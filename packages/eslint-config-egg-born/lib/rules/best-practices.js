@@ -69,5 +69,6 @@ module.exports = {
     'generator-star-spacing': [0],
     'newline-per-chained-call': [0],
     'vue/multi-word-component-names': [0],
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };

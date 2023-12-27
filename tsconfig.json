@@ -8,6 +8,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "resolvePackageJsonImports": true,
+    "isolatedModules": true,
     "rootDir": "./src",
     "outDir": "./dist"
   },
