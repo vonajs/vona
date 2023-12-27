@@ -3,11 +3,13 @@
     "jsx": "preserve",
     "allowJs": true,
     "checkJs": false,
-    "target": "esnext",
-    "module": "esnext",
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "noEmit": true
+    "noEmit": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolvePackageJsonImports": true,
+    "rootDir": "./src",
+    "outDir": "./dist"
   },
   "include": [
     "src/module/**/*", //
