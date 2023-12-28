@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es6",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "sourceMap": true,
     "jsx": "preserve",
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
     "noEmit": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
     "resolvePackageJsonImports": true,
     "isolatedModules": true,
-    "rootDir": "./src",
-    "outDir": "./dist"
+    "typeRoots": ["node_modules/@types"]
   },
   "include": [
     "src/module/**/*", //
