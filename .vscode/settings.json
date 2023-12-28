@@ -2,6 +2,13 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "files.eol": "\n",
+  // typescript
+  "typescript.disableAutomaticTypeAcquisition": false,
+  "typescript.format.enable": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.tsserver.useSyntaxServer": "auto",
+  "typescript.validate.enable": true,
   // eslint
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -38,7 +45,7 @@
     "/src/backend/run/**": true,
     "src/front/__dist,": true,
     "src/front/__runtime,": true,
-    "**/node_modules": false
+    "**/node_modules": true
   },
   "search.useIgnoreFiles": false,
   "hide-my-secrets.hideSecrets": false
