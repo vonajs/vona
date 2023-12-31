@@ -2,11 +2,12 @@ pnpm-lock.yaml
 package-lock.json
 node_modules
 miniprogram_npm
+typings/core
 /coverage
 /dist
 /dist-release
 /docs-api
-/typings/core
+
 
 .idea
 .DS_Store
