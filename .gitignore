@@ -6,11 +6,13 @@ miniprogram_npm
 /dist
 /dist-release
 /docs-api
+/typings/core
 
 .idea
 .DS_Store
 
 *.tsbuildinfo
+
 *.log
 *.logs
 *.swp
