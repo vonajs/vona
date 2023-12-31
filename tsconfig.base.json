@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "target": "esnext",
+    "target": "ES2018",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
