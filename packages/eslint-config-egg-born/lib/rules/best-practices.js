@@ -20,13 +20,13 @@ module.exports = {
         typeof: false,
       },
     ],
-    'no-unused-vars': [
-      'error',
-      {
-        varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
-        argsIgnorePattern: 'app|ctx|user|state|reject|options',
-      },
-    ],
+    // 'no-unused-vars': [
+    //   'error',
+    //   {
+    //     varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
+    //     argsIgnorePattern: 'app|ctx|user|state|reject|options',
+    //   },
+    // ],
     'array-bracket-spacing': ['error', 'never'],
     'no-empty': [
       'error',
