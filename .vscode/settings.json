@@ -6,9 +6,13 @@
   "typescript.disableAutomaticTypeAcquisition": false,
   "typescript.format.enable": true,
   "typescript.implementationsCodeLens.enabled": true,
-  "typescript.suggest.autoImports": true,
   "typescript.tsserver.useSyntaxServer": "auto",
   "typescript.validate.enable": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.includeCompletionsForImportStatements": true,
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
   // eslint
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"

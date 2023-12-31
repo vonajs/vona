@@ -10,6 +10,7 @@ miniprogram_npm
 .idea
 .DS_Store
 
+*.tsbuildinfo
 *.log
 *.logs
 *.swp

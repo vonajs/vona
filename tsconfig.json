@@ -1,33 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "ES2018",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "declaration": true,
-    "sourceMap": true,
-    "jsx": "preserve",
-    "allowJs": true,
-    "checkJs": false,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "resolvePackageJsonImports": true,
-    "isolatedModules": true,
-    "typeRoots": ["node_modules/@types"]
-  },
-  "include": [
-    "src/module/**/*", //
-    "src/module-system/**/*",
-    "src/module-vendor/**/*",
-    "src/suite/**/*",
-    "src/suite-vendor/**/*",
-    "packages/**/*"
-  ],
-  "exclude": [
-    "node_modules", //
-    "**/dist/**",
-    "**/*.min.js",
-    "backend/cli/templates"
-  ]
+  "extends": "./tsconfig.base.json",
+  "files": []
+  // "references": [
+  //   {
+  //     "path": "src/suite/test-party/modules/test-party"
+  //   },
+  //   {
+  //     "path": "src/suite/test-party/modules/test-partymonkey-monkey"
+  //   }
+  // ]
 }
