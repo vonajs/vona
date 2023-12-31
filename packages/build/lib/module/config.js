@@ -14,7 +14,7 @@ module.exports = context => {
     },
   };
 
-  const file = path.join(context.modulePath, 'build/config.js');
+  const file = path.join(context.modulePath, 'build/config.cjs');
   if (fse.existsSync(file)) {
     config = merge(config, require(file));
   }

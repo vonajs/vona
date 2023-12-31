@@ -8,7 +8,7 @@ module.exports = context => {
     if (externalsExclude && externalsExclude[request]) {
       return cb();
     }
-    return cb(null, `commonjs2 ${request}`);
+    return cb(null, `module ${request}`);
   }
 
   const rules = [];
@@ -50,11 +50,19 @@ module.exports = context => {
     entry: {
       backend: path.join(context.modulePath, 'backend/src/main.js'),
     },
-    target: 'node',
+    // target: 'node',
+    target: 'es2018',
+    experiments: {
+      outputModule: true,
+    },
     output: {
       path: context.config.build.assetsRoot,
       filename: '[name].js',
-      libraryTarget: 'commonjs2',
+      // libraryTarget: 'commonjs2',
+      library: {
+        type: 'module',
+      },
+      chunkFormat: 'module',
     },
     externals: [nodeModulesCheck],
     resolve: {
