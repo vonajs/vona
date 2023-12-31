@@ -1,12 +1,12 @@
 {
   "extends": "./tsconfig.base.json",
-  "files": []
-  // "references": [
-  //   {
-  //     "path": "src/suite/test-party/modules/test-party"
-  //   },
-  //   {
-  //     "path": "src/suite/test-party/modules/test-partymonkey-monkey"
-  //   }
-  // ]
+  "files": [],
+  "references": [
+    {
+      "path": "src/suite/test-party/modules/test-party"
+    },
+    {
+      "path": "src/suite/test-party/modules/test-partymonkey-monkey"
+    }
+  ]
 }
