@@ -33,6 +33,7 @@
     "bullmq": "^2.3.1",
     "chalk": "^3.0.0",
     "debug": "^4.3.4",
+    "egg": "^3.17.5",
     "egg-born-localeutil": "^2.1.2",
     "egg-born-mglob": "^4.0.1",
     "egg-born-mock": "^3.0.5",
