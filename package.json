@@ -60,7 +60,6 @@
     "@babel/register": "^7.8.3",
     "@typescript-eslint/parser": "^6.16.0",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
-    "@zhennann/docdash": "^1.2.3",
     "@zhennann/extend": "^3.0.2",
     "@zhennann/framework7": "^5.8.2",
     "@zhennann/socketio": "^4.0.2",
