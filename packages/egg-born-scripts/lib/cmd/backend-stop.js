@@ -7,14 +7,14 @@ class BackendStopCommand extends StopCommand {
     this.usage = 'Usage: egg-born-scripts backend-stop';
   }
 
-  *run(context) {
+  async run(context) {
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
 
     if (!context.argv._ || context.argv._.length === 0) context.argv._ = ['src/backend'];
 
-    yield super.run(context);
+    await super.run(context);
   }
 
   description() {

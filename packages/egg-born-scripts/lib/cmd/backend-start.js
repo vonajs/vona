@@ -7,7 +7,7 @@ class BackendStartCommand extends StartCommand {
     this.usage = 'Usage: egg-born-scripts backend-start';
   }
 
-  *run(context) {
+  async run(context) {
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
@@ -23,7 +23,7 @@ class BackendStartCommand extends StartCommand {
 
     utils.versionCheckCabloy({ scene: 'start' }).then(() => {});
 
-    yield super.run(context);
+    await super.run(context);
   }
 
   description() {
