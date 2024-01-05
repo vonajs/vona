@@ -10,7 +10,7 @@ class BackendCovCommand extends CovCommand {
     this.usage = 'Usage: egg-born-bin backend-cov';
   }
 
-  *run(context) {
+  async run(context) {
     if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
     if (!context.env.EGG_FRAMEWORK) context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
 
@@ -23,15 +23,15 @@ class BackendCovCommand extends CovCommand {
     context.argv.x = ['src/**/backend/**/*.spec.js', 'src/**/dist/backend.js'];
 
     // check dev server
-    const devServerRunning = yield utils.checkIfDevServerRunning({
+    const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
     if (devServerRunning) return;
 
-    yield super.run(context);
+    await super.run(context);
   }
 
-  *formatTestArgs({ argv, debugOptions }) {
+  async formatTestArgs({ argv, debugOptions }) {
     const testArgv = Object.assign({}, argv);
 
     /* istanbul ignore next */
@@ -76,7 +76,7 @@ class BackendCovCommand extends CovCommand {
     let pattern;
     // changed
     if (testArgv.changed) {
-      pattern = yield this._getChangedTestFiles();
+      pattern = await this._getChangedTestFiles();
       if (!pattern.length) {
         console.log('No changed test files');
         return;

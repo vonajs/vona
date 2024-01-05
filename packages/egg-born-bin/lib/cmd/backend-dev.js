@@ -35,7 +35,7 @@ class BackendDevCommand extends DevCommand {
     };
   }
 
-  *run(context) {
+  async run(context) {
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
@@ -44,14 +44,14 @@ class BackendDevCommand extends DevCommand {
     // if (context.argv.sticky === undefined) context.argv.sticky = true;
 
     // check dev server
-    const devServerRunning = yield utils.checkIfDevServerRunning({
+    const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
     if (devServerRunning) return;
 
     utils.versionCheckCabloy({ scene: 'dev' }).then(() => {});
 
-    yield super.run(context);
+    await super.run(context);
   }
 
   description() {

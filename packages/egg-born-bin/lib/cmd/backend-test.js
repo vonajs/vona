@@ -12,7 +12,7 @@ class BackendTestCommand extends TestCommand {
     this.usage = 'Usage: egg-born-bin backend-test';
   }
 
-  *run(context) {
+  async run(context) {
     if (context.argv.timeout === undefined) context.argv.timeout = 3600 * 1000;
 
     if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
@@ -25,7 +25,7 @@ class BackendTestCommand extends TestCommand {
     });
 
     // check dev server
-    const devServerRunning = yield utils.checkIfDevServerRunning({
+    const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
     if (devServerRunning) return;
@@ -40,21 +40,21 @@ class BackendTestCommand extends TestCommand {
       mock.env('unittest');
       // app
       const app = mock.app(options);
-      yield app.ready();
+      await app.ready();
 
       // check app ready
-      yield app.meta.checkAppReady();
+      await app.meta.checkAppReady();
 
       // done
       console.log(chalk.cyan('  backend-test successfully!'));
       process.exit(0);
     } else {
       // run
-      yield super.run(context);
+      await super.run(context);
     }
   }
 
-  *formatTestArgs({ argv, debugOptions }) {
+  async formatTestArgs({ argv, debugOptions }) {
     const testArgv = Object.assign({}, argv);
 
     /* istanbul ignore next */
@@ -99,7 +99,7 @@ class BackendTestCommand extends TestCommand {
     let pattern;
     // changed
     if (testArgv.changed) {
-      pattern = yield this._getChangedTestFiles();
+      pattern = await this._getChangedTestFiles();
       if (!pattern.length) {
         console.log('No changed test files');
         return;

@@ -24,7 +24,7 @@ class CliCommand extends BaseCommand {
     this.cabloyConfig = null;
   }
 
-  *run({ argv, cwd, env, rawArgv }) {
+  async run({ argv, cwd, env, rawArgv }) {
     // argv
     argv = Object.assign({}, argv, this.__argv);
     delete argv.t;
@@ -35,24 +35,24 @@ class CliCommand extends BaseCommand {
     // log start
     console.log(`npm run cli ${chalk.cyan(argv.cliFullName)} at %s\n`, cwd);
     // cabloy config
-    yield this._loadCabloyConfig();
+    await this._loadCabloyConfig();
     // log meta welcomes
     this._logMetaWelcomes();
     // prompt
-    yield this._promptGroups({ context, groups: this.__groups });
+    await this._promptGroups({ context, groups: this.__groups });
     // execute
     const progressId = uuid.v4().replace(/-/g, '');
     // progressbar
-    yield this._progressbar({ progressId, context });
+    await this._progressbar({ progressId, context });
     // done: log cli docs
     this._logCliDocs();
     // done
     console.log(chalk.cyan('\n  cli successfully!\n'));
   }
 
-  *_loadCabloyConfig() {
+  async _loadCabloyConfig() {
     this.__cabloyConfig = eggBornUtils.cabloyConfig;
-    yield this.__cabloyConfig.load({ projectPath: this.__argv.projectPath });
+    await this.__cabloyConfig.load({ projectPath: this.__argv.projectPath });
     this.cabloyConfig = this.__cabloyConfig.get();
   }
 
@@ -94,14 +94,14 @@ class CliCommand extends BaseCommand {
     return res;
   }
 
-  *_promptGroups({ context, groups }) {
+  async _promptGroups({ context, groups }) {
     for (const groupName in groups) {
       const group = groups[groupName];
-      yield this._promptGroup({ group, context });
+      await this._promptGroup({ group, context });
     }
   }
 
-  *_promptGroup({ group, context }) {
+  async _promptGroup({ group, context }) {
     const { argv } = context;
     // check
     const check = this._checkGroupCondition({ group, context });
@@ -123,7 +123,7 @@ class CliCommand extends BaseCommand {
       console.log('===>', group.description);
     }
     // prompt
-    yield enquirer.prompt(varsWant);
+    await enquirer.prompt(varsWant);
   }
 
   _prepareQuestionPropertyExpression({ group, question, key, context, propName }) {

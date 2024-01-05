@@ -7,7 +7,7 @@ class BackendDebugCommand extends DebugCommand {
     this.usage = 'Usage: egg-born-bin backend-debug';
   }
 
-  *run(context) {
+  async run(context) {
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
@@ -15,14 +15,14 @@ class BackendDebugCommand extends DebugCommand {
     if (!context.argv.baseDir) context.argv.baseDir = 'src/backend';
 
     // check dev server
-    const devServerRunning = yield utils.checkIfDevServerRunning({
+    const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
     if (devServerRunning) return;
 
     utils.versionCheckCabloy({ scene: 'debug' }).then(() => {});
 
-    yield super.run(context);
+    await super.run(context);
   }
 
   description() {

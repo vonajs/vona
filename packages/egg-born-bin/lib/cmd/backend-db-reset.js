@@ -10,7 +10,7 @@ class BackendDbResetCommand extends TestCommand {
     this.usage = 'Usage: egg-born-bin backend-db-reset';
   }
 
-  *run(context) {
+  async run(context) {
     if (context.argv.timeout === undefined) context.argv.timeout = 3600 * 1000;
 
     if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
@@ -22,7 +22,7 @@ class BackendDbResetCommand extends TestCommand {
     options.framework = context.env.EGG_FRAMEWORK;
 
     // check dev server
-    const devServerRunning = yield utils.checkIfDevServerRunning({
+    const devServerRunning = await utils.checkIfDevServerRunning({
       warnWhenRunning: true,
     });
     if (devServerRunning) return;
@@ -31,10 +31,10 @@ class BackendDbResetCommand extends TestCommand {
     mock.env('unittest');
     // app
     const app = mock.app(options);
-    yield app.ready();
+    await app.ready();
 
     // check app ready
-    yield app.meta.checkAppReady();
+    await app.meta.checkAppReady();
 
     // done
     console.log(chalk.cyan('  backend-db-reset successfully!'));

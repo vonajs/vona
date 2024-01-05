@@ -16,27 +16,27 @@ class EggBornBinCommand extends Command {
     this.load(path.join(__dirname, 'lib/cmd'));
   }
 
-  *[DISPATCH]() {
+  async [DISPATCH]() {
     const commandName = this.rawArgv[0];
     // general
     if (commandName !== 'cli') {
-      yield super[DISPATCH]();
+      await super[DISPATCH]();
       return;
     }
     // cli
-    yield this._handleCli();
+    await this._handleCli();
   }
 
-  *_handleCli() {
+  async _handleCli() {
     // get parsed argument without handling helper and version
-    const parsed = yield this[PARSE](this.rawArgv);
+    const parsed = await this[PARSE](this.rawArgv);
     // argv
     const argv = {};
     argv.projectPath = process.cwd();
     // cli
     Object.assign(argv, this._prepareCliFullName(parsed._[1]));
     // token / proc
-    const tokenAndProc = yield this._prepareTokenAndDevServer({ parsed, argv });
+    const tokenAndProc = await this._prepareTokenAndDevServer({ parsed, argv });
     if (!tokenAndProc) {
       // do nothing
       return;
@@ -45,9 +45,9 @@ class EggBornBinCommand extends Command {
     // OpenAuthClient
     const openAuthClient = new eggBornUtils.OpenAuthClient({ token });
     // signin
-    yield openAuthClient.signin();
+    await openAuthClient.signin();
     // cli meta
-    const meta = yield openAuthClient.post({
+    const meta = await openAuthClient.post({
       path: '/a/cli/cli/meta',
       body: {
         context: {
@@ -59,13 +59,13 @@ class EggBornBinCommand extends Command {
     const rawArgv = this.rawArgv.slice();
     rawArgv.splice(rawArgv.indexOf('cli'), 2);
     const command = new CliCommand(rawArgv, { meta, argv, openAuthClient });
-    yield command[DISPATCH]();
+    await command[DISPATCH]();
     // logout
-    yield openAuthClient.logout();
+    await openAuthClient.logout();
     // proc kill
     if (proc) {
       proc.kill('SIGTERM');
-      yield eggBornUtils.tools.sleep(1500);
+      await eggBornUtils.tools.sleep(1500);
     }
     // force exit
     process.exit(0);
