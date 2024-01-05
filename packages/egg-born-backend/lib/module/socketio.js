@@ -22,10 +22,11 @@ module.exports = function (loader) {
     }
 
     // check
-    const ctx = loader.app.createAnonymousContext(req, {
+    const reqNew = Object.assign({}, req, {
       method: 'SOCKETIO',
       url: '/api/a/base/',
     });
+    const ctx = loader.app.createAnonymousContext(reqNew);
     ctx.bean.instance
       .checkAppReadyInstance({ startup: true })
       .then(res => {

@@ -171,11 +171,10 @@ module.exports = app => {
           if (i === chains.length) fn = next;
           if (!fn) return Promise.resolve();
           try {
-            return Promise.resolve(
-              fn.call(receiver, context, function next() {
-                return dispatch(i + 1);
-              })
-            );
+            const res = fn.call(receiver, context, function next() {
+              return dispatch(i + 1);
+            });
+            return Promise.resolve(res);
           } catch (err) {
             return Promise.reject(err);
           }
@@ -334,11 +333,10 @@ module.exports = app => {
       return subdomain || '-';
     },
     deprecated(oldUsage, newUsage) {
-      return console.warn(
-        '`'
-          .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
-          .concat(newUsage, '` instead')
-      );
+      const message = '`'
+        .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
+        .concat(newUsage, '` instead');
+      return console.warn(message);
     },
     requireDynamic(file) {
       if (!file) throw new Error('file should not empty');
