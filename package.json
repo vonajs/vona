@@ -44,15 +44,11 @@
     "start:backend": "node ./packages/egg-born-scripts/bin/egg-born-scripts.js backend-start",
     "start:backend-daemon": "node ./packages/egg-born-scripts/bin/egg-born-scripts.js backend-start --daemon",
     "stop:backend": "node ./packages/egg-born-scripts/bin/egg-born-scripts.js backend-stop",
-    "release": "node ./packages/egg-born-bin/bin/egg-born-bin.js release",
-    "release:front": "node ./packages/egg-born-bin/bin/egg-born-bin.js release-front",
-    "release:backend": "node ./packages/egg-born-bin/bin/egg-born-bin.js release-backend",
     "commits": "./scripts/commits.sh",
     "commits-all": "./scripts/commits-all.sh",
     "format": "prettier --write \"**/*.js\" \"**/*.json\" \"**/*.jsx\" \"**/*.vue\"",
     "lint": "prettier --check \"**/*.js\" \"**/*.json\" \"**/*.jsx\" \"**/*.vue\"",
     "eslint": "eslint --ext .js,.json,.jsx,.vue src",
-    "docs:build": "node_modules/.bin/jsdoc -c jsdoc.json --readme docs/jsdoc-readme.md",
     "cnpm:sync": "node ./scripts/cnpm-sync.js"
   },
   "devDependencies": {
