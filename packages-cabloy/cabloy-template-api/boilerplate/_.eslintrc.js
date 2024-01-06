@@ -1,14 +1,9 @@
 // 2022-04-28
-const path = require('path');
+const config = require.resolve('egg-born-lint-config/api/eslint.js');
 
 module.exports = {
-  parser: 'vue-eslint-parser',
-  extends: ['plugin:vue/essential', 'eslint-config-egg-born'],
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-    sourceType: 'module',
-    babelOptions: {
-      configFile: path.join(__dirname, 'babel.config.js'),
-    },
-  },
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  extends: [config],
 };
