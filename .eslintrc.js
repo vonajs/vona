@@ -1,5 +1,4 @@
-const config = require.resolve('./packages-egg-born/egg-born-lint-config/api/eslint.js');
-
+const config = require('./packages-egg-born/egg-born-lint-config/api/eslint.js');
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',

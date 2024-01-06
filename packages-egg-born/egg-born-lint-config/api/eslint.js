@@ -92,6 +92,6 @@ const builtin = {
 };
 
 module.exports = {
-  extends: ['eslint-config-egg/typescript'].concat(builtin),
+  extends: ['eslint-config-egg/typescript'].concat([builtin]),
   parserOptions: {},
 };
