@@ -1,4 +1,3 @@
-// 2023-12-27
 const eslintConfigEggBorn = require.resolve('./packages/eslint-config-egg-born/api.js');
 
 module.exports = {
