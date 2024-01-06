@@ -1,4 +1,4 @@
-const eslintConfigEggBorn = require.resolve('./packages/eslint-config-egg-born/api.js');
+const eslintConfigEggBorn = require.resolve('./packages/egg-born-lint-config/api/eslint.js');
 
 module.exports = {
   root: true,
