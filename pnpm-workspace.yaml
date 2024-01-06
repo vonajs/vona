@@ -1,5 +1,6 @@
 packages:
-  - 'packages/*'
+  - 'packages-cabloy/*'
+  - 'packages-egg-born/*'
   - 'src/module/*'
   - 'src/module-system/*'
   - 'src/module-vendor/*'
