@@ -181,7 +181,7 @@
       "describe('action test', () => {",
       "  it('[test]', async () => {",
       "    // ctx",
-      "    const ctx = await app.mockCtx();",
+      "    const ctx = await app.meta.mockUtil.mockCtx();",
       "",
       "    // login as root",
       "    await ctx.meta.mockUtil.login({ auth: 'root' });",

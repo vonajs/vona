@@ -17,6 +17,13 @@ module.exports = app => {
       const prefix = this.parseUrlFromPackage(dir, apiPrefix);
       return url ? `${prefix}/${url}` : `${prefix}/`;
     },
+    async mockCtx(options) {
+      options = options || {};
+      const locale = options.locale;
+      const subdomain = options.subdomain !== undefined ? options.subdomain : '';
+      const ctx = await app.meta.util.createAnonymousContext({ locale, subdomain });
+      return ctx;
+    },
   };
 };
 

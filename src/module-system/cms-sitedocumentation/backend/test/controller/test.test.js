@@ -3,7 +3,7 @@ const { app, mockUrl, mockInfo, assert } = require('egg-born-mock')(__dirname);
 describe.skip('test/controller/test.test.js', () => {
   it('Document', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // atomClass info
     const atomClassModule = mockInfo().relativeName;

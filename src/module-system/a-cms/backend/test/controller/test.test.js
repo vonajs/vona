@@ -3,7 +3,7 @@ const { app, mockUrl, mockInfo, assert } = require('egg-born-mock')(__dirname);
 describe('test/controller/test.test.js', () => {
   it('action:set config', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
@@ -33,7 +33,7 @@ describe('test/controller/test.test.js', () => {
 
   it('action:build languages', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
@@ -48,7 +48,7 @@ describe('test/controller/test.test.js', () => {
 
   it('action:render article(a-cms)', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });

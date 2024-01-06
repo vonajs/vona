@@ -9,7 +9,7 @@ describe.skip('test/controller/test.test.js', () => {
 
   it('action:set config', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
@@ -40,7 +40,7 @@ describe.skip('test/controller/test.test.js', () => {
 
   it('action:build languages', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
@@ -58,7 +58,7 @@ describe.skip('test/controller/test.test.js', () => {
 
   it('action:render article(cms-sitecommunity)', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
@@ -146,7 +146,7 @@ describe.skip('test/controller/test.test.js', () => {
 
   it('action:build languages', async () => {
     // ctx
-    const ctx = await app.mockCtx();
+    const ctx = await app.meta.mockUtil.mockCtx();
 
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
