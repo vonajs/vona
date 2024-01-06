@@ -1,6 +1,3 @@
-#!/usr/bin/env node
-
-const co = require('co');
 const Command = require('@zhennann/egg-init');
 const path = require('path');
 const randomize = require('randomatic');
