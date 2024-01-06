@@ -54,7 +54,7 @@ class BackendTestCommand extends TestCommand {
     }
   }
 
-  async formatTestArgs({ argv, debugOptions }) {
+  async formatTestArgs({ argv, debugOptions, execArgvObj }) {
     const testArgv = Object.assign({}, argv);
 
     /* istanbul ignore next */
@@ -72,26 +72,27 @@ class BackendTestCommand extends TestCommand {
     }
 
     // collect require
-    let requireArr = testArgv.require || testArgv.r || [];
+    const requireArr = execArgvObj.require;
     /* istanbul ignore next */
-    if (!Array.isArray(requireArr)) requireArr = [requireArr];
+    if (Array.isArray(testArgv.require)) {
+      for (const r of testArgv.require) {
+        requireArr.push(r);
+      }
+    }
 
     // clean mocha stack, inspired by https://github.com/rstacruz/mocha-clean
     // [mocha built-in](https://github.com/mochajs/mocha/blob/master/lib/utils.js#L738) don't work with `[npminstall](https://github.com/cnpm/npminstall)`, so we will override it.
     if (!testArgv.fullTrace) requireArr.unshift(require.resolve('@zhennann/egg-bin/lib/mocha-clean'));
 
-    // requireArr.push(require.resolve('co-mocha'));
-
-    if (requireArr.includes('intelli-espower-loader')) {
-      console.warn("[egg-bin] don't need to manually require `intelli-espower-loader` anymore");
-    } else {
-      requireArr.push(require.resolve('intelli-espower-loader'));
-    }
-
-    // for power-assert
-    if (testArgv.typescript) {
-      // remove ts-node in context getter on top.
-      requireArr.push(require.resolve('espower-typescript/guess'));
+    // handle mochawesome enable
+    if (!testArgv.reporter && testArgv.mochawesome) {
+      // use https://github.com/node-modules/mochawesome/pull/1 instead
+      testArgv.reporter = require.resolve('mochawesome-with-mocha');
+      testArgv['reporter-options'] = 'reportDir=node_modules/.mochawesome-reports';
+      if (testArgv.parallel) {
+        // https://github.com/adamgruber/mochawesome#parallel-mode
+        requireArr.push(require.resolve('mochawesome-with-mocha/register'));
+      }
     }
 
     testArgv.require = requireArr;
@@ -145,6 +146,7 @@ class BackendTestCommand extends TestCommand {
     testArgv.typescript = undefined;
     testArgv['dry-run'] = undefined;
     testArgv.dryRun = undefined;
+    testArgv.mochawesome = undefined;
 
     return this.helper.unparseArgv(testArgv);
   }
