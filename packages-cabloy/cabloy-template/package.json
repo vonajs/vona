@@ -1,0 +1,16 @@
+{
+  "name": "cabloy-template-api",
+  "version": "5.0.0",
+  "description": "cabloy-template-api",
+  "scripts": {},
+  "keywords": [
+    "egg",
+    "egg-born",
+    "fullstack",
+    "boilerplate",
+    "template",
+    "cabloy"
+  ],
+  "author": "zhennann",
+  "license": "MIT"
+}

@@ -37,7 +37,7 @@ co(function* () {
 
   command.getTemplateDir = function* () {
     // download boilerplate
-    return yield this.downloadBoilerplate('egg-born-template-cabloy');
+    return yield this.downloadBoilerplate('cabloy-template-api');
   };
 
   const askForVariable = command.askForVariable;

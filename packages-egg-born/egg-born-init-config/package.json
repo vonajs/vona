@@ -1,12 +1,16 @@
 {
   "name": "egg-born-init-config",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "egg-born-init-config",
   "config": {
     "boilerplate": {
-      "cabloy": {
-        "package": "egg-born-template-cabloy",
-        "description": "cabloy project template"
+      "cabloy-api": {
+        "package": "cabloy-template-api",
+        "description": "cabloy project template: api"
+      },
+      "cabloy-front": {
+        "package": "cabloy-template-front",
+        "description": "cabloy project template: front"
       }
     }
   },
