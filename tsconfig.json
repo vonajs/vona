@@ -5,6 +5,9 @@
   "include": ["typings/**/*"],
   "references": [
     {
+      "path": "packages-cabloy/core"
+    },
+    {
       "path": "packages-egg-born/egg-born-backend"
     }
   ]
