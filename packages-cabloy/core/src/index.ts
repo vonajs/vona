@@ -1,4 +1,4 @@
-import '@zhennann/set';
+import '@cabloy/set';
 import 'regenerator-runtime';
 require('../base/json.js');
 
