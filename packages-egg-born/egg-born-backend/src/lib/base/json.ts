@@ -28,11 +28,14 @@ function __patchJSON() {
   // json5
   const _json5Parse = json5.parse;
   // @ts-ignore
-  json5.parse = function (source, reviver) {
+  const parse = function (source, reviver) {
     return _json5Parse(source, function (k, v) {
       return __jsonReviver(k, v, reviver);
     });
   };
 
-  global.JSON5 = json5;
+  global.JSON5 = {
+    parse,
+    stringify: json5.stringify,
+  } as typeof json5;
 }
