@@ -1,26 +1,21 @@
 {
-  "name": "egg-born-backend",
-  "version": "8.0.0",
-  "description": "egg-born-backend",
+  "name": "@cabloy/core",
+  "version": "5.0.0",
+  "description": "cabloy core",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "eslint ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zhennann/egg-born-backend.git"
   },
   "keywords": [
     "egg",
     "egg-born",
     "framework",
-    "backend"
+    "cabloy"
   ],
   "author": "zhennann",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zhennann/egg-born-backend/issues"
-  },
-  "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
     "@zhennann/egg-mysql": "^4.0.3",
     "@zhennann/egg-passport": "^2.1.5",
