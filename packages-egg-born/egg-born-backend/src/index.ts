@@ -4,9 +4,6 @@ import * as Framework from '@cabloy/core';
 const EGG_PATH = Symbol.for('egg#eggPath');
 const EGG_LOADER = Symbol.for('egg#loader');
 
-//Master.prototype.onReload = onReload;
-console.log(Framework);
-
 const eggPath = path.resolve(__dirname, './');
 
 class Application extends Framework.Application {
