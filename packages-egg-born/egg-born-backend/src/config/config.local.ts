@@ -1,5 +1,5 @@
 module.exports = appInfo => {
-  const config = {};
+  const config = {} as any;
 
   // proxy
   config.proxy = true;

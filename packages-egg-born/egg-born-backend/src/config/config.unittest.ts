@@ -1,5 +1,5 @@
 module.exports = appInfo => {
-  const config = {};
+  const config = {} as any;
 
   // queue
   config.queue = {

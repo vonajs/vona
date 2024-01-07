@@ -1,8 +1,8 @@
-const compose = require('koa-compose');
+import compose from 'koa-compose';
 
-module.exports = app => {
+export default function (app) {
   function loadMiddlewares() {
-    const _middlewares = [];
+    const _middlewares = [] as any;
 
     // all middlewares
     const ebMiddlewares = app.meta.middlewaresSocketIoPacket;
@@ -12,7 +12,7 @@ module.exports = app => {
     return compose(_middlewares);
   }
 
-  let _middlewares = null;
+  let _middlewares = null as any;
 
   return async (context, next) => {
     if (!_middlewares) {
@@ -20,7 +20,7 @@ module.exports = app => {
     }
     await _middlewares(context, next);
   };
-};
+}
 
 function wrapMiddleware(item) {
   const fn = (context, next) => {

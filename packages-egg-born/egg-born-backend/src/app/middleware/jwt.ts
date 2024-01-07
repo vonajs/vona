@@ -1,6 +1,6 @@
-const koajwt = require('koa-jwt2');
-const jsonwebtoken = require('jsonwebtoken');
-const utility = require('utility');
+import koajwt from 'koa-jwt2';
+import jsonwebtoken from 'jsonwebtoken';
+import utility from 'utility';
 
 function __checkIfJWT(ctx) {
   return !ctx.ctxCaller && (!!ctx.get('authorization') || ctx.query.hasOwnProperty('eb-jwt'));
@@ -61,7 +61,7 @@ function __parseCookiesResponse(cookiesArray) {
 }
 
 function __combineCookies(cookies) {
-  const cookiesArray = [];
+  const cookiesArray = [] as any;
   for (const name in cookies) {
     cookiesArray.push(`${name}=${cookies[name]}`);
   }

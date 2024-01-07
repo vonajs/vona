@@ -12,7 +12,7 @@ const {
 
 // eslint-disable-next-line
 module.exports = appInfo => {
-  const config = {};
+  const config = {} as any;
 
   const _maintenanceEnus =
     'Under development and maintenance, the source code mode may be unstable. Please keep an eye on the development progress, or use the project mode to create a CabloyJS project.';
@@ -291,7 +291,7 @@ module.exports = appInfo => {
         code,
         message,
         errors: err.errors,
-      };
+      } as any;
 
       if (status >= 500 && !this.app.meta.isProd) {
         // provide detail error stack in local env
