@@ -5,6 +5,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "lib/framework/framework.js",
   "scripts": {
     "lint": "eslint ."
   },

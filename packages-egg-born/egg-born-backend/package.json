@@ -2,7 +2,6 @@
   "name": "egg-born-backend",
   "version": "9.0.0",
   "description": "egg-born-backend",
-  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -29,6 +28,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
+    "@cabloy/core": "5.0.0",
     "@zhennann/egg-mysql": "^4.0.3",
     "@zhennann/egg-passport": "^2.1.5",
     "@zhennann/egg-socket.io": "^6.0.0",
