@@ -5,20 +5,6 @@ const EGG_LOADER = Symbol.for('egg#loader');
 const AppWorkerLoader = require('./load/app.js');
 const AgentWorkerLoader = require('./load/agent.js');
 
-///
-require('@zhennann/set');
-require('regenerator-runtime');
-require('../base/json.js');
-
-// process.traceDeprecation = true;
-
-const moduleAlias = require('module-alias');
-moduleAlias.addAlias('koa-static-cache', '@zhennann/koa-static-cache');
-
-const Master = require('egg-cluster/lib/master.js');
-Master.prototype.onReload = require('../utils/reload.js');
-///
-
 const eggPath = path.resolve(__dirname, '../..');
 
 class Application extends egg.Application {
@@ -33,7 +19,7 @@ class Agent extends egg.Agent {
   }
 }
 
-module.exports = {
+export default {
   Application,
   Agent,
   AppWorkerLoader,

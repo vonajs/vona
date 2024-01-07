@@ -5,16 +5,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./dist/index.js",
-      "default": "./src/index.ts"
-    }
-  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts"
@@ -58,6 +50,7 @@
     "moment": "^2.24.0",
     "passport-oauth2": "^1.6.1",
     "redlock": "^4.1.0",
+    "regenerator-runtime": "^0.14.1",
     "semver": "^7.3.7",
     "supertest": "^4.0.2",
     "uuid": "^8.3.2"

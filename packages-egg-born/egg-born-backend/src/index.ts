@@ -6,6 +6,8 @@ const EGG_LOADER = Symbol.for('egg#loader');
 
 const eggPath = path.resolve(__dirname, './');
 
+// process.traceDeprecation = true;
+
 class Application extends Framework.Application {
   get [EGG_PATH]() {
     return eggPath;
