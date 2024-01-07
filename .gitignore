@@ -4,7 +4,7 @@ node_modules
 miniprogram_npm
 typings/core
 /coverage
-/dist
+**/dist/
 /dist-release
 /docs-api
 

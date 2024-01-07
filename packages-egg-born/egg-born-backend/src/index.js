@@ -1,13 +1,14 @@
-require('@zhennann/set');
-require('regenerator-runtime/runtime');
-require('./lib/base/json.js');
+import '@zhennann/set';
+import 'regenerator-runtime/runtime';
+import './lib/base/json.js';
+import moduleAlias from 'module-alias';
+import Master from 'egg-cluster/lib/master.js';
+import onReload from './lib/utils/reload.js';
+import Framework from './lib/framework/framework.js';
 
 // process.traceDeprecation = true;
-
-const moduleAlias = require('module-alias');
 moduleAlias.addAlias('koa-static-cache', '@zhennann/koa-static-cache');
 
-const Master = require('egg-cluster/lib/master.js');
-Master.prototype.onReload = require('./lib/utils/reload.js');
+Master.prototype.onReload = onReload;
 
-module.exports = require('./lib/framework/framework.js');
+export default Framework;

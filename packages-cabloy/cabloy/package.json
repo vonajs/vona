@@ -24,7 +24,7 @@
     "lerna": "^7.4.2"
   },
   "dependencies": {
-    "egg-born-backend": "^8.0.0",
+    "egg-born-backend": "^9.0.0",
     "egg-born-bin": "^4.3.8",
     "egg-born-front": "^9.0.0",
     "egg-born-module-a-antdv": "^5.0.0",
