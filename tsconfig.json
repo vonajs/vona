@@ -2,5 +2,10 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {},
   "files": [],
-  "include": ["typings/**/*"]
+  "include": ["typings/**/*"],
+  "references": [
+    {
+      "path": "packages-egg-born/egg-born-backend"
+    }
+  ]
 }
