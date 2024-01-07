@@ -1,6 +1,6 @@
 import '@cabloy/set';
+import '@cabloy/json5';
 import 'regenerator-runtime';
-require('../base/json.js');
 
 const moduleAlias = require('module-alias');
 moduleAlias.addAlias('koa-static-cache', '@zhennann/koa-static-cache');
