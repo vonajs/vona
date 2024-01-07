@@ -1,5 +1,5 @@
 require('@zhennann/set');
-require('regenerator-runtime/runtime');
+require('regenerator-runtime');
 require('./lib/base/json.js');
 
 // process.traceDeprecation = true;

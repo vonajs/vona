@@ -1,5 +1,5 @@
 import '@zhennann/set';
-import 'regenerator-runtime/runtime';
+import 'regenerator-runtime';
 import './lib/base/json.js';
 import * as moduleAlias from 'module-alias';
 import * as Master from 'egg-cluster/lib/master.js';
