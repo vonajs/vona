@@ -25,23 +25,17 @@ class Application extends egg.Application {
   get [EGG_PATH]() {
     return eggPath;
   }
-  get [EGG_LOADER]() {
-    return AppWorkerLoader;
-  }
 }
 
 class Agent extends egg.Agent {
   get [EGG_PATH]() {
     return eggPath;
   }
-  get [EGG_LOADER]() {
-    return AgentWorkerLoader;
-  }
 }
 
-module.exports = Object.assign(egg, {
+module.exports = {
   Application,
   Agent,
   AppWorkerLoader,
   AgentWorkerLoader,
-});
+};
