@@ -41,7 +41,7 @@
     "pinia-plugin-created": "^1.0.0",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
-    "regenerator-runtime": "^0.14.0",
+    "regenerator-runtime": "^0.14.1",
     "uuid": "^8.3.2",
     "vue": "^2.7.13",
     "vue-plugin-component-mounted": "^1.0.0",

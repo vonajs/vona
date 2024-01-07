@@ -25,7 +25,7 @@ class Agent extends egg.Agent {
   }
 }
 
-module.exports = Object.assign(egg, {
+export default Object.assign(egg, {
   Application,
   Agent,
   AppWorkerLoader,
