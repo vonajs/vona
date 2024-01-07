@@ -6,12 +6,6 @@ const FlowBehaviorBase = require('./common/flowBehaviorBase.js');
 const FlowNodeBase = require('./common/flowNodeBase.js');
 const FlowEdgeBase = require('./common/flowEdgeBase.js');
 const aops = require('./aops.js');
-
-// FlowBehaviorBase/FlowNodeBase/FlowEdgeBase
-module.meta.class.FlowBehaviorBase = FlowBehaviorBase;
-module.meta.class.FlowNodeBase = FlowNodeBase;
-module.meta.class.FlowEdgeBase = FlowEdgeBase;
-
 const beans = require('./beans.js');
 const routes = require('./routes.js');
 const controllers = require('./controllers.js');
@@ -19,6 +13,11 @@ const services = require('./services.js');
 const models = require('./models.js');
 // meta
 const meta = require('./meta.js');
+
+// FlowBehaviorBase/FlowNodeBase/FlowEdgeBase
+module.meta.class.FlowBehaviorBase = FlowBehaviorBase;
+module.meta.class.FlowNodeBase = FlowNodeBase;
+module.meta.class.FlowEdgeBase = FlowEdgeBase;
 
 module.exports = {
   aops,

@@ -1,5 +1,7 @@
+const AtomCmsBase = require('../common/atomCmsBase.js');
+
 // const moduleInfo = module.info;
-module.exports = class Atom extends module.meta.class.AtomCmsBase {
+module.exports = class Atom extends AtomCmsBase {
   async default({ atomClass, item, options, user }) {
     // super
     return await super.default({ atomClass, item, options, user });

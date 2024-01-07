@@ -1,4 +1,6 @@
-module.exports = class FlowBehavior extends module.meta.class.FlowBehaviorBase {
+const FlowBehaviorBase = require('../common/flowBehaviorBase.js');
+
+module.exports = class FlowBehavior extends FlowBehaviorBase {
   getBehaviorDefOptions({ behaviorDefId, options }) {
     return this.nodeInstance.nodeBaseBean.getBehaviorDefOptions({ behaviorDefId, options });
   }
