@@ -2,15 +2,6 @@
   "name": "cabloy-source",
   "title": "Cabloy",
   "private": true,
-  "workspaces": [
-    "packages-cabloy/*",
-    "packages-egg-born/*",
-    "src/module/*",
-    "src/module-system/*",
-    "src/module-vendor/*",
-    "src/suite/*/modules/*",
-    "src/suite-vendor/*/modules/*"
-  ],
   "description": "A Node.js full-stack framework with workflow engine, based on koa + egg + vue + framework7",
   "repository": {
     "type": "git",

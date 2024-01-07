@@ -16,7 +16,7 @@ class BackendTestCommand extends TestCommand {
     if (context.argv.timeout === undefined) context.argv.timeout = 3600 * 1000;
 
     if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
-    if (!context.env.EGG_FRAMEWORK) context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    if (!context.env.EGG_FRAMEWORK) context.env.EGG_FRAMEWORK = 'egg-born-backend';
 
     context.argv._ = utils.combineTestPattern({
       baseDir: context.env.EGG_BASE_DIR,

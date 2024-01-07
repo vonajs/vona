@@ -9,7 +9,7 @@ class BackendStopCommand extends StopCommand {
 
   async run(context) {
     if (!context.argv.framework) {
-      context.argv.framework = utils.getModulePath('egg-born-backend');
+      context.argv.framework = 'egg-born-backend';
     }
 
     if (!context.argv._ || context.argv._.length === 0) context.argv._ = ['src/backend'];
