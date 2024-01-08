@@ -1,6 +1,6 @@
-const raw = require('raw-body');
-const inflate = require('inflation');
-const mparse = require('egg-born-mparse').default;
+import raw from 'raw-body';
+import inflate from 'inflation';
+import mparse from 'egg-born-mparse';
 const metaCtxFn = require('../../lib/module/metaCtx.js');
 const DbTransaction = require('../../lib/base/dbTransaction.js');
 
