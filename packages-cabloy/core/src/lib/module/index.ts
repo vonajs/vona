@@ -43,21 +43,21 @@ export default function (loader) {
     loadLocales(loader, modules);
     loadErrors(loader, modules);
     loadConstants(loader, modules);
-    loadBeans.loadBeans(loader, modules);
+    loadBeans.loadBeans(loader);
     loadRoutes(loader, modules);
     loadControllers(loader, modules);
     loadServices(loader, modules);
     loadModels(loader, modules);
-    loadRedis(loader, modules);
+    loadRedis(loader);
     loadQueues(loader, modules);
     loadBroadcasts(loader, modules);
-    loadStartups(loader, modules);
-    loadSchedules(loader, modules);
-    loadSocketio(loader, modules);
-    loadClusterApp(loader, modules);
+    loadStartups(loader);
+    loadSchedules(loader);
+    loadSocketio(loader);
+    loadClusterApp(loader);
   } else {
     loadConfig(loader, modules);
-    loadClusterAgent(loader, modules);
+    loadClusterAgent(loader);
   }
 
   // monkey modules

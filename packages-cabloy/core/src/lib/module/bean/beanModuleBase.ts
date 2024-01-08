@@ -1,6 +1,8 @@
 const BeanModuleCaches = Symbol('BEAN#__BeanModuleCaches');
 
 class BeanModuleBase {
+  __moduleName: string;
+
   constructor(moduleName) {
     this.__moduleName = moduleName;
   }
