@@ -1,6 +1,6 @@
-const VersionReadyFn = require('../version/ready.js');
+import VersionReadyFn from '../version/ready.js';
 
-module.exports = function (loader) {
+export default function (loader) {
   const app = loader.app;
   const versionReady = VersionReadyFn(app);
   // initialize
@@ -13,9 +13,9 @@ module.exports = function (loader) {
   // eb_clear
   app.messenger.once('eb_clear', async data => {
     await app.meta.queue._clearWorkers();
-    process.send({ to: 'master', action: 'eb_clear_done', data: { id: data.id } });
+    (<any>process).send({ to: 'master', action: 'eb_clear_done', data: { id: data.id } });
   });
-};
+}
 
 // maybe cause some resources initialized more times
 // async function __versionReady(app) {
