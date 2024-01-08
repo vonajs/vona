@@ -20,7 +20,7 @@ import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import loadBeans from './bean/index.js';
 
-module.exports = function (loader) {
+export default function (loader) {
   // meta
   const meta = loadMeta(loader);
 
@@ -62,4 +62,4 @@ module.exports = function (loader) {
 
   // monkey modules
   modulesTools.monkeyModules('moduleLoaded');
-};
+}
