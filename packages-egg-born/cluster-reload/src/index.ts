@@ -1,3 +1,11 @@
+/** *
+ * Copyright(c) node-modules and other contributors.
+ * MIT Licensed
+ *
+ * Authors:
+ *   fengmk2 <m@fengmk2.com> (http://fengmk2.com)
+ */
+
 // https://github.com/node-modules/cluster-reload
 
 import os from 'os';
@@ -7,7 +15,7 @@ import cluster from 'cluster';
 const KILL_SIGNAL = 'SIGTERM';
 let reloading = false;
 let reloadPedding = false;
-function reload(count) {
+function reload(master, count) {
   if (reloading) {
     reloadPedding = true;
     return;
@@ -27,6 +35,49 @@ function reload(count) {
     aliveWorkers.push(worker);
   }
 
+  const promise: any = reloadClear(master, count, aliveWorkers);
+  promise.then(() => {
+    reloadNext(master, count, aliveWorkers);
+  });
+}
+
+function reloadClear(master, count, aliveWorkers) {
+  // clear worker
+  const _clearWorkers = new Set();
+  for (let i = 0; i < aliveWorkers.length; i++) {
+    const worker = aliveWorkers[i];
+    worker.send({ action: 'eb_clear', data: { id: worker.id } });
+    _clearWorkers.add(worker.id);
+  }
+
+  // promise
+  return new Promise(resolve => {
+    let _timeout: any = null;
+    let _resolved = false;
+    function _done() {
+      if (_resolved) return;
+      _resolved = true;
+      master.off('eb_clear_done', _callback);
+      if (_timeout) {
+        clearTimeout(_timeout);
+        _timeout = null;
+      }
+      resolve(true);
+    }
+    function _callback(data) {
+      _clearWorkers.delete(data.id);
+      if (_clearWorkers.size === 0) {
+        _done();
+      }
+    }
+    master.on('eb_clear_done', _callback);
+    _timeout = setTimeout(() => {
+      _done();
+    }, 5000);
+  });
+}
+
+function reloadNext(master, count, aliveWorkers) {
   let firstWorker;
   let newWorker;
 
@@ -46,7 +97,7 @@ function reload(count) {
     if (reloadPedding) {
       // has reload jobs, reload again
       reloadPedding = false;
-      reload(count);
+      reload(master, count);
     }
   }
 
@@ -56,7 +107,7 @@ function reload(count) {
 
   // kill other workers
   for (let i = 1; i < aliveWorkers.length; i++) {
-    worker = aliveWorkers[i];
+    const worker = aliveWorkers[i];
     // console.log('worker %s %s', worker.id, worker.state);
     worker.kill(KILL_SIGNAL);
   }
