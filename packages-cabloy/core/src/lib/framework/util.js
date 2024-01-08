@@ -1,9 +1,9 @@
 const MixinClassesFn = require('mixin-classes');
 
-module.exports = function () {
+export default function () {
   return {
     mixinClasses(classMain, classesMore, ...args) {
       return MixinClassesFn(classMain, classesMore, ...args);
     },
   };
-};
+}

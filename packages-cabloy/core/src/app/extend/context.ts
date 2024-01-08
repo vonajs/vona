@@ -14,7 +14,7 @@ const CTXCALLER = Symbol.for('Context#__ctxcaller');
 const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const DBLEVEL = Symbol.for('Context#__dblevel');
 
-module.exports = {
+export default {
   get module() {
     if (this[MODULE] === undefined) {
       const url = this.req.mockUrl || this.req.url || '';

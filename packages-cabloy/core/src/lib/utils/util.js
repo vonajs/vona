@@ -6,7 +6,7 @@ const is = require('is-type-of');
 const isSafeDomainUtil = require('egg-security').utils.isSafeDomain;
 const MixinClassesFn = require('mixin-classes');
 
-module.exports = app => {
+export default app => {
   return {
     instanceStarted(subdomain) {
       return app.meta.appReadyInstances && app.meta.appReadyInstances[subdomain];

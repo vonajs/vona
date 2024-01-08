@@ -11,7 +11,7 @@ let __fnMiddleware;
  * @param  {json} options.body   body(optional)
  * @return {promise}                response.body.data or throw error
  */
-module.exports = async function performAction({
+export default async function performAction({
   ctxCaller,
   innerAccess,
   // subdomain, deprecated
@@ -103,7 +103,7 @@ module.exports = async function performAction({
       message: ctx.message || ctx.body,
     });
   }
-};
+}
 
 function delegateHeaders(ctx, ctxCaller, headers) {
   if (ctxCaller && ctxCaller.headers) {

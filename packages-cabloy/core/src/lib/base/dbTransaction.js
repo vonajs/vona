@@ -1,4 +1,4 @@
-module.exports = class DbTransaction {
+export default class DbTransaction {
   constructor(ctx) {
     this._ctx = ctx;
     this._transactionCounter = 0;
@@ -45,4 +45,4 @@ module.exports = class DbTransaction {
     }
     return res;
   }
-};
+}

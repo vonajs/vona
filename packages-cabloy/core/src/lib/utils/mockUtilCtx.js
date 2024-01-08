@@ -1,4 +1,4 @@
-module.exports = ctx => {
+export default ctx => {
   return {
     // login
     async login({ auth, password = '123456' }) {

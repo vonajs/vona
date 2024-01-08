@@ -1,7 +1,7 @@
 const is = require('is-type-of');
 const performActionFn = require('./performAction.js');
 
-module.exports = ctx => {
+export default ctx => {
   const util = {
     runInBackground(scope) {
       ctx.runInBackground(async () => {

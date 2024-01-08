@@ -1,4 +1,4 @@
-module.exports = ebErrors => {
+export default ebErrors => {
   class ErrorClass {
     constructor(ctx) {
       this.ctx = ctx;

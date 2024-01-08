@@ -1,6 +1,6 @@
 const ModuleInfo = require('@cabloy/module-info');
 
-module.exports = app => {
+export default app => {
   return {
     parseUrlFromPackage(dir, apiPrefix = true) {
       apiPrefix = _prepareApiPrefix(apiPrefix);
