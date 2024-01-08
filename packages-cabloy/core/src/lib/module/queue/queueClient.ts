@@ -1,28 +1,19 @@
 import bull from 'bullmq';
 import uuid from 'uuid';
-
-interface IQueueClientWork {
-  [queueKey: string]: {
-    redlock: any;
-    worker: bull.Worker;
-  };
-}
-
-interface IQueueClientQueue {
-  [queueKey: string]: {
-    queue: bull.Queue;
-    queueEvents: bull.QueueEvents;
-  };
-}
+import {
+  IQueueCallbacks,
+  IQueueJobContext,
+  IQueueQueue,
+  IQueueQueues,
+  IQueueWork,
+  IQueueWorks,
+} from '../../../types/interface/queue.js';
 
 export default function (app) {
   class QueueClient {
-    _workers: IQueueClientWork = {};
-    _queues: IQueueClientQueue = {};
-
-    constructor() {
-      this._queueCallbacks = {};
-    }
+    _workers: IQueueWorks = {};
+    _queues: IQueueQueues = {};
+    _queueCallbacks: IQueueCallbacks = {};
 
     push(info) {
       if (!info.dbLevel) info.dbLevel = 1;
@@ -45,7 +36,7 @@ export default function (app) {
 
     _createWorker(info, queueKey) {
       // worker
-      const _worker = {};
+      const _worker = {} as IQueueWork;
       // prefix
       const prefix = `bull_${app.name}:queue`;
       // queue config
@@ -94,7 +85,8 @@ export default function (app) {
 
       _worker.worker.on('error', err => {
         if (err.message && err.message.indexOf('Missing lock for job') > -1) {
-          if (!_worker.worker.running) {
+          const workerInner = _worker.worker as any;
+          if (!workerInner.running) {
             _worker.worker.run().catch(error => {
               console.error(error);
             });
@@ -108,7 +100,7 @@ export default function (app) {
 
     _createQueue(info, queueKey) {
       // queue
-      const _queue = {};
+      const _queue = {} as IQueueQueue;
       // prefix
       const prefix = `bull_${app.name}:queue`;
       // queue config
@@ -218,7 +210,7 @@ export default function (app) {
       if (!ctxParent) ctxParent = {};
       ctxParent.dbLevel = dbLevel - 1;
       // context
-      const context = { job, data };
+      const context = { job, data } as IQueueJobContext;
       if (queueNameSub) {
         context.queueNameSub = queueNameSub;
       }
