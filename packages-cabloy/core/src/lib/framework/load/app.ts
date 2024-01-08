@@ -1,12 +1,15 @@
-const path = require('path');
-const AgentWorkerLoader = require('egg').AgentWorkerLoader;
-const LoadModulesFn = require('../../module');
-const ModuleInfoFn = require('../moduleInfo.js');
+import path from 'path';
+import { AppWorkerLoader } from 'egg';
+import LoadModulesFn from '../../module';
+import ModuleInfoFn from '../moduleInfo.js';
 
-export class CustomAgentWorkerLoader extends AgentWorkerLoader {
+export class CustomAppWorkerLoader extends AppWorkerLoader {
   // constructor(opt) {
   //   super(opt);
   // }
+
+  private pkgCabloy: any = null;
+
   loadConfig() {
     super.loadConfig();
     this.app.subdomainOffset = typeof this.config.subdomainOffset === 'undefined' ? 2 : this.config.subdomainOffset;

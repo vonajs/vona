@@ -1,10 +1,10 @@
-const MetaClassFn = require('./metaClass.js');
-const MetaUtilFn = require('./util.js');
-const MetaEnvFn = require('../module/metaEnv.js');
+import MetaClassFn from './metaClass.js';
+import MetaUtilFn from './util.js';
+import MetaEnvFn from '../module/metaEnv.js';
 
 module.exports = function (app) {
   // meta
-  const meta = {};
+  const meta: any = {};
 
   // class
   meta.class = MetaClassFn();

@@ -79,6 +79,7 @@ module.exports = function (loader, modules) {
       const names = fs.readdirSync(dir);
       for (let j = 0; j < names.length; j++) {
         const name = names[j];
+        if (path.extname(name) !== '.js') continue;
         const filepath = path.join(dir, name);
         // support en_US.js => en-US.js
         const key = formatLocale(name.split('.')[0]);

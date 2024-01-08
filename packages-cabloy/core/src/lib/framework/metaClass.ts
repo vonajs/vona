@@ -1,9 +1,9 @@
-const ModelClass = require('../base/model.js');
-const BeanModuleBaseClass = require('../module/bean/beanModuleBase.js');
+import ModelClass from '../base/model.js';
+import BeanModuleBaseClass from '../module/bean/beanModuleBase.js';
 
-module.exports = function () {
+export default function () {
   const __classes = {};
-  const classes = new Proxy(__classes, {
+  const classes: any = new Proxy(__classes, {
     get(target, prop) {
       return target[prop];
     },
@@ -12,6 +12,7 @@ module.exports = function () {
       if (!target[prop]) {
         target[prop] = value;
       }
+      return true;
     },
   });
 
@@ -22,4 +23,4 @@ module.exports = function () {
   classes.BeanModuleBase = BeanModuleBaseClass;
 
   return classes;
-};
+}
