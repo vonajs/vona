@@ -1,9 +1,12 @@
+import { BeanBase } from './beanBase.js';
+
 const BeanModuleCaches = Symbol('BEAN#__BeanModuleCaches');
 
-class BeanModuleBase {
+class BeanModuleBase extends BeanBase {
   __moduleName: string;
 
   constructor(moduleName) {
+    super();
     this.__moduleName = moduleName;
   }
 

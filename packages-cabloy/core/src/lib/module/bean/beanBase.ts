@@ -1,9 +1,13 @@
-import { CabloyContext } from '../../../types/index.js';
+import { CabloyApplication, CabloyContext } from '../../../types/index.js';
 
-class BeanBase {
-  //app:
-  ctx: CabloyContext | null;
+export class BeanBase {
+  app: CabloyApplication;
+  ctx: CabloyContext;
+  __beanFullName__: string | null;
+
   constructor() {
-    this.ctx = null;
+    this.app = null as unknown as CabloyApplication;
+    this.ctx = null as unknown as CabloyContext;
+    this.__beanFullName__ = null;
   }
 }
