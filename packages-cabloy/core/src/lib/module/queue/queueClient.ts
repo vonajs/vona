@@ -7,7 +7,7 @@ import {
   IQueueQueues,
   IQueueWork,
   IQueueWorks,
-} from '../../../types/interface/queue.js';
+} from '../../../types/index.js';
 
 export default function (app) {
   class QueueClient {

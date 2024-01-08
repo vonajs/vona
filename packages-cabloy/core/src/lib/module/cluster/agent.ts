@@ -1,4 +1,4 @@
-import { EnumAppEvent } from '../../base/constants.js';
+import { EnumAppEvent } from '../../../types/index.js';
 
 module.exports = function (loader) {
   // ready

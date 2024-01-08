@@ -1,4 +1,4 @@
-import { EnumAppEvent } from '../../base/constants.js';
+import { EnumAppEvent } from '../../../types/index.js';
 import clearFn from './clear.js';
 
 export default function (app) {
