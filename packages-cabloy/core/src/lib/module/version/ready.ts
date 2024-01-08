@@ -1,7 +1,7 @@
-const constant = require('../../base/constants.js');
-const clearFn = require('./clear.js');
+import { EnumAppEvent } from '../../base/constants.js';
+import clearFn from './clear.js';
 
-module.exports = function (app) {
+export default function (app) {
   return {
     initialize() {
       // checkAppReady
@@ -9,16 +9,16 @@ module.exports = function (app) {
         return new Promise((resolve, reject) => {
           // check once
           if (app.meta.__versionReady) {
-            resolve();
+            resolve(true);
           }
           if (app.meta.__versionReadyError) {
             reject(app.meta.__versionReadyError);
           }
           // listen
-          app.on(constant.event.appReady, () => {
-            resolve();
+          app.on(EnumAppEvent.AppReady, () => {
+            resolve(true);
           });
-          app.on(constant.event.appReadyError, err => {
+          app.on(EnumAppEvent.AppReadyError, err => {
             reject(err);
           });
         });
@@ -31,7 +31,7 @@ module.exports = function (app) {
         // record
         app.meta.__versionReady = true;
         // event: appReady
-        app.emit(constant.event.appReady);
+        app.emit(EnumAppEvent.AppReady);
         // event to agent
         app.meta.messenger.callAgent({
           name: 'appReady',
@@ -41,13 +41,13 @@ module.exports = function (app) {
         // record
         app.meta.__versionReadyError = err;
         // event: appReadyError
-        app.emit(constant.event.appReadyError, err);
+        app.emit(EnumAppEvent.AppReadyError, err);
         // throw exception
         throw err;
       }
     },
   };
-};
+}
 
 async function _versionReady(app) {
   // clear keys

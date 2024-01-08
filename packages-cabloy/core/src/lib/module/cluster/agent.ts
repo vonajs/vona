@@ -1,4 +1,4 @@
-const constant = require('../../base/constants.js');
+import { EnumAppEvent } from '../../base/constants.js';
 
 module.exports = function (loader) {
   // ready
@@ -13,7 +13,7 @@ module.exports = function (loader) {
       if (!_ready) {
         _ready = true;
         // for agent: event: appReady
-        loader.app.emit(constant.event.appReady);
+        loader.app.emit(EnumAppEvent.AppReady);
       }
     },
   });

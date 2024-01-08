@@ -1,7 +1,7 @@
-const path = require('path');
-const fse = require('fs-extra');
+import path from 'path';
+import fse from 'fs-extra';
 
-module.exports = async function (app) {
+export default async function (app) {
   if (!app.meta.isTest) return;
   // clear keys
   await _clearRedisKeys(app.redis.get('limiter'), `b_${app.name}:*`);
@@ -18,13 +18,13 @@ module.exports = async function (app) {
   }
   // src/backend/app/public
   await fse.remove(path.join(app.config.baseDir, 'app/public/1'));
-};
+}
 
 async function _clearRedisKeys(redis, pattern) {
   if (!redis) return;
   const keyPrefix = redis.options.keyPrefix;
   const keys = await redis.keys(pattern);
-  const keysDel = [];
+  const keysDel = [] as any;
   for (const fullKey of keys) {
     const key = keyPrefix ? fullKey.substr(keyPrefix.length) : fullKey;
     keysDel.push(key);
