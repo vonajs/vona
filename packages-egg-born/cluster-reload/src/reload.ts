@@ -1,14 +1,3 @@
-const cluster = require('cluster');
-
-module.exports = function () {
-  this.log('[master] reload workers...');
-  for (const id in cluster.workers) {
-    const worker = cluster.workers[id];
-    worker.isDevReload = true;
-  }
-  reload(this, this.options.workers);
-};
-
 /** *
  * Copyright(c) node-modules and other contributors.
  * MIT Licensed
@@ -16,6 +5,11 @@ module.exports = function () {
  * Authors:
  *   fengmk2 <m@fengmk2.com> (http://fengmk2.com)
  */
+
+// https://github.com/node-modules/cluster-reload
+
+import os from 'os';
+import cluster from 'cluster';
 
 // Windows not support SIGQUIT https://nodejs.org/api/process.html#process_signal_events
 const KILL_SIGNAL = 'SIGTERM';
@@ -27,11 +21,11 @@ function reload(master, count) {
     return;
   }
   if (!count) {
-    count = require('os').cpus().length;
+    count = os.cpus().length;
   }
   reloading = true;
   // find out all alive workers
-  const aliveWorkers = [];
+  const aliveWorkers = [] as any;
   let worker;
   for (const id in cluster.workers) {
     worker = cluster.workers[id];
@@ -41,6 +35,13 @@ function reload(master, count) {
     aliveWorkers.push(worker);
   }
 
+  const promise: any = reloadClear(master, count, aliveWorkers);
+  promise.then(() => {
+    reloadNext(master, count, aliveWorkers);
+  });
+}
+
+function reloadClear(master, count, aliveWorkers) {
   // clear worker
   const _clearWorkers = new Set();
   for (let i = 0; i < aliveWorkers.length; i++) {
@@ -50,8 +51,8 @@ function reload(master, count) {
   }
 
   // promise
-  const promise = new Promise(resolve => {
-    let _timeout = null;
+  return new Promise(resolve => {
+    let _timeout: any = null;
     let _resolved = false;
     function _done() {
       if (_resolved) return;
@@ -73,9 +74,6 @@ function reload(master, count) {
     _timeout = setTimeout(() => {
       _done();
     }, 5000);
-  });
-  promise.then(() => {
-    reloadNext(master, count, aliveWorkers);
   });
 }
 
@@ -120,3 +118,5 @@ function reloadNext(master, count, aliveWorkers) {
     cluster.fork();
   }
 }
+
+export default reload;
