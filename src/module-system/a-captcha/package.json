@@ -17,5 +17,7 @@
     "preversion": "npm run build:all && git add ."
   },
   "author": "zhennann",
-  "dependencies": {}
+  "dependencies": {
+    "@cabloy/module-parse": "^1.0.0"
+  }
 }
