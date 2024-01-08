@@ -1,4 +1,4 @@
-module.exports = function (loader) {
+export default function (loader) {
   // use modulesArray
   const ebModulesArray = loader.app.meta.modulesArray;
 
@@ -25,7 +25,7 @@ module.exports = function (loader) {
   );
 
   return [ebMiddlewaresNormal, ebMiddlewaresGlobal];
-};
+}
 
 function loadMiddlewares(
   ebMiddlewaresAll,

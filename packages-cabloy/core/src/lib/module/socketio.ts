@@ -1,6 +1,6 @@
 const URL = require('url').URL;
 
-module.exports = function (loader) {
+export default function (loader) {
   loader.app.beforeStart(() => {
     loader.app.io.checkRequest = checkRequest;
   });
@@ -40,4 +40,4 @@ module.exports = function (loader) {
         return fn(null, false);
       });
   }
-};
+}

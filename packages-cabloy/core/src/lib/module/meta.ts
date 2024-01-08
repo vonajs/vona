@@ -4,7 +4,7 @@ import mockUtilFn from '../utils/mockUtil.js';
 import reloadFn from './reload.js';
 import metaEnvFn from './metaEnv.js';
 
-module.exports = function (loader) {
+export default function (loader) {
   // meta
   if (!loader.app.meta) loader.app.meta = {};
   const meta = loader.app.meta;
@@ -30,4 +30,4 @@ module.exports = function (loader) {
 
   // meta
   return meta;
-};
+}

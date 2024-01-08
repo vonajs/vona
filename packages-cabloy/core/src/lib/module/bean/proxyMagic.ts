@@ -1,1 +1,1 @@
-module.exports = class ProxyMagic {};
+export default class ProxyMagic {}

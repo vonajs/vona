@@ -1,6 +1,6 @@
 import ModelClass from '../base/model.js';
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // load models
   loadModels();
 
@@ -67,4 +67,4 @@ module.exports = function (loader, modules) {
       }
     }
   }
-};
+}

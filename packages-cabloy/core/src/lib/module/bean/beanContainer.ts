@@ -1,7 +1,7 @@
 import is from 'is-type-of';
 import ProxyMagic from './proxyMagic.js';
 
-module.exports = (app, ctx) => {
+export default (app, ctx) => {
   const beanContainer = {
     _register(moduleName, beanName, beanClass) {
       const beanFullName = beanClass.global

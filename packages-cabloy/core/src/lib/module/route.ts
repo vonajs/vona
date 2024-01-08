@@ -4,7 +4,7 @@ import pathMatching from 'egg-path-matching';
 import loadMiddlewares from './middleware.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // load middlewares
   const [ebMiddlewaresNormal, ebMiddlewaresGlobal] = loadMiddlewares(loader, modules);
 
@@ -147,7 +147,7 @@ module.exports = function (loader, modules) {
       }
     });
   }
-};
+}
 
 function wrapMiddlewareApp(key, route, loader) {
   try {

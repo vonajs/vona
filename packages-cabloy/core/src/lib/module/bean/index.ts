@@ -62,7 +62,7 @@ function loadBeans(loader) {
   }
 }
 
-module.exports = {
+export default {
   loadBeanContainer,
   loadBeans,
 };

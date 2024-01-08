@@ -1,4 +1,4 @@
-module.exports = function (loader /* , modules*/) {
+export default function (loader /* , modules*/) {
   // all schedules
   const ebSchedules = (loader.app.meta.schedules = {});
 
@@ -123,4 +123,4 @@ module.exports = function (loader /* , modules*/) {
   function __getJobName(subdomain, module, name) {
     return `${subdomain}.${module}.${name}`;
   }
-};
+}

@@ -21,4 +21,4 @@ class BeanModuleBase {
   }
 }
 
-module.exports = BeanModuleBase;
+export default BeanModuleBase;

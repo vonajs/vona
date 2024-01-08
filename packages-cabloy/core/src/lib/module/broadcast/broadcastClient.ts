@@ -1,4 +1,4 @@
-module.exports = function (app) {
+export default function (app) {
   class BroadcastClient {
     constructor() {
       this.__callerId = app.meta.workerId;
@@ -64,4 +64,4 @@ module.exports = function (app) {
   }
 
   return BroadcastClient;
-};
+}

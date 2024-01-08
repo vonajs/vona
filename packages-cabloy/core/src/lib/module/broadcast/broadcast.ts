@@ -1,6 +1,6 @@
 import BroadcastClientFn from './broadcastClient.js';
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // broadcast
   loader.app.meta.broadcast = new (BroadcastClientFn(loader.app))();
 
@@ -43,4 +43,4 @@ module.exports = function (loader, modules) {
       }
     }
   }
-};
+}

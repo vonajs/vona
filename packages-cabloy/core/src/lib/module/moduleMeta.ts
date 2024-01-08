@@ -1,4 +1,4 @@
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // load metas
   loadMetas();
 
@@ -23,4 +23,4 @@ module.exports = function (loader, modules) {
       }
     });
   }
-};
+}

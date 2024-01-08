@@ -3,7 +3,7 @@ import path from 'path';
 import is from 'is-type-of';
 import mglob from 'egg-born-mglob';
 
-module.exports = function (loader) {
+export default function (loader) {
   // all modules
   const { suites, modules, modulesArray, modulesMonkey } = mglob.glob({
     projectPath: path.join(loader.app.options.baseDir, '../..'),
@@ -58,4 +58,4 @@ module.exports = function (loader) {
       }
     },
   };
-};
+}

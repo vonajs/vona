@@ -2,7 +2,7 @@ import extend from '@zhennann/extend';
 
 const CTXCONFIG = Symbol.for('Context#__config');
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // all configs
   loader.app.meta.configs = {};
 
@@ -79,4 +79,4 @@ module.exports = function (loader, modules) {
       }
     });
   }
-};
+}

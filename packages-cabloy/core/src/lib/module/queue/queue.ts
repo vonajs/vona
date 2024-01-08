@@ -1,6 +1,6 @@
 import QueueClientFn from './queueClient.js';
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // queue
   loader.app.meta.queue = new (QueueClientFn(loader.app))();
 
@@ -54,4 +54,4 @@ module.exports = function (loader, modules) {
       loader.app.meta.queue._ensureWorker(info);
     }
   };
-};
+}

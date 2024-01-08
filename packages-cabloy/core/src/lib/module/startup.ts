@@ -1,4 +1,4 @@
-module.exports = function (loader) {
+export default function (loader) {
   // use modulesArray
   const ebModulesArray = loader.app.meta.modulesArray;
 
@@ -130,4 +130,4 @@ module.exports = function (loader) {
       transaction: startup.config.transaction,
     });
   }
-};
+}

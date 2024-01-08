@@ -1,4 +1,4 @@
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // load controllers
   loadControllers();
 
@@ -16,4 +16,4 @@ module.exports = function (loader, modules) {
       }
     }
   }
-};
+}

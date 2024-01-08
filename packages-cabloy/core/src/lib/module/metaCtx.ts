@@ -1,7 +1,7 @@
 import utilCtxFn from '../utils/utilCtx.js';
 import mockUtilCtxFn from '../utils/mockUtilCtx.js';
 
-module.exports = function (ctx) {
+export default function (ctx) {
   const meta = {};
   // util
   meta.util = utilCtxFn(ctx);
@@ -10,4 +10,4 @@ module.exports = function (ctx) {
   meta.mockUtil = mockUtilCtxFn(ctx);
 
   return meta;
-};
+}

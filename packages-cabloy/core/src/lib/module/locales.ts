@@ -3,7 +3,7 @@ import path from 'path';
 import extend from '@zhennann/extend';
 const localeutil = require('egg-born-localeutil').default;
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // all locales
   const ebLocales = {};
 
@@ -119,7 +119,7 @@ module.exports = function (loader, modules) {
     args[0] = text;
     return localeutil.getText.apply(localeutil, args);
   }
-};
+}
 
 function formatLocale(locale) {
   // support zh_CN, en_US => zh-CN, en-US

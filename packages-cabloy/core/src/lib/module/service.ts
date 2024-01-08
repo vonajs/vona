@@ -1,6 +1,6 @@
 const SERVICEPROXY = Symbol('CTX#__SERVICEPROXY');
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // load services
   loadServices();
 
@@ -52,4 +52,4 @@ module.exports = function (loader, modules) {
       }
     }
   }
-};
+}

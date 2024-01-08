@@ -1,7 +1,7 @@
 import Bottleneck from 'bottleneck';
 import Redlock from 'redlock';
 
-module.exports = function (loader) {
+export default function (loader) {
   const limiter = {
     // https://github.com/SGrondin/bottleneck#clustering
     create(options) {
@@ -35,4 +35,4 @@ module.exports = function (loader) {
   loader.app.meta.limiter = limiter;
   // redlock
   loader.app.meta.redlock = redlock;
-};
+}

@@ -1,6 +1,6 @@
 import extend from '@zhennann/extend';
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // all constants
   const ebConstants = (loader.app.meta.constants = {});
 

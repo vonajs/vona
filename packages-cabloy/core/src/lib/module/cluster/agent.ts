@@ -1,6 +1,6 @@
 import { EnumAppEvent } from '../../../types/index.js';
 
-module.exports = function (loader) {
+export default function (loader) {
   // ready
   let _ready = false;
   const pids = {};
@@ -17,4 +17,4 @@ module.exports = function (loader) {
       }
     },
   });
-};
+}

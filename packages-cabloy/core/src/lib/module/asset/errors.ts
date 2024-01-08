@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   0: 'Success',
   1: 'Unknown Error',
   100: 'Continue',

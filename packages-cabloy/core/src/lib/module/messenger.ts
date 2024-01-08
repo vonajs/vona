@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 const eventMessengerCall = 'eb:event:messengerCall';
 
-module.exports = function (loader) {
+export default function (loader) {
   class Messenger {
     constructor() {
       this._providers = {};
@@ -104,4 +104,4 @@ module.exports = function (loader) {
 
   // messenger
   loader.app.meta.messenger = new Messenger();
-};
+}

@@ -3,7 +3,7 @@ import assetErrors from './asset/errors.js';
 import errorClassFn from '../base/error.js';
 const ERROR = Symbol('Context#__error');
 
-module.exports = function (loader, modules) {
+export default function (loader, modules) {
   // all errors
   const ebErrors = {};
 
@@ -55,4 +55,4 @@ module.exports = function (loader, modules) {
       extend(true, ebError, assetErrors);
     });
   }
-};
+}

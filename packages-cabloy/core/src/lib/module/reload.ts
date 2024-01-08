@@ -1,4 +1,4 @@
-module.exports = app => {
+export default app => {
   return {
     now() {
       app.meta['a-cms:watcher'].reload({ action: 'now' });
