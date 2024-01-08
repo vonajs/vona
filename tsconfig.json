@@ -1,6 +1,23 @@
 {
-  "extends": ["./tsconfig.base.json", "./tsconfig.references.json"],
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {},
   "files": [],
-  "include": ["typings/**/*"]
+  "include": ["typings/**/*"],
+  "references": [
+    {
+      "path": "packages-cabloy/core"
+    },
+    {
+      "path": "packages-egg-born/egg-born-backend"
+    },
+    {
+      "path": "packages-utils/cluster-reload"
+    },
+    {
+      "path": "packages-utils/json5"
+    },
+    {
+      "path": "packages-utils/set"
+    }
+  ]
 }
