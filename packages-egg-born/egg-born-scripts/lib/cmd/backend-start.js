@@ -9,7 +9,7 @@ class BackendStartCommand extends StartCommand {
 
   async run(context) {
     if (!context.argv.framework) {
-      context.argv.framework = 'egg-born-backend';
+      context.argv.framework = utils.getModulePath('egg-born-backend');
     }
 
     // need not sticky
