@@ -18,8 +18,6 @@ export interface ContextBase {
   tail(cb);
   tailDone(): Promise<any>;
   get tailCallbacks();
-  executeBean({ locale, subdomain, beanModule, beanFullName, context, fn, transaction }): Promise<any>;
-  executeBeanIsolate({ locale, subdomain, beanModule, beanFullName, context, fn, transaction }): Promise<any>;
   successMore(list, index, size);
   getPayload(options): Promise<any>;
 }

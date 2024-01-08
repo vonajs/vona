@@ -86,7 +86,7 @@ const context: ContextBase = {
     this[DBLEVEL] = value;
   },
   get subdomain() {
-    return typeof this[SUBDOMAIN] === 'undefined' ? this.subdomains.join('.') : this[SUBDOMAIN];
+    return typeof this[SUBDOMAIN] === 'undefined' ? (<any>this).subdomains.join('.') : this[SUBDOMAIN];
   },
   set subdomain(value) {
     this[SUBDOMAIN] = value;
@@ -105,7 +105,7 @@ const context: ContextBase = {
     this.dbLevel = value.dbLevel;
   },
   get cache() {
-    return this.bean.cache;
+    return (<any>this).bean.cache;
   },
   tail(cb) {
     if (!this.dbMeta.master) {
@@ -133,38 +133,16 @@ const context: ContextBase = {
     return this[TAILCALLBACKS];
   },
 
-  async executeBean({ locale, subdomain, beanModule, beanFullName, context, fn, transaction }) {
-    this.app.meta.util.deprecated('ctx.executeBean', 'ctx.meta.util.executeBean');
-    return await this.meta.util.executeBean({
-      locale,
-      subdomain,
-      context,
-      beanModule,
-      beanFullName,
-      transaction,
-      fn,
-    });
-  },
-
-  async executeBeanIsolate({ locale, subdomain, beanModule, beanFullName, context, fn, transaction }) {
-    this.app.meta.util.deprecated('ctx.executeBeanIsolate', 'ctx.meta.util.executeBeanIsolate');
-    return await this.meta.util.executeBeanIsolate({
-      locale,
-      subdomain,
-      context,
-      beanModule,
-      beanFullName,
-      transaction,
-      fn,
-    });
-  },
-
   successMore(list, index, size) {
-    this.success({ list, index: index + list.length, finished: size === -1 || size === 0 || list.length < size });
+    (<any>this).success({
+      list,
+      index: index + list.length,
+      finished: size === -1 || size === 0 || list.length < size,
+    });
   },
 
   async getPayload(options) {
-    return await raw(inflate(this.req), options);
+    return await raw(inflate((<any>this).req), options);
   },
 };
 export default context;
