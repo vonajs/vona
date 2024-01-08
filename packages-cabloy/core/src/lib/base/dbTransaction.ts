@@ -1,4 +1,10 @@
+import { CabloyContext } from '../../types/index.js';
+
 export default class DbTransaction {
+  _ctx: CabloyContext;
+  _transactionCounter: number;
+  _connection: any;
+
   constructor(ctx) {
     this._ctx = ctx;
     this._transactionCounter = 0;
