@@ -1,10 +1,10 @@
 const mparse = require('@cabloy/module-parse').default;
-const fse = require('fs-extra');
-const path = require('path');
+import fse from 'fs-extra';
+import path from 'path';
 const URL = require('url').URL;
-const is = require('is-type-of');
+import is from 'is-type-of';
 const isSafeDomainUtil = require('egg-security').utils.isSafeDomain;
-const MixinClassesFn = require('mixin-classes');
+import MixinClassesFn from 'mixin-classes';
 
 export default app => {
   return {

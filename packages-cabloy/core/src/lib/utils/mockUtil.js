@@ -1,4 +1,4 @@
-const ModuleInfo = require('@cabloy/module-info');
+import ModuleInfo from '@cabloy/module-info';
 
 export default app => {
   return {

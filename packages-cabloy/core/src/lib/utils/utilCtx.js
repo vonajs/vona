@@ -1,5 +1,5 @@
-const is = require('is-type-of');
-const performActionFn = require('./performAction.js');
+import is from 'is-type-of';
+import performActionFn from './performAction.js';
 
 export default ctx => {
   const util = {

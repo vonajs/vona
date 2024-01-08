@@ -1,4 +1,4 @@
-const MixinClassesFn = require('mixin-classes');
+import MixinClassesFn from 'mixin-classes';
 
 export default function () {
   return {

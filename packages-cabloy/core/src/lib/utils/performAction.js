@@ -1,5 +1,5 @@
-const http = require('http');
-const compose = require('koa-compose');
+import http from 'http';
+import compose from 'koa-compose';
 
 let __fnMiddleware;
 

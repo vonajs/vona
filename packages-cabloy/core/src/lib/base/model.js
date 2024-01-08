@@ -1,4 +1,4 @@
-const is = require('is-type-of');
+import is from 'is-type-of';
 
 let __columns = {};
 

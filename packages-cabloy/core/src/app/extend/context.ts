@@ -1,8 +1,8 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
 import mparse from '@cabloy/module-parse';
-const metaCtxFn = require('../../lib/module/metaCtx.js');
-const DbTransaction = require('../../lib/base/dbTransaction.js');
+import metaCtxFn from '../../lib/module/metaCtx.js';
+import DbTransaction from '../../lib/base/dbTransaction.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
