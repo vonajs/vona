@@ -9,4 +9,7 @@ moduleAlias.addAlias('koa-static-cache', '@cabloy/koa-static-cache');
 Master.prototype.onReload = Reload;
 
 export * from './types/index.js';
+export * from './lib/module/bean/beanBase.js';
+export * from './lib/module/bean/beanModuleBase.js';
+
 export * from './lib/framework/framework.js';
