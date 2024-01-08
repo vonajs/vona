@@ -9,7 +9,7 @@
     "noEmitOnError": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "isolatedModules": true,
     "target": "ES2018",
     "module": "CommonJS",
