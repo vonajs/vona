@@ -3,7 +3,7 @@ const AppWorkerLoader = require('egg').AppWorkerLoader;
 const LoadModulesFn = require('../../module');
 const ModuleInfoFn = require('../moduleInfo.js');
 
-module.exports = class CustomAppWorkerLoader extends AppWorkerLoader {
+export class CustomAppWorkerLoader extends AppWorkerLoader {
   // constructor(opt) {
   //   super(opt);
   // }
@@ -24,4 +24,4 @@ module.exports = class CustomAppWorkerLoader extends AppWorkerLoader {
     }
     return this.pkgCabloy.name;
   }
-};
+}

@@ -3,7 +3,7 @@ const AgentWorkerLoader = require('egg').AgentWorkerLoader;
 const LoadModulesFn = require('../../module');
 const ModuleInfoFn = require('../moduleInfo.js');
 
-module.exports = class CustomAgentWorkerLoader extends AgentWorkerLoader {
+export class CustomAgentWorkerLoader extends AgentWorkerLoader {
   // constructor(opt) {
   //   super(opt);
   // }
@@ -24,4 +24,4 @@ module.exports = class CustomAgentWorkerLoader extends AgentWorkerLoader {
     }
     return this.pkgCabloy.name;
   }
-};
+}
