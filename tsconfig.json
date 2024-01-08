@@ -8,7 +8,16 @@
       "path": "packages-cabloy/core"
     },
     {
+      "path": "packages-egg-born/cluster-reload"
+    },
+    {
       "path": "packages-egg-born/egg-born-backend"
+    },
+    {
+      "path": "packages-utils/json5"
+    },
+    {
+      "path": "packages-utils/set"
     }
   ]
 }

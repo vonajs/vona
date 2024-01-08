@@ -23,6 +23,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
+    "@cabloy/cluster-reload": "^1.0.0",
     "@cabloy/json5": "^1.0.0",
     "@cabloy/set": "^1.0.0",
     "@zhennann/egg-mysql": "^4.0.3",
