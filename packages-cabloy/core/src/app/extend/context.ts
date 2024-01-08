@@ -3,6 +3,7 @@ import inflate from 'inflation';
 import mparse from '@cabloy/module-parse';
 import metaCtxFn from '../../lib/module/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
+import { ContextBase } from '../../types/context/contextBase.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
@@ -14,10 +15,10 @@ const CTXCALLER = Symbol.for('Context#__ctxcaller');
 const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const DBLEVEL = Symbol.for('Context#__dblevel');
 
-export default {
+const context: ContextBase = {
   get module() {
     if (this[MODULE] === undefined) {
-      const url = this.req.mockUrl || this.req.url || '';
+      const url = (<any>this).req.mockUrl || (<any>this).req.url || '';
       let info;
       if (url.indexOf('/api/static/public/') === 0) {
         info = null;
@@ -28,7 +29,7 @@ export default {
         info = mparse.parseInfo('a-base');
       }
       if (info) {
-        const module = this.app.meta.modules[info.relativeName];
+        const module = (<any>this).app.meta.modules[info.relativeName];
         // should not throw error, because the url maybe not valid
         // if (!module) throw new Error(`module not found: ${info.relativeName}`);
         this[MODULE] = module || null;
@@ -158,55 +159,6 @@ export default {
     });
   },
 
-  // * deprecated
-  // performActionInBackground(options) {
-  //   // inherit subdomain, cookies such as locale
-  //   const ctx = this;
-  //   ctx.runInBackground(() => {
-  //     // performAction
-  //     return ctx.meta.util.performAction(options);
-  //   });
-  // },
-
-  /**
-   * perform action of this or that module
-   * @param  {string} options options
-   * @param  {string} options.method method
-   * @param  {string} options.url    url
-   * @param  {json} options.body   body(optional)
-   * @return {promise}                response.body.data or throw error
-   */
-  performAction({ innerAccess, method, url, query, params, headers, body }) {
-    this.app.meta.util.deprecated('ctx.performAction', 'ctx.meta.util.performAction');
-    return this.meta.util.performAction({ innerAccess, method, url, query, params, headers, body });
-  },
-
-  getVal(name) {
-    return (
-      (this.params && this.params[name]) ||
-      (this.query && this.query[name]) ||
-      (this.request.body && this.request.body[name])
-    );
-  },
-
-  getInt(name) {
-    return parseInt(this.getVal(name));
-  },
-
-  getFloat(name) {
-    return parseFloat(this.getVal(name));
-  },
-
-  getStr(name) {
-    const v = this.getVal(name);
-    return (v && v.toString()) || '';
-  },
-
-  getSafeStr(name) {
-    const v = this.getStr(name);
-    return v.replace(/'/gi, "''");
-  },
-
   successMore(list, index, size) {
     this.success({ list, index: index + list.length, finished: size === -1 || size === 0 || list.length < size });
   },
@@ -215,3 +167,4 @@ export default {
     return await raw(inflate(this.req), options);
   },
 };
+export default context;
