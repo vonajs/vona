@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-front#readme",
   "dependencies": {
+    "@cabloy/module-parse": "^1.0.0",
     "@zhennann/currency": "^1.0.3",
     "@zhennann/debounce": "^1.0.1",
     "@zhennann/extend": "^3.0.2",
@@ -34,7 +35,6 @@
     "axios": "^1.6.2",
     "cascade-extend": "^1.0.2",
     "egg-born-localeutil": "^2.1.2",
-    "egg-born-mparse": "^2.1.9",
     "js-cookie": "^2.2.1",
     "json5": "^2.1.1",
     "pinia": "^2.1.7",

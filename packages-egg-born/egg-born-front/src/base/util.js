@@ -1,4 +1,4 @@
-import mparse from 'egg-born-mparse';
+import mparse from '@cabloy/module-parse';
 import moment from 'moment';
 import * as uuid from 'uuid';
 import cookies from 'js-cookie';

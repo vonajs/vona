@@ -1,4 +1,4 @@
-const mparse = require('egg-born-mparse').default;
+const mparse = require('@cabloy/module-parse').default;
 const utils = require('../common/utils.js');
 
 const moduleInfo = module.info;

@@ -5,7 +5,7 @@ const Chalk = require('chalk');
 const TableClass = require('cli-table3');
 const Boxen = require('boxen');
 const fse = require('fs-extra');
-const mparse = require('egg-born-mparse').default;
+const mparse = require('@cabloy/module-parse').default;
 
 const moduleInfo = module.info;
 module.exports = class Local {

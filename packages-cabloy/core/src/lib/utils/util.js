@@ -1,4 +1,4 @@
-const mparse = require('egg-born-mparse').default;
+const mparse = require('@cabloy/module-parse').default;
 const fse = require('fs-extra');
 const path = require('path');
 const URL = require('url').URL;

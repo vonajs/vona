@@ -1,6 +1,6 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
-import mparse from 'egg-born-mparse';
+import mparse from '@cabloy/module-parse';
 const metaCtxFn = require('../../lib/module/metaCtx.js');
 const DbTransaction = require('../../lib/base/dbTransaction.js');
 

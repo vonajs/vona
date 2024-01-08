@@ -1,4 +1,4 @@
-import mparse from 'egg-born-mparse';
+import mparse from '@cabloy/module-parse';
 import nprogressFn from './nprogress.js';
 
 const __ComponentInstallFactoryProps = ['render', 'staticRenderFns', '__ebModuleRelativeName', '__file', '_compiled'];

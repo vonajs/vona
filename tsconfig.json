@@ -17,6 +17,12 @@
       "path": "packages-utils/json5"
     },
     {
+      "path": "packages-utils/module-info"
+    },
+    {
+      "path": "packages-utils/module-parse"
+    },
+    {
       "path": "packages-utils/set"
     }
   ]

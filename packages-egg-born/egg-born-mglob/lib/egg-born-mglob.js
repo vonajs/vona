@@ -4,7 +4,7 @@ const semver = require('semver');
 const chalk = require('chalk');
 const boxen = require('boxen');
 const eggBornUtils = require('egg-born-utils');
-const mparse = require('egg-born-mparse').default;
+const mparse = require('@cabloy/module-parse').default;
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 

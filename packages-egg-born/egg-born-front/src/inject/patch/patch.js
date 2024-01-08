@@ -1,4 +1,4 @@
-import mparse from 'egg-born-mparse';
+import mparse from '@cabloy/module-parse';
 
 export default function (ctx, router) {
   // load route
