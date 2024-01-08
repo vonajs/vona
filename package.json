@@ -29,7 +29,7 @@
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
     "dev:front": "node ./scripts/egg-born-bin.js front-dev",
     "build:front": "node ./scripts/egg-born-bin.js front-build",
-    "dev:backend": "tsc -b & node ./scripts/egg-born-bin.js backend-dev",
+    "dev:backend": "tsc -b && node ./scripts/egg-born-bin.js backend-dev",
     "debug:backend": "node ./scripts/egg-born-bin.js backend-debug",
     "test:backend": "node ./scripts/egg-born-bin.js backend-test",
     "cov:backend": "node ./scripts/egg-born-bin.js backend-cov",

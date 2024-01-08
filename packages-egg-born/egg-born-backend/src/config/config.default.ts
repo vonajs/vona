@@ -1,4 +1,4 @@
-const _config = require('../../../build/config.js');
+const _config = require('../../../../build/config.js');
 
 const path = require('path');
 const chalk = require('chalk');
