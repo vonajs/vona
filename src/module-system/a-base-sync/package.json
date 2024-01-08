@@ -1,0 +1,39 @@
+{
+  "name": "egg-born-module-a-base-sync",
+  "version": "5.0.0",
+  "title": "Base",
+  "eggBornModule": {
+    "fileVersion": 30,
+    "dependencies": {
+      "a-instance": "5.0.0",
+      "a-status": "5.0.0",
+      "a-sequence": "5.0.0",
+      "a-summer": "5.0.0"
+    }
+  },
+  "description": "",
+  "files": [
+    "dist",
+    "backend/utils",
+    "backend/test"
+  ],
+  "scripts": {
+    "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",
+    "build:backend": "node ../../../scripts/egg-born-bin.js backend-build-module",
+    "build:all": "npm run build:front && npm run build:backend",
+    "preversion": "npm run build:all && git add ."
+  },
+  "author": "zhennann",
+  "dependencies": {
+    "@cabloy/module-parse": "^1.0.0",
+    "@koa/cors": "^5.0.0",
+    "@zhennann/currency": "^1.0.3",
+    "@zhennann/extend": "^3.0.2",
+    "@zhennann/trim-html": "^0.1.12",
+    "exceljs": "^4.3.0",
+    "moment": "^2.24.0",
+    "object-hash": "^3.0.0",
+    "qr-image": "^3.2.0",
+    "vm2": "^3.9.11"
+  }
+}

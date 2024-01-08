@@ -1,0 +1,29 @@
+const _resourceTypes = {};
+
+// const moduleInfo = module.info;
+module.exports = class Base {
+  resourceTypes() {
+    if (!_resourceTypes[this.ctx.locale]) {
+      _resourceTypes[this.ctx.locale] = this._prepareResourceTypes();
+    }
+    return _resourceTypes[this.ctx.locale];
+  }
+
+  _prepareResourceTypes() {
+    const resourceTypes = {};
+    for (const module of this.ctx.app.meta.modulesArray) {
+      const moduleName = module.info.relativeName;
+      const resources = module.main.meta && module.main.meta.base && module.main.meta.base.resources;
+      if (!resources) continue;
+      for (const key in resources) {
+        const resource = resources[key];
+        const fullKey = `${moduleName}:${key}`;
+        resourceTypes[fullKey] = {
+          ...resource,
+          titleLocale: this.ctx.text(resource.title),
+        };
+      }
+    }
+    return resourceTypes;
+  }
+};

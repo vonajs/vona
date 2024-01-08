@@ -1,0 +1,71 @@
+class FormAction {
+  async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user, throwError }) {
+    // read
+    const modeRead = mode === 'view' || mode === 'read';
+    // actionBase
+    const actionBase = this.ctx.bean.base.action({
+      module: atomClass.module,
+      atomClassName: atomClass.atomClassName,
+      name: formAction,
+    });
+    // formMode
+    const formMode = actionBase.params?.form?.mode || 'edit';
+    const formModeRead = formMode === 'view' || formMode === 'read';
+    if (!modeRead && formModeRead) {
+      // no right
+      if (throwError) this.ctx.throw(403);
+      return null;
+    }
+    // fieldsRight
+    const fieldsRight = actionBase.params?.form?.fieldsRight;
+    if (!fieldsRight) {
+      if (throwError) this.ctx.throw(403);
+      return null;
+    }
+    // ok
+    return fieldsRight;
+  }
+
+  // atomClass: maybe main/detail
+  async _prepareAtomSchema({ mode, formAction, atomClass, user, throwError }) {
+    // fieldsRight
+    const fieldsRight = await this._prepareAtomSchema_getFieldsRight({
+      mode,
+      formAction,
+      atomClass,
+      user,
+      throwError,
+    });
+    if (!fieldsRight) return null;
+    // schema
+    const schema = await this.ctx.bean.fields.parseSchema({
+      atomClass,
+      atomClassMain: atomClass,
+      fieldsRight,
+    });
+    return { fieldsRight, schema };
+  }
+
+  // atomClass: maybe main/detail
+  async _prepareAtomSchemaMain({ mode, formActionMain, atomClass, user, throwError }) {
+    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassMain = atomClassBase.detail.atomClassMain;
+    // fieldsRight
+    const fieldsRight = await this._prepareAtomSchema_getFieldsRight({
+      mode,
+      formAction: formActionMain,
+      atomClass: atomClassMain,
+      user,
+      throwError,
+    });
+    if (!fieldsRight) return null;
+    // schema
+    const schema = await this.ctx.bean.fields.parseSchema({
+      atomClass,
+      atomClassMain,
+      fieldsRight,
+    });
+    return { fieldsRight, schema };
+  }
+}
+module.exports = FormAction;

@@ -1,0 +1,24 @@
+module.exports = class SummerCache {
+  // key: in/notin
+  async get(key) {
+    const atomClasses = this.__getAtomClasses(key);
+    return await this.ctx.bean.atomClass.model.mget(atomClasses);
+  }
+
+  __getAtomClasses(clause) {
+    const result = [];
+    const _atomClasses = this.ctx.bean.base.atomClasses();
+    for (const module in _atomClasses) {
+      const _atomClassesModule = _atomClasses[module];
+      for (const atomClassName in _atomClassesModule) {
+        const _atomClass = _atomClassesModule[atomClassName];
+        if (clause === 'in' && _atomClass.inner) {
+          result.push({ module, atomClassName });
+        } else if (clause === 'notin' && !_atomClass.inner) {
+          result.push({ module, atomClassName });
+        }
+      }
+    }
+    return result;
+  }
+};

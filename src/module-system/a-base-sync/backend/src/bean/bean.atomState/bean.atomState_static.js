@@ -1,0 +1,16 @@
+module.exports = class AtomState {
+  static_getDictKey({ atomClass, atomClassBase, atomStage }) {
+    // atomClassBase
+    if (!atomClassBase) {
+      atomClassBase = this.ctx.bean.base.atomClass(atomClass);
+    }
+    // atomStage
+    atomStage = this.ctx.bean.atomStage.toString({ atomStage });
+    if (!atomStage) return null;
+    // dictKey
+    const dictKey = this.ctx.bean.util.getProperty(atomClassBase, `fields.dicts.atomState.${atomStage}.dictKey`);
+    if (!dictKey) return null;
+    // ok
+    return dictKey;
+  }
+};

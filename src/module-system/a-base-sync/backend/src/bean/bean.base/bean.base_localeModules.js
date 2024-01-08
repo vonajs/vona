@@ -1,0 +1,24 @@
+const _localeModules = {};
+
+// const moduleInfo = module.info;
+module.exports = class Base {
+  localeModules() {
+    if (!_localeModules[this.ctx.locale]) {
+      _localeModules[this.ctx.locale] = this._prepareLocaleModules();
+    }
+    return _localeModules[this.ctx.locale];
+  }
+
+  _prepareLocaleModules() {
+    const localeModules = [];
+    for (const module of this.ctx.app.meta.modulesArray) {
+      const locale = module.package.eggBornModule && module.package.eggBornModule.locale;
+      if (!locale) continue;
+      const locales = locale.split(',');
+      if (locales.findIndex(item => item === this.ctx.locale) > -1) {
+        localeModules.push(module.info.relativeName);
+      }
+    }
+    return localeModules;
+  }
+};
