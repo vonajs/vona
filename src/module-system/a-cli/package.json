@@ -21,6 +21,7 @@
   },
   "author": "zhennann",
   "dependencies": {
+    "@cabloy/module-parse": "^1.0.0",
     "@zhennann/ejs": "^3.0.1",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
