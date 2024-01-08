@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const extend = require('@zhennann/extend');
+import fs from 'fs';
+import path from 'path';
+import extend from '@zhennann/extend';
 const localeutil = require('egg-born-localeutil').default;
 
 module.exports = function (loader, modules) {
@@ -83,7 +83,7 @@ module.exports = function (loader, modules) {
         const filepath = path.join(dir, name);
         // support en_US.js => en-US.js
         const key = formatLocale(name.split('.')[0]);
-        const resource = require(filepath);
+        import resource from filepath;
 
         let locale = ebLocales[key];
         if (!locale) locale = ebLocales[key] = {};

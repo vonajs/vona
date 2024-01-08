@@ -1,4 +1,4 @@
-const QueueClientFn = require('./queueClient.js');
+import QueueClientFn from './queueClient.js';
 
 module.exports = function (loader, modules) {
   // queue

@@ -1,4 +1,4 @@
-const BroadcastClientFn = require('./broadcastClient.js');
+import BroadcastClientFn from './broadcastClient.js';
 
 module.exports = function (loader, modules) {
   // broadcast

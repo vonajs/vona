@@ -1,7 +1,7 @@
-const is = require('is-type-of');
-const extend = require('@zhennann/extend');
-const pathMatching = require('egg-path-matching');
-const loadMiddlewares = require('./middleware.js');
+import is from 'is-type-of';
+import extend from '@zhennann/extend';
+import pathMatching from 'egg-path-matching';
+import loadMiddlewares from './middleware.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
 module.exports = function (loader, modules) {

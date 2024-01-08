@@ -1,4 +1,4 @@
-const extend = require('@zhennann/extend');
+import extend from '@zhennann/extend';
 
 const CTXCONFIG = Symbol.for('Context#__config');
 

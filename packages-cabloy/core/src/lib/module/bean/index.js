@@ -1,4 +1,4 @@
-const beanContainerFn = require('./beanContainer.js');
+import beanContainerFn from './beanContainer.js';
 
 function loadBeanContainer(loader) {
   loader.app.bean = beanContainerFn(loader.app, null);

@@ -1,6 +1,6 @@
-const extend = require('@zhennann/extend');
-const assetErrors = require('./asset/errors.js');
-const errorClassFn = require('../base/error.js');
+import extend from '@zhennann/extend';
+import assetErrors from './asset/errors.js';
+import errorClassFn from '../base/error.js';
 const ERROR = Symbol('Context#__error');
 
 module.exports = function (loader, modules) {

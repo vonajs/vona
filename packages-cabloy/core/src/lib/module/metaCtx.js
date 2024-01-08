@@ -1,5 +1,5 @@
-const utilCtxFn = require('../utils/utilCtx.js');
-const mockUtilCtxFn = require('../utils/mockUtilCtx.js');
+import utilCtxFn from '../utils/utilCtx.js';
+import mockUtilCtxFn from '../utils/mockUtilCtx.js';
 
 module.exports = function (ctx) {
   const meta = {};

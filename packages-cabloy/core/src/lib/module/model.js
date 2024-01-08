@@ -1,4 +1,4 @@
-const ModelClass = require('../base/model.js');
+import ModelClass from '../base/model.js';
 
 module.exports = function (loader, modules) {
   // load models

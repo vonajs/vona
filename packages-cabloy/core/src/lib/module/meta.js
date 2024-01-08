@@ -1,8 +1,8 @@
-const uuid = require('uuid');
-const utilFn = require('../utils/util.js');
-const mockUtilFn = require('../utils/mockUtil.js');
-const reloadFn = require('./reload.js');
-const metaEnvFn = require('./metaEnv.js');
+import uuid from 'uuid';
+import utilFn from '../utils/util.js';
+import mockUtilFn from '../utils/mockUtil.js';
+import reloadFn from './reload.js';
+import metaEnvFn from './metaEnv.js';
 
 module.exports = function (loader) {
   // meta

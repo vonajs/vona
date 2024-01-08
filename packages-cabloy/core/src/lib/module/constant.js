@@ -1,4 +1,4 @@
-const extend = require('@zhennann/extend');
+import extend from '@zhennann/extend';
 
 module.exports = function (loader, modules) {
   // all constants

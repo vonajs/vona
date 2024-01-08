@@ -1,5 +1,5 @@
-const bull = require('bullmq');
-const uuid = require('uuid');
+import bull from 'bullmq';
+import uuid from 'uuid';
 
 module.exports = function (app) {
   class QueueClient {

@@ -1,7 +1,7 @@
-const fse = require('fs-extra');
-const path = require('path');
-const is = require('is-type-of');
-const mglob = require('egg-born-mglob');
+import fse from 'fs-extra';
+import path from 'path';
+import is from 'is-type-of';
+import mglob from 'egg-born-mglob';
 
 module.exports = function (loader) {
   // all modules
@@ -22,7 +22,7 @@ module.exports = function (loader) {
   const pathAppMonkey = path.resolve(loader.appInfo.baseDir, 'config/monkey.js');
   let ebAppMonkey;
   if (fse.existsSync(pathAppMonkey)) {
-    const AppMonkey = require(pathAppMonkey);
+    import AppMonkey from pathAppMonkey;
     ebAppMonkey = loader.app.meta.appMonkey = loader.app.bean._newBean(AppMonkey);
   }
 

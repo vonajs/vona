@@ -1,5 +1,5 @@
-const Bottleneck = require('bottleneck');
-const Redlock = require('redlock');
+import Bottleneck from 'bottleneck';
+import Redlock from 'redlock';
 
 module.exports = function (loader) {
   const limiter = {

@@ -1,5 +1,5 @@
-const is = require('is-type-of');
-const ProxyMagic = require('./proxyMagic.js');
+import is from 'is-type-of';
+import ProxyMagic from './proxyMagic.js';
 
 module.exports = (app, ctx) => {
   const beanContainer = {

@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+import uuid from 'uuid';
 const eventMessengerCall = 'eb:event:messengerCall';
 
 module.exports = function (loader) {
