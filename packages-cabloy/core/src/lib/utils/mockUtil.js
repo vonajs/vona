@@ -1,4 +1,4 @@
-const ModuleInfo = require('@zhennann/module-info');
+const ModuleInfo = require('@cabloy/module-info');
 
 module.exports = app => {
   return {

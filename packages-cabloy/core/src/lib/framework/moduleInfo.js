@@ -1,5 +1,5 @@
 const Module = require('module');
-const ModuleInfo = require('@zhennann/module-info');
+const ModuleInfo = require('@cabloy/module-info');
 const MetaFn = require('./meta.js');
 
 let __patched = false;
