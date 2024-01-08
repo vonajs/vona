@@ -19,7 +19,7 @@ class Agent extends egg.Agent {
   }
 }
 
-export default {
+export = {
   Application,
   Agent,
   AppWorkerLoader,
