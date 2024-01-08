@@ -1,9 +1,9 @@
-const Module = require('module');
-const ModuleInfo = require('@cabloy/module-info');
-const MetaFn = require('./meta.js');
+import Module from 'module';
+import ModuleInfo from '@cabloy/module-info';
+import MetaFn from './meta.js';
 
 let __patched = false;
-module.exports = function (app) {
+export default function (app) {
   // only once
   if (__patched) return;
   __patched = true;
@@ -12,8 +12,9 @@ module.exports = function (app) {
   const meta = MetaFn(app);
 
   // compile
-  const originalCompile = Module.prototype._compile;
-  Module.prototype._compile = function (...args) {
+  const Module2 = Module as any;
+  const originalCompile = Module2.prototype._compile;
+  Module2.prototype._compile = function (...args) {
     const _module = this;
     let _moduleInfo;
     // meta
@@ -35,4 +36,4 @@ module.exports = function (app) {
     });
     return originalCompile.apply(_module, args);
   };
-};
+}

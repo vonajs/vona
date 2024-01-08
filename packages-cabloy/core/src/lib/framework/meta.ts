@@ -2,7 +2,7 @@ import MetaClassFn from './metaClass.js';
 import MetaUtilFn from './util.js';
 import MetaEnvFn from '../module/metaEnv.js';
 
-module.exports = function (app) {
+export default function (app) {
   // meta
   const meta: any = {};
 
@@ -17,4 +17,4 @@ module.exports = function (app) {
 
   // meta
   return meta;
-};
+}
