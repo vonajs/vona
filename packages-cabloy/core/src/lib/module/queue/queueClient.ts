@@ -1,11 +1,26 @@
 import bull from 'bullmq';
 import uuid from 'uuid';
 
-module.exports = function (app) {
+interface IQueueClientWork {
+  [queueKey: string]: {
+    redlock: any;
+    worker: bull.Worker;
+  };
+}
+
+interface IQueueClientQueue {
+  [queueKey: string]: {
+    queue: bull.Queue;
+    queueEvents: bull.QueueEvents;
+  };
+}
+
+export default function (app) {
   class QueueClient {
+    _workers: IQueueClientWork = {};
+    _queues: IQueueClientQueue = {};
+
     constructor() {
-      this._workers = {};
-      this._queues = {};
       this._queueCallbacks = {};
     }
 
@@ -233,4 +248,4 @@ module.exports = function (app) {
   }
 
   return QueueClient;
-};
+}
