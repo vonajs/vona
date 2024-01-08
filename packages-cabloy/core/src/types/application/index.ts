@@ -1,1 +1,1 @@
-export * from './application.js';
+export * from './app.js';
