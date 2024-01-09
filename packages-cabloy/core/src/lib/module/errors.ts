@@ -1,6 +1,7 @@
 import extend from '@zhennann/extend';
 import assetErrors from './asset/errors.js';
-import errorClassFn from '../base/error.js';
+import ErrorClass from '../base/error.js';
+import { CabloyContext } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
 
 export default function (loader, modules) {
@@ -16,20 +17,20 @@ export default function (loader, modules) {
   function patchCreateContext() {
     const createContext = loader.app.createContext;
     loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+      const context: CabloyContext = createContext.call(loader.app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
         // error
-        context[ERROR] = new (errorClassFn(ebErrors))(context);
+        (<any>context)[ERROR] = context.bean._newBean(ErrorClass, ebErrors);
 
         // methods
         ['success', 'fail', 'throw', 'parseFail', 'parseSuccess', 'parseCode'].forEach(key => {
           context[key] = function (...args) {
-            return context[ERROR][key](context.module.info.relativeName, ...args);
+            return (<any>context)[ERROR][key](context.module.info.relativeName, ...args);
           };
           context[key].module = function (module, ...args) {
-            return context[ERROR][key](module, ...args);
+            return (<any>context)[ERROR][key](module, ...args);
           };
         });
       }
