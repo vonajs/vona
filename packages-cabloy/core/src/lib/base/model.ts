@@ -1,9 +1,14 @@
 import is from 'is-type-of';
+import { BeanBase } from '../module/bean/beanBase.js';
 
 let __columns = {};
 
-class Model {
+class Model extends BeanBase {
+  table: string;
+  options: any;
+
   constructor({ table, options = {} }) {
+    super();
     this.table = table;
     this.options = options;
   }
@@ -20,7 +25,7 @@ class Model {
       : this.options.disableInstance;
   }
 
-  async columns(tableName) {
+  async columns(tableName?: string) {
     tableName = tableName || this.table;
     let columns = __columns[tableName];
     if (!columns) {
@@ -89,13 +94,13 @@ class Model {
 
   async create(data, ...args) {
     const data2 = await this.prepareData(data);
-    const res = await this.insert(data2, ...args);
+    const res = await (<any>this).insert(data2, ...args);
     return res.insertId;
   }
 
   async write(data, ...args) {
     const data2 = await this.prepareData(data);
-    return await this.update(data2, ...args);
+    return await (<any>this).update(data2, ...args);
   }
 
   _rowCheck(row) {
@@ -134,7 +139,7 @@ class Model {
   Object.defineProperty(Model.prototype, method, {
     get() {
       if (is.function(this.ctx.db[method])) {
-        return function () {
+        return function (this: any) {
           return this.ctx.db[method].apply(this.ctx.db, arguments);
         };
       }
@@ -147,7 +152,7 @@ class Model {
 ['insert'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function (...args) {
+      return function (this: any, ...args) {
         if (args.length === 0) {
           args.push({});
         }
@@ -164,8 +169,8 @@ class Model {
 ['update'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function () {
-        const args = [];
+      return function (this: any) {
+        const args = [] as any;
         if (this.table) args.push(this.table);
         for (const arg of arguments) args.push(arg);
         if (args[2] && args[2].where) {
@@ -180,8 +185,8 @@ class Model {
 ['delete'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function () {
-        const args = [];
+      return function (this: any) {
+        const args = [] as any;
         if (this.table) args.push(this.table);
         for (const arg of arguments) args.push(arg);
         args[1] = args[1] || {};
@@ -199,8 +204,8 @@ class Model {
 ['count'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function () {
-        const args = [];
+      return function (this: any) {
+        const args = [] as any;
         if (this.table) args.push(this.table);
         for (const arg of arguments) args.push(arg);
         args[1] = args[1] || {};
@@ -214,9 +219,9 @@ class Model {
 ['get'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function () {
+      return function (this: any) {
         // console.log(this.constructor.name, arguments);
-        const args = [];
+        const args = [] as any;
         if (this.table) args.push(this.table);
         for (const arg of arguments) args.push(arg);
         args[1] = args[1] || {};
@@ -233,8 +238,8 @@ class Model {
 ['select'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function () {
-        const args = [];
+      return function (this) {
+        const args = [] as any;
         if (this.table) args.push(this.table);
         for (const arg of arguments) args.push(arg);
         args[1] = args[1] || {};
