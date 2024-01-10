@@ -8,10 +8,6 @@ export default class AppBootHook {
     this._adjustMiddlewares();
   }
 
-  async beforeClose() {
-    // 请将您的 app.beforeClose 中的代码置于此处。
-  }
-
   _adjustMiddlewares() {
     const app = this.app;
     // jwt
