@@ -1,13 +1,24 @@
-export default function (loader) {
+import { object } from 'is-type-of';
+
+export default function (loader): [object, any[]] {
   // use modulesArray
   const ebModulesArray = loader.app.meta.modulesArray;
 
   // all middlewares
-  const ebMiddlewaresAll = (loader.app.meta.middlewares = []);
-  const ebMiddlewaresNormal = (loader.app.meta.middlewaresNormal = {});
-  const ebMiddlewaresGlobal: any[] = (loader.app.meta.middlewaresGlobal = []);
-  const ebMiddlewaresSocketIoConnection = (loader.app.meta.middlewaresSocketIoConnection = []);
-  const ebMiddlewaresSocketIoPacket = (loader.app.meta.middlewaresSocketIoPacket = []);
+  loader.app.meta.middlewares = [];
+  const ebMiddlewaresAll: any[] = loader.app.meta.middlewares;
+
+  loader.app.meta.middlewaresNormal = {};
+  const ebMiddlewaresNormal: object = loader.app.meta.middlewaresNormal;
+
+  loader.app.meta.middlewaresGlobal = [];
+  const ebMiddlewaresGlobal: any[] = loader.app.meta.middlewaresGlobal;
+
+  loader.app.meta.middlewaresSocketIoConnection = [];
+  const ebMiddlewaresSocketIoConnection: any[] = loader.app.meta.middlewaresSocketIoConnection;
+
+  loader.app.meta.middlewaresSocketIoPacket = [];
+  const ebMiddlewaresSocketIoPacket: any[] = loader.app.meta.middlewaresSocketIoPacket;
 
   // load middlewares all
   loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, loader);
