@@ -25,7 +25,7 @@ export default (app, ctx) => {
       // need not support object mode
       return app.meta.beans[beanFullName];
     },
-    _getBean(moduleName, beanName) {
+    _getBean(moduleName, beanName?: string) {
       if (!beanName) {
         beanName = moduleName;
         moduleName = null;
@@ -165,7 +165,7 @@ export default (app, ctx) => {
         return beanInstance[prop];
       }
       // aop chains
-      const _aopChainsProp = this._getAopChainsProp(beanFullName, prop);
+      const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, null);
       if (_aopChainsProp.length === 0) return beanInstance[prop];
       // proxy
       const methodProxyKey = `__aopproxy_method_${prop}__`;
@@ -217,7 +217,7 @@ export default (app, ctx) => {
       const _beanClass = this._getBeanClass(beanFullName);
       if (_beanClass.__aopChains__) return _beanClass.__aopChains__;
       // chains
-      const chains = [];
+      const chains = [] as any[];
       if (!is.class(beanFullName)) {
         for (const key in app.meta.aops) {
           const aop = app.meta.aops[key];
@@ -249,7 +249,7 @@ export default (app, ctx) => {
       const _beanClass = this._getBeanClass(beanFullName);
       if (_beanClass[chainsKey]) return _beanClass[chainsKey];
       const _aopChains = this._getAopChains(beanFullName);
-      const chains = [];
+      const chains = [] as any[];
       for (const key of _aopChains) {
         if (key === ProxyMagic) {
           chains.push(ProxyMagic);

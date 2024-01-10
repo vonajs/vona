@@ -22,7 +22,7 @@ export default function (loader) {
     // https://github.com/mike-marcacci/node-redlock#configuration
     create(options) {
       // clients
-      const clients = [];
+      const clients = [] as any;
       for (const clientName of loader.app.config.queue.redlock.clients) {
         const client = loader.app.redis.get(clientName) || loader.app.redis.get('limiter');
         clients.push(client);

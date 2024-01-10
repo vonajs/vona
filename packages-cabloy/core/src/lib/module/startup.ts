@@ -4,7 +4,7 @@ export default function (loader) {
 
   // all startups
   const ebStartups = (loader.app.meta.startups = {});
-  const ebStartupsArray = (loader.app.meta.startupsArray = []);
+  const ebStartupsArray: any[] = (loader.app.meta.startupsArray = []);
 
   // load startups
   loadStartups();
