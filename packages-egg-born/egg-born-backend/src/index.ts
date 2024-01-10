@@ -1,6 +1,7 @@
 import path from 'path';
 import egg from 'egg';
 import * as Framework from '@cabloy/core';
+
 const EGG_PATH = Symbol.for('egg#eggPath');
 const EGG_LOADER = Symbol.for('egg#loader');
 

@@ -1,13 +1,11 @@
 import path from 'path';
 import egg from 'egg';
-//import LoadModulesFn from '../module';
 
 export { Bootstrap } from './bootstrap.js';
 
 export { CustomAppWorkerLoader as AppWorkerLoader, CustomAgentWorkerLoader as AgentWorkerLoader } from './loader.js';
 
 const EGG_PATH = Symbol.for('egg#eggPath');
-const EGG_LOADER = Symbol.for('egg#loader');
 
 const eggPath = path.resolve(__dirname, '../..');
 
