@@ -19,7 +19,7 @@ function createLoaderClass<T>(T) {
     load() {
       super.load();
       // load modules
-      LoadModulesFn(this);
+      //LoadModulesFn(this);
     }
     getAppname() {
       if (!this.pkgCabloy) {
