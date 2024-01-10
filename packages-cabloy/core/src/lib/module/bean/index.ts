@@ -1,10 +1,11 @@
+import { CabloyApplication } from '../../../types/index.js';
 import { BeanContainerCreate } from './beanContainer.js';
 
 export function loadBeanContainer(app) {
   app.bean = BeanContainerCreate(app, null);
 }
 
-export function loadBeans(app) {
+export function loadBeans(app: CabloyApplication) {
   // use modulesArray
   const ebModulesArray = app.meta.modulesArray;
 
@@ -22,7 +23,7 @@ export function loadBeans(app) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = app.createContext;
+    const createContext = app.createContext as any;
     app.createContext = (...args) => {
       const context = createContext.call(app, ...args);
 

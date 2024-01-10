@@ -4,6 +4,7 @@ import { AppReload } from './reload.js';
 import { AppUtil } from '../utils/util.js';
 import { BeanBase } from './bean/beanBase.js';
 import { Messenger } from './messenger.js';
+import { IMonkey } from '../../types/interface/monkey.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -16,8 +17,14 @@ export class AppMeta extends BeanBase {
   mockUtil: AppMockUtil = null as any;
   reload: AppReload = null as any;
   messenger: Messenger = null as any;
+  appMonkey?: IMonkey;
   beans: Record<string, any> = null as any;
   aops: Record<string, any> = null as any;
+  suites: Record<string, any> = null as any;
+  modules: Record<string, any> = null as any;
+  modulesArray: any[] = null as any;
+  modulesMonkey: Record<string, any> = null as any;
+  configs: Record<string, any> = null as any;
 
   __init__() {
     // workerId

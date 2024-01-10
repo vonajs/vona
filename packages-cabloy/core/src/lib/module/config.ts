@@ -1,8 +1,9 @@
 import extend from '@zhennann/extend';
+import { CabloyApplication } from '../../types/index.js';
 
 const CTXCONFIG = Symbol.for('Context#__config');
 
-export default async function (app, modules) {
+export default async function (app: CabloyApplication, modules) {
   // all configs
   app.meta.configs = {};
 
@@ -13,7 +14,7 @@ export default async function (app, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = app.createContext;
+    const createContext = app.createContext as any;
     app.createContext = (...args) => {
       const context = createContext.call(app, ...args);
 
@@ -56,15 +57,12 @@ export default async function (app, modules) {
 
       // module config
       if (module.main.config) {
-        let config = module.main.config(app);
+        const config = module.main.config(app);
         // configNew is not used by now
-        const configNew = app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', {
+        app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', {
           module,
           config,
         });
-        if (configNew) {
-          config = configNew;
-        }
         extend(true, ebConfig, config);
       }
 

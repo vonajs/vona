@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import extend from '@zhennann/extend';
+import { CabloyApplication } from '../../types/index.js';
 const localeutil = require('egg-born-localeutil').default;
 
-export default function (app, modules) {
+export default function (app: CabloyApplication, modules) {
   // all locales
   const ebLocales = {};
 
@@ -14,7 +15,7 @@ export default function (app, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = app.createContext;
+    const createContext = app.createContext as any;
     app.createContext = (...args) => {
       const context = createContext.call(app, ...args);
 
@@ -68,7 +69,7 @@ export default function (app, modules) {
      *
      */
     // project locales
-    const localeDirs = app.config.i18n.dirs;
+    const localeDirs = app.config.i18n.dir;
     for (let i = 0; i < localeDirs.length; i++) {
       const dir = localeDirs[i];
 
