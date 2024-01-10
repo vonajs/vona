@@ -5,7 +5,7 @@ export default function (loader) {
   // all middlewares
   const ebMiddlewaresAll = (loader.app.meta.middlewares = []);
   const ebMiddlewaresNormal = (loader.app.meta.middlewaresNormal = {});
-  const ebMiddlewaresGlobal = (loader.app.meta.middlewaresGlobal = []);
+  const ebMiddlewaresGlobal: any[] = (loader.app.meta.middlewaresGlobal = []);
   const ebMiddlewaresSocketIoConnection = (loader.app.meta.middlewaresSocketIoConnection = []);
   const ebMiddlewaresSocketIoPacket = (loader.app.meta.middlewaresSocketIoPacket = []);
 

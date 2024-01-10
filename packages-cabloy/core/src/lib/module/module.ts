@@ -22,7 +22,7 @@ export default function (loader) {
   const pathAppMonkey = path.resolve(loader.appInfo.baseDir, 'config/monkey.js');
   let ebAppMonkey;
   if (fse.existsSync(pathAppMonkey)) {
-    import AppMonkey from pathAppMonkey;
+    const AppMonkey = require(pathAppMonkey);
     ebAppMonkey = loader.app.meta.appMonkey = loader.app.bean._newBean(AppMonkey);
   }
 

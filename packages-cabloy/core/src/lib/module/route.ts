@@ -2,11 +2,12 @@ import is from 'is-type-of';
 import extend from '@zhennann/extend';
 import pathMatching from 'egg-path-matching';
 import loadMiddlewares from './middleware.js';
+import { CabloyContext } from '../../types/index.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
 export default function (loader, modules) {
   // load middlewares
-  const [ebMiddlewaresNormal, ebMiddlewaresGlobal] = loadMiddlewares(loader, modules);
+  const [ebMiddlewaresNormal, ebMiddlewaresGlobal] = loadMiddlewares(loader);
 
   // patch router
   patchRouter();
@@ -18,7 +19,7 @@ export default function (loader, modules) {
     loader.app.meta.router = {
       register(info, route) {
         // args
-        const args = [];
+        const args = [] as any;
         // name
         if (route.name) args.push(route.name);
         // path
@@ -200,7 +201,7 @@ function middlewareDeps(ctx, options) {
 }
 
 function methodToMiddleware(controllerBeanFullName, _route) {
-  return function classControllerMiddleware(...args) {
+  return function classControllerMiddleware(this: CabloyContext, ...args) {
     const controller = this.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);
