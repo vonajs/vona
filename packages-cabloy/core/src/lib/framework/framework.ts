@@ -1,8 +1,7 @@
 import path from 'path';
 import egg from 'egg';
 
-export { CustomAppWorkerLoader as AppWorkerLoader } from './load/app.js';
-export { CustomAgentWorkerLoader as AgentWorkerLoader } from './load/loader.js';
+export { CustomAppWorkerLoader as AppWorkerLoader, CustomAgentWorkerLoader as AgentWorkerLoader } from './loader.js';
 
 const EGG_PATH = Symbol.for('egg#eggPath');
 const EGG_LOADER = Symbol.for('egg#loader');

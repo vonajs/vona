@@ -1,7 +1,7 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
-import LoadModulesFn from '../../module';
-import ModuleInfoFn from '../moduleInfo.js';
+import LoadModulesFn from '../module';
+import ModuleInfoFn from './moduleInfo.js';
 
 function createLoaderClass<T>(T) {
   return class LoaderClass extends T {
