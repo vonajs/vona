@@ -24,8 +24,6 @@ export default function (loader, modules) {
   function createModelContainer(context, relativeName) {
     // base
     const modelContainer = context.bean._newBean(Model, { table: null });
-    // should set modelContainer.ctx;
-    modelContainer.ctx = context;
     // remove app/config/service
     modelContainer.app = undefined;
     modelContainer.config = undefined;

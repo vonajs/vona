@@ -40,10 +40,10 @@ export default function (loader) {
   if (meta.inApp) {
     loadConfig(loader, modules);
     loadModuleMeta(loader, modules);
+    loadBeans.loadBeans(loader);
     loadLocales(loader, modules);
     loadErrors(loader, modules);
     loadConstants(loader, modules);
-    loadBeans.loadBeans(loader);
     loadRoutes(loader, modules);
     loadControllers(loader, modules);
     loadServices(loader, modules);

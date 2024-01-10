@@ -60,17 +60,17 @@ export default (app, ctx) => {
     },
     _patchBeanInstance(beanInstance, args, beanFullName, isAop) {
       if (app) {
-        __setPropertyValue(beanInstance, 'app', app);
+        beanInstance.app = app;
       }
       if (ctx) {
-        __setPropertyValue(beanInstance, 'ctx', ctx);
+        beanInstance.ctx = ctx;
       }
       if (beanInstance.__init__) {
         beanInstance.__init__(...args);
       }
       // __beanFullName__
       if (!is.class(beanFullName)) {
-        __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
+        beanInstance.__beanFullName__ = beanFullName;
       }
       // not aop on aop
       if (isAop) return beanInstance;

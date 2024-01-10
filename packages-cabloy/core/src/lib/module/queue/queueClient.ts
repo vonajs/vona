@@ -1,5 +1,5 @@
-import bull from 'bullmq';
-import uuid from 'uuid';
+import * as bull from 'bullmq';
+import * as uuid from 'uuid';
 import {
   IQueueCallbacks,
   IQueueJobContext,
