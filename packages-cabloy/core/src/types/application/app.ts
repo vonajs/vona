@@ -1,6 +1,6 @@
 import { Application as EggApplication } from 'egg';
-import { AppMeta } from './meta.js';
 import { BeanContainer } from '../../lib/module/bean/beanContainer.js';
+import { AppMeta } from '../../lib/module/meta.js';
 
 export interface CabloyApplication extends EggApplication {
   meta: AppMeta;
