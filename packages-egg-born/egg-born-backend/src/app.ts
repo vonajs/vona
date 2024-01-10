@@ -1,14 +1,17 @@
-import { CabloyApplication } from '@cabloy/core';
+import { CabloyApplication, Bootstrap } from '@cabloy/core';
 
 export default class AppBootHook {
   app: CabloyApplication;
 
   constructor(app) {
     this.app = app;
-    this._adjustMiddlewares();
   }
 
-  _adjustMiddlewares() {
+  configWillLoad() {
+    this._prepareMiddlewares();
+  }
+
+  _prepareMiddlewares() {
     const app = this.app;
     // jwt
     let index = app.config.coreMiddleware.indexOf('session');
