@@ -1,9 +1,10 @@
 import Module from 'module';
 import ModuleInfo from '@cabloy/module-info';
 import MetaFn from './meta.js';
+import { CabloyApplication } from '../../types/index.js';
 
 let __patched = false;
-export default function (app) {
+export default function (app: CabloyApplication) {
   // only once
   if (__patched) return;
   __patched = true;

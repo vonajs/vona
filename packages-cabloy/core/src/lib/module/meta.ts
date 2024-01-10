@@ -3,6 +3,7 @@ import { AppMockUtil } from '../utils/mockUtil.js';
 import { AppReload } from './reload.js';
 import { AppUtil } from '../utils/util.js';
 import { BeanBase } from './bean/beanBase.js';
+import { Messenger } from './messenger.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -14,6 +15,7 @@ export class AppMeta extends BeanBase {
   util: AppUtil = null as any;
   mockUtil: AppMockUtil = null as any;
   reload: AppReload = null as any;
+  messenger: Messenger = null as any;
   beans: Record<string, any> = null as any;
   aops: Record<string, any> = null as any;
 

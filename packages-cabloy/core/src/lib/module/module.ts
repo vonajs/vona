@@ -2,8 +2,9 @@ import fse from 'fs-extra';
 import path from 'path';
 import is from 'is-type-of';
 import mglob from 'egg-born-mglob';
+import { CabloyApplication } from '../../types/index.js';
 
-export default function (app) {
+export default function (app: CabloyApplication) {
   // all modules
   const { suites, modules, modulesArray, modulesMonkey } = mglob.glob({
     projectPath: path.join(app.options.baseDir, '../..'),

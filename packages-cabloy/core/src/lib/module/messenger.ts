@@ -1,5 +1,6 @@
 import uuid from 'uuid';
 import { BeanBase } from './bean/beanBase.js';
+import { CabloyApplication } from '../../types/index.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
 export class Messenger extends BeanBase {
@@ -105,7 +106,7 @@ export class Messenger extends BeanBase {
   }
 }
 
-export default function (app) {
+export default function (app: CabloyApplication) {
   // messenger
   app.meta.messenger = app.bean._newBean(Messenger);
 }
