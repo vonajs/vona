@@ -76,7 +76,7 @@ export default function (app) {
             },
           });
         },
-        _workerOptions
+        _workerOptions,
       );
 
       _worker.worker.on('failed', (job, err) => {
