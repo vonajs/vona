@@ -17,7 +17,7 @@ export default async function (app) {
     await _clearRedisKeys(app.redis.get(clientName), `redlock_${app.name}:*`);
   }
   // src/backend/app/public
-  await fse.remove(path.join(app.config.baseDir, 'app/public/1'));
+  await fse.remove(path.join(app.options.baseDir, 'app/public/1'));
 }
 
 async function _clearRedisKeys(redis, pattern) {

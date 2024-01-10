@@ -74,8 +74,8 @@ export default function (loader, modules) {
       }
 
       // application config
-      if (loader.config.modules && loader.config.modules[module.info.relativeName]) {
-        extend(true, ebConfig, loader.config.modules[module.info.relativeName]);
+      if (loader.app.config.modules && loader.app.config.modules[module.info.relativeName]) {
+        extend(true, ebConfig, loader.app.config.modules[module.info.relativeName]);
       }
     });
   }

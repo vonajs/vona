@@ -19,7 +19,7 @@ export default function (loader) {
   const ebModulesMonkey = (loader.app.meta.modulesMonkey = modulesMonkey);
 
   // app monkey
-  const pathAppMonkey = path.resolve(loader.appInfo.baseDir, 'config/monkey.js');
+  const pathAppMonkey = path.resolve(loader.app.options.baseDir, 'config/monkey.js');
   let ebAppMonkey;
   if (fse.existsSync(pathAppMonkey)) {
     const AppMonkey = require(pathAppMonkey);
@@ -30,7 +30,7 @@ export default function (loader) {
     loadModules() {
       // 1. require
       for (const module of ebModulesArray) {
-        module.main = loader.requireFile(module.js.backend);
+        module.main = require(module.js.backend);
       }
       // 2. load
       for (const module of ebModulesArray) {
