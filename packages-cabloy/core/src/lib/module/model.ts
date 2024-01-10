@@ -1,4 +1,4 @@
-import ModelClass from '../base/model.js';
+import { Model } from '../base/model.js';
 
 export default function (loader, modules) {
   // load models
@@ -23,7 +23,7 @@ export default function (loader, modules) {
 
   function createModelContainer(context, relativeName) {
     // base
-    const modelContainer = new ModelClass({ table: null });
+    const modelContainer = context.bean._newBean(Model, { table: null });
     // should set modelContainer.ctx;
     modelContainer.ctx = context;
     // remove app/config/service
@@ -43,6 +43,7 @@ export default function (loader, modules) {
     // proxy
     return new Proxy(modelContainer, {
       get(obj, prop) {
+        if (typeof prop === 'symbol') return obj[prop];
         // base
         if (obj[prop]) return obj[prop];
         const beanName = `model.${prop}`;

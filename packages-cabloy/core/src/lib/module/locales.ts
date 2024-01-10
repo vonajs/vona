@@ -83,7 +83,7 @@ export default function (loader, modules) {
         const filepath = path.join(dir, name);
         // support en_US.js => en-US.js
         const key = formatLocale(name.split('.')[0]);
-        import resource from filepath;
+        const resource = require(filepath);
 
         let locale = ebLocales[key];
         if (!locale) locale = ebLocales[key] = {};
