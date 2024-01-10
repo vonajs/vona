@@ -14,14 +14,14 @@ export default function (app: CabloyApplication) {
   meta.workerId = uuid.v4();
 
   // app or agent
-  meta.inApp = loader.app.type === 'application';
-  meta.inAgent = loader.app.type === 'agent';
+  meta.inApp = app.type === 'application';
+  meta.inAgent = app.type === 'agent';
 
   // env
-  metaEnvFn(loader.app, meta);
+  metaEnvFn(app, meta);
 
   // util
-  meta.util = utilFn(loader.app);
+  meta.util = utilFn(app);
 
   // mockUtil
   meta.mockUtil = mockUtilFn(loader.app);
