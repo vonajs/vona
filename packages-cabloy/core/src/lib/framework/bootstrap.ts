@@ -1,4 +1,5 @@
 import { CabloyApplication } from '../../types/index.js';
+import { loadBeanContainer } from '../module/bean/index.js';
 import { ModuleLoader } from '../module/index.js';
 import { VersionReady } from '../module/version/ready.js';
 
@@ -11,6 +12,9 @@ export class Bootstrap {
 
   async loadModules() {
     const app = this.app as any;
+    // bean container
+    loadBeanContainer(app);
+    // module loader
     const moduleLoader = app.bean._newBean(ModuleLoader);
     await moduleLoader.execute();
   }

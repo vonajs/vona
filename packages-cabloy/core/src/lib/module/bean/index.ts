@@ -1,16 +1,16 @@
 import beanContainerFn from './beanContainer.js';
 
-function loadBeanContainer(loader) {
-  loader.app.bean = beanContainerFn(loader.app, null);
+export function loadBeanContainer(app) {
+  app.bean = beanContainerFn(app, null);
 }
 
-function loadBeans(loader) {
+export function loadBeans(app) {
   // use modulesArray
-  const ebModulesArray = loader.app.meta.modulesArray;
+  const ebModulesArray = app.meta.modulesArray;
 
   // all
-  loader.app.meta.aops = {};
-  loader.app.meta.beans = {};
+  app.meta.aops = {};
+  app.meta.beans = {};
 
   // load beans
   loadBeans();
@@ -22,13 +22,13 @@ function loadBeans(loader) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+    const createContext = app.createContext;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
 
       // not check context.module
       // bean
-      context.bean = beanContainerFn(loader.app, context);
+      context.bean = beanContainerFn(app, context);
 
       return context;
     };
@@ -45,7 +45,7 @@ function loadBeans(loader) {
         if (['app', 'ctx'].includes(beanClass.mode)) {
           throw new Error(`bean: ${moduleName}:${beanName}, mode: ${beanClass.mode} is deprecated, use Class instead.`);
         }
-        loader.app.bean._register(moduleName, beanName, beanClass);
+        app.bean._register(moduleName, beanName, beanClass);
       }
     }
   }
@@ -56,13 +56,8 @@ function loadBeans(loader) {
       const aops = module.main.aops;
       if (!aops) continue;
       for (const aopName in aops) {
-        loader.app.bean._registerAop(module.info.relativeName, aopName, aops[aopName]);
+        app.bean._registerAop(module.info.relativeName, aopName, aops[aopName]);
       }
     }
   }
 }
-
-export default {
-  loadBeanContainer,
-  loadBeans,
-};

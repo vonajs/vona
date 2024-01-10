@@ -18,7 +18,7 @@ import loadSchedules from './schedule.js';
 import loadSocketio from './socketio.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
-import loadBeans from './bean/index.js';
+import { loadBeans } from './bean/index.js';
 import { BeanBase } from './bean/beanBase.js';
 
 export class ModuleLoader extends BeanBase {
@@ -26,9 +26,6 @@ export class ModuleLoader extends BeanBase {
     const app = this.app;
     // meta
     const meta = loadMeta(app);
-
-    // bean
-    loadBeans.loadBeanContainer(app);
 
     // messenger
     loadMessenger(app);
@@ -43,7 +40,7 @@ export class ModuleLoader extends BeanBase {
     if (meta.inApp) {
       loadConfig(app, modules);
       loadModuleMeta(app, modules);
-      loadBeans.loadBeans(app);
+      loadBeans(app);
       loadLocales(app, modules);
       loadErrors(app, modules);
       loadConstants(app, modules);
