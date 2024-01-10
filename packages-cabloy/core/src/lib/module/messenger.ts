@@ -2,11 +2,6 @@ import uuid from 'uuid';
 import { BeanBase } from './bean/beanBase.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
-export default function (loader) {
-  // messenger
-  loader.app.meta.messenger = loader.app.bean._newBean(Messenger);
-}
-
 export class Messenger extends BeanBase {
   _providers: object = {};
   _pids: any = null;
@@ -108,4 +103,9 @@ export class Messenger extends BeanBase {
   addProvider(provider) {
     this._providers[provider.name] = provider;
   }
+}
+
+export default function (loader) {
+  // messenger
+  loader.app.meta.messenger = loader.app.bean._newBean(Messenger);
 }
