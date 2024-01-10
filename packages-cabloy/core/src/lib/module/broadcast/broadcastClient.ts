@@ -32,6 +32,7 @@ export class BroadcastClient extends BeanBase {
   }
 
   async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
+    const app = this.app as any;
     // context
     const context: IBroadcastExecuteContext = { data };
     if (__callerId === this.__callerId) {
