@@ -1,8 +1,8 @@
-import BroadcastClientFn from './broadcastClient.js';
+import { BroadcastClient } from './broadcastClient.js';
 
 export default function (loader, modules) {
   // broadcast
-  loader.app.meta.broadcast = new (BroadcastClientFn(loader.app))();
+  loader.app.meta.broadcast = loader.app.bean._newBean(BroadcastClient);
 
   // all broadcasts
   const ebBroadcasts = (loader.app.meta.broadcasts = {});

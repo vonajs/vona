@@ -1,3 +1,4 @@
+import { IBroadcastExecuteContext } from '../../../types/index.js';
 import { BeanBase } from '../bean/beanBase.js';
 
 export class BroadcastClient extends BeanBase {
@@ -32,7 +33,7 @@ export class BroadcastClient extends BeanBase {
 
   async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
     // context
-    const context = { data };
+    const context: IBroadcastExecuteContext = { data };
     if (__callerId === this.__callerId) {
       context.sameAsCaller = true;
     }
@@ -46,6 +47,7 @@ export class BroadcastClient extends BeanBase {
   }
 
   async _performTask({ broadcast, context, locale, subdomain }) {
+    const app = this.app as any;
     const bean = broadcast.bean;
     // execute as global when broadcast.config.instance === false
     // ignore when instance not started
