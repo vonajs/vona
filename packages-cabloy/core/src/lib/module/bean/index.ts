@@ -1,7 +1,7 @@
-import beanContainerFn from './beanContainer.js';
+import { BeanContainerCreate } from './beanContainer.js';
 
 export function loadBeanContainer(app) {
-  app.bean = beanContainerFn(app, null);
+  app.bean = BeanContainerCreate(app, null);
 }
 
 export function loadBeans(app) {
@@ -28,7 +28,7 @@ export function loadBeans(app) {
 
       // not check context.module
       // bean
-      context.bean = beanContainerFn(app, context);
+      context.bean = BeanContainerCreate(app, context);
 
       return context;
     };

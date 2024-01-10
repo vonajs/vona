@@ -231,14 +231,15 @@ export class BeanContainer {
   }
 
   _prepareAopChains(beanFullName, beanInstance) {
+    const self = this;
     // beanFullName maybe class
     const _beanClass = this._getBeanClass(beanFullName);
     if (_beanClass.__aopChains__) return _beanClass.__aopChains__;
     // chains
     const chains = [] as any[];
     if (!is.class(beanFullName)) {
-      for (const key in app.meta.aops) {
-        const aop = app.meta.aops[key];
+      for (const key in self.app.meta.aops) {
+        const aop = self.app.meta.aops[key];
         // not self
         if (key === beanFullName) continue;
         // check if match aop

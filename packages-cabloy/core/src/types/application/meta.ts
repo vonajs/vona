@@ -12,4 +12,6 @@ export interface AppMeta {
   util: AppUtil;
   mockUtil: AppMockUtil;
   reload: AppReload;
+  beans: Record<string, any>;
+  aops: Record<string, any>;
 }
