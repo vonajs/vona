@@ -3,11 +3,12 @@ import utilFn from '../utils/util.js';
 import mockUtilFn from '../utils/mockUtil.js';
 import reloadFn from './reload.js';
 import metaEnvFn from './metaEnv.js';
+import { CabloyApplication } from '../../types/index.js';
 
-export default function (loader) {
+export default function (app: CabloyApplication) {
   // meta
-  if (!loader.app.meta) loader.app.meta = {};
-  const meta = loader.app.meta;
+  if (!app.meta) app.meta = {};
+  const meta = app.meta;
 
   // workerId
   meta.workerId = uuid.v4();
