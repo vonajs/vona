@@ -1,6 +1,5 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
-import ModuleInfoFn from './moduleInfo.js';
 
 function createLoaderClass<T>(T) {
   return class LoaderClass extends T {
@@ -9,7 +8,6 @@ function createLoaderClass<T>(T) {
     loadConfig() {
       super.loadConfig();
       this.app.subdomainOffset = typeof this.config.subdomainOffset === 'undefined' ? 2 : this.config.subdomainOffset;
-      ModuleInfoFn(this.app);
     }
 
     getAppname() {

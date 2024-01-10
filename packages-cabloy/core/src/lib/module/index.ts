@@ -20,12 +20,16 @@ import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import { loadBeans } from './bean/index.js';
 import { BeanBase } from './bean/beanBase.js';
+import ModuleInfoFn from '../framework/moduleInfo.js';
 
 export class ModuleLoader extends BeanBase {
   async execute() {
     const app = this.app;
     // meta
     const meta = app.bean._newBean(AppMeta);
+
+    // moduleInfo
+    ModuleInfoFn(app);
 
     // messenger
     loadMessenger(app);
