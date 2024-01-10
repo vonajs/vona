@@ -3,31 +3,31 @@ import path from 'path';
 import is from 'is-type-of';
 import mglob from 'egg-born-mglob';
 
-export default function (loader) {
+export default function (app) {
   // all modules
   const { suites, modules, modulesArray, modulesMonkey } = mglob.glob({
-    projectPath: path.join(loader.app.options.baseDir, '../..'),
-    disabledModules: loader.app.config.disabledModules,
-    disabledSuites: loader.app.config.disabledSuites,
-    log: !!loader.app.meta.inAgent,
+    projectPath: path.join(app.options.baseDir, '../..'),
+    disabledModules: app.config.disabledModules,
+    disabledSuites: app.config.disabledSuites,
+    log: !!app.meta.inAgent,
     type: 'backend',
   });
   // eslint-disable-next-line
-  const ebSuites = (loader.app.meta.suites = suites);
-  const ebModules = (loader.app.meta.modules = modules);
-  const ebModulesArray = (loader.app.meta.modulesArray = modulesArray);
-  const ebModulesMonkey = (loader.app.meta.modulesMonkey = modulesMonkey);
+  const ebSuites = (app.meta.suites = suites);
+  const ebModules = (app.meta.modules = modules);
+  const ebModulesArray = (app.meta.modulesArray = modulesArray);
+  const ebModulesMonkey = (app.meta.modulesMonkey = modulesMonkey);
 
   // app monkey
-  const pathAppMonkey = path.resolve(loader.app.options.baseDir, 'config/monkey.js');
+  const pathAppMonkey = path.resolve(app.options.baseDir, 'config/monkey.js');
   let ebAppMonkey;
   if (fse.existsSync(pathAppMonkey)) {
     const AppMonkey = require(pathAppMonkey);
-    ebAppMonkey = loader.app.meta.appMonkey = loader.app.bean._newBean(AppMonkey);
+    ebAppMonkey = app.meta.appMonkey = app.bean._newBean(AppMonkey);
   }
 
   return {
-    loadModules() {
+    async loadModules() {
       // 1. require
       for (const module of ebModulesArray) {
         module.main = require(module.js.backend);
@@ -35,26 +35,26 @@ export default function (loader) {
       // 2. load
       for (const module of ebModulesArray) {
         if (is.class(module.main)) {
-          const mainInstance = loader.app.bean._newBean(module.main);
+          const mainInstance = app.bean._newBean(module.main);
           module.main = mainInstance.options;
           module.mainInstance = mainInstance;
         } else if (is.function(module.main) && !is.class(module.main)) {
-          module.main = module.main(loader.app, module);
+          module.main = module.main(app, module);
         }
       }
       // 3. monkey
       for (const key in ebModulesMonkey) {
         const moduleMonkey = ebModulesMonkey[key];
         if (moduleMonkey.main.monkey) {
-          moduleMonkey.monkeyInstance = loader.app.bean._newBean(moduleMonkey.main.monkey);
+          moduleMonkey.monkeyInstance = app.bean._newBean(moduleMonkey.main.monkey);
         }
       }
       // ok
       return ebModules;
     },
-    monkeyModules(monkeyName) {
+    async monkeyModules(monkeyName) {
       for (const module of ebModulesArray) {
-        loader.app.meta.util.monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, { module });
+        app.meta.util.monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, { module });
       }
     },
   };

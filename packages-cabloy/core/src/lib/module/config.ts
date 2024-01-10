@@ -2,20 +2,20 @@ import extend from '@zhennann/extend';
 
 const CTXCONFIG = Symbol.for('Context#__config');
 
-export default function (loader, modules) {
+export default async function (app, modules) {
   // all configs
-  loader.app.meta.configs = {};
+  app.meta.configs = {};
 
   // load configs
-  loadConfigs();
+  await loadConfigs();
 
   // patch service
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+    const createContext = app.createContext;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
@@ -28,7 +28,7 @@ export default function (loader, modules) {
             let useCache;
             let _configs = context.bean.instance.getInstanceConfigs();
             if (!_configs) {
-              _configs = loader.app.meta.configs;
+              _configs = app.meta.configs;
               useCache = false;
             } else {
               useCache = true;
@@ -49,24 +49,19 @@ export default function (loader, modules) {
     };
   }
 
-  function loadConfigs() {
-    Object.keys(modules).forEach(key => {
+  async function loadConfigs() {
+    for (const key in modules) {
       const module = modules[key];
-      const ebConfig = (loader.app.meta.configs[module.info.relativeName] = {});
+      const ebConfig = (app.meta.configs[module.info.relativeName] = {});
 
       // module config
       if (module.main.config) {
-        let config = module.main.config(loader.appInfo);
+        let config = module.main.config(app);
         // configNew is not used by now
-        const configNew = loader.app.meta.util.monkeyModule(
-          loader.app.meta.appMonkey,
-          loader.app.meta.modulesMonkey,
-          'configLoaded',
-          {
-            module,
-            config,
-          }
-        );
+        const configNew = app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', {
+          module,
+          config,
+        });
         if (configNew) {
           config = configNew;
         }
@@ -74,9 +69,9 @@ export default function (loader, modules) {
       }
 
       // application config
-      if (loader.app.config.modules && loader.app.config.modules[module.info.relativeName]) {
-        extend(true, ebConfig, loader.app.config.modules[module.info.relativeName]);
+      if (app.config.modules && app.config.modules[module.info.relativeName]) {
+        extend(true, ebConfig, app.config.modules[module.info.relativeName]);
       }
-    });
+    }
   }
 }

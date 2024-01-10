@@ -38,12 +38,12 @@ export class ModuleLoader extends BeanBase {
     // modules
     const modulesTools = ModulesToolsFn(app);
     // load modules
-    const modules = modulesTools.loadModules();
+    const modules = await modulesTools.loadModules();
     // monkey modules
-    modulesTools.monkeyModules('moduleLoading');
+    await modulesTools.monkeyModules('moduleLoading');
 
     if (meta.inApp) {
-      loadConfig(app, modules);
+      await loadConfig(app, modules);
       loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
@@ -61,11 +61,11 @@ export class ModuleLoader extends BeanBase {
       loadSocketio(app);
       loadClusterApp(app);
     } else {
-      loadConfig(app, modules);
+      await loadConfig(app, modules);
       loadClusterAgent(app);
     }
 
     // monkey modules
-    modulesTools.monkeyModules('moduleLoaded');
+    await modulesTools.monkeyModules('moduleLoaded');
   }
 }
