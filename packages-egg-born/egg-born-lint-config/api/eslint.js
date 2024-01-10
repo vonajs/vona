@@ -73,7 +73,9 @@ const rules = {
   '@typescript-eslint/no-unused-vars': 'error',
 };
 
-const builtin = {
+module.exports = {
+  extends: 'eslint-config-egg/typescript',
+  parserOptions: {},
   rules,
   env: {
     browser: true,
@@ -89,9 +91,4 @@ const builtin = {
     wx: true,
     define: true,
   },
-};
-
-module.exports = {
-  extends: ['eslint-config-egg/typescript'].concat([builtin]),
-  parserOptions: {},
 };
