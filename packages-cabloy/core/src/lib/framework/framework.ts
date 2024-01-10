@@ -1,5 +1,6 @@
 import path from 'path';
 import egg from 'egg';
+//import LoadModulesFn from '../module';
 
 export { CustomAppWorkerLoader as AppWorkerLoader, CustomAgentWorkerLoader as AgentWorkerLoader } from './loader.js';
 
