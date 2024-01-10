@@ -4,10 +4,12 @@ import mockUtilFn from '../utils/mockUtil.js';
 import reloadFn from './reload.js';
 import metaEnvFn from './metaEnv.js';
 import { CabloyApplication } from '../../types/index.js';
+import { AppMeta } from '../../types/application/meta.js';
+import AppUtil from '../utils/util.js';
 
 export default function (app: CabloyApplication) {
   // meta
-  if (!app.meta) app.meta = {};
+  if (!app.meta) app.meta = {} as AppMeta;
   const meta = app.meta;
 
   // workerId
@@ -21,7 +23,7 @@ export default function (app: CabloyApplication) {
   metaEnvFn(app, meta);
 
   // util
-  meta.util = utilFn(app);
+  meta.util = app.bean._newBean(AppUtil);
 
   // mockUtil
   meta.mockUtil = mockUtilFn(loader.app);
