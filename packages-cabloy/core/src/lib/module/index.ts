@@ -9,7 +9,7 @@ import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
-import { LoadMessenger } from './messenger.js';
+import loadMessenger from './messenger.js';
 import loadRedis from './redis.js';
 import loadQueues from './queue/queue.js';
 import loadBroadcasts from './broadcast/broadcast.js';
@@ -33,7 +33,7 @@ export class ModuleLoader extends BeanBase {
     ModuleInfoFn(app);
 
     // messenger
-    LoadMessenger(app);
+    loadMessenger(app);
 
     // modules
     const modulesTools = ModulesToolsFn(app);
@@ -44,7 +44,7 @@ export class ModuleLoader extends BeanBase {
 
     if (meta.inApp) {
       await loadConfig(app, modules);
-      loadModuleMeta(app, modules);
+      await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
       loadErrors(app, modules);

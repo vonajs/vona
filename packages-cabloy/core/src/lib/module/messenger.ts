@@ -105,7 +105,7 @@ export class Messenger extends BeanBase {
   }
 }
 
-export function LoadMessenger(app) {
+export default function (app) {
   // messenger
   app.meta.messenger = app.bean._newBean(Messenger);
 }

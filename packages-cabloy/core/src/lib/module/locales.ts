@@ -3,7 +3,7 @@ import path from 'path';
 import extend from '@zhennann/extend';
 const localeutil = require('egg-born-localeutil').default;
 
-export default function (loader, modules) {
+export default function (app, modules) {
   // all locales
   const ebLocales = {};
 
@@ -14,13 +14,13 @@ export default function (loader, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+    const createContext = app.createContext;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
-        const defaultLocale = loader.app.config.i18n.defaultLocale;
+        const defaultLocale = app.config.i18n.defaultLocale;
         context.text = function (...args) {
           return getText(context.locale || defaultLocale, ...args);
         };
@@ -68,7 +68,7 @@ export default function (loader, modules) {
      *
      */
     // project locales
-    const localeDirs = loader.app.config.i18n.dirs;
+    const localeDirs = app.config.i18n.dirs;
     for (let i = 0; i < localeDirs.length; i++) {
       const dir = localeDirs[i];
 
@@ -117,7 +117,7 @@ export default function (loader, modules) {
     }
     // format
     args[0] = text;
-    return localeutil.getText.apply(localeutil, args);
+    return localeutil.getText(...args);
   }
 }
 
