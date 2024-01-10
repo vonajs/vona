@@ -2,7 +2,7 @@ import utilCtxFn from '../utils/utilCtx.js';
 import mockUtilCtxFn from '../utils/mockUtilCtx.js';
 
 export default function (ctx) {
-  const meta = {};
+  const meta = {} as any;
   // util
   meta.util = utilCtxFn(ctx);
 

@@ -1,5 +1,5 @@
-import ModelClass from '../base/model.js';
-import BeanModuleBaseClass from '../module/bean/beanModuleBase.js';
+import { Model } from '../base/model.js';
+import { BeanModuleBase } from '../module/bean/beanModuleBase.js';
 
 export default function () {
   const __classes = {};
@@ -17,10 +17,10 @@ export default function () {
   });
 
   // model
-  classes.Model = ModelClass;
+  classes.Model = Model;
 
   // BeanModuleBase
-  classes.BeanModuleBase = BeanModuleBaseClass;
+  classes.BeanModuleBase = BeanModuleBase;
 
   return classes;
 }
