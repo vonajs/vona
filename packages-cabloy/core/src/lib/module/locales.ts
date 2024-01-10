@@ -69,7 +69,7 @@ export default function (app: CabloyApplication, modules) {
      *
      */
     // project locales
-    const localeDirs = app.config.i18n.dir;
+    const localeDirs = (<any>app.config.i18n).dirs;
     for (let i = 0; i < localeDirs.length; i++) {
       const dir = localeDirs[i];
 
