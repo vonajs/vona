@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import utilFn from '../utils/util.js';
 import mockUtilFn from '../utils/mockUtil.js';
 import reloadFn from './reload.js';

@@ -24,11 +24,11 @@ export default function (loader) {
   // meta
   const meta = loadMeta(loader);
 
-  // messenger
-  loadMessenger(loader);
-
   // bean
   loadBeans.loadBeanContainer(loader);
+
+  // messenger
+  loadMessenger(loader);
 
   // modules
   const modulesTools = ModulesToolsFn(loader);
