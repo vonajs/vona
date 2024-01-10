@@ -1,6 +1,6 @@
 import extend from '@zhennann/extend';
 import assetErrors from './asset/errors.js';
-import ErrorClass from '../base/error.js';
+import { ErrorClass } from '../base/error.js';
 import { CabloyContext } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
 

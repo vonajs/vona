@@ -1,67 +1,64 @@
-export default function (app) {
-  class BroadcastClient {
-    constructor() {
-      this.__callerId = app.meta.workerId;
-      this.channelName = null;
-      this.sub = null;
-      this.pub = null;
-      this.init();
-    }
+import { BeanBase } from '../bean/beanBase.js';
 
-    init() {
-      this.channelName = `broadcast_${app.name}:`;
-      this.pub = app.redis.get('broadcast').duplicate();
-      this.sub = app.redis.get('broadcast').duplicate();
-      this.sub.subscribe(this.channelName, function () {});
-      this.sub.on('message', (channel, info) => {
-        this._performTasks(JSON.parse(info))
-          .then(() => {
-            // do nothing
-          })
-          .catch(err => {
-            app.logger.error(err);
-          });
-      });
-    }
+export class BroadcastClient extends BeanBase {
+  __callerId: number = 0;
+  channelName: string | null = null;
+  sub: any = null;
+  pub: any = null;
 
-    // { locale, subdomain, module, broadcastName, data }
-    emit(info) {
-      info.__callerId = this.__callerId;
-      this.pub.publish(this.channelName, JSON.stringify(info));
-    }
+  __init__() {
+    const app = this.app as any;
+    this.__callerId = app.meta.workerId;
+    this.channelName = `broadcast_${this.app.name}:`;
+    this.pub = app.redis.get('broadcast').duplicate();
+    this.sub = app.redis.get('broadcast').duplicate();
+    this.sub.subscribe(this.channelName, function () {});
+    this.sub.on('message', (channel, info) => {
+      this._performTasks(JSON.parse(info))
+        .then(() => {
+          // do nothing
+        })
+        .catch(err => {
+          app.logger.error(err);
+        });
+    });
+  }
 
-    async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
-      // context
-      const context = { data };
-      if (__callerId === this.__callerId) {
-        context.sameAsCaller = true;
-      }
-      // broadcasts
-      const broadcastArray = app.meta.broadcasts[`${module}:${broadcastName}`];
-      if (!broadcastArray) return;
-      // loop
-      for (const broadcast of broadcastArray) {
-        await this._performTask({ broadcast, context, locale, subdomain });
-      }
-    }
+  // { locale, subdomain, module, broadcastName, data }
+  emit(info) {
+    info.__callerId = this.__callerId;
+    this.pub.publish(this.channelName, JSON.stringify(info));
+  }
 
-    async _performTask({ broadcast, context, locale, subdomain }) {
-      const bean = broadcast.bean;
-      // execute as global when broadcast.config.instance === false
-      // ignore when instance not started
-      const instanceStarted = app.meta.util.instanceStarted(subdomain);
-      if (!instanceStarted && broadcast.config.instance !== false) return;
-      // execute
-      return await app.meta.util.executeBean({
-        locale,
-        subdomain,
-        context,
-        beanModule: bean.module,
-        beanFullName: `${bean.module}.broadcast.${bean.name}`,
-        transaction: broadcast.config.transaction,
-      });
+  async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
+    // context
+    const context = { data };
+    if (__callerId === this.__callerId) {
+      context.sameAsCaller = true;
+    }
+    // broadcasts
+    const broadcastArray = app.meta.broadcasts[`${module}:${broadcastName}`];
+    if (!broadcastArray) return;
+    // loop
+    for (const broadcast of broadcastArray) {
+      await this._performTask({ broadcast, context, locale, subdomain });
     }
   }
 
-  return BroadcastClient;
+  async _performTask({ broadcast, context, locale, subdomain }) {
+    const bean = broadcast.bean;
+    // execute as global when broadcast.config.instance === false
+    // ignore when instance not started
+    const instanceStarted = app.meta.util.instanceStarted(subdomain);
+    if (!instanceStarted && broadcast.config.instance !== false) return;
+    // execute
+    return await app.meta.util.executeBean({
+      locale,
+      subdomain,
+      context,
+      beanModule: bean.module,
+      beanFullName: `${bean.module}.broadcast.${bean.name}`,
+      transaction: broadcast.config.transaction,
+    });
+  }
 }

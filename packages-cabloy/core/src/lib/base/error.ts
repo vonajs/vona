@@ -1,7 +1,7 @@
 import { BeanBase } from '../../index.js';
 import { CabloyContext } from '../../types/index.js';
 
-export default class ErrorClass extends BeanBase {
+export class ErrorClass extends BeanBase {
   ebErrors: any;
 
   constructor(ebErrors) {

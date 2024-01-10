@@ -2,7 +2,7 @@ import { BeanBase } from './beanBase.js';
 
 const BeanModuleCaches = Symbol('BEAN#__BeanModuleCaches');
 
-class BeanModuleBase extends BeanBase {
+export class BeanModuleBase extends BeanBase {
   __moduleName: string;
 
   constructor(moduleName) {
@@ -25,5 +25,3 @@ class BeanModuleBase extends BeanBase {
     return beanInstance;
   }
 }
-
-export default BeanModuleBase;

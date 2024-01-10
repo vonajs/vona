@@ -10,4 +10,6 @@ export class BeanBase {
     this.ctx = null as unknown as CabloyContext;
     this.__beanFullName__ = null;
   }
+
+  __init__() {}
 }

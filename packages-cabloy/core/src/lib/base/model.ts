@@ -3,7 +3,7 @@ import { BeanBase } from '../module/bean/beanBase.js';
 
 let __columns = {};
 
-class Model extends BeanBase {
+export class Model extends BeanBase {
   table: string;
   options: any;
 
@@ -250,5 +250,3 @@ class Model extends BeanBase {
     },
   });
 });
-
-export default Model;
