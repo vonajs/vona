@@ -22,6 +22,7 @@ export default function (loader, modules) {
                 {},
                 {
                   get(obj, prop) {
+                    if (typeof prop === 'symbol') return obj[prop];
                     const beanName = `service.${prop}`;
                     return context.bean._getBean(context.module.info.relativeName, beanName);
                   },
