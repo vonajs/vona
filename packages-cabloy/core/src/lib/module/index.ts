@@ -19,47 +19,51 @@ import loadSocketio from './socketio.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import loadBeans from './bean/index.js';
+import { BeanBase } from './bean/beanBase.js';
 
-export class ModuleLoader {
-  // meta
-  const meta = loadMeta(loader);
+export class ModuleLoader extends BeanBase {
+  async execute() {
+    const app = this.app;
+    // meta
+    const meta = loadMeta(app);
 
-  // bean
-  loadBeans.loadBeanContainer(loader);
+    // bean
+    loadBeans.loadBeanContainer(app);
 
-  // messenger
-  loadMessenger(loader);
+    // messenger
+    loadMessenger(app);
 
-  // modules
-  const modulesTools = ModulesToolsFn(loader);
-  // load modules
-  const modules = modulesTools.loadModules();
-  // monkey modules
-  modulesTools.monkeyModules('moduleLoading');
+    // modules
+    const modulesTools = ModulesToolsFn(app);
+    // load modules
+    const modules = modulesTools.loadModules();
+    // monkey modules
+    modulesTools.monkeyModules('moduleLoading');
 
-  if (meta.inApp) {
-    loadConfig(loader, modules);
-    loadModuleMeta(loader, modules);
-    loadBeans.loadBeans(loader);
-    loadLocales(loader, modules);
-    loadErrors(loader, modules);
-    loadConstants(loader, modules);
-    loadRoutes(loader, modules);
-    loadControllers(loader, modules);
-    loadServices(loader, modules);
-    loadModels(loader, modules);
-    loadRedis(loader);
-    loadQueues(loader, modules);
-    loadBroadcasts(loader, modules);
-    loadStartups(loader);
-    loadSchedules(loader);
-    loadSocketio(loader);
-    loadClusterApp(loader);
-  } else {
-    loadConfig(loader, modules);
-    loadClusterAgent(loader);
+    if (meta.inApp) {
+      loadConfig(app, modules);
+      loadModuleMeta(app, modules);
+      loadBeans.loadBeans(app);
+      loadLocales(app, modules);
+      loadErrors(app, modules);
+      loadConstants(app, modules);
+      loadRoutes(app, modules);
+      loadControllers(app, modules);
+      loadServices(app, modules);
+      loadModels(app, modules);
+      loadRedis(app);
+      loadQueues(app, modules);
+      loadBroadcasts(app, modules);
+      loadStartups(app);
+      loadSchedules(app);
+      loadSocketio(app);
+      loadClusterApp(app);
+    } else {
+      loadConfig(app, modules);
+      loadClusterAgent(app);
+    }
+
+    // monkey modules
+    modulesTools.monkeyModules('moduleLoaded');
   }
-
-  // monkey modules
-  modulesTools.monkeyModules('moduleLoaded');
 }
