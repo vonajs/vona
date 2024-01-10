@@ -20,7 +20,7 @@ import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import loadBeans from './bean/index.js';
 
-export default function (loader) {
+export class ModuleLoader {
   // meta
   const meta = loadMeta(loader);
 

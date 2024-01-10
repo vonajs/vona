@@ -14,7 +14,7 @@ export default class AppBootHook {
   }
 
   async didLoad() {
-    this.bootstrap.loadModules();
+    await this.bootstrap.loadModules();
   }
 
   async serverDidReady() {
