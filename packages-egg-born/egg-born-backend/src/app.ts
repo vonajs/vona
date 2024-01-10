@@ -17,6 +17,10 @@ export default class AppBootHook {
     this.bootstrap.loadModules();
   }
 
+  async serverDidReady() {
+    await this.bootstrap.versionReady();
+  }
+
   _prepareMiddlewares() {
     const app = this.app;
     // jwt

@@ -1,15 +1,10 @@
-import VersionReadyFn from '../version/ready.js';
+import { VersionReady } from '../version/ready.js';
 
 export default function (loader) {
   const app = loader.app;
-  const versionReady = VersionReadyFn(app);
+  const versionReady = app.bean._newBean(VersionReady);
   // initialize
   versionReady.initialize();
-  // egg-ready
-  app.messenger.once('egg-ready', async () => {
-    // version ready
-    await versionReady.execute();
-  });
   // eb_clear
   app.messenger.once('eb_clear', async data => {
     await app.meta.queue._clearWorkers();

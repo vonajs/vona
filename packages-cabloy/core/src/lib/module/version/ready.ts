@@ -1,52 +1,53 @@
 import { EnumAppEvent } from '../../../types/index.js';
+import { BeanBase } from '../bean/beanBase.js';
 import clearFn from './clear.js';
 
-export default function (app) {
-  return {
-    initialize() {
-      // checkAppReady
-      app.meta.checkAppReady = async function () {
-        return new Promise((resolve, reject) => {
-          // check once
-          if (app.meta.__versionReady) {
-            resolve(true);
-          }
-          if (app.meta.__versionReadyError) {
-            reject(app.meta.__versionReadyError);
-          }
-          // listen
-          app.on(EnumAppEvent.AppReady, () => {
-            resolve(true);
-          });
-          app.on(EnumAppEvent.AppReadyError, err => {
-            reject(err);
-          });
+export class VersionReady extends BeanBase {
+  initialize() {
+    const app = this.app as any;
+    // checkAppReady
+    app.meta.checkAppReady = async function () {
+      return new Promise((resolve, reject) => {
+        // check once
+        if (app.meta.__versionReady) {
+          resolve(true);
+        }
+        if (app.meta.__versionReadyError) {
+          reject(app.meta.__versionReadyError);
+        }
+        // listen
+        app.on(EnumAppEvent.AppReady, () => {
+          resolve(true);
         });
-      };
-    },
-    async execute() {
-      try {
-        // version ready
-        await _versionReady(app);
-        // record
-        app.meta.__versionReady = true;
-        // event: appReady
-        app.emit(EnumAppEvent.AppReady);
-        // event to agent
-        app.meta.messenger.callAgent({
-          name: 'appReady',
-          data: { pid: process.pid },
+        app.on(EnumAppEvent.AppReadyError, err => {
+          reject(err);
         });
-      } catch (err) {
-        // record
-        app.meta.__versionReadyError = err;
-        // event: appReadyError
-        app.emit(EnumAppEvent.AppReadyError, err);
-        // throw exception
-        throw err;
-      }
-    },
-  };
+      });
+    };
+  }
+  async execute() {
+    const app = this.app as any;
+    try {
+      // version ready
+      await _versionReady(app);
+      // record
+      app.meta.__versionReady = true;
+      // event: appReady
+      app.emit(EnumAppEvent.AppReady);
+      // event to agent
+      app.meta.messenger.callAgent({
+        name: 'appReady',
+        data: { pid: process.pid },
+      });
+    } catch (err) {
+      // record
+      app.meta.__versionReadyError = err;
+      // event: appReadyError
+      app.emit(EnumAppEvent.AppReadyError, err);
+      // throw exception
+      throw err;
+    }
+  }
 }
 
 async function _versionReady(app) {
