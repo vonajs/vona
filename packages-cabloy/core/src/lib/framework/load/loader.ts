@@ -1,8 +1,7 @@
 import path from 'path';
-import { AgentWorkerLoader } from 'egg';
+import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
 import LoadModulesFn from '../../module';
 import ModuleInfoFn from '../moduleInfo.js';
-import { CustomAppWorkerLoader } from './app.js';
 
 function createLoaderClass<T>(T) {
   return class LoaderClass extends T {
@@ -32,4 +31,5 @@ function createLoaderClass<T>(T) {
   };
 }
 
+export const CustomAppWorkerLoader = createLoaderClass(AppWorkerLoader);
 export const CustomAgentWorkerLoader = createLoaderClass(AgentWorkerLoader);
