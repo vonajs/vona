@@ -1,4 +1,6 @@
-import AppUtil from '../../lib/utils/util.js';
+import { AppReload } from '../../lib/module/reload.js';
+import { AppMockUtil } from '../../lib/utils/mockUtil.js';
+import { AppUtil } from '../../lib/utils/util.js';
 
 export interface AppMeta {
   workerId: string;
@@ -8,4 +10,6 @@ export interface AppMeta {
   isTest: boolean;
   isLocal: boolean;
   util: AppUtil;
+  mockUtil: AppMockUtil;
+  reload: AppReload;
 }

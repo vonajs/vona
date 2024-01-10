@@ -7,7 +7,7 @@ const isSafeDomainUtil = require('egg-security').utils.isSafeDomain;
 import MixinClassesFn from 'mixin-classes';
 import { BeanBase } from '../module/bean/beanBase';
 
-export default class AppUtil extends BeanBase {
+export class AppUtil extends BeanBase {
   instanceStarted(subdomain) {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }

@@ -1,11 +1,10 @@
 import * as uuid from 'uuid';
-import utilFn from '../utils/util.js';
-import mockUtilFn from '../utils/mockUtil.js';
-import reloadFn from './reload.js';
+import { AppMockUtil } from '../utils/mockUtil.js';
+import { AppReload } from './reload.js';
 import metaEnvFn from './metaEnv.js';
 import { CabloyApplication } from '../../types/index.js';
 import { AppMeta } from '../../types/application/meta.js';
-import AppUtil from '../utils/util.js';
+import { AppUtil } from '../utils/util.js';
 
 export default function (app: CabloyApplication) {
   // meta
@@ -26,10 +25,10 @@ export default function (app: CabloyApplication) {
   meta.util = app.bean._newBean(AppUtil);
 
   // mockUtil
-  meta.mockUtil = mockUtilFn(loader.app);
+  meta.mockUtil = app.bean._newBean(AppMockUtil);
 
   // reload
-  meta.reload = reloadFn(loader.app);
+  meta.reload = app.bean._newBean(AppReload);
 
   // meta
   return meta;
