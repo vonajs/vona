@@ -19,13 +19,13 @@ const rules = {
       typeof: false,
     },
   ],
-  // 'no-unused-vars': [
-  //   'error',
-  //   {
-  //     varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
-  //     argsIgnorePattern: 'app|ctx|user|state|reject|options',
-  //   },
-  // ],
+  'no-unused-vars': [
+    'error',
+    {
+      varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
+      argsIgnorePattern: 'app|ctx|user|state|reject|options',
+    },
+  ],
   'array-bracket-spacing': ['error', 'never'],
   'no-empty': [
     'error',
@@ -69,8 +69,13 @@ const rules = {
   'newline-per-chained-call': [0],
   'vue/multi-word-component-names': [0],
   '@typescript-eslint/no-var-requires': 'off',
-  'no-unused-vars': 'off',
-  '@typescript-eslint/no-unused-vars': 'error',
+  '@typescript-eslint/no-unused-vars': [
+    'error',
+    {
+      varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
+      argsIgnorePattern: 'app|ctx|user|state|reject|options',
+    },
+  ],
 };
 
 module.exports = {
