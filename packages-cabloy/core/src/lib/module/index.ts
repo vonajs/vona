@@ -1,4 +1,4 @@
-import loadMeta from './meta.js';
+import { AppMeta } from './meta.js';
 import ModulesToolsFn from './module.js';
 import loadRoutes from './route.js';
 import loadControllers from './controller.js';
@@ -25,7 +25,7 @@ export class ModuleLoader extends BeanBase {
   async execute() {
     const app = this.app;
     // meta
-    const meta = loadMeta(app);
+    const meta = app.bean._newBean(AppMeta);
 
     // messenger
     loadMessenger(app);

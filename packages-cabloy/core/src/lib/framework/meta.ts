@@ -1,6 +1,5 @@
 import MetaClassFn from './metaClass.js';
 import MetaUtilFn from './util.js';
-import MetaEnvFn from '../module/metaEnv.js';
 
 export default function (app) {
   // meta
@@ -13,7 +12,9 @@ export default function (app) {
   meta.util = MetaUtilFn();
 
   // env
-  MetaEnvFn(app, meta);
+  meta.isProd = app.meta.isProd;
+  meta.isTest = app.meta.isTest;
+  meta.isLocal = app.meta.isLocal;
 
   // meta
   return meta;

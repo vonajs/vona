@@ -1,35 +1,46 @@
 import * as uuid from 'uuid';
 import { AppMockUtil } from '../utils/mockUtil.js';
 import { AppReload } from './reload.js';
-import metaEnvFn from './metaEnv.js';
-import { CabloyApplication } from '../../types/index.js';
-import { AppMeta } from '../../types/application/meta.js';
 import { AppUtil } from '../utils/util.js';
+import { BeanBase } from './bean/beanBase.js';
 
-export default function (app: CabloyApplication) {
-  // meta
-  if (!app.meta) app.meta = {} as AppMeta;
-  const meta = app.meta;
+export class AppMeta extends BeanBase {
+  workerId: string;
+  inApp: boolean;
+  inAgent: boolean;
+  isProd: boolean;
+  isTest: boolean;
+  isLocal: boolean;
+  util: AppUtil;
+  mockUtil: AppMockUtil;
+  reload: AppReload;
 
-  // workerId
-  meta.workerId = uuid.v4();
+  constructor() {
+    super();
 
-  // app or agent
-  meta.inApp = app.type === 'application';
-  meta.inAgent = app.type === 'agent';
+    // workerId
+    this.workerId = uuid.v4();
 
-  // env
-  metaEnvFn(app, meta);
+    // app or agent
+    this.inApp = this.app.type === 'application';
+    this.inAgent = this.app.type === 'agent';
 
-  // util
-  meta.util = app.bean._newBean(AppUtil);
+    // env
+    //   isProd
+    this.isProd =
+      this.app.config.env !== 'local' && this.app.config.env !== 'unittest' && this.app.config.env !== 'test';
+    //   isTest
+    this.isTest = this.app.config.env === 'unittest' || this.app.config.env === 'test';
+    //   isLocal
+    this.isLocal = this.app.config.env === 'local';
 
-  // mockUtil
-  meta.mockUtil = app.bean._newBean(AppMockUtil);
+    // util
+    this.util = this.app.bean._newBean(AppUtil);
 
-  // reload
-  meta.reload = app.bean._newBean(AppReload);
+    // mockUtil
+    this.mockUtil = this.app.bean._newBean(AppMockUtil);
 
-  // meta
-  return meta;
+    // reload
+    this.reload = this.app.bean._newBean(AppReload);
+  }
 }
