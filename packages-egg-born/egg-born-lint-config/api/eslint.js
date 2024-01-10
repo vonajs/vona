@@ -76,6 +76,7 @@ const rules = {
       argsIgnorePattern: 'app|ctx|user|state|reject|options',
     },
   ],
+  '@typescript-eslint/no-this-alias': 'off',
 };
 
 module.exports = {

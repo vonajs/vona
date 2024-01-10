@@ -14,7 +14,7 @@ export default function (app) {
   // compile
   const Module2 = Module as any;
   const originalCompile = Module2.prototype._compile;
-  Module2.prototype._compile = function (...args) {
+  Module2.prototype._compile = function (this: any, ...args) {
     const _module = this;
     let _moduleInfo;
     // meta
