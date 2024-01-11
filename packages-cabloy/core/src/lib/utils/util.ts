@@ -8,6 +8,7 @@ import MixinClassesFn from 'mixin-classes';
 import { BeanBase } from '../module/bean/beanBase';
 import Redlock from 'redlock';
 import { Request } from 'egg';
+import { CabloyContext } from '../../types/index.js';
 
 export class AppUtil extends BeanBase {
   instanceStarted(subdomain) {
@@ -237,6 +238,17 @@ export class AppUtil extends BeanBase {
     ctxCaller,
     ctxParent,
     instance,
+  }: {
+    locale?: string;
+    subdomain?: string;
+    beanModule?: string;
+    beanFullName?: string;
+    context: any;
+    fn?: any;
+    transaction?: boolean;
+    ctxCaller?: CabloyContext;
+    ctxParent?: CabloyContext;
+    instance?: boolean;
   }) {
     // ctxModule
     const ctxModule = beanModule || ctxCaller?.module?.info?.relativeName || ctxParent?.module?.info?.relativeName;
