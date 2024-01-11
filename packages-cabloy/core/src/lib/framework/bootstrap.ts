@@ -6,22 +6,22 @@ import { VersionReady } from '../module/version/ready.js';
 export class Bootstrap {
   app: CabloyApplication;
 
-  constructor(app) {
+  constructor(app: CabloyApplication) {
     this.app = app;
   }
 
   async loadModules() {
-    const app = this.app as any;
     // bean container
-    loadBeanContainer(app);
+    loadBeanContainer(this.app);
     // module loader
-    const moduleLoader = app.bean._newBean(ModuleLoader);
+    const moduleLoader = this.app.bean._newBean(ModuleLoader);
     await moduleLoader.execute();
   }
 
   async versionReady() {
-    const app = this.app as any;
-    const versionReady = app.bean._newBean(VersionReady);
+    const versionReady = this.app.bean._newBean(VersionReady);
     await versionReady.execute();
   }
+
+  async socketioReady() {}
 }

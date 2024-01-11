@@ -19,6 +19,7 @@ export default class AppBootHook {
 
   async serverDidReady() {
     await this.bootstrap.versionReady();
+    await this.bootstrap.socketioReady();
   }
 
   _prepareMiddlewares() {

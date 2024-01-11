@@ -1,8 +1,10 @@
+import { CabloyApplication } from '../../types/index.js';
+
 const URL = require('url').URL;
 
-export default function (loader) {
-  loader.app.beforeStart(() => {
-    loader.app.io.checkRequest = checkRequest;
+export default function (app: CabloyApplication) {
+  app.beforeStart(() => {
+    app.io.checkRequest = checkRequest;
   });
 
   function checkRequest(req, fn) {
