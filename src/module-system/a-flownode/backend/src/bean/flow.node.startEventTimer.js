@@ -74,7 +74,7 @@ module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
     const jobKeyActive = this.ctx.app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
     const jobKeyConfig = this.ctx.app.meta.queue._getRepeatKey(
       this._getJobName(flowDefId, nodeConfig),
-      this._getJobRepeat(nodeConfig)
+      this._getJobRepeat(nodeConfig),
     );
     if (jobKeyActive !== jobKeyConfig) return false;
     // ok
@@ -91,7 +91,7 @@ module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
   async _deleteSchedule2({ flowDefId, node }) {
     const jobKeyActive = this.ctx.app.meta.queue._getRepeatKey(
       this._getJobName(flowDefId, node),
-      this._getJobRepeat(node)
+      this._getJobRepeat(node),
     );
     const queue = this.ctx.app.meta.queue._getQueue({
       subdomain: this.ctx.subdomain,

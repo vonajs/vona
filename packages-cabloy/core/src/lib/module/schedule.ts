@@ -1,13 +1,15 @@
-export default function (loader /* , modules*/) {
+import { CabloyApplication } from '../../types/index.js';
+
+export default function (app: CabloyApplication) {
   // all schedules
-  const ebSchedules = (loader.app.meta.schedules = {});
+  const ebSchedules = (app.meta.schedules = {});
 
   // load schedules
   loadSchedules();
 
   function loadSchedules() {
-    for (const module of loader.app.meta.modulesArray) {
-      const config = loader.app.meta.configs[module.info.relativeName];
+    for (const module of app.meta.modulesArray) {
+      const config = app.meta.configs[module.info.relativeName];
       if (!config.schedules) continue;
       for (const scheduleKey in config.schedules) {
         const fullKey = `${module.info.relativeName}.${scheduleKey}`;
@@ -43,7 +45,7 @@ export default function (loader /* , modules*/) {
       if (!schedule.config.disable && schedule.config.repeat) {
         // push
         const jobName = __getJobName(subdomain, schedule.module, schedule.name); // not use :
-        loader.app.meta.queue.push({
+        app.meta.queue.push({
           subdomain,
           module: 'a-base',
           queueName: 'schedule',
@@ -63,17 +65,17 @@ export default function (loader /* , modules*/) {
     }
   }
 
-  loader.app.meta._loadSchedules = async ({ ctx }) => {
+  app.meta._loadSchedules = async ({ ctx }) => {
     const instances = await ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
       __installSchedules({ subdomain: instance.name });
     }
   };
 
-  loader.app.meta._runSchedule = async context => {
+  app.meta._runSchedule = async context => {
     const { subdomain, module, name } = context.data;
     // ignore on test
-    if (loader.app.meta.isTest) return;
+    if (app.meta.isTest) return;
     // check if valid
     if (!__checkJobValid(context)) {
       await __deleteSchedule(context);
@@ -85,7 +87,7 @@ export default function (loader /* , modules*/) {
     // bean
     const bean = schedule.bean;
     // execute
-    return await loader.app.meta.util.executeBean({
+    return await app.meta.util.executeBean({
       subdomain,
       beanModule: bean.module,
       beanFullName: `${bean.module}.schedule.${bean.name}`,
@@ -97,7 +99,7 @@ export default function (loader /* , modules*/) {
 
   async function __deleteSchedule(context) {
     const job = context.job;
-    const jobKeyActive = loader.app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
     const repeat = await job.queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
@@ -112,9 +114,9 @@ export default function (loader /* , modules*/) {
     // check disable
     if (schedule.config.disable) return false;
     // check if changed
-    const jobKeyActive = loader.app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
     const jobNameConfig = __getJobName(subdomain, module, name);
-    const jobKeyConfig = loader.app.meta.queue._getRepeatKey(jobNameConfig, schedule.config.repeat);
+    const jobKeyConfig = app.meta.queue._getRepeatKey(jobNameConfig, schedule.config.repeat);
     if (jobKeyActive !== jobKeyConfig) return false;
     // ok
     return true;

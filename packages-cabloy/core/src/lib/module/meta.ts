@@ -9,6 +9,7 @@ import { AppRouter } from './route.js';
 import { AppLimiter, AppRedlock } from './redis.js';
 import { QueueClient } from './queue/queueClient.js';
 import { BroadcastClient } from './broadcast/broadcastClient.js';
+import { CabloyContext } from '../../types/index.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -47,10 +48,13 @@ export class AppMeta extends BeanBase {
   //
   queues: Record<string, any> = null as any;
   broadcasts: Record<string, any> = null as any;
+  schedules: Record<string, any> = null as any;
   //
   appReadyInstances: Record<string, any> = null as any;
   //
   _loadQueueWorkers: ({ subdomain }: { subdomain: string }) => void = null as any;
+  _loadSchedules: ({ ctx }: { ctx: CabloyContext }) => Promise<void> = null as any;
+  _runSchedule: (context) => Promise<any> = null as any;
 
   __init__() {
     // workerId
