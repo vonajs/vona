@@ -1,17 +1,17 @@
-export default function (loader) {
+export default function (app) {
   // use modulesArray
-  const ebModulesArray = loader.app.meta.modulesArray;
+  const ebModulesArray = app.meta.modulesArray;
 
   // all startups
-  const ebStartups = (loader.app.meta.startups = {});
-  const ebStartupsArray: any[] = (loader.app.meta.startupsArray = []);
+  const ebStartups = (app.meta.startups = {});
+  const ebStartupsArray: any[] = (app.meta.startupsArray = []);
 
   // load startups
   loadStartups();
 
   function loadStartups() {
     for (const module of ebModulesArray) {
-      const config = loader.app.meta.configs[module.info.relativeName];
+      const config = app.meta.configs[module.info.relativeName];
       if (!config.startups) continue;
       for (const startupKey in config.startups) {
         const startupConfig = config.startups[startupKey];
@@ -43,7 +43,7 @@ export default function (loader) {
     }
   }
 
-  loader.app.meta._runStartup = async ({ module, name, instanceStartup }) => {
+  app.meta._runStartup = async ({ module, name, instanceStartup }) => {
     const fullKey = `${module}:${name}`;
     const startup = ebStartups[fullKey];
     // normal
@@ -52,11 +52,11 @@ export default function (loader) {
     }
     // debounce: lock
     const subdomain = instanceStartup ? instanceStartup.subdomain : undefined;
-    return await loader.app.meta.util.lock({
+    return await app.meta.util.lock({
       subdomain,
       resource: `${instanceStartup ? 'instanceStartup' : 'startup'}.${fullKey}`,
       fn: async () => {
-        return await loader.app.meta.util.executeBean({
+        return await app.meta.util.executeBean({
           subdomain,
           beanModule: 'a-base',
           fn: async ({ ctx }) => {
@@ -67,12 +67,12 @@ export default function (loader) {
     });
   };
 
-  loader.app.meta._runStartupInstance = async ({ subdomain, options }) => {
+  app.meta._runStartupInstance = async ({ subdomain, options }) => {
     // run startups: not after
-    for (const startup of loader.app.meta.startupsArray) {
+    for (const startup of app.meta.startupsArray) {
       if (!startup.config.disable && startup.config.instance && startup.config.after !== true) {
         console.log(`---- instance startup: ${startup.key}, pid: ${process.pid}`);
-        await loader.app.meta._runStartup({
+        await app.meta._runStartup({
           module: startup.module,
           name: startup.name,
           instanceStartup: { subdomain, options },
@@ -80,12 +80,12 @@ export default function (loader) {
       }
     }
     // set flag
-    loader.app.meta.appReadyInstances[subdomain] = true;
+    app.meta.appReadyInstances[subdomain] = true;
     // run startups: after
-    for (const startup of loader.app.meta.startupsArray) {
+    for (const startup of app.meta.startupsArray) {
       if (!startup.config.disable && startup.config.instance && startup.config.after === true) {
         console.log(`---- instance startup: ${startup.key}, pid: ${process.pid}`);
-        await loader.app.meta._runStartup({
+        await app.meta._runStartup({
           module: startup.module,
           name: startup.name,
           instanceStartup: { subdomain, options },
@@ -93,8 +93,8 @@ export default function (loader) {
       }
     }
     // load queue workers
-    if (!loader.app.meta.isTest) {
-      loader.app.meta._loadQueueWorkers({ subdomain });
+    if (!app.meta.isTest) {
+      app.meta._loadQueueWorkers({ subdomain });
     }
   };
 
@@ -122,7 +122,7 @@ export default function (loader) {
     // bean
     const bean = startup.bean;
     // execute
-    return await loader.app.meta.util.executeBean({
+    return await app.meta.util.executeBean({
       subdomain: instanceStartup ? instanceStartup.subdomain : undefined,
       context,
       beanModule: bean.module,
