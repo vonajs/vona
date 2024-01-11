@@ -100,6 +100,7 @@ export class QueueClient extends BeanBase {
   }
 
   _createQueue(info, queueKey) {
+    const app = this.app;
     // queue
     const _queue = {} as IQueueQueue;
     // prefix
@@ -163,6 +164,7 @@ export class QueueClient extends BeanBase {
   }
 
   _queuePush(info, isAsync) {
+    const app = this.app;
     // queue config
     const fullKey = `${info.module}:${info.queueName}`;
     const queueBase = app.meta.queues[fullKey];
@@ -201,11 +203,13 @@ export class QueueClient extends BeanBase {
   }
 
   _combineQueueKey({ subdomain, module = '', queueName = '' }) {
+    const app = this.app;
     subdomain = app.meta.util.subdomainDesp(subdomain);
     return `${subdomain}||${module}||${queueName}`;
   }
 
   async _performTask(job) {
+    const app = this.app;
     let { locale, subdomain, module, queueName, queueNameSub, data, ctxParent, dbLevel } = job.data;
     // ctxParent
     if (!ctxParent) ctxParent = {};

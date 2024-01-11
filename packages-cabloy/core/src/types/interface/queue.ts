@@ -1,4 +1,5 @@
 import bull from 'bullmq';
+import Redlock from 'redlock';
 
 export interface IQueueJobContext {
   job: bull.Job;
@@ -7,7 +8,7 @@ export interface IQueueJobContext {
 }
 
 export interface IQueueWork {
-  redlock: any;
+  redlock: Redlock;
   worker: bull.Worker;
 }
 export interface IQueueWorks {

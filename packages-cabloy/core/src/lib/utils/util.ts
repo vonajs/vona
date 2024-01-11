@@ -307,7 +307,7 @@ export class AppUtil extends BeanBase {
     options,
     redlock,
   }: {
-    subdomain: string | undefined;
+    subdomain?: string;
     resource: string;
     fn: () => Promise<any>;
     options;
