@@ -4,5 +4,5 @@
 //   }
 // }
 export interface IBeanRecord {
-  // 'a-base:atom:user': AtomUser;
+  // 'a-base.atom.user': AtomUser;
 }
