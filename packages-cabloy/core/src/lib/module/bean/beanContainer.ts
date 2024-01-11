@@ -1,6 +1,6 @@
 import is from 'is-type-of';
 import ProxyMagic from './proxyMagic.js';
-import { CabloyApplication, CabloyContext } from '../../../types/index.js';
+import { CabloyApplication, CabloyContext, IBeanRecord } from '../../../types/index.js';
 
 export class BeanContainer {
   app: CabloyApplication;
@@ -53,10 +53,13 @@ export class BeanContainer {
     return this[beanFullName];
   }
 
-  _newBean(beanFullName, ...args) {
+  _newBean<T>(A: new (...args) => T, ...args): T;
+  _newBean<T extends IBeanRecord, K extends keyof T>(beanFullName: K, ...args): T[K];
+  _newBean(beanFullName: string, ...args);
+  _newBean(beanFullName: (new (...args) => any) | string, ...args) {
     // class
     if (is.class(beanFullName)) {
-      const beanInstance = new beanFullName(...args);
+      const beanInstance = new (<any>beanFullName)(...args);
       return this._patchBeanInstance(beanInstance, args, beanFullName, false);
     }
     // string
