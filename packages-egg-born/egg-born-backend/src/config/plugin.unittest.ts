@@ -2,7 +2,6 @@ module.exports = {
   view: false,
   development: false,
   watcher: false,
-  schedule: false,
 
   // need not redefined
   // static: {

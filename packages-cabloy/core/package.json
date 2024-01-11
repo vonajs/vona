@@ -43,7 +43,6 @@
     "egg-born-mock": "^4.0.1",
     "egg-cluster": "^2.2.1",
     "egg-redis": "^2.4.0",
-    "egg-schedule": "^3.6.6",
     "is-type-of": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "koa-jwt2": "^1.0.3",
