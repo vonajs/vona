@@ -139,8 +139,8 @@ export class Model extends BeanBase {
   Object.defineProperty(Model.prototype, method, {
     get() {
       if (is.function(this.ctx.db[method])) {
-        return function (this: any) {
-          return this.ctx.db[method].apply(this.ctx.db, arguments);
+        return function (this: any, ...args) {
+          return this.ctx.db[method](...args);
         };
       }
       // property
@@ -160,7 +160,7 @@ export class Model extends BeanBase {
           args.unshift(this.table);
         }
         this._insertRowsCheck(args[1]);
-        return this.ctx.db[method].apply(this.ctx.db, args);
+        return this.ctx.db[method](...args);
       };
     },
   });
@@ -169,14 +169,14 @@ export class Model extends BeanBase {
 ['update'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function (this: any) {
-        const args = [] as any;
-        if (this.table) args.push(this.table);
-        for (const arg of arguments) args.push(arg);
-        if (args[2] && args[2].where) {
-          this._rowCheck(args[2].where);
+      return function (this: any, ...args) {
+        const _args = [] as any;
+        if (this.table) _args.push(this.table);
+        for (const arg of args) _args.push(arg);
+        if (_args[2] && _args[2].where) {
+          this._rowCheck(_args[2].where);
         }
-        return this.ctx.db[method].apply(this.ctx.db, args);
+        return this.ctx.db[method](..._args);
       };
     },
   });
@@ -185,17 +185,17 @@ export class Model extends BeanBase {
 ['delete'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function (this: any) {
-        const args = [] as any;
-        if (this.table) args.push(this.table);
-        for (const arg of arguments) args.push(arg);
-        args[1] = args[1] || {};
-        this._rowCheck(args[1]);
+      return function (this: any, ...args) {
+        const _args = [] as any;
+        if (this.table) _args.push(this.table);
+        for (const arg of args) _args.push(arg);
+        _args[1] = _args[1] || {};
+        this._rowCheck(_args[1]);
         if (this.table && !this.disableDeleted) {
-          const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [args[0]]) + this.ctx.db._where(args[1]);
+          const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.db._where(_args[1]);
           return this.ctx.db.query(sql);
         }
-        return this.ctx.db[method].apply(this.ctx.db, args);
+        return this.ctx.db[method](..._args);
       };
     },
   });
@@ -204,13 +204,13 @@ export class Model extends BeanBase {
 ['count'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function (this: any) {
-        const args = [] as any;
-        if (this.table) args.push(this.table);
-        for (const arg of arguments) args.push(arg);
-        args[1] = args[1] || {};
-        this._rowCheck(args[1]);
-        return this.ctx.db[method].apply(this.ctx.db, args);
+      return function (this: any, ...args) {
+        const _args = [] as any;
+        if (this.table) _args.push(this.table);
+        for (const arg of args) _args.push(arg);
+        _args[1] = _args[1] || {};
+        this._rowCheck(_args[1]);
+        return this.ctx.db[method](..._args);
       };
     },
   });
