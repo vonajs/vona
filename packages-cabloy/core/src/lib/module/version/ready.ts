@@ -26,7 +26,7 @@ export class VersionReady extends BeanBase {
     };
   }
   async execute() {
-    const app = this.app as any;
+    const app = this.app;
     try {
       // version ready
       await _versionReady(app);

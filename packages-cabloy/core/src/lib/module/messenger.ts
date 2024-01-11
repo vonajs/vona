@@ -3,7 +3,7 @@ import { BeanBase } from './bean/beanBase.js';
 import { CabloyApplication } from '../../types/index.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
-export class Messenger extends BeanBase {
+export class AppMessenger extends BeanBase {
   _providers: object = {};
   _pids: any = null;
 

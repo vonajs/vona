@@ -3,7 +3,7 @@ import { AppMockUtil } from '../utils/mockUtil.js';
 import { AppReload } from './reload.js';
 import { AppUtil } from '../utils/util.js';
 import { BeanBase } from './bean/beanBase.js';
-import { Messenger } from './messenger.js';
+import { AppMessenger } from './messenger.js';
 import { IMonkey } from '../../types/interface/monkey.js';
 import { AppRouter } from './route.js';
 import { AppLimiter, AppRedlock } from './redis.js';
@@ -21,7 +21,7 @@ export class AppMeta extends BeanBase {
   util: AppUtil = null as any;
   mockUtil: AppMockUtil = null as any;
   reload: AppReload = null as any;
-  messenger: Messenger = null as any;
+  messenger: AppMessenger = null as any;
   appMonkey?: IMonkey;
   router: AppRouter = null as any;
   limiter: AppLimiter = null as any;
