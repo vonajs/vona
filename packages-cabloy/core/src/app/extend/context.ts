@@ -1,7 +1,7 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
 import mparse from '@cabloy/module-parse';
-import metaCtxFn from '../../lib/module/metaCtx.js';
+import { AppMeta, CtxMeta } from '../../lib/module/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 
@@ -41,7 +41,7 @@ const context: ContextBase = {
   },
   get meta() {
     if (!this[META]) {
-      this[META] = metaCtxFn(this);
+      this[META] = (<any>this).bean._newBean(CtxMeta);
     }
     return this[META];
   },

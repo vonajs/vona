@@ -1,13 +1,16 @@
 import { CtxUtil } from '../utils/utilCtx.js';
 import { CtxMockUtil } from '../utils/mockUtilCtx.js';
+import { BeanBase } from './bean/beanBase.js';
 
-export default function (ctx) {
-  const meta = {} as any;
-  // util
-  meta.util = ctx.bean._newBean(CtxUtil);
+export class CtxMeta extends BeanBase {
+  util: CtxUtil = null as any;
+  mockUtil: CtxMockUtil = null as any;
 
-  // mockUtil
-  meta.mockUtil = ctx.bean._newBean(CtxMockUtil);
+  __init__() {
+    // util
+    this.util = this.ctx.bean._newBean(CtxUtil);
 
-  return meta;
+    // mockUtil
+    this.mockUtil = this.ctx.bean._newBean(CtxMockUtil);
+  }
 }
