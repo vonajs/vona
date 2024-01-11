@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import extend from '@zhennann/extend';
 import { CabloyApplication } from '../../types/index.js';
-const localeutil = require('egg-born-localeutil').default;
+import localeutil from '@cabloy/localeutil';
 
 export default function (app: CabloyApplication, modules) {
   // all locales

@@ -137,8 +137,10 @@ function format(f) {
  *
  */
 
-function getText(text, value) {
+function getText(...arguments) {
   if (arguments.length === 0) return '';
+
+  const [text, value] = arguments;
 
   if (!text) return '';
 
