@@ -1,7 +1,8 @@
 import Bottleneck from 'bottleneck';
 import Redlock from 'redlock';
+import { CabloyApplication } from '../../types/index.js';
 
-export default function (loader) {
+export default function (app: CabloyApplication) {
   const limiter = {
     // https://github.com/SGrondin/bottleneck#clustering
     create(options) {
@@ -11,7 +12,7 @@ export default function (loader) {
       // connection
       if (options.connection === undefined) {
         options.connection = new Bottleneck.IORedisConnection({
-          client: loader.app.redis.get('limiter'),
+          client: app.redis.get('limiter'),
         });
       }
       return new Bottleneck(options);
@@ -23,8 +24,8 @@ export default function (loader) {
     create(options) {
       // clients
       const clients = [] as any;
-      for (const clientName of loader.app.config.queue.redlock.clients) {
-        const client = loader.app.redis.get(clientName) || loader.app.redis.get('limiter');
+      for (const clientName of app.config.queue.redlock.clients) {
+        const client = app.redis.get(clientName) || app.redis.get('limiter');
         clients.push(client);
       }
       return new Redlock(clients, options);
@@ -32,7 +33,7 @@ export default function (loader) {
   };
 
   // limiter
-  loader.app.meta.limiter = limiter;
+  app.meta.limiter = limiter;
   // redlock
-  loader.app.meta.redlock = redlock;
+  app.meta.redlock = redlock;
 }

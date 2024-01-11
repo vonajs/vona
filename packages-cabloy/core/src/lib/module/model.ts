@@ -1,6 +1,7 @@
+import { CabloyApplication } from '../../types/index.js';
 import { Model } from '../base/model.js';
 
-export default function (loader, modules) {
+export default function (app: CabloyApplication, modules) {
   // load models
   loadModels();
 
@@ -8,9 +9,9 @@ export default function (loader, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+    const createContext = app.createContext as any;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
@@ -62,7 +63,7 @@ export default function (loader, modules) {
           mode: 'app',
           bean: models[modelName],
         };
-        loader.app.bean._register(module.info.relativeName, beanName, bean);
+        app.bean._register(module.info.relativeName, beanName, bean);
       }
     }
   }

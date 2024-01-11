@@ -1,6 +1,8 @@
+import { CabloyApplication } from '../../types/index.js';
+
 const SERVICEPROXY = Symbol('CTX#__SERVICEPROXY');
 
-export default function (loader, modules) {
+export default function (app: CabloyApplication, modules) {
   // load services
   loadServices();
 
@@ -8,9 +10,9 @@ export default function (loader, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+    const createContext = app.createContext as any;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
@@ -26,7 +28,7 @@ export default function (loader, modules) {
                     const beanName = `service.${prop}`;
                     return context.bean._getBean(context.module.info.relativeName, beanName);
                   },
-                }
+                },
               );
             }
             return service;
@@ -49,7 +51,7 @@ export default function (loader, modules) {
           mode: 'app',
           bean: services[serviceName],
         };
-        loader.app.bean._register(module.info.relativeName, beanName, bean);
+        app.bean._register(module.info.relativeName, beanName, bean);
       }
     }
   }

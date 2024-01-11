@@ -1,4 +1,6 @@
-export default function (loader, modules) {
+import { CabloyApplication } from '../../types/index.js';
+
+export default function (app: CabloyApplication, modules) {
   // load controllers
   loadControllers();
 
@@ -12,7 +14,7 @@ export default function (loader, modules) {
         const bean = {
           bean: controllers[controllerName],
         };
-        loader.app.bean._register(module.info.relativeName, beanName, bean);
+        app.bean._register(module.info.relativeName, beanName, bean);
       }
     }
   }
