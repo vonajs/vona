@@ -20,5 +20,5 @@ type TypeErrorMethods = { success: TypeErrorMethodSuccess } & {
 } & { parseCode: TypeErrorMethodParseCode };
 
 export interface ContextError extends TypeErrorMethods {
-  createError: (data: object | Event) => Event;
+  createError: (data: object | Error) => Error;
 }

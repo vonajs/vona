@@ -1,10 +1,10 @@
 import extend from '@zhennann/extend';
 import assetErrors from './asset/errors.js';
 import { ErrorClass } from '../base/error.js';
-import { CabloyContext } from '../../types/index.js';
+import { CabloyApplication, CabloyContext } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
 
-export default function (loader, modules) {
+export default function (app: CabloyApplication, modules) {
   // all errors
   const ebErrors = {};
 
@@ -15,9 +15,9 @@ export default function (loader, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context: CabloyContext = createContext.call(loader.app, ...args);
+    const createContext = app.createContext as any;
+    app.createContext = (...args) => {
+      const context: CabloyContext = createContext.call(app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
@@ -37,7 +37,7 @@ export default function (loader, modules) {
 
       // createError
       context.createError = function (data) {
-        return loader.app.meta.util.createError(data);
+        return app.meta.util.createError(data);
       };
 
       return context;
