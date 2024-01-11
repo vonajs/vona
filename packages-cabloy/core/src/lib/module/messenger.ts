@@ -8,7 +8,7 @@ export class Messenger extends BeanBase {
   _pids: any = null;
 
   __init__() {
-    const app = this.app as any;
+    const app = this.app;
     // wait for call
     app.messenger.on(eventMessengerCall, async info => {
       const provider = this._providers[info.name];

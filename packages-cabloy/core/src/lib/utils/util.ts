@@ -51,8 +51,8 @@ export class AppUtil extends BeanBase {
     return `${url}&${str}`;
   }
 
-  createError(data) {
-    const error = new Error();
+  createError(data, returnObject?: boolean) {
+    const error = returnObject ? ({} as any) : new Error();
     error.code = data.code !== undefined ? data.code : 500;
     if (data.message && typeof data.message === 'object') {
       error.message = JSON.stringify(data.message, null, 2);
