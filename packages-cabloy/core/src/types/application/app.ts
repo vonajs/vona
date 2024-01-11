@@ -10,4 +10,5 @@ export interface CabloyApplication extends EggApplication {
   bean: BeanContainer;
   redis: Singleton<Redis>; // Omit<Redis, 'get'> & Singleton<Redis>;
   io: SocketServer;
+  mysql: any; // EggMySQL & Singleton<EggMySQL>;
 }

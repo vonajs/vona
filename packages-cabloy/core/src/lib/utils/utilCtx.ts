@@ -1,8 +1,11 @@
 import is from 'is-type-of';
 import performActionFn from './performAction.js';
+import { BeanBase } from '../module/bean/beanBase.js';
+import { CabloyContext } from '../../types/index.js';
 
 export class CtxUtil extends BeanBase {
   runInBackground(scope) {
+    const ctx = this.ctx;
     ctx.runInBackground(async () => {
       await ctx.meta.util.executeBeanIsolate({
         fn: async ({ ctx }) => {
@@ -13,11 +16,13 @@ export class CtxUtil extends BeanBase {
   }
 
   async lock({ subdomain, resource, fn, options, redlock }) {
+    const ctx = this.ctx;
     if (subdomain === undefined) subdomain = ctx.subdomain;
     return await ctx.app.meta.util.lock({ subdomain, resource, fn, options, redlock });
   }
 
   broadcastEmit({ locale, subdomain, module, broadcastName, data }) {
+    const ctx = this.ctx;
     ctx.app.meta.broadcast.emit({
       locale: locale === undefined ? ctx.locale : locale,
       subdomain: subdomain === undefined ? ctx.subdomain : subdomain,
@@ -28,14 +33,17 @@ export class CtxUtil extends BeanBase {
   }
 
   queuePush(info) {
+    const ctx = this.ctx;
     ctx.app.meta.queue.push(this._queuePushInfoPrepare(info));
   }
 
   async queuePushAsync(info) {
+    const ctx = this.ctx;
     return await ctx.app.meta.queue.pushAsync(this._queuePushInfoPrepare(info));
   }
 
   _queuePushInfoPrepare(info) {
+    const ctx = this.ctx;
     const dbLevel = !info.dbLevel ? ctx.dbLevel + 1 : info.dbLevel;
     const locale = info.locale === undefined ? ctx.locale : info.locale;
     const subdomain = info.subdomain === undefined ? ctx.subdomain : info.subdomain;
@@ -72,6 +80,7 @@ export class CtxUtil extends BeanBase {
   }
 
   async executeBeanAuto({ beanModule, beanFullName, context, fn }) {
+    const ctx = this.ctx;
     const _beanClass = beanFullName ? ctx.bean._getBeanClass(beanFullName) : null;
     if (_beanClass && _beanClass.mode === 'ctx') {
       // in the same ctx
@@ -82,7 +91,26 @@ export class CtxUtil extends BeanBase {
     return await this.executeBean({ beanModule, beanFullName, context, fn });
   }
 
-  async executeBean({ locale, subdomain, beanModule, beanFullName, context, fn, transaction, instance }) {
+  async executeBean({
+    locale,
+    subdomain,
+    beanModule,
+    beanFullName,
+    context,
+    fn,
+    transaction,
+    instance,
+  }: {
+    locale?: string;
+    subdomain?: string;
+    beanModule?: string;
+    beanFullName?: string;
+    context: any;
+    fn?: any;
+    transaction?: boolean;
+    instance?: boolean;
+  }) {
+    const ctx = this.ctx;
     return await ctx.app.meta.util.executeBean({
       locale: locale === undefined ? ctx.locale : locale,
       subdomain: subdomain === undefined ? ctx.subdomain : subdomain,
@@ -106,7 +134,18 @@ export class CtxUtil extends BeanBase {
     transaction,
     ctxParent,
     instance,
+  }: {
+    locale?: string;
+    subdomain?: string;
+    beanModule?: string;
+    beanFullName?: string;
+    context: any;
+    fn?: any;
+    transaction?: boolean;
+    ctxParent?: CabloyContext;
+    instance?: boolean;
   }) {
+    const ctx = this.ctx;
     if (ctxParent) {
       if (ctxParent.dbLevel === undefined) {
         ctxParent = {
@@ -130,15 +169,8 @@ export class CtxUtil extends BeanBase {
     });
   }
 
-  /**
-   * perform action of this or that module
-   * @param  {string} options options
-   * @param  {string} options.method method
-   * @param  {string} options.url    url
-   * @param  {json} options.body   body(optional)
-   * @return {promise}                response.body.data or throw error
-   */
   async performAction({ innerAccess, method, url, query, params, headers, body }) {
+    const ctx = this.ctx;
     return await performActionFn({
       ctxCaller: ctx,
       innerAccess,
@@ -152,6 +184,7 @@ export class CtxUtil extends BeanBase {
   }
 
   getDbOriginal() {
+    const ctx = this.ctx;
     const dbLevel = ctx.dbLevel;
     const mysqlConfig = ctx.app.mysql.__ebdb_test;
     if (!mysqlConfig) return ctx.app.mysql.get('__ebdb');
@@ -172,6 +205,7 @@ export class CtxUtil extends BeanBase {
   }
 
   createDatabase() {
+    const ctx = this.ctx;
     const db = this.getDbOriginal();
     return new Proxy(db, {
       get(target, prop) {
@@ -181,7 +215,7 @@ export class CtxUtil extends BeanBase {
         // check if use transaction
         if (!ctx.dbMeta.transaction.inTransaction) return value;
         return function (...args) {
-          return ctx.dbMeta.transaction.connection[prop].apply(ctx.dbMeta.transaction.connection, args);
+          return ctx.dbMeta.transaction.connection[prop](...args);
         };
       },
     });
