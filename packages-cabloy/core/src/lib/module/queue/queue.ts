@@ -1,12 +1,12 @@
 import { CabloyApplication } from '../../../types/index.js';
-import QueueClientFn from './queueClient.js';
+import { QueueClient } from './queueClient.js';
 
 export default function (app: CabloyApplication, modules) {
   // queue
-  app.meta.queue = new (QueueClientFn(app))();
+  app.meta.queue = app.bean._newBean(QueueClient);
 
   // all queues
-  const ebQueues = (loader.app.meta.queues = {});
+  const ebQueues = (app.meta.queues = {});
 
   // load queues
   loadQueues();
@@ -14,7 +14,7 @@ export default function (app: CabloyApplication, modules) {
   function loadQueues() {
     for (const key in modules) {
       const module = modules[key];
-      const config = loader.app.meta.configs[module.info.relativeName];
+      const config = app.meta.configs[module.info.relativeName];
       if (!config.queues) continue;
       for (const queueName in config.queues) {
         const queueConfig = config.queues[queueName];
@@ -44,7 +44,7 @@ export default function (app: CabloyApplication, modules) {
     }
   }
 
-  loader.app.meta._loadQueueWorkers = ({ subdomain }) => {
+  app.meta._loadQueueWorkers = ({ subdomain }) => {
     for (const fullKey in ebQueues) {
       const queue = ebQueues[fullKey];
       const info = {
@@ -52,7 +52,7 @@ export default function (app: CabloyApplication, modules) {
         module: queue.module,
         queueName: queue.name,
       };
-      loader.app.meta.queue._ensureWorker(info);
+      app.meta.queue._ensureWorker(info);
     }
   };
 }

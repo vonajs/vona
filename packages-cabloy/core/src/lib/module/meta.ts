@@ -7,6 +7,7 @@ import { Messenger } from './messenger.js';
 import { IMonkey } from '../../types/interface/monkey.js';
 import { AppRouter } from './route.js';
 import { AppLimiter, AppRedlock } from './redis.js';
+import { QueueClient } from './queue/queueClient.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -23,6 +24,7 @@ export class AppMeta extends BeanBase {
   router: AppRouter = null as any;
   limiter: AppLimiter = null as any;
   redlock: AppRedlock = null as any;
+  queue: QueueClient = null as any;
   //
   beans: Record<string, any> = null as any;
   aops: Record<string, any> = null as any;
@@ -44,6 +46,8 @@ export class AppMeta extends BeanBase {
   queues: Record<string, any> = null as any;
   //
   appReadyInstances: Record<string, any> = null as any;
+  //
+  _loadQueueWorkers: ({ subdomain }: { subdomain: string }) => void = null as any;
 
   __init__() {
     // workerId
