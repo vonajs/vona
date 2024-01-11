@@ -3,5 +3,5 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['egg-born-lint-config/api/eslint.js'],
+  extends: ['egg-born-lint-config/api/eslint.js', 'prettier'],
 };
