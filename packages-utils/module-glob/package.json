@@ -1,0 +1,26 @@
+{
+  "name": "@cabloy/module-glob",
+  "version": "1.0.0",
+  "description": "cabloy module-glob",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
+  "author": "zhennann",
+  "license": "MIT",
+  "dependencies": {}
+}
