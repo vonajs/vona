@@ -2,7 +2,7 @@ import ModuleInfo from '@cabloy/module-info';
 import { BeanBase } from '../module/bean/beanBase';
 
 export class AppMockUtil extends BeanBase {
-  parseUrlFromPackage(dir, apiPrefix = true) {
+  parseUrlFromPackage(dir, apiPrefix: string | boolean = true) {
     apiPrefix = _prepareApiPrefix(apiPrefix);
     const moduleInfo = this.parseInfoFromPackage(dir);
     if (!moduleInfo) return null;
@@ -13,7 +13,7 @@ export class AppMockUtil extends BeanBase {
     return ModuleInfo.parseInfoFromPackage(dir);
   }
 
-  mockUrl(dir, url, apiPrefix = true) {
+  mockUrl(dir, url, apiPrefix: string | boolean = true) {
     apiPrefix = _prepareApiPrefix(apiPrefix);
     if (url && url.charAt(0) === '/') return `${apiPrefix}${url}`;
     const prefix = this.parseUrlFromPackage(dir, apiPrefix);
@@ -24,7 +24,7 @@ export class AppMockUtil extends BeanBase {
     options = options || {};
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
-    const ctx = await this.app.meta.util.createAnonymousContext({ locale, subdomain });
+    const ctx = await this.app.meta.util.createAnonymousContext({ locale, subdomain } as any);
     return ctx;
   }
 }

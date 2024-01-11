@@ -1,5 +1,5 @@
 import utilCtxFn from '../utils/utilCtx.js';
-import mockUtilCtxFn from '../utils/mockUtilCtx.js';
+import { AppMockUtilCtx } from '../utils/mockUtilCtx.js';
 
 export default function (ctx) {
   const meta = {} as any;
@@ -7,7 +7,7 @@ export default function (ctx) {
   meta.util = utilCtxFn(ctx);
 
   // mockUtil
-  meta.mockUtil = mockUtilCtxFn(ctx);
+  meta.mockUtil = ctx.bean._newBean(AppMockUtilCtx);
 
   return meta;
 }
