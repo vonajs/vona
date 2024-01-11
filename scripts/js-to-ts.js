@@ -18,10 +18,12 @@ async function main() {
   // files
   const files = await eggBornUtils.tools.globbyAsync(patterns);
   // convert
+  const filesTo = [];
   for (const file of files) {
     const pos = String(file).lastIndexOf('.js');
     const fileTo = String(file).substring(0, pos) + '.ts';
     await fs.rename(file, fileTo);
+    filesTo.push(fileTo);
   }
-  console.log(files);
+  console.log(filesTo);
 }
