@@ -24,6 +24,6 @@ module.exports = {
 
   io: {
     enable: true,
-    package: '@zhennann/egg-socket.io',
+    package: '@cabloy/egg-socket.io',
   },
 };

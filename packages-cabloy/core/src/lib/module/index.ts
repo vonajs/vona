@@ -15,7 +15,6 @@ import loadQueues from './queue/queue.js';
 import loadBroadcasts from './broadcast/broadcast.js';
 import loadStartups from './startup.js';
 import loadSchedules from './schedule.js';
-import loadSocketio from './socketio.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import { loadBeans } from './bean/index.js';
@@ -58,7 +57,6 @@ export class ModuleLoader extends BeanBase {
       loadBroadcasts(app, modules);
       loadStartups(app);
       loadSchedules(app);
-      loadSocketio(app);
       loadClusterApp(app);
     } else {
       await loadConfig(app, modules);

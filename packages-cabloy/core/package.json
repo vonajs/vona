@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@cabloy/cluster-reload": "^1.0.0",
+    "@cabloy/egg-socket.io": "^6.0.0",
     "@cabloy/koa-static-cache": "^5.1.8",
     "@cabloy/json5": "^1.0.0",
     "@cabloy/module-parse": "^1.0.0",
@@ -31,7 +32,6 @@
     "@cabloy/set": "^1.0.0",
     "@zhennann/egg-mysql": "^4.0.3",
     "@zhennann/egg-passport": "^2.1.5",
-    "@zhennann/egg-socket.io": "^6.0.0",
     "async": "^3.2.0",
     "bottleneck": "^2.19.5",
     "bullmq": "^2.3.1",
