@@ -1,8 +1,9 @@
 import extend from '@zhennann/extend';
+import { CabloyApplication } from '../../types/index.js';
 
-export default function (loader, modules) {
+export default function (app: CabloyApplication, modules) {
   // all constants
-  const ebConstants = (loader.app.meta.constants = {});
+  const ebConstants = (app.meta.constants = {});
 
   // load constants
   loadConstants();
@@ -11,9 +12,9 @@ export default function (loader, modules) {
   patchCreateContext();
 
   function patchCreateContext() {
-    const createContext = loader.app.createContext;
-    loader.app.createContext = (...args) => {
-      const context = createContext.call(loader.app, ...args);
+    const createContext = app.createContext as any;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
 
       // maybe /favicon.ico
       if (context.module) {
@@ -48,4 +49,4 @@ export default function (loader, modules) {
       },
     });
   }
-};
+}

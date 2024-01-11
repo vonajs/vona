@@ -25,6 +25,7 @@ export class AppMeta extends BeanBase {
   modulesArray: any[] = null as any;
   modulesMonkey: Record<string, any> = null as any;
   configs: Record<string, any> = null as any;
+  constants: Record<string, any> = null as any;
 
   __init__() {
     // workerId
