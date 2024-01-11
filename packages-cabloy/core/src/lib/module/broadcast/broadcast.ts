@@ -1,11 +1,12 @@
+import { CabloyApplication } from '../../../types/index.js';
 import { BroadcastClient } from './broadcastClient.js';
 
-export default function (loader, modules) {
+export default function (app: CabloyApplication, modules) {
   // broadcast
-  loader.app.meta.broadcast = loader.app.bean._newBean(BroadcastClient);
+  app.meta.broadcast = app.bean._newBean(BroadcastClient);
 
   // all broadcasts
-  const ebBroadcasts = (loader.app.meta.broadcasts = {});
+  const ebBroadcasts = (app.meta.broadcasts = {});
 
   // load broadcasts
   loadBroadcasts();
@@ -13,7 +14,7 @@ export default function (loader, modules) {
   function loadBroadcasts() {
     for (const key in modules) {
       const module = modules[key];
-      const config = loader.app.meta.configs[module.info.relativeName];
+      const config = app.meta.configs[module.info.relativeName];
       if (!config.broadcasts) continue;
       for (const broadcastKey in config.broadcasts) {
         const broadcastConfig = config.broadcasts[broadcastKey];
