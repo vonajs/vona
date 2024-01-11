@@ -219,17 +219,17 @@ export class Model extends BeanBase {
 ['get'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function (this: any) {
+      return function (this: any, ...args) {
         // console.log(this.constructor.name, arguments);
-        const args = [] as any;
-        if (this.table) args.push(this.table);
-        for (const arg of arguments) args.push(arg);
-        args[1] = args[1] || {};
-        // if (args[1].id) {
-        //   return this.ctx.db[method].apply(this.ctx.db, args);
+        const _args = [] as any;
+        if (this.table) _args.push(this.table);
+        for (const arg of args) _args.push(arg);
+        _args[1] = _args[1] || {};
+        // if (_args[1].id) {
+        //   return this.ctx.db[method].apply(this.ctx.db, _args);
         // }
-        this._rowCheck(args[1]);
-        return this.ctx.db[method].apply(this.ctx.db, args);
+        this._rowCheck(_args[1]);
+        return this.ctx.db[method](..._args);
       };
     },
   });
@@ -238,14 +238,14 @@ export class Model extends BeanBase {
 ['select'].forEach(method => {
   Object.defineProperty(Model.prototype, method, {
     get() {
-      return function (this) {
-        const args = [] as any;
-        if (this.table) args.push(this.table);
-        for (const arg of arguments) args.push(arg);
-        args[1] = args[1] || {};
-        args[1].where = args[1].where || {};
-        this._rowCheck(args[1].where);
-        return this.ctx.db[method].apply(this.ctx.db, args);
+      return function (this: any, ...args) {
+        const _args = [] as any;
+        if (this.table) _args.push(this.table);
+        for (const arg of args) _args.push(arg);
+        _args[1] = _args[1] || {};
+        _args[1].where = _args[1].where || {};
+        this._rowCheck(_args[1].where);
+        return this.ctx.db[method](..._args);
       };
     },
   });
