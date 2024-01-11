@@ -8,6 +8,6 @@ export interface CabloyApplication extends EggApplication {
   options: EggLoaderOptions;
   meta: AppMeta;
   bean: BeanContainer;
-  redis: Singleton<Redis>;
+  redis: Singleton<Redis>; // Omit<Redis, 'get'> & Singleton<Redis>;
   io: SocketServer;
 }
