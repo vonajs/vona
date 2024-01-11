@@ -45,9 +45,9 @@ export default function (app: CabloyApplication, modules) {
         if (typeof prop === 'symbol') return obj[prop];
         // base
         if (obj[prop]) return obj[prop];
-        const beanName = `model.${prop}`;
+        const beanFullName = `${relativeName}.model.${prop}`;
         // model
-        return context.bean._getBean(relativeName, beanName);
+        return context.bean._getBean(beanFullName);
       },
     });
   }

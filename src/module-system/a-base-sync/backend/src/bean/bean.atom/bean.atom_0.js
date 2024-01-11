@@ -36,7 +36,7 @@ module.exports = class Atom extends module.meta.class.BeanModuleBase {
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean(moduleInfo.relativeName, 'local.procedure');
+    return this.ctx.bean._getBean('a-base.local.procedure');
   }
 
   // atom other functions

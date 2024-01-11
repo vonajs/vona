@@ -14,6 +14,6 @@ module.exports = class Flow {
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean(moduleInfo.relativeName, 'local.procedure');
+    return this.ctx.bean._getBean('a-flow.local.procedure');
   }
 };

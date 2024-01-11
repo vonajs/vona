@@ -33,7 +33,7 @@ module.exports = class Captcha {
       }
     }
     // provider
-    const provider = this.ctx.bean._getBean(moduleInfo.relativeName, `sms.provider.${providerName}`);
+    const provider = this.ctx.bean._getBean(`${moduleInfo.relativeName}.sms.provider.${providerName}`);
     const config = providers[providerName];
     return { provider, config };
   }

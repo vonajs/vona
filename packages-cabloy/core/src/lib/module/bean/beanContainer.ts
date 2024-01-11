@@ -36,17 +36,9 @@ export class BeanContainer {
     return this.app.meta.beans[beanFullName];
   }
 
-  _getBean(moduleName, beanName?: string) {
-    if (!beanName) {
-      beanName = moduleName;
-      moduleName = null;
-    }
-    let beanFullName;
-    if (!moduleName) {
-      beanFullName = beanName;
-    } else {
-      beanFullName = `${typeof moduleName === 'string' ? moduleName : moduleName.relativeName}.${beanName}`;
-    }
+  _getBean<T extends IBeanRecord, K extends keyof T>(beanFullName: K): T[K];
+  _getBean(beanFullName: string);
+  _getBean(beanFullName: string) {
     if (this[beanFullName] === undefined) {
       this[beanFullName] = this._newBean(beanFullName);
     }
@@ -318,6 +310,7 @@ export function BeanContainerCreate(app, ctx) {
   return new Proxy(beanContainer, {
     get(obj, prop) {
       if (obj[prop]) return obj[prop];
+      if (typeof prop === 'symbol') return obj[prop];
       return obj._getBean(prop);
     },
   });

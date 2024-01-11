@@ -25,8 +25,8 @@ export default function (app: CabloyApplication, modules) {
                 {
                   get(obj, prop) {
                     if (typeof prop === 'symbol') return obj[prop];
-                    const beanName = `service.${prop}`;
-                    return context.bean._getBean(context.module.info.relativeName, beanName);
+                    const beanFullName = `${context.module.info.relativeName}.service.${prop}`;
+                    return context.bean._getBean(beanFullName);
                   },
                 },
               );

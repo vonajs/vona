@@ -10,14 +10,14 @@ module.exports = class Cache {
   }
 
   get _db() {
-    return this.ctx.bean._getBean(moduleInfo, 'local.db');
+    return this.ctx.bean._getBean('a-cache.local.db');
   }
 
   get mem() {
-    return this.ctx.bean._getBean(moduleInfo, 'local.mem');
+    return this.ctx.bean._getBean('a-cache.local.mem');
   }
 
   get redis() {
-    return this.ctx.bean._getBean(moduleInfo, 'local.redis');
+    return this.ctx.bean._getBean('a-cache.local.redis');
   }
 };

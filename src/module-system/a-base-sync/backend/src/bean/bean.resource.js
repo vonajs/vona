@@ -19,7 +19,7 @@ module.exports = class Resource extends module.meta.class.BeanModuleBase {
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean(moduleInfo.relativeName, 'local.procedure');
+    return this.ctx.bean._getBean('a-base.local.procedure');
   }
 
   // count
@@ -228,7 +228,7 @@ module.exports = class Resource extends module.meta.class.BeanModuleBase {
             where a.iid=? and a.atomId=?
             order by b.roleName
         `,
-      [this.ctx.instance.id, key.atomId]
+      [this.ctx.instance.id, key.atomId],
     );
     // locale
     for (const item of items) {
@@ -366,7 +366,7 @@ module.exports = class Resource extends module.meta.class.BeanModuleBase {
             order by c.module,b.atomClassId,e.resourceType,b.atomCategoryId
             ${_limit}
         `,
-      [locale, this.ctx.instance.id, roleId]
+      [locale, this.ctx.instance.id, roleId],
     );
     // locale
     this._resourceRightsLocale({ items });
@@ -401,7 +401,7 @@ module.exports = class Resource extends module.meta.class.BeanModuleBase {
             order by c.module,b.atomClassId,e.resourceType,b.atomCategoryId
             ${_limit}
         `,
-      [locale, this.ctx.instance.id, roleId]
+      [locale, this.ctx.instance.id, roleId],
     );
     // locale
     this._resourceRightsLocale({ items });
@@ -435,7 +435,7 @@ module.exports = class Resource extends module.meta.class.BeanModuleBase {
             order by c.module,b.atomClassId,e.resourceType,b.atomCategoryId
             ${_limit}
         `,
-      [locale, this.ctx.instance.id, userId]
+      [locale, this.ctx.instance.id, userId],
     );
     // locale
     this._resourceRightsLocale({ items });

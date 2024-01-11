@@ -34,7 +34,7 @@ module.exports = class User {
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean(moduleInfo.relativeName, 'local.procedure');
+    return this.ctx.bean._getBean('a-base.local.procedure');
   }
 
   async anonymous() {
@@ -437,12 +437,12 @@ module.exports = class User {
     // aAuth: delete old records
     const list = await this.ctx.model.query(
       'select a.id,a.providerId,a.providerScene from aAuth a where a.deleted=0 and a.iid=? and a.userId=?',
-      [this.ctx.instance.id, userIdFrom]
+      [this.ctx.instance.id, userIdFrom],
     );
     for (const item of list) {
       await this.ctx.model.query(
         'delete from aAuth where deleted=0 and iid=? and userId=? and providerId=? and providerScene=?',
-        [this.ctx.instance.id, userIdTo, item.providerId, item.providerScene]
+        [this.ctx.instance.id, userIdTo, item.providerId, item.providerScene],
       );
     }
     // aAuth: update records
