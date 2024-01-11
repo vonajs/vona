@@ -7,6 +7,7 @@ const isSafeDomainUtil = require('egg-security').utils.isSafeDomain;
 import MixinClassesFn from 'mixin-classes';
 import { BeanBase } from '../module/bean/beanBase';
 import Redlock from 'redlock';
+import { Request } from 'egg';
 
 export class AppUtil extends BeanBase {
   instanceStarted(subdomain) {
@@ -59,11 +60,11 @@ export class AppUtil extends BeanBase {
     }
     if (data.stack) error.stack = data.stack;
     if (data.name) error.name = data.name;
-    if (data.errno) error.errno = data.errno;
-    if (data.sqlMessage) error.sqlMessage = data.sqlMessage;
-    if (data.sqlState) error.sqlState = data.sqlState;
-    if (data.index) error.index = data.index;
-    if (data.sql) error.sql = data.sql;
+    if (data.errno) (<any>error).errno = data.errno;
+    if (data.sqlMessage) (<any>error).sqlMessage = data.sqlMessage;
+    if (data.sqlState) (<any>error).sqlState = data.sqlState;
+    if (data.index) (<any>error).index = data.index;
+    if (data.sql) (<any>error).sql = data.sql;
     return error;
   }
 
@@ -199,8 +200,8 @@ export class AppUtil extends BeanBase {
     const ctx = this.app.createAnonymousContext({
       method: 'post',
       url,
-    });
-    ctx.req.ctx = ctx;
+    } as Request);
+    (<any>ctx.req).ctx = ctx;
     // locale
     Object.defineProperty(ctx, 'locale', {
       get() {

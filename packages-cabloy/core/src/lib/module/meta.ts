@@ -42,6 +42,8 @@ export class AppMeta extends BeanBase {
   middlewaresSocketIoPacket: any[] = null as any;
   //
   queues: Record<string, any> = null as any;
+  //
+  appReadyInstances: Record<string, any> = null as any;
 
   __init__() {
     // workerId
