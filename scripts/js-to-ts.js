@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const path = require('path');
 const fs = require('node:fs/promises');
 const eggBornUtils = require('egg-born-utils');
 const argv = require('./lib/parse_argv')('sync');
