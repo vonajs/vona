@@ -1,27 +1,27 @@
-import { object } from 'is-type-of';
+import { CabloyApplication } from '../../types/index.js';
 
-export default function (loader): [object, any[]] {
+export default function (app: CabloyApplication): [object, any[]] {
   // use modulesArray
-  const ebModulesArray = loader.app.meta.modulesArray;
+  const ebModulesArray = app.meta.modulesArray;
 
   // all middlewares
-  loader.app.meta.middlewares = [];
-  const ebMiddlewaresAll: any[] = loader.app.meta.middlewares;
+  app.meta.middlewares = [];
+  const ebMiddlewaresAll = app.meta.middlewares;
 
-  loader.app.meta.middlewaresNormal = {};
-  const ebMiddlewaresNormal: object = loader.app.meta.middlewaresNormal;
+  app.meta.middlewaresNormal = {};
+  const ebMiddlewaresNormal: object = app.meta.middlewaresNormal;
 
-  loader.app.meta.middlewaresGlobal = [];
-  const ebMiddlewaresGlobal: any[] = loader.app.meta.middlewaresGlobal;
+  app.meta.middlewaresGlobal = [];
+  const ebMiddlewaresGlobal = app.meta.middlewaresGlobal;
 
-  loader.app.meta.middlewaresSocketIoConnection = [];
-  const ebMiddlewaresSocketIoConnection: any[] = loader.app.meta.middlewaresSocketIoConnection;
+  app.meta.middlewaresSocketIoConnection = [];
+  const ebMiddlewaresSocketIoConnection = app.meta.middlewaresSocketIoConnection;
 
-  loader.app.meta.middlewaresSocketIoPacket = [];
-  const ebMiddlewaresSocketIoPacket: any[] = loader.app.meta.middlewaresSocketIoPacket;
+  app.meta.middlewaresSocketIoPacket = [];
+  const ebMiddlewaresSocketIoPacket = app.meta.middlewaresSocketIoPacket;
 
   // load middlewares all
-  loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, loader);
+  loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app);
 
   // handle dependents
   handleDependents(ebMiddlewaresAll);
@@ -32,7 +32,7 @@ export default function (loader): [object, any[]] {
     ebMiddlewaresNormal,
     ebMiddlewaresGlobal,
     ebMiddlewaresSocketIoConnection,
-    ebMiddlewaresSocketIoPacket
+    ebMiddlewaresSocketIoPacket,
   );
 
   return [ebMiddlewaresNormal, ebMiddlewaresGlobal];
@@ -43,7 +43,7 @@ function loadMiddlewares(
   ebMiddlewaresNormal,
   ebMiddlewaresGlobal,
   ebMiddlewaresSocketIoConnection,
-  ebMiddlewaresSocketIoPacket
+  ebMiddlewaresSocketIoPacket,
 ) {
   // load
   for (const item of ebMiddlewaresAll) {
@@ -68,9 +68,9 @@ function loadMiddlewares(
   swap(ebMiddlewaresSocketIoPacket);
 }
 
-function loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, loader) {
+function loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app) {
   for (const module of ebModulesArray) {
-    const config = loader.app.meta.configs[module.info.relativeName];
+    const config = app.meta.configs[module.info.relativeName];
     if (!config.middlewares) continue;
     for (const middlewareKey in config.middlewares) {
       const middlewareConfig = config.middlewares[middlewareKey];

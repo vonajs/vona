@@ -5,6 +5,7 @@ import { AppUtil } from '../utils/util.js';
 import { BeanBase } from './bean/beanBase.js';
 import { Messenger } from './messenger.js';
 import { IMonkey } from '../../types/interface/monkey.js';
+import { AppRouter } from './route.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -18,6 +19,7 @@ export class AppMeta extends BeanBase {
   reload: AppReload = null as any;
   messenger: Messenger = null as any;
   appMonkey?: IMonkey;
+  router: AppRouter = null as any;
   beans: Record<string, any> = null as any;
   aops: Record<string, any> = null as any;
   suites: Record<string, any> = null as any;
@@ -26,6 +28,11 @@ export class AppMeta extends BeanBase {
   modulesMonkey: Record<string, any> = null as any;
   configs: Record<string, any> = null as any;
   constants: Record<string, any> = null as any;
+  middlewares: any[] = null as any;
+  middlewaresNormal: Record<string, any> = null as any;
+  middlewaresGlobal: any[] = null as any;
+  middlewaresSocketIoConnection: any[] = null as any;
+  middlewaresSocketIoPacket: any[] = null as any;
 
   __init__() {
     // workerId
