@@ -40,6 +40,8 @@ export class AppMeta extends BeanBase {
   middlewaresGlobal: any[] = null as any;
   middlewaresSocketIoConnection: any[] = null as any;
   middlewaresSocketIoPacket: any[] = null as any;
+  //
+  queues: Record<string, any> = null as any;
 
   __init__() {
     // workerId

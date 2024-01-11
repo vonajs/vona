@@ -1,8 +1,9 @@
+import { CabloyApplication } from '../../../types/index.js';
 import QueueClientFn from './queueClient.js';
 
-export default function (loader, modules) {
+export default function (app: CabloyApplication, modules) {
   // queue
-  loader.app.meta.queue = new (QueueClientFn(loader.app))();
+  app.meta.queue = new (QueueClientFn(app))();
 
   // all queues
   const ebQueues = (loader.app.meta.queues = {});

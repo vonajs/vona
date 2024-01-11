@@ -6,6 +6,7 @@ import is from 'is-type-of';
 const isSafeDomainUtil = require('egg-security').utils.isSafeDomain;
 import MixinClassesFn from 'mixin-classes';
 import { BeanBase } from '../module/bean/beanBase';
+import Redlock from 'redlock';
 
 export class AppUtil extends BeanBase {
   instanceStarted(subdomain) {
@@ -298,7 +299,19 @@ export class AppUtil extends BeanBase {
     return res;
   }
 
-  async lock({ subdomain, resource, fn, options, redlock }) {
+  async lock({
+    subdomain,
+    resource,
+    fn,
+    options,
+    redlock,
+  }: {
+    subdomain: string | undefined;
+    resource: string;
+    fn: () => Promise<any>;
+    options;
+    redlock?: Redlock;
+  }) {
     // resource
     const _lockResource = `redlock_${this.app.name}:${this.subdomainDesp(subdomain)}:${resource}`;
     // options
@@ -309,7 +322,7 @@ export class AppUtil extends BeanBase {
     }
     let _lock = await redlock.lock(_lockResource, _lockOptions.lockTTL);
     // timer
-    let _lockTimer = null;
+    let _lockTimer = null as any;
     const _lockDone = () => {
       if (_lockTimer) {
         clearInterval(_lockTimer);
