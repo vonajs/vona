@@ -3,6 +3,12 @@ import { BeanBase } from './bean/beanBase.js';
 import { CabloyApplication } from '../../types/index.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
+interface IMessengerCallbackContext {
+  name: string;
+  data: any;
+}
+type IMessengerCallback = (info: IMessengerCallbackContext) => void;
+
 export class AppMessenger extends BeanBase {
   _providers: object = {};
   _pids: any = null;
@@ -37,16 +43,16 @@ export class AppMessenger extends BeanBase {
     }
   }
 
-  callAgent(info, cb) {
+  callAgent(info, cb?: IMessengerCallback) {
     info.pid = process.pid;
     this._call(null, info, cb);
   }
 
-  callRandom(info, cb) {
+  callRandom(info, cb?: IMessengerCallback) {
     this._call(null, info, cb);
   }
 
-  callTo(pid, info, cb) {
+  callTo(pid, info, cb?: IMessengerCallback) {
     this._call(pid, info, cb);
   }
 
@@ -55,7 +61,7 @@ export class AppMessenger extends BeanBase {
   }
 
   // info: { name, data }
-  _call(pid, info, cb) {
+  _call(pid, info, cb?: IMessengerCallback) {
     const app = this.app;
     if (cb) {
       info.echo = uuid.v4();
@@ -108,5 +114,5 @@ export class AppMessenger extends BeanBase {
 
 export default function (app: CabloyApplication) {
   // messenger
-  app.meta.messenger = app.bean._newBean(Messenger);
+  app.meta.messenger = app.bean._newBean(AppMessenger);
 }

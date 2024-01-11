@@ -41,7 +41,7 @@ export class VersionReady extends BeanBase {
       });
     } catch (err) {
       // record
-      app.meta.__versionReadyError = err;
+      app.meta.__versionReadyError = err as Error;
       // event: appReadyError
       app.emit(EnumAppEvent.AppReadyError, err);
       // throw exception
