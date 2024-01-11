@@ -56,7 +56,7 @@ export class Messenger extends BeanBase {
 
   // info: { name, data }
   _call(pid, info, cb) {
-    const app = this.app as any;
+    const app = this.app;
     if (cb) {
       info.echo = uuid.v4();
       app.messenger.once(info.echo, info => {
@@ -75,11 +75,11 @@ export class Messenger extends BeanBase {
   }
 
   sendToApp(eventName, info) {
-    const app = this.app as any;
+    const app = this.app;
     app.messenger.sendToApp(eventName, info);
   }
   sendTo(pid, eventName, info) {
-    const app = this.app as any;
+    const app = this.app;
     if (app.meta.isTest || !this._pids) {
       // support init:backend
       app.messenger.sendToApp(eventName, info);
@@ -88,7 +88,7 @@ export class Messenger extends BeanBase {
     }
   }
   sendRandom(eventName, info) {
-    const app = this.app as any;
+    const app = this.app;
     if (app.meta.isTest || !this._pids) {
       // support init:backend
       app.messenger.sendToApp(eventName, info);
@@ -97,7 +97,7 @@ export class Messenger extends BeanBase {
     }
   }
   sendAgent(eventName, info) {
-    const app = this.app as any;
+    const app = this.app;
     app.messenger.sendToAgent(eventName, info);
   }
 

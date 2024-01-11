@@ -2,13 +2,13 @@ import { IBroadcastExecuteContext } from '../../../types/index.js';
 import { BeanBase } from '../bean/beanBase.js';
 
 export class BroadcastClient extends BeanBase {
-  __callerId: number = 0;
+  __callerId: string = '';
   channelName: string | null = null;
   sub: any = null;
   pub: any = null;
 
   __init__() {
-    const app = this.app as any;
+    const app = this.app;
     this.__callerId = app.meta.workerId;
     this.channelName = `broadcast_${this.app.name}:`;
     this.pub = app.redis.get('broadcast').duplicate();
@@ -32,7 +32,7 @@ export class BroadcastClient extends BeanBase {
   }
 
   async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
-    const app = this.app as any;
+    const app = this.app;
     // context
     const context: IBroadcastExecuteContext = { data };
     if (__callerId === this.__callerId) {
@@ -48,7 +48,7 @@ export class BroadcastClient extends BeanBase {
   }
 
   async _performTask({ broadcast, context, locale, subdomain }) {
-    const app = this.app as any;
+    const app = this.app;
     const bean = broadcast.bean;
     // execute as global when broadcast.config.instance === false
     // ignore when instance not started

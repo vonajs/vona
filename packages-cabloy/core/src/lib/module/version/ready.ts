@@ -4,7 +4,7 @@ import clearFn from './clear.js';
 
 export class VersionReady extends BeanBase {
   initialize() {
-    const app = this.app as any;
+    const app = this.app;
     // checkAppReady
     app.meta.checkAppReady = async function () {
       return new Promise((resolve, reject) => {

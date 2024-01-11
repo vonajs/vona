@@ -52,9 +52,13 @@ export class AppMeta extends BeanBase {
   //
   appReadyInstances: Record<string, any> = null as any;
   //
+  __versionReady: boolean = false;
+  __versionReadyError: Error = null as any;
+  //
   _loadQueueWorkers: ({ subdomain }: { subdomain: string }) => void = null as any;
   _loadSchedules: ({ ctx }: { ctx: CabloyContext }) => Promise<void> = null as any;
   _runSchedule: (context) => Promise<any> = null as any;
+  checkAppReady: () => Promise<boolean> = null as any;
 
   __init__() {
     // workerId
