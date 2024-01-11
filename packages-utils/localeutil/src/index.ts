@@ -137,17 +137,17 @@ function format(f) {
  *
  */
 
-function getText(...arguments) {
-  if (arguments.length === 0) return '';
+function getText(...args) {
+  if (args.length === 0) return '';
 
-  const [text, value] = arguments;
+  const [text, value] = args;
 
   if (!text) return '';
 
-  if (arguments.length === 1) {
+  if (args.length === 1) {
     return text;
   }
-  if (arguments.length === 2) {
+  if (args.length === 2) {
     if (isObject(value)) {
       return formatWithObject(text, value);
     }
@@ -159,12 +159,12 @@ function getText(...arguments) {
     return format(text, value);
   }
 
-  const args = new Array(arguments.length);
-  args[0] = text;
-  for (let i = 1; i < args.length; i++) {
-    args[i] = arguments[i];
+  const _args = new Array(args.length);
+  _args[0] = text;
+  for (let i = 1; i < _args.length; i++) {
+    _args[i] = args[i];
   }
-  return format.apply(null, args);
+  return format.apply(null, _args);
 }
 
 function isObject(obj) {
