@@ -37,7 +37,7 @@ export default function (app: CabloyApplication) {
       for (const module of ebModulesArray) {
         if (is.class(module.main)) {
           const mainInstance = app.bean._newBean(module.main);
-          module.main = mainInstance.options;
+          module.main = (<any>mainInstance).options;
           module.mainInstance = mainInstance;
         } else if (is.function(module.main) && !is.class(module.main)) {
           module.main = module.main(app, module);
