@@ -20,10 +20,10 @@
       "path": "packages-utils/localeutil"
     },
     {
-      "path": "packages-utils/module-info"
+      "path": "packages-utils/module-glob"
     },
     {
-      "path": "packages-utils/module-glob"
+      "path": "packages-utils/module-info"
     },
     {
       "path": "packages-utils/module-parse"
