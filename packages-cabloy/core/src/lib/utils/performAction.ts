@@ -135,16 +135,16 @@ function createRequest({ method, url }, ctxCaller) {
   // _req
   const _req = ctxCaller.request;
   // req
-  const req = new http.IncomingMessage();
+  const req = new http.IncomingMessage(null as any);
   req.headers = _req.headers;
-  req.host = _req.host;
-  req.hostname = _req.hostname;
-  req.protocol = _req.protocol;
-  req.secure = _req.secure;
+  (<any>req).host = _req.host;
+  (<any>req).hostname = _req.hostname;
+  (<any>req).protocol = _req.protocol;
+  (<any>req).secure = _req.secure;
   req.method = method.toUpperCase();
   req.url = url;
   // path,
-  req.socket = {
+  (<any>req).socket = {
     remoteAddress: _req.socket.remoteAddress,
     remotePort: _req.socket.remotePort,
   };
