@@ -24,19 +24,22 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/* eslint-disable */
+// @ts-nocheck
+
 let CIRCULAR_ERROR_MESSAGE;
 
 function tryStringify(arg) {
   try {
     return JSON.stringify(arg);
-  } catch (err) {
+  } catch (err: any) {
     // Populate the circular error message lazily
     if (!CIRCULAR_ERROR_MESSAGE) {
       try {
-        const a = {};
+        const a = {} as any;
         a.a = a;
         JSON.stringify(a);
-      } catch (err) {
+      } catch (err: any) {
         CIRCULAR_ERROR_MESSAGE = err.message;
       }
     }
@@ -53,6 +56,7 @@ function format(f) {
   let str = '';
   let a = 1;
   let lastPos = 0;
+
   for (let i = 0; i < f.length; ) {
     if (f.charCodeAt(i) === 37 /* '%'*/ && i + 1 < f.length) {
       if (f.charCodeAt(i + 1) !== 37 /* '%'*/ && a >= arguments.length) {
