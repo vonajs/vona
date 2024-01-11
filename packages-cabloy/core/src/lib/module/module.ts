@@ -1,7 +1,7 @@
 import fse from 'fs-extra';
 import path from 'path';
 import is from 'is-type-of';
-import mglob from 'egg-born-mglob';
+import mglob from '@cabloy/module-glob';
 import { CabloyApplication } from '../../types/index.js';
 
 export default function (app: CabloyApplication) {
@@ -30,11 +30,13 @@ export default function (app: CabloyApplication) {
   return {
     async loadModules() {
       // 1. require
-      for (const module of ebModulesArray) {
+      for (const _module of ebModulesArray) {
+        const module = _module as any;
         module.main = require(module.js.backend);
       }
       // 2. load
-      for (const module of ebModulesArray) {
+      for (const _module of ebModulesArray) {
+        const module = _module as any;
         if (is.class(module.main)) {
           const mainInstance = app.bean._newBean(module.main);
           module.main = (<any>mainInstance).options;

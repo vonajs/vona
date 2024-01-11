@@ -1,7 +1,7 @@
 const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fse = require('fs-extra');
-const mglob = require('egg-born-mglob');
+const mglob = require('@cabloy/module-glob');
 
 module.exports = context => {
   return {

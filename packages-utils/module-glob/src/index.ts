@@ -1,10 +1,10 @@
-const path = require('path');
-const fse = require('fs-extra');
-const semver = require('semver');
-const chalk = require('chalk');
-const boxen = require('boxen');
-const eggBornUtils = require('egg-born-utils');
-const mparse = require('@cabloy/module-parse').default;
+import path from 'path';
+import fse from 'fs-extra';
+import semver from 'semver';
+import chalk from 'chalk';
+import boxen from 'boxen';
+import eggBornUtils from 'egg-born-utils';
+import mparse from '@cabloy/module-parse';
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
