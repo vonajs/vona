@@ -1,9 +1,9 @@
-const mparse = require('@cabloy/module-parse').default;
+import mparse from '@cabloy/module-parse';
 import fse from 'fs-extra';
 import path from 'path';
-const URL = require('url').URL;
+import { URL } from 'url';
 import is from 'is-type-of';
-const isSafeDomainUtil = require('egg-security').utils.isSafeDomain;
+import * as security from 'egg-security';
 import MixinClassesFn from 'mixin-classes';
 import { BeanBase } from '../module/bean/beanBase';
 import Redlock from 'redlock';
@@ -127,7 +127,10 @@ export class AppUtil extends BeanBase {
 
     // whiteList
     const whiteListCors = this.getWhiteListCors(ctx);
-    if (isSafeDomainUtil(parsedUrl.hostname, whiteListCors) || isSafeDomainUtil(origin, whiteListCors)) {
+    if (
+      security.utils.isSafeDomain(parsedUrl.hostname, whiteListCors) ||
+      security.utils.isSafeDomain(origin, whiteListCors)
+    ) {
       return true;
     }
     return false;

@@ -1,6 +1,5 @@
+import { URL } from 'url';
 import { BeanBase } from './bean/beanBase.js';
-
-const URL = require('url').URL;
 
 export class SocketioReady extends BeanBase {
   initialize() {
