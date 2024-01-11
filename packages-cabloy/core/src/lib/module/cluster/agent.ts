@@ -1,19 +1,19 @@
-import { EnumAppEvent } from '../../../types/index.js';
+import { CabloyApplication, EnumAppEvent } from '../../../types/index.js';
 
-export default function (loader) {
+export default function (app: CabloyApplication) {
   // ready
   let _ready = false;
   const pids = {};
 
   // messenger
-  loader.app.meta.messenger.addProvider({
+  app.meta.messenger.addProvider({
     name: 'appReady',
     handler: data => {
       pids[data.pid] = true;
       if (!_ready) {
         _ready = true;
         // for agent: event: appReady
-        loader.app.emit(EnumAppEvent.AppReady);
+        app.emit(EnumAppEvent.AppReady);
       }
     },
   });

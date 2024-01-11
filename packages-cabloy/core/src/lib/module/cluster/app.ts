@@ -1,7 +1,7 @@
+import { CabloyApplication } from '../../../types/index.js';
 import { VersionReady } from '../version/ready.js';
 
-export default function (loader) {
-  const app = loader.app;
+export default function (app: CabloyApplication) {
   const versionReady = app.bean._newBean(VersionReady);
   // initialize
   versionReady.initialize();
