@@ -6,7 +6,13 @@ import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import mparse from '@cabloy/module-parse';
 
-const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
+const boxenOptions: boxen.Options = {
+  padding: 1,
+  margin: 1,
+  align: 'center',
+  borderColor: 'yellow',
+  borderStyle: boxen.BorderStyle.Round,
+};
 
 export default {
   glob: eggBornMglob,

@@ -3,10 +3,23 @@ const PREFIX_B = 'egg-born-module-';
 const PREFIX_C = './egg-born-module-';
 const PREFIX_D = './';
 
+export interface IModuleParseInfo {
+  pid: string;
+  name: string;
+  fullName: string;
+  relativeName: string;
+  url?: string;
+  sync?: boolean;
+  monkey?: boolean;
+  vendor?: boolean;
+  public?: boolean;
+  node_modules?: boolean;
+}
+
 export default {
   // aa-hello aa/hello
   //   first check / then -
-  parseInfo(moduleName, type = 'module') {
+  parseInfo(moduleName, type = 'module'): IModuleParseInfo | null {
     if (!moduleName) return null;
     if (moduleName.indexOf('://') > -1) return null;
     if (moduleName.charAt(0) === '/') moduleName = moduleName.substr(1);
