@@ -1,5 +1,6 @@
+const fse = require('fs-extra');
 const { ProcessHelper } = require('@cabloy/process-helper');
-const mglob = require('@cabloy/module-glob');
+const mglob = require('@cabloy/module-glob').default;
 const argv = require('./lib/parse_argv')('sync');
 
 (async function () {
@@ -11,14 +12,29 @@ async function main() {
   const message = argv.args[0];
   const processHelper = new ProcessHelper(process.cwd());
 
-  // loop
   // modules
-  const { modules } = mglob.glob({
-    projectPath: context.config.projectPath,
-    disabledModules: context.config.configProject.base.disabledModules,
-    disabledSuites: context.config.configProject.base.disabledSuites,
+  const { modulesArray } = mglob.glob({
+    projectPath: process.cwd(),
+    disabledModules: null,
+    disabledSuites: null,
     log: true,
     type: 'backend',
   });
-  console.log(modules);
+
+  // loop
+  for (const module of modulesArray) {
+    await _moduleHandle({ module });
+  }
+}
+
+async function _moduleHandle({ module }) {
+  await _moduleRemoveFront({ module });
+}
+
+async function _moduleRemoveFront({ module }) {
+  // console.log(module);
+  // front/icons/src
+  await fse.remove(`${module.root}/front`);
+  await fse.remove(`${module.root}/icons`);
+  await fse.remove(`${module.root}/src`);
 }
