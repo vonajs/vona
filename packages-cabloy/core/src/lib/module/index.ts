@@ -1,4 +1,4 @@
-import { AppMeta } from './meta.js';
+import { AppMeta } from '../core/meta.js';
 import ModulesToolsFn from './module.js';
 import loadRoutes from './route.js';
 import loadControllers from './controller.js';

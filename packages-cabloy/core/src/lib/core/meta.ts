@@ -1,14 +1,14 @@
 import * as uuid from 'uuid';
 import { AppMockUtil } from '../utils/mockUtil.js';
-import { AppReload } from './reload.js';
+import { AppReload } from '../module/reload.js';
 import { AppUtil } from '../utils/util.js';
-import { BeanBase } from './bean/beanBase.js';
-import { AppMessenger } from './messenger.js';
+import { BeanBase } from '../module/bean/beanBase.js';
+import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp } from '../../types/interface/monkey.js';
-import { AppRouter } from './route.js';
-import { AppLimiter, AppRedlock } from './redis.js';
-import { QueueClient } from './queue/queueClient.js';
-import { BroadcastClient } from './broadcast/broadcastClient.js';
+import { AppRouter } from '../module/route.js';
+import { AppLimiter, AppRedlock } from '../module/redis.js';
+import { QueueClient } from '../module/queue/queueClient.js';
+import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import { CabloyContext } from '../../types/index.js';
 import { IAppModule, IAppSuite } from '../../types/interface/module.js';
 

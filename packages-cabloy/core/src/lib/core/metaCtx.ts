@@ -1,6 +1,6 @@
 import { CtxUtil } from '../utils/utilCtx.js';
 import { CtxMockUtil } from '../utils/mockUtilCtx.js';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanBase } from '../module/bean/beanBase.js';
 
 export class CtxMeta extends BeanBase {
   util: CtxUtil = null as any;
