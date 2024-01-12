@@ -247,6 +247,8 @@ function __parseModules(projectPath, type) {
       if (!info) {
         throw new Error(`module name is not valid: ${name}`);
       }
+      // todo:
+      if (info.relativeName !== 'a-version') continue;
       info.vendor = __path.vendor;
       info.public = __path.public;
       info.node_modules = __path.node_modules;
