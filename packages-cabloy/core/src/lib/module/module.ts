@@ -3,6 +3,7 @@ import path from 'path';
 import is from 'is-type-of';
 import mglob from '@cabloy/module-glob';
 import { CabloyApplication } from '../../types/index.js';
+import { IAppModule, IAppModuleMain } from '../../types/interface/module.js';
 
 export default function (app: CabloyApplication) {
   // all modules
@@ -17,7 +18,7 @@ export default function (app: CabloyApplication) {
   // eslint-disable-next-line
   const ebSuites = (app.meta.suites = suites);
   const ebModules = (app.meta.modules = modules);
-  const ebModulesArray = (app.meta.modulesArray = modulesArray);
+  const ebModulesArray: IAppModule[] = (app.meta.modulesArray = modulesArray);
   const ebModulesMonkey = (app.meta.modulesMonkey = modulesMonkey);
 
   // app monkey
@@ -31,9 +32,15 @@ export default function (app: CabloyApplication) {
   return {
     async loadModules() {
       // 1. require
+      const promises: Promise<IAppModuleMain>[] = [];
       for (const _module of ebModulesArray) {
         const module = _module as any;
-        module.main = require(module.js.backend);
+        promises.push(import(module.js.backend));
+      }
+      const modulesMain = await Promise.all(promises);
+      for (let i = 0; i < modulesMain.length; i++) {
+        const module = ebModulesArray[i];
+        module.main = modulesMain[i];
       }
       // 2. load
       for (const _module of ebModulesArray) {
