@@ -6,7 +6,6 @@
 #   npm install
 ################################################################ 
 # modules
-git submodule add -f git@github.com:zhennann/egg-born-module-a-base-sync src/module/a-base-sync
 git submodule add -f git@github.com:zhennann/egg-born-module-a-flownodebooster src/module/a-flownodebooster
 git submodule add -f git@github.com:zhennann/egg-born-module-a-flowtask src/module/a-flowtask
 git submodule add -f git@github.com:zhennann/egg-born-module-a-layoutpc src/module/a-layoutpc
