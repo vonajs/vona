@@ -9,7 +9,7 @@ const constants = require('./config/constants.js');
 const beans = require('./beans.js');
 const controllers = require('./controllers.js');
 
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

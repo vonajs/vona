@@ -29,6 +29,7 @@ async function main() {
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  // await fse.move(`${module.root}/src/main.js`, `${module.root}/src/index.js`);
   // await fse.remove(`${module.root}/dist`);
   // await _modulePublish({ module, processHelper });
   // await _moduleRemoveFront({ module });
