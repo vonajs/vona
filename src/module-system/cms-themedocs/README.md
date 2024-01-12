@@ -5,7 +5,7 @@ The First Documentation Theme
 ## Installation
 
 ```bash
-$ npm i egg-born-module-cms-themedocs
+$ npm i cabloy-module-api-cms-themedocs
 ```
 
 ## Usage

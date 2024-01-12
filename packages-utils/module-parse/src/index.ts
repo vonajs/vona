@@ -1,6 +1,6 @@
 const PREFIX_A = '/api/';
-const PREFIX_B = 'egg-born-module-';
-const PREFIX_C = './egg-born-module-';
+const PREFIX_B = 'cabloy-module-api-';
+const PREFIX_C = './cabloy-module-api-';
 const PREFIX_D = './';
 
 export interface IModuleParseInfo {
@@ -33,14 +33,14 @@ export default {
       return {
         pid: parts[0],
         name: parts[1],
-        fullName: `egg-born-suite-${parts[0]}-${parts[1]}`,
+        fullName: `cabloy-suite-api-${parts[0]}-${parts[1]}`,
         relativeName: `${parts[0]}-${parts[1]}`,
       };
     }
     return {
       pid: parts[0],
       name: parts[1],
-      fullName: `egg-born-module-${parts[0]}-${parts[1]}`,
+      fullName: `cabloy-module-api-${parts[0]}-${parts[1]}`,
       relativeName: `${parts[0]}-${parts[1]}`,
       url: `${parts[0]}/${parts[1]}`,
       sync: parts[2] === 'sync',
@@ -48,9 +48,9 @@ export default {
     };
   },
   // /api/aa/hello/home/index
-  // egg-born-module-aa-hello
+  // cabloy-module-api-aa-hello
   // ./aa-hello/
-  // ./egg-born-module-aa-hello/
+  // ./cabloy-module-api-aa-hello/
   parseName(moduleUrl) {
     if (!moduleUrl) return null;
     if (moduleUrl.indexOf('/api/static/') === 0) {

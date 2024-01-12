@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-module-cms-pluginuser",
+  "name": "cabloy-module-api-cms-pluginuser",
   "version": "5.0.0",
   "title": "cms:plugin:user",
   "eggBornModule": {

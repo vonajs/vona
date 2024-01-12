@@ -6,7 +6,7 @@ module.exports = app => {
   config.theme = {
     _theme: {
       name: 'cms-themeblog',
-      url: 'https://www.npmjs.com/package/egg-born-module-cms-themeblog',
+      url: 'https://www.npmjs.com/package/cabloy-module-api-cms-themeblog',
     },
   };
 

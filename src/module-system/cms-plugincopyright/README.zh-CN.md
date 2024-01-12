@@ -1,17 +1,17 @@
 简体中文 | [English](./README.md)
 
-# egg-born-module-cms-plugincopyright
+# cabloy-module-api-cms-plugincopyright
 
 ## 介绍
 
-使用此插件可以自动在文章底部显示`版权声明`及文章基本信息，如作者、链接和Markdown源文件，等等
+使用此插件可以自动在文章底部显示`版权声明`及文章基本信息，如作者、链接和 Markdown 源文件，等等
 
 ## 如何使用
 
 ### 安装插件
 
-``` bash
-$ npm i egg-born-module-cms-plugincopyright
+```bash
+$ npm i cabloy-module-api-cms-plugincopyright
 ```
 
 > 如果主题模块已经包含了此插件就会自动安装
@@ -22,7 +22,7 @@ $ npm i egg-born-module-cms-plugincopyright
 
 此插件提供了四种显示风格：`none/simple/license/full`, 其中`simple`是默认风格
 
-``` javascript
+```javascript
 {
   ...
   "plugins": {

@@ -1,4 +1,4 @@
-# egg-born-module-cms-pluginsubmit
+# cabloy-module-api-cms-pluginsubmit
 
 ## 介绍
 
@@ -8,18 +8,17 @@
 
 ### 安装插件
 
-``` bash
-$ npm i egg-born-module-cms-pluginsubmit
+```bash
+$ npm i cabloy-module-api-cms-pluginsubmit
 ```
 
 > 如果主题模块已经包含了此插件就会自动安装
 
 ### 配置参数
 
-只需在`站点配置`或`语言配置`中提供百度分配的token即可
+只需在`站点配置`或`语言配置`中提供百度分配的 token 即可
 
-
-``` javascript
+```javascript
 {
   ...
   "plugins": {
@@ -34,4 +33,4 @@ $ npm i egg-born-module-cms-pluginsubmit
 }
 ```
 
-> 关于token详情，请参见：[百度-搜索资源平台](https://ziyuan.baidu.com/linksubmit/index)
+> 关于 token 详情，请参见：[百度-搜索资源平台](https://ziyuan.baidu.com/linksubmit/index)

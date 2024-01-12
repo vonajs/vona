@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-module-cms-themeaws",
+  "name": "cabloy-module-api-cms-themeaws",
   "version": "5.0.0",
   "title": "cms:theme:aws",
   "eggBornModule": {

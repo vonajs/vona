@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-module-cms-plugintrack",
+  "name": "cabloy-module-api-cms-plugintrack",
   "version": "5.0.0",
   "title": "cms:plugin:track",
   "eggBornModule": {

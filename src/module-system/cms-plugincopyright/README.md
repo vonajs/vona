@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-CN.md)
 
-# egg-born-module-cms-plugincopyright
+# cabloy-module-api-cms-plugincopyright
 
 ## Introduce
 
@@ -10,8 +10,8 @@ Use this plugin to automatically display the `copyright notice` and basic inform
 
 ### Install
 
-``` bash
-$ npm i egg-born-module-cms-plugincopyright
+```bash
+$ npm i cabloy-module-api-cms-plugincopyright
 ```
 
 > If the theme module already contains this plugin, it will be installed automatically
@@ -22,7 +22,7 @@ Modify the plugin parameters in the `site configuration` or `Language Configurat
 
 This plugin provides three display styles: `none/simple/license`, while `simple` is the default style
 
-``` javascript
+```javascript
 {
   ...
   "plugins": {

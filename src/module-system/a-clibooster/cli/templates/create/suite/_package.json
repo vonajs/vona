@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-suite-<%=argv.name%>",
+  "name": "cabloy-suite-api-<%=argv.name%>",
   "version": "5.0.0",
   "title": "<%=argv.suiteInfo.relativeName%>",
   "description": "<%=argv.description%>",

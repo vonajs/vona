@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-module-cms-pluginmarkdowngithub",
+  "name": "cabloy-module-api-cms-pluginmarkdowngithub",
   "version": "5.0.0",
   "title": "cms:plugin:markdowngithub",
   "eggBornModule": {

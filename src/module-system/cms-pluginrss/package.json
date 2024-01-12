@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-module-cms-pluginrss",
+  "name": "cabloy-module-api-cms-pluginrss",
   "version": "5.0.0",
   "title": "cms:plugin:rss",
   "eggBornModule": {

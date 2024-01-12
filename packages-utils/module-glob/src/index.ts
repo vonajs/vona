@@ -81,7 +81,7 @@ const __pathsModules = [
     ],
   },
   {
-    prefix: 'node_modules/egg-born-module-',
+    prefix: 'node_modules/cabloy-module-api-',
     vendor: true,
     public: true,
     node_modules: true,
@@ -234,9 +234,9 @@ function __parseModules(projectPath, type) {
         continue;
       }
       // check if full name
-      if (!__path.public && name.indexOf('egg-born-module-') > -1) {
+      if (!__path.public && name.indexOf('cabloy-module-api-') > -1) {
         const pathSrc = path.join(prefix, name);
-        name = name.substring('egg-born-module-'.length);
+        name = name.substring('cabloy-module-api-'.length);
         filePkg = path.join(prefix, name, 'package.json');
         const pathDest = path.join(prefix, name);
         fse.moveSync(pathSrc, pathDest);
@@ -403,9 +403,9 @@ function __parseSuites(projectPath) {
         continue;
       }
       // check if full name
-      if (name.indexOf('egg-born-suite-') > -1) {
+      if (name.indexOf('cabloy-suite-api-') > -1) {
         const pathSrc = path.join(prefix, name);
-        name = name.substring('egg-born-suite-'.length);
+        name = name.substring('cabloy-suite-api-'.length);
         filePkg = path.join(prefix, name, 'package.json');
         const pathDest = path.join(prefix, name);
         fse.moveSync(pathSrc, pathDest);

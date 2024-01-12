@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-module-<%=argv.name%>",
+  "name": "cabloy-module-api-<%=argv.name%>",
   "version": "5.0.0",
   "title": "<%=argv.moduleInfo.relativeName%>",
   "eggBornModule": {

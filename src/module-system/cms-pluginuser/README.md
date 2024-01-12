@@ -4,4 +4,4 @@ Add user function buttons in the navigation bar: `sign in`, `personal profile`, 
 
 ## How to use
 
-> See Also：[Blog Theme](https://github.com/zhennann/egg-born-module-cms-themeblog)
+> See Also：[Blog Theme](https://github.com/zhennann/cabloy-module-api-cms-themeblog)

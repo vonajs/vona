@@ -1,10 +1,10 @@
 {
-  "name": "egg-born-module-a-login",
+  "name": "cabloy-module-api-a-login",
   "version": "5.0.0",
   "eggBornModule": {
     "dependencies": {}
   },
-  "description": "egg-born-module-aa-login",
+  "description": "cabloy-module-api-aa-login",
   "scripts": {
     "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",
     "build:backend": "node ../../../scripts/egg-born-bin.js backend-build-module",

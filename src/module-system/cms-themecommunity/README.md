@@ -5,7 +5,7 @@ The First Community Theme
 ## Installation
 
 ```bash
-$ npm i egg-born-module-cms-themecommunity
+$ npm i cabloy-module-api-cms-themecommunity
 ```
 
 ## Usage

@@ -4,4 +4,4 @@ CMS basic rendering elements: `title`, `article statistics`, `attachments`, `pre
 
 ## How to use
 
-> See Also：[Blog Theme](https://github.com/zhennann/egg-born-module-cms-themeblog)
+> See Also：[Blog Theme](https://github.com/zhennann/cabloy-module-api-cms-themeblog)

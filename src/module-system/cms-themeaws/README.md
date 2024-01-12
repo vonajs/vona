@@ -1,11 +1,11 @@
-# egg-born-module-cms-themeaws
+# cabloy-module-api-cms-themeaws
 
 Cabloy-CMS Theme
 
 ## Installation
 
 ```bash
-$ npm i egg-born-module-cms-themeaws
+$ npm i cabloy-module-api-cms-themeaws
 ```
 
 ## Usage

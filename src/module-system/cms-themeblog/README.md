@@ -5,7 +5,7 @@ The First Blog Theme
 ## Installation
 
 ```bash
-$ npm i egg-born-module-cms-themeblog
+$ npm i cabloy-module-api-cms-themeblog
 ```
 
 ## Usage

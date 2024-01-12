@@ -15,7 +15,7 @@ module.exports = app => {
     },
     _theme: {
       name: 'cms-themedocs',
-      url: 'https://www.npmjs.com/package/egg-born-module-cms-themedocs',
+      url: 'https://www.npmjs.com/package/cabloy-module-api-cms-themedocs',
     },
     _github: {
       user: 'zhennann',
