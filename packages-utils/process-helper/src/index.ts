@@ -106,6 +106,15 @@ export class ProcessHelper {
       });
     });
   }
+  async npmPublish({ cwd }) {
+    await this.spawnCmd({
+      cmd: 'npm',
+      args: ['publish'],
+      options: {
+        cwd,
+      },
+    });
+  }
   async gitCommit({ cwd, message }) {
     // git status
     const stdout = await this.spawnExe({
