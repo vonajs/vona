@@ -1,8 +1,9 @@
-const moment = require('moment');
-const chalk = require('chalk');
+import moment from 'moment';
+import chalk from 'chalk';
+import { BeanBase } from '@cabloy/core';
+import { __ThisModule__ } from '../types/this.js';
 
-const moduleInfo = module.info;
-module.exports = class Version {
+export class LocalVersion extends BeanBase {
   async databaseInitStartup() {
     // database
     await this.__database();
@@ -28,7 +29,7 @@ module.exports = class Version {
       this.ctx.model.columnsClearAll();
       // broadcast
       this.app.meta.broadcast.emit({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         broadcastName: 'columnsClear',
         data: { mode: 'all' },
       });
@@ -80,7 +81,7 @@ module.exports = class Version {
     }
 
     // check all modules
-    const debug = this.app.bean.debug.get('version');
+    const debug = (<any>this.app.bean).debug.get('version');
     for (const module of this.app.meta.modulesArray) {
       debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
       await this.__checkModule(module.info.relativeName, options);
@@ -90,8 +91,8 @@ module.exports = class Version {
     if (options.scene === 'init' || options.scene === 'test') {
       await this.ctx.meta.util.executeBean({
         subdomain: options.subdomain,
-        beanModule: moduleInfo.relativeName,
-        beanFullName: `${moduleInfo.relativeName}.local.version`,
+        beanModule: __ThisModule__,
+        beanFullName: `${__ThisModule__}.local.version`,
         fn: '__after',
       });
     }
@@ -130,7 +131,7 @@ module.exports = class Version {
         } else {
           const res = await this.ctx.db.queryOne(
             'select * from aVersionInit where subdomain=? and module=? order by version desc',
-            [options.subdomain, moduleName]
+            [options.subdomain, moduleName],
           );
           if (res) {
             fileVersionOld = res.version;
@@ -173,7 +174,7 @@ module.exports = class Version {
         versions.push(version);
       }
       // loop
-      const debug = this.app.bean.debug.get('version');
+      const debug = (<any>this.app.bean).debug.get('version');
       for (const version of versions) {
         debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
         await this.__updateModule2(options, module, version);
@@ -353,4 +354,4 @@ module.exports = class Version {
   __getModule(moduleName) {
     return this.app.meta.modules[moduleName];
   }
-};
+}

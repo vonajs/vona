@@ -1,4 +1,6 @@
-module.exports = class Broadcast {
+import { BeanBase } from '@cabloy/core';
+
+export class BroadcastColumnsClear extends BeanBase {
   async execute(context) {
     const sameAsCaller = context.sameAsCaller;
     const { mode, tableName } = context.data;
@@ -11,4 +13,4 @@ module.exports = class Broadcast {
       }
     }
   }
-};
+}

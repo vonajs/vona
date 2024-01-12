@@ -1,11 +1,13 @@
-module.exports = class Startup {
+import { BeanBase } from '@cabloy/core';
+
+export class StartupWorkerAlive extends BeanBase {
   async execute() {
     const aliveTimeout = this.ctx.config.worker.alive.timeout;
     // interval
     setInterval(async () => {
-      await this.app.bean.worker.setAlive();
+      await (<any>this.app.bean).worker.setAlive();
     }, aliveTimeout);
     // alive
-    await this.app.bean.worker.setAlive();
+    await (<any>this.app.bean).worker.setAlive();
   }
-};
+}

@@ -1,7 +1,9 @@
-module.exports = class Startup {
+import { BeanBase } from '@cabloy/core';
+
+export class StartupInstanceInit extends BeanBase {
   async execute(context) {
     const options = context.options;
     const beanVersion = this.ctx.bean.local.version;
     return await beanVersion.instanceInitStartup({ options });
   }
-};
+}
