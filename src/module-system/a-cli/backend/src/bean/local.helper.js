@@ -1,16 +1,15 @@
-const { spawn } = require('child_process');
-const path = require('path');
-
 const Chalk = require('chalk');
 const TableClass = require('cli-table3');
 const Boxen = require('boxen');
 const fse = require('fs-extra');
 const mparse = require('@cabloy/module-parse').default;
+const { ProcessHelper } = require('@cabloy/process-helper');
 
 const moduleInfo = module.info;
 module.exports = class Local {
   constructor(cli) {
     this.cli = cli;
+    this.ProcessHelper = new ProcessHelper(this.cwd, this.console);
   }
 
   get options() {
@@ -105,103 +104,21 @@ module.exports = class Local {
     });
   }
   async formatFile({ fileName, logPrefix }) {
-    try {
-      await this.spawnBin({
-        cmd: 'prettier',
-        args: ['--write', fileName],
-        options: {
-          logPrefix,
-        },
-      });
-    } catch (err) {
-      if (err.code === 2) {
-        // not throw error
-        return;
-      }
-      throw err;
-    }
+    return await this.ProcessHelper.formatFile({ fileName, logPrefix });
   }
   async spawnBin({ cmd, args, options }) {
-    cmd = path.join(this.cwd, 'node_modules/.bin', cmd);
-    return await this.spawnCmd({ cmd, args, options });
+    return await this.ProcessHelper.spawnBin({ cmd, args, options });
   }
   async spawnCmd({ cmd, args, options }) {
-    if (/^win/.test(process.platform)) {
-      cmd = `${cmd}.cmd`;
-    }
-    return await this.spawn({ cmd, args, options });
+    return await this.ProcessHelper.spawnCmd({ cmd, args, options });
   }
   async spawnExe({ cmd, args, options }) {
-    if (/^win/.test(process.platform)) {
-      cmd = `${cmd}.exe`;
-    }
-    return await this.spawn({ cmd, args, options });
+    return await this.ProcessHelper.spawnExe({ cmd, args, options });
   }
   async spawn({ cmd, args = [], options = {} }) {
-    if (!options.cwd) {
-      options.cwd = this.cwd;
-    }
-    return new Promise((resolve, reject) => {
-      const logPrefix = options.logPrefix;
-      const proc = spawn(cmd, args, options);
-      let stdout = '';
-      // let stderr = '';
-      proc.stdout.on('data', async data => {
-        stdout += data.toString();
-        await this.console.log({ text: data.toString() }, { logPrefix });
-      });
-      proc.stderr.on('data', async data => {
-        // stderr += data.toString();
-        await this.console.log({ text: data.toString() }, { logPrefix });
-      });
-      proc.once('exit', code => {
-        if (code !== 0) {
-          const err = new Error(`spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`);
-          err.code = 10000 + code;
-          return reject(err);
-        }
-        resolve(stdout);
-      });
-    });
+    return await this.ProcessHelper.spawn({ cmd, args, options });
   }
   async gitCommit({ cwd, message }) {
-    // git status
-    const stdout = await this.spawnExe({
-      cmd: 'git',
-      args: ['status'],
-      options: {
-        cwd,
-      },
-    });
-    if (stdout.indexOf('nothing to commit, working tree clean') > -1 && stdout.indexOf('is ahead of') === -1) {
-      // do nothing
-      return;
-    }
-    if (stdout.indexOf('is ahead of') === -1) {
-      // git add .
-      await this.spawnExe({
-        cmd: 'git',
-        args: ['add', '.'],
-        options: {
-          cwd,
-        },
-      });
-      // git commit
-      await this.spawnExe({
-        cmd: 'git',
-        args: ['commit', '-m', message],
-        options: {
-          cwd,
-        },
-      });
-    }
-    // git push
-    await this.spawnExe({
-      cmd: 'git',
-      args: ['push'],
-      options: {
-        cwd,
-      },
-    });
+    return await this.ProcessHelper.gitCommit({ cwd, message });
   }
 };
