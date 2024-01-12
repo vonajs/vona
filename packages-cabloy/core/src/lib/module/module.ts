@@ -52,6 +52,7 @@ export default function (app: CabloyApplication) {
           moduleMonkey.monkeyInstance = app.bean._newBean(moduleMonkey.main.monkey);
         }
       }
+      console.log(ebModulesArray[0]);
       // ok
       return ebModules;
     },

@@ -1,0 +1,21 @@
+import { IModuleParseInfo } from '@cabloy/module-parse';
+
+export interface IAppModulePackage {
+  name: string;
+  version: string;
+  eggBornModule: {
+    fileVersion: number;
+    dependencies: Record<string, string>;
+  };
+  description: string;
+  author: string;
+  dependencies: string;
+}
+export interface IAppModule {
+  name: string;
+  info: IModuleParseInfo;
+  root: string;
+  pkg: string;
+  package: IAppModulePackage;
+  main: object; // todo:
+}

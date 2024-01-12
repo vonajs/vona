@@ -10,6 +10,7 @@ import { AppLimiter, AppRedlock } from './redis.js';
 import { QueueClient } from './queue/queueClient.js';
 import { BroadcastClient } from './broadcast/broadcastClient.js';
 import { CabloyContext } from '../../types/index.js';
+import { IAppModule } from '../../types/interface/module.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -33,9 +34,9 @@ export class AppMeta extends BeanBase {
   aops: Record<string, any> = null as any;
   //
   suites: Record<string, any> = null as any;
-  modules: Record<string, any> = null as any;
-  modulesArray: any[] = null as any;
-  modulesMonkey: Record<string, any> = null as any;
+  modules: Record<string, IAppModule> = null as any;
+  modulesArray: IAppModule[] = null as any;
+  modulesMonkey: Record<string, IAppModule> = null as any;
   //
   configs: Record<string, any> = null as any;
   constants: Record<string, any> = null as any;
