@@ -5,6 +5,18 @@
     "fileVersion": 2,
     "dependencies": {}
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "description": "cabloy-module-api-a-version",
   "scripts": {
     "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",

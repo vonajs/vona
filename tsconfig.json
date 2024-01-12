@@ -33,6 +33,9 @@
     },
     {
       "path": "packages-utils/set"
+    },
+    {
+      "path": "src/module-system/a-version"
     }
   ]
 }

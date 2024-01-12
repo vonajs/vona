@@ -29,7 +29,8 @@ async function main() {
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  await _modulePublish({ module, processHelper });
+  // await fse.remove(`${module.root}/dist`);
+  // await _modulePublish({ module, processHelper });
   // await _moduleRemoveFront({ module });
 }
 
