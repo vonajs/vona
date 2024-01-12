@@ -11,6 +11,7 @@ import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import { CabloyContext } from '../../types/index.js';
 import { IAppModule, IAppSuite } from '../../types/interface/module.js';
+import { Resource, resource } from './resource.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -29,6 +30,8 @@ export class AppMeta extends BeanBase {
   redlock: AppRedlock = null as any;
   queue: QueueClient = null as any;
   broadcast: BroadcastClient = null as any;
+  //
+  resource: Resource = null as any;
   //
   beans: Record<string, any> = null as any;
   aops: Record<string, any> = null as any;
@@ -80,6 +83,10 @@ export class AppMeta extends BeanBase {
 
     // reload
     this.reload = this.app.bean._newBean(AppReload);
+
+    // resource
+    this.resource = resource;
+    this.resource.app = this.app;
   }
 
   prepareEnv() {
