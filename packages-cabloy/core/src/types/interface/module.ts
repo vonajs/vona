@@ -25,3 +25,11 @@ export interface IAppModule {
   package: IAppModulePackage;
   main: IAppModuleMain;
 }
+
+export interface IAppSuite {
+  name: string;
+  info: IModuleParseInfo;
+  root: string;
+  pkg: string;
+  package: IAppModulePackage;
+}

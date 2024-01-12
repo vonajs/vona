@@ -13,7 +13,7 @@ export default function (app: CabloyApplication) {
     log: !!app.meta.inAgent,
     type: 'backend',
   });
-  console.log(suites);
+
   // eslint-disable-next-line
   const ebSuites = (app.meta.suites = suites);
   const ebModules = (app.meta.modules = modules);
