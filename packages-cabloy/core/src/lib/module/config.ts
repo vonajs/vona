@@ -59,7 +59,7 @@ export default async function (app: CabloyApplication, modules) {
       if (module.main.config) {
         const config = module.main.config(app);
         // configNew is not used by now
-        app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', {
+        await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', {
           module,
           config,
         });

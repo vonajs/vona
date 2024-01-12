@@ -69,22 +69,25 @@ export class AppUtil extends BeanBase {
     return error;
   }
 
-  monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, monkeyData) {
+  async monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, monkeyData) {
+    // self
     const module = monkeyData && monkeyData.module;
     if (module) {
       if (module.mainInstance && module.mainInstance[monkeyName]) {
-        module.mainInstance[monkeyName](monkeyData);
+        await module.mainInstance[monkeyName](monkeyData);
       }
     }
+    // module monkey
     for (const key in ebModulesMonkey) {
       const moduleMonkey = ebModulesMonkey[key];
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
         const monkeyData2 = Object.assign({ moduleSelf: moduleMonkey }, monkeyData);
-        moduleMonkey.monkeyInstance[monkeyName](monkeyData2);
+        await moduleMonkey.monkeyInstance[monkeyName](monkeyData2);
       }
     }
+    // app monkey
     if (ebAppMonkey && ebAppMonkey[monkeyName]) {
-      ebAppMonkey[monkeyName](monkeyData);
+      await ebAppMonkey[monkeyName](monkeyData);
     }
   }
 

@@ -57,7 +57,7 @@ export default function (app: CabloyApplication) {
     },
     async monkeyModules(monkeyName) {
       for (const module of ebModulesArray) {
-        app.meta.util.monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, { module });
+        await app.meta.util.monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, { module });
       }
     },
   };

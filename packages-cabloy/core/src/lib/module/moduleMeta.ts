@@ -10,7 +10,7 @@ export default async function (app: CabloyApplication, modules) {
       // module meta
       if (module.main.meta) {
         // metaNew is not used by now
-        app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
+        await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
           module,
           meta: module.main.meta,
         });
