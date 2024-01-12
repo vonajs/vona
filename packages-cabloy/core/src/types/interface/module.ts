@@ -11,11 +11,17 @@ export interface IAppModulePackage {
   author: string;
   dependencies: string;
 }
+// todo:
+export interface IAppModuleMain {
+  beans: Record<string, any>;
+  aops: Record<string, any>;
+}
+
 export interface IAppModule {
   name: string;
   info: IModuleParseInfo;
   root: string;
   pkg: string;
   package: IAppModulePackage;
-  main: object; // todo:
+  main: IAppModuleMain;
 }

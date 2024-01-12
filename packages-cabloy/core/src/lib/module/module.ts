@@ -13,6 +13,7 @@ export default function (app: CabloyApplication) {
     log: !!app.meta.inAgent,
     type: 'backend',
   });
+  console.log(suites);
   // eslint-disable-next-line
   const ebSuites = (app.meta.suites = suites);
   const ebModules = (app.meta.modules = modules);
@@ -52,7 +53,6 @@ export default function (app: CabloyApplication) {
           moduleMonkey.monkeyInstance = app.bean._newBean(moduleMonkey.main.monkey);
         }
       }
-      console.log(ebModulesArray[0]);
       // ok
       return ebModules;
     },
