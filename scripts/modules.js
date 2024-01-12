@@ -24,12 +24,24 @@ async function main() {
 
   // loop
   for (const module of modulesArray) {
-    await _moduleHandle({ module });
+    await _moduleHandle({ module, processHelper });
   }
 }
 
-async function _moduleHandle({ module }) {
+async function _moduleHandle({ module, processHelper }) {
+  await _modulePublish({ module, processHelper });
   // await _moduleRemoveFront({ module });
+}
+
+async function _modulePublish({ module, processHelper }) {
+  console.log(module.info.fullName);
+  const cabloyConfig = require('../cabloy.json');
+  const entities = cabloyConfig.store.commands.publish.entities;
+  const entity = entities[module.info.relativeName];
+  if (entity && entity.scripts.includes('npmPublish')) {
+    console.log(cabloyConfig);
+    await processHelper.npmPublish({ cwd: module.root });
+  }
 }
 
 async function _moduleRemoveFront({ module }) {
