@@ -1,7 +1,7 @@
 {
-  "name": "@cabloy/spawn",
+  "name": "@cabloy/process-helper",
   "version": "1.0.0",
-  "description": "cabloy spawn",
+  "description": "cabloy process-helper",
   "publishConfig": {
     "access": "public"
   },

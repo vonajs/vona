@@ -50,7 +50,7 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
-    "@cabloy/spawn": "^1.0.0",
+    "@cabloy/process-helper": "^1.0.0",
     "@typescript-eslint/parser": "^6.16.0",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@zhennann/extend": "^3.0.2",
