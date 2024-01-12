@@ -1,6 +1,7 @@
-const fse = require('fs-extra');
+import { BeanBase } from '@cabloy/core';
+import fse from 'fs-extra';
 
-module.exports = class Version {
+export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // do nothing
@@ -35,4 +36,4 @@ module.exports = class Version {
     // remove
     await fse.remove(publicPath);
   }
-};
+}

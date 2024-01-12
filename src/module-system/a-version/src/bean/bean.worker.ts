@@ -1,9 +1,9 @@
-const moduleInfo = module.info;
-module.exports = class Worker {
-  constructor() {
-    this._redisCache = null;
-    // this._redisIO = null;
-  }
+import { BeanBase, IORedis } from '@cabloy/core';
+import { __ThisModule__ } from '../types/this.js';
+
+export class BeanWorker extends BeanBase {
+  _redisCache: IORedis.Redis = null as any;
+  // _redisIO = null;
 
   get id() {
     return this.app.meta.workerId;
@@ -20,7 +20,7 @@ module.exports = class Worker {
   // }
 
   async setAlive() {
-    const config = this.app.meta.configs[moduleInfo.relativeName];
+    const config = this.app.meta.configs[__ThisModule__];
     const aliveTimeout = config.worker.alive.timeout;
     const key = `workerAlive:${this.id}`;
     await this.redisCache.set(key, JSON.stringify(true), 'PX', aliveTimeout * 2);
@@ -32,4 +32,4 @@ module.exports = class Worker {
     const value = await this.redisCache.get(key);
     return value ? JSON.parse(value) : undefined;
   }
-};
+}
