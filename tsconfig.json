@@ -29,6 +29,9 @@
       "path": "packages-utils/module-parse"
     },
     {
+      "path": "packages-utils/process-helper"
+    },
+    {
       "path": "packages-utils/set"
     }
   ]
