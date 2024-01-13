@@ -181,12 +181,12 @@ function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
       }
       // resource
       const root = path.dirname(filePkg);
-      const module: IModule = {
+      const module = {
         name,
         info,
         root,
         pkg: filePkg,
-      };
+      } as IModule;
       if (loadPackage !== false) {
         module.package = require(filePkg);
       }
