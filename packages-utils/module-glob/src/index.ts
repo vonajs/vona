@@ -6,7 +6,7 @@ import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import * as mparse from '@cabloy/module-parse';
 import { __pathSuites, __pathsModules } from './meta.js';
-import { IModuleGlobOptions } from './interface.js';
+import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -20,7 +20,7 @@ const boxenOptions: boxen.Options = {
 export function glob(options: IModuleGlobOptions) {
   const { projectPath, disabledModules, disabledSuites, log, type } = options;
   // context
-  const context = {
+  const context: IModuleGlobContext = {
     options,
     suites: {},
     modules: {},
