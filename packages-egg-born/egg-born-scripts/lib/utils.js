@@ -58,7 +58,7 @@ const utils = {
       setTimeout(() => {
         // log
         let message = `[${chalk.keyword('cyan')(moduleName)}] new version available: ${chalk.keyword('yellow')(
-          moduleVersion
+          moduleVersion,
         )} → ${chalk.keyword('orange')(moduleVersionCurrent)}`;
         if (mode === 'lerna') {
           message += `\nRun ${chalk.keyword('orange')('> git pull <')} to update cabloy!`;
@@ -75,7 +75,7 @@ const utils = {
   },
   getModulePath(moduleName) {
     const moduleFile = require.resolve(`${moduleName}/package.json`);
-    return path.dirname(moduleFile);
+    return `${path.dirname(moduleFile)}/dist/index.js`;
   },
   __getCabloyPath() {
     const cwd = process.cwd();
