@@ -7,6 +7,7 @@ import eggBornUtils from 'egg-born-utils';
 import * as ModuleInfo from '@cabloy/module-info';
 import { __pathSuites, __pathsModules } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
+export * from './interface.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -166,7 +167,7 @@ function __parseModules(projectPath, type) {
         // throw new Error(`Should use relative name for local module: ${name}`);
       }
       // info
-      const info = mparse.parseInfo(name, 'module');
+      const info = ModuleInfo.parseInfo(name, 'module');
       if (!info) {
         throw new Error(`module name is not valid: ${name}`);
       }
@@ -335,7 +336,7 @@ function __parseSuites(projectPath) {
         // throw new Error(`Should use relative name for local suite: ${name}`);
       }
       // info
-      const info = mparse.parseInfo(name, 'suite');
+      const info = ModuleInfo.parseInfo(name, 'suite');
       if (!info) {
         throw new Error(`suite name is not valid: ${name}`);
       }

@@ -1,3 +1,5 @@
+import { IModule, ISuite } from '@cabloy/module-info';
+
 export interface IModuleGlobOptions {
   projectPath: string;
   disabledModules?: string[];

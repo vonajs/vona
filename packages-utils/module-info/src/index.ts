@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { IModuleInfo } from './interface.js';
+export * from './interface.js';
 
 export function lookupPackage(dir) {
   let _dir = dir;
