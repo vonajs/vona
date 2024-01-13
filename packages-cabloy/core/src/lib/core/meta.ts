@@ -9,9 +9,8 @@ import { AppRouter } from '../module/route.js';
 import { AppLimiter, AppRedlock } from '../module/redis.js';
 import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
-import { CabloyContext } from '../../types/index.js';
-import { IAppModule, IAppSuite } from '../../types/interface/module.js';
-import { Resource, resource } from './resource.js';
+import { CabloyContext, IModule, ISuite } from '../../types/index.js';
+import { AppResource, resource } from './resource.js';
 
 export class AppMeta extends BeanBase {
   workerId: string = null as any;
@@ -31,15 +30,15 @@ export class AppMeta extends BeanBase {
   queue: QueueClient = null as any;
   broadcast: BroadcastClient = null as any;
   //
-  resource: Resource = null as any;
+  resource: AppResource = null as any;
   //
   beans: Record<string, any> = null as any;
   aops: Record<string, any> = null as any;
   //
-  suites: Record<string, IAppSuite> = null as any;
-  modules: Record<string, IAppModule> = null as any;
-  modulesArray: IAppModule[] = null as any;
-  modulesMonkey: Record<string, IAppModule> = null as any;
+  suites: Record<string, ISuite> = null as any;
+  modules: Record<string, IModule> = null as any;
+  modulesArray: IModule[] = null as any;
+  modulesMonkey: Record<string, IModule> = null as any;
   //
   configs: Record<string, any> = null as any;
   constants: Record<string, any> = null as any;

@@ -1,11 +1,19 @@
+import { IModuleMain, IMonkeyModule } from './monkey.js';
+
+export * from '@cabloy/module-info';
+
 // todo:
-export interface IAppModuleMain {
+export interface IModuleResource {
+  Main: new () => IModuleMain;
+  Monkey: new () => IMonkeyModule;
   beans: Record<string, any>;
   aops: Record<string, any>;
 }
 
-declare module '@cabloy/module-glob' {
+declare module '@cabloy/module-info' {
   export interface IModule {
-    main: IAppModuleMain;
+    resource: IModuleResource;
+    main: IModuleMain;
+    monkey: IMonkeyModule;
   }
 }

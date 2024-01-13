@@ -5,6 +5,13 @@ export interface IMonkeyApp {
   metaLoaded({ module, meta }): Promise<void>;
 }
 
+export interface IModuleMain {
+  moduleLoading({ module }): Promise<void>;
+  moduleLoaded({ module }): Promise<void>;
+  configLoaded({ module, config }): Promise<void>;
+  metaLoaded({ module, meta }): Promise<void>;
+}
+
 export interface IMonkeyModule {
   moduleLoading({ moduleSelf, module }): Promise<void>;
   moduleLoaded({ moduleSelf, module }): Promise<void>;
