@@ -1,4 +1,4 @@
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 import moment from 'moment';
 import * as uuid from 'uuid';
 import cookies from 'js-cookie';
@@ -430,7 +430,7 @@ export default function (Vue) {
             function () {
               callback();
             },
-            false
+            false,
           );
         } else if (script.attachEvent) {
           script.attachEvent('onreadystatechange', function () {
@@ -466,7 +466,7 @@ export default function (Vue) {
             function () {
               callback();
             },
-            false
+            false,
           );
         } else if (link.attachEvent) {
           link.attachEvent('onreadystatechange', function () {

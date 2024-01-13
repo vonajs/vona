@@ -1,4 +1,4 @@
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 import nprogressFn from './nprogress.js';
 
 const __ComponentInstallFactoryProps = ['render', 'staticRenderFns', '__ebModuleRelativeName', '__file', '_compiled'];
@@ -312,7 +312,7 @@ export default function (Vue) {
         Vue.prototype.$meta._configOriginal.modules[module.info.relativeName] = Vue.prototype.$utils.extend(
           {},
           module.options.config,
-          Vue.prototype.$meta._configOriginal.modules[module.info.relativeName]
+          Vue.prototype.$meta._configOriginal.modules[module.info.relativeName],
         );
       }
     },
@@ -321,7 +321,7 @@ export default function (Vue) {
         Vue.prototype.$meta.locales[key] = Vue.prototype.$utils.extend(
           {},
           module.options.locales[key],
-          Vue.prototype.$meta.locales[key]
+          Vue.prototype.$meta.locales[key],
         );
       });
     },

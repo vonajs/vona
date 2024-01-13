@@ -1,4 +1,4 @@
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 import fse from 'fs-extra';
 import path from 'path';
 import { URL } from 'url';

@@ -4,7 +4,7 @@ import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 
 const boxenOptions: boxen.Options = {
   padding: 1,

@@ -1,6 +1,6 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
 import { ContextBase } from '../../types/context/contextBase.js';

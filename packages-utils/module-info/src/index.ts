@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 
 export function lookupPackage(dir) {
   let _dir = dir;

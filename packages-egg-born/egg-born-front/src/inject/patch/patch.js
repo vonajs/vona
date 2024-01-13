@@ -1,4 +1,4 @@
-import mparse from '@cabloy/module-parse';
+import * as mparse from '@cabloy/module-parse';
 
 export default function (ctx, router) {
   // load route
@@ -37,7 +37,7 @@ export default function (ctx, router) {
         () => {
           // do nothing
           //   maybe need login
-        }
+        },
       );
     });
   }
@@ -109,7 +109,7 @@ export default function (ctx, router) {
       },
       () => {
         cb && cb();
-      }
+      },
     );
     return router;
   };
