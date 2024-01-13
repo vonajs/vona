@@ -4,9 +4,9 @@ import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
-import * as ModuleInfo from '@cabloy/module-info';
 import { __pathSuites, __pathsModules } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
+import { IModuleResource, parseInfo } from '@cabloy/module-info';
 export * from './interface.js';
 
 const boxenOptions: boxen.Options = {
@@ -19,7 +19,7 @@ const boxenOptions: boxen.Options = {
 
 // type: front/backend/all
 export async function glob(options: IModuleGlobOptions) {
-  const { projectPath, disabledModules, disabledSuites, log, type } = options;
+  const { projectPath, disabledModules, disabledSuites, log, type, loadPackage } = options;
   // context
   const context: IModuleGlobContext = {
     options,
@@ -45,7 +45,7 @@ export async function glob(options: IModuleGlobOptions) {
   // parse suites
   const suites = __parseSuites(projectPath);
   // parse modules
-  const modules = __parseModules(projectPath, type, cabloyConfig);
+  const modules = __parseModules(projectPath, type, loadPackage, cabloyConfig);
   // bind suites modules
   __bindSuitesModules(suites, modules);
 
@@ -147,7 +147,8 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
   return enabled;
 }
 
-function __parseModules(projectPath, type, cabloyConfig) {
+function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
+  const entities = cabloyConfig.source?.entities;
   const modules = {};
   for (const __path of __pathsModules) {
     const prefix = `${projectPath}/${__path.prefix}`;
@@ -161,65 +162,61 @@ function __parseModules(projectPath, type, cabloyConfig) {
         continue;
       }
       // info
-      const info = ModuleInfo.parseInfo(name, 'module');
+      const info = parseInfo(name, 'module');
       if (!info) {
         throw new Error(`module name is not valid: ${name}`);
       }
       // todo:
       if (info.relativeName !== 'a-version') continue;
+      // check if exists
+      if (modules[info.relativeName]) continue;
+      // info
       info.vendor = __path.vendor;
       info.source = __path.source;
       info.node_modules = __path.node_modules;
-      // check if exists
-      if (!modules[info.relativeName]) {
-        // meta
-        const _package = require(filePkg);
-        const root = path.dirname(filePkg);
-        const moduleMeta = {
-          name,
-          info,
-          root,
-          pkg: filePkg,
-          package: _package,
-          js: {},
-          static: {},
-        };
-        const _moduleMeta = __parseModule(__path, moduleMeta, type, cabloyConfig);
-        if (_moduleMeta) {
-          // record
-          modules[info.relativeName] = _moduleMeta;
-        }
+      // source
+      const entity = entities?.[info.relativeName];
+      if (entity === true || entity === false) {
+        info.source = entity;
       }
+      // resource
+      const root = path.dirname(filePkg);
+      const moduleResource: IModuleResource = {
+        name,
+        info,
+        root,
+        pkg: filePkg,
+      };
+      if (loadPackage !== false) {
+        moduleResource.package = require(filePkg);
+      }
+      // record
+      modules[info.relativeName] = moduleResource;
     }
   }
   return modules;
 }
 
-function __parseModule(__path, moduleMeta, type, cabloyConfig) {
-  const root = moduleMeta.root;
+function __parseModule(__path, moduleResource, type, cabloyConfig) {
+  const root = moduleResource.root;
   // front
   if (type !== 'backend') {
     for (const item of __path.fronts) {
       const file = path.join(root, item.js);
       if (fse.existsSync(file)) {
-        moduleMeta.js.front = file;
+        moduleResource.js.front = file;
         break;
       }
     }
-    if (!moduleMeta.js.front) {
+    if (!moduleResource.js.front) {
       return null;
     }
   }
   // backend
   if (type !== 'front') {
-    const entities = cabloyConfig.source?.entities;
-    const entity = entities?.[moduleMeta.info.relativeName];
-    if (entity === true || entity === false) {
-      moduleMeta.info.source = entity;
-    }
   }
   // ok
-  return moduleMeta;
+  return moduleResource;
 }
 
 function __logModules(context, log) {
@@ -318,7 +315,7 @@ function __parseSuites(projectPath) {
         // throw new Error(`Should use relative name for local suite: ${name}`);
       }
       // info
-      const info = ModuleInfo.parseInfo(name, 'suite');
+      const info = parseInfo(name, 'suite');
       if (!info) {
         throw new Error(`suite name is not valid: ${name}`);
       }
