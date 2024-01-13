@@ -8,6 +8,24 @@ export interface IModuleGlobOptions {
   type: 'front' | 'backend';
 }
 
+export interface IModuleGlobContext {
+  options: IModuleGlobOptions;
+  suites: Record<string, IAppSuite>;
+  modules: Record<string, IAppModule>;
+  modulesArray;
+  modulesLast;
+  //
+  modulesLocal;
+  modulesGlobal;
+  modulesMonkey;
+  //
+  suitesLocal;
+  suitesVendor;
+  //
+  disabledModules;
+  disabledSuites;
+}
+
 export interface IAppSuite {
   name: string;
   info: IModuleParseInfo;
