@@ -1,4 +1,4 @@
-import { IModuleResource, ISuiteResource } from '@cabloy/module-info';
+import { IModule, ISuite } from '@cabloy/module-info';
 
 export interface IModuleGlobOptions {
   projectPath: string;
@@ -11,17 +11,17 @@ export interface IModuleGlobOptions {
 
 export interface IModuleGlobContext {
   options: IModuleGlobOptions;
-  suites: Record<string, ISuiteResource>;
-  modules: Record<string, IModuleResource>;
-  modulesArray: IModuleResource[];
-  modulesLast: IModuleResource[];
+  suites: Record<string, ISuite>;
+  modules: Record<string, IModule>;
+  modulesArray: IModule[];
+  modulesLast: IModule[];
   //
-  modulesLocal: Record<string, IModuleResource>;
-  modulesGlobal: Record<string, IModuleResource>;
-  modulesMonkey: Record<string, IModuleResource>;
+  modulesLocal: Record<string, IModule>;
+  modulesGlobal: Record<string, IModule>;
+  modulesMonkey: Record<string, IModule>;
   //
-  suitesLocal: Record<string, ISuiteResource>;
-  suitesVendor: Record<string, ISuiteResource>;
+  suitesLocal: Record<string, ISuite>;
+  suitesVendor: Record<string, ISuite>;
   //
   disabledModules: Record<string, boolean>;
   disabledSuites: Record<string, boolean>;

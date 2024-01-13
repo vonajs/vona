@@ -11,7 +11,7 @@ export interface IModuleInfo {
   node_modules?: boolean;
 }
 
-export interface ISuiteResource {
+export interface ISuite {
   name: string;
   info: IModuleInfo;
   root: string;
@@ -19,7 +19,7 @@ export interface ISuiteResource {
   package?: IModulePackage;
 }
 
-export interface IModuleResource {
+export interface IModule {
   name: string;
   info: IModuleInfo;
   root: string;

@@ -5,7 +5,7 @@ export interface IAppModuleMain {
 }
 
 declare module '@cabloy/module-glob' {
-  export interface IAppModule {
+  export interface IModule {
     main: IAppModuleMain;
   }
 }

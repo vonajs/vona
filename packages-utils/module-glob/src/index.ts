@@ -6,7 +6,7 @@ import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import { __pathSuites, __pathsModules } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
-import { IModuleResource, parseInfo } from '@cabloy/module-info';
+import { IModule, parseInfo } from '@cabloy/module-info';
 export * from './interface.js';
 
 const boxenOptions: boxen.Options = {
@@ -181,17 +181,17 @@ function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
       }
       // resource
       const root = path.dirname(filePkg);
-      const moduleResource: IModuleResource = {
+      const module: IModule = {
         name,
         info,
         root,
         pkg: filePkg,
       };
       if (loadPackage !== false) {
-        moduleResource.package = require(filePkg);
+        module.package = require(filePkg);
       }
       // record
-      modules[info.relativeName] = moduleResource;
+      modules[info.relativeName] = module;
     }
   }
   return modules;
