@@ -2,18 +2,8 @@
   "name": "egg-born-backend",
   "version": "9.0.0",
   "description": "egg-born-backend",
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "default": "./src/index.ts"
-    },
-    "./package.json": "./package.json"
-  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts"

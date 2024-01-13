@@ -75,7 +75,7 @@ const utils = {
   },
   getModulePath(moduleName) {
     const moduleFile = require.resolve(`${moduleName}/package.json`);
-    return `${path.dirname(moduleFile)}/dist/index.js`;
+    return path.dirname(moduleFile);
   },
   __getCabloyPath() {
     const cwd = process.cwd();
