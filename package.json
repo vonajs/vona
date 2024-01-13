@@ -51,7 +51,6 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
     "@cabloy/module-glob": "workspace:^",
-    "@cabloy/module-parse": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
     "@typescript-eslint/parser": "^6.16.0",
     "@typescript-eslint/eslint-plugin": "^6.16.0",

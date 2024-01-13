@@ -1,4 +1,4 @@
-import * as mparse from '@cabloy/module-parse';
+import * as ModuleInfo from '@cabloy/module-info';
 import nprogressFn from './nprogress.js';
 
 const __ComponentInstallFactoryProps = ['render', 'staticRenderFns', '__ebModuleRelativeName', '__file', '_compiled'];

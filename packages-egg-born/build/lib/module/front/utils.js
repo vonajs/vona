@@ -1,6 +1,6 @@
 const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const mparse = require('@cabloy/module-parse').default;
+//const ModuleInfo = require('@cabloy/module-info').default;
 
 module.exports = context => {
   return {

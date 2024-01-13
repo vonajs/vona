@@ -22,7 +22,5 @@
   ],
   "author": "zhennann",
   "license": "MIT",
-  "dependencies": {
-    "@cabloy/module-parse": "^1.0.0"
-  }
+  "dependencies": {}
 }

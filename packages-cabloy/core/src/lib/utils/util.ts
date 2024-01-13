@@ -1,4 +1,4 @@
-import * as mparse from '@cabloy/module-parse';
+import * as ModuleInfo from '@cabloy/module-info';
 import fse from 'fs-extra';
 import path from 'path';
 import { URL } from 'url';
@@ -18,14 +18,14 @@ export class AppUtil extends BeanBase {
   combineFetchPath(moduleName, arg) {
     if (arg.substr(0, 2) === '//') return arg.substr(1);
     if (arg.charAt(0) === '/') return `/api${arg}`;
-    const moduleInfo = typeof moduleName === 'string' ? mparse.parseInfo(moduleName) : moduleName;
+    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error('invalid url');
     return `/api/${moduleInfo.url}/${arg}`;
   }
 
   combineApiPath(moduleName, arg) {
     if (arg.charAt(0) === '/') return arg;
-    const moduleInfo = typeof moduleName === 'string' ? mparse.parseInfo(moduleName) : moduleName;
+    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error('invalid url');
     return `/${moduleInfo.url}/${arg}`;
   }

@@ -22,7 +22,7 @@
   "author": "zhennann",
   "dependencies": {
     "@cabloy/process-helper": "workspace:^",
-    "@cabloy/module-parse": "workspace:^",
+    "@cabloy/module-info": "workspace:^",
     "@zhennann/ejs": "^3.0.1",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",

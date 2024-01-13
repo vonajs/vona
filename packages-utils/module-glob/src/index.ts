@@ -4,7 +4,7 @@ import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
-import * as mparse from '@cabloy/module-parse';
+import * as ModuleInfo from '@cabloy/module-info';
 import { __pathSuites, __pathsModules } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
 

@@ -30,7 +30,6 @@
     "@cabloy/localeutil": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
-    "@cabloy/module-parse": "workspace:^",
     "@cabloy/set": "workspace:^",
     "@zhennann/egg-mysql": "^4.0.3",
     "@zhennann/egg-passport": "^2.1.5",

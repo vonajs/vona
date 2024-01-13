@@ -25,7 +25,7 @@
   "homepage": "https://github.com/zhennann/egg-born-front#readme",
   "dependencies": {
     "@cabloy/localeutil": "^1.0.0",
-    "@cabloy/module-parse": "^1.0.0",
+    "@cabloy/module-info": "^1.0.0",
     "@zhennann/currency": "^1.0.3",
     "@zhennann/debounce": "^1.0.1",
     "@zhennann/extend": "^3.0.2",

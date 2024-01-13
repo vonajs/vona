@@ -25,7 +25,7 @@
   },
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/module-parse": "workspace:^",
+    "@cabloy/module-info": "workspace:^",
     "@koa/cors": "^5.0.0",
     "@zhennann/currency": "^1.0.3",
     "@zhennann/extend": "^3.0.2",

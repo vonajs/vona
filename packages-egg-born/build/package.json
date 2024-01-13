@@ -20,7 +20,6 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
     "@cabloy/module-glob": "^5.0.0",
-    "@cabloy/module-parse": "^1.0.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
     "@vue/babel-preset-jsx": "^1.4.0",
     "@zhennann/babel-generator": "^7.17.3",

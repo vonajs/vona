@@ -1,4 +1,4 @@
-import * as mparse from '@cabloy/module-parse';
+import * as ModuleInfo from '@cabloy/module-info';
 import moment from 'moment';
 import * as uuid from 'uuid';
 import cookies from 'js-cookie';

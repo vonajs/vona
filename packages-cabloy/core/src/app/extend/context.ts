@@ -1,6 +1,6 @@
 import raw from 'raw-body';
 import inflate from 'inflation';
-import * as mparse from '@cabloy/module-parse';
+import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
 import { ContextBase } from '../../types/context/contextBase.js';
@@ -23,10 +23,10 @@ const context: ContextBase = {
       if (url.indexOf('/api/static/public/') === 0) {
         info = null;
       } else {
-        info = mparse.parseInfo(mparse.parseName(url));
+        info = ModuleInfo.parseInfo(ModuleInfo.parseName(url));
       }
       if (!info) {
-        info = mparse.parseInfo('a-base');
+        info = ModuleInfo.parseInfo('a-base');
       }
       if (info) {
         const module = (<any>this).app.meta.modules[info.relativeName];

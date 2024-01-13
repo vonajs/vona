@@ -1,4 +1,4 @@
-import * as mparse from '@cabloy/module-parse';
+import * as ModuleInfo from '@cabloy/module-info';
 
 export default function (ctx, router) {
   // load route
