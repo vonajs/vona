@@ -50,7 +50,7 @@ function tryStringify(arg) {
   }
 }
 
-function format(f) {
+export function format(f) {
   if (arguments.length === 1) return f;
 
   let str = '';
@@ -137,7 +137,7 @@ function format(f) {
  *
  */
 
-function getText(...args) {
+export function getText(...args) {
   if (args.length === 0) return '';
 
   const [text, value] = args;
@@ -194,8 +194,3 @@ function formatWithObject(text, values) {
     return orignal;
   });
 }
-
-export default {
-  format,
-  getText,
-};
