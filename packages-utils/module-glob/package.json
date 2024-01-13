@@ -24,6 +24,6 @@
   "license": "MIT",
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
-    "egg-born-utils": "^1.1.7"
+    "egg-born-utils": "^1.1.9"
   }
 }

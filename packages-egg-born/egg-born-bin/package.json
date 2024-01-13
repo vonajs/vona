@@ -40,7 +40,7 @@
     "compressing": "^1.5.1",
     "egg-born-backend": "^9.0.0",
     "egg-born-front": "^9.0.0",
-    "egg-born-utils": "^1.1.7",
+    "egg-born-utils": "^1.1.9",
     "egg-mock": "^5.10.9",
     "enquirer": "^2.3.6",
     "nock": "^11.7.2",

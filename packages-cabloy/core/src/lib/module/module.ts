@@ -31,14 +31,14 @@ export class ModuleTools extends BeanBase {
   async load() {
     const app = this.app;
     // 1. import
-    const promises: Promise<{ default: IModuleResource }>[] = [];
+    const promises: Promise<IModuleResource>[] = [];
     for (const module of app.meta.modulesArray) {
-      promises.push(import(module.root));
+      promises.push(import(`${module.root}/dist/index.js`));
     }
     const modulesResource = await Promise.all(promises);
     for (let i = 0; i < modulesResource.length; i++) {
       const module = app.meta.modulesArray[i];
-      module.resource = modulesResource[i].default;
+      module.resource = modulesResource[i];
     }
     // 2. main
     for (const module of app.meta.modulesArray) {
