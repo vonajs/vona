@@ -1,4 +1,4 @@
-import ModuleInfo from '@cabloy/module-info';
+import * as ModuleInfo from '@cabloy/module-info';
 import { BeanBase } from '../module/bean/beanBase';
 
 export class AppMockUtil extends BeanBase {

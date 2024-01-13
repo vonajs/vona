@@ -1,5 +1,5 @@
 import Module from 'module';
-import ModuleInfo from '@cabloy/module-info';
+import * as ModuleInfo from '@cabloy/module-info';
 import MetaFn from './meta.js';
 import { CabloyApplication } from '../../types/index.js';
 
