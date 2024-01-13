@@ -370,5 +370,10 @@
         ]
       }
     }
+  },
+  "source": {
+    "entities": {
+      "a-base": true
+    }
   }
 }

@@ -18,7 +18,7 @@ const boxenOptions: boxen.Options = {
 };
 
 // type: front/backend/all
-export function glob(options: IModuleGlobOptions) {
+export async function glob(options: IModuleGlobOptions) {
   const { projectPath, disabledModules, disabledSuites, log, type } = options;
   // context
   const context: IModuleGlobContext = {
@@ -39,10 +39,13 @@ export function glob(options: IModuleGlobOptions) {
     disabledSuites: __getDisabledSuites(disabledSuites),
   };
 
+  // cabloy config
+  const cabloyConfig = __loadCabloyConfig();
+
   // parse suites
   const suites = __parseSuites(projectPath);
   // parse modules
-  const modules = __parseModules(projectPath, type);
+  const modules = __parseModules(projectPath, type, cabloyConfig);
   // bind suites modules
   __bindSuitesModules(suites, modules);
 
@@ -144,7 +147,7 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
   return enabled;
 }
 
-function __parseModules(projectPath, type) {
+function __parseModules(projectPath, type, cabloyConfig) {
   const modules = {};
   for (const __path of __pathsModules) {
     const prefix = `${projectPath}/${__path.prefix}`;
@@ -157,15 +160,6 @@ function __parseModules(projectPath, type) {
         // skip
         continue;
       }
-      // check if full name
-      if (!__path.public && name.indexOf('cabloy-module-api-') > -1) {
-        const pathSrc = path.join(prefix, name);
-        name = name.substring('cabloy-module-api-'.length);
-        filePkg = path.join(prefix, name, 'package.json');
-        const pathDest = path.join(prefix, name);
-        fse.moveSync(pathSrc, pathDest);
-        // throw new Error(`Should use relative name for local module: ${name}`);
-      }
       // info
       const info = ModuleInfo.parseInfo(name, 'module');
       if (!info) {
@@ -174,7 +168,7 @@ function __parseModules(projectPath, type) {
       // todo:
       if (info.relativeName !== 'a-version') continue;
       info.vendor = __path.vendor;
-      info.public = __path.public;
+      info.source = __path.source;
       info.node_modules = __path.node_modules;
       // check if exists
       if (!modules[info.relativeName]) {
@@ -190,13 +184,8 @@ function __parseModules(projectPath, type) {
           js: {},
           static: {},
         };
-        const _moduleMeta = __parseModule(__path, moduleMeta, type);
+        const _moduleMeta = __parseModule(__path, moduleMeta, type, cabloyConfig);
         if (_moduleMeta) {
-          // enhance check public
-          // if (_moduleMeta.info.public) {
-          const file = _moduleMeta.js.front || _moduleMeta.js.backend;
-          _moduleMeta.info.public = file.replace(/\\/g, '/').indexOf('/dist/') > -1;
-          // }
           // record
           modules[info.relativeName] = _moduleMeta;
         }
@@ -206,7 +195,7 @@ function __parseModules(projectPath, type) {
   return modules;
 }
 
-function __parseModule(__path, moduleMeta, type) {
+function __parseModule(__path, moduleMeta, type, cabloyConfig) {
   const root = moduleMeta.root;
   // front
   if (type !== 'backend') {
@@ -223,17 +212,10 @@ function __parseModule(__path, moduleMeta, type) {
   }
   // backend
   if (type !== 'front') {
-    for (const item of __path.backends) {
-      const file = path.join(root, item.js);
-      if (fse.existsSync(file)) {
-        moduleMeta.js.backend = file;
-        const staticBackendPath = path.normalize(path.join(root, item.static));
-        moduleMeta.static.backend = staticBackendPath;
-        break;
-      }
-    }
-    if (!moduleMeta.js.backend) {
-      return null;
+    const entities = cabloyConfig.source?.entities;
+    const entity = entities?.[moduleMeta.info.relativeName];
+    if (entity === true || entity === false) {
+      moduleMeta.info.source = entity;
     }
   }
   // ok
@@ -399,4 +381,10 @@ function __checkSuites(context, suites) {
       }
     }
   }
+}
+
+async function __loadCabloyConfig() {
+  const __cabloyConfig = eggBornUtils.cabloyConfig;
+  await __cabloyConfig.load();
+  return __cabloyConfig.get();
 }
