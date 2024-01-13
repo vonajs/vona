@@ -18,6 +18,6 @@
   },
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/module-parse": "^1.0.0"
+    "@cabloy/module-parse": "workspace:^"
   }
 }

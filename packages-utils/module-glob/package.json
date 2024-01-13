@@ -23,7 +23,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/module-parse": "^1.0.0",
+    "@cabloy/module-parse": "workspace:^",
     "egg-born-utils": "^1.1.7"
   }
 }

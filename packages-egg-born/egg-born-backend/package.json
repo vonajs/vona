@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
-    "@cabloy/core": "5.0.0",
+    "@cabloy/core": "workspace:^",
     "egg": "^3.17.5",
     "jsonwebtoken": "^8.5.1",
     "koa-jwt2": "^1.0.3"
