@@ -14,10 +14,6 @@ const boxenOptions: boxen.Options = {
   borderStyle: boxen.BorderStyle.Round,
 };
 
-export default {
-  glob: eggBornMglob,
-};
-
 const __pathSuites = [
   {
     prefix: 'src/suite/',
@@ -94,7 +90,7 @@ const __pathsModules = [
 ];
 
 // type: front/backend/all
-function eggBornMglob(options) {
+export function glob(options) {
   const { projectPath, disabledModules, disabledSuites, log, type } = options;
   // context
   const context = {

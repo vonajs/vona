@@ -1,7 +1,7 @@
 const path = require('path');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fse = require('fs-extra');
-const mglob = require('@cabloy/module-glob');
+const { glob } = require('@cabloy/module-glob').default;
 
 module.exports = context => {
   return {
@@ -80,7 +80,7 @@ module.exports = context => {
       // const staticPath = path.join(context.config.build.assetsRoot, context.config.build.assetsSubDirectory);
 
       // modules
-      const { modules, modulesGlobal } = mglob.glob({
+      const { modules, modulesGlobal } = glob({
         projectPath: context.config.projectPath,
         disabledModules: context.config.configProject.base.disabledModules,
         disabledSuites: context.config.configProject.base.disabledSuites,

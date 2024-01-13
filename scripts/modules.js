@@ -1,6 +1,6 @@
 const fse = require('fs-extra');
 const { ProcessHelper } = require('@cabloy/process-helper');
-const mglob = require('@cabloy/module-glob').default;
+const { glob } = require('@cabloy/module-glob').default;
 const eggBornUtils = require('egg-born-utils');
 const argv = require('./lib/parse_argv')('sync');
 
@@ -14,7 +14,7 @@ async function main() {
   const processHelper = new ProcessHelper(process.cwd());
 
   // modules
-  const { modulesArray } = mglob.glob({
+  const { modulesArray } = glob({
     projectPath: process.cwd(),
     disabledModules: null,
     disabledSuites: null,

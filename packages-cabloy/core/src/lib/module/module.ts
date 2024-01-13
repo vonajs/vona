@@ -1,13 +1,13 @@
 import fse from 'fs-extra';
 import path from 'path';
 import is from 'is-type-of';
-import mglob from '@cabloy/module-glob';
+import { glob } from '@cabloy/module-glob';
 import { CabloyApplication } from '../../types/index.js';
 import { IAppModule, IAppModuleMain } from '../../types/interface/module.js';
 
 export default function (app: CabloyApplication) {
   // all modules
-  const { suites, modules, modulesArray, modulesMonkey } = mglob.glob({
+  const { suites, modules, modulesArray, modulesMonkey } = glob({
     projectPath: path.join(app.options.baseDir, '../..'),
     disabledModules: app.config.disabledModules,
     disabledSuites: app.config.disabledSuites,
