@@ -24,7 +24,7 @@ export interface IModule {
   info: IModuleInfo;
   root: string;
   pkg: string;
-  package?: IModulePackage;
+  package: IModulePackage;
 }
 
 export interface IModulePackage {
