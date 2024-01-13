@@ -40,7 +40,7 @@ export async function glob(options: IModuleGlobOptions) {
   };
 
   // cabloy config
-  const cabloyConfig = __loadCabloyConfig();
+  const cabloyConfig = await __loadCabloyConfig();
 
   // parse suites
   const suites = __parseSuites(projectPath);
@@ -153,9 +153,9 @@ function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
   for (const __path of __pathsModules) {
     const prefix = `${projectPath}/${__path.prefix}`;
     const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
-    for (let filePkg of filePkgs) {
+    for (const filePkg of filePkgs) {
       // name
-      let name = filePkg.split('/').slice(-2)[0];
+      const name = filePkg.split('/').slice(-2)[0];
       // check if '-' prefix exists
       if (name.substring(0, 1) === '-') {
         // skip
@@ -195,28 +195,6 @@ function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
     }
   }
   return modules;
-}
-
-function __parseModule(__path, moduleResource, type, cabloyConfig) {
-  const root = moduleResource.root;
-  // front
-  if (type !== 'backend') {
-    for (const item of __path.fronts) {
-      const file = path.join(root, item.js);
-      if (fse.existsSync(file)) {
-        moduleResource.js.front = file;
-        break;
-      }
-    }
-    if (!moduleResource.js.front) {
-      return null;
-    }
-  }
-  // backend
-  if (type !== 'front') {
-  }
-  // ok
-  return moduleResource;
 }
 
 function __logModules(context, log) {
@@ -382,6 +360,6 @@ function __checkSuites(context, suites) {
 
 async function __loadCabloyConfig() {
   const __cabloyConfig = eggBornUtils.cabloyConfig;
-  await __cabloyConfig.load();
-  return __cabloyConfig.get();
+  const { config } = await __cabloyConfig.load();
+  return config;
 }
