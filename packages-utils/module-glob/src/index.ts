@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import * as mparse from '@cabloy/module-parse';
+import { __pathSuites, __pathsModules } from './meta.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -13,81 +14,6 @@ const boxenOptions: boxen.Options = {
   borderColor: 'yellow',
   borderStyle: boxen.BorderStyle.Round,
 };
-
-const __pathSuites = [
-  {
-    prefix: 'src/suite/',
-    vendor: false,
-  },
-  {
-    prefix: 'src/suite-vendor/',
-    vendor: true,
-  },
-];
-
-const __pathsModules = [
-  {
-    prefix: 'src/module/',
-    vendor: false,
-    public: false,
-    fronts: [{ js: 'front/src/main.js' }, { js: 'dist/front.js' }],
-    backends: [
-      { js: 'backend/src/main.js', static: 'backend/static' },
-      { js: 'dist/backend.js', static: 'dist/staticBackend' },
-    ],
-  },
-  {
-    prefix: 'src/module-system/',
-    vendor: false,
-    public: false,
-    fronts: [{ js: 'front/src/main.js' }, { js: 'dist/front.js' }],
-    backends: [
-      { js: 'backend/src/main.js', static: 'backend/static' },
-      { js: 'dist/backend.js', static: 'dist/staticBackend' },
-    ],
-  },
-  {
-    prefix: 'src/suite/*/modules/',
-    vendor: false,
-    public: false,
-    fronts: [{ js: 'front/src/main.js' }, { js: 'dist/front.js' }],
-    backends: [
-      { js: 'backend/src/main.js', static: 'backend/static' },
-      { js: 'dist/backend.js', static: 'dist/staticBackend' },
-    ],
-  },
-  {
-    prefix: 'src/module-vendor/',
-    vendor: true,
-    public: false,
-    fronts: [{ js: 'dist/front.js' }, { js: 'front/src/main.js' }],
-    backends: [
-      { js: 'dist/backend.js', static: 'dist/staticBackend' },
-      { js: 'backend/src/main.js', static: 'backend/static' },
-    ],
-  },
-  {
-    prefix: 'src/suite-vendor/*/modules/',
-    vendor: true,
-    public: false,
-    fronts: [{ js: 'dist/front.js' }, { js: 'front/src/main.js' }],
-    backends: [
-      { js: 'dist/backend.js', static: 'dist/staticBackend' },
-      { js: 'backend/src/main.js', static: 'backend/static' },
-    ],
-  },
-  {
-    prefix: 'node_modules/cabloy-module-api-',
-    vendor: true,
-    public: true,
-    node_modules: true,
-    fronts: [{ js: 'dist/front.js' }, { js: 'front/src/main.js' }],
-    backends: [
-      { js: 'dist/backend.js', static: 'dist/staticBackend' },
-      { js: 'backend/src/main.js', static: 'backend/static' },
-    ],
-  },
-];
 
 // type: front/backend/all
 export function glob(options) {

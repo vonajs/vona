@@ -1,20 +1,10 @@
+import { IModuleParseInfo } from './interface.js';
+export * from './interface.js';
+
 const PREFIX_A = '/api/';
 const PREFIX_B = 'cabloy-module-api-';
 const PREFIX_C = './cabloy-module-api-';
 const PREFIX_D = './';
-
-export interface IModuleParseInfo {
-  pid: string;
-  name: string;
-  fullName: string;
-  relativeName: string;
-  url?: string;
-  sync?: boolean;
-  monkey?: boolean;
-  vendor?: boolean;
-  public?: boolean;
-  node_modules?: boolean;
-}
 
 // aa-hello aa/hello
 //   first check / then -
