@@ -38,7 +38,7 @@ export function loadBeans(app: CabloyApplication) {
   function loadBeans() {
     for (const key in ebModulesArray) {
       const module = ebModulesArray[key];
-      const beans = module.main.beans;
+      const beans = module.resource.beans;
       if (!beans) continue;
       for (const beanName in beans) {
         const moduleName = module.info.relativeName;
@@ -54,7 +54,7 @@ export function loadBeans(app: CabloyApplication) {
   function loadAops() {
     for (const key in ebModulesArray) {
       const module = ebModulesArray[key];
-      const aops = module.main.aops;
+      const aops = module.resource.aops;
       if (!aops) continue;
       for (const aopName in aops) {
         app.bean._registerAop(module.info.relativeName, aopName, aops[aopName]);

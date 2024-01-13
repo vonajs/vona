@@ -25,9 +25,10 @@ export class ModuleTools extends BeanBase {
       const AppMonkey = require(pathAppMonkey);
       app.meta.appMonkey = app.bean._newBean(AppMonkey);
     }
+    return modules;
   }
 
-  async loadModules() {
+  async load() {
     const app = this.app;
     // 1. import
     const promises: Promise<{ default: IModuleResource }>[] = [];
@@ -54,7 +55,7 @@ export class ModuleTools extends BeanBase {
     }
   }
 
-  async monkeyModules(monkeyName) {
+  async monkey(monkeyName) {
     const app = this.app;
     for (const module of app.meta.modulesArray) {
       await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, { module });

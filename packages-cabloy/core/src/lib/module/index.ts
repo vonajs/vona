@@ -1,5 +1,5 @@
 import { AppMeta } from '../core/meta.js';
-import ModulesToolsFn from './module.js';
+import { ModuleTools } from './module.js';
 import loadRoutes from './route.js';
 import loadControllers from './controller.js';
 import loadServices from './service.js';
@@ -35,11 +35,13 @@ export class ModuleLoader extends BeanBase {
     loadMessenger(app);
 
     // modules
-    const modulesTools = ModulesToolsFn(app);
+    const moduleTools = app.bean._newBean(ModuleTools);
+    // prepare
+    const modules = await moduleTools.prepare();
     // load modules
-    const modules = await modulesTools.loadModules();
+    await moduleTools.load();
     // monkey modules
-    await modulesTools.monkeyModules('moduleLoading');
+    await moduleTools.monkey('moduleLoading');
 
     if (meta.inApp) {
       await loadConfig(app, modules);
@@ -64,6 +66,6 @@ export class ModuleLoader extends BeanBase {
     }
 
     // monkey modules
-    await modulesTools.monkeyModules('moduleLoaded');
+    await moduleTools.monkey('moduleLoaded');
   }
 }
