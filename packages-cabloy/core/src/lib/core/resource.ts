@@ -1,5 +1,5 @@
 import { BeanBase } from '../module/bean/beanBase.js';
 
-export class Resource extends BeanBase {}
+export class AppResource extends BeanBase {}
 
-export const resource = new Resource();
+export const resource = new AppResource();
