@@ -1,4 +1,3 @@
 // declare module '@cabloy/core' {
-//   interface IBeanRecord {
-//   }
+//   interface IBeanRecord {}
 // }
