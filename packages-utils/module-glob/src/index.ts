@@ -58,7 +58,7 @@ export async function glob(options: IModuleGlobOptions) {
   __checkSuites(context, suites);
 
   // order
-  if (type === 'backend') {
+  if (type === 'backend' && loadPackage !== false) {
     __orderModules(context, modules);
   }
   // log

@@ -14,6 +14,7 @@ export class ModuleTools extends BeanBase {
       disabledSuites: app.config.disabledSuites,
       log: !!app.meta.inAgent,
       type: 'backend',
+      loadPackage: true,
     });
     app.meta.suites = suites;
     app.meta.modules = modules;
