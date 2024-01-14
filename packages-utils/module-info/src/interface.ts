@@ -11,22 +11,18 @@ export interface IModuleInfo {
   node_modules?: boolean;
 }
 
-export interface ISuite {
-  name: string;
-  info: IModuleInfo;
-  root: string;
-  pkg: string;
-  package?: IModulePackage;
-  modules: string[];
-}
-
-export interface IModule {
+export interface ISuiteModuleBase {
   name: string;
   info: IModuleInfo;
   root: string;
   pkg: string;
   package: IModulePackage;
 }
+export interface ISuite extends ISuiteModuleBase {
+  modules: string[];
+}
+
+export interface IModule extends ISuiteModuleBase {}
 
 export interface IModulePackage {
   name: string;

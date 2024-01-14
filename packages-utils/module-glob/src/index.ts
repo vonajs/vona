@@ -5,7 +5,7 @@ import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import { __pathSuites, __pathsModules } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
-import { IModule, ISuite, parseInfo } from '@cabloy/module-info';
+import { IModule, IModulePackage, ISuite, ISuiteModuleBase, parseInfo } from '@cabloy/module-info';
 export * from './interface.js';
 
 const boxenOptions: boxen.Options = {
@@ -42,9 +42,14 @@ export async function glob(options: IModuleGlobOptions) {
   const cabloyConfig = await __loadCabloyConfig();
 
   // parse suites
-  const suites = __parseSuites(projectPath, loadPackage);
+  const suites = __parseSuites(projectPath);
   // parse modules
-  const modules = __parseModules(projectPath, type, loadPackage, cabloyConfig);
+  const modules = __parseModules(projectPath, cabloyConfig);
+  // load package
+  if (loadPackage !== false) {
+    await __loadPackage(suites);
+    await __loadPackage(modules);
+  }
   // bind suites modules
   __bindSuitesModules(suites, modules);
 
@@ -52,7 +57,9 @@ export async function glob(options: IModuleGlobOptions) {
   __checkSuites(context, suites);
 
   // order
-  __orderModules(context, modules);
+  if (type === 'backend') {
+    __orderModules(context, modules);
+  }
   // log
   __logModules(context, log);
   __logSuites(context, log);
@@ -70,6 +77,21 @@ export async function glob(options: IModuleGlobOptions) {
     suitesLocal: context.suitesLocal,
     suitesVendor: context.suitesVendor,
   };
+}
+
+async function __loadPackage(modules: Record<string, ISuiteModuleBase>) {
+  const promises: Promise<IModulePackage>[] = [];
+  const modulesArray: string[] = [];
+  for (const moduleName in modules) {
+    const module = modules[moduleName];
+    promises.push(import(module.pkg));
+    modulesArray.push(moduleName);
+  }
+  const modulesPackage = await Promise.all(promises);
+  for (let i = 0; i < modulesPackage.length; i++) {
+    const moduleName = modulesArray[i];
+    modules[moduleName].package = modulesPackage[i];
+  }
 }
 
 function __orderModules(context, modules) {
@@ -146,7 +168,7 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
   return enabled;
 }
 
-function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
+function __parseModules(projectPath, cabloyConfig) {
   const entities = cabloyConfig.source?.entities;
   const modules: Record<string, IModule> = {};
   for (const __path of __pathsModules) {
@@ -186,9 +208,6 @@ function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
         root,
         pkg: filePkg,
       } as IModule;
-      if (loadPackage !== false) {
-        module.package = require(filePkg);
-      }
       // record
       modules[info.relativeName] = module;
     }
@@ -269,7 +288,7 @@ function __getDisabledSuites(disabledSuites) {
   return disabledSuitesMap;
 }
 
-function __parseSuites(projectPath, loadPackage) {
+function __parseSuites(projectPath) {
   const suites: Record<string, ISuite> = {};
   for (const __path of __pathSuites) {
     const prefix = `${projectPath}/${__path.prefix}`;
@@ -299,10 +318,7 @@ function __parseSuites(projectPath, loadPackage) {
         root,
         pkg: filePkg,
         modules: [],
-      } as ISuite;
-      if (loadPackage !== false) {
-        suite.package = require(filePkg);
-      }
+      } as unknown as ISuite;
       // record
       suites[info.relativeName] = suite;
     }
