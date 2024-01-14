@@ -1,4 +1,5 @@
 import path from 'path';
+import fse from 'fs-extra';
 import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -84,13 +85,13 @@ async function __loadPackage(modules: Record<string, ISuiteModuleBase>) {
   const modulesArray: string[] = [];
   for (const moduleName in modules) {
     const module = modules[moduleName];
-    promises.push(import(module.pkg));
+    promises.push(fse.readFile(module.pkg));
     modulesArray.push(moduleName);
   }
   const modulesPackage = await Promise.all(promises);
   for (let i = 0; i < modulesPackage.length; i++) {
     const moduleName = modulesArray[i];
-    modules[moduleName].package = modulesPackage[i];
+    modules[moduleName].package = JSON.parse(modulesPackage[i].toString());
   }
 }
 
