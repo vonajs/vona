@@ -1,8 +1,8 @@
 import { CabloyApplication } from '../../../types/index.js';
-import { BeanContainerCreate } from './beanContainer.js';
+import { BeanContainerCreate, BeanContainerLike } from './beanContainer.js';
 
-export function loadBeanContainer(app) {
-  app.bean = BeanContainerCreate(app, null);
+export function loadBeanContainer(app: CabloyApplication) {
+  app.bean = BeanContainerCreate(app, null) as BeanContainerLike;
 }
 
 export function loadBeans(app: CabloyApplication) {

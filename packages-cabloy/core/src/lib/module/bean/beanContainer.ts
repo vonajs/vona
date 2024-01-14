@@ -1,6 +1,6 @@
 import is from 'is-type-of';
 import ProxyMagic from './proxyMagic.js';
-import { CabloyApplication, CabloyContext, IBeanRecord } from '../../../types/index.js';
+import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../types/index.js';
 
 export class BeanContainer {
   app: CabloyApplication;
@@ -304,6 +304,8 @@ export class BeanContainer {
     return this.app.meta.util.composeAsync(chains, this.__composeForPropAdapter);
   }
 }
+
+export type BeanContainerLike = TypeBeanRecord & BeanContainer;
 
 export function BeanContainerCreate(app, ctx) {
   const beanContainer = new BeanContainer(app, ctx);
