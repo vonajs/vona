@@ -17,6 +17,7 @@ export interface ISuite {
   root: string;
   pkg: string;
   package?: IModulePackage;
+  modules: string[];
 }
 
 export interface IModule {

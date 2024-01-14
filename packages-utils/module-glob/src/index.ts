@@ -6,7 +6,7 @@ import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import { __pathSuites, __pathsModules } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
-import { IModule, parseInfo } from '@cabloy/module-info';
+import { IModule, ISuite, parseInfo } from '@cabloy/module-info';
 export * from './interface.js';
 
 const boxenOptions: boxen.Options = {
@@ -43,7 +43,7 @@ export async function glob(options: IModuleGlobOptions) {
   const cabloyConfig = await __loadCabloyConfig();
 
   // parse suites
-  const suites = __parseSuites(projectPath);
+  const suites = __parseSuites(projectPath, loadPackage);
   // parse modules
   const modules = __parseModules(projectPath, type, loadPackage, cabloyConfig);
   // bind suites modules
@@ -149,7 +149,7 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
 
 function __parseModules(projectPath, type, loadPackage, cabloyConfig) {
   const entities = cabloyConfig.source?.entities;
-  const modules = {};
+  const modules: Record<string, IModule> = {};
   for (const __path of __pathsModules) {
     const prefix = `${projectPath}/${__path.prefix}`;
     const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
@@ -270,48 +270,42 @@ function __getDisabledSuites(disabledSuites) {
   return disabledSuitesMap;
 }
 
-function __parseSuites(projectPath) {
-  const suites = {};
+function __parseSuites(projectPath, loadPackage) {
+  const suites: Record<string, ISuite> = {};
   for (const __path of __pathSuites) {
     const prefix = `${projectPath}/${__path.prefix}`;
     const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
-    for (let filePkg of filePkgs) {
+    for (const filePkg of filePkgs) {
       // name
-      let name = filePkg.split('/').slice(-2)[0];
+      const name = filePkg.split('/').slice(-2)[0];
       // check if '-' prefix exists
       if (name.substring(0, 1) === '-') {
         // skip
         continue;
-      }
-      // check if full name
-      if (name.indexOf('cabloy-suite-api-') > -1) {
-        const pathSrc = path.join(prefix, name);
-        name = name.substring('cabloy-suite-api-'.length);
-        filePkg = path.join(prefix, name, 'package.json');
-        const pathDest = path.join(prefix, name);
-        fse.moveSync(pathSrc, pathDest);
-        // throw new Error(`Should use relative name for local suite: ${name}`);
       }
       // info
       const info = parseInfo(name, 'suite');
       if (!info) {
         throw new Error(`suite name is not valid: ${name}`);
       }
-      info.vendor = __path.vendor;
       // check if exists
-      if (!suites[info.relativeName]) {
-        // meta
-        const _package = require(filePkg);
-        const root = path.dirname(filePkg);
-        suites[info.relativeName] = {
-          name,
-          info,
-          root,
-          pkg: filePkg,
-          package: _package,
-          modules: [],
-        };
+      if (suites[info.relativeName]) continue;
+      // info
+      info.vendor = __path.vendor;
+      // suite
+      const root = path.dirname(filePkg);
+      const suite = {
+        name,
+        info,
+        root,
+        pkg: filePkg,
+        modules: [],
+      } as ISuite;
+      if (loadPackage !== false) {
+        suite.package = require(filePkg);
       }
+      // record
+      suites[info.relativeName] = suite;
     }
   }
   // ok
