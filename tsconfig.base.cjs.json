@@ -20,6 +20,7 @@
     "emitDecoratorMetadata": true,
     "allowJs": true,
     "checkJs": false,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   }
 }
