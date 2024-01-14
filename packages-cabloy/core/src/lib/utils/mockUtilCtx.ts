@@ -3,12 +3,12 @@ import { BeanBase } from '../module/bean/beanBase.js';
 export class CtxMockUtil extends BeanBase {
   // login
   async login({ auth, password = '123456' }) {
-    return await this.ctx.bean.authSimple.signinDirect({ data: { auth, password } });
+    return await (<any>this.ctx.bean).authSimple.signinDirect({ data: { auth, password } });
   }
 
   // logout
   async logout() {
-    return await this.ctx.bean.auth.logout();
+    return await (<any>this.ctx.bean).auth.logout();
   }
 
   // catchError

@@ -66,7 +66,7 @@ export default function (app: CabloyApplication) {
   }
 
   app.meta._loadSchedules = async ({ ctx }) => {
-    const instances = await ctx.bean.instance.list({ where: {} });
+    const instances = await (<any>ctx.bean).instance.list({ where: {} });
     for (const instance of instances) {
       __installSchedules({ subdomain: instance.name });
     }

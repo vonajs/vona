@@ -33,7 +33,7 @@ export class VersionManager extends BeanBase {
     // only for test/local env
     if (this.app.meta.isProd) return;
     // path
-    const publicPath = await this.ctx.bean.base.getPath();
+    const publicPath = await (<any>this.ctx.bean).base.getPath();
     // remove
     await fse.remove(publicPath);
   }

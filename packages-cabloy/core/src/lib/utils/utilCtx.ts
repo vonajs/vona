@@ -61,7 +61,8 @@ export class CtxUtil extends BeanBase {
     const headers = info.ctxParent.request.headers;
     for (const key of ['x-clientid', 'x-scene']) {
       if (!headers[key]) {
-        const value = key === 'x-clientid' ? ctx.bean.util.getFrontClientId() : ctx.bean.util.getFrontScene();
+        const value =
+          key === 'x-clientid' ? (<any>ctx.bean).util.getFrontClientId() : (<any>ctx.bean).util.getFrontScene();
         if (value) {
           headers[key] = value;
         }

@@ -45,7 +45,7 @@ export class LocalVersion extends BeanBase {
   async __instanceInit(subdomain, instanceBase) {
     try {
       if (!instanceBase) {
-        instanceBase = this.ctx.bean.instance._getInstanceBase({ subdomain });
+        instanceBase = (<any>this.ctx.bean).instance._getInstanceBase({ subdomain });
       }
       if (!instanceBase) instanceBase = {};
       await this.__check({ ...instanceBase, scene: 'init', subdomain });
@@ -262,7 +262,7 @@ export class LocalVersion extends BeanBase {
   }
 
   async __after() {
-    await this.ctx.bean.role.build();
+    await (<any>this.ctx.bean).role.build();
   }
 
   __getDatabasePrefix() {
