@@ -1,8 +1,8 @@
-import { BeanBase, appResource } from '../../../index.js';
+import { appResource } from '../../../index.js';
 import { BeanConstructable, IDecoratorLocalOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Local<T extends BeanBase>(options: IDecoratorLocalOptions<T>): ClassDecorator {
+export function Local<T>(options: IDecoratorLocalOptions<T>): ClassDecorator {
   return function (target) {
     // module
     const module = parseModuleName();
