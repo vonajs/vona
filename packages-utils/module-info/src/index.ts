@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import StackUtils from 'stack-utils';
 import { IModuleInfo } from './interface.js';
 export * from './interface.js';
 
@@ -19,6 +20,24 @@ export function parseInfoFromPackage(dir) {
   if (!file) return null;
   const pkg = require(file);
   return parseInfo(parseName(pkg.name));
+}
+
+export const ParseModuleNameLevelInit = 1;
+export function parseModuleName(level: number = ParseModuleNameLevelInit): string | null {
+  const stackUtils = new StackUtils();
+  const traces = stackUtils.capture(level);
+  const trace = traces[level - 1];
+  let fileName = trace.getFileName();
+  fileName = fileName.replace(/\\/gi, '/');
+  const parts = fileName.split('/');
+  for (let i = parts.length - 1; i >= 0; i--) {
+    let part = parts[i];
+    if (part.indexOf('-') === -1) continue;
+    const info = parseInfo(part);
+    if (!info) continue;
+    return info.relativeName;
+  }
+  return null;
 }
 
 const PREFIX_A = '/api/';

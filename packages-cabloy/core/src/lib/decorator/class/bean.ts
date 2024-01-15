@@ -1,9 +1,12 @@
+import { parseModuleName } from '@cabloy/module-info';
 import { appResource } from '../../core/resource.js';
 import { Constructable, IDecoratorBeanOptions, IDecoratorBeanOptionsBase } from '../index.js';
+import { ParseModuleNameLevel } from './util.js';
 
 export function Bean<T>(options: IDecoratorBeanOptions<T>): ClassDecorator {
   return function (target) {
-    const module = '';
+    const module = parseModuleName(ParseModuleNameLevel);
+    if (!module) throw new Error(`module name not parsed for bean: ${options.scene}.${options.name}`);
     // fullName
     const fullName = options.scene ? `${module}.${options.scene}.${options.name}` : options.name;
     // options
