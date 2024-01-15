@@ -1,7 +1,7 @@
 import fse from 'fs-extra';
 import path from 'path';
 import { glob } from '@cabloy/module-glob';
-import { IModuleResource } from '../../types/index.js';
+import { IModuleResource } from '../../type/index.js';
 import { BeanBase } from './bean/beanBase.js';
 
 export class ModuleTools extends BeanBase {

@@ -1,5 +1,5 @@
 import extend from '@zhennann/extend';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication } from '../../type/index.js';
 
 const CTXCONFIG = Symbol.for('Context#__config');
 

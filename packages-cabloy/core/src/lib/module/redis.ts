@@ -1,6 +1,6 @@
 import Bottleneck from 'bottleneck';
 import Redlock from 'redlock';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication } from '../../type/index.js';
 import { BeanBase } from './bean/beanBase.js';
 
 export class AppLimiter extends BeanBase {

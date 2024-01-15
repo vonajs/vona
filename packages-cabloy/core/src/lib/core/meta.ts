@@ -4,12 +4,12 @@ import { AppReload } from '../module/reload.js';
 import { AppUtil } from '../utils/util.js';
 import { BeanBase } from '../module/bean/beanBase.js';
 import { AppMessenger } from '../module/messenger.js';
-import { IMonkeyApp } from '../../types/interface/monkey.js';
+import { IMonkeyApp } from '../../type/interface/monkey.js';
 import { AppRouter } from '../module/route.js';
 import { AppLimiter, AppRedlock } from '../module/redis.js';
 import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
-import { CabloyContext, IModule, ISuite } from '../../types/index.js';
+import { CabloyContext, IModule, ISuite } from '../../type/index.js';
 import { AppResource, resource } from './resource.js';
 
 export class AppMeta extends BeanBase {

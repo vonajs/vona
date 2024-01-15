@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import extend from '@zhennann/extend';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication } from '../../type/index.js';
 import * as localeutil from '@cabloy/localeutil';
 
 export default function (app: CabloyApplication, modules) {

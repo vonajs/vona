@@ -1,4 +1,4 @@
-import { CabloyApplication } from '../../../types/index.js';
+import { CabloyApplication } from '../../../type/index.js';
 import { QueueClient } from './queueClient.js';
 
 export default function (app: CabloyApplication, modules) {

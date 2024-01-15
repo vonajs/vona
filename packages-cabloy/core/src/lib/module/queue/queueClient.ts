@@ -7,7 +7,7 @@ import {
   IQueueQueues,
   IQueueWork,
   IQueueWorks,
-} from '../../../types/index.js';
+} from '../../../type/index.js';
 import { BeanBase } from '../bean/beanBase.js';
 
 export class QueueClient extends BeanBase {

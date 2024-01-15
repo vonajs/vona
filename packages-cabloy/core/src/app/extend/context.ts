@@ -3,7 +3,7 @@ import inflate from 'inflation';
 import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
-import { ContextBase } from '../../types/context/contextBase.js';
+import { ContextBase } from '../../type/context/contextBase.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');

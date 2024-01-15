@@ -1,4 +1,4 @@
-import { CabloyApplication, EnumAppEvent } from '../../../types/index.js';
+import { CabloyApplication, EnumAppEvent } from '../../../type/index.js';
 
 export default function (app: CabloyApplication) {
   // ready

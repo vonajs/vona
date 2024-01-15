@@ -1,4 +1,4 @@
-import { CabloyApplication } from '../../../types/index.js';
+import { CabloyApplication } from '../../../type/index.js';
 import { VersionReady } from '../version/ready.js';
 
 export default function (app: CabloyApplication) {

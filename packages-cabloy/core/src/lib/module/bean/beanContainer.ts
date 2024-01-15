@@ -1,6 +1,6 @@
 import is from 'is-type-of';
 import ProxyMagic from './proxyMagic.js';
-import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../types/index.js';
+import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
 
 export class BeanContainer {
   app: CabloyApplication;

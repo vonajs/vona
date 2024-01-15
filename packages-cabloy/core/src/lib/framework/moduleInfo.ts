@@ -1,7 +1,7 @@
 import Module from 'module';
 import * as ModuleInfo from '@cabloy/module-info';
 import MetaFn from './meta.js';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication } from '../../type/index.js';
 
 let __patched = false;
 export default function (app: CabloyApplication) {

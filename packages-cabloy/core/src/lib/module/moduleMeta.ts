@@ -1,4 +1,4 @@
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication } from '../../type/index.js';
 
 export default async function (app: CabloyApplication, modules) {
   // load metas
