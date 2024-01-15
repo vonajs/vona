@@ -117,7 +117,7 @@ export class AppRouter extends BeanBase {
     if (index > -1) app.router.stack.splice(index, 1);
   }
 
-  findByPath(moduleName, arg) {
+  findByPath(moduleName, arg): any {
     const app = this.app;
     const path = app.meta.util.combineFetchPath(moduleName, arg);
     return app.router.stack.find(layer => layer.path === path);
