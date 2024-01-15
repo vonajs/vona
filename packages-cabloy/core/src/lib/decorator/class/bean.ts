@@ -1,5 +1,5 @@
 import { appResource } from '../../core/resource.js';
-import { BeanConstructable, IDecoratorBeanOptions, IDecoratorBeanOptionsBase } from '../index.js';
+import { Constructable, IDecoratorBeanOptions, IDecoratorBeanOptionsBase } from '../index.js';
 import { parseModuleName } from './util.js';
 
 export function Bean<T>(options: IDecoratorBeanOptions<T>): ClassDecorator {
@@ -12,7 +12,7 @@ export function Bean<T>(options: IDecoratorBeanOptions<T>): ClassDecorator {
       scene: options.scene,
       name: options.name,
       scope: options.scope,
-      beanClass: target as unknown as BeanConstructable<T>,
+      beanClass: target as unknown as Constructable<T>,
     });
   };
 }

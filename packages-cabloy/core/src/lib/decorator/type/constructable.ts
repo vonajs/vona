@@ -1,1 +1,1 @@
-export type BeanConstructable<T = unknown> = new (...args: any[]) => T;
+export type Constructable<T = unknown> = new (...args: any[]) => T;

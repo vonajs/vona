@@ -1,6 +1,6 @@
 import is from 'is-type-of';
 import { parseModuleName } from '@cabloy/module-info';
-import { BeanConstructable, IDecoratorBeanOptionsBase } from '../decorator/index.js';
+import { Constructable, IDecoratorBeanOptionsBase } from '../decorator/index.js';
 import { BeanBase } from '../module/bean/beanBase.js';
 import { appMetadata } from './metadata.js';
 import { IBeanRecord } from '../../index.js';
@@ -30,10 +30,10 @@ export class AppResource extends BeanBase {
     appMetadata.defineMetaData(DecoratorBeanFullName, fullName, beanOptions.beanClass);
   }
 
-  getBean<T>(A: BeanConstructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
+  getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T extends IBeanRecord, K extends keyof T>(beanFullName: K): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<T>(beanFullName: BeanConstructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
+  getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
     if (typeof beanFullName !== 'string' && is.class(beanFullName)) {
       fullName = appMetadata.getOwnMetaData(DecoratorBeanFullName, beanFullName);
