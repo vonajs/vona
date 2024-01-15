@@ -11,6 +11,7 @@ import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import { CabloyContext, IModule, ISuite } from '../../type/index.js';
 import { AppResource, appResource } from './resource.js';
+import { AppMetadata, appMetadata } from './metadata.js';
 
 export class AppMeta extends BeanBase {
   workerId: string;
@@ -31,6 +32,7 @@ export class AppMeta extends BeanBase {
   broadcast: BroadcastClient;
   //
   resource: AppResource;
+  metadata: AppMetadata;
   //
   beans: Record<string, any>;
   aops: Record<string, any>;
@@ -86,6 +88,10 @@ export class AppMeta extends BeanBase {
     // resource
     this.resource = appResource;
     this.resource.app = this.app;
+
+    // metadata
+    this.metadata = appMetadata;
+    this.metadata.app = this.app;
   }
 
   prepareEnv() {

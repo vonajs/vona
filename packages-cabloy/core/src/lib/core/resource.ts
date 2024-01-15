@@ -19,7 +19,9 @@ export class AppResource extends BeanBase {
       scope: options.scope,
       beanClass: options.beanClass!,
     };
-    appResource.beans[fullName!] = beanOptions;
+    this.beans[fullName!] = beanOptions;
+    // set metadata
+    this.
   }
 }
 
