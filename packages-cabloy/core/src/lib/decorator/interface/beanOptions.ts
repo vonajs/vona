@@ -8,14 +8,21 @@ export interface IDecoratorBeanOptionsBase<Type = unknown> {
    */
   fullName: string;
   module: string;
-  /** global: if empty */
   scene: string | undefined;
   name: string;
   beanClass: Constructable<Type>;
   scope: ContainerScope | undefined;
 }
 
-export type IDecoratorBeanOptions<T = unknown> = Omit<
-  Partial<IDecoratorBeanOptionsBase<T>>,
-  'fullName' | 'module' | 'beanClass'
->;
+export interface IDecoratorBeanOptions<T = unknown> {
+  /** global: if omit */
+  scene?: string;
+  name: string;
+  scope?: ContainerScope;
+}
+
+// export type IDecoratorBeanOptions<T = unknown> = Omit<
+//   Partial<IDecoratorBeanOptionsBase<T>>,
+//   'fullName' | 'module' | 'name' | 'beanClass'
+// > &
+//   Pick<IDecoratorBeanOptionsBase, 'name'>;

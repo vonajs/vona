@@ -5,4 +5,4 @@ export class AppResource extends BeanBase {
   beans: Record<string, IDecoratorBeanOptionsBase>;
 }
 
-export const resource = new AppResource();
+export const appResource = new AppResource();
