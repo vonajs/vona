@@ -1,7 +1,8 @@
-import { Constructable } from '../index.js';
+import { BeanBase } from '../../../index.js';
+import { BeanConstructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
-export interface IDecoratorBeanOptionsBase<Type = unknown> {
+export interface IDecoratorBeanOptionsBase<Type extends BeanBase> {
   /**
    * global: equal to name
    * others: module.scene.name
@@ -10,7 +11,7 @@ export interface IDecoratorBeanOptionsBase<Type = unknown> {
   module: string;
   scene: string | undefined;
   name: string;
-  beanClass: Constructable<Type>;
+  beanClass: BeanConstructable<Type>;
   scope: ContainerScope | undefined;
 }
 

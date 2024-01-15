@@ -1,1 +1,3 @@
-export type Constructable<T> = new (...args: any[]) => T;
+import { BeanBase } from '../../../index.js';
+
+export type BeanConstructable<T extends BeanBase> = new (...args: any[]) => T;
