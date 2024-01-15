@@ -16,6 +16,7 @@
     "moduleResolution": "NodeNext",
     "strict": true,
     "noImplicitAny": false,
+    "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": true,
