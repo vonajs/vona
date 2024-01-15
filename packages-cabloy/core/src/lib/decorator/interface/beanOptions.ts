@@ -21,6 +21,8 @@ export interface IDecoratorBeanOptions<T = unknown> {
   scope?: ContainerScope;
 }
 
+export type IDecoratorLocalOptions<T = unknown> = Omit<IDecoratorBeanOptions<T>, 'scene'>;
+
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
 //   Partial<IDecoratorBeanOptionsBase<T>>,
 //   'fullName' | 'module' | 'name' | 'beanClass'

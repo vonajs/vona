@@ -23,7 +23,7 @@ export function parseInfoFromPackage(dir) {
 }
 
 export const ParseModuleNameLevelInit = 1;
-export function parseModuleName(level: number = ParseModuleNameLevelInit): string | null {
+export function parseModuleName(level: number = ParseModuleNameLevelInit): string | undefined {
   const stackUtils = new StackUtils();
   const traces = stackUtils.capture(level);
   const trace = traces[level - 1];
@@ -37,7 +37,7 @@ export function parseModuleName(level: number = ParseModuleNameLevelInit): strin
     if (!info) continue;
     return info.relativeName;
   }
-  return null;
+  return;
 }
 
 const PREFIX_A = '/api/';
