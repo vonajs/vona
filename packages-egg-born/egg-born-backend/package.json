@@ -31,6 +31,7 @@
     "@cabloy/core": "workspace:^",
     "egg": "^3.17.5",
     "jsonwebtoken": "^8.5.1",
-    "koa-jwt2": "^1.0.3"
+    "koa-jwt2": "^1.0.3",
+    "koa-compose": "^4.1.0"
   }
 }

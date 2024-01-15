@@ -2,7 +2,7 @@ import { BeanBase, IORedis } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
 
 export class BeanWorker extends BeanBase {
-  _redisCache: IORedis.Redis = null as any;
+  _redisCache: IORedis.Redis;
   // _redisIO = null;
 
   get id() {

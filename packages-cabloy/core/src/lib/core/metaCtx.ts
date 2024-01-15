@@ -3,8 +3,8 @@ import { CtxMockUtil } from '../utils/mockUtilCtx.js';
 import { BeanBase } from '../module/bean/beanBase.js';
 
 export class CtxMeta extends BeanBase {
-  util: CtxUtil = null as any;
-  mockUtil: CtxMockUtil = null as any;
+  util: CtxUtil;
+  mockUtil: CtxMockUtil;
 
   __init__() {
     // util
