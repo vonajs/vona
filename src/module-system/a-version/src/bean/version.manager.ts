@@ -1,7 +1,7 @@
-import { BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 import fse from 'fs-extra';
 
-// @Bean
+@Bean()
 export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
