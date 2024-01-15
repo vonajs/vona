@@ -1,6 +1,9 @@
 import { parseModuleName } from '@cabloy/module-info';
 import { IDecoratorBeanOptionsBase } from '../decorator/index.js';
 import { BeanBase } from '../module/bean/beanBase.js';
+import { appMetadata } from './metadata.js';
+
+export const DecoratorBeanFullName = Symbol.for('decorator#BeanFullName');
 
 export class AppResource extends BeanBase {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
@@ -11,17 +14,18 @@ export class AppResource extends BeanBase {
     // fullName
     const fullName = options.scene ? `${module}.${options.scene}.${options.name}` : options.name;
     // options
-    const beanOptions: IDecoratorBeanOptionsBase<T> = {
-      fullName: fullName!,
+    const beanOptions = {
+      fullName,
       module: options.module,
       scene: options.scene,
-      name: options.name!,
+      name: options.name,
       scope: options.scope,
-      beanClass: options.beanClass!,
-    };
+      beanClass: options.beanClass,
+    } as IDecoratorBeanOptionsBase<T>;
+    // record
     this.beans[fullName!] = beanOptions;
     // set metadata
-    this.
+    appMetadata.defineMetaData(DecoratorBeanFullName, fullName, beanOptions.beanClass);
   }
 }
 

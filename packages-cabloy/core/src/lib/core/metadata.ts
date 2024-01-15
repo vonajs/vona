@@ -1,5 +1,12 @@
-import { BeanBase } from '../../index.js';
+import 'reflect-metadata';
+import { BeanBase, BeanConstructable } from '../../index.js';
 
-export class AppMetadata extends BeanBase {}
+export type MetaDataKey = symbol | string;
+
+export class AppMetadata extends BeanBase {
+  defineMetaData<T>(metadataKey: MetaDataKey, metadataValue: T, target: BeanConstructable) {
+    Reflect.defineMetadata(metadataKey, metadataValue, target);
+  }
+}
 
 export const appMetadata = new AppMetadata();
