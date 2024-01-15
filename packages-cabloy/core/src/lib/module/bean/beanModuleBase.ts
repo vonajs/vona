@@ -19,7 +19,7 @@ export class BeanModuleBase extends BeanBase {
     if (!this[BeanModuleCaches]) this[BeanModuleCaches] = new Map();
     let beanInstance = this[BeanModuleCaches].get(moduleName);
     if (!beanInstance) {
-      beanInstance = this.ctx.bean._newBean(this.__beanFullName__, moduleName);
+      beanInstance = this.ctx.bean._newBean((<any>this).__beanFullName__, moduleName);
       this[BeanModuleCaches].set(moduleName, beanInstance);
     }
     return beanInstance;

@@ -7,7 +7,7 @@ export class BroadcastClient extends BeanBase {
   sub: any = null;
   pub: any = null;
 
-  __init__() {
+  private __init__() {
     const app = this.app;
     this.__callerId = app.meta.workerId;
     this.channelName = `broadcast_${this.app.name}:`;

@@ -13,7 +13,7 @@ export class AppMessenger extends BeanBase {
   _providers: object = {};
   _pids: any = null;
 
-  __init__() {
+  private __init__() {
     const app = this.app;
     // wait for call
     app.messenger.on(eventMessengerCall, async info => {

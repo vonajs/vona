@@ -63,7 +63,7 @@ export class AppMeta extends BeanBase {
   _runSchedule: (context) => Promise<any>;
   checkAppReady: () => Promise<boolean>;
 
-  __init__() {
+  private __init__() {
     // workerId
     this.workerId = uuid.v4();
 
