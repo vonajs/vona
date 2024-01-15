@@ -29,6 +29,7 @@
     "@babel/register": "^7.8.3",
     "@cabloy/module-glob": "^5.0.0",
     "@zhennann/build": "^1.6.5",
+    "@zhennann/common-bin": "^4.0.0",
     "@zhennann/egg-bin": "^7.0.0",
     "@zhennann/socketio": "^4.0.2",
     "babel-loader": "^8.2.2",

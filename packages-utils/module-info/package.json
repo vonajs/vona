@@ -33,6 +33,6 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "stack-trace": "^1.0.0-pre2"
+    "stack-utils": "^2.0.6"
   }
 }
