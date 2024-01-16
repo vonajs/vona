@@ -37,6 +37,10 @@ export class AppResource {
     return beanOptions;
   }
 
+  getBeanFullName<T>(A: Constructable<T>): string | undefined {
+    return appMetadata.getOwnMetaData(DecoratorBeanFullName, A);
+  }
+
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;

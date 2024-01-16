@@ -34,6 +34,10 @@ export class BeanContainer {
     return beanFullName;
   }
 
+  getBeanFullName<T>(A: Constructable<T>): string | undefined {
+    return appResource.getBeanFullName(A);
+  }
+
   _getBean<T>(A: Constructable<T>): T;
   _getBean<K extends keyof IBeanRecord>(beanFullName: K): IBeanRecord[K];
   _getBean<T>(beanFullName: string): T;
@@ -81,10 +85,6 @@ export class BeanContainer {
     }
     if (beanInstance.__init__) {
       beanInstance.__init__(...args);
-    }
-    // __beanFullName__
-    if (!is.class(beanFullName)) {
-      beanInstance.__beanFullName__ = beanFullName;
     }
     // not aop on aop
     if (aop) return beanInstance;
