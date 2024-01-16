@@ -49,7 +49,7 @@ export class BeanContainer {
       // not found
       return null!;
     }
-    const fullName = beanOptions.fullName;
+    const fullName = beanOptions.beanFullName;
     if (this.__instances__[fullName] === undefined) {
       this.__instances__[fullName] = this._newBean(fullName);
     }
@@ -85,7 +85,7 @@ export class BeanContainer {
       const useOptions = uses[key];
       const targetOptions = appResource.getBean(useOptions.beanFullName)!;
       const scope = targetOptions.scope || 'ctx';
-      let targetBeanFullName = targetOptions.fullName;
+      let targetBeanFullName = targetOptions.beanFullName;
       let targetInstance;
       if (scope === 'app') {
         targetInstance = this.app.bean._getBean(targetBeanFullName);

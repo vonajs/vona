@@ -27,11 +27,11 @@ export class AppResource {
     name = this._parseBeanName(beanClass!, scene, name);
     // module
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
-    // fullName
-    const fullName = scene ? `${module}.${scene}.${name}` : name;
+    // beanFullName
+    const beanFullName = scene ? `${module}.${scene}.${name}` : name;
     // options
     const beanOptions = {
-      fullName,
+      beanFullName,
       module,
       scene,
       name,
@@ -41,9 +41,9 @@ export class AppResource {
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
     // record
-    this.beans[beanOptions.fullName] = beanOptions;
+    this.beans[beanOptions.beanFullName] = beanOptions;
     // set metadata
-    appMetadata.defineMetadata(DecoratorBeanFullName, fullName, beanOptions.beanClass);
+    appMetadata.defineMetadata(DecoratorBeanFullName, beanFullName, beanOptions.beanClass);
     // ok
     return beanOptions;
   }

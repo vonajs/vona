@@ -8,7 +8,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
    * global: equal to name
    * others: module.scene.name
    */
-  fullName: string;
+  beanFullName: string;
   module: string;
   scene: string | undefined;
   name: string;
@@ -31,6 +31,6 @@ export type IDecoratorLocalOptions<T = unknown> = Omit<IDecoratorBeanOptions<T>,
 
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
 //   Partial<IDecoratorBeanOptionsBase<T>>,
-//   'fullName' | 'module' | 'name' | 'beanClass'
+//   'beanFullName' | 'module' | 'name' | 'beanClass'
 // > &
 //   Pick<IDecoratorBeanOptionsBase, 'name'>;
