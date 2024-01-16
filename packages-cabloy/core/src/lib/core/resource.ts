@@ -12,9 +12,13 @@ export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
 
   addUse(target: Object, options: IDecoratorUseOptionsBase) {
-    const records = appMetadata.getOwnMetadataMap(DecoratorUse, target);
-    records[options.prop] = options;
-    appMetadata.defineMetadata(DecoratorUse, records, target);
+    const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
+    uses[options.prop] = options;
+    appMetadata.defineMetadata(DecoratorUse, uses, target);
+  }
+
+  getUses(target: Object) {
+    return appMetadata.getOwnMetadataMap(DecoratorUse, target);
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {

@@ -2,7 +2,7 @@ import is from 'is-type-of';
 import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
-import { MetadataKey } from '../../core/metadata.js';
+import { MetadataKey, appMetadata } from '../../core/metadata.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 
@@ -77,13 +77,24 @@ export class BeanContainer {
     return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.aop);
   }
 
+  _injectBeanInstance(beanInstance, beanFullName) {
+    const beanOptions = appResource.getBean(beanFullName);
+    if (!beanOptions) return;
+    const uses = appResource.getUses(beanOptions.beanClass.prototype);
+    console.log(uses);
+  }
+
   _patchBeanInstance(beanInstance, args, beanFullName, aop) {
+    // app/ctx
     if (this.app) {
       beanInstance.app = this.app;
     }
     if (this.ctx) {
       beanInstance.ctx = this.ctx;
     }
+    // inject
+    this._injectBeanInstance(beanInstance, beanFullName);
+    // init
     if (beanInstance.__init__) {
       beanInstance.__init__(...args);
     }
