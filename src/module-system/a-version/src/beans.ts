@@ -1,4 +1,5 @@
 export { VersionManager } from './bean/version.manager.js';
+export { LocalA, LocalB } from './bean/local.a.js';
 // const localVersion = require('./bean/local.version.js');
 // const startupWorkerAlive = require('./bean/startup.workerAlive.js');
 // const startupDatabaseInit = require('./bean/startup.databaseInit.js');
