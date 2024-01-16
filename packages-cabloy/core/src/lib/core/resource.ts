@@ -1,6 +1,6 @@
 import is from 'is-type-of';
 import { parseModuleName } from '@cabloy/module-info';
-import { Constructable, IDecoratorBeanOptionsBase } from '../decorator/index.js';
+import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { BeanBase } from '../module/bean/beanBase.js';
 import { appMetadata } from './metadata.js';
 import { IBeanRecord } from '../../index.js';
@@ -9,6 +9,10 @@ export const DecoratorBeanFullName = Symbol.for('decorator#BeanFullName');
 
 export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
+
+  addUse(target: Object, options: IDecoratorUseOptionsBase) {
+    // appMetadata.getOwnMetadataMap();
+  }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
     let { module, scene, name, scope, beanClass } = options;

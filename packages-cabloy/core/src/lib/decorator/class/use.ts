@@ -7,8 +7,9 @@ export function Use(): PropertyDecorator {
     // beanFullName
     const proto = appMetadata.getDesignType(target, prop);
     const beanFullName = appResource.getBeanFullName(proto as any);
+    if (!beanFullName) throw new Error(`beanFullName not found for: ${(<any>proto).name}`);
     // record
-    appResource.addUse({
+    appResource.addUse(target, {
       prop,
       beanFullName,
     });

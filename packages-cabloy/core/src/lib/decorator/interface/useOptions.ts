@@ -1,4 +1,6 @@
+import { MetadataKey } from '../../../index.js';
+
 export interface IDecoratorUseOptionsBase {
-  prop: string;
+  prop: MetadataKey;
   beanFullName: string;
 }
