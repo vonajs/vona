@@ -62,18 +62,13 @@ export class BeanContainer {
       // throw new Error(`bean not found: ${beanFullName}`);
       return null!;
     }
-    // string
-    const _beanClass = this._getBeanClass(beanFullName);
-    if (!_beanClass) {
-      return null!;
-    }
     // instance
-    const beanInstance = new _beanClass.bean(...args);
+    const beanInstance = new beanOptions.beanClass(...args);
     // patch
-    return this._patchBeanInstance(beanInstance, args, beanFullName, _beanClass.aop);
+    return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.magic);
   }
 
-  _patchBeanInstance(beanInstance, args, beanFullName, isAop) {
+  _patchBeanInstance(beanInstance, args, beanFullName, magic) {
     if (this.app) {
       beanInstance.app = this.app;
     }
@@ -88,7 +83,7 @@ export class BeanContainer {
       beanInstance.__beanFullName__ = beanFullName;
     }
     // not aop on aop
-    if (isAop) return beanInstance;
+    if (magic) return beanInstance;
     // aop chains
     const _aopChains = this._prepareAopChains(beanFullName, beanInstance);
     // no aop
