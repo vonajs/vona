@@ -7,7 +7,7 @@ import { IBeanRecord } from '../../index.js';
 
 export const DecoratorBeanFullName = Symbol.for('decorator#BeanFullName');
 
-export class AppResource extends BeanBase {
+export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {

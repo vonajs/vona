@@ -87,11 +87,9 @@ export class AppMeta extends BeanBase {
 
     // resource
     this.resource = appResource;
-    this.resource.app = this.app;
 
     // metadata
     this.metadata = appMetadata;
-    this.metadata.app = this.app;
   }
 
   prepareEnv() {
