@@ -14,7 +14,7 @@ export class AppResource {
     // module
     if (!options.module) throw new Error(`module name not parsed for bean: ${options.scene}.${options.name}`);
     // fullName
-    const fullName = options.scene ? `${module}.${options.scene}.${options.name}` : options.name;
+    const fullName = options.scene ? `${options.module}.${options.scene}.${options.name}` : options.name;
     // options
     const beanOptions = {
       fullName,
