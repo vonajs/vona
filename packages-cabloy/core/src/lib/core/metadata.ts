@@ -29,6 +29,20 @@ export class AppMetadata {
     }
     return own;
   }
+
+  getOwnMetaDataMap<T, K extends PropertyKey, V>(metadataKey: MetaDataKey, target: Constructable<T>): Record<K, V> {
+    let own: Record<K, V> | undefined = this.getOwnMetaData(metadataKey, target);
+    if (!own) {
+      const parent: Record<K, V> | undefined = this.getMetaData(metadataKey, target);
+      if (parent) {
+        own = Object.assign({}, parent);
+      } else {
+        own = {} as Record<K, V>;
+      }
+      this.defineMetaData(metadataKey, own, target);
+    }
+    return own;
+  }
 }
 
 export const appMetadata = new AppMetadata();
