@@ -81,7 +81,21 @@ export class BeanContainer {
     const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
     const uses = appResource.getUses(beanOptions.beanClass.prototype);
-    console.log(uses);
+    for (const key in uses) {
+      const useOptions = uses[key];
+      const targetOptions = appResource.getBean(useOptions.beanFullName)!;
+      const scope = targetOptions.scope || 'ctx';
+      let targetBeanFullName = targetOptions.fullName;
+      let targetInstance;
+      if (scope === 'app') {
+        targetInstance = this.app.bean._getBean(targetBeanFullName);
+      } else if (scope === 'ctx') {
+        targetInstance = this._getBean(targetBeanFullName);
+      } else if (scope === 'transient') {
+        targetInstance = this._newBean(targetBeanFullName);
+      }
+      beanInstance[useOptions.prop] = targetInstance;
+    }
   }
 
   _patchBeanInstance(beanInstance, args, beanFullName, aop) {

@@ -2,7 +2,7 @@ import is from 'is-type-of';
 import { parseModuleName } from '@cabloy/module-info';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { BeanBase } from '../module/bean/beanBase.js';
-import { appMetadata } from './metadata.js';
+import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../../index.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
@@ -17,7 +17,7 @@ export class AppResource {
     appMetadata.defineMetadata(DecoratorUse, uses, target);
   }
 
-  getUses(target: Object) {
+  getUses(target: Object): Record<MetadataKey, IDecoratorUseOptionsBase> {
     return appMetadata.getOwnMetadataMap(DecoratorUse, target);
   }
 
