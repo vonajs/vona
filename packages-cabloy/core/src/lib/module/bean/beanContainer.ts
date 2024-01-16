@@ -52,16 +52,19 @@ export class BeanContainer {
   _newBean<T>(beanFullName: string, ...args): T;
   _newBean<T>(beanFullName: Constructable<T> | string, ...args): T {
     // bean options
-    //const beanOptions = appResource.getBean(beanFullName);
-    // class
-    if (is.class(beanFullName)) {
-      const beanInstance = new (<any>beanFullName)(...args);
-      return this._patchBeanInstance(beanInstance, args, beanFullName, false);
+    const beanOptions = appResource.getBean(beanFullName as any);
+    if (!beanOptions) {
+      // class
+      if (typeof beanFullName === 'function' && is.class(beanFullName)) {
+        const beanInstance = new beanFullName(...args);
+        return this._patchBeanInstance(beanInstance, args, beanFullName, false);
+      }
+      // throw new Error(`bean not found: ${beanFullName}`);
+      return null!;
     }
     // string
     const _beanClass = this._getBeanClass(beanFullName);
     if (!_beanClass) {
-      // throw new Error(`bean not found: ${beanFullName}`);
       return null!;
     }
     // instance

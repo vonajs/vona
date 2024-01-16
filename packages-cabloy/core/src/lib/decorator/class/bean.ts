@@ -12,6 +12,7 @@ export function Bean<T>(options: IDecoratorBeanOptions<T>): ClassDecorator {
       scene: options.scene,
       name: options.name,
       scope: options.scope,
+      magic: options.magic,
       beanClass: target as unknown as Constructable<T>,
     });
   };

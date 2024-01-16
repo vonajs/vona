@@ -13,6 +13,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   name: string;
   beanClass: Constructable<T>;
   scope: ContainerScope | undefined;
+  magic: boolean | undefined;
 }
 
 export interface IDecoratorBeanOptions<T = unknown> {
@@ -20,6 +21,7 @@ export interface IDecoratorBeanOptions<T = unknown> {
   scene?: string;
   name: string;
   scope?: ContainerScope;
+  magic?: boolean;
 }
 
 export type IDecoratorLocalOptions<T = unknown> = Omit<IDecoratorBeanOptions<T>, 'scene'>;
