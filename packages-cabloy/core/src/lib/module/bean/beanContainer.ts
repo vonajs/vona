@@ -235,6 +235,7 @@ export class BeanContainer {
     const self = this;
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
+    if (!beanOptions) return [];
     if (beanOptions.__aopChains__) return beanOptions.__aopChains__;
     // chains
     const chains: (string | symbol)[] = [];
@@ -263,12 +264,14 @@ export class BeanContainer {
   _getAopChains(beanFullName) {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
+    if (!beanOptions) return [];
     return beanOptions.__aopChains__;
   }
 
   _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
+    if (!beanOptions) return [];
     if (beanOptions.__aopChainsKey__[chainsKey]) return beanOptions.__aopChainsKey__[chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
     const chains: [string | symbol, string][] = [];
