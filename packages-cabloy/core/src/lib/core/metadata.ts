@@ -12,8 +12,11 @@ export class AppMetadata {
     return Reflect.getOwnMetadata(metadataKey, target);
   }
 
-  getMetaData<T, V>(metadataKey: MetaDataKey, target: Constructable<T>, propKey?: PropertyKey): V | undefined {
-    return Reflect.getMetadata(metadataKey, target, propKey as string);
+  getMetaData<T, V>(metadataKey: MetaDataKey, target: Constructable<T>, prop?: string | symbol): V | undefined {
+    if (prop) {
+      return Reflect.getMetadata(metadataKey, target, prop);
+    }
+    return Reflect.getMetadata(metadataKey, target);
   }
 
   getOwnMetaDataArray<T, Entry>(metadataKey: MetaDataKey, target: Constructable<T>): Array<Entry> {
@@ -42,6 +45,10 @@ export class AppMetadata {
       this.defineMetaData(metadataKey, own, target);
     }
     return own;
+  }
+
+  getDesignType<T>(target: Constructable<T>, prop?: string | symbol) {
+    return this.getMetaData('design:type', target, prop);
   }
 }
 
