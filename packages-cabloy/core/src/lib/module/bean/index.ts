@@ -11,7 +11,6 @@ export function loadBeans(app: CabloyApplication) {
 
   // all
   app.meta.aops = {};
-  app.meta.beans = {};
 
   // load beans
   loadBeans();

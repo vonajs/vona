@@ -24,23 +24,27 @@ export class AppResource {
       scope: options.scope,
       beanClass: options.beanClass,
     } as IDecoratorBeanOptionsBase<T>;
+    beanOptions.__aopChains__ = null!;
+    beanOptions.__aopChainsKey__ = {};
     // record
     this.beans[beanOptions.fullName] = beanOptions;
     // set metadata
     appMetadata.defineMetaData(DecoratorBeanFullName, fullName, beanOptions.beanClass);
+    // ok
+    return beanOptions;
   }
 
-  getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
-  getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
+  getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T>;
+  getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]>;
+  getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T>;
+  getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> {
     let fullName: string | undefined;
     if (typeof beanFullName === 'function' && is.class(beanFullName)) {
       fullName = appMetadata.getOwnMetaData(DecoratorBeanFullName, beanFullName);
     } else {
       fullName = beanFullName as string;
     }
-    if (!fullName) return;
+    if (!fullName) return null!;
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;
   }
 }

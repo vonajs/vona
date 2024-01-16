@@ -13,7 +13,9 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   name: string;
   beanClass: Constructable<T>;
   scope: ContainerScope | undefined;
-  magic: boolean | undefined;
+  aop: boolean | undefined;
+  __aopChains__: (string | symbol)[];
+  __aopChainsKey__: Record<string, [string | symbol, string][]>;
 }
 
 export interface IDecoratorBeanOptions<T = unknown> {

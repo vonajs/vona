@@ -1,8 +1,9 @@
 import is from 'is-type-of';
-import ProxyMagic from './proxyMagic.js';
 import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
+
+const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 
 export class BeanContainer {
   app: CabloyApplication;
@@ -18,7 +19,7 @@ export class BeanContainer {
     const beanFullName = beanClass.global
       ? beanName
       : `${typeof moduleName === 'string' ? moduleName : moduleName.relativeName}.${beanName}`;
-    this.app.meta.beans[beanFullName] = beanClass;
+    (<any>this.app.meta).beans[beanFullName] = beanClass;
     return beanFullName;
   }
 
@@ -31,12 +32,6 @@ export class BeanContainer {
     const beanFullName = this._register(moduleName, beanName, beanClass);
     this.app.meta.aops[beanFullName] = { match: aopClass.match, matchAop: aopClass.matchAop };
     return beanFullName;
-  }
-
-  _getBeanClass(beanFullName) {
-    if (is.class(beanFullName)) return beanFullName;
-    // need not support object mode
-    return this.app.meta.beans[beanFullName];
   }
 
   _getBean<T>(A: Constructable<T>): T;
@@ -74,10 +69,10 @@ export class BeanContainer {
     // instance
     const beanInstance = new beanOptions.beanClass(...args);
     // patch
-    return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.magic);
+    return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.aop);
   }
 
-  _patchBeanInstance(beanInstance, args, beanFullName, magic) {
+  _patchBeanInstance(beanInstance, args, beanFullName, aop) {
     if (this.app) {
       beanInstance.app = this.app;
     }
@@ -92,7 +87,7 @@ export class BeanContainer {
       beanInstance.__beanFullName__ = beanFullName;
     }
     // not aop on aop
-    if (magic) return beanInstance;
+    if (aop) return beanInstance;
     // aop chains
     const _aopChains = this._prepareAopChains(beanFullName, beanInstance);
     // no aop
@@ -239,17 +234,17 @@ export class BeanContainer {
   _prepareAopChains(beanFullName, beanInstance) {
     const self = this;
     // beanFullName maybe class
-    const _beanClass = this._getBeanClass(beanFullName);
-    if (_beanClass.__aopChains__) return _beanClass.__aopChains__;
+    const beanOptions = appResource.getBean(beanFullName);
+    if (beanOptions.__aopChains__) return beanOptions.__aopChains__;
     // chains
-    const chains = [] as any[];
+    const chains: (string | symbol)[] = [];
     if (!is.class(beanFullName)) {
       for (const key in self.app.meta.aops) {
         const aop = self.app.meta.aops[key];
         // not self
         if (key === beanFullName) continue;
         // check if match aop
-        if (_beanClass.aop && !aop.matchAop) continue;
+        if (beanOptions.aop && !aop.matchAop) continue;
         // match
         if (__aopMatch(aop.match, beanFullName)) {
           chains.push(key);
@@ -261,44 +256,44 @@ export class BeanContainer {
       chains.push(ProxyMagic);
     }
     // hold
-    __setPropertyValue(_beanClass, '__aopChains__', chains);
+    beanOptions.__aopChains__ = chains;
     return chains;
   }
 
   _getAopChains(beanFullName) {
     // beanFullName maybe class
-    const _beanClass = this._getBeanClass(beanFullName);
-    return _beanClass.__aopChains__;
+    const beanOptions = appResource.getBean(beanFullName);
+    return beanOptions.__aopChains__;
   }
 
   _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
     const chainsKey = `__aopChains_${methodName}__`;
-    const _beanClass = this._getBeanClass(beanFullName);
-    if (_beanClass[chainsKey]) return _beanClass[chainsKey];
+    const beanOptions = appResource.getBean(beanFullName);
+    if (beanOptions.__aopChainsKey__[chainsKey]) return beanOptions.__aopChainsKey__[chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
-    const chains = [] as any[];
-    for (const key of _aopChains) {
-      if (key === ProxyMagic) {
-        chains.push(ProxyMagic);
+    const chains: [string | symbol, string][] = [];
+    for (const aopKey of _aopChains) {
+      if (aopKey === ProxyMagic) {
+        chains.push([aopKey, methodName]);
       } else {
-        const aop = this._getBean(key);
+        const aop: any = this._getBean(aopKey as string);
         if (aop[methodName]) {
-          chains.push([key, methodName]);
+          chains.push([aopKey, methodName]);
         } else if (methodNameMagic && aop[methodNameMagic]) {
-          chains.push([key, methodNameMagic]);
+          chains.push([aopKey, methodNameMagic]);
         }
       }
     }
-    __setPropertyValue(_beanClass, chainsKey, chains);
+    beanOptions.__aopChainsKey__[chainsKey] = chains;
     return chains;
   }
 
   __composeForPropAdapter = (context, chain) => {
+    const [aopKey, methodName] = chain;
     // ProxyMagic
-    if (chain === ProxyMagic) return null;
+    if (aopKey === ProxyMagic) return null;
     // chain
-    const [key, methodName] = chain;
-    const aop = this._getBean(key);
+    const aop = this._getBean(aopKey);
     if (!aop) throw new Error(`aop not found: ${chain}`);
     if (!aop[methodName]) return null;
     return {

@@ -34,7 +34,6 @@ export class AppMeta extends BeanBase {
   resource: AppResource;
   metadata: AppMetadata;
   //
-  beans: Record<string, any>;
   aops: Record<string, any>;
   //
   suites: Record<string, ISuite>;

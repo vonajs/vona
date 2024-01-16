@@ -2,6 +2,7 @@ import is from 'is-type-of';
 import performActionFn from './performAction.js';
 import { BeanBase } from '../module/bean/beanBase.js';
 import { CabloyContext } from '../../type/index.js';
+import { appResource } from '../core/resource.js';
 
 export class CtxUtil extends BeanBase {
   runInBackground(scope) {
@@ -80,16 +81,11 @@ export class CtxUtil extends BeanBase {
     return info;
   }
 
-  async executeBeanAuto({ beanModule, beanFullName, context, fn }) {
+  async executeBeanAuto({ beanFullName, context, fn }) {
     const ctx = this.ctx;
-    const _beanClass = beanFullName ? ctx.bean._getBeanClass(beanFullName) : null;
-    if (_beanClass && _beanClass.mode === 'ctx') {
-      // in the same ctx
-      const bean = ctx.bean._getBean(beanFullName);
-      return await ctx.app.meta.util._executeBeanFn({ fn, ctx, bean, context });
-    }
-    // in the new ctx
-    return await this.executeBean({ beanModule, beanFullName, context, fn });
+    // in the same ctx
+    const bean = ctx.bean._getBean(beanFullName);
+    return await ctx.app.meta.util._executeBeanFn({ fn, ctx, bean, context });
   }
 
   async executeBean({
