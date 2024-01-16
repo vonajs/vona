@@ -38,13 +38,21 @@ export class BeanContainer {
     return this.app.meta.beans[beanFullName];
   }
 
-  _getBean<T extends IBeanRecord, K extends keyof T>(beanFullName: K): T[K];
-  _getBean(beanFullName: string);
-  _getBean(beanFullName: string) {
-    if (this[beanFullName] === undefined) {
-      this[beanFullName] = this._newBean(beanFullName);
+  _getBean<T>(A: Constructable<T>): T;
+  _getBean<K extends keyof IBeanRecord>(beanFullName: K): IBeanRecord[K];
+  _getBean<T>(beanFullName: string): T;
+  _getBean<T>(beanFullName: Constructable<T> | string): T {
+    // bean options
+    const beanOptions = appResource.getBean(beanFullName as any);
+    if (!beanOptions) {
+      // not found
+      return null!;
     }
-    return this[beanFullName];
+    const fullName = beanOptions.fullName;
+    if (this[fullName] === undefined) {
+      this[fullName] = this._newBean(fullName);
+    }
+    return this[fullName];
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;
