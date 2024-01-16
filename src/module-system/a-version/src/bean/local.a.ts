@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local, Use } from '@cabloy/core';
 
 @Local()
 export class LocalA extends BeanBase {

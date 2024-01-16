@@ -5,13 +5,16 @@ import { BeanBase } from '../module/bean/beanBase.js';
 import { appMetadata } from './metadata.js';
 import { IBeanRecord } from '../../index.js';
 
-export const DecoratorBeanFullName = Symbol.for('decorator#BeanFullName');
+export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
+export const DecoratorUse = Symbol.for('Decorator#Use');
 
 export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
 
   addUse(target: Object, options: IDecoratorUseOptionsBase) {
-    // appMetadata.getOwnMetadataMap();
+    const records = appMetadata.getOwnMetadataMap(DecoratorUse, target);
+    records[options.prop] = options;
+    appMetadata.defineMetadata(DecoratorUse, records, target);
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
