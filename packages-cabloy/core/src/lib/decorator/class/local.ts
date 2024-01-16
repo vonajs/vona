@@ -2,8 +2,9 @@ import { appResource } from '../../../index.js';
 import { Constructable, IDecoratorLocalOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Local<T>(options: IDecoratorLocalOptions<T>): ClassDecorator {
+export function Local<T>(options?: IDecoratorLocalOptions<T>): ClassDecorator {
   return function (target) {
+    if (!options) options = {};
     // module
     const module = parseModuleName();
     // add

@@ -21,7 +21,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
 export interface IDecoratorBeanOptions<T = unknown> {
   /** global: if omit */
   scene?: string;
-  name: string;
+  name?: string;
   scope?: ContainerScope;
   magic?: boolean;
 }

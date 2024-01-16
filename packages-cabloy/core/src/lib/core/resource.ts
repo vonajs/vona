@@ -11,18 +11,21 @@ export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
+    let { module, scene, name, scope, beanClass } = options;
+    // name
+    name = this._parseBeanName(beanClass!, scene, name);
     // module
-    if (!options.module) throw new Error(`module name not parsed for bean: ${options.scene}.${options.name}`);
+    if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // fullName
-    const fullName = options.scene ? `${options.module}.${options.scene}.${options.name}` : options.name;
+    const fullName = scene ? `${module}.${scene}.${name}` : name;
     // options
     const beanOptions = {
       fullName,
-      module: options.module,
-      scene: options.scene,
-      name: options.name,
-      scope: options.scope,
-      beanClass: options.beanClass,
+      module,
+      scene,
+      name,
+      scope,
+      beanClass,
     } as IDecoratorBeanOptionsBase<T>;
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
@@ -46,6 +49,24 @@ export class AppResource {
     }
     if (!fullName) return null!;
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;
+  }
+
+  _parseBeanName<T>(beanClass: Constructable<T>, scene?: string, name?: string) {
+    // name
+    if (name) return name;
+    // scene
+    if (!scene) scene = 'bean';
+    scene = scene.replace(/\./gi, '');
+    // bean class name
+    const beanClassName = beanClass.name;
+    if (beanClassName.toLowerCase().startsWith(scene)) {
+      name = beanClassName.substring(scene.length);
+    } else {
+      name = beanClassName;
+    }
+    // lowerCase
+    name = name.charAt(0).toLowerCase() + name.substring(1);
+    return name;
   }
 }
 

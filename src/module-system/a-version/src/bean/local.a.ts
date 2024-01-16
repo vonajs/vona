@@ -1,13 +1,13 @@
 import { BeanBase, Local } from '@cabloy/core';
 
-@Local({ name: 'a' })
+@Local()
 export class LocalA extends BeanBase {
   getName() {
     return 'yang';
   }
 }
 
-@Local({ name: 'b' })
+@Local()
 export class LocalB extends BeanBase {
   localA: LocalA;
 
