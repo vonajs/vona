@@ -9,6 +9,7 @@ export class LocalA extends BeanBase {
 
 @Local()
 export class LocalB extends BeanBase {
+  @Use()
   localA: LocalA;
 
   printName() {
