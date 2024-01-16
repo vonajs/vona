@@ -2,6 +2,7 @@ import is from 'is-type-of';
 import ProxyMagic from './proxyMagic.js';
 import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
 import { Constructable } from '../../decorator/index.js';
+import { appResource } from '../../core/resource.js';
 
 export class BeanContainer {
   app: CabloyApplication;
@@ -47,9 +48,12 @@ export class BeanContainer {
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;
-  _newBean<T extends IBeanRecord, K extends keyof T>(beanFullName: K, ...args): T[K];
+  _newBean<V extends IBeanRecord, K extends keyof V>(beanFullName: K, ...args): V[K];
   _newBean<T>(beanFullName: string, ...args): T | undefined;
   _newBean<T>(beanFullName: Constructable<T> | string, ...args): T {
+    //const a = appResource.getBean(
+    // bean options
+    //const beanOptions = appResource.getBean(beanFullName);
     // class
     if (is.class(beanFullName)) {
       const beanInstance = new (<any>beanFullName)(...args);

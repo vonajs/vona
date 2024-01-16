@@ -31,8 +31,8 @@ export class AppResource extends BeanBase {
   }
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<T extends IBeanRecord, K extends keyof T>(beanFullName: K): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
+  getBean<V extends IBeanRecord, K extends keyof V>(beanFullName: K): IDecoratorBeanOptionsBase<V[K]> | undefined;
+  //getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
     if (typeof beanFullName !== 'string' && is.class(beanFullName)) {
