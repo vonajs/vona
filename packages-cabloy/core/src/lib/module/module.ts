@@ -41,8 +41,8 @@ export class ModuleTools extends BeanBase {
       const module = app.meta.modulesArray[i];
       module.resource = modulesResource[i];
     }
-    const b = app.bean._getBean('a-version.local.b');
-    b.printName();
+    // const b = app.bean._getBean('a-version.local.b');
+    // b.printName();
     // 2. main
     for (const module of app.meta.modulesArray) {
       if (module.resource.Main) {
