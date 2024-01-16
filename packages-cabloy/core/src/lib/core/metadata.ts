@@ -47,8 +47,8 @@ export class AppMetadata {
     return own;
   }
 
-  getDesignType<T>(target: Constructable<T>, prop?: MetadataKey) {
-    return this.getMetadata('design:type', target, prop);
+  getDesignType(target: Object, prop?: MetadataKey) {
+    return this.getMetadata('design:type', target as any, prop);
   }
 }
 
