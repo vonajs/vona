@@ -48,10 +48,9 @@ export class BeanContainer {
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;
-  _newBean<V extends IBeanRecord, K extends keyof V>(beanFullName: K, ...args): V[K];
-  _newBean<T>(beanFullName: string, ...args): T | undefined;
+  _newBean<K extends keyof IBeanRecord>(beanFullName: K, ...args): IBeanRecord[K];
+  _newBean<T>(beanFullName: string, ...args): T;
   _newBean<T>(beanFullName: Constructable<T> | string, ...args): T {
-    //const a = appResource.getBean(
     // bean options
     //const beanOptions = appResource.getBean(beanFullName);
     // class
