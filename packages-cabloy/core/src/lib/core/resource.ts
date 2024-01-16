@@ -35,10 +35,10 @@ export class AppResource {
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
-    if (typeof beanFullName !== 'string' && is.class(beanFullName)) {
+    if (typeof beanFullName === 'function' && is.class(beanFullName)) {
       fullName = appMetadata.getOwnMetaData(DecoratorBeanFullName, beanFullName);
     } else {
-      fullName = fullName;
+      fullName = beanFullName as string;
     }
     if (!fullName) return;
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;

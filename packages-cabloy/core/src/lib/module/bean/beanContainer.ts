@@ -7,6 +7,7 @@ import { appResource } from '../../core/resource.js';
 export class BeanContainer {
   app: CabloyApplication;
   ctx: CabloyContext;
+  private __instances__: Record<string, Constructable> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
@@ -49,10 +50,10 @@ export class BeanContainer {
       return null!;
     }
     const fullName = beanOptions.fullName;
-    if (this[fullName] === undefined) {
-      this[fullName] = this._newBean(fullName);
+    if (this.__instances__[fullName] === undefined) {
+      this.__instances__[fullName] = this._newBean(fullName);
     }
-    return this[fullName];
+    return this.__instances__[fullName] as T;
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;
@@ -321,8 +322,8 @@ export function BeanContainerCreate(app, ctx) {
   const beanContainer = new BeanContainer(app, ctx);
   return new Proxy(beanContainer, {
     get(obj, prop) {
-      if (obj[prop]) return obj[prop];
       if (typeof prop === 'symbol') return obj[prop];
+      if (obj[prop]) return obj[prop];
       return obj._getBean(prop);
     },
   });
