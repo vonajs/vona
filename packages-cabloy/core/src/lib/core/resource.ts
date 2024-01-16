@@ -32,13 +32,13 @@ export class AppResource {
     // record
     this.beans[beanOptions.fullName] = beanOptions;
     // set metadata
-    appMetadata.defineMetaData(DecoratorBeanFullName, fullName, beanOptions.beanClass);
+    appMetadata.defineMetadata(DecoratorBeanFullName, fullName, beanOptions.beanClass);
     // ok
     return beanOptions;
   }
 
   getBeanFullName<T>(A: Constructable<T>): string | undefined {
-    return appMetadata.getOwnMetaData(DecoratorBeanFullName, A);
+    return appMetadata.getOwnMetadata(DecoratorBeanFullName, A);
   }
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
@@ -47,7 +47,7 @@ export class AppResource {
   getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
     if (typeof beanFullName === 'function' && is.class(beanFullName)) {
-      fullName = appMetadata.getOwnMetaData(DecoratorBeanFullName, beanFullName);
+      fullName = appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
     } else {
       fullName = beanFullName as string;
     }

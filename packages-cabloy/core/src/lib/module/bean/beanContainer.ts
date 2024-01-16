@@ -2,6 +2,7 @@ import is from 'is-type-of';
 import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
+import { MetadataKey } from '../../core/metadata.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 
@@ -238,7 +239,7 @@ export class BeanContainer {
     if (!beanOptions) return [];
     if (beanOptions.__aopChains__) return beanOptions.__aopChains__;
     // chains
-    const chains: (string | symbol)[] = [];
+    const chains: MetadataKey[] = [];
     if (!is.class(beanFullName)) {
       for (const key in self.app.meta.aops) {
         const aop = self.app.meta.aops[key];
@@ -274,7 +275,7 @@ export class BeanContainer {
     if (!beanOptions) return [];
     if (beanOptions.__aopChainsKey__[chainsKey]) return beanOptions.__aopChainsKey__[chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
-    const chains: [string | symbol, string][] = [];
+    const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
       if (aopKey === ProxyMagic) {
         chains.push([aopKey, methodName]);

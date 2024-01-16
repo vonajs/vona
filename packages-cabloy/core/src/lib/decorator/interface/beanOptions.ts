@@ -1,4 +1,5 @@
 import { BeanBase } from '../../../index.js';
+import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
@@ -14,8 +15,8 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   beanClass: Constructable<T>;
   scope: ContainerScope | undefined;
   aop: boolean | undefined;
-  __aopChains__: (string | symbol)[];
-  __aopChainsKey__: Record<string, [string | symbol, string][]>;
+  __aopChains__: MetadataKey[];
+  __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
 
 export interface IDecoratorBeanOptions<T = unknown> {

@@ -1,8 +1,11 @@
+import { appMetadata } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 
 export function Use(): PropertyDecorator {
-  return function (target: Object, prop: string | symbol) {
+  return function (target: Object, prop: MetadataKey) {
     // beanFullName
+    const proto=appMetadata.
+    const beanFullName=
     // add
     appResource.addBean({
       module,
