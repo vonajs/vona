@@ -1,5 +1,6 @@
-import { BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 
+@Bean({ scene: 'broadcast' })
 export class BroadcastColumnsClear extends BeanBase {
   async execute(context) {
     const sameAsCaller = context.sameAsCaller;

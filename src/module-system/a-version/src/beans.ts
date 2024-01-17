@@ -1,12 +1,12 @@
 export { VersionManager } from './bean/version.manager.js';
 export { LocalA, LocalB } from './bean/local.a.js';
-// const localVersion = require('./bean/local.version.js');
+export { LocalVersion } from './bean/local.version.js';
 // const startupWorkerAlive = require('./bean/startup.workerAlive.js');
-// const startupDatabaseInit = require('./bean/startup.databaseInit.js');
-// const startupDatabaseName = require('./bean/startup.databaseName.js');
+export { StartupDatabaseInit } from './bean/startup.databaseInit.js';
+export { StartupDatabaseName } from './bean/startup.databaseName.js';
 // const startupInstanceInit = require('./bean/startup.instanceInit.js');
-// const broadcastColumnsClear = require('./bean/broadcast.columnsClear.js');
-// const beanWorker = require('./bean/bean.worker.js');
+export { BroadcastColumnsClear } from './bean/broadcast.columnsClear.js';
+export { BeanWorker } from './bean/bean.worker.js';
 
 // module.exports = {
 //   // version

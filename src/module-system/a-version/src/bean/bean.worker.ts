@@ -1,6 +1,7 @@
-import { BeanBase, IORedis } from '@cabloy/core';
+import { Bean, BeanBase, IORedis } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
 
+@Bean()
 export class BeanWorker extends BeanBase {
   _redisCache: IORedis.Redis;
   // _redisIO = null;
