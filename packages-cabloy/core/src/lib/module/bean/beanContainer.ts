@@ -77,6 +77,13 @@ export class BeanContainer {
     return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.aop);
   }
 
+  _newBeanModule<T>(A: Constructable<T>, moduleScope, ...args): T;
+  _newBeanModule<K extends keyof IBeanRecord>(beanFullName: K, moduleScope, ...args): IBeanRecord[K];
+  _newBeanModule<T>(beanFullName: string, moduleScope, ...args): T;
+  _newBeanModule<T>(beanFullName: Constructable<T> | string, moduleScope, ...args): T {
+    return this._newBean(beanFullName as any, moduleScope, ...args);
+  }
+
   _injectBeanInstance(beanInstance, beanFullName) {
     const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
@@ -84,9 +91,24 @@ export class BeanContainer {
     for (const key in uses) {
       const useOptions = uses[key];
       const targetOptions = appResource.getBean(useOptions.beanFullName)!;
+      const targetBeanFullName = targetOptions.beanFullName;
       const scope = targetOptions.scope || 'ctx';
-      let targetBeanFullName = targetOptions.beanFullName;
-      let targetInstance;
+      const moduleScope = useOptions.moduleScope;
+      beanInstance[useOptions.prop] = this._injectBeanInstanceProp(targetBeanFullName, scope, moduleScope);
+    }
+  }
+
+  _injectBeanInstanceProp(targetBeanFullName, scope, moduleScope) {
+    let targetInstance;
+    if (moduleScope) {
+      if (scope === 'app') {
+        targetInstance = this.app.bean._getBeanModule(targetBeanFullName, moduleScope);
+      } else if (scope === 'ctx') {
+        targetInstance = this._getBeanModule(targetBeanFullName, moduleScope);
+      } else if (scope === 'transient') {
+        targetInstance = this._newBeanModule(targetBeanFullName, moduleScope);
+      }
+    } else {
       if (scope === 'app') {
         targetInstance = this.app.bean._getBean(targetBeanFullName);
       } else if (scope === 'ctx') {
@@ -94,8 +116,9 @@ export class BeanContainer {
       } else if (scope === 'transient') {
         targetInstance = this._newBean(targetBeanFullName);
       }
-      beanInstance[useOptions.prop] = targetInstance;
     }
+
+    return targetInstance;
   }
 
   _patchBeanInstance(beanInstance, args, beanFullName, aop) {
