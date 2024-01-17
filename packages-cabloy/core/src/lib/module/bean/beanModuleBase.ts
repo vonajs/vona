@@ -1,6 +1,5 @@
 import { BeanBase } from './beanBase.js';
 
-const BeanModuleCaches = Symbol('BEAN#__BeanModuleCaches');
 const BeanModuleScope = Symbol('BEAN#__BeanModuleScope');
 
 export class BeanModuleBase extends BeanBase {
@@ -17,12 +16,6 @@ export class BeanModuleBase extends BeanBase {
 
   // other module's bean
   module(moduleScope) {
-    if (!this[BeanModuleCaches]) this[BeanModuleCaches] = new Map();
-    let beanInstance = this[BeanModuleCaches].get(moduleScope);
-    if (!beanInstance) {
-      beanInstance = this.ctx.bean._newBean(this.constructor as any, moduleScope);
-      this[BeanModuleCaches].set(moduleScope, beanInstance);
-    }
-    return beanInstance;
+    return this.ctx.bean._newBeanModule(this.constructor as any, moduleScope);
   }
 }
