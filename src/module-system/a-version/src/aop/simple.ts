@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { Aop, BeanBase } from '@cabloy/core';
 
 class SimpleAopBase extends BeanBase {
   actionSync(context, next) {
@@ -7,7 +7,7 @@ class SimpleAopBase extends BeanBase {
   }
 }
 
-@Aop()
+@Aop({ match: 'a-version.local.a' })
 export class AopSimple extends SimpleAopBase {
   // magic
   __get__(context, next) {

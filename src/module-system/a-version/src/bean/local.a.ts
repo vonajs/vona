@@ -3,7 +3,11 @@ import { __ThisModule__ } from '../types/this.js';
 
 @Local()
 export class LocalA extends BeanModuleBase {
+  actionSync() {
+    return 'a';
+  }
   getName() {
+    this.actionSync();
     //const aa = this.module('test-party');
     //const bb = this.app.bean.local.user;
     //const cc = this.app.bean.local.module('test-party').aaa;
