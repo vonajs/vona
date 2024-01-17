@@ -5,7 +5,8 @@ import { __ThisModule__ } from '../types/this.js';
 export class LocalA extends BeanModuleBase {
   getName() {
     const aa = this.module('test-party');
-    const bb = (<any>this.app.bean.local).aaa;
+    const bb = this.app.bean.local.user;
+    const cc = this.app.bean.local.module('test-party').aaa;
     console.log(this.moduleScope, __ThisModule__);
     if (this.moduleScope !== __ThisModule__) throw new Error();
     return this.moduleScope;
