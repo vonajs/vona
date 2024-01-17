@@ -1,8 +1,8 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
 
-function createLoaderClass<T>(T) {
-  return class LoaderClass extends T {
+function createLoaderClass(Base) {
+  return class LoaderClass extends Base {
     pkgCabloy: any = null;
 
     loadConfig() {

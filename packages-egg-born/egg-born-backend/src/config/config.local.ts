@@ -1,4 +1,4 @@
-module.exports = appInfo => {
+module.exports = _appInfo => {
   const config = {} as any;
 
   // proxy

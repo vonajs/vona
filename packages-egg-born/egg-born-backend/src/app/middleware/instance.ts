@@ -1,4 +1,4 @@
-module.exports = (options, app) => {
+module.exports = () => {
   return async function (ctx, next) {
     // init instance
     await ctx.bean.instance.initInstance();

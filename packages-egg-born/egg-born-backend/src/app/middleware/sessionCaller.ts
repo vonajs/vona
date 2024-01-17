@@ -1,4 +1,4 @@
-module.exports = (options, app) => {
+module.exports = () => {
   return async function (ctx, next) {
     // session
     if (ctx.ctxCaller && ctx.ctxCaller.session) {

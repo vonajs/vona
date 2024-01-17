@@ -1,4 +1,4 @@
-module.exports = (options, app) => {
+module.exports = () => {
   return async function (ctx, next) {
     // bodyCrypto decrypt
     await ctx.bean.bodyCrypto.decrypt();

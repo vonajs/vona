@@ -1,4 +1,4 @@
-module.exports = (options, app) => {
+module.exports = () => {
   return async function (ctx, next) {
     // check appReady
     if (!ctx.innerAccess) {

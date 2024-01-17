@@ -2,7 +2,7 @@ import is from 'is-type-of';
 import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
-import { MetadataKey, appMetadata } from '../../core/metadata.js';
+import { MetadataKey } from '../../core/metadata.js';
 import { BeanLocal, BeanLocalLike } from './beanLocal.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');

@@ -311,7 +311,7 @@ module.exports = appInfo => {
   return config;
 };
 
-function getFullPath(ctx, dir, filename, options) {
+function getFullPath(ctx, dir, filename, _options) {
   const parts = filename.split(path.sep);
   const wordFirst = parts.shift();
   // public
