@@ -312,13 +312,13 @@ export class BeanContainer {
     if (host.__aopChains__) return host.__aopChains__;
     // chains
     const chains: MetadataKey[] = [];
-    if (beanOptions) {
+    if (beanOptions && !beanOptions.aop) {
       for (const key in self.app.meta.aops) {
         const aop = self.app.meta.aops[key];
         // not self
         if (key === beanOptions.beanFullName) continue;
-        // check if match aop
-        if (beanOptions.aop && !aop.matchAop) continue;
+        // // check if match aop
+        // if (beanOptions.aop && !aop.matchAop) continue;
         // match
         if (__aopMatch(aop.match, beanOptions.beanFullName)) {
           chains.push(key);
