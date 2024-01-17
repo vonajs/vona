@@ -5,11 +5,14 @@ import { appResource } from '../../core/resource.js';
 import { MetadataKey, appMetadata } from '../../core/metadata.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
+const BeanContainerInstances = Symbol.for('Bean#Instances');
+const BeanContainerInstancesModule = Symbol.for('Bean#InstancesModule');
 
 export class BeanContainer {
   app: CabloyApplication;
   ctx: CabloyContext;
-  private __instances__: Record<string, Constructable> = {};
+  [BeanContainerInstances]: Record<string, Constructable> = {};
+  [BeanContainerInstancesModule]: Record<string, Constructable> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
@@ -50,10 +53,28 @@ export class BeanContainer {
       return null!;
     }
     const fullName = beanOptions.beanFullName;
-    if (this.__instances__[fullName] === undefined) {
-      this.__instances__[fullName] = this._newBean(fullName);
+    if (this[BeanContainerInstances][fullName] === undefined) {
+      this[BeanContainerInstances][fullName] = this._newBean(fullName);
     }
-    return this.__instances__[fullName] as T;
+    return this[BeanContainerInstances][fullName] as T;
+  }
+
+  _getBeanModule<T>(A: Constructable<T>, moduleScope): T;
+  _getBeanModule<K extends keyof IBeanRecord>(beanFullName: K, moduleScope): IBeanRecord[K];
+  _getBeanModule<T>(beanFullName: string, moduleScope): T;
+  _getBeanModule<T>(beanFullName: Constructable<T> | string, moduleScope): T {
+    // bean options
+    const beanOptions = appResource.getBean(beanFullName as any);
+    if (!beanOptions) {
+      // not found
+      return null!;
+    }
+    const fullName = beanOptions.beanFullName;
+    const key = `${fullName}#${moduleScope}`;
+    if (this[BeanContainerInstancesModule][key] === undefined) {
+      this[BeanContainerInstancesModule][key] = this._newBeanModule(fullName, moduleScope);
+    }
+    return this[BeanContainerInstancesModule][key] as T;
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;

@@ -4,6 +4,8 @@ const BeanModuleCaches = Symbol('BEAN#__BeanModuleCaches');
 const BeanModuleScope = Symbol('BEAN#__BeanModuleScope');
 
 export class BeanModuleBase extends BeanBase {
+  [BeanModuleScope]?: string;
+
   constructor(moduleScope?: string) {
     super();
     this[BeanModuleScope] = moduleScope;
