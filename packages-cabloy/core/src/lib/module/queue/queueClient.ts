@@ -111,12 +111,12 @@ export class QueueClient extends BeanBase {
     const queueOptions = (queueConfig.options && queueConfig.options.queue) || null;
 
     // create queue
-    const connectionQueue = app.redis.get('queue').duplicate();
+    const connectionQueue: bull.ConnectionOptions = app.redis.get('queue').duplicate();
     const _queueOptions = Object.assign({}, queueOptions, { prefix, connection: connectionQueue });
     _queue.queue = new bull.Queue(queueKey, _queueOptions);
 
     // create events
-    const connectionEvents = app.redis.get('queue').duplicate();
+    const connectionEvents: bull.ConnectionOptions = app.redis.get('queue').duplicate();
     _queue.queueEvents = new bull.QueueEvents(queueKey, { prefix, connection: connectionEvents });
     _queue.queueEvents.on('completed', ({ jobId, returnvalue }) => {
       this._callCallback(jobId, null, returnvalue);
