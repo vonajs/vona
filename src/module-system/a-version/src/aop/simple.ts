@@ -21,7 +21,7 @@ export class AopSimple extends SimpleAopBase {
     // }
   }
 
-  __set__(context, next) {
+  __set__(_context, next) {
     // const prop = context.prop;
     // if (prop === 'name') {
     //   const parts = context.value.split(':');

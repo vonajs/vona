@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-module.exports = app => {
+module.exports = _app => {
   const config = {} as any;
 
   // startups
