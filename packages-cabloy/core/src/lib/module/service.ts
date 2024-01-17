@@ -2,10 +2,7 @@ import { CabloyApplication } from '../../type/index.js';
 
 const SERVICEPROXY = Symbol('CTX#__SERVICEPROXY');
 
-export default function (app: CabloyApplication, modules) {
-  // load services
-  loadServices();
-
+export default function (app: CabloyApplication) {
   // patch service
   patchCreateContext();
 
@@ -38,21 +35,5 @@ export default function (app: CabloyApplication, modules) {
 
       return context;
     };
-  }
-
-  function loadServices() {
-    for (const key in modules) {
-      const module = modules[key];
-      const services = module.main.services;
-      if (!services) continue;
-      for (const serviceName in services) {
-        const beanName = `service.${serviceName}`;
-        const bean = {
-          mode: 'app',
-          bean: services[serviceName],
-        };
-        app.bean._register(module.info.relativeName, beanName, bean);
-      }
-    }
   }
 }

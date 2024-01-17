@@ -1,10 +1,7 @@
 import { CabloyApplication } from '../../type/index.js';
 import { Model } from '../base/model.js';
 
-export default function (app: CabloyApplication, modules) {
-  // load models
-  loadModels();
-
+export default function (app: CabloyApplication) {
   // patch model
   patchCreateContext();
 
@@ -50,21 +47,5 @@ export default function (app: CabloyApplication, modules) {
         return context.bean._getBean(beanFullName);
       },
     });
-  }
-
-  function loadModels() {
-    for (const key in modules) {
-      const module = modules[key];
-      const models = module.main.models;
-      if (!models) continue;
-      for (const modelName in models) {
-        const beanName = `model.${modelName}`;
-        const bean = {
-          mode: 'app',
-          bean: models[modelName],
-        };
-        app.bean._register(module.info.relativeName, beanName, bean);
-      }
-    }
   }
 }

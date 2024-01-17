@@ -1,7 +1,6 @@
 import { AppMeta } from '../core/meta.js';
 import { ModuleTools } from './module.js';
 import loadRoutes from './route.js';
-import loadControllers from './controller.js';
 import loadServices from './service.js';
 import loadModels from './model.js';
 import loadConfig from './config.js';
@@ -51,9 +50,8 @@ export class ModuleLoader extends BeanBase {
       loadErrors(app, modules);
       loadConstants(app, modules);
       loadRoutes(app, modules);
-      loadControllers(app, modules);
-      loadServices(app, modules);
-      loadModels(app, modules);
+      loadServices(app);
+      loadModels(app);
       loadRedis(app);
       loadQueues(app, modules);
       loadBroadcasts(app, modules);

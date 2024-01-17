@@ -22,25 +22,6 @@ export class BeanContainer {
     this.local = this._newBean(BeanLocal) as BeanLocalLike;
   }
 
-  _register(moduleName, beanName, beanClass) {
-    const beanFullName = beanClass.global
-      ? beanName
-      : `${typeof moduleName === 'string' ? moduleName : moduleName.relativeName}.${beanName}`;
-    (<any>this.app.meta).beans[beanFullName] = beanClass;
-    return beanFullName;
-  }
-
-  _registerAop(moduleName, aopName, aopClass) {
-    const beanName = `aop.${aopName}`;
-    const beanClass = {
-      bean: aopClass.bean,
-      aop: true,
-    };
-    const beanFullName = this._register(moduleName, beanName, beanClass);
-    this.app.meta.aops[beanFullName] = { match: aopClass.match, matchAop: aopClass.matchAop };
-    return beanFullName;
-  }
-
   getBeanFullName<T>(A: Constructable<T>): string | undefined {
     return appResource.getBeanFullName(A);
   }
