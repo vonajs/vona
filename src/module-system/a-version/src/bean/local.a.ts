@@ -9,6 +9,7 @@ export class LocalA extends BeanModuleBase {
   getName() {
     this.ctx.bean['a-version.version.manager'].init;
     this.ctx.local.version.__database;
+
     //const aa = this.actionSync();
     //const aa = this.module('test-party');
     //const bb = this.app.bean.local.user;
