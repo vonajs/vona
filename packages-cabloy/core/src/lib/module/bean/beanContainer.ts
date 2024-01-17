@@ -3,6 +3,7 @@ import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '.
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
 import { MetadataKey, appMetadata } from '../../core/metadata.js';
+import { BeanLocal } from './beanLocal.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -11,12 +12,14 @@ const BeanContainerInstancesModule = Symbol.for('Bean#InstancesModule');
 export class BeanContainer {
   app: CabloyApplication;
   ctx: CabloyContext;
+  local: BeanLocal;
   [BeanContainerInstances]: Record<string, Constructable> = {};
   [BeanContainerInstancesModule]: Record<string, Constructable> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
     this.ctx = ctx;
+    this.local = this._newBean(BeanLocal);
   }
 
   _register(moduleName, beanName, beanClass) {
@@ -305,19 +308,19 @@ export class BeanContainer {
     const self = this;
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
-    if (!beanOptions) return [];
-    if (beanOptions.__aopChains__) return beanOptions.__aopChains__;
+    const host = beanOptions || beanFullName;
+    if (host.__aopChains__) return host.__aopChains__;
     // chains
     const chains: MetadataKey[] = [];
-    if (!is.class(beanFullName)) {
+    if (beanOptions) {
       for (const key in self.app.meta.aops) {
         const aop = self.app.meta.aops[key];
         // not self
-        if (key === beanFullName) continue;
+        if (key === beanOptions.beanFullName) continue;
         // check if match aop
         if (beanOptions.aop && !aop.matchAop) continue;
         // match
-        if (__aopMatch(aop.match, beanFullName)) {
+        if (__aopMatch(aop.match, beanOptions.beanFullName)) {
           chains.push(key);
         }
       }
@@ -327,20 +330,21 @@ export class BeanContainer {
       chains.push(ProxyMagic);
     }
     // hold
-    beanOptions.__aopChains__ = chains;
+    host.__aopChains__ = chains;
     return chains;
   }
 
   _getAopChains(beanFullName) {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
-    if (!beanOptions) return [];
-    return beanOptions.__aopChains__;
+    const host = beanOptions || beanFullName;
+    return host.__aopChains__;
   }
 
   _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
+
     if (!beanOptions) return [];
     if (beanOptions.__aopChainsKey__[chainsKey]) return beanOptions.__aopChainsKey__[chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
