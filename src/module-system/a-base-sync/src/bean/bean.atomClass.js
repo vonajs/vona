@@ -25,7 +25,7 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleBase {
   }
 
   async __getRaw({ id, module, atomClassName }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const data = id ? { id } : { module, atomClassName };
     const res = await this.model.get(data);
     if (res) return res;
@@ -132,7 +132,7 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleBase {
           inner join aAtomClass b on a.atomClassId=b.id
             where a.iid=? and a.userIdWho=?
       `,
-      [this.ctx.instance.id, user.id]
+      [this.ctx.instance.id, user.id],
     );
     const itemsMap = {};
     for (const item of items) {
@@ -173,7 +173,7 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleBase {
             left join aAtom c on b.flowKey=c.atomStaticKey and c.atomStage=1
               where a.iid=? and a.atomClassId=? and a.userIdWho=?
         `,
-      [this.ctx.instance.id, atomClassId, user.id]
+      [this.ctx.instance.id, atomClassId, user.id],
     );
     // locale
     await this.ctx.bean.role._adjustFlowActionsLocale({ items, actionNameKey: 'name' });
@@ -190,7 +190,7 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleBase {
         select * from aViewRoleRightAtomClass 
           where iid=? and atomClassId=? and action=? ${clauseExcludeMine} ${clauseOnlyMine} and roleIdWho=?
       `,
-      [this.ctx.instance.id, atomClassId, action, roleId]
+      [this.ctx.instance.id, atomClassId, action, roleId],
     );
     return !!res;
   }
@@ -205,7 +205,7 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleBase {
         select * from aViewUserRightAtomClass 
           where iid=? and atomClassId=? and action=? ${clauseExcludeMine} ${clauseOnlyMine} and userIdWho=?
       `,
-      [this.ctx.instance.id, atomClassId, action, user.id]
+      [this.ctx.instance.id, atomClassId, action, user.id],
     );
     return !!res;
   }
@@ -218,7 +218,7 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleBase {
         select * from aViewUserRightAtomClass 
           where iid=? and atomClassId=? and userIdWho=?
       `,
-      [this.ctx.instance.id, atomClassId, user.id]
+      [this.ctx.instance.id, atomClassId, user.id],
     );
     return !!res;
   }

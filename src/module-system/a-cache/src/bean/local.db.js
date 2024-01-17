@@ -21,7 +21,7 @@ module.exports = class CacheDb extends module.meta.class.BeanModuleBase {
     const expired = second ? `TIMESTAMPADD(SECOND,${second},CURRENT_TIMESTAMP)` : 'null';
     const res = await this.ctx.db.get('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
-      module: this.moduleName,
+      module: this.moduleScope,
       name,
     });
     if (res) {
@@ -30,17 +30,17 @@ module.exports = class CacheDb extends module.meta.class.BeanModuleBase {
           update aCache set value=?, expired=${expired}
             where id=?
           `,
-        [JSON.stringify(value), res.id]
+        [JSON.stringify(value), res.id],
       );
     } else {
       if (queue) {
         await this.ctx.meta.util.lock({
-          resource: `${moduleInfo.relativeName}.cacheDbSet.${this.moduleName}.${name}`,
+          resource: `${moduleInfo.relativeName}.cacheDbSet.${this.moduleScope}.${name}`,
           fn: async () => {
             return await this.ctx.meta.util.executeBeanIsolate({
               beanModule: moduleInfo.relativeName,
               fn: async ({ ctx }) => {
-                return await ctx.cache._db.module(this.moduleName)._set({ name, value, timeout, queue: false });
+                return await ctx.cache._db.module(this.moduleScope)._set({ name, value, timeout, queue: false });
               },
             });
           },
@@ -50,7 +50,7 @@ module.exports = class CacheDb extends module.meta.class.BeanModuleBase {
           `
             insert into aCache(iid,module,name,value,expired) values(?,?,?,?,${expired})
             `,
-          [this.ctx.instance ? this.ctx.instance.id : 0, this.moduleName, name, JSON.stringify(value)]
+          [this.ctx.instance ? this.ctx.instance.id : 0, this.moduleScope, name, JSON.stringify(value)],
         );
       }
     }
@@ -68,14 +68,14 @@ module.exports = class CacheDb extends module.meta.class.BeanModuleBase {
   async _has(name) {
     const sql =
       'select * from aCache where iid=? and module=? and name=? and (expired is null or expired>CURRENT_TIMESTAMP)';
-    const res = await this.ctx.db.queryOne(sql, [this.ctx.instance ? this.ctx.instance.id : 0, this.moduleName, name]);
+    const res = await this.ctx.db.queryOne(sql, [this.ctx.instance ? this.ctx.instance.id : 0, this.moduleScope, name]);
     return res;
   }
 
   async remove(name) {
     await this.ctx.db.delete('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
-      module: this.moduleName,
+      module: this.moduleScope,
       name,
     });
   }
@@ -83,7 +83,7 @@ module.exports = class CacheDb extends module.meta.class.BeanModuleBase {
   async clear() {
     await this.ctx.db.delete('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
-      module: this.moduleName,
+      module: this.moduleScope,
     });
   }
 };

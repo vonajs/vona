@@ -303,7 +303,7 @@ module.exports = class Resource extends module.meta.class.BeanModuleBase {
   // ];
   async addRoleResourceBatch({ module, roleResources }) {
     // module
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     // roleResources
     if (!roleResources || !roleResources.length) return;
     for (const roleResource of roleResources) {

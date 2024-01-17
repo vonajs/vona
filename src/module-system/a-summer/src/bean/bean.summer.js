@@ -51,7 +51,7 @@ module.exports = class Summer extends module.meta.class.BeanModuleBase {
 
   _prepareFullKey({ module, name, fullKey }) {
     if (!fullKey) {
-      module = module || this.moduleName;
+      module = module || this.moduleScope;
       fullKey = `${module}:${name}`;
     }
     return fullKey;

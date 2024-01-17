@@ -8,7 +8,7 @@ module.exports = class Stats extends module.meta.class.BeanModuleBase {
   }
 
   notify({ module, name, nameSub, user }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     user = user || (this.ctx.state.user && this.ctx.state.user.op);
     this.ctx.tail(() => {
       this._notify_tail({ module, name, nameSub, user, async: false });
@@ -16,7 +16,7 @@ module.exports = class Stats extends module.meta.class.BeanModuleBase {
   }
 
   async notifyAsync({ module, name, nameSub, user }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     user = user || (this.ctx.state.user && this.ctx.state.user.op);
     await this._notify_tail({ module, name, nameSub, user, async: true });
   }
@@ -87,7 +87,7 @@ module.exports = class Stats extends module.meta.class.BeanModuleBase {
   }
 
   async get({ module, name, nameSub, user }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const provider = this._findStatsProvider({ module, name });
     const fullName = this._getFullName({ name, nameSub });
     return await this._get({
@@ -157,7 +157,7 @@ module.exports = class Stats extends module.meta.class.BeanModuleBase {
   }
 
   _findStatsProvider({ module, name }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const fullKey = `${module}:${name}`;
     if (!__stats) {
       __statsDeps = {};

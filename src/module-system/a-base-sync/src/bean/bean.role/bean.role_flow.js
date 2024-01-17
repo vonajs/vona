@@ -9,7 +9,7 @@ module.exports = class Role {
   // ];
   async addRoleRightBatchByModeFlow({ atomClassId, module, atomClassName, roleRights }) {
     // module
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     // const _module = this.ctx.app.meta.modules[module];
     // atomClass
     const atomClass = await this.ctx.bean.atomClass.get({ id: atomClassId, module, atomClassName });

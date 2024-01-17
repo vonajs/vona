@@ -1,7 +1,7 @@
 const moduleInfo = module.info;
 module.exports = class Atom extends module.meta.class.BeanModuleBase {
   get atomClass() {
-    return this.ctx.bean.atomClass.module(this.moduleName);
+    return this.ctx.bean.atomClass.module(this.moduleScope);
   }
 
   get model() {

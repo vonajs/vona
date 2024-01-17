@@ -19,7 +19,7 @@ module.exports = class Sequence extends module.meta.class.BeanModuleBase {
   }
 
   async next(name) {
-    const moduleName = this.moduleName;
+    const moduleName = this.moduleScope;
     return await this.ctx.meta.util.lock({
       resource: `${moduleInfo.relativeName}.sequence.${moduleName}.${name}`,
       fn: async () => {
@@ -59,7 +59,7 @@ module.exports = class Sequence extends module.meta.class.BeanModuleBase {
       // insert
       await this.ctx.db.insert('aSequence', {
         iid: this.ctx.instance.id,
-        module: this.moduleName,
+        module: this.moduleScope,
         name,
         value: JSON.stringify(value),
       });
@@ -72,14 +72,14 @@ module.exports = class Sequence extends module.meta.class.BeanModuleBase {
     // get
     const sequence = await this.ctx.db.get('aSequence', {
       iid: this.ctx.instance.id,
-      module: this.moduleName,
+      module: this.moduleScope,
       name,
     });
     return sequence;
   }
 
   _findSequenceProvider(name) {
-    const fullKey = `${this.moduleName}:${name}`;
+    const fullKey = `${this.moduleScope}:${name}`;
     if (!__sequences) {
       __sequences = this._collectSequences();
     }

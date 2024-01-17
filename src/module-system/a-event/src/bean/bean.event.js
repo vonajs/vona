@@ -34,7 +34,7 @@ module.exports = class Event extends module.meta.class.BeanModuleBase {
   }
 
   _getEventArray({ module, name }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const key = `${module}:${name}`;
     const events = this.ctx.bean.util.getPropertyObject(this.ctx.app.meta, 'events');
     if (events[key]) return events[key];

@@ -1,7 +1,7 @@
 // const moduleInfo = module.info;
 module.exports = class RedisDb extends module.meta.class.BeanModuleBase {
   _getKey(name) {
-    return `${this.ctx.instance ? this.ctx.instance.id : 0}:${this.moduleName}:${name}`;
+    return `${this.ctx.instance ? this.ctx.instance.id : 0}:${this.moduleScope}:${name}`;
   }
 
   async get(name) {

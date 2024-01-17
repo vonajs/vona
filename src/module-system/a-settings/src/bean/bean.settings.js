@@ -55,7 +55,7 @@ module.exports = class Settings extends module.meta.class.BeanModuleBase {
   // function
 
   async _get({ scene, module, name }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const res = await this.modelSettingsRef.get({
       module,
       scene: constants.scene[scene],
@@ -73,7 +73,7 @@ module.exports = class Settings extends module.meta.class.BeanModuleBase {
   }
 
   async _loadSettings({ scene, module }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const res = await this.modelSettings.get({
       module,
       scene: constants.scene[scene],
@@ -85,7 +85,7 @@ module.exports = class Settings extends module.meta.class.BeanModuleBase {
   }
 
   async _saveSettings({ scene, module, data }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const validator = this._getValidator({ scene, module });
     if (!validator) this.ctx.throw(404); // not found
     await this.ctx.bean.validation.validate({
@@ -158,7 +158,7 @@ module.exports = class Settings extends module.meta.class.BeanModuleBase {
   }
 
   _getValidator({ scene, module }) {
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     const validator = this.ctx.app.meta.modules[module].main.meta.settings[scene].validator;
     return validator ? { module, scene, validator } : null;
   }

@@ -58,7 +58,7 @@ module.exports = class AtomStatic extends module.meta.class.BeanModuleBase {
   }
 
   async _loadAtomStatics_prepare({ moduleName, atomClass, items }) {
-    moduleName = moduleName || this.moduleName;
+    moduleName = moduleName || this.moduleScope;
     const atomStaticKeys = [];
     for (const item of items) {
       // key not empty
@@ -94,7 +94,7 @@ module.exports = class AtomStatic extends module.meta.class.BeanModuleBase {
   }
 
   async loadAtomStatic({ moduleName, atomClass, item }, atoms) {
-    moduleName = moduleName || this.moduleName;
+    moduleName = moduleName || this.moduleScope;
     // key not empty
     if (!item.atomStaticKey) {
       throw new Error(`atomStaticKey cannot be empty for atom: ${moduleName}:${item.atomName}`);

@@ -8,8 +8,8 @@ module.exports = class CacheMem extends module.meta.class.BeanModuleBase {
     }
     return this.ctx.bean.util.getPropertyObject(
       this.ctx.app[CACHEMEMORY],
-      `${this.ctx.subdomain}&&${this.moduleName}`,
-      '&&'
+      `${this.ctx.subdomain}&&${this.moduleScope}`,
+      '&&',
     );
   }
 
@@ -49,7 +49,7 @@ module.exports = class CacheMem extends module.meta.class.BeanModuleBase {
     this.ctx.meta.util.broadcastEmit({
       module: 'a-cache',
       broadcastName: 'memRemove',
-      data: { moduleName: this.moduleName, name },
+      data: { moduleName: this.moduleScope, name },
     });
   }
 
@@ -65,7 +65,7 @@ module.exports = class CacheMem extends module.meta.class.BeanModuleBase {
     this.ctx.meta.util.broadcastEmit({
       module: 'a-cache',
       broadcastName: 'memClear',
-      data: { moduleName: this.moduleName },
+      data: { moduleName: this.moduleScope },
     });
   }
 
@@ -74,9 +74,9 @@ module.exports = class CacheMem extends module.meta.class.BeanModuleBase {
     if (
       this.ctx.app[CACHEMEMORY] &&
       this.ctx.app[CACHEMEMORY][this.ctx.subdomain] &&
-      this.ctx.app[CACHEMEMORY][this.ctx.subdomain][this.moduleName]
+      this.ctx.app[CACHEMEMORY][this.ctx.subdomain][this.moduleScope]
     ) {
-      this.ctx.app[CACHEMEMORY][this.ctx.subdomain][this.moduleName] = {};
+      this.ctx.app[CACHEMEMORY][this.ctx.subdomain][this.moduleScope] = {};
     }
   }
 

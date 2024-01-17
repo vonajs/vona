@@ -129,7 +129,7 @@ module.exports = class Role {
   // ];
   async addRoleRightBatch({ module, atomClassName, roleRights }) {
     // module
-    module = module || this.moduleName;
+    module = module || this.moduleScope;
     // const _module = this.ctx.app.meta.modules[module];
     // atomClass
     const atomClass = await this.ctx.bean.atomClass.get({ module, atomClassName });
@@ -205,7 +205,7 @@ module.exports = class Role {
         order by b.module,a.atomClassId,a.action
         ${_limit}
         `,
-      [this.ctx.instance.id, roleId]
+      [this.ctx.instance.id, roleId],
     );
     // adjust
     await this._adjustItems({ items });
@@ -238,7 +238,7 @@ module.exports = class Role {
         order by b.module,a.atomClassId,a.action
         ${_limit}
         `,
-      [this.ctx.instance.id, roleId]
+      [this.ctx.instance.id, roleId],
     );
     // adjust
     await this._adjustItems({ items });
@@ -268,7 +268,7 @@ module.exports = class Role {
         order by b.module,a.atomClassId,a.action
         ${_limit}
         `,
-      [this.ctx.instance.id, userId]
+      [this.ctx.instance.id, userId],
     );
     // adjust
     await this._adjustItems({ items });
@@ -308,7 +308,7 @@ module.exports = class Role {
             select a.* from aRole a
               where a.iid=? and a.id in (${scope.join(',')})
             `,
-      [this.ctx.instance.id]
+      [this.ctx.instance.id],
     );
     return this._translateRoleNamesLocale({ items });
   }
