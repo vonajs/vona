@@ -30,7 +30,6 @@ const middlewareRight = require('./bean/middleware.right.js');
 const middlewareJsonp = require('./bean/middleware.jsonp.js');
 const middlewareHttpLog = require('./bean/middleware.httpLog.js');
 const middlewareIOConnectionAuth = require('./bean/middleware.io.connectionAuth.js');
-const beanLocal = require('./bean/bean.local.js');
 const beanAtomBase = require('./bean/bean.atomBase.js');
 const beanAtom = require('./bean/bean.atom.js');
 const beanAtomAction = require('./bean/bean.atomAction.js');
@@ -165,10 +164,6 @@ module.exports = {
     bean: middlewareIOConnectionAuth,
   },
   // global
-  local: {
-    bean: beanLocal,
-    global: true,
-  },
   atomBase: {
     bean: beanAtomBase,
     global: true,
