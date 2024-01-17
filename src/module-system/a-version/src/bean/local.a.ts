@@ -12,7 +12,7 @@ export class LocalA extends BeanModuleBase {
 
 @Local()
 export class LocalB extends BeanBase {
-  @Use({ moduleScope: 'test-party' })
+  @Use()
   localA: LocalA;
 
   printName() {
