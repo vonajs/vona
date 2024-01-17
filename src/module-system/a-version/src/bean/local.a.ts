@@ -4,6 +4,7 @@ import { __ThisModule__ } from '../types/this.js';
 @Local()
 export class LocalA extends BeanModuleBase {
   getName() {
+    console.log(this.moduleScope, __ThisModule__);
     if (this.moduleScope !== __ThisModule__) throw new Error();
     return this.moduleScope;
   }
@@ -11,7 +12,7 @@ export class LocalA extends BeanModuleBase {
 
 @Local()
 export class LocalB extends BeanBase {
-  @Use()
+  @Use({ moduleScope: 'test-party' })
   localA: LocalA;
 
   printName() {
