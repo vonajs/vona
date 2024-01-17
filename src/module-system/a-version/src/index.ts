@@ -1,3 +1,4 @@
+export * from './types/index.js';
 export * from './aops.js';
 export * from './beans.js';
 // const routes = require('./routes.js');

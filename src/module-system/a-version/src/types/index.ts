@@ -1,3 +1,1 @@
-// declare module '@cabloy/core' {
-//   interface IBeanRecord {}
-// }
+export * from './bean.js';
