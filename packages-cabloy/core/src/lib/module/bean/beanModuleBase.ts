@@ -1,26 +1,25 @@
 import { BeanBase } from './beanBase.js';
 
 const BeanModuleCaches = Symbol('BEAN#__BeanModuleCaches');
+const BeanModuleScope = Symbol('BEAN#__BeanModuleScope');
 
 export class BeanModuleBase extends BeanBase {
-  __moduleName: string;
-
-  constructor(moduleName) {
+  constructor(moduleScope?: string) {
     super();
-    this.__moduleName = moduleName;
+    this[BeanModuleScope] = moduleScope;
   }
 
-  get moduleName() {
-    return this.__moduleName || this.ctx.module.info.relativeName;
+  get moduleScope() {
+    return this[BeanModuleScope] || this.ctx.module.info.relativeName;
   }
 
   // other module's bean
-  module(moduleName) {
+  module(moduleScope) {
     if (!this[BeanModuleCaches]) this[BeanModuleCaches] = new Map();
-    let beanInstance = this[BeanModuleCaches].get(moduleName);
+    let beanInstance = this[BeanModuleCaches].get(moduleScope);
     if (!beanInstance) {
-      beanInstance = this.ctx.bean._newBean(this.constructor as any, moduleName);
-      this[BeanModuleCaches].set(moduleName, beanInstance);
+      beanInstance = this.ctx.bean._newBean(this.constructor as any, moduleScope);
+      this[BeanModuleCaches].set(moduleScope, beanInstance);
     }
     return beanInstance;
   }
