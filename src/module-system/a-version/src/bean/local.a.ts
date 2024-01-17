@@ -7,7 +7,7 @@ export class LocalA extends BeanModuleBase {
     return 'a';
   }
   getName() {
-    this.actionSync();
+    const aa = this.actionSync();
     //const aa = this.module('test-party');
     //const bb = this.app.bean.local.user;
     //const cc = this.app.bean.local.module('test-party').aaa;

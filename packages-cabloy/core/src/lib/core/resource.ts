@@ -53,7 +53,7 @@ export class AppResource {
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
-    let { module, scene, name, scope, beanClass } = options;
+    let { module, scene, name, beanClass } = options;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
