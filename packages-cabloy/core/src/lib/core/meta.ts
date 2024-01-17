@@ -34,8 +34,6 @@ export class AppMeta extends BeanBase {
   resource: AppResource;
   metadata: AppMetadata;
   //
-  aops: Record<string, any>;
-  //
   suites: Record<string, ISuite>;
   modules: Record<string, IModule>;
   modulesArray: IModule[];
@@ -64,8 +62,7 @@ export class AppMeta extends BeanBase {
   _runSchedule: (context) => Promise<any>;
   checkAppReady: () => Promise<boolean>;
 
-  // @ts-ignore
-  private __init__() {
+  protected __init__() {
     // workerId
     this.workerId = uuid.v4();
 
