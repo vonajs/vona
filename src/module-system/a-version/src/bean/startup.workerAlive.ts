@@ -1,5 +1,6 @@
-import { BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 
+@Bean({ scene: 'startup' })
 export class StartupWorkerAlive extends BeanBase {
   async execute() {
     const aliveTimeout = this.ctx.config.worker.alive.timeout;

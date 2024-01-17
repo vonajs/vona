@@ -2,6 +2,8 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
+export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | TypeDecoratorBeanOptionsScene;
+export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name
@@ -9,21 +11,21 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
    */
   beanFullName: string;
   module: string;
-  scene: string | undefined;
+  scene?: TypeDecoratorBeanOptionsSceneBase;
   name: string;
   beanClass: Constructable<T>;
-  scope: ContainerScope | undefined;
+  scope?: ContainerScope;
   aop: boolean | undefined;
-  aopMatch: string | RegExp | (string | RegExp)[] | undefined;
+  aopMatch?: string | RegExp | (string | RegExp)[];
   /** auto fetch value from constructor */
-  moduleScope: boolean | undefined;
+  moduleScope?: boolean;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
 
 export interface IDecoratorBeanOptions {
   /** global: if omit */
-  scene?: string;
+  scene?: TypeDecoratorBeanOptionsScene;
   name?: string;
   scope?: ContainerScope;
 }

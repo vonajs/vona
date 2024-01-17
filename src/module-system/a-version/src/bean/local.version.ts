@@ -1,8 +1,9 @@
 import moment from 'moment';
 import chalk from 'chalk';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Local } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
 
+@Local()
 export class LocalVersion extends BeanBase {
   async databaseInitStartup() {
     // database

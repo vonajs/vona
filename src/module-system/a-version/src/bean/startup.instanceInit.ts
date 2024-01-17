@@ -1,5 +1,6 @@
-import { BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 
+@Bean({ scene: 'startup' })
 export class StartupInstanceInit extends BeanBase {
   async execute(context) {
     const options = context.options;
