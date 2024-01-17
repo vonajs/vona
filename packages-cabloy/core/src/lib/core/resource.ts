@@ -29,6 +29,29 @@ export class AppResource {
     return beanOptions;
   }
 
+  findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
+  findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): string[] | undefined;
+  findAopsMatched<T>(beanFullName: string): string[] | undefined;
+  findAopsMatched<T>(beanFullName: Constructable<T> | string): string[] | undefined {
+    // beanOptions
+    const beanOptions = this.getBean(beanFullName as any);
+    if (!beanOptions) return;
+    // loop
+    const aops: string[] = [];
+    for (const key in this.aops) {
+      const aop = this.aops[key];
+      // not self
+      if (key === beanOptions.beanFullName) continue;
+      // // check if match aop
+      // if (beanOptions.aop && !aop.matchAop) continue;
+      // match
+      if (__aopMatch(aop.aopMatch, beanOptions.beanFullName)) {
+        aops.push(key);
+      }
+    }
+    return aops;
+  }
+
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
     let { module, scene, name, scope, beanClass } = options;
     // name
@@ -41,13 +64,10 @@ export class AppResource {
     const moduleScope = beanClass instanceof BeanModuleBase;
     // options
     const beanOptions = {
+      ...options,
       beanFullName,
-      module,
-      scene,
       name,
-      scope,
       moduleScope,
-      beanClass,
     } as IDecoratorBeanOptionsBase<T>;
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
@@ -97,3 +117,10 @@ export class AppResource {
 }
 
 export const appResource = new AppResource();
+
+function __aopMatch(match, beanFullName) {
+  if (!Array.isArray(match)) {
+    return (typeof match === 'string' && match === beanFullName) || (is.regExp(match) && match.test(beanFullName));
+  }
+  return match.some(item => __aopMatch(item, beanFullName));
+}

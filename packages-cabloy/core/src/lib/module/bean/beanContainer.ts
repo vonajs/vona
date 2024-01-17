@@ -311,18 +311,11 @@ export class BeanContainer {
     const host = beanOptions || beanFullName;
     if (host.__aopChains__) return host.__aopChains__;
     // chains
-    const chains: MetadataKey[] = [];
+    let chains: MetadataKey[] = [];
     if (beanOptions && !beanOptions.aop) {
-      for (const key in self.app.meta.aops) {
-        const aop = self.app.meta.aops[key];
-        // not self
-        if (key === beanOptions.beanFullName) continue;
-        // // check if match aop
-        // if (beanOptions.aop && !aop.matchAop) continue;
-        // match
-        if (__aopMatch(aop.match, beanOptions.beanFullName)) {
-          chains.push(key);
-        }
+      const aops = appResource.findAopsMatched(beanOptions.beanFullName);
+      if (aops) {
+        chains = chains.concat(aops);
       }
     }
     // magic self
@@ -417,13 +410,6 @@ function __getPropertyDescriptorStatic(obj, prop) {
     proto = Object.getPrototypeOf(proto);
   }
   return null;
-}
-
-function __aopMatch(match, beanFullName) {
-  if (!Array.isArray(match)) {
-    return (typeof match === 'string' && match === beanFullName) || (is.regExp(match) && match.test(beanFullName));
-  }
-  return match.some(item => __aopMatch(item, beanFullName));
 }
 
 function __setPropertyValue(obj, prop, value) {
