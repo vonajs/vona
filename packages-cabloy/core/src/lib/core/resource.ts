@@ -1,9 +1,7 @@
 import is from 'is-type-of';
-import { parseModuleName } from '@cabloy/module-info';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
-import { BeanBase } from '../module/bean/beanBase.js';
 import { MetadataKey, appMetadata } from './metadata.js';
-import { IBeanRecord } from '../../index.js';
+import { BeanModuleBase, IBeanRecord } from '../../index.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
@@ -29,6 +27,8 @@ export class AppResource {
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
     const beanFullName = scene ? `${module}.${scene}.${name}` : name;
+    // moduleScope
+    const moduleScope = beanClass instanceof BeanModuleBase;
     // options
     const beanOptions = {
       beanFullName,
@@ -36,6 +36,7 @@ export class AppResource {
       scene,
       name,
       scope,
+      moduleScope,
       beanClass,
     } as IDecoratorBeanOptionsBase<T>;
     beanOptions.__aopChains__ = null!;

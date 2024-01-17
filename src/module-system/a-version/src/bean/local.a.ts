@@ -1,9 +1,11 @@
-import { BeanBase, Local, Use } from '@cabloy/core';
+import { BeanBase, BeanModuleBase, Local, Use } from '@cabloy/core';
+import { __ThisModule__ } from '../types/this.js';
 
 @Local()
-export class LocalA extends BeanBase {
+export class LocalA extends BeanModuleBase {
   getName() {
-    return 'yang';
+    if (this.moduleScope !== __ThisModule__) throw new Error();
+    return this.moduleScope;
   }
 }
 

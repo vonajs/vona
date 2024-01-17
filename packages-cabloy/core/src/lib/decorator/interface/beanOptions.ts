@@ -15,6 +15,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   beanClass: Constructable<T>;
   scope: ContainerScope | undefined;
   aop: boolean | undefined;
+  moduleScope: boolean | undefined;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
