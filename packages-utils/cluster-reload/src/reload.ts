@@ -41,7 +41,7 @@ function reload(master, count) {
   });
 }
 
-function reloadClear(master, count, aliveWorkers) {
+function reloadClear(master, _count, aliveWorkers) {
   // clear worker
   const _clearWorkers = new Set();
   for (let i = 0; i < aliveWorkers.length; i++) {

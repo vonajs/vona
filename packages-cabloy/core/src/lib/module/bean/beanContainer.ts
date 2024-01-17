@@ -305,7 +305,6 @@ export class BeanContainer {
   }
 
   _prepareAopChains(beanFullName, beanInstance) {
-    const self = this;
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
@@ -358,7 +357,7 @@ export class BeanContainer {
     return chains;
   }
 
-  __composeForPropAdapter = (context, chain) => {
+  __composeForPropAdapter = (_context, chain) => {
     const [aopKey, methodName] = chain;
     // ProxyMagic
     if (aopKey === ProxyMagic) return null;

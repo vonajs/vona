@@ -23,7 +23,7 @@ export class ProcessHelperConsole {
     await this._logInner(data, text);
   }
 
-  async _logInner(data, text) {
+  async _logInner(_data, text) {
     // fallback
     console.log(text);
   }

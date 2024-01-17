@@ -7,6 +7,7 @@ export class BroadcastClient extends BeanBase {
   sub: any = null;
   pub: any = null;
 
+  // @ts-ignore
   private __init__() {
     const app = this.app;
     this.__callerId = app.meta.workerId;
@@ -14,7 +15,7 @@ export class BroadcastClient extends BeanBase {
     this.pub = app.redis.get('broadcast').duplicate();
     this.sub = app.redis.get('broadcast').duplicate();
     this.sub.subscribe(this.channelName, function () {});
-    this.sub.on('message', (channel, info) => {
+    this.sub.on('message', (_channel, info) => {
       this._performTasks(JSON.parse(info))
         .then(() => {
           // do nothing

@@ -6,6 +6,7 @@ export class CtxMeta extends BeanBase {
   util: CtxUtil;
   mockUtil: CtxMockUtil;
 
+  // @ts-ignore
   private __init__() {
     // util
     this.util = this.ctx.bean._newBean(CtxUtil);

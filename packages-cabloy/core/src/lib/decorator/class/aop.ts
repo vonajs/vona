@@ -2,7 +2,7 @@ import { appResource } from '../../../index.js';
 import { Constructable, IDecoratorAopOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Aop<T>(options: IDecoratorAopOptions<T>): ClassDecorator {
+export function Aop<T>(options: IDecoratorAopOptions): ClassDecorator {
   return function (target) {
     // module
     const module = parseModuleName();

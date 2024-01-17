@@ -1,4 +1,3 @@
-import { BeanBase } from '../../../index.js';
 import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
@@ -22,15 +21,15 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
 
-export interface IDecoratorBeanOptions<T = unknown> {
+export interface IDecoratorBeanOptions {
   /** global: if omit */
   scene?: string;
   name?: string;
   scope?: ContainerScope;
 }
 
-export type IDecoratorLocalOptions<T = unknown> = Omit<IDecoratorBeanOptions<T>, 'scene'>;
-export interface IDecoratorAopOptions<T = unknown> {
+export type IDecoratorLocalOptions = Omit<IDecoratorBeanOptions, 'scene'>;
+export interface IDecoratorAopOptions {
   name?: string;
   scope?: ContainerScope;
   match: string;

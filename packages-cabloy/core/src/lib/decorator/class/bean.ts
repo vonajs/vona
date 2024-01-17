@@ -1,8 +1,8 @@
 import { appResource } from '../../core/resource.js';
-import { Constructable, IDecoratorBeanOptions, IDecoratorBeanOptionsBase } from '../index.js';
+import { Constructable, IDecoratorBeanOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Bean<T>(options?: IDecoratorBeanOptions<T>): ClassDecorator {
+export function Bean<T>(options?: IDecoratorBeanOptions): ClassDecorator {
   return function (target) {
     if (!options) options = {};
     // module

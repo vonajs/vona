@@ -80,7 +80,7 @@ export class QueueClient extends BeanBase {
       _workerOptions,
     );
 
-    _worker.worker.on('failed', (job, err) => {
+    _worker.worker.on('failed', (_job, err) => {
       app.logger.error(err);
     });
 

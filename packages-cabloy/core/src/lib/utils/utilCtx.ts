@@ -2,7 +2,6 @@ import is from 'is-type-of';
 import performActionFn from './performAction.js';
 import { BeanBase } from '../module/bean/beanBase.js';
 import { CabloyContext } from '../../type/index.js';
-import { appResource } from '../core/resource.js';
 
 export class CtxUtil extends BeanBase {
   runInBackground(scope) {
