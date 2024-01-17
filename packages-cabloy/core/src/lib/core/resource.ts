@@ -8,6 +8,7 @@ export const DecoratorUse = Symbol.for('Decorator#Use');
 
 export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
+  aops: Record<string, IDecoratorBeanOptionsBase> = {};
 
   addUse(target: Object, options: IDecoratorUseOptionsBase) {
     const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
@@ -17,6 +18,15 @@ export class AppResource {
 
   getUses(target: Object): Record<MetadataKey, IDecoratorUseOptionsBase> {
     return appMetadata.getOwnMetadataMap(DecoratorUse, target);
+  }
+
+  addAop<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
+    // bean
+    const beanOptions = this.addBean(options);
+    // aop
+    this.aops[beanOptions.beanFullName] = beanOptions;
+    // ok
+    return beanOptions;
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {

@@ -15,6 +15,8 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   beanClass: Constructable<T>;
   scope: ContainerScope | undefined;
   aop: boolean | undefined;
+  aopMatch: string | RegExp | (string | RegExp)[] | undefined;
+  /** auto fetch value from constructor */
   moduleScope: boolean | undefined;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
@@ -25,10 +27,14 @@ export interface IDecoratorBeanOptions<T = unknown> {
   scene?: string;
   name?: string;
   scope?: ContainerScope;
-  magic?: boolean;
 }
 
 export type IDecoratorLocalOptions<T = unknown> = Omit<IDecoratorBeanOptions<T>, 'scene'>;
+export interface IDecoratorAopOptions<T = unknown> {
+  name?: string;
+  scope?: ContainerScope;
+  match: string;
+}
 
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
 //   Partial<IDecoratorBeanOptionsBase<T>>,

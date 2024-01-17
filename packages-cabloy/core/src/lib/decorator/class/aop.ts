@@ -1,0 +1,20 @@
+import { appResource } from '../../../index.js';
+import { Constructable, IDecoratorAopOptions } from '../index.js';
+import { parseModuleName } from './util.js';
+
+export function Aop<T>(options: IDecoratorAopOptions<T>): ClassDecorator {
+  return function (target) {
+    // module
+    const module = parseModuleName();
+    // add
+    appResource.addAop({
+      module,
+      scene: 'aop',
+      name: options.name,
+      scope: options.scope,
+      beanClass: target as unknown as Constructable<T>,
+      aop: true,
+      aopMatch: options.match,
+    });
+  };
+}
