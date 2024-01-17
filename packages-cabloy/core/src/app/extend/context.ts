@@ -4,6 +4,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
 import { ContextBase } from '../../type/context/contextBase.js';
+import { BeanLocalLike } from '../../index.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
@@ -106,6 +107,9 @@ const context: ContextBase = {
   },
   get cache() {
     return (<any>this).bean.cache;
+  },
+  get local(): BeanLocalLike {
+    return (<any>this).bean.local;
   },
   tail(cb) {
     if (!this.dbMeta.master) {

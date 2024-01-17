@@ -1,3 +1,5 @@
+import { BeanLocalLike } from '../../index.js';
+
 export interface ContextBase {
   get module();
   get meta();
@@ -15,6 +17,7 @@ export interface ContextBase {
   get ctxCaller();
   set ctxCaller(value);
   get cache();
+  get local(): BeanLocalLike;
   tail(cb);
   tailDone(): Promise<any>;
   get tailCallbacks();
