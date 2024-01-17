@@ -344,9 +344,9 @@ export class BeanContainer {
   _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
-
-    if (!beanOptions) return [];
-    if (beanOptions.__aopChainsKey__[chainsKey]) return beanOptions.__aopChainsKey__[chainsKey];
+    const host = beanOptions || beanFullName;
+    if (!host.__aopChainsKey__) host.__aopChainsKey__ = {};
+    if (host.__aopChainsKey__[chainsKey]) return host.__aopChainsKey__[chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
@@ -361,7 +361,7 @@ export class BeanContainer {
         }
       }
     }
-    beanOptions.__aopChainsKey__[chainsKey] = chains;
+    host.__aopChainsKey__[chainsKey] = chains;
     return chains;
   }
 
