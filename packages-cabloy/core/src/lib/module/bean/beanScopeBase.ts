@@ -1,6 +1,6 @@
 import { BeanScopeScene } from './beanScopeScene.js';
 import { BeanSimple } from './beanSimple.js';
-import { TypeBeanScopeRecord } from './type.js';
+import { IBeanScopeRecord } from './type.js';
 
 const BeanModuleScope = Symbol('BeanScopeBase#ModuleScope');
 
@@ -18,7 +18,7 @@ export class BeanScopeBase extends BeanSimple {
   }
 
   // other module's bean
-  module(moduleScope: string): TypeBeanScopeRecord {
+  module<K extends keyof IBeanScopeRecord>(moduleScope: K): IBeanScopeRecord[K] {
     const bean = this.ctx ? this.ctx.bean : this.app.bean;
     return bean._getBeanScope(`${moduleScope}.scope.module`, moduleScope);
   }
