@@ -60,14 +60,14 @@ export class AppResource {
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
     const beanFullName = scene ? `${module}.${scene}.${name}` : name;
-    // moduleScope
-    const moduleScope = this._parseModuleScope(module, beanClass, virtual);
+    // moduleBelong
+    const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
     const beanOptions = {
       ...options,
       beanFullName,
       name,
-      moduleScope,
+      moduleBelong,
     } as IDecoratorBeanOptionsBase<T>;
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
@@ -115,23 +115,23 @@ export class AppResource {
     return name;
   }
 
-  _parseModuleScope(module, beanClass, virtual) {
+  _parseModuleBelong(module, beanClass, virtual) {
     // not set when virtual
     if (virtual) return;
     // check parent
-    let moduleScope;
+    let moduleBelong;
     const parent = Object.getPrototypeOf(beanClass);
     if (parent) {
       const beanOptions = this.getBean(parent);
-      if (beanOptions && beanOptions.moduleScope) {
-        moduleScope = beanOptions.moduleScope;
+      if (beanOptions && beanOptions.moduleBelong) {
+        moduleBelong = beanOptions.moduleBelong;
       }
     }
     // set to current when parent not set
-    if (!moduleScope) {
-      moduleScope = module;
+    if (!moduleBelong) {
+      moduleBelong = module;
     }
-    return moduleScope;
+    return moduleBelong;
   }
 }
 
