@@ -311,7 +311,7 @@ export class AppUtil extends BeanBase {
     } else {
       fn = fn || 'execute';
       if (!bean[fn]) {
-        throw new Error(`bean method not found: ${ctx.bean.getBeanFullName(bean.constructor)}:${fn}`);
+        throw new Error(`bean method not found: ${ctx.bean._getBeanFullName(bean.constructor)}:${fn}`);
       }
       res = await bean[fn](context);
     }

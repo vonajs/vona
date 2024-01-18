@@ -24,7 +24,7 @@ export class BeanContainer {
     this.local = this._newBean(BeanLocal) as BeanLocalLike;
   }
 
-  getBeanFullName<T>(A: Constructable<T>): string | undefined {
+  _getBeanFullName<T>(A: Constructable<T>): string | undefined {
     return appResource.getBeanFullName(A);
   }
 
