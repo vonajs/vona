@@ -1,3 +1,4 @@
+import { appResource } from '../../core/resource.js';
 import { BeanBase } from './beanBase.js';
 
 const BeanModuleScope = Symbol('BEAN#__BeanModuleScope');
@@ -11,7 +12,10 @@ export class BeanModuleScopeBase extends BeanBase {
   }
 
   get moduleScope() {
-    return this[BeanModuleScope] || this.ctx.module.info.relativeName;
+    if (this[BeanModuleScope]) return this[BeanModuleScope];
+    const beanOptions = appResource.getBean(this.constructor as any);
+    if (!beanOptions || !beanOptions.moduleScope) throw new Error(`not found module scope: ${this.constructor.name}`);
+    return beanOptions.moduleScope;
   }
 
   // other module's bean

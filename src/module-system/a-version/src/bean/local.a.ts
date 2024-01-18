@@ -11,9 +11,8 @@ export class LocalA extends BeanModuleScopeBase {
     return 'a';
   }
   getName() {
-    this.ctx.bean['a-version.version.manager'].init;
-    this.ctx.local.version.__database;
-    this.moduleScope;
+    // this.ctx.bean['a-version.version.manager'].init;
+    // this.ctx.local.version.__database;
     // this.bean.
     // this.ctx.bean.
     // const aa = this.actionSync();
