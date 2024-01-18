@@ -10,7 +10,7 @@ export class BeanScopeBase extends BeanSimple {
     this[BeanModuleScope] = moduleScope;
   }
 
-  get moduleScope() {
+  protected get moduleScope() {
     return this[BeanModuleScope];
   }
 

@@ -8,6 +8,7 @@ import { BeanLocal, BeanLocalLike } from './beanLocal.js';
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
 const BeanContainerInstancesModule = Symbol.for('Bean#InstancesModule');
+const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export class BeanContainer {
   private app: CabloyApplication;
@@ -136,6 +137,19 @@ export class BeanContainer {
     if (this.ctx) {
       beanInstance.ctx = this.ctx;
     }
+    // scope
+    Object.defineProperty(beanInstance, 'scope', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        if (!this[BeanInstanceScope]) {
+          const moduleScope = this.moduleBelong;
+          const bean = this.ctx ? this.ctx.bean : this.app.bean;
+          this[BeanInstanceScope] = bean._getBeanScope(`${moduleScope}.scope.module`, moduleScope);
+        }
+        return this[BeanInstanceScope];
+      },
+    });
     // inject
     this._injectBeanInstance(beanInstance, beanFullName);
     // init

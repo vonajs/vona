@@ -10,7 +10,7 @@ export class BeanModuleScopeBase extends BeanBase {
     this[BeanModuleScope] = moduleScope;
   }
 
-  get moduleScope() {
+  protected get moduleScope() {
     return this[BeanModuleScope] || this.moduleBelong;
   }
 
