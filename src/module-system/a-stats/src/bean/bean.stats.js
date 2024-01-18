@@ -2,7 +2,7 @@ let __stats;
 let __statsDeps;
 
 const moduleInfo = module.info;
-module.exports = class Stats extends module.meta.class.BeanScopeBase {
+module.exports = class Stats extends module.meta.class.BeanModuleScopeBase {
   get modelStats() {
     return this.ctx.model.module(moduleInfo.relativeName).stats;
   }

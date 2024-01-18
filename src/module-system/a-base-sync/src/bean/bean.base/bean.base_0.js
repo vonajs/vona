@@ -1,2 +1,2 @@
 // const moduleInfo = module.info;
-module.exports = class Base extends module.meta.class.BeanScopeBase {};
+module.exports = class Base extends module.meta.class.BeanModuleScopeBase {};

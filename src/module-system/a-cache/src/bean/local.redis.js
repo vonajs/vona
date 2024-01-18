@@ -1,5 +1,5 @@
 // const moduleInfo = module.info;
-module.exports = class RedisDb extends module.meta.class.BeanScopeBase {
+module.exports = class RedisDb extends module.meta.class.BeanModuleScopeBase {
   _getKey(name) {
     return `${this.ctx.instance ? this.ctx.instance.id : 0}:${this.moduleScope}:${name}`;
   }

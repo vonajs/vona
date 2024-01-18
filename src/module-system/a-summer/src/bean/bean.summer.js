@@ -1,7 +1,7 @@
 let __cacheBases;
 
 const moduleInfo = module.info;
-module.exports = class Summer extends module.meta.class.BeanScopeBase {
+module.exports = class Summer extends module.meta.class.BeanModuleScopeBase {
   getCache({ module, name, fullKey }) {
     fullKey = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey });

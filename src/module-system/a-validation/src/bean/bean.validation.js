@@ -1,5 +1,5 @@
 const __module__ = module;
-module.exports = class Validation extends module.meta.class.BeanScopeBase {
+module.exports = class Validation extends module.meta.class.BeanModuleScopeBase {
   getSchema({ module, validator, schema }) {
     // for flexible
     if (schema && typeof schema === 'object') {

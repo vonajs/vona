@@ -5,7 +5,7 @@ const __atomClass = {
   module: moduleInfo.relativeName,
   atomClassName: 'resource',
 };
-module.exports = class Resource extends module.meta.class.BeanScopeBase {
+module.exports = class Resource extends module.meta.class.BeanModuleScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).resource;
   }

@@ -1,9 +1,9 @@
-import { BeanBase, BeanScopeBase, Local, Use } from '@cabloy/core';
+import { BeanBase, BeanModuleScopeBase, Local, Use } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
 import { BeanInstance } from 'cabloy-module-api-a-instance';
 
 @Local()
-export class LocalA extends BeanScopeBase {
+export class LocalA extends BeanModuleScopeBase {
   @Use()
   testInstance: BeanInstance;
 

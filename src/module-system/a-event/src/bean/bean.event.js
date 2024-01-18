@@ -7,7 +7,7 @@ const __adapter = (context, chain) => {
     fn: eventBean.execute,
   };
 };
-module.exports = class Event extends module.meta.class.BeanScopeBase {
+module.exports = class Event extends module.meta.class.BeanModuleScopeBase {
   async invoke({ module, name, data, result, next }) {
     const eventArray = this._getEventArray({ module, name });
     const eventBeanArray = eventArray.map(item => {

@@ -1,7 +1,7 @@
 const mparse = require('@cabloy/module-parse').default;
 
 const moduleInfo = module.info;
-module.exports = class AtomStatic extends module.meta.class.BeanScopeBase {
+module.exports = class AtomStatic extends module.meta.class.BeanModuleScopeBase {
   async loadAllAtomStatics() {
     const modules = this._loadAllAtomStatics_prepare();
     const count = modules.length;

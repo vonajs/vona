@@ -1,7 +1,7 @@
 const _cacheMessageClassesUniform = {};
 
 // const moduleInfo = module.info;
-module.exports = class Message extends module.meta.class.BeanScopeBase {
+module.exports = class Message extends module.meta.class.BeanModuleScopeBase {
   async group(/* {  options, user }*/) {
     const items = this.messageClassesUniform();
     return items;

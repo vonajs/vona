@@ -1,5 +1,5 @@
 const moduleInfo = module.info;
-module.exports = class CacheDb extends module.meta.class.BeanScopeBase {
+module.exports = class CacheDb extends module.meta.class.BeanModuleScopeBase {
   async get(name) {
     const res = await this._has(name);
     return res ? JSON.parse(res.value) : undefined;

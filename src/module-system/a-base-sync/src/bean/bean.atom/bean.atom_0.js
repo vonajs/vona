@@ -1,5 +1,5 @@
 const moduleInfo = module.info;
-module.exports = class Atom extends module.meta.class.BeanScopeBase {
+module.exports = class Atom extends module.meta.class.BeanModuleScopeBase {
   get atomClass() {
     return this.ctx.bean.atomClass.module(this.moduleScope);
   }

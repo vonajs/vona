@@ -1,7 +1,7 @@
 let __icons = null;
 
 // const moduleInfo = module.info;
-module.exports = class Icon extends module.meta.class.BeanScopeBase {
+module.exports = class Icon extends module.meta.class.BeanModuleScopeBase {
   getIcons() {
     if (!__icons) {
       __icons = this._prepareIcons();

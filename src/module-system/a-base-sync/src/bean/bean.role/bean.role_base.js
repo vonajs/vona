@@ -5,7 +5,7 @@ const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',
 };
-module.exports = class Role extends module.meta.class.BeanScopeBase {
+module.exports = class Role extends module.meta.class.BeanModuleScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).role;
   }

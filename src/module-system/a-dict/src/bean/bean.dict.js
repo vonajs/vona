@@ -1,6 +1,6 @@
 const moduleInfo = module.info;
 const __SeparatorCode = '/';
-module.exports = class Dict extends module.meta.class.BeanScopeBase {
+module.exports = class Dict extends module.meta.class.BeanModuleScopeBase {
   get cacheMem() {
     return this.ctx.cache.mem.module(moduleInfo.relativeName);
   }
