@@ -3,7 +3,7 @@ import { BeanSimple } from './beanSimple.js';
 const BeanModuleScope = Symbol('BeanScopeBase#ModuleScope');
 
 export class BeanScopeBase extends BeanSimple {
-  [BeanModuleScope]?: string;
+  private [BeanModuleScope]?: string;
 
   constructor(moduleScope?: string) {
     super();

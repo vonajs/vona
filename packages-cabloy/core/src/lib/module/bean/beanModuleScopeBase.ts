@@ -3,7 +3,7 @@ import { BeanBase } from './beanBase.js';
 const BeanModuleScope = Symbol('BeanModuleScopeBase#ModuleScope');
 
 export class BeanModuleScopeBase extends BeanBase {
-  [BeanModuleScope]?: string;
+  private [BeanModuleScope]?: string;
 
   constructor(moduleScope?: string) {
     super();

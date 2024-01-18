@@ -82,7 +82,7 @@ export class BeanContainer {
     // instance
     const beanInstance = new beanOptions.beanClass(...args);
     // patch
-    return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.aop);
+    return this._patchBeanInstance(beanInstance, args, beanOptions.beanFullName, beanOptions.aop);
   }
 
   _newBeanScope<T>(A: Constructable<T>, moduleScope, ...args): T;
@@ -129,15 +129,8 @@ export class BeanContainer {
     return targetInstance;
   }
 
-  private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
-    // app/ctx
-    if (this.app) {
-      beanInstance.app = this.app;
-    }
-    if (this.ctx) {
-      beanInstance.ctx = this.ctx;
-    }
-    // scope
+  private _injectBeanInstanceScope(beanInstance, beanFullName) {
+    if (typeof beanFullName !== 'string' || beanFullName.indexOf('.scope.module') > -1) return;
     Object.defineProperty(beanInstance, 'scope', {
       enumerable: false,
       configurable: true,
@@ -150,6 +143,18 @@ export class BeanContainer {
         return this[BeanInstanceScope];
       },
     });
+  }
+
+  private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
+    // app/ctx
+    if (this.app) {
+      beanInstance.app = this.app;
+    }
+    if (this.ctx) {
+      beanInstance.ctx = this.ctx;
+    }
+    // scope
+    this._injectBeanInstanceScope(beanInstance, beanFullName);
     // inject
     this._injectBeanInstance(beanInstance, beanFullName);
     // init
