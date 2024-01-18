@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-version';
-export type __TypeThisModule__ = typeof __ThisModule__;
+export type __ThisModuleType__ = typeof __ThisModule__;
