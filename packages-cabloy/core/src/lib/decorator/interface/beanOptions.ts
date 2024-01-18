@@ -17,8 +17,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   scope?: ContainerScope;
   aop: boolean | undefined;
   aopMatch?: string | RegExp | (string | RegExp)[];
-  /** auto fetch value from constructor */
-  moduleScope?: boolean;
+
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }

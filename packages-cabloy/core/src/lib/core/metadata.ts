@@ -3,22 +3,22 @@ import 'reflect-metadata';
 export type MetadataKey = symbol | string;
 
 export class AppMetadata {
-  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: Object) {
+  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: object) {
     Reflect.defineMetadata(metadataKey, metadataValue, target);
   }
 
-  getOwnMetadata<V>(metadataKey: MetadataKey, target: Object): V | undefined {
+  getOwnMetadata<V>(metadataKey: MetadataKey, target: object): V | undefined {
     return Reflect.getOwnMetadata(metadataKey, target);
   }
 
-  getMetadata<V>(metadataKey: MetadataKey, target: Object, prop?: MetadataKey): V | undefined {
+  getMetadata<V>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): V | undefined {
     if (prop) {
       return Reflect.getMetadata(metadataKey, target, prop);
     }
     return Reflect.getMetadata(metadataKey, target);
   }
 
-  getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: Object): Array<Entry> {
+  getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: object): Array<Entry> {
     let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target);
     if (!own) {
       const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target);
@@ -46,7 +46,7 @@ export class AppMetadata {
     return own;
   }
 
-  getDesignType(target: Object, prop?: MetadataKey) {
+  getDesignType(target: object, prop?: MetadataKey) {
     return this.getMetadata('design:type', target as any, prop);
   }
 }

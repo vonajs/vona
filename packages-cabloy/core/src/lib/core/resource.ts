@@ -1,7 +1,7 @@
 import is from 'is-type-of';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
-import { BeanModuleScopeBase, IBeanRecord } from '../../index.js';
+import { IBeanRecord } from '../../index.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
@@ -10,13 +10,13 @@ export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   aops: Record<string, IDecoratorBeanOptionsBase> = {};
 
-  addUse(target: Object, options: IDecoratorUseOptionsBase) {
+  addUse(target: object, options: IDecoratorUseOptionsBase) {
     const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
     uses[options.prop] = options;
     appMetadata.defineMetadata(DecoratorUse, uses, target);
   }
 
-  getUses(target: Object): Record<MetadataKey, IDecoratorUseOptionsBase> {
+  getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> {
     return appMetadata.getOwnMetadataMap(DecoratorUse, target);
   }
 
@@ -31,7 +31,7 @@ export class AppResource {
 
   findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
   findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): string[] | undefined;
-  findAopsMatched<T>(beanFullName: string): string[] | undefined;
+  findAopsMatched(beanFullName: string): string[] | undefined;
   findAopsMatched<T>(beanFullName: Constructable<T> | string): string[] | undefined {
     // beanOptions
     const beanOptions = this.getBean(beanFullName as any);
@@ -60,14 +60,11 @@ export class AppResource {
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
     const beanFullName = scene ? `${module}.${scene}.${name}` : name;
-    // moduleScope
-    const moduleScope = beanClass instanceof BeanModuleScopeBase;
     // options
     const beanOptions = {
       ...options,
       beanFullName,
       name,
-      moduleScope,
     } as IDecoratorBeanOptionsBase<T>;
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
