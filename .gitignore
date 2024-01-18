@@ -2,7 +2,7 @@ pnpm-lock.yaml
 package-lock.json
 node_modules
 miniprogram_npm
-typings/core
+/typings/core
 /coverage
 **/dist/
 /dist-release
