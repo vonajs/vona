@@ -6,4 +6,6 @@ export interface IDecoratorUseOptionsBase {
   moduleScope?: string;
 }
 
-export type IDecoratorUseOptions = Pick<IDecoratorUseOptionsBase, 'moduleScope'>;
+export interface IDecoratorUseOptions {
+  moduleScope?: string;
+}

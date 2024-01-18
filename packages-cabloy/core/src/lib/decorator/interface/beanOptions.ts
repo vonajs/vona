@@ -30,7 +30,10 @@ export interface IDecoratorBeanOptions {
   scope?: ContainerScope;
 }
 
-export type IDecoratorLocalOptions = Omit<IDecoratorBeanOptions, 'scene'>;
+export interface IDecoratorLocalOptions {
+  name?: string;
+  scope?: ContainerScope;
+}
 export interface IDecoratorAopOptions {
   name?: string;
   scope?: ContainerScope;
