@@ -33,7 +33,6 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/core": "5.0.0",
     "chalk": "^3.0.0",
     "fs-extra": "^10.1.0"
   }
