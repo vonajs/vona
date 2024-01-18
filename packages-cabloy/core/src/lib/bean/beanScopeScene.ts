@@ -1,4 +1,4 @@
-import { BeanSimple } from '../index.js';
+import { BeanSimple } from './index.js';
 
 const BeanModuleScope = Symbol('BeanScopeScene#ModuleScope');
 const BeanModuleScene = Symbol('BeanScopeScene#BeanModuleScene');

@@ -1,6 +1,6 @@
+import { BeanModuleScopeBase } from '../../bean/beanModuleScopeBase.js';
 import { MetadataKey, appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
-import { BeanModuleScopeBase } from '../../module/index.js';
 import { Constructable, IDecoratorUseOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 

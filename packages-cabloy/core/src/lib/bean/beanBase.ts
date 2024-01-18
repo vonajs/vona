@@ -1,5 +1,5 @@
-import { appResource } from '../../core/resource.js';
-import { BeanSimple } from '../index.js';
+import { appResource } from '../core/resource.js';
+import { BeanSimple } from './index.js';
 
 export class BeanBase extends BeanSimple {
   protected get bean() {
