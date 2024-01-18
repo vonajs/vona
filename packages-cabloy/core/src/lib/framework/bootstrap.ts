@@ -1,5 +1,5 @@
 import { CabloyApplication } from '../../type/index.js';
-import { loadBeanContainer } from '../module/bean/index.js';
+import { loadBeanContainer } from '../module/bean/loader.js';
 import { ModuleLoader } from '../module/loader.js';
 import { SocketioReady } from '../module/socketio.js';
 import { VersionReady } from '../module/version/ready.js';
