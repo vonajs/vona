@@ -5,7 +5,7 @@ import { Constructable, IDecoratorUseOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator {
-  return function (target: Object, prop: MetadataKey) {
+  return function (target: object, prop: MetadataKey) {
     if (!options) options = {};
     // beanFullName
     const beanClass = appMetadata.getDesignType(target, prop) as Constructable;
