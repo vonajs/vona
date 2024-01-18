@@ -5,5 +5,7 @@ import { LocalVersion } from '../beans.js';
 export class ScopeModule extends BeanScopeBase {}
 
 export interface ScopeModule {
-  local: LocalVersion;
+  local: {
+    version: LocalVersion;
+  };
 }
