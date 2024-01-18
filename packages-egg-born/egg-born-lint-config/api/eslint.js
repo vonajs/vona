@@ -77,6 +77,7 @@ const rules = {
     },
   ],
   '@typescript-eslint/no-this-alias': 'off',
+  '@typescript-eslint/no-unsafe-declaration-merging': 'off',
 };
 
 module.exports = {
