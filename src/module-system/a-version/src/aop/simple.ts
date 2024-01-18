@@ -1,5 +1,6 @@
-import { Aop, BeanBase } from '@cabloy/core';
+import { Aop, BeanBase, Virtual } from '@cabloy/core';
 
+@Virtual()
 class SimpleAopBase extends BeanBase {
   actionSync(context, next) {
     next();
