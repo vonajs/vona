@@ -16,8 +16,8 @@ import loadStartups from './startup.js';
 import loadSchedules from './schedule.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
-import { loadBeans } from './bean/loader.js';
-import { BeanSimple } from './bean/beanSimple.js';
+import { loadBeans } from './bean/index.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 import ModuleInfoFn from '../framework/moduleInfo.js';
 
 export class ModuleLoader extends BeanSimple {

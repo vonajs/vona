@@ -1,8 +1,24 @@
-export * from './beanBase.js';
-export * from './beanContainer.js';
-export * from './beanLocal.js';
-export * from './beanModuleScopeBase.js';
-export * from './beanScopeBase.js';
-export * from './beanScopeScene.js';
-export * from './beanSimple.js';
-export * from './type.js';
+import { CabloyApplication } from '../../../types/index.js';
+import { BeanContainerCreate, BeanContainerLike } from './beanContainer.js';
+
+export function loadBeanContainer(app: CabloyApplication) {
+  app.bean = BeanContainerCreate(app, null) as BeanContainerLike;
+}
+
+export function loadBeans(app: CabloyApplication) {
+  // patch context
+  patchCreateContext();
+
+  function patchCreateContext() {
+    const createContext = app.createContext as any;
+    app.createContext = (...args) => {
+      const context = createContext.call(app, ...args);
+
+      // not check context.module
+      // bean
+      context.bean = BeanContainerCreate(app, context);
+
+      return context;
+    };
+  }
+}
