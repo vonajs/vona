@@ -1,9 +1,10 @@
 import is from 'is-type-of';
-import { CabloyApplication, CabloyContext, IBeanRecord, TypeBeanRecord } from '../../../type/index.js';
+import { CabloyApplication, CabloyContext } from '../../../type/index.js';
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
 import { MetadataKey } from '../../core/metadata.js';
-import { BeanLocal, BeanLocalLike } from './beanLocal.js';
+import { BeanLocal } from './beanLocal.js';
+import { IBeanRecord, TypeBeanRecord } from './type.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -14,7 +15,7 @@ export class BeanContainer {
   private app: CabloyApplication;
   private ctx: CabloyContext;
 
-  local: BeanLocalLike;
+  local: any;
 
   private [BeanContainerInstances]: Record<string, Constructable> = {};
   private [BeanContainerInstancesModule]: Record<string, Constructable> = {};
@@ -22,7 +23,7 @@ export class BeanContainer {
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
     this.ctx = ctx;
-    this.local = this._newBean(BeanLocal) as BeanLocalLike;
+    this.local = this._newBean(BeanLocal);
   }
 
   _getBeanFullName<T>(A: Constructable<T>): string | undefined {

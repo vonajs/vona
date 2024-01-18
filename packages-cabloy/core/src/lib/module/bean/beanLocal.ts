@@ -1,4 +1,3 @@
-import { TypeLocalRecord } from '../../../index.js';
 import { BeanModuleScopeBase } from './beanModuleScopeBase.js';
 
 export class BeanLocal extends BeanModuleScopeBase {
@@ -8,5 +7,3 @@ export class BeanLocal extends BeanModuleScopeBase {
     return bean._getBean(`${this.moduleScope}.local.${prop}`);
   }
 }
-
-export type BeanLocalLike = TypeLocalRecord & BeanLocal;

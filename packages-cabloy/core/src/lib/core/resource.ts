@@ -1,7 +1,7 @@
 import is from 'is-type-of';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
-import { IBeanRecord } from '../../index.js';
+import { IBeanRecord } from '../module/bean/type.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
