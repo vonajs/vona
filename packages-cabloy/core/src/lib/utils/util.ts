@@ -5,10 +5,10 @@ import { URL } from 'url';
 import is from 'is-type-of';
 import * as security from 'egg-security';
 import MixinClassesFn from 'mixin-classes';
-import { BeanSimple } from '../module/bean/beanBase';
 import Redlock from 'redlock';
 import { Request } from 'egg';
 import { CabloyContext } from '../../type/index.js';
+import { BeanSimple } from '../../index.js';
 
 export class AppUtil extends BeanSimple {
   instanceStarted(subdomain) {

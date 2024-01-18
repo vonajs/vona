@@ -1,6 +1,6 @@
 import is from 'is-type-of';
 import performActionFn from './performAction.js';
-import { BeanSimple } from '../module/bean/beanBase.js';
+import { BeanSimple } from '../module/bean/beanSimple.js';
 import { CabloyContext } from '../../type/index.js';
 
 export class CtxUtil extends BeanSimple {

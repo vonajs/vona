@@ -2,7 +2,7 @@ import * as uuid from 'uuid';
 import { AppMockUtil } from '../utils/mockUtil.js';
 import { AppReload } from '../module/reload.js';
 import { AppUtil } from '../utils/util.js';
-import { BeanSimple } from '../module/bean/beanBase.js';
+import { BeanSimple } from '../module/bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp } from '../../type/interface/monkey.js';
 import { AppRouter } from '../module/route.js';

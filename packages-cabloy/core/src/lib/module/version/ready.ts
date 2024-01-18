@@ -1,5 +1,5 @@
 import { EnumAppEvent } from '../../../type/index.js';
-import { BeanSimple } from '../bean/beanBase.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 import clearFn from './clear.js';
 
 export class VersionReady extends BeanSimple {

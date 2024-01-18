@@ -1,4 +1,4 @@
-import { BeanSimple } from '../module/bean/beanBase.js';
+import { BeanSimple } from '../module/bean/beanSimple.js';
 
 export class CtxMockUtil extends BeanSimple {
   // login

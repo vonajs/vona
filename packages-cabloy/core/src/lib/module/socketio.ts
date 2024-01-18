@@ -1,5 +1,5 @@
 import { URL } from 'url';
-import { BeanSimple } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanSimple.js';
 
 export class SocketioReady extends BeanSimple {
   initialize() {

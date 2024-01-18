@@ -1,5 +1,5 @@
 import { IBroadcastExecuteContext } from '../../../type/index.js';
-import { BeanSimple } from '../bean/beanBase.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 export class BroadcastClient extends BeanSimple {
   __callerId: string = '';
