@@ -11,7 +11,8 @@ export class LocalA extends BeanModuleScopeBase {
     return 'a';
   }
   getName() {
-    const version = this.scope.module('a-instance').broadcast.reload.execute();
+    const version = this.scope.module('a-instance').broadcast.reload.execute;
+    // version = this.scope.local.version;
     console.log(this.scope.module, version);
     // this.ctx.bean['a-version.version.manager'].init;
     // this.ctx.local.version.__database;
