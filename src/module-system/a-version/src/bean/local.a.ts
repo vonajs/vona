@@ -1,8 +1,12 @@
 import { BeanBase, BeanModuleBase, Local, Use } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
+import { BeanInstance } from 'cabloy-module-api-a-instance';
 
 @Local()
 export class LocalA extends BeanModuleBase {
+  @Use()
+  testInstance: BeanInstance;
+
   actionSync() {
     return 'a';
   }
@@ -10,10 +14,10 @@ export class LocalA extends BeanModuleBase {
     this.ctx.bean['a-version.version.manager'].init;
     this.ctx.local.version.__database;
 
-    //const aa = this.actionSync();
-    //const aa = this.module('test-party');
-    //const bb = this.app.bean.local.user;
-    //const cc = this.app.bean.local.module('test-party').aaa;
+    // const aa = this.actionSync();
+    // const aa = this.module('test-party');
+    // const bb = this.app.bean.local.user;
+    // const cc = this.app.bean.local.module('test-party').aaa;
     console.log(this.moduleScope, __ThisModule__);
     if (this.moduleScope !== __ThisModule__) throw new Error();
     return this.moduleScope;
