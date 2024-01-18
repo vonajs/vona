@@ -148,7 +148,7 @@ export class BeanInstance extends BeanBase {
     return instanceConfigsFront;
   }
 
-  async checkAppReady(options) {
+  async checkAppReady(options?: { wait?: boolean }) {
     if (!options) options = { wait: true };
     if (!this.ctx.app.meta.appReady && options.wait === false) return false;
     while (!this.ctx.app.meta.appReady) {

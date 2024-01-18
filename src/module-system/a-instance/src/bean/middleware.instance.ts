@@ -1,8 +1,11 @@
-module.exports = class Middleware {
-  async execute(options, next) {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareInstance extends BeanBase {
+  async execute(_options, next) {
     // init instance
     await this.ctx.bean.instance.initInstance();
     // next
     await next();
   }
-};
+}

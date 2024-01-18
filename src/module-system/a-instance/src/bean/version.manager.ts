@@ -1,4 +1,7 @@
-module.exports = class Version {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'version' })
+export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aInstance
@@ -41,5 +44,5 @@ module.exports = class Version {
     }
   }
 
-  async init(options) {}
-};
+  async init(_options) {}
+}

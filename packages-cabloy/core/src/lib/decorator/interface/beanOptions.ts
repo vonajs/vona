@@ -3,7 +3,7 @@ import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
 export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | TypeDecoratorBeanOptionsScene;
-export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version';
+export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version' | 'middleware';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name
