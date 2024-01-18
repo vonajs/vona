@@ -2,7 +2,7 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
-export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | 'virtual' | TypeDecoratorBeanOptionsScene;
+export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | 'virtual' | 'scope' | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version' | 'middleware';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**

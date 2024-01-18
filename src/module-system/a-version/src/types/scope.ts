@@ -1,3 +1,4 @@
-import { BeanScopeBase } from '@cabloy/core';
+import { BeanScopeBase, Scope } from '@cabloy/core';
 
-export class Scope extends BeanScopeBase {}
+@Scope()
+export class ScopeModule extends BeanScopeBase {}

@@ -6,4 +6,5 @@ export * from './class/aop.js';
 export * from './class/bean.js';
 export * from './class/local.js';
 export * from './class/virtual.js';
+export * from './class/scope.js';
 export * from './class/use.js';
