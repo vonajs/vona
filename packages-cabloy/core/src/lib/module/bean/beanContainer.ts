@@ -45,10 +45,10 @@ export class BeanContainer {
     return this[BeanContainerInstances][fullName] as T;
   }
 
-  _getBeanModule<T>(A: Constructable<T>, moduleScope): T;
-  _getBeanModule<K extends keyof IBeanRecord>(beanFullName: K, moduleScope): IBeanRecord[K];
-  _getBeanModule<T>(beanFullName: string, moduleScope): T;
-  _getBeanModule<T>(beanFullName: Constructable<T> | string, moduleScope): T {
+  _getBeanScope<T>(A: Constructable<T>, moduleScope): T;
+  _getBeanScope<K extends keyof IBeanRecord>(beanFullName: K, moduleScope): IBeanRecord[K];
+  _getBeanScope<T>(beanFullName: string, moduleScope): T;
+  _getBeanScope<T>(beanFullName: Constructable<T> | string, moduleScope): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -58,7 +58,7 @@ export class BeanContainer {
     const fullName = beanOptions.beanFullName;
     const key = `${fullName}#${moduleScope}`;
     if (this[BeanContainerInstancesModule][key] === undefined) {
-      this[BeanContainerInstancesModule][key] = this._newBeanModule(fullName, moduleScope);
+      this[BeanContainerInstancesModule][key] = this._newBeanScope(fullName, moduleScope);
     }
     return this[BeanContainerInstancesModule][key] as T;
   }
@@ -84,10 +84,10 @@ export class BeanContainer {
     return this._patchBeanInstance(beanInstance, args, beanFullName, beanOptions.aop);
   }
 
-  _newBeanModule<T>(A: Constructable<T>, moduleScope, ...args): T;
-  _newBeanModule<K extends keyof IBeanRecord>(beanFullName: K, moduleScope, ...args): IBeanRecord[K];
-  _newBeanModule<T>(beanFullName: string, moduleScope, ...args): T;
-  _newBeanModule<T>(beanFullName: Constructable<T> | string, moduleScope, ...args): T {
+  _newBeanScope<T>(A: Constructable<T>, moduleScope, ...args): T;
+  _newBeanScope<K extends keyof IBeanRecord>(beanFullName: K, moduleScope, ...args): IBeanRecord[K];
+  _newBeanScope<T>(beanFullName: string, moduleScope, ...args): T;
+  _newBeanScope<T>(beanFullName: Constructable<T> | string, moduleScope, ...args): T {
     return this._newBean(beanFullName as any, moduleScope, ...args);
   }
 
@@ -109,11 +109,11 @@ export class BeanContainer {
     let targetInstance;
     if (moduleScope) {
       if (scope === 'app') {
-        targetInstance = this.app.bean._getBeanModule(targetBeanFullName, moduleScope);
+        targetInstance = this.app.bean._getBeanScope(targetBeanFullName, moduleScope);
       } else if (scope === 'ctx') {
-        targetInstance = this._getBeanModule(targetBeanFullName, moduleScope);
+        targetInstance = this._getBeanScope(targetBeanFullName, moduleScope);
       } else if (scope === 'transient') {
-        targetInstance = this._newBeanModule(targetBeanFullName, moduleScope);
+        targetInstance = this._newBeanScope(targetBeanFullName, moduleScope);
       }
     } else {
       if (scope === 'app') {
