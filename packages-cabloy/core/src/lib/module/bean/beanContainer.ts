@@ -98,15 +98,14 @@ export class BeanContainer {
     const uses = appResource.getUses(beanOptions.beanClass.prototype);
     for (const key in uses) {
       const useOptions = uses[key];
-      const targetOptions = appResource.getBean(useOptions.beanFullName)!;
-      const targetBeanFullName = targetOptions.beanFullName;
-      const scope = targetOptions.scope || 'ctx';
       const moduleScope = useOptions.moduleScope;
-      beanInstance[useOptions.prop] = this._injectBeanInstanceProp(targetBeanFullName, scope, moduleScope);
+      beanInstance[useOptions.prop] = this._injectBeanInstanceProp(useOptions.beanFullName, moduleScope);
     }
   }
 
-  private _injectBeanInstanceProp(targetBeanFullName, scope, moduleScope) {
+  private _injectBeanInstanceProp(targetBeanFullName, moduleScope) {
+    const targetOptions = appResource.getBean(targetBeanFullName)!;
+    const scope = targetOptions.scope || 'ctx';
     let targetInstance;
     if (moduleScope) {
       if (scope === 'app') {
@@ -125,7 +124,6 @@ export class BeanContainer {
         targetInstance = this._newBean(targetBeanFullName);
       }
     }
-
     return targetInstance;
   }
 
