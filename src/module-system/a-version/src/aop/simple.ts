@@ -2,14 +2,6 @@ import { Aop, BeanBase, Virtual } from '@cabloy/core';
 
 @Virtual()
 class SimpleAopBase extends BeanBase {
-  actionSync(context, next) {
-    next();
-    context.result = `${context.result}:simpleaop`;
-  }
-}
-
-@Aop({ match: 'a-version.local.a' })
-export class AopSimple extends SimpleAopBase {
   // magic
   __get__(context, next) {
     next();
@@ -22,6 +14,18 @@ export class AopSimple extends SimpleAopBase {
     // }
   }
 
+  actionSync(context, next) {
+    next();
+    context.result = `${context.result}:simpleaop`;
+  }
+}
+
+@Aop({ match: 'a-version.local.a' })
+export class AopSimple extends SimpleAopBase {
+  // magic
+  __get__(context, next) {
+    super.__get__(context, next);
+  }
   __set__(_context, next) {
     // const prop = context.prop;
     // if (prop === 'name') {
