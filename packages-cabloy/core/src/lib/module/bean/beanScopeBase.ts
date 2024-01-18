@@ -1,13 +1,18 @@
-import { BeanBase } from './beanBase.js';
+import { appResource } from '../../core/resource.js';
+import { BeanSimple } from './beanSimple.js';
 
-const BeanModuleScope = Symbol('BeanModuleScopeBase#ModuleScope');
+const BeanModuleScope = Symbol('BeanScopeBase#ModuleScope');
 
-export class BeanModuleScopeBase extends BeanBase {
+export class BeanScopeBase extends BeanSimple {
   [BeanModuleScope]?: string;
 
   constructor(moduleScope?: string) {
     super();
     this[BeanModuleScope] = moduleScope;
+  }
+
+  get moduleBelong() {
+    return appResource._getModuleBelong(this.constructor as any);
   }
 
   get moduleScope() {

@@ -7,8 +7,6 @@ export class BeanBase extends BeanSimple {
   }
 
   get moduleBelong() {
-    const beanOptions = appResource.getBean(this.constructor as any);
-    if (!beanOptions || !beanOptions.moduleBelong) throw new Error(`not found module belong: ${this.constructor.name}`);
-    return beanOptions.moduleBelong;
+    return appResource._getModuleBelong(this.constructor as any);
   }
 }
