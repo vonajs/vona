@@ -10,7 +10,7 @@ Master.prototype.onReload = Reload;
 
 export * from './lib/core/index.js';
 export * from './lib/decorator/index.js';
-export * from './type/index.js';
+export * from './types/index.js';
 export * from './lib/module/index.js';
 
 export * from './lib/framework/framework.js';

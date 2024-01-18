@@ -1,4 +1,4 @@
-import { CabloyApplication } from '../../type/index.js';
+import { CabloyApplication } from '../../types/index.js';
 import { loadBeanContainer } from '../module/bean/loader.js';
 import { ModuleLoader } from '../module/loader.js';
 import { SocketioReady } from '../module/socketio.js';

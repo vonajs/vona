@@ -1,4 +1,4 @@
-import { IBroadcastExecuteContext } from '../../../type/index.js';
+import { IBroadcastExecuteContext } from '../../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
 export class BroadcastClient extends BeanSimple {

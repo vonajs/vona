@@ -1,4 +1,4 @@
-import { CabloyContext } from '../../type/index.js';
+import { CabloyContext } from '../../types/index.js';
 
 export default class DbTransaction {
   _ctx: CabloyContext;

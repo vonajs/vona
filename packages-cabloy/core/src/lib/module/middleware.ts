@@ -1,4 +1,4 @@
-import { CabloyApplication } from '../../type/index.js';
+import { CabloyApplication } from '../../types/index.js';
 
 export default function (app: CabloyApplication): [object, any[]] {
   // use modulesArray

@@ -1,4 +1,4 @@
-import { EnumAppEvent } from '../../../type/index.js';
+import { EnumAppEvent } from '../../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import clearFn from './clear.js';
 

@@ -1,5 +1,5 @@
 import extend from '@zhennann/extend';
-import { CabloyApplication } from '../../type/index.js';
+import { CabloyApplication } from '../../types/index.js';
 
 export default function (app: CabloyApplication, modules) {
   // all constants

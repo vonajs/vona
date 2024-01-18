@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import { BeanSimple } from './bean/beanSimple.js';
-import { CabloyApplication } from '../../type/index.js';
+import { CabloyApplication } from '../../types/index.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
 interface IMessengerCallbackContext {

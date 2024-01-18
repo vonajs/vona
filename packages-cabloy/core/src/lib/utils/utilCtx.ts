@@ -1,7 +1,7 @@
 import is from 'is-type-of';
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../module/bean/beanSimple.js';
-import { CabloyContext } from '../../type/index.js';
+import { CabloyContext } from '../../types/index.js';
 
 export class CtxUtil extends BeanSimple {
   runInBackground(scope) {

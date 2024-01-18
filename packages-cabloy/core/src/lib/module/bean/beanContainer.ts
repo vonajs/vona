@@ -1,5 +1,5 @@
 import is from 'is-type-of';
-import { CabloyApplication, CabloyContext } from '../../../type/index.js';
+import { CabloyApplication, CabloyContext } from '../../../types/index.js';
 import { Constructable } from '../../decorator/index.js';
 import { appResource } from '../../core/resource.js';
 import { MetadataKey } from '../../core/metadata.js';
