@@ -7,7 +7,7 @@ const __atomClassUserOnlineHistory = {
   module: moduleInfo.relativeName,
   atomClassName: 'userOnlineHistory',
 };
-module.exports = class UserOnline extends module.meta.class.BeanModuleBase {
+module.exports = class UserOnline extends module.meta.class.BeanScopeBase {
   get modelUserOnline() {
     return this.ctx.model.module(moduleInfo.relativeName).userOnline;
   }

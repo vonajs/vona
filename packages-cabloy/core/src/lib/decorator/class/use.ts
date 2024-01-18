@@ -1,6 +1,6 @@
 import { MetadataKey, appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
-import { BeanModuleBase } from '../../module/index.js';
+import { BeanScopeBase } from '../../module/index.js';
 import { Constructable, IDecoratorUseOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
@@ -13,7 +13,7 @@ export function Use(options?: IDecoratorUseOptions): PropertyDecorator {
     if (!beanFullName) throw new Error(`beanFullName not found for: ${beanClass.name}`);
     // moduleScope
     let moduleScope = options.moduleScope;
-    if (!moduleScope && beanClass.prototype instanceof BeanModuleBase) {
+    if (!moduleScope && beanClass.prototype instanceof BeanScopeBase) {
       moduleScope = parseModuleName();
     }
     // record

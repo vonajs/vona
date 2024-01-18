@@ -1,7 +1,7 @@
 import { TypeLocalRecord } from '../../../index.js';
-import { BeanModuleBase } from './beanModuleBase.js';
+import { BeanScopeBase } from './beanScopeBase.js';
 
-export class BeanLocal extends BeanModuleBase {
+export class BeanLocal extends BeanScopeBase {
   // magic
   protected __get__(prop) {
     const bean = this.ctx ? this.ctx.bean : this.app.bean;

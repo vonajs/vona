@@ -1,7 +1,7 @@
 const constants = require('../config/constants.js');
 
 const moduleInfo = module.info;
-module.exports = class Settings extends module.meta.class.BeanModuleBase {
+module.exports = class Settings extends module.meta.class.BeanScopeBase {
   get modelSettings() {
     return this.ctx.model.module(moduleInfo.relativeName).settings;
   }

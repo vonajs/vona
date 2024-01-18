@@ -1,7 +1,7 @@
 import is from 'is-type-of';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
-import { BeanModuleBase, IBeanRecord } from '../../index.js';
+import { BeanScopeBase, IBeanRecord } from '../../index.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
@@ -61,7 +61,7 @@ export class AppResource {
     // beanFullName
     const beanFullName = scene ? `${module}.${scene}.${name}` : name;
     // moduleScope
-    const moduleScope = beanClass instanceof BeanModuleBase;
+    const moduleScope = beanClass instanceof BeanScopeBase;
     // options
     const beanOptions = {
       ...options,

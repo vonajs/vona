@@ -1,5 +1,5 @@
 const moduleInfo = module.info;
-module.exports = class Progress extends module.meta.class.BeanModuleBase {
+module.exports = class Progress extends module.meta.class.BeanScopeBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }

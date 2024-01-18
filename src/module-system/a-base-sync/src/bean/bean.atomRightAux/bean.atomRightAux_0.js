@@ -1,2 +1,2 @@
 // const moduleInfo = module.info;
-module.exports = class AtomRightAux extends module.meta.class.BeanModuleBase {};
+module.exports = class AtomRightAux extends module.meta.class.BeanScopeBase {};

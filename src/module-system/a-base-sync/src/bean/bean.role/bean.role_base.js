@@ -5,7 +5,7 @@ const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',
 };
-module.exports = class Role extends module.meta.class.BeanModuleBase {
+module.exports = class Role extends module.meta.class.BeanScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).role;
   }
@@ -238,7 +238,7 @@ module.exports = class Role extends module.meta.class.BeanModuleBase {
           select * from aRoleRef a 
             where a.iid=? and a.roleId in (${roleIds.join(',')})
         `,
-      [this.ctx.instance.id]
+      [this.ctx.instance.id],
     );
     const res = [];
     for (const roleId of roleIds) {

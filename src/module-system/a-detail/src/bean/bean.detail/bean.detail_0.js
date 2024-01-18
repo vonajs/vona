@@ -1,5 +1,5 @@
 const moduleInfo = module.info;
-module.exports = class Detail extends module.meta.class.BeanModuleBase {
+module.exports = class Detail extends module.meta.class.BeanScopeBase {
   get modelDetailBase() {
     return this.ctx.model.module(moduleInfo.relativeName).detailBase;
   }
