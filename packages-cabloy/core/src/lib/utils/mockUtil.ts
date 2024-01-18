@@ -1,7 +1,7 @@
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanBase } from '../module/bean/beanBase';
+import { BeanSimple } from '../module/bean/beanBase';
 
-export class AppMockUtil extends BeanBase {
+export class AppMockUtil extends BeanSimple {
   parseUrlFromPackage(dir, apiPrefix: string | boolean = true) {
     apiPrefix = _prepareApiPrefix(apiPrefix);
     const moduleInfo = this.parseInfoFromPackage(dir);

@@ -1,6 +1,6 @@
-import { BeanBase } from '../../index.js';
+import { BeanSimple } from '../../index.js';
 
-export class ErrorClass extends BeanBase {
+export class ErrorClass extends BeanSimple {
   ebErrors: any;
 
   constructor(ebErrors) {

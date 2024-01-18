@@ -2,7 +2,7 @@ import * as uuid from 'uuid';
 import { AppMockUtil } from '../utils/mockUtil.js';
 import { AppReload } from '../module/reload.js';
 import { AppUtil } from '../utils/util.js';
-import { BeanBase } from '../module/bean/beanBase.js';
+import { BeanSimple } from '../module/bean/beanBase.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp } from '../../type/interface/monkey.js';
 import { AppRouter } from '../module/route.js';
@@ -13,7 +13,7 @@ import { CabloyContext, IModule, ISuite } from '../../type/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 
-export class AppMeta extends BeanBase {
+export class AppMeta extends BeanSimple {
   workerId: string;
   inApp: boolean;
   inAgent: boolean;

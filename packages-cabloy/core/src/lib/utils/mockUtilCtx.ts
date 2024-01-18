@@ -1,6 +1,6 @@
-import { BeanBase } from '../module/bean/beanBase.js';
+import { BeanSimple } from '../module/bean/beanBase.js';
 
-export class CtxMockUtil extends BeanBase {
+export class CtxMockUtil extends BeanSimple {
   // login
   async login({ auth, password = '123456' }) {
     return await (<any>this.ctx.bean).authSimple.signinDirect({ data: { auth, password } });

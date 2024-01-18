@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 import { CabloyApplication } from '../../type/index.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
@@ -9,7 +9,7 @@ interface IMessengerCallbackContext {
 }
 type IMessengerCallback = (info: IMessengerCallbackContext) => void;
 
-export class AppMessenger extends BeanBase {
+export class AppMessenger extends BeanSimple {
   _providers: object = {};
   _pids: any = null;
 

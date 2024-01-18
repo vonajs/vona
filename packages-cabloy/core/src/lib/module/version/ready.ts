@@ -1,8 +1,8 @@
 import { EnumAppEvent } from '../../../type/index.js';
-import { BeanBase } from '../bean/beanBase.js';
+import { BeanSimple } from '../bean/beanBase.js';
 import clearFn from './clear.js';
 
-export class VersionReady extends BeanBase {
+export class VersionReady extends BeanSimple {
   initialize() {
     const app = this.app;
     // checkAppReady

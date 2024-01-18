@@ -1,6 +1,6 @@
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 
-export class AppReload extends BeanBase {
+export class AppReload extends BeanSimple {
   now() {
     this.app.meta['a-cms:watcher'].reload({ action: 'now' });
   }

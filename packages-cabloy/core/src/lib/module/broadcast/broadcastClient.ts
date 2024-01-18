@@ -1,7 +1,7 @@
 import { IBroadcastExecuteContext } from '../../../type/index.js';
-import { BeanBase } from '../bean/beanBase.js';
+import { BeanSimple } from '../bean/beanBase.js';
 
-export class BroadcastClient extends BeanBase {
+export class BroadcastClient extends BeanSimple {
   __callerId: string = '';
   channelName: string | null = null;
   sub: any = null;

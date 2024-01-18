@@ -3,10 +3,10 @@ import extend from '@zhennann/extend';
 import pathMatching from 'egg-path-matching';
 import loadMiddlewares from './middleware.js';
 import { CabloyApplication, CabloyContext } from '../../type/index.js';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
-export class AppRouter extends BeanBase {
+export class AppRouter extends BeanSimple {
   register(info, route) {
     const app = this.app;
     // args

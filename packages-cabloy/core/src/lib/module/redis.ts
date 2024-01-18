@@ -1,9 +1,9 @@
 import Bottleneck from 'bottleneck';
 import Redlock from 'redlock';
 import { CabloyApplication } from '../../type/index.js';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 
-export class AppLimiter extends BeanBase {
+export class AppLimiter extends BeanSimple {
   // https://github.com/SGrondin/bottleneck#clustering
   create(options) {
     options = options || {};
@@ -19,7 +19,7 @@ export class AppLimiter extends BeanBase {
   }
 }
 
-export class AppRedlock extends BeanBase {
+export class AppRedlock extends BeanSimple {
   // https://github.com/mike-marcacci/node-redlock#configuration
   create(options) {
     // clients

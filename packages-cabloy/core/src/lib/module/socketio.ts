@@ -1,7 +1,7 @@
 import { URL } from 'url';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 
-export class SocketioReady extends BeanBase {
+export class SocketioReady extends BeanSimple {
   initialize() {
     const app = this.app;
     // checkRequest

@@ -5,12 +5,12 @@ import { URL } from 'url';
 import is from 'is-type-of';
 import * as security from 'egg-security';
 import MixinClassesFn from 'mixin-classes';
-import { BeanBase } from '../module/bean/beanBase';
+import { BeanSimple } from '../module/bean/beanBase';
 import Redlock from 'redlock';
 import { Request } from 'egg';
 import { CabloyContext } from '../../type/index.js';
 
-export class AppUtil extends BeanBase {
+export class AppUtil extends BeanSimple {
   instanceStarted(subdomain) {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }

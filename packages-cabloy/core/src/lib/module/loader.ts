@@ -17,10 +17,10 @@ import loadSchedules from './schedule.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import { loadBeans } from './bean/index.js';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 import ModuleInfoFn from '../framework/moduleInfo.js';
 
-export class ModuleLoader extends BeanBase {
+export class ModuleLoader extends BeanSimple {
   async execute() {
     const app = this.app;
     // meta

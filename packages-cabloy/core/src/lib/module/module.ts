@@ -2,9 +2,9 @@ import fse from 'fs-extra';
 import path from 'path';
 import { glob } from '@cabloy/module-glob';
 import { IModuleResource } from '../../type/index.js';
-import { BeanBase } from './bean/beanBase.js';
+import { BeanSimple } from './bean/beanBase.js';
 
-export class ModuleTools extends BeanBase {
+export class ModuleTools extends BeanSimple {
   async prepare() {
     const app = this.app;
     // all modules

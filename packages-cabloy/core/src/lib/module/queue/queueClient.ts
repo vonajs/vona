@@ -8,9 +8,9 @@ import {
   IQueueWork,
   IQueueWorks,
 } from '../../../type/index.js';
-import { BeanBase } from '../bean/beanBase.js';
+import { BeanSimple } from '../bean/beanBase.js';
 
-export class QueueClient extends BeanBase {
+export class QueueClient extends BeanSimple {
   _workers: IQueueWorks = {};
   _queues: IQueueQueues = {};
   _queueCallbacks: IQueueCallbacks = {};
