@@ -10,11 +10,13 @@ const BeanContainerInstances = Symbol.for('Bean#Instances');
 const BeanContainerInstancesModule = Symbol.for('Bean#InstancesModule');
 
 export class BeanContainer {
-  app: CabloyApplication;
-  ctx: CabloyContext;
+  private app: CabloyApplication;
+  private ctx: CabloyContext;
+
   local: BeanLocalLike;
-  [BeanContainerInstances]: Record<string, Constructable> = {};
-  [BeanContainerInstancesModule]: Record<string, Constructable> = {};
+
+  private [BeanContainerInstances]: Record<string, Constructable> = {};
+  private [BeanContainerInstancesModule]: Record<string, Constructable> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
