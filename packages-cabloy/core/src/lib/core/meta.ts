@@ -52,6 +52,7 @@ export class AppMeta extends BeanBase {
   broadcasts: Record<string, any>;
   schedules: Record<string, any>;
   //
+  appReady: boolean;
   appReadyInstances: Record<string, any>;
   //
   __versionReady: boolean;

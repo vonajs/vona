@@ -1,4 +1,1 @@
-declare global {
-  const MyTest = 3;
-}
-export {};
+import '../../../../../typings/core/index.d.js';

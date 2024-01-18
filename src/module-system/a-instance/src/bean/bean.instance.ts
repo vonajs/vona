@@ -1,30 +1,38 @@
-const async = require('async');
-const chalk = require('chalk');
-const boxen = require('boxen');
+import async from 'async';
+import chalk from 'chalk';
+import boxen from 'boxen';
+import { Bean, BeanBase } from '@cabloy/core';
+import { __ThisModule__ } from '../types/this.js';
 
-const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
+const boxenOptions: boxen.Options = {
+  padding: 1,
+  margin: 1,
+  align: 'center',
+  borderColor: 'yellow',
+  borderStyle: boxen.BorderStyle.Round,
+};
 
 const __queueInstanceStartup = {};
 
-const moduleInfo = module.info;
-module.exports = class Instance {
+@Bean()
+export class BeanInstance extends BeanBase {
   get cacheMem() {
-    return this.ctx.cache.mem.module(moduleInfo.relativeName);
+    return this.ctx.cache.mem.module(__ThisModule__);
   }
 
   async list(options) {
     // options
     if (!options) options = { where: null, orders: null, page: null };
-    const page = this.ctx.bean.util.page(options.page, false);
+    const page = (<any>this.ctx.bean).util.page(options.page, false);
     const orders = options.orders;
     const where = options.where || { disabled: 0 }; // allow disabled=undefined
     // select
-    const _options = { where, orders };
+    const _options = { where, orders } as any;
     if (page.size !== 0) {
       _options.limit = page.size;
       _options.offset = page.index;
     }
-    const modelInstance = this.ctx.model.module(moduleInfo.relativeName).instance;
+    const modelInstance = this.ctx.model.module(__ThisModule__).instance;
     return await modelInstance.select(_options);
   }
 
@@ -37,7 +45,7 @@ module.exports = class Instance {
 
   async _get({ subdomain }) {
     // get
-    const modelInstance = this.ctx.model.module(moduleInfo.relativeName).instance;
+    const modelInstance = this.ctx.model.module(__ThisModule__).instance;
     const instance = await modelInstance.get({ name: subdomain });
     if (instance) return instance;
     // instance base
@@ -46,11 +54,11 @@ module.exports = class Instance {
     // lock
     return await this.ctx.meta.util.lock({
       subdomain: null,
-      resource: `${moduleInfo.relativeName}.registerInstance.${subdomain}`,
+      resource: `${__ThisModule__}.registerInstance.${subdomain}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
           subdomain: null,
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           beanFullName: 'instance',
           context: { instanceBase },
           fn: '_registerLock',
@@ -61,7 +69,7 @@ module.exports = class Instance {
 
   async _registerLock({ instanceBase }) {
     // get again
-    const modelInstance = this.ctx.model.module(moduleInfo.relativeName).instance;
+    const modelInstance = this.ctx.model.module(__ThisModule__).instance;
     let instance = await modelInstance.get({ name: instanceBase.subdomain });
     if (instance) return instance;
     // insert
@@ -111,7 +119,7 @@ module.exports = class Instance {
     // config
     instance.config = JSON.parse(instance.config) || {};
     // cache configs
-    const instanceConfigs = this.ctx.bean.util.extend({}, this.ctx.app.meta.configs, instance.config);
+    const instanceConfigs = (<any>this.ctx.bean).util.extend({}, this.ctx.app.meta.configs, instance.config);
     this.cacheMem.set('instanceConfigs', instanceConfigs);
     // cache configsFront
     const instanceConfigsFront = this._mergeInstanceConfigFront({ instanceConfigs });
@@ -144,15 +152,15 @@ module.exports = class Instance {
     if (!options) options = { wait: true };
     if (!this.ctx.app.meta.appReady && options.wait === false) return false;
     while (!this.ctx.app.meta.appReady) {
-      await this.ctx.bean.util.sleep(300);
+      await (<any>this.ctx.bean).util.sleep(300);
     }
     return true;
   }
 
-  async checkAppReadyInstance(options) {
+  async checkAppReadyInstance(options?: { startup: boolean }) {
     if (!options) options = { startup: true };
     // chech appReady first
-    const appReady = await this.ctx.bean.instance.checkAppReady({ wait: options.startup !== false });
+    const appReady = await this.checkAppReady({ wait: options.startup !== false });
     if (!appReady) return false;
     // check appReady instance
     const subdomain = this.ctx.subdomain;
@@ -165,7 +173,7 @@ module.exports = class Instance {
   }
 
   // options: force/instanceBase
-  async instanceStartup({ subdomain, options }) {
+  async instanceStartup({ subdomain, options }: { subdomain: string; options?: object }) {
     // queue within the same worker
     if (!__queueInstanceStartup[subdomain]) {
       __queueInstanceStartup[subdomain] = async.queue((info, cb) => {
@@ -177,7 +185,7 @@ module.exports = class Instance {
           return;
         }
         // startup
-        this.ctx.app.meta
+        (<any>this.ctx.app.meta)
           ._runStartupInstance({ subdomain: info.subdomain, options: info.options })
           .then(() => {
             info.resolve();
@@ -200,7 +208,7 @@ module.exports = class Instance {
 
   async initInstance() {
     // instance
-    const instance = await this.ctx.bean.instance.get({ subdomain: this.ctx.subdomain });
+    const instance = await this.get({ subdomain: this.ctx.subdomain });
     if (!instance) {
       // prompt: should for local/prod
       // if (this.ctx.app.meta.isLocal) {
@@ -233,7 +241,7 @@ module.exports = class Instance {
         aBase.host = this.ctx.host;
         aBase.protocol = this.ctx.protocol;
         // update
-        const modelInstance = this.ctx.model.module(moduleInfo.relativeName).instance;
+        const modelInstance = this.ctx.model.module(__ThisModule__).instance;
         await modelInstance.update({
           id: instance.id,
           config: JSON.stringify(instance.config),
@@ -246,7 +254,7 @@ module.exports = class Instance {
     // ok
     this.ctx.instance = instance;
   }
-};
+}
 
 function ctxHostValid(ctx) {
   // not check localhost, because almost inner api call use 127.0.0.1
