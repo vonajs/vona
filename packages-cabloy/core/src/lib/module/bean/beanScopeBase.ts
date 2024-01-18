@@ -1,4 +1,3 @@
-import { appResource } from '../../core/resource.js';
 import { BeanSimple } from './beanSimple.js';
 
 const BeanModuleScope = Symbol('BeanScopeBase#ModuleScope');
