@@ -115,12 +115,23 @@ export class AppResource {
     return name;
   }
 
-  _parseModuleScope(_module, beanClass, virtual) {
-    if (!virtual) {
-      const aa = beanClass.prototype;
-      const bb = aa.prototype;
-      return bb;
+  _parseModuleScope(module, beanClass, virtual) {
+    // not set when virtual
+    if (virtual) return;
+    // check parent
+    let moduleScope;
+    const parent = Object.getPrototypeOf(beanClass);
+    if (parent) {
+      const beanOptions = this.getBean(parent);
+      if (beanOptions && beanOptions.moduleScope) {
+        moduleScope = beanOptions.moduleScope;
+      }
     }
+    // set to current when parent not set
+    if (!moduleScope) {
+      moduleScope = module;
+    }
+    return moduleScope;
   }
 }
 
