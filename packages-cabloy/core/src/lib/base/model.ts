@@ -1,5 +1,5 @@
 import is from 'is-type-of';
-import { BeanSimple } from '../module/bean/beanSimple.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 let __columns = {};
 

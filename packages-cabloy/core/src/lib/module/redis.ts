@@ -1,7 +1,7 @@
 import Bottleneck from 'bottleneck';
 import Redlock from 'redlock';
 import { CabloyApplication } from '../../types/index.js';
-import { BeanSimple } from './bean/beanSimple.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 export class AppLimiter extends BeanSimple {
   // https://github.com/SGrondin/bottleneck#clustering

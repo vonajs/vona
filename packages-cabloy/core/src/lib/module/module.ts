@@ -2,7 +2,7 @@ import fse from 'fs-extra';
 import path from 'path';
 import { glob } from '@cabloy/module-glob';
 import { IModuleResource } from '../../types/index.js';
-import { BeanSimple } from './bean/beanSimple.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 export class ModuleTools extends BeanSimple {
   async prepare() {

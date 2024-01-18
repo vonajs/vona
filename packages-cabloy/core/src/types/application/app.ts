@@ -1,5 +1,5 @@
 import { Application as EggApplication, EggLoaderOptions, Singleton } from 'egg';
-import { BeanContainerLike } from '../../lib/module/bean/beanContainer.js';
+import { BeanContainerLike } from '../../lib/bean/beanContainer.js';
 import { AppMeta } from '../../lib/core/meta.js';
 import { Server as SocketServer } from 'socket.io';
 import { Redis } from 'ioredis';

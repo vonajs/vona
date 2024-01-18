@@ -1,5 +1,5 @@
 import { Model } from '../base/model.js';
-import { BeanModuleScopeBase } from '../module/bean/beanModuleScopeBase.js';
+import { BeanModuleScopeBase } from '../bean/beanModuleScopeBase.js';
 
 export default function () {
   const __classes = {};

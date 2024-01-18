@@ -1,4 +1,4 @@
-import { BeanSimple } from './bean/beanSimple.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 export class AppReload extends BeanSimple {
   now() {
