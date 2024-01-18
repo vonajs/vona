@@ -89,7 +89,7 @@ export class BeanContainer {
     return this._newBean(beanFullName as any, moduleScope, ...args);
   }
 
-  _injectBeanInstance(beanInstance, beanFullName) {
+  private _injectBeanInstance(beanInstance, beanFullName) {
     const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
     const uses = appResource.getUses(beanOptions.beanClass.prototype);
@@ -103,7 +103,7 @@ export class BeanContainer {
     }
   }
 
-  _injectBeanInstanceProp(targetBeanFullName, scope, moduleScope) {
+  private _injectBeanInstanceProp(targetBeanFullName, scope, moduleScope) {
     let targetInstance;
     if (moduleScope) {
       if (scope === 'app') {
@@ -126,7 +126,7 @@ export class BeanContainer {
     return targetInstance;
   }
 
-  _patchBeanInstance(beanInstance, args, beanFullName, aop) {
+  private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
     // app/ctx
     if (this.app) {
       beanInstance.app = this.app;
@@ -150,7 +150,7 @@ export class BeanContainer {
     return this._newBeanProxy(beanFullName, beanInstance);
   }
 
-  _newBeanProxy(beanFullName, beanInstance) {
+  private _newBeanProxy(beanFullName, beanInstance) {
     const self = this;
     return new Proxy(beanInstance, {
       get(target, prop, receiver) {
@@ -229,7 +229,7 @@ export class BeanContainer {
     });
   }
 
-  _getInstanceMethodProxy(beanFullName, beanInstance, prop, methodType) {
+  private _getInstanceMethodProxy(beanFullName, beanInstance, prop, methodType) {
     const self = this;
     // not aop magic methods
     if (['__get__', '__set__'].includes(prop)) {
@@ -285,7 +285,7 @@ export class BeanContainer {
     return methodProxy;
   }
 
-  _prepareAopChains(beanFullName, beanInstance) {
+  private _prepareAopChains(beanFullName, beanInstance) {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
@@ -307,14 +307,14 @@ export class BeanContainer {
     return chains;
   }
 
-  _getAopChains(beanFullName) {
+  private _getAopChains(beanFullName) {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
     return host.__aopChains__;
   }
 
-  _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
+  private _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
@@ -338,7 +338,7 @@ export class BeanContainer {
     return chains;
   }
 
-  __composeForPropAdapter = (_context, chain) => {
+  private __composeForPropAdapter = (_context, chain) => {
     const [aopKey, methodName] = chain;
     // ProxyMagic
     if (aopKey === ProxyMagic) return null;
@@ -352,11 +352,11 @@ export class BeanContainer {
     };
   };
 
-  __composeForProp(chains) {
+  private __composeForProp(chains) {
     return this.app.meta.util.compose(chains, this.__composeForPropAdapter);
   }
 
-  __composeForPropAsync(chains) {
+  private __composeForPropAsync(chains) {
     return this.app.meta.util.composeAsync(chains, this.__composeForPropAdapter);
   }
 }
