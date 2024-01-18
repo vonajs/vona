@@ -53,18 +53,21 @@ export class AppResource {
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
-    let { module, scene, name, beanClass } = options;
+    let { module, scene, name, beanClass, virtual } = options;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // module
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
     const beanFullName = scene ? `${module}.${scene}.${name}` : name;
+    // moduleScope
+    const moduleScope = this._parseModuleScope(module, beanClass, virtual);
     // options
     const beanOptions = {
       ...options,
       beanFullName,
       name,
+      moduleScope,
     } as IDecoratorBeanOptionsBase<T>;
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
@@ -110,6 +113,14 @@ export class AppResource {
     // lowerCase
     name = name.charAt(0).toLowerCase() + name.substring(1);
     return name;
+  }
+
+  _parseModuleScope(_module, beanClass, virtual) {
+    if (!virtual) {
+      const aa = beanClass.prototype;
+      const bb = aa.prototype;
+      return bb;
+    }
   }
 }
 

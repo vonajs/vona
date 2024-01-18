@@ -1,4 +1,4 @@
-import { CabloyApplication, CabloyContext } from '../../../type/index.js';
+import type { CabloyApplication, CabloyContext } from '../../../type/index.js';
 
 export class BeanSimple {
   protected app: CabloyApplication;

@@ -35,7 +35,7 @@
       "path": "src/module-system/a-version"
     },
     {
-      "path": "src/module-system/a-instance"
+      "path-": "src/module-system/a-instance"
     }
   ]
 }

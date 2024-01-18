@@ -8,7 +8,7 @@ import MixinClassesFn from 'mixin-classes';
 import Redlock from 'redlock';
 import { Request } from 'egg';
 import { CabloyContext } from '../../type/index.js';
-import { BeanSimple } from '../../index.js';
+import { BeanSimple } from '../module/bean/beanSimple.js';
 
 export class AppUtil extends BeanSimple {
   instanceStarted(subdomain) {

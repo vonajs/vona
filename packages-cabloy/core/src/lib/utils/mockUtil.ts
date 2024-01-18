@@ -1,5 +1,5 @@
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanSimple } from '../../index.js';
+import { BeanSimple } from '../module/bean/beanSimple.js';
 
 export class AppMockUtil extends BeanSimple {
   parseUrlFromPackage(dir, apiPrefix: string | boolean = true) {
