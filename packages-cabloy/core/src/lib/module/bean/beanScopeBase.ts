@@ -11,17 +11,13 @@ export class BeanScopeBase extends BeanSimple {
     this[BeanModuleScope] = moduleScope;
   }
 
-  get moduleBelong() {
-    return appResource._getModuleBelong(this.constructor as any);
-  }
-
   get moduleScope() {
-    return this[BeanModuleScope] || this.moduleBelong;
+    return this[BeanModuleScope];
   }
 
   // other module's bean
   module(moduleScope: string) {
     const bean = this.ctx ? this.ctx.bean : this.app.bean;
-    return bean._getBeanScope(this.constructor as any, moduleScope);
+    return bean._getBeanScope(`${this.moduleScope}.scope.module`, moduleScope);
   }
 }

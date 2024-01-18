@@ -10,6 +10,7 @@ export function Scope<T>(): ClassDecorator {
     appResource.addBean({
       module,
       scene: 'scope',
+      name: 'module', // force to the same name
       beanClass: target as unknown as Constructable<T>,
     });
   };
