@@ -1,8 +1,8 @@
-import { BeanSimple } from './beanSimple.js';
+import { BeanBase } from './beanBase.js';
 
 const BeanModuleScope = Symbol('BEAN#__BeanModuleScope');
 
-export class BeanScopeBase extends BeanSimple {
+export class BeanScopeBase extends BeanBase {
   [BeanModuleScope]?: string;
 
   constructor(moduleScope?: string) {

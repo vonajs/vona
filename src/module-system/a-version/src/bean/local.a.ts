@@ -13,6 +13,7 @@ export class LocalA extends BeanScopeBase {
   getName() {
     this.ctx.bean['a-version.version.manager'].init;
     this.ctx.local.version.__database;
+    // this.bean.
     // this.ctx.bean.
     // const aa = this.actionSync();
     // const aa = this.module('test-party');
