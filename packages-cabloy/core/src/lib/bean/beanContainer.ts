@@ -152,6 +152,10 @@ export class BeanContainer {
     if (this.ctx) {
       beanInstance.ctx = this.ctx;
     }
+    // beanFullName
+    if (typeof beanFullName === 'string') {
+      __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
+    }
     // scope
     this._injectBeanInstanceScope(beanInstance, beanFullName);
     // inject
