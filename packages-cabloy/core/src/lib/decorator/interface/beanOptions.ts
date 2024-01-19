@@ -2,7 +2,13 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
-export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | 'virtual' | 'scope' | TypeDecoratorBeanOptionsScene;
+export type TypeDecoratorBeanOptionsSceneBase =
+  | 'local'
+  | 'aop'
+  | 'virtual'
+  | 'scope'
+  | 'controller'
+  | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version' | 'middleware';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
@@ -36,9 +42,13 @@ export interface IDecoratorLocalOptions {
   name?: string;
   containerScope?: ContainerScope;
 }
+
+export interface IDecoratorControllerOptions {
+  name?: string;
+}
+
 export interface IDecoratorAopOptions {
   name?: string;
-  containerScope?: ContainerScope;
   match: string;
 }
 
