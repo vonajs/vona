@@ -1,3 +1,3 @@
-export const errors = {
-  1001: 'ModuleOld',
-};
+export enum errors {
+  'ModuleOld' = 1001,
+}
