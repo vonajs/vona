@@ -14,7 +14,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   scene?: TypeDecoratorBeanOptionsSceneBase;
   name: string;
   beanClass: Constructable<T>;
-  scope?: ContainerScope;
+  containerScope?: ContainerScope;
   aop: boolean | undefined;
   aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
@@ -27,18 +27,18 @@ export interface IDecoratorBeanOptions {
   /** global: if omit */
   scene?: TypeDecoratorBeanOptionsScene;
   name?: string;
-  scope?: ContainerScope;
+  containerScope?: ContainerScope;
 }
 
 export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
 
 export interface IDecoratorLocalOptions {
   name?: string;
-  scope?: ContainerScope;
+  containerScope?: ContainerScope;
 }
 export interface IDecoratorAopOptions {
   name?: string;
-  scope?: ContainerScope;
+  containerScope?: ContainerScope;
   match: string;
 }
 

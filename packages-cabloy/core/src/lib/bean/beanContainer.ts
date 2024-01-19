@@ -102,22 +102,22 @@ export class BeanContainer {
 
   private _injectBeanInstanceProp(targetBeanFullName, moduleScope) {
     const targetOptions = appResource.getBean(targetBeanFullName)!;
-    const scope = targetOptions.scope || 'ctx';
+    const containerScope = targetOptions.containerScope || 'ctx';
     let targetInstance;
     if (moduleScope) {
-      if (scope === 'app') {
+      if (containerScope === 'app') {
         targetInstance = this.app.bean._getBeanScope(targetBeanFullName, moduleScope);
-      } else if (scope === 'ctx') {
+      } else if (containerScope === 'ctx') {
         targetInstance = this._getBeanScope(targetBeanFullName, moduleScope);
-      } else if (scope === 'transient') {
+      } else if (containerScope === 'transient') {
         targetInstance = this._newBeanScope(targetBeanFullName, moduleScope);
       }
     } else {
-      if (scope === 'app') {
+      if (containerScope === 'app') {
         targetInstance = this.app.bean._getBean(targetBeanFullName);
-      } else if (scope === 'ctx') {
+      } else if (containerScope === 'ctx') {
         targetInstance = this._getBean(targetBeanFullName);
-      } else if (scope === 'transient') {
+      } else if (containerScope === 'transient') {
         targetInstance = this._newBean(targetBeanFullName);
       }
     }

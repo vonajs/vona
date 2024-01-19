@@ -12,7 +12,7 @@ export function Bean<T>(options?: IDecoratorBeanOptions): ClassDecorator {
       module,
       scene: options.scene,
       name: options.name,
-      scope: options.scope,
+      containerScope: options.containerScope,
       beanClass: target as unknown as Constructable<T>,
     });
   };

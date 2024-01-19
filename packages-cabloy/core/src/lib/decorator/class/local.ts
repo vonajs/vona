@@ -12,7 +12,7 @@ export function Local<T>(options?: IDecoratorLocalOptions): ClassDecorator {
       module,
       scene: 'local',
       name: options.name,
-      scope: options.scope,
+      containerScope: options.containerScope,
       beanClass: target as unknown as Constructable<T>,
     });
   };

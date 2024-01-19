@@ -11,7 +11,7 @@ export function Aop<T>(options: IDecoratorAopOptions): ClassDecorator {
       module,
       scene: 'aop',
       name: options.name,
-      scope: options.scope,
+      containerScope: options.containerScope,
       beanClass: target as unknown as Constructable<T>,
       aop: true,
       aopMatch: options.match,
