@@ -20,11 +20,12 @@ export class AppMockUtil extends BeanSimple {
     return url ? `${prefix}/${url}` : `${prefix}/`;
   }
 
-  async mockCtx(options?: { locale?: string; subdomain?: string | null }) {
+  async mockCtx(options?: { locale?: string; subdomain?: string | null; module?: string }) {
     options = options || {};
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
-    const ctx = await this.app.meta.util.createAnonymousContext({ locale, subdomain } as any);
+    const module = options.module;
+    const ctx = await this.app.meta.util.createAnonymousContext({ locale, subdomain, module } as any);
     return ctx;
   }
 }

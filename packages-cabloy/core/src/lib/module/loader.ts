@@ -59,7 +59,7 @@ export class ModuleLoader extends BeanSimple {
       // loadSchedules(app);
       // loadClusterApp(app);
 
-      const ctx = await app.meta.mockUtil.mockCtx({ subdomain: null });
+      const ctx = await app.meta.mockUtil.mockCtx({ subdomain: null, module: 'a-version' });
       const b = ctx.bean._getBean('a-version.local.b') as any;
       b.printName();
     } else {

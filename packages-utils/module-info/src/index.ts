@@ -31,7 +31,7 @@ export function parseModuleName(level: number = ParseModuleNameLevelInit): strin
   fileName = fileName.replace(/\\/gi, '/');
   const parts = fileName.split('/');
   for (let i = parts.length - 1; i >= 0; i--) {
-    let part = parts[i];
+    const part = parts[i];
     if (part.indexOf('-') === -1) continue;
     const info = parseInfo(part);
     if (!info) continue;
