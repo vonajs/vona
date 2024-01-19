@@ -311,7 +311,7 @@ export class AppUtil extends BeanSimple {
     } else {
       fn = fn || 'execute';
       if (!bean[fn]) {
-        throw new Error(`bean method not found: ${ctx.bean._getBeanFullName(bean.constructor)}:${fn}`);
+        throw new Error(`bean method not found: ${bean.__beanFullName__}:${fn}`);
       }
       res = await bean[fn](context);
     }

@@ -26,10 +26,6 @@ export class BeanContainer {
     this.local = this._newBean(BeanLocal);
   }
 
-  _getBeanFullName<T>(A: Constructable<T>): string | undefined {
-    return appResource.getBeanFullName(A);
-  }
-
   _getBean<T>(A: Constructable<T>): T;
   _getBean<K extends keyof IBeanRecord>(beanFullName: K): IBeanRecord[K];
   _getBean<T>(beanFullName: string): T;
