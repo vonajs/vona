@@ -33,8 +33,6 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/core": "workspace:^",
-    "cabloy-module-api-a-instance": "workspace:^",
     "chalk": "^3.0.0",
     "fs-extra": "^10.1.0"
   }

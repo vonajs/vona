@@ -43,7 +43,11 @@
     "eslint": "eslint --ext .js,.json,.jsx,.vue src",
     "cnpm:sync": "node ./scripts/cnpm-sync.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@cabloy/core": "workspace:^",
+    "cabloy-module-api-a-instance": "workspace:^",
+    "cabloy-module-api-a-version": "workspace:^"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/eslint-parser": "^7.13.10",
