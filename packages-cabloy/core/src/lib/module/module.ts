@@ -1,11 +1,11 @@
 import fse from 'fs-extra';
 import path from 'path';
 import { glob } from '@cabloy/module-glob';
-import { IModuleResource } from '../../types/index.js';
+import { IModule, IModuleResource } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
 export class ModuleTools extends BeanSimple {
-  async prepare() {
+  async prepare(): Promise<Record<string, IModule>> {
     const app = this.app;
     // all modules
     const { suites, modules, modulesArray, modulesMonkey } = await glob({
@@ -41,9 +41,6 @@ export class ModuleTools extends BeanSimple {
       const module = app.meta.modulesArray[i];
       module.resource = modulesResource[i];
     }
-    const ctx = await app.meta.mockUtil.mockCtx();
-    const b = ctx.bean._getBean('a-version.local.b') as any;
-    b.printName();
     // 2. main
     for (const module of app.meta.modulesArray) {
       if (module.resource.Main) {

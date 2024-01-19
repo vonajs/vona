@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import extend from '@zhennann/extend';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication, IModule } from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
 
-export default function (app: CabloyApplication, modules) {
+export default function (app: CabloyApplication, modules: Record<string, IModule>) {
   // all locales
   const ebLocales = {};
 
@@ -50,17 +50,17 @@ export default function (app: CabloyApplication, modules) {
 
   function loadLocales() {
     // module locales
-    Object.keys(modules).forEach(key => {
+    for (const key in modules) {
       const module = modules[key];
-      const locales = module.main.locales;
+      const locales = module.resource.locales;
       if (locales) {
-        Object.keys(locales).forEach(key => {
-          let locale = ebLocales[key];
-          if (!locale) locale = ebLocales[key] = {};
-          extend(false, locale, locales[key]);
-        });
+        for (const language in locales) {
+          let locale = ebLocales[language];
+          if (!locale) locale = ebLocales[language] = {};
+          extend(false, locale, locales[language]);
+        }
       }
-    });
+    }
 
     /**
      * based on egg-i18n

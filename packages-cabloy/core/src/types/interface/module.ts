@@ -8,6 +8,7 @@ export interface IModuleResource {
   Monkey: new () => IMonkeyModule;
   beans: Record<string, any>;
   aops: Record<string, any>;
+  locales: Record<string, any>;
 }
 
 declare module '@cabloy/module-info' {
