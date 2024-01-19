@@ -21,6 +21,7 @@ export function Use(options?: IDecoratorUseOptions): PropertyDecorator {
       prop,
       beanFullName,
       moduleScope,
+      containerScope: options.containerScope,
     });
   };
 }

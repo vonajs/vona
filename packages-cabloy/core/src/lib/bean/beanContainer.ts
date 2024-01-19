@@ -96,13 +96,22 @@ export class BeanContainer {
     for (const key in uses) {
       const useOptions = uses[key];
       const moduleScope = useOptions.moduleScope;
-      beanInstance[useOptions.prop] = this._injectBeanInstanceProp(useOptions.beanFullName, moduleScope);
+      const containerScope = useOptions.containerScope;
+      beanInstance[useOptions.prop] = this._injectBeanInstanceProp(
+        useOptions.beanFullName,
+        moduleScope,
+        containerScope,
+      );
     }
   }
 
-  private _injectBeanInstanceProp(targetBeanFullName, moduleScope) {
-    const targetOptions = appResource.getBean(targetBeanFullName)!;
-    const containerScope = targetOptions.containerScope || 'ctx';
+  private _injectBeanInstanceProp(targetBeanFullName, moduleScope?: string, containerScope?: string) {
+    // containerScope
+    if (!containerScope) {
+      const targetOptions = appResource.getBean(targetBeanFullName)!;
+      containerScope = targetOptions.containerScope || 'ctx';
+    }
+    // targetInstance
     let targetInstance;
     if (moduleScope) {
       if (containerScope === 'app') {
