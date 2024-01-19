@@ -9,6 +9,7 @@ export interface IModuleResource {
   beans: Record<string, any>;
   aops: Record<string, any>;
   locales: Record<string, any>;
+  errors: Record<number, string>;
 }
 
 declare module '@cabloy/module-info' {

@@ -1,10 +1,10 @@
 import extend from '@zhennann/extend';
 import assetErrors from './asset/errors.js';
 import { ErrorClass } from '../base/error.js';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication, IModule } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
 
-export default function (app: CabloyApplication, modules) {
+export default function (app: CabloyApplication, modules: Record<string, IModule>) {
   // all errors
   const ebErrors = {};
 
@@ -45,15 +45,15 @@ export default function (app: CabloyApplication, modules) {
   }
 
   function loadErrors() {
-    Object.keys(modules).forEach(key => {
+    for (const key in modules) {
       const module = modules[key];
       const ebError = (ebErrors[module.info.relativeName] = {});
 
       // module errors
-      if (module.main.errors) extend(true, ebError, module.main.errors);
+      if (module.resource.errors) extend(true, ebError, module.resource.errors);
 
       // asset errors
       extend(true, ebError, assetErrors);
-    });
+    }
   }
 }
