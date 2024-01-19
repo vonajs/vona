@@ -141,13 +141,10 @@ export class BeanContainer {
   }
 
   private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
-    // app/ctx
-    if (this.app) {
-      beanInstance.app = this.app;
-    }
-    if (this.ctx) {
-      beanInstance.ctx = this.ctx;
-    }
+    // app
+    beanInstance.app = this.app;
+    // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
+    beanInstance.ctx = this.ctx;
     // beanFullName
     if (typeof beanFullName === 'string') {
       __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
