@@ -13,6 +13,7 @@
   "exports": {
     ".": {
       "types": [
+        "./src/index.ts",
         "./dist/index.d.ts"
       ],
       "import": "./dist/index.js",
