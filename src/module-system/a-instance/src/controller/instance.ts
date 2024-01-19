@@ -1,14 +1,17 @@
-module.exports = class InstanceController {
+import { BeanBase, Controller } from '@cabloy/core';
+
+@Controller()
+export class ControllerInstance extends BeanBase {
   async item() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    (<any>this.ctx.bean).util.checkDemo();
     const res = await this.ctx.service.instance.item();
     this.ctx.success(res);
   }
 
   async save() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    (<any>this.ctx.bean).util.checkDemo();
     await this.ctx.service.instance.save({
       data: this.ctx.request.body.data,
     });
@@ -17,15 +20,15 @@ module.exports = class InstanceController {
 
   async getConfigsPreview() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    (<any>this.ctx.bean).util.checkDemo();
     const res = await this.ctx.service.instance.getConfigsPreview();
     this.ctx.success(res);
   }
 
   async reload() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    (<any>this.ctx.bean).util.checkDemo();
     await this.ctx.service.instance.reload();
     this.ctx.success();
   }
-};
+}
