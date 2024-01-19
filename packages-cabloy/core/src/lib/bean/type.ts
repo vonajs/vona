@@ -4,3 +4,4 @@ export type TypeBeanRecord = { [property in keyof IBeanRecord]: IBeanRecord[prop
 
 export interface IBeanScopeRecord {}
 export type TypeBeanScopeRecord = { [property in keyof IBeanScopeRecord]: IBeanScopeRecord[property] };
+export type TypeBeanScopeRecordKeys = keyof IBeanScopeRecord;
