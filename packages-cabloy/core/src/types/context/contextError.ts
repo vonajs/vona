@@ -6,7 +6,7 @@ type TypeErrorMethodCommon = {
 };
 
 type TypeErrorMethodSuccess = {
-  (data: any, ...args: any[]): void;
+  (data?: any, ...args: any[]): void;
   module: (moduleName: string, data: any, ...args: any[]) => void;
 };
 
