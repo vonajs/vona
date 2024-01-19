@@ -9,7 +9,7 @@ import { IBeanRecord, TypeBeanRecord } from './type.js';
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
 const BeanContainerInstancesModule = Symbol.for('Bean#InstancesModule');
-const BeanInstanceScope = Symbol('BeanInstance#Scope');
+// const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export class BeanContainer {
   private app: CabloyApplication;
@@ -133,19 +133,19 @@ export class BeanContainer {
     return targetInstance;
   }
 
-  private _injectBeanInstanceScope(beanInstance, beanFullName) {
-    if (typeof beanFullName !== 'string' || beanFullName.indexOf('.scope.module') > -1) return;
-    Object.defineProperty(beanInstance, 'scope', {
-      enumerable: false,
-      configurable: true,
-      get() {
-        if (!this[BeanInstanceScope]) {
-          this[BeanInstanceScope] = this.bean._getBean(`${this.moduleBelong}.scope.module`);
-        }
-        return this[BeanInstanceScope];
-      },
-    });
-  }
+  // private _injectBeanInstanceScope(beanInstance, beanFullName) {
+  //   if (typeof beanFullName !== 'string' || beanFullName.indexOf('.scope.module') > -1) return;
+  //   Object.defineProperty(beanInstance, 'scope', {
+  //     enumerable: false,
+  //     configurable: true,
+  //     get() {
+  //       if (!this[BeanInstanceScope]) {
+  //         this[BeanInstanceScope] = this.bean._getBean(`${this.moduleBelong}.scope.module`);
+  //       }
+  //       return this[BeanInstanceScope];
+  //     },
+  //   });
+  // }
 
   private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
     // app
@@ -156,8 +156,8 @@ export class BeanContainer {
     if (typeof beanFullName === 'string') {
       __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
     }
-    // scope
-    this._injectBeanInstanceScope(beanInstance, beanFullName);
+    /// / scope
+    // this._injectBeanInstanceScope(beanInstance, beanFullName);
     // inject
     this._injectBeanInstance(beanInstance, beanFullName);
     // init

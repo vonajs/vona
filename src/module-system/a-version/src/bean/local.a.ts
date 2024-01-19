@@ -6,6 +6,9 @@ import { BeanInstance } from 'cabloy-module-api-a-instance';
 @Local()
 export class LocalA extends BeanModuleScopeBase {
   @Use()
+  scope: ScopeModule;
+
+  @Use()
   testInstance: BeanInstance;
 
   @Use()

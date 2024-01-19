@@ -1,7 +1,11 @@
-import { BeanBase, Controller } from '@cabloy/core';
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModule } from '../index.js';
 
 @Controller()
 export class ControllerInstance extends BeanBase {
+  @Use()
+  scope: ScopeModule;
+
   async item() {
     // check demo
     (<any>this.ctx.bean).util.checkDemo();
