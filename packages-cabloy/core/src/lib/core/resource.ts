@@ -139,7 +139,7 @@ export class AppResource {
   _getModuleBelong(beanFullName: string): string;
   _getModuleBelong<T>(beanFullName: Constructable<T> | string): string {
     const beanOptions = this.getBean(beanFullName as any);
-    if (!beanOptions || !beanOptions.moduleBelong) throw new Error(`not found module belong: ${A.constructor.name}`);
+    if (!beanOptions || !beanOptions.moduleBelong) throw new Error(`not found module belong: ${beanFullName}`);
     return beanOptions.moduleBelong;
   }
 }
