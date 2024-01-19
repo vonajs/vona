@@ -131,8 +131,7 @@ export class BeanContainer {
       configurable: true,
       get() {
         if (!this[BeanInstanceScope]) {
-          const moduleScope = this.moduleBelong;
-          this[BeanInstanceScope] = this.bean._getBeanScope(`${moduleScope}.scope.module`, moduleScope);
+          this[BeanInstanceScope] = this.bean._getBean(`${this.moduleBelong}.scope.module`);
         }
         return this[BeanInstanceScope];
       },
