@@ -1,5 +1,5 @@
 import { BeanScopeBase, Scope } from '@cabloy/core';
-import { BroadcastReload } from '../beans.js';
+import { LocalInstance } from '../beans.js';
 
 @Scope()
 export class ScopeModule extends BeanScopeBase {}
@@ -11,7 +11,7 @@ declare module '@cabloy/core' {
 }
 
 export interface ScopeModule {
-  broadcast: {
-    reload: BroadcastReload;
+  local: {
+    instance: LocalInstance;
   };
 }

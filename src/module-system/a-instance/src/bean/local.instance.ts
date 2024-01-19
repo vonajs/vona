@@ -1,6 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const __blackFields = ['startups', 'queues', 'broadcasts', 'middlewares', 'schedules'];
 
-module.exports = class Instance {
+@Local()
+export class LocalInstance extends BeanBase {
   async item() {
     return await this.ctx.model.instance.get({ id: this.ctx.instance.id });
   }
@@ -18,7 +21,7 @@ module.exports = class Instance {
 
   async getConfigsPreview() {
     const instance = await this.item();
-    let configPreview = this.ctx.bean.util.extend({}, this.app.meta.configs, JSON.parse(instance.config));
+    let configPreview = (<any>this.ctx.bean).util.extend({}, this.app.meta.configs, JSON.parse(instance.config));
     configPreview = this.__configBlackFields(configPreview);
     return { data: configPreview };
   }
@@ -37,4 +40,4 @@ module.exports = class Instance {
     }
     return config;
   }
-};
+}
