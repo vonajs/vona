@@ -4,10 +4,6 @@ import { BeanSimple } from './beanSimple.js';
 export class BeanBase extends BeanSimple {
   private __beanFullName__: string;
 
-  protected get bean() {
-    return this.ctx.bean;
-  }
-
   protected get moduleBelong() {
     return appResource._getModuleBelong(this.__beanFullName__);
   }

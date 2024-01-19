@@ -16,7 +16,6 @@ export class BeanModuleScopeBase extends BeanBase {
 
   // other module's bean
   module(moduleScope: string) {
-    const bean = this.ctx ? this.ctx.bean : this.app.bean;
-    return bean._getBeanScope((<any>this).__beanFullName__, moduleScope);
+    return this.bean._getBeanScope((<any>this).__beanFullName__, moduleScope);
   }
 }

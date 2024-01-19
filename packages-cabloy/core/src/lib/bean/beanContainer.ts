@@ -132,8 +132,7 @@ export class BeanContainer {
       get() {
         if (!this[BeanInstanceScope]) {
           const moduleScope = this.moduleBelong;
-          const bean = this.ctx ? this.ctx.bean : this.app.bean;
-          this[BeanInstanceScope] = bean._getBeanScope(`${moduleScope}.scope.module`, moduleScope);
+          this[BeanInstanceScope] = this.bean._getBeanScope(`${moduleScope}.scope.module`, moduleScope);
         }
         return this[BeanInstanceScope];
       },
