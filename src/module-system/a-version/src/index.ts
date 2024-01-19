@@ -3,6 +3,7 @@ export * from './aops.js';
 export * from './beans.js';
 export * from './controllers.js';
 export * from './config/locales.js';
+export * from './config/errors.js';
 // const routes = require('./routes.js');
 // const services = require('./services.js');
 // const config = require('./config/config.js');
