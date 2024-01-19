@@ -1,3 +1,3 @@
 export default {
-  'Module %s is Old': '模块过旧',
+  ModuleOld: '模块 %s 过旧',
 };

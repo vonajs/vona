@@ -1,3 +1,3 @@
 export const errors = {
-  1001: 'Module %s is Old',
+  1001: 'ModuleOld',
 };
