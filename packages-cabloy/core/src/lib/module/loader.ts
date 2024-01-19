@@ -16,7 +16,7 @@ import loadMessenger from './messenger.js';
 // import loadSchedules from './schedule.js';
 // import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
-// import { loadBeans } from './bean/index.js';
+import { loadBeans } from './bean/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import ModuleInfoFn from '../framework/moduleInfo.js';
 
@@ -45,7 +45,7 @@ export class ModuleLoader extends BeanSimple {
     if (meta.inApp) {
       // await loadConfig(app, modules);
       // await loadModuleMeta(app, modules);
-      // loadBeans(app);
+      loadBeans(app);
       loadLocales(app, modules);
       loadErrors(app, modules);
       // loadConstants(app, modules);
@@ -58,6 +58,10 @@ export class ModuleLoader extends BeanSimple {
       // loadStartups(app);
       // loadSchedules(app);
       // loadClusterApp(app);
+
+      const ctx = await app.meta.mockUtil.mockCtx({ subdomain: null });
+      const b = ctx.bean._getBean('a-version.local.b') as any;
+      b.printName();
     } else {
       // await loadConfig(app, modules);
       loadClusterAgent(app);

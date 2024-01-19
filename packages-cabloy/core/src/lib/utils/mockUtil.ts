@@ -20,7 +20,7 @@ export class AppMockUtil extends BeanSimple {
     return url ? `${prefix}/${url}` : `${prefix}/`;
   }
 
-  async mockCtx(options?: { locale?: string; subdomain?: string }) {
+  async mockCtx(options?: { locale?: string; subdomain?: string | null }) {
     options = options || {};
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
