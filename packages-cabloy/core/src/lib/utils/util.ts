@@ -200,7 +200,7 @@ export class AppUtil extends BeanSimple {
     };
   }
 
-  async createAnonymousContext({ locale, subdomain, module, instance }) {
+  async createAnonymousContext({ locale, subdomain, module, instance }): Promise<CabloyContext> {
     // url
     const url = module ? this.combineFetchPath(module, '') : '/api/a/base/';
     // ctx
@@ -230,7 +230,7 @@ export class AppUtil extends BeanSimple {
       }
     }
     // ok
-    return ctx;
+    return ctx as unknown as CabloyContext;
   }
 
   async executeBean({

@@ -41,7 +41,8 @@ export class ModuleTools extends BeanSimple {
       const module = app.meta.modulesArray[i];
       module.resource = modulesResource[i];
     }
-    const b = app.bean._getBean('a-version.local.b') as any;
+    const ctx = await app.meta.mockUtil.mockCtx();
+    const b = ctx.bean._getBean('a-version.local.b') as any;
     b.printName();
     // 2. main
     for (const module of app.meta.modulesArray) {
