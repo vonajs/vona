@@ -1,5 +1,1 @@
-const instance = require('./controller/instance.js');
-
-module.exports = {
-  instance,
-};
+export * from './controller/instance.js';
