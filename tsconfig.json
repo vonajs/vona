@@ -32,10 +32,10 @@
       "path": "packages-egg-born/egg-born-backend"
     },
     {
-      "path": "src/module-system/a-version"
+      "path": "src/module-system/a-instance"
     },
     {
-      "path-": "src/module-system/a-instance"
+      "path": "src/module-system/a-version"
     }
   ]
 }

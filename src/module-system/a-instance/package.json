@@ -13,7 +13,6 @@
   "exports": {
     ".": {
       "types": [
-        "./src/index.ts",
         "./dist/index.d.ts"
       ],
       "import": "./dist/index.js",
@@ -30,6 +29,7 @@
   },
   "author": "zhennann",
   "dependencies": {
+    "@cabloy/core": "workspace:^",
     "assert": "^2.0.0",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0"

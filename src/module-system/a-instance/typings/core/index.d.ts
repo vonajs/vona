@@ -1,4 +1,4 @@
-import '../../../../../typings/core/index.d.js';
+import '@cabloy/core';
 import { ScopeModule } from '../../src/types/scope.js';
 
 declare module '@cabloy/core' {
