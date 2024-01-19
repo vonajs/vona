@@ -118,7 +118,7 @@ export class BeanContainer {
         targetInstance = this.app.bean._getBeanScope(targetBeanFullName, moduleScope);
       } else if (containerScope === 'ctx') {
         targetInstance = this._getBeanScope(targetBeanFullName, moduleScope);
-      } else if (containerScope === 'transient') {
+      } else if (containerScope === 'new') {
         targetInstance = this._newBeanScope(targetBeanFullName, moduleScope);
       }
     } else {
@@ -126,7 +126,7 @@ export class BeanContainer {
         targetInstance = this.app.bean._getBean(targetBeanFullName);
       } else if (containerScope === 'ctx') {
         targetInstance = this._getBean(targetBeanFullName);
-      } else if (containerScope === 'transient') {
+      } else if (containerScope === 'new') {
         targetInstance = this._newBean(targetBeanFullName);
       }
     }

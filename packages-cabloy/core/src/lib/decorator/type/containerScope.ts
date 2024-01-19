@@ -1,1 +1,1 @@
-export type ContainerScope = 'app' | 'ctx' | 'transient';
+export type ContainerScope = 'app' | 'ctx' | 'new';
