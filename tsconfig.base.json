@@ -22,7 +22,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "jsx": "preserve",
-    "allowJs": true,
+    "allowJs": false,
     "checkJs": false,
     "resolvePackageJsonImports": true,
     "forceConsistentCasingInFileNames": true,
