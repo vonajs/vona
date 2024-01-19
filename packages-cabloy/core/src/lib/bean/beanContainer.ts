@@ -97,12 +97,35 @@ export class BeanContainer {
       const useOptions = uses[key];
       const moduleScope = useOptions.moduleScope;
       const containerScope = useOptions.containerScope;
-      beanInstance[useOptions.prop] = this._injectBeanInstanceProp(
+      this._injectBeanInstancePropLazy(
+        beanInstance,
+        useOptions.prop,
         useOptions.beanFullName,
         moduleScope,
         containerScope,
       );
     }
+  }
+
+  private _injectBeanInstancePropLazy(
+    instance,
+    prop,
+    targetBeanFullName,
+    moduleScope?: string,
+    containerScope?: string,
+  ) {
+    const self = this;
+    Object.defineProperty(instance, prop, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        const symbol = Symbol.for(`__bean_use__#${prop}`);
+        if (!instance[symbol]) {
+          instance[symbol] = self._injectBeanInstanceProp(targetBeanFullName, moduleScope, containerScope);
+        }
+        return instance[symbol];
+      },
+    });
   }
 
   private _injectBeanInstanceProp(targetBeanFullName, moduleScope?: string, containerScope?: string) {
