@@ -6,7 +6,9 @@ export class BeanScopeBase extends BeanBase {
   private __scenes: Record<string, any> = {};
 
   // other module's bean
-  module<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K] {
+  module<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
+  module<T>(moduleScope: string): T;
+  module<T>(moduleScope: string): T {
     return this.bean._getBean(`${moduleScope}.scope.module`);
   }
 
