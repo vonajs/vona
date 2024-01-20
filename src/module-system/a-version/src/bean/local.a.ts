@@ -1,7 +1,7 @@
 import { BeanBase, BeanModuleScopeBase, Local, TypeBeanScopeRecordKeys, Use } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
 import { ScopeModule } from '../index.js';
-import { ScopeModule as ScopeModuleInstance } from 'cabloy-module-api-a-instance';
+// import { ScopeModule as ScopeModuleInstance } from 'cabloy-module-api-a-instance';
 
 @Local()
 export class LocalA extends BeanModuleScopeBase {
@@ -22,16 +22,16 @@ export class LocalA extends BeanModuleScopeBase {
     return 'a';
   }
   getName() {
-    const scopeOther: ScopeModuleInstance = this.scope.module('a-instancea');
-    console.log('scopeOther:', scopeOther.local.instance);
+    const scopeOther: ScopeModule = this.bean.scope('a-version');
+    console.log('scopeOther:', scopeOther.local.version);
     return;
     const fail = this.ctx.parseFail(1001, 'a-version');
     console.log(fail);
     // this.scope.local.version;
-    const version = this.scope.module('a-instance').local.instance;
+    const version = this.bean.scope('a-instance').local.instance;
     // const version = this.testScope.module('a-version').local.version;
     // version = this.scope.local.version;
-    console.log(this.scope.module, version);
+    console.log(this.bean.scope, version);
     // this.ctx.bean['a-version.version.manager'].init;
     // this.ctx.local.version.__database;
     // this.bean.

@@ -4,7 +4,7 @@ import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
 import { BeanLocal } from './beanLocal.js';
-import { IBeanRecord, TypeBeanRecord } from './type.js';
+import { IBeanRecord, IBeanScopeRecord, TypeBeanRecord, TypeBeanScopeRecordKeys } from './type.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -24,6 +24,13 @@ export class BeanContainer {
     this.app = app;
     this.ctx = ctx;
     this.local = this._newBean(BeanLocal);
+  }
+
+  /** get specific module's scope */
+  scope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
+  scope<T>(moduleScope: string): T;
+  scope<T>(moduleScope: string): T {
+    return this._getBean(`${moduleScope}.scope.module`);
   }
 
   _getBean<T>(A: Constructable<T>): T;
