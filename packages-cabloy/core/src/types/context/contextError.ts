@@ -1,8 +1,8 @@
 type TypeErrorMethodNames = 'fail' | 'throw' | 'parseFail' | 'parseSuccess';
 
 type TypeErrorMethodCommon = {
-  (...args: any[]): void;
-  module: (moduleName: string, ...args: any[]) => void;
+  (code: number, ...args: any[]): void;
+  module: (moduleName: string, code: number, ...args: any[]) => void;
 };
 
 type TypeErrorMethodSuccess = {
