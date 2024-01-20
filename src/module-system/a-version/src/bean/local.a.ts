@@ -22,7 +22,7 @@ export class LocalA extends BeanModuleScopeBase {
     return 'a';
   }
   getName() {
-    const scopeOther: ScopeModule = this.bean.scope('a-version');
+    const scopeOther: ScopeModule = this.bean.scope(__ThisModule__);
     console.log('scopeOther:', scopeOther.local.version);
     return;
     const fail = this.ctx.parseFail(1001, 'a-version');
