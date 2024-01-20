@@ -1,6 +1,6 @@
 import extend from '@cabloy/extend';
 import assetErrors from './asset/errors.js';
-import { ErrorClass } from '../base/error.js';
+import { ErrorClass } from '../error/errorClass.js';
 import { CabloyApplication, IModule } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
 
