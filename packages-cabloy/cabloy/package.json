@@ -38,6 +38,7 @@
   "dependencies": {
     "egg-born-backend": "workspace:^",
     "egg-born-bin": "workspace:^",
+    "cabloy-suite-api-a-base": "workspace:^",
     "cabloy-module-api-a-antdv": "workspace:^",
     "cabloy-module-api-a-antvg6": "workspace:^",
     "cabloy-module-api-a-antvlayout": "workspace:^",

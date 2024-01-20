@@ -3,5 +3,9 @@
   "version": "5.0.0",
   "title": "Suite Base",
   "description": "",
-  "author": "zhennann"
+  "author": "zhennann",
+  "dependencies": {
+    "cabloy-module-api-a-instance": "workspace:^",
+    "cabloy-module-api-a-version": "workspace:^"
+  }
 }

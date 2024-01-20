@@ -29,13 +29,19 @@
       "path": "packages-cabloy/core"
     },
     {
+      "path": "packages-cabloy/cabloy"
+    },
+    {
       "path": "packages-egg-born/egg-born-backend"
     },
     {
-      "path": "src/module-system/a-instance"
+      "path": "src/suite/a-base"
     },
     {
-      "path": "src/module-system/a-version"
+      "path": "src/suite/a-base/modules/a-instance"
+    },
+    {
+      "path": "src/suite/a-base/modules/a-version"
     }
   ]
 }
