@@ -4,5 +4,6 @@ export * from './beanLocal.js';
 export * from './beanModuleScopeBase.js';
 export * from './scope/beanScopeBase.js';
 export * from './scope/beanScopeScene.js';
+export * from './scope/beanScopeError.js';
 export * from './beanSimple.js';
 export * from './type.js';
