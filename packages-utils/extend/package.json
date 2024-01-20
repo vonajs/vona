@@ -1,0 +1,36 @@
+{
+  "name": "@cabloy/extend",
+  "version": "1.0.0",
+  "description": "cabloy extend",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
+  "author": "zhennann",
+  "license": "MIT",
+  "dependencies": {}
+}

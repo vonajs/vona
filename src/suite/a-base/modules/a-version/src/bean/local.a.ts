@@ -29,7 +29,7 @@ export class LocalA extends BeanModuleScopeBase {
     // console.log('scopeOther:', scopeOther.local.version);
     // return;
     const fail = this.ctx.parseFail(this.scope.error.ModuleOld, 'a-version');
-    this.scope.error.ModuleOld.throw('a-version');
+    this.scope.error.ModuleOld.throw('a-version', 2);
     console.log(fail);
     return;
     // this.scope.local.version;

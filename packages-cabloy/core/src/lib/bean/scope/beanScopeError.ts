@@ -1,5 +1,5 @@
 interface IBeanScopeError {
-  throw(string: 'a-version'): never;
+  throw(...args: any[]): never;
 }
 
 export type TypeBeanScopeError<T> = {
