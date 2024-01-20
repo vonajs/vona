@@ -1,5 +1,5 @@
 import is from 'is-type-of';
-import extend from '@zhennann/extend';
+import extend from '@cabloy/extend';
 import pathMatching from 'egg-path-matching';
 import loadMiddlewares from './middleware.js';
 import { CabloyApplication, CabloyContext } from '../../types/index.js';

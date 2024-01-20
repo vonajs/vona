@@ -1,4 +1,4 @@
-import extend from '@zhennann/extend';
+import extend from '@cabloy/extend';
 import assetErrors from './asset/errors.js';
 import { ErrorClass } from '../base/error.js';
 import { CabloyApplication, IModule } from '../../types/index.js';

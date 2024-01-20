@@ -62,7 +62,7 @@ const getProperty = function getProperty(obj, name) {
   return obj[name];
 };
 
-module.exports = function extend(...args) {
+export default function extend(...args) {
   let options, name, src, copy, copyIsArray, clone;
   let target = args[0];
   let i = 1;
@@ -114,4 +114,4 @@ module.exports = function extend(...args) {
 
   // Return the modified object
   return target;
-};
+}
