@@ -22,13 +22,13 @@ export class ErrorClass extends BeanSimple {
 
     this.ctx.response.status = 200;
     this.ctx.response.type = 'application/json';
-    this.ctx.response.body = { code: __combineErrorCode(module, body.code), message: body.message }; // body maybe Error
+    this.ctx.response.body = { code: body.code, message: body.message }; // body maybe Error
   }
   // code/message,args
   throw(module, code, ...args) {
     const body = this.parseFail(module, code, ...args);
     const err = new Error();
-    err.code = __combineErrorCode(module, body.code);
+    err.code = body.code;
     err.message = body.message;
     if (body.code < 500) err.status = body.code;
     throw err;
@@ -60,11 +60,12 @@ export class ErrorClass extends BeanSimple {
       message = this.ctx.text(ebError[codeDefault]);
     }
 
+    code = __combineErrorCode(module, code);
     return { code, message };
   }
 }
 
 function __combineErrorCode(module, code) {
-  if (code <= 1000) return code;
+  if (typeof code !== 'number' || code <= 1000) return code;
   return module ? `${module}:${code}` : code;
 }
