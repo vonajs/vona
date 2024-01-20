@@ -25,7 +25,7 @@ export class ErrorClass extends BeanSimple {
     this.ctx.response.body = { code: body.code, message: body.message }; // body maybe Error
   }
   // code/message,args
-  throw(module, code, ...args) {
+  throw(module, code, ...args): never {
     const body = this.parseFail(module, code, ...args);
     const err = new Error();
     err.code = body.code;
