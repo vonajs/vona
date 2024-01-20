@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const extend = require('@zhennann/extend');
+const extend = require('@cabloy/extend');
 const currency = require('@zhennann/currency').default;
 const moment = require('moment');
 const mparse = require('@cabloy/module-parse').default;

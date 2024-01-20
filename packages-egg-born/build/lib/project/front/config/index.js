@@ -1,7 +1,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 const path = require('path');
 const { merge } = require('webpack-merge');
-const extend = require('@zhennann/extend');
+const extend = require('@cabloy/extend');
 const os = require('os');
 const webpack = require('webpack');
 const fse = require('fs-extra');
@@ -85,7 +85,7 @@ module.exports = (context, cb) => {
         },
       },
       configProject,
-      configScene
+      configScene,
     );
 
     const envCustomTitle = {
@@ -153,7 +153,7 @@ module.exports = (context, cb) => {
       },
       envCustom,
       envCustomTitle,
-      config.front
+      config.front,
     );
 
     cb(null, res);

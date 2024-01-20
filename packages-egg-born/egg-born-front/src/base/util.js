@@ -5,7 +5,7 @@ import cookies from 'js-cookie';
 import queue from 'async/queue';
 import debounce from '@zhennann/debounce';
 import currency from '@zhennann/currency';
-import extend from '@zhennann/extend';
+import extend from '@cabloy/extend';
 import cascadeExtend from 'cascade-extend';
 import requirejsFn from './requirejs.js';
 // eslint-disable-next-line

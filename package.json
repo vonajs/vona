@@ -55,7 +55,7 @@
     "@cabloy/process-helper": "workspace:^",
     "@typescript-eslint/parser": "^6.16.0",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
-    "@zhennann/extend": "^3.0.2",
+    "@cabloy/extend": "^3.0.2",
     "@zhennann/framework7": "^5.8.2",
     "@zhennann/socketio": "^4.0.2",
     "async": "^3.2.0",
