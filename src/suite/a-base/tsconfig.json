@@ -4,5 +4,13 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "references": [
+    {
+      "path": "modules/a-instance"
+    },
+    {
+      "path": "modules/a-version"
+    }
+  ]
 }

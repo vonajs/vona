@@ -36,12 +36,6 @@
     },
     {
       "path": "src/suite/a-base"
-    },
-    {
-      "path": "src/suite/a-base/modules/a-instance"
-    },
-    {
-      "path": "src/suite/a-base/modules/a-version"
     }
   ]
 }
