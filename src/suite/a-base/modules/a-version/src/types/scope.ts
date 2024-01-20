@@ -1,6 +1,6 @@
 import { BeanScopeBase, Scope } from '@cabloy/core';
-import { LocalVersion } from '../beans.js';
-import { Errors } from '../index.js';
+import { Local } from './local.js';
+import { Error } from './error.js';
 
 @Scope()
 export class ScopeModule extends BeanScopeBase {}
@@ -12,8 +12,6 @@ declare module '@cabloy/core' {
 }
 
 export interface ScopeModule {
-  local: {
-    version: LocalVersion;
-  };
-  error: typeof Errors;
+  local: Local;
+  error: Error;
 }
