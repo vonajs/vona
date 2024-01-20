@@ -1,5 +1,5 @@
 import { BeanScopeScene } from './beanScopeScene.js';
-import { BeanBase } from './beanBase.js';
+import { BeanBase } from '../beanBase.js';
 
 export class BeanScopeBase extends BeanBase {
   private __scenes: Record<string, any> = {};
