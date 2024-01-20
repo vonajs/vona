@@ -1,6 +1,6 @@
 import { Context as EggContext } from 'egg';
 import { ContextBase } from './contextBase.js';
-import { ContextError } from './contextError.js';
+import { ContextError } from '../../lib/error/errorContext.js';
 import { CabloyApplication } from '../application/app.js';
 import { BeanContainerLike } from '../../lib/bean/beanContainer.js';
 
