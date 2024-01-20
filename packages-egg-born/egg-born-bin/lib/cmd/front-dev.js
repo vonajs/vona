@@ -7,7 +7,7 @@ class FrontDevCommand extends Command {
     this.usage = 'Usage: egg-born-bin front-dev';
   }
 
-  *run({ cwd, argv }) {
+  async run({ cwd, argv }) {
     console.log('run front dev at %s', cwd);
 
     const frontFile = require.resolve('egg-born-front/package.json');

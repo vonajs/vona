@@ -6,7 +6,7 @@ class BackendBuildCommand extends Command {
     this.usage = 'Usage: egg-born-bin backend-build-module';
   }
 
-  *run({ cwd }) {
+  async run({ cwd }) {
     console.log('run backend build at %s', cwd);
 
     const modulePath = cwd;

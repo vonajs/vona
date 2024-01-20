@@ -6,7 +6,7 @@ class FrontBuildCommand extends Command {
     this.usage = 'Usage: egg-born-bin front-build-module';
   }
 
-  *run({ cwd }) {
+  async run({ cwd }) {
     console.log('run front build at %s', cwd);
 
     const modulePath = cwd;

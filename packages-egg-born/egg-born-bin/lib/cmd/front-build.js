@@ -7,7 +7,7 @@ class FrontBuildCommand extends Command {
     this.usage = 'Usage: egg-born-bin front-build';
   }
 
-  *run({ cwd, argv }) {
+  async run({ cwd, argv }) {
     console.log('run front build at %s', cwd);
 
     const frontFile = require.resolve('egg-born-front/package.json');
