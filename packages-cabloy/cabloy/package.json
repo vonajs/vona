@@ -36,6 +36,7 @@
     "lerna": "^7.4.2"
   },
   "dependencies": {
+    "@cabloy/core": "workspace:^",
     "egg-born-backend": "workspace:^",
     "egg-born-bin": "workspace:^",
     "cabloy-suite-api-a-base": "workspace:^",
