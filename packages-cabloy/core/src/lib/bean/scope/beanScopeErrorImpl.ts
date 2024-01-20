@@ -7,7 +7,7 @@ const BeanErrorCode = Symbol('BeanScopeError#BeanErrorCode');
 
 export class BeanScopeErrorImpl extends BeanSimple implements IBeanScopeError {
   private [BeanModuleScope]: string;
-  private [BeanErrorCode]: number;
+  private [BeanErrorCode]: number | string;
 
   constructor(moduleScope, errorCode) {
     super();

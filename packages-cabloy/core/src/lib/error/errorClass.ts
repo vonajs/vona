@@ -47,6 +47,11 @@ export class ErrorClass extends BeanSimple {
     const ebError = this.ebErrors[module];
     let message = null;
 
+    // convert from enum
+    if (code && typeof code === 'string') {
+      code = ebError[code];
+    }
+
     if (code === undefined || code === null || code === '') {
       code = codeDefault;
     } else if (typeof code === 'string') {

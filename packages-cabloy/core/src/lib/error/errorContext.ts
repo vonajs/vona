@@ -3,18 +3,18 @@ import { IErrorObject } from './errorObject.js';
 type TypeErrorMethodNames = 'parseFail' | 'parseSuccess';
 
 type TypeErrorMethodCommon = {
-  (code: number, ...args: any[]): IErrorObject;
-  module: (moduleName: string, code: number, ...args: any[]) => IErrorObject;
+  (code: number | string, ...args: any[]): IErrorObject;
+  module: (moduleName: string, code: number | string, ...args: any[]) => IErrorObject;
 };
 
 type TypeErrorMethodFail = {
-  (code: number, ...args: any[]): void;
-  module: (moduleName: string, code: number, ...args: any[]) => void;
+  (code: number | string, ...args: any[]): void;
+  module: (moduleName: string, code: number | string, ...args: any[]) => void;
 };
 
 type TypeErrorMethodThrow = {
-  (code: number, ...args: any[]): never;
-  module: (moduleName: string, code: number, ...args: any[]) => never;
+  (code: number | string, ...args: any[]): never;
+  module: (moduleName: string, code: number | string, ...args: any[]) => never;
 };
 
 type TypeErrorMethodSuccess = {
@@ -23,8 +23,8 @@ type TypeErrorMethodSuccess = {
 };
 
 type TypeErrorMethodParseCode = {
-  (codeDefault: number, code: number, ...args: any[]): IErrorObject;
-  module: (moduleName: string, codeDefault: number, code: number, ...args: any[]) => IErrorObject;
+  (codeDefault: number, code: number | string, ...args: any[]): IErrorObject;
+  module: (moduleName: string, codeDefault: number, code: number | string, ...args: any[]) => IErrorObject;
 };
 
 type TypeErrorMethods = { success: TypeErrorMethodSuccess } & { throw: TypeErrorMethodThrow } & {
