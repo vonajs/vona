@@ -50,7 +50,7 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
       const ebError = (ebErrors[module.info.relativeName] = {});
 
       // module errors
-      if (module.resource.errors) extend(true, ebError, module.resource.errors);
+      if (module.resource.Errors) extend(true, ebError, module.resource.Errors);
 
       // asset errors
       extend(true, ebError, assetErrors);
