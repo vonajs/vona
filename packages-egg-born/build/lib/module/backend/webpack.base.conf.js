@@ -48,7 +48,7 @@ module.exports = context => {
 
   return {
     entry: {
-      backend: path.join(context.modulePath, 'backend/src/main.js'),
+      backend: path.join(context.modulePath, 'dist/index.js'),
     },
     // target: 'node',
     target: 'es2018',
