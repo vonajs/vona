@@ -1,1 +1,1 @@
-import '../../../../../typings/core/index.d.js';
+import 'cabloy';

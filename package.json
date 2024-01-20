@@ -44,9 +44,7 @@
     "cnpm:sync": "node ./scripts/cnpm-sync.js"
   },
   "dependencies": {
-    "@cabloy/core": "workspace:^",
-    "cabloy-module-api-a-instance": "workspace:^",
-    "cabloy-module-api-a-version": "workspace:^"
+    "cabloy": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
