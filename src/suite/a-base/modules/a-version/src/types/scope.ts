@@ -6,6 +6,7 @@ import { locales } from '../config/locales.js';
 
 @Scope()
 export class ScopeModule extends BeanScopeBase {}
+
 export interface ScopeModule extends TypeModuleResource<Local, typeof config, typeof Errors, typeof locales> {}
 
 declare module '@cabloy/core' {
