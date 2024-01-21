@@ -1,5 +1,4 @@
 import extend from '@cabloy/extend';
-import assetErrors from './asset/errors.js';
 import { ErrorClass } from '../error/errorClass.js';
 import { CabloyApplication, IModule } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
@@ -51,9 +50,6 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
 
       // module errors
       if (module.resource.Errors) extend(true, ebError, module.resource.Errors);
-
-      // asset errors
-      extend(true, ebError, assetErrors);
     }
   }
 }

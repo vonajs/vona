@@ -1,4 +1,5 @@
 import { BeanSimple } from '../bean/beanSimple.js';
+import { errorsInternal } from './errorInternal.js';
 
 export class ErrorClass extends BeanSimple {
   ebErrors: any;
@@ -45,7 +46,6 @@ export class ErrorClass extends BeanSimple {
   // parseCode
   parseCode(module, codeDefault, code, ...args) {
     const ebError = this.ebErrors[module];
-    let message = null;
 
     // convert from enum
     if (code && typeof code === 'string') {
@@ -54,15 +54,13 @@ export class ErrorClass extends BeanSimple {
 
     if (code === undefined || code === null || code === '') {
       code = codeDefault;
-    } else if (typeof code === 'string') {
-      message = this.ctx.text(code, ...args);
-      code = codeDefault;
-    } else {
-      message = this.ctx.text(ebError[code], ...args);
     }
 
-    if (!message) {
-      message = this.ctx.text(ebError[codeDefault]);
+    let message = null;
+    if (code <= 1000) {
+      message = this.ctx.text(errorsInternal[code], ...args);
+    } else {
+      message = this.ctx.text(ebError[code], ...args);
     }
 
     code = __combineErrorCode(module, code);
