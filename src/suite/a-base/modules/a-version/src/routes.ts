@@ -1,3 +1,3 @@
-import { IAppRoute } from '@cabloy/core';
+import { IModuleRoute } from '@cabloy/core';
 
-export const routes: IAppRoute[] = [];
+export const routes: IModuleRoute[] = [];

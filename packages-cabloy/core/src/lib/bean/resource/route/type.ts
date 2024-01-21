@@ -1,4 +1,4 @@
-export interface IAppRoute {
+export interface IModuleRoute {
   method: 'get' | 'post';
   path: string;
   controller: string;
