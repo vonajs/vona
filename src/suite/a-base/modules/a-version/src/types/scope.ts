@@ -1,4 +1,4 @@
-import { BeanScopeBase, Scope } from '@cabloy/core';
+import { BeanScopeBase, Scope, TypeModuleResource } from '@cabloy/core';
 import { Local } from './local.js';
 import { TypeErrors } from './error.js';
 import { TypeLocales } from './locale.js';
@@ -13,8 +13,7 @@ declare module '@cabloy/core' {
   }
 }
 
-export interface ScopeModule {
-  local: Local;
+export interface ScopeModule extends TypeModuleResource<Local> {
   error: TypeErrors;
   locale: TypeLocales;
   config: TypeConfig;
