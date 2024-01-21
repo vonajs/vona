@@ -1,1 +1,1 @@
-import 'cabloy';
+import 'cabloy-module-api-a-instance';
