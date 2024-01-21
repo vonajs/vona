@@ -1,6 +1,6 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
 import { ScopeModule } from '../index.js';
-import type { ScopeModule as ScopeModuleVersion } from 'cabloy-module-api-a-version';
+import { ScopeModule as ScopeModuleVersion } from 'cabloy-module-api-a-version';
 
 @Controller()
 export class ControllerInstance extends BeanBase {
