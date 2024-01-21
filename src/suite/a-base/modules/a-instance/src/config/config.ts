@@ -1,29 +1,23 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
-
-  // middlewares
-  config.middlewares = {
-    // instance: {
-    //   bean: 'instance',
-    //   global: true,
-    //   dependencies: 'appReady',
-    // },
-    // appReady: {
-    //   bean: 'appReady',
-    //   global: true,
-    // },
-  };
-
-  // broadcasts
-  config.broadcasts = {
-    resetCache: {
-      bean: 'resetCache',
+export const config = _app => {
+  return {
+    middlewares: {
+      // instance: {
+      //   bean: 'instance',
+      //   global: true,
+      //   dependencies: 'appReady',
+      // },
+      // appReady: {
+      //   bean: 'appReady',
+      //   global: true,
+      // },
     },
-    reload: {
-      bean: 'reload',
+    broadcasts: {
+      resetCache: {
+        bean: 'resetCache',
+      },
+      reload: {
+        bean: 'reload',
+      },
     },
   };
-
-  return config;
 };
