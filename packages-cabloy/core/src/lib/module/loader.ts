@@ -43,7 +43,7 @@ export class ModuleLoader extends BeanSimple {
     await moduleTools.monkey('moduleLoading');
 
     if (meta.inApp) {
-      await loadConfig(app, modules);
+      // await loadConfig(app, modules);
       // await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
@@ -63,7 +63,7 @@ export class ModuleLoader extends BeanSimple {
       const b = ctx.bean._getBean('a-version.local.b') as any;
       b.printName();
     } else {
-      await loadConfig(app, modules);
+      // await loadConfig(app, modules);
       loadClusterAgent(app);
     }
 

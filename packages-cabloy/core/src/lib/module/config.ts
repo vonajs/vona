@@ -27,7 +27,7 @@ export default async function (app: CabloyApplication, modules) {
             if (context[CTXCONFIG]) return context[CTXCONFIG];
             // get
             let useCache;
-            let _configs = context.bean.instance.getInstanceConfigs();
+            let _configs: Record<string, any> = context.bean.instance.getInstanceConfigs();
             if (!_configs) {
               _configs = app.meta.configs;
               useCache = false;
