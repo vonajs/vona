@@ -4,11 +4,9 @@ export * from './beans.js';
 export * from './controllers.js';
 export * from './config/locales.js';
 export * from './config/errors.js';
+export * from './config/config.js';
 // const routes = require('./routes.js');
 // const services = require('./services.js');
-// const config = require('./config/config.js');
-// const locales = require('./config/locales.js');
-// const errors = require('./config/errors.js');
 // const constants = require('./config/constants.js');
 
 // // eslint-disable-next-line
