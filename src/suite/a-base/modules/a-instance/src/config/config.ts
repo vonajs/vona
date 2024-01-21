@@ -1,3 +1,5 @@
+import { IModuleConfigBroadcast } from '@cabloy/core';
+
 export const config = _app => {
   const middlewares = {
     // instance: {
@@ -10,15 +12,18 @@ export const config = _app => {
     //   global: true,
     // } as IModuleConfigMiddleware,
   };
+
+  const broadcasts = {
+    resetCache: {
+      bean: 'resetCache',
+    } as IModuleConfigBroadcast,
+    reload: {
+      bean: 'reload',
+    } as IModuleConfigBroadcast,
+  };
+
   return {
     middlewares,
-    broadcasts: {
-      resetCache: {
-        bean: 'resetCache',
-      },
-      reload: {
-        bean: 'reload',
-      },
-    },
+    broadcasts,
   };
 };
