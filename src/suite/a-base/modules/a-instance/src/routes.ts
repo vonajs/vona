@@ -1,4 +1,4 @@
-module.exports = [
+export const routes = [
   // instance
   {
     method: 'post',

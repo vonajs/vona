@@ -1,11 +1,11 @@
 export * from './types/index.js';
 export * from './beans.js';
 export * from './controllers.js';
-// const routes = require('./routes.js');
+export * from './routes.js';
+export * from './config/locales.js';
+export * from './config/errors.js';
 // const services = require('./services.js');
 // const config = require('./config/config.js');
-// const locales = require('./config/locales.js');
-// const errors = require('./config/errors.js');
 
 // // eslint-disable-next-line
 // const beans = require('./beans.js');
