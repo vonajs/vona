@@ -29,8 +29,9 @@ export class LocalA extends BeanModuleScopeBase {
     // console.log('scopeOther3:', scopeOther.local.version);
     // return;
     // const fail = this.ctx.text.locale('zh-cn', 'ModuleOld', '-a-version-');
-    let fail = this.scope.locale.ModuleOld('-a-version-');
-    fail = this.scope.locale.ModuleOld('zh-cn', '-a-version-');
+    let fail = this.scope.locale.ModuleOld();
+    fail = this.scope.locale.ModuleOld('-a-version-');
+    fail = this.scope.locale.ModuleOld.locale('zh-cn', '-a-version-');
     // const fail = this.ctx.parseFail(403, 'a-version');
     // const fail = this.scope.error.ModuleOld.throw('a-version');
     console.log(fail);
