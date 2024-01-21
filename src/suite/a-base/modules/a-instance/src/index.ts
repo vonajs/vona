@@ -4,7 +4,6 @@ export * from './controllers.js';
 export * from './routes.js';
 export * from './config/locales.js';
 export * from './config/errors.js';
-// const services = require('./services.js');
 // const config = require('./config/config.js');
 
 // // eslint-disable-next-line
