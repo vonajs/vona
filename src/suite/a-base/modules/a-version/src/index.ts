@@ -7,17 +7,3 @@ export * from './config/errors.js';
 export * from './config/config.js';
 export * from './routes.js';
 // const constants = require('./config/constants.js');
-
-// // eslint-disable-next-line
-// const beans = require('./beans.js');
-
-// export default {
-//   beans,
-//   routes,
-//   controllers,
-//   services,
-//   config,
-//   locales,
-//   errors,
-//   constants,
-// };
