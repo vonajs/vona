@@ -6,12 +6,10 @@ export * from './config/locales.js';
 export * from './config/errors.js';
 export * from './config/config.js';
 export * from './routes.js';
-// const services = require('./services.js');
 // const constants = require('./config/constants.js');
 
 // // eslint-disable-next-line
 // const beans = require('./beans.js');
-// const controllers = require('./controllers.js');
 
 // export default {
 //   beans,
