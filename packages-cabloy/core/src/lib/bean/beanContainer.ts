@@ -138,7 +138,10 @@ export class BeanContainer {
   private _injectBeanInstanceProp(targetBeanFullName, moduleScope?: string, containerScope?: string) {
     // containerScope
     if (!containerScope) {
-      const targetOptions = appResource.getBean(targetBeanFullName)!;
+      const targetOptions = appResource.getBean(targetBeanFullName);
+      if (!targetOptions) {
+        throw new Error(`not found bean class: ${targetBeanFullName}`);
+      }
       containerScope = targetOptions.containerScope || 'ctx';
     }
     // targetInstance
