@@ -3,7 +3,7 @@ import { ModuleTools } from './module.js';
 // import loadRoutes from './route.js';
 // import loadServices from './service.js';
 // import loadModels from './model.js';
-import loadConfig from './config.js';
+// import loadConfig from './config.js';
 // import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
