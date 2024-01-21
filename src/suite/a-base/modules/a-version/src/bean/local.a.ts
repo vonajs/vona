@@ -9,7 +9,7 @@ import { BeanInstance } from 'cabloy-module-api-a-instance';
 
 @Local()
 export class LocalA extends BeanModuleScopeBase {
-  @Use({})
+  @Use({ beanFullName: 'a-version.local.b' })
   localB: LocalB;
 
   get localB2(): LocalB {

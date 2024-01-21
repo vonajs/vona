@@ -21,11 +21,9 @@ export function Use(options?: IDecoratorUseOptions): PropertyDecorator {
       moduleScope = parseModuleName();
     }
     // containerScope
-    let containerScope = options.containerScope;
-    if (!containerScope) {
-      const targetOptions = appResource.getBean(beanFullName)!;
-      containerScope = targetOptions.containerScope || 'ctx';
-    }
+    //   should dynamic get containerScope when invoke beanContainer
+    //      because class has not inited
+    const containerScope = options.containerScope;
     // record
     appResource.addUse(target, {
       prop,
