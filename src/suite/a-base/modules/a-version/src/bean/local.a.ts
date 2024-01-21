@@ -28,7 +28,7 @@ export class LocalA extends BeanModuleScopeBase {
     // const scopeOther: ScopeModule = this.bean.scope(__ThisModule__);
     // console.log('scopeOther3:', scopeOther.local.version);
     // return;
-    const fail = this.ctx.text('ModuleOld', '-a-version-');
+    const fail = this.ctx.text.locale('zh-cn', 'ModuleOld', '-a-version-');
     // const fail = this.ctx.parseFail(403, 'a-version');
     // const fail = this.scope.error.ModuleOld.throw('a-version');
     console.log(fail);

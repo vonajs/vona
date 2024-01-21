@@ -56,7 +56,7 @@ export class ErrorClass extends BeanSimple {
       code = codeDefault;
     }
 
-    let message = null;
+    let message: string;
     if (code <= 1000) {
       message = this.ctx.text(errorsInternal[code], ...args);
     } else {
