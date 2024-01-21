@@ -26,17 +26,17 @@ export class LocalA extends BeanModuleScopeBase {
   }
   getName() {
     // const scopeOther: ScopeModule = this.bean.scope(__ThisModule__);
-    // console.log('scopeOther:', scopeOther.local.version);
+    // console.log('scopeOther1:', scopeOther.local.version);
     // return;
     // const fail = this.ctx.parseFail(this.scope.error.ModuleOld, 'a-version');
     const fail = this.scope.error.ModuleOld.throw('a-version');
     console.log(fail);
-    return;
+    // return;
     // this.scope.local.version;
-    // const version = this.bean.scope('a-instance').local.instance;
+    const version = this.bean.scope('a-instance').local.instance;
     // const version = this.testScope.module('a-version').local.version;
     // version = this.scope.local.version;
-    // console.log(this.bean.scope, version);
+    console.log(this.bean.scope, version);
     // this.ctx.bean['a-version.version.manager'].init;
     // this.ctx.local.version.__database;
     // this.bean.
