@@ -1,4 +1,4 @@
-import { IErrorObject } from '../../resource/error/errorObject.js';
+import { IErrorObject } from '../resource/error/errorObject.js';
 import { BeanSimple } from '../beanSimple.js';
 import { IBeanScopeError } from './type.js';
 

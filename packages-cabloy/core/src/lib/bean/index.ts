@@ -4,4 +4,6 @@ export * from './scope/index.js';
 export * from './beanLocal.js';
 export * from './beanModuleScopeBase.js';
 export * from './beanSimple.js';
+export * from './resource/error/index.js';
+export * from './resource/locale/index.js';
 export * from './type.js';
