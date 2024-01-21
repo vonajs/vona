@@ -1,6 +1,6 @@
 import { BeanScopeScene } from './beanScopeScene.js';
 import { BeanBase } from '../beanBase.js';
-import { BeanScopeError } from './beanScopeError.js';
+import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');

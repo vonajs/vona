@@ -1,4 +1,4 @@
-import { IErrorObject } from '../resource/error/errorObject.js';
+import { IErrorObject } from './errorObject.js';
 
 export interface IBeanScopeError {
   throw(...args: any[]): never;

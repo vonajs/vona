@@ -1,5 +1,5 @@
-import { IErrorObject } from '../resource/error/errorObject.js';
-import { BeanSimple } from '../beanSimple.js';
+import { BeanSimple } from '../../beanSimple.js';
+import { IErrorObject } from './errorObject.js';
 import { IBeanScopeError } from './type.js';
 
 const BeanModuleScope = Symbol('BeanScopeError#ModuleScope');

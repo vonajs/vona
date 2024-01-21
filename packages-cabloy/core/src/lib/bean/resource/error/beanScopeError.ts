@@ -1,6 +1,6 @@
 import { IBeanScopeError } from './type.js';
-import { BeanSimple } from '../beanSimple.js';
 import { BeanScopeErrorImpl } from './beanScopeErrorImpl.js';
+import { BeanSimple } from '../../beanSimple.js';
 
 const BeanModuleScope = Symbol('BeanScopeError#ModuleScope');
 
