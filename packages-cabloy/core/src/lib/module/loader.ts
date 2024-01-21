@@ -3,7 +3,7 @@ import { ModuleTools } from './module.js';
 // import loadRoutes from './route.js';
 // import loadServices from './service.js';
 // import loadModels from './model.js';
-// import loadConfig from './config.js';
+import loadConfig from './config.js';
 // import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
@@ -43,7 +43,7 @@ export class ModuleLoader extends BeanSimple {
     await moduleTools.monkey('moduleLoading');
 
     if (meta.inApp) {
-      // await loadConfig(app, modules);
+      await loadConfig(app, modules);
       // await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
@@ -63,7 +63,7 @@ export class ModuleLoader extends BeanSimple {
       const b = ctx.bean._getBean('a-version.local.b') as any;
       b.printName();
     } else {
-      // await loadConfig(app, modules);
+      await loadConfig(app, modules);
       loadClusterAgent(app);
     }
 
