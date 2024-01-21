@@ -27,6 +27,10 @@ export class BeanScopeBase extends BeanBase {
       }
       return this[BeanModuleLocale];
     }
+    // config
+    if (prop === 'config') {
+      return this.ctx.config.module(moduleBelong);
+    }
     // scene
     if (!this.__scenes[prop]) {
       this.__scenes[prop] = this.bean._newBean(BeanScopeScene, moduleBelong, prop);
