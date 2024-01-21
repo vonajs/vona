@@ -8,8 +8,8 @@
   "exports": {
     ".": {
       "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
+        "./dist/index.d.ts",
+        "./src/index.ts"
       ],
       "import": "./dist/index.js",
       "require": "./dist/index.js",

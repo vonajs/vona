@@ -18,7 +18,7 @@ export class LocalA extends BeanModuleScopeBase {
   testScope: ScopeModule;
 
   module(moduleScope: TypeBeanScopeRecordKeys): LocalA {
-    return super.module(moduleScope);
+    return super.module(moduleScope) as LocalA;
   }
 
   actionSync() {
