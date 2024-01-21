@@ -1,4 +1,4 @@
-import { BeanSimple } from '../bean/beanSimple.js';
+import { BeanSimple } from '../../bean/beanSimple.js';
 import { errorsInternal } from './errorInternal.js';
 
 export class ErrorClass extends BeanSimple {
