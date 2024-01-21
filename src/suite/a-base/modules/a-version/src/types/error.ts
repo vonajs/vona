@@ -1,4 +1,4 @@
-import { TypeBeanScopeErrors } from '@cabloy/core';
+import { TypeModuleErrors } from '@cabloy/core';
 import { Errors } from '../config/errors.js';
 
-export type TypeErrors = TypeBeanScopeErrors<typeof Errors>;
+export type TypeErrors = TypeModuleErrors<typeof Errors>;

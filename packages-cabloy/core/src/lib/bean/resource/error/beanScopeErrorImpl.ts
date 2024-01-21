@@ -1,11 +1,11 @@
 import { BeanSimple } from '../../beanSimple.js';
 import { IErrorObject } from './errorObject.js';
-import { IBeanScopeError } from './type.js';
+import { IModuleError } from './type.js';
 
 const BeanModuleScope = Symbol('BeanScopeError#ModuleScope');
 const BeanErrorCode = Symbol('BeanScopeError#BeanErrorCode');
 
-export class BeanScopeErrorImpl extends BeanSimple implements IBeanScopeError {
+export class BeanScopeErrorImpl extends BeanSimple implements IModuleError {
   private [BeanModuleScope]: string;
   private [BeanErrorCode]: number | string;
 
