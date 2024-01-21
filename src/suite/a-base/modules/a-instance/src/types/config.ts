@@ -1,3 +1,4 @@
+import { TypeModuleConfig } from '@cabloy/core';
 import { config } from '../config/config.js';
 
-export type TypeConfig = ReturnType<typeof config>;
+export type TypeConfig = TypeModuleConfig<typeof config>;
