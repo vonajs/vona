@@ -1,4 +1,4 @@
-import { IBeanScopeLocale } from './type.js';
+import { IModuleLocale } from './type.js';
 import { BeanScopeLocaleImpl } from './beanScopeLocaleImpl.js';
 import { BeanSimple } from '../../beanSimple.js';
 
@@ -6,7 +6,7 @@ const BeanModuleScope = Symbol('BeanScopeError#ModuleScope');
 
 export class BeanScopeLocale extends BeanSimple {
   private [BeanModuleScope]: string;
-  private __instances: Record<string, IBeanScopeLocale> = {};
+  private __instances: Record<string, IModuleLocale> = {};
 
   constructor(moduleScope) {
     super();

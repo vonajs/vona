@@ -1,6 +1,6 @@
-import { CabloyContext, IBeanScopeLocale } from '../../../../index.js';
+import { CabloyContext, IModuleLocale } from '../../../../index.js';
 
-export function BeanScopeLocaleImpl(ctx: CabloyContext, _moduleScope: string, text: string): IBeanScopeLocale {
+export function BeanScopeLocaleImpl(ctx: CabloyContext, _moduleScope: string, text: string): IModuleLocale {
   const getText = function (...args: any[]): string {
     return ctx.text(text, ...args);
   };
