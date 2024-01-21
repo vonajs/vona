@@ -5,6 +5,6 @@ export interface IBeanScopeError {
   parseFail(...args: any[]): IErrorObject;
 }
 
-export type TypeBeanScopeError<T> = {
+export type TypeBeanScopeErrors<T> = {
   [prop in string & keyof T]: IBeanScopeError;
 };

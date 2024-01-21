@@ -1,4 +1,4 @@
-import { TypeBeanScopeLocale } from '@cabloy/core';
+import { TypeBeanScopeLocales } from '@cabloy/core';
 import { locales } from '../config/locales.js';
 
-export type TypeLocales = TypeBeanScopeLocale<typeof locales>;
+export type TypeLocales = TypeBeanScopeLocales<typeof locales>;
