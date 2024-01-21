@@ -8,6 +8,7 @@ export interface IDecoratorUseOptionsBase {
 }
 
 export interface IDecoratorUseOptions {
+  beanFullName?: string;
   moduleScope?: string;
   containerScope?: ContainerScope;
 }

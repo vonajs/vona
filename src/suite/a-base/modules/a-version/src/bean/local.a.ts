@@ -1,6 +1,7 @@
-import { BeanBase, BeanModuleScopeBase, Local, TypeBeanScopeRecordKeys, Use } from '@cabloy/core';
+import { BeanModuleScopeBase, Local, TypeBeanScopeRecordKeys, Use } from '@cabloy/core';
 import { __ThisModule__ } from '../types/this.js';
 import { ScopeModule } from '../index.js';
+import type { LocalB } from '../index.js';
 import { BeanInstance } from 'cabloy-module-api-a-instance';
 // import { BeanInstance } from 'cabloy-module-api-a-instance';
 // import { BeanInstance } from 'cabloy-module-api-a-instance';
@@ -8,6 +9,13 @@ import { BeanInstance } from 'cabloy-module-api-a-instance';
 
 @Local()
 export class LocalA extends BeanModuleScopeBase {
+  @Use({})
+  localB: LocalB;
+
+  get localB2(): LocalB {
+    return this.bean._getBean('a-version.local.b');
+  }
+
   @Use()
   scope: ScopeModule;
 
@@ -54,16 +62,5 @@ export class LocalA extends BeanModuleScopeBase {
     console.log(this.moduleScope, __ThisModule__);
     if (this.moduleScope !== __ThisModule__) throw new Error();
     return this.moduleScope;
-  }
-}
-
-@Local()
-export class LocalB extends BeanBase {
-  @Use()
-  localA: LocalA;
-
-  printName() {
-    this.localA.module('a-version').getName();
-    console.log(this.localA.getName());
   }
 }

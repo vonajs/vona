@@ -1,5 +1,6 @@
 export * from './bean/version.manager.js';
 export * from './bean/local.a.js';
+export * from './bean/local.b.js';
 export * from './bean/local.version.js';
 export * from './bean/startup.workerAlive.js';
 export * from './bean/startup.databaseInit.js';
