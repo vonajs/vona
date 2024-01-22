@@ -1,7 +1,7 @@
 {
-  "name": "cabloy-module-api-a-flownodebooster",
+  "name": "cabloy-module-api-a-flowgateway",
   "version": "5.0.0",
-  "title": "Flow Node Booster",
+  "title": "Flow Node Gateway",
   "eggBornModule": {
     "fileVersion": 0,
     "dependencies": {

@@ -10,7 +10,7 @@ describe('flow.set03_gatewayInclusive', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/flownodebooster/flow/start',
+      url: '/a/flowgateway/flow/start',
       body: {
         flowDefKey: {
           module: mockInfo().relativeName,
