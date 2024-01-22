@@ -59,6 +59,18 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  // tsconfig
+  const tsconfig = `{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+      "rootDir": "src",
+      "outDir": "dist"
+    },
+    "include": ["src/**/*", "typings/**/*"]
+  }`;
+  const outFileName = `${module.root}/tsconfig.json`;
+  await fse.outputFile(outFileName, tsconfig);
+  await processHelper.formatFile({ fileName: outFileName });
   // console.log(module);
   // await _jstots({ module, processHelper });
   // await fse.move(`${module.root}/src/main.js`, `${module.root}/src/index.js`);
