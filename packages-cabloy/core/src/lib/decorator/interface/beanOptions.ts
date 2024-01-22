@@ -8,6 +8,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'virtual'
   | 'scope'
   | 'controller'
+  | 'model'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version' | 'middleware';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
@@ -25,6 +26,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
   moduleBelong?: string;
+  options?: object;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
@@ -45,6 +47,15 @@ export interface IDecoratorLocalOptions {
 
 export interface IDecoratorControllerOptions {
   name?: string;
+}
+
+export interface IDecoratorModelOptions {
+  name?: string;
+  table: string;
+  options: {
+    disableDeleted?: boolean;
+    disableInstance?: boolean;
+  };
 }
 
 export interface IDecoratorAopOptions {

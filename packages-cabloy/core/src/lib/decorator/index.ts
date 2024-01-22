@@ -5,6 +5,7 @@ export * from './type/containerScope.js';
 export * from './class/aop.js';
 export * from './class/bean.js';
 export * from './class/controller.js';
+export * from './class/model.js';
 export * from './class/local.js';
 export * from './class/virtual.js';
 export * from './class/scope.js';
