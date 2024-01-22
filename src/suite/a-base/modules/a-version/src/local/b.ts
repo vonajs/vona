@@ -1,5 +1,5 @@
 import { BeanBase, Local, Use } from '@cabloy/core';
-import { LocalA } from './local.a.js';
+import { LocalA } from './a.js';
 import { ScopeModule } from 'cabloy-module-api-a-instance';
 
 @Local()

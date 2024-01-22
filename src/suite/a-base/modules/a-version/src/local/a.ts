@@ -1,7 +1,7 @@
 import { BeanModuleScopeBase, Local, TypeBeanScopeRecordKeys, Use } from '@cabloy/core';
-import { __ThisModule__ } from '../types/this.js';
+import { __ThisModule__ } from '../resource/this.js';
 import { ScopeModule } from '../index.js';
-import type { LocalB } from '../index.js';
+import type { LocalB } from './b.js';
 import { BeanInstance } from 'cabloy-module-api-a-instance';
 // import { BeanInstance } from 'cabloy-module-api-a-instance';
 // import { BeanInstance } from 'cabloy-module-api-a-instance';

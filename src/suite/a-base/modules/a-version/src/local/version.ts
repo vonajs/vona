@@ -1,7 +1,7 @@
 import moment from 'moment';
 import chalk from 'chalk';
 import { BeanBase, Local } from '@cabloy/core';
-import { __ThisModule__ } from '../types/this.js';
+import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalVersion extends BeanBase {

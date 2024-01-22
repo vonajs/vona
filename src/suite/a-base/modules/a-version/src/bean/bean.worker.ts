@@ -1,5 +1,5 @@
 import { Bean, BeanBase, IORedis } from '@cabloy/core';
-import { __ThisModule__ } from '../types/this.js';
+import { __ThisModule__ } from '../resource/this.js';
 
 @Bean()
 export class BeanWorker extends BeanBase {

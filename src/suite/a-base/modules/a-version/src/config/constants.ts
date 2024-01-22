@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../types/this.js';
+import { __ThisModule__ } from '../resource/this.js';
 
 // action
 const action = {
