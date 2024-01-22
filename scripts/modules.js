@@ -59,11 +59,12 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  if (!module.suite) {
-    console.log(`{
-    "path": "src/module/${module.package.name.substring('cabloy-module-api-'.length)}"
-  },`);
-  }
+  // package.json
+  // if (!module.suite) {
+  //   console.log(`{
+  //   "path": "src/module/${module.package.name.substring('cabloy-module-api-'.length)}"
+  // },`);
+  // }
   // // tsconfig
   // const tsconfig = `{
   //   "extends": "../../tsconfig.json",
