@@ -1,0 +1,31 @@
+{
+  "name": "cabloy-module-api-a-socketio",
+  "version": "5.0.0",
+  "title": "SocketIO",
+  "eggBornModule": {
+    "fileVersion": 3,
+    "dependencies": {
+      "a-instance": "5.0.0",
+      "a-base": "5.0.0"
+    }
+  },
+  "description": "",
+  "keywords": [
+    "Cabloy Module"
+  ],
+  "files": [
+    "dist",
+    "backend/utils",
+    "backend/test"
+  ],
+  "scripts": {
+    "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",
+    "build:backend": "node ../../../scripts/egg-born-bin.js backend-build-module",
+    "build:all": "npm run build:front && npm run build:backend",
+    "preversion": "npm run build:all && git add ."
+  },
+  "author": "zhennann",
+  "dependencies": {
+    "socket.io-client": "^2.3.0"
+  }
+}
