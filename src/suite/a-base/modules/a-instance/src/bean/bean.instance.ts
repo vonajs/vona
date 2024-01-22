@@ -2,7 +2,7 @@ import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import { Bean, BeanBase } from '@cabloy/core';
-import { __ThisModule__ } from '../types/this.js';
+import { __ThisModule__ } from '../resource/this.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
