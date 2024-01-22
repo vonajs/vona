@@ -1,0 +1,46 @@
+// const moduleInfo = module.info;
+module.exports = class FlowTask {
+  async _publishMessageTaskInit({ flowTaskId, userIdAssignee, user }) {
+    if (!this.context._flow.flowAtomId) {
+      // only support business flow
+      return;
+    }
+    if (userIdAssignee === user.id) {
+      // only send message to others
+      return;
+    }
+    // publish uniform message
+    const userFlow = await this.ctx.bean.user.get({ id: this.context._flow.flowUserId });
+    const userAssignee = await this.ctx.bean.user.get({ id: userIdAssignee });
+    const title = `${this.ctx.text.locale(userAssignee.locale, 'Task')} - ${this.ctx.text.locale(
+      userAssignee.locale,
+      this.contextNode._flowNode.flowNodeName
+    )}`;
+    const actionPath = `/a/flowtask/flow?flowId=${this.context._flowId}&flowTaskId=${flowTaskId}`;
+    const message = {
+      userIdTo: userIdAssignee,
+      content: {
+        issuerId: userFlow.id,
+        issuerName: userFlow.userName,
+        issuerAvatar: userFlow.avatar,
+        title,
+        body: this.context._flow.flowName,
+        actionPath,
+        params: {
+          flowId: this.context._flowId,
+          flowTaskId,
+        },
+      },
+    };
+    // jump out of the transaction
+    this.ctx.tail(async () => {
+      await this.ctx.bean.io.publish({
+        message,
+        messageClass: {
+          module: 'a-flow',
+          messageClassName: 'workflow',
+        },
+      });
+    });
+  }
+};

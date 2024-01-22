@@ -1,0 +1,30 @@
+{
+  "name": "cabloy-module-api-a-flownodebooster",
+  "version": "5.0.0",
+  "title": "Flow Node Booster",
+  "eggBornModule": {
+    "fileVersion": 0,
+    "dependencies": {
+      "a-instance": "5.0.0",
+      "a-base": "5.0.0",
+      "a-flow": "5.0.0"
+    }
+  },
+  "description": "",
+  "keywords": [
+    "Cabloy Module"
+  ],
+  "files": [
+    "dist",
+    "backend/utils",
+    "backend/test"
+  ],
+  "scripts": {
+    "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",
+    "build:backend": "node ../../../scripts/egg-born-bin.js backend-build-module",
+    "build:all": "npm run build:front && npm run build:backend",
+    "preversion": "npm run build:all && git add ."
+  },
+  "author": "zhennann",
+  "dependencies": {}
+}

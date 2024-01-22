@@ -1,0 +1,57 @@
+const schemas = require('./meta/validation/schemas.js');
+const staticLayouts = require('./meta/static/layouts.js');
+// nodes
+const flowNodes = require('./meta/flow/nodes.js');
+// meta
+const meta = {
+  base: {
+    atoms: {},
+    statics: {
+      'a-baselayout.layout': {
+        items: staticLayouts,
+      },
+    },
+  },
+  validation: {
+    validators: {
+      // startEventAtom
+      startEventAtom: {
+        schemas: 'startEventAtom,activityUserTask',
+      },
+      // endEventAtom
+      endEventAtom: {
+        schemas: 'endEventAtom',
+      },
+      // activityUserTask
+      activityUserTask: {
+        schemas: 'activityUserTask',
+      },
+    },
+    keywords: {},
+    schemas,
+  },
+  flow: {
+    nodes: flowNodes,
+  },
+  stats: {
+    providers: {
+      taskClaimings: {
+        user: true,
+        bean: 'taskClaimings',
+      },
+      taskHandlings: {
+        user: true,
+        bean: 'taskHandlings',
+      },
+      taskClaimingsHandlings: {
+        user: true,
+        bean: {
+          module: 'a-stats',
+          name: 'deps',
+        },
+        dependencies: ['a-flowtask:taskClaimings', 'a-flowtask:taskHandlings'],
+      },
+    },
+  },
+};
+module.exports = meta;

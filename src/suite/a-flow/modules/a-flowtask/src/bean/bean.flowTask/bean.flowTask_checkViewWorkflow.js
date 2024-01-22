@@ -1,0 +1,41 @@
+// const moduleInfo = module.info;
+module.exports = class FlowTask {
+  async _checkViewWorkflow({ flowId, user }) {
+    // 1. check atomClass action
+    let res = await this._checkViewWorkflow_checkRightAction({ flowId, user });
+    if (res) return true;
+    // 2. check task option: allowViewWorkflow
+    res = await this._checkViewWorkflow_checkTaskOptions({ flowId, user });
+    return res;
+  }
+
+  async _checkViewWorkflow_checkRightAction({ flowId, user }) {
+    // flow
+    const flowItem = await this.ctx.bean.flow.modelFlowHistory.get({ flowId });
+    const atomId = flowItem.flowAtomId;
+    const atomClassId = flowItem.flowAtomClassId;
+    if (!atomId) return false;
+    // check atomClass action
+    const res = await this.ctx.bean.atom.checkRightAction({
+      atom: { id: atomId },
+      atomClass: { id: atomClassId },
+      action: 'viewWorkflow',
+      user,
+    });
+    return !!res;
+  }
+
+  async _checkViewWorkflow_checkTaskOptions({ flowId, user }) {
+    // check task option: allowViewWorkflow
+    const items = await this.modelFlowTaskHistory.select({
+      where: {
+        flowId,
+        userIdAssignee: user.id,
+        allowViewWorkflow: 1,
+      },
+      limit: 1,
+      offset: 0,
+    });
+    return items.length > 0;
+  }
+};
