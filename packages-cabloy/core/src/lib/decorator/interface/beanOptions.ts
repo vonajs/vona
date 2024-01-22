@@ -1,3 +1,4 @@
+import { IModelOptions } from '../../bean/resource/model/type.js';
 import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
@@ -26,7 +27,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
   moduleBelong?: string;
-  options?: object;
+  options?: unknown;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
@@ -52,10 +53,7 @@ export interface IDecoratorControllerOptions {
 export interface IDecoratorModelOptions {
   name?: string;
   table: string;
-  options: {
-    disableDeleted?: boolean;
-    disableInstance?: boolean;
-  };
+  options: IModelOptions;
 }
 
 export interface IDecoratorAopOptions {

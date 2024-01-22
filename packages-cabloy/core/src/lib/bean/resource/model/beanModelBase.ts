@@ -1,16 +1,23 @@
 import is from 'is-type-of';
 import { BeanBase } from '../../beanBase.js';
+import { IModelOptions } from './type.js';
+import { appResource } from '../../../core/resource.js';
+import { IDecoratorModelOptions } from '../../../decorator/index.js';
 
 let __columns = {};
 
 export class BeanModelBase extends BeanBase {
-  table: string;
-  options: any;
+  private get __modelOptions() {
+    const beanOptions = appResource.getBean((<any>this).__beanFullName__);
+    return beanOptions?.options as IDecoratorModelOptions;
+  }
 
-  constructor({ table, options = {} }) {
-    super();
-    this.table = table;
-    this.options = options;
+  get table(): string {
+    return this.__modelOptions.table;
+  }
+
+  get options(): IModelOptions {
+    return this.__modelOptions.options;
   }
 
   get disableDeleted() {
