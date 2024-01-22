@@ -11,10 +11,10 @@ export class LocalB extends BeanBase {
   scopeInstance: ScopeModule;
 
   async printName() {
-    const modelInstance = this.scopeInstance.model.instance;
-    const items = await modelInstance.columns();
+    // const modelInstance = this.scopeInstance.model.instance;
+    // const items = await modelInstance.columns();
     // const items = await this.ctx.model.module('a-instance').instance.select({});
-    console.log(items);
+    // console.log(items);
     this.localA.module('a-version').getName();
     console.log(this.localA.getName());
   }
