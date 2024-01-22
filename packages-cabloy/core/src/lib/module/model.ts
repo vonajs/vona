@@ -1,5 +1,5 @@
 import { CabloyApplication } from '../../types/index.js';
-import { Model } from '../base/model.js';
+import { BeanModelBase } from '../bean/resource/model/beanModelBase.js';
 
 export default function (app: CabloyApplication) {
   // patch model
@@ -21,7 +21,7 @@ export default function (app: CabloyApplication) {
 
   function createModelContainer(context, relativeName) {
     // base
-    const modelContainer = context.bean._newBean(Model, { table: null });
+    const modelContainer = context.bean._newBean(BeanModelBase, { table: null });
     // remove app/config/service
     modelContainer.app = undefined;
     modelContainer.config = undefined;

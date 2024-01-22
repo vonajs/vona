@@ -18,7 +18,6 @@ import loadMessenger from './messenger.js';
 import loadClusterAgent from './cluster/agent.js';
 import { loadBeans } from './bean/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import ModuleInfoFn from '../framework/moduleInfo.js';
 
 export class ModuleLoader extends BeanSimple {
   async execute() {
@@ -26,9 +25,6 @@ export class ModuleLoader extends BeanSimple {
     // meta
     const meta = app.bean._newBean(AppMeta);
     app.meta = meta;
-
-    // moduleInfo
-    ModuleInfoFn(app);
 
     // messenger
     loadMessenger(app);
