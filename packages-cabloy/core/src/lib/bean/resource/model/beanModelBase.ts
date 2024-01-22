@@ -1,5 +1,5 @@
 import is from 'is-type-of';
-import { BeanBase } from '../beanBase.js';
+import { BeanBase } from '../../beanBase.js';
 
 let __columns = {};
 
@@ -136,7 +136,7 @@ export class BeanModelBase extends BeanBase {
   '_selectColumns',
   '_limit',
 ].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       if (is.function(this.ctx.db[method])) {
         return function (this: any, ...args) {
@@ -150,7 +150,7 @@ export class BeanModelBase extends BeanBase {
 });
 
 ['insert'].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       return function (this: any, ...args) {
         if (args.length === 0) {
@@ -167,7 +167,7 @@ export class BeanModelBase extends BeanBase {
 });
 
 ['update'].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       return function (this: any, ...args) {
         const _args = [] as any;
@@ -183,7 +183,7 @@ export class BeanModelBase extends BeanBase {
 });
 
 ['delete'].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       return function (this: any, ...args) {
         const _args = [] as any;
@@ -202,7 +202,7 @@ export class BeanModelBase extends BeanBase {
 });
 
 ['count'].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       return function (this: any, ...args) {
         const _args = [] as any;
@@ -217,7 +217,7 @@ export class BeanModelBase extends BeanBase {
 });
 
 ['get'].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       return function (this: any, ...args) {
         // console.log(this.constructor.name, arguments);
@@ -236,7 +236,7 @@ export class BeanModelBase extends BeanBase {
 });
 
 ['select'].forEach(method => {
-  Object.defineProperty(Model.prototype, method, {
+  Object.defineProperty(BeanModelBase.prototype, method, {
     get() {
       return function (this: any, ...args) {
         const _args = [] as any;

@@ -1,6 +1,3 @@
-import { Model } from '../base/model.js';
-import { BeanModuleScopeBase } from '../bean/beanModuleScopeBase.js';
-
 export default function () {
   const __classes = {};
   const classes: any = new Proxy(__classes, {
@@ -15,12 +12,6 @@ export default function () {
       return true;
     },
   });
-
-  // model
-  classes.Model = Model;
-
-  // BeanModuleScopeBase
-  classes.BeanModuleScopeBase = BeanModuleScopeBase;
 
   return classes;
 }
