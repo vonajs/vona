@@ -1,3 +1,4 @@
+import { CabloyApplication } from '../application/app.js';
 import { IModuleMain, IMonkeyModule } from './monkey.js';
 
 export * from '@cabloy/module-info';
@@ -10,6 +11,9 @@ export interface IModuleResource {
   aops: Record<string, any>;
   locales: Record<string, any>;
   Errors: Record<number, string>;
+  config: (app: CabloyApplication) => object;
+  constants: unknown;
+  meta: unknown;
 }
 
 declare module '@cabloy/module-info' {

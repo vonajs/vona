@@ -1,9 +1,9 @@
 import extend from '@cabloy/extend';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication, IModule } from '../../types/index.js';
 
 const CTXCONFIG = Symbol.for('Context#__config');
 
-export default async function (app: CabloyApplication, modules) {
+export default async function (app: CabloyApplication, modules: Record<string, IModule>) {
   // all configs
   app.meta.configs = {};
 

@@ -1,7 +1,7 @@
 import extend from '@cabloy/extend';
-import { CabloyApplication } from '../../types/index.js';
+import { CabloyApplication, IModule } from '../../types/index.js';
 
-export default function (app: CabloyApplication, modules) {
+export default function (app: CabloyApplication, modules: Record<string, IModule>) {
   // all constants
   const ebConstants = (app.meta.constants = {});
 

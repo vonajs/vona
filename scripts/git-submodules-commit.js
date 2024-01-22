@@ -4,11 +4,6 @@ const { ProcessHelper } = require('@cabloy/process-helper');
 const argv = require('./lib/parse_argv')('sync');
 
 const subModules = [
-  'src/module/a-flownodebooster',
-  'src/module/a-flowtask',
-  'src/module/a-layoutpc',
-  'src/module/a-markdown',
-  'src/module/a-socketio',
   'src/module/bz-login',
   'src/module/test-flow',
   'src/module/test-note',
