@@ -39,6 +39,12 @@
     },
     {
       "path": "src/suite/a-base"
+    },
+    {
+      "path": "src/suite/a-cms"
+    },
+    {
+      "path": "src/suite/a-flow"
     }
   ]
 }
