@@ -445,6 +445,7 @@ function __getPropertyDescriptor(obj, prop) {
 function __getPropertyDescriptorStatic(obj, prop) {
   let proto = Object.getPrototypeOf(obj);
   while (proto) {
+    if (Object.getPrototypeOf(proto.constructor) === BeanBase) return null;
     const descriptor = Object.getOwnPropertyDescriptor(proto, prop);
     if (descriptor) return { descriptor, dynamic: false };
     proto = Object.getPrototypeOf(proto);
