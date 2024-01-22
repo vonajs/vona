@@ -1,0 +1,20 @@
+{
+  "name": "cabloy-suite-api-a-cms",
+  "version": "5.0.0",
+  "title": "Suite CMS",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "description": "",
+  "author": "zhennann",
+  "dependencies": {}
+}

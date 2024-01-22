@@ -43,6 +43,8 @@ miniprogram_npm
 /src/suite/*
 !/src/suite/.gitkeep
 !/src/suite/a-base
+!/src/suite/a-cms
+!/src/suite/a-flow
 !/src/suite/a-dingtalk
 !/src/suite/a-paypal
 !/src/suite/a-wechat
