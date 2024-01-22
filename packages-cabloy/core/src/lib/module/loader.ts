@@ -2,7 +2,7 @@ import { AppMeta } from '../core/meta.js';
 import { ModuleTools } from './module.js';
 // import loadRoutes from './route.js';
 // import loadServices from './service.js';
-// import loadModels from './model.js';
+import loadModels from './model.js';
 // import loadConfig from './config.js';
 // import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
@@ -47,7 +47,7 @@ export class ModuleLoader extends BeanSimple {
       loadConstants(app, modules);
       // loadRoutes(app, modules);
       // loadServices(app);
-      // loadModels(app);
+      loadModels(app);
       // loadRedis(app);
       // loadQueues(app, modules);
       // loadBroadcasts(app, modules);
@@ -57,7 +57,7 @@ export class ModuleLoader extends BeanSimple {
 
       const ctx = await app.meta.mockUtil.mockCtx({ subdomain: null, module: 'a-version' });
       const b = ctx.bean._getBean('a-version.local.b') as any;
-      b.printName();
+      await b.printName();
     } else {
       // await loadConfig(app, modules);
       loadClusterAgent(app);
