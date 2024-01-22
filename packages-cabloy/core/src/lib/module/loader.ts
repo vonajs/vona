@@ -7,7 +7,7 @@ import { ModuleTools } from './module.js';
 // import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
-// import loadConstants from './constant.js';
+import loadConstants from './constant.js';
 import loadMessenger from './messenger.js';
 // import loadRedis from './redis.js';
 // import loadQueues from './queue/queue.js';
@@ -48,7 +48,7 @@ export class ModuleLoader extends BeanSimple {
       loadBeans(app);
       loadLocales(app, modules);
       loadErrors(app, modules);
-      // loadConstants(app, modules);
+      loadConstants(app, modules);
       // loadRoutes(app, modules);
       // loadServices(app);
       // loadModels(app);

@@ -31,6 +31,10 @@ export class BeanScopeBase extends BeanBase {
     if (prop === 'config') {
       return this.ctx.config.module(moduleBelong);
     }
+    // constant
+    if (prop === 'constant') {
+      return this.ctx.constant.module(moduleBelong);
+    }
     // scene
     if (!this.__scenes[prop]) {
       this.__scenes[prop] = this.bean._newBean(BeanScopeScene, moduleBelong, prop);

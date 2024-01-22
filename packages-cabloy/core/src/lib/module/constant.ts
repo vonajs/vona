@@ -27,16 +27,16 @@ export default function (app: CabloyApplication, modules) {
   }
 
   function loadConstants() {
-    Object.keys(modules).forEach(key => {
+    for (const key in modules) {
       const module = modules[key];
       const ebConstant = (ebConstants[module.info.relativeName] = {});
 
       // module constants
-      if (module.main.constants) extend(true, ebConstant, module.main.constants);
+      if (module.resource.constants) extend(true, ebConstant, module.resource.constants);
 
       // patchConstant
       patchConstant(ebConstant);
-    });
+    }
   }
 
   function patchConstant(ebConstant) {
