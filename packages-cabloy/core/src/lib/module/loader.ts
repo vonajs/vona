@@ -4,7 +4,7 @@ import { ModuleTools } from './module.js';
 // import loadServices from './service.js';
 import loadModels from './model.js';
 // import loadConfig from './config.js';
-// import loadModuleMeta from './moduleMeta.js';
+import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
@@ -40,7 +40,7 @@ export class ModuleLoader extends BeanSimple {
 
     if (meta.inApp) {
       // await loadConfig(app, modules);
-      // await loadModuleMeta(app, modules);
+      await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
       loadErrors(app, modules);

@@ -8,11 +8,11 @@ export default async function (app: CabloyApplication, modules) {
     for (const key in modules) {
       const module = modules[key];
       // module meta
-      if (module.main.meta) {
+      if (module.resource.meta) {
         // metaNew is not used by now
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
           module,
-          meta: module.main.meta,
+          meta: module.resource.meta,
         });
       }
     }
