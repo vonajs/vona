@@ -7,4 +7,8 @@ export class BeanBase extends BeanSimple {
   protected get moduleBelong() {
     return appResource._getModuleBelong(this.__beanFullName__);
   }
+
+  getScope() {
+    return this.bean.scope(this.moduleBelong);
+  }
 }

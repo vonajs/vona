@@ -214,6 +214,11 @@ export class BeanContainer {
         if (typeof prop === 'symbol') {
           return target[prop];
         }
+        // ignore properties of BeanBase/BeanSimple
+        if (['app', 'ctx', 'bean', '__beanFullName__', 'moduleBelong', 'getScope'].includes(prop)) {
+          return target[prop];
+        }
+        // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
         if (descriptorInfo && descriptorInfo.dynamic) return target[prop];
         const methodType = __methodTypeOfDescriptor(descriptorInfo);
