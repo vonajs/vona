@@ -1,9 +1,9 @@
 import is from 'is-type-of';
-import { BeanSimple } from '../bean/beanSimple.js';
+import { BeanBase } from '../beanBase.js';
 
 let __columns = {};
 
-export class Model extends BeanSimple {
+export class BeanModelBase extends BeanBase {
   table: string;
   options: any;
 

@@ -8,5 +8,6 @@ export * from './resource/config/index.js';
 export * from './resource/constant/index.js';
 export * from './resource/error/index.js';
 export * from './resource/locale/index.js';
+export * from './resource/model/index.js';
 export * from './resource/route/index.js';
 export * from './type.js';
