@@ -5,6 +5,7 @@ import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
 import { BeanLocal } from './beanLocal.js';
 import { IBeanRecord, IBeanScopeRecord, TypeBeanRecord, TypeBeanScopeRecordKeys } from './type.js';
+import { BeanBase } from './beanBase.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -214,13 +215,9 @@ export class BeanContainer {
         if (typeof prop === 'symbol') {
           return target[prop];
         }
-        // ignore properties of BeanBase/BeanSimple
-        if (['app', 'ctx', 'bean', '__beanFullName__', 'moduleBelong', 'getScope'].includes(prop)) {
-          return target[prop];
-        }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
-        if (descriptorInfo && descriptorInfo.dynamic) return target[prop];
+        if (!descriptorInfo || descriptorInfo.dynamic) return target[prop];
         const methodType = __methodTypeOfDescriptor(descriptorInfo);
         // get prop
         if (!methodType) {
@@ -257,8 +254,9 @@ export class BeanContainer {
           target[prop] = value;
           return true;
         }
+        // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
-        if (descriptorInfo && descriptorInfo.dynamic) {
+        if (!descriptorInfo || descriptorInfo.dynamic) {
           target[prop] = value;
           return true;
         }
