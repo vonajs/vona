@@ -292,22 +292,22 @@
             "scripts": ["npmPublish"]
           },
           "a-base-sync": {
-            "scripts": ["npmPublish", "gitCommit"]
+            "scripts": ["npmPublish"]
           },
-          "a-flownodebooster": {
-            "scripts": ["gitCommit"]
+          "a-flowgateway": {
+            "scripts": ["npmPublish"]
           },
           "a-flowtask": {
-            "scripts": ["npmPublish", "gitCommit"]
+            "scripts": ["npmPublish"]
           },
           "a-layoutpc": {
-            "scripts": ["npmPublish", "gitCommit"]
+            "scripts": ["npmPublish"]
           },
           "a-markdown": {
-            "scripts": ["npmPublish", "gitCommit"]
+            "scripts": ["npmPublish"]
           },
           "a-socketio": {
-            "scripts": ["npmPublish", "gitCommit"]
+            "scripts": ["npmPublish"]
           },
           "bz-login": {
             "scripts": ["gitCommit"]
@@ -350,12 +350,6 @@
     "commands": {
       ":git:commit": {
         "entities": [
-          "a-base-sync",
-          "a-flownodebooster",
-          "a-flowtask",
-          "a-layoutpc",
-          "a-markdown",
-          "a-socketio",
           "bz-login",
           "test-flow",
           "test-note",
