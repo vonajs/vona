@@ -9,7 +9,7 @@ export type TypeModuleResource<
   CONFIG extends (app: CabloyApplication) => object,
   ERRORS,
   LOCALES extends { 'zh-cn': object },
-  CONSTANTS,
+  CONSTANTS = object,
 > = {
   local: LOCAL;
   config: TypeModuleConfig<CONFIG>;

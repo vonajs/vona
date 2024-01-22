@@ -40,7 +40,7 @@ export class LocalA extends BeanModuleScopeBase {
     let fail = this.scope.locale.ModuleOld();
     fail = this.scope.locale.ModuleOld('-a-version-');
     fail = this.scope.locale.ModuleOld.locale('zh-cn', '-a-version-');
-    fail = typeof this.localB;
+    fail = this.scope.constant.atom.stage.formal.toString();
     // this.scope.local.version
     // fail = this.scope.config.startups.databaseName.bean;
     // const fail = this.ctx.parseFail(403, 'a-version');
