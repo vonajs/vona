@@ -1,21 +1,3 @@
-[submodule "src/module/a-base-sync"]
-	path = src/module/a-base-sync
-	url = git@github.com:cabloy/cabloy-module-api-a-base-sync
-[submodule "src/module/a-flownodebooster"]
-	path = src/module/a-flownodebooster
-	url = git@github.com:cabloy/cabloy-module-api-a-flownodebooster
-[submodule "src/module/a-flowtask"]
-	path = src/module/a-flowtask
-	url = git@github.com:cabloy/cabloy-module-api-a-flowtask
-[submodule "src/module/a-layoutpc"]
-	path = src/module/a-layoutpc
-	url = git@github.com:cabloy/cabloy-module-api-a-layoutpc
-[submodule "src/module/a-markdown"]
-	path = src/module/a-markdown
-	url = git@github.com:cabloy/cabloy-module-api-a-markdown
-[submodule "src/module/a-socketio"]
-	path = src/module/a-socketio
-	url = git@github.com:cabloy/cabloy-module-api-a-socketio
 [submodule "src/module/bz-login"]
 	path = src/module/bz-login
 	url = git@github.com:cabloy/cabloy-module-api-bz-login
