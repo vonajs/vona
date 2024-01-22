@@ -1,4 +1,4 @@
-import { schemas } from '../meta/validation/schemas.js';
+import { schemas } from './meta/validation/schemas.js';
 export const meta = {
   validation: {
     validators: {},
