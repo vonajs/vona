@@ -39,7 +39,7 @@ async function _moduleHandle({ module, processHelper }) {
 }
 
 async function _jstots({ module, processHelper }) {
-  const pattern = `${module.root}/src/**/*.js`;
+  const pattern = `${module.root}/test/**/*.js`;
   // files
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   // convert
