@@ -5,5 +5,27 @@
     "outDir": "dist"
   },
   "include": ["src/**/*"],
-  "references": []
+  "references": [
+    {
+      "path": "modules/a-flow"
+    },
+    {
+      "path": "modules/a-flowbehavior"
+    },
+    {
+      "path": "modules/a-flowchart"
+    },
+    {
+      "path": "modules/a-flowgateway"
+    },
+    {
+      "path": "modules/a-flownode"
+    },
+    {
+      "path": "modules/a-flowtask"
+    },
+    {
+      "path": "modules/a-flowtimeline"
+    }
+  ]
 }

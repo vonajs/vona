@@ -5,5 +5,60 @@
     "outDir": "dist"
   },
   "include": ["src/**/*"],
-  "references": []
+  "references": [
+    {
+      "path": "modules/a-cms"
+    },
+    {
+      "path": "modules/cms-pluginarticle"
+    },
+    {
+      "path": "modules/cms-pluginbacktotop"
+    },
+    {
+      "path": "modules/cms-pluginbase"
+    },
+    {
+      "path": "modules/cms-plugincopyright"
+    },
+    {
+      "path": "modules/cms-pluginmarkdowngithub"
+    },
+    {
+      "path": "modules/cms-pluginrss"
+    },
+    {
+      "path": "modules/cms-pluginsidebar"
+    },
+    {
+      "path": "modules/cms-pluginsocialshare"
+    },
+    {
+      "path": "modules/cms-pluginsubmit"
+    },
+    {
+      "path": "modules/cms-plugintrack"
+    },
+    {
+      "path": "modules/cms-pluginuser"
+    },
+    {
+      "path": "modules/cms-sitecommunity"
+    },
+    {
+      "path": "modules/cms-sitedocumentation"
+    },
+    {
+      "path": "modules/cms-themeaws"
+    },
+    {
+      "path": "modules/cms-themeblog"
+    },
+    {
+      "path": "modules/cms-themecommunity"
+    },
+    {
+      "path": "modules/cms-themedocs"
+    }
+  ]
 }

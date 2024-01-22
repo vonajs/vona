@@ -7,10 +7,235 @@
   "include": ["src/**/*"],
   "references": [
     {
+      "path": "modules/a-antdv"
+    },
+    {
+      "path": "modules/a-antvg6"
+    },
+    {
+      "path": "modules/a-antvlayout"
+    },
+    {
+      "path": "modules/a-antvx6"
+    },
+    {
+      "path": "modules/a-app"
+    },
+    {
+      "path": "modules/a-appbooster"
+    },
+    {
+      "path": "modules/a-auth"
+    },
+    {
+      "path": "modules/a-authgithub"
+    },
+    {
+      "path": "modules/a-authopen"
+    },
+    {
+      "path": "modules/a-authsimple"
+    },
+    {
+      "path": "modules/a-authsms"
+    },
+    {
+      "path": "modules/a-base-sync"
+    },
+    {
+      "path": "modules/a-baseaction"
+    },
+    {
+      "path": "modules/a-baseadmin"
+    },
+    {
+      "path": "modules/a-basefront"
+    },
+    {
+      "path": "modules/a-basefront2"
+    },
+    {
+      "path": "modules/a-baselayout"
+    },
+    {
+      "path": "modules/a-baserender"
+    },
+    {
+      "path": "modules/a-baserendertable"
+    },
+    {
+      "path": "modules/a-basestore"
+    },
+    {
+      "path": "modules/a-cache"
+    },
+    {
+      "path": "modules/a-captcha"
+    },
+    {
+      "path": "modules/a-captchasimple"
+    },
+    {
+      "path": "modules/a-chartjs"
+    },
+    {
+      "path": "modules/a-cli"
+    },
+    {
+      "path": "modules/a-clibooster"
+    },
+    {
+      "path": "modules/a-clipboard"
+    },
+    {
+      "path": "modules/a-codemirror"
+    },
+    {
+      "path": "modules/a-components-sync"
+    },
+    {
+      "path": "modules/a-dashboard"
+    },
+    {
+      "path": "modules/a-dashboardbooster"
+    },
+    {
+      "path": "modules/a-debug"
+    },
+    {
+      "path": "modules/a-detail"
+    },
+    {
+      "path": "modules/a-dict"
+    },
+    {
+      "path": "modules/a-dictarea"
+    },
+    {
+      "path": "modules/a-dictbooster"
+    },
+    {
+      "path": "modules/a-echarts"
+    },
+    {
+      "path": "modules/a-event"
+    },
+    {
+      "path": "modules/a-fields"
+    },
+    {
+      "path": "modules/a-file"
+    },
+    {
+      "path": "modules/a-host"
+    },
+    {
+      "path": "modules/a-icon"
+    },
+    {
+      "path": "modules/a-iconbooster"
+    },
+    {
+      "path": "modules/a-index"
+    },
+    {
       "path": "modules/a-instance"
     },
     {
+      "path": "modules/a-jsoneditor"
+    },
+    {
+      "path": "modules/a-layoutmobile"
+    },
+    {
+      "path": "modules/a-layoutpc"
+    },
+    {
+      "path": "modules/a-lazyload"
+    },
+    {
+      "path": "modules/a-login"
+    },
+    {
+      "path": "modules/a-mail"
+    },
+    {
+      "path": "modules/a-markdown"
+    },
+    {
+      "path": "modules/a-markdownblock"
+    },
+    {
+      "path": "modules/a-markdownrender"
+    },
+    {
+      "path": "modules/a-markdownstyle"
+    },
+    {
+      "path": "modules/a-message"
+    },
+    {
+      "path": "modules/a-oauth"
+    },
+    {
+      "path": "modules/a-photobrowser"
+    },
+    {
+      "path": "modules/a-pinyin"
+    },
+    {
+      "path": "modules/a-progress"
+    },
+    {
+      "path": "modules/a-sandbox"
+    },
+    {
+      "path": "modules/a-screenfull"
+    },
+    {
+      "path": "modules/a-sequence"
+    },
+    {
+      "path": "modules/a-settings"
+    },
+    {
+      "path": "modules/a-share"
+    },
+    {
+      "path": "modules/a-socketio"
+    },
+    {
+      "path": "modules/a-stats"
+    },
+    {
+      "path": "modules/a-status"
+    },
+    {
+      "path": "modules/a-summer"
+    },
+    {
+      "path": "modules/a-swiper"
+    },
+    {
+      "path": "modules/a-themebrilliant"
+    },
+    {
+      "path": "modules/a-themehyacinth"
+    },
+    {
+      "path": "modules/a-user"
+    },
+    {
+      "path": "modules/a-useronline"
+    },
+    {
+      "path": "modules/a-validation"
+    },
+    {
       "path": "modules/a-version"
+    },
+    {
+      "path": "modules/a-wasmgo"
     }
   ]
 }

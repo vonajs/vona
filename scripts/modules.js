@@ -37,18 +37,39 @@ async function main() {
 }
 
 async function _suiteHandle({ modules, suite, processHelper }) {
-  const pkg = require(suite.pkg);
-  let dependencies = pkg.dependencies;
-  if (!dependencies) {
-    dependencies = pkg.dependencies = {};
-  }
+  const refs = [];
   for (const moduleName of suite.modules) {
     const module = modules[moduleName];
     console.log(module.package.name);
-    dependencies[module.package.name] = 'workspace:^';
+    refs.push(`{
+      "path": "modules/${module.package.name.substring('cabloy-module-api-'.length)}"
+    }`);
   }
-  console.log(dependencies);
-  await fse.outputFile(suite.pkg, JSON.stringify(pkg, null, 2));
+  const tsconfig = `
+  {
+    "extends": "../../../tsconfig.base.json",
+    "compilerOptions": {
+      "rootDir": "src",
+      "outDir": "dist"
+    },
+    "include": ["src/**/*"],
+    "references": [
+      ${refs.join(',')}
+    ]
+  }
+`;
+  // console.log(tsconfig);
+  await fse.outputFile(`${suite.root}/tsconfig.json`, tsconfig);
+  await processHelper.formatFile({ fileName: `${suite.root}/tsconfig.json` });
+
+  // const pkg = require(suite.root);
+  // let dependencies = pkg.dependencies;
+  // if (!dependencies) {
+  //   dependencies = pkg.dependencies = {};
+  // }
+
+  // console.log(dependencies);
+  // await fse.outputFile(suite.pkg, JSON.stringify(pkg, null, 2));
   // console.log(pkg.name);
 }
 
