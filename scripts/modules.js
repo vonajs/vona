@@ -37,9 +37,6 @@ async function main() {
 }
 
 async function _suiteHandle({ modules, suite, processHelper }) {
-  console.log(`{
-    "path": "src/suite/${suite.package.name.substring('cabloy-suite-api-'.length)}"
-  },`);
   // const refs = [];
   // for (const moduleName of suite.modules) {
   //   const module = modules[moduleName];
@@ -62,6 +59,11 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  if (!module.suite) {
+    console.log(`{
+    "path": "src/module/${module.package.name.substring('cabloy-module-api-'.length)}"
+  },`);
+  }
   // // tsconfig
   // const tsconfig = `{
   //   "extends": "../../tsconfig.json",

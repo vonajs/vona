@@ -44,7 +44,43 @@
       "path": "src/suite/a-cms"
     },
     {
+      "path": "src/suite/a-dingtalk"
+    },
+    {
       "path": "src/suite/a-flow"
+    },
+    {
+      "path": "src/suite/a-paypal"
+    },
+    {
+      "path": "src/suite/a-wechat"
+    },
+    {
+      "path": "src/suite/a-wxwork"
+    },
+    {
+      "path": "src/suite/bz-diancai"
+    },
+    {
+      "path": "src/suite/bz-study"
+    },
+    {
+      "path": "src/suite/cabloy-store"
+    },
+    {
+      "path": "src/suite/test-party"
+    },
+    {
+      "path": "src/module/bz-login"
+    },
+    {
+      "path": "src/module/test-flow"
+    },
+    {
+      "path": "src/module/test-note"
+    },
+    {
+      "path": "src/module/test-userpro-monkey"
     }
   ]
 }
