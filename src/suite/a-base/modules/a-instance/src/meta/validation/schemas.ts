@@ -1,8 +1,7 @@
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../../resource/this.js';
 
-const schemas = {};
 // instance
-schemas.instance = {
+const instance = {
   type: 'object',
   properties: {
     // Basic Info
@@ -49,7 +48,7 @@ schemas.instance = {
         actions: [
           {
             name: 'preview',
-            actionModule: moduleInfo.relativeName,
+            actionModule: __ThisModule__,
             actionComponent: 'action',
             icon: { f7: '::preview' },
             navigateOptions: { target: '_self' },
@@ -61,4 +60,4 @@ schemas.instance = {
   },
 };
 
-module.exports = schemas;
+export const schemas = { instance };

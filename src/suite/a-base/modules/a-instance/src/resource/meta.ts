@@ -1,5 +1,5 @@
-const schemas = require('./meta/validation/schemas.js');
-const meta = {
+import { schemas } from '../meta/validation/schemas.js';
+export const meta = {
   validation: {
     validators: {},
     keywords: {},
@@ -11,4 +11,3 @@ const meta = {
     },
   },
 };
-module.exports = meta;
