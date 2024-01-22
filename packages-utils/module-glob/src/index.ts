@@ -188,8 +188,6 @@ function __parseModules(projectPath, cabloyConfig) {
       if (!info) {
         throw new Error(`module name is not valid: ${name}`);
       }
-      // todo:
-      if (!['a-version', 'a-instance'].includes(info.relativeName)) continue;
       // check if exists
       if (modules[info.relativeName]) continue;
       // info
