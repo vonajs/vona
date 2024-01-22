@@ -1,4 +1,5 @@
 const fse = require('fs-extra');
+const fs = require('node:fs/promises');
 const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
 const eggBornUtils = require('egg-born-utils');
@@ -21,7 +22,7 @@ async function main() {
     log: true,
     type: 'backend',
   });
-  console.log(modulesArray);
+  console.log(modulesArray.length);
 
   // loop
   for (const module of modulesArray) {
@@ -30,10 +31,26 @@ async function main() {
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  await _jstots({ module, processHelper });
   // await fse.move(`${module.root}/src/main.js`, `${module.root}/src/index.js`);
   // await fse.remove(`${module.root}/dist`);
   // await _modulePublish({ module, processHelper });
   // await _moduleRemoveFront({ module });
+}
+
+async function _jstots({ module, processHelper }) {
+  const pattern = `${module.root}/src/**/*.js`;
+  // files
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  // convert
+  const filesTo = [];
+  for (const file of files) {
+    const pos = String(file).lastIndexOf('.js');
+    const fileTo = String(file).substring(0, pos) + '.ts';
+    await fs.rename(file, fileTo);
+    filesTo.push(fileTo);
+  }
+  console.log(filesTo);
 }
 
 async function _modulePublish({ module, processHelper }) {
