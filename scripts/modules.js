@@ -15,23 +15,46 @@ async function main() {
   const processHelper = new ProcessHelper(process.cwd());
 
   // modules
-  const { modulesArray } = await glob({
+  const { modules, modulesArray, suites } = await glob({
     projectPath: process.cwd(),
     disabledModules: null,
     disabledSuites: null,
     log: true,
     type: 'backend',
   });
-  console.log(modulesArray.length);
+  console.log('modules: ', modulesArray.length);
 
-  // loop
+  // loop suites
+  for (const key in suites) {
+    const suite = suites[key];
+    await _suiteHandle({ modules, suite, processHelper });
+  }
+
+  // loop modules
   for (const module of modulesArray) {
     await _moduleHandle({ module, processHelper });
   }
 }
 
+async function _suiteHandle({ modules, suite, processHelper }) {
+  const pkg = require(suite.pkg);
+  let dependencies = pkg.dependencies;
+  if (!dependencies) {
+    dependencies = pkg.dependencies = {};
+  }
+  for (const moduleName of suite.modules) {
+    const module = modules[moduleName];
+    console.log(module.package.name);
+    dependencies[module.package.name] = 'workspace:^';
+  }
+  console.log(dependencies);
+  await fse.outputFile(suite.pkg, JSON.stringify(pkg, null, 2));
+  // console.log(pkg.name);
+}
+
 async function _moduleHandle({ module, processHelper }) {
-  await _jstots({ module, processHelper });
+  // console.log(module);
+  // await _jstots({ module, processHelper });
   // await fse.move(`${module.root}/src/main.js`, `${module.root}/src/index.js`);
   // await fse.remove(`${module.root}/dist`);
   // await _modulePublish({ module, processHelper });
