@@ -79,13 +79,17 @@ async function _moduleHandle({ module, processHelper }) {
     },
     './package.json': './package.json',
   };
-  if (pkgOld.description) pkgNew.description = pkgOld.description;
+  pkgNew.description = pkgOld.description || '';
+  pkgNew.files = ['dist', 'test', 'static', 'typings', 'cms', 'docs']; // no need 'utils'
   pkgNew.scripts = pkgOld.scripts;
   if (pkgOld.keywords) pkgNew.keywords = pkgOld.keywords;
   if (pkgOld.author) pkgNew.author = pkgOld.author;
   if (pkgOld.license) pkgNew.license = pkgOld.license;
   if (pkgOld.dependencies) pkgNew.dependencies = pkgOld.dependencies;
   const pkgNewStr = JSON.stringify(pkgNew, null, 2);
+  if (!['a-base', 'test-party'].includes(module.info.relativeName)) {
+    return;
+  }
   // console.log(pkgNewStr);
   const outFileName = `${module.root}/package.json`;
   await fse.outputFile(outFileName, pkgNewStr);
