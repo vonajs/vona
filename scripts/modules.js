@@ -3,6 +3,7 @@ const fs = require('node:fs/promises');
 const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
 const eggBornUtils = require('egg-born-utils');
+const { stringify } = require('json5');
 const argv = require('./lib/parse_argv')('sync');
 
 (async function () {
@@ -60,6 +61,36 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 async function _moduleHandle({ module, processHelper }) {
   // package.json
+  // delete require.cache[require.resolve(module.pkg)];
+  // const pkgOld =  require(module.pkg);
+  let pkgOld = fse.readFileSync(module.pkg);
+  pkgOld = JSON.parse(pkgOld);
+  const pkgNew = {};
+  pkgNew.name = pkgOld.name;
+  pkgNew.version = pkgOld.version;
+  if (pkgOld.title) pkgNew.title = pkgOld.title;
+  pkgNew.eggBornModule = pkgOld.eggBornModule;
+  pkgNew.type = 'module';
+  pkgNew.exports = {
+    '.': {
+      types: ['./src/index.ts', './dist/index.d.ts'],
+      import: './dist/index.js',
+      default: './src/index.ts',
+    },
+    './package.json': './package.json',
+  };
+  if (pkgOld.description) pkgNew.description = pkgOld.description;
+  pkgNew.scripts = pkgOld.scripts;
+  if (pkgOld.keywords) pkgNew.keywords = pkgOld.keywords;
+  if (pkgOld.author) pkgNew.author = pkgOld.author;
+  if (pkgOld.license) pkgNew.license = pkgOld.license;
+  if (pkgOld.dependencies) pkgNew.dependencies = pkgOld.dependencies;
+  const pkgNewStr = JSON.stringify(pkgNew, null, 2);
+  // console.log(pkgNewStr);
+  const outFileName = `${module.root}/package.json`;
+  await fse.outputFile(outFileName, pkgNewStr);
+  await processHelper.formatFile({ fileName: outFileName });
+
   // if (!module.suite) {
   //   console.log(`{
   //   "path": "src/module/${module.package.name.substring('cabloy-module-api-'.length)}"
