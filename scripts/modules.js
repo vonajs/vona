@@ -113,7 +113,7 @@ export class ${classNameNew} extends BeanBase ${contentMatches[3]}
     let routesContent = (await fse.readFile(routesFile)).toString();
     routesContent = routesContent.replaceAll(`controller: '${classNameOld}'`, `controller: '${beanName}'`);
     // console.log(routesContent, beanName);
-    await fse.outputFile(routesFile, contentNew);
+    await fse.outputFile(routesFile, routesContent);
     await processHelper.formatFile({ fileName: routesFile });
   }
 
