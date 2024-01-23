@@ -3,6 +3,9 @@ import { ScopeModuleAFlowgateway } from '../index.js';
 
 @Controller()
 export class ControllerFlow extends BeanBase {
+  @Use()
+  scope: ScopeModuleAFlowgateway;
+
   async start() {
     // start
     const flowInstance = await this.ctx.bean.flow.startByKey({

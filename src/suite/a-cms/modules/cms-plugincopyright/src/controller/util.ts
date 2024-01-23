@@ -3,6 +3,9 @@ import { ScopeModuleCmsPlugincopyright } from '../index.js';
 
 @Controller()
 export class ControllerUtil extends BeanBase {
+  @Use()
+  scope: ScopeModuleCmsPlugincopyright;
+
   async md() {
     // atomId
     const atomId = this.ctx.params.atomId;

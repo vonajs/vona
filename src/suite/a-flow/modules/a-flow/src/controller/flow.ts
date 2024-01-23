@@ -3,12 +3,15 @@ import { ScopeModuleAFlow } from '../index.js';
 
 @Controller()
 export class ControllerFlow extends BeanBase {
+  @Use()
+  scope: ScopeModuleAFlow;
+
   // options
   //   where, orders, page, mode: mine/others/flowing/history
   async select() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.service.flow.select({
+    const items = await this.scope.local.flow.select({
       options,
       user: this.ctx.state.user.op,
     });
@@ -17,7 +20,7 @@ export class ControllerFlow extends BeanBase {
 
   async count() {
     const options = this.ctx.request.body.options;
-    const count = await this.ctx.service.flow.count({
+    const count = await this.scope.local.flow.count({
       options,
       user: this.ctx.state.user.op,
     });

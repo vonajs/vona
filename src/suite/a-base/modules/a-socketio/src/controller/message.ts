@@ -3,8 +3,11 @@ import { ScopeModuleASocketio } from '../index.js';
 
 @Controller()
 export class ControllerMessage extends BeanBase {
+  @Use()
+  scope: ScopeModuleASocketio;
+
   async offset() {
-    const res = await this.ctx.service.message.offset({
+    const res = await this.scope.local.message.offset({
       messageClass: this.ctx.request.body.messageClass,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -15,7 +18,7 @@ export class ControllerMessage extends BeanBase {
   async select() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.service.message.select({
+    const items = await this.scope.local.message.select({
       messageClass: this.ctx.request.body.messageClass,
       options,
       user: this.ctx.state.user.op,
@@ -25,7 +28,7 @@ export class ControllerMessage extends BeanBase {
 
   async count() {
     const options = this.ctx.request.body.options;
-    const count = await this.ctx.service.message.count({
+    const count = await this.scope.local.message.count({
       messageClass: this.ctx.request.body.messageClass,
       options,
       user: this.ctx.state.user.op,
@@ -34,7 +37,7 @@ export class ControllerMessage extends BeanBase {
   }
 
   async setRead() {
-    const res = await this.ctx.service.message.setRead({
+    const res = await this.scope.local.message.setRead({
       messageClass: this.ctx.request.body.messageClass,
       messageIds: this.ctx.request.body.messageIds,
       all: this.ctx.request.body.all,
@@ -44,7 +47,7 @@ export class ControllerMessage extends BeanBase {
   }
 
   async delete() {
-    const res = await this.ctx.service.message.delete({
+    const res = await this.scope.local.message.delete({
       messageIds: this.ctx.request.body.messageIds,
       user: this.ctx.state.user.op,
     });

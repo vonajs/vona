@@ -3,9 +3,12 @@ import { ScopeModuleABaseadmin } from '../index.js';
 
 @Controller()
 export class ControllerRole extends BeanBase {
+  @Use()
+  scope: ScopeModuleABaseadmin;
+
   async childrenTop() {
     const page = this.ctx.request.body.page;
-    const items = await this.ctx.service.role.childrenTop({
+    const items = await this.scope.local.role.childrenTop({
       roleTypes: this.ctx.request.body.roleTypes,
       page,
       user: this.ctx.state.user.op,
@@ -15,7 +18,7 @@ export class ControllerRole extends BeanBase {
 
   async children() {
     const page = this.ctx.request.body.page;
-    const items = await this.ctx.service.role.children({
+    const items = await this.scope.local.role.children({
       roleTypes: this.ctx.request.body.roleTypes,
       roleId: this.ctx.request.body.roleId,
       page,
@@ -27,7 +30,7 @@ export class ControllerRole extends BeanBase {
   async delete() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.delete({
+    const res = await this.scope.local.role.delete({
       roleAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
@@ -37,7 +40,7 @@ export class ControllerRole extends BeanBase {
   async clone() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.clone({
+    const res = await this.scope.local.role.clone({
       roleAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
@@ -47,7 +50,7 @@ export class ControllerRole extends BeanBase {
   async move() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.move({
+    const res = await this.scope.local.role.move({
       roleAtomId: this.ctx.request.body.key.atomId,
       roleIdParent: this.ctx.request.body.data.roleIdParent,
       user: this.ctx.state.user.op,
@@ -58,7 +61,7 @@ export class ControllerRole extends BeanBase {
   async addChild() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.addChild({
+    const res = await this.scope.local.role.addChild({
       roleAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
@@ -67,7 +70,7 @@ export class ControllerRole extends BeanBase {
 
   async roleUsers() {
     const page = this.ctx.request.body.page;
-    const items = await this.ctx.service.role.roleUsers({
+    const items = await this.scope.local.role.roleUsers({
       roleAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,
@@ -77,7 +80,7 @@ export class ControllerRole extends BeanBase {
 
   async includes() {
     const page = this.ctx.request.body.page;
-    const items = await this.ctx.service.role.includes({
+    const items = await this.scope.local.role.includes({
       roleAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,
@@ -88,7 +91,7 @@ export class ControllerRole extends BeanBase {
   async addUserRole() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.addUserRole({
+    const res = await this.scope.local.role.addUserRole({
       roleAtomId: this.ctx.request.body.key.atomId,
       userId: this.ctx.request.body.userId,
       user: this.ctx.state.user.op,
@@ -99,7 +102,7 @@ export class ControllerRole extends BeanBase {
   async deleteUserRole() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.deleteUserRole({
+    const res = await this.scope.local.role.deleteUserRole({
       roleAtomId: this.ctx.request.body.key.atomId,
       userId: this.ctx.request.body.userId,
       user: this.ctx.state.user.op,
@@ -110,7 +113,7 @@ export class ControllerRole extends BeanBase {
   async addRoleInc() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.addRoleInc({
+    const res = await this.scope.local.role.addRoleInc({
       roleAtomId: this.ctx.request.body.key.atomId,
       roleIdInc: this.ctx.request.body.roleIdInc,
       user: this.ctx.state.user.op,
@@ -121,7 +124,7 @@ export class ControllerRole extends BeanBase {
   async removeRoleInc() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.role.removeRoleInc({
+    const res = await this.scope.local.role.removeRoleInc({
       roleAtomId: this.ctx.request.body.key.atomId,
       roleIdInc: this.ctx.request.body.roleIdInc,
       user: this.ctx.state.user.op,

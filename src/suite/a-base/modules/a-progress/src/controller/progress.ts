@@ -3,8 +3,11 @@ import { ScopeModuleAProgress } from '../index.js';
 
 @Controller()
 export class ControllerProgress extends BeanBase {
+  @Use()
+  scope: ScopeModuleAProgress;
+
   async check() {
-    const res = await this.ctx.service.progress.check({
+    const res = await this.scope.local.progress.check({
       progressId: this.ctx.request.body.progressId,
       counter: this.ctx.request.body.counter,
       user: this.ctx.state.user.op,
@@ -13,7 +16,7 @@ export class ControllerProgress extends BeanBase {
   }
 
   async abort() {
-    await this.ctx.service.progress.abort({
+    await this.scope.local.progress.abort({
       progressId: this.ctx.request.body.progressId,
       user: this.ctx.state.user.op,
     });
@@ -21,7 +24,7 @@ export class ControllerProgress extends BeanBase {
   }
 
   async delete() {
-    await this.ctx.service.progress.delete({
+    await this.scope.local.progress.delete({
       progressId: this.ctx.request.body.progressId,
       user: this.ctx.state.user.op,
     });

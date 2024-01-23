@@ -3,10 +3,13 @@ import { ScopeModuleAAuthopen } from '../index.js';
 
 @Controller()
 export class ControllerAuthOpen extends BeanBase {
+  @Use()
+  scope: ScopeModuleAAuthopen;
+
   async hideClientSecret() {
     // check demo
     // this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.authOpen.hideClientSecret({
+    const res = await this.scope.local.authOpen.hideClientSecret({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -16,7 +19,7 @@ export class ControllerAuthOpen extends BeanBase {
   async resetClientSecret() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.authOpen.resetClientSecret({
+    const res = await this.scope.local.authOpen.resetClientSecret({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });

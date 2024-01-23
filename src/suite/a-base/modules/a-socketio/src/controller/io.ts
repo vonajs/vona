@@ -3,8 +3,11 @@ import { ScopeModuleASocketio } from '../index.js';
 
 @Controller()
 export class ControllerIo extends BeanBase {
+  @Use()
+  scope: ScopeModuleASocketio;
+
   async subscribe() {
-    const res = await this.ctx.service.io.subscribe({
+    const res = await this.scope.local.io.subscribe({
       path: this.ctx.request.body.path,
       timestamp: this.ctx.request.body.timestamp,
       workerId: this.app.meta.workerId,
@@ -16,7 +19,7 @@ export class ControllerIo extends BeanBase {
   }
 
   async unsubscribe() {
-    const res = await this.ctx.service.io.unsubscribe({
+    const res = await this.scope.local.io.unsubscribe({
       path: this.ctx.request.body.path,
       timestamp: this.ctx.request.body.timestamp,
       socketId: this.ctx.socket.id,

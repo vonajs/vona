@@ -3,12 +3,15 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerResource extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   // options
   //   where, orders, page, star, label, resourceType, locale
   async select() {
     const options = this.ctx.request.body.options || {};
     options.page = this.ctx.bean.util.page(options.page, false); // false
-    const items = await this.ctx.service.resource.select({
+    const items = await this.scope.local.resource.select({
       atomClass: this.ctx.request.body.atomClass,
       options,
       user: this.ctx.state.user.op,
@@ -17,7 +20,7 @@ export class ControllerResource extends BeanBase {
   }
 
   async read() {
-    const res = await this.ctx.service.resource.read({
+    const res = await this.scope.local.resource.read({
       atomStaticKey: this.ctx.request.body.atomStaticKey,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -26,7 +29,7 @@ export class ControllerResource extends BeanBase {
   }
 
   async check() {
-    const res = await this.ctx.service.resource.check({
+    const res = await this.scope.local.resource.check({
       atomStaticKeys: this.ctx.request.body.atomStaticKeys,
       user: this.ctx.state.user.op,
     });
@@ -34,7 +37,7 @@ export class ControllerResource extends BeanBase {
   }
 
   async resourceRoles() {
-    const list = await this.ctx.service.resource.resourceRoles({
+    const list = await this.scope.local.resource.resourceRoles({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -44,7 +47,7 @@ export class ControllerResource extends BeanBase {
   async resourceRoleRemove() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.resource.resourceRoleRemove({
+    const res = await this.scope.local.resource.resourceRoleRemove({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -55,7 +58,7 @@ export class ControllerResource extends BeanBase {
   async resourceRoleAdd() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.resource.resourceRoleAdd({
+    const res = await this.scope.local.resource.resourceRoleAdd({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,

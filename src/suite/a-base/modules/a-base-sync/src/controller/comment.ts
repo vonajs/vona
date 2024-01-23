@@ -3,6 +3,9 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerComment extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   async all() {
     const options = this.ctx.request.body.options;
     options.comment = 1;
@@ -20,7 +23,7 @@ export class ControllerComment extends BeanBase {
   async list() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.service.comment.list({
+    const items = await this.scope.local.comment.list({
       key: this.ctx.request.body.key,
       options,
       user: this.ctx.state.user.op,
@@ -29,7 +32,7 @@ export class ControllerComment extends BeanBase {
   }
 
   async count() {
-    const count = await this.ctx.service.comment.count({
+    const count = await this.scope.local.comment.count({
       key: this.ctx.request.body.key,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -38,7 +41,7 @@ export class ControllerComment extends BeanBase {
   }
 
   async item() {
-    const res = await this.ctx.service.comment.item({
+    const res = await this.scope.local.comment.item({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -47,7 +50,7 @@ export class ControllerComment extends BeanBase {
   }
 
   async save() {
-    const res = await this.ctx.service.comment.save({
+    const res = await this.scope.local.comment.save({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -56,7 +59,7 @@ export class ControllerComment extends BeanBase {
   }
 
   async delete() {
-    const res = await this.ctx.service.comment.delete({
+    const res = await this.scope.local.comment.delete({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -65,7 +68,7 @@ export class ControllerComment extends BeanBase {
   }
 
   async heart() {
-    const res = await this.ctx.service.comment.heart({
+    const res = await this.scope.local.comment.heart({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,

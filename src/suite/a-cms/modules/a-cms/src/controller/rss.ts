@@ -3,6 +3,9 @@ import { ScopeModuleACms } from '../index.js';
 
 @Controller()
 export class ControllerRss extends BeanBase {
+  @Use()
+  scope: ScopeModuleACms;
+
   async feed() {
     // params
     //   module

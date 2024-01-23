@@ -3,17 +3,20 @@ import { ScopeModuleABaseadmin } from '../index.js';
 
 @Controller()
 export class ControllerAuth extends BeanBase {
+  @Use()
+  scope: ScopeModuleABaseadmin;
+
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.auth.list();
+    const res = await this.scope.local.auth.list();
     this.ctx.success(res);
   }
 
   async disable() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.auth.disable({
+    const res = await this.scope.local.auth.disable({
       id: this.ctx.request.body.id,
       disabled: this.ctx.request.body.disabled,
     });
@@ -23,7 +26,7 @@ export class ControllerAuth extends BeanBase {
   async save() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.auth.save({
+    const res = await this.scope.local.auth.save({
       id: this.ctx.request.body.id,
       config: this.ctx.request.body.data,
     });

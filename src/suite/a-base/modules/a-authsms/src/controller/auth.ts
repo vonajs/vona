@@ -3,18 +3,21 @@ import { ScopeModuleAAuthsms } from '../index.js';
 
 @Controller()
 export class ControllerAuth extends BeanBase {
+  @Use()
+  scope: ScopeModuleAAuthsms;
+
   async signin() {
     // data: { mobile, rememberMe }
     const data = this.ctx.request.body.data;
     const state = this.ctx.request.body.state;
-    const res = await this.ctx.service.auth.signin({ data, state });
+    const res = await this.scope.local.auth.signin({ data, state });
     this.ctx.success(res);
   }
 
   async signup() {
     const { userName, realName, mobile } = this.ctx.request.body.data;
     const state = this.ctx.request.body.state;
-    const res = await this.ctx.service.auth.signup({
+    const res = await this.scope.local.auth.signup({
       user: this.ctx.state.user.agent,
       state,
       userName,
@@ -26,7 +29,7 @@ export class ControllerAuth extends BeanBase {
 
   async mobileVerify() {
     const { mobile } = this.ctx.request.body.data;
-    const res = await this.ctx.service.auth.mobileVerify({
+    const res = await this.scope.local.auth.mobileVerify({
       user: this.ctx.state.user.agent,
       mobile,
     });

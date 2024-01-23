@@ -4,47 +4,50 @@ const qr = require('qr-image');
 
 @Controller()
 export class ControllerBase extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   modules() {
-    const res = this.ctx.service.base.modules();
+    const res = this.scope.local.base.modules();
     this.ctx.success(res);
   }
 
   locales() {
-    const res = this.ctx.service.base.locales();
+    const res = this.scope.local.base.locales();
     this.ctx.success(res);
   }
 
   resourceTypes() {
-    const res = this.ctx.service.base.resourceTypes();
+    const res = this.scope.local.base.resourceTypes();
     this.ctx.success(res);
   }
 
   async getAtomClassBase() {
-    const res = await this.ctx.service.base.getAtomClassBase({
+    const res = await this.scope.local.base.getAtomClassBase({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   getActionsBase() {
-    const res = this.ctx.service.base.getActionsBase({
+    const res = this.scope.local.base.getActionsBase({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   atomClasses() {
-    const res = this.ctx.service.base.atomClasses();
+    const res = this.scope.local.base.atomClasses();
     this.ctx.success(res);
   }
 
   actions() {
-    const res = this.ctx.service.base.actions();
+    const res = this.scope.local.base.actions();
     this.ctx.success(res);
   }
 
   themes() {
-    const res = this.ctx.service.base.themes();
+    const res = this.scope.local.base.themes();
     this.ctx.success(res);
   }
 

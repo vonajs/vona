@@ -3,12 +3,15 @@ import { ScopeModuleAFlowtask } from '../index.js';
 
 @Controller()
 export class ControllerFlowTask extends BeanBase {
+  @Use()
+  scope: ScopeModuleAFlowtask;
+
   // options
   //   where, orders, page, history
   async select() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.service.flowTask.select({
+    const items = await this.scope.local.flowTask.select({
       options,
       user: this.ctx.state.user.op,
     });
@@ -17,7 +20,7 @@ export class ControllerFlowTask extends BeanBase {
 
   async count() {
     const options = this.ctx.request.body.options;
-    const count = await this.ctx.service.flowTask.count({
+    const count = await this.scope.local.flowTask.count({
       options,
       user: this.ctx.state.user.op,
     });
@@ -25,7 +28,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async claim() {
-    const res = await this.ctx.service.flowTask.claim({
+    const res = await this.scope.local.flowTask.claim({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -33,7 +36,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async complete() {
-    const res = await this.ctx.service.flowTask.complete({
+    const res = await this.scope.local.flowTask.complete({
       flowTaskId: this.ctx.request.body.flowTaskId,
       handle: this.ctx.request.body.handle,
       formAtom: this.ctx.request.body.formAtom,
@@ -43,7 +46,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async appendHandleRemark() {
-    const res = await this.ctx.service.flowTask.appendHandleRemark({
+    const res = await this.scope.local.flowTask.appendHandleRemark({
       flowTaskId: this.ctx.request.body.flowTaskId,
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
@@ -52,7 +55,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async assignees() {
-    const res = await this.ctx.service.flowTask.assignees({
+    const res = await this.scope.local.flowTask.assignees({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -60,7 +63,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async assigneesConfirmation() {
-    const res = await this.ctx.service.flowTask.assigneesConfirmation({
+    const res = await this.scope.local.flowTask.assigneesConfirmation({
       flowTaskId: this.ctx.request.body.flowTaskId,
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
@@ -69,7 +72,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async recall() {
-    const res = await this.ctx.service.flowTask.recall({
+    const res = await this.scope.local.flowTask.recall({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -77,7 +80,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async cancelFlow() {
-    const res = await this.ctx.service.flowTask.cancelFlow({
+    const res = await this.scope.local.flowTask.cancelFlow({
       flowTaskId: this.ctx.request.body.flowTaskId,
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
@@ -86,7 +89,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async viewAtom() {
-    const res = await this.ctx.service.flowTask.viewAtom({
+    const res = await this.scope.local.flowTask.viewAtom({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -94,7 +97,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async editAtom() {
-    const res = await this.ctx.service.flowTask.editAtom({
+    const res = await this.scope.local.flowTask.editAtom({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -105,7 +108,7 @@ export class ControllerFlowTask extends BeanBase {
     const { flowTaskId, params } = this.ctx.request.body;
     const user = this.ctx.state.user.op;
     const page = params.page;
-    const items = await this.ctx.service.flowTask.userSelectForward({
+    const items = await this.scope.local.flowTask.userSelectForward({
       flowTaskId,
       params,
       user,
@@ -114,7 +117,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async forward() {
-    const res = await this.ctx.service.flowTask.forward({
+    const res = await this.scope.local.flowTask.forward({
       flowTaskId: this.ctx.request.body.flowTaskId,
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
@@ -123,7 +126,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async forwardRecall() {
-    const res = await this.ctx.service.flowTask.forwardRecall({
+    const res = await this.scope.local.flowTask.forwardRecall({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -134,7 +137,7 @@ export class ControllerFlowTask extends BeanBase {
     const { flowTaskId, params } = this.ctx.request.body;
     const user = this.ctx.state.user.op;
     const page = params.page;
-    const items = await this.ctx.service.flowTask.userSelectSubstitute({
+    const items = await this.scope.local.flowTask.userSelectSubstitute({
       flowTaskId,
       params,
       user,
@@ -143,7 +146,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async substitute() {
-    const res = await this.ctx.service.flowTask.substitute({
+    const res = await this.scope.local.flowTask.substitute({
       flowTaskId: this.ctx.request.body.flowTaskId,
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
@@ -152,7 +155,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async substituteRecall() {
-    const res = await this.ctx.service.flowTask.substituteRecall({
+    const res = await this.scope.local.flowTask.substituteRecall({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
@@ -160,7 +163,7 @@ export class ControllerFlowTask extends BeanBase {
   }
 
   async actions() {
-    const res = await this.ctx.service.flowTask.actions({
+    const res = await this.scope.local.flowTask.actions({
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });

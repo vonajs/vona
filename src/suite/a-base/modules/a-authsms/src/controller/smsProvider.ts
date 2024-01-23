@@ -4,20 +4,23 @@ const moduleInfo = module.info;
 
 @Controller()
 export class ControllerSmsProvider extends BeanBase {
+  @Use()
+  scope: ScopeModuleAAuthsms;
+
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.smsProvider.list();
+    const res = await this.scope.local.smsProvider.list();
     this.ctx.success(res);
   }
 
   async setCurrent() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    await this.ctx.service.smsProvider.setCurrent({
+    await this.scope.local.smsProvider.setCurrent({
       providerName: this.ctx.request.body.providerName,
     });
-    const list = await this.ctx.service.smsProvider.list();
+    const list = await this.scope.local.smsProvider.list();
     this.ctx.success({ list });
   }
 
@@ -36,12 +39,12 @@ export class ControllerSmsProvider extends BeanBase {
       filterOptions: true,
     });
     // save
-    await this.ctx.service.smsProvider.save({
+    await this.scope.local.smsProvider.save({
       providerName,
       data,
     });
     // ok
-    const list = await this.ctx.service.smsProvider.list();
+    const list = await this.scope.local.smsProvider.list();
     const res = list[providerName];
     this.ctx.success(res);
   }

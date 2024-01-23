@@ -3,8 +3,11 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerAtom extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   async preferredRoles() {
-    const res = await this.ctx.service.atom.preferredRoles({
+    const res = await this.scope.local.atom.preferredRoles({
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
@@ -12,7 +15,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async preferredRole() {
-    const res = await this.ctx.service.atom.preferredRole({
+    const res = await this.scope.local.atom.preferredRole({
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
@@ -20,7 +23,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async preferredRoleId() {
-    const res = await this.ctx.service.atom.preferredRoleId({
+    const res = await this.scope.local.atom.preferredRoleId({
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
@@ -34,7 +37,7 @@ export class ControllerAtom extends BeanBase {
     // item
     const item = this._prepareItemForCreate();
     // create
-    const res = await this.ctx.service.atom.default({
+    const res = await this.scope.local.atom.default({
       atomClass: this.ctx.request.body.atomClass,
       roleIdOwner: this.ctx.request.body.roleIdOwner,
       item,
@@ -50,7 +53,7 @@ export class ControllerAtom extends BeanBase {
     // item
     const item = this._prepareItemForCreate();
     // create
-    const res = await this.ctx.service.atom.create({
+    const res = await this.scope.local.atom.create({
       atomClass: this.ctx.request.body.atomClass,
       roleIdOwner: this.ctx.request.body.roleIdOwner,
       item,
@@ -61,7 +64,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async atomClass() {
-    const res = await this.ctx.service.atom.atomClass({
+    const res = await this.scope.local.atom.atomClass({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -69,7 +72,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async read() {
-    const res = await this.ctx.service.atom.read({
+    const res = await this.scope.local.atom.read({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
@@ -83,7 +86,7 @@ export class ControllerAtom extends BeanBase {
   async select() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.service.atom.select({
+    const items = await this.scope.local.atom.select({
       atomClass: this.ctx.request.body.atomClass,
       options,
       user: this.ctx.state.user.op,
@@ -93,7 +96,7 @@ export class ControllerAtom extends BeanBase {
 
   async count() {
     const options = this.ctx.request.body.options;
-    const count = await this.ctx.service.atom.count({
+    const count = await this.scope.local.atom.count({
       atomClass: this.ctx.request.body.atomClass,
       options,
       user: this.ctx.state.user.op,
@@ -121,7 +124,7 @@ export class ControllerAtom extends BeanBase {
       item = this.ctx.request.body.item;
     }
     // write
-    const res = await this.ctx.service.atom.write({
+    const res = await this.scope.local.atom.write({
       key,
       atomClass: this.ctx.request.body.atomClass,
       roleIdOwner: this.ctx.request.body.roleIdOwner,
@@ -134,7 +137,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async openDraft() {
-    const res = await this.ctx.service.atom.openDraft({
+    const res = await this.scope.local.atom.openDraft({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
@@ -145,7 +148,7 @@ export class ControllerAtom extends BeanBase {
   async submit() {
     const options = this.ctx.request.body.options;
     // submit
-    const res = await this.ctx.service.atom.submit({
+    const res = await this.scope.local.atom.submit({
       key: this.ctx.request.body.key,
       options,
       user: this.ctx.state.user.op,
@@ -154,7 +157,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async delete() {
-    await this.ctx.service.atom.delete({
+    await this.scope.local.atom.delete({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
@@ -164,7 +167,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async deleteBulk() {
-    const res = await this.ctx.service.atom.deleteBulk({
+    const res = await this.scope.local.atom.deleteBulk({
       atomClass: this.ctx.request.body.atomClass,
       keys: this.ctx.request.body.keys,
       options: this.ctx.request.body.options,
@@ -174,7 +177,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async clone() {
-    const res = await this.ctx.service.atom.clone({
+    const res = await this.scope.local.atom.clone({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       roleIdOwner: this.ctx.request.body.roleIdOwner,
@@ -185,7 +188,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async enable() {
-    const res = await this.ctx.service.atom.enable({
+    const res = await this.scope.local.atom.enable({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -193,7 +196,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async disable() {
-    const res = await this.ctx.service.atom.disable({
+    const res = await this.scope.local.atom.disable({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -201,7 +204,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async exportBulk() {
-    const res = await this.ctx.service.atom.exportBulk({
+    const res = await this.scope.local.atom.exportBulk({
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
       fields: this.ctx.request.body.fields,
@@ -211,7 +214,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async importBulk() {
-    const res = await this.ctx.service.atom.importBulk({
+    const res = await this.scope.local.atom.importBulk({
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
       file: this.ctx.request.body.file,
@@ -221,7 +224,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async performAction() {
-    const res = await this.ctx.service.atom.performAction({
+    const res = await this.scope.local.atom.performAction({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       action: this.ctx.request.body.action,
@@ -233,7 +236,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async performActionBulk() {
-    const res = await this.ctx.service.atom.performActionBulk({
+    const res = await this.scope.local.atom.performActionBulk({
       keys: this.ctx.request.body.keys,
       atomClass: this.ctx.request.body.atomClass,
       action: this.ctx.request.body.action,
@@ -245,7 +248,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async star() {
-    const res = await this.ctx.service.atom.star({
+    const res = await this.scope.local.atom.star({
       key: this.ctx.request.body.key,
       atom: this.ctx.request.body.atom,
       user: this.ctx.state.user.op,
@@ -254,7 +257,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async readCount() {
-    const res = await this.ctx.service.atom.readCount({
+    const res = await this.scope.local.atom.readCount({
       key: this.ctx.request.body.key,
       atom: this.ctx.request.body.atom,
       user: this.ctx.state.user.op,
@@ -263,7 +266,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async stats() {
-    const res = await this.ctx.service.atom.stats({
+    const res = await this.scope.local.atom.stats({
       atomIds: this.ctx.request.body.atomIds,
       user: this.ctx.state.user.op,
     });
@@ -271,7 +274,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async labels() {
-    const res = await this.ctx.service.atom.labels({
+    const res = await this.scope.local.atom.labels({
       key: this.ctx.request.body.key,
       atom: this.ctx.request.body.atom,
       user: this.ctx.state.user.op,
@@ -280,7 +283,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async actions() {
-    const res = await this.ctx.service.atom.actions({
+    const res = await this.scope.local.atom.actions({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
@@ -291,7 +294,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async actionsBulk() {
-    const res = await this.ctx.service.atom.actionsBulk({
+    const res = await this.scope.local.atom.actionsBulk({
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -300,7 +303,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async checkRightAction() {
-    const res = await this.ctx.service.atom.checkRightAction({
+    const res = await this.scope.local.atom.checkRightAction({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       action: this.ctx.request.body.action,
@@ -312,7 +315,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async schema() {
-    const res = await this.ctx.service.atom.schema({
+    const res = await this.scope.local.atom.schema({
       atomClass: this.ctx.request.body.atomClass,
       schema: this.ctx.request.body.schema,
     });
@@ -320,14 +323,14 @@ export class ControllerAtom extends BeanBase {
   }
 
   async validator() {
-    const res = await this.ctx.service.atom.validator({
+    const res = await this.scope.local.atom.validator({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   async moveUp() {
-    const res = await this.ctx.service.atom.moveUp({
+    const res = await this.scope.local.atom.moveUp({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,
@@ -337,7 +340,7 @@ export class ControllerAtom extends BeanBase {
   }
 
   async moveDown() {
-    const res = await this.ctx.service.atom.moveDown({
+    const res = await this.scope.local.atom.moveDown({
       key: this.ctx.request.body.key,
       atomClass: this.ctx.request.body.atomClass,
       options: this.ctx.request.body.options,

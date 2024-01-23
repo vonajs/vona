@@ -3,8 +3,11 @@ import { ScopeModuleAShare } from '../index.js';
 
 @Controller()
 export class ControllerShare extends BeanBase {
+  @Use()
+  scope: ScopeModuleAShare;
+
   async generate() {
-    const res = await this.ctx.service.share.generate({
+    const res = await this.scope.local.share.generate({
       host: this.ctx.request.body.host,
       atomId: this.ctx.request.body.atomId,
       url: this.ctx.request.body.url,
@@ -14,7 +17,7 @@ export class ControllerShare extends BeanBase {
   }
 
   async shareGo() {
-    await this.ctx.service.share.shareGo({
+    await this.scope.local.share.shareGo({
       uuid: this.ctx.params.uuid,
       user: this.ctx.state.user.op,
     });

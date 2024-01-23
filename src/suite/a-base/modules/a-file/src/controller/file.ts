@@ -3,10 +3,13 @@ import { ScopeModuleAFile } from '../index.js';
 
 @Controller()
 export class ControllerFile extends BeanBase {
+  @Use()
+  scope: ScopeModuleAFile;
+
   async all() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.service.file.all({
+    const items = await this.scope.local.file.all({
       atomClass: this.ctx.request.body.atomClass,
       options,
       user: this.ctx.state.user.op,
@@ -17,7 +20,7 @@ export class ControllerFile extends BeanBase {
   async list() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page, false);
-    const items = await this.ctx.service.file.list({
+    const items = await this.scope.local.file.list({
       key: this.ctx.request.body.key,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -26,7 +29,7 @@ export class ControllerFile extends BeanBase {
   }
 
   async update() {
-    const res = await this.ctx.service.file.update({
+    const res = await this.scope.local.file.update({
       fileId: this.ctx.request.body.fileId,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -35,7 +38,7 @@ export class ControllerFile extends BeanBase {
   }
 
   async delete() {
-    const res = await this.ctx.service.file.delete({
+    const res = await this.scope.local.file.delete({
       fileId: this.ctx.request.body.fileId || this.ctx.request.body.data.fileId,
       user: this.ctx.state.user.op,
     });
@@ -43,14 +46,14 @@ export class ControllerFile extends BeanBase {
   }
 
   async upload() {
-    const res = await this.ctx.service.file.upload({
+    const res = await this.scope.local.file.upload({
       user: this.ctx.state.user.op,
     });
     this.ctx.success(res);
   }
 
   async uploadDataUrl() {
-    const res = await this.ctx.service.file.uploadDataUrl({
+    const res = await this.scope.local.file.uploadDataUrl({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
@@ -58,7 +61,7 @@ export class ControllerFile extends BeanBase {
   }
 
   async download() {
-    await this.ctx.service.file.download({
+    await this.scope.local.file.download({
       downloadId: this.ctx.params.downloadId,
       atomId: parseInt(this.ctx.query.atomId || 0),
       width: this.ctx.query.width,

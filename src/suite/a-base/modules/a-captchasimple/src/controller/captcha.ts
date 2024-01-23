@@ -4,6 +4,9 @@ const captcha = require('trek-captcha');
 
 @Controller()
 export class ControllerCaptcha extends BeanBase {
+  @Use()
+  scope: ScopeModuleACaptchasimple;
+
   async image() {
     // providerInstanceId
     const providerInstanceId = this.ctx.query.providerInstanceId;

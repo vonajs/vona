@@ -3,8 +3,11 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerLayoutConfig extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   async load() {
-    const res = await this.ctx.service.layoutConfig.load({
+    const res = await this.scope.local.layoutConfig.load({
       module: this.ctx.request.body.module,
       user: this.ctx.state.user.op,
     });
@@ -12,7 +15,7 @@ export class ControllerLayoutConfig extends BeanBase {
   }
 
   async save() {
-    const res = await this.ctx.service.layoutConfig.save({
+    const res = await this.scope.local.layoutConfig.save({
       module: this.ctx.request.body.module,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -21,7 +24,7 @@ export class ControllerLayoutConfig extends BeanBase {
   }
 
   async saveKey() {
-    const res = await this.ctx.service.layoutConfig.saveKey({
+    const res = await this.scope.local.layoutConfig.saveKey({
       module: this.ctx.request.body.module,
       key: this.ctx.request.body.key,
       value: this.ctx.request.body.value,

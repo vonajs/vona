@@ -3,6 +3,9 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerAuth extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   // return current user auth info
   //   { op:{id},agent:{id},provider}
   async echo() {

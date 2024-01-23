@@ -4,6 +4,9 @@ const utils = require('../common/utils.js');
 
 @Controller()
 export class ControllerArticle extends BeanBase {
+  @Use()
+  scope: ScopeModuleACms;
+
   // list
   async list() {
     // atomClass

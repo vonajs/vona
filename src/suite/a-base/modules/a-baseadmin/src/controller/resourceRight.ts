@@ -3,9 +3,12 @@ import { ScopeModuleABaseadmin } from '../index.js';
 
 @Controller()
 export class ControllerResourceRight extends BeanBase {
+  @Use()
+  scope: ScopeModuleABaseadmin;
+
   async rights() {
     const page = this.ctx.request.body.page;
-    const items = await this.ctx.service.resourceRight.rights({
+    const items = await this.scope.local.resourceRight.rights({
       roleAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,
@@ -16,7 +19,7 @@ export class ControllerResourceRight extends BeanBase {
   async add() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.resourceRight.add({
+    const res = await this.scope.local.resourceRight.add({
       roleAtomId: this.ctx.request.body.key.atomId,
       atomIds: this.ctx.request.body.atomIds,
       user: this.ctx.state.user.op,
@@ -27,7 +30,7 @@ export class ControllerResourceRight extends BeanBase {
   async delete() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.ctx.service.resourceRight.delete({
+    const res = await this.scope.local.resourceRight.delete({
       roleAtomId: this.ctx.request.body.key.atomId,
       atomId: this.ctx.request.body.atomId,
       user: this.ctx.state.user.op,
@@ -37,7 +40,7 @@ export class ControllerResourceRight extends BeanBase {
 
   async spreads() {
     const page = this.ctx.request.body.page;
-    const items = await this.ctx.service.resourceRight.spreads({
+    const items = await this.scope.local.resourceRight.spreads({
       roleAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,

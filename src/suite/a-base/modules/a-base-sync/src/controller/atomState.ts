@@ -3,8 +3,11 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerAtomState extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   async getDictDynamic() {
-    const res = await this.ctx.service.atomState.getDictDynamic({
+    const res = await this.scope.local.atomState.getDictDynamic({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);

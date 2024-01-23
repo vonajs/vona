@@ -3,9 +3,12 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerDb extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   async insert() {
     const { tableName, data } = this.ctx.request.body;
-    const res = await this.ctx.service.db.insert({
+    const res = await this.scope.local.db.insert({
       tableName,
       data,
     });
@@ -14,7 +17,7 @@ export class ControllerDb extends BeanBase {
 
   async select() {
     const { tableName, options } = this.ctx.request.body;
-    const res = await this.ctx.service.db.select({
+    const res = await this.scope.local.db.select({
       tableName,
       options,
     });
@@ -23,7 +26,7 @@ export class ControllerDb extends BeanBase {
 
   async get() {
     const { tableName, where } = this.ctx.request.body;
-    const res = await this.ctx.service.db.get({
+    const res = await this.scope.local.db.get({
       tableName,
       where,
     });
@@ -32,7 +35,7 @@ export class ControllerDb extends BeanBase {
 
   async count() {
     const { tableName, where } = this.ctx.request.body;
-    const res = await this.ctx.service.db.count({
+    const res = await this.scope.local.db.count({
       tableName,
       where,
     });
@@ -41,7 +44,7 @@ export class ControllerDb extends BeanBase {
 
   async update() {
     const { tableName, data, options } = this.ctx.request.body;
-    const res = await this.ctx.service.db.update({
+    const res = await this.scope.local.db.update({
       tableName,
       data,
       options,
@@ -51,7 +54,7 @@ export class ControllerDb extends BeanBase {
 
   async delete() {
     const { tableName, where } = this.ctx.request.body;
-    const res = await this.ctx.service.db.delete({
+    const res = await this.scope.local.db.delete({
       tableName,
       where,
     });
@@ -60,7 +63,7 @@ export class ControllerDb extends BeanBase {
 
   async query() {
     const { sql, params } = this.ctx.request.body;
-    const res = await this.ctx.service.db.query({
+    const res = await this.scope.local.db.query({
       sql,
       params,
     });
@@ -69,7 +72,7 @@ export class ControllerDb extends BeanBase {
 
   async queryOne() {
     const { sql, params } = this.ctx.request.body;
-    const res = await this.ctx.service.db.queryOne({
+    const res = await this.scope.local.db.queryOne({
       sql,
       params,
     });
@@ -77,7 +80,7 @@ export class ControllerDb extends BeanBase {
   }
 
   async iid() {
-    const res = await this.ctx.service.db.iid();
+    const res = await this.scope.local.db.iid();
     this.ctx.success(res);
   }
 }

@@ -3,9 +3,12 @@ import { ScopeModuleABase } from '../index.js';
 
 @Controller()
 export class ControllerTag extends BeanBase {
+  @Use()
+  scope: ScopeModuleABase;
+
   async list() {
     const atomClass = this.ctx.request.body.atomClass;
-    const list = await this.ctx.service.tag.list({
+    const list = await this.scope.local.tag.list({
       atomClass,
       options: this.ctx.request.body.options,
     });
@@ -16,7 +19,7 @@ export class ControllerTag extends BeanBase {
     // check demo
     this.ctx.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.ctx.service.tag.add({
+    const res = await this.scope.local.tag.add({
       atomClass,
       data: this.ctx.request.body.data,
     });
@@ -27,7 +30,7 @@ export class ControllerTag extends BeanBase {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.ctx.service.tag.save({
+    const res = await this.scope.local.tag.save({
       tagId: this.ctx.request.body.tagId,
       data: this.ctx.request.body.data,
     });
@@ -38,7 +41,7 @@ export class ControllerTag extends BeanBase {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.ctx.service.tag.delete({
+    const res = await this.scope.local.tag.delete({
       tagId: this.ctx.request.body.tagId,
     });
     this.ctx.success(res);

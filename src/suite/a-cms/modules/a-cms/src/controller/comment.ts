@@ -4,6 +4,9 @@ const utils = require('../common/utils.js');
 
 @Controller()
 export class ControllerComment extends BeanBase {
+  @Use()
+  scope: ScopeModuleACms;
+
   async all() {
     // atomClass
     const atomClass = utils.atomClass(this.ctx.request.body.atomClass);

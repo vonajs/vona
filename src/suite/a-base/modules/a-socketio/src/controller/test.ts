@@ -3,6 +3,9 @@ import { ScopeModuleASocketio } from '../index.js';
 
 @Controller()
 export class ControllerTest extends BeanBase {
+  @Use()
+  scope: ScopeModuleASocketio;
+
   async echo() {
     const echo = this.ctx.request.body.echo;
     // this.ctx.throw(403);
