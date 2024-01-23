@@ -69,22 +69,39 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/resource/index.ts`;
+  const file = `${module.root}/src/resource/scope.ts`;
   if (fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
   }
   const contentNew = `
-export * from './scope.js';
-export * from './aops.js';
-export * from './beans.js';
-export * from './models.js';
-export * from './locals.js';
-export * from './controllers.js';
+  import { BeanScopeBase, Scope, TypeModuleResource } from '@cabloy/core';
+  import { IModuleLocal } from './locals.js';
+  import { IModuleModel } from './models.js';
+  import { config, Errors, locales, constants } from '../config/index.js';
+  
+  @Scope()
+  export class ScopeModuleAInstance extends BeanScopeBase {}
+  
+  export interface ScopeModuleAInstance
+    extends TypeModuleResource<
+      IModuleLocal,
+      IModuleModel,
+      typeof config,
+      typeof Errors,
+      typeof locales,
+      typeof constants
+    > {}
+  
+  declare module '@cabloy/core' {
+    export interface IBeanScopeRecord {
+      'a-instance': ScopeModuleAInstance;
+    }
+  }  
     `;
   // console.log(contentNew);
-  await fse.outputFile(file, contentNew);
-  await processHelper.formatFile({ fileName: file });
+  // await fse.outputFile(file, contentNew);
+  // await processHelper.formatFile({ fileName: file });
   // // ------ controller
   // const fileControllers = `${module.root}/src/controllers.ts`;
   // if (!fse.existsSync(fileControllers)) {
