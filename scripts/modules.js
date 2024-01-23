@@ -70,14 +70,61 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 //
 
 async function _moduleHandle({ module, processHelper }) {
-  // ------ src/resource/aops.ts
-  const outFileName = `${module.root}/src/resource/aops.ts`;
-  if (!fse.existsSync(outFileName)) {
-    const typings = ``;
-    // console.log(typings);
-    await fse.outputFile(outFileName, typings);
-    await processHelper.formatFile({ fileName: outFileName });
+  // ------ controller
+  // if (!['test-party'].includes(module.info.relativeName)) return;
+  // console.log(module.info.relativeName);
+  const fileControllers = `${module.root}/src/controllers.ts`;
+  if (!fse.existsSync(fileControllers)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
   }
+  const controllers = (await fse.readFile(fileControllers)).toString();
+  const regexp = /const (.*) = .*\/controller\/(.*)\.js/g;
+  const matches = controllers.matchAll(regexp);
+  for (const match of matches) {
+    const classNameOld = match[1];
+    const classPath = match[2];
+    const classFile = `${module.root}/src/controller/${classPath}.ts`;
+    // console.log(classFile);
+    const classContent = (await fse.readFile(classFile)).toString();
+    const classNameNew = classPathToClassName('Controller', classPath);
+    const beanName = parseBeanName(classNameNew, 'Controller');
+    // console.log(classNameNew, classNameOld);
+    // 替换内容
+    const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) (\{[\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', module.info.relativeName);
+      return;
+    }
+    // console.log(contentMatches);
+    const contentNew = `
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ${getScopeModuleName(module.info.relativeName)} } from '../index.js';    
+${contentMatches[1]}
+@Controller()
+export class ${classNameNew} extends BeanBase ${contentMatches[3]}
+    `;
+    // console.log(contentNew);
+    await fse.outputFile(classFile, contentNew);
+    await processHelper.formatFile({ fileName: classFile });
+
+    // 别忘了替换routes中的controller name
+    const routesFile = `${module.root}/src/routes.ts`;
+    let routesContent = (await fse.readFile(routesFile)).toString();
+    routesContent = routesContent.replaceAll(`controller: '${classNameOld}'`, `controller: '${beanName}'`);
+    // console.log(routesContent, beanName);
+    await fse.outputFile(routesFile, contentNew);
+    await processHelper.formatFile({ fileName: routesFile });
+  }
+
+  // ------ src/resource/aops.ts
+  // const outFileName = `${module.root}/src/resource/aops.ts`;
+  // if (!fse.existsSync(outFileName)) {
+  //   const typings = ``;
+  //   // console.log(typings);
+  //   await fse.outputFile(outFileName, typings);
+  //   await processHelper.formatFile({ fileName: outFileName });
+  // }
   // ------ typings/core/index.d.ts
   // const outFileName = `${module.root}/typings/core/index.d.ts`;
   // if (!fse.existsSync(outFileName)) {
@@ -145,6 +192,39 @@ async function _moduleHandle({ module, processHelper }) {
   // await fse.remove(`${module.root}/dist`);
   // await _modulePublish({ module, processHelper });
   // await _moduleRemoveFront({ module });
+}
+
+function getScopeModuleName(moduleName) {
+  const parts2 = moduleName.split('-').map(name => {
+    return name.charAt(0).toUpperCase() + name.substring(1);
+  });
+  return `ScopeModule${parts2.join('')}`;
+}
+
+function classPathToClassName(prefix, classPath) {
+  const parts = classPath.split('/').map(part => {
+    const parts2 = part.split('-').map(name => {
+      return name.charAt(0).toUpperCase() + name.substring(1);
+    });
+    return parts2.join('');
+  });
+  return `${prefix}${parts.join('')}`;
+}
+
+function parseBeanName(beanClassName, scene) {
+  // scene
+  if (!scene) scene = 'bean';
+  scene = scene.toLowerCase().replace(/\./gi, '');
+  // bean class name
+  let name;
+  if (beanClassName.toLowerCase().startsWith(scene)) {
+    name = beanClassName.substring(scene.length);
+  } else {
+    name = beanClassName;
+  }
+  // lowerCase
+  name = name.charAt(0).toLowerCase() + name.substring(1);
+  return name;
 }
 
 async function _jstots({ module, processHelper }) {
