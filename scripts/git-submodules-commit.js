@@ -25,6 +25,7 @@ async function main() {
   const processHelper = new ProcessHelper(process.cwd());
   // loop
   for (const subModule of subModules) {
+    console.log('----------: ', subModule);
     const cwd = `${process.cwd()}/${subModule}`;
     await processHelper.gitCommit({ cwd, message });
   }

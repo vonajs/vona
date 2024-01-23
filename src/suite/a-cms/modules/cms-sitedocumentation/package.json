@@ -11,9 +11,23 @@
       "a-cms": "5.0.0"
     }
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "description": "",
-  "keywords": [
-    "Cabloy Module"
+  "files": [
+    "dist",
+    "static",
+    "typings"
   ],
   "scripts": {
     "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",
@@ -21,6 +35,9 @@
     "build:all": "npm run build:front && npm run build:backend",
     "preversion": "npm run build:all && git add ."
   },
+  "keywords": [
+    "Cabloy Module"
+  ],
   "author": "zhennann",
   "dependencies": {}
 }

@@ -90,9 +90,9 @@ async function _moduleHandle({ module, processHelper }) {
   if (pkgOld.license) pkgNew.license = pkgOld.license;
   if (pkgOld.dependencies) pkgNew.dependencies = pkgOld.dependencies;
   const pkgNewStr = JSON.stringify(pkgNew, null, 2);
-  if (!['a-base', 'test-party'].includes(module.info.relativeName)) {
-    return;
-  }
+  // if (!['a-base', 'test-party'].includes(module.info.relativeName)) {
+  //   return;
+  // }
   // console.log(pkgNewStr);
   const outFileName = `${module.root}/package.json`;
   await fse.outputFile(outFileName, pkgNewStr);
