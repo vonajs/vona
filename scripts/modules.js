@@ -93,21 +93,24 @@ async function _moduleHandle({ module, processHelper }) {
     // 替换内容
     const contentMatches = classContent.match(/([\s\S\n]*export class [\S]* extends BeanBase \{)([\s\S\n]*)/);
     if (!contentMatches) {
-      console.log('---- not matched: ', module.info.relativeName);
+      console.log('---- not matched: ', module.info.relativeName, classNameNew);
       return;
     }
     // console.log(contentMatches[2]);
     // console.log(contentMatches);
-    const contentNew = `
+    let contentNew = `
 ${contentMatches[1]}
 @Use()
-scope: ScopeModuleAInstance;
+scope: ${getScopeModuleName(module.info.relativeName)};
 
 ${contentMatches[2]}
     `;
-    console.log(contentNew);
-    // await fse.outputFile(classFile, contentNew);
-    // await processHelper.formatFile({ fileName: classFile });
+    // local
+    contentNew = contentNew.replaceAll('this.ctx.service', 'this.scope.local');
+    contentNew = contentNew.replaceAll('this.service', 'this.scope.local');
+    // console.log(contentNew);
+    await fse.outputFile(classFile, contentNew);
+    await processHelper.formatFile({ fileName: classFile });
   }
 }
 
