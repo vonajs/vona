@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // category
   { method: 'post', path: 'category/child', controller: 'category' }, // not set function right
   { method: 'post', path: 'category/children', controller: 'category' }, // not set function right
@@ -40,3 +42,5 @@ module.exports = [
   { method: 'post', path: 'category/relativeTop', controller: 'category' }, // not set function right
   { method: 'post', path: 'category/parseCategoryName', controller: 'category' }, // not set function right
 ];
+
+export default routes;

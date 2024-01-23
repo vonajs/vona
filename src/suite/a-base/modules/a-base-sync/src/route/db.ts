@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // db
   { method: 'post', path: 'db/insert', controller: 'db', middlewares: 'test' },
   { method: 'post', path: 'db/select', controller: 'db', middlewares: 'test' },
@@ -10,3 +12,5 @@ module.exports = [
   { method: 'post', path: 'db/queryOne', controller: 'db', middlewares: 'test' },
   { method: 'post', path: 'db/iid', controller: 'db', middlewares: 'test' },
 ];
+
+export default routes;

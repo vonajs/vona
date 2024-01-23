@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // atomState
   {
     method: 'post',
@@ -7,3 +9,5 @@ module.exports = [
     meta: { right: { type: 'atomClass' } },
   },
 ];
+
+export default routes;

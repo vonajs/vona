@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // tag
   { method: 'post', path: 'tag/list', controller: 'tag' },
   {
@@ -20,3 +22,5 @@ module.exports = [
     meta: { right: { type: 'resource', module: 'a-settings', name: 'settings' } },
   },
 ];
+
+export default routes;

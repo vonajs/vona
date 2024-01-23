@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // util
   {
     method: 'get',
@@ -9,3 +11,5 @@ module.exports = [
   },
   { method: 'post', path: 'util/performActions', controller: 'util' },
 ];
+
+export default routes;

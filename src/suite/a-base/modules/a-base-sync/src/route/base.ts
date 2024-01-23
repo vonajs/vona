@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // base
   { method: 'post', path: 'base/modules', controller: 'base' },
   { method: 'post', path: 'base/locales', controller: 'base' },
@@ -10,3 +12,5 @@ module.exports = [
   { method: 'get', path: 'base/qrcode', controller: 'base', meta: { auth: { enable: false } } },
   { method: 'post', path: 'base/themes', controller: 'base' },
 ];
+
+export default routes;

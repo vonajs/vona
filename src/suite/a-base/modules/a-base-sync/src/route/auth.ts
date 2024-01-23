@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // auth
   { method: 'post', path: 'auth/echo', controller: 'auth', meta: { auth: { enable: false } } },
   { method: 'post', path: 'auth/check', controller: 'auth', meta: { auth: { user: true } } },
@@ -12,3 +14,5 @@ module.exports = [
     },
   },
 ];
+
+export default routes;

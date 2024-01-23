@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // resource
   { method: 'post', path: 'resource/select', controller: 'resource' },
   { method: 'post', path: 'resource/read', controller: 'resource' },
@@ -22,3 +24,5 @@ module.exports = [
     meta: { right: { type: 'atom', action: 'authorize' } },
   },
 ];
+
+export default routes;

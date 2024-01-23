@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // atom
   { method: 'post', path: 'atom/preferredRoles', controller: 'atom' },
   { method: 'post', path: 'atom/preferredRole', controller: 'atom' },
@@ -143,3 +145,5 @@ module.exports = [
     meta: { right: { type: 'atom', action: 'moveDown' } },
   },
 ];
+
+export default routes;

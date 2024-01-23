@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+const routes: IModuleRoute[] = [
   // comment
   { method: 'post', path: 'comment/all', controller: 'comment' },
   {
@@ -50,3 +52,5 @@ module.exports = [
     },
   },
 ];
+
+export default routes;
