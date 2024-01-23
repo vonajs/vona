@@ -1,3 +1,4 @@
+import { BeanScopeBean } from './beanScopeBean.js';
 import { BeanScopeScene } from './beanScopeScene.js';
 import { BeanBase } from '../beanBase.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
@@ -7,13 +8,15 @@ const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleConfig = Symbol('BeanScopeBase#BeanModuleConfig');
 const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
+const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 
 export class BeanScopeBase extends BeanBase {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleConfig]: unknown;
   private [BeanModuleConstant]: unknown;
-  private __scenes: Record<string, any> = {};
+  private [BeanModuleBean]: BeanScopeBean;
+  private __scenes: Record<string, BeanScopeScene> = {};
 
   protected __get__(prop) {
     const moduleBelong = this.moduleBelong;
@@ -47,6 +50,10 @@ export class BeanScopeBase extends BeanBase {
     }
     // bean
     if (prop === 'bean') {
+      if (!this[BeanModuleBean]) {
+        this[BeanModuleBean] = this.bean._newBean(BeanScopeBean, moduleBelong);
+      }
+      return this[BeanModuleBean];
     }
     // scene
     if (!this.__scenes[prop]) {

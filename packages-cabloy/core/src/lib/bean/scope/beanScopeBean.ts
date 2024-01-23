@@ -3,7 +3,7 @@ import { BeanSimple } from '../beanSimple.js';
 const BeanModuleScope = Symbol('BeanScopeScene#ModuleScope');
 const BeanModuleScene = Symbol('BeanScopeScene#BeanModuleScene');
 
-export class BeanScopeScene extends BeanSimple {
+export class BeanScopeBean extends BeanSimple {
   private [BeanModuleScope]: string;
   private [BeanModuleScene]: string;
   private __instances: Record<string, any> = {};
