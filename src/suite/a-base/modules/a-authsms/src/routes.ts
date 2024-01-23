@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+export const routes: IModuleRoute[] = [
   // captcha
   { method: 'post', path: 'captcha/sendCode', controller: 'captcha' },
   // auth

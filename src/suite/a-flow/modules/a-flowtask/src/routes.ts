@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+export const routes: IModuleRoute[] = [
   // flow
   { method: 'post', path: 'flow/data', controller: 'flow' },
   // task

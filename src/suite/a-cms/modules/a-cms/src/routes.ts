@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+export const routes: IModuleRoute[] = [
   // article
   { method: 'post', path: 'article/list', controller: 'article' },
   { method: 'post', path: 'article/attachments', controller: 'article' },

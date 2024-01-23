@@ -1,1 +1,3 @@
-module.exports = [{ method: 'post', path: 'dict/getDict', controller: 'dict' }];
+import { IModuleRoute } from '@cabloy/core';
+
+export const routes: IModuleRoute[] = [{ method: 'post', path: 'dict/getDict', controller: 'dict' }];

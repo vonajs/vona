@@ -1,4 +1,6 @@
-module.exports = [
+import { IModuleRoute } from '@cabloy/core';
+
+export const routes: IModuleRoute[] = [
   // file
   { method: 'post', path: 'file/upload', controller: 'file', meta: { auth: { user: true } } },
   { method: 'post', path: 'file/uploadDataUrl', controller: 'file', meta: { auth: { user: true } } },
