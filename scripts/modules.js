@@ -91,6 +91,48 @@ async function _moduleHandle({ module, processHelper }) {
     const beanName = parseBeanName(classNameNew, 'Controller');
     // console.log(classNameNew, classNameOld);
     // 替换内容
+    const contentMatches = classContent.match(/([\s\S\n]*export class [\S]* extends BeanBase \{)([\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', module.info.relativeName);
+      return;
+    }
+    // console.log(contentMatches[2]);
+    // console.log(contentMatches);
+    const contentNew = `
+${contentMatches[1]}
+@Use()
+scope: ScopeModuleAInstance;
+
+${contentMatches[2]}
+    `;
+    console.log(contentNew);
+    // await fse.outputFile(classFile, contentNew);
+    // await processHelper.formatFile({ fileName: classFile });
+  }
+}
+
+async function _moduleHandle_controller({ module, processHelper }) {
+  // ------ controller
+  // if (!['test-party'].includes(module.info.relativeName)) return;
+  // console.log(module.info.relativeName);
+  const fileControllers = `${module.root}/src/controllers.ts`;
+  if (!fse.existsSync(fileControllers)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const controllers = (await fse.readFile(fileControllers)).toString();
+  const regexp = /const (.*) = .*\/controller\/(.*)\.js/g;
+  const matches = controllers.matchAll(regexp);
+  for (const match of matches) {
+    const classNameOld = match[1];
+    const classPath = match[2];
+    const classFile = `${module.root}/src/controller/${classPath}.ts`;
+    // console.log(classFile);
+    const classContent = (await fse.readFile(classFile)).toString();
+    const classNameNew = classPathToClassName('Controller', classPath);
+    const beanName = parseBeanName(classNameNew, 'Controller');
+    // console.log(classNameNew, classNameOld);
+    // 替换内容
     const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) (\{[\s\S\n]*)/);
     if (!contentMatches) {
       console.log('---- not matched: ', module.info.relativeName);
