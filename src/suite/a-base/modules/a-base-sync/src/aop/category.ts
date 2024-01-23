@@ -1,9 +1,12 @@
-// const moduleInfo = module.info;
+import { Aop, BeanBase } from '@cabloy/core';
+
 const __atomClassApp = {
   module: 'a-app',
   atomClassName: 'app',
 };
-module.exports = class localAop {
+
+@Aop({ match: 'category' })
+export class AopCategory extends BeanBase {
   async children(context, next) {
     // next
     await next();
@@ -75,4 +78,4 @@ module.exports = class localAop {
     }
     return true;
   }
-};
+}

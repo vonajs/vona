@@ -58,7 +58,7 @@ export interface IDecoratorModelOptions {
 
 export interface IDecoratorAopOptions {
   name?: string;
-  match: string;
+  match: string | RegExp | (string | RegExp)[];
 }
 
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
