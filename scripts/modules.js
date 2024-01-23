@@ -75,8 +75,9 @@ async function _moduleHandle({ module, processHelper }) {
   if (!fse.existsSync(outFileName)) {
     const typings = `export const __ThisModule__ = '${module.info.relativeName}';
     export type __ThisModuleType__ = typeof __ThisModule__;`;
-    // await fse.outputFile(outFileName, typings);
-    // await processHelper.formatFile({ fileName: outFileName });
+    // console.log(typings);
+    await fse.outputFile(outFileName, typings);
+    await processHelper.formatFile({ fileName: outFileName });
   }
   // ------ typings/core/index.d.ts
   // const outFileName = `${module.root}/typings/core/index.d.ts`;
