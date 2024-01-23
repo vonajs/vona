@@ -1,3 +1,4 @@
+import { IModuleMiddlewareGate } from '../../bean/index.js';
 import { IModelOptions } from '../../bean/resource/model/type.js';
 import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
@@ -27,6 +28,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
   moduleBelong?: string;
+  gate?: IModuleMiddlewareGate;
   options?: unknown;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
@@ -59,6 +61,7 @@ export interface IDecoratorModelOptions {
 export interface IDecoratorAopOptions {
   name?: string;
   match: string | RegExp | (string | RegExp)[];
+  gate?: IModuleMiddlewareGate;
 }
 
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
