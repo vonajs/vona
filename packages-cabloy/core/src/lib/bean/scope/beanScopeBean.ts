@@ -1,23 +1,20 @@
 import { BeanSimple } from '../beanSimple.js';
 
 const BeanModuleScope = Symbol('BeanScopeScene#ModuleScope');
-const BeanModuleScene = Symbol('BeanScopeScene#BeanModuleScene');
 
 export class BeanScopeBean extends BeanSimple {
   private [BeanModuleScope]: string;
-  private [BeanModuleScene]: string;
   private __instances: Record<string, any> = {};
 
-  constructor(moduleScope, scene) {
+  constructor(moduleScope) {
     super();
     this[BeanModuleScope] = moduleScope;
-    this[BeanModuleScene] = scene;
   }
 
   protected __get__(prop) {
     if (!this.__instances[prop]) {
-      const beanFullName = `${this[BeanModuleScope]}.${this[BeanModuleScene]}.${prop}`;
-      this.__instances[prop] = (<any>this.bean)._injectBeanInstanceProp(beanFullName);
+      const beanFullName = prop;
+      this.__instances[prop] = (<any>this.bean)._injectBeanInstanceProp(beanFullName, this[BeanModuleScope]);
     }
     return this.__instances[prop];
   }
