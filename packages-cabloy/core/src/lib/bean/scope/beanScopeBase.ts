@@ -3,6 +3,7 @@ import { BeanScopeScene } from './beanScopeScene.js';
 import { BeanBase } from '../beanBase.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
+import { IModule } from '@cabloy/module-info';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
@@ -17,6 +18,10 @@ export class BeanScopeBase extends BeanBase {
   private [BeanModuleConstant]: unknown;
   private [BeanModuleBean]: BeanScopeBean;
   private __scenes: Record<string, BeanScopeScene> = {};
+
+  get module(): IModule {
+    return this.app.meta.modules[this.moduleBelong];
+  }
 
   protected __get__(prop) {
     const moduleBelong = this.moduleBelong;
