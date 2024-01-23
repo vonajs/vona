@@ -68,8 +68,19 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
-
 async function _moduleHandle({ module, processHelper }) {
+  // ------ controller
+  const fileControllers = `${module.root}/src/controllers.ts`;
+  if (!fse.existsSync(fileControllers)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  // move
+  const pathTo = `${module.root}/src/resource/controllers.ts`;
+  await fse.move(fileControllers, pathTo);
+}
+
+async function _moduleHandle_controller2({ module, processHelper }) {
   // ------ controller
   // if (!['test-party'].includes(module.info.relativeName)) return;
   // console.log(module.info.relativeName);
