@@ -1,18 +1,10 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModule } from '../index.js';
-import { ScopeModule as ScopeModuleVersion } from 'cabloy-module-api-a-version';
+import { ScopeModuleAInstance } from '../index.js';
 
 @Controller()
 export class ControllerInstance extends BeanBase {
   @Use()
-  scope: ScopeModule;
-
-  @Use()
-  scopesss: ScopeModuleVersion;
-
-  get scopeVersion() {
-    return this.bean.scope('a-version');
-  }
+  scope: ScopeModuleAInstance;
 
   async item() {
     // check demo
