@@ -4,11 +4,14 @@ export interface IModuleRoute {
   controller: string;
   action?: string;
   middlewares?: string | string[];
-  meta: {
+  meta?: {
     right?:
       | { type: 'atom'; atomClass?: string; action: string; stage?: string; checkFlow?: boolean }
       | { type: 'atomClass' }
       | { type: 'resource'; module?: string; name?: string };
-    validate?: { validator?: string };
+    validate?: { validator?: string; schema?: string };
+    auth?: { user?: boolean; enable?: boolean };
+    captchaVerify?: { scene: { name: string } };
+    authOpen?: { enableAuthOpen?: boolean; onlyAuthOpen?: boolean };
   };
 }
