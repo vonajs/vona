@@ -60,43 +60,50 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  // package.json
+  // ------ typings/core/index.d.ts
+  const outFileName = `${module.root}/typings/core/index.d.ts`;
+  if (!fse.existsSync(outFileName)) {
+    const typings = '';
+    await fse.outputFile(outFileName, typings);
+    await processHelper.formatFile({ fileName: outFileName });
+  }
+  // ------ package.json
   // delete require.cache[require.resolve(module.pkg)];
   // const pkgOld =  require(module.pkg);
-  let pkgOld = fse.readFileSync(module.pkg);
-  pkgOld = JSON.parse(pkgOld);
-  const pkgNew = {};
-  pkgNew.name = pkgOld.name;
-  pkgNew.version = pkgOld.version;
-  if (pkgOld.title) pkgNew.title = pkgOld.title;
-  pkgNew.eggBornModule = pkgOld.eggBornModule;
-  pkgNew.type = 'module';
-  pkgNew.exports = {
-    '.': {
-      types: ['./src/index.ts', './dist/index.d.ts'],
-      import: './dist/index.js',
-      default: './src/index.ts',
-    },
-    './package.json': './package.json',
-  };
-  pkgNew.description = pkgOld.description || '';
-  pkgNew.files = ['dist', 'static', 'typings']; // no need 'utils' 'test', 'cms', 'docs'
-  if (pkgOld.eggBornModule.cms) {
-    pkgNew.files.push('cms');
-  }
-  pkgNew.scripts = pkgOld.scripts;
-  if (pkgOld.keywords) pkgNew.keywords = pkgOld.keywords;
-  if (pkgOld.author) pkgNew.author = pkgOld.author;
-  if (pkgOld.license) pkgNew.license = pkgOld.license;
-  if (pkgOld.dependencies) pkgNew.dependencies = pkgOld.dependencies;
-  const pkgNewStr = JSON.stringify(pkgNew, null, 2);
-  // if (!['a-base', 'test-party'].includes(module.info.relativeName)) {
-  //   return;
+  // let pkgOld = fse.readFileSync(module.pkg);
+  // pkgOld = JSON.parse(pkgOld);
+  // const pkgNew = {};
+  // pkgNew.name = pkgOld.name;
+  // pkgNew.version = pkgOld.version;
+  // if (pkgOld.title) pkgNew.title = pkgOld.title;
+  // pkgNew.eggBornModule = pkgOld.eggBornModule;
+  // pkgNew.type = 'module';
+  // pkgNew.exports = {
+  //   '.': {
+  //     types: ['./src/index.ts', './dist/index.d.ts'],
+  //     import: './dist/index.js',
+  //     default: './src/index.ts',
+  //   },
+  //   './package.json': './package.json',
+  // };
+  // pkgNew.description = pkgOld.description || '';
+  // pkgNew.files = ['dist', 'static', 'typings']; // no need 'utils' 'test', 'cms', 'docs'
+  // if (pkgOld.eggBornModule.cms) {
+  //   pkgNew.files.push('cms');
   // }
-  // console.log(pkgNewStr);
-  const outFileName = `${module.root}/package.json`;
-  await fse.outputFile(outFileName, pkgNewStr);
-  await processHelper.formatFile({ fileName: outFileName });
+  // pkgNew.scripts = pkgOld.scripts;
+  // if (pkgOld.keywords) pkgNew.keywords = pkgOld.keywords;
+  // if (pkgOld.author) pkgNew.author = pkgOld.author;
+  // if (pkgOld.license) pkgNew.license = pkgOld.license;
+  // if (pkgOld.dependencies) pkgNew.dependencies = pkgOld.dependencies;
+  // const pkgNewStr = JSON.stringify(pkgNew, null, 2);
+  // // if (!['a-base', 'test-party'].includes(module.info.relativeName)) {
+  // //   return;
+  // // }
+  // // console.log(pkgNewStr);
+  // const outFileName = `${module.root}/package.json`;
+  // await fse.outputFile(outFileName, pkgNewStr);
+  // await processHelper.formatFile({ fileName: outFileName });
 
   // if (!module.suite) {
   //   console.log(`{
