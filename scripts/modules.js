@@ -80,7 +80,10 @@ async function _moduleHandle({ module, processHelper }) {
     './package.json': './package.json',
   };
   pkgNew.description = pkgOld.description || '';
-  pkgNew.files = ['dist', 'test', 'static', 'typings', 'cms', 'docs']; // no need 'utils'
+  pkgNew.files = ['dist', 'static', 'typings']; // no need 'utils' 'test', 'cms', 'docs'
+  if (pkgOld.eggBornModule.cms) {
+    pkgNew.files.push('cms');
+  }
   pkgNew.scripts = pkgOld.scripts;
   if (pkgOld.keywords) pkgNew.keywords = pkgOld.keywords;
   if (pkgOld.author) pkgNew.author = pkgOld.author;
