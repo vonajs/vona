@@ -48,8 +48,8 @@ export class BeanScopeBase extends BeanBase {
       }
       return this[BeanModuleConstant];
     }
-    // bean
-    if (prop === 'bean') {
+    // _bean
+    if (prop === '_bean') {
       if (!this[BeanModuleBean]) {
         this[BeanModuleBean] = this.bean._newBean(BeanScopeBean, moduleBelong);
       }

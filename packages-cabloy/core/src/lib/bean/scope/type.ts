@@ -3,6 +3,11 @@ import { TypeModuleConfig } from '../resource/config/type.js';
 import { TypeModuleErrors } from '../resource/error/type.js';
 import { TypeModuleLocales } from '../resource/locale/type.js';
 import { TypeModuleConstants } from '../resource/constant/type.js';
+import { IBeanRecord } from '../type.js';
+
+type TypeModuleBean = {
+  [property in keyof IBeanRecord]: IBeanRecord[property];
+};
 
 export type TypeModuleResource<
   LOCAL,
@@ -12,6 +17,7 @@ export type TypeModuleResource<
   LOCALES extends { 'zh-cn': object },
   CONSTANTS = object,
 > = {
+  _bean: TypeModuleBean;
   local: LOCAL;
   model: MODEL;
   config: TypeModuleConfig<CONFIG>;
