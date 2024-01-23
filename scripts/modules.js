@@ -3,7 +3,6 @@ const fs = require('node:fs/promises');
 const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
 const eggBornUtils = require('egg-born-utils');
-const { stringify } = require('json5');
 const argv = require('./lib/parse_argv')('sync');
 
 (async function () {
@@ -59,14 +58,18 @@ async function _suiteHandle({ modules, suite, processHelper }) {
   // console.log(pkg.name);
 }
 
+// * 将require替换为import
+// const (\S*) = require\((\S*)\);
+// import $1 from $2;
+
 async function _moduleHandle({ module, processHelper }) {
   // ------ typings/core/index.d.ts
-  const outFileName = `${module.root}/typings/core/index.d.ts`;
-  if (!fse.existsSync(outFileName)) {
-    const typings = '';
-    await fse.outputFile(outFileName, typings);
-    await processHelper.formatFile({ fileName: outFileName });
-  }
+  // const outFileName = `${module.root}/typings/core/index.d.ts`;
+  // if (!fse.existsSync(outFileName)) {
+  //   const typings = '';
+  //   await fse.outputFile(outFileName, typings);
+  //   await processHelper.formatFile({ fileName: outFileName });
+  // }
   // ------ package.json
   // delete require.cache[require.resolve(module.pkg)];
   // const pkgOld =  require(module.pkg);
@@ -104,7 +107,6 @@ async function _moduleHandle({ module, processHelper }) {
   // const outFileName = `${module.root}/package.json`;
   // await fse.outputFile(outFileName, pkgNewStr);
   // await processHelper.formatFile({ fileName: outFileName });
-
   // if (!module.suite) {
   //   console.log(`{
   //   "path": "src/module/${module.package.name.substring('cabloy-module-api-'.length)}"
