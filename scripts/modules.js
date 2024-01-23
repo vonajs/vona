@@ -70,11 +70,10 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 //
 
 async function _moduleHandle({ module, processHelper }) {
-  // ------ src/resource/this.ts
-  const outFileName = `${module.root}/src/resource/this.ts`;
+  // ------ src/resource/aops.ts
+  const outFileName = `${module.root}/src/resource/aops.ts`;
   if (!fse.existsSync(outFileName)) {
-    const typings = `export const __ThisModule__ = '${module.info.relativeName}';
-    export type __ThisModuleType__ = typeof __ThisModule__;`;
+    const typings = ``;
     // console.log(typings);
     await fse.outputFile(outFileName, typings);
     await processHelper.formatFile({ fileName: outFileName });
