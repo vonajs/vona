@@ -7,12 +7,15 @@ const subModules = [
   'src/module/bz-login',
   'src/module/test-flow',
   'src/module/test-note',
+  'src/module/test-userpro-monkey',
   'src/suite/a-dingtalk',
   'src/suite/a-paypal',
   'src/suite/a-wechat',
   'src/suite/a-wxwork',
-  'src/suite/test-party',
   'src/suite/bz-diancai',
+  'src/suite/bz-study',
+  'src/suite/cabloy-store',
+  'src/suite/test-party',
 ];
 
 (async function () {
