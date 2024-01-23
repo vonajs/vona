@@ -23,7 +23,7 @@ export interface IModuleMiddlewareAuthOpen {
 }
 
 export interface IModuleMiddlewareGate {
-  env?: string;
+  env?: string | string[];
 }
 
 export interface IModuleRouteMeta {

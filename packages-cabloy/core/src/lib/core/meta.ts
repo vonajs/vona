@@ -85,6 +85,7 @@ export class AppMeta extends BeanSimple {
 
     // resource
     this.resource = appResource;
+    (<any>this.resource).app = this.app;
 
     // metadata
     this.metadata = appMetadata;

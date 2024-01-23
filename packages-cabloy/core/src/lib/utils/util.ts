@@ -9,6 +9,7 @@ import Redlock from 'redlock';
 import { Request } from 'egg';
 import { CabloyContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { IModuleMiddlewareGate } from '../bean/index.js';
 
 export class AppUtil extends BeanSimple {
   instanceStarted(subdomain) {
@@ -387,6 +388,24 @@ export class AppUtil extends BeanSimple {
     return console.warn(message);
   }
 
+  checkGate(gate?: IModuleMiddlewareGate) {
+    // check none
+    if (!gate) return true;
+    // check env
+    if (!this._checkGateEnv(gate.env)) return false;
+    // default
+    return true;
+  }
+
+  _checkGateEnv(env?: IModuleMiddlewareGate['env']) {
+    // check none
+    if (!env) return true;
+    if (!Array.isArray(env)) env = env.split(',');
+    const bingo = env.some(item => this.app.config.env === item);
+    if (!bingo) return false;
+    return true;
+  }
+
   requireDynamic(file) {
     if (!file) throw new Error('file should not empty');
     let instance = require(file);
@@ -401,7 +420,7 @@ export class AppUtil extends BeanSimple {
     return instance;
   }
 
-  _requireDynamic_getFileTime(file) {
+  private _requireDynamic_getFileTime(file) {
     if (!path.isAbsolute(file)) return null;
     const exists = fse.pathExistsSync(file);
     if (!exists) return null;

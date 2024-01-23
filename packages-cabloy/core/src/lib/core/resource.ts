@@ -2,11 +2,12 @@ import is from 'is-type-of';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
+import { BeanSimple } from '../bean/beanSimple.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
 
-export class AppResource {
+export class AppResource extends BeanSimple {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   aops: Record<string, IDecoratorBeanOptionsBase> = {};
 
@@ -44,6 +45,8 @@ export class AppResource {
       if (key === beanOptions.beanFullName) continue;
       // // check if match aop
       // if (beanOptions.aop && !aop.matchAop) continue;
+      // gate
+      if (!this.app.meta.util.checkGate(aop.gate)) continue;
       // match
       if (__aopMatch(aop.aopMatch, beanOptions.beanFullName)) {
         aops.push(key);

@@ -14,6 +14,7 @@ export function Aop<T>(options: IDecoratorAopOptions): ClassDecorator {
       beanClass: target as unknown as Constructable<T>,
       aop: true,
       aopMatch: options.match,
+      gate: options.gate,
     });
   };
 }
