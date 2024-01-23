@@ -3,13 +3,13 @@ import { IModuleLocal } from './locals.js';
 import { config, Errors, locales, constants } from '../config/index.js';
 
 @Scope()
-export class ScopeModule extends BeanScopeBase {}
+export class ScopeModuleAVersion extends BeanScopeBase {}
 
-export interface ScopeModule
+export interface ScopeModuleAVersion
   extends TypeModuleResource<IModuleLocal, null, typeof config, typeof Errors, typeof locales, typeof constants> {}
 
 declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
-    'a-version': ScopeModule;
+    'a-version': ScopeModuleAVersion;
   }
 }

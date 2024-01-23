@@ -4,13 +4,13 @@ import { IModuleModel } from './models.js';
 import { config, Errors, locales } from '../config/index.js';
 
 @Scope()
-export class ScopeModule extends BeanScopeBase {}
+export class ScopeModuleAInstance extends BeanScopeBase {}
 
-export interface ScopeModule
+export interface ScopeModuleAInstance
   extends TypeModuleResource<IModuleLocal, IModuleModel, typeof config, typeof Errors, typeof locales> {}
 
 declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
-    'a-instance': ScopeModule;
+    'a-instance': ScopeModuleAInstance;
   }
 }

@@ -1,6 +1,8 @@
 import { BeanBase, Local, Use } from '@cabloy/core';
 import { LocalA } from './a.js';
-import { ScopeModule } from 'cabloy-module-api-a-instance';
+import { ScopeModuleAInstance } from 'cabloy-module-api-a-instance';
+
+// import { ScopeModule } from 'cabloy-module-api-a-instance';
 
 @Local()
 export class LocalB extends BeanBase {
@@ -8,7 +10,7 @@ export class LocalB extends BeanBase {
   localA: LocalA;
 
   @Use()
-  scopeInstance: ScopeModule;
+  scopeInstance: ScopeModuleAInstance;
 
   async printName() {
     // const modelInstance = this.scopeInstance.model.instance;
