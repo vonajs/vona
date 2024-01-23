@@ -1,13 +1,5 @@
-const article = require('./controller/article.js');
-const render = require('./controller/render.js');
-const site = require('./controller/site.js');
-const comment = require('./controller/comment.js');
-const rss = require('./controller/rss.js');
-
-module.exports = {
-  article,
-  render,
-  site,
-  comment,
-  rss,
-};
+export * from '../controller/article.js';
+export * from '../controller/render.js';
+export * from '../controller/site.js';
+export * from '../controller/comment.js';
+export * from '../controller/rss.js';

@@ -1,5 +1,1 @@
-const progress = require('./controller/progress.js');
-
-module.exports = {
-  progress,
-};
+export * from '../controller/progress.js';

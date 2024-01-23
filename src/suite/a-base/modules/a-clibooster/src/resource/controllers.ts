@@ -1,5 +1,1 @@
-const tools = require('./controller/tools.js');
-
-module.exports = {
-  tools,
-};
+export * from '../controller/tools.js';

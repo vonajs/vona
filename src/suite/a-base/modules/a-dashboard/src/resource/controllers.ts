@@ -1,5 +1,1 @@
-const dashboard = require('./controller/dashboard.js');
-
-module.exports = {
-  dashboard,
-};
+export * from '../controller/dashboard.js';

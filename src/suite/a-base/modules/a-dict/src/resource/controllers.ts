@@ -1,5 +1,1 @@
-const dict = require('./controller/dict.js');
-
-module.exports = {
-  dict,
-};
+export * from '../controller/dict.js';

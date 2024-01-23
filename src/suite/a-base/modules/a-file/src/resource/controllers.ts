@@ -1,5 +1,1 @@
-const file = require('./controller/file.js');
-
-module.exports = {
-  file,
-};
+export * from '../controller/file.js';

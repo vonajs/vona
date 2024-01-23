@@ -1,5 +1,1 @@
-const captcha = require('./controller/captcha.js');
-
-module.exports = {
-  captcha,
-};
+export * from '../controller/captcha.js';

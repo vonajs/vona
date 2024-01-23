@@ -1,7 +1,2 @@
-const auth = require('./controller/auth.js');
-const authOpen = require('./controller/authOpen.js');
-
-module.exports = {
-  auth,
-  authOpen,
-};
+export * from '../controller/auth.js';
+export * from '../controller/authOpen.js';

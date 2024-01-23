@@ -1,5 +1,1 @@
-const share = require('./controller/share.js');
-
-module.exports = {
-  share,
-};
+export * from '../controller/share.js';

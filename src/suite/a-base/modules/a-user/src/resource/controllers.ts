@@ -1,7 +1,2 @@
-const user = require('./controller/user.js');
-const public2 = require('./controller/public.js');
-
-module.exports = {
-  user,
-  public: public2,
-};
+export * from '../controller/user.js';
+export * from '../controller/public.js';

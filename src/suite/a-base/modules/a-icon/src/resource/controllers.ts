@@ -1,5 +1,1 @@
-const icon = require('./controller/icon.js');
-
-module.exports = {
-  icon,
-};
+export * from '../controller/icon.js';

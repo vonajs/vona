@@ -1,3 +1,1 @@
-const scene = require('./controller/scene.js');
-
-module.exports = { scene };
+export * from '../controller/scene.js';

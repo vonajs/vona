@@ -1,5 +1,3 @@
-const smsProvider = require('./controller/smsProvider.js');
-const captcha = require('./controller/captcha.js');
-const auth = require('./controller/auth.js');
-
-module.exports = { smsProvider, captcha, auth };
+export * from '../controller/smsProvider.js';
+export * from '../controller/captcha.js';
+export * from '../controller/auth.js';

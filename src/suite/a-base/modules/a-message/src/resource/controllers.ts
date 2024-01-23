@@ -1,5 +1,1 @@
-const message = require('./controller/message.js');
-
-module.exports = {
-  message,
-};
+export * from '../controller/message.js';

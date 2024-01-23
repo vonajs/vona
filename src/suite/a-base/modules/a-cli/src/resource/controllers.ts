@@ -1,5 +1,1 @@
-const cli = require('./controller/cli.js');
-
-module.exports = {
-  cli,
-};
+export * from '../controller/cli.js';

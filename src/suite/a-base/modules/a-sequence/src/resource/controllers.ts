@@ -1,5 +1,1 @@
-const sequence = require('./controller/sequence.js');
-
-module.exports = {
-  sequence,
-};
+export * from '../controller/sequence.js';

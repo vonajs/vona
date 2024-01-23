@@ -1,5 +1,1 @@
-const stats = require('./controller/stats.js');
-
-module.exports = {
-  stats,
-};
+export * from '../controller/stats.js';

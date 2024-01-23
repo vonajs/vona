@@ -1,7 +1,2 @@
-const flow = require('./controller/flow.js');
-const flowTask = require('./controller/flowTask.js');
-
-module.exports = {
-  flow,
-  flowTask,
-};
+export * from '../controller/flow.js';
+export * from '../controller/flowTask.js';

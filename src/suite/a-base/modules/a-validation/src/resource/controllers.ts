@@ -1,5 +1,1 @@
-const validation = require('./controller/validation.js');
-
-module.exports = {
-  validation,
-};
+export * from '../controller/validation.js';

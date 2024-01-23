@@ -1,5 +1,1 @@
-const util = require('./controller/util.js');
-
-module.exports = {
-  util,
-};
+export * from '../controller/util.js';

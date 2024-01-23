@@ -1,2 +1,1 @@
-const resource = require('./controller/resource.js');
-module.exports = { resource };
+export * from '../controller/resource.js';

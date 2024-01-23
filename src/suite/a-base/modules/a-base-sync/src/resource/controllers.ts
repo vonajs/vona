@@ -1,34 +1,15 @@
-const atom = require('./controller/atom.js');
-const atomAction = require('./controller/atomAction.js');
-const atomClass = require('./controller/atomClass.js');
-const atomState = require('./controller/atomState.js');
-const auth = require('./controller/auth.js');
-const base = require('./controller/base.js');
-const comment = require('./controller/comment.js');
-const resource = require('./controller/resource.js');
-const jwt = require('./controller/jwt.js');
-const layoutConfig = require('./controller/layoutConfig.js');
-const user = require('./controller/user.js');
-const category = require('./controller/category.js');
-const tag = require('./controller/tag.js');
-const util = require('./controller/util.js');
-const db = require('./controller/db.js');
-
-const controllers = {
-  atom,
-  atomAction,
-  atomClass,
-  atomState,
-  auth,
-  base,
-  comment,
-  resource,
-  jwt,
-  layoutConfig,
-  user,
-  category,
-  tag,
-  util,
-  db,
-};
-module.exports = controllers;
+export * from '../controller/atom.js';
+export * from '../controller/atomAction.js';
+export * from '../controller/atomClass.js';
+export * from '../controller/atomState.js';
+export * from '../controller/auth.js';
+export * from '../controller/base.js';
+export * from '../controller/comment.js';
+export * from '../controller/resource.js';
+export * from '../controller/jwt.js';
+export * from '../controller/layoutConfig.js';
+export * from '../controller/user.js';
+export * from '../controller/category.js';
+export * from '../controller/tag.js';
+export * from '../controller/util.js';
+export * from '../controller/db.js';

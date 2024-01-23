@@ -1,5 +1,1 @@
-const settings = require('./controller/settings.js');
-
-module.exports = {
-  settings,
-};
+export * from '../controller/settings.js';
