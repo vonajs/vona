@@ -1,12 +1,38 @@
+export type TypeModuleMiddlewareRight =
+  | { type: 'atom'; atomClass?: string; action: string; stage?: string; checkFlow?: boolean }
+  | { type: 'atomClass' }
+  | { type: 'resource'; module?: string; name?: string };
+
+export interface IModuleMiddlewareValidate {
+  validator?: string;
+  schema?: string;
+}
+
+export interface IModuleMiddlewareAuth {
+  user?: boolean;
+  enable?: boolean;
+}
+
+export interface IModuleMiddlewareCaptchaVerify {
+  scene: { name: string };
+}
+
+export interface IModuleMiddlewareAuthOpen {
+  enableAuthOpen?: boolean;
+  onlyAuthOpen?: boolean;
+}
+
+export interface IModuleMiddlewareGate {
+  env?: string;
+}
+
 export interface IModuleRouteMeta {
-  right?:
-    | { type: 'atom'; atomClass?: string; action: string; stage?: string; checkFlow?: boolean }
-    | { type: 'atomClass' }
-    | { type: 'resource'; module?: string; name?: string };
-  validate?: { validator?: string; schema?: string };
-  auth?: { user?: boolean; enable?: boolean };
-  captchaVerify?: { scene: { name: string } };
-  authOpen?: { enableAuthOpen?: boolean; onlyAuthOpen?: boolean };
+  right?: TypeModuleMiddlewareRight;
+  validate?: IModuleMiddlewareValidate;
+  auth?: IModuleMiddlewareAuth;
+  captchaVerify?: IModuleMiddlewareCaptchaVerify;
+  authOpen?: IModuleMiddlewareAuthOpen;
+  gate?: IModuleMiddlewareGate;
 }
 export interface IModuleRoute {
   method: 'get' | 'post';
