@@ -82,9 +82,9 @@ export * from './models.js';
 export * from './locals.js';
 export * from './controllers.js';
     `;
-  console.log(contentNew);
-  //   await fse.outputFile(file, contentNew);
-  //   await processHelper.formatFile({ fileName: file });
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
   // // ------ controller
   // const fileControllers = `${module.root}/src/controllers.ts`;
   // if (!fse.existsSync(fileControllers)) {
