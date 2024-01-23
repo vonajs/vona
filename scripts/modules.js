@@ -74,6 +74,7 @@ async function _moduleHandle({ module, processHelper }) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
   }
+  const scopeModuleName = getScopeModuleName(module.info.relativeName);
   const contentNew = `
   import { BeanScopeBase, Scope, TypeModuleResource } from '@cabloy/core';
   import { IModuleLocal } from './locals.js';
@@ -81,9 +82,9 @@ async function _moduleHandle({ module, processHelper }) {
   import { config, Errors, locales, constants } from '../config/index.js';
   
   @Scope()
-  export class ScopeModuleAInstance extends BeanScopeBase {}
+  export class ${scopeModuleName} extends BeanScopeBase {}
   
-  export interface ScopeModuleAInstance
+  export interface ${scopeModuleName}
     extends TypeModuleResource<
       IModuleLocal,
       IModuleModel,
@@ -95,13 +96,13 @@ async function _moduleHandle({ module, processHelper }) {
   
   declare module '@cabloy/core' {
     export interface IBeanScopeRecord {
-      'a-instance': ScopeModuleAInstance;
+      '${module.info.relativeName}': ${scopeModuleName};
     }
   }  
     `;
   // console.log(contentNew);
-  // await fse.outputFile(file, contentNew);
-  // await processHelper.formatFile({ fileName: file });
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
   // // ------ controller
   // const fileControllers = `${module.root}/src/controllers.ts`;
   // if (!fse.existsSync(fileControllers)) {
