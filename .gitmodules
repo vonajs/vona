@@ -19,6 +19,9 @@
 [submodule "src/suite/a-wxwork"]
 	path = src/suite/a-wxwork
 	url = git@github.com:cabloy/cabloy-suite-api-a-wxwork
+[submodule "src/suite/cabloy-store"]
+	path = src/suite/test-party
+	url = git@github.com:cabloy/cabloy-suite-api-cabloy-store
 [submodule "src/suite/test-party"]
 	path = src/suite/test-party
 	url = git@github.com:cabloy/cabloy-suite-api-test-party
