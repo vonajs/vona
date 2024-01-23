@@ -5,10 +5,14 @@ import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
+const BeanModuleConfig = Symbol('BeanScopeBase#BeanModuleConfig');
+const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
 
 export class BeanScopeBase extends BeanBase {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
+  private [BeanModuleConfig]: unknown;
+  private [BeanModuleConstant]: unknown;
   private __scenes: Record<string, any> = {};
 
   protected __get__(prop) {
@@ -29,11 +33,20 @@ export class BeanScopeBase extends BeanBase {
     }
     // config
     if (prop === 'config') {
-      return this.ctx.config.module(moduleBelong);
+      if (!this[BeanModuleConfig]) {
+        this[BeanModuleConfig] = this.ctx.config.module(moduleBelong);
+      }
+      return this[BeanModuleConfig];
     }
     // constant
     if (prop === 'constant') {
-      return this.ctx.constant.module(moduleBelong);
+      if (!this[BeanModuleConstant]) {
+        this[BeanModuleConstant] = this.ctx.constant.module(moduleBelong);
+      }
+      return this[BeanModuleConstant];
+    }
+    // bean
+    if (prop === 'bean') {
     }
     // scene
     if (!this.__scenes[prop]) {
