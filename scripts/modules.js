@@ -62,7 +62,22 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // const (\S*) = require\((\S*)\);
 // import $1 from $2;
 
+// * module.exports =
+// module.exports = \[([\s\S\n]*)\]
+// import { IModuleRoute } from '@cabloy/core';
+// export const routes: IModuleRoute[] = [];
+
+//
+
 async function _moduleHandle({ module, processHelper }) {
+  // ------ src/resource/this.ts
+  const outFileName = `${module.root}/src/resource/this.ts`;
+  if (!fse.existsSync(outFileName)) {
+    const typings = `export const __ThisModule__ = '${module.info.relativeName}';
+    export type __ThisModuleType__ = typeof __ThisModule__;`;
+    // await fse.outputFile(outFileName, typings);
+    // await processHelper.formatFile({ fileName: outFileName });
+  }
   // ------ typings/core/index.d.ts
   // const outFileName = `${module.root}/typings/core/index.d.ts`;
   // if (!fse.existsSync(outFileName)) {
