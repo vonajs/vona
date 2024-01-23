@@ -1,4 +1,8 @@
-module.exports = class UserController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerUser extends BeanBase {
   async getLabels() {
     const res = await this.ctx.service.user.getLabels({
       user: this.ctx.state.user.op,
@@ -13,4 +17,4 @@ module.exports = class UserController {
     });
     this.ctx.success();
   }
-};
+}

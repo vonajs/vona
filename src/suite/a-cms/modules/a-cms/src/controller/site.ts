@@ -1,6 +1,9 @@
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACms } from '../index.js';
 const utils = require('../common/utils.js');
 
-module.exports = class SiteController {
+@Controller()
+export class ControllerSite extends BeanBase {
   async getConfigSiteBase() {
     const atomClass = this.ctx.request.body.atomClass;
     const data = await this.ctx.service.site.getConfigSiteBase({ atomClass });
@@ -113,4 +116,4 @@ module.exports = class SiteController {
     });
     this.ctx.success(res);
   }
-};
+}

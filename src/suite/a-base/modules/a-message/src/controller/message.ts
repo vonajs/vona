@@ -1,4 +1,8 @@
-module.exports = class MessageController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAMessage } from '../index.js';
+
+@Controller()
+export class ControllerMessage extends BeanBase {
   // options
   //   where, orders
   async group() {
@@ -9,4 +13,4 @@ module.exports = class MessageController {
     });
     this.ctx.success(items);
   }
-};
+}

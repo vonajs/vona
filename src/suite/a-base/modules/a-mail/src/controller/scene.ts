@@ -1,4 +1,8 @@
-module.exports = class SceneController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAMail } from '../index.js';
+
+@Controller()
+export class ControllerScene extends BeanBase {
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
@@ -54,4 +58,4 @@ module.exports = class SceneController {
     const list = await this.ctx.service.scene.list();
     this.ctx.success({ list });
   }
-};
+}

@@ -1,4 +1,8 @@
-module.exports = class RSSController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACms } from '../index.js';
+
+@Controller()
+export class ControllerRss extends BeanBase {
   async feed() {
     // params
     //   module
@@ -201,4 +205,4 @@ module.exports = class RSSController {
     this.ctx.body = feed;
     this.ctx.set('content-type', 'application/rss+xml; charset=UTF-8');
   }
-};
+}

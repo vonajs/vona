@@ -1,4 +1,8 @@
-module.exports = class RenderController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACms } from '../index.js';
+
+@Controller()
+export class ControllerRender extends BeanBase {
   async getArticleUrl() {
     const res = await this.ctx.service.render.getArticleUrl({
       atomClass: this.ctx.request.body.atomClass,
@@ -7,4 +11,4 @@ module.exports = class RenderController {
     });
     this.ctx.success(res);
   }
-};
+}

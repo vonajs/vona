@@ -1,4 +1,8 @@
-module.exports = class FlowDefController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAFlowchart } from '../index.js';
+
+@Controller()
+export class ControllerFlowDef extends BeanBase {
   async normalizeAssignees() {
     const { host, assignees } = this.ctx.request.body;
     const user = this.ctx.state.user.op;
@@ -21,4 +25,4 @@ module.exports = class FlowDefController {
     });
     this.ctx.successMore(items, page.index, page.size);
   }
-};
+}

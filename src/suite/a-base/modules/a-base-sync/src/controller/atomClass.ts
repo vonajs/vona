@@ -1,4 +1,8 @@
-module.exports = class AtomClassController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerAtomClass extends BeanBase {
   async validatorSearch() {
     const res = await this.ctx.service.atomClass.validatorSearch({
       atomClass: this.ctx.request.body.atomClass,
@@ -35,4 +39,4 @@ module.exports = class AtomClassController {
     });
     this.ctx.success(res);
   }
-};
+}

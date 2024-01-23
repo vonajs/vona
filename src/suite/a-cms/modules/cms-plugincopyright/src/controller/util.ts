@@ -1,4 +1,8 @@
-module.exports = class UtilController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleCmsPlugincopyright } from '../index.js';
+
+@Controller()
+export class ControllerUtil extends BeanBase {
   async md() {
     // atomId
     const atomId = this.ctx.params.atomId;
@@ -10,4 +14,4 @@ module.exports = class UtilController {
     this.ctx.body = article.content;
     this.ctx.set('content-type', 'text/x-markdown; charset=UTF-8');
   }
-};
+}

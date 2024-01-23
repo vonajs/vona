@@ -1,4 +1,8 @@
-module.exports = class CaptchaController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACaptcha } from '../index.js';
+
+@Controller()
+export class ControllerCaptcha extends BeanBase {
   async createProviderInstance() {
     const res = await this.ctx.service.captcha.createProviderInstance({
       module: this.ctx.request.body.module,
@@ -17,4 +21,4 @@ module.exports = class CaptchaController {
     });
     this.ctx.success(res);
   }
-};
+}

@@ -1,4 +1,8 @@
-module.exports = class FlowDefController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAFlow } from '../index.js';
+
+@Controller()
+export class ControllerFlowDef extends BeanBase {
   behaviorBases() {
     const res = this.ctx.service.flowDef.behaviorBases();
     this.ctx.success(res);
@@ -18,4 +22,4 @@ module.exports = class FlowDefController {
     const res = this.ctx.service.flowDef.flowServiceBases();
     this.ctx.success(res);
   }
-};
+}

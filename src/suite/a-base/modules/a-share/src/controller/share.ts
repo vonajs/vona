@@ -1,4 +1,8 @@
-module.exports = class ShareController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAShare } from '../index.js';
+
+@Controller()
+export class ControllerShare extends BeanBase {
   async generate() {
     const res = await this.ctx.service.share.generate({
       host: this.ctx.request.body.host,
@@ -15,4 +19,4 @@ module.exports = class ShareController {
       user: this.ctx.state.user.op,
     });
   }
-};
+}

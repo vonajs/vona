@@ -1,4 +1,8 @@
-module.exports = class SettingsController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleASettings } from '../index.js';
+
+@Controller()
+export class ControllerSettings extends BeanBase {
   // instance
 
   instanceList() {
@@ -36,4 +40,4 @@ module.exports = class SettingsController {
     const res = await this.ctx.service.settings.userSave(this.ctx.request.body);
     this.ctx.success(res);
   }
-};
+}

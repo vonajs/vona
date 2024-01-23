@@ -1,4 +1,8 @@
-module.exports = class TagController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerTag extends BeanBase {
   async list() {
     const atomClass = this.ctx.request.body.atomClass;
     const list = await this.ctx.service.tag.list({
@@ -39,4 +43,4 @@ module.exports = class TagController {
     });
     this.ctx.success(res);
   }
-};
+}

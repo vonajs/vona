@@ -1,4 +1,8 @@
-module.exports = class UserController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABaseadmin } from '../index.js';
+
+@Controller()
+export class ControllerUser extends BeanBase {
   async select() {
     const page = this.ctx.bean.util.page(this.ctx.request.body.page);
     const items = await this.ctx.service.user.select({
@@ -60,4 +64,4 @@ module.exports = class UserController {
     });
     this.ctx.successMore(items, page.index, page.size);
   }
-};
+}

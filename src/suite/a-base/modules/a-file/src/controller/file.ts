@@ -1,4 +1,8 @@
-module.exports = class FileController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAFile } from '../index.js';
+
+@Controller()
+export class ControllerFile extends BeanBase {
   async all() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
@@ -62,4 +66,4 @@ module.exports = class FileController {
       user: this.ctx.state.user.op,
     });
   }
-};
+}

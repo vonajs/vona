@@ -1,4 +1,8 @@
-module.exports = class FlowController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAFlowtask } from '../index.js';
+
+@Controller()
+export class ControllerFlow extends BeanBase {
   async data() {
     const res = await this.ctx.service.flow.data({
       flowId: this.ctx.request.body.flowId,
@@ -7,4 +11,4 @@ module.exports = class FlowController {
     });
     this.ctx.success(res);
   }
-};
+}

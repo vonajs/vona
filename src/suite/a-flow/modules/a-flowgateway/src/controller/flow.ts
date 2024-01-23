@@ -1,4 +1,8 @@
-module.exports = class FlowController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAFlowgateway } from '../index.js';
+
+@Controller()
+export class ControllerFlow extends BeanBase {
   async start() {
     // start
     const flowInstance = await this.ctx.bean.flow.startByKey({
@@ -10,4 +14,4 @@ module.exports = class FlowController {
       flowId: flowInstance.context._flowId,
     });
   }
-};
+}

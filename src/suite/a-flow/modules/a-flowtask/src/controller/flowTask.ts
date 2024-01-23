@@ -1,4 +1,8 @@
-module.exports = class FlowTaskController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAFlowtask } from '../index.js';
+
+@Controller()
+export class ControllerFlowTask extends BeanBase {
   // options
   //   where, orders, page, history
   async select() {
@@ -162,4 +166,4 @@ module.exports = class FlowTaskController {
     });
     this.ctx.success(res);
   }
-};
+}

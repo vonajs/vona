@@ -1,4 +1,8 @@
-module.exports = class DbController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerDb extends BeanBase {
   async insert() {
     const { tableName, data } = this.ctx.request.body;
     const res = await this.ctx.service.db.insert({
@@ -76,4 +80,4 @@ module.exports = class DbController {
     const res = await this.ctx.service.db.iid();
     this.ctx.success(res);
   }
-};
+}

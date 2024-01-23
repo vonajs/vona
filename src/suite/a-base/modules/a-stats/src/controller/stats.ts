@@ -1,4 +1,8 @@
-module.exports = class StatsController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAStats } from '../index.js';
+
+@Controller()
+export class ControllerStats extends BeanBase {
   async get() {
     const { module, name, nameSub } = this.ctx.request.body;
     // only support user stats
@@ -13,4 +17,4 @@ module.exports = class StatsController {
     });
     this.ctx.success(res);
   }
-};
+}

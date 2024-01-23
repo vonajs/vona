@@ -1,4 +1,8 @@
-module.exports = class AuthController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAAuthsimple } from '../index.js';
+
+@Controller()
+export class ControllerAuth extends BeanBase {
   async signin() {
     // data: { auth, password, rememberMe }
     const data = this.ctx.request.body.data;
@@ -63,4 +67,4 @@ module.exports = class AuthController {
     const res = await this.ctx.service.auth.checkStatus({ user: this.ctx.state.user.agent });
     this.ctx.success(res);
   }
-};
+}

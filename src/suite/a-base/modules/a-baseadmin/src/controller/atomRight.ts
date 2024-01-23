@@ -1,4 +1,8 @@
-module.exports = class AtomRightController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABaseadmin } from '../index.js';
+
+@Controller()
+export class ControllerAtomRight extends BeanBase {
   async rights() {
     const page = this.ctx.request.body.page;
     const items = await this.ctx.service.atomRight.rights({
@@ -43,4 +47,4 @@ module.exports = class AtomRightController {
     });
     this.ctx.successMore(items, page.index, page.size);
   }
-};
+}

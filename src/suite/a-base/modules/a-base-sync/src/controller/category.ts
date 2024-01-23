@@ -1,4 +1,8 @@
-module.exports = class CategoryController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerCategory extends BeanBase {
   async child() {
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.ctx.service.category.child({
@@ -115,4 +119,4 @@ module.exports = class CategoryController {
     });
     this.ctx.success(category);
   }
-};
+}

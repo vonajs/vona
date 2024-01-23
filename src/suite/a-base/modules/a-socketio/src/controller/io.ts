@@ -1,4 +1,8 @@
-module.exports = class IOController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleASocketio } from '../index.js';
+
+@Controller()
+export class ControllerIo extends BeanBase {
   async subscribe() {
     const res = await this.ctx.service.io.subscribe({
       path: this.ctx.request.body.path,
@@ -20,4 +24,4 @@ module.exports = class IOController {
     });
     this.ctx.success(res);
   }
-};
+}

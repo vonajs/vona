@@ -1,5 +1,9 @@
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAAuthsms } from '../index.js';
 const moduleInfo = module.info;
-module.exports = class SmsProviderController {
+
+@Controller()
+export class ControllerSmsProvider extends BeanBase {
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
@@ -41,4 +45,4 @@ module.exports = class SmsProviderController {
     const res = list[providerName];
     this.ctx.success(res);
   }
-};
+}

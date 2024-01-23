@@ -1,4 +1,8 @@
-module.exports = class AtomController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerAtom extends BeanBase {
   async preferredRoles() {
     const res = await this.ctx.service.atom.preferredRoles({
       atomClass: this.ctx.request.body.atomClass,
@@ -353,4 +357,4 @@ module.exports = class AtomController {
     delete item.atomRevision;
     return item;
   }
-};
+}

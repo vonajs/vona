@@ -1,6 +1,9 @@
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
 const qr = require('qr-image');
 
-module.exports = class BaseController {
+@Controller()
+export class ControllerBase extends BeanBase {
   modules() {
     const res = this.ctx.service.base.modules();
     this.ctx.success(res);
@@ -58,4 +61,4 @@ module.exports = class BaseController {
     this.ctx.type = 'image/png';
     this.ctx.body = img;
   }
-};
+}

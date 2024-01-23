@@ -1,4 +1,8 @@
-module.exports = class ProgressController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAProgress } from '../index.js';
+
+@Controller()
+export class ControllerProgress extends BeanBase {
   async check() {
     const res = await this.ctx.service.progress.check({
       progressId: this.ctx.request.body.progressId,
@@ -23,4 +27,4 @@ module.exports = class ProgressController {
     });
     this.ctx.success();
   }
-};
+}

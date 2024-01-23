@@ -1,4 +1,8 @@
-module.exports = class TestController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleASocketio } from '../index.js';
+
+@Controller()
+export class ControllerTest extends BeanBase {
   async echo() {
     const echo = this.ctx.request.body.echo;
     // this.ctx.throw(403);
@@ -7,4 +11,4 @@ module.exports = class TestController {
       query: this.ctx.request.query,
     });
   }
-};
+}

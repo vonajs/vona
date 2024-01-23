@@ -1,4 +1,8 @@
-module.exports = class CommentController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerComment extends BeanBase {
   async all() {
     const options = this.ctx.request.body.options;
     options.comment = 1;
@@ -68,4 +72,4 @@ module.exports = class CommentController {
     });
     this.ctx.success(res);
   }
-};
+}

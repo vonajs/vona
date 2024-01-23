@@ -1,4 +1,8 @@
-module.exports = class ValidationController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleAValidation } from '../index.js';
+
+@Controller()
+export class ControllerValidation extends BeanBase {
   schema() {
     const res = this.ctx.service.validation.schema(this.ctx.request.body);
     this.ctx.success(res);
@@ -10,4 +14,4 @@ module.exports = class ValidationController {
     });
     this.ctx.success(res);
   }
-};
+}

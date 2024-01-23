@@ -1,4 +1,8 @@
-module.exports = class ResourceController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerResource extends BeanBase {
   // options
   //   where, orders, page, star, label, resourceType, locale
   async select() {
@@ -58,4 +62,4 @@ module.exports = class ResourceController {
     });
     this.ctx.success(res);
   }
-};
+}

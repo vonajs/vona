@@ -1,6 +1,9 @@
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACms } from '../index.js';
 const utils = require('../common/utils.js');
 
-module.exports = class ArticleController {
+@Controller()
+export class ControllerArticle extends BeanBase {
   // list
   async list() {
     // atomClass
@@ -30,4 +33,4 @@ module.exports = class ArticleController {
     });
     this.ctx.successMore(items, options.page.index, options.page.size);
   }
-};
+}

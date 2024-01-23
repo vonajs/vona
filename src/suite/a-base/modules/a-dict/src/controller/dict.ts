@@ -1,4 +1,8 @@
-module.exports = class DictController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleADict } from '../index.js';
+
+@Controller()
+export class ControllerDict extends BeanBase {
   async getDict() {
     const res = await this.ctx.service.dict.getDict({
       dictKey: this.ctx.request.body.dictKey,
@@ -6,4 +10,4 @@ module.exports = class DictController {
     });
     this.ctx.success(res);
   }
-};
+}

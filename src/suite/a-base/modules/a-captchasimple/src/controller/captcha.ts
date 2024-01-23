@@ -1,6 +1,9 @@
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACaptchasimple } from '../index.js';
 const captcha = require('trek-captcha');
 
-module.exports = class CaptchaController {
+@Controller()
+export class ControllerCaptcha extends BeanBase {
   async image() {
     // providerInstanceId
     const providerInstanceId = this.ctx.query.providerInstanceId;
@@ -16,4 +19,4 @@ module.exports = class CaptchaController {
     this.ctx.type = 'image/gif';
     this.ctx.body = buffer;
   }
-};
+}

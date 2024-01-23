@@ -1,4 +1,8 @@
-module.exports = class LayoutConfigController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerLayoutConfig extends BeanBase {
   async load() {
     const res = await this.ctx.service.layoutConfig.load({
       module: this.ctx.request.body.module,
@@ -25,4 +29,4 @@ module.exports = class LayoutConfigController {
     });
     this.ctx.success(res);
   }
-};
+}

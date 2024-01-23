@@ -1,4 +1,8 @@
-module.exports = class cliController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleACli } from '../index.js';
+
+@Controller()
+export class ControllerCli extends BeanBase {
   async meta() {
     const res = await this.ctx.service.cli.meta({
       context: this.ctx.request.body.context,
@@ -15,4 +19,4 @@ module.exports = class cliController {
     });
     this.ctx.success(res);
   }
-};
+}

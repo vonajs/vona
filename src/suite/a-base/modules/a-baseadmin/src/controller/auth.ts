@@ -1,4 +1,8 @@
-module.exports = class AuthController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABaseadmin } from '../index.js';
+
+@Controller()
+export class ControllerAuth extends BeanBase {
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
@@ -25,4 +29,4 @@ module.exports = class AuthController {
     });
     this.ctx.success(res);
   }
-};
+}

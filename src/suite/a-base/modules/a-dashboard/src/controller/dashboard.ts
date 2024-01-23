@@ -1,4 +1,8 @@
-module.exports = class DashboardController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleADashboard } from '../index.js';
+
+@Controller()
+export class ControllerDashboard extends BeanBase {
   async itemByKey() {
     const res = await this.ctx.service.dashboard.itemByKey({
       atomStaticKey: this.ctx.request.body.atomStaticKey,
@@ -74,4 +78,4 @@ module.exports = class DashboardController {
     });
     this.ctx.success(res);
   }
-};
+}

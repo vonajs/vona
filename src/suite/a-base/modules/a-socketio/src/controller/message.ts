@@ -1,4 +1,8 @@
-module.exports = class MessageController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleASocketio } from '../index.js';
+
+@Controller()
+export class ControllerMessage extends BeanBase {
   async offset() {
     const res = await this.ctx.service.message.offset({
       messageClass: this.ctx.request.body.messageClass,
@@ -46,4 +50,4 @@ module.exports = class MessageController {
     });
     this.ctx.success(res);
   }
-};
+}

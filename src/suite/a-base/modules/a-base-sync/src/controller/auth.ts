@@ -1,4 +1,8 @@
-module.exports = class AuthController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerAuth extends BeanBase {
   // return current user auth info
   //   { op:{id},agent:{id},provider}
   async echo() {
@@ -15,4 +19,4 @@ module.exports = class AuthController {
     const info = await this.ctx.bean.auth.logout();
     this.ctx.success(info);
   }
-};
+}

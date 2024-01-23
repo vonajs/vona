@@ -1,4 +1,8 @@
-module.exports = class UtilController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABase } from '../index.js';
+
+@Controller()
+export class ControllerUtil extends BeanBase {
   async performAction() {
     const res = await this.ctx.service.util.performAction({
       params: JSON.parse(this.ctx.request.query.params),
@@ -12,4 +16,4 @@ module.exports = class UtilController {
     });
     this.ctx.success(res);
   }
-};
+}

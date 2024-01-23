@@ -1,4 +1,8 @@
-module.exports = class RoleController {
+import { BeanBase, Controller, Use } from '@cabloy/core';
+import { ScopeModuleABaseadmin } from '../index.js';
+
+@Controller()
+export class ControllerRole extends BeanBase {
   async childrenTop() {
     const page = this.ctx.request.body.page;
     const items = await this.ctx.service.role.childrenTop({
@@ -124,4 +128,4 @@ module.exports = class RoleController {
     });
     this.ctx.success(res);
   }
-};
+}
