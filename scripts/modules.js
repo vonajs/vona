@@ -96,6 +96,7 @@ async function _moduleHandle({ module, processHelper }) {
     ${outputNew1.join('\n')}
   }
   `;
+  console.log(outputNew);
 }
 
 async function _moduleHandle_locales({ module, processHelper }) {
