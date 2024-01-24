@@ -1,4 +1,4 @@
-module.exports = {
+export const constants = {
   flow: {
     status: {
       flowing: 0,

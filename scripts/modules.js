@@ -75,7 +75,6 @@ async function _moduleHandle({ module, processHelper }) {
     return;
   }
   console.log(file);
-  await fse.remove(file);
 }
 
 async function _moduleHandle_config({ module, processHelper }) {
