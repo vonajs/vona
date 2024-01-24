@@ -1,11 +1,7 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
-
-  // plugin
-  config.plugin = {
-    animateSpeed: 500,
+export const config = _app => {
+  return {
+    plugin: {
+      animateSpeed: 500,
+    },
   };
-
-  return config;
 };

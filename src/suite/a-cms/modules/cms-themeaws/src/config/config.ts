@@ -1,14 +1,10 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
-
-  // theme
-  config.theme = {
-    _theme: {
-      name: 'cms-themeaws',
-      url: 'https://www.npmjs.com/package/cabloy-module-api-cms-themeaws',
+export const config = _app => {
+  return {
+    theme: {
+      _theme: {
+        name: 'cms-themeaws',
+        url: 'https://www.npmjs.com/package/cabloy-module-api-cms-themeaws',
+      },
     },
   };
-
-  return config;
 };

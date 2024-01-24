@@ -1,16 +1,12 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
-
-  // plugin
-  config.plugin = {
-    wechatQrcodeTitle: '微信扫一扫：分享',
-    wechatQrcodeHelper: '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>',
-    wechatQrcodeSize: 100,
-    sites: 'wechat,weibo,qq,douban,linkedin,facebook,twitter',
-    mobileSites: '',
-    disabled: '',
+export const config = _app => {
+  return {
+    plugin: {
+      wechatQrcodeTitle: '微信扫一扫：分享',
+      wechatQrcodeHelper: '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>',
+      wechatQrcodeSize: 100,
+      sites: 'wechat,weibo,qq,douban,linkedin,facebook,twitter',
+      mobileSites: '',
+      disabled: '',
+    },
   };
-
-  return config;
 };

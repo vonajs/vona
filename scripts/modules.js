@@ -81,24 +81,30 @@ async function _moduleHandle({ module, processHelper }) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
   }
-  const regexp = /config\.(.*) = ([\s\S\n]*);/g;
+  const regexp = /config\.(.*) = ([\s\S\n]*?);/g;
   const matches = contentOld.matchAll(regexp);
   const outputNew1 = [];
   const outputNew2 = [];
   for (const match of matches) {
     const classNameOld = match[1];
     const classPath = match[2];
-    console.log(classNameOld, classPath);
-    outputNew1.push(`${classPath} = ${classNameOld},`);
+    if (classNameOld.indexOf('.') > -1) {
+      console.log('has . :', module.info.relativeName);
+      return;
+    }
+    // console.log(classNameOld, classPath);
+    outputNew1.push(`${classNameOld} : ${classPath},`);
   }
   const outputNew = `
-  export enum Errors {
-    ${outputNew1.join('\n')}
-  }
+  export const config = _app => {
+    return {
+      ${outputNew1.join('\n')}
+    };
+  };
   `;
   // console.log(outputNew);
-  // await fse.outputFile(file, outputNew);
-  // await processHelper.formatFile({ fileName: file });
+  await fse.outputFile(file, outputNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle_errors3({ module, processHelper }) {
