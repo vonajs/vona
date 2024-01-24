@@ -8,7 +8,7 @@ export default {
   'Element Exists': '元素已存在',
   'Cannot Contain __': '不能包含__',
   'SMS Verification': '短信认证',
-  'Authentication Failed': '认证失败',
-  'User is Disabled': '用户被禁用',
+  AuthenticationFailed: '认证失败',
+  UserIsDisabled: '用户被禁用',
   'SMS Management': 'SMS管理',
 };

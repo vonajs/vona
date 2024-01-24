@@ -38,4 +38,6 @@ export default {
   passwordResetEmailExpired: 'This password reset link has expired',
   passwordResetEmailSubject,
   passwordResetEmailBody,
+  AuthenticationFailed: 'Authentication Failed',
+  UserIsDisabled: 'User is Disabled',
 };

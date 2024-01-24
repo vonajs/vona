@@ -31,8 +31,8 @@ const passwordResetEmailBody = `
 export default {
   Close: '关闭',
   'User/Password': '用户/密码',
-  'Authentication Failed': '认证失败',
-  'User is Disabled': '用户被禁用',
+  AuthenticationFailed: '认证失败',
+  UserIsDisabled: '用户被禁用',
   'Auth-Simple': '认证-简单',
   'Reset Password': '重置密码',
   'Element Exists': '元素已存在',

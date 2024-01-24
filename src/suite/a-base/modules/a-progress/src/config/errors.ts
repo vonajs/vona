@@ -1,3 +1,3 @@
 export enum Errors {
-  'Operation Aborted' = 1001,
+  'OperationAborted' = 1001,
 }

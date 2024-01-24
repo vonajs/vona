@@ -1,1 +1,1 @@
-export default {};
+export default { SceneNotSpecified: 'Scene Not Specified' };

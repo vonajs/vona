@@ -68,7 +68,17 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+
 async function _moduleHandle({ module, processHelper }) {
+  const pattern = `${module.root}/**/*.ts`;
+  // files
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  for (const file of files) {
+    console.log(file);
+  }
+}
+
+async function _moduleHandle_errors2({ module, processHelper }) {
   const file = `${module.root}/src/config/errors.ts`;
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);

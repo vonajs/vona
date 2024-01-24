@@ -5,6 +5,6 @@ export default {
   ExistsValidation: '已存在',
   'Invalid Date': '无效的日期',
   'Not Expected Value': '不是期望的值',
-  'Validator Not Specified': '没有指定validator',
+  ValidatorNotSpecified: '没有指定validator',
   'Slug Exists': 'Slug已存在',
 };

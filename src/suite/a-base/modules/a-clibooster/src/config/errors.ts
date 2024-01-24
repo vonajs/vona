@@ -1,9 +1,9 @@
 export enum Errors {
-  'Not Found' = 1001,
-  'No Changes Found' = 2001,
-  'Submitted, Version: %s' = 2002,
-  'Synced, Version: %s' = 3000,
-  'Not Purchased' = 3001,
-  'Expired, Expired Time: %s' = 3002,
-  'Expired Time: %s' = 3003,
+  'NotFound' = 1001,
+  'NoChangesFound' = 2001,
+  'SubmittedVersion__' = 2002,
+  'SyncedVersion__' = 3000,
+  'NotPurchased' = 3001,
+  'ExpiredExpiredTime__' = 3002,
+  'ExpiredTime__' = 3003,
 }

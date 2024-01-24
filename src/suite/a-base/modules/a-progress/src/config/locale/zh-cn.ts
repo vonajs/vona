@@ -1,3 +1,3 @@
 export default {
-  'Operation Aborted': '操作已中止',
+  OperationAborted: '操作已中止',
 };

@@ -1,8 +1,8 @@
 export enum Errors {
-  'Language must not be Empty' = 1001,
-  'Theme %s:%s:%s not Set' = 1002,
-  'Theme %s not Found' = 1003,
-  'Cannot delete if has children' = 1004,
-  'Cannot delete if has articles' = 1005,
-  'Build Site First' = 1006,
+  'LanguageMustNotBeEmpty' = 1001,
+  'ThemeNotSet__' = 1002,
+  'ThemeNotFound__' = 1003,
+  'CannotDeleteIfHasChildren' = 1004,
+  'CannotDeleteIfHasArticles' = 1005,
+  'BuildSiteFirst' = 1006,
 }

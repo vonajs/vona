@@ -1,3 +1,3 @@
 export default {
-  'Scene Not Specified': '场景未指定',
+  SceneNotSpecified: '场景未指定',
 };

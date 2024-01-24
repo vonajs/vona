@@ -1,3 +1,3 @@
 export enum Errors {
-  'Validator Not Specified' = 1001,
+  'ValidatorNotSpecified' = 1001,
 }
