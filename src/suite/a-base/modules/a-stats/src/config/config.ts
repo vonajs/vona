@@ -1,28 +1,30 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigQueue, IModuleConfigSummer, IModuleConfigSummerCache } from '@cabloy/core';
 
-  // queues
-  config.queues = {
-    stats: {
-      bean: 'stats',
-    },
-  };
+// queues
+const queues = {
+  stats: {
+    bean: 'stats',
+  } as IModuleConfigQueue,
+};
 
-  // summer
-  config.summer = {
-    caches: {
-      modelStats: {
-        mode: 'redis', // only redis
-        // mem: {
-        //   max: 500,
-        // },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
+// summer
+const summer = {
+  caches: {
+    modelStats: {
+      mode: 'redis', // only redis
+      // mem: {
+      //   max: 500,
+      // },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
-  };
+    } as IModuleConfigSummerCache,
+  },
+} as IModuleConfigSummer;
 
-  return config;
+export const config = _app => {
+  return {
+    queues,
+    summer,
+  };
 };

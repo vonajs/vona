@@ -35,5 +35,6 @@ export interface IModuleConfigSummerCache {
 }
 
 export interface IModuleConfigSummer {
+  enable?: boolean;
   caches: Record<string, IModuleConfigSummerCache>;
 }

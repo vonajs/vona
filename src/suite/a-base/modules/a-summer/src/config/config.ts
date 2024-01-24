@@ -1,24 +1,25 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigBroadcast, IModuleConfigSummer } from '@cabloy/core';
 
-  // broadcasts
-  config.broadcasts = {
-    memDel: {
-      bean: 'memDel',
-    },
-    memMultiDel: {
-      bean: 'memMultiDel',
-    },
-    memClear: {
-      bean: 'memClear',
-    },
+// broadcasts
+const broadcasts = {
+  memDel: {
+    bean: 'memDel',
+  } as IModuleConfigBroadcast,
+  memMultiDel: {
+    bean: 'memMultiDel',
+  } as IModuleConfigBroadcast,
+  memClear: {
+    bean: 'memClear',
+  } as IModuleConfigBroadcast,
+};
+
+// summer
+const summer = {
+  enable: true,
+} as IModuleConfigSummer;
+
+export const config = _app => {
+  return {
+    summer,
   };
-
-  // summer
-  config.summer = {
-    enable: true,
-  };
-
-  return config;
 };
