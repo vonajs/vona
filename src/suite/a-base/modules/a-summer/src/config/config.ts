@@ -20,6 +20,7 @@ const summer = {
 
 export const config = _app => {
   return {
+    broadcasts,
     summer,
   };
 };
