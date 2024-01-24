@@ -80,15 +80,26 @@ async function _moduleHandle({ module, processHelper }) {
   };  
     `;
   console.log(contentNew);
-  // await fse.outputFile(classFile, contentNew);
-  // await processHelper.formatFile({ fileName: classFile });
+  await fse.outputFile(classFile, contentNew);
+  await processHelper.formatFile({ fileName: classFile });
   //
-  const outputNew = `
-  
-  `;
-  // console.log(outputNew);
-  // await fse.outputFile(file, outputNew);
-  // await processHelper.formatFile({ fileName: file });
+  const file2 = `${module.root}/src/config/locales.ts`;
+  const contentOld = (await fse.readFile(file2)).toString();
+  const outputNew = contentOld
+    .replace(
+      'import zh_cn',
+      `import en_us from './locale/en-us.js';
+  import zh_cn`,
+    )
+    .replace(
+      `'zh-cn': zh_cn,`,
+      `'en-us': en_us,
+  'zh-cn': zh_cn,`,
+    );
+
+  console.log(outputNew);
+  await fse.outputFile(file2, outputNew);
+  await processHelper.formatFile({ fileName: file2 });
 }
 
 async function _moduleHandle_errors({ module, processHelper }) {
