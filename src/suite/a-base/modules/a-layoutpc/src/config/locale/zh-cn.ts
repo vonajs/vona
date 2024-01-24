@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Copyright: '版权',
   Clock: '时钟',
   Dashboard: '仪表板',

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'CMS:Community': 'CMS:社区',
   CMSPostTitle: '帖子',
   'Create Post': '新建帖子',

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Layout: '布局',
   Layouts: '布局',
   'Create Layout': '新建布局',

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   FlowTitle: '流程',
   FlowDefinition: '流程定义',
   WorkFlow: '工作流',

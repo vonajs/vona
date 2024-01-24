@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   StartEventNone: '空开始事件',
   StartEventTimer: '定时开始事件',
   EndEventNone: '空结束事件',

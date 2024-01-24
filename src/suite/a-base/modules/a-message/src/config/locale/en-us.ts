@@ -16,7 +16,7 @@ Regards,
 {{info.siteName}} Team
 `;
 
-module.exports = {
+export default {
   uniformMessageRenderTemplateMailSubject,
   uniformMessageRenderTemplateMailBody,
 };

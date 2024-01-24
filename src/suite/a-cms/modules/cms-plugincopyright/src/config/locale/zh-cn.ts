@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Title: '标题',
   Author: '作者',
   Link: '链接',

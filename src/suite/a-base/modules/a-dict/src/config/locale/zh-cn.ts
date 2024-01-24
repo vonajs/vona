@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Dict: '字典',
   Dicts: '字典',
   Array: '数组',

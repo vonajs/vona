@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Submitted: '已提交',
   CliStoreDocs: 'Cli商店文档',
   CliAuthOpenTokenInfoStoreSync: '用于Cabloy商店同步的开放认证Token',

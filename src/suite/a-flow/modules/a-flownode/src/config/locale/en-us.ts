@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   StartEventNone: 'StartEvent: None',
   StartEventTimer: 'StartEvent: Timer',
   EndEventNone: 'EndEvent: None',

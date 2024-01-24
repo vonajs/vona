@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   App: '应用',
   Apps: '应用',
   'Create App': '新建应用',

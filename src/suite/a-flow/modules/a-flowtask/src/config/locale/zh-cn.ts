@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Submitted: '已提交',
   StartEventAtom: '数据起草开始事件',
   EndEventAtom: '数据提交结束事件',

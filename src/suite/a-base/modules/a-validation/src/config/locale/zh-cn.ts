@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   test: '测试',
   Required: '必需的',
   RequiredField: '不允许为空',

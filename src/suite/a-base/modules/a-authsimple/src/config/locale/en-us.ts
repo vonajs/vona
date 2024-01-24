@@ -29,7 +29,8 @@ Regards,
 `;
 
 //
-module.exports = {
+
+export default {
   confirmationEmailExpired: 'This email confirmation link has expired',
   confirmationEmailSucceeded: 'Your email address has been confirmed',
   confirmationEmailSubject,

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   About: '关于',
   Dashboard: '仪表板',
   Dashboards: '仪表板',

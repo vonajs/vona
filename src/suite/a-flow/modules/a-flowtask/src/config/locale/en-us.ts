@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   StartEventAtom: 'StartEvent: Data Draft',
   EndEventAtom: 'EndEvent: Data Submit',
   ActivityUserTask: 'Activity: User Task',

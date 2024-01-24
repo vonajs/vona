@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   UserAtomRight: 'User Data Right',
   UserResourceRight: 'User Resource Right',
   UserFieldsRight: 'User Fields Right',

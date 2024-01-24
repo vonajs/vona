@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   // language/locale
   'en-us': '英语',
   'zh-cn': '简体中文',

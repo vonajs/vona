@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'CMS:Documentation': 'CMS:文档',
   Document: '文档',
   'Create Document': '新建文档',

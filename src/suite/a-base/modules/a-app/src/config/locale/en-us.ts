@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   AppMenu: 'App Menu',
   AppHome: 'App Home',
   AppCategoryFront: 'Front Apps',

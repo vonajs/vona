@@ -68,7 +68,37 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+
 async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/config/errors.ts`;
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  const matchExport = contentOld.match(/export /);
+  if (matchExport) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const regexp = /(\d*): ('.*')/g;
+  const matches = contentOld.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  for (const match of matches) {
+    const classNameOld = match[1];
+    const classPath = match[2];
+    // console.log(classNameOld, classPath);
+    outputNew1.push(`${classPath} = ${classNameOld},`);
+  }
+  const outputNew = `
+  export enum Errors {
+    ${outputNew1.join('\n')}
+  }
+  `;
+}
+
+async function _moduleHandle_locales({ module, processHelper }) {
   const file = `${module.root}/src/config/locales.ts`;
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);

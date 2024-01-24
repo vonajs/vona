@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   FlowTitle: 'Flow',
   WorkFlow: 'Work Flow',
   WorkFlows: 'Work Flows',

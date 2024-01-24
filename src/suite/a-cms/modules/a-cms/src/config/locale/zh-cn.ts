@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   All: '所有',
   Article: '文章',
   Catalog: '目录',

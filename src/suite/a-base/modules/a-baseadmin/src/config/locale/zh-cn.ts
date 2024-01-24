@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'Basic Admin': '基础管理',
   'User Management': '用户管理',
   'Role Management': '角色管理',

@@ -16,7 +16,7 @@ const uniformMessageRenderTemplateMailBody = `
 {{info.siteName}} 团队
 `;
 
-module.exports = {
+export default {
   Messages: '消息',
   Message: '消息',
   uniformMessageRenderTemplateMailSubject,

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   PersonalProfile: 'Profile',
   AuthorProfile: 'Author Profile',
   ArticlePrevious: 'Previous',

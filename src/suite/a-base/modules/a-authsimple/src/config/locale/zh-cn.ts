@@ -28,7 +28,7 @@ const passwordResetEmailBody = `
 {{siteName}} 团队
 `;
 
-module.exports = {
+export default {
   Close: '关闭',
   'User/Password': '用户/密码',
   'Authentication Failed': '认证失败',

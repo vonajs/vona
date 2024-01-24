@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   SMS: '短信',
   smsProviderNonePrompt: '请指定SMS Provider',
   SMSCodeInvalid: '认证码已失效，请重新获取',
