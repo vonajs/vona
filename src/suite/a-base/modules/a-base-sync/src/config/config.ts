@@ -1,4 +1,10 @@
-import { IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from '@cabloy/core';
+import {
+  IModuleConfigMiddleware,
+  IModuleConfigQueue,
+  IModuleConfigStartup,
+  IModuleConfigSummer,
+  IModuleConfigSummerCache,
+} from '@cabloy/core';
 
 // middlewares
 const middlewares = {
@@ -92,7 +98,7 @@ const queues = {
 };
 
 // summer
-config.summer = {
+const summer = {
   caches: {
     modelRole: {
       bean: null,
@@ -103,7 +109,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     modelUser: {
       bean: null,
       mode: 'all',
@@ -113,7 +119,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     modelAtomClass: {
       mode: 'all',
       mem: {
@@ -123,7 +129,7 @@ config.summer = {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
       ignoreNull: true,
-    },
+    } as IModuleConfigSummerCache,
     modelAtomAction: {
       mode: 'all',
       mem: {
@@ -133,7 +139,7 @@ config.summer = {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
       ignoreNull: true,
-    },
+    } as IModuleConfigSummerCache,
     modelAtom: {
       mode: 'redis', // only redis
       // mem: {
@@ -142,7 +148,7 @@ config.summer = {
       redis: {
         ttl: 2 * 60 * 60 * 1000, // 2 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     modelCategory: {
       mode: 'all',
       mem: {
@@ -151,7 +157,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     modelLabel: {
       mode: 'all',
       mem: {
@@ -160,7 +166,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     atomClassInner: {
       bean: 'atomClassInner',
       mode: 'all',
@@ -170,7 +176,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     roleScopesOfUser: {
       bean: 'roleScopesOfUser',
       mode: 'all',
@@ -180,7 +186,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     roleScopesOfRole: {
       bean: 'roleScopesOfRole',
       mode: 'all',
@@ -190,7 +196,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     roleScopesMineOfUser: {
       bean: 'roleScopesMineOfUser',
       mode: 'all',
@@ -200,7 +206,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     roleWhosOfAtomClassAction: {
       bean: 'roleWhosOfAtomClassAction',
       mode: 'all',
@@ -210,7 +216,7 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
     roleParentsOfUser: {
       bean: 'roleParentsOfUser',
       mode: 'all',
@@ -220,108 +226,86 @@ config.summer = {
       redis: {
         ttl: 4 * 60 * 60 * 1000, // 4 hours
       },
-    },
+    } as IModuleConfigSummerCache,
   },
-};
+} as IModuleConfigSummer;
 
-module.exports = _app => {
-  const config = {};
-
-  // pageSize
-  config.pageSize = 20;
-
-  // locales
-  config.locales = {
-    'en-us': 'English',
-    'zh-cn': 'Chinese',
-  };
-
-  // timezones
-  config.timezones = {
-    'en-us': -8,
-    'zh-cn': 8,
-  };
-
-  config.draft = {
-    sequence: true,
-  };
-
-  config.cors = {
-    whiteList: 'http://localhost',
-  };
-
-  // checkUserName
-  config.checkUserName = true;
-  // account
-  config.account = {
-    needActivation: true,
-    activationWays: 'mobile,email',
-    activationProviders: {
-      mobile: 'a-authsms',
-      email: 'a-authsimple',
+export const config = _app => {
+  return {
+    middlewares,
+    startups,
+    queues,
+    summer,
+    pageSize: 20,
+    locales: {
+      'en-us': 'English',
+      'zh-cn': 'Chinese',
     },
-    url: {
-      // url is specified by activation provider
-      //   emailConfirm: '/a/authsimple/emailConfirm',
-      //   mobileVerify: '',
-      //   passwordChange: '/a/authsimple/passwordChange',
-      //   passwordForgot: '/a/authsimple/passwordForgot',
-      //   passwordReset: '/a/authsimple/passwordReset',
+    timezones: {
+      'en-us': -8,
+      'zh-cn': 8,
     },
-    //  default is 'activated', if need activating by mobile/email, then add to 'registered' first
-    activatedRoles: 'activated',
-  };
-
-  // public dir
-  config.publicDir = '';
-
-  // comment
-  config.comment = {
-    trim: {
-      limit: 100,
-      wordBreak: false,
-      preserveTags: false,
+    draft: {
+      sequence: true,
     },
-  };
-
-  // httpLog
-  config.httpLog = true;
-
-  // auth
-  config.auth = {
-    avatar: {
-      timeout: 5000,
-      default: 'https://cabloy.com/plugins/cms-pluginbase/assets/images/avatar_user.png',
+    cors: {
+      whiteList: 'http://localhost',
     },
-    maxAge: {
-      anonymous: 365 * 24 * 3600 * 1000, // 365 days
-      authenticated: 30 * 24 * 3600 * 1000, // 30 days // authenticated or rememberMe
-      default: 1 * 24 * 3600 * 1000, // default is one day
+    checkUserName: true,
+    account: {
+      needActivation: true,
+      activationWays: 'mobile,email',
+      activationProviders: {
+        mobile: 'a-authsms',
+        email: 'a-authsimple',
+      },
+      url: {
+        // url is specified by activation provider
+        //   emailConfirm: '/a/authsimple/emailConfirm',
+        //   mobileVerify: '',
+        //   passwordChange: '/a/authsimple/passwordChange',
+        //   passwordForgot: '/a/authsimple/passwordForgot',
+        //   passwordReset: '/a/authsimple/passwordReset',
+      },
+      //  default is 'activated', if need activating by mobile/email, then add to 'registered' first
+      activatedRoles: 'activated',
     },
-  };
-
-  // user
-  config.user = {
-    privacyFields: 'createdAt,updatedAt,realName,locale,email,mobile,activated,emailConfirmed,mobileVerified',
-  };
-
-  // securityLevelProtection
-  config.securityLevelProtection = {
-    body: {
-      crypto: false,
-      cryptojs: '/a/base/js/bodyCrypto',
+    publicDir: '',
+    comment: {
+      trim: {
+        limit: 100,
+        wordBreak: false,
+        preserveTags: false,
+      },
+    },
+    httpLog: true,
+    auth: {
+      avatar: {
+        timeout: 5000,
+        default: 'https://cabloy.com/plugins/cms-pluginbase/assets/images/avatar_user.png',
+      },
+      maxAge: {
+        anonymous: 365 * 24 * 3600 * 1000, // 365 days
+        authenticated: 30 * 24 * 3600 * 1000, // 30 days // authenticated or rememberMe
+        default: 1 * 24 * 3600 * 1000, // default is one day
+      },
+    },
+    user: {
+      privacyFields: 'createdAt,updatedAt,realName,locale,email,mobile,activated,emailConfirmed,mobileVerified',
+    },
+    securityLevelProtection: {
+      body: {
+        crypto: false,
+        cryptojs: '/a/base/js/bodyCrypto',
+      },
+    },
+    configFront: {
+      site: {
+        cover: '/api/static/a/base/img/cabloy.png',
+      },
+      demo: {
+        enable: false,
+      },
     },
   };
-
-  // configFront
-  config.configFront = {
-    site: {
-      cover: '/api/static/a/base/img/cabloy.png',
-    },
-    demo: {
-      enable: false,
-    },
-  };
-
-  return config;
 };
