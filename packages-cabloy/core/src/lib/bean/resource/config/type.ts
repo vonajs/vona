@@ -42,7 +42,8 @@ export interface IModuleConfigSummer {
 export interface IModuleConfigSchedule {
   bean: string | { module: string; name: string };
   repeat: {
-    every: number;
+    every?: number;
+    cron?: string;
   };
   disable?: boolean;
 }
