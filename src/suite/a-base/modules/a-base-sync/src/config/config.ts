@@ -1,230 +1,231 @@
-// eslint-disable-next-line
-module.exports = app => {
+import { IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from '@cabloy/core';
+
+// middlewares
+const middlewares = {
+  inner: {
+    bean: 'inner',
+    global: false,
+  } as IModuleConfigMiddleware,
+  test: {
+    bean: 'test',
+    global: false,
+  } as IModuleConfigMiddleware,
+  transaction: {
+    bean: 'transaction',
+    global: false,
+  } as IModuleConfigMiddleware,
+  gate: {
+    bean: 'gate',
+    global: true,
+    dependencies: 'instance',
+  } as IModuleConfigMiddleware,
+  cors: {
+    bean: 'cors',
+    global: true,
+    dependencies: 'instance',
+  } as IModuleConfigMiddleware,
+  authOpen: {
+    bean: 'authOpen',
+    global: true,
+    dependencies: 'auth',
+  } as IModuleConfigMiddleware,
+  auth: {
+    bean: 'auth',
+    global: true,
+    dependencies: 'instance',
+    ignore: /\/version\/(update|init|test)/,
+  } as IModuleConfigMiddleware,
+  right: {
+    bean: 'right',
+    global: true,
+    dependencies: 'auth,authOpen',
+  } as IModuleConfigMiddleware,
+  jsonp: {
+    bean: 'jsonp',
+    global: false,
+    dependencies: 'instance',
+  } as IModuleConfigMiddleware,
+  httpLog: {
+    bean: 'httpLog',
+    global: false,
+    dependencies: 'instance',
+  } as IModuleConfigMiddleware,
+  connectionAuth: {
+    bean: 'connectionAuth',
+    type: 'socketio.connection',
+  } as IModuleConfigMiddleware,
+};
+
+// startups
+const startups = {
+  loadSchedules: {
+    bean: 'loadSchedules',
+    // instance: true,
+    debounce: true,
+    after: true,
+  } as IModuleConfigStartup,
+  loadAtomStatics: {
+    bean: 'loadAtomStatics',
+    instance: true,
+    debounce: true,
+  } as IModuleConfigStartup,
+  checkResourceLocales: {
+    bean: 'checkResourceLocales',
+    instance: true,
+    debounce: true,
+  } as IModuleConfigStartup,
+  checkViewHistoryRight: {
+    bean: 'checkViewHistoryRight',
+    instance: true,
+    debounce: true,
+  } as IModuleConfigStartup,
+};
+
+// queues
+const queues = {
+  schedule: {
+    bean: 'schedule',
+  } as IModuleConfigQueue,
+  roleBuild: {
+    bean: 'roleBuild',
+  } as IModuleConfigQueue,
+};
+
+// summer
+config.summer = {
+  caches: {
+    modelRole: {
+      bean: null,
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    modelUser: {
+      bean: null,
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    modelAtomClass: {
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+      ignoreNull: true,
+    },
+    modelAtomAction: {
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+      ignoreNull: true,
+    },
+    modelAtom: {
+      mode: 'redis', // only redis
+      // mem: {
+      //   max: 500,
+      // },
+      redis: {
+        ttl: 2 * 60 * 60 * 1000, // 2 hours
+      },
+    },
+    modelCategory: {
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    modelLabel: {
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    atomClassInner: {
+      bean: 'atomClassInner',
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    roleScopesOfUser: {
+      bean: 'roleScopesOfUser',
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    roleScopesOfRole: {
+      bean: 'roleScopesOfRole',
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    roleScopesMineOfUser: {
+      bean: 'roleScopesMineOfUser',
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    roleWhosOfAtomClassAction: {
+      bean: 'roleWhosOfAtomClassAction',
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+    roleParentsOfUser: {
+      bean: 'roleParentsOfUser',
+      mode: 'all',
+      mem: {
+        max: 500,
+      },
+      redis: {
+        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      },
+    },
+  },
+};
+
+module.exports = _app => {
   const config = {};
-
-  // middlewares
-  config.middlewares = {
-    inner: {
-      bean: 'inner',
-      global: false,
-    },
-    test: {
-      bean: 'test',
-      global: false,
-    },
-    transaction: {
-      bean: 'transaction',
-      global: false,
-    },
-    gate: {
-      bean: 'gate',
-      global: true,
-      dependencies: 'instance',
-    },
-    cors: {
-      bean: 'cors',
-      global: true,
-      dependencies: 'instance',
-    },
-    authOpen: {
-      bean: 'authOpen',
-      global: true,
-      dependencies: 'auth',
-    },
-    auth: {
-      bean: 'auth',
-      global: true,
-      dependencies: 'instance',
-      ignore: /\/version\/(update|init|test)/,
-    },
-    right: {
-      bean: 'right',
-      global: true,
-      dependencies: 'auth,authOpen',
-    },
-    jsonp: {
-      bean: 'jsonp',
-      global: false,
-      dependencies: 'instance',
-    },
-    httpLog: {
-      bean: 'httpLog',
-      global: false,
-      dependencies: 'instance',
-    },
-    connectionAuth: {
-      bean: 'connectionAuth',
-      type: 'socketio.connection',
-    },
-  };
-
-  // startups
-  config.startups = {
-    loadSchedules: {
-      bean: 'loadSchedules',
-      // instance: true,
-      debounce: true,
-      after: true,
-    },
-    loadAtomStatics: {
-      bean: 'loadAtomStatics',
-      instance: true,
-      debounce: true,
-    },
-    checkResourceLocales: {
-      bean: 'checkResourceLocales',
-      instance: true,
-      debounce: true,
-    },
-    checkViewHistoryRight: {
-      bean: 'checkViewHistoryRight',
-      instance: true,
-      debounce: true,
-    },
-  };
-
-  // queues
-  config.queues = {
-    schedule: {
-      bean: 'schedule',
-    },
-    roleBuild: {
-      bean: 'roleBuild',
-    },
-  };
-
-  // summer
-  config.summer = {
-    caches: {
-      modelRole: {
-        bean: null,
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      modelUser: {
-        bean: null,
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      modelAtomClass: {
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-        ignoreNull: true,
-      },
-      modelAtomAction: {
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-        ignoreNull: true,
-      },
-      modelAtom: {
-        mode: 'redis', // only redis
-        // mem: {
-        //   max: 500,
-        // },
-        redis: {
-          ttl: 2 * 60 * 60 * 1000, // 2 hours
-        },
-      },
-      modelCategory: {
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      modelLabel: {
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      atomClassInner: {
-        bean: 'atomClassInner',
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      roleScopesOfUser: {
-        bean: 'roleScopesOfUser',
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      roleScopesOfRole: {
-        bean: 'roleScopesOfRole',
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      roleScopesMineOfUser: {
-        bean: 'roleScopesMineOfUser',
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      roleWhosOfAtomClassAction: {
-        bean: 'roleWhosOfAtomClassAction',
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-      roleParentsOfUser: {
-        bean: 'roleParentsOfUser',
-        mode: 'all',
-        mem: {
-          max: 500,
-        },
-        redis: {
-          ttl: 4 * 60 * 60 * 1000, // 4 hours
-        },
-      },
-    },
-  };
 
   // pageSize
   config.pageSize = 20;
