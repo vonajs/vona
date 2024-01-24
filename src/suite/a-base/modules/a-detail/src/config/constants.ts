@@ -1,5 +1,3 @@
-// const moduleInfo = module.info;
-
 const actionMeta = {
   create: {
     title: 'Create',
@@ -109,7 +107,7 @@ for (const key in actionMeta) {
 // };
 
 // ok
-module.exports = {
+export const constants = {
   detail: {
     // action,
     actionMeta,

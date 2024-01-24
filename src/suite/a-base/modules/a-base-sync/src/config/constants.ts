@@ -1,4 +1,4 @@
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../resource/this.js';
 
 // action
 const action = {
@@ -40,7 +40,7 @@ const action = {
 const actionMeta = {
   create: {
     title: 'Create',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     bulk: true,
     select: false,
@@ -49,7 +49,7 @@ const actionMeta = {
   },
   read: {
     title: 'View',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     // actionPath: '/a/basefront/atom/item?mode=view&atomId={{atomId}}&itemId={{itemId}}',
     enableOnStatic: null,
@@ -59,7 +59,7 @@ const actionMeta = {
   },
   write: {
     title: 'Edit',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: false,
     enableOnOpened: false,
@@ -71,7 +71,7 @@ const actionMeta = {
   },
   delete: {
     title: 'Delete',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: false,
     enableOnOpened: false,
@@ -83,7 +83,7 @@ const actionMeta = {
   },
   clone: {
     title: 'Clone',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: null,
     enableOnOpened: null,
@@ -92,7 +92,7 @@ const actionMeta = {
   },
   enable: {
     title: 'Enable',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: null,
     enableOnOpened: null,
@@ -104,7 +104,7 @@ const actionMeta = {
   },
   disable: {
     title: 'Disable',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: null,
     enableOnOpened: null,
@@ -116,7 +116,7 @@ const actionMeta = {
   },
   layout: {
     title: 'Layout',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: null,
     enableOnOpened: null,
@@ -126,7 +126,7 @@ const actionMeta = {
   },
   viewWorkflow: {
     title: 'ViewWorkFlow',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: null,
     enableOnOpened: false,
@@ -137,7 +137,7 @@ const actionMeta = {
   },
   viewHistory: {
     title: 'ViewHistory',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     enableOnStatic: null,
     enableOnOpened: null,
@@ -148,7 +148,7 @@ const actionMeta = {
   },
   authorize: {
     title: 'Authorize',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionPath: '/a/basefront/resource/authorize?atomId={{atomId}}&itemId={{itemId}}',
     enableOnStatic: null,
     enableOnOpened: null,
@@ -159,7 +159,7 @@ const actionMeta = {
   },
   deleteBulk: {
     title: 'BatchDelete',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'actionBulk',
     bulk: true,
     select: true,
@@ -167,7 +167,7 @@ const actionMeta = {
   },
   exportBulk: {
     title: 'Export',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'actionBulk',
     bulk: true,
     select: null,
@@ -178,7 +178,7 @@ const actionMeta = {
   },
   importBulk: {
     title: 'Import',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'actionBulk',
     bulk: true,
     select: false,
@@ -194,7 +194,7 @@ const actionMeta = {
   },
   layoutBulk: {
     title: 'Layout',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'actionBulk',
     bulk: true,
     select: false,
@@ -202,7 +202,7 @@ const actionMeta = {
   },
   draftStatsBulk: {
     title: 'Draft',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'actionBulk',
     render: {
       module: 'a-baserender',
@@ -216,7 +216,7 @@ const actionMeta = {
   },
   readBulk: {
     title: 'List',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'actionBulk',
     bulk: true,
     select: false,
@@ -225,28 +225,28 @@ const actionMeta = {
   },
   save: {
     title: 'Save',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     authorize: false,
     icon: { f7: '::save' },
   },
   submit: {
     title: 'Submit',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     authorize: false,
     icon: { f7: '::done' },
   },
   formal: {
     title: 'Formal',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     authorize: false,
     icon: { f7: ':outline:archive-outline' },
   },
   draft: {
     title: 'Draft',
-    actionModule: moduleInfo.relativeName,
+    actionModule: __ThisModule__,
     actionComponent: 'action',
     authorize: false,
     icon: { f7: ':outline:draft-outline' },
@@ -342,7 +342,7 @@ const atom = {
   actionMetaItemOnly,
 };
 // ok
-module.exports = {
+export const constants = {
   systemRoles,
   atom,
   atomClass: {
