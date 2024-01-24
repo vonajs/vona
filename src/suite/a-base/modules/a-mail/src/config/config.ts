@@ -1,49 +1,50 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+// startups
+const startups = {
+  cacheMailScenes: {
+    bean: 'cacheMailScenes',
+    instance: true,
+  },
+};
 
-  // startups
-  config.startups = {
-    cacheMailScenes: {
-      bean: 'cacheMailScenes',
-      instance: true,
+// broadcasts
+const broadcasts = {
+  mailSceneChanged: {
+    bean: 'mailSceneChanged',
+  },
+};
+
+const sceneDefault = {
+  // title: undefined,
+  transport: {
+    host: '',
+    port: 0,
+    secure: false,
+    auth: {
+      user: '',
+      pass: '',
     },
-  };
+    logger: false,
+    debug: false,
+  },
+  defaults: {
+    from: '',
+  },
+};
 
-  // broadcasts
-  config.broadcasts = {
-    mailSceneChanged: {
-      bean: 'mailSceneChanged',
+export const config = _app => {
+  return {
+    startups,
+    broadcasts,
+    // default
+    scene: {
+      default: sceneDefault,
     },
-  };
-
-  // default
-  config.scene = {
-    default: {
-      // title: undefined,
-      transport: {
-        host: '',
-        port: 0,
-        secure: false,
-        auth: {
-          user: '',
-          pass: '',
-        },
-        logger: false,
-        debug: false,
+    // scenes
+    scenes: {
+      system: {
+        title: 'System',
+        ...sceneDefault,
       },
-      defaults: {
-        from: '',
-      },
     },
   };
-  // scenes
-  config.scenes = {
-    system: {
-      title: 'System',
-      ...config.scene.default,
-    },
-  };
-
-  return config;
 };
