@@ -1,21 +1,21 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigBroadcast } from '@cabloy/core';
 
-  // broadcasts
-  config.broadcasts = {
-    memRemove: {
-      bean: 'memRemove',
-    },
-    memClear: {
-      bean: 'memClear',
+// broadcasts
+const broadcasts = {
+  memRemove: {
+    bean: 'memRemove',
+  } as IModuleConfigBroadcast,
+  memClear: {
+    bean: 'memClear',
+  } as IModuleConfigBroadcast,
+};
+
+export const config = _app => {
+  return {
+    broadcasts,
+    // db
+    db: {
+      redis: true,
     },
   };
-
-  // db
-  config.db = {
-    redis: true,
-  };
-
-  return config;
 };
