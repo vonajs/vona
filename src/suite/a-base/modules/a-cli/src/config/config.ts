@@ -1,6 +1,5 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {
+export const config = _app => {
+  return {
     helper: {
       chalk: {
         options: { level: 2 },
@@ -34,5 +33,4 @@ module.exports = app => {
       },
     },
   };
-  return config;
 };
