@@ -68,7 +68,15 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
-async function _moduleHandle({ module, processHelper }) {}
+async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/config/middlewares.ts`;
+  if (!fse.existsSync(file)) {
+    // console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  console.log(file);
+  await fse.remove(file);
+}
 
 async function _moduleHandle_config({ module, processHelper }) {
   const file = `${module.root}/src/config/config.ts`;
