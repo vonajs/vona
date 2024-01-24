@@ -69,17 +69,14 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/config/index.ts`;
+  const file = `${module.root}/src/config/constants.ts`;
   if (fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
   }
   const scopeModuleName = getScopeModuleName(module.info.relativeName);
   const contentNew = `
-export * from './locales.js';
-export * from './errors.js';
-export * from './config.js';
-export * from './constants.js';
+  export const constants = null;
     `;
   // console.log(contentNew);
   await fse.outputFile(file, contentNew);
