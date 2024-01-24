@@ -68,8 +68,9 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+async function _moduleHandle({ module, processHelper }) {}
 
-async function _moduleHandle({ module, processHelper }) {
+async function _moduleHandle_locales2({ module, processHelper }) {
   const file = `${module.root}/src/config/locale/en-us.ts`;
   if (fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
