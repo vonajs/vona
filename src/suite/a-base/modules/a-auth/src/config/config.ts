@@ -1,45 +1,45 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigBroadcast, IModuleConfigStartup } from '@cabloy/core';
 
-  // startups
-  config.startups = {
-    registerPassport: {
-      bean: 'registerPassport',
-    },
-    registerRouters: {
-      bean: 'registerRouters',
-    },
-    cacheAuthProviders: {
-      bean: 'cacheAuthProviders',
-      instance: true,
+// startups
+const startups = {
+  registerPassport: {
+    bean: 'registerPassport',
+  } as IModuleConfigStartup,
+  registerRouters: {
+    bean: 'registerRouters',
+  } as IModuleConfigStartup,
+  cacheAuthProviders: {
+    bean: 'cacheAuthProviders',
+    instance: true,
+  } as IModuleConfigStartup,
+};
+
+// broadcasts
+const broadcasts = {
+  authProviderChanged: {
+    bean: 'authProviderChanged',
+  } as IModuleConfigBroadcast,
+};
+
+export const config = _app => {
+  return {
+    startups,
+    broadcasts,
+    login: {
+      providers: [
+        {
+          module: 'a-authsimple',
+          provider: 'authsimple',
+        },
+        {
+          module: 'a-authsms',
+          provider: 'authsms',
+        },
+        {
+          module: 'a-authgithub',
+          provider: 'authgithub',
+        },
+      ],
     },
   };
-
-  // broadcasts
-  config.broadcasts = {
-    authProviderChanged: {
-      bean: 'authProviderChanged',
-    },
-  };
-
-  // login
-  config.login = {
-    providers: [
-      {
-        module: 'a-authsimple',
-        provider: 'authsimple',
-      },
-      {
-        module: 'a-authsms',
-        provider: 'authsms',
-      },
-      {
-        module: 'a-authgithub',
-        provider: 'authgithub',
-      },
-    ],
-  };
-
-  return config;
 };
