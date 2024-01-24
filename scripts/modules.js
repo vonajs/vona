@@ -68,7 +68,72 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
-async function _moduleHandle({ module, processHelper }) {}
+async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/config/errors.ts`;
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  let contentOld = (await fse.readFile(file)).toString();
+  const regexp = /('[^']*') = (\d*)/g;
+  const matches = contentOld.matchAll(regexp);
+  const errorNames = [];
+  const errorNamesNew = [];
+  for (const match of matches) {
+    const errorName = match[1];
+    const errorCode = match[2];
+    if (errorName.indexOf(' ') === -1) continue;
+    console.log(`${errorName}, ${errorCode}`);
+    let errorNameNew = errorName
+      .replaceAll('%s', ' ')
+      .replaceAll('%d', ' ')
+      .replaceAll(':', ' ')
+      .replaceAll(',', ' ')
+      .replaceAll('!', ' ')
+      .replaceAll('.', ' ')
+      .replaceAll('?', ' ')
+      .replaceAll('-', ' ');
+    const parts = errorNameNew
+      .split(' ')
+      .filter(item => !!item)
+      .map(item => {
+        return item.charAt(0).toUpperCase() + item.substring(1);
+      });
+    errorNameNew = parts.join('');
+    if (errorName.indexOf('%') > -1) {
+      errorNameNew = errorNameNew.substring(0, errorNameNew.length - 1) + "__'";
+    }
+    console.log(errorNameNew);
+    errorNames.push(errorName);
+    errorNamesNew.push(errorNameNew);
+    // outputNew1.push(`${classPath} = ${classNameOld},`);
+  }
+  if (errorNames.length === 0) return;
+  // en-us
+  const fileEn = `${module.root}/src/config/locale/en-us.ts`;
+  let contentEn = (await fse.readFile(fileEn)).toString();
+  const fileZh = `${module.root}/src/config/locale/zh-cn.ts`;
+  let contentZh = (await fse.readFile(fileZh)).toString();
+  for (let index = 0; index < errorNames.length; index++) {
+    const errorName = errorNames[index];
+    const errorNameNew = errorNamesNew[index];
+    contentEn = contentEn.replace('};', `${errorNameNew.replaceAll("'", '')}: ${errorName}\n};`);
+    contentZh = contentZh.replace(errorName, errorNameNew.replaceAll("'", ''));
+    contentOld = contentOld.replace(errorName, errorNameNew);
+  }
+  console.log('---------------');
+  console.log(contentEn);
+  console.log(contentZh);
+  console.log(contentOld);
+
+  // console.log(outputNew);
+  await fse.outputFile(fileEn, contentEn);
+  await processHelper.formatFile({ fileName: fileEn });
+  await fse.outputFile(fileZh, contentZh);
+  await processHelper.formatFile({ fileName: fileZh });
+  await fse.outputFile(file, contentOld);
+  await processHelper.formatFile({ fileName: file });
+}
 
 async function _moduleHandle_locales2({ module, processHelper }) {
   const file = `${module.root}/src/config/locale/en-us.ts`;
