@@ -69,12 +69,13 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/config/middlewares.ts`;
+  const file = `${module.root}/src/aops.ts`;
   if (!fse.existsSync(file)) {
     // console.log('---- not changed: ', module.info.relativeName);
     return;
   }
   console.log(file);
+  await fse.remove(file);
 }
 
 async function _moduleHandle_config({ module, processHelper }) {
