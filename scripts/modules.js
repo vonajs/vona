@@ -117,7 +117,7 @@ async function _moduleHandle({ module, processHelper }) {
   for (let index = 0; index < errorNames.length; index++) {
     const errorName = errorNames[index];
     const errorNameNew = errorNamesNew[index];
-    contentEn = contentEn.replace('};', `${errorNameNew.replaceAll("'", '')}: ${errorName}\n};`);
+    contentEn = contentEn.replace('};', `${errorNameNew.replaceAll("'", '')}: ${errorName},\n};`);
     contentZh = contentZh.replace(errorName, errorNameNew.replaceAll("'", ''));
     contentOld = contentOld.replace(errorName, errorNameNew);
   }
