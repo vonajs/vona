@@ -38,3 +38,11 @@ export interface IModuleConfigSummer {
   enable?: boolean;
   caches: Record<string, IModuleConfigSummerCache>;
 }
+
+export interface IModuleConfigSchedule {
+  bean: string | { module: string; name: string };
+  repeat: {
+    every: number;
+  };
+  disable?: boolean;
+}
