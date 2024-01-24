@@ -96,7 +96,9 @@ async function _moduleHandle({ module, processHelper }) {
     ${outputNew1.join('\n')}
   }
   `;
-  console.log(outputNew);
+  // console.log(outputNew);
+  await fse.outputFile(file, outputNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle_locales({ module, processHelper }) {
