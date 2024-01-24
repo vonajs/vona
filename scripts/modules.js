@@ -70,11 +70,21 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 //
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/**/*.ts`;
+  const fileZh = `${module.root}/src/config/locale/zh-cn.ts`;
+  const contentZh = (await fse.readFile(fileZh)).toString();
+  // console.log(contentZh);
   // files
+  const pattern = `${module.root}/**/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
-    console.log(file);
+    const contentOld = (await fse.readFile(file)).toString();
+    const matches = contentOld.matchAll(/.text\(('[^']* [^']*')\)/g);
+    for (const match of matches) {
+      const errorName = match[1];
+      if (contentZh.indexOf(errorName) === -1) {
+        console.log(errorName);
+      }
+    }
   }
 }
 
