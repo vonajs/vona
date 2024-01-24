@@ -69,7 +69,9 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
-async function _moduleHandle({ module, processHelper }) {
+async function _moduleHandle({ module, processHelper }) {}
+
+async function _moduleHandle_errors3({ module, processHelper }) {
   const fileZh = `${module.root}/src/config/locale/zh-cn.ts`;
   const contentZh = (await fse.readFile(fileZh)).toString();
   // console.log(contentZh);
