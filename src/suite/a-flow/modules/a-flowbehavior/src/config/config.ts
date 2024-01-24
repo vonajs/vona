@@ -1,13 +1,12 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+// queues
+const queues = {
+  overtime: {
+    bean: 'overtime',
+  },
+};
 
-  // queues
-  config.queues = {
-    overtime: {
-      bean: 'overtime',
-    },
+export const config = _app => {
+  return {
+    queues,
   };
-
-  return config;
 };

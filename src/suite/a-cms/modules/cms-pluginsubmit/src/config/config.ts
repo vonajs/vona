@@ -1,22 +1,22 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigQueue } from '@cabloy/core';
 
-  // plugin
-  config.plugin = {
-    submit: {
-      baidu: {
-        token: '',
+// queues
+const queues = {
+  submit: {
+    bean: 'submit',
+  } as IModuleConfigQueue,
+};
+
+export const config = _app => {
+  return {
+    queues,
+    // plugin
+    plugin: {
+      submit: {
+        baidu: {
+          token: '',
+        },
       },
     },
   };
-
-  // queues
-  config.queues = {
-    submit: {
-      bean: 'submit',
-    },
-  };
-
-  return config;
 };

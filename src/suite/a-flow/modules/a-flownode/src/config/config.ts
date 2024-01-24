@@ -1,14 +1,15 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigQueue } from '@cabloy/core';
 
-  // queues
-  config.queues = {
-    startEventTimer: {
-      bean: 'startEventTimer',
-      concurrency: true,
-    },
+// queues
+const queues = {
+  startEventTimer: {
+    bean: 'startEventTimer',
+    concurrency: true,
+  } as IModuleConfigQueue,
+};
+
+export const config = _app => {
+  return {
+    queues,
   };
-
-  return config;
 };
