@@ -1,14 +1,15 @@
-// eslint-disable-next-line
-module.exports = app => {
-  const config = {};
+import { IModuleConfigMiddleware } from '@cabloy/core';
 
-  // middlewares
-  config.middlewares = {
-    validate: {
-      bean: 'validate',
-      global: false,
-    },
+// middlewares
+const middlewares = {
+  validate: {
+    bean: 'validate',
+    global: false,
+  } as IModuleConfigMiddleware,
+};
+
+export const config = _app => {
+  return {
+    middlewares,
   };
-
-  return config;
 };
