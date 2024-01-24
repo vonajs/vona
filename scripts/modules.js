@@ -68,8 +68,9 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+async function _moduleHandle({ module, processHelper }) {}
 
-async function _moduleHandle({ module, processHelper }) {
+async function _moduleHandle_config({ module, processHelper }) {
   const file = `${module.root}/src/config/config.ts`;
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
