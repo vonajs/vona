@@ -69,6 +69,66 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/config/locales.ts`;
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  const regexp = /'(.*)': require\('\.\/(.*)\.js'\)/g;
+  const matches = contentOld.matchAll(regexp);
+  const routesNew1 = [];
+  const routesNew2 = [];
+  for (const match of matches) {
+    const classNameOld = match[1];
+    const classPath = match[2];
+    console.log(classNameOld, classPath);
+    routesNew1.push(`import ${classNameOld.replace('-', '_')} from './${classPath}.js';`);
+    routesNew2.push(`'${classNameOld}': ${classNameOld.replace('-', '_')},`);
+    //
+    const classFile = `${module.root}/src/config/${classPath}.ts`;
+    // console.log(classFile);
+    const classContent = (await fse.readFile(classFile)).toString();
+    // const classNameNew = classPathToClassName('Controller', classPath);
+    // const beanName = parseBeanName(classNameNew, 'Controller');
+    // console.log(classNameNew, classNameOld);
+    // 替换内容
+    const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = (\{[\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', module.info.relativeName);
+      return;
+    }
+    // console.log(contentMatches);
+    const contentNew = `
+${contentMatches[1]}
+export default ${contentMatches[2]}
+    `;
+    // console.log(contentNew);
+    await fse.outputFile(classFile, contentNew);
+    await processHelper.formatFile({ fileName: classFile });
+
+    // 别忘了替换routes中的controller name
+    // const routesFile = `${module.root}/src/routes.ts`;
+    // let routesContent = (await fse.readFile(routesFile)).toString();
+    // routesContent = routesContent.replaceAll(`controller: '${classNameOld}'`, `controller: '${beanName}'`);
+    // console.log(routesContent, beanName);
+    // await fse.outputFile(routesFile, routesContent);
+    // await processHelper.formatFile({ fileName: routesFile });
+  }
+  // routes
+  const routesContentNew = `
+${routesNew1.join('\n')}
+
+export const locales = {
+  ${routesNew2.join('\n')}
+};
+  `;
+  console.log(routesContentNew);
+  await fse.outputFile(file, routesContentNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
+async function _moduleHandle_constants({ module, processHelper }) {
   const file = `${module.root}/src/config/constants.ts`;
   if (fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
