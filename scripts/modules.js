@@ -69,7 +69,37 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
-async function _moduleHandle({ module, processHelper }) {}
+async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/config/config.ts`;
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  const matchExport = contentOld.match(/export /);
+  if (matchExport) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const regexp = /config\.(.*) = ([\s\S\n]*);/g;
+  const matches = contentOld.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  for (const match of matches) {
+    const classNameOld = match[1];
+    const classPath = match[2];
+    console.log(classNameOld, classPath);
+    outputNew1.push(`${classPath} = ${classNameOld},`);
+  }
+  const outputNew = `
+  export enum Errors {
+    ${outputNew1.join('\n')}
+  }
+  `;
+  // console.log(outputNew);
+  // await fse.outputFile(file, outputNew);
+  // await processHelper.formatFile({ fileName: file });
+}
 
 async function _moduleHandle_errors3({ module, processHelper }) {
   const fileZh = `${module.root}/src/config/locale/zh-cn.ts`;
