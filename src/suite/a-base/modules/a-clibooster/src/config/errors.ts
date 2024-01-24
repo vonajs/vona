@@ -1,12 +1,9 @@
-// error code should start from 1001
-module.exports = {
-  1001: 'Not Found',
-  // 2000: publish
-  2001: 'No Changes Found',
-  2002: 'Submitted, Version: %s',
-  // 3000: sync
-  3000: 'Synced, Version: %s',
-  3001: 'Not Purchased',
-  3002: 'Expired, Expired Time: %s',
-  3003: 'Expired Time: %s',
-};
+export enum Errors {
+  'Not Found' = 1001,
+  'No Changes Found' = 2001,
+  'Submitted, Version: %s' = 2002,
+  'Synced, Version: %s' = 3000,
+  'Not Purchased' = 3001,
+  'Expired, Expired Time: %s' = 3002,
+  'Expired Time: %s' = 3003,
+}

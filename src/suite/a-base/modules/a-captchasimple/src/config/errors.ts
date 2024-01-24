@@ -1,5 +1,4 @@
-// error code should start from 1001
-module.exports = {
-  1001: 'CaptchaInvalid',
-  1002: 'CaptchaMismatch',
-};
+export enum Errors {
+  'CaptchaInvalid' = 1001,
+  'CaptchaMismatch' = 1002,
+}

@@ -1,2 +1,1 @@
-// error code should start from 1001
-module.exports = {};
+export enum Errors {}

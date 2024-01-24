@@ -1,6 +1,5 @@
-// error code should start from 1001
-module.exports = {
-  1001: 'Authentication Failed',
-  1002: 'User is Disabled',
-  1003: 'passwordResetEmailExpired',
-};
+export enum Errors {
+  'Authentication Failed' = 1001,
+  'User is Disabled' = 1002,
+  'passwordResetEmailExpired' = 1003,
+}

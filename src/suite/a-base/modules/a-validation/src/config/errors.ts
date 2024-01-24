@@ -1,4 +1,3 @@
-// error code should start from 1001
-module.exports = {
-  1001: 'Validator Not Specified',
-};
+export enum Errors {
+  'Validator Not Specified' = 1001,
+}

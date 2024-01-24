@@ -1,4 +1,3 @@
-// error code should start from 1001
-module.exports = {
-  1001: 'AtLeastOneAuthProviderEnabled',
-};
+export enum Errors {
+  'AtLeastOneAuthProviderEnabled' = 1001,
+}

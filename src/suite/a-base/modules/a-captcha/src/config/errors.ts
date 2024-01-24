@@ -1,4 +1,3 @@
-// error code should start from 1001
-module.exports = {
-  1001: 'Scene Not Specified',
-};
+export enum Errors {
+  'Scene Not Specified' = 1001,
+}

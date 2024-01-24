@@ -70,6 +70,28 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 //
 
 async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/config/locale/en-us.ts`;
+  if (fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentNew = `
+  export default {
+  };  
+    `;
+  console.log(contentNew);
+  // await fse.outputFile(classFile, contentNew);
+  // await processHelper.formatFile({ fileName: classFile });
+  //
+  const outputNew = `
+  
+  `;
+  // console.log(outputNew);
+  // await fse.outputFile(file, outputNew);
+  // await processHelper.formatFile({ fileName: file });
+}
+
+async function _moduleHandle_errors({ module, processHelper }) {
   const file = `${module.root}/src/config/errors.ts`;
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
