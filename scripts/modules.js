@@ -80,8 +80,8 @@ async function _moduleHandle({ module, processHelper }) {
   };  
     `;
   console.log(contentNew);
-  await fse.outputFile(classFile, contentNew);
-  await processHelper.formatFile({ fileName: classFile });
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
   //
   const file2 = `${module.root}/src/config/locales.ts`;
   const contentOld = (await fse.readFile(file2)).toString();
