@@ -56,7 +56,9 @@ async function _moduleHandle({ module, processHelper }) {
   const outputNew1 = [];
   const outputNew2 = [];
   const outputNew3 = [];
+  let matchCount = 0;
   for (const match of matches) {
+    matchCount++;
     const classNameOld = match[1];
     const classPath = match[2];
     if (classNameOld.indexOf('.') > -1) {
@@ -102,6 +104,11 @@ ${contentMatches[4]}
     // console.log(contentNew);
     await fse.outputFile(classFile, contentNew);
     await processHelper.formatFile({ fileName: classFile });
+  }
+  if (matchCount.length !== outputNew1.length) {
+    console.log('---- match length not equal: ', module.info.relativeName);
+    process.exit(0);
+    return;
   }
   const outputNew = `
 ${outputNew1.join('\n')}
