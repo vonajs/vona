@@ -1,5 +1,4 @@
-module.exports = class ShareRecordUV extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aShareRecordUV', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aShareRecordUV', options: { disableDeleted: false } })
+export class ModelShareRecordUV extends BeanModelBase {}

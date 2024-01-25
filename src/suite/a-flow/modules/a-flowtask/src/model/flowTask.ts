@@ -1,11 +1,10 @@
-module.exports = class FlowTask extends module.meta.class.ModelCache {
-  constructor() {
-    super({
-      table: 'aFlowTask',
-      options: {
-        disableDeleted: true,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelFlowTask' },
-      },
-    });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({
+  table: 'aFlowTask',
+  options: {
+    disableDeleted: true,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelFlowTask' },
+  },
+})
+export class ModelFlowTask extends BeanModelBase {}

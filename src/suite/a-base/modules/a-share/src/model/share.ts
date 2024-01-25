@@ -1,5 +1,4 @@
-module.exports = class Share extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aShare', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aShare', options: { disableDeleted: false } })
+export class ModelShare extends BeanModelBase {}

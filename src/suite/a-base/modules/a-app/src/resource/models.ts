@@ -1,5 +1,13 @@
-const _app = require('./model/app.js');
-const appContent = require('./model/appContent.js');
-const appFull = require('./model/appFull.js');
+export * from '../model/app.js';
+export * from '../model/appContent.js';
+export * from '../model/appFull.js';
 
-module.exports = { app: _app, appContent, appFull };
+import { ModelApp } from '../model/app.js';
+import { ModelAppContent } from '../model/appContent.js';
+import { ModelAppFull } from '../model/appFull.js';
+
+export interface IModuleModel {
+  _app: ModelApp;
+  appContent: ModelAppContent;
+  appFull: ModelAppFull;
+}

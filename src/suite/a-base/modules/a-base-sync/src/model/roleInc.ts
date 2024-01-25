@@ -1,5 +1,4 @@
-module.exports = class RoleInc extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aRoleInc', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aRoleInc', options: { disableDeleted: true } })
+export class ModelRoleInc extends BeanModelBase {}

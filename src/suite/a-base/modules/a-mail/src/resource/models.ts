@@ -1,5 +1,7 @@
-const mail = require('./model/mail.js');
+export * from '../model/mail.js';
 
-module.exports = {
-  mail,
-};
+import { ModelMail } from '../model/mail.js';
+
+export interface IModuleModel {
+  mail: ModelMail;
+}

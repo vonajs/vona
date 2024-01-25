@@ -1,5 +1,4 @@
-module.exports = class Mail extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aMail', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aMail', options: { disableDeleted: false } })
+export class ModelMail extends BeanModelBase {}

@@ -1,13 +1,12 @@
+import { BeanModelBase, Model } from '@cabloy/core';
+
 const ModelCache = require('../common/modelCache.js');
 
-module.exports = class Label extends ModelCache {
-  constructor() {
-    super({
-      table: 'aLabel',
-      options: {
-        disableDeleted: true,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelLabel' },
-      },
-    });
-  }
-};
+@Model({
+  table: 'aLabel',
+  options: {
+    disableDeleted: true,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelLabel' },
+  },
+})
+export class ModelLabel extends BeanModelBase {}

@@ -1,5 +1,4 @@
-module.exports = class FlowDefFull extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aFlowDefViewFull', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aFlowDefViewFull', options: { disableDeleted: false } })
+export class ModelFlowDefFull extends BeanModelBase {}

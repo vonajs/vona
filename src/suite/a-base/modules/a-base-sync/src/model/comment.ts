@@ -1,5 +1,4 @@
-module.exports = class Comment extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aComment', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aComment', options: { disableDeleted: false } })
+export class ModelComment extends BeanModelBase {}

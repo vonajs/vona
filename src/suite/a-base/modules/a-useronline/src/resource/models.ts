@@ -1,7 +1,10 @@
-const userOnline = require('./model/userOnline.js');
-const userOnlineHistory = require('./model/userOnlineHistory.js');
+export * from '../model/userOnline.js';
+export * from '../model/userOnlineHistory.js';
 
-module.exports = {
-  userOnline,
-  userOnlineHistory,
-};
+import { ModelUserOnline } from '../model/userOnline.js';
+import { ModelUserOnlineHistory } from '../model/userOnlineHistory.js';
+
+export interface IModuleModel {
+  userOnline: ModelUserOnline;
+  userOnlineHistory: ModelUserOnlineHistory;
+}

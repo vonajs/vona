@@ -1,5 +1,7 @@
-const authSimple = require('./model/authSimple.js');
+export * from '../model/authSimple.js';
 
-module.exports = {
-  authSimple,
-};
+import { ModelAuthSimple } from '../model/authSimple.js';
+
+export interface IModuleModel {
+  authSimple: ModelAuthSimple;
+}

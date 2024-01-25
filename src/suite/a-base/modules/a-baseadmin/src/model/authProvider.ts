@@ -1,5 +1,4 @@
-module.exports = class AuthProvider extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aAuthProvider', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aAuthProvider', options: { disableDeleted: true } })
+export class ModelAuthProvider extends BeanModelBase {}

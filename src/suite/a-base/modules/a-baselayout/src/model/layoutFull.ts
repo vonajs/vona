@@ -1,5 +1,4 @@
-module.exports = class LayoutFull extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aLayoutViewFull', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aLayoutViewFull', options: { disableDeleted: false } })
+export class ModelLayoutFull extends BeanModelBase {}

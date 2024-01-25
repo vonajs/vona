@@ -1,5 +1,4 @@
-module.exports = class SettingsRef extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aSettingsRef', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aSettingsRef', options: { disableDeleted: true } })
+export class ModelSettingsRef extends BeanModelBase {}

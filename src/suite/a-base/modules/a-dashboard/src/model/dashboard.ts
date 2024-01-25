@@ -1,5 +1,4 @@
-module.exports = class Dashboard extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aDashboard', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aDashboard', options: { disableDeleted: false } })
+export class ModelDashboard extends BeanModelBase {}

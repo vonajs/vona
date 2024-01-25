@@ -1,5 +1,4 @@
-module.exports = class FlowNodeStartEventAtomCondition extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aFlowNodeStartEventAtomCondition', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aFlowNodeStartEventAtomCondition', options: { disableDeleted: true } })
+export class ModelFlowNodeStartEventAtomCondition extends BeanModelBase {}

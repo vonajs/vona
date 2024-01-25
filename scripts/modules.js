@@ -83,7 +83,7 @@ async function _moduleHandle({ module, processHelper }) {
     // console.log(classNameNew, classNameOld);
     // 替换内容
     const contentMatches = classContent.match(
-      /([\s\S\n]*)module\.exports = class ([\S]*) extends [\s\S\n]* super\(([\s\S\n]*)\);[\s\n]*\}([\s\S\n]*)/,
+      /([\s\S\n]*)module\.exports = class ([\S]*) extends [\s\S\n]* super\(([\s\S\n]*?)\);[\s\n]*?\}([\s\S\n]*)/,
     );
     if (!contentMatches) {
       console.log('---- not matched: ', classFile);
@@ -99,7 +99,7 @@ ${contentMatches[1]}
 export class ${classNameNew} extends BeanModelBase {
 ${contentMatches[4]}
     `;
-    console.log(contentNew);
+    // console.log(contentNew);
     await fse.outputFile(classFile, contentNew);
     await processHelper.formatFile({ fileName: classFile });
   }
@@ -112,7 +112,7 @@ export interface IModuleModel {
   ${outputNew3.join('\n')}
 }
   `;
-  console.log(outputNew);
+  // console.log(outputNew);
   await fse.outputFile(file, outputNew);
   await processHelper.formatFile({ fileName: file });
 }

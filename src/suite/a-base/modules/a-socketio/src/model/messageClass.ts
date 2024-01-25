@@ -1,14 +1,13 @@
-module.exports = class MessageClass extends module.meta.class.ModelCache {
-  constructor() {
-    super({
-      table: 'aSocketIOMessageClass',
-      options: {
-        disableDeleted: false,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelMessageClass' },
-      },
-    });
-  }
+import { BeanModelBase, Model } from '@cabloy/core';
 
+@Model({
+  table: 'aSocketIOMessageClass',
+  options: {
+    disableDeleted: false,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelMessageClass' },
+  },
+})
+export class ModelMessageClass extends BeanModelBase {
   // array of object/number
   async mget(ids) {
     if (ids.length === 0) return [];
@@ -42,4 +41,4 @@ module.exports = class MessageClass extends module.meta.class.ModelCache {
     // others
     return await super.get(where, ...args);
   }
-};
+}

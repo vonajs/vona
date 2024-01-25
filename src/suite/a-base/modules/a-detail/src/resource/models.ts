@@ -1,5 +1,7 @@
-const detailBase = require('./model/detailBase.js');
+export * from '../model/detailBase.js';
 
-module.exports = {
-  detailBase,
-};
+import { ModelDetailBase } from '../model/detailBase.js';
+
+export interface IModuleModel {
+  detailBase: ModelDetailBase;
+}

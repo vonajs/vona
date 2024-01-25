@@ -1,7 +1,10 @@
-const file = require('./model/file.js');
-const fileView = require('./model/fileView.js');
+export * from '../model/file.js';
+export * from '../model/fileView.js';
 
-module.exports = {
-  file,
-  fileView,
-};
+import { ModelFile } from '../model/file.js';
+import { ModelFileView } from '../model/fileView.js';
+
+export interface IModuleModel {
+  file: ModelFile;
+  fileView: ModelFileView;
+}

@@ -1,5 +1,7 @@
-const status = require('./model/status.js');
+export * from '../model/status.js';
 
-module.exports = {
-  status,
-};
+import { ModelStatus } from '../model/status.js';
+
+export interface IModuleModel {
+  status: ModelStatus;
+}

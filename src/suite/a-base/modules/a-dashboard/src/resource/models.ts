@@ -1,11 +1,16 @@
-const dashboard = require('./model/dashboard.js');
-const dashboardContent = require('./model/dashboardContent.js');
-const dashboardUser = require('./model/dashboardUser.js');
-const dashboardFull = require('./model/dashboardFull.js');
+export * from '../model/dashboard.js';
+export * from '../model/dashboardContent.js';
+export * from '../model/dashboardUser.js';
+export * from '../model/dashboardFull.js';
 
-module.exports = {
-  dashboard,
-  dashboardContent,
-  dashboardUser,
-  dashboardFull,
-};
+import { ModelDashboard } from '../model/dashboard.js';
+import { ModelDashboardContent } from '../model/dashboardContent.js';
+import { ModelDashboardUser } from '../model/dashboardUser.js';
+import { ModelDashboardFull } from '../model/dashboardFull.js';
+
+export interface IModuleModel {
+  dashboard: ModelDashboard;
+  dashboardContent: ModelDashboardContent;
+  dashboardUser: ModelDashboardUser;
+  dashboardFull: ModelDashboardFull;
+}

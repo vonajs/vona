@@ -1,5 +1,4 @@
-module.exports = class Dict extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aDict', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aDict', options: { disableDeleted: false } })
+export class ModelDict extends BeanModelBase {}

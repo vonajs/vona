@@ -1,5 +1,4 @@
-module.exports = class ResourceLocale extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aResourceLocale', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aResourceLocale', options: { disableDeleted: true } })
+export class ModelResourceLocale extends BeanModelBase {}

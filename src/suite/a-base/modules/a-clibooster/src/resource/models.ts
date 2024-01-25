@@ -1,2 +1,1 @@
-const models = {};
-module.exports = models;
+export interface IModuleModel {}

@@ -1,5 +1,7 @@
-const authProvider = require('./model/authProvider.js');
+export * from '../model/authProvider.js';
 
-module.exports = {
-  authProvider,
-};
+import { ModelAuthProvider } from '../model/authProvider.js';
+
+export interface IModuleModel {
+  authProvider: ModelAuthProvider;
+}

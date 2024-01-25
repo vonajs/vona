@@ -1,5 +1,7 @@
-const stats = require('./model/stats.js');
+export * from '../model/stats.js';
 
-module.exports = {
-  stats,
-};
+import { ModelStats } from '../model/stats.js';
+
+export interface IModuleModel {
+  stats: ModelStats;
+}

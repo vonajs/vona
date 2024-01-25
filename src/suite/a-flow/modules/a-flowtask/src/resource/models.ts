@@ -1,9 +1,13 @@
-const flowNodeStartEventAtomCondition = require('./model/flowNodeStartEventAtomCondition.js');
-const flowTask = require('./model/flowTask.js');
-const flowTaskHistory = require('./model/flowTaskHistory.js');
+export * from '../model/flowNodeStartEventAtomCondition.js';
+export * from '../model/flowTask.js';
+export * from '../model/flowTaskHistory.js';
 
-module.exports = {
-  flowNodeStartEventAtomCondition,
-  flowTask,
-  flowTaskHistory,
-};
+import { ModelFlowNodeStartEventAtomCondition } from '../model/flowNodeStartEventAtomCondition.js';
+import { ModelFlowTask } from '../model/flowTask.js';
+import { ModelFlowTaskHistory } from '../model/flowTaskHistory.js';
+
+export interface IModuleModel {
+  flowNodeStartEventAtomCondition: ModelFlowNodeStartEventAtomCondition;
+  flowTask: ModelFlowTask;
+  flowTaskHistory: ModelFlowTaskHistory;
+}

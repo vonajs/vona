@@ -1,62 +1,94 @@
-const atom = require('./model/atom.js');
-const atomAction = require('./model/atomAction.js');
-const atomClass = require('./model/atomClass.js');
-const auth = require('./model/auth.js');
-const authProvider = require('./model/authProvider.js');
-const role = require('./model/role.js');
-const roleInc = require('./model/roleInc.js');
-const roleIncRef = require('./model/roleIncRef.js');
-const roleRef = require('./model/roleRef.js');
-const roleRight = require('./model/roleRight.js');
-const roleRightRef = require('./model/roleRightRef.js');
-const roleExpand = require('./model/roleExpand.js');
-const roleFieldsRight = require('./model/roleFieldsRight.js');
-const user = require('./model/user.js');
-const userAgent = require('./model/userAgent.js');
-const userRole = require('./model/userRole.js');
-const label = require('./model/label.js');
-const atomLabel = require('./model/atomLabel.js');
-const atomLabelRef = require('./model/atomLabelRef.js');
-const atomStar = require('./model/atomStar.js');
-const comment = require('./model/comment.js');
-const commentView = require('./model/commentView.js');
-const commentHeart = require('./model/commentHeart.js');
-const category = require('./model/category.js');
-const tag = require('./model/tag.js');
-const tagRef = require('./model/tagRef.js');
-const resource = require('./model/resource.js');
-const resourceLocale = require('./model/resourceLocale.js');
-const resourceRole = require('./model/resourceRole.js');
+export * from '../model/atom.js';
+export * from '../model/atomAction.js';
+export * from '../model/atomClass.js';
+export * from '../model/auth.js';
+export * from '../model/authProvider.js';
+export * from '../model/role.js';
+export * from '../model/roleInc.js';
+export * from '../model/roleIncRef.js';
+export * from '../model/roleRef.js';
+export * from '../model/roleRight.js';
+export * from '../model/roleRightRef.js';
+export * from '../model/roleExpand.js';
+export * from '../model/roleFieldsRight.js';
+export * from '../model/user.js';
+export * from '../model/userAgent.js';
+export * from '../model/userRole.js';
+export * from '../model/userRoleIncRef.js';
+export * from '../model/label.js';
+export * from '../model/atomLabel.js';
+export * from '../model/atomLabelRef.js';
+export * from '../model/atomStar.js';
+export * from '../model/comment.js';
+export * from '../model/commentView.js';
+export * from '../model/commentHeart.js';
+export * from '../model/category.js';
+export * from '../model/tag.js';
+export * from '../model/tagRef.js';
+export * from '../model/resource.js';
+export * from '../model/resourceLocale.js';
+export * from '../model/resourceRole.js';
 
-const models = {
-  atom,
-  atomAction,
-  atomClass,
-  auth,
-  authProvider,
-  role,
-  roleInc,
-  roleIncRef,
-  roleRef,
-  roleRight,
-  roleRightRef,
-  roleExpand,
-  roleFieldsRight,
-  user,
-  userAgent,
-  userRole,
-  label,
-  atomLabel,
-  atomLabelRef,
-  atomStar,
-  comment,
-  commentView,
-  commentHeart,
-  category,
-  tag,
-  tagRef,
-  resource,
-  resourceLocale,
-  resourceRole,
-};
-module.exports = models;
+import { ModelAtom } from '../model/atom.js';
+import { ModelAtomAction } from '../model/atomAction.js';
+import { ModelAtomClass } from '../model/atomClass.js';
+import { ModelAuth } from '../model/auth.js';
+import { ModelAuthProvider } from '../model/authProvider.js';
+import { ModelRole } from '../model/role.js';
+import { ModelRoleInc } from '../model/roleInc.js';
+import { ModelRoleIncRef } from '../model/roleIncRef.js';
+import { ModelRoleRef } from '../model/roleRef.js';
+import { ModelRoleRight } from '../model/roleRight.js';
+import { ModelRoleRightRef } from '../model/roleRightRef.js';
+import { ModelRoleExpand } from '../model/roleExpand.js';
+import { ModelRoleFieldsRight } from '../model/roleFieldsRight.js';
+import { ModelUser } from '../model/user.js';
+import { ModelUserAgent } from '../model/userAgent.js';
+import { ModelUserRole } from '../model/userRole.js';
+import { ModelUserRoleIncRef } from '../model/userRoleIncRef.js';
+import { ModelLabel } from '../model/label.js';
+import { ModelAtomLabel } from '../model/atomLabel.js';
+import { ModelAtomLabelRef } from '../model/atomLabelRef.js';
+import { ModelAtomStar } from '../model/atomStar.js';
+import { ModelComment } from '../model/comment.js';
+import { ModelCommentView } from '../model/commentView.js';
+import { ModelCommentHeart } from '../model/commentHeart.js';
+import { ModelCategory } from '../model/category.js';
+import { ModelTag } from '../model/tag.js';
+import { ModelTagRef } from '../model/tagRef.js';
+import { ModelResource } from '../model/resource.js';
+import { ModelResourceLocale } from '../model/resourceLocale.js';
+import { ModelResourceRole } from '../model/resourceRole.js';
+
+export interface IModuleModel {
+  atom: ModelAtom;
+  atomAction: ModelAtomAction;
+  atomClass: ModelAtomClass;
+  auth: ModelAuth;
+  authProvider: ModelAuthProvider;
+  role: ModelRole;
+  roleInc: ModelRoleInc;
+  roleIncRef: ModelRoleIncRef;
+  roleRef: ModelRoleRef;
+  roleRight: ModelRoleRight;
+  roleRightRef: ModelRoleRightRef;
+  roleExpand: ModelRoleExpand;
+  roleFieldsRight: ModelRoleFieldsRight;
+  user: ModelUser;
+  userAgent: ModelUserAgent;
+  userRole: ModelUserRole;
+  userRoleIncRef: ModelUserRoleIncRef;
+  label: ModelLabel;
+  atomLabel: ModelAtomLabel;
+  atomLabelRef: ModelAtomLabelRef;
+  atomStar: ModelAtomStar;
+  comment: ModelComment;
+  commentView: ModelCommentView;
+  commentHeart: ModelCommentHeart;
+  category: ModelCategory;
+  tag: ModelTag;
+  tagRef: ModelTagRef;
+  resource: ModelResource;
+  resourceLocale: ModelResourceLocale;
+  resourceRole: ModelResourceRole;
+}

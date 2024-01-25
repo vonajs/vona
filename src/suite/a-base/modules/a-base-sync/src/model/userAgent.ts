@@ -1,5 +1,4 @@
-module.exports = class UserAgent extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aUserAgent', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aUserAgent', options: { disableDeleted: true } })
+export class ModelUserAgent extends BeanModelBase {}

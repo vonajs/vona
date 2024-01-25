@@ -1,5 +1,7 @@
-const authOpen = require('./model/authOpen.js');
+export * from '../model/authOpen.js';
 
-module.exports = {
-  authOpen,
-};
+import { ModelAuthOpen } from '../model/authOpen.js';
+
+export interface IModuleModel {
+  authOpen: ModelAuthOpen;
+}

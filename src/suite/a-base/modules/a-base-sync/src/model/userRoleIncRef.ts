@@ -1,5 +1,4 @@
-module.exports = class UserRoleIncRef extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aUserRoleIncRef', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aUserRoleIncRef', options: { disableDeleted: true } })
+export class ModelUserRoleIncRef extends BeanModelBase {}

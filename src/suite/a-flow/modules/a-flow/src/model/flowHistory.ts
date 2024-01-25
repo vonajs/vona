@@ -1,11 +1,10 @@
-module.exports = class FlowHistory extends module.meta.class.ModelCache {
-  constructor() {
-    super({
-      table: 'aFlowHistory',
-      options: {
-        disableDeleted: false,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelFlowHistory' },
-      },
-    });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({
+  table: 'aFlowHistory',
+  options: {
+    disableDeleted: false,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelFlowHistory' },
+  },
+})
+export class ModelFlowHistory extends BeanModelBase {}

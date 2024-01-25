@@ -1,16 +1,15 @@
+import { BeanModelBase, Model } from '@cabloy/core';
+
 const ModelCache = require('../common/modelCache.js');
 
-module.exports = class AtomClass extends ModelCache {
-  constructor() {
-    super({
-      table: 'aAtomClass',
-      options: {
-        disableDeleted: false,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelAtomClass' },
-      },
-    });
-  }
-
+@Model({
+  table: 'aAtomClass',
+  options: {
+    disableDeleted: false,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelAtomClass' },
+  },
+})
+export class ModelAtomClass extends BeanModelBase {
   // array of object/number
   async mget(ids) {
     if (ids.length === 0) return [];
@@ -44,4 +43,4 @@ module.exports = class AtomClass extends ModelCache {
     // others
     return await super.get(where, ...args);
   }
-};
+}

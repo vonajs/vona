@@ -1,5 +1,4 @@
-module.exports = class MessageSync extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aSocketIOMessageSync', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aSocketIOMessageSync', options: { disableDeleted: false } })
+export class ModelMessageSync extends BeanModelBase {}

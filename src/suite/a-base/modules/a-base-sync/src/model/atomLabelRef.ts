@@ -1,5 +1,4 @@
-module.exports = class AtomLabelRef extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aAtomLabelRef', options: { disableDeleted: true } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aAtomLabelRef', options: { disableDeleted: true } })
+export class ModelAtomLabelRef extends BeanModelBase {}

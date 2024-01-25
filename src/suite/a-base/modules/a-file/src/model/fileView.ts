@@ -1,5 +1,4 @@
-module.exports = class FileView extends module.meta.class.Model {
-  constructor() {
-    super({ table: 'aViewFile', options: { disableDeleted: false } });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({ table: 'aViewFile', options: { disableDeleted: false } })
+export class ModelFileView extends BeanModelBase {}

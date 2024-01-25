@@ -1,11 +1,10 @@
-module.exports = class Stats extends module.meta.class.ModelCache {
-  constructor() {
-    super({
-      table: 'aStats',
-      options: {
-        disableDeleted: true,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelStats' },
-      },
-    });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({
+  table: 'aStats',
+  options: {
+    disableDeleted: true,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelStats' },
+  },
+})
+export class ModelStats extends BeanModelBase {}

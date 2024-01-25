@@ -1,11 +1,10 @@
-module.exports = class UserOnline extends module.meta.class.ModelCache {
-  constructor() {
-    super({
-      table: 'aUserOnline',
-      options: {
-        disableDeleted: false,
-        cacheName: { module: moduleInfo.relativeName, name: 'modelUserOnline' },
-      },
-    });
-  }
-};
+import { BeanModelBase, Model } from '@cabloy/core';
+
+@Model({
+  table: 'aUserOnline',
+  options: {
+    disableDeleted: false,
+    cacheName: { module: moduleInfo.relativeName, name: 'modelUserOnline' },
+  },
+})
+export class ModelUserOnline extends BeanModelBase {}

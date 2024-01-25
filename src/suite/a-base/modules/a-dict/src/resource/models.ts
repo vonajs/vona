@@ -1,7 +1,10 @@
-const dict = require('./model/dict.js');
-const dictContent = require('./model/dictContent.js');
+export * from '../model/dict.js';
+export * from '../model/dictContent.js';
 
-module.exports = {
-  dict,
-  dictContent,
-};
+import { ModelDict } from '../model/dict.js';
+import { ModelDictContent } from '../model/dictContent.js';
+
+export interface IModuleModel {
+  dict: ModelDict;
+  dictContent: ModelDictContent;
+}
