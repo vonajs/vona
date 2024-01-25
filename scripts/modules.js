@@ -104,7 +104,7 @@ async function _moduleHandle({ module, processHelper }) {
     const classFile = `${module.root}/src/local/${classPath}.ts`;
     // console.log(classFile);
     const classContent = (await fse.readFile(classFile)).toString();
-    const matchExport = contentOld.match(/export /);
+    const matchExport = classContent.match(/export /);
     if (matchExport) {
       console.log('---- not changed: ', classFile);
       continue;
@@ -127,7 +127,7 @@ ${contentMatches[1]}
 @Local()
 export class ${classNameNew} extends BeanBase ${contentMatches[3]}
     `;
-    console.log(contentNew);
+    // console.log(contentNew);
     // await fse.outputFile(classFile, contentNew);
     // await processHelper.formatFile({ fileName: classFile });
   }
@@ -140,7 +140,7 @@ export interface IModuleLocal {
   ${outputNew3.join('\n')}
 }
   `;
-  console.log(outputNew);
+  // console.log(outputNew);
   // await fse.outputFile(file, outputNew);
   // await processHelper.formatFile({ fileName: file });
 }
