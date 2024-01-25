@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Detail {
   async _deleteDetails({ atomClass, atomKey, user }) {
     await this._loopDetailClasses({

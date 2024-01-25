@@ -1,6 +1,5 @@
 const AtomBase = require('./bean.atomBase.js');
 
-// const moduleInfo = module.info;
 module.exports = class Atom extends AtomBase {
   async read({ atomClass, options, key, user }) {
     // super

@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class IOInner {
   // queue: push
   async queuePush({ options, message, messageSyncs, messageClass }) {

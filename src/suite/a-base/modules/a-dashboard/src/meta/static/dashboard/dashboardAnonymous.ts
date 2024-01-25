@@ -1,5 +1,3 @@
-// const moduleInfo = module.info;
-
 const content = {
   root: {
     id: '3f61ffd596d848be9c82d2c07d7dde83',

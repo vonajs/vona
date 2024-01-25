@@ -1,6 +1,5 @@
 const SOCKETSONLINE = Symbol.for('APP#__SOCKETSONLINE');
 
-// const moduleInfo = module.info;
 module.exports = class IO {
   _getSocketsOnline() {
     if (!this.ctx.app[SOCKETSONLINE]) {
@@ -43,7 +42,7 @@ module.exports = class IO {
     debug(
       'socketEmit broadcast: workerId:%s, socketIds:%s',
       this.ctx.app.meta.workerId,
-      Object.keys(socketsOnline).join(',')
+      Object.keys(socketsOnline).join(','),
     );
     debug('socketEmit broadcast: found:%d, workerId:%s, socketId:%s', !!socket, this.ctx.app.meta.workerId, socketId);
     if (socket) {

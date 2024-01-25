@@ -1,5 +1,3 @@
-// const moduleInfo = module.info;
-
 const info = {
   mine: {
     layout: true,

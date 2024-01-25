@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class AtomRightAux {
   async clearSummersOfRole() {
     await this.clearSummer_roleScopesOfRole();

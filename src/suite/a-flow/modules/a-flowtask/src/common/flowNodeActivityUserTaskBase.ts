@@ -1,6 +1,5 @@
 const assert = require('assert');
 
-// const moduleInfo = module.info;
 module.exports = class FlowNodeActivityUserTaskBase extends module.meta.class.FlowNodeBase {
   constructor(options) {
     super(options);

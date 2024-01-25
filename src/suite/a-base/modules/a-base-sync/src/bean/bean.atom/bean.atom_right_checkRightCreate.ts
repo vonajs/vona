@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async checkRightCreate({ atomClass, user, options }) {
     return await this.checkRightActionBulk({ atomClass, action: 1, user, options });

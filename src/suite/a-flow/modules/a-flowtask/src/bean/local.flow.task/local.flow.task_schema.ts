@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _viewAtom() {
     return await this._getAtomAndSchema({ mode: 'read' });

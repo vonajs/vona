@@ -1,5 +1,3 @@
-// const moduleInfo = module.info;
-
 const __adapter = (context, chain) => {
   const eventBean = chain;
   return {

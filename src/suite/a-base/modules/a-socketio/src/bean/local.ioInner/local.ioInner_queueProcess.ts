@@ -1,5 +1,3 @@
-
-// const moduleInfo = module.info;
 module.exports = class IOInner {
   // queue: process
   async queueProcess({ path, options, message, messageClass }) {
@@ -12,4 +10,3 @@ module.exports = class IOInner {
     await beanMessage.onProcess({ path, options, message, messageSyncs, messageClass });
   }
 };
-

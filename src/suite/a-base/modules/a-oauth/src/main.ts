@@ -11,7 +11,6 @@ const models = require('./models.js');
 // meta
 const meta = require('./meta.js');
 
-// const moduleInfo = module.info;
 module.exports = class Main {
   get options() {
     return {

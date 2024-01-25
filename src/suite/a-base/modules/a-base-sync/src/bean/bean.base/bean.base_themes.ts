@@ -1,6 +1,5 @@
 const _themesLocales = {};
 
-// const moduleInfo = module.info;
 module.exports = class Base {
   themes() {
     if (!_themesLocales[this.ctx.locale]) {

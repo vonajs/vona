@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class AtomBase {
   async performAction({ key, atomClass, action, item, options, user }) {
     // actionBase

@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   // preferred roles
   async preferredRoles({ atomClass, user, disableAuthOpenCheck }) {

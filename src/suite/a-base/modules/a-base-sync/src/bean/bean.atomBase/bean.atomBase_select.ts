@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class AtomBase {
   async selectQuery({ atomClass, options, user }) {
     return await this.ctx.bean.atom._selectQuery({ atomClass, options, user });

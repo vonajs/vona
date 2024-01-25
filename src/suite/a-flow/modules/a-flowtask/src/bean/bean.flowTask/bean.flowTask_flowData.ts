@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async flowData({ flowId, options, user }) {
     options = options || {};
@@ -203,7 +202,7 @@ module.exports = class FlowTask {
           return await nodeInstances.getOptions(task.flowNodeId);
         },
         disableCheckTimeClaimed: true,
-      })
+      }),
     );
     if (res) {
       const options = await nodeInstances.getOptions(task.flowNodeId);
@@ -224,7 +223,7 @@ module.exports = class FlowTask {
           return await nodeInstances.getOptions(task.flowNodeId);
         },
         disableCheckTimeClaimed: true,
-      })
+      }),
     );
     if (res) {
       actions.push({
@@ -237,7 +236,7 @@ module.exports = class FlowTask {
     });
     // 6. appendHandleRemark
     res = await this._flowData_task_checkRight(
-      this.localRight.appendHandleRemark({ flowTask, user, flowNodeType: task.flowNodeType })
+      this.localRight.appendHandleRemark({ flowTask, user, flowNodeType: task.flowNodeType }),
     );
     if (res) {
       actions.push({
@@ -253,7 +252,7 @@ module.exports = class FlowTask {
           return await nodeInstances.getOptions(task.flowNodeId);
         },
         disableCheckTimeClaimed: true,
-      })
+      }),
     );
     if (res) {
       actions.push({
@@ -271,7 +270,7 @@ module.exports = class FlowTask {
         getTask: flowTaskIdForwardTo => {
           return tasks.find(item => item.flowTaskId === flowTaskIdForwardTo);
         },
-      })
+      }),
     );
     if (res) {
       actions.push({
@@ -287,7 +286,7 @@ module.exports = class FlowTask {
           return await nodeInstances.getOptions(task.flowNodeId);
         },
         disableCheckTimeClaimed: true,
-      })
+      }),
     );
     if (res) {
       actions.push({
@@ -305,7 +304,7 @@ module.exports = class FlowTask {
         getTask: flowTaskIdSubstituteTo => {
           return tasks.find(item => item.flowTaskId === flowTaskIdSubstituteTo);
         },
-      })
+      }),
     );
     if (res) {
       actions.push({

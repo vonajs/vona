@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowNode {
   async _getAllConditions({ atomClassId, needFlowContent }) {
     const flowContentFields = needFlowContent ? ',b2.content' : '';
@@ -13,7 +12,7 @@ module.exports = class FlowNode {
             where a.iid=? and a.atomClassId=?
             order by c.atomStatic asc, a.conditionExpression desc
         `,
-      [this.ctx.instance.id, atomClassId]
+      [this.ctx.instance.id, atomClassId],
     );
     return list;
   }

@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   // mode: read/write view/edit
   // atomClass: detail/main

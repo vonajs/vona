@@ -1,7 +1,6 @@
 let __commandsMap;
 let __commandsAll;
 
-// const moduleInfo = module.info;
 module.exports = class Cli {
   async meta({ context, user }) {
     try {

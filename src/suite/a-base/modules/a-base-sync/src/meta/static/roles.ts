@@ -1,5 +1,3 @@
-// const moduleInfo = module.info;
-
 const __rolesAll = [
   { atomName: 'root', roleTypeCode: 0 },
   { atomName: 'anonymous', roleTypeCode: 0 },

@@ -1,6 +1,5 @@
 const objectHash = require('object-hash');
 
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async _checkDetailRightInherit({ atomClass, atomClassBase, action, user, options }) {
     // atomIdMain

@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowDef {
   _findNode({ content, nodeDefId }) {
     return content.process.nodes.find(node => {

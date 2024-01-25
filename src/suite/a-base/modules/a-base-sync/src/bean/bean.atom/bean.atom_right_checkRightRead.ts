@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async checkRoleRightRead({ atom: { id }, atomClass, options, roleId }) {
     return await this.checkRoleRightAction({

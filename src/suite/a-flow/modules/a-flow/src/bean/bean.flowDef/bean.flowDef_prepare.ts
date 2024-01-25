@@ -3,7 +3,6 @@ const __flowNodeBases = {};
 const __flowEdgeBases = {};
 const __flowServiceBases = {};
 
-// const moduleInfo = module.info;
 module.exports = class FlowDef {
   behaviorBases() {
     return this._getFlowBehaviorBases();

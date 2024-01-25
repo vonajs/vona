@@ -1,7 +1,6 @@
 const __subVersion = 'sub3';
 const __keyUserIndex = 2;
 
-// const moduleInfo = module.info;
 module.exports = class LocalRedis {
   constructor() {
     this._redis = null;

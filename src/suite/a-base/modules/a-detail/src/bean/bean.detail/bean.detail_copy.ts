@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Detail {
   async _copyDetails({ atomClass, target, srcKeyAtom, destKeyAtom, srcAtom, destAtom, options, user }) {
     await this._loopDetailClasses({

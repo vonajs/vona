@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   // actionsBulk of atomClass
   async actionsBulk({ atomClass, options, user }) {

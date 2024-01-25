@@ -1,6 +1,5 @@
 const mparse = require('@cabloy/module-parse').default;
 
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async _switchToSimple({ atomClass, atomClassBase, atom, user }) {
     let atomIdDraft;
@@ -36,7 +35,7 @@ module.exports = class Atom {
           update aAtom set atomSimple=1, atomIdDraft=0 
             where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?
         `,
-      [this.ctx.instance.id, atomIdFormal]
+      [this.ctx.instance.id, atomIdFormal],
     );
     // update formal
     await this.modelAtom.update({
@@ -76,7 +75,7 @@ module.exports = class Atom {
           update aAtom set atomSimple=0
             where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?
         `,
-      [this.ctx.instance.id, atomIdFormal]
+      [this.ctx.instance.id, atomIdFormal],
     );
     // update formal's atomSimple
     await this.modelAtom.update({

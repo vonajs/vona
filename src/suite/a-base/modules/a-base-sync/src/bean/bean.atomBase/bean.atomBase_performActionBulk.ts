@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class AtomBase {
   async performActionBulk({ keys, atomClass, action, item, options, user, fnBefore, fnAfter }) {
     // actionBase

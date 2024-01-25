@@ -1,6 +1,5 @@
 const py = require('pinyin-pro');
 
-// const moduleInfo = module.info;
 module.exports = class Pinyin {
   translate({ text, options }) {
     return py.pinyin(text, options);

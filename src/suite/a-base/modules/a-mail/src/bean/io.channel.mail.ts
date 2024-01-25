@@ -4,7 +4,6 @@ const boxen = require('boxen');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
-// const moduleInfo = module.info;
 module.exports = class IOChannel extends module.meta.class.IOChannelBase {
   async onPush({ content /* options, message, messageSync, messageClass*/ }) {
     // check if content.message

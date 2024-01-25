@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Local {
   constructor(cli) {
     this.cli = cli;

@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class AtomBase {
   _ensureItemMeta(item) {
     if (!item) return null;

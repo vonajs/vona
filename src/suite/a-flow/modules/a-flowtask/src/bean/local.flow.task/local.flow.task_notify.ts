@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   _notifyTaskClaimings(userId) {
     this.ctx.bean.flowTask._notifyTaskClaimings(userId);

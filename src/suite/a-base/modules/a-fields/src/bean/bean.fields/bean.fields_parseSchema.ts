@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Fields {
   // atomClass: maybe main/detail
   //  atomClass is main only when (!atomClassMain && !atomClass.detail) || atomClass=atomClassMain

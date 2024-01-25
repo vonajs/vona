@@ -1,7 +1,6 @@
 const VarsFn = require('../../common/vars.js');
 const UtilsFn = require('../../common/utils.js');
 
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async init({ userIdAssignee, user }) {
     // create flowTask

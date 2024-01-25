@@ -3,7 +3,6 @@ const path = require('path');
 const Markdownit = require('@zhennann/markdown');
 const markdown_it_block = require('@zhennann/markdown-it-block');
 
-// const moduleInfo = module.info;
 module.exports = class Markdown {
   async render({ host, content, locale }) {
     if (!content) return '';

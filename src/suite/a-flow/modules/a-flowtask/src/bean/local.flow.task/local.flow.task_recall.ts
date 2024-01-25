@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _recall() {
     // user
@@ -31,7 +30,7 @@ module.exports = class FlowTask {
           select id,userIdAssignee from aFlowTask
             where iid=? and deleted=0 and flowNodeId=? and id<>?
           `,
-      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId]
+      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
     );
     for (const _task of _tasks) {
       this._notifyTaskClaimings(_task.userIdAssignee);
@@ -42,14 +41,14 @@ module.exports = class FlowTask {
           delete from aFlowTask
             where iid=? and flowNodeId=? and id<>?
           `,
-      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId]
+      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
     );
     await this.ctx.model.query(
       `
           update aFlowTaskHistory set deleted=1
             where iid=? and deleted=0 and flowNodeId=? and flowTaskId<>?
           `,
-      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId]
+      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
     );
     // recall
     return await this.ctx.bean.flowTask._gotoFlowNodePrevious({

@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class IO {
   // subcribe
   //    key: userId:path:socketId

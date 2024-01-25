@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowNode {
   async _deploy_flowActions({ atomClass, /* flowDefId,*/ node, deleting, flowDef, content }) {
     if (deleting) {

@@ -5,7 +5,6 @@ const __adapter = (context, chain) => {
   };
 };
 
-// const moduleInfo = module.info;
 module.exports = class FlowNode {
   getBehaviorDefOptions({ behaviorDefId }) {
     // nodeDef

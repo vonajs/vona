@@ -1,6 +1,5 @@
 const Strategy = require('../meta/passport/strategy.js');
 
-// const moduleInfo = module.info;
 module.exports = class Provider extends module.meta.class.AuthProviderBase {
   async getConfigDefault() {
     return null;

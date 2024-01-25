@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Flow {
   evaluateExpression({ expression, globals }) {
     return this.ctx.bean.util.evaluateExpression({ expression, globals });

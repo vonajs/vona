@@ -2,7 +2,6 @@ const chalk = require('chalk');
 const Table = require('cli-table3');
 const eggBornUtils = require('egg-born-utils');
 
-// const moduleInfo = module.info;
 module.exports = class Local {
   async add({ name, host, clientID, clientSecret, log }) {
     // init file

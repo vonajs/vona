@@ -1,5 +1,3 @@
-// const moduleInfo = module.info;
-
 function _createProvider() {
   return {
     meta: {

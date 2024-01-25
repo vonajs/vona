@@ -1,6 +1,5 @@
 const _authProvidersLocales = {};
 
-// const moduleInfo = module.info;
 module.exports = class Base {
   authProviders() {
     if (!_authProvidersLocales[this.ctx.locale]) {

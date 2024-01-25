@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class AtomBase {
   async delete({ atomClass, key, options, user }) {
     // atomClass

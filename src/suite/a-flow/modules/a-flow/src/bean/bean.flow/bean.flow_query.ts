@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Flow {
   async count({ options, user }) {
     return await this.select({ options, user, count: 1 });

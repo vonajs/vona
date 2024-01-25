@@ -10,7 +10,7 @@ const __atomBasicFields = [
   // 'atomRevision',
 ];
 const __itemBasicFieldsWrite = ['id', 'iid', 'atomId', 'itemId', 'atomStage'];
-// const moduleInfo = module.info;
+
 module.exports = class AtomBase {
   async write({ atomClass, target, key, item: itemOriginal, options, user }) {
     if (!itemOriginal) return; // atomClass

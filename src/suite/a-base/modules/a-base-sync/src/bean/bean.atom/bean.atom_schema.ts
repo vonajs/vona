@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   // mode: view/edit
   // atomClass: exluding userFieldsRight (avoid deadloop)

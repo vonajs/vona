@@ -1,6 +1,5 @@
 const ExcelJS = require('exceljs');
 
-// const moduleInfo = module.info;
 module.exports = class AtomBase {
   async exportBulk({ atomClass, options, fields, user }) {
     // select

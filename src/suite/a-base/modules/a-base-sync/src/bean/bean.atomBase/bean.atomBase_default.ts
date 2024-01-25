@@ -6,7 +6,7 @@ const __create_atom_basic_fields = [
   'atomLanguage',
   'atomCategoryId',
 ];
-// const moduleInfo = module.info;
+
 module.exports = class AtomBase {
   async default({ atomClass, data, item, options, user }) {
     data = data || {};

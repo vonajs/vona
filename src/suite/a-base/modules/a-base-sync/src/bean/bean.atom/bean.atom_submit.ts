@@ -1,6 +1,5 @@
 const mparse = require('@cabloy/module-parse').default;
 
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async submit({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
     // atomClass

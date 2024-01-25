@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class IOInner {
   async queuePushDirect({ content, options, channel }) {
     // get channel base

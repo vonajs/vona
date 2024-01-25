@@ -10,7 +10,7 @@ const __itemBasicFieldsRead = [
   'atomIdMain',
   'atomIdParent',
 ];
-// const moduleInfo = module.info;
+
 module.exports = class AtomBase {
   async readQuery({ atomClass, options, user }) {
     return await this.ctx.bean.atom._readQuery({ atomClass, options, user });

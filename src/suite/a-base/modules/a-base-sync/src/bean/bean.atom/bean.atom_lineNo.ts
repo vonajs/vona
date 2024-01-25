@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async moveUp({ key, atomClass, options, user }) {
     return await this._moveLineNo({ key, atomClass, options, user, direction: 'up' });

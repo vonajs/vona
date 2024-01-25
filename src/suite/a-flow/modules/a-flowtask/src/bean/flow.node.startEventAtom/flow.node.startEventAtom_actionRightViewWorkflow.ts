@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowNode {
   async _deploy_actionRightViewWorkflow({ atomClass }) {
     // check if any role exists

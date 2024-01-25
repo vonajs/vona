@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _checkViewWorkflow({ flowId, user }) {
     // 1. check atomClass action

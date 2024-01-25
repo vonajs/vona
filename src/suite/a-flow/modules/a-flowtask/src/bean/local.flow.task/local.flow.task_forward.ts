@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   // handle: assignee/remark
   async _forward({ handle }) {

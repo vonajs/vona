@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 const info = {
   menu: {},
   home: {},

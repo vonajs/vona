@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _publishMessageTaskInit({ flowTaskId, userIdAssignee, user }) {
     if (!this.context._flow.flowAtomId) {
@@ -14,7 +13,7 @@ module.exports = class FlowTask {
     const userAssignee = await this.ctx.bean.user.get({ id: userIdAssignee });
     const title = `${this.ctx.text.locale(userAssignee.locale, 'Task')} - ${this.ctx.text.locale(
       userAssignee.locale,
-      this.contextNode._flowNode.flowNodeName
+      this.contextNode._flowNode.flowNodeName,
     )}`;
     const actionPath = `/a/flowtask/flow?flowId=${this.context._flowId}&flowTaskId=${flowTaskId}`;
     const message = {

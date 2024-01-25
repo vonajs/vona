@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _claim() {
     // user
@@ -24,7 +23,7 @@ module.exports = class FlowTask {
           select id,userIdAssignee from aFlowTask
             where iid=? and deleted=0 and flowNodeId=? and specificFlag=2
           `,
-      [this.ctx.instance.id, flowTask.flowNodeId]
+      [this.ctx.instance.id, flowTask.flowNodeId],
     );
     if (_taskRecall) {
       this._notifyTaskHandlings(_taskRecall.userIdAssignee);
@@ -34,14 +33,14 @@ module.exports = class FlowTask {
           delete from aFlowTask
             where iid=? and id=?
           `,
-        [this.ctx.instance.id, _taskRecall.id]
+        [this.ctx.instance.id, _taskRecall.id],
       );
       await this.ctx.model.query(
         `
           update aFlowTaskHistory set deleted=1
             where iid=? and deleted=0 and flowTaskId=?
           `,
-        [this.ctx.instance.id, _taskRecall.id]
+        [this.ctx.instance.id, _taskRecall.id],
       );
     }
     // check if bidding
@@ -53,7 +52,7 @@ module.exports = class FlowTask {
           select id,userIdAssignee from aFlowTask
             where iid=? and deleted=0 and flowNodeId=? and id<>? and (flowTaskStatus=0 and handleStatus=0)
           `,
-        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId]
+        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
       );
       for (const _task of _tasks) {
         this._notifyTaskClaimings(_task.userIdAssignee);
@@ -64,14 +63,14 @@ module.exports = class FlowTask {
           delete from aFlowTask
             where iid=? and flowNodeId=? and id<>? and (flowTaskStatus=0 and handleStatus=0)
           `,
-        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId]
+        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
       );
       await this.ctx.model.query(
         `
           update aFlowTaskHistory set deleted=1
             where iid=? and deleted=0 and flowNodeId=? and flowTaskId<>? and (flowTaskStatus=0 and handleStatus=0)
           `,
-        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId]
+        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
       );
     }
     // event: task.claimed

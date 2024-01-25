@@ -1,6 +1,5 @@
 const mparse = require('@cabloy/module-parse').default;
 
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async default({ atomClass, atomStage, roleIdOwner, item, options, user }) {
     options = options || {};

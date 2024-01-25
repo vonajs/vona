@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _setAtomState({ context, options }) {
     const atomState = options.atomState;

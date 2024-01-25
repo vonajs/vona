@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Role {
   // add role right
   async addRoleRight({ roleAtomId, roleId, atomClass, atomClassId, action, scope, user, roleRightId }) {

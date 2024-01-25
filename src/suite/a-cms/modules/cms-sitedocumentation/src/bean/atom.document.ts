@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom extends module.meta.class.AtomCmsBase {
   async default({ atomClass, item, options, user }) {
     // super

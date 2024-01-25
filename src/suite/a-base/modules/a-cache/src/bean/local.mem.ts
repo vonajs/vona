@@ -1,6 +1,5 @@
 const CACHEMEMORY = Symbol('APP#__CACHEMEMORY');
 
-// const moduleInfo = module.info;
 module.exports = class CacheMem extends module.meta.class.BeanModuleScopeBase {
   get memory() {
     if (!this.ctx.app[CACHEMEMORY]) {

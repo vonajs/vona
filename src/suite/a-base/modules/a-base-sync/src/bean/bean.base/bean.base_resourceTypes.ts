@@ -1,6 +1,5 @@
 const _resourceTypes = {};
 
-// const moduleInfo = module.info;
 module.exports = class Base {
   resourceTypes() {
     if (!_resourceTypes[this.ctx.locale]) {

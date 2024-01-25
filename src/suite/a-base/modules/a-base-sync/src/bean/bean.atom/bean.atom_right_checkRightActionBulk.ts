@@ -1,4 +1,3 @@
-// const moduleInfo = module.info;
 module.exports = class Atom {
   // atomClass: { id, module, atomClassName }
   async checkRightActionBulk({ atomClass, action, stage, user, options }) {

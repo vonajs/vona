@@ -1,6 +1,5 @@
 const mparse = require('@cabloy/module-parse').default;
 
-// const moduleInfo = module.info;
 module.exports = class Atom {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }) {
     // atomClass
@@ -287,7 +286,7 @@ module.exports = class Atom {
           update aAtom set atomIdDraft=?
             where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?
         `,
-      [keyDraft.atomId, this.ctx.instance.id, atomIdFormal]
+      [keyDraft.atomId, this.ctx.instance.id, atomIdFormal],
     );
     // update formal
     await this.modelAtom.update({

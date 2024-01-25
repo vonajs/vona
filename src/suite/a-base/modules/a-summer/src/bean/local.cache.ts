@@ -1,7 +1,6 @@
 const objectHash = require('object-hash');
 const CacheBase = require('../common/cacheBase.js');
 
-// const moduleInfo = module.info;
 module.exports = class LocalCache extends CacheBase {
   constructor({ cacheBase }) {
     super({ cacheBase });
