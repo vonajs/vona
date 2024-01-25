@@ -615,3 +615,50 @@ function parseBeanName(beanClassName, scene) {
   name = name.charAt(0).toLowerCase() + name.substring(1);
   return name;
 }
+
+async function _jstots({ module, processHelper }) {
+  const pattern = `${module.root}/test/**/*.js`;
+  // files
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  // convert
+  const filesTo = [];
+  for (const file of files) {
+    const pos = String(file).lastIndexOf('.js');
+    const fileTo = String(file).substring(0, pos) + '.ts';
+    await fs.rename(file, fileTo);
+    filesTo.push(fileTo);
+  }
+  console.log(filesTo);
+}
+
+async function _modulePublish({ module, processHelper }) {
+  console.log(module.info.fullName);
+  const cabloyConfig = require('../cabloy.json');
+  const entities = cabloyConfig.store.commands.publish.entities;
+  const entity = entities[module.info.relativeName];
+  if (entity && entity.scripts.includes('npmPublish')) {
+    console.log(cabloyConfig);
+    await processHelper.npmPublish({ cwd: module.root });
+  }
+}
+
+async function _moduleRemoveFront({ module }) {
+  // console.log(module);
+  // front/icons/src
+  // await fse.remove(`${module.root}/front`);
+  // await fse.remove(`${module.root}/icons`);
+  // await fse.remove(`${module.root}/src`);
+  // backend->root
+  // files
+  // const files = await eggBornUtils.tools.globbyAsync(`*`, {
+  //   expandDirectories: false,
+  //   onlyFiles: false,
+  //   absolute: false,
+  //   cwd: `${module.root}/backend`,
+  // });
+  // console.log(files);
+  // for (const file of files) {
+  //   await fse.move(`${module.root}/backend/${file}`, `${module.root}/${file}`);
+  // }
+  // await fse.remove(`${module.root}/backend`);
+}
