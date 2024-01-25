@@ -39,7 +39,7 @@ async function main() {
 //
 
 async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/resource/locals.ts`;
+  const file = `${module.root}/src/resource/models.ts`;
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
@@ -51,7 +51,7 @@ async function _moduleHandle({ module, processHelper }) {
     return;
   }
   console.log(file);
-  const regexp = /const (.*?) =.*service\/(.*?)\.js/g;
+  const regexp = /const (.*?) =.*model\/(.*?)\.js/g;
   const matches = contentOld.matchAll(regexp);
   const outputNew1 = [];
   const outputNew2 = [];
@@ -63,14 +63,14 @@ async function _moduleHandle({ module, processHelper }) {
       console.log('has . :', module.info.relativeName);
       return;
     }
-    const classNameNew = classPathToClassName('Local', classPath);
+    const classNameNew = classPathToClassName('Model', classPath);
     // console.log(classNameOld, classPath, classNameNew);
-    // locals.ts
-    outputNew1.push(`export * from '../local/${classPath}.js';`);
-    outputNew2.push(`import { ${classNameNew} } from '../local/${classPath}.js';`);
+    // models.ts
+    outputNew1.push(`export * from '../model/${classPath}.js';`);
+    outputNew2.push(`import { ${classNameNew} } from '../model/${classPath}.js';`);
     outputNew3.push(`${classNameOld}: ${classNameNew};`);
-    // local
-    const classFile = `${module.root}/src/local/${classPath}.ts`;
+    // model
+    const classFile = `${module.root}/src/model/${classPath}.ts`;
     // console.log(classFile);
     const classContent = (await fse.readFile(classFile)).toString();
     const matchExport = classContent.match(/export /);
@@ -82,36 +82,36 @@ async function _moduleHandle({ module, processHelper }) {
     // const beanName = parseBeanName(classNameNew, 'Controller');
     // console.log(classNameNew, classNameOld);
     // 替换内容
-    const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) (\{[\s\S\n]*)/);
+    const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) extends [\S]* (\{[\s\S\n]*)/);
     if (!contentMatches) {
       console.log('---- not matched: ', classFile);
       return;
     }
     // console.log(contentMatches);
     const contentNew = `
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanModelBase, Model } from '@cabloy/core';
 
 ${contentMatches[1]}
 
-@Local()
-export class ${classNameNew} extends BeanBase ${contentMatches[3]}
+@Model()
+export class ${classNameNew} extends BeanModelBase ${contentMatches[3]}
     `;
-    // console.log(contentNew);
-    await fse.outputFile(classFile, contentNew);
-    await processHelper.formatFile({ fileName: classFile });
+    console.log(contentNew);
+    // await fse.outputFile(classFile, contentNew);
+    // await processHelper.formatFile({ fileName: classFile });
   }
   const outputNew = `
 ${outputNew1.join('\n')}
 
 ${outputNew2.join('\n')}
 
-export interface IModuleLocal {
+export interface IModuleModel {
   ${outputNew3.join('\n')}
 }
   `;
-  // console.log(outputNew);
-  await fse.outputFile(file, outputNew);
-  await processHelper.formatFile({ fileName: file });
+  console.log(outputNew);
+  // await fse.outputFile(file, outputNew);
+  // await processHelper.formatFile({ fileName: file });
 }
 
 async function _suiteHandle({ modules, suite, processHelper }) {
