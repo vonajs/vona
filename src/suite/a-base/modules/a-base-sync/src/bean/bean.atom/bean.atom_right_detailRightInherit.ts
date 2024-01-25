@@ -1,6 +1,8 @@
+import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkRightFromViewHistory.js';
+
 const objectHash = require('object-hash');
 
-module.exports = class Atom {
+export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFromViewHistory {
   async _checkDetailRightInherit({ atomClass, atomClassBase, action, user, options }) {
     // atomIdMain
     const atomIdMain = options?.atomIdMain;
@@ -177,4 +179,4 @@ module.exports = class Atom {
   //   }
   //   return false;
   // }
-};
+}

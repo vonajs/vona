@@ -1,6 +1,8 @@
+import { BeanAtomFormal } from './bean.atom_formal.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtomSimple extends BeanAtomFormal {
   async _switchToSimple({ atomClass, atomClassBase, atom, user }) {
     let atomIdDraft;
     let atomIdFormal;
@@ -104,4 +106,4 @@ module.exports = class Atom {
     // -> not simple
     return await this._switchToSimpleZero({ atomClass, atomClassBase, atom, user });
   }
-};
+}

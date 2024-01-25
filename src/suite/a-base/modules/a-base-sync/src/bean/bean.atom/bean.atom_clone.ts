@@ -1,6 +1,8 @@
+import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtomClone extends BeanAtomStarLabel {
   async clone({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, roleIdOwner, user }) {
     // atomClass
     const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
@@ -284,4 +286,4 @@ module.exports = class Atom {
       await this.modelFile.insert(file);
     }
   }
-};
+}

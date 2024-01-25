@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightCheckRightAction } from './bean.atom_right_checkRightAction.js';
+
+export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAction {
   // atomClass: { id, module, atomClassName }
   async checkRightActionBulk({ atomClass, action, stage, user, options }) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
@@ -138,4 +140,4 @@ module.exports = class Atom {
     }
     return actionRes;
   }
-};
+}

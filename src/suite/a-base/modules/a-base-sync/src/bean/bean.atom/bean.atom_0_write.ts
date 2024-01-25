@@ -1,6 +1,8 @@
+import { BeanAtom0Select } from './bean.atom_0_select.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Write extends BeanAtom0Select {
   // write
   //   target: should be null for frontend call
   async write({
@@ -130,4 +132,4 @@ module.exports = class Atom {
   async _update({ atom }) {
     await this.modelAtom.update(atom);
   }
-};
+}

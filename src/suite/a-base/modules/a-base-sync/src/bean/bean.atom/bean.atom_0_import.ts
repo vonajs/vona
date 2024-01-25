@@ -1,6 +1,8 @@
+import { BeanAtom0Export } from './bean.atom_0_export.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Import extends BeanAtom0Export {
   async importBulk({ atomClass, options, file, user }) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
@@ -15,4 +17,4 @@ module.exports = class Atom {
       fn: 'importBulk',
     });
   }
-};
+}

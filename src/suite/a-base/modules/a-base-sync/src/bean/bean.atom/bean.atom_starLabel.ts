@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtom0Write } from './bean.atom_0_write.js';
+
+export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {
     // get
     const atom = await this.get({ atomId: key.atomId });
@@ -163,4 +165,4 @@ module.exports = class Atom {
       });
     }
   }
-};
+}

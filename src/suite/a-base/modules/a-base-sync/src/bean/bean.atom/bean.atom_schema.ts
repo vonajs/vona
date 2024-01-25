@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomLineNo } from './bean.atom_lineNo.js';
+
+export class BeanAtomSchema extends BeanAtomLineNo {
   // mode: view/edit
   // atomClass: exluding userFieldsRight (avoid deadloop)
   async _prepareAtomSchema({ mode, atomClass, options, user }) {
@@ -117,4 +119,4 @@ module.exports = class Atom {
     atomClass = await this.atomClass.get(atomClass);
     return await this.atomClass.validator({ atomClass });
   }
-};
+}

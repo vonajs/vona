@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
+
+export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
   async checkRightSelect({ atomClass, user, options }) {
     options = options || {};
     const atomIdMain = options.atomIdMain;
@@ -58,4 +60,4 @@ module.exports = class Atom {
     }
     return false;
   }
-};
+}

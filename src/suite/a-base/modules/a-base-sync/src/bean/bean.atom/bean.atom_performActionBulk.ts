@@ -1,6 +1,8 @@
+import { BeanAtomPerformAction } from './bean.atom_performAction.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtomPerformActionBulk extends BeanAtomPerformAction {
   async performActionBulk({ keys, atomClass, action, item, options, user }) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
@@ -15,4 +17,4 @@ module.exports = class Atom {
       fn: 'performActionBulk',
     });
   }
-};
+}

@@ -1,6 +1,8 @@
+import { BeanAtom0Import } from './bean.atom_0_import.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Read extends BeanAtom0Import {
   // read
   async read({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
     // atomClass
@@ -106,4 +108,4 @@ module.exports = class Atom {
   async _readQuery({ /* atomClass, */ options, user }) {
     return await this.sqlProcedure.getAtom({ options });
   }
-};
+}

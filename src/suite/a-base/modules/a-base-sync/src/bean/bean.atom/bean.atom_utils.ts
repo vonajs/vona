@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
+
+export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
   async _prepareAtomClassAndAtomClassBase({ key, atomClass, throwWhenEmpty = true }) {
     const atomId = key.atomId;
     // atomClass
@@ -132,4 +134,4 @@ module.exports = class Atom {
   _checkForAtomUser(atomClass) {
     return atomClass && atomClass.module === 'a-base' && atomClass.atomClassName === 'user';
   }
-};
+}

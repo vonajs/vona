@@ -1,6 +1,8 @@
+import { BeanAtomClone } from './bean.atom_clone.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtomDraft extends BeanAtomClone {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }) {
     // atomClass
     const { key, atomClass, atomClassBase } = await this._prepareKeyAndAtomAndAtomClass({
@@ -296,4 +298,4 @@ module.exports = class Atom {
     // ok
     return keyDraft;
   }
-};
+}

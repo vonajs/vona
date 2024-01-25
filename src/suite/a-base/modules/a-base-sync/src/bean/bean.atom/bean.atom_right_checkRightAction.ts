@@ -1,6 +1,8 @@
+import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   async checkRightAction({
     atom: { id },
     atomClass: atomClassOuter,
@@ -435,4 +437,4 @@ module.exports = class Atom {
     debug('checkRightAction sql end: atomId: ', atom.id);
     return res;
   }
-};
+}

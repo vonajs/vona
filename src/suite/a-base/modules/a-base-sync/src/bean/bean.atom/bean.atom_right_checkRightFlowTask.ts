@@ -1,6 +1,8 @@
+import { BeanAtomRightCheckRightSelect } from './bean.atom_right_checkRightSelect.js';
+
 const objectHash = require('object-hash');
 
-module.exports = class Atom {
+export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSelect {
   async _checkRightFlowTask({
     key,
     atomClass,
@@ -90,4 +92,4 @@ module.exports = class Atom {
       throwError,
     });
   }
-};
+}

@@ -1,6 +1,8 @@
+import { BeanAtom0Create } from './bean.atom_0_create.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Default extends BeanAtom0Create {
   async default({ atomClass, atomStage, roleIdOwner, item, options, user }) {
     options = options || {};
     // atomClass
@@ -28,4 +30,4 @@ module.exports = class Atom {
     if (!returnSchema) return item;
     return { item, schema: options.schema };
   }
-};
+}

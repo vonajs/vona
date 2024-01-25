@@ -1,6 +1,8 @@
+import { BeanAtom0Default } from './bean.atom_0_default.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Delete extends BeanAtom0Default {
   // deleteBulk
   async deleteBulk({ atomClass, keys, options, user }) {
     const resKeys = [];
@@ -146,4 +148,4 @@ module.exports = class Atom {
     // ok
     return true;
   }
-};
+}

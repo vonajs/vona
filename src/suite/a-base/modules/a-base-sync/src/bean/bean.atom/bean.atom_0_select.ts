@@ -1,6 +1,8 @@
+import { BeanAtom0Read } from './bean.atom_0_read.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Select extends BeanAtom0Read {
   // count
   async count({ atomClass, options, user }) {
     return await this.select({ atomClass, options, user, count: 1 });
@@ -164,4 +166,4 @@ module.exports = class Atom {
   async _selectQuery({ /* atomClass, */ options, user }) {
     return await this.sqlProcedure.selectAtoms({ options });
   }
-};
+}

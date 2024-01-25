@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomSubmit } from './bean.atom_submit.js';
+
+export class BeanAtomNotify extends BeanAtomSubmit {
   _notifyDraftsDrafting(user, atomClass) {
     this.ctx.bean.stats.notify({
       module: moduleInfo.relativeName,
@@ -32,4 +34,4 @@ module.exports = class Atom {
       user,
     });
   }
-};
+}

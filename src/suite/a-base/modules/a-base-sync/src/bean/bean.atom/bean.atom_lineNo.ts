@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomUtils } from './bean.atom_utils.js';
+
+export class BeanAtomLineNo extends BeanAtomUtils {
   async moveUp({ key, atomClass, options, user }) {
     return await this._moveLineNo({ key, atomClass, options, user, direction: 'up' });
   }
@@ -75,4 +77,4 @@ module.exports = class Atom {
       to: { atomId: atomTo.id },
     };
   }
-};
+}

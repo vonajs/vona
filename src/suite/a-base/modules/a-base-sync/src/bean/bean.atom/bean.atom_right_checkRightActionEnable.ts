@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
+
+export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRightActionBulk {
   // _atom/null/true
   // _atom: means ready
   // null: means no right
@@ -99,4 +101,4 @@ module.exports = class Atom {
     if (_checkPoint === false && isFlowing) return null;
     return true;
   }
-};
+}

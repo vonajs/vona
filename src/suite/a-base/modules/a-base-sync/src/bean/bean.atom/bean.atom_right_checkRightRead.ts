@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightCheckRightCreate } from './bean.atom_right_checkRightCreate.js';
+
+export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
   async checkRoleRightRead({ atom: { id }, atomClass, options, roleId }) {
     return await this.checkRoleRightAction({
       atom: { id },
@@ -101,4 +103,4 @@ module.exports = class Atom {
       forAtomUser,
     });
   }
-};
+}

@@ -1,6 +1,8 @@
+import { BeanAtom0Delete } from './bean.atom_0_delete.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Enable extends BeanAtom0Delete {
   async enable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
     // atomClass
     const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
@@ -36,4 +38,4 @@ module.exports = class Atom {
       fn: 'disable',
     });
   }
-};
+}

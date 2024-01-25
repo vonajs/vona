@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightActions } from './bean.atom_right_actions.js';
+
+export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
   // actionsBulk of atomClass
   async actionsBulk({ atomClass, options, user }) {
     options = options || {};
@@ -35,4 +37,4 @@ module.exports = class Atom {
     this.ctx.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
     return results;
   }
-};
+}

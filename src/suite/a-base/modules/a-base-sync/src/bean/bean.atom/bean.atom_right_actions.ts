@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightPreferredRoles } from './bean.atom_right_preferredRoles.js';
+
+export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   // actions of atom
   async actions({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, basic, user }) {
     // atomClass
@@ -159,4 +161,4 @@ module.exports = class Atom {
       bulk: false,
     });
   }
-};
+}

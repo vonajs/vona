@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomNotify } from './bean.atom_notify.js';
+
+export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
   // preferred roles
   async preferredRoles({ atomClass, user, disableAuthOpenCheck }) {
     // atomClass
@@ -99,4 +101,4 @@ module.exports = class Atom {
     }
     return roleIdOwner;
   }
-};
+}

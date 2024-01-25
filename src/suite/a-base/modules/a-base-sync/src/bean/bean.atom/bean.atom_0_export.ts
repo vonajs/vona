@@ -1,6 +1,8 @@
+import { BeanAtom0Enable } from './bean.atom_0_enable.js';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class Atom {
+export class BeanAtom0Export extends BeanAtom0Enable {
   async exportBulk({ atomClass, options, fields, user }) {
     // atomClass
     let atomClassBase;
@@ -26,4 +28,4 @@ module.exports = class Atom {
     // ok
     return resFile;
   }
-};
+}

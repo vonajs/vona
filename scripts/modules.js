@@ -46,7 +46,7 @@ async function _moduleHandle_mixin({ file, module, processHelper }) {
     return;
   }
   const contentOld = (await fse.readFile(file)).toString();
-  const matchExport = contentOld.match(/export /);
+  const matchExport = contentOld.match(/export class /);
   if (matchExport) {
     // console.log('---- not changed: ', module.info.relativeName);
     return;
@@ -99,7 +99,7 @@ async function _moduleHandle_mixin({ file, module, processHelper }) {
     const classFile = path.resolve(path.dirname(file), classPath + '.ts');
     // console.log(classFile);
     const classContent = (await fse.readFile(classFile)).toString();
-    const matchExport = classContent.match(/export /);
+    const matchExport = classContent.match(/export class /);
     if (matchExport) {
       console.log('---- not changed: ', classFile);
       process.exit(0);
@@ -136,7 +136,7 @@ async function _moduleHandle_mixin({ file, module, processHelper }) {
       let __classPath = names[index - 1].classPath;
       const pos = __classPath.lastIndexOf('/');
       __classPath = __classPath.substring(pos + 1);
-      importName = `import ${extendName} from './${__classPath}.js';`;
+      importName = `import {${extendName}} from './${__classPath}.js';`;
     }
     const contentNew = `
 ${importName}
@@ -178,7 +178,7 @@ async function _moduleHandle({ module, processHelper }) {
   for (const file of files) {
     const contentOld = (await fse.readFile(file)).toString();
     // console.log(contentOld);
-    // const matchExport = contentOld.match(/export /);
+    // const matchExport = contentOld.match(/export class /);
     // if (matchExport) {
     //   // console.log('---- not changed: ', module.info.relativeName);
     //   return;
@@ -186,6 +186,7 @@ async function _moduleHandle({ module, processHelper }) {
     if (contentOld.indexOf('.util.mixinClasses') === -1) {
       continue;
     }
+    // if (file.indexOf('/bean.atom.ts') === -1) return;
     // console.log(file);
     await _moduleHandle_mixin({ file, module, processHelper });
   }

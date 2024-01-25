@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomDraft } from './bean.atom_draft.js';
+
+export class BeanAtomFormal extends BeanAtomDraft {
   async closeFormal({ key }) {
     // update atomClosed
     await this.modelAtom.update({
@@ -6,4 +8,4 @@ module.exports = class Atom {
       atomClosed: 1,
     });
   }
-};
+}

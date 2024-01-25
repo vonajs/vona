@@ -1,4 +1,6 @@
-module.exports = class Atom {
+import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
+
+export class BeanAtomRightCheckRightCreate extends BeanAtomRightCheckRightActionEnable {
   async checkRightCreate({ atomClass, user, options }) {
     return await this.checkRightActionBulk({ atomClass, action: 1, user, options });
   }
@@ -52,4 +54,4 @@ module.exports = class Atom {
     // ok
     return true;
   }
-};
+}
