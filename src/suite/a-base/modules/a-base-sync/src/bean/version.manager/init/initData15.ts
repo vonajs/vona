@@ -9,6 +9,6 @@ const roles = {
   },
 };
 
-module.exports = {
+export default {
   roles,
 };

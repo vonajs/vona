@@ -1,4 +1,6 @@
-module.exports = class VersionUpdate {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
   async run(options) {
     let sql;
 
@@ -83,7 +85,7 @@ module.exports = class VersionUpdate {
     // atoms
     const atoms = await this.ctx.model.query(
       'select id, atomClassId, userIdCreated from aAtom where iid=? and deleted=0',
-      [this.ctx.instance.id]
+      [this.ctx.instance.id],
     );
     for (const atom of atoms) {
       const mapKey = `${atom.userIdCreated}:${atom.atomClassId}`;
@@ -104,4 +106,4 @@ module.exports = class VersionUpdate {
       disableAuthOpenCheck: true,
     });
   }
-};
+}

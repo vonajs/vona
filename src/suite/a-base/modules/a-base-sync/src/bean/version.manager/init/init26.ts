@@ -1,4 +1,6 @@
-module.exports = class VersionInit {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionInit extends BeanBase {
   async run() {
     // need not
     // // init roleRight actions
@@ -7,4 +9,4 @@ module.exports = class VersionInit {
     //   actions: 'create,read,write,delete,clone,deleteBulk',
     // });
   }
-};
+}

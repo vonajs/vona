@@ -1,8 +1,10 @@
+import { BeanBase } from '@cabloy/core';
+
 const path = require('path');
 
 const initData = require('./initData1.js');
 
-module.exports = class VersionInit {
+export class VersionInit extends BeanBase {
   get modelAuthOpen() {
     return this.ctx.model.module(moduleInfo.relativeName).authOpen;
   }
@@ -97,4 +99,4 @@ module.exports = class VersionInit {
     // hideClientSecret
     await this.ctx.bean.authOpen.hideClientSecret({ itemId: item.id, user: userRoot });
   }
-};
+}

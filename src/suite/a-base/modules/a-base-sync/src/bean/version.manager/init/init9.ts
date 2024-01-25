@@ -1,4 +1,6 @@
-module.exports = class VersionInit {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionInit extends BeanBase {
   async run() {
     // do nothing, see also: init14.js
     // // add role rights
@@ -23,4 +25,4 @@ module.exports = class VersionInit {
     // ];
     // await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'resource', roleRights });
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class VersionInit {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionInit extends BeanBase {
   async run(options) {
     // add role:template to authenticated
     // add role:system to template
@@ -46,4 +48,4 @@ module.exports = class VersionInit {
       await this.ctx.bean.role.setDirty(true);
     }
   }
-};
+}

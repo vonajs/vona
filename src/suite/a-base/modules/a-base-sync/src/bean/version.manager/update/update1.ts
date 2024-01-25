@@ -1,6 +1,8 @@
+import { BeanBase } from '@cabloy/core';
+
 const update1Data = require('./update1Data.js');
 
-module.exports = class VersionUpdate {
+export class VersionUpdate extends BeanBase {
   async run() {
     // tables
     const tableNames = [
@@ -52,4 +54,4 @@ module.exports = class VersionUpdate {
       await this.ctx.model.query(update1Data.functions[functionName]);
     }
   }
-};
+}

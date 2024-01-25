@@ -1,3 +1,5 @@
+import { BeanBase } from '@cabloy/core';
+
 const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',
@@ -6,7 +8,8 @@ const __atomClassUser = {
   module: moduleInfo.relativeName,
   atomClassName: 'user',
 };
-module.exports = class VersionUpdate {
+
+export class VersionUpdate extends BeanBase {
   get modelRole() {
     return this.ctx.model.module(moduleInfo.relativeName).role;
   }
@@ -121,4 +124,4 @@ module.exports = class VersionUpdate {
       });
     }
   }
-};
+}

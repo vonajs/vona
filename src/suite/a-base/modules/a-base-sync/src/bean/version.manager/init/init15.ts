@@ -1,6 +1,8 @@
+import { BeanBase } from '@cabloy/core';
+
 const initData = require('./initData15.js');
 
-module.exports = class VersionInit {
+export class VersionInit extends BeanBase {
   async run() {
     // roles
     await this._initRoles();
@@ -28,4 +30,4 @@ module.exports = class VersionInit {
       [roleBuiltIn.id, this.ctx.instance.id, atomClassRole.id, roleSystem.id],
     );
   }
-};
+}

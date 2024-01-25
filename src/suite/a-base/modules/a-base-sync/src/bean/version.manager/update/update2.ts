@@ -1,4 +1,6 @@
-module.exports = class VersionUpdate {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
   async run() {
     // enable 0
     await this.ctx.model.query("SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO'");
@@ -21,4 +23,4 @@ module.exports = class VersionUpdate {
     // disable 0
     await this.ctx.model.query("SET SESSION sql_mode=''");
   }
-};
+}

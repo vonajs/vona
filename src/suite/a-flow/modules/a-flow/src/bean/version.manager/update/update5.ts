@@ -1,4 +1,6 @@
-module.exports = class VersionUpdate {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
   async run(options) {
     let sql;
 
@@ -68,4 +70,4 @@ module.exports = class VersionUpdate {
       }
     }
   }
-};
+}

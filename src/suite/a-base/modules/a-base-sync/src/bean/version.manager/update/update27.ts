@@ -1,4 +1,6 @@
-module.exports = class VersionUpdate {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
   get modelRoleExpand() {
     return this.ctx.model.module(moduleInfo.relativeName).roleExpand;
   }
@@ -38,4 +40,4 @@ module.exports = class VersionUpdate {
       await this.modelRoleExpand.update({ id: roleExpand.id, roleAtomId });
     }
   }
-};
+}

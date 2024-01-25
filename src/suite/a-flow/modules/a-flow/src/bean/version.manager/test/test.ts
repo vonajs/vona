@@ -1,4 +1,6 @@
-module.exports = class VersionTest {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionTest extends BeanBase {
   async run(options) {
     // why add these test codes
     //   - for force flowHistory.id !== flow.id
@@ -9,4 +11,4 @@ module.exports = class VersionTest {
     res = await this.ctx.model.flowNodeHistory.insert({});
     await this.ctx.model.flowNodeHistory.delete({ id: res.insertId });
   }
-};
+}

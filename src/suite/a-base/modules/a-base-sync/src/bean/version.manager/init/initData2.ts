@@ -115,7 +115,7 @@ const users = {
   },
 };
 
-module.exports = {
+export default {
   roles,
   includes,
   users,

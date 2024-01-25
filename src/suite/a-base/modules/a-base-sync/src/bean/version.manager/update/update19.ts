@@ -1,8 +1,11 @@
+import { BeanBase } from '@cabloy/core';
+
 const __atomClassResource = {
   module: 'a-base',
   atomClassName: 'resource',
 };
-module.exports = class VersionUpdate {
+
+export class VersionUpdate extends BeanBase {
   get modelAtom() {
     return this.ctx.model.module(moduleInfo.relativeName).atom;
   }
@@ -94,4 +97,4 @@ module.exports = class VersionUpdate {
       this.ctx.logger.info(`categoryId: ${category.id}, categoryName: ${category.categoryName}`);
     }
   }
-};
+}

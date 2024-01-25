@@ -1,4 +1,6 @@
-module.exports = class VersionUpdate {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
   async run() {
     await this._alterTables();
     await this._alterViews_aRoleRight_level1();
@@ -175,4 +177,4 @@ module.exports = class VersionUpdate {
         `;
     await this.ctx.model.query(sql);
   }
-};
+}

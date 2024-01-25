@@ -1,4 +1,6 @@
-module.exports = class VersionUpdate {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
   async run() {
     await this.run_atom();
     await this.run_categorytag();
@@ -235,4 +237,4 @@ module.exports = class VersionUpdate {
     // drop view: aViewUserRightFunction
     await this.ctx.model.query('drop view aViewUserRightFunction');
   }
-};
+}
