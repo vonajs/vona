@@ -36,6 +36,35 @@ async function main() {
   }
 }
 
+//
+
+async function _moduleHandle({ module, processHelper }) {
+  const pattern = `${module.root}/src/local/**/*.ts`;
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  for (const file of files) {
+    // console.log(file);
+    const contentOld = (await fse.readFile(file)).toString();
+    // console.log(contentOld);
+    // const matchExport = contentOld.match(/export /);
+    // if (matchExport) {
+    //   // console.log('---- not changed: ', module.info.relativeName);
+    //   return;
+    // }
+    if (contentOld.indexOf('const moduleInfo = module.info;') === -1) {
+      continue;
+    }
+    console.log(file);
+    const contentNew = contentOld
+      .replace(`from '@cabloy/core';`, `from '@cabloy/core';\nimport { __ThisModule__ } from '../resource/this.js';`)
+      .replace(`// const moduleInfo = module.info;`, '')
+      .replace(`const moduleInfo = module.info;`, '')
+      .replaceAll(`moduleInfo.relativeName`, '__ThisModule__');
+    console.log(contentNew);
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
+  }
+}
+
 async function _suiteHandle({ modules, suite, processHelper }) {
   // const refs = [];
   // for (const moduleName of suite.modules) {
@@ -66,34 +95,6 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // module.exports = \[([\s\S\n]*)\]
 // import { IModuleRoute } from '@cabloy/core';
 // export const routes: IModuleRoute[] = [];
-
-//
-
-async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/local/**/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
-  for (const file of files) {
-    // console.log(file);
-    const contentOld = (await fse.readFile(file)).toString();
-    // console.log(contentOld);
-    const matchExport = contentOld.match(/export /);
-    if (matchExport) {
-      // console.log('---- not changed: ', module.info.relativeName);
-      return;
-    }
-    console.log(file);
-
-    // const matches = contentOld.matchAll(/.text\(('[^']* [^']*')\)/g);
-    // for (const match of matches) {
-    //   const errorName = match[1];
-    //   if (contentZh.indexOf(errorName) === -1) {
-    //     console.log(errorName);
-    //   }
-    // }
-  }
-  // await fse.outputFile(file, outputNew);
-  // await processHelper.formatFile({ fileName: file });
-}
 
 function getScopeModuleName(moduleName) {
   const parts2 = moduleName.split('-').map(name => {
