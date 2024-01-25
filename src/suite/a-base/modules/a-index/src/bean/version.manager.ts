@@ -3,7 +3,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 const chalk = require('chalk');
 
 @Bean({ scene: 'version' })
-export class Version extends BeanBase {
+export class VersionManager extends BeanBase {
   async update(options) {
     // check indexes
     if (this.ctx.config.indexesCheck) {

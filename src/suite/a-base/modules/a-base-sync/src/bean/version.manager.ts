@@ -11,7 +11,7 @@ const fileVersionUpdates = [
 const fileVersionInits = [2, 4, 5, 7, 8, 9, 14, 15, 26, 29];
 
 @Bean({ scene: 'version' })
-export class Version extends BeanBase {
+export class VersionManager extends BeanBase {
   async update(options) {
     if (fileVersionUpdates.includes(options.version)) {
       const { VersionUpdate } = await import(`./version.manager/update/update${options.version}.js`);

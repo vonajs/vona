@@ -39,45 +39,7 @@ async function main() {
 
 //
 
-async function _moduleHandle_version({ file, module, processHelper }) {
-  // const file = `${module.root}/src/resource/models.ts`;
-  if (!fse.existsSync(file)) {
-    console.log('---- not changed: ', module.info.relativeName);
-    return;
-  }
-  const contentOld = (await fse.readFile(file)).toString();
-  const matchExport = contentOld.match(/export class /);
-  if (matchExport) {
-    // console.log('---- not changed: ', module.info.relativeName);
-    return;
-  }
-  console.log(file);
-  // 解析内容
-  const contentMatches = contentOld.match(/([\s\S\n]*)module\.exports = class ([\S]*?) [\s\S\n]*?\{([\s\S\n]*)/);
-  if (!contentMatches) {
-    console.log('---- not matched: ', file);
-    return;
-  }
-  // console.log(contentMatches);
-  let contentNew = `
-import { Bean, BeanBase } from '@cabloy/core';
-
-${contentMatches[1]}
-
-@Bean({ scene: 'version' })
-export class ${contentMatches[2]} extends BeanBase {
-${contentMatches[3]}
-  `;
-  contentNew = contentNew
-    .replace(`const VersionUpdate = require`, `const {VersionUpdate} = await import`)
-    .replace(`const VersionInit = require`, `const {VersionInit} = await import`)
-    .replace(`const VersionTest = require`, `const {VersionTest} = await import`);
-  console.log(contentNew);
-  await fse.outputFile(file, contentNew);
-  await processHelper.formatFile({ fileName: file });
-}
-
-async function _moduleHandle({ module, processHelper }) {
+async function _moduleHandle_({ module, processHelper }) {
   const pattern = `${module.root}/src/bean/version.manager.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
