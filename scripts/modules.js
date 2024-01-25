@@ -59,21 +59,26 @@ async function _moduleHandle_version({ file, module, processHelper }) {
     return;
   }
   // console.log(contentMatches);
-  const contentNew = `
-import { BeanBase } from '@cabloy/core';
+  let contentNew = `
+import { Bean, BeanBase } from '@cabloy/core';
 
 ${contentMatches[1]}
 
+@Bean({ scene: 'version' })
 export class ${contentMatches[2]} extends BeanBase {
 ${contentMatches[3]}
   `;
+  contentNew = contentNew
+    .replace(`const VersionUpdate = require`, `const {VersionUpdate} = await import`)
+    .replace(`const VersionInit = require`, `const {VersionInit} = await import`)
+    .replace(`const VersionTest = require`, `const {VersionTest} = await import`);
   console.log(contentNew);
   await fse.outputFile(file, contentNew);
   await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/bean/version.manager/**/*.ts`;
+  const pattern = `${module.root}/src/bean/version.manager.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
