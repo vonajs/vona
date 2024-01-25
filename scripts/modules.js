@@ -69,13 +69,14 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/aops.ts`;
+  const file = `${module.root}/src/service`;
   if (!fse.existsSync(file)) {
     // console.log('---- not changed: ', module.info.relativeName);
     return;
   }
   console.log(file);
-  await fse.remove(file);
+  // await fse.rename(file, `${module.root}/src/local`);
+  // await fse.remove(file);
 }
 
 async function _moduleHandle_config({ module, processHelper }) {
