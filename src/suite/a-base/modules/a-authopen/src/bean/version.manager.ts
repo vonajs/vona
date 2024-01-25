@@ -1,10 +1,13 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const fileVersionUpdates = [1];
 const fileVersionInits = [1];
 
-module.exports = class Version {
+@Bean({ scene: 'version' })
+export class Version extends BeanBase {
   async update(options) {
     if (fileVersionUpdates.includes(options.version)) {
-      const VersionUpdate = require(`./version.manager/update/update${options.version}.js`);
+      const { VersionUpdate } = await import(`./version.manager/update/update${options.version}.js`);
       const versionUpdate = this.ctx.bean._newBean(VersionUpdate);
       await versionUpdate.run(options);
     }
@@ -12,15 +15,15 @@ module.exports = class Version {
 
   async init(options) {
     if (fileVersionInits.includes(options.version)) {
-      const VersionInit = require(`./version.manager/init/init${options.version}.js`);
+      const { VersionInit } = await import(`./version.manager/init/init${options.version}.js`);
       const versionInit = this.ctx.bean._newBean(VersionInit);
       await versionInit.run(options);
     }
   }
 
   async test() {
-    const VersionTest = require('./version.manager/test/test.js');
+    const { VersionTest } = await import('./version.manager/test/test.js');
     const versionTest = this.ctx.bean._newBean(VersionTest);
     await versionTest.run();
   }
-};
+}

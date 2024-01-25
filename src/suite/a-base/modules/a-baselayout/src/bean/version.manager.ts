@@ -1,4 +1,7 @@
-module.exports = class Version {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'version' })
+export class Version extends BeanBase {
   get modelRoleRight() {
     return this.ctx.model.module('a-base').roleRight;
   }
@@ -101,4 +104,4 @@ module.exports = class Version {
       'layout',
     ]);
   }
-};
+}

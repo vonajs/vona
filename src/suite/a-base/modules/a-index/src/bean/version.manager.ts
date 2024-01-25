@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const chalk = require('chalk');
 
-module.exports = class Version {
+@Bean({ scene: 'version' })
+export class Version extends BeanBase {
   async update(options) {
     // check indexes
     if (this.ctx.config.indexesCheck) {
@@ -17,7 +20,7 @@ module.exports = class Version {
         {},
         this.ctx.config.indexes,
         moduleIndexes,
-        this.ctx.config.indexesExtend
+        this.ctx.config.indexesExtend,
       );
       // create indexes
       for (const moduleRelativeName in indexes) {
@@ -53,7 +56,7 @@ module.exports = class Version {
           // too long
           // const sql = `create ${indexType} index idx_${tableName}_${fieldNameArray.join('_')} ON ${tableName} (${fieldNameArray.join(',')})`;
           const sql = `create ${indexType} index idx_${tableName}_${fieldNameFirst} ON ${tableName} (${fieldNameArray.join(
-            ','
+            ',',
           )})`;
           await this.ctx.model.query(sql);
         }
@@ -64,4 +67,4 @@ module.exports = class Version {
       if (e.sql) console.log(chalk.red(e.sql));
     }
   }
-};
+}
