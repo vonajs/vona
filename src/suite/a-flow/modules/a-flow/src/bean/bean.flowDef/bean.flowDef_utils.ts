@@ -1,4 +1,4 @@
-import BeanFlowDefFind from './bean.flowDef_find.js';
+import { BeanFlowDefFind } from './bean.flowDef_find.js';
 
 export class BeanFlowDefUtils extends BeanFlowDefFind {
   _calcConditionExpressionLevel({ conditionExpression }) {

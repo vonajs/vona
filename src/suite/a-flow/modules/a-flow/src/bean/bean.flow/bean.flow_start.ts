@@ -1,4 +1,4 @@
-import BeanFlowQuery from './bean.flow_query.js';
+import { BeanFlowQuery } from './bean.flow_query.js';
 
 export class BeanFlowStart extends BeanFlowQuery {
   async startByKey({ flowDefKey, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {

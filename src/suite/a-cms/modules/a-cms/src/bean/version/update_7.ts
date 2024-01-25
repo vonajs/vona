@@ -1,4 +1,4 @@
-import Update6 from './update_6.js';
+import { Update6 } from './update_6.js';
 
 export class Update7 extends Update6 {
   async _update_7(options) {

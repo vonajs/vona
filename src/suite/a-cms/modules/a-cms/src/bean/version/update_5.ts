@@ -1,4 +1,4 @@
-import Update4 from './update_4.js';
+import { Update4 } from './update_4.js';
 
 const utils = require('../../common/utils.js');
 

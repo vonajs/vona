@@ -1,4 +1,4 @@
-import LocalFlowFlowEndFlow from './local.flow.flow_endFlow.js';
+import { LocalFlowFlowEndFlow } from './local.flow.flow_endFlow.js';
 
 export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
   // return true, means has one edge to be taken

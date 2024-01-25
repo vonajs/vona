@@ -1,4 +1,4 @@
-import BeanFlowAssignees from './bean.flow_assignees.js';
+import { BeanFlowAssignees } from './bean.flow_assignees.js';
 
 export class BeanFlowLoad extends BeanFlowAssignees {
   async _loadFlowInstance({ flowId, history, throwError = true }) {

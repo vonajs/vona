@@ -1,4 +1,4 @@
-import LocalFlowFlowAssignees from './local.flow.flow_assignees.js';
+import { LocalFlowFlowAssignees } from './local.flow.flow_assignees.js';
 
 export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
   async _endFlow(options) {

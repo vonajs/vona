@@ -1,4 +1,4 @@
-import VersionManager0 from './version.manager_0.js';
+import { VersionManager0 } from './version.manager_0.js';
 
 export class Update1 extends VersionManager0 {
   async _update_1(options) {

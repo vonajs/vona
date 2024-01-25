@@ -12,7 +12,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'controller'
   | 'model'
   | TypeDecoratorBeanOptionsScene;
-export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version' | 'middleware';
+export type TypeDecoratorBeanOptionsScene = 'broadcast' | 'startup' | 'version' | 'middleware' | 'local.flow';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name

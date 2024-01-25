@@ -1,4 +1,4 @@
-import LocalFlowFlow0 from './local.flow.flow_0.js';
+import { LocalFlowFlow0 } from './local.flow.flow_0.js';
 
 export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
   async _parseAssignees({ nodeInstance, assignees }) {

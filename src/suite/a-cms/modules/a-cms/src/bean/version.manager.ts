@@ -1,4 +1,5 @@
 import { Bean } from '@cabloy/core';
+import { Test } from './version/test.js';
 
-@Bean()
+@Bean({ scene: 'version' })
 export class VersionManager extends Test {}

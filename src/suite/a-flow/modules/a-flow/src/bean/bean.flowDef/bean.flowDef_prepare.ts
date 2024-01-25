@@ -1,4 +1,4 @@
-import BeanFlowDefDeploy from './bean.flowDef_deploy.js';
+import { BeanFlowDefDeploy } from './bean.flowDef_deploy.js';
 
 const __flowBehaviorBases = {};
 const __flowNodeBases = {};

@@ -1,4 +1,4 @@
-import BeanDetailCopy from './bean.detail_copy.js';
+import { BeanDetailCopy } from './bean.detail_copy.js';
 
 export class BeanDetailDelete extends BeanDetailCopy {
   async _deleteDetails({ atomClass, atomKey, user }) {

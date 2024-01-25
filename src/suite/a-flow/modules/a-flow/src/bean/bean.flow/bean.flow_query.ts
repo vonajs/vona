@@ -1,4 +1,4 @@
-import BeanFlowLoad from './bean.flow_load.js';
+import { BeanFlowLoad } from './bean.flow_load.js';
 
 export class BeanFlowQuery extends BeanFlowLoad {
   async count({ options, user }) {

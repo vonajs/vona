@@ -1,4 +1,4 @@
-import BeanFlowDef0 from './bean.flowDef_0.js';
+import { BeanFlowDef0 } from './bean.flowDef_0.js';
 
 export class BeanFlowDefDeploy extends BeanFlowDef0 {
   async deploy({ flowDefId, undeploy, deleting }) {

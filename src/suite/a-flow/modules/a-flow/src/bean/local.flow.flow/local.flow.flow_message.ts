@@ -1,4 +1,4 @@
-import LocalFlowFlowNextEdges from './local.flow.flow_nextEdges.js';
+import { LocalFlowFlowNextEdges } from './local.flow.flow_nextEdges.js';
 
 export class LocalFlowFlowMessage extends LocalFlowFlowNextEdges {
   async _publishMessageFlowEnd({ flowUserId, user }) {

@@ -1,4 +1,4 @@
-import BeanFlowStart from './bean.flow_start.js';
+import { BeanFlowStart } from './bean.flow_start.js';
 
 export class BeanFlowUtils extends BeanFlowStart {
   evaluateExpression({ expression, globals }) {

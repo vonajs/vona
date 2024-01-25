@@ -1,4 +1,4 @@
-import Init12 from './init_12.js';
+import { Init12 } from './init_12.js';
 
 export class Test extends Init12 {
   async _test() {

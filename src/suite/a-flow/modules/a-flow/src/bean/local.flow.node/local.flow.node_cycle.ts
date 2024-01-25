@@ -1,4 +1,4 @@
-import LocalFlowNode0 from './local.flow.node_0.js';
+import { LocalFlowNode0 } from './local.flow.node_0.js';
 
 const __adapter = (context, chain) => {
   return {

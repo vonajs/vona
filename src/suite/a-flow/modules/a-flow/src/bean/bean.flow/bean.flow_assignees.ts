@@ -1,4 +1,4 @@
-import BeanFlow0 from './bean.flow_0.js';
+import { BeanFlow0 } from './bean.flow_0.js';
 
 const __VARTITLES = {
   flowUser: 'FlowInitiator',

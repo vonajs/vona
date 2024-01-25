@@ -1,4 +1,4 @@
-import BeanFlowDefPrepare from './bean.flowDef_prepare.js';
+import { BeanFlowDefPrepare } from './bean.flowDef_prepare.js';
 
 export class BeanFlowDefFind extends BeanFlowDefPrepare {
   _findNode({ content, nodeDefId }) {

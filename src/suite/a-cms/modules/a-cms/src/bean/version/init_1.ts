@@ -1,4 +1,4 @@
-import Update12 from './update_12.js';
+import { Update12 } from './update_12.js';
 
 export class Init1 extends Update12 {
   async _init_1(options) {
