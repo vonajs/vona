@@ -1,7 +1,9 @@
-const objectHash = require('object-hash');
-const CacheBase = require('../common/cacheBase.js');
+import objectHash from 'object-hash';
+import { CacheBase } from './cacheBase.js';
+import { Local } from '@cabloy/core';
 
-module.exports = class LocalCache extends CacheBase {
+@Local()
+export class LocalCache extends CacheBase {
   constructor({ cacheBase }) {
     super({ cacheBase });
   }
@@ -73,4 +75,4 @@ module.exports = class LocalCache extends CacheBase {
   __getKeysHash(keys) {
     return keys.map(key => this.__getKeyHash(key));
   }
-};
+}

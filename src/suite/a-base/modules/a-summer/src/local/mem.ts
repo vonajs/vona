@@ -1,9 +1,11 @@
 const LRUCache = require('lru-cache');
-const CacheBase = require('../common/cacheBase.js');
+import { CacheBase } from './cacheBase.js';
+import { Local } from '@cabloy/core';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
-module.exports = class LocalMem extends CacheBase {
+@Local()
+export class LocalMem extends CacheBase {
   constructor({ cacheBase }) {
     super({ cacheBase });
     this._lruCache = null;
@@ -138,4 +140,4 @@ module.exports = class LocalMem extends CacheBase {
     }
     return this.ctx.app[SUMMERCACHEMEMORY][this.ctx.subdomain];
   }
-};
+}

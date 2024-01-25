@@ -1,5 +1,8 @@
-module.exports = class CacheBase {
+import { BeanBase } from '@cabloy/core';
+
+export class CacheBase extends BeanBase {
   constructor({ cacheBase }) {
+    super();
     this._cacheBase = cacheBase;
     this._configModule = null;
     this._localMem = null;
@@ -58,4 +61,4 @@ module.exports = class CacheBase {
     }
     return value === undefined;
   }
-};
+}

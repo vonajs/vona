@@ -1,6 +1,8 @@
-const CacheBase = require('../common/cacheBase.js');
+import { CacheBase } from './cacheBase.js';
+import { Local } from '@cabloy/core';
 
-module.exports = class LocalFetch extends CacheBase {
+@Local()
+export class LocalFetch extends CacheBase {
   constructor({ cacheBase }) {
     super({ cacheBase });
     this._cacheBean = null;
@@ -57,4 +59,4 @@ module.exports = class LocalFetch extends CacheBase {
     }
     return this._cacheBean;
   }
-};
+}

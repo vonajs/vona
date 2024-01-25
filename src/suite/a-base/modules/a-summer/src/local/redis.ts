@@ -1,6 +1,8 @@
-const CacheBase = require('../common/cacheBase.js');
+import { CacheBase } from './cacheBase.js';
+import { Local } from '@cabloy/core';
 
-module.exports = class LocalRedis extends CacheBase {
+@Local()
+export class LocalRedis extends CacheBase {
   constructor({ cacheBase }) {
     super({ cacheBase });
     this._redisSummer = null;
@@ -104,4 +106,4 @@ module.exports = class LocalRedis extends CacheBase {
   _getRedisKey(key) {
     return `${this.ctx.instance.id}!${this._cacheBase.fullKey}!${key}`;
   }
-};
+}
