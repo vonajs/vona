@@ -39,8 +39,8 @@ async function main() {
 
 //
 
-async function _moduleHandle_({ module, processHelper }) {
-  const pattern = `${module.root}/src/bean/version.manager.ts`;
+async function _moduleHandle({ module, processHelper }) {
+  const pattern = `${module.root}/src/bean/local*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -55,7 +55,7 @@ async function _moduleHandle_({ module, processHelper }) {
     // }
     // if (file.indexOf('/bean.atom.ts') === -1) return;
     console.log(file);
-    await _moduleHandle_version({ file, module, processHelper });
+    // await _moduleHandle_version({ file, module, processHelper });
   }
 }
 
