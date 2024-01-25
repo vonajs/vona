@@ -38,6 +38,28 @@ async function main() {
 }
 
 //
+async function _moduleHandle_local({ file, module, processHelper }) {
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  // 查找是否有子目录
+  const classPath = path.basename(file).replace('.ts', '');
+  // console.log(classPath);
+  if (contentOld.indexOf(`/${classPath}/`) > -1) {
+    // move
+    const moveFrom = `${module.root}/src/bean/${classPath}`;
+    const moveTo = `${module.root}/src/local/${classPath}`;
+    console.log(moveFrom);
+    console.log(moveTo);
+    await fse.move(moveFrom, moveTo);
+  }
+  const moveTo = `${module.root}/src/local/${classPath}.ts`.replace('local.', '');
+  console.log(file);
+  console.log(moveTo);
+  await fse.move(file, moveTo);
+}
 
 async function _moduleHandle({ module, processHelper }) {
   const pattern = `${module.root}/src/bean/local*.ts`;
@@ -54,8 +76,8 @@ async function _moduleHandle({ module, processHelper }) {
     //   continue;
     // }
     // if (file.indexOf('/bean.atom.ts') === -1) return;
-    console.log(file);
-    // await _moduleHandle_version({ file, module, processHelper });
+    // console.log(file);
+    await _moduleHandle_local({ file, module, processHelper });
   }
 }
 
