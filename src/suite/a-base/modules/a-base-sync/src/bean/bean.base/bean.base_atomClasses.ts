@@ -1,4 +1,4 @@
-import BeanBaseActions from './bean.base_actions.js';
+import { BeanBaseActions } from './bean.base_actions.js';
 
 const _atomClasses = {};
 

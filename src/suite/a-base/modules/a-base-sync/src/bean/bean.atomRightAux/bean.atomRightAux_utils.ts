@@ -1,4 +1,4 @@
-import BeanAtomRightAuxRoleParentsOfUser from './bean.atomRightAux_roleParentsOfUser.js';
+import { BeanAtomRightAuxRoleParentsOfUser } from './bean.atomRightAux_roleParentsOfUser.js';
 
 export class BeanAtomRightAuxUtils extends BeanAtomRightAuxRoleParentsOfUser {
   async clearSummersOfRole() {

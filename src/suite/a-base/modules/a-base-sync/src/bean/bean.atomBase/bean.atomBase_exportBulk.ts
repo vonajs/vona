@@ -1,4 +1,4 @@
-import BeanAtomBaseDelete from './bean.atomBase_delete.js';
+import { BeanAtomBaseDelete } from './bean.atomBase_delete.js';
 
 const ExcelJS = require('exceljs');
 

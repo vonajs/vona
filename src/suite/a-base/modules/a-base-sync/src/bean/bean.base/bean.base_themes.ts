@@ -1,4 +1,4 @@
-import BeanBaseResourceTypes from './bean.base_resourceTypes.js';
+import { BeanBaseResourceTypes } from './bean.base_resourceTypes.js';
 
 const _themesLocales = {};
 

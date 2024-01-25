@@ -1,4 +1,4 @@
-import BeanAtomBaseExportBulk from './bean.atomBase_exportBulk.js';
+import { BeanAtomBaseExportBulk } from './bean.atomBase_exportBulk.js';
 
 export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
   async performAction({ key, atomClass, action, item, options, user }) {

@@ -1,4 +1,4 @@
-import BeanAtomState0 from './bean.atomState_0.js';
+import { BeanAtomState0 } from './bean.atomState_0.js';
 
 export class BeanAtomStateStatic extends BeanAtomState0 {
   static_getDictKey({ atomClass, atomClassBase, atomStage }) {

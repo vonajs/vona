@@ -1,4 +1,4 @@
-import BeanBase0 from './bean.base_0.js';
+import { BeanBase0 } from './bean.base_0.js';
 
 const _actions = {};
 

@@ -1,4 +1,4 @@
-import BeanAtomBaseDefault from './bean.atomBase_default.js';
+import { BeanAtomBaseDefault } from './bean.atomBase_default.js';
 
 export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
   async selectQuery({ atomClass, options, user }) {

@@ -1,4 +1,4 @@
-import BeanAtomRightAux0 from './bean.atomRightAux_0.js';
+import { BeanAtomRightAux0 } from './bean.atomRightAux_0.js';
 
 export class BeanAtomRightAuxRoleScopesOfUser extends BeanAtomRightAux0 {
   async getRoleScopesOfUser({ atomClass, action, userId }) {

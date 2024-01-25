@@ -1,4 +1,4 @@
-import BeanAtomBaseSelect from './bean.atomBase_select.js';
+import { BeanAtomBaseSelect } from './bean.atomBase_select.js';
 
 const __itemBasicFieldsRead = [
   'id',

@@ -1,4 +1,4 @@
-import BeanAtomRightAuxRoleWhos from './bean.atomRightAux_roleWhos.js';
+import { BeanAtomRightAuxRoleWhos } from './bean.atomRightAux_roleWhos.js';
 
 export class BeanAtomRightAuxRoleParentsOfUser extends BeanAtomRightAuxRoleWhos {
   async getRoleParentsOfUser({ userId }) {

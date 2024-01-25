@@ -1,4 +1,4 @@
-import BeanAtomBase1 from './bean.atomBase_1.js';
+import { BeanAtomBase1 } from './bean.atomBase_1.js';
 
 const __create_atom_basic_fields = [
   'atomStage',

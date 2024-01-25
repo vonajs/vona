@@ -1,4 +1,4 @@
-import BeanAtomStateStatic from './bean.atomState_static.js';
+import { BeanAtomStateStatic } from './bean.atomState_static.js';
 
 const __atomClassDict = {
   module: 'a-dict',

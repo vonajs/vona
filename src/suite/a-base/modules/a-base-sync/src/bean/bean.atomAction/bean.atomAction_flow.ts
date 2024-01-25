@@ -1,4 +1,4 @@
-import BeanAtomActionBase from './bean.atomAction_base.js';
+import { BeanAtomActionBase } from './bean.atomAction_base.js';
 
 export class BeanAtomActionFlow extends BeanAtomActionBase {
   async selectFlowActions({ atomClass, flowKey }) {

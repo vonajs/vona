@@ -1,4 +1,4 @@
-import BeanBaseModules from './bean.base_modules.js';
+import { BeanBaseModules } from './bean.base_modules.js';
 
 const _resourceTypes = {};
 

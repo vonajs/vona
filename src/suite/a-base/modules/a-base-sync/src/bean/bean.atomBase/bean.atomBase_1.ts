@@ -1,4 +1,4 @@
-import BeanAtomBase0 from './bean.atomBase_0.js';
+import { BeanAtomBase0 } from './bean.atomBase_0.js';
 
 export class BeanAtomBase1 extends BeanAtomBase0 {
   _ensureItemMeta(item) {

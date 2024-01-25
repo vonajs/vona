@@ -1,4 +1,4 @@
-import BeanBaseAtomClasses from './bean.base_atomClasses.js';
+import { BeanBaseAtomClasses } from './bean.base_atomClasses.js';
 
 const _authProvidersLocales = {};
 

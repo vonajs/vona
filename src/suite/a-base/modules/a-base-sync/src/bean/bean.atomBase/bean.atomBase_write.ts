@@ -1,4 +1,4 @@
-import BeanAtomBaseRead from './bean.atomBase_read.js';
+import { BeanAtomBaseRead } from './bean.atomBase_read.js';
 
 // maybe modified by user
 const __atomBasicFields = [

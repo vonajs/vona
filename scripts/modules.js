@@ -187,7 +187,7 @@ async function _moduleHandle({ module, processHelper }) {
       continue;
     }
     // if (file.indexOf('/bean.atom.ts') === -1) return;
-    // console.log(file);
+    console.log(file);
     await _moduleHandle_mixin({ file, module, processHelper });
   }
 }

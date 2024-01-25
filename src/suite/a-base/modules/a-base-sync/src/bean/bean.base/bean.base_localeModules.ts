@@ -1,4 +1,4 @@
-import BeanBaseAuthProviders from './bean.base_authProviders.js';
+import { BeanBaseAuthProviders } from './bean.base_authProviders.js';
 
 const _localeModules = {};
 

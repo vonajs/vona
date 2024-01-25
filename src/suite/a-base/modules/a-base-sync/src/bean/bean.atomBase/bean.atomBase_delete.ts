@@ -1,4 +1,4 @@
-import BeanAtomBaseWrite from './bean.atomBase_write.js';
+import { BeanAtomBaseWrite } from './bean.atomBase_write.js';
 
 export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
   async delete({ atomClass, key, options, user }) {

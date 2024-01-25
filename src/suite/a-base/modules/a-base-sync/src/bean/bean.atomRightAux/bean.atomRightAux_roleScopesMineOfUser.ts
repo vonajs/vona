@@ -1,4 +1,4 @@
-import BeanAtomRightAuxRoleScopesOfRole from './bean.atomRightAux_roleScopesOfRole.js';
+import { BeanAtomRightAuxRoleScopesOfRole } from './bean.atomRightAux_roleScopesOfRole.js';
 
 export class BeanAtomRightAuxRoleScopesMineOfUser extends BeanAtomRightAuxRoleScopesOfRole {
   async getRoleScopesMineOfUser({ atomClass, action, userId }) {

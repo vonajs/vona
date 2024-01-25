@@ -1,4 +1,4 @@
-import BeanBaseLocaleModules from './bean.base_localeModules.js';
+import { BeanBaseLocaleModules } from './bean.base_localeModules.js';
 
 const _locales = {};
 

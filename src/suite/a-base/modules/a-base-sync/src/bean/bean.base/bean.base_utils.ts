@@ -1,4 +1,4 @@
-import BeanBaseThemes from './bean.base_themes.js';
+import { BeanBaseThemes } from './bean.base_themes.js';
 
 const path = require('path');
 
