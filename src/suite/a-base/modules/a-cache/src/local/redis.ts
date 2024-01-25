@@ -1,4 +1,7 @@
-module.exports = class RedisDb extends module.meta.class.BeanModuleScopeBase {
+import { BeanModuleScopeBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalRedis extends BeanModuleScopeBase {
   _getKey(name) {
     return `${this.ctx.instance ? this.ctx.instance.id : 0}:${this.moduleScope}:${name}`;
   }
@@ -45,4 +48,4 @@ module.exports = class RedisDb extends module.meta.class.BeanModuleScopeBase {
     const key = this._getKey(name);
     await redis.del(key);
   }
-};
+}

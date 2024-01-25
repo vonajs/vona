@@ -38,7 +38,13 @@ async function main() {
 
 //
 
-async function _moduleHandle({ module, processHelper }) {}
+async function _moduleHandle({ module, processHelper }) {
+  const pattern = `${module.root}/src/bean/local*.ts`;
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  for (const file of files) {
+    console.log(file);
+  }
+}
 
 async function _suiteHandle({ modules, suite, processHelper }) {
   // const refs = [];
