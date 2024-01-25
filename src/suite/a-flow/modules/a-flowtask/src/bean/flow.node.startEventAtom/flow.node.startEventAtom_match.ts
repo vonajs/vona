@@ -1,4 +1,4 @@
-import FlowNodeStartEventAtomCondition from './flow.node.startEventAtom_condition.js';
+import { FlowNodeStartEventAtomCondition } from './flow.node.startEventAtom_condition.js';
 
 export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition {
   async _getAllConditions({ atomClassId, needFlowContent }) {

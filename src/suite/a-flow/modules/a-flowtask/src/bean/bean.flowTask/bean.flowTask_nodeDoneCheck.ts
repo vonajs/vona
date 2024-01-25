@@ -1,4 +1,4 @@
-import BeanFlowTaskFlowData from './bean.flowTask_flowData.js';
+import { BeanFlowTaskFlowData } from './bean.flowTask_flowData.js';
 
 export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
   async _nodeDoneCheckLock({ flowNodeId }) {

@@ -1,4 +1,4 @@
-import LocalFlowTaskEvent from './local.flow.task_event.js';
+import { LocalFlowTaskEvent } from './local.flow.task_event.js';
 
 const VarsFn = require('../../common/vars.js');
 const UtilsFn = require('../../common/utils.js');

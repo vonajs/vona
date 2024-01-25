@@ -1,4 +1,4 @@
-import LocalFlowTaskActions from './local.flow.task_actions.js';
+import { LocalFlowTaskActions } from './local.flow.task_actions.js';
 
 export class LocalFlowTaskNotify extends LocalFlowTaskActions {
   _notifyTaskClaimings(userId) {

@@ -1,4 +1,4 @@
-import BeanIoSave from './bean.io_save.js';
+import { BeanIoSave } from './bean.io_save.js';
 
 const SOCKETSONLINE = Symbol.for('APP#__SOCKETSONLINE');
 

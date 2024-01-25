@@ -1,4 +1,4 @@
-import LocalFlowTask0 from './local.flow.task_0.js';
+import { LocalFlowTask0 } from './local.flow.task_0.js';
 
 export class LocalFlowTaskAppendHandleRemark extends LocalFlowTask0 {
   async _appendHandleRemark({ handle }) {

@@ -1,4 +1,4 @@
-import FlowNodeStartEventAtomMatch from './flow.node.startEventAtom_match.js';
+import { FlowNodeStartEventAtomMatch } from './flow.node.startEventAtom_match.js';
 
 export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMatch {
   async _deploy_flowActions({ atomClass, /* flowDefId,*/ node, deleting, flowDef, content }) {

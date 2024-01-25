@@ -1,4 +1,4 @@
-import BeanFlowTaskAtomState from './bean.flowTask_atomState.js';
+import { BeanFlowTaskAtomState } from './bean.flowTask_atomState.js';
 
 export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
   async flowData({ flowId, options, user }) {

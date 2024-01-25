@@ -1,4 +1,4 @@
-import LocalFlowTaskNotify from './local.flow.task_notify.js';
+import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
   async _publishMessageTaskInit({ flowTaskId, userIdAssignee, user }) {

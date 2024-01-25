@@ -1,4 +1,4 @@
-import BeanIoDelivery from './bean.io_delivery.js';
+import { BeanIoDelivery } from './bean.io_delivery.js';
 
 export class BeanIoPublish extends BeanIoDelivery {
   async publish({ path, message, messageClass, options }) {

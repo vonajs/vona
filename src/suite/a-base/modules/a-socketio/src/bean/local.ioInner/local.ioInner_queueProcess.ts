@@ -1,4 +1,4 @@
-import LocalIoInnerQueueDelivery from './local.ioInner_queueDelivery.js';
+import { LocalIoInnerQueueDelivery } from './local.ioInner_queueDelivery.js';
 
 export class LocalIoInnerQueueProcess extends LocalIoInnerQueueDelivery {
   // queue: process

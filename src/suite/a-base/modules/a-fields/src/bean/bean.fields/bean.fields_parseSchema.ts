@@ -1,4 +1,4 @@
-import BeanFieldsBase from './bean.fields_base.js';
+import { BeanFieldsBase } from './bean.fields_base.js';
 
 export class BeanFieldsParseSchema extends BeanFieldsBase {
   // atomClass: maybe main/detail

@@ -1,4 +1,4 @@
-import LocalFlowTaskForward from './local.flow.task_forward.js';
+import { LocalFlowTaskForward } from './local.flow.task_forward.js';
 
 export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
   // handle: assignee/remark

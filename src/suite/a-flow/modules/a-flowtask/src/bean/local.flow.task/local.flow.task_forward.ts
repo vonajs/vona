@@ -1,4 +1,4 @@
-import LocalFlowTaskRecall from './local.flow.task_recall.js';
+import { LocalFlowTaskRecall } from './local.flow.task_recall.js';
 
 export class LocalFlowTaskForward extends LocalFlowTaskRecall {
   // handle: assignee/remark

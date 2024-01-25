@@ -1,4 +1,4 @@
-import FlowNodeStartEventAtom0 from './flow.node.startEventAtom_0.js';
+import { FlowNodeStartEventAtom0 } from './flow.node.startEventAtom_0.js';
 
 export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
   async _deploy_condition({ atomClass, deploy, flowDefId, node }) {

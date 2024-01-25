@@ -1,4 +1,4 @@
-import BeanIoPublish from './bean.io_publish.js';
+import { BeanIoPublish } from './bean.io_publish.js';
 
 export class BeanIoPush extends BeanIoPublish {
   async pushDirect({ content, channel, options }) {

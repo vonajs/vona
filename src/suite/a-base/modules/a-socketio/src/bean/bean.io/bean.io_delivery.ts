@@ -1,4 +1,4 @@
-import BeanIo0 from './bean.io_0.js';
+import { BeanIo0 } from './bean.io_0.js';
 
 export class BeanIoDelivery extends BeanIo0 {
   // called by messageBase.onDelivery

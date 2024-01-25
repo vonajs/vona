@@ -1,4 +1,4 @@
-import LocalIoInnerQueuePush from './local.ioInner_queuePush.js';
+import { LocalIoInnerQueuePush } from './local.ioInner_queuePush.js';
 
 export class LocalIoInnerQueuePushDirect extends LocalIoInnerQueuePush {
   async queuePushDirect({ content, options, channel }) {

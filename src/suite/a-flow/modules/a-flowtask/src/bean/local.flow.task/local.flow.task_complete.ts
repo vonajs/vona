@@ -1,4 +1,4 @@
-import LocalFlowTaskClaim from './local.flow.task_claim.js';
+import { LocalFlowTaskClaim } from './local.flow.task_claim.js';
 
 export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
   async _complete({ handle, formAtom }) {

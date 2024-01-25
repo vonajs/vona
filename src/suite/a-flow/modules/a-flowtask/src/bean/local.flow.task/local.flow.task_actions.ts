@@ -1,4 +1,4 @@
-import LocalFlowTaskSchema from './local.flow.task_schema.js';
+import { LocalFlowTaskSchema } from './local.flow.task_schema.js';
 
 export class LocalFlowTaskActions extends LocalFlowTaskSchema {
   async _actions() {

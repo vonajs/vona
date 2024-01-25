@@ -1,4 +1,4 @@
-import LocalFlowTaskComplete from './local.flow.task_complete.js';
+import { LocalFlowTaskComplete } from './local.flow.task_complete.js';
 
 export class LocalFlowTaskEvent extends LocalFlowTaskComplete {
   async raiseEventCreated() {

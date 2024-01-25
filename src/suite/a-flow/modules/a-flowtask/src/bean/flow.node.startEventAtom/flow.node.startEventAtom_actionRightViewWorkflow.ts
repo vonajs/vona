@@ -1,4 +1,4 @@
-import FlowNodeStartEventAtomFlowActions from './flow.node.startEventAtom_flowActions.js';
+import { FlowNodeStartEventAtomFlowActions } from './flow.node.startEventAtom_flowActions.js';
 
 export class FlowNodeStartEventAtomActionRightViewWorkflow extends FlowNodeStartEventAtomFlowActions {
   async _deploy_actionRightViewWorkflow({ atomClass }) {

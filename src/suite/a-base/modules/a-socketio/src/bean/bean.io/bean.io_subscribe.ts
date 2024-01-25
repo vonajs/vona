@@ -1,4 +1,4 @@
-import BeanIoSockets from './bean.io_sockets.js';
+import { BeanIoSockets } from './bean.io_sockets.js';
 
 export class BeanIoSubscribe extends BeanIoSockets {
   // subcribe

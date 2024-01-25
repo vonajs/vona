@@ -1,4 +1,4 @@
-import BeanFlowTaskSchema from './bean.flowTask_schema.js';
+import { BeanFlowTaskSchema } from './bean.flowTask_schema.js';
 
 export class BeanFlowTaskCheckViewWorkflow extends BeanFlowTaskSchema {
   async _checkViewWorkflow({ flowId, user }) {

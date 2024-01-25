@@ -1,4 +1,4 @@
-import BeanIoPush from './bean.io_push.js';
+import { BeanIoPush } from './bean.io_push.js';
 
 export class BeanIoSave extends BeanIoPush {
   _checkPersistence({ options, /* message,*/ messageClass }) {

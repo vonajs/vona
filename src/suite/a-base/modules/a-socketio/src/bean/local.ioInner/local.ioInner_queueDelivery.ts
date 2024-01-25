@@ -1,4 +1,4 @@
-import LocalIoInner0 from './local.ioInner_0.js';
+import { LocalIoInner0 } from './local.ioInner_0.js';
 
 export class LocalIoInnerQueueDelivery extends LocalIoInner0 {
   // queue: delivery

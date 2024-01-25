@@ -1,4 +1,4 @@
-import LocalFlowTaskAssignees from './local.flow.task_assignees.js';
+import { LocalFlowTaskAssignees } from './local.flow.task_assignees.js';
 
 export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
   async _cancelFlow({ handle }) {

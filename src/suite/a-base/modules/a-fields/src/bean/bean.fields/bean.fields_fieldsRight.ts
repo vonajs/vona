@@ -1,4 +1,4 @@
-import BeanFieldsParseSchema from './bean.fields_parseSchema.js';
+import { BeanFieldsParseSchema } from './bean.fields_parseSchema.js';
 
 const __atomClass_userFieldsRight = {
   module: 'a-base',

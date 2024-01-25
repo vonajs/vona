@@ -1,4 +1,4 @@
-import LocalFlowTaskAppendHandleRemark from './local.flow.task_appendHandleRemark.js';
+import { LocalFlowTaskAppendHandleRemark } from './local.flow.task_appendHandleRemark.js';
 
 export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
   async _assignees() {

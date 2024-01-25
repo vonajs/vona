@@ -1,4 +1,4 @@
-import LocalFlowTaskInit from './local.flow.task_init.js';
+import { LocalFlowTaskInit } from './local.flow.task_init.js';
 
 export class LocalFlowTaskRecall extends LocalFlowTaskInit {
   async _recall() {

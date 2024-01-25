@@ -1,4 +1,4 @@
-import LocalFlowTaskSubstitute from './local.flow.task_substitute.js';
+import { LocalFlowTaskSubstitute } from './local.flow.task_substitute.js';
 
 export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
   async _viewAtom() {
