@@ -1,18 +1,17 @@
 import { BeanBase, Local } from '@cabloy/core';
-
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalDashboard extends BeanBase {
   get atomClass() {
     return {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'dashboard',
     };
   }
 
   get sequence() {
-    return this.ctx.bean.sequence.module(moduleInfo.relativeName);
+    return this.ctx.bean.sequence.module(__ThisModule__);
   }
 
   async itemByKey({ atomStaticKey, user }) {

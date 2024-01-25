@@ -1,11 +1,10 @@
 import { BeanBase, Local } from '@cabloy/core';
-
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalScene extends BeanBase {
   get statusModule() {
-    return this.ctx.bean.status.module(moduleInfo.relativeName);
+    return this.ctx.bean.status.module(__ThisModule__);
   }
 
   async list() {

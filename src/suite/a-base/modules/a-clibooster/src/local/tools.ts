@@ -1,11 +1,10 @@
 import { BeanBase, Local } from '@cabloy/core';
-
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalTools extends BeanBase {
   get localUtils() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).utils;
+    return this.ctx.bean.local.module(__ThisModule__).utils;
   }
 
   async demo({ method, query }) {

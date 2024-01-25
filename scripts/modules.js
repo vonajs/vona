@@ -38,32 +38,7 @@ async function main() {
 
 //
 
-async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/local/**/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
-  for (const file of files) {
-    // console.log(file);
-    const contentOld = (await fse.readFile(file)).toString();
-    // console.log(contentOld);
-    // const matchExport = contentOld.match(/export /);
-    // if (matchExport) {
-    //   // console.log('---- not changed: ', module.info.relativeName);
-    //   return;
-    // }
-    if (contentOld.indexOf('const moduleInfo = module.info;') === -1) {
-      continue;
-    }
-    console.log(file);
-    const contentNew = contentOld
-      .replace(`from '@cabloy/core';`, `from '@cabloy/core';\nimport { __ThisModule__ } from '../resource/this.js';`)
-      .replace(`// const moduleInfo = module.info;`, '')
-      .replace(`const moduleInfo = module.info;`, '')
-      .replaceAll(`moduleInfo.relativeName`, '__ThisModule__');
-    console.log(contentNew);
-    await fse.outputFile(file, contentNew);
-    await processHelper.formatFile({ fileName: file });
-  }
-}
+async function _moduleHandle({ module, processHelper }) {}
 
 async function _suiteHandle({ modules, suite, processHelper }) {
   // const refs = [];

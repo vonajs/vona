@@ -1,13 +1,12 @@
 import { BeanBase, Local } from '@cabloy/core';
-
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalAuth extends BeanBase {
   async signup({ user, state = 'login', userName, realName, mobile }) {
     // profileUser
     const profileUser = {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       provider: 'authsms',
       profileId: mobile,
       maxAge: 0,
@@ -53,7 +52,7 @@ export class LocalAuth extends BeanBase {
   // data: { mobile, rememberMe }
   async signin({ data, state = 'login' }) {
     const res = await this.ctx.bean.authProvider.authenticateDirect({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authsms',
       query: { state },
       body: { data },

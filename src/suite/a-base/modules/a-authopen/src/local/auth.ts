@@ -1,6 +1,5 @@
 import { BeanBase, Local } from '@cabloy/core';
-
-const moduleInfo = module.info;
+import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalAuth extends BeanBase {
@@ -8,7 +7,7 @@ export class LocalAuth extends BeanBase {
   async signin({ data, state = 'login' }) {
     // signin
     await this.ctx.bean.authProvider.authenticateDirect({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authopen',
       query: { state },
       body: { data },
