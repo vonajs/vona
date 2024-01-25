@@ -38,19 +38,7 @@ async function main() {
 
 //
 
-async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/resource/models.ts`;
-  if (fse.existsSync(file)) {
-    console.log('---- not changed: ', module.info.relativeName);
-    return;
-  }
-  const outputNew = `
-export interface IModuleModel {}
-  `;
-  // console.log(outputNew);
-  await fse.outputFile(file, outputNew);
-  await processHelper.formatFile({ fileName: file });
-}
+async function _moduleHandle({ module, processHelper }) {}
 
 async function _suiteHandle({ modules, suite, processHelper }) {
   // const refs = [];

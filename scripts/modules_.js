@@ -155,6 +155,20 @@ export interface IModuleModel {
   await processHelper.formatFile({ fileName: file });
 }
 
+async function _moduleHandle_appendExtra({ module, processHelper }) {
+  const file = `${module.root}/src/resource/models.ts`;
+  if (fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const outputNew = `
+export interface IModuleModel {}
+  `;
+  // console.log(outputNew);
+  await fse.outputFile(file, outputNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_eachFile({ module, processHelper }) {
   const pattern = `${module.root}/src/local/**/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
