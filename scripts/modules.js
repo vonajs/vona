@@ -82,7 +82,9 @@ async function _moduleHandle({ module, processHelper }) {
     // const beanName = parseBeanName(classNameNew, 'Controller');
     // console.log(classNameNew, classNameOld);
     // 替换内容
-    const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) extends [\S]* (\{[\s\S\n]*)/);
+    const contentMatches = classContent.match(
+      /([\s\S\n]*)module\.exports = class ([\S]*) extends [\s\S\n]* super\(([\s\S\n]*)\);[\s\n]*\}([\s\S\n]*)/,
+    );
     if (!contentMatches) {
       console.log('---- not matched: ', classFile);
       return;
@@ -93,12 +95,13 @@ import { BeanModelBase, Model } from '@cabloy/core';
 
 ${contentMatches[1]}
 
-@Model()
-export class ${classNameNew} extends BeanModelBase ${contentMatches[3]}
+@Model(${contentMatches[3]})
+export class ${classNameNew} extends BeanModelBase {
+${contentMatches[4]}
     `;
     console.log(contentNew);
-    // await fse.outputFile(classFile, contentNew);
-    // await processHelper.formatFile({ fileName: classFile });
+    await fse.outputFile(classFile, contentNew);
+    await processHelper.formatFile({ fileName: classFile });
   }
   const outputNew = `
 ${outputNew1.join('\n')}
@@ -110,8 +113,8 @@ export interface IModuleModel {
 }
   `;
   console.log(outputNew);
-  // await fse.outputFile(file, outputNew);
-  // await processHelper.formatFile({ fileName: file });
+  await fse.outputFile(file, outputNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _suiteHandle({ modules, suite, processHelper }) {
