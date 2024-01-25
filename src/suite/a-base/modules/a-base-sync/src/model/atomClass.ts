@@ -1,12 +1,10 @@
 import { BeanModelBase, Model } from '@cabloy/core';
 
-const ModelCache = require('../common/modelCache.js');
-
 @Model({
   table: 'aAtomClass',
   options: {
     disableDeleted: false,
-    cacheName: { module: moduleInfo.relativeName, name: 'modelAtomClass' },
+    cacheName: { name: 'modelAtomClass' },
   },
 })
 export class ModelAtomClass extends BeanModelBase {

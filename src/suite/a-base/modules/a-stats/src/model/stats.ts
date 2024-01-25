@@ -4,7 +4,7 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aStats',
   options: {
     disableDeleted: true,
-    cacheName: { module: moduleInfo.relativeName, name: 'modelStats' },
+    cacheName: { name: 'modelStats' },
   },
 })
 export class ModelStats extends BeanModelBase {}
