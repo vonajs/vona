@@ -40,84 +40,12 @@ async function main() {
 
 async function _moduleHandle({ module, processHelper }) {
   const file = `${module.root}/src/resource/models.ts`;
-  if (!fse.existsSync(file)) {
+  if (fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
   }
-  const contentOld = (await fse.readFile(file)).toString();
-  const matchExport = contentOld.match(/export /);
-  if (matchExport) {
-    // console.log('---- not changed: ', module.info.relativeName);
-    return;
-  }
-  console.log(file);
-  const regexp = /const (.*?) =.*model\/(.*?)\.js/g;
-  const matches = contentOld.matchAll(regexp);
-  const outputNew1 = [];
-  const outputNew2 = [];
-  const outputNew3 = [];
-  let matchCount = 0;
-  for (const match of matches) {
-    matchCount++;
-    const classNameOld = match[1];
-    const classPath = match[2];
-    if (classNameOld.indexOf('.') > -1) {
-      console.log('has . :', module.info.relativeName);
-      return;
-    }
-    const classNameNew = classPathToClassName('Model', classPath);
-    // console.log(classNameOld, classPath, classNameNew);
-    // models.ts
-    outputNew1.push(`export * from '../model/${classPath}.js';`);
-    outputNew2.push(`import { ${classNameNew} } from '../model/${classPath}.js';`);
-    outputNew3.push(`${classNameOld}: ${classNameNew};`);
-    // model
-    const classFile = `${module.root}/src/model/${classPath}.ts`;
-    // console.log(classFile);
-    const classContent = (await fse.readFile(classFile)).toString();
-    const matchExport = classContent.match(/export /);
-    if (matchExport) {
-      console.log('---- not changed: ', classFile);
-      continue;
-    }
-    // const classNameNew = classPathToClassName('Controller', classPath);
-    // const beanName = parseBeanName(classNameNew, 'Controller');
-    // console.log(classNameNew, classNameOld);
-    // 替换内容
-    const contentMatches = classContent.match(
-      /([\s\S\n]*)module\.exports = class ([\S]*) extends [\s\S\n]* super\(([\s\S\n]*?)\);[\s\n]*?\}([\s\S\n]*)/,
-    );
-    if (!contentMatches) {
-      console.log('---- not matched: ', classFile);
-      return;
-    }
-    // console.log(contentMatches);
-    const contentNew = `
-import { BeanModelBase, Model } from '@cabloy/core';
-
-${contentMatches[1]}
-
-@Model(${contentMatches[3]})
-export class ${classNameNew} extends BeanModelBase {
-${contentMatches[4]}
-    `;
-    // console.log(contentNew);
-    await fse.outputFile(classFile, contentNew);
-    await processHelper.formatFile({ fileName: classFile });
-  }
-  if (matchCount.length !== outputNew1.length) {
-    console.log('---- match length not equal: ', module.info.relativeName);
-    process.exit(0);
-    return;
-  }
   const outputNew = `
-${outputNew1.join('\n')}
-
-${outputNew2.join('\n')}
-
-export interface IModuleModel {
-  ${outputNew3.join('\n')}
-}
+export interface IModuleModel {}
   `;
   // console.log(outputNew);
   await fse.outputFile(file, outputNew);
