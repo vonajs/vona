@@ -1,4 +1,4 @@
-import LocalProcedureUtilsFieldsRight from './local.procedure_utils_fieldsRight.js';
+import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
   async _prepareRightMine({ /* iid, */ atomClass, atomClassBase, action, userIdWho, atom }) {

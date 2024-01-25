@@ -1,4 +1,5 @@
-import { Bean } from '@cabloy/core';
+import { Local } from '@cabloy/core';
+import { LocalProcedureUtils } from './local.procedure/local.procedure_utils.js';
 
-@Bean()
+@Local()
 export class LocalProcedure extends LocalProcedureUtils {}

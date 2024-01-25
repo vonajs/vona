@@ -1,4 +1,4 @@
-import BeanRoleUsers from './bean.role_users.js';
+import { BeanRoleUsers } from './bean.role_users.js';
 
 export class BeanRoleFlow extends BeanRoleUsers {
   // const roleRights = [

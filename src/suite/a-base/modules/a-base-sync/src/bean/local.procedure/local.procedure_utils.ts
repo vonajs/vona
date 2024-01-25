@@ -1,4 +1,4 @@
-import LocalProcedureUtilsRights from './local.procedure_utils_rights.js';
+import { LocalProcedureUtilsRights } from './local.procedure_utils_rights.js';
 
 export class LocalProcedureUtils extends LocalProcedureUtilsRights {
   _prepare_cms({ tableName, iid, mode, cms }) {

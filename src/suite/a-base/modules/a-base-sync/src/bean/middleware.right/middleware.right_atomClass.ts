@@ -1,4 +1,4 @@
-import MiddlewareRightAtom from './middleware.right_atom.js';
+import { MiddlewareRightAtom } from './middleware.right_atom.js';
 
 export class MiddlewareRightAtomClass extends MiddlewareRightAtom {
   async checkAtomClass(options) {

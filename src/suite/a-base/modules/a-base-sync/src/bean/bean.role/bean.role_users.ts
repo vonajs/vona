@@ -1,4 +1,4 @@
-import BeanRoleResourceRights from './bean.role_resourceRights.js';
+import { BeanRoleResourceRights } from './bean.role_resourceRights.js';
 
 const __atomClassRole = {
   module: moduleInfo.relativeName,

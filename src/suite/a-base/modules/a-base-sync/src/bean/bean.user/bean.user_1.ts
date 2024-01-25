@@ -1,4 +1,4 @@
-import BeanUser0 from './bean.user_0.js';
+import { BeanUser0 } from './bean.user_0.js';
 
 const __atomClassUser = {
   module: moduleInfo.relativeName,

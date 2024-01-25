@@ -1,4 +1,4 @@
-import LocalProcedureAtomGetAtom from './local.procedure_atom_getAtom.js';
+import { LocalProcedureAtomGetAtom } from './local.procedure_atom_getAtom.js';
 
 export class LocalProcedureAtomRight extends LocalProcedureAtomGetAtom {
   // checkRoleRightRead

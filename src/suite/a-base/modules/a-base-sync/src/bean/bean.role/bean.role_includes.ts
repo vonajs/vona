@@ -1,4 +1,4 @@
-import BeanRoleBuild from './bean.role_build.js';
+import { BeanRoleBuild } from './bean.role_build.js';
 
 const __atomClassRole = {
   module: moduleInfo.relativeName,

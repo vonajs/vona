@@ -1,4 +1,4 @@
-import LocalProcedureAtomRightCheckRightActionBulk from './local.procedure_atomRight_checkRightActionBulk.js';
+import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
   checkRightResource({ iid, userIdWho, resourceAtomId }) {

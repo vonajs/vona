@@ -1,4 +1,4 @@
-import BeanRoleAtomRights from './bean.role_atomRights.js';
+import { BeanRoleAtomRights } from './bean.role_atomRights.js';
 
 export class BeanRoleBuild extends BeanRoleAtomRights {
   // set dirty

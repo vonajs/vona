@@ -1,4 +1,4 @@
-import LocalProcedureResource from './local.procedure_resource.js';
+import { LocalProcedureResource } from './local.procedure_resource.js';
 
 const __itemBasicFieldsRead = [
   'id',

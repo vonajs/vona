@@ -1,4 +1,4 @@
-import LocalProcedureAtomRight from './local.procedure_atomRight.js';
+import { LocalProcedureAtomRight } from './local.procedure_atomRight.js';
 
 export class LocalProcedureAtomRightCheckRoleRightRead extends LocalProcedureAtomRight {
   async checkRoleRightAction({ iid, roleIdWho, atomClass, atomClassBase, atom, action, forAtomUser }) {

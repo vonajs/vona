@@ -1,4 +1,4 @@
-import LocalProcedureBase from './local.procedure_base.js';
+import { LocalProcedureBase } from './local.procedure_base.js';
 
 export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
   async selectAtoms({ options }) {

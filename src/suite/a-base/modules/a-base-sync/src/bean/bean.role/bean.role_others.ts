@@ -1,4 +1,4 @@
-import BeanRoleIncludes from './bean.role_includes.js';
+import { BeanRoleIncludes } from './bean.role_includes.js';
 
 //
 

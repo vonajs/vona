@@ -1,4 +1,4 @@
-import LocalProcedureAtomSelectAtomsDraft from './local.procedure_atom_selectAtoms_draft.js';
+import { LocalProcedureAtomSelectAtomsDraft } from './local.procedure_atom_selectAtoms_draft.js';
 
 export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelectAtomsDraft {
   async _selectAtoms_formal({ action, options }) {

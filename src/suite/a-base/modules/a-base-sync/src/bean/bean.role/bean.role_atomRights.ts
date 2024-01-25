@@ -1,4 +1,4 @@
-import BeanRoleBase from './bean.role_base.js';
+import { BeanRoleBase } from './bean.role_base.js';
 
 export class BeanRoleAtomRights extends BeanRoleBase {
   // add role right
