@@ -1,6 +1,6 @@
 import { BeanBase, Local } from '@cabloy/core';
 
-const pMap = require('p-map');
+import pMap from 'p-map';
 
 @Local()
 export class LocalUtil extends BeanBase {

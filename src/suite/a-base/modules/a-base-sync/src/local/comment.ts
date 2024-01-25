@@ -1,6 +1,6 @@
 import { BeanBase, Local } from '@cabloy/core';
 
-const trimHtml = require('@zhennann/trim-html');
+import trimHtml from '@zhennann/trim-html';
 
 @Local()
 export class LocalComment extends BeanBase {

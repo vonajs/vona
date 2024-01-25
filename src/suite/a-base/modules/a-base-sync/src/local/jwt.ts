@@ -1,6 +1,6 @@
 import { BeanBase, Local } from '@cabloy/core';
 
-const jsonwebtoken = require('jsonwebtoken');
+import jsonwebtoken from 'jsonwebtoken';
 
 @Local()
 export class LocalJwt extends BeanBase {
