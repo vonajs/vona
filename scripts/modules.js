@@ -38,7 +38,81 @@ async function main() {
 
 //
 
-async function _moduleHandle({ module, processHelper }) {}
+async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/resource/locals.ts`;
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  const matchExport = contentOld.match(/export /);
+  if (matchExport) {
+    // console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  console.log(file);
+  const regexp = /const (.*?) =.*service\/(.*?)\.js/g;
+  const matches = contentOld.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  const outputNew3 = [];
+  for (const match of matches) {
+    const classNameOld = match[1];
+    const classPath = match[2];
+    if (classNameOld.indexOf('.') > -1) {
+      console.log('has . :', module.info.relativeName);
+      return;
+    }
+    const classNameNew = classPathToClassName('Local', classPath);
+    // console.log(classNameOld, classPath, classNameNew);
+    // locals.ts
+    outputNew1.push(`export * from '../local/${classPath}.js';`);
+    outputNew2.push(`import { ${classNameNew} } from '../local/${classPath}.js';`);
+    outputNew3.push(`${classNameOld}: ${classNameNew};`);
+    // local
+    const classFile = `${module.root}/src/local/${classPath}.ts`;
+    // console.log(classFile);
+    const classContent = (await fse.readFile(classFile)).toString();
+    const matchExport = classContent.match(/export /);
+    if (matchExport) {
+      console.log('---- not changed: ', classFile);
+      continue;
+    }
+    // const classNameNew = classPathToClassName('Controller', classPath);
+    // const beanName = parseBeanName(classNameNew, 'Controller');
+    // console.log(classNameNew, classNameOld);
+    // 替换内容
+    const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) (\{[\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', classFile);
+      return;
+    }
+    // console.log(contentMatches);
+    const contentNew = `
+import { BeanBase, Local } from '@cabloy/core';
+
+${contentMatches[1]}
+
+@Local()
+export class ${classNameNew} extends BeanBase ${contentMatches[3]}
+    `;
+    // console.log(contentNew);
+    await fse.outputFile(classFile, contentNew);
+    await processHelper.formatFile({ fileName: classFile });
+  }
+  const outputNew = `
+${outputNew1.join('\n')}
+
+${outputNew2.join('\n')}
+
+export interface IModuleLocal {
+  ${outputNew3.join('\n')}
+}
+  `;
+  // console.log(outputNew);
+  await fse.outputFile(file, outputNew);
+  await processHelper.formatFile({ fileName: file });
+}
 
 async function _suiteHandle({ modules, suite, processHelper }) {
   // const refs = [];
