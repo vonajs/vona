@@ -1,6 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const jsonwebtoken = require('jsonwebtoken');
 
-module.exports = class Jwt {
+@Local()
+export class LocalJwt extends BeanBase {
   async create({ scene = 'query' }) {
     // check
     if (!this.ctx.state.jwt) this.ctx.throw(403);
@@ -16,4 +19,4 @@ module.exports = class Jwt {
     const jwt = jsonwebtoken.sign(payload, secret);
     return { jwt };
   }
-};
+}

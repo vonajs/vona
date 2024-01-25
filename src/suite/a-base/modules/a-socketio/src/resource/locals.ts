@@ -1,9 +1,13 @@
-const io = require('./service/io.js');
-const messageClass = require('./service/messageClass.js');
-const message = require('./service/message.js');
+export * from '../local/io.js';
+export * from '../local/messageClass.js';
+export * from '../local/message.js';
 
-module.exports = {
-  io,
-  messageClass,
-  message,
-};
+import { LocalIo } from '../local/io.js';
+import { LocalMessageClass } from '../local/messageClass.js';
+import { LocalMessage } from '../local/message.js';
+
+export interface IModuleLocal {
+  io: LocalIo;
+  messageClass: LocalMessageClass;
+  message: LocalMessage;
+}

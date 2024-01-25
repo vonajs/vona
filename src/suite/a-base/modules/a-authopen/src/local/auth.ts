@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class Auth {
+
+@Local()
+export class LocalAuth extends BeanBase {
   // data: { clientID, clientSecret }
   async signin({ data, state = 'login' }) {
     // signin
@@ -12,4 +16,4 @@ module.exports = class Auth {
     // user info
     return await this.ctx.bean.auth.getLoginInfo({ clientId: true });
   }
-};
+}

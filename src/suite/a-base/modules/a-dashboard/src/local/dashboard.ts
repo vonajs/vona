@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class Dashboard {
+
+@Local()
+export class LocalDashboard extends BeanBase {
   get atomClass() {
     return {
       module: moduleInfo.relativeName,
@@ -67,7 +71,7 @@ module.exports = class Dashboard {
           id: dashboardUserId,
           userId: user.id,
         },
-      }
+      },
     );
   }
 
@@ -81,7 +85,7 @@ module.exports = class Dashboard {
           id: dashboardUserId,
           userId: user.id,
         },
-      }
+      },
     );
   }
 
@@ -111,7 +115,7 @@ module.exports = class Dashboard {
           userId: user.id,
           dashboardAtomId,
         },
-      }
+      },
     );
     // insert
     const data = {
@@ -158,11 +162,11 @@ module.exports = class Dashboard {
           userId: user.id,
           dashboardAtomId,
         },
-      }
+      },
     );
     await this.ctx.model.dashboardUser.update({
       id: dashboardUserId,
       dashboardDefault: 1,
     });
   }
-};
+}

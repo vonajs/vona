@@ -1,7 +1,10 @@
-const user = require('./service/user.js');
-const public2 = require('./service/public.js');
+export * from '../local/user.js';
+export * from '../local/public.js';
 
-module.exports = {
-  user,
-  public: public2,
-};
+import { LocalUser } from '../local/user.js';
+import { LocalPublic } from '../local/public.js';
+
+export interface IModuleLocal {
+  user: LocalUser;
+  public2: LocalPublic;
+}

@@ -1,5 +1,7 @@
-const userOnline = require('./service/userOnline.js');
+export * from '../local/userOnline.js';
 
-module.exports = {
-  userOnline,
-};
+import { LocalUserOnline } from '../local/userOnline.js';
+
+export interface IModuleLocal {
+  userOnline: LocalUserOnline;
+}

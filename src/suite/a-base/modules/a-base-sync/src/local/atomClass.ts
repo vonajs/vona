@@ -1,4 +1,7 @@
-module.exports = class AtomClass {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAtomClass extends BeanBase {
   async validatorSearch({ atomClass }) {
     return await this.ctx.bean.atomClass.validatorSearch({ atomClass });
   }
@@ -18,4 +21,4 @@ module.exports = class AtomClass {
   async actionsUser({ atomClass, user }) {
     return await this.ctx.bean.atomClass.actionsUser({ atomClass, user });
   }
-};
+}

@@ -1,5 +1,7 @@
-const share = require('./service/share.js');
+export * from '../local/share.js';
 
-module.exports = {
-  share,
-};
+import { LocalShare } from '../local/share.js';
+
+export interface IModuleLocal {
+  share: LocalShare;
+}

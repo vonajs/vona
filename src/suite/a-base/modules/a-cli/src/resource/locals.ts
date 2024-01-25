@@ -1,5 +1,7 @@
-const cli = require('./service/cli.js');
+export * from '../local/cli.js';
 
-module.exports = {
-  cli,
-};
+import { LocalCli } from '../local/cli.js';
+
+export interface IModuleLocal {
+  cli: LocalCli;
+}

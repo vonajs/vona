@@ -1,6 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const pMap = require('p-map');
 
-module.exports = class Util {
+@Local()
+export class LocalUtil extends BeanBase {
   async performAction({ params }) {
     // force innerAccess as false
     params.innerAccess = false;
@@ -25,4 +28,4 @@ module.exports = class Util {
     };
     return await pMap(actions, mapper, { concurrency: 10 });
   }
-};
+}

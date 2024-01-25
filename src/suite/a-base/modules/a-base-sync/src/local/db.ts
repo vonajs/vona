@@ -1,4 +1,7 @@
-module.exports = class Db {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalDb extends BeanBase {
   async insert({ tableName, data }) {
     return await this.ctx.db.insert(tableName, data);
   }
@@ -34,4 +37,4 @@ module.exports = class Db {
   async iid() {
     return this.ctx.instance.id;
   }
-};
+}

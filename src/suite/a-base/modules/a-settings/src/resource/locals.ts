@@ -1,5 +1,7 @@
-const settings = require('./service/settings.js');
+export * from '../local/settings.js';
 
-module.exports = {
-  settings,
-};
+import { LocalSettings } from '../local/settings.js';
+
+export interface IModuleLocal {
+  settings: LocalSettings;
+}

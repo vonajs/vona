@@ -1,4 +1,7 @@
-module.exports = class Category {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalCategory extends BeanBase {
   async child({ atomClass, language, categoryId, categoryName, categoryHidden, categoryFlag, setLocale, user }) {
     return await this.ctx.bean.category.child({
       atomClass,
@@ -70,4 +73,4 @@ module.exports = class Category {
       force,
     });
   }
-};
+}

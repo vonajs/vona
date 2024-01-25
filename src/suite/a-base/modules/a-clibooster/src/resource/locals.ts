@@ -1,5 +1,7 @@
-const tools = require('./service/tools.js');
+export * from '../local/tools.js';
 
-module.exports = {
-  tools,
-};
+import { LocalTools } from '../local/tools.js';
+
+export interface IModuleLocal {
+  tools: LocalTools;
+}

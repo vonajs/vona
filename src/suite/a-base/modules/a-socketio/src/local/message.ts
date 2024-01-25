@@ -1,4 +1,7 @@
-module.exports = class Message {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalMessage extends BeanBase {
   async offset({ messageClass, options, user }) {
     return await this.ctx.bean.io.message.offset({ messageClass, options, user });
   }
@@ -18,4 +21,4 @@ module.exports = class Message {
   async delete({ messageIds, user }) {
     return await this.ctx.bean.io.message.delete({ messageIds, user });
   }
-};
+}

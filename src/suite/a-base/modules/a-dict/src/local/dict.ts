@@ -1,4 +1,7 @@
-module.exports = class Dict {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalDict extends BeanBase {
   async getDict({ dictKey, user }) {
     // check right
     const res = await this.ctx.bean.dict._prepareDict_load({ dictKey, user, returnDict: false });
@@ -14,4 +17,4 @@ module.exports = class Dict {
       _dictItems: dict._dictItems,
     };
   }
-};
+}

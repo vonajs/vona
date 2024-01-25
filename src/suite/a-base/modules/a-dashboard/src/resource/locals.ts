@@ -1,5 +1,7 @@
-const dashboard = require('./service/dashboard.js');
+export * from '../local/dashboard.js';
 
-module.exports = {
-  dashboard,
-};
+import { LocalDashboard } from '../local/dashboard.js';
+
+export interface IModuleLocal {
+  dashboard: LocalDashboard;
+}

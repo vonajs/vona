@@ -1,3 +1,7 @@
-const scene = require('./service/scene.js');
+export * from '../local/scene.js';
 
-module.exports = { scene };
+import { LocalScene } from '../local/scene.js';
+
+export interface IModuleLocal {
+  scene: LocalScene;
+}

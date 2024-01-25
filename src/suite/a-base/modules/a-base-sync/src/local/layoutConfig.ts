@@ -1,4 +1,7 @@
-module.exports = class Settings {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalLayoutConfig extends BeanBase {
   async load({ module, user }) {
     const name = `user-layoutConfig:${module}:${user.id}`;
     return await this.ctx.bean.status.get(name);
@@ -14,4 +17,4 @@ module.exports = class Settings {
     const data = this.ctx.bean.util.extend({}, layoutConfig || {}, { [key]: value });
     await this.save({ module, data, user });
   }
-};
+}

@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class tools {
+
+@Local()
+export class LocalTools extends BeanBase {
   get localUtils() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).utils;
   }
@@ -27,4 +31,4 @@ module.exports = class tools {
     // execute
     return await this.localUtils.demoExecute({ method, argv, cli });
   }
-};
+}

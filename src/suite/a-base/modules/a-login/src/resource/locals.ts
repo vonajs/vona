@@ -1,5 +1,7 @@
-const auth = require('./service/auth.js');
+export * from '../local/auth.js';
 
-module.exports = {
-  auth,
-};
+import { LocalAuth } from '../local/auth.js';
+
+export interface IModuleLocal {
+  auth: LocalAuth;
+}

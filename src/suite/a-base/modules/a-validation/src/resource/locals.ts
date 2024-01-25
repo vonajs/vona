@@ -1,5 +1,7 @@
-const validation = require('./service/validation.js');
+export * from '../local/validation.js';
 
-module.exports = {
-  validation,
-};
+import { LocalValidation } from '../local/validation.js';
+
+export interface IModuleLocal {
+  validation: LocalValidation;
+}

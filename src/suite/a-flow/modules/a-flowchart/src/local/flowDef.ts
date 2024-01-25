@@ -1,4 +1,7 @@
-module.exports = class FlowDef {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalFlowDef extends BeanBase {
   async normalizeAssignees({ host, assignees, user }) {
     // check right
     assignees = await this.__checkRightNormalizeAssignees({ host, assignees, user });
@@ -56,4 +59,4 @@ module.exports = class FlowDef {
     // ok
     return node.options.task ? node.options.task.assignees : node.options.assignees;
   }
-};
+}

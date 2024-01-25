@@ -1,5 +1,7 @@
-const dict = require('./service/dict.js');
+export * from '../local/dict.js';
 
-module.exports = {
-  dict,
-};
+import { LocalDict } from '../local/dict.js';
+
+export interface IModuleLocal {
+  dict: LocalDict;
+}

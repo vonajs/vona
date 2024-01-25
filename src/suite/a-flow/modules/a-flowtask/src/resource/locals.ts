@@ -1,7 +1,10 @@
-const flow = require('./service/flow.js');
-const flowTask = require('./service/flowTask.js');
+export * from '../local/flow.js';
+export * from '../local/flowTask.js';
 
-module.exports = {
-  flow,
-  flowTask,
-};
+import { LocalFlow } from '../local/flow.js';
+import { LocalFlowTask } from '../local/flowTask.js';
+
+export interface IModuleLocal {
+  flow: LocalFlow;
+  flowTask: LocalFlowTask;
+}

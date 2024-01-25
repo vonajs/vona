@@ -1,4 +1,7 @@
-module.exports = class Validation {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalValidation extends BeanBase {
   schema({ module, validator, schema }) {
     return this.ctx.bean.validation.getSchema({ module, validator, schema });
   }
@@ -17,4 +20,4 @@ module.exports = class Validation {
     });
     return { data };
   }
-};
+}

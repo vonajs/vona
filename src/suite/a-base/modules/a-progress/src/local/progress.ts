@@ -1,4 +1,7 @@
-module.exports = class Progress {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalProgress extends BeanBase {
   async check({ progressId, counter, user }) {
     return await this.ctx.bean.progress.check({ progressId, counter, user });
   }
@@ -10,4 +13,4 @@ module.exports = class Progress {
   async delete({ progressId, user }) {
     return await this.ctx.bean.progress.delete({ progressId, user });
   }
-};
+}

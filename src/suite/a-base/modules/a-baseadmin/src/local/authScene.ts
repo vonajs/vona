@@ -1,4 +1,7 @@
-module.exports = class authScene {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAuthScene extends BeanBase {
   async disable({ id, sceneName, disabled }) {
     // item
     const item = await this.ctx.model.authProvider.get({ id });
@@ -97,4 +100,4 @@ module.exports = class authScene {
     }
     return meta;
   }
-};
+}

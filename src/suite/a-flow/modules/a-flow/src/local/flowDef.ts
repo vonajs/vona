@@ -1,4 +1,7 @@
-module.exports = class FlowDef {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalFlowDef extends BeanBase {
   behaviorBases() {
     return this.ctx.bean.flowDef.behaviorBases();
   }
@@ -14,4 +17,4 @@ module.exports = class FlowDef {
   flowServiceBases() {
     return this.ctx.bean.flowDef.flowServiceBases();
   }
-};
+}

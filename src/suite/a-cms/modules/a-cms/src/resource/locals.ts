@@ -1,7 +1,10 @@
-const render = require('./service/render.js');
-const site = require('./service/site.js');
+export * from '../local/render.js';
+export * from '../local/site.js';
 
-module.exports = {
-  render,
-  site,
-};
+import { LocalRender } from '../local/render.js';
+import { LocalSite } from '../local/site.js';
+
+export interface IModuleLocal {
+  render: LocalRender;
+  site: LocalSite;
+}

@@ -1,4 +1,7 @@
-module.exports = class AtomState {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAtomState extends BeanBase {
   async getDictDynamic({ atomClass }) {
     const data = await this.ctx.bean.atomState.dynamic_getDict({ atomClass });
     if (!data) return null;
@@ -15,4 +18,4 @@ module.exports = class AtomState {
       },
     };
   }
-};
+}

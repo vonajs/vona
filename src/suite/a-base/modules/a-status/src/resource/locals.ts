@@ -1,5 +1,7 @@
-const status = require('./service/status.js');
+export * from '../local/status.js';
 
-module.exports = {
-  status,
-};
+import { LocalStatus } from '../local/status.js';
+
+export interface IModuleLocal {
+  status: LocalStatus;
+}

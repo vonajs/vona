@@ -1,4 +1,7 @@
-module.exports = class Public2 {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalPublic extends BeanBase {
   async profile({ userId }) {
     const item = await this.ctx.bean.user.get({ id: userId });
     const user = {
@@ -8,4 +11,4 @@ module.exports = class Public2 {
     };
     return { user };
   }
-};
+}

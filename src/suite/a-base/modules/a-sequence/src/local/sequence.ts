@@ -1,1 +1,4 @@
-module.exports = class Sequence {};
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalSequence extends BeanBase {}

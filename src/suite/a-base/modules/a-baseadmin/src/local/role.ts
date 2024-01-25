@@ -1,4 +1,7 @@
-module.exports = class Role {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalRole extends BeanBase {
   async childrenTop({ roleTypes, page, user }) {
     return await this.ctx.bean.role.childrenTop({ roleTypes, page, user });
   }
@@ -65,4 +68,4 @@ module.exports = class Role {
     this.ctx.bean.role.build({ progressId });
     return progressId;
   }
-};
+}

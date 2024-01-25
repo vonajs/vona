@@ -1,5 +1,7 @@
-const captcha = require('./service/captcha.js');
+export * from '../local/captcha.js';
 
-module.exports = {
-  captcha,
-};
+import { LocalCaptcha } from '../local/captcha.js';
+
+export interface IModuleLocal {
+  captcha: LocalCaptcha;
+}

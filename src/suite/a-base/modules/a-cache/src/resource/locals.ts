@@ -1,5 +1,7 @@
-const db = require('./service/db.js');
+export * from '../local/db.js';
 
-module.exports = {
-  db,
-};
+import { LocalDb } from '../local/db.js';
+
+export interface IModuleLocal {
+  db: LocalDb;
+}

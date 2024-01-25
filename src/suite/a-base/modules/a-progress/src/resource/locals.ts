@@ -1,5 +1,7 @@
-const progress = require('./service/progress.js');
+export * from '../local/progress.js';
 
-module.exports = {
-  progress,
-};
+import { LocalProgress } from '../local/progress.js';
+
+export interface IModuleLocal {
+  progress: LocalProgress;
+}

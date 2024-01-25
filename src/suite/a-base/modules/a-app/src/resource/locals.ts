@@ -1,2 +1,7 @@
-const resource = require('./service/resource.js');
-module.exports = { resource };
+export * from '../local/resource.js';
+
+import { LocalResource } from '../local/resource.js';
+
+export interface IModuleLocal {
+  resource: LocalResource;
+}

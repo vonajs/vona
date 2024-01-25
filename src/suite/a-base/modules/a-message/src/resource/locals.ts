@@ -1,5 +1,7 @@
-const message = require('./service/message.js');
+export * from '../local/message.js';
 
-module.exports = {
-  message,
-};
+import { LocalMessage } from '../local/message.js';
+
+export interface IModuleLocal {
+  message: LocalMessage;
+}

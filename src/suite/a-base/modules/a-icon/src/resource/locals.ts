@@ -1,5 +1,7 @@
-const icon = require('./service/icon.js');
+export * from '../local/icon.js';
 
-module.exports = {
-  icon,
-};
+import { LocalIcon } from '../local/icon.js';
+
+export interface IModuleLocal {
+  icon: LocalIcon;
+}

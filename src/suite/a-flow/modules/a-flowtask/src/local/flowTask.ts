@@ -1,4 +1,7 @@
-module.exports = class FlowTask {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalFlowTask extends BeanBase {
   async select({ options, user }) {
     return await this.ctx.bean.flowTask.select({ options, user });
   }
@@ -78,4 +81,4 @@ module.exports = class FlowTask {
   async actions({ flowTaskId, user }) {
     return await this.ctx.bean.flowTask.actions({ flowTaskId, user });
   }
-};
+}

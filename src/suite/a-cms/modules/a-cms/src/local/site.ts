@@ -1,4 +1,7 @@
-module.exports = class Site {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalSite extends BeanBase {
   async getSite({ atomClass, language, options }) {
     return await this.ctx.bean.cms.site.getSite({ atomClass, language, options });
   }
@@ -52,4 +55,4 @@ module.exports = class Site {
   async checkFile({ atomId, file, mtime, user }) {
     return await this.ctx.bean.cms.site.checkFile({ atomId, file, mtime, user });
   }
-};
+}

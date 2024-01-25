@@ -1,4 +1,7 @@
-module.exports = class Render {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalRender extends BeanBase {
   async getArticleUrl({ atomClass, key, options }) {
     return await this.ctx.bean.cms.render.getArticleUrl({ atomClass, key, options });
   }
@@ -7,4 +10,4 @@ module.exports = class Render {
   async combineSiteBase({ atomClass, mergeConfigSite }) {
     return await this.ctx.bean.cms.render.combineSiteBase({ atomClass, mergeConfigSite });
   }
-};
+}

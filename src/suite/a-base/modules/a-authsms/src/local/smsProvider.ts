@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class SmsProvider {
+
+@Local()
+export class LocalSmsProvider extends BeanBase {
   get statusModule() {
     return this.ctx.bean.status.module(moduleInfo.relativeName);
   }
@@ -36,4 +40,4 @@ module.exports = class SmsProvider {
     // changed
     await this.ctx.bean.smsProviderCache.smsProviderChanged();
   }
-};
+}

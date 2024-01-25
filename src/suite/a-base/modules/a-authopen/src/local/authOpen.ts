@@ -1,4 +1,7 @@
-module.exports = class AuthOpen {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAuthOpen extends BeanBase {
   async hideClientSecret({ key, user }) {
     return await this.ctx.bean.authOpen.hideClientSecret({
       atomId: key.atomId,
@@ -14,4 +17,4 @@ module.exports = class AuthOpen {
       user,
     });
   }
-};
+}

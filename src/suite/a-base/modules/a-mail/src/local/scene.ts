@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class Scene {
+
+@Local()
+export class LocalScene extends BeanBase {
   get statusModule() {
     return this.ctx.bean.status.module(moduleInfo.relativeName);
   }
@@ -32,4 +36,4 @@ module.exports = class Scene {
     data = this.ctx.bean.util.extend({}, this.ctx.config.scene.default, data);
     await this._save({ sceneName, data });
   }
-};
+}

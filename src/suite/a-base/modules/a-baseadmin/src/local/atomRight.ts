@@ -1,4 +1,7 @@
-module.exports = class AtomRight {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAtomRight extends BeanBase {
   async rights({ roleAtomId, page, user }) {
     return await this.ctx.bean.role.roleRights({ roleAtomId, page, user });
   }
@@ -24,4 +27,4 @@ module.exports = class AtomRight {
   async spreads({ roleAtomId, page, user }) {
     return await this.ctx.bean.role.roleSpreads({ roleAtomId, page, user });
   }
-};
+}

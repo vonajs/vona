@@ -1,4 +1,7 @@
-module.exports = class Atom {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAtom extends BeanBase {
   async preferredRoles({ atomClass, user }) {
     return await this.ctx.bean.atom.preferredRoles({ atomClass, user });
   }
@@ -228,4 +231,4 @@ module.exports = class Atom {
     // ok
     return res;
   }
-};
+}

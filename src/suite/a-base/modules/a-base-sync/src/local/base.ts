@@ -1,4 +1,7 @@
-module.exports = class Base {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalBase extends BeanBase {
   modules() {
     return this.ctx.bean.base.modules();
   }
@@ -36,4 +39,4 @@ module.exports = class Base {
   themes() {
     return this.ctx.bean.base.themes();
   }
-};
+}

@@ -122,8 +122,8 @@ ${contentMatches[1]}
 export class ${classNameNew} extends BeanBase ${contentMatches[3]}
     `;
     console.log(contentNew);
-    // await fse.outputFile(classFile, contentNew);
-    // await processHelper.formatFile({ fileName: classFile });
+    await fse.outputFile(classFile, contentNew);
+    await processHelper.formatFile({ fileName: classFile });
   }
   const outputNew = `
 ${outputNew1.join('\n')}
@@ -135,8 +135,8 @@ export interface IModuleLocal {
 }
   `;
   // console.log(outputNew);
-  // await fse.outputFile(file, outputNew);
-  // await processHelper.formatFile({ fileName: file });
+  await fse.outputFile(file, outputNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 function getScopeModuleName(moduleName) {

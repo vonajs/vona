@@ -1,6 +1,10 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 let _instanceList = null;
 let _userList = null;
-module.exports = class Settings {
+
+@Local()
+export class LocalSettings extends BeanBase {
   // instance
 
   instanceList() {
@@ -69,4 +73,4 @@ module.exports = class Settings {
     }
     return list;
   }
-};
+}

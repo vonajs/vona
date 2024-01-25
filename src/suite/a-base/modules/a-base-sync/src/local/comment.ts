@@ -1,6 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const trimHtml = require('@zhennann/trim-html');
 
-module.exports = class Comment {
+@Local()
+export class LocalComment extends BeanBase {
   async list({ key, options, user }) {
     const _options = this._adjuctOptions({ key, options });
     // sql
@@ -98,7 +101,7 @@ module.exports = class Comment {
     // sorting
     const list = await this.ctx.model.query(
       'select max(sorting) as sorting from aComment where iid=? and deleted=0 and atomId=?',
-      [this.ctx.instance.id, key.atomId]
+      [this.ctx.instance.id, key.atomId],
     );
     const sorting = (list[0].sorting || 0) + 1;
     // reply
@@ -326,4 +329,4 @@ ${sep}
   _trimHtml(html) {
     return trimHtml(html, this.ctx.config.comment.trim);
   }
-};
+}

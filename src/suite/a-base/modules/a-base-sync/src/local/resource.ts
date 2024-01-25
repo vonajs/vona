@@ -1,4 +1,7 @@
-module.exports = class Resource {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalResource extends BeanBase {
   async select({ atomClass, options, user }) {
     return await this.ctx.bean.resource.select({ atomClass, options, user });
   }
@@ -28,4 +31,4 @@ module.exports = class Resource {
       await this.ctx.bean.resource.addResourceRole({ atomId: key.atomId, roleId, user });
     }
   }
-};
+}

@@ -1,4 +1,7 @@
-module.exports = class User {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalUser extends BeanBase {
   async select({ query, page, user }) {
     return await this.ctx.bean.user.selectGeneral({ params: { query, page }, user });
   }
@@ -22,4 +25,4 @@ module.exports = class User {
   async resourceRights({ userAtomId, page, user }) {
     return await this.ctx.bean.resource.resourceRightsOfUser({ userAtomId, page, user });
   }
-};
+}

@@ -1,6 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const __appKeyDefault = 'a-app:appDefault';
 
-module.exports = class User {
+@Local()
+export class LocalUser extends BeanBase {
   async save({ data, user }) {
     // id
     data.id = user.id;
@@ -129,4 +132,4 @@ module.exports = class User {
   _getThemeKey({ appKey, user }) {
     return `user-theme:${user.id}:${appKey || __appKeyDefault}`;
   }
-};
+}

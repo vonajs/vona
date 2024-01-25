@@ -1,4 +1,7 @@
-module.exports = class Flow {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalFlow extends BeanBase {
   async flowChartProcess({ host, user }) {
     // check right
     const flowChartProcess = await this.__checkRightFlowChartProcess({ host, user });
@@ -45,4 +48,4 @@ module.exports = class Flow {
     // ok
     return content.process;
   }
-};
+}

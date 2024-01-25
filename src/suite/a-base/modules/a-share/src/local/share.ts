@@ -1,4 +1,7 @@
-module.exports = class Share {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalShare extends BeanBase {
   async generate({ host, atomId, url, user }) {
     return await this.ctx.bean.share.generate({ host, atomId, url, user });
   }
@@ -6,4 +9,4 @@ module.exports = class Share {
   async shareGo({ uuid, user }) {
     return await this.ctx.bean.share.shareGo({ uuid, user });
   }
-};
+}
