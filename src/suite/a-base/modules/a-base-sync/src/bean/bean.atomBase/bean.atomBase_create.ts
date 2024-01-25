@@ -7,7 +7,7 @@ const __create_atom_basic_fields = [
   'atomLanguage',
   'atomCategoryId',
 ];
-const moduleInfo = module.info;
+
 module.exports = class AtomBase {
   async create({ atomClass, item, options, user }) {
     // dataWrite
@@ -211,7 +211,7 @@ module.exports = class AtomBase {
         select max(a.${fieldNameLineNo}) as detailLineNo from ${tableName} a
           where a.iid=? and a.deleted=0 and a.${fieldNameAtomIdMain}=?
         `,
-      [this.ctx.instance.id, atomIdMain]
+      [this.ctx.instance.id, atomIdMain],
     );
     const detailLineNo = res.detailLineNo;
     return detailLineNo ? detailLineNo + 1 : 1;

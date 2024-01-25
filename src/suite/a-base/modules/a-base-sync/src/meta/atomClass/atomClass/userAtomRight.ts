@@ -19,7 +19,7 @@ const tableNameDefault = function () {
     )
   `;
 };
-const moduleInfo = module.info;
+
 module.exports = {
   info: {
     bean: 'userAtomRight',

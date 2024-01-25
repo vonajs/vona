@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Atom {
   // _atom/null/true
   // _atom: means ready

@@ -6,7 +6,6 @@ const isTextOrBinary = require('istextorbinary');
 const ejs = require('@zhennann/ejs');
 const gogocode = require('gogocode');
 
-const moduleInfo = module.info;
 module.exports = class Local {
   constructor(cli) {
     this.cli = cli;

@@ -28,7 +28,7 @@ const tableNameDefault = function ({ action }) {
     )
   `;
 };
-const moduleInfo = module.info;
+
 module.exports = {
   info: {
     bean: 'roleRight',

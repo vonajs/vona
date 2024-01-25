@@ -1,6 +1,5 @@
 const trimHtml = require('@zhennann/trim-html');
 
-const moduleInfo = module.info;
 module.exports = class AtomCmsBase extends module.meta.class.AtomBase {
   get modelCMSArticle() {
     return this.ctx.model.module(moduleInfo.relativeName).article;
@@ -227,7 +226,7 @@ module.exports = class AtomCmsBase extends module.meta.class.AtomBase {
         where: {
           atomId,
         },
-      }
+      },
     );
     // update content
     await this.ctx.model.query('update aCmsContent a set a.content=?, a.html=? where a.iid=? and a.atomId=?', [

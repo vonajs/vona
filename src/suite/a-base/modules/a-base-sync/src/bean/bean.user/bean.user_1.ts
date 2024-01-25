@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const __atomClassUser = {
   module: moduleInfo.relativeName,
   atomClassName: 'user',
@@ -11,7 +10,7 @@ module.exports = class User {
   async add(
     { disabled = 0, userName, realName, email, mobile, avatar, motto, locale, anonymous = 0 },
     user,
-    returnKey
+    returnKey,
   ) {
     // check if incomplete information
     let needCheck;
@@ -88,7 +87,7 @@ module.exports = class User {
     return await this.model.queryOne(
       `select * from aUser
             ${where} and iid=? and deleted=0`,
-      [this.ctx.instance.id]
+      [this.ctx.instance.id],
     );
   }
 

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _complete({ handle, formAtom }) {
     // user
@@ -139,7 +138,7 @@ module.exports = class FlowTask {
           where: {
             flowTaskId: flowTaskIdForwardFrom,
           },
-        }
+        },
       );
       // notify
       this._notifyTaskHandlings(taskFrom.userIdAssignee);
@@ -165,7 +164,7 @@ module.exports = class FlowTask {
           where: {
             flowTaskId: flowTaskIdSubstituteFrom,
           },
-        }
+        },
       );
       // notify
       this._notifyTaskHandlings(taskFrom.userIdAssignee);

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IOMessage extends module.meta.class.IOMessageBase {
   async onChannelRender({ channelFullName, options, message, messageSync, messageClass }) {
     if (channelFullName === 'a-mail:mail') {

@@ -1,6 +1,5 @@
 const mparse = require('@cabloy/module-parse').default;
 
-const moduleInfo = module.info;
 module.exports = class Atom {
   // count
   async count({ atomClass, options, user }) {

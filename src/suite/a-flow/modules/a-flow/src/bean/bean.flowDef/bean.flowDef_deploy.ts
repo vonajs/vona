@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowDef {
   async deploy({ flowDefId, undeploy, deleting }) {
     // start event

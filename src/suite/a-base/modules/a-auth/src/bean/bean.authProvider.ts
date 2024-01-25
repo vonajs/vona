@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class AuthProvider {
   get modelAuthProvider() {
     return this.ctx.model.module(moduleInfo.relativeName).authProvider;

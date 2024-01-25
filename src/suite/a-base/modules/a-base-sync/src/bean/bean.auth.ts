@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 class Auth {
   constructor() {
     this._redisAuth = null;

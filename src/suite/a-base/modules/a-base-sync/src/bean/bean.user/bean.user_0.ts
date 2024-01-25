@@ -1,6 +1,5 @@
 const _usersAnonymous = {};
 
-const moduleInfo = module.info;
 module.exports = class User {
   constructor() {
     this._sequence = null;

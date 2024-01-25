@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Flow extends module.meta.class.ModelCache {
   constructor() {
     super({

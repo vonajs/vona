@@ -1,4 +1,4 @@
-//  const moduleInfo = module.info;
+//
 module.exports = class Role {
   async getUserRolesDirect({ userId }) {
     const list = await this.ctx.model.query(
@@ -7,7 +7,7 @@ module.exports = class Role {
           left join aUserRole b on a.id=b.roleId
             where a.iid=? and b.userId=?
         `,
-      [this.ctx.instance.id, userId]
+      [this.ctx.instance.id, userId],
     );
     return list;
   }
@@ -19,7 +19,7 @@ module.exports = class Role {
           left join aViewUserRoleRef b on a.id=b.roleIdParent
             where a.iid=? and b.userId=?
         `,
-      [this.ctx.instance.id, userId]
+      [this.ctx.instance.id, userId],
     );
     return list;
   }
@@ -31,7 +31,7 @@ module.exports = class Role {
           left join aViewUserRoleExpand b on a.id=b.roleIdBase
             where a.iid=? and b.userId=?
         `,
-      [this.ctx.instance.id, userId]
+      [this.ctx.instance.id, userId],
     );
     return list;
   }
@@ -42,7 +42,7 @@ module.exports = class Role {
         select count(*) as count from aUserRole a
           where a.iid=? and a.userId=? and a.roleId=?
         `,
-      [this.ctx.instance.id, userId, roleId]
+      [this.ctx.instance.id, userId, roleId],
     );
     return list[0].count > 0;
   }
@@ -53,7 +53,7 @@ module.exports = class Role {
         select count(*) as count from aViewUserRoleRef a
           where a.iid=? and a.userId=? and a.roleIdParent=?
         `,
-      [this.ctx.instance.id, userId, roleId]
+      [this.ctx.instance.id, userId, roleId],
     );
     return list[0].count > 0;
   }
@@ -64,7 +64,7 @@ module.exports = class Role {
         select count(*) as count from aViewUserRoleExpand a
           where a.iid=? and a.userId=? and a.roleIdBase=?
         `,
-      [this.ctx.instance.id, userId, roleId]
+      [this.ctx.instance.id, userId, roleId],
     );
     return list[0].count > 0;
   }
@@ -89,7 +89,7 @@ module.exports = class Role {
             order by a.userName
             ${_limit}
         `,
-      [this.ctx.instance.id, roleId]
+      [this.ctx.instance.id, roleId],
     );
     return list;
   }
@@ -126,7 +126,7 @@ module.exports = class Role {
             order by a.userName
             ${_limit}
         `,
-      [this.ctx.instance.id, roleId]
+      [this.ctx.instance.id, roleId],
     );
     return list;
   }
@@ -151,7 +151,7 @@ module.exports = class Role {
             order by a.userName
             ${_limit}
         `,
-      [this.ctx.instance.id, roleId]
+      [this.ctx.instance.id, roleId],
     );
     return list;
   }

@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 const resources = [
   {
     atomName: 'Create <%=argv.atomClassNameCapitalize%>',

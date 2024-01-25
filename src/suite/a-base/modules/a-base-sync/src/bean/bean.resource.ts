@@ -1,6 +1,5 @@
 let __atomClassesResource = null;
 
-const moduleInfo = module.info;
 const __atomClass = {
   module: moduleInfo.relativeName,
   atomClassName: 'resource',

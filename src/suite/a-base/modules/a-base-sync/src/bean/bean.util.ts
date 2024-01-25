@@ -6,7 +6,6 @@ const mparse = require('@cabloy/module-parse').default;
 const eggBornUtils = require('egg-born-utils');
 const utils = require('../common/utils.js');
 
-const moduleInfo = module.info;
 module.exports = class Util {
   get localConfig() {
     return this.ctx.config.module(moduleInfo.relativeName);

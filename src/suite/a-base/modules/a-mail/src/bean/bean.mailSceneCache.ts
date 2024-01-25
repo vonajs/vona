@@ -1,6 +1,5 @@
 const __mailScenesConfigCache = {};
 
-const moduleInfo = module.info;
 module.exports = class MailSceneCache {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);

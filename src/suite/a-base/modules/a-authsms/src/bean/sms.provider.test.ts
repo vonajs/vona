@@ -3,7 +3,6 @@ const boxen = require('boxen');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
-const moduleInfo = module.info;
 module.exports = class Provider {
   async sendCode({ context }) {
     // token

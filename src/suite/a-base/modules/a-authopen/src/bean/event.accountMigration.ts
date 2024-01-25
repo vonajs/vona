@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class eventBean {
   get modelAuthOpen() {
     return this.ctx.model.module(moduleInfo.relativeName).authOpen;

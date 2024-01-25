@@ -3,7 +3,6 @@ const __VARTITLES = {
   auto: 'FlowVarAutoPick',
 };
 
-const moduleInfo = module.info;
 module.exports = class Flow {
   async normalizeAssignees({ users, roles, vars }) {
     const assignees = {};

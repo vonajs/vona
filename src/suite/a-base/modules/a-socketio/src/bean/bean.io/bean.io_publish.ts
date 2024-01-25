@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IO {
   async publish({ path, message, messageClass, options }) {
     // messageClass
@@ -85,7 +84,7 @@ module.exports = class IO {
       _message.messageScene,
       _message.userIdFrom,
       _message.userIdTo,
-      _message.userIdsTo
+      _message.userIdsTo,
     );
     debug('_publish path: %s', path);
     debug('_publish content: %j', message.content);

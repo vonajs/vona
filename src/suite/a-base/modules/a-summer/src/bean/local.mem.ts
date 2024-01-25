@@ -3,7 +3,6 @@ const CacheBase = require('../common/cacheBase.js');
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
-const moduleInfo = module.info;
 module.exports = class LocalMem extends CacheBase {
   constructor({ cacheBase }) {
     super({ cacheBase });

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowTask {
   async _list({ options: { where, orders, page, mode, history = 0 }, user, pageForce = true, count = 0 }) {
     // special for mode
@@ -92,7 +91,7 @@ module.exports = class FlowTask {
         update aFlowTaskHistory set deleted=1
           where iid=? and deleted=0 and flowNodeId=? and flowTaskStatus=0 and specificFlag=2 
         `,
-      [this.ctx.instance.id, flowNodeId]
+      [this.ctx.instance.id, flowNodeId],
     );
     //   2. close
     //    flowTaskStatus:1
@@ -102,7 +101,7 @@ module.exports = class FlowTask {
         update aFlowTaskHistory set flowTaskStatus=1
           where iid=? and deleted=0 and flowNodeId=? and flowTaskStatus=0
         `,
-      [this.ctx.instance.id, flowNodeId]
+      [this.ctx.instance.id, flowNodeId],
     );
   }
 

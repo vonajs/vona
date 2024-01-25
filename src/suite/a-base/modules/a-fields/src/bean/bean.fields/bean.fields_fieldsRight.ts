@@ -3,8 +3,6 @@ const __atomClass_userFieldsRight = {
   atomClassName: 'userFieldsRight',
 };
 
-const moduleInfo = module.info;
-
 module.exports = class Fields {
   // atomClass: only main (exluding detail)
   async getPreferredFieldsRightOfUser({ atomClass, user }) {
@@ -14,13 +12,13 @@ module.exports = class Fields {
     // 1. fieldsRightOfAtomClass
     const exists = await this.ctx.bean.summer.get(
       { module: moduleInfo.relativeName, name: 'fieldsRightOfAtomClass' },
-      { atomClassId: atomClass.id }
+      { atomClassId: atomClass.id },
     );
     if (!exists) return null;
     // 2. fieldsRightOfUser
     const fieldsRight = await this.ctx.bean.summer.get(
       { module: moduleInfo.relativeName, name: 'fieldsRightOfUser' },
-      { atomClassId: atomClass.id, userId: user.id }
+      { atomClassId: atomClass.id, userId: user.id },
     );
     return fieldsRight;
   }

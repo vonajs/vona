@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 // actionPath
 const actionPath = '/a/basefront/atom/draftTabs';
 // resource

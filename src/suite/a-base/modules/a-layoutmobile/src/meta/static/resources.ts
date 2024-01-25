@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 const resources = [
   // tabbar buttons
   {

@@ -4,7 +4,6 @@ const fse = require('fs-extra');
 
 let _hostText = null;
 
-const moduleInfo = module.info;
 module.exports = class Base {
   get host() {
     // test

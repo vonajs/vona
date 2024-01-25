@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Progress extends module.meta.class.BeanModuleScopeBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);

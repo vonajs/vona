@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowInstance {
   async _endFlow(options) {
     options = options || {};

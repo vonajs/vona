@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const __SeparatorCode = '/';
 module.exports = class Dict extends module.meta.class.BeanModuleScopeBase {
   get cacheMem() {

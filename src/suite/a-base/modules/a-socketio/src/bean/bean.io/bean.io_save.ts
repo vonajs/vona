@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IO {
   _checkPersistence({ options, /* message,*/ messageClass }) {
     // // 1.

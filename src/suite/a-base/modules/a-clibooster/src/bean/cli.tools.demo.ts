@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Cli extends module.meta.class.CliBase {
   get localUtils() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).utils;

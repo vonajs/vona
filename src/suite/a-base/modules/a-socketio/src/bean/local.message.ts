@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class MessageClass {
   get modelMessage() {
     return this.ctx.model.module(moduleInfo.relativeName).message;

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = {
   info: {
     bean: 'article',

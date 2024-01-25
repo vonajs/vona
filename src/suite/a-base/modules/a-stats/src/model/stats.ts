@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Stats extends module.meta.class.ModelCache {
   constructor() {
     super({

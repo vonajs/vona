@@ -21,7 +21,7 @@ const tableNameDefault = function ({ ctx, action }) {
     `;
   }
 };
-const moduleInfo = module.info;
+
 module.exports = {
   info: {
     bean: 'roleResourceRight',

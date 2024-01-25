@@ -1,6 +1,5 @@
 const eggBornUtils = require('egg-born-utils');
 
-const moduleInfo = module.info;
 module.exports = class CliBase {
   constructor(options) {
     this.options = options;

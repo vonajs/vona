@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Middleware {
   async execute(options, next) {
     await next();

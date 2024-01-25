@@ -1,6 +1,5 @@
 const popCore = require('@alicloud/pop-core');
 
-const moduleInfo = module.info;
 module.exports = class Provider {
   async sendCode({ providerInstanceId, context, config }) {
     // get

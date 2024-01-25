@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IOInner {
   // queue: delivery
   async queueDelivery({ path, options, message, messageSyncs, messageClass }) {

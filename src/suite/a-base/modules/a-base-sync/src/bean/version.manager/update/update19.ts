@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const __atomClassResource = {
   module: 'a-base',
   atomClassName: 'resource',
@@ -65,7 +64,7 @@ module.exports = class VersionUpdate {
             where: {
               atomIdFormal: item.atomId,
             },
-          }
+          },
         );
       }
     }

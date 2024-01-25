@@ -1,6 +1,5 @@
 const utils = require('../../common/utils.js');
 
-const moduleInfo = module.info;
 module.exports = class Version {
   async _update_5(options) {
     // alter table: aCmsCategory
@@ -40,13 +39,13 @@ module.exports = class Version {
     await this.ctx.model.query(
       `update aCmsCategory set atomClassId=?
              where iid=?`,
-      [atomClass.id, this.ctx.instance.id]
+      [atomClass.id, this.ctx.instance.id],
     );
     // update aCmsTag's atomClassId
     await this.ctx.model.query(
       `update aCmsTag set atomClassId=?
              where iid=?`,
-      [atomClass.id, this.ctx.instance.id]
+      [atomClass.id, this.ctx.instance.id],
     );
   }
 };

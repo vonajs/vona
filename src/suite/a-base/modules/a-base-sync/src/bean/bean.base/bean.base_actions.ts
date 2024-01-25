@@ -1,6 +1,5 @@
 const _actions = {};
 
-const moduleInfo = module.info;
 module.exports = class Base {
   actions() {
     if (!_actions[this.ctx.locale]) {

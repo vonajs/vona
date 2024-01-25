@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IO {
   async pushDirect({ content, channel, options }) {
     this.ctx.meta.util.queuePush({

@@ -1,7 +1,6 @@
 const _cacheMessageClasses = {};
 const _cacheChannels = {};
 
-const moduleInfo = module.info;
 module.exports = class MessageClass {
   get modelMessageClass() {
     return this.ctx.model.module(moduleInfo.relativeName).messageClass;

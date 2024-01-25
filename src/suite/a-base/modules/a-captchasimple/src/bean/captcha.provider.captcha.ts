@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 module.exports = class Captcha {
   async verify(context) {
     const { data, dataInput } = context;

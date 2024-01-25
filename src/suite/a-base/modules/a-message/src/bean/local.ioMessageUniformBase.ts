@@ -1,6 +1,5 @@
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
-const moduleInfo = module.info;
 module.exports = class IOMessageUniformBase extends module.meta.class.IOMessageBase {
   async onPublish({ /* path,*/ message, messageClass, options }) {
     // onPublish

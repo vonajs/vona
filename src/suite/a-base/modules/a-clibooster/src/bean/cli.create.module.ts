@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const moduleInfo = module.info;
 module.exports = class Cli extends module.meta.class.CliBase {
   async execute({ user }) {
     const { argv } = this.context;

@@ -1,6 +1,5 @@
 const ModelCache = require('../common/modelCache.js');
 
-const moduleInfo = module.info;
 module.exports = class AtomClass extends ModelCache {
   constructor() {
     super({

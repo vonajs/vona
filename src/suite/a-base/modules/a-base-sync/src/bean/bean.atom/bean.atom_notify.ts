@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Atom {
   _notifyDraftsDrafting(user, atomClass) {
     this.ctx.bean.stats.notify({

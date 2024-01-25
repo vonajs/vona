@@ -19,7 +19,7 @@ const tableNameDefault = async function ({ ctx }) {
     )
   `;
 };
-const moduleInfo = module.info;
+
 module.exports = {
   info: {
     bean: 'userFieldsRight',

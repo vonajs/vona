@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Stats {
   async execute(context) {
     const { keys, user } = context;

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowBehavior extends module.meta.class.FlowBehaviorBase {
   async enter(context, next) {
     // addJob

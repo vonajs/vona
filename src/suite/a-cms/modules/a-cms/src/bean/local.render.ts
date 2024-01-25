@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Render {
   async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }) {
     // atomClass

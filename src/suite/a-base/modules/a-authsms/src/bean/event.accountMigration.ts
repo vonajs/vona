@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 module.exports = class eventBean {
   async execute(context, next) {
     const data = context.data;

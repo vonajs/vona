@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Atom {
   async star({ key, atom: { star = 1 }, user }) {
     // get

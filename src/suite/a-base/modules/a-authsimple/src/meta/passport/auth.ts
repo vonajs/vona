@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const provider = moduleInfo.name;
 module.exports = {
   providers: {

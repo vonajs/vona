@@ -11,7 +11,6 @@ const Mime = require('mime');
 
 const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 
-const moduleInfo = module.info;
 module.exports = class File {
   get modelFile() {
     return this.ctx.model.module(moduleInfo.relativeName).file;
@@ -326,7 +325,7 @@ module.exports = class File {
       this.ctx.set('content-transfer-encoding', file.encoding);
       this.ctx.set(
         'content-disposition',
-        `attachment; filename*=UTF-8''${encodeURIComponent(file.realName)}${file.fileExt}`
+        `attachment; filename*=UTF-8''${encodeURIComponent(file.realName)}${file.fileExt}`,
       );
       this.ctx.set('X-Accel-Redirect', forwardUrl);
       // this.ctx.success();
@@ -492,7 +491,7 @@ module.exports = class File {
             inner join aAtom b on a.atomId=b.id
               where a.iid=? and a.deleted=0 and a.mode=2 and a.downloadId=? and b.atomStage=1
         `,
-      [this.ctx.instance.id, downloadId]
+      [this.ctx.instance.id, downloadId],
     );
     if (file) return file;
     // no matter what atomId is: maybe ===0 or !==0

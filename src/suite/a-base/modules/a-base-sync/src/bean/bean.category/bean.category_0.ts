@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Category {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).category;

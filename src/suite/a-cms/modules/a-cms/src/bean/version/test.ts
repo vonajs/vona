@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Version {
   async _test() {
     const atomClass = {

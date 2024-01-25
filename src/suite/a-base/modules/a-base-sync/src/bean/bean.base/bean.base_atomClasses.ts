@@ -1,6 +1,5 @@
 const _atomClasses = {};
 
-const moduleInfo = module.info;
 module.exports = class Base {
   atomClasses() {
     if (!_atomClasses[this.ctx.locale]) {

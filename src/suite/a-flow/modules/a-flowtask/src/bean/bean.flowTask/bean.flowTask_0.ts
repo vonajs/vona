@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowTask {
   get modelFlowTask() {
     return this.ctx.model.module(moduleInfo.relativeName).flowTask;

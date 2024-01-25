@@ -1,6 +1,5 @@
 const initData = require('./initData2.js');
 
-const moduleInfo = module.info;
 module.exports = class VersionInit {
   async run(options) {
     // roles

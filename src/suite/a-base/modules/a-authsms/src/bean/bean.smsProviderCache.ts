@@ -1,6 +1,5 @@
 const __smsProvidersConfigCache = {};
 
-const moduleInfo = module.info;
 module.exports = class SmsProviderCache {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);

@@ -1,6 +1,5 @@
 const UtilsFn = require('../common/utils.js');
 
-const moduleInfo = module.info;
 module.exports = class FlowEdge {
   constructor({ flowInstance, context, contextNode }) {
     this.flowInstance = flowInstance;

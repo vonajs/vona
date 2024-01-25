@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Flow {
   async startByKey({ flowDefKey, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
     // fullKey

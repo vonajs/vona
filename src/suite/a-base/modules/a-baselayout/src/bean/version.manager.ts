@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Version {
   get modelRoleRight() {
     return this.ctx.model.module('a-base').roleRight;

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Queue {
   async execute(context) {
     const { mode } = context.data;

@@ -4,7 +4,6 @@ const mparse = require('@cabloy/module-parse').default;
 
 let __bodyCryptoInstance = null;
 
-const moduleInfo = module.info;
 class BodyCrypto {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);

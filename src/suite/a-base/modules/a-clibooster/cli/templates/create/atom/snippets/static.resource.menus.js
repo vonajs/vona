@@ -40,7 +40,7 @@ module.exports = {
       ast.replace('const resources = [$_$]', `const resources = [$_$, \n ${code}]`);
     }
     // moduleInfo
-    const moduleInfo = 'const moduleInfo = module.info;';
+    const moduleInfo = ' ';
     if (!ast.has(moduleInfo)) {
       ast.find('const resources = [$_$]').before(moduleInfo);
     }

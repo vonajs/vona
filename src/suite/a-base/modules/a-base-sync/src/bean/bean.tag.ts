@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 class Tag {
   get modelTag() {
     return this.ctx.model.module(moduleInfo.relativeName).tag;
@@ -132,7 +131,7 @@ class Tag {
           inner join aAtom b on a.atomId=b.id
           where a.iid=? and a.tagId=? and b.iid=? and b.deleted=0 and b.atomStage=1
         `,
-      [this.ctx.instance.id, tagId, this.ctx.instance.id]
+      [this.ctx.instance.id, tagId, this.ctx.instance.id],
     );
     return res[0].atomCount;
   }

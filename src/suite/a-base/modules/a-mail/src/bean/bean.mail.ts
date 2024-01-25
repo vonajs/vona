@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Mail extends module.meta.class.BeanModuleScopeBase {
   get modelMail() {
     return this.ctx.model.module(moduleInfo.relativeName).mail;

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class AtomRightAux {
   async getRoleParentsOfUser({ userId }) {
     // cache
@@ -17,7 +16,7 @@ module.exports = class AtomRightAux {
             where a.iid=? and a.userId=?
             order by a.roleId desc
         `,
-      [this.ctx.instance.id, userId]
+      [this.ctx.instance.id, userId],
     );
   }
 };

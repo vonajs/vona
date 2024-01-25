@@ -1,7 +1,7 @@
 // request.body
 //   validate: module(optional), validator, schema(optional)
 //   data:
-const moduleInfo = module.info;
+
 module.exports = class Middleware {
   async execute(options, next) {
     // must exists

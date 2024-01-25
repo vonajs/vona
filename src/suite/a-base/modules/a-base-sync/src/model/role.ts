@@ -1,6 +1,5 @@
 const ModelCache = require('../common/modelCache.js');
 
-const moduleInfo = module.info;
 module.exports = class Role extends ModelCache {
   constructor() {
     super({

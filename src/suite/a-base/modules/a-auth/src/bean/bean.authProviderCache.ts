@@ -2,7 +2,6 @@ const __authProvidersConfigCache = {};
 const __authProvidersConfigCache_login = {};
 const __authProvidersConfigCache_admin = {};
 
-const moduleInfo = module.info;
 module.exports = class AuthProviderCache {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
@@ -72,7 +71,7 @@ module.exports = class AuthProviderCache {
       const providerConfigForLogin = this._getAuthProviderConfigForLogin(
         providerFullName,
         providerConfigCache,
-        forLogin
+        forLogin,
       );
       if (providerConfigForLogin) {
         listMap[providerFullName] = providerConfigForLogin;
@@ -212,7 +211,7 @@ module.exports = class AuthProviderCache {
           providerItem,
           beanProvider,
           providerScene,
-          sceneName
+          sceneName,
         );
       }
     } else {
@@ -221,7 +220,7 @@ module.exports = class AuthProviderCache {
         providerItem,
         beanProvider,
         null,
-        null
+        null,
       );
     }
     return configProviderScenes;

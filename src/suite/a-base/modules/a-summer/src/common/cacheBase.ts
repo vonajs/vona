@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class CacheBase {
   constructor({ cacheBase }) {
     this._cacheBase = cacheBase;

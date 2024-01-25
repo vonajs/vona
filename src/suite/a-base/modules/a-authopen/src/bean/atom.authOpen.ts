@@ -1,6 +1,5 @@
 const randomize = require('randomatic');
 
-const moduleInfo = module.info;
 module.exports = class Atom extends module.meta.class.AtomBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).authOpen;

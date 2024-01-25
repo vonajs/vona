@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Flow {
   async _loadFlowInstance({ flowId, history, throwError = true }) {
     // flow

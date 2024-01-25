@@ -2,7 +2,6 @@ const path = require('path');
 
 const initData = require('./initData1.js');
 
-const moduleInfo = module.info;
 module.exports = class VersionInit {
   get modelAuthOpen() {
     return this.ctx.model.module(moduleInfo.relativeName).authOpen;

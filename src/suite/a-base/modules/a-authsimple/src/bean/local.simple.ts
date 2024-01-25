@@ -1,7 +1,6 @@
 const util = require('util');
 const passwordFn = require('password-hash-and-salt'); // should compile
 
-const moduleInfo = module.info;
 module.exports = class Simple {
   get modelAuthSimple() {
     return this.ctx.model.module(moduleInfo.relativeName).authSimple;

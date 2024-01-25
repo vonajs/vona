@@ -12,7 +12,6 @@ const UglifyJS = require('uglify-js');
 const less = require('less');
 const utils = require('../common/utils.js');
 
-const moduleInfo = module.info;
 module.exports = class Build {
   constructor(atomClass) {
     this.atomClass = utils.atomClass(atomClass);
@@ -177,7 +176,7 @@ module.exports = class Build {
     return this.ctx.bean.util.extend(
       {},
       this._combineThemes(moduleExtend),
-      this.ctx.config.module(themeModuleName).theme
+      this.ctx.config.module(themeModuleName).theme,
     );
   }
 
@@ -219,7 +218,7 @@ module.exports = class Build {
           rawRootUrl: this.getUrlRawRoot(site),
           atomClass: this.atomClass,
         },
-      }
+      },
     );
     // front.envs
     if (options.envs !== false) {
@@ -484,7 +483,7 @@ module.exports = class Build {
   <url>
     <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>
-  </url>`
+  </url>`,
       );
     }
     // save
@@ -567,7 +566,7 @@ module.exports = class Build {
           update aCmsArticle set renderAt=?
             where iid=? and atomId=?
           `,
-        [data.article.renderAt, this.ctx.instance.id, data.article.atomId]
+        [data.article.renderAt, this.ctx.instance.id, data.article.atomId],
       );
     }
     // socketio publish

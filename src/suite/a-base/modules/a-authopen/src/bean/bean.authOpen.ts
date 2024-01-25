@@ -1,6 +1,5 @@
 const randomize = require('randomatic');
 
-const moduleInfo = module.info;
 const __atomClassRole = {
   module: 'a-base',
   atomClassName: 'role',
@@ -96,7 +95,7 @@ module.exports = class AuthOpen {
           select * from aViewRoleRightResource a
             where a.iid=? and a.roleIdWho=? and a.atomId=?
         `,
-      [this.ctx.instance.id, authOpen.scopeRoleId, resourceAtomId]
+      [this.ctx.instance.id, authOpen.scopeRoleId, resourceAtomId],
     );
     return !!right;
   }
@@ -116,7 +115,7 @@ module.exports = class AuthOpen {
         select * from aViewRoleRightAtomClass a
             where a.iid=? and a.roleIdWho=? and a.atomClassId=? and action=?
       `,
-      [this.ctx.instance.id, authOpen.scopeRoleId, atomClass.id, action]
+      [this.ctx.instance.id, authOpen.scopeRoleId, atomClass.id, action],
     );
     return !!right;
   }
@@ -128,7 +127,7 @@ module.exports = class AuthOpen {
             inner join aAuth b on a.id=b.profileId
               where a.iid=? and a.deleted=0 and b.id=? 
         `,
-      [this.ctx.instance.id, authId]
+      [this.ctx.instance.id, authId],
     );
   }
 

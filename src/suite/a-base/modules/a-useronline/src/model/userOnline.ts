@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class UserOnline extends module.meta.class.ModelCache {
   constructor() {
     super({

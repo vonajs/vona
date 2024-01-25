@@ -1,6 +1,5 @@
 const fse = require('fs-extra');
 
-const moduleInfo = module.info;
 module.exports = class Site {
   async getSite({ atomClass, language, options }) {
     const build = this.ctx.bean.cms.build({ atomClass });

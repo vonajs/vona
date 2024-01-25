@@ -1,6 +1,5 @@
 let __sequences;
 
-const moduleInfo = module.info;
 module.exports = class Sequence extends module.meta.class.BeanModuleScopeBase {
   async reset(name) {
     const provider = this._findSequenceProvider(name);

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Role {
   // set dirty
   async setDirty(dirty) {
@@ -87,7 +86,7 @@ module.exports = class Role {
 
   async _buildRolesAdd({ iid, roleIdParent }, progress) {
     const list = await this.ctx.model.query(
-      `select a.id,a.roleName,a.catalog,a.atomId from aRole a where a.iid=${iid} and a.roleIdParent=${roleIdParent}`
+      `select a.id,a.roleName,a.catalog,a.atomId from aRole a where a.iid=${iid} and a.roleIdParent=${roleIdParent}`,
     );
     for (const item of list) {
       // info
@@ -123,10 +122,10 @@ module.exports = class Role {
       await this.ctx.model.query(
         `insert into aRoleRef(iid,roleId,roleIdParent,level)
              values(${iid},${roleId},${roleIdParent},${level})
-          `
+          `,
       );
       const item = await this.ctx.model.queryOne(
-        `select a.roleIdParent from aRole a where a.iid=${iid} and a.id=${roleIdParent}`
+        `select a.roleIdParent from aRole a where a.iid=${iid} and a.id=${roleIdParent}`,
       );
       if (!item || !item.roleIdParent) {
         level = -1;
@@ -142,7 +141,7 @@ module.exports = class Role {
       `insert into aRoleIncRef(iid,roleId,roleIdInc,roleIdSrc)
             select ${iid},${roleId},a.roleIdInc,a.roleId from aRoleInc a
               where a.iid=${iid} and a.roleId in (select b.roleIdParent from aRoleRef b where b.iid=${iid} and b.roleId=${roleId})
-        `
+        `,
     );
   }
 
@@ -151,13 +150,13 @@ module.exports = class Role {
       `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
             select a.iid,${roleAtomId},a.roleId,a.roleIdParent from aRoleRef a
               where a.iid=${iid} and a.roleId=${roleId}
-        `
+        `,
     );
     await this.ctx.model.query(
       `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
             select a.iid,${roleAtomId},a.roleId,a.roleIdInc from aRoleIncRef a
               where a.iid=${iid} and a.roleId=${roleId}
-        `
+        `,
     );
   }
 };

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Version {
   async update(options) {
     if (options.version === 1) {

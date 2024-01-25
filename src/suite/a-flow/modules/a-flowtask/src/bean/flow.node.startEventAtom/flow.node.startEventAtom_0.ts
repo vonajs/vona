@@ -1,6 +1,5 @@
 const FlowNodeActivityUserTaskBase = require('../../common/flowNodeActivityUserTaskBase.js');
 
-const moduleInfo = module.info;
 module.exports = class FlowNode extends FlowNodeActivityUserTaskBase {
   constructor(options) {
     super(options);

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Middleware {
   get constant() {
     return this.ctx.constant.module(moduleInfo.relativeName);

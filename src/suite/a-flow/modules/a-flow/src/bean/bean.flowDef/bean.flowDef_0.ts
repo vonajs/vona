@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowDef {
   get modelFlowDef() {
     return this.ctx.model.module(moduleInfo.relativeName).flowDef;

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = ({ mode }) => {
   class FlowNodeGatewayBase extends module.meta.class.FlowNodeBase {
     async onNodeEnter() {
@@ -41,7 +40,7 @@ module.exports = ({ mode }) => {
         flowId,
         flowNodeId,
         nodeDefId,
-        edgeDefId
+        edgeDefId,
       );
       // node
       const nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId, throwError: false });
@@ -133,7 +132,7 @@ module.exports = ({ mode }) => {
         mode,
         flowId,
         flowNodeId,
-        flowNodeIdsActive.join(',')
+        flowNodeIdsActive.join(','),
       );
       if (flowNodesActive.length === 0) {
         // done

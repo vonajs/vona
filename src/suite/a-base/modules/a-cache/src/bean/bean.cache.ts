@@ -1,5 +1,3 @@
-const moduleInfo = module.info;
-
 module.exports = class Cache {
   get db() {
     const config = this.ctx.config.module(moduleInfo.relativeName);

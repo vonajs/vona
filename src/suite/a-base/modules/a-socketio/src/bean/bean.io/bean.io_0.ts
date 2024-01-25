@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IO {
   get messageClass() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).messageClass;

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Version {
   async _update_7(options) {
     // update cms blocks
@@ -45,7 +44,7 @@ module.exports = class Version {
            left join aCmsArticleTag c on c.atomId=a.atomId
             where a.iid=? and a.deleted=0 and b.atomStage=1
         `,
-      [this.ctx.instance.id]
+      [this.ctx.instance.id],
     );
     // loop
     for (const article of articles) {

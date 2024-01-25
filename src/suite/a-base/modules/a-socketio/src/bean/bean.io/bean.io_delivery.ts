@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class IO {
   // called by messageBase.onDelivery
   async delivery({ path, options, message, messageSync, messageClass }) {
@@ -42,7 +41,7 @@ module.exports = class IO {
       messageScene,
       message.userIdFrom,
       userId,
-      path
+      path,
     );
     // get hash value
     let values = messageSync._subscribeValuesByPath;
@@ -62,7 +61,7 @@ module.exports = class IO {
           '_emitScene message socket: socketId:%s, cache scene:%s, message scene:%s',
           socketId,
           value.scene,
-          messageScene
+          messageScene,
         );
         this._emitSocket({ path, options, message, socketId });
         bSent = true;

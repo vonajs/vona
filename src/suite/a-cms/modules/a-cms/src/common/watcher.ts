@@ -4,7 +4,6 @@ const chokidar = require('chokidar');
 const debounce = require('debounce');
 // const eggBornUtils = require('egg-born-utils');
 
-const moduleInfo = module.info;
 module.exports = class Watcher {
   constructor() {
     this._watchers = {};
@@ -136,7 +135,7 @@ module.exports = class Watcher {
             data: { subdomain, atomClass, language },
           });
         }
-      }, 300)
+      }, 300),
     );
     // on ready
     _watcher.once('ready', function () {

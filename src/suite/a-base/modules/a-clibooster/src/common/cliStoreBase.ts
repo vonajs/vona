@@ -3,7 +3,6 @@ const eggBornUtils = require('egg-born-utils');
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';
 
-const moduleInfo = module.info;
 module.exports = class CliStoreBase extends module.meta.class.CliBase {
   constructor(options, commandName) {
     super(options);
@@ -94,7 +93,7 @@ module.exports = class CliStoreBase extends module.meta.class.CliBase {
       // load all entities
       const entitiesConfig = this.ctx.bean.util.getProperty(
         this.cabloyConfig.get(),
-        `store.commands.${this.commandName}.entities`
+        `store.commands.${this.commandName}.entities`,
       );
       entityNames = entitiesConfig ? Object.keys(entitiesConfig) : [];
     }
@@ -132,14 +131,14 @@ module.exports = class CliStoreBase extends module.meta.class.CliBase {
       // save to config
       let entityConfig = this.ctx.bean.util.getProperty(
         this.cabloyConfig.get(),
-        `store.commands.${this.commandName}.entities.${entityName}`
+        `store.commands.${this.commandName}.entities.${entityName}`,
       );
       if (!entityConfig) {
         entityConfig = {};
         this.ctx.bean.util.setProperty(
           this.cabloyConfig.get(),
           `store.commands.${this.commandName}.entities.${entityName}`,
-          entityConfig
+          entityConfig,
         );
         await this.cabloyConfig.save();
       }

@@ -1,6 +1,5 @@
 const url = require('url');
 
-const moduleInfo = module.info;
 module.exports = class LocalTools {
   async submit({ links, config }) {
     for (const target in config.submit) {

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',

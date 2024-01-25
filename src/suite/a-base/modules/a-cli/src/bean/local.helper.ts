@@ -5,7 +5,6 @@ const fse = require('fs-extra');
 const mparse = require('@cabloy/module-parse').default;
 const { ProcessHelper } = require('@cabloy/process-helper');
 
-const moduleInfo = module.info;
 module.exports = class Local {
   constructor(cli) {
     this.cli = cli;

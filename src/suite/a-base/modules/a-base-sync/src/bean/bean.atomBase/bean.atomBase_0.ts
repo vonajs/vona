@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class AtomBase {
   get configModuleBase() {
     return this.ctx.config.module(moduleInfo.relativeName);

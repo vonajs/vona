@@ -6,7 +6,7 @@ const __behaviorBaseDef = {
   name: 'Base',
   type: 'base',
 };
-const moduleInfo = module.info;
+
 module.exports = class FlowNode {
   // contextEdge maybe null
   constructor({ flowInstance, context, contextEdge }) {

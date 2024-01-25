@@ -1,6 +1,5 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
 import { ScopeModuleAAuthsms } from '../index.js';
-const moduleInfo = module.info;
 
 @Controller()
 export class ControllerSmsProvider extends BeanBase {

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Version {
   async _update_12(options) {
     await this._update12Migration(options);
@@ -37,7 +36,7 @@ module.exports = class Version {
                     or  b.content like '%cabloy-dashboard:blockCourse%'
                   )   
         `,
-      [this.ctx.instance.id]
+      [this.ctx.instance.id],
     );
     // then, update all articles
     await this.ctx.model.query(`

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class AtomRightAux {
   async getRoleScopesOfRole({ atomClass, action, roleId }) {
     // atomClass
@@ -11,7 +10,7 @@ module.exports = class AtomRightAux {
     // cache
     return await this.ctx.bean.summer.get(
       { module: moduleInfo.relativeName, name: 'roleScopesOfRole' },
-      { atomClassId: atomClass.id, action, roleId }
+      { atomClassId: atomClass.id, action, roleId },
     );
   }
 

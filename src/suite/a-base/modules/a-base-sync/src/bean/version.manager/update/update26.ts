@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class VersionUpdate {
   get modelRoleRight() {
     return this.ctx.model.module(moduleInfo.relativeName).roleRight;

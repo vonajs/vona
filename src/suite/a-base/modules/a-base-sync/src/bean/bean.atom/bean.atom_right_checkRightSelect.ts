@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Atom {
   async checkRightSelect({ atomClass, user, options }) {
     options = options || {};

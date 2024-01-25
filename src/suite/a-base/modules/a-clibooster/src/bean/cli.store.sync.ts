@@ -8,8 +8,6 @@ const fse = require('fs-extra');
 const rimraf = require('mz-modules/rimraf');
 const CliStoreBase = require('../common/cliStoreBase.js');
 
-const moduleInfo = module.info;
-
 module.exports = class Cli extends CliStoreBase {
   constructor(options) {
     super(options, 'sync');

@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Share {
   get modelShare() {
     return this.ctx.model.module(moduleInfo.relativeName).share;

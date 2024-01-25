@@ -1,8 +1,6 @@
 const VarsFn = require('../../common/vars.js');
 const UtilsFn = require('../../common/utils.js');
 
-const moduleInfo = module.info;
-
 module.exports = class FlowInstance {
   __init__({ flowDef }) {
     // context

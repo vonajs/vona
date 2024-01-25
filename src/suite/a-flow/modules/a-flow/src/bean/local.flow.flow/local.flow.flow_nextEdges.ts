@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class FlowInstance {
   // return true, means has one edge to be taken
   async nextEdges({ nodeInstance, behaviorDefId }) {
@@ -38,7 +37,7 @@ module.exports = class FlowInstance {
       'nextEdges %s: flowId:%d, flowNodeId:%d',
       resBingo ? 'bingo' : 'invalid',
       this.context._flowId,
-      contextNode._flowNodeId
+      contextNode._flowNodeId,
     );
     // bingo
     if (resBingo) return true;

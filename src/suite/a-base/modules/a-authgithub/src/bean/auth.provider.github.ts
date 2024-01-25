@@ -1,7 +1,6 @@
 const Strategy = require('passport-github').Strategy;
 const StrategyMock = require('../meta/passport/strategyMock.js');
 
-const moduleInfo = module.info;
 module.exports = class Provider extends module.meta.class.AuthProviderBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);

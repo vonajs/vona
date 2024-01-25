@@ -1,6 +1,5 @@
 const initData15 = require('../version.manager/init/initData15.js');
 
-const moduleInfo = module.info;
 const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',

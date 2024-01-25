@@ -1,6 +1,5 @@
 const initData = require('./initData15.js');
 
-const moduleInfo = module.info;
 module.exports = class VersionInit {
   async run() {
     // roles
@@ -26,7 +25,7 @@ module.exports = class VersionInit {
       `
           update aAtom set roleIdOwner=? where iid=? and atomClassId<>? and roleIdOwner=?
       `,
-      [roleBuiltIn.id, this.ctx.instance.id, atomClassRole.id, roleSystem.id]
+      [roleBuiltIn.id, this.ctx.instance.id, atomClassRole.id, roleSystem.id],
     );
   }
 };

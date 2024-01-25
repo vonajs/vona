@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const __atomClassDict = {
   module: 'a-dict',
   atomClassName: 'dict',

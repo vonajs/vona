@@ -1,7 +1,5 @@
 const defaults = require('./defaults.js');
 
-const moduleInfo = module.info;
-
 const nodes = {
   // events
   startEventNone: {

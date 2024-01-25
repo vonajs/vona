@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Version {
   async _update_6(options) {
     // alter table: aCmsArticle

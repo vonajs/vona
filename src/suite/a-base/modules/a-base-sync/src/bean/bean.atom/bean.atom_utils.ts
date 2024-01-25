@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class Atom {
   async _prepareAtomClassAndAtomClassBase({ key, atomClass, throwWhenEmpty = true }) {
     const atomId = key.atomId;

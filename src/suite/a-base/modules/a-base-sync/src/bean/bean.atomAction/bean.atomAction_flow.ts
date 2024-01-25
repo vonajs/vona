@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class AtomAction {
   async selectFlowActions({ atomClass, flowKey }) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);

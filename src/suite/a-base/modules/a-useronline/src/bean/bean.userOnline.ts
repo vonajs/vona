@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 const __atomClassUserOnline = {
   module: moduleInfo.relativeName,
   atomClassName: 'userOnline',

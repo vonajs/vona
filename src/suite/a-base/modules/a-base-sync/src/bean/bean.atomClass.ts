@@ -1,4 +1,3 @@
-const moduleInfo = module.info;
 module.exports = class AtomClass extends module.meta.class.BeanModuleScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).atomClass;
