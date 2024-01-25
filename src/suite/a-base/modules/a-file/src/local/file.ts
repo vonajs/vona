@@ -1,4 +1,7 @@
-module.exports = class File {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalFile extends BeanBase {
   async all({ atomClass, options, user }) {
     return await this.ctx.bean.file.all({ atomClass, options, user });
   }
@@ -40,4 +43,4 @@ module.exports = class File {
   async fileDownloadCheck({ file, user }) {
     return await this.ctx.bean.file.fileDownloadCheck({ file, user });
   }
-};
+}

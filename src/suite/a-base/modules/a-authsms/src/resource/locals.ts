@@ -1,5 +1,13 @@
-const smsProvider = require('./service/smsProvider.js');
-const captcha = require('./service/captcha.js');
-const auth = require('./service/auth.js');
+export * from '../local/smsProvider.js';
+export * from '../local/captcha.js';
+export * from '../local/auth.js';
 
-module.exports = { smsProvider, captcha, auth };
+import { LocalSmsProvider } from '../local/smsProvider.js';
+import { LocalCaptcha } from '../local/captcha.js';
+import { LocalAuth } from '../local/auth.js';
+
+export interface IModuleLocal {
+  smsProvider: LocalSmsProvider;
+  captcha: LocalCaptcha;
+  auth: LocalAuth;
+}

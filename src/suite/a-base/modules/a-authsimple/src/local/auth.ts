@@ -1,4 +1,7 @@
-module.exports = class Auth {
+import { BeanBase, Local } from '@cabloy/core';
+
+@Local()
+export class LocalAuth extends BeanBase {
   // mobile: not use
   async signup({ user, state = 'login', userName, realName, email, /* mobile,*/ password }) {
     return await this.ctx.bean.authSimple.signup({ user, state, userName, realName, email, /* mobile,*/ password });
@@ -37,4 +40,4 @@ module.exports = class Auth {
   async checkStatus({ user }) {
     return await this.ctx.bean.authSimple.checkStatus({ user });
   }
-};
+}

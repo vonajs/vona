@@ -1,5 +1,7 @@
-const file = require('./service/file.js');
+export * from '../local/file.js';
 
-module.exports = {
-  file,
-};
+import { LocalFile } from '../local/file.js';
+
+export interface IModuleLocal {
+  file: LocalFile;
+}

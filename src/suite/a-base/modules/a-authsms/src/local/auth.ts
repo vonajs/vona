@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class Auth {
+
+@Local()
+export class LocalAuth extends BeanBase {
   async signup({ user, state = 'login', userName, realName, mobile }) {
     // profileUser
     const profileUser = {
@@ -65,4 +69,4 @@ module.exports = class Auth {
   async mobileVerify({ user, mobile }) {
     await this.signup({ user, state: 'associate', userName: null, realName: null, mobile });
   }
-};
+}

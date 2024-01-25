@@ -78,9 +78,10 @@ async function _moduleHandle_local({ module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
   const matchExport = contentOld.match(/export /);
   if (matchExport) {
-    console.log('---- not changed: ', module.info.relativeName);
+    // console.log('---- not changed: ', module.info.relativeName);
     return;
   }
+  console.log(file);
   const regexp = /const (.*?) =.*service\/(.*?)\.js/g;
   const matches = contentOld.matchAll(regexp);
   const outputNew1 = [];
@@ -103,16 +104,21 @@ async function _moduleHandle_local({ module, processHelper }) {
     const classFile = `${module.root}/src/local/${classPath}.ts`;
     // console.log(classFile);
     const classContent = (await fse.readFile(classFile)).toString();
+    const matchExport = classContent.match(/export /);
+    if (matchExport) {
+      console.log('---- not changed: ', classFile);
+      continue;
+    }
     // const classNameNew = classPathToClassName('Controller', classPath);
     // const beanName = parseBeanName(classNameNew, 'Controller');
     // console.log(classNameNew, classNameOld);
     // 替换内容
     const contentMatches = classContent.match(/([\s\S\n]*)module\.exports = class ([\S]*) (\{[\s\S\n]*)/);
     if (!contentMatches) {
-      console.log('---- not matched: ', module.info.relativeName);
+      console.log('---- not matched: ', classFile);
       return;
     }
-    console.log(contentMatches);
+    // console.log(contentMatches);
     const contentNew = `
 import { BeanBase, Local } from '@cabloy/core';
 
@@ -121,7 +127,7 @@ ${contentMatches[1]}
 @Local()
 export class ${classNameNew} extends BeanBase ${contentMatches[3]}
     `;
-    console.log(contentNew);
+    // console.log(contentNew);
     await fse.outputFile(classFile, contentNew);
     await processHelper.formatFile({ fileName: classFile });
   }

@@ -1,5 +1,9 @@
+import { BeanBase, Local } from '@cabloy/core';
+
 const moduleInfo = module.info;
-module.exports = class Captcha {
+
+@Local()
+export class LocalCaptcha extends BeanBase {
   async sendCode({ providerInstanceId, context }) {
     // sms provider
     const bean = this.ctx.bean._getBean(`${moduleInfo.relativeName}.captcha.provider.captcha`);
@@ -13,4 +17,4 @@ module.exports = class Captcha {
       context,
     });
   }
-};
+}
