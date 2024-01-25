@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureBase from './local.procedure_base.js';
+
+export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
   async selectAtoms({ options }) {
     let {
       iid,
@@ -80,4 +82,4 @@ module.exports = class Procedure {
     // formal/history
     return await this._selectAtoms_formal({ action, options });
   }
-};
+}

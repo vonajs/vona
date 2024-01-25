@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskRecall from './local.flow.task_recall.js';
+
+export class LocalFlowTaskForward extends LocalFlowTaskRecall {
   // handle: assignee/remark
   async _forward({ handle }) {
     // user
@@ -95,4 +97,4 @@ module.exports = class FlowTask {
     this.contextTask._flowTaskHistory.ignoreMark = 0;
     await this.modelFlowTaskHistory.update(this.contextTask._flowTaskHistory);
   }
-};
+}

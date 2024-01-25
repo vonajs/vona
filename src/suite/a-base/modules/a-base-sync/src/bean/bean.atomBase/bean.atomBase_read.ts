@@ -1,3 +1,5 @@
+import BeanAtomBaseSelect from './bean.atomBase_select.js';
+
 const __itemBasicFieldsRead = [
   'id',
   'iid',
@@ -11,7 +13,7 @@ const __itemBasicFieldsRead = [
   'atomIdParent',
 ];
 
-module.exports = class AtomBase {
+export class BeanAtomBaseRead extends BeanAtomBaseSelect {
   async readQuery({ atomClass, options, user }) {
     return await this.ctx.bean.atom._readQuery({ atomClass, options, user });
   }
@@ -73,4 +75,4 @@ module.exports = class AtomBase {
     }
     return item;
   }
-};
+}

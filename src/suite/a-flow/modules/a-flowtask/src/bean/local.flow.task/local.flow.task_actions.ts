@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskSchema from './local.flow.task_schema.js';
+
+export class LocalFlowTaskActions extends LocalFlowTaskSchema {
   async _actions() {
     // user
     const user = this.contextTask._user;
@@ -16,4 +18,4 @@ module.exports = class FlowTask {
     });
     return actions;
   }
-};
+}

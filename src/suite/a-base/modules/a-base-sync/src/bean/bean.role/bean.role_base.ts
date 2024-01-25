@@ -1,10 +1,13 @@
+import { BeanModuleScopeBase } from '@cabloy/core';
+
 const initData15 = require('../version.manager/init/initData15.js');
 
 const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',
 };
-module.exports = class Role extends module.meta.class.BeanModuleScopeBase {
+
+export class BeanRoleBase extends BeanModuleScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).role;
   }
@@ -374,4 +377,4 @@ module.exports = class Role extends module.meta.class.BeanModuleScopeBase {
     }
     return roleIds;
   }
-};
+}

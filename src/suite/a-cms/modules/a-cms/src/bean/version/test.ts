@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Init12 from './init_12.js';
+
+export class Test extends Init12 {
   async _test() {
     const atomClass = {
       module: moduleInfo.relativeName,
@@ -63,4 +65,4 @@ module.exports = class Version {
       tagIds[item.tagName] = tagId;
     }
   }
-};
+}

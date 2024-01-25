@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import BeanFlowTaskFlowData from './bean.flowTask_flowData.js';
+
+export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
   async _nodeDoneCheckLock({ flowNodeId }) {
     // load flow node
     let nodeInstance;
@@ -97,4 +99,4 @@ module.exports = class FlowTask {
   async _findFlowNodeHistoryPrevious({ nodeInstance }) {
     return await nodeInstance._findFlowNodeHistoryPrevious();
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class Role {
+import BeanRoleUsers from './bean.role_users.js';
+
+export class BeanRoleFlow extends BeanRoleUsers {
   // const roleRights = [
   //   {
   //     roleName: 'family.father',
@@ -43,4 +45,4 @@ module.exports = class Role {
       });
     }
   }
-};
+}

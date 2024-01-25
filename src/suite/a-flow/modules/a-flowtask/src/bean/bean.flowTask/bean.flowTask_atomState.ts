@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import BeanFlowTask1 from './bean.flowTask_1.js';
+
+export class BeanFlowTaskAtomState extends BeanFlowTask1 {
   async _setAtomState({ context, options }) {
     const atomState = options.atomState;
     if (atomState !== undefined && atomState !== null) {
@@ -45,4 +47,4 @@ module.exports = class FlowTask {
   //   // ok
   //   return true;
   // }
-};
+}

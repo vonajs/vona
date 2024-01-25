@@ -1,4 +1,6 @@
-module.exports = class AtomBase {
+import BeanAtomBaseExportBulk from './bean.atomBase_exportBulk.js';
+
+export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
   async performAction({ key, atomClass, action, item, options, user }) {
     // actionBase
     const actionBase = this.ctx.bean.base.action({
@@ -65,4 +67,4 @@ module.exports = class AtomBase {
       await this.ctx.bean.cms.render._renderArticlePush({ key, inner: false });
     }
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class FlowDef {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanFlowDef0 extends BeanBase {
   get modelFlowDef() {
     return this.ctx.model.module(moduleInfo.relativeName).flowDef;
   }
@@ -50,4 +52,4 @@ module.exports = class FlowDef {
       atomStage,
     });
   }
-};
+}

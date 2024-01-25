@@ -1,6 +1,8 @@
+import BeanBaseModules from './bean.base_modules.js';
+
 const _resourceTypes = {};
 
-module.exports = class Base {
+export class BeanBaseResourceTypes extends BeanBaseModules {
   resourceTypes() {
     if (!_resourceTypes[this.ctx.locale]) {
       _resourceTypes[this.ctx.locale] = this._prepareResourceTypes();
@@ -25,4 +27,4 @@ module.exports = class Base {
     }
     return resourceTypes;
   }
-};
+}

@@ -1,3 +1,5 @@
+import LocalProcedureResource from './local.procedure_resource.js';
+
 const __itemBasicFieldsRead = [
   'id',
   'iid',
@@ -11,7 +13,7 @@ const __itemBasicFieldsRead = [
   'atomIdParent',
 ];
 
-module.exports = class Procedure {
+export class LocalProcedureUtilsFieldsRight extends LocalProcedureResource {
   // see also: _readValidate
   async _prepare_fieldsRight({ options }) {
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') > -1) return 'f.*';
@@ -26,4 +28,4 @@ module.exports = class Procedure {
     }
     return fieldNames.map(item => `f.${item}`).join(',');
   }
-};
+}

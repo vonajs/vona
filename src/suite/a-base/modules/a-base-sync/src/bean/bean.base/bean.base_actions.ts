@@ -1,6 +1,8 @@
+import BeanBase0 from './bean.base_0.js';
+
 const _actions = {};
 
-module.exports = class Base {
+export class BeanBaseActions extends BeanBase0 {
   actions() {
     if (!_actions[this.ctx.locale]) {
       _actions[this.ctx.locale] = this._prepareActions();
@@ -77,4 +79,4 @@ module.exports = class Base {
     }
     return actions;
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class AtomRightAux {
+import BeanAtomRightAuxRoleScopesMineOfUser from './bean.atomRightAux_roleScopesMineOfUser.js';
+
+export class BeanAtomRightAuxRoleWhos extends BeanAtomRightAuxRoleScopesMineOfUser {
   async getRoleWhosOfAtomClassAction({ atomClass, action }) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
@@ -27,4 +29,4 @@ module.exports = class AtomRightAux {
       [this.ctx.instance.id, atomClassId, action],
     );
   }
-};
+}

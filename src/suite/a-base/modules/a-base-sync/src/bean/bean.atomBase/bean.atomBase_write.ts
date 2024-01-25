@@ -1,3 +1,5 @@
+import BeanAtomBaseRead from './bean.atomBase_read.js';
+
 // maybe modified by user
 const __atomBasicFields = [
   'atomName', //
@@ -11,7 +13,7 @@ const __atomBasicFields = [
 ];
 const __itemBasicFieldsWrite = ['id', 'iid', 'atomId', 'itemId', 'atomStage'];
 
-module.exports = class AtomBase {
+export class BeanAtomBaseWrite extends BeanAtomBaseRead {
   async write({ atomClass, target, key, item: itemOriginal, options, user }) {
     if (!itemOriginal) return; // atomClass
     // create a copy
@@ -181,4 +183,4 @@ module.exports = class AtomBase {
       }
     }
   }
-};
+}

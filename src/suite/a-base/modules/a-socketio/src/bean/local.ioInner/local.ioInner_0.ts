@@ -1,4 +1,6 @@
-module.exports = class IOInner {
+import { BeanBase } from '@cabloy/core';
+
+export class LocalIoInner0 extends BeanBase {
   get messageClass() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).messageClass;
   }
@@ -100,4 +102,4 @@ module.exports = class IOInner {
       await onHandle(messageSync);
     }
   }
-};
+}

@@ -1,6 +1,8 @@
+import BeanIoSave from './bean.io_save.js';
+
 const SOCKETSONLINE = Symbol.for('APP#__SOCKETSONLINE');
 
-module.exports = class IO {
+export class BeanIoSockets extends BeanIoSave {
   _getSocketsOnline() {
     if (!this.ctx.app[SOCKETSONLINE]) {
       this.ctx.app[SOCKETSONLINE] = {};
@@ -49,4 +51,4 @@ module.exports = class IO {
       socket.emit('message', { path, message });
     }
   }
-};
+}

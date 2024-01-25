@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureAtomSelectAtomsDraft from './local.procedure_atom_selectAtoms_draft.js';
+
+export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelectAtomsDraft {
   async _selectAtoms_formal({ action, options }) {
     const {
       iid,
@@ -318,7 +320,7 @@ module.exports = class Procedure {
     // right
     return await this._prepareRight({ iid, atomClass, atomClassBase, action, userIdWho, forAtomUser, role });
   }
-};
+}
 
 // ${_where}
 //    (

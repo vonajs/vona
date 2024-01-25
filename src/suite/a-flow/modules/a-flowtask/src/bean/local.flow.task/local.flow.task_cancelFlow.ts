@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskAssignees from './local.flow.task_assignees.js';
+
+export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
   async _cancelFlow({ handle }) {
     // user
     const user = this.contextTask._user;
@@ -37,4 +39,4 @@ module.exports = class FlowTask {
       atom: { close: true },
     });
   }
-};
+}

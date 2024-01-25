@@ -1,6 +1,8 @@
+import BeanBaseLocales from './bean.base_locales.js';
+
 const _modulesLocales = {};
 
-module.exports = class Base {
+export class BeanBaseModules extends BeanBaseLocales {
   modules() {
     if (!_modulesLocales[this.ctx.locale]) {
       _modulesLocales[this.ctx.locale] = this._prepareModules();
@@ -27,4 +29,4 @@ module.exports = class Base {
     }
     return modules;
   }
-};
+}

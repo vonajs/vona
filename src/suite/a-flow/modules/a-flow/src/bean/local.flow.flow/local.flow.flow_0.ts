@@ -1,7 +1,9 @@
+import { BeanBase } from '@cabloy/core';
+
 const VarsFn = require('../../common/vars.js');
 const UtilsFn = require('../../common/utils.js');
 
-module.exports = class FlowInstance {
+export class LocalFlowFlow0 extends BeanBase {
   __init__({ flowDef }) {
     // context
     this.context = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.context.flow`, {
@@ -263,4 +265,4 @@ module.exports = class FlowInstance {
       });
     }
   }
-};
+}

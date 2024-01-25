@@ -1,4 +1,6 @@
-module.exports = class Detail extends module.meta.class.BeanModuleScopeBase {
+import { BeanModuleScopeBase } from '@cabloy/core';
+
+export class BeanDetail0 extends BeanModuleScopeBase {
   get modelDetailBase() {
     return this.ctx.model.module(moduleInfo.relativeName).detailBase;
   }
@@ -15,4 +17,4 @@ module.exports = class Detail extends module.meta.class.BeanModuleScopeBase {
       await fn({ atomClassDetail, atomClassBaseDetail });
     }
   }
-};
+}

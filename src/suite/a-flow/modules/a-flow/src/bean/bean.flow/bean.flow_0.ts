@@ -1,4 +1,6 @@
-module.exports = class Flow {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanFlow0 extends BeanBase {
   get modelFlow() {
     return this.ctx.model.module(moduleInfo.relativeName).flow;
   }
@@ -15,4 +17,4 @@ module.exports = class Flow {
   get sqlProcedure() {
     return this.ctx.bean._getBean('a-flow.local.procedure');
   }
-};
+}

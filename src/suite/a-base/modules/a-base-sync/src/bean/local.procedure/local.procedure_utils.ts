@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureUtilsRights from './local.procedure_utils_rights.js';
+
+export class LocalProcedureUtils extends LocalProcedureUtilsRights {
   _prepare_cms({ tableName, iid, mode, cms }) {
     let _cmsField, _cmsJoin;
     const _cmsWhere = {};
@@ -74,4 +76,4 @@ module.exports = class Procedure {
     const atomNameLocale = __or__atomNameResource.find(item => !!item['m.atomNameLocale']);
     return !!atomNameLocale;
   }
-};
+}

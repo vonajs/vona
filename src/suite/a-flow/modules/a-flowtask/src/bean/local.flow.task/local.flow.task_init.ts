@@ -1,7 +1,9 @@
+import LocalFlowTaskEvent from './local.flow.task_event.js';
+
 const VarsFn = require('../../common/vars.js');
 const UtilsFn = require('../../common/utils.js');
 
-module.exports = class FlowTask {
+export class LocalFlowTaskInit extends LocalFlowTaskEvent {
   async init({ userIdAssignee, user }) {
     // create flowTask
     const flowTaskId = await this._createFlowTask({ userIdAssignee, user });
@@ -78,4 +80,4 @@ module.exports = class FlowTask {
   _getNodeOptionsTask() {
     return this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
   }
-};
+}

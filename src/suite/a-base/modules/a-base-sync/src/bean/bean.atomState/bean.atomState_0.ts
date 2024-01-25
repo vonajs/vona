@@ -1,4 +1,6 @@
-module.exports = class AtomState {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanAtomState0 extends BeanBase {
   constructor() {
     this.dictKeyDefault = 'a-dictbooster:dictAtomStateDefault';
   }
@@ -39,4 +41,4 @@ module.exports = class AtomState {
     // not found
     return null;
   }
-};
+}

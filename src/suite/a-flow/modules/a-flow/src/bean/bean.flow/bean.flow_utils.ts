@@ -1,4 +1,6 @@
-module.exports = class Flow {
+import BeanFlowStart from './bean.flow_start.js';
+
+export class BeanFlowUtils extends BeanFlowStart {
   evaluateExpression({ expression, globals }) {
     return this.ctx.bean.util.evaluateExpression({ expression, globals });
   }
@@ -26,4 +28,4 @@ module.exports = class Flow {
     }
     return await beanInstance.execute(context);
   }
-};
+}

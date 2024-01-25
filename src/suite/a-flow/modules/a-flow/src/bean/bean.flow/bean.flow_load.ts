@@ -1,4 +1,6 @@
-module.exports = class Flow {
+import BeanFlowAssignees from './bean.flow_assignees.js';
+
+export class BeanFlowLoad extends BeanFlowAssignees {
   async _loadFlowInstance({ flowId, history, throwError = true }) {
     // flow
     let flow;
@@ -56,4 +58,4 @@ module.exports = class Flow {
     const flowNodeInstance = await flowInstance._loadNodeInstance({ flowNode, history });
     return flowNodeInstance;
   }
-};
+}

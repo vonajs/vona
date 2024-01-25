@@ -1,4 +1,6 @@
-module.exports = class AtomRightAux {
+import BeanAtomRightAuxRoleWhos from './bean.atomRightAux_roleWhos.js';
+
+export class BeanAtomRightAuxRoleParentsOfUser extends BeanAtomRightAuxRoleWhos {
   async getRoleParentsOfUser({ userId }) {
     // cache
     return await this.ctx.bean.summer.get({ module: moduleInfo.relativeName, name: 'roleParentsOfUser' }, { userId });
@@ -19,4 +21,4 @@ module.exports = class AtomRightAux {
       [this.ctx.instance.id, userId],
     );
   }
-};
+}

@@ -1,9 +1,11 @@
+import BeanFlow0 from './bean.flow_0.js';
+
 const __VARTITLES = {
   flowUser: 'FlowInitiator',
   auto: 'FlowVarAutoPick',
 };
 
-module.exports = class Flow {
+export class BeanFlowAssignees extends BeanFlow0 {
   async normalizeAssignees({ users, roles, vars }) {
     const assignees = {};
     assignees.users = await this._normalizeAssignees_users(users);
@@ -102,4 +104,4 @@ module.exports = class Flow {
       return typeof item === 'object' ? item.name : item;
     });
   }
-};
+}

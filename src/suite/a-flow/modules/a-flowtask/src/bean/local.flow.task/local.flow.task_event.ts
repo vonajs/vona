@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskComplete from './local.flow.task_complete.js';
+
+export class LocalFlowTaskEvent extends LocalFlowTaskComplete {
   async raiseEventCreated() {
     await this.nodeInstance.change({
       event: 'created',
@@ -46,4 +48,4 @@ module.exports = class FlowTask {
     // save flowVars
     await this.flowInstance._saveFlowVars();
   }
-};
+}

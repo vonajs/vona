@@ -1,3 +1,4 @@
-const category_0 = require('./bean.category/bean.category_0.js');
+import { Bean } from '@cabloy/core';
 
-module.exports = module.meta.util.mixinClasses(category_0, []);
+@Bean()
+export class BeanCategory extends BeanCategory0 {}

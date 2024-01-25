@@ -1,8 +1,11 @@
+import BeanRoleBuild from './bean.role_build.js';
+
 const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',
 };
-module.exports = class Role {
+
+export class BeanRoleIncludes extends BeanRoleBuild {
   // includes
   async includes({ roleAtomId, roleId, page, user }) {
     // user, should check user right scope
@@ -69,7 +72,7 @@ module.exports = class Role {
     // set dirty
     await this.setDirty(true);
   }
-};
+}
 
 // // includes
 // async includes({ roleAtomId, roleId, page, user }) {

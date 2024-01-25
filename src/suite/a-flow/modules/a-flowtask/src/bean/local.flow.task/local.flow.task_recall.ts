@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskInit from './local.flow.task_init.js';
+
+export class LocalFlowTaskRecall extends LocalFlowTaskInit {
   async _recall() {
     // user
     const user = this.contextTask._user;
@@ -57,4 +59,4 @@ module.exports = class FlowTask {
       flowNodeRemark: 'Recalled',
     });
   }
-};
+}

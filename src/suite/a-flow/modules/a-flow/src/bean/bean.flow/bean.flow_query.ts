@@ -1,4 +1,6 @@
-module.exports = class Flow {
+import BeanFlowLoad from './bean.flow_load.js';
+
+export class BeanFlowQuery extends BeanFlowLoad {
   async count({ options, user }) {
     return await this.select({ options, user, count: 1 });
   }
@@ -60,4 +62,4 @@ module.exports = class Flow {
     const res = await this.ctx.model.query(sql);
     return count ? res[0]._count : res;
   }
-};
+}

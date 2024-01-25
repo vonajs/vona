@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update8 from './update_8.js';
+
+export class Update9 extends Update8 {
   async _update_9(options) {
     // drop column: aCmsContent.itemId
     const sql = `
@@ -13,4 +15,4 @@ module.exports = class Version {
     // drop view: aCmsArticleViewSearch
     await this.ctx.model.query('drop view aCmsArticleViewSearch');
   }
-};
+}

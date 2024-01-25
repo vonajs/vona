@@ -1,4 +1,6 @@
-module.exports = class AtomAction extends module.meta.class.BeanModuleScopeBase {
+import { BeanModuleScopeBase } from '@cabloy/core';
+
+export class BeanAtomActionBase extends BeanModuleScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).atomAction;
   }
@@ -100,4 +102,4 @@ module.exports = class AtomAction extends module.meta.class.BeanModuleScopeBase 
     data.id = res2.insertId;
     return data;
   }
-};
+}

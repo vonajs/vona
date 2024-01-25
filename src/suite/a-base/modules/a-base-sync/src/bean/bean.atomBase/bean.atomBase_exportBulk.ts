@@ -1,6 +1,8 @@
+import BeanAtomBaseDelete from './bean.atomBase_delete.js';
+
 const ExcelJS = require('exceljs');
 
-module.exports = class AtomBase {
+export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
   async exportBulk({ atomClass, options, fields, user }) {
     // select
     const items = await this.ctx.bean.atom.select({ atomClass, options, user, pageForce: false });
@@ -44,4 +46,4 @@ module.exports = class AtomBase {
     // ok
     return { type: 'buffer', data: buffer, meta };
   }
-};
+}

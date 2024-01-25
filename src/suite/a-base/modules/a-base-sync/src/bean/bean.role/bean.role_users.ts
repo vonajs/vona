@@ -1,3 +1,5 @@
+import BeanRoleResourceRights from './bean.role_resourceRights.js';
+
 const __atomClassRole = {
   module: moduleInfo.relativeName,
   atomClassName: 'role',
@@ -6,7 +8,8 @@ const __atomClassUser = {
   module: moduleInfo.relativeName,
   atomClassName: 'user',
 };
-module.exports = class Role {
+
+export class BeanRoleUsers extends BeanRoleResourceRights {
   async roleUsers({ roleAtomId, roleId, page, user }) {
     // user, should check user right scope
     // user = { id: 0 };
@@ -100,4 +103,4 @@ module.exports = class Role {
   async deleteAllUserRoles({ userId }) {
     await this.modelUserRole.delete({ userId });
   }
-};
+}

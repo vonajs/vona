@@ -1,4 +1,6 @@
-module.exports = class AtomBase {
+import BeanAtomBase0 from './bean.atomBase_0.js';
+
+export class BeanAtomBase1 extends BeanAtomBase0 {
   _ensureItemMeta(item) {
     if (!item) return null;
     if (!item._meta) item._meta = {};
@@ -294,4 +296,4 @@ module.exports = class AtomBase {
       item.atomClassTitleLocale = _atomClassBaseItem.titleLocale;
     }
   }
-};
+}

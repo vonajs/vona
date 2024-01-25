@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update2 from './update_2.js';
+
+export class Update3 extends Update2 {
   async _update_3(options) {
     // alter table: aCmsArticle
     let sql = `
@@ -52,4 +54,4 @@ module.exports = class Version {
         `;
     await this.ctx.model.query(sql);
   }
-};
+}

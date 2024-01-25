@@ -1,8 +1,11 @@
+import BeanUser0 from './bean.user_0.js';
+
 const __atomClassUser = {
   module: moduleInfo.relativeName,
   atomClassName: 'user',
 };
-module.exports = class User {
+
+export class BeanUser1 extends BeanUser0 {
   async get(where) {
     return await this.model.get(where);
   }
@@ -243,7 +246,7 @@ module.exports = class User {
     if (!res) this.ctx.throw(403);
     return _user;
   }
-};
+}
 
 // async save({ user }) {
 //   // userKey

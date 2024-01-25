@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import BeanFlowTaskSchema from './bean.flowTask_schema.js';
+
+export class BeanFlowTaskCheckViewWorkflow extends BeanFlowTaskSchema {
   async _checkViewWorkflow({ flowId, user }) {
     // 1. check atomClass action
     let res = await this._checkViewWorkflow_checkRightAction({ flowId, user });
@@ -37,4 +39,4 @@ module.exports = class FlowTask {
     });
     return items.length > 0;
   }
-};
+}

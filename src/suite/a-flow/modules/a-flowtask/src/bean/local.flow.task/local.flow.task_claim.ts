@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskCancelFlow from './local.flow.task_cancelFlow.js';
+
+export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
   async _claim() {
     // user
     const user = this.contextTask._user;
@@ -81,4 +83,4 @@ module.exports = class FlowTask {
     // ok
     return { timeClaimed };
   }
-};
+}

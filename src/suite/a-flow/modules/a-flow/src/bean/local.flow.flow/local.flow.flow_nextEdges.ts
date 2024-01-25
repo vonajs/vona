@@ -1,4 +1,6 @@
-module.exports = class FlowInstance {
+import LocalFlowFlowEndFlow from './local.flow.flow_endFlow.js';
+
+export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
   // return true, means has one edge to be taken
   async nextEdges({ nodeInstance, behaviorDefId }) {
     const contextNode = nodeInstance.contextNode;
@@ -72,4 +74,4 @@ module.exports = class FlowInstance {
     }
     return edges;
   }
-};
+}

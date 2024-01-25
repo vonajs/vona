@@ -1,1 +1,3 @@
-module.exports = class Procedure {};
+import { BeanBase } from '@cabloy/core';
+
+export class LocalProcedureBase extends BeanBase {}

@@ -1,4 +1,6 @@
-module.exports = class FlowNode {
+import FlowNodeStartEventAtomMatch from './flow.node.startEventAtom_match.js';
+
+export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMatch {
   async _deploy_flowActions({ atomClass, /* flowDefId,*/ node, deleting, flowDef, content }) {
     if (deleting) {
       await this._deploy_flowActions_deleting({ atomClass, flowDef });
@@ -98,4 +100,4 @@ module.exports = class FlowNode {
       });
     }
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class IOInner {
+import LocalIoInner0 from './local.ioInner_0.js';
+
+export class LocalIoInnerQueueDelivery extends LocalIoInner0 {
   // queue: delivery
   async queueDelivery({ path, options, message, messageSyncs, messageClass }) {
     // bean
@@ -48,4 +50,4 @@ module.exports = class IOInner {
       });
     }
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskNotify from './local.flow.task_notify.js';
+
+export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
   async _publishMessageTaskInit({ flowTaskId, userIdAssignee, user }) {
     if (!this.context._flow.flowAtomId) {
       // only support business flow
@@ -42,4 +44,4 @@ module.exports = class FlowTask {
       });
     });
   }
-};
+}

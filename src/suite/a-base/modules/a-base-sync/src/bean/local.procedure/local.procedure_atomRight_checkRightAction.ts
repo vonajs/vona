@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureAtomRightCheckRoleRightRead from './local.procedure_atomRight_checkRoleRightRead.js';
+
+export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomRightCheckRoleRightRead {
   async checkRightAction({ iid, userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }) {
     // for safe
     iid = parseInt(iid);
@@ -69,4 +71,4 @@ module.exports = class Procedure {
       atom,
     });
   }
-};
+}

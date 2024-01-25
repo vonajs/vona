@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanFlowTask0 extends BeanBase {
   get modelFlowTask() {
     return this.ctx.model.module(moduleInfo.relativeName).flowTask;
   }
@@ -124,4 +126,4 @@ module.exports = class FlowTask {
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._actions();
   }
-};
+}

@@ -1,3 +1,5 @@
+import { BeanBase } from '@cabloy/core';
+
 const VarsFn = require('../../common/vars.js');
 const UtilsFn = require('../../common/utils.js');
 
@@ -7,7 +9,7 @@ const __behaviorBaseDef = {
   type: 'base',
 };
 
-module.exports = class FlowNode {
+export class LocalFlowNode0 extends BeanBase {
   // contextEdge maybe null
   constructor({ flowInstance, context, contextEdge }) {
     this.flowInstance = flowInstance;
@@ -246,4 +248,4 @@ module.exports = class FlowNode {
     }
     return this._nodeBase;
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class Middleware {
+import { BeanBase } from '@cabloy/core';
+
+export class MiddlewareRight0 extends BeanBase {
   get constant() {
     return this.ctx.constant.module(moduleInfo.relativeName);
   }
@@ -42,4 +44,4 @@ module.exports = class Middleware {
     // resource
     if (type === 'resource') return await this.checkResource(options);
   }
-};
+}

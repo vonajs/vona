@@ -1,10 +1,12 @@
+import BeanBaseThemes from './bean.base_themes.js';
+
 const path = require('path');
 
 const fse = require('fs-extra');
 
 let _hostText = null;
 
-module.exports = class Base {
+export class BeanBaseUtils extends BeanBaseThemes {
   get host() {
     // test
     if (this.ctx.app.meta.isTest) {
@@ -72,4 +74,4 @@ module.exports = class Base {
   getAlertUrl({ data }) {
     return this.getAbsoluteUrl(`/#!/a/basefront/base/alert?data=${encodeURIComponent(JSON.stringify(data))}`);
   }
-};
+}

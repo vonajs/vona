@@ -1,9 +1,11 @@
+import BeanFieldsParseSchema from './bean.fields_parseSchema.js';
+
 const __atomClass_userFieldsRight = {
   module: 'a-base',
   atomClassName: 'userFieldsRight',
 };
 
-module.exports = class Fields {
+export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
   // atomClass: only main (exluding detail)
   async getPreferredFieldsRightOfUser({ atomClass, user }) {
     if (!user || user.id === 0) return null;
@@ -60,4 +62,4 @@ module.exports = class Fields {
       }
     }
   }
-};
+}

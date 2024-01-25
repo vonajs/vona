@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Init1 from './init_1.js';
+
+export class Init12 extends Init1 {
   async _init_12(options) {
     // add role rights
     const roleRights = [
@@ -7,4 +9,4 @@ module.exports = class Version {
     ];
     await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'article', roleRights });
   }
-};
+}

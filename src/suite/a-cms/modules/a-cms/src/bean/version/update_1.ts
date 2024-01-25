@@ -1,4 +1,6 @@
-module.exports = class Version {
+import VersionManager0 from './version.manager_0.js';
+
+export class Update1 extends VersionManager0 {
   async _update_1(options) {
     // create table: aCmsArticle
     let sql = `
@@ -82,4 +84,4 @@ module.exports = class Version {
         `;
     await this.ctx.model.query(sql);
   }
-};
+}

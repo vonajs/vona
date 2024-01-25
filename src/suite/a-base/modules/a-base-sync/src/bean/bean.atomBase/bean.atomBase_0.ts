@@ -1,4 +1,6 @@
-module.exports = class AtomBase {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanAtomBase0 extends BeanBase {
   get configModuleBase() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -46,4 +48,4 @@ module.exports = class AtomBase {
   async prepareStaticItem({ moduleName, atomClass, item, register }) {
     return await this.ctx.bean.atomStatic._adjustItem_base({ moduleName, atomClass, item, register });
   }
-};
+}

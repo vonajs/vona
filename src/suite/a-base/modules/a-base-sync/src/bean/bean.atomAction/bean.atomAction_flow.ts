@@ -1,4 +1,6 @@
-module.exports = class AtomAction {
+import BeanAtomActionBase from './bean.atomAction_base.js';
+
+export class BeanAtomActionFlow extends BeanAtomActionBase {
   async selectFlowActions({ atomClass, flowKey }) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     return await this.model.select({
@@ -67,4 +69,4 @@ module.exports = class AtomAction {
     // ok
     return data;
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class FlowNode {
+import FlowNodeStartEventAtom0 from './flow.node.startEventAtom_0.js';
+
+export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
   async _deploy_condition({ atomClass, deploy, flowDefId, node }) {
     if (deploy) {
       await this._addCondition({ atomClass, flowDefId, node });
@@ -60,4 +62,4 @@ module.exports = class FlowNode {
       startEventId,
     });
   }
-};
+}

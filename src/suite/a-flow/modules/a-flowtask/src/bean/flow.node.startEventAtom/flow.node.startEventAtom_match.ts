@@ -1,4 +1,6 @@
-module.exports = class FlowNode {
+import FlowNodeStartEventAtomCondition from './flow.node.startEventAtom_condition.js';
+
+export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition {
   async _getAllConditions({ atomClassId, needFlowContent }) {
     const flowContentFields = needFlowContent ? ',b2.content' : '';
     const flowContentJoin = needFlowContent ? 'inner join aFlowDefContent b2 on b.atomId=b2.atomId' : '';
@@ -73,4 +75,4 @@ module.exports = class FlowNode {
     // ok
     return true;
   }
-};
+}

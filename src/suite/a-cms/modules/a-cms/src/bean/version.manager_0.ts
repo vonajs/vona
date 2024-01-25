@@ -1,4 +1,6 @@
-module.exports = class Version {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionManager0 extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       await this._update_1(options);
@@ -50,4 +52,4 @@ module.exports = class Version {
   async test() {
     await this._test();
   }
-};
+}

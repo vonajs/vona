@@ -1,4 +1,6 @@
-module.exports = class IOInner {
+import LocalIoInnerQueuePush from './local.ioInner_queuePush.js';
+
+export class LocalIoInnerQueuePushDirect extends LocalIoInnerQueuePush {
   async queuePushDirect({ content, options, channel }) {
     // get channel base
     const channelFullName = `${channel.module}:${channel.name}`;
@@ -10,4 +12,4 @@ module.exports = class IOInner {
     // done
     return pushDone;
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class AtomBase {
+import BeanAtomBasePerformAction from './bean.atomBase_performAction.js';
+
+export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
   async performActionBulk({ keys, atomClass, action, item, options, user, fnBefore, fnAfter }) {
     // actionBase
     const actionBase = this.ctx.bean.base.action({
@@ -87,4 +89,4 @@ module.exports = class AtomBase {
     }
     return { keys: resKeys };
   }
-};
+}

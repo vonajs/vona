@@ -1,4 +1,6 @@
-module.exports = class IO {
+import BeanIoPublish from './bean.io_publish.js';
+
+export class BeanIoPush extends BeanIoPublish {
   async pushDirect({ content, channel, options }) {
     this.ctx.meta.util.queuePush({
       module: moduleInfo.relativeName,
@@ -108,4 +110,4 @@ module.exports = class IO {
       return false;
     }
   }
-};
+}

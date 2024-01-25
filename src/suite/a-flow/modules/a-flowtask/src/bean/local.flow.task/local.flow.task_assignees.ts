@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskAppendHandleRemark from './local.flow.task_appendHandleRemark.js';
+
+export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
   async _assignees() {
     // user
     const user = this.contextTask._user;
@@ -95,4 +97,4 @@ module.exports = class FlowTask {
       });
     }
   }
-};
+}

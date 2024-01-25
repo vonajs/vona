@@ -1,4 +1,6 @@
-module.exports = class Middleware {
+import MiddlewareRightAtomClass from './middleware.right_atomClass.js';
+
+export class MiddlewareRightResource extends MiddlewareRightAtomClass {
   async checkResource(options) {
     if (this.ctx.innerAccess) return;
     // useKey
@@ -37,4 +39,4 @@ module.exports = class Middleware {
       user: this.ctx.state.user.op,
     });
   }
-};
+}

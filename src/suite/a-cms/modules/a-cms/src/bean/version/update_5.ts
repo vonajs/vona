@@ -1,6 +1,8 @@
+import Update4 from './update_4.js';
+
 const utils = require('../../common/utils.js');
 
-module.exports = class Version {
+export class Update5 extends Update4 {
   async _update_5(options) {
     // alter table: aCmsCategory
     let sql = `
@@ -48,4 +50,4 @@ module.exports = class Version {
       [atomClass.id, this.ctx.instance.id],
     );
   }
-};
+}

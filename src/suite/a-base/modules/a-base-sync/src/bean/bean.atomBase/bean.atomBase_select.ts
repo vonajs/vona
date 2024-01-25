@@ -1,4 +1,6 @@
-module.exports = class AtomBase {
+import BeanAtomBaseDefault from './bean.atomBase_default.js';
+
+export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
   async selectQuery({ atomClass, options, user }) {
     return await this.ctx.bean.atom._selectQuery({ atomClass, options, user });
   }
@@ -37,4 +39,4 @@ module.exports = class AtomBase {
       items[index] = item;
     }
   }
-};
+}

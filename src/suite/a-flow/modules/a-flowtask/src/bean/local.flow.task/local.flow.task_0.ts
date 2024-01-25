@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import { BeanBase } from '@cabloy/core';
+
+export class LocalFlowTask0 extends BeanBase {
   constructor({ nodeInstance }) {
     this.nodeInstance = nodeInstance;
     this.flowInstance = nodeInstance.flowInstance;
@@ -24,4 +26,4 @@ module.exports = class FlowTask {
   get localRight() {
     return this.ctx.bean._getBean('a-flowtask.local.right');
   }
-};
+}

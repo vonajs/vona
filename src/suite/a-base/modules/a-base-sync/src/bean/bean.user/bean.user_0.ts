@@ -1,6 +1,8 @@
+import { BeanBase } from '@cabloy/core';
+
 const _usersAnonymous = {};
 
-module.exports = class User {
+export class BeanUser0 extends BeanBase {
   constructor() {
     this._sequence = null;
     this._config = null;
@@ -601,4 +603,4 @@ module.exports = class User {
       user[column] = value;
     }
   }
-};
+}

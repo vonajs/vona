@@ -1,4 +1,6 @@
-module.exports = class IO {
+import BeanIoDelivery from './bean.io_delivery.js';
+
+export class BeanIoPublish extends BeanIoDelivery {
   async publish({ path, message, messageClass, options }) {
     // messageClass
     messageClass = await this.messageClass.get(messageClass);
@@ -128,4 +130,4 @@ module.exports = class IO {
       await this._pushQueuePush({ options, message, messageSyncs, messageClass });
     }
   }
-};
+}

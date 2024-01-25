@@ -1,9 +1,11 @@
+import BeanFlowDefDeploy from './bean.flowDef_deploy.js';
+
 const __flowBehaviorBases = {};
 const __flowNodeBases = {};
 const __flowEdgeBases = {};
 const __flowServiceBases = {};
 
-module.exports = class FlowDef {
+export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   behaviorBases() {
     return this._getFlowBehaviorBases();
   }
@@ -186,4 +188,4 @@ module.exports = class FlowDef {
     }
     return { fullKey, dynamic };
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update5 from './update_5.js';
+
+export class Update6 extends Update5 {
   async _update_6(options) {
     // alter table: aCmsArticle
     let sql = `
@@ -91,4 +93,4 @@ module.exports = class Version {
   _uuid() {
     return this.ctx.bean.util.uuidv4();
   }
-};
+}

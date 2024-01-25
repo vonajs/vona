@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import BeanFlowTaskAtomState from './bean.flowTask_atomState.js';
+
+export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
   async flowData({ flowId, options, user }) {
     options = options || {};
     // allowViewWorkflow
@@ -314,4 +316,4 @@ module.exports = class FlowTask {
     // ok
     return actions;
   }
-};
+}

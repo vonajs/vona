@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureAtomSelectAtomsFormal from './local.procedure_atom_selectAtoms_formal.js';
+
+export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsFormal {
   async getAtom({ options }) {
     let {
       iid,
@@ -148,4 +150,4 @@ module.exports = class Procedure {
     // ok
     return _sql;
   }
-};
+}

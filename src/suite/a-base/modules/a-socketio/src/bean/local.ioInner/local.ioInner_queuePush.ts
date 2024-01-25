@@ -1,4 +1,6 @@
-module.exports = class IOInner {
+import LocalIoInnerQueueProcess from './local.ioInner_queueProcess.js';
+
+export class LocalIoInnerQueuePush extends LocalIoInnerQueueProcess {
   // queue: push
   async queuePush({ options, message, messageSyncs, messageClass }) {
     // bean
@@ -15,4 +17,4 @@ module.exports = class IOInner {
       },
     });
   }
-};
+}

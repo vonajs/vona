@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update6 from './update_6.js';
+
+export class Update7 extends Update6 {
   async _update_7(options) {
     // update cms blocks
     await this.ctx.model.query(`
@@ -161,4 +163,4 @@ module.exports = class Version {
     mapCagetoryIds[category.id] = categoryIdNew;
     return categoryIdNew;
   }
-};
+}

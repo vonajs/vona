@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskClaim from './local.flow.task_claim.js';
+
+export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
   async _complete({ handle, formAtom }) {
     // user
     const user = this.contextTask._user;
@@ -187,4 +189,4 @@ module.exports = class FlowTask {
   //     user,
   //   });
   // }
-};
+}

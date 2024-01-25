@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update11 from './update_11.js';
+
+export class Update12 extends Update11 {
   async _update_12(options) {
     await this._update12Migration(options);
   }
@@ -87,4 +89,4 @@ module.exports = class Version {
       user,
     });
   }
-};
+}

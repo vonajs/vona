@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import BeanFlowTask0 from './bean.flowTask_0.js';
+
+export class BeanFlowTask1 extends BeanFlowTask0 {
   async _list({ options: { where, orders, page, mode, history = 0 }, user, pageForce = true, count = 0 }) {
     // special for mode
     if (mode === 'claimings') {
@@ -124,4 +126,4 @@ module.exports = class FlowTask {
       });
     }
   }
-};
+}

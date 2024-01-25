@@ -1,3 +1,5 @@
+import LocalFlowNode0 from './local.flow.node_0.js';
+
 const __adapter = (context, chain) => {
   return {
     receiver: chain.behaviorBean,
@@ -5,7 +7,7 @@ const __adapter = (context, chain) => {
   };
 };
 
-module.exports = class FlowNode {
+export class LocalFlowNodeCycle extends LocalFlowNode0 {
   getBehaviorDefOptions({ behaviorDefId }) {
     // nodeDef
     const nodeDef = this.contextNode._nodeDef;
@@ -119,4 +121,4 @@ module.exports = class FlowNode {
   async _behaviorsInvokeAsync(context) {
     return await this.ctx.app.meta.util.composeAsync(this.behaviors, __adapter)(context);
   }
-};
+}

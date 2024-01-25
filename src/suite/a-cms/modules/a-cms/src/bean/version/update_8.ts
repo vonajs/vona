@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update7 from './update_7.js';
+
+export class Update8 extends Update7 {
   async _update_8(options) {
     // schemas update for 7
     await this._update7Migration_schemas(options);
@@ -47,4 +49,4 @@ module.exports = class Version {
     // aCmsArticleViewTag
     await this.ctx.model.query('drop view aCmsArticleViewTag');
   }
-};
+}

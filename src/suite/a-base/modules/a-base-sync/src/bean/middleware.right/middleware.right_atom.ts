@@ -1,4 +1,6 @@
-module.exports = class Middleware {
+import MiddlewareRight0 from './middleware.right_0.js';
+
+export class MiddlewareRightAtom extends MiddlewareRight0 {
   async checkAtom(options) {
     // user
     const user = this.ctx.state.user.op;
@@ -182,4 +184,4 @@ module.exports = class Middleware {
     }
     this.ctx.request.body.options = options;
   }
-};
+}

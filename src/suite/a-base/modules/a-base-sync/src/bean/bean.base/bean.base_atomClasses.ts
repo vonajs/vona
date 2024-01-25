@@ -1,6 +1,8 @@
+import BeanBaseActions from './bean.base_actions.js';
+
 const _atomClasses = {};
 
-module.exports = class Base {
+export class BeanBaseAtomClasses extends BeanBaseActions {
   atomClasses() {
     if (!_atomClasses[this.ctx.locale]) {
       // prepare
@@ -75,4 +77,4 @@ module.exports = class Base {
     }
     return atomClasses;
   }
-};
+}

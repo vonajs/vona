@@ -1,4 +1,6 @@
-module.exports = class IO {
+import BeanIo0 from './bean.io_0.js';
+
+export class BeanIoDelivery extends BeanIo0 {
   // called by messageBase.onDelivery
   async delivery({ path, options, message, messageSync, messageClass }) {
     // ignore delivery online if !path
@@ -107,4 +109,4 @@ module.exports = class IO {
   //   // done
   //   return true;
   // }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import BeanFlowTaskNodeDoneCheck from './bean.flowTask_nodeDoneCheck.js';
+
+export class BeanFlowTaskSchema extends BeanFlowTaskNodeDoneCheck {
   // mode: read/write view/edit
   // atomClass: detail/main
   async _prepareAtomSchema({ mode, flowTaskId, atomClass, user, throwError }) {
@@ -32,4 +34,4 @@ module.exports = class FlowTask {
     });
     return { taskInstance, fieldsRight, schema, item: taskInstance.context.atom };
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class IO {
+import BeanIoSockets from './bean.io_sockets.js';
+
+export class BeanIoSubscribe extends BeanIoSockets {
   // subcribe
   //    key: userId:path:socketId
   //    value: timestamp,workerId,scene
@@ -13,4 +15,4 @@ module.exports = class IO {
   async unsubscribeWhenDisconnect({ iid, user, socketId }) {
     return await this.localRedis._unsubscribeWhenDisconnect({ iid, user, socketId });
   }
-};
+}

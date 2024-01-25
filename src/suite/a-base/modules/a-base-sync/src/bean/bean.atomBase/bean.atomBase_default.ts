@@ -1,3 +1,5 @@
+import BeanAtomBaseCreate from './bean.atomBase_create.js';
+
 const __create_atom_basic_fields = [
   'atomStage',
   'atomName',
@@ -7,7 +9,7 @@ const __create_atom_basic_fields = [
   'atomCategoryId',
 ];
 
-module.exports = class AtomBase {
+export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
   async default({ atomClass, data, item, options, user }) {
     data = data || {};
     // atomClass
@@ -103,4 +105,4 @@ module.exports = class AtomBase {
     // ok
     return data;
   }
-};
+}

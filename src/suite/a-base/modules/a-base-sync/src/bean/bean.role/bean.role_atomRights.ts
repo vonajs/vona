@@ -1,4 +1,6 @@
-module.exports = class Role {
+import BeanRoleBase from './bean.role_base.js';
+
+export class BeanRoleAtomRights extends BeanRoleBase {
   // add role right
   async addRoleRight({ roleAtomId, roleId, atomClass, atomClassId, action, scope, user, roleRightId }) {
     // atomClassId
@@ -328,4 +330,4 @@ module.exports = class Role {
       }
     }
   }
-};
+}

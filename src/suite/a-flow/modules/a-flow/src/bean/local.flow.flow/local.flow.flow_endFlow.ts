@@ -1,4 +1,6 @@
-module.exports = class FlowInstance {
+import LocalFlowFlowAssignees from './local.flow.flow_assignees.js';
+
+export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
   async _endFlow(options) {
     options = options || {};
     const flowHandleStatus = options.flowHandleStatus || 1;
@@ -93,4 +95,4 @@ module.exports = class FlowInstance {
     const flowUserId = this.context._flow.flowUserId;
     await this._publishMessageFlowEnd({ flowUserId, user: userOp });
   }
-};
+}

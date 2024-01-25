@@ -1,4 +1,6 @@
-module.exports = class FlowNode {
+import FlowNodeStartEventAtomFlowActions from './flow.node.startEventAtom_flowActions.js';
+
+export class FlowNodeStartEventAtomActionRightViewWorkflow extends FlowNodeStartEventAtomFlowActions {
   async _deploy_actionRightViewWorkflow({ atomClass }) {
     // check if any role exists
     const right = await this.modelRoleRight.get({
@@ -16,4 +18,4 @@ module.exports = class FlowNode {
       roleRights,
     });
   }
-};
+}

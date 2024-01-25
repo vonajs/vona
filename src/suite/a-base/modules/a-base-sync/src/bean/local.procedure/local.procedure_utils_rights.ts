@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureUtilsFieldsRight from './local.procedure_utils_fieldsRight.js';
+
+export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
   async _prepareRightMine({ /* iid, */ atomClass, atomClassBase, action, userIdWho, atom }) {
     // only mine data
     if (!atomClassBase) {
@@ -122,7 +124,7 @@ module.exports = class Procedure {
     }
     return _others;
   }
-};
+}
 
 function __combineClauseRightMineAtom({ atom, userIdWho }) {
   if (atom) {

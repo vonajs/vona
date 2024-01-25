@@ -1,4 +1,6 @@
-module.exports = class Category {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanCategory0 extends BeanBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).category;
   }
@@ -269,4 +271,4 @@ module.exports = class Category {
     });
     return res ? categoryHidden : 0;
   }
-};
+}

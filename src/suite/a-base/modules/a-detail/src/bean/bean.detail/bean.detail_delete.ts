@@ -1,4 +1,6 @@
-module.exports = class Detail {
+import BeanDetailCopy from './bean.detail_copy.js';
+
+export class BeanDetailDelete extends BeanDetailCopy {
   async _deleteDetails({ atomClass, atomKey, user }) {
     await this._loopDetailClasses({
       atomClass,
@@ -38,4 +40,4 @@ module.exports = class Detail {
       detailClassId: atomClass.id,
     });
   }
-};
+}

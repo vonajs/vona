@@ -1,4 +1,6 @@
-module.exports = class FlowDef {
+import BeanFlowDefPrepare from './bean.flowDef_prepare.js';
+
+export class BeanFlowDefFind extends BeanFlowDefPrepare {
   _findNode({ content, nodeDefId }) {
     return content.process.nodes.find(node => {
       return node.id === nodeDefId;
@@ -71,4 +73,4 @@ module.exports = class FlowDef {
       }
     }
   }
-};
+}

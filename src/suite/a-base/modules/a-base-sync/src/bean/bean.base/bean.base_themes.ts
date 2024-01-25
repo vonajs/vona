@@ -1,6 +1,8 @@
+import BeanBaseResourceTypes from './bean.base_resourceTypes.js';
+
 const _themesLocales = {};
 
-module.exports = class Base {
+export class BeanBaseThemes extends BeanBaseResourceTypes {
   themes() {
     if (!_themesLocales[this.ctx.locale]) {
       _themesLocales[this.ctx.locale] = this._prepareThemes();
@@ -25,4 +27,4 @@ module.exports = class Base {
     }
     return modules;
   }
-};
+}

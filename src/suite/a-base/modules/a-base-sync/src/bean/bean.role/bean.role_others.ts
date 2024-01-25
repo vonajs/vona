@@ -1,5 +1,8 @@
+import BeanRoleIncludes from './bean.role_includes.js';
+
 //
-module.exports = class Role {
+
+export class BeanRoleOthers extends BeanRoleIncludes {
   async getUserRolesDirect({ userId }) {
     const list = await this.ctx.model.query(
       `
@@ -203,4 +206,4 @@ module.exports = class Role {
     });
     return !!res;
   }
-};
+}

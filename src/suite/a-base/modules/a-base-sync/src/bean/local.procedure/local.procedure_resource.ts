@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureAtomRightCheckRightActionBulk from './local.procedure_atomRight_checkRightActionBulk.js';
+
+export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
   checkRightResource({ iid, userIdWho, resourceAtomId }) {
     // for safe
     iid = parseInt(iid);
@@ -36,4 +38,4 @@ module.exports = class Procedure {
         `;
     return _sql;
   }
-};
+}

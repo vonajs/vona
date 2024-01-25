@@ -1,3 +1,5 @@
+import BeanAtomBase1 from './bean.atomBase_1.js';
+
 const __create_atom_basic_fields = [
   'atomStage',
   'atomName',
@@ -8,7 +10,7 @@ const __create_atom_basic_fields = [
   'atomCategoryId',
 ];
 
-module.exports = class AtomBase {
+export class BeanAtomBaseCreate extends BeanAtomBase1 {
   async create({ atomClass, item, options, user }) {
     // dataWrite
     const dataWrite = options.__createDelayData;
@@ -216,4 +218,4 @@ module.exports = class AtomBase {
     const detailLineNo = res.detailLineNo;
     return detailLineNo ? detailLineNo + 1 : 1;
   }
-};
+}

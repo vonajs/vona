@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTask0 from './local.flow.task_0.js';
+
+export class LocalFlowTaskAppendHandleRemark extends LocalFlowTask0 {
   async _appendHandleRemark({ handle }) {
     // user
     const user = this.contextTask._user;
@@ -10,4 +12,4 @@ module.exports = class FlowTask {
     this.contextTask._flowTaskHistory.handleRemark = handle.remark;
     await this.modelFlowTaskHistory.update(this.contextTask._flowTaskHistory);
   }
-};
+}

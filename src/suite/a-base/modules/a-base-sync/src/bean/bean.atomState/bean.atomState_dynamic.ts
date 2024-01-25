@@ -1,8 +1,11 @@
+import BeanAtomStateStatic from './bean.atomState_static.js';
+
 const __atomClassDict = {
   module: 'a-dict',
   atomClassName: 'dict',
 };
-module.exports = class AtomState {
+
+export class BeanAtomStateDynamic extends BeanAtomStateStatic {
   // status
   get beanStatus() {
     return this.ctx.bean.status.module(moduleInfo.relativeName);
@@ -122,4 +125,4 @@ module.exports = class AtomState {
       await this.dynamic_setDictKeyInfo({ atomClass, dictKey, mode });
     }
   }
-};
+}

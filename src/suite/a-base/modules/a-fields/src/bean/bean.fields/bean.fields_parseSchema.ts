@@ -1,4 +1,6 @@
-module.exports = class Fields {
+import BeanFieldsBase from './bean.fields_base.js';
+
+export class BeanFieldsParseSchema extends BeanFieldsBase {
   // atomClass: maybe main/detail
   //  atomClass is main only when (!atomClassMain && !atomClass.detail) || atomClass=atomClassMain
   async parseSchema({ atomClass, atomClassMain, fieldsRight }) {
@@ -187,4 +189,4 @@ module.exports = class Fields {
   __getAtomClassKey({ atomClass }) {
     return `${atomClass.module}:${atomClass.atomClassName}`;
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class FlowTask {
+import LocalFlowTaskSubstitute from './local.flow.task_substitute.js';
+
+export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
   async _viewAtom() {
     return await this._getAtomAndSchema({ mode: 'read' });
   }
@@ -118,4 +120,4 @@ module.exports = class FlowTask {
     });
     return schema;
   }
-};
+}

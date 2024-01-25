@@ -1,4 +1,6 @@
-module.exports = class AtomRightAux {
+import BeanAtomRightAuxRoleParentsOfUser from './bean.atomRightAux_roleParentsOfUser.js';
+
+export class BeanAtomRightAuxUtils extends BeanAtomRightAuxRoleParentsOfUser {
   async clearSummersOfRole() {
     await this.clearSummer_roleScopesOfRole();
     await this.clearSummer_roleWhosOfAtomClassAction();
@@ -9,4 +11,4 @@ module.exports = class AtomRightAux {
     await this.clearSummer_roleScopesMineOfUser();
     await this.clearSummer_roleParentsOfUser();
   }
-};
+}

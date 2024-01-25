@@ -1,4 +1,6 @@
-module.exports = class AtomBase {
+import BeanAtomBaseWrite from './bean.atomBase_write.js';
+
+export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
   async delete({ atomClass, key, options, user }) {
     // atomClass
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -39,4 +41,4 @@ module.exports = class AtomBase {
       await this.ctx.bean.detail._deleteDetailBase({ atomClassBase, atomClass, key, options, user });
     }
   }
-};
+}

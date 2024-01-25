@@ -1,6 +1,8 @@
+import BeanBaseAtomClasses from './bean.base_atomClasses.js';
+
 const _authProvidersLocales = {};
 
-module.exports = class Base {
+export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
   authProviders() {
     if (!_authProvidersLocales[this.ctx.locale]) {
       _authProvidersLocales[this.ctx.locale] = this._prepareAuthProviders();
@@ -70,4 +72,4 @@ module.exports = class Base {
       meta.validator = { module: relativeName, validator: meta.validator };
     }
   }
-};
+}

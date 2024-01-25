@@ -1,4 +1,6 @@
-module.exports = class IO {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanIo0 extends BeanBase {
   get messageClass() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).messageClass;
   }
@@ -22,4 +24,4 @@ module.exports = class IO {
   _getBeanChannel(channelFullName) {
     return this.localIOInner._getBeanChannel(channelFullName);
   }
-};
+}

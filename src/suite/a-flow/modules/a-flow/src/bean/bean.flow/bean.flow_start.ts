@@ -1,4 +1,6 @@
-module.exports = class Flow {
+import BeanFlowQuery from './bean.flow_query.js';
+
+export class BeanFlowStart extends BeanFlowQuery {
   async startByKey({ flowDefKey, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
     // fullKey
     const { fullKey } = this.ctx.bean.flowDef._combineFullKey({ flowDefKey });
@@ -32,4 +34,4 @@ module.exports = class Flow {
     });
     return flowInstance;
   }
-};
+}

@@ -1,4 +1,6 @@
-module.exports = class IO {
+import BeanIoPush from './bean.io_push.js';
+
+export class BeanIoSave extends BeanIoPush {
   _checkPersistence({ options, /* message,*/ messageClass }) {
     // // 1.
     // if (message.userIdTo === -2 || message.userIdsTo) return true;
@@ -147,4 +149,4 @@ module.exports = class IO {
       }
     }
   }
-};
+}

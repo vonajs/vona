@@ -1,4 +1,6 @@
-module.exports = class FlowDef {
+import BeanFlowDef0 from './bean.flowDef_0.js';
+
+export class BeanFlowDefDeploy extends BeanFlowDef0 {
   async deploy({ flowDefId, undeploy, deleting }) {
     // start event
     const res = await this._deploy_startEvent({ flowDefId, undeploy, deleting });
@@ -198,4 +200,4 @@ module.exports = class FlowDef {
     // return
     return { atomClass };
   }
-};
+}

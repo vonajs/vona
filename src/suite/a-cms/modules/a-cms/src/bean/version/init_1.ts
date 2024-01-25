@@ -1,4 +1,6 @@
-module.exports = class Version {
+import Update12 from './update_12.js';
+
+export class Init1 extends Update12 {
   async _init_1(options) {
     // create roles: cms-writer to template
     const roles = ['cms-writer'];
@@ -29,4 +31,4 @@ module.exports = class Version {
     ];
     await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'article', roleRights });
   }
-};
+}

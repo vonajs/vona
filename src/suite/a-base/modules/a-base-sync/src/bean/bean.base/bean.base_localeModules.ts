@@ -1,6 +1,8 @@
+import BeanBaseAuthProviders from './bean.base_authProviders.js';
+
 const _localeModules = {};
 
-module.exports = class Base {
+export class BeanBaseLocaleModules extends BeanBaseAuthProviders {
   localeModules() {
     if (!_localeModules[this.ctx.locale]) {
       _localeModules[this.ctx.locale] = this._prepareLocaleModules();
@@ -20,4 +22,4 @@ module.exports = class Base {
     }
     return localeModules;
   }
-};
+}

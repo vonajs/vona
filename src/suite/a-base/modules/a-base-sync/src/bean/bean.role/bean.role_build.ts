@@ -1,4 +1,6 @@
-module.exports = class Role {
+import BeanRoleAtomRights from './bean.role_atomRights.js';
+
+export class BeanRoleBuild extends BeanRoleAtomRights {
   // set dirty
   async setDirty(dirty) {
     // when build done, clear summer
@@ -159,4 +161,4 @@ module.exports = class Role {
         `,
     );
   }
-};
+}

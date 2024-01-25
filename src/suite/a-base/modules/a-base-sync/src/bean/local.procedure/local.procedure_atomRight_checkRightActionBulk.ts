@@ -1,4 +1,6 @@
-module.exports = class Procedure {
+import LocalProcedureAtomRightCheckRightAction from './local.procedure_atomRight_checkRightAction.js';
+
+export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {
   checkRightActionBulk({ iid, userIdWho, atomClass, atomClassBase, action }) {
     // for safe
     iid = parseInt(iid);
@@ -43,4 +45,4 @@ module.exports = class Procedure {
         )
       `);
   }
-};
+}
