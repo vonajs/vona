@@ -1,6 +1,9 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const assert = require('assert');
 
-module.exports = class FlowListener {
+@Local()
+export class LocalFlowListener extends BeanBase {
   constructor({ flowInstance, context }) {
     this.flowInstance = flowInstance;
     this.context = context;
@@ -129,4 +132,4 @@ module.exports = class FlowListener {
     }
     return options;
   }
-};
+}

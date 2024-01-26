@@ -1,4 +1,7 @@
-module.exports = class Right {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalRight extends BeanBase {
   get modelFlowTask() {
     return this.ctx.model.module(moduleInfo.relativeName).flowTask;
   }
@@ -226,4 +229,4 @@ module.exports = class Right {
       this.ctx.throw(403);
     }
   }
-};
+}

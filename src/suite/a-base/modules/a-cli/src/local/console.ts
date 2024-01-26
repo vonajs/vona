@@ -1,4 +1,7 @@
-module.exports = class Local {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalConsole extends BeanBase {
   constructor(cli) {
     this.cli = cli;
   }
@@ -43,4 +46,4 @@ module.exports = class Local {
       .map(item => (item ? prefix + item : item))
       .join('\n');
   }
-};
+}

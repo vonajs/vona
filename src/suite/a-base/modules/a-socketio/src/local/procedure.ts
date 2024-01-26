@@ -1,4 +1,7 @@
-module.exports = class Procedure {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalProcedure extends BeanBase {
   selectMessages({ iid, where, orders, page, offset, count }) {
     // for safe
     where = where ? this.ctx.model._where(where) : null;
@@ -75,4 +78,4 @@ module.exports = class Procedure {
     // ok
     return _sql;
   }
-};
+}

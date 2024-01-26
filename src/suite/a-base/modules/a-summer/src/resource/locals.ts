@@ -1,3 +1,4 @@
+export * from '../local/cacheBase.js';
 export * from '../local/cache.js';
 export * from '../local/fetch.js';
 export * from '../local/mem.js';

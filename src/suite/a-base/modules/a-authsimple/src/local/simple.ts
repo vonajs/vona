@@ -1,7 +1,10 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const util = require('util');
 const passwordFn = require('password-hash-and-salt'); // should compile
 
-module.exports = class Simple {
+@Local()
+export class LocalSimple extends BeanBase {
   get modelAuthSimple() {
     return this.ctx.model.module(moduleInfo.relativeName).authSimple;
   }
@@ -32,4 +35,4 @@ module.exports = class Simple {
     const hashFn = util.promisify(_password.hash);
     return await hashFn.call(_password);
   }
-};
+}

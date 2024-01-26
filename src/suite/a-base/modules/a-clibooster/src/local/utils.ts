@@ -1,3 +1,5 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 const fse = require('fs-extra');
 
@@ -42,7 +44,8 @@ const __JSContent = `
 };
 `;
 
-module.exports = class Local {
+@Local()
+export class LocalUtils extends BeanBase {
   async demoExecute({ method, argv, cli }) {
     // js file
     const jsFile = await this._prepareJSFile({ cli });
@@ -86,4 +89,4 @@ module.exports = class Local {
     // ok
     return jsFile;
   }
-};
+}

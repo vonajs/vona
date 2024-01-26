@@ -1,5 +1,9 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const ONE_DAY = 1000 * 60 * 60 * 24;
-module.exports = class SessionStore {
+
+@Local()
+export class LocalSessionStore extends BeanBase {
   constructor() {
     this._redis = null;
   }
@@ -33,4 +37,4 @@ module.exports = class SessionStore {
     const key = this._getKeyToken({ ctx, token });
     await this.redis.del(key);
   }
-};
+}

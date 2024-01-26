@@ -1,6 +1,9 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const url = require('url');
 
-module.exports = class LocalTools {
+@Local()
+export class LocalTools extends BeanBase {
   async submit({ links, config }) {
     for (const target in config.submit) {
       const targetConfig = config.submit[target];
@@ -31,4 +34,4 @@ module.exports = class LocalTools {
       });
     });
   }
-};
+}

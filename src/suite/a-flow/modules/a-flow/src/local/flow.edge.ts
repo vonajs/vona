@@ -1,6 +1,9 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const UtilsFn = require('../common/utils.js');
 
-module.exports = class FlowEdge {
+@Local()
+export class LocalFlowEdge extends BeanBase {
   constructor({ flowInstance, context, contextNode }) {
     this.flowInstance = flowInstance;
     this.context = context;
@@ -81,4 +84,4 @@ module.exports = class FlowEdge {
     if (!this._edgeBase) this._edgeBase = this.ctx.bean.flowDef._getFlowEdgeBase(this.contextEdge._edgeDef.type);
     return this._edgeBase;
   }
-};
+}

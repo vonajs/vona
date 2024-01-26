@@ -1,3 +1,5 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const fs = require('fs');
 const path = require('path');
 
@@ -6,7 +8,8 @@ const isTextOrBinary = require('istextorbinary');
 const ejs = require('@zhennann/ejs');
 const gogocode = require('gogocode');
 
-module.exports = class Local {
+@Local()
+export class LocalTemplate extends BeanBase {
   constructor(cli) {
     this.cli = cli;
   }
@@ -238,4 +241,4 @@ module.exports = class Local {
     if (!num || isNaN(num)) return 10000;
     return parseInt(num);
   }
-};
+}

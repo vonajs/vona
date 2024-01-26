@@ -1,7 +1,10 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const _cacheMessageClasses = {};
 const _cacheChannels = {};
 
-module.exports = class MessageClass {
+@Local()
+export class LocalMessageClass extends BeanBase {
   get modelMessageClass() {
     return this.ctx.model.module(moduleInfo.relativeName).messageClass;
   }
@@ -136,4 +139,4 @@ module.exports = class MessageClass {
     }
     return channels;
   }
-};
+}

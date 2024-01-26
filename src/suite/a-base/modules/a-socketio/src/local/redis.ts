@@ -1,7 +1,10 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const __subVersion = 'sub3';
 const __keyUserIndex = 2;
 
-module.exports = class LocalRedis {
+@Local()
+export class LocalRedis extends BeanBase {
   constructor() {
     this._redis = null;
   }
@@ -115,4 +118,4 @@ module.exports = class LocalRedis {
     if (Object.keys(values).length === 0) return null;
     return values;
   }
-};
+}

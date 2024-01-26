@@ -1,3 +1,5 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 
 const ejs = require('@zhennann/ejs');
@@ -12,7 +14,8 @@ const UglifyJS = require('uglify-js');
 const less = require('less');
 const utils = require('../common/utils.js');
 
-module.exports = class Build {
+@Local()
+export class LocalBuild extends BeanBase {
   constructor(atomClass) {
     this.atomClass = utils.atomClass(atomClass);
     this.default = this.atomClass.module === 'a-cms';
@@ -1313,4 +1316,4 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     }
     return envs;
   }
-};
+}

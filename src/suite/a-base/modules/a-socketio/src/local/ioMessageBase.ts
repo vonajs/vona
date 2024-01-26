@@ -1,4 +1,7 @@
-module.exports = class IOMessageBase {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalIoMessageBase extends BeanBase {
   async onSessionId({ /* path,*/ message /* options*/ }) {
     const userIdFrom = message.userIdFrom;
     const userIdTo = message.userIdTo;
@@ -56,4 +59,4 @@ module.exports = class IOMessageBase {
     if (userIdFrom === userIdTo) return userIdFrom;
     return `${userIdFrom > userIdTo ? userIdFrom : userIdTo}:${userIdFrom < userIdTo ? userIdFrom : userIdTo}`;
   }
-};
+}

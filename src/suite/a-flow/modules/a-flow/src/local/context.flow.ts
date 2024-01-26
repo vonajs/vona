@@ -1,4 +1,7 @@
-module.exports = class ContextFlow {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalContextFlow extends BeanBase {
   constructor({ flowDef }) {
     this._flowDef = flowDef;
     this._flowDefContent = JSON.parse(this._flowDef.content);
@@ -24,4 +27,4 @@ module.exports = class ContextFlow {
   get utils() {
     return this._utils;
   }
-};
+}

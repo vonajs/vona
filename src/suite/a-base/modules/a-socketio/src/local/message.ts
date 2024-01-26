@@ -1,4 +1,7 @@
-module.exports = class MessageClass {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalMessage extends BeanBase {
   get modelMessage() {
     return this.ctx.model.module(moduleInfo.relativeName).message;
   }
@@ -131,7 +134,7 @@ module.exports = class MessageClass {
     const res = await this.ctx.model.query(sql);
     return count ? res[0]._count : res;
   }
-};
+}
 
 // async saveSyncs({ messageClass, message, groupUsers, persistence }) {
 //   // messageClassId

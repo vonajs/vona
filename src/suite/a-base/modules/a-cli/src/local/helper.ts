@@ -1,3 +1,5 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const Chalk = require('chalk');
 const TableClass = require('cli-table3');
 const Boxen = require('boxen');
@@ -5,7 +7,8 @@ const fse = require('fs-extra');
 const mparse = require('@cabloy/module-parse').default;
 const { ProcessHelper } = require('@cabloy/process-helper');
 
-module.exports = class Local {
+@Local()
+export class LocalHelper extends BeanBase {
   constructor(cli) {
     this.cli = cli;
     this.ProcessHelper = new ProcessHelper(this.cwd, this.console);
@@ -120,4 +123,4 @@ module.exports = class Local {
   async gitCommit({ cwd, message }) {
     return await this.ProcessHelper.gitCommit({ cwd, message });
   }
-};
+}

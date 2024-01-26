@@ -1,4 +1,7 @@
-module.exports = class Passport {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalPassport extends BeanBase {
   async authenticate({ module, providerName, providerScene, next }) {
     const providerFullName = `${module}:${providerName}`;
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({ module, providerName });
@@ -44,7 +47,7 @@ module.exports = class Passport {
     const authenticate = this.ctx.app.passport.authenticate(strategy, config);
     await authenticate(this.ctx, next || function () {});
   }
-};
+}
 
 async function _createProviderStrategy(ctx, authProvider, beanProvider) {
   // config

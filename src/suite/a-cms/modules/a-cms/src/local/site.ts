@@ -1,6 +1,9 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const fse = require('fs-extra');
 
-module.exports = class Site {
+@Local()
+export class LocalSite extends BeanBase {
   async getSite({ atomClass, language, options }) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getSite({ language, options });
@@ -183,4 +186,4 @@ module.exports = class Site {
     // default
     return null;
   }
-};
+}

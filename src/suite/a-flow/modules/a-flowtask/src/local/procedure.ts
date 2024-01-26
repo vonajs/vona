@@ -1,4 +1,7 @@
-module.exports = class Procedure {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalProcedure extends BeanBase {
   selectTasks({ iid, userIdWho, where, orders, page, count, history }) {
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
@@ -134,4 +137,4 @@ module.exports = class Procedure {
     // ok
     return _sql;
   }
-};
+}

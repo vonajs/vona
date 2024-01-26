@@ -1,8 +1,11 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const chalk = require('chalk');
 const Table = require('cli-table3');
 const eggBornUtils = require('egg-born-utils');
 
-module.exports = class Local {
+@Local()
+export class LocalToken extends BeanBase {
   async add({ name, host, clientID, clientSecret, log }) {
     // init file
     const { fileName, config } = await eggBornUtils.openAuthConfig.load();
@@ -69,4 +72,4 @@ module.exports = class Local {
     // ok
     return { fileName, config };
   }
-};
+}

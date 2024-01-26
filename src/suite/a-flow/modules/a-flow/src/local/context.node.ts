@@ -1,4 +1,7 @@
-module.exports = class ContextNode {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalContextNode extends BeanBase {
   // contextEdge maybe null
   constructor({ context, contextEdge, nodeDef }) {
     this.context = context;
@@ -20,4 +23,4 @@ module.exports = class ContextNode {
   get utils() {
     return this._utils;
   }
-};
+}

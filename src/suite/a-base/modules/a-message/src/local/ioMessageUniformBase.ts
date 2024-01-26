@@ -1,6 +1,9 @@
+import { Local, BeanBase } from '@cabloy/core';
+
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
-module.exports = class IOMessageUniformBase extends module.meta.class.IOMessageBase {
+@Local()
+export class LocalIoMessageUniformBase extends BeanBase {
   async onPublish({ /* path,*/ message, messageClass, options }) {
     // onPublish
     return await super.onPublish({ path: __PATH_MESSAGE_UNIFORM, message, messageClass, options });
@@ -105,4 +108,4 @@ module.exports = class IOMessageUniformBase extends module.meta.class.IOMessageB
       user,
     });
   }
-};
+}

@@ -1,4 +1,7 @@
-module.exports = class Render {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalRender extends BeanBase {
   async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }) {
     // atomClass
     const { key, atomClass, options } = await this.ctx.bean.atom._prepareKeyAndAtomAndAtomClass({
@@ -118,4 +121,4 @@ module.exports = class Render {
       });
     });
   }
-};
+}
