@@ -1,6 +1,5 @@
-const schemas = {};
 // category
-schemas.category = {
+const category = {
   type: 'object',
   properties: {
     categoryName: {
@@ -46,4 +45,4 @@ schemas.category = {
     },
   },
 };
-export default schemas;
+export default { category };

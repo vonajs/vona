@@ -4,7 +4,7 @@ const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Create extends BeanAtom0 {
   // create
-  async create({ atomClass, atomStage, roleIdOwner, item, options, createOptions, user }) {
+  async create({ atomClass, atomStage, roleIdOwner, item, options, createOptions, user }: any) {
     options = options || {};
     if (createOptions) {
       options.createOptions = createOptions;

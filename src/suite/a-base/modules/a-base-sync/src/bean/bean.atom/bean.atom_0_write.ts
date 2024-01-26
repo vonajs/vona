@@ -14,7 +14,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
     roleIdOwner,
     item,
     user,
-  }) {
+  }: any) {
     if (!keyOuter) {
       keyOuter = { atomId: 0, itemId: 0 };
     }

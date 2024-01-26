@@ -1,5 +1,4 @@
-const schemas = {};
-schemas.userChangeUserName = {
+const userChangeUserName = {
   type: 'object',
   properties: {
     userNameOld: {
@@ -17,4 +16,4 @@ schemas.userChangeUserName = {
     },
   },
 };
-export default schemas;
+export default { userChangeUserName };

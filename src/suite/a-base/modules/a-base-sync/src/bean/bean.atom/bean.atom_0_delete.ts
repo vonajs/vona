@@ -16,7 +16,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
   }
 
   // delete
-  async delete({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
+  async delete({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
     // atomClass
     const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,

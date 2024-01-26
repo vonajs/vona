@@ -4,7 +4,7 @@ const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Read extends BeanAtom0Import {
   // read
-  async read({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
+  async read({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
     // atomClass
     const { key, atom, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,

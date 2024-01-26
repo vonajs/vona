@@ -12,9 +12,9 @@ export class BeanUser1 extends BeanUser0 {
   }
 
   async add(
-    { disabled = 0, userName, realName, email, mobile, avatar, motto, locale, anonymous = 0 },
-    user,
-    returnKey,
+    { disabled = 0, userName, realName, email, mobile, avatar, motto, locale, anonymous = 0 }: any,
+    user?,
+    returnKey?,
   ) {
     // check if incomplete information
     let needCheck;
@@ -73,7 +73,7 @@ export class BeanUser1 extends BeanUser0 {
     return returnKey ? userKey : userKey.itemId;
   }
 
-  async exists({ userName, email, mobile }) {
+  async exists({ userName, email, mobile }: any) {
     userName = userName || '';
     email = email || '';
     mobile = mobile || '';

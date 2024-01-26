@@ -1,6 +1,5 @@
-const schemas = {};
 // userAdmin
-schemas.userAdmin = {
+const userAdmin = {
   type: 'object',
   properties: {
     // title
@@ -57,7 +56,7 @@ schemas.userAdmin = {
   },
 };
 // userAdminSearch
-schemas.userAdminSearch = {
+const userAdminSearch = {
   type: 'object',
   properties: {
     realName: {
@@ -78,4 +77,4 @@ schemas.userAdminSearch = {
     },
   },
 };
-export default schemas;
+export default { userAdmin, userAdminSearch };

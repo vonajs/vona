@@ -33,7 +33,7 @@ export class VersionInit extends BeanBase {
   // users
   async _initUsers(roleIds, options) {
     // users
-    const users = [];
+    const users: any[] = [];
     // user: root
     const userRoot = this.ctx.bean.util.extend({}, initData.users.root);
     userRoot.item.email = options.email;

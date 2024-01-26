@@ -1,6 +1,5 @@
-const schemas = {};
 // user
-schemas.user = {
+const user = {
   type: 'object',
   properties: {
     // title
@@ -58,4 +57,4 @@ schemas.user = {
     },
   },
 };
-export default schemas;
+export default { user };

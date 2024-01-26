@@ -128,7 +128,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   //   { roleName: 'cms-writer', action: 'read', scopeNames: 'authenticated' },
   //   { roleName: 'root', action: 'read', scopeNames: 'authenticated' },
   // ];
-  async addRoleRightBatch({ module, atomClassName, roleRights }) {
+  async addRoleRightBatch({ module, atomClassName, roleRights }: any) {
     // module
     module = module || this.moduleScope;
     // const _module = this.ctx.app.meta.modules[module];

@@ -3,7 +3,17 @@ import { BeanAtomSimple } from './bean.atom_simple.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtomSubmit extends BeanAtomSimple {
-  async submit({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
+  async submit({
+    key: keyOuter,
+    atomClass: atomClassOuter,
+    options: optionsOuter,
+    user,
+  }: {
+    key?;
+    atomClass?;
+    options?;
+    user?;
+  }) {
     // atomClass
     const {
       key,

@@ -7,6 +7,10 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
 export class BeanAjv extends BeanBase {
+  get Ajv() {
+    return Ajv;
+  }
+
   create({ options, keywords, schemas, schemaRoot }: { options?; keywords?; schemas?; schemaRoot? }) {
     // default
     const _options = {

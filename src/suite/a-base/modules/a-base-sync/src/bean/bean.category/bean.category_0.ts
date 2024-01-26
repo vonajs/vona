@@ -30,7 +30,25 @@ export class BeanCategory0 extends BeanBase {
     return await this.children({ atomClass, language, categoryId, categoryHidden, categoryFlag, user, count: 1 });
   }
 
-  async child({ atomClass, language, categoryId, categoryName, categoryHidden, categoryFlag, setLocale, user }) {
+  async child({
+    atomClass,
+    language,
+    categoryId,
+    categoryName,
+    categoryHidden,
+    categoryFlag,
+    setLocale,
+    user,
+  }: {
+    atomClass;
+    language?;
+    categoryId?;
+    categoryName?;
+    categoryHidden?;
+    categoryFlag?;
+    setLocale?;
+    user?;
+  }) {
     const list = await this.children({
       atomClass,
       language,
@@ -54,6 +72,16 @@ export class BeanCategory0 extends BeanBase {
     setLocale,
     count = 0,
     user,
+  }: {
+    atomClass;
+    language?;
+    categoryId?;
+    categoryName?;
+    categoryHidden?;
+    categoryFlag?;
+    setLocale?;
+    count?;
+    user?;
   }) {
     // categoryHidden
     categoryHidden = await this._checkRightForCategoryHidden({ categoryHidden, user });

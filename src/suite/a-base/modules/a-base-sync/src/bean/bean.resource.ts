@@ -51,7 +51,7 @@ export class BeanResource extends BeanModuleScopeBase {
     user,
     pageForce = false,
     count = 0,
-  }) {
+  }: any) {
     // atomClass
     atomClass = atomClass || __atomClass;
     // locale

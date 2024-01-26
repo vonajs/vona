@@ -4,6 +4,7 @@ export type TypeModuleMiddlewareRight =
   | { type: 'resource'; module?: string; name?: string };
 
 export interface IModuleMiddlewareValidate {
+  module?: string;
   validator?: string;
   schema?: string;
 }
@@ -35,9 +36,9 @@ export interface IModuleRouteMeta {
   gate?: IModuleMiddlewareGate;
 }
 export interface IModuleRoute {
-  method: 'get' | 'post';
-  path: string;
-  controller: string;
+  method: 'get' | 'post' | 'options';
+  path: string | RegExp;
+  controller?: string;
   action?: string;
   middlewares?: string | string[];
   meta?: IModuleRouteMeta;

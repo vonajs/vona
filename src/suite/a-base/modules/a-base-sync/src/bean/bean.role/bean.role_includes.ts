@@ -32,7 +32,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
   }
 
   // add role include
-  async addRoleInc({ roleAtomId, roleId, roleIdInc, user }) {
+  async addRoleInc({ roleAtomId, roleId, roleIdInc, user }: any) {
     // role
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;

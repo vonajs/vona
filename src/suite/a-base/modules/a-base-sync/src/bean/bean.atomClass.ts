@@ -14,7 +14,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     });
   }
 
-  async get({ id, module, atomClassName }) {
+  async get({ id, module, atomClassName }: any) {
     return await this.__getRaw({ id, module, atomClassName });
   }
 

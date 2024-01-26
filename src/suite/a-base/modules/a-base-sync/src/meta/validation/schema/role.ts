@@ -1,6 +1,5 @@
-const schemas = {};
 // role
-schemas.role = {
+const role = {
   type: 'object',
   properties: {
     // title
@@ -112,7 +111,7 @@ schemas.role = {
   },
 };
 // role search
-schemas.roleSearch = {
+const roleSearch = {
   type: 'object',
   properties: {
     roleTypeCode: {
@@ -126,4 +125,4 @@ schemas.roleSearch = {
     },
   },
 };
-export default schemas;
+export default { role, roleSearch };

@@ -1,6 +1,5 @@
-const schemas = {};
 // resource
-schemas.resource = {
+const resource = {
   type: 'object',
   properties: {
     // title
@@ -85,7 +84,7 @@ schemas.resource = {
   },
 };
 // resource search
-schemas.resourceSearch = {
+const resourceSearch = {
   type: 'object',
   properties: {
     resourceType: {
@@ -108,4 +107,4 @@ schemas.resourceSearch = {
     },
   },
 };
-export default schemas;
+export default { resource, resourceSearch };

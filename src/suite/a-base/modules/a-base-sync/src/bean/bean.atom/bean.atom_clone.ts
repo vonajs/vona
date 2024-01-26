@@ -4,7 +4,7 @@ import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtomClone extends BeanAtomStarLabel {
-  async clone({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, roleIdOwner, user }) {
+  async clone({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, roleIdOwner, user }: any) {
     // atomClass
     const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,

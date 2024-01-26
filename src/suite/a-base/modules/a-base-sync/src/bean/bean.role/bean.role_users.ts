@@ -55,7 +55,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
   }
 
   // add user role
-  async addUserRole({ roleAtomId, roleId, userAtomId, userId, user }) {
+  async addUserRole({ roleAtomId, roleId, userAtomId, userId, user }: any) {
     // role
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;
