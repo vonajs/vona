@@ -2,7 +2,7 @@ import { BeanBase } from '@cabloy/core';
 
 export class BeanCategory0 extends BeanBase {
   get model() {
-    return this.ctx.model.module().category;
+    return this.ctx.model.module(moduleInfo.relativeName).category;
   }
 
   async get({ categoryId, setLocale }) {
@@ -112,12 +112,12 @@ export class BeanCategory0 extends BeanBase {
     // check atoms
     const count = await this.ctx.bean.atom.modelAtom.count({ atomCategoryId: categoryId });
     if (count > 0) {
-      this.ctx.throw.module(, 1012);
+      this.ctx.throw.module(moduleInfo.relativeName, 1012);
     }
     // check children
     const children = await this.children({ categoryId });
     if (children.length > 0) {
-      this.ctx.throw.module(, 1013);
+      this.ctx.throw.module(moduleInfo.relativeName, 1013);
     }
 
     // category
@@ -230,10 +230,10 @@ export class BeanCategory0 extends BeanBase {
   async _register({ atomClass, language, categoryName, categoryIdParent }) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     return await this.ctx.meta.util.lock({
-      resource: `${}.category.register.${atomClass.id}`,
+      resource: `${moduleInfo.relativeName}.category.register.${atomClass.id}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: ,
+          beanModule: moduleInfo.relativeName,
           beanFullName: 'category',
           context: { atomClass, language, categoryName, categoryIdParent },
           fn: '_registerLock',

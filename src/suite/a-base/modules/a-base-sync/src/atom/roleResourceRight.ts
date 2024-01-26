@@ -6,7 +6,7 @@ import AtomBase from './bean.atomBase.js';
 @Atom()
 export class AtomRoleResourceRight extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module().resourceRole;
+    return this.ctx.model.module(moduleInfo.relativeName).resourceRole;
   }
 
   async default({ atomClass, item, options, user }) {

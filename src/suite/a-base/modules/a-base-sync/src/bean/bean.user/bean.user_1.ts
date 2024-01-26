@@ -1,7 +1,7 @@
 import { BeanUser0 } from './bean.user_0.js';
 
 const __atomClassUser = {
-  module: ,
+  module: moduleInfo.relativeName,
   atomClassName: 'user',
 };
 
@@ -27,7 +27,7 @@ export class BeanUser1 extends BeanUser0 {
     // if exists
     if (needCheck) {
       const res = await this.exists({ userName, email, mobile });
-      if (res) this.ctx.throw.module(, 1001);
+      if (res) this.ctx.throw.module(moduleInfo.relativeName, 1001);
     }
     if (!user) {
       user = { id: 0 };
@@ -64,7 +64,7 @@ export class BeanUser1 extends BeanUser0 {
     item.atomId = userKey.atomId;
     item.itemId = userKey.itemId;
     await this.ctx.bean.event.invoke({
-      module: ,
+      module: moduleInfo.relativeName,
       name: 'userAdd',
       data: { user: item },
     });
@@ -126,7 +126,7 @@ export class BeanUser1 extends BeanUser0 {
     let fields = await this.model.columns();
     if (removePrivacy) {
       fields = this.ctx.bean.util.extend({}, fields);
-      const privacyFields = this.ctx.config.module().user.privacyFields.split(',');
+      const privacyFields = this.ctx.config.module(moduleInfo.relativeName).user.privacyFields.split(',');
       for (const privacyField of privacyFields) {
         delete fields[privacyField];
       }

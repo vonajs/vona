@@ -15,7 +15,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
       }
     } else {
       atomClass = await this.ctx.bean.atomClass.get(atomClass);
-      if (!atomClass) this.ctx.throw.module(, 1002);
+      if (!atomClass) this.ctx.throw.module(moduleInfo.relativeName, 1002);
     }
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -59,7 +59,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
     let { key, atom } = await this._prepareKeyAndAtom_inner({ key: keyOuter, atomClass, atomClassBase });
     // check if empty
     if (!atom && throwWhenEmpty) {
-      this.ctx.throw.module(, 1002);
+      this.ctx.throw.module(moduleInfo.relativeName, 1002);
     }
     if (!atom) return { key, atom };
     // patch

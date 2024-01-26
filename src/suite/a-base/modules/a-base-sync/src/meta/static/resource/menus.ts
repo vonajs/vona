@@ -6,7 +6,7 @@ const resources = [
     atomCategoryId: 'a-base:menu.BasicProfile',
     resourceType: 'a-base:menu',
     resourceConfig: JSON.stringify({
-      module: ,
+      module: moduleInfo.relativeName,
       atomClassName: 'resource',
       atomAction: 'read',
     }),

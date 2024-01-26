@@ -7,7 +7,7 @@ const comment = {
         params: {
           module: 'a-message',
           name: 'message',
-          nameSub: `${}_comment`,
+          nameSub: `${moduleInfo.relativeName}_comment`,
         },
         color: 'red',
       },

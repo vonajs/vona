@@ -8,7 +8,7 @@ const __atomClassDict = {
 export class BeanAtomStateDynamic extends BeanAtomStateStatic {
   // status
   get beanStatus() {
-    return this.ctx.bean.status.module();
+    return this.ctx.bean.status.module(moduleInfo.relativeName);
   }
 
   async dynamic_getDictKeyInfo({ atomClass }) {

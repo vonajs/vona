@@ -1,30 +1,30 @@
 import { BeanBase } from '@cabloy/core';
 
 const __atomClassRole = {
-  module: ,
+  module: moduleInfo.relativeName,
   atomClassName: 'role',
 };
 const __atomClassUser = {
-  module: ,
+  module: moduleInfo.relativeName,
   atomClassName: 'user',
 };
 
 export class VersionUpdate extends BeanBase {
   get modelRole() {
-    return this.ctx.model.module().role;
+    return this.ctx.model.module(moduleInfo.relativeName).role;
   }
   get modelUser() {
-    return this.ctx.model.module().user;
+    return this.ctx.model.module(moduleInfo.relativeName).user;
   }
 
-  async run() {
+  async run(options) {
     // adjustRoles
-    await this._adjustRoles();
+    await this._adjustRoles(options);
     // adjustUsers
-    await this._adjustUsers();
+    await this._adjustUsers(options);
   }
 
-  async _adjustRoles() {
+  async _adjustRoles(options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
@@ -38,7 +38,7 @@ export class VersionUpdate extends BeanBase {
     }
   }
 
-  async _adjustUsers() {
+  async _adjustUsers(options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
@@ -63,7 +63,7 @@ export class VersionUpdate extends BeanBase {
         atomClass: __atomClassRole,
         item: {
           itemId: roleId,
-          atomStaticKey: `${}:role_${roleName}`,
+          atomStaticKey: `${moduleInfo.relativeName}:role_${roleName}`,
           catalog: role.catalog,
           system: role.system,
           roleIdParent: role.roleIdParent,

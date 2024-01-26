@@ -4,7 +4,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 export class StatsDraftsFlowing extends BeanBase {
   async execute(context) {
     const { user } = context;
-    const modelAtom = this.ctx.model.module().atom;
+    const modelAtom = this.ctx.model.module(moduleInfo.relativeName).atom;
     const count = await modelAtom.count({
       userIdUpdated: user.id,
       atomStage: 0,

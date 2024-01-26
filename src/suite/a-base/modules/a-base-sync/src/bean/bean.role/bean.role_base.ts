@@ -3,33 +3,33 @@ import { BeanModuleScopeBase } from '@cabloy/core';
 import initData15 from '../version.manager/init/initData15.js';
 
 const __atomClassRole = {
-  module: ,
+  module: moduleInfo.relativeName,
   atomClassName: 'role',
 };
 
 export class BeanRoleBase extends BeanModuleScopeBase {
   get model() {
-    return this.ctx.model.module().role;
+    return this.ctx.model.module(moduleInfo.relativeName).role;
   }
 
   get modelRoleInc() {
-    return this.ctx.model.module().roleInc;
+    return this.ctx.model.module(moduleInfo.relativeName).roleInc;
   }
 
   get modelUserRole() {
-    return this.ctx.model.module().userRole;
+    return this.ctx.model.module(moduleInfo.relativeName).userRole;
   }
 
   get modelRoleRight() {
-    return this.ctx.model.module().roleRight;
+    return this.ctx.model.module(moduleInfo.relativeName).roleRight;
   }
 
   get modelRoleRightRef() {
-    return this.ctx.model.module().roleRightRef;
+    return this.ctx.model.module(moduleInfo.relativeName).roleRightRef;
   }
 
   get modelAtom() {
-    return this.ctx.model.module().atom;
+    return this.ctx.model.module(moduleInfo.relativeName).atom;
   }
 
   async get(where) {
@@ -136,7 +136,7 @@ export class BeanRoleBase extends BeanModuleScopeBase {
     // special check 'authenticated.builtIn'
     if (!role && roleName === 'authenticated.builtIn') {
       await this._initSystemRoles({
-        module: ,
+        module: moduleInfo.relativeName,
         rolesData: initData15.roles,
       });
       return await this._parseRoleName_general({ roleName });
@@ -328,10 +328,10 @@ export class BeanRoleBase extends BeanModuleScopeBase {
 
   async _register({ roleName, roleIdParent }) {
     return await this.ctx.meta.util.lock({
-      resource: `${}.role.register`,
+      resource: `${moduleInfo.relativeName}.role.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: ,
+          beanModule: moduleInfo.relativeName,
           beanFullName: 'role',
           context: { roleName, roleIdParent },
           fn: '_registerLock',

@@ -6,7 +6,7 @@ export class MiddlewareHttpLog extends BeanBase {
     await next();
 
     // check if log
-    const _config = this.ctx.config.module();
+    const _config = this.ctx.config.module(moduleInfo.relativeName);
     if (!_config.httpLog) return;
 
     //

@@ -3,22 +3,22 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 let __atomClassesResource = null;
 
 const __atomClass = {
-  module: ,
+  module: moduleInfo.relativeName,
   atomClassName: 'resource',
 };
 
 @Bean()
 export class BeanResource extends BeanModuleScopeBase {
   get model() {
-    return this.ctx.model.module().resource;
+    return this.ctx.model.module(moduleInfo.relativeName).resource;
   }
 
   get modelResourceLocale() {
-    return this.ctx.model.module().resourceLocale;
+    return this.ctx.model.module(moduleInfo.relativeName).resourceLocale;
   }
 
   get modelResourceRole() {
-    return this.ctx.model.module().resourceRole;
+    return this.ctx.model.module(moduleInfo.relativeName).resourceRole;
   }
 
   get sqlProcedure() {
@@ -124,7 +124,7 @@ export class BeanResource extends BeanModuleScopeBase {
     // select
     const items = await this.modelResourceLocale.select({ where: { atomId } });
     // setLocales
-    const locales = this.ctx.config.module().locales;
+    const locales = this.ctx.config.module(moduleInfo.relativeName).locales;
     for (const locale in locales) {
       const atomNameLocale = this.ctx.text.locale(locale, atomName);
       const item = items.find(_item => _item.locale === locale);
@@ -147,7 +147,7 @@ export class BeanResource extends BeanModuleScopeBase {
 
   async checkLocales() {
     // setLocales
-    const locales = this.ctx.config.module().locales;
+    const locales = this.ctx.config.module(moduleInfo.relativeName).locales;
     for (const locale in locales) {
       await this._checkLocale({ locale });
     }

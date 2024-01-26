@@ -123,7 +123,7 @@ export class BeanAuth extends BeanBase {
 
   _getAccount() {
     // account
-    const account = this.ctx.bean.util.extend({}, this.ctx.config.module().account);
+    const account = this.ctx.bean.util.extend({}, this.ctx.config.module(moduleInfo.relativeName).account);
     account.activatedRoles = undefined;
     // url
     for (const key in account.activationProviders) {

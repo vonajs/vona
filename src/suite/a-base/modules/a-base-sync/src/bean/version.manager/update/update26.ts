@@ -2,10 +2,10 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   get modelRoleRight() {
-    return this.ctx.model.module().roleRight;
+    return this.ctx.model.module(moduleInfo.relativeName).roleRight;
   }
 
-  async run() {
+  async run(options) {
     // aRoleRight: add roleAtomId
     const sql = `
         ALTER TABLE aRoleRight
@@ -13,10 +13,10 @@ export class VersionUpdate extends BeanBase {
                   `;
     await this.ctx.model.query(sql);
     // adjustRoleRights
-    await this._adjustRoleRights();
+    await this._adjustRoleRights(options);
   }
 
-  async _adjustRoleRights() {
+  async _adjustRoleRights(options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {

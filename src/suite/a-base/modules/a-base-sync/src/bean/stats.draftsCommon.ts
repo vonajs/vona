@@ -32,7 +32,7 @@ export class StatsDraftsCommon extends BeanBase {
       params.atomClassId = atomClass.id;
     }
     // count
-    const modelAtom = this.ctx.model.module().atom;
+    const modelAtom = this.ctx.model.module(moduleInfo.relativeName).atom;
     const count = await modelAtom.count(params);
     return count;
   }

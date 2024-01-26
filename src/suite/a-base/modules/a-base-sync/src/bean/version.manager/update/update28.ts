@@ -1,9 +1,8 @@
 import { BeanBase } from '@cabloy/core';
-import { __ThisModule__ } from '../../../resource/this.js';
 
 export class VersionUpdate extends BeanBase {
   get modelResourceRole() {
-    return this.ctx.model.module(__ThisModule__).resourceRole;
+    return this.ctx.model.module(moduleInfo.relativeName).resourceRole;
   }
 
   async run(options) {
@@ -14,10 +13,10 @@ export class VersionUpdate extends BeanBase {
                   `;
     await this.ctx.model.query(sql);
     // adjustRoleRights
-    await this._adjustResourceRoles();
+    await this._adjustResourceRoles(options);
   }
 
-  async _adjustResourceRoles() {
+  async _adjustResourceRoles(options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {

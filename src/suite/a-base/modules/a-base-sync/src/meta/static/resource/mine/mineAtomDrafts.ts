@@ -11,7 +11,7 @@ const resource = {
     actionPath,
     stats: {
       params: {
-        module: ,
+        module: moduleInfo.relativeName,
         name: 'drafts',
       },
       color: 'orange',

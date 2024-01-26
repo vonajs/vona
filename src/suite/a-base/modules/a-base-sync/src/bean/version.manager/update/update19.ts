@@ -7,7 +7,7 @@ const __atomClassResource = {
 
 export class VersionUpdate extends BeanBase {
   get modelAtom() {
-    return this.ctx.model.module().atom;
+    return this.ctx.model.module(moduleInfo.relativeName).atom;
   }
 
   async run() {

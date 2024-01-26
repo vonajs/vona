@@ -1,7 +1,7 @@
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run() {
+  async run(options) {
     // aAtomClass: add atomClassInner
     const sql = `
         ALTER TABLE aAtomClass
