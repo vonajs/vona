@@ -69,6 +69,77 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
+//
+async function _moduleHandle_local({ file, module, processHelper }) {
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  //
+  const classPath = path.basename(file).replace('.ts', '');
+  const classNameNew = classPathToClassName('Local', classPath);
+  // console.log(classNameNew);
+  // 1. 查看是否需要转换export class
+  let needLog = false;
+  const matchExport = contentOld.match(/export class /);
+  if (!matchExport) {
+    needLog = true;
+    // 解析内容
+    const contentMatches = contentOld.match(/([\s\S\n]*)module\.exports = class ([\S]*?) [\s\S\n]*?\{([\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', file);
+      process.exit(0);
+    }
+    // console.log(contentMatches);
+    const contentNew = `
+import { Local, BeanBase } from '@cabloy/core';
+
+${contentMatches[1]}
+
+@Local()
+export class ${classNameNew} extends BeanBase {
+${contentMatches[3]}
+  `;
+    // console.log(contentNew);
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
+  }
+  // 2. 查看是否需要在resource/locals中添加记录
+  const fileLocals = `${module.root}/src/resource/locals.ts`;
+  let contentLocals = (await fse.readFile(fileLocals)).toString();
+  if (contentLocals.indexOf(`{ ${classNameNew} }`) === -1) {
+    needLog = true;
+    if (contentLocals.indexOf('import') === -1) {
+      // the first
+      contentLocals = `
+export * from '../local/${classPath}.js';
+
+import { ${classNameNew} } from '../local/${classPath}.js';
+
+export interface IModuleLocal {
+  '${classPath}': ${classNameNew};
+}
+      `;
+    } else {
+      contentLocals = contentLocals
+        .replace('export * from', `export * from '../local/${classPath}.js';\nexport * from`)
+        .replace('import {', `import { ${classNameNew} } from '../local/${classPath}.js';\nimport {`)
+        .replace(
+          'export interface IModuleLocal {',
+          `export interface IModuleLocal {\n  '${classPath}': ${classNameNew};`,
+        );
+    }
+    // console.log(contentLocals);
+    await fse.outputFile(fileLocals, contentLocals);
+    await processHelper.formatFile({ fileName: fileLocals });
+  }
+  // 3. log
+  if (needLog) {
+    console.log('--------: ', file);
+  }
+}
+
 async function _moduleHandle_model({ module, processHelper }) {
   const file = `${module.root}/src/resource/models.ts`;
   if (!fse.existsSync(file)) {
