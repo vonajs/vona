@@ -11,7 +11,7 @@ import rimraf from 'mz-modules/rimraf';
 import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })
-export class CliStoreSync extends BeanBase {
+export class CliStoreSync extends CliStoreBase {
   constructor(options) {
     super(options, 'sync');
   }

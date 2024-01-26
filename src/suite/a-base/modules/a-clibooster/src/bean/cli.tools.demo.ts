@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.tools' })
-export class CliToolsDemo extends BeanBase {
+export class CliToolsDemo extends BeanCliBase {
   get localUtils() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).utils;
   }

@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 import path from 'path';
 import fse from 'fs-extra';
@@ -7,7 +8,7 @@ import bb from 'bluebird';
 import xml2js from 'xml2js';
 
 @Bean({ scene: 'cli.tools' })
-export class CliToolsIcons extends BeanBase {
+export class CliToolsIcons extends BeanCliBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super

@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.token' })
-export class CliTokenDelete extends BeanBase {
+export class CliTokenDelete extends BeanCliBase {
   get localToken() {
     return this.ctx.bean.local.module('a-authopen').token;
   }

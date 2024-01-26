@@ -1,9 +1,10 @@
 import eggBornUtils from 'egg-born-utils';
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';
 
-export default class CliStoreBase extends module.meta.class.CliBase {
+export default class CliStoreBase extends BeanCliBase {
   constructor(options, commandName) {
     super(options);
     this.commandName = commandName;

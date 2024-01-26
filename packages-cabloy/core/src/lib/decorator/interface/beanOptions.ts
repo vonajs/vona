@@ -24,7 +24,14 @@ export type TypeDecoratorBeanOptionsScene =
   | 'flow.node'
   | 'flow.behavior'
   | 'flow.service'
-  | 'auth.provider';
+  | 'auth.provider'
+  | 'cli.create'
+  | 'cli.default'
+  | 'cli.front'
+  | 'cli.git'
+  | 'cli.store'
+  | 'cli.token'
+  | 'cli.tools';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name

@@ -1,8 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase, Virtual } from '@cabloy/core';
 
 import eggBornUtils from 'egg-born-utils';
 
-@Bean()
+@Virtual({ scene: 'bean' })
 export class BeanCliBase extends BeanBase {
   constructor(options) {
     this.options = options;

@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 import path from 'path';
 
@@ -7,7 +8,7 @@ import UglifyJS from 'uglify-js';
 import fse from 'fs-extra';
 
 @Bean({ scene: 'cli.tools' })
-export class CliToolsBabel extends BeanBase {
+export class CliToolsBabel extends BeanCliBase {
   async execute({ user }) {
     const { cwd, argv } = this.context;
     // super

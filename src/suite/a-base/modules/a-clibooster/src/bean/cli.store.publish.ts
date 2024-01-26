@@ -10,7 +10,7 @@ import eggBornUtils from 'egg-born-utils';
 import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })
-export class CliStorePublish extends BeanBase {
+export class CliStorePublish extends CliStoreBase {
   constructor(options) {
     super(options, 'publish');
   }

@@ -1,10 +1,11 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 import fs from 'fs';
 import path from 'path';
 
 @Bean({ scene: 'cli.create' })
-export class CliCreateModule extends BeanBase {
+export class CliCreateModule extends BeanCliBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
