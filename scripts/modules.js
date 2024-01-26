@@ -38,9 +38,10 @@ async function main() {
 }
 
 async function _moduleHandle_main({ file, module, processHelper }) {
-  const contentOld = (await fse.readFile(file)).toString();
-  if (contentOld.indexOf('=>') === -1) return;
+  // const contentOld = (await fse.readFile(file)).toString();
+  // if (contentOld.indexOf('=>') === -1) return;
   console.log(file);
+  await fse.remove(file);
 }
 
 async function _moduleHandle({ module, processHelper }) {
