@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanRoleAtomRights } from './bean.role_atomRights.js';
 
 export class BeanRoleBuild extends BeanRoleAtomRights {

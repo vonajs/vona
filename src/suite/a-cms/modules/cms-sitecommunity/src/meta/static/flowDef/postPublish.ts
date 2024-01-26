@@ -1,3 +1,5 @@
+import { __ThisModule__ } from '../../../resource/this.js';
+
 const content = {
   listener: null,
   process: {

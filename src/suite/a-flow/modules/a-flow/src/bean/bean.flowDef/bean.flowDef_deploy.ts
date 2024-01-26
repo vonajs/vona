@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
 
 export class BeanFlowDefDeploy extends BeanFlowDef0 {

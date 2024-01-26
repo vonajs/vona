@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFieldsParseSchema } from './bean.fields_parseSchema.js';
 
 const __atomClass_userFieldsRight = {

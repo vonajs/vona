@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 
 const mparse = require('@cabloy/module-parse').default;

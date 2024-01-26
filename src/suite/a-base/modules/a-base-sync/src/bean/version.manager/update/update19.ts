@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 const __atomClassResource = {

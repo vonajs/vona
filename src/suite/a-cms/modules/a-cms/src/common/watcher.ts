@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import path from 'path';
 import fse from 'fs-extra';
 import chokidar from 'chokidar';

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 const _cacheMessageClasses = {};

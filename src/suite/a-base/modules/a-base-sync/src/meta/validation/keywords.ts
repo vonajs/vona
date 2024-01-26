@@ -4,7 +4,7 @@ keywords.exists = {
   type: 'string',
   errors: true,
   compile() {
-    return async function (data, path, rootData, name) {
+    return async function (data, _path, _rootData, name) {
       const ctx = this;
       const res = await ctx.bean.user.exists({ [name]: data });
       if (res && (!ctx.state.user || res.id !== ctx.state.user.agent.id)) {

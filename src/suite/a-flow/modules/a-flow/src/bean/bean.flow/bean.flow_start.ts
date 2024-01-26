@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowQuery } from './bean.flow_query.js';
 
 export class BeanFlowStart extends BeanFlowQuery {

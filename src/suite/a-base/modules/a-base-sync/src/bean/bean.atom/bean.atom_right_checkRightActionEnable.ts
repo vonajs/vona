@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 
 export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRightActionBulk {

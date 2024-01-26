@@ -1,4 +1,6 @@
-const tableNameDefault = function ({ ctx, action }) {
+import { __ThisModule__ } from '../../../resource/this.js';
+
+const tableNameDefault = function ({ action }) {
   if (action === 'read' || action === 'select') {
     return `
       (select 

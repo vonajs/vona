@@ -1,7 +1,7 @@
 import { BeanBase } from '@cabloy/core';
 
 export class VersionInit extends BeanBase {
-  async run(options) {
+  async run(_options) {
     // add role:template to authenticated
     // add role:system to template
     const items = [

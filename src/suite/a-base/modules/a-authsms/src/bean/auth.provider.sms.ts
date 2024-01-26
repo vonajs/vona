@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { Bean } from '@cabloy/core';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 

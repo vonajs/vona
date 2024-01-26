@@ -30,7 +30,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
     return item;
   }
 
-  async _read_handleTranslate({ item, atomClass, options, user }) {
+  async _read_handleTranslate({ item, atomClass, options: _options, user: _user }) {
     // atomClass
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // patchAtomClassInfo
@@ -53,7 +53,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
     this._atomNameLocaleTranslate({ item, atomClassBase });
   }
 
-  async _readValidate({ /* atomClass, */ item, options, user }) {
+  async _readValidate({ /* atomClass,*/ item, options, user: _user }) {
     // schema/tableName: see also: _prepare_fieldsRight
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') === -1) return item;
     // validate

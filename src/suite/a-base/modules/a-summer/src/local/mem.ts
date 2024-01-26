@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from './cacheBase.js';
 import { Local } from '@cabloy/core';

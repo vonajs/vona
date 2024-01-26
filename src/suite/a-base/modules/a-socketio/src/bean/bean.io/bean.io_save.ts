@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoPush } from './bean.io_push.js';
 
 export class BeanIoSave extends BeanIoPush {

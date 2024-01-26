@@ -1,7 +1,7 @@
 import { BeanAtomBaseExportBulk } from './bean.atomBase_exportBulk.js';
 
 export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
-  async performAction({ key, atomClass, action, item, options, user }) {
+  async performAction({ key, atomClass, action, item, options: _options, user }) {
     // actionBase
     const actionBase = this.ctx.bean.base.action({
       module: atomClass.module,

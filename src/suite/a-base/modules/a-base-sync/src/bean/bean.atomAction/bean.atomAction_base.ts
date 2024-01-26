@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanAtomActionBase extends BeanModuleScopeBase {

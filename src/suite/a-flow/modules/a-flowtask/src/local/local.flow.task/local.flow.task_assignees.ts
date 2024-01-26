@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskAppendHandleRemark } from './local.flow.task_appendHandleRemark.js';
 
 export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {

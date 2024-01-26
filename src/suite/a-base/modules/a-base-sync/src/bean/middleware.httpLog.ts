@@ -1,8 +1,9 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'middleware' })
 export class MiddlewareHttpLog extends BeanBase {
-  async execute(options, next) {
+  async execute(_options, next) {
     await next();
 
     // check if log

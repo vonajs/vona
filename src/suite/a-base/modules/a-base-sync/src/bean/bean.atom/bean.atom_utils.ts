@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
 export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {

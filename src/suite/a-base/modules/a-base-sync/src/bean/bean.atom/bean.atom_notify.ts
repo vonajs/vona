@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomSubmit } from './bean.atom_submit.js';
 
 export class BeanAtomNotify extends BeanAtomSubmit {

@@ -9,7 +9,7 @@ export class BeanAtomLineNo extends BeanAtomUtils {
     return await this._moveLineNo({ key, atomClass, options, user, direction: 'down' });
   }
 
-  async _moveLineNo({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user, direction }) {
+  async _moveLineNo({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user: _user, direction }) {
     // atomClass
     const {
       /* key,*/

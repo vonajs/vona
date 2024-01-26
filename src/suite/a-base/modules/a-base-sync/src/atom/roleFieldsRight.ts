@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 

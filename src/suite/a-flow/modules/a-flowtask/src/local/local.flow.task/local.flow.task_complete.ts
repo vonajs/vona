@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskClaim } from './local.flow.task_claim.js';
 
 export class LocalFlowTaskComplete extends LocalFlowTaskClaim {

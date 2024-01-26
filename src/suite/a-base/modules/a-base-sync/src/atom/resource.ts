@@ -76,7 +76,7 @@ export class AtomResource extends BeanAtomBase {
     });
   }
 
-  _getMeta(options, item, showSorting) {
+  _getMeta(_options, item, showSorting) {
     // resourceTypes
     const resourceTypes = this.ctx.bean.base.resourceTypes();
     const resourceType = resourceTypes[item.resourceType];

@@ -16,7 +16,7 @@ export class LocalComment extends BeanBase {
     return await this.ctx.model.query(sql, [this.ctx.instance.id, user.id]);
   }
 
-  async count({ key, options, user }) {
+  async count({ key, options, user: _user }) {
     const _options = this._adjuctOptions({ key, options });
     // sql
     const _where = this.ctx.model._where(_options.where);

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 
 export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {

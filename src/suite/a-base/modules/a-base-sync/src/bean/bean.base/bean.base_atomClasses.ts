@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseActions } from './bean.base_actions.js';
 
 const _atomClasses = {};
@@ -59,7 +60,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     return this.ctx.constant.module(__ThisModule__).atomClass.meta;
   }
 
-  _prepareAtomClassesModule(module, _atoms) {
+  _prepareAtomClassesModule(_module, _atoms) {
     const atomClasses = {};
     for (const key in _atoms) {
       const _atomClass = _atoms[key].info;

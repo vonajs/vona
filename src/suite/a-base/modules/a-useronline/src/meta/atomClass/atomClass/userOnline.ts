@@ -1,3 +1,5 @@
+import { __ThisModule__ } from '../../../resource/this.js';
+
 export default {
   info: {
     bean: 'userOnline',

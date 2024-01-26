@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import path from 'path';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 

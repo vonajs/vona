@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 
 export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {

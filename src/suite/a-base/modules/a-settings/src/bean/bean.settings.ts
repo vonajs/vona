@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 import constants from '../config/constants.js';

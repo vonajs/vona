@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { Update4 } from './update_4.js';
 
 import utils from '../../common/utils.js';

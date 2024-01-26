@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoDelivery } from './bean.io_delivery.js';
 
 export class BeanIoPublish extends BeanIoDelivery {

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanRoleResourceRights } from './bean.role_resourceRights.js';
 
 const __atomClassRole = {

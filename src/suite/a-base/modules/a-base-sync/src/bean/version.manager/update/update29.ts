@@ -1,7 +1,7 @@
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run(options) {
+  async run(_options) {
     // aRoleFieldsRight
     let sql = `
         CREATE TABLE aRoleFieldsRight (

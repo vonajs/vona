@@ -1,3 +1,5 @@
+import { __ThisModule__ } from '../../../resource/this.js';
+
 const tableNameDefault = function ({ ctx, action }) {
   const locale = ctx.locale;
   if (action === 'read' || action === 'select') {

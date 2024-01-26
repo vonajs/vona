@@ -58,7 +58,7 @@ export class AtomRoleRightSpread extends BeanAtomBase {
     throw new Error(403);
   }
 
-  _getMeta(item, options) {
+  _getMeta(item, _options) {
     if (item.scope) {
       item.scope = JSON.parse(item.scope);
     }

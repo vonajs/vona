@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanUser0 } from './bean.user_0.js';
 
 const __atomClassUser = {

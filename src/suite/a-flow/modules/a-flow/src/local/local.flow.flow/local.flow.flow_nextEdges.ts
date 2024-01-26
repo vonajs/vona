@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowFlowEndFlow } from './local.flow.flow_endFlow.js';
 
 export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {

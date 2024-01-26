@@ -4,7 +4,7 @@ const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Delete extends BeanAtom0Default {
   // deleteBulk
-  async deleteBulk({ atomClass, keys, options, user }) {
+  async deleteBulk({ atomClass, keys, options: _options, user }) {
     const resKeys = [];
     for (const key of keys) {
       const res = await this._deleteBulk_item({ atomClass, key, user });

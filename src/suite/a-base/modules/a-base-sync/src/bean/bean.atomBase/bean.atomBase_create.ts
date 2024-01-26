@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase1 } from './bean.atomBase_1.js';
 
 const __create_atom_basic_fields = [
@@ -57,7 +58,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     return data;
   }
 
-  async _create_prepareItemOnly_userIdCreated({ data, atomClassBase, item, options, user }) {
+  async _create_prepareItemOnly_userIdCreated({ data, atomClassBase, item, options: _options, user }) {
     const userIdCreatedField = atomClassBase.fields?.mappings?.userIdCreated;
     if (!userIdCreatedField) return;
     if (item[userIdCreatedField]) {
@@ -67,7 +68,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareDetail_atomIdMain({ data, atomClassBase, item, options, user }) {
+  async _create_prepareDetail_atomIdMain({ data, atomClassBase, item, options, user: _user }) {
     // atomIdMain
     const atomIdMainField = atomClassBase.fields?.mappings?.atomIdMain;
     if (item[atomIdMainField]) {
@@ -119,7 +120,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     return data;
   }
 
-  async _create_prepareItem_atomName({ atomClassBase, atomClass, data, options, user }) {
+  async _create_prepareItem_atomName({ atomClassBase, atomClass, data, options: _options, user: _user }) {
     // atomName
     if (data.atomName) return;
     // sequence
@@ -140,13 +141,13 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     data.atomName = `${atomName}-${draftId}`;
   }
 
-  async _create_prepareItem_atomStaticKey({ data, options, user }) {
+  async _create_prepareItem_atomStaticKey({ data, options: _options, user: _user }) {
     if (!data.atomStaticKey) {
       data.atomStaticKey = this.ctx.bean.util.uuidv4();
     }
   }
 
-  async _create_prepareItem_atomSimple({ atomClassBase, data, options, user }) {
+  async _create_prepareItem_atomSimple({ atomClassBase, data, options: _options, user: _user }) {
     if (atomClassBase.simple) {
       data.atomSimple = 1;
       data.atomStage = 1;
@@ -181,7 +182,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     data.roleIdOwner = roleId;
   }
 
-  async _create_prepareItem_atomCategoryId({ atomClass, data, options, user }) {
+  async _create_prepareItem_atomCategoryId({ atomClass, data, options: _options, user: _user }) {
     if (data.atomCategoryId && typeof data.atomCategoryId === 'string') {
       const category = await this.ctx.bean.category.parseCategoryName({
         atomClass,
@@ -196,7 +197,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareDetail_detailLineNo({ atomClassBase, options, user }) {
+  async _create_prepareDetail_detailLineNo({ atomClassBase, options, user: _user }) {
     if (!atomClassBase.detail) return null;
     // field lineNo
     const fieldNameLineNo = atomClassBase.fields?.mappings?.lineNo;

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
 
 const mparse = require('@cabloy/module-parse').default;
@@ -165,7 +166,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     await this.modelAtom.update(data);
   }
 
-  _copy_prepareDestItem_itemOnly({ /* target,*/ srcItem, user }) {
+  _copy_prepareDestItem_itemOnly({ /* target,*/ srcItem, user: _user }) {
     // destItem
     const destItem = Object.assign({}, srcItem, {
       // atomId: destKey.atomId,

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { Init12 } from './init_12.js';
 
 export class Test extends Init12 {

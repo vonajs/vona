@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { BeanModuleScopeBase, Local } from '@cabloy/core';
 
 @Local()

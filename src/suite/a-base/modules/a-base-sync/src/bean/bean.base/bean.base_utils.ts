@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseThemes } from './bean.base_themes.js';
 
 import path from 'path';

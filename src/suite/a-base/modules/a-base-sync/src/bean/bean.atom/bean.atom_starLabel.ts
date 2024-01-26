@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Write } from './bean.atom_0_write.js';
 
 export class BeanAtomStarLabel extends BeanAtom0Write {

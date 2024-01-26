@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import eggBornUtils from 'egg-born-utils';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 

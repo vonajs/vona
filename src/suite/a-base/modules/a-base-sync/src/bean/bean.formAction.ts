@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
 export class BeanFormAction extends BeanBase {
-  async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user, throwError }) {
+  async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user: _user, throwError }) {
     // read
     const modeRead = mode === 'view' || mode === 'read';
     // actionBase

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseLocaleModules } from './bean.base_localeModules.js';
 
 const _locales = {};

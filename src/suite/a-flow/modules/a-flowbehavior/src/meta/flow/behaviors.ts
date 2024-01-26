@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import defaults from './defaults.js';
 
 const behaviors = {

@@ -1,3 +1,5 @@
+import { __ThisModule__ } from '../../../../resource/this.js';
+
 // actionPath
 const actionPath = '/a/basefront/atom/draftTabs';
 // resource

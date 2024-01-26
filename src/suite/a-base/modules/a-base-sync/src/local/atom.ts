@@ -22,7 +22,7 @@ export class LocalAtom extends BeanBase {
     return await this.ctx.bean.atom.create({ atomClass, roleIdOwner, item, options, user });
   }
 
-  async atomClass({ key, user }) {
+  async atomClass({ key, user: _user }) {
     const atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
     return {
       id: atomClass.id,

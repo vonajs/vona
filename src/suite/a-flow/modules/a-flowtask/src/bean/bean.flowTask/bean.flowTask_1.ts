@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowTask0 } from './bean.flowTask_0.js';
 
 export class BeanFlowTask1 extends BeanFlowTask0 {

@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase, Virtual } from '@cabloy/core';
 
 import eggBornUtils from 'egg-born-utils';

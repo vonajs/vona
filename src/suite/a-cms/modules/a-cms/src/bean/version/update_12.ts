@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { Update11 } from './update_11.js';
 
 export class Update12 extends Update11 {

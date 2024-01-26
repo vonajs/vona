@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanAtom0 extends BeanModuleScopeBase {
@@ -67,7 +68,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     });
   }
 
-  async readCount({ key, atom: { readCount = 1 }, user }) {
+  async readCount({ key, atom: { readCount = 1 }, user: _user }) {
     await this.modelAtom.query('update aAtom set readCount = readCount + ? where iid=? and id=?', [
       readCount,
       this.ctx.instance.id,

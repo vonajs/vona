@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
 import initData15 from '../version.manager/init/initData15.js';

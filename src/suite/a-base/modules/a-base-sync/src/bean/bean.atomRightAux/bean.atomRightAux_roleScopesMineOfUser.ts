@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightAuxRoleScopesOfRole } from './bean.atomRightAux_roleScopesOfRole.js';
 
 export class BeanAtomRightAuxRoleScopesMineOfUser extends BeanAtomRightAuxRoleScopesOfRole {

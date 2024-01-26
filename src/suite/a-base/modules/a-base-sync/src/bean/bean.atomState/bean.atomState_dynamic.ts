@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomStateStatic } from './bean.atomState_static.js';
 
 const __atomClassDict = {

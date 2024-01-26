@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'middleware' })
 export class MiddlewareTransaction extends BeanBase {
-  async execute(options, next) {
+  async execute(_options, next) {
     await this.ctx.transaction.begin(async () => {
       // next
       await next();

@@ -37,7 +37,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     });
   }
 
-  async __checkRightActionBulk_fetchActions_fromMeta({ atomClass, /* atomClassBase,*/ action, user, bulk }) {
+  async __checkRightActionBulk_fetchActions_fromMeta({ atomClass, /* atomClassBase,*/ action, user: _user, bulk }) {
     // meta
     const _module = this.ctx.app.meta.modules[atomClass.module];
     const metaAtomClass = _module.main.meta.base.atoms[atomClass.atomClassName];

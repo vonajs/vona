@@ -10,7 +10,7 @@ export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
     await this._delete_detail({ atomClassBase, atomClass, key, options, user });
   }
 
-  async _delete_general({ atomClassBase, atomClass, key, options, user }) {
+  async _delete_general({ atomClassBase, atomClass, key, options: _options, user }) {
     const atomId = key.atomId;
     // details
     await this.ctx.bean.detail._deleteDetails({ atomClass, atomKey: { atomId }, user });

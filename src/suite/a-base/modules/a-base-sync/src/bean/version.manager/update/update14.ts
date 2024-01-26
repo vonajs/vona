@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 const __atomClassRole = {
@@ -24,7 +25,7 @@ export class VersionUpdate extends BeanBase {
     await this._adjustUsers(options);
   }
 
-  async _adjustRoles(options) {
+  async _adjustRoles(_options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
@@ -38,7 +39,7 @@ export class VersionUpdate extends BeanBase {
     }
   }
 
-  async _adjustUsers(options) {
+  async _adjustUsers(_options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {

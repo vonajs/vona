@@ -65,7 +65,7 @@ export class VersionUpdate extends BeanBase {
     await this._updateAtoms(options);
   }
 
-  async _updateAtoms(options) {
+  async _updateAtoms(_options) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {

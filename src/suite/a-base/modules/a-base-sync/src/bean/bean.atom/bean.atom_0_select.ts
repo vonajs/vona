@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 
 const mparse = require('@cabloy/module-parse').default;

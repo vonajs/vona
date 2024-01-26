@@ -1,3 +1,4 @@
+import { __ThisModule__ } from '../resource/this.js';
 import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 export default ({ mode }) => {
