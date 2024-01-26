@@ -164,7 +164,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _selectQuery({ /* atomClass, */ options, user }) {
+  async _selectQuery({ /* atomClass, */ options, user: _user }) {
     return await this.sqlProcedure.selectAtoms({ options });
   }
 }

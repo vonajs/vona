@@ -225,7 +225,7 @@ export class AtomRole extends BeanAtomBase {
     return res;
   }
 
-  async _getMeta(options, item, showSorting) {
+  async _getMeta(_options, item, showSorting) {
     // meta
     const meta = this._ensureItemMeta(item);
     // meta.flags

@@ -76,7 +76,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     ]);
   }
 
-  async comment({ key, atom: { comment = 1 }, user }) {
+  async comment({ key, atom: { comment = 1 }, user: _user }) {
     await this.modelAtom.query('update aAtom set commentCount = commentCount + ? where iid=? and id=?', [
       comment,
       this.ctx.instance.id,
@@ -84,7 +84,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     ]);
   }
 
-  async attachment({ key, atom: { attachment = 1 }, user }) {
+  async attachment({ key, atom: { attachment = 1 }, user: _user }) {
     await this.modelAtom.query('update aAtom set attachmentCount = attachmentCount + ? where iid=? and id=?', [
       attachment,
       this.ctx.instance.id,

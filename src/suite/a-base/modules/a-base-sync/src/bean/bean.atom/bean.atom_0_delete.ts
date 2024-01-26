@@ -98,7 +98,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     }
   }
 
-  async _delete({ /* atomClass,*/ atom, user }) {
+  async _delete({ /* atomClass,*/ atom, user: _user }) {
     // stars
     await this._delete_stars({ atomId: atom.id });
     // labels

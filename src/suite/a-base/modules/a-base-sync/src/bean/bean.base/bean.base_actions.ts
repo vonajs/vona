@@ -63,7 +63,7 @@ export class BeanBaseActions extends BeanBase0 {
     return atomClass.info.detail.inline ? constantDetail.actionMeta : constantDetail.actionMetaNotInline;
   }
 
-  _prepareActionsAtomClass(module, atomClass) {
+  _prepareActionsAtomClass(_module, atomClass) {
     const actions = {};
     const _actions = atomClass.actions;
     const _actionsSystem = this.ctx.constant.module(__ThisModule__).atom.action;

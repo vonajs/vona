@@ -126,7 +126,7 @@ export class AtomUser extends BeanAtomBase {
     return res;
   }
 
-  async _getMeta(options, item) {
+  async _getMeta(_options, item) {
     // meta
     const meta = this._ensureItemMeta(item);
     // meta.summary

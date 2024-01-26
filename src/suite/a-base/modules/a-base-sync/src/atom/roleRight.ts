@@ -99,7 +99,7 @@ export class AtomRoleRight extends BeanAtomBase {
     await this.ctx.bean.role.deleteRoleRight({ roleRightId, user });
   }
 
-  _getMeta(item, options) {
+  _getMeta(item, _options) {
     if (item.scope) {
       item.scope = JSON.parse(item.scope);
     }

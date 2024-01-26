@@ -105,7 +105,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     return item;
   }
 
-  async _readQuery({ /* atomClass, */ options, user }) {
+  async _readQuery({ /* atomClass, */ options, user: _user }) {
     return await this.sqlProcedure.getAtom({ options });
   }
 }
