@@ -1,4 +1,7 @@
-module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'flow.node' })
+export class FlowNodeEndEventAtom extends BeanBase {
   async onNodeEnter() {
     // options
     let options = this.nodeInstance.getNodeDefOptions();
@@ -33,4 +36,4 @@ module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
     // also true
     return true;
   }
-};
+}

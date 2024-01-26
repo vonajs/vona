@@ -1,4 +1,7 @@
-module.exports = class Stats {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'stats' })
+export class StatsTaskClaimings extends BeanBase {
   async execute(context) {
     const { user } = context;
     const modelFlowTask = this.ctx.model.module(moduleInfo).flowTask;
@@ -9,4 +12,4 @@ module.exports = class Stats {
     });
     return count;
   }
-};
+}

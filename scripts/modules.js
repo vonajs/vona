@@ -38,99 +38,12 @@ async function main() {
 }
 
 async function _moduleHandle_bean({ file, module, processHelper }) {
-  if (!fse.existsSync(file)) {
-    console.log('---- not changed: ', module.info.relativeName);
-    return;
-  }
   const contentOld = (await fse.readFile(file)).toString();
-  //
-  const classPath = path.basename(file).replace('.ts', '');
-  const sceneName = parseSceneName(classPath);
-  const classNameNew = classPathToClassName('', classPath);
-  const shortName = parseShortName(classPath);
-  console.log(classPath, '--', sceneName, '--', classNameNew, '--', shortName);
-  // 1. 查看是否需要转换export class
-  let needLog = false;
-  const matchExport = contentOld.match(/export class /);
-  if (!matchExport) {
-    needLog = true;
-    // 解析内容
-    const contentMatches = contentOld.match(/([\s\S\n]*)module\.exports = class ([\S]*?) [\s\S\n]*?\{([\s\S\n]*)/);
-    if (!contentMatches) {
-      console.log('---- not matched: ', file);
-      process.exit(0);
-    }
-    // console.log(contentMatches);
-    let beanOptions;
-    if (sceneName === 'bean') {
-      beanOptions = '';
-    } else {
-      beanOptions = `{ scene: '${sceneName}' }`;
-    }
-
-    const contentNew = `
-import { Bean, BeanBase } from '@cabloy/core';
-
-${contentMatches[1]}
-
-@Bean(${beanOptions})
-export class ${classNameNew} extends BeanBase {
-${contentMatches[3]}
-  `;
-    // console.log(contentNew);
-    await fse.outputFile(file, contentNew);
-    await processHelper.formatFile({ fileName: file });
-  }
-  // 2. 查看是否需要在resource/beans.ts中添加记录
-  const fileLocals = `${module.root}/src/resource/beans.ts`;
-  let contentLocals = (await fse.readFile(fileLocals)).toString();
-  if (contentLocals.indexOf(`${classPath}.js`) === -1) {
-    needLog = true;
-    if (contentLocals.indexOf('export *') === -1) {
-      // the first
-      if (sceneName === 'bean') {
-        contentLocals = `
-export * from '../bean/${classPath}.js';
-
-import { ${classNameNew} } from '../bean/${classPath}.js';
-
-export interface IBeanRecord {
-  ${shortName}: ${classNameNew};
-}
-      `;
-      } else {
-        contentLocals = `
-export * from '../bean/${classPath}.js';
-              `;
-      }
-    } else {
-      if (sceneName === 'bean') {
-        contentLocals = contentLocals
-          .replace('export * from', `export * from '../bean/${classPath}.js';\nexport * from`)
-          .replace('import {', `import { ${classNameNew} } from '../bean/${classPath}.js';\nimport {`)
-          .replace(
-            'export interface IBeanRecord {',
-            `export interface IBeanRecord {\n  ${shortName}: ${classNameNew};`,
-          );
-      } else {
-        contentLocals = contentLocals.replace(
-          'export * from',
-          `export * from '../bean/${classPath}.js';\nexport * from`,
-        );
-      }
-    }
-    // console.log(contentLocals);
-    await fse.outputFile(fileLocals, contentLocals);
-    await processHelper.formatFile({ fileName: fileLocals });
-  }
-  // 3. log
-  if (needLog) {
-    console.log('--------: ', file);
-  }
+  console.log(contentOld);
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/bean/*.ts`;
+  const pattern = `${module.root}/src/resource/beans.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();

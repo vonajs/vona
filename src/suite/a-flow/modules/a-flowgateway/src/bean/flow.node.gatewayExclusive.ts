@@ -1,3 +1,5 @@
-const FlowNodeGatewayBase = require('../common/flowNodeGatewayBase.js');
+import { Bean } from '@cabloy/core';
+import FlowNodeGatewayBase from '../common/flowNodeGatewayBase.js';
 
-module.exports = class FlowNode extends FlowNodeGatewayBase({ mode: 'exclusive' }) {};
+@Bean({ scene: 'flow.node' })
+export class FlowNodeGatewayExclusive extends FlowNodeGatewayBase({ mode: 'exclusive' }) {}

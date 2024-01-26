@@ -1,3 +1,5 @@
-const FlowNodeGatewayBase = require('../common/flowNodeGatewayBase.js');
+import { Bean } from '@cabloy/core';
+import FlowNodeGatewayBase from '../common/flowNodeGatewayBase.js';
 
-module.exports = class FlowNode extends FlowNodeGatewayBase({ mode: 'inclusive' }) {};
+@Bean({ scene: 'flow.node' })
+export class FlowNodeGatewayInclusive extends FlowNodeGatewayBase({ mode: 'inclusive' }) {}

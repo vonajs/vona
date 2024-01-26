@@ -1,1 +1,4 @@
-module.exports = class IOMessage extends module.meta.class.IOMessageBase {};
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'io.message' })
+export class IoMessageWorkflow extends BeanBase {}
