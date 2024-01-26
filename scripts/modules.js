@@ -45,8 +45,8 @@ async function _moduleHandle_local({ file, module, processHelper }) {
   }
   const contentOld = (await fse.readFile(file)).toString();
   //
-  const shortName = path.basename(file).replace('.ts', '');
-  const classNameNew = classPathToClassName('Local', shortName);
+  const classPath = path.basename(file).replace('.ts', '');
+  const classNameNew = classPathToClassName('Local', classPath);
   // console.log(classNameNew);
   // 1. 查看是否需要转换export class
   let needLog = false;
@@ -81,21 +81,21 @@ ${contentMatches[3]}
     if (contentLocals.indexOf('import') === -1) {
       // the first
       contentLocals = `
-export * from '../local/${shortName}.js';
+export * from '../local/${classPath}.js';
 
-import { ${classNameNew} } from '../local/${shortName}.js';
+import { ${classNameNew} } from '../local/${classPath}.js';
 
 export interface IModuleLocal {
-  ${shortName}: ${classNameNew};
+  '${classPath}': ${classNameNew};
 }
       `;
     } else {
       contentLocals = contentLocals
-        .replace('export * from', `export * from '../local/${shortName}.js';\nexport * from`)
-        .replace('import {', `import { ${classNameNew} } from '../local/${shortName}.js';\nimport {`)
+        .replace('export * from', `export * from '../local/${classPath}.js';\nexport * from`)
+        .replace('import {', `import { ${classNameNew} } from '../local/${classPath}.js';\nimport {`)
         .replace(
           'export interface IModuleLocal {',
-          `export interface IModuleLocal {\n  ${shortName}: ${classNameNew};`,
+          `export interface IModuleLocal {\n  '${classPath}': ${classNameNew};`,
         );
     }
     // console.log(contentLocals);
