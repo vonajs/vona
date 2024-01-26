@@ -1,6 +1,10 @@
+import { Atom } from '@cabloy/core';
+import { BeanAtomBase } from 'cabloy-module-api-a-base';
+
 const randomize = require('randomatic');
 
-module.exports = class Atom extends module.meta.class.AtomBase {
+@Atom()
+export class AtomAuthOpen extends BeanAtomBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).authOpen;
   }
@@ -135,4 +139,4 @@ module.exports = class Atom extends module.meta.class.AtomBase {
       item.scopeRoleNameLocale = this.ctx.text(item.scopeRoleName);
     }
   }
-};
+}

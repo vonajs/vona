@@ -1,6 +1,10 @@
+import { Atom } from '@cabloy/core';
+import { BeanAtomBase } from '../bean/virtual.atomBase.js';
+
 const AtomBase = require('./bean.atomBase.js');
 
-module.exports = class Atom extends AtomBase {
+@Atom()
+export class AtomRoleResourceRightSpread extends BeanAtomBase {
   async read({ atomClass, options, key, user }) {
     // super
     const item = await super.read({ atomClass, options, key, user });
@@ -63,4 +67,4 @@ module.exports = class Atom extends AtomBase {
     // meta
     // const meta = this._ensureItemMeta(item);
   }
-};
+}

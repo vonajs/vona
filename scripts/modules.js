@@ -78,8 +78,8 @@ export class ${classNameNew} extends BeanAtomBase {
 ${contentMatches[3]}
   `;
     console.log(contentNew);
-    // await fse.outputFile(file, contentNew);
-    // await processHelper.formatFile({ fileName: file });
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
   }
   // 2. 查看是否需要在resource/atoms.ts中添加记录
   const fileLocals = `${module.root}/src/resource/atoms.ts`;
@@ -95,8 +95,8 @@ export * from '../atom/${classPath}.js';
       contentLocals = contentLocals.replace('export * from', `export * from '../atom/${classPath}.js';\nexport * from`);
     }
     console.log(contentLocals);
-    // await fse.outputFile(fileLocals, contentLocals);
-    // await processHelper.formatFile({ fileName: fileLocals });
+    await fse.outputFile(fileLocals, contentLocals);
+    await processHelper.formatFile({ fileName: fileLocals });
   }
   // 3. log
   if (needLog) {

@@ -1,6 +1,10 @@
+import { Atom } from '@cabloy/core';
+import { BeanAtomBase } from '../bean/virtual.atomBase.js';
+
 const AtomBase = require('./bean.atomBase.js');
 
-module.exports = class Atom extends AtomBase {
+@Atom()
+export class AtomRoleRight extends BeanAtomBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).roleRight;
   }
@@ -105,4 +109,4 @@ module.exports = class Atom extends AtomBase {
     // meta
     // const meta = this._ensureItemMeta(item);
   }
-};
+}

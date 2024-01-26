@@ -1,6 +1,10 @@
+import { Atom } from '@cabloy/core';
+import { BeanAtomBase } from 'cabloy-module-api-a-base';
+
 const AtomCmsBase = require('../common/atomCmsBase.js');
 
-module.exports = class Atom extends AtomCmsBase {
+@Atom()
+export class AtomArticle extends BeanAtomBase {
   async default({ atomClass, item, options, user }) {
     // super
     return await super.default({ atomClass, item, options, user });
@@ -33,4 +37,4 @@ module.exports = class Atom extends AtomCmsBase {
     // super
     await super.delete({ atomClass, key, options, user });
   }
-};
+}

@@ -1,4 +1,8 @@
-module.exports = class Atom extends module.meta.class.AtomBase {
+import { Atom } from '@cabloy/core';
+import { BeanAtomBase } from 'cabloy-module-api-a-base';
+
+@Atom()
+export class AtomDict extends BeanAtomBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).dict;
   }
@@ -133,4 +137,4 @@ module.exports = class Atom extends module.meta.class.AtomBase {
       },
     });
   }
-};
+}

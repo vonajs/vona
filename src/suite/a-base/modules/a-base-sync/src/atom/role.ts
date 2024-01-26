@@ -1,6 +1,10 @@
+import { Atom } from '@cabloy/core';
+import { BeanAtomBase } from '../bean/virtual.atomBase.js';
+
 const AtomBase = require('./bean.atomBase.js');
 
-module.exports = class Atom extends AtomBase {
+@Atom()
+export class AtomRole extends BeanAtomBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).role;
   }
@@ -265,4 +269,4 @@ module.exports = class Atom extends AtomBase {
     const role = await this.beanRole.parseRoleName({ roleName: roleId, force: false });
     return role.id;
   }
-};
+}
