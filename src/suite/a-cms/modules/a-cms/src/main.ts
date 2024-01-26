@@ -10,8 +10,6 @@ import services from './services.js';
 import models from './models.js';
 // meta
 import meta from './meta.js';
-// atomCmsBase
-module.meta.class.AtomCmsBase = AtomCmsBase;
 
 export default app => {
   // watcher: only in development

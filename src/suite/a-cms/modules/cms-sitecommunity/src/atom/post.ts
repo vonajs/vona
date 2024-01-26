@@ -2,7 +2,7 @@ import { Atom } from '@cabloy/core';
 import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';
 
 @Atom()
-export class AtomPost extends BeanAtomBase {
+export class AtomPost extends BeanAtomCmsBase {
   async default({ atomClass, item, options, user }) {
     // super
     return await super.default({ atomClass, item, options, user });
