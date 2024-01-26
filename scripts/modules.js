@@ -44,6 +44,14 @@ async function _moduleHandle_atom({ file, module, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/resource/atoms.ts`;
+  // const contentOld = (await fse.readFile(file)).toString();
+  const contentNew = '';
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+  /// ////////////
+  return;
   const pattern = `${module.root}/src/bean/atom.*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
