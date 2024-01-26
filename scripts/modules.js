@@ -41,11 +41,11 @@ async function _moduleHandle_main({ file, module, processHelper }) {
   // const contentOld = (await fse.readFile(file)).toString();
   // if (contentOld.indexOf('=>') === -1) return;
   console.log(file);
-  await fse.remove(file);
+  // await fse.remove(file);
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/main.ts`;
+  const pattern = `${module.root}/src/beans.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
