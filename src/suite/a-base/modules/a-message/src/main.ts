@@ -10,9 +10,6 @@ import models from './models.js';
 // meta
 import meta from './meta.js';
 
-// base
-module.meta.class.IOMessageUniformBase = IOMessageUniformBase;
-
 export default {
   beans,
   routes,

@@ -12,9 +12,6 @@ import meta from './meta.js';
 import routes from './routes.js';
 import controllers from './controllers.js';
 
-// Ajv
-module.meta.class.Ajv = require('./ajv/ajv.js');
-
 export default {
   beans,
   routes,

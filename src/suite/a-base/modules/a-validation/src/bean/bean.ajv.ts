@@ -2,56 +2,59 @@ import Ajv from 'ajv';
 import AjvLocalize from 'ajv-i18n';
 import AjvKeywords from 'ajv-keywords';
 import jsBeautify from 'js-beautify';
-import systemKeywords from './keywords.js';
+import systemKeywords from '../ajv/keywords.js';
+import { Bean, BeanBase } from '@cabloy/core';
 
-Ajv.create = function ({ options, keywords, schemas, schemaRoot }) {
-  // default
-  const _options = {
-    $data: true,
-    allErrors: true,
-    verbose: false,
-    jsonPointers: true,
-    format: 'full',
-    unknownFormats: true,
-    useDefaults: true,
-    coerceTypes: true,
-    transpile: false,
-    passContext: true,
-    removeAdditional: 'all',
-  };
-  // processCode
-  if (module.meta.isTest || module.meta.isLocal) {
-    _options.processCode = jsBeautify.js_beautify;
-  }
-  // override
-  Object.assign(_options, options);
-  // ajv
-  const ajv = new Ajv(_options);
-  AjvKeywords(ajv);
-  ajv.v = createValidate(schemaRoot);
-  // systemKeywords
-  for (const _keyword in systemKeywords) {
-    ajv.addKeyword(_keyword, systemKeywords[_keyword]);
-  }
-  // keywords
-  if (keywords) {
-    for (const key in keywords) {
-      const _key = key.indexOf('x-') === 0 ? key : `x-${key}`;
-      ajv.addKeyword(_key, keywords[key]);
+@Bean()
+export class BeanAjv extends BeanBase {
+  create({ options, keywords, schemas, schemaRoot }: { options?; keywords?; schemas?; schemaRoot? }) {
+    // default
+    const _options = {
+      $data: true,
+      allErrors: true,
+      verbose: false,
+      jsonPointers: true,
+      format: 'full',
+      unknownFormats: true,
+      useDefaults: true,
+      coerceTypes: true,
+      transpile: false,
+      passContext: true,
+      removeAdditional: 'all',
+    } as any;
+    // processCode
+    if (this.app.meta.isTest || this.app.meta.isLocal) {
+      _options.processCode = jsBeautify.js_beautify;
     }
-  }
-  // schemas
-  if (schemas) {
-    for (const key in schemas) {
-      ajv.addSchema(schemas[key], key);
+    // override
+    Object.assign(_options, options);
+    // ajv
+    const ajv = new Ajv(_options);
+    AjvKeywords(ajv);
+    (<any>ajv).v = createValidate(schemaRoot);
+    // systemKeywords
+    for (const _keyword in systemKeywords) {
+      ajv.addKeyword(_keyword, systemKeywords[_keyword]);
     }
+    // keywords
+    if (keywords) {
+      for (const key in keywords) {
+        const _key = key.indexOf('x-') === 0 ? key : `x-${key}`;
+        ajv.addKeyword(_key, keywords[key]);
+      }
+    }
+    // schemas
+    if (schemas) {
+      for (const key in schemas) {
+        ajv.addSchema(schemas[key], key);
+      }
+    }
+    return ajv;
   }
-  return ajv;
-};
-export default Ajv;
+}
 
 function createValidate(schemaRoot) {
-  return async function ({ ctx, schema, data, filterOptions }) {
+  return async function (this: any, { ctx, schema, data, filterOptions }) {
     const validate = this.getSchema(schema || schemaRoot);
     try {
       const res = await validate.call(ctx, data);
@@ -59,7 +62,7 @@ function createValidate(schemaRoot) {
         _filterResult({ ajv: this, validate, data, filterOptions });
       }
       return res;
-    } catch (e) {
+    } catch (e: any) {
       if (!Array.isArray(e.errors)) throw e;
       const locale = ctx.locale.split('-')[0];
       if (locale !== 'en' && AjvLocalize[locale]) AjvLocalize[locale](e.errors);

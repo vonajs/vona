@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanIoChannelBase } from 'cabloy-module-api-a-socketio';
 
 import nodemailer from 'nodemailer';
 import chalk from 'chalk';
@@ -7,7 +8,7 @@ import boxen from 'boxen';
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
 @Bean({ scene: 'io.channel' })
-export class IoChannelMail extends BeanBase {
+export class IoChannelMail extends BeanIoChannelBase {
   async onPush({ content /* options, message, messageSync, messageClass*/ }) {
     // check if content.message
     // not set content.message.to dynamic for test, which must be set by business

@@ -74,7 +74,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     }
     const params = {
       options,
-    };
+    } as any;
     // keywords
     if (module) {
       module = module || this.moduleScope;
@@ -92,7 +92,7 @@ export class BeanValidation extends BeanModuleScopeBase {
       params.schemas = schemas;
     }
     // create
-    return __module__.meta.class.Ajv.create(params);
+    return this.bean.ajv.create(params);
   }
 
   _checkValidator({ module, validator }) {
@@ -110,7 +110,7 @@ export class BeanValidation extends BeanModuleScopeBase {
       if (!schemas[_schema]) throw new Error(`schema not found: ${module}:${_schema}`);
       schemas[_schema].$async = true;
     }
-    _validator.ajv = __module__.meta.class.Ajv.create({
+    _validator.ajv = this.bean.ajv.create({
       options: _validator.options,
       keywords: meta.validation.keywords,
       schemas,
@@ -118,7 +118,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     });
     // create ajv_ignoreRules
     const schemas2 = this._prepareSchemas_ignoreRules({ schemas });
-    _validator.ajv_ignoreRules = __module__.meta.class.Ajv.create({
+    _validator.ajv_ignoreRules = this.bean.ajv.create({
       options: { coerceTypes: false, useDefaults: true }, // not use _validator.options
       keywords: meta.validation.keywords,
       schemas: schemas2,
