@@ -1,6 +1,7 @@
+import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 import assert from 'assert';
 
-export default class FlowNodeActivityUserTaskBase extends module.meta.class.FlowNodeBase {
+export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
   constructor(options) {
     super(options);
     this.atomStateDefault = null;

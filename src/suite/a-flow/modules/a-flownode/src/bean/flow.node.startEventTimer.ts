@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.node' })
-export class FlowNodeStartEventTimer extends BeanBase {
+export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
   async deploy({ deploy, flowDefId, node }) {
     if (deploy) {
       await this._addSchedule({ flowDefId, node });

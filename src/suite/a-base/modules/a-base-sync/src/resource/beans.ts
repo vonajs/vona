@@ -65,6 +65,7 @@ import { BeanAtomRightAux } from '../bean/bean.atomRightAux.js';
 import { BeanAtomClass } from '../bean/bean.atomClass.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
 import { BeanAtom } from '../bean/bean.atom.js';
+import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 declare module '@cabloy/core' {
   export interface IBeanRecord {
@@ -86,5 +87,6 @@ declare module '@cabloy/core' {
     atomClass: BeanAtomClass;
     atomAction: BeanAtomAction;
     atom: BeanAtom;
+    atomBase: BeanAtomBase;
   }
 }

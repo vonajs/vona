@@ -1,4 +1,4 @@
-export default class FlowNodeBase {
+export class BeanFlowNodeBase {
   constructor(options) {
     if (options) {
       this.flowInstance = options.flowInstance;

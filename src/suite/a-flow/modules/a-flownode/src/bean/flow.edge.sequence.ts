@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanFlowEdgeBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.edge' })
-export class FlowEdgeSequence extends BeanBase {
+export class FlowEdgeSequence extends BeanFlowEdgeBase {
   async onEdgeEnter() {
     // super
     const res = await super.onEdgeEnter();

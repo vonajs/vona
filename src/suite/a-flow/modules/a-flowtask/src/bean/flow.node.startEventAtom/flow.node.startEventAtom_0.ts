@@ -1,8 +1,6 @@
-import { BeanBase } from '@cabloy/core';
-
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 
-export class FlowNodeStartEventAtom0 extends BeanBase {
+export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   constructor(options) {
     super(options);
     this.atomStateDefault = 1;

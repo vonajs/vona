@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.node' })
-export class FlowNodeActivityService extends BeanBase {
+export class FlowNodeActivityService extends BeanFlowNodeBase {
   async onNodeDoing() {
     // super
     await super.onNodeDoing();

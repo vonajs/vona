@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
 
-import FlowBehaviorBase from '../common/flowBehaviorBase.js';
+import { BeanFlowBehaviorBase } from '../common/flowBehaviorBase.js';
 
 @Bean({ scene: 'flow.behavior' })
-export class FlowBehaviorBase extends BeanBase {
+export class FlowBehaviorBase extends BeanFlowBehaviorBase {
   getBehaviorDefOptions({ behaviorDefId, options }) {
     return this.nodeInstance.nodeBaseBean.getBehaviorDefOptions({ behaviorDefId, options });
   }

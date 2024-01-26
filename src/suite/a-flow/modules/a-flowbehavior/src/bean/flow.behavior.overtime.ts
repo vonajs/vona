@@ -1,7 +1,8 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { BeanFlowBehaviorBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.behavior' })
-export class FlowBehaviorOvertime extends BeanBase {
+export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
   async enter(context, next) {
     // addJob
     const flowId = this.context._flowId;

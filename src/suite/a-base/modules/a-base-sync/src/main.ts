@@ -16,11 +16,6 @@ import constants from './config/constants.js';
 // meta
 import meta from './meta.js';
 
-// base
-module.meta.class.AtomBase = AtomBase;
-// modelCache
-module.meta.class.ModelCache = ModelCache;
-
 export default {
   aops,
   beans,

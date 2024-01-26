@@ -1,7 +1,7 @@
-import { FlowNodeBase } from 'cabloy-module-api-a-flow';
+import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 export default ({ mode }) => {
-  class FlowNodeGatewayBase extends FlowNodeBase {
+  class FlowNodeGatewayBase extends BeanFlowNodeBase {
     async onNodeEnter() {
       // super
       const res = await super.onNodeEnter();

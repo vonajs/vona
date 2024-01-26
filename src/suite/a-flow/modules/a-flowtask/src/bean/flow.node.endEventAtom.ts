@@ -1,7 +1,8 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.node' })
-export class FlowNodeEndEventAtom extends BeanBase {
+export class FlowNodeEndEventAtom extends BeanFlowNodeBase {
   async onNodeEnter() {
     // options
     let options = this.nodeInstance.getNodeDefOptions();
