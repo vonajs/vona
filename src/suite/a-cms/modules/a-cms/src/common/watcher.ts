@@ -2,9 +2,10 @@ import path from 'path';
 import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
+import { BeanBase } from '@cabloy/core';
 // import eggBornUtils from 'egg-born-utils';
 
-export default class Watcher {
+export class Watcher extends BeanBase {
   constructor() {
     this._watchers = {};
     this._freezeCounter = 0;
