@@ -62,6 +62,8 @@ async function _moduleHandle_atom({ file, module, processHelper }) {
     let importBase;
     if (module.info.relativeName === 'a-base') {
       importBase = `import { BeanAtomBase } from '../bean/virtual.atomBase.js';`;
+    } else if (contentOld.indexOf('class.AtomCmsBase') > -1) {
+      importBase = `import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';`;
     } else {
       importBase = `import { BeanAtomBase } from 'cabloy-module-api-a-base';`;
     }
@@ -72,40 +74,27 @@ ${importBase}
 ${contentMatches[1]}
 
 @Atom()
-export class ${classNameNew} extends AtomBase {
+export class ${classNameNew} extends BeanAtomBase {
 ${contentMatches[3]}
   `;
     console.log(contentNew);
     // await fse.outputFile(file, contentNew);
     // await processHelper.formatFile({ fileName: file });
   }
-  return;
-  // 2. 查看是否需要在resource/locals中添加记录
-  const fileLocals = `${module.root}/src/resource/locals.ts`;
+  // 2. 查看是否需要在resource/atoms.ts中添加记录
+  const fileLocals = `${module.root}/src/resource/atoms.ts`;
   let contentLocals = (await fse.readFile(fileLocals)).toString();
-  if (contentLocals.indexOf(`{ ${classNameNew} }`) === -1) {
+  if (contentLocals.indexOf(`${classPath}.js`) === -1) {
     needLog = true;
-    if (contentLocals.indexOf('import') === -1) {
+    if (contentLocals.indexOf('export') === -1) {
       // the first
       contentLocals = `
-export * from '../local/${classPath}.js';
-
-import { ${classNameNew} } from '../local/${classPath}.js';
-
-export interface IModuleLocal {
-  '${classPath}': ${classNameNew};
-}
+export * from '../atom/${classPath}.js';
       `;
     } else {
-      contentLocals = contentLocals
-        .replace('export * from', `export * from '../local/${classPath}.js';\nexport * from`)
-        .replace('import {', `import { ${classNameNew} } from '../local/${classPath}.js';\nimport {`)
-        .replace(
-          'export interface IModuleLocal {',
-          `export interface IModuleLocal {\n  '${classPath}': ${classNameNew};`,
-        );
+      contentLocals = contentLocals.replace('export * from', `export * from '../atom/${classPath}.js';\nexport * from`);
     }
-    // console.log(contentLocals);
+    console.log(contentLocals);
     // await fse.outputFile(fileLocals, contentLocals);
     // await processHelper.formatFile({ fileName: fileLocals });
   }

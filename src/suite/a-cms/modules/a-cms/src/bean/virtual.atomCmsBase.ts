@@ -1,6 +1,9 @@
+import { Virtual } from '@cabloy/core';
+import { BeanAtomBase } from 'cabloy-module-api-a-base';
 const trimHtml = require('@zhennann/trim-html');
 
-module.exports = class AtomCmsBase extends module.meta.class.AtomBase {
+@Virtual({ scene: 'bean' })
+export class BeanAtomCmsBase extends BeanAtomBase {
   get modelCMSArticle() {
     return this.ctx.model.module(moduleInfo.relativeName).article;
   }
@@ -329,4 +332,4 @@ module.exports = class AtomCmsBase extends module.meta.class.AtomBase {
       item.atomNameFull = `${item.atomName}: ${item.atomNameSub}`;
     }
   }
-};
+}
