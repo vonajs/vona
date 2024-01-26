@@ -1,20 +1,20 @@
 import { BeanBase } from '@cabloy/core';
 
 const __atomClassRole = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'role',
 };
 const __atomClassUser = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'user',
 };
 
 export class VersionUpdate extends BeanBase {
   get modelRole() {
-    return this.ctx.model.module(moduleInfo.relativeName).role;
+    return this.ctx.model.module(__ThisModule__).role;
   }
   get modelUser() {
-    return this.ctx.model.module(moduleInfo.relativeName).user;
+    return this.ctx.model.module(__ThisModule__).user;
   }
 
   async run(options) {
@@ -63,7 +63,7 @@ export class VersionUpdate extends BeanBase {
         atomClass: __atomClassRole,
         item: {
           itemId: roleId,
-          atomStaticKey: `${moduleInfo.relativeName}:role_${roleName}`,
+          atomStaticKey: `${__ThisModule__}:role_${roleName}`,
           catalog: role.catalog,
           system: role.system,
           roleIdParent: role.roleIdParent,

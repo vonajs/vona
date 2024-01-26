@@ -3,7 +3,7 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 @Bean()
 export class BeanAtomClass extends BeanModuleScopeBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).atomClass;
+    return this.ctx.model.module(__ThisModule__).atomClass;
   }
 
   async atomClass(atomClass) {
@@ -19,7 +19,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
 
   async getAtomClassIdsInner({ inner }) {
     // cache
-    const cache = this.ctx.bean.summer.getCache({ module: moduleInfo.relativeName, name: 'atomClassInner' });
+    const cache = this.ctx.bean.summer.getCache({ module: __ThisModule__, name: 'atomClassInner' });
     // key
     const key = inner ? 'in' : 'notin';
     const atomClasses = await cache.get(key);
@@ -31,13 +31,13 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     const data = id ? { id } : { module, atomClassName };
     const res = await this.model.get(data);
     if (res) return res;
-    if (!module || !atomClassName) this.ctx.throw.module(moduleInfo.relativeName, 1011);
+    if (!module || !atomClassName) this.ctx.throw.module(__ThisModule__, 1011);
     // lock
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.atomClass.register`,
+      resource: `${__ThisModule__}.atomClass.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           beanFullName: 'atomClass',
           context: { module, atomClassName },
           fn: '_registerLock',

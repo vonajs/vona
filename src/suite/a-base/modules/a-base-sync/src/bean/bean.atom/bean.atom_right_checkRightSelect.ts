@@ -10,7 +10,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     }
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
-    if (!atomClass) this.ctx.throw.module(moduleInfo.relativeName, 1002);
+    if (!atomClass) this.ctx.throw.module(__ThisModule__, 1002);
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check atom history

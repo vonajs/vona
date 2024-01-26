@@ -7,7 +7,7 @@ const resources = [
     atomCategoryId: 'a-base:menu.BasicProfile',
     resourceType: 'a-base:menu',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'resource',
       atomAction: 'create',
     }),

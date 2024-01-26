@@ -17,7 +17,7 @@ export class VersionInit extends BeanBase {
   // roles
   async _initRoles() {
     return await this.ctx.bean.role._initSystemRoles({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       rolesData: initData.roles,
     });
   }
@@ -39,7 +39,7 @@ export class VersionInit extends BeanBase {
     userRoot.item.mobile = options.mobile;
     users.push(userRoot);
     // user: admin
-    const demo = this.ctx.config.module(moduleInfo.relativeName).configFront.demo;
+    const demo = this.ctx.config.module(__ThisModule__).configFront.demo;
     if (demo.enable) {
       const userAdmin = this.ctx.bean.util.extend({}, initData.users.admin);
       users.push(userAdmin);

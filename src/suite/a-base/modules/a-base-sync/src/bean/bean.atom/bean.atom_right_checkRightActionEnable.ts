@@ -11,7 +11,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
     const _checkPoints = this.ctx.bean.util.ensureArray(_checkPoint);
-    const __atomStages = this.ctx.constant.module(moduleInfo.relativeName).atom.stage;
+    const __atomStages = this.ctx.constant.module(__ThisModule__).atom.stage;
     const bingo = _checkPoints.some(item => __atomStages[item] === _atom.atomStage);
     if (!bingo) {
       return null;

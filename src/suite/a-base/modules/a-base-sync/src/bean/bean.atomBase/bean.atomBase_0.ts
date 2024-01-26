@@ -2,11 +2,11 @@ import { BeanBase } from '@cabloy/core';
 
 export class BeanAtomBase0 extends BeanBase {
   get configModuleBase() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get modelResourceRole() {
-    return this.ctx.model.module(moduleInfo.relativeName).resourceRole;
+    return this.ctx.model.module(__ThisModule__).resourceRole;
   }
 
   async submit({ atomClass, key, options, user }) {

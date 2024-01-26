@@ -11,13 +11,13 @@ export class BeanAtomRightAuxRoleWhos extends BeanAtomRightAuxRoleScopesMineOfUs
     });
     // cache
     return await this.ctx.bean.summer.get(
-      { module: moduleInfo.relativeName, name: 'roleWhosOfAtomClassAction' },
+      { module: __ThisModule__, name: 'roleWhosOfAtomClassAction' },
       { atomClassId: atomClass.id, action },
     );
   }
 
   async clearSummer_roleWhosOfAtomClassAction() {
-    await this.ctx.bean.summer.clear({ module: moduleInfo.relativeName, name: 'roleWhosOfAtomClassAction' });
+    await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'roleWhosOfAtomClassAction' });
   }
 
   async __getRoleWhosOfAtomClassActionRaw({ atomClassId, action }) {

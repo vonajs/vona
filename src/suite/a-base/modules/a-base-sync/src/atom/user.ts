@@ -6,7 +6,7 @@ import AtomBase from './bean.atomBase.js';
 @Atom()
 export class AtomUser extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).user;
+    return this.ctx.model.module(__ThisModule__).user;
   }
 
   get beanUser() {

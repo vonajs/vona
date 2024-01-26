@@ -1,7 +1,7 @@
 import { BeanRoleBuild } from './bean.role_build.js';
 
 const __atomClassRole = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'role',
 };
 

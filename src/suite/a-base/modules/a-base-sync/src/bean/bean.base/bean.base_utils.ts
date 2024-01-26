@@ -18,12 +18,12 @@ export class BeanBaseUtils extends BeanBaseThemes {
       return _hostText;
     }
     // others
-    const config = this.ctx.config.module(moduleInfo.relativeName);
+    const config = this.ctx.config.module(__ThisModule__);
     return config.host || this.ctx.host;
   }
 
   get protocol() {
-    const config = this.ctx.config.module(moduleInfo.relativeName);
+    const config = this.ctx.config.module(__ThisModule__);
     return config.protocol || this.ctx.protocol;
   }
 
@@ -48,7 +48,7 @@ export class BeanBaseUtils extends BeanBaseThemes {
       return this.ctx.app.config.static.dir;
     }
     const dir =
-      this.ctx.config.module(moduleInfo.relativeName).publicDir ||
+      this.ctx.config.module(__ThisModule__).publicDir ||
       path.join(require('os').homedir(), 'cabloy', this.ctx.app.name, 'public');
     await fse.ensureDir(dir);
     return dir;

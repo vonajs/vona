@@ -1,11 +1,11 @@
 import { BeanRoleResourceRights } from './bean.role_resourceRights.js';
 
 const __atomClassRole = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'role',
 };
 const __atomClassUser = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'user',
 };
 

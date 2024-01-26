@@ -6,7 +6,7 @@ import AtomBase from './bean.atomBase.js';
 @Atom()
 export class AtomRoleFieldsRight extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).roleFieldsRight;
+    return this.ctx.model.module(__ThisModule__).roleFieldsRight;
   }
 
   async default({ atomClass, item, options, user }) {

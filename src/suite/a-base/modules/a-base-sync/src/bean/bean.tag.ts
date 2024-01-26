@@ -3,11 +3,11 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanTag extends BeanBase {
   get modelTag() {
-    return this.ctx.model.module(moduleInfo.relativeName).tag;
+    return this.ctx.model.module(__ThisModule__).tag;
   }
 
   get modelTagRef() {
-    return this.ctx.model.module(moduleInfo.relativeName).tagRef;
+    return this.ctx.model.module(__ThisModule__).tagRef;
   }
 
   async count({ atomClass, language }) {
@@ -72,7 +72,7 @@ export class BeanTag extends BeanBase {
   async delete({ tagId }) {
     // check atoms
     const count = await this.modelTagRef.count({ tagId });
-    if (count > 0) this.ctx.throw.module(moduleInfo.relativeName, 1012);
+    if (count > 0) this.ctx.throw.module(__ThisModule__, 1012);
 
     // delete
     await this.modelTag.delete({ id: tagId });
@@ -165,10 +165,10 @@ export class BeanTag extends BeanBase {
   async _register({ atomClass, language, tagName }) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.tag.register.${atomClass.id}`,
+      resource: `${__ThisModule__}.tag.register.${atomClass.id}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           beanFullName: 'tag',
           context: { atomClass, language, tagName },
           fn: '_registerLock',

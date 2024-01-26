@@ -33,7 +33,7 @@ export default {
     detail: {
       inline: false,
       atomClassMain: {
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         atomClassName: 'role',
       },
     },

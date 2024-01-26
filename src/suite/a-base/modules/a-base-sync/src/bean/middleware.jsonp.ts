@@ -9,7 +9,7 @@ export class MiddlewareJsonp extends BeanBase {
     if (this.ctx.app.meta.isTest) {
       options.whiteList = false;
     } else {
-      const _config = this.ctx.config.module(moduleInfo.relativeName);
+      const _config = this.ctx.config.module(__ThisModule__);
       const _whiteList = _config && _config.jsonp && _config.jsonp.whiteList;
       const hostSelf = this.ctx.hostname;
       if (_whiteList) {

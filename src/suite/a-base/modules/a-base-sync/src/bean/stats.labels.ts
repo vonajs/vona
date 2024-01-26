@@ -21,7 +21,7 @@ export class StatsLabels extends BeanBase {
         user,
       });
       await this.ctx.bean.stats._set({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         name: 'labels',
         fullName: `labels.${labelId}`,
         value: count,

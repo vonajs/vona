@@ -11,7 +11,7 @@ import utils from '../common/utils.js';
 @Bean()
 export class BeanUtil extends BeanBase {
   get localConfig() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get uuid() {
@@ -154,13 +154,13 @@ export class BeanUtil extends BeanBase {
   }
 
   checkDemo(throwError = true) {
-    const demo = this.ctx.config.module(moduleInfo.relativeName).configFront.demo;
+    const demo = this.ctx.config.module(__ThisModule__).configFront.demo;
     if (!demo.enable) return true;
     const user = this.ctx.state.user;
     // !user means system operation
     if (!user || user.op.userName === 'root') return true;
     if (throwError) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1014);
+      this.ctx.throw.module(__ThisModule__, 1014);
     }
     return false;
   }

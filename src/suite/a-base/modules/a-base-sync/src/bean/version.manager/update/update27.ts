@@ -2,7 +2,7 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   get modelRoleExpand() {
-    return this.ctx.model.module(moduleInfo.relativeName).roleExpand;
+    return this.ctx.model.module(__ThisModule__).roleExpand;
   }
 
   async run(options) {

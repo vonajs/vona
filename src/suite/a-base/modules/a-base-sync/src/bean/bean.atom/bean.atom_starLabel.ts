@@ -4,7 +4,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {
     // get
     const atom = await this.get({ atomId: key.atomId });
-    if (atom.atomStage !== 1) this.ctx.throw.module(moduleInfo.relativeName, 1010);
+    if (atom.atomStage !== 1) this.ctx.throw.module(__ThisModule__, 1010);
     // check if exists
     let diff = 0;
     const items = await this.modelAtomStar.select({
@@ -56,7 +56,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
   async labels({ key, atom: { labels = null }, user }) {
     // get
     const atom = await this.get({ atomId: key.atomId });
-    if (atom.atomStage !== 1) this.ctx.throw.module(moduleInfo.relativeName, 1010);
+    if (atom.atomStage !== 1) this.ctx.throw.module(__ThisModule__, 1010);
     // atomLabel
     await this._labels_atomLabel({ atomId: key.atomId, labels, user });
     // atomLabelRef

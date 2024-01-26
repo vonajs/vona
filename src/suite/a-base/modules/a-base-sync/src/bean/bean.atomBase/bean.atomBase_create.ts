@@ -123,7 +123,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // atomName
     if (data.atomName) return;
     // sequence
-    const sequence = this.ctx.bean.sequence.module(moduleInfo.relativeName);
+    const sequence = this.ctx.bean.sequence.module(__ThisModule__);
     // user
     if (atomClass.module === 'a-base' && atomClass.atomClassName === 'user') {
       const draftId = await sequence.next('draft');

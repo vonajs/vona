@@ -11,11 +11,11 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
     }
     // status
-    await this.ctx.bean.status.module(moduleInfo.relativeName).set('roleDirty', dirty);
+    await this.ctx.bean.status.module(__ThisModule__).set('roleDirty', dirty);
   }
 
   async getDirty() {
-    return await this.ctx.bean.status.module(moduleInfo.relativeName).get('roleDirty');
+    return await this.ctx.bean.status.module(__ThisModule__).get('roleDirty');
   }
 
   // build roles
@@ -33,7 +33,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     }
     // queue
     await this.ctx.meta.util.queuePushAsync({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'roleBuild',
       data: { options },
     });

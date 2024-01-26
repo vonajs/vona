@@ -3,7 +3,7 @@ import { BeanAtomSubmit } from './bean.atom_submit.js';
 export class BeanAtomNotify extends BeanAtomSubmit {
   _notifyDraftsDrafting(user, atomClass) {
     this.ctx.bean.stats.notify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'draftsDrafting',
       nameSub: `${atomClass.module}_${atomClass.atomClassName}`,
       user,
@@ -12,7 +12,7 @@ export class BeanAtomNotify extends BeanAtomSubmit {
 
   _notifyDraftsFlowing(user, atomClass) {
     this.ctx.bean.stats.notify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'draftsFlowing',
       nameSub: `${atomClass.module}_${atomClass.atomClassName}`,
       user,
@@ -21,7 +21,7 @@ export class BeanAtomNotify extends BeanAtomSubmit {
 
   _notifyStars(user) {
     this.ctx.bean.stats.notify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'stars',
       user,
     });
@@ -29,7 +29,7 @@ export class BeanAtomNotify extends BeanAtomSubmit {
 
   _notifyLabels(user) {
     this.ctx.bean.stats.notify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'labels',
       user,
     });
