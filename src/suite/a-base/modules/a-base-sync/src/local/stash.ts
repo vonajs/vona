@@ -1,4 +1,4 @@
-class Stash {
+module.exports = class Stash {
   constructor() {
     this._caches = {};
   }
@@ -27,5 +27,4 @@ class Stash {
     }
     return cache;
   }
-}
-module.exports = Stash;
+};

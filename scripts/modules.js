@@ -44,25 +44,72 @@ async function _moduleHandle_local({ file, module, processHelper }) {
     return;
   }
   const contentOld = (await fse.readFile(file)).toString();
-  // 查找是否有子目录
-  const classPath = path.basename(file).replace('.ts', '');
-  // console.log(classPath);
-  if (contentOld.indexOf(`/${classPath}/`) > -1) {
-    // move
-    const moveFrom = `${module.root}/src/bean/${classPath}`;
-    const moveTo = `${module.root}/src/local/${classPath}`;
-    console.log(moveFrom);
-    console.log(moveTo);
-    await fse.move(moveFrom, moveTo);
+  //
+  const shortName = path.basename(file).replace('.ts', '');
+  const classNameNew = classPathToClassName('Local', shortName);
+  // console.log(classNameNew);
+  // 1. 查看是否需要转换export class
+  let needLog = false;
+  const matchExport = contentOld.match(/export class /);
+  if (!matchExport) {
+    needLog = true;
+    // 解析内容
+    const contentMatches = contentOld.match(/([\s\S\n]*)module\.exports = class ([\S]*?) [\s\S\n]*?\{([\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', file);
+      process.exit(0);
+    }
+    // console.log(contentMatches);
+    const contentNew = `
+import { Local, BeanBase } from '@cabloy/core';
+
+${contentMatches[1]}
+
+@Local()
+export class ${classNameNew} extends BeanBase {
+${contentMatches[3]}
+  `;
+    // console.log(contentNew);
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
   }
-  const moveTo = `${module.root}/src/local/${classPath}.ts`.replace('local.', '');
-  console.log(file);
-  console.log(moveTo);
-  await fse.move(file, moveTo);
+  // 2. 查看是否需要在resource/locals中添加记录
+  const fileLocals = `${module.root}/src/resource/locals.ts`;
+  let contentLocals = (await fse.readFile(fileLocals)).toString();
+  if (contentLocals.indexOf(`{ ${classNameNew} }`) === -1) {
+    needLog = true;
+    if (contentLocals.indexOf('import') === -1) {
+      // the first
+      contentLocals = `
+export * from '../local/${shortName}.js';
+
+import { ${classNameNew} } from '../local/${shortName}.js';
+
+export interface IModuleLocal {
+  ${shortName}: ${classNameNew};
+}
+      `;
+    } else {
+      contentLocals = contentLocals
+        .replace('export * from', `export * from '../local/${shortName}.js';\nexport * from`)
+        .replace('import {', `import { ${classNameNew} } from '../local/${shortName}.js';\nimport {`)
+        .replace(
+          'export interface IModuleLocal {',
+          `export interface IModuleLocal {\n  ${shortName}: ${classNameNew};`,
+        );
+    }
+    // console.log(contentLocals);
+    await fse.outputFile(fileLocals, contentLocals);
+    await processHelper.formatFile({ fileName: fileLocals });
+  }
+  // 3. log
+  if (needLog) {
+    console.log('--------: ', file);
+  }
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/bean/local*.ts`;
+  const pattern = `${module.root}/src/local/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -73,9 +120,9 @@ async function _moduleHandle({ module, processHelper }) {
     //   return;
     // }
     // if (contentOld.indexOf('.util.mixinClasses') === -1) {
-    //   continue;
+    //  continue;
     // }
-    // if (file.indexOf('/bean.atom.ts') === -1) return;
+    if (file.indexOf('_.ts') > -1) continue;
     // console.log(file);
     await _moduleHandle_local({ file, module, processHelper });
   }
