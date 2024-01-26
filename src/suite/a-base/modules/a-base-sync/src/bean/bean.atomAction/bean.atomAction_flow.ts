@@ -17,10 +17,10 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     if (res) return res;
     // lock
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.atomAction.register`,
+      resource: `${}.atomAction.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: ,
           beanFullName: 'atomAction',
           context: { atomClassId, flowKey, nodeDefId, nodeDefName },
           fn: '_registerLockByModeFlow',
@@ -38,7 +38,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     const res = await this.model.get({ atomClassId, flowKey, nodeDefId });
     if (res) return res;
     // code
-    const sequence = this.ctx.bean.sequence.module(moduleInfo.relativeName);
+    const sequence = this.ctx.bean.sequence.module();
     const flowActionCode = await sequence.next('flowAction');
     const data = {
       atomClassId,

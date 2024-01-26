@@ -52,11 +52,11 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
   _prepareAtomClassesModule_atomClassMeta(_atomClass) {
     if (_atomClass.itemOnly) {
       if (_atomClass.detail) {
-        return this.ctx.constant.module(moduleInfo.relativeName).atomClass.metaDetail;
+        return this.ctx.constant.module().atomClass.metaDetail;
       }
-      return this.ctx.constant.module(moduleInfo.relativeName).atomClass.metaItemOnly;
+      return this.ctx.constant.module().atomClass.metaItemOnly;
     }
-    return this.ctx.constant.module(moduleInfo.relativeName).atomClass.meta;
+    return this.ctx.constant.module().atomClass.meta;
   }
 
   _prepareAtomClassesModule(module, _atoms) {

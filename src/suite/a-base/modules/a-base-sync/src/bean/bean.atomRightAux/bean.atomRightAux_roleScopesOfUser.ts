@@ -11,13 +11,13 @@ export class BeanAtomRightAuxRoleScopesOfUser extends BeanAtomRightAux0 {
     });
     // cache
     return await this.ctx.bean.summer.get(
-      { module: moduleInfo.relativeName, name: 'roleScopesOfUser' },
+      { module: , name: 'roleScopesOfUser' },
       { atomClassId: atomClass.id, action, userId },
     );
   }
 
   async clearSummer_roleScopesOfUser() {
-    await this.ctx.bean.summer.clear({ module: moduleInfo.relativeName, name: 'roleScopesOfUser' });
+    await this.ctx.bean.summer.clear({ module: , name: 'roleScopesOfUser' });
   }
 
   async __getRoleScopesOfUserRaw({ atomClassId, action, userId }) {

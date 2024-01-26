@@ -12,7 +12,7 @@ export class BeanBaseLocales extends BeanBaseLocaleModules {
 
   _prepareLocales() {
     const locales = [];
-    const config = this.ctx.config.module(moduleInfo.relativeName);
+    const config = this.ctx.config.module();
     for (const locale in config.locales) {
       locales.push({
         title: this.ctx.text(config.locales[locale]),

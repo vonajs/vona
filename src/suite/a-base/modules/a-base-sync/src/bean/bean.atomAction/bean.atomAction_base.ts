@@ -2,7 +2,7 @@ import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanAtomActionBase extends BeanModuleScopeBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).atomAction;
+    return this.ctx.model.module().atomAction;
   }
 
   async delete({ atomClassId, code }) {
@@ -42,10 +42,10 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     if (res) return res;
     // lock
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.atomAction.register`,
+      resource: `${}.atomAction.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: ,
           beanFullName: 'atomAction',
           context: { atomClassId, code },
           fn: '_registerLock',

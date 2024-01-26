@@ -9,7 +9,7 @@ let __bodyCryptoInstance = null;
 @Bean()
 export class BeanBodyCrypto extends BeanBase {
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module();
   }
 
   async ensureBodyCrypto() {
@@ -17,7 +17,7 @@ export class BeanBodyCrypto extends BeanBase {
       const configCryptoJS = this.configModule.securityLevelProtection.body.cryptojs;
       const moduleInfo = mparse.parseInfo(configCryptoJS);
       if (!moduleInfo) throw new Error(`Invalid BodyCrypto JS: ${configCryptoJS}`);
-      const _module = this.ctx.app.meta.modules[moduleInfo.relativeName];
+      const _module = this.ctx.app.meta.modules[];
       if (!_module) throw new Error(`Module Not Found: ${module}`);
       let jsFile = path.join(_module.static.backend, configCryptoJS.substring(moduleInfo.url.length + 2));
       if (this.ctx.app.meta.isProd) {

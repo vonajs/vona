@@ -2,7 +2,7 @@ import { BeanBase } from '@cabloy/core';
 
 export class MiddlewareRight0 extends BeanBase {
   get constant() {
-    return this.ctx.constant.module(moduleInfo.relativeName);
+    return this.ctx.constant.module();
   }
 
   async execute(options, next) {

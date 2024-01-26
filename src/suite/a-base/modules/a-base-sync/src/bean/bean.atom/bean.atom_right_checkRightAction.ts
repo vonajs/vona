@@ -90,7 +90,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     let { stage, checkFlow } = options || {};
     // atom
     const _atom = atom;
-    if (!_atom) this.ctx.throw.module(moduleInfo.relativeName, 1002);
+    if (!_atom) this.ctx.throw.module(, 1002);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check fromViewHistory
     const rightFromViewHistory = await this._checkRightFromViewHistory({

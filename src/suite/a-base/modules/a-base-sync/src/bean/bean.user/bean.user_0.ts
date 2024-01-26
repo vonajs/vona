@@ -9,28 +9,28 @@ export class BeanUser0 extends BeanBase {
   }
 
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).user;
+    return this.ctx.model.module().user;
   }
 
   get modelAgent() {
-    return this.ctx.model.module(moduleInfo.relativeName).userAgent;
+    return this.ctx.model.module().userAgent;
   }
 
   get modelAuth() {
-    return this.ctx.model.module(moduleInfo.relativeName).auth;
+    return this.ctx.model.module().auth;
   }
 
   get modelAuthProvider() {
-    return this.ctx.model.module(moduleInfo.relativeName).authProvider;
+    return this.ctx.model.module().authProvider;
   }
 
   get sequence() {
-    if (!this._sequence) this._sequence = this.ctx.bean.sequence.module(moduleInfo.relativeName);
+    if (!this._sequence) this._sequence = this.ctx.bean.sequence.module();
     return this._sequence;
   }
 
   get config() {
-    if (!this._config) this._config = this.ctx.config.module(moduleInfo.relativeName);
+    if (!this._config) this._config = this.ctx.config.module();
     return this._config;
   }
 
@@ -116,11 +116,11 @@ export class BeanUser0 extends BeanBase {
     const userOp = await this.get({ id: ctxUser.op.id });
     // deleted
     if (!userOp) {
-      // this.ctx.throw.module(moduleInfo.relativeName, 1004);
+      // this.ctx.throw.module(, 1004);
       this.ctx.throw(401);
     }
     // disabled
-    if (userOp.disabled) this.ctx.throw.module(moduleInfo.relativeName, 1005);
+    if (userOp.disabled) this.ctx.throw.module(, 1005);
     // hold user
     stateUser.op = userOp;
     // agent
@@ -128,11 +128,11 @@ export class BeanUser0 extends BeanBase {
     if (ctxUser.agent && ctxUser.agent.id !== ctxUser.op.id) {
       userAgent = await this.agent({ userId: ctxUser.op.id });
       if (!userAgent) {
-        // this.ctx.throw.module(moduleInfo.relativeName, 1006);
+        // this.ctx.throw.module(, 1006);
         this.ctx.throw(401);
       }
-      if (userAgent.id !== ctxUser.agent.id) this.ctx.throw.module(moduleInfo.relativeName, 1006);
-      if (userAgent.disabled) this.ctx.throw.module(moduleInfo.relativeName, 1005);
+      if (userAgent.id !== ctxUser.agent.id) this.ctx.throw.module(, 1006);
+      if (userAgent.disabled) this.ctx.throw.module(, 1005);
     } else {
       userAgent = userOp;
     }
@@ -302,7 +302,7 @@ export class BeanUser0 extends BeanBase {
       }
     } else {
       if (state === 'migrate' || profileUser.authShouldExists === true) {
-        this.ctx.throw.module(moduleInfo.relativeName, 1009);
+        this.ctx.throw.module(, 1009);
       }
       // add
       const _profile = JSON.stringify(profileUser.profile);
@@ -409,7 +409,7 @@ export class BeanUser0 extends BeanBase {
 
     // user verify event
     await this.ctx.bean.event.invoke({
-      module: moduleInfo.relativeName,
+      module: ,
       name: 'userVerify',
       data: { verifyUser, profileUser },
     });
@@ -431,7 +431,7 @@ export class BeanUser0 extends BeanBase {
   async accountMigration({ userIdFrom, userIdTo }) {
     // accountMigration event
     await this.ctx.bean.event.invoke({
-      module: moduleInfo.relativeName,
+      module: ,
       name: 'accountMigration',
       data: { userIdFrom, userIdTo },
     });

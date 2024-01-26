@@ -62,10 +62,10 @@ export class VersionUpdate extends BeanBase {
     await this.ctx.model.query(sql);
 
     // update exists atoms
-    await this._updateAtoms(options);
+    await this._updateAtoms();
   }
 
-  async _updateAtoms(options) {
+  async _updateAtoms() {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {

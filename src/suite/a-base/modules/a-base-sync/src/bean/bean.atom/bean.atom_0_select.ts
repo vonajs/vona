@@ -69,7 +69,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // page
     page = this.ctx.bean.util.page(page, pageForce);
     // stage
-    stage = typeof stage === 'number' ? stage : this.ctx.constant.module(moduleInfo.relativeName).atom.stage[stage];
+    stage = typeof stage === 'number' ? stage : this.ctx.constant.module().atom.stage[stage];
     // tableName
     let atomClassBase;
     let tableName = '';

@@ -6,34 +6,34 @@ export class BeanAtom0 extends BeanModuleScopeBase {
   }
 
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).atom;
+    return this.ctx.model.module().atom;
   }
 
   get modelAtom() {
-    return this.ctx.model.module(moduleInfo.relativeName).atom;
+    return this.ctx.model.module().atom;
   }
 
   get modelAtomStar() {
-    return this.ctx.model.module(moduleInfo.relativeName).atomStar;
+    return this.ctx.model.module().atomStar;
   }
 
   get modelLabel() {
-    return this.ctx.model.module(moduleInfo.relativeName).label;
+    return this.ctx.model.module().label;
   }
 
   get modelAtomLabel() {
-    return this.ctx.model.module(moduleInfo.relativeName).atomLabel;
+    return this.ctx.model.module().atomLabel;
   }
 
   get modelAtomLabelRef() {
-    return this.ctx.model.module(moduleInfo.relativeName).atomLabelRef;
+    return this.ctx.model.module().atomLabelRef;
   }
   get modelFile() {
     return this.ctx.model.module('a-file').file;
   }
 
   get sequence() {
-    return this.ctx.bean.sequence.module(moduleInfo.relativeName);
+    return this.ctx.bean.sequence.module();
   }
 
   get sqlProcedure() {

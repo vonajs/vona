@@ -6,11 +6,11 @@ import AtomBase from './bean.atomBase.js';
 @Atom()
 export class AtomRole extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).role;
+    return this.ctx.model.module().role;
   }
 
   get modelAtom() {
-    return this.ctx.model.module(moduleInfo.relativeName).atom;
+    return this.ctx.model.module().atom;
   }
 
   get beanRole() {
@@ -135,7 +135,7 @@ export class AtomRole extends BeanAtomBase {
     // check if children
     if (role.catalog && !force) {
       const children = await this.beanRole.children({ roleId });
-      if (children.length > 0) this.ctx.throw.module(moduleInfo.relativeName, 1008);
+      if (children.length > 0) this.ctx.throw.module(, 1008);
     }
 
     // delete all includes
