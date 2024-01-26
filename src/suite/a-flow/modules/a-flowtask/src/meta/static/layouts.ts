@@ -1,7 +1,7 @@
-const layoutFlowItemBase = require('./layout/layoutFlowItemBase.js');
-const layoutFlowListBase = require('./layout/layoutFlowListBase.js');
-const layoutFlowTaskAtomBase = require('./layout/layoutFlowTaskAtomBase.js');
-const layoutFlowTaskListBase = require('./layout/layoutFlowTaskListBase.js');
+import layoutFlowItemBase from './layout/layoutFlowItemBase.js';
+import layoutFlowListBase from './layout/layoutFlowListBase.js';
+import layoutFlowTaskAtomBase from './layout/layoutFlowTaskAtomBase.js';
+import layoutFlowTaskListBase from './layout/layoutFlowTaskListBase.js';
 
 const layouts = [
   layoutFlowItemBase, //

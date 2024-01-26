@@ -1,5 +1,5 @@
-const statsUser = require('./bean/stats.user.js');
-const statsUserAlert = require('./bean/stats.userAlert.js');
+import statsUser from './bean/stats.user.js';
+import statsUserAlert from './bean/stats.userAlert.js';
 
 export default {
   // stats

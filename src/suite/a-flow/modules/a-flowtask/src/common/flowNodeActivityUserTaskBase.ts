@@ -1,4 +1,4 @@
-const assert = require('assert');
+import assert from 'assert';
 
 export default class FlowNodeActivityUserTaskBase extends module.meta.class.FlowNodeBase {
   constructor(options) {

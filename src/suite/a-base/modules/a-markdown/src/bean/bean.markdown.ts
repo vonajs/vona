@@ -1,9 +1,9 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
+import path from 'path';
 
-const Markdownit = require('@zhennann/markdown');
-const markdown_it_block = require('@zhennann/markdown-it-block');
+import Markdownit from '@zhennann/markdown';
+import markdown_it_block from '@zhennann/markdown-it-block';
 
 @Bean()
 export class BeanMarkdown extends BeanBase {

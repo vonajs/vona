@@ -1,6 +1,6 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
 import { ScopeModuleACms } from '../index.js';
-const utils = require('../common/utils.js');
+import utils from '../common/utils.js';
 
 @Controller()
 export class ControllerSite extends BeanBase {

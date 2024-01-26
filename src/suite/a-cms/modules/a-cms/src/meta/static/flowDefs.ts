@@ -1,4 +1,4 @@
-const articlePublish = require('./flowDef/articlePublish.js');
+import articlePublish from './flowDef/articlePublish.js';
 
 const flowDefs = [articlePublish];
 export default flowDefs;

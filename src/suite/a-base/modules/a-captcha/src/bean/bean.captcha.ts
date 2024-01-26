@@ -1,7 +1,7 @@
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const mparse = require('@cabloy/module-parse').default;
-const utils = require('../common/utils.js');
+import utils from '../common/utils.js';
 
 @Bean()
 export class BeanCaptcha extends BeanModuleScopeBase {

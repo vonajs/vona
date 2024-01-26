@@ -1,9 +1,9 @@
-const versionManager = require('./bean/version.manager.js');
-const eventAccountMigration = require('./bean/event.accountMigration.js');
-const atomAuthOpen = require('./bean/atom.authOpen.js');
-const authProviderOpen = require('./bean/auth.provider.open.js');
-const localToken = require('./bean/local.token.js');
-const beanAuthOpen = require('./bean/bean.authOpen.js');
+import versionManager from './bean/version.manager.js';
+import eventAccountMigration from './bean/event.accountMigration.js';
+import atomAuthOpen from './bean/atom.authOpen.js';
+import authProviderOpen from './bean/auth.provider.open.js';
+import localToken from './bean/local.token.js';
+import beanAuthOpen from './bean/bean.authOpen.js';
 
 export default {
   // version

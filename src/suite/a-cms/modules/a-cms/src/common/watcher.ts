@@ -1,8 +1,8 @@
-const path = require('path');
-const fse = require('fs-extra');
-const chokidar = require('chokidar');
-const debounce = require('debounce');
-// const eggBornUtils = require('egg-born-utils');
+import path from 'path';
+import fse from 'fs-extra';
+import chokidar from 'chokidar';
+import debounce from 'debounce';
+// import eggBornUtils from 'egg-born-utils';
 
 export default class Watcher {
   constructor() {

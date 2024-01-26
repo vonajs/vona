@@ -1,6 +1,6 @@
-const countries = require('./dict/countries.js');
-const citiesUSA = require('./dict/citiesUSA.js');
-const citiesChina = require('./dict/citiesChina.js');
+import countries from './dict/countries.js';
+import citiesUSA from './dict/citiesUSA.js';
+import citiesChina from './dict/citiesChina.js';
 
 const dicts = [
   countries, //

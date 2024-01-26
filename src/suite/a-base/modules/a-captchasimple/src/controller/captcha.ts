@@ -1,6 +1,6 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
 import { ScopeModuleACaptchasimple } from '../index.js';
-const captcha = require('trek-captcha');
+import captcha from 'trek-captcha';
 
 @Controller()
 export class ControllerCaptcha extends BeanBase {

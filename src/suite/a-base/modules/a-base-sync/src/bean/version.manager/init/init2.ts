@@ -1,6 +1,6 @@
 import { BeanBase } from '@cabloy/core';
 
-const initData = require('./initData2.js');
+import initData from './initData2.js';
 
 export class VersionInit extends BeanBase {
   async run(options) {

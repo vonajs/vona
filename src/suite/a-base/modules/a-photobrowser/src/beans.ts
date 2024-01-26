@@ -1,4 +1,4 @@
-const versionManager = require('./bean/version.manager.js');
+import versionManager from './bean/version.manager.js';
 
 export default {
   // version

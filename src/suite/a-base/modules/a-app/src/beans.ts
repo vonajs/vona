@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const atomApp = require('./bean/atom.app.js');
+import versionManager from './bean/version.manager.js';
+import atomApp from './bean/atom.app.js';
 
 export default {
   // version

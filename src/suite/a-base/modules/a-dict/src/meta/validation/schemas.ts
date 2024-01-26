@@ -1,4 +1,4 @@
-const dict = require('./schema/dict.js');
+import dict from './schema/dict.js';
 
 const schemas = {};
 // dict

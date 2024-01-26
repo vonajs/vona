@@ -1,4 +1,4 @@
-const layoutDetailListBase = require('./layout/layoutDetailListBase.js');
+import layoutDetailListBase from './layout/layoutDetailListBase.js';
 
 const layouts = [
   //

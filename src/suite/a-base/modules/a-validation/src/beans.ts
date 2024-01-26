@@ -1,5 +1,5 @@
-const beanValidation = require('./bean/bean.validation.js');
-const middlewareValidate = require('./bean/middleware.validate.js');
+import beanValidation from './bean/bean.validation.js';
+import middlewareValidate from './bean/middleware.validate.js';
 
 export default {
   // middleware

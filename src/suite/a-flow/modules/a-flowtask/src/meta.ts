@@ -1,7 +1,7 @@
-const schemas = require('./meta/validation/schemas.js');
-const staticLayouts = require('./meta/static/layouts.js');
+import schemas from './meta/validation/schemas.js';
+import staticLayouts from './meta/static/layouts.js';
 // nodes
-const flowNodes = require('./meta/flow/nodes.js');
+import flowNodes from './meta/flow/nodes.js';
 // meta
 const meta = {
   base: {

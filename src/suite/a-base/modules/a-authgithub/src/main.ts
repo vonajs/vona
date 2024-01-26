@@ -1,13 +1,13 @@
-const routes = require('./routes.js');
-const services = require('./services.js');
-const models = require('./models.js');
-const config = require('./config/config.js');
-const locales = require('./config/locales.js');
-const errors = require('./config/errors.js');
-const meta = require('./meta.js');
+import routes from './routes.js';
+import services from './services.js';
+import models from './models.js';
+import config from './config/config.js';
+import locales from './config/locales.js';
+import errors from './config/errors.js';
+import meta from './meta.js';
 
-const beans = require('./beans.js');
-const controllers = require('./controllers.js');
+import beans from './beans.js';
+import controllers from './controllers.js';
 export default {
   beans,
   routes,

@@ -1,5 +1,5 @@
-const schemas = require('./meta/validation/schemas.js');
-const staticDicts = require('./meta/static/dicts.js');
+import schemas from './meta/validation/schemas.js';
+import staticDicts from './meta/static/dicts.js';
 const meta = {
   base: {
     atoms: {},

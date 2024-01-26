@@ -1,5 +1,5 @@
 // static
-const staticResources = require('./meta/static/resources.js');
+import staticResources from './meta/static/resources.js';
 const meta = {
   base: {
     statics: {

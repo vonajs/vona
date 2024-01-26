@@ -1,6 +1,6 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
 import { ScopeModuleABase } from '../index.js';
-const qr = require('qr-image');
+import qr from 'qr-image';
 
 @Controller()
 export class ControllerBase extends BeanBase {

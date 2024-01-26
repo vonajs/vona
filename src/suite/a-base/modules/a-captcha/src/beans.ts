@@ -1,5 +1,5 @@
-const middlewareCaptchaVerify = require('./bean/middleware.captchaVerify.js');
-const beanCaptcha = require('./bean/bean.captcha.js');
+import middlewareCaptchaVerify from './bean/middleware.captchaVerify.js';
+import beanCaptcha from './bean/bean.captcha.js';
 
 export default {
   // middleware

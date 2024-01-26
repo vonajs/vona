@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
+import path from 'path';
 
 const mparse = require('@cabloy/module-parse').default;
 

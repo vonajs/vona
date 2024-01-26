@@ -1,12 +1,12 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const eggBornUtils = require('egg-born-utils');
-const isTextOrBinary = require('istextorbinary');
-const ejs = require('@zhennann/ejs');
-const gogocode = require('gogocode');
+import eggBornUtils from 'egg-born-utils';
+import isTextOrBinary from 'istextorbinary';
+import ejs from '@zhennann/ejs';
+import gogocode from 'gogocode';
 
 @Local()
 export class LocalTemplate extends BeanBase {

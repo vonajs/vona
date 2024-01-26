@@ -1,6 +1,6 @@
 import { BeanAtomRightCheckRightFlowTask } from './bean.atom_right_checkRightFlowTask.js';
 
-const objectHash = require('object-hash');
+import objectHash from 'object-hash';
 
 export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFlowTask {
   async _checkRightFormAction({

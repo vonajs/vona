@@ -1,4 +1,4 @@
-const Listener = require('./listener/set03_gatewayInclusive.spec.js');
+import Listener from './listener/set03_gatewayInclusive.spec.js';
 
 const content = {
   listener: Listener,

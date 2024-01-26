@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const chalk = require('chalk');
-const boxen = require('boxen');
+import chalk from 'chalk';
+import boxen from 'boxen';
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 

@@ -1,4 +1,4 @@
-const staticLayouts = require('./meta/static/layouts.js');
+import staticLayouts from './meta/static/layouts.js';
 // meta
 const meta = {
   base: {

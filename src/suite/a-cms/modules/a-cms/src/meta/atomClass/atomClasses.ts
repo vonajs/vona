@@ -1,4 +1,4 @@
-const article = require('./atomClass/article.js');
+import article from './atomClass/article.js';
 
 export default {
   //

@@ -1,6 +1,6 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const fse = require('fs-extra');
+import fse from 'fs-extra';
 
 @Local()
 export class LocalSite extends BeanBase {

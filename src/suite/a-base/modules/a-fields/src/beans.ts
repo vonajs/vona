@@ -1,7 +1,7 @@
-const versionManager = require('./bean/version.manager.js');
-const beanFields = require('./bean/bean.fields.js');
-const summerCacheFieldsRightOfAtomClass = require('./bean/summer.cache.fieldsRightOfAtomClass.js');
-const summerCacheFieldsRightOfUser = require('./bean/summer.cache.fieldsRightOfUser.js');
+import versionManager from './bean/version.manager.js';
+import beanFields from './bean/bean.fields.js';
+import summerCacheFieldsRightOfAtomClass from './bean/summer.cache.fieldsRightOfAtomClass.js';
+import summerCacheFieldsRightOfUser from './bean/summer.cache.fieldsRightOfUser.js';
 
 export default {
   // version

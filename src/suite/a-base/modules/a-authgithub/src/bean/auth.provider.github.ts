@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
 const Strategy = require('passport-github').Strategy;
-const StrategyMock = require('../meta/passport/strategyMock.js');
+import StrategyMock from '../meta/passport/strategyMock.js';
 
 @Bean({ scene: 'auth.provider' })
 export class AuthProviderGithub extends BeanBase {

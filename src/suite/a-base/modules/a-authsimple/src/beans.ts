@@ -1,8 +1,8 @@
-const versionManager = require('./bean/version.manager.js');
-const eventAccountMigration = require('./bean/event.accountMigration.js');
-const authProviderSimple = require('./bean/auth.provider.simple.js');
-const localSimple = require('./bean/local.simple.js');
-const beanAuthSimple = require('./bean/bean.authSimple.js');
+import versionManager from './bean/version.manager.js';
+import eventAccountMigration from './bean/event.accountMigration.js';
+import authProviderSimple from './bean/auth.provider.simple.js';
+import localSimple from './bean/local.simple.js';
+import beanAuthSimple from './bean/bean.authSimple.js';
 
 export default {
   // version

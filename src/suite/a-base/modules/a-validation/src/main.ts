@@ -1,16 +1,16 @@
-const services = require('./services.js');
-const models = require('./models.js');
-const config = require('./config/config.js');
-const locales = require('./config/locales.js');
-const errors = require('./config/errors.js');
-const constants = require('./config/constants.js');
+import services from './services.js';
+import models from './models.js';
+import config from './config/config.js';
+import locales from './config/locales.js';
+import errors from './config/errors.js';
+import constants from './config/constants.js';
 
 // eslint-disable-next-line
-const beans = require('./beans.js');
+import beans from './beans.js';
 // meta
-const meta = require('./meta.js');
-const routes = require('./routes.js');
-const controllers = require('./controllers.js');
+import meta from './meta.js';
+import routes from './routes.js';
+import controllers from './controllers.js';
 
 // Ajv
 module.meta.class.Ajv = require('./ajv/ajv.js');

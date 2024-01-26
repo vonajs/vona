@@ -1,6 +1,6 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const url = require('url');
+import url from 'url';
 
 @Local()
 export class LocalTools extends BeanBase {

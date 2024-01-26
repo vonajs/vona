@@ -1,6 +1,6 @@
-const schemas = require('./meta/validation/schemas.js');
-const staticLayouts = require('./meta/static/layouts.js');
-const staticResources = require('./meta/static/resources.js');
+import schemas from './meta/validation/schemas.js';
+import staticLayouts from './meta/static/layouts.js';
+import staticResources from './meta/static/resources.js';
 // meta
 const meta = {
   base: {

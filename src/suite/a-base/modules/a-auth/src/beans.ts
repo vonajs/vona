@@ -1,12 +1,12 @@
-const versionManager = require('./bean/version.manager.js');
-const localAuthProviderBase = require('./bean/local.authProviderBase.js');
-const localPassport = require('./bean/local.passport.js');
-const broadcastAuthProviderChanged = require('./bean/broadcast.authProviderChanged.js');
-const startupRegisterPassport = require('./bean/startup.registerPassport.js');
-const startupRegisterRouters = require('./bean/startup.registerRouters.js');
-const startupCacheAuthProviders = require('./bean/startup.cacheAuthProviders.js');
-const beanAuthProvider = require('./bean/bean.authProvider.js');
-const beanAuthProviderCache = require('./bean/bean.authProviderCache.js');
+import versionManager from './bean/version.manager.js';
+import localAuthProviderBase from './bean/local.authProviderBase.js';
+import localPassport from './bean/local.passport.js';
+import broadcastAuthProviderChanged from './bean/broadcast.authProviderChanged.js';
+import startupRegisterPassport from './bean/startup.registerPassport.js';
+import startupRegisterRouters from './bean/startup.registerRouters.js';
+import startupCacheAuthProviders from './bean/startup.cacheAuthProviders.js';
+import beanAuthProvider from './bean/bean.authProvider.js';
+import beanAuthProviderCache from './bean/bean.authProviderCache.js';
 
 export default {
   // version

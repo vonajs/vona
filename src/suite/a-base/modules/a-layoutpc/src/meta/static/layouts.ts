@@ -1,5 +1,5 @@
-const layoutPC = require('./layout/layoutPC.js');
-const layoutPCAnonymous = require('./layout/layoutPCAnonymous.js');
+import layoutPC from './layout/layoutPC.js';
+import layoutPCAnonymous from './layout/layoutPCAnonymous.js';
 
 const layouts = [layoutPC, layoutPCAnonymous];
 export default layouts;

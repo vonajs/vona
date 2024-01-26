@@ -1,8 +1,8 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const nodemailer = require('nodemailer');
-const chalk = require('chalk');
-const boxen = require('boxen');
+import nodemailer from 'nodemailer';
+import chalk from 'chalk';
+import boxen from 'boxen';
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 

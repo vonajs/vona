@@ -1,5 +1,5 @@
-const schemas = require('./meta/validation/schemas.js');
-const iconGroups = require('./meta/icons/groups.js');
+import schemas from './meta/validation/schemas.js';
+import iconGroups from './meta/icons/groups.js';
 const meta = {
   base: {
     atoms: {},

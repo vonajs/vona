@@ -1,4 +1,4 @@
-const dict = require('./atomClass/dict.js');
+import dict from './atomClass/dict.js';
 
 export default {
   //

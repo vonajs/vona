@@ -1,9 +1,9 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const Chalk = require('chalk');
-const TableClass = require('cli-table3');
-const Boxen = require('boxen');
-const fse = require('fs-extra');
+import Chalk from 'chalk';
+import TableClass from 'cli-table3';
+import Boxen from 'boxen';
+import fse from 'fs-extra';
 const mparse = require('@cabloy/module-parse').default;
 const { ProcessHelper } = require('@cabloy/process-helper');
 

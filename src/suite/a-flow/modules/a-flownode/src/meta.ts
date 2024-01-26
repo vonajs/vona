@@ -1,6 +1,6 @@
-const schemas = require('./meta/validation/schemas.js');
-const flowNodes = require('./meta/flow/nodes.js');
-const flowEdges = require('./meta/flow/edges.js');
+import schemas from './meta/validation/schemas.js';
+import flowNodes from './meta/flow/nodes.js';
+import flowEdges from './meta/flow/edges.js';
 const meta = {
   base: {
     atoms: {},

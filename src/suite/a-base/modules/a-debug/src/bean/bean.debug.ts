@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const DebugInstance = require('debug');
+import DebugInstance from 'debug';
 
 const __debug_caches = {};
 

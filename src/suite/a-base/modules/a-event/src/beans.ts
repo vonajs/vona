@@ -1,4 +1,4 @@
-const beanEvent = require('./bean/bean.event.js');
+import beanEvent from './bean/bean.event.js';
 
 export default {
   // global

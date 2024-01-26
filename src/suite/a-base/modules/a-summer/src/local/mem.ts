@@ -1,4 +1,4 @@
-const LRUCache = require('lru-cache');
+import LRUCache from 'lru-cache';
 import { CacheBase } from './cacheBase.js';
 import { Local } from '@cabloy/core';
 

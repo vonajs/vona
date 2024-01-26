@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 
 export default pageMode => {
   class Cli extends module.meta.class.CliBase {

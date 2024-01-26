@@ -1,4 +1,4 @@
-const defaults = require('./defaults.js');
+import defaults from './defaults.js';
 
 const behaviors = {
   // Overtime

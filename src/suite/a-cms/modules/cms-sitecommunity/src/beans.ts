@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const atomPost = require('./bean/atom.post.js');
+import versionManager from './bean/version.manager.js';
+import atomPost from './bean/atom.post.js';
 
 export default {
   // version

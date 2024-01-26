@@ -1,18 +1,18 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const path = require('path');
+import path from 'path';
 
-const ejs = require('@zhennann/ejs');
-const pMap = require('p-map');
-const fse = require('fs-extra');
-const moment = require('moment');
-const eggBornUtils = require('egg-born-utils');
-const CleanCSS = require('clean-css');
-const shajs = require('sha.js');
-const babel = require('@babel/core');
-const UglifyJS = require('uglify-js');
-const less = require('less');
-const utils = require('../common/utils.js');
+import ejs from '@zhennann/ejs';
+import pMap from 'p-map';
+import fse from 'fs-extra';
+import moment from 'moment';
+import eggBornUtils from 'egg-born-utils';
+import CleanCSS from 'clean-css';
+import shajs from 'sha.js';
+import babel from '@babel/core';
+import UglifyJS from 'uglify-js';
+import less from 'less';
+import utils from '../common/utils.js';
 
 @Local()
 export class LocalBuild extends BeanBase {

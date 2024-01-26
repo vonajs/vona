@@ -1,6 +1,6 @@
-const versionManager = require('./bean/version.manager.js');
-const atomDict = require('./bean/atom.dict.js');
-const beanDict = require('./bean/bean.dict.js');
+import versionManager from './bean/version.manager.js';
+import atomDict from './bean/atom.dict.js';
+import beanDict from './bean/bean.dict.js';
 
 export default {
   // version

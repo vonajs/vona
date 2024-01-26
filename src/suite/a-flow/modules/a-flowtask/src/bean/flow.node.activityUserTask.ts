@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const FlowNodeActivityUserTaskBase = require('../common/flowNodeActivityUserTaskBase.js');
+import FlowNodeActivityUserTaskBase from '../common/flowNodeActivityUserTaskBase.js';
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeActivityUserTask extends BeanBase {

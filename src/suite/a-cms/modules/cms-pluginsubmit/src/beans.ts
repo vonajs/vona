@@ -1,5 +1,5 @@
-const queueSubmit = require('./bean/queue.submit.js');
-const localTools = require('./bean/local.tools.js');
+import queueSubmit from './bean/queue.submit.js';
+import localTools from './bean/local.tools.js';
 
 export default {
   // queue

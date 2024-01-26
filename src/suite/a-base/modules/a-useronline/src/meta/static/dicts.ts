@@ -1,4 +1,4 @@
-const loginType = require('./dict/loginType.js');
+import loginType from './dict/loginType.js';
 
 const dicts = [
   loginType, //

@@ -1,8 +1,8 @@
 import { BeanBase } from '@cabloy/core';
 
-const path = require('path');
+import path from 'path';
 
-const initData = require('./initData1.js');
+import initData from './initData1.js';
 
 export class VersionInit extends BeanBase {
   get modelAuthOpen() {

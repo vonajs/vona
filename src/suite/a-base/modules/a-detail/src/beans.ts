@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const beanDetail = require('./bean/bean.detail.js');
+import versionManager from './bean/version.manager.js';
+import beanDetail from './bean/bean.detail.js';
 
 export default {
   // version

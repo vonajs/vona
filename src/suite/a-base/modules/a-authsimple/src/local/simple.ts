@@ -1,7 +1,7 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const util = require('util');
-const passwordFn = require('password-hash-and-salt'); // should compile
+import util from 'util';
+import passwordFn from 'password-hash-and-salt'; // should compile
 
 @Local()
 export class LocalSimple extends BeanBase {

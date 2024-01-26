@@ -1,4 +1,4 @@
-const atomInfo = require('./schema/atomInfo.js');
+import atomInfo from './schema/atomInfo.js';
 
 const schemas = {};
 // formTest

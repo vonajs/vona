@@ -1,4 +1,4 @@
-const auth = require('./meta/passport/auth.js');
+import auth from './meta/passport/auth.js';
 
 // actionPathListOpenAuthSelf
 const _options = {
@@ -9,9 +9,9 @@ const actionPathListOpenAuthSelf = `/a/basefront/atom/list?module=a-authopen&ato
   JSON.stringify(_options),
 )}`;
 
-const schemas = require('./meta/validation/schemas.js');
-const staticLayouts = require('./meta/static/layouts.js');
-const staticResources = require('./meta/static/resources.js');
+import schemas from './meta/validation/schemas.js';
+import staticLayouts from './meta/static/layouts.js';
+import staticResources from './meta/static/resources.js';
 // meta
 const meta = {
   auth,

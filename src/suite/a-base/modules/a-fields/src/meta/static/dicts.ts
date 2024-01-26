@@ -1,4 +1,4 @@
-const fieldsRightMode = require('./dict/fieldsRightMode.js');
+import fieldsRightMode from './dict/fieldsRightMode.js';
 
 const dicts = [fieldsRightMode];
 export default dicts;

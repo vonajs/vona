@@ -1,8 +1,8 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const chalk = require('chalk');
-const Table = require('cli-table3');
-const eggBornUtils = require('egg-born-utils');
+import chalk from 'chalk';
+import Table from 'cli-table3';
+import eggBornUtils from 'egg-born-utils';
 
 @Local()
 export class LocalToken extends BeanBase {

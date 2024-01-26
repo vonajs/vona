@@ -1,5 +1,5 @@
-const layoutMessageGroupBase = require('./layout/layoutMessageGroupBase.js');
-const layoutMessageListBase = require('./layout/layoutMessageListBase.js');
+import layoutMessageGroupBase from './layout/layoutMessageGroupBase.js';
+import layoutMessageListBase from './layout/layoutMessageListBase.js';
 
 const layouts = [layoutMessageGroupBase, layoutMessageListBase];
 export default layouts;

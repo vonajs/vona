@@ -1,14 +1,14 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
-const os = require('os');
+import path from 'path';
+import os from 'os';
 
-const eggBornUtils = require('egg-born-utils');
-const AdmZip = require('adm-zip');
-const semver = require('semver');
-const fse = require('fs-extra');
-const rimraf = require('mz-modules/rimraf');
-const CliStoreBase = require('../common/cliStoreBase.js');
+import eggBornUtils from 'egg-born-utils';
+import AdmZip from 'adm-zip';
+import semver from 'semver';
+import fse from 'fs-extra';
+import rimraf from 'mz-modules/rimraf';
+import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })
 export class CliStoreSync extends BeanBase {

@@ -1,6 +1,6 @@
 import { BeanBase } from '@cabloy/core';
 
-const update1Data = require('./update1Data.js');
+import update1Data from './update1Data.js';
 
 export class VersionUpdate extends BeanBase {
   async run() {

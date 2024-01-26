@@ -1,7 +1,7 @@
-const notEmpty = require('./keyword/notEmpty.js');
-const date = require('./keyword/date.js');
-const atomName = require('./keyword/atomName.js');
-const slug = require('./keyword/slug.js');
+import notEmpty from './keyword/notEmpty.js';
+import date from './keyword/date.js';
+import atomName from './keyword/atomName.js';
+import slug from './keyword/slug.js';
 export default {
   notEmpty,
   'x-date': date,

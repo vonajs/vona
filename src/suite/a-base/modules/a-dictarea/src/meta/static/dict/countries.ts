@@ -1,4 +1,4 @@
-const countries = require('./cities/countries.json');
+import countries from './cities/countries.json';
 
 const dictItems = countries;
 const dictLocales = {

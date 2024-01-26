@@ -1,6 +1,6 @@
 import { Update4 } from './update_4.js';
 
-const utils = require('../../common/utils.js');
+import utils from '../../common/utils.js';
 
 export class Update5 extends Update4 {
   async _update_5(options) {

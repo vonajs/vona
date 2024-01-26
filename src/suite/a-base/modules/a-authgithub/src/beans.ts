@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const authProviderGithub = require('./bean/auth.provider.github.js');
+import versionManager from './bean/version.manager.js';
+import authProviderGithub from './bean/auth.provider.github.js';
 
 export default {
   // version

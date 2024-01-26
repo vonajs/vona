@@ -1,4 +1,4 @@
-const socketioStats = require('./meta/socketio/stats.js');
+import socketioStats from './meta/socketio/stats.js';
 const meta = {
   socketio: {
     messages: {

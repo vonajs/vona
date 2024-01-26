@@ -1,6 +1,6 @@
-const layoutAtomItemCms = require('./layout/layoutAtomItemCms.js');
-const layoutAtomListCms = require('./layout/layoutAtomListCms.js');
-const layoutAppMenuCmsBase = require('./layout/layoutAppMenuCmsBase.js');
+import layoutAtomItemCms from './layout/layoutAtomItemCms.js';
+import layoutAtomListCms from './layout/layoutAtomListCms.js';
+import layoutAppMenuCmsBase from './layout/layoutAppMenuCmsBase.js';
 
 const layouts = [
   //

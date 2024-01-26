@@ -1,7 +1,7 @@
 import { LocalFlowTaskEvent } from './local.flow.task_event.js';
 
-const VarsFn = require('../../common/vars.js');
-const UtilsFn = require('../../common/utils.js');
+import VarsFn from '../../common/vars.js';
+import UtilsFn from '../../common/utils.js';
 
 export class LocalFlowTaskInit extends LocalFlowTaskEvent {
   async init({ userIdAssignee, user }) {

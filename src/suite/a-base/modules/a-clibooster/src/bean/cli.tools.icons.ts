@@ -1,10 +1,10 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
-const fse = require('fs-extra');
-const eggBornUtils = require('egg-born-utils');
-const bb = require('bluebird');
-const xml2js = require('xml2js');
+import path from 'path';
+import fse from 'fs-extra';
+import eggBornUtils from 'egg-born-utils';
+import bb from 'bluebird';
+import xml2js from 'xml2js';
 
 @Bean({ scene: 'cli.tools' })
 export class CliToolsIcons extends BeanBase {

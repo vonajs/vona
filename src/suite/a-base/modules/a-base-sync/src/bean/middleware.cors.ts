@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 const URL = require('url').URL;
 
-const koaCors = require('@koa/cors');
+import koaCors from '@koa/cors';
 
 const optionsDefault = {
   // origin: undefined,

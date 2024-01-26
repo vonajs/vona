@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const UtilsFn = require('../common/utils.js');
+import UtilsFn from '../common/utils.js';
 
 @Bean({ scene: 'local.flow' })
 export class LocalFlowEdge extends BeanBase {

@@ -1,15 +1,15 @@
-const versionManager = require('./bean/version.manager.js');
-const flowNodeStartEventAtom = require('./bean/flow.node.startEventAtom.js');
-const flowNodeEndEventAtom = require('./bean/flow.node.endEventAtom.js');
-const flowNodeActivityUserTask = require('./bean/flow.node.activityUserTask.js');
-const localContextTask = require('./bean/local.context.task.js');
-const localFlowTask = require('./bean/local.flow.task.js');
-const localProcedure = require('./bean/local.procedure.js');
-const localRight = require('./bean/local.right.js');
-const beanFlowTask = require('./bean/bean.flowTask.js');
-const statsTaskClaimings = require('./bean/stats.taskClaimings.js');
-const statsTaskHandlings = require('./bean/stats.taskHandlings.js');
-const ioMessageWorkflow = require('./bean/io.message.workflow.js');
+import versionManager from './bean/version.manager.js';
+import flowNodeStartEventAtom from './bean/flow.node.startEventAtom.js';
+import flowNodeEndEventAtom from './bean/flow.node.endEventAtom.js';
+import flowNodeActivityUserTask from './bean/flow.node.activityUserTask.js';
+import localContextTask from './bean/local.context.task.js';
+import localFlowTask from './bean/local.flow.task.js';
+import localProcedure from './bean/local.procedure.js';
+import localRight from './bean/local.right.js';
+import beanFlowTask from './bean/bean.flowTask.js';
+import statsTaskClaimings from './bean/stats.taskClaimings.js';
+import statsTaskHandlings from './bean/stats.taskHandlings.js';
+import ioMessageWorkflow from './bean/io.message.workflow.js';
 
 export default {
   // version

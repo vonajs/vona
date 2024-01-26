@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const atomDocument = require('./bean/atom.document.js');
+import versionManager from './bean/version.manager.js';
+import atomDocument from './bean/atom.document.js';
 
 export default {
   // version

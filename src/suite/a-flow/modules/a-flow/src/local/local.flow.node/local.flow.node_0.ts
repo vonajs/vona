@@ -1,7 +1,7 @@
 import { BeanBase } from '@cabloy/core';
 
-const VarsFn = require('../../common/vars.js');
-const UtilsFn = require('../../common/utils.js');
+import VarsFn from '../../common/vars.js';
+import UtilsFn from '../../common/utils.js';
 
 const __behaviorBaseDef = {
   id: 'behavior_0',

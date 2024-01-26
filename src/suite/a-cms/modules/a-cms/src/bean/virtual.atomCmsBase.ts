@@ -1,6 +1,6 @@
 import { Virtual } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
-const trimHtml = require('@zhennann/trim-html');
+import trimHtml from '@zhennann/trim-html';
 
 @Virtual({ scene: 'bean' })
 export class BeanAtomCmsBase extends BeanAtomBase {

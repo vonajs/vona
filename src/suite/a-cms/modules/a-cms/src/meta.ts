@@ -1,13 +1,13 @@
-const atomClasses = require('./meta/atomClass/atomClasses.js');
-const keywords = require('./meta/validation/keywords.js');
-const schemas = require('./meta/validation/schemas.js');
+import atomClasses from './meta/atomClass/atomClasses.js';
+import keywords from './meta/validation/keywords.js';
+import schemas from './meta/validation/schemas.js';
 // socketio
-const socketioHotloadFile = require('./meta/socketio/hotloadFile.js');
+import socketioHotloadFile from './meta/socketio/hotloadFile.js';
 // static
-const staticApps = require('./meta/static/apps.js');
-const staticFlowDefs = require('./meta/static/flowDefs.js');
-const staticResources = require('./meta/static/resources.js');
-const staticLayouts = require('./meta/static/layouts.js');
+import staticApps from './meta/static/apps.js';
+import staticFlowDefs from './meta/static/flowDefs.js';
+import staticResources from './meta/static/resources.js';
+import staticLayouts from './meta/static/layouts.js';
 // meta
 const meta = {
   base: {

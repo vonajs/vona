@@ -1,13 +1,13 @@
-const config = require('./config/config.js');
-const locales = require('./config/locales.js');
-const errors = require('./config/errors.js');
+import config from './config/config.js';
+import locales from './config/locales.js';
+import errors from './config/errors.js';
 
-const routes = require('./routes.js');
-const controllers = require('./controllers.js');
-const services = require('./services.js');
-const models = require('./models.js');
+import routes from './routes.js';
+import controllers from './controllers.js';
+import services from './services.js';
+import models from './models.js';
 // meta
-const meta = require('./meta.js');
+import meta from './meta.js';
 
 export default {
   routes,

@@ -1,4 +1,4 @@
-const schemaApp = require('./schema/app.js');
+import schemaApp from './schema/app.js';
 
 const schemas = {};
 // app

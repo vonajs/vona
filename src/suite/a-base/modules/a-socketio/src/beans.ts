@@ -1,18 +1,18 @@
-const versionManager = require('./bean/version.manager.js');
-const localMessage = require('./bean/local.message.js');
-const localMessageClass = require('./bean/local.messageClass.js');
-const localProcedure = require('./bean/local.procedure.js');
-const localIoMessageBase = require('./bean/local.ioMessageBase.js');
-const localIoInner = require('./bean/local.ioInner.js');
-const localRedis = require('./bean/local.redis.js');
-const broadcastSocketEmit = require('./bean/broadcast.socketEmit.js');
-const queueProcess = require('./bean/queue.process.js');
-const queueDelivery = require('./bean/queue.delivery.js');
-const queuePush = require('./bean/queue.push.js');
-const queuePushDirect = require('./bean/queue.pushDirect.js');
-const middlewareIOConnection = require('./bean/middleware.io.connection.js');
-const middlewareIOPacket = require('./bean/middleware.io.packet.js');
-const beanIO = require('./bean/bean.io.js');
+import versionManager from './bean/version.manager.js';
+import localMessage from './bean/local.message.js';
+import localMessageClass from './bean/local.messageClass.js';
+import localProcedure from './bean/local.procedure.js';
+import localIoMessageBase from './bean/local.ioMessageBase.js';
+import localIoInner from './bean/local.ioInner.js';
+import localRedis from './bean/local.redis.js';
+import broadcastSocketEmit from './bean/broadcast.socketEmit.js';
+import queueProcess from './bean/queue.process.js';
+import queueDelivery from './bean/queue.delivery.js';
+import queuePush from './bean/queue.push.js';
+import queuePushDirect from './bean/queue.pushDirect.js';
+import middlewareIOConnection from './bean/middleware.io.connection.js';
+import middlewareIOPacket from './bean/middleware.io.packet.js';
+import beanIO from './bean/bean.io.js';
 
 export default {
   // version

@@ -1,10 +1,10 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
+import path from 'path';
 
-const babel = require('@babel/core');
-const UglifyJS = require('uglify-js');
-const fse = require('fs-extra');
+import babel from '@babel/core';
+import UglifyJS from 'uglify-js';
+import fse from 'fs-extra';
 
 @Bean({ scene: 'cli.tools' })
 export class CliToolsBabel extends BeanBase {

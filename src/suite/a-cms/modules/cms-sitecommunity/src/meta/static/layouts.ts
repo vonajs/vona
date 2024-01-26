@@ -1,4 +1,4 @@
-const layoutAtomListPost = require('./layout/layoutAtomListPost.js');
+import layoutAtomListPost from './layout/layoutAtomListPost.js';
 
 const layouts = [layoutAtomListPost];
 export default layouts;

@@ -1,8 +1,8 @@
-const schemas = require('./meta/validation/schemas.js');
+import schemas from './meta/validation/schemas.js';
 // static
-const staticResources = require('./meta/static/resources.js');
+import staticResources from './meta/static/resources.js';
 // cli commands
-const cliCommands = require('./meta/cli/commands.js');
+import cliCommands from './meta/cli/commands.js';
 // meta
 const meta = {
   base: {

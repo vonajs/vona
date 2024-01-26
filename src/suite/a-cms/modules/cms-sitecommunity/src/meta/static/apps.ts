@@ -1,4 +1,4 @@
-const appCommunity = require('./app/appCommunity.js');
+import appCommunity from './app/appCommunity.js';
 
 const apps = [
   //

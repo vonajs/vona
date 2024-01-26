@@ -1,6 +1,6 @@
-const startEventAtom = require('./schema/startEventAtom.js');
-const endEventAtom = require('./schema/endEventAtom.js');
-const activityUserTask = require('./schema/activityUserTask.js');
+import startEventAtom from './schema/startEventAtom.js';
+import endEventAtom from './schema/endEventAtom.js';
+import activityUserTask from './schema/activityUserTask.js';
 
 const schemas = {};
 // startEventAtom

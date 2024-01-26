@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const beanDebug = require('./bean/bean.debug.js');
+import versionManager from './bean/version.manager.js';
+import beanDebug from './bean/bean.debug.js';
 
 export default {
   // version

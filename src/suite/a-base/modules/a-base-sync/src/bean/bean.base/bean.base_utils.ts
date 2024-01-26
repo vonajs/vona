@@ -1,8 +1,8 @@
 import { BeanBaseThemes } from './bean.base_themes.js';
 
-const path = require('path');
+import path from 'path';
 
-const fse = require('fs-extra');
+import fse from 'fs-extra';
 
 let _hostText = null;
 

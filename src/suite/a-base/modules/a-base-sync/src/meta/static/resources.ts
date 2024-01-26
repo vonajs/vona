@@ -1,9 +1,9 @@
-const functions = require('./resource/functions.js');
-const menus = require('./resource/menus.js');
-const mines = require('./resource/mines.js');
-const deprecated = require('./resource/deprecated.js');
+import functions from './resource/functions.js';
+import menus from './resource/menus.js';
+import mines from './resource/mines.js';
+import deprecated from './resource/deprecated.js';
 
-let resources = [];
+let resources: any[] = [];
 resources = resources.concat(functions);
 resources = resources.concat(menus);
 resources = resources.concat(mines);

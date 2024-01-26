@@ -1,7 +1,7 @@
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 
-const AtomCmsBase = require('../common/atomCmsBase.js');
+import AtomCmsBase from '../common/atomCmsBase.js';
 
 @Atom()
 export class AtomArticle extends BeanAtomBase {

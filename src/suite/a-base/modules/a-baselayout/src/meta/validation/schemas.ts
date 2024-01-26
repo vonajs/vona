@@ -1,6 +1,6 @@
-const filterTabBasic = require('./schema/filterTabBasic.js');
-const filterTabGeneral = require('./schema/filterTabGeneral.js');
-const layout = require('./schema/layout.js');
+import filterTabBasic from './schema/filterTabBasic.js';
+import filterTabGeneral from './schema/filterTabGeneral.js';
+import layout from './schema/layout.js';
 
 const schemas = {};
 // filterTabBasic

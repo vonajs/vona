@@ -1,5 +1,5 @@
-const schemas = require('./meta/validation/schemas.js');
-const flowBehaviors = require('./meta/flow/behaviors.js');
+import schemas from './meta/validation/schemas.js';
+import flowBehaviors from './meta/flow/behaviors.js';
 const meta = {
   base: {
     atoms: {},

@@ -1,4 +1,4 @@
-const postPublish = require('./flowDef/postPublish.js');
+import postPublish from './flowDef/postPublish.js';
 
 const flowDefs = [postPublish];
 export default flowDefs;

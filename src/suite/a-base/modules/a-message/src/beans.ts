@@ -1,7 +1,7 @@
-const versionManager = require('./bean/version.manager.js');
-const beanMessage = require('./bean/bean.message.js');
-const statsMessage = require('./bean/stats.message.js');
-const localIoMessageUniformBase = require('./bean/local.ioMessageUniformBase.js');
+import versionManager from './bean/version.manager.js';
+import beanMessage from './bean/bean.message.js';
+import statsMessage from './bean/stats.message.js';
+import localIoMessageUniformBase from './bean/local.ioMessageUniformBase.js';
 
 export default {
   // version

@@ -1,5 +1,5 @@
-const layoutAtomListUserOnline = require('./layout/layoutAtomListUserOnline.js');
-const layoutAtomListUserOnlineHistory = require('./layout/layoutAtomListUserOnlineHistory.js');
+import layoutAtomListUserOnline from './layout/layoutAtomListUserOnline.js';
+import layoutAtomListUserOnlineHistory from './layout/layoutAtomListUserOnlineHistory.js';
 
 const layouts = [
   //

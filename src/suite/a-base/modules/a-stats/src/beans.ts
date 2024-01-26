@@ -1,8 +1,8 @@
-const versionManager = require('./bean/version.manager.js');
-const queueStats = require('./bean/queue.stats.js');
-const beanStats = require('./bean/bean.stats.js');
-const ioMessageStats = require('./bean/io.message.stats.js');
-const statsDeps = require('./bean/stats.deps.js');
+import versionManager from './bean/version.manager.js';
+import queueStats from './bean/queue.stats.js';
+import beanStats from './bean/bean.stats.js';
+import ioMessageStats from './bean/io.message.stats.js';
+import statsDeps from './bean/stats.deps.js';
 
 export default {
   // version

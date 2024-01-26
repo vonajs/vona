@@ -1,6 +1,6 @@
-const layoutAtomListApp = require('./layout/layoutAtomListApp.js');
-const layoutAppMenuBase = require('./layout/layoutAppMenuBase.js');
-const layoutAppMenuDefault = require('./layout/layoutAppMenuDefault.js');
+import layoutAtomListApp from './layout/layoutAtomListApp.js';
+import layoutAppMenuBase from './layout/layoutAppMenuBase.js';
+import layoutAppMenuDefault from './layout/layoutAppMenuDefault.js';
 
 const layouts = [layoutAtomListApp, layoutAppMenuBase, layoutAppMenuDefault];
 export default layouts;

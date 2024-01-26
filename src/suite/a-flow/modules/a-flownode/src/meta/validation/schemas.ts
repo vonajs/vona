@@ -1,6 +1,6 @@
-const sequence = require('./schema/sequence.js');
-const startEventTimer = require('./schema/startEventTimer.js');
-const activityService = require('./schema/activityService.js');
+import sequence from './schema/sequence.js';
+import startEventTimer from './schema/startEventTimer.js';
+import activityService from './schema/activityService.js';
 
 const schemas = {};
 // sequence

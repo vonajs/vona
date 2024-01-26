@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const Strategy = require('../meta/passport/strategy.js');
+import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
 export class AuthProviderSms extends BeanBase {

@@ -1,9 +1,9 @@
 // auth
-const auth = require('./meta/passport/auth.js');
-const keywords = require('./meta/validation/keywords.js');
-const schemas = require('./meta/validation/schemas.js');
+import auth from './meta/passport/auth.js';
+import keywords from './meta/validation/keywords.js';
+import schemas from './meta/validation/schemas.js';
 // static
-const staticResources = require('./meta/static/resources.js');
+import staticResources from './meta/static/resources.js';
 // meta
 export default {
   base: {

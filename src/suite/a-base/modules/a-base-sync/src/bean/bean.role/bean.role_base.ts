@@ -1,6 +1,6 @@
 import { BeanModuleScopeBase } from '@cabloy/core';
 
-const initData15 = require('../version.manager/init/initData15.js');
+import initData15 from '../version.manager/init/initData15.js';
 
 const __atomClassRole = {
   module: moduleInfo.relativeName,

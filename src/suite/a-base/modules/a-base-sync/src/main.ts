@@ -1,20 +1,20 @@
-const AtomBase = require('./bean/bean.atomBase.js');
-const ModelCache = require('./common/modelCache.js');
+import AtomBase from './bean/bean.atomBase.js';
+import ModelCache from './common/modelCache.js';
 
-const config = require('./config/config.js');
-const locales = require('./config/locales.js');
-const errors = require('./config/errors.js');
-const aops = require('./aops.js');
-const beans = require('./beans.js');
+import config from './config/config.js';
+import locales from './config/locales.js';
+import errors from './config/errors.js';
+import aops from './aops.js';
+import beans from './beans.js';
 
 // eslint-disable-next-line
-const routes = require('./routes.js');
-const controllers = require('./controllers.js');
-const services = require('./services.js');
-const models = require('./models.js');
-const constants = require('./config/constants.js');
+import routes from './routes.js';
+import controllers from './controllers.js';
+import services from './services.js';
+import models from './models.js';
+import constants from './config/constants.js';
 // meta
-const meta = require('./meta.js');
+import meta from './meta.js';
 
 // base
 module.meta.class.AtomBase = AtomBase;

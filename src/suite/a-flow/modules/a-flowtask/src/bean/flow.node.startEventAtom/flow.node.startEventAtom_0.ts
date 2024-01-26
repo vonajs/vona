@@ -1,6 +1,6 @@
 import { BeanBase } from '@cabloy/core';
 
-const FlowNodeActivityUserTaskBase = require('../../common/flowNodeActivityUserTaskBase.js');
+import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 
 export class FlowNodeStartEventAtom0 extends BeanBase {
   constructor(options) {

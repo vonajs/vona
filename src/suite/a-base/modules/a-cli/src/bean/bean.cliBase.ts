@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const eggBornUtils = require('egg-born-utils');
+import eggBornUtils from 'egg-born-utils';
 
 @Bean()
 export class BeanCliBase extends BeanBase {

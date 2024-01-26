@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const localSessionStore = require('./bean/local.sessionStore.js');
+import versionManager from './bean/version.manager.js';
+import localSessionStore from './bean/local.sessionStore.js';
 
 export default {
   // version

@@ -1,6 +1,6 @@
-const versionManager = require('./bean/version.manager.js');
-const sequenceSimple = require('./bean/sequence.simple.js');
-const beanSequence = require('./bean/bean.sequence.js');
+import versionManager from './bean/version.manager.js';
+import sequenceSimple from './bean/sequence.simple.js';
+import beanSequence from './bean/bean.sequence.js';
 
 export default {
   // version

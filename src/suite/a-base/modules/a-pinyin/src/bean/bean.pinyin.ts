@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const py = require('pinyin-pro');
+import py from 'pinyin-pro';
 
 @Bean()
 export class BeanPinyin extends BeanBase {

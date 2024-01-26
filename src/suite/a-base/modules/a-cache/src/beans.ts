@@ -1,10 +1,10 @@
-const versionManager = require('./bean/version.manager.js');
-const localDb = require('./bean/local.db.js');
-const localMem = require('./bean/local.mem.js');
-const localRedis = require('./bean/local.redis.js');
-const broadcastMemClear = require('./bean/broadcast.memClear.js');
-const broadcastMemRemove = require('./bean/broadcast.memRemove.js');
-const beanCache = require('./bean/bean.cache.js');
+import versionManager from './bean/version.manager.js';
+import localDb from './bean/local.db.js';
+import localMem from './bean/local.mem.js';
+import localRedis from './bean/local.redis.js';
+import broadcastMemClear from './bean/broadcast.memClear.js';
+import broadcastMemRemove from './bean/broadcast.memRemove.js';
+import beanCache from './bean/bean.cache.js';
 
 export default {
   // version

@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const popCore = require('@alicloud/pop-core');
+import popCore from '@alicloud/pop-core';
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderAliyun extends BeanBase {

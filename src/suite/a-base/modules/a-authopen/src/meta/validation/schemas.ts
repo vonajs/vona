@@ -1,4 +1,4 @@
-const authOpen = require('./schema/authOpen.js');
+import authOpen from './schema/authOpen.js';
 
 const schemas = {};
 // authOpen

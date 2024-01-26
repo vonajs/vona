@@ -1,17 +1,17 @@
-const versionManager = require('./bean/version.manager.js');
-const atomFlowDef = require('./bean/atom.flowDef.js');
-const flowBehaviorBase = require('./bean/flow.behavior.base.js');
-const localContextFlow = require('./bean/local.context.flow.js');
-const localContextNode = require('./bean/local.context.node.js');
-const localContextEdge = require('./bean/local.context.edge.js');
-const localFlowFlow = require('./bean/local.flow.flow.js');
-const localFlowNode = require('./bean/local.flow.node.js');
-const localFlowEdge = require('./bean/local.flow.edge.js');
-const localFlowListener = require('./bean/local.flow.listener.js');
-const localProcedure = require('./bean/local.procedure.js');
-const beanFlow = require('./bean/bean.flow.js');
-const beanFlowDef = require('./bean/bean.flowDef.js');
-const statsFlowInitiateds = require('./bean/stats.flowInitiateds.js');
+import versionManager from './bean/version.manager.js';
+import atomFlowDef from './bean/atom.flowDef.js';
+import flowBehaviorBase from './bean/flow.behavior.base.js';
+import localContextFlow from './bean/local.context.flow.js';
+import localContextNode from './bean/local.context.node.js';
+import localContextEdge from './bean/local.context.edge.js';
+import localFlowFlow from './bean/local.flow.flow.js';
+import localFlowNode from './bean/local.flow.node.js';
+import localFlowEdge from './bean/local.flow.edge.js';
+import localFlowListener from './bean/local.flow.listener.js';
+import localProcedure from './bean/local.procedure.js';
+import beanFlow from './bean/bean.flow.js';
+import beanFlowDef from './bean/bean.flowDef.js';
+import statsFlowInitiateds from './bean/stats.flowInitiateds.js';
 
 export default {
   // version

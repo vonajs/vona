@@ -1,5 +1,5 @@
-const auth = require('./meta/passport/auth.js');
-const schemas = require('./meta/validation/schemas.js');
+import auth from './meta/passport/auth.js';
+import schemas from './meta/validation/schemas.js';
 export default {
   auth,
   validation: {

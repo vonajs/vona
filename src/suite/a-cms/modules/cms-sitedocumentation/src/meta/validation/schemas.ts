@@ -1,4 +1,4 @@
-const document = require('./schema/document.js');
+import document from './schema/document.js';
 
 const schemas = {};
 // document

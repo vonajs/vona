@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const beanIcon = require('./bean/bean.icon.js');
+import versionManager from './bean/version.manager.js';
+import beanIcon from './bean/bean.icon.js';
 
 export default {
   // version

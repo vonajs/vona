@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const atomLayout = require('./bean/atom.layout.js');
+import versionManager from './bean/version.manager.js';
+import atomLayout from './bean/atom.layout.js';
 
 export default {
   // version

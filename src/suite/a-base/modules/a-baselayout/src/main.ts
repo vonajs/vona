@@ -1,15 +1,15 @@
-const routes = require('./routes.js');
-const services = require('./services.js');
-const config = require('./config/config.js');
-const locales = require('./config/locales.js');
-const errors = require('./config/errors.js');
+import routes from './routes.js';
+import services from './services.js';
+import config from './config/config.js';
+import locales from './config/locales.js';
+import errors from './config/errors.js';
 
 // eslint-disable-next-line
-const beans = require('./beans.js');
-const controllers = require('./controllers.js');
-const models = require('./models.js');
+import beans from './beans.js';
+import controllers from './controllers.js';
+import models from './models.js';
 // meta
-const meta = require('./meta.js');
+import meta from './meta.js';
 export default {
   beans,
   routes,

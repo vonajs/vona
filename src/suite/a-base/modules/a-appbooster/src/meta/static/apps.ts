@@ -1,6 +1,6 @@
-const appGeneral = require('./app/appGeneral.js');
-const appSystem = require('./app/appSystem.js');
-const appUnclassified = require('./app/appUnclassified.js');
+import appGeneral from './app/appGeneral.js';
+import appSystem from './app/appSystem.js';
+import appUnclassified from './app/appUnclassified.js';
 
 const apps = [
   //

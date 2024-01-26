@@ -1,10 +1,10 @@
-const versionManager = require('./bean/version.manager.js');
-const ioMessageMail = require('./bean/io.message.mail.js');
-const ioChannelMail = require('./bean/io.channel.mail.js');
-const broadcastMailSceneChanged = require('./bean/broadcast.mailSceneChanged.js');
-const startupCacheMailScenes = require('./bean/startup.cacheMailScenes.js');
-const beanMail = require('./bean/bean.mail.js');
-const beanMailSceneCache = require('./bean/bean.mailSceneCache.js');
+import versionManager from './bean/version.manager.js';
+import ioMessageMail from './bean/io.message.mail.js';
+import ioChannelMail from './bean/io.channel.mail.js';
+import broadcastMailSceneChanged from './bean/broadcast.mailSceneChanged.js';
+import startupCacheMailScenes from './bean/startup.cacheMailScenes.js';
+import beanMail from './bean/bean.mail.js';
+import beanMailSceneCache from './bean/bean.mailSceneCache.js';
 
 export default {
   // version

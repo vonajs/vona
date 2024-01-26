@@ -1,5 +1,5 @@
-const auth = require('./schema/auth.js');
-const aliyun = require('./schema/aliyun.js');
+import auth from './schema/auth.js';
+import aliyun from './schema/aliyun.js';
 
 const schemas = {};
 Object.assign(schemas, auth, aliyun);

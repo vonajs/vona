@@ -1,4 +1,4 @@
-const eggBornUtils = require('egg-born-utils');
+import eggBornUtils from 'egg-born-utils';
 
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';

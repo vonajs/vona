@@ -1,4 +1,4 @@
-const overtime = require('./schema/overtime.js');
+import overtime from './schema/overtime.js';
 
 const schemas = {};
 // overtime

@@ -1,7 +1,7 @@
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 
-const randomize = require('randomatic');
+import randomize from 'randomatic';
 
 @Atom()
 export class AtomAuthOpen extends BeanAtomBase {

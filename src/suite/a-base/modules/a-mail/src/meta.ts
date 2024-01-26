@@ -1,9 +1,9 @@
-const schemas = require('./meta/validation/schemas.js');
+import schemas from './meta/validation/schemas.js';
 // socketio
-const socketioMessageMail = require('./meta/socketio/messageMail.js');
-const socketioChannelMail = require('./meta/socketio/channelMail.js');
+import socketioMessageMail from './meta/socketio/messageMail.js';
+import socketioChannelMail from './meta/socketio/channelMail.js';
 // static
-const staticResources = require('./meta/static/resources.js');
+import staticResources from './meta/static/resources.js';
 // meta
 const meta = {
   base: {

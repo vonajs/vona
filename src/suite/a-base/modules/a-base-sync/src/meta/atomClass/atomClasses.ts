@@ -1,15 +1,15 @@
-const resource = require('./atomClass/resource.js');
-const role = require('./atomClass/role.js');
-const roleRight = require('./atomClass/roleRight.js');
-const roleRightSpread = require('./atomClass/roleRightSpread.js');
-const roleResourceRight = require('./atomClass/roleResourceRight.js');
-const roleResourceRightSpread = require('./atomClass/roleResourceRightSpread.js');
-const roleFieldsRight = require('./atomClass/roleFieldsRight.js');
-const roleFieldsRightSpread = require('./atomClass/roleFieldsRightSpread.js');
-const user = require('./atomClass/user.js');
-const userAtomRight = require('./atomClass/userAtomRight.js');
-const userResourceRight = require('./atomClass/userResourceRight.js');
-const userFieldsRight = require('./atomClass/userFieldsRight.js');
+import resource from './atomClass/resource.js';
+import role from './atomClass/role.js';
+import roleRight from './atomClass/roleRight.js';
+import roleRightSpread from './atomClass/roleRightSpread.js';
+import roleResourceRight from './atomClass/roleResourceRight.js';
+import roleResourceRightSpread from './atomClass/roleResourceRightSpread.js';
+import roleFieldsRight from './atomClass/roleFieldsRight.js';
+import roleFieldsRightSpread from './atomClass/roleFieldsRightSpread.js';
+import user from './atomClass/user.js';
+import userAtomRight from './atomClass/userAtomRight.js';
+import userResourceRight from './atomClass/userResourceRight.js';
+import userFieldsRight from './atomClass/userFieldsRight.js';
 
 export default {
   //

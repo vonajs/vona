@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const beanShare = require('./bean/bean.share.js');
+import versionManager from './bean/version.manager.js';
+import beanShare from './bean/bean.share.js';
 
 export default {
   // version

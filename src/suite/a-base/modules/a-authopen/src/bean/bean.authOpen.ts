@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const randomize = require('randomatic');
+import randomize from 'randomatic';
 
 const __atomClassRole = {
   module: 'a-base',

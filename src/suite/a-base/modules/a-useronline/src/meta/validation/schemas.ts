@@ -1,5 +1,5 @@
-const userOnline = require('./schema/userOnline.js');
-const userOnlineHistory = require('./schema/userOnlineHistory.js');
+import userOnline from './schema/userOnline.js';
+import userOnlineHistory from './schema/userOnlineHistory.js';
 
 const schemas = {};
 // userOnline

@@ -1,5 +1,5 @@
-const userOnline = require('./atomClass/userOnline.js');
-const userOnlineHistory = require('./atomClass/userOnlineHistory.js');
+import userOnline from './atomClass/userOnline.js';
+import userOnlineHistory from './atomClass/userOnlineHistory.js';
 
 export default {
   //

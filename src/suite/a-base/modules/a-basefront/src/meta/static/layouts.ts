@@ -1,6 +1,6 @@
-const layoutAtomItemBase = require('./layout/layoutAtomItemBase.js');
-const layoutAtomListBase = require('./layout/layoutAtomListBase.js');
-const layoutItemOnlyListBase = require('./layout/layoutItemOnlyListBase.js');
+import layoutAtomItemBase from './layout/layoutAtomItemBase.js';
+import layoutAtomListBase from './layout/layoutAtomListBase.js';
+import layoutItemOnlyListBase from './layout/layoutItemOnlyListBase.js';
 
 const layouts = [
   //

@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const FlowBehaviorBase = require('../common/flowBehaviorBase.js');
+import FlowBehaviorBase from '../common/flowBehaviorBase.js';
 
 @Bean({ scene: 'flow.behavior' })
 export class FlowBehaviorBase extends BeanBase {

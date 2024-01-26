@@ -1,6 +1,6 @@
 import { BeanAtomBaseDelete } from './bean.atomBase_delete.js';
 
-const ExcelJS = require('exceljs');
+import ExcelJS from 'exceljs';
 
 export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
   async exportBulk({ atomClass, options, fields, user }) {

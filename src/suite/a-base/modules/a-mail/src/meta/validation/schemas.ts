@@ -1,4 +1,4 @@
-const mailScene = require('./schema/mailScene.js');
+import mailScene from './schema/mailScene.js';
 
 const schemas = {};
 Object.assign(schemas, mailScene);

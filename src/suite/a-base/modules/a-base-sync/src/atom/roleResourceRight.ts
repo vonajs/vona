@@ -1,7 +1,7 @@
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
-const AtomBase = require('./bean.atomBase.js');
+import AtomBase from './bean.atomBase.js';
 
 @Atom()
 export class AtomRoleResourceRight extends BeanAtomBase {

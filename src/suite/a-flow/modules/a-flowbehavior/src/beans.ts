@@ -1,6 +1,6 @@
-const versionManager = require('./bean/version.manager.js');
-const flowBehaviorOvertime = require('./bean/flow.behavior.overtime.js');
-const queueOvertime = require('./bean/queue.overtime.js');
+import versionManager from './bean/version.manager.js';
+import flowBehaviorOvertime from './bean/flow.behavior.overtime.js';
+import queueOvertime from './bean/queue.overtime.js';
 
 export default {
   // version

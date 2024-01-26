@@ -1,9 +1,9 @@
-const user = require('./schema/user.js');
-const userAdmin = require('./schema/userAdmin.js');
-const userChangeUserName = require('./schema/userChangeUserName.js');
-const category = require('./schema/category.js');
-const resource = require('./schema/resource.js');
-const role = require('./schema/role.js');
+import user from './schema/user.js';
+import userAdmin from './schema/userAdmin.js';
+import userChangeUserName from './schema/userChangeUserName.js';
+import category from './schema/category.js';
+import resource from './schema/resource.js';
+import role from './schema/role.js';
 
 const schemas = {};
 Object.assign(schemas, user);

@@ -1,10 +1,10 @@
-const atomClasses = require('./meta/atomClass/atomClasses.js');
-const keywords = require('./meta/validation/keywords.js');
-const schemas = require('./meta/validation/schemas.js');
-const staticDicts = require('./meta/static/dicts.js');
-const staticResources = require('./meta/static/resources.js');
-const staticRoles = require('./meta/static/roles.js');
-const socketioComment = require('./meta/socketio/comment.js');
+import atomClasses from './meta/atomClass/atomClasses.js';
+import keywords from './meta/validation/keywords.js';
+import schemas from './meta/validation/schemas.js';
+import staticDicts from './meta/static/dicts.js';
+import staticResources from './meta/static/resources.js';
+import staticRoles from './meta/static/roles.js';
+import socketioComment from './meta/socketio/comment.js';
 // meta
 const meta = {
   base: {

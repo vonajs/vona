@@ -1,7 +1,7 @@
-const versionManager = require('./bean/version.manager.js');
-const atomUserOnline = require('./bean/atom.userOnline.js');
-const atomUserOnlineHistory = require('./bean/atom.userOnlineHistory.js');
-const beanUserOnline = require('./bean/bean.userOnline.js');
+import versionManager from './bean/version.manager.js';
+import atomUserOnline from './bean/atom.userOnline.js';
+import atomUserOnlineHistory from './bean/atom.userOnlineHistory.js';
+import beanUserOnline from './bean/bean.userOnline.js';
 
 export default {
   // version

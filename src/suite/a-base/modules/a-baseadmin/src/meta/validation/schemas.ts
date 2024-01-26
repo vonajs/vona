@@ -1,6 +1,6 @@
-const roleRight = require('./schema/roleRight.js');
-const roleResourceRight = require('./schema/roleResourceRight.js');
-const roleFieldsRight = require('./schema/roleFieldsRight.js');
+import roleRight from './schema/roleRight.js';
+import roleResourceRight from './schema/roleResourceRight.js';
+import roleFieldsRight from './schema/roleFieldsRight.js';
 
 const schemas = {};
 Object.assign(schemas, roleRight);

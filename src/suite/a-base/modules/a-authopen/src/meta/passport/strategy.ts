@@ -1,5 +1,5 @@
-const passport = require('passport-strategy');
-const util = require('util');
+import passport from 'passport-strategy';
+import util from 'util';
 
 function Strategy(options, verify) {
   if (typeof options === 'function') {

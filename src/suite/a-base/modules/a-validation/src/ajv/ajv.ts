@@ -1,8 +1,8 @@
-const Ajv = require('ajv');
-const AjvLocalize = require('ajv-i18n');
-const AjvKeywords = require('ajv-keywords');
-const jsBeautify = require('js-beautify');
-const systemKeywords = require('./keywords.js');
+import Ajv from 'ajv';
+import AjvLocalize from 'ajv-i18n';
+import AjvKeywords from 'ajv-keywords';
+import jsBeautify from 'js-beautify';
+import systemKeywords from './keywords.js';
 
 Ajv.create = function ({ options, keywords, schemas, schemaRoot }) {
   // default

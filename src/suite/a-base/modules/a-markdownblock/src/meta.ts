@@ -1,5 +1,5 @@
-const schemas = require('./meta/validation/schemas.js');
-const staticResources = require('./meta/static/resources.js');
+import schemas from './meta/validation/schemas.js';
+import staticResources from './meta/static/resources.js';
 const meta = {
   base: {
     atoms: {},

@@ -1,13 +1,13 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
-const fse = require('fs-extra');
-const JSZip = require('jszip');
-const shajs = require('sha.js');
-const semver = require('semver');
-const utility = require('utility');
-const eggBornUtils = require('egg-born-utils');
-const CliStoreBase = require('../common/cliStoreBase.js');
+import path from 'path';
+import fse from 'fs-extra';
+import JSZip from 'jszip';
+import shajs from 'sha.js';
+import semver from 'semver';
+import utility from 'utility';
+import eggBornUtils from 'egg-born-utils';
+import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })
 export class CliStorePublish extends BeanBase {

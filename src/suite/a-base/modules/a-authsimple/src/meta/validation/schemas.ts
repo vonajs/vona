@@ -1,9 +1,9 @@
-const emailConfirm = require('./schema/emailConfirm.js');
-const passwordChange = require('./schema/passwordChange.js');
-const passwordForgot = require('./schema/passwordForgot.js');
-const passwordReset = require('./schema/passwordReset.js');
-const signin = require('./schema/signin.js');
-const signup = require('./schema/signup.js');
+import emailConfirm from './schema/emailConfirm.js';
+import passwordChange from './schema/passwordChange.js';
+import passwordForgot from './schema/passwordForgot.js';
+import passwordReset from './schema/passwordReset.js';
+import signin from './schema/signin.js';
+import signup from './schema/signup.js';
 
 const schemas = {};
 Object.assign(schemas, emailConfirm);

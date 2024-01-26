@@ -1,4 +1,4 @@
-const appDocumentation = require('./app/appDocumentation.js');
+import appDocumentation from './app/appDocumentation.js';
 
 const apps = [
   //

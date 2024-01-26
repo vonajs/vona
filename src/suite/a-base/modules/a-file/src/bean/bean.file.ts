@@ -1,15 +1,15 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
-const sendToWormhole = require('stream-wormhole');
-const Jimp = require('jimp');
-const bb = require('bluebird');
-const pump = require('pump');
-const fse = require('fs-extra');
-const base64url = require('base64url');
-const Mime = require('mime');
+import sendToWormhole from 'stream-wormhole';
+import Jimp from 'jimp';
+import bb from 'bluebird';
+import pump from 'pump';
+import fse from 'fs-extra';
+import base64url from 'base64url';
+import Mime from 'mime';
 
 const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 

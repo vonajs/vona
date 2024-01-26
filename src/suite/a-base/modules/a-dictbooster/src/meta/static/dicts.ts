@@ -1,8 +1,8 @@
-const onlineStatus = require('./dict/onlineStatus.js');
-const layoutType = require('./dict/layoutType.js');
-const atomStateDefault = require('./dict/atomStateDefault.js');
-const atomDisabled = require('./dict/atomDisabled.js');
-const dictMode = require('./dict/dictMode.js');
+import onlineStatus from './dict/onlineStatus.js';
+import layoutType from './dict/layoutType.js';
+import atomStateDefault from './dict/atomStateDefault.js';
+import atomDisabled from './dict/atomDisabled.js';
+import dictMode from './dict/dictMode.js';
 
 const dicts = [
   onlineStatus, //

@@ -1,12 +1,12 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const uuid = require('uuid');
-const extend = require('@cabloy/extend');
+import uuid from 'uuid';
+import extend from '@cabloy/extend';
 const currency = require('@zhennann/currency').default;
-const moment = require('moment');
+import moment from 'moment';
 const mparse = require('@cabloy/module-parse').default;
-const eggBornUtils = require('egg-born-utils');
-const utils = require('../common/utils.js');
+import eggBornUtils from 'egg-born-utils';
+import utils from '../common/utils.js';
 
 @Bean()
 export class BeanUtil extends BeanBase {

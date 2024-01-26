@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase {

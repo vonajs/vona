@@ -1,6 +1,6 @@
-const schemas = require('./meta/validation/schemas.js');
-const staticFlowDefs = require('./meta/static/flowDefs.js');
-const flowNodes = require('./meta/flow/nodes.js');
+import schemas from './meta/validation/schemas.js';
+import staticFlowDefs from './meta/static/flowDefs.js';
+import flowNodes from './meta/flow/nodes.js';
 const meta = {
   base: {
     atoms: {},

@@ -1,7 +1,7 @@
 import { Local, BeanBase } from '@cabloy/core';
 
-const path = require('path');
-const fse = require('fs-extra');
+import path from 'path';
+import fse from 'fs-extra';
 
 const __JSContent = `
   class Demo {

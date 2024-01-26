@@ -1,7 +1,7 @@
-const schemas = require('./meta/validation/schemas.js');
-const staticResources = require('./meta/static/resources.js');
-const socketioWorkflow = require('./meta/socketio/workflow.js');
-const flowBehaviors = require('./meta/flow/behaviors.js');
+import schemas from './meta/validation/schemas.js';
+import staticResources from './meta/static/resources.js';
+import socketioWorkflow from './meta/socketio/workflow.js';
+import flowBehaviors from './meta/flow/behaviors.js';
 const meta = {
   base: {
     atoms: {

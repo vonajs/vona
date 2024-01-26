@@ -1,5 +1,5 @@
-const appCms = require('./app/appCms.js');
-// const appCmsInnerTest = require('./app/appCmsInnerTest.js');
+import appCms from './app/appCms.js';
+// import appCmsInnerTest from './app/appCmsInnerTest.js';
 
 const apps = [
   //

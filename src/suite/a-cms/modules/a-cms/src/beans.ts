@@ -1,13 +1,13 @@
-const versionManager = require('./bean/version.manager.js');
-const localBuild = require('./bean/local.build.js');
-const localRender = require('./bean/local.render.js');
-const localSite = require('./bean/local.site.js');
-const queueRender = require('./bean/queue.render.js');
-const startupRegisterAllWatchers = require('./bean/startup.registerAllWatchers.js');
-const startupRegisterDevelopment = require('./bean/startup.registerDevelopment.js');
-const atomArticle = require('./bean/atom.article.js');
-const beanCms = require('./bean/bean.cms.js');
-const ioMessageHotloadFile = require('./bean/io.message.hotloadFile.js');
+import versionManager from './bean/version.manager.js';
+import localBuild from './bean/local.build.js';
+import localRender from './bean/local.render.js';
+import localSite from './bean/local.site.js';
+import queueRender from './bean/queue.render.js';
+import startupRegisterAllWatchers from './bean/startup.registerAllWatchers.js';
+import startupRegisterDevelopment from './bean/startup.registerDevelopment.js';
+import atomArticle from './bean/atom.article.js';
+import beanCms from './bean/bean.cms.js';
+import ioMessageHotloadFile from './bean/io.message.hotloadFile.js';
 
 export default {
   // version

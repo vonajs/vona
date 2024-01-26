@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const beanMarkdown = require('./bean/bean.markdown.js');
+import versionManager from './bean/version.manager.js';
+import beanMarkdown from './bean/bean.markdown.js';
 
 export default {
   // version

@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const atomDashboard = require('./bean/atom.dashboard.js');
+import versionManager from './bean/version.manager.js';
+import atomDashboard from './bean/atom.dashboard.js';
 
 export default {
   // version

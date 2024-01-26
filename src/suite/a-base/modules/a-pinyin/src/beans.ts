@@ -1,5 +1,5 @@
-const versionManager = require('./bean/version.manager.js');
-const beanPinyin = require('./bean/bean.pinyin.js');
+import versionManager from './bean/version.manager.js';
+import beanPinyin from './bean/bean.pinyin.js';
 
 export default {
   // version
