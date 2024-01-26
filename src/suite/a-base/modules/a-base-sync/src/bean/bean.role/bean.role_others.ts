@@ -175,7 +175,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return roleId;
   }
 
-  async _forceRole({ roleAtomId, roleId }) {
+  async _forceRole({ roleAtomId, roleId }: any) {
     if (roleAtomId) {
       return await this.get({ atomId: roleAtomId });
     }

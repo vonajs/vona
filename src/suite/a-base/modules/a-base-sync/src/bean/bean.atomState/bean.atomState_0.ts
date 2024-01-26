@@ -1,6 +1,8 @@
 import { BeanBase } from '@cabloy/core';
 
 export class BeanAtomState0 extends BeanBase {
+  dictKeyDefault: any;
+
   constructor() {
     this.dictKeyDefault = 'a-dictbooster:dictAtomStateDefault';
   }

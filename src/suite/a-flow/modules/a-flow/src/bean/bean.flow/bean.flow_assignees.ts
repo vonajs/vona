@@ -77,7 +77,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
     if (!Array.isArray(str)) {
       str = str.toString().split(',');
     }
-    const arr = [];
+    const arr: any[] = [];
     for (const item of str) {
       if (typeof item === 'object') {
         // object

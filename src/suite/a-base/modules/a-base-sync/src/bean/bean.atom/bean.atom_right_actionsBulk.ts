@@ -9,7 +9,7 @@ export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     const actionsRes = await this.__checkRightActionBulk_fetchActions({ atomClass, atomClassBase, user });
-    const results = [];
+    const results: any[] = [];
     this.ctx.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
     for (const actionRes of actionsRes) {
       // just for listing check, not for right check

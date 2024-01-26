@@ -1,2 +1,2 @@
-const apps = [];
+const apps: any[] = [];
 export default apps;

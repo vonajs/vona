@@ -9,7 +9,7 @@ export class SummerCacheAtomClassInner extends BeanBase {
   }
 
   __getAtomClasses(clause) {
-    const result = [];
+    const result: any[] = [];
     const _atomClasses = this.ctx.bean.base.atomClasses();
     for (const module in _atomClasses) {
       const _atomClassesModule = _atomClasses[module];

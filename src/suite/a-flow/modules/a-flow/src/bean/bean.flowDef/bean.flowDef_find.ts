@@ -23,7 +23,7 @@ export class BeanFlowDefFind extends BeanFlowDefPrepare {
   async _loopNodes({ content, nodeIdStart, fn, options }) {
     options = options || {};
     const checkNodeStart = options.checkNodeStart !== false;
-    const nodes = [];
+    const nodes: any[] = [];
     const nodeIdCaches = {};
     // check node start
     if (checkNodeStart) {

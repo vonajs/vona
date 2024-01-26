@@ -100,8 +100,8 @@ export class BeanAuthProvider extends BeanBase {
     // authenticate
     const authenticate = _createAuthenticate();
     // middlewares
-    const middlewaresPost = [];
-    const middlewaresGet = [];
+    const middlewaresPost: any[] = [];
+    const middlewaresGet: any[] = [];
     if (!this.ctx.app.meta.isTest) middlewaresPost.push('inner');
     middlewaresPost.push(authenticate);
     middlewaresGet.push(authenticate);

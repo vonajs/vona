@@ -9,7 +9,7 @@ export class LocalTools extends BeanBase {
 
   async demo({ method, query }) {
     // methods
-    const methods = [];
+    const methods: any[] = [];
     if (method) {
       methods.push(method);
     } else {

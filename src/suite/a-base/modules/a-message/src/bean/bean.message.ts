@@ -18,7 +18,7 @@ export class BeanMessage extends BeanModuleScopeBase {
 
   _prepareMessageClassesUniform() {
     const messageClasses = this.ctx.bean.io.messageClass.messageClasses();
-    const items = [];
+    const items: any[] = [];
     for (const relativeName in messageClasses) {
       const _module = messageClasses[relativeName];
       for (const messageClassName in _module) {

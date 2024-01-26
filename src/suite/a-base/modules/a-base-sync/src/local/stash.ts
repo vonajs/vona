@@ -2,7 +2,10 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalStash extends BeanBase {
+  _caches: any;
+
   constructor() {
+    super();
     this._caches = {};
   }
   get({ type, key }) {

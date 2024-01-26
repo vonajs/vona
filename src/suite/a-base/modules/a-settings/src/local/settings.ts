@@ -54,7 +54,7 @@ export class LocalSettings extends BeanBase {
   //
 
   _prepareSettingsList(scene) {
-    const list = [];
+    const list: any[] = [];
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
       if (module.main.meta && module.main.meta.settings && module.main.meta.settings[scene]) {

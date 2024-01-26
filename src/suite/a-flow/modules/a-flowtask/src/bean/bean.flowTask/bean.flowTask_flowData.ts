@@ -163,7 +163,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     // info
     const isDone = task.flowTaskStatus === 1;
     // actions
-    const actions = [];
+    const actions: any[] = [];
     const flowTask = task;
     let res;
     // 1. assigneesConfirmation

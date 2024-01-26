@@ -14,7 +14,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     // actions
     const actionsRes = await this.__actions_fetchActions({ atom, atomClass, atomClassBase, basic, user });
     // actions res
-    const results = [];
+    const results: any[] = [];
     this.ctx.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
     this.ctx.bean.stash.clear({ options, type: 'prepareAtomSchema' });
     for (const actionRes of actionsRes) {
@@ -138,7 +138,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   async __actions_fetchActions_fromMeta({ atomClass, atomClassBase, basic, user }) {
     // basic
     if (basic) {
-      const actionsRes = [];
+      const actionsRes: any[] = [];
       for (const actionName of ['write', 'delete']) {
         const actionRes = await this.__checkRightActionBulk_fetchActions_fromMeta({
           atomClass,

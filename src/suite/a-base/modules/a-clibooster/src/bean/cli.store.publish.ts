@@ -96,7 +96,7 @@ export class CliStorePublish extends CliStoreBase {
     // zip modules
     const pathSuite = suite.root;
     const filePkgs = await eggBornUtils.tools.globbyAsync(`${pathSuite}/modules/*/package.json`);
-    const modulesMeta = [];
+    const modulesMeta: any[] = [];
     for (const filePkg of filePkgs) {
       // name
       const name = filePkg.split('/').slice(-2)[0];

@@ -142,7 +142,7 @@ export class BeanTag extends BeanBase {
 
   async parseTags({ atomClass, language, tagName, force = false }) {
     const tagNames = tagName.split(',');
-    const tagIds = [];
+    const tagIds: any[] = [];
     for (const _tagName of tagNames) {
       const tag = await this.item({ atomClass, language, tagName: _tagName });
       // next

@@ -27,10 +27,10 @@ export class LocalRedis extends CacheBase {
     const redisKeys = keysHash.map(keyHash => this._getRedisKey(keyHash));
     let values = await this.redisSummer.mget(redisKeys);
     values = values.map(v => (v ? JSON.parse(v) : undefined));
-    const redisKeysMissing = [];
-    const keysHashMissing = [];
-    const keysMissing = [];
-    const indexesMissing = [];
+    const redisKeysMissing: any[] = [];
+    const keysHashMissing: any[] = [];
+    const keysMissing: any[] = [];
+    const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {
       if (this.__checkValueEmpty(values[i], options)) {
         redisKeysMissing.push(redisKeys[i]);
@@ -72,7 +72,7 @@ export class LocalRedis extends CacheBase {
     const keyPrefix = this.redisSummer.options.keyPrefix;
     const keyPattern = `${keyPrefix}${redisKey}`;
     const keys = await this.redisSummer.keys(keyPattern);
-    const keysDel = [];
+    const keysDel: any[] = [];
     for (const fullKey of keys) {
       const key = keyPrefix ? fullKey.substr(keyPrefix.length) : fullKey;
       keysDel.push(key);

@@ -1,5 +1,9 @@
 export default ({ ctx /* flowInstance*/ }) => {
   class Utils {
+    context: any;
+    contextNode: any;
+    contextEdge: any;
+
     constructor({ context, contextNode, contextEdge }) {
       this.context = context;
       this.contextNode = contextNode;

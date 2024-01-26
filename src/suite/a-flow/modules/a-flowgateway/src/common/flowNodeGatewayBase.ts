@@ -107,7 +107,7 @@ export default ({ mode }) => {
           id: { op: '<>', val: flowNodeId },
         },
       });
-      const flowNodeInstances = [];
+      const flowNodeInstances: any[] = [];
       for (const flowNodeShadow of flowNodesShadow) {
         const flowNodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowNodeShadow.id });
         flowNodeInstances.push(flowNodeInstance);

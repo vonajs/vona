@@ -1,4 +1,12 @@
 export class BeanFlowBehaviorBase {
+  flowInstance: any;
+  nodeInstance: any;
+  context: any;
+  contextNode: any;
+  contextEdge: any;
+  _behaviorDef: any;
+  _behaviorBase: any;
+
   constructor(options) {
     if (options) {
       this.flowInstance = options.flowInstance;

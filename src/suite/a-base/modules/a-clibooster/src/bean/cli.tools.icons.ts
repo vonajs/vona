@@ -40,8 +40,8 @@ export class CliToolsIcons extends BeanCliBase {
       group.iconNames = await this._generateIconsGroup({ modulePath, iconsSrc, group });
     }
     // write to front
-    const groupsFrontImport = [];
-    const groupsFrontExport = [];
+    const groupsFrontImport: any[] = [];
+    const groupsFrontExport: any[] = [];
     for (const group of groups) {
       groupsFrontImport.push(`import _${group.name} from '../assets/icons/groups/${group.name}.svg';`);
       groupsFrontExport.push(`${group.name}: _${group.name},`);
@@ -52,7 +52,7 @@ export class CliToolsIcons extends BeanCliBase {
     await fse.ensureDir(pathFront);
     await fse.writeFile(fileFront, jsFront);
     // write to backend
-    const groupsBackend = [];
+    const groupsBackend: any[] = [];
     for (const group of groups) {
       groupsBackend.push(`${group.name}: '${group.iconNames.join(',')}',`);
     }
@@ -68,7 +68,7 @@ export class CliToolsIcons extends BeanCliBase {
     const files = await eggBornUtils.tools.globbyAsync(`${iconsSrc}/${group.name}/*.svg`);
     const iconNames = files.map(item => path.basename(item, '.svg'));
     // symbols
-    const symbols = [];
+    const symbols: any[] = [];
     for (let index = 0; index < files.length; index++) {
       const file = files[index];
       const iconName = iconNames[index];

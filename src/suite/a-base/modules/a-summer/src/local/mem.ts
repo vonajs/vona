@@ -7,6 +7,8 @@ const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Local()
 export class LocalMem extends CacheBase {
+  _lruCache: any;
+
   constructor({ cacheBase }) {
     super({ cacheBase });
     this._lruCache = null;
@@ -25,9 +27,9 @@ export class LocalMem extends CacheBase {
   async mget(keysHash, keys, options) {
     // peek
     const values = keysHash.map(keyHash => this.lruCache.peek(keyHash));
-    const keysHashMissing = [];
-    const keysMissing = [];
-    const indexesMissing = [];
+    const keysHashMissing: any[] = [];
+    const keysMissing: any[] = [];
+    const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {
       if (this.__checkValueEmpty(values[i], options)) {
         keysHashMissing.push(keysHash[i]);

@@ -5,6 +5,8 @@ const __keyUserIndex = 2;
 
 @Local()
 export class LocalRedis extends BeanBase {
+  _redis: any;
+
   constructor() {
     this._redis = null;
   }
@@ -43,7 +45,7 @@ export class LocalRedis extends BeanBase {
     const keyPrefix = this.redis.options.keyPrefix;
     const keyPatern = `${keyPrefix}${__subVersion}:${iid}:${user.id}:*`;
     const keys = await this.redis.keys(keyPatern);
-    const cmds = [];
+    const cmds: any[] = [];
     for (const fullKey of keys) {
       const key = fullKey.substr(keyPrefix.length);
       cmds.push(['hdel', key, socketId]);
@@ -70,7 +72,7 @@ export class LocalRedis extends BeanBase {
   }
 
   async _getSubscribeValuesByPathBatch({ userIds, path }) {
-    const cmdsGetAll = [];
+    const cmdsGetAll: any[] = [];
     for (const userId of userIds) {
       const key = `${__subVersion}:${this.ctx.instance.id}:${userId}:${path}`;
       cmdsGetAll.push(['hgetall', key]);
@@ -80,7 +82,7 @@ export class LocalRedis extends BeanBase {
     // check
     const result = {};
     const workersStatus = {};
-    const cmdsDelete = [];
+    const cmdsDelete: any[] = [];
     for (let i = 0; i < userIds.length; i++) {
       const userId = userIds[i];
       const hashValues = valuesBatch[i][1];

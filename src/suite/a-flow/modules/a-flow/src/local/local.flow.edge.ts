@@ -5,6 +5,12 @@ import UtilsFn from '../common/utils.js';
 
 @Bean({ scene: 'local.flow' })
 export class LocalFlowEdge extends BeanBase {
+  flowInstance: any;
+  context: any;
+  contextNode: any;
+  _edgeBase: any;
+  _edgeBaseBean: any;
+
   constructor({ flowInstance, context, contextNode }) {
     this.flowInstance = flowInstance;
     this.context = context;

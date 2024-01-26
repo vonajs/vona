@@ -93,7 +93,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
   }
 
   async stats({ atomIds, user }) {
-    const list = [];
+    const list: any[] = [];
     for (const atomId of atomIds) {
       const res = await this.checkRightRead({ atom: { id: atomId }, user, checkFlow: true });
       if (res) {

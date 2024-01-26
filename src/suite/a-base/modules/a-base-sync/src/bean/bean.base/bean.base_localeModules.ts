@@ -11,7 +11,7 @@ export class BeanBaseLocaleModules extends BeanBaseAuthProviders {
   }
 
   _prepareLocaleModules() {
-    const localeModules = [];
+    const localeModules: any[] = [];
     for (const module of this.ctx.app.meta.modulesArray) {
       const locale = module.package.eggBornModule && module.package.eggBornModule.locale;
       if (!locale) continue;

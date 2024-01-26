@@ -45,7 +45,7 @@ export class BeanEvent extends BeanModuleScopeBase {
   }
 
   _collectEventArray(key) {
-    const eventArray = [];
+    const eventArray: any[] = [];
     for (const module of this.ctx.app.meta.modulesArray) {
       const implementations = module.main.meta && module.main.meta.event && module.main.meta.event.implementations;
       if (!implementations) continue;

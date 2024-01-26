@@ -11,6 +11,8 @@ import gogocode from 'gogocode';
 
 @Local()
 export class LocalTemplate extends BeanBase {
+  cli: any;
+
   constructor(cli) {
     this.cli = cli;
   }

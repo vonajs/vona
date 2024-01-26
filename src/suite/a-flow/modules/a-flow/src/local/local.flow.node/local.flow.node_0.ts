@@ -12,6 +12,13 @@ const __behaviorBaseDef = {
 
 export class LocalFlowNode0 extends BeanBase {
   // contextEdge maybe null
+  flowInstance: any;
+  context: any;
+  contextEdge: any;
+  _nodeBase: any;
+  _nodeBaseBean: any;
+  _behaviors: any;
+
   constructor({ flowInstance, context, contextEdge }) {
     this.flowInstance = flowInstance;
     this.context = context;

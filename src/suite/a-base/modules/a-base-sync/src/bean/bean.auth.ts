@@ -3,6 +3,8 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
 export class BeanAuth extends BeanBase {
+  _redisAuth: any;
+
   constructor() {
     this._redisAuth = null;
   }

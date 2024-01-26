@@ -2,6 +2,15 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'local.context' })
 export class LocalContextFlow extends BeanBase {
+  _flowDef: any;
+  _flowDefContent: any;
+  _flowId: any;
+  _flow: any;
+  _flowHistory: any;
+  _flowVars: any;
+  _atom: any;
+  _utils: any;
+
   constructor({ flowDef }) {
     this._flowDef = flowDef;
     this._flowDefContent = JSON.parse(this._flowDef.content);

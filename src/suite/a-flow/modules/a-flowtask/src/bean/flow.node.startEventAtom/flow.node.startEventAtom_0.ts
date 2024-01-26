@@ -2,6 +2,8 @@ import { __ThisModule__ } from '../../resource/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 
 export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
+  atomStateDefault: any;
+
   constructor(options) {
     super(options);
     this.atomStateDefault = 1;

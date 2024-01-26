@@ -6,6 +6,10 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 // const __storeTokenHost = 'http://localhost:9192';
 
 export default class CliStoreBase extends BeanCliBase {
+  commandName: any;
+  tokenName: any;
+  openAuthClient: any;
+
   constructor(options, commandName) {
     super(options);
     this.commandName = commandName;
@@ -101,7 +105,7 @@ export default class CliStoreBase extends BeanCliBase {
     }
     // loop
     const total = entityNames.length;
-    const results = [];
+    const results: any[] = [];
     for (let index = 0; index < total; index++) {
       const entityName = entityNames[index];
       // log

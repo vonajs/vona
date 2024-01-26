@@ -16,7 +16,7 @@ export class ModelAtomClass extends BeanModelBase {
       return await super.mget(ids);
     }
     // array of object
-    const result = [];
+    const result: any[] = [];
     for (const atomClass of ids) {
       result.push(await this.get(atomClass));
     }

@@ -17,6 +17,9 @@ import utils from '../common/utils.js';
 
 @Local()
 export class LocalBuild extends BeanBase {
+  atomClass: any;
+  default: any;
+
   constructor(atomClass) {
     this.atomClass = utils.atomClass(atomClass);
     this.default = this.atomClass.module === 'a-cms';
@@ -120,7 +123,7 @@ export class LocalBuild extends BeanBase {
   async getLanguages() {
     const siteBase = await this.combineSiteBase();
     if (!siteBase.language) return [];
-    const languages = [];
+    const languages: any[] = [];
     for (const item of siteBase.language.items.split(',')) {
       languages.push({
         title: this.ctx.text(item),
@@ -798,8 +801,8 @@ var env=${JSON.stringify(env, null, 2)};
   async getData({ site }) {
     // data
     const self = this;
-    const _csses = [];
-    const _jses = [];
+    const _csses: any[] = [];
+    const _jses: any[] = [];
     const _envs = {};
     let _pathIntermediate = await this.getPathIntermediate(site.language && site.language.current);
     _pathIntermediate = path.join(_pathIntermediate, '/');
@@ -1078,7 +1081,7 @@ var env=${JSON.stringify(env, null, 2)};
   // register watchers
   async registerWatchers() {
     // info
-    const watcherInfos = [];
+    const watcherInfos: any[] = [];
     // site
     const site = await this.combineSiteBase();
     const languages = site.language ? site.language.items.split(',') : [null];

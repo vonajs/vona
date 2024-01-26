@@ -2,6 +2,16 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'local.context' })
 export class LocalContextTask extends BeanBase {
+  context: any;
+  contextNode: any;
+  _nodeDef: any;
+  _flowTaskId: any;
+  _flowTask: any;
+  _flowTaskHistory: any;
+  _taskVars: any;
+  _utils: any;
+  _user: any;
+
   constructor({ context, contextNode, nodeDef }) {
     this.context = context;
     this.contextNode = contextNode;

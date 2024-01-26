@@ -2,6 +2,11 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class LocalFlowTask0 extends BeanBase {
+  nodeInstance: any;
+  flowInstance: any;
+  context: any;
+  contextNode: any;
+
   constructor({ nodeInstance }) {
     this.nodeInstance = nodeInstance;
     this.flowInstance = nodeInstance.flowInstance;

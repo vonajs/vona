@@ -49,7 +49,7 @@ export class VersionUpdate extends BeanBase {
     }
 
     // functions
-    const functionNames = [];
+    const functionNames: any[] = [];
     for (const functionName of functionNames) {
       await this.ctx.model.query(update1Data.functions[functionName]);
     }

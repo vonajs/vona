@@ -24,12 +24,12 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
   }
 
   _loadAllAtomStatics_prepare() {
-    const modules = [];
+    const modules: any[] = [];
     for (const module of this.ctx.app.meta.modulesArray) {
       const moduleName = module.info.relativeName;
       const statics = module.main.meta && module.main.meta.base && module.main.meta.base.statics;
       if (!statics) continue;
-      const statics2 = [];
+      const statics2: any[] = [];
       for (const atomClassKey in statics) {
         const atomClass = this.ctx.bean.util.parseAtomClass({
           module: null,
@@ -62,7 +62,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
 
   async _loadAtomStatics_prepare({ moduleName, atomClass, items }) {
     moduleName = moduleName || this.moduleScope;
-    const atomStaticKeys = [];
+    const atomStaticKeys: any[] = [];
     for (const item of items) {
       // key not empty
       if (!item.atomStaticKey) {

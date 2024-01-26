@@ -3,6 +3,8 @@ import { Local } from '@cabloy/core';
 
 @Local()
 export class LocalFetch extends CacheBase {
+  _cacheBean: any;
+
   constructor({ cacheBase }) {
     super({ cacheBase });
     this._cacheBean = null;
@@ -26,7 +28,7 @@ export class LocalFetch extends CacheBase {
       return await this.cacheBean.mget(keys, options, keysHash);
     }
     // fallback
-    const values = [];
+    const values: any[] = [];
     for (let i = 0; i < keys.length; i++) {
       values.push(await this.get(keysHash[i], keys[i], options));
     }

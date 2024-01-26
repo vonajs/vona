@@ -13,7 +13,7 @@ export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
     // worksheet
     const worksheet = workbook.addWorksheet('Sheet');
     // columns
-    const columns = [];
+    const columns: any[] = [];
     for (const field of fields) {
       columns.push({
         header: this.ctx.text(field.title),
@@ -22,7 +22,7 @@ export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
     }
     worksheet.columns = columns;
     // rows
-    const rows = [];
+    const rows: any[] = [];
     for (const item of items) {
       const row = {};
       for (const field of fields) {

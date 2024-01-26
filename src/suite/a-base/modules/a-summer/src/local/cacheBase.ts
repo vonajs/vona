@@ -2,6 +2,13 @@ import { __ThisModule__ } from '../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class CacheBase extends BeanBase {
+  _cacheBase: any;
+
+  _configModule: any;
+  _localMem: any;
+  _localRedis: any;
+  _localFetch: any;
+
   constructor({ cacheBase }) {
     super();
     this._cacheBase = cacheBase;

@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const fileVersionUpdates = [];
-const fileVersionInits = [];
+const fileVersionUpdates: any[] = [];
+const fileVersionInits: any[] = [];
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase {

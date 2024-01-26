@@ -5,6 +5,10 @@ import eggBornUtils from 'egg-born-utils';
 
 @Virtual({ scene: 'bean' })
 export class BeanCliBase extends BeanBase {
+  options: any;
+  cabloyConfig: any;
+  terminal: any;
+
   constructor(options) {
     this.options = options;
     this.cabloyConfig = null;

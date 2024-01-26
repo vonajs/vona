@@ -16,7 +16,7 @@ export class ModelMessageClass extends BeanModelBase {
       return await super.mget(ids);
     }
     // array of object
-    const result = [];
+    const result: any[] = [];
     for (const messageClass of ids) {
       result.push(await this.get(messageClass));
     }

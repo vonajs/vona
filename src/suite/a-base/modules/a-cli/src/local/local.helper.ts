@@ -10,6 +10,9 @@ const { ProcessHelper } = require('@cabloy/process-helper');
 
 @Local()
 export class LocalHelper extends BeanBase {
+  cli: any;
+  ProcessHelper: any;
+
   constructor(cli) {
     this.cli = cli;
     this.ProcessHelper = new ProcessHelper(this.cwd, this.console);

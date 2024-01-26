@@ -64,7 +64,7 @@ export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
     fnBefore,
     fnAfter,
   }) {
-    const resKeys = [];
+    const resKeys: any[] = [];
     for (const key of keys) {
       // check right action
       const right = await this.ctx.bean.atom.checkRightAction({

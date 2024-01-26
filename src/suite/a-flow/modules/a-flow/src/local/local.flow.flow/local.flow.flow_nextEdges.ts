@@ -68,7 +68,7 @@ export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
       return levelA - levelB;
     });
     // edges
-    const edges = [];
+    const edges: any[] = [];
     for (const edgeDef of edgeDefs) {
       const edge = await this._createEdgeInstance({ edgeDef, contextNode });
       edges.push(edge);

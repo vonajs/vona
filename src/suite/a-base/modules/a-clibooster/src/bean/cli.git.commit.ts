@@ -32,7 +32,7 @@ export class CliGitCommit extends BeanCliBase {
     // load all entities
     const entityNames = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.commands.:git:commit.entities');
     // prepare
-    const entities = [];
+    const entities: any[] = [];
     for (const entityName of entityNames) {
       // try suite
       let entity = this.helper.findSuite(entityName);

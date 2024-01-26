@@ -2,6 +2,11 @@ import { BeanBase, Virtual } from '@cabloy/core';
 
 @Virtual({ scene: 'bean' })
 export class BeanAuthProviderBase extends BeanBase {
+  authProvider: any;
+  providerModule: any;
+  providerName: any;
+  providerScene: any;
+
   constructor({ authProvider, providerModule, providerName, providerScene }) {
     this.authProvider = authProvider;
     this.providerModule = providerModule;

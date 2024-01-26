@@ -41,9 +41,33 @@ async function main() {
 async function _moduleHandle_vars({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
   // 查找constructor
-  const ast = gogocode(sourceCode, { parseOptions: snippet.parseOptions });
-  const outAst = await snippet.transform(this.getAstData(ast, snippet));
-  outputCode = outAst.root().generate();
+  const ast = gogocode(contentOld, { parseOptions: {} });
+  const ast1 = ast.find('constructor() {$$$0}');
+  // const outAst = await snippet.transform(this.getAstData(ast, snippet));
+  const ast1Src = ast1.generate();
+  // 查找this参数
+  const regexp = /this\.(.*?) = .*?;/g;
+  const matches = ast1Src.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  const outputNew3 = [];
+  let matchCount = 0;
+  for (const match of matches) {
+    matchCount++;
+    const classNameOld = match[1];
+    const classNameNew = `${classNameOld}: any;`;
+    if (contentOld.indexOf(classNameNew) === -1) {
+      outputNew1.push(classNameNew);
+    }
+  }
+  if (outputNew1.length === 0) {
+    return;
+  }
+  const contentNew = contentOld.replace(`constructor(`, `${outputNew1.join('\n')}\n\nconstructor(`);
+  // console.log(contentNew);
+  console.log(file);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {

@@ -4,6 +4,8 @@ const ONE_DAY = 1000 * 60 * 60 * 24;
 
 @Local()
 export class LocalSessionStore extends BeanBase {
+  _redis: any;
+
   constructor() {
     this._redis = null;
   }

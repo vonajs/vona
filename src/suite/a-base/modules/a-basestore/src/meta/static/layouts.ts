@@ -1,2 +1,2 @@
-const layouts = [];
+const layouts: any[] = [];
 export default layouts;

@@ -7,6 +7,11 @@ import { BeanBase } from '@cabloy/core';
 // import eggBornUtils from 'egg-born-utils';
 
 export class Watcher extends BeanBase {
+  _watchers: any;
+  _freezeCounter: any;
+  _needReload: any;
+  _needReload: any;
+
   constructor() {
     this._watchers = {};
     this._freezeCounter = 0;
@@ -178,7 +183,7 @@ export class Watcher extends BeanBase {
       'suite-vendor',
     ];
     const pathSrc = path.resolve(this.app.config.baseDir, '..');
-    const watchDirs = [];
+    const watchDirs: any[] = [];
     for (const __path of __pathes) {
       watchDirs.push(path.join(pathSrc, __path));
     }

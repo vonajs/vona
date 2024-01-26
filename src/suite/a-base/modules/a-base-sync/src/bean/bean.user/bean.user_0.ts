@@ -4,6 +4,9 @@ import { BeanBase } from '@cabloy/core';
 const _usersAnonymous = {};
 
 export class BeanUser0 extends BeanBase {
+  _sequence: any;
+  _config: any;
+
   constructor() {
     this._sequence = null;
     this._config = null;

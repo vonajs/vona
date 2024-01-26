@@ -75,7 +75,7 @@ export class CliDefaultList extends BeanCliBase {
   }
 
   _combineCliFullName({ moduleShow, groupShow, commandName }) {
-    const parts = [];
+    const parts: any[] = [];
     if (moduleShow === 'a-clibooster') {
       parts.push('');
     } else {

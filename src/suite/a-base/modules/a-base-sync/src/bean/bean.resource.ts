@@ -180,7 +180,7 @@ export class BeanResource extends BeanModuleScopeBase {
 
   // check
   async check({ atomStaticKeys, user }) {
-    const output = [];
+    const output: any[] = [];
     for (const atomStaticKey of atomStaticKeys) {
       const res = await this.checkRightResource({ atomStaticKey, user });
       if (res) {
@@ -328,7 +328,7 @@ export class BeanResource extends BeanModuleScopeBase {
 
   async _getAtomClassesResource() {
     if (__atomClassesResource) return __atomClassesResource;
-    const atomClassesResource = [];
+    const atomClassesResource: any[] = [];
     const atomClasses = this.ctx.bean.base.atomClasses();
     for (const module in atomClasses) {
       const atomClassesModule = atomClasses[module];

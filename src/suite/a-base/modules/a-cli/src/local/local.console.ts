@@ -2,6 +2,8 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalConsole extends BeanBase {
+  cli: any;
+
   constructor(cli) {
     this.cli = cli;
   }

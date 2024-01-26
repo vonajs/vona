@@ -184,7 +184,7 @@ export class BeanUser1 extends BeanUser0 {
     // fields
     const fields = await this.getFields({ removePrivacy });
     const fieldNames = Object.keys(fields);
-    const itemsRes = [];
+    const itemsRes: any[] = [];
     for (const item of items) {
       const itemRes = {};
       for (const fieldName of fieldNames) {

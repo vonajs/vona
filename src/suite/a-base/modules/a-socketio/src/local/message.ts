@@ -143,7 +143,7 @@ export class LocalMessage extends BeanBase {
 //   // messageId
 //   const messageId = message.id;
 //   // message sync
-//   const messageSyncs = [];
+//   const messageSyncs: any[] = [];
 //   //  :userIdFrom
 //   const isSame = message.userIdTo === message.userIdFrom;
 //   messageSyncs.push({

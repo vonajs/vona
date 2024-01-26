@@ -1,5 +1,8 @@
 export default () => {
   class FlowVars {
+    _vars: any;
+    _dirty: any;
+
     constructor() {
       this._vars = null;
       this._dirty = false;

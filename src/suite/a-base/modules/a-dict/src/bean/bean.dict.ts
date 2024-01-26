@@ -52,7 +52,7 @@ export class BeanDict extends BeanModuleScopeBase {
     let dictItemRes = findByCode ? dict._cacheCode[codeFull] : dict._cacheTitle[title];
     if (dictItemRes) return dictItemRes;
     // find
-    const dictItemsRes = [];
+    const dictItemsRes: any[] = [];
     const res = this._findItem_loop({
       dictItemsRes,
       dictItems: dict._dictItems,

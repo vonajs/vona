@@ -86,7 +86,7 @@ export class BeanAuthProviderCache extends BeanBase {
   }
 
   _getAuthProvidersConfigForLogin_order(listMap) {
-    const list = [];
+    const list: any[] = [];
     for (const item of this.configModule.login.providers) {
       const key = `${item.module}:${item.provider}`;
       const provider = listMap[key];

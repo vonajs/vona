@@ -4,6 +4,10 @@ import assert from 'assert';
 
 @Bean({ scene: 'local.flow' })
 export class LocalFlowListener extends BeanBase {
+  flowInstance: any;
+  context: any;
+  _flowListener: any;
+
   constructor({ flowInstance, context }) {
     this.flowInstance = flowInstance;
     this.context = context;

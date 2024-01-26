@@ -3,6 +3,15 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean({ scene: 'local.context' })
 export class LocalContextNode extends BeanBase {
   // contextEdge maybe null
+  context: any;
+  contextEdge: any;
+  _nodeDef: any;
+  _flowNodeId: any;
+  _flowNode: any;
+  _flowNodeHistory: any;
+  _nodeVars: any;
+  _utils: any;
+
   constructor({ context, contextEdge, nodeDef }) {
     this.context = context;
     this.contextEdge = contextEdge;

@@ -123,7 +123,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
   }
 
   _deploy_atomState_combineDictItemsTask({ nodeTasks, dictLocales }) {
-    const dictItems = [];
+    const dictItems: any[] = [];
     const codesCache = {};
     for (const nodeTask of nodeTasks) {
       const dictItem = this._deploy_atomState_combineDictItem({ node: nodeTask, dictLocales, codesCache });
