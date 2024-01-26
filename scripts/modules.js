@@ -38,10 +38,27 @@ async function main() {
 }
 
 async function _moduleHandle_thisModule({ file, module, processHelper }) {
-  // const contentOld = (await fse.readFile(file)).toString();
-  // if (contentOld.indexOf('=>') === -1) return;
-  console.log(file);
+  if (file.indexOf('src/resource/this.ts') > -1) return;
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('__ThisModule__') === -1) return;
+  if (contentOld.indexOf('{ __ThisModule__ }') > -1) return;
+  const fileThis = `${module.root}/src/resource/this.js`;
+  let fileRelative = path.relative(path.dirname(file), fileThis);
+  if (fileRelative[0] !== '.') {
+    fileRelative = './' + fileRelative;
+  }
+  let contentNew;
+  if (contentOld.indexOf('import ') > -1) {
+    contentNew = contentOld.replace('import ', `import { __ThisModule__ } from '${fileRelative}';\nimport `);
+  } else {
+    contentNew = `import { __ThisModule__ } from '${fileRelative}';\n\n` + contentOld;
+  }
+  // console.log(contentNew);
+  // console.log(file);
+  // console.log(fileRelative);
   // await fse.remove(file);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
