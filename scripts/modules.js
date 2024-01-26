@@ -37,7 +37,7 @@ async function main() {
   }
 }
 
-async function _moduleHandle_main({ file, module, processHelper }) {
+async function _moduleHandle_thisModule({ file, module, processHelper }) {
   // const contentOld = (await fse.readFile(file)).toString();
   // if (contentOld.indexOf('=>') === -1) return;
   console.log(file);
@@ -45,7 +45,7 @@ async function _moduleHandle_main({ file, module, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/beans.ts`;
+  const pattern = `${module.root}/src/**/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -62,7 +62,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_main({ file, module, processHelper });
+    await _moduleHandle_thisModule({ file, module, processHelper });
   }
 }
 

@@ -1,7 +1,5 @@
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
-
-import AtomBase from './bean.atomBase.js';
 import { __ThisModule__ } from '../resource/this.js';
 
 @Atom()
