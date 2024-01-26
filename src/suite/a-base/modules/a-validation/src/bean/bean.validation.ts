@@ -1,16 +1,14 @@
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-const __module__ = module;
-
 @Bean()
 export class BeanValidation extends BeanModuleScopeBase {
-  getSchema({ module, validator, schema }) {
+  getSchema({ module, validator, schema }: any) {
     // for flexible
     if (schema && typeof schema === 'object') {
       return { module, validator, schema };
     }
     module = module || this.moduleScope;
-    const meta = this.ctx.app.meta.modules[module].main.meta;
+    const meta = this.ctx.app.meta.modules[module].resource.meta;
     if (!schema) {
       const _validator = this.getValidator({ module, validator });
       if (!_validator) throw new Error(`validator not found: ${module}:${validator}`);
@@ -26,7 +24,7 @@ export class BeanValidation extends BeanModuleScopeBase {
 
   getValidator({ module, validator }) {
     module = module || this.moduleScope;
-    const meta = this.ctx.app.meta.modules[module].main.meta;
+    const meta = this.ctx.app.meta.modules[module].resource.meta;
     let _validator = this.ctx.bean.util.getProperty(meta, `validation.validators.${validator}`);
     if (!_validator) {
       const _schema = this.ctx.bean.util.getProperty(meta, `validation.schemas.${validator}`);
@@ -78,7 +76,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     // keywords
     if (module) {
       module = module || this.moduleScope;
-      const meta = this.ctx.app.meta.modules[module].main.meta;
+      const meta = this.ctx.app.meta.modules[module].resource.meta;
       params.keywords = meta.validation.keywords;
     }
     // schemas
@@ -95,10 +93,10 @@ export class BeanValidation extends BeanModuleScopeBase {
     return this.bean.ajv.create(params);
   }
 
-  _checkValidator({ module, validator }) {
+  _checkValidator({ module, validator }: any) {
     // check ajv cache
     module = module || this.moduleScope;
-    const meta = this.ctx.app.meta.modules[module].main.meta;
+    const meta = this.ctx.app.meta.modules[module].resource.meta;
     const _validator = this.getValidator({ module, validator });
     if (!_validator) throw new Error(`validator not found: ${module}:${validator}`);
     if (_validator.ajv) return _validator;
@@ -143,7 +141,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     const __basicRuleNames = ['type', 'ebType', 'ebCopy', 'ebReadOnly', '$async'];
     for (const key in propertiesFrom) {
       const propertyFrom = propertiesFrom[key];
-      const propertyTo = {};
+      const propertyTo: any = {};
       propertiesTo[key] = propertyTo;
       for (const ruleName in propertyFrom) {
         if (__basicRuleNames.includes(ruleName)) {
@@ -165,7 +163,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return schemas;
   }
 
-  async _validate({ atomClass, data, options, filterOptions }) {
+  async _validate({ atomClass, data, options, filterOptions }: any) {
     // validator
     const optionsSchema = options && options.schema;
     if (optionsSchema) {

@@ -1,9 +1,11 @@
+import { CabloyContext } from '@cabloy/core';
+
 export default {
   async: true,
   type: 'string',
   errors: true,
-  compile(schema, schemaProperty) {
-    return async function (data, path, rootData /* , name*/) {
+  compile(_schema, schemaProperty) {
+    return async function (this: CabloyContext, data, _path, rootData /* , name*/) {
       // ignore if empty
       if (!data) return true;
       const atomName = data.trim();
@@ -29,8 +31,8 @@ export default {
       if (checkExists) {
         const _title = ctx.text(schemaProperty.ebTitle || 'Atom Name');
         const message = `${_title} ${ctx.text('ExistsValidation')}`;
-        const errors = [{ keyword: 'x-atomName', params: [], message }];
-        throw new module.meta.class.Ajv.ValidationError(errors);
+        const errors: any[] = [{ keyword: 'x-atomName', params: [], message }];
+        throw new ctx.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;
     };

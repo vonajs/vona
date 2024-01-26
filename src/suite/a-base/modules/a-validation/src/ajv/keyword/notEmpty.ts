@@ -1,7 +1,9 @@
+import { CabloyContext } from '@cabloy/core';
+
 export default {
   errors: true,
   compile(schema, schemaProperty) {
-    const fun = function (data, path, rootData) {
+    const fun = function (this: CabloyContext, data, _path, rootData) {
       // notEmpty=false
       if (!schema) return true;
       // ctx
@@ -19,7 +21,7 @@ export default {
         if (!res) return true;
       }
       if (checkIfEmpty(schema, schemaProperty, data)) {
-        fun.errors = [{ keyword: 'notEmpty', params: [], message: this.text('RequiredField') }];
+        (<any>fun).errors = [{ keyword: 'notEmpty', params: [], message: this.text('RequiredField') }];
         return false;
       }
       return true;

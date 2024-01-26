@@ -1,21 +1,23 @@
+import { CabloyContext } from '@cabloy/core';
 import moment from 'moment';
 
 export default {
   errors: true,
   compile(schema) {
-    const fun = function (data, path, rootData, name) {
+    const fun = function (this: CabloyContext, data, _path, rootData, name) {
       if (!schema) return true;
+      const ctx = this;
       if (Array.isArray(data)) {
-        const res = [];
+        const res: any[] = [];
         for (const item of data) {
-          const _date = transformDate(fun, this, item);
+          const _date = transformDate(fun, ctx, item);
           if (_date === false) return false;
           res.push(_date);
         }
         rootData[name] = res;
         return true;
       }
-      const _date = transformDate(fun, this, data);
+      const _date = transformDate(fun, ctx, data);
       if (_date === false) return false;
       rootData[name] = _date;
       return true;
@@ -24,7 +26,7 @@ export default {
   },
 };
 
-function transformDate(fun, ctx, data) {
+function transformDate(fun, ctx: CabloyContext, data) {
   if (!data) return null; // support null
   const _date = moment(data);
   if (!_date.isValid()) {

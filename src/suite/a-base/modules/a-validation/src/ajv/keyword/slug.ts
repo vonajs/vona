@@ -1,9 +1,11 @@
+import { CabloyContext } from '@cabloy/core';
+
 export default {
   async: true,
   type: 'string',
   errors: true,
   compile() {
-    return async function (data, path, rootData /* , name*/) {
+    return async function (this: CabloyContext, data, _path, rootData /* , name*/) {
       // ignore if empty
       if (!data) return true;
       const slug = data.trim();
@@ -29,8 +31,8 @@ export default {
       // check draft/formal
       const checkExists = await ctx.bean.util.checkAtomIdExists({ atomId, items });
       if (checkExists) {
-        const errors = [{ keyword: 'x-slug', params: [], message: ctx.text('Slug Exists') }];
-        throw new module.meta.class.Ajv.ValidationError(errors);
+        const errors: any[] = [{ keyword: 'x-slug', params: [], message: ctx.text('Slug Exists') }];
+        throw new ctx.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;
     };

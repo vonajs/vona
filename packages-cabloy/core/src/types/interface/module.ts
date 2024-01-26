@@ -13,7 +13,7 @@ export interface IModuleResource {
   Errors: Record<number, string>;
   config: (app: CabloyApplication) => object;
   constants: unknown;
-  meta: unknown;
+  meta: any;
 }
 
 declare module '@cabloy/module-info' {
