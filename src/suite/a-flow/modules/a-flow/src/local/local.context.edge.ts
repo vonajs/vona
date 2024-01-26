@@ -1,6 +1,6 @@
-import { Local, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 
-@Local()
+@Bean({ scene: 'local.context' })
 export class LocalContextEdge extends BeanBase {
   constructor({ context, contextNode, edgeDef }) {
     this.context = context;

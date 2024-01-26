@@ -18,6 +18,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'version'
   | 'middleware'
   | 'local.flow'
+  | 'local.context'
   | 'flow.node';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**

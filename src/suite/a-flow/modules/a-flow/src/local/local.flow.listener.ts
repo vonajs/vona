@@ -1,8 +1,8 @@
-import { Local, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 
 const assert = require('assert');
 
-@Local()
+@Bean({ scene: 'local.flow' })
 export class LocalFlowListener extends BeanBase {
   constructor({ flowInstance, context }) {
     this.flowInstance = flowInstance;
