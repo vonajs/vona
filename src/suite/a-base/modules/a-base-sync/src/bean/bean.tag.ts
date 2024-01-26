@@ -1,4 +1,7 @@
-module.exports = class Tag {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanTag extends BeanBase {
   get modelTag() {
     return this.ctx.model.module(moduleInfo.relativeName).tag;
   }
@@ -187,4 +190,4 @@ module.exports = class Tag {
       },
     });
   }
-};
+}

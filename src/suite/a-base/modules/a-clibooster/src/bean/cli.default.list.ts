@@ -1,4 +1,7 @@
-module.exports = class Cli extends module.meta.class.CliBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'cli.default' })
+export class CliDefaultList extends BeanBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
@@ -85,4 +88,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     parts.push(commandName);
     return parts.join(':');
   }
-};
+}

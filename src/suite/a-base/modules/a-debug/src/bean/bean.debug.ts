@@ -1,8 +1,11 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const DebugInstance = require('debug');
 
 const __debug_caches = {};
 
-module.exports = class Debug {
+@Bean()
+export class BeanDebug extends BeanBase {
   get instance() {
     return DebugInstance;
   }
@@ -13,4 +16,4 @@ module.exports = class Debug {
     }
     return __debug_caches[namespace];
   }
-};
+}

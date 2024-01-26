@@ -1,8 +1,11 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 // request.body
 //   validate: module(optional), validator, schema(optional)
 //   data:
 
-module.exports = class Middleware {
+@Bean({ scene: 'middleware' })
+export class MiddlewareValidate extends BeanBase {
   async execute(options, next) {
     // must exists
     const validator = options.validator;
@@ -22,4 +25,4 @@ module.exports = class Middleware {
     // next
     await next();
   }
-};
+}

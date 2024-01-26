@@ -1,4 +1,7 @@
-module.exports = class AuthProvider {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanAuthProvider extends BeanBase {
   get modelAuthProvider() {
     return this.ctx.model.module(moduleInfo.relativeName).authProvider;
   }
@@ -123,7 +126,7 @@ module.exports = class AuthProvider {
       this.ctx.app.meta.router.register(moduleInfo, route);
     }
   }
-};
+}
 
 function _createAuthenticate() {
   return async function (ctx, next) {

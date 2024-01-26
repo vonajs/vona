@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const _cacheMessageClassesUniform = {};
 
-module.exports = class Message extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanMessage extends BeanBase {
   async group(/* {  options, user }*/) {
     const items = this.messageClassesUniform();
     return items;
@@ -31,4 +34,4 @@ module.exports = class Message extends module.meta.class.BeanModuleScopeBase {
     }
     return items;
   }
-};
+}

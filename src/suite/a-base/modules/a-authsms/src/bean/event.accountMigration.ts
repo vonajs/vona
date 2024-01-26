@@ -1,4 +1,7 @@
-module.exports = class eventBean {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'event' })
+export class EventAccountMigration extends BeanBase {
   async execute(context, next) {
     const data = context.data;
     // provider
@@ -17,4 +20,4 @@ module.exports = class eventBean {
     // next
     await next();
   }
-};
+}

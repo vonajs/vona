@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const Strategy = require('../meta/passport/strategy.js');
 
-module.exports = class Provider extends module.meta.class.AuthProviderBase {
+@Bean({ scene: 'auth.provider' })
+export class AuthProviderOpen extends BeanBase {
   async getConfigDefault() {
     return null;
   }
@@ -34,4 +37,4 @@ module.exports = class Provider extends module.meta.class.AuthProviderBase {
       },
     };
   }
-};
+}

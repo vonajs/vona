@@ -1,5 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __module__ = module;
-module.exports = class Validation extends module.meta.class.BeanModuleScopeBase {
+
+@Bean()
+export class BeanValidation extends BeanBase {
   getSchema({ module, validator, schema }) {
     // for flexible
     if (schema && typeof schema === 'object') {
@@ -201,4 +205,4 @@ module.exports = class Validation extends module.meta.class.BeanModuleScopeBase 
       }
     }
   }
-};
+}

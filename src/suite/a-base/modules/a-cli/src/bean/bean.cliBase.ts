@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const eggBornUtils = require('egg-born-utils');
 
-module.exports = class CliBase {
+@Bean()
+export class BeanCliBase extends BeanBase {
   constructor(options) {
     this.options = options;
     this.cabloyConfig = null;
@@ -130,4 +133,4 @@ module.exports = class CliBase {
     }
     return welcomes;
   }
-};
+}

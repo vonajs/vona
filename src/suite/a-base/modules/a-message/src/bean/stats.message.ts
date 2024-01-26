@@ -1,4 +1,7 @@
-module.exports = class Stats {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'stats' })
+export class StatsMessage extends BeanBase {
   async execute(context) {
     const { keys, user } = context;
     if (keys.length === 2) {
@@ -47,4 +50,4 @@ module.exports = class Stats {
       return stat;
     }
   }
-};
+}

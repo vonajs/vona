@@ -1,4 +1,7 @@
-module.exports = class IOMessage extends module.meta.class.IOMessageBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'io.message' })
+export class IoMessageMail extends BeanBase {
   async onChannelRender({ channelFullName, options, message, messageSync, messageClass }) {
     if (channelFullName === 'a-mail:mail') {
       return await this._onChannelRenderMail({ options, message, messageSync, messageClass });
@@ -16,4 +19,4 @@ module.exports = class IOMessage extends module.meta.class.IOMessageBase {
       message: JSON.parse(mail.message),
     };
   }
-};
+}

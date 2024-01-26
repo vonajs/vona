@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareCaptchaVerify extends BeanBase {
   async execute(options, next) {
     // must exists
     const scene = options.scene;
@@ -22,7 +25,7 @@ module.exports = class Middleware {
     // next
     await next();
   }
-};
+}
 
 async function sceneVerify({ ctx, scene }) {
   // params

@@ -177,7 +177,7 @@ ${contentMatches[3]}
   let contentLocals = (await fse.readFile(fileLocals)).toString();
   if (contentLocals.indexOf(`{ ${classNameNew} }`) === -1) {
     needLog = true;
-    if (contentLocals.indexOf('import') === -1) {
+    if (contentLocals.indexOf('export') === -1) {
       // the first
       contentLocals = `
 export * from '../local/${classPath}.js';

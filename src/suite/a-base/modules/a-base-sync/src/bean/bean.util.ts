@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const uuid = require('uuid');
 const extend = require('@cabloy/extend');
 const currency = require('@zhennann/currency').default;
@@ -6,7 +8,8 @@ const mparse = require('@cabloy/module-parse').default;
 const eggBornUtils = require('egg-born-utils');
 const utils = require('../common/utils.js');
 
-module.exports = class Util {
+@Bean()
+export class BeanUtil extends BeanBase {
   get localConfig() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -360,4 +363,4 @@ module.exports = class Util {
       atomClassName: parts[1],
     };
   }
-};
+}

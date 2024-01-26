@@ -1,4 +1,7 @@
-module.exports = class SummerCache {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'summer.cache' })
+export class SummerCacheAtomClassInner extends BeanBase {
   // key: in/notin
   async get(key) {
     const atomClasses = this.__getAtomClasses(key);
@@ -21,4 +24,4 @@ module.exports = class SummerCache {
     }
     return result;
   }
-};
+}

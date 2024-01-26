@@ -1,4 +1,7 @@
-module.exports = class AtomClass extends module.meta.class.BeanModuleScopeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanAtomClass extends BeanBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).atomClass;
   }
@@ -221,4 +224,4 @@ module.exports = class AtomClass extends module.meta.class.BeanModuleScopeBase {
     );
     return !!res;
   }
-};
+}

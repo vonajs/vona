@@ -1,4 +1,7 @@
-module.exports = class Cache {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanCache extends BeanBase {
   get db() {
     const config = this.ctx.config.module(moduleInfo.relativeName);
     if (config.db.redis) {
@@ -18,4 +21,4 @@ module.exports = class Cache {
   get redis() {
     return this.ctx.bean._getBean('a-cache.local.redis');
   }
-};
+}

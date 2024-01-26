@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareGate extends BeanBase {
   async execute(options, next) {
     // check gate
     if (!this.ctx.app.meta.util.checkGate(options)) {
@@ -7,4 +10,4 @@ module.exports = class Middleware {
     // next
     await next();
   }
-};
+}

@@ -1,4 +1,7 @@
-module.exports = class Cms {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanCms extends BeanBase {
   get render() {
     return this.ctx.bean._getBean('a-cms.local.render');
   }
@@ -10,4 +13,4 @@ module.exports = class Cms {
   build({ atomClass }) {
     return this.ctx.bean._newBean(`a-cms.local.build`, atomClass);
   }
-};
+}

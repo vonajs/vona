@@ -1,4 +1,7 @@
-module.exports = class Startup {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'startup' })
+export class StartupRegisterPassport extends BeanBase {
   async execute() {
     // verify
     this.app.passport.verify(async (ctx, profileUser) => {
@@ -27,4 +30,4 @@ module.exports = class Startup {
       return await ctx.bean.auth.deserializeUser({ user });
     });
   }
-};
+}

@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareHttpLog extends BeanBase {
   async execute(options, next) {
     await next();
 
@@ -40,4 +43,4 @@ module.exports = class Middleware {
     // log
     this.ctx.logger.info(log);
   }
-};
+}

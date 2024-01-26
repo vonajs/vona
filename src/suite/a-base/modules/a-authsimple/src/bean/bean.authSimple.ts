@@ -1,4 +1,7 @@
-module.exports = class AuthSimple {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanAuthSimple extends BeanBase {
   get modelAuthSimple() {
     return this.ctx.model.module(moduleInfo.relativeName).authSimple;
   }
@@ -349,4 +352,4 @@ module.exports = class AuthSimple {
       },
     };
   }
-};
+}

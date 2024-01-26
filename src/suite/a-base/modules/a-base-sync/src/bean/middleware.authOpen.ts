@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareAuthOpen extends BeanBase {
   async execute(options, next) {
     // check
     this.checkAuthOpen(options);
@@ -21,4 +24,4 @@ module.exports = class Middleware {
     if (isAuthOpen && !enableAuthOpen) this.ctx.throw(403);
     if (!isAuthOpen && onlyAuthOpen) this.ctx.throw(403);
   }
-};
+}

@@ -1,4 +1,7 @@
-module.exports = class Stats {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'stats' })
+export class StatsDeps extends BeanBase {
   async execute(context) {
     const { keys, provider, user } = context;
     const dependencies = provider.dependencies;
@@ -20,4 +23,4 @@ module.exports = class Stats {
     }
     return count;
   }
-};
+}

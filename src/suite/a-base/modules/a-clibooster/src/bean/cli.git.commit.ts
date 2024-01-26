@@ -1,4 +1,7 @@
-module.exports = class Cli extends module.meta.class.CliBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'cli.git' })
+export class CliGitCommit extends BeanBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
@@ -46,4 +49,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     }
     return entities;
   }
-};
+}

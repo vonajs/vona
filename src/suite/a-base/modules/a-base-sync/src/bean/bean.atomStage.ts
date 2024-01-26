@@ -1,5 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __stages = ['draft', 'formal', 'history'];
-module.exports = class AtomStage {
+
+@Bean()
+export class BeanAtomStage extends BeanBase {
   toNumber({ atomStage }) {
     if (atomStage === undefined || atomStage === null) return atomStage;
     if (typeof atomStage === 'number') return atomStage;
@@ -12,4 +16,4 @@ module.exports = class AtomStage {
     if (typeof atomStage === 'string') return atomStage;
     return __stages[atomStage];
   }
-};
+}

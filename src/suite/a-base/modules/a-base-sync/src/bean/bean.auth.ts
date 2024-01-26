@@ -1,4 +1,7 @@
-module.exports = class Auth {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanAuth extends BeanBase {
   constructor() {
     this._redisAuth = null;
   }
@@ -224,4 +227,4 @@ module.exports = class Auth {
       await this.redisAuth.del(key);
     }
   }
-};
+}

@@ -61,44 +61,67 @@ async function _moduleHandle_bean({ file, module, processHelper }) {
       process.exit(0);
     }
     // console.log(contentMatches);
-    let importBase;
-    if (module.info.relativeName === 'a-base') {
-      importBase = `import { BeanAtomBase } from '../bean/virtual.atomBase.js';`;
-    } else if (contentOld.indexOf('class.AtomCmsBase') > -1) {
-      importBase = `import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';`;
+    let beanOptions;
+    if (sceneName === 'bean') {
+      beanOptions = '';
     } else {
-      importBase = `import { BeanAtomBase } from 'cabloy-module-api-a-base';`;
+      beanOptions = `{ scene: '${sceneName}' }`;
     }
+
     const contentNew = `
-import { Atom } from '@cabloy/core';
-${importBase}
+import { Bean, BeanBase } from '@cabloy/core';
 
 ${contentMatches[1]}
 
-@Atom()
-export class ${classNameNew} extends BeanAtomBase {
+@Bean(${beanOptions})
+export class ${classNameNew} extends BeanBase {
 ${contentMatches[3]}
   `;
     // console.log(contentNew);
-    // await fse.outputFile(file, contentNew);
-    // await processHelper.formatFile({ fileName: file });
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
   }
-  // 2. 查看是否需要在resource/atoms.ts中添加记录
-  const fileLocals = `${module.root}/src/resource/atoms.ts`;
+  // 2. 查看是否需要在resource/beans.ts中添加记录
+  const fileLocals = `${module.root}/src/resource/beans.ts`;
   let contentLocals = (await fse.readFile(fileLocals)).toString();
   if (contentLocals.indexOf(`${classPath}.js`) === -1) {
     needLog = true;
-    if (contentLocals.indexOf('export') === -1) {
+    if (contentLocals.indexOf('export *') === -1) {
       // the first
-      contentLocals = `
-export * from '../atom/${classPath}.js';
+      if (sceneName === 'bean') {
+        contentLocals = `
+export * from '../bean/${classPath}.js';
+
+import { ${classNameNew} } from '../bean/${classPath}.js';
+
+export interface IBeanRecord {
+  ${shortName}: ${classNameNew};
+}
       `;
+      } else {
+        contentLocals = `
+export * from '../bean/${classPath}.js';
+              `;
+      }
     } else {
-      contentLocals = contentLocals.replace('export * from', `export * from '../atom/${classPath}.js';\nexport * from`);
+      if (sceneName === 'bean') {
+        contentLocals = contentLocals
+          .replace('export * from', `export * from '../bean/${classPath}.js';\nexport * from`)
+          .replace('import {', `import { ${classNameNew} } from '../bean/${classPath}.js';\nimport {`)
+          .replace(
+            'export interface IBeanRecord {',
+            `export interface IBeanRecord {\n  ${shortName}: ${classNameNew};`,
+          );
+      } else {
+        contentLocals = contentLocals.replace(
+          'export * from',
+          `export * from '../bean/${classPath}.js';\nexport * from`,
+        );
+      }
     }
     // console.log(contentLocals);
-    // await fse.outputFile(fileLocals, contentLocals);
-    // await processHelper.formatFile({ fileName: fileLocals });
+    await fse.outputFile(fileLocals, contentLocals);
+    await processHelper.formatFile({ fileName: fileLocals });
   }
   // 3. log
   if (needLog) {

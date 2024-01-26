@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 const fs = require('fs');
 
@@ -11,7 +13,8 @@ const Mime = require('mime');
 
 const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 
-module.exports = class File {
+@Bean()
+export class BeanFile extends BeanBase {
   get modelFile() {
     return this.ctx.model.module(moduleInfo.relativeName).file;
   }
@@ -572,4 +575,4 @@ module.exports = class File {
     }
     return this.ctx.bean.base.getAbsoluteUrl(url);
   }
-};
+}

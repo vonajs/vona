@@ -1,4 +1,7 @@
-module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'flow.node' })
+export class FlowNodeActivityService extends BeanBase {
   async onNodeDoing() {
     // super
     await super.onNodeDoing();
@@ -8,7 +11,7 @@ module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
     // check
     if (!bean) {
       throw new Error(
-        `flow service bean is not set: flow:${this.context._flowDef.atomName}, node:${this.contextNode._nodeDef.name}`
+        `flow service bean is not set: flow:${this.context._flowDef.atomName}, node:${this.contextNode._nodeDef.name}`,
       );
     }
     // executeService
@@ -23,4 +26,4 @@ module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
     // ok
     return true;
   }
-};
+}

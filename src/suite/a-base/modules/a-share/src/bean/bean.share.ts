@@ -1,4 +1,7 @@
-module.exports = class Share {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanShare extends BeanBase {
   get modelShare() {
     return this.ctx.model.module(moduleInfo.relativeName).share;
   }
@@ -109,4 +112,4 @@ module.exports = class Share {
       });
     }
   }
-};
+}

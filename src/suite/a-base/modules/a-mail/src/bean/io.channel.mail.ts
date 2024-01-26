@@ -1,10 +1,13 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const nodemailer = require('nodemailer');
 const chalk = require('chalk');
 const boxen = require('boxen');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
-module.exports = class IOChannel extends module.meta.class.IOChannelBase {
+@Bean({ scene: 'io.channel' })
+export class IoChannelMail extends BeanBase {
   async onPush({ content /* options, message, messageSync, messageClass*/ }) {
     // check if content.message
     // not set content.message.to dynamic for test, which must be set by business
@@ -71,4 +74,4 @@ module.exports = class IOChannel extends module.meta.class.IOChannelBase {
   _sceneValid(scene) {
     return scene && scene.transport && scene.transport.host;
   }
-};
+}

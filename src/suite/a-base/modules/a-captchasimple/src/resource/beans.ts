@@ -1,3 +1,1 @@
-declare module '@cabloy/core' {
-  export interface IBeanRecord {}
-}
+export * from '../bean/captcha.provider.captcha.js';

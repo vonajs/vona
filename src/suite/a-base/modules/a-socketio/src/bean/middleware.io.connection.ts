@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware.io' })
+export class MiddlewareIoConnection extends BeanBase {
   async execute(options, next) {
     // cache userId/socketId for disconnect
     const user = this.ctx.state.user && this.ctx.state.user.op;
@@ -43,4 +46,4 @@ module.exports = class Middleware {
     await next();
     debug(`socket io disconnected: user:${user.id}, socket:${socketId}`);
   }
-};
+}

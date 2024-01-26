@@ -1,7 +1,10 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const mparse = require('@cabloy/module-parse').default;
 const utils = require('../common/utils.js');
 
-module.exports = class Captcha extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanCaptcha extends BeanBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -100,4 +103,4 @@ module.exports = class Captcha extends module.meta.class.BeanModuleScopeBase {
     providerInstance.data = null;
     await this.cacheModule.set(key, providerInstance, provider.timeout);
   }
-};
+}

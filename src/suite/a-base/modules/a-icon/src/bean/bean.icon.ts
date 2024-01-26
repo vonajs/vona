@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 let __icons = null;
 
-module.exports = class Icon extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanIcon extends BeanBase {
   getIcons() {
     if (!__icons) {
       __icons = this._prepareIcons();
@@ -19,4 +22,4 @@ module.exports = class Icon extends module.meta.class.BeanModuleScopeBase {
     }
     return icons;
   }
-};
+}

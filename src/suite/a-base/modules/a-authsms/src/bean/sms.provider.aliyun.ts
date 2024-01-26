@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const popCore = require('@alicloud/pop-core');
 
-module.exports = class Provider {
+@Bean({ scene: 'sms.provider' })
+export class SmsProviderAliyun extends BeanBase {
   async sendCode({ providerInstanceId, context, config }) {
     // get
     const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
@@ -42,4 +45,4 @@ module.exports = class Provider {
   __prefix0(num, length) {
     return (Array(length).join('0') + num).slice(-length);
   }
-};
+}

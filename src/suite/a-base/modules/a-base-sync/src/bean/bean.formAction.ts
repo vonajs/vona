@@ -1,4 +1,7 @@
-module.exports = class FormAction {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanFormAction extends BeanBase {
   async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user, throwError }) {
     // read
     const modeRead = mode === 'view' || mode === 'read';
@@ -67,4 +70,4 @@ module.exports = class FormAction {
     });
     return { fieldsRight, schema };
   }
-};
+}

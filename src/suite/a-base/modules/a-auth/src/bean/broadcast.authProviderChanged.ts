@@ -1,4 +1,7 @@
-module.exports = class Broadcast {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'broadcast' })
+export class BroadcastAuthProviderChanged extends BeanBase {
   async execute(context) {
     const sameAsCaller = context.sameAsCaller;
     const data = context.data;
@@ -6,4 +9,4 @@ module.exports = class Broadcast {
       await this.ctx.bean.authProviderCache._cacheAuthProviderConfig(data.module, data.providerName);
     }
   }
-};
+}

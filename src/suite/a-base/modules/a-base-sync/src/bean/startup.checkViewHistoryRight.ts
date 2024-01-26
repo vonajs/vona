@@ -1,4 +1,7 @@
-module.exports = class Startup {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'startup' })
+export class StartupCheckViewHistoryRight extends BeanBase {
   get modelRoleRight() {
     return this.ctx.model.module('a-base').roleRight;
   }
@@ -41,4 +44,4 @@ module.exports = class Startup {
       roleRights,
     });
   }
-};
+}

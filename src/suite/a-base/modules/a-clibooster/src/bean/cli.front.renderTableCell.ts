@@ -1,4 +1,7 @@
-module.exports = class Cli extends module.meta.class.CliBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'cli.front' })
+export class CliFrontRenderTableCell extends BeanBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
@@ -25,4 +28,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     // need not reload
     // ctx.app.meta.reload.now();
   }
-};
+}

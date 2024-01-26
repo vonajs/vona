@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware.io' })
+export class MiddlewareIoPacket extends BeanBase {
   async execute(options, packet, next) {
     const eventName = packet[0];
     if (eventName === 'performAction') {
@@ -44,4 +47,4 @@ module.exports = class Middleware {
       });
     }
   }
-};
+}

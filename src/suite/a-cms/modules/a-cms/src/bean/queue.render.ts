@@ -1,4 +1,7 @@
-module.exports = class Queue {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'queue' })
+export class QueueRender extends BeanBase {
   async execute(context) {
     const data = context.data;
     const queueAction = data.queueAction;
@@ -24,4 +27,4 @@ module.exports = class Queue {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.deleteArticle({ key, article, inner });
   }
-};
+}

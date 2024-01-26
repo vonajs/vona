@@ -1,4 +1,7 @@
-module.exports = class Queue {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'queue' })
+export class QueueSubmit extends BeanBase {
   async execute(context) {
     const { target, targetConfig, hostname, links } = context.data;
     if (target === 'baidu') {
@@ -24,4 +27,4 @@ module.exports = class Queue {
       this.ctx.logger.info(`submit baidu: ${links.join('\n')}`);
     }
   }
-};
+}

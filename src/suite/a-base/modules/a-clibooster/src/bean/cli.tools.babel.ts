@@ -1,10 +1,13 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 
 const babel = require('@babel/core');
 const UglifyJS = require('uglify-js');
 const fse = require('fs-extra');
 
-module.exports = class Cli extends module.meta.class.CliBase {
+@Bean({ scene: 'cli.tools' })
+export class CliToolsBabel extends BeanBase {
   async execute({ user }) {
     const { cwd, argv } = this.context;
     // super
@@ -45,4 +48,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     // output
     fse.outputFileSync(fileDest, content);
   }
-};
+}

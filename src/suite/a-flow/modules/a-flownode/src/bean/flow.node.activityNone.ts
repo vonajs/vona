@@ -1,1 +1,4 @@
-module.exports = class FlowNode extends module.meta.class.FlowNodeBase {};
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'flow.node' })
+export class FlowNodeActivityNone extends BeanBase {}

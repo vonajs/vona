@@ -1,9 +1,12 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const chalk = require('chalk');
 const boxen = require('boxen');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
-module.exports = class Provider {
+@Bean({ scene: 'sms.provider' })
+export class SmsProviderTest extends BeanBase {
   async sendCode({ context }) {
     // token
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
@@ -25,4 +28,4 @@ module.exports = class Provider {
   __prefix0(num, length) {
     return (Array(length).join('0') + num).slice(-length);
   }
-};
+}

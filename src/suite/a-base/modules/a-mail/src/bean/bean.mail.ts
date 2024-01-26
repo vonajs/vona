@@ -1,4 +1,7 @@
-module.exports = class Mail extends module.meta.class.BeanModuleScopeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanMail extends BeanBase {
   get modelMail() {
     return this.ctx.model.module(moduleInfo.relativeName).mail;
   }
@@ -27,4 +30,4 @@ module.exports = class Mail extends module.meta.class.BeanModuleScopeBase {
       });
     });
   }
-};
+}

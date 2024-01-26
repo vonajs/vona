@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __smsProvidersConfigCache = {};
 
-module.exports = class SmsProviderCache {
+@Bean()
+export class BeanSmsProviderCache extends BeanBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -52,4 +55,4 @@ module.exports = class SmsProviderCache {
     // cache
     __smsProvidersConfigCache[this.ctx.subdomain] = configProviders;
   }
-};
+}

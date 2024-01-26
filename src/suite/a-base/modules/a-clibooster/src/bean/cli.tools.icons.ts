@@ -1,10 +1,13 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 const fse = require('fs-extra');
 const eggBornUtils = require('egg-born-utils');
 const bb = require('bluebird');
 const xml2js = require('xml2js');
 
-module.exports = class Cli extends module.meta.class.CliBase {
+@Bean({ scene: 'cli.tools' })
+export class CliToolsIcons extends BeanBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
@@ -119,4 +122,4 @@ ${symbols.join('\n')}
   buildXML({ xml, cdata = true, headless = true, rootName = 'xml' }) {
     return new xml2js.Builder({ cdata, headless, rootName }).buildObject(xml);
   }
-};
+}

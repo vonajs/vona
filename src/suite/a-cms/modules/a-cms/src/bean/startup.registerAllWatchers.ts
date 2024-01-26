@@ -1,4 +1,7 @@
-module.exports = class Startup {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'startup' })
+export class StartupRegisterAllWatchers extends BeanBase {
   async execute() {
     // only in development
     if (!this.app.meta.isLocal) return;
@@ -28,4 +31,4 @@ module.exports = class Startup {
       }
     }
   }
-};
+}

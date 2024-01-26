@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareJsonp extends BeanBase {
   async execute(options, next) {
     // options
     options = options || {};
@@ -24,4 +27,4 @@ module.exports = class Middleware {
     const fn = this.ctx.app.jsonp(options);
     await fn(this.ctx, next);
   }
-};
+}

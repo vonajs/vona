@@ -1,4 +1,7 @@
-module.exports = class FlowEdge extends module.meta.class.FlowEdgeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'flow.edge' })
+export class FlowEdgeSequence extends BeanBase {
   async onEdgeEnter() {
     // super
     const res = await super.onEdgeEnter();
@@ -26,8 +29,8 @@ module.exports = class FlowEdge extends module.meta.class.FlowEdgeBase {
       'edge %s: edgeRefId:%s, conditionExpression: %s',
       resEnter ? 'enter' : 'block',
       this.contextEdge._edgeDef.id,
-      conditionExpression
+      conditionExpression,
     );
     return !!resEnter;
   }
-};
+}

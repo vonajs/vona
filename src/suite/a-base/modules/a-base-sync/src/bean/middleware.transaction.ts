@@ -1,4 +1,7 @@
-module.exports = class Middleware {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'middleware' })
+export class MiddlewareTransaction extends BeanBase {
   async execute(options, next) {
     await this.ctx.transaction.begin(async () => {
       // next
@@ -6,7 +9,7 @@ module.exports = class Middleware {
       checkIfSuccess(this.ctx);
     });
   }
-};
+}
 
 function checkIfSuccess(ctx) {
   if (typeof ctx.response.body === 'object' && ctx.response.body && ctx.response.body.code !== undefined) {

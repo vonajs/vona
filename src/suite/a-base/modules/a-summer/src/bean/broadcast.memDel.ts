@@ -1,4 +1,7 @@
-module.exports = class Broadcast {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'broadcast' })
+export class BroadcastMemDel extends BeanBase {
   async execute(context) {
     const sameAsCaller = context.sameAsCaller;
     const { fullKey, keyHash, key, options } = context.data;
@@ -7,4 +10,4 @@ module.exports = class Broadcast {
       cache.localMem.__delRaw(keyHash, key, options);
     }
   }
-};
+}

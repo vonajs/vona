@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 const os = require('os');
 
@@ -8,7 +10,8 @@ const fse = require('fs-extra');
 const rimraf = require('mz-modules/rimraf');
 const CliStoreBase = require('../common/cliStoreBase.js');
 
-module.exports = class Cli extends CliStoreBase {
+@Bean({ scene: 'cli.store' })
+export class CliStoreSync extends BeanBase {
   constructor(options) {
     super(options, 'sync');
   }
@@ -135,4 +138,4 @@ module.exports = class Cli extends CliStoreBase {
     if (!_package) return null;
     return _package.version;
   }
-};
+}

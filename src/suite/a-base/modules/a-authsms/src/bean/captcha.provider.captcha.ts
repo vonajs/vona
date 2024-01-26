@@ -1,9 +1,12 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const chalk = require('chalk');
 const boxen = require('boxen');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
-module.exports = class Captcha {
+@Bean({ scene: 'captcha.provider' })
+export class CaptchaProviderCaptcha extends BeanBase {
   async verify(_context) {
     const { providerInstanceId, context, data, dataInput } = _context;
     // sms provider
@@ -35,4 +38,4 @@ module.exports = class Captcha {
     const config = providers[providerName];
     return { provider, config };
   }
-};
+}

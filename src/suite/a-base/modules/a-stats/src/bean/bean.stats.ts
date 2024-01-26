@@ -1,7 +1,10 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 let __stats;
 let __statsDeps;
 
-module.exports = class Stats extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanStats extends BeanBase {
   get modelStats() {
     return this.ctx.model.module(moduleInfo.relativeName).stats;
   }
@@ -249,4 +252,4 @@ module.exports = class Stats extends module.meta.class.BeanModuleScopeBase {
       }
     }
   }
-};
+}

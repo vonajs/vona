@@ -1,4 +1,7 @@
-module.exports = class Cli extends module.meta.class.CliBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'cli.token' })
+export class CliTokenList extends BeanBase {
   get localToken() {
     return this.ctx.bean.local.module('a-authopen').token;
   }
@@ -25,4 +28,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     const text = this.helper.chalk.keyword('cyan')(`\n  ${fileName}\n`);
     await this.console.log({ text });
   }
-};
+}

@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __atomClassUserOnline = {
   module: moduleInfo.relativeName,
   atomClassName: 'userOnline',
@@ -6,7 +8,9 @@ const __atomClassUserOnlineHistory = {
   module: moduleInfo.relativeName,
   atomClassName: 'userOnlineHistory',
 };
-module.exports = class UserOnline extends module.meta.class.BeanModuleScopeBase {
+
+@Bean()
+export class BeanUserOnline extends BeanBase {
   get modelUserOnline() {
     return this.ctx.model.module(moduleInfo.relativeName).userOnline;
   }
@@ -163,4 +167,4 @@ module.exports = class UserOnline extends module.meta.class.BeanModuleScopeBase 
       userOnlineHistoryId: atomKey.itemId,
     };
   }
-};
+}

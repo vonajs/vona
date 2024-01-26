@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const constants = require('../config/constants.js');
 
-module.exports = class Settings extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanSettings extends BeanBase {
   get modelSettings() {
     return this.ctx.model.module(moduleInfo.relativeName).settings;
   }
@@ -172,4 +175,4 @@ module.exports = class Settings extends module.meta.class.BeanModuleScopeBase {
     });
     return this.ctx.bean.util.extend({}, schema);
   }
-};
+}

@@ -1,3 +1,6 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const CliCreatePageFn = require('../common/cliCreatePage.js');
 
-module.exports = class Cli extends CliCreatePageFn('pagex') {};
+@Bean({ scene: 'cli.create' })
+export class CliCreatePagex extends BeanBase {}

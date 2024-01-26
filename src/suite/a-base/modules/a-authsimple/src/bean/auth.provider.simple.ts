@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const Strategy = require('../meta/passport/strategy.js');
 
-module.exports = class Provider extends module.meta.class.AuthProviderBase {
+@Bean({ scene: 'auth.provider' })
+export class AuthProviderSimple extends BeanBase {
   get localSimple() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).simple;
   }
@@ -20,4 +23,4 @@ module.exports = class Provider extends module.meta.class.AuthProviderBase {
     // exists
     return await this.ctx.bean.authSimple.ensureAuthUser({ beanProvider: this, data: body.data });
   }
-};
+}

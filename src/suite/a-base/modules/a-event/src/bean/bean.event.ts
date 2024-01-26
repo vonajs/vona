@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __adapter = (context, chain) => {
   const eventBean = chain;
   return {
@@ -5,7 +7,9 @@ const __adapter = (context, chain) => {
     fn: eventBean.execute,
   };
 };
-module.exports = class Event extends module.meta.class.BeanModuleScopeBase {
+
+@Bean()
+export class BeanEvent extends BeanBase {
   async invoke({ module, name, data, result, next }) {
     const eventArray = this._getEventArray({ module, name });
     const eventBeanArray = eventArray.map(item => {
@@ -58,4 +62,4 @@ module.exports = class Event extends module.meta.class.BeanModuleScopeBase {
     }
     return eventArray;
   }
-};
+}

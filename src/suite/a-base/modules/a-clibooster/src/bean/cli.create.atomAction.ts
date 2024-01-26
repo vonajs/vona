@@ -1,4 +1,7 @@
-module.exports = class Cli extends module.meta.class.CliBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'cli.create' })
+export class CliCreateAtomAction extends BeanBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
@@ -23,4 +26,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     // reload
     this.ctx.app.meta.reload.now();
   }
-};
+}

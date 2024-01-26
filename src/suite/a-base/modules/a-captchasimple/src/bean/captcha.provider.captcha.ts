@@ -1,4 +1,7 @@
-module.exports = class Captcha {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'captcha.provider' })
+export class CaptchaProviderCaptcha extends BeanBase {
   async verify(context) {
     const { data, dataInput } = context;
     if (!data) this.ctx.throw.module(moduleInfo.relativeName, 1001);
@@ -6,4 +9,4 @@ module.exports = class Captcha {
       this.ctx.throw.module(moduleInfo.relativeName, 1002);
     }
   }
-};
+}

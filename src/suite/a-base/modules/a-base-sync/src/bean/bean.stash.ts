@@ -1,4 +1,7 @@
-module.exports = class Stash {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanStash extends BeanBase {
   get({ options, type, key }) {
     const stash = this._prepareStash(options);
     return stash.get({ type, key });
@@ -29,4 +32,4 @@ module.exports = class Stash {
     }
     return options.stash;
   }
-};
+}

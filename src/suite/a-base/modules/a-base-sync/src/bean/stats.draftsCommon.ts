@@ -1,4 +1,7 @@
-module.exports = class Stats {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'stats' })
+export class StatsDraftsCommon extends BeanBase {
   async execute(context) {
     const { keys, provider, user } = context;
     // params
@@ -33,4 +36,4 @@ module.exports = class Stats {
     const count = await modelAtom.count(params);
     return count;
   }
-};
+}

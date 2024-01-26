@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 let __cacheBases;
 
-module.exports = class Summer extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanSummer extends BeanBase {
   getCache({ module, name, fullKey }) {
     fullKey = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey });
@@ -86,4 +89,4 @@ module.exports = class Summer extends module.meta.class.BeanModuleScopeBase {
     }
     return cacheBases;
   }
-};
+}

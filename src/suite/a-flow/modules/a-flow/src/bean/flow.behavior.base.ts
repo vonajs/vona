@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const FlowBehaviorBase = require('../common/flowBehaviorBase.js');
 
-module.exports = class FlowBehavior extends FlowBehaviorBase {
+@Bean({ scene: 'flow.behavior' })
+export class FlowBehaviorBase extends BeanBase {
   getBehaviorDefOptions({ behaviorDefId, options }) {
     return this.nodeInstance.nodeBaseBean.getBehaviorDefOptions({ behaviorDefId, options });
   }
@@ -43,4 +46,4 @@ module.exports = class FlowBehavior extends FlowBehaviorBase {
   async change({ options }) {
     return await this.nodeInstance.nodeBaseBean.onNodeChange({ options });
   }
-};
+}

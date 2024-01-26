@@ -1,5 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __SeparatorCode = '/';
-module.exports = class Dict extends module.meta.class.BeanModuleScopeBase {
+
+@Bean()
+export class BeanDict extends BeanBase {
   get cacheMem() {
     return this.ctx.cache.mem.module(moduleInfo.relativeName);
   }
@@ -210,4 +214,4 @@ module.exports = class Dict extends module.meta.class.BeanModuleScopeBase {
   _checkIfEmptyForSelect(value) {
     return value === '' || value === undefined || value === null;
   }
-};
+}

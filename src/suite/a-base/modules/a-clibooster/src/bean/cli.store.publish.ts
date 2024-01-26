@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const path = require('path');
 const fse = require('fs-extra');
 const JSZip = require('jszip');
@@ -7,7 +9,8 @@ const utility = require('utility');
 const eggBornUtils = require('egg-born-utils');
 const CliStoreBase = require('../common/cliStoreBase.js');
 
-module.exports = class Cli extends CliStoreBase {
+@Bean({ scene: 'cli.store' })
+export class CliStorePublish extends BeanBase {
   constructor(options) {
     super(options, 'publish');
   }
@@ -400,4 +403,4 @@ module.exports = class Cli extends CliStoreBase {
       },
     });
   }
-};
+}

@@ -1,7 +1,10 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 let __commandsMap;
 let __commandsAll;
 
-module.exports = class Cli {
+@Bean()
+export class BeanCli extends BeanBase {
   async meta({ context, user }) {
     try {
       // reload freeze
@@ -145,4 +148,4 @@ module.exports = class Cli {
     __commandsMap = _commandsMap;
     __commandsAll = _commandsAll;
   }
-};
+}

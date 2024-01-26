@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const py = require('pinyin-pro');
 
-module.exports = class Pinyin {
+@Bean()
+export class BeanPinyin extends BeanBase {
   translate({ text, options }) {
     return py.pinyin(text, options);
   }
@@ -24,4 +27,4 @@ module.exports = class Pinyin {
   polyphonic({ text, options }) {
     return py.polyphonic(text, options);
   }
-};
+}

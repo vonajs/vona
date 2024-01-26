@@ -1,4 +1,7 @@
-module.exports = class FlowBehavior extends module.meta.class.FlowBehaviorBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'flow.behavior' })
+export class FlowBehaviorOvertime extends BeanBase {
   async enter(context, next) {
     // addJob
     const flowId = this.context._flowId;
@@ -87,4 +90,4 @@ module.exports = class FlowBehavior extends module.meta.class.FlowBehaviorBase {
   _getJobName({ flowId, flowNodeId, behaviorDefId }) {
     return `${flowId}.${flowNodeId}.${behaviorDefId}`.replace(/:/g, '.');
   }
-};
+}

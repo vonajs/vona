@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const URL = require('url').URL;
 
 const koaCors = require('@koa/cors');
@@ -12,7 +14,8 @@ const optionsDefault = {
   // keepHeadersOnError:undefined,
 };
 
-module.exports = class Middleware {
+@Bean({ scene: 'middleware' })
+export class MiddlewareCors extends BeanBase {
   async execute(options, next) {
     // not cors (safari not send sec-fetch-mode)
     // if (this.ctx.headers['sec-fetch-mode'] !== 'cors') return await next();
@@ -46,4 +49,4 @@ module.exports = class Middleware {
     const fn = koaCors(optionsCors);
     await fn(this.ctx, next);
   }
-};
+}

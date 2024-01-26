@@ -1,4 +1,7 @@
-module.exports = class Progress extends module.meta.class.BeanModuleScopeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean()
+export class BeanProgress extends BeanBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -206,4 +209,4 @@ module.exports = class Progress extends module.meta.class.BeanModuleScopeBase {
       },
     });
   }
-};
+}

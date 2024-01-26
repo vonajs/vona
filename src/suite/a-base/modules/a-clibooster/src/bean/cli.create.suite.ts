@@ -1,7 +1,10 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const fs = require('fs');
 const path = require('path');
 
-module.exports = class Cli extends module.meta.class.CliBase {
+@Bean({ scene: 'cli.create' })
+export class CliCreateSuite extends BeanBase {
   async execute({ user }) {
     const { argv } = this.context;
     // super
@@ -30,4 +33,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
     // reload
     this.ctx.app.meta.reload.now();
   }
-};
+}

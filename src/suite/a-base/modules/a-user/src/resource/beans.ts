@@ -1,3 +1,2 @@
-declare module '@cabloy/core' {
-  export interface IBeanRecord {}
-}
+export * from '../bean/stats.userAlert.js';
+export * from '../bean/stats.user.js';

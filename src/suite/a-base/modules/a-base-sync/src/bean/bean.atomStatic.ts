@@ -1,6 +1,9 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const mparse = require('@cabloy/module-parse').default;
 
-module.exports = class AtomStatic extends module.meta.class.BeanModuleScopeBase {
+@Bean()
+export class BeanAtomStatic extends BeanBase {
   async loadAllAtomStatics() {
     const modules = this._loadAllAtomStatics_prepare();
     const count = modules.length;
@@ -415,4 +418,4 @@ module.exports = class AtomStatic extends module.meta.class.BeanModuleScopeBase 
     // }
     return atomKey;
   }
-};
+}

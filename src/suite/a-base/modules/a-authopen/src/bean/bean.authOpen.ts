@@ -1,3 +1,5 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const randomize = require('randomatic');
 
 const __atomClassRole = {
@@ -8,7 +10,9 @@ const __atomClassAuthOpen = {
   module: moduleInfo.relativeName,
   atomClassName: 'authOpen',
 };
-module.exports = class AuthOpen {
+
+@Bean()
+export class BeanAuthOpen extends BeanBase {
   get modelAuthOpen() {
     return this.ctx.model.module(moduleInfo.relativeName).authOpen;
   }
@@ -200,4 +204,4 @@ module.exports = class AuthOpen {
       await this.ctx.bean.role.setDirty(true);
     }
   }
-};
+}

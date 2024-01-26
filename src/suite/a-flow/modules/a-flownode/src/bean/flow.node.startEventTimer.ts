@@ -1,4 +1,7 @@
-module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'flow.node' })
+export class FlowNodeStartEventTimer extends BeanBase {
   async deploy({ deploy, flowDefId, node }) {
     if (deploy) {
       await this._addSchedule({ flowDefId, node });
@@ -107,4 +110,4 @@ module.exports = class FlowNode extends module.meta.class.FlowNodeBase {
   _getJobRepeat(node) {
     return node.options && node.options.repeat;
   }
-};
+}

@@ -1,8 +1,11 @@
+import { Bean, BeanBase } from '@cabloy/core';
+
 const __authProvidersConfigCache = {};
 const __authProvidersConfigCache_login = {};
 const __authProvidersConfigCache_admin = {};
 
-module.exports = class AuthProviderCache {
+@Bean()
+export class BeanAuthProviderCache extends BeanBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -253,4 +256,4 @@ module.exports = class AuthProviderCache {
     // ok
     return configProviderScene;
   }
-};
+}

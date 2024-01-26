@@ -1,4 +1,7 @@
-module.exports = class Cli extends module.meta.class.CliBase {
+import { Bean, BeanBase } from '@cabloy/core';
+
+@Bean({ scene: 'cli.tools' })
+export class CliToolsDemo extends BeanBase {
   get localUtils() {
     return this.ctx.bean.local.module(moduleInfo.relativeName).utils;
   }
@@ -29,4 +32,4 @@ module.exports = class Cli extends module.meta.class.CliBase {
       await this.console.log({ text: JSON.stringify(res.result, null, 2) });
     }
   }
-};
+}
