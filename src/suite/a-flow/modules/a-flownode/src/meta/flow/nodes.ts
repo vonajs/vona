@@ -14,7 +14,7 @@ const nodes = {
     bean: 'startEventTimer',
     icon: { f7: ':flow:start-event-timer' },
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'startEventTimer',
     },
   },
@@ -37,7 +37,7 @@ const nodes = {
     bean: 'activityService',
     icon: { f7: ':flow:activity-service' },
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'activityService',
     },
   },

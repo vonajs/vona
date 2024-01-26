@@ -6,7 +6,7 @@ export class EventAccountMigration extends BeanBase {
     const data = context.data;
     // provider
     const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authsms',
     });
     // model auth

@@ -4,11 +4,11 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomDict extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).dict;
+    return this.ctx.model.module(__ThisModule__).dict;
   }
 
   get modelDictContent() {
-    return this.ctx.model.module(moduleInfo.relativeName).dictContent;
+    return this.ctx.model.module(__ThisModule__).dictContent;
   }
 
   async default({ atomClass, item, options, user }) {

@@ -18,7 +18,7 @@ const resources = [
         loop: true,
       },
       validator: {
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         validator: 'blockAudio',
       },
     }),
@@ -37,7 +37,7 @@ const resources = [
         height: '',
       },
       validator: {
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         validator: 'blockIFrame',
       },
     }),

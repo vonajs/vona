@@ -23,10 +23,10 @@ export class BeanSequence extends BeanModuleScopeBase {
   async next(name) {
     const moduleName = this.moduleScope;
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.sequence.${moduleName}.${name}`,
+      resource: `${__ThisModule__}.sequence.${moduleName}.${name}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           beanFullName: 'sequence',
           fn: async ({ bean }) => {
             return await bean.module(moduleName)._nextLock(name);

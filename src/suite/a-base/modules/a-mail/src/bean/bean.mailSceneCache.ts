@@ -5,10 +5,10 @@ const __mailScenesConfigCache = {};
 @Bean()
 export class BeanMailSceneCache extends BeanBase {
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
   get statusModule() {
-    return this.ctx.bean.status.module(moduleInfo.relativeName);
+    return this.ctx.bean.status.module(__ThisModule__);
   }
 
   getMailScenesConfigCache() {

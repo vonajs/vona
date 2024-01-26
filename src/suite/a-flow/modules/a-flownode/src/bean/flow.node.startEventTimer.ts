@@ -18,7 +18,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     // push
     const jobName = this._getJobName(flowDefId, node);
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'startEventTimer',
       jobName,
       jobOptions: {
@@ -98,7 +98,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     );
     const queue = this.ctx.app.meta.queue._getQueue({
       subdomain: this.ctx.subdomain,
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'startEventTimer',
     });
     const repeat = await queue.repeat;

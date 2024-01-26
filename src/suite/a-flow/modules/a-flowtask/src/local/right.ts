@@ -3,7 +3,7 @@ import { Local, BeanBase } from '@cabloy/core';
 @Local()
 export class LocalRight extends BeanBase {
   get modelFlowTask() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowTask;
+    return this.ctx.model.module(__ThisModule__).flowTask;
   }
   _check_specificFlag_normal({ flowTask }) {
     if (flowTask.specificFlag === 1 || flowTask.specificFlag === 2) this.ctx.throw(403);
@@ -21,28 +21,28 @@ export class LocalRight extends BeanBase {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // must be the same user
     if (user && user.id !== 0 && user.id !== flowTask.userIdAssignee) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1002, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1002, flowTaskId);
     }
   }
   _check_notDone({ flowTask }) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // not complete
     if (flowTask.flowTaskStatus === 1) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1005, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1005, flowTaskId);
     }
   }
   _check_notDoneAndHandled({ flowTask }) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // not complete and not handled
     if (flowTask.flowTaskStatus === 1 || flowTask.handleStatus !== 0) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1005, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1005, flowTaskId);
     }
   }
   _check_claimed({ flowTask }) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // timeClaimed first
     if (!flowTask.timeClaimed) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1004, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1004, flowTaskId);
     }
   }
   async _getNodeOptionsTask({ getOptions, flowTask, nodeInstance }) {
@@ -72,7 +72,7 @@ export class LocalRight extends BeanBase {
     this._check_sameUser({ flowTask, user });
     // more check
     if (flowNodeType !== 'startEventAtom' || flowTask.flowTaskStatus !== 1 || flowTask.handleRemark) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1011, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1011, flowTaskId);
     }
   }
   async assignees({ flowTask, user }) {
@@ -105,7 +105,7 @@ export class LocalRight extends BeanBase {
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     // check if allowCancelFlow
     if (!options.allowCancelFlow) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1010, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1010, flowTaskId);
     }
   }
   async claim({ flowTask, user }) {
@@ -114,7 +114,7 @@ export class LocalRight extends BeanBase {
     // not complete
     this._check_notDoneAndHandled({ flowTask });
     // check: not throw error
-    // if (flowTask.timeClaimed) this.ctx.throw.module(moduleInfo.relativeName, 1003, flowTaskId);
+    // if (flowTask.timeClaimed) this.ctx.throw.module(__ThisModule__, 1003, flowTaskId);
     if (flowTask.timeClaimed) {
       return { timeClaimed: flowTask.timeClaimed };
     }
@@ -136,10 +136,10 @@ export class LocalRight extends BeanBase {
     // check if pass/reject
     if (handle) {
       if (handle.status === 1 && !options.allowPassTask) {
-        this.ctx.throw.module(moduleInfo.relativeName, 1006, flowTaskId);
+        this.ctx.throw.module(__ThisModule__, 1006, flowTaskId);
       }
       if (handle.status === 2 && !options.allowRejectTask) {
-        this.ctx.throw.module(moduleInfo.relativeName, 1007, flowTaskId);
+        this.ctx.throw.module(__ThisModule__, 1007, flowTaskId);
       }
     } else if (!options.allowPassTask && !options.allowRejectTask) {
       this.ctx.throw(403);
@@ -172,7 +172,7 @@ export class LocalRight extends BeanBase {
     // options
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     if (!options.allowForward || flowTask.flowTaskIdForwardTo) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1012, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1012, flowTaskId);
     }
   }
   async forwardRecall({ flowTask, user, getOptions, getTask }) {
@@ -207,7 +207,7 @@ export class LocalRight extends BeanBase {
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     // allowed only once, so should check flowTaskIdSubstituteFrom
     if (!options.allowSubstitute || flowTask.flowTaskIdSubstituteFrom || flowTask.flowTaskIdSubstituteTo) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1013, flowTaskId);
+      this.ctx.throw.module(__ThisModule__, 1013, flowTaskId);
     }
   }
   async substituteRecall({ flowTask, user, getOptions, getTask }) {

@@ -65,7 +65,7 @@ export class VersionManager extends BeanBase {
       // check if exists
       const roleSystem = await this.ctx.bean.role.getSystemRole({ roleName: 'system' });
       const atomClassLayout = await this.ctx.bean.atomClass.get({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         atomClassName: 'layout',
       });
       const exists = await this.modelRoleRight.get({

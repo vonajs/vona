@@ -7,7 +7,7 @@ const resources = [
     atomCategoryId: 'a-base:menu.Create',
     resourceType: 'a-base:menu',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'layout',
       atomAction: 'create',
     }),
@@ -20,7 +20,7 @@ const resources = [
     atomCategoryId: 'a-base:menu.List',
     resourceType: 'a-base:menu',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'layout',
       atomAction: 'read',
     }),
@@ -79,7 +79,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonAppHome',
       icon: { f7: '::home' },
     }),
@@ -92,7 +92,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonAppMine',
       icon: { f7: '::person' },
       showSeparator: true,
@@ -107,7 +107,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::search' },
       actionPath: '/a/basefront/atom/searchQuick',
@@ -123,7 +123,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::home' },
       actionPath: '/a/dashboard/dashboard?key=home',
@@ -139,7 +139,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::dashboard' },
       actionPath: '/a/dashboard/dashboard',
@@ -155,7 +155,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonFullscreen',
     }),
     resourceRoles: 'root',
@@ -167,7 +167,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonMine',
       icon: { f7: '::person' },
       actionPath: null,
@@ -185,7 +185,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonViewPopup',
     }),
     resourceRoles: 'root',
@@ -197,7 +197,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonClock',
       actionPath: '/a/layoutpc/button/clock/preferences',
       scene: 'sidebar',
@@ -212,7 +212,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::copyright' },
       actionPath: '/a/basefront/base/about',
@@ -229,7 +229,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: ':outline:layout-outline' },
       actionPath: '/a/user/view/pc',
@@ -246,7 +246,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: ':outline:theme-outline' },
       actionPath: '/a/user/Theme',
@@ -263,7 +263,7 @@ const resources = [
     atomCategoryId: 'a-layoutpc:button.General',
     resourceType: 'a-layoutpc:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLanguage',
       icon: { f7: '::language' },
     }),

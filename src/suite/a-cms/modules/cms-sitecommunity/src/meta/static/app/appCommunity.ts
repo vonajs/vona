@@ -7,7 +7,7 @@ const info = {
 const content = {
   info: {
     atomClass: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'post',
     },
   },

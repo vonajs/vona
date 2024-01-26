@@ -4,7 +4,7 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 @Bean({ scene: 'cli.tools' })
 export class CliToolsDemo extends BeanCliBase {
   get localUtils() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).utils;
+    return this.ctx.bean.local.module(__ThisModule__).utils;
   }
 
   async execute({ user }) {

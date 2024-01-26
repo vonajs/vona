@@ -22,11 +22,11 @@ export class LocalBuild extends BeanBase {
   }
 
   get moduleConfig() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get beanStatus() {
-    return this.ctx.bean.status.module(moduleInfo.relativeName);
+    return this.ctx.bean.status.module(__ThisModule__);
   }
 
   async getConfigSiteBase() {
@@ -98,7 +98,7 @@ export class LocalBuild extends BeanBase {
     let themeName = site.themes[language || 'default'];
     if (!themeName) {
       // // log info
-      // const error = this.ctx.parseFail.module(moduleInfo.relativeName, 1002, atomClass.module, atomClass.atomClassName, language);
+      // const error = this.ctx.parseFail.module(__ThisModule__, 1002, atomClass.module, atomClass.atomClassName, language);
       // this.ctx.logger.info(error.message);
       // use default
       if (site.language) {
@@ -110,7 +110,7 @@ export class LocalBuild extends BeanBase {
     }
     // throw error if empty either
     if (!themeName) {
-      this.ctx.throw.module(moduleInfo.relativeName, 1002, atomClass.module, atomClass.atomClassName, language);
+      this.ctx.throw.module(__ThisModule__, 1002, atomClass.module, atomClass.atomClassName, language);
     }
     // ok
     return { themeName, language };
@@ -173,7 +173,7 @@ export class LocalBuild extends BeanBase {
   _combineThemes(themeModuleName) {
     // module
     const module = this.app.meta.modules[themeModuleName];
-    if (!module) this.ctx.throw.module(moduleInfo.relativeName, 1003, themeModuleName);
+    if (!module) this.ctx.throw.module(__ThisModule__, 1003, themeModuleName);
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.extend');
     if (!moduleExtend) return this.ctx.config.module(themeModuleName).theme;
     return this.ctx.bean.util.extend(
@@ -1183,7 +1183,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
   async _copyThemes(pathIntermediate, themeModuleName) {
     // module
     const module = this.app.meta.modules[themeModuleName];
-    if (!module) this.ctx.throw.module(moduleInfo.relativeName, 1003, themeModuleName);
+    if (!module) this.ctx.throw.module(__ThisModule__, 1003, themeModuleName);
     // extend
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.extend');
     if (moduleExtend) {
@@ -1205,7 +1205,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
   _watcherThemes(site, themeModuleName) {
     // module
     const module = this.app.meta.modules[themeModuleName];
-    if (!module) this.ctx.throw.module(moduleInfo.relativeName, 1003, themeModuleName);
+    if (!module) this.ctx.throw.module(__ThisModule__, 1003, themeModuleName);
     // extend
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.extend');
     if (moduleExtend) {
@@ -1244,7 +1244,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const site = await this.getSite({ language: article.atomLanguage });
     // check if build site first
     const siteBuilt = await this._checkIfSiteBuilt({ site, force: false });
-    if (!siteBuilt) this.ctx.throw.module(moduleInfo.relativeName, 1006);
+    if (!siteBuilt) this.ctx.throw.module(__ThisModule__, 1006);
     // fileName
     const pathDist = await this.getPathDist(site, article.atomLanguage);
     const fileName = path.join(pathDist, articleUrl);

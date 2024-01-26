@@ -4,7 +4,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 export class EventAccountMigration extends BeanBase {
   async execute(context, next) {
     const data = context.data;
-    const modelAuthSimple = this.ctx.model.module(moduleInfo.relativeName).authSimple;
+    const modelAuthSimple = this.ctx.model.module(__ThisModule__).authSimple;
     // check userIdFrom
     const authSimple = await modelAuthSimple.get({ userId: data.userIdFrom });
     if (authSimple) {

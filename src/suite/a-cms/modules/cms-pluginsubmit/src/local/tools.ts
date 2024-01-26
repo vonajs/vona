@@ -23,7 +23,7 @@ export class LocalTools extends BeanBase {
     // queue
     this.ctx.tail(() => {
       this.ctx.meta.util.queuePush({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         queueName: 'submit',
         data: {
           target,

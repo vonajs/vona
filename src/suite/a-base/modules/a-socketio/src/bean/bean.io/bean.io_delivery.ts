@@ -87,7 +87,7 @@ export class BeanIoDelivery extends BeanIo0 {
     } else {
       // broadcast
       this.ctx.meta.util.broadcastEmit({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         broadcastName: 'socketEmit',
         data: { messageEmit },
       });

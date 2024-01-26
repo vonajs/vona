@@ -17,7 +17,7 @@ export class CliCreateDetail extends BeanCliBase {
     }
     // atomClassMain
     argv.atomClassMain = this.ctx.bean.util.parseAtomClass({
-      module: argv.moduleInfo.relativeName,
+      module: argv.__ThisModule__,
       atomClassName: argv.atomClassMain,
     });
     // target dir
@@ -25,7 +25,7 @@ export class CliCreateDetail extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       snippetsPath: 'create/atom-detail/snippets',
       boilerplatePath: 'create/atom-detail/boilerplate',
     });

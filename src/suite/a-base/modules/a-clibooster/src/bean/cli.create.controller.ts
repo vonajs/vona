@@ -20,7 +20,7 @@ export class CliCreateController extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       snippetsPath: 'create/controller/snippets',
       boilerplatePath: 'create/controller/boilerplate',
     });

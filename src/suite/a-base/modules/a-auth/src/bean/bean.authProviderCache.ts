@@ -7,7 +7,7 @@ const __authProvidersConfigCache_admin = {};
 @Bean()
 export class BeanAuthProviderCache extends BeanBase {
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   getAuthProvidersConfigCache() {

@@ -3,7 +3,7 @@ import { Init12 } from './init_12.js';
 export class Test extends Init12 {
   async _test() {
     const atomClass = {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'article',
     };
     // categories

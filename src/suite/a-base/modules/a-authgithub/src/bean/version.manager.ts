@@ -13,7 +13,7 @@ export class VersionManager extends BeanBase {
         await this.ctx.meta.util.executeBean({
           subdomain: instance.name,
           fn: async ({ ctx }) => {
-            const beanFullName = `${moduleInfo.relativeName}.version.manager`;
+            const beanFullName = `${__ThisModule__}.version.manager`;
             const beanInstance = ctx.bean._newBean(beanFullName);
             await beanInstance._update8AuthsInstance();
           },
@@ -30,7 +30,7 @@ export class VersionManager extends BeanBase {
 
   async _update8AuthsInstance() {
     const provideItem = await this.ctx.bean.authProvider.getAuthProvider({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authgithub',
     });
     await this.ctx.model.query('update aAuth a set a.providerScene=? where a.iid=? and a.providerId=?', [

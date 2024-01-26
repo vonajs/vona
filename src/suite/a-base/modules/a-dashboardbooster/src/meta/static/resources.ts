@@ -7,7 +7,7 @@ const resources = [
     atomCategoryId: 'a-dashboard:widget.Template',
     resourceType: 'a-dashboard:widget',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'widgetInfoBox',
     }),
     resourceRoles: 'root',

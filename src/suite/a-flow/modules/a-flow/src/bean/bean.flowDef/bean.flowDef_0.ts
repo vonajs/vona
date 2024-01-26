@@ -2,17 +2,17 @@ import { BeanBase } from '@cabloy/core';
 
 export class BeanFlowDef0 extends BeanBase {
   get modelFlowDef() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowDef;
+    return this.ctx.model.module(__ThisModule__).flowDef;
   }
   get modelFlowDefContent() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowDefContent;
+    return this.ctx.model.module(__ThisModule__).flowDefContent;
   }
   get modelFlowDefFull() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowDefFull;
+    return this.ctx.model.module(__ThisModule__).flowDefFull;
   }
   get atomClass() {
     return {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'flowDef',
     };
   }

@@ -10,7 +10,7 @@ export class LocalFlowTask0 extends BeanBase {
 
   __init__({ nodeInstance }) {
     // context
-    this.contextTask = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.context.task`, {
+    this.contextTask = this.ctx.bean._newBean(`${__ThisModule__}.local.context.task`, {
       context: nodeInstance.context,
       contextNode: nodeInstance.contextNode,
       nodeDef: nodeInstance.contextNode._nodeDef,
@@ -18,10 +18,10 @@ export class LocalFlowTask0 extends BeanBase {
   }
 
   get modelFlowTask() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowTask;
+    return this.ctx.model.module(__ThisModule__).flowTask;
   }
   get modelFlowTaskHistory() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowTaskHistory;
+    return this.ctx.model.module(__ThisModule__).flowTaskHistory;
   }
   get localRight() {
     return this.ctx.bean._getBean('a-flowtask.local.right');

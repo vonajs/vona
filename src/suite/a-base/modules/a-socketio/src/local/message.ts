@@ -3,15 +3,15 @@ import { Local, BeanBase } from '@cabloy/core';
 @Local()
 export class LocalMessage extends BeanBase {
   get modelMessage() {
-    return this.ctx.model.module(moduleInfo.relativeName).message;
+    return this.ctx.model.module(__ThisModule__).message;
   }
 
   get modelMessageSync() {
-    return this.ctx.model.module(moduleInfo.relativeName).messageSync;
+    return this.ctx.model.module(__ThisModule__).messageSync;
   }
 
   get sqlProcedure() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).procedure;
+    return this.ctx.bean.local.module(__ThisModule__).procedure;
   }
 
   async save({ message }) {

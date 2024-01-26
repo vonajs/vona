@@ -23,7 +23,7 @@ export default ({ mode }) => {
       // jump out of the transaction
       this.ctx.tail(async () => {
         await this.ctx.meta.util.queuePushAsync({
-          module: moduleInfo.relativeName,
+          module: __ThisModule__,
           queueName: 'gateway',
           queueNameSub: `${flowId}:${nodeDefId}:${behaviorDefId || ''}`,
           data,

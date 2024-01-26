@@ -4,11 +4,11 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomApp extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).app;
+    return this.ctx.model.module(__ThisModule__).app;
   }
 
   get modelAppContent() {
-    return this.ctx.model.module(moduleInfo.relativeName).appContent;
+    return this.ctx.model.module(__ThisModule__).appContent;
   }
 
   async default({ atomClass, item, options, user }) {

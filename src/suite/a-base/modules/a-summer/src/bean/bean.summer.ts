@@ -8,7 +8,7 @@ export class BeanSummer extends BeanModuleScopeBase {
     fullKey = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey });
     if (!cacheBase) throw new Error(`summer cache not found: ${fullKey}`);
-    return this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.cache`, {
+    return this.ctx.bean._newBean(`${__ThisModule__}.local.cache`, {
       cacheBase,
     });
   }

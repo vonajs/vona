@@ -7,7 +7,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   }
 
   get modelCondition() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowNodeStartEventAtomCondition;
+    return this.ctx.model.module(__ThisModule__).flowNodeStartEventAtomCondition;
   }
 
   get modelRoleRight() {

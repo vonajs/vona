@@ -2,16 +2,16 @@ import { BeanBase } from '@cabloy/core';
 
 export class BeanFlow0 extends BeanBase {
   get modelFlow() {
-    return this.ctx.model.module(moduleInfo.relativeName).flow;
+    return this.ctx.model.module(__ThisModule__).flow;
   }
   get modelFlowHistory() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowHistory;
+    return this.ctx.model.module(__ThisModule__).flowHistory;
   }
   get modelFlowNode() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowNode;
+    return this.ctx.model.module(__ThisModule__).flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowNodeHistory;
+    return this.ctx.model.module(__ThisModule__).flowNodeHistory;
   }
 
   get sqlProcedure() {

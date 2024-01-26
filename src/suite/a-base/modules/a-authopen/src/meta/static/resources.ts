@@ -7,7 +7,7 @@ const resources = [
   //   atomCategoryId: 'a-base:menu.Create',
   //   resourceType: 'a-base:menu',
   //   resourceConfig: JSON.stringify({
-  //     module: moduleInfo.relativeName,
+  //     module: __ThisModule__,
   //     atomClassName: 'authOpen',
   //     atomAction: 'create',
   //   }),
@@ -20,7 +20,7 @@ const resources = [
   //   atomCategoryId: 'a-base:menu.List',
   //   resourceType: 'a-base:menu',
   //   resourceConfig: JSON.stringify({
-  //     module: moduleInfo.relativeName,
+  //     module: __ThisModule__,
   //     atomClassName: 'authOpen',
   //     atomAction: 'read',
   //   }),

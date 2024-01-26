@@ -7,7 +7,7 @@ const resources = [
     atomCategoryId: 'a-base:menu.BasicProfile',
     resourceType: 'a-base:menu',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'dashboard',
       atomAction: 'create',
     }),
@@ -22,7 +22,7 @@ const resources = [
     atomCategoryId: 'a-base:menu.BasicProfile',
     resourceType: 'a-base:menu',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'dashboard',
       atomAction: 'read',
     }),
@@ -38,7 +38,7 @@ const resources = [
     atomCategoryId: 'a-dashboard:widget.General',
     resourceType: 'a-dashboard:widget',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'widgetAbout',
     }),
     resourceRoles: 'root',

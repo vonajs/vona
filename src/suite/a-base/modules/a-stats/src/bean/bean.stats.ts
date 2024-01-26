@@ -6,7 +6,7 @@ let __statsDeps;
 @Bean()
 export class BeanStats extends BeanModuleScopeBase {
   get modelStats() {
-    return this.ctx.model.module(moduleInfo.relativeName).stats;
+    return this.ctx.model.module(__ThisModule__).stats;
   }
 
   notify({ module, name, nameSub, user }) {
@@ -29,7 +29,7 @@ export class BeanStats extends BeanModuleScopeBase {
     // queue
     const method = async ? 'queuePushAsync' : 'queuePush';
     return this.ctx.meta.util[method]({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'stats',
       queueNameSub: provider.user ? 'user' : 'instance',
       data: {

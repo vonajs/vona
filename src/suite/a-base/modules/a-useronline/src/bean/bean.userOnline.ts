@@ -1,22 +1,22 @@
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const __atomClassUserOnline = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'userOnline',
 };
 const __atomClassUserOnlineHistory = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'userOnlineHistory',
 };
 
 @Bean()
 export class BeanUserOnline extends BeanModuleScopeBase {
   get modelUserOnline() {
-    return this.ctx.model.module(moduleInfo.relativeName).userOnline;
+    return this.ctx.model.module(__ThisModule__).userOnline;
   }
 
   get configUserOnline() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get configUserOnlineExpired() {

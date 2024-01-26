@@ -31,10 +31,10 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
   async _complete_tail({ flowTask, user }) {
     const flowNodeId = flowTask.flowNodeId;
     await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.flowTask.nodeDoneCheck.${flowNodeId}`,
+      resource: `${__ThisModule__}.flowTask.nodeDoneCheck.${flowNodeId}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           beanFullName: 'flowTask',
           context: { flowNodeId },
           fn: '_nodeDoneCheckLock',

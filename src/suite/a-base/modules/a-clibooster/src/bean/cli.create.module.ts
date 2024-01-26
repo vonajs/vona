@@ -43,7 +43,7 @@ export class CliCreateModule extends BeanCliBase {
     const template = argv.template;
     // templateDir
     const templateDir = this.template.resolvePath({
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       path: `create/${template}`,
     });
     // render

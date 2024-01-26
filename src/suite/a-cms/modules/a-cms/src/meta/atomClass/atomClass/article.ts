@@ -29,7 +29,7 @@ export default {
     preview: {
       code: 101,
       title: 'Preview',
-      actionModule: moduleInfo.relativeName,
+      actionModule: __ThisModule__,
       actionComponent: 'action',
       icon: { f7: '::preview' },
       enableOnStatic: null,

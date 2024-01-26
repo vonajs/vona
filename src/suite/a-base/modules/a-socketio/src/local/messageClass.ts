@@ -6,7 +6,7 @@ const _cacheChannels = {};
 @Local()
 export class LocalMessageClass extends BeanBase {
   get modelMessageClass() {
-    return this.ctx.model.module(moduleInfo.relativeName).messageClass;
+    return this.ctx.model.module(__ThisModule__).messageClass;
   }
 
   async getMessageClassId({ id, module, messageClassName }) {
@@ -22,10 +22,10 @@ export class LocalMessageClass extends BeanBase {
     if (!module || !messageClassName) throw new Error('Invalid arguments');
     // lock
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.messageClass.register`,
+      resource: `${__ThisModule__}.messageClass.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           fn: async ({ ctx }) => {
             return await ctx.bean.io.messageClass._registerLock({ module, messageClassName });
           },

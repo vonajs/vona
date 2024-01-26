@@ -6,7 +6,7 @@ import Strategy from '../meta/passport/strategy.js';
 @Bean({ scene: 'auth.provider' })
 export class AuthProviderSms extends BeanAuthProviderBase {
   // get localSimple() {
-  //   return this.ctx.bean.local.module(moduleInfo.relativeName).simple;
+  //   return this.ctx.bean.local.module(__ThisModule__).simple;
   // }
   async getConfigDefault() {
     return null;
@@ -20,12 +20,12 @@ export class AuthProviderSms extends BeanAuthProviderBase {
   async onVerify(body) {
     const { mobile, rememberMe } = body.data;
     // validate
-    await this.ctx.bean.validation.validate({ module: moduleInfo.relativeName, validator: 'signin', data: body.data });
+    await this.ctx.bean.validation.validate({ module: __ThisModule__, validator: 'signin', data: body.data });
     // exists
     const user = await this.ctx.bean.user.exists({ mobile });
-    if (!user) return this.ctx.throw.module(moduleInfo.relativeName, 1004);
+    if (!user) return this.ctx.throw.module(__ThisModule__, 1004);
     // disabled
-    if (user.disabled) return this.ctx.throw.module(moduleInfo.relativeName, 1005);
+    if (user.disabled) return this.ctx.throw.module(__ThisModule__, 1005);
     return {
       module: this.providerModule,
       provider: this.providerName,

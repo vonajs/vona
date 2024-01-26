@@ -17,7 +17,7 @@ export default class CliStoreBase extends BeanCliBase {
   }
 
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   async meta({ user }) {
@@ -116,7 +116,7 @@ export default class CliStoreBase extends BeanCliBase {
       // result
       if (result.code && !result.message) {
         const args = result.args || [];
-        result.message = this.ctx.parseSuccess.module(moduleInfo.relativeName, result.code, ...args).message;
+        result.message = this.ctx.parseSuccess.module(__ThisModule__, result.code, ...args).message;
       }
       if (result.message) {
         await this.console.log({ text: result.message });

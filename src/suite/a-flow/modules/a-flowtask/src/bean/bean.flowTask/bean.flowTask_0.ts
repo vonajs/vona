@@ -2,10 +2,10 @@ import { BeanBase } from '@cabloy/core';
 
 export class BeanFlowTask0 extends BeanBase {
   get modelFlowTask() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowTask;
+    return this.ctx.model.module(__ThisModule__).flowTask;
   }
   get modelFlowTaskHistory() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowTaskHistory;
+    return this.ctx.model.module(__ThisModule__).flowTaskHistory;
   }
   get localRight() {
     return this.ctx.bean._getBean('a-flowtask.local.right');

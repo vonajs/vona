@@ -26,7 +26,7 @@ schemas.dashboard = {
       ebType: 'component',
       ebTitle: 'Content',
       ebRender: {
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         name: 'renderDashboardContent',
       },
       notEmpty: true,

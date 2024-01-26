@@ -6,7 +6,7 @@ export class StatsUserAlert extends BeanBase {
     const { user } = context;
     // user stats
     const statsUser = await this.ctx.bean.stats._get({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       fullName: 'user',
       user,
     });

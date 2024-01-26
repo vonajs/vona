@@ -6,11 +6,11 @@ import UtilsFn from '../../common/utils.js';
 export class LocalFlowFlow0 extends BeanBase {
   __init__({ flowDef }) {
     // context
-    this.context = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.context.flow`, {
+    this.context = this.ctx.bean._newBean(`${__ThisModule__}.local.context.flow`, {
       flowDef,
     });
     // listener
-    this._flowListener = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.flow.listener`, {
+    this._flowListener = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.listener`, {
       flowInstance: this,
       context: this.context,
     });
@@ -20,19 +20,19 @@ export class LocalFlowFlow0 extends BeanBase {
     return this.ctx.model.module('a-base').atom;
   }
   get modelFlow() {
-    return this.ctx.model.module(moduleInfo.relativeName).flow;
+    return this.ctx.model.module(__ThisModule__).flow;
   }
   get modelFlowHistory() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowHistory;
+    return this.ctx.model.module(__ThisModule__).flowHistory;
   }
   get modelFlowNode() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowNode;
+    return this.ctx.model.module(__ThisModule__).flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowNodeHistory;
+    return this.ctx.model.module(__ThisModule__).flowNodeHistory;
   }
   get constant() {
-    return this.ctx.constant.module(moduleInfo.relativeName);
+    return this.ctx.constant.module(__ThisModule__);
   }
 
   async start({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
@@ -179,7 +179,7 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   _createNodeInstance2({ nodeDef, contextEdge }) {
-    const node = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.flow.node`, {
+    const node = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.node`, {
       flowInstance: this,
       context: this.context,
       contextEdge,
@@ -190,7 +190,7 @@ export class LocalFlowFlow0 extends BeanBase {
 
   async _loadNodeInstance({ flowNode, history }) {
     const nodeDef = this._findNodeDef({ nodeDefId: flowNode.flowNodeDefId });
-    if (!nodeDef) this.ctx.throw.module(moduleInfo.relativeName, 1005, flowNode.flowNodeDefId);
+    if (!nodeDef) this.ctx.throw.module(__ThisModule__, 1005, flowNode.flowNodeDefId);
     const node = this._createNodeInstance2({ nodeDef });
     await node._load({ flowNode, history });
     return node;
@@ -204,7 +204,7 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   async _createEdgeInstance({ edgeDef, contextNode }) {
-    const edge = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.flow.edge`, {
+    const edge = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.edge`, {
       flowInstance: this,
       context: this.context,
       contextNode,
@@ -259,7 +259,7 @@ export class LocalFlowFlow0 extends BeanBase {
   _notifyFlowInitiateds(flowUserId) {
     if (flowUserId) {
       this.ctx.bean.stats.notify({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         name: 'flowInitiateds',
         user: { id: flowUserId },
       });

@@ -7,7 +7,7 @@ const workflow = {
         params: {
           module: 'a-message',
           name: 'message',
-          nameSub: `${moduleInfo.relativeName}_workflow`,
+          nameSub: `${__ThisModule__}_workflow`,
         },
         color: 'red',
       },

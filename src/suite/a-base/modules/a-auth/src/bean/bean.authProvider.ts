@@ -3,10 +3,10 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanAuthProvider extends BeanBase {
   get modelAuthProvider() {
-    return this.ctx.model.module(moduleInfo.relativeName).authProvider;
+    return this.ctx.model.module(__ThisModule__).authProvider;
   }
   get localPassport() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).passport;
+    return this.ctx.bean.local.module(__ThisModule__).passport;
   }
 
   getAuthProviderBase({ module, providerName }) {
@@ -23,10 +23,10 @@ export class BeanAuthProvider extends BeanBase {
     if (!module || !providerName) throw new Error('Invalid arguments');
     // lock
     return await this.ctx.meta.util.lock({
-      resource: `${moduleInfo.relativeName}.authProvider.register`,
+      resource: `${__ThisModule__}.authProvider.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: moduleInfo.relativeName,
+          beanModule: __ThisModule__,
           beanFullName: 'authProvider',
           context: { module, providerName },
           fn: '_registerAuthProviderLock',
@@ -50,8 +50,8 @@ export class BeanAuthProvider extends BeanBase {
 
   async authenticateDirect({ module, providerName, providerScene, query, body }) {
     return await this.ctx.meta.util.executeBeanIsolate({
-      beanModule: moduleInfo.relativeName,
-      beanFullName: `${moduleInfo.relativeName}.local.passport`,
+      beanModule: __ThisModule__,
+      beanFullName: `${__ThisModule__}.local.passport`,
       context: { module, providerName, providerScene },
       fn: 'authenticate',
       ctxParent: {

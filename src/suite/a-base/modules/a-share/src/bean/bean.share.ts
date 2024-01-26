@@ -3,15 +3,15 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanShare extends BeanBase {
   get modelShare() {
-    return this.ctx.model.module(moduleInfo.relativeName).share;
+    return this.ctx.model.module(__ThisModule__).share;
   }
 
   get modelShareRecordPV() {
-    return this.ctx.model.module(moduleInfo.relativeName).shareRecordPV;
+    return this.ctx.model.module(__ThisModule__).shareRecordPV;
   }
 
   get modelShareRecordUV() {
-    return this.ctx.model.module(moduleInfo.relativeName).shareRecordUV;
+    return this.ctx.model.module(__ThisModule__).shareRecordUV;
   }
 
   async generate({ host, atomId, url, user }) {
@@ -72,7 +72,7 @@ export class BeanShare extends BeanBase {
     const userId = user.id;
     // aShareRecordPV
     await this.ctx.bean.event.invoke({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'shareRecordPV',
       data: { share: item, user },
       next: async (context, next) => {
@@ -97,7 +97,7 @@ export class BeanShare extends BeanBase {
     const uv = await this.modelShareRecordUV.get(uvData);
     if (!uv) {
       await this.ctx.bean.event.invoke({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         name: 'shareRecordUV',
         data: { share: item, user },
         next: async (context, next) => {

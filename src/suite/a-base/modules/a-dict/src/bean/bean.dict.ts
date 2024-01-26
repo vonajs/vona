@@ -5,22 +5,22 @@ const __SeparatorCode = '/';
 @Bean()
 export class BeanDict extends BeanModuleScopeBase {
   get cacheMem() {
-    return this.ctx.cache.mem.module(moduleInfo.relativeName);
+    return this.ctx.cache.mem.module(__ThisModule__);
   }
 
   get atomClass() {
     return {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'dict',
     };
   }
 
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).dict;
+    return this.ctx.model.module(__ThisModule__).dict;
   }
 
   get modelDictContent() {
-    return this.ctx.model.module(moduleInfo.relativeName).dictContent;
+    return this.ctx.model.module(__ThisModule__).dictContent;
   }
 
   // options: separator

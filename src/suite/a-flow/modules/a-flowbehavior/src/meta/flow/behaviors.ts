@@ -7,7 +7,7 @@ const behaviors = {
     bean: 'overtime',
     icon: { f7: ':outline:timer-outline' },
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'overtime',
     },
   },

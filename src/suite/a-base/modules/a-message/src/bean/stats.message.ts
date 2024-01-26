@@ -26,7 +26,7 @@ export class StatsMessage extends BeanBase {
       const modelStats = this.ctx.model.module('a-stats').stats;
       const items = await modelStats.select({
         where: {
-          module: moduleInfo.relativeName,
+          module: __ThisModule__,
           name: {
             op: 'likeRight',
             val: 'message.',

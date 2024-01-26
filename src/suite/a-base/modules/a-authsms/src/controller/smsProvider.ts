@@ -31,7 +31,7 @@ export class ControllerSmsProvider extends BeanBase {
     const data = this.ctx.request.body.data;
     // validate
     await this.ctx.bean.validation.validate({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: providerName,
       schema: null,
       data,

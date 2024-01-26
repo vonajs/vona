@@ -9,7 +9,7 @@ export class MiddlewareValidate extends BeanBase {
   async execute(options, next) {
     // must exists
     const validator = options.validator;
-    if (!validator) this.ctx.throw.module(moduleInfo.relativeName, 1001);
+    if (!validator) this.ctx.throw.module(__ThisModule__, 1001);
     // params
     const module = options.module || this.ctx.module.info.relativeName;
     const schema = options.schema || (this.ctx.meta._validator && this.ctx.meta._validator.schema);

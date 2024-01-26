@@ -3,7 +3,7 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 @Bean()
 export class BeanStatus extends BeanModuleScopeBase {
   get modelStatus() {
-    return this.ctx.model.module(moduleInfo.relativeName).status;
+    return this.ctx.model.module(__ThisModule__).status;
   }
 
   async get(name) {
@@ -31,10 +31,10 @@ export class BeanStatus extends BeanModuleScopeBase {
     } else {
       if (queue) {
         await this.ctx.meta.util.lock({
-          resource: `${moduleInfo.relativeName}.statusSet.${this.moduleScope}.${name}`,
+          resource: `${__ThisModule__}.statusSet.${this.moduleScope}.${name}`,
           fn: async () => {
             return await this.ctx.meta.util.executeBeanIsolate({
-              beanModule: moduleInfo.relativeName,
+              beanModule: __ThisModule__,
               fn: async ({ ctx }) => {
                 return await ctx.bean.status.module(this.moduleScope)._set({ name, value, queue: false });
               },

@@ -27,7 +27,7 @@ export class BeanIoSave extends BeanIoPush {
     // message syncs
     let messageSyncs = [];
     // saveLimit
-    const saveLimit = this.ctx.config.module(moduleInfo.relativeName).message.sync.saveLimit;
+    const saveLimit = this.ctx.config.module(__ThisModule__).message.sync.saveLimit;
     // sender
     //   not save ===0
     if (message.userIdFrom !== 0) {

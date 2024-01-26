@@ -57,7 +57,7 @@ export class VersionManager extends BeanBase {
 
   async test() {
     const atomClass = {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'post',
     };
     const categories = [

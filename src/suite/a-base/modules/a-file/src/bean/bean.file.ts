@@ -16,10 +16,10 @@ const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 @Bean()
 export class BeanFile extends BeanBase {
   get modelFile() {
-    return this.ctx.model.module(moduleInfo.relativeName).file;
+    return this.ctx.model.module(__ThisModule__).file;
   }
   get modelFileView() {
-    return this.ctx.model.module(moduleInfo.relativeName).fileView;
+    return this.ctx.model.module(__ThisModule__).fileView;
   }
 
   async all({ atomClass, options, user }) {
@@ -388,7 +388,7 @@ export class BeanFile extends BeanBase {
   async _fileUpdateCheck({ file, user }) {
     // invoke event
     return await this.ctx.bean.event.invoke({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'fileUpdateCheck',
       data: { file, user },
       next: async (context, next) => {
@@ -428,7 +428,7 @@ export class BeanFile extends BeanBase {
   async _fileDownloadCheck({ file, user }) {
     // invoke event
     return await this.ctx.bean.event.invoke({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'fileDownloadCheck',
       data: { file, user },
       next: async (context, next) => {

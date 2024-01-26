@@ -7,7 +7,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonAppMenu',
       icon: { f7: ':outline:apps-outline' },
     }),
@@ -20,7 +20,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonAppHome',
       icon: { f7: '::home' },
     }),
@@ -33,7 +33,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonAppMine',
       icon: { f7: '::person' },
       url: '/a/user/user/mine',
@@ -48,7 +48,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::database' },
       url: '/a/basefront/atom/list',
@@ -62,7 +62,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::search' },
       url: '/a/basefront/atom/searchQuick',
@@ -76,7 +76,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonMine',
       icon: { f7: '::person' },
       url: '/a/user/user/mine',
@@ -91,7 +91,7 @@ const resources = [
     atomCategoryId: 'a-layoutmobile:button.General',
     resourceType: 'a-layoutmobile:button',
     resourceConfig: JSON.stringify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       component: 'buttonLink',
       icon: { f7: '::home' },
       url: '/a/basefront/resource/tree',

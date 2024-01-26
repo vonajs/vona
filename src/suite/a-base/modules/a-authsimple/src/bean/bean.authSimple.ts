@@ -3,19 +3,19 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanAuthSimple extends BeanBase {
   get modelAuthSimple() {
-    return this.ctx.model.module(moduleInfo.relativeName).authSimple;
+    return this.ctx.model.module(__ThisModule__).authSimple;
   }
   get modelAuth() {
     return this.ctx.model.module('a-base').auth;
   }
   get localSimple() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).simple;
+    return this.ctx.bean.local.module(__ThisModule__).simple;
   }
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
   get cacheDb() {
-    return this.ctx.cache.db.module(moduleInfo.relativeName);
+    return this.ctx.cache.db.module(__ThisModule__);
   }
 
   // mobile: not use
@@ -25,7 +25,7 @@ export class BeanAuthSimple extends BeanBase {
 
     // profileUser
     const profileUser = {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       provider: 'authsimple',
       profileId: authSimpleId,
       maxAge: 0,
@@ -72,7 +72,7 @@ export class BeanAuthSimple extends BeanBase {
   // data: { auth, password, rememberMe }
   async signin({ data, state = 'login' }) {
     const res = await this.ctx.bean.authProvider.authenticateDirect({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authsimple',
       query: { state },
       body: { data },
@@ -88,7 +88,7 @@ export class BeanAuthSimple extends BeanBase {
   async signinDirect({ data, state = 'login' }) {
     // beanProvider
     const beanProvider = this.ctx.bean.authProvider.createAuthProviderBean({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authsimple',
       providerScene: null,
     });
@@ -123,7 +123,7 @@ export class BeanAuthSimple extends BeanBase {
 
     // auth
     const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authsimple',
     });
     await this.modelAuth.insert({
@@ -157,7 +157,7 @@ export class BeanAuthSimple extends BeanBase {
 
     // profileUser
     const profileUser = {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       provider: 'authsimple',
       profileId: authSimpleId,
       maxAge: 0,
@@ -198,7 +198,7 @@ export class BeanAuthSimple extends BeanBase {
     if (!value) {
       // expired, send confirmation mail again
       //  1003: passwordResetEmailExpired
-      this.ctx.throw.module(moduleInfo.relativeName, 1003);
+      this.ctx.throw.module(__ThisModule__, 1003);
     }
     // userId
     const userId = value.userId;
@@ -333,12 +333,12 @@ export class BeanAuthSimple extends BeanBase {
   async ensureAuthUser({ beanProvider, data: { auth, password, rememberMe } }) {
     // exists
     const user = await this.ctx.bean.user.exists({ userName: auth, email: auth, mobile: auth });
-    if (!user) return this.ctx.throw.module(moduleInfo.relativeName, 1001);
+    if (!user) return this.ctx.throw.module(__ThisModule__, 1001);
     // disabled
-    if (user.disabled) return this.ctx.throw.module(moduleInfo.relativeName, 1002);
+    if (user.disabled) return this.ctx.throw.module(__ThisModule__, 1002);
     // verify
     const authSimple = await this.localSimple.verify({ userId: user.id, password });
-    if (!authSimple) return this.ctx.throw.module(moduleInfo.relativeName, 1001);
+    if (!authSimple) return this.ctx.throw.module(__ThisModule__, 1001);
     return {
       module: beanProvider.providerModule,
       provider: beanProvider.providerName,

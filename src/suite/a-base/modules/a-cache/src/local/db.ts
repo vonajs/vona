@@ -37,10 +37,10 @@ export class LocalDb extends BeanModuleScopeBase {
     } else {
       if (queue) {
         await this.ctx.meta.util.lock({
-          resource: `${moduleInfo.relativeName}.cacheDbSet.${this.moduleScope}.${name}`,
+          resource: `${__ThisModule__}.cacheDbSet.${this.moduleScope}.${name}`,
           fn: async () => {
             return await this.ctx.meta.util.executeBeanIsolate({
-              beanModule: moduleInfo.relativeName,
+              beanModule: __ThisModule__,
               fn: async ({ ctx }) => {
                 return await ctx.cache._db.module(this.moduleScope)._set({ name, value, timeout, queue: false });
               },

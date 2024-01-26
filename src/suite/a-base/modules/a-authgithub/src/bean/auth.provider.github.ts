@@ -7,7 +7,7 @@ import StrategyMock from '../meta/passport/strategyMock.js';
 @Bean({ scene: 'auth.provider' })
 export class AuthProviderGithub extends BeanAuthProviderBase {
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
   async getConfigDefault() {
     const configGitHub = this.configModule.account.github;

@@ -32,14 +32,14 @@ export default pageMode => {
       // render snippets
       await this.template.renderBoilerplateAndSnippets({
         targetDir,
-        moduleName: moduleInfo.relativeName,
+        moduleName: __ThisModule__,
         snippetsPath: `create/${pageMode}/snippets`,
         boilerplatePath: null,
       });
       // render boilerplate
       await this.template.renderBoilerplateAndSnippets({
         targetDir: pageDir,
-        moduleName: moduleInfo.relativeName,
+        moduleName: __ThisModule__,
         snippetsPath: null,
         boilerplatePath: `create/${pageMode}/boilerplate`,
       });

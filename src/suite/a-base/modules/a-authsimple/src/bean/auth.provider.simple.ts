@@ -6,7 +6,7 @@ import Strategy from '../meta/passport/strategy.js';
 @Bean({ scene: 'auth.provider' })
 export class AuthProviderSimple extends BeanAuthProviderBase {
   get localSimple() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).simple;
+    return this.ctx.bean.local.module(__ThisModule__).simple;
   }
   async getConfigDefault() {
     return null;
@@ -20,7 +20,7 @@ export class AuthProviderSimple extends BeanAuthProviderBase {
   async onVerify(body) {
     // const { auth, password, rememberMe } = body.data;
     // validate
-    await this.ctx.bean.validation.validate({ module: moduleInfo.relativeName, validator: 'signin', data: body.data });
+    await this.ctx.bean.validation.validate({ module: __ThisModule__, validator: 'signin', data: body.data });
     // exists
     return await this.ctx.bean.authSimple.ensureAuthUser({ beanProvider: this, data: body.data });
   }

@@ -44,7 +44,7 @@ export class LocalIoInnerQueueDelivery extends LocalIoInner0 {
     const messagesEmit = options.collector.messagesEmit;
     if (messagesEmit.length > 0) {
       this.ctx.meta.util.broadcastEmit({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         broadcastName: 'socketEmit',
         data: { messagesEmit },
       });

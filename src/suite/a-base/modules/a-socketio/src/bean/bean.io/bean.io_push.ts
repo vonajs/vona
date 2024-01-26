@@ -3,7 +3,7 @@ import { BeanIoPublish } from './bean.io_publish.js';
 export class BeanIoPush extends BeanIoPublish {
   async pushDirect({ content, channel, options }) {
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'pushDirect',
       data: {
         content,
@@ -47,7 +47,7 @@ export class BeanIoPush extends BeanIoPublish {
     if (!pushEnable) return;
     // queue
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'push',
       data: {
         options,

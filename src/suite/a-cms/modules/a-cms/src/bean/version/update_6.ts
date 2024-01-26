@@ -63,8 +63,8 @@ export class Update6 extends Update5 {
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        beanModule: moduleInfo.relativeName,
-        beanFullName: `${moduleInfo.relativeName}.version.manager`,
+        beanModule: __ThisModule__,
+        beanFullName: `${__ThisModule__}.version.manager`,
         context: options,
         fn: '_update6UuidsInstance',
       });

@@ -14,7 +14,7 @@ export class BeanIoPublish extends BeanIoDelivery {
       path: '/a/socketio/messageSystem',
       message,
       messageClass: {
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         messageClassName: 'messageSystem',
       },
     });
@@ -93,7 +93,7 @@ export class BeanIoPublish extends BeanIoDelivery {
 
     // to queue
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'process',
       data: {
         path,
@@ -115,7 +115,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     if (path) {
       // try delivery first, then try push if failed
       this.ctx.meta.util.queuePush({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         queueName: 'delivery',
         data: {
           path,

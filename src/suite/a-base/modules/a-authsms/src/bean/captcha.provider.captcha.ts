@@ -30,11 +30,11 @@ export class CaptchaProviderCaptcha extends BeanBase {
         // prompt
         const message = chalk.keyword('orange')(this.ctx.text('smsProviderNonePrompt'));
         console.log('\n' + boxen(message, boxenOptions));
-        this.ctx.throw.module(moduleInfo.relativeName, 1001);
+        this.ctx.throw.module(__ThisModule__, 1001);
       }
     }
     // provider
-    const provider = this.ctx.bean._getBean(`${moduleInfo.relativeName}.sms.provider.${providerName}`);
+    const provider = this.ctx.bean._getBean(`${__ThisModule__}.sms.provider.${providerName}`);
     const config = providers[providerName];
     return { provider, config };
   }

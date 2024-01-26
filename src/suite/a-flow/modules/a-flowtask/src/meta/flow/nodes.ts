@@ -8,7 +8,7 @@ const nodes = {
     bean: 'startEventAtom',
     icon: { f7: ':flow:start-event-atom' },
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'startEventAtom',
     },
   },
@@ -18,7 +18,7 @@ const nodes = {
     bean: 'endEventAtom',
     icon: { f7: ':flow:end-event-atom' },
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'endEventAtom',
     },
   },
@@ -29,7 +29,7 @@ const nodes = {
     bean: 'activityUserTask',
     icon: { f7: ':flow:activity-user-task' },
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'activityUserTask',
     },
   },

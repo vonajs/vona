@@ -25,8 +25,8 @@ export class SmsProviderAliyun extends BeanBase {
   }
 
   async verify({ data, dataInput }) {
-    if (!data) this.ctx.throw.module(moduleInfo.relativeName, 1002);
-    if (data.token !== dataInput.token) this.ctx.throw.module(moduleInfo.relativeName, 1003);
+    if (!data) this.ctx.throw.module(__ThisModule__, 1002);
+    if (data.token !== dataInput.token) this.ctx.throw.module(__ThisModule__, 1003);
   }
 
   async __sendSms({ params, config }) {

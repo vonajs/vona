@@ -36,7 +36,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
   async onChannels({ options, message, messageSync, messageClass }) {
     let channels = await super.onChannels({ options, message, messageSync, messageClass });
     if (!channels) {
-      channels = this.ctx.config.module(moduleInfo.relativeName).socketio.message.push.channels;
+      channels = this.ctx.config.module(__ThisModule__).socketio.message.push.channels;
     }
     return channels;
   }
@@ -77,9 +77,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
       },
     };
     // config
-    const configTemplate = this.ctx.config.module(moduleInfo.relativeName).socketio.message.render.templates[
-      channelFullName
-    ];
+    const configTemplate = this.ctx.config.module(__ThisModule__).socketio.message.render.templates[channelFullName];
     // subject
     let subject = this.ctx.text.locale(user.locale, configTemplate.subject);
     subject = this.ctx.bean.util.replaceTemplate(subject, scope);
@@ -103,7 +101,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
     if (user.id <= 0) return;
     // stats
     this.ctx.bean.stats.notify({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       name: 'message',
       nameSub: `${messageClass.module}_${messageClass.messageClassName}`,
       user,

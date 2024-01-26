@@ -5,7 +5,7 @@ const edges = {
     title: 'Sequence',
     bean: 'sequence',
     validator: {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       validator: 'sequence',
     },
   },

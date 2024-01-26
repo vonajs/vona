@@ -4,11 +4,11 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomFlowDef extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowDef;
+    return this.ctx.model.module(__ThisModule__).flowDef;
   }
 
   get modelFlowDefContent() {
-    return this.ctx.model.module(moduleInfo.relativeName).flowDefContent;
+    return this.ctx.model.module(__ThisModule__).flowDefContent;
   }
 
   async default({ atomClass, item, options, user }) {

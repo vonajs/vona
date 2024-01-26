@@ -6,7 +6,7 @@ import passwordFn from 'password-hash-and-salt'; // should compile
 @Local()
 export class LocalSimple extends BeanBase {
   get modelAuthSimple() {
-    return this.ctx.model.module(moduleInfo.relativeName).authSimple;
+    return this.ctx.model.module(__ThisModule__).authSimple;
   }
 
   async verify({ userId, password }) {

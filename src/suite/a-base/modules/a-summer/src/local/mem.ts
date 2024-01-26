@@ -55,7 +55,7 @@ export class LocalMem extends CacheBase {
     this.lruCache.delete(keyHash);
     // del on other workers by broadcast
     this.ctx.meta.util.broadcastEmit({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       broadcastName: 'memDel',
       data: { fullKey: this._cacheBase.fullKey, keyHash, key, options },
     });
@@ -69,7 +69,7 @@ export class LocalMem extends CacheBase {
     keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
     // del on other workers by broadcast
     this.ctx.meta.util.broadcastEmit({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       broadcastName: 'memMultiDel',
       data: { fullKey: this._cacheBase.fullKey, keysHash, keys, options },
     });
@@ -83,7 +83,7 @@ export class LocalMem extends CacheBase {
     this.lruCache.clear();
     // clear on other workers by broadcast
     this.ctx.meta.util.broadcastEmit({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       broadcastName: 'memClear',
       data: { fullKey: this._cacheBase.fullKey, options },
     });

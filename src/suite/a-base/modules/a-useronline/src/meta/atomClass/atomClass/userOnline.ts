@@ -34,7 +34,7 @@ export default {
     loginLog: {
       code: 102,
       title: 'LoginLog',
-      actionModule: moduleInfo.relativeName,
+      actionModule: __ThisModule__,
       actionComponent: 'action',
       icon: { f7: ':role:shield-key' },
       stage: 'formal',

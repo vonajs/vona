@@ -13,7 +13,7 @@ export class IoMessageMail extends BeanIoMessageBase {
 
   async _onChannelRenderMail({ message }) {
     const content = JSON.parse(message.content);
-    const modelMail = this.ctx.model.module(moduleInfo.relativeName).mail;
+    const modelMail = this.ctx.model.module(__ThisModule__).mail;
     const mail = await modelMail.get({ id: content.mailId });
     return {
       scene: mail.scene,

@@ -3,7 +3,7 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 @Bean()
 export class BeanMail extends BeanModuleScopeBase {
   get modelMail() {
-    return this.ctx.model.module(moduleInfo.relativeName).mail;
+    return this.ctx.model.module(__ThisModule__).mail;
   }
 
   // send
@@ -24,7 +24,7 @@ export class BeanMail extends BeanModuleScopeBase {
           content: { mailId },
         },
         messageClass: {
-          module: moduleInfo.relativeName,
+          module: __ThisModule__,
           messageClassName: 'mail',
         },
       });

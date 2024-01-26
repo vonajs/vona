@@ -12,21 +12,21 @@ export class BeanCliBase extends BeanBase {
 
   get console() {
     if (!this.__console) {
-      this.__console = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.console`, this);
+      this.__console = this.ctx.bean._newBean(`${__ThisModule__}.local.console`, this);
     }
     return this.__console;
   }
 
   get helper() {
     if (!this.__helper) {
-      this.__helper = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.helper`, this);
+      this.__helper = this.ctx.bean._newBean(`${__ThisModule__}.local.helper`, this);
     }
     return this.__helper;
   }
 
   get template() {
     if (!this.__template) {
-      this.__template = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.template`, this);
+      this.__template = this.ctx.bean._newBean(`${__ThisModule__}.local.template`, this);
     }
     return this.__template;
   }

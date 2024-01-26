@@ -1,7 +1,7 @@
  
 module.exports = class Atom extends module.meta.class.AtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).<%=argv.atomClassName%>;
+    return this.ctx.model.module(__ThisModule__).<%=argv.atomClassName%>;
   }
 
   async default({ atomClass, item, options, user }) {

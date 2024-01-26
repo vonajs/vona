@@ -14,7 +14,7 @@ export class LocalFlowEdge extends BeanBase {
 
   __init__({ context, contextNode, edgeDef }) {
     // context
-    this.contextEdge = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.context.edge`, {
+    this.contextEdge = this.ctx.bean._newBean(`${__ThisModule__}.local.context.edge`, {
       context,
       contextNode,
       edgeDef,

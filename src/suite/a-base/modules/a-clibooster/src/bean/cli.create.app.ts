@@ -26,7 +26,7 @@ export class CliCreateApp extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       snippetsPath: 'create/app/snippets',
       boilerplatePath: 'create/app/boilerplate',
     });

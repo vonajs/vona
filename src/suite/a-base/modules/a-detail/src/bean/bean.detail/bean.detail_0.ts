@@ -2,7 +2,7 @@ import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanDetail0 extends BeanModuleScopeBase {
   get modelDetailBase() {
-    return this.ctx.model.module(moduleInfo.relativeName).detailBase;
+    return this.ctx.model.module(__ThisModule__).detailBase;
   }
 
   async _loopDetailClasses({ atomClass, fn }) {

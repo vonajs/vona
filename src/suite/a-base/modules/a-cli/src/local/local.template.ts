@@ -31,7 +31,7 @@ export class LocalTemplate extends BeanBase {
   }
 
   get moduleConfig() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get fileMapping() {

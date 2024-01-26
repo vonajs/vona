@@ -69,14 +69,14 @@ export class LocalSite extends BeanBase {
     const site = await build.getSite({ language });
     // check if build site first
     const siteBuilt = await build._checkIfSiteBuilt({ site, force: false });
-    if (!siteBuilt) this.ctx.throw.module(moduleInfo.relativeName, 1006);
+    if (!siteBuilt) this.ctx.throw.module(__ThisModule__, 1006);
     return build.getUrl(site, language, path);
   }
 
   buildLanguagesQueue({ atomClass, progressId }) {
     // queue
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'render',
       queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
       data: {
@@ -90,7 +90,7 @@ export class LocalSite extends BeanBase {
   buildLanguageQueue({ atomClass, language, progressId }) {
     // queue
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'render',
       queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
       data: {

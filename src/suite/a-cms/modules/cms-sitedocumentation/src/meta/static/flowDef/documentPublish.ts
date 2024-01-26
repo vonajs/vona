@@ -8,7 +8,7 @@ const content = {
         type: 'startEventAtom',
         options: {
           atom: {
-            module: moduleInfo.relativeName,
+            module: __ThisModule__,
             atomClassName: 'document',
           },
           conditionExpression: null,

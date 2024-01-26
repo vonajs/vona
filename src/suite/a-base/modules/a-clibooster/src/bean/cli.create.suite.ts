@@ -26,7 +26,7 @@ export class CliCreateSuite extends BeanCliBase {
     targetDir = await this.helper.ensureDir(targetDir);
     // templateDir
     const templateDir = this.template.resolvePath({
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       path: 'create/suite',
     });
     // render

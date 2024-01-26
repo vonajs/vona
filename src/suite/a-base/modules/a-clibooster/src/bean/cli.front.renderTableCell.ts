@@ -22,7 +22,7 @@ export class CliFrontRenderTableCell extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       snippetsPath: 'front/renderTableCell/snippets',
       boilerplatePath: 'front/renderTableCell/boilerplate',
     });

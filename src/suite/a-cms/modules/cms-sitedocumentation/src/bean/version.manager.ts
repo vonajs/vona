@@ -49,7 +49,7 @@ export class VersionManager extends BeanBase {
 
   async _test_categories_tags() {
     const atomClass = {
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       atomClassName: 'document',
     };
     // categories

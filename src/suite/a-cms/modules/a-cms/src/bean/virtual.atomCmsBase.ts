@@ -5,15 +5,15 @@ import trimHtml from '@zhennann/trim-html';
 @Virtual({ scene: 'bean' })
 export class BeanAtomCmsBase extends BeanAtomBase {
   get modelCMSArticle() {
-    return this.ctx.model.module(moduleInfo.relativeName).article;
+    return this.ctx.model.module(__ThisModule__).article;
   }
 
   get modelCMSContent() {
-    return this.ctx.model.module(moduleInfo.relativeName).content;
+    return this.ctx.model.module(__ThisModule__).content;
   }
 
   get moduleCMSConfig() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   async default({ atomClass, data, item, options, user }) {

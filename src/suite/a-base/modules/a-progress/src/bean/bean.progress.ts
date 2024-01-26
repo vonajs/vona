@@ -3,7 +3,7 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 @Bean()
 export class BeanProgress extends BeanModuleScopeBase {
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get redis() {
@@ -72,12 +72,12 @@ export class BeanProgress extends BeanModuleScopeBase {
     if (!item) {
       // same as abort
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(moduleInfo.relativeName, 1001);
+      this.ctx.throw.module(__ThisModule__, 1001);
     }
     // abort
     if (item.abort) {
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(moduleInfo.relativeName, 1001);
+      this.ctx.throw.module(__ThisModule__, 1001);
     }
     // data
     const data = item.data || [];
@@ -112,7 +112,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     if (!item) {
       // same as abort
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(moduleInfo.relativeName, 1001);
+      this.ctx.throw.module(__ThisModule__, 1001);
     }
     // data
     const data = { message };
@@ -145,7 +145,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     if (!item) {
       // same as abort
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(moduleInfo.relativeName, 1001);
+      this.ctx.throw.module(__ThisModule__, 1001);
     }
     // data
     const data = { message };
@@ -204,7 +204,7 @@ export class BeanProgress extends BeanModuleScopeBase {
       path: `/a/progress/update/${progressId}`,
       message: ioMessage,
       messageClass: {
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         messageClassName: 'progress',
       },
     });

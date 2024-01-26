@@ -6,7 +6,7 @@ import randomize from 'randomatic';
 @Atom()
 export class AtomAuthOpen extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(moduleInfo.relativeName).authOpen;
+    return this.ctx.model.module(__ThisModule__).authOpen;
   }
 
   get modelAuth() {
@@ -58,7 +58,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     const itemId = data.itemId;
     // add aAuth record
     const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authopen',
     });
     await this.modelAuth.insert({
@@ -90,7 +90,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     await super.delete({ atomClass, key, user });
     // delete aAuth record
     const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       providerName: 'authopen',
     });
     // not use userId

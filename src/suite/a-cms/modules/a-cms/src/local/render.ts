@@ -47,7 +47,7 @@ export class LocalRender extends BeanBase {
     this.ctx.tail(async () => {
       // queue
       await this.ctx.meta.util.queuePushAsync({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         queueName: 'render',
         queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
         data: {
@@ -68,7 +68,7 @@ export class LocalRender extends BeanBase {
     this.ctx.tail(() => {
       // queue
       this.ctx.meta.util.queuePush({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         queueName: 'render',
         queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
         data: {
@@ -89,7 +89,7 @@ export class LocalRender extends BeanBase {
     this.ctx.tail(async () => {
       // queue
       await this.ctx.meta.util.queuePushAsync({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         queueName: 'render',
         queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
         data: {
@@ -109,7 +109,7 @@ export class LocalRender extends BeanBase {
     this.ctx.tail(() => {
       // queue
       this.ctx.meta.util.queuePush({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         queueName: 'render',
         queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
         data: {

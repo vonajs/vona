@@ -20,7 +20,7 @@ export class CliCreateAtomAction extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: moduleInfo.relativeName,
+      moduleName: __ThisModule__,
       snippetsPath: 'create/atomAction/snippets',
       boilerplatePath: 'create/atomAction/boilerplate',
     });

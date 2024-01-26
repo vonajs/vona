@@ -6,10 +6,10 @@ import initData from './initData1.js';
 
 export class VersionInit extends BeanBase {
   get modelAuthOpen() {
-    return this.ctx.model.module(moduleInfo.relativeName).authOpen;
+    return this.ctx.model.module(__ThisModule__).authOpen;
   }
   get localToken() {
-    return this.ctx.bean.local.module(moduleInfo.relativeName).token;
+    return this.ctx.bean.local.module(__ThisModule__).token;
   }
 
   async run(options) {

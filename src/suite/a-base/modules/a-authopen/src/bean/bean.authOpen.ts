@@ -7,14 +7,14 @@ const __atomClassRole = {
   atomClassName: 'role',
 };
 const __atomClassAuthOpen = {
-  module: moduleInfo.relativeName,
+  module: __ThisModule__,
   atomClassName: 'authOpen',
 };
 
 @Bean()
 export class BeanAuthOpen extends BeanBase {
   get modelAuthOpen() {
-    return this.ctx.model.module(moduleInfo.relativeName).authOpen;
+    return this.ctx.model.module(__ThisModule__).authOpen;
   }
   get modelResourceRole() {
     return this.ctx.model.module('a-base').resourceRole;
@@ -67,7 +67,7 @@ export class BeanAuthOpen extends BeanBase {
     if (atom.atomDisabled) return this.ctx.throw(403);
     // neverExpire/expireTime
     if (!authOpen.neverExpire && authOpen.expireTime <= Date.now()) {
-      return this.ctx.throw.module(moduleInfo.relativeName, 1001);
+      return this.ctx.throw.module(__ThisModule__, 1001);
     }
     // done
     return authOpen;
@@ -183,7 +183,7 @@ export class BeanAuthOpen extends BeanBase {
       }
       // loadAtomStatic
       const atomKey = await this.ctx.bean.atomStatic.loadAtomStatic({
-        moduleName: moduleInfo.relativeName,
+        moduleName: __ThisModule__,
         atomClass: __atomClassRole,
         item,
       });

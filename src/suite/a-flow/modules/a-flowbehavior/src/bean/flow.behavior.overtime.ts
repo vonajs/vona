@@ -40,7 +40,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     const jobName = this._getJobName({ flowId, flowNodeId, behaviorDefId });
     const jobId = jobName;
     this.ctx.meta.util.queuePush({
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'overtime',
       queueNameSub: flowId,
       jobName,
@@ -60,7 +60,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     const jobId = this._getJobName({ flowId, flowNodeId, behaviorDefId });
     const queue = this.ctx.app.meta.queue._getQueue({
       subdomain: this.ctx.subdomain,
-      module: moduleInfo.relativeName,
+      module: __ThisModule__,
       queueName: 'overtime',
     });
     await queue.remove(jobId);

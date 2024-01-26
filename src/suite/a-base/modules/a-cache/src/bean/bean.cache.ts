@@ -3,7 +3,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanCache extends BeanBase {
   get db() {
-    const config = this.ctx.config.module(moduleInfo.relativeName);
+    const config = this.ctx.config.module(__ThisModule__);
     if (config.db.redis) {
       return this.redis;
     }

@@ -4,7 +4,7 @@ const content = {
       blocks: {
         items: {
           component: {
-            module: moduleInfo.relativeName,
+            module: __ThisModule__,
             name: 'appSystemMenuLayoutBlockListItems',
           },
         },

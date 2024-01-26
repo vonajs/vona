@@ -6,10 +6,10 @@ export class MiddlewareCaptchaVerify extends BeanBase {
     // must exists
     const scene = options.scene;
     const scenes = options.scenes;
-    if (!scene && !scenes) this.ctx.throw.module(moduleInfo.relativeName, 1001);
+    if (!scene && !scenes) this.ctx.throw.module(__ThisModule__, 1001);
 
     // local.disabled
-    if (this.ctx.app.meta.isLocal && this.ctx.config.module(moduleInfo.relativeName).configFront.local.disabled) {
+    if (this.ctx.app.meta.isLocal && this.ctx.config.module(__ThisModule__).configFront.local.disabled) {
       // next
       return await next();
     }

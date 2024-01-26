@@ -6,11 +6,11 @@ import utils from '../common/utils.js';
 @Bean()
 export class BeanCaptcha extends BeanModuleScopeBase {
   get configModule() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
 
   get cacheModule() {
-    return this.ctx.cache.db.module(moduleInfo.relativeName);
+    return this.ctx.cache.db.module(__ThisModule__);
   }
 
   async getProvider({ module, sceneName }) {

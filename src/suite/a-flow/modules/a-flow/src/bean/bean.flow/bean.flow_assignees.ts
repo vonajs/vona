@@ -84,7 +84,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
       } else if (isNaN(item)) {
         // string
         const role = await this.ctx.bean.role.parseRoleName({ roleName: item });
-        if (!role) this.ctx.throw.module(moduleInfo.relativeName, 1007, item);
+        if (!role) this.ctx.throw.module(__ThisModule__, 1007, item);
         arr.push(role.id);
       } else {
         // number

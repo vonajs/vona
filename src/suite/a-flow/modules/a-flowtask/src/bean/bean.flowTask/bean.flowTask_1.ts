@@ -44,7 +44,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     }
     if (!flowTask) {
       if (throwError) {
-        this.ctx.throw.module(moduleInfo.relativeName, 1001, flowTaskId);
+        this.ctx.throw.module(__ThisModule__, 1001, flowTaskId);
       } else {
         return null;
       }
@@ -58,7 +58,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
   }
 
   _createTaskInstance2({ nodeInstance }) {
-    const task = this.ctx.bean._newBean(`${moduleInfo.relativeName}.local.flow.task`, {
+    const task = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.task`, {
       nodeInstance,
     });
     return task;
@@ -110,7 +110,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
   _notifyTaskClaimings(userId) {
     if (userId) {
       this.ctx.bean.stats.notify({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         name: 'taskClaimings',
         user: { id: userId },
       });
@@ -120,7 +120,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
   _notifyTaskHandlings(userId) {
     if (userId) {
       this.ctx.bean.stats.notify({
-        module: moduleInfo.relativeName,
+        module: __ThisModule__,
         name: 'taskHandlings',
         user: { id: userId },
       });

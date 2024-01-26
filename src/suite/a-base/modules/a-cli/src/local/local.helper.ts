@@ -31,7 +31,7 @@ export class LocalHelper extends BeanBase {
   }
 
   get moduleConfig() {
-    return this.ctx.config.module(moduleInfo.relativeName);
+    return this.ctx.config.module(__ThisModule__);
   }
   get chalk() {
     return this.newChalk();
@@ -65,7 +65,7 @@ export class LocalHelper extends BeanBase {
   }
   findModule(moduleName) {
     const moduleInfo = this.parseModuleInfo(moduleName);
-    return this.ctx.app.meta.modules[moduleInfo.relativeName];
+    return this.ctx.app.meta.modules[__ThisModule__];
   }
   parseSuiteInfo(suiteName) {
     const suiteInfo = mparse.parseInfo(suiteName, 'suite');
