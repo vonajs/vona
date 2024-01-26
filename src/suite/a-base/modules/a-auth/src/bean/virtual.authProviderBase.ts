@@ -1,4 +1,7 @@
-module.exports = class AuthProviderBase {
+import { BeanBase, Virtual } from '@cabloy/core';
+
+@Virtual()
+export class AuthProviderBase extends BeanBase {
   constructor({ authProvider, providerModule, providerName, providerScene }) {
     this.authProvider = authProvider;
     this.providerModule = providerModule;
@@ -51,4 +54,4 @@ module.exports = class AuthProviderBase {
     }
     return this.authProvider.meta;
   }
-};
+}
