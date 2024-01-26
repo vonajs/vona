@@ -9,7 +9,7 @@ import 'cabloy-module-api-a-authgithub';
 import 'cabloy-module-api-a-authopen';
 import 'cabloy-module-api-a-authsimple';
 import 'cabloy-module-api-a-authsms';
-import 'cabloy-module-api-a-base-sync';
+import 'cabloy-module-api-a-base';
 import 'cabloy-module-api-a-baseaction';
 import 'cabloy-module-api-a-baseadmin';
 import 'cabloy-module-api-a-basefront';

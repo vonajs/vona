@@ -28,7 +28,7 @@
     "cabloy-module-api-a-authopen": "workspace:^",
     "cabloy-module-api-a-authsimple": "workspace:^",
     "cabloy-module-api-a-authsms": "workspace:^",
-    "cabloy-module-api-a-base-sync": "workspace:^",
+    "cabloy-module-api-a-base": "workspace:^",
     "cabloy-module-api-a-baseaction": "workspace:^",
     "cabloy-module-api-a-baseadmin": "workspace:^",
     "cabloy-module-api-a-basefront": "workspace:^",
