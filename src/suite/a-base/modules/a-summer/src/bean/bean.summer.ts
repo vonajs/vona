@@ -1,15 +1,15 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { LocalCache } from '../index.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 let __cacheBases;
 
 @Bean()
 export class BeanSummer extends BeanModuleScopeBase {
-  getCache({ module, name, fullKey }) {
+  getCache({ module, name, fullKey }: any) {
     fullKey = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey });
     if (!cacheBase) throw new Error(`summer cache not found: ${fullKey}`);
-    return this.ctx.bean._newBean(`${__ThisModule__}.local.cache`, {
+    return this.ctx.bean._newBean(LocalCache, {
       cacheBase,
     });
   }
@@ -44,7 +44,7 @@ export class BeanSummer extends BeanModuleScopeBase {
     return await cache.peek(key, options);
   }
 
-  _findCacheBase({ module, name, fullKey }) {
+  _findCacheBase({ module, name, fullKey }: any) {
     fullKey = this._prepareFullKey({ module, name, fullKey });
     if (!__cacheBases) {
       __cacheBases = this._collectCacheBases();
@@ -52,7 +52,7 @@ export class BeanSummer extends BeanModuleScopeBase {
     return __cacheBases[fullKey];
   }
 
-  _prepareFullKey({ module, name, fullKey }) {
+  _prepareFullKey({ module, name, fullKey }: any) {
     if (!fullKey) {
       module = module || this.moduleScope;
       fullKey = `${module}:${name}`;

@@ -3,6 +3,8 @@ import { Local } from '@cabloy/core';
 
 @Local()
 export class LocalRedis extends CacheBase {
+  _redisSummer: any;
+
   constructor({ cacheBase }) {
     super({ cacheBase });
     this._redisSummer = null;

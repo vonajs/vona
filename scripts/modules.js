@@ -5,6 +5,7 @@ const { glob } = require('@cabloy/module-glob');
 const eggBornUtils = require('egg-born-utils');
 const argv = require('./lib/parse_argv')('sync');
 const path = require('node:path');
+const gogocode = require('gogocode');
 
 (async function () {
   await main();
@@ -37,28 +38,12 @@ async function main() {
   }
 }
 
-async function _moduleHandle_thisModule({ file, module, processHelper }) {
-  if (file.indexOf('src/resource/this.ts') > -1) return;
+async function _moduleHandle_vars({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
-  if (contentOld.indexOf('__ThisModule__') === -1) return;
-  if (contentOld.indexOf('{ __ThisModule__ }') > -1) return;
-  const fileThis = `${module.root}/src/resource/this.js`;
-  let fileRelative = path.relative(path.dirname(file), fileThis);
-  if (fileRelative[0] !== '.') {
-    fileRelative = './' + fileRelative;
-  }
-  let contentNew;
-  if (contentOld.indexOf('import ') > -1) {
-    contentNew = contentOld.replace('import ', `import { __ThisModule__ } from '${fileRelative}';\nimport `);
-  } else {
-    contentNew = `import { __ThisModule__ } from '${fileRelative}';\n\n` + contentOld;
-  }
-  // console.log(contentNew);
-  // console.log(file);
-  // console.log(fileRelative);
-  // await fse.remove(file);
-  await fse.outputFile(file, contentNew);
-  await processHelper.formatFile({ fileName: file });
+  // 查找constructor
+  const ast = gogocode(sourceCode, { parseOptions: snippet.parseOptions });
+  const outAst = await snippet.transform(this.getAstData(ast, snippet));
+  outputCode = outAst.root().generate();
 }
 
 async function _moduleHandle({ module, processHelper }) {
@@ -79,7 +64,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_thisModule({ file, module, processHelper });
+    await _moduleHandle_vars({ file, module, processHelper });
   }
 }
 
