@@ -180,9 +180,12 @@ function classPathToClassNameMixin(classPath) {
 
 function classPathToClassName(prefix, classPath) {
   const parts = classPath.split('/').map(part => {
-    const parts2 = part.split('-').map(name => {
-      return name.charAt(0).toUpperCase() + name.substring(1);
-    });
+    const parts2 = part
+      .replaceAll('.', '-')
+      .split('-')
+      .map(name => {
+        return name.charAt(0).toUpperCase() + name.substring(1);
+      });
     return parts2.join('');
   });
   return `${prefix}${parts.join('')}`;

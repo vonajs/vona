@@ -1,3 +1,5 @@
+export * from '../local/stash.js';
+export * from '../local/procedure.js';
 export * from '../local/base.js';
 export * from '../local/user.js';
 export * from '../local/atom.js';
@@ -14,6 +16,8 @@ export * from '../local/tag.js';
 export * from '../local/util.js';
 export * from '../local/db.js';
 
+import { LocalStash } from '../local/stash.js';
+import { LocalProcedure } from '../local/procedure.js';
 import { LocalBase } from '../local/base.js';
 import { LocalUser } from '../local/user.js';
 import { LocalAtom } from '../local/atom.js';
@@ -31,6 +35,8 @@ import { LocalUtil } from '../local/util.js';
 import { LocalDb } from '../local/db.js';
 
 export interface IModuleLocal {
+  stash: LocalStash;
+  procedure: LocalProcedure;
   base: LocalBase;
   user: LocalUser;
   atom: LocalAtom;

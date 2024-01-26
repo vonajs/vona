@@ -1,4 +1,7 @@
-module.exports = class Stash {
+import { Local, BeanBase } from '@cabloy/core';
+
+@Local()
+export class LocalStash extends BeanBase {
   constructor() {
     this._caches = {};
   }
@@ -27,4 +30,4 @@ module.exports = class Stash {
     }
     return cache;
   }
-};
+}
