@@ -12,7 +12,7 @@ const tableNameDefault = function ({ ctx, action }) {
   }
 };
 
-module.exports = {
+export default {
   info: {
     bean: 'roleFieldsRight',
     title: 'RoleFieldsRight',

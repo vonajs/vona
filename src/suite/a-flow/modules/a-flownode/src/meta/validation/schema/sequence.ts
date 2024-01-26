@@ -13,4 +13,4 @@ schemas.sequence = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

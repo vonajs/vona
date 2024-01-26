@@ -5,7 +5,7 @@ const localTemplate = require('./bean/local.template.js');
 const beanCliBase = require('./bean/bean.cliBase.js');
 const beanCli = require('./bean/bean.cli.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

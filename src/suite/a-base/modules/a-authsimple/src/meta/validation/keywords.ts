@@ -37,4 +37,4 @@ keywords.passwordForgotEmail = {
     };
   },
 };
-module.exports = keywords;
+export default keywords;

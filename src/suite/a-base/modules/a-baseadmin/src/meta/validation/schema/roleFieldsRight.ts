@@ -86,4 +86,4 @@ schemas.roleFieldsRightSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

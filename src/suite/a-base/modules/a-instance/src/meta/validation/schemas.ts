@@ -60,4 +60,6 @@ const instance = {
   },
 };
 
-export const schemas = { instance };
+const schemas = { instance };
+
+export default schemas;

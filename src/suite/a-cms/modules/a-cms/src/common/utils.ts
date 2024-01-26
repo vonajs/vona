@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   atomClass(atomClass) {
     let _atomClass;
     if (atomClass) {

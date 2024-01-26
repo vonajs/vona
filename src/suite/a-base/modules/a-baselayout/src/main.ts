@@ -10,7 +10,7 @@ const controllers = require('./controllers.js');
 const models = require('./models.js');
 // meta
 const meta = require('./meta.js');
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

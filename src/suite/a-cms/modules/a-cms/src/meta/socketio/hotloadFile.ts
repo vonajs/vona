@@ -5,4 +5,4 @@ const hotloadFile = {
     persistence: false,
   },
 };
-module.exports = hotloadFile;
+export default hotloadFile;

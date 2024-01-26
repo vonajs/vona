@@ -1,6 +1,6 @@
 const beanEvent = require('./bean/bean.event.js');
 
-module.exports = {
+export default {
   // global
   event: {
     bean: beanEvent,

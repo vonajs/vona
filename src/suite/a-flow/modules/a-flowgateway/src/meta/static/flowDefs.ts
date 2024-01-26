@@ -7,4 +7,4 @@ const flowDefs = [
   set03_gatewayParallel,
   set03_gatewayInclusive,
 ];
-module.exports = module.meta.isProd ? [] : flowDefs;
+export default module.meta.isProd ? [] : flowDefs;

@@ -65,4 +65,4 @@ const resources = [
   },
 ];
 // ok
-module.exports = resources;
+export default resources;

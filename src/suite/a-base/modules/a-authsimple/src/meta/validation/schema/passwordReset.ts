@@ -24,4 +24,4 @@ schemas.passwordReset = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

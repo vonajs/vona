@@ -118,4 +118,4 @@ schemas.activityUserTask = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

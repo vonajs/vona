@@ -13,4 +13,4 @@ Object.assign(schemas, passwordReset);
 Object.assign(schemas, signin);
 Object.assign(schemas, signup);
 // ok
-module.exports = schemas;
+export default schemas;

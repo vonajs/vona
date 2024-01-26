@@ -4,4 +4,4 @@ const ChannelMail = {
     title: 'Mail',
   },
 };
-module.exports = ChannelMail;
+export default ChannelMail;

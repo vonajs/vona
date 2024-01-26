@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   info: {
     bean: 'role',
     title: 'Role',

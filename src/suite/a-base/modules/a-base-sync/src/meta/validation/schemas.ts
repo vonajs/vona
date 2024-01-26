@@ -12,4 +12,4 @@ Object.assign(schemas, userChangeUserName);
 Object.assign(schemas, category);
 Object.assign(schemas, resource);
 Object.assign(schemas, role);
-module.exports = schemas;
+export default schemas;

@@ -13,7 +13,7 @@ const meta = require('./meta.js');
 // atomCmsBase
 module.meta.class.AtomCmsBase = AtomCmsBase;
 
-module.exports = app => {
+export default app => {
   // watcher: only in development
   if (app.meta.isLocal) {
     app.meta['a-cms:watcher'] = app.bean._newBean(Watcher);

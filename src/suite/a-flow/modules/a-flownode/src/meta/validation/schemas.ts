@@ -10,4 +10,4 @@ Object.assign(schemas, startEventTimer);
 // activityService
 Object.assign(schemas, activityService);
 // ok
-module.exports = schemas;
+export default schemas;

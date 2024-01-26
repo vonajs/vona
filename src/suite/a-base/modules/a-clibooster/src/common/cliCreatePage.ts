@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = pageMode => {
+export default pageMode => {
   class Cli extends module.meta.class.CliBase {
     async execute({ user }) {
       const { argv } = this.context;

@@ -74,4 +74,4 @@ schemas.userOnlineHistorySearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

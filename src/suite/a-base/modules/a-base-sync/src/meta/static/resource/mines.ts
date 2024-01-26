@@ -35,4 +35,4 @@ const resources = [
   mineAppearanceTheme,
   mineAppearanceView,
 ];
-module.exports = resources;
+export default resources;

@@ -67,4 +67,4 @@ schemas.mobileVerify = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

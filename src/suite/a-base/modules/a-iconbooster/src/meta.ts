@@ -13,4 +13,4 @@ const meta = {
     groups: iconGroups,
   },
 };
-module.exports = meta;
+export default meta;

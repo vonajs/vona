@@ -79,4 +79,4 @@ schemas.mailScene = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

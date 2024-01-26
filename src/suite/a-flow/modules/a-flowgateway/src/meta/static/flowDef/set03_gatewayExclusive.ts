@@ -60,4 +60,4 @@ const definition = {
   description: '',
   content: JSON.stringify(content),
 };
-module.exports = definition;
+export default definition;

@@ -8,4 +8,4 @@ const MessageMail = {
     },
   },
 };
-module.exports = MessageMail;
+export default MessageMail;

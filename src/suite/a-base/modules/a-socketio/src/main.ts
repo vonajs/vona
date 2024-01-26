@@ -15,7 +15,7 @@ const meta = require('./meta.js');
 module.meta.class.IOMessageBase = IOMessageBase;
 module.meta.class.IOChannelBase = IOChannelBase;
 
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

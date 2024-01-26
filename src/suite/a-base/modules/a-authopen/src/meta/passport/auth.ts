@@ -20,4 +20,4 @@ const metaAuth = {
 };
 
 // ok
-module.exports = metaAuth;
+export default metaAuth;

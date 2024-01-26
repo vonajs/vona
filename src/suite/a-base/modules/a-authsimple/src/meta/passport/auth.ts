@@ -1,5 +1,5 @@
 const provider = moduleInfo.name;
-module.exports = {
+export default {
   providers: {
     [provider]: {
       meta: {

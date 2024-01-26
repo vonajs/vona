@@ -27,4 +27,4 @@ schemas.overtime = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

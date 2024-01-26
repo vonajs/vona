@@ -7,4 +7,4 @@ const dicts = [
   citiesUSA,
   citiesChina,
 ];
-module.exports = dicts;
+export default dicts;

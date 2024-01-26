@@ -37,4 +37,4 @@ schemas.table = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

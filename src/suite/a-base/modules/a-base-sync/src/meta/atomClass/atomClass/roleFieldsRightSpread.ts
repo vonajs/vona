@@ -17,7 +17,7 @@ const tableNameDefault = function ({ ctx, action }) {
   }
 };
 
-module.exports = {
+export default {
   info: {
     bean: 'roleFieldsRightSpread',
     title: 'RoleFieldsRightSpread',

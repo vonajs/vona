@@ -1,2 +1,2 @@
 const dicts = [];
-module.exports = dicts;
+export default dicts;

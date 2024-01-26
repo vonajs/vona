@@ -54,4 +54,4 @@ schemas.aliyun = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

@@ -29,7 +29,7 @@ const tableNameDefault = function ({ action }) {
   `;
 };
 
-module.exports = {
+export default {
   info: {
     bean: 'roleRight',
     title: 'RoleAtomRight',

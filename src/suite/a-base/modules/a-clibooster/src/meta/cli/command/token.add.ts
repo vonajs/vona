@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'token.add',
   resource: {
     atomStaticKey: 'cliToken',

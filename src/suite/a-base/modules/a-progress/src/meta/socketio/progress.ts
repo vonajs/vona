@@ -4,4 +4,4 @@ const progress = {
     persistence: false,
   },
 };
-module.exports = progress;
+export default progress;

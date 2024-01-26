@@ -1,1 +1,1 @@
-module.exports = class FlowServiceBase {};
+export default class FlowServiceBase {}

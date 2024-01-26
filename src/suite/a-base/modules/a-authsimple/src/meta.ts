@@ -2,7 +2,7 @@
 const auth = require('./meta/passport/auth.js');
 const keywords = require('./meta/validation/keywords.js');
 const schemas = require('./meta/validation/schemas.js');
-module.exports = {
+export default {
   auth,
   validation: {
     validators: {},

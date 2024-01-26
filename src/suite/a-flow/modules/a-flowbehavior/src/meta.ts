@@ -12,4 +12,4 @@ const meta = {
     behaviors: flowBehaviors,
   },
 };
-module.exports = meta;
+export default meta;

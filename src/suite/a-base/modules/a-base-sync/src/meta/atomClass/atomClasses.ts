@@ -11,7 +11,7 @@ const userAtomRight = require('./atomClass/userAtomRight.js');
 const userResourceRight = require('./atomClass/userResourceRight.js');
 const userFieldsRight = require('./atomClass/userFieldsRight.js');
 
-module.exports = {
+export default {
   //
   resource,
   role,

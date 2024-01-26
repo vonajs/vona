@@ -63,4 +63,4 @@ schemas.filterTabBasic = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

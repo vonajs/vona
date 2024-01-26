@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   async: true,
   type: 'string',
   errors: true,
@@ -24,7 +24,7 @@ module.exports = {
             left join aCmsArticle b on a.id=b.atomId
               where a.atomStage in (0,1) and a.iid=? and a.deleted=0 and a.atomClassId=? and b.slug=? ${atomLanguageClause}
           `,
-        [ctx.instance.id, atomClass.id, slug, rootData.atomLanguage]
+        [ctx.instance.id, atomClass.id, slug, rootData.atomLanguage],
       );
       // check draft/formal
       const checkExists = await ctx.bean.util.checkAtomIdExists({ atomId, items });

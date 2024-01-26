@@ -22,4 +22,4 @@ const meta = {
     commands: cliCommands,
   },
 };
-module.exports = meta;
+export default meta;

@@ -52,4 +52,4 @@ schemas.signup = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

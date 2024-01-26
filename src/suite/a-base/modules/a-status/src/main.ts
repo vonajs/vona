@@ -8,7 +8,7 @@ const routes = require('./routes.js');
 const controllers = require('./controllers.js');
 const services = require('./services.js');
 
-module.exports = app => {
+export default app => {
   // models
   const models = require('./models.js');
   return {

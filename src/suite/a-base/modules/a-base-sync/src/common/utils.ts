@@ -43,7 +43,7 @@ function escapeURL(str) {
   return str;
 }
 
-module.exports = {
+export default {
   escapeHtml(str) {
     return escapeHtml(str);
   },

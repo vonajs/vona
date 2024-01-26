@@ -19,4 +19,4 @@ const meta = {
     nodes: flowNodes,
   },
 };
-module.exports = meta;
+export default meta;

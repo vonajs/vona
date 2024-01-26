@@ -34,4 +34,4 @@ const dict = {
   dictLocales: JSON.stringify(dictLocales),
   resourceRoles: 'root',
 };
-module.exports = dict;
+export default dict;

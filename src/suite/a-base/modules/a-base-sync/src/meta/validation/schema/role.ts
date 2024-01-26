@@ -126,4 +126,4 @@ schemas.roleSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

@@ -34,4 +34,4 @@ schemas.passwordChange = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

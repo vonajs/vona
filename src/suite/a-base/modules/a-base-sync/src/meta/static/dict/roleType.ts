@@ -80,4 +80,4 @@ const definition = {
   dictLocales: JSON.stringify(dictLocales),
   resourceRoles: 'root',
 };
-module.exports = definition;
+export default definition;

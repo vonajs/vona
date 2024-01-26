@@ -11,7 +11,7 @@ const statsTaskClaimings = require('./bean/stats.taskClaimings.js');
 const statsTaskHandlings = require('./bean/stats.taskHandlings.js');
 const ioMessageWorkflow = require('./bean/io.message.workflow.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

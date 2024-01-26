@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   // check draft/formal
   async checkAtomIdExists({ ctx, atomId, items }) {
     if (items.length === 0) return false;

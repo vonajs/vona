@@ -1,7 +1,7 @@
 const versionManager = require('./bean/version.manager.js');
 const beanFile = require('./bean/bean.file.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

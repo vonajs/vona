@@ -15,7 +15,7 @@ const controllers = require('./controllers.js');
 // Ajv
 module.meta.class.Ajv = require('./ajv/ajv.js');
 
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

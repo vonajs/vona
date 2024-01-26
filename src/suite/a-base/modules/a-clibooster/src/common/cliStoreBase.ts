@@ -3,7 +3,7 @@ const eggBornUtils = require('egg-born-utils');
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';
 
-module.exports = class CliStoreBase extends module.meta.class.CliBase {
+export default class CliStoreBase extends module.meta.class.CliBase {
   constructor(options, commandName) {
     super(options);
     this.commandName = commandName;
@@ -190,4 +190,4 @@ module.exports = class CliStoreBase extends module.meta.class.CliBase {
     const text = this.helper.chalk.keyword('cyan')(url);
     welcomes.push(`${this.ctx.text('CliStoreDocs')}: ${text}`);
   }
-};
+}

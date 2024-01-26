@@ -11,7 +11,7 @@ const models = require('./models.js');
 // meta
 const meta = require('./meta.js');
 
-module.exports = class Main {
+export default class Main {
   get options() {
     return {
       aops,
@@ -34,4 +34,4 @@ module.exports = class Main {
       // this.app.sessionStore = this.app.bean._getBean(`${moduleInfo.relativeName}.local.sessionStore`);
     }
   }
-};
+}

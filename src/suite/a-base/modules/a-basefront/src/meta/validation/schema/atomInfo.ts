@@ -89,4 +89,4 @@ schemas.atomInfoItemOnlySimple = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

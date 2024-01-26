@@ -4,4 +4,4 @@ const schemas = {};
 // document
 Object.assign(schemas, document);
 // ok
-module.exports = schemas;
+export default schemas;

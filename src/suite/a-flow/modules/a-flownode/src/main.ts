@@ -14,7 +14,7 @@ const meta = require('./meta.js');
 // FlowServiceBase
 module.meta.class.FlowServiceBase = FlowServiceBase;
 
-module.exports = {
+export default {
   aops,
   beans,
   routes,

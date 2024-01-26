@@ -55,4 +55,4 @@ const commands = {
     commit: gitCommit,
   },
 };
-module.exports = commands;
+export default commands;

@@ -358,7 +358,7 @@ create view aViewUserRightFunction as
 
 const functions = {};
 
-module.exports = {
+export default {
   tables,
   views,
   functions,

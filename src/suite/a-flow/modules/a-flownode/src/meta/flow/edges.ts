@@ -19,4 +19,4 @@ for (const key in edges) {
   }
 }
 
-module.exports = edges;
+export default edges;

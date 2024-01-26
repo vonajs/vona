@@ -14,7 +14,7 @@ const meta = require('./meta.js');
 // base
 module.meta.class.CliBase = CliBase;
 
-module.exports = {
+export default {
   aops,
   beans,
   routes,

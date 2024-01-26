@@ -7,4 +7,4 @@ Object.assign(schemas, userOnline);
 // userOnlineHistory
 Object.assign(schemas, userOnlineHistory);
 // ok
-module.exports = schemas;
+export default schemas;

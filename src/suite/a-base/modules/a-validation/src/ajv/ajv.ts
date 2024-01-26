@@ -48,7 +48,7 @@ Ajv.create = function ({ options, keywords, schemas, schemaRoot }) {
   }
   return ajv;
 };
-module.exports = Ajv;
+export default Ajv;
 
 function createValidate(schemaRoot) {
   return async function ({ ctx, schema, data, filterOptions }) {

@@ -15,4 +15,4 @@ const meta = {
     },
   },
 };
-module.exports = meta;
+export default meta;

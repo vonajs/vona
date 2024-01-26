@@ -8,7 +8,7 @@ const startupCacheAuthProviders = require('./bean/startup.cacheAuthProviders.js'
 const beanAuthProvider = require('./bean/bean.authProvider.js');
 const beanAuthProviderCache = require('./bean/bean.authProviderCache.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

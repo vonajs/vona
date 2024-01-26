@@ -1,7 +1,7 @@
 const versionManager = require('./bean/version.manager.js');
 const atomLayout = require('./bean/atom.layout.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

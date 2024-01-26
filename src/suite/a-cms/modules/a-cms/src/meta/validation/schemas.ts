@@ -129,4 +129,4 @@ schemas.articleSearch = {
   },
 };
 
-module.exports = schemas;
+export default schemas;

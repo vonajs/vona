@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   info: {
     bean: 'resource',
     title: 'GeneralResource',

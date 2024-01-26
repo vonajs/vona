@@ -1,4 +1,4 @@
-module.exports = () => {
+export default () => {
   class FlowVars {
     constructor() {
       this._vars = null;

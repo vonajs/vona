@@ -108,4 +108,4 @@ schemas.resourceSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

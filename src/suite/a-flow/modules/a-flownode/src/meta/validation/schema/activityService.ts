@@ -23,4 +23,4 @@ schemas.activityService = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

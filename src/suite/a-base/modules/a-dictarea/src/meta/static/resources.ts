@@ -12,4 +12,4 @@ resources = resources.concat(mines);
 resources = resources.concat(widgets);
 resources = resources.concat(blocks);
 resources = resources.concat(deprecateds);
-module.exports = resources;
+export default resources;

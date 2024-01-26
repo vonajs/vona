@@ -2,7 +2,7 @@ const versionManager = require('./bean/version.manager.js');
 const flowBehaviorOvertime = require('./bean/flow.behavior.overtime.js');
 const queueOvertime = require('./bean/queue.overtime.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

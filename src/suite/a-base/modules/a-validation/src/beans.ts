@@ -1,7 +1,7 @@
 const beanValidation = require('./bean/bean.validation.js');
 const middlewareValidate = require('./bean/middleware.validate.js');
 
-module.exports = {
+export default {
   // middleware
   'middleware.validate': {
     bean: middlewareValidate,

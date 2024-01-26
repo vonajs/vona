@@ -1,7 +1,7 @@
 const queueSubmit = require('./bean/queue.submit.js');
 const localTools = require('./bean/local.tools.js');
 
-module.exports = {
+export default {
   // queue
   'queue.submit': {
     bean: queueSubmit,

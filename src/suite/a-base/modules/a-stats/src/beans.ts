@@ -4,7 +4,7 @@ const beanStats = require('./bean/bean.stats.js');
 const ioMessageStats = require('./bean/io.message.stats.js');
 const statsDeps = require('./bean/stats.deps.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

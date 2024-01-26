@@ -22,4 +22,4 @@ const meta = {
     indexes: {},
   },
 };
-module.exports = meta;
+export default meta;

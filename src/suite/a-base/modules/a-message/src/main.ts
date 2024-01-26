@@ -13,7 +13,7 @@ const meta = require('./meta.js');
 // base
 module.meta.class.IOMessageUniformBase = IOMessageUniformBase;
 
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

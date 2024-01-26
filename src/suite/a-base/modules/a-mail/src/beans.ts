@@ -6,7 +6,7 @@ const startupCacheMailScenes = require('./bean/startup.cacheMailScenes.js');
 const beanMail = require('./bean/bean.mail.js');
 const beanMailSceneCache = require('./bean/bean.mailSceneCache.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

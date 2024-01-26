@@ -4,4 +4,4 @@ const schemas = {};
 // authOpen
 Object.assign(schemas, authOpen);
 // ok
-module.exports = schemas;
+export default schemas;

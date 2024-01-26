@@ -17,4 +17,4 @@ schemas.userChangeUserName = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

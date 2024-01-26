@@ -10,4 +10,4 @@ Object.assign(schemas, filterTabGeneral);
 // layout
 Object.assign(schemas, layout);
 // ok
-module.exports = schemas;
+export default schemas;

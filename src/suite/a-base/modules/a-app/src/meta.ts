@@ -59,4 +59,4 @@ const meta = {
     indexes: { aApp: 'createdAt,updatedAt,atomId' },
   },
 };
-module.exports = meta;
+export default meta;

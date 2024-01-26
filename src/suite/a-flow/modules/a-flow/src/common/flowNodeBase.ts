@@ -1,4 +1,4 @@
-module.exports = class FlowNodeBase {
+export default class FlowNodeBase {
   constructor(options) {
     if (options) {
       this.flowInstance = options.flowInstance;
@@ -58,4 +58,4 @@ module.exports = class FlowNodeBase {
     // await this.flowInstance._flowListener.onNodeChange(this.contextNode, { options });
     return true;
   }
-};
+}

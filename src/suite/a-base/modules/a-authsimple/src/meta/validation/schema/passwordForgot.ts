@@ -12,4 +12,4 @@ schemas.passwordForgot = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

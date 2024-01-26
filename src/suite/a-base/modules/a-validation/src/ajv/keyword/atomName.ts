@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   async: true,
   type: 'string',
   errors: true,
@@ -22,7 +22,7 @@ module.exports = {
           select a.atomStage,a.id from aAtom a
               where a.atomStage in (0,1) and a.iid=? and a.deleted=0 and a.atomClassId=? and a.atomName=? ${atomLanguageClause}
           `,
-        [ctx.instance.id, atomClass.id, atomName, rootData.atomLanguage]
+        [ctx.instance.id, atomClass.id, atomName, rootData.atomLanguage],
       );
       // check draft/formal
       const checkExists = await ctx.bean.util.checkAtomIdExists({ atomId, items });

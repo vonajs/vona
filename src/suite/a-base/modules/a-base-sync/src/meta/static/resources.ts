@@ -9,4 +9,4 @@ resources = resources.concat(menus);
 resources = resources.concat(mines);
 resources = resources.concat(deprecated);
 // ok
-module.exports = resources;
+export default resources;

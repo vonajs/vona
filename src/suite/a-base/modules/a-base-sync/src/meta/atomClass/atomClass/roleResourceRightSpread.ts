@@ -27,7 +27,7 @@ const tableNameDefault = function ({ ctx, action }) {
   }
 };
 
-module.exports = {
+export default {
   info: {
     bean: 'roleResourceRightSpread',
     title: 'RoleResourceRightSpread',

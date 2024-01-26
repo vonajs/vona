@@ -11,7 +11,7 @@ const constants = require('./config/constants.js');
 // meta
 const meta = require('./meta.js');
 
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

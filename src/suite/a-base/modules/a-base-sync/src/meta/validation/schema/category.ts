@@ -46,4 +46,4 @@ schemas.category = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

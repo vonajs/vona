@@ -3,4 +3,4 @@ const aliyun = require('./schema/aliyun.js');
 
 const schemas = {};
 Object.assign(schemas, auth, aliyun);
-module.exports = schemas;
+export default schemas;

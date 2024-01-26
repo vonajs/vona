@@ -60,7 +60,7 @@ const summerCacheRoleScopesMineOfUser = require('./bean/summer.cache.roleScopesM
 const summerCacheRoleWhosOfAtomClassAction = require('./bean/summer.cache.roleWhosOfAtomClassAction.js');
 const summerCacheRoleParentsOfUser = require('./bean/summer.cache.roleParentsOfUser.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

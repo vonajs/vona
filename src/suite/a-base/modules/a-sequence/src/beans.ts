@@ -2,7 +2,7 @@ const versionManager = require('./bean/version.manager.js');
 const sequenceSimple = require('./bean/sequence.simple.js');
 const beanSequence = require('./bean/bean.sequence.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

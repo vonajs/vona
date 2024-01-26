@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-module.exports = {
+export default {
   errors: true,
   compile(schema) {
     const fun = function (data, path, rootData, name) {

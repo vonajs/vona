@@ -3,7 +3,7 @@ const beanFields = require('./bean/bean.fields.js');
 const summerCacheFieldsRightOfAtomClass = require('./bean/summer.cache.fieldsRightOfAtomClass.js');
 const summerCacheFieldsRightOfUser = require('./bean/summer.cache.fieldsRightOfUser.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

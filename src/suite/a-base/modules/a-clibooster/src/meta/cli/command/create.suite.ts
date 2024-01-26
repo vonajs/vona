@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'create.suite',
   resource: {
     atomStaticKey: 'cliCreate',

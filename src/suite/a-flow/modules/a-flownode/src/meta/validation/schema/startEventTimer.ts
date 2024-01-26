@@ -29,4 +29,4 @@ schemas.startEventTimer = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

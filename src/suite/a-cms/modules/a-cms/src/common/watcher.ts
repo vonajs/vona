@@ -4,7 +4,7 @@ const chokidar = require('chokidar');
 const debounce = require('debounce');
 // const eggBornUtils = require('egg-born-utils');
 
-module.exports = class Watcher {
+export default class Watcher {
   constructor() {
     this._watchers = {};
     this._freezeCounter = 0;
@@ -232,4 +232,4 @@ module.exports = class Watcher {
       }
     }
   }
-};
+}

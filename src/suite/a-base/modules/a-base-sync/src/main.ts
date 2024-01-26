@@ -21,7 +21,7 @@ module.meta.class.AtomBase = AtomBase;
 // modelCache
 module.meta.class.ModelCache = ModelCache;
 
-module.exports = {
+export default {
   aops,
   beans,
   routes,

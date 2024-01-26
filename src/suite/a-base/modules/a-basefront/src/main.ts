@@ -8,7 +8,7 @@ const errors = require('./config/errors.js');
 // meta
 const meta = require('./meta.js');
 const controllers = require('./controllers.js');
-module.exports = {
+export default {
   routes,
   controllers,
   services,

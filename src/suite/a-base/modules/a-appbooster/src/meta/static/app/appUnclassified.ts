@@ -16,4 +16,4 @@ const _app = {
   resourceRoles: 'template.system',
   appSorting: 1,
 };
-module.exports = _app;
+export default _app;

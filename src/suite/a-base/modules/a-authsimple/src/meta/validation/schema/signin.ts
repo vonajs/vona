@@ -25,4 +25,4 @@ schemas.signin = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

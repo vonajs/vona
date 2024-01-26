@@ -16,4 +16,4 @@ for (const key in behaviors) {
   }
 }
 
-module.exports = behaviors;
+export default behaviors;

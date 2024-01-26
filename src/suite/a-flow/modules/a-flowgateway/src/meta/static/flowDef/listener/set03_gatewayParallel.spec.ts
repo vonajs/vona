@@ -1,4 +1,4 @@
-module.exports = `
+export default `
 class Listener {
   constructor(context) {
     this.context = context;

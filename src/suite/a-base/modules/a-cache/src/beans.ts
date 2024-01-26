@@ -6,7 +6,7 @@ const broadcastMemClear = require('./bean/broadcast.memClear.js');
 const broadcastMemRemove = require('./bean/broadcast.memRemove.js');
 const beanCache = require('./bean/bean.cache.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

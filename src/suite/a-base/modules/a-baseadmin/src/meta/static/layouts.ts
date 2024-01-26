@@ -17,4 +17,4 @@ const layouts = [
   layoutAtomListRoleResourceRight,
   layoutAtomListRoleFieldsRight,
 ];
-module.exports = layouts;
+export default layouts;

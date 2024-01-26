@@ -76,4 +76,4 @@ schemas.blockAudio = {
   },
 };
 
-module.exports = schemas;
+export default schemas;

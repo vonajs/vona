@@ -11,7 +11,7 @@ const routes = require('./routes.js');
 const controllers = require('./controllers.js');
 const models = require('./models.js');
 
-module.exports = {
+export default {
   beans,
   routes,
   controllers,

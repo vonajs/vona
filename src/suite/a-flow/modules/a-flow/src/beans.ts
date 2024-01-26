@@ -13,7 +13,7 @@ const beanFlow = require('./bean/bean.flow.js');
 const beanFlowDef = require('./bean/bean.flowDef.js');
 const statsFlowInitiateds = require('./bean/stats.flowInitiateds.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

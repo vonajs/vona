@@ -1,7 +1,7 @@
 const statsUser = require('./bean/stats.user.js');
 const statsUserAlert = require('./bean/stats.userAlert.js');
 
-module.exports = {
+export default {
   // stats
   'stats.user': {
     bean: statsUser,

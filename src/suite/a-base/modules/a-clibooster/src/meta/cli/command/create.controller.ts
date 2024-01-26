@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'create.controller',
   resource: {
     atomStaticKey: 'cliCreate',

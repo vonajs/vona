@@ -26,4 +26,4 @@ schemas.oauth2 = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

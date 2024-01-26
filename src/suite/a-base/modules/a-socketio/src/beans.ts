@@ -14,7 +14,7 @@ const middlewareIOConnection = require('./bean/middleware.io.connection.js');
 const middlewareIOPacket = require('./bean/middleware.io.packet.js');
 const beanIO = require('./bean/bean.io.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

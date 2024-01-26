@@ -10,4 +10,4 @@ schemas.endEventAtom = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

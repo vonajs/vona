@@ -9,4 +9,4 @@ const layouts = [
   layoutFlowTaskAtomBase,
   layoutFlowTaskListBase,
 ];
-module.exports = layouts;
+export default layouts;

@@ -14,4 +14,4 @@ const meta = {
     schemas,
   },
 };
-module.exports = meta;
+export default meta;

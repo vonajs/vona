@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   errors: true,
   compile(schema, schemaProperty) {
     const fun = function (data, path, rootData) {

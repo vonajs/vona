@@ -55,7 +55,7 @@ export class CliToolsIcons extends BeanBase {
     for (const group of groups) {
       groupsBackend.push(`${group.name}: '${group.iconNames.join(',')}',`);
     }
-    const jsBackend = `module.exports = {\n  ${groupsBackend.join('\n  ')}\n};\n`;
+    const jsBackend = `export default {\n  ${groupsBackend.join('\n  ')}\n};\n`;
     const pathBackend = path.join(modulePath, 'backend/src/meta/icons');
     const fileBackend = path.join(modulePath, 'backend/src/meta/icons/groups.js');
     await fse.ensureDir(pathBackend);

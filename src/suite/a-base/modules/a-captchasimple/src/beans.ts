@@ -1,6 +1,6 @@
 const captchaProvider = require('./bean/captcha.provider.captcha.js');
 
-module.exports = {
+export default {
   // captcha.provider
   'captcha.provider.captcha': {
     bean: captchaProvider,

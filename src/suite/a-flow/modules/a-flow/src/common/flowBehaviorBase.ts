@@ -1,4 +1,4 @@
-module.exports = class FlowBehaviorBase {
+export default class FlowBehaviorBase {
   constructor(options) {
     if (options) {
       this.flowInstance = options.flowInstance;
@@ -46,4 +46,4 @@ module.exports = class FlowBehaviorBase {
   async change(context, next) {
     return await next();
   }
-};
+}

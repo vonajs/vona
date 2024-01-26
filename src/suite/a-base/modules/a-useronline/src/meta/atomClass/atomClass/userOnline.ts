@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   info: {
     bean: 'userOnline',
     title: 'Users Status', // 'Online Users',

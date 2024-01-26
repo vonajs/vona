@@ -79,4 +79,4 @@ schemas.flowDefSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

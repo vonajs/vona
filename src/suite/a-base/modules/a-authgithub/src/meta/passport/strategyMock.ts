@@ -65,4 +65,4 @@ Strategy.prototype.authenticate = function (req) {
   }
 };
 
-module.exports = Strategy;
+export default Strategy;

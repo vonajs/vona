@@ -6,4 +6,4 @@ const apps = [
   appCms,
   // appCmsInnerTest,
 ];
-module.exports = apps;
+export default apps;

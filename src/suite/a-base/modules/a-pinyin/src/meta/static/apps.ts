@@ -1,2 +1,2 @@
 const apps = [];
-module.exports = apps;
+export default apps;

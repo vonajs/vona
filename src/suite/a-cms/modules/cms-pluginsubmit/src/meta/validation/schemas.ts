@@ -1,2 +1,2 @@
 const schemas = {};
-module.exports = schemas;
+export default schemas;

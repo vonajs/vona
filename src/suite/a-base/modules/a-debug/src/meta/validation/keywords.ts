@@ -1,2 +1,2 @@
 const keywords = {};
-module.exports = keywords;
+export default keywords;

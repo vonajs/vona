@@ -2,4 +2,4 @@ const layoutPC = require('./layout/layoutPC.js');
 const layoutPCAnonymous = require('./layout/layoutPCAnonymous.js');
 
 const layouts = [layoutPC, layoutPCAnonymous];
-module.exports = layouts;
+export default layouts;

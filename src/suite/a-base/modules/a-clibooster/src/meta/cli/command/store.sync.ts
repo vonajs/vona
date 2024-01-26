@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'store.sync',
   resource: {
     atomStaticKey: 'cliStore',

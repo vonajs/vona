@@ -35,6 +35,6 @@ const roleScopes = [
   },
 ];
 
-module.exports = {
+export default {
   roleScopes,
 };

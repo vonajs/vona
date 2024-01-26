@@ -1,4 +1,4 @@
-module.exports = ({ ctx /* flowInstance*/ }) => {
+export default ({ ctx /* flowInstance*/ }) => {
   class Utils {
     constructor({ context, contextNode, contextTask }) {
       this.context = context;

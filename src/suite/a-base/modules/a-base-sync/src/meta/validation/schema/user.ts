@@ -58,4 +58,4 @@ schemas.user = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

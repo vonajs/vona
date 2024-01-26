@@ -44,4 +44,4 @@ schemas.dashboardSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

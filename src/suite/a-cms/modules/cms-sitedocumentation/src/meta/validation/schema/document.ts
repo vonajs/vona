@@ -123,4 +123,4 @@ schemas.documentSearch = {
   },
 };
 
-module.exports = schemas;
+export default schemas;

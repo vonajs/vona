@@ -96,4 +96,4 @@ schemas.appSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

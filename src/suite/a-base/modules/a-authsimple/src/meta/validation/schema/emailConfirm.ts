@@ -18,4 +18,4 @@ schemas.emailConfirm = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

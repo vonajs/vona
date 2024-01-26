@@ -7,7 +7,7 @@ const broadcastSmsProviderChanged = require('./bean/broadcast.smsProviderChanged
 const startupCacheSmsProviders = require('./bean/startup.cacheSmsProviders.js');
 const beanSmsProviderCache = require('./bean/bean.smsProviderCache.js');
 
-module.exports = {
+export default {
   // event
   'event.accountMigration': {
     bean: eventAccountMigration,

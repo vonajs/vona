@@ -6,4 +6,4 @@ const layouts = [
   layoutAtomListUserOnline,
   layoutAtomListUserOnlineHistory,
 ];
-module.exports = layouts;
+export default layouts;

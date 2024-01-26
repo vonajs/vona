@@ -14,4 +14,4 @@ const meta = {
     edges: flowEdges,
   },
 };
-module.exports = meta;
+export default meta;

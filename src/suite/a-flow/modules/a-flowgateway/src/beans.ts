@@ -4,7 +4,7 @@ const flowNodeGatewayExclusive = require('./bean/flow.node.gatewayExclusive.js')
 const flowNodeGatewayParallel = require('./bean/flow.node.gatewayParallel.js');
 const flowNodeGatewayInclusive = require('./bean/flow.node.gatewayInclusive.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

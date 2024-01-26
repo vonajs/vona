@@ -31,4 +31,4 @@ schemas.startEventAtom = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

@@ -3,7 +3,7 @@ const atomUserOnline = require('./bean/atom.userOnline.js');
 const atomUserOnlineHistory = require('./bean/atom.userOnlineHistory.js');
 const beanUserOnline = require('./bean/bean.userOnline.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

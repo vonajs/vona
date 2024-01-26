@@ -1,2 +1,2 @@
 const layouts = [];
-module.exports = layouts;
+export default layouts;

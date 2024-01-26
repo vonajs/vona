@@ -11,4 +11,4 @@ const dicts = [
   atomDisabled,
   dictMode,
 ];
-module.exports = dicts;
+export default dicts;

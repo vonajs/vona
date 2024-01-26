@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'tools.demo',
   resource: {
     atomStaticKey: 'cliTools',

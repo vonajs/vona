@@ -5,4 +5,4 @@ const layouts = [
   layoutAppMineBase,
   // layoutAppMineDefault,
 ];
-module.exports = layouts;
+export default layouts;

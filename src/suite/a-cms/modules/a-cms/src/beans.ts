@@ -9,7 +9,7 @@ const atomArticle = require('./bean/atom.article.js');
 const beanCms = require('./bean/bean.cms.js');
 const ioMessageHotloadFile = require('./bean/io.message.hotloadFile.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

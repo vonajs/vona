@@ -5,7 +5,7 @@ const schemas = require('./meta/validation/schemas.js');
 // static
 const staticResources = require('./meta/static/resources.js');
 // meta
-module.exports = {
+export default {
   base: {
     statics: {
       'a-base.resource': {

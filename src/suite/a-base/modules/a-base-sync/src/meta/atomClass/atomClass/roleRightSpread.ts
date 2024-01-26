@@ -19,7 +19,7 @@ const tableNameDefault = function () {
   `;
 };
 
-module.exports = {
+export default {
   info: {
     bean: 'roleRightSpread',
     title: 'RoleAtomRightSpread',

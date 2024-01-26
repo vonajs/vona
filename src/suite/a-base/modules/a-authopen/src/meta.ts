@@ -6,7 +6,7 @@ const _options = {
   mine: 1,
 };
 const actionPathListOpenAuthSelf = `/a/basefront/atom/list?module=a-authopen&atomClassName=authOpen&options=${encodeURIComponent(
-  JSON.stringify(_options)
+  JSON.stringify(_options),
 )}`;
 
 const schemas = require('./meta/validation/schemas.js');
@@ -88,4 +88,4 @@ const meta = {
     },
   },
 };
-module.exports = meta;
+export default meta;

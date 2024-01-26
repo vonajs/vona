@@ -7,7 +7,7 @@ const flowNodeEndEventNone = require('./bean/flow.node.endEventNone.js');
 const flowNodeActivityNone = require('./bean/flow.node.activityNone.js');
 const flowNodeActivityService = require('./bean/flow.node.activityService.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

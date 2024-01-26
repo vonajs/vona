@@ -8,7 +8,7 @@ const broadcastMemDel = require('./bean/broadcast.memDel.js');
 const broadcastMemMultiDel = require('./bean/broadcast.memMultiDel.js');
 const broadcastMemClear = require('./bean/broadcast.memClear.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

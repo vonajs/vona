@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   startEventAtom: {
     atom: null,
     conditionExpression: null,

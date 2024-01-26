@@ -96,4 +96,4 @@ const beans = {
     bean: localUtils,
   },
 };
-module.exports = beans;
+export default beans;

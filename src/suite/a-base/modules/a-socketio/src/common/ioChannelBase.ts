@@ -1,5 +1,5 @@
-module.exports = class IOChannelBase {
+export default class IOChannelBase {
   async onPush(/* { content, options, message, messageSync, messageClass }*/) {
     return false;
   }
-};
+}

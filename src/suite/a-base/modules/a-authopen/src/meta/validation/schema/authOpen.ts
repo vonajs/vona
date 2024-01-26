@@ -96,4 +96,4 @@ schemas.authOpenSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

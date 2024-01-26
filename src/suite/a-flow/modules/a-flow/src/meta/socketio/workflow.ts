@@ -14,4 +14,4 @@ const workflow = {
     },
   },
 };
-module.exports = workflow;
+export default workflow;

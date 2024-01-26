@@ -1,7 +1,7 @@
 const versionManager = require('./bean/version.manager.js');
 const localSessionStore = require('./bean/local.sessionStore.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

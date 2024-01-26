@@ -78,4 +78,4 @@ schemas.userAdminSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

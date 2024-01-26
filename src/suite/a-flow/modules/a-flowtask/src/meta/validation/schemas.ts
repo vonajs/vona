@@ -10,4 +10,4 @@ Object.assign(schemas, endEventAtom);
 // activityUserTask
 Object.assign(schemas, activityUserTask);
 // ok
-module.exports = schemas;
+export default schemas;

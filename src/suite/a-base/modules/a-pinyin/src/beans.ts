@@ -1,7 +1,7 @@
 const versionManager = require('./bean/version.manager.js');
 const beanPinyin = require('./bean/bean.pinyin.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

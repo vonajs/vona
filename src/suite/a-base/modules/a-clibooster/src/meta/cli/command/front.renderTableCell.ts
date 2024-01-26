@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'front.renderTableCell',
   resource: {
     atomStaticKey: 'cliCreate',

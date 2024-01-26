@@ -47,4 +47,4 @@ const layout = {
   content: JSON.stringify(content),
   resourceRoles: 'root',
 };
-module.exports = layout;
+export default layout;

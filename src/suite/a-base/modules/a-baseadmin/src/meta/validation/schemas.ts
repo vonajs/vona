@@ -6,4 +6,4 @@ const schemas = {};
 Object.assign(schemas, roleRight);
 Object.assign(schemas, roleResourceRight);
 Object.assign(schemas, roleFieldsRight);
-module.exports = schemas;
+export default schemas;

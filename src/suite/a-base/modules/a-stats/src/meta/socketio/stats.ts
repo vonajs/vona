@@ -5,4 +5,4 @@ const stats = {
     persistence: false,
   },
 };
-module.exports = stats;
+export default stats;

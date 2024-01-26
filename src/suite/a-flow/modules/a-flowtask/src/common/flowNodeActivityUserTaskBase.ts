@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-module.exports = class FlowNodeActivityUserTaskBase extends module.meta.class.FlowNodeBase {
+export default class FlowNodeActivityUserTaskBase extends module.meta.class.FlowNodeBase {
   constructor(options) {
     super(options);
     this.atomStateDefault = null;
@@ -225,4 +225,4 @@ module.exports = class FlowNodeActivityUserTaskBase extends module.meta.class.Fl
     }
     return { dictKey, atomState };
   }
-};
+}

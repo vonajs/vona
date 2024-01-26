@@ -19,4 +19,4 @@ keywords.exists = {
     };
   },
 };
-module.exports = keywords;
+export default keywords;

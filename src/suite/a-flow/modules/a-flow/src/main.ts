@@ -19,7 +19,7 @@ module.meta.class.FlowBehaviorBase = FlowBehaviorBase;
 module.meta.class.FlowNodeBase = FlowNodeBase;
 module.meta.class.FlowEdgeBase = FlowEdgeBase;
 
-module.exports = {
+export default {
   aops,
   beans,
   routes,

@@ -1,7 +1,7 @@
 const versionManager = require('./bean/version.manager.js');
 const authProviderGithub = require('./bean/auth.provider.github.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

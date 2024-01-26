@@ -4,4 +4,4 @@ const apps = [
   //
   appCommunity,
 ];
-module.exports = apps;
+export default apps;

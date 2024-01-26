@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'git.commit',
   resource: {
     atomStaticKey: 'cliGit',

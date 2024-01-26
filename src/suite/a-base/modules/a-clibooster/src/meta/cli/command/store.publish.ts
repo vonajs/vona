@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   bean: 'store.publish',
   resource: {
     atomStaticKey: 'cliStore',

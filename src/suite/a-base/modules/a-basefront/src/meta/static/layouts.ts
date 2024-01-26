@@ -8,4 +8,4 @@ const layouts = [
   layoutAtomListBase,
   layoutItemOnlyListBase,
 ];
-module.exports = layouts;
+export default layouts;

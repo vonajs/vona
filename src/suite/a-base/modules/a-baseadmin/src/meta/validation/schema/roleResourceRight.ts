@@ -60,4 +60,4 @@ schemas.roleResourceRightSearch = {
     // },
   },
 };
-module.exports = schemas;
+export default schemas;

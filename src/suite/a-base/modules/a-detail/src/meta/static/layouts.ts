@@ -4,4 +4,4 @@ const layouts = [
   //
   layoutDetailListBase,
 ];
-module.exports = layouts;
+export default layouts;

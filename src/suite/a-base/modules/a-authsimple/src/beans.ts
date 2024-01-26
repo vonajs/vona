@@ -4,7 +4,7 @@ const authProviderSimple = require('./bean/auth.provider.simple.js');
 const localSimple = require('./bean/local.simple.js');
 const beanAuthSimple = require('./bean/bean.authSimple.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

@@ -8,4 +8,4 @@ const apps = [
   appSystem,
   appUnclassified,
 ];
-module.exports = apps;
+export default apps;

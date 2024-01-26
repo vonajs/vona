@@ -185,4 +185,4 @@ const dashboard = {
   content: JSON.stringify(content),
   resourceRoles: 'root',
 };
-module.exports = dashboard;
+export default dashboard;

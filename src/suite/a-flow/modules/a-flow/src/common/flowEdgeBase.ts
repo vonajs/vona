@@ -1,4 +1,4 @@
-module.exports = class FlowEdgeBase {
+export default class FlowEdgeBase {
   constructor(options) {
     if (options) {
       this.flowInstance = options.flowInstance;
@@ -23,4 +23,4 @@ module.exports = class FlowEdgeBase {
     await this.flowInstance._flowListener.onEdgeLeave(this.contextEdge, this.contextNode);
     return true;
   }
-};
+}

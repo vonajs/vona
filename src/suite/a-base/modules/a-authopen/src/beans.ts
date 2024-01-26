@@ -5,7 +5,7 @@ const authProviderOpen = require('./bean/auth.provider.open.js');
 const localToken = require('./bean/local.token.js');
 const beanAuthOpen = require('./bean/bean.authOpen.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

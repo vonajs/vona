@@ -51,4 +51,4 @@ for (const key in nodes) {
   }
 }
 
-module.exports = nodes;
+export default nodes;

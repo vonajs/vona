@@ -6,7 +6,7 @@ const errors = require('./config/errors.js');
 
 // eslint-disable-next-line
 const controllers = require('./controllers.js');
-module.exports = {
+export default {
   routes,
   controllers,
   services,

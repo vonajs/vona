@@ -4,4 +4,4 @@ const messageSystem = {
     persistence: false,
   },
 };
-module.exports = messageSystem;
+export default messageSystem;

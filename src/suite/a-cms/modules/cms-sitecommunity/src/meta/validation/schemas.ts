@@ -66,4 +66,4 @@ schemas.postSearch = {
     },
   },
 };
-module.exports = schemas;
+export default schemas;

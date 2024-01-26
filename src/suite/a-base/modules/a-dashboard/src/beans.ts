@@ -1,7 +1,7 @@
 const versionManager = require('./bean/version.manager.js');
 const atomDashboard = require('./bean/atom.dashboard.js');
 
-module.exports = {
+export default {
   // version
   'version.manager': {
     bean: versionManager,

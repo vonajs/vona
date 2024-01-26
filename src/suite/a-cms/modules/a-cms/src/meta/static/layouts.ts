@@ -8,4 +8,4 @@ const layouts = [
   layoutAtomListCms,
   layoutAppMenuCmsBase,
 ];
-module.exports = layouts;
+export default layouts;

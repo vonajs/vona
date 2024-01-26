@@ -4,4 +4,4 @@ const schemas = {};
 // dict
 Object.assign(schemas, dict);
 // ok
-module.exports = schemas;
+export default schemas;

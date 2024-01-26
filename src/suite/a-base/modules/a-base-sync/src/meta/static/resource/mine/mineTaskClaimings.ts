@@ -23,4 +23,4 @@ const resource = {
   resourceRoles: 'root',
   resourceSorting: 1,
 };
-module.exports = resource;
+export default resource;
