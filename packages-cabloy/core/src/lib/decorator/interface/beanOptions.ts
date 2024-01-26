@@ -11,6 +11,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'scope'
   | 'controller'
   | 'model'
+  | 'atom'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'broadcast'
@@ -53,6 +54,10 @@ export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
 export interface IDecoratorLocalOptions {
   name?: string;
   containerScope?: ContainerScope;
+}
+
+export interface IDecoratorAtomOptions {
+  name?: string;
 }
 
 export interface IDecoratorControllerOptions {

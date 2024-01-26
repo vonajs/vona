@@ -3,6 +3,7 @@ export * from './interface/useOptions.js';
 export * from './type/constructable.js';
 export * from './type/containerScope.js';
 export * from './class/aop.js';
+export * from './class/atom.js';
 export * from './class/bean.js';
 export * from './class/controller.js';
 export * from './class/model.js';
