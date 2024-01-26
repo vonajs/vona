@@ -7,11 +7,14 @@ export * from '../bean/middleware.io.packet.js';
 export * from '../bean/middleware.io.connection.js';
 export * from '../bean/broadcast.socketEmit.js';
 export * from '../bean/bean.io.js';
+export * from '../bean/virtual.ioMessageBase.js';
 
 import { BeanIo } from '../bean/bean.io.js';
+import { BeanIoMessageBase } from '../bean/virtual.ioMessageBase.js';
 
 declare module '@cabloy/core' {
   export interface IBeanRecord {
     io: BeanIo;
+    ioMessageBase: BeanIoMessageBase;
   }
 }

@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanIoMessageBase } from 'cabloy-module-api-a-socketio';
 
 @Bean({ scene: 'io.message' })
-export class IoMessageHotloadFile extends BeanBase {}
+export class IoMessageHotloadFile extends BeanIoMessageBase {}

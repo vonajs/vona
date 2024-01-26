@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanIoMessageBase } from 'cabloy-module-api-a-socketio';
 
 @Bean({ scene: 'io.message' })
-export class IoMessageMail extends BeanBase {
+export class IoMessageMail extends BeanIoMessageBase {
   async onChannelRender({ channelFullName, options, message, messageSync, messageClass }) {
     if (channelFullName === 'a-mail:mail') {
       return await this._onChannelRenderMail({ options, message, messageSync, messageClass });

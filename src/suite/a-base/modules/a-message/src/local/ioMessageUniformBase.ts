@@ -1,9 +1,10 @@
-import { Local, BeanBase } from '@cabloy/core';
+import { Local } from '@cabloy/core';
+import { BeanIoMessageBase } from 'cabloy-module-api-a-socketio';
 
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
 @Local()
-export class LocalIoMessageUniformBase extends BeanBase {
+export class LocalIoMessageUniformBase extends BeanIoMessageBase {
   async onPublish({ /* path,*/ message, messageClass, options }) {
     // onPublish
     return await super.onPublish({ path: __PATH_MESSAGE_UNIFORM, message, messageClass, options });
