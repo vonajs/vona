@@ -1,7 +1,7 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanProgress extends BeanBase {
+export class BeanProgress extends BeanModuleScopeBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }

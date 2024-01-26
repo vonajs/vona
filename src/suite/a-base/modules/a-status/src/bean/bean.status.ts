@@ -1,7 +1,7 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanStatus extends BeanBase {
+export class BeanStatus extends BeanModuleScopeBase {
   get modelStatus() {
     return this.ctx.model.module(moduleInfo.relativeName).status;
   }

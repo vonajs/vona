@@ -1,7 +1,7 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanMail extends BeanBase {
+export class BeanMail extends BeanModuleScopeBase {
   get modelMail() {
     return this.ctx.model.module(moduleInfo.relativeName).mail;
   }

@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const constants = require('../config/constants.js');
 
 @Bean()
-export class BeanSettings extends BeanBase {
+export class BeanSettings extends BeanModuleScopeBase {
   get modelSettings() {
     return this.ctx.model.module(moduleInfo.relativeName).settings;
   }

@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 let __atomClassesResource = null;
 
@@ -8,7 +8,7 @@ const __atomClass = {
 };
 
 @Bean()
-export class BeanResource extends BeanBase {
+export class BeanResource extends BeanModuleScopeBase {
   get model() {
     return this.ctx.model.module(moduleInfo.relativeName).resource;
   }

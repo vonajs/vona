@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const mparse = require('@cabloy/module-parse').default;
 
 @Bean()
-export class BeanAtomStatic extends BeanBase {
+export class BeanAtomStatic extends BeanModuleScopeBase {
   async loadAllAtomStatics() {
     const modules = this._loadAllAtomStatics_prepare();
     const count = modules.length;

@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 let __sequences;
 
 @Bean()
-export class BeanSequence extends BeanBase {
+export class BeanSequence extends BeanModuleScopeBase {
   async reset(name) {
     const provider = this._findSequenceProvider(name);
     const sequence = await this._get(name);

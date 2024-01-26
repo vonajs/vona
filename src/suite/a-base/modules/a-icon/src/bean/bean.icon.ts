@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 let __icons = null;
 
 @Bean()
-export class BeanIcon extends BeanBase {
+export class BeanIcon extends BeanModuleScopeBase {
   getIcons() {
     if (!__icons) {
       __icons = this._prepareIcons();

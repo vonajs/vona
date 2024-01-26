@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const __SeparatorCode = '/';
 
 @Bean()
-export class BeanDict extends BeanBase {
+export class BeanDict extends BeanModuleScopeBase {
   get cacheMem() {
     return this.ctx.cache.mem.module(moduleInfo.relativeName);
   }

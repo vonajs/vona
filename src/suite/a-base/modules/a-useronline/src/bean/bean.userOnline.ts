@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const __atomClassUserOnline = {
   module: moduleInfo.relativeName,
@@ -10,7 +10,7 @@ const __atomClassUserOnlineHistory = {
 };
 
 @Bean()
-export class BeanUserOnline extends BeanBase {
+export class BeanUserOnline extends BeanModuleScopeBase {
   get modelUserOnline() {
     return this.ctx.model.module(moduleInfo.relativeName).userOnline;
   }

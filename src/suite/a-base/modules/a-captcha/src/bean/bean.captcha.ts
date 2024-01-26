@@ -1,10 +1,10 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const mparse = require('@cabloy/module-parse').default;
 const utils = require('../common/utils.js');
 
 @Bean()
-export class BeanCaptcha extends BeanBase {
+export class BeanCaptcha extends BeanModuleScopeBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
