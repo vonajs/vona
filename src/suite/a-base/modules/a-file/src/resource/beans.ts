@@ -3,6 +3,8 @@ export * from '../bean/bean.file.js';
 
 import { BeanFile } from '../bean/bean.file.js';
 
-export interface IBeanRecord {
-  file: BeanFile;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    file: BeanFile;
+  }
 }

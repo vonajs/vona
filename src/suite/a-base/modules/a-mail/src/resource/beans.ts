@@ -9,7 +9,9 @@ export * from '../bean/bean.mail.js';
 import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
 import { BeanMail } from '../bean/bean.mail.js';
 
-export interface IBeanRecord {
-  mailSceneCache: BeanMailSceneCache;
-  mail: BeanMail;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    mailSceneCache: BeanMailSceneCache;
+    mail: BeanMail;
+  }
 }

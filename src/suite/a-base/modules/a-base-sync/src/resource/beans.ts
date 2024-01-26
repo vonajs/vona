@@ -66,23 +66,25 @@ import { BeanAtomClass } from '../bean/bean.atomClass.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
 import { BeanAtom } from '../bean/bean.atom.js';
 
-export interface IBeanRecord {
-  util: BeanUtil;
-  user: BeanUser;
-  tag: BeanTag;
-  stash: BeanStash;
-  role: BeanRole;
-  resource: BeanResource;
-  formAction: BeanFormAction;
-  category: BeanCategory;
-  bodyCrypto: BeanBodyCrypto;
-  base: BeanBase;
-  auth: BeanAuth;
-  atomStatic: BeanAtomStatic;
-  atomState: BeanAtomState;
-  atomStage: BeanAtomStage;
-  atomRightAux: BeanAtomRightAux;
-  atomClass: BeanAtomClass;
-  atomAction: BeanAtomAction;
-  atom: BeanAtom;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    util: BeanUtil;
+    user: BeanUser;
+    tag: BeanTag;
+    stash: BeanStash;
+    role: BeanRole;
+    resource: BeanResource;
+    formAction: BeanFormAction;
+    category: BeanCategory;
+    bodyCrypto: BeanBodyCrypto;
+    base: BeanBase;
+    auth: BeanAuth;
+    atomStatic: BeanAtomStatic;
+    atomState: BeanAtomState;
+    atomStage: BeanAtomStage;
+    atomRightAux: BeanAtomRightAux;
+    atomClass: BeanAtomClass;
+    atomAction: BeanAtomAction;
+    atom: BeanAtom;
+  }
 }

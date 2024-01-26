@@ -3,6 +3,8 @@ export * from '../bean/bean.progress.js';
 
 import { BeanProgress } from '../bean/bean.progress.js';
 
-export interface IBeanRecord {
-  progress: BeanProgress;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    progress: BeanProgress;
+  }
 }

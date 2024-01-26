@@ -6,6 +6,8 @@ export * from '../bean/bean.summer.js';
 
 import { BeanSummer } from '../bean/bean.summer.js';
 
-export interface IBeanRecord {
-  summer: BeanSummer;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    summer: BeanSummer;
+  }
 }

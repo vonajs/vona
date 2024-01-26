@@ -3,6 +3,8 @@ export * from '../bean/bean.share.js';
 
 import { BeanShare } from '../bean/bean.share.js';
 
-export interface IBeanRecord {
-  share: BeanShare;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    share: BeanShare;
+  }
 }

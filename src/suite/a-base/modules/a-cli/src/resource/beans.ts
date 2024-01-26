@@ -5,7 +5,9 @@ export * from '../bean/bean.cli.js';
 import { BeanCliBase } from '../bean/bean.cliBase.js';
 import { BeanCli } from '../bean/bean.cli.js';
 
-export interface IBeanRecord {
-  cliBase: BeanCliBase;
-  cli: BeanCli;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    cliBase: BeanCliBase;
+    cli: BeanCli;
+  }
 }

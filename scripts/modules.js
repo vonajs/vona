@@ -39,7 +39,16 @@ async function main() {
 
 async function _moduleHandle_bean({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
-  console.log(contentOld);
+  if (contentOld.indexOf(`export interface IBeanRecord`) === -1) return;
+  if (contentOld.indexOf(`declare module '@cabloy/core'`) > -1) return;
+  let contentNew = contentOld.replace(
+    `export interface IBeanRecord`,
+    `declare module '@cabloy/core' {\nexport interface IBeanRecord`,
+  );
+  contentNew += '}';
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
@@ -57,7 +66,7 @@ async function _moduleHandle({ module, processHelper }) {
     //  continue;
     // }
     // if (file.indexOf('_.ts') > -1) continue;
-    console.log(file);
+    // console.log(file);
     await _moduleHandle_bean({ file, module, processHelper });
   }
 }

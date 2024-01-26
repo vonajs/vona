@@ -9,6 +9,8 @@ export * from '../bean/bean.flowTask.js';
 
 import { BeanFlowTask } from '../bean/bean.flowTask.js';
 
-export interface IBeanRecord {
-  flowTask: BeanFlowTask;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    flowTask: BeanFlowTask;
+  }
 }

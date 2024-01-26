@@ -5,6 +5,8 @@ export * from '../bean/bean.cache.js';
 
 import { BeanCache } from '../bean/bean.cache.js';
 
-export interface IBeanRecord {
-  cache: BeanCache;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    cache: BeanCache;
+  }
 }

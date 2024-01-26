@@ -10,7 +10,9 @@ export * from '../bean/bean.authProvider.js';
 import { BeanAuthProviderCache } from '../bean/bean.authProviderCache.js';
 import { BeanAuthProvider } from '../bean/bean.authProvider.js';
 
-export interface IBeanRecord {
-  authProviderCache: BeanAuthProviderCache;
-  authProvider: BeanAuthProvider;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    authProviderCache: BeanAuthProviderCache;
+    authProvider: BeanAuthProvider;
+  }
 }

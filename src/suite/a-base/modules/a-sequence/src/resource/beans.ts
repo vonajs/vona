@@ -4,6 +4,8 @@ export * from '../bean/bean.sequence.js';
 
 import { BeanSequence } from '../bean/bean.sequence.js';
 
-export interface IBeanRecord {
-  sequence: BeanSequence;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    sequence: BeanSequence;
+  }
 }

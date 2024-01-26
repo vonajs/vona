@@ -3,6 +3,8 @@ export * from '../bean/bean.settings.js';
 
 import { BeanSettings } from '../bean/bean.settings.js';
 
-export interface IBeanRecord {
-  settings: BeanSettings;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    settings: BeanSettings;
+  }
 }

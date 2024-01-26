@@ -7,7 +7,9 @@ export * from '../bean/bean.flow.js';
 import { BeanFlowDef } from '../bean/bean.flowDef.js';
 import { BeanFlow } from '../bean/bean.flow.js';
 
-export interface IBeanRecord {
-  flowDef: BeanFlowDef;
-  flow: BeanFlow;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    flowDef: BeanFlowDef;
+    flow: BeanFlow;
+  }
 }

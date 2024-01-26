@@ -3,6 +3,8 @@ export * from '../bean/bean.status.js';
 
 import { BeanStatus } from '../bean/bean.status.js';
 
-export interface IBeanRecord {
-  status: BeanStatus;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    status: BeanStatus;
+  }
 }

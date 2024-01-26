@@ -6,6 +6,8 @@ export * from '../bean/bean.stats.js';
 
 import { BeanStats } from '../bean/bean.stats.js';
 
-export interface IBeanRecord {
-  stats: BeanStats;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    stats: BeanStats;
+  }
 }

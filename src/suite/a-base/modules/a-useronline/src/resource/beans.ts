@@ -3,6 +3,8 @@ export * from '../bean/bean.userOnline.js';
 
 import { BeanUserOnline } from '../bean/bean.userOnline.js';
 
-export interface IBeanRecord {
-  userOnline: BeanUserOnline;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    userOnline: BeanUserOnline;
+  }
 }

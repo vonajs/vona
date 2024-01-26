@@ -5,6 +5,8 @@ export * from '../bean/bean.fields.js';
 
 import { BeanFields } from '../bean/bean.fields.js';
 
-export interface IBeanRecord {
-  fields: BeanFields;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    fields: BeanFields;
+  }
 }

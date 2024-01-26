@@ -3,6 +3,8 @@ export * from '../bean/bean.dict.js';
 
 import { BeanDict } from '../bean/bean.dict.js';
 
-export interface IBeanRecord {
-  dict: BeanDict;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    dict: BeanDict;
+  }
 }

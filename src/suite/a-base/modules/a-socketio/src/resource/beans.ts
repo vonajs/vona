@@ -10,6 +10,8 @@ export * from '../bean/bean.io.js';
 
 import { BeanIo } from '../bean/bean.io.js';
 
-export interface IBeanRecord {
-  io: BeanIo;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    io: BeanIo;
+  }
 }

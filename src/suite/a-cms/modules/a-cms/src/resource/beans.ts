@@ -9,6 +9,8 @@ export * from '../bean/bean.cms.js';
 
 import { BeanCms } from '../bean/bean.cms.js';
 
-export interface IBeanRecord {
-  cms: BeanCms;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    cms: BeanCms;
+  }
 }

@@ -3,6 +3,8 @@ export * from '../bean/bean.pinyin.js';
 
 import { BeanPinyin } from '../bean/bean.pinyin.js';
 
-export interface IBeanRecord {
-  pinyin: BeanPinyin;
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    pinyin: BeanPinyin;
+  }
 }
