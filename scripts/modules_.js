@@ -68,6 +68,21 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+
+async function _moduleHandle_bean({ file, module, processHelper }) {
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf(`export interface IBeanRecord`) === -1) return;
+  if (contentOld.indexOf(`declare module '@cabloy/core'`) > -1) return;
+  let contentNew = contentOld.replace(
+    `export interface IBeanRecord`,
+    `declare module '@cabloy/core' {\nexport interface IBeanRecord`,
+  );
+  contentNew += '}';
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_bean({ file, module, processHelper }) {
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
