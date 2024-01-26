@@ -22,7 +22,9 @@ export type TypeDecoratorBeanOptionsScene =
   | 'local.flow'
   | 'local.context'
   | 'flow.node'
-  | 'flow.behavior';
+  | 'flow.behavior'
+  | 'flow.service'
+  | 'auth.provider';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name

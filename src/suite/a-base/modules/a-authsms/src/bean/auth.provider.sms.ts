@@ -1,9 +1,10 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderSms extends BeanBase {
+export class AuthProviderSms extends BeanAuthProviderBase {
   // get localSimple() {
   //   return this.ctx.bean.local.module(moduleInfo.relativeName).simple;
   // }

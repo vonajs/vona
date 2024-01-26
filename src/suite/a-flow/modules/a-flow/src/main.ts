@@ -14,11 +14,6 @@ import models from './models.js';
 // meta
 import meta from './meta.js';
 
-// FlowBehaviorBase/FlowNodeBase/FlowEdgeBase
-module.meta.class.FlowBehaviorBase = FlowBehaviorBase;
-module.meta.class.FlowNodeBase = FlowNodeBase;
-module.meta.class.FlowEdgeBase = FlowEdgeBase;
-
 export default {
   aops,
   beans,

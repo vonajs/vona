@@ -11,9 +11,6 @@ import models from './models.js';
 // meta
 import meta from './meta.js';
 
-// FlowServiceBase
-module.meta.class.FlowServiceBase = FlowServiceBase;
-
 export default {
   aops,
   beans,

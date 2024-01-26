@@ -1,9 +1,10 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
+import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderOpen extends BeanBase {
+export class AuthProviderOpen extends BeanAuthProviderBase {
   async getConfigDefault() {
     return null;
   }

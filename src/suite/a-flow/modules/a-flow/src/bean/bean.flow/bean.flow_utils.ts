@@ -18,7 +18,7 @@ export class BeanFlowUtils extends BeanFlowStart {
     const beanFullName = `${bean.module}.flow.service.${bean.name}`;
     const beanInstance = this.ctx.bean._getBean(beanFullName);
     if (!beanInstance) throw new Error(`bean not found: ${beanFullName}`);
-    if (Object.getPrototypeOf(Object.getPrototypeOf(beanInstance)).constructor.name !== 'FlowServiceBase') {
+    if (Object.getPrototypeOf(Object.getPrototypeOf(beanInstance)).constructor.name !== 'BeanFlowServiceBase') {
       throw new Error(`bean should extends FlowServiceBase: ${beanFullName}`);
     }
     // context

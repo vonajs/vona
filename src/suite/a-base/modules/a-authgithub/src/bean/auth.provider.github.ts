@@ -1,10 +1,11 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 const Strategy = require('passport-github').Strategy;
 import StrategyMock from '../meta/passport/strategyMock.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderGithub extends BeanBase {
+export class AuthProviderGithub extends BeanAuthProviderBase {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }

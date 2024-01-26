@@ -1,1 +1,1 @@
-export default class FlowServiceBase {}
+export class BeanFlowServiceBase {}
