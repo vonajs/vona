@@ -194,7 +194,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return role;
   }
 
-  async _checkRightActionOfRole({ roleAtomId, roleId, action, user }) {
+  async _checkRightActionOfRole({ roleAtomId, roleId, action, user }: any) {
     if (!user || user.id === 0) return true;
     // roleId
     roleAtomId = await this._forceRoleAtomId({ roleAtomId, roleId });

@@ -281,7 +281,7 @@ export class BeanResource extends BeanModuleScopeBase {
     });
   }
 
-  async deleteByResource({ atomId, atomStaticKey, user }) {
+  async deleteByResource({ atomId, atomStaticKey, user }: any) {
     if (!atomId && !atomStaticKey) return null;
     // atomId
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });

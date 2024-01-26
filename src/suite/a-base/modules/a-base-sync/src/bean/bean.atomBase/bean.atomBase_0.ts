@@ -34,7 +34,7 @@ export class BeanAtomBase0 extends BeanBase {
     });
   }
 
-  async copy(/* { atomClass, target, srcKey, srcItem, destKey, destItem, options, user }*/) {
+  async copy(_params: { atomClass; target; srcKey; srcItem; destKey; destItem; options; user }) {
     // do nothing
   }
 

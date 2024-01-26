@@ -116,7 +116,7 @@ export class BeanUtil extends BeanBase {
     }
   }
 
-  getProperty(obj, name, sep) {
+  getProperty(obj, name, sep?) {
     return this._getProperty(obj, name, sep, false);
   }
 

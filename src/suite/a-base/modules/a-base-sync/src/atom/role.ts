@@ -264,7 +264,7 @@ export class AtomRole extends BeanAtomBase {
   }
 
   async _prepareRoleIdFromName(roleId) {
-    if (roleId === 0 || typeof roleIdParent !== 'string') return roleId;
+    if (roleId === 0 || typeof roleId !== 'string') return roleId;
     const role = await this.beanRole.parseRoleName({ roleName: roleId, force: false });
     return role.id;
   }

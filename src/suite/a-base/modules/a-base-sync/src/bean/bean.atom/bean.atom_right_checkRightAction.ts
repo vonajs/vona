@@ -13,7 +13,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     checkFlow,
     disableAuthOpenCheck,
     options: optionsOuter,
-  }) {
+  }: any) {
     const { key, atom, atomClass, /* atomClassBase,*/ options } = await this._prepareKeyAndAtomAndAtomClass({
       key: { atomId: id },
       atomClass: atomClassOuter,

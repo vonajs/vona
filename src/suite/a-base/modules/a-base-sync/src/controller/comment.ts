@@ -42,7 +42,7 @@ export class ControllerComment extends BeanBase {
 
   async item() {
     const res = await this.scope.local.comment.item({
-      key: this.ctx.request.body.key,
+      // key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });

@@ -196,7 +196,7 @@ export class BeanValidation extends BeanModuleScopeBase {
         await this.validate({
           module: validator.module,
           validator: validator.validator,
-          schema: validator.schema,
+          schema: null, // validator.schema,
           data,
           filterOptions,
         });

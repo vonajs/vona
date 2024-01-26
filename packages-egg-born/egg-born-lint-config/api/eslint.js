@@ -72,8 +72,8 @@ const rules = {
   '@typescript-eslint/no-unused-vars': [
     'error',
     {
-      varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
-      argsIgnorePattern: 'app|ctx|user|state|reject|options',
+      varsIgnorePattern: 'app|params|mockUrl|mockInfo|assert|schemas|load|loadjsx',
+      argsIgnorePattern: 'app|ctx|user|state|reject|options|params',
     },
   ],
   '@typescript-eslint/no-this-alias': 'off',
