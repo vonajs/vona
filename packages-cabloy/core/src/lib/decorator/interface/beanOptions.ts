@@ -14,6 +14,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'atom'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
+  | 'bean'
   | 'broadcast'
   | 'startup'
   | 'version'
