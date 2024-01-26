@@ -1,4 +1,4 @@
-class Tag {
+module.exports = class Tag {
   get modelTag() {
     return this.ctx.model.module(moduleInfo.relativeName).tag;
   }
@@ -187,5 +187,4 @@ class Tag {
       },
     });
   }
-}
-module.exports = Tag;
+};

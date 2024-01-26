@@ -1,4 +1,4 @@
-class Stash {
+module.exports = class Stash {
   get({ options, type, key }) {
     const stash = this._prepareStash(options);
     return stash.get({ type, key });
@@ -29,5 +29,4 @@ class Stash {
     }
     return options.stash;
   }
-}
-module.exports = Stash;
+};

@@ -1,4 +1,4 @@
-class Auth {
+module.exports = class Auth {
   constructor() {
     this._redisAuth = null;
   }
@@ -224,6 +224,4 @@ class Auth {
       await this.redisAuth.del(key);
     }
   }
-}
-
-module.exports = Auth;
+};

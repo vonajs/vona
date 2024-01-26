@@ -37,7 +37,7 @@ async function main() {
   }
 }
 
-async function _moduleHandle_atom({ file, module, processHelper }) {
+async function _moduleHandle_bean({ file, module, processHelper }) {
   if (!fse.existsSync(file)) {
     console.log('---- not changed: ', module.info.relativeName);
     return;
@@ -45,8 +45,10 @@ async function _moduleHandle_atom({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
   //
   const classPath = path.basename(file).replace('.ts', '');
-  const classNameNew = classPathToClassName('Atom', classPath);
-  // console.log(classNameNew);
+  const sceneName = parseSceneName(classPath);
+  const classNameNew = classPathToClassName('', classPath);
+  const shortName = parseShortName(classPath);
+  console.log(classPath, '--', sceneName, '--', classNameNew, '--', shortName);
   // 1. 查看是否需要转换export class
   let needLog = false;
   const matchExport = contentOld.match(/export class /);
@@ -77,9 +79,9 @@ ${contentMatches[1]}
 export class ${classNameNew} extends BeanAtomBase {
 ${contentMatches[3]}
   `;
-    console.log(contentNew);
-    await fse.outputFile(file, contentNew);
-    await processHelper.formatFile({ fileName: file });
+    // console.log(contentNew);
+    // await fse.outputFile(file, contentNew);
+    // await processHelper.formatFile({ fileName: file });
   }
   // 2. 查看是否需要在resource/atoms.ts中添加记录
   const fileLocals = `${module.root}/src/resource/atoms.ts`;
@@ -94,9 +96,9 @@ export * from '../atom/${classPath}.js';
     } else {
       contentLocals = contentLocals.replace('export * from', `export * from '../atom/${classPath}.js';\nexport * from`);
     }
-    console.log(contentLocals);
-    await fse.outputFile(fileLocals, contentLocals);
-    await processHelper.formatFile({ fileName: fileLocals });
+    // console.log(contentLocals);
+    // await fse.outputFile(fileLocals, contentLocals);
+    // await processHelper.formatFile({ fileName: fileLocals });
   }
   // 3. log
   if (needLog) {
@@ -105,7 +107,7 @@ export * from '../atom/${classPath}.js';
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/atom/*.ts`;
+  const pattern = `${module.root}/src/bean/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -120,7 +122,7 @@ async function _moduleHandle({ module, processHelper }) {
     // }
     // if (file.indexOf('_.ts') > -1) continue;
     console.log(file);
-    await _moduleHandle_atom({ file, module, processHelper });
+    await _moduleHandle_bean({ file, module, processHelper });
   }
 }
 
@@ -174,7 +176,18 @@ function classPathToClassNameMixin(classPath) {
   return parts.join('');
 }
 
+function parseSceneName(classPath) {
+  const pos = classPath.lastIndexOf('.');
+  return classPath.substring(0, pos);
+}
+
+function parseShortName(classPath) {
+  const pos = classPath.lastIndexOf('.');
+  return classPath.substring(pos + 1);
+}
+
 function classPathToClassName(prefix, classPath) {
+  prefix = prefix.charAt(0).toUpperCase() + prefix.substring(1);
   const parts = classPath.split('/').map(part => {
     const parts2 = part
       .replaceAll('.', '-')

@@ -4,7 +4,7 @@ const mparse = require('@cabloy/module-parse').default;
 
 let __bodyCryptoInstance = null;
 
-class BodyCrypto {
+module.exports = class BodyCrypto {
   get configModule() {
     return this.ctx.config.module(moduleInfo.relativeName);
   }
@@ -48,5 +48,4 @@ class BodyCrypto {
     const bodyCryptoInstance = await this.ensureBodyCrypto();
     this.ctx.response.body = bodyCryptoInstance.encrypt(body);
   }
-}
-module.exports = BodyCrypto;
+};

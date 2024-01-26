@@ -69,6 +69,73 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
+async function _moduleHandle_atom({ file, module, processHelper }) {
+  if (!fse.existsSync(file)) {
+    console.log('---- not changed: ', module.info.relativeName);
+    return;
+  }
+  const contentOld = (await fse.readFile(file)).toString();
+  //
+  const classPath = path.basename(file).replace('.ts', '');
+  const classNameNew = classPathToClassName('Atom', classPath);
+  // console.log(classNameNew);
+  // 1. 查看是否需要转换export class
+  let needLog = false;
+  const matchExport = contentOld.match(/export class /);
+  if (!matchExport) {
+    needLog = true;
+    // 解析内容
+    const contentMatches = contentOld.match(/([\s\S\n]*)module\.exports = class ([\S]*?) [\s\S\n]*?\{([\s\S\n]*)/);
+    if (!contentMatches) {
+      console.log('---- not matched: ', file);
+      process.exit(0);
+    }
+    // console.log(contentMatches);
+    let importBase;
+    if (module.info.relativeName === 'a-base') {
+      importBase = `import { BeanAtomBase } from '../bean/virtual.atomBase.js';`;
+    } else if (contentOld.indexOf('class.AtomCmsBase') > -1) {
+      importBase = `import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';`;
+    } else {
+      importBase = `import { BeanAtomBase } from 'cabloy-module-api-a-base';`;
+    }
+    const contentNew = `
+import { Atom } from '@cabloy/core';
+${importBase}
+
+${contentMatches[1]}
+
+@Atom()
+export class ${classNameNew} extends BeanAtomBase {
+${contentMatches[3]}
+  `;
+    console.log(contentNew);
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
+  }
+  // 2. 查看是否需要在resource/atoms.ts中添加记录
+  const fileLocals = `${module.root}/src/resource/atoms.ts`;
+  let contentLocals = (await fse.readFile(fileLocals)).toString();
+  if (contentLocals.indexOf(`${classPath}.js`) === -1) {
+    needLog = true;
+    if (contentLocals.indexOf('export') === -1) {
+      // the first
+      contentLocals = `
+export * from '../atom/${classPath}.js';
+      `;
+    } else {
+      contentLocals = contentLocals.replace('export * from', `export * from '../atom/${classPath}.js';\nexport * from`);
+    }
+    console.log(contentLocals);
+    await fse.outputFile(fileLocals, contentLocals);
+    await processHelper.formatFile({ fileName: fileLocals });
+  }
+  // 3. log
+  if (needLog) {
+    console.log('--------: ', file);
+  }
+}
+
 //
 async function _moduleHandle_local({ file, module, processHelper }) {
   if (!fse.existsSync(file)) {

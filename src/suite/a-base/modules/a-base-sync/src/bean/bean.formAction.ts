@@ -1,4 +1,4 @@
-class FormAction {
+module.exports = class FormAction {
   async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user, throwError }) {
     // read
     const modeRead = mode === 'view' || mode === 'read';
@@ -67,5 +67,4 @@ class FormAction {
     });
     return { fieldsRight, schema };
   }
-}
-module.exports = FormAction;
+};

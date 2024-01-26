@@ -1,5 +1,5 @@
 const __stages = ['draft', 'formal', 'history'];
-class AtomStage {
+module.exports = class AtomStage {
   toNumber({ atomStage }) {
     if (atomStage === undefined || atomStage === null) return atomStage;
     if (typeof atomStage === 'number') return atomStage;
@@ -12,5 +12,4 @@ class AtomStage {
     if (typeof atomStage === 'string') return atomStage;
     return __stages[atomStage];
   }
-}
-module.exports = AtomStage;
+};
