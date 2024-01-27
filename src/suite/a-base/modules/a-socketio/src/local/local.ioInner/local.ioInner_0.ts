@@ -1,4 +1,4 @@
-import BeanIoChannelBase from '../../common/ioChannelBase.js';
+import { BeanIoChannelBase } from '../../common/ioChannelBase.js';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
