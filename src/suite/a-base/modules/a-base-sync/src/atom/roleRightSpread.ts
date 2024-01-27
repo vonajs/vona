@@ -41,21 +41,21 @@ export class AtomRoleRightSpread extends BeanAtomBase {
     // super
     await super.create({ atomClass, item, options, user });
     // donot go here
-    throw new Error(403);
+    this.ctx.throw(403);
   }
 
   async write({ atomClass, target, key, item, options, user }) {
     // super
     await super.write({ atomClass, target, key, item, options, user });
     // donot go here
-    throw new Error(403);
+    this.ctx.throw(403);
   }
 
   async delete({ atomClass, key, options, user }) {
     // super
     await super.delete({ atomClass, key, options, user });
     // donot go here
-    throw new Error(403);
+    this.ctx.throw(403);
   }
 
   _getMeta(item, _options) {

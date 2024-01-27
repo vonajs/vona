@@ -99,7 +99,9 @@ export class AtomRoleFieldsRight extends BeanAtomBase {
     await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
   }
 
-  _getMeta(/* item, options*/) {
+  _getMeta(item, options) {
+    item;
+    options;
     // layout: list/table/mobile/pc
     // const layout = options && options.layout;
     // meta
