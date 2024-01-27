@@ -4,7 +4,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 export class VersionManager extends BeanBase {
   async update(_options) {}
 
-  async init(options) {}
+  async init(_options) {}
 
   async test() {}
 }

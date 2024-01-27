@@ -34,7 +34,7 @@ export class VersionManager extends BeanBase {
     }
   }
 
-  async init(options) {}
+  async init(_options) {}
 
   async test() {}
 
