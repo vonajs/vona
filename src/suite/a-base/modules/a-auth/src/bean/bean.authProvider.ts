@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
+import { BeanAuthProviderBase } from './virtual.authProviderBase.js';
 
 @Bean()
 export class BeanAuthProvider extends BeanBase {
@@ -36,7 +37,7 @@ export class BeanAuthProvider extends BeanBase {
     });
   }
 
-  createAuthProviderBean({ module, providerName, providerScene }: any) {
+  createAuthProviderBean({ module, providerName, providerScene }: any): BeanAuthProviderBase {
     const providerFullName = `${module}:${providerName}`;
     const authProvider = this.getAuthProviderBase({ module, providerName });
     const beanName = authProvider.meta.bean;
@@ -82,7 +83,7 @@ export class BeanAuthProvider extends BeanBase {
     // const _authProviders = this.ctx.bean.base.authProviders();
     // const _provider = _authProviders[`${module}:${providerName}`];
     // if (!_provider) throw new Error(`authProvider ${module}:${providerName} not found!`);
-    const data = {
+    const data: any = {
       module,
       providerName,
       // config: JSON.stringify(_provider.config),
@@ -124,7 +125,7 @@ export class BeanAuthProvider extends BeanBase {
     ];
     for (const route of routes) {
       this.ctx.app.meta.router.unRegister(route.name);
-      this.ctx.app.meta.router.register(moduleInfo, route);
+      this.ctx.app.meta.router.register(__ThisModule__, route);
     }
   }
 }

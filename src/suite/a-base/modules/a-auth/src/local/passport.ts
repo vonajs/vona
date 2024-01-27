@@ -49,9 +49,9 @@ export class LocalPassport extends BeanBase {
   }
 }
 
-async function _createProviderStrategy(ctx, authProvider, beanProvider) {
+async function _createProviderStrategy(ctx, _authProvider, beanProvider) {
   // config
-  let config = {};
+  let config: any = {};
   config.passReqToCallback = true;
   config.failWithError = false;
   config.successRedirect = config.successReturnToOrRedirect = beanProvider.metaScene.mode === 'redirect' ? '/' : false;

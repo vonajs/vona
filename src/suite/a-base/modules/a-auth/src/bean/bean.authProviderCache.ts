@@ -106,7 +106,7 @@ export class BeanAuthProviderCache extends BeanBase {
     const [module, providerName] = providerFullName.split(':');
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({ module, providerName });
     const { providerItem, configProviderScenes } = providerConfigCache;
-    const providerConfigForLogin = {
+    const providerConfigForLogin: any = {
       module,
       providerName,
       meta: authProvider.meta,

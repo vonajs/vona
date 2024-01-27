@@ -96,7 +96,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return atomKey;
   }
 
-  async loadAtomStatic({ moduleName, atomClass, item }, atoms) {
+  async loadAtomStatic({ moduleName, atomClass, item }, atoms?) {
     moduleName = moduleName || this.moduleScope;
     // key not empty
     if (!item.atomStaticKey) {

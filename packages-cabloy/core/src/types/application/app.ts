@@ -1,4 +1,5 @@
 import { Application as EggApplication, EggLoaderOptions, Singleton } from 'egg';
+import { EggPassport } from '@zhennann/egg-passport';
 import { BeanContainerLike } from '../../lib/bean/beanContainer.js';
 import { AppMeta } from '../../lib/core/meta.js';
 import { Server as SocketServer } from 'socket.io';
@@ -12,4 +13,5 @@ export interface CabloyApplication extends EggApplication {
   redis: Singleton<Redis>; // Omit<Redis, 'get'> & Singleton<Redis>;
   io: SocketServer;
   mysql: any; // EggMySQL & Singleton<EggMySQL>;
+  passport: EggPassport;
 }

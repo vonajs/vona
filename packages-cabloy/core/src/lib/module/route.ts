@@ -1,6 +1,7 @@
 import is from 'is-type-of';
 import extend from '@cabloy/extend';
 import pathMatching from 'egg-path-matching';
+import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
 import { CabloyApplication, CabloyContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
@@ -8,6 +9,11 @@ const MWSTATUS = Symbol('Context#__wmstatus');
 
 export class AppRouter extends BeanSimple {
   register(info, route) {
+    // info
+    if (typeof info === 'string') {
+      info = ModuleInfo.parseInfo(info);
+    }
+    // app
     const app = this.app;
     // args
     const args = [] as any;
