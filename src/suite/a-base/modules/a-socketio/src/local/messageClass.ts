@@ -42,7 +42,7 @@ export class LocalMessageClass extends BeanBase {
     // data
     const messageClass = this.messageClass({ module, messageClassName });
     if (!messageClass) throw new Error(`messageClass ${module}:${messageClassName} not found!`);
-    const data = {
+    const data: any = {
       module,
       messageClassName,
       uniform: messageClass.info.uniform ? 1 : 0,

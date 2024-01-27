@@ -1,3 +1,4 @@
+import BeanIoChannelBase from '../../common/ioChannelBase.js';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
@@ -33,7 +34,7 @@ export class LocalIoInner0 extends BeanBase {
     return beanMessage;
   }
 
-  _getBeanChannel(channelFullName) {
+  _getBeanChannel(channelFullName): BeanIoChannelBase | null {
     // get channel base
     const channelBase = this.messageClass.channel(channelFullName);
     if (!channelBase) {
@@ -42,7 +43,7 @@ export class LocalIoInner0 extends BeanBase {
     }
     // bean
     const beanFullName = `${channelBase.info.module}.io.channel.${channelBase.info.bean}`;
-    const beanChannel = this.ctx.bean._getBean(beanFullName);
+    const beanChannel = this.ctx.bean._getBean(beanFullName) as BeanIoChannelBase;
     if (!beanChannel) {
       this.ctx.logger.info(`channel bean not found: ${beanFullName}`);
       return null;
