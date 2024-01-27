@@ -1,7 +1,7 @@
 import { LocalProcedureUtilsRights } from './local.procedure_utils_rights.js';
 
 export class LocalProcedureUtils extends LocalProcedureUtilsRights {
-  _prepare_cms({ tableName, iid, mode, cms }) {
+  _prepare_cms({ tableName, iid, mode, cms }: any) {
     let _cmsField, _cmsJoin;
     const _cmsWhere = {};
 

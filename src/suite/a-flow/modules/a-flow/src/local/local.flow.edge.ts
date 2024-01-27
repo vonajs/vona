@@ -11,7 +11,7 @@ export class LocalFlowEdge extends BeanBase {
   _edgeBase: any;
   _edgeBaseBean: any;
 
-  constructor({ flowInstance, context, contextNode }) {
+  constructor({ flowInstance, context, contextNode }: any) {
     super();
     this.flowInstance = flowInstance;
     this.context = context;
@@ -20,7 +20,7 @@ export class LocalFlowEdge extends BeanBase {
     this._edgeBaseBean = null;
   }
 
-  __init__({ context, contextNode, edgeDef }) {
+  __init__({ context, contextNode, edgeDef }: any) {
     // context
     this.contextEdge = this.ctx.bean._newBean(`${__ThisModule__}.local.context.edge`, {
       context,

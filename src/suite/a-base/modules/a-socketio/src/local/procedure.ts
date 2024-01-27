@@ -2,7 +2,7 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalProcedure extends BeanBase {
-  selectMessages({ iid, where, orders, page, offset, count }) {
+  selectMessages({ iid, where, orders, page, offset, count }: any) {
     // for safe
     where = where ? this.ctx.model._where(where) : null;
     orders = orders ? this.ctx.model._orders(orders) : null;
@@ -44,7 +44,7 @@ export class LocalProcedure extends BeanBase {
     return _sql;
   }
 
-  setRead({ iid, messageClassId, messageIds, all, userId }) {
+  setRead({ iid, messageClassId, messageIds, all, userId }: any) {
     if (messageIds && messageIds.length > 0) {
       const _messageIds = messageIds.map(item => parseInt(item)).join(',');
 
@@ -67,7 +67,7 @@ export class LocalProcedure extends BeanBase {
     return null;
   }
 
-  delete({ iid, messageIds, userId }) {
+  delete({ iid, messageIds, userId }: any) {
     const _messageIds = messageIds.map(item => parseInt(item)).join(',');
 
     // sql

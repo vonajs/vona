@@ -49,7 +49,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     });
   }
 
-  _checkIfAtomHistory({ options }) {
+  _checkIfAtomHistory({ options }: any) {
     const whereAtomIdFormal = options.where?.['a.atomIdFormal'];
     const stage = this.ctx.bean.atomStage.toString({ atomStage: options.stage });
     if (stage === 'history' && !whereAtomIdFormal) {

@@ -12,7 +12,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     return this._redis;
   }
 
-  _getRedisKey({ progressId }) {
+  _getRedisKey({ progressId }: any) {
     return `progress:${this.ctx.instance.id}:${progressId}`;
   }
 

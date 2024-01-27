@@ -55,7 +55,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     });
   }
 
-  parseActionCode({ action, atomClass }) {
+  parseActionCode({ action, atomClass }: any) {
     // is number
     if (!isNaN(action)) return parseInt(action);
     // add role right
@@ -69,7 +69,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     return _action.code;
   }
 
-  getCreateDelay({ atomClass }) {
+  getCreateDelay({ atomClass }: any) {
     const actionBase = this.ctx.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,

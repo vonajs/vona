@@ -447,7 +447,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return items;
   }
 
-  _resourceRightsLocale({ items }) {
+  _resourceRightsLocale({ items }: any) {
     // resourceTypes for a-base:resource
     const resourceTypes = this.ctx.bean.base.resourceTypes();
     // locale

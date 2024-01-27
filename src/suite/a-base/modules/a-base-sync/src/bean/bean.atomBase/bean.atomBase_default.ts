@@ -51,7 +51,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
     return await this._readValidate_schema({ schema: atomSchema.schema, item: data });
   }
 
-  _default_general_data({ atomClassBase, atomClass, user }) {
+  _default_general_data({ atomClassBase, atomClass, user }: any) {
     const data = {
       id: 0,
       atomId: 0,

@@ -89,7 +89,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     await nodeInstance.flowInstance.nextEdges({ nodeInstance, behaviorDefId });
   }
 
-  _getJobName({ flowId, flowNodeId, behaviorDefId }) {
+  _getJobName({ flowId, flowNodeId, behaviorDefId }: any) {
     return `${flowId}.${flowNodeId}.${behaviorDefId}`.replace(/:/g, '.');
   }
 }

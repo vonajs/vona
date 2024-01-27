@@ -9,7 +9,7 @@ export class CacheBase extends BeanBase {
   _localRedis: any;
   _localFetch: any;
 
-  constructor({ cacheBase }) {
+  constructor({ cacheBase }: any) {
     super();
     this._cacheBase = cacheBase;
     this._configModule = null;

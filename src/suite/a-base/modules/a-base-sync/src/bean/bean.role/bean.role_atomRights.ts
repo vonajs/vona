@@ -314,7 +314,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     return this._translateRoleNamesLocale({ items });
   }
 
-  _translateRoleNamesLocale({ items }) {
+  _translateRoleNamesLocale({ items }: any) {
     for (const item of items) {
       item.roleNameLocale = this.ctx.text(item.roleName);
     }

@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalValidation extends BeanBase {
-  schema({ module, validator, schema }) {
+  schema({ module, validator, schema }: any) {
     return this.ctx.bean.validation.getSchema({ module, validator, schema });
   }
   async validate({ params, data }: any) {

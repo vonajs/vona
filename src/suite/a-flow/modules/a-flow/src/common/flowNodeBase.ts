@@ -18,11 +18,11 @@ export class BeanFlowNodeBase extends BeanBase {
     }
   }
 
-  getBehaviorDefOptions({ behaviorDefId, options }) {
+  getBehaviorDefOptions({ behaviorDefId, options }: any) {
     return this.flowInstance._flowListener.getBehaviorDefOptions(this.contextNode, { behaviorDefId, options });
   }
 
-  getNodeDefOptions({ options }) {
+  getNodeDefOptions({ options }: any) {
     return this.flowInstance._flowListener.getNodeDefOptions(this.contextNode, { options });
   }
 

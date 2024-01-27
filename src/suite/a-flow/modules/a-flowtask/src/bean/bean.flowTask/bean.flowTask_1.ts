@@ -58,7 +58,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     return task;
   }
 
-  _createTaskInstance2({ nodeInstance }) {
+  _createTaskInstance2({ nodeInstance }: any) {
     const task = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.task`, {
       nodeInstance,
     });
@@ -71,7 +71,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     return task;
   }
 
-  _getNodeDefOptionsTask({ nodeInstance }) {
+  _getNodeDefOptionsTask({ nodeInstance }: any) {
     return nodeInstance._getNodeDefOptionsTask();
   }
 

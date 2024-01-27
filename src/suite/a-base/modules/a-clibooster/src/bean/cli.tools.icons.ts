@@ -120,7 +120,7 @@ ${symbols.join('\n')}
     });
   }
 
-  buildXML({ xml, cdata = true, headless = true, rootName = 'xml' }) {
+  buildXML({ xml, cdata = true, headless = true, rootName = 'xml' }: any) {
     return new xml2js.Builder({ cdata, headless, rootName }).buildObject(xml);
   }
 }

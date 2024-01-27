@@ -14,7 +14,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     return _atomClasses[this.ctx.locale];
   }
 
-  atomClass({ module, atomClassName }) {
+  atomClass({ module, atomClassName }: any) {
     const _atomClasses = this.atomClasses();
     return _atomClasses[module] && _atomClasses[module][atomClassName];
   }

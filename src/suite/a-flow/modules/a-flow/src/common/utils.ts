@@ -4,7 +4,7 @@ export default ({ ctx /* flowInstance*/ }) => {
     contextNode: any;
     contextEdge: any;
 
-    constructor({ context, contextNode, contextEdge }) {
+    constructor({ context, contextNode, contextEdge }: any) {
       this.context = context;
       this.contextNode = contextNode;
       this.contextEdge = contextEdge;

@@ -60,7 +60,7 @@ export class LocalMessageClass extends BeanBase {
     return _cacheMessageClasses[this.ctx.locale];
   }
 
-  messageClass({ module, messageClassName }) {
+  messageClass({ module, messageClassName }: any) {
     const _messageClasses = this.messageClasses();
     return _messageClasses[module] && _messageClasses[module][messageClassName];
   }

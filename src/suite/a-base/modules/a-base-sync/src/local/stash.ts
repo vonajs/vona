@@ -8,19 +8,19 @@ export class LocalStash extends BeanBase {
     super();
     this._caches = {};
   }
-  get({ type, key }) {
+  get({ type, key }: any) {
     const cache = this._prepareCache(type);
     return cache[key];
   }
-  set({ type, key, value }) {
+  set({ type, key, value }: any) {
     const cache = this._prepareCache(type);
     cache[key] = value;
   }
-  remove({ type, key }) {
+  remove({ type, key }: any) {
     const cache = this._prepareCache(type);
     delete cache[key];
   }
-  clear({ type }) {
+  clear({ type }: any) {
     delete this._caches[type];
   }
   reset() {

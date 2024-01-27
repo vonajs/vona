@@ -2,7 +2,7 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalProcedure extends BeanBase {
-  selectTasks({ iid, userIdWho, where, orders, page, count, history }) {
+  selectTasks({ iid, userIdWho, where, orders, page, count, history }: any) {
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
     history = parseInt(history);
@@ -14,7 +14,7 @@ export class LocalProcedure extends BeanBase {
     return this._selectTasks_1({ iid, userIdWho, where, orders, page, count });
   }
 
-  _selectTasks_0({ iid, userIdWho, where, orders, page, count }) {
+  _selectTasks_0({ iid, userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlowTask
     // -- b: aFlowNode
@@ -76,7 +76,7 @@ export class LocalProcedure extends BeanBase {
     return _sql;
   }
 
-  _selectTasks_1({ iid, userIdWho, where, orders, page, count }) {
+  _selectTasks_1({ iid, userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlowTaskHistory
     // -- b: aFlowNodeHistory

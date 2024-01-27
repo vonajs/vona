@@ -183,7 +183,7 @@ export class CliStorePublish extends CliStoreBase {
     return zipSuiteAll;
   }
 
-  _zipSuiteAll_hash({ suiteMeta, modulesMeta }) {
+  _zipSuiteAll_hash({ suiteMeta, modulesMeta }: any) {
     const entityHash = {};
     entityHash.default = suiteMeta.zipSuite.hash;
     for (const moduleMeta of modulesMeta) {

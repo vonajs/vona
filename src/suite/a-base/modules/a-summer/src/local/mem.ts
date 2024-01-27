@@ -9,7 +9,7 @@ const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 export class LocalMem extends CacheBase {
   _lruCache: any;
 
-  constructor({ cacheBase }) {
+  constructor({ cacheBase }: any) {
     super({ cacheBase });
     this._lruCache = null;
   }

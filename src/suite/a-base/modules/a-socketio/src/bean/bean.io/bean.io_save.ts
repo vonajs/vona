@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoPush } from './bean.io_push.js';
 
 export class BeanIoSave extends BeanIoPush {
-  _checkPersistence({ options, /* message,*/ messageClass }) {
+  _checkPersistence({ options, /* message,*/ messageClass }: any) {
     // // 1.
     // if (message.userIdTo === -2 || message.userIdsTo) return true;
     // 2.

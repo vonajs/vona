@@ -8,7 +8,7 @@ const __adapter = (context, chain) => {
 };
 
 export class LocalFlowNodeCycle extends LocalFlowNode0 {
-  getBehaviorDefOptions({ behaviorDefId }) {
+  getBehaviorDefOptions({ behaviorDefId }: any) {
     // nodeDef
     const nodeDef = this.contextNode._nodeDef;
     // behaviorDef

@@ -8,7 +8,7 @@ export class LocalFlowTask0 extends BeanBase {
   contextNode: any;
   contextTask: any;
 
-  constructor({ nodeInstance }) {
+  constructor({ nodeInstance }: any) {
     super();
     this.nodeInstance = nodeInstance;
     this.flowInstance = nodeInstance.flowInstance;
@@ -16,7 +16,7 @@ export class LocalFlowTask0 extends BeanBase {
     this.contextNode = nodeInstance.contextNode;
   }
 
-  __init__({ nodeInstance }) {
+  __init__({ nodeInstance }: any) {
     // context
     this.contextTask = this.ctx.bean._newBean(`${__ThisModule__}.local.context.task`, {
       context: nodeInstance.context,

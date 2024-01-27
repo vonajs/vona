@@ -281,7 +281,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return html;
   }
 
-  _parseSummary({ item, html }) {
+  _parseSummary({ item, html }: any) {
     // summary
     let summary;
     if (html) {

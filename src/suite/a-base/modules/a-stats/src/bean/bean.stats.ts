@@ -10,7 +10,7 @@ export class BeanStats extends BeanModuleScopeBase {
     return this.ctx.model.module(__ThisModule__).stats;
   }
 
-  notify({ module, name, nameSub, user }) {
+  notify({ module, name, nameSub, user }: any) {
     module = module || this.moduleScope;
     user = user || (this.ctx.state.user && this.ctx.state.user.op);
     this.ctx.tail(() => {
@@ -24,7 +24,7 @@ export class BeanStats extends BeanModuleScopeBase {
     await this._notify_tail({ module, name, nameSub, user, async: true });
   }
 
-  _notify_tail({ module, name, nameSub, user, async }) {
+  _notify_tail({ module, name, nameSub, user, async }: any) {
     const provider = this._findStatsProvider({ module, name });
     if (provider.user && !user) return;
     // queue
@@ -101,7 +101,7 @@ export class BeanStats extends BeanModuleScopeBase {
     });
   }
 
-  _getFullName({ name, nameSub }) {
+  _getFullName({ name, nameSub }: any) {
     return nameSub ? `${name}.${nameSub}` : name;
   }
 
@@ -159,7 +159,7 @@ export class BeanStats extends BeanModuleScopeBase {
     }
   }
 
-  _findStatsProvider({ module, name }) {
+  _findStatsProvider({ module, name }: any) {
     module = module || this.moduleScope;
     const fullKey = `${module}:${name}`;
     if (!__stats) {

@@ -118,7 +118,7 @@ export class CliStoreSync extends CliStoreBase {
     return tempPath;
   }
 
-  _getEntityType({ entityStatus }) {
+  _getEntityType({ entityStatus }: any) {
     return entityStatus.entity.entityTypeCode;
   }
 

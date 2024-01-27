@@ -122,7 +122,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     return { nodeStart, nodeEnd, nodeTasks };
   }
 
-  _deploy_atomState_combineDictItemsTask({ nodeTasks, dictLocales }) {
+  _deploy_atomState_combineDictItemsTask({ nodeTasks, dictLocales }: any) {
     const dictItems: any[] = [];
     const codesCache = {};
     for (const nodeTask of nodeTasks) {
@@ -134,7 +134,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     return dictItems;
   }
 
-  _deploy_atomState_combineDictItem({ node, code, title, dictLocales, codesCache }) {
+  _deploy_atomState_combineDictItem({ node, code, title, dictLocales, codesCache }: any) {
     // name
     const name = node.options?.atomStateTip || node.name;
     // code

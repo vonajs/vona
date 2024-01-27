@@ -114,7 +114,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     item.id = key.itemId;
   }
 
-  _writeValidate_prepareFilterOptions({ target }) {
+  _writeValidate_prepareFilterOptions({ target }: any) {
     const filterOptions = {};
     if (!target) {
       // just save

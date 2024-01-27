@@ -1,7 +1,7 @@
 import { LocalProcedureAtomRightCheckRightAction } from './local.procedure_atomRight_checkRightAction.js';
 
 export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {
-  checkRightActionBulk({ iid, userIdWho, atomClass, atomClassBase, action }) {
+  checkRightActionBulk({ iid, userIdWho, atomClass, atomClassBase, action }: any) {
     // for safe
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
@@ -36,7 +36,7 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
     return _sql;
   }
 
-  _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }) {
+  _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any) {
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true;
     return this.ctx.model.raw(`

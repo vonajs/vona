@@ -1,7 +1,7 @@
 import { BeanFlowStart } from './bean.flow_start.js';
 
 export class BeanFlowUtils extends BeanFlowStart {
-  evaluateExpression({ expression, globals }) {
+  evaluateExpression({ expression, globals }: any) {
     return this.ctx.bean.util.evaluateExpression({ expression, globals });
   }
 

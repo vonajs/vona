@@ -3,7 +3,7 @@ import { Local, BeanBase } from '@cabloy/core';
 @Local()
 export class LocalProcedure extends BeanBase {
   // mode: mine/others/flowing/history
-  selectFlows({ iid, userIdWho, where, orders, page, count, mode }) {
+  selectFlows({ iid, userIdWho, where, orders, page, count, mode }: any) {
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
 
@@ -16,7 +16,7 @@ export class LocalProcedure extends BeanBase {
     return this._selectFlows_History({ iid, userIdWho, where, orders, page, count });
   }
 
-  _selectFlows_Mine({ iid, userIdWho, where, orders, page, count }) {
+  _selectFlows_Mine({ iid, userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlow
     // -- c: aUser
@@ -69,7 +69,7 @@ export class LocalProcedure extends BeanBase {
     return _sql;
   }
 
-  _selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode }) {
+  _selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode }: any) {
     // -- tables
     // -- a: aFlow
     // -- c: aUser
@@ -132,7 +132,7 @@ export class LocalProcedure extends BeanBase {
     return _sql;
   }
 
-  _selectFlows_History({ iid, userIdWho, where, orders, page, count }) {
+  _selectFlows_History({ iid, userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlowHistory
     // -- c: aUser

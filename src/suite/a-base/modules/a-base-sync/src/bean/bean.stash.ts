@@ -2,23 +2,23 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
 export class BeanStash extends BeanBase {
-  get({ options, type, key }) {
+  get({ options, type, key }: any) {
     const stash = this._prepareStash(options);
     return stash.get({ type, key });
   }
-  set({ options, type, key, value }) {
+  set({ options, type, key, value }: any) {
     const stash = this._prepareStash(options);
     stash.set({ type, key, value });
   }
-  remove({ options, type, key }) {
+  remove({ options, type, key }: any) {
     const stash = this._prepareStash(options);
     stash.remove({ type, key });
   }
-  clear({ options, type }) {
+  clear({ options, type }: any) {
     const stash = this._prepareStash(options);
     stash.clear({ type });
   }
-  reset({ options }) {
+  reset({ options }: any) {
     const stash = this._prepareStash(options);
     stash.reset();
   }

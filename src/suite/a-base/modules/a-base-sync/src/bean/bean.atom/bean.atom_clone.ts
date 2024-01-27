@@ -166,7 +166,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     await this.modelAtom.update(data);
   }
 
-  _copy_prepareDestItem_itemOnly({ /* target,*/ srcItem, user: _user }) {
+  _copy_prepareDestItem_itemOnly({ /* target,*/ srcItem, user: _user }: any) {
     // destItem
     const destItem = Object.assign({}, srcItem, {
       // atomId: destKey.atomId,
@@ -177,7 +177,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     return destItem;
   }
 
-  _copy_prepareDestItem_normal({ target, srcItem, user }) {
+  _copy_prepareDestItem_normal({ target, srcItem, user }: any) {
     // atomSimple
     const atomSimple = srcItem.atomSimple;
     // atomStage

@@ -22,7 +22,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     };
   }
 
-  getValidator({ module, validator }) {
+  getValidator({ module, validator }: any) {
     module = module || this.moduleScope;
     const meta = this.ctx.app.meta.modules[module].resource.meta;
     let _validator = this.ctx.bean.util.getProperty(meta, `validation.validators.${validator}`);
@@ -60,7 +60,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return await ajv.v({ ctx: this.ctx, schema, data, filterOptions });
   }
 
-  ajvFromSchema({ module, schema, filterOptions }) {
+  ajvFromSchema({ module, schema, filterOptions }: any) {
     // ignoreRules
     const ignoreRules = filterOptions && filterOptions.ignoreRules;
     // params
@@ -126,7 +126,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return _validator;
   }
 
-  _prepareSchemas_ignoreRules({ schemas }) {
+  _prepareSchemas_ignoreRules({ schemas }: any) {
     const schemas2 = {};
     for (const schemaName in schemas) {
       const schema = schemas[schemaName];
@@ -137,7 +137,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return schemas2;
   }
 
-  _prepareProperties_ignoreRules({ propertiesFrom, propertiesTo }) {
+  _prepareProperties_ignoreRules({ propertiesFrom, propertiesTo }: any) {
     const __basicRuleNames = ['type', 'ebType', 'ebCopy', 'ebReadOnly', '$async'];
     for (const key in propertiesFrom) {
       const propertyFrom = propertiesFrom[key];

@@ -79,7 +79,7 @@ export class BeanIoDelivery extends BeanIo0 {
     return true;
   }
 
-  _emitSocket({ path, options, message, socketId }) {
+  _emitSocket({ path, options, message, socketId }: any) {
     const messageEmit = { path, message, socketId };
     const messagesEmit = options?.collector?.messagesEmit;
     if (messagesEmit) {

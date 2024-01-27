@@ -32,14 +32,14 @@ export class AopCategory extends BeanBase {
     this._checkGeneral({ list });
   }
 
-  _checkGeneral({ list }) {
+  _checkGeneral({ list }: any) {
     for (const item of list) {
       item.categoryNameLocale = this.ctx.text(item.categoryName);
     }
     return true;
   }
 
-  _checkResourceType({ list, categoryIdParent, atomClass }) {
+  _checkResourceType({ list, categoryIdParent, atomClass }: any) {
     if (atomClass.module !== 'a-base' || atomClass.atomClassName !== 'resource') return false;
     if (categoryIdParent !== 0) return false;
     // resourceTypes for a-base:resource

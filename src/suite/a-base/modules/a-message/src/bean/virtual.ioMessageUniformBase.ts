@@ -98,7 +98,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
     };
   }
 
-  _notify({ messageClass, user }) {
+  _notify({ messageClass, user }: any) {
     if (user.id <= 0) return;
     // stats
     this.ctx.bean.stats.notify({

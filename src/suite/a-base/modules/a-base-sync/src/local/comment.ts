@@ -27,7 +27,7 @@ export class LocalComment extends BeanBase {
     return res.count;
   }
 
-  _adjuctOptions({ key, options }) {
+  _adjuctOptions({ key, options }: any) {
     const _options = {};
     // where
     _options.where = options.where || {};
@@ -293,7 +293,7 @@ export class LocalComment extends BeanBase {
     return title;
   }
 
-  _fullContent({ content, replyContent, replyUserName }) {
+  _fullContent({ content, replyContent, replyUserName }: any) {
     if (!replyContent) return content;
     const sep = this._getMarkdownSep(replyContent);
     return `${content}

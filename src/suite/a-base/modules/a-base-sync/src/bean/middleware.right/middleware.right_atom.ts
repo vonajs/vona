@@ -124,7 +124,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     };
   }
 
-  _checkAtom_checkRequestKey({ action }) {
+  _checkAtom_checkRequestKey({ action }: any) {
     const isActionWrite = action === 'write' || action === this.constant.atom.action.write;
     if (isActionWrite) {
       if (!this.ctx.request.body.key) {

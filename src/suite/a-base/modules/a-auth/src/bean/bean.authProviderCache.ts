@@ -66,7 +66,7 @@ export class BeanAuthProviderCache extends BeanBase {
     return res;
   }
 
-  _getAuthProvidersConfigForLogin_list({ forLogin }) {
+  _getAuthProvidersConfigForLogin_list({ forLogin }: any) {
     const listMap = {};
     //
     const providersConfigCache = this.getAuthProvidersConfigCache();

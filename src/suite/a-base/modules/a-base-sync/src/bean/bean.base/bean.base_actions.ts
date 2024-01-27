@@ -11,12 +11,12 @@ export class BeanBaseActions extends BeanBase0 {
     return _actions[this.ctx.locale];
   }
 
-  actionsBase({ module, atomClassName }) {
+  actionsBase({ module, atomClassName }: any) {
     const _actions = this.actions();
     return _actions[module] && _actions[module][atomClassName];
   }
 
-  action({ module, atomClassName, code, name }) {
+  action({ module, atomClassName, code, name }: any) {
     // prepare
     if (name && !isNaN(name)) {
       code = parseInt(name);

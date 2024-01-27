@@ -187,7 +187,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     return fieldsRight;
   }
 
-  __getAtomClassKey({ atomClass }) {
+  __getAtomClassKey({ atomClass }: any) {
     return `${atomClass.module}:${atomClass.atomClassName}`;
   }
 }

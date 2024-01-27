@@ -24,7 +24,7 @@ export class BeanIoSockets extends BeanIoSave {
     delete socketsOnline[socketId];
   }
 
-  broadcastSocketEmit({ messagesEmit, messageEmit }) {
+  broadcastSocketEmit({ messagesEmit, messageEmit }: any) {
     if (messagesEmit) {
       const debug = this.ctx.app.bean.debug.get('io');
       debug('socketEmit broadcast: count:%d, workerId:%s', messagesEmit.length, this.ctx.app.meta.workerId);
@@ -36,7 +36,7 @@ export class BeanIoSockets extends BeanIoSave {
     }
   }
 
-  _broadcastSocketEmit_single({ messageEmit }) {
+  _broadcastSocketEmit_single({ messageEmit }: any) {
     const { path, message, socketId } = messageEmit;
     const socketsOnline = this._getSocketsOnline();
     const socket = socketsOnline[socketId];

@@ -160,13 +160,13 @@ export class BeanSettings extends BeanModuleScopeBase {
     }
   }
 
-  _getValidator({ scene, module }) {
+  _getValidator({ scene, module }: any) {
     module = module || this.moduleScope;
     const validator = this.ctx.app.meta.modules[module].main.meta.settings[scene].validator;
     return validator ? { module, scene, validator } : null;
   }
 
-  _getSchema({ scene, module, schemaName }) {
+  _getSchema({ scene, module, schemaName }: any) {
     const validator = this._getValidator({ scene, module });
     if (!validator) return null;
     const schema = this.ctx.bean.validation.getSchema({

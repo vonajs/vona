@@ -139,17 +139,17 @@ export class BeanAuth extends BeanBase {
     return account;
   }
 
-  _getAuthRedisKey({ user }) {
+  _getAuthRedisKey({ user }: any) {
     const userAgent = user.agent || user.op;
     if (!this.ctx.instance || !user.provider || !userAgent) return null;
     return `authToken:${this.ctx.instance.id}:${userAgent.id}:${user.provider.scene || ''}:${user.provider.id}`;
   }
 
-  _getAuthRedisKeyPattern({ user, keyPrefix }) {
+  _getAuthRedisKeyPattern({ user, keyPrefix }: any) {
     return `${keyPrefix}authToken:${this.ctx.instance.id}:${user.id}:*`;
   }
 
-  _pruneUser({ user }) {
+  _pruneUser({ user }: any) {
     const _user = {
       op: { id: user.op.id, iid: user.op.iid, anonymous: user.op.anonymous },
     };

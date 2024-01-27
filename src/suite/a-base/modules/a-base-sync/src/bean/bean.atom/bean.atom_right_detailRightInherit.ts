@@ -124,7 +124,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
     });
   }
 
-  _checkDetailRightInherit_schemaValid({ action, schema, atomClass /* , atomClassBase*/ }) {
+  _checkDetailRightInherit_schemaValid({ action, schema, atomClass /* , atomClassBase*/ }: any) {
     for (const key in schema.properties) {
       const property = schema.properties[key];
       if (

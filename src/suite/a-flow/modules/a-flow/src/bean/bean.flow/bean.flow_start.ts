@@ -29,7 +29,7 @@ export class BeanFlowStart extends BeanFlowQuery {
     return flowInstance;
   }
 
-  _createFlowInstance({ flowDef }) {
+  _createFlowInstance({ flowDef }: any) {
     const flowInstance = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.flow`, {
       flowDef,
     });

@@ -228,7 +228,7 @@ export class BeanUtil extends BeanBase {
     return utils.escapeURL(str);
   }
 
-  getTitleLocale({ locales, title, locale }) {
+  getTitleLocale({ locales, title, locale }: any) {
     locale = locale || this.ctx.locale;
     let titleLocale = this.getProperty(locales, `${locale}.${title}`);
     if (!titleLocale && locale !== 'en-us') {
@@ -258,7 +258,7 @@ export class BeanUtil extends BeanBase {
     );
   }
 
-  evaluateExpression({ expression, globals, wrapper }) {
+  evaluateExpression({ expression, globals, wrapper }: any) {
     return eggBornUtils.tools.evaluateExpression({ expression, scope: globals, wrapper });
     // return vm.runInContext(expression, vm.createContext(globals || {}));
   }
@@ -297,7 +297,7 @@ export class BeanUtil extends BeanBase {
       escapeURL(str) {
         return self.escapeURL(str);
       },
-      performAction({ method, url, body }) {
+      performAction({ method, url, body }: any) {
         return self.ctx.meta.util.performAction({ method, url, body });
       },
     };
@@ -330,18 +330,18 @@ export class BeanUtil extends BeanBase {
     );
   }
 
-  parseIdSafe(id) {
+  parseIdSafe(id?) {
     if (!id) return 0;
     if (!isNaN(id)) return parseInt(id);
     return this.parseTokenSafe(id);
   }
 
-  parseTokenSafe(token) {
+  parseTokenSafe(token?) {
     if (!token) return token;
     return token.replace(/[\\\.*#%'"`;, ]/g, '');
   }
 
-  ensureArray(arr, sep) {
+  ensureArray(arr, sep?) {
     if (sep === undefined) sep = ',';
     if (!arr) return arr;
     if (Array.isArray(arr)) return arr;
@@ -349,7 +349,7 @@ export class BeanUtil extends BeanBase {
     throw new Error(`invalid array: ${arr}`);
   }
 
-  parseAtomClass({ module, atomClassName }) {
+  parseAtomClass({ module, atomClassName }: any) {
     if (!atomClassName) return null;
     let parts;
     if (atomClassName.indexOf(':') > -1) {

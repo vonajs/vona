@@ -167,7 +167,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return atomKey;
   }
 
-  _ifChanged({ /* atomClassBase,*/ atomRevisionWill, atomRevisionCurrent }) {
+  _ifChanged({ /* atomClassBase,*/ atomRevisionWill, atomRevisionCurrent }: any) {
     const changed = atomRevisionWill > atomRevisionCurrent;
     return changed;
   }
@@ -193,7 +193,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return value;
   }
 
-  _adjustItem_atomCategoryId({ atomClass, item }) {
+  _adjustItem_atomCategoryId({ atomClass, item }: any) {
     if (
       atomClass.module === 'a-base' &&
       atomClass.atomClassName === 'resource' &&
@@ -270,7 +270,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return item;
   }
 
-  _findAtomStatic({ atomStaticKey }) {
+  _findAtomStatic({ atomStaticKey }: any) {
     const [_moduleName, _atomStaticKey] = atomStaticKey.split(':');
     for (const module of this.ctx.app.meta.modulesArray) {
       const moduleName = module.info.relativeName;

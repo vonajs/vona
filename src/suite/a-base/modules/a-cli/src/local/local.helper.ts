@@ -57,7 +57,7 @@ export class LocalHelper extends BeanBase {
   newTable(options) {
     return new TableClass(options);
   }
-  boxen({ text, options }) {
+  boxen({ text, options }: any) {
     if (!options) {
       options = this.moduleConfig.helper.boxen.options;
     }

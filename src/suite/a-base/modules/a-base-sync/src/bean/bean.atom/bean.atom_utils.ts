@@ -103,7 +103,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
     return { key, atom };
   }
 
-  _patchAtom({ atom, key, atomClass }) {
+  _patchAtom({ atom, key, atomClass }: any) {
     let atomId;
     let itemId;
     if (key) {
@@ -123,7 +123,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
     };
   }
 
-  _patchCreateWriteData({ data, atomClassBase }) {
+  _patchCreateWriteData({ data, atomClassBase }: any) {
     if (data.itemId === undefined) {
       data.itemId = 0;
     }

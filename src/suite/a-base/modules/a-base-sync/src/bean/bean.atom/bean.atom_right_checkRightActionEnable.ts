@@ -7,7 +7,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
   // null: means no right
   // true: means ignore
 
-  _checkRightAction_checkStage({ _atom, actionBase }) {
+  _checkRightAction_checkStage({ _atom, actionBase }: any) {
     const _checkPoint = actionBase.stage;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
@@ -20,7 +20,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     return true;
   }
 
-  _checkRightAction_enableOnAtomState({ _atom, actionBase }) {
+  _checkRightAction_enableOnAtomState({ _atom, actionBase }: any) {
     const _checkPoint = actionBase.enableOnAtomState;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
@@ -35,7 +35,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     return true;
   }
 
-  _checkRightAction_enableOnAtomStateReverse({ _atom, actionBase }) {
+  _checkRightAction_enableOnAtomStateReverse({ _atom, actionBase }: any) {
     const _checkPoint = actionBase.enableOnAtomStateReverse;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
@@ -50,7 +50,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     return true;
   }
 
-  _checkRightAction_enableOnAtomDisabled({ _atom, actionBase }) {
+  _checkRightAction_enableOnAtomDisabled({ _atom, actionBase }: any) {
     const _checkPoint = actionBase.enableOnAtomDisabled;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     if (_checkPoint === true && _atom.atomDisabled === 0) return null;
@@ -58,7 +58,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     return true;
   }
 
-  _checkRightAction_enableOnStatic({ _atom, action, actionBase, user }) {
+  _checkRightAction_enableOnStatic({ _atom, action, actionBase, user }: any) {
     const _checkPoint = actionBase.enableOnStatic;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check true
@@ -78,7 +78,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     return true;
   }
 
-  _checkRightAction_enableOnOpened({ _atomDraft, actionBase }) {
+  _checkRightAction_enableOnOpened({ _atomDraft, actionBase }: any) {
     const _checkPoint = actionBase.enableOnOpened;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // ignore when no draft

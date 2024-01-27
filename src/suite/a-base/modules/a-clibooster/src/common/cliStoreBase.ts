@@ -182,12 +182,12 @@ export default class CliStoreBase extends BeanCliBase {
     return `https://store.cabloy.com/${locale === 'zh-cn' ? 'zh-cn/' : ''}articles/${entityName}.html`;
   }
 
-  _getCabloyDocsURL({ slug, user }) {
+  _getCabloyDocsURL({ slug, user }: any) {
     const locale = user.locale;
     return `https://cabloy.com/${locale === 'zh-cn' ? 'zh-cn/' : ''}articles/${slug}.html`;
   }
 
-  _logHelperDocs({ welcomes, user }) {
+  _logHelperDocs({ welcomes, user }: any) {
     const configHelper = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
     if (configHelper === false) {
       return;

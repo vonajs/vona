@@ -186,7 +186,7 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
     await this.ctx.bean.flowTask._setAtomState({ context: this.context, options });
   }
 
-  _prepareAtomState_static({ options }) {
+  _prepareAtomState_static({ options }: any) {
     const atomStage = this.context._atom.atomStage;
     const atomClass = {
       module: this.context._atom.module,

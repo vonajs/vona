@@ -5,7 +5,7 @@ import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
 
 export class LocalFlowFlow0 extends BeanBase {
-  __init__({ flowDef }) {
+  __init__({ flowDef }: any) {
     // context
     this.context = this.ctx.bean._newBean(`${__ThisModule__}.local.context.flow`, {
       flowDef,
@@ -179,7 +179,7 @@ export class LocalFlowFlow0 extends BeanBase {
     return flowId;
   }
 
-  _createNodeInstance2({ nodeDef, contextEdge }) {
+  _createNodeInstance2({ nodeDef, contextEdge }: any) {
     const node = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.node`, {
       flowInstance: this,
       context: this.context,
@@ -215,7 +215,7 @@ export class LocalFlowFlow0 extends BeanBase {
     return edge;
   }
 
-  _findNodeDef({ nodeDefId }) {
+  _findNodeDef({ nodeDefId }: any) {
     return this.ctx.bean.flowDef._findNode({ content: this.context._flowDefContent, nodeDefId });
   }
 

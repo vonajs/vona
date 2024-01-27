@@ -84,7 +84,7 @@ export class BeanInstance extends BeanBase {
     return instance;
   }
 
-  _getInstanceBase({ subdomain }) {
+  _getInstanceBase({ subdomain }: any) {
     const instances = this.ctx.app.config.instances || [{ subdomain: '', password: '' }];
     return instances.find(item => item.subdomain === subdomain);
   }
@@ -137,7 +137,7 @@ export class BeanInstance extends BeanBase {
     return this.cacheMem.get('instanceConfigsFront');
   }
 
-  _mergeInstanceConfigFront({ instanceConfigs }) {
+  _mergeInstanceConfigFront({ instanceConfigs }: any) {
     const instanceConfigsFront = {};
     for (const moduleName in instanceConfigs) {
       const instanceConfig = instanceConfigs[moduleName];

@@ -67,7 +67,7 @@ export class BeanCliBase extends BeanBase {
     return meta;
   }
 
-  _commandMeta_groups({ groups }) {
+  _commandMeta_groups({ groups }: any) {
     const metaGroups = {};
     if (groups) {
       for (const groupName in groups) {
@@ -78,7 +78,7 @@ export class BeanCliBase extends BeanBase {
     return metaGroups;
   }
 
-  _commandMeta_group({ group }) {
+  _commandMeta_group({ group }: any) {
     const metaGroup = {
       description: this.ctx.text(group.description),
       condition: group.condition,
@@ -94,7 +94,7 @@ export class BeanCliBase extends BeanBase {
     return metaGroup;
   }
 
-  _commandMeta_options({ options }) {
+  _commandMeta_options({ options }: any) {
     const metaOptions = {};
     if (options) {
       for (const key in options) {
@@ -108,7 +108,7 @@ export class BeanCliBase extends BeanBase {
     return metaOptions;
   }
 
-  _commandMeta_info({ info, argv }) {
+  _commandMeta_info({ info, argv }: any) {
     // info
     const metaInfo = {
       version: info.version,
@@ -125,7 +125,7 @@ export class BeanCliBase extends BeanBase {
     return metaInfo;
   }
 
-  _commandMeta_info_welcomes({ info }) {
+  _commandMeta_info_welcomes({ info }: any) {
     let welcomes = info.welcomes || [];
     if (!Array.isArray(welcomes)) welcomes = [welcomes];
     welcomes = welcomes.map(item => this.ctx.text(item));

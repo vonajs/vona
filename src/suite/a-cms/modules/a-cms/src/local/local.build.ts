@@ -98,7 +98,7 @@ export class LocalBuild extends BeanBase {
     }
   }
 
-  _getThemeName({ site, language }) {
+  _getThemeName({ site, language }: any) {
     const atomClass = site.atomClass || this.atomClass;
     let themeName = site.themes[language || 'default'];
     if (!themeName) {
@@ -601,7 +601,7 @@ export class LocalBuild extends BeanBase {
     });
   }
 
-  _checkIfPluginEnable({ site, moduleName }) {
+  _checkIfPluginEnable({ site, moduleName }: any) {
     const config = site.plugins[moduleName];
     return !config || !config.disabled;
   }
@@ -773,11 +773,11 @@ var env=${JSON.stringify(env, null, 2)};
     };
   }
 
-  getCurrentLocale({ site }) {
+  getCurrentLocale({ site }: any) {
     return site.language ? site.language.current : this.ctx.app.config.i18n.defaultLocale;
   }
 
-  createUtilTime({ site }) {
+  createUtilTime({ site }: any) {
     const self = this;
     const _textLocale = this.getCurrentLocale({ site });
     return {

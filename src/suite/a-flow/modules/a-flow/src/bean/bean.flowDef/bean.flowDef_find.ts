@@ -1,19 +1,19 @@
 import { BeanFlowDefPrepare } from './bean.flowDef_prepare.js';
 
 export class BeanFlowDefFind extends BeanFlowDefPrepare {
-  _findNode({ content, nodeDefId }) {
+  _findNode({ content, nodeDefId }: any) {
     return content.process.nodes.find(node => {
       return node.id === nodeDefId;
     });
   }
 
-  _findEdgesPrevious({ content, behaviorDefId, nodeDefId }) {
+  _findEdgesPrevious({ content, behaviorDefId, nodeDefId }: any) {
     return content.process.edges.filter(edge => {
       return edge.target === nodeDefId && (edge.behavior || '') === (behaviorDefId || '');
     });
   }
 
-  _findEdgesNext({ content, behaviorDefId, nodeDefId }) {
+  _findEdgesNext({ content, behaviorDefId, nodeDefId }: any) {
     return content.process.edges.filter(edge => {
       return edge.source === nodeDefId && (edge.behavior || '') === (behaviorDefId || '');
     });

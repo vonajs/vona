@@ -176,7 +176,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
     return flowEdgeBases;
   }
 
-  _combineFullKey({ flowDefKey }) {
+  _combineFullKey({ flowDefKey }: any) {
     let fullKey;
     let dynamic;
     if (typeof flowDefKey === 'string') {

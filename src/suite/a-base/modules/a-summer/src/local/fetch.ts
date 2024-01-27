@@ -5,7 +5,7 @@ import { Local } from '@cabloy/core';
 export class LocalFetch extends CacheBase {
   _cacheBean: any;
 
-  constructor({ cacheBase }) {
+  constructor({ cacheBase }: any) {
     super({ cacheBase });
     this._cacheBean = null;
   }

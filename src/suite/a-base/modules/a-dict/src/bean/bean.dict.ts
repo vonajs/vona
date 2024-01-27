@@ -79,7 +79,7 @@ export class BeanDict extends BeanModuleScopeBase {
     return dictItemRes;
   }
 
-  _findItem_loop({ dictItemsRes, dictItems, dictItemsMap, codes, titles, findByCode }) {
+  _findItem_loop({ dictItemsRes, dictItems, dictItemsMap, codes, titles, findByCode }: any) {
     let dictItem;
     if (findByCode) {
       const code = codes.shift();
@@ -119,7 +119,7 @@ export class BeanDict extends BeanModuleScopeBase {
     return dict[locale];
   }
 
-  dictCacheRemove({ dictKey }) {
+  dictCacheRemove({ dictKey }: any) {
     this.cacheMem.remove(dictKey);
   }
 
@@ -163,7 +163,7 @@ export class BeanDict extends BeanModuleScopeBase {
     return dict;
   }
 
-  _prepareDict_adjust({ dict, locale }) {
+  _prepareDict_adjust({ dict, locale }: any) {
     // init
     dict._dictItems = JSON.parse(dict.dictItems);
     dict._dictLocales = dict.dictLocales ? JSON.parse(dict.dictLocales) : null;
@@ -178,7 +178,7 @@ export class BeanDict extends BeanModuleScopeBase {
     });
   }
 
-  _prepareDict_adjust_loop({ dict, dictItemsMap, dictItems, locale, itemParent }) {
+  _prepareDict_adjust_loop({ dict, dictItemsMap, dictItems, locale, itemParent }: any) {
     for (const item of dictItems) {
       // codeFull
       let codeFull = itemParent ? `${itemParent.codeFull}${item.code}` : item.code;
@@ -204,7 +204,7 @@ export class BeanDict extends BeanModuleScopeBase {
     }
   }
 
-  _prepareDict_titleLocale({ dict, title, locale }) {
+  _prepareDict_titleLocale({ dict, title, locale }: any) {
     return this.ctx.bean.util.getTitleLocale({
       locales: dict._dictLocales,
       title,

@@ -64,7 +64,7 @@ export class BeanMarkdown extends BeanBase {
     return html;
   }
 
-  _getHost({ host, content, locale }) {
+  _getHost({ host, content, locale }: any) {
     const $util = this.ctx.bean.util.hostUtil({
       locale: locale || this.ctx.bean.util.getProperty(host, 'atom.atomLanguage'),
     });

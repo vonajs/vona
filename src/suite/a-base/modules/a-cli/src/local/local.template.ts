@@ -46,7 +46,7 @@ export class LocalTemplate extends BeanBase {
     return this.moduleConfig.template.render.ignore;
   }
 
-  resolvePath({ moduleName, path: _path }) {
+  resolvePath({ moduleName, path: _path }: any) {
     const module = this.helper.findModule(moduleName);
     return path.join(module.root, 'backend/cli/templates', _path);
   }

@@ -24,7 +24,7 @@ export class LocalBase extends BeanBase {
     };
   }
 
-  getActionsBase({ atomClass }) {
+  getActionsBase({ atomClass }: any) {
     return this.ctx.bean.base.actionsBase({ module: atomClass.module, atomClassName: atomClass.atomClassName });
   }
 

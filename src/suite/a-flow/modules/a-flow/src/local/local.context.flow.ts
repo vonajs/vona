@@ -11,7 +11,7 @@ export class LocalContextFlow extends BeanBase {
   _atom: any;
   _utils: any;
 
-  constructor({ flowDef }) {
+  constructor({ flowDef }: any) {
     super();
     this._flowDef = flowDef;
     this._flowDefContent = JSON.parse(this._flowDef.content);

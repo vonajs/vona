@@ -1,7 +1,7 @@
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
-  checkRightResource({ iid, userIdWho, resourceAtomId }) {
+  checkRightResource({ iid, userIdWho, resourceAtomId }: any) {
     // for safe
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho || 0);
@@ -23,7 +23,7 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
     return _sql;
   }
 
-  _checkResourceLocales({ iid, locale, atomClassIds }) {
+  _checkResourceLocales({ iid, locale, atomClassIds }: any) {
     // for safe
     iid = parseInt(iid);
     locale = this.ctx.model.format('?', locale);

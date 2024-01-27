@@ -94,7 +94,7 @@ export class BeanCli extends BeanBase {
     return command;
   }
 
-  _findCliCommand({ cliFullName }) {
+  _findCliCommand({ cliFullName }: any) {
     if (!__commandsMap) {
       this._collectCommands();
     }

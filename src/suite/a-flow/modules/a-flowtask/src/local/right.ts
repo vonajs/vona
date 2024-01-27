@@ -6,40 +6,40 @@ export class LocalRight extends BeanBase {
   get modelFlowTask() {
     return this.ctx.model.module(__ThisModule__).flowTask;
   }
-  _check_specificFlag_normal({ flowTask }) {
+  _check_specificFlag_normal({ flowTask }: any) {
     if (flowTask.specificFlag === 1 || flowTask.specificFlag === 2) this.ctx.throw(403);
   }
-  _check_specificFlag_0({ flowTask }) {
+  _check_specificFlag_0({ flowTask }: any) {
     if (flowTask.specificFlag !== 0) this.ctx.throw(403);
   }
-  _check_specificFlag_1({ flowTask }) {
+  _check_specificFlag_1({ flowTask }: any) {
     if (flowTask.specificFlag !== 1) this.ctx.throw(403);
   }
-  _check_specificFlag_2({ flowTask }) {
+  _check_specificFlag_2({ flowTask }: any) {
     if (flowTask.specificFlag !== 2) this.ctx.throw(403);
   }
-  _check_sameUser({ flowTask, user }) {
+  _check_sameUser({ flowTask, user }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // must be the same user
     if (user && user.id !== 0 && user.id !== flowTask.userIdAssignee) {
       this.ctx.throw.module(__ThisModule__, 1002, flowTaskId);
     }
   }
-  _check_notDone({ flowTask }) {
+  _check_notDone({ flowTask }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // not complete
     if (flowTask.flowTaskStatus === 1) {
       this.ctx.throw.module(__ThisModule__, 1005, flowTaskId);
     }
   }
-  _check_notDoneAndHandled({ flowTask }) {
+  _check_notDoneAndHandled({ flowTask }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // not complete and not handled
     if (flowTask.flowTaskStatus === 1 || flowTask.handleStatus !== 0) {
       this.ctx.throw.module(__ThisModule__, 1005, flowTaskId);
     }
   }
-  _check_claimed({ flowTask }) {
+  _check_claimed({ flowTask }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // timeClaimed first
     if (!flowTask.timeClaimed) {

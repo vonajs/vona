@@ -10,7 +10,7 @@ export class BeanCms extends BeanBase {
     return this.ctx.bean._getBean('a-cms.local.site');
   }
 
-  build({ atomClass }) {
+  build({ atomClass }: any) {
     return this.ctx.bean._newBean(`a-cms.local.build`, atomClass);
   }
 }

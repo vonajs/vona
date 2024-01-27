@@ -82,7 +82,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     return await this.__actions_fetchActions_fromMeta({ atomClass, atomClassBase, basic, user });
   }
 
-  __actions_fetchActions_patchDraft({ atomClass, actions }) {
+  __actions_fetchActions_patchDraft({ atomClass, actions }: any) {
     const checks = [
       { code: 3, name: 'write' },
       { code: 4, name: 'delete' },

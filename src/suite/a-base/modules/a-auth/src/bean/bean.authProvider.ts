@@ -10,7 +10,7 @@ export class BeanAuthProvider extends BeanBase {
     return this.ctx.bean.local.module(__ThisModule__).passport;
   }
 
-  getAuthProviderBase({ module, providerName }) {
+  getAuthProviderBase({ module, providerName }: any) {
     const providerFullName = `${module}:${providerName}`;
     const authProviders = this.ctx.bean.base.authProviders();
     return authProviders[providerFullName];
@@ -36,7 +36,7 @@ export class BeanAuthProvider extends BeanBase {
     });
   }
 
-  createAuthProviderBean({ module, providerName, providerScene }) {
+  createAuthProviderBean({ module, providerName, providerScene }: any) {
     const providerFullName = `${module}:${providerName}`;
     const authProvider = this.getAuthProviderBase({ module, providerName });
     const beanName = authProvider.meta.bean;
@@ -65,7 +65,7 @@ export class BeanAuthProvider extends BeanBase {
     });
   }
 
-  _combineAuthenticateUrls({ module, providerName, providerScene }) {
+  _combineAuthenticateUrls({ module, providerName, providerScene }: any) {
     const authProvider = this.getAuthProviderBase({ module, providerName });
     const urlParamScene = authProvider.meta.scene ? `/${providerScene}` : '';
     return {

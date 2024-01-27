@@ -67,16 +67,16 @@ export class Watcher extends BeanBase {
   }
 
   // called by this.app
-  reload({ action }) {
+  reload({ action }: any) {
     this.app.meta.messenger.callAgent({ name: 'a-cms:reload', data: { action } });
   }
 
-  _getWatcherKey({ development, subdomain, atomClass }) {
+  _getWatcherKey({ development, subdomain, atomClass }: any) {
     if (development) return 'development';
     return `${subdomain}&&${atomClass.module}&&${atomClass.atomClassName}`;
   }
 
-  _getWatcherAtomClass({ development, subdomain, atomClass }) {
+  _getWatcherAtomClass({ development, subdomain, atomClass }: any) {
     const watcherKey = this._getWatcherKey({ development, subdomain, atomClass });
     if (!this._watchers[watcherKey]) {
       this._watchers[watcherKey] = {};
@@ -84,7 +84,7 @@ export class Watcher extends BeanBase {
     return this._watchers[watcherKey];
   }
 
-  _getWatcherAtomClassLanguage({ development, subdomain, atomClass, language }) {
+  _getWatcherAtomClassLanguage({ development, subdomain, atomClass, language }: any) {
     const watchers = this._getWatcherAtomClass({ development, subdomain, atomClass });
     if (!watchers[language]) {
       watchers[language] = {};
@@ -93,7 +93,7 @@ export class Watcher extends BeanBase {
   }
 
   // invoked in agent
-  _registerLanguages({ info, watcherInfos }) {
+  _registerLanguages({ info, watcherInfos }: any) {
     // clear
     const watchers = this._getWatcherAtomClass({ subdomain: info.subdomain, atomClass: info.atomClass });
     for (const language in watchers) {
@@ -110,7 +110,7 @@ export class Watcher extends BeanBase {
   }
 
   // invoked in agent
-  _register({ development, subdomain, atomClass, language, watchers }) {
+  _register({ development, subdomain, atomClass, language, watchers }: any) {
     // watchers
     if (development) {
       watchers = this._collectDevelopmentWatchDirs();
@@ -223,7 +223,7 @@ export class Watcher extends BeanBase {
   }
 
   //  invoked in agent
-  _reloadByApp({ action }) {
+  _reloadByApp({ action }: any) {
     if (action === 'now') {
       if (this._freezeCounter > 0) {
         this._needReload = true;

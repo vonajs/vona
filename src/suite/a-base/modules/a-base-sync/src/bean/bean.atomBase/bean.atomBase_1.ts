@@ -8,7 +8,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     return item._meta;
   }
 
-  _appendRevisionToHistory({ items, item, atomClassBase }) {
+  _appendRevisionToHistory({ items, item, atomClassBase }: any) {
     if (atomClassBase && atomClassBase.itemOnly) return;
     // items
     if (item) {
@@ -77,7 +77,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  _dictTranslateField_getDickKey({ item, field }) {
+  _dictTranslateField_getDickKey({ item, field }: any) {
     const dictKey = field.dictKey;
     if (dictKey) return dictKey;
     const dictKeyFrom = field.dictKeyFrom;
@@ -110,7 +110,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     return item;
   }
 
-  _atomDisabledTranslate({ items, item, atomClassBase }) {
+  _atomDisabledTranslate({ items, item, atomClassBase }: any) {
     if (atomClassBase && atomClassBase.itemOnly) return;
     // items
     if (item) {
@@ -122,7 +122,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  _atomDisabledTranslate_item({ item }) {
+  _atomDisabledTranslate_item({ item }: any) {
     //
     if (!item.atomDisabled) return;
     //
@@ -222,7 +222,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  _atomNameLocaleTranslate({ items, item, atomClassBase }) {
+  _atomNameLocaleTranslate({ items, item, atomClassBase }: any) {
     if (atomClassBase && atomClassBase.itemOnly) return;
     if (atomClassBase && !atomClassBase.resource) return;
     // items
@@ -247,7 +247,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  _atomLanguageLocaleTranslate({ items, item, atomClassBase }) {
+  _atomLanguageLocaleTranslate({ items, item, atomClassBase }: any) {
     if (atomClassBase && atomClassBase.itemOnly) return;
     // items
     if (item) {

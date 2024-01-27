@@ -129,7 +129,7 @@ export class LocalUser extends BeanBase {
     await this.ctx.bean.status.set(key, theme);
   }
 
-  _getThemeKey({ appKey, user }) {
+  _getThemeKey({ appKey, user }: any) {
     return `user-theme:${user.id}:${appKey || __appKeyDefault}`;
   }
 }

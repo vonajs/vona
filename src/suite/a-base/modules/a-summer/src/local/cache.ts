@@ -4,7 +4,7 @@ import { Local } from '@cabloy/core';
 
 @Local()
 export class LocalCache extends CacheBase {
-  constructor({ cacheBase }) {
+  constructor({ cacheBase }: any) {
     super({ cacheBase });
   }
 

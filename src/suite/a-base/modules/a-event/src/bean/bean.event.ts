@@ -35,7 +35,7 @@ export class BeanEvent extends BeanModuleScopeBase {
     return context.result;
   }
 
-  _getEventArray({ module, name }) {
+  _getEventArray({ module, name }: any) {
     module = module || this.moduleScope;
     const key = `${module}:${name}`;
     const events = this.ctx.bean.util.getPropertyObject(this.ctx.app.meta, 'events');

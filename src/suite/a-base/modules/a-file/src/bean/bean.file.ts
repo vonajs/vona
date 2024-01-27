@@ -569,7 +569,7 @@ export class BeanFile extends BeanBase {
     }
   }
 
-  getDownloadUrl({ downloadId, atomId, mode, fileExt }) {
+  getDownloadUrl({ downloadId, atomId, mode, fileExt }: any) {
     let url = `/api/a/file/file/download/${downloadId}${mode === 1 || mode === 3 ? fileExt : ''}`;
     if (atomId) {
       url = `${url}?atomId=${atomId}`;

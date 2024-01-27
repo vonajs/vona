@@ -4,11 +4,11 @@ import { BeanFlowBehaviorBase } from '../common/flowBehaviorBase.js';
 
 @Bean({ scene: 'flow.behavior' })
 export class FlowBehaviorBase extends BeanFlowBehaviorBase {
-  getBehaviorDefOptions({ behaviorDefId, options }) {
+  getBehaviorDefOptions({ behaviorDefId, options }: any) {
     return this.nodeInstance.nodeBaseBean.getBehaviorDefOptions({ behaviorDefId, options });
   }
 
-  getNodeDefOptions({ options }) {
+  getNodeDefOptions({ options }: any) {
     return this.nodeInstance.nodeBaseBean.getNodeDefOptions({ options });
   }
 

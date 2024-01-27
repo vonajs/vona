@@ -72,7 +72,7 @@ export class BeanBaseUtils extends BeanBaseThemes {
   }
 
   // alert
-  getAlertUrl({ data }) {
+  getAlertUrl({ data }: any) {
     return this.getAbsoluteUrl(`/#!/a/basefront/base/alert?data=${encodeURIComponent(JSON.stringify(data))}`);
   }
 }

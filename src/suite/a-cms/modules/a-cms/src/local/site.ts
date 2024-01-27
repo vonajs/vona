@@ -74,7 +74,7 @@ export class LocalSite extends BeanBase {
     return build.getUrl(site, language, path);
   }
 
-  buildLanguagesQueue({ atomClass, progressId }) {
+  buildLanguagesQueue({ atomClass, progressId }: any) {
     // queue
     this.ctx.meta.util.queuePush({
       module: __ThisModule__,
@@ -88,7 +88,7 @@ export class LocalSite extends BeanBase {
     });
   }
 
-  buildLanguageQueue({ atomClass, language, progressId }) {
+  buildLanguageQueue({ atomClass, language, progressId }: any) {
     // queue
     this.ctx.meta.util.queuePush({
       module: __ThisModule__,

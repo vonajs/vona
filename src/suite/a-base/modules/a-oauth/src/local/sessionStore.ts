@@ -17,7 +17,7 @@ export class LocalSessionStore extends BeanBase {
     return this._redis;
   }
 
-  _getKeyToken({ ctx, token }) {
+  _getKeyToken({ ctx, token }: any) {
     return `${ctx.instance ? ctx.instance.id : 0}:${token}`;
   }
 
