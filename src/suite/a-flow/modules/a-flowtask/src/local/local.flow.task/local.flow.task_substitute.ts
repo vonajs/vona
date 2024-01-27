@@ -1,4 +1,5 @@
 import { LocalFlowTaskForward } from './local.flow.task_forward.js';
+import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
   // handle: assignee/remark
@@ -80,7 +81,7 @@ export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
     await this.modelFlowTask.delete({ id: taskTo.id });
     await this.modelFlowTaskHistory.delete({ flowTaskId: taskTo.id });
     // notify
-    this._notifyTaskClaimings(taskTo.userIdAssignee);
+    (this as unknown as LocalFlowTaskNotify)._notifyTaskClaimings(taskTo.userIdAssignee);
     // 2. update
     // flowTask
     this.contextTask._flowTask.timeHandled = null;

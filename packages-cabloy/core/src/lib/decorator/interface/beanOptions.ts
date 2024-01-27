@@ -24,7 +24,6 @@ export type TypeDecoratorBeanOptionsScene =
   | 'event'
   | 'stats'
   | 'local.flow'
-  | 'local.context'
   | 'flow.node'
   | 'flow.behavior'
   | 'flow.service'

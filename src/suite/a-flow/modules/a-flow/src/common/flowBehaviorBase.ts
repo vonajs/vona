@@ -22,39 +22,39 @@ export class BeanFlowBehaviorBase extends BeanBase {
     }
   }
 
-  getBehaviorDefOptions(context, next) {
+  getBehaviorDefOptions(_context, next) {
     return next();
   }
 
-  getNodeDefOptions(context, next) {
+  getNodeDefOptions(_context, next) {
     return next();
   }
 
-  async enter(context, next) {
+  async enter(_context, next) {
     return await next();
   }
 
-  async begin(context, next) {
+  async begin(_context, next) {
     return await next();
   }
 
-  async doing(context, next) {
+  async doing(_context, next) {
     return await next();
   }
 
-  async end(context, next) {
+  async end(_context, next) {
     return await next();
   }
 
-  async leave(context, next) {
+  async leave(_context, next) {
     return await next();
   }
 
-  async clear(context, next) {
+  async clear(_context, next) {
     return await next();
   }
 
-  async change(context, next) {
+  async change(_context, next) {
     return await next();
   }
 }

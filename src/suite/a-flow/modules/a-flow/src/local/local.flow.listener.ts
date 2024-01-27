@@ -1,11 +1,12 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
 import assert from 'assert';
+import { LocalContextFlow } from './local.context.flow.js';
 
 @Bean({ scene: 'local.flow' })
 export class LocalFlowListener extends BeanBase {
   flowInstance: any;
-  context: any;
+  context: LocalContextFlow;
   _flowListener: any;
 
   constructor({ flowInstance, context }: any) {
@@ -30,7 +31,7 @@ export class LocalFlowListener extends BeanBase {
     globals.__contextFlow = this.context;
     globals.assert = {
       equal: (...args) => {
-        assert.equal(...args);
+        (<any>assert.equal)(...args);
       },
     };
     // new class

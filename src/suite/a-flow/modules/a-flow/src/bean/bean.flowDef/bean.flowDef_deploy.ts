@@ -1,3 +1,4 @@
+import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
 import { BeanFlowDefPrepare } from './bean.flowDef_prepare.js';
@@ -29,7 +30,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
   async _deploy_atomState_inner({ atomClass }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     // all flowDefs
-    const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom');
+    const _nodeBaseBean = this.ctx.bean._newBean(FlowNodeStartEventAtom);
     const conditions = await _nodeBaseBean._getAllConditions({ atomClassId, needFlowContent: true });
     if (conditions.length === 0) {
       // delete dict
@@ -62,11 +63,11 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
       }
       // start
       if (!dictItemStart) {
-        dictItemStart = this._deploy_atomState_combineDictItem({ node: nodeStart, code: 1, dictLocales });
+        dictItemStart = <any>this._deploy_atomState_combineDictItem({ node: nodeStart, code: 1, dictLocales });
       }
       // end
       if (!dictItemEnd) {
-        dictItemEnd = this._deploy_atomState_combineDictItem({ node: nodeEnd, code: -1, dictLocales });
+        dictItemEnd = <any>this._deploy_atomState_combineDictItem({ node: nodeEnd, code: -1, dictLocales });
       }
       // append
       if (mode === 1) {
@@ -78,7 +79,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
           title: flowName,
           dictLocales,
         });
-        dictGroup.children = dictItemsTask;
+        (<any>dictGroup).children = dictItemsTask;
         dictItems.push(dictGroup);
       } else {
         // array

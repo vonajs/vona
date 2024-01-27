@@ -1,4 +1,6 @@
 import { LocalFlowTaskCancelFlow } from './local.flow.task_cancelFlow.js';
+import { LocalFlowTaskEvent } from './local.flow.task_event.js';
+import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
   async _claim() {
@@ -28,7 +30,7 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
       [this.ctx.instance.id, flowTask.flowNodeId],
     );
     if (_taskRecall) {
-      this._notifyTaskHandlings(_taskRecall.userIdAssignee);
+      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(_taskRecall.userIdAssignee);
       // delete task
       await this.ctx.model.query(
         `
@@ -57,7 +59,7 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
         [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
       );
       for (const _task of _tasks) {
-        this._notifyTaskClaimings(_task.userIdAssignee);
+        (this as unknown as LocalFlowTaskNotify)._notifyTaskClaimings(_task.userIdAssignee);
       }
       // delete other tasks
       await this.ctx.model.query(
@@ -76,10 +78,10 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
       );
     }
     // event: task.claimed
-    await this.raiseEventClaimed();
+    await (this as unknown as LocalFlowTaskEvent).raiseEventClaimed();
     // notify
-    this._notifyTaskClaimings(flowTask.userIdAssignee);
-    this._notifyTaskHandlings(flowTask.userIdAssignee);
+    (this as unknown as LocalFlowTaskNotify)._notifyTaskClaimings(flowTask.userIdAssignee);
+    (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(flowTask.userIdAssignee);
     // ok
     return { timeClaimed };
   }

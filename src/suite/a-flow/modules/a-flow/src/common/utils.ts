@@ -1,4 +1,4 @@
-export default ({ ctx /* flowInstance*/ }) => {
+export default ({ ctx /* flowInstance*/ }: any) => {
   class Utils {
     context: any;
     contextNode: any;

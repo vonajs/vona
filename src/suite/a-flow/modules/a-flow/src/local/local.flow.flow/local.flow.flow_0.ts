@@ -3,15 +3,22 @@ import { BeanBase } from '@cabloy/core';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
+import { LocalContextFlow } from '../local.context.flow.js';
+import { LocalFlowListener } from '../local.flow.listener.js';
+import { LocalFlowNode } from '../local.flow.node.js';
+import { LocalFlowEdge } from '../local.flow.edge.js';
 
 export class LocalFlowFlow0 extends BeanBase {
+  context: LocalContextFlow;
+  _flowListener: LocalFlowListener;
+
   __init__({ flowDef }: any) {
     // context
-    this.context = this.ctx.bean._newBean(`${__ThisModule__}.local.context.flow`, {
+    this.context = this.ctx.bean._newBean(LocalContextFlow, {
       flowDef,
     });
     // listener
-    this._flowListener = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.listener`, {
+    this._flowListener = this.ctx.bean._newBean(LocalFlowListener, {
       flowInstance: this,
       context: this.context,
     });
@@ -85,7 +92,7 @@ export class LocalFlowFlow0 extends BeanBase {
       contextEdge,
     });
     // enter
-    return await nodeInstanceNext.enter();
+    return await nodeInstanceNext!.enter();
   }
 
   async _contextInit({ flowId, history }: any) {
@@ -154,7 +161,7 @@ export class LocalFlowFlow0 extends BeanBase {
       flowName = this.context._flowDef.atomName;
     }
     // flow
-    const data = {
+    const data: any = {
       flowDefId: this.context._flowDef.atomId,
       flowDefKey: this.context._flowDef.atomStaticKey,
       flowDefRevision: this.context._flowDef.atomRevision,
@@ -180,7 +187,7 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   _createNodeInstance2({ nodeDef, contextEdge }: any) {
-    const node = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.node`, {
+    const node = this.ctx.bean._newBean(LocalFlowNode, {
       flowInstance: this,
       context: this.context,
       contextEdge,
@@ -205,7 +212,7 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   async _createEdgeInstance({ edgeDef, contextNode }: any) {
-    const edge = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.edge`, {
+    const edge = this.ctx.bean._newBean(LocalFlowEdge, {
       flowInstance: this,
       context: this.context,
       contextNode,

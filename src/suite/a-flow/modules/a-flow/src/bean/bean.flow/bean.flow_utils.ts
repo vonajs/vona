@@ -26,6 +26,6 @@ export class BeanFlowUtils extends BeanFlowStart {
     if (parameter !== undefined) {
       context.parameter = parameter;
     }
-    return await beanInstance.execute(context);
+    return await (<any>beanInstance).execute(context);
   }
 }

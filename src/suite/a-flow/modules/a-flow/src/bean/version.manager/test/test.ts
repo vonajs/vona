@@ -1,7 +1,7 @@
 import { BeanBase } from '@cabloy/core';
 
 export class VersionTest extends BeanBase {
-  async run(_options) {
+  async run() {
     // why add these test codes
     //   - for force flowHistory.id !== flow.id
     // flowHistory

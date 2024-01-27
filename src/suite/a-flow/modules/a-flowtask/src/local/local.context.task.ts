@@ -1,7 +1,5 @@
-import { Bean, BeanBase } from '@cabloy/core';
-
-@Bean({ scene: 'local.context' })
-export class LocalContextTask extends BeanBase {
+// not extends BeanBase
+export class LocalContextTask {
   context: any;
   contextNode: any;
   _nodeDef: any;
@@ -13,7 +11,6 @@ export class LocalContextTask extends BeanBase {
   _user: any;
 
   constructor({ context, contextNode, nodeDef }: any) {
-    super();
     this.context = context;
     this.contextNode = contextNode;
     this._nodeDef = nodeDef;

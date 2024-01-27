@@ -1,10 +1,11 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { LocalContextEdge } from './local.context.edge.js';
+import { LocalContextFlow } from './local.context.flow.js';
 
-@Bean({ scene: 'local.context' })
-export class LocalContextNode extends BeanBase {
+// not extends BeanBase
+export class LocalContextNode {
   // contextEdge maybe null
-  context: any;
-  contextEdge: any;
+  context: LocalContextFlow;
+  contextEdge: LocalContextEdge;
   _nodeDef: any;
   _flowNodeId: any;
   _flowNode: any;
@@ -13,7 +14,6 @@ export class LocalContextNode extends BeanBase {
   _utils: any;
 
   constructor({ context, contextEdge, nodeDef }: any) {
-    super();
     this.context = context;
     this.contextEdge = contextEdge;
     this._nodeDef = nodeDef;

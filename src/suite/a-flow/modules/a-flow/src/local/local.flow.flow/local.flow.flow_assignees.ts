@@ -40,6 +40,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     if (!str) return null;
     // roleIds
     const roleIds = await this.ctx.bean.flow._adjustAssignees_roleIds(str);
+    if (!roleIds) return null;
     // users
     let users: any[] = [];
     for (const roleId of roleIds) {
@@ -81,7 +82,8 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     }
   }
 
-  _parseUserVar_flowUser(/* { nodeInstance }*/) {
+  _parseUserVar_flowUser({ nodeInstance }: any) {
+    nodeInstance;
     return this.context._flow.flowUserId;
   }
 

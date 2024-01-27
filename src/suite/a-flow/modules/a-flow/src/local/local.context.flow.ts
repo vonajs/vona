@@ -1,7 +1,5 @@
-import { Bean, BeanBase } from '@cabloy/core';
-
-@Bean({ scene: 'local.context' })
-export class LocalContextFlow extends BeanBase {
+// not extends BeanBase
+export class LocalContextFlow {
   _flowDef: any;
   _flowDefContent: any;
   _flowId: any;
@@ -12,7 +10,6 @@ export class LocalContextFlow extends BeanBase {
   _utils: any;
 
   constructor({ flowDef }: any) {
-    super();
     this._flowDef = flowDef;
     this._flowDefContent = JSON.parse(this._flowDef.content);
     //

@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowFlowAssignees } from './local.flow.flow_assignees.js';
+import { LocalFlowFlowMessage } from './local.flow.flow_message.js';
 
 export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
   async _endFlow(options) {
@@ -94,6 +95,6 @@ export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
     // publish uniform message
     const userOp = this._getOpUser();
     const flowUserId = this.context._flow.flowUserId;
-    await this._publishMessageFlowEnd({ flowUserId, user: userOp });
+    await (this as unknown as LocalFlowFlowMessage)._publishMessageFlowEnd({ flowUserId, user: userOp });
   }
 }

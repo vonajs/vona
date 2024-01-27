@@ -2,6 +2,8 @@ import { LocalFlowTaskEvent } from './local.flow.task_event.js';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
+import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
+import { LocalFlowTaskMessage } from './local.flow.task_message.js';
 
 export class LocalFlowTaskInit extends LocalFlowTaskEvent {
   async init({ userIdAssignee, user }: any) {
@@ -22,7 +24,7 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
     // options
     const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     // flowTask
-    const data = {
+    const data: any = {
       flowId: this.context._flowId,
       flowNodeId: this.contextNode._flowNodeId,
       flowTaskStatus: 0,
@@ -37,9 +39,9 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
     data.flowTaskId = flowTaskId;
     await this.modelFlowTaskHistory.insert(data);
     // notify
-    this._notifyTaskClaimings(userIdAssignee);
+    (this as unknown as LocalFlowTaskNotify)._notifyTaskClaimings(userIdAssignee);
     // publish uniform message
-    await this._publishMessageTaskInit({ flowTaskId, userIdAssignee, user });
+    await (this as unknown as LocalFlowTaskMessage)._publishMessageTaskInit({ flowTaskId, userIdAssignee, user });
     // ok
     return flowTaskId;
   }

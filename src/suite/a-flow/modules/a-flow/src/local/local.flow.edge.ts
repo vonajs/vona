@@ -2,12 +2,16 @@ import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import UtilsFn from '../common/utils.js';
+import { LocalContextEdge } from './local.context.edge.js';
+import { LocalContextNode } from './local.context.node.js';
+import { LocalContextFlow } from './local.context.flow.js';
 
 @Bean({ scene: 'local.flow' })
 export class LocalFlowEdge extends BeanBase {
   flowInstance: any;
-  context: any;
-  contextNode: any;
+  context: LocalContextFlow;
+  contextNode: LocalContextNode;
+  contextEdge: LocalContextEdge;
   _edgeBase: any;
   _edgeBaseBean: any;
 
@@ -22,7 +26,7 @@ export class LocalFlowEdge extends BeanBase {
 
   __init__({ context, contextNode, edgeDef }: any) {
     // context
-    this.contextEdge = this.ctx.bean._newBean(`${__ThisModule__}.local.context.edge`, {
+    this.contextEdge = this.ctx.bean._newBean(LocalContextEdge, {
       context,
       contextNode,
       edgeDef,

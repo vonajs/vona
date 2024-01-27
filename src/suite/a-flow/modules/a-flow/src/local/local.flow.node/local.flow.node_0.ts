@@ -3,6 +3,9 @@ import { BeanBase } from '@cabloy/core';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
+import { LocalContextNode } from '../local.context.node.js';
+import { LocalContextEdge } from '../local.context.edge.js';
+import { LocalContextFlow } from '../local.context.flow.js';
 
 const __behaviorBaseDef = {
   id: 'behavior_0',
@@ -13,8 +16,9 @@ const __behaviorBaseDef = {
 export class LocalFlowNode0 extends BeanBase {
   // contextEdge maybe null
   flowInstance: any;
-  context: any;
-  contextEdge: any;
+  context: LocalContextFlow;
+  contextNode: LocalContextNode;
+  contextEdge: LocalContextEdge;
   _nodeBase: any;
   _nodeBaseBean: any;
   _behaviors: any;
@@ -31,7 +35,7 @@ export class LocalFlowNode0 extends BeanBase {
 
   __init__({ context, contextEdge, nodeDef }: any) {
     // context
-    this.contextNode = this.ctx.bean._newBean(`${__ThisModule__}.local.context.node`, {
+    this.contextNode = this.ctx.bean._newBean(LocalContextNode, {
       context,
       contextEdge,
       nodeDef,

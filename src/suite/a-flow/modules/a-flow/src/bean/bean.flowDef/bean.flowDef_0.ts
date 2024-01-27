@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
+import { BeanFlowDefPrepare } from './bean.flowDef_prepare.js';
 
 export class BeanFlowDef0 extends BeanBase {
   get modelFlowDef() {
@@ -44,7 +45,7 @@ export class BeanFlowDef0 extends BeanBase {
 
   async _getByKey({ flowDefKey, flowDefRevision, atomStage }: any) {
     // fullKey
-    const { fullKey } = this._combineFullKey({ flowDefKey });
+    const { fullKey } = (this as unknown as BeanFlowDefPrepare)._combineFullKey({ flowDefKey });
     // from db
     return await this.ctx.bean.atom.readByStaticKey({
       atomClass: this.atomClass,

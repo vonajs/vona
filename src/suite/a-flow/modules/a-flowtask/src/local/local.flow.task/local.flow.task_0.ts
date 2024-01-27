@@ -32,6 +32,6 @@ export class LocalFlowTask0 extends BeanBase {
     return this.ctx.model.module(__ThisModule__).flowTaskHistory;
   }
   get localRight() {
-    return this.ctx.bean._getBean('a-flowtask.local.right');
+    return this.bean.scope('a-flowtask').local.right;
   }
 }

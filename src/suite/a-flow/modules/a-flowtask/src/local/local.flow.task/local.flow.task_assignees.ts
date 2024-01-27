@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskAppendHandleRemark } from './local.flow.task_appendHandleRemark.js';
+import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
   async _assignees() {
@@ -53,7 +54,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
     // handle
     await this._assigneesConfirmation_handle({ handle });
     // notify
-    this._notifyTaskHandlings(flowTask.userIdAssignee);
+    (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(flowTask.userIdAssignee);
   }
 
   async _assigneesConfirmation_handle({ handle }: any) {

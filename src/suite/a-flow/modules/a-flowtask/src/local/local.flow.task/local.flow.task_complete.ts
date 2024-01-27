@@ -1,5 +1,8 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskClaim } from './local.flow.task_claim.js';
+import { LocalFlowTaskEvent } from './local.flow.task_event.js';
+import { LocalFlowTaskInit } from './local.flow.task_init.js';
+import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
   async _complete({ handle, formAtom }: any) {
@@ -8,7 +11,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     // flowTask
     const flowTask = this.contextTask._flowTask;
     // options
-    const options = this._getNodeOptionsTask();
+    const options = (this as unknown as LocalFlowTaskInit)._getNodeOptionsTask();
     // check right
     await this.localRight.complete({ flowTask, user, handle, getOptions: () => options });
     // formAtom
@@ -19,13 +22,13 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     if (handle) {
       await this._complete_handle({ handle, options });
       // event: task.completed
-      await this.raiseEventCompleted();
+      await (this as unknown as LocalFlowTaskEvent).raiseEventCompleted();
       // check if node done
       this.ctx.tail(async () => {
         await this._complete_tail({ flowTask, user });
       });
       // notify
-      this._notifyTaskHandlings(flowTask.userIdAssignee);
+      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(flowTask.userIdAssignee);
     }
   }
 
@@ -144,7 +147,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
         },
       );
       // notify
-      this._notifyTaskHandlings(taskFrom.userIdAssignee);
+      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(taskFrom.userIdAssignee);
       // next
       flowTaskIdForwardFrom = taskFrom.flowTaskIdForwardFrom;
     }
@@ -170,7 +173,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
         },
       );
       // notify
-      this._notifyTaskHandlings(taskFrom.userIdAssignee);
+      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(taskFrom.userIdAssignee);
       // next
       flowTaskIdSubstituteFrom = taskFrom.flowTaskIdSubstituteFrom;
     }

@@ -57,7 +57,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     // load flow
     const flowInstance = await this._loadFlowInstance({ flowId: flowNode.flowId, history });
     // load flow node
-    const flowNodeInstance = await flowInstance._loadNodeInstance({ flowNode, history });
+    const flowNodeInstance = await flowInstance!._loadNodeInstance({ flowNode, history });
     return flowNodeInstance;
   }
 }

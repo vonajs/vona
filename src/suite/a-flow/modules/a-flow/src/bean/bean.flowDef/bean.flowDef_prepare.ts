@@ -55,7 +55,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
     const flowServiceBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const relativeName = module.info.relativeName;
-      const beans = module.main.beans;
+      const beans = module.resource.beans;
       if (!beans) continue;
       const res = this._prepareFlowServiceBasesModule(relativeName, beans);
       if (Object.keys(res).length > 0) {
