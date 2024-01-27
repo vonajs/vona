@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
+import { BeanAtomSchema } from './bean.atom_schema.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -94,7 +95,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       //   options.where['a.atomClassId'] = atomClass.id;
       // }
       // schema
-      const atomSchema = await this._prepareAtomSchema({
+      const atomSchema = await (this as unknown as BeanAtomSchema)._prepareAtomSchema({
         mode: options.containerMode || 'view',
         atomClass,
         options,

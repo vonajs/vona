@@ -4,7 +4,6 @@ import path from 'path';
 import { URL } from 'url';
 import is from 'is-type-of';
 import * as security from 'egg-security';
-import MixinClassesFn from 'mixin-classes';
 import Redlock from 'redlock';
 import { Request } from 'egg';
 import { CabloyContext } from '../../types/index.js';
@@ -142,7 +141,7 @@ export class AppUtil extends BeanSimple {
 
   compose(chains, adapter) {
     if (!chains) chains = [];
-    return function (context, next) {
+    return function (context, next?) {
       // last called middleware #
       let index = -1;
       return dispatch(0);
@@ -170,7 +169,7 @@ export class AppUtil extends BeanSimple {
 
   composeAsync(chains, adapter) {
     if (!chains) chains = [];
-    return function (context, next) {
+    return function (context, next?) {
       // last called middleware #
       let index = -1;
       return dispatch(0);
@@ -370,10 +369,6 @@ export class AppUtil extends BeanSimple {
       await _lock.unlock();
       throw err;
     }
-  }
-
-  mixinClasses(classMain, classesMore, ...args) {
-    return MixinClassesFn(classMain, classesMore, ...args);
   }
 
   subdomainDesp(subdomain) {

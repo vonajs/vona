@@ -59,7 +59,7 @@ export class AtomUserResourceRight extends BeanAtomBase {
     this.ctx.throw(403);
   }
 
-  _getMeta(/* item, options*/) {
+  _getMeta(_item, _options) {
     // layout: list/table/mobile/pc
     // const layout = options && options.layout;
     // meta

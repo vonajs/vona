@@ -6,6 +6,7 @@ import UtilsFn from '../../common/utils.js';
 import { LocalContextNode } from '../local.context.node.js';
 import { LocalContextEdge } from '../local.context.edge.js';
 import { LocalContextFlow } from '../local.context.flow.js';
+import { LocalFlowNodeCycle } from './local.flow.node_cycle.js';
 
 const __behaviorBaseDef = {
   id: 'behavior_0',
@@ -77,7 +78,7 @@ export class LocalFlowNode0 extends BeanBase {
     // behaviorDefId
     const behaviorDefId = (this.contextEdge && this.contextEdge._edgeDef.behavior) || '';
     // flowNode
-    const data = {
+    const data: any = {
       flowId: this.context._flowId,
       flowNodeDefId: this.contextNode._nodeDef.id,
       flowNodeName: this.contextNode._nodeDef.name,
@@ -169,7 +170,7 @@ export class LocalFlowNode0 extends BeanBase {
     await this.flowInstance._saveFlowVars();
   }
 
-  async _setCurrent(clear) {
+  async _setCurrent(clear?) {
     // flow
     this.context._flow.flowNodeIdCurrent = clear ? 0 : this.contextNode._flowNodeId;
     this.context._flow.flowNodeNameCurrent = clear ? '' : this.contextNode._nodeDef.name;
@@ -214,7 +215,7 @@ export class LocalFlowNode0 extends BeanBase {
     // nodeDef
     const nodeDef = this.contextNode._nodeDef;
     // options
-    const options = this.getNodeDefOptions();
+    const options = (this as unknown as LocalFlowNodeCycle).getNodeDefOptions();
     return nodeDef.type.indexOf('startEventAtom') > -1 ? options.task : options;
   }
 

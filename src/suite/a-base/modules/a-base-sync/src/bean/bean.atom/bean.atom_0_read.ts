@@ -1,4 +1,5 @@
 import { BeanAtom0Import } from './bean.atom_0_import.js';
+import { BeanAtomSchema } from './bean.atom_schema.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -63,7 +64,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     // hold for subsequent usage
     options.tableName = tableName;
     // schema
-    const atomSchema = await this._prepareAtomSchema({
+    const atomSchema = await (this as unknown as BeanAtomSchema)._prepareAtomSchema({
       mode: options.containerMode || 'view',
       atomClass,
       options,

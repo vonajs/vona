@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
+import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -153,7 +154,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFlowTask;
     }
     // check detail
-    const detailRightInherit = await this._checkDetailRightInherit({
+    const detailRightInherit = await (this as unknown as BeanAtomRightDetailRightInherit)._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action,

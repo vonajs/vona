@@ -1,6 +1,7 @@
 import { BeanAtomRightCheckRightFormAction } from './bean.atom_right_checkRightFormAction.js';
 
 import objectHash from 'object-hash';
+import { BeanAtomSchema } from './bean.atom_schema.js';
 
 export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRightFormAction {
   async _checkRightFromViewHistory({
@@ -107,7 +108,7 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
     });
     if (!checkRight) return null;
     // schema: use stage:formal fieldsRight
-    return await this._prepareAtomSchema({
+    return await (this as unknown as BeanAtomSchema)._prepareAtomSchema({
       mode,
       atomClass,
       options: {},

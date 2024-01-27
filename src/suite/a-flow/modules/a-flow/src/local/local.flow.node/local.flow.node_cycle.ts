@@ -51,7 +51,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
 
   async enter() {
     // current
-    await this._setCurrent();
+    await (this as unknown as LocalFlowNode0)._setCurrent();
     const res = await this._behaviorsInvokeAsync({
       methodName: 'enter',
     });
