@@ -1,10 +1,9 @@
-import { ScopeModuleABase } from '../../index.js';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanAtom0 extends BeanModuleScopeBase {
   get scope() {
-    return this.getScope() as ScopeModuleABase;
+    return this.getScope() as ScopeModule;
   }
 
   get atomClass() {

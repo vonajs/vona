@@ -1,15 +1,19 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 
 @Atom()
 export class AtomFlowDef extends BeanAtomBase {
+  get scope() {
+    return this.getScope() as ScopeModule;
+  }
+
   get model() {
-    return this.ctx.model.module(__ThisModule__).flowDef;
+    return this.scope.model.flowDef;
   }
 
   get modelFlowDefContent() {
-    return this.ctx.model.module(__ThisModule__).flowDefContent;
+    return this.scope.model.flowDefContent;
   }
 
   async default({ atomClass, item, options, user }: any) {

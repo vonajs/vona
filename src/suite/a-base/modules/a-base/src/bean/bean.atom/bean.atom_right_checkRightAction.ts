@@ -3,6 +3,7 @@ import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
 import { BeanAtomRightCheckRightFlowTask } from './bean.atom_right_checkRightFlowTask.js';
+import { BeanAtomRightCheckRightFormAction } from './bean.atom_right_checkRightFormAction.js';
 import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkRightFromViewHistory.js';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
@@ -91,7 +92,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
 
   async _checkRightAction_inner2({ atom, atomClass, action, stage, user, checkFlow, options }: any) {
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check right
     options = {
@@ -134,7 +135,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFromViewHistory;
     }
     // check formActionRight
-    const rightFormAction = await this._checkRightFormAction({
+    const rightFormAction = await (this as unknown as BeanAtomRightCheckRightFormAction)._checkRightFormAction({
       key: { atomId: atom.atomId },
       atomClass,
       atomClassBase,

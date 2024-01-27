@@ -71,7 +71,7 @@ export class BeanModelBaseInner extends BeanBase {
     return data;
   }
 
-  async default(data) {
+  async default(data?) {
     data = data || {};
     // columns
     const columns = await this.columns();

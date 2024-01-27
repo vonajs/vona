@@ -1,15 +1,19 @@
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Atom()
 export class AtomResource extends BeanAtomBase {
+  get scope() {
+    return this.getScope() as ScopeModule;
+  }
+
   get model() {
-    return this.ctx.model.module(__ThisModule__).resource;
+    return this.scope.model.resource;
   }
 
   get modelResourceLocale() {
-    return this.ctx.model.module(__ThisModule__).resourceLocale;
+    return this.scope.model.resourceLocale;
   }
 
   async default({ atomClass, item, options, user }: any) {
