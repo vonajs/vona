@@ -14,32 +14,32 @@ export class BeanSummer extends BeanModuleScopeBase {
     });
   }
 
-  async get(cacheName, key, options) {
+  async get(cacheName, key, options?) {
     const cache = this.getCache(cacheName);
     return await cache.get(key, options);
   }
 
-  async mget(cacheName, keys, options) {
+  async mget(cacheName, keys, options?) {
     const cache = this.getCache(cacheName);
     return await cache.mget(keys, options);
   }
 
-  async del(cacheName, key, options) {
+  async del(cacheName, key, options?) {
     const cache = this.getCache(cacheName);
     return await cache.del(key, options);
   }
 
-  async mdel(cacheName, keys, options) {
+  async mdel(cacheName, keys, options?) {
     const cache = this.getCache(cacheName);
     return await cache.mdel(keys, options);
   }
 
-  async clear(cacheName, options) {
+  async clear(cacheName, options?) {
     const cache = this.getCache(cacheName);
     return await cache.clear(options);
   }
 
-  async peek(cacheName, key, options) {
+  async peek(cacheName, key, options?) {
     const cache = this.getCache(cacheName);
     return await cache.peek(key, options);
   }

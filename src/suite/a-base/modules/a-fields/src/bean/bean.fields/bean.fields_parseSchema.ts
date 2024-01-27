@@ -23,14 +23,14 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
       if (fieldsRight.mode === 'allowAllFieldsReadWrite') {
         // schemaBase = schemaBase;
       } else {
-        schemaBase = this.__parseSchema_checkModeGeneral({ schemaBase, fieldsRight });
+        schemaBase = await this.__parseSchema_checkModeGeneral({ schemaBase, fieldsRight });
       }
     } else {
       // custom: array/object
       if (Array.isArray(fieldsRight.custom)) {
-        schemaBase = this.__parseSchema_checkModeCustom_array({ schemaBase, fieldsRight });
+        schemaBase = await this.__parseSchema_checkModeCustom_array({ schemaBase, fieldsRight });
       } else {
-        schemaBase = this.__parseSchema_checkModeCustom_object({ schemaBase, fieldsRight });
+        schemaBase = await this.__parseSchema_checkModeCustom_object({ schemaBase, fieldsRight });
       }
     }
     return schemaBase;
@@ -62,7 +62,8 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     };
   }
 
-  async __parseSchema_checkModeCustom_object({ /* schemaBase,*/ fieldsRight }) {
+  async __parseSchema_checkModeCustom_object({ schemaBase, fieldsRight }) {
+    schemaBase; // no used
     const schemaParams = {
       module: fieldsRight.custom.module,
       validator: fieldsRight.custom.validator,

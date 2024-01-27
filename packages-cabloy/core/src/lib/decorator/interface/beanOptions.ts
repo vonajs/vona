@@ -33,7 +33,8 @@ export type TypeDecoratorBeanOptionsScene =
   | 'cli.token'
   | 'cli.tools'
   | 'io.message'
-  | 'io.channel';
+  | 'io.channel'
+  | 'summer.cache';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name

@@ -38,13 +38,20 @@ async function main() {
   }
 }
 
-async function _moduleHandle_vars({ file, module, processHelper }) {
+async function _moduleHandle_options({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
   // 查找constructor
   const ast = gogocode(contentOld, { parseOptions: {} });
-  const ast1 = ast.find('constructor() {$$$0}');
+  const ast1 = ast.find('async $$$0(options){$$$1}');
+  if (ast1.match.length === 0) return;
   // const outAst = await snippet.transform(this.getAstData(ast, snippet));
   const ast1Src = ast1.generate();
+  if (ast1Src.replace('(options)', '(_)').indexOf('options') > -1) {
+    // console.log(file);
+    return;
+  }
+  console.log(file);
+  return;
   // 查找this参数
   const regexp = /this\.(.*?) = .*?;/g;
   const matches = ast1Src.matchAll(regexp);
@@ -66,8 +73,8 @@ async function _moduleHandle_vars({ file, module, processHelper }) {
   const contentNew = contentOld.replace(`constructor(`, `${outputNew1.join('\n')}\n\nconstructor(`);
   // console.log(contentNew);
   console.log(file);
-  await fse.outputFile(file, contentNew);
-  await processHelper.formatFile({ fileName: file });
+  // await fse.outputFile(file, contentNew);
+  // await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
@@ -88,7 +95,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_vars({ file, module, processHelper });
+    await _moduleHandle_options({ file, module, processHelper });
   }
 }
 

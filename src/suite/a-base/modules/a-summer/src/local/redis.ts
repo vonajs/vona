@@ -94,7 +94,7 @@ export class LocalRedis extends CacheBase {
     return value;
   }
 
-  __getLayered(/* options*/) {
+  __getLayered(_options?) {
     return this.localFetch;
   }
 
