@@ -86,7 +86,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     return atomClass;
   }
 
-  async _checkAtom_checkAtomClassExpect({ options }) {
+  async _checkAtom_checkAtomClassExpect({ options }: any) {
     // atomClassExpect
     const atomClassExpect = this._parseAtomClass(options.atomClass);
     // atomKey
@@ -133,7 +133,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     }
   }
 
-  async _checkAtom_prepareRoleIdOwner({ action, atomKey, atomClass, user }) {
+  async _checkAtom_prepareRoleIdOwner({ action, atomKey, atomClass, user }: any) {
     const isActionCreate = action === 'create' || action === this.constant.atom.action.create;
     const isActionClone = action === 'clone' || action === this.constant.atom.action.clone;
     const isActionWrite = action === 'write' || action === this.constant.atom.action.write;
@@ -147,7 +147,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     }
   }
 
-  async _checkAtom_prepareRoleIdOwner_inner({ atomClass, user }) {
+  async _checkAtom_prepareRoleIdOwner_inner({ atomClass, user }: any) {
     // roleIdOwner
     const roleIdOwner = await this.ctx.bean.atom.checkRightPreferredRole({
       roleIdOwner: this.ctx.request.body.roleIdOwner,

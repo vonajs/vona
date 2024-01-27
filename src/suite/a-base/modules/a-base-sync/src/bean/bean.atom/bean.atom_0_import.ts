@@ -3,7 +3,7 @@ import { BeanAtom0Export } from './bean.atom_0_export.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Import extends BeanAtom0Export {
-  async importBulk({ atomClass, options, file, user }) {
+  async importBulk({ atomClass, options, file, user }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);

@@ -19,7 +19,7 @@ export class BeanStatus extends BeanModuleScopeBase {
     await this._set({ name, value, queue: true });
   }
 
-  async _set({ name, value, queue }) {
+  async _set({ name, value, queue }: any) {
     const status = await this.modelStatus.get({
       module: this.moduleScope,
       name,

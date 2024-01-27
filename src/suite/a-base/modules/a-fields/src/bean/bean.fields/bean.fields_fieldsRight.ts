@@ -8,7 +8,7 @@ const __atomClass_userFieldsRight = {
 
 export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
   // atomClass: only main (exluding detail)
-  async getPreferredFieldsRightOfUser({ atomClass, user }) {
+  async getPreferredFieldsRightOfUser({ atomClass, user }: any) {
     if (!user || user.id === 0) return null;
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
@@ -34,12 +34,12 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
     await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfUser' });
   }
 
-  async __getFieldsRightOfAtomClassRaw({ atomClassId }) {
+  async __getFieldsRightOfAtomClassRaw({ atomClassId }: any) {
     const item = await this.modelRoleFieldsRight.get({ atomClassId });
     return !!item; // exists: true/false
   }
 
-  async __getFieldsRightOfUserRaw({ atomClassId, userId }) {
+  async __getFieldsRightOfUserRaw({ atomClassId, userId }: any) {
     const options = {
       page: { index: 0, size: 1 },
       where: {
@@ -55,7 +55,7 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
     return item?.fieldsRight ? JSON.parse(item.fieldsRight) : null;
   }
 
-  async _fieldsRightLocale({ items }) {
+  async _fieldsRightLocale({ items }: any) {
     for (const item of items) {
       // roleNameBase
       if (item.roleNameBase) {

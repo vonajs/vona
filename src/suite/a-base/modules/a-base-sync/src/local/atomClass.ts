@@ -2,23 +2,23 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalAtomClass extends BeanBase {
-  async validatorSearch({ atomClass }) {
+  async validatorSearch({ atomClass }: any) {
     return await this.ctx.bean.atomClass.validatorSearch({ atomClass });
   }
 
-  async checkRightCreate({ atomClass, user }) {
+  async checkRightCreate({ atomClass, user }: any) {
     return await this.ctx.bean.atom.checkRightCreate({ atomClass, user });
   }
 
-  async atomClass({ atomClass }) {
+  async atomClass({ atomClass }: any) {
     return await this.ctx.bean.atomClass.get(atomClass);
   }
 
-  async atomClassesUser({ user }) {
+  async atomClassesUser({ user }: any) {
     return await this.ctx.bean.atomClass.atomClassesUser({ user });
   }
 
-  async actionsUser({ atomClass, user }) {
+  async actionsUser({ atomClass, user }: any) {
     return await this.ctx.bean.atomClass.actionsUser({ atomClass, user });
   }
 }

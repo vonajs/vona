@@ -6,7 +6,7 @@ import eggBornUtils from 'egg-born-utils';
 
 @Local()
 export class LocalToken extends BeanBase {
-  async add({ name, host, clientID, clientSecret, log }) {
+  async add({ name, host, clientID, clientSecret, log }: any) {
     // init file
     const { fileName, config } = await eggBornUtils.openAuthConfig.load();
     // config
@@ -26,7 +26,7 @@ export class LocalToken extends BeanBase {
     return { fileName, config };
   }
 
-  async delete({ name, log }) {
+  async delete({ name, log }: any) {
     // init file
     const { fileName, config } = await eggBornUtils.openAuthConfig.load();
     // config
@@ -44,13 +44,13 @@ export class LocalToken extends BeanBase {
     return { fileName, config };
   }
 
-  async get({ name }) {
+  async get({ name }: any) {
     // init file
     const { config } = await eggBornUtils.openAuthConfig.load();
     return config.tokens && config.tokens[name];
   }
 
-  async list({ log }) {
+  async list({ log }: any) {
     // init file
     const { fileName, config } = await eggBornUtils.openAuthConfig.load();
     // log

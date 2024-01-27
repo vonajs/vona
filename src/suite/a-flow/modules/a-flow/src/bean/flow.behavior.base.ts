@@ -39,11 +39,11 @@ export class FlowBehaviorBase extends BeanFlowBehaviorBase {
     return false;
   }
 
-  async clear({ options }) {
+  async clear({ options }: any) {
     return await this.nodeInstance.nodeBaseBean.onNodeClear({ options });
   }
 
-  async change({ options }) {
+  async change({ options }: any) {
     return await this.nodeInstance.nodeBaseBean.onNodeChange({ options });
   }
 }

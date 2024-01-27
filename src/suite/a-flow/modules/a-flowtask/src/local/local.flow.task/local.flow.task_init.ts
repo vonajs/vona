@@ -4,7 +4,7 @@ import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
 
 export class LocalFlowTaskInit extends LocalFlowTaskEvent {
-  async init({ userIdAssignee, user }) {
+  async init({ userIdAssignee, user }: any) {
     // create flowTask
     const flowTaskId = await this._createFlowTask({ userIdAssignee, user });
     // context init
@@ -13,12 +13,12 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
     await this.raiseEventCreated();
   }
 
-  async _load({ flowTask, user, history }) {
+  async _load({ flowTask, user, history }: any) {
     // context init
     await this._contextInit({ flowTaskId: flowTask.id, user, history });
   }
 
-  async _createFlowTask({ userIdAssignee, user }) {
+  async _createFlowTask({ userIdAssignee, user }: any) {
     // options
     const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     // flowTask
@@ -44,7 +44,7 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
     return flowTaskId;
   }
 
-  async _contextInit({ flowTaskId, user, history }) {
+  async _contextInit({ flowTaskId, user, history }: any) {
     // flowTaskId
     this.contextTask._flowTaskId = flowTaskId;
     // flowTask
@@ -67,7 +67,7 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
     this.contextTask._user = user;
   }
 
-  async _hidden({ hidden }) {
+  async _hidden({ hidden }: any) {
     // flowTask
     const flowTaskHidden = hidden ? 1 : 0;
     this.contextTask._flowTask.flowTaskHidden = flowTaskHidden;

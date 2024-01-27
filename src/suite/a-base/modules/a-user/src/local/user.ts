@@ -4,7 +4,7 @@ const __appKeyDefault = 'a-app:appDefault';
 
 @Local()
 export class LocalUser extends BeanBase {
-  async save({ data, user }) {
+  async save({ data, user }: any) {
     // id
     data.id = user.id;
     // readOnly
@@ -16,42 +16,42 @@ export class LocalUser extends BeanBase {
     return await this.ctx.bean.user.save({ user: data });
   }
 
-  async saveAvatar({ data, user }) {
+  async saveAvatar({ data, user }: any) {
     const userData = { id: user.id, avatar: data.avatar };
     return await this.ctx.bean.user.save({ user: userData });
   }
 
-  async saveLocale({ data, user }) {
+  async saveLocale({ data, user }: any) {
     const userData = { id: user.id, locale: data.locale };
     return await this.ctx.bean.user.save({ user: userData });
   }
 
-  async changeUserName({ data, user }) {
+  async changeUserName({ data, user }: any) {
     const userData = { id: user.id, userName: data.userName };
     return await this.ctx.bean.user.changeUserName({ user: userData });
   }
 
-  async agent({ userId }) {
+  async agent({ userId }: any) {
     return await this.ctx.bean.user.agent({ userId });
   }
 
-  async agentsBy({ userId }) {
+  async agentsBy({ userId }: any) {
     return await this.ctx.bean.user.agentsBy({ userId });
   }
 
-  async userByMobile({ mobile }) {
+  async userByMobile({ mobile }: any) {
     return await this.ctx.bean.user.exists({ mobile });
   }
 
-  async addAgent({ userIdAgent, userId }) {
+  async addAgent({ userIdAgent, userId }: any) {
     return await this.ctx.bean.user.addAgent({ userIdAgent, userId });
   }
 
-  async removeAgent({ userIdAgent, userId }) {
+  async removeAgent({ userIdAgent, userId }: any) {
     return await this.ctx.bean.user.removeAgent({ userIdAgent, userId });
   }
 
-  async switchAgent({ userIdAgent }) {
+  async switchAgent({ userIdAgent }: any) {
     return await this.ctx.bean.user.switchAgent({ userIdAgent });
   }
 
@@ -59,7 +59,7 @@ export class LocalUser extends BeanBase {
     return await this.ctx.bean.user.switchOffAgent();
   }
 
-  async authentications({ user }) {
+  async authentications({ user }: any) {
     // 1. get auth providers list from a-login
     let listLogin = this.ctx.bean.util.extend([], this.ctx.bean.authProviderCache.getAuthProvidersConfigForLogin());
     if (listLogin.length === 0) return [];
@@ -110,7 +110,7 @@ export class LocalUser extends BeanBase {
     return meta;
   }
 
-  async authenticationDisable({ authId, user }) {
+  async authenticationDisable({ authId, user }: any) {
     // must use userId in where
     await this.ctx.model.query('delete from aAuth where iid=? and id=? and userId=?', [
       this.ctx.instance.id,
@@ -119,12 +119,12 @@ export class LocalUser extends BeanBase {
     ]);
   }
 
-  async themeLoad({ appKey, user }) {
+  async themeLoad({ appKey, user }: any) {
     const key = this._getThemeKey({ appKey, user });
     return await this.ctx.bean.status.get(key);
   }
 
-  async themeSave({ appKey, theme, user }) {
+  async themeSave({ appKey, theme, user }: any) {
     const key = this._getThemeKey({ appKey, user });
     await this.ctx.bean.status.set(key, theme);
   }

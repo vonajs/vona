@@ -24,7 +24,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     return this.configUserOnline.userOnline.expired;
   }
 
-  async register({ user, isLogin }) {
+  async register({ user, isLogin }: any) {
     user = user.agent || user.op;
     // data
     const data = {
@@ -42,7 +42,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     return res;
   }
 
-  async heartBeat({ user }) {
+  async heartBeat({ user }: any) {
     user = user.agent || user.op;
     const userId = user.id;
     const item = await this.modelUserOnline.get({ userId });
@@ -58,7 +58,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     return true;
   }
 
-  async kickOut({ user }) {
+  async kickOut({ user }: any) {
     // redis
     await this.ctx.bean.auth._clearRedisAuthAll({ user });
     // offline
@@ -67,7 +67,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     await this.sendMessageSystemLogout({ user, type: 'all' });
   }
 
-  async _offline({ user }) {
+  async _offline({ user }: any) {
     const userId = user.id;
     const item = await this.modelUserOnline.get({ userId });
     await this.modelUserOnline.update({
@@ -76,7 +76,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     });
   }
 
-  async sendMessageSystemLogout({ user, type, provider }) {
+  async sendMessageSystemLogout({ user, type, provider }: any) {
     const userId = user.id;
     // content
     const content = {
@@ -99,7 +99,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     return new Date(Date.now() + this.configUserOnlineExpired);
   }
 
-  async _insertUserOnline({ user, data, isLogin }) {
+  async _insertUserOnline({ user, data, isLogin }: any) {
     const userId = user.id;
     // check if exists
     let item = await this.modelUserOnline.get({ userId });
@@ -148,7 +148,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
     };
   }
 
-  async _insertUserOnlineHistory({ user, data, isLogin }) {
+  async _insertUserOnlineHistory({ user, data, isLogin }: any) {
     const userId = user.id;
     //   write
     const atomKey = await this.ctx.bean.atom.write({

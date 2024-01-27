@@ -15,13 +15,13 @@ export class LocalMessage extends BeanBase {
     return this.ctx.bean.local.module(__ThisModule__).procedure;
   }
 
-  async save({ message }) {
+  async save({ message }: any) {
     // insert
     const res = await this.modelMessage.insert(message);
     return res.insertId;
   }
 
-  async saveSync({ messageSync }) {
+  async saveSync({ messageSync }: any) {
     // insert
     const res = await this.modelMessageSync.insert(messageSync);
     return res.insertId;
@@ -30,7 +30,7 @@ export class LocalMessage extends BeanBase {
   // the first unread message
   // options:
   //    where
-  async offset({ messageClass, options, user }) {
+  async offset({ messageClass, options, user }: any) {
     // messageClass
     messageClass = await this.ctx.bean.io.messageClass.get(messageClass);
     // where
@@ -63,16 +63,16 @@ export class LocalMessage extends BeanBase {
     return { offset };
   }
 
-  async select({ messageClass, options, user }) {
+  async select({ messageClass, options, user }: any) {
     return await this._list({ messageClass, options, user, count: 0 });
   }
 
-  async count({ messageClass, options, user }) {
+  async count({ messageClass, options, user }: any) {
     const count = await this._list({ messageClass, options, user, count: 1 });
     return { count };
   }
 
-  async setRead({ messageClass, messageIds, all, user }) {
+  async setRead({ messageClass, messageIds, all, user }: any) {
     if ((!messageIds || messageIds.length === 0) && !all) return;
     if (all && !messageClass) return;
     // messageClass
@@ -86,7 +86,7 @@ export class LocalMessage extends BeanBase {
     return await this._setRead({ messageClass, messageIds, all, user });
   }
 
-  async _setRead({ messageClass, messageIds, all, user }) {
+  async _setRead({ messageClass, messageIds, all, user }: any) {
     const messageClassId = messageClass ? messageClass.id : 0;
     // query
     const sql = this.sqlProcedure.setRead({
@@ -101,7 +101,7 @@ export class LocalMessage extends BeanBase {
     }
   }
 
-  async delete({ messageIds, user }) {
+  async delete({ messageIds, user }: any) {
     if (!messageIds || messageIds.length === 0) return;
     // query
     const sql = this.sqlProcedure.delete({
@@ -112,7 +112,7 @@ export class LocalMessage extends BeanBase {
     await this.ctx.model.query(sql);
   }
 
-  async _list({ messageClass, options, user, count }) {
+  async _list({ messageClass, options, user, count }: any) {
     // messageClass
     messageClass = messageClass ? await this.ctx.bean.io.messageClass.get(messageClass) : null;
     // where
@@ -137,7 +137,7 @@ export class LocalMessage extends BeanBase {
   }
 }
 
-// async saveSyncs({ messageClass, message, groupUsers, persistence }) {
+// async saveSyncs({ messageClass, message, groupUsers, persistence }: any) {
 //   // messageClassId
 //   const messageClassId = messageClass.id;
 //   // messageId

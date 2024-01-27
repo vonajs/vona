@@ -1,7 +1,7 @@
 import { BeanDetailCopy } from './bean.detail_copy.js';
 
 export class BeanDetailDelete extends BeanDetailCopy {
-  async _deleteDetails({ atomClass, atomKey, user }) {
+  async _deleteDetails({ atomClass, atomKey, user }: any) {
     await this._loopDetailClasses({
       atomClass,
       fn: async ({ atomClassDetail, atomClassBaseDetail }) => {
@@ -10,7 +10,7 @@ export class BeanDetailDelete extends BeanDetailCopy {
     });
   }
 
-  async _deleteDetails_Class({ atomClassDetail, /* atomClassBaseDetail, atomClass,*/ atomKey, user }) {
+  async _deleteDetails_Class({ atomClassDetail, /* atomClassBaseDetail, atomClass,*/ atomKey, user }: any) {
     // select all details
     const details = await this.ctx.bean.atom.select({
       atomClass: atomClassDetail,
@@ -34,7 +34,7 @@ export class BeanDetailDelete extends BeanDetailCopy {
     }
   }
 
-  async _deleteDetailBase({ atomClass, key, options, user }) {
+  async _deleteDetailBase({ atomClass, key, options, user }: any) {
     await this.modelDetailBase.delete({
       detailId: key.atomId,
       detailClassId: atomClass.id,

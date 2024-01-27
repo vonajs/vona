@@ -1,7 +1,7 @@
 import { BeanAtomBaseExportBulk } from './bean.atomBase_exportBulk.js';
 
 export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
-  async performAction({ key, atomClass, action, item, options: _options, user }) {
+  async performAction({ key, atomClass, action, item, options: _options, user }: any) {
     // actionBase
     const actionBase = this.ctx.bean.base.action({
       module: atomClass.module,
@@ -16,7 +16,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     await this._performAction_cms({ key, actionBase });
   }
 
-  async _performAction_fieldsMapping({ key, actionBase, /* item,*/ user }) {
+  async _performAction_fieldsMapping({ key, actionBase, /* item,*/ user }: any) {
     const fieldsMapping = this.ctx.bean.util.getProperty(actionBase, 'params.fieldsMapping');
     if (!fieldsMapping) return;
     const keys = Object.keys(fieldsMapping);
@@ -45,7 +45,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     });
   }
 
-  async _performAction_setAtomState({ key, actionBase, item }) {
+  async _performAction_setAtomState({ key, actionBase, item }: any) {
     const atomState = this.ctx.bean.util.getProperty(actionBase, 'params.atomState');
     // allowed to be null
     if (atomState === undefined) return;
@@ -59,7 +59,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     }
   }
 
-  async _performAction_cms({ key, actionBase }) {
+  async _performAction_cms({ key, actionBase }: any) {
     // render
     const cmsRender = this.ctx.bean.util.getProperty(actionBase, 'params.cms.render');
     if (cmsRender) {

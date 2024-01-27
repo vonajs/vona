@@ -8,14 +8,14 @@ export class AtomRoleRight extends BeanAtomBase {
     return this.ctx.model.module(__ThisModule__).roleRight;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // roleRight default
     const data = await this.model.default();
     // super
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -27,7 +27,7 @@ export class AtomRoleRight extends BeanAtomBase {
     return item;
   }
 
-  async selectQuery({ atomClass, options, user }) {
+  async selectQuery({ atomClass, options, user }: any) {
     options.orders = [
       //
       ['f.moduleTarget', 'asc'],
@@ -38,7 +38,7 @@ export class AtomRoleRight extends BeanAtomBase {
     return await super.selectQuery({ atomClass, options, user });
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // adjust
@@ -49,7 +49,7 @@ export class AtomRoleRight extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     const data = await super.create({ atomClass, item, options, user });
     // atomIdMain
@@ -73,7 +73,7 @@ export class AtomRoleRight extends BeanAtomBase {
     // });
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update roleRight
@@ -91,7 +91,7 @@ export class AtomRoleRight extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // super
     await super.delete({ atomClass, key, options, user });
     // delete roleRight

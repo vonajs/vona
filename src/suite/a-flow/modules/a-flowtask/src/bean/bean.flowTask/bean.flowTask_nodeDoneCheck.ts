@@ -1,7 +1,7 @@
 import { BeanFlowTaskFlowData } from './bean.flowTask_flowData.js';
 
 export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
-  async _nodeDoneCheckLock({ flowNodeId }) {
+  async _nodeDoneCheckLock({ flowNodeId }: any) {
     // load flow node
     let nodeInstance;
     try {
@@ -66,17 +66,17 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     // here means not done
   }
 
-  async _nodeDoneCheckLock_passed({ nodeInstance, options }) {
+  async _nodeDoneCheckLock_passed({ nodeInstance, options }: any) {
     // next stage of flow node: end
     return await nodeInstance.end();
   }
 
-  async _nodeDoneCheckLock_rejected({ nodeInstance, options }) {
+  async _nodeDoneCheckLock_rejected({ nodeInstance, options }: any) {
     // rejectedNode
     return await this._gotoFlowNodePrevious({ nodeInstance, rejectedNode: options.rejectedNode });
   }
 
-  async _gotoFlowNodePrevious({ nodeInstance, rejectedNode, flowNodeRemark = 'Rejected' }) {
+  async _gotoFlowNodePrevious({ nodeInstance, rejectedNode, flowNodeRemark = 'Rejected' }: any) {
     // flowNodeId
     const flowNodeId = nodeInstance.contextNode._flowNodeId;
     // rejectedNode
@@ -96,7 +96,7 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     return await nodeInstancePrev.enter();
   }
 
-  async _findFlowNodeHistoryPrevious({ nodeInstance }) {
+  async _findFlowNodeHistoryPrevious({ nodeInstance }: any) {
     return await nodeInstance._findFlowNodeHistoryPrevious();
   }
 }

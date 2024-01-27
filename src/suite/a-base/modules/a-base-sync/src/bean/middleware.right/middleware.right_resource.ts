@@ -32,7 +32,7 @@ export class MiddlewareRightResource extends MiddlewareRightAtomClass {
     this.ctx.meta._resource = res;
   }
 
-  async _checkResource({ resourceAtomId, atomStaticKey }) {
+  async _checkResource({ resourceAtomId, atomStaticKey }: any) {
     return await this.ctx.bean.resource.checkRightResource({
       resourceAtomId,
       atomStaticKey,

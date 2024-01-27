@@ -7,7 +7,7 @@ import markdown_it_block from '@zhennann/markdown-it-block';
 
 @Bean()
 export class BeanMarkdown extends BeanBase {
-  async render({ host, content, locale }) {
+  async render({ host, content, locale }: any) {
     if (!content) return '';
     // asyncs
     const asyncs = {};

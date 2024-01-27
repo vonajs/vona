@@ -3,7 +3,7 @@ import { LocalIoInner0 } from './local.ioInner_0.js';
 
 export class LocalIoInnerQueueDelivery extends LocalIoInner0 {
   // queue: delivery
-  async queueDelivery({ path, options, message, messageSyncs, messageClass }) {
+  async queueDelivery({ path, options, message, messageSyncs, messageClass }: any) {
     // bean
     const messageClassBase = this.messageClass.messageClass(messageClass);
     const beanMessage = this._getBeanMessage(messageClassBase);

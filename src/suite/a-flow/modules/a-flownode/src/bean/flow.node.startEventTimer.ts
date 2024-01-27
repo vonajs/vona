@@ -4,7 +4,7 @@ import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
-  async deploy({ deploy, flowDefId, node }) {
+  async deploy({ deploy, flowDefId, node }: any) {
     if (deploy) {
       await this._addSchedule({ flowDefId, node });
     } else {
@@ -12,7 +12,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     }
   }
 
-  async _addSchedule({ flowDefId, node }) {
+  async _addSchedule({ flowDefId, node }: any) {
     const repeat = this._getJobRepeat(node);
     if (!repeat) return;
     if (!repeat.every && !repeat.cron) return;
@@ -92,7 +92,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
 
-  async _deleteSchedule2({ flowDefId, node }) {
+  async _deleteSchedule2({ flowDefId, node }: any) {
     const jobKeyActive = this.ctx.app.meta.queue._getRepeatKey(
       this._getJobName(flowDefId, node),
       this._getJobRepeat(node),

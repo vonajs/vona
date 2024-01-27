@@ -15,11 +15,11 @@ export class BeanSettings extends BeanModuleScopeBase {
 
   // get
 
-  async getUser({ module, name }) {
+  async getUser({ module, name }: any) {
     return await this._get({ scene: 'user', module, name });
   }
 
-  async getInstance({ module, name }) {
+  async getInstance({ module, name }: any) {
     return await this._get({ scene: 'instance', module, name });
   }
 
@@ -35,7 +35,7 @@ export class BeanSettings extends BeanModuleScopeBase {
     return this._getValidator({ scene: 'user', module: ops.module });
   }
 
-  async saveSettingsUser({ module, data }) {
+  async saveSettingsUser({ module, data }: any) {
     return await this._saveSettings({ scene: 'user', module, data });
   }
 
@@ -51,13 +51,13 @@ export class BeanSettings extends BeanModuleScopeBase {
     return this._getValidator({ scene: 'instance', module: ops.module });
   }
 
-  async saveSettingsInstance({ module, data }) {
+  async saveSettingsInstance({ module, data }: any) {
     return await this._saveSettings({ scene: 'instance', module, data });
   }
 
   // function
 
-  async _get({ scene, module, name }) {
+  async _get({ scene, module, name }: any) {
     module = module || this.moduleScope;
     const res = await this.modelSettingsRef.get({
       module,
@@ -75,7 +75,7 @@ export class BeanSettings extends BeanModuleScopeBase {
     return data;
   }
 
-  async _loadSettings({ scene, module }) {
+  async _loadSettings({ scene, module }: any) {
     module = module || this.moduleScope;
     const res = await this.modelSettings.get({
       module,
@@ -87,7 +87,7 @@ export class BeanSettings extends BeanModuleScopeBase {
     return res ? this.ctx.bean.util.extend({}, config, JSON.parse(res.value)) : config;
   }
 
-  async _saveSettings({ scene, module, data }) {
+  async _saveSettings({ scene, module, data }: any) {
     module = module || this.moduleScope;
     const validator = this._getValidator({ scene, module });
     if (!validator) this.ctx.throw(404); // not found
@@ -122,7 +122,7 @@ export class BeanSettings extends BeanModuleScopeBase {
     await this._saveSettingsRef({ scene, module, data });
   }
 
-  async _saveSettingsRef({ scene, module, data }) {
+  async _saveSettingsRef({ scene, module, data }: any) {
     // remove aSettingsRef
     await this.modelSettingsRef.delete({
       module,
@@ -133,12 +133,12 @@ export class BeanSettings extends BeanModuleScopeBase {
     await this._saveSettingsRef1({ scene, module, data, schemaName: null, path: '' });
   }
 
-  async _saveSettingsRef1({ scene, module, data, schemaName, path }) {
+  async _saveSettingsRef1({ scene, module, data, schemaName, path }: any) {
     const schema = this._getSchema({ scene, module, schemaName });
     await this._saveSettingsRef2({ scene, module, data, schema: schema.schema, path });
   }
 
-  async _saveSettingsRef2({ scene, module, data, schema, path }) {
+  async _saveSettingsRef2({ scene, module, data, schema, path }: any) {
     for (const key in schema.properties) {
       const subSchema = schema.properties[key];
       if (!subSchema.type) continue;

@@ -9,7 +9,7 @@ export class BeanRoleFlow extends BeanRoleUsers {
   //     scopeNames: 'family',
   //   },
   // ];
-  async addRoleRightBatchByModeFlow({ atomClassId, module, atomClassName, roleRights }) {
+  async addRoleRightBatchByModeFlow({ atomClassId, module, atomClassName, roleRights }: any) {
     // module
     module = module || this.moduleScope;
     // const _module = this.ctx.app.meta.modules[module];

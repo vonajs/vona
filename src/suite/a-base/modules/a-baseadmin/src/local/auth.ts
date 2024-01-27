@@ -6,7 +6,7 @@ export class LocalAuth extends BeanBase {
     return this.ctx.bean.authProviderCache.getAuthProvidersConfigForAdmin();
   }
 
-  async disable({ id, disabled }) {
+  async disable({ id, disabled }: any) {
     // check if only one
     if (disabled) {
       const list = this.ctx.bean.authProviderCache.getAuthProvidersConfigForLogin();
@@ -23,7 +23,7 @@ export class LocalAuth extends BeanBase {
     });
   }
 
-  async save({ id, config }) {
+  async save({ id, config }: any) {
     // update
     await this.ctx.model.authProvider.update({ id, config: JSON.stringify(config) });
     // item

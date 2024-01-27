@@ -14,7 +14,7 @@ export class LocalSettings extends BeanBase {
     return _instanceList;
   }
 
-  async instanceLoad({ module }) {
+  async instanceLoad({ module }: any) {
     const validator = await this.ctx.bean.settings.loadValidatorInstance({ module });
     const data = await this.ctx.bean.settings.loadSettingsInstance({ module });
     return {
@@ -24,7 +24,7 @@ export class LocalSettings extends BeanBase {
     };
   }
 
-  async instanceSave({ module, data }) {
+  async instanceSave({ module, data }: any) {
     await this.ctx.bean.settings.saveSettingsInstance({ module, data });
   }
 
@@ -37,7 +37,7 @@ export class LocalSettings extends BeanBase {
     return _userList;
   }
 
-  async userLoad({ module }) {
+  async userLoad({ module }: any) {
     const validator = await this.ctx.bean.settings.loadValidatorUser({ module });
     const data = await this.ctx.bean.settings.loadSettingsUser({ module });
     return {
@@ -47,7 +47,7 @@ export class LocalSettings extends BeanBase {
     };
   }
 
-  async userSave({ module, data }) {
+  async userSave({ module, data }: any) {
     await this.ctx.bean.settings.saveSettingsUser({ module, data });
   }
 

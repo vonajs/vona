@@ -1,7 +1,7 @@
 import { BeanDetail0 } from './bean.detail_0.js';
 
 export class BeanDetailCopy extends BeanDetail0 {
-  async _copyDetails({ atomClass, target, srcKeyAtom, destKeyAtom, srcAtom, destAtom, options, user }) {
+  async _copyDetails({ atomClass, target, srcKeyAtom, destKeyAtom, srcAtom, destAtom, options, user }: any) {
     await this._loopDetailClasses({
       atomClass,
       fn: async ({ atomClassDetail, atomClassBaseDetail }) => {

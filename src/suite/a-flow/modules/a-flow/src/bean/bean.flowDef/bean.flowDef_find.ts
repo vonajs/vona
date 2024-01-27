@@ -20,7 +20,7 @@ export class BeanFlowDefFind extends BeanFlowDefPrepare {
   }
 
   // fn: false is break
-  async _loopNodes({ content, nodeIdStart, fn, options }) {
+  async _loopNodes({ content, nodeIdStart, fn, options }: any) {
     options = options || {};
     const checkNodeStart = options.checkNodeStart !== false;
     const nodes: any[] = [];
@@ -38,7 +38,7 @@ export class BeanFlowDefFind extends BeanFlowDefPrepare {
     return nodes;
   }
 
-  async _loopNodes_checkNode({ content, nodeId, nodes, nodeIdCaches, fn }) {
+  async _loopNodes_checkNode({ content, nodeId, nodes, nodeIdCaches, fn }: any) {
     // cache
     if (nodeIdCaches[nodeId]) {
       return;
@@ -53,7 +53,7 @@ export class BeanFlowDefFind extends BeanFlowDefPrepare {
     return await fn({ nodes, node });
   }
 
-  async _loopNodes_next({ content, nodeId, nodes, nodeIdCaches, fn }) {
+  async _loopNodes_next({ content, nodeId, nodes, nodeIdCaches, fn }: any) {
     // edges
     const edges = content.process.edges.filter(item => {
       return item.source === nodeId && !nodeIdCaches[item.target];

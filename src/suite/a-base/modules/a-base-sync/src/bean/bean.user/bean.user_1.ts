@@ -95,7 +95,7 @@ export class BeanUser1 extends BeanUser0 {
     );
   }
 
-  async save({ user }) {
+  async save({ user }: any) {
     // not use atom.write
     const userId = user.id;
     if (userId && Object.keys(user).length > 1) {
@@ -110,7 +110,7 @@ export class BeanUser1 extends BeanUser0 {
     }
   }
 
-  async changeUserName({ user }) {
+  async changeUserName({ user }: any) {
     // check allowChangeUserName
     const item = await this.get({ id: user.id });
     if (item.allowChangeUserName === 0) this.ctx.throw(403);
@@ -123,7 +123,7 @@ export class BeanUser1 extends BeanUser0 {
     await this.save({ user });
   }
 
-  async getFields({ removePrivacy }) {
+  async getFields({ removePrivacy }: any) {
     let fields = await this.model.columns();
     if (removePrivacy) {
       fields = this.ctx.bean.util.extend({}, fields);
@@ -135,22 +135,22 @@ export class BeanUser1 extends BeanUser0 {
     return fields;
   }
 
-  async getFieldsSelect({ removePrivacy, alias }) {
+  async getFieldsSelect({ removePrivacy, alias }: any) {
     const fields = await this.getFields({ removePrivacy });
     return Object.keys(fields)
       .map(item => (alias ? `${alias}.${item}` : item))
       .join(',');
   }
 
-  async count({ options, user }) {
+  async count({ options, user }: any) {
     return await this.select({ options, user, count: 1 });
   }
 
-  async select({ options, user, pageForce = true, count = 0 }) {
+  async select({ options, user, pageForce = true, count = 0 }: any) {
     return await this._list({ options, user, pageForce, count });
   }
 
-  async selectGeneral({ params, user, pageForce = true, count = 0 }) {
+  async selectGeneral({ params, user, pageForce = true, count = 0 }: any) {
     const { query, page } = params;
     const options = {
       where: {
@@ -172,7 +172,7 @@ export class BeanUser1 extends BeanUser0 {
   }
 
   // options: { where, orders, page, removePrivacy, ... }
-  async _list({ options, user, pageForce = true, count = 0 }) {
+  async _list({ options, user, pageForce = true, count = 0 }: any) {
     if (!options) options = {};
     // select
     const items = await this.ctx.bean.atom.select({ atomClass: __atomClassUser, options, user, pageForce, count });
@@ -197,7 +197,7 @@ export class BeanUser1 extends BeanUser0 {
     return itemsRes;
   }
 
-  async disable({ userAtomId, userId, disabled }) {
+  async disable({ userAtomId, userId, disabled }: any) {
     const item = await this._forceUser({ userAtomId, userId });
     const key = { atomId: item.atomId, itemId: item.id };
     if (disabled) {
@@ -207,13 +207,13 @@ export class BeanUser1 extends BeanUser0 {
     }
   }
 
-  async delete({ userAtomId, userId }) {
+  async delete({ userAtomId, userId }: any) {
     userAtomId = await this._forceUserAtomId({ userAtomId, userId });
     // delete this
     await this.ctx.bean.atom.delete({ key: { atomId: userAtomId } });
   }
 
-  async _forceUserAtomId({ userAtomId, userId }) {
+  async _forceUserAtomId({ userAtomId, userId }: any) {
     if (!userAtomId) {
       const item = await this.get({ id: userId });
       userAtomId = item.atomId;
@@ -221,7 +221,7 @@ export class BeanUser1 extends BeanUser0 {
     return userAtomId;
   }
 
-  async _forceUserId({ userAtomId, userId }) {
+  async _forceUserId({ userAtomId, userId }: any) {
     if (!userId) {
       const item = await this.get({ atomId: userAtomId });
       userId = item.id;
@@ -229,14 +229,14 @@ export class BeanUser1 extends BeanUser0 {
     return userId;
   }
 
-  async _forceUser({ userAtomId, userId }) {
+  async _forceUser({ userAtomId, userId }: any) {
     if (userAtomId) {
       return await this.get({ atomId: userAtomId });
     }
     return await this.get({ id: userId });
   }
 
-  async _forceUserAndCheckRightRead({ userAtomId, userId, user }) {
+  async _forceUserAndCheckRightRead({ userAtomId, userId, user }: any) {
     const _user = await this._forceUser({ userAtomId, userId });
     if (!user || user.id === 0) return _user;
     // check
@@ -249,7 +249,7 @@ export class BeanUser1 extends BeanUser0 {
   }
 }
 
-// async save({ user }) {
+// async save({ user }: any) {
 //   // userKey
 //   const userAtomId = await this._forceUserAtomId({ userId: user.id });
 //   const userKey = { atomId: userAtomId };
@@ -265,7 +265,7 @@ export class BeanUser1 extends BeanUser0 {
 //   });
 // }
 
-// async list({ roleId, query, anonymous, page, removePrivacy }) {
+// async list({ roleId, query, anonymous, page, removePrivacy }: any) {
 //   const roleJoin = roleId ? 'left join aUserRole b on a.id=b.userId' : '';
 //   const roleWhere = roleId ? `and b.roleId=${this.ctx.model._formatValue(roleId)}` : '';
 //   const queryLike = query ? this.ctx.model._formatValue({ op: 'like', val: query }) : '';

@@ -1,7 +1,7 @@
 import { BeanFlowTask1 } from './bean.flowTask_1.js';
 
 export class BeanFlowTaskAtomState extends BeanFlowTask1 {
-  async _setAtomState({ context, options }) {
+  async _setAtomState({ context, options }: any) {
     const atomState = options.atomState;
     if (atomState !== undefined && atomState !== null) {
       // set
@@ -9,7 +9,7 @@ export class BeanFlowTaskAtomState extends BeanFlowTask1 {
     }
   }
 
-  async _setAtomState_changed({ context, atomState }) {
+  async _setAtomState_changed({ context, atomState }: any) {
     const atomId = context._atom.atomId;
     await this.ctx.bean.atom.atomState({
       key: { atomId },
@@ -18,7 +18,7 @@ export class BeanFlowTaskAtomState extends BeanFlowTask1 {
     context._atom.atomState = atomState;
   }
 
-  // async _setAtomState({ context, options }) {
+  // async _setAtomState({ context, options }: any) {
   //   const atomState = options.atomState;
   //   if (atomState === -3) {
   //     const check = await this._setAtomState_check_cancelled({ context, options });
@@ -32,7 +32,7 @@ export class BeanFlowTaskAtomState extends BeanFlowTask1 {
   //   }
   // }
 
-  // async _setAtomState_check_cancelled({ context }) {
+  // async _setAtomState_check_cancelled({ context }: any) {
   //   const atom = context._atom;
   //   // atomClass
   //   const atomClassBase = this.ctx.bean.base.atomClass({

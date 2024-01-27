@@ -32,7 +32,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
   }
 
   // target: draft/formal/history/clone
-  async _copy({ target, atomClass, srcKey, srcItem, destKey, options, roleIdOwner, user }) {
+  async _copy({ target, atomClass, srcKey, srcItem, destKey, options, roleIdOwner, user }: any) {
     if (!user) user = { id: 0 };
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -129,7 +129,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     return destKey;
   }
 
-  async _copy_updateAtomFields({ atomClassBase, target, srcItem, destItem }) {
+  async _copy_updateAtomFields({ atomClassBase, target, srcItem, destItem }: any) {
     const data = {
       id: destItem.atomId,
       userIdCreated: destItem.userIdCreated,
@@ -274,7 +274,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     return destItem;
   }
 
-  async _copyAttachments({ atomIdSrc, atomIdDest }) {
+  async _copyAttachments({ atomIdSrc, atomIdDest }: any) {
     // delete old files
     await this.modelFile.delete({ atomId: atomIdDest, mode: 2 });
     // add new files

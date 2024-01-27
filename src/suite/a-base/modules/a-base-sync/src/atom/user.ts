@@ -12,14 +12,14 @@ export class AtomUser extends BeanAtomBase {
     return this.ctx.bean.user;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // user default
     const data = await this.model.default();
     // super
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -29,7 +29,7 @@ export class AtomUser extends BeanAtomBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // meta
@@ -38,7 +38,7 @@ export class AtomUser extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // only support atomStage=1
     if (item.atomStage !== 1) throw new Error('user only support atomStage=1');
     // fields
@@ -64,7 +64,7 @@ export class AtomUser extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomWrite();
     // super
@@ -80,7 +80,7 @@ export class AtomUser extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     const userId = key.itemId;
     // super
     await super.delete({ atomClass, key, options, user });
@@ -92,7 +92,7 @@ export class AtomUser extends BeanAtomBase {
     await this.model.delete({ id: userId });
   }
 
-  async enable({ atomClass, key, options, user }) {
+  async enable({ atomClass, key, options, user }: any) {
     // super
     await super.enable({ atomClass, key, options, user });
     // enable
@@ -102,7 +102,7 @@ export class AtomUser extends BeanAtomBase {
     });
   }
 
-  async disable({ atomClass, key, options, user }) {
+  async disable({ atomClass, key, options, user }: any) {
     // super
     await super.disable({ atomClass, key, options, user });
     // disable
@@ -112,7 +112,7 @@ export class AtomUser extends BeanAtomBase {
     });
   }
 
-  async checkRightAction({ atom, atomClass, action, options, user }) {
+  async checkRightAction({ atom, atomClass, action, options, user }: any) {
     // super
     const res = await super.checkRightAction({ atom, atomClass, action, options, user });
     if (!res) return res;

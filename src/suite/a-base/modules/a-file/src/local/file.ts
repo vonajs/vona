@@ -2,45 +2,45 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalFile extends BeanBase {
-  async all({ atomClass, options, user }) {
+  async all({ atomClass, options, user }: any) {
     return await this.ctx.bean.file.all({ atomClass, options, user });
   }
 
   // where adjusted by controller
-  async list({ key, options, user }) {
+  async list({ key, options, user }: any) {
     return await this.ctx.bean.file.list({ key, options, user });
   }
 
-  async delete({ fileId, user }) {
+  async delete({ fileId, user }: any) {
     return await this.ctx.bean.file.delete({ fileId, user });
   }
 
-  async update({ fileId, data, user }) {
+  async update({ fileId, data, user }: any) {
     return await this.ctx.bean.file.update({ fileId, data, user });
   }
 
-  async upload({ user }) {
+  async upload({ user }: any) {
     return await this.ctx.bean.file.upload({ user });
   }
 
-  async uploadDataUrl({ data, user }) {
+  async uploadDataUrl({ data, user }: any) {
     return await this.ctx.bean.file.uploadDataUrl({ data, user });
   }
 
-  async download({ downloadId, atomId, width, height, user }) {
+  async download({ downloadId, atomId, width, height, user }: any) {
     return await this.ctx.bean.file.download({ downloadId, atomId, width, height, user });
   }
 
   // inner invoke
-  async fileInfo({ downloadId }) {
+  async fileInfo({ downloadId }: any) {
     return await this.ctx.bean.file.fileInfo({ downloadId });
   }
 
-  async fileUpdateCheck({ file, user }) {
+  async fileUpdateCheck({ file, user }: any) {
     return await this.ctx.bean.file.fileUpdateCheck({ file, user });
   }
 
-  async fileDownloadCheck({ file, user }) {
+  async fileDownloadCheck({ file, user }: any) {
     return await this.ctx.bean.file.fileDownloadCheck({ file, user });
   }
 }

@@ -1,7 +1,7 @@
 import { LocalProcedureAtomRight } from './local.procedure_atomRight.js';
 
 export class LocalProcedureAtomRightCheckRoleRightRead extends LocalProcedureAtomRight {
-  async checkRoleRightAction({ iid, roleIdWho, atomClass, atomClassBase, atom, action, forAtomUser }) {
+  async checkRoleRightAction({ iid, roleIdWho, atomClass, atomClassBase, atom, action, forAtomUser }: any) {
     // for safe
     iid = parseInt(iid);
     roleIdWho = parseInt(roleIdWho);
@@ -58,7 +58,7 @@ export class LocalProcedureAtomRightCheckRoleRightRead extends LocalProcedureAto
     return _sql;
   }
 
-  async _checkRoleRightAction_rightWhere({ iid, roleIdWho, atomClass, atomClassBase, action, forAtomUser, atom }) {
+  async _checkRoleRightAction_rightWhere({ iid, roleIdWho, atomClass, atomClassBase, action, forAtomUser, atom }: any) {
     // right
     return await this._prepareRightOfRole({
       iid,

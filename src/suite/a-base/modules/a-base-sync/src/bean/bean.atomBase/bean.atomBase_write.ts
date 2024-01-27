@@ -14,7 +14,7 @@ const __atomBasicFields = [
 const __itemBasicFieldsWrite = ['id', 'iid', 'atomId', 'itemId', 'atomStage'];
 
 export class BeanAtomBaseWrite extends BeanAtomBaseRead {
-  async write({ atomClass, target, key, item: itemOriginal, options, user }) {
+  async write({ atomClass, target, key, item: itemOriginal, options, user }: any) {
     if (!itemOriginal) return; // atomClass
     // create a copy
     let item = Object.assign({}, itemOriginal);
@@ -69,7 +69,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     return item;
   }
 
-  async _writeValidate({ atomClass, target, key, item, options, user }) {
+  async _writeValidate({ atomClass, target, key, item, options, user }: any) {
     // options
     const ignoreValidate = options && options.ignoreValidate;
     if (!ignoreValidate) {
@@ -136,7 +136,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     return filterOptions;
   }
 
-  async _writeAtom({ key, item, user, atomSimple, atomStage }) {
+  async _writeAtom({ key, item, user, atomSimple, atomStage }: any) {
     // write atom
     const atom = {};
     for (const field of __atomBasicFields) {
@@ -153,7 +153,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     await this.ctx.bean.atom._update({ atom, user });
   }
 
-  async _writeHandleResource({ atomClass, atomClassBase, key, item }) {
+  async _writeHandleResource({ atomClass, atomClassBase, key, item }: any) {
     // atomId/stage
     const atomId = key.atomId;
     const atomStage = item.atomStage;

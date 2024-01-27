@@ -5,7 +5,7 @@ import popCore from '@alicloud/pop-core';
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderAliyun extends BeanBase {
-  async sendCode({ providerInstanceId, context, config }) {
+  async sendCode({ providerInstanceId, context, config }: any) {
     // get
     const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
     if (!providerInstance) this.ctx.throw(403);
@@ -25,12 +25,12 @@ export class SmsProviderAliyun extends BeanBase {
     return { token };
   }
 
-  async verify({ data, dataInput }) {
+  async verify({ data, dataInput }: any) {
     if (!data) this.ctx.throw.module(__ThisModule__, 1002);
     if (data.token !== dataInput.token) this.ctx.throw.module(__ThisModule__, 1003);
   }
 
-  async __sendSms({ params, config }) {
+  async __sendSms({ params, config }: any) {
     const client = new popCore.RPCClient({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,

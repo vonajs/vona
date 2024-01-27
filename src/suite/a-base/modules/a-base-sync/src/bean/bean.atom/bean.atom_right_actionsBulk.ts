@@ -2,7 +2,7 @@ import { BeanAtomRightActions } from './bean.atom_right_actions.js';
 
 export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
   // actionsBulk of atomClass
-  async actionsBulk({ atomClass, options, user }) {
+  async actionsBulk({ atomClass, options, user }: any) {
     options = options || {};
     const stage = options.stage;
     const containerMode = options.containerMode;

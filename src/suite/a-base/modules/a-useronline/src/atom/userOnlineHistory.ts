@@ -8,14 +8,14 @@ export class AtomUserOnlineHistory extends BeanAtomBase {
     return this.ctx.model.module(__ThisModule__).userOnlineHistory;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // userOnlineHistory default
     const data = await this.model.default();
     // super
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomRead();
     // super
@@ -27,7 +27,7 @@ export class AtomUserOnlineHistory extends BeanAtomBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomSelect();
     // super
@@ -38,7 +38,7 @@ export class AtomUserOnlineHistory extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     const data = await super.create({ atomClass, item, options, user });
     // add userOnlineHistory
@@ -47,7 +47,7 @@ export class AtomUserOnlineHistory extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update userOnlineHistory
@@ -58,7 +58,7 @@ export class AtomUserOnlineHistory extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // super
     await super.delete({ atomClass, key, options, user });
     // delete userOnlineHistory

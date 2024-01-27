@@ -3,7 +3,7 @@ import { BeanAtom0Create } from './bean.atom_0_create.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Default extends BeanAtom0Create {
-  async default({ atomClass, atomStage, roleIdOwner, item, options, user }) {
+  async default({ atomClass, atomStage, roleIdOwner, item, options, user }: any) {
     options = options || {};
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);

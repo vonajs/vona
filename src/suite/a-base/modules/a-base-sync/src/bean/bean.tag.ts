@@ -11,7 +11,7 @@ export class BeanTag extends BeanBase {
     return this.ctx.model.module(__ThisModule__).tagRef;
   }
 
-  async count({ atomClass, language }) {
+  async count({ atomClass, language }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const where = {
       atomClassId: atomClass.id,
@@ -22,11 +22,11 @@ export class BeanTag extends BeanBase {
     return await this.modelTag.count(where);
   }
 
-  async get({ tagId }) {
+  async get({ tagId }: any) {
     return await this.modelTag.get({ id: tagId });
   }
 
-  async item({ atomClass, language, tagName }) {
+  async item({ atomClass, language, tagName }: any) {
     const where = {
       tagName,
     };
@@ -40,7 +40,7 @@ export class BeanTag extends BeanBase {
     return list[0];
   }
 
-  async list({ atomClass, options }) {
+  async list({ atomClass, options }: any) {
     options = options || {};
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     if (!options.where) options.where = {};
@@ -51,7 +51,7 @@ export class BeanTag extends BeanBase {
     return await this.modelTag.select(options);
   }
 
-  async add({ atomClass, data }) {
+  async add({ atomClass, data }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // add
     const res = await this.modelTag.insert({
@@ -63,14 +63,14 @@ export class BeanTag extends BeanBase {
     return res.insertId;
   }
 
-  async save({ tagId, data }) {
+  async save({ tagId, data }: any) {
     await this.modelTag.update({
       id: tagId,
       tagName: data.tagName,
     });
   }
 
-  async delete({ tagId }) {
+  async delete({ tagId }: any) {
     // check atoms
     const count = await this.modelTagRef.count({ tagId });
     if (count > 0) this.ctx.throw.module(__ThisModule__, 1012);
@@ -79,7 +79,7 @@ export class BeanTag extends BeanBase {
     await this.modelTag.delete({ id: tagId });
   }
 
-  async updateTagRefs({ atomId, atomTags }) {
+  async updateTagRefs({ atomId, atomTags }: any) {
     // tags
     if (typeof atomTags === 'string') {
       atomTags = JSON.parse(atomTags);
@@ -99,13 +99,13 @@ export class BeanTag extends BeanBase {
     return atomTags;
   }
 
-  async deleteTagRefs({ atomId }) {
+  async deleteTagRefs({ atomId }: any) {
     await this.modelTagRef.delete({
       atomId,
     });
   }
 
-  async setTagAtomCount({ tagsNew, tagsOld }) {
+  async setTagAtomCount({ tagsNew, tagsOld }: any) {
     // tags
     const tags = {};
     if (tagsNew) {
@@ -128,7 +128,7 @@ export class BeanTag extends BeanBase {
     }
   }
 
-  async calcAtomCount({ tagId }) {
+  async calcAtomCount({ tagId }: any) {
     const res = await this.ctx.model.query(
       `
         select count(*) atomCount from aTagRef a
@@ -140,7 +140,7 @@ export class BeanTag extends BeanBase {
     return res[0].atomCount;
   }
 
-  async parseTags({ atomClass, language, tagName, force = false }) {
+  async parseTags({ atomClass, language, tagName, force = false }: any) {
     const tagNames = tagName.split(',');
     const tagIds: any[] = [];
     for (const _tagName of tagNames) {
@@ -163,7 +163,7 @@ export class BeanTag extends BeanBase {
     return tagIds;
   }
 
-  async _register({ atomClass, language, tagName }) {
+  async _register({ atomClass, language, tagName }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.tag.register.${atomClass.id}`,
@@ -178,7 +178,7 @@ export class BeanTag extends BeanBase {
     });
   }
 
-  async _registerLock({ atomClass, language, tagName }) {
+  async _registerLock({ atomClass, language, tagName }: any) {
     // get again
     const tag = await this.item({ atomClass, language, tagName });
     if (tag) return tag.id;

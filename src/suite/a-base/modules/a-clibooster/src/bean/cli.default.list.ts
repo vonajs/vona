@@ -3,7 +3,7 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.default' })
 export class CliDefaultList extends BeanCliBase {
-  async execute({ user }) {
+  async execute({ user }: any) {
     const { argv } = this.context;
     // super
     await super.execute({ user });
@@ -38,7 +38,7 @@ export class CliDefaultList extends BeanCliBase {
     // await this.console.log({ text: JSON.stringify(modulesWant) });
   }
 
-  async _moduleShow({ moduleShow, groupWant, commandsAll }) {
+  async _moduleShow({ moduleShow, groupWant, commandsAll }: any) {
     // _module
     const _module = commandsAll[moduleShow];
     // groupsShow

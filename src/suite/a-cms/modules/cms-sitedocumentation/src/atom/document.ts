@@ -3,12 +3,12 @@ import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';
 
 @Atom()
 export class AtomDocument extends BeanAtomCmsBase {
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // super
     return await super.default({ atomClass, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -16,22 +16,22 @@ export class AtomDocument extends BeanAtomCmsBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     return await super.create({ atomClass, item, options, user });
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // super
     return await super.write({ atomClass, target, key, item, options, user });
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // super
     await super.delete({ atomClass, key, options, user });
   }

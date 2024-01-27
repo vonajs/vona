@@ -88,7 +88,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   }
 
   // delete role right
-  async deleteRoleRight({ roleRightId, user }) {
+  async deleteRoleRight({ roleRightId, user }: any) {
     // role right
     const item = await this.modelRoleRight.get({ id: roleRightId });
     const { roleAtomId, roleId } = item;
@@ -113,7 +113,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     await this.ctx.bean.atomRightAux.clearSummersOfUser();
   }
 
-  async deleteRoleRightByAction({ atomClassId, action }) {
+  async deleteRoleRightByAction({ atomClassId, action }: any) {
     await this.modelRoleRight.delete({ atomClassId, action });
     await this.modelRoleRightRef.delete({ atomClassId, action });
     // clear summer
@@ -163,7 +163,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     }
   }
 
-  async _parseScopeNames({ scopeNames }) {
+  async _parseScopeNames({ scopeNames }: any) {
     let scope;
     if (scopeNames === undefined || scopeNames === null) {
       scope = [];
@@ -187,7 +187,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   }
 
   // role rights
-  async roleRights({ roleAtomId, roleId, page }) {
+  async roleRights({ roleAtomId, roleId, page }: any) {
     roleId = await this._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     const _limit = this.ctx.model._limit(page.size, page.index);
@@ -215,7 +215,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   }
 
   // role spreads
-  async roleSpreads({ roleAtomId, roleId, page }) {
+  async roleSpreads({ roleAtomId, roleId, page }: any) {
     roleId = await this._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     const _limit = this.ctx.model._limit(page.size, page.index);
@@ -248,7 +248,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   }
 
   // atom rights of user
-  async atomRightsOfUser({ userAtomId, userId, page }) {
+  async atomRightsOfUser({ userAtomId, userId, page }: any) {
     userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
     page = this.ctx.bean.util.page(page, false);
     const _limit = this.ctx.model._limit(page.size, page.index);
@@ -277,7 +277,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     return items;
   }
 
-  async _adjustItems({ items, actionNameKey = 'actionName' }) {
+  async _adjustItems({ items, actionNameKey = 'actionName' }: any) {
     // scope
     await this._adjustAtomRightsScopeRoles({ items });
     // locale
@@ -286,14 +286,14 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     await this._adjustFlowActionsLocale({ items, actionNameKey });
   }
 
-  async _adjustAtomRightsScopeRoles({ items }) {
+  async _adjustAtomRightsScopeRoles({ items }: any) {
     for (const item of items) {
       const scope = JSON.parse(item.scope);
       item.scopeRoles = await this._scopeRoles({ scope });
     }
   }
 
-  async _adjustAtomRightsLocale({ items }) {
+  async _adjustAtomRightsLocale({ items }: any) {
     for (const item of items) {
       // roleNameBase
       if (item.roleNameBase) {
@@ -302,7 +302,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     }
   }
 
-  async _scopeRoles({ scope }) {
+  async _scopeRoles({ scope }: any) {
     if (!scope || scope.length === 0) return null;
     const items = await this.ctx.model.query(
       `
@@ -322,7 +322,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   }
 
   // actionFlows
-  async _adjustFlowActionsLocale({ items, actionNameKey }) {
+  async _adjustFlowActionsLocale({ items, actionNameKey }: any) {
     for (const item of items) {
       if (item.actionMode === 1) {
         item[`${actionNameKey}Locale`] = this.ctx.text(item[actionNameKey] || 'Unnamed');

@@ -4,14 +4,14 @@ import pMap from 'p-map';
 
 @Local()
 export class LocalUtil extends BeanBase {
-  async performAction({ params }) {
+  async performAction({ params }: any) {
     // force innerAccess as false
     params.innerAccess = false;
     // performAction
     return await this.ctx.meta.util.performAction(params);
   }
 
-  async performActions({ actions }) {
+  async performActions({ actions }: any) {
     // concurrency
     const mapper = async params => {
       let err;

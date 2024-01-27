@@ -6,7 +6,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     return this.ctx.model.module(__ThisModule__).atomAction;
   }
 
-  async delete({ atomClassId, code }) {
+  async delete({ atomClassId, code }: any) {
     // delete roleRight
     await this.ctx.bean.role.deleteRoleRightByAction({
       atomClassId,
@@ -20,7 +20,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     await this.model.update(data);
   }
 
-  async init({ atomClass, actions, action }) {
+  async init({ atomClass, actions, action }: any) {
     // actions
     if (action) {
       actions = [action];
@@ -37,7 +37,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     }
   }
 
-  async get({ id, atomClassId, code }) {
+  async get({ id, atomClassId, code }: any) {
     const data = id ? { id } : { atomClassId, code };
     const res = await this.model.get(data);
     if (res) return res;
@@ -78,11 +78,11 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     return actionBase.createDelay;
   }
 
-  async _registerLock({ atomClassId, code }) {
+  async _registerLock({ atomClassId, code }: any) {
     return await this._registerLock_inner({ atomClassId, code });
   }
 
-  async _registerLock_inner({ atomClassId, code }) {
+  async _registerLock_inner({ atomClassId, code }: any) {
     // get
     const res = await this.model.get({ atomClassId, code });
     if (res) return res;

@@ -57,7 +57,7 @@ export class VersionUpdate extends BeanBase {
     }
   }
 
-  async _update12Migration_article({ article }) {
+  async _update12Migration_article({ article }: any) {
     // user
     const user = { id: article.userIdCreated };
     // open

@@ -70,7 +70,7 @@ export class VersionInit extends BeanBase {
     await this._init_rootCliDevTest_persistence({ authOpenKey, userRoot });
   }
 
-  async _init_rootCliDevTest_create({ userRoot }) {
+  async _init_rootCliDevTest_create({ userRoot }: any) {
     // create aAuthOpen record for user:root
     const item = {
       atomName: 'Cli For Development',
@@ -81,7 +81,7 @@ export class VersionInit extends BeanBase {
     return await this.ctx.bean.authOpen.createAuthOpen({ item, user: userRoot });
   }
 
-  async _init_rootCliDevTest_persistence({ authOpenKey, userRoot }) {
+  async _init_rootCliDevTest_persistence({ authOpenKey, userRoot }: any) {
     // authOpen
     const item = await this.modelAuthOpen.get({ id: authOpenKey.itemId });
     // name

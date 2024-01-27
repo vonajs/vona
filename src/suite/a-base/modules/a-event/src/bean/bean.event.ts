@@ -10,7 +10,7 @@ const __adapter = (context, chain) => {
 
 @Bean()
 export class BeanEvent extends BeanModuleScopeBase {
-  async invoke({ module, name, data, result, next }) {
+  async invoke({ module, name, data, result, next }: any) {
     const eventArray = this._getEventArray({ module, name });
     const eventBeanArray = eventArray.map(item => {
       const eventBean = this.ctx.bean._getBean(item);

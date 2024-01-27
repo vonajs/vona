@@ -4,7 +4,7 @@ import { BeanIoMessageBase } from 'cabloy-module-api-a-socketio';
 
 @Bean({ scene: 'io.message' })
 export class IoMessageMail extends BeanIoMessageBase {
-  async onChannelRender({ channelFullName, options, message, messageSync, messageClass }) {
+  async onChannelRender({ channelFullName, options, message, messageSync, messageClass }: any) {
     if (channelFullName === 'a-mail:mail') {
       return await this._onChannelRenderMail({ options, message, messageSync, messageClass });
     }
@@ -12,7 +12,7 @@ export class IoMessageMail extends BeanIoMessageBase {
     return await super.onChannelRender({ channelFullName, options, message, messageSync, messageClass });
   }
 
-  async _onChannelRenderMail({ message }) {
+  async _onChannelRenderMail({ message }: any) {
     const content = JSON.parse(message.content);
     const modelMail = this.ctx.model.module(__ThisModule__).mail;
     const mail = await modelMail.get({ id: content.mailId });

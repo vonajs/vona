@@ -5,7 +5,7 @@ let __commandsAll;
 
 @Bean()
 export class BeanCli extends BeanBase {
-  async meta({ context, user }) {
+  async meta({ context, user }: any) {
     try {
       // reload freeze
       this.ctx.app.meta.reload.freeze();
@@ -24,7 +24,7 @@ export class BeanCli extends BeanBase {
     }
   }
 
-  async execute({ progressId, context, user }) {
+  async execute({ progressId, context, user }: any) {
     // directly
     if (!progressId) {
       await this._progressInBackground({ progressId, context, user });
@@ -41,7 +41,7 @@ export class BeanCli extends BeanBase {
     return { progressId };
   }
 
-  async _progressInBackground({ progressId, context, user }) {
+  async _progressInBackground({ progressId, context, user }: any) {
     try {
       // reload freeze
       this.ctx.app.meta.reload.freeze();
@@ -82,7 +82,7 @@ export class BeanCli extends BeanBase {
     }
   }
 
-  async _findCliCommandAndCheckRight({ cliFullName, user }) {
+  async _findCliCommandAndCheckRight({ cliFullName, user }: any) {
     // command
     const command = this._findCliCommand({ cliFullName });
     // check right first

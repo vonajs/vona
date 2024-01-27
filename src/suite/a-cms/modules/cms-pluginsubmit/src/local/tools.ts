@@ -5,14 +5,14 @@ import url from 'url';
 
 @Local()
 export class LocalTools extends BeanBase {
-  async submit({ links, config }) {
+  async submit({ links, config }: any) {
     for (const target in config.submit) {
       const targetConfig = config.submit[target];
       await this._submit({ target, targetConfig, links });
     }
   }
 
-  async _submit({ target, targetConfig, links }) {
+  async _submit({ target, targetConfig, links }: any) {
     if (!targetConfig.token) return;
     if (!links || links.length === 0) return;
     // host

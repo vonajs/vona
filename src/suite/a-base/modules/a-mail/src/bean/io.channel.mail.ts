@@ -9,7 +9,7 @@ const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yel
 
 @Bean({ scene: 'io.channel' })
 export class IoChannelMail extends BeanIoChannelBase {
-  async onPush({ content /* options, message, messageSync, messageClass*/ }) {
+  async onPush({ content /* options, message, messageSync, messageClass*/ }: any) {
     // check if content.message
     // not set content.message.to dynamic for test, which must be set by business
     if (!content.message || !content.message.to) return false;

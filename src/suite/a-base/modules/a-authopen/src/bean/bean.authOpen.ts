@@ -24,7 +24,7 @@ export class BeanAuthOpen extends BeanBase {
     return this.ctx.bean.local.module('a-authsimple').simple;
   }
 
-  async hideClientSecret({ atomId, itemId, user }) {
+  async hideClientSecret({ atomId, itemId, user }: any) {
     const item = await this._forceAuthOpen({ atomId, itemId });
     const clientSecret = await this.localAuthSimple.calcPassword({ password: item.clientSecret });
     // use userId for safety
@@ -36,7 +36,7 @@ export class BeanAuthOpen extends BeanBase {
     });
   }
 
-  async resetClientSecret({ atomId, itemId, user }) {
+  async resetClientSecret({ atomId, itemId, user }: any) {
     itemId = await this._forceAuthOpenId({ atomId, itemId });
     // clientSecret
     const clientSecret = randomize('0a', 40);
@@ -49,7 +49,7 @@ export class BeanAuthOpen extends BeanBase {
     });
   }
 
-  async verify({ clientID, clientSecret }) {
+  async verify({ clientID, clientSecret }: any) {
     // authOpen
     const authOpen = await this.modelAuthOpen.get({ clientID });
     if (!authOpen) return this.ctx.throw(403);
@@ -90,7 +90,7 @@ export class BeanAuthOpen extends BeanBase {
     return authOpen;
   }
 
-  async checkRightResource({ resourceAtomId }) {
+  async checkRightResource({ resourceAtomId }: any) {
     // authOpen
     const authOpen = await this.prepareAuthOpen();
     if (!authOpen) return true;
@@ -105,7 +105,7 @@ export class BeanAuthOpen extends BeanBase {
     return !!right;
   }
 
-  async checkRightAtomAction({ atomClass, action }) {
+  async checkRightAtomAction({ atomClass, action }: any) {
     // authOpen
     const authOpen = await this.prepareAuthOpen();
     if (!authOpen) return true;
@@ -125,7 +125,7 @@ export class BeanAuthOpen extends BeanBase {
     return !!right;
   }
 
-  async getAuthOpenByAuthId({ authId }) {
+  async getAuthOpenByAuthId({ authId }: any) {
     return await this.ctx.model.queryOne(
       `
           select a.* from aAuthOpenView a
@@ -136,7 +136,7 @@ export class BeanAuthOpen extends BeanBase {
     );
   }
 
-  async _forceAuthOpenId({ atomId, itemId }) {
+  async _forceAuthOpenId({ atomId, itemId }: any) {
     if (!itemId) {
       const item = await this.modelAuthOpen.get({ atomId });
       itemId = item.id;
@@ -144,7 +144,7 @@ export class BeanAuthOpen extends BeanBase {
     return itemId;
   }
 
-  async _forceAuthOpen({ atomId, itemId }) {
+  async _forceAuthOpen({ atomId, itemId }: any) {
     if (!itemId) {
       return await this.modelAuthOpen.get({ atomId });
     }
@@ -170,7 +170,7 @@ export class BeanAuthOpen extends BeanBase {
     return authOpenKey;
   }
 
-  async createRoleScopes({ roleScopes, setDirty = true }) {
+  async createRoleScopes({ roleScopes, setDirty = true }: any) {
     //
     for (const roleScope of roleScopes) {
       // item

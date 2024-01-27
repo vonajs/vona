@@ -3,7 +3,7 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.git' })
 export class CliGitCommit extends BeanCliBase {
-  async execute({ user }) {
+  async execute({ user }: any) {
     const { argv } = this.context;
     // super
     await super.execute({ user });

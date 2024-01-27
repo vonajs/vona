@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightAuxRoleScopesMineOfUser } from './bean.atomRightAux_roleScopesMineOfUser.js';
 
 export class BeanAtomRightAuxRoleWhos extends BeanAtomRightAuxRoleScopesMineOfUser {
-  async getRoleWhosOfAtomClassAction({ atomClass, action }) {
+  async getRoleWhosOfAtomClassAction({ atomClass, action }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // action
@@ -21,7 +21,7 @@ export class BeanAtomRightAuxRoleWhos extends BeanAtomRightAuxRoleScopesMineOfUs
     await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'roleWhosOfAtomClassAction' });
   }
 
-  async __getRoleWhosOfAtomClassActionRaw({ atomClassId, action }) {
+  async __getRoleWhosOfAtomClassActionRaw({ atomClassId, action }: any) {
     return await this.ctx.model.query(
       `
           select distinct roleIdWho,scope from aViewRoleRightAtomClass 

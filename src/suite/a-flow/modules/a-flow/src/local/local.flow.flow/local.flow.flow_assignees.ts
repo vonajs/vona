@@ -1,7 +1,7 @@
 import { LocalFlowFlow0 } from './local.flow.flow_0.js';
 
 export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
-  async _parseAssignees({ nodeInstance, assignees }) {
+  async _parseAssignees({ nodeInstance, assignees }: any) {
     const { users, roles, vars } = assignees;
     // init
     let userIds = [];
@@ -50,7 +50,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     return users;
   }
 
-  async _parseAssignees_vars({ nodeInstance, vars }) {
+  async _parseAssignees_vars({ nodeInstance, vars }: any) {
     if (!vars) return null;
     // vars
     const _vars = await this.ctx.bean.flow._adjustAssignees_vars(vars);
@@ -70,7 +70,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     return users;
   }
 
-  async _parseUserVar({ nodeInstance, _var }) {
+  async _parseUserVar({ nodeInstance, _var }: any) {
     // flowUser
     if (_var === 'flowUser') {
       return this._parseUserVar_flowUser({ nodeInstance });
@@ -85,7 +85,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     return this.context._flow.flowUserId;
   }
 
-  async _parseUserVar_auto({ nodeInstance }) {
+  async _parseUserVar_auto({ nodeInstance }: any) {
     const flowKey = this.context._flowDef.atomStaticKey;
     const nodeDefId = nodeInstance.contextNode._nodeDef.id;
     const nodeDefName = nodeInstance.contextNode._nodeDef.name;

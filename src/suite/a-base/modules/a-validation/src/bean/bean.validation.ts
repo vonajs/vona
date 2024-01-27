@@ -37,7 +37,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return _validator;
   }
 
-  async validate({ module, validator, schema, data, filterOptions }) {
+  async validate({ module, validator, schema, data, filterOptions }: any) {
     // validator
     const _validator = this._checkValidator({ module, validator, filterOptions });
     // ignoreRules
@@ -47,7 +47,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return await _validator[cacheKey].v({ ctx: this.ctx, schema, data, filterOptions });
   }
 
-  async ajvFromSchemaAndValidate({ module, schema, data, filterOptions }) {
+  async ajvFromSchemaAndValidate({ module, schema, data, filterOptions }: any) {
     if (typeof schema === 'string') {
       const _schema = this.getSchema({ module, schema });
       schema = _schema.schema;
@@ -56,7 +56,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     return await this.ajvValidate({ ajv, schema: null, data, filterOptions });
   }
 
-  async ajvValidate({ ajv, schema, data, filterOptions }) {
+  async ajvValidate({ ajv, schema, data, filterOptions }: any) {
     return await ajv.v({ ctx: this.ctx, schema, data, filterOptions });
   }
 

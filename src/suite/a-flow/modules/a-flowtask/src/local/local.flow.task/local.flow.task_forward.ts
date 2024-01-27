@@ -2,7 +2,7 @@ import { LocalFlowTaskRecall } from './local.flow.task_recall.js';
 
 export class LocalFlowTaskForward extends LocalFlowTaskRecall {
   // handle: assignee/remark
-  async _forward({ handle }) {
+  async _forward({ handle }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask
@@ -17,7 +17,7 @@ export class LocalFlowTaskForward extends LocalFlowTaskRecall {
 
   // 1. create a new task
   // 2. update handleStatus/handleRemark
-  async _forward_handle({ handle }) {
+  async _forward_handle({ handle }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask

@@ -15,7 +15,7 @@ export class LocalBase extends BeanBase {
   }
 
   // id, module, atomClassName
-  async getAtomClassBase({ atomClass }) {
+  async getAtomClassBase({ atomClass }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = this.ctx.bean.base.atomClass(atomClass);
     return {

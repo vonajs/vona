@@ -3,7 +3,7 @@ import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 @Atom()
 export class AtomUserAtomRight extends BeanAtomBase {
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -15,7 +15,7 @@ export class AtomUserAtomRight extends BeanAtomBase {
     return item;
   }
 
-  async selectQuery({ atomClass, options, user }) {
+  async selectQuery({ atomClass, options, user }: any) {
     options.orders = [
       //
       ['f.moduleTarget', 'asc'],
@@ -26,7 +26,7 @@ export class AtomUserAtomRight extends BeanAtomBase {
     return await super.selectQuery({ atomClass, options, user });
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // adjust
@@ -37,21 +37,21 @@ export class AtomUserAtomRight extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     await super.create({ atomClass, item, options, user });
     // donot go here
     this.ctx.throw(403);
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // super
     await super.write({ atomClass, target, key, item, options, user });
     // donot go here
     this.ctx.throw(403);
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // super
     await super.delete({ atomClass, key, options, user });
     // donot go here

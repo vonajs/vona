@@ -53,14 +53,14 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return modules;
   }
 
-  async loadAtomStatics({ moduleName, atomClass, items }) {
+  async loadAtomStatics({ moduleName, atomClass, items }: any) {
     const atoms = await this._loadAtomStatics_prepare({ moduleName, atomClass, items });
     for (const item of items) {
       await this.loadAtomStatic({ moduleName, atomClass, item }, atoms);
     }
   }
 
-  async _loadAtomStatics_prepare({ moduleName, atomClass, items }) {
+  async _loadAtomStatics_prepare({ moduleName, atomClass, items }: any) {
     moduleName = moduleName || this.moduleScope;
     const atomStaticKeys: any[] = [];
     for (const item of items) {
@@ -89,7 +89,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return atoms;
   }
 
-  async preloadAtomStatic({ atomStaticKey }) {
+  async preloadAtomStatic({ atomStaticKey }: any) {
     const data = this._findAtomStatic({ atomStaticKey });
     if (!data) return null;
     const atomKey = await this.loadAtomStatic(data);
@@ -172,7 +172,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return changed;
   }
 
-  async _addResourceRoles({ atomId, roles }) {
+  async _addResourceRoles({ atomId, roles }: any) {
     if (!roles || !roles.length) return;
     for (const role of roles) {
       if (!role) continue;
@@ -208,7 +208,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     }
   }
 
-  async _adjustItem({ moduleName, atomClass, atomClassBase, item, register }) {
+  async _adjustItem({ moduleName, atomClass, atomClassBase, item, register }: any) {
     // atom bean
     const _moduleInfo = mparse.parseInfo(atomClass.module);
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
@@ -221,7 +221,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return item;
   }
 
-  async _adjustItem_base({ moduleName, atomClass, item, register }) {
+  async _adjustItem_base({ moduleName, atomClass, item, register }: any) {
     // item
     item = {
       ...item,
@@ -294,7 +294,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return null;
   }
 
-  async _updateRevision({ atomClassBase, atomClass, atomIdFormal, item }) {
+  async _updateRevision({ atomClassBase, atomClass, atomIdFormal, item }: any) {
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
       fn: async () => {
@@ -309,7 +309,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     });
   }
 
-  async _updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item }) {
+  async _updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item }: any) {
     // atomCurrent
     const atomCurrent = await this.ctx.bean.atom.modelAtom.get({ id: atomIdFormal });
     // check changed again
@@ -369,7 +369,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     }
   }
 
-  async _register({ atomClassBase, atomClass, item }) {
+  async _register({ atomClassBase, atomClass, item }: any) {
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
       fn: async () => {
@@ -384,7 +384,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     });
   }
 
-  async _registerLock({ /* atomClassBase,*/ atomClass, item }) {
+  async _registerLock({ /* atomClassBase,*/ atomClass, item }: any) {
     // get again
     const atom = await this.ctx.bean.atom.readByStaticKey({
       atomClass,

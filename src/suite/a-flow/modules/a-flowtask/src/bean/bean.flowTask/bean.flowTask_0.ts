@@ -15,11 +15,11 @@ export class BeanFlowTask0 extends BeanBase {
     return this.ctx.bean._getBean('a-flowtask.local.procedure');
   }
 
-  async count({ options, user }) {
+  async count({ options, user }: any) {
     return await this.select({ options, user, count: 1 });
   }
 
-  async select({ options, user, pageForce = true, count = 0 }) {
+  async select({ options, user, pageForce = true, count = 0 }: any) {
     const tasks = await this._list({ options, user, pageForce, count });
     // loop
     for (const task of tasks) {
@@ -35,55 +35,55 @@ export class BeanFlowTask0 extends BeanBase {
     return tasks;
   }
 
-  async get({ options, user }) {
+  async get({ options, user }: any) {
     const tasks = await this.select({ options, user });
     return tasks[0];
   }
 
-  async claim({ flowTaskId, user }) {
+  async claim({ flowTaskId, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     return await taskInstance._claim();
   }
 
-  async complete({ flowTaskId, handle, formAtom, user }) {
+  async complete({ flowTaskId, handle, formAtom, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._complete({ handle, formAtom });
   }
 
-  async appendHandleRemark({ flowTaskId, handle, user }) {
+  async appendHandleRemark({ flowTaskId, handle, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user, history: true });
     await taskInstance._appendHandleRemark({ handle });
   }
 
-  async assignees({ flowTaskId, user }) {
+  async assignees({ flowTaskId, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     return await taskInstance._assignees();
   }
 
-  async assigneesConfirmation({ flowTaskId, handle, user }) {
+  async assigneesConfirmation({ flowTaskId, handle, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._assigneesConfirmation({ handle });
   }
 
-  async recall({ flowTaskId, user }) {
+  async recall({ flowTaskId, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._recall();
   }
 
-  async cancelFlow({ flowTaskId, handle, user }) {
+  async cancelFlow({ flowTaskId, handle, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._cancelFlow({ handle });
   }
 
   // from history
-  async viewAtom({ flowTaskId, user, throwError }) {
+  async viewAtom({ flowTaskId, user, throwError }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user, history: true, throwError });
     if (!taskInstance) return null;
@@ -91,38 +91,38 @@ export class BeanFlowTask0 extends BeanBase {
   }
 
   // from runtime
-  async editAtom({ flowTaskId, user, throwError }) {
+  async editAtom({ flowTaskId, user, throwError }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user, history: false, throwError });
     if (!taskInstance) return null;
     return await taskInstance._editAtom();
   }
 
-  async forward({ flowTaskId, handle, user }) {
+  async forward({ flowTaskId, handle, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._forward({ handle });
   }
 
-  async forwardRecall({ flowTaskId, user }) {
+  async forwardRecall({ flowTaskId, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._forwardRecall();
   }
 
-  async substitute({ flowTaskId, handle, user }) {
+  async substitute({ flowTaskId, handle, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._substitute({ handle });
   }
 
-  async substituteRecall({ flowTaskId, user }) {
+  async substituteRecall({ flowTaskId, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._substituteRecall();
   }
 
-  async actions({ flowTaskId, user }) {
+  async actions({ flowTaskId, user }: any) {
     // taskInstance
     const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
     await taskInstance._actions();

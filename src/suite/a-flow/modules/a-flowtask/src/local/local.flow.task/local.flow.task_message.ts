@@ -1,7 +1,7 @@
 import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
-  async _publishMessageTaskInit({ flowTaskId, userIdAssignee, user }) {
+  async _publishMessageTaskInit({ flowTaskId, userIdAssignee, user }: any) {
     if (!this.context._flow.flowAtomId) {
       // only support business flow
       return;

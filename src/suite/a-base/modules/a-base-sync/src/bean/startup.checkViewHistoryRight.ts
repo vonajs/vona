@@ -25,7 +25,7 @@ export class StartupCheckViewHistoryRight extends BeanBase {
     }
   }
 
-  async _checkAtomClass({ atomClass }) {
+  async _checkAtomClass({ atomClass }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // check if any role exists
     const right = await this.modelRoleRight.get({

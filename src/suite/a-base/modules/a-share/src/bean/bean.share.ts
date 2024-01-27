@@ -15,7 +15,7 @@ export class BeanShare extends BeanBase {
     return this.ctx.model.module(__ThisModule__).shareRecordUV;
   }
 
-  async generate({ host, atomId, url, user }) {
+  async generate({ host, atomId, url, user }: any) {
     const userId = user.id;
     // get
     let item = await this.modelShare.get({
@@ -42,7 +42,7 @@ export class BeanShare extends BeanBase {
     return { link, uuid: item.uuid };
   }
 
-  async shareGo({ uuid, user }) {
+  async shareGo({ uuid, user }: any) {
     const userId = user.id;
     // get share
     const item = await this.modelShare.get({ uuid });
@@ -69,7 +69,7 @@ export class BeanShare extends BeanBase {
     return this.ctx.bean.base.getAbsoluteUrl(`/api/a/share/go/${uuid}`);
   }
 
-  async _share_record({ item, user }) {
+  async _share_record({ item, user }: any) {
     const userId = user.id;
     // aShareRecordPV
     await this.ctx.bean.event.invoke({

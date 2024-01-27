@@ -1,7 +1,7 @@
 import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
-  async _prepareRightMine({ /* iid, */ atomClass, atomClassBase, action, userIdWho, atom }) {
+  async _prepareRightMine({ /* iid, */ atomClass, atomClassBase, action, userIdWho, atom }: any) {
     // only mine data
     if (!atomClassBase) {
       return false; // not throw 403
@@ -35,7 +35,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     return roleScopesMine ? __combineClauseRightMineItemOnly({ atom, userIdWho, userIdFieldName }) : false;
   }
 
-  async _prepareRightOthers({ iid, atomClass, /* atomClassBase,*/ action, userIdWho, forAtomUser, role, atom }) {
+  async _prepareRightOthers({ iid, atomClass, /* atomClassBase,*/ action, userIdWho, forAtomUser, role, atom }: any) {
     // others
     let _others;
     if (forAtomUser) {
@@ -68,7 +68,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     return _others;
   }
 
-  async _prepareRight({ iid, atomClass, atomClassBase, action, userIdWho, forAtomUser, role, atom }) {
+  async _prepareRight({ iid, atomClass, atomClassBase, action, userIdWho, forAtomUser, role, atom }: any) {
     // enableRight
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true; // pass rights check
@@ -89,7 +89,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     return { __or__: [_mine, _others] };
   }
 
-  async _prepareRightOfRole({ iid, atomClass, atomClassBase, action, roleIdWho, forAtomUser, role, atom }) {
+  async _prepareRightOfRole({ iid, atomClass, atomClassBase, action, roleIdWho, forAtomUser, role, atom }: any) {
     // enableRight
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true; // pass rights check

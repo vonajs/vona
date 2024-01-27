@@ -57,19 +57,19 @@ export class LocalFlowNode0 extends BeanBase {
     return this._behaviors;
   }
 
-  async init({ flowNodeIdPrev }) {
+  async init({ flowNodeIdPrev }: any) {
     // create flowNode
     const flowNodeId = await this._createFlowNode({ flowNodeIdPrev });
     // context init
     await this._contextInit({ flowNodeId });
   }
 
-  async _load({ flowNode, history }) {
+  async _load({ flowNode, history }: any) {
     // context init
     await this._contextInit({ flowNodeId: flowNode.id, history });
   }
 
-  async _createFlowNode({ flowNodeIdPrev = 0 }) {
+  async _createFlowNode({ flowNodeIdPrev = 0 }: any) {
     // behaviorDefId
     const behaviorDefId = (this.contextEdge && this.contextEdge._edgeDef.behavior) || '';
     // flowNode
@@ -91,7 +91,7 @@ export class LocalFlowNode0 extends BeanBase {
     return flowNodeId;
   }
 
-  async _contextInit({ flowNodeId, history }) {
+  async _contextInit({ flowNodeId, history }: any) {
     // flowNodeId
     this.contextNode._flowNodeId = flowNodeId;
     // flowNode

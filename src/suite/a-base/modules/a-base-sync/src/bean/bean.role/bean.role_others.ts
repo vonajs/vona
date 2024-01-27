@@ -3,7 +3,7 @@ import { BeanRoleIncludes } from './bean.role_includes.js';
 //
 
 export class BeanRoleOthers extends BeanRoleIncludes {
-  async getUserRolesDirect({ userId }) {
+  async getUserRolesDirect({ userId }: any) {
     const list = await this.ctx.model.query(
       `
         select a.* from aRole a
@@ -15,7 +15,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list;
   }
 
-  async getUserRolesParent({ userId }) {
+  async getUserRolesParent({ userId }: any) {
     const list = await this.ctx.model.query(
       `
         select a.* from aRole a
@@ -27,7 +27,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list;
   }
 
-  async getUserRolesExpand({ userId }) {
+  async getUserRolesExpand({ userId }: any) {
     const list = await this.ctx.model.query(
       `
         select a.* from aRole a
@@ -39,7 +39,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list;
   }
 
-  async userInRoleDirect({ userId, roleId }) {
+  async userInRoleDirect({ userId, roleId }: any) {
     const list = await this.ctx.model.query(
       `
         select count(*) as count from aUserRole a
@@ -50,7 +50,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list[0].count > 0;
   }
 
-  async userInRoleParent({ userId, roleId }) {
+  async userInRoleParent({ userId, roleId }: any) {
     const list = await this.ctx.model.query(
       `
         select count(*) as count from aViewUserRoleRef a
@@ -61,7 +61,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list[0].count > 0;
   }
 
-  async userInRoleExpand({ userId, roleId }) {
+  async userInRoleExpand({ userId, roleId }: any) {
     const list = await this.ctx.model.query(
       `
         select count(*) as count from aViewUserRoleExpand a
@@ -72,7 +72,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list[0].count > 0;
   }
 
-  async usersOfRoleDirect({ roleId, disabled, page, removePrivacy }) {
+  async usersOfRoleDirect({ roleId, disabled, page, removePrivacy }: any) {
     // disabled
     let _disabled = '';
     if (disabled !== undefined) {
@@ -97,7 +97,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list;
   }
 
-  async usersOfRoleParent({ roleId, disabled, page, removePrivacy, query }) {
+  async usersOfRoleParent({ roleId, disabled, page, removePrivacy, query }: any) {
     // disabled
     let _disabled = '';
     if (disabled !== undefined) {
@@ -134,7 +134,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list;
   }
 
-  async usersOfRoleExpand({ roleId, disabled, page, removePrivacy }) {
+  async usersOfRoleExpand({ roleId, disabled, page, removePrivacy }: any) {
     // disabled
     let _disabled = '';
     if (disabled !== undefined) {
@@ -159,7 +159,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return list;
   }
 
-  async _forceRoleAtomId({ roleAtomId, roleId }) {
+  async _forceRoleAtomId({ roleAtomId, roleId }: any) {
     if (!roleAtomId) {
       const item = await this.get({ id: roleId });
       roleAtomId = item.atomId;
@@ -167,7 +167,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return roleAtomId;
   }
 
-  async _forceRoleId({ roleAtomId, roleId }) {
+  async _forceRoleId({ roleAtomId, roleId }: any) {
     if (!roleId) {
       const item = await this.get({ atomId: roleAtomId });
       roleId = item.id;
@@ -182,7 +182,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     return await this.get({ id: roleId });
   }
 
-  async _forceRoleAndCheckRightRead({ roleAtomId, roleId, user }) {
+  async _forceRoleAndCheckRightRead({ roleAtomId, roleId, user }: any) {
     const role = await this._forceRole({ roleAtomId, roleId });
     if (!user || user.id === 0) return role;
     // check

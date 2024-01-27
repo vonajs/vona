@@ -42,7 +42,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     });
   }
 
-  async _submitBase({ atomClass, key, options, user }) {
+  async _submitBase({ atomClass, key, options, user }: any) {
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // flowStage
@@ -76,7 +76,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     return await this._submitDirect({ atomClass, key, item: _atom, options, user });
   }
 
-  async _submitDirect({ atomClass, key, item, options, user }) {
+  async _submitDirect({ atomClass, key, item, options, user }: any) {
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // flowStage
@@ -103,7 +103,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     return result;
   }
 
-  async _submitDirect_formal({ atomClass, /* key,*/ item, options, user }) {
+  async _submitDirect_formal({ atomClass, /* key,*/ item, options, user }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // formal -> history
     if (item.atomIdFormal) {

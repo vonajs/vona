@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
 export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
-  async _prepareAtomClassAndAtomClassBase({ key, atomClass, throwWhenEmpty = true }) {
+  async _prepareAtomClassAndAtomClassBase({ key, atomClass, throwWhenEmpty = true }: any) {
     const atomId = key.atomId;
     // atomClass
     if (!atomClass) {
@@ -24,7 +24,12 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
     return { atomClass, atomClassBase };
   }
 
-  async _prepareKeyAndAtomAndAtomClass({ key: keyOuter, atomClass: atomClassOuter, options, throwWhenEmpty = true }) {
+  async _prepareKeyAndAtomAndAtomClass({
+    key: keyOuter,
+    atomClass: atomClassOuter,
+    options,
+    throwWhenEmpty = true,
+  }: any) {
     if (!options) options = {};
     // using the same options is better
     // options = Object.assign({}, options);
@@ -55,7 +60,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
     return { key, atom, atomClass, atomClassBase, options };
   }
 
-  async _prepareKeyAndAtom({ key: keyOuter, atomClass, atomClassBase, throwWhenEmpty = true }) {
+  async _prepareKeyAndAtom({ key: keyOuter, atomClass, atomClassBase, throwWhenEmpty = true }: any) {
     // prepare
     let { key, atom } = await this._prepareKeyAndAtom_inner({ key: keyOuter, atomClass, atomClassBase });
     // check if empty
@@ -69,7 +74,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
     return { key, atom };
   }
 
-  async _prepareKeyAndAtom_inner({ key: keyOuter, atomClass, atomClassBase }) {
+  async _prepareKeyAndAtom_inner({ key: keyOuter, atomClass, atomClassBase }: any) {
     const atomId = keyOuter.atomId;
     let atom, key;
     // check if empty

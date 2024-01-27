@@ -18,7 +18,7 @@ export class BeanStats extends BeanModuleScopeBase {
     });
   }
 
-  async notifyAsync({ module, name, nameSub, user }) {
+  async notifyAsync({ module, name, nameSub, user }: any) {
     module = module || this.moduleScope;
     user = user || (this.ctx.state.user && this.ctx.state.user.op);
     await this._notify_tail({ module, name, nameSub, user, async: true });
@@ -42,14 +42,14 @@ export class BeanStats extends BeanModuleScopeBase {
     });
   }
 
-  async _notify_queue({ module, name, nameSub, user }) {
+  async _notify_queue({ module, name, nameSub, user }: any) {
     // loop names
     await this._notify_queue_names({ module, name, nameSub, user });
     // deps
     await this._notify_queue_deps({ module, name, nameSub, user });
   }
 
-  async _notify_queue_names({ module, name, nameSub, user }) {
+  async _notify_queue_names({ module, name, nameSub, user }: any) {
     const provider = this._findStatsProvider({ module, name });
     const fullName = this._getFullName({ name, nameSub });
     const names = fullName.split('.');
@@ -73,7 +73,7 @@ export class BeanStats extends BeanModuleScopeBase {
     }
   }
 
-  async _notify_queue_deps({ module, name, nameSub, user }) {
+  async _notify_queue_deps({ module, name, nameSub, user }: any) {
     const fullKey = `${module}:${name}`;
     const deps = __statsDeps[fullKey];
     if (!deps || deps.length === 0) return;
@@ -89,7 +89,7 @@ export class BeanStats extends BeanModuleScopeBase {
     }
   }
 
-  async get({ module, name, nameSub, user }) {
+  async get({ module, name, nameSub, user }: any) {
     module = module || this.moduleScope;
     const provider = this._findStatsProvider({ module, name });
     const fullName = this._getFullName({ name, nameSub });
@@ -105,7 +105,7 @@ export class BeanStats extends BeanModuleScopeBase {
     return nameSub ? `${name}.${nameSub}` : name;
   }
 
-  async _get({ module, name, fullName, user }) {
+  async _get({ module, name, fullName, user }: any) {
     const where = { module, name: fullName };
     if (user) {
       where.userId = user.id;
@@ -119,7 +119,7 @@ export class BeanStats extends BeanModuleScopeBase {
     return value;
   }
 
-  async _set({ module, name, fullName, value, user }) {
+  async _set({ module, name, fullName, value, user }: any) {
     const where = { module, name: fullName };
     if (user) {
       where.userId = user.id;

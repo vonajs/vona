@@ -4,7 +4,7 @@ const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Delete extends BeanAtom0Default {
   // deleteBulk
-  async deleteBulk({ atomClass, keys, options: _options, user }) {
+  async deleteBulk({ atomClass, keys, options: _options, user }: any) {
     const resKeys: any[] = [];
     for (const key of keys) {
       const res = await this._deleteBulk_item({ atomClass, key, user });
@@ -98,7 +98,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     }
   }
 
-  async _delete({ /* atomClass,*/ atom, user: _user }) {
+  async _delete({ /* atomClass,*/ atom, user: _user }: any) {
     // stars
     await this._delete_stars({ atomId: atom.id });
     // labels
@@ -109,7 +109,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     await this.modelAtom.delete(atom);
   }
 
-  async _delete_stars({ atomId }) {
+  async _delete_stars({ atomId }: any) {
     const items = await this.modelAtomStar.select({
       where: { atomId, star: 1 },
     });
@@ -121,7 +121,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     }
   }
 
-  async _delete_labels({ atomId }) {
+  async _delete_labels({ atomId }: any) {
     const items = await this.modelAtomLabel.select({
       where: { atomId },
     });
@@ -134,7 +134,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     }
   }
 
-  async _deleteBulk_item({ atomClass, key, user }) {
+  async _deleteBulk_item({ atomClass, key, user }: any) {
     // check right
     const res = await this.ctx.bean.atom.checkRightAction({
       atom: { id: key.atomId },

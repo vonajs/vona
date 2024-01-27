@@ -6,7 +6,7 @@ export class BeanCategory0 extends BeanBase {
     return this.ctx.model.module(__ThisModule__).category;
   }
 
-  async get({ categoryId, setLocale }) {
+  async get({ categoryId, setLocale }: any) {
     if (!categoryId) return null;
     const category = await this.model.get({ id: categoryId });
     if (category && setLocale) {
@@ -15,7 +15,7 @@ export class BeanCategory0 extends BeanBase {
     return category;
   }
 
-  async save({ categoryId, data }) {
+  async save({ categoryId, data }: any) {
     await this.model.update({
       id: categoryId,
       categoryName: data.categoryName,
@@ -26,7 +26,7 @@ export class BeanCategory0 extends BeanBase {
     });
   }
 
-  async count({ atomClass, language, categoryId, categoryHidden, categoryFlag, user }) {
+  async count({ atomClass, language, categoryId, categoryHidden, categoryFlag, user }: any) {
     return await this.children({ atomClass, language, categoryId, categoryHidden, categoryFlag, user, count: 1 });
   }
 
@@ -118,7 +118,7 @@ export class BeanCategory0 extends BeanBase {
     return list;
   }
 
-  async add({ atomClass, data }) {
+  async add({ atomClass, data }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // add
     const res = await this.model.insert({
@@ -137,7 +137,7 @@ export class BeanCategory0 extends BeanBase {
     return res.insertId;
   }
 
-  async delete({ categoryId }) {
+  async delete({ categoryId }: any) {
     // check atoms
     const count = await this.ctx.bean.atom.modelAtom.count({ atomCategoryId: categoryId });
     if (count > 0) {
@@ -160,7 +160,7 @@ export class BeanCategory0 extends BeanBase {
     await this.adjustCatalog(categoryIdParent);
   }
 
-  async move({ categoryId, categoryIdParent }) {
+  async move({ categoryId, categoryIdParent }: any) {
     // category
     const category = await this.model.get({ id: categoryId });
     // categoryIdParentOld
@@ -186,7 +186,7 @@ export class BeanCategory0 extends BeanBase {
     });
   }
 
-  async tree({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale, user }) {
+  async tree({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale, user }: any) {
     // categoryHidden
     categoryHidden = await this._checkRightForCategoryHidden({ categoryHidden, user });
     // categoryId
@@ -194,7 +194,7 @@ export class BeanCategory0 extends BeanBase {
     return await this._treeChildren({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale });
   }
 
-  async _treeChildren({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale }) {
+  async _treeChildren({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale }: any) {
     const list = await this.children({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale });
     for (const item of list) {
       if (item.categoryCatalog) {
@@ -212,11 +212,11 @@ export class BeanCategory0 extends BeanBase {
     return list;
   }
 
-  async relativeTop({ categoryId, setLocale }) {
+  async relativeTop({ categoryId, setLocale }: any) {
     return await this._relativeTop({ categoryId, setLocale });
   }
 
-  async _relativeTop({ categoryId, setLocale }) {
+  async _relativeTop({ categoryId, setLocale }: any) {
     if (categoryId === 0) return null;
     const category = await this.get({ categoryId, setLocale });
     if (!category) return null;
@@ -225,7 +225,7 @@ export class BeanCategory0 extends BeanBase {
   }
 
   // categoryA.categoryB
-  async parseCategoryName({ atomClass, language, categoryName, categoryIdParent = 0, force = false }) {
+  async parseCategoryName({ atomClass, language, categoryName, categoryIdParent = 0, force = false }: any) {
     const categoryNames = categoryName.split('.');
     let category;
     for (const _categoryName of categoryNames) {
@@ -256,7 +256,7 @@ export class BeanCategory0 extends BeanBase {
     return category;
   }
 
-  async _register({ atomClass, language, categoryName, categoryIdParent }) {
+  async _register({ atomClass, language, categoryName, categoryIdParent }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.category.register.${atomClass.id}`,
@@ -271,7 +271,7 @@ export class BeanCategory0 extends BeanBase {
     });
   }
 
-  async _registerLock({ atomClass, language, categoryName, categoryIdParent }) {
+  async _registerLock({ atomClass, language, categoryName, categoryIdParent }: any) {
     // get again
     const category = await this.child({
       atomClass,
@@ -291,7 +291,7 @@ export class BeanCategory0 extends BeanBase {
     });
   }
 
-  async _checkRightForCategoryHidden({ categoryHidden, user }) {
+  async _checkRightForCategoryHidden({ categoryHidden, user }: any) {
     if (!user || user.id === 0) return categoryHidden;
     if (categoryHidden === 0) return categoryHidden;
     const res = await this.ctx.bean.resource.checkRightResource({

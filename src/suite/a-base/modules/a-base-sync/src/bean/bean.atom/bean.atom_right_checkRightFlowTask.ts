@@ -59,7 +59,7 @@ export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSele
     return { action, flowTaskId, flowTaskInfo };
   }
 
-  async _checkRightFlowTask_prepareAtomSchema({ options, mode, flowTaskId, atomClass, user, throwError }) {
+  async _checkRightFlowTask_prepareAtomSchema({ options, mode, flowTaskId, atomClass, user, throwError }: any) {
     const hint = {
       mode,
       flowTaskId,
@@ -83,7 +83,7 @@ export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSele
     return res;
   }
 
-  async _checkRightFlowTask_prepareAtomSchema_stash({ mode, flowTaskId, atomClass, user, throwError }) {
+  async _checkRightFlowTask_prepareAtomSchema_stash({ mode, flowTaskId, atomClass, user, throwError }: any) {
     return await this.ctx.bean.flowTask._prepareAtomSchema({
       mode,
       flowTaskId,

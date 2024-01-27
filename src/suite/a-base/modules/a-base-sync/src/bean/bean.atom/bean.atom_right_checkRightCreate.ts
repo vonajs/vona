@@ -1,12 +1,12 @@
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
 
 export class BeanAtomRightCheckRightCreate extends BeanAtomRightCheckRightActionEnable {
-  async checkRightCreate({ atomClass, user, options }) {
+  async checkRightCreate({ atomClass, user, options }: any) {
     return await this.checkRightActionBulk({ atomClass, action: 1, user, options });
   }
 
   // atomClass: { id, module, atomClassName }
-  async checkRightCreateRole({ atomClass, roleIdOwner, user, options, disableAuthOpenCheck }) {
+  async checkRightCreateRole({ atomClass, roleIdOwner, user, options, disableAuthOpenCheck }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // normal check
     const res = await this._checkRightCreateRole_normal({ atomClass, roleIdOwner, user, options });
@@ -20,7 +20,7 @@ export class BeanAtomRightCheckRightCreate extends BeanAtomRightCheckRightAction
     return res;
   }
 
-  async _checkRightCreateRole_normal({ atomClass, roleIdOwner, user, options }) {
+  async _checkRightCreateRole_normal({ atomClass, roleIdOwner, user, options }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check detail
     const detailRightInherit = await this._checkDetailRightInherit({

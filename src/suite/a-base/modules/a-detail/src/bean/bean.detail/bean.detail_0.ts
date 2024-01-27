@@ -6,7 +6,7 @@ export class BeanDetail0 extends BeanModuleScopeBase {
     return this.ctx.model.module(__ThisModule__).detailBase;
   }
 
-  async _loopDetailClasses({ atomClass, fn }) {
+  async _loopDetailClasses({ atomClass, fn }: any) {
     // all details of atom
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     const atomClassDetails = atomClassBase.details;

@@ -2,7 +2,7 @@ import { LocalFlowTaskForward } from './local.flow.task_forward.js';
 
 export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
   // handle: assignee/remark
-  async _substitute({ handle }) {
+  async _substitute({ handle }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask
@@ -17,7 +17,7 @@ export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
 
   // 1. create a new task
   // 2. update handleStatus/handleRemark
-  async _substitute_handle({ handle }) {
+  async _substitute_handle({ handle }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask

@@ -1,7 +1,7 @@
 import { LocalProcedureAtomSelectAtoms } from './local.procedure_atom_selectAtoms.js';
 
 export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtoms {
-  async _selectAtoms_0({ options }) {
+  async _selectAtoms_0({ options }: any) {
     const {
       iid,
       atomClass,
@@ -229,7 +229,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     return _sql;
   }
 
-  async _selectAtoms_0_rightWhere({ iid, forAtomUser, role }) {
+  async _selectAtoms_0_rightWhere({ iid, forAtomUser, role }: any) {
     if (forAtomUser && role) {
       return this.ctx.model.raw(`
           exists(

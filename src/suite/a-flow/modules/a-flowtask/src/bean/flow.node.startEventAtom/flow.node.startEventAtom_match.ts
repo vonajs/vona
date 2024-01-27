@@ -1,7 +1,7 @@
 import { FlowNodeStartEventAtomCondition } from './flow.node.startEventAtom_condition.js';
 
 export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition {
-  async _getAllConditions({ atomClassId, needFlowContent }) {
+  async _getAllConditions({ atomClassId, needFlowContent }: any) {
     const flowContentFields = needFlowContent ? ',b2.content' : '';
     const flowContentJoin = needFlowContent ? 'inner join aFlowDefContent b2 on b.atomId=b2.atomId' : '';
     // order by atomStatic/conditionExpression
@@ -19,7 +19,7 @@ export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition
     return list;
   }
 
-  async _match({ atom, userId }) {
+  async _match({ atom, userId }: any) {
     const list = await this._getAllConditions({ atomClassId: atom.atomClassId });
     for (const _condition of list) {
       const flowInstance = await this._matchCondition({ _condition, atom, userId });

@@ -10,7 +10,7 @@ export default ({ ctx /* flowInstance*/ }) => {
       this.contextEdge = contextEdge;
     }
 
-    async executeService({ bean, parameter }) {
+    async executeService({ bean, parameter }: any) {
       const globals = {};
       if (this.context) globals.context = this.context;
       if (this.contextNode) globals.contextNode = this.contextNode;

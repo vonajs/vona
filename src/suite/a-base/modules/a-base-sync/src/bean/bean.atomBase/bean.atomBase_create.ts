@@ -12,7 +12,7 @@ const __create_atom_basic_fields = [
 ];
 
 export class BeanAtomBaseCreate extends BeanAtomBase1 {
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // dataWrite
     const dataWrite = options.__createDelayData;
     // atomClass
@@ -43,7 +43,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     return data;
   }
 
-  async _create_prepareItemOnly({ atomClassBase, atomClass, item, options, user }) {
+  async _create_prepareItemOnly({ atomClassBase, atomClass, item, options, user }: any) {
     const data = { iid: atomClass.iid };
     // userIdCreated
     await this._create_prepareItemOnly_userIdCreated({ data, atomClassBase, item, options, user });
@@ -58,7 +58,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     return data;
   }
 
-  async _create_prepareItemOnly_userIdCreated({ data, atomClassBase, item, options: _options, user }) {
+  async _create_prepareItemOnly_userIdCreated({ data, atomClassBase, item, options: _options, user }: any) {
     const userIdCreatedField = atomClassBase.fields?.mappings?.userIdCreated;
     if (!userIdCreatedField) return;
     if (item[userIdCreatedField]) {
@@ -68,7 +68,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareDetail_atomIdMain({ data, atomClassBase, item, options, user: _user }) {
+  async _create_prepareDetail_atomIdMain({ data, atomClassBase, item, options, user: _user }: any) {
     // atomIdMain
     const atomIdMainField = atomClassBase.fields?.mappings?.atomIdMain;
     if (item[atomIdMainField]) {
@@ -78,7 +78,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareDetail_lineNo({ data, atomClassBase, atomClass, item, options, user }) {
+  async _create_prepareDetail_lineNo({ data, atomClassBase, atomClass, item, options, user }: any) {
     // detailLineNo
     const fieldNameLineNo = atomClassBase.fields?.mappings?.lineNo;
     if (!fieldNameLineNo) return;
@@ -95,7 +95,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareItem({ atomClassBase, atomClass, item, options, user }) {
+  async _create_prepareItem({ atomClassBase, atomClass, item, options, user }: any) {
     const data = { iid: atomClass.iid };
     // merge
     for (const field of __create_atom_basic_fields) {
@@ -120,7 +120,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     return data;
   }
 
-  async _create_prepareItem_atomName({ atomClassBase, atomClass, data, options: _options, user: _user }) {
+  async _create_prepareItem_atomName({ atomClassBase, atomClass, data, options: _options, user: _user }: any) {
     // atomName
     if (data.atomName) return;
     // sequence
@@ -141,13 +141,13 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     data.atomName = `${atomName}-${draftId}`;
   }
 
-  async _create_prepareItem_atomStaticKey({ data, options: _options, user: _user }) {
+  async _create_prepareItem_atomStaticKey({ data, options: _options, user: _user }: any) {
     if (!data.atomStaticKey) {
       data.atomStaticKey = this.ctx.bean.util.uuidv4();
     }
   }
 
-  async _create_prepareItem_atomSimple({ atomClassBase, data, options: _options, user: _user }) {
+  async _create_prepareItem_atomSimple({ atomClassBase, data, options: _options, user: _user }: any) {
     if (atomClassBase.simple) {
       data.atomSimple = 1;
       data.atomStage = 1;
@@ -157,7 +157,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareItem_roleIdOwner({ atomClassBase, atomClass, data, options, user }) {
+  async _create_prepareItem_roleIdOwner({ atomClassBase, atomClass, data, options, user }: any) {
     const bAtomClassRole = atomClass && atomClass.module === 'a-base' && atomClass.atomClassName === 'role';
     if (bAtomClassRole) return;
     if (data.roleIdOwner) return;
@@ -182,7 +182,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     data.roleIdOwner = roleId;
   }
 
-  async _create_prepareItem_atomCategoryId({ atomClass, data, options: _options, user: _user }) {
+  async _create_prepareItem_atomCategoryId({ atomClass, data, options: _options, user: _user }: any) {
     if (data.atomCategoryId && typeof data.atomCategoryId === 'string') {
       const category = await this.ctx.bean.category.parseCategoryName({
         atomClass,
@@ -197,7 +197,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     }
   }
 
-  async _create_prepareDetail_detailLineNo({ atomClassBase, options, user: _user }) {
+  async _create_prepareDetail_detailLineNo({ atomClassBase, options, user: _user }: any) {
     if (!atomClassBase.detail) return null;
     // field lineNo
     const fieldNameLineNo = atomClassBase.fields?.mappings?.lineNo;

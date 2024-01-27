@@ -8,7 +8,7 @@ export class LocalInstance extends BeanBase {
     return await this.ctx.model.instance.get({ id: this.ctx.instance.id });
   }
 
-  async save({ data }) {
+  async save({ data }: any) {
     // update
     await this.ctx.model.instance.update({
       id: this.ctx.instance.id,

@@ -12,7 +12,7 @@ export class AtomDict extends BeanAtomBase {
     return this.ctx.model.module(__ThisModule__).dictContent;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // dict default
     const data = await this.model.default();
     data.dictItems = '[]';
@@ -21,7 +21,7 @@ export class AtomDict extends BeanAtomBase {
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -31,7 +31,7 @@ export class AtomDict extends BeanAtomBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // meta
@@ -40,7 +40,7 @@ export class AtomDict extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     const data = await super.create({ atomClass, item, options, user });
     // add dict
@@ -55,7 +55,7 @@ export class AtomDict extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomWrite();
     // info
@@ -91,7 +91,7 @@ export class AtomDict extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     const item = await this.ctx.bean.atom.modelAtom.get({ id: key.atomId });
     const atomStaticKey = item.atomStaticKey;
     const atomStage = item.atomStage;

@@ -29,7 +29,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
   }
 
   // readByStaticKey
-  async readByStaticKey({ atomClass, atomStaticKey, atomRevision, atomStage }) {
+  async readByStaticKey({ atomClass, atomStaticKey, atomRevision, atomStage }: any) {
     const options = {
       mode: 'full',
       stage: atomStage,
@@ -44,7 +44,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     return list[0];
   }
 
-  async _get({ atomClass, options, key, mode, user }) {
+  async _get({ atomClass, options, key, mode, user }: any) {
     if (!options) options = {};
     const resource = options.resource || 0;
     const resourceLocale = options.resourceLocale === false ? false : options.resourceLocale || this.ctx.locale;
@@ -105,7 +105,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     return item;
   }
 
-  async _readQuery({ /* atomClass, */ options, user: _user }) {
+  async _readQuery({ /* atomClass, */ options, user: _user }: any) {
     return await this.sqlProcedure.getAtom({ options });
   }
 }

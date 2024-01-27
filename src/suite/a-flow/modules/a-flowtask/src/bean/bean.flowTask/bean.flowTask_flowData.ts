@@ -1,7 +1,7 @@
 import { BeanFlowTaskAtomState } from './bean.flowTask_atomState.js';
 
 export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
-  async flowData({ flowId, options, user }) {
+  async flowData({ flowId, options, user }: any) {
     options = options || {};
     // allowViewWorkflow
     const allowViewWorkflow = await this._checkViewWorkflow({ flowId, user });
@@ -16,7 +16,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     return { allowViewWorkflow, flow, atom, tasks };
   }
 
-  async _flowData_flow({ allowViewWorkflow, flowId, user }) {
+  async _flowData_flow({ allowViewWorkflow, flowId, user }: any) {
     if (allowViewWorkflow) {
       user = { id: 0 };
     }
@@ -28,7 +28,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     return flow;
   }
 
-  async _flowData_atom({ flowId, atomId, atomClassId }) {
+  async _flowData_atom({ flowId, atomId, atomClassId }: any) {
     // only read basic info
     let atom = await this.ctx.bean.atom.model.get({ id: atomId, atomClassId });
     if (atom.atomFlowId !== flowId) {
@@ -51,7 +51,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     return atom;
   }
 
-  async _flowData_tasks({ allowViewWorkflow, flow, atom, flowId, options, user }) {
+  async _flowData_tasks({ allowViewWorkflow, flow, atom, flowId, options, user }: any) {
     const currentOnly = options.currentOnly;
     const mineOnly = !allowViewWorkflow;
     // where
@@ -159,7 +159,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     }
   }
 
-  async _flowData_task_actions({ nodeInstances, tasks, task, user }) {
+  async _flowData_task_actions({ nodeInstances, tasks, task, user }: any) {
     // info
     const isDone = task.flowTaskStatus === 1;
     // actions

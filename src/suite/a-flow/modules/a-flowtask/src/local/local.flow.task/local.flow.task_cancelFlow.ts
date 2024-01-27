@@ -1,7 +1,7 @@
 import { LocalFlowTaskAssignees } from './local.flow.task_assignees.js';
 
 export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
-  async _cancelFlow({ handle }) {
+  async _cancelFlow({ handle }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask
@@ -12,7 +12,7 @@ export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
     await this._cancelFlow_handle({ handle });
   }
 
-  async _cancelFlow_handle({ handle }) {
+  async _cancelFlow_handle({ handle }: any) {
     // atomState
     await this.ctx.bean.flowTask._setAtomState({ context: this.context, options: { atomState: -3 } });
     // flowTask

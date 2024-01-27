@@ -111,7 +111,7 @@ export class BeanUser0 extends BeanBase {
     if (checkUser && this.ctx.state.user.op.anonymous) this.ctx.throw(401);
   }
 
-  async _check_getStateUser({ ctxUser }) {
+  async _check_getStateUser({ ctxUser }: any) {
     // state
     const stateUser = {
       provider: ctxUser.provider,
@@ -160,7 +160,7 @@ export class BeanUser0 extends BeanBase {
     return stateUser;
   }
 
-  async setActivated({ user, autoActivate }) {
+  async setActivated({ user, autoActivate }: any) {
     // save
     if (user.activated !== undefined) delete user.activated;
     await this.save({ user });
@@ -171,7 +171,7 @@ export class BeanUser0 extends BeanBase {
     }
   }
 
-  async userRoleStageAdd({ userId }) {
+  async userRoleStageAdd({ userId }: any) {
     // roleNames
     let roleNames = this.config.account.needActivation ? 'registered' : this.config.account.activatedRoles;
     roleNames = roleNames.split(',');
@@ -181,7 +181,7 @@ export class BeanUser0 extends BeanBase {
     }
   }
 
-  async userRoleStageActivate({ userId }) {
+  async userRoleStageActivate({ userId }: any) {
     // get
     const user = await this.get({ id: userId });
     // only once
@@ -214,7 +214,7 @@ export class BeanUser0 extends BeanBase {
     });
   }
 
-  async agent({ userId }) {
+  async agent({ userId }: any) {
     const sql = `
         select a.* from aUser a
           left join aUserAgent b on a.id=b.userIdAgent
@@ -223,7 +223,7 @@ export class BeanUser0 extends BeanBase {
     return await this.ctx.model.queryOne(sql, [this.ctx.instance.id, userId]);
   }
 
-  async agentsBy({ userId }) {
+  async agentsBy({ userId }: any) {
     const sql = `
         select a.* from aUser a
           left join aUserAgent b on a.id=b.userId
@@ -232,21 +232,21 @@ export class BeanUser0 extends BeanBase {
     return await this.ctx.model.query(sql, [this.ctx.instance.id, userId]);
   }
 
-  async addAgent({ userIdAgent, userId }) {
+  async addAgent({ userIdAgent, userId }: any) {
     await this.modelAgent.insert({
       userIdAgent,
       userId,
     });
   }
 
-  async removeAgent({ userIdAgent, userId }) {
+  async removeAgent({ userIdAgent, userId }: any) {
     await this.modelAgent.delete({
       userIdAgent,
       userId,
     });
   }
 
-  async switchAgent({ userIdAgent }) {
+  async switchAgent({ userIdAgent }: any) {
     const op = this.ctx.user.op;
     const _user = await this.get({ id: userIdAgent });
     this.ctx.user.op = { id: _user.id, iid: _user.iid, anonymous: _user.anonymous };
@@ -265,7 +265,7 @@ export class BeanUser0 extends BeanBase {
   }
 
   // state: login/associate/migrate
-  async verify({ state = 'login', profileUser }) {
+  async verify({ state = 'login', profileUser }: any) {
     if (state === 'migrate' || state === 'associate') {
       this.ctx.bean.util.checkDemo();
     }
@@ -432,7 +432,7 @@ export class BeanUser0 extends BeanBase {
     return verifyUser;
   }
 
-  async accountMigration({ userIdFrom, userIdTo }) {
+  async accountMigration({ userIdFrom, userIdTo }: any) {
     // accountMigration event
     await this.ctx.bean.event.invoke({
       module: __ThisModule__,
@@ -466,7 +466,7 @@ export class BeanUser0 extends BeanBase {
     await this.delete({ userId: userIdFrom });
   }
 
-  async _downloadAvatar({ avatar }) {
+  async _downloadAvatar({ avatar }: any) {
     const timeout = this.config.auth.avatar.timeout;
     let res;
     try {
@@ -477,7 +477,7 @@ export class BeanUser0 extends BeanBase {
     return res;
   }
 
-  async _prepareAvatar({ authItem, profile }) {
+  async _prepareAvatar({ authItem, profile }: any) {
     // maybe failed for image format invalid
     try {
       // avatar

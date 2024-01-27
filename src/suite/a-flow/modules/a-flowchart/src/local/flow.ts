@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalFlow extends BeanBase {
-  async flowChartProcess({ host, user }) {
+  async flowChartProcess({ host, user }: any) {
     // check right
     const flowChartProcess = await this.__checkRightFlowChartProcess({ host, user });
     if (!flowChartProcess) this.ctx.throw(403);
@@ -28,7 +28,7 @@ export class LocalFlow extends BeanBase {
     return flowChartProcess;
   }
 
-  async __checkRightFlowChartProcess({ host, user }) {
+  async __checkRightFlowChartProcess({ host, user }: any) {
     const { flowId } = host;
     // check right: allowViewWorkflow
     const allowViewWorkflow = await this.ctx.bean.flowTask._checkViewWorkflow({ flowId, user });

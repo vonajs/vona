@@ -43,7 +43,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
     };
   }
 
-  async _assigneesConfirmation({ handle }) {
+  async _assigneesConfirmation({ handle }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask
@@ -56,7 +56,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
     this._notifyTaskHandlings(flowTask.userIdAssignee);
   }
 
-  async _assigneesConfirmation_handle({ handle }) {
+  async _assigneesConfirmation_handle({ handle }: any) {
     // options
     const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     // flowTaskHistory update

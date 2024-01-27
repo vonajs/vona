@@ -20,7 +20,7 @@ export class BeanAuthSimple extends BeanBase {
   }
 
   // mobile: not use
-  async signup({ user, state = 'login', userName, realName, email, /* mobile,*/ password }) {
+  async signup({ user, state = 'login', userName, realName, email, /* mobile,*/ password }: any) {
     // add authsimple
     const authSimpleId = await this._addAuthSimple({ password });
 
@@ -71,7 +71,7 @@ export class BeanAuthSimple extends BeanBase {
   }
 
   // data: { auth, password, rememberMe }
-  async signin({ data, state = 'login' }) {
+  async signin({ data, state = 'login' }: any) {
     const res = await this.ctx.bean.authProvider.authenticateDirect({
       module: __ThisModule__,
       providerName: 'authsimple',
@@ -86,7 +86,7 @@ export class BeanAuthSimple extends BeanBase {
     return res;
   }
 
-  async signinDirect({ data, state = 'login' }) {
+  async signinDirect({ data, state = 'login' }: any) {
     // beanProvider
     const beanProvider = this.ctx.bean.authProvider.createAuthProviderBean({
       module: __ThisModule__,
@@ -104,7 +104,7 @@ export class BeanAuthSimple extends BeanBase {
     return verifyUser;
   }
 
-  async _addAuthSimple({ password }) {
+  async _addAuthSimple({ password }: any) {
     // hash
     password = password || this.configModule.defaultPassword;
     const hash = await this.localSimple.calcPassword({ password });
@@ -116,7 +116,7 @@ export class BeanAuthSimple extends BeanBase {
     return res.insertId;
   }
 
-  async add({ userId, password }) {
+  async add({ userId, password }: any) {
     // add authsimple
     const authSimpleId = await this._addAuthSimple({ password });
     // update userId
@@ -139,7 +139,7 @@ export class BeanAuthSimple extends BeanBase {
     return authSimpleId;
   }
 
-  async passwordChange({ passwordOld, passwordNew, userId }) {
+  async passwordChange({ passwordOld, passwordNew, userId }: any) {
     let authSimpleId;
     // check if exists
     const authSimple = await this.modelAuthSimple.get({ userId });
@@ -180,7 +180,7 @@ export class BeanAuthSimple extends BeanBase {
     // await this.ctx.bean.auth.login(verifyUser);
   }
 
-  async _passwordSaveNew({ passwordNew, userId }) {
+  async _passwordSaveNew({ passwordNew, userId }: any) {
     // save new
     const auth = await this.modelAuthSimple.get({
       userId,
@@ -192,7 +192,7 @@ export class BeanAuthSimple extends BeanBase {
     });
   }
 
-  async passwordReset({ passwordNew, token }) {
+  async passwordReset({ passwordNew, token }: any) {
     // token value
     const cacheKey = `passwordReset:${token}`;
     const value = await this.cacheDb.get(cacheKey);
@@ -223,7 +223,7 @@ export class BeanAuthSimple extends BeanBase {
     return user2;
   }
 
-  async passwordForgot({ email }) {
+  async passwordForgot({ email }: any) {
     // user by email
     const user = await this.ctx.bean.user.exists({ email });
     // link
@@ -254,7 +254,7 @@ export class BeanAuthSimple extends BeanBase {
     await this.cacheDb.set(`passwordReset:${token}`, { userId: user.id }, this.configModule.passwordReset.timeout);
   }
 
-  async emailConfirm({ email, user }) {
+  async emailConfirm({ email, user }: any) {
     // save email
     await this.ctx.bean.user.setActivated({
       user: { id: user.id, email, emailConfirmed: 0 },
@@ -288,7 +288,7 @@ export class BeanAuthSimple extends BeanBase {
   }
 
   // invoke by user clicking the link
-  async emailConfirmation({ token }) {
+  async emailConfirmation({ token }: any) {
     // token value
     const cacheKey = `emailConfirm:${token}`;
     const value = await this.cacheDb.get(cacheKey);
@@ -321,7 +321,7 @@ export class BeanAuthSimple extends BeanBase {
     return this.ctx.redirect(url);
   }
 
-  async checkStatus({ user }) {
+  async checkStatus({ user }: any) {
     // check if exists
     const auth = await this.modelAuthSimple.get({
       userId: user.id,

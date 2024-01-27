@@ -12,26 +12,26 @@ export class BeanAtomStateDynamic extends BeanAtomStateStatic {
     return this.ctx.bean.status.module(__ThisModule__);
   }
 
-  async dynamic_getDictKeyInfo({ atomClass }) {
+  async dynamic_getDictKeyInfo({ atomClass }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     const statusName = `atomStateDictKey:${atomClassId}`;
     return await this.beanStatus.get(statusName);
   }
 
-  async dynamic_setDictKeyInfo({ atomClass, dictKey, mode }) {
+  async dynamic_setDictKeyInfo({ atomClass, dictKey, mode }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     const statusName = `atomStateDictKey:${atomClassId}`;
     const dictKeyInfo = { dictKey, mode };
     await this.beanStatus.set(statusName, dictKeyInfo);
   }
 
-  async dynamic_clearDictKeyInfo({ atomClass }) {
+  async dynamic_clearDictKeyInfo({ atomClass }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     const statusName = `atomStateDictKey:${atomClassId}`;
     await this.beanStatus.set(statusName, null);
   }
 
-  async dynamic_getDict({ atomClass }) {
+  async dynamic_getDict({ atomClass }: any) {
     const dictKeyInfo = await this.dynamic_getDictKeyInfo({ atomClass });
     const dictKey = dictKeyInfo?.dictKey;
     if (!dictKey) return null;
@@ -40,7 +40,7 @@ export class BeanAtomStateDynamic extends BeanAtomStateStatic {
     return { dictKey, dict };
   }
 
-  async dynamic_deleteDict({ atomClass }) {
+  async dynamic_deleteDict({ atomClass }: any) {
     // atom class dict
     const atomClassDict = await this.ctx.bean.atomClass.get(__atomClassDict);
     // get dictKey from status
@@ -61,7 +61,7 @@ export class BeanAtomStateDynamic extends BeanAtomStateStatic {
     await this.dynamic_clearDictKeyInfo({ atomClass });
   }
 
-  async dynamic_saveDict({ atomClass, dictItems, dictLocales, mode }) {
+  async dynamic_saveDict({ atomClass, dictItems, dictLocales, mode }: any) {
     // atom class dict
     const atomClassDict = await this.ctx.bean.atomClass.get(__atomClassDict);
     // get dictKey from status

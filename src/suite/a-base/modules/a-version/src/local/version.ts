@@ -17,7 +17,7 @@ export class LocalVersion extends BeanBase {
     await this.__database();
   }
 
-  async instanceInitStartup({ options }) {
+  async instanceInitStartup({ options }: any) {
     const instanceBase = options && options.instanceBase;
     await this.__instanceInit(this.ctx.subdomain, instanceBase);
   }

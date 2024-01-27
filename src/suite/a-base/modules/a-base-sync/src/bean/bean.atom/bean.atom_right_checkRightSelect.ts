@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 
 export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
-  async checkRightSelect({ atomClass, user, options }) {
+  async checkRightSelect({ atomClass, user, options }: any) {
     options = options || {};
     const atomIdMain = options.atomIdMain;
     if (!atomClass) {
@@ -29,7 +29,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     return true;
   }
 
-  async _checkRightSelect_atomHistory({ atomClass, user, options }) {
+  async _checkRightSelect_atomHistory({ atomClass, user, options }: any) {
     // right check of select of hisotry contains two steps:
     //   1. check viewHistory action right
     //   2. check other action right (options.formAction)

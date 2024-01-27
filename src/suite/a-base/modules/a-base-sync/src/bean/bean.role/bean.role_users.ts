@@ -11,7 +11,7 @@ const __atomClassUser = {
 };
 
 export class BeanRoleUsers extends BeanRoleResourceRights {
-  async roleUsers({ roleAtomId, roleId, page, user }) {
+  async roleUsers({ roleAtomId, roleId, page, user }: any) {
     // user, should check user right scope
     // user = { id: 0 };
     // roleId
@@ -32,7 +32,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     return list;
   }
 
-  async userRoles({ userAtomId, userId, page, user }) {
+  async userRoles({ userAtomId, userId, page, user }: any) {
     // user, should check user right scope
     // user = { id: 0 };
     userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
@@ -82,7 +82,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     return res.insertId;
   }
 
-  async deleteUserRole({ roleAtomId, roleId, userAtomId, userId, user }) {
+  async deleteUserRole({ roleAtomId, roleId, userAtomId, userId, user }: any) {
     // role
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;
@@ -101,7 +101,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     });
   }
 
-  async deleteAllUserRoles({ userId }) {
+  async deleteAllUserRoles({ userId }: any) {
     await this.modelUserRole.delete({ userId });
   }
 }

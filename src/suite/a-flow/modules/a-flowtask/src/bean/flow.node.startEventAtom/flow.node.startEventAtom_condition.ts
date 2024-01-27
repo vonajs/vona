@@ -1,7 +1,7 @@
 import { FlowNodeStartEventAtom0 } from './flow.node.startEventAtom_0.js';
 
 export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
-  async _deploy_condition({ atomClass, deploy, flowDefId, node }) {
+  async _deploy_condition({ atomClass, deploy, flowDefId, node }: any) {
     if (deploy) {
       await this._addCondition({ atomClass, flowDefId, node });
     } else {
@@ -9,7 +9,7 @@ export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
     }
   }
 
-  async _getAtomClass({ flowDefId, node }) {
+  async _getAtomClass({ flowDefId, node }: any) {
     const atom = node.options && node.options.atom;
     if (!atom || !atom.module || !atom.atomClassName) {
       // donot delete condition
@@ -25,7 +25,7 @@ export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
     return { atomClass };
   }
 
-  async _addCondition({ atomClass, flowDefId, node }) {
+  async _addCondition({ atomClass, flowDefId, node }: any) {
     // conditionExpression
     const conditionExpression = node.options.conditionExpression;
     // get condition
@@ -55,7 +55,7 @@ export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
     await this.modelCondition.delete({ id: _condition.id });
   }
 
-  async _deleteCondition2({ flowDefId, node }) {
+  async _deleteCondition2({ flowDefId, node }: any) {
     const startEventId = node.id;
     await this.modelCondition.delete({
       flowDefId,

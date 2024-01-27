@@ -1,7 +1,7 @@
 import { BeanFlowTaskSchema } from './bean.flowTask_schema.js';
 
 export class BeanFlowTaskCheckViewWorkflow extends BeanFlowTaskSchema {
-  async _checkViewWorkflow({ flowId, user }) {
+  async _checkViewWorkflow({ flowId, user }: any) {
     // 1. check atomClass action
     let res = await this._checkViewWorkflow_checkRightAction({ flowId, user });
     if (res) return true;
@@ -10,7 +10,7 @@ export class BeanFlowTaskCheckViewWorkflow extends BeanFlowTaskSchema {
     return res;
   }
 
-  async _checkViewWorkflow_checkRightAction({ flowId, user }) {
+  async _checkViewWorkflow_checkRightAction({ flowId, user }: any) {
     // flow
     const flowItem = await this.ctx.bean.flow.modelFlowHistory.get({ flowId });
     const atomId = flowItem.flowAtomId;
@@ -26,7 +26,7 @@ export class BeanFlowTaskCheckViewWorkflow extends BeanFlowTaskSchema {
     return !!res;
   }
 
-  async _checkViewWorkflow_checkTaskOptions({ flowId, user }) {
+  async _checkViewWorkflow_checkTaskOptions({ flowId, user }: any) {
     // check task option: allowViewWorkflow
     const items = await this.modelFlowTaskHistory.select({
       where: {

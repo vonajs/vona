@@ -3,7 +3,7 @@ import { LocalFlowFlowEndFlow } from './local.flow.flow_endFlow.js';
 
 export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
   // return true, means has one edge to be taken
-  async nextEdges({ nodeInstance, behaviorDefId }) {
+  async nextEdges({ nodeInstance, behaviorDefId }: any) {
     const contextNode = nodeInstance.contextNode;
     const nodeBase = nodeInstance.nodeBase;
     // gatewayMode
@@ -50,7 +50,7 @@ export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
     // return false;
   }
 
-  async _findEdgeInstancesNext({ nodeDefId, contextNode, behaviorDefId }) {
+  async _findEdgeInstancesNext({ nodeDefId, contextNode, behaviorDefId }: any) {
     // edgeDefs
     const edgeDefs = this.ctx.bean.flowDef._findEdgesNext({
       content: this.context._flowDefContent,

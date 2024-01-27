@@ -82,13 +82,13 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
     return false;
   }
 
-  async onNodeClear({ options }) {
+  async onNodeClear({ options }: any) {
     await this.ctx.bean.flowTask._clearRemains({ nodeInstance: this.nodeInstance });
     // super
     return await super.onNodeClear({ options });
   }
 
-  async onNodeChange({ options }) {
+  async onNodeChange({ options }: any) {
     const { event, taskInstance } = options;
     if (event === 'created') {
       await taskInstance.flowInstance._flowListener.onTaskCreated(taskInstance.contextTask, taskInstance.contextNode);
@@ -101,7 +101,7 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
     return await super.onNodeChange({ options });
   }
 
-  async _prepareAssignees({ options }) {
+  async _prepareAssignees({ options }: any) {
     // check var: _assigneesConfirmed
     let assignees = this.contextNode.vars.get('_assigneesConfirmed');
     if (assignees && assignees.length > 0) return true;
@@ -140,7 +140,7 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
   }
 
   // specificFlag: 1,2
-  async _taskConfirmationClaim({ taskInstance, specificFlag }) {
+  async _taskConfirmationClaim({ taskInstance, specificFlag }: any) {
     // allowViewWorkflow
     let allowViewWorkflow;
     if (specificFlag === 1 || specificFlag === 2) {
@@ -170,7 +170,7 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
     taskInstance._notifyTaskHandlings(taskInstance.contextTask._flowTask.userIdAssignee);
   }
 
-  async _setAtomState({ options }) {
+  async _setAtomState({ options }: any) {
     // static/dynamic
     let atomStateInfo = this._prepareAtomState_static({ options });
     if (!atomStateInfo) {
@@ -205,7 +205,7 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
     return { dictKey, atomState };
   }
 
-  async _prepareAtomState_dynamic({ options }) {
+  async _prepareAtomState_dynamic({ options }: any) {
     if (this.atomStateDefault) {
       // means startEventAtom
       return { atomState: this.atomStateDefault };

@@ -15,7 +15,7 @@ const __itemBasicFieldsRead = [
 
 export class LocalProcedureUtilsFieldsRight extends LocalProcedureResource {
   // see also: _readValidate
-  async _prepare_fieldsRight({ options }) {
+  async _prepare_fieldsRight({ options }: any) {
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') > -1) return 'f.*';
     const schema = this.ctx.bean.validation.getSchema(options.schema);
     const properties = schema.schema.properties;

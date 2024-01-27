@@ -16,7 +16,7 @@ export class BeanAuthProvider extends BeanBase {
     return authProviders[providerFullName];
   }
 
-  async getAuthProvider({ id, module, providerName }) {
+  async getAuthProvider({ id, module, providerName }: any) {
     // this.ctx.instance maybe not exists
     const data = id ? { id } : { module, providerName };
     const res = await this.modelAuthProvider.get(data);
@@ -49,7 +49,7 @@ export class BeanAuthProvider extends BeanBase {
     });
   }
 
-  async authenticateDirect({ module, providerName, providerScene, query, body }) {
+  async authenticateDirect({ module, providerName, providerScene, query, body }: any) {
     return await this.ctx.meta.util.executeBeanIsolate({
       beanModule: __ThisModule__,
       beanFullName: `${__ThisModule__}.local.passport`,
@@ -74,7 +74,7 @@ export class BeanAuthProvider extends BeanBase {
     };
   }
 
-  async _registerAuthProviderLock({ module, providerName }) {
+  async _registerAuthProviderLock({ module, providerName }: any) {
     // get
     const res = await this.modelAuthProvider.get({ module, providerName });
     if (res) return res;

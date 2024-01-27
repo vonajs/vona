@@ -66,7 +66,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     this._notifyLabels();
   }
 
-  async _labels_atomLabel({ atomId, labels, user }) {
+  async _labels_atomLabel({ atomId, labels, user }: any) {
     // delete
     if (!labels || labels.length === 0) {
       await this.modelAtomLabel.delete({
@@ -109,7 +109,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     }
   }
 
-  async _labels_atomLabelRef({ atomId, labels, user }) {
+  async _labels_atomLabelRef({ atomId, labels, user }: any) {
     // force delete
     await this.modelAtomLabelRef.delete({
       userId: user.id,
@@ -127,7 +127,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     }
   }
 
-  async getLabels({ user }) {
+  async getLabels({ user }: any) {
     const data = await this.modelLabel.get({
       userId: user.id,
     });
@@ -149,7 +149,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     return labels;
   }
 
-  async setLabels({ labels, user }) {
+  async setLabels({ labels, user }: any) {
     const labels2 = JSON.stringify(labels);
     const res = await this.modelLabel.get({
       userId: user.id,

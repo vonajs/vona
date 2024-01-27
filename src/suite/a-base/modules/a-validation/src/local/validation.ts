@@ -5,7 +5,7 @@ export class LocalValidation extends BeanBase {
   schema({ module, validator, schema }) {
     return this.ctx.bean.validation.getSchema({ module, validator, schema });
   }
-  async validate({ params, data }) {
+  async validate({ params, data }: any) {
     const { module, validator, schema } = params;
     await this.ctx.bean.validation._validate({
       atomClas: null,

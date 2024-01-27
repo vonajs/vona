@@ -304,7 +304,7 @@ export class BeanUtil extends BeanBase {
   }
 
   // check draft/formal
-  async checkAtomIdExists({ atomId, items }) {
+  async checkAtomIdExists({ atomId, items }: any) {
     if (items.length === 0) return false;
     const atomIds = new Set([atomId]);
     const _atomOld = await this.ctx.bean.atom.modelAtom.get({ id: atomId });

@@ -1,7 +1,7 @@
 import { FlowNodeStartEventAtomMatch } from './flow.node.startEventAtom_match.js';
 
 export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMatch {
-  async _deploy_flowActions({ atomClass, /* flowDefId,*/ node, deleting, flowDef, content }) {
+  async _deploy_flowActions({ atomClass, /* flowDefId,*/ node, deleting, flowDef, content }: any) {
     if (deleting) {
       await this._deploy_flowActions_deleting({ atomClass, flowDef });
     } else {
@@ -9,7 +9,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
     }
   }
 
-  async _deploy_flowActions_modifing({ atomClass, node, flowDef, content }) {
+  async _deploy_flowActions_modifing({ atomClass, node, flowDef, content }: any) {
     // nodeTasks
     const checked = {};
     const nodeTasks = await this._deploy_flowActions_findNodeTasks({ content, nodeStart: node });
@@ -62,7 +62,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
     }
   }
 
-  async _deploy_flowActions_findNodeTasks({ content, nodeStart: node }) {
+  async _deploy_flowActions_findNodeTasks({ content, nodeStart: node }: any) {
     return await this.ctx.bean.flowDef._loopNodes({
       content,
       nodeIdStart: node.id,
@@ -88,7 +88,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
     });
   }
 
-  async _deploy_flowActions_deleting({ atomClass, flowDef }) {
+  async _deploy_flowActions_deleting({ atomClass, flowDef }: any) {
     // flowActions
     const flowActions = await this.ctx.bean.atomAction.selectFlowActions({ atomClass, flowKey: flowDef.atomStaticKey });
     // loop one

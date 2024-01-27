@@ -9,7 +9,7 @@ export class QueueSubmit extends BeanBase {
     }
   }
 
-  async _queueSubmitBaidu({ targetConfig, hostname, links }) {
+  async _queueSubmitBaidu({ targetConfig, hostname, links }: any) {
     // submit
     const url = `http://data.zz.baidu.com/urls?site=${hostname}&token=${targetConfig.token}`;
     const options = {

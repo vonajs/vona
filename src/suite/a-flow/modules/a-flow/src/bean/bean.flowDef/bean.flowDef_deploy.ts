@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
 
 export class BeanFlowDefDeploy extends BeanFlowDef0 {
-  async deploy({ flowDefId, undeploy, deleting }) {
+  async deploy({ flowDefId, undeploy, deleting }: any) {
     // start event
     const res = await this._deploy_startEvent({ flowDefId, undeploy, deleting });
     const atomClass = res?.atomClass;
@@ -12,7 +12,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     }
   }
 
-  async _deploy_atomState({ atomClass }) {
+  async _deploy_atomState({ atomClass }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     // let db commit
     this.ctx.tail(async () => {
@@ -25,7 +25,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     });
   }
 
-  async _deploy_atomState_inner({ atomClass }) {
+  async _deploy_atomState_inner({ atomClass }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     // all flowDefs
     const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom');
@@ -92,7 +92,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     await this.ctx.bean.atomState.dynamic_saveDict({ atomClass, dictItems, dictLocales, mode });
   }
 
-  async _deploy_atomState_findNodes({ startEventId, content }) {
+  async _deploy_atomState_findNodes({ startEventId, content }: any) {
     let nodeStart = null;
     let nodeEnd = null;
     const nodeTasks = await this.ctx.bean.flowDef._loopNodes({
@@ -170,7 +170,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     return dictItem;
   }
 
-  async _deploy_startEvent({ flowDefId, undeploy, deleting }) {
+  async _deploy_startEvent({ flowDefId, undeploy, deleting }: any) {
     // flowDef
     const flowDef = await this._getById({ flowDefId });
     if (!flowDef) return;

@@ -3,7 +3,7 @@ import { BeanFlowTaskNodeDoneCheck } from './bean.flowTask_nodeDoneCheck.js';
 export class BeanFlowTaskSchema extends BeanFlowTaskNodeDoneCheck {
   // mode: read/write view/edit
   // atomClass: detail/main
-  async _prepareAtomSchema({ mode, flowTaskId, atomClass, user, throwError }) {
+  async _prepareAtomSchema({ mode, flowTaskId, atomClass, user, throwError }: any) {
     // read
     const modeRead = mode === 'view' || mode === 'read';
     // taskInstance

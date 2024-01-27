@@ -3,7 +3,7 @@ import { BeanIo0 } from './bean.io_0.js';
 
 export class BeanIoDelivery extends BeanIo0 {
   // called by messageBase.onDelivery
-  async delivery({ path, options, message, messageSync, messageClass }) {
+  async delivery({ path, options, message, messageSync, messageClass }: any) {
     // ignore delivery online if !path
     if (path) {
       const deliveryDone = await this.emit({ path, options, message, messageSync, messageClass });
@@ -17,7 +17,7 @@ export class BeanIoDelivery extends BeanIo0 {
   // offline: return false
   //    hash key: userId:path
   //    hash value: scene -> workerId:socketId
-  async emit({ path, options, message, messageSync /* , messageClass*/ }) {
+  async emit({ path, options, message, messageSync /* , messageClass*/ }: any) {
     // userId
     const userId = messageSync.userId;
     if (!userId) return true;
@@ -32,7 +32,7 @@ export class BeanIoDelivery extends BeanIo0 {
   }
 
   // return true when any emitSocket
-  async _emitScene({ path, options, message, messageSync, messageScene }) {
+  async _emitScene({ path, options, message, messageSync, messageScene }: any) {
     // userId
     const userId = messageSync.userId;
     const isSender = message.userIdFrom === userId;
@@ -95,7 +95,7 @@ export class BeanIoDelivery extends BeanIo0 {
     }
   }
 
-  // async _emitNoScene({ path, message, messageSync, messageScene }) {
+  // async _emitNoScene({ path, message, messageSync, messageScene }: any) {
   //   // userId
   //   const userId = messageSync.userId;
   //   const isSender = message.userIdFrom === userId;

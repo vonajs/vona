@@ -39,7 +39,7 @@ export class BeanAtom0Create extends BeanAtom0 {
     return await this._create_result({ key, atomClass, options, user });
   }
 
-  async _create_result({ key, atomClass, options, user }) {
+  async _create_result({ key, atomClass, options, user }: any) {
     const returnItem = options.returnItem;
     if (!returnItem) return key;
     // read
@@ -56,7 +56,7 @@ export class BeanAtom0Create extends BeanAtom0 {
     return { key, item: resRead };
   }
 
-  async _create_after({ key, atomClass, atomClassBase }) {
+  async _create_after({ key, atomClass, atomClassBase }: any) {
     const { atomId, itemId } = key;
     // save itemId
     if (!atomClassBase.itemOnly) {

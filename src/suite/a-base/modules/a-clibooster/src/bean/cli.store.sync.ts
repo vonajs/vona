@@ -17,7 +17,7 @@ export class CliStoreSync extends CliStoreBase {
     super(options, 'sync');
   }
 
-  async onExecuteStoreCommandEntity({ entityName }) {
+  async onExecuteStoreCommandEntity({ entityName }: any) {
     // fetch entity status
     const entityStatus = await this.openAuthClient.post({
       path: '/cabloy/store/store/sync/entityStatus',
@@ -58,7 +58,7 @@ export class CliStoreSync extends CliStoreBase {
     };
   }
 
-  async _onExecuteStoreCommandEntity_handle({ entityName, entityStatus, licenseMeta }) {
+  async _onExecuteStoreCommandEntity_handle({ entityName, entityStatus, licenseMeta }: any) {
     // entityVersion
     const entityVersion = entityStatus.entity.moduleVersion;
     // entityMeta
@@ -94,7 +94,7 @@ export class CliStoreSync extends CliStoreBase {
     return { code: 3000, args: [entityVersion] };
   }
 
-  async _copyToSuite({ tempPath, entityMeta }) {
+  async _copyToSuite({ tempPath, entityMeta }: any) {
     // default
     const zip = new AdmZip(path.join(tempPath, 'default'));
     zip.extractAllTo(entityMeta.root, true);
@@ -106,11 +106,11 @@ export class CliStoreSync extends CliStoreBase {
     }
   }
 
-  async _copyToModuleIsolate({ tempPath, entityMeta }) {
+  async _copyToModuleIsolate({ tempPath, entityMeta }: any) {
     await fse.move(tempPath, entityMeta.root, { overwrite: true });
   }
 
-  async _unzip({ entityName, buffer }) {
+  async _unzip({ entityName, buffer }: any) {
     const tempPath = path.join(os.tmpdir(), entityName);
     await rimraf(tempPath);
     const zip = new AdmZip(buffer);
@@ -122,7 +122,7 @@ export class CliStoreSync extends CliStoreBase {
     return entityStatus.entity.entityTypeCode;
   }
 
-  async _getEntityMeta({ entityName, entityStatus }) {
+  async _getEntityMeta({ entityName, entityStatus }: any) {
     const { argv } = this.context;
     // entityMeta
     const entityType = this._getEntityType({ entityStatus });

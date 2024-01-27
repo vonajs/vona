@@ -66,25 +66,25 @@ export class LocalBuild extends BeanBase {
     return await this.beanStatus.get(name);
   }
 
-  async setConfigSite({ data }) {
+  async setConfigSite({ data }: any) {
     const name = `config-site:${this.atomClass.module}:${this.atomClass.atomClassName}`;
     await this.beanStatus.set(name, data);
   }
 
-  async getConfigLanguage({ language }) {
+  async getConfigLanguage({ language }: any) {
     language = language || 'default';
     const name = `config-${language}:${this.atomClass.module}:${this.atomClass.atomClassName}`;
     return await this.beanStatus.get(name);
   }
 
-  async setConfigLanguage({ language, data }) {
+  async setConfigLanguage({ language, data }: any) {
     language = language || 'default';
     const name = `config-${language}:${this.atomClass.module}:${this.atomClass.atomClassName}`;
     this._adjustConfigLanguange(data);
     await this.beanStatus.set(name, data);
   }
 
-  async getConfigLanguagePreview({ language }) {
+  async getConfigLanguagePreview({ language }: any) {
     const site = await this.getSite({ language });
     this._adjustConfigLanguange(site);
     return site;
@@ -153,7 +153,7 @@ export class LocalBuild extends BeanBase {
   }
 
   // site<plugin<theme<site(db)<language(db)
-  async combineSite({ siteBase, language }) {
+  async combineSite({ siteBase, language }: any) {
     // themeName
     const __themeName = this._getThemeName({ site: siteBase, language });
     const themeName = __themeName.themeName;
@@ -189,7 +189,7 @@ export class LocalBuild extends BeanBase {
   }
 
   // site<plugin<theme<site(db)<language(db)
-  async getSite({ language, options }) {
+  async getSite({ language, options }: any) {
     // options
     options = options || {};
     // base
@@ -293,7 +293,7 @@ export class LocalBuild extends BeanBase {
 
   // ///////////////////////////////// render
 
-  async renderAllFiles({ language, progressId, progressNo }) {
+  async renderAllFiles({ language, progressId, progressNo }: any) {
     // clearCache
     ejs.clearCache();
     // site
@@ -307,7 +307,7 @@ export class LocalBuild extends BeanBase {
     await this._renderIndex({ site });
   }
 
-  async renderArticle({ key, inner }) {
+  async renderArticle({ key, inner }: any) {
     // article
     let article = await this.ctx.bean.cms.render.getArticle({ key, inner });
     if (!article) {
@@ -336,7 +336,7 @@ export class LocalBuild extends BeanBase {
     }
   }
 
-  async deleteArticle({ /* key,*/ article, inner }) {
+  async deleteArticle({ /* key,*/ article, inner }: any) {
     // maybe not rendered
     if (!article.url) return;
     // maybe site.language is false
@@ -366,7 +366,7 @@ export class LocalBuild extends BeanBase {
     }
   }
 
-  async _renderArticles({ site, progressId, progressNo }) {
+  async _renderArticles({ site, progressId, progressNo }: any) {
     // anonymous user
     const user = await this.ctx.bean.user.anonymous();
     // articles
@@ -407,7 +407,7 @@ export class LocalBuild extends BeanBase {
     await this._writeSitemaps({ site, articles });
   }
 
-  async _renderArticle({ site, article }) {
+  async _renderArticle({ site, article }: any) {
     // data
     const data = await this.getData({ site });
     data.article = article;
@@ -420,7 +420,7 @@ export class LocalBuild extends BeanBase {
     });
   }
 
-  async _renderIndex({ site }) {
+  async _renderIndex({ site }: any) {
     // index
     const pathIntermediate = await this.getPathIntermediate(site.language && site.language.current);
     const indexFiles = await eggBornUtils.tools.globbyAsync(`${pathIntermediate}/main/index/**/*.ejs`);
@@ -441,7 +441,7 @@ export class LocalBuild extends BeanBase {
     }
   }
 
-  async _writeSitemaps({ site, articles }) {
+  async _writeSitemaps({ site, articles }: any) {
     // xml
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -462,7 +462,7 @@ export class LocalBuild extends BeanBase {
     await fse.writeFile(fileName, xml);
   }
 
-  async _writeSitemap({ site, article }) {
+  async _writeSitemap({ site, article }: any) {
     const loc = this.getUrl(site, site.language && site.language.current, article.url);
     const lastmod = moment(article.updatedAt).format();
     // load
@@ -498,7 +498,7 @@ export class LocalBuild extends BeanBase {
     await fse.writeFile(fileName, xml);
   }
 
-  async _renderStatic({ site }) {
+  async _renderStatic({ site }: any) {
     // static
     const pathIntermediate = await this.getPathIntermediate(site.language && site.language.current);
     const staticFiles = await eggBornUtils.tools.globbyAsync(`${pathIntermediate}/static/**/*.ejs`);
@@ -519,7 +519,7 @@ export class LocalBuild extends BeanBase {
     }
   }
 
-  async _renderFile({ fileSrc, fileDest, fileDestAlt, data }) {
+  async _renderFile({ fileSrc, fileDest, fileDestAlt, data }: any) {
     // site
     const site = data.site;
     // language
@@ -583,7 +583,7 @@ export class LocalBuild extends BeanBase {
     }
   }
 
-  async _socketioPublish({ hotloadFile, article }) {
+  async _socketioPublish({ hotloadFile, article }: any) {
     const message = {
       userIdTo: -1,
       content: {
@@ -606,7 +606,7 @@ export class LocalBuild extends BeanBase {
     return !config || !config.disabled;
   }
 
-  async _loadPluginIncludes({ site, language }) {
+  async _loadPluginIncludes({ site, language }: any) {
     // if exists
     if (site._pluginIncludes) return site._pluginIncludes;
     // modulesArray
@@ -629,7 +629,7 @@ export class LocalBuild extends BeanBase {
     return site._pluginIncludes;
   }
 
-  async _renderCSSJSes({ data, content }) {
+  async _renderCSSJSes({ data, content }: any) {
     data.js('plugins/cms-pluginbase/assets/js/lib/require.min.js');
     data.js('plugins/cms-pluginbase/assets/js/lib/regenerator-runtime/runtime.js');
     content = await this._renderCSSJS({ data, content, type: 'CSS', items: data._csses });
@@ -637,7 +637,7 @@ export class LocalBuild extends BeanBase {
     return content;
   }
 
-  async _renderCSSJS({ data, content, type, items }) {
+  async _renderCSSJS({ data, content, type, items }: any) {
     if (items.length === 0) return content;
     // site
     const site = data.site;
@@ -715,7 +715,7 @@ export class LocalBuild extends BeanBase {
     return content.replace(regexp, urlDest);
   }
 
-  async _renderEnvs({ data, content }) {
+  async _renderEnvs({ data, content }: any) {
     // site
     const site = data.site;
     // env
@@ -799,7 +799,7 @@ var env=${JSON.stringify(env, null, 2)};
     };
   }
 
-  async getData({ site }) {
+  async getData({ site }: any) {
     // data
     const self = this;
     const _csses: any[] = [];
@@ -861,7 +861,7 @@ var env=${JSON.stringify(env, null, 2)};
   // //////////////////////////////// build
 
   // build languages
-  async buildLanguages({ progressId, progressNo = 0 }) {
+  async buildLanguages({ progressId, progressNo = 0 }: any) {
     try {
       // time start
       const timeStart = new Date();
@@ -919,7 +919,7 @@ var env=${JSON.stringify(env, null, 2)};
   }
 
   // build language
-  async buildLanguage({ language, progressId, progressNo = 0 }) {
+  async buildLanguage({ language, progressId, progressNo = 0 }: any) {
     try {
       // time start
       const timeStart = new Date();
@@ -1102,14 +1102,14 @@ var env=${JSON.stringify(env, null, 2)};
     });
   }
 
-  async registerWatcher({ language }) {
+  async registerWatcher({ language }: any) {
     // info
     const watcherInfo = await this._collectWatcher({ language });
     // register
     this.app.meta['a-cms:watcher'].register(watcherInfo);
   }
 
-  async _collectWatcher({ language }) {
+  async _collectWatcher({ language }: any) {
     // site
     const site = await this.getSite({ language });
 
@@ -1148,7 +1148,7 @@ var env=${JSON.stringify(env, null, 2)};
     };
   }
 
-  async createSitemapIndex({ site }) {
+  async createSitemapIndex({ site }: any) {
     // content
     const urlRawRoot = this.getUrlRawRoot(site);
     let items = '';
@@ -1167,7 +1167,7 @@ ${items}</sitemapindex>`;
     await fse.outputFile(`${pathRawDist}/sitemapindex.xml`, content);
   }
 
-  async createRobots({ site }) {
+  async createRobots({ site }: any) {
     // content
     const urlRawRoot = this.getUrlRawRoot(site);
     const content = `User-agent: *
@@ -1223,7 +1223,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     }
   }
 
-  async _checkIfSiteBuilt({ site, force }) {
+  async _checkIfSiteBuilt({ site, force }: any) {
     // check if build site first
     const pathIntermediate = await this.getPathIntermediate(site.language && site.language.current);
     const fileName = path.join(pathIntermediate, 'main/article.ejs');
@@ -1235,7 +1235,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     return true;
   }
 
-  async getArticleUrl({ key, options }) {
+  async getArticleUrl({ key, options }: any) {
     // options
     const returnPhysicalPath = options && options.returnPhysicalPath;
     const returnWaitingPath = options && options.returnWaitingPath;
@@ -1284,7 +1284,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     return `${atomClass.module}:${atomClass.atomClassName}`;
   }
 
-  async getFrontEnvs({ language }) {
+  async getFrontEnvs({ language }: any) {
     const envs = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       // may be more atoms

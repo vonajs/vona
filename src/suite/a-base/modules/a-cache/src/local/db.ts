@@ -17,7 +17,7 @@ export class LocalDb extends BeanModuleScopeBase {
     return res ? JSON.parse(res.value) : undefined;
   }
 
-  async _set({ name, value, timeout, queue }) {
+  async _set({ name, value, timeout, queue }: any) {
     // second
     const second = timeout ? parseInt(timeout / 1000) : timeout;
     // expired

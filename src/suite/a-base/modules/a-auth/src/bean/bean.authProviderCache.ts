@@ -48,7 +48,7 @@ export class BeanAuthProviderCache extends BeanBase {
     return providersConfigForAdmin;
   }
 
-  async authProviderChanged({ module, providerName }) {
+  async authProviderChanged({ module, providerName }: any) {
     // change self
     await this._cacheAuthProviderConfig(module, providerName);
     // broadcast

@@ -7,7 +7,7 @@ export class LocalTools extends BeanBase {
     return this.ctx.bean.local.module(__ThisModule__).utils;
   }
 
-  async demo({ method, query }) {
+  async demo({ method, query }: any) {
     // methods
     const methods: any[] = [];
     if (method) {

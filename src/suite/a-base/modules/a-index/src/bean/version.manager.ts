@@ -38,7 +38,7 @@ export class VersionManager extends BeanBase {
 
   async test() {}
 
-  async _createIndexesOnTable({ tableName, indexes }) {
+  async _createIndexesOnTable({ tableName, indexes }: any) {
     try {
       const _indexArray = indexes.split(',');
       const list = await this.ctx.model.query(`show index from ${tableName}`);

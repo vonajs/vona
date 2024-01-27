@@ -18,16 +18,16 @@ export class BeanFlowDef0 extends BeanBase {
     };
   }
 
-  async getByKey({ flowDefKey }) {
+  async getByKey({ flowDefKey }: any) {
     return await this._getByKey({ flowDefKey, atomStage: 'formal' });
   }
 
-  async getById({ flowDefId }) {
+  async getById({ flowDefId }: any) {
     // get
     return await this._getById({ flowDefId });
   }
 
-  async getByKeyAndRevision({ flowDefKey, flowDefRevision }) {
+  async getByKeyAndRevision({ flowDefKey, flowDefRevision }: any) {
     // get from formal
     let flowDef = await this._getByKey({ flowDefKey, flowDefRevision, atomStage: 'formal' });
     if (flowDef) return flowDef;
@@ -38,11 +38,11 @@ export class BeanFlowDef0 extends BeanBase {
     return null;
   }
 
-  async _getById({ flowDefId }) {
+  async _getById({ flowDefId }: any) {
     return await this.ctx.bean.atom.read({ key: { atomId: flowDefId } });
   }
 
-  async _getByKey({ flowDefKey, flowDefRevision, atomStage }) {
+  async _getByKey({ flowDefKey, flowDefRevision, atomStage }: any) {
     // fullKey
     const { fullKey } = this._combineFullKey({ flowDefKey });
     // from db

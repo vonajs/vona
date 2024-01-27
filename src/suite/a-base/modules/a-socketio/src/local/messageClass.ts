@@ -10,13 +10,13 @@ export class LocalMessageClass extends BeanBase {
     return this.ctx.model.module(__ThisModule__).messageClass;
   }
 
-  async getMessageClassId({ id, module, messageClassName }) {
+  async getMessageClassId({ id, module, messageClassName }: any) {
     if (id) return id;
     const messageClass = await this.get({ module, messageClassName });
     return messageClass.id;
   }
 
-  async get({ id, module, messageClassName }) {
+  async get({ id, module, messageClassName }: any) {
     const data = id ? { id } : { module, messageClassName };
     const res = await this.modelMessageClass.get(data);
     if (res) return res;
@@ -35,7 +35,7 @@ export class LocalMessageClass extends BeanBase {
     });
   }
 
-  async _registerLock({ module, messageClassName }) {
+  async _registerLock({ module, messageClassName }: any) {
     // get
     const res = await this.modelMessageClass.get({ module, messageClassName });
     if (res) return res;

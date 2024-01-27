@@ -4,7 +4,7 @@ import trimHtml from '@zhennann/trim-html';
 
 @Local()
 export class LocalComment extends BeanBase {
-  async list({ key, options, user }) {
+  async list({ key, options, user }: any) {
     const _options = this._adjuctOptions({ key, options });
     // sql
     const _where = this.ctx.model._where(_options.where);
@@ -16,7 +16,7 @@ export class LocalComment extends BeanBase {
     return await this.ctx.model.query(sql, [this.ctx.instance.id, user.id]);
   }
 
-  async count({ key, options, user: _user }) {
+  async count({ key, options, user: _user }: any) {
     const _options = this._adjuctOptions({ key, options });
     // sql
     const _where = this.ctx.model._where(_options.where);
@@ -52,7 +52,7 @@ export class LocalComment extends BeanBase {
     return list[0];
   }
 
-  async save({ key, data, user }) {
+  async save({ key, data, user }: any) {
     if (!data.commentId) {
       return await this.save_add({ key, data, user });
     }
@@ -226,7 +226,7 @@ export class LocalComment extends BeanBase {
   }
 
   // publish
-  async _publish({ atomId, commentId, replyId, replyUserId, user, mode }) {
+  async _publish({ atomId, commentId, replyId, replyUserId, user, mode }: any) {
     const userIdsTo = {};
     // 1. atom.userIdUpdated
     const atom = await this.ctx.model.atom.get({ id: atomId });
@@ -271,7 +271,7 @@ export class LocalComment extends BeanBase {
     }
   }
 
-  async _publishTitle({ userId, replyId, mode }) {
+  async _publishTitle({ userId, replyId, mode }: any) {
     const user = await this.ctx.bean.user.get({ id: userId });
     const locale = user.locale;
     let title;
@@ -317,7 +317,7 @@ ${sep}
     return ':'.repeat(posB - posA + 1);
   }
 
-  async _renderContent({ atomId, content, replyContent, replyUserName }) {
+  async _renderContent({ atomId, content, replyContent, replyUserName }: any) {
     const fullContent = this._fullContent({ content, replyContent, replyUserName });
     return await this.ctx.bean.markdown.render({
       host: { atomId },

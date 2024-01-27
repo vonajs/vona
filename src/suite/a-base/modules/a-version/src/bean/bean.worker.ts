@@ -28,7 +28,7 @@ export class BeanWorker extends BeanBase {
     // await this.redisIO.set(key, JSON.stringify(true), 'PX', aliveTimeout * 2);
   }
 
-  async getAlive({ id }) {
+  async getAlive({ id }: any) {
     const key = `workerAlive:${id}`;
     const value = await this.redisCache.get(key);
     return value ? JSON.parse(value) : undefined;

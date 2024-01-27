@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowAssignees } from './bean.flow_assignees.js';
 
 export class BeanFlowLoad extends BeanFlowAssignees {
-  async _loadFlowInstance({ flowId, history, throwError = true }) {
+  async _loadFlowInstance({ flowId, history, throwError = true }: any) {
     // flow
     let flow;
     if (!history) {
@@ -35,7 +35,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     return flowInstance;
   }
 
-  async _loadFlowNodeInstance({ flowNodeId, history, throwError = true }) {
+  async _loadFlowNodeInstance({ flowNodeId, history, throwError = true }: any) {
     // get
     let flowNode;
     if (!history) {

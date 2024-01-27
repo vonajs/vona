@@ -51,7 +51,7 @@ export class LocalTemplate extends BeanBase {
     return path.join(module.root, 'backend/cli/templates', _path);
   }
 
-  async renderBoilerplateAndSnippets({ targetDir, moduleName, snippetsPath, boilerplatePath }) {
+  async renderBoilerplateAndSnippets({ targetDir, moduleName, snippetsPath, boilerplatePath }: any) {
     // first
     if (snippetsPath) {
       const snippetsDir = this.resolvePath({
@@ -70,7 +70,7 @@ export class LocalTemplate extends BeanBase {
     }
   }
 
-  async renderDir({ targetDir, templateDir }) {
+  async renderDir({ targetDir, templateDir }: any) {
     const { argv } = this.context;
     // files
     const files = eggBornUtils.tools.globbySync('**/*', {
@@ -106,7 +106,7 @@ export class LocalTemplate extends BeanBase {
     return fileName;
   }
 
-  async renderFile({ targetFile, templateFile }) {
+  async renderFile({ targetFile, templateFile }: any) {
     const stats = fs.lstatSync(templateFile);
     if (stats.isSymbolicLink()) {
       const target = fs.readlinkSync(templateFile);
@@ -138,7 +138,7 @@ export class LocalTemplate extends BeanBase {
     }
   }
 
-  async renderContent({ content }) {
+  async renderContent({ content }: any) {
     if (!content) return content;
     const data = this.getEjsData();
     const options = this.getEjsOptions();
@@ -172,7 +172,7 @@ export class LocalTemplate extends BeanBase {
     };
   }
 
-  async applySnippets({ targetDir, snippetsDir }) {
+  async applySnippets({ targetDir, snippetsDir }: any) {
     // snippets
     let files = eggBornUtils.tools.globbySync('*.js', {
       cwd: snippetsDir,
@@ -204,7 +204,7 @@ export class LocalTemplate extends BeanBase {
     }
   }
 
-  async applySnippet({ targetFile, snippet }) {
+  async applySnippet({ targetFile, snippet }: any) {
     await this.console.log(`apply changes to ${targetFile}`);
     // source code
     let sourceCode;

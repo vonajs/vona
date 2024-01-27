@@ -90,7 +90,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     return true;
   }
 
-  async _checkRightAction_enableOnFlowing({ actionBase, atomClassBase, _atom, _atomAnother }) {
+  async _checkRightAction_enableOnFlowing({ actionBase, atomClassBase, _atom, _atomAnother }: any) {
     const _checkPoint = actionBase.enableOnFlowing;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     const isFlowing = await this._checkRightAction_isFlowing({

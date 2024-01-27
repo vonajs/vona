@@ -16,14 +16,14 @@ export class AtomRole extends BeanAtomBase {
     return this.ctx.bean.role;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // role default
     const data = await this.model.default();
     // super
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -33,7 +33,7 @@ export class AtomRole extends BeanAtomBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // meta
@@ -43,7 +43,7 @@ export class AtomRole extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // only support atomStage=1
     if (item.atomStage !== 1) throw new Error('role only support atomStage=1');
     // fields
@@ -96,7 +96,7 @@ export class AtomRole extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomWrite();
     // roleIdParent
@@ -120,7 +120,7 @@ export class AtomRole extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     const roleId = key.itemId;
     // force
     const force = options && options.force;
@@ -162,7 +162,7 @@ export class AtomRole extends BeanAtomBase {
     await this.beanRole.setDirty(true);
   }
 
-  async copy({ atomClass, target, srcKey, srcItem, destKey, destItem, options, user }) {
+  async copy({ atomClass, target, srcKey, srcItem, destKey, destItem, options, user }: any) {
     await super.copy({ atomClass, target, srcKey, srcItem, destKey, destItem, options, user });
     if (target === 'clone') {
       await this.model.update({
@@ -174,7 +174,7 @@ export class AtomRole extends BeanAtomBase {
     }
   }
 
-  async checkRightAction({ atom, atomClass, action, options, user }) {
+  async checkRightAction({ atom, atomClass, action, options, user }: any) {
     // super
     const res = await super.checkRightAction({ atom, atomClass, action, options, user });
     if (!res) return res;
@@ -242,7 +242,7 @@ export class AtomRole extends BeanAtomBase {
     }
   }
 
-  async _getMetaTranslate({ item }) {
+  async _getMetaTranslate({ item }: any) {
     const dictKey = 'a-base:dictRoleType';
     const atomDict = await this.modelAtom.get({
       atomStaticKey: dictKey,

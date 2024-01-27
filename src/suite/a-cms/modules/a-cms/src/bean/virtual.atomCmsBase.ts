@@ -17,7 +17,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return this.ctx.config.module(__ThisModule__);
   }
 
-  async default({ atomClass, data, item, options, user }) {
+  async default({ atomClass, data, item, options, user }: any) {
     // article
     data = await this.modelCMSArticle.default(data);
     // article content
@@ -26,7 +26,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -36,7 +36,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // select
@@ -46,7 +46,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     const data = await super.create({ atomClass, item, options, user });
     const atomId = data.atomId;
@@ -95,7 +95,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     const atomStage = item.atomStage;
     // super
     let data;
@@ -127,7 +127,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return data;
   }
 
-  async _write_cms({ atomStage, target, key, item, options, user }) {
+  async _write_cms({ atomStage, target, key, item, options, user }: any) {
     // get atom for safety
     let atomOld;
     if (key.atomId === 0) {
@@ -241,7 +241,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     ]);
   }
 
-  async _renderContent({ item, atomId }) {
+  async _renderContent({ item, atomId }: any) {
     // editMode
     const editMode = item.editMode;
     // html
@@ -295,7 +295,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     return summary;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // get atom for safety
     const atomOld = await this.ctx.bean.atom.read({ key, user });
 

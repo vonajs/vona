@@ -7,7 +7,7 @@ export class BeanAtomState0 extends BeanBase {
     this.dictKeyDefault = 'a-dictbooster:dictAtomStateDefault';
   }
 
-  async findDictItem({ atomClass, atomClassBase, atomStage, atomState }) {
+  async findDictItem({ atomClass, atomClassBase, atomStage, atomState }: any) {
     // atomClassBase
     if (!atomClassBase) {
       atomClassBase = this.ctx.bean.base.atomClass(atomClass);

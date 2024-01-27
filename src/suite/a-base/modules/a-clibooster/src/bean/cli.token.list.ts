@@ -7,7 +7,7 @@ export class CliTokenList extends BeanCliBase {
     return this.ctx.bean.local.module('a-authopen').token;
   }
 
-  async execute({ user }) {
+  async execute({ user }: any) {
     // super
     await super.execute({ user });
     // add

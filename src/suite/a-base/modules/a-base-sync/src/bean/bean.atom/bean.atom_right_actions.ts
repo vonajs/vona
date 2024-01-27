@@ -2,7 +2,7 @@ import { BeanAtomRightPreferredRoles } from './bean.atom_right_preferredRoles.js
 
 export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   // actions of atom
-  async actions({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, basic, user }) {
+  async actions({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, basic, user }: any) {
     // atomClass
     const { /* key,*/ atom, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
@@ -67,7 +67,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     return results;
   }
 
-  async __actions_fetchActions({ atom, atomClass, atomClassBase, basic, user }) {
+  async __actions_fetchActions({ atom, atomClass, atomClassBase, basic, user }: any) {
     // enableRight
     const enableRight = atomClassBase.enableRight;
     if (enableRight) {
@@ -108,7 +108,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     return actions;
   }
 
-  async __actions_fetchActions_fromDb({ atomClass, /* atomClassBase,*/ basic, user }) {
+  async __actions_fetchActions_fromDb({ atomClass, /* atomClassBase,*/ basic, user }: any) {
     // basic?
     const _basic = basic ? 'and b.code in (3,4)' : '';
     // actionMode=0: not flow action
@@ -122,7 +122,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     return items;
   }
 
-  // async __actions_fetchActions_fromDb({ atomClass, /* atomClassBase,*/ basic, user }) {
+  // async __actions_fetchActions_fromDb({ atomClass, /* atomClassBase,*/ basic, user }: any) {
   //   // basic?
   //   const _basic = basic ? 'and a.code in (3,4)' : '';
   //   // actionMode=0: not flow action
@@ -135,7 +135,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   //   return await this.ctx.model.query(sql, [this.ctx.instance.id, atomClass.id]);
   // }
 
-  async __actions_fetchActions_fromMeta({ atomClass, atomClassBase, basic, user }) {
+  async __actions_fetchActions_fromMeta({ atomClass, atomClassBase, basic, user }: any) {
     // basic
     if (basic) {
       const actionsRes: any[] = [];

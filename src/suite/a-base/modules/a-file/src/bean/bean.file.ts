@@ -23,7 +23,7 @@ export class BeanFile extends BeanBase {
     return this.ctx.model.module(__ThisModule__).fileView;
   }
 
-  async all({ atomClass, options, user }) {
+  async all({ atomClass, options, user }: any) {
     // file
     options.file = 1;
     // select
@@ -46,7 +46,7 @@ export class BeanFile extends BeanBase {
   }
 
   // key,user maybe null
-  async list({ key, options, user }) {
+  async list({ key, options, user }: any) {
     // page
     options.page = this.ctx.bean.util.page(options.page, false);
     // where
@@ -87,7 +87,7 @@ export class BeanFile extends BeanBase {
     return items;
   }
 
-  async attachments({ key, options, user }) {
+  async attachments({ key, options, user }: any) {
     options = options || {};
     // filter drafts
     options.where = this.ctx.bean.util.extend(options.where, {
@@ -101,7 +101,7 @@ export class BeanFile extends BeanBase {
     return await this.list({ key, options, user });
   }
 
-  async delete({ downloadId, fileId, user }) {
+  async delete({ downloadId, fileId, user }: any) {
     // file
     const file = await this.getFile({ downloadId, fileId });
     if (!file) this.ctx.throw(404);
@@ -117,7 +117,7 @@ export class BeanFile extends BeanBase {
     }
   }
 
-  async update({ fileId, data, user }) {
+  async update({ fileId, data, user }: any) {
     // check
     if (user && user.id) {
       // file
@@ -132,7 +132,7 @@ export class BeanFile extends BeanBase {
     });
   }
 
-  async upload({ user }) {
+  async upload({ user }: any) {
     const stream = await this.ctx.getFileStream();
     try {
       const meta = {
@@ -148,7 +148,7 @@ export class BeanFile extends BeanBase {
     }
   }
 
-  async uploadDataUrl({ data, user }) {
+  async uploadDataUrl({ data, user }: any) {
     const dataUrl = data.dataUrl || '';
     const matches = dataUrl.match(REGEXP_DATA_URL);
     if (!matches) return null;
@@ -179,7 +179,7 @@ export class BeanFile extends BeanBase {
     return await this._upload({ fileContent, meta, user });
   }
 
-  async uploadByLocalFile({ pathFile, meta, user }) {
+  async uploadByLocalFile({ pathFile, meta, user }: any) {
     if (!meta) meta = {};
     if (!meta.fields) meta.fields = {};
     // mode
@@ -208,7 +208,7 @@ export class BeanFile extends BeanBase {
     });
   }
 
-  async _upload({ fileContent, meta, user }) {
+  async _upload({ fileContent, meta, user }: any) {
     // info
     const fileInfo = path.parse(meta.filename);
     if (fileInfo.name === '_none_') {
@@ -292,7 +292,7 @@ export class BeanFile extends BeanBase {
     };
   }
 
-  async download({ downloadId, atomId, width, height, user }) {
+  async download({ downloadId, atomId, width, height, user }: any) {
     // downloadId
     if (!downloadId) this.ctx.throw(404);
     const extPos = downloadId.indexOf('.');
@@ -338,7 +338,7 @@ export class BeanFile extends BeanBase {
     }
   }
 
-  async getFile({ downloadId, fileId }) {
+  async getFile({ downloadId, fileId }: any) {
     let file;
     if (downloadId) {
       const extPos = downloadId.indexOf('.');
@@ -351,7 +351,7 @@ export class BeanFile extends BeanBase {
   }
 
   // inner invoke
-  async fileInfo({ downloadId, fileId }) {
+  async fileInfo({ downloadId, fileId }: any) {
     const file = await this.getFile({ downloadId, fileId });
     if (!file) this.ctx.throw(404);
 
@@ -365,7 +365,7 @@ export class BeanFile extends BeanBase {
     };
   }
 
-  async loadBuffer({ downloadId }) {
+  async loadBuffer({ downloadId }: any) {
     const fileInfo = await this.fileInfo({ downloadId });
     const buffer = await fse.readFile(fileInfo.absolutePath);
     return {
@@ -374,7 +374,7 @@ export class BeanFile extends BeanBase {
     };
   }
 
-  async fileUpdateCheck({ file, user }) {
+  async fileUpdateCheck({ file, user }: any) {
     if (!user) {
       // check user
       await this.ctx.bean.user.check();
@@ -386,7 +386,7 @@ export class BeanFile extends BeanBase {
     this.ctx.throw(403);
   }
 
-  async _fileUpdateCheck({ file, user }) {
+  async _fileUpdateCheck({ file, user }: any) {
     // invoke event
     return await this.ctx.bean.event.invoke({
       module: __ThisModule__,
@@ -414,7 +414,7 @@ export class BeanFile extends BeanBase {
     });
   }
 
-  async fileDownloadCheck({ file, user }) {
+  async fileDownloadCheck({ file, user }: any) {
     if (!user) {
       // check user
       await this.ctx.bean.user.check();
@@ -426,7 +426,7 @@ export class BeanFile extends BeanBase {
     this.ctx.throw(403);
   }
 
-  async _fileDownloadCheck({ file, user }) {
+  async _fileDownloadCheck({ file, user }: any) {
     // invoke event
     return await this.ctx.bean.event.invoke({
       module: __ThisModule__,
@@ -484,7 +484,7 @@ export class BeanFile extends BeanBase {
     return fileName;
   }
 
-  async _getFileByDownloadId({ downloadId, atomId }) {
+  async _getFileByDownloadId({ downloadId, atomId }: any) {
     if (atomId) {
       return await this.modelFile.get({ downloadId, atomId });
     }
@@ -502,7 +502,7 @@ export class BeanFile extends BeanBase {
     return await this.ctx.model.file.get({ downloadId });
   }
 
-  async _checkRightWrite({ atomId, user }) {
+  async _checkRightWrite({ atomId, user }: any) {
     // not check if !atomId
     if (!atomId) return;
     const res = await this.ctx.bean.atom.checkRightAction({
@@ -517,7 +517,7 @@ export class BeanFile extends BeanBase {
     this.ctx.throw(403);
   }
 
-  async _outputImageContent({ destFile, fileContent, fields, fileInfo }) {
+  async _outputImageContent({ destFile, fileContent, fields, fileInfo }: any) {
     // prepare image content
     const tmpFile = destFile + fileInfo.ext;
     await this._outputFileContent({ destFile: tmpFile, fileContent });
@@ -556,7 +556,7 @@ export class BeanFile extends BeanBase {
     return { width, height };
   }
 
-  async _outputFileContent({ destFile, fileContent }) {
+  async _outputFileContent({ destFile, fileContent }: any) {
     if (Buffer.isBuffer(fileContent)) {
       // buffer
       await fse.outputFile(destFile, fileContent);

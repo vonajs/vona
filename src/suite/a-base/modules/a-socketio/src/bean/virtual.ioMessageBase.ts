@@ -2,21 +2,21 @@ import { BeanBase, Virtual } from '@cabloy/core';
 
 @Virtual({ scene: 'bean' })
 export class BeanIoMessageBase extends BeanBase {
-  async onSessionId({ /* path,*/ message /* options*/ }) {
+  async onSessionId({ /* path,*/ message /* options*/ }: any) {
     const userIdFrom = message.userIdFrom;
     const userIdTo = message.userIdTo;
     return message.messageGroup ? userIdTo : this._combineSessionId(userIdFrom, userIdTo);
   }
 
-  async onProcess({ path, options, message, messageSyncs, messageClass }) {
+  async onProcess({ path, options, message, messageSyncs, messageClass }: any) {
     return await this.ctx.bean.io._onProcessBase({ path, options, message, messageSyncs, messageClass });
   }
 
-  async onSaveSyncs({ path, options, message, messageClass }) {
+  async onSaveSyncs({ path, options, message, messageClass }: any) {
     return await this.ctx.bean.io._onSaveSyncs({ path, options, message, messageClass });
   }
 
-  async onSaveSyncsPolicy({ path, options, message, messageClass, saveLimit, onSave }) {
+  async onSaveSyncsPolicy({ path, options, message, messageClass, saveLimit, onSave }: any) {
     return await this.ctx.bean.io._onSaveSyncsPolicy({ path, options, message, messageClass, saveLimit, onSave });
   }
 
@@ -24,20 +24,20 @@ export class BeanIoMessageBase extends BeanBase {
     return null;
   }
 
-  async onDelivery({ path, options, message, messageSync, messageClass }) {
+  async onDelivery({ path, options, message, messageSync, messageClass }: any) {
     return await this.ctx.bean.io.delivery({ path, options, message, messageSync, messageClass });
   }
 
-  async onPushEnable({ /* options, message, messageSyncs,*/ messageClass }) {
+  async onPushEnable({ /* options, message, messageSyncs,*/ messageClass }: any) {
     const messageClassBase = this.ctx.bean.io.messageClass.messageClass(messageClass);
     return !!(messageClassBase.info.push && messageClassBase.info.push.channels);
   }
 
-  async onPush({ options, message, messageSync, messageClass }) {
+  async onPush({ options, message, messageSync, messageClass }: any) {
     return await this.ctx.bean.io.push({ options, message, messageSync, messageClass });
   }
 
-  async onChannels({ /* options, message, messageSync,*/ messageClass }) {
+  async onChannels({ /* options, message, messageSync,*/ messageClass }: any) {
     const messageClassBase = this.ctx.bean.io.messageClass.messageClass(messageClass);
     return messageClassBase.info.push && messageClassBase.info.push.channels;
   }
@@ -46,11 +46,11 @@ export class BeanIoMessageBase extends BeanBase {
     return null;
   }
 
-  async onPublish({ path, message, messageClass, options }) {
+  async onPublish({ path, message, messageClass, options }: any) {
     return await this.ctx.bean.io._publish({ path, message, messageClass, options });
   }
 
-  async onSetRead({ messageClass, messageIds, all, user }) {
+  async onSetRead({ messageClass, messageIds, all, user }: any) {
     return await this.ctx.bean.io.message._setRead({ messageClass, messageIds, all, user });
   }
 

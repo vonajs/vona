@@ -5,23 +5,23 @@ import fse from 'fs-extra';
 
 @Local()
 export class LocalSite extends BeanBase {
-  async getSite({ atomClass, language, options }) {
+  async getSite({ atomClass, language, options }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getSite({ language, options });
   }
 
-  async getConfigSiteBase({ atomClass }) {
+  async getConfigSiteBase({ atomClass }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getConfigSiteBase();
   }
 
-  async getConfigSite({ atomClass }) {
+  async getConfigSite({ atomClass }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getConfigSite();
   }
 
   // save site config
-  async setConfigSite({ atomClass, data }) {
+  async setConfigSite({ atomClass, data }: any) {
     // build
     const build = this.ctx.bean.cms.build({ atomClass });
     // save
@@ -35,18 +35,18 @@ export class LocalSite extends BeanBase {
     }
   }
 
-  async getConfigLanguagePreview({ atomClass, language }) {
+  async getConfigLanguagePreview({ atomClass, language }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getConfigLanguagePreview({ language });
   }
 
-  async getConfigLanguage({ atomClass, language }) {
+  async getConfigLanguage({ atomClass, language }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getConfigLanguage({ language });
   }
 
   // save language config
-  async setConfigLanguage({ atomClass, language, data }) {
+  async setConfigLanguage({ atomClass, language, data }: any) {
     // build
     const build = this.ctx.bean.cms.build({ atomClass });
     // save
@@ -60,12 +60,12 @@ export class LocalSite extends BeanBase {
     }
   }
 
-  async getLanguages({ atomClass }) {
+  async getLanguages({ atomClass }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getLanguages();
   }
 
-  async getUrl({ atomClass, language, path }) {
+  async getUrl({ atomClass, language, path }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     const site = await build.getSite({ language });
     // check if build site first
@@ -103,7 +103,7 @@ export class LocalSite extends BeanBase {
     });
   }
 
-  async getStats({ atomClass, languages }) {
+  async getStats({ atomClass, languages }: any) {
     const res = {};
     for (const language of languages) {
       res[language] = await this._getStatsLanguange({ atomClass, language });
@@ -111,7 +111,7 @@ export class LocalSite extends BeanBase {
     return res;
   }
 
-  async _getStatsLanguange({ atomClass, language }) {
+  async _getStatsLanguange({ atomClass, language }: any) {
     const stats = {};
 
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -157,7 +157,7 @@ export class LocalSite extends BeanBase {
     return stats;
   }
 
-  async checkFile({ atomId, file, mtime, user }) {
+  async checkFile({ atomId, file, mtime, user }: any) {
     // check right
     let mtimeCurrent;
     let article;

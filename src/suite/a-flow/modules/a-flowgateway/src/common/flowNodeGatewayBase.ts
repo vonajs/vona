@@ -85,7 +85,7 @@ export default ({ mode }) => {
       }
     }
 
-    async _checkShadowNodeBefore({ nodeInstance, behaviorDefId }) {
+    async _checkShadowNodeBefore({ nodeInstance, behaviorDefId }: any) {
       const flowNodeId = nodeInstance.contextNode._flowNodeId;
       const flowNodeDefId = nodeInstance.contextNode._nodeDef.id;
       const flowNodeShadow = await nodeInstance.modelFlowNode.get({
@@ -97,7 +97,7 @@ export default ({ mode }) => {
       return await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowNodeShadow.id });
     }
 
-    async _checkShadowNodesOthers({ nodeInstance, behaviorDefId }) {
+    async _checkShadowNodesOthers({ nodeInstance, behaviorDefId }: any) {
       const flowNodeId = nodeInstance.contextNode._flowNodeId;
       const flowNodeDefId = nodeInstance.contextNode._nodeDef.id;
       const flowNodesShadow = await nodeInstance.modelFlowNode.select({
@@ -115,7 +115,7 @@ export default ({ mode }) => {
       return flowNodeInstances;
     }
 
-    async _checkDone({ nodeInstanceCurrent }) {
+    async _checkDone({ nodeInstanceCurrent }: any) {
       const content = nodeInstanceCurrent.context._flowDefContent;
       const flowId = nodeInstanceCurrent.context._flowId;
       const flowNodeId = nodeInstanceCurrent.contextNode._flowNodeId;

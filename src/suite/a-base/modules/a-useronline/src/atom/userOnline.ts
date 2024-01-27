@@ -8,14 +8,14 @@ export class AtomUserOnline extends BeanAtomBase {
     return this.ctx.model.module(__ThisModule__).userOnline;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // userOnline default
     const data = await this.model.default();
     // super
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -25,7 +25,7 @@ export class AtomUserOnline extends BeanAtomBase {
     return item;
   }
 
-  async selectQuery({ atomClass, options, user }) {
+  async selectQuery({ atomClass, options, user }: any) {
     // orders
     for (const order of options.orders) {
       if (order[0] === 'f.onlineStatus') {
@@ -51,7 +51,7 @@ export class AtomUserOnline extends BeanAtomBase {
     return await super.selectQuery({ atomClass, options, user });
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // meta
@@ -60,7 +60,7 @@ export class AtomUserOnline extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // super
     const data = await super.create({ atomClass, item, options, user });
     // add userOnline
@@ -72,7 +72,7 @@ export class AtomUserOnline extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update userOnline
@@ -83,7 +83,7 @@ export class AtomUserOnline extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // super
     await super.delete({ atomClass, key, options, user });
     // delete userOnline
@@ -92,7 +92,7 @@ export class AtomUserOnline extends BeanAtomBase {
     });
   }
 
-  async checkRightAction({ atom, atomClass, action, options, user }) {
+  async checkRightAction({ atom, atomClass, action, options, user }: any) {
     // super
     const res = await super.checkRightAction({ atom, atomClass, action, options, user });
     if (!res) return res;
@@ -104,7 +104,7 @@ export class AtomUserOnline extends BeanAtomBase {
     return null;
   }
 
-  async performAction({ key, atomClass, action, item, options, user }) {
+  async performAction({ key, atomClass, action, item, options, user }: any) {
     // super
     await super.performAction({ key, atomClass, action, item, options, user });
     // kickOut

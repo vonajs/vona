@@ -46,7 +46,7 @@ const __JSContent = `
 
 @Local()
 export class LocalUtils extends BeanBase {
-  async demoExecute({ method, argv, cli }) {
+  async demoExecute({ method, argv, cli }: any) {
     // js file
     const jsFile = await this._prepareJSFile({ cli });
     // require
@@ -73,7 +73,7 @@ export class LocalUtils extends BeanBase {
     return { timeBegin, timeEnd, duration, result };
   }
 
-  async _prepareJSFile({ cli }) {
+  async _prepareJSFile({ cli }: any) {
     // prepare
     const jsFile = path.join(this.ctx.app.baseDir, 'demo/index.js');
     const exists = await fse.exists(jsFile);

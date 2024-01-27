@@ -1,7 +1,7 @@
 import { LocalFlowFlowNextEdges } from './local.flow.flow_nextEdges.js';
 
 export class LocalFlowFlowMessage extends LocalFlowFlowNextEdges {
-  async _publishMessageFlowEnd({ flowUserId, user }) {
+  async _publishMessageFlowEnd({ flowUserId, user }: any) {
     if (!this.context._flow.flowAtomId) {
       // only support business flow
       return;

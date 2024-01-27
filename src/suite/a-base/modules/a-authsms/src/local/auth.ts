@@ -3,7 +3,7 @@ import { __ThisModule__ } from '../resource/this.js';
 
 @Local()
 export class LocalAuth extends BeanBase {
-  async signup({ user, state = 'login', userName, realName, mobile }) {
+  async signup({ user, state = 'login', userName, realName, mobile }: any) {
     // profileUser
     const profileUser = {
       module: __ThisModule__,
@@ -50,7 +50,7 @@ export class LocalAuth extends BeanBase {
   }
 
   // data: { mobile, rememberMe }
-  async signin({ data, state = 'login' }) {
+  async signin({ data, state = 'login' }: any) {
     const res = await this.ctx.bean.authProvider.authenticateDirect({
       module: __ThisModule__,
       providerName: 'authsms',
@@ -65,7 +65,7 @@ export class LocalAuth extends BeanBase {
     return res;
   }
 
-  async mobileVerify({ user, mobile }) {
+  async mobileVerify({ user, mobile }: any) {
     await this.signup({ user, state: 'associate', userName: null, realName: null, mobile });
   }
 }

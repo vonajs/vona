@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskClaim } from './local.flow.task_claim.js';
 
 export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
-  async _complete({ handle, formAtom }) {
+  async _complete({ handle, formAtom }: any) {
     // user
     const user = this.contextTask._user;
     // flowTask
@@ -29,7 +29,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     }
   }
 
-  async _complete_tail({ flowTask, user }) {
+  async _complete_tail({ flowTask, user }: any) {
     const flowNodeId = flowTask.flowNodeId;
     await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.flowTask.nodeDoneCheck.${flowNodeId}`,
@@ -46,7 +46,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     });
   }
 
-  async _complete_formAtom({ formAtom }) {
+  async _complete_formAtom({ formAtom }: any) {
     // write
     const atomId = this.context._atom.atomId;
     const atomClassId = this.context._atom.atomClassId;
@@ -61,7 +61,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     });
   }
 
-  async _complete_handle({ handle, options }) {
+  async _complete_handle({ handle, options }: any) {
     const timeHandled = new Date();
     // flowTask
     this.contextTask._flowTask.flowTaskStatus = 1;
@@ -83,7 +83,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     await this._complete_handle_checkSubstitute();
   }
 
-  async _complete_handle_fieldsMapping({ handle, options }) {
+  async _complete_handle_fieldsMapping({ handle, options }: any) {
     // check handle status
     if (handle.status !== 1) return;
     // fieldsMapping
@@ -176,7 +176,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     }
   }
 
-  // async _complete_formAtom({ formAtom }) {
+  // async _complete_formAtom({ formAtom }: any) {
   //   // schemaWrite
   //   const schemaWrite = await this._getSchema();
   //   if (!schemaWrite) return;

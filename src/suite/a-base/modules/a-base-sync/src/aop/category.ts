@@ -54,7 +54,7 @@ export class AopCategory extends BeanBase {
     return true;
   }
 
-  async _checkAppKey({ list, categoryIdParent, atomClass }) {
+  async _checkAppKey({ list, categoryIdParent, atomClass }: any) {
     if (atomClass.module !== 'a-base' || atomClass.atomClassName !== 'resource') return false;
     if (categoryIdParent === 0) return false;
     // categoryIdParent

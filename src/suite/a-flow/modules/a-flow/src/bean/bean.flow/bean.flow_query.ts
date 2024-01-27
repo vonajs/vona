@@ -1,11 +1,11 @@
 import { BeanFlowLoad } from './bean.flow_load.js';
 
 export class BeanFlowQuery extends BeanFlowLoad {
-  async count({ options, user }) {
+  async count({ options, user }: any) {
     return await this.select({ options, user, count: 1 });
   }
 
-  async select({ options, user, pageForce = true, count = 0 }) {
+  async select({ options, user, pageForce = true, count = 0 }: any) {
     const items = await this._list({ options, user, pageForce, count });
     for (const item of items) {
       if (item.flowNodeNameCurrent) {
@@ -18,7 +18,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
     return items;
   }
 
-  async get({ flowId, history, user }) {
+  async get({ flowId, history, user }: any) {
     // check viewWorkflow
     if (user && user.id) {
       const res = await this.ctx.bean.flowTask._checkViewWorkflow_checkRightAction({ flowId, user });
@@ -29,7 +29,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
     return await this._get({ flowId, history, user });
   }
 
-  async _get({ flowId, history, user }) {
+  async _get({ flowId, history, user }: any) {
     // where
     const where = {};
     if (history) {

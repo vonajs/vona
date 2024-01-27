@@ -9,7 +9,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     return await this._getAtomAndSchema({ mode: 'write' });
   }
 
-  async _getSchemaSafe({ mode }) {
+  async _getSchemaSafe({ mode }: any) {
     // fieldsRight: null means readOnly
     const fieldsRight = await this._getFieldsRightSafe({ mode });
     // schema
@@ -21,7 +21,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     return schema;
   }
 
-  async _getFieldsRightSafe({ mode }) {
+  async _getFieldsRightSafe({ mode }: any) {
     // user/atom
     const user = this.contextTask._user;
     const atom = this.context._atom;
@@ -40,7 +40,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     return await this._getFieldsRight();
   }
 
-  async _getAtomAndSchema({ mode }) {
+  async _getAtomAndSchema({ mode }: any) {
     // user/atom
     const atom = this.context._atom;
     // schema
@@ -78,7 +78,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
   //   return item;
   // }
 
-  // async _combineFields({ schema }) {
+  // async _combineFields({ schema }: any) {
   //   let fields = [
   //     'atomId',
   //     'module',

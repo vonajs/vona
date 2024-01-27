@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalAuthOpen extends BeanBase {
-  async hideClientSecret({ key, user }) {
+  async hideClientSecret({ key, user }: any) {
     return await this.ctx.bean.authOpen.hideClientSecret({
       atomId: key.atomId,
       itemId: key.itemId,
@@ -10,7 +10,7 @@ export class LocalAuthOpen extends BeanBase {
     });
   }
 
-  async resetClientSecret({ key, user }) {
+  async resetClientSecret({ key, user }: any) {
     return await this.ctx.bean.authOpen.resetClientSecret({
       atomId: key.atomId,
       itemId: key.itemId,

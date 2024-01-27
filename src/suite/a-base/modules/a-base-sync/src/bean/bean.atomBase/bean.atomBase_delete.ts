@@ -1,7 +1,7 @@
 import { BeanAtomBaseWrite } from './bean.atomBase_write.js';
 
 export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
-  async delete({ atomClass, key, options, user }) {
+  async delete({ atomClass, key, options, user }: any) {
     // atomClass
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // general
@@ -10,7 +10,7 @@ export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
     await this._delete_detail({ atomClassBase, atomClass, key, options, user });
   }
 
-  async _delete_general({ atomClassBase, atomClass, key, options: _options, user }) {
+  async _delete_general({ atomClassBase, atomClass, key, options: _options, user }: any) {
     const atomId = key.atomId;
     // details
     await this.ctx.bean.detail._deleteDetails({ atomClass, atomKey: { atomId }, user });
@@ -36,7 +36,7 @@ export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
     }
   }
 
-  async _delete_detail({ atomClassBase, atomClass, key, options, user }) {
+  async _delete_detail({ atomClassBase, atomClass, key, options, user }: any) {
     if (atomClassBase.detail) {
       await this.ctx.bean.detail._deleteDetailBase({ atomClassBase, atomClass, key, options, user });
     }

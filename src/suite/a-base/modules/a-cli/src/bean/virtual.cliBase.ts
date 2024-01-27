@@ -41,7 +41,7 @@ export class BeanCliBase extends BeanBase {
     return this.options.context;
   }
 
-  async meta({ user }) {
+  async meta({ user }: any) {
     await this._loadCabloyConfig();
     const metaLocale = this._commandMeta();
     return metaLocale;

@@ -11,7 +11,7 @@ export class LocalSmsProvider extends BeanBase {
     return this.ctx.bean.smsProviderCache.getSmsProvidersConfigForAdmin();
   }
 
-  async setCurrent({ providerName }) {
+  async setCurrent({ providerName }: any) {
     const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
     const providerNameOld = Object.keys(providers).find(providerName => providers[providerName].current);
     if (providerNameOld) {
@@ -24,14 +24,14 @@ export class LocalSmsProvider extends BeanBase {
     await this.ctx.bean.smsProviderCache.smsProviderChanged();
   }
 
-  async save({ providerName, data }) {
+  async save({ providerName, data }: any) {
     const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
     const providerOld = providers[providerName];
     data = this.ctx.bean.util.extend({}, providerOld, data);
     await this._save({ providerName, data });
   }
 
-  async _save({ providerName, data }) {
+  async _save({ providerName, data }: any) {
     const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
     providers[providerName] = data ? this.ctx.bean.smsProviderCache.purgeProvider(data) : data;
     // update

@@ -1,15 +1,15 @@
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
 export class BeanAtomLineNo extends BeanAtomUtils {
-  async moveUp({ key, atomClass, options, user }) {
+  async moveUp({ key, atomClass, options, user }: any) {
     return await this._moveLineNo({ key, atomClass, options, user, direction: 'up' });
   }
 
-  async moveDown({ key, atomClass, options, user }) {
+  async moveDown({ key, atomClass, options, user }: any) {
     return await this._moveLineNo({ key, atomClass, options, user, direction: 'down' });
   }
 
-  async _moveLineNo({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user: _user, direction }) {
+  async _moveLineNo({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user: _user, direction }: any) {
     // atomClass
     const {
       /* key,*/

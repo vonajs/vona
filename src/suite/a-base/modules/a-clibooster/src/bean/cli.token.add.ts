@@ -7,7 +7,7 @@ export class CliTokenAdd extends BeanCliBase {
     return this.ctx.bean.local.module('a-authopen').token;
   }
 
-  async execute({ user }) {
+  async execute({ user }: any) {
     const { argv } = this.context;
     // super
     await super.execute({ user });

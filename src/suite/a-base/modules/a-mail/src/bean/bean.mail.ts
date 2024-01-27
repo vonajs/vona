@@ -8,7 +8,7 @@ export class BeanMail extends BeanModuleScopeBase {
   }
 
   // send
-  async send({ scene, message }) {
+  async send({ scene, message }: any) {
     // save to db
     const res = await this.modelMail.insert({
       scene,

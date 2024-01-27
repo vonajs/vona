@@ -157,7 +157,7 @@ export class Watcher extends BeanBase {
   }
 
   // invoked in this.app
-  async _change({ subdomain, atomClass, language }) {
+  async _change({ subdomain, atomClass, language }: any) {
     this.app.meta.queue.push({
       subdomain,
       module: __ThisModule__,

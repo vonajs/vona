@@ -25,7 +25,7 @@ export default class CliStoreBase extends BeanCliBase {
     return this.ctx.config.module(__ThisModule__);
   }
 
-  async meta({ user }) {
+  async meta({ user }: any) {
     // meta
     const meta = await super.meta({ user });
     // check if token exists
@@ -39,7 +39,7 @@ export default class CliStoreBase extends BeanCliBase {
     return meta;
   }
 
-  async execute({ user }) {
+  async execute({ user }: any) {
     // super
     await super.execute({ user });
     // token
@@ -132,7 +132,7 @@ export default class CliStoreBase extends BeanCliBase {
     await this._logResults({ results });
   }
 
-  async _executeStoreCommandEntity({ entityName }) {
+  async _executeStoreCommandEntity({ entityName }: any) {
     try {
       // save to config
       let entityConfig = this.ctx.bean.util.getProperty(
@@ -162,7 +162,7 @@ export default class CliStoreBase extends BeanCliBase {
     }
   }
 
-  async _logResults({ results }) {
+  async _logResults({ results }: any) {
     // sort
     results.sort((a, b) => a.code - b.code);
     // table

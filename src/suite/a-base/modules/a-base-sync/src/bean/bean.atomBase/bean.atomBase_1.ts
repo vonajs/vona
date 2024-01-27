@@ -22,7 +22,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  async _atomStateTranslate({ items, item, atomClassBase }) {
+  async _atomStateTranslate({ items, item, atomClassBase }: any) {
     if (atomClassBase && atomClassBase.itemOnly) return;
     // items
     if (item) {
@@ -34,7 +34,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  async _atomStateTranslate_item({ item }) {
+  async _atomStateTranslate_item({ item }: any) {
     // atomState
     const atomState = item.atomState;
     if (atomState === undefined || atomState === null) return;
@@ -52,7 +52,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     // item._atomStateTitleLocale = dictItem.titleLocaleFull;
   }
 
-  async _dictTranslate({ items, item, atomClass, atomClassBase }) {
+  async _dictTranslate({ items, item, atomClass, atomClassBase }: any) {
     if (!atomClass && !atomClassBase) return;
     if (!atomClassBase) {
       atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -67,7 +67,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  async _dictTranslate_item({ item, atomClassBase }) {
+  async _dictTranslate_item({ item, atomClassBase }: any) {
     const fields = atomClassBase?.fields?.dicts;
     for (const fieldName in fields) {
       if (fieldName === 'atomState') continue;
@@ -86,7 +86,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     return fromOptions?.dictKey;
   }
 
-  async _dictTranslateField({ item, fieldName, code, field }) {
+  async _dictTranslateField({ item, fieldName, code, field }: any) {
     if (field.translate === false) return null;
     if (code === undefined) return null;
     // dictKey
@@ -136,7 +136,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     meta.flags.push(this.ctx.text(title));
   }
 
-  async _atomCategoryIdTranslate({ items, item, atomClassBase }) {
+  async _atomCategoryIdTranslate({ items, item, atomClassBase }: any) {
     if (atomClassBase && atomClassBase.itemOnly) return;
     // items
     if (item) {
@@ -164,7 +164,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  async _userIdsTranslate({ items, item, atomClassBase }) {
+  async _userIdsTranslate({ items, item, atomClassBase }: any) {
     // userIdsKey
     let userIdsKey = atomClassBase?.fields?.mappings?.userIds || [];
     if (!Array.isArray(userIdsKey)) {
@@ -261,7 +261,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  async _patchAtomClassInfo({ items, item, atomClass }) {
+  async _patchAtomClassInfo({ items, item, atomClass }: any) {
     // items
     if (item) {
       items = [item];
@@ -274,14 +274,14 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     }
   }
 
-  async _patchAtomClassInfo_withoutTitle({ items, atomClass }) {
+  async _patchAtomClassInfo_withoutTitle({ items, atomClass }: any) {
     for (const item of items) {
       item.module = atomClass.module;
       item.atomClassName = atomClass.atomClassName;
     }
   }
 
-  async _patchAtomClassInfo_withTitle({ items }) {
+  async _patchAtomClassInfo_withTitle({ items }: any) {
     // atomClassIds
     const atomClassIds = Set.unique(items.map(item => item.atomClassId));
     // atomClasses

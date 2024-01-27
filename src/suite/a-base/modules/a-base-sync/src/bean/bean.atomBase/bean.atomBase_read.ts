@@ -14,11 +14,11 @@ const __itemBasicFieldsRead = [
 ];
 
 export class BeanAtomBaseRead extends BeanAtomBaseSelect {
-  async readQuery({ atomClass, options, user }) {
+  async readQuery({ atomClass, options, user }: any) {
     return await this.ctx.bean.atom._readQuery({ atomClass, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // get
     let item = await this.ctx.bean.atom._get({ atomClass, options, key, mode: 'full', user });
     if (!item) return item;
@@ -30,7 +30,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
     return item;
   }
 
-  async _read_handleTranslate({ item, atomClass, options: _options, user: _user }) {
+  async _read_handleTranslate({ item, atomClass, options: _options, user: _user }: any) {
     // atomClass
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // patchAtomClassInfo
@@ -53,7 +53,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
     this._atomNameLocaleTranslate({ item, atomClassBase });
   }
 
-  async _readValidate({ /* atomClass,*/ item, options, user: _user }) {
+  async _readValidate({ /* atomClass,*/ item, options, user: _user }: any) {
     // schema/tableName: see also: _prepare_fieldsRight
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') === -1) return item;
     // validate
@@ -62,7 +62,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
     return item;
   }
 
-  async _readValidate_schema({ schema, item }) {
+  async _readValidate_schema({ schema, item }: any) {
     // schema
     schema = this.ctx.bean.validation.getSchema(schema);
     const properties = schema.schema.properties;

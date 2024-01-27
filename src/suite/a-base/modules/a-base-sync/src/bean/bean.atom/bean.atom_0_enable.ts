@@ -3,7 +3,7 @@ import { BeanAtom0Delete } from './bean.atom_0_delete.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Enable extends BeanAtom0Delete {
-  async enable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
+  async enable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
     // atomClass
     const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
@@ -21,7 +21,7 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
     });
   }
 
-  async disable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
+  async disable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
     // atomClass
     const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,

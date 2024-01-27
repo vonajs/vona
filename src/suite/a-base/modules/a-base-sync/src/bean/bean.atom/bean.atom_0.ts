@@ -43,7 +43,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
 
   // atom other functions
 
-  async get({ atomId }) {
+  async get({ atomId }: any) {
     return await this.modelAtom.get({ id: atomId });
   }
 
@@ -92,7 +92,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     ]);
   }
 
-  async stats({ atomIds, user }) {
+  async stats({ atomIds, user }: any) {
     const list: any[] = [];
     for (const atomId of atomIds) {
       const res = await this.checkRightRead({ atom: { id: atomId }, user, checkFlow: true });
@@ -109,7 +109,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     return list;
   }
 
-  async getTableName({ atomClass, atomClassBase, options, mode, user, action, key, count }) {
+  async getTableName({ atomClass, atomClassBase, options, mode, user, action, key, count }: any) {
     const tableNameModes = atomClassBase.tableNameModes || {};
     let tableName;
     if (mode === 'search') {

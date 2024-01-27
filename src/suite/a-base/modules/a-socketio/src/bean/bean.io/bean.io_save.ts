@@ -15,7 +15,7 @@ export class BeanIoSave extends BeanIoPush {
   // called by messageBase.onSaveSyncs
   // support userIdTo/userIdsTo
   //   userIdTo: 0/-1/-2/-3
-  async _onSaveSyncs({ path, options, message, messageClass }) {
+  async _onSaveSyncs({ path, options, message, messageClass }: any) {
     // messageClass
     const messageClassBase = this.messageClass.messageClass(messageClass);
     const beanMessage = this._getBeanMessage(messageClassBase);
@@ -97,7 +97,7 @@ export class BeanIoSave extends BeanIoPush {
   // called by messageBase.onSaveSyncsPolicy
   // support userIdTo/userIdsTo
   //   userIdTo: 0/-1/-2/-3
-  async _onSaveSyncsPolicy({ path, options, message, messageClass, saveLimit, onSave }) {
+  async _onSaveSyncsPolicy({ path, options, message, messageClass, saveLimit, onSave }: any) {
     // userIdsTo
     if (message.userIdsTo) {
       return await this._onSaveSyncsPolicy_userIdsTo({ path, options, message, messageClass, saveLimit, onSave });
@@ -120,7 +120,7 @@ export class BeanIoSave extends BeanIoPush {
     return await onSave([message.userIdTo]);
   }
 
-  async _onSaveSyncsPolicy_userIdsTo({ message, saveLimit, onSave }) {
+  async _onSaveSyncsPolicy_userIdsTo({ message, saveLimit, onSave }: any) {
     const loop = Math.ceil(message.userIdsTo.length / saveLimit);
     for (let i = 0; i < loop; i++) {
       const userIds = message.userIdsTo.slice(i * saveLimit, (i + 1) * saveLimit);
@@ -128,7 +128,7 @@ export class BeanIoSave extends BeanIoPush {
     }
   }
 
-  async _onSaveSyncsPolicy_userIdsAll({ saveLimit, onSave }) {
+  async _onSaveSyncsPolicy_userIdsAll({ saveLimit, onSave }: any) {
     const modelUser = this.ctx.model.module('a-base').user;
     let offset = 0;
     // eslint-disable-next-line

@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowQuery } from './bean.flow_query.js';
 
 export class BeanFlowStart extends BeanFlowQuery {
-  async startByKey({ flowDefKey, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
+  async startByKey({ flowDefKey, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
     // fullKey
     const { fullKey } = this.ctx.bean.flowDef._combineFullKey({ flowDefKey });
     // get flow def
@@ -12,7 +12,7 @@ export class BeanFlowStart extends BeanFlowQuery {
     return await this._start({ flowDef, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId });
   }
 
-  async startById({ flowDefId, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
+  async startById({ flowDefId, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
     // get flow def
     const flowDef = await this.ctx.bean.flowDef.getById({ flowDefId });
     if (!flowDef) this.ctx.throw.module(__ThisModule__, 1001, flowDefId);
@@ -20,7 +20,7 @@ export class BeanFlowStart extends BeanFlowQuery {
     return await this._start({ flowDef, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId });
   }
 
-  async _start({ flowDef, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
+  async _start({ flowDef, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
     // flowInstance
     const flowInstance = this._createFlowInstance({ flowDef });
     // start

@@ -28,7 +28,7 @@ export class MiddlewareCaptchaVerify extends BeanBase {
   }
 }
 
-async function sceneVerify({ ctx, scene }) {
+async function sceneVerify({ ctx, scene }: any) {
   // params
   const module = scene.module || ctx.module.info.relativeName;
   const sceneName = scene.name;

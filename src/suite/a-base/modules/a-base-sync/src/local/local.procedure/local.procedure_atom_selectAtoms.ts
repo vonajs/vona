@@ -1,7 +1,7 @@
 import { LocalProcedureBase } from './local.procedure_base.js';
 
 export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
-  async selectAtoms({ options }) {
+  async selectAtoms({ options }: any) {
     let {
       iid,
       userIdWho,

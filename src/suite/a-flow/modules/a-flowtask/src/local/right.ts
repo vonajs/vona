@@ -46,28 +46,28 @@ export class LocalRight extends BeanBase {
       this.ctx.throw.module(__ThisModule__, 1004, flowTaskId);
     }
   }
-  async _getNodeOptionsTask({ getOptions, flowTask, nodeInstance }) {
+  async _getNodeOptionsTask({ getOptions, flowTask, nodeInstance }: any) {
     if (getOptions) return await getOptions();
     if (!nodeInstance) {
       nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowTask.flowNodeId });
     }
     return this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
   }
-  async _getTask({ getTask, flowTaskId }) {
+  async _getTask({ getTask, flowTaskId }: any) {
     if (getTask) return await getTask(flowTaskId);
     return await this.modelFlowTask.get({ id: flowTaskId });
   }
-  async viewAtom({ flowTask, user }) {
+  async viewAtom({ flowTask, user }: any) {
     // must be the same user
     this._check_sameUser({ flowTask, user });
   }
-  async editAtom({ flowTask, user }) {
+  async editAtom({ flowTask, user }: any) {
     // must be the same user
     this._check_sameUser({ flowTask, user });
     // not complete
     this._check_notDoneAndHandled({ flowTask });
   }
-  async appendHandleRemark({ flowTask, user, flowNodeType }) {
+  async appendHandleRemark({ flowTask, user, flowNodeType }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // must be the same user
     this._check_sameUser({ flowTask, user });
@@ -76,7 +76,7 @@ export class LocalRight extends BeanBase {
       this.ctx.throw.module(__ThisModule__, 1011, flowTaskId);
     }
   }
-  async assignees({ flowTask, user }) {
+  async assignees({ flowTask, user }: any) {
     // specificFlag must be 1
     this._check_specificFlag_1({ flowTask });
     // must be the same user
@@ -86,11 +86,11 @@ export class LocalRight extends BeanBase {
     // timeClaimed first
     this._check_claimed({ flowTask });
   }
-  async assigneesConfirmation({ flowTask, user }) {
+  async assigneesConfirmation({ flowTask, user }: any) {
     // same as assignees
     return await this.assignees({ flowTask, user });
   }
-  async cancelFlow({ flowTask, user, getOptions, disableCheckTimeClaimed }) {
+  async cancelFlow({ flowTask, user, getOptions, disableCheckTimeClaimed }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // specificFlag must be normal
     this._check_specificFlag_normal({ flowTask });
@@ -109,7 +109,7 @@ export class LocalRight extends BeanBase {
       this.ctx.throw.module(__ThisModule__, 1010, flowTaskId);
     }
   }
-  async claim({ flowTask, user }) {
+  async claim({ flowTask, user }: any) {
     // must be the same user
     this._check_sameUser({ flowTask, user });
     // not complete
@@ -120,7 +120,7 @@ export class LocalRight extends BeanBase {
       return { timeClaimed: flowTask.timeClaimed };
     }
   }
-  async complete({ flowTask, user, handle, getOptions, disableCheckTimeClaimed }) {
+  async complete({ flowTask, user, handle, getOptions, disableCheckTimeClaimed }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // specificFlag must be normal
     this._check_specificFlag_normal({ flowTask });
@@ -146,7 +146,7 @@ export class LocalRight extends BeanBase {
       this.ctx.throw(403);
     }
   }
-  async recall({ flowTask, user }) {
+  async recall({ flowTask, user }: any) {
     // specificFlag must be 2
     this._check_specificFlag_2({ flowTask });
     // must be the same user
@@ -156,7 +156,7 @@ export class LocalRight extends BeanBase {
     // timeClaimed first
     this._check_claimed({ flowTask });
   }
-  async forward({ flowTask, user, getOptions, disableCheckTimeClaimed }) {
+  async forward({ flowTask, user, getOptions, disableCheckTimeClaimed }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // must be the same user
     this._check_sameUser({ flowTask, user });
@@ -176,7 +176,7 @@ export class LocalRight extends BeanBase {
       this.ctx.throw.module(__ThisModule__, 1012, flowTaskId);
     }
   }
-  async forwardRecall({ flowTask, user, getOptions, getTask }) {
+  async forwardRecall({ flowTask, user, getOptions, getTask }: any) {
     // must be the same user
     this._check_sameUser({ flowTask, user });
     // not complete
@@ -194,7 +194,7 @@ export class LocalRight extends BeanBase {
       this.ctx.throw(403);
     }
   }
-  async substitute({ flowTask, user, getOptions, disableCheckTimeClaimed }) {
+  async substitute({ flowTask, user, getOptions, disableCheckTimeClaimed }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // must be the same user
     this._check_sameUser({ flowTask, user });
@@ -211,7 +211,7 @@ export class LocalRight extends BeanBase {
       this.ctx.throw.module(__ThisModule__, 1013, flowTaskId);
     }
   }
-  async substituteRecall({ flowTask, user, getOptions, getTask }) {
+  async substituteRecall({ flowTask, user, getOptions, getTask }: any) {
     // must be the same user
     this._check_sameUser({ flowTask, user });
     // not complete

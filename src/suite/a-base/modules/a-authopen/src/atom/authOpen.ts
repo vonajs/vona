@@ -14,14 +14,14 @@ export class AtomAuthOpen extends BeanAtomBase {
     return this.ctx.model.module('a-base').auth;
   }
 
-  async default({ atomClass, item, options, user }) {
+  async default({ atomClass, item, options, user }: any) {
     // authOpen default
     const data = await this.model.default();
     // super
     return await super.default({ atomClass, data, item, options, user });
   }
 
-  async read({ atomClass, options, key, user }) {
+  async read({ atomClass, options, key, user }: any) {
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -31,7 +31,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     return item;
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     // super
     await super.select({ atomClass, options, items, user });
     // meta
@@ -40,7 +40,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     }
   }
 
-  async create({ atomClass, item, options, user }) {
+  async create({ atomClass, item, options, user }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomCreate();
     // super
@@ -74,7 +74,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     return data;
   }
 
-  async write({ atomClass, target, key, item, options, user }) {
+  async write({ atomClass, target, key, item, options, user }: any) {
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update authOpen
@@ -85,7 +85,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     return data;
   }
 
-  async delete({ atomClass, key, user }) {
+  async delete({ atomClass, key, user }: any) {
     const itemId = key.itemId;
     // super
     await super.delete({ atomClass, key, user });
@@ -105,7 +105,7 @@ export class AtomAuthOpen extends BeanAtomBase {
     });
   }
 
-  async checkRightAction({ atom, atomClass, action, options, user }) {
+  async checkRightAction({ atom, atomClass, action, options, user }: any) {
     // super
     const res = await super.checkRightAction({ atom, atomClass, action, options, user });
     if (!res) return res;

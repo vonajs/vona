@@ -50,7 +50,7 @@ export class LocalIoInner0 extends BeanBase {
     return beanChannel;
   }
 
-  async _loopMessageSyncs({ path, message, messageSyncs, onHandle }) {
+  async _loopMessageSyncs({ path, message, messageSyncs, onHandle }: any) {
     // array
     if (messageSyncs) {
       await this._loopMessageSyncs_handle({ path, messageSyncs, onHandle });
@@ -83,7 +83,7 @@ export class LocalIoInner0 extends BeanBase {
     }
   }
 
-  async _loopMessageSyncs_handle({ path, messageSyncs, onHandle }) {
+  async _loopMessageSyncs_handle({ path, messageSyncs, onHandle }: any) {
     if (path) {
       // userIds
       const userIds = messageSyncs.map(item => item.userId).filter(userId => userId > 0);

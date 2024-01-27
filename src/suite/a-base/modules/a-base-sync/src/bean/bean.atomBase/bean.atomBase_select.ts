@@ -1,11 +1,11 @@
 import { BeanAtomBaseDefault } from './bean.atomBase_default.js';
 
 export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
-  async selectQuery({ atomClass, options, user }) {
+  async selectQuery({ atomClass, options, user }: any) {
     return await this.ctx.bean.atom._selectQuery({ atomClass, options, user });
   }
 
-  async select({ atomClass, options, items, user }) {
+  async select({ atomClass, options, items, user }: any) {
     if (items.length === 0) return;
     // validate
     await this._selectValidate({ atomClass, items, options, user });
@@ -31,7 +31,7 @@ export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
     this._atomNameLocaleTranslate({ items, atomClassBase });
   }
 
-  async _selectValidate({ atomClass, items, options, user }) {
+  async _selectValidate({ atomClass, items, options, user }: any) {
     // schema/tableName: see also: _prepare_fieldsRight
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') === -1) return;
     for (let index = 0; index < items.length; index++) {

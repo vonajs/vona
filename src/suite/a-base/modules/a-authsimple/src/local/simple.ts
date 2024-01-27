@@ -10,7 +10,7 @@ export class LocalSimple extends BeanBase {
     return this.ctx.model.module(__ThisModule__).authSimple;
   }
 
-  async verify({ userId, password }) {
+  async verify({ userId, password }: any) {
     // check
     if (!password) return false;
     // authSimple
@@ -25,13 +25,13 @@ export class LocalSimple extends BeanBase {
     return authSimple;
   }
 
-  async verifyPassword({ password, hash }) {
+  async verifyPassword({ password, hash }: any) {
     const _password = passwordFn(password.toString());
     const verifyFn = util.promisify(_password.verifyAgainst);
     return await verifyFn.call(_password, hash);
   }
 
-  async calcPassword({ password }) {
+  async calcPassword({ password }: any) {
     const _password = passwordFn(password.toString());
     const hashFn = util.promisify(_password.hash);
     return await hashFn.call(_password);

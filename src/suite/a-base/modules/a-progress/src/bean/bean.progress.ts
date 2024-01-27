@@ -16,13 +16,13 @@ export class BeanProgress extends BeanModuleScopeBase {
     return `progress:${this.ctx.instance.id}:${progressId}`;
   }
 
-  async _getRedisValue({ progressId }) {
+  async _getRedisValue({ progressId }: any) {
     const key = this._getRedisKey({ progressId });
     const content = await this.redis.get(key);
     return content ? JSON.parse(content) : null;
   }
 
-  async _setRedisValue({ progressId, content, contentOld }) {
+  async _setRedisValue({ progressId, content, contentOld }: any) {
     const expireTime = this.configModule.progress.expireTime;
     const key = this._getRedisKey({ progressId });
     if (contentOld) {
@@ -31,12 +31,12 @@ export class BeanProgress extends BeanModuleScopeBase {
     await this.redis.set(key, JSON.stringify(content), 'PX', expireTime);
   }
 
-  async _updateRedisValue({ progressId, content }) {
+  async _updateRedisValue({ progressId, content }: any) {
     const contentOld = await this._getRedisValue({ progressId });
     await this._setRedisValue({ progressId, content, contentOld });
   }
 
-  async _deleteRedisValue({ progressId }) {
+  async _deleteRedisValue({ progressId }: any) {
     const key = this._getRedisKey({ progressId });
     await this.redis.del(key);
   }
@@ -67,7 +67,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     return progressId;
   }
 
-  async update({ progressId, progressNo = 0, total, progress, text }) {
+  async update({ progressId, progressNo = 0, total, progress, text }: any) {
     if (!progressId) return;
     const item = await this._getRedisValue({ progressId });
     if (!item) {
@@ -107,7 +107,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     await this._publish({ progressId, ioMessage });
   }
 
-  async done({ progressId, message }) {
+  async done({ progressId, message }: any) {
     if (!progressId) return;
     const item = await this._getRedisValue({ progressId });
     if (!item) {
@@ -140,7 +140,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     await this._publish({ progressId, ioMessage });
   }
 
-  async error({ progressId, message }) {
+  async error({ progressId, message }: any) {
     if (!progressId) return;
     const item = await this._getRedisValue({ progressId });
     if (!item) {
@@ -173,14 +173,14 @@ export class BeanProgress extends BeanModuleScopeBase {
     await this._publish({ progressId, ioMessage });
   }
 
-  async check({ progressId, counter, user }) {
+  async check({ progressId, counter, user }: any) {
     if (!progressId) return null;
     const item = await this._getRedisValue({ progressId });
     if (!item || item.userId !== user.id || item.counter <= counter) return null;
     return item;
   }
 
-  async abort({ progressId, user }) {
+  async abort({ progressId, user }: any) {
     if (!progressId) return;
     const item = await this._getRedisValue({ progressId });
     if (!item || item.userId !== user.id) return;
@@ -193,14 +193,14 @@ export class BeanProgress extends BeanModuleScopeBase {
     });
   }
 
-  async delete({ progressId, user }) {
+  async delete({ progressId, user }: any) {
     if (!progressId) return;
     const item = await this._getRedisValue({ progressId });
     if (!item || item.userId !== user.id) return;
     await this._deleteRedisValue({ progressId });
   }
 
-  async _publish({ progressId, ioMessage }) {
+  async _publish({ progressId, ioMessage }: any) {
     await this.ctx.bean.io.publish({
       path: `/a/progress/update/${progressId}`,
       message: ioMessage,

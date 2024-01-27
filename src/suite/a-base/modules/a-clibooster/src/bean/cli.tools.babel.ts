@@ -9,7 +9,7 @@ import fse from 'fs-extra';
 
 @Bean({ scene: 'cli.tools' })
 export class CliToolsBabel extends BeanCliBase {
-  async execute({ user }) {
+  async execute({ user }: any) {
     const { cwd, argv } = this.context;
     // super
     await super.execute({ user });

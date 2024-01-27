@@ -60,7 +60,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
     });
   }
 
-  async _checkRightRead_normal({ _atom, atomClass, user, checkFlow, options: _options }) {
+  async _checkRightRead_normal({ _atom, atomClass, user, checkFlow, options: _options }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // draft: only userIdUpdated
     // check right

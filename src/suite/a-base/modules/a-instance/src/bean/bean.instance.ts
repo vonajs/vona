@@ -36,14 +36,14 @@ export class BeanInstance extends BeanBase {
     return await modelInstance.select(_options);
   }
 
-  async get({ subdomain }) {
+  async get({ subdomain }: any) {
     // cache
     const instance = this.cacheMem.get('instance');
     if (instance) return instance;
     return await this.resetCache({ subdomain });
   }
 
-  async _get({ subdomain }) {
+  async _get({ subdomain }: any) {
     // get
     const modelInstance = this.ctx.model.module(__ThisModule__).instance;
     const instance = await modelInstance.get({ name: subdomain });
@@ -67,7 +67,7 @@ export class BeanInstance extends BeanBase {
     });
   }
 
-  async _registerLock({ instanceBase }) {
+  async _registerLock({ instanceBase }: any) {
     // get again
     const modelInstance = this.ctx.model.module(__ThisModule__).instance;
     let instance = await modelInstance.get({ name: instanceBase.subdomain });
@@ -112,7 +112,7 @@ export class BeanInstance extends BeanBase {
     }
   }
 
-  async resetCache({ subdomain }) {
+  async resetCache({ subdomain }: any) {
     // cache
     const instance = await this._get({ subdomain });
     if (!instance) return null;

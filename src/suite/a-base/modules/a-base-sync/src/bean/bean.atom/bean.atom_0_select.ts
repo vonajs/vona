@@ -5,12 +5,12 @@ const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
-  async count({ atomClass, options, user }) {
+  async count({ atomClass, options, user }: any) {
     return await this.select({ atomClass, options, user, count: 1 });
   }
 
   // select
-  async select({ atomClass, options, user, pageForce = true, count = 0 }) {
+  async select({ atomClass, options, user, pageForce = true, count = 0 }: any) {
     if (!options) options = {};
     if (!options.where) options.where = {};
     if (!options.orders) options.orders = [];
@@ -48,7 +48,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _list({ atomClass, options, user, pageForce = true, count = 0 }) {
+  async _list({ atomClass, options, user, pageForce = true, count = 0 }: any) {
     let {
       where,
       orders,
@@ -164,7 +164,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _selectQuery({ /* atomClass, */ options, user: _user }) {
+  async _selectQuery({ /* atomClass, */ options, user: _user }: any) {
     return await this.sqlProcedure.selectAtoms({ options });
   }
 }

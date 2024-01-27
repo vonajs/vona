@@ -4,7 +4,7 @@ import { __ThisModule__ } from '../resource/this.js';
 @Local()
 export class LocalAuth extends BeanBase {
   // data: { clientID, clientSecret }
-  async signin({ data, state = 'login' }) {
+  async signin({ data, state = 'login' }: any) {
     // signin
     await this.ctx.bean.authProvider.authenticateDirect({
       module: __ThisModule__,

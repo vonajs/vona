@@ -37,7 +37,7 @@ export class VersionUpdate extends BeanBase {
     await this._update7Migration_articles({ mapCagetoryIds, mapTagIds });
   }
 
-  async _update7Migration_articles({ mapCagetoryIds, mapTagIds }) {
+  async _update7Migration_articles({ mapCagetoryIds, mapTagIds }: any) {
     // articles
     const articles = await this.ctx.model.query(
       `
@@ -55,7 +55,7 @@ export class VersionUpdate extends BeanBase {
     }
   }
 
-  async _update7Migration_article({ mapCagetoryIds, mapTagIds, article }) {
+  async _update7Migration_article({ mapCagetoryIds, mapTagIds, article }: any) {
     // user
     const user = { id: article.userIdCreated };
     // open
@@ -111,7 +111,7 @@ export class VersionUpdate extends BeanBase {
     return mapTagIds;
   }
 
-  async _update7Migration_tag({ mapTagIds, tag }) {
+  async _update7Migration_tag({ mapTagIds, tag }: any) {
     const tagIdNew = await this.ctx.bean.tag.add({
       atomClass: { id: tag.atomClassId },
       data: {
@@ -137,7 +137,7 @@ export class VersionUpdate extends BeanBase {
     }
     return mapCagetoryIds;
   }
-  async _update7Migration_cagetory({ mapCagetoryIds, categories, category }) {
+  async _update7Migration_cagetory({ mapCagetoryIds, categories, category }: any) {
     if (category.__parsed) return mapCagetoryIds[category.id];
     let categoryIdParent = 0;
     if (category.categoryIdParent > 0) {

@@ -17,7 +17,7 @@ export class VersionUpdate extends BeanBase {
     await this._adjustCategories({ resourceType: 'a-base:mine' });
   }
 
-  async _adjustCategories({ resourceType }) {
+  async _adjustCategories({ resourceType }: any) {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
@@ -31,7 +31,7 @@ export class VersionUpdate extends BeanBase {
     }
   }
 
-  async _adjustCategoriesInstance({ resourceType }) {
+  async _adjustCategoriesInstance({ resourceType }: any) {
     // select all resources
     const list = await this.ctx.bean.resource.select({
       options: {

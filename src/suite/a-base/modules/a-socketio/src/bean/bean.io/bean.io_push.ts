@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoPublish } from './bean.io_publish.js';
 
 export class BeanIoPush extends BeanIoPublish {
-  async pushDirect({ content, channel, options }) {
+  async pushDirect({ content, channel, options }: any) {
     this.ctx.meta.util.queuePush({
       module: __ThisModule__,
       queueName: 'pushDirect',
@@ -14,7 +14,7 @@ export class BeanIoPush extends BeanIoPublish {
     });
   }
 
-  async push({ options, message, messageSync, messageClass }) {
+  async push({ options, message, messageSync, messageClass }: any) {
     // userId
     const userId = messageSync.userId;
     const isSender = message.userIdFrom === userId;
@@ -42,7 +42,7 @@ export class BeanIoPush extends BeanIoPublish {
     return true;
   }
 
-  async _pushQueuePush({ options, message, messageSyncs, messageClass }) {
+  async _pushQueuePush({ options, message, messageSyncs, messageClass }: any) {
     // check if enable push
     const pushEnable = await this._checkPushEnable({ options, message, messageSyncs, messageClass });
     if (!pushEnable) return;
@@ -59,7 +59,7 @@ export class BeanIoPush extends BeanIoPublish {
     });
   }
 
-  async _checkPushEnable({ options, message, messageSyncs, messageClass }) {
+  async _checkPushEnable({ options, message, messageSyncs, messageClass }: any) {
     // options maybe set push.channels
     const channels = options && options.push && options.push.channels;
     if (channels) return true;
@@ -70,7 +70,7 @@ export class BeanIoPush extends BeanIoPublish {
     return await beanMessage.onPushEnable({ options, message, messageSyncs, messageClass });
   }
 
-  async _getChannels({ options, message, messageSync, messageClass }) {
+  async _getChannels({ options, message, messageSync, messageClass }: any) {
     // options maybe set push.channels
     const channels = options && options.push && options.push.channels;
     if (channels) return channels;
@@ -80,7 +80,7 @@ export class BeanIoPush extends BeanIoPublish {
     return await beanMessage.onChannels({ options, message, messageSync, messageClass });
   }
 
-  async _pushChannel({ options, message, messageSync, messageClass, channelFullName }) {
+  async _pushChannel({ options, message, messageSync, messageClass, channelFullName }: any) {
     try {
       // bean
       const messageClassBase = this.messageClass.messageClass(messageClass);

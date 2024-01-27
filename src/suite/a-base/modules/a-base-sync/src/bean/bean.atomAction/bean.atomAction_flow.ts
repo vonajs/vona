@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomActionBase } from './bean.atomAction_base.js';
 
 export class BeanAtomActionFlow extends BeanAtomActionBase {
-  async selectFlowActions({ atomClass, flowKey }) {
+  async selectFlowActions({ atomClass, flowKey }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     return await this.model.select({
       where: {
@@ -12,7 +12,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     });
   }
 
-  async getByModeFlow({ id, atomClassId, flowKey, nodeDefId, nodeDefName }) {
+  async getByModeFlow({ id, atomClassId, flowKey, nodeDefId, nodeDefName }: any) {
     const data = id ? { id } : { atomClassId, flowKey, nodeDefId };
     const res = await this.model.get(data);
     if (res) return res;
@@ -30,11 +30,11 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     });
   }
 
-  async _registerLockByModeFlow({ atomClassId, flowKey, nodeDefId, nodeDefName }) {
+  async _registerLockByModeFlow({ atomClassId, flowKey, nodeDefId, nodeDefName }: any) {
     return await this._registerLockByModeFlow_inner({ atomClassId, flowKey, nodeDefId, nodeDefName });
   }
 
-  async _registerLockByModeFlow_inner({ atomClassId, flowKey, nodeDefId, nodeDefName }) {
+  async _registerLockByModeFlow_inner({ atomClassId, flowKey, nodeDefId, nodeDefName }: any) {
     // get
     const res = await this.model.get({ atomClassId, flowKey, nodeDefId });
     if (res) return res;

@@ -1,7 +1,7 @@
 import { LocalProcedureAtomRightCheckRoleRightRead } from './local.procedure_atomRight_checkRoleRightRead.js';
 
 export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomRightCheckRoleRightRead {
-  async checkRightAction({ iid, userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }) {
+  async checkRightAction({ iid, userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }: any) {
     // for safe
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
@@ -58,7 +58,7 @@ export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomR
     return _sql;
   }
 
-  async _checkRightAction_rightWhere({ iid, userIdWho, atomClass, atomClassBase, action, forAtomUser, atom }) {
+  async _checkRightAction_rightWhere({ iid, userIdWho, atomClass, atomClassBase, action, forAtomUser, atom }: any) {
     // right
     return await this._prepareRight({
       iid,

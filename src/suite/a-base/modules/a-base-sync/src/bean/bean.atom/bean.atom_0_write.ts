@@ -129,7 +129,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
     return await this._create_result({ key, atomClass, options, user });
   }
 
-  async _update({ atom }) {
+  async _update({ atom }: any) {
     await this.modelAtom.update(atom);
   }
 }

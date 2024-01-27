@@ -8,7 +8,7 @@ const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yel
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderTest extends BeanBase {
-  async sendCode({ context }) {
+  async sendCode({ context }: any) {
     // token
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
     // prompt
@@ -21,7 +21,7 @@ export class SmsProviderTest extends BeanBase {
     return { token };
   }
 
-  async verify({ data, dataInput }) {
+  async verify({ data, dataInput }: any) {
     if (!data) this.ctx.throw.module(__ThisModule__, 1002);
     if (data.token !== dataInput.token) this.ctx.throw.module(__ThisModule__, 1003);
   }

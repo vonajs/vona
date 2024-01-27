@@ -18,7 +18,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return await this.__getRaw({ id, module, atomClassName });
   }
 
-  async getAtomClassIdsInner({ inner }) {
+  async getAtomClassIdsInner({ inner }: any) {
     // cache
     const cache = this.ctx.bean.summer.getCache({ module: __ThisModule__, name: 'atomClassInner' });
     // key
@@ -27,7 +27,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return atomClasses.map(item => item.id);
   }
 
-  async __getRaw({ id, module, atomClassName }) {
+  async __getRaw({ id, module, atomClassName }: any) {
     module = module || this.moduleScope;
     const data = id ? { id } : { module, atomClassName };
     const res = await this.model.get(data);
@@ -47,7 +47,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     });
   }
 
-  async _registerLock({ module, atomClassName }) {
+  async _registerLock({ module, atomClassName }: any) {
     // atomClassBase
     const atomClassBase = this.ctx.bean.base.atomClass({ module, atomClassName });
     if (!atomClassBase) throw new Error(`atomClass ${module}:${atomClassName} not found!`);
@@ -64,7 +64,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return data;
   }
 
-  async _registerLock_inner({ module, atomClassName }) {
+  async _registerLock_inner({ module, atomClassName }: any) {
     // get
     const res = await this.model.get({ module, atomClassName });
     if (res) return res;
@@ -85,7 +85,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return res.id;
   }
 
-  async getByAtomId({ atomId }) {
+  async getByAtomId({ atomId }: any) {
     const atom = await this.ctx.bean.atom.get({ atomId });
     if (!atom) return null;
     return await this.get({ id: atom.atomClassId });
@@ -100,7 +100,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     // return res[0];
   }
 
-  async validator({ atomClass }) {
+  async validator({ atomClass }: any) {
     // default
     const _module = this.ctx.app.meta.modules[atomClass.module];
     const validator = _module.resource.meta.base.atoms[atomClass.atomClassName].validator;
@@ -114,7 +114,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     };
   }
 
-  async validatorSearch({ atomClass }) {
+  async validatorSearch({ atomClass }: any) {
     const _module = this.ctx.app.meta.modules[atomClass.module];
     const validator = _module.main.meta.base.atoms[atomClass.atomClassName].search.validator;
     if (!validator) return null;
@@ -127,7 +127,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     };
   }
 
-  async atomClassesUser({ user }) {
+  async atomClassesUser({ user }: any) {
     // items
     const items = await this.ctx.model.query(
       `
@@ -166,7 +166,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return atomClassesNew;
   }
 
-  async actionsUser({ atomClass, user }) {
+  async actionsUser({ atomClass, user }: any) {
     const atomClassId = await this.getAtomClassId(atomClass);
     // items
     const items = await this.ctx.model.query(
@@ -184,7 +184,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return items;
   }
 
-  async checkRightAtomClassActionOfRole({ atomClass, action, roleId, excludeMine, onlyMine }) {
+  async checkRightAtomClassActionOfRole({ atomClass, action, roleId, excludeMine, onlyMine }: any) {
     const atomClassId = await this.getAtomClassId(atomClass);
     const clauseExcludeMine = excludeMine ? 'and scope<>0' : '';
     const clauseOnlyMine = onlyMine ? 'and scope=0' : '';
@@ -213,7 +213,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return !!res;
   }
 
-  async checkRightAtomClass({ atomClass, user }) {
+  async checkRightAtomClass({ atomClass, user }: any) {
     if (!user || user.id === 0) return true;
     const atomClassId = await this.getAtomClassId(atomClass);
     const res = await this.ctx.model.queryOne(

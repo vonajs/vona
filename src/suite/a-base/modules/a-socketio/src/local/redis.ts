@@ -19,7 +19,7 @@ export class LocalRedis extends BeanBase {
   // subcribe
   //    key: userId:path:socketId
   //    value: timestamp,workerId,scene
-  async _subscribe({ path, timestamp, workerId, socketId, scene, user }) {
+  async _subscribe({ path, timestamp, workerId, socketId, scene, user }: any) {
     if (!path) this.ctx.throw(403);
     scene = scene || '';
     const key = `${__subVersion}:${this.ctx.instance.id}:${user.id}:${path}`;
@@ -29,7 +29,7 @@ export class LocalRedis extends BeanBase {
     await this.redis.hset(key, socketId, value);
   }
 
-  async _unsubscribe({ path, timestamp, socketId, user }) {
+  async _unsubscribe({ path, timestamp, socketId, user }: any) {
     if (!path) this.ctx.throw(403);
     const key = `${__subVersion}:${this.ctx.instance.id}:${user.id}:${path}`;
     // check timestamp
@@ -41,7 +41,7 @@ export class LocalRedis extends BeanBase {
     await this.redis.hdel(key, socketId);
   }
 
-  async _unsubscribeWhenDisconnect({ iid, user, socketId }) {
+  async _unsubscribeWhenDisconnect({ iid, user, socketId }: any) {
     const keyPrefix = this.redis.options.keyPrefix;
     const keyPatern = `${keyPrefix}${__subVersion}:${iid}:${user.id}:*`;
     const keys = await this.redis.keys(keyPatern);
@@ -54,7 +54,7 @@ export class LocalRedis extends BeanBase {
     await this.redis.pipeline(cmds).exec();
   }
 
-  async _getPathUsersOnline({ path }) {
+  async _getPathUsersOnline({ path }: any) {
     const userIds = {};
     const keyPrefix = this.redis.options.keyPrefix;
     const keyPatern = `${keyPrefix}${__subVersion}:${this.ctx.instance.id}:*:${path}`;
@@ -66,12 +66,12 @@ export class LocalRedis extends BeanBase {
     return Object.keys(userIds).map(item => parseInt(item));
   }
 
-  async _getSubscribeValuesByPath({ userId, path }) {
+  async _getSubscribeValuesByPath({ userId, path }: any) {
     const result = await this._getSubscribeValuesByPathBatch({ userIds: [userId], path });
     return result[userId];
   }
 
-  async _getSubscribeValuesByPathBatch({ userIds, path }) {
+  async _getSubscribeValuesByPathBatch({ userIds, path }: any) {
     const cmdsGetAll: any[] = [];
     for (const userId of userIds) {
       const key = `${__subVersion}:${this.ctx.instance.id}:${userId}:${path}`;
@@ -96,7 +96,7 @@ export class LocalRedis extends BeanBase {
     return result;
   }
 
-  async _subscribeValuesCheck({ userId, path, hashValues, workersStatus, cmdsDelete }) {
+  async _subscribeValuesCheck({ userId, path, hashValues, workersStatus, cmdsDelete }: any) {
     const values = {};
     for (const socketId in hashValues) {
       // in

@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightAuxRoleScopesOfRole } from './bean.atomRightAux_roleScopesOfRole.js';
 
 export class BeanAtomRightAuxRoleScopesMineOfUser extends BeanAtomRightAuxRoleScopesOfRole {
-  async getRoleScopesMineOfUser({ atomClass, action, userId }) {
+  async getRoleScopesMineOfUser({ atomClass, action, userId }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // action
@@ -21,7 +21,7 @@ export class BeanAtomRightAuxRoleScopesMineOfUser extends BeanAtomRightAuxRoleSc
     await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'roleScopesMineOfUser' });
   }
 
-  async __getRoleScopesMineOfUserRaw({ atomClassId, action, userId }) {
+  async __getRoleScopesMineOfUserRaw({ atomClassId, action, userId }: any) {
     // atomClass
     const atomClass = await this.ctx.bean.atomClass.get({ id: atomClassId });
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);

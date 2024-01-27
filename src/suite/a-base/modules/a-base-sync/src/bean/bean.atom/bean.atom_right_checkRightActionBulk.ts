@@ -2,7 +2,7 @@ import { BeanAtomRightCheckRightAction } from './bean.atom_right_checkRightActio
 
 export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAction {
   // atomClass: { id, module, atomClassName }
-  async checkRightActionBulk({ atomClass, action, stage, user, options }) {
+  async checkRightActionBulk({ atomClass, action, stage, user, options }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // normal check
     const res = await this._checkRightActionBulk_normal({ atomClass, action, stage, user, options });
@@ -14,13 +14,13 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     return res;
   }
 
-  async _checkRightActionBulk_normal({ atomClass, action, stage, user, options }) {
+  async _checkRightActionBulk_normal({ atomClass, action, stage, user, options }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     const actionRes = await this.__checkRightActionBulk_fetchActions({ atomClass, atomClassBase, action, user });
     return await this.__checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options });
   }
 
-  async __checkRightActionBulk_fetchActions({ atomClass, atomClassBase, action, user }) {
+  async __checkRightActionBulk_fetchActions({ atomClass, atomClassBase, action, user }: any) {
     // enableRight
     const enableRight = atomClassBase.enableRight;
     if (enableRight) {
@@ -37,7 +37,12 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     });
   }
 
-  async __checkRightActionBulk_fetchActions_fromMeta({ atomClass, /* atomClassBase,*/ action, user: _user, bulk }) {
+  async __checkRightActionBulk_fetchActions_fromMeta({
+    atomClass,
+    /* atomClassBase,*/ action,
+    user: _user,
+    bulk,
+  }: any) {
     // meta
     const _module = this.ctx.app.meta.modules[atomClass.module];
     const metaAtomClass = _module.main.meta.base.atoms[atomClass.atomClassName];
@@ -84,7 +89,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     return actionsRes;
   }
 
-  async __checkRightActionBulk_fetchActions_fromDb({ atomClass, atomClassBase, action, user }) {
+  async __checkRightActionBulk_fetchActions_fromDb({ atomClass, atomClassBase, action, user }: any) {
     const params = {
       iid: this.ctx.instance.id,
       userIdWho: user.id,
@@ -107,7 +112,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     return await this.ctx.model.query(sql);
   }
 
-  async __checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options }) {
+  async __checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options }: any) {
     if (!actionRes) return actionRes;
     // check detail
     const detailRightInherit = await this._checkDetailRightInherit({

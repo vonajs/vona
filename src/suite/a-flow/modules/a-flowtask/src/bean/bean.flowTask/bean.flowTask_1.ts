@@ -32,7 +32,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     return count ? res[0]._count : res;
   }
 
-  async _loadTaskInstance({ flowTaskId, user, history, throwError = true }) {
+  async _loadTaskInstance({ flowTaskId, user, history, throwError = true }: any) {
     // get
     let flowTask;
     if (!history) {
@@ -65,7 +65,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     return task;
   }
 
-  async _createTaskInstance({ nodeInstance, userIdAssignee, user }) {
+  async _createTaskInstance({ nodeInstance, userIdAssignee, user }: any) {
     const task = this._createTaskInstance2({ nodeInstance });
     await task.init({ userIdAssignee, user });
     return task;
@@ -75,7 +75,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     return nodeInstance._getNodeDefOptionsTask();
   }
 
-  async _clearRemains({ nodeInstance }) {
+  async _clearRemains({ nodeInstance }: any) {
     const flowNodeId = nodeInstance.contextNode._flowNodeId;
     // notify
     const _tasks = await this.modelFlowTask.select({

@@ -8,7 +8,7 @@ const __atomClassRole = {
 
 export class BeanRoleIncludes extends BeanRoleBuild {
   // includes
-  async includes({ roleAtomId, roleId, page, user }) {
+  async includes({ roleAtomId, roleId, page, user }: any) {
     // user, should check user right scope
     // user = { id: 0 };
     //
@@ -59,7 +59,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
   }
 
   // remove role include
-  async removeRoleInc({ roleAtomId, roleId, roleIdInc, user }) {
+  async removeRoleInc({ roleAtomId, roleId, roleIdInc, user }: any) {
     // role
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;
@@ -76,7 +76,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
 }
 
 // // includes
-// async includes({ roleAtomId, roleId, page, user }) {
+// async includes({ roleAtomId, roleId, page, user }: any) {
 //   roleId = await this._forceRoleId({ roleAtomId, roleId });
 //   page = this.ctx.bean.util.page(page, false);
 //   const _limit = this.ctx.model._limit(page.size, page.index);

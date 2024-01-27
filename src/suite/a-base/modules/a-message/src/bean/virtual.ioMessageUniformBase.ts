@@ -6,12 +6,12 @@ const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
 @Virtual({ scene: 'bean' })
 export class BeanIoMessageUniformBase extends BeanIoMessageBase {
-  async onPublish({ /* path,*/ message, messageClass, options }) {
+  async onPublish({ /* path,*/ message, messageClass, options }: any) {
     // onPublish
     return await super.onPublish({ path: __PATH_MESSAGE_UNIFORM, message, messageClass, options });
   }
 
-  async onSaveSync({ path, options, message, messageSync, messageClass }) {
+  async onSaveSync({ path, options, message, messageSync, messageClass }: any) {
     if (messageSync.userId > 0 && messageSync.messageDirection === 2) {
       // user
       const user = { id: messageSync.userId };
@@ -21,7 +21,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
     return await super.onSaveSync({ path, options, message, messageSync, messageClass });
   }
 
-  async onSetRead({ messageClass, messageIds, all, user }) {
+  async onSetRead({ messageClass, messageIds, all, user }: any) {
     // stats
     if (messageClass) {
       this._notify({ messageClass, user });
@@ -34,7 +34,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
     return true;
   }
 
-  async onChannels({ options, message, messageSync, messageClass }) {
+  async onChannels({ options, message, messageSync, messageClass }: any) {
     let channels = await super.onChannels({ options, message, messageSync, messageClass });
     if (!channels) {
       channels = this.ctx.config.module(__ThisModule__).socketio.message.push.channels;
@@ -42,7 +42,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
     return channels;
   }
 
-  async onChannelRender({ channelFullName, options, message, messageSync, messageClass }) {
+  async onChannelRender({ channelFullName, options, message, messageSync, messageClass }: any) {
     if (channelFullName === 'a-mail:mail') {
       return await this._onChannelRenderMail({ channelFullName, options, message, messageSync, messageClass });
     }
@@ -50,7 +50,7 @@ export class BeanIoMessageUniformBase extends BeanIoMessageBase {
     return await super.onChannelRender({ channelFullName, options, message, messageSync, messageClass });
   }
 
-  async _onChannelRenderMail({ channelFullName, message, messageSync }) {
+  async _onChannelRenderMail({ channelFullName, message, messageSync }: any) {
     // user
     const userId = messageSync.userId;
     const user = await this.ctx.bean.user.get({ id: userId });

@@ -1,6 +1,6 @@
 export default {
   // check draft/formal
-  async checkAtomIdExists({ ctx, atomId, items }) {
+  async checkAtomIdExists({ ctx, atomId, items }: any) {
     if (items.length === 0) return false;
     const _atomOld = await ctx.bean.atom.modelAtom.get({ id: atomId });
     const atomIds = new Set([atomId]);

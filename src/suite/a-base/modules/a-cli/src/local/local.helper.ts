@@ -110,22 +110,22 @@ export class LocalHelper extends BeanBase {
       args,
     });
   }
-  async formatFile({ fileName, logPrefix }) {
+  async formatFile({ fileName, logPrefix }: any) {
     return await this.ProcessHelper.formatFile({ fileName, logPrefix });
   }
-  async spawnBin({ cmd, args, options }) {
+  async spawnBin({ cmd, args, options }: any) {
     return await this.ProcessHelper.spawnBin({ cmd, args, options });
   }
-  async spawnCmd({ cmd, args, options }) {
+  async spawnCmd({ cmd, args, options }: any) {
     return await this.ProcessHelper.spawnCmd({ cmd, args, options });
   }
-  async spawnExe({ cmd, args, options }) {
+  async spawnExe({ cmd, args, options }: any) {
     return await this.ProcessHelper.spawnExe({ cmd, args, options });
   }
   async spawn({ cmd, args = [], options = {} }) {
     return await this.ProcessHelper.spawn({ cmd, args, options });
   }
-  async gitCommit({ cwd, message }) {
+  async gitCommit({ cwd, message }: any) {
     return await this.ProcessHelper.gitCommit({ cwd, message });
   }
 }

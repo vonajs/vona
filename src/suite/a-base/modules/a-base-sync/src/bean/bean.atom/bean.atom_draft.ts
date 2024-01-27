@@ -3,7 +3,7 @@ import { BeanAtomClone } from './bean.atom_clone.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtomDraft extends BeanAtomClone {
-  async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }) {
+  async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
     // atomClass
     const { key, atomClass, atomClassBase } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
@@ -102,7 +102,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     return res;
   }
 
-  async _openDraft_asSimple({ atomClass, atom, user }) {
+  async _openDraft_asSimple({ atomClass, atom, user }: any) {
     let keyFormal;
     let changed = true;
     // formal
@@ -133,7 +133,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     return { formal: { key: keyFormal }, changed };
   }
 
-  async _openDraft_asSimpleZero({ atomClass, atomClassBase, atom, user }) {
+  async _openDraft_asSimpleZero({ atomClass, atomClassBase, atom, user }: any) {
     // draft
     if (atom.atomStage === 0) {
       return await this._openDraft_asSimpleZero_draft({ atomClass, atomClassBase, atom, user });
@@ -149,7 +149,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     // never go here
   }
 
-  async _openDraft_asSimpleZero_history({ atomClass, atom, user }) {
+  async _openDraft_asSimpleZero_history({ atomClass, atom, user }: any) {
     let keyDraft;
     let changed = true;
     let atomDraft;
@@ -192,7 +192,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     return { draft: { key: keyDraft }, changed };
   }
 
-  async _openDraft_asSimpleZero_formal({ atomClass, atom, user }) {
+  async _openDraft_asSimpleZero_formal({ atomClass, atom, user }: any) {
     let keyDraft;
     let changed = true;
     if (atom.atomIdDraft > 0) {
@@ -229,7 +229,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     return { draft: { key: keyDraft }, changed };
   }
 
-  async _openDraft_asSimpleZero_draft({ atomClass, atom, user }) {
+  async _openDraft_asSimpleZero_draft({ atomClass, atom, user }: any) {
     let changed = true;
     // key
     const keyDraft = { atomId: atom.id, itemId: atom.itemId };
@@ -259,7 +259,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     return { draft: { key: keyDraft }, changed };
   }
 
-  async _openDraft_update({ atomClass, atomId, atomRevision, user }) {
+  async _openDraft_update({ atomClass, atomId, atomRevision, user }: any) {
     await this.modelAtom.update({
       id: atomId,
       atomFlowId: 0,
@@ -272,7 +272,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     this._notifyDraftsDrafting(null, atomClass);
   }
 
-  async _createDraftFromFormal({ atomClass, atomIdFormal, user }) {
+  async _createDraftFromFormal({ atomClass, atomIdFormal, user }: any) {
     // ** create draft from formal
     const keyDraft = await this._copy({
       target: 'draft',

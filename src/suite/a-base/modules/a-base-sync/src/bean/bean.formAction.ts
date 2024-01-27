@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
 export class BeanFormAction extends BeanBase {
-  async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user: _user, throwError }) {
+  async _prepareAtomSchema_getFieldsRight({ mode, formAction, atomClass, user: _user, throwError }: any) {
     // read
     const modeRead = mode === 'view' || mode === 'read';
     // actionBase
@@ -30,7 +30,7 @@ export class BeanFormAction extends BeanBase {
   }
 
   // atomClass: maybe main/detail
-  async _prepareAtomSchema({ mode, formAction, atomClass, user, throwError }) {
+  async _prepareAtomSchema({ mode, formAction, atomClass, user, throwError }: any) {
     // fieldsRight
     const fieldsRight = await this._prepareAtomSchema_getFieldsRight({
       mode,
@@ -50,7 +50,7 @@ export class BeanFormAction extends BeanBase {
   }
 
   // atomClass: maybe main/detail
-  async _prepareAtomSchemaMain({ mode, formActionMain, atomClass, user, throwError }) {
+  async _prepareAtomSchemaMain({ mode, formActionMain, atomClass, user, throwError }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     const atomClassMain = atomClassBase.detail.atomClassMain;
     // fieldsRight

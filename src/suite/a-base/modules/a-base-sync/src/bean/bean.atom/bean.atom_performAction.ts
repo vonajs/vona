@@ -3,7 +3,7 @@ import { BeanAtomSchema } from './bean.atom_schema.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtomPerformAction extends BeanAtomSchema {
-  async performAction({ key, atomClass, action, item, options, user }) {
+  async performAction({ key, atomClass, action, item, options, user }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);

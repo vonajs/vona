@@ -1,7 +1,7 @@
 import { LocalIoInnerQueuePush } from './local.ioInner_queuePush.js';
 
 export class LocalIoInnerQueuePushDirect extends LocalIoInnerQueuePush {
-  async queuePushDirect({ content, options, channel }) {
+  async queuePushDirect({ content, options, channel }: any) {
     // get channel base
     const channelFullName = `${channel.module}:${channel.name}`;
     const beanChannel = this._getBeanChannel(channelFullName);

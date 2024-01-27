@@ -3,7 +3,7 @@ import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkR
 import objectHash from 'object-hash';
 
 export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFromViewHistory {
-  async _checkDetailRightInherit({ atomClass, atomClassBase, action, user, options }) {
+  async _checkDetailRightInherit({ atomClass, atomClassBase, action, user, options }: any) {
     // atomIdMain
     const atomIdMain = options?.atomIdMain;
     // atomClassBase
@@ -143,7 +143,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
     return false;
   }
 
-  async _checkDetailRightInherit_perform({ detailRightInherit, user, options }) {
+  async _checkDetailRightInherit_perform({ detailRightInherit, user, options }: any) {
     const { atomIdMain, atomClassMain, rightInherit, rightInheritStage } = detailRightInherit;
     const formActionMain = options.formActionMain;
     // options
@@ -164,7 +164,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
     });
   }
 
-  // async _checkDetailRightInherit_detailInlineMode({ atomClass, atomClassMain }) {
+  // async _checkDetailRightInherit_detailInlineMode({ atomClass, atomClassMain }: any) {
   //   const schemaMain = await this.ctx.bean.atom._prepareAtomSchema_default({ atomClass: atomClassMain });
   //   for (const key in schemaMain.schema.properties) {
   //     const property = schemaMain.schema.properties[key];

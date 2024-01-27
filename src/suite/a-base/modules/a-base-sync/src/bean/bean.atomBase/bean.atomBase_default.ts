@@ -10,7 +10,7 @@ const __create_atom_basic_fields = [
 ];
 
 export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
-  async default({ atomClass, data, item, options, user }) {
+  async default({ atomClass, data, item, options, user }: any) {
     data = data || {};
     // atomClass
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -38,7 +38,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
     return data;
   }
 
-  async _default_validate({ atomClass, data, options, user }) {
+  async _default_validate({ atomClass, data, options, user }: any) {
     // schema
     const atomSchema = await this.ctx.bean.atom._prepareAtomSchema({
       mode: options.containerMode || 'view',
@@ -71,7 +71,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
     return data;
   }
 
-  async _default_prepareItemOnly({ data, atomClassBase, item, options, user }) {
+  async _default_prepareItemOnly({ data, atomClassBase, item, options, user }: any) {
     // userIdCreated
     await this._create_prepareItemOnly_userIdCreated({ data, atomClassBase, item, options, user });
     // detail
@@ -85,7 +85,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
     return data;
   }
 
-  async _default_prepareItem({ data, atomClassBase, atomClass, item, options, user }) {
+  async _default_prepareItem({ data, atomClassBase, atomClass, item, options, user }: any) {
     // merge
     for (const field of __create_atom_basic_fields) {
       if (item[field] !== undefined) {

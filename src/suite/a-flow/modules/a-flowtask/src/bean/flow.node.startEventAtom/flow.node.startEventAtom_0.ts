@@ -21,7 +21,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
     return this.ctx.model.module('a-base').roleRightRef;
   }
 
-  async deploy({ deploy, flowDefId, node, deleting, flowDef, content }) {
+  async deploy({ deploy, flowDefId, node, deleting, flowDef, content }: any) {
     // atomClass
     const { atomClass } = await this._getAtomClass({ flowDefId, node });
     // condition

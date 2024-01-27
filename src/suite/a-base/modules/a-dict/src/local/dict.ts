@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalDict extends BeanBase {
-  async getDict({ dictKey, user }) {
+  async getDict({ dictKey, user }: any) {
     // check right
     const res = await this.ctx.bean.dict._prepareDict_load({ dictKey, user, returnDict: false });
     if (!res) this.ctx.throw(403);

@@ -10,11 +10,11 @@ export class BeanAtomBase0 extends BeanBase {
     return this.ctx.model.module(__ThisModule__).resourceRole;
   }
 
-  async submit({ atomClass, key, options, user }) {
+  async submit({ atomClass, key, options, user }: any) {
     return await this.ctx.bean.atom._submitBase({ atomClass, key, options, user });
   }
 
-  async enable({ /* atomClass,*/ key /* , options*/ /* , user*/ }) {
+  async enable({ /* atomClass,*/ key /* , options*/ /* , user*/ }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomEnable();
     // enable
@@ -24,7 +24,7 @@ export class BeanAtomBase0 extends BeanBase {
     });
   }
 
-  async disable({ /* atomClass,*/ key /* , options*/ /* , user*/ }) {
+  async disable({ /* atomClass,*/ key /* , options*/ /* , user*/ }: any) {
     // check demo
     this.ctx.bean.util.checkDemoForAtomDisable();
     // disable
@@ -42,11 +42,11 @@ export class BeanAtomBase0 extends BeanBase {
     // do nothing
   }
 
-  async checkRightAction({ atom, atomClass, action, options, user }) {
+  async checkRightAction({ atom, atomClass, action, options, user }: any) {
     return await this.ctx.bean.atom._checkRightAction_base({ atom, atomClass, action, options, user });
   }
 
-  async prepareStaticItem({ moduleName, atomClass, item, register }) {
+  async prepareStaticItem({ moduleName, atomClass, item, register }: any) {
     return await this.ctx.bean.atomStatic._adjustItem_base({ moduleName, atomClass, item, register });
   }
 }

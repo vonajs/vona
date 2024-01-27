@@ -7,7 +7,7 @@ import path from 'path';
 
 @Bean({ scene: 'cli.create' })
 export class CliCreateModule extends BeanCliBase {
-  async execute({ user }) {
+  async execute({ user }: any) {
     const { argv } = this.context;
     // super
     await super.execute({ user });

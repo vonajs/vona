@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalFlowDef extends BeanBase {
-  async normalizeAssignees({ host, assignees, user }) {
+  async normalizeAssignees({ host, assignees, user }: any) {
     // check right
     assignees = await this.__checkRightNormalizeAssignees({ host, assignees, user });
     if (!assignees) this.ctx.throw(403);
@@ -10,7 +10,7 @@ export class LocalFlowDef extends BeanBase {
     return await this.ctx.bean.flow.normalizeAssignees(assignees);
   }
 
-  async userSelect({ host, params, user }) {
+  async userSelect({ host, params, user }: any) {
     // check write right
     const rightWrite = await this.__checkRightWrite({ host, user });
     if (!rightWrite) this.ctx.throw(403);
@@ -18,7 +18,7 @@ export class LocalFlowDef extends BeanBase {
     return await this.ctx.bean.user.selectGeneral({ params, user });
   }
 
-  async __checkRightWrite({ host, user }) {
+  async __checkRightWrite({ host, user }: any) {
     const { flowDefId } = host;
     return await this.ctx.bean.atom.checkRightAction({
       atom: { id: flowDefId },
@@ -29,7 +29,7 @@ export class LocalFlowDef extends BeanBase {
     });
   }
 
-  async __checkRightRead({ host, user }) {
+  async __checkRightRead({ host, user }: any) {
     const { flowDefId } = host;
     return await this.ctx.bean.atom.checkRightRead({
       atom: { id: flowDefId },
@@ -38,7 +38,7 @@ export class LocalFlowDef extends BeanBase {
     });
   }
 
-  async __checkRightNormalizeAssignees({ host, assignees, user }) {
+  async __checkRightNormalizeAssignees({ host, assignees, user }: any) {
     const { flowDefId, nodeDefId } = host;
     // check write right
     const rightWrite = await this.__checkRightWrite({ host, user });

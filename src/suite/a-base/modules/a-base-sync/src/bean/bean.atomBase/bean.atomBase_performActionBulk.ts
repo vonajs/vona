@@ -1,7 +1,7 @@
 import { BeanAtomBasePerformAction } from './bean.atomBase_performAction.js';
 
 export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
-  async performActionBulk({ keys, atomClass, action, item, options, user, fnBefore, fnAfter }) {
+  async performActionBulk({ keys, atomClass, action, item, options, user, fnBefore, fnAfter }: any) {
     // actionBase
     const actionBase = this.ctx.bean.base.action({
       module: atomClass.module,

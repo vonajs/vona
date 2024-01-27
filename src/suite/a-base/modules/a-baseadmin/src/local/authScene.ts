@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalAuthScene extends BeanBase {
-  async disable({ id, sceneName, disabled }) {
+  async disable({ id, sceneName, disabled }: any) {
     // item
     const item = await this.ctx.model.authProvider.get({ id });
     // update
@@ -20,7 +20,7 @@ export class LocalAuthScene extends BeanBase {
     });
   }
 
-  async save({ id, sceneName, data }) {
+  async save({ id, sceneName, data }: any) {
     // item
     const item = await this.ctx.model.authProvider.get({ id });
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({
@@ -62,7 +62,7 @@ export class LocalAuthScene extends BeanBase {
     return { data };
   }
 
-  async add({ id, sceneName, data }) {
+  async add({ id, sceneName, data }: any) {
     // item
     const item = await this.ctx.model.authProvider.get({ id });
     // update
@@ -77,7 +77,7 @@ export class LocalAuthScene extends BeanBase {
     });
   }
 
-  async delete({ id, sceneName }) {
+  async delete({ id, sceneName }: any) {
     // item
     const item = await this.ctx.model.authProvider.get({ id });
     // update

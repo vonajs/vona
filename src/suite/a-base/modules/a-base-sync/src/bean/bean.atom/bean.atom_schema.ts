@@ -3,7 +3,7 @@ import { BeanAtomLineNo } from './bean.atom_lineNo.js';
 export class BeanAtomSchema extends BeanAtomLineNo {
   // mode: view/edit
   // atomClass: exluding userFieldsRight (avoid deadloop)
-  async _prepareAtomSchema({ mode, atomClass, options, user }) {
+  async _prepareAtomSchema({ mode, atomClass, options, user }: any) {
     // check if userFieldsRight
     if (atomClass.module === 'a-base' && atomClass.atomClassName === 'userFieldsRight') {
       return await this._prepareAtomSchema_default({ atomClass });
@@ -35,12 +35,12 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     return await this._prepareAtomSchema_atomClass({ atomClass, user });
   }
 
-  async _prepareAtomSchema_default({ atomClass }) {
+  async _prepareAtomSchema_default({ atomClass }: any) {
     const schema = await this.ctx.bean.atom.schema({ atomClass, schema: null });
     return { fieldsRight: null, schema };
   }
 
-  async _prepareAtomSchema_formAction({ mode, formAction, atomClass, user }) {
+  async _prepareAtomSchema_formAction({ mode, formAction, atomClass, user }: any) {
     const res = await this.ctx.bean.formAction._prepareAtomSchema({
       mode,
       formAction,
@@ -55,7 +55,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     return res;
   }
 
-  async _prepareAtomSchema_formActionMain({ mode, formActionMain, atomClass, user }) {
+  async _prepareAtomSchema_formActionMain({ mode, formActionMain, atomClass, user }: any) {
     const res = await this.ctx.bean.formAction._prepareAtomSchemaMain({
       mode,
       formActionMain,
@@ -70,7 +70,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     return res;
   }
 
-  async _prepareAtomSchema_flowTask({ mode, flowTaskId, atomClass, user }) {
+  async _prepareAtomSchema_flowTask({ mode, flowTaskId, atomClass, user }: any) {
     const res = await this.ctx.bean.flowTask._prepareAtomSchema({
       mode,
       flowTaskId,
@@ -85,7 +85,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     return res;
   }
 
-  async _prepareAtomSchema_atomClass({ atomClass, user }) {
+  async _prepareAtomSchema_atomClass({ atomClass, user }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     const atomClassMain = atomClassBase.detail ? atomClassBase.detail.atomClassMain : atomClass;
     const fieldsRight = await this.ctx.bean.fields.getPreferredFieldsRightOfUser({ atomClass: atomClassMain, user });
@@ -101,7 +101,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     return { fieldsRight, schema };
   }
 
-  async schema({ atomClass, schema }) {
+  async schema({ atomClass, schema }: any) {
     const validator = await this.validator({ atomClass });
     if (!validator) return null;
     let schemaRes = this.ctx.bean.validation.getSchema({
@@ -115,7 +115,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     return schemaRes;
   }
 
-  async validator({ atomClass }) {
+  async validator({ atomClass }: any) {
     atomClass = await this.atomClass.get(atomClass);
     return await this.atomClass.validator({ atomClass });
   }

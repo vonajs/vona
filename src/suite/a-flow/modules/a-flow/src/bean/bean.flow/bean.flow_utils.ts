@@ -5,14 +5,14 @@ export class BeanFlowUtils extends BeanFlowStart {
     return this.ctx.bean.util.evaluateExpression({ expression, globals });
   }
 
-  async executeService({ bean, parameterExpression, parameter, globals }) {
+  async executeService({ bean, parameterExpression, parameter, globals }: any) {
     if (parameterExpression !== undefined) {
       parameter = this.evaluateExpression({ expression: parameterExpression, globals });
     }
     return await this._executeServiceInner({ bean, parameter, globals });
   }
 
-  async _executeServiceInner({ bean, parameter, globals }) {
+  async _executeServiceInner({ bean, parameter, globals }: any) {
     if (!bean) throw new Error('flow service bean is not set');
     // bean
     const beanFullName = `${bean.module}.flow.service.${bean.name}`;

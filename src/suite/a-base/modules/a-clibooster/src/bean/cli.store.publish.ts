@@ -15,7 +15,7 @@ export class CliStorePublish extends CliStoreBase {
     super(options, 'publish');
   }
 
-  async onExecuteStoreCommandEntity({ entityName, entityConfig }) {
+  async onExecuteStoreCommandEntity({ entityName, entityConfig }: any) {
     // fetch entity status
     const entityStatus = await this.openAuthClient.post({
       path: '/cabloy/store/store/publish/entityStatus',
@@ -58,7 +58,7 @@ export class CliStorePublish extends CliStoreBase {
     return res;
   }
 
-  async _publishModuleIsolate({ moduleName, entityConfig, entityHash, entityStatus, needOfficial, needTrial }) {
+  async _publishModuleIsolate({ moduleName, entityConfig, entityHash, entityStatus, needOfficial, needTrial }: any) {
     // check if exists
     const module = this.helper.findModule(moduleName);
     if (!module) {
@@ -86,7 +86,7 @@ export class CliStorePublish extends CliStoreBase {
     return { code: 2002, args: [moduleMeta.package.version] };
   }
 
-  async _publishSuite({ suiteName, entityConfig, entityHash, entityStatus, needOfficial, needTrial }) {
+  async _publishSuite({ suiteName, entityConfig, entityHash, entityStatus, needOfficial, needTrial }: any) {
     // check if exists
     const suite = this.helper.findSuite(suiteName);
     if (!suite) {
@@ -138,7 +138,7 @@ export class CliStorePublish extends CliStoreBase {
     return { code: 2002, args: [suiteMeta.package.version] };
   }
 
-  async _uploadModuleIsolate({ moduleMeta, needOfficial, needTrial }) {
+  async _uploadModuleIsolate({ moduleMeta, needOfficial, needTrial }: any) {
     await this.openAuthClient.post({
       path: '/cabloy/store/store/publish/entityPublish',
       body: {
@@ -153,7 +153,7 @@ export class CliStorePublish extends CliStoreBase {
     });
   }
 
-  async _uploadSuiteAll({ suiteMeta, zipSuiteAll, needOfficial, needTrial }) {
+  async _uploadSuiteAll({ suiteMeta, zipSuiteAll, needOfficial, needTrial }: any) {
     await this.openAuthClient.post({
       path: '/cabloy/store/store/publish/entityPublish',
       body: {
@@ -168,7 +168,7 @@ export class CliStorePublish extends CliStoreBase {
     });
   }
 
-  async _zipSuiteAll({ suiteMeta, modulesMeta, needOfficial, needTrial }) {
+  async _zipSuiteAll({ suiteMeta, modulesMeta, needOfficial, needTrial }: any) {
     const zipSuiteAll = {};
     // hash
     zipSuiteAll.entityHash = this._zipSuiteAll_hash({ suiteMeta, modulesMeta });
@@ -192,7 +192,7 @@ export class CliStorePublish extends CliStoreBase {
     return entityHash;
   }
 
-  async _zipSuiteAll_zip({ suiteMeta, modulesMeta, type }) {
+  async _zipSuiteAll_zip({ suiteMeta, modulesMeta, type }: any) {
     const zip = new JSZip();
     zip.file('default', suiteMeta.zipSuite.buffer);
     for (const moduleMeta of modulesMeta) {
@@ -203,7 +203,7 @@ export class CliStorePublish extends CliStoreBase {
     return { buffer };
   }
 
-  async _zipSuite({ modulesMeta, suiteMeta, suiteHash, needLicense }) {
+  async _zipSuite({ modulesMeta, suiteMeta, suiteHash, needLicense }: any) {
     const { argv } = this.context;
     let zipSuite;
     // check modulesMeta
@@ -243,7 +243,7 @@ export class CliStorePublish extends CliStoreBase {
     suiteMeta.zipSuite = zipSuite;
   }
 
-  async _zipSuiteModule({ moduleMeta, moduleHash, needTrial, needLicense }) {
+  async _zipSuiteModule({ moduleMeta, moduleHash, needTrial, needLicense }: any) {
     const { argv } = this.context;
     // log
     await this.console.log(`===> module: ${moduleMeta.name}`);
@@ -302,7 +302,7 @@ export class CliStorePublish extends CliStoreBase {
     }
   }
 
-  async _zipAndHash({ patterns, pathRoot, needHash, needLicense }) {
+  async _zipAndHash({ patterns, pathRoot, needHash, needLicense }: any) {
     const { argv } = this.context;
     // globby
     const files = await eggBornUtils.tools.globbyAsync(patterns, { cwd: pathRoot });
@@ -350,7 +350,7 @@ export class CliStorePublish extends CliStoreBase {
     return { buffer, hash: { hash } };
   }
 
-  async _handleScripts({ entityMeta, entityConfig }) {
+  async _handleScripts({ entityMeta, entityConfig }: any) {
     if (!entityConfig.scripts) return;
     for (const script of entityConfig.scripts) {
       if (script === 'npmPublish') {
@@ -363,7 +363,7 @@ export class CliStorePublish extends CliStoreBase {
     }
   }
 
-  async _handleScripts_npmPublish({ entityMeta }) {
+  async _handleScripts_npmPublish({ entityMeta }: any) {
     const { argv } = this.context;
     // npm publish
     await this.helper.spawnCmd({
@@ -385,14 +385,14 @@ export class CliStorePublish extends CliStoreBase {
     }
   }
 
-  async _handleScripts_gitCommit({ entityMeta }) {
+  async _handleScripts_gitCommit({ entityMeta }: any) {
     await this.helper.gitCommit({
       cwd: entityMeta.root,
       message: `chore: version ${entityMeta.package.version}`,
     });
   }
 
-  async _handleScripts_general({ entityMeta, script }) {
+  async _handleScripts_general({ entityMeta, script }: any) {
     const args = script.split(' ');
     const cmd = args.shift();
     await this.helper.spawn({

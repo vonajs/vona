@@ -36,7 +36,7 @@ export class LocalFlowFlow0 extends BeanBase {
     return this.ctx.constant.module(__ThisModule__);
   }
 
-  async start({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }) {
+  async start({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
     if (!flowVars) flowVars = {};
     if (flowUserId === undefined) flowUserId = 0;
     // create flow
@@ -73,12 +73,12 @@ export class LocalFlowFlow0 extends BeanBase {
     }
   }
 
-  async _load({ flow, history }) {
+  async _load({ flow, history }: any) {
     // context init
     await this._contextInit({ flowId: flow.id, history });
   }
 
-  async nextNode({ contextEdge }) {
+  async nextNode({ contextEdge }: any) {
     const nodeInstanceNext = await this._findNodeInstanceNext({
       nodeDefId: contextEdge._edgeDef.target,
       flowNodeIdPrev: contextEdge.contextNode._flowNodeId,
@@ -88,7 +88,7 @@ export class LocalFlowFlow0 extends BeanBase {
     return await nodeInstanceNext.enter();
   }
 
-  async _contextInit({ flowId, history }) {
+  async _contextInit({ flowId, history }: any) {
     // flowId
     this.context._flowId = flowId;
     // flow
@@ -114,7 +114,7 @@ export class LocalFlowFlow0 extends BeanBase {
     });
   }
 
-  async _contextInit_atom({ atomId, atomClassId }) {
+  async _contextInit_atom({ atomId, atomClassId }: any) {
     return await this.ctx.bean.atom.read({
       key: { atomId },
       atomClass: { id: atomClassId },
@@ -136,7 +136,7 @@ export class LocalFlowFlow0 extends BeanBase {
     this.context._flowVars._dirty = false;
   }
 
-  async _createFlow({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId }) {
+  async _createFlow({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId }: any) {
     if (flowAtomId === undefined) {
       flowAtomId = 0;
       flowAtomClassId = 0;
@@ -189,7 +189,7 @@ export class LocalFlowFlow0 extends BeanBase {
     return node;
   }
 
-  async _loadNodeInstance({ flowNode, history }) {
+  async _loadNodeInstance({ flowNode, history }: any) {
     const nodeDef = this._findNodeDef({ nodeDefId: flowNode.flowNodeDefId });
     if (!nodeDef) this.ctx.throw.module(__ThisModule__, 1005, flowNode.flowNodeDefId);
     const node = this._createNodeInstance2({ nodeDef });
@@ -198,13 +198,13 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   // contextEdge maybe null
-  async _createNodeInstance({ nodeDef, flowNodeIdPrev, contextEdge }) {
+  async _createNodeInstance({ nodeDef, flowNodeIdPrev, contextEdge }: any) {
     const node = this._createNodeInstance2({ nodeDef, contextEdge });
     await node.init({ flowNodeIdPrev });
     return node;
   }
 
-  async _createEdgeInstance({ edgeDef, contextNode }) {
+  async _createEdgeInstance({ edgeDef, contextNode }: any) {
     const edge = this.ctx.bean._newBean(`${__ThisModule__}.local.flow.edge`, {
       flowInstance: this,
       context: this.context,
@@ -220,13 +220,13 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   // contextEdge maybe null
-  async _findNodeInstanceNext({ nodeDefId, flowNodeIdPrev, contextEdge }) {
+  async _findNodeInstanceNext({ nodeDefId, flowNodeIdPrev, contextEdge }: any) {
     const nodeDef = this._findNodeDef({ nodeDefId });
     if (!nodeDef) return null;
     return await this._createNodeInstance({ nodeDef, flowNodeIdPrev, contextEdge });
   }
 
-  async _findNodeInstanceStartEvent({ startEventId }) {
+  async _findNodeInstanceStartEvent({ startEventId }: any) {
     const nodeDef = this.context._flowDefContent.process.nodes.find(node => {
       return (startEventId && startEventId === node.id) || (!startEventId && node.type === 'startEventNone');
     });
@@ -235,7 +235,7 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   // find from history
-  async _findFlowNodeHistoryPrevious({ flowNodeId, cb }) {
+  async _findFlowNodeHistoryPrevious({ flowNodeId, cb }: any) {
     let flowNode = await this.modelFlowNodeHistory.get({ flowNodeId });
     while (flowNode && flowNode.flowNodeIdPrev !== 0) {
       flowNode = await this.modelFlowNodeHistory.get({ flowNodeId: flowNode.flowNodeIdPrev });

@@ -3,7 +3,7 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalRender extends BeanBase {
-  async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }) {
+  async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
     // atomClass
     const { key, atomClass, options } = await this.ctx.bean.atom._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
@@ -15,12 +15,12 @@ export class LocalRender extends BeanBase {
   }
 
   // site<plugin<theme<site(db)<language(db)
-  async combineSiteBase({ atomClass, mergeConfigSite }) {
+  async combineSiteBase({ atomClass, mergeConfigSite }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.combineSiteBase({ mergeConfigSite });
   }
 
-  async getArticle({ key, inner }) {
+  async getArticle({ key, inner }: any) {
     // 1. try to get article: maybe not exits
     const article = await this.ctx.bean.atom.read({ key, user: { id: 0 } });
     if (!article) return null;
@@ -41,7 +41,7 @@ export class LocalRender extends BeanBase {
     return article;
   }
 
-  async _deleteArticlePushAsync({ atomClass, key, article, inner }) {
+  async _deleteArticlePushAsync({ atomClass, key, article, inner }: any) {
     if (!atomClass) {
       atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
     }
@@ -62,7 +62,7 @@ export class LocalRender extends BeanBase {
     });
   }
 
-  async _deleteArticlePush({ atomClass, key, article, inner }) {
+  async _deleteArticlePush({ atomClass, key, article, inner }: any) {
     if (!atomClass) {
       atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
     }
@@ -83,7 +83,7 @@ export class LocalRender extends BeanBase {
     });
   }
 
-  async _renderArticlePushAsync({ atomClass, key, inner }) {
+  async _renderArticlePushAsync({ atomClass, key, inner }: any) {
     if (!atomClass) {
       atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
     }
@@ -103,7 +103,7 @@ export class LocalRender extends BeanBase {
     });
   }
 
-  async _renderArticlePush({ atomClass, key, inner }) {
+  async _renderArticlePush({ atomClass, key, inner }: any) {
     if (!atomClass) {
       atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
     }

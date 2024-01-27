@@ -9,7 +9,7 @@ import xml2js from 'xml2js';
 
 @Bean({ scene: 'cli.tools' })
 export class CliToolsIcons extends BeanCliBase {
-  async execute({ user }) {
+  async execute({ user }: any) {
     const { argv } = this.context;
     // super
     await super.execute({ user });
@@ -29,7 +29,7 @@ export class CliToolsIcons extends BeanCliBase {
     }
   }
 
-  async _generateIcons({ moduleName }) {
+  async _generateIcons({ moduleName }: any) {
     const module = this.helper.findModule(moduleName);
     if (!module) throw new Error(`module not found: ${moduleName}`);
     const modulePath = module.root;
@@ -63,7 +63,7 @@ export class CliToolsIcons extends BeanCliBase {
     await fse.writeFile(fileBackend, jsBackend);
   }
 
-  async _generateIconsGroup({ modulePath, iconsSrc, group }) {
+  async _generateIconsGroup({ modulePath, iconsSrc, group }: any) {
     // icons
     const files = await eggBornUtils.tools.globbyAsync(`${iconsSrc}/${group.name}/*.svg`);
     const iconNames = files.map(item => path.basename(item, '.svg'));
@@ -88,7 +88,7 @@ ${symbols.join('\n')}
     return iconNames;
   }
 
-  async _combineSymbol({ file, iconName }) {
+  async _combineSymbol({ file, iconName }: any) {
     // svg
     const xml = await fse.readFile(file);
     const svg = await this.parseXML({ xml });
@@ -104,7 +104,7 @@ ${symbols.join('\n')}
     return this.buildXML({ xml: svg, rootName: 'symbol' });
   }
 
-  async _resolveGroups({ iconsSrc }) {
+  async _resolveGroups({ iconsSrc }: any) {
     const groupPaths = await eggBornUtils.tools.globbyAsync(`${iconsSrc}/*`, { onlyDirectories: true });
     return groupPaths.map(item => {
       return {
@@ -113,7 +113,7 @@ ${symbols.join('\n')}
     });
   }
 
-  async parseXML({ xml, trim = true, explicitArray = false, explicitRoot = false }) {
+  async parseXML({ xml, trim = true, explicitArray = false, explicitRoot = false }: any) {
     const parser = new xml2js.Parser({ trim, explicitArray, explicitRoot });
     return await bb.fromCallback(cb => {
       parser.parseString(xml, cb);

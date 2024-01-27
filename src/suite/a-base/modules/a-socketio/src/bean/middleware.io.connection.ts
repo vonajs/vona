@@ -39,7 +39,7 @@ export class MiddlewareIoConnection extends BeanBase {
     }
   }
 
-  async _next({ next, user, socketId }) {
+  async _next({ next, user, socketId }: any) {
     const debug = this.ctx.app.bean.debug.get('io');
     debug(`socket io connected: user:${user.id}, socket:${socketId}`);
     // next

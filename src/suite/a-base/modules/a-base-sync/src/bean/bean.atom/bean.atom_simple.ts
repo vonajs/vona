@@ -3,7 +3,7 @@ import { BeanAtomFormal } from './bean.atom_formal.js';
 const mparse = require('@cabloy/module-parse').default;
 
 export class BeanAtomSimple extends BeanAtomFormal {
-  async _switchToSimple({ atomClass, atomClassBase, atom, user }) {
+  async _switchToSimple({ atomClass, atomClassBase, atom, user }: any) {
     let atomIdDraft;
     let atomIdFormal;
     if (atom.atomStage === 0) {
@@ -69,7 +69,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
     return atom;
   }
 
-  async _switchToSimpleZero({ /* atomClass, atomClassBase,*/ atom, user }) {
+  async _switchToSimpleZero({ /* atomClass, atomClassBase,*/ atom, user }: any) {
     const atomIdFormal = atom.atomStage === 1 ? atom.id : atom.atomIdFormal;
     // update history's atomSimple
     await this.ctx.model.query(
@@ -96,7 +96,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
     return atom;
   }
 
-  async _checkSimpleSwitch({ atomClass, atomClassBase, atom, user }) {
+  async _checkSimpleSwitch({ atomClass, atomClassBase, atom, user }: any) {
     // the same mode
     if (Boolean(atom.atomSimple) === Boolean(atomClassBase.simple)) return atom;
     // -> simple

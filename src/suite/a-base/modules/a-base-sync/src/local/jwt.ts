@@ -4,7 +4,7 @@ import jsonwebtoken from 'jsonwebtoken';
 
 @Local()
 export class LocalJwt extends BeanBase {
-  async create({ scene = 'query' }) {
+  async create({ scene = 'query' }: any) {
     // check
     if (!this.ctx.state.jwt) this.ctx.throw(403);
     // token

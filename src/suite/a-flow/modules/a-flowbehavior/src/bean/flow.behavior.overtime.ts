@@ -24,7 +24,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     return await next();
   }
 
-  async _addJob({ flowId, flowNodeId, behaviorDefId }) {
+  async _addJob({ flowId, flowNodeId, behaviorDefId }: any) {
     const options = this.nodeInstance.getBehaviorDefOptions({ behaviorDefId });
     if (!options.timeDuration && !options.timeDate) {
       // do nothing
@@ -57,7 +57,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     });
   }
 
-  async _deleteJob({ flowId, flowNodeId, behaviorDefId }) {
+  async _deleteJob({ flowId, flowNodeId, behaviorDefId }: any) {
     const jobId = this._getJobName({ flowId, flowNodeId, behaviorDefId });
     const queue = this.ctx.app.meta.queue._getQueue({
       subdomain: this.ctx.subdomain,

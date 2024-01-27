@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoDelivery } from './bean.io_delivery.js';
 
 export class BeanIoPublish extends BeanIoDelivery {
-  async publish({ path, message, messageClass, options }) {
+  async publish({ path, message, messageClass, options }: any) {
     // messageClass
     messageClass = await this.messageClass.get(messageClass);
     const messageClassBase = this.messageClass.messageClass(messageClass);
@@ -10,7 +10,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     return await beanMessage.onPublish({ path, message, messageClass, options });
   }
 
-  async publishMessageSystem({ message }) {
+  async publishMessageSystem({ message }: any) {
     await this.publish({
       path: '/a/socketio/messageSystem',
       message,
@@ -22,7 +22,7 @@ export class BeanIoPublish extends BeanIoDelivery {
   }
 
   // called by messageBase.onPublish
-  async _publish({ path, message, messageClass, options }) {
+  async _publish({ path, message, messageClass, options }: any) {
     // messageClass
     const messageClassBase = this.messageClass.messageClass(messageClass);
     const beanMessage = this._getBeanMessage(messageClassBase);
@@ -111,7 +111,7 @@ export class BeanIoPublish extends BeanIoDelivery {
   }
 
   // called by messageBase.onProcess
-  async _onProcessBase({ path, options, message, messageSyncs, messageClass }) {
+  async _onProcessBase({ path, options, message, messageSyncs, messageClass }: any) {
     // to queue: delivery/push
     if (path) {
       // try delivery first, then try push if failed

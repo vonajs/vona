@@ -2,7 +2,7 @@ import { BeanAtomNotify } from './bean.atom_notify.js';
 
 export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
   // preferred roles
-  async preferredRoles({ atomClass, user, disableAuthOpenCheck }) {
+  async preferredRoles({ atomClass, user, disableAuthOpenCheck }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // normal check
@@ -18,7 +18,7 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
   }
 
   // preferred roles
-  async _preferredRoles_normal({ atomClass, user }) {
+  async _preferredRoles_normal({ atomClass, user }: any) {
     // 1. roleWhos
     const roleWhos = await this.ctx.bean.atomRightAux.getRoleWhosOfAtomClassAction({ atomClass, action: 1 });
     // 2. roleParents
@@ -48,19 +48,19 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
     // return roles;
   }
 
-  async preferredRole({ atomClass, user, disableAuthOpenCheck }) {
+  async preferredRole({ atomClass, user, disableAuthOpenCheck }: any) {
     const roles = await this.preferredRoles({ atomClass, user, disableAuthOpenCheck });
     return !roles || roles.length === 0 ? null : roles[0];
   }
 
-  async preferredRoleId({ atomClass, user, disableAuthOpenCheck }) {
+  async preferredRoleId({ atomClass, user, disableAuthOpenCheck }: any) {
     const role = await this.preferredRole({ atomClass, user, disableAuthOpenCheck });
     return role ? role.roleIdWho : 0;
   }
 
   // undefined: not support
   // null: invalid
-  async checkRightPreferredRole({ roleIdOwner, atomClass, user, options, disableAuthOpenCheck }) {
+  async checkRightPreferredRole({ roleIdOwner, atomClass, user, options, disableAuthOpenCheck }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);

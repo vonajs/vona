@@ -26,7 +26,7 @@ export class BeanDict extends BeanModuleScopeBase {
 
   // options: separator
   //  find by code or title
-  async findItem({ dictKey, code: codeFull, title, options }) {
+  async findItem({ dictKey, code: codeFull, title, options }: any) {
     let findByCode;
     if (!this._checkIfEmptyForSelect(codeFull)) {
       codeFull = String(codeFull);
@@ -105,7 +105,7 @@ export class BeanDict extends BeanModuleScopeBase {
     });
   }
 
-  async getDict({ dictKey, locale }) {
+  async getDict({ dictKey, locale }: any) {
     locale = locale || this.ctx.locale;
     let dict = this.cacheMem.get(dictKey);
     if (dict && dict[locale]) return dict[locale];
@@ -123,7 +123,7 @@ export class BeanDict extends BeanModuleScopeBase {
     this.cacheMem.remove(dictKey);
   }
 
-  async _prepareDict({ dictKey, locale }) {
+  async _prepareDict({ dictKey, locale }: any) {
     // load
     const dict = await this._prepareDict_load({ dictKey, user: null, returnDict: true });
     // prepare
@@ -132,7 +132,7 @@ export class BeanDict extends BeanModuleScopeBase {
     return dict;
   }
 
-  async _prepareDict_load({ dictKey, user, returnDict }) {
+  async _prepareDict_load({ dictKey, user, returnDict }: any) {
     if (!dictKey) throw new Error('dictKey not set');
     // get atomId
     let atomId;

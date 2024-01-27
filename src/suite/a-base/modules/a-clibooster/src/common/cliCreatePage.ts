@@ -4,7 +4,7 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 export default pageMode => {
   class Cli extends BeanCliBase {
-    async execute({ user }) {
+    async execute({ user }: any) {
       const { argv } = this.context;
       // super
       await super.execute({ user });

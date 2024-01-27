@@ -14,7 +14,7 @@ export class BeanCaptcha extends BeanModuleScopeBase {
     return this.ctx.cache.db.module(__ThisModule__);
   }
 
-  async getProvider({ module, sceneName }) {
+  async getProvider({ module, sceneName }: any) {
     // default scene
     const sceneDefault = this.configModule.captcha.scenes.default;
     // module scene
@@ -24,7 +24,7 @@ export class BeanCaptcha extends BeanModuleScopeBase {
   }
 
   // create provider instance
-  async createProviderInstance({ module, sceneName, context }) {
+  async createProviderInstance({ module, sceneName, context }: any) {
     // provider
     const provider = await this.getProvider({ module, sceneName });
     // instance id
@@ -37,7 +37,7 @@ export class BeanCaptcha extends BeanModuleScopeBase {
   }
 
   // refresh provider instance
-  async refreshProviderInstance({ providerInstanceId, module, sceneName, context }) {
+  async refreshProviderInstance({ providerInstanceId, module, sceneName, context }: any) {
     // provider
     const provider = await this.getProvider({ module, sceneName });
     // cache
@@ -48,13 +48,13 @@ export class BeanCaptcha extends BeanModuleScopeBase {
   }
 
   // get
-  async getProviderInstance({ providerInstanceId }) {
+  async getProviderInstance({ providerInstanceId }: any) {
     const key = utils.getCacheKey({ ctx: this.ctx, providerInstanceId });
     return await this.cacheModule.get(key);
   }
 
   // update
-  async update({ providerInstanceId, data, context }) {
+  async update({ providerInstanceId, data, context }: any) {
     // key
     const key = utils.getCacheKey({ ctx: this.ctx, providerInstanceId });
     // get
@@ -71,7 +71,7 @@ export class BeanCaptcha extends BeanModuleScopeBase {
     await this.cacheModule.set(key, providerInstance, provider.timeout);
   }
 
-  async verify({ module, sceneName, providerInstanceId, dataInput }) {
+  async verify({ module, sceneName, providerInstanceId, dataInput }: any) {
     // key
     const key = utils.getCacheKey({ ctx: this.ctx, providerInstanceId });
     // get

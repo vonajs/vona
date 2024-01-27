@@ -2,51 +2,51 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalFlowTask extends BeanBase {
-  async select({ options, user }) {
+  async select({ options, user }: any) {
     return await this.ctx.bean.flowTask.select({ options, user });
   }
 
-  async count({ options, user }) {
+  async count({ options, user }: any) {
     return await this.ctx.bean.flowTask.count({ options, user });
   }
 
-  async claim({ flowTaskId, user }) {
+  async claim({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.claim({ flowTaskId, user });
   }
 
-  async complete({ flowTaskId, handle, formAtom, user }) {
+  async complete({ flowTaskId, handle, formAtom, user }: any) {
     return await this.ctx.bean.flowTask.complete({ flowTaskId, handle, formAtom, user });
   }
 
-  async appendHandleRemark({ flowTaskId, handle, user }) {
+  async appendHandleRemark({ flowTaskId, handle, user }: any) {
     return await this.ctx.bean.flowTask.appendHandleRemark({ flowTaskId, handle, user });
   }
 
-  async assignees({ flowTaskId, user }) {
+  async assignees({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.assignees({ flowTaskId, user });
   }
 
-  async assigneesConfirmation({ flowTaskId, handle, user }) {
+  async assigneesConfirmation({ flowTaskId, handle, user }: any) {
     return await this.ctx.bean.flowTask.assigneesConfirmation({ flowTaskId, handle, user });
   }
 
-  async recall({ flowTaskId, user }) {
+  async recall({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.recall({ flowTaskId, user });
   }
 
-  async cancelFlow({ flowTaskId, handle, user }) {
+  async cancelFlow({ flowTaskId, handle, user }: any) {
     return await this.ctx.bean.flowTask.cancelFlow({ flowTaskId, handle, user });
   }
 
-  async viewAtom({ flowTaskId, user }) {
+  async viewAtom({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.viewAtom({ flowTaskId, user });
   }
 
-  async editAtom({ flowTaskId, user }) {
+  async editAtom({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.editAtom({ flowTaskId, user });
   }
 
-  async userSelectForward({ flowTaskId, params, user }) {
+  async userSelectForward({ flowTaskId, params, user }: any) {
     // check right
     const flowTask = await this.ctx.model.flowTask.get({ id: flowTaskId });
     await this.ctx.bean.local.right.forward({ flowTask, user });
@@ -54,15 +54,15 @@ export class LocalFlowTask extends BeanBase {
     return await this.ctx.bean.user.selectGeneral({ params, user });
   }
 
-  async forward({ flowTaskId, handle, user }) {
+  async forward({ flowTaskId, handle, user }: any) {
     return await this.ctx.bean.flowTask.forward({ flowTaskId, handle, user });
   }
 
-  async forwardRecall({ flowTaskId, user }) {
+  async forwardRecall({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.forwardRecall({ flowTaskId, user });
   }
 
-  async userSelectSubstitute({ flowTaskId, params, user }) {
+  async userSelectSubstitute({ flowTaskId, params, user }: any) {
     // check right
     const flowTask = await this.ctx.model.flowTask.get({ id: flowTaskId });
     await this.ctx.bean.local.right.substitute({ flowTask, user });
@@ -70,15 +70,15 @@ export class LocalFlowTask extends BeanBase {
     return await this.ctx.bean.user.selectGeneral({ params, user });
   }
 
-  async substitute({ flowTaskId, handle, user }) {
+  async substitute({ flowTaskId, handle, user }: any) {
     return await this.ctx.bean.flowTask.substitute({ flowTaskId, handle, user });
   }
 
-  async substituteRecall({ flowTaskId, user }) {
+  async substituteRecall({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.substituteRecall({ flowTaskId, user });
   }
 
-  async actions({ flowTaskId, user }) {
+  async actions({ flowTaskId, user }: any) {
     return await this.ctx.bean.flowTask.actions({ flowTaskId, user });
   }
 }

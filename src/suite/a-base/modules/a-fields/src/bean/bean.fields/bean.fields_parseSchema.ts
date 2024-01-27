@@ -3,7 +3,7 @@ import { BeanFieldsBase } from './bean.fields_base.js';
 export class BeanFieldsParseSchema extends BeanFieldsBase {
   // atomClass: maybe main/detail
   //  atomClass is main only when (!atomClassMain && !atomClass.detail) || atomClass=atomClassMain
-  async parseSchema({ atomClass, atomClassMain, fieldsRight }) {
+  async parseSchema({ atomClass, atomClassMain, fieldsRight }: any) {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // atomClassMain
@@ -36,7 +36,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     return schemaBase;
   }
 
-  async __parseSchema_checkModeCustom_array({ schemaBase, fieldsRight }) {
+  async __parseSchema_checkModeCustom_array({ schemaBase, fieldsRight }: any) {
     const schema = schemaBase.schema;
     const properties = schema.properties;
     const propertiesNew = {};
@@ -62,7 +62,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     };
   }
 
-  async __parseSchema_checkModeCustom_object({ schemaBase, fieldsRight }) {
+  async __parseSchema_checkModeCustom_object({ schemaBase, fieldsRight }: any) {
     schemaBase; // no used
     const schemaParams = {
       module: fieldsRight.custom.module,
@@ -72,7 +72,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     return this.ctx.bean.validation.getSchema(schemaParams);
   }
 
-  async __parseSchema_checkModeGeneral({ schemaBase, fieldsRight }) {
+  async __parseSchema_checkModeGeneral({ schemaBase, fieldsRight }: any) {
     const schema = schemaBase.schema;
     const properties = schema.properties;
     const propertiesNew = {};
@@ -128,11 +128,11 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     };
   }
 
-  async __parseSchema_getSchemaBase({ atomClass }) {
+  async __parseSchema_getSchemaBase({ atomClass }: any) {
     return await this.ctx.bean.atom.schema({ atomClass, schema: null });
   }
 
-  async __parseSchema_getFieldsRight({ atomClass, isMain, fieldsRight }) {
+  async __parseSchema_getFieldsRight({ atomClass, isMain, fieldsRight }: any) {
     // use default right when null
     fieldsRight = fieldsRight || {};
     if (isMain) {
@@ -146,7 +146,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     return this.__parseSchema_prepareFieldsRight({ fieldsRight });
   }
 
-  async __parseSchema_prepareFieldsRight({ fieldsRight }) {
+  async __parseSchema_prepareFieldsRight({ fieldsRight }: any) {
     // extend
     fieldsRight = this.ctx.bean.util.extend({}, fieldsRight);
     // mode

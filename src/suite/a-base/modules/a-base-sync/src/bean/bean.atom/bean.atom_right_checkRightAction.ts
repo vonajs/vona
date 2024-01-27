@@ -50,7 +50,16 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     });
   }
 
-  async _checkRightAction_inner({ atom, atomClass, action, stage, user, checkFlow, disableAuthOpenCheck, options }) {
+  async _checkRightAction_inner({
+    atom,
+    atomClass,
+    action,
+    stage,
+    user,
+    checkFlow,
+    disableAuthOpenCheck,
+    options,
+  }: any) {
     // parse action code
     action = this.ctx.bean.atomAction.parseActionCode({
       action,
@@ -68,7 +77,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     return res;
   }
 
-  async _checkRightAction_inner2({ atom, atomClass, action, stage, user, checkFlow, options }) {
+  async _checkRightAction_inner2({ atom, atomClass, action, stage, user, checkFlow, options }: any) {
     // atom bean
     const _moduleInfo = mparse.parseInfo(atomClass.module);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -87,7 +96,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     });
   }
 
-  async _checkRightAction_base({ atom, atomClass, action, options, user }) {
+  async _checkRightAction_base({ atom, atomClass, action, options, user }: any) {
     let { stage, checkFlow } = options || {};
     // atom
     const _atom = atom;
@@ -237,7 +246,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     });
   }
 
-  async _checkRightAction_flowAction({ _atom, atomClass, action, user }) {
+  async _checkRightAction_flowAction({ _atom, atomClass, action, user }: any) {
     // actionItem
     const actionItem = await this.ctx.bean.atomAction.model.get({ atomClassId: atomClass.id, code: action });
     if (!actionItem) return null;
@@ -257,7 +266,16 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     return task;
   }
 
-  async _checkRightAction_draft({ atomClass, atomClassBase, actionBase, _atom, action, user, checkFlow, options }) {
+  async _checkRightAction_draft({
+    atomClass,
+    atomClassBase,
+    actionBase,
+    _atom,
+    action,
+    user,
+    checkFlow,
+    options,
+  }: any) {
     // _atomFormal
     let _atomFormal;
     if (_atom.atomIdFormal) {
@@ -320,7 +338,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     return await this._checkRightAction_basic({ atomClass, _atom, action, user });
   }
 
-  async _checkRightAction_isFlowing({ atomClassBase, atom, atomAnother }) {
+  async _checkRightAction_isFlowing({ atomClassBase, atom, atomAnother }: any) {
     const flowStage = atomClassBase.flow?.stage || 'draft';
     const atomStage = flowStage === 'draft' ? 0 : 1;
     let _atomCheck;
@@ -343,7 +361,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     return _atomCheck && _atomCheck.atomFlowId > 0 && _atomCheck.atomClosed === 0;
   }
 
-  async _checkRightAction_not_draft({ atomClass, atomClassBase, actionBase, _atom, action, user, checkFlow }) {
+  async _checkRightAction_not_draft({ atomClass, atomClassBase, actionBase, _atom, action, user, checkFlow }: any) {
     // draft: must closed
     let _atomDraft;
     if (_atom.atomIdDraft) {
@@ -396,12 +414,12 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     return await this._checkRightAction_basic({ atomClass, _atom, action, user });
   }
 
-  async _checkRightAction_itemOnly({ atomClass, _atom, action, user }) {
+  async _checkRightAction_itemOnly({ atomClass, _atom, action, user }: any) {
     // check basic
     return await this._checkRightAction_basic({ atomClass, _atom, action, user });
   }
 
-  async _checkRightAction_basic({ atomClass, _atom, action, user }) {
+  async _checkRightAction_basic({ atomClass, _atom, action, user }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // special check for itemOnly/enableRight=false
     if (atomClassBase.itemOnly && !atomClassBase.enableRight) {
@@ -420,7 +438,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     });
   }
 
-  async _checkRightAction_sql({ userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }) {
+  async _checkRightAction_sql({ userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }: any) {
     const sql = await this.sqlProcedure.checkRightAction({
       iid: this.ctx.instance.id,
       userIdWho,

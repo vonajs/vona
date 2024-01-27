@@ -27,7 +27,7 @@ export class BeanResource extends BeanModuleScopeBase {
   }
 
   // count
-  async count({ options, user }) {
+  async count({ options, user }: any) {
     return await this.select({ options, user, count: 1 });
   }
 
@@ -93,7 +93,7 @@ export class BeanResource extends BeanModuleScopeBase {
     });
   }
 
-  async readByStaticKey({ atomStaticKey, options, user }) {
+  async readByStaticKey({ atomStaticKey, options, user }: any) {
     if (!atomStaticKey) return this.ctx.throw.module('a-base', 1002);
     // get atomId
     const atom = await this.ctx.bean.atom.modelAtom.get({
@@ -110,7 +110,7 @@ export class BeanResource extends BeanModuleScopeBase {
   }
 
   // read
-  async read({ key, options, user }) {
+  async read({ key, options, user }: any) {
     options = Object.assign({ resource: 1 }, options);
     // locale
     let locale = options.locale;
@@ -121,7 +121,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return await this.ctx.bean.atom.read({ key, options, user });
   }
 
-  async setLocales({ atomId, atomName }) {
+  async setLocales({ atomId, atomName }: any) {
     // select
     const items = await this.modelResourceLocale.select({ where: { atomId } });
     // setLocales
@@ -154,7 +154,7 @@ export class BeanResource extends BeanModuleScopeBase {
     }
   }
 
-  async _checkLocale({ locale }) {
+  async _checkLocale({ locale }: any) {
     const resources = await this._checkResourceLocales({ locale });
     if (resources.length === 0) return;
     // insert locales
@@ -167,7 +167,7 @@ export class BeanResource extends BeanModuleScopeBase {
     }
   }
 
-  async _checkResourceLocales({ locale }) {
+  async _checkResourceLocales({ locale }: any) {
     const atomClasses = await this._getAtomClassesResource();
     const atomClassIds = atomClasses.map(item => item.id);
     const sql = this.sqlProcedure._checkResourceLocales({
@@ -179,7 +179,7 @@ export class BeanResource extends BeanModuleScopeBase {
   }
 
   // check
-  async check({ atomStaticKeys, user }) {
+  async check({ atomStaticKeys, user }: any) {
     const output: any[] = [];
     for (const atomStaticKey of atomStaticKeys) {
       const res = await this.checkRightResource({ atomStaticKey, user });
@@ -199,7 +199,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return output;
   }
 
-  async checkRightResource({ resourceAtomId, atomStaticKey, user }) {
+  async checkRightResource({ resourceAtomId, atomStaticKey, user }: any) {
     // normal check
     const res = await this._checkRightResource_normal({ resourceAtomId, atomStaticKey, user });
     if (!res) return res;
@@ -210,7 +210,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return res;
   }
 
-  async _checkRightResource_normal({ resourceAtomId, atomStaticKey, user }) {
+  async _checkRightResource_normal({ resourceAtomId, atomStaticKey, user }: any) {
     if (!resourceAtomId) {
       const atom = await this.ctx.bean.atom.modelAtom.get({ atomStaticKey, atomDisabled: 0, atomStage: 1 });
       if (!atom) return null;
@@ -224,7 +224,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return await this.ctx.model.queryOne(sql);
   }
 
-  async resourceRoles({ key /* , user */ }) {
+  async resourceRoles({ key /* , user */ }: any) {
     const items = await this.ctx.model.query(
       `
         select a.*,b.roleName from aResourceRole a
@@ -243,7 +243,7 @@ export class BeanResource extends BeanModuleScopeBase {
   }
 
   // add resource role
-  async addResourceRole({ roleAtomId, roleId, atomId, atomStaticKey, user }) {
+  async addResourceRole({ roleAtomId, roleId, atomId, atomStaticKey, user }: any) {
     if (!atomId && !atomStaticKey) return null;
     // atomId
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });
@@ -267,7 +267,7 @@ export class BeanResource extends BeanModuleScopeBase {
   }
 
   // delete resource role
-  async deleteResourceRole({ roleAtomId, roleId, atomId, atomStaticKey, user }) {
+  async deleteResourceRole({ roleAtomId, roleId, atomId, atomStaticKey, user }: any) {
     if (!atomId && !atomStaticKey) return null;
     // atomId
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });
@@ -291,7 +291,7 @@ export class BeanResource extends BeanModuleScopeBase {
     });
   }
 
-  async deleteByRole({ roleAtomId, roleId, user }) {
+  async deleteByRole({ roleAtomId, roleId, user }: any) {
     // role
     const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;
@@ -305,7 +305,7 @@ export class BeanResource extends BeanModuleScopeBase {
   //   { roleName: 'root', atomStaticKey: 'a-base:listComment' },
   //   { roleName: 'root', name: 'listComment' },
   // ];
-  async addRoleResourceBatch({ module, roleResources }) {
+  async addRoleResourceBatch({ module, roleResources }: any) {
     // module
     module = module || this.moduleScope;
     // roleResources
@@ -320,7 +320,7 @@ export class BeanResource extends BeanModuleScopeBase {
   }
 
   // add resource roles
-  async addResourceRoles({ roleAtomId, roleId, atomIds, user }) {
+  async addResourceRoles({ roleAtomId, roleId, atomIds, user }: any) {
     for (const atomId of atomIds) {
       await this.addResourceRole({ roleAtomId, roleId, atomId, atomStaticKey: null, user });
     }
@@ -346,7 +346,7 @@ export class BeanResource extends BeanModuleScopeBase {
 
   // admin
 
-  async resourceRights({ roleAtomId, roleId, page }) {
+  async resourceRights({ roleAtomId, roleId, page }: any) {
     // check locale
     const locale = this.ctx.locale;
     // items
@@ -378,7 +378,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return items;
   }
 
-  async resourceSpreads({ roleAtomId, roleId, page }) {
+  async resourceSpreads({ roleAtomId, roleId, page }: any) {
     // check locale
     const locale = this.ctx.locale;
     // items
@@ -413,7 +413,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return items;
   }
 
-  async resourceRightsOfUser({ userAtomId, userId, page }) {
+  async resourceRightsOfUser({ userAtomId, userId, page }: any) {
     userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
     // check locale
     const locale = this.ctx.locale;
@@ -466,7 +466,7 @@ export class BeanResource extends BeanModuleScopeBase {
     }
   }
 
-  async _forceResourceAtomId({ atomId, atomStaticKey }) {
+  async _forceResourceAtomId({ atomId, atomStaticKey }: any) {
     if (!atomId) {
       const atom = await this.ctx.bean.atom.modelAtom.get({
         atomStaticKey,
@@ -480,7 +480,7 @@ export class BeanResource extends BeanModuleScopeBase {
     return atomId;
   }
 
-  async _forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user }) {
+  async _forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user }: any) {
     atomId = await this._forceResourceAtomId({ atomId, atomStaticKey });
     if (!user || user.id === 0) return atomId;
     // check
@@ -492,7 +492,7 @@ export class BeanResource extends BeanModuleScopeBase {
   // /* backup */
 
   // // function rights
-  // async functionRights({ menu, roleId, page }) {
+  // async functionRights({ menu, roleId, page }: any) {
   //   // check locale
   //   const locale = this.ctx.locale;
   //   // list
@@ -511,7 +511,7 @@ export class BeanResource extends BeanModuleScopeBase {
   // }
 
   // // function spreads
-  // async functionSpreads({ menu, roleId, page }) {
+  // async functionSpreads({ menu, roleId, page }: any) {
   //   // check locale
   //   const locale = this.ctx.locale;
   //   // list
@@ -532,7 +532,7 @@ export class BeanResource extends BeanModuleScopeBase {
   // }
 
   // // function rights of user
-  // async functionRightsOfUser({ menu, userId, page }) {
+  // async functionRightsOfUser({ menu, userId, page }: any) {
   //   // check locale
   //   const locale = this.ctx.locale;
   //   // list

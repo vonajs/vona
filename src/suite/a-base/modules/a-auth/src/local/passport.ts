@@ -2,7 +2,7 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalPassport extends BeanBase {
-  async authenticate({ module, providerName, providerScene, next }) {
+  async authenticate({ module, providerName, providerScene, next }: any) {
     const providerFullName = `${module}:${providerName}`;
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({ module, providerName });
     // provider scene

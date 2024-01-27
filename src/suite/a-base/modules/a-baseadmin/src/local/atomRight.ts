@@ -2,11 +2,11 @@ import { BeanBase, Local } from '@cabloy/core';
 
 @Local()
 export class LocalAtomRight extends BeanBase {
-  async rights({ roleAtomId, page, user }) {
+  async rights({ roleAtomId, page, user }: any) {
     return await this.ctx.bean.role.roleRights({ roleAtomId, page, user });
   }
 
-  async add({ roleAtomId, atomClass, actionCode, scopeSelf, scope, user }) {
+  async add({ roleAtomId, atomClass, actionCode, scopeSelf, scope, user }: any) {
     if (scopeSelf) {
       scope = 0;
     }
@@ -20,11 +20,11 @@ export class LocalAtomRight extends BeanBase {
     });
   }
 
-  async delete({ roleAtomId, roleRightId, user }) {
+  async delete({ roleAtomId, roleRightId, user }: any) {
     return await this.ctx.bean.role.deleteRoleRight({ roleAtomId, roleRightId, user });
   }
 
-  async spreads({ roleAtomId, page, user }) {
+  async spreads({ roleAtomId, page, user }: any) {
     return await this.ctx.bean.role.roleSpreads({ roleAtomId, page, user });
   }
 }

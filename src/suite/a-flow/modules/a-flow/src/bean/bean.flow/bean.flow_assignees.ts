@@ -7,7 +7,7 @@ const __VARTITLES = {
 };
 
 export class BeanFlowAssignees extends BeanFlow0 {
-  async normalizeAssignees({ users, roles, vars }) {
+  async normalizeAssignees({ users, roles, vars }: any) {
     const assignees = {};
     assignees.users = await this._normalizeAssignees_users(users);
     assignees.roles = await this._normalizeAssignees_roles(roles);

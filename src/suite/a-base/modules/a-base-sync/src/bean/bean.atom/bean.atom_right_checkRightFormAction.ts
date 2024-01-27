@@ -87,7 +87,15 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
     return { action, formAction, formActionInfo };
   }
 
-  async _checkRightFormAction_prepareAtomSchema({ atomId, options, mode, formAction, atomClass, user, throwError }) {
+  async _checkRightFormAction_prepareAtomSchema({
+    atomId,
+    options,
+    mode,
+    formAction,
+    atomClass,
+    user,
+    throwError,
+  }: any) {
     const hint = {
       atomId,
       mode,
@@ -113,7 +121,7 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
     return res;
   }
 
-  async _checkRightFormAction_prepareAtomSchema_stash({ atomId, mode, formAction, atomClass, user, throwError }) {
+  async _checkRightFormAction_prepareAtomSchema_stash({ atomId, mode, formAction, atomClass, user, throwError }: any) {
     // check right: formAction
     // const options = Object.assign({}, options, {
     //   formAction: undefined,

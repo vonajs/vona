@@ -3,7 +3,7 @@ import { BeanAtomBaseDelete } from './bean.atomBase_delete.js';
 import ExcelJS from 'exceljs';
 
 export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
-  async exportBulk({ atomClass, options, fields, user }) {
+  async exportBulk({ atomClass, options, fields, user }: any) {
     // select
     const items = await this.ctx.bean.atom.select({ atomClass, options, user, pageForce: false });
     // workbook

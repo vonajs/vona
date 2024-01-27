@@ -162,7 +162,7 @@ export class BeanAuth extends BeanBase {
     return _user;
   }
 
-  async serializeUser({ user }) {
+  async serializeUser({ user }: any) {
     // _user
     const _user = this._pruneUser({ user });
     // anonymous
@@ -189,7 +189,7 @@ export class BeanAuth extends BeanBase {
     return _user;
   }
 
-  async deserializeUser({ user }) {
+  async deserializeUser({ user }: any) {
     if (user.op.anonymous) return user;
     // not throw 401: this.ctx.throw(401);
     if (!user.token) return null;
@@ -202,7 +202,7 @@ export class BeanAuth extends BeanBase {
     return user;
   }
 
-  async _sendMessageSystemLogout({ user }) {
+  async _sendMessageSystemLogout({ user }: any) {
     if (!user || user.op.anonymous) return;
     // send message-system
     await this.ctx.bean.userOnline.sendMessageSystemLogout({
@@ -212,7 +212,7 @@ export class BeanAuth extends BeanBase {
     });
   }
 
-  async _clearRedisAuth({ user }) {
+  async _clearRedisAuth({ user }: any) {
     if (!user || user.agent.anonymous) return;
     // redis auth
     const key = this._getAuthRedisKey({ user });
@@ -221,7 +221,7 @@ export class BeanAuth extends BeanBase {
     }
   }
 
-  async _clearRedisAuthAll({ user }) {
+  async _clearRedisAuthAll({ user }: any) {
     const keyPrefix = this.redisAuth.options.keyPrefix;
     const keyPattern = this._getAuthRedisKeyPattern({ user, keyPrefix });
     const keys = await this.redisAuth.keys(keyPattern);
