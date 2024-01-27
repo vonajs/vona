@@ -6,6 +6,7 @@ import { MetadataKey } from '../core/metadata.js';
 import { BeanLocal } from './beanLocal.js';
 import { IBeanRecord, IBeanScopeRecord, TypeBeanRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
+import { BeanSimple } from './beanSimple.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -182,10 +183,12 @@ export class BeanContainer {
   // }
 
   private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
-    // app
-    beanInstance.app = this.app;
-    // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
-    beanInstance.ctx = this.ctx;
+    if (beanInstance instanceof BeanSimple) {
+      // app
+      (<any>beanInstance).app = this.app;
+      // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
+      (<any>beanInstance).ctx = this.ctx;
+    }
     // beanFullName
     if (typeof beanFullName === 'string') {
       __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
