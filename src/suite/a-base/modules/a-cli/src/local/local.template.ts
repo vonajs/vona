@@ -14,6 +14,7 @@ export class LocalTemplate extends BeanBase {
   cli: any;
 
   constructor(cli) {
+    super();
     this.cli = cli;
   }
 
@@ -114,7 +115,7 @@ export class LocalTemplate extends BeanBase {
     } else if (stats.isDirectory()) {
       await this.helper.ensureDir(targetFile);
     } else if (stats.isFile()) {
-      let content = fs.readFileSync(templateFile);
+      const content = fs.readFileSync(templateFile);
       await this.console.log(`write to ${targetFile}`);
       // check if content is a text file
       let result;
@@ -122,9 +123,9 @@ export class LocalTemplate extends BeanBase {
       if (!isTextOrBinary.isTextSync(templateFile, content)) {
         result = content;
       } else {
-        content = content.toString('utf8');
-        result = await this.renderContent({ content });
-        changed = content !== result;
+        const _content = content.toString('utf8');
+        result = await this.renderContent({ content: _content });
+        changed = _content !== result;
       }
       // save
       fs.writeFileSync(targetFile, result);

@@ -14,6 +14,7 @@ export class LocalHelper extends BeanBase {
   ProcessHelper: any;
 
   constructor(cli) {
+    super();
     this.cli = cli;
     this.ProcessHelper = new ProcessHelper(this.cwd, this.console);
   }

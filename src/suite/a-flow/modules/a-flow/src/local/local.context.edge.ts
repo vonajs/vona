@@ -8,6 +8,7 @@ export class LocalContextEdge extends BeanBase {
   _utils: any;
 
   constructor({ context, contextNode, edgeDef }) {
+    super();
     this.context = context;
     this.contextNode = contextNode;
     this._edgeDef = edgeDef;

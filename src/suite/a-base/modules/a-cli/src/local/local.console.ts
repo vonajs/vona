@@ -5,6 +5,7 @@ export class LocalConsole extends BeanBase {
   cli: any;
 
   constructor(cli) {
+    super();
     this.cli = cli;
   }
 

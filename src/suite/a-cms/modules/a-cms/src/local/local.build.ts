@@ -21,6 +21,7 @@ export class LocalBuild extends BeanBase {
   default: any;
 
   constructor(atomClass) {
+    super();
     this.atomClass = utils.atomClass(atomClass);
     this.default = this.atomClass.module === 'a-cms';
   }

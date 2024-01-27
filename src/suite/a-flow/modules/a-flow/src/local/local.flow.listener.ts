@@ -9,6 +9,7 @@ export class LocalFlowListener extends BeanBase {
   _flowListener: any;
 
   constructor({ flowInstance, context }) {
+    super();
     this.flowInstance = flowInstance;
     this.context = context;
     this._flowListener = undefined;

@@ -1,4 +1,6 @@
-export class BeanFlowEdgeBase {
+import { BeanBase } from '@cabloy/core';
+
+export class BeanFlowEdgeBase extends BeanBase {
   flowInstance: any;
   edgeInstance: any;
   context: any;
@@ -6,6 +8,7 @@ export class BeanFlowEdgeBase {
   contextEdge: any;
 
   constructor(options) {
+    super();
     if (options) {
       this.flowInstance = options.flowInstance;
       this.edgeInstance = options.edgeInstance;

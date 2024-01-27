@@ -12,6 +12,7 @@ export class LocalFlowEdge extends BeanBase {
   _edgeBaseBean: any;
 
   constructor({ flowInstance, context, contextNode }) {
+    super();
     this.flowInstance = flowInstance;
     this.context = context;
     this.contextNode = contextNode;

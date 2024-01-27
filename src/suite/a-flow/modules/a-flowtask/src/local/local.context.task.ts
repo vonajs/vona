@@ -13,6 +13,7 @@ export class LocalContextTask extends BeanBase {
   _user: any;
 
   constructor({ context, contextNode, nodeDef }) {
+    super();
     this.context = context;
     this.contextNode = contextNode;
     this._nodeDef = nodeDef;

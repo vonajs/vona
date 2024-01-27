@@ -6,8 +6,10 @@ export class LocalFlowTask0 extends BeanBase {
   flowInstance: any;
   context: any;
   contextNode: any;
+  contextTask: any;
 
   constructor({ nodeInstance }) {
+    super();
     this.nodeInstance = nodeInstance;
     this.flowInstance = nodeInstance.flowInstance;
     this.context = nodeInstance.context;

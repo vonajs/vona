@@ -13,6 +13,7 @@ export class LocalContextNode extends BeanBase {
   _utils: any;
 
   constructor({ context, contextEdge, nodeDef }) {
+    super();
     this.context = context;
     this.contextEdge = contextEdge;
     this._nodeDef = nodeDef;

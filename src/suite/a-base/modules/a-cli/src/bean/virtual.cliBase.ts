@@ -10,6 +10,7 @@ export class BeanCliBase extends BeanBase {
   terminal: any;
 
   constructor(options) {
+    super();
     this.options = options;
     this.cabloyConfig = null;
     this.terminal = options.terminal !== false;

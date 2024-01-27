@@ -45,7 +45,19 @@ async function _moduleHandle_super({ file, module, processHelper }) {
     // console.log(file);
     return;
   }
+  // 查找constructor
+  const ast = gogocode(contentOld, { parseOptions: {} });
+  const ast1 = ast.find('constructor($_$) {$$$0}');
+  if (ast1.match.length === 0) return;
+  const ast1Src = ast1.generate();
+  if (ast1Src.indexOf('super(') > -1) return;
+  // 添加super
+  const ast2 = ast1.replace(`constructor($_$) {$$$0}`, `constructor($_$) {\nsuper();\n$$$0\n}`);
+  const ast2Src = ast2.root().generate();
+  // console.log(ast2Src);
   console.log(file);
+  await fse.outputFile(file, ast2Src);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {

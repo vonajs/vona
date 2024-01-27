@@ -8,6 +8,7 @@ export class BeanAuthProviderBase extends BeanBase {
   providerScene: any;
 
   constructor({ authProvider, providerModule, providerName, providerScene }) {
+    super();
     this.authProvider = authProvider;
     this.providerModule = providerModule;
     this.providerName = providerName;

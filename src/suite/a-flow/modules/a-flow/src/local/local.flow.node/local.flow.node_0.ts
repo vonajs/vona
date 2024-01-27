@@ -20,6 +20,7 @@ export class LocalFlowNode0 extends BeanBase {
   _behaviors: any;
 
   constructor({ flowInstance, context, contextEdge }) {
+    super();
     this.flowInstance = flowInstance;
     this.context = context;
     this.contextEdge = contextEdge;
