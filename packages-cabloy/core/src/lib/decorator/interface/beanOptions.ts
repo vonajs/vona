@@ -23,6 +23,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'middleware.io'
   | 'event'
   | 'stats'
+  | 'sequence'
   | 'local.flow'
   | 'flow.node'
   | 'flow.behavior'

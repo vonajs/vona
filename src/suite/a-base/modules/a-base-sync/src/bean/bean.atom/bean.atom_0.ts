@@ -89,7 +89,7 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     ]);
   }
 
-  async attachment({ key, atom: { attachment = 1 }, user: _user }) {
+  async attachment({ key, atom: { attachment = 1 }, user: _user }: any) {
     await this.modelAtom.query('update aAtom set attachmentCount = attachmentCount + ? where iid=? and id=?', [
       attachment,
       this.ctx.instance.id,

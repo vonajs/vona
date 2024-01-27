@@ -162,7 +162,7 @@ export class BeanFile extends BeanBase {
     const filename = `${data.title || '_none_'}.${ext}`;
     const encoding = data.encoding || '7bit';
     // content
-    const fileContent = base64url.toBuffer(contentBase64);
+    const fileContent = base64url.default.toBuffer(contentBase64);
     // console.log('----fileContent: ', typeof fileContent);
     // meta
     const meta = {
