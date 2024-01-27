@@ -65,7 +65,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
   }
 
   // _combineFieldsData({ fields, atom }: any) {
-  //   const item = {};
+  //   const item: any = {};
   //   for (const field of fields) {
   //     // support dict/userId
   //     const names = [field, `_${field}Title`, `_${field}TitleLocale`, `_${field}Name`, `_${field}Avatar`];

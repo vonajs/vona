@@ -111,7 +111,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     // query
     let where;
     if (query) {
-      const clause = {};
+      const clause: any = {};
       clause.__or__ = [
         { 'a.userName': { op: 'like', val: query } },
         { 'a.realName': { op: 'like', val: query } },

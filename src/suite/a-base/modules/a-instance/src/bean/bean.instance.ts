@@ -12,7 +12,7 @@ const boxenOptions: boxen.Options = {
   borderStyle: boxen.BorderStyle.Round,
 };
 
-const __queueInstanceStartup = {};
+const __queueInstanceStartup: any = {};
 
 @Bean()
 export class BeanInstance extends BeanBase {
@@ -138,7 +138,7 @@ export class BeanInstance extends BeanBase {
   }
 
   _mergeInstanceConfigFront({ instanceConfigs }: any) {
-    const instanceConfigsFront = {};
+    const instanceConfigsFront: any = {};
     for (const moduleName in instanceConfigs) {
       const instanceConfig = instanceConfigs[moduleName];
       if (instanceConfig.configFront) {

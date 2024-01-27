@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
-const __smsProvidersConfigCache = {};
+const __smsProvidersConfigCache: any = {};
 
 @Bean()
 export class BeanSmsProviderCache extends BeanBase {

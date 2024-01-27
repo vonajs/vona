@@ -24,7 +24,7 @@ export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
     // rows
     const rows: any[] = [];
     for (const item of items) {
-      const row = {};
+      const row: any = {};
       for (const field of fields) {
         row[field.name] = item[field.name];
       }

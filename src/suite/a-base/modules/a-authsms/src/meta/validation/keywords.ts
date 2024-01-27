@@ -1,4 +1,4 @@
-const keywords = {};
+const keywords: any = {};
 keywords.exists = {
   async: true,
   type: 'string',

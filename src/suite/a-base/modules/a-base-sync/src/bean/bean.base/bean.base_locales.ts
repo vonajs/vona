@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseLocaleModules } from './bean.base_localeModules.js';
 
-const _locales = {};
+const _locales: any = {};
 
 export class BeanBaseLocales extends BeanBaseLocaleModules {
   locales() {

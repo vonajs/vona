@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseActions } from './bean.base_actions.js';
 
-const _atomClasses = {};
+const _atomClasses: any = {};
 
 export class BeanBaseAtomClasses extends BeanBaseActions {
   atomClasses() {
@@ -20,7 +20,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
   }
 
   _prepareAtomClasses() {
-    const atomClasses = {};
+    const atomClasses: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.resource.meta && module.resource.meta.base && module.resource.meta.base.atoms) {
@@ -61,7 +61,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
   }
 
   _prepareAtomClassesModule(_module, _atoms) {
-    const atomClasses = {};
+    const atomClasses: any = {};
     for (const key in _atoms) {
       const _atomClass = _atoms[key].info;
       const _atomClassMeta = this._prepareAtomClassesModule_atomClassMeta(_atomClass);

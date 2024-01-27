@@ -1,2 +1,2 @@
-const meta = {};
+const meta: any = {};
 export default meta;

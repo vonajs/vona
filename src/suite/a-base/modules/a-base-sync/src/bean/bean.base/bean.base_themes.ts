@@ -1,6 +1,6 @@
 import { BeanBaseResourceTypes } from './bean.base_resourceTypes.js';
 
-const _themesLocales = {};
+const _themesLocales: any = {};
 
 export class BeanBaseThemes extends BeanBaseResourceTypes {
   themes() {
@@ -11,7 +11,7 @@ export class BeanBaseThemes extends BeanBaseResourceTypes {
   }
 
   _prepareThemes() {
-    const modules = {};
+    const modules: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.package.eggBornModule && module.package.eggBornModule.theme) {

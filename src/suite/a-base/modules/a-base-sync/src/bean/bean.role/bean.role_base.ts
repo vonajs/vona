@@ -356,7 +356,7 @@ export class BeanRoleBase extends BeanModuleScopeBase {
   }
 
   async _initSystemRoles({ module, rolesData }: any) {
-    const roleIds = {};
+    const roleIds: any = {};
     // system roles
     for (const roleName in rolesData) {
       let role = rolesData[roleName];

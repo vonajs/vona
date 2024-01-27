@@ -79,7 +79,7 @@ export class BeanUserOnline extends BeanModuleScopeBase {
   async sendMessageSystemLogout({ user, type, provider }: any) {
     const userId = user.id;
     // content
-    const content = {
+    const content: any = {
       code: 401,
       message: 'logout',
       type,

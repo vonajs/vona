@@ -1,6 +1,6 @@
 import { BeanBaseAtomClasses } from './bean.base_atomClasses.js';
 
-const _authProvidersLocales = {};
+const _authProvidersLocales: any = {};
 
 export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
   authProviders() {
@@ -11,7 +11,7 @@ export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
   }
 
   _prepareAuthProviders() {
-    const authProviders = {};
+    const authProviders: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const relativeName = module.info.relativeName;
       let metaAuth = module.resource.meta && module.resource.meta.auth;
@@ -52,7 +52,7 @@ export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
   }
 
   _prepareAuthProvider_mergeMetaScene(metaScene, metaConfig) {
-    const _meta = {};
+    const _meta: any = {};
     for (const key of ['mode', 'inner', 'inline', 'disableAssociate', 'render', 'validator']) {
       if (metaConfig[key] !== undefined) {
         _meta[key] = metaConfig[key];

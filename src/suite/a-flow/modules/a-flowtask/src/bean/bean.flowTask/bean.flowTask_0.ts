@@ -1,6 +1,7 @@
 import { ScopeModuleAFlowtask } from '../../index.js';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
+import { BeanFlowTask1 } from './bean.flowTask_1.js';
 
 export class BeanFlowTask0 extends BeanBase {
   get scope() {
@@ -24,7 +25,7 @@ export class BeanFlowTask0 extends BeanBase {
   }
 
   async select({ options, user, pageForce = true, count = 0 }: any) {
-    const tasks = await this._list({ options, user, pageForce, count });
+    const tasks = await (this as unknown as BeanFlowTask1)._list({ options, user, pageForce, count });
     // loop
     for (const task of tasks) {
       // locale
@@ -46,50 +47,59 @@ export class BeanFlowTask0 extends BeanBase {
 
   async claim({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    return await taskInstance._claim();
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    return await taskInstance!._claim();
   }
 
   async complete({ flowTaskId, handle, formAtom, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._complete({ handle, formAtom });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._complete({ handle, formAtom });
   }
 
   async appendHandleRemark({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user, history: true });
-    await taskInstance._appendHandleRemark({ handle });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({
+      flowTaskId,
+      user,
+      history: true,
+    });
+    await taskInstance!._appendHandleRemark({ handle });
   }
 
   async assignees({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    return await taskInstance._assignees();
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    return await taskInstance!._assignees();
   }
 
   async assigneesConfirmation({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._assigneesConfirmation({ handle });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._assigneesConfirmation({ handle });
   }
 
   async recall({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._recall();
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._recall();
   }
 
   async cancelFlow({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._cancelFlow({ handle });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._cancelFlow({ handle });
   }
 
   // from history
   async viewAtom({ flowTaskId, user, throwError }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user, history: true, throwError });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({
+      flowTaskId,
+      user,
+      history: true,
+      throwError,
+    });
     if (!taskInstance) return null;
     return await taskInstance._viewAtom();
   }
@@ -97,38 +107,43 @@ export class BeanFlowTask0 extends BeanBase {
   // from runtime
   async editAtom({ flowTaskId, user, throwError }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user, history: false, throwError });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({
+      flowTaskId,
+      user,
+      history: false,
+      throwError,
+    });
     if (!taskInstance) return null;
     return await taskInstance._editAtom();
   }
 
   async forward({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._forward({ handle });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._forward({ handle });
   }
 
   async forwardRecall({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._forwardRecall();
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._forwardRecall();
   }
 
   async substitute({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._substitute({ handle });
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._substitute({ handle });
   }
 
   async substituteRecall({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._substituteRecall();
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._substituteRecall();
   }
 
   async actions({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await this._loadTaskInstance({ flowTaskId, user });
-    await taskInstance._actions();
+    const taskInstance = await (this as unknown as BeanFlowTask1)._loadTaskInstance({ flowTaskId, user });
+    await taskInstance!._actions();
   }
 }

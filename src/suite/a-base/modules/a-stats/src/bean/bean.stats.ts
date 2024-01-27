@@ -173,7 +173,7 @@ export class BeanStats extends BeanModuleScopeBase {
   }
 
   _collectStats() {
-    const stats = {};
+    const stats: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const providers = module.resource.meta && module.resource.meta.stats && module.resource.meta.stats.providers;
       if (!providers) continue;

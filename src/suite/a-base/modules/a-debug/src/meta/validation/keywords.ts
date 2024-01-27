@@ -1,2 +1,2 @@
-const keywords = {};
+const keywords: any = {};
 export default keywords;

@@ -1,9 +1,9 @@
 import { BeanFlowDefDeploy } from './bean.flowDef_deploy.js';
 
-const __flowBehaviorBases = {};
-const __flowNodeBases = {};
-const __flowEdgeBases = {};
-const __flowServiceBases = {};
+const __flowBehaviorBases: any = {};
+const __flowNodeBases: any = {};
+const __flowEdgeBases: any = {};
+const __flowServiceBases: any = {};
 
 export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   behaviorBases() {
@@ -52,7 +52,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   }
 
   _prepareFlowServiceBases() {
-    const flowServiceBases = {};
+    const flowServiceBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const relativeName = module.info.relativeName;
       const beans = module.main.beans;
@@ -66,12 +66,12 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   }
 
   _prepareFlowServiceBasesModule(relativeName, beans) {
-    const flowServiceBases = {};
+    const flowServiceBases: any = {};
     for (const beanName in beans) {
       if (beanName.indexOf('flow.service.') !== 0) continue;
       // info
       const bean = beans[beanName];
-      const serviceBase = {
+      const serviceBase: any = {
         title: bean.title,
       };
       if (bean.title) {
@@ -88,7 +88,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   }
 
   _prepareFlowBehaviorBases() {
-    const flowBehaviorBases = {};
+    const flowBehaviorBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const behaviors = module.resource.meta && module.resource.meta.flow && module.resource.meta.flow.behaviors;
       if (!behaviors) continue;
@@ -114,7 +114,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   }
 
   _prepareFlowNodeBases() {
-    const flowNodeBases = {};
+    const flowNodeBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const nodes = module.resource.meta && module.resource.meta.flow && module.resource.meta.flow.nodes;
       if (!nodes) continue;
@@ -151,7 +151,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   }
 
   _prepareFlowEdgeBases() {
-    const flowEdgeBases = {};
+    const flowEdgeBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const edges = module.resource.meta && module.resource.meta.flow && module.resource.meta.flow.edges;
       if (!edges) continue;

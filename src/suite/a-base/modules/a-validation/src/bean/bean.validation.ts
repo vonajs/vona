@@ -127,7 +127,7 @@ export class BeanValidation extends BeanModuleScopeBase {
   }
 
   _prepareSchemas_ignoreRules({ schemas }: any) {
-    const schemas2 = {};
+    const schemas2: any = {};
     for (const schemaName in schemas) {
       const schema = schemas[schemaName];
       const schema2 = { type: 'object', properties: {} };

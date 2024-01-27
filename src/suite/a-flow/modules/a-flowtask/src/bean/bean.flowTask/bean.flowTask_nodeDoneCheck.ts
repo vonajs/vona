@@ -66,7 +66,7 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     // here means not done
   }
 
-  async _nodeDoneCheckLock_passed({ nodeInstance, options }: any) {
+  async _nodeDoneCheckLock_passed({ nodeInstance, options: _options }: any) {
     // next stage of flow node: end
     return await nodeInstance.end();
   }

@@ -86,7 +86,7 @@ export class BeanCategory0 extends BeanBase {
     // categoryHidden
     categoryHidden = await this._checkRightForCategoryHidden({ categoryHidden, user });
     // where
-    const where = {};
+    const where: any = {};
     if (categoryId !== undefined) where.categoryIdParent = categoryId;
     // atomClassId
     if (!where.categoryIdParent) {

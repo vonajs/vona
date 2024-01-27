@@ -11,7 +11,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
 
   async _deploy_flowActions_modifing({ atomClass, node, flowDef, content }: any) {
     // nodeTasks
-    const checked = {};
+    const checked: any = {};
     const nodeTasks = await this._deploy_flowActions_findNodeTasks({ content, nodeStart: node });
     // flowActions
     const flowActions = await this.ctx.bean.atomAction.selectFlowActions({ atomClass, flowKey: flowDef.atomStaticKey });

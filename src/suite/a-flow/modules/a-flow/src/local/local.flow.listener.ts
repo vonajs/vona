@@ -26,7 +26,7 @@ export class LocalFlowListener extends BeanBase {
     // script
     const expression = `${listenerContent};\nexport default new Listener(__contextFlow);`;
     // globals
-    const globals = {};
+    const globals: any = {};
     globals.__contextFlow = this.context;
     globals.assert = {
       equal: (...args) => {

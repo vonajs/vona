@@ -14,7 +14,7 @@ export class MiddlewareIoPacket extends BeanBase {
   async _performAction({ params: { id, method, url, body } }) {
     try {
       // headers
-      const headers = {};
+      const headers: any = {};
       for (const key of ['x-clientid', 'x-scene']) {
         if (this.ctx.request.query[key]) {
           headers[key] = this.ctx.request.query[key];

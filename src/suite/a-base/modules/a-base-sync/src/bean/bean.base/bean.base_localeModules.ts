@@ -1,6 +1,6 @@
 import { BeanBaseAuthProviders } from './bean.base_authProviders.js';
 
-const _localeModules = {};
+const _localeModules: any = {};
 
 export class BeanBaseLocaleModules extends BeanBaseAuthProviders {
   localeModules() {

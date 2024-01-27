@@ -69,7 +69,7 @@ export class BeanFile extends BeanBase {
       }
     }
     // _options
-    const _options = {};
+    const _options: any = {};
     // where
     _options.where = options.where || {};
     // orders

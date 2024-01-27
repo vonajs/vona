@@ -174,10 +174,10 @@ export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
     // static/dynamic
     let atomStateInfo = this._prepareAtomState_static({ options });
     if (!atomStateInfo) {
-      atomStateInfo = await this._prepareAtomState_dynamic({ options });
+      atomStateInfo = <any>await this._prepareAtomState_dynamic({ options });
     }
     // atomState
-    const atomState = atomStateInfo.atomState;
+    const atomState = atomStateInfo!.atomState;
     // options
     if (options.atomState !== atomState) {
       options = Object.assign({}, options, { atomState });

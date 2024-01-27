@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase0 } from './bean.base_0.js';
 
-const _actions = {};
+const _actions: any = {};
 
 export class BeanBaseActions extends BeanBase0 {
   actions() {
@@ -33,11 +33,11 @@ export class BeanBaseActions extends BeanBase0 {
   }
 
   _prepareActions() {
-    const actions = {};
+    const actions: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.resource.meta && module.resource.meta.base && module.resource.meta.base.atoms) {
-        const res = {};
+        const res: any = {};
         for (const atomClassName in module.resource.meta.base.atoms) {
           const res2 = this._prepareActionsAtomClass(module, module.resource.meta.base.atoms[atomClassName]);
           if (Object.keys(res2).length > 0) {
@@ -64,7 +64,7 @@ export class BeanBaseActions extends BeanBase0 {
   }
 
   _prepareActionsAtomClass(_module, atomClass) {
-    const actions = {};
+    const actions: any = {};
     const _actions = atomClass.actions;
     const _actionsSystem = this.ctx.constant.module(__ThisModule__).atom.action;
     const _actionsSystemMeta = this._prepareActionsAtomClass_actionsSystemMetaAtom(atomClass);

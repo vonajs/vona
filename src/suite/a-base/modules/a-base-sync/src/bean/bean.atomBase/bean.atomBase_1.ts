@@ -143,7 +143,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
       items = [item];
     }
     // categoryIdsWant
-    const categoryIdsWantMap = {};
+    const categoryIdsWantMap: any = {};
     for (item of items) {
       const categoryId = item.atomCategoryId;
       if (categoryId) {
@@ -177,7 +177,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
       items = [item];
     }
     // userIdsWant
-    const userIdsWantMap = {};
+    const userIdsWantMap: any = {};
     for (item of items) {
       for (const userIdKey of userIdsKey) {
         const userId = item[userIdKey];

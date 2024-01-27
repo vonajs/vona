@@ -95,7 +95,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     const atom = this.context._atom;
     const atomId = atom.atomId;
     const user = this.contextTask.user;
-    const data = {};
+    const data: any = {};
     for (const key of keys) {
       const conditionExpression = fieldsMapping[key];
       // evaluateExpression

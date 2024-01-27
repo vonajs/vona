@@ -22,7 +22,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     const keys = Object.keys(fieldsMapping);
     if (keys.length === 0) return;
     // data
-    const data = {};
+    const data: any = {};
     for (const key of keys) {
       const conditionExpression = fieldsMapping[key];
       // evaluateExpression

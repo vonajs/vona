@@ -10,7 +10,7 @@ export class BeanMarkdown extends BeanBase {
   async render({ host, content, locale }: any) {
     if (!content) return '';
     // asyncs
-    const asyncs = {};
+    const asyncs: any = {};
     // block options
     const blockOptions = {
       utils: {

@@ -1,7 +1,7 @@
 import citiesUSA from './cities/citiesUSA.json';
 
 const dictItems = citiesUSA;
-const dictLocales = {};
+const dictLocales: any = {};
 const dict = {
   atomName: 'Cities USA',
   atomStaticKey: 'citiesUSA',

@@ -81,7 +81,7 @@ export class BeanUser1 extends BeanUser0 {
       userName = '';
     }
     // where
-    const clause = {};
+    const clause: any = {};
     clause.__or__ = [];
     if (userName) clause.__or__.push({ userName });
     if (email) clause.__or__.push({ email });
@@ -186,7 +186,7 @@ export class BeanUser1 extends BeanUser0 {
     const fieldNames = Object.keys(fields);
     const itemsRes: any[] = [];
     for (const item of items) {
-      const itemRes = {};
+      const itemRes: any = {};
       for (const fieldName of fieldNames) {
         itemRes[fieldName] = item[fieldName];
       }

@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
-const _usersAnonymous = {};
+const _usersAnonymous: any = {};
 
 export class BeanUser0 extends BeanBase {
   _sequence: any;
@@ -191,7 +191,7 @@ export class BeanUser0 extends BeanBase {
       // userRoles
       const userRoles = await this.ctx.bean.role.getUserRolesDirect({ userId });
       // userRolesMap
-      const map = {};
+      const map: any = {};
       for (const role of userRoles) {
         map[role.roleName] = role;
       }
@@ -271,7 +271,7 @@ export class BeanUser0 extends BeanBase {
     }
 
     // verifyUser
-    const verifyUser = {};
+    const verifyUser: any = {};
 
     // provider
     const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
@@ -527,7 +527,7 @@ export class BeanUser0 extends BeanBase {
   }
 
   async _addUserInfo(profile, columns, autoActivate) {
-    const user = {};
+    const user: any = {};
     for (const column of columns) {
       // others
       await this._setUserInfoColumn(user, column, profile);

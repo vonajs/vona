@@ -1,6 +1,6 @@
 import { BeanBaseLocales } from './bean.base_locales.js';
 
-const _modulesLocales = {};
+const _modulesLocales: any = {};
 
 export class BeanBaseModules extends BeanBaseLocales {
   modules() {
@@ -11,7 +11,7 @@ export class BeanBaseModules extends BeanBaseLocales {
   }
 
   _prepareModules() {
-    const modules = {};
+    const modules: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       const _module = {

@@ -8,6 +8,7 @@ export class LocalRedis extends BeanBase {
   _redis: any;
 
   constructor() {
+    super();
     this._redis = null;
   }
 
@@ -55,7 +56,7 @@ export class LocalRedis extends BeanBase {
   }
 
   async _getPathUsersOnline({ path }: any) {
-    const userIds = {};
+    const userIds: any = {};
     const keyPrefix = this.redis.options.keyPrefix;
     const keyPatern = `${keyPrefix}${__subVersion}:${this.ctx.instance.id}:*:${path}`;
     const keys = await this.redis.keys(keyPatern);
@@ -80,8 +81,8 @@ export class LocalRedis extends BeanBase {
     // pipeline
     const valuesBatch = await this.redis.pipeline(cmdsGetAll).exec();
     // check
-    const result = {};
-    const workersStatus = {};
+    const result: any = {};
+    const workersStatus: any = {};
     const cmdsDelete: any[] = [];
     for (let i = 0; i < userIds.length; i++) {
       const userId = userIds[i];
@@ -97,7 +98,7 @@ export class LocalRedis extends BeanBase {
   }
 
   async _subscribeValuesCheck({ userId, path, hashValues, workersStatus, cmdsDelete }: any) {
-    const values = {};
+    const values: any = {};
     for (const socketId in hashValues) {
       // in
       const value = hashValues[socketId];

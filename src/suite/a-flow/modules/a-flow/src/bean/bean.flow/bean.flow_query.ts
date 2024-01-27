@@ -1,3 +1,4 @@
+import { BeanFlow0 } from './bean.flow_0.js';
 import { BeanFlowLoad } from './bean.flow_load.js';
 
 export class BeanFlowQuery extends BeanFlowLoad {
@@ -31,7 +32,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
 
   async _get({ flowId, history, user }: any) {
     // where
-    const where = {};
+    const where: any = {};
     if (history) {
       where['a.flowId'] = flowId;
     } else {
@@ -50,7 +51,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
   // mode: mine/others/flowing/history
   async _list({ options: { where, orders, page, mode }, user, pageForce = true, count = 0 }) {
     page = this.ctx.bean.util.page(page, pageForce);
-    const sql = this.sqlProcedure.selectFlows({
+    const sql = (this as unknown as BeanFlow0).sqlProcedure.selectFlows({
       iid: this.ctx.instance.id,
       userIdWho: user ? user.id : 0,
       where,

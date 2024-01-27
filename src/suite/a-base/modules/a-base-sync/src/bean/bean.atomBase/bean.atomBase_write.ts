@@ -85,7 +85,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
         options.schema = atomSchema.schema;
       }
       // itemHold
-      const itemHold = {};
+      const itemHold: any = {};
       for (const field of __itemBasicFieldsWrite) {
         if (item[field] !== undefined) {
           itemHold[field] = item[field];
@@ -115,7 +115,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
   }
 
   _writeValidate_prepareFilterOptions({ target }: any) {
-    const filterOptions = {};
+    const filterOptions: any = {};
     if (!target) {
       // just save
       filterOptions.type = true;
@@ -138,7 +138,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
 
   async _writeAtom({ key, item, user, atomSimple, atomStage }: any) {
     // write atom
-    const atom = {};
+    const atom: any = {};
     for (const field of __atomBasicFields) {
       if (item[field] !== undefined) atom[field] = item[field];
     }

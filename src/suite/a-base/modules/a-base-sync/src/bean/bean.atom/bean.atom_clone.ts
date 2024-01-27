@@ -59,7 +59,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     }
     // destKey
     if (!destKey) {
-      const options = {};
+      const options: any = {};
       // patch atomIdMain of options
       if (atomClassBase.detail) {
         const atomIdMainField = atomClassBase.fields?.mappings?.atomIdMain;

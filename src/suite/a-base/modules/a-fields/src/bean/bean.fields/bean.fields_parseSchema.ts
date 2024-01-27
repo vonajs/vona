@@ -39,7 +39,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
   async __parseSchema_checkModeCustom_array({ schemaBase, fieldsRight }: any) {
     const schema = schemaBase.schema;
     const properties = schema.properties;
-    const propertiesNew = {};
+    const propertiesNew: any = {};
     for (const field of fieldsRight.custom) {
       if (typeof field === 'string') {
         if (properties[field]) {
@@ -75,7 +75,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
   async __parseSchema_checkModeGeneral({ schemaBase, fieldsRight }: any) {
     const schema = schemaBase.schema;
     const properties = schema.properties;
-    const propertiesNew = {};
+    const propertiesNew: any = {};
     for (const key in properties) {
       const property = properties[key];
       let propertyNew;

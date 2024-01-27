@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
-const __mailScenesConfigCache = {};
+const __mailScenesConfigCache: any = {};
 
 @Bean()
 export class BeanMailSceneCache extends BeanBase {

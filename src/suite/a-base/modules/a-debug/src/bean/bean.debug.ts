@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 import DebugInstance from 'debug';
 
-const __debug_caches = {};
+const __debug_caches: any = {};
 
 @Bean()
 export class BeanDebug extends BeanBase {

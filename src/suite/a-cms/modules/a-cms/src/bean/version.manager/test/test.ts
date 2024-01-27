@@ -26,7 +26,7 @@ export class VersionTest extends BeanBase {
       { categoryName: '隐藏分类', language: 'zh-cn', categoryIdParent: 0, categoryHidden: 1 },
       { categoryName: '加标记的分类', language: 'zh-cn', categoryIdParent: 0, categoryFlag: 'Flag' },
     ];
-    const categoryIds = {};
+    const categoryIds: any = {};
     for (const item of categories) {
       // add
       const categoryId = await this.ctx.bean.category.add({
@@ -53,7 +53,7 @@ export class VersionTest extends BeanBase {
       { tagName: '学习', language: 'zh-cn' },
       { tagName: '工作', language: 'zh-cn' },
     ];
-    const tagIds = {};
+    const tagIds: any = {};
     for (const item of tags) {
       // add
       const tagId = await this.ctx.bean.tag.add({

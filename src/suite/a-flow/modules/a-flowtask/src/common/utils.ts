@@ -11,7 +11,7 @@ export default ({ ctx /* flowInstance*/ }) => {
     }
 
     async executeService({ bean, parameter }: any) {
-      const globals = {};
+      const globals: any = {};
       if (this.context) globals.context = this.context;
       if (this.contextNode) globals.contextNode = this.contextNode;
       if (this.contextTask) globals.contextTask = this.contextTask;

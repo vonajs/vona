@@ -62,7 +62,7 @@ export class BeanFlowNodeBase extends BeanBase {
     return true;
   }
 
-  async onNodeChange({ options }: any) {
+  async onNodeChange({ options: _options }: any) {
     // should not raise onNodeChange for flowListener
     // await this.flowInstance._flowListener.onNodeChange(this.contextNode, { options });
     return true;

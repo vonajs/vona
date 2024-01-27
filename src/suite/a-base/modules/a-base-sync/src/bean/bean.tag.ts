@@ -107,7 +107,7 @@ export class BeanTag extends BeanBase {
 
   async setTagAtomCount({ tagsNew, tagsOld }: any) {
     // tags
-    const tags = {};
+    const tags: any = {};
     if (tagsNew) {
       const _tags = typeof tagsNew === 'string' ? JSON.parse(tagsNew) : tagsNew;
       for (const tagId of _tags) {

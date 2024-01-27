@@ -34,7 +34,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
 
     // where
-    const _where = {};
+    const _where: any = {};
 
     // vars
     let _starField, _labelField;

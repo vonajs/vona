@@ -81,7 +81,7 @@ export class VersionUpdate extends BeanBase {
 
   async _updateAtomsInstance() {
     // cache
-    const mapUserAtomClassRole = {};
+    const mapUserAtomClassRole: any = {};
     // atoms
     const atoms = await this.ctx.model.query(
       'select id, atomClassId, userIdCreated from aAtom where iid=? and deleted=0',

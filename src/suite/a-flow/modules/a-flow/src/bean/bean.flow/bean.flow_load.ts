@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowAssignees } from './bean.flow_assignees.js';
+import { BeanFlowStart } from './bean.flow_start.js';
 
 export class BeanFlowLoad extends BeanFlowAssignees {
   async _loadFlowInstance({ flowId, history, throwError = true }: any) {
@@ -28,7 +29,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     if (!flowDef) this.ctx.throw.module(__ThisModule__, 1001, flow.flowDefId);
     // not check atomDisabled
     // flowInstance
-    const flowInstance = this._createFlowInstance({ flowDef });
+    const flowInstance = (this as unknown as BeanFlowStart)._createFlowInstance({ flowDef });
     // load
     await flowInstance._load({ flow, history });
     // ok

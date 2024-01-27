@@ -61,7 +61,7 @@ export class BeanSummer extends BeanModuleScopeBase {
   }
 
   _collectCacheBases() {
-    const cacheBases = {};
+    const cacheBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const config = this.ctx.app.meta.configs[module.info.relativeName];
       const caches = this.ctx.bean.util.getProperty(config, 'summer.caches');

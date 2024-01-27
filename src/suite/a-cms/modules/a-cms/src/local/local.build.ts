@@ -719,7 +719,7 @@ export class LocalBuild extends BeanBase {
     // site
     const site = data.site;
     // env
-    const _env = {};
+    const _env: any = {};
     for (const name of Object.keys(data._envs)) {
       let value;
       const keys = name.split('.');
@@ -804,7 +804,7 @@ var env=${JSON.stringify(env, null, 2)};
     const self = this;
     const _csses: any[] = [];
     const _jses: any[] = [];
-    const _envs = {};
+    const _envs: any = {};
     let _pathIntermediate = await this.getPathIntermediate(site.language && site.language.current);
     _pathIntermediate = path.join(_pathIntermediate, '/');
     const _textLocale = this.getCurrentLocale({ site });
@@ -1285,7 +1285,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
   }
 
   async getFrontEnvs({ language }: any) {
-    const envs = {};
+    const envs: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       // may be more atoms
       const atoms = this.ctx.bean.util.getProperty(module, 'main.meta.base.atoms');

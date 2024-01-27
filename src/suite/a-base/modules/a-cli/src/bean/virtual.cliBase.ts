@@ -60,7 +60,7 @@ export class BeanCliBase extends BeanBase {
   _commandMeta() {
     const { command } = this.options;
     const { argv } = this.context;
-    const meta = {};
+    const meta: any = {};
     meta.info = this._commandMeta_info({ info: command.info, argv });
     meta.options = this._commandMeta_options({ options: command.options, argv });
     meta.groups = this._commandMeta_groups({ groups: command.groups, argv });
@@ -68,7 +68,7 @@ export class BeanCliBase extends BeanBase {
   }
 
   _commandMeta_groups({ groups }: any) {
-    const metaGroups = {};
+    const metaGroups: any = {};
     if (groups) {
       for (const groupName in groups) {
         const group = groups[groupName];
@@ -95,7 +95,7 @@ export class BeanCliBase extends BeanBase {
   }
 
   _commandMeta_options({ options }: any) {
-    const metaOptions = {};
+    const metaOptions: any = {};
     if (options) {
       for (const key in options) {
         const option = options[key];

@@ -1,9 +1,9 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
-const __authProvidersConfigCache = {};
-const __authProvidersConfigCache_login = {};
-const __authProvidersConfigCache_admin = {};
+const __authProvidersConfigCache: any = {};
+const __authProvidersConfigCache_login: any = {};
+const __authProvidersConfigCache_admin: any = {};
 
 @Bean()
 export class BeanAuthProviderCache extends BeanBase {
@@ -67,7 +67,7 @@ export class BeanAuthProviderCache extends BeanBase {
   }
 
   _getAuthProvidersConfigForLogin_list({ forLogin }: any) {
-    const listMap = {};
+    const listMap: any = {};
     //
     const providersConfigCache = this.getAuthProvidersConfigCache();
     for (const providerFullName in providersConfigCache) {

@@ -104,7 +104,7 @@ export class LocalSite extends BeanBase {
   }
 
   async getStats({ atomClass, languages }: any) {
-    const res = {};
+    const res: any = {};
     for (const language of languages) {
       res[language] = await this._getStatsLanguange({ atomClass, language });
     }
@@ -112,7 +112,7 @@ export class LocalSite extends BeanBase {
   }
 
   async _getStatsLanguange({ atomClass, language }: any) {
-    const stats = {};
+    const stats: any = {};
 
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
 

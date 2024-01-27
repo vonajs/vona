@@ -98,7 +98,7 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _update7Migration_tags() {
-    const mapTagIds = {};
+    const mapTagIds: any = {};
     const tags = await this.ctx.model.select('aCmsTag', {
       where: {
         iid: this.ctx.instance.id,
@@ -125,7 +125,7 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _update7Migration_cagetories() {
-    const mapCagetoryIds = {};
+    const mapCagetoryIds: any = {};
     const categories = await this.ctx.model.select('aCmsCategory', {
       where: {
         iid: this.ctx.instance.id,

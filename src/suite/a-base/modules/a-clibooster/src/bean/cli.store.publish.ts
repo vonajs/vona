@@ -169,7 +169,7 @@ export class CliStorePublish extends CliStoreBase {
   }
 
   async _zipSuiteAll({ suiteMeta, modulesMeta, needOfficial, needTrial }: any) {
-    const zipSuiteAll = {};
+    const zipSuiteAll: any = {};
     // hash
     zipSuiteAll.entityHash = this._zipSuiteAll_hash({ suiteMeta, modulesMeta });
     // zip official
@@ -184,7 +184,7 @@ export class CliStorePublish extends CliStoreBase {
   }
 
   _zipSuiteAll_hash({ suiteMeta, modulesMeta }: any) {
-    const entityHash = {};
+    const entityHash: any = {};
     entityHash.default = suiteMeta.zipSuite.hash;
     for (const moduleMeta of modulesMeta) {
       entityHash[moduleMeta.name] = moduleMeta.zipOfficial.hash;

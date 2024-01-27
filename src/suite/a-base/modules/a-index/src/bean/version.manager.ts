@@ -8,7 +8,7 @@ export class VersionManager extends BeanBase {
     // check indexes
     if (this.ctx.config.indexesCheck) {
       // combine module's indexes
-      const moduleIndexes = {};
+      const moduleIndexes: any = {};
       for (const relativeName in this.app.meta.modules) {
         const module = this.app.meta.modules[relativeName];
         if (module.resource.meta && module.resource.meta.index && module.resource.meta.index.indexes) {
@@ -42,7 +42,7 @@ export class VersionManager extends BeanBase {
     try {
       const _indexArray = indexes.split(',');
       const list = await this.ctx.model.query(`show index from ${tableName}`);
-      const map = {};
+      const map: any = {};
       for (const item of list) {
         map[item.Column_name] = item.Index_type;
       }

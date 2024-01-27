@@ -71,7 +71,7 @@ export class VersionManager extends BeanBase {
       { categoryName: '问答', language: 'zh-cn', categoryIdParent: 0, categorySorting: 2 },
       { categoryName: '公告', language: 'zh-cn', categoryIdParent: 0, categorySorting: 3 },
     ];
-    const categoryIds = {};
+    const categoryIds: any = {};
     for (const item of categories) {
       // add
       const categoryId = await this.ctx.bean.category.add({

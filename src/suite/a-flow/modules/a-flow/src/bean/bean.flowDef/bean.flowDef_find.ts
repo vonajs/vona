@@ -24,7 +24,7 @@ export class BeanFlowDefFind extends BeanFlowDefPrepare {
     options = options || {};
     const checkNodeStart = options.checkNodeStart !== false;
     const nodes: any[] = [];
-    const nodeIdCaches = {};
+    const nodeIdCaches: any = {};
     // check node start
     if (checkNodeStart) {
       const resCheck = await this._loopNodes_checkNode({ content, nodeId: nodeIdStart, nodes, nodeIdCaches, fn });

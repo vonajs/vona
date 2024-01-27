@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
+import { BeanFlowDefPrepare } from './bean.flowDef_prepare.js';
 
 export class BeanFlowDefDeploy extends BeanFlowDef0 {
   async deploy({ flowDefId, undeploy, deleting }: any) {
@@ -39,7 +40,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     let dictItemStart = null;
     let dictItemEnd = null;
     let dictItems: any[] = [];
-    const dictLocales = {};
+    const dictLocales: any = {};
     const mode = conditions.length > 1 ? 1 : 0;
     // loop
     for (const condition of conditions) {
@@ -124,7 +125,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
 
   _deploy_atomState_combineDictItemsTask({ nodeTasks, dictLocales }: any) {
     const dictItems: any[] = [];
-    const codesCache = {};
+    const codesCache: any = {};
     for (const nodeTask of nodeTasks) {
       const dictItem = this._deploy_atomState_combineDictItem({ node: nodeTask, dictLocales, codesCache });
       if (dictItem) {
@@ -182,7 +183,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     for (const node of content.process.nodes) {
       const nodeType = node.type;
       if (nodeType.indexOf('startEvent') === -1) continue;
-      const _nodeBase = this._getFlowNodeBase(nodeType);
+      const _nodeBase = (this as unknown as BeanFlowDefPrepare)._getFlowNodeBase(nodeType);
       const _nodeBaseBean = this.ctx.bean._newBean(_nodeBase.beanFullName);
       if (_nodeBaseBean.deploy) {
         const res = await _nodeBaseBean.deploy({

@@ -28,7 +28,7 @@ export class LocalComment extends BeanBase {
   }
 
   _adjuctOptions({ key, options }: any) {
-    const _options = {};
+    const _options: any = {};
     // where
     _options.where = options.where || {};
     _options.where.iid = this.ctx.instance.id;
@@ -227,7 +227,7 @@ export class LocalComment extends BeanBase {
 
   // publish
   async _publish({ atomId, commentId, replyId, replyUserId, user, mode }: any) {
-    const userIdsTo = {};
+    const userIdsTo: any = {};
     // 1. atom.userIdUpdated
     const atom = await this.ctx.model.atom.get({ id: atomId });
     const userIdUpdated = atom.userIdUpdated;

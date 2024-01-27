@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
 import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.node' })
@@ -22,7 +22,7 @@ export class FlowNodeEndEventAtom extends BeanFlowNodeBase {
   async onNodeLeave() {
     await super.onNodeLeave();
     // end
-    const atom = {};
+    const atom: any = {};
     const atomStage = this.context._atom.atomStage;
     if (atomStage === 0) {
       atom.submit = true;

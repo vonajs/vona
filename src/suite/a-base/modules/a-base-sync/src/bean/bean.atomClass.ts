@@ -137,16 +137,16 @@ export class BeanAtomClass extends BeanModuleScopeBase {
       `,
       [this.ctx.instance.id, user.id],
     );
-    const itemsMap = {};
+    const itemsMap: any = {};
     for (const item of items) {
       itemsMap[`${item.module}:${item.atomClassName}`] = item.atomClassId;
     }
     // atomClasses
     const _atomClasses = this.ctx.bean.base.atomClasses();
     // atomClassesNew
-    const atomClassesNew = {};
+    const atomClassesNew: any = {};
     for (const _moduleName in _atomClasses) {
-      const atomClassesModuleNew = {};
+      const atomClassesModuleNew: any = {};
       const _atomClassesModule = _atomClasses[_moduleName];
       for (const _atomClassName in _atomClassesModule) {
         const _atomClass = _atomClassesModule[_atomClassName];

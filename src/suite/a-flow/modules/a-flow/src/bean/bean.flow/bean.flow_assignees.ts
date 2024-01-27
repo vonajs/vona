@@ -8,7 +8,7 @@ const __VARTITLES = {
 
 export class BeanFlowAssignees extends BeanFlow0 {
   async normalizeAssignees({ users, roles, vars }: any) {
-    const assignees = {};
+    const assignees: any = {};
     assignees.users = await this._normalizeAssignees_users(users);
     assignees.roles = await this._normalizeAssignees_roles(roles);
     assignees.vars = await this._normalizeAssignees_vars(vars);
@@ -37,7 +37,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
     if (!str) return [];
     // roleIds
     const roleIds = await this._adjustAssignees_roleIds(str);
-    if (roleIds.length === 0) return [];
+    if (!roleIds || roleIds.length === 0) return [];
     // select
     return await this.ctx.bean.role.model.select({
       where: {

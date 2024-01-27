@@ -89,7 +89,7 @@ const actionMeta = {
     title: 'Custom',
   },
 };
-const actionMetaNotInline = {};
+const actionMetaNotInline: any = {};
 for (const key in actionMeta) {
   actionMetaNotInline[key] = Object.assign({}, actionMeta[key], { mode: null });
 }

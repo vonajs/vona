@@ -1,6 +1,6 @@
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-const _cacheMessageClassesUniform = {};
+const _cacheMessageClassesUniform: any = {};
 
 @Bean()
 export class BeanMessage extends BeanModuleScopeBase {

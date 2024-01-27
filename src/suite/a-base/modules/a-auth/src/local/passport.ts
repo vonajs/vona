@@ -33,7 +33,7 @@ export class LocalPassport extends BeanBase {
       }
     }
     // config
-    const config = {};
+    const config: any = {};
     config.passReqToCallback = true;
     config.failWithError = false;
     config.loginURL = this.ctx.bean.base.getAbsoluteUrl(loginURL);

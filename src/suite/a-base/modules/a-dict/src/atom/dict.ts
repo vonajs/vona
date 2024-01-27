@@ -26,7 +26,7 @@ export class AtomDict extends BeanAtomBase {
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
     // meta
-    await this._getMeta(item, atomClass);
+    await this._getMeta(item);
     // ok
     return item;
   }
@@ -36,7 +36,7 @@ export class AtomDict extends BeanAtomBase {
     await super.select({ atomClass, options, items, user });
     // meta
     for (const item of items) {
-      await this._getMeta(item, atomClass);
+      await this._getMeta(item);
     }
   }
 

@@ -1,6 +1,6 @@
 import { BeanBaseModules } from './bean.base_modules.js';
 
-const _resourceTypes = {};
+const _resourceTypes: any = {};
 
 export class BeanBaseResourceTypes extends BeanBaseModules {
   resourceTypes() {
@@ -11,7 +11,7 @@ export class BeanBaseResourceTypes extends BeanBaseModules {
   }
 
   _prepareResourceTypes() {
-    const resourceTypes = {};
+    const resourceTypes: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const moduleName = module.info.relativeName;
       const resources = module.resource.meta && module.resource.meta.base && module.resource.meta.base.resources;

@@ -1,3 +1,4 @@
+import { LocalProcedure } from '../../local/procedure.js';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
@@ -16,6 +17,6 @@ export class BeanFlow0 extends BeanBase {
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean('a-flow.local.procedure');
+    return this.ctx.bean._getBean(LocalProcedure);
   }
 }

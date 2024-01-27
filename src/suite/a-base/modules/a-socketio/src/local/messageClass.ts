@@ -1,8 +1,8 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
-const _cacheMessageClasses = {};
-const _cacheChannels = {};
+const _cacheMessageClasses: any = {};
+const _cacheChannels: any = {};
 
 @Local()
 export class LocalMessageClass extends BeanBase {
@@ -66,7 +66,7 @@ export class LocalMessageClass extends BeanBase {
   }
 
   _prepareMessageClasses() {
-    const messageClasses = {};
+    const messageClasses: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.resource.meta && module.resource.meta.socketio && module.resource.meta.socketio.messages) {
@@ -80,7 +80,7 @@ export class LocalMessageClass extends BeanBase {
   }
 
   _prepareMessageClassesModule(module, _messages) {
-    const messageClasses = {};
+    const messageClasses: any = {};
     for (const key in _messages) {
       const message = this.ctx.bean.util.extend({}, _messages[key]);
       message.info.module = module.info.relativeName;
@@ -114,7 +114,7 @@ export class LocalMessageClass extends BeanBase {
   }
 
   _prepareChannels() {
-    const channels = {};
+    const channels: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.resource.meta && module.resource.meta.socketio && module.resource.meta.socketio.channels) {
@@ -128,7 +128,7 @@ export class LocalMessageClass extends BeanBase {
   }
 
   _prepareChannelsModule(module, _channels) {
-    const channels = {};
+    const channels: any = {};
     for (const key in _channels) {
       const channel = this.ctx.bean.util.extend({}, _channels[key]);
       channel.info.module = module.info.relativeName;
