@@ -1,3 +1,4 @@
+import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
 const mparse = require('@cabloy/module-parse').default;
@@ -68,7 +69,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
     }
     // notify
     if (!atomClassBase.itemOnly) {
-      this._notifyDraftsDrafting(null, atomClass);
+      (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(null, atomClass);
     }
   }
 

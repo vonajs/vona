@@ -154,16 +154,16 @@ export class BeanDetailCopy extends BeanDetail0 {
     atomClassBaseDetail,
     atomClass,
     target,
-    /* srcKeyAtom,*/
+    srcKeyAtom: _srcKeyAtom,
     destKeyAtom,
-    /* srcAtom,*/
+    srcAtom: _srcAtom,
     destAtom,
-    options,
+    options: _options,
     user,
     detailBaseSrc,
     detailSrc,
     detailKeyDest,
-  }) {
+  }: any) {
     // create detail
     if (!detailKeyDest) {
       detailKeyDest = await this.ctx.bean.atom.create({
@@ -208,17 +208,17 @@ export class BeanDetailCopy extends BeanDetail0 {
 
   async _copyDetails_prepareStaticKey({
     atomClassDetail,
-    /* atomClassBaseDetail,*/
+    atomClassBaseDetail: _atomClassBaseDetail,
     atomClass,
-    /* target,*/
+    target: _target,
     srcKeyAtom,
-    /* destKeyAtom,*/
+    destKeyAtom: _destKeyAtom,
     srcAtom,
-    /* destAtom,*/
-    options,
-    user,
+    destAtom: _destAtom,
+    options: _options,
+    user: _user,
     detailsSrc,
-  }) {
+  }: any) {
     // detailBasesSrc
     const detailBasesSrc = await this.modelDetailBase.select({
       where: {
@@ -231,7 +231,7 @@ export class BeanDetailCopy extends BeanDetail0 {
     const detailsSrcMissing = detailsSrc.filter(item => !detailBasesId.includes(item.id));
     // create detail base
     for (const detailSrcMissing of detailsSrcMissing) {
-      const data = {
+      const data: any = {
         atomIdMain: srcKeyAtom.atomId,
         atomClassIdMain: atomClass.id,
         atomStage: srcAtom.atomStage,

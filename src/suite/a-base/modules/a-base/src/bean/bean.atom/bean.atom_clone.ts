@@ -130,7 +130,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
   }
 
   async _copy_updateAtomFields({ atomClassBase, target, srcItem, destItem }: any) {
-    const data = {
+    const data: any = {
       id: destItem.atomId,
       userIdCreated: destItem.userIdCreated,
       userIdUpdated: destItem.userIdUpdated,

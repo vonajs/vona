@@ -13,3 +13,4 @@ import 'cabloy-module-api-a-sequence';
 import 'cabloy-module-api-a-file';
 import 'cabloy-module-api-a-event';
 import 'cabloy-module-api-a-authopen';
+import 'cabloy-module-api-a-detail';

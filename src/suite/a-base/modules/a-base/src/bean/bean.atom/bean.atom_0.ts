@@ -1,5 +1,6 @@
 import { ScopeModule } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
+import { BeanAtomNotify } from './bean.atom_notify.js';
 
 export class BeanAtom0 extends BeanModuleScopeBase {
   get scope() {
@@ -61,8 +62,8 @@ export class BeanAtom0 extends BeanModuleScopeBase {
     // notify
     const item = await this.modelAtom.get({ id: key.atomId });
     const user = { id: item.userIdUpdated };
-    this._notifyDraftsDrafting(user, atomClass);
-    this._notifyDraftsFlowing(user, atomClass);
+    (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(user, atomClass);
+    (this as unknown as BeanAtomNotify)._notifyDraftsFlowing(user, atomClass);
   }
 
   async atomState({ key, atom: { atomState } }) {

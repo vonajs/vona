@@ -1,4 +1,5 @@
 import { BeanAtom0Default } from './bean.atom_0_default.js';
+import { BeanAtomNotify } from './bean.atom_notify.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -78,7 +79,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
           fn: 'delete',
         });
         // notify
-        this._notifyDraftsDrafting(null, atomClass);
+        (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(null, atomClass);
       }
       // delete formal
       await this.ctx.meta.util.executeBeanAuto({
@@ -126,7 +127,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       where: { atomId },
     });
     for (const item of items) {
-      this._notifyLabels({ id: item.userId });
+      (this as unknown as BeanAtomNotify)._notifyLabels({ id: item.userId });
     }
     if (items.length > 0) {
       await this.modelAtomLabel.delete({ atomId });

@@ -34,7 +34,7 @@ export class BeanDetailDelete extends BeanDetailCopy {
     }
   }
 
-  async _deleteDetailBase({ atomClass, key, options, user }: any) {
+  async _deleteDetailBase({ atomClass, key, options: _options, user: _user }: any) {
     await this.modelDetailBase.delete({
       detailId: key.atomId,
       detailClassId: atomClass.id,

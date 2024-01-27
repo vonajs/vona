@@ -1,4 +1,6 @@
+import { BeanAtomClone } from './bean.atom_clone.js';
 import { BeanAtomFormal } from './bean.atom_formal.js';
+import { BeanAtomNotify } from './bean.atom_notify.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -15,7 +17,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
         // create formal
         const srcItem = await this.ctx.bean.atom.read({ key: { atomId: atomIdDraft }, user });
         srcItem.atomSimple = 1; // important
-        const keyFormal = await this._copy({
+        const keyFormal = await (this as unknown as BeanAtomClone)._copy({
           target: 'formal',
           atomClass,
           srcKey: { atomId: atomIdDraft },
@@ -58,7 +60,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
         fn: 'delete',
       });
       // notify to change draft stats
-      this._notifyDraftsDrafting(null, atomClass);
+      (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(null, atomClass);
     }
     // ok
     if (atom.atomStage === 0) {

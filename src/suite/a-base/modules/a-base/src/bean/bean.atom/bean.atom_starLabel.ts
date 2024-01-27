@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Write } from './bean.atom_0_write.js';
+import { BeanAtomNotify } from './bean.atom_notify.js';
 
 export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {
@@ -63,7 +64,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     // atomLabelRef
     await this._labels_atomLabelRef({ atomId: key.atomId, labels, user });
     // notify
-    this._notifyLabels();
+    (this as unknown as BeanAtomNotify)._notifyLabels();
   }
 
   async _labels_atomLabel({ atomId, labels, user }: any) {

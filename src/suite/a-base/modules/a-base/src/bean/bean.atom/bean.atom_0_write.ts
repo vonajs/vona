@@ -1,4 +1,5 @@
 import { BeanAtom0Select } from './bean.atom_0_select.js';
+import { BeanAtomClone } from './bean.atom_clone.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -52,7 +53,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
         if (_atomBasic.atomSimple) {
           if (atomClassBase.history !== false) {
             //  formal -> history
-            await this._copy({
+            await (this as unknown as BeanAtomClone)._copy({
               target: 'history',
               atomClass,
               srcKey: { atomId: key.atomId },

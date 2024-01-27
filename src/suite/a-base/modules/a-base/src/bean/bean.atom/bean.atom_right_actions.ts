@@ -1,3 +1,5 @@
+import { BeanAtomRightCheckRightAction } from './bean.atom_right_checkRightAction.js';
+import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 import { BeanAtomRightPreferredRoles } from './bean.atom_right_preferredRoles.js';
 
 export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
@@ -48,7 +50,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
         continue;
       }
       // right check
-      const _resCheck = await this._checkRightAction_inner({
+      const _resCheck = await (this as unknown as BeanAtomRightCheckRightAction)._checkRightAction_inner({
         atom,
         atomClass,
         action: actionRes.code,
@@ -140,7 +142,9 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     if (basic) {
       const actionsRes: any[] = [];
       for (const actionName of ['write', 'delete']) {
-        const actionRes = await this.__checkRightActionBulk_fetchActions_fromMeta({
+        const actionRes = await (
+          this as unknown as BeanAtomRightCheckRightActionBulk
+        ).__checkRightActionBulk_fetchActions_fromMeta({
           atomClass,
           atomClassBase,
           action: actionName,
@@ -154,7 +158,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
       return actionsRes;
     }
     // all
-    return await this.__checkRightActionBulk_fetchActions_fromMeta({
+    return await (this as unknown as BeanAtomRightCheckRightActionBulk).__checkRightActionBulk_fetchActions_fromMeta({
       atomClass,
       atomClassBase,
       user,

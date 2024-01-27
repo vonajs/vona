@@ -1,4 +1,7 @@
+import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
+import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomSimple } from './bean.atom_simple.js';
+import { BeanAtomClone } from './bean.atom_clone.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -52,7 +55,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     const _atom = await this.ctx.bean.atom.read({ key, user: null });
     // check atom flow
     if (!ignoreFlow && flowStage === 'draft') {
-      const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom');
+      const _nodeBaseBean = this.ctx.bean._newBean(FlowNodeStartEventAtom);
       const flowInstance = await _nodeBaseBean._match({ atom: _atom, userId: _atom.userIdUpdated });
       if (flowInstance) {
         // set atom flow
@@ -87,7 +90,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     key = result.formal.key;
     item = { ...item, id: key.itemId, atomId: key.atomId, itemId: key.itemId, atomStage: 1 };
     if (flowStage === 'formal') {
-      const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom');
+      const _nodeBaseBean = this.ctx.bean._newBean(FlowNodeStartEventAtom);
       const flowInstance = await _nodeBaseBean._match({ atom: item, userId: item.userIdUpdated });
       if (flowInstance) {
         // set atom flow
@@ -96,7 +99,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
         result = {
           flow: { id: atomFlowId },
           formal: result.formal,
-        };
+        } as any;
       }
     }
     // ok
@@ -108,7 +111,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     // formal -> history
     if (item.atomIdFormal) {
       if (atomClassBase.history !== false) {
-        await this._copy({
+        await (this as unknown as BeanAtomClone)._copy({
           target: 'history',
           atomClass,
           srcKey: { atomId: item.atomIdFormal },
@@ -120,7 +123,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       }
     }
     // draft -> formal
-    const keyFormal = await this._copy({
+    const keyFormal = await (this as unknown as BeanAtomClone)._copy({
       target: 'formal',
       atomClass,
       srcKey: { atomId: item.atomId },
@@ -136,9 +139,9 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       atomIdFormal: keyFormal.atomId,
     });
     // notify
-    this._notifyDraftsDrafting(user, atomClass);
+    (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(user, atomClass);
     if (item.atomFlowId > 0) {
-      this._notifyDraftsFlowing(user, atomClass);
+      (this as unknown as BeanAtomNotify)._notifyDraftsFlowing(user, atomClass);
     }
     // get formal atom
     const atomFormal = await this.modelAtom.get({ id: keyFormal.atomId });

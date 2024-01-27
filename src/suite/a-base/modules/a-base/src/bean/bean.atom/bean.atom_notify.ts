@@ -28,7 +28,7 @@ export class BeanAtomNotify extends BeanAtomSubmit {
     });
   }
 
-  _notifyLabels(user) {
+  _notifyLabels(user?) {
     this.ctx.bean.stats.notify({
       module: __ThisModule__,
       name: 'labels',
