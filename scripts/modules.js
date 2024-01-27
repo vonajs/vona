@@ -38,50 +38,6 @@ async function main() {
   }
 }
 
-async function _moduleHandle_options({ file, module, processHelper }) {
-  const contentOld = (await fse.readFile(file)).toString();
-  // 查找constructor
-  const ast = gogocode(contentOld, { parseOptions: {} });
-  const ast1 = ast.find('async $$$0(options){$$$1}');
-  if (ast1.match.length === 0) return;
-  // const outAst = await snippet.transform(this.getAstData(ast, snippet));
-  const ast1Src = ast1.generate();
-  if (ast1Src.replace('(options)', '(_)').indexOf('options') > -1) {
-    // console.log(file);
-    return;
-  }
-  const ast2 = ast1.replace('async $_$(options){$$$1}', 'async $_$(_options){\n$$$1\n}');
-  const ast2Src = ast2.root().generate();
-  // console.log(ast2Src);
-  console.log(file);
-  await fse.outputFile(file, ast2Src);
-  await processHelper.formatFile({ fileName: file });
-  return;
-  // 查找this参数
-  const regexp = /this\.(.*?) = .*?;/g;
-  const matches = ast1Src.matchAll(regexp);
-  const outputNew1 = [];
-  const outputNew2 = [];
-  const outputNew3 = [];
-  let matchCount = 0;
-  for (const match of matches) {
-    matchCount++;
-    const classNameOld = match[1];
-    const classNameNew = `${classNameOld}: any;`;
-    if (contentOld.indexOf(classNameNew) === -1) {
-      outputNew1.push(classNameNew);
-    }
-  }
-  if (outputNew1.length === 0) {
-    return;
-  }
-  const contentNew = contentOld.replace(`constructor(`, `${outputNew1.join('\n')}\n\nconstructor(`);
-  // console.log(contentNew);
-  console.log(file);
-  // await fse.outputFile(file, contentNew);
-  // await processHelper.formatFile({ fileName: file });
-}
-
 async function _moduleHandle({ module, processHelper }) {
   const pattern = `${module.root}/src/**/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);

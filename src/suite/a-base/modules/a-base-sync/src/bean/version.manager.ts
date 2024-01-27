@@ -27,4 +27,10 @@ export class VersionManager extends BeanBase {
       await versionInit.run(options);
     }
   }
+
+  async test() {
+    const { VersionTest } = await import('./version.manager/test/test.js');
+    const versionTest = this.ctx.bean._newBean(VersionTest);
+    await versionTest.run();
+  }
 }
