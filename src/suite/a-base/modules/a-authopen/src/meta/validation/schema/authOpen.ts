@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // authOpen
 schemas.authOpen = {
   type: 'object',

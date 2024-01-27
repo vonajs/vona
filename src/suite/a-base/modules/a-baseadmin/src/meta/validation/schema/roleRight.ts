@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // roleRight
 schemas.roleRight = {
   type: 'object',

@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // app
 schemas.app = {
   type: 'object',

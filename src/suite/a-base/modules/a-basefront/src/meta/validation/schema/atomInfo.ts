@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // atomInfo
 schemas.atomInfo = {
   type: 'object',

@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // link
 schemas.link = {
   type: 'object',

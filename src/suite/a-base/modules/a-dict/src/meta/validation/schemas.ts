@@ -1,6 +1,6 @@
 import dict from './schema/dict.js';
 
-const schemas = {};
+const schemas: any = {};
 // dict
 Object.assign(schemas, dict);
 // ok

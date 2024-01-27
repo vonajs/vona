@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // activityService
 schemas.activityService = {
   type: 'object',

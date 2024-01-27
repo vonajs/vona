@@ -2,7 +2,7 @@ import startEventAtom from './schema/startEventAtom.js';
 import endEventAtom from './schema/endEventAtom.js';
 import activityUserTask from './schema/activityUserTask.js';
 
-const schemas = {};
+const schemas: any = {};
 // startEventAtom
 Object.assign(schemas, startEventAtom);
 // endEventAtom

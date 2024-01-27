@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // article
 schemas.article = {
   type: 'object',

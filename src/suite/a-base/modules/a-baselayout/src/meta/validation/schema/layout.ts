@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // layout
 schemas.layout = {
   type: 'object',

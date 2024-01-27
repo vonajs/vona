@@ -5,7 +5,7 @@ import passwordReset from './schema/passwordReset.js';
 import signin from './schema/signin.js';
 import signup from './schema/signup.js';
 
-const schemas = {};
+const schemas: any = {};
 Object.assign(schemas, emailConfirm);
 Object.assign(schemas, passwordChange);
 Object.assign(schemas, passwordForgot);

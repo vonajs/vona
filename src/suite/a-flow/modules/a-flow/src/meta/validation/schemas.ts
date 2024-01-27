@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // flowDef
 schemas.flowDef = {
   type: 'object',

@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 schemas.emailConfirm = {
   type: 'object',
   properties: {

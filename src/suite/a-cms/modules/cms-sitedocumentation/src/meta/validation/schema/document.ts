@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // document
 schemas.document = {
   type: 'object',

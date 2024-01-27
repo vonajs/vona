@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 schemas.passwordReset = {
   type: 'object',
   properties: {

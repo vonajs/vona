@@ -1,6 +1,6 @@
 import authOpen from './schema/authOpen.js';
 
-const schemas = {};
+const schemas: any = {};
 // authOpen
 Object.assign(schemas, authOpen);
 // ok

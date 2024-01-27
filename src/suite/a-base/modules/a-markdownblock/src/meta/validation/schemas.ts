@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // block iframe
 schemas.blockIFrame = {
   type: 'object',

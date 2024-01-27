@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // overtime
 schemas.overtime = {
   type: 'object',

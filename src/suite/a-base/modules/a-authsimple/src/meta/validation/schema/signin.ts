@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 schemas.signin = {
   type: 'object',
   properties: {

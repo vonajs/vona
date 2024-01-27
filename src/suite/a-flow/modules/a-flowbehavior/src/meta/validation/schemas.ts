@@ -1,6 +1,6 @@
 import overtime from './schema/overtime.js';
 
-const schemas = {};
+const schemas: any = {};
 // overtime
 Object.assign(schemas, overtime);
 // ok

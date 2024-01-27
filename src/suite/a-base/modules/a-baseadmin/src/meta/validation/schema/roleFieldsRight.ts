@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // roleFieldsRight
 schemas.roleFieldsRight = {
   type: 'object',

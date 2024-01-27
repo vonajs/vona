@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // startEventTimer
 schemas.startEventTimer = {
   type: 'object',

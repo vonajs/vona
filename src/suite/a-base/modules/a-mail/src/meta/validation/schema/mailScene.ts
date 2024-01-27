@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 schemas.mailScene = {
   type: 'object',
   properties: {

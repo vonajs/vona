@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // sequence
 schemas.sequence = {
   type: 'object',

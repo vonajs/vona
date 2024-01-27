@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 schemas.aliyun = {
   type: 'object',
   properties: {

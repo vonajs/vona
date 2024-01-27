@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // filterTabBasic
 schemas.filterTabBasic = {
   type: 'object',

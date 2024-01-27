@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // endEventAtom
 schemas.endEventAtom = {
   type: 'object',

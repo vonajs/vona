@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // dict
 schemas.dict = {
   type: 'object',

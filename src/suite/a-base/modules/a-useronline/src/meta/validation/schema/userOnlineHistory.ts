@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // userOnlineHistory
 schemas.userOnlineHistory = {
   type: 'object',

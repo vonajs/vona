@@ -2,7 +2,7 @@ import sequence from './schema/sequence.js';
 import startEventTimer from './schema/startEventTimer.js';
 import activityService from './schema/activityService.js';
 
-const schemas = {};
+const schemas: any = {};
 // sequence
 Object.assign(schemas, sequence);
 // startEventTimer

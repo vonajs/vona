@@ -1,4 +1,4 @@
-const schemas = {};
+const schemas: any = {};
 // activityUserTask
 schemas.activityUserTask = {
   type: 'object',

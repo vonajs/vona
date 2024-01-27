@@ -2,7 +2,7 @@ import filterTabBasic from './schema/filterTabBasic.js';
 import filterTabGeneral from './schema/filterTabGeneral.js';
 import layout from './schema/layout.js';
 
-const schemas = {};
+const schemas: any = {};
 // filterTabBasic
 Object.assign(schemas, filterTabBasic);
 // filterTabGeneral

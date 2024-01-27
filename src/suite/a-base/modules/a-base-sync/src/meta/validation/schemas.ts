@@ -5,7 +5,7 @@ import category from './schema/category.js';
 import resource from './schema/resource.js';
 import role from './schema/role.js';
 
-const schemas = {};
+const schemas: any = {};
 Object.assign(schemas, user);
 Object.assign(schemas, userAdmin);
 Object.assign(schemas, userChangeUserName);

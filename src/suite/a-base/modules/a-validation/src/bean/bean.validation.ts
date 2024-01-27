@@ -102,7 +102,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     if (_validator.ajv) return _validator;
     // create ajv
     const _schemas = this._adjustSchemas(_validator.schemas);
-    const schemas = {};
+    const schemas: any = {};
     for (const _schema of _schemas) {
       schemas[_schema] = meta.validation.schemas[_schema];
       if (!schemas[_schema]) throw new Error(`schema not found: ${module}:${_schema}`);
