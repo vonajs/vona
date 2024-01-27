@@ -1,4 +1,5 @@
 import { BeanAtom0Import } from './bean.atom_0_import.js';
+import { BeanAtom0Select } from './bean.atom_0_select.js';
 import { BeanAtomSchema } from './bean.atom_schema.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
@@ -42,7 +43,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     if (atomRevision !== undefined) {
       options.where['a.atomRevision'] = atomRevision;
     }
-    const list = await this.select({ atomClass, options });
+    const list = await (this as unknown as BeanAtom0Select).select({ atomClass, options });
     return list[0];
   }
 

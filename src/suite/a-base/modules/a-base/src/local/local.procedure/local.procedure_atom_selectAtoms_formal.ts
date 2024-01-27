@@ -1,4 +1,7 @@
 import { LocalProcedureAtomSelectAtomsDraft } from './local.procedure_atom_selectAtoms_draft.js';
+import { LocalProcedureUtils } from './local.procedure_utils.js';
+import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
+import { LocalProcedureUtilsRights } from './local.procedure_utils_rights.js';
 
 export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelectAtomsDraft {
   async _selectAtoms_formal({ action, options }: any) {
@@ -66,10 +69,15 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     let _resourceField, _resourceJoin;
 
     // needResourceLocale
-    const needResourceLocale = this._prepare_needResourceLocale(_where);
+    const needResourceLocale = (this as unknown as LocalProcedureUtils)._prepare_needResourceLocale(_where);
 
     // cms
-    const { _cmsField, _cmsJoin, _cmsWhere } = this._prepare_cms({ tableName, iid, mode, cms });
+    const { _cmsField, _cmsJoin, _cmsWhere } = (this as unknown as LocalProcedureUtils)._prepare_cms({
+      tableName,
+      iid,
+      mode,
+      cms,
+    });
     _where.__and__cms = _cmsWhere;
 
     // language
@@ -162,19 +170,19 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // tableName
     if (tableName) {
-      const _fields = await this._prepare_fieldsRight({ options });
+      const _fields = await (this as unknown as LocalProcedureUtilsFieldsRight)._prepare_fieldsRight({ options });
       _itemField = `${_fields},`;
       if (!atomClassBase || !atomClassBase.itemOnly) {
         _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
-        this._prepare_orders_push(_orders, ['a.id', 'asc']);
+        (this as unknown as LocalProcedureUtils)._prepare_orders_push(_orders, ['a.id', 'asc']);
       } else {
         _itemJoin = `from ${tableName} f`;
-        this._prepare_orders_push(_orders, ['f.id', 'asc']);
+        (this as unknown as LocalProcedureUtils)._prepare_orders_push(_orders, ['f.id', 'asc']);
       }
     } else {
       _itemField = '';
       _itemJoin = '';
-      this._prepare_orders_push(_orders, ['a.id', 'asc']);
+      (this as unknown as LocalProcedureUtils)._prepare_orders_push(_orders, ['a.id', 'asc']);
     }
 
     // atom
@@ -196,7 +204,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // atomClass inner
     if (!atomClass && !star && !label) {
-      _where['a.atomClassId'] = await this._prepare_atomClassIdsInner();
+      _where['a.atomClassId'] = await (this as unknown as LocalProcedureUtils)._prepare_atomClassIdsInner();
     }
     if (atomClass && !atomClassBase.itemOnly) {
       _where['a.atomClassId'] = atomClass.id;
@@ -215,7 +223,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     if (count) {
       _selectFields = 'count(*) as _count';
     } else {
-      _selectFields = this._combineFields([
+      _selectFields = (this as unknown as LocalProcedureUtils)._combineFields([
         _itemField,
         _cmsField,
         _atomField,
@@ -314,11 +322,25 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // mine
     if (mine) {
-      return await this._prepareRightMine({ iid, atomClass, atomClassBase, action, userIdWho });
+      return await (this as unknown as LocalProcedureUtilsRights)._prepareRightMine({
+        iid,
+        atomClass,
+        atomClassBase,
+        action,
+        userIdWho,
+      });
     }
 
     // right
-    return await this._prepareRight({ iid, atomClass, atomClassBase, action, userIdWho, forAtomUser, role });
+    return await (this as unknown as LocalProcedureUtilsRights)._prepareRight({
+      iid,
+      atomClass,
+      atomClassBase,
+      action,
+      userIdWho,
+      forAtomUser,
+      role,
+    });
   }
 }
 

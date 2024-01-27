@@ -6,6 +6,7 @@ export class BeanAuth extends BeanBase {
   _redisAuth: any;
 
   constructor() {
+    super();
     this._redisAuth = null;
   }
 
@@ -61,12 +62,12 @@ export class BeanAuth extends BeanBase {
     return await this.getLoginInfo();
   }
 
-  async getLoginInfo(options) {
+  async getLoginInfo(options?) {
     options = options || {};
     const needClientId = options.clientId === true;
     const isAuthOpen = this.ctx.bean.authOpen.isAuthOpen();
     // info
-    const info = {
+    const info: any = {
       user: this.ctx.state.user,
       instance: this._getInstance(),
       locales: this.ctx.bean.base.locales(),
@@ -101,7 +102,7 @@ export class BeanAuth extends BeanBase {
     // instanceConfigsFront
     const instanceConfigsFront = this.ctx.bean.instance.getInstanceConfigsFront();
     // config
-    let config = {
+    let config: any = {
       modules: instanceConfigsFront,
     };
     // config base
@@ -150,7 +151,7 @@ export class BeanAuth extends BeanBase {
   }
 
   _pruneUser({ user }: any) {
-    const _user = {
+    const _user: any = {
       op: { id: user.op.id, iid: user.op.iid, anonymous: user.op.anonymous },
     };
     if (user.agent && user.agent.id !== user.op.id) {
@@ -164,7 +165,7 @@ export class BeanAuth extends BeanBase {
 
   async serializeUser({ user }: any) {
     // _user
-    const _user = this._pruneUser({ user });
+    const _user: any = this._pruneUser({ user });
     // anonymous
     if (user.op.anonymous) {
       // not use redis

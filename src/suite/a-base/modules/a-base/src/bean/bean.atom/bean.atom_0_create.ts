@@ -1,3 +1,5 @@
+import { BeanAtom0Read } from './bean.atom_0_read.js';
+import { BeanAtom0Write } from './bean.atom_0_write.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
@@ -50,7 +52,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
       flowTaskId: options.flowTaskId,
       returnSchema: options.returnSchema,
     };
-    const resRead = await this.read({ key, atomClass, options: optionsRead, user });
+    const resRead = await (this as unknown as BeanAtom0Read).read({ key, atomClass, options: optionsRead, user });
     if (options.returnSchema) {
       return { key, item: resRead.item, schema: resRead.schema };
     }
@@ -62,7 +64,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
     // save itemId
     if (!atomClassBase.itemOnly) {
       if (itemId !== undefined) {
-        await this._update({
+        await (this as unknown as BeanAtom0Write)._update({
           atom: { id: atomId, itemId },
         });
       }

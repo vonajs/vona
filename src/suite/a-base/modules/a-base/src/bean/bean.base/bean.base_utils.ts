@@ -5,7 +5,7 @@ import path from 'path';
 
 import fse from 'fs-extra';
 
-let _hostText = null;
+let _hostText: string | null = null;
 
 export class BeanBaseUtils extends BeanBaseThemes {
   get host() {

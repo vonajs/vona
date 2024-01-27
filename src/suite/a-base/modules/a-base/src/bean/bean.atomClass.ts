@@ -69,7 +69,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     const res = await this.model.get({ module, atomClassName });
     if (res) return res;
     // data
-    const data = {
+    const data: any = {
       module,
       atomClassName,
     };

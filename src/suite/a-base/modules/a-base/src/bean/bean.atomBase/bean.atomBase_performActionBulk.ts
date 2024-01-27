@@ -57,7 +57,8 @@ export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
   async performActionBulk_policyLoop({
     keys,
     atomClass,
-    /* action,*/ item,
+    action: _action,
+    item,
     options,
     user,
     actionItem,

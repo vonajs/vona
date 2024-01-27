@@ -1,4 +1,5 @@
 import { __ThisModule__ } from '../../resource/this.js';
+import { BeanAtom0Read } from './bean.atom_0_read.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
 
 const mparse = require('@cabloy/module-parse').default;
@@ -24,7 +25,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     });
     // ok
     // get atom
-    const atom = await this.read({ key: keyDraft, atomClass, options, user });
+    const atom = await (this as unknown as BeanAtom0Read).read({ key: keyDraft, atomClass, options, user });
     // draft/formal
     const res = { key: keyDraft, atom };
     if (!atomClassBase.itemOnly && atom.atomStage === 0) return { draft: res };

@@ -72,7 +72,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       if (progressId) {
         await this.ctx.bean.progress.done({ progressId });
       }
-    } catch (err) {
+    } catch (err: any) {
       // error
       if (progressId) {
         await this.ctx.bean.progress.error({ progressId, message: err.message });

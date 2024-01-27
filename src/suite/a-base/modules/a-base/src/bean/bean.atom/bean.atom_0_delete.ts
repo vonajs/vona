@@ -1,4 +1,5 @@
 import { BeanAtom0Default } from './bean.atom_0_default.js';
+import { BeanAtomDraft } from './bean.atom_draft.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 
 const mparse = require('@cabloy/module-parse').default;
@@ -49,7 +50,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     // atom
     if (_atom.atomStage === 0) {
       // close draft
-      await this.closeDraft({ key });
+      await (this as unknown as BeanAtomDraft).closeDraft({ key });
     } else if (_atom.atomStage === 1) {
       // delete history
       const listHistory = await this.modelAtom.select({
@@ -115,7 +116,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       where: { atomId, star: 1 },
     });
     for (const item of items) {
-      this._notifyStars({ id: item.userId });
+      (this as unknown as BeanAtomNotify)._notifyStars({ id: item.userId });
     }
     if (items.length > 0) {
       await this.modelAtomStar.delete({ atomId });

@@ -3,9 +3,9 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 import uuid from 'uuid';
 import extend from '@cabloy/extend';
-const currency = require('@zhennann/currency').default;
+import currency from '@zhennann/currency';
 import moment from 'moment';
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 import eggBornUtils from 'egg-born-utils';
 import utils from '../common/utils.js';
 
@@ -39,7 +39,7 @@ export class BeanUtil extends BeanBase {
   }
 
   extend(...args) {
-    return extend(true, ...args);
+    return extend.default(true, ...args);
   }
 
   currency(options) {
@@ -150,7 +150,7 @@ export class BeanUtil extends BeanBase {
     if (!arg || typeof arg !== 'string') return arg;
     const first = arg.charAt(0);
     if (first === '/' || first === '#') return arg;
-    const moduleInfo = typeof moduleName === 'string' ? mparse.parseInfo(moduleName) : moduleName;
+    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
     return `/${moduleInfo.url}/${arg}`;
   }
 
@@ -279,9 +279,9 @@ export class BeanUtil extends BeanBase {
   hostUtil(options) {
     const self = this;
     return {
-      text(...args) {
+      text(text, ...args) {
         const locale = options && options.locale;
-        return self.ctx.text.locale(locale || self.ctx.app.config.i18n.defaultLocale, ...args);
+        return self.ctx.text.locale(locale || self.ctx.app.config.i18n.defaultLocale, text, ...args);
       },
       url(str) {
         if (str && (str.indexOf('http://') === 0 || str.indexOf('https://') === 0)) return this.escapeURL(str);

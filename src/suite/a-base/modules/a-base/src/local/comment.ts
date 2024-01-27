@@ -319,7 +319,7 @@ ${sep}
 
   async _renderContent({ atomId, content, replyContent, replyUserName }: any) {
     const fullContent = this._fullContent({ content, replyContent, replyUserName });
-    return await this.ctx.bean.markdown.render({
+    return (<any>await this.ctx.bean).markdown.render({
       host: { atomId },
       content: fullContent,
       locale: this.ctx.locale,

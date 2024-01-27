@@ -92,7 +92,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
       atomClassName: atomClass.atomClassName,
       code,
     });
-    const data = {
+    const data: any = {
       atomClassId,
       code,
       name: action.name,

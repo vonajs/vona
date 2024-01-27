@@ -6,7 +6,7 @@ export class StatsDraftsCommon extends BeanBase {
   async execute(context) {
     const { keys, provider, user } = context;
     // params
-    const params = {
+    const params: any = {
       userIdUpdated: user.id,
       atomStage: 0,
       atomClosed: 0,

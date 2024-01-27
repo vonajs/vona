@@ -34,7 +34,7 @@ export class BeanUser1 extends BeanUser0 {
       user = { id: 0 };
     }
     // write
-    const item = {
+    const item: any = {
       userName,
       realName,
       email,
@@ -152,7 +152,7 @@ export class BeanUser1 extends BeanUser0 {
 
   async selectGeneral({ params, user, pageForce = true, count = 0 }: any) {
     const { query, page } = params;
-    const options = {
+    const options: any = {
       where: {
         'f.anonymous': 0,
         'f.disabled': 0,

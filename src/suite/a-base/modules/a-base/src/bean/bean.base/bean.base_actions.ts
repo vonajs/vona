@@ -29,7 +29,7 @@ export class BeanBaseActions extends BeanBase0 {
     const actions = this.actionsBase({ module, atomClassName });
     if (name) return actions[name];
     const key = Object.keys(actions).find(key => actions[key].code === code);
-    return actions[key];
+    return actions[key!];
   }
 
   _prepareActions() {

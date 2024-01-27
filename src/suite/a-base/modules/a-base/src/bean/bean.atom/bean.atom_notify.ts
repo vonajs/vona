@@ -20,7 +20,7 @@ export class BeanAtomNotify extends BeanAtomSubmit {
     });
   }
 
-  _notifyStars(user) {
+  _notifyStars(user?) {
     this.ctx.bean.stats.notify({
       module: __ThisModule__,
       name: 'stars',

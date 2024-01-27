@@ -1,6 +1,7 @@
 import { ScopeModule } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 import { BeanAtomNotify } from './bean.atom_notify.js';
+import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 
 export class BeanAtom0 extends BeanModuleScopeBase {
   get scope() {
@@ -100,7 +101,11 @@ export class BeanAtom0 extends BeanModuleScopeBase {
   async stats({ atomIds, user }: any) {
     const list: any[] = [];
     for (const atomId of atomIds) {
-      const res = await this.checkRightRead({ atom: { id: atomId }, user, checkFlow: true });
+      const res = await (this as unknown as BeanAtomRightCheckRightRead).checkRightRead({
+        atom: { id: atomId },
+        user,
+        checkFlow: true,
+      });
       if (res) {
         list.push({
           id: atomId,

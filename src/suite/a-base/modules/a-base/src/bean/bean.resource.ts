@@ -1,7 +1,7 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-let __atomClassesResource = null;
+let __atomClassesResource: any = null;
 
 const __atomClass = {
   module: __ThisModule__,
@@ -10,20 +10,24 @@ const __atomClass = {
 
 @Bean()
 export class BeanResource extends BeanModuleScopeBase {
+  get scope() {
+    return this.getScope() as ScopeModule;
+  }
+
   get model() {
-    return this.ctx.model.module(__ThisModule__).resource;
+    return this.scope.model.resource;
   }
 
   get modelResourceLocale() {
-    return this.ctx.model.module(__ThisModule__).resourceLocale;
+    return this.scope.model.resourceLocale;
   }
 
   get modelResourceRole() {
-    return this.ctx.model.module(__ThisModule__).resourceRole;
+    return this.scope.model.resourceRole;
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean('a-base.local.procedure');
+    return this.scope.local.procedure;
   }
 
   // count

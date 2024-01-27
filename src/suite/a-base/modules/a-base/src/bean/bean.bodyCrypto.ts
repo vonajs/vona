@@ -20,7 +20,7 @@ export class BeanBodyCrypto extends BeanBase {
       if (!moduleInfo) throw new Error(`Invalid BodyCrypto JS: ${configCryptoJS}`);
       const _module = this.ctx.app.meta.modules[__ThisModule__];
       if (!_module) throw new Error(`Module Not Found: ${module}`);
-      let jsFile = path.join(_module.static.backend, configCryptoJS.substring(moduleInfo.url.length + 2));
+      let jsFile = path.join(_module.root, 'static', configCryptoJS.substring(moduleInfo.url.length + 2));
       if (this.ctx.app.meta.isProd) {
         jsFile += '.min';
       }
@@ -36,7 +36,7 @@ export class BeanBodyCrypto extends BeanBase {
     if (!body || typeof body !== 'object' || !body.crypto) return;
     // ensure
     const bodyCryptoInstance = await this.ensureBodyCrypto();
-    this.ctx.request.body = bodyCryptoInstance.decrypt(body);
+    this.ctx.request.body = (<any>bodyCryptoInstance).decrypt(body);
   }
 
   async encrypt() {
@@ -50,6 +50,6 @@ export class BeanBodyCrypto extends BeanBase {
     if (!body || typeof body !== 'object') return;
     // ensure
     const bodyCryptoInstance = await this.ensureBodyCrypto();
-    this.ctx.response.body = bodyCryptoInstance.encrypt(body);
+    this.ctx.response.body = (<any>bodyCryptoInstance).encrypt(body);
   }
 }

@@ -25,7 +25,7 @@ export class MiddlewareJsonp extends BeanBase {
       }
     }
     // jsonp
-    const fn = this.ctx.app.jsonp(options);
+    const fn = (<any>this.ctx.app).jsonp(options);
     await fn(this.ctx, next);
   }
 }

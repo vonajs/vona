@@ -41,7 +41,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     // code
     const sequence = this.ctx.bean.sequence.module(__ThisModule__);
     const flowActionCode = await sequence.next('flowAction');
-    const data = {
+    const data: any = {
       atomClassId,
       code: flowActionCode,
       name: nodeDefName,

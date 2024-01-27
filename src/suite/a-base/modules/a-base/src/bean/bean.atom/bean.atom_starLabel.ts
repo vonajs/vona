@@ -50,7 +50,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
       });
     }
     // notify
-    this._notifyStars();
+    (this as unknown as BeanAtomNotify)._notifyStars();
     // ok
     return { star, starCount };
   }

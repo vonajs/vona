@@ -1,4 +1,5 @@
 import { BeanAtomBaseCreate } from './bean.atomBase_create.js';
+import { BeanAtomBaseRead } from './bean.atomBase_read.js';
 
 const __create_atom_basic_fields = [
   'atomStage',
@@ -33,7 +34,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
     const dataGeneral = this._default_general_data({ atomClassBase, atomClass, user });
     data = Object.assign(data, dataGeneral);
     // translate
-    await this._read_handleTranslate({ item: data, atomClass, options, user });
+    await (this as unknown as BeanAtomBaseRead)._read_handleTranslate({ item: data, atomClass, options, user });
     // ok
     return data;
   }
@@ -48,11 +49,11 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
     });
     options.schema = atomSchema.schema;
     // validate
-    return await this._readValidate_schema({ schema: atomSchema.schema, item: data });
+    return await (this as unknown as BeanAtomBaseRead)._readValidate_schema({ schema: atomSchema.schema, item: data });
   }
 
   _default_general_data({ atomClassBase, atomClass, user }: any) {
-    const data = {
+    const data: any = {
       id: 0,
       atomId: 0,
       itemId: 0,

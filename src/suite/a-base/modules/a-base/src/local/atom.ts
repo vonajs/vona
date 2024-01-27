@@ -208,7 +208,7 @@ export class LocalAtom extends BeanBase {
       // background
       this.ctx.meta.util.runInBackground(async ({ ctx }) => {
         // handle next
-        const selfInstance = ctx.bean._newBean(Atom);
+        const selfInstance = ctx.bean._newBean(LocalAtom);
         await selfInstance._handleActionParams_transaction({ options, params, fn });
       });
       return { progressId };

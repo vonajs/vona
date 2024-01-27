@@ -1,5 +1,4 @@
 import { BeanBase, Local } from '@cabloy/core';
-
 import pMap from 'p-map';
 
 @Local()
@@ -18,7 +17,7 @@ export class LocalUtil extends BeanBase {
       let res;
       try {
         res = await this.performAction({ params });
-      } catch (error) {
+      } catch (error: any) {
         err = {
           code: error.code || 500,
           message: error.message,

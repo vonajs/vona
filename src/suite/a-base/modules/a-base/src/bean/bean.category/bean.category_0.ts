@@ -73,7 +73,7 @@ export class BeanCategory0 extends BeanBase {
     count = 0,
     user,
   }: {
-    atomClass;
+    atomClass?;
     language?;
     categoryId?;
     categoryName?;

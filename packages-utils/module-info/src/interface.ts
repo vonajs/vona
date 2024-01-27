@@ -30,7 +30,11 @@ export interface IModulePackage {
   eggBornModule: {
     fileVersion: number;
     dependencies: Record<string, string>;
+    theme: object;
+    icon: string;
+    locale: string;
   };
+  title: string;
   description: string;
   author: string;
   dependencies: string;

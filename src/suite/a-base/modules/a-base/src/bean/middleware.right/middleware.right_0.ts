@@ -1,5 +1,8 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
+import { MiddlewareRightAtom } from './middleware.right_atom.js';
+import { MiddlewareRightAtomClass } from './middleware.right_atomClass.js';
+import { MiddlewareRightResource } from './middleware.right_resource.js';
 
 export class MiddlewareRight0 extends BeanBase {
   get constant() {
@@ -37,12 +40,12 @@ export class MiddlewareRight0 extends BeanBase {
 
   async checkRight(type, options) {
     // atom
-    if (type === 'atom') return await this.checkAtom(options);
+    if (type === 'atom') return await (this as unknown as MiddlewareRightAtom).checkAtom(options);
 
     // atomClass
-    if (type === 'atomClass') return await this.checkAtomClass(options);
+    if (type === 'atomClass') return await (this as unknown as MiddlewareRightAtomClass).checkAtomClass(options);
 
     // resource
-    if (type === 'resource') return await this.checkResource(options);
+    if (type === 'resource') return await (this as unknown as MiddlewareRightResource).checkResource(options);
   }
 }

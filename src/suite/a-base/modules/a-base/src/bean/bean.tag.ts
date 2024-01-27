@@ -13,7 +13,7 @@ export class BeanTag extends BeanBase {
 
   async count({ atomClass, language }: any) {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
-    const where = {
+    const where: any = {
       atomClassId: atomClass.id,
     };
     if (language) {
@@ -27,7 +27,7 @@ export class BeanTag extends BeanBase {
   }
 
   async item({ atomClass, language, tagName }: any) {
-    const where = {
+    const where: any = {
       tagName,
     };
     if (language) {

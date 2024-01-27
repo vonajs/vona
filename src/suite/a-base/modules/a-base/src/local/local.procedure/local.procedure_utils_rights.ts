@@ -1,3 +1,4 @@
+import { LocalProcedureUtils } from './local.procedure_utils.js';
 import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
@@ -21,7 +22,11 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     const enableRightMine = enableRight.mine;
     if (!enableRightMine) return false;
     // roleScopesMine
-    const roleScopesMine = await this._prepare_roleScopesMineOfUser({ atomClass, action, userIdWho });
+    const roleScopesMine = await (this as unknown as LocalProcedureUtils)._prepare_roleScopesMineOfUser({
+      atomClass,
+      action,
+      userIdWho,
+    });
     // atom
     if (!atomClassBase.itemOnly) {
       return roleScopesMine ? __combineClauseRightMineAtom({ atom, userIdWho }) : false;
@@ -57,7 +62,11 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
             `);
       }
     } else {
-      const roleScopes = await this._prepare_roleScopesOfUser({ atomClass, action, userIdWho });
+      const roleScopes = await (this as unknown as LocalProcedureUtils)._prepare_roleScopesOfUser({
+        atomClass,
+        action,
+        userIdWho,
+      });
       if (roleScopes === true) return true; // pass through
       if (roleScopes === false) {
         _others = false; // should check mine
@@ -114,7 +123,11 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
             `);
       }
     } else {
-      const roleScopes = await this._prepare_roleScopesOfRole({ atomClass, action, roleIdWho });
+      const roleScopes = await (this as unknown as LocalProcedureUtils)._prepare_roleScopesOfRole({
+        atomClass,
+        action,
+        roleIdWho,
+      });
       if (roleScopes === true) return true; // pass through
       if (roleScopes === false) {
         _others = false;

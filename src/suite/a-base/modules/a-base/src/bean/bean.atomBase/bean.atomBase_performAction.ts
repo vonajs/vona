@@ -64,7 +64,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     const cmsRender = this.ctx.bean.util.getProperty(actionBase, 'params.cms.render');
     if (cmsRender) {
       // render article
-      await this.ctx.bean.cms.render._renderArticlePush({ key, inner: false });
+      await (<any>this.ctx.bean).cms.render._renderArticlePush({ key, inner: false });
     }
   }
 }

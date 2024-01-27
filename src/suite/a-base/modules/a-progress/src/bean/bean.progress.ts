@@ -3,6 +3,8 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
 export class BeanProgress extends BeanModuleScopeBase {
+  _redis: any;
+
   get configModule() {
     return this.ctx.config.module(__ThisModule__);
   }
@@ -41,7 +43,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     await this.redis.del(key);
   }
 
-  async create(options) {
+  async create(options?) {
     if (!this.ctx.state.user || !this.ctx.state.user.op) return this.ctx.throw(403);
     let progressId = options && options.progressId;
     // create

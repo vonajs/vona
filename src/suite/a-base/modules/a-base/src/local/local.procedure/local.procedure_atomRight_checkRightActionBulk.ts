@@ -12,7 +12,7 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
     const _atomActionJoin = 'from aAtomAction a';
     const _atomClassjoin = 'left join aAtomClass c on a.atomClassId=c.id';
     // _where
-    const _where = {
+    const _where: any = {
       'a.iid': iid,
       'a.bulk': 1,
       'a.atomClassId': atomClass.id,

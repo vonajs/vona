@@ -20,7 +20,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
       }
     }
     const timeEnd = new Date();
-    console.log(`load static end, pid: ${process.pid}: ${(timeEnd - timeBegin) / 1000}s`);
+    console.log(`load static end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
   }
 
   _loadAllAtomStatics_prepare() {

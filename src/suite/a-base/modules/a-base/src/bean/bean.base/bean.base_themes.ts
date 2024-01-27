@@ -15,7 +15,7 @@ export class BeanBaseThemes extends BeanBaseResourceTypes {
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.package.eggBornModule && module.package.eggBornModule.theme) {
-        const _module = {
+        const _module: any = {
           name: relativeName,
           title: module.package.title || module.info.name,
           description: this.ctx.text(module.package.description),

@@ -1,4 +1,5 @@
 import { __ThisModule__ } from '../../resource/this.js';
+import { BeanRoleOthers } from './bean.role_others.js';
 import { BeanRoleResourceRights } from './bean.role_resourceRights.js';
 
 const __atomClassRole = {
@@ -15,7 +16,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     // user, should check user right scope
     // user = { id: 0 };
     // roleId
-    roleId = await this._forceRoleId({ roleAtomId, roleId });
+    roleId = await (this as unknown as BeanRoleOthers)._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     // select
     const list = await this.ctx.bean.atom.select({
