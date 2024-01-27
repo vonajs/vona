@@ -46,15 +46,15 @@ export class BeanUtil extends BeanBase {
     return currency(options);
   }
 
-  moment(date) {
+  moment(date?) {
     return moment(date);
   }
 
-  now(fmt, locale) {
+  now(fmt?, locale?) {
     return this.formatDateTime(null, fmt, locale);
   }
 
-  today(fmt, locale) {
+  today(fmt?, locale?) {
     return this.formatDate(null, fmt, locale);
   }
 
