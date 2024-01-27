@@ -469,8 +469,8 @@ export class BeanFile extends BeanBase {
     const bExists = await fse.pathExists(destFile);
     if (bExists) return fileName;
 
-    const width = widthRequire || parseInt((file.width * heightRequire) / file.height);
-    const height = heightRequire || parseInt((file.height * widthRequire) / file.width);
+    const width = widthRequire || parseInt(String((file.width * heightRequire) / file.height));
+    const height = heightRequire || parseInt(String((file.height * widthRequire) / file.width));
 
     const srcFile = await this.ctx.bean.base.getPath(`${file.filePath}/${file.fileName}${file.fileExt}`, false);
 

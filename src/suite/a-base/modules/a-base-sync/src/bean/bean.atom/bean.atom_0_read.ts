@@ -1,5 +1,6 @@
 import { BeanAtom0Import } from './bean.atom_0_import.js';
 import { BeanAtomSchema } from './bean.atom_schema.js';
+import { BeanAtomUtils } from './bean.atom_utils.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -74,7 +75,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     // cms
     const cms = atomClassBase && atomClassBase.cms;
     // forAtomUser
-    const forAtomUser = this._checkForAtomUser(atomClass);
+    const forAtomUser = (this as unknown as BeanAtomUtils)._checkForAtomUser(atomClass);
     // options: maybe has another custom options
     options = Object.assign({}, options, {
       iid: this.ctx.instance.id,

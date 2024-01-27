@@ -89,7 +89,7 @@ export class BeanUser0 extends BeanBase {
     return _anonymousId;
   }
 
-  async check(options) {
+  async check(options?) {
     // options
     const checkUser = options && options.user;
     // check if has this.ctx.state.user

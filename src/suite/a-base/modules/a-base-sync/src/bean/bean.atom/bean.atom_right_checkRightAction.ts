@@ -1,6 +1,7 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
+import { BeanAtomUtils } from './bean.atom_utils.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
@@ -427,7 +428,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return true;
     }
     // forAtomUser
-    const forAtomUser = this._checkForAtomUser(atomClass);
+    const forAtomUser = (this as unknown as BeanAtomUtils)._checkForAtomUser(atomClass);
     // check formal/history
     return await this._checkRightAction_sql({
       userIdWho: user.id,

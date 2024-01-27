@@ -1,6 +1,6 @@
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-const __adapter = (context, chain) => {
+const __adapter = (_context, chain) => {
   const eventBean = chain;
   return {
     receiver: eventBean,

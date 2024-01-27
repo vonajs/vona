@@ -120,7 +120,7 @@ export class BeanUtil extends BeanBase {
     return this._getProperty(obj, name, sep, false);
   }
 
-  getPropertyObject(obj, name, sep) {
+  getPropertyObject(obj, name, sep?) {
     return this._getProperty(obj, name, sep, true);
   }
 

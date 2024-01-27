@@ -1,44 +1,49 @@
+import { ScopeModuleABase } from '../../index.js';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanAtom0 extends BeanModuleScopeBase {
+  get scope() {
+    return this.getScope() as ScopeModuleABase;
+  }
+
   get atomClass() {
-    return this.ctx.bean.atomClass.module(this.moduleScope);
+    return this.scope._bean.atomClass;
   }
 
   get model() {
-    return this.ctx.model.module(__ThisModule__).atom;
+    return this.scope.model.atom;
   }
 
   get modelAtom() {
-    return this.ctx.model.module(__ThisModule__).atom;
+    return this.scope.model.atom;
   }
 
   get modelAtomStar() {
-    return this.ctx.model.module(__ThisModule__).atomStar;
+    return this.scope.model.atomStar;
   }
 
   get modelLabel() {
-    return this.ctx.model.module(__ThisModule__).label;
+    return this.scope.model.label;
   }
 
   get modelAtomLabel() {
-    return this.ctx.model.module(__ThisModule__).atomLabel;
+    return this.scope.model.atomLabel;
   }
 
   get modelAtomLabelRef() {
-    return this.ctx.model.module(__ThisModule__).atomLabelRef;
+    return this.scope.model.atomLabelRef;
   }
   get modelFile() {
-    return this.ctx.model.module('a-file').file;
+    return this.bean.scope('a-file').model.file;
   }
 
   get sequence() {
-    return this.ctx.bean.sequence.module(__ThisModule__);
+    return this.scope._bean.sequence;
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean('a-base.local.procedure');
+    return this.scope.local.procedure;
   }
 
   // atom other functions
