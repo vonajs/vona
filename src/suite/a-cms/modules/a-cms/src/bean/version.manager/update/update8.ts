@@ -1,9 +1,9 @@
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run(options) {
+  async run() {
     // schemas update for 7
-    await this._update7Migration_schemas(options);
+    await this._update7Migration_schemas();
   }
   async _update7Migration_schemas() {
     let sql;

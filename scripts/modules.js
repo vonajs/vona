@@ -38,6 +38,16 @@ async function main() {
   }
 }
 
+async function _moduleHandle_super({ file, module, processHelper }) {
+  const contentOld = (await fse.readFile(file)).toString();
+  const matchExport = contentOld.match(/export class .*? extends .*? \{/);
+  if (!matchExport) {
+    // console.log(file);
+    return;
+  }
+  console.log(file);
+}
+
 async function _moduleHandle({ module, processHelper }) {
   const pattern = `${module.root}/src/**/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
@@ -56,7 +66,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_options({ file, module, processHelper });
+    await _moduleHandle_super({ file, module, processHelper });
   }
 }
 

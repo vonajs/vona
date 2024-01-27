@@ -57,7 +57,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     this._notifyDraftsFlowing(user, atomClass);
   }
 
-  async openDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }) {
+  async openDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
     if (!user) user = { id: 0 };
     let { key, atom, atomClass, atomClassBase } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,

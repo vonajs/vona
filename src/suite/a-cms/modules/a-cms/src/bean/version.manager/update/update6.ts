@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run() {
+  async run(options) {
     // alter table: aCmsArticle
     let sql = `
         ALTER TABLE aCmsArticle

@@ -5,7 +5,7 @@ import utils from '../../../common/utils.js';
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run() {
+  async run(options) {
     // alter table: aCmsCategory
     let sql = `
       ALTER TABLE aCmsCategory

@@ -19,6 +19,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'startup'
   | 'version'
   | 'middleware'
+  | 'event'
   | 'local.flow'
   | 'local.context'
   | 'flow.node'

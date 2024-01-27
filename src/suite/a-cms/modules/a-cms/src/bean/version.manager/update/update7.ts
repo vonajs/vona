@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run() {
+  async run(options) {
     // update cms blocks
     await this.ctx.model.query(`
       update aCmsContent set content = replace (content,'cms-pluginblock:audio','cms-pluginblock:blockAudio') where content like '%cms-pluginblock:audio%'
