@@ -15,7 +15,7 @@ export class BeanAuthProviderBase extends BeanBase {
     this.providerScene = providerScene;
   }
   // should be overrided
-  async getConfigDefault() {
+  async getConfigDefault(): Promise<any> {
     throw new Error('getConfigDefault not implemented');
   }
   //
@@ -34,7 +34,7 @@ export class BeanAuthProviderBase extends BeanBase {
     throw new Error('getStrategy not implemented');
   }
   // should be overrided
-  async onVerify(/* ...args */) {
+  async onVerify(..._args: any): Promise<any> {
     throw new Error('onVerify not implemented');
   }
   get configProviderCache() {
