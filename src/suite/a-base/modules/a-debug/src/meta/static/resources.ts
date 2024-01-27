@@ -5,7 +5,7 @@ import widgets from './resource/widgets.js';
 import blocks from './resource/blocks.js';
 import deprecateds from './resource/deprecateds.js';
 
-let resources = [];
+let resources: any[] = [];
 resources = resources.concat(functions);
 resources = resources.concat(menus);
 resources = resources.concat(mines);

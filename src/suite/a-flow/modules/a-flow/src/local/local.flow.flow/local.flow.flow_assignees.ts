@@ -4,7 +4,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
   async _parseAssignees({ nodeInstance, assignees }: any) {
     const { users, roles, vars } = assignees;
     // init
-    let userIds = [];
+    let userIds: any[] = [];
 
     // 1. users
     const _users = await this._parseAssignees_users(users);
@@ -41,7 +41,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     // roleIds
     const roleIds = await this.ctx.bean.flow._adjustAssignees_roleIds(str);
     // users
-    let users = [];
+    let users: any[] = [];
     for (const roleId of roleIds) {
       const list = await this.ctx.bean.role.usersOfRoleParent({ roleId, disabled: 0, removePrivacy: true });
       users = users.concat(list.map(item => item.id));
@@ -55,7 +55,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     // vars
     const _vars = await this.ctx.bean.flow._adjustAssignees_vars(vars);
     // users
-    let users = [];
+    let users: any[] = [];
     for (const _var of _vars) {
       const userId = await this._parseUserVar({ nodeInstance, _var });
       if (userId) {

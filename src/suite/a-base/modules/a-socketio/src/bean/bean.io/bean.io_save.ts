@@ -26,7 +26,7 @@ export class BeanIoSave extends BeanIoPush {
     // messageId
     const messageId = message.id;
     // message syncs
-    let messageSyncs = [];
+    let messageSyncs: any[] = [];
     // saveLimit
     const saveLimit = this.ctx.config.module(__ThisModule__).message.sync.saveLimit;
     // sender

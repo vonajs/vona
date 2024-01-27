@@ -48,7 +48,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     const metaAtomClass = _module.main.meta.base.atoms[atomClass.atomClassName];
     const metaActions = metaAtomClass.actions;
     // actions
-    let actionsRes = [];
+    let actionsRes: any[] = [];
     if (action) {
       const actionBase = this.ctx.bean.base.action({
         module: atomClass.module,

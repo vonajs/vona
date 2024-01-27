@@ -38,7 +38,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     // vars
     let dictItemStart = null;
     let dictItemEnd = null;
-    let dictItems = [];
+    let dictItems: any[] = [];
     const dictLocales = {};
     const mode = conditions.length > 1 ? 1 : 0;
     // loop
