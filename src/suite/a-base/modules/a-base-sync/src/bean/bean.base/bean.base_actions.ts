@@ -36,10 +36,10 @@ export class BeanBaseActions extends BeanBase0 {
     const actions = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
-      if (module.main.meta && module.main.meta.base && module.main.meta.base.atoms) {
+      if (module.resource.meta && module.resource.meta.base && module.resource.meta.base.atoms) {
         const res = {};
-        for (const atomClassName in module.main.meta.base.atoms) {
-          const res2 = this._prepareActionsAtomClass(module, module.main.meta.base.atoms[atomClassName]);
+        for (const atomClassName in module.resource.meta.base.atoms) {
+          const res2 = this._prepareActionsAtomClass(module, module.resource.meta.base.atoms[atomClassName]);
           if (Object.keys(res2).length > 0) {
             res[atomClassName] = res2;
           }

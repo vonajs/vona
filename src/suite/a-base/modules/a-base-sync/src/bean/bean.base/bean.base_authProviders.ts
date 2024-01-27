@@ -14,7 +14,7 @@ export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
     const authProviders = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const relativeName = module.info.relativeName;
-      let metaAuth = module.main.meta && module.main.meta.auth;
+      let metaAuth = module.resource.meta && module.resource.meta.auth;
       if (!metaAuth) continue;
       if (typeof metaAuth === 'function') {
         metaAuth = metaAuth(this.ctx.app);

@@ -116,7 +116,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
 
   async validatorSearch({ atomClass }: any) {
     const _module = this.ctx.app.meta.modules[atomClass.module];
-    const validator = _module.main.meta.base.atoms[atomClass.atomClassName].search.validator;
+    const validator = _module.resource.meta.base.atoms[atomClass.atomClassName].search.validator;
     if (!validator) return null;
     if (typeof validator === 'string') {
       return { module: atomClass.module, validator };

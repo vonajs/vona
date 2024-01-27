@@ -92,7 +92,8 @@ export class BeanSequence extends BeanModuleScopeBase {
   _collectSequences() {
     const sequences = {};
     for (const module of this.ctx.app.meta.modulesArray) {
-      const providers = module.main.meta && module.main.meta.sequence && module.main.meta.sequence.providers;
+      const providers =
+        module.resource.meta && module.resource.meta.sequence && module.resource.meta.sequence.providers;
       if (!providers) continue;
       for (const key in providers) {
         const provider = providers[key];

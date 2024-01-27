@@ -90,7 +90,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   _prepareFlowBehaviorBases() {
     const flowBehaviorBases = {};
     for (const module of this.ctx.app.meta.modulesArray) {
-      const behaviors = module.main.meta && module.main.meta.flow && module.main.meta.flow.behaviors;
+      const behaviors = module.resource.meta && module.resource.meta.flow && module.resource.meta.flow.behaviors;
       if (!behaviors) continue;
       for (const key in behaviors) {
         const behavior = behaviors[key];
@@ -116,7 +116,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   _prepareFlowNodeBases() {
     const flowNodeBases = {};
     for (const module of this.ctx.app.meta.modulesArray) {
-      const nodes = module.main.meta && module.main.meta.flow && module.main.meta.flow.nodes;
+      const nodes = module.resource.meta && module.resource.meta.flow && module.resource.meta.flow.nodes;
       if (!nodes) continue;
       for (const key in nodes) {
         const node = nodes[key];
@@ -153,7 +153,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   _prepareFlowEdgeBases() {
     const flowEdgeBases = {};
     for (const module of this.ctx.app.meta.modulesArray) {
-      const edges = module.main.meta && module.main.meta.flow && module.main.meta.flow.edges;
+      const edges = module.resource.meta && module.resource.meta.flow && module.resource.meta.flow.edges;
       if (!edges) continue;
       for (const key in edges) {
         const edge = edges[key];

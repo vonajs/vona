@@ -11,8 +11,8 @@ export class VersionManager extends BeanBase {
       const moduleIndexes = {};
       for (const relativeName in this.app.meta.modules) {
         const module = this.app.meta.modules[relativeName];
-        if (module.main.meta && module.main.meta.index && module.main.meta.index.indexes) {
-          moduleIndexes[relativeName] = module.main.meta.index.indexes;
+        if (module.resource.meta && module.resource.meta.index && module.resource.meta.index.indexes) {
+          moduleIndexes[relativeName] = module.resource.meta.index.indexes;
         }
       }
       // combine indexes all
