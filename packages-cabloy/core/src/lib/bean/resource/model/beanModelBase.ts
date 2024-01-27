@@ -142,17 +142,17 @@ export class BeanModelBase extends BeanModelBaseInner {
   }
 
   __getCacheInstance() {
-    return this.ctx.bean.summer.getCache(this.__cacheName);
+    return (<any>this.ctx.bean).summer.getCache(this.__cacheName);
   }
 
   async clearCache() {
     if (!this.__cacheExists()) return;
-    await this.ctx.bean.summer.clear(this.__cacheName);
+    await (<any>this.ctx.bean).summer.clear(this.__cacheName);
   }
 
   __cacheExists() {
     if (!this.__cacheName) return false;
-    const cachaBase = this.ctx.bean.summer._findCacheBase({
+    const cachaBase = (<any>this.ctx.bean).summer._findCacheBase({
       module: this.__cacheName.module,
       name: this.__cacheName.name,
     });

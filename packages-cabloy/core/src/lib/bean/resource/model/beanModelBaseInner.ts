@@ -125,6 +125,82 @@ export class BeanModelBaseInner extends BeanBase {
       this._rowCheck(row);
     }
   }
+
+  /////////////
+
+  async query(...args) {
+    return await this.ctx.db.query(...args);
+  }
+
+  async queryOne(...args) {
+    return await this.ctx.db.queryOne(...args);
+  }
+
+  async select(...args) {
+    const _args = [] as any;
+    if (this.table) _args.push(this.table);
+    for (const arg of args) _args.push(arg);
+    _args[1] = _args[1] || {};
+    _args[1].where = _args[1].where || {};
+    this._rowCheck(_args[1].where);
+    return await this.ctx.db.select(..._args);
+  }
+
+  async count(...args) {
+    const _args = [] as any;
+    if (this.table) _args.push(this.table);
+    for (const arg of args) _args.push(arg);
+    _args[1] = _args[1] || {};
+    this._rowCheck(_args[1]);
+    return await this.ctx.db.count(..._args);
+  }
+
+  async get(...args) {
+    // console.log(this.constructor.name, arguments);
+    const _args = [] as any;
+    if (this.table) _args.push(this.table);
+    for (const arg of args) _args.push(arg);
+    _args[1] = _args[1] || {};
+    // if (_args[1].id) {
+    //   return this.ctx.db[method].apply(this.ctx.db, _args);
+    // }
+    this._rowCheck(_args[1]);
+    return await this.ctx.db.get(..._args);
+  }
+
+  async insert(...args) {
+    if (args.length === 0) {
+      args.push({});
+    }
+    if (this.table) {
+      args.unshift(this.table);
+    }
+    this._insertRowsCheck(args[1]);
+    return await this.ctx.db.insert(...args);
+  }
+
+  async update(...args) {
+    const _args = [] as any;
+    if (this.table) _args.push(this.table);
+    for (const arg of args) _args.push(arg);
+    if (_args[2] && _args[2].where) {
+      this._rowCheck(_args[2].where);
+    }
+    return await this.ctx.db.update(..._args);
+  }
+
+  async delete(...args) {
+    const _args = [] as any;
+    if (this.table) _args.push(this.table);
+    for (const arg of args) _args.push(arg);
+    _args[1] = _args[1] || {};
+    this._rowCheck(_args[1]);
+    if (this.table && !this.disableDeleted) {
+      const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.db._where(_args[1]);
+      return this.ctx.db.query(sql);
+    }
+    return await this.ctx.db.delete(..._args);
+  }
 }
 
 [
@@ -137,13 +213,11 @@ export class BeanModelBaseInner extends BeanBase {
   '_where',
   '_orders',
   'raw',
-  'query',
-  'queryOne',
   '_query',
   '_selectColumns',
   '_limit',
 ].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
+  Object.defineProperty(BeanModelBaseInner.prototype, method, {
     get() {
       if (is.function(this.ctx.db[method])) {
         return function (this: any, ...args) {
@@ -152,108 +226,6 @@ export class BeanModelBaseInner extends BeanBase {
       }
       // property
       return this.ctx.db[method];
-    },
-  });
-});
-
-['insert'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        if (args.length === 0) {
-          args.push({});
-        }
-        if (this.table) {
-          args.unshift(this.table);
-        }
-        this._insertRowsCheck(args[1]);
-        return this.ctx.db[method](...args);
-      };
-    },
-  });
-});
-
-['update'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        if (_args[2] && _args[2].where) {
-          this._rowCheck(_args[2].where);
-        }
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['delete'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        this._rowCheck(_args[1]);
-        if (this.table && !this.disableDeleted) {
-          const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.db._where(_args[1]);
-          return this.ctx.db.query(sql);
-        }
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['count'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        this._rowCheck(_args[1]);
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['get'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        // console.log(this.constructor.name, arguments);
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        // if (_args[1].id) {
-        //   return this.ctx.db[method].apply(this.ctx.db, _args);
-        // }
-        this._rowCheck(_args[1]);
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['select'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        _args[1].where = _args[1].where || {};
-        this._rowCheck(_args[1].where);
-        return this.ctx.db[method](..._args);
-      };
     },
   });
 });
