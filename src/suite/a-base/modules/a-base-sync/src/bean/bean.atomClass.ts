@@ -198,7 +198,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     return !!res;
   }
 
-  async checkRightAtomClassActionOfUser({ atomClass, action, user, excludeMine, onlyMine }) {
+  async checkRightAtomClassActionOfUser({ atomClass, action, user, excludeMine, onlyMine }: any) {
     if (!user || user.id === 0) return true;
     const atomClassId = await this.getAtomClassId(atomClass);
     const clauseExcludeMine = excludeMine ? 'and scope<>0' : '';

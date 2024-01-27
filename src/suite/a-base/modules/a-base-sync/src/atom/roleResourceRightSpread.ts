@@ -59,7 +59,9 @@ export class AtomRoleResourceRightSpread extends BeanAtomBase {
     this.ctx.throw(403);
   }
 
-  _getMeta(/* item, options*/) {
+  _getMeta(item, options) {
+    item;
+    options;
     // layout: list/table/mobile/pc
     // const layout = options && options.layout;
     // meta

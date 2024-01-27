@@ -2,7 +2,7 @@ import { BeanRoleBase } from './bean.role_base.js';
 
 export class BeanRoleAtomRights extends BeanRoleBase {
   // add role right
-  async addRoleRight({ roleAtomId, roleId, atomClass, atomClassId, action, scope, user, roleRightId }) {
+  async addRoleRight({ roleAtomId, roleId, atomClass, atomClassId, action, scope, user, roleRightId }: any) {
     // atomClassId
     if (!atomClassId) {
       atomClass = await this.ctx.bean.atomClass.get(atomClass);
