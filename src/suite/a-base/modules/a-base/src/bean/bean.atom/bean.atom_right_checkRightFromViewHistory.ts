@@ -5,7 +5,7 @@ import { BeanAtomSchema } from './bean.atom_schema.js';
 
 export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRightFormAction {
   async _checkRightFromViewHistory({
-    /* key,*/
+    key: _key,
     atom,
     atomClass,
     atomClassBase,
@@ -89,10 +89,10 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
   async _checkRightFromViewHistory_prepareAtomSchema_stash({
     atomId,
     mode,
-    /* fromViewHistory,*/
+    fromViewHistory: _fromViewHistory,
     atomClass,
     user,
-    /* throwError,*/
+    throwError: _throwError,
   }) {
     // check right: formAction
     // const options = Object.assign({}, options, {

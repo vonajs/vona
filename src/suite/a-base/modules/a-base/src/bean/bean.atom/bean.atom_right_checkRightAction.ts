@@ -1,9 +1,14 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
+import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
+import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
+import { BeanAtomRightCheckRightFlowTask } from './bean.atom_right_checkRightFlowTask.js';
+import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkRightFromViewHistory.js';
+import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   async checkRightAction({
@@ -35,7 +40,12 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       // const createDelay = this.ctx.bean.atomAction.getCreateDelay({ atomClass });
       // if (!createDelay) this.ctx.throw(403);
       // check if create
-      return await this.checkRightActionBulk({ atomClass, action: 1, user, options });
+      return await (this as unknown as BeanAtomRightCheckRightActionBulk).checkRightActionBulk({
+        atomClass,
+        action: 1,
+        user,
+        options,
+      });
     }
     // others
     if (!atom) this.ctx.throw(403);
@@ -105,7 +115,9 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (!_atom) this.ctx.throw.module(__ThisModule__, 1002);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check fromViewHistory
-    const rightFromViewHistory = await this._checkRightFromViewHistory({
+    const rightFromViewHistory = await (
+      this as unknown as BeanAtomRightCheckRightFromViewHistory
+    )._checkRightFromViewHistory({
       key: { atomId: atom.atomId },
       atom,
       atomClass,
@@ -138,7 +150,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFormAction;
     }
     // check flowTaskRight
-    const rightFlowTask = await this._checkRightFlowTask({
+    const rightFlowTask = await (this as unknown as BeanAtomRightCheckRightFlowTask)._checkRightFlowTask({
       key: { atomId: atom.atomId },
       atomClass,
       atomClassBase,
@@ -165,7 +177,13 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (!detailRightInherit) return null;
     // special for read
     if (action === 2) {
-      return await this._checkRightRead_normal({ _atom, atomClass, user, checkFlow, options });
+      return await (this as unknown as BeanAtomRightCheckRightRead)._checkRightRead_normal({
+        _atom,
+        atomClass,
+        user,
+        checkFlow,
+        options,
+      });
     }
     // check if itemOnly
     if (atomClassBase.itemOnly) {
@@ -202,24 +220,36 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return null;
     }
     // stage
-    const _checkStage = this._checkRightAction_checkStage({ _atom, actionBase });
+    const _checkStage = (this as unknown as BeanAtomRightCheckRightActionEnable)._checkRightAction_checkStage({
+      _atom,
+      actionBase,
+    });
     if (_checkStage !== true) {
       return _checkStage;
     }
     // actionBase.enableOnStatic
-    const _enableOnStatic = this._checkRightAction_enableOnStatic({ _atom, action, actionBase, user });
+    const _enableOnStatic = (this as unknown as BeanAtomRightCheckRightActionEnable)._checkRightAction_enableOnStatic({
+      _atom,
+      action,
+      actionBase,
+      user,
+    });
     if (_enableOnStatic !== true) {
       return _enableOnStatic;
     }
     // viewWorkflow
     if (action === 16 && _atom.atomFlowId === 0) return null;
     // actionBase.enableOnAtomState
-    const _enableOnAtomState = this._checkRightAction_enableOnAtomState({ _atom, actionBase });
+    const _enableOnAtomState = (
+      this as unknown as BeanAtomRightCheckRightActionEnable
+    )._checkRightAction_enableOnAtomState({ _atom, actionBase });
     if (_enableOnAtomState !== true) {
       return _enableOnAtomState;
     }
     // actionBase.enableOnAtomStateReverse
-    const _enableOnAtomStateReverse = this._checkRightAction_enableOnAtomStateReverse({ _atom, actionBase });
+    const _enableOnAtomStateReverse = (
+      this as unknown as BeanAtomRightCheckRightActionEnable
+    )._checkRightAction_enableOnAtomStateReverse({ _atom, actionBase });
     if (_enableOnAtomStateReverse !== true) {
       return _enableOnAtomStateReverse;
     }
@@ -320,7 +350,9 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return null;
     }
     // 2. flow
-    const _enableOnFlowing = await this._checkRightAction_enableOnFlowing({
+    const _enableOnFlowing = await (
+      this as unknown as BeanAtomRightCheckRightActionEnable
+    )._checkRightAction_enableOnFlowing({
       actionBase,
       atomClassBase,
       _atom,
@@ -393,12 +425,17 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       if (flow) return _atom;
     }
     // check enableOnOpened
-    const _enableOnOpened = this._checkRightAction_enableOnOpened({ _atomDraft, actionBase });
+    const _enableOnOpened = (this as unknown as BeanAtomRightCheckRightActionEnable)._checkRightAction_enableOnOpened({
+      _atomDraft,
+      actionBase,
+    });
     if (_enableOnOpened !== true) {
       return _enableOnOpened;
     }
     // flow
-    const _enableOnFlowing = await this._checkRightAction_enableOnFlowing({
+    const _enableOnFlowing = await (
+      this as unknown as BeanAtomRightCheckRightActionEnable
+    )._checkRightAction_enableOnFlowing({
       actionBase,
       atomClassBase,
       _atom,
@@ -408,7 +445,9 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return _enableOnFlowing;
     }
     // enable/disable
-    const _enableOnAtomDisabled = this._checkRightAction_enableOnAtomDisabled({ _atom, actionBase });
+    const _enableOnAtomDisabled = (
+      this as unknown as BeanAtomRightCheckRightActionEnable
+    )._checkRightAction_enableOnAtomDisabled({ _atom, actionBase });
     if (_enableOnAtomDisabled !== true) {
       return _enableOnAtomDisabled;
     }

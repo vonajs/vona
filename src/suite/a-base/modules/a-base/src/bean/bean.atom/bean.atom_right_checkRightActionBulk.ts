@@ -91,7 +91,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
   }
 
   async __checkRightActionBulk_fetchActions_fromDb({ atomClass, atomClassBase, action, user }: any) {
-    const params = {
+    const params: any = {
       iid: this.ctx.instance.id,
       userIdWho: user.id,
       atomClass,
