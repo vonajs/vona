@@ -1,8 +1,8 @@
-import { BeanAtom0 } from './bean.atom_0.js';
+import { BeanAtomUtils } from './bean.atom_utils.js';
 
 const mparse = require('@cabloy/module-parse').default;
 
-export class BeanAtom0Create extends BeanAtom0 {
+export class BeanAtom0Create extends BeanAtomUtils {
   // create
   async create({ atomClass, atomStage, roleIdOwner, item, options, createOptions, user }: any) {
     options = options || {};

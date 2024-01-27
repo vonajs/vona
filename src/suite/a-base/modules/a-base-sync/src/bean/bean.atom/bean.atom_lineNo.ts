@@ -1,6 +1,7 @@
 import { BeanAtomUtils } from './bean.atom_utils.js';
+import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
-export class BeanAtomLineNo extends BeanAtomUtils {
+export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
   async moveUp({ key, atomClass, options, user }: any) {
     return await this._moveLineNo({ key, atomClass, options, user, direction: 'up' });
   }

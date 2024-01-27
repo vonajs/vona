@@ -1,7 +1,8 @@
 import { __ThisModule__ } from '../../resource/this.js';
-import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
+import { BeanAtom0 } from './bean.atom_0.js';
+import { BeanAtom0Read } from './bean.atom_0_read.js';
 
-export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
+export class BeanAtomUtils extends BeanAtom0 {
   async _prepareAtomClassAndAtomClassBase({ key, atomClass, throwWhenEmpty = true }: any) {
     const atomId = key.atomId;
     // atomClass
@@ -89,7 +90,7 @@ export class BeanAtomUtils extends BeanAtomRightDetailRightInherit {
         atom = await modelItem.get({ id: atomId });
       } else {
         // not use .read for infinite loop
-        atom = await this._get({ key, atomClass });
+        atom = await (this as unknown as BeanAtom0Read)._get({ key, atomClass });
       }
     } else {
       atom = await this.modelAtom.get({ id: atomId, atomClassId: atomClass.id });
