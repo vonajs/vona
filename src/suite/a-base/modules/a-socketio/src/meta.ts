@@ -8,7 +8,7 @@ const meta = {
   validation: {
     validators: {},
     keywords: {},
-    schemas: {},
+    schemas,
   },
   socketio: {
     messages: {

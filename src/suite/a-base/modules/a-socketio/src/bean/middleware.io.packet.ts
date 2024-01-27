@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'middleware.io' })
 export class MiddlewareIoPacket extends BeanBase {
-  async execute(options, packet, next) {
+  async execute(_options, packet, next) {
     const eventName = packet[0];
     if (eventName === 'performAction') {
       await this._performAction({ params: packet[1] });
@@ -37,7 +37,7 @@ export class MiddlewareIoPacket extends BeanBase {
           data,
         },
       });
-    } catch (err) {
+    } catch (err: any) {
       this.ctx.socket.emit('performAction-callback', {
         id,
         result: {

@@ -1,259 +1,161 @@
-import is from 'is-type-of';
-import { BeanBase } from '../../beanBase.js';
-import { IModelOptions } from './type.js';
-import { appResource } from '../../../core/resource.js';
-import { IDecoratorModelOptions } from '../../../decorator/index.js';
+import { BeanModelBaseInner } from './beanModelBaseInner.js';
 
-let __columns = {};
-
-export class BeanModelBase extends BeanBase {
-  private get __modelOptions() {
-    const beanOptions = appResource.getBean((<any>this).__beanFullName__);
-    return beanOptions?.options as IDecoratorModelOptions;
+export class BeanModelBase extends BeanModelBaseInner {
+  get __cacheName() {
+    return this.options.cacheName;
   }
 
-  get table(): string {
-    return this.__modelOptions.table;
+  get __cacheKeyAux() {
+    return this.options.cacheKeyAux;
   }
 
-  get options(): IModelOptions {
-    return this.__modelOptions.options;
+  get __cacheNotKey() {
+    return this.options.cacheNotKey !== false;
   }
 
-  get disableDeleted() {
-    return this.options.disableDeleted === undefined
-      ? this.app.config.model.disableDeleted
-      : this.options.disableDeleted;
+  async mget(ids) {
+    if (!this.__cacheExists()) {
+      return await this.__mget_select(ids);
+    }
+    // cache
+    const cache = this.__getCacheInstance();
+    return await cache.mget(ids, {
+      fn_mget: async keys => {
+        return await this.__mget_select(keys);
+      },
+    });
   }
 
-  get disableInstance() {
-    return this.options.disableInstance === undefined
-      ? this.app.config.model.disableInstance
-      : this.options.disableInstance;
+  async get(where, ...args) {
+    if (!this.__cacheExists()) {
+      return await super.get(where, ...args);
+    }
+    if (where.id && typeof where.id === 'object') {
+      // for example: id: { op: '<', val: flowNodeId },
+      return await super.get(where, ...args);
+    }
+    if (!this.__checkCacheKeyValid(where)) {
+      if (this.__cacheNotKey) {
+        return await this.__get_notkey(where, ...args);
+      }
+      return await super.get(where, ...args);
+    }
+    return await this.__get_key(where, ...args);
   }
 
-  async columns(tableName?: string) {
-    tableName = tableName || this.table;
-    let columns = __columns[tableName];
-    if (!columns) {
-      const list = await this.ctx.db.query(`show columns from ${this.ctx.db.format('??', tableName)}`);
-      columns = __columns[tableName] = {};
-      for (const item of list) {
-        columns[item.Field] = item;
+  async update(where, ...args) {
+    if (!this.__cacheExists()) {
+      return await super.update(where, ...args);
+    }
+    const res = await super.update(where, ...args);
+    await this.__deleteCache_key(where);
+    return res;
+  }
+
+  async delete(where, ...args) {
+    if (!this.__cacheExists()) {
+      return await super.delete(where, ...args);
+    }
+    const res = await super.delete(where, ...args);
+    await this.__deleteCache_key(where);
+    return res;
+  }
+
+  async __mget_select(keys) {
+    const items = await this.select({
+      where: {
+        id: keys,
+      },
+    });
+    items.sort((a, b) => {
+      const indexA = keys.indexOf(a.id);
+      const indexB = keys.indexOf(b.id);
+      return indexA - indexB;
+    });
+    return items;
+  }
+
+  async __get_notkey(where, ...args) {
+    // cache
+    const cache = this.__getCacheInstance();
+    const data = await cache.get(where, {
+      fn_get: async () => {
+        return await super.get(where, { columns: ['id'] });
+      },
+      ignoreNull: true,
+    });
+    if (!data) return data;
+    // check if exists and valid
+    const data2 = await this.__get_key({ id: data.id }, ...args);
+    if (data2 && this.__checkCacheNotKeyDataValid(where, data2)) {
+      return data2;
+    }
+    // delete cache
+    await this.__deleteCache_notkey(where);
+    // get again
+    return await this.__get_notkey(where, ...args);
+  }
+
+  async __get_key(where, ...args) {
+    // cache
+    const cache = this.__getCacheInstance();
+    return await cache.get(where.id, {
+      fn_get: async () => {
+        // where: maybe contain aux key
+        return await super.get(where, ...args);
+      },
+    });
+  }
+
+  __checkCacheKeyValid(where) {
+    let keys = Object.keys(where);
+    if (this.__cacheKeyAux) {
+      keys = keys.filter(item => item !== this.__cacheKeyAux);
+    }
+    return keys.length === 1 && keys[0] === 'id';
+  }
+
+  __checkCacheNotKeyDataValid(where, data) {
+    for (const key in where) {
+      const a = where[key];
+      const b = data[key];
+      if (a && b && typeof a === 'string' && typeof b === 'string') {
+        if (a.toLowerCase() !== b.toLowerCase()) return false;
+      } else if (typeof a === 'boolean' || typeof b === 'boolean') {
+        if (Boolean(a) !== Boolean(b)) return false;
+      } else {
+        if (a !== b) return false;
       }
     }
-    return columns;
+    return true;
   }
 
-  columnsClear(tableName) {
-    tableName = tableName || this.table;
-    const exists = __columns[tableName];
-    delete __columns[tableName];
-    return exists;
+  async __deleteCache_key(where) {
+    if (!where.id) return;
+    const cache = this.__getCacheInstance();
+    await cache.del(where.id);
   }
 
-  columnsClearAll() {
-    const exists = Object.keys(__columns).length > 0;
-    __columns = {};
-    return exists;
+  async __deleteCache_notkey(where) {
+    const cache = this.__getCacheInstance();
+    await cache.del(where);
   }
 
-  async prepareData(item) {
-    // columns
-    const columns = await this.columns();
-    // data
-    const data = {};
-    for (const columnName in columns) {
-      if (item[columnName] !== undefined) {
-        data[columnName] = item[columnName];
-      }
-    }
-    return data;
+  __getCacheInstance() {
+    return this.ctx.bean.summer.getCache(this.__cacheName);
   }
 
-  async default(data) {
-    data = data || {};
-    // columns
-    const columns = await this.columns();
-    for (const columnName in columns) {
-      const column = columns[columnName];
-      data[columnName] = this._coerceTypeOfDefault(column);
-    }
-    return data;
+  async clearCache() {
+    if (!this.__cacheExists()) return;
+    await this.ctx.bean.summer.clear(this.__cacheName);
   }
 
-  _coerceTypeOfDefault(column) {
-    // type
-    let type = column.Type;
-    const pos = type.indexOf('(');
-    if (pos > -1) type = type.substring(0, pos);
-    // default value
-    const value = column.Default;
-    // coerce
-    if (value === null) return value;
-    if (['timestamp'].includes(type) && value === 'CURRENT_TIMESTAMP') return new Date();
-    if (['bit', 'bool'].includes(type)) return Boolean(value);
-    if (['float', 'double'].includes(type)) return Number(value);
-    if (['tinyint', 'smallint', 'mediumint', 'int', 'bigint'].includes(type)) return Number(value);
-    // others
-    return value;
-  }
-
-  async create(data, ...args) {
-    const data2 = await this.prepareData(data);
-    const res = await (<any>this).insert(data2, ...args);
-    return res.insertId;
-  }
-
-  async write(data, ...args) {
-    const data2 = await this.prepareData(data);
-    return await (<any>this).update(data2, ...args);
-  }
-
-  _rowCheck(row) {
-    if ((!this.table || !this.disableInstance) && row.iid === undefined) {
-      row.iid = this.ctx.instance.id;
-    }
-    if (this.table && !this.disableDeleted && row.deleted === undefined) {
-      row.deleted = 0;
-    }
-  }
-
-  _insertRowsCheck(rows) {
-    if (!Array.isArray(rows)) return this._rowCheck(rows);
-    for (const row of rows) {
-      this._rowCheck(row);
-    }
+  __cacheExists() {
+    if (!this.__cacheName) return false;
+    const cachaBase = this.ctx.bean.summer._findCacheBase({
+      module: this.__cacheName.module,
+      name: this.__cacheName.name,
+    });
+    return !!cachaBase;
   }
 }
-
-[
-  'literals', //
-  'escape',
-  'escapeId',
-  'format',
-  '_formatValue',
-  '_formatWhere',
-  '_where',
-  '_orders',
-  'raw',
-  'query',
-  'queryOne',
-  '_query',
-  '_selectColumns',
-  '_limit',
-].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      if (is.function(this.ctx.db[method])) {
-        return function (this: any, ...args) {
-          return this.ctx.db[method](...args);
-        };
-      }
-      // property
-      return this.ctx.db[method];
-    },
-  });
-});
-
-['insert'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        if (args.length === 0) {
-          args.push({});
-        }
-        if (this.table) {
-          args.unshift(this.table);
-        }
-        this._insertRowsCheck(args[1]);
-        return this.ctx.db[method](...args);
-      };
-    },
-  });
-});
-
-['update'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        if (_args[2] && _args[2].where) {
-          this._rowCheck(_args[2].where);
-        }
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['delete'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        this._rowCheck(_args[1]);
-        if (this.table && !this.disableDeleted) {
-          const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.db._where(_args[1]);
-          return this.ctx.db.query(sql);
-        }
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['count'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        this._rowCheck(_args[1]);
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['get'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        // console.log(this.constructor.name, arguments);
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        // if (_args[1].id) {
-        //   return this.ctx.db[method].apply(this.ctx.db, _args);
-        // }
-        this._rowCheck(_args[1]);
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});
-
-['select'].forEach(method => {
-  Object.defineProperty(BeanModelBase.prototype, method, {
-    get() {
-      return function (this: any, ...args) {
-        const _args = [] as any;
-        if (this.table) _args.push(this.table);
-        for (const arg of args) _args.push(arg);
-        _args[1] = _args[1] || {};
-        _args[1].where = _args[1].where || {};
-        this._rowCheck(_args[1].where);
-        return this.ctx.db[method](..._args);
-      };
-    },
-  });
-});

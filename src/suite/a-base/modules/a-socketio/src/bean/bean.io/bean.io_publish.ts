@@ -1,5 +1,7 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoDelivery } from './bean.io_delivery.js';
+import { BeanIoPush } from './bean.io_push.js';
+import { BeanIoSave } from './bean.io_save.js';
 
 export class BeanIoPublish extends BeanIoDelivery {
   async publish({ path, message, messageClass, options }: any) {
@@ -47,7 +49,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     // sessionId
     const sessionId = await beanMessage.onSessionId({ path, message, options });
     // message
-    const _message = {
+    const _message: any = {
       messageClassId: messageClass.id,
       messageType: message.messageType,
       messageFilter: message.messageFilter,
@@ -60,7 +62,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     };
 
     // save
-    const persistence = this._checkPersistence({ options, message, messageClass });
+    const persistence = (this as unknown as BeanIoSave)._checkPersistence({ options, message, messageClass });
     if (persistence) {
       _message.id = await this.message.save({ message: _message });
       _message.createdAt = new Date();
@@ -128,7 +130,7 @@ export class BeanIoPublish extends BeanIoDelivery {
       });
     } else {
       // push
-      await this._pushQueuePush({ options, message, messageSyncs, messageClass });
+      await (this as unknown as BeanIoPush)._pushQueuePush({ options, message, messageSyncs, messageClass });
     }
   }
 }

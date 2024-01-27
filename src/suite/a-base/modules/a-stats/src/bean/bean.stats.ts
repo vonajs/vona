@@ -106,7 +106,7 @@ export class BeanStats extends BeanModuleScopeBase {
   }
 
   async _get({ module, name, fullName, user }: any) {
-    const where = { module, name: fullName };
+    const where: any = { module, name: fullName };
     if (user) {
       where.userId = user.id;
     }
@@ -120,7 +120,7 @@ export class BeanStats extends BeanModuleScopeBase {
   }
 
   async _set({ module, name, fullName, value, user }: any) {
-    const where = { module, name: fullName };
+    const where: any = { module, name: fullName };
     if (user) {
       where.userId = user.id;
     }
@@ -131,7 +131,7 @@ export class BeanStats extends BeanModuleScopeBase {
         value: JSON.stringify(value),
       });
     } else {
-      const data = { module, name: fullName, value: JSON.stringify(value) };
+      const data: any = { module, name: fullName, value: JSON.stringify(value) };
       if (user) {
         data.userId = user.id;
       }

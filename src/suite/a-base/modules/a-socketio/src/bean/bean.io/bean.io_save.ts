@@ -26,14 +26,14 @@ export class BeanIoSave extends BeanIoPush {
     // messageId
     const messageId = message.id;
     // message syncs
-    let messageSyncs: any[] = [];
+    let messageSyncs: any[] | null = [];
     // saveLimit
     const saveLimit = this.ctx.config.module(__ThisModule__).message.sync.saveLimit;
     // sender
     //   not save ===0
     if (message.userIdFrom !== 0) {
       // save
-      const messageSync = {
+      const messageSync: any = {
         messageClassId,
         messageId,
         userId: message.userIdFrom,
@@ -68,7 +68,7 @@ export class BeanIoSave extends BeanIoPush {
         for (const userIdTo of userIds) {
           if (userIdTo !== message.userIdFrom && userIdTo !== 0) {
             // save
-            const messageSync = {
+            const messageSync: any = {
               messageClassId,
               messageId,
               userId: userIdTo,

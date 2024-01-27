@@ -1,6 +1,6 @@
 import { BeanBase, Local } from '@cabloy/core';
 
-@Local()
+@Local({ name: 'flowTask' })
 export class LocalFlowTaskService extends BeanBase {
   async select({ options, user }: any) {
     return await this.ctx.bean.flowTask.select({ options, user });

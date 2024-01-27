@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'middleware.io' })
 export class MiddlewareIoConnection extends BeanBase {
-  async execute(options, next) {
+  async execute(_options, next) {
     // cache userId/socketId for disconnect
     const user = this.ctx.state.user && this.ctx.state.user.op;
     if (!user || user.anonymous) {
