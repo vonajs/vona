@@ -50,7 +50,12 @@ async function _moduleHandle_options({ file, module, processHelper }) {
     // console.log(file);
     return;
   }
+  const ast2 = ast1.replace('async $_$(options){$$$1}', 'async $_$(_options){\n$$$1\n}');
+  const ast2Src = ast2.root().generate();
+  // console.log(ast2Src);
   console.log(file);
+  await fse.outputFile(file, ast2Src);
+  await processHelper.formatFile({ fileName: file });
   return;
   // 查找this参数
   const regexp = /this\.(.*?) = .*?;/g;

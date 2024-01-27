@@ -13,7 +13,7 @@ export class VersionInit extends BeanBase {
     return this.ctx.bean.local.module(__ThisModule__).token;
   }
 
-  async run(options) {
+  async run(_options) {
     // rights
     await this._init_rights();
     // open auth scopes

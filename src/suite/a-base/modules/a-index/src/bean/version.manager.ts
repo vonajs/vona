@@ -4,7 +4,7 @@ import chalk from 'chalk';
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase {
-  async update(options) {
+  async update(_options) {
     // check indexes
     if (this.ctx.config.indexesCheck) {
       // combine module's indexes

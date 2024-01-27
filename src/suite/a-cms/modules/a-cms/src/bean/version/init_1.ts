@@ -1,7 +1,7 @@
 import { Update12 } from './update_12.js';
 
 export class Init1 extends Update12 {
-  async _init_1(options) {
+  async _init_1(_options) {
     // create roles: cms-writer to template
     const roles = ['cms-writer'];
     const roleTemplate = await this.ctx.bean.role.getSystemRole({ roleName: 'template' });
@@ -16,7 +16,6 @@ export class Init1 extends Update12 {
     }
     // build roles
     await this.ctx.bean.role.setDirty(true);
-
     // add role rights
     const roleRights = [
       { roleName: 'cms-writer', action: 'create' },
