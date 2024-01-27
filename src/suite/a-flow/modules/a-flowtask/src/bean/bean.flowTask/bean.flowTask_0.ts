@@ -1,7 +1,11 @@
+import { ScopeModuleAFlowtask } from '../../index.js';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class BeanFlowTask0 extends BeanBase {
+  get scope() {
+    return super.getScope() as ScopeModuleAFlowtask;
+  }
   get modelFlowTask() {
     return this.ctx.model.module(__ThisModule__).flowTask;
   }
@@ -9,10 +13,10 @@ export class BeanFlowTask0 extends BeanBase {
     return this.ctx.model.module(__ThisModule__).flowTaskHistory;
   }
   get localRight() {
-    return this.ctx.bean._getBean('a-flowtask.local.right');
+    return this.scope.local.right;
   }
   get sqlProcedure() {
-    return this.ctx.bean._getBean('a-flowtask.local.procedure');
+    return this.scope.local.procedure;
   }
 
   async count({ options, user }: any) {

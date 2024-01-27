@@ -1,10 +1,14 @@
 import { BeanFlowTaskAtomState } from './bean.flowTask_atomState.js';
+import { BeanFlowTaskCheckViewWorkflow } from './bean.flowTask_checkViewWorkflow.js';
 
 export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
   async flowData({ flowId, options, user }: any) {
     options = options || {};
     // allowViewWorkflow
-    const allowViewWorkflow = await this._checkViewWorkflow({ flowId, user });
+    const allowViewWorkflow = await (this as unknown as BeanFlowTaskCheckViewWorkflow)._checkViewWorkflow({
+      flowId,
+      user,
+    });
     // flow
     const flow = await this._flowData_flow({ allowViewWorkflow, flowId, user });
     if (!flow) return null;
@@ -55,7 +59,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     const currentOnly = options.currentOnly;
     const mineOnly = !allowViewWorkflow;
     // where
-    const where = {
+    const where: any = {
       'a.flowId': flowId,
       'b.flowNodeType': [
         'a-flowtask:startEventAtom',
@@ -127,13 +131,14 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
   }
 
   _flowData_task_nodeInstancesBox() {
+    const ctx = this.ctx;
     return {
       _nodeInstances: {},
       _options: {},
       async get(flowNodeId) {
         let nodeInstance = this._nodeInstances[flowNodeId];
         if (!nodeInstance) {
-          nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId });
+          nodeInstance = await ctx.bean.flow._loadFlowNodeInstance({ flowNodeId });
           this._nodeInstances[flowNodeId] = nodeInstance;
         }
         return nodeInstance;
@@ -142,7 +147,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
         let options = this._options[flowNodeId];
         if (!options) {
           const nodeInstance = await this.get(flowNodeId);
-          options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
+          options = ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
           this._options[flowNodeId] = options;
         }
         return options;
