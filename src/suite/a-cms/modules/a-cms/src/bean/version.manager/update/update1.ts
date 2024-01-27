@@ -1,7 +1,7 @@
-import { VersionManager0 } from './version.manager_0.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Update1 extends VersionManager0 {
-  async _update_1(_options) {
+export class VersionUpdate extends BeanBase {
+  async run() {
     // create table: aCmsArticle
     let sql = `
         CREATE TABLE aCmsArticle (

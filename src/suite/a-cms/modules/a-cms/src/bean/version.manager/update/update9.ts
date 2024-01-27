@@ -1,7 +1,7 @@
-import { Update8 } from './update_8.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Update9 extends Update8 {
-  async _update_9(_options) {
+export class VersionUpdate extends BeanBase {
+  async run() {
     // drop column: aCmsContent.itemId
     const sql = `
     ALTER TABLE aCmsContent

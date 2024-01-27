@@ -1,7 +1,7 @@
-import { Update12 } from './update_12.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Init1 extends Update12 {
-  async _init_1(_options) {
+export class VersionInit extends BeanBase {
+  async run(_options) {
     // create roles: cms-writer to template
     const roles = ['cms-writer'];
     const roleTemplate = await this.ctx.bean.role.getSystemRole({ roleName: 'template' });

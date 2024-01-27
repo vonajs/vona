@@ -1,7 +1,7 @@
-import { Update7 } from './update_7.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Update8 extends Update7 {
-  async _update_8(options) {
+export class VersionUpdate extends BeanBase {
+  async run(options) {
     // schemas update for 7
     await this._update7Migration_schemas(options);
   }

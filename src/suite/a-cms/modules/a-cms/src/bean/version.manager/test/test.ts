@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../../resource/this.js';
-import { Init12 } from './init_12.js';
+import { BeanBase } from '@cabloy/core';
+import { __ThisModule__ } from '../../../resource/this.js';
 
-export class Test extends Init12 {
-  async _test() {
+export class VersionTest extends BeanBase {
+  async run() {
     const atomClass = {
       module: __ThisModule__,
       atomClassName: 'article',

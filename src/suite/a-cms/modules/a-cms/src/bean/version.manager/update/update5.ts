@@ -1,10 +1,11 @@
-import { __ThisModule__ } from '../../resource/this.js';
-import { Update4 } from './update_4.js';
+import { __ThisModule__ } from '../../../resource/this.js';
 
-import utils from '../../common/utils.js';
+import utils from '../../../common/utils.js';
 
-export class Update5 extends Update4 {
-  async _update_5(options) {
+import { BeanBase } from '@cabloy/core';
+
+export class VersionUpdate extends BeanBase {
+  async run() {
     // alter table: aCmsCategory
     let sql = `
       ALTER TABLE aCmsCategory

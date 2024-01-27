@@ -1,7 +1,7 @@
-import { Update9 } from './update_9.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Update10 extends Update9 {
-  async _update_10(_options) {
+export class VersionUpdate extends BeanBase {
+  async run() {
     // alter table: aCmsArticle
     const sql = `
     ALTER TABLE aCmsArticle

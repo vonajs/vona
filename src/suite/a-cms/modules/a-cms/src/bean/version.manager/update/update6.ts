@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../../resource/this.js';
-import { Update5 } from './update_5.js';
+import { __ThisModule__ } from '../../../resource/this.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Update6 extends Update5 {
-  async _update_6(options) {
+export class VersionUpdate extends BeanBase {
+  async run() {
     // alter table: aCmsArticle
     let sql = `
         ALTER TABLE aCmsArticle

@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../../resource/this.js';
-import { Update11 } from './update_11.js';
+import { __ThisModule__ } from '../../../resource/this.js';
+import { BeanBase } from '@cabloy/core';
 
-export class Update12 extends Update11 {
-  async _update_12(options) {
+export class VersionUpdate extends BeanBase {
+  async run(options) {
     await this._update12Migration(options);
   }
 
