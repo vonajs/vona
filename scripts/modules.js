@@ -56,6 +56,11 @@ async function _moduleHandle_typings({ file, module, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  if (module.info.relativeName === 'a-base') return;
+  const dirFrom = `${module.root}/typings`;
+  const dirTo = `${module.root}/src/typings`;
+  await fse.move(dirFrom, dirTo);
+  //
   const pattern = `${module.root}/typings/core/index.d.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
