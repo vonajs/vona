@@ -46,7 +46,7 @@ export class LocalVersion extends BeanBase {
   async __instanceInit(subdomain, instanceBase) {
     try {
       if (!instanceBase) {
-        instanceBase = (<any>this.ctx.bean).instance._getInstanceBase({ subdomain });
+        instanceBase = this.ctx.bean.instance._getInstanceBase({ subdomain });
       }
       if (!instanceBase) instanceBase = {};
       await this.__check({ ...instanceBase, scene: 'init', subdomain });
@@ -82,7 +82,7 @@ export class LocalVersion extends BeanBase {
     }
 
     // check all modules
-    const debug = (<any>this.app.bean).debug.get('version');
+    const debug = this.app.bean.debug.get('version');
     for (const module of this.app.meta.modulesArray) {
       debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
       await this.__checkModule(module.info.relativeName, options);
@@ -175,7 +175,7 @@ export class LocalVersion extends BeanBase {
         versions.push(version);
       }
       // loop
-      const debug = (<any>this.app.bean).debug.get('version');
+      const debug = this.app.bean.debug.get('version');
       for (const version of versions) {
         debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
         await this.__updateModule2(options, module, version);
@@ -263,7 +263,7 @@ export class LocalVersion extends BeanBase {
   }
 
   async __after() {
-    await (<any>this.ctx.bean).role.build();
+    await this.ctx.bean.role.build();
   }
 
   __getDatabasePrefix() {

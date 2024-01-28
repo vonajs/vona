@@ -20,7 +20,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   }
 
   // build roles
-  async build(options) {
+  async build(options?) {
     options = options || {};
     const progressId = options.progressId;
     // check dirty
