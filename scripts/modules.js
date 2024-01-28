@@ -49,6 +49,8 @@ async function _moduleHandle_scopeModule({ file, module, processHelper }) {
 export { ${scopeModuleName} as ScopeModule } from './scope.js';
   `;
   console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
