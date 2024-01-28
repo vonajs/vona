@@ -21,7 +21,7 @@ export class LocalInstance extends BeanBase {
 
   async getConfigsPreview() {
     const instance = await this.item();
-    let configPreview = (<any>this.ctx.bean).util.extend({}, this.app.meta.configs, JSON.parse(instance.config));
+    let configPreview = this.ctx.bean.util.extend({}, this.app.meta.configs, JSON.parse(instance.config));
     configPreview = this.__configBlackFields(configPreview);
     return { data: configPreview };
   }

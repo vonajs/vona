@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -23,7 +24,7 @@ export class BeanInstance extends BeanBase {
   async list(options) {
     // options
     if (!options) options = { where: null, orders: null, page: null };
-    const page = (<any>this.ctx.bean).util.page(options.page, false);
+    const page = this.ctx.bean.util.page(options.page, false);
     const orders = options.orders;
     const where = options.where || { disabled: 0 }; // allow disabled=undefined
     // select
@@ -119,7 +120,7 @@ export class BeanInstance extends BeanBase {
     // config
     instance.config = JSON.parse(instance.config) || {};
     // cache configs
-    const instanceConfigs = (<any>this.ctx.bean).util.extend({}, this.ctx.app.meta.configs, instance.config);
+    const instanceConfigs = this.ctx.bean.util.extend({}, this.ctx.app.meta.configs, instance.config);
     this.cacheMem.set('instanceConfigs', instanceConfigs);
     // cache configsFront
     const instanceConfigsFront = this._mergeInstanceConfigFront({ instanceConfigs });
@@ -152,7 +153,7 @@ export class BeanInstance extends BeanBase {
     if (!options) options = { wait: true };
     if (!this.ctx.app.meta.appReady && options.wait === false) return false;
     while (!this.ctx.app.meta.appReady) {
-      await (<any>this.ctx.bean).util.sleep(300);
+      await this.ctx.bean.util.sleep(300);
     }
     return true;
   }
@@ -185,7 +186,7 @@ export class BeanInstance extends BeanBase {
           return;
         }
         // startup
-        (<any>this.ctx.app.meta)
+        Cast(this.ctx.app.meta)
           ._runStartupInstance({ subdomain: info.subdomain, options: info.options })
           .then(() => {
             info.resolve();

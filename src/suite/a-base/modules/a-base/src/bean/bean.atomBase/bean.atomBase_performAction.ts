@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtomBaseExportBulk } from './bean.atomBase_exportBulk.js';
 
 export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
@@ -64,7 +65,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     const cmsRender = this.ctx.bean.util.getProperty(actionBase, 'params.cms.render');
     if (cmsRender) {
       // render article
-      await (<any>this.ctx.bean).cms.render._renderArticlePush({ key, inner: false });
+      await Cast(this.ctx.bean).cms.render._renderArticlePush({ key, inner: false });
     }
   }
 }
