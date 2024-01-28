@@ -38,8 +38,25 @@ async function main() {
   }
 }
 
+async function _moduleHandle_typings({ file, module, processHelper }) {
+  console.log(file);
+  if (module.info.relativeName === 'a-base') return;
+  const contentNew = `
+  import 'cabloy-module-api-a-validation';
+  import 'cabloy-module-api-a-instance';
+  import 'cabloy-module-api-a-fields';
+  import 'cabloy-module-api-a-summer';
+  import 'cabloy-module-api-a-stats';
+  import 'cabloy-module-api-a-debug';
+  import 'cabloy-module-api-a-dict';
+  import 'cabloy-module-api-a-version';`;
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/controller/**/*.ts`;
+  const pattern = `${module.root}/typings/core/index.d.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -56,7 +73,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_useScope({ file, module, processHelper });
+    await _moduleHandle_typings({ file, module, processHelper });
   }
 }
 
