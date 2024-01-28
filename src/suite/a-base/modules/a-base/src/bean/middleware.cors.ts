@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-const URL = require('url').URL;
+import { URL } from 'url';
 
 import koaCors from '@koa/cors';
 
