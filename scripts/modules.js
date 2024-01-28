@@ -39,29 +39,33 @@ async function main() {
 }
 
 async function _moduleHandle_typings({ file, module, processHelper }) {
-  console.log(file);
   if (module.info.relativeName === 'a-base') return;
+  console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+
   const contentNew = `
-  import 'cabloy-module-api-a-validation';
-  import 'cabloy-module-api-a-instance';
-  import 'cabloy-module-api-a-fields';
-  import 'cabloy-module-api-a-summer';
-  import 'cabloy-module-api-a-stats';
-  import 'cabloy-module-api-a-debug';
-  import 'cabloy-module-api-a-dict';
-  import 'cabloy-module-api-a-version';`;
-  // console.log(contentNew);
-  await fse.outputFile(file, contentNew);
-  await processHelper.formatFile({ fileName: file });
+  import 'cabloy-module-api-a-base';
+`;
+  console.log(contentNew);
+  // await fse.outputFile(file, contentNew);
+  // await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  if (module.info.relativeName === 'a-base') return;
-  const dirFrom = `${module.root}/typings`;
-  const dirTo = `${module.root}/src/typings`;
-  await fse.move(dirFrom, dirTo);
+  // if (module.info.relativeName === 'a-base') return;
+  // const dirFrom = `${module.root}/typings`;
+  // const dirTo = `${module.root}/src/typings`;
+  // if (!fse.existsSync(dirFrom)) {
+  //   if (!fse.existsSync(dirTo)) {
+  //     console.log(module.info.relativeName);
+  //     process.exit(0);
+  //   }
+  // } else {
+  //   await fse.move(dirFrom, dirTo);
+  // }
+  // return;
   //
-  const pattern = `${module.root}/typings/core/index.d.ts`;
+  const pattern = `${module.root}/src/index.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
