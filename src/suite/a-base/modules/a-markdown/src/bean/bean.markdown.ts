@@ -14,8 +14,8 @@ export class BeanMarkdown extends BeanBase {
     // block options
     const blockOptions = {
       utils: {
-        text: (...args) => {
-          return this.ctx.text.locale(locale || this.ctx.app.config.i18n.defaultLocale, ...args);
+        text: (text, ...args) => {
+          return this.ctx.text.locale(locale || this.ctx.app.config.i18n.defaultLocale, text, ...args);
         },
         register: ({ params, content }) => {
           const placeholder = `__markdown_block_placeholder__${this.ctx.bean.util.uuidv4()}`;
@@ -35,7 +35,7 @@ export class BeanMarkdown extends BeanBase {
       if (!module || !blockName) throw new Error(`Invalid Markdown Block: ${params}`);
       const _module = this.ctx.app.meta.modules[module];
       if (!_module) throw new Error(`Module Not Found: ${module}`);
-      let block_js = path.join(_module.static.backend, `blocks/${blockName}/main`);
+      let block_js = path.join(_module.root, 'static', `blocks/${blockName}/main`);
       if (this.ctx.app.meta.isProd) {
         block_js += '.min';
       }

@@ -24,7 +24,7 @@ const meta = {
   validation: {
     validators: {},
     keywords: {},
-    schemas: {},
+    schemas,
   },
 };
 export default meta;

@@ -126,7 +126,7 @@ export class CliStoreSync extends CliStoreBase {
     const { argv } = this.context;
     // entityMeta
     const entityType = this._getEntityType({ entityStatus });
-    const entityMeta = {
+    const entityMeta: any = {
       root: path.join(argv.projectPath, entityType === 1 ? 'src/suite-vendor' : 'src/module-vendor', entityName),
     };
     // version

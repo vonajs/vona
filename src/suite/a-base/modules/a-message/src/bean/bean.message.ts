@@ -4,7 +4,7 @@ const _cacheMessageClassesUniform: any = {};
 
 @Bean()
 export class BeanMessage extends BeanModuleScopeBase {
-  async group(/* {  options, user }*/) {
+  async group(/* {  options, user }*/ _params: any) {
     const items = this.messageClassesUniform();
     return items;
   }

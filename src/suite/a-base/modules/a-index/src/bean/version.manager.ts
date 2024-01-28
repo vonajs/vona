@@ -61,7 +61,7 @@ export class VersionManager extends BeanBase {
           await this.ctx.model.query(sql);
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       // just log the error message
       console.log(chalk.red(e.message));
       if (e.sql) console.log(chalk.red(e.sql));

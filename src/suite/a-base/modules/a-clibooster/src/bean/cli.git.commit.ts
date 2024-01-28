@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean, IModule, ISuite } from '@cabloy/core';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.git' })
@@ -32,10 +32,10 @@ export class CliGitCommit extends BeanCliBase {
     // load all entities
     const entityNames = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.commands.:git:commit.entities');
     // prepare
-    const entities: any[] = [];
+    const entities: (ISuite | IModule)[] = [];
     for (const entityName of entityNames) {
       // try suite
-      let entity = this.helper.findSuite(entityName);
+      let entity: ISuite | IModule = this.helper.findSuite(entityName);
       if (!entity) {
         // try module
         entity = this.helper.findModule(entityName);

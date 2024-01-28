@@ -1,13 +1,17 @@
-import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase, Virtual } from '@cabloy/core';
+import { BeanBase, Virtual } from '@cabloy/core';
 
 import eggBornUtils from 'egg-born-utils';
+import { LocalConsole, LocalHelper, LocalTemplate } from '../index.js';
 
 @Virtual({ scene: 'bean' })
 export class BeanCliBase extends BeanBase {
   options: any;
   cabloyConfig: any;
   terminal: any;
+  __console: LocalConsole;
+  __helper: LocalHelper;
+  __template;
+  LocalTemplate;
 
   constructor(options) {
     super();
@@ -18,21 +22,21 @@ export class BeanCliBase extends BeanBase {
 
   get console() {
     if (!this.__console) {
-      this.__console = this.ctx.bean._newBean(`${__ThisModule__}.local.console`, this);
+      this.__console = this.ctx.bean._newBean(LocalConsole, this);
     }
     return this.__console;
   }
 
   get helper() {
     if (!this.__helper) {
-      this.__helper = this.ctx.bean._newBean(`${__ThisModule__}.local.helper`, this);
+      this.__helper = this.ctx.bean._newBean(LocalHelper, this);
     }
     return this.__helper;
   }
 
   get template() {
     if (!this.__template) {
-      this.__template = this.ctx.bean._newBean(`${__ThisModule__}.local.template`, this);
+      this.__template = this.ctx.bean._newBean(LocalTemplate, this);
     }
     return this.__template;
   }
@@ -41,13 +45,13 @@ export class BeanCliBase extends BeanBase {
     return this.options.context;
   }
 
-  async meta({ user }: any) {
+  async meta(/* { user } */ _params: any) {
     await this._loadCabloyConfig();
     const metaLocale = this._commandMeta();
     return metaLocale;
   }
 
-  async execute(/* { user } */) {
+  async execute(/* { user } */ _params: any) {
     await this._loadCabloyConfig();
   }
 

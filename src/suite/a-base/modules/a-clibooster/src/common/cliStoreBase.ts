@@ -9,6 +9,7 @@ export default class CliStoreBase extends BeanCliBase {
   commandName: any;
   tokenName: any;
   openAuthClient: any;
+  _needLernaBootstrap: boolean;
 
   constructor(options, commandName) {
     super(options);

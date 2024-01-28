@@ -1,7 +1,7 @@
 export type TypeModuleMiddlewareRight =
   | { type: 'atom'; atomClass?: string; action: string; stage?: string; checkFlow?: boolean }
   | { type: 'atomClass' }
-  | { type: 'resource'; module?: string; name?: string };
+  | { type: 'resource'; module?: string; name?: string; useKey?: boolean };
 
 export interface IModuleMiddlewareValidate {
   module?: string;

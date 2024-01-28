@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
 
 import path from 'path';
 import fse from 'fs-extra';
@@ -66,7 +66,7 @@ export class CliStorePublish extends CliStoreBase {
       return { code: 1001 };
     }
     // zip module
-    const moduleMeta = {
+    const moduleMeta: any = {
       name: moduleName,
       root: module.root,
       pkg: module.pkg,
@@ -116,7 +116,7 @@ export class CliStorePublish extends CliStoreBase {
     // zip suite
     const filePkg = path.join(pathSuite, 'package.json');
     const _package = await eggBornUtils.tools.loadJSON(filePkg);
-    const suiteMeta = {
+    const suiteMeta: any = {
       name: suiteName,
       root: pathSuite,
       pkg: filePkg,
@@ -289,7 +289,7 @@ export class CliStorePublish extends CliStoreBase {
     zipOfficial.hash = {
       hash: zipOfficialTemp.hash.hash,
       version: moduleMeta.package.version,
-    };
+    } as any;
     moduleMeta.zipOfficial = zipOfficial;
     // zip trial
     if (needTrial) {

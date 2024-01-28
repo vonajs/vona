@@ -117,7 +117,7 @@ export class LocalDashboard extends BeanBase {
       },
     );
     // insert
-    const data = {
+    const data: any = {
       userId: user.id,
       dashboardDefault: 1,
       dashboardAtomId,

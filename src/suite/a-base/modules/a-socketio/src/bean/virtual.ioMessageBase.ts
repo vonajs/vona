@@ -20,7 +20,7 @@ export class BeanIoMessageBase extends BeanBase {
     return await this.ctx.bean.io._onSaveSyncsPolicy({ path, options, message, messageClass, saveLimit, onSave });
   }
 
-  async onSaveSync(/* { path, options, message, messageSync, messageClass }*/) {
+  async onSaveSync(/* { path, options, message, messageSync, messageClass }*/ _params: any) {
     return null;
   }
 
@@ -42,7 +42,9 @@ export class BeanIoMessageBase extends BeanBase {
     return messageClassBase.info.push && messageClassBase.info.push.channels;
   }
 
-  async onChannelRender(/* { channelFullName, options, message, messageSync, messageClass }*/) {
+  async onChannelRender(
+    /* { channelFullName, options, message, messageSync, messageClass }*/ _params: any,
+  ): Promise<any> {
     return null;
   }
 
