@@ -47,9 +47,9 @@ async function _moduleHandle_typings({ file, module, processHelper }) {
     `export * from './routes.js';`,
     `export * from './routes.js';\n\nimport './typings/core/index.js';`,
   );
-  console.log(contentNew);
-  // await fse.outputFile(file, contentNew);
-  // await processHelper.formatFile({ fileName: file });
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {

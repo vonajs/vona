@@ -6,6 +6,8 @@ export * from './resource/index.js';
 export * from './meta.js';
 export * from './routes.js';
 
+import './typings/core/index.js';
+
 export class Main extends BeanBase implements IModuleMain {
   async moduleLoading(_options): Promise<void> {}
   async moduleLoaded(_options): Promise<void> {
