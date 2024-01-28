@@ -56,7 +56,7 @@ export class BeanBaseUtils extends BeanBaseThemes {
   }
 
   // get path
-  async getPath(subdir, ensure) {
+  async getPath(subdir?, ensure?) {
     const rootPath = await this.getRootPath();
     // use instance.id, not subdomain
     const dir = path.join(rootPath, this.ctx.instance.id.toString(), subdir || '');
