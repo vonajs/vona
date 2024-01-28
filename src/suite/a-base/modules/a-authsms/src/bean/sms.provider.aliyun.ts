@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
-import popCore from '@alicloud/pop-core';
+import * as PopCore from '@alicloud/pop-core';
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderAliyun extends BeanBase {
@@ -10,7 +10,7 @@ export class SmsProviderAliyun extends BeanBase {
     const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
     if (!providerInstance) this.ctx.throw(403);
     // token
-    const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
+    const token = this.__prefix0(parseInt(String(Math.random() * 10000)), 4);
     const templateParam = { code: token };
     // params
     const params = {
@@ -31,9 +31,9 @@ export class SmsProviderAliyun extends BeanBase {
   }
 
   async __sendSms({ params, config }: any) {
-    const client = new popCore.RPCClient({
+    const client = new PopCore.default({
       accessKeyId: config.accessKeyId,
-      secretAccessKey: config.secretAccessKey,
+      accessKeySecret: config.accessKeySecret,
       endpoint: config.endpoint,
       apiVersion: config.apiVersion,
     });

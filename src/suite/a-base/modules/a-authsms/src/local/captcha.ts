@@ -1,14 +1,14 @@
 import { BeanBase, Local } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
+import { CaptchaProviderCaptcha } from '../index.js';
 
 @Local()
 export class LocalCaptcha extends BeanBase {
   async sendCode({ providerInstanceId, context }: any) {
     // sms provider
-    const bean = this.ctx.bean._getBean(`${__ThisModule__}.captcha.provider.captcha`);
+    const bean = this.ctx.bean._getBean(CaptchaProviderCaptcha);
     const { provider, config } = bean.__createSMSProvider();
     // sendCode
-    const data = await provider.sendCode({ providerInstanceId, context, config });
+    const data = await (<any>provider).sendCode({ providerInstanceId, context, config });
     // update
     await this.ctx.bean.captcha.update({
       providerInstanceId,

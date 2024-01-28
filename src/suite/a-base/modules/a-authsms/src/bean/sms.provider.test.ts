@@ -2,15 +2,21 @@ import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import chalk from 'chalk';
-import boxen from 'boxen';
+import boxen, { BorderStyle } from 'boxen';
 
-const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
+const boxenOptions: boxen.Options = {
+  padding: 1,
+  margin: 1,
+  align: 'center',
+  borderColor: 'yellow',
+  borderStyle: BorderStyle.Round,
+};
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderTest extends BeanBase {
   async sendCode({ context }: any) {
     // token
-    const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
+    const token = this.__prefix0(parseInt(String(Math.random() * 10000)), 4);
     // prompt
     const message =
       chalk.keyword('cyan')('Test SMS Verification Code To: ') +

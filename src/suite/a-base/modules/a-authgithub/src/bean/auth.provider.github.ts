@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 const Strategy = require('passport-github').Strategy;

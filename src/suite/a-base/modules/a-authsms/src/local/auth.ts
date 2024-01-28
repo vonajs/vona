@@ -24,7 +24,7 @@ export class LocalAuth extends BeanBase {
     const userId = verifyUser.agent.id;
 
     // override user's info: userName/realName/mobile
-    const userNew = { id: userId };
+    const userNew: any = { id: userId };
     if (userName) {
       if (state === 'login' || !user.userName || user.userName.indexOf('__') > -1) {
         userNew.userName = userName;

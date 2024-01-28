@@ -6,3 +6,11 @@ export * from '../bean/captcha.provider.captcha.js';
 export * from '../bean/broadcast.smsProviderChanged.js';
 export * from '../bean/bean.smsProviderCache.js';
 export * from '../bean/auth.provider.sms.js';
+
+import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
+
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+    smsProviderCache: BeanSmsProviderCache;
+  }
+}

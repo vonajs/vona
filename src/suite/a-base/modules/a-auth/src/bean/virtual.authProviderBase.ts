@@ -26,7 +26,8 @@ export class BeanAuthProviderBase extends BeanBase {
     return config;
   }
   // should be overrided
-  checkConfigValid(/* config */) {
+  checkConfigValid(config): boolean {
+    config;
     throw new Error('checkConfigValid not implemented');
   }
   // should be overrided
@@ -34,7 +35,8 @@ export class BeanAuthProviderBase extends BeanBase {
     throw new Error('getStrategy not implemented');
   }
   // should be overrided
-  async onVerify(..._args: any): Promise<any> {
+  async onVerify(...args: any[]): Promise<any> {
+    args;
     throw new Error('onVerify not implemented');
   }
   get configProviderCache() {

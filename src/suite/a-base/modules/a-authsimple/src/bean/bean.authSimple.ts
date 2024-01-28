@@ -48,7 +48,7 @@ export class BeanAuthSimple extends BeanBase {
     await this.modelAuthSimple.update({ id: authSimpleId, userId });
 
     // override user's info: userName/realName/email
-    const userNew = { id: userId, realName };
+    const userNew: any = { id: userId, realName };
     if (state === 'login' || !user.userName || user.userName.indexOf('__') > -1) {
       userNew.userName = userName;
     }

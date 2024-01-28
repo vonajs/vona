@@ -1,7 +1,6 @@
-const provider = moduleInfo.name;
 export default {
   providers: {
-    [provider]: {
+    authsimple: {
       meta: {
         title: 'User/Password',
         inline: true,

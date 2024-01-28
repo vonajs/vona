@@ -19,10 +19,10 @@ schemas.aliyun = {
       ebTitle: 'accessKeyId',
       notEmpty: true,
     },
-    secretAccessKey: {
+    accessKeySecret: {
       type: 'string',
       ebType: 'text',
-      ebTitle: 'secretAccessKey',
+      ebTitle: 'accessKeySecret',
       notEmpty: true,
     },
     endpoint: {

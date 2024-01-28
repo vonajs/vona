@@ -2,9 +2,15 @@ import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import chalk from 'chalk';
-import boxen from 'boxen';
+import boxen, { BorderStyle } from 'boxen';
 
-const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
+const boxenOptions: boxen.Options = {
+  padding: 1,
+  margin: 1,
+  align: 'center',
+  borderColor: 'yellow',
+  borderStyle: BorderStyle.Round,
+};
 
 @Bean({ scene: 'captcha.provider' })
 export class CaptchaProviderCaptcha extends BeanBase {
@@ -13,10 +19,10 @@ export class CaptchaProviderCaptcha extends BeanBase {
     // sms provider
     const { provider, config } = this.__createSMSProvider();
     // verify
-    await provider.verify({ providerInstanceId, context, data, dataInput, config });
+    await (<any>provider).verify({ providerInstanceId, context, data, dataInput, config });
   }
 
-  __createSMSProvider(options) {
+  __createSMSProvider(options?) {
     const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
     // provider name
     let providerName = options && options.providerName;

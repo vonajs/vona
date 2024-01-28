@@ -49,7 +49,7 @@ export const config = _app => {
           title: 'AliYun',
           current: false,
           accessKeyId: '',
-          secretAccessKey: '',
+          accessKeySecret: '',
           endpoint: 'https://dysmsapi.aliyuncs.com',
           apiVersion: '2017-05-25',
           signName: '',
