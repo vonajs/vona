@@ -4,11 +4,7 @@ import { BeanModuleScopeBase } from '@cabloy/core';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 
-export class BeanAtom0 extends BeanModuleScopeBase {
-  get scope() {
-    return this.getScope() as ScopeModule;
-  }
-
+export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
   get atomClass() {
     return this.scope._bean.atomClass;
   }

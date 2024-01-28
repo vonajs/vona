@@ -2,11 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'startup' })
-export class StartupWorkerAlive extends BeanBase {
-  get scope() {
-    return this.getScope() as ScopeModule;
-  }
-
+export class StartupWorkerAlive extends BeanBase<ScopeModule> {
   async execute() {
     const aliveTimeout = this.scope.config.worker.alive.timeout;
     // interval

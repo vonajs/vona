@@ -3,11 +3,7 @@ import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 import { ScopeModule } from '../resource/this.js';
 
 @Atom()
-export class AtomResource extends BeanAtomBase {
-  get scope() {
-    return this.getScope() as ScopeModule;
-  }
-
+export class AtomResource extends BeanAtomBase<ScopeModule> {
   get model() {
     return this.scope.model.resource;
   }

@@ -1,18 +1,14 @@
 import { Cast } from '@cabloy/core';
-import { ScopeModuleAFlowtask } from '../../index.js';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { BeanFlowTask1 } from './bean.flowTask_1.js';
 
-export class BeanFlowTask0 extends BeanBase {
-  get scope() {
-    return super.getScope() as ScopeModuleAFlowtask;
-  }
+export class BeanFlowTask0 extends BeanBase<ScopeModule> {
   get modelFlowTask() {
-    return this.ctx.model.module(__ThisModule__).flowTask;
+    return this.scope.model.flowTask;
   }
   get modelFlowTaskHistory() {
-    return this.ctx.model.module(__ThisModule__).flowTaskHistory;
+    return this.scope.model.flowTaskHistory;
   }
   get localRight() {
     return this.scope.local.right;

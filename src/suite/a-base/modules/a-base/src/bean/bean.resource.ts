@@ -9,11 +9,7 @@ const __atomClass = {
 };
 
 @Bean()
-export class BeanResource extends BeanModuleScopeBase {
-  get scope() {
-    return this.getScope() as ScopeModule;
-  }
-
+export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   get model() {
     return this.scope.model.resource;
   }

@@ -3,11 +3,7 @@ import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 
 @Atom()
-export class AtomFlowDef extends BeanAtomBase {
-  get scope() {
-    return this.getScope() as ScopeModule;
-  }
-
+export class AtomFlowDef extends BeanAtomBase<ScopeModule> {
   get model() {
     return this.scope.model.flowDef;
   }
