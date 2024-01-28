@@ -39,13 +39,14 @@ async function main() {
 }
 
 async function _moduleHandle_typings({ file, module, processHelper }) {
-  if (module.info.relativeName === 'a-base') return;
+  // if (module.info.relativeName === 'a-base') return;
   console.log(file);
   const contentOld = (await fse.readFile(file)).toString();
-
-  const contentNew = `
-  import 'cabloy-module-api-a-base';
-`;
+  if (contentOld.indexOf(`import './typings/core/index.js';`) > -1) return;
+  const contentNew = contentOld.replace(
+    `export * from './routes.js';`,
+    `export * from './routes.js';\n\nimport './typings/core/index.js';`,
+  );
   console.log(contentNew);
   // await fse.outputFile(file, contentNew);
   // await processHelper.formatFile({ fileName: file });
