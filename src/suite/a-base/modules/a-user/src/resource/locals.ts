@@ -6,5 +6,5 @@ import { LocalPublic } from '../local/public.js';
 
 export interface IModuleLocal {
   user: LocalUser;
-  public2: LocalPublic;
+  public: LocalPublic;
 }

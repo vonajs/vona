@@ -7,6 +7,7 @@ export class LocalSessionStore extends BeanBase {
   _redis: any;
 
   constructor() {
+    super();
     this._redis = null;
   }
 
@@ -21,7 +22,7 @@ export class LocalSessionStore extends BeanBase {
     return `${ctx.instance ? ctx.instance.id : 0}:${token}`;
   }
 
-  async get(token, maxAge, { ctx }) {
+  async get(token, _maxAge, { ctx }) {
     const key = this._getKeyToken({ ctx, token });
     const value = await this.redis.get(key);
     return value ? JSON.parse(value) : undefined;

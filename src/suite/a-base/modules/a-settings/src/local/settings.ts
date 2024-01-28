@@ -1,7 +1,7 @@
 import { BeanBase, Local } from '@cabloy/core';
 
-let _instanceList = null;
-let _userList = null;
+let _instanceList: any = null;
+let _userList: any = null;
 
 @Local()
 export class LocalSettings extends BeanBase {
@@ -19,7 +19,7 @@ export class LocalSettings extends BeanBase {
     const data = await this.ctx.bean.settings.loadSettingsInstance({ module });
     return {
       module,
-      validator: validator.validator,
+      validator: validator!.validator,
       data,
     };
   }
@@ -42,7 +42,7 @@ export class LocalSettings extends BeanBase {
     const data = await this.ctx.bean.settings.loadSettingsUser({ module });
     return {
       module,
-      validator: validator.validator,
+      validator: validator!.validator,
       data,
     };
   }
@@ -59,7 +59,7 @@ export class LocalSettings extends BeanBase {
       const module = this.app.meta.modules[relativeName];
       if (module.resource.meta && module.resource.meta.settings && module.resource.meta.settings[scene]) {
         const settings = module.resource.meta.settings[scene];
-        const item = {
+        const item: any = {
           module: relativeName,
           validator: settings.validator,
         };

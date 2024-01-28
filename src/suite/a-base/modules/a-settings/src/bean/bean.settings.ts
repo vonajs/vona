@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-import constants from '../config/constants.js';
+import { constants } from '../config/constants.js';
 
 @Bean()
 export class BeanSettings extends BeanModuleScopeBase {
@@ -162,7 +162,7 @@ export class BeanSettings extends BeanModuleScopeBase {
 
   _getValidator({ scene, module }: any) {
     module = module || this.moduleScope;
-    const validator = this.ctx.app.meta.modules[module].main.meta.settings[scene].validator;
+    const validator = this.ctx.app.meta.modules[module].resource.meta.settings[scene].validator;
     return validator ? { module, scene, validator } : null;
   }
 
