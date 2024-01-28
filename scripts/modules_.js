@@ -69,6 +69,29 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
+async function _moduleHandle_useScope({ file, module, processHelper }) {
+  console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+  const scopeModuleName = getScopeModuleName(module.info.relativeName);
+  console.log(scopeModuleName);
+  //
+  const fileThis = `${module.root}/src/resource/this.js`;
+  let fileRelative = path.relative(path.dirname(file), fileThis);
+  if (fileRelative[0] !== '.') {
+    fileRelative = './' + fileRelative;
+  }
+  console.log(fileRelative);
+  // replace
+  // const contentNew = contentOld
+  //   .replace(/import \{ ScopeModule.*? \} from '.*?\/index\.js';/, `import { ScopeModule } from '${fileRelative}';`)
+  //   .replace(`extends BeanBase {`, `extends BeanBase<ScopeModule> {`)
+  //   .replace(/@Use[\s\S\n]*?scope: ScopeModule.*?;/, '');
+  const contentNew = contentOld.replace(`import { BeanBase, Controller, Use }`, `import { BeanBase, Controller }`);
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_typings({ file, module, processHelper }) {
   console.log(file);
   const contentNew = `import 'cabloy-suite-api-a-base';`;
