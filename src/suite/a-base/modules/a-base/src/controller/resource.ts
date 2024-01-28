@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerResource extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerResource extends BeanBase<ScopeModule> {
   // options
   //   where, orders, page, star, label, resourceType, locale
   async select() {

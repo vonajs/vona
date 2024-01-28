@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleADashboard } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerDashboard extends BeanBase {
-  @Use()
-  scope: ScopeModuleADashboard;
-
+export class ControllerDashboard extends BeanBase<ScopeModule> {
   async itemByKey() {
     const res = await this.scope.local.dashboard.itemByKey({
       atomStaticKey: this.ctx.request.body.atomStaticKey,

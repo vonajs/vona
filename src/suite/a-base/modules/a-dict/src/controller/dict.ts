@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleADict } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerDict extends BeanBase {
-  @Use()
-  scope: ScopeModuleADict;
-
+export class ControllerDict extends BeanBase<ScopeModule> {
   async getDict() {
     const res = await this.scope.local.dict.getDict({
       dictKey: this.ctx.request.body.dictKey,

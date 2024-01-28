@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABaseadmin } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerRole extends BeanBase {
-  @Use()
-  scope: ScopeModuleABaseadmin;
-
+export class ControllerRole extends BeanBase<ScopeModule> {
   async childrenTop() {
     const page = this.ctx.request.body.page;
     const items = await this.scope.local.role.childrenTop({

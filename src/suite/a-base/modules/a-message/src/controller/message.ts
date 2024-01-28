@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAMessage } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerMessage extends BeanBase {
-  @Use()
-  scope: ScopeModuleAMessage;
-
+export class ControllerMessage extends BeanBase<ScopeModule> {
   // options
   //   where, orders
   async group() {

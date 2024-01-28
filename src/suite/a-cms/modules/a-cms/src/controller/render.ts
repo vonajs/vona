@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACms } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerRender extends BeanBase {
-  @Use()
-  scope: ScopeModuleACms;
-
+export class ControllerRender extends BeanBase<ScopeModule> {
   async getArticleUrl() {
     const res = await this.scope.local.render.getArticleUrl({
       atomClass: this.ctx.request.body.atomClass,

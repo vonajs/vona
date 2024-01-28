@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAFlowchart } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerFlow extends BeanBase {
-  @Use()
-  scope: ScopeModuleAFlowchart;
-
+export class ControllerFlow extends BeanBase<ScopeModule> {
   async flowChartProcess() {
     const { host } = this.ctx.request.body;
     const user = this.ctx.state.user.op;

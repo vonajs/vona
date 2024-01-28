@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAtomClass extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerAtomClass extends BeanBase<ScopeModule> {
   async validatorSearch() {
     const res = await this.scope.local.atomClass.validatorSearch({
       atomClass: this.ctx.request.body.atomClass,

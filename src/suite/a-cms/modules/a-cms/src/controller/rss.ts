@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACms } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerRss extends BeanBase {
-  @Use()
-  scope: ScopeModuleACms;
-
+export class ControllerRss extends BeanBase<ScopeModule> {
   async feed() {
     // params
     //   module

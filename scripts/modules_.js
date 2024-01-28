@@ -68,6 +68,15 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+
+async function _moduleHandle_typings({ file, module, processHelper }) {
+  console.log(file);
+  const contentNew = `import 'cabloy-suite-api-a-base';`;
+  // console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_scopeModule({ file, module, processHelper }) {
   // console.log(file);
   const contentOld = (await fse.readFile(file)).toString();

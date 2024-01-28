@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerTag extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerTag extends BeanBase<ScopeModule> {
   async list() {
     const atomClass = this.ctx.request.body.atomClass;
     const list = await this.scope.local.tag.list({

@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAValidation } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerValidation extends BeanBase {
-  @Use()
-  scope: ScopeModuleAValidation;
-
+export class ControllerValidation extends BeanBase<ScopeModule> {
   schema() {
     const res = this.scope.local.validation.schema(this.ctx.request.body);
     this.ctx.success(res);

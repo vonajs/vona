@@ -1,12 +1,9 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 import qr from 'qr-image';
 
 @Controller()
-export class ControllerBase extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerBase extends BeanBase<ScopeModule> {
   modules() {
     const res = this.scope.local.base.modules();
     this.ctx.success(res);

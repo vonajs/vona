@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerLayoutConfig extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerLayoutConfig extends BeanBase<ScopeModule> {
   async load() {
     const res = await this.scope.local.layoutConfig.load({
       module: this.ctx.request.body.module,

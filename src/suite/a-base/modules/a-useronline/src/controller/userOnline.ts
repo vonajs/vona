@@ -1,8 +1,5 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAUseronline } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerUserOnline extends BeanBase {
-  @Use()
-  scope: ScopeModuleAUseronline;
-}
+export class ControllerUserOnline extends BeanBase<ScopeModule> {}

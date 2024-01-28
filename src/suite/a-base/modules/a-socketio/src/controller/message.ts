@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleASocketio } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerMessage extends BeanBase {
-  @Use()
-  scope: ScopeModuleASocketio;
-
+export class ControllerMessage extends BeanBase<ScopeModule> {
   async offset() {
     const res = await this.scope.local.message.offset({
       messageClass: this.ctx.request.body.messageClass,

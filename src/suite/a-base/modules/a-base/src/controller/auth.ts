@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAuth extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerAuth extends BeanBase<ScopeModule> {
   // return current user auth info
   //   { op:{id},agent:{id},provider}
   async echo() {

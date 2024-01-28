@@ -1,8 +1,5 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACache } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerDb extends BeanBase {
-  @Use()
-  scope: ScopeModuleACache;
-}
+export class ControllerDb extends BeanBase<ScopeModule> {}

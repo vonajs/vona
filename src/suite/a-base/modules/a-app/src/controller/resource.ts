@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAApp } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerResource extends BeanBase {
-  @Use()
-  scope: ScopeModuleAApp;
-
+export class ControllerResource extends BeanBase<ScopeModule> {
   async read() {
     const res = await this.scope.local.resource.read({
       atomStaticKey: this.ctx.request.body.atomStaticKey,

@@ -1,8 +1,5 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleASequence } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerSequence extends BeanBase {
-  @Use()
-  scope: ScopeModuleASequence;
-}
+export class ControllerSequence extends BeanBase<ScopeModule> {}

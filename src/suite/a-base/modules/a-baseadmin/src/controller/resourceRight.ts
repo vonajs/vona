@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABaseadmin } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerResourceRight extends BeanBase {
-  @Use()
-  scope: ScopeModuleABaseadmin;
-
+export class ControllerResourceRight extends BeanBase<ScopeModule> {
   async rights() {
     const page = this.ctx.request.body.page;
     const items = await this.scope.local.resourceRight.rights({

@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerDb extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerDb extends BeanBase<ScopeModule> {
   async insert() {
     const { tableName, data } = this.ctx.request.body;
     const res = await this.scope.local.db.insert({

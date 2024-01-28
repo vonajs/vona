@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleASettings } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerSettings extends BeanBase {
-  @Use()
-  scope: ScopeModuleASettings;
-
+export class ControllerSettings extends BeanBase<ScopeModule> {
   // instance
 
   instanceList() {

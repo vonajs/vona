@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAIcon } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerIcon extends BeanBase {
-  @Use()
-  scope: ScopeModuleAIcon;
-
+export class ControllerIcon extends BeanBase<ScopeModule> {
   getIcons() {
     const res = this.scope.local.icon.getIcons();
     this.ctx.success(res);

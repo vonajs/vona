@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAtom extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerAtom extends BeanBase<ScopeModule> {
   async preferredRoles() {
     const res = await this.scope.local.atom.preferredRoles({
       atomClass: this.ctx.request.body.atomClass,

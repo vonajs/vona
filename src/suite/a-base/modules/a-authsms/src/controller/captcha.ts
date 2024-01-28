@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAAuthsms } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerCaptcha extends BeanBase {
-  @Use()
-  scope: ScopeModuleAAuthsms;
-
+export class ControllerCaptcha extends BeanBase<ScopeModule> {
   async sendCode() {
     await this.scope.local.captcha.sendCode({
       providerInstanceId: this.ctx.request.body.providerInstanceId,

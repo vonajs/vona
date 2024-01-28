@@ -1,12 +1,9 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACms } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 import utils from '../common/utils.js';
 
 @Controller()
-export class ControllerArticle extends BeanBase {
-  @Use()
-  scope: ScopeModuleACms;
-
+export class ControllerArticle extends BeanBase<ScopeModule> {
   // list
   async list() {
     // atomClass

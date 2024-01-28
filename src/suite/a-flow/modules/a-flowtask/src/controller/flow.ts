@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAFlowtask } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerFlow extends BeanBase {
-  @Use()
-  scope: ScopeModuleAFlowtask;
-
+export class ControllerFlow extends BeanBase<ScopeModule> {
   async data() {
     const res = await this.scope.local.flow.data({
       flowId: this.ctx.request.body.flowId,

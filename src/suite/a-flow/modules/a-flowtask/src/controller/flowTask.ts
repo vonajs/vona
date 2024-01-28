@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAFlowtask } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerFlowTask extends BeanBase {
-  @Use()
-  scope: ScopeModuleAFlowtask;
-
+export class ControllerFlowTask extends BeanBase<ScopeModule> {
   // options
   //   where, orders, page, history
   async select() {

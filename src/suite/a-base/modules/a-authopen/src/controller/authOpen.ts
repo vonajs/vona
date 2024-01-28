@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAAuthopen } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAuthOpen extends BeanBase {
-  @Use()
-  scope: ScopeModuleAAuthopen;
-
+export class ControllerAuthOpen extends BeanBase<ScopeModule> {
   async hideClientSecret() {
     // check demo
     // this.ctx.bean.util.checkDemo();

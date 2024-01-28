@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerUser extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerUser extends BeanBase<ScopeModule> {
   async getLabels() {
     const res = await this.scope.local.user.getLabels({
       user: this.ctx.state.user.op,

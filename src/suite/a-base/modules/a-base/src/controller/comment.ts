@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerComment extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerComment extends BeanBase<ScopeModule> {
   async all() {
     const options = this.ctx.request.body.options;
     options.comment = 1;

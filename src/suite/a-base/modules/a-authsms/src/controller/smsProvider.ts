@@ -1,12 +1,9 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAAuthsms } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerSmsProvider extends BeanBase {
-  @Use()
-  scope: ScopeModuleAAuthsms;
-
+export class ControllerSmsProvider extends BeanBase<ScopeModule> {
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();

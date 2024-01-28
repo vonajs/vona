@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAFlow } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerFlowDef extends BeanBase {
-  @Use()
-  scope: ScopeModuleAFlow;
-
+export class ControllerFlowDef extends BeanBase<ScopeModule> {
   behaviorBases() {
     const res = this.scope.local.flowDef.behaviorBases();
     this.ctx.success(res);

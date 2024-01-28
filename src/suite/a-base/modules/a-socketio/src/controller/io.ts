@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleASocketio } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerIo extends BeanBase {
-  @Use()
-  scope: ScopeModuleASocketio;
-
+export class ControllerIo extends BeanBase<ScopeModule> {
   async subscribe() {
     const res = await this.scope.local.io.subscribe({
       path: this.ctx.request.body.path,

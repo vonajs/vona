@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerUtil extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerUtil extends BeanBase<ScopeModule> {
   async performAction() {
     const res = await this.scope.local.util.performAction({
       params: JSON.parse(this.ctx.request.query.params),

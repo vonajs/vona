@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleASocketio } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerTest extends BeanBase {
-  @Use()
-  scope: ScopeModuleASocketio;
-
+export class ControllerTest extends BeanBase<ScopeModule> {
   async echo() {
     const echo = this.ctx.request.body.echo;
     // this.ctx.throw(403);

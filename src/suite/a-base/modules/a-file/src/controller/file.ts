@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAFile } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerFile extends BeanBase {
-  @Use()
-  scope: ScopeModuleAFile;
-
+export class ControllerFile extends BeanBase<ScopeModule> {
   async all() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);

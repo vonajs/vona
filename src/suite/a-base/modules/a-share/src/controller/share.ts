@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAShare } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerShare extends BeanBase {
-  @Use()
-  scope: ScopeModuleAShare;
-
+export class ControllerShare extends BeanBase<ScopeModule> {
   async generate() {
     const res = await this.scope.local.share.generate({
       host: this.ctx.request.body.host,

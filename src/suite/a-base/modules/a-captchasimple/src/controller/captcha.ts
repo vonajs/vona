@@ -1,12 +1,9 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACaptchasimple } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 import captcha from 'trek-captcha';
 
 @Controller()
-export class ControllerCaptcha extends BeanBase {
-  @Use()
-  scope: ScopeModuleACaptchasimple;
-
+export class ControllerCaptcha extends BeanBase<ScopeModule> {
   async image() {
     // providerInstanceId
     const providerInstanceId = this.ctx.query.providerInstanceId;

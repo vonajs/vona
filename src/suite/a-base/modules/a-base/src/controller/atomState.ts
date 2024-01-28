@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleABase } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAtomState extends BeanBase {
-  @Use()
-  scope: ScopeModuleABase;
-
+export class ControllerAtomState extends BeanBase<ScopeModule> {
   async getDictDynamic() {
     const res = await this.scope.local.atomState.getDictDynamic({
       atomClass: this.ctx.request.body.atomClass,

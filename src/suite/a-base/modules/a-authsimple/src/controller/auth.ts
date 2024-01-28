@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAAuthsimple } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAuth extends BeanBase {
-  @Use()
-  scope: ScopeModuleAAuthsimple;
-
+export class ControllerAuth extends BeanBase<ScopeModule> {
   async signin() {
     // data: { auth, password, rememberMe }
     const data = this.ctx.request.body.data;

@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACaptcha } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerCaptcha extends BeanBase {
-  @Use()
-  scope: ScopeModuleACaptcha;
-
+export class ControllerCaptcha extends BeanBase<ScopeModule> {
   async createProviderInstance() {
     const res = await this.scope.local.captcha.createProviderInstance({
       module: this.ctx.request.body.module,

@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleALogin } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerAuth extends BeanBase {
-  @Use()
-  scope: ScopeModuleALogin;
-
+export class ControllerAuth extends BeanBase<ScopeModule> {
   async list() {
     const res = await this.scope.local.auth.list();
     this.ctx.success(res);

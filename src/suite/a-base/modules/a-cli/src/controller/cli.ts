@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleACli } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerCli extends BeanBase {
-  @Use()
-  scope: ScopeModuleACli;
-
+export class ControllerCli extends BeanBase<ScopeModule> {
   async meta() {
     const res = await this.scope.local.cli.meta({
       context: this.ctx.request.body.context,

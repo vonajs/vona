@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleCmsPlugincopyright } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerUtil extends BeanBase {
-  @Use()
-  scope: ScopeModuleCmsPlugincopyright;
-
+export class ControllerUtil extends BeanBase<ScopeModule> {
   async md() {
     // atomId
     const atomId = this.ctx.params.atomId;

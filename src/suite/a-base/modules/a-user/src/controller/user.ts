@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAUser } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerUser extends BeanBase {
-  @Use()
-  scope: ScopeModuleAUser;
-
+export class ControllerUser extends BeanBase<ScopeModule> {
   async save() {
     const res = await this.scope.local.user.save({
       data: this.ctx.request.body.data,

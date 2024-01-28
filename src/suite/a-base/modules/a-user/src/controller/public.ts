@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAUser } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerPublic extends BeanBase {
-  @Use()
-  scope: ScopeModuleAUser;
-
+export class ControllerPublic extends BeanBase<ScopeModule> {
   async profile() {
     const res = await this.scope.local.public.profile({
       userId: this.ctx.request.body.userId,

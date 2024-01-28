@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAProgress } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerProgress extends BeanBase {
-  @Use()
-  scope: ScopeModuleAProgress;
-
+export class ControllerProgress extends BeanBase<ScopeModule> {
   async check() {
     const res = await this.scope.local.progress.check({
       progressId: this.ctx.request.body.progressId,

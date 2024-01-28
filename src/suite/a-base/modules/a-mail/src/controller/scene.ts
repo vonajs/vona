@@ -1,11 +1,8 @@
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ScopeModuleAMail } from '../index.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Controller()
-export class ControllerScene extends BeanBase {
-  @Use()
-  scope: ScopeModuleAMail;
-
+export class ControllerScene extends BeanBase<ScopeModule> {
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
