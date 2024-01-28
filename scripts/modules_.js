@@ -68,6 +68,20 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+async function _moduleHandle_scopeModule({ file, module, processHelper }) {
+  // console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('ScopeModule') > -1) return;
+  //
+  const scopeModuleName = getScopeModuleName(module.info.relativeName);
+  // console.log(scopeModuleName);
+  const contentNew = `${contentOld}\n
+export { ${scopeModuleName} as ScopeModule } from './scope.js';
+  `;
+  console.log(contentNew);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+}
 
 async function _moduleHandle_super({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
