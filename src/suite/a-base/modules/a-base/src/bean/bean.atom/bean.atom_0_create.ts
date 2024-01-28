@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 import { BeanAtom0Write } from './bean.atom_0_write.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
@@ -52,7 +53,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
       flowTaskId: options.flowTaskId,
       returnSchema: options.returnSchema,
     };
-    const resRead = await (this as unknown as BeanAtom0Read).read({ key, atomClass, options: optionsRead, user });
+    const resRead = await Cast<BeanAtom0Read>(this).read({ key, atomClass, options: optionsRead, user });
     if (options.returnSchema) {
       return { key, item: resRead.item, schema: resRead.schema };
     }
