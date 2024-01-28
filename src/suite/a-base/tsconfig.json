@@ -40,7 +40,7 @@
       "path": "modules/a-authsms"
     },
     {
-      "path": "modules/a-base-sync"
+      "path": "modules/a-base"
     },
     {
       "path": "modules/a-baseaction"
