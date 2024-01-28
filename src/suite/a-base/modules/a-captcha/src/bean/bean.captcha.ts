@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 import utils from '../common/utils.js';
 
 @Bean()
@@ -85,7 +85,7 @@ export class BeanCaptcha extends BeanModuleScopeBase {
       sceneName: providerInstance.sceneName,
     });
     // invoke provider verify
-    const _moduleInfo = mparse.parseInfo(provider.module);
+    const _moduleInfo = ModuleInfo.parseInfo(provider.module);
     await this.ctx.meta.util.executeBean({
       beanModule: _moduleInfo.relativeName,
       beanFullName: `${_moduleInfo.relativeName}.captcha.provider.${provider.name}`,

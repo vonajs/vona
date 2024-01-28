@@ -63,6 +63,7 @@ export function parseInfo(moduleName, type = 'module'): IModuleInfo | null {
       name: parts[1],
       fullName: `cabloy-suite-api-${parts[0]}-${parts[1]}`,
       relativeName: `${parts[0]}-${parts[1]}`,
+      url: '',
     };
   }
   return {

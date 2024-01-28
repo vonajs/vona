@@ -3,7 +3,7 @@ import { BeanAtomClone } from './bean.atom_clone.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomSimple } from './bean.atom_simple.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomDraft extends BeanAtomClone {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
@@ -14,7 +14,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       options: optionsOuter,
     });
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     // draft
     const atomIdDraft = key.atomId;

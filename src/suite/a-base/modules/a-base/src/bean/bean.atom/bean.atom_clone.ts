@@ -3,7 +3,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomClone extends BeanAtomStarLabel {
   async clone({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, roleIdOwner, user }: any) {
@@ -39,7 +39,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     // srcItem
     if (!srcItem) {

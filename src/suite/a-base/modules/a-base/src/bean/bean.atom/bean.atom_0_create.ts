@@ -4,7 +4,7 @@ import { BeanAtom0Write } from './bean.atom_0_write.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Create extends BeanAtomUtils {
   // create
@@ -27,7 +27,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
       item.roleIdOwner = roleIdOwner;
     }
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const data = await this.ctx.meta.util.executeBeanAuto({
       beanModule: _moduleInfo.relativeName,

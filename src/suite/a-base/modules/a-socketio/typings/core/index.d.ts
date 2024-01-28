@@ -6,3 +6,4 @@ import 'cabloy-module-api-a-stats';
 import 'cabloy-module-api-a-debug';
 import 'cabloy-module-api-a-dict';
 import 'cabloy-module-api-a-version';
+import 'cabloy-module-api-a-useronline';

@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 @Bean()
 export class BeanAtomStatic extends BeanModuleScopeBase {
@@ -210,7 +210,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
 
   async _adjustItem({ moduleName, atomClass, atomClassBase, item, register }: any) {
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     item = await this.ctx.meta.util.executeBeanAuto({
       beanModule: _moduleInfo.relativeName,

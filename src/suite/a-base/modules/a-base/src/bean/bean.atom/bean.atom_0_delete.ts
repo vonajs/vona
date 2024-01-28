@@ -3,7 +3,7 @@ import { BeanAtom0Default } from './bean.atom_0_default.js';
 import { BeanAtomDraft } from './bean.atom_draft.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Delete extends BeanAtom0Default {
   // deleteBulk
@@ -27,7 +27,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       options: optionsOuter,
     });
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     // atom
     let _atom;

@@ -1,6 +1,6 @@
 import { BeanAtom0Enable } from './bean.atom_0_enable.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Export extends BeanAtom0Enable {
   async exportBulk({ atomClass, options, fields, user }: any) {
@@ -11,7 +11,7 @@ export class BeanAtom0Export extends BeanAtom0Enable {
       atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     }
     // export
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const resExport = await this.ctx.meta.util.executeBeanAuto({
       beanModule: _moduleInfo.relativeName,

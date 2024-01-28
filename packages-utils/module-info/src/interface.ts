@@ -3,7 +3,7 @@ export interface IModuleInfo {
   name: string;
   fullName: string;
   relativeName: string;
-  url?: string;
+  url: string;
   sync?: boolean;
   monkey?: boolean;
   vendor?: boolean;

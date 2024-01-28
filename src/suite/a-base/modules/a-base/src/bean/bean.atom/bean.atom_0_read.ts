@@ -4,7 +4,7 @@ import { BeanAtom0Select } from './bean.atom_0_select.js';
 import { BeanAtomSchema } from './bean.atom_schema.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Read extends BeanAtom0Import {
   // read
@@ -18,7 +18,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     });
     if (!atom) return null;
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const item = await this.ctx.meta.util.executeBeanAuto({
       beanModule: _moduleInfo.relativeName,
@@ -93,7 +93,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
       forAtomUser,
     });
     // readQuery
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const sql = await this.ctx.meta.util.executeBeanAuto({
       beanModule: _moduleInfo.relativeName,

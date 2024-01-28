@@ -1,6 +1,6 @@
 import { BeanAtom0Create } from './bean.atom_0_create.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Default extends BeanAtom0Create {
   async default({ atomClass, atomStage, roleIdOwner, item, options, user }: any) {
@@ -17,7 +17,7 @@ export class BeanAtom0Default extends BeanAtom0Create {
       item.roleIdOwner = roleIdOwner;
     }
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     item = await this.ctx.meta.util.executeBeanAuto({
       beanModule: _moduleInfo.relativeName,

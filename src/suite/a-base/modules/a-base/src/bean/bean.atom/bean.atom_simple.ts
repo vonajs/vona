@@ -3,7 +3,7 @@ import { BeanAtomClone } from './bean.atom_clone.js';
 import { BeanAtomFormal } from './bean.atom_formal.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomSimple extends BeanAtomFormal {
   async _switchToSimple({ atomClass, atomClassBase, atom, user }: any) {
@@ -52,7 +52,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
     if (atomIdDraft) {
       const atomDraft = atom.atomStage === 0 ? atom : await this.modelAtom.get({ id: atomIdDraft });
       const keyDraft = { atomId: atomDraft.id, itemId: atomDraft.itemId };
-      const _moduleInfo = mparse.parseInfo(atomClass.module);
+      const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
       const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
       await this.ctx.meta.util.executeBeanAuto({
         beanModule: _moduleInfo.relativeName,

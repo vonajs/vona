@@ -2,7 +2,7 @@ import { Cast } from '@cabloy/core';
 import { BeanAtom0Select } from './bean.atom_0_select.js';
 import { BeanAtomClone } from './bean.atom_clone.js';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Write extends BeanAtom0Select {
   // write
@@ -34,7 +34,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
       throwWhenEmpty: false,
     });
     // atom bean
-    const _moduleInfo = mparse.parseInfo(atomClass.module);
+    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     // support formal flow
     // if (_atomBasic.atomStage !== _atomBasic.atomSimple) this.ctx.throw(403);

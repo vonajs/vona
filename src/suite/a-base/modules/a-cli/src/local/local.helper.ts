@@ -5,7 +5,7 @@ import Chalk from 'chalk';
 import TableClass from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 const { ProcessHelper } = require('@cabloy/process-helper');
 
 @Local()
@@ -64,7 +64,7 @@ export class LocalHelper extends BeanBase {
     return Boxen(text, options);
   }
   parseModuleInfo(moduleName) {
-    const moduleInfo = mparse.parseInfo(moduleName);
+    const moduleInfo = ModuleInfo.parseInfo(moduleName);
     if (!moduleInfo) throw new Error(`module name is not valid: ${moduleName}`);
     return moduleInfo;
   }
@@ -73,7 +73,7 @@ export class LocalHelper extends BeanBase {
     return this.ctx.app.meta.modules[moduleInfo.relativeName];
   }
   parseSuiteInfo(suiteName) {
-    const suiteInfo = mparse.parseInfo(suiteName, 'suite');
+    const suiteInfo = ModuleInfo.parseInfo(suiteName, 'suite');
     if (!suiteInfo) throw new Error(`suite name is not valid: ${suiteName}`);
     return suiteInfo;
   }

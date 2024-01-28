@@ -3,7 +3,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 
 import path from 'path';
 
-const mparse = require('@cabloy/module-parse').default;
+import * as ModuleInfo from '@cabloy/module-info';
 
 let __bodyCryptoInstance = null;
 
@@ -16,7 +16,7 @@ export class BeanBodyCrypto extends BeanBase {
   async ensureBodyCrypto() {
     if (!__bodyCryptoInstance) {
       const configCryptoJS = this.configModule.securityLevelProtection.body.cryptojs;
-      const moduleInfo = mparse.parseInfo(configCryptoJS);
+      const moduleInfo = ModuleInfo.parseInfo(configCryptoJS);
       if (!moduleInfo) throw new Error(`Invalid BodyCrypto JS: ${configCryptoJS}`);
       const _module = this.ctx.app.meta.modules[__ThisModule__];
       if (!_module) throw new Error(`Module Not Found: ${module}`);
