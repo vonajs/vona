@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightAction } from './bean.atom_right_checkRightAction.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
@@ -116,7 +117,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
   async __checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options }: any) {
     if (!actionRes) return actionRes;
     // check detail
-    const detailRightInherit = await (this as unknown as BeanAtomRightDetailRightInherit)._checkDetailRightInherit({
+    const detailRightInherit = await Cast<BeanAtomRightDetailRightInherit>(this)._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action: actionRes.name,

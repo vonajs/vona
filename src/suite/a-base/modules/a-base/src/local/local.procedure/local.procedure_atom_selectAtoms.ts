@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { LocalProcedureAtomSelectAtoms0 } from './local.procedure_atom_selectAtoms_0.js';
 import { LocalProcedureAtomSelectAtomsDraft } from './local.procedure_atom_selectAtoms_draft.js';
 import { LocalProcedureAtomSelectAtomsFormal } from './local.procedure_atom_selectAtoms_formal.js';
@@ -77,12 +78,12 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
     // draft
     if (stage === 0) {
       // userIdWho must be set
-      return await (this as unknown as LocalProcedureAtomSelectAtomsDraft)._selectAtoms_draft({ action, options });
+      return await Cast<LocalProcedureAtomSelectAtomsDraft>(this)._selectAtoms_draft({ action, options });
     }
     if (userIdWho === 0) {
-      return await (this as unknown as LocalProcedureAtomSelectAtoms0)._selectAtoms_0({ action, options });
+      return await Cast<LocalProcedureAtomSelectAtoms0>(this)._selectAtoms_0({ action, options });
     }
     // formal/history
-    return await (this as unknown as LocalProcedureAtomSelectAtomsFormal)._selectAtoms_formal({ action, options });
+    return await Cast<LocalProcedureAtomSelectAtomsFormal>(this)._selectAtoms_formal({ action, options });
   }
 }

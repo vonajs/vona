@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanBase } from '@cabloy/core';
 import { BeanAtomStateDynamic } from './bean.atomState_dynamic.js';
 import { BeanAtomStateStatic } from './bean.atomState_static.js';
@@ -20,11 +21,11 @@ export class BeanAtomState0 extends BeanBase {
     atomStage = this.ctx.bean.atomStage.toString({ atomStage });
     const flowStageSame = flowStage === atomStage;
     // dictKey: static
-    let dictKey = (this as unknown as BeanAtomStateStatic).static_getDictKey({ atomClass, atomClassBase, atomStage });
+    let dictKey = Cast<BeanAtomStateStatic>(this).static_getDictKey({ atomClass, atomClassBase, atomStage });
     if (!dictKey) {
       // dictKey: dynamic
       if (flowStageSame) {
-        const dictKeyInfo = await (this as unknown as BeanAtomStateDynamic).dynamic_getDictKeyInfo({ atomClass });
+        const dictKeyInfo = await Cast<BeanAtomStateDynamic>(this).dynamic_getDictKeyInfo({ atomClass });
         dictKey = dictKeyInfo?.dictKey;
       }
     }

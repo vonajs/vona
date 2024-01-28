@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { BeanUser1 } from './bean.user_1.js';
@@ -49,18 +50,18 @@ export class BeanUser0 extends BeanBase {
     let _userAnonymous = _usersAnonymous[this.ctx.instance.id];
     if (_userAnonymous) return _userAnonymous;
     // try get
-    _userAnonymous = await (this as unknown as BeanUser1).get({ anonymous: 1 });
+    _userAnonymous = await Cast<BeanUser1>(this).get({ anonymous: 1 });
     if (_userAnonymous) {
       _usersAnonymous[this.ctx.instance.id] = _userAnonymous;
       return _userAnonymous;
     }
     // add user
-    const userId = await (this as unknown as BeanUser1).add({ userName: 'anonymous', disabled: 0, anonymous: 1 });
+    const userId = await Cast<BeanUser1>(this).add({ userName: 'anonymous', disabled: 0, anonymous: 1 });
     // addRole
     const role = await this.ctx.bean.role.getSystemRole({ roleName: 'anonymous' });
     await this.ctx.bean.role.addUserRole({ userId, roleId: role.id });
     // ready
-    _userAnonymous = await (this as unknown as BeanUser1).get({ id: userId });
+    _userAnonymous = await Cast<BeanUser1>(this).get({ id: userId });
     _usersAnonymous[this.ctx.instance.id] = _userAnonymous;
     return _userAnonymous;
   }
@@ -119,7 +120,7 @@ export class BeanUser0 extends BeanBase {
       provider: ctxUser.provider,
     };
     // check if deleted,disabled,agent
-    const userOp = await (this as unknown as BeanUser1).get({ id: ctxUser.op.id });
+    const userOp = await Cast<BeanUser1>(this).get({ id: ctxUser.op.id });
     // deleted
     if (!userOp) {
       // this.ctx.throw.module(__ThisModule__, 1004);
@@ -150,12 +151,12 @@ export class BeanUser0 extends BeanBase {
     if (checkDemo && !userAgent.locale && this.ctx.locale && !this.ctx.app.meta.isTest) {
       // set
       const userData = { id: userAgent.id, locale: this.ctx.locale };
-      await (this as unknown as BeanUser1).save({ user: userData });
+      await Cast<BeanUser1>(this).save({ user: userData });
       userAgent.locale = this.ctx.locale;
     } else if (!checkDemo && userAgent.locale) {
       // clear
       const userData = { id: userAgent.id, locale: null };
-      await (this as unknown as BeanUser1).save({ user: userData });
+      await Cast<BeanUser1>(this).save({ user: userData });
       userAgent.locale = null;
     }
     // ok
@@ -165,7 +166,7 @@ export class BeanUser0 extends BeanBase {
   async setActivated({ user, autoActivate }: any) {
     // save
     if (user.activated !== undefined) delete user.activated;
-    await (this as unknown as BeanUser1).save({ user });
+    await Cast<BeanUser1>(this).save({ user });
     // tryActivate
     const tryActivate = autoActivate || user.emailConfirmed || user.mobileVerified;
     if (tryActivate) {
@@ -185,7 +186,7 @@ export class BeanUser0 extends BeanBase {
 
   async userRoleStageActivate({ userId }: any) {
     // get
-    const user = await (this as unknown as BeanUser1).get({ id: userId });
+    const user = await Cast<BeanUser1>(this).get({ id: userId });
     // only once
     if (user.activated) return;
     // adjust role
@@ -211,7 +212,7 @@ export class BeanUser0 extends BeanBase {
       }
     }
     // set activated
-    await (this as unknown as BeanUser1).save({
+    await Cast<BeanUser1>(this).save({
       user: { id: userId, activated: 1 },
     });
   }
@@ -250,7 +251,7 @@ export class BeanUser0 extends BeanBase {
 
   async switchAgent({ userIdAgent }: any) {
     const op = this.ctx.user.op;
-    const _user = await (this as unknown as BeanUser1).get({ id: userIdAgent });
+    const _user = await Cast<BeanUser1>(this).get({ id: userIdAgent });
     this.ctx.user.op = { id: _user.id, iid: _user.iid, anonymous: _user.anonymous };
     try {
       await this.check();
@@ -465,7 +466,7 @@ export class BeanUser0 extends BeanBase {
       userIdFrom,
     ]);
     // delete user
-    await (this as unknown as BeanUser1).delete({ userId: userIdFrom });
+    await Cast<BeanUser1>(this).delete({ userId: userIdFrom });
   }
 
   async _downloadAvatar({ avatar }: any) {
@@ -535,7 +536,7 @@ export class BeanUser0 extends BeanBase {
       await this._setUserInfoColumn(user, column, profile);
     }
     // add user
-    const userId = await (this as unknown as BeanUser1).add(user);
+    const userId = await Cast<BeanUser1>(this).add(user);
     // add role
     await this.userRoleStageAdd({ userId });
     // try setActivated
@@ -564,7 +565,7 @@ export class BeanUser0 extends BeanBase {
       await this._setUserInfoColumn(user, column, profile);
     }
     user.id = userId;
-    await (this as unknown as BeanUser1).save({ user });
+    await Cast<BeanUser1>(this).save({ user });
   }
 
   async _setUserInfoColumn(user, column, profile) {
@@ -593,14 +594,14 @@ export class BeanUser0 extends BeanBase {
     if (user[column] || !value) return;
     // userName
     if (column === 'userName') {
-      const res = await (this as unknown as BeanUser1).exists({ [column]: value });
+      const res = await Cast<BeanUser1>(this).exists({ [column]: value });
       if (res) {
         // sequence
         const sequence = await this.sequence.next('userName');
         value = `${value}__${sequence}`;
       }
     } else if (column === 'email' || column === 'mobile') {
-      const res = await (this as unknown as BeanUser1).exists({ [column]: value });
+      const res = await Cast<BeanUser1>(this).exists({ [column]: value });
       if (res) {
         value = null;
       }

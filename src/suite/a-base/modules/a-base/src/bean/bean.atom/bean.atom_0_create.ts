@@ -65,14 +65,14 @@ export class BeanAtom0Create extends BeanAtomUtils {
     // save itemId
     if (!atomClassBase.itemOnly) {
       if (itemId !== undefined) {
-        await (this as unknown as BeanAtom0Write)._update({
+        await Cast<BeanAtom0Write>(this)._update({
           atom: { id: atomId, itemId },
         });
       }
     }
     // notify
     if (!atomClassBase.itemOnly) {
-      (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(null, atomClass);
+      Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(null, atomClass);
     }
   }
 

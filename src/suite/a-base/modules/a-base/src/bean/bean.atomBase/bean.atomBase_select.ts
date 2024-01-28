@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtomBaseDefault } from './bean.atomBase_default.js';
 import { BeanAtomBaseRead } from './bean.atomBase_read.js';
 
@@ -36,7 +37,7 @@ export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
     // schema/tableName: see also: _prepare_fieldsRight
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') === -1) return;
     for (let index = 0; index < items.length; index++) {
-      const item = await (this as unknown as BeanAtomBaseRead)._readValidate({
+      const item = await Cast<BeanAtomBaseRead>(this)._readValidate({
         atomClass,
         item: items[index],
         options,

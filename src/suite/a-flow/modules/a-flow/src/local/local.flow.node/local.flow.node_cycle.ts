@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { LocalFlowNode0 } from './local.flow.node_0.js';
 
 const __adapter = (context, chain) => {
@@ -51,7 +52,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
 
   async enter() {
     // current
-    await (this as unknown as LocalFlowNode0)._setCurrent();
+    await Cast<LocalFlowNode0>(this)._setCurrent();
     const res = await this._behaviorsInvokeAsync({
       methodName: 'enter',
     });

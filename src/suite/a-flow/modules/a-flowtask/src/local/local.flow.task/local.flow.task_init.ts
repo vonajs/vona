@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { LocalFlowTaskEvent } from './local.flow.task_event.js';
 
 import VarsFn from '../../common/vars.js';
@@ -39,9 +40,9 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
     data.flowTaskId = flowTaskId;
     await this.modelFlowTaskHistory.insert(data);
     // notify
-    (this as unknown as LocalFlowTaskNotify)._notifyTaskClaimings(userIdAssignee);
+    Cast<LocalFlowTaskNotify>(this)._notifyTaskClaimings(userIdAssignee);
     // publish uniform message
-    await (this as unknown as LocalFlowTaskMessage)._publishMessageTaskInit({ flowTaskId, userIdAssignee, user });
+    await Cast<LocalFlowTaskMessage>(this)._publishMessageTaskInit({ flowTaskId, userIdAssignee, user });
     // ok
     return flowTaskId;
   }

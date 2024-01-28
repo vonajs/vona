@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanRoleBuild } from './bean.role_build.js';
 import { BeanRoleOthers } from './bean.role_others.js';
@@ -13,7 +14,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
     // user, should check user right scope
     // user = { id: 0 };
     //
-    roleId = await (this as unknown as BeanRoleOthers)._forceRoleId({ roleAtomId, roleId });
+    roleId = await Cast<BeanRoleOthers>(this)._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     // where
     const where = { 'f.roleIdWho': roleId };
@@ -35,10 +36,10 @@ export class BeanRoleIncludes extends BeanRoleBuild {
   // add role include
   async addRoleInc({ roleAtomId, roleId, roleIdInc, user }: any) {
     // role
-    const _role = await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    const _role = await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;
     // role inc
-    const _roleInc = await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({
+    const _roleInc = await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({
       roleAtomId: null,
       roleId: roleIdInc,
       user,
@@ -66,10 +67,10 @@ export class BeanRoleIncludes extends BeanRoleBuild {
   // remove role include
   async removeRoleInc({ roleAtomId, roleId, roleIdInc, user }: any) {
     // role
-    const _role = await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    const _role = await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id;
     // role inc
-    const _roleInc = await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({
+    const _roleInc = await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({
       roleAtomId: null,
       roleId: roleIdInc,
       user,
@@ -86,7 +87,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
 
 // // includes
 // async includes({ roleAtomId, roleId, page, user }: any) {
-//   roleId = await (this as unknown as BeanRoleOthers)._forceRoleId({ roleAtomId, roleId });
+//   roleId = await Cast<BeanRoleOthers>(this)._forceRoleId({ roleAtomId, roleId });
 //   page = this.ctx.bean.util.page(page, false);
 //   const _limit = this.ctx.model._limit(page.size, page.index);
 //   const list = await this.ctx.model.query(

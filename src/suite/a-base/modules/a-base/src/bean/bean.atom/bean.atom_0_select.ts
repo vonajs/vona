@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 import { BeanAtomSchema } from './bean.atom_schema.js';
@@ -96,7 +97,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       //   options.where['a.atomClassId'] = atomClass.id;
       // }
       // schema
-      const atomSchema = await (this as unknown as BeanAtomSchema)._prepareAtomSchema({
+      const atomSchema = await Cast<BeanAtomSchema>(this)._prepareAtomSchema({
         mode: options.containerMode || 'view',
         atomClass,
         options,
@@ -107,7 +108,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // cms
     const cms = atomClassBase && atomClassBase.cms;
     // forAtomUser
-    const forAtomUser = (this as unknown as BeanAtomUtils)._checkForAtomUser(atomClass);
+    const forAtomUser = Cast<BeanAtomUtils>(this)._checkForAtomUser(atomClass);
     // options: maybe has another custom options
     options = Object.assign({}, options, {
       iid: this.ctx.instance.id,

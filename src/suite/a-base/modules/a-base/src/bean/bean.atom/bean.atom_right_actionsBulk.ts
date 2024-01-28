@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtomRightActions } from './bean.atom_right_actions.js';
 import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 
@@ -9,9 +10,11 @@ export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
     const containerMode = options.containerMode;
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
-    const actionsRes = await (this as unknown as BeanAtomRightCheckRightActionBulk).__checkRightActionBulk_fetchActions(
-      { atomClass, atomClassBase, user },
-    );
+    const actionsRes = await Cast<BeanAtomRightCheckRightActionBulk>(this).__checkRightActionBulk_fetchActions({
+      atomClass,
+      atomClassBase,
+      user,
+    });
     const results: any[] = [];
     this.ctx.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
     for (const actionRes of actionsRes) {
@@ -25,7 +28,7 @@ export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
         continue;
       }
       // right check
-      const _resCheck = await (this as unknown as BeanAtomRightCheckRightActionBulk).__checkRightActionBulk_check({
+      const _resCheck = await Cast<BeanAtomRightCheckRightActionBulk>(this).__checkRightActionBulk_check({
         atomClass,
         atomClassBase,
         actionRes,

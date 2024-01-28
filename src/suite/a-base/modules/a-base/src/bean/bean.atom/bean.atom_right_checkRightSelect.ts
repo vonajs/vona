@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
@@ -19,7 +20,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     const checkAtomHistory = await this._checkRightSelect_atomHistory({ atomClass, user, options });
     if (!checkAtomHistory) return false;
     // check detail
-    const detailRightInherit = await (this as unknown as BeanAtomRightDetailRightInherit)._checkDetailRightInherit({
+    const detailRightInherit = await Cast<BeanAtomRightDetailRightInherit>(this)._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action: 'read',

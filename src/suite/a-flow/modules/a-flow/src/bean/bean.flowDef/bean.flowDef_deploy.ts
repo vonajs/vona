@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
@@ -184,7 +185,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     for (const node of content.process.nodes) {
       const nodeType = node.type;
       if (nodeType.indexOf('startEvent') === -1) continue;
-      const _nodeBase = (this as unknown as BeanFlowDefPrepare)._getFlowNodeBase(nodeType);
+      const _nodeBase = Cast<BeanFlowDefPrepare>(this)._getFlowNodeBase(nodeType);
       const _nodeBaseBean = this.ctx.bean._newBean(_nodeBase.beanFullName);
       if (_nodeBaseBean.deploy) {
         const res = await _nodeBaseBean.deploy({

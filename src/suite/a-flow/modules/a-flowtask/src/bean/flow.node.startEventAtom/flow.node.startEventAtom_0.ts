@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 import { FlowNodeStartEventAtomCondition } from './flow.node.startEventAtom_condition.js';
@@ -26,16 +27,16 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
 
   async deploy({ deploy, flowDefId, node, deleting, flowDef, content }: any) {
     // atomClass
-    const { atomClass } = await (this as unknown as FlowNodeStartEventAtomCondition)._getAtomClass({ flowDefId, node });
+    const { atomClass } = await Cast<FlowNodeStartEventAtomCondition>(this)._getAtomClass({ flowDefId, node });
     // condition
-    await (this as unknown as FlowNodeStartEventAtomCondition)._deploy_condition({
+    await Cast<FlowNodeStartEventAtomCondition>(this)._deploy_condition({
       atomClass,
       deploy,
       flowDefId,
       node,
     });
     // flow actions
-    await (this as unknown as FlowNodeStartEventAtomFlowActions)._deploy_flowActions({
+    await Cast<FlowNodeStartEventAtomFlowActions>(this)._deploy_flowActions({
       atomClass,
       flowDefId,
       node,
@@ -44,7 +45,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
       content,
     });
     // action right: viewWorkflow
-    await (this as unknown as FlowNodeStartEventAtomActionRightViewWorkflow)._deploy_actionRightViewWorkflow({
+    await Cast<FlowNodeStartEventAtomActionRightViewWorkflow>(this)._deploy_actionRightViewWorkflow({
       atomClass,
     });
     // return

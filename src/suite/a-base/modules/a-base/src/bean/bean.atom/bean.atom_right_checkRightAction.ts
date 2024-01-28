@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
@@ -41,7 +42,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       // const createDelay = this.ctx.bean.atomAction.getCreateDelay({ atomClass });
       // if (!createDelay) this.ctx.throw(403);
       // check if create
-      return await (this as unknown as BeanAtomRightCheckRightActionBulk).checkRightActionBulk({
+      return await Cast<BeanAtomRightCheckRightActionBulk>(this).checkRightActionBulk({
         atomClass,
         action: 1,
         user,
@@ -135,7 +136,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFromViewHistory;
     }
     // check formActionRight
-    const rightFormAction = await (this as unknown as BeanAtomRightCheckRightFormAction)._checkRightFormAction({
+    const rightFormAction = await Cast<BeanAtomRightCheckRightFormAction>(this)._checkRightFormAction({
       key: { atomId: atom.atomId },
       atomClass,
       atomClassBase,
@@ -151,7 +152,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFormAction;
     }
     // check flowTaskRight
-    const rightFlowTask = await (this as unknown as BeanAtomRightCheckRightFlowTask)._checkRightFlowTask({
+    const rightFlowTask = await Cast<BeanAtomRightCheckRightFlowTask>(this)._checkRightFlowTask({
       key: { atomId: atom.atomId },
       atomClass,
       atomClassBase,
@@ -168,7 +169,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFlowTask;
     }
     // check detail
-    const detailRightInherit = await (this as unknown as BeanAtomRightDetailRightInherit)._checkDetailRightInherit({
+    const detailRightInherit = await Cast<BeanAtomRightDetailRightInherit>(this)._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action,
@@ -178,7 +179,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (!detailRightInherit) return null;
     // special for read
     if (action === 2) {
-      return await (this as unknown as BeanAtomRightCheckRightRead)._checkRightRead_normal({
+      return await Cast<BeanAtomRightCheckRightRead>(this)._checkRightRead_normal({
         _atom,
         atomClass,
         user,
@@ -221,7 +222,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return null;
     }
     // stage
-    const _checkStage = (this as unknown as BeanAtomRightCheckRightActionEnable)._checkRightAction_checkStage({
+    const _checkStage = Cast<BeanAtomRightCheckRightActionEnable>(this)._checkRightAction_checkStage({
       _atom,
       actionBase,
     });
@@ -229,7 +230,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return _checkStage;
     }
     // actionBase.enableOnStatic
-    const _enableOnStatic = (this as unknown as BeanAtomRightCheckRightActionEnable)._checkRightAction_enableOnStatic({
+    const _enableOnStatic = Cast<BeanAtomRightCheckRightActionEnable>(this)._checkRightAction_enableOnStatic({
       _atom,
       action,
       actionBase,
@@ -426,7 +427,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       if (flow) return _atom;
     }
     // check enableOnOpened
-    const _enableOnOpened = (this as unknown as BeanAtomRightCheckRightActionEnable)._checkRightAction_enableOnOpened({
+    const _enableOnOpened = Cast<BeanAtomRightCheckRightActionEnable>(this)._checkRightAction_enableOnOpened({
       _atomDraft,
       actionBase,
     });
@@ -468,7 +469,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return true;
     }
     // forAtomUser
-    const forAtomUser = (this as unknown as BeanAtomUtils)._checkForAtomUser(atomClass);
+    const forAtomUser = Cast<BeanAtomUtils>(this)._checkForAtomUser(atomClass);
     // check formal/history
     return await this._checkRightAction_sql({
       userIdWho: user.id,

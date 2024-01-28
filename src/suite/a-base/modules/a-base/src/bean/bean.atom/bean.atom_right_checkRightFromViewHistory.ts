@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightFormAction } from './bean.atom_right_checkRightFormAction.js';
 
 import objectHash from 'object-hash';
@@ -108,7 +109,7 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
     });
     if (!checkRight) return null;
     // schema: use stage:formal fieldsRight
-    return await (this as unknown as BeanAtomSchema)._prepareAtomSchema({
+    return await Cast<BeanAtomSchema>(this)._prepareAtomSchema({
       mode,
       atomClass,
       options: {},

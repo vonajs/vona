@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomSimple } from './bean.atom_simple.js';
@@ -111,7 +112,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     // formal -> history
     if (item.atomIdFormal) {
       if (atomClassBase.history !== false) {
-        await (this as unknown as BeanAtomClone)._copy({
+        await Cast<BeanAtomClone>(this)._copy({
           target: 'history',
           atomClass,
           srcKey: { atomId: item.atomIdFormal },
@@ -123,7 +124,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       }
     }
     // draft -> formal
-    const keyFormal = await (this as unknown as BeanAtomClone)._copy({
+    const keyFormal = await Cast<BeanAtomClone>(this)._copy({
       target: 'formal',
       atomClass,
       srcKey: { atomId: item.atomId },
@@ -139,9 +140,9 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       atomIdFormal: keyFormal.atomId,
     });
     // notify
-    (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(user, atomClass);
+    Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(user, atomClass);
     if (item.atomFlowId > 0) {
-      (this as unknown as BeanAtomNotify)._notifyDraftsFlowing(user, atomClass);
+      Cast<BeanAtomNotify>(this)._notifyDraftsFlowing(user, atomClass);
     }
     // get formal atom
     const atomFormal = await this.modelAtom.get({ id: keyFormal.atomId });

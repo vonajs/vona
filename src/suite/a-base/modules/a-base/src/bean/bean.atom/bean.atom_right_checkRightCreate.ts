@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
@@ -24,7 +25,7 @@ export class BeanAtomRightCheckRightCreate extends BeanAtomRightCheckRightAction
   async _checkRightCreateRole_normal({ atomClass, roleIdOwner, user, options }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check detail
-    const detailRightInherit = await (this as unknown as BeanAtomRightDetailRightInherit)._checkDetailRightInherit({
+    const detailRightInherit = await Cast<BeanAtomRightDetailRightInherit>(this)._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action: 'create',

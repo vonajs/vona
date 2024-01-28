@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtom0Select } from './bean.atom_0_select.js';
 import { BeanAtomClone } from './bean.atom_clone.js';
 
@@ -53,7 +54,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
         if (_atomBasic.atomSimple) {
           if (atomClassBase.history !== false) {
             //  formal -> history
-            await (this as unknown as BeanAtomClone)._copy({
+            await Cast<BeanAtomClone>(this)._copy({
               target: 'history',
               atomClass,
               srcKey: { atomId: key.atomId },

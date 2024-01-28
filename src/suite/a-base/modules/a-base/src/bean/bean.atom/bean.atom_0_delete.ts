@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtom0Default } from './bean.atom_0_default.js';
 import { BeanAtomDraft } from './bean.atom_draft.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
@@ -50,7 +51,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     // atom
     if (_atom.atomStage === 0) {
       // close draft
-      await (this as unknown as BeanAtomDraft).closeDraft({ key });
+      await Cast<BeanAtomDraft>(this).closeDraft({ key });
     } else if (_atom.atomStage === 1) {
       // delete history
       const listHistory = await this.modelAtom.select({
@@ -80,7 +81,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
           fn: 'delete',
         });
         // notify
-        (this as unknown as BeanAtomNotify)._notifyDraftsDrafting(null, atomClass);
+        Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(null, atomClass);
       }
       // delete formal
       await this.ctx.meta.util.executeBeanAuto({
@@ -116,7 +117,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       where: { atomId, star: 1 },
     });
     for (const item of items) {
-      (this as unknown as BeanAtomNotify)._notifyStars({ id: item.userId });
+      Cast<BeanAtomNotify>(this)._notifyStars({ id: item.userId });
     }
     if (items.length > 0) {
       await this.modelAtomStar.delete({ atomId });
@@ -128,7 +129,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       where: { atomId },
     });
     for (const item of items) {
-      (this as unknown as BeanAtomNotify)._notifyLabels({ id: item.userId });
+      Cast<BeanAtomNotify>(this)._notifyLabels({ id: item.userId });
     }
     if (items.length > 0) {
       await this.modelAtomLabel.delete({ atomId });

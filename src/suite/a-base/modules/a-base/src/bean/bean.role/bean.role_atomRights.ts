@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanRoleBase } from './bean.role_base.js';
 import { BeanRoleOthers } from './bean.role_others.js';
 
@@ -23,7 +24,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       roleAtomId = item.roleAtomId;
       roleId = item.roleId; // maybe empty when create
     }
-    const _role = await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    const _role = await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role.id; // force exists: support create
     roleAtomId = _role.atomId; // force exists: support create
     // scope: allowed [] / 0
@@ -38,7 +39,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       }
       // check right
       for (const roleIdScope of scope) {
-        await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({
+        await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({
           roleAtomId: null,
           roleId: roleIdScope,
           user,
@@ -98,13 +99,13 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     const item = await this.modelRoleRight.get({ id: roleRightId });
     const { roleAtomId, roleId } = item;
     // check right
-    await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     // check right of scope
     const scope = JSON.parse(item.scope);
     if (scope) {
       // check right
       for (const roleIdScope of scope) {
-        await (this as unknown as BeanRoleOthers)._forceRoleAndCheckRightRead({
+        await Cast<BeanRoleOthers>(this)._forceRoleAndCheckRightRead({
           roleAtomId: null,
           roleId: roleIdScope,
           user,
@@ -149,7 +150,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       // role
       let role;
       if (roleRight.roleAtomId || roleRight.roleId) {
-        role = await (this as unknown as BeanRoleOthers)._forceRole({
+        role = await Cast<BeanRoleOthers>(this)._forceRole({
           roleAtomId: roleRight.roleAtomId,
           roleId: roleRight.roleId,
         });
@@ -200,7 +201,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
 
   // role rights
   async roleRights({ roleAtomId, roleId, page }: any) {
-    roleId = await (this as unknown as BeanRoleOthers)._forceRoleId({ roleAtomId, roleId });
+    roleId = await Cast<BeanRoleOthers>(this)._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     const _limit = this.ctx.model._limit(page.size, page.index);
     const items = await this.ctx.model.query(
@@ -228,7 +229,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
 
   // role spreads
   async roleSpreads({ roleAtomId, roleId, page }: any) {
-    roleId = await (this as unknown as BeanRoleOthers)._forceRoleId({ roleAtomId, roleId });
+    roleId = await Cast<BeanRoleOthers>(this)._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     const _limit = this.ctx.model._limit(page.size, page.index);
     const items = await this.ctx.model.query(

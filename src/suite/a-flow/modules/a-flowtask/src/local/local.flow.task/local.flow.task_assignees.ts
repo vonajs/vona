@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskAppendHandleRemark } from './local.flow.task_appendHandleRemark.js';
 import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
@@ -54,7 +55,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
     // handle
     await this._assigneesConfirmation_handle({ handle });
     // notify
-    (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(flowTask.userIdAssignee);
+    Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(flowTask.userIdAssignee);
   }
 
   async _assigneesConfirmation_handle({ handle }: any) {

@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskClaim } from './local.flow.task_claim.js';
 import { LocalFlowTaskEvent } from './local.flow.task_event.js';
@@ -11,7 +12,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     // flowTask
     const flowTask = this.contextTask._flowTask;
     // options
-    const options = (this as unknown as LocalFlowTaskInit)._getNodeOptionsTask();
+    const options = Cast<LocalFlowTaskInit>(this)._getNodeOptionsTask();
     // check right
     await this.localRight.complete({ flowTask, user, handle, getOptions: () => options });
     // formAtom
@@ -22,13 +23,13 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     if (handle) {
       await this._complete_handle({ handle, options });
       // event: task.completed
-      await (this as unknown as LocalFlowTaskEvent).raiseEventCompleted();
+      await Cast<LocalFlowTaskEvent>(this).raiseEventCompleted();
       // check if node done
       this.ctx.tail(async () => {
         await this._complete_tail({ flowTask, user });
       });
       // notify
-      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(flowTask.userIdAssignee);
+      Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(flowTask.userIdAssignee);
     }
   }
 
@@ -147,7 +148,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
         },
       );
       // notify
-      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(taskFrom.userIdAssignee);
+      Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(taskFrom.userIdAssignee);
       // next
       flowTaskIdForwardFrom = taskFrom.flowTaskIdForwardFrom;
     }
@@ -173,7 +174,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
         },
       );
       // notify
-      (this as unknown as LocalFlowTaskNotify)._notifyTaskHandlings(taskFrom.userIdAssignee);
+      Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(taskFrom.userIdAssignee);
       // next
       flowTaskIdSubstituteFrom = taskFrom.flowTaskIdSubstituteFrom;
     }

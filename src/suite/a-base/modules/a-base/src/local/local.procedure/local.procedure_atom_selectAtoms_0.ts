@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { LocalProcedureAtomSelectAtoms } from './local.procedure_atom_selectAtoms.js';
 import { LocalProcedureUtils } from './local.procedure_utils.js';
 import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
@@ -61,10 +62,10 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     let _resourceField, _resourceJoin;
 
     // needResourceLocale
-    const needResourceLocale = (this as unknown as LocalProcedureUtils)._prepare_needResourceLocale(_where);
+    const needResourceLocale = Cast<LocalProcedureUtils>(this)._prepare_needResourceLocale(_where);
 
     // cms
-    const { _cmsField, _cmsJoin, _cmsWhere } = (this as unknown as LocalProcedureUtils)._prepare_cms({
+    const { _cmsField, _cmsJoin, _cmsWhere } = Cast<LocalProcedureUtils>(this)._prepare_cms({
       tableName,
       iid,
       mode,
@@ -131,19 +132,19 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
 
     // tableName
     if (tableName) {
-      const _fields = await (this as unknown as LocalProcedureUtilsFieldsRight)._prepare_fieldsRight({ options });
+      const _fields = await Cast<LocalProcedureUtilsFieldsRight>(this)._prepare_fieldsRight({ options });
       _itemField = `${_fields},`;
       if (!atomClassBase || !atomClassBase.itemOnly) {
         _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
-        (this as unknown as LocalProcedureUtils)._prepare_orders_push(_orders, ['a.id', 'asc']);
+        Cast<LocalProcedureUtils>(this)._prepare_orders_push(_orders, ['a.id', 'asc']);
       } else {
         _itemJoin = `from ${tableName} f`;
-        (this as unknown as LocalProcedureUtils)._prepare_orders_push(_orders, ['f.id', 'asc']);
+        Cast<LocalProcedureUtils>(this)._prepare_orders_push(_orders, ['f.id', 'asc']);
       }
     } else {
       _itemField = '';
       _itemJoin = '';
-      (this as unknown as LocalProcedureUtils)._prepare_orders_push(_orders, ['a.id', 'asc']);
+      Cast<LocalProcedureUtils>(this)._prepare_orders_push(_orders, ['a.id', 'asc']);
     }
 
     // atom
@@ -165,7 +166,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
 
     // atomClass inner
     if (!atomClass) {
-      _where['a.atomClassId'] = await (this as unknown as LocalProcedureUtils)._prepare_atomClassIdsInner();
+      _where['a.atomClassId'] = await Cast<LocalProcedureUtils>(this)._prepare_atomClassIdsInner();
     }
     if (atomClass && !atomClassBase.itemOnly) {
       _where['a.atomClassId'] = atomClass.id;
@@ -184,7 +185,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     if (count) {
       _selectFields = 'count(*) as _count';
     } else {
-      _selectFields = (this as unknown as LocalProcedureUtils)._combineFields([
+      _selectFields = Cast<LocalProcedureUtils>(this)._combineFields([
         _itemField,
         _cmsField,
         _atomField,

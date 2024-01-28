@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanAtom0Import } from './bean.atom_0_import.js';
 import { BeanAtom0Select } from './bean.atom_0_select.js';
 import { BeanAtomSchema } from './bean.atom_schema.js';
@@ -43,7 +44,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     if (atomRevision !== undefined) {
       options.where['a.atomRevision'] = atomRevision;
     }
-    const list = await (this as unknown as BeanAtom0Select).select({ atomClass, options });
+    const list = await Cast<BeanAtom0Select>(this).select({ atomClass, options });
     return list[0];
   }
 
@@ -66,7 +67,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     // hold for subsequent usage
     options.tableName = tableName;
     // schema
-    const atomSchema = await (this as unknown as BeanAtomSchema)._prepareAtomSchema({
+    const atomSchema = await Cast<BeanAtomSchema>(this)._prepareAtomSchema({
       mode: options.containerMode || 'view',
       atomClass,
       options,
@@ -76,7 +77,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     // cms
     const cms = atomClassBase && atomClassBase.cms;
     // forAtomUser
-    const forAtomUser = (this as unknown as BeanAtomUtils)._checkForAtomUser(atomClass);
+    const forAtomUser = Cast<BeanAtomUtils>(this)._checkForAtomUser(atomClass);
     // options: maybe has another custom options
     options = Object.assign({}, options, {
       iid: this.ctx.instance.id,

@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0 } from './bean.atom_0.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
@@ -90,7 +91,7 @@ export class BeanAtomUtils extends BeanAtom0 {
         atom = await modelItem.get({ id: atomId });
       } else {
         // not use .read for infinite loop
-        atom = await (this as unknown as BeanAtom0Read)._get({ key, atomClass });
+        atom = await Cast<BeanAtom0Read>(this)._get({ key, atomClass });
       }
     } else {
       atom = await this.modelAtom.get({ id: atomId, atomClassId: atomClass.id });

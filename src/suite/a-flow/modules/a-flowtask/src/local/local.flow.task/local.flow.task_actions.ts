@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { LocalFlowTask0 } from './local.flow.task_0.js';
 import { LocalFlowTaskSchema } from './local.flow.task_schema.js';
 
@@ -8,7 +9,7 @@ export class LocalFlowTaskActions extends LocalFlowTaskSchema {
     // flowTask
     const flowTask = this.contextTask._flowTask;
     // check right
-    await (this as unknown as LocalFlowTask0).localRight.viewAtom({ flowTask, user });
+    await Cast<LocalFlowTask0>(this).localRight.viewAtom({ flowTask, user });
     // actions
     const nodeInstances = this.ctx.bean.flowTask._flowData_task_nodeInstancesBox();
     const actions = await this.ctx.bean.flowTask._flowData_task_actions({

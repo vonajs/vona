@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
@@ -215,7 +216,7 @@ export class LocalFlowNode0 extends BeanBase {
     // nodeDef
     const nodeDef = this.contextNode._nodeDef;
     // options
-    const options = (this as unknown as LocalFlowNodeCycle).getNodeDefOptions();
+    const options = Cast<LocalFlowNodeCycle>(this).getNodeDefOptions();
     return nodeDef.type.indexOf('startEventAtom') > -1 ? options.task : options;
   }
 
