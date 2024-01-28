@@ -51,10 +51,11 @@ async function _moduleHandle_useScope({ file, module, processHelper }) {
   }
   console.log(fileRelative);
   // replace
-  const contentNew = contentOld
-    .replace(/import \{ ScopeModule.*? \} from '.*?\/index\.js';/, `import { ScopeModule } from '${fileRelative}';`)
-    .replace(`extends BeanBase {`, `extends BeanBase<ScopeModule> {`)
-    .replace(/@Use[\s\S\n]*?scope: ScopeModule.*?;/, '');
+  // const contentNew = contentOld
+  //   .replace(/import \{ ScopeModule.*? \} from '.*?\/index\.js';/, `import { ScopeModule } from '${fileRelative}';`)
+  //   .replace(`extends BeanBase {`, `extends BeanBase<ScopeModule> {`)
+  //   .replace(/@Use[\s\S\n]*?scope: ScopeModule.*?;/, '');
+  const contentNew = contentOld.replace(`import { BeanBase, Controller, Use }`, `import { BeanBase, Controller }`);
   // console.log(contentNew);
   await fse.outputFile(file, contentNew);
   await processHelper.formatFile({ fileName: file });
