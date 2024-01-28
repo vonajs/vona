@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../resource/this.js';
 import { Bean } from '@cabloy/core';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
-const Strategy = require('passport-github').Strategy;
+import Strategy from 'passport-github';
 import StrategyMock from '../meta/passport/strategyMock.js';
 
 @Bean({ scene: 'auth.provider' })
