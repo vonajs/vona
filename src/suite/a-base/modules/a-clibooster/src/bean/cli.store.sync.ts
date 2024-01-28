@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
 
 import path from 'path';
 import os from 'os';
@@ -8,7 +8,7 @@ import eggBornUtils from 'egg-born-utils';
 import AdmZip from 'adm-zip';
 import semver from 'semver';
 import fse from 'fs-extra';
-import rimraf from 'mz-modules/rimraf';
+import { rimraf } from 'rimraf';
 import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })

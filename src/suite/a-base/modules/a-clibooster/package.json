@@ -48,7 +48,7 @@
     "jszip": "^3.10.1",
     "bluebird": "^3.7.2",
     "fs-extra": "^10.1.0",
-    "mz-modules": "^2.1.0",
+    "rimraf": "^5.0.5",
     "semver": "^7.3.7",
     "sha.js": "^2.4.11",
     "uglify-js": "^3.7.7",
