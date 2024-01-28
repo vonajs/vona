@@ -92,6 +92,8 @@ export default class CliStoreBase extends BeanCliBase {
     }
   }
 
+  async onExecuteStoreCommandEntity(/* { entityName, entityConfig }*/ _params: any): Promise<any> {}
+
   async _executeStoreCommand() {
     const { argv } = this.context;
     // entityNames
@@ -151,7 +153,7 @@ export default class CliStoreBase extends BeanCliBase {
       }
       // onExecuteStoreCommandEntity
       return await this.onExecuteStoreCommandEntity({ entityName, entityConfig });
-    } catch (err) {
+    } catch (err: any) {
       let message = err.message;
       if (message && typeof message === 'object') {
         message = JSON.stringify(message, null, 2);

@@ -34,7 +34,7 @@ export class BeanCli extends BeanBase {
     await this.ctx.bean.progress.create({ progressId });
     // background
     this.ctx.meta.util.runInBackground(async ({ ctx }) => {
-      const selfInstance = ctx.bean._newBean(Cli);
+      const selfInstance = ctx.bean._newBean(BeanCli);
       await selfInstance._progressInBackground({ progressId, context, user });
     });
     // return progressId
@@ -56,7 +56,7 @@ export class BeanCli extends BeanBase {
       await beanCommand.execute({ user });
       // progress done
       await this.ctx.bean.progress.done({ progressId, message: this.ctx.text('CliDone') });
-    } catch (err) {
+    } catch (err: any) {
       // progress error
       const msg = err.message;
       let msgObject;

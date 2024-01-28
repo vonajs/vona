@@ -68,7 +68,7 @@ export class LocalUtils extends BeanBase {
       });
     }
     const timeEnd = new Date();
-    const duration = timeEnd - timeBegin;
+    const duration = timeEnd.valueOf() - timeBegin.valueOf();
     // ok
     return { timeBegin, timeEnd, duration, result };
   }

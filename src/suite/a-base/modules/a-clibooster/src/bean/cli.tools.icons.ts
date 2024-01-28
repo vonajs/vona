@@ -97,7 +97,7 @@ ${symbols.join('\n')}
     delete svg.metadata;
     // root
     const domRoot = svg.$;
-    const attrs = { id: iconName };
+    const attrs: any = { id: iconName };
     if (domRoot.preserveAspectRatio) attrs.preserveAspectRatio = domRoot.preserveAspectRatio;
     if (domRoot.viewBox) attrs.viewBox = domRoot.viewBox;
     svg.$ = attrs;

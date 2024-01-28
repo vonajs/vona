@@ -38,7 +38,8 @@ export type TypeDecoratorBeanOptionsScene =
   | 'cli.tools'
   | 'io.message'
   | 'io.channel'
-  | 'summer.cache';
+  | 'summer.cache'
+  | 'captcha.provider';
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
    * global: equal to name

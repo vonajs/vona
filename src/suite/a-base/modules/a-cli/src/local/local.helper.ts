@@ -70,7 +70,7 @@ export class LocalHelper extends BeanBase {
   }
   findModule(moduleName) {
     const moduleInfo = this.parseModuleInfo(moduleName);
-    return this.ctx.app.meta.modules[__ThisModule__];
+    return this.ctx.app.meta.modules[moduleInfo.relativeName];
   }
   parseSuiteInfo(suiteName) {
     const suiteInfo = mparse.parseInfo(suiteName, 'suite');
