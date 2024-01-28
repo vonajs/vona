@@ -3,7 +3,7 @@ import { BeanBase } from '@cabloy/core';
 export class VersionInit extends BeanBase {
   async run(_options) {
     // add role rights
-    let roleRights = [
+    let roleRights: any[] = [
       //
       { roleName: 'system', action: 'read', scopeNames: 'authenticated' },
       // custom
