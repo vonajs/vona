@@ -38,8 +38,21 @@ async function main() {
   }
 }
 
+async function _moduleHandle_scopeModule({ file, module, processHelper }) {
+  // console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('ScopeModule') > -1) return;
+  //
+  const scopeModuleName = getScopeModuleName(module.info.relativeName);
+  // console.log(scopeModuleName);
+  const contentNew = `${contentOld}\n
+export { ${scopeModuleName} as ScopeModule } from './scope.js';
+  `;
+  console.log(contentNew);
+}
+
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/src/**/*.ts`;
+  const pattern = `${module.root}/src/resource/this.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -56,7 +69,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_super({ file, module, processHelper });
+    await _moduleHandle_scopeModule({ file, module, processHelper });
   }
 }
 
