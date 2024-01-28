@@ -1,1 +1,1 @@
-import 'cabloy-module-api-a-base';
+import 'cabloy-suite-api-a-base';
