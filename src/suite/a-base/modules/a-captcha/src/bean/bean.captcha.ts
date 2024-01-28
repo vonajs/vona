@@ -85,7 +85,7 @@ export class BeanCaptcha extends BeanModuleScopeBase {
       sceneName: providerInstance.sceneName,
     });
     // invoke provider verify
-    const _moduleInfo = ModuleInfo.parseInfo(provider.module);
+    const _moduleInfo = ModuleInfo.parseInfo(provider.module)!;
     await this.ctx.meta.util.executeBean({
       beanModule: _moduleInfo.relativeName,
       beanFullName: `${_moduleInfo.relativeName}.captcha.provider.${provider.name}`,
