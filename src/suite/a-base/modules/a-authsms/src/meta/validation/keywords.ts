@@ -1,19 +1,21 @@
+import { CabloyContext } from '@cabloy/core';
+
 const keywords: any = {};
 keywords.exists = {
   async: true,
   type: 'string',
   errors: true,
   compile() {
-    return async function (data, path, rootData, name) {
+    return async function (this: CabloyContext, data, _path, _rootData, name) {
       const ctx = this;
       const res = await ctx.bean.user.exists({ [name]: data });
       if (res && res.id !== ctx.state.user.agent.id) {
-        const errors = [{ keyword: 'x-exists', params: [], message: ctx.text('Element Exists') }];
-        throw new module.meta.class.Ajv.ValidationError(errors);
+        const errors: any[] = [{ keyword: 'x-exists', params: [], message: ctx.text('Element Exists') }];
+        throw new ctx.bean.ajv.Ajv.ValidationError(errors);
       }
       if (!res && data.indexOf('__') > -1) {
-        const errors = [{ keyword: 'x-exists', params: [], message: ctx.text('Cannot Contain __') }];
-        throw new module.meta.class.Ajv.ValidationError(errors);
+        const errors: any[] = [{ keyword: 'x-exists', params: [], message: ctx.text('Cannot Contain __') }];
+        throw new ctx.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;
     };

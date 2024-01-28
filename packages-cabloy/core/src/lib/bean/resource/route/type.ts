@@ -14,8 +14,14 @@ export interface IModuleMiddlewareAuth {
   enable?: boolean;
 }
 
+export interface IModuleMiddlewareCaptchaVerifyScene {
+  name: string;
+  dataKey?: string;
+  fieldKey?: string;
+}
 export interface IModuleMiddlewareCaptchaVerify {
-  scene: { name: string };
+  scene?: IModuleMiddlewareCaptchaVerifyScene;
+  scenes?: IModuleMiddlewareCaptchaVerifyScene[];
 }
 
 export interface IModuleMiddlewareAuthOpen {

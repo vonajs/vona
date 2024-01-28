@@ -48,7 +48,7 @@ export class LocalHelper extends BeanBase {
     return this.context.cwd;
   }
 
-  newChalk(options) {
+  newChalk(options?) {
     if (!options) {
       options = this.moduleConfig.helper.chalk.options;
     }

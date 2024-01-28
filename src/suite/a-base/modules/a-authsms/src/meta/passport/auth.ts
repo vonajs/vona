@@ -1,7 +1,6 @@
-const provider = moduleInfo.name;
 export default {
   providers: {
-    [provider]: {
+    authsms: {
       meta: {
         title: 'SMS',
         inline: true,

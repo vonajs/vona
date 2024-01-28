@@ -38,7 +38,7 @@ async function sceneVerify({ ctx, scene }: any) {
   // verify
   try {
     await ctx.bean.captcha.verify({ module, sceneName, providerInstanceId, dataInput });
-  } catch (err) {
+  } catch (err: any) {
     throw combineCaptchaError({
       fieldKey: scene.fieldKey || 'token',
       message: err.message,

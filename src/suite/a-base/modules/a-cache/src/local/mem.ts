@@ -41,7 +41,7 @@ export class LocalMem extends BeanModuleScopeBase {
   has(name) {
     const res = this.memory[name];
     if (!res) return null;
-    return res.timeout === 0 || new Date() - res.timestamp < res.timeout ? res : null;
+    return res.timeout === 0 || new Date().valueOf() - res.timestamp < res.timeout ? res : null;
   }
 
   remove(name) {

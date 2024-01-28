@@ -36,6 +36,7 @@
   },
   "author": "zhennann",
   "dependencies": {
-    "passport-github": "^1.1.0"
+    "passport-github": "^1.1.0",
+    "passport-strategy": "^1.0.0"
   }
 }

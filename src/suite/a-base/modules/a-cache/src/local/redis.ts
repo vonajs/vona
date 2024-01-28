@@ -26,13 +26,13 @@ export class LocalRedis extends BeanModuleScopeBase {
   async getset(name, value, timeout) {
     const redis = this.ctx.app.redis.get('cache');
     const key = this._getKey(name);
-    let valuePrev;
+    let valuePrev: any;
     if (timeout) {
       const res = await redis.multi().get(key).set(key, JSON.stringify(value), 'PX', timeout).exec();
-      valuePrev = res[0][1];
+      valuePrev = res && res[0][1];
     } else {
       const res = await redis.multi().get(key).set(key, JSON.stringify(value)).exec();
-      valuePrev = res[0][1];
+      valuePrev = res && res[0][1];
     }
     return valuePrev ? JSON.parse(valuePrev) : undefined;
   }

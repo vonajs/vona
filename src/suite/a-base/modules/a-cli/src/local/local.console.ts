@@ -17,7 +17,7 @@ export class LocalConsole extends BeanBase {
     return this.cli.options.context;
   }
 
-  async log(data, options = {}) {
+  async log(data, options: any = {}) {
     if (!data) return;
     // data
     if (typeof data !== 'object') {

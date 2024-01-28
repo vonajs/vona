@@ -1,7 +1,7 @@
 import passport from 'passport-strategy';
 import util from 'util';
 
-function Strategy(options, verify) {
+function Strategy(this: any, options, verify) {
   if (typeof options === 'function') {
     verify = options;
     options = {};

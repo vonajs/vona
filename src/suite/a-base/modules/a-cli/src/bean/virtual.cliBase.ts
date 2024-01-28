@@ -114,7 +114,7 @@ export class BeanCliBase extends BeanBase {
 
   _commandMeta_info({ info, argv }: any) {
     // info
-    const metaInfo = {
+    const metaInfo: any = {
       version: info.version,
       title: this.ctx.text(info.title),
       usage: this.ctx.text(info.usage),
