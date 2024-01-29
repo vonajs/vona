@@ -4,7 +4,7 @@ const urllib = require('urllib');
 const semver = require('semver');
 const chalk = require('chalk');
 const boxen = require('boxen');
-const extend = require('@cabloy/extend');
+const extend = require('@cabloy/extend').default;
 const eggBornUtils = require('egg-born-utils');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
