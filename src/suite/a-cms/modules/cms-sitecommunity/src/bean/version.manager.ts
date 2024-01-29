@@ -61,7 +61,7 @@ export class VersionManager extends BeanBase {
       module: __ThisModule__,
       atomClassName: 'post',
     };
-    const categories = [
+    const categories: any[] = [
       // en-us
       { categoryName: 'Share', language: 'en-us', categoryIdParent: 0, categorySorting: 1 },
       { categoryName: 'Answer', language: 'en-us', categoryIdParent: 0, categorySorting: 2 },
