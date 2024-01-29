@@ -409,8 +409,7 @@ export class LocalBuild extends BeanBase {
 
   async _renderArticle({ site, article }: any) {
     // data
-    const data = await this.getData({ site });
-    data.article = article;
+    const data = await this.getData({ site, article });
     // render
     await this._renderFile({
       fileSrc: 'main/article.ejs',
@@ -554,8 +553,7 @@ export class LocalBuild extends BeanBase {
     const pluginIncludes = await this._loadPluginIncludes({ site, language });
     contentSrc = `${pluginIncludes}\n${contentSrc}`;
     // render
-    const options = this.getOptions();
-    options.filename = fileName;
+    const options = this.getOptions(fileName);
     let content = await ejs.render(contentSrc, data, options);
     content = await this._renderEnvs({ data, content });
     content = await this._renderCSSJSes({ data, content });
@@ -763,13 +761,14 @@ var env=${JSON.stringify(env, null, 2)};
     return path.join(pathRoot, fileName);
   }
 
-  getOptions() {
+  getOptions(filename?) {
     return {
       async: true,
       cache: true,
       compileDebug: this.ctx.app.meta.isTest || this.ctx.app.meta.isLocal,
       outputFunctionName: 'echo',
       rmWhitespace: true,
+      filename,
     };
   }
 
@@ -799,7 +798,7 @@ var env=${JSON.stringify(env, null, 2)};
     };
   }
 
-  async getData({ site }: any) {
+  async getData({ site, article }: { site: any; article?: any }) {
     // data
     const self = this;
     const _csses: any[] = [];
@@ -812,6 +811,7 @@ var env=${JSON.stringify(env, null, 2)};
     return {
       ctx: self.ctx,
       site,
+      article,
       _csses,
       _jses,
       _envs,
