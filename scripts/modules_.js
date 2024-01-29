@@ -69,6 +69,64 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
+async function _moduleHandle_bean({ file, module, processHelper }) {
+  // if (module.info.relativeName === 'a-base') return;
+  // console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+  // console.log(contentOld);
+  const regexp = /export \* from '\.\.\/bean\/bean\.(.*?)\.js';/g;
+  const matches = contentOld.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  const outputNew3 = [];
+  let matchCount = 0;
+  for (const match of matches) {
+    matchCount++;
+    const classNameOld = match[1];
+    const classNameNew = classPathToClassName('Bean', classNameOld);
+    // console.log(classNameOld, classNameNew);
+    const _declare = `${classNameOld}: ${classNameNew}`;
+    if (contentOld.indexOf(_declare) === -1) {
+      // console.log(file);
+      // console.log(classNameNew);
+      outputNew1.push(`import { ${classNameNew} } from '../bean/bean.${classNameOld}.js';`);
+      outputNew2.push(`${classNameOld}: ${classNameNew};`);
+    }
+  }
+  if (outputNew1.length === 0) {
+    return;
+  }
+  //
+  let contentNew;
+  if (contentOld.indexOf('export interface IBeanRecord') === -1) {
+    contentNew = `
+${contentOld}
+
+declare module '@cabloy/core' {
+  export interface IBeanRecord {
+  }
+}  
+`;
+  } else {
+    contentNew = contentOld;
+  }
+  //
+  if (contentNew.indexOf('import {') > -1) {
+    contentNew = contentNew.replace(`import {`, `${outputNew1.join('\n')}import {`);
+  } else {
+    contentNew = contentNew.replace(`declare module`, `${outputNew1.join('\n')}\n\ndeclare module`);
+    // console.log(contentNew);
+  }
+  contentNew = contentNew.replace(
+    `export interface IBeanRecord {`,
+    `export interface IBeanRecord {\n${outputNew2.join('\n')}`,
+  );
+  // console.log(contentNew);
+  console.log(file);
+  await fse.outputFile(file, contentNew);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_useScope({ file, module, processHelper }) {
   console.log(file);
   const contentOld = (await fse.readFile(file)).toString();
