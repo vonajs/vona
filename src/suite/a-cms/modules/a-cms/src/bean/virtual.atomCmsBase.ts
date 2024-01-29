@@ -74,7 +74,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
       }
     }
     // add article
-    const params = {
+    const params: any = {
       atomId,
       editMode,
       slug,
