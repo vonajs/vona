@@ -43,16 +43,9 @@ async function _moduleHandle_backend({ file, module, processHelper }) {
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/backend`;
-  if (fse.existsSync(pattern)) {
-    // console.log(pattern);
-    const files = await eggBornUtils.tools.globbyAsync(pattern + '/**');
-    if (files.length > 0) {
-      console.log(pattern);
-    }
-    await fse.remove(pattern);
-    return;
-  }
+  const pattern = `${module.root}/build`;
+  await fse.remove(pattern);
+  return;
   const files = await eggBornUtils.tools.globbyAsync(pattern, { onlyDirectories: true });
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
