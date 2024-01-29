@@ -10,6 +10,8 @@ import { CabloyContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 
+const __EnvTests = ['unittest', 'test'];
+
 export class AppUtil extends BeanSimple {
   instanceStarted(subdomain) {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
@@ -396,7 +398,11 @@ export class AppUtil extends BeanSimple {
     // check none
     if (!env) return true;
     if (!Array.isArray(env)) env = env.split(',');
-    const bingo = env.some(item => this.app.config.env === item);
+    const bingo = env.some(item => {
+      if (this.app.config.env === item) return true;
+      if (__EnvTests.includes(this.app.config.env) && __EnvTests.includes(item)) return true;
+      return false;
+    });
     if (!bingo) return false;
     return true;
   }

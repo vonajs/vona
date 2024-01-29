@@ -76,6 +76,7 @@ const content = {
   },
 };
 const definition = {
+  __gate__: { env: 'test,local' },
   atomName: 'Test_Set03_Gateway_Parallel',
   atomStaticKey: 'set03_gatewayParallel',
   atomRevision: 1,

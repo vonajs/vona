@@ -54,6 +54,7 @@ const content = {
   },
 };
 const definition = {
+  __gate__: { env: 'test,local' },
   atomName: 'Test_Set03_Gateway_Exclusive',
   atomStaticKey: 'set03_gatewayExclusive',
   atomRevision: 2,

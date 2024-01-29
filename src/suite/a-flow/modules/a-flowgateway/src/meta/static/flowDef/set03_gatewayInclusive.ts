@@ -102,6 +102,7 @@ const content = {
   },
 };
 const definition = {
+  __gate__: { env: 'test,local' },
   atomName: 'Test_Set03_Gateway_Inclusive',
   atomStaticKey: 'set03_gatewayInclusive',
   atomRevision: 2,
