@@ -20,7 +20,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     const edgeDefId = this.contextEdge._edgeDef.id;
     const behaviorDefId = this.contextEdge._edgeDef.behavior;
     const data = {
-      mode,
+      gatewayMode: this.gatewayMode,
       flowId,
       flowNodeId,
       nodeDefId,
@@ -45,7 +45,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     const debug = this.ctx.app.bean.debug.get('flow');
     debug(
       'gateway %s: flowId:%d, flowNodeId:%d, nodeDefId:%s, edgeDefId:%s',
-      mode,
+      this.gatewayMode,
       flowId,
       flowNodeId,
       nodeDefId,
@@ -71,7 +71,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     // check done
     const nodeInstanceCurrent = nodeInstanceShadow || nodeInstance;
     const done = await this._checkDone({ nodeInstanceCurrent });
-    debug('gateway %s: flowId:%d, flowNodeId:%d, done:%d', mode, flowId, flowNodeId, done);
+    debug('gateway %s: flowId:%d, flowNodeId:%d, done:%d', this.gatewayMode, flowId, flowNodeId, done);
     if (done) {
       // clear the other shadow nodes
       const nodeInstancesShadow = await this._checkShadowNodesOthers({
@@ -138,7 +138,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     const debug = this.ctx.app.bean.debug.get('flow');
     debug(
       'gateway %s: flowId:%d, flowNodeId:%d, flowNodesActive:%s',
-      mode,
+      this.gatewayMode,
       flowId,
       flowNodeId,
       flowNodeIdsActive.join(','),
