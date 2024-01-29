@@ -127,7 +127,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
     return data;
   }
 
-  async _write_cms({ atomStage, target, key, item, options, user }: any) {
+  async _write_cms({ atomStage, target, key, item, options: _options, user: _user }: any) {
     // get atom for safety
     let atomOld;
     if (key.atomId === 0) {

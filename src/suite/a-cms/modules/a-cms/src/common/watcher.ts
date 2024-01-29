@@ -3,16 +3,17 @@ import path from 'path';
 import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Cast } from '@cabloy/core';
 // import eggBornUtils from 'egg-born-utils';
 
 export class Watcher extends BeanBase {
   _watchers: any;
   _freezeCounter: any;
   _needReload: any;
-  _needReload: any;
+  _reloadDebounce: any;
 
   constructor() {
+    super();
     this._watchers = {};
     this._freezeCounter = 0;
     this._needReload = false;
@@ -145,11 +146,12 @@ export class Watcher extends BeanBase {
       }, 300),
     );
     // on ready
+    const _watcher2 = Cast(_watcher);
     _watcher.once('ready', function () {
-      _watcher.__eb_ready = true;
-      if (_watcher.__eb_closing) {
+      _watcher2.__eb_ready = true;
+      if (_watcher2.__eb_closing) {
         _watcher.close();
-        _watcher.__eb_closed = true;
+        _watcher2.__eb_closed = true;
       }
     });
     // ok
@@ -216,7 +218,7 @@ export class Watcher extends BeanBase {
 
   // invoked in agent
   _reloadByAgent() {
-    process.send({
+    Cast(process).send({
       to: 'master',
       action: 'reload-worker',
     });
