@@ -35,7 +35,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
           module: null,
           atomClassName: atomClassKey,
         });
-        const items = statics[atomClassKey].items;
+        const items = this._filterGate(statics[atomClassKey].items);
         if (!items || items.length === 0) continue;
         statics2.push({
           moduleName,
@@ -64,6 +64,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     moduleName = moduleName || this.moduleScope;
     const atomStaticKeys: any[] = [];
     for (const item of items) {
+      if (!this._checkGate(item)) continue;
       // key not empty
       if (!item.atomStaticKey) {
         throw new Error(`atomStaticKey cannot be empty for atom: ${moduleName}:${item.atomName}`);
@@ -87,6 +88,15 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
       pageForce: false,
     });
     return atoms;
+  }
+
+  _checkGate(item) {
+    return this.app.meta.util.checkGate(item.__gate__);
+  }
+
+  _filterGate(items?: any[]) {
+    if (!items) return;
+    return items.filter(item => this._checkGate(item));
   }
 
   async preloadAtomStatic({ atomStaticKey }: any) {
