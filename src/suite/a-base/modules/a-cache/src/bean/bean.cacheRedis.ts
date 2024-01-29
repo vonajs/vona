@@ -1,7 +1,7 @@
-import { BeanModuleScopeBase, Local } from '@cabloy/core';
+import { BeanModuleScopeBase, Bean } from '@cabloy/core';
 
-@Local()
-export class LocalRedis extends BeanModuleScopeBase {
+@Bean()
+export class BeanCacheRedis extends BeanModuleScopeBase {
   _getKey(name) {
     return `${this.ctx.instance ? this.ctx.instance.id : 0}:${this.moduleScope}:${name}`;
   }

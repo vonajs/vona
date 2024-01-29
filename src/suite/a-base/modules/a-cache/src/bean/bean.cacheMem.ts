@@ -1,9 +1,9 @@
-import { BeanModuleScopeBase, Local } from '@cabloy/core';
+import { BeanModuleScopeBase, Bean } from '@cabloy/core';
 
 const CACHEMEMORY = Symbol('APP#__CACHEMEMORY');
 
-@Local()
-export class LocalMem extends BeanModuleScopeBase {
+@Bean()
+export class BeanCacheMem extends BeanModuleScopeBase {
   get memory() {
     if (!this.ctx.app[CACHEMEMORY]) {
       this.ctx.app[CACHEMEMORY] = {};

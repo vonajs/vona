@@ -1,8 +1,8 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { BeanModuleScopeBase, Local } from '@cabloy/core';
+import { BeanModuleScopeBase, Bean } from '@cabloy/core';
 
-@Local()
-export class LocalDb extends BeanModuleScopeBase {
+@Bean()
+export class BeanCacheDb extends BeanModuleScopeBase {
   async get(name) {
     const res = await this._has(name);
     return res ? JSON.parse(res.value) : undefined;
