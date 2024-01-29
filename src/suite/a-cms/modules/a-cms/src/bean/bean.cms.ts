@@ -1,16 +1,17 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { LocalBuild, LocalRender, LocalSite } from '../index.js';
 
 @Bean()
 export class BeanCms extends BeanBase {
   get render() {
-    return this.ctx.bean._getBean('a-cms.local.render');
+    return this.ctx.bean._getBean(LocalRender);
   }
 
   get site() {
-    return this.ctx.bean._getBean('a-cms.local.site');
+    return this.ctx.bean._getBean(LocalSite);
   }
 
   build({ atomClass }: any) {
-    return this.ctx.bean._newBean(`a-cms.local.build`, atomClass);
+    return this.ctx.bean._newBean(LocalBuild, atomClass);
   }
 }
