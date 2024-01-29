@@ -13,7 +13,7 @@ export class BeanCacheRedis extends BeanModuleScopeBase {
     return value ? JSON.parse(value) : undefined;
   }
 
-  async set(name, value, timeout) {
+  async set(name, value, timeout?) {
     const redis = this.ctx.app.redis.get('cache');
     const key = this._getKey(name);
     if (timeout) {

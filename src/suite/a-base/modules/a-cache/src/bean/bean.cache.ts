@@ -1,25 +1,26 @@
-import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
 export class BeanCache extends BeanBase {
   get db() {
-    const config = this.ctx.config.module(__ThisModule__);
-    if (config.db.redis) {
-      return this.redis;
-    }
-    return this._db;
+    // always return redis
+    return this.redis;
+    // const config = this.ctx.config.module(__ThisModule__);
+    // if (config.db.redis) {
+    //   return this.redis;
+    // }
+    // return this._db;
   }
 
   get _db() {
-    return this.ctx.bean._getBean('a-cache.local.db');
+    return this.bean.cacheDb;
   }
 
   get mem() {
-    return this.ctx.bean._getBean('a-cache.local.mem');
+    return this.bean.cacheMem;
   }
 
   get redis() {
-    return this.ctx.bean._getBean('a-cache.local.redis');
+    return this.bean.cacheRedis;
   }
 }
