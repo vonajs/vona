@@ -8,7 +8,7 @@ export class VersionManager extends BeanBase {
     }
   }
 
-  async init(options) {}
+  async init() {}
 
   async test() {}
 }

@@ -1,6 +1,6 @@
 import { BeanBase } from '@cabloy/core';
 
-export class BeanFlowBehaviorBase extends BeanBase {
+export class BeanFlowBehaviorBase<T = unknown> extends BeanBase<T> {
   flowInstance: any;
   nodeInstance: any;
   context: any;

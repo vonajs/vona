@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
+import { FlowBehaviorOvertime } from './flow.behavior.overtime.js';
 
 @Bean({ scene: 'queue' })
 export class QueueOvertime extends BeanBase {
   async execute(context) {
-    const _behaviorBean = this.ctx.bean._newBean(`${__ThisModule__}.flow.behavior.overtime`);
+    const _behaviorBean = this.ctx.bean._newBean(FlowBehaviorOvertime);
     await _behaviorBean._runJob(context);
   }
 }

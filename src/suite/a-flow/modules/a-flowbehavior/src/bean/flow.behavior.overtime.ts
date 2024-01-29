@@ -1,10 +1,10 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean } from '@cabloy/core';
 import { BeanFlowBehaviorBase } from 'cabloy-module-api-a-flow';
 
 @Bean({ scene: 'flow.behavior' })
 export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
-  async enter(context, next) {
+  async enter(_context, next) {
     // addJob
     const flowId = this.context._flowId;
     const flowNodeId = this.contextNode._flowNodeId;
@@ -14,7 +14,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     return await next();
   }
 
-  async clear(context, next) {
+  async clear(_context, next) {
     // deleteJob
     const flowId = this.context._flowId;
     const flowNodeId = this.contextNode._flowNodeId;
@@ -35,7 +35,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     if (options.timeDuration) {
       delay = options.timeDuration;
     } else {
-      delay = options.timeDate - new Date();
+      delay = options.timeDate - new Date().valueOf();
     }
     // push
     const jobName = this._getJobName({ flowId, flowNodeId, behaviorDefId });

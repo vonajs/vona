@@ -26,6 +26,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'sequence'
   | 'local.flow'
   | 'flow.node'
+  | 'flow.edge'
   | 'flow.behavior'
   | 'flow.service'
   | 'auth.provider'
