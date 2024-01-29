@@ -16,7 +16,7 @@ const boxenOptions: boxen.Options = {
 export class SmsProviderTest extends BeanBase {
   async sendCode({ context }: any) {
     // token
-    const token = this.__prefix0(parseInt(String(Math.random() * 10000)), 4);
+    const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
     // prompt
     const message =
       chalk.keyword('cyan')('Test SMS Verification Code To: ') +

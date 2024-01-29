@@ -135,7 +135,7 @@ export class LocalBuild extends BeanBase {
   }
 
   // site<plugin<theme<site(db)<language(db)
-  async combineSiteBase(options) {
+  async combineSiteBase(options?) {
     const mergeConfigSite = options && options.mergeConfigSite;
     // site
     let site = await this.getConfigSiteBase();
@@ -907,7 +907,7 @@ var env=${JSON.stringify(env, null, 2)};
       return {
         time,
       };
-    } catch (err) {
+    } catch (err: any) {
       // error
       if (progressId) {
         if (progressNo === 0) {
@@ -1068,7 +1068,7 @@ var env=${JSON.stringify(env, null, 2)};
       return {
         time,
       };
-    } catch (err) {
+    } catch (err: any) {
       // error
       if (progressId) {
         if (progressNo === 0) {
@@ -1123,9 +1123,9 @@ var env=${JSON.stringify(env, null, 2)};
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
       const plugin = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.plugin');
-      if (!module.info.public && plugin) {
-        site._watchers.push(path.join(module.root, 'backend/cms'));
-        // site._watchers.push(path.join(module.root, 'backend/src'));
+      if (!module.info.node_modules && !module.info.vendor && plugin) {
+        site._watchers.push(path.join(module.root, 'cms'));
+        // site._watchers.push(path.join(module.root, 'src'));
       }
     }
 
@@ -1163,7 +1163,7 @@ var env=${JSON.stringify(env, null, 2)};
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${items}</sitemapindex>`;
     // write
-    const pathRawDist = await this.getPathRawDist(site);
+    const pathRawDist = await this.getPathRawDist();
     await fse.outputFile(`${pathRawDist}/sitemapindex.xml`, content);
   }
 
@@ -1176,7 +1176,7 @@ Allow: /
 Sitemap: ${urlRawRoot}/sitemapindex.xml
 `;
     // write
-    const pathRawDist = await this.getPathRawDist(site);
+    const pathRawDist = await this.getPathRawDist();
     await fse.outputFile(`${pathRawDist}/robots.txt`, content);
   }
 
@@ -1217,9 +1217,9 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
       this._watcherThemes(site, moduleExtend);
     }
     // current
-    if (!module.info.public) {
-      site._watchers.push(path.join(module.root, 'backend/cms'));
-      // site._watchers.push(path.join(module.root, 'backend/src'));
+    if (!module.info.node_modules && !module.info.vendor) {
+      site._watchers.push(path.join(module.root, 'cms'));
+      // site._watchers.push(path.join(module.root, 'src'));
     }
   }
 
@@ -1270,7 +1270,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     }
     // ok
     const url = this.getUrl(site, site.language && site.language.current, articleUrl);
-    const res = {
+    const res: any = {
       relativeUrl: articleUrl,
       url,
     };

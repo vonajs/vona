@@ -19,7 +19,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
 
   async _set({ name, value, timeout, queue }: any) {
     // second
-    const second = timeout ? parseInt(String(timeout / 1000)) : timeout;
+    const second = timeout ? parseInt(timeout / 1000) : timeout;
     // expired
     const expired = second ? `TIMESTAMPADD(SECOND,${second},CURRENT_TIMESTAMP)` : 'null';
     const res = await this.ctx.db.get('aCache', {

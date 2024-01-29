@@ -10,7 +10,7 @@ export class SmsProviderAliyun extends BeanBase {
     const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
     if (!providerInstance) this.ctx.throw(403);
     // token
-    const token = this.__prefix0(parseInt(String(Math.random() * 10000)), 4);
+    const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
     const templateParam = { code: token };
     // params
     const params = {

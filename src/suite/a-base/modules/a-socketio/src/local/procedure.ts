@@ -24,7 +24,7 @@ export class LocalProcedure extends BeanBase {
     // offset
     let _offsetWhere;
     if (typeof offset === 'number') {
-      _offsetWhere = ` and a.id > ${parseInt(String(offset))}`;
+      _offsetWhere = ` and a.id > ${parseInt(offset)}`;
     } else {
       _offsetWhere = '';
     }

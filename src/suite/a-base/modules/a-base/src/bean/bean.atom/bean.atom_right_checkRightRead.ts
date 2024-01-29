@@ -3,7 +3,7 @@ import { BeanAtomRightCheckRightCreate } from './bean.atom_right_checkRightCreat
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
 export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
-  async checkRoleRightRead({ atom: { id }, atomClass, options, roleId }) {
+  async checkRoleRightRead({ atom: { id }, atomClass, options, roleId }: any) {
     return await this.checkRoleRightAction({
       atom: { id },
       atomClass,
