@@ -44,9 +44,7 @@ async function _moduleHandle_backend({ file, module, processHelper }) {
 
 async function _moduleHandle({ module, processHelper }) {
   const pattern = `${module.root}/build`;
-  await fse.remove(pattern);
-  return;
-  const files = await eggBornUtils.tools.globbyAsync(pattern, { onlyDirectories: true });
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
     // console.log(contentOld);
