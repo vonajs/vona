@@ -1,10 +1,8 @@
 import { Atom } from '@cabloy/core';
-import { BeanAtomBase } from 'cabloy-module-api-a-base';
-
-import AtomCmsBase from '../common/atomCmsBase.js';
+import { BeanAtomCmsBase } from '../bean/virtual.atomCmsBase.js';
 
 @Atom()
-export class AtomArticle extends BeanAtomBase {
+export class AtomArticle extends BeanAtomCmsBase {
   async default({ atomClass, item, options, user }: any) {
     // super
     return await super.default({ atomClass, item, options, user });

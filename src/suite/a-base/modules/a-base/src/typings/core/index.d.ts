@@ -20,3 +20,4 @@ import 'cabloy-module-api-a-detail';
 import 'cabloy-module-api-a-status';
 import 'cabloy-module-api-a-mail';
 import 'cabloy-module-api-a-captcha';
+import 'cabloy-module-api-a-markdown';

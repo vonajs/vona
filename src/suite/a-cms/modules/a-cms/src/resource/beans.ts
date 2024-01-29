@@ -1,5 +1,4 @@
 export * from '../bean/virtual.atomCmsBase.js';
-export * from '../bean/version.manager_0.js';
 export * from '../bean/version.manager.js';
 export * from '../bean/startup.registerDevelopment.js';
 export * from '../bean/startup.registerAllWatchers.js';

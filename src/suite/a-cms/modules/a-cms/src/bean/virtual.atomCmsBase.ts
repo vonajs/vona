@@ -4,7 +4,7 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 import trimHtml from '@zhennann/trim-html';
 
 @Virtual({ scene: 'bean' })
-export class BeanAtomCmsBase extends BeanAtomBase {
+export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
   get modelCMSArticle() {
     return this.ctx.model.module(__ThisModule__).article;
   }
@@ -321,7 +321,7 @@ export class BeanAtomCmsBase extends BeanAtomBase {
     });
   }
 
-  _cms_getMeta(options, item, showSorting) {
+  _cms_getMeta(_options, item, showSorting) {
     const meta = this._ensureItemMeta(item);
     // meta.flags
     if (item.sticky) meta.flags.push(this.ctx.text('Sticky'));
