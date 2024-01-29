@@ -781,19 +781,19 @@ var env=${JSON.stringify(env, null, 2)};
     const self = this;
     const _textLocale = this.getCurrentLocale({ site });
     return {
-      now(fmt, locale) {
+      now(fmt?, locale?) {
         return self.ctx.bean.util.now(fmt, locale || _textLocale);
       },
-      today(fmt, locale) {
+      today(fmt?, locale?) {
         return self.ctx.bean.util.today(fmt, locale || _textLocale);
       },
-      formatDateTime(date, fmt, locale) {
+      formatDateTime(date, fmt?, locale?) {
         return self.ctx.bean.util.formatDateTime(date, fmt, locale || _textLocale);
       },
-      formatDate(date, sep, locale) {
+      formatDate(date, sep?, locale?) {
         return self.ctx.bean.util.formatDate(date, sep, locale || _textLocale);
       },
-      formatTime(date, sep, locale) {
+      formatTime(date, sep?, locale?) {
         return self.ctx.bean.util.formatTime(date, sep, locale || _textLocale);
       },
     };
@@ -815,6 +815,8 @@ var env=${JSON.stringify(env, null, 2)};
       _csses,
       _jses,
       _envs,
+      _filename: '',
+      _path: '',
       require(fileName) {
         const _path = self.resolvePath('', this._filename, fileName);
         return self.ctx.app.meta.util.requireDynamic(_path);
@@ -837,8 +839,8 @@ var env=${JSON.stringify(env, null, 2)};
       env(name, value) {
         _envs[name] = value;
       },
-      text(...args) {
-        return self.ctx.text.locale(_textLocale, ...args);
+      text(text, ...args) {
+        return self.ctx.text.locale(_textLocale, text, ...args);
       },
       util: {
         time,
