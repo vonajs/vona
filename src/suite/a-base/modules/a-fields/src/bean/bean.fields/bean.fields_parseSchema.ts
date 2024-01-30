@@ -3,7 +3,11 @@ import { BeanFieldsBase } from './bean.fields_base.js';
 export class BeanFieldsParseSchema extends BeanFieldsBase {
   // atomClass: maybe main/detail
   //  atomClass is main only when (!atomClassMain && !atomClass.detail) || atomClass=atomClassMain
-  async parseSchema({ atomClass, atomClassMain, fieldsRight }: any) {
+  async parseSchema({
+    atomClass,
+    atomClassMain,
+    fieldsRight,
+  }: any): Promise<{ module: string; validator: string; schema: any; isSchemaBase?: boolean } | null> {
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     // atomClassMain

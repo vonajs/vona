@@ -25,7 +25,7 @@ export class BeanSettings extends BeanModuleScopeBase {
 
   // user
 
-  async loadSettingsUser(ops) {
+  async loadSettingsUser(ops?) {
     ops = ops || {};
     return await this._loadSettings({ scene: 'user', module: ops.module });
   }
@@ -41,7 +41,7 @@ export class BeanSettings extends BeanModuleScopeBase {
 
   // instance
 
-  async loadSettingsInstance(ops) {
+  async loadSettingsInstance(ops?) {
     ops = ops || {};
     return await this._loadSettings({ scene: 'instance', module: ops.module });
   }
