@@ -58,7 +58,7 @@ export class BeanUtil extends BeanBase {
     return this.formatDate(null, fmt, locale);
   }
 
-  formatDateTime(date, fmt, locale) {
+  formatDateTime(date, fmt?, locale?) {
     locale = locale || this.ctx.locale;
     let timezone = this.localConfig.timezones[locale];
     if (timezone === undefined) {
@@ -70,13 +70,13 @@ export class BeanUtil extends BeanBase {
     return moment(date).utcOffset(timezone).format(fmt);
   }
 
-  formatDate(date, sep, locale) {
+  formatDate(date, sep?, locale?) {
     if (sep === undefined) sep = '-';
     const fmt = `YYYY${sep}MM${sep}DD`;
     return this.formatDateTime(date, fmt, locale);
   }
 
-  formatTime(date, sep, locale) {
+  formatTime(date, sep?, locale?) {
     if (sep === undefined) sep = ':';
     const fmt = `HH${sep}mm${sep}ss`;
     return this.formatDateTime(date, fmt, locale);
