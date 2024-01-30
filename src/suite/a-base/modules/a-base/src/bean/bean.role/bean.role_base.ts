@@ -318,7 +318,7 @@ export class BeanRoleBase extends BeanModuleScopeBase {
   }
 
   // save
-  async save({ roleId, data: { roleName, leader, sorting, catalog } }) {
+  async save({ roleId, data: { roleName, leader, sorting, catalog } }: any) {
     const role = await this.get({ id: roleId });
     if (roleName !== undefined) role.roleName = roleName;
     if (leader !== undefined) role.leader = leader;

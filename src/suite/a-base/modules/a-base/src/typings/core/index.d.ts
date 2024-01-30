@@ -18,6 +18,7 @@ import 'cabloy-module-api-a-useronline';
 import 'cabloy-module-api-a-authopen';
 import 'cabloy-module-api-a-detail';
 import 'cabloy-module-api-a-status';
+import 'cabloy-module-api-a-settings';
 import 'cabloy-module-api-a-mail';
 import 'cabloy-module-api-a-captcha';
 import 'cabloy-module-api-a-markdown';
