@@ -19,5 +19,5 @@ export interface ContextBase {
   tailDone(): Promise<any>;
   get tailCallbacks();
   successMore(list, index, size);
-  getPayload(options): Promise<any>;
+  getPayload(options?): Promise<any>;
 }
