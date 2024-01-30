@@ -56,7 +56,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     return { star, starCount };
   }
 
-  async labels({ key, atom: { labels = null }, user }) {
+  async labels({ key, atom: { labels = null }, user }: any) {
     // get
     const atom = await this.get({ atomId: key.atomId });
     if (atom.atomStage !== 1) this.ctx.throw.module(__ThisModule__, 1010);
