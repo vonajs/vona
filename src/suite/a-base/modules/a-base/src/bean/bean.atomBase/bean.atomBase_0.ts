@@ -38,7 +38,7 @@ export class BeanAtomBase0 extends BeanBase {
     // do nothing
   }
 
-  async importBulk(/* {  atomClass, options, file , user }*/) {
+  async importBulk(/* {  atomClass, options, file , user }*/ _params: any) {
     // do nothing
   }
 
