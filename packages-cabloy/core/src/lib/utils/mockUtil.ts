@@ -1,22 +1,16 @@
-import * as ModuleInfo from '@cabloy/module-info';
 import { BeanSimple } from '../bean/beanSimple.js';
 
 export class AppMockUtil extends BeanSimple {
-  parseUrlFromPackage(dir, apiPrefix: string | boolean = true) {
+  parseUrlFromModuleInfo(moduleInfo, apiPrefix: string | boolean = true) {
     apiPrefix = _prepareApiPrefix(apiPrefix);
-    const moduleInfo = this.parseInfoFromPackage(dir);
     if (!moduleInfo) return null;
     return `${apiPrefix}/${moduleInfo.pid}/${moduleInfo.name}`;
   }
 
-  parseInfoFromPackage(dir) {
-    return ModuleInfo.parseInfoFromPackage(dir);
-  }
-
-  mockUrl(dir, url, apiPrefix: string | boolean = true) {
+  mockUrl(moduleInfo, url, apiPrefix: string | boolean = true) {
     apiPrefix = _prepareApiPrefix(apiPrefix);
     if (url && url.charAt(0) === '/') return `${apiPrefix}${url}`;
-    const prefix = this.parseUrlFromPackage(dir, apiPrefix);
+    const prefix = this.parseUrlFromModuleInfo(moduleInfo, apiPrefix);
     return url ? `${prefix}/${url}` : `${prefix}/`;
   }
 

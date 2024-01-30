@@ -1,29 +1,15 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import StackUtils from 'stack-utils';
 import { IModuleInfo } from './interface.js';
 export * from './interface.js';
 
-export function lookupPackage(dir) {
-  let _dir = dir;
-  // eslint-disable-next-line
-  while (true) {
-    const file = path.join(_dir, 'package.json');
-    if (file === '/package.json') return null;
-    if (fs.existsSync(file)) return file;
-    _dir = path.join(_dir, '../');
-  }
-}
-
-export function parseInfoFromPackage(dir) {
-  const file = lookupPackage(dir);
-  if (!file) return null;
-  const pkg = require(file);
-  return parseInfo(parseName(pkg.name));
-}
-
 export const ParseModuleNameLevelInit = 1;
 export function parseModuleName(level: number = ParseModuleNameLevelInit): string | undefined {
+  const info = parseModuleInfo(level + 1);
+  if (!info) return;
+  return info.relativeName;
+}
+
+export function parseModuleInfo(level: number = ParseModuleNameLevelInit): IModuleInfo | undefined {
   const stackUtils = new StackUtils();
   const traces = stackUtils.capture(level);
   const trace = traces[level - 1];
@@ -35,7 +21,7 @@ export function parseModuleName(level: number = ParseModuleNameLevelInit): strin
     if (part.indexOf('-') === -1) continue;
     const info = parseInfo(part);
     if (!info) continue;
-    return info.relativeName;
+    return info;
   }
   return;
 }
