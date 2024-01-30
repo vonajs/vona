@@ -6,7 +6,7 @@ import staticResources from './meta/static/resources.js';
 import staticRoles from './meta/static/roles.js';
 import socketioComment from './meta/socketio/comment.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: atomClasses,
     resources: {
@@ -114,4 +114,3 @@ const meta = {
     },
   },
 };
-export default meta;

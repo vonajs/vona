@@ -1,7 +1,7 @@
 import schemas from './meta/validation/schemas.js';
 import staticDashboards from './meta/static/dashboards.js';
 import staticResources from './meta/static/resources.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {
       dashboard: {
@@ -59,4 +59,3 @@ const meta = {
     schemas,
   },
 };
-export default meta;

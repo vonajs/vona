@@ -1,6 +1,6 @@
 import schemas from './meta/validation/schemas.js';
 import staticDicts from './meta/static/dicts.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {},
     statics: {
@@ -15,4 +15,3 @@ const meta = {
     schemas,
   },
 };
-export default meta;

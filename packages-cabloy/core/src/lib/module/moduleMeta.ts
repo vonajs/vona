@@ -9,6 +9,9 @@ export default async function (app: CabloyApplication, modules: Record<string, I
       const module = modules[key];
       // module meta
       if (module.resource.meta) {
+        if (typeof module.resource.meta === 'function') {
+          module.resource.meta = module.resource.meta(app);
+        }
         // metaNew is not used by now
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
           module,

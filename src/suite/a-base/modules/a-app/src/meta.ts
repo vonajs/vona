@@ -3,7 +3,7 @@ import schemas from './meta/validation/schemas.js';
 import staticApps from './meta/static/apps.js';
 import staticLayouts from './meta/static/layouts.js';
 import staticResources from './meta/static/resources.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {
       app: {
@@ -59,4 +59,3 @@ const meta = {
     indexes: { aApp: 'createdAt,updatedAt,atomId' },
   },
 };
-export default meta;

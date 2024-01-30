@@ -1,7 +1,7 @@
 import staticLayouts from './meta/static/layouts.js';
 import staticResources from './meta/static/resources.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     resources: {
       button: {
@@ -18,4 +18,3 @@ const meta = {
     },
   },
 };
-export default meta;

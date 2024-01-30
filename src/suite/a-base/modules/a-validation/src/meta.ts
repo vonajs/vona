@@ -1,2 +1,1 @@
-const meta: any = {};
-export default meta;
+export const meta = {};

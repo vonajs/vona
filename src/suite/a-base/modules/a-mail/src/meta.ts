@@ -5,7 +5,7 @@ import socketioChannelMail from './meta/socketio/channelMail.js';
 // static
 import staticResources from './meta/static/resources.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: {},
     statics: {
@@ -28,4 +28,3 @@ const meta = {
     },
   },
 };
-export default meta;

@@ -1,6 +1,6 @@
 import schemas from './meta/validation/schemas.js';
 import iconGroups from './meta/icons/groups.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {},
   },
@@ -13,4 +13,3 @@ const meta = {
     groups: iconGroups,
   },
 };
-export default meta;

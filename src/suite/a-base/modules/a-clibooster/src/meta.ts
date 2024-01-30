@@ -4,7 +4,7 @@ import staticResources from './meta/static/resources.js';
 // cli commands
 import cliCommands from './meta/cli/commands.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: {},
     statics: {
@@ -22,4 +22,3 @@ const meta = {
     commands: cliCommands,
   },
 };
-export default meta;

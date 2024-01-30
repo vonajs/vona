@@ -3,7 +3,7 @@ import staticLayouts from './meta/static/layouts.js';
 // nodes
 import flowNodes from './meta/flow/nodes.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: {},
     statics: {
@@ -54,4 +54,3 @@ const meta = {
     },
   },
 };
-export default meta;

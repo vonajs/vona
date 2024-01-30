@@ -4,7 +4,7 @@ import staticApps from './meta/static/apps.js';
 import staticFlowDefs from './meta/static/flowDefs.js';
 import staticResources from './meta/static/resources.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: {
       document: {
@@ -65,4 +65,3 @@ const meta = {
     schemas,
   },
 };
-export default meta;

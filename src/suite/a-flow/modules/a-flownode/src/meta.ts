@@ -1,7 +1,7 @@
 import schemas from './meta/validation/schemas.js';
 import flowNodes from './meta/flow/nodes.js';
 import flowEdges from './meta/flow/edges.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {},
   },
@@ -14,4 +14,3 @@ const meta = {
     edges: flowEdges,
   },
 };
-export default meta;

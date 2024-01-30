@@ -2,7 +2,7 @@ import schemas from './meta/validation/schemas.js';
 import staticResources from './meta/static/resources.js';
 import socketioWorkflow from './meta/socketio/workflow.js';
 import flowBehaviors from './meta/flow/behaviors.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {
       flowDef: {
@@ -60,4 +60,3 @@ const meta = {
     behaviors: flowBehaviors,
   },
 };
-export default meta;

@@ -1,6 +1,6 @@
 import schemas from './meta/validation/schemas.js';
 import flowBehaviors from './meta/flow/behaviors.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {},
   },
@@ -12,4 +12,3 @@ const meta = {
     behaviors: flowBehaviors,
   },
 };
-export default meta;

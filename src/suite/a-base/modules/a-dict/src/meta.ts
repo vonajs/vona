@@ -3,7 +3,7 @@ import schemas from './meta/validation/schemas.js';
 import staticLayouts from './meta/static/layouts.js';
 import staticResources from './meta/static/resources.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: atomClasses,
     statics: {
@@ -21,4 +21,3 @@ const meta = {
     schemas,
   },
 };
-export default meta;

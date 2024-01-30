@@ -1,5 +1,5 @@
 import schemas from './meta/validation/schemas.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {},
     resources: {
@@ -14,4 +14,3 @@ const meta = {
     schemas,
   },
 };
-export default meta;

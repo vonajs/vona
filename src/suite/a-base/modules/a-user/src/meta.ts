@@ -1,6 +1,6 @@
 import staticLayouts from './meta/static/layouts.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     statics: {
       'a-baselayout.layout': {
@@ -50,4 +50,3 @@ const meta = {
     },
   },
 };
-export default meta;

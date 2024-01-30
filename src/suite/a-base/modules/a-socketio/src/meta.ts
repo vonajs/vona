@@ -1,7 +1,7 @@
 import schemas from './meta/validation/schemas.js';
 // socketio
 import socketioMessageSystem from './meta/socketio/messageSystem.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {},
   },
@@ -16,4 +16,3 @@ const meta = {
     },
   },
 };
-export default meta;

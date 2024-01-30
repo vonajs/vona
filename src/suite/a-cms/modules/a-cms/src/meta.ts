@@ -9,7 +9,7 @@ import staticFlowDefs from './meta/static/flowDefs.js';
 import staticResources from './meta/static/resources.js';
 import staticLayouts from './meta/static/layouts.js';
 // meta
-const meta = {
+export const meta = {
   base: {
     atoms: atomClasses,
     resources: {
@@ -51,4 +51,3 @@ const meta = {
     },
   },
 };
-export default meta;

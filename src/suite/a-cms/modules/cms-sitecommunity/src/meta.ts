@@ -3,7 +3,7 @@ import staticApps from './meta/static/apps.js';
 import staticFlowDefs from './meta/static/flowDefs.js';
 import staticLayouts from './meta/static/layouts.js';
 import staticResources from './meta/static/resources.js';
-const meta = {
+export const meta = {
   base: {
     atoms: {
       post: {
@@ -80,4 +80,3 @@ const meta = {
     },
   },
 };
-export default meta;
