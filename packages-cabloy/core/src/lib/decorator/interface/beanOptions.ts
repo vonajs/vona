@@ -19,6 +19,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'startup'
   | 'queue'
   | 'version'
+  | 'schedule'
   | 'middleware'
   | 'middleware.io'
   | 'event'
