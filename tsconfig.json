@@ -38,6 +38,9 @@
       "path": "packages-egg-born/egg-born-backend"
     },
     {
+      "path": "packages-egg-born/egg-born-mock"
+    },
+    {
       "path": "src/suite/a-base"
     },
     {

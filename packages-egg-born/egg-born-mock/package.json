@@ -1,0 +1,40 @@
+{
+  "name": "egg-born-mock",
+  "version": "5.0.0",
+  "description": "cabloy mock",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": [
+        "./dist/index.d.ts",
+        "./src/index.ts"
+      ],
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
+  "author": "zhennann",
+  "license": "MIT",
+  "dependencies": {
+    "@types/mocha": "^10.0.1",
+    "assert": "^2.1.0",
+    "egg-mock": "^5.10.9"
+  }
+}
