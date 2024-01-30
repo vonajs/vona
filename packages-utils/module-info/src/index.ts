@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 import StackUtils from 'stack-utils';
 import { IModuleInfo } from './interface.js';
 export * from './interface.js';
