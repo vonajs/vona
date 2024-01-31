@@ -7,7 +7,7 @@ miniprogram_npm
 **/dist/
 /dist-release
 /docs-api
-
+/run
 
 .idea
 .DS_Store
