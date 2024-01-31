@@ -7,7 +7,9 @@ let bundle = global.__egg_born_mock;
 if (!bundle) {
   global.__egg_born_mock = bundle = require('egg-mock/bootstrap');
 
-  before(async () => {
+  before(async function () {
+    // wait ready
+    await bundle.app.ready();
     // session
     bundle.app.mockSession({});
     // wait app ready
@@ -16,7 +18,7 @@ if (!bundle) {
     bundle.mock.restore();
   });
 
-  after(async () => {
+  after(async function () {
     await bundle.app.close();
   });
 }
