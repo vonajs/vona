@@ -13,6 +13,8 @@ export default async function (app: CabloyApplication, modules: Record<string, I
       // module meta
       if (typeof module.resource.meta === 'function') {
         module.meta = module.resource.meta(app);
+      } else {
+        module.meta = module.resource.meta;
       }
       if (module.meta) {
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
