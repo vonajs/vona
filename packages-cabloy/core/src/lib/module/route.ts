@@ -3,7 +3,7 @@ import extend from '@cabloy/extend';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
-import { CabloyApplication, CabloyContext } from '../../types/index.js';
+import { CabloyApplication, CabloyContext, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
@@ -130,7 +130,7 @@ export class AppRouter extends BeanSimple {
   }
 }
 
-export default function (app: CabloyApplication, modules) {
+export default function (app: CabloyApplication, modules: Record<string, IModule>) {
   // load middlewares
   loadMiddlewares(app);
 
@@ -146,17 +146,16 @@ export default function (app: CabloyApplication, modules) {
 
   function loadRoutes() {
     // load routes
-    Object.keys(modules).forEach(key => {
+    for (const key in modules) {
       const module = modules[key];
-
       // routes and controllers
-      const routes = module.main.routes;
+      const routes = module.resource.routes;
       if (routes) {
-        routes.forEach(route => {
+        for (const route of routes) {
           app.meta.router.register(module.info, route);
-        });
+        }
       }
-    });
+    }
   }
 }
 

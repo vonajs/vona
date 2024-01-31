@@ -11,8 +11,8 @@ export default async function (app: CabloyApplication, modules: Record<string, I
     for (const key in modules) {
       const module = modules[key];
       // module meta
-      if (typeof module.meta === 'function') {
-        module.meta = module.meta(app);
+      if (typeof module.resource.meta === 'function') {
+        module.meta = module.resource.meta(app);
       }
       if (module.meta) {
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {

@@ -1,3 +1,4 @@
+import { IModuleRoute } from '../../lib/bean/resource/route/type.js';
 import { CabloyApplication } from '../application/app.js';
 import { IModuleMain, IMonkeyModule } from './monkey.js';
 
@@ -12,7 +13,9 @@ export interface IModuleResource {
   locales: Record<string, any>;
   Errors: Record<number, string>;
   config: (app: CabloyApplication) => object;
+  meta: ((app: CabloyApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
+  routes: IModuleRoute[];
 }
 
 export type TypeModuleMetaGeneric = {
