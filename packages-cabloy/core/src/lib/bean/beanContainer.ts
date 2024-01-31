@@ -220,7 +220,7 @@ export class BeanContainer {
         }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
-        if (!descriptorInfo || descriptorInfo.dynamic) return target[prop];
+        if (!__checkAopOfDescriptorInfo(descriptorInfo)) return target[prop];
         const methodType = __methodTypeOfDescriptor(descriptorInfo);
         // get prop
         if (!methodType) {
@@ -259,7 +259,7 @@ export class BeanContainer {
         }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
-        if (!descriptorInfo || descriptorInfo.dynamic) {
+        if (!__checkAopOfDescriptorInfo(descriptorInfo)) {
           target[prop] = value;
           return true;
         }
@@ -437,6 +437,11 @@ export function BeanContainerCreate(app, ctx) {
   });
 }
 
+function __checkAopOfDescriptorInfo(descriptorInfo) {
+  if (!descriptorInfo) return true;
+  return !descriptorInfo.dynamic && !descriptorInfo.ofBeanBase;
+}
+
 function __getPropertyDescriptor(obj, prop) {
   // dynamic
   const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
@@ -447,10 +452,13 @@ function __getPropertyDescriptor(obj, prop) {
 
 function __getPropertyDescriptorStatic(obj, prop) {
   let proto = Object.getPrototypeOf(obj);
+  let ofBeanBase = false;
   while (proto) {
-    if (Object.getPrototypeOf(proto.constructor) === BeanBase) return null;
+    if (Object.getPrototypeOf(proto.constructor) === BeanBase) {
+      ofBeanBase = true;
+    }
     const descriptor = Object.getOwnPropertyDescriptor(proto, prop);
-    if (descriptor) return { descriptor, dynamic: false };
+    if (descriptor) return { descriptor, dynamic: false, ofBeanBase };
     proto = Object.getPrototypeOf(proto);
   }
   return null;
