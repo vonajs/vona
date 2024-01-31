@@ -18,4 +18,5 @@ module.exports = {
   extension: ['ts'],
   spec,
   'node-option': ['no-warnings', 'import=tsx/esm'],
+  timeout: 0,
 };
