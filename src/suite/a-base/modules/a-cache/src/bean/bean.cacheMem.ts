@@ -20,7 +20,7 @@ export class BeanCacheMem extends BeanModuleScopeBase {
     return res ? res.value : undefined;
   }
 
-  set(name, value, timeout) {
+  set(name, value, timeout?) {
     this.memory[name] = {
       value,
       timeout: timeout || 0,
@@ -28,7 +28,7 @@ export class BeanCacheMem extends BeanModuleScopeBase {
     };
   }
 
-  getset(name, value, timeout) {
+  getset(name, value, timeout?) {
     const valueOld = this.get(name);
     this.memory[name] = {
       value,
