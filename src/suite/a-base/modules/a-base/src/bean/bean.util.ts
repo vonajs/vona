@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import extend from '@cabloy/extend';
 import currency from '@zhennann/currency';
 import moment from 'moment';

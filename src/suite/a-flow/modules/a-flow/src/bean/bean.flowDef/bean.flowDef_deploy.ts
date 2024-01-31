@@ -31,7 +31,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
   async _deploy_atomState_inner({ atomClass }: any) {
     const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
     // all flowDefs
-    const _nodeBaseBean = this.ctx.bean._newBean(FlowNodeStartEventAtom);
+    const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
     const conditions = await _nodeBaseBean._getAllConditions({ atomClassId, needFlowContent: true });
     if (conditions.length === 0) {
       // delete dict
