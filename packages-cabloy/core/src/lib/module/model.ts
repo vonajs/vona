@@ -22,10 +22,6 @@ export default function (app: CabloyApplication) {
   function createModelContainer(context, relativeName) {
     // base
     const modelContainer = context.bean._newBean(BeanModelBase, { table: null });
-    // remove app/config/service
-    modelContainer.app = undefined;
-    modelContainer.config = undefined;
-    modelContainer.service = undefined;
     // module
     modelContainer.__ebCacheModule = new Map();
     modelContainer.module = function (moduleName) {
