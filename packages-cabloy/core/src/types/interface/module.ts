@@ -15,7 +15,11 @@ export interface IModuleResource {
   constants: unknown;
 }
 
-export interface IModuleMeta {}
+export type TypeModuleMetaGeneric = {
+  [property: string]: any;
+};
+
+export interface IModuleMeta extends TypeModuleMetaGeneric {}
 
 declare module '@cabloy/module-info' {
   export interface IModule {
