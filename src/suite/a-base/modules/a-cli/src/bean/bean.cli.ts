@@ -112,7 +112,7 @@ export class BeanCli extends BeanBase {
     const _commandsAll: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const moduleName = module.info.relativeName;
-      const commands = module.resource.meta && module.resource.meta.cli && module.resource.meta.cli.commands;
+      const commands = module.meta && module.meta.cli && module.meta.cli.commands;
       if (!commands) continue;
       const _commandsModule = (_commandsAll[moduleName] = {});
       for (const groupName in commands) {

@@ -69,8 +69,8 @@ export class LocalMessageClass extends BeanBase {
     const messageClasses: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
-      if (module.resource.meta && module.resource.meta.socketio && module.resource.meta.socketio.messages) {
-        const res = this._prepareMessageClassesModule(module, module.resource.meta.socketio.messages);
+      if (module.meta && module.meta.socketio && module.meta.socketio.messages) {
+        const res = this._prepareMessageClassesModule(module, module.meta.socketio.messages);
         if (Object.keys(res).length > 0) {
           messageClasses[relativeName] = res;
         }
@@ -117,8 +117,8 @@ export class LocalMessageClass extends BeanBase {
     const channels: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
-      if (module.resource.meta && module.resource.meta.socketio && module.resource.meta.socketio.channels) {
-        const res = this._prepareChannelsModule(module, module.resource.meta.socketio.channels);
+      if (module.meta && module.meta.socketio && module.meta.socketio.channels) {
+        const res = this._prepareChannelsModule(module, module.meta.socketio.channels);
         if (Object.keys(res).length > 0) {
           channels[relativeName] = res;
         }

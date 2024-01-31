@@ -57,8 +57,8 @@ export class LocalSettings extends BeanBase {
     const list: any[] = [];
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
-      if (module.resource.meta && module.resource.meta.settings && module.resource.meta.settings[scene]) {
-        const settings = module.resource.meta.settings[scene];
+      if (module.meta && module.meta.settings && module.meta.settings[scene]) {
+        const settings = module.meta.settings[scene];
         const item: any = {
           module: relativeName,
           validator: settings.validator,

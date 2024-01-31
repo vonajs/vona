@@ -23,8 +23,8 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     const atomClasses: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
-      if (module.resource.meta && module.resource.meta.base && module.resource.meta.base.atoms) {
-        const res = this._prepareAtomClassesModule(module, module.resource.meta.base.atoms);
+      if (module.meta && module.meta.base && module.meta.base.atoms) {
+        const res = this._prepareAtomClassesModule(module, module.meta.base.atoms);
         if (Object.keys(res).length > 0) {
           atomClasses[relativeName] = res;
         }

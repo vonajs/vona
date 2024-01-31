@@ -14,7 +14,7 @@ export class BeanBaseResourceTypes extends BeanBaseModules {
     const resourceTypes: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       const moduleName = module.info.relativeName;
-      const resources = module.resource.meta && module.resource.meta.base && module.resource.meta.base.resources;
+      const resources = module.meta && module.meta.base && module.meta.base.resources;
       if (!resources) continue;
       for (const key in resources) {
         const resource = resources[key];
