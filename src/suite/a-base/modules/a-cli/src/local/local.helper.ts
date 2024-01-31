@@ -6,7 +6,7 @@ import TableClass from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
-const { ProcessHelper } = require('@cabloy/process-helper');
+import { ProcessHelper } from '@cabloy/process-helper';
 
 @Local()
 export class LocalHelper extends BeanBase {
