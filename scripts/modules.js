@@ -39,11 +39,23 @@ async function main() {
 }
 
 async function _moduleHandle_backend({ file, module, processHelper }) {
-  console.log(file);
+  // console.log(file);
+  // await fse.move(file, `${module.root}/src/typings/core/index.ts`);
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld !== `export type * as ABase from 'cabloy-module-api-a-base';\n`) {
+    console.log(file);
+  }
+  // const contentNew = contentOld.replace(
+  //   `import 'cabloy-module-api-a-base';`,
+  //   `export type * as ABase from 'cabloy-module-api-a-base';`,
+  // );
+  // console.log(contentNew);
+  // await fse.outputFile(file, contentNew);
+  // await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const pattern = `${module.root}/build`;
+  const pattern = `${module.root}/src/typings/core/index.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
