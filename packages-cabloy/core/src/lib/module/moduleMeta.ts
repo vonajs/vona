@@ -1,6 +1,9 @@
 import { CabloyApplication, IModule } from '../../types/index.js';
 
 export default async function (app: CabloyApplication, modules: Record<string, IModule>) {
+  // all metas
+  app.meta.metas = {};
+
   // load metas
   await loadMetas();
 
@@ -8,16 +11,19 @@ export default async function (app: CabloyApplication, modules: Record<string, I
     for (const key in modules) {
       const module = modules[key];
       // module meta
-      if (module.resource.meta) {
-        if (typeof module.resource.meta === 'function') {
-          module.resource.meta = module.resource.meta(app);
-        }
-        // metaNew is not used by now
+      let meta;
+      if (typeof module.meta === 'function') {
+        meta = module.meta(app);
+      } else {
+        meta = module.meta;
+      }
+      if (meta) {
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
           module,
-          meta: module.resource.meta,
+          meta,
         });
       }
+      app.meta.metas[module.info.relativeName] = meta;
     }
   }
 }

@@ -13,13 +13,15 @@ export interface IModuleResource {
   Errors: Record<number, string>;
   config: (app: CabloyApplication) => object;
   constants: unknown;
-  meta: any;
 }
+
+export interface IModuleMeta {}
 
 declare module '@cabloy/module-info' {
   export interface IModule {
     resource: IModuleResource;
     main: IModuleMain;
     monkey: IMonkeyModule;
+    meta: (app: CabloyApplication) => IModuleMeta | IModuleMeta;
   }
 }
