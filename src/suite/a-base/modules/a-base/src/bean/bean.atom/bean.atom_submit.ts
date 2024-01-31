@@ -56,7 +56,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     const _atom = await this.ctx.bean.atom.read({ key, user: null });
     // check atom flow
     if (!ignoreFlow && flowStage === 'draft') {
-      const _nodeBaseBean = this.ctx.bean._newBean(FlowNodeStartEventAtom);
+      const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
       const flowInstance = await _nodeBaseBean._match({ atom: _atom, userId: _atom.userIdUpdated });
       if (flowInstance) {
         // set atom flow
@@ -91,7 +91,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     key = result.formal.key;
     item = { ...item, id: key.itemId, atomId: key.atomId, itemId: key.itemId, atomStage: 1 };
     if (flowStage === 'formal') {
-      const _nodeBaseBean = this.ctx.bean._newBean(FlowNodeStartEventAtom);
+      const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
       const flowInstance = await _nodeBaseBean._match({ atom: item, userId: item.userIdUpdated });
       if (flowInstance) {
         // set atom flow
