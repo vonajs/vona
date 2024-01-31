@@ -32,7 +32,7 @@
     "build:front": "node ./scripts/egg-born-bin.js front-build",
     "dev:backend": "node ./scripts/egg-born-bin.js backend-dev",
     "debug:backend": "node ./scripts/egg-born-bin.js backend-debug",
-    "test:backend": "node ./scripts/egg-born-bin.js backend-test",
+    "test": "npx mocha",
     "cov:backend": "node ./scripts/egg-born-bin.js backend-cov",
     "start:backend": "node ./scripts/egg-born-scripts.js backend-start",
     "start:backend-daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon",
