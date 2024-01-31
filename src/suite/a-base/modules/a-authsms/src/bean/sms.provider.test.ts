@@ -2,15 +2,15 @@ import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import chalk from 'chalk';
-import boxen, { BorderStyle } from 'boxen';
+import boxen from 'boxen';
 
-const boxenOptions: boxen.Options = {
+const boxenOptions = {
   padding: 1,
   margin: 1,
   align: 'center',
   borderColor: 'yellow',
-  borderStyle: BorderStyle.Round,
-};
+  borderStyle: 'round',
+} as boxen.Options;
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderTest extends BeanBase {

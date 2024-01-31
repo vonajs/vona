@@ -3,15 +3,15 @@ import { BeanIoChannelBase } from 'cabloy-module-api-a-socketio';
 
 import nodemailer from 'nodemailer';
 import chalk from 'chalk';
-import boxen, { BorderStyle } from 'boxen';
+import boxen from 'boxen';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
   margin: 1,
   align: 'center',
   borderColor: 'yellow',
-  borderStyle: BorderStyle.Round,
-};
+  borderStyle: 'round',
+} as boxen.Options;
 
 @Bean({ scene: 'io.channel' })
 export class IoChannelMail extends BeanIoChannelBase {
