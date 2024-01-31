@@ -8,7 +8,7 @@ export class BeanValidation extends BeanModuleScopeBase {
       return { module, validator, schema };
     }
     module = module || this.moduleScope;
-    const meta = this.ctx.app.meta.modules[module].resource.meta;
+    const meta = this.ctx.app.meta.modules[module].meta;
     if (!schema) {
       const _validator = this.getValidator({ module, validator });
       if (!_validator) throw new Error(`validator not found: ${module}:${validator}`);
@@ -24,7 +24,7 @@ export class BeanValidation extends BeanModuleScopeBase {
 
   getValidator({ module, validator }: any) {
     module = module || this.moduleScope;
-    const meta = this.ctx.app.meta.modules[module].resource.meta;
+    const meta = this.ctx.app.meta.modules[module].meta;
     let _validator = this.ctx.bean.util.getProperty(meta, `validation.validators.${validator}`);
     if (!_validator) {
       const _schema = this.ctx.bean.util.getProperty(meta, `validation.schemas.${validator}`);
@@ -76,7 +76,7 @@ export class BeanValidation extends BeanModuleScopeBase {
     // keywords
     if (module) {
       module = module || this.moduleScope;
-      const meta = this.ctx.app.meta.modules[module].resource.meta;
+      const meta = this.ctx.app.meta.modules[module].meta;
       params.keywords = meta.validation.keywords;
     }
     // schemas
@@ -96,7 +96,7 @@ export class BeanValidation extends BeanModuleScopeBase {
   _checkValidator({ module, validator }: any) {
     // check ajv cache
     module = module || this.moduleScope;
-    const meta = this.ctx.app.meta.modules[module].resource.meta;
+    const meta = this.ctx.app.meta.modules[module].meta;
     const _validator = this.getValidator({ module, validator });
     if (!_validator) throw new Error(`validator not found: ${module}:${validator}`);
     if (_validator.ajv) return _validator;

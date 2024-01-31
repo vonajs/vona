@@ -162,7 +162,7 @@ export class BeanSettings extends BeanModuleScopeBase {
 
   _getValidator({ scene, module }: any) {
     module = module || this.moduleScope;
-    const validator = this.ctx.app.meta.modules[module].resource.meta.settings[scene].validator;
+    const validator = this.ctx.app.meta.modules[module].meta.settings[scene].validator;
     return validator ? { module, scene, validator } : null;
   }
 
