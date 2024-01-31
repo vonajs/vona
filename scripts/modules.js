@@ -41,7 +41,7 @@ async function main() {
 async function _moduleHandle_backend({ file, module, processHelper }) {
   // console.log(file);
   // await fse.move(file, `${module.root}/src/typings/core/index.ts`);
-  const contentOld = (await fse.readFile(file)).toString();
+  let contentOld = (await fse.readFile(file)).toString();
   const regexp = /import 'cabloy-module-api-(.*?)';/g;
   const matches = contentOld.matchAll(regexp);
   const outputNew1 = [];
@@ -51,17 +51,18 @@ async function _moduleHandle_backend({ file, module, processHelper }) {
   for (const match of matches) {
     matchCount++;
     const classNameOld = match[1];
-    const classPath = match[2];
+    const classPath = match[1];
     const classNameNew = classPathToClassName('', classPath);
     console.log(classNameOld, classPath, classNameNew);
     // models.ts
-    outputNew1.push(`export * from '../model/${classPath}.js';`);
-    outputNew2.push(`import { ${classNameNew} } from '../model/${classPath}.js';`);
-    outputNew3.push(`${classNameOld}: ${classNameNew};`);
+    contentOld = contentOld.replace(
+      `import 'cabloy-module-api-${classPath}';`,
+      `export type * as ${classNameNew} from 'cabloy-module-api-${classPath}';`,
+    );
   }
-  // console.log(contentNew);
-  // await fse.outputFile(file, contentNew);
-  // await processHelper.formatFile({ fileName: file });
+  // console.log(contentOld);
+  await fse.outputFile(file, contentOld);
+  await processHelper.formatFile({ fileName: file });
 }
 
 async function _moduleHandle({ module, processHelper }) {
