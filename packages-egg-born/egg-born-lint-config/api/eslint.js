@@ -78,6 +78,13 @@ const rules = {
   ],
   '@typescript-eslint/no-this-alias': 'off',
   '@typescript-eslint/no-unsafe-declaration-merging': 'off',
+  '@typescript-eslint/ban-ts-comment': [
+    'error',
+    {
+      'ts-expect-error': 'allow-with-description',
+      'ts-ignore': 'allow-with-description',
+    },
+  ],
 };
 
 module.exports = {
