@@ -3,7 +3,7 @@ import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import { Bean, BeanBase } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -16,9 +16,12 @@ const boxenOptions: boxen.Options = {
 const __queueInstanceStartup: any = {};
 
 @Bean()
-export class BeanInstance extends BeanBase {
+export class BeanInstance extends BeanBase<ScopeModule> {
   get cacheMem() {
-    return this.ctx.cache.mem.module(__ThisModule__);
+    return this.scope._bean.cacheMem;
+  }
+  get modelInstance() {
+    return this.scope.model.instance;
   }
 
   async list(options) {
@@ -33,8 +36,7 @@ export class BeanInstance extends BeanBase {
       _options.limit = page.size;
       _options.offset = page.index;
     }
-    const modelInstance = this.ctx.model.module(__ThisModule__).instance;
-    return await modelInstance.select(_options);
+    return await this.modelInstance.select(_options);
   }
 
   async get({ subdomain }: any) {
@@ -46,8 +48,7 @@ export class BeanInstance extends BeanBase {
 
   async _get({ subdomain }: any) {
     // get
-    const modelInstance = this.ctx.model.module(__ThisModule__).instance;
-    const instance = await modelInstance.get({ name: subdomain });
+    const instance = await this.modelInstance.get({ name: subdomain });
     if (instance) return instance;
     // instance base
     const instanceBase = this._getInstanceBase({ subdomain });
@@ -70,8 +71,7 @@ export class BeanInstance extends BeanBase {
 
   async _registerLock({ instanceBase }: any) {
     // get again
-    const modelInstance = this.ctx.model.module(__ThisModule__).instance;
-    let instance = await modelInstance.get({ name: instanceBase.subdomain });
+    let instance = await this.modelInstance.get({ name: instanceBase.subdomain });
     if (instance) return instance;
     // insert
     instance = {
@@ -80,7 +80,7 @@ export class BeanInstance extends BeanBase {
       config: JSON.stringify(instanceBase.config || {}),
       disabled: 0,
     };
-    const res = await modelInstance.insert(instance);
+    const res = await this.modelInstance.insert(instance);
     instance.id = res.insertId;
     return instance;
   }
@@ -242,8 +242,7 @@ export class BeanInstance extends BeanBase {
         aBase.host = this.ctx.host;
         aBase.protocol = this.ctx.protocol;
         // update
-        const modelInstance = this.ctx.model.module(__ThisModule__).instance;
-        await modelInstance.update({
+        await this.modelInstance.update({
           id: instance.id,
           config: JSON.stringify(instance.config),
         });
