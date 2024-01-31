@@ -22,6 +22,6 @@ declare module '@cabloy/module-info' {
     resource: IModuleResource;
     main: IModuleMain;
     monkey: IMonkeyModule;
-    meta: (app: CabloyApplication) => IModuleMeta | IModuleMeta;
+    meta: IModuleMeta;
   }
 }

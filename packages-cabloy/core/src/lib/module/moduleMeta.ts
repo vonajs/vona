@@ -11,19 +11,16 @@ export default async function (app: CabloyApplication, modules: Record<string, I
     for (const key in modules) {
       const module = modules[key];
       // module meta
-      let meta;
       if (typeof module.meta === 'function') {
-        meta = module.meta(app);
-      } else {
-        meta = module.meta;
+        module.meta = module.meta(app);
       }
-      if (meta) {
+      if (module.meta) {
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
           module,
-          meta,
+          meta: module.meta,
         });
       }
-      app.meta.metas[module.info.relativeName] = meta;
+      app.meta.metas[module.info.relativeName] = module.meta;
     }
   }
 }
