@@ -94,120 +94,42 @@ const queues = {
 
 // summer
 const summer = {
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    modelAtomClass: {
   group: {
-    default: {},
-    model: {
-      role: {
+    default: {
+      atomClassInner: {
+        bean: 'atomClassInner',
         config: 'all',
       },
-      user: {
+      roleScopesOfUser: {
+        bean: 'roleScopesOfUser',
         config: 'all',
       },
-      modelAtomClass: {
-        config: 'allWithIgnoreNull',
+      roleScopesOfRole: {
+        bean: 'roleScopesOfRole',
+        config: 'all',
       },
-      modelAtomAction: {
-        config: 'allWithIgnoreNull',
+      roleScopesMineOfUser: {
+        bean: 'roleScopesMineOfUser',
+        config: 'all',
+      },
+      roleWhosOfAtomClassAction: {
+        bean: 'roleWhosOfAtomClassAction',
+        config: 'all',
+      },
+      roleParentsOfUser: {
+        bean: 'roleParentsOfUser',
+        config: 'all',
       },
     },
-  },
-  caches: {
-    modelAtom: {
-      mode: 'redis', // only redis
-      // mem: {
-      //   max: 500,
-      // },
-      redis: {
-        ttl: 2 * 60 * 60 * 1000, // 2 hours
-      },
-    } as IModuleConfigSummerCache,
-    modelCategory: {
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    modelLabel: {
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    atomClassInner: {
-      bean: 'atomClassInner',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    roleScopesOfUser: {
-      bean: 'roleScopesOfUser',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    roleScopesOfRole: {
-      bean: 'roleScopesOfRole',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    roleScopesMineOfUser: {
-      bean: 'roleScopesMineOfUser',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    roleWhosOfAtomClassAction: {
-      bean: 'roleWhosOfAtomClassAction',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    roleParentsOfUser: {
-      bean: 'roleParentsOfUser',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
+    model: {
+      role: { config: 'all' },
+      user: { config: 'all' },
+      atomClass: { config: 'allWithIgnoreNull' },
+      atomAction: { config: 'allWithIgnoreNull' },
+      atom: { config: 'redis' },
+      category: { config: 'all' },
+      label: { config: 'all' },
+    },
   },
 } as IModuleConfigSummer;
 

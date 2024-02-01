@@ -43,6 +43,12 @@ export const config = _app => {
       enable: true,
       config: {
         group: {
+          default: {
+            redis: configRedis,
+            redisWithIgnoreNull: configRedisWithIgnoreNull,
+            all: configAll,
+            allWithIgnoreNull: configAllWithIgnoreNull,
+          },
           model: {
             redis: configRedis,
             redisWithIgnoreNull: configRedisWithIgnoreNull,

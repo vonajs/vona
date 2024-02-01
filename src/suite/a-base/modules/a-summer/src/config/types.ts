@@ -17,5 +17,4 @@ export interface IModuleConfigSummerGroup {
 }
 export interface IModuleConfigSummer {
   group: IModuleConfigSummerGroup;
-  caches?: any;
 }
