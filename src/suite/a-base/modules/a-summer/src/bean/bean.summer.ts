@@ -67,28 +67,31 @@ export class BeanSummer extends BeanModuleScopeBase {
       // ignore a-summer
       if (moduleName === 'a-summer') continue;
       const config = this.ctx.app.meta.configs[moduleName];
-      const caches = this.ctx.bean.util.getProperty(config, 'summer.caches');
-      if (!caches) continue;
-      for (const key in caches) {
-        const cache = caches[key];
-        const fullKey = `${module.info.relativeName}:${key}`;
-        // bean
-        let beanFullName;
-        const beanName = cache.bean;
-        if (beanName) {
-          if (typeof beanName === 'string') {
-            beanFullName = `${module.info.relativeName}.summer.cache.${beanName}`;
-          } else {
-            beanFullName = `${beanName.module || module.info.relativeName}.summer.cache.${beanName.name}`;
+      const summerGroups = this.ctx.bean.util.getProperty(config, 'summer.group');
+      if (!summerGroups) continue;
+      for (const groupName in summerGroups) {
+        const summerGroup = summerGroups[groupName];
+        for (const key in summerGroup) {
+          const cache = summerGroup[key];
+          const fullKey = `${moduleName}:${groupName}:${key}`;
+          // bean
+          let beanFullName;
+          const beanName = cache.bean;
+          if (beanName) {
+            if (typeof beanName === 'string') {
+              beanFullName = `${moduleName}.summer.cache.${beanName}`;
+            } else {
+              beanFullName = `${beanName.module || moduleName}.summer.cache.${beanName.name}`;
+            }
           }
+          // ok
+          cacheBases[fullKey] = {
+            ...cache,
+            key,
+            fullKey,
+            beanFullName,
+          };
         }
-        // ok
-        cacheBases[fullKey] = {
-          ...cache,
-          key,
-          fullKey,
-          beanFullName,
-        };
       }
     }
     return cacheBases;
