@@ -1,17 +1,13 @@
-import { IModuleConfigSummer, IModuleConfigSummerCache } from '@cabloy/core';
+import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // summer
 const summer = {
-  caches: {
-    modelStatus: {
-      mode: 'redis', // only redis
-      // mem: {
-      //   max: 500,
-      // },
-      redis: {
-        ttl: 2 * 60 * 60 * 1000, // 2 hours
+  group: {
+    model: {
+      status: {
+        config: 'redis',
       },
-    } as IModuleConfigSummerCache,
+    },
   },
 } as IModuleConfigSummer;
 
