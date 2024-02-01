@@ -81,21 +81,19 @@ async function _moduleHandle({ module, processHelper }) {
 
 async function _suiteHandle({ modules, suite, processHelper }) {
   console.log(suite.root);
-  const fileFrom = `${suite.root}/tsconfig.build.json`;
-  const fileTo = `${suite.root}/tsconfig.json`;
-  if (!fse.existsSync(fileTo)) {
-    await fse.move(fileFrom, fileTo);
-  }
+  const fileFrom = `${suite.root}/tsconfig.base.json`;
+  // const fileTo = `${suite.root}/tsconfig.json`;
+  // if (!fse.existsSync(fileTo)) {
+  //  await fse.move(fileFrom, fileTo);
+  // }
   const contentNew = `
   {
     "extends": "../../../tsconfig.base.json",
-    "compilerOptions": {
-      "noEmit": true
-    }
+    "compilerOptions": {}
   }
   `;
-  // await fse.outputFile(fileFrom, contentNew);
-  // await processHelper.formatFile({ fileName: fileFrom });
+  await fse.outputFile(fileFrom, contentNew);
+  await processHelper.formatFile({ fileName: fileFrom });
   // const refs = [];
   // for (const moduleName of suite.modules) {
   //   const module = modules[moduleName];
