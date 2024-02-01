@@ -19,7 +19,6 @@ const configRedis = {
   redis: {
     ttl: 2 * 60 * 60 * 1000, // 2 hours
   },
-  ignoreNull: true,
 } as IModuleConfigSummerCache;
 
 const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
