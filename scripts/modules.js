@@ -55,8 +55,8 @@ async function _moduleHandle({ module, processHelper }) {
   }
   
   `;
-  await fse.outputFile(fileTo, contentNew);
-  await processHelper.formatFile({ fileName: fileTo });
+  // await fse.outputFile(fileTo, contentNew);
+  // await processHelper.formatFile({ fileName: fileTo });
   return;
   const pattern = `${module.root}/src/typings/core/index.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
