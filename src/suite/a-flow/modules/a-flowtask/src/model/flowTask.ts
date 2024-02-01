@@ -4,7 +4,6 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aFlowTask',
   options: {
     disableDeleted: true,
-    cacheName: { name: 'modelFlowTask' },
   },
 })
 export class ModelFlowTask extends BeanModelBase {}

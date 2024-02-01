@@ -4,7 +4,6 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aAtom',
   options: {
     disableDeleted: false,
-    cacheName: { name: 'modelAtom' },
     cacheKeyAux: 'atomClassId',
   },
 })

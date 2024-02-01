@@ -4,7 +4,6 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aLabel',
   options: {
     disableDeleted: true,
-    cacheName: { name: 'modelLabel' },
   },
 })
 export class ModelLabel extends BeanModelBase {}

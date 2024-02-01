@@ -4,7 +4,6 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aAtomAction',
   options: {
     disableDeleted: false,
-    cacheName: { name: 'modelAtomAction' },
   },
 })
 export class ModelAtomAction extends BeanModelBase {}

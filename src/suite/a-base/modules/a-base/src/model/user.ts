@@ -4,7 +4,6 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aUser',
   options: {
     disableDeleted: false,
-    cacheName: { name: 'modelUser' },
   },
 })
 export class ModelUser extends BeanModelBase {}

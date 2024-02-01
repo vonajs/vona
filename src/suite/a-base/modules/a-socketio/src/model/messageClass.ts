@@ -4,7 +4,6 @@ import { BeanModelBase, Model } from '@cabloy/core';
   table: 'aSocketIOMessageClass',
   options: {
     disableDeleted: false,
-    cacheName: { name: 'modelMessageClass' },
   },
 })
 export class ModelMessageClass extends BeanModelBase {
