@@ -1,10 +1,5 @@
-import {
-  IModuleConfigBroadcast,
-  IModuleConfigMiddleware,
-  IModuleConfigQueue,
-  IModuleConfigSummer,
-  IModuleConfigSummerCache,
-} from '@cabloy/core';
+import { IModuleConfigBroadcast, IModuleConfigMiddleware, IModuleConfigQueue } from '@cabloy/core';
+import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // middlewares
 const middlewares = {
@@ -51,17 +46,12 @@ const broadcasts = {
 
 // summer
 const summer = {
-  caches: {
-    modelMessageClass: {
-      mode: 'all',
-      mem: {
-        max: 500,
+  group: {
+    model: {
+      messageClass: {
+        config: 'allWithIgnoreNull',
       },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-      ignoreNull: true,
-    } as IModuleConfigSummerCache,
+    },
   },
 } as IModuleConfigSummer;
 
