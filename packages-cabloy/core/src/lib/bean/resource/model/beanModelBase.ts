@@ -2,7 +2,10 @@ import { BeanModelBaseInner } from './beanModelBaseInner.js';
 
 export class BeanModelBase extends BeanModelBaseInner {
   get __cacheName() {
-    return this.options.cacheName;
+    const cache = this.options.cache || { module: '', name: '' };
+    const moduleName = cache.module || this.moduleBelong;
+    const cacheName = cache.name || this.__beanOptions?.name;
+    return { module: moduleName, name: `model:${cacheName}` };
   }
 
   get __cacheKeyAux() {

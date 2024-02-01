@@ -1,7 +1,7 @@
 export interface IModelOptions {
   disableDeleted?: boolean;
   disableInstance?: boolean;
-  cacheName?: {
+  cache?: {
     module?: string;
     name: string;
   };

@@ -7,8 +7,12 @@ import { IDecoratorModelOptions } from '../../../decorator/index.js';
 let __columns = {};
 
 export class BeanModelBaseInner extends BeanBase {
+  protected get __beanOptions() {
+    return appResource.getBean((<any>this).__beanFullName__);
+  }
+
   protected get __modelOptions() {
-    const beanOptions = appResource.getBean((<any>this).__beanFullName__);
+    const beanOptions = this.__beanOptions;
     return beanOptions?.options as IDecoratorModelOptions;
   }
 
@@ -126,7 +130,7 @@ export class BeanModelBaseInner extends BeanBase {
     }
   }
 
-  /////////////
+  // ///////////
 
   async query(...args) {
     return await this.ctx.db.query(...args);
