@@ -17,7 +17,7 @@ export class LocalRedis extends CacheBase {
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheBase.redis.ttl);
+      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheBase.redis!.ttl);
     }
     return value;
   }
@@ -48,7 +48,7 @@ export class LocalRedis extends CacheBase {
       const multi = this.redisSummer.multi();
       for (let i = 0; i < keysHashMissing.length; i++) {
         const valueMissing = valuesMissing[i];
-        multi.setex(redisKeysMissing[i], Math.trunc(this._cacheBase.redis.ttl / 1000), JSON.stringify(valueMissing));
+        multi.setex(redisKeysMissing[i], Math.trunc(this._cacheBase.redis!.ttl / 1000), JSON.stringify(valueMissing));
         values[indexesMissing[i]] = valueMissing;
       }
       await multi.exec();
@@ -57,17 +57,19 @@ export class LocalRedis extends CacheBase {
     return values;
   }
 
-  async del(keyHash /* , key, options*/) {
+  async del(keyHash, _key, _options) {
+    _key;
     const redisKey = this._getRedisKey(keyHash);
     await this.redisSummer.del(redisKey);
   }
 
-  async mdel(keysHash /* , keys, options*/) {
+  async mdel(keysHash, _keys, _options) {
+    _keys;
     const redisKeys = keysHash.map(keyHash => this._getRedisKey(keyHash));
     await this.redisSummer.del(redisKeys);
   }
 
-  async clear(/* options*/) {
+  async clear(_options) {
     const redisKey = this._getRedisKey('*');
     const keyPrefix = this.redisSummer.options.keyPrefix;
     const keyPattern = `${keyPrefix}${redisKey}`;
@@ -82,7 +84,8 @@ export class LocalRedis extends CacheBase {
     }
   }
 
-  async peek(keyHash /* , key, options*/) {
+  async peek(keyHash, _key, _options) {
+    _key;
     const redisKey = this._getRedisKey(keyHash);
     let value = await this.redisSummer.get(redisKey);
     value = value ? JSON.parse(value) : undefined;

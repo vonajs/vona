@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { LocalMem } from './mem.js';
-import { LocalRedis } from 'cabloy-module-api-a-socketio';
+import { LocalRedis } from './redis.js';
 import { LocalFetch } from './fetch.js';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 

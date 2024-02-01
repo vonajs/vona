@@ -35,20 +35,26 @@ export class LocalFetch extends CacheBase {
     return values;
   }
 
-  async peek(/* keyHash, key, options*/) {
+  async peek(_keyHash, _key, _options) {
+    _keyHash;
+    _key;
     // just return undefined
     return undefined;
   }
 
-  async del(/* keyHash , key, options*/) {
+  async del(_keyHash, _key, _options) {
+    _keyHash;
+    _key;
     // do nothing
   }
 
-  async mdel(/* keysHash, keys, options*/) {
+  async mdel(_keysHash, _keys, _options) {
+    _keysHash;
+    _keys;
     // do nothing
   }
 
-  async clear(/* options*/) {
+  async clear(_options) {
     // do nothing
   }
 

@@ -104,15 +104,17 @@ export class LocalMem extends CacheBase {
     return value;
   }
 
-  __delRaw(keyHash /* , key, options*/) {
+  __delRaw(keyHash, _key, _options) {
+    _key;
     this.lruCache.delete(keyHash);
   }
 
-  __mdelRaw(keysHash /* , keys, options*/) {
+  __mdelRaw(keysHash, _keys, _options) {
+    _keys;
     keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
   }
 
-  __clearRaw(/* options*/) {
+  __clearRaw(_options) {
     this.lruCache.clear();
   }
 
@@ -128,7 +130,7 @@ export class LocalMem extends CacheBase {
     if (!this._lruCache) {
       this._lruCache = this.memoryInstance[this._cacheBase.fullKey];
       if (!this._lruCache) {
-        this._lruCache = this.memoryInstance[this._cacheBase.fullKey] = new LRUCache(this._cacheBase.mem);
+        this._lruCache = this.memoryInstance[this._cacheBase.fullKey] = new LRUCache(this._cacheBase.mem as any);
       }
     }
     return this._lruCache;
