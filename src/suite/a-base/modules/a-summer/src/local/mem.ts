@@ -2,6 +2,7 @@ import { __ThisModule__ } from '../resource/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from './cacheBase.js';
 import { Local } from '@cabloy/core';
+import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
@@ -9,7 +10,7 @@ const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 export class LocalMem extends CacheBase {
   _lruCache: any;
 
-  constructor({ cacheBase }: any) {
+  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
     this._lruCache = null;
   }

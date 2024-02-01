@@ -1,10 +1,11 @@
 import objectHash from 'object-hash';
 import { CacheBase } from './cacheBase.js';
 import { Local } from '@cabloy/core';
+import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 @Local()
 export class LocalCache extends CacheBase {
-  constructor({ cacheBase }: any) {
+  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
   }
 

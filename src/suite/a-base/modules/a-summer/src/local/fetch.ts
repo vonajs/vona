@@ -1,3 +1,4 @@
+import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from './cacheBase.js';
 import { Local } from '@cabloy/core';
 
@@ -5,7 +6,7 @@ import { Local } from '@cabloy/core';
 export class LocalFetch extends CacheBase {
   _cacheBean: any;
 
-  constructor({ cacheBase }: any) {
+  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
     this._cacheBean = null;
   }
