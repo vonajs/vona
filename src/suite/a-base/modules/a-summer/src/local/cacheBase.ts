@@ -1,33 +1,33 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { BeanBase } from '@cabloy/core';
+import { LocalMem } from './mem.js';
+import { LocalRedis } from 'cabloy-module-api-a-socketio';
+import { LocalFetch } from './fetch.js';
+import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 export class CacheBase extends BeanBase {
-  _cacheBase: any;
+  _cacheBase: IModuleConfigSummerCacheBase;
 
-  _configModule: any;
-  _localMem: any;
-  _localRedis: any;
-  _localFetch: any;
+  _localMem: LocalMem;
+  _localRedis: LocalRedis;
+  _localFetch: LocalFetch;
 
-  constructor({ cacheBase }: any) {
+  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super();
     this._cacheBase = cacheBase;
-    this._configModule = null;
-    this._localMem = null;
-    this._localRedis = null;
-    this._localFetch = null;
+  }
+
+  get scopeModule() {
+    return this.bean.scope(__ThisModule__);
   }
 
   get configModule() {
-    if (!this._configModule) {
-      this._configModule = this.ctx.config.module(__ThisModule__);
-    }
-    return this._configModule;
+    return this.scopeModule.config;
   }
 
   get localMem() {
     if (!this._localMem) {
-      this._localMem = this.ctx.bean._newBean(`${__ThisModule__}.local.mem`, {
+      this._localMem = this.ctx.bean._newBean(LocalMem, {
         cacheBase: this._cacheBase,
       });
     }
@@ -36,7 +36,7 @@ export class CacheBase extends BeanBase {
 
   get localRedis() {
     if (!this._localRedis) {
-      this._localRedis = this.ctx.bean._newBean(`${__ThisModule__}.local.redis`, {
+      this._localRedis = this.ctx.bean._newBean(LocalRedis, {
         cacheBase: this._cacheBase,
       });
     }
@@ -45,11 +45,18 @@ export class CacheBase extends BeanBase {
 
   get localFetch() {
     if (!this._localFetch) {
-      this._localFetch = this.ctx.bean._newBean(`${__ThisModule__}.local.fetch`, {
+      this._localFetch = this.ctx.bean._newBean(LocalFetch, {
         cacheBase: this._cacheBase,
       });
     }
     return this._localFetch;
+  }
+
+  __getOptionsEnabled(options?) {
+    if (!this.configModule.summer.enable) return false;
+    if (options?.enable === false) return false;
+    if (this._cacheBase.enable === false) return false;
+    return true;
   }
 
   __getOptionsMode(options) {

@@ -84,7 +84,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
             cache = this.ctx.bean.util.extend({}, configDefault, cache);
           }
           // fullKey
-          const fullKey = `${moduleName}:${groupName}:${key}`;
+          const fullKey = groupName === 'default' ? `${moduleName}:${key}` : `${moduleName}:${groupName}:${key}`;
           // bean
           let beanFullName;
           const beanName = cache.bean;

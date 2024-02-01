@@ -1,4 +1,5 @@
 export interface IModuleConfigSummerCache {
+  enable?: boolean;
   bean?: string | { module: string; name: string } | null;
   config?: 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
   mode?: 'all' | 'mem' | 'redis';
@@ -10,6 +11,12 @@ export interface IModuleConfigSummerCache {
     ttl: number;
   };
   ignoreNull?: boolean;
+}
+
+export interface IModuleConfigSummerCacheBase extends IModuleConfigSummerCache {
+  key: string;
+  fullKey: string;
+  beanFullName: string;
 }
 
 export interface IModuleConfigSummerGroup {

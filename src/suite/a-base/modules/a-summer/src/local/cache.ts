@@ -50,7 +50,7 @@ export class LocalCache extends CacheBase {
   }
 
   __getLayered(options?) {
-    if (!this.configModule.summer.enable) {
+    if (!this.__getOptionsEnabled(options)) {
       return this.localFetch;
     }
     const mode = this.__getOptionsMode(options);
