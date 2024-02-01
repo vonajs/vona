@@ -7,58 +7,58 @@
   "include": ["src/**/*"],
   "references": [
     {
-      "path": "modules/a-cms"
+      "path": "modules/a-cms/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginarticle"
+      "path": "modules/cms-pluginarticle/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginbacktotop"
+      "path": "modules/cms-pluginbacktotop/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginbase"
+      "path": "modules/cms-pluginbase/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-plugincopyright"
+      "path": "modules/cms-plugincopyright/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginmarkdowngithub"
+      "path": "modules/cms-pluginmarkdowngithub/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginrss"
+      "path": "modules/cms-pluginrss/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginsidebar"
+      "path": "modules/cms-pluginsidebar/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginsocialshare"
+      "path": "modules/cms-pluginsocialshare/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginsubmit"
+      "path": "modules/cms-pluginsubmit/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-plugintrack"
+      "path": "modules/cms-plugintrack/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-pluginuser"
+      "path": "modules/cms-pluginuser/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-sitecommunity"
+      "path": "modules/cms-sitecommunity/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-sitedocumentation"
+      "path": "modules/cms-sitedocumentation/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-themeaws"
+      "path": "modules/cms-themeaws/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-themeblog"
+      "path": "modules/cms-themeblog/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-themecommunity"
+      "path": "modules/cms-themecommunity/tsconfig.build.json"
     },
     {
-      "path": "modules/cms-themedocs"
+      "path": "modules/cms-themedocs/tsconfig.build.json"
     }
   ]
 }
