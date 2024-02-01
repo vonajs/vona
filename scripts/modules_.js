@@ -69,6 +69,33 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
+async function _moduleHandle_backend({ file, module, processHelper }) {
+  // console.log(file);
+  // await fse.move(file, `${module.root}/src/typings/core/index.ts`);
+  let contentOld = (await fse.readFile(file)).toString();
+  const regexp = /import 'cabloy-module-api-(.*?)';/g;
+  const matches = contentOld.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  const outputNew3 = [];
+  let matchCount = 0;
+  for (const match of matches) {
+    matchCount++;
+    const classNameOld = match[1];
+    const classPath = match[1];
+    const classNameNew = classPathToClassName('', classPath);
+    console.log(classNameOld, classPath, classNameNew);
+    // models.ts
+    contentOld = contentOld.replace(
+      `import 'cabloy-module-api-${classPath}';`,
+      `export type * as ${classNameNew} from 'cabloy-module-api-${classPath}';`,
+    );
+  }
+  // console.log(contentOld);
+  await fse.outputFile(file, contentOld);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_bean({ file, module, processHelper }) {
   // if (module.info.relativeName === 'a-base') return;
   // console.log(file);
