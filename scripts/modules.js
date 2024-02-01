@@ -39,11 +39,13 @@ async function main() {
 }
 
 async function _moduleHandle_ts({ file, module, processHelper }) {
-  console.log(file);
-  await fse.remove(file);
+  // console.log(file);
+  // await fse.remove(file);
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  // if (module.suite) return;
+  // console.log(module.info.relativeName);
   // const fileFrom = `${module.root}/tsconfig.json`;
   // const fileTo = `${module.root}/tsconfig.build.json`;
 

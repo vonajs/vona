@@ -74,16 +74,16 @@
       "path": "src/suite/test-party"
     },
     {
-      "path": "src/module/bz-login"
+      "path": "src/module/bz-login/tsconfig.build.json"
     },
     {
-      "path": "src/module/test-flow"
+      "path": "src/module/test-flow/tsconfig.build.json"
     },
     {
-      "path": "src/module/test-note"
+      "path": "src/module/test-note/tsconfig.build.json"
     },
     {
-      "path": "src/module/test-userpro-monkey"
+      "path": "src/module/test-userpro-monkey/tsconfig.build.json"
     }
   ]
 }
