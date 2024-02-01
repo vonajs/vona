@@ -38,27 +38,30 @@ async function main() {
   }
 }
 
-async function _moduleHandle_ts({ file, module, processHelper }) {}
+async function _moduleHandle_ts({ file, module, processHelper }) {
+  console.log(file);
+  await fse.remove(file);
+}
 
 async function _moduleHandle({ module, processHelper }) {
-  const fileFrom = `${module.root}/tsconfig.json`;
-  const fileTo = `${module.root}/tsconfig.build.json`;
+  // const fileFrom = `${module.root}/tsconfig.json`;
+  // const fileTo = `${module.root}/tsconfig.build.json`;
 
-  const contentNew = `
-  {
-    "extends": "../../tsconfig.base.json",
-    "compilerOptions": {
-      "rootDir": "src",
-      "outDir": "dist"
-    },
-    "include": ["src/**/*.ts", "src/**/*.json"]
-  }
-  
-  `;
-  await fse.outputFile(fileTo, contentNew);
-  await processHelper.formatFile({ fileName: fileTo });
-  return;
-  const pattern = `${module.root}/src/typings/core/index.ts`;
+  // const contentNew = `
+  // {
+  //   "extends": "../../tsconfig.base.json",
+  //   "compilerOptions": {
+  //     "rootDir": "src",
+  //     "outDir": "dist"
+  //   },
+  //   "include": ["src/**/*.ts", "src/**/*.json"]
+  // }
+
+  // `;
+  // await fse.outputFile(fileTo, contentNew);
+  // await processHelper.formatFile({ fileName: fileTo });
+  // return;
+  const pattern = `${module.root}/*.tsbuildinfo`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
