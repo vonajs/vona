@@ -1,28 +1,18 @@
-import { IModuleConfigSummer, IModuleConfigSummerCache } from '@cabloy/core';
+import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // summer
 const summer = {
-  caches: {
-    fieldsRightOfAtomClass: {
-      bean: 'fieldsRightOfAtomClass',
-      mode: 'all',
-      mem: {
-        max: 500,
+  group: {
+    default: {
+      fieldsRightOfAtomClass: {
+        bean: 'fieldsRightOfAtomClass',
+        config: 'all',
       },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      fieldsRightOfUser: {
+        bean: 'fieldsRightOfUser',
+        config: 'all',
       },
-    } as IModuleConfigSummerCache,
-    fieldsRightOfUser: {
-      bean: 'fieldsRightOfUser',
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
+    },
   },
 } as IModuleConfigSummer;
 
