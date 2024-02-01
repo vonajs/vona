@@ -46,7 +46,7 @@ async function _moduleHandle({ module, processHelper }) {
 
   const contentNew = `
   {
-    "extends": "../../tsconfig.build.json",
+    "extends": "../../tsconfig.base.json",
     "compilerOptions": {
       "rootDir": "src",
       "outDir": "dist"
@@ -55,8 +55,8 @@ async function _moduleHandle({ module, processHelper }) {
   }
   
   `;
-  // await fse.outputFile(fileTo, contentNew);
-  // await processHelper.formatFile({ fileName: fileTo });
+  await fse.outputFile(fileTo, contentNew);
+  await processHelper.formatFile({ fileName: fileTo });
   return;
   const pattern = `${module.root}/src/typings/core/index.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
@@ -80,7 +80,7 @@ async function _moduleHandle({ module, processHelper }) {
 }
 
 async function _suiteHandle({ modules, suite, processHelper }) {
-  console.log(suite.root);
+  // console.log(suite.root);
   const fileFrom = `${suite.root}/tsconfig.base.json`;
   // const fileTo = `${suite.root}/tsconfig.json`;
   // if (!fse.existsSync(fileTo)) {
@@ -92,8 +92,8 @@ async function _suiteHandle({ modules, suite, processHelper }) {
     "compilerOptions": {}
   }
   `;
-  await fse.outputFile(fileFrom, contentNew);
-  await processHelper.formatFile({ fileName: fileFrom });
+  // await fse.outputFile(fileFrom, contentNew);
+  // await processHelper.formatFile({ fileName: fileFrom });
   // const refs = [];
   // for (const moduleName of suite.modules) {
   //   const module = modules[moduleName];
