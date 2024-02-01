@@ -1,10 +1,5 @@
-import {
-  IModuleConfigMiddleware,
-  IModuleConfigQueue,
-  IModuleConfigStartup,
-  IModuleConfigSummer,
-  IModuleConfigSummerCache,
-} from '@cabloy/core';
+import { IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from '@cabloy/core';
+import { IModuleConfigSummer, IModuleConfigSummerCache } from 'cabloy-module-api-a-summer';
 
 // middlewares
 const middlewares = {

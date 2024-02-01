@@ -1,4 +1,5 @@
-import { IModuleConfigBroadcast, IModuleConfigSummer } from '@cabloy/core';
+import { IModuleConfigBroadcast } from '@cabloy/core';
+import { IModuleConfigSummer } from './types.js';
 
 // broadcasts
 const broadcasts = {
@@ -13,14 +14,11 @@ const broadcasts = {
   } as IModuleConfigBroadcast,
 };
 
-// summer
-const summer = {
-  enable: true,
-} as IModuleConfigSummer;
-
 export const config = _app => {
   return {
     broadcasts,
-    summer,
+    summer: {
+      enable: true,
+    },
   };
 };
