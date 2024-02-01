@@ -1,5 +1,5 @@
 export interface IModuleConfigSummerCache {
-  bean: string | { module: string; name: string } | null;
+  bean?: string | { module: string; name: string } | null;
   mode: 'all' | 'mem' | 'redis';
   mem?: {
     max: number;
