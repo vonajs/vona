@@ -1,10 +1,15 @@
 import { LocalCache } from '../index.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 let __cacheBases;
 
 @Bean()
-export class BeanSummer extends BeanModuleScopeBase {
+export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
+  get confieModule() {
+    return this.scope.config;
+  }
+
   getCache({ module, name, fullKey }: any) {
     fullKey = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey });
@@ -72,7 +77,13 @@ export class BeanSummer extends BeanModuleScopeBase {
       for (const groupName in summerGroups) {
         const summerGroup = summerGroups[groupName];
         for (const key in summerGroup) {
-          const cache = summerGroup[key];
+          let cache = summerGroup[key];
+          // config
+          if (cache.config) {
+            const configDefault = this.confieModule.summer.config.group[groupName][cache.config];
+            cache = this.ctx.bean.util.extend({}, configDefault, cache);
+          }
+          // fullKey
           const fullKey = `${moduleName}:${groupName}:${key}`;
           // bean
           let beanFullName;
