@@ -3,7 +3,8 @@ export interface IModuleConfigSummerCache {
   config?: 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
   mode?: 'all' | 'mem' | 'redis';
   mem?: {
-    max: number;
+    max?: number;
+    ttl?: number;
   };
   redis?: {
     ttl: number;

@@ -1,18 +1,19 @@
-import { IModuleConfigSummer, IModuleConfigSummerCache } from '@cabloy/core';
+import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // summer
 const summer = {
-  caches: {
-    modelUserOnline: {
-      bean: null,
-      mode: 'all',
-      mem: {
-        max: 500,
+  group: {
+    model: {
+      userOnline: {
+        config: 'all',
+        mem: {
+          ttl: 10 * 60 * 1000, // 10 minutes
+        },
+        redis: {
+          ttl: 10 * 60 * 1000, // 10 minutes
+        },
       },
-      redis: {
-        ttl: 10 * 60 * 1000, // 10 minutes
-      },
-    } as IModuleConfigSummerCache,
+    },
   },
 } as IModuleConfigSummer;
 
