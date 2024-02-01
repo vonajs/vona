@@ -1,32 +1,22 @@
-import { IModuleConfigSummer, IModuleConfigSummerCache } from '@cabloy/core';
+import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // summer
 const summer = {
-  caches: {
-    modelFlow: {
-      mode: 'redis', // only redis
-      redis: {
-        ttl: 2 * 60 * 60 * 1000, // 2 hours
+  group: {
+    model: {
+      flow: {
+        config: 'redis',
       },
-    } as IModuleConfigSummerCache,
-    modelFlowHistory: {
-      mode: 'redis', // only redis
-      redis: {
-        ttl: 2 * 60 * 60 * 1000, // 2 hours
+      flowHistory: {
+        config: 'redis',
       },
-    } as IModuleConfigSummerCache,
-    modelFlowNode: {
-      mode: 'redis', // only redis
-      redis: {
-        ttl: 2 * 60 * 60 * 1000, // 2 hours
+      flowNode: {
+        config: 'redis',
       },
-    } as IModuleConfigSummerCache,
-    modelFlowNodeHistory: {
-      mode: 'redis', // only redis
-      redis: {
-        ttl: 2 * 60 * 60 * 1000, // 2 hours
+      flowNodeHistory: {
+        config: 'redis',
       },
-    } as IModuleConfigSummerCache,
+    },
   },
 } as IModuleConfigSummer;
 
