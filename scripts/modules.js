@@ -80,20 +80,20 @@ async function _moduleHandle({ module, processHelper }) {
 }
 
 async function _suiteHandle({ modules, suite, processHelper }) {
-  // console.log(suite.root);
-  // const fileFrom = `${suite.root}/tsconfig.json`;
-  // const fileTo = `${suite.root}/tsconfig.build.json`;
-  // if (!fse.existsSync(fileTo)) {
-  //   await fse.move(fileFrom, fileTo);
-  // }
-  // const contentNew = `
-  // {
-  //   "extends": "../../../tsconfig.base.json",
-  //   "compilerOptions": {
-  //     "noEmit": true
-  //   }
-  // }
-  // `;
+  console.log(suite.root);
+  const fileFrom = `${suite.root}/tsconfig.build.json`;
+  const fileTo = `${suite.root}/tsconfig.json`;
+  if (!fse.existsSync(fileTo)) {
+    await fse.move(fileFrom, fileTo);
+  }
+  const contentNew = `
+  {
+    "extends": "../../../tsconfig.base.json",
+    "compilerOptions": {
+      "noEmit": true
+    }
+  }
+  `;
   // await fse.outputFile(fileFrom, contentNew);
   // await processHelper.formatFile({ fileName: fileFrom });
   // const refs = [];
