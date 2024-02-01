@@ -94,19 +94,6 @@ const queues = {
 
 // summer
 const summer = {
-  caches: {
-    modelRole: {
-      bean: null,
-      mode: 'all',
-      mem: {
-        max: 500,
-      },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
-      },
-    } as IModuleConfigSummerCache,
-    modelUser: {
-      bean: null,
       mode: 'all',
       mem: {
         max: 500,
@@ -116,25 +103,24 @@ const summer = {
       },
     } as IModuleConfigSummerCache,
     modelAtomClass: {
-      mode: 'all',
-      mem: {
-        max: 500,
+  group: {
+    default: {},
+    model: {
+      role: {
+        config: 'all',
       },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      user: {
+        config: 'all',
       },
-      ignoreNull: true,
-    } as IModuleConfigSummerCache,
-    modelAtomAction: {
-      mode: 'all',
-      mem: {
-        max: 500,
+      modelAtomClass: {
+        config: 'allWithIgnoreNull',
       },
-      redis: {
-        ttl: 4 * 60 * 60 * 1000, // 4 hours
+      modelAtomAction: {
+        config: 'allWithIgnoreNull',
       },
-      ignoreNull: true,
-    } as IModuleConfigSummerCache,
+    },
+  },
+  caches: {
     modelAtom: {
       mode: 'redis', // only redis
       // mem: {

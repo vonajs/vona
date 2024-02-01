@@ -1,6 +1,7 @@
 export interface IModuleConfigSummerCache {
   bean?: string | { module: string; name: string } | null;
-  mode: 'all' | 'mem' | 'redis';
+  config?: 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
+  mode?: 'all' | 'mem' | 'redis';
   mem?: {
     max: number;
   };
@@ -10,6 +11,11 @@ export interface IModuleConfigSummerCache {
   ignoreNull?: boolean;
 }
 
+export interface IModuleConfigSummerGroup {
+  default?: Record<string, IModuleConfigSummerCache>;
+  model?: Record<string, IModuleConfigSummerCache>;
+}
 export interface IModuleConfigSummer {
-  caches: Record<string, IModuleConfigSummerCache>;
+  group: IModuleConfigSummerGroup;
+  caches?: any;
 }

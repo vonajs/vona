@@ -14,24 +14,41 @@ const broadcasts = {
   } as IModuleConfigBroadcast,
 };
 
+const configRedis = {
+  mode: 'redis', // only redis
+  redis: {
+    ttl: 2 * 60 * 60 * 1000, // 2 hours
+  },
+  ignoreNull: true,
+} as IModuleConfigSummerCache;
+
+const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
+
+const configAll = {
+  mode: 'all',
+  mem: {
+    max: 500,
+  },
+  redis: {
+    ttl: 2 * 60 * 60 * 1000, // 2 hours
+  },
+} as IModuleConfigSummerCache;
+
+const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
+
 export const config = _app => {
   return {
     broadcasts,
     summer: {
       enable: true,
-      group: {
-        default: {
-          default: null,
-          dynamic: false,
-        },
-        model: {
-          default: {
-            mode: 'redis', // only redis
-            redis: {
-              ttl: 2 * 60 * 60 * 1000, // 2 hours
-            },
-          } as IModuleConfigSummerCache,
-          dynamic: true,
+      config: {
+        group: {
+          model: {
+            redis: configRedis,
+            redisWithIgnoreNull: configRedisWithIgnoreNull,
+            all: configAll,
+            allWithIgnoreNull: configAllWithIgnoreNull,
+          },
         },
       },
     },
