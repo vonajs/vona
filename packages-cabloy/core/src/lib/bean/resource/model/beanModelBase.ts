@@ -159,6 +159,6 @@ export class BeanModelBase extends BeanModelBaseInner {
       module: this.__cacheName.module,
       name: this.__cacheName.name,
     });
-    return !!cachaBase;
+    return !!cachaBase && cachaBase.enable !== false;
   }
 }

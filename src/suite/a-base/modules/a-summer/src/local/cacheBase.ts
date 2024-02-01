@@ -27,7 +27,7 @@ export class CacheBase extends BeanBase {
 
   get localMem() {
     if (!this._localMem) {
-      this._localMem = this.ctx.bean._newBean(LocalMem, {
+      this._localMem = this.ctx.bean._newBean(`${__ThisModule__}.local.mem`, {
         cacheBase: this._cacheBase,
       });
     }
@@ -36,7 +36,7 @@ export class CacheBase extends BeanBase {
 
   get localRedis() {
     if (!this._localRedis) {
-      this._localRedis = this.ctx.bean._newBean(LocalRedis, {
+      this._localRedis = this.ctx.bean._newBean(`${__ThisModule__}.local.redis`, {
         cacheBase: this._cacheBase,
       });
     }
@@ -45,7 +45,7 @@ export class CacheBase extends BeanBase {
 
   get localFetch() {
     if (!this._localFetch) {
-      this._localFetch = this.ctx.bean._newBean(LocalFetch, {
+      this._localFetch = this.ctx.bean._newBean(`${__ThisModule__}.local.fetch`, {
         cacheBase: this._cacheBase,
       });
     }
