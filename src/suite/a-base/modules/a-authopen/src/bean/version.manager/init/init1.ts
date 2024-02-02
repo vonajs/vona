@@ -1,9 +1,13 @@
-import { ScopeModule } from '../../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import path from 'path';
 import initData from './initData1.js';
 
 export class VersionInit extends BeanBase<ScopeModule> {
+  constructor() {
+    super(__ThisModule__);
+  }
+
   get modelAuthOpen() {
     return this.scope.model.authOpen;
   }
