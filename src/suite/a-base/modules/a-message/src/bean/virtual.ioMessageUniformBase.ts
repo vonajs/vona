@@ -5,7 +5,7 @@ import { BeanIoMessageBase } from 'cabloy-module-api-a-socketio';
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
 @Virtual({ scene: 'bean' })
-export class BeanIoMessageUniformBase extends BeanIoMessageBase {
+export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> {
   async onPublish({ /* path,*/ message, messageClass, options }: any) {
     // onPublish
     return await super.onPublish({ path: __PATH_MESSAGE_UNIFORM, message, messageClass, options });

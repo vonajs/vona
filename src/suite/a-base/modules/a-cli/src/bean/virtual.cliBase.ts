@@ -4,7 +4,7 @@ import eggBornUtils from 'egg-born-utils';
 import { LocalConsole, LocalHelper, LocalTemplate } from '../index.js';
 
 @Virtual({ scene: 'bean' })
-export class BeanCliBase extends BeanBase {
+export class BeanCliBase<T = unknown> extends BeanBase<T> {
   options: any;
   cabloyConfig: any;
   terminal: any;

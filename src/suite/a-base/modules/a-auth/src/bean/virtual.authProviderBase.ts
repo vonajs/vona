@@ -1,7 +1,7 @@
 import { BeanBase, Virtual } from '@cabloy/core';
 
 @Virtual({ scene: 'bean' })
-export class BeanAuthProviderBase extends BeanBase {
+export class BeanAuthProviderBase<T = unknown> extends BeanBase<T> {
   authProvider: any;
   providerModule: any;
   providerName: any;
