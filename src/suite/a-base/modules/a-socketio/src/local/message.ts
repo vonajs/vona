@@ -1,18 +1,18 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
-export class LocalMessage extends BeanBase {
+export class LocalMessage extends BeanBase<ScopeModule> {
   get modelMessage() {
-    return this.ctx.model.module(__ThisModule__).message;
+    return this.scope.model.message;
   }
 
   get modelMessageSync() {
-    return this.ctx.model.module(__ThisModule__).messageSync;
+    return this.scope.model.messageSync;
   }
 
   get sqlProcedure() {
-    return this.ctx.bean.local.module(__ThisModule__).procedure;
+    return this.scope.local.procedure;
   }
 
   async save({ message }: any) {

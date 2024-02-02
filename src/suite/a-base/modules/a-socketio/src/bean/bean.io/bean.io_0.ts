@@ -1,21 +1,21 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
-export class BeanIo0 extends BeanBase {
+export class BeanIo0 extends BeanBase<ScopeModule> {
   get messageClass() {
-    return this.ctx.bean.local.module(__ThisModule__).messageClass;
+    return this.scope.local.messageClass;
   }
 
   get message() {
-    return this.ctx.bean.local.module(__ThisModule__).message;
+    return this.scope.local.message;
   }
 
   get localRedis() {
-    return this.ctx.bean.local.module(__ThisModule__).redis;
+    return this.scope.local.redis;
   }
 
   get localIOInner() {
-    return this.ctx.bean.local.module(__ThisModule__).ioInner;
+    return this.scope.local.ioInner;
   }
 
   _getBeanMessage(messageClassBase) {
