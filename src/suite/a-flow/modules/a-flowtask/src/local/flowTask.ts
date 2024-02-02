@@ -1,7 +1,12 @@
 import { BeanBase, Local } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Local({ name: 'flowTask' })
-export class LocalFlowTaskService extends BeanBase {
+export class LocalFlowTaskService extends BeanBase<ScopeModule> {
+  get localRight() {
+    return this.scope.local.right;
+  }
+
   async select({ options, user }: any) {
     return await this.ctx.bean.flowTask.select({ options, user });
   }
@@ -49,7 +54,7 @@ export class LocalFlowTaskService extends BeanBase {
   async userSelectForward({ flowTaskId, params, user }: any) {
     // check right
     const flowTask = await this.ctx.model.flowTask.get({ id: flowTaskId });
-    await this.ctx.bean.local.right.forward({ flowTask, user });
+    await this.localRight.forward({ flowTask, user });
     // users
     return await this.ctx.bean.user.selectGeneral({ params, user });
   }
@@ -65,7 +70,7 @@ export class LocalFlowTaskService extends BeanBase {
   async userSelectSubstitute({ flowTaskId, params, user }: any) {
     // check right
     const flowTask = await this.ctx.model.flowTask.get({ id: flowTaskId });
-    await this.ctx.bean.local.right.substitute({ flowTask, user });
+    await this.localRight.substitute({ flowTask, user });
     // users
     return await this.ctx.bean.user.selectGeneral({ params, user });
   }
