@@ -3,9 +3,9 @@ import { BeanSimple } from './beanSimple.js';
 
 export class BeanBase<T = unknown> extends BeanSimple {
   private __beanFullName__: string;
-  private __moduleBelong__: string;
+  private __moduleBelong__?: string;
 
-  constructor(moduleBelong: string) {
+  constructor(moduleBelong?: string) {
     super();
     this.__moduleBelong__ = moduleBelong;
   }

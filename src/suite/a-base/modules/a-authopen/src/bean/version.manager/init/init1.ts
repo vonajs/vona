@@ -1,16 +1,14 @@
-import { __ThisModule__ } from '../../../resource/this.js';
+import { ScopeModule } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
-
 import path from 'path';
-
 import initData from './initData1.js';
 
-export class VersionInit extends BeanBase {
+export class VersionInit extends BeanBase<ScopeModule> {
   get modelAuthOpen() {
-    return this.ctx.model.module(__ThisModule__).authOpen;
+    return this.scope.model.authOpen;
   }
   get localToken() {
-    return this.ctx.bean.local.module(__ThisModule__).token;
+    return this.scope.local.token;
   }
 
   async run(_options) {
