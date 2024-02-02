@@ -29,12 +29,12 @@ export const config = _app => {
     email: {
       templates: {
         confirmation: {
-          subject: 'confirmationEmailSubject',
-          body: 'confirmationEmailBody',
+          subject: 'ConfirmationEmailSubject',
+          body: 'ConfirmationEmailBody',
         },
         passwordReset: {
-          subject: 'passwordResetEmailSubject',
-          body: 'passwordResetEmailBody',
+          subject: 'PasswordResetEmailSubject',
+          body: 'PasswordResetEmailBody',
         },
       },
     },

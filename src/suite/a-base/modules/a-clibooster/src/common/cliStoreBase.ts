@@ -1,11 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import eggBornUtils from 'egg-born-utils';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';
 
-export default class CliStoreBase extends BeanCliBase {
+export default class CliStoreBase extends BeanCliBase<ScopeModule> {
   commandName: any;
   tokenName: any;
   openAuthClient: any;
@@ -19,11 +19,11 @@ export default class CliStoreBase extends BeanCliBase {
   }
 
   get localToken() {
-    return this.ctx.bean.local.module('a-authopen').token;
+    return this.bean.scope('a-authopen').local.token;
   }
 
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   async meta({ user }: any) {

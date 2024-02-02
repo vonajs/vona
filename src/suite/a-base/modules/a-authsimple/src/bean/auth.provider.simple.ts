@@ -1,13 +1,13 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean } from '@cabloy/core';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderSimple extends BeanAuthProviderBase {
+export class AuthProviderSimple extends BeanAuthProviderBase<ScopeModule> {
   get localSimple() {
-    return this.ctx.bean.local.module(__ThisModule__).simple;
+    return this.scope.local.simple;
   }
   async getConfigDefault() {
     return null;

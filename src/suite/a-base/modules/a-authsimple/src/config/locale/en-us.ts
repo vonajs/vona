@@ -1,8 +1,8 @@
 // confirmationEmail
 //   subject
-const confirmationEmailSubject = '[{{siteName}}] Account Confirmation';
+const ConfirmationEmailSubject = '[{{siteName}}] Account Confirmation';
 //   body
-const confirmationEmailBody = `
+const ConfirmationEmailBody = `
 Hi {{userName}},
 
 Welcome to join us. Please click this link to confirm your email:
@@ -15,9 +15,9 @@ Regards,
 
 // passwordResetEmail
 //   subject
-const passwordResetEmailSubject = '[{{siteName}}] Password Reset';
+const PasswordResetEmailSubject = '[{{siteName}}] Password Reset';
 //   body
-const passwordResetEmailBody = `
+const PasswordResetEmailBody = `
 Hi {{userName}},
 
 To reset your password, visit the following address:
@@ -31,13 +31,13 @@ Regards,
 //
 
 export default {
-  confirmationEmailExpired: 'This email confirmation link has expired',
-  confirmationEmailSucceeded: 'Your email address has been confirmed',
-  confirmationEmailSubject,
-  confirmationEmailBody,
-  passwordResetEmailExpired: 'This password reset link has expired',
-  passwordResetEmailSubject,
-  passwordResetEmailBody,
+  ConfirmationEmailExpired: 'This email confirmation link has expired',
+  ConfirmationEmailSucceeded: 'Your email address has been confirmed',
+  ConfirmationEmailSubject,
+  ConfirmationEmailBody,
+  PasswordResetEmailExpired: 'This password reset link has expired',
+  PasswordResetEmailSubject,
+  PasswordResetEmailBody,
   AuthenticationFailed: 'Authentication Failed',
   UserIsDisabled: 'User is Disabled',
 };

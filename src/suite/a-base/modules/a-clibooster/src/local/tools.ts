@@ -1,10 +1,10 @@
 import { BeanBase, Local } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalTools extends BeanBase {
+export class LocalTools extends BeanBase<ScopeModule> {
   get localUtils() {
-    return this.ctx.bean.local.module(__ThisModule__).utils;
+    return this.scope.local.utils;
   }
 
   async demo({ method, query }: any) {

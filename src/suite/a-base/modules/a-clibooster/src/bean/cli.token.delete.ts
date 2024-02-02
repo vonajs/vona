@@ -4,7 +4,7 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 @Bean({ scene: 'cli.token' })
 export class CliTokenDelete extends BeanCliBase {
   get localToken() {
-    return this.ctx.bean.local.module('a-authopen').token;
+    return this.bean.scope('a-authopen').local.token;
   }
 
   async execute({ user }: any) {

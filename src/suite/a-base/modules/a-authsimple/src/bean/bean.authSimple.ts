@@ -1,22 +1,22 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
-export class BeanAuthSimple extends BeanBase {
+export class BeanAuthSimple extends BeanBase<ScopeModule> {
   get modelAuthSimple() {
-    return this.ctx.model.module(__ThisModule__).authSimple;
+    return this.scope.model.authSimple;
   }
   get modelAuth() {
-    return this.ctx.model.module('a-base').auth;
+    return this.bean.scope('a-base').model.auth;
   }
   get localSimple() {
-    return this.ctx.bean.local.module(__ThisModule__).simple;
+    return this.scope.local.simple;
   }
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
   get cacheDb() {
-    return this.ctx.cache.db.module(__ThisModule__);
+    return this.scope._bean.cacheRedis;
   }
 
   // mobile: not use
@@ -198,8 +198,8 @@ export class BeanAuthSimple extends BeanBase {
     const value = await this.cacheDb.get(cacheKey);
     if (!value) {
       // expired, send confirmation mail again
-      //  1003: passwordResetEmailExpired
-      this.ctx.throw.module(__ThisModule__, 1003);
+      //  1003: PasswordResetEmailExpired
+      this.scope.error.PasswordResetEmailExpired.throw();
     }
     // userId
     const userId = value.userId;
@@ -295,7 +295,7 @@ export class BeanAuthSimple extends BeanBase {
     if (!value) {
       // expired, send confirmation mail again
       const data = {
-        message: this.ctx.text('confirmationEmailExpired'),
+        message: this.ctx.text('ConfirmationEmailExpired'),
         link: '/a/authsimple/emailConfirm',
         linkText: this.ctx.text('Resend Confirmation Email'),
       };
@@ -313,7 +313,7 @@ export class BeanAuthSimple extends BeanBase {
     // not: login antomatically
     // ok
     const data = {
-      message: this.ctx.text('confirmationEmailSucceeded'),
+      message: this.ctx.text('ConfirmationEmailSucceeded'),
       link: '#back',
       linkText: this.ctx.text('Close'),
     };
@@ -334,12 +334,12 @@ export class BeanAuthSimple extends BeanBase {
   async ensureAuthUser({ beanProvider, data: { auth, password, rememberMe } }) {
     // exists
     const user = await this.ctx.bean.user.exists({ userName: auth, email: auth, mobile: auth });
-    if (!user) return this.ctx.throw.module(__ThisModule__, 1001);
+    if (!user) return this.scope.error.AuthenticationFailed.throw();
     // disabled
-    if (user.disabled) return this.ctx.throw.module(__ThisModule__, 1002);
+    if (user.disabled) return this.scope.error.UserIsDisabled.throw();
     // verify
     const authSimple = await this.localSimple.verify({ userId: user.id, password });
-    if (!authSimple) return this.ctx.throw.module(__ThisModule__, 1001);
+    if (!authSimple) return this.scope.error.AuthenticationFailed.throw();
     return {
       module: beanProvider.providerModule,
       provider: beanProvider.providerName,

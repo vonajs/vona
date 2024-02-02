@@ -1,14 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean } from '@cabloy/core';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderSms extends BeanAuthProviderBase {
-  // get localSimple() {
-  //   return this.ctx.bean.local.module(__ThisModule__).simple;
-  // }
+export class AuthProviderSms extends BeanAuthProviderBase<ScopeModule> {
   async getConfigDefault() {
     return null;
   }
@@ -24,9 +21,9 @@ export class AuthProviderSms extends BeanAuthProviderBase {
     await this.ctx.bean.validation.validate({ module: __ThisModule__, validator: 'signin', data: body.data });
     // exists
     const user = await this.ctx.bean.user.exists({ mobile });
-    if (!user) return this.ctx.throw.module(__ThisModule__, 1004);
+    if (!user) return this.scope.error.AuthenticationFailed.throw();
     // disabled
-    if (user.disabled) return this.ctx.throw.module(__ThisModule__, 1005);
+    if (user.disabled) return this.scope.error.UserIsDisabled.throw();
     return {
       module: this.providerModule,
       provider: this.providerName,

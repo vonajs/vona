@@ -1,9 +1,10 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'queue' })
-export class QueuePushDirect extends BeanBase {
+export class QueuePushDirect extends BeanBase<ScopeModule> {
   async execute(context) {
     const { options, content, channel } = context.data;
-    return await this.ctx.bean.local.ioInner.queuePushDirect({ options, content, channel });
+    return await this.scope.local.ioInner.queuePushDirect({ options, content, channel });
   }
 }

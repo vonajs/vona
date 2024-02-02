@@ -1,11 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean } from '@cabloy/core';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.tools' })
-export class CliToolsDemo extends BeanCliBase {
+export class CliToolsDemo extends BeanCliBase<ScopeModule> {
   get localUtils() {
-    return this.ctx.bean.local.module(__ThisModule__).utils;
+    return this.scope.local.utils;
   }
 
   async execute({ user }: any) {

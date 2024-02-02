@@ -1,8 +1,8 @@
 // confirmationEmail
 //   subject
-const confirmationEmailSubject = '[{{siteName}}] 账号确认';
+const ConfirmationEmailSubject = '[{{siteName}}] 账号确认';
 //   body
-const confirmationEmailBody = `
+const ConfirmationEmailBody = `
 您好，{{userName}}，
 
 欢迎加入我们。请点击以下链接验证您的邮件：
@@ -15,9 +15,9 @@ const confirmationEmailBody = `
 
 // passwordResetEmail
 //   subject
-const passwordResetEmailSubject = '[{{siteName}}] 重置密码';
+const PasswordResetEmailSubject = '[{{siteName}}] 重置密码';
 //   body
-const passwordResetEmailBody = `
+const PasswordResetEmailBody = `
 您好，{{userName}}，
 
 请点击以下链接重置密码：
@@ -39,11 +39,11 @@ export default {
   'Cannot Contain __': '不能包含__',
   'Resend Confirmation Email': '重新发送确认邮件',
   'Email Address does not Exist': '邮件地址不存在',
-  confirmationEmailExpired: '确认邮件链接已经过期',
-  confirmationEmailSucceeded: '您的邮件地址已经确认',
-  confirmationEmailSubject,
-  confirmationEmailBody,
-  passwordResetEmailExpired: '重置密码链接已经过期',
-  passwordResetEmailSubject,
-  passwordResetEmailBody,
+  ConfirmationEmailExpired: '确认邮件链接已经过期',
+  ConfirmationEmailSucceeded: '您的邮件地址已经确认',
+  ConfirmationEmailSubject,
+  ConfirmationEmailBody,
+  PasswordResetEmailExpired: '重置密码链接已经过期',
+  PasswordResetEmailSubject,
+  PasswordResetEmailBody,
 };
