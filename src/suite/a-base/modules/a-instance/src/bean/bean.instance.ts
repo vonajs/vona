@@ -10,8 +10,8 @@ const boxenOptions: boxen.Options = {
   margin: 1,
   align: 'center',
   borderColor: 'yellow',
-  borderStyle: boxen.BorderStyle.Round,
-};
+  borderStyle: 'round',
+} as boxen.Options;
 
 const __queueInstanceStartup: any = {};
 

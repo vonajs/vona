@@ -14,8 +14,8 @@ const boxenOptions: boxen.Options = {
   margin: 1,
   align: 'center',
   borderColor: 'yellow',
-  borderStyle: boxen.BorderStyle.Round,
-};
+  borderStyle: 'round',
+} as boxen.Options;
 
 // type: front/backend/all
 export async function glob(options: IModuleGlobOptions) {
