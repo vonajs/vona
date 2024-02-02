@@ -1,18 +1,18 @@
 import { BeanIoChannelBase } from '../../common/ioChannelBase.js';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
-export class LocalIoInner0 extends BeanBase {
+export class LocalIoInner0 extends BeanBase<ScopeModule> {
   get messageClass() {
-    return this.ctx.bean.local.module(__ThisModule__).messageClass;
+    return this.scope.local.messageClass;
   }
 
   get message() {
-    return this.ctx.bean.local.module(__ThisModule__).message;
+    return this.scope.local.message;
   }
 
   get localRedis() {
-    return this.ctx.bean.local.module(__ThisModule__).redis;
+    return this.scope.local.redis;
   }
 
   _getBeanMessage(messageClassBase) {
@@ -59,7 +59,7 @@ export class LocalIoInner0 extends BeanBase {
     }
     // from db
     // saveLimit
-    const saveLimit = this.ctx.config.module(__ThisModule__).message.sync.saveLimit;
+    const saveLimit = this.scope.config.message.sync.saveLimit;
     const modelMessageSync = this.message.modelMessageSync;
     let offset = 0;
     // eslint-disable-next-line
