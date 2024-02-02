@@ -3,7 +3,6 @@ import { CabloyApplication, CabloyContext } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
-import { BeanLocal } from './beanLocal.js';
 import { IBeanRecord, IBeanScopeRecord, TypeBeanRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
@@ -17,15 +16,12 @@ export class BeanContainer {
   private app: CabloyApplication;
   private ctx: CabloyContext;
 
-  local: any;
-
   private [BeanContainerInstances]: Record<string, Constructable> = {};
   private [BeanContainerInstancesModule]: Record<string, Constructable> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
     this.ctx = ctx;
-    this.local = this._newBean(BeanLocal);
   }
 
   /** get specific module's scope */
