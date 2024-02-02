@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import randomize from 'randomatic';
@@ -13,15 +13,15 @@ const __atomClassAuthOpen = {
 };
 
 @Bean()
-export class BeanAuthOpen extends BeanBase {
+export class BeanAuthOpen extends BeanBase<ScopeModule> {
   get modelAuthOpen() {
-    return this.ctx.model.module(__ThisModule__).authOpen;
+    return this.scope.model.authOpen;
   }
   get modelResourceRole() {
-    return this.ctx.model.module('a-base').resourceRole;
+    return this.bean.scope('a-base').model.resourceRole;
   }
   get localAuthSimple() {
-    return this.ctx.bean.local.module('a-authsimple').simple;
+    return this.bean.scope('a-authsimple').local.simple;
   }
 
   async hideClientSecret({ atomId, itemId, user }: any) {
@@ -68,7 +68,7 @@ export class BeanAuthOpen extends BeanBase {
     if (atom.atomDisabled) return this.ctx.throw(403);
     // neverExpire/expireTime
     if (!authOpen.neverExpire && authOpen.expireTime <= Date.now()) {
-      return this.ctx.throw.module(__ThisModule__, 1001);
+      return this.scope.error.AuthOpenTokenExpired.throw();
     }
     // done
     return authOpen;

@@ -1,14 +1,14 @@
-import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { Bean, BeanBase, CabloyContext } from '@cabloy/core';
 import { BeanAuthProviderBase } from './virtual.authProviderBase.js';
 
 @Bean()
-export class BeanAuthProvider extends BeanBase {
+export class BeanAuthProvider extends BeanBase<ScopeModule> {
   get modelAuthProvider() {
-    return this.ctx.model.module(__ThisModule__).authProvider;
+    return this.scope.model.authProvider;
   }
   get localPassport() {
-    return this.ctx.bean.local.module(__ThisModule__).passport;
+    return this.scope.local.passport;
   }
 
   getAuthProviderBase({ module, providerName }: any) {
@@ -131,14 +131,14 @@ export class BeanAuthProvider extends BeanBase {
 }
 
 function _createAuthenticate() {
-  return async function (ctx, next) {
+  return async function (ctx: CabloyContext, next) {
     const urlPattern = ctx.params[0];
     const [module, providerName, providerScene] = urlPattern.split('/');
     ctx.params.module = module;
     ctx.params.providerName = providerName;
     ctx.params.providerScene = providerScene;
     // authenticate
-    await ctx.bean.local.module('a-auth').passport.authenticate({
+    await ctx.bean.scope(__ThisModule__).local.passport.authenticate({
       module,
       providerName,
       providerScene,
