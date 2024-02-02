@@ -1,17 +1,17 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 import * as ModuleInfo from '@cabloy/module-info';
 import utils from '../common/utils.js';
 
 @Bean()
-export class BeanCaptcha extends BeanModuleScopeBase {
+export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   get cacheModule() {
-    return this.ctx.cache.db.module(__ThisModule__);
+    return this.scope._bean.cacheRedis;
   }
 
   async getProvider({ module, sceneName }: any) {
