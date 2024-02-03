@@ -6,6 +6,7 @@ import { BeanSimple } from '../bean/beanSimple.js';
 export class CtxMeta extends BeanSimple {
   util: CtxUtil;
   mockUtil: CtxMockUtil;
+  /** dynamic middleware options */
   middlewares: Record<string, any>;
 
   protected __init__() {
