@@ -56,7 +56,7 @@ import { BeanResource } from '../bean/bean.resource.js';
 import { BeanFormAction } from '../bean/bean.formAction.js';
 import { BeanCategory } from '../bean/bean.category.js';
 import { BeanBodyCrypto } from '../bean/bean.bodyCrypto.js';
-import { BeanBase } from '../bean/bean.base.js';
+import { BeanBase2 } from '../bean/bean.base.js';
 import { BeanAuth } from '../bean/bean.auth.js';
 import { BeanAtomStatic } from '../bean/bean.atomStatic.js';
 import { BeanAtomState } from '../bean/bean.atomState.js';
@@ -78,7 +78,7 @@ declare module '@cabloy/core' {
     formAction: BeanFormAction;
     category: BeanCategory;
     bodyCrypto: BeanBodyCrypto;
-    base: BeanBase;
+    base: BeanBase2;
     auth: BeanAuth;
     atomStatic: BeanAtomStatic;
     atomState: BeanAtomState;
