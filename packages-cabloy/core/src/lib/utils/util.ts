@@ -264,7 +264,7 @@ export class AppUtil extends BeanSimple {
     fn?: any;
     transaction?: boolean;
     ctxCaller?: CabloyContext;
-    ctxParent?: CabloyContext;
+    ctxParent?: Partial<CabloyContext>;
     instance?: boolean;
   }) {
     // ctxModule

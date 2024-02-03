@@ -40,6 +40,7 @@ export class AppRouter extends BeanSimple {
         module: info.name,
         controller: route.controller,
         action: route.action || route.path.substr(route.path.lastIndexOf('/') + 1),
+        route,
       };
     }
 

@@ -133,13 +133,13 @@ export class CtxUtil extends BeanSimple {
     instance,
   }: {
     locale?: string;
-    subdomain?: string;
+    subdomain?: string | null;
     beanModule?: string;
     beanFullName?: string;
     context?: any;
     fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
-    ctxParent?: CabloyContext;
+    ctxParent?: Partial<CabloyContext>;
     instance?: boolean;
   }) {
     const ctx = this.ctx;
@@ -166,7 +166,7 @@ export class CtxUtil extends BeanSimple {
     });
   }
 
-  async performAction({ innerAccess, method, url, query, params, headers, body }) {
+  async performAction({ innerAccess, method, url, query, params, headers, body }: any) {
     const ctx = this.ctx;
     return await performActionFn({
       ctxCaller: ctx,
