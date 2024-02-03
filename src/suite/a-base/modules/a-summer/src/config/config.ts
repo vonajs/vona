@@ -42,7 +42,7 @@ export const config = _app => {
       enable: true,
       group: {
         default: { dynamic: false },
-        model: { dynamic: true },
+        model: { dynamic: true, configDefault: 'redis' },
       },
       config: {
         group: {

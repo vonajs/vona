@@ -49,12 +49,24 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
     return await cache.peek(key, options);
   }
 
-  _findCacheBase({ module, name, fullKey }: any) {
+  _findCacheBaseInner({ module, name, fullKey }: any) {
     const { key } = this._prepareFullKey({ module, name, fullKey });
     if (!__cacheBases) {
       __cacheBases = this._collectCacheBases();
     }
     return __cacheBases[key];
+  }
+
+  _findCacheBase({ module, name, fullKey }: any) {
+    const { key, group } = this._prepareFullKey({ module, name, fullKey });
+    const cacheBase = this._findCacheBaseInner({ fullKey: key });
+    if (cacheBase) return cacheBase;
+    // dynamic
+    const configGroup = this.confieModule.summer.group[group];
+    const dynamic = configGroup.dynamic;
+    if (!dynamic) return;
+    const configDefault = this.confieModule.summer.config.group[group][configGroup.configDefault];
+    return configDefault;
   }
 
   _prepareFullKey({ module, name, fullKey }: any) {
