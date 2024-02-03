@@ -110,6 +110,7 @@ export class LocalRedis extends CacheBase {
   }
 
   _getRedisKey(key) {
-    return `${this.ctx.instance.id}!${this._cacheBase.fullKey}!${key}`;
+    const iid = this.ctx.instance ? this.ctx.instance.id : 0;
+    return `${iid}!${this._cacheBase.fullKey}!${key}`;
   }
 }
