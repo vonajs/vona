@@ -223,7 +223,6 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     item = await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { moduleName, atomClass, item, register },
       fn: 'prepareStaticItem',

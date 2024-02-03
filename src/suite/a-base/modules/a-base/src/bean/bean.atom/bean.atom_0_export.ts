@@ -14,7 +14,6 @@ export class BeanAtom0Export extends BeanAtom0Enable {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const resExport = await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, options, fields, user },
       fn: 'exportBulk',

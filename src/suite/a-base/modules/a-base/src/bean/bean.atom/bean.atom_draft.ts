@@ -48,7 +48,6 @@ export class BeanAtomDraft extends BeanAtomClone {
       } else {
         // delete
         await this.ctx.meta.util.executeBeanAuto({
-          beanModule: _moduleInfo.relativeName,
           beanFullName,
           context: { atomClass, key, user },
           fn: 'delete',

@@ -104,7 +104,6 @@ export class BeanAtom0Write extends BeanAtom0Select {
     }
     // write
     const data = await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, target, key, item: itemWrite, options, user },
       fn: 'write',

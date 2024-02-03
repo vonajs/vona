@@ -14,7 +14,6 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, key, options, user },
       fn: 'enable',
@@ -32,7 +31,6 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, key, options, user },
       fn: 'disable',

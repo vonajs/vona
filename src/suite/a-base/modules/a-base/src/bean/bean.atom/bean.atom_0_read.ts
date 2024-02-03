@@ -21,7 +21,6 @@ export class BeanAtom0Read extends BeanAtom0Import {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const item = await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, options, key, user },
       fn: 'read',
@@ -96,7 +95,6 @@ export class BeanAtom0Read extends BeanAtom0Import {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     const sql = await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, options, user },
       fn: 'readQuery',

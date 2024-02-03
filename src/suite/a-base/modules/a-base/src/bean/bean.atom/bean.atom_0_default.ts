@@ -20,7 +20,6 @@ export class BeanAtom0Default extends BeanAtom0Create {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     item = await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, item, options, user },
       fn: 'default',

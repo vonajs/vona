@@ -55,7 +55,6 @@ export class BeanAtomSimple extends BeanAtomFormal {
       const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
       const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
       await this.ctx.meta.util.executeBeanAuto({
-        beanModule: _moduleInfo.relativeName,
         beanFullName,
         context: { atomClass, key: keyDraft, user },
         fn: 'delete',

@@ -100,14 +100,12 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     }
     // bean write
     await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, target, key: destKey, item: destItem, options, user },
       fn: 'write',
     });
     // bean copy
     await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atomClass, target, srcKey, srcItem, destKey, destItem, options, user },
       fn: 'copy',

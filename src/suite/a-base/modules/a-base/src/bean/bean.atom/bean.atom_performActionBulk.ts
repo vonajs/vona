@@ -11,7 +11,6 @@ export class BeanAtomPerformActionBulk extends BeanAtomPerformAction {
     const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     return await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { keys, atomClass, action, item, options, user },
       fn: 'performActionBulk',

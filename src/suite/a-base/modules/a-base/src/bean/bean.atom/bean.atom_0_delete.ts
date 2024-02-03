@@ -41,7 +41,6 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     if (atomClassBase.itemOnly) {
       // delete as formal
       await this.ctx.meta.util.executeBeanAuto({
-        beanModule: _moduleInfo.relativeName,
         beanFullName,
         context: { atomClass, key, options, user },
         fn: 'delete',
@@ -62,7 +61,6 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       });
       for (const item of listHistory) {
         await this.ctx.meta.util.executeBeanAuto({
-          beanModule: _moduleInfo.relativeName,
           beanFullName,
           context: { atomClass, key: { atomId: item.id, itemId: item.itemId }, options, user },
           fn: 'delete',
@@ -75,7 +73,6 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       });
       if (itemDraft) {
         await this.ctx.meta.util.executeBeanAuto({
-          beanModule: _moduleInfo.relativeName,
           beanFullName,
           context: { atomClass, key: { atomId: itemDraft.id, itemId: itemDraft.itemId }, options, user },
           fn: 'delete',
@@ -85,7 +82,6 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       }
       // delete formal
       await this.ctx.meta.util.executeBeanAuto({
-        beanModule: _moduleInfo.relativeName,
         beanFullName,
         context: { atomClass, key: { atomId: _atom.id, itemId: _atom.itemId }, options, user },
         fn: 'delete',
@@ -93,7 +89,6 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     } else if (_atom.atomStage === 2) {
       // delete history self
       await this.ctx.meta.util.executeBeanAuto({
-        beanModule: _moduleInfo.relativeName,
         beanFullName,
         context: { atomClass, key: { atomId: _atom.id, itemId: _atom.itemId }, options, user },
         fn: 'delete',

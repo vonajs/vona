@@ -103,7 +103,6 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     };
     const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     return await this.ctx.meta.util.executeBeanAuto({
-      beanModule: _moduleInfo.relativeName,
       beanFullName,
       context: { atom, atomClass, action, options, user },
       fn: 'checkRightAction',

@@ -38,7 +38,6 @@ export class BeanAtom0Select extends BeanAtom0Read {
       if (atomClass) {
         const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
         await this.ctx.meta.util.executeBeanAuto({
-          beanModule: _moduleInfo.relativeName,
           beanFullName,
           context: { atomClass, options, items, user },
           fn: 'select',
@@ -142,7 +141,6 @@ export class BeanAtom0Select extends BeanAtom0Read {
       const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
       const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
       sql = await this.ctx.meta.util.executeBeanAuto({
-        beanModule: _moduleInfo.relativeName,
         beanFullName,
         context: { atomClass, options, user },
         fn: 'selectQuery',
