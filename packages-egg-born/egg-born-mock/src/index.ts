@@ -1,5 +1,5 @@
 import { CabloyApplication } from '@cabloy/core';
-import * as Assert from 'assert';
+import Assert from 'assert';
 import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
