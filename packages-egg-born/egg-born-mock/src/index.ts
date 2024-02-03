@@ -1,6 +1,6 @@
 import { CabloyApplication } from '@cabloy/core';
 import * as Assert from 'assert';
-import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
+import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
 let bundle = global.__egg_born_mock;
@@ -29,9 +29,9 @@ export const mock = bundle.mock;
 export const mm = bundle.mock;
 
 export function mockUrl(url, apiPrefix = true) {
-  const moduleInfo = mockInfo();
+  const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
   return app.meta.mockUtil.mockUrl(moduleInfo, url, apiPrefix);
 }
-export function mockInfo() {
-  return parseModuleInfo(ParseModuleNameLevel);
+export function mockInfo(): IModuleInfo {
+  return parseModuleInfo(ParseModuleNameLevel)!;
 }
