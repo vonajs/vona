@@ -19,4 +19,5 @@ module.exports = {
   spec,
   'node-option': ['no-warnings', 'import=tsx/esm'],
   timeout: 0,
+  exit: true,
 };
