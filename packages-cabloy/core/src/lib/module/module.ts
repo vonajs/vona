@@ -34,7 +34,7 @@ export class ModuleTools extends BeanSimple {
     // 1. import
     const promises: Promise<IModuleResource>[] = [];
     for (const module of app.meta.modulesArray) {
-      promises.push(import(`${module.root}/dist/index.js`));
+      promises.push(import(module.info.fullName));
     }
     const modulesResource = await Promise.all(promises);
     for (let i = 0; i < modulesResource.length; i++) {
