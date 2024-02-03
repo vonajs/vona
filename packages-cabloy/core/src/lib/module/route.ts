@@ -1,5 +1,4 @@
 import is from 'is-type-of';
-import extend from '@cabloy/extend';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
@@ -52,21 +51,6 @@ export class AppRouter extends BeanSimple {
       ctx.route = _route;
       // dynamic options
       ctx.meta.middlewares = {};
-      // getMiddlewareOptions
-      ctx.meta.getMiddlewareOptions = function (middlewareName) {
-        const item = app.meta.middlewaresNormal[middlewareName];
-        // config options
-        const config = ctx.config.module(item.module);
-        const optionsConfig = config.middlewares ? config.middlewares[item.name] : null;
-        // route options
-        const optionsRoute = route.meta ? route.meta[item.name] : null;
-        // dynamic options
-        const optionsDynamic = ctx.meta.middlewares[item.name];
-        // final options
-        const options = extend(true, {}, optionsConfig, optionsRoute, optionsDynamic);
-        // ok
-        return options;
-      };
       // next
       await next();
       // invoke callbackes: handle secondly
