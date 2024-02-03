@@ -13,7 +13,7 @@ export class MiddlewareValidate extends BeanBase {
     if (!validator) this.ctx.throw.module(__ThisModule__, 1001);
     // params
     const module = options.module || this.ctx.module.info.relativeName;
-    const schema = options.schema || (this.ctx.meta._validator && this.ctx.meta._validator.schema);
+    const schema = options.schema;
     const data = this.ctx.request.body[options.data || 'data'];
     // if error throw 422
     await this.ctx.bean.validation.validate({

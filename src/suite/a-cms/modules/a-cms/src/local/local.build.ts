@@ -973,7 +973,7 @@ var env=${JSON.stringify(env, null, 2)};
         const module = this.app.meta.modules[relativeName];
         const plugin = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.plugin');
         if (plugin) {
-          const pluginPath = path.join(module.root, 'backend/cms/plugin');
+          const pluginPath = path.join(module.root, 'cms/plugin');
           const pluginFiles = await eggBornUtils.tools.globbyAsync(`${pluginPath}/*`, { onlyFiles: false });
           for (const item of pluginFiles) {
             await fse.copy(item, path.join(pathIntermediate, 'plugins', relativeName, path.basename(item)));
@@ -1197,7 +1197,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
       await this._copyThemes(pathIntermediate, moduleExtend);
     }
     // current
-    const themePath = path.join(module.root, 'backend/cms/theme');
+    const themePath = path.join(module.root, 'cms/theme');
     const themeFiles = await eggBornUtils.tools.globbyAsync(`${themePath}/*`, { onlyFiles: false });
     for (const item of themeFiles) {
       await fse.copy(item, path.join(pathIntermediate, path.basename(item)));

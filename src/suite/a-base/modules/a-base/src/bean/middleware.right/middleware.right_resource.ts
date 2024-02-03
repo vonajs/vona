@@ -8,7 +8,6 @@ export class MiddlewareRightResource extends MiddlewareRightAtomClass {
       const resourceAtomId = this.ctx.request.body.key.atomId;
       const res = await this._checkResource({ resourceAtomId });
       if (!res) this.ctx.throw(403);
-      this.ctx.meta._resource = res;
       return;
     }
     // atomStaticKey/name
@@ -29,7 +28,6 @@ export class MiddlewareRightResource extends MiddlewareRightAtomClass {
       if (res) break; // ok when any passed
     }
     if (!res) this.ctx.throw(403);
-    this.ctx.meta._resource = res;
   }
 
   async _checkResource({ resourceAtomId, atomStaticKey }: any) {

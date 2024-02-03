@@ -16,13 +16,13 @@ export class CtxUtil extends BeanSimple {
     });
   }
 
-  async lock({ subdomain, resource, fn, options, redlock }) {
+  async lock({ subdomain, resource, fn, options, redlock }: any) {
     const ctx = this.ctx;
     if (subdomain === undefined) subdomain = ctx.subdomain;
     return await ctx.app.meta.util.lock({ subdomain, resource, fn, options, redlock });
   }
 
-  broadcastEmit({ locale, subdomain, module, broadcastName, data }) {
+  broadcastEmit({ locale, subdomain, module, broadcastName, data }: any) {
     const ctx = this.ctx;
     ctx.app.meta.broadcast.emit({
       locale: locale === undefined ? ctx.locale : locale,
