@@ -17,7 +17,7 @@ const broadcasts = {
 const configRedis = {
   mode: 'redis', // only redis
   redis: {
-    ttl: 2 * 60 * 60 * 1000, // 2 hours
+    ttl: 20 * 60 * 1000, // 20 minutes
   },
 } as IModuleConfigSummerCache;
 
@@ -29,7 +29,7 @@ const configAll = {
     max: 500,
   },
   redis: {
-    ttl: 2 * 60 * 60 * 1000, // 2 hours
+    ttl: 20 * 60 * 1000, // 20 minutes
   },
 } as IModuleConfigSummerCache;
 
