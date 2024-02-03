@@ -1,8 +1,9 @@
+import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { IModule } from '../interface/module.js';
 
 export interface ContextBase {
-  get module(): IModule | null;
-  get meta();
+  get module(): IModule; // not union null
+  get meta(): CtxMeta;
   get db();
   set db(value);
   get dbMeta();

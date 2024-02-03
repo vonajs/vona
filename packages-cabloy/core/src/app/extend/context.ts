@@ -43,8 +43,9 @@ const context: ContextBase = {
     return this[MODULE];
   },
   get meta() {
+    const self = Cast<CabloyContext>(this);
     if (!this[META]) {
-      this[META] = (<any>this).bean._newBean(CtxMeta);
+      this[META] = self.bean._newBean(CtxMeta);
     }
     return this[META];
   },

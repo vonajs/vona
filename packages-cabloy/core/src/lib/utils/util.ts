@@ -12,6 +12,15 @@ import { IModuleMiddlewareGate } from '../bean/index.js';
 
 const __EnvTests = ['unittest', 'test'];
 
+export interface IExecuteBeanCallbackParams {
+  ctx: CabloyContext;
+  bean: any;
+  context: any;
+}
+export interface IExecuteBeanCallback {
+  (params: IExecuteBeanCallbackParams): Promise<any>;
+}
+
 export class AppUtil extends BeanSimple {
   instanceStarted(subdomain) {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];

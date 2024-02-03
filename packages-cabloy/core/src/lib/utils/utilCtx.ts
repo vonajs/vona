@@ -2,6 +2,7 @@ import is from 'is-type-of';
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { CabloyContext } from '../../types/index.js';
+import { IExecuteBeanCallback } from './util.js';
 
 export class CtxUtil extends BeanSimple {
   runInBackground(scope) {
@@ -101,8 +102,8 @@ export class CtxUtil extends BeanSimple {
     subdomain?: string;
     beanModule?: string;
     beanFullName?: string;
-    context: any;
-    fn?: any;
+    context?: any;
+    fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
     instance?: boolean;
   }) {
@@ -135,8 +136,8 @@ export class CtxUtil extends BeanSimple {
     subdomain?: string;
     beanModule?: string;
     beanFullName?: string;
-    context: any;
-    fn?: any;
+    context?: any;
+    fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
     ctxParent?: CabloyContext;
     instance?: boolean;
