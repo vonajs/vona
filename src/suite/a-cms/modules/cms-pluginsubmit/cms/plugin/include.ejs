@@ -3,7 +3,7 @@
   if(typeof article!=='undefined' && site.render && site.render.scene==='single' && !site.render.inner){
     const articleLink=url(article.url);
     // submit
-    await ctx.bean.local.module('cms-pluginsubmit').tools.submit({
+    await ctx.bean.scope('cms-pluginsubmit').local.tools.submit({
       links:[articleLink],
       config:site.plugins['cms-pluginsubmit'],
     });
