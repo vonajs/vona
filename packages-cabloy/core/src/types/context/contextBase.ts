@@ -1,5 +1,7 @@
+import { IModule } from '../interface/module.js';
+
 export interface ContextBase {
-  get module();
+  get module(): IModule | null;
   get meta();
   get db();
   set db(value);

@@ -4,6 +4,8 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import DbTransaction from '../../lib/base/dbTransaction.js';
 import { ContextBase } from '../../types/context/contextBase.js';
+import { CabloyContext } from '../../types/context/index.js';
+import { Cast } from '../../types/utils/cast.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
@@ -17,6 +19,7 @@ const DBLEVEL = Symbol.for('Context#__dblevel');
 
 const context: ContextBase = {
   get module() {
+    const self = Cast<CabloyContext>(this);
     if (this[MODULE] === undefined) {
       const url = (<any>this).req.mockUrl || (<any>this).req.url || '';
       let info;
@@ -29,7 +32,7 @@ const context: ContextBase = {
         info = ModuleInfo.parseInfo('a-base');
       }
       if (info) {
-        const module = (<any>this).app.meta.modules[info.relativeName];
+        const module = self.app.meta.modules[info.relativeName];
         // should not throw error, because the url maybe not valid
         // if (!module) throw new Error(`module not found: ${info.relativeName}`);
         this[MODULE] = module || null;
