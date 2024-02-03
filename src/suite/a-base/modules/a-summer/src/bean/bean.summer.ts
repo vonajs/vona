@@ -11,9 +11,9 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
   }
 
   getCache({ module, name, fullKey }: any) {
-    fullKey = this._prepareFullKey({ module, name, fullKey });
-    const cacheBase = this._findCacheBase({ fullKey });
-    if (!cacheBase) throw new Error(`summer cache not found: ${fullKey}`);
+    const { key } = this._prepareFullKey({ module, name, fullKey });
+    const cacheBase = this._findCacheBase({ fullKey: key });
+    if (!cacheBase) throw new Error(`summer cache not found: ${key}`);
     return this.ctx.bean._newBean(LocalCache, {
       cacheBase,
     });
@@ -50,19 +50,26 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
   }
 
   _findCacheBase({ module, name, fullKey }: any) {
-    fullKey = this._prepareFullKey({ module, name, fullKey });
+    const { key } = this._prepareFullKey({ module, name, fullKey });
     if (!__cacheBases) {
       __cacheBases = this._collectCacheBases();
     }
-    return __cacheBases[fullKey];
+    return __cacheBases[key];
   }
 
   _prepareFullKey({ module, name, fullKey }: any) {
+    // key
+    let key;
     if (!fullKey) {
-      module = module || this.moduleScope;
-      fullKey = `${module}:${name}`;
+      key = `${module || this.moduleScope}:${name}`;
+    } else {
+      key = fullKey;
     }
-    return fullKey;
+    // group
+    const parts = key.split(':');
+    const group = parts.length === 2 ? 'default' : parts[1];
+    // ok
+    return { key, group };
   }
 
   _collectCacheBases() {

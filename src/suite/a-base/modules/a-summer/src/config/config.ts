@@ -40,6 +40,10 @@ export const config = _app => {
     broadcasts,
     summer: {
       enable: true,
+      group: {
+        default: { dynamic: false },
+        model: { dynamic: true },
+      },
       config: {
         group: {
           default: {
