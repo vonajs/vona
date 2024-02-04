@@ -1,0 +1,1 @@
+{"version":3,"file":"beanScopeBase.d.ts","sourceRoot":"","sources":["../../../src/lib/bean/beanScopeBase.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,eAAe,CAAC;AAEzC,qBAAa,aAAc,SAAQ,QAAQ;IACzC,OAAO,CAAC,QAAQ,CAA2B;IAE3C,SAAS,CAAC,OAAO,CAAC,IAAI,KAAA;CAMvB"}

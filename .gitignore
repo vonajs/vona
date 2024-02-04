@@ -9,9 +9,6 @@ miniprogram_npm
 /docs-api
 /run
 
-!packages-utils/extend/dist
-!packages-egg-born/egg-born-mock/dist
-
 .idea
 .DS_Store
 
@@ -24,6 +21,18 @@ miniprogram_npm
 *.rdb
 
 # package-lock.json
+
+!packages-cabloy/core/dist
+!packages-egg-born/egg-born-backend/dist
+!packages-egg-born/egg-born-mock/dist
+!packages-utils/cluster-reload/dist
+!packages-utils/extend/dist
+!packages-utils/localeutil/dist
+!packages-utils/module-glob/dist
+!packages-utils/module-info/dist
+!packages-utils/process-helper/dist
+!packages-utils/json5/dist
+!packages-utils/set/dist
 
 /docker-compose
 !/docker-compose/config

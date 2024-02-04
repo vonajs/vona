@@ -1,0 +1,1 @@
+{"version":3,"file":"schedule.d.ts","sourceRoot":"","sources":["../../../src/types/interface/schedule.ts"],"names":[],"mappings":"AAAA,OAAO,IAAI,MAAM,QAAQ,CAAC;AAE1B,MAAM,WAAW,mBAAmB;IAClC,GAAG,EAAE,IAAI,CAAC,GAAG,CAAC;IACd,IAAI,EAAE;QACJ,SAAS,EAAE,MAAM,CAAC;QAClB,MAAM,EAAE,MAAM,CAAC;QACf,IAAI,EAAE,MAAM,CAAC;KACd,CAAC;IACF,YAAY,EAAE,MAAM,GAAG,SAAS,CAAC;CAClC"}

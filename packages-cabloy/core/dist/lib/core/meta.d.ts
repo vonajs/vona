@@ -1,0 +1,63 @@
+import { AppMockUtil } from '../utils/mockUtil.js';
+import { AppReload } from '../module/reload.js';
+import { AppUtil } from '../utils/util.js';
+import { BeanSimple } from '../bean/beanSimple.js';
+import { AppMessenger } from '../module/messenger.js';
+import { IMonkeyApp } from '../../types/interface/monkey.js';
+import { AppRouter } from '../module/route.js';
+import { AppLimiter, AppRedlock } from '../module/redis.js';
+import { QueueClient } from '../module/queue/queueClient.js';
+import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
+import { CabloyContext, IModule, IModuleMeta, ISuite } from '../../types/index.js';
+import { AppResource } from './resource.js';
+import { AppMetadata } from './metadata.js';
+export declare class AppMeta extends BeanSimple {
+    workerId: string;
+    inApp: boolean;
+    inAgent: boolean;
+    isProd: boolean;
+    isTest: boolean;
+    isLocal: boolean;
+    util: AppUtil;
+    mockUtil: AppMockUtil;
+    reload: AppReload;
+    messenger: AppMessenger;
+    appMonkey?: IMonkeyApp;
+    router: AppRouter;
+    limiter: AppLimiter;
+    redlock: AppRedlock;
+    queue: QueueClient;
+    broadcast: BroadcastClient;
+    resource: AppResource;
+    metadata: AppMetadata;
+    suites: Record<string, ISuite>;
+    modules: Record<string, IModule>;
+    modulesArray: IModule[];
+    modulesMonkey: Record<string, IModule>;
+    configs: Record<string, any>;
+    constants: Record<string, any>;
+    metas: Record<string, IModuleMeta>;
+    middlewares: any[];
+    middlewaresNormal: Record<string, any>;
+    middlewaresGlobal: any[];
+    middlewaresSocketIoConnection: any[];
+    middlewaresSocketIoPacket: any[];
+    queues: Record<string, any>;
+    broadcasts: Record<string, any>;
+    schedules: Record<string, any>;
+    appReady: boolean;
+    appReadyInstances: Record<string, any>;
+    __versionReady: boolean;
+    __versionReadyError: Error;
+    _loadQueueWorkers: ({ subdomain }: {
+        subdomain: string;
+    }) => void;
+    _loadSchedules: ({ ctx }: {
+        ctx: CabloyContext;
+    }) => Promise<void>;
+    _runSchedule: (context: any) => Promise<any>;
+    checkAppReady: () => Promise<boolean>;
+    protected __init__(): void;
+    prepareEnv(): void;
+}
+//# sourceMappingURL=meta.d.ts.map

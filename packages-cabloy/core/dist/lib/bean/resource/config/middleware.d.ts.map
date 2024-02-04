@@ -1,0 +1,1 @@
+{"version":3,"file":"middleware.d.ts","sourceRoot":"","sources":["../../../../../src/lib/bean/resource/config/middleware.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,uBAAuB;IACtC,IAAI,EAAE,MAAM,GAAG;QAAE,MAAM,EAAE,MAAM,CAAC;QAAC,IAAI,EAAE,MAAM,CAAA;KAAE,CAAC;IAChD,MAAM,CAAC,EAAE,OAAO,CAAC;IACjB,YAAY,EAAE,MAAM,GAAG,MAAM,EAAE,CAAC;CACjC"}
