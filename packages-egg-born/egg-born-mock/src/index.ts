@@ -1,5 +1,5 @@
 import Bundle from 'egg-mock/bootstrap.js';
-import { CabloyApplication } from '@cabloy/core';
+import { CabloyApplication, Cast } from '@cabloy/core';
 import Assert from 'assert';
 import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
@@ -8,7 +8,7 @@ if (global.__egg_born_mock === undefined) {
   global.__egg_born_mock = true;
 
   before(async function () {
-    const app = Bundle.app as unknown as CabloyApplication;
+    const app = Cast<CabloyApplication>(Bundle.app);
     // wait ready
     await Bundle.app.ready();
     // session
@@ -25,7 +25,7 @@ if (global.__egg_born_mock === undefined) {
 }
 
 export const assert = Assert;
-export const app = Bundle.app as unknown as CabloyApplication;
+export const app = Cast<CabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
 export const mm = Bundle.mock;
 
