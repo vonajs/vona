@@ -1,7 +1,8 @@
 import { appResource } from '../core/resource.js';
 import { BeanSimple } from './beanSimple.js';
+import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 
-export class BeanBase<T = unknown> extends BeanSimple {
+export class BeanBase<TScopeModule = unknown> extends BeanSimple {
   private __beanFullName__: string;
   private __moduleBelong__?: string;
 
@@ -15,10 +16,16 @@ export class BeanBase<T = unknown> extends BeanSimple {
   }
 
   get scope() {
-    return this.getScope() as T;
+    return this.getScope() as TScopeModule;
   }
 
-  getScope() {
-    return this.bean.scope(this.moduleBelong) as T;
+  getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
+  getScope<T>(moduleScope: string): T;
+  getScope(): TScopeModule;
+  getScope(moduleScope?: string) {
+    if (!moduleScope) {
+      return this.bean.scope(this.moduleBelong) as TScopeModule;
+    }
+    return this.bean.scope(moduleScope);
   }
 }
