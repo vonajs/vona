@@ -1,17 +1,17 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 
 import randomize from 'randomatic';
 
 @Atom()
-export class AtomAuthOpen extends BeanAtomBase {
+export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).authOpen;
+    return this.scope.model.authOpen;
   }
 
   get modelAuth() {
-    return this.ctx.model.module('a-base').auth;
+    return this.getScope('a-auth').model.auth;
   }
 
   async default({ atomClass, item, options, user }: any) {
