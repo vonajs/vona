@@ -14,8 +14,7 @@ export class VersionManager extends BeanBase {
         await this.ctx.meta.util.executeBean({
           subdomain: instance.name,
           fn: async ({ ctx }) => {
-            const beanFullName = `${__ThisModule__}.version.manager`;
-            const beanInstance = ctx.bean._newBean(beanFullName);
+            const beanInstance = ctx.bean._newBean(VersionManager);
             await beanInstance._update8AuthsInstance();
           },
         });
