@@ -5,7 +5,7 @@ import schemas from './meta/validation/schemas.js';
 // static
 import staticResources from './meta/static/resources.js';
 // meta
-export default {
+export const meta = {
   base: {
     statics: {
       'a-base.resource': {

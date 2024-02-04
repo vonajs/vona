@@ -2,7 +2,8 @@
 import auth from './meta/passport/auth.js';
 import keywords from './meta/validation/keywords.js';
 import schemas from './meta/validation/schemas.js';
-export default {
+// meta
+export const meta = {
   auth,
   validation: {
     validators: {},
