@@ -5,14 +5,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
   "exports": {
     ".": {
       "types": [
         "./dist/index.d.ts",
         "./src/index.ts"
       ],
-      "development": "./src/index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "default": "./src/index.ts"

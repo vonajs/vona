@@ -10,6 +10,7 @@ miniprogram_npm
 /run
 
 !packages-utils/extend/dist
+!packages-egg-born/egg-born-mock/dist
 
 .idea
 .DS_Store
