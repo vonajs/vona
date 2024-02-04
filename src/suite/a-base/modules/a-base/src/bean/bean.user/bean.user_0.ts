@@ -28,7 +28,7 @@ export class BeanUser0 extends BeanBase {
   }
 
   get modelAuthProvider() {
-    return this.ctx.model.module(__ThisModule__).authProvider;
+    return this.getScope('a-auth').model.authProvider;
   }
 
   get sequence() {
