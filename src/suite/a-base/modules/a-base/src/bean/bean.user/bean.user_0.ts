@@ -112,11 +112,11 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     const userOp = await Cast<BeanUser1>(this).get({ id: ctxUser.op.id });
     // deleted
     if (!userOp) {
-      // this.ctx.throw.module(__ThisModule__, 1004);
+      // this.scope.error.UserDoesNotExist.throw();
       this.ctx.throw(401);
     }
     // disabled
-    if (userOp.disabled) this.ctx.throw.module(__ThisModule__, 1005);
+    if (userOp.disabled) this.scope.error.UserIsDisabled.throw();
     // hold user
     stateUser.op = userOp;
     // agent
@@ -124,11 +124,11 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     if (ctxUser.agent && ctxUser.agent.id !== ctxUser.op.id) {
       userAgent = await this.agent({ userId: ctxUser.op.id });
       if (!userAgent) {
-        // this.ctx.throw.module(__ThisModule__, 1006);
+        // this.scope.error.AgentUserDoesNotExist.throw();
         this.ctx.throw(401);
       }
-      if (userAgent.id !== ctxUser.agent.id) this.ctx.throw.module(__ThisModule__, 1006);
-      if (userAgent.disabled) this.ctx.throw.module(__ThisModule__, 1005);
+      if (userAgent.id !== ctxUser.agent.id) this.scope.error.AgentUserDoesNotExist.throw();
+      if (userAgent.disabled) this.scope.error.UserIsDisabled.throw();
     } else {
       userAgent = userOp;
     }
@@ -298,7 +298,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       }
     } else {
       if (state === 'migrate' || profileUser.authShouldExists === true) {
-        this.ctx.throw.module(__ThisModule__, 1009);
+        this.scope.error.TheAuthShouldBeEnabled.throw();
       }
       // add
       const _profile = JSON.stringify(profileUser.profile);

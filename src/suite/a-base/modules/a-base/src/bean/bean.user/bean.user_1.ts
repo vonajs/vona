@@ -28,7 +28,7 @@ export class BeanUser1 extends BeanUser0 {
     // if exists
     if (needCheck) {
       const res = await this.exists({ userName, email, mobile });
-      if (res) this.ctx.throw.module(__ThisModule__, 1001);
+      if (res) this.scope.error.ElementExists.throw();
     }
     if (!user) {
       user = { id: 0 };

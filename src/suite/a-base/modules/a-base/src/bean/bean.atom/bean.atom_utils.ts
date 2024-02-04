@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0 } from './bean.atom_0.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 
@@ -18,7 +17,7 @@ export class BeanAtomUtils extends BeanAtom0 {
       }
     } else {
       atomClass = await this.ctx.bean.atomClass.get(atomClass);
-      if (!atomClass) this.ctx.throw.module(__ThisModule__, 1002);
+      if (!atomClass) this.scope.error.ElementDoesNotExist.throw();
     }
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
@@ -67,7 +66,7 @@ export class BeanAtomUtils extends BeanAtom0 {
     let { key, atom } = await this._prepareKeyAndAtom_inner({ key: keyOuter, atomClass, atomClassBase });
     // check if empty
     if (!atom && throwWhenEmpty) {
-      this.ctx.throw.module(__ThisModule__, 1002);
+      this.scope.error.ElementDoesNotExist.throw();
     }
     if (!atom) return { key, atom };
     // patch

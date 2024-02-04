@@ -1,9 +1,9 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
-export class BeanCategory0 extends BeanBase {
+export class BeanCategory0 extends BeanBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).category;
+    return this.scope.model.category;
   }
 
   async get({ categoryId, setLocale }: any) {
@@ -141,12 +141,12 @@ export class BeanCategory0 extends BeanBase {
     // check atoms
     const count = await this.ctx.bean.atom.modelAtom.count({ atomCategoryId: categoryId });
     if (count > 0) {
-      this.ctx.throw.module(__ThisModule__, 1012);
+      this.scope.error.CannotDeleteIfHasAtoms.throw();
     }
     // check children
     const children = await this.children({ categoryId });
     if (children.length > 0) {
-      this.ctx.throw.module(__ThisModule__, 1013);
+      this.scope.error.CannotDeleteIfHasChildren.throw();
     }
 
     // category

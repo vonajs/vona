@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Write } from './bean.atom_0_write.js';
 import { BeanAtomNotify } from './bean.atom_notify.js';
 
@@ -7,7 +6,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {
     // get
     const atom = await this.get({ atomId: key.atomId });
-    if (atom.atomStage !== 1) this.ctx.throw.module(__ThisModule__, 1010);
+    if (atom.atomStage !== 1) this.scope.error.OnlyValidForFormalAtom.throw();
     // check if exists
     let diff = 0;
     const items = await this.modelAtomStar.select({
@@ -59,7 +58,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
   async labels({ key, atom: { labels = null }, user }: any) {
     // get
     const atom = await this.get({ atomId: key.atomId });
-    if (atom.atomStage !== 1) this.ctx.throw.module(__ThisModule__, 1010);
+    if (atom.atomStage !== 1) this.scope.error.OnlyValidForFormalAtom.throw();
     // atomLabel
     await this._labels_atomLabel({ atomId: key.atomId, labels, user });
     // atomLabelRef

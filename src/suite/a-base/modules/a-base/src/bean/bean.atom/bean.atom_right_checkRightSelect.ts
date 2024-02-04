@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 
@@ -13,7 +12,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     }
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
-    if (!atomClass) this.ctx.throw.module(__ThisModule__, 1002);
+    if (!atomClass) this.scope.error.ElementDoesNotExist.throw();
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check atom history
