@@ -39,7 +39,7 @@ export class BeanMarkdown extends BeanBase {
       if (this.ctx.app.meta.isProd) {
         block_js += '.min';
       }
-      block_js += '.js';
+      block_js += '.cjs';
       const BlockClass = this.ctx.app.meta.util.requireDynamic(block_js);
       // render
       const blockHost = this._getHost({ host, content, locale });
