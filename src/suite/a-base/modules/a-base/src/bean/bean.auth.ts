@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
-export class BeanAuth extends BeanBase {
+export class BeanAuth extends BeanBase<ScopeModule> {
   _redisAuth: any;
 
   constructor() {
@@ -127,7 +127,7 @@ export class BeanAuth extends BeanBase {
 
   _getAccount() {
     // account
-    const account = this.ctx.bean.util.extend({}, this.ctx.config.module(__ThisModule__).account);
+    const account = this.ctx.bean.util.extend({}, this.scope.config.account);
     account.activatedRoles = undefined;
     // url
     for (const key in account.activationProviders) {

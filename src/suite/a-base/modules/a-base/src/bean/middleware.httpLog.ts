@@ -1,13 +1,13 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'middleware' })
-export class MiddlewareHttpLog extends BeanBase {
+export class MiddlewareHttpLog extends BeanBase<ScopeModule> {
   async execute(_options, next) {
     await next();
 
     // check if log
-    const _config = this.ctx.config.module(__ThisModule__);
+    const _config = this.scope.config;
     if (!_config.httpLog) return;
 
     //

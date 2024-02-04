@@ -1,4 +1,3 @@
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseThemes } from './bean.base_themes.js';
 
 import path from 'path';
@@ -19,12 +18,12 @@ export class BeanBaseUtils extends BeanBaseThemes {
       return _hostText;
     }
     // others
-    const config = this.ctx.config.module(__ThisModule__);
+    const config = this.scope.config;
     return config.host || this.ctx.host;
   }
 
   get protocol() {
-    const config = this.ctx.config.module(__ThisModule__);
+    const config = this.scope.config;
     return config.protocol || this.ctx.protocol;
   }
 
@@ -49,8 +48,7 @@ export class BeanBaseUtils extends BeanBaseThemes {
       return this.ctx.app.config.static.dir;
     }
     const dir =
-      this.ctx.config.module(__ThisModule__).publicDir ||
-      path.join(require('os').homedir(), 'cabloy', this.ctx.app.name, 'public');
+      this.scope.config.publicDir || path.join(require('os').homedir(), 'cabloy', this.ctx.app.name, 'public');
     await fse.ensureDir(dir);
     return dir;
   }

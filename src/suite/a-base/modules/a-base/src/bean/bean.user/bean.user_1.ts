@@ -127,7 +127,7 @@ export class BeanUser1 extends BeanUser0 {
     let fields = await this.model.columns();
     if (removePrivacy) {
       fields = this.ctx.bean.util.extend({}, fields);
-      const privacyFields = this.ctx.config.module(__ThisModule__).user.privacyFields.split(',');
+      const privacyFields = this.scope.config.user.privacyFields.split(',');
       for (const privacyField of privacyFields) {
         delete fields[privacyField];
       }

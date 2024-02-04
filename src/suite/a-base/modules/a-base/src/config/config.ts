@@ -139,6 +139,8 @@ export const config = _app => {
     startups,
     queues,
     summer,
+    host: '',
+    protocol: '',
     pageSize: 20,
     locales: {
       'en-us': 'English',

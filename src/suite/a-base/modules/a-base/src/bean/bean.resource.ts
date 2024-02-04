@@ -125,7 +125,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // select
     const items = await this.modelResourceLocale.select({ where: { atomId } });
     // setLocales
-    const locales = this.ctx.config.module(__ThisModule__).locales;
+    const locales = this.scope.config.locales;
     for (const locale in locales) {
       const atomNameLocale = this.ctx.text.locale(locale, atomName);
       const item = items.find(_item => _item.locale === locale);
@@ -148,7 +148,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
 
   async checkLocales() {
     // setLocales
-    const locales = this.ctx.config.module(__ThisModule__).locales;
+    const locales = this.scope.config.locales;
     for (const locale in locales) {
       await this._checkLocale({ locale });
     }

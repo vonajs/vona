@@ -1,4 +1,3 @@
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBaseLocaleModules } from './bean.base_localeModules.js';
 
 const _locales: any = {};
@@ -13,7 +12,7 @@ export class BeanBaseLocales extends BeanBaseLocaleModules {
 
   _prepareLocales() {
     const locales: any[] = [];
-    const config = this.ctx.config.module(__ThisModule__);
+    const config = this.scope.config;
     for (const locale in config.locales) {
       locales.push({
         title: this.ctx.text(config.locales[locale]),

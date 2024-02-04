@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import path from 'path';
@@ -8,9 +8,9 @@ import * as ModuleInfo from '@cabloy/module-info';
 let __bodyCryptoInstance = null;
 
 @Bean()
-export class BeanBodyCrypto extends BeanBase {
+export class BeanBodyCrypto extends BeanBase<ScopeModule> {
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   async ensureBodyCrypto() {

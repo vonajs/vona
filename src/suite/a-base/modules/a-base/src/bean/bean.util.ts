@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import * as uuid from 'uuid';
@@ -11,7 +11,7 @@ import utils from '../common/utils.js';
 
 @Bean()
 export class BeanUtil extends BeanBase<ScopeModule> {
-  get localConfig() {
+  get configModule() {
     return this.scope.config;
   }
 
@@ -24,7 +24,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
   }
 
   page(_page, force = true) {
-    const pageSize = this.localConfig.pageSize;
+    const pageSize = this.configModule.pageSize;
     if (!_page) {
       _page = force ? { index: 0 } : { index: 0, size: 0 };
     }
@@ -60,9 +60,9 @@ export class BeanUtil extends BeanBase<ScopeModule> {
 
   formatDateTime(date, fmt?, locale?) {
     locale = locale || this.ctx.locale;
-    let timezone = this.localConfig.timezones[locale];
+    let timezone = this.configModule.timezones[locale];
     if (timezone === undefined) {
-      timezone = this.localConfig.timezones[this.app.config.i18n.defaultLocale];
+      timezone = this.configModule.timezones[this.app.config.i18n.defaultLocale];
     }
     date = date || new Date();
     fmt = fmt || 'YYYY-MM-DD HH:mm:ss';
@@ -155,7 +155,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
   }
 
   checkDemo(throwError = true) {
-    const demo = this.ctx.config.module(__ThisModule__).configFront.demo;
+    const demo = this.configModule.configFront.demo;
     if (!demo.enable) return true;
     const user = this.ctx.state.user;
     // !user means system operation
