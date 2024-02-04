@@ -17,7 +17,7 @@ spec = ['src/suite/test-party/modules/test-party/test/controller/test.test.ts'];
 module.exports = {
   extension: ['ts'],
   spec,
-  'node-option': ['no-warnings', 'loader=ts-node/esm'],
+  'node-option': ['no-warnings', 'loader=ts-node/esm', 'conditions=development'],
   timeout: 0,
   exit: true,
 };

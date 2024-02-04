@@ -190,7 +190,8 @@ const utils = {
     // cli templates
     pattern.push('!src/**/cli/templates/**/*.test.js');
     // expand glob
-    return eggBornUtils.tools.globbySync(pattern);
+    // return eggBornUtils.tools.globbySync(pattern);
+    return pattern;
   },
 };
 module.exports = utils;

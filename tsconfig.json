@@ -8,9 +8,6 @@
       "path": "packages-utils/cluster-reload"
     },
     {
-      "path": "packages-utils/extend"
-    },
-    {
       "path": "packages-utils/json5"
     },
     {

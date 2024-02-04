@@ -9,6 +9,8 @@ miniprogram_npm
 /docs-api
 /run
 
+!packages-utils/extend/dist
+
 .idea
 .DS_Store
 
