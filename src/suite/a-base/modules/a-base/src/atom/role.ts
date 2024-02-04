@@ -1,15 +1,15 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 @Atom()
-export class AtomRole extends BeanAtomBase {
+export class AtomRole extends BeanAtomBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).role;
+    return this.scope.model.role;
   }
 
   get modelAtom() {
-    return this.ctx.model.module(__ThisModule__).atom;
+    return this.scope.model.atom;
   }
 
   get beanRole() {
@@ -134,7 +134,7 @@ export class AtomRole extends BeanAtomBase {
     // check if children
     if (role.catalog && !force) {
       const children = await this.beanRole.children({ roleId });
-      if (children.length > 0) this.ctx.throw.module(__ThisModule__, 1008);
+      if (children.length > 0) this.scope.error.ShouldDeleteChildrenFirst.throw();
     }
 
     // delete all includes

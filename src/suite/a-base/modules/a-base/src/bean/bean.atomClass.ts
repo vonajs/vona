@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanAtomClass extends BeanModuleScopeBase {
+export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).atomClass;
+    return this.scope.model.atomClass;
   }
 
   async atomClass(atomClass) {
@@ -32,7 +32,7 @@ export class BeanAtomClass extends BeanModuleScopeBase {
     const data = id ? { id } : { module, atomClassName };
     const res = await this.model.get(data);
     if (res) return res;
-    if (!module || !atomClassName) this.ctx.throw.module(__ThisModule__, 1011);
+    if (!module || !atomClassName) this.scope.error.InvalidArguments.throw();
     // lock
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.atomClass.register`,

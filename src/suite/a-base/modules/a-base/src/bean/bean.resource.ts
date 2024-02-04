@@ -94,13 +94,13 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async readByStaticKey({ atomStaticKey, options, user }: any) {
-    if (!atomStaticKey) return this.ctx.throw.module('a-base', 1002);
+    if (!atomStaticKey) return this.scope.error.ElementDoesNotExist.throw();
     // get atomId
     const atom = await this.ctx.bean.atom.modelAtom.get({
       atomStaticKey,
       atomStage: 1,
     });
-    if (!atom) return this.ctx.throw.module('a-base', 1016, atomStaticKey);
+    if (!atom) return this.scope.error.ResourceDoesNotExist__.throw(atomStaticKey);
     const atomId = atom.id;
     // check resource right
     const res = await this.checkRightResource({ resourceAtomId: atomId, user });

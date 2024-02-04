@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
-export class BeanTag extends BeanBase {
+export class BeanTag extends BeanBase<ScopeModule> {
   get modelTag() {
     return this.ctx.model.module(__ThisModule__).tag;
   }
