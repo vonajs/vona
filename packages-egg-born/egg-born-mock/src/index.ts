@@ -1,32 +1,33 @@
+import Bundle from 'egg-mock/bootstrap.js';
 import { CabloyApplication } from '@cabloy/core';
 import Assert from 'assert';
 import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
-let bundle = global.__egg_born_mock;
-if (!bundle) {
-  global.__egg_born_mock = bundle = require('egg-mock/bootstrap');
+if (global.__egg_born_mock === undefined) {
+  global.__egg_born_mock = true;
 
   before(async function () {
+    const app = Bundle.app as unknown as CabloyApplication;
     // wait ready
-    await bundle.app.ready();
+    await Bundle.app.ready();
     // session
-    bundle.app.mockSession({});
+    Bundle.app.mockSession({});
     // wait app ready
-    await bundle.app.meta.checkAppReady();
+    await app.meta.checkAppReady();
     // restore
-    bundle.mock.restore();
+    Bundle.mock.restore();
   });
 
   after(async function () {
-    await bundle.app.close();
+    await Bundle.app.close();
   });
 }
 
 export const assert = Assert;
-export const app = bundle.app as CabloyApplication;
-export const mock = bundle.mock;
-export const mm = bundle.mock;
+export const app = Bundle.app as unknown as CabloyApplication;
+export const mock = Bundle.mock;
+export const mm = Bundle.mock;
 
 export function mockUrl(url, apiPrefix = true) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;

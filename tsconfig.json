@@ -3,6 +3,9 @@
   "compilerOptions": {},
   "files": [],
   "include": ["typings/**/*"],
+  "ts-node": {
+    "transpileOnly": true
+  },
   "references": [
     {
       "path": "packages-utils/cluster-reload"
