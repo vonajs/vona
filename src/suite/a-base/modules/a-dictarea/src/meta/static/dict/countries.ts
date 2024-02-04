@@ -1,4 +1,4 @@
-import countries from './cities/countries.json';
+import countries from './cities/countries.json' with { type: "json" };
 
 const dictItems = countries;
 const dictLocales = {

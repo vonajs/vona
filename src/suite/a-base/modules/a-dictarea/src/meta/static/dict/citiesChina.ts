@@ -1,4 +1,4 @@
-import citiesChina from './cities/citiesChina.json';
+import citiesChina from './cities/citiesChina.json' with { type: "json" };
 
 const dictItems = citiesChina;
 const dictLocales: any = {};
