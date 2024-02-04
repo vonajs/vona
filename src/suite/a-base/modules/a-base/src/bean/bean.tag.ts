@@ -4,11 +4,11 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanTag extends BeanBase<ScopeModule> {
   get modelTag() {
-    return this.ctx.model.module(__ThisModule__).tag;
+    return this.scope.model.tag;
   }
 
   get modelTagRef() {
-    return this.ctx.model.module(__ThisModule__).tagRef;
+    return this.scope.model.tagRef;
   }
 
   async count({ atomClass, language }: any) {
@@ -73,7 +73,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
   async delete({ tagId }: any) {
     // check atoms
     const count = await this.modelTagRef.count({ tagId });
-    if (count > 0) this.ctx.throw.module(__ThisModule__, 1012);
+    if (count > 0) this.scope.error.CannotDeleteIfHasAtoms.throw();
 
     // delete
     await this.modelTag.delete({ id: tagId });

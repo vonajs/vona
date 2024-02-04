@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import * as uuid from 'uuid';
@@ -10,9 +10,9 @@ import eggBornUtils from 'egg-born-utils';
 import utils from '../common/utils.js';
 
 @Bean()
-export class BeanUtil extends BeanBase {
+export class BeanUtil extends BeanBase<ScopeModule> {
   get localConfig() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   get uuid() {
@@ -161,7 +161,7 @@ export class BeanUtil extends BeanBase {
     // !user means system operation
     if (!user || user.op.userName === 'root') return true;
     if (throwError) {
-      this.ctx.throw.module(__ThisModule__, 1014);
+      this.scope.error.DisabledOnDemoMode.throw();
     }
     return false;
   }

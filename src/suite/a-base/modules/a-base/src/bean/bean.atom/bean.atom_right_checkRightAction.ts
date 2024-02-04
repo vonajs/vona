@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
@@ -113,7 +112,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     let { stage, checkFlow } = options || {};
     // atom
     const _atom = atom;
-    if (!_atom) this.ctx.throw.module(__ThisModule__, 1002);
+    if (!_atom) this.scope.error.ElementDoesNotExist.throw();
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check fromViewHistory
     const rightFromViewHistory = await (
