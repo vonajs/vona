@@ -1,9 +1,13 @@
-import { __ThisModule__ } from '../../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
-export class VersionUpdate extends BeanBase {
+export class VersionUpdate extends BeanBase<ScopeModule> {
+  constructor() {
+    super(__ThisModule__);
+  }
+
   get modelRoleRight() {
-    return this.ctx.model.module(__ThisModule__).roleRight;
+    return this.scope.model.roleRight;
   }
 
   async run(options) {

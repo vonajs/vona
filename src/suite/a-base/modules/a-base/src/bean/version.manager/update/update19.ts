@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 const __atomClassResource = {
@@ -6,9 +6,13 @@ const __atomClassResource = {
   atomClassName: 'resource',
 };
 
-export class VersionUpdate extends BeanBase {
+export class VersionUpdate extends BeanBase<ScopeModule> {
+  constructor() {
+    super(__ThisModule__);
+  }
+
   get modelAtom() {
-    return this.ctx.model.module(__ThisModule__).atom;
+    return this.scope.model.atom;
   }
 
   async run() {

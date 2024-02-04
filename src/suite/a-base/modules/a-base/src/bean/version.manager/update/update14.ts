@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 const __atomClassRole = {
@@ -10,12 +10,16 @@ const __atomClassUser = {
   atomClassName: 'user',
 };
 
-export class VersionUpdate extends BeanBase {
+export class VersionUpdate extends BeanBase<ScopeModule> {
+  constructor() {
+    super(__ThisModule__);
+  }
+
   get modelRole() {
-    return this.ctx.model.module(__ThisModule__).role;
+    return this.scope.model.role;
   }
   get modelUser() {
-    return this.ctx.model.module(__ThisModule__).user;
+    return this.scope.model.user;
   }
 
   async run(options) {
