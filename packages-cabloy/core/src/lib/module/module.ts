@@ -37,7 +37,10 @@ export class ModuleTools extends BeanSimple {
       const subPath = app.meta.isTest || app.meta.isLocal ? 'src' : 'dist';
       promises.push(import(`${module.root}/${subPath}/index.js`));
     }
+    const timeBegin = new Date().valueOf();
     const modulesResource = await Promise.all(promises);
+    const timeEnd = new Date().valueOf();
+    console.log('----------', (timeEnd - timeBegin) / 1000);
     for (let i = 0; i < modulesResource.length; i++) {
       const module = app.meta.modulesArray[i];
       module.resource = modulesResource[i];

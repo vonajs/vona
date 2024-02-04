@@ -4,7 +4,7 @@
   "files": [],
   "include": ["typings/**/*"],
   "ts-node": {
-    "transpileOnly": true
+    "swc": true
   },
   "references": [
     {
