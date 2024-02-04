@@ -122,10 +122,12 @@ export class BeanModelBase extends BeanModelBaseInner {
     for (const key in where) {
       const a = where[key];
       const b = data[key];
-      if (a && b && typeof a === 'string' && typeof b === 'string') {
-        if (a.toLowerCase() !== b.toLowerCase()) return false;
+      if (typeof a === 'string' || typeof b === 'string') {
+        if (String(a).toLowerCase() !== String(b).toLowerCase()) return false;
       } else if (typeof a === 'boolean' || typeof b === 'boolean') {
         if (Boolean(a) !== Boolean(b)) return false;
+      } else if (a === null || a === undefined || b === null || b === undefined) {
+        if ((a || null) !== (b || null)) return false;
       } else {
         if (a !== b) return false;
       }
