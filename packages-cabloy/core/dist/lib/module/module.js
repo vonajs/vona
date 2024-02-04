@@ -37,7 +37,7 @@ class ModuleTools extends beanSimple_js_1.BeanSimple {
         // 1. import
         const promises = [];
         for (const module of app.meta.modulesArray) {
-            const subPath = 'dist'; // app.meta.isTest || app.meta.isLocal ? 'src' : 'dist';
+            const subPath = app.meta.isTest || app.meta.isLocal ? 'src' : 'dist';
             promises.push(import(`${module.root}/${subPath}/index.js`));
         }
         const modulesResource = await Promise.all(promises);
