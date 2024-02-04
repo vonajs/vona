@@ -1,7 +1,6 @@
 export * from '../model/atom.js';
 export * from '../model/atomAction.js';
 export * from '../model/atomClass.js';
-export * from '../model/auth.js';
 export * from '../model/role.js';
 export * from '../model/roleInc.js';
 export * from '../model/roleIncRef.js';
@@ -32,7 +31,6 @@ export * from '../model/resourceRole.js';
 import { ModelAtom } from '../model/atom.js';
 import { ModelAtomAction } from '../model/atomAction.js';
 import { ModelAtomClass } from '../model/atomClass.js';
-import { ModelAuth } from '../model/auth.js';
 import { ModelRole } from '../model/role.js';
 import { ModelRoleInc } from '../model/roleInc.js';
 import { ModelRoleIncRef } from '../model/roleIncRef.js';
@@ -64,7 +62,6 @@ export interface IModuleModel {
   atom: ModelAtom;
   atomAction: ModelAtomAction;
   atomClass: ModelAtomClass;
-  auth: ModelAuth;
   role: ModelRole;
   roleInc: ModelRoleInc;
   roleIncRef: ModelRoleIncRef;

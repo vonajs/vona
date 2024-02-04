@@ -7,7 +7,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     return this.scope.model.authSimple;
   }
   get modelAuth() {
-    return this.bean.scope('a-base').model.auth;
+    return this.bean.scope('a-auth').model.auth;
   }
   get localSimple() {
     return this.scope.local.simple;

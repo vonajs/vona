@@ -1,30 +1,21 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { BeanUser1 } from './bean.user_1.js';
 
 const _usersAnonymous: any = {};
 
-export class BeanUser0 extends BeanBase {
-  _sequence: any;
-  _config: any;
-
-  constructor() {
-    super();
-    this._sequence = null;
-    this._config = null;
-  }
-
+export class BeanUser0 extends BeanBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).user;
+    return this.scope.model.user;
   }
 
   get modelAgent() {
-    return this.ctx.model.module(__ThisModule__).userAgent;
+    return this.scope.model.userAgent;
   }
 
   get modelAuth() {
-    return this.ctx.model.module(__ThisModule__).auth;
+    return this.getScope('a-auth').model.auth;
   }
 
   get modelAuthProvider() {
@@ -32,17 +23,15 @@ export class BeanUser0 extends BeanBase {
   }
 
   get sequence() {
-    if (!this._sequence) this._sequence = this.ctx.bean.sequence.module(__ThisModule__);
-    return this._sequence;
+    return this.scope._bean.sequence;
   }
 
   get config() {
-    if (!this._config) this._config = this.ctx.config.module(__ThisModule__);
-    return this._config;
+    return this.scope.config;
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean('a-base.local.procedure');
+    return this.scope.local.procedure;
   }
 
   async anonymous() {
@@ -176,7 +165,7 @@ export class BeanUser0 extends BeanBase {
 
   async userRoleStageAdd({ userId }: any) {
     // roleNames
-    let roleNames = this.config.account.needActivation ? 'registered' : this.config.account.activatedRoles;
+    let roleNames: any = this.config.account.needActivation ? 'registered' : this.config.account.activatedRoles;
     roleNames = roleNames.split(',');
     for (const roleName of roleNames) {
       const role = await this.ctx.bean.role.parseRoleName({ roleName });
