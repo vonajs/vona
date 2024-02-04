@@ -19,13 +19,6 @@ const rules = {
       typeof: false,
     },
   ],
-  // 'no-unused-vars': [
-  //   'error',
-  //   {
-  //     varsIgnorePattern: 'app|mockUrl|mockInfo|assert|schemas|load|loadjsx',
-  //     argsIgnorePattern: 'app|ctx|user|state|reject|options',
-  //   },
-  // ],
   'array-bracket-spacing': ['error', 'never'],
   'no-empty': [
     'error',
@@ -72,8 +65,7 @@ const rules = {
   '@typescript-eslint/no-unused-vars': [
     'error',
     {
-      varsIgnorePattern: 'app|params|mockUrl|mockInfo|assert|schemas|load|loadjsx',
-      argsIgnorePattern: 'app|ctx|user|state|reject|options|params',
+      argsIgnorePattern: '^_',
     },
   ],
   '@typescript-eslint/no-this-alias': 'off',
