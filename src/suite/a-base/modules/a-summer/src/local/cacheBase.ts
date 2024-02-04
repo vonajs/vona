@@ -17,12 +17,12 @@ export class CacheBase extends BeanBase {
     this._cacheBase = cacheBase;
   }
 
-  get scopeModule() {
-    return this.bean.scope(__ThisModule__);
+  get scopeASummer() {
+    return this.getScope(__ThisModule__);
   }
 
   get configModule() {
-    return this.scopeModule.config;
+    return this.scopeASummer.config;
   }
 
   get localMem() {

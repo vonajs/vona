@@ -1,13 +1,17 @@
-import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
+import { __ThisModule__ } from '../../resource/this.js';
 
-export class BeanAtomBase0 extends BeanBase<ScopeModule> {
+export class BeanAtomBase0 extends BeanBase {
+  get scopeABase() {
+    return this.getScope(__ThisModule__);
+  }
+
   get configModuleBase() {
-    return this.scope.config;
+    return this.scopeABase.config;
   }
 
   get modelResourceRole() {
-    return this.scope.model.resourceRole;
+    return this.scopeABase.model.resourceRole;
   }
 
   async submit({ atomClass, key, options, user }: any) {
