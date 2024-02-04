@@ -1,11 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 @Atom()
-export class AtomUser extends BeanAtomBase {
+export class AtomUser extends BeanAtomBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).user;
+    return this.scope.model.user;
   }
 
   get beanUser() {

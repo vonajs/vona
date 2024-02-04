@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'stats' })
-export class StatsDraftsCommon extends BeanBase {
+export class StatsDraftsCommon extends BeanBase<ScopeModule> {
   async execute(context) {
     const { keys, provider, user } = context;
     // params
@@ -33,7 +33,7 @@ export class StatsDraftsCommon extends BeanBase {
       params.atomClassId = atomClass.id;
     }
     // count
-    const modelAtom = this.ctx.model.module(__ThisModule__).atom;
+    const modelAtom = this.scope.model.atom;
     const count = await modelAtom.count(params);
     return count;
   }

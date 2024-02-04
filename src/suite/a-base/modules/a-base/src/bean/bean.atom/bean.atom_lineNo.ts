@@ -23,7 +23,7 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
       options: optionsOuter,
     });
     // model
-    const modelItem = this.ctx.model.module(atomClass.module)[atomClassBase.model];
+    const modelItem = this.getScope(atomClass.module).model[atomClassBase.model];
     // table
     const tableName = atomClassBase.tableName;
     // field: lineNo

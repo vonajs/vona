@@ -1,9 +1,10 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'startup' })
-export class StartupCheckViewHistoryRight extends BeanBase {
+export class StartupCheckViewHistoryRight extends BeanBase<ScopeModule> {
   get modelRoleRight() {
-    return this.ctx.model.module('a-base').roleRight;
+    return this.scope.model.roleRight;
   }
 
   async execute() {

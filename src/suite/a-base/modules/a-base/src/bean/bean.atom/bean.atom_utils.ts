@@ -86,7 +86,7 @@ export class BeanAtomUtils extends BeanAtom0 {
     if (atomClassBase.itemOnly) {
       key = { atomId, itemId: atomId };
       if (atomClassBase.model) {
-        const modelItem = this.ctx.model.module(atomClass.module)[atomClassBase.model];
+        const modelItem = this.getScope(atomClass.module).model[atomClassBase.model];
         atom = await modelItem.get({ id: atomId });
       } else {
         // not use .read for infinite loop

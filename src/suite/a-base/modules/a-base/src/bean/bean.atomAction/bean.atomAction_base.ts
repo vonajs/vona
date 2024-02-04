@@ -1,9 +1,9 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
-export class BeanAtomActionBase extends BeanModuleScopeBase {
+export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).atomAction;
+    return this.scope.model.atomAction;
   }
 
   async delete({ atomClassId, code }: any) {

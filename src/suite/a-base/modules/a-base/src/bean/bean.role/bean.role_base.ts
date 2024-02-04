@@ -1,5 +1,5 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
 import initData15 from '../version.manager/init/initData15.js';
@@ -12,29 +12,29 @@ const __atomClassRole = {
   atomClassName: 'role',
 };
 
-export class BeanRoleBase extends BeanModuleScopeBase {
+export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).role;
+    return this.scope.model.role;
   }
 
   get modelRoleInc() {
-    return this.ctx.model.module(__ThisModule__).roleInc;
+    return this.scope.model.roleInc;
   }
 
   get modelUserRole() {
-    return this.ctx.model.module(__ThisModule__).userRole;
+    return this.scope.model.userRole;
   }
 
   get modelRoleRight() {
-    return this.ctx.model.module(__ThisModule__).roleRight;
+    return this.scope.model.roleRight;
   }
 
   get modelRoleRightRef() {
-    return this.ctx.model.module(__ThisModule__).roleRightRef;
+    return this.scope.model.roleRightRef;
   }
 
   get modelAtom() {
-    return this.ctx.model.module(__ThisModule__).atom;
+    return this.scope.model.atom;
   }
 
   async get(where) {

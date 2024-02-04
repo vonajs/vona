@@ -1,11 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 @Atom()
-export class AtomRoleResourceRight extends BeanAtomBase {
+export class AtomRoleResourceRight extends BeanAtomBase<ScopeModule> {
   get model() {
-    return this.ctx.model.module(__ThisModule__).resourceRole;
+    return this.scope.model.resourceRole;
   }
 
   async default({ atomClass, item, options, user }: any) {
