@@ -1,10 +1,15 @@
 import { BeanBase, Local } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalAuthScene extends BeanBase {
+export class LocalAuthScene extends BeanBase<ScopeModule> {
+  get modelAuthProvider() {
+    return this.getScope('a-auth').model.authProvider;
+  }
+
   async disable({ id, sceneName, disabled }: any) {
     // item
-    const item = await this.ctx.model.authProvider.get({ id });
+    const item = await this.modelAuthProvider.get({ id });
     // update
     const scenes = item.scenes ? JSON.parse(item.scenes) : {};
     if (!scenes[sceneName]) {
@@ -12,7 +17,7 @@ export class LocalAuthScene extends BeanBase {
     }
     scenes[sceneName].disabled = disabled;
     item.scenes = JSON.stringify(scenes);
-    await this.ctx.model.authProvider.update(item);
+    await this.modelAuthProvider.update(item);
     // changed
     this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,
@@ -22,7 +27,7 @@ export class LocalAuthScene extends BeanBase {
 
   async save({ id, sceneName, data }: any) {
     // item
-    const item = await this.ctx.model.authProvider.get({ id });
+    const item = await this.modelAuthProvider.get({ id });
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({
       module: item.module,
       providerName: item.providerName,
@@ -52,7 +57,7 @@ export class LocalAuthScene extends BeanBase {
       };
       item.scenes = JSON.stringify(scenes);
     }
-    await this.ctx.model.authProvider.update(item);
+    await this.modelAuthProvider.update(item);
     // changed
     this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,
@@ -64,12 +69,12 @@ export class LocalAuthScene extends BeanBase {
 
   async add({ id, sceneName, data }: any) {
     // item
-    const item = await this.ctx.model.authProvider.get({ id });
+    const item = await this.modelAuthProvider.get({ id });
     // update
     const scenes = item.scenes ? JSON.parse(item.scenes) : {};
     scenes[sceneName] = data;
     item.scenes = JSON.stringify(scenes);
-    await this.ctx.model.authProvider.update(item);
+    await this.modelAuthProvider.update(item);
     // changed
     this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,
@@ -79,12 +84,12 @@ export class LocalAuthScene extends BeanBase {
 
   async delete({ id, sceneName }: any) {
     // item
-    const item = await this.ctx.model.authProvider.get({ id });
+    const item = await this.modelAuthProvider.get({ id });
     // update
     const scenes = item.scenes ? JSON.parse(item.scenes) : {};
     delete scenes[sceneName];
     item.scenes = JSON.stringify(scenes);
-    await this.ctx.model.authProvider.update(item);
+    await this.modelAuthProvider.update(item);
     // changed
     this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,

@@ -1,7 +1,12 @@
 import { BeanBase, Local } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalAuth extends BeanBase {
+export class LocalAuth extends BeanBase<ScopeModule> {
+  get modelAuthProvider() {
+    return this.getScope('a-auth').model.authProvider;
+  }
+
   async list() {
     return this.ctx.bean.authProviderCache.getAuthProvidersConfigForAdmin();
   }
@@ -13,9 +18,9 @@ export class LocalAuth extends BeanBase {
       if (list.length <= 1) this.ctx.throw(1001);
     }
     // update
-    await this.ctx.model.authProvider.update({ id, disabled });
+    await this.modelAuthProvider.update({ id, disabled });
     // item
-    const item = await this.ctx.model.authProvider.get({ id });
+    const item = await this.modelAuthProvider.get({ id });
     // changed
     await this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,
@@ -25,9 +30,9 @@ export class LocalAuth extends BeanBase {
 
   async save({ id, config }: any) {
     // update
-    await this.ctx.model.authProvider.update({ id, config: JSON.stringify(config) });
+    await this.modelAuthProvider.update({ id, config: JSON.stringify(config) });
     // item
-    const item = await this.ctx.model.authProvider.get({ id });
+    const item = await this.modelAuthProvider.get({ id });
     // changed
     await this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,
