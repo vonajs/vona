@@ -27,8 +27,8 @@ export interface IModuleMeta extends TypeModuleMetaGeneric {}
 declare module '@cabloy/module-info' {
   export interface IModule {
     resource: IModuleResource;
-    main: IModuleMain;
-    monkey: IMonkeyModule;
     meta: IModuleMeta;
+    mainInstance: IModuleMain;
+    monkeyInstance: IMonkeyModule;
   }
 }

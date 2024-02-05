@@ -6,7 +6,7 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { CabloyContext } from '../../types/index.js';
+import { CabloyContext, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 
@@ -82,7 +82,7 @@ export class AppUtil extends BeanSimple {
 
   async monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, monkeyData) {
     // self
-    const module = monkeyData && monkeyData.module;
+    const module: IModule = monkeyData && monkeyData.module;
     if (module) {
       if (module.mainInstance && module.mainInstance[monkeyName]) {
         await module.mainInstance[monkeyName](monkeyData);
@@ -90,7 +90,7 @@ export class AppUtil extends BeanSimple {
     }
     // module monkey
     for (const key in ebModulesMonkey) {
-      const moduleMonkey = ebModulesMonkey[key];
+      const moduleMonkey: IModule = ebModulesMonkey[key];
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
         const monkeyData2 = Object.assign({ moduleSelf: moduleMonkey }, monkeyData);
         await moduleMonkey.monkeyInstance[monkeyName](monkeyData2);

@@ -48,14 +48,14 @@ export class ModuleTools extends BeanSimple {
     // 2. main
     for (const module of app.meta.modulesArray) {
       if (module.resource.Main) {
-        module.main = app.bean._newBean(module.resource.Main);
+        module.mainInstance = app.bean._newBean(module.resource.Main);
       }
     }
     // 3. monkey
     for (const key in app.meta.modulesMonkey) {
       const moduleMonkey = app.meta.modulesMonkey[key];
       if (moduleMonkey.resource.Monkey) {
-        moduleMonkey.monkey = app.bean._newBean(moduleMonkey.resource.Monkey);
+        moduleMonkey.monkeyInstance = app.bean._newBean(moduleMonkey.resource.Monkey);
       }
     }
   }
