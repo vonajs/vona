@@ -1,1 +1,0 @@
-{"version":3,"file":"type.d.ts","sourceRoot":"","sources":["../../../../../src/lib/bean/resource/model/type.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,aAAa;IAC5B,cAAc,CAAC,EAAE,OAAO,CAAC;IACzB,eAAe,CAAC,EAAE,OAAO,CAAC;IAC1B,KAAK,CAAC,EAAE;QACN,MAAM,CAAC,EAAE,MAAM,CAAC;QAChB,IAAI,EAAE,MAAM,CAAC;KACd,CAAC;IACF,WAAW,CAAC,EAAE,MAAM,CAAC;IACrB,WAAW,CAAC,EAAE,OAAO,CAAC;CACvB"}

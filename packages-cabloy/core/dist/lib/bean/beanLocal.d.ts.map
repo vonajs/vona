@@ -1,1 +1,0 @@
-{"version":3,"file":"beanLocal.d.ts","sourceRoot":"","sources":["../../../src/lib/bean/beanLocal.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,mBAAmB,EAAE,MAAM,0BAA0B,CAAC;AAE/D,qBAAa,SAAU,SAAQ,mBAAmB;IAEhD,SAAS,CAAC,OAAO,CAAC,IAAI,KAAA;IAKtB,MAAM,CAAC,WAAW,EAAE,MAAM,GAAG,OAAO,IAAI;CAGzC"}

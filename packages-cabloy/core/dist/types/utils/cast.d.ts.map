@@ -1,1 +1,0 @@
-{"version":3,"file":"cast.d.ts","sourceRoot":"","sources":["../../../src/types/utils/cast.ts"],"names":[],"mappings":"AAAA,wBAAgB,IAAI,CAAC,CAAC,GAAG,GAAG,EAAE,MAAM,EAAE,OAAO,KAE5C;AAED,OAAO,CAAC,MAAM,CAAC;IACb,SAAS,QAAQ,CAAC,GAAG,EAAE,MAAM,EAAE,KAAK,CAAC,EAAE,MAAM,GAAG,MAAM,CAAC;CACxD"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"beanScopeBean.d.ts","sourceRoot":"","sources":["../../../../src/lib/bean/scope/beanScopeBean.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAC;AAE9C,QAAA,MAAM,eAAe,eAAuC,CAAC;AAE7D,qBAAa,aAAc,SAAQ,UAAU;IAC3C,OAAO,CAAC,CAAC,eAAe,CAAC,CAAS;IAClC,OAAO,CAAC,WAAW,CAA2B;gBAElC,WAAW,KAAA;IAKvB,SAAS,CAAC,OAAO,CAAC,IAAI,KAAA;CAOvB"}

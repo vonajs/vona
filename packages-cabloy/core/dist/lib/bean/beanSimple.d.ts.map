@@ -1,1 +1,0 @@
-{"version":3,"file":"beanSimple.d.ts","sourceRoot":"","sources":["../../../src/lib/bean/beanSimple.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,iBAAiB,EAAE,aAAa,EAAE,MAAM,sBAAsB,CAAC;AAE7E,qBAAa,UAAU;IACrB,SAAS,CAAC,GAAG,EAAE,iBAAiB,CAAC;IACjC,SAAS,CAAC,GAAG,EAAE,aAAa,CAAC;IAE7B,SAAS,KAAK,IAAI,mDAEjB;CACF"}
