@@ -80,25 +80,24 @@ export class AppUtil extends BeanSimple {
     return error;
   }
 
-  async monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, monkeyData) {
-    // self
-    const module: IModule = monkeyData && monkeyData.module;
+  async monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, monkeyData: any[]) {
+    // self: main
+    const module: IModule = monkeyData && monkeyData[0];
     if (module) {
       if (module.mainInstance && module.mainInstance[monkeyName]) {
-        await module.mainInstance[monkeyName](monkeyData);
+        await module.mainInstance[monkeyName](...monkeyData);
       }
     }
     // module monkey
     for (const key in ebModulesMonkey) {
       const moduleMonkey: IModule = ebModulesMonkey[key];
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
-        const monkeyData2 = Object.assign({ moduleSelf: moduleMonkey }, monkeyData);
-        await moduleMonkey.monkeyInstance[monkeyName](monkeyData2);
+        await moduleMonkey.monkeyInstance[monkeyName](moduleMonkey, ...monkeyData);
       }
     }
     // app monkey
     if (ebAppMonkey && ebAppMonkey[monkeyName]) {
-      await ebAppMonkey[monkeyName](monkeyData);
+      await ebAppMonkey[monkeyName](...monkeyData);
     }
   }
 

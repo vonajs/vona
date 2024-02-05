@@ -17,10 +17,10 @@ export default async function (app: CabloyApplication, modules: Record<string, I
         module.meta = module.resource.meta;
       }
       if (module.meta) {
-        await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', {
+        await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', [
           module,
-          meta: module.meta,
-        });
+          module.meta,
+        ]);
       }
       app.meta.metas[module.info.relativeName] = module.meta;
     }
