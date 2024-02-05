@@ -54,6 +54,7 @@ export class ModuleLoader extends BeanSimple {
       loadClusterApp(app);
     } else {
       await loadConfig(app, modules);
+      await loadModuleMeta(app, modules);
       loadClusterAgent(app);
     }
 
