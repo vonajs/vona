@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-pluginmarkdowngithub': ScopeModuleCmsPluginmarkdowngithub;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-pluginmarkdowngithub': ReturnType<typeof config>;
+  }
 }

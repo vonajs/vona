@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-wasmgo': ScopeModuleAWasmgo;
   }
+
+  export interface IBeanScopeConfig {
+    'a-wasmgo': ReturnType<typeof config>;
+  }
 }

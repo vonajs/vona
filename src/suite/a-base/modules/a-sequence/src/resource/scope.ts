@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-sequence': ScopeModuleASequence;
   }
+
+  export interface IBeanScopeConfig {
+    'a-sequence': ReturnType<typeof config>;
+  }
 }

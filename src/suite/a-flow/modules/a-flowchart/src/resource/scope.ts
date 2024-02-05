@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-flowchart': ScopeModuleAFlowchart;
   }
+
+  export interface IBeanScopeConfig {
+    'a-flowchart': ReturnType<typeof config>;
+  }
 }

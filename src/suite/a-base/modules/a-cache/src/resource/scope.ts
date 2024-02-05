@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-cache': ScopeModuleACache;
   }
+
+  export interface IBeanScopeConfig {
+    'a-cache': ReturnType<typeof config>;
+  }
 }

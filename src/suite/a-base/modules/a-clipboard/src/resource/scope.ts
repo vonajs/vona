@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-clipboard': ScopeModuleAClipboard;
   }
+
+  export interface IBeanScopeConfig {
+    'a-clipboard': ReturnType<typeof config>;
+  }
 }

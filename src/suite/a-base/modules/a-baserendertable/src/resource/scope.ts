@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-baserendertable': ScopeModuleABaserendertable;
   }
+
+  export interface IBeanScopeConfig {
+    'a-baserendertable': ReturnType<typeof config>;
+  }
 }

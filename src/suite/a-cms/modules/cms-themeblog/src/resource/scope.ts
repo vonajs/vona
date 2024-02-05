@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-themeblog': ScopeModuleCmsThemeblog;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-themeblog': ReturnType<typeof config>;
+  }
 }

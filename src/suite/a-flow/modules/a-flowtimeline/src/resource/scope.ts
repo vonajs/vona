@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-flowtimeline': ScopeModuleAFlowtimeline;
   }
+
+  export interface IBeanScopeConfig {
+    'a-flowtimeline': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-themebrilliant': ScopeModuleAThemebrilliant;
   }
+
+  export interface IBeanScopeConfig {
+    'a-themebrilliant': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-screenfull': ScopeModuleAScreenfull;
   }
+
+  export interface IBeanScopeConfig {
+    'a-screenfull': ReturnType<typeof config>;
+  }
 }

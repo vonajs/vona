@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-markdownstyle': ScopeModuleAMarkdownstyle;
   }
+
+  export interface IBeanScopeConfig {
+    'a-markdownstyle': ReturnType<typeof config>;
+  }
 }

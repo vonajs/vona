@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-antvlayout': ScopeModuleAAntvlayout;
   }
+
+  export interface IBeanScopeConfig {
+    'a-antvlayout': ReturnType<typeof config>;
+  }
 }

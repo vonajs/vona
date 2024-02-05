@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-pluginsocialshare': ScopeModuleCmsPluginsocialshare;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-pluginsocialshare': ReturnType<typeof config>;
+  }
 }

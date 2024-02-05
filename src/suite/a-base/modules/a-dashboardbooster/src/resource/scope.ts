@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-dashboardbooster': ScopeModuleADashboardbooster;
   }
+
+  export interface IBeanScopeConfig {
+    'a-dashboardbooster': ReturnType<typeof config>;
+  }
 }

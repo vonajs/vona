@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-sitecommunity': ScopeModuleCmsSitecommunity;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-sitecommunity': ReturnType<typeof config>;
+  }
 }

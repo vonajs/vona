@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-flownode': ScopeModuleAFlownode;
   }
+
+  export interface IBeanScopeConfig {
+    'a-flownode': ReturnType<typeof config>;
+  }
 }

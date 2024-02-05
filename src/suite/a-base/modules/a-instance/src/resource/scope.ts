@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-instance': ScopeModuleAInstance;
   }
+
+  export interface IBeanScopeConfig {
+    'a-instance': ReturnType<typeof config>;
+  }
 }

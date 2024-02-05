@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-codemirror': ScopeModuleACodemirror;
   }
+
+  export interface IBeanScopeConfig {
+    'a-codemirror': ReturnType<typeof config>;
+  }
 }

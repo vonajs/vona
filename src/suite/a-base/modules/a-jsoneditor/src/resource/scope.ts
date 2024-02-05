@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-jsoneditor': ScopeModuleAJsoneditor;
   }
+
+  export interface IBeanScopeConfig {
+    'a-jsoneditor': ReturnType<typeof config>;
+  }
 }

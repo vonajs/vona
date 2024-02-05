@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-pluginbase': ScopeModuleCmsPluginbase;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-pluginbase': ReturnType<typeof config>;
+  }
 }

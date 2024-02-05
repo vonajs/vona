@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-progress': ScopeModuleAProgress;
   }
+
+  export interface IBeanScopeConfig {
+    'a-progress': ReturnType<typeof config>;
+  }
 }

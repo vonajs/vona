@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-lazyload': ScopeModuleALazyload;
   }
+
+  export interface IBeanScopeConfig {
+    'a-lazyload': ReturnType<typeof config>;
+  }
 }

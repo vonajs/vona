@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-sandbox': ScopeModuleASandbox;
   }
+
+  export interface IBeanScopeConfig {
+    'a-sandbox': ReturnType<typeof config>;
+  }
 }

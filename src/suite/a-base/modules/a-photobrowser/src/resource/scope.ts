@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-photobrowser': ScopeModuleAPhotobrowser;
   }
+
+  export interface IBeanScopeConfig {
+    'a-photobrowser': ReturnType<typeof config>;
+  }
 }

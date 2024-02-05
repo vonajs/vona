@@ -86,7 +86,7 @@ export const config = _app => {
     },
     // watch
     watch: {
-      atomClass: null,
+      atomClass: null as { module: string; atomClassName: string } | null,
     },
     // site
     cms: {

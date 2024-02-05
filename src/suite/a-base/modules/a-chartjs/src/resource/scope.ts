@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-chartjs': ScopeModuleAChartjs;
   }
+
+  export interface IBeanScopeConfig {
+    'a-chartjs': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-antvg6': ScopeModuleAAntvg6;
   }
+
+  export interface IBeanScopeConfig {
+    'a-antvg6': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-authgithub': ScopeModuleAAuthgithub;
   }
+
+  export interface IBeanScopeConfig {
+    'a-authgithub': ReturnType<typeof config>;
+  }
 }

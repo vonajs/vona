@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-layoutmobile': ScopeModuleALayoutmobile;
   }
+
+  export interface IBeanScopeConfig {
+    'a-layoutmobile': ReturnType<typeof config>;
+  }
 }

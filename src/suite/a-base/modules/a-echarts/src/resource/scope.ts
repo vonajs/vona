@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-echarts': ScopeModuleAEcharts;
   }
+
+  export interface IBeanScopeConfig {
+    'a-echarts': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-dictarea': ScopeModuleADictarea;
   }
+
+  export interface IBeanScopeConfig {
+    'a-dictarea': ReturnType<typeof config>;
+  }
 }

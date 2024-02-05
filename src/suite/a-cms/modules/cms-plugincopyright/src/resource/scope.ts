@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-plugincopyright': ScopeModuleCmsPlugincopyright;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-plugincopyright': ReturnType<typeof config>;
+  }
 }

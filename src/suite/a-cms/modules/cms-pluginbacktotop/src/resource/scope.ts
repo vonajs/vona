@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-pluginbacktotop': ScopeModuleCmsPluginbacktotop;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-pluginbacktotop': ReturnType<typeof config>;
+  }
 }

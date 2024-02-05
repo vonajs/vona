@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-markdownrender': ScopeModuleAMarkdownrender;
   }
+
+  export interface IBeanScopeConfig {
+    'a-markdownrender': ReturnType<typeof config>;
+  }
 }

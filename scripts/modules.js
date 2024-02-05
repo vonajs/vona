@@ -40,6 +40,12 @@ async function main() {
 
 async function _moduleHandle_ts({ file, module, processHelper }) {
   // console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('export interface IBeanScopeConfig') > -1) {
+    // console.log(file);
+    return;
+  }
+
   // await fse.remove(file);
 }
 
@@ -63,7 +69,7 @@ async function _moduleHandle({ module, processHelper }) {
   // await fse.outputFile(fileTo, contentNew);
   // await processHelper.formatFile({ fileName: fileTo });
   // return;
-  const pattern = `${module.root}/*.tsbuildinfo`;
+  const pattern = `${module.root}/src/resource/scope.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();

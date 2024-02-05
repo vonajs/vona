@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-validation': ScopeModuleAValidation;
   }
+
+  export interface IBeanScopeConfig {
+    'a-validation': ReturnType<typeof config>;
+  }
 }

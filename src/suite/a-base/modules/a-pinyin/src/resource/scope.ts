@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-pinyin': ScopeModuleAPinyin;
   }
+
+  export interface IBeanScopeConfig {
+    'a-pinyin': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-flowgateway': ScopeModuleAFlowgateway;
   }
+
+  export interface IBeanScopeConfig {
+    'a-flowgateway': ReturnType<typeof config>;
+  }
 }

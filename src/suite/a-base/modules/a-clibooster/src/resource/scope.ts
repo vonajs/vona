@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-clibooster': ScopeModuleAClibooster;
   }
+
+  export interface IBeanScopeConfig {
+    'a-clibooster': ReturnType<typeof config>;
+  }
 }

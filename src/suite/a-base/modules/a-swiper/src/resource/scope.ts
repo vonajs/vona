@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-swiper': ScopeModuleASwiper;
   }
+
+  export interface IBeanScopeConfig {
+    'a-swiper': ReturnType<typeof config>;
+  }
 }

@@ -115,7 +115,7 @@ export const config = _app => {
         aWxworkMember: 'createdAt,updatedAt,userId,memberId',
       },
     },
-    indexesExtend: null,
+    indexesExtend: {},
     indexesCheck: true,
   };
 };

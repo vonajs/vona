@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-socketio': ScopeModuleASocketio;
   }
+
+  export interface IBeanScopeConfig {
+    'a-socketio': ReturnType<typeof config>;
+  }
 }

@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'cms-themeaws': ScopeModuleCmsThemeaws;
   }
+
+  export interface IBeanScopeConfig {
+    'cms-themeaws': ReturnType<typeof config>;
+  }
 }

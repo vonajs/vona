@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-flowtask': ScopeModuleAFlowtask;
   }
+
+  export interface IBeanScopeConfig {
+    'a-flowtask': ReturnType<typeof config>;
+  }
 }

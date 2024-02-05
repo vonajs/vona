@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-summer': ScopeModuleASummer;
   }
+
+  export interface IBeanScopeConfig {
+    'a-summer': ReturnType<typeof config>;
+  }
 }

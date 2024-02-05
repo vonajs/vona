@@ -20,4 +20,8 @@ declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
     'a-captcha': ScopeModuleACaptcha;
   }
+
+  export interface IBeanScopeConfig {
+    'a-captcha': ReturnType<typeof config>;
+  }
 }
