@@ -28,10 +28,7 @@
   "scripts": {
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
-    "dev:front": "node ./scripts/egg-born-bin.js front-dev",
-    "build:front": "node ./scripts/egg-born-bin.js front-build",
-    "dev:backend": "node ./scripts/egg-born-bin.js backend-dev",
-    "debug:backend": "node ./scripts/egg-born-bin.js backend-debug",
+    "dev": "node ./scripts/egg-born-bin.js backend-dev",
     "test": "mocha",
     "cov": "c8 npm run test",
     "start:backend": "node ./scripts/egg-born-scripts.js backend-start",

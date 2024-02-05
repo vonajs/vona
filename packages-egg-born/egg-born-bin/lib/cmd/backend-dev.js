@@ -10,7 +10,7 @@ class BackendDevCommand extends DevCommand {
       baseDir: {
         description: 'directory of application, default to `process.cwd()`',
         type: 'string',
-        default: 'src/backend',
+        default: 'dist/backend',
       },
       workers: {
         description: 'numbers of app workers, default to 1 at local mode',
@@ -39,6 +39,11 @@ class BackendDevCommand extends DevCommand {
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
+
+    if (!context.env.NODE_OPTIONS) {
+      context.env.NODE_OPTIONS = '';
+    }
+    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
 
     // need not sticky
     // if (context.argv.sticky === undefined) context.argv.sticky = true;
