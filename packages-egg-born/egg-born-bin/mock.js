@@ -1,14 +1,16 @@
 const path = require('path');
 const utils = require('./lib/utils.js');
 
+// baseDir
+const baseDir = path.join(process.cwd(), 'dist/backend');
 // env
-process.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
+process.env.EGG_BASE_DIR = baseDir;
 process.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
 process.env.NODE_ENV = 'test';
 
 // spec
 let spec = utils.combineTestPattern({
-  baseDir: path.join(process.cwd(), 'src/backend'),
+  baseDir,
   env: 'unittest',
   pattern: null,
 });
