@@ -44,6 +44,8 @@ class BackendDevCommand extends DevCommand {
       context.env.NODE_OPTIONS = '';
     }
     context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.argv.tscompiler = undefined;
+    context.argv.eggTsHelper = undefined;
 
     // need not sticky
     // if (context.argv.sticky === undefined) context.argv.sticky = true;
