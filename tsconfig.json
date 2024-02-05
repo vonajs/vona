@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
-  "compilerOptions": {},
-  "files": [],
-  "include": ["typings/**/*"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/backend/config", "src/backend/demo", "typings/**/*"],
   "ts-node": {
     "swc": true
   },

@@ -1,30 +1,22 @@
 import { IModule } from '@cabloy/module-info';
 
 export interface IMonkeyApp {
-  moduleLoading({ module }: { module: IModule }): Promise<void>;
-  moduleLoaded({ module }: { module: IModule }): Promise<void>;
-  configLoaded({ module, config }: { module: IModule; config: unknown }): Promise<void>;
-  metaLoaded({ module, meta }): Promise<void>;
+  moduleLoading(module: IModule): Promise<void>;
+  moduleLoaded(module: IModule): Promise<void>;
+  configLoaded(module: IModule, config: any): Promise<void>;
+  metaLoaded(module: IModule, meta: any): Promise<void>;
 }
 
 export interface IModuleMain {
-  moduleLoading({ module }: { module: IModule }): Promise<void>;
-  moduleLoaded({ module }: { module: IModule }): Promise<void>;
-  configLoaded({ module, config }: { module: IModule; config: unknown }): Promise<void>;
-  metaLoaded({ module, meta }): Promise<void>;
+  moduleLoading(module: IModule): Promise<void>;
+  moduleLoaded(module: IModule): Promise<void>;
+  configLoaded(module: IModule, config: any): Promise<void>;
+  metaLoaded(module: IModule, meta: any): Promise<void>;
 }
 
 export interface IMonkeyModule {
-  moduleLoading({ moduleSelf, module }: { moduleSelf: IModule; module: IModule }): Promise<void>;
-  moduleLoaded({ moduleSelf, module }: { moduleSelf: IModule; module: IModule }): Promise<void>;
-  configLoaded({
-    moduleSelf,
-    module,
-    config,
-  }: {
-    moduleSelf: IModule;
-    module: IModule;
-    config: unknown;
-  }): Promise<void>;
-  metaLoaded({ moduleSelf, module, meta }: { moduleSelf: IModule; module: IModule; meta: unknown }): Promise<void>;
+  moduleLoading(moduleSelf: IModule, module: IModule): Promise<void>;
+  moduleLoaded(moduleSelf: IModule, module: IModule): Promise<void>;
+  configLoaded(moduleSelf: IModule, module: IModule, config: any): Promise<void>;
+  metaLoaded(moduleSelf: IModule, module: IModule, meta: any): Promise<void>;
 }

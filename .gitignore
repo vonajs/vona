@@ -22,18 +22,6 @@ miniprogram_npm
 
 # package-lock.json
 
-!packages-cabloy/core/dist
-!packages-egg-born/egg-born-backend/dist
-!packages-egg-born/egg-born-mock/dist
-!packages-utils/cluster-reload/dist
-!packages-utils/extend/dist
-!packages-utils/localeutil/dist
-!packages-utils/module-glob/dist
-!packages-utils/module-info/dist
-!packages-utils/process-helper/dist
-!packages-utils/json5/dist
-!packages-utils/set/dist
-
 /docker-compose
 !/docker-compose/config
 !/docker-compose/data/mysql/.gitkeep
