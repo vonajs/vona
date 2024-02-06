@@ -6,16 +6,14 @@ const chalk = require('chalk');
 const boxen = require('boxen');
 const extend = require('@cabloy/extend').default;
 const eggBornUtils = require('egg-born-utils');
+const { ProcessHelper } = require('@cabloy/process-helper');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
 const utils = {
   async tsc() {
-    const timeBegin = new Date();
-    console.log(`tsc -b begin, pid: ${process.pid}`);
-    await eggBornUtils.process.spawnBin({ cmd: 'tsc', args: ['-b'], options: { cwd: process.cwd() } });
-    const timeEnd = new Date();
-    console.log(`tsc -b end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
+    const processHelper = new ProcessHelper();
+    await processHelper.tsc();
   },
   async prepareToken(projectPath, tokenName, options) {
     options = options || {};

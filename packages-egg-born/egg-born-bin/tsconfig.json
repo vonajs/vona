@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.cjs.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "allowJs": true
+  },
+  "include": ["lib/**/*"]
+}
