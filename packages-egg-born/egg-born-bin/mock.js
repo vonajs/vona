@@ -23,3 +23,9 @@ module.exports = {
   timeout: 0,
   exit: true,
 };
+
+/** .mocharc.js 
+const mockConfig = require('egg-born-bin/mock.js');
+
+module.exports = mockConfig;
+*/

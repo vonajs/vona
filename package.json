@@ -29,7 +29,7 @@
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
     "dev": "node ./scripts/egg-born-bin.js backend-dev",
-    "test": "mocha",
+    "test": "node ./scripts/egg-born-bin.js backend-test",
     "cov": "c8 npm run test",
     "start:backend": "node ./scripts/egg-born-scripts.js backend-start",
     "start:backend-daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon",

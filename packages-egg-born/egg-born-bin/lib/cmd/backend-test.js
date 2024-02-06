@@ -25,6 +25,7 @@ class BackendTestCommand extends TestCommand {
     context.argv.eggTsHelper = undefined;
     context.argv.tsconfigPaths = undefined;
     context.argv['tsconfig-paths'] = undefined;
+    context.argv.mochawesome = false;
 
     // baseDir
     const baseDir = path.join(process.cwd(), 'dist/backend');
@@ -55,7 +56,7 @@ class BackendTestCommand extends TestCommand {
     const testArgv = Object.assign({}, argv);
 
     /* istanbul ignore next */
-    testArgv.timeout = testArgv.timeout || process.env.TEST_TIMEOUT || 60000;
+    testArgv.timeout = testArgv.timeout || process.env.TEST_TIMEOUT || 0;
     testArgv.reporter = testArgv.reporter || process.env.TEST_REPORTER;
     // force exit
     testArgv.exit = true;
