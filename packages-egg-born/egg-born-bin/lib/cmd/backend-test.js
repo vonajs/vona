@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const eggBornUtils = require('egg-born-utils');
 const TestCommand = require('@zhennann/egg-bin').TestCommand;
 const utils = require('../utils.js');
 
@@ -113,28 +111,28 @@ class BackendTestCommand extends TestCommand {
       pattern = process.env.TESTS.split(',');
     }
 
-    // collect test files
-    if (!pattern.length) {
-      pattern = [`test/**/*.test.${testArgv.typescript ? 'ts' : 'js'}`];
-    }
+    // // collect test files
+    // if (!pattern.length) {
+    //   pattern = [`test/**/*.test.${testArgv.typescript ? 'ts' : 'js'}`];
+    // }
     // by zhennann
     // pattern = pattern.concat([ '!test/fixtures', '!test/node_modules' ]);
 
-    // expand glob and skip node_modules and fixtures
-    const files = eggBornUtils.tools.globbySync(pattern);
-    files.sort();
+    // // expand glob and skip node_modules and fixtures
+    // const files = eggBornUtils.tools.globbySync(pattern);
+    // files.sort();
 
-    if (files.length === 0) {
-      console.log(`No test files found with ${pattern}`);
-      return;
-    }
+    // if (files.length === 0) {
+    //   console.log(`No test files found with ${pattern}`);
+    //   return;
+    // }
 
-    // auto add setup file as the first test file
-    const setupFile = path.join(process.cwd(), `test/.setup.${testArgv.typescript ? 'ts' : 'js'}`);
-    if (fs.existsSync(setupFile)) {
-      files.unshift(setupFile);
-    }
-    testArgv._ = files;
+    // // auto add setup file as the first test file
+    // const setupFile = path.join(process.cwd(), `test/.setup.${testArgv.typescript ? 'ts' : 'js'}`);
+    // if (fs.existsSync(setupFile)) {
+    //   files.unshift(setupFile);
+    // }
+    // testArgv._ = files;
 
     // remove alias
     testArgv.$0 = undefined;
