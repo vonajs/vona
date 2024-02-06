@@ -38,7 +38,33 @@ async function main() {
   }
 }
 
-async function _moduleHandle_ts({ file, module, processHelper }) {}
+async function _moduleHandle_ts({ file, module, processHelper }) {
+  if (module.info.relativeName === 'a-base') return;
+  // console.log(file);
+  const contentOld = (await fse.readFile(file)).toString();
+  const regexp = /import 'cabloy-module-api-([^']*?)';/g;
+  const matches = contentOld.matchAll(regexp);
+  const outputNew1 = [];
+  const outputNew2 = [];
+  const outputNew3 = [];
+  let matchCount = 0;
+  for (const match of matches) {
+    matchCount++;
+    const classNameOld = match[1];
+    const classNameNew = classPathToClassName('', classNameOld);
+    // console.log(classNameOld);
+    outputNew1.push(`export type * as ${classNameNew} from 'cabloy-module-api-${classNameOld}';`);
+  }
+  const contentNew = `
+${outputNew1.join('\n')}
+  `;
+  console.log(contentNew);
+  const fileNew = `${module.root}/src/types.ts`;
+  await fse.outputFile(fileNew, contentNew);
+  await processHelper.formatFile({ fileName: fileNew });
+
+  await fse.remove(file);
+}
 
 async function _moduleHandle({ module, processHelper }) {
   // if (module.suite) return;
@@ -60,9 +86,7 @@ async function _moduleHandle({ module, processHelper }) {
   // await fse.outputFile(fileTo, contentNew);
   // await processHelper.formatFile({ fileName: fileTo });
   // return;
-  const pattern = `${module.root}/dist`;
-  await fse.remove(pattern);
-  return;
+  const pattern = `${module.root}/src/types.d.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
