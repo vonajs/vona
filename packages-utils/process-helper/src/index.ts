@@ -162,4 +162,17 @@ export class ProcessHelper {
       },
     });
   }
+  async tsc({ cwd }) {
+    const timeBegin = new Date();
+    await this.console.log(`tsc -b begin, pid: ${process.pid}`);
+    await this.spawnBin({
+      cmd: 'tsc',
+      args: ['-b'],
+      options: {
+        cwd,
+      },
+    });
+    const timeEnd = new Date();
+    await this.console.log(`tsc -b end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
+  }
 }
