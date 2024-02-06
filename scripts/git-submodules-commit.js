@@ -30,7 +30,7 @@ async function main() {
   for (const subModule of subModules) {
     console.log('----------: ', subModule);
     const cwd = `${process.cwd()}/${subModule}`;
-    await processHelper.gitCommit({ cwd, message });
+    await processHelper.gitCommit(message, { cwd });
   }
   // main
   await processHelper.gitCommit(message);
