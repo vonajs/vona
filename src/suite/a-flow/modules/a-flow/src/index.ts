@@ -5,5 +5,3 @@ export * from './routes.js';
 export * from './common/flowBehaviorBase.js';
 export * from './common/flowEdgeBase.js';
 export * from './common/flowNodeBase.js';
-
-import './typings/core/index.js';
