@@ -60,6 +60,7 @@ class BackendDevCommand extends DevCommand {
 
     utils.versionCheckCabloy({ scene: 'dev' }).then(() => {});
 
+    await utils.tsc();
     await super.run(context);
   }
 

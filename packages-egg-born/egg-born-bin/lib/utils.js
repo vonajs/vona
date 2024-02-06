@@ -10,6 +10,9 @@ const eggBornUtils = require('egg-born-utils');
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
 const utils = {
+  async tsc() {
+    await eggBornUtils.process.spawnBin({ cmd: 'tsc', args: ['-b'], options: { cwd: process.cwd() } });
+  },
   async prepareToken(projectPath, tokenName, options) {
     options = options || {};
     const warnWhenEmpty = options.warnWhenEmpty;
