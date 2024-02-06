@@ -37,7 +37,14 @@ export class ProcessHelperConsole {
 }
 
 export class ProcessHelper {
-  constructor(public cwd: string, public console: ProcessHelperConsole = new ProcessHelperConsole()) {}
+  cwd: string;
+  console: ProcessHelperConsole;
+
+  constructor(cwd, console) {
+    this.cwd = cwd || process.cwd();
+    this.console = console || new ProcessHelperConsole();
+  }
+
   async formatFile({ fileName, logPrefix }) {
     try {
       await this.spawnBin({
