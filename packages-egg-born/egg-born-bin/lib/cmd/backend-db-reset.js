@@ -1,6 +1,5 @@
 const path = require('path');
 const chalk = require('chalk');
-const mock = require('egg-mock');
 const TestCommand = require('@zhennann/egg-bin').TestCommand;
 const utils = require('../utils.js');
 
@@ -11,15 +10,28 @@ class BackendDbResetCommand extends TestCommand {
   }
 
   async run(context) {
-    if (context.argv.timeout === undefined) context.argv.timeout = 3600 * 1000;
+    await utils.tsc();
 
-    if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
-    if (!context.env.EGG_FRAMEWORK) context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    context.argv.timeout = 0;
+    context.argv.exit = true;
+    context.argv.extension = ['ts'];
 
-    // options
-    const options = {};
-    options.baseDir = context.env.EGG_BASE_DIR;
-    options.framework = context.env.EGG_FRAMEWORK;
+    if (!context.env.NODE_OPTIONS) {
+      context.env.NODE_OPTIONS = '';
+    }
+    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.argv.tscompiler = undefined;
+    context.argv.eggTsHelper = undefined;
+    context.argv.tsconfigPaths = undefined;
+    context.argv['tsconfig-paths'] = undefined;
+    context.argv.mochawesome = false;
+
+    // baseDir
+    const baseDir = path.join(process.cwd(), 'dist/backend');
+    // env
+    context.env.EGG_BASE_DIR = baseDir;
+    context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    context.env.NODE_ENV = 'test';
 
     // check dev server
     const devServerRunning = await utils.checkIfDevServerRunning({
@@ -27,18 +39,31 @@ class BackendDbResetCommand extends TestCommand {
     });
     if (devServerRunning) return;
 
-    // env
-    mock.env('unittest');
-    // app
-    const app = mock.app(options);
-    await app.ready();
+    // run
+    const mochaFile = require.resolve('../mockApp.js');
+    const testArgs = await this.formatTestArgs(context);
+    if (!testArgs) return;
 
-    // check app ready
-    await app.meta.checkAppReady();
+    const opt = {
+      env: Object.assign(
+        {
+          NODE_ENV: 'test',
+        },
+        context.env,
+      ),
+      execArgv: [...context.execArgv],
+    };
+
+    await this.helper.forkNode(mochaFile, testArgs, opt);
 
     // done
     console.log(chalk.cyan('  backend-db-reset successfully!'));
     process.exit(0);
+  }
+
+  async formatTestArgs({ argv }) {
+    const testArgv = Object.assign({}, argv);
+    return this.helper.unparseArgv(testArgv);
   }
 
   description() {

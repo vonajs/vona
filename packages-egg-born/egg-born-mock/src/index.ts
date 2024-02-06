@@ -27,7 +27,7 @@ if (global.__egg_born_mock === undefined) {
 export const assert = Assert;
 export const app = Cast<CabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
-export const mm = Bundle.mock;
+export const mm = Bundle.mm;
 
 export function mockUrl(url, apiPrefix = true) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
