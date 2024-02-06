@@ -31,7 +31,7 @@
     "@cabloy/module-glob": "workspace:^",
     "@zhennann/build": "^1.6.5",
     "@zhennann/common-bin": "^4.0.0",
-    "@zhennann/egg-bin": "^7.0.0",
+    "@zhennann/egg-bin": "^7.0.1",
     "@zhennann/socketio": "^4.0.2",
     "babel-loader": "^8.2.2",
     "bluebird": "^3.7.2",

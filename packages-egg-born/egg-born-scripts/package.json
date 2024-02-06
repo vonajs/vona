@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-scripts#readme",
   "dependencies": {
-    "@zhennann/egg-bin": "^7.0.0",
+    "@zhennann/egg-bin": "^7.0.1",
     "@zhennann/egg-scripts": "^4.0.1",
     "egg-born-backend": "^9.0.0"
   }
