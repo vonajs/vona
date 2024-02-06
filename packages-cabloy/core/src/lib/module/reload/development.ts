@@ -2,7 +2,7 @@ import path from 'path';
 import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
-import eggBornUtils from 'egg-born-utils';
+import { ProcessHelper } from '@cabloy/process-helper';
 import { CabloyApplication } from '../../../types/application/app.js';
 import { Cast } from '../../../types/utils/cast.js';
 
@@ -85,7 +85,8 @@ export default function (app: CabloyApplication) {
     // tsc
     const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/core'];
     if (__pathes.some(item => info.indexOf(item) > -1)) {
-      await eggBornUtils.process.spawnBin({ cmd: 'tsc', args: ['-b'], options: { cwd: process.cwd() } });
+      const processHelper = new ProcessHelper();
+      await processHelper.tsc();
     }
     // reload
     app.meta.reload.now();

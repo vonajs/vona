@@ -40,7 +40,7 @@ export class ProcessHelper {
   cwd: string;
   console: ProcessHelperConsole;
 
-  constructor(cwd, console) {
+  constructor(cwd?: string, console?: ProcessHelperConsole) {
     this.cwd = cwd || process.cwd();
     this.console = console || new ProcessHelperConsole();
   }
@@ -113,23 +113,19 @@ export class ProcessHelper {
       });
     });
   }
-  async npmPublish({ cwd }) {
+  async npmPublish(options?: IProcessHelperSpawnOptions) {
     await this.spawnCmd({
       cmd: 'npm',
       args: ['publish'],
-      options: {
-        cwd,
-      },
+      options,
     });
   }
-  async gitCommit({ cwd, message }) {
+  async gitCommit(message: string, options?: IProcessHelperSpawnOptions) {
     // git status
     const stdout = await this.spawnExe({
       cmd: 'git',
       args: ['status'],
-      options: {
-        cwd,
-      },
+      options,
     });
     if (stdout.indexOf('nothing to commit, working tree clean') > -1 && stdout.indexOf('is ahead of') === -1) {
       // do nothing
@@ -140,37 +136,29 @@ export class ProcessHelper {
       await this.spawnExe({
         cmd: 'git',
         args: ['add', '.'],
-        options: {
-          cwd,
-        },
+        options,
       });
       // git commit
       await this.spawnExe({
         cmd: 'git',
         args: ['commit', '-m', message],
-        options: {
-          cwd,
-        },
+        options,
       });
     }
     // git push
     await this.spawnExe({
       cmd: 'git',
       args: ['push'],
-      options: {
-        cwd,
-      },
+      options,
     });
   }
-  async tsc({ cwd }) {
+  async tsc(options?: IProcessHelperSpawnOptions) {
     const timeBegin = new Date();
     await this.console.log(`tsc -b begin, pid: ${process.pid}`);
     await this.spawnBin({
       cmd: 'tsc',
       args: ['-b'],
-      options: {
-        cwd,
-      },
+      options,
     });
     const timeEnd = new Date();
     await this.console.log(`tsc -b end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
