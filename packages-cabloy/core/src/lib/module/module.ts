@@ -38,6 +38,7 @@ export class ModuleTools extends BeanSimple {
       promises.push(import(`${module.root}/${subPath}/index.js`));
     }
     const timeBegin = new Date();
+    console.log(`import modules begin, pid: ${process.pid}`);
     const modulesResource = await Promise.all(promises);
     const timeEnd = new Date();
     console.log(`import modules end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);

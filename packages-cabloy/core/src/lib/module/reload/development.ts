@@ -79,7 +79,7 @@ export default function (app: CabloyApplication) {
   // invoked in agent
   async function _developmentChange(info) {
     info = info.replace(/\\/g, '/');
-    if (info.indexOf('.ts') === -1) return;
+    if (path.extname(info) !== '.ts') return;
     // log
     app.logger.warn(`[agent:development] reload worker because ${info} changed`);
     // tsc
