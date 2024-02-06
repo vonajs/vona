@@ -36,6 +36,8 @@ class BackendDevCommand extends DevCommand {
   }
 
   async run(context) {
+    await utils.tsc();
+
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
@@ -60,7 +62,7 @@ class BackendDevCommand extends DevCommand {
 
     utils.versionCheckCabloy({ scene: 'dev' }).then(() => {});
 
-    await utils.tsc();
+    // run
     await super.run(context);
   }
 

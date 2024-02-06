@@ -1,8 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const chalk = require('chalk');
 const eggBornUtils = require('egg-born-utils');
-const mock = require('egg-mock');
 const TestCommand = require('@zhennann/egg-bin').TestCommand;
 const utils = require('../utils.js');
 
@@ -13,16 +11,35 @@ class BackendTestCommand extends TestCommand {
   }
 
   async run(context) {
-    if (context.argv.timeout === undefined) context.argv.timeout = 3600 * 1000;
+    await utils.tsc();
 
-    if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
-    if (!context.env.EGG_FRAMEWORK) context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    context.argv.timeout = 0;
+    context.argv.exit = true;
+    context.argv.extension = ['ts'];
 
+    if (!context.env.NODE_OPTIONS) {
+      context.env.NODE_OPTIONS = '';
+    }
+    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.argv.tscompiler = undefined;
+    context.argv.eggTsHelper = undefined;
+    context.argv.tsconfigPaths = undefined;
+    context.argv['tsconfig-paths'] = undefined;
+
+    // baseDir
+    const baseDir = path.join(process.cwd(), 'dist/backend');
+    // env
+    context.env.EGG_BASE_DIR = baseDir;
+    context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    context.env.NODE_ENV = 'test';
+
+    // spec
     context.argv._ = utils.combineTestPattern({
-      baseDir: context.env.EGG_BASE_DIR,
+      baseDir,
       env: 'unittest',
       pattern: context.argv._,
     });
+    context.argv._ = ['src/suite/test-party/modules/test-party/test/controller/test.test.ts'];
 
     // check dev server
     const devServerRunning = await utils.checkIfDevServerRunning({
@@ -30,28 +47,8 @@ class BackendTestCommand extends TestCommand {
     });
     if (devServerRunning) return;
 
-    if (!context.argv._.length) {
-      // options
-      const options = {};
-      options.baseDir = context.env.EGG_BASE_DIR;
-      options.framework = context.env.EGG_FRAMEWORK;
-
-      // env
-      mock.env('unittest');
-      // app
-      const app = mock.app(options);
-      await app.ready();
-
-      // check app ready
-      await app.meta.checkAppReady();
-
-      // done
-      console.log(chalk.cyan('  backend-test successfully!'));
-      process.exit(0);
-    } else {
-      // run
-      await super.run(context);
-    }
+    // run
+    await super.run(context);
   }
 
   async formatTestArgs({ argv, debugOptions, execArgvObj }) {
