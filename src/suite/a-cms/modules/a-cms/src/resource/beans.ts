@@ -1,6 +1,5 @@
 export * from '../bean/virtual.atomCmsBase.js';
 export * from '../bean/version.manager.js';
-export * from '../bean/startup.registerDevelopment.js';
 export * from '../bean/startup.registerAllWatchers.js';
 export * from '../bean/queue.render.js';
 export * from '../bean/io.message.hotloadFile.js';

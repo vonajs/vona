@@ -7,12 +7,12 @@ import { CabloyApplication } from '../../../types/application/app.js';
 import { Cast } from '../../../types/utils/cast.js';
 
 export default function (app: CabloyApplication) {
+  let watcherDevelopment: chokidar.FSWatcher | null = null;
+
   // only in development
   if (app.meta.inAgent && app.meta.isLocal) {
     _register();
   }
-
-  let watcherDevelopment: chokidar.FSWatcher | null = null;
 
   // invoked in agent
   function _register() {

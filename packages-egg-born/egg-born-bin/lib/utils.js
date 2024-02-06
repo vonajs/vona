@@ -11,7 +11,11 @@ const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yel
 
 const utils = {
   async tsc() {
+    const timeBegin = new Date();
+    console.log(`tsc -b begin, pid: ${process.pid}`);
     await eggBornUtils.process.spawnBin({ cmd: 'tsc', args: ['-b'], options: { cwd: process.cwd() } });
+    const timeEnd = new Date();
+    console.log(`tsc -b end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
   },
   async prepareToken(projectPath, tokenName, options) {
     options = options || {};
