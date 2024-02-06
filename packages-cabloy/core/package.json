@@ -72,6 +72,8 @@
     "semver": "^7.3.7",
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "chokidar": "^3.5.2",
+    "debounce": "^1.2.0"
   }
 }

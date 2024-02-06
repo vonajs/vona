@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import { AppMockUtil } from '../utils/mockUtil.js';
-import { AppReload } from '../module/reload.js';
+import { AppReload } from '../module/reload/reload.js';
 import { AppUtil } from '../utils/util.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';

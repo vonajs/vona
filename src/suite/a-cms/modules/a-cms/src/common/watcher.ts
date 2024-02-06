@@ -8,21 +8,10 @@ import eggBornUtils from 'egg-born-utils';
 
 export class Watcher extends BeanBase {
   _watchers: any;
-  _freezeCounter: any;
-  _needReload: any;
-  _reloadDebounce: any;
 
   constructor() {
     super();
     this._watchers = {};
-    this._freezeCounter = 0;
-    this._needReload = false;
-    this._reloadDebounce = debounce(() => {
-      if (this._freezeCounter === 0 && this._needReload) {
-        this._needReload = false;
-        this._reloadByAgent();
-      }
-    }, 1000);
   }
 
   __init__() {
@@ -48,12 +37,6 @@ export class Watcher extends BeanBase {
           this._registerLanguages(info);
         },
       });
-      this.app.meta.messenger.addProvider({
-        name: 'a-cms:reload',
-        handler: info => {
-          this._reloadByApp(info);
-        },
-      });
     }
   }
 
@@ -65,11 +48,6 @@ export class Watcher extends BeanBase {
   // called by this.app
   registerLanguages(info) {
     this.app.meta.messenger.callAgent({ name: 'a-cms:watcherRegisterLanguages', data: info });
-  }
-
-  // called by this.app
-  reload({ action }: any) {
-    this.app.meta.messenger.callAgent({ name: 'a-cms:reload', data: { action } });
   }
 
   _getWatcherKey({ development, subdomain, atomClass }: any) {
@@ -212,31 +190,5 @@ export class Watcher extends BeanBase {
     }
     // reload
     this._reloadByApp({ action: 'now' });
-  }
-
-  // invoked in agent
-  _reloadByAgent() {
-    Cast(process).send({
-      to: 'master',
-      action: 'reload-worker',
-    });
-  }
-
-  //  invoked in agent
-  _reloadByApp({ action }: any) {
-    if (action === 'now') {
-      if (this._freezeCounter > 0) {
-        this._needReload = true;
-      } else {
-        this._reloadByAgent();
-      }
-    } else if (action === 'freeze') {
-      this._freezeCounter++;
-    } else if (action === 'unfreeze') {
-      this._freezeCounter--;
-      if (this._freezeCounter === 0 && this._needReload) {
-        this._reloadDebounce();
-      }
-    }
   }
 }
