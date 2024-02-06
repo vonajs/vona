@@ -13,10 +13,6 @@ const startups = {
     instance: true,
     debounce: true,
   },
-  registerDevelopment: {
-    bean: 'registerDevelopment',
-    debounce: true,
-  },
 };
 
 const cmsSite = {

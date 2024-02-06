@@ -90,10 +90,6 @@ export class Watcher extends BeanBase {
 
   // invoked in agent
   _register({ development, subdomain, atomClass, language, watchers }: any) {
-    // watchers
-    if (development) {
-      watchers = this._collectDevelopmentWatchDirs();
-    }
     // watcherEntry
     const watcherEntry = this._getWatcherAtomClassLanguage({ development, subdomain, atomClass, language });
     watcherEntry.info = { development, subdomain, atomClass, language, watchers };
@@ -149,46 +145,5 @@ export class Watcher extends BeanBase {
         language,
       },
     });
-  }
-
-  // invoked in agent
-  _collectDevelopmentWatchDirs() {
-    const __pathes = [
-      'src/backend/config',
-      'src/backend/demo',
-      'src/module',
-      'src/module-vendor',
-      'src/suite',
-      'src/suite-vendor',
-      'packages-cabloy/core',
-    ];
-    const cwd = process.cwd();
-    const watchDirs: any[] = [];
-    for (const __path of __pathes) {
-      const pathDir = path.join(cwd, __path);
-      if (fse.existsSync(pathDir)) {
-        watchDirs.push(pathDir);
-      }
-    }
-    return watchDirs;
-    // const pathSrc = path.resolve(this.app.config.baseDir, '..');
-    // let watchDirs = eggBornUtils.tools.globbySync(`${pathSrc}/**/backend/src`, { onlyDirectories: true });
-    // watchDirs = [path.join(pathSrc, 'backend/config')].concat(watchDirs);
-    // return watchDirs;
-  }
-
-  // invoked in agent
-  async _developmentChange(info) {
-    info = info.replace(/\\/g, '/');
-    if (info.indexOf('.ts') === -1) return;
-    // log
-    this.app.logger.warn(`[agent:development] reload worker because ${info} changed`);
-    // tsc
-    const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/core'];
-    if (__pathes.some(item => info.indexOf(item) > -1)) {
-      await eggBornUtils.process.spawnBin({ cmd: 'tsc', args: ['-b'], options: { cwd: process.cwd() } });
-    }
-    // reload
-    this._reloadByApp({ action: 'now' });
   }
 }

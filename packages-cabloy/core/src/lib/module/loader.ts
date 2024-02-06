@@ -16,6 +16,7 @@ import loadSchedules from './schedule.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import loadReload from './reload/reload.js';
+import loadDevelopment from './reload/development.js';
 import { loadBeans } from './bean/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
@@ -59,6 +60,7 @@ export class ModuleLoader extends BeanSimple {
       await loadModuleMeta(app, modules);
       loadClusterAgent(app);
       loadReload(app);
+      loadDevelopment(app);
     }
 
     // monkey modules
