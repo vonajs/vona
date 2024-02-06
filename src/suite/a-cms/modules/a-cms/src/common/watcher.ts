@@ -1,10 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
-import path from 'path';
-import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { BeanBase, Cast } from '@cabloy/core';
-import eggBornUtils from 'egg-born-utils';
 
 export class Watcher extends BeanBase {
   _watchers: any;
@@ -50,21 +47,20 @@ export class Watcher extends BeanBase {
     this.app.meta.messenger.callAgent({ name: 'a-cms:watcherRegisterLanguages', data: info });
   }
 
-  _getWatcherKey({ development, subdomain, atomClass }: any) {
-    if (development) return 'development';
+  _getWatcherKey({ subdomain, atomClass }: any) {
     return `${subdomain}&&${atomClass.module}&&${atomClass.atomClassName}`;
   }
 
-  _getWatcherAtomClass({ development, subdomain, atomClass }: any) {
-    const watcherKey = this._getWatcherKey({ development, subdomain, atomClass });
+  _getWatcherAtomClass({ subdomain, atomClass }: any) {
+    const watcherKey = this._getWatcherKey({ subdomain, atomClass });
     if (!this._watchers[watcherKey]) {
       this._watchers[watcherKey] = {};
     }
     return this._watchers[watcherKey];
   }
 
-  _getWatcherAtomClassLanguage({ development, subdomain, atomClass, language }: any) {
-    const watchers = this._getWatcherAtomClass({ development, subdomain, atomClass });
+  _getWatcherAtomClassLanguage({ subdomain, atomClass, language }: any) {
+    const watchers = this._getWatcherAtomClass({ subdomain, atomClass });
     if (!watchers[language]) {
       watchers[language] = {};
     }
@@ -89,10 +85,10 @@ export class Watcher extends BeanBase {
   }
 
   // invoked in agent
-  _register({ development, subdomain, atomClass, language, watchers }: any) {
+  _register({ subdomain, atomClass, language, watchers }: any) {
     // watcherEntry
-    const watcherEntry = this._getWatcherAtomClassLanguage({ development, subdomain, atomClass, language });
-    watcherEntry.info = { development, subdomain, atomClass, language, watchers };
+    const watcherEntry = this._getWatcherAtomClassLanguage({ subdomain, atomClass, language });
+    watcherEntry.info = { subdomain, atomClass, language, watchers };
     // close
     if (watcherEntry.watcher) {
       const _watcher = watcherEntry.watcher;
@@ -108,15 +104,11 @@ export class Watcher extends BeanBase {
     // watcher
     const _watcher = chokidar.watch(watchers).on(
       'change',
-      debounce(info => {
-        if (development) {
-          this._developmentChange(info);
-        } else {
-          this.app.meta.messenger.callRandom({
-            name: 'a-cms:watcherChange',
-            data: { subdomain, atomClass, language },
-          });
-        }
+      debounce(() => {
+        this.app.meta.messenger.callRandom({
+          name: 'a-cms:watcherChange',
+          data: { subdomain, atomClass, language },
+        });
       }, 300),
     );
     // on ready
