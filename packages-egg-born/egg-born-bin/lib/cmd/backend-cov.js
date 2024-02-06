@@ -26,7 +26,7 @@ class BackendCovCommand extends CovCommand {
     context.argv.mochawesome = false;
 
     context.argv.c8 =
-      '--temp-directory ./node_modules/.c8_output -n src/**/src/**/*.ts -r text-summary -r json-summary -r json -r lcov -r cobertura';
+      '--temp-directory ./node_modules/.c8_output -o ./coverage -n src/**/src/**/*.ts -r text-summary -r json-summary -r json -r lcov -r cobertura';
 
     // baseDir
     const baseDir = path.join(process.cwd(), 'dist/backend');
