@@ -84,7 +84,9 @@ async function _moduleHandle({ module, processHelper }) {
   // await fse.outputFile(fileTo, contentNew);
   // await processHelper.formatFile({ fileName: fileTo });
   // return;
-  const pattern = `${module.root}/src/index.ts`;
+  const pattern = `${module.root}/src/types.ts`;
+  await fs.rename(pattern, `${module.root}/src/typings.ts`);
+  return;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
