@@ -33,5 +33,5 @@ async function main() {
     await processHelper.gitCommit({ cwd, message });
   }
   // main
-  await processHelper.gitCommit({ message });
+  await processHelper.gitCommit(message);
 }
