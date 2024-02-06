@@ -4,7 +4,7 @@ import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { BeanBase, Cast } from '@cabloy/core';
-// import eggBornUtils from 'egg-born-utils';
+import eggBornUtils from 'egg-born-utils';
 
 export class Watcher extends BeanBase {
   _watchers: any;
@@ -176,25 +176,22 @@ export class Watcher extends BeanBase {
   // invoked in agent
   _collectDevelopmentWatchDirs() {
     const __pathes = [
-      'backend/config',
-      'backend/demo',
-      'module',
-      'module-system',
-      'module-vendor',
-      'suite',
-      'suite-vendor',
+      'src/backend/config',
+      'src/backend/demo',
+      'src/module',
+      'src/module-vendor',
+      'src/suite',
+      'src/suite-vendor',
+      'packages-cabloy/core',
     ];
-    const pathSrc = path.resolve(this.app.config.baseDir, '..');
+    const cwd = process.cwd();
     const watchDirs: any[] = [];
     for (const __path of __pathes) {
-      watchDirs.push(path.join(pathSrc, __path));
+      const pathDir = path.join(cwd, __path);
+      if (fse.existsSync(pathDir)) {
+        watchDirs.push(pathDir);
+      }
     }
-    // egg-born-backend
-    const pathEggBornBackend = path.resolve(pathSrc, '../packages/egg-born-backend');
-    if (fse.existsSync(pathEggBornBackend)) {
-      watchDirs.push(pathEggBornBackend);
-    }
-    // ok
     return watchDirs;
     // const pathSrc = path.resolve(this.app.config.baseDir, '..');
     // let watchDirs = eggBornUtils.tools.globbySync(`${pathSrc}/**/backend/src`, { onlyDirectories: true });
@@ -203,17 +200,18 @@ export class Watcher extends BeanBase {
   }
 
   // invoked in agent
-  _developmentChange(info) {
+  async _developmentChange(info) {
     info = info.replace(/\\/g, '/');
-    if (
-      info.indexOf('/backend/src/') > -1 ||
-      info.indexOf('/src/backend/config/') > -1 ||
-      info.indexOf('/src/backend/demo/') > -1 ||
-      info.indexOf('/packages/egg-born-backend/') > -1
-    ) {
-      this.app.logger.warn(`[agent:development] reload worker because ${info} changed`);
-      this._reloadByApp({ action: 'now' });
+    if (info.indexOf('.ts') === -1) return;
+    // log
+    this.app.logger.warn(`[agent:development] reload worker because ${info} changed`);
+    // tsc
+    const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/core'];
+    if (__pathes.some(item => info.indexOf(item) > -1)) {
+      await eggBornUtils.process.spawnBin({ cmd: 'tsc', args: ['-b'], options: { cwd: process.cwd() } });
     }
+    // reload
+    this._reloadByApp({ action: 'now' });
   }
 
   // invoked in agent
