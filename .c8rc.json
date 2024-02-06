@@ -1,5 +1,0 @@
-{
-  "include": ["src/**/src/**/*.ts"],
-  "report-dir": "./coverage",
-  "reporter": ["text-summary", "json-summary", "json", "lcov"]
-}

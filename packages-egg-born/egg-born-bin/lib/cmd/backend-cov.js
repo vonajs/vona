@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const eggBornUtils = require('egg-born-utils');
 const CovCommand = require('@zhennann/egg-bin').CovCommand;
 const utils = require('../utils.js');
 
@@ -11,14 +9,39 @@ class BackendCovCommand extends CovCommand {
   }
 
   async run(context) {
-    if (!context.env.EGG_BASE_DIR) context.env.EGG_BASE_DIR = path.join(process.cwd(), 'src/backend');
-    if (!context.env.EGG_FRAMEWORK) context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    await utils.tsc();
 
+    context.argv.timeout = 0;
+    context.argv.exit = true;
+    context.argv.extension = ['ts'];
+
+    if (!context.env.NODE_OPTIONS) {
+      context.env.NODE_OPTIONS = '';
+    }
+    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.argv.tscompiler = undefined;
+    context.argv.eggTsHelper = undefined;
+    context.argv.tsconfigPaths = undefined;
+    context.argv['tsconfig-paths'] = undefined;
+    context.argv.mochawesome = false;
+
+    context.argv.c8 =
+      '--temp-directory ./node_modules/.c8_output -n src/**/src/**/*.ts -r text-summary -r json-summary -r json -r lcov -r cobertura';
+
+    // baseDir
+    const baseDir = path.join(process.cwd(), 'dist/backend');
+    // env
+    context.env.EGG_BASE_DIR = baseDir;
+    context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
+    context.env.NODE_ENV = 'test';
+
+    // spec
     context.argv._ = utils.combineTestPattern({
-      baseDir: context.env.EGG_BASE_DIR,
+      baseDir,
       env: 'unittest',
       pattern: context.argv._,
     });
+    context.argv._ = ['src/suite/test-party/modules/test-party/test/controller/test.test.ts'];
 
     context.argv.x = ['src/**/backend/**/*.spec.js', 'src/**/dist/backend.js'];
 
@@ -28,6 +51,7 @@ class BackendCovCommand extends CovCommand {
     });
     if (devServerRunning) return;
 
+    // run
     await super.run(context);
   }
 
@@ -35,7 +59,7 @@ class BackendCovCommand extends CovCommand {
     const testArgv = Object.assign({}, argv);
 
     /* istanbul ignore next */
-    testArgv.timeout = testArgv.timeout || process.env.TEST_TIMEOUT || 60000;
+    testArgv.timeout = testArgv.timeout || process.env.TEST_TIMEOUT || 0;
     testArgv.reporter = testArgv.reporter || process.env.TEST_REPORTER;
     // force exit
     testArgv.exit = true;
@@ -92,28 +116,28 @@ class BackendCovCommand extends CovCommand {
       pattern = process.env.TESTS.split(',');
     }
 
-    // collect test files
-    if (!pattern.length) {
-      pattern = [`test/**/*.test.${testArgv.typescript ? 'ts' : 'js'}`];
-    }
+    // // collect test files
+    // if (!pattern.length) {
+    //   pattern = [`test/**/*.test.${testArgv.typescript ? 'ts' : 'js'}`];
+    // }
     // by zhennann
     // pattern = pattern.concat([ '!test/fixtures', '!test/node_modules' ]);
 
-    // expand glob and skip node_modules and fixtures
-    const files = eggBornUtils.tools.globbySync(pattern);
-    files.sort();
+    // // expand glob and skip node_modules and fixtures
+    // const files = eggBornUtils.tools.globbySync(pattern);
+    // files.sort();
 
-    if (files.length === 0) {
-      console.log(`No test files found with ${pattern}`);
-      return;
-    }
+    // if (files.length === 0) {
+    //   console.log(`No test files found with ${pattern}`);
+    //   return;
+    // }
 
-    // auto add setup file as the first test file
-    const setupFile = path.join(process.cwd(), `test/.setup.${testArgv.typescript ? 'ts' : 'js'}`);
-    if (fs.existsSync(setupFile)) {
-      files.unshift(setupFile);
-    }
-    testArgv._ = files;
+    // // auto add setup file as the first test file
+    // const setupFile = path.join(process.cwd(), `test/.setup.${testArgv.typescript ? 'ts' : 'js'}`);
+    // if (fs.existsSync(setupFile)) {
+    //   files.unshift(setupFile);
+    // }
+    // testArgv._ = files;
 
     // remove alias
     testArgv.$0 = undefined;

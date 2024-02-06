@@ -30,7 +30,7 @@
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
     "dev": "node ./scripts/egg-born-bin.js backend-dev",
     "test": "node ./scripts/egg-born-bin.js backend-test",
-    "cov": "c8 npm run test",
+    "cov": "node ./scripts/egg-born-bin.js backend-cov",
     "start:backend": "node ./scripts/egg-born-scripts.js backend-start",
     "start:backend-daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon",
     "stop:backend": "node ./scripts/egg-born-scripts.js backend-stop",
