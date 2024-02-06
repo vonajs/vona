@@ -22,6 +22,10 @@ miniprogram_npm
 
 # package-lock.json
 
+# should pre-compiled 
+!packages-utils/extend/dist
+!packages-utils/process-helper/dist
+
 /docker-compose
 !/docker-compose/config
 !/docker-compose/data/mysql/.gitkeep

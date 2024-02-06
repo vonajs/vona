@@ -28,9 +28,6 @@
       "path": "packages-utils/module-glob"
     },
     {
-      "path": "packages-utils/process-helper"
-    },
-    {
       "path": "packages-cabloy/core"
     },
     {
