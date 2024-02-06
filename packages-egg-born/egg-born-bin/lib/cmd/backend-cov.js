@@ -41,7 +41,6 @@ class BackendCovCommand extends CovCommand {
       env: 'unittest',
       pattern: context.argv._,
     });
-    context.argv._ = ['src/suite/test-party/modules/test-party/test/controller/test.test.ts'];
 
     context.argv.x = ['src/**/backend/**/*.spec.js', 'src/**/dist/backend.js'];
 

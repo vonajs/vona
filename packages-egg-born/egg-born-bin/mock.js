@@ -9,12 +9,11 @@ process.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
 process.env.NODE_ENV = 'test';
 
 // spec
-let spec = utils.combineTestPattern({
+const spec = utils.combineTestPattern({
   baseDir,
   env: 'unittest',
   pattern: null,
 });
-spec = ['src/suite/test-party/modules/test-party/test/controller/test.test.ts'];
 
 module.exports = {
   extension: ['ts'],

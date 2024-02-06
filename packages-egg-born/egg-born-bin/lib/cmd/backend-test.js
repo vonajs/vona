@@ -38,7 +38,6 @@ class BackendTestCommand extends TestCommand {
       env: 'unittest',
       pattern: context.argv._,
     });
-    context.argv._ = ['src/suite/test-party/modules/test-party/test/controller/test.test.ts'];
 
     // check dev server
     const devServerRunning = await utils.checkIfDevServerRunning({
