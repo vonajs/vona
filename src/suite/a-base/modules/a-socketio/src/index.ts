@@ -4,3 +4,5 @@ export * from './meta.js';
 export * from './routes.js';
 
 export * from './common/ioChannelBase.js';
+
+import './types.js';

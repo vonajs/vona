@@ -17,3 +17,5 @@ export class Main extends BeanBase implements IModuleMain {
   async configLoaded(_module: IModule, _config) {}
   async metaLoaded(_module: IModule, _meta) {}
 }
+
+import './types.js';
