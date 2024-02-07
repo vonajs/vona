@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "dev:backend",
+      "name": "dev",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
@@ -14,7 +14,7 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "dev:backend(attach)",
+      "name": "dev(attach)",
       "type": "node",
       "request": "attach",
       "processId": "${command:PickProcess}",
@@ -29,7 +29,7 @@
       "url": "http://localhost:9192"
     },
     {
-      "name": "test:backend",
+      "name": "test",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
@@ -37,7 +37,7 @@
       "runtimeArgs": ["run", "test:backend"]
     },
     {
-      "name": "cov:backend",
+      "name": "cov",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
