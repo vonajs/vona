@@ -5,6 +5,7 @@
     "outDir": "dist"
   },
   "include": ["src/backend/package.json", "src/backend/config", "src/backend/demo"],
+  "exclude": ["src/backend/_config"],
   "ts-node": {
     "swc": true
   },
