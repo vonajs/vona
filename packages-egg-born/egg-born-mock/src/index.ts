@@ -3,7 +3,9 @@ import { CabloyApplication, CabloyContext, Cast } from '@cabloy/core';
 import Assert from 'assert';
 import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
 import { BaseMockApplication } from 'egg-mock';
-export interface MockCabloyApplication extends BaseMockApplication<CabloyApplication, CabloyContext> {}
+
+type TypeMockCabloyApplication<T, C> = BaseMockApplication<T, C> & CabloyApplication;
+export interface MockCabloyApplication extends TypeMockCabloyApplication<CabloyApplication, CabloyContext> {}
 
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
