@@ -3,68 +3,66 @@ import { Local, BeanBase } from '@cabloy/core';
 import path from 'path';
 import fse from 'fs-extra';
 
-const __JSContent = `
-  class Demo {
-    // npm run cli :tools:demo
-    // npm run cli :tools:demo execute
-    async execute(argv) {
-      await this.argv(argv);
-      await this.print();
-    }
+const __JSContent = `import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
-    // npm run cli :tools:demo argv
-    async argv(argv) {
-      await this.console.log({ text: argv });
-    }
-
-    // npm run cli :tools:demo print
-    async print() {
-      // welcome
-      await this.console.log('\\n==== Welcome to CabloyJS! ====\\n');
-      // chalk
-      let text = this.helper.chalk.keyword('orange')('chalk test');
-      await this.console.log({ text });
-      // boxen
-      text = this.helper.boxen({ text: 'boxen test' });
-      await this.console.log({ text });
-      // table
-      const table = this.helper.newTable({
-        head: ['Name', 'Sex'],
-        colWidths: [20, 20],
-      });
-      table.push(['Tom', 'M']);
-      table.push(['Jane', 'F']);
-      await this.console.log({ text: 'table test' });
-      await this.console.log({ text: table.toString() });
-      // ok
-      return 'hello world';
-    }
+export default class Demo extends BeanCliBase {
+  // npm run cli :tools:demo
+  // npm run cli :tools:demo execute
+  async execute({ user }) {
+    await super.execute({ user });
+    await this.argv({ user });
+    await this.print();
   }
-  return Demo;
-};
+
+  // npm run cli :tools:demo argv
+  async argv({ user }) {
+    await this.console.log({ text: user.id });
+  }
+
+  // npm run cli :tools:demo print
+  async print() {
+    // welcome
+    await this.console.log('\\n==== Welcome to CabloyJS! ====\\n');
+    // chalk
+    let text = this.helper.chalk.keyword('orange')('chalk test');
+    await this.console.log({ text });
+    // boxen
+    text = this.helper.boxen({ text: 'boxen test' });
+    await this.console.log({ text });
+    // table
+    const table = this.helper.newTable({
+      head: ['Name', 'Sex'],
+      colWidths: [20, 20],
+    });
+    table.push(['Tom', 'M']);
+    table.push(['Jane', 'F']);
+    await this.console.log({ text: 'table test' });
+    await this.console.log({ text: table.toString() });
+    // ok
+    return 'hello world';
+  }
+}
 `;
 
 @Local()
 export class LocalUtils extends BeanBase {
-  async demoExecute({ method, argv, cli }: any) {
+  async demoExecute({ method, argv, cli, user }: any) {
     // js file
     const jsFile = await this._prepareJSFile({ cli });
     // require
-    const DemoClass = this.ctx.app.meta.util.requireDynamic(jsFile);
+    const DemoClass = await import(jsFile);
     // demo
-    const demo = this.ctx.bean._newBean(DemoClass);
+    const context = { argv };
+    const demo = this.ctx.bean._newBean(DemoClass.default, { method, context });
     if (!demo[method]) throw new Error(`method not found: ${method}`);
-    // console/helper
-    demo.console = cli.console;
-    demo.helper = cli.helper;
     // execute
     const timeBegin = new Date();
     let result;
     if (argv.transaction === false) {
-      result = await demo[method](argv);
+      result = await demo[method]({ user });
     } else {
       result = await this.ctx.transaction.begin(async () => {
-        return await demo[method](argv);
+        return await demo[method]({ user });
       });
     }
     const timeEnd = new Date();
