@@ -7,7 +7,7 @@ const subModules = [
   'src/module/bz-login',
   'src/module/test-flow',
   'src/module/test-note',
-  'src/module/test-userpro-monkey',
+  'src/module/test-userpro',
   'src/suite/a-dingtalk',
   'src/suite/a-paypal',
   'src/suite/a-wechat',

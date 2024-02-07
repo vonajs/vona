@@ -318,7 +318,7 @@
           "test-note": {
             "scripts": ["gitCommit"]
           },
-          "test-userpro-monkey": {
+          "test-userpro": {
             "scripts": ["gitCommit"]
           },
           "a-paypal": {
@@ -353,7 +353,7 @@
           "bz-login",
           "test-flow",
           "test-note",
-          "test-userpro-monkey",
+          "test-userpro",
           "a-paypal",
           "a-wechat",
           "a-wxwork",

@@ -250,25 +250,30 @@ const utils = {
       contentOld = (await fse.readFile(fileTemplate)).toString();
     }
     const content = JSON.parse(contentOld);
-    let references = content.references;
+    const referencesOld = content.references;
     // remove old
-    references = references.filter(item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1));
+    const referencesNew = referencesOld.filter(
+      item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1),
+    );
     // append new
     // suites
-    const imports = [];
     for (const key in suites) {
       const suite = suites[key];
-      console.log(suite);
-      imports.push(`import '${suite.info.fullName}';`);
+      if (!suite.info.vendor) {
+        referencesNew.push({ path: `src/suite/${suite.info.relativeName}` });
+      }
     }
     // modules
     for (const key in modules) {
       const module = modules[key];
-      if (!module.suite) {
-        imports.push(`import '${module.info.fullName}';`);
+      if (!module.suite && !module.info.vendor) {
+        referencesNew.push({ path: `src/module/${module.info.relativeName}/tsconfig.build.json` });
       }
     }
-    console.log(references);
+    //
+    if (exists && JSON.stringify(referencesNew, null, 2) === JSON.stringify(referencesOld, null, 2)) return;
+    const contentNew = { ...content, references: referencesNew };
+    await fse.outputFile(fileConfig, JSON.stringify(contentNew, null, 2));
   },
   async prepareProjectAll() {
     const projectPath = this.getProjectDir();
