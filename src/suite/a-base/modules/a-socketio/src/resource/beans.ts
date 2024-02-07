@@ -7,7 +7,6 @@ export * from '../bean/middleware.io.packet.js';
 export * from '../bean/middleware.io.connection.js';
 export * from '../bean/broadcast.socketEmit.js';
 export * from '../bean/bean.io.js';
-export * from '../bean/virtual.ioMessageBase.js';
 
 import { BeanIo } from '../bean/bean.io.js';
 

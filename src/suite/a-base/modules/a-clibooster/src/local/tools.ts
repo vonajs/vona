@@ -7,7 +7,7 @@ export class LocalTools extends BeanBase<ScopeModule> {
     return this.scope.local.utils;
   }
 
-  async demo({ method, query }: any) {
+  async demo({ method, query, user }: any) {
     // methods
     const methods: any[] = [];
     if (method) {
@@ -28,6 +28,6 @@ export class LocalTools extends BeanBase<ScopeModule> {
       terminal: false,
     });
     // execute
-    return await this.localUtils.demoExecute({ method, argv, cli });
+    return await this.localUtils.demoExecute({ method, argv, cli, user });
   }
 }
