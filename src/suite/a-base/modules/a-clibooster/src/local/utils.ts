@@ -1,5 +1,5 @@
 import { Local, BeanBase } from '@cabloy/core';
-
+import { BeanCliBase } from 'cabloy-module-api-a-cli';
 import path from 'path';
 import fse from 'fs-extra';
 
@@ -46,14 +46,17 @@ export default class Demo extends BeanCliBase {
 
 @Local()
 export class LocalUtils extends BeanBase {
-  async demoExecute({ method, argv, cli, user }: any) {
+  async demoExecute({ method, argv, cli, user }: { method: string; argv; cli: BeanCliBase; user }) {
     // js file
     const jsFile = await this._prepareJSFile({ cli });
     // require
     const DemoClass = await import(jsFile);
     // demo
-    const context = { argv };
-    const demo = this.ctx.bean._newBean(DemoClass.default, { method, context });
+    const demo = this.ctx.bean._newBean(DemoClass.default, {
+      method,
+      context: { argv },
+      progressId: cli.options.progressId,
+    });
     if (!demo[method]) throw new Error(`method not found: ${method}`);
     // execute
     const timeBegin = new Date();

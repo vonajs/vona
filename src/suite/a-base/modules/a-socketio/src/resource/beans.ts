@@ -10,11 +10,9 @@ export * from '../bean/bean.io.js';
 export * from '../bean/virtual.ioMessageBase.js';
 
 import { BeanIo } from '../bean/bean.io.js';
-import { BeanIoMessageBase } from '../bean/virtual.ioMessageBase.js';
 
 declare module '@cabloy/core' {
   export interface IBeanRecord {
     io: BeanIo;
-    ioMessageBase: BeanIoMessageBase;
   }
 }
