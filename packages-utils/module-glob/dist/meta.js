@@ -10,6 +10,11 @@ exports.__pathSuites = [
         prefix: 'src/suite-vendor/',
         vendor: true,
     },
+    {
+        prefix: 'node_modules/cabloy-suite-api-',
+        vendor: true,
+        node_modules: true,
+    },
 ];
 exports.__pathsModules = [
     {

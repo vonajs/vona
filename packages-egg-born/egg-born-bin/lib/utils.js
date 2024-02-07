@@ -114,6 +114,10 @@ const utils = {
       return null;
     }
   },
+  getProjectMode() {
+    const cabloyPath = this.__getCabloyPath();
+    return cabloyPath.indexOf('packages-cabloy') > -1 ? 'source' : 'project';
+  },
   async versionCheckCabloy({ scene }) {
     try {
       // cabloy
@@ -123,7 +127,7 @@ const utils = {
       // moduleVersion
       const moduleVersion = _pkg.version;
       // mode
-      const mode = cabloyPath.indexOf('packages') > -1 ? 'lerna' : '';
+      const mode = this.getProjectMode();
       // versionCheck
       const moduleVersionCurrent = await this.versionCheck({ moduleName: 'cabloy', moduleVersion, scene, mode });
       if (!moduleVersionCurrent) return;
@@ -160,11 +164,14 @@ const utils = {
     return path.dirname(moduleFile);
   },
   __getCabloyPath() {
-    return eggBornUtils.tools._getCabloyPath(process.cwd());
+    const projectPath = this.getProjectDir();
+    const cabloyPath = path.join(projectPath, 'packages-cabloy/cabloy');
+    if (fse.existsSync(cabloyPath)) return cabloyPath;
+    return eggBornUtils.tools._getCabloyPath(projectPath);
   },
   getAppPackage() {
-    const cwd = process.cwd();
-    return require(path.join(cwd, 'package.json'));
+    const projectPath = this.getProjectDir();
+    return require(path.join(projectPath, 'package.json'));
   },
   loadEnvConfig({ baseDir, env }) {
     const fileConfigDefault = path.join(baseDir, 'config/config.default.js');
@@ -205,17 +212,8 @@ const utils = {
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
   },
-  async prepareProjectTypes() {
+  async prepareProjectTypes({ suites, modules }) {
     const projectPath = this.getProjectDir();
-    // glob
-    const { suites, modules } = await glob({
-      projectPath,
-      disabledModules: null,
-      disabledSuites: null,
-      log: false,
-      type: 'backend',
-      loadPackage: false,
-    });
     // suites
     const imports = [];
     for (const key in suites) {
@@ -238,8 +236,53 @@ const utils = {
     }
     await fse.outputFile(fileTypes, contentNew);
   },
+  async prepareProjectTsConfig({ suites, modules }) {
+    const projectPath = this.getProjectDir();
+    const mode = this.getProjectMode();
+    const fileTemplate = path.resolve(__dirname, `../template/_tsconfig_${mode}.json`);
+    const fileConfig = path.join(projectPath, 'tsconfig.json');
+    // content
+    let contentOld;
+    const exists = fse.existsSync(fileConfig);
+    if (exists) {
+      contentOld = (await fse.readFile(fileConfig)).toString();
+    } else {
+      contentOld = (await fse.readFile(fileTemplate)).toString();
+    }
+    const content = JSON.parse(contentOld);
+    let references = content.references;
+    // remove old
+    references = references.filter(item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1));
+    // append new
+    // suites
+    const imports = [];
+    for (const key in suites) {
+      const suite = suites[key];
+      console.log(suite);
+      imports.push(`import '${suite.info.fullName}';`);
+    }
+    // modules
+    for (const key in modules) {
+      const module = modules[key];
+      if (!module.suite) {
+        imports.push(`import '${module.info.fullName}';`);
+      }
+    }
+    console.log(references);
+  },
   async prepareProjectAll() {
-    await this.prepareProjectTypes();
+    const projectPath = this.getProjectDir();
+    // glob
+    const { suites, modules } = await glob({
+      projectPath,
+      disabledModules: null,
+      disabledSuites: null,
+      log: false,
+      type: 'backend',
+      loadPackage: false,
+    });
+    await this.prepareProjectTypes({ suites, modules });
+    await this.prepareProjectTsConfig({ suites, modules });
     await this.tsc();
   },
 };

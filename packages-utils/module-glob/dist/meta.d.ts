@@ -1,7 +1,12 @@
-export declare const __pathSuites: {
+export declare const __pathSuites: ({
     prefix: string;
     vendor: boolean;
-}[];
+    node_modules?: undefined;
+} | {
+    prefix: string;
+    vendor: boolean;
+    node_modules: boolean;
+})[];
 export declare const __pathsModules: ({
     prefix: string;
     vendor: boolean;

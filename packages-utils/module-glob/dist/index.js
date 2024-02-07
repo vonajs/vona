@@ -316,6 +316,7 @@ function __parseSuites(projectPath) {
                 continue;
             // info
             info.vendor = __path.vendor;
+            info.node_modules = __path.node_modules;
             // suite
             const root = path_1.default.dirname(filePkg);
             const suite = {
