@@ -42,7 +42,7 @@ export interface IModuleRouteMeta {
   gate?: IModuleMiddlewareGate;
 }
 export interface IModuleRoute {
-  // name?: string; not supported
+  name?: string;
   method: 'get' | 'post' | 'options';
   path: string | RegExp;
   controller?: string | { module: string; name: string };

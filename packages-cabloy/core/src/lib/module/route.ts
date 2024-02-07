@@ -17,8 +17,8 @@ export class AppRouter extends BeanSimple {
     const app = this.app;
     // args
     const args: any[] = [];
-    // name: not supported
-    // if (route.name) args.push(route.name);
+    // name:
+    const routeName = route.name;
     // path
     const routePath = typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path;
 
@@ -107,7 +107,11 @@ export class AppRouter extends BeanSimple {
     }
 
     // load
-    app.router[route.method](routePath, ...args);
+    if (routeName) {
+      app.router[route.method](routeName, routePath, ...args);
+    } else {
+      app.router[route.method](routePath, ...args);
+    }
   }
 
   unRegister(name) {
