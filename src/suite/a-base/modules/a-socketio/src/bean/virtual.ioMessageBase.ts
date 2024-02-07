@@ -1,6 +1,6 @@
 import { BeanBase, Virtual } from '@cabloy/core';
 
-@Virtual({ scene: 'bean' })
+@Virtual({ scene: 'local', name: 'ioMessageBase' })
 export class BeanIoMessageBase<T = unknown> extends BeanBase<T> {
   async onSessionId({ /* path,*/ message /* options*/ }: any) {
     const userIdFrom = message.userIdFrom;

@@ -15,6 +15,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
+  | 'local'
   | 'broadcast'
   | 'startup'
   | 'queue'
