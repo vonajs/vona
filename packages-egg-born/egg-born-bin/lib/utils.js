@@ -7,6 +7,7 @@ const boxen = require('boxen');
 const extend = require('@cabloy/extend').default;
 const eggBornUtils = require('egg-born-utils');
 const { ProcessHelper } = require('@cabloy/process-helper');
+const { glob } = require('@cabloy/module-glob');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
@@ -176,6 +177,12 @@ const utils = {
     const configEnv = require(fileConfigEnv)({});
     return extend(true, {}, configDefault, configEnv);
   },
+  getBaseDir() {
+    return path.join(process.cwd(), 'dist/backend');
+  },
+  getProjectDir() {
+    return process.cwd();
+  },
   combineTestPattern({ baseDir, env, pattern }) {
     // pattern
     if (!pattern || pattern.length === 0) {
@@ -198,7 +205,16 @@ const utils = {
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
   },
-  async prepareProjectTypes() {},
+  async prepareProjectTypes() {
+    const { suites, modules, modulesArray } = await glob({
+      projectPath: process.cwd(),
+      disabledModules: app.config.disabledModules,
+      disabledSuites: app.config.disabledSuites,
+      log: !!app.meta.inAgent,
+      type: 'backend',
+      loadPackage: true,
+    });
+  },
   async prepareProjectAll() {
     await this.prepareProjectTypes();
     await this.tsc();

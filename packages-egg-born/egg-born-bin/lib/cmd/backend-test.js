@@ -1,4 +1,3 @@
-const path = require('path');
 const TestCommand = require('@zhennann/egg-bin').TestCommand;
 const utils = require('../utils.js');
 
@@ -26,7 +25,7 @@ class BackendTestCommand extends TestCommand {
     context.argv.mochawesome = false;
 
     // baseDir
-    const baseDir = path.join(process.cwd(), 'dist/backend');
+    const baseDir = utils.getBaseDir();
     // env
     context.env.EGG_BASE_DIR = baseDir;
     context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');

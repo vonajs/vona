@@ -1,4 +1,3 @@
-const path = require('path');
 const CovCommand = require('@zhennann/egg-bin').CovCommand;
 const utils = require('../utils.js');
 
@@ -29,7 +28,7 @@ class BackendCovCommand extends CovCommand {
       '--temp-directory ./node_modules/.c8_output -o ./coverage -n src/**/src/**/*.ts -r text-summary -r json-summary -r json -r lcov -r cobertura';
 
     // baseDir
-    const baseDir = path.join(process.cwd(), 'dist/backend');
+    const baseDir = utils.getBaseDir();
     // env
     context.env.EGG_BASE_DIR = baseDir;
     context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
