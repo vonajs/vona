@@ -16,11 +16,11 @@ export class AppRouter extends BeanSimple {
     // app
     const app = this.app;
     // args
-    const args = [] as any;
-    // name
-    if (route.name) args.push(route.name);
+    const args: any[] = [];
+    // name: not supported
+    // if (route.name) args.push(route.name);
     // path
-    args.push(typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path);
+    const routePath = typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path;
 
     // route
     const _route = {
@@ -85,7 +85,7 @@ export class AppRouter extends BeanSimple {
     // middlewares: route
     if (route.middlewares) {
       let middlewares = route.middlewares;
-      if (is.string(middlewares)) middlewares = middlewares.split(',');
+      if (typeof middlewares === 'string') middlewares = middlewares.split(',');
       middlewares.forEach(key => {
         if (is.string(key)) {
           const item = app.meta.middlewaresNormal[key];
@@ -107,7 +107,7 @@ export class AppRouter extends BeanSimple {
     }
 
     // load
-    app.router[route.method](...args);
+    app.router[route.method](routePath, ...args);
   }
 
   unRegister(name) {
