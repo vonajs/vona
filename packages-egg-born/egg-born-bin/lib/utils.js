@@ -206,14 +206,28 @@ const utils = {
     return pattern;
   },
   async prepareProjectTypes() {
-    const { suites, modules, modulesArray } = await glob({
+    // glob
+    const { suites, modules } = await glob({
       projectPath: process.cwd(),
-      disabledModules: app.config.disabledModules,
-      disabledSuites: app.config.disabledSuites,
-      log: !!app.meta.inAgent,
+      disabledModules: null,
+      disabledSuites: null,
+      log: false,
       type: 'backend',
-      loadPackage: true,
+      loadPackage: false,
     });
+    // suites
+    const imports = [];
+    for (const key in suites) {
+      const suite = suites[key];
+      imports.push(`import '${suite.info.fullName}';`);
+    }
+    // modules
+    for (const key in modules) {
+      const module = modules[key];
+      console.log(module);
+      // if(module.suite)
+    }
+    console.log(imports);
   },
   async prepareProjectAll() {
     await this.prepareProjectTypes();

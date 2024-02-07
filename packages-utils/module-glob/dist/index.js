@@ -74,6 +74,9 @@ async function glob(options) {
     if (type === 'backend' && loadPackage !== false) {
         __orderModules(context, modules);
     }
+    else {
+        context.modules = modules;
+    }
     // log
     __logModules(context, log);
     __logSuites(context, log);
