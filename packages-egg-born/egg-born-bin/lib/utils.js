@@ -206,9 +206,10 @@ const utils = {
     return pattern;
   },
   async prepareProjectTypes() {
+    const projectPath = this.getProjectDir();
     // glob
     const { suites, modules } = await glob({
-      projectPath: process.cwd(),
+      projectPath,
       disabledModules: null,
       disabledSuites: null,
       log: false,
@@ -224,10 +225,18 @@ const utils = {
     // modules
     for (const key in modules) {
       const module = modules[key];
-      console.log(module);
-      // if(module.suite)
+      if (!module.suite) {
+        imports.push(`import '${module.info.fullName}';`);
+      }
     }
-    console.log(imports);
+    // types.d.mts
+    const fileTypes = path.join(projectPath, 'src/backend/config/types.d.mts');
+    const contentNew = `${imports.join('\n')}\n`;
+    if (fse.existsSync(fileTypes)) {
+      const contentOld = (await fse.readFile(fileTypes)).toString();
+      if (contentNew === contentOld) return;
+    }
+    await fse.outputFile(fileTypes, contentNew);
   },
   async prepareProjectAll() {
     await this.prepareProjectTypes();
