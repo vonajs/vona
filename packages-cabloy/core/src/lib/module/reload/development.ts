@@ -79,14 +79,18 @@ export default function (app: CabloyApplication) {
   // invoked in agent
   async function _developmentChange(info) {
     info = info.replace(/\\/g, '/');
-    if (path.extname(info) !== '.ts') return;
+    // extname
+    const extname = path.extname(info);
+    if (!['.ts', '.mts'].includes(extname)) return;
     // log
     app.logger.warn(`[agent:development] reload worker because ${info} changed`);
     // tsc
-    const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/core'];
-    if (__pathes.some(item => info.indexOf(item) > -1)) {
-      const processHelper = new ProcessHelper();
-      await processHelper.tsc();
+    if (extname !== '.mts') {
+      const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/core'];
+      if (__pathes.some(item => info.indexOf(item) > -1)) {
+        const processHelper = new ProcessHelper();
+        await processHelper.tsc();
+      }
     }
     // reload
     app.meta.reload.now();
