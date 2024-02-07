@@ -8,7 +8,7 @@ export class ModuleTools extends BeanSimple {
   async prepare(): Promise<Record<string, IModule>> {
     const app = this.app;
     // all modules
-    const { suites, modules, modulesArray, modulesMonkey } = await glob({
+    const { suites, modules, modulesArray } = await glob({
       projectPath: path.join(app.options.baseDir, '../..'),
       disabledModules: app.config.disabledModules,
       disabledSuites: app.config.disabledSuites,
@@ -19,7 +19,7 @@ export class ModuleTools extends BeanSimple {
     app.meta.suites = suites;
     app.meta.modules = modules;
     app.meta.modulesArray = modulesArray;
-    app.meta.modulesMonkey = modulesMonkey;
+    app.meta.modulesMonkey = {};
     // app monkey
     const pathAppMonkey = path.resolve(app.options.baseDir, 'config/monkey.js');
     if (fse.existsSync(pathAppMonkey)) {
@@ -46,17 +46,14 @@ export class ModuleTools extends BeanSimple {
       const module = app.meta.modulesArray[i];
       module.resource = modulesResource[i];
     }
-    // 2. main
+    // 2. main / monkey
     for (const module of app.meta.modulesArray) {
       if (module.resource.Main) {
         module.mainInstance = app.bean._newBean(module.resource.Main);
       }
-    }
-    // 3. monkey
-    for (const key in app.meta.modulesMonkey) {
-      const moduleMonkey = app.meta.modulesMonkey[key];
-      if (moduleMonkey.resource.Monkey) {
-        moduleMonkey.monkeyInstance = app.bean._newBean(moduleMonkey.resource.Monkey);
+      if (module.resource.Monkey) {
+        module.monkeyInstance = app.bean._newBean(module.resource.Monkey);
+        app.meta.modulesMonkey[module.info.relativeName] = module;
       }
     }
   }
