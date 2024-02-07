@@ -5,6 +5,7 @@ export * from './config/index.js';
 export * from './resource/index.js';
 export * from './meta.js';
 export * from './routes.js';
+export * from './types.js';
 
 export class Main extends BeanBase implements IModuleMain {
   async moduleLoading(_module: IModule) {}
@@ -18,4 +19,4 @@ export class Main extends BeanBase implements IModuleMain {
   async metaLoaded(_module: IModule, _meta) {}
 }
 
-import './types.js';
+import './typings.js';
