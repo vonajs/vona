@@ -9,7 +9,7 @@ class BackendCovCommand extends CovCommand {
   }
 
   async run(context) {
-    await utils.tsc();
+    await utils.prepareProjectAll();
 
     context.argv.timeout = 0;
     context.argv.exit = true;

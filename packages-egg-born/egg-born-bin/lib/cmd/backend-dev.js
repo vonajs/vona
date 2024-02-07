@@ -36,7 +36,7 @@ class BackendDevCommand extends DevCommand {
   }
 
   async run(context) {
-    await utils.tsc();
+    await utils.prepareProjectAll();
 
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');

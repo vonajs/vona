@@ -198,5 +198,10 @@ const utils = {
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
   },
+  async prepareProjectTypes() {},
+  async prepareProjectAll() {
+    await this.prepareProjectTypes();
+    await this.tsc();
+  },
 };
 module.exports = utils;
