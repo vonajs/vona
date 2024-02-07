@@ -1,4 +1,4 @@
-import Bundle from 'egg-mock/bootstrap.js';
+import _Bundle from 'egg-mock/bootstrap.js';
 import { CabloyApplication, CabloyContext, Cast } from '@cabloy/core';
 import Assert from 'assert';
 import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
@@ -9,8 +9,9 @@ export interface MockCabloyApplication extends TypeMockCabloyApplication<CabloyA
 
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
-if (global.__egg_born_mock === undefined) {
-  global.__egg_born_mock = true;
+let Bundle = global.__egg_born_mock;
+if (!Bundle) {
+  Bundle = global.__egg_born_mock = _Bundle;
 
   before(async function () {
     const app = Cast<CabloyApplication>(Bundle.app);
