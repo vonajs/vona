@@ -122,7 +122,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
         middlewares: middlewaresPost,
         meta: { auth: { enable: false } },
       },
-    ];
+    ] as const;
     for (const route of routes) {
       this.ctx.app.meta.router.unRegister(route.name);
       this.ctx.app.meta.router.register(__ThisModule__, route);

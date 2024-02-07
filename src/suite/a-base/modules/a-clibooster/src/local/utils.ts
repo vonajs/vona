@@ -75,13 +75,13 @@ export class LocalUtils extends BeanBase {
 
   async _prepareJSFile({ cli }: any) {
     // prepare
-    const jsFile = path.join(this.ctx.app.baseDir, 'demo/index.js');
+    const jsFile = path.join(process.cwd(), 'src/backend/demo/index.mts');
     const exists = await fse.exists(jsFile);
     if (!exists) {
       await fse.outputFile(jsFile, __JSContent);
     }
     // log
-    let log = cli.helper.chalk.keyword('cyan')('> ./src/backend/demo/index.js');
+    let log = cli.helper.chalk.keyword('cyan')('> ./src/backend/demo/index.mts');
     await cli.console.log(log);
     const url = this.ctx.bean.base.getAbsoluteUrl('/api/a/clibooster/tools/demo');
     log = cli.helper.chalk.keyword('cyan')(`> ${url}\n`);
