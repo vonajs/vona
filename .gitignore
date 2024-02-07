@@ -25,6 +25,8 @@ miniprogram_npm
 # should pre-compiled 
 !packages-utils/extend/dist
 !packages-utils/process-helper/dist
+!packages-utils/module-glob/dist
+!packages-utils/module-info/dist
 
 /docker-compose
 !/docker-compose/config

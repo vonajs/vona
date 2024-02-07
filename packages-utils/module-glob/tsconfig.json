@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.cjs.json",
   "compilerOptions": {
+    "composite": false,
     "rootDir": "src",
     "outDir": "dist"
   },
