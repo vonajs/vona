@@ -45,13 +45,13 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
     return this.options.context;
   }
 
-  async meta(/* { user } */ _params: any) {
+  async meta(/* { user } */ _params: any): Promise<any> {
     await this._loadCabloyConfig();
     const metaLocale = this._commandMeta();
     return metaLocale;
   }
 
-  async execute(/* { user } */ _params: any) {
+  async execute(/* { user } */ _params: any): Promise<any> {
     await this._loadCabloyConfig();
   }
 

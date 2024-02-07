@@ -11,12 +11,12 @@ export default class Demo extends BeanCliBase {
   async execute({ user }) {
     await super.execute({ user });
     await this.argv({ user });
-    await this.print();
+    return await this.print();
   }
 
   // npm run cli :tools:demo argv
   async argv({ user }) {
-    await this.console.log({ text: user.id });
+    await this.console.log({ text: user.userName });
   }
 
   // npm run cli :tools:demo print
