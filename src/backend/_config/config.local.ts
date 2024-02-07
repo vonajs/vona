@@ -1,6 +1,6 @@
 import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
 
-module.exports = (appInfo: CabloyAppInfo) => {
+export default function (appInfo: CabloyAppInfo) {
   const config = {} as CabloyConfigOptional;
 
   // keys
@@ -45,4 +45,4 @@ module.exports = (appInfo: CabloyAppInfo) => {
   };
 
   return config;
-};
+}
