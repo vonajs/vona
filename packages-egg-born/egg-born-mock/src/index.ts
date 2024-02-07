@@ -1,7 +1,10 @@
 import Bundle from 'egg-mock/bootstrap.js';
-import { CabloyApplication, Cast } from '@cabloy/core';
+import { CabloyApplication, CabloyContext, Cast } from '@cabloy/core';
 import Assert from 'assert';
 import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
+import { BaseMockApplication } from 'egg-mock';
+export interface MockCabloyApplication extends BaseMockApplication<CabloyApplication, CabloyContext> {}
+
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
 if (global.__egg_born_mock === undefined) {
@@ -25,12 +28,13 @@ if (global.__egg_born_mock === undefined) {
 }
 
 export const assert = Assert;
-export const app = Cast<CabloyApplication>(Bundle.app);
+export const app = Cast<MockCabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
 export const mm = Bundle.mm;
 
 export function mockUrl(url, apiPrefix = true) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
+  const app = Cast<CabloyApplication>(Bundle.app);
   return app.meta.mockUtil.mockUrl(moduleInfo, url, apiPrefix);
 }
 export function mockInfo(): IModuleInfo {
