@@ -7,7 +7,7 @@ export const routes: IModuleRoute[] = [
     controller: 'tools',
     action: 'demo',
     meta: {
-      right: { type: 'resource', module: 'a-clibooster', name: 'cliTools' },
+      // right: { type: 'resource', module: 'a-clibooster', name: 'cliTools' },
       gate: { env: 'local' },
     },
   },
