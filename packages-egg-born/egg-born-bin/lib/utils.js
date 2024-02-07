@@ -185,15 +185,15 @@ const utils = {
     const configEnv = this.loadEnvConfig({ baseDir, env });
     const disabledModules = configEnv.disabledModules || [];
     for (const relativeName of disabledModules) {
-      pattern.push(`!src/**/${relativeName}/test/**/*.test.js`);
+      pattern.push(`!src/**/${relativeName}/test/**/*.test.ts`);
     }
     // disabledSuites
     const disabledSuites = configEnv.disabledSuites || [];
     for (const relativeName of disabledSuites) {
-      pattern.push(`!src/**/${relativeName}/modules/*/test/**/*.test.js`);
+      pattern.push(`!src/**/${relativeName}/modules/*/test/**/*.test.ts`);
     }
     // cli templates
-    pattern.push('!src/**/cli/templates/**/*.test.js');
+    pattern.push('!src/**/cli/templates/**/*.test.ts');
     // expand glob
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
