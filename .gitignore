@@ -22,6 +22,9 @@ miniprogram_npm
 
 # package-lock.json
 
+# auto created
+/tsconfig.json
+
 # should pre-compiled 
 !packages-utils/extend/dist
 !packages-utils/process-helper/dist
