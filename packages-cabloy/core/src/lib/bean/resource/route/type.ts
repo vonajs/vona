@@ -42,9 +42,10 @@ export interface IModuleRouteMeta {
   gate?: IModuleMiddlewareGate;
 }
 export interface IModuleRoute {
+  name?: string;
   method: 'get' | 'post' | 'options';
   path: string | RegExp;
-  controller?: string;
+  controller?: string | { module: string; name: string };
   action?: string;
   middlewares?: string | string[];
   meta?: IModuleRouteMeta;

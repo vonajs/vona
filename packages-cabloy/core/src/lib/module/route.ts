@@ -2,12 +2,13 @@ import is from 'is-type-of';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
-import { CabloyApplication, CabloyContext, IModule } from '../../types/index.js';
+import { CabloyApplication, CabloyContext, Cast, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { IModuleRoute } from '../bean/index.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
 export class AppRouter extends BeanSimple {
-  register(info, route) {
+  register(info, route: IModuleRoute) {
     // info
     if (typeof info === 'string') {
       info = ModuleInfo.parseInfo(info);
@@ -21,27 +22,34 @@ export class AppRouter extends BeanSimple {
     // path
     args.push(typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path);
 
+    // route
+    const _route = {
+      pid: info.pid,
+      module: info.name,
+      controller: route.controller,
+      controllerBeanFullName: '',
+      action: '',
+      route,
+    };
     // constroller
-    let controllerBeanFullName;
-    let _route;
     if (route.controller) {
       if (is.function(route.controller)) {
-        throw new Error(`Controller should be bean: ${info.relativeName}.${route.controller(app).name}`);
+        throw new Error(`Controller should be bean: ${info.relativeName}.${Cast(route.controller)(app).name}`);
       }
+      let controllerBeanFullName;
       if (typeof route.controller === 'string') {
         controllerBeanFullName = `${info.relativeName}.controller.${route.controller}`;
       } else {
         controllerBeanFullName = `${route.controller.module || info.relativeName}.controller.${route.controller.name}`;
       }
-      // _route
-      _route = {
-        pid: info.pid,
-        module: info.name,
-        controller: route.controller,
-        action: route.action || route.path.substr(route.path.lastIndexOf('/') + 1),
-        route,
-      };
+      _route.controllerBeanFullName = controllerBeanFullName;
     }
+    // action
+    let action = route.action;
+    if (!action && typeof route.path === 'string') {
+      action = route.path.substring(route.path.lastIndexOf('/') + 1);
+    }
+    _route.action = action || '';
 
     // middlewares: start
     const fnStart = async (ctx, next) => {
@@ -95,7 +103,7 @@ export class AppRouter extends BeanSimple {
     // controller
     if (route.controller) {
       // middleware controller
-      args.push(methodToMiddleware(controllerBeanFullName, _route));
+      args.push(methodToMiddleware(_route.controllerBeanFullName, _route));
     }
 
     // load
