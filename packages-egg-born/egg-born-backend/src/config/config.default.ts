@@ -325,9 +325,10 @@ function getFullPath(ctx, dir, filename, _options) {
   const moduleRelativeName = `${wordFirst}-${parts.shift()}`;
   const module = ctx.app.meta.modules[moduleRelativeName];
   if (!module) return null;
-  const fullPath = path.normalize(path.join(module.static.backend, parts.join(path.sep)));
+  const staticPath = path.join(module.root, 'static');
+  const fullPath = path.normalize(path.join(staticPath, parts.join(path.sep)));
   // files that can be accessd should be under options.dir
-  if (fullPath.indexOf(module.static.backend) !== 0) return null;
+  if (fullPath.indexOf(staticPath) !== 0) return null;
   return fullPath;
 }
 

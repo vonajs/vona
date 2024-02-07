@@ -48,7 +48,7 @@ export class LocalTemplate extends BeanBase {
 
   resolvePath({ moduleName, path: _path }: any) {
     const module = this.helper.findModule(moduleName);
-    return path.join(module.root, 'backend/cli/templates', _path);
+    return path.join(module.root, 'cli/templates', _path);
   }
 
   async renderBoilerplateAndSnippets({ targetDir, moduleName, snippetsPath, boilerplatePath }: any) {
