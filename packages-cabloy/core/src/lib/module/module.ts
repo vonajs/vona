@@ -23,18 +23,13 @@ export class ModuleTools extends BeanSimple {
     // app monkey
     let pathAppMonkey;
     if (app.meta.isTest || app.meta.isLocal) {
-      pathAppMonkey = path.resolve(process.cwd(), 'src/backend/config/monkey.mjs');
+      pathAppMonkey = path.resolve(process.cwd(), 'src/backend/config/monkey.mts');
     } else {
-      pathAppMonkey = path.resolve(app.options.baseDir, 'config/monkey.js');
+      pathAppMonkey = path.resolve(app.options.baseDir, 'config/monkey.mjs');
     }
     if (fse.existsSync(pathAppMonkey)) {
-      let AppMonkey;
-      if (app.meta.isTest || app.meta.isLocal) {
-        AppMonkey = await import(pathAppMonkey);
-      } else {
-        AppMonkey = require(pathAppMonkey);
-      }
-      app.meta.appMonkey = app.bean._newBean(AppMonkey);
+      const AppMonkey = await import(pathAppMonkey);
+      app.meta.appMonkey = app.bean._newBean(AppMonkey.Monkey);
     }
     return modules;
   }
