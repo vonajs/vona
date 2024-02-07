@@ -56,6 +56,7 @@ export class LocalUtils extends BeanBase {
       method,
       context: { argv },
       progressId: cli.options.progressId,
+      terminal: false,
     });
     if (!demo[method]) throw new Error(`method not found: ${method}`);
     // execute
