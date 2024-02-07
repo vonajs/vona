@@ -1,5 +1,7 @@
-module.exports = appInfo => {
-  const config = {};
+import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
+
+module.exports = (appInfo: CabloyAppInfo) => {
+  const config = {} as CabloyConfigOptional;
 
   // keys
   config.keys = appInfo.name + '_1596889047267_3245';
