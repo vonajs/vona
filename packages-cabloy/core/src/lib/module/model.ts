@@ -21,7 +21,7 @@ export default function (app: CabloyApplication) {
 
   function createModelContainer(context, relativeName) {
     // base
-    const modelContainer = context.bean._newBean(BeanModelBase, { table: null });
+    const modelContainer = context.bean._newBean(BeanModelBase);
     // module
     modelContainer.__ebCacheModule = new Map();
     modelContainer.module = function (moduleName) {

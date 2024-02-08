@@ -8,6 +8,9 @@ export class BeanBase<TScopeModule = unknown> extends BeanSimple {
 
   constructor(moduleBelong?: string) {
     super();
+    if (moduleBelong && typeof moduleBelong !== 'string') {
+      throw new Error(`moduleBelong not valid: ${moduleBelong}`);
+    }
     this.__moduleBelong__ = moduleBelong;
   }
 
