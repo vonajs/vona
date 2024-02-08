@@ -46,7 +46,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     }
     if (!flowTask) {
       if (throwError) {
-        this.ctx.throw.module(__ThisModule__, 1001, flowTaskId);
+        this.scope.error.TaskNotFound__.throw(flowTaskId);
       } else {
         return null;
       }

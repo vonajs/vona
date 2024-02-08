@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 import VarsFn from '../../common/vars.js';
@@ -8,7 +8,7 @@ import { LocalFlowListener } from '../local.flow.listener.js';
 import { LocalFlowNode } from '../local.flow.node.js';
 import { LocalFlowEdge } from '../local.flow.edge.js';
 
-export class LocalFlowFlow0 extends BeanBase {
+export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   context: LocalContextFlow;
   _flowListener: LocalFlowListener;
 
@@ -25,22 +25,22 @@ export class LocalFlowFlow0 extends BeanBase {
   }
 
   get modelAtom() {
-    return this.ctx.model.module('a-base').atom;
+    return this.getScope('a-base').model.atom;
   }
   get modelFlow() {
-    return this.ctx.model.module(__ThisModule__).flow;
+    return this.scope.model.flow;
   }
   get modelFlowHistory() {
-    return this.ctx.model.module(__ThisModule__).flowHistory;
+    return this.scope.model.flowHistory;
   }
   get modelFlowNode() {
-    return this.ctx.model.module(__ThisModule__).flowNode;
+    return this.scope.model.flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.ctx.model.module(__ThisModule__).flowNodeHistory;
+    return this.scope.model.flowNodeHistory;
   }
   get constant() {
-    return this.ctx.constant.module(__ThisModule__);
+    return this.scope.constant;
   }
 
   async start({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
@@ -198,7 +198,7 @@ export class LocalFlowFlow0 extends BeanBase {
 
   async _loadNodeInstance({ flowNode, history }: any) {
     const nodeDef = this._findNodeDef({ nodeDefId: flowNode.flowNodeDefId });
-    if (!nodeDef) this.ctx.throw.module(__ThisModule__, 1005, flowNode.flowNodeDefId);
+    if (!nodeDef) this.scope.error.FlowNodeDefinitionNotFound__.throw(flowNode.flowNodeDefId);
     const node = this._createNodeInstance2({ nodeDef });
     await node._load({ flowNode, history });
     return node;

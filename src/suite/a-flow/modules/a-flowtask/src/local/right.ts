@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
-export class LocalRight extends BeanBase {
+export class LocalRight extends BeanBase<ScopeModule> {
   get modelFlowTask() {
-    return this.ctx.model.module(__ThisModule__).flowTask;
+    return this.scope.model.flowTask;
   }
   _check_specificFlag_normal({ flowTask }: any) {
     if (flowTask.specificFlag === 1 || flowTask.specificFlag === 2) this.ctx.throw(403);
@@ -22,28 +22,28 @@ export class LocalRight extends BeanBase {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // must be the same user
     if (user && user.id !== 0 && user.id !== flowTask.userIdAssignee) {
-      this.ctx.throw.module(__ThisModule__, 1002, flowTaskId);
+      this.scope.error.TaskCannotBeAccessed__.throw(flowTaskId);
     }
   }
   _check_notDone({ flowTask }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // not complete
     if (flowTask.flowTaskStatus === 1) {
-      this.ctx.throw.module(__ThisModule__, 1005, flowTaskId);
+      this.scope.error.TaskHasBeenHandled__.throw(flowTaskId);
     }
   }
   _check_notDoneAndHandled({ flowTask }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // not complete and not handled
     if (flowTask.flowTaskStatus === 1 || flowTask.handleStatus !== 0) {
-      this.ctx.throw.module(__ThisModule__, 1005, flowTaskId);
+      this.scope.error.TaskHasBeenHandled__.throw(flowTaskId);
     }
   }
   _check_claimed({ flowTask }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
     // timeClaimed first
     if (!flowTask.timeClaimed) {
-      this.ctx.throw.module(__ThisModule__, 1004, flowTaskId);
+      this.scope.error.TaskShouldBeClaimedFirst__.throw(flowTaskId);
     }
   }
   async _getNodeOptionsTask({ getOptions, flowTask, nodeInstance }: any) {
@@ -73,7 +73,7 @@ export class LocalRight extends BeanBase {
     this._check_sameUser({ flowTask, user });
     // more check
     if (flowNodeType !== 'startEventAtom' || flowTask.flowTaskStatus !== 1 || flowTask.handleRemark) {
-      this.ctx.throw.module(__ThisModule__, 1011, flowTaskId);
+      this.scope.error.TaskHandleRemarkCannotBeAppended__.throw(flowTaskId);
     }
   }
   async assignees({ flowTask, user }: any) {
@@ -106,7 +106,7 @@ export class LocalRight extends BeanBase {
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     // check if allowCancelFlow
     if (!options.allowCancelFlow) {
-      this.ctx.throw.module(__ThisModule__, 1010, flowTaskId);
+      this.scope.error.FlowCannotBeCancelled__.throw(flowTaskId);
     }
   }
   async claim({ flowTask, user }: any) {
@@ -115,7 +115,7 @@ export class LocalRight extends BeanBase {
     // not complete
     this._check_notDoneAndHandled({ flowTask });
     // check: not throw error
-    // if (flowTask.timeClaimed) this.ctx.throw.module(__ThisModule__, 1003, flowTaskId);
+    // if (flowTask.timeClaimed) this.scope.error.TaskHasBeenClaimed__.throw(flowTaskId);
     if (flowTask.timeClaimed) {
       return { timeClaimed: flowTask.timeClaimed };
     }

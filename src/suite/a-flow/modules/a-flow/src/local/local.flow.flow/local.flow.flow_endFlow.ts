@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowFlowAssignees } from './local.flow.flow_assignees.js';
 import { LocalFlowFlowMessage } from './local.flow.flow_message.js';
 
@@ -13,7 +12,7 @@ export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
     const timeEnd = new Date();
     // check if end
     if (this.context._flow.flowStatus === flowStatus) {
-      this.ctx.throw.module(__ThisModule__, 1008, flowId);
+      this.scope.error.FlowCompleted__.throw(flowId);
     }
     // handle atom
     await this._endFlow_handleAtom(options);
