@@ -1,4 +1,3 @@
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlow0 } from './bean.flow_0.js';
 
 const __VARTITLES = {
@@ -85,7 +84,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
       } else if (isNaN(item)) {
         // string
         const role = await this.ctx.bean.role.parseRoleName({ roleName: item });
-        if (!role) this.ctx.throw.module(__ThisModule__, 1007, item);
+        if (!role) this.scope.error.RoleNotFound__.throw(item);
         arr.push(role.id);
       } else {
         // number

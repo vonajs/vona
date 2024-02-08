@@ -1,22 +1,21 @@
-import { LocalProcedure } from '../../local/procedure.js';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
-export class BeanFlow0 extends BeanBase {
+export class BeanFlow0 extends BeanBase<ScopeModule> {
   get modelFlow() {
-    return this.ctx.model.module(__ThisModule__).flow;
+    return this.scope.model.flow;
   }
   get modelFlowHistory() {
-    return this.ctx.model.module(__ThisModule__).flowHistory;
+    return this.scope.model.flowHistory;
   }
   get modelFlowNode() {
-    return this.ctx.model.module(__ThisModule__).flowNode;
+    return this.scope.model.flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.ctx.model.module(__ThisModule__).flowNodeHistory;
+    return this.scope.model.flowNodeHistory;
   }
 
   get sqlProcedure() {
-    return this.ctx.bean._getBean(LocalProcedure);
+    return this.scope.local.procedure;
   }
 }

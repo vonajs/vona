@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowAssignees } from './bean.flow_assignees.js';
 import { BeanFlowStart } from './bean.flow_start.js';
 
@@ -17,7 +16,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     }
     if (!flow) {
       if (throwError) {
-        this.ctx.throw.module(__ThisModule__, 1003, flowId);
+        this.scope.error.FlowNotFound__.throw(flowId);
       } else {
         return null;
       }
@@ -27,7 +26,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
       flowDefKey: flow.flowDefKey,
       flowDefRevision: flow.flowDefRevision,
     });
-    if (!flowDef) this.ctx.throw.module(__ThisModule__, 1001, flow.flowDefId);
+    if (!flowDef) this.scope.error.FlowDefinitionNotFound__.throw(flow.flowDefId);
     // not check atomDisabled
     // flowInstance
     const flowInstance = Cast<BeanFlowStart>(this)._createFlowInstance({ flowDef });
@@ -50,7 +49,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     }
     if (!flowNode) {
       if (throwError) {
-        this.ctx.throw.module(__ThisModule__, 1004, flowNodeId);
+        this.scope.error.FlowNodeNotFound__.throw(flowNodeId);
       } else {
         return null;
       }
