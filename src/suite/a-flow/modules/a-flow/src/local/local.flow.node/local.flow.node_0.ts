@@ -1,5 +1,5 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 import VarsFn from '../../common/vars.js';
@@ -15,7 +15,7 @@ const __behaviorBaseDef = {
   type: 'base',
 };
 
-export class LocalFlowNode0 extends BeanBase {
+export class LocalFlowNode0 extends BeanBase<ScopeModule> {
   // contextEdge maybe null
   flowInstance: any;
   context: LocalContextFlow;
@@ -45,16 +45,16 @@ export class LocalFlowNode0 extends BeanBase {
   }
 
   get modelFlow() {
-    return this.ctx.model.module(__ThisModule__).flow;
+    return this.scope.model.flow;
   }
   get modelFlowHistory() {
-    return this.ctx.model.module(__ThisModule__).flowHistory;
+    return this.scope.model.flowHistory;
   }
   get modelFlowNode() {
-    return this.ctx.model.module(__ThisModule__).flowNode;
+    return this.scope.model.flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.ctx.model.module(__ThisModule__).flowNodeHistory;
+    return this.scope.model.flowNodeHistory;
   }
   get behaviors() {
     if (!this._behaviors) {
