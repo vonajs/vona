@@ -15,7 +15,7 @@ export class LocalDashboard extends BeanBase {
   }
 
   async itemByKey({ atomStaticKey, user }: any) {
-    if (!atomStaticKey) return this.ctx.throw.module('a-base', 1002);
+    if (!atomStaticKey) return this.getScope('a-base').error.ElementDoesNotExist.throw();
     // get atomId
     const atomClass = await this.ctx.bean.atomClass.get(this.atomClass);
     const atom = await this.ctx.bean.atom.modelAtom.get({
@@ -23,7 +23,7 @@ export class LocalDashboard extends BeanBase {
       atomStaticKey,
       atomStage: 1,
     });
-    if (!atom) return this.ctx.throw.module('a-base', 1002);
+    if (!atom) return this.getScope('a-base').error.ElementDoesNotExist.throw();
     const atomId = atom.id;
     // check resource right
     const res = await this.ctx.bean.resource.checkRightResource({ resourceAtomId: atomId, user });

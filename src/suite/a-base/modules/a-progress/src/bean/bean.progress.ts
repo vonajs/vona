@@ -1,12 +1,12 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanProgress extends BeanModuleScopeBase {
+export class BeanProgress extends BeanModuleScopeBase<ScopeModule> {
   _redis: any;
 
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   get redis() {
@@ -75,12 +75,12 @@ export class BeanProgress extends BeanModuleScopeBase {
     if (!item) {
       // same as abort
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(__ThisModule__, 1001);
+      this.scope.error.OperationAborted.throw();
     }
     // abort
     if (item.abort) {
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(__ThisModule__, 1001);
+      this.scope.error.OperationAborted.throw();
     }
     // data
     const data = item.data || [];
@@ -115,7 +115,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     if (!item) {
       // same as abort
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(__ThisModule__, 1001);
+      this.scope.error.OperationAborted.throw();
     }
     // data
     const data = { message };
@@ -148,7 +148,7 @@ export class BeanProgress extends BeanModuleScopeBase {
     if (!item) {
       // same as abort
       // 1001: 'Operation Aborted',
-      this.ctx.throw.module(__ThisModule__, 1001);
+      this.scope.error.OperationAborted.throw();
     }
     // data
     const data = { message };

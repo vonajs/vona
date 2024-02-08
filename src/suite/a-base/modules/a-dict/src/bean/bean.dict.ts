@@ -158,7 +158,7 @@ export class BeanDict extends BeanModuleScopeBase {
     if (!returnDict) return true;
     // read
     const dict = await this.ctx.bean.atom.read({ key: { atomId } });
-    if (!dict) return this.ctx.throw.module('a-base', 1002);
+    if (!dict) return this.getScope('a-base').error.ElementDoesNotExist.throw();
     // ok
     return dict;
   }
