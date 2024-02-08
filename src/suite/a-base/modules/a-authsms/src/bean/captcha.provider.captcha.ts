@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import chalk from 'chalk';
@@ -13,7 +13,7 @@ const boxenOptions: boxen.Options = {
 } as boxen.Options;
 
 @Bean({ scene: 'captcha.provider' })
-export class CaptchaProviderCaptcha extends BeanBase {
+export class CaptchaProviderCaptcha extends BeanBase<ScopeModule> {
   async verify(_context) {
     const { providerInstanceId, context, data, dataInput } = _context;
     // sms provider
@@ -35,9 +35,9 @@ export class CaptchaProviderCaptcha extends BeanBase {
       }
       if (!providerName) {
         // prompt
-        const message = chalk.keyword('orange')(this.ctx.text('smsProviderNonePrompt'));
+        const message = chalk.keyword('orange')(this.ctx.text('SMSProviderNonePrompt'));
         console.log('\n' + boxen(message, boxenOptions));
-        this.ctx.throw.module(__ThisModule__, 1001);
+        this.scope.error.SMSProviderNonePrompt.throw();
       }
     }
     // provider

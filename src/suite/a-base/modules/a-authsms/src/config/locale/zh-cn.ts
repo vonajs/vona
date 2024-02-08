@@ -1,6 +1,6 @@
 export default {
   SMS: '短信',
-  smsProviderNonePrompt: '请指定SMS Provider',
+  SMSProviderNonePrompt: '请指定SMS Provider',
   SMSCodeInvalid: '认证码已失效，请重新获取',
   SMSCodeMismatch: '认证码不匹配',
   AliYun: '阿里云',

@@ -15,7 +15,7 @@ export class LocalPassport extends BeanBase {
       providerName,
       providerScene,
     });
-    if (!beanProvider.providerSceneValid) this.ctx.throw.module('a-base', 1015);
+    if (!beanProvider.providerSceneValid) this.getScope('a-base').error.InvalidConfiguration.throw();
     // urls
     const { loginURL, callbackURL } = this.ctx.bean.authProvider._combineAuthenticateUrls({
       module,

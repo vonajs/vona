@@ -1,5 +1,5 @@
 export default {
-  smsProviderNonePrompt: 'Please specify the sms provider',
+  SMSProviderNonePrompt: 'Please specify the sms provider',
   SMSCodeInvalid: 'Verification code is invalid, please retrieve again',
   SMSCodeMismatch: 'Mismatch Verification Code',
   AuthenticationFailed: 'Authentication Failed',
