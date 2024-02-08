@@ -8,7 +8,7 @@ export class ControllerUtil extends BeanBase<ScopeModule> {
     const atomId = this.ctx.params.atomId;
     // article
     const article = await this.ctx.bean.atom.read({ key: { atomId }, user: this.ctx.state.user.op });
-    if (!article) this.ctx.throw.module('a-base', 1002);
+    if (!article) this.getScope('a-base').error.ElementDoesNotExist.throw();
     // ok
     this.ctx.status = 200;
     this.ctx.body = article.content;

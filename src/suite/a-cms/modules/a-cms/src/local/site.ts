@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 import fse from 'fs-extra';
 
 @Local()
-export class LocalSite extends BeanBase {
+export class LocalSite extends BeanBase<ScopeModule> {
   async getSite({ atomClass, language, options }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getSite({ language, options });
@@ -70,7 +70,7 @@ export class LocalSite extends BeanBase {
     const site = await build.getSite({ language });
     // check if build site first
     const siteBuilt = await build._checkIfSiteBuilt({ site, force: false });
-    if (!siteBuilt) this.ctx.throw.module(__ThisModule__, 1006);
+    if (!siteBuilt) this.scope.error.BuildSiteFirst.throw();
     return build.getUrl(site, language, path);
   }
 
@@ -174,7 +174,7 @@ export class LocalSite extends BeanBase {
       mtimeCurrent = stat.mtime.valueOf();
     } else {
       article = await this.ctx.bean.cms.render.getArticle({ key: { atomId }, inner: true });
-      if (!article) this.ctx.throw.module('a-base', 1002);
+      if (!article) this.getScope('a-base').error.ElementDoesNotExist.throw();
       // only author
       if (article.userIdUpdated !== user.id) this.ctx.throw(403);
       mtimeCurrent = article.renderAt ? article.renderAt.getTime() : 0;

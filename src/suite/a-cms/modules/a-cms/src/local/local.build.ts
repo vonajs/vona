@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 import path from 'path';
@@ -16,7 +16,7 @@ import less from 'less';
 import utils from '../common/utils.js';
 
 @Local()
-export class LocalBuild extends BeanBase {
+export class LocalBuild extends BeanBase<ScopeModule> {
   atomClass: any;
   default: any;
 
@@ -27,11 +27,11 @@ export class LocalBuild extends BeanBase {
   }
 
   get moduleConfig() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   get beanStatus() {
-    return this.ctx.bean.status.module(__ThisModule__);
+    return this.scope._bean.status;
   }
 
   async getConfigSiteBase() {
@@ -115,7 +115,7 @@ export class LocalBuild extends BeanBase {
     }
     // throw error if empty either
     if (!themeName) {
-      this.ctx.throw.module(__ThisModule__, 1002, atomClass.module, atomClass.atomClassName, language);
+      this.scope.error.ThemeNotSet__.throw(atomClass.module, atomClass.atomClassName, language);
     }
     // ok
     return { themeName, language };
@@ -178,7 +178,7 @@ export class LocalBuild extends BeanBase {
   _combineThemes(themeModuleName) {
     // module
     const module = this.app.meta.modules[themeModuleName];
-    if (!module) this.ctx.throw.module(__ThisModule__, 1003, themeModuleName);
+    if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.extend');
     if (!moduleExtend) return this.ctx.config.module(themeModuleName).theme;
     return this.ctx.bean.util.extend(
@@ -1190,7 +1190,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
   async _copyThemes(pathIntermediate, themeModuleName) {
     // module
     const module = this.app.meta.modules[themeModuleName];
-    if (!module) this.ctx.throw.module(__ThisModule__, 1003, themeModuleName);
+    if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     // extend
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.extend');
     if (moduleExtend) {
@@ -1212,7 +1212,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
   _watcherThemes(site, themeModuleName) {
     // module
     const module = this.app.meta.modules[themeModuleName];
-    if (!module) this.ctx.throw.module(__ThisModule__, 1003, themeModuleName);
+    if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     // extend
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.eggBornModule.cms.extend');
     if (moduleExtend) {
@@ -1243,7 +1243,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const returnWaitingPath = options && options.returnWaitingPath;
     // article
     const article = await this.ctx.bean.cms.render.getArticle({ key, inner: true });
-    if (!article) this.ctx.throw.module('a-base', 1002);
+    if (!article) this.getScope('a-base').error.ElementDoesNotExist.throw();
     if (!article.url) return null; // not throw error
     // articleUrl
     let articleUrl = article.url;
@@ -1251,7 +1251,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const site = await this.getSite({ language: article.atomLanguage });
     // check if build site first
     const siteBuilt = await this._checkIfSiteBuilt({ site, force: false });
-    if (!siteBuilt) this.ctx.throw.module(__ThisModule__, 1006);
+    if (!siteBuilt) this.scope.error.BuildSiteFirst.throw();
     // fileName
     const pathDist = await this.getPathDist(site, article.atomLanguage);
     const fileName = path.join(pathDist, articleUrl);
