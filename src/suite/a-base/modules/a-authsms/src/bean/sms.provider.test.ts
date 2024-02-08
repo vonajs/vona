@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import chalk from 'chalk';
@@ -13,7 +13,7 @@ const boxenOptions = {
 } as boxen.Options;
 
 @Bean({ scene: 'sms.provider' })
-export class SmsProviderTest extends BeanBase {
+export class SmsProviderTest extends BeanBase<ScopeModule> {
   async sendCode({ context }: any) {
     // token
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
@@ -28,8 +28,8 @@ export class SmsProviderTest extends BeanBase {
   }
 
   async verify({ data, dataInput }: any) {
-    if (!data) this.ctx.throw.module(__ThisModule__, 1002);
-    if (data.token !== dataInput.token) this.ctx.throw.module(__ThisModule__, 1003);
+    if (!data) this.scope.error.SMSCodeInvalid.throw();
+    if (data.token !== dataInput.token) this.scope.error.SMSCodeMismatch.throw();
   }
 
   __prefix0(num, length) {

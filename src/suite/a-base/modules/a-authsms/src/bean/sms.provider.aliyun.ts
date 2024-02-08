@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import * as PopCore from '@alicloud/pop-core';
 
 @Bean({ scene: 'sms.provider' })
-export class SmsProviderAliyun extends BeanBase {
+export class SmsProviderAliyun extends BeanBase<ScopeModule> {
   async sendCode({ providerInstanceId, context, config }: any) {
     // get
     const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
@@ -26,8 +26,8 @@ export class SmsProviderAliyun extends BeanBase {
   }
 
   async verify({ data, dataInput }: any) {
-    if (!data) this.ctx.throw.module(__ThisModule__, 1002);
-    if (data.token !== dataInput.token) this.ctx.throw.module(__ThisModule__, 1003);
+    if (!data) this.scope.error.SMSCodeInvalid.throw();
+    if (data.token !== dataInput.token) this.scope.error.SMSCodeMismatch.throw();
   }
 
   async __sendSms({ params, config }: any) {
