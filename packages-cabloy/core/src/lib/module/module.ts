@@ -39,8 +39,7 @@ export class ModuleTools extends BeanSimple {
     // 1. import
     const promises: Promise<IModuleResource>[] = [];
     for (const module of app.meta.modulesArray) {
-      const subPath = app.meta.isTest || app.meta.isLocal ? 'src' : 'dist';
-      promises.push(import(`${module.root}/${subPath}/index.js`));
+      promises.push(import(this._getModuleIndexPath(module)));
     }
     const timeBegin = new Date();
     console.log(`import modules begin, pid: ${process.pid}`);
@@ -68,5 +67,14 @@ export class ModuleTools extends BeanSimple {
     for (const module of app.meta.modulesArray) {
       await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, [module]);
     }
+  }
+
+  _getModuleIndexPath(module): string {
+    const app = this.app;
+    const pathSrc = `${module.root}/src/index.js`;
+    if ((app.meta.isTest || app.meta.isLocal) && fse.existsSync(pathSrc)) {
+      return pathSrc;
+    }
+    return `${module.root}/dist/index.js`;
   }
 }
