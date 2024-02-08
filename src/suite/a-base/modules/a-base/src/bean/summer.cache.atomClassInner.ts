@@ -1,7 +1,15 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import type { IModuleConfigSummerCacheBase } from 'cabloy-module-api-a-summer';
 
 @Bean({ scene: 'summer.cache' })
 export class SummerCacheAtomClassInner extends BeanBase {
+  _cacheBase: IModuleConfigSummerCacheBase;
+
+  constructor(cacheBase: IModuleConfigSummerCacheBase) {
+    super();
+    this._cacheBase = cacheBase;
+  }
+
   // key: in/notin
   async get(key) {
     const atomClasses = this.__getAtomClasses(key);

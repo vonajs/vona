@@ -62,9 +62,7 @@ export class LocalFetch extends CacheBase {
   get cacheBean() {
     if (!this._cacheBase.beanFullName) return null;
     if (!this._cacheBean) {
-      this._cacheBean = this.ctx.bean._newBean(this._cacheBase.beanFullName, {
-        cacheBase: this._cacheBase,
-      });
+      this._cacheBean = this.ctx.bean._newBean(this._cacheBase.beanFullName, this._cacheBase);
     }
     return this._cacheBean;
   }
