@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { LocalContextTask } from '../local.context.task.js';
 
-export class LocalFlowTask0 extends BeanBase {
+export class LocalFlowTask0 extends BeanBase<ScopeModule> {
   nodeInstance: any;
   flowInstance: any;
   context: any;
@@ -27,12 +27,12 @@ export class LocalFlowTask0 extends BeanBase {
   }
 
   get modelFlowTask() {
-    return this.ctx.model.module(__ThisModule__).flowTask;
+    return this.scope.model.flowTask;
   }
   get modelFlowTaskHistory() {
-    return this.ctx.model.module(__ThisModule__).flowTaskHistory;
+    return this.scope.model.flowTaskHistory;
   }
   get localRight() {
-    return this.bean.scope('a-flowtask').local.right;
+    return this.scope.local.right;
   }
 }

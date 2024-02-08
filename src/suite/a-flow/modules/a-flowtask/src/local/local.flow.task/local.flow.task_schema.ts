@@ -28,7 +28,9 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     // flowTask
     const flowTask = this.contextTask._flowTaskHistory;
     // must be the same flowId, means not outdated
-    if (atom.atomFlowId !== this.context._flowId) this.ctx.throw.module('a-flow', 1009, this.context._flowId);
+    if (atom.atomFlowId !== this.context._flowId) {
+      this.getScope('a-flow').error.FlowOutdated__.throw(this.context._flowId);
+    }
     // check right
     if (mode === 'write' || mode === 'edit') {
       // special for write

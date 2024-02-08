@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
@@ -137,10 +137,10 @@ export class LocalRight extends BeanBase<ScopeModule> {
     // check if pass/reject
     if (handle) {
       if (handle.status === 1 && !options.allowPassTask) {
-        this.ctx.throw.module(__ThisModule__, 1006, flowTaskId);
+        this.scope.error.TaskCannotBePassed__.throw(flowTaskId);
       }
       if (handle.status === 2 && !options.allowRejectTask) {
-        this.ctx.throw.module(__ThisModule__, 1007, flowTaskId);
+        this.scope.error.TaskCannotBeRejected__.throw(flowTaskId);
       }
     } else if (!options.allowPassTask && !options.allowRejectTask) {
       this.ctx.throw(403);
@@ -173,7 +173,7 @@ export class LocalRight extends BeanBase<ScopeModule> {
     // options
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     if (!options.allowForward || flowTask.flowTaskIdForwardTo) {
-      this.ctx.throw.module(__ThisModule__, 1012, flowTaskId);
+      this.scope.error.TaskHasBeenForwarded__.throw(flowTaskId);
     }
   }
   async forwardRecall({ flowTask, user, getOptions, getTask }: any) {
@@ -208,7 +208,7 @@ export class LocalRight extends BeanBase<ScopeModule> {
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     // allowed only once, so should check flowTaskIdSubstituteFrom
     if (!options.allowSubstitute || flowTask.flowTaskIdSubstituteFrom || flowTask.flowTaskIdSubstituteTo) {
-      this.ctx.throw.module(__ThisModule__, 1013, flowTaskId);
+      this.scope.error.TaskHasBeenSubstituted__.throw(flowTaskId);
     }
   }
   async substituteRecall({ flowTask, user, getOptions, getTask }: any) {

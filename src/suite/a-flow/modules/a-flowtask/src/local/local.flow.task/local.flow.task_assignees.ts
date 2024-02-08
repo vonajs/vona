@@ -1,5 +1,4 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
 import { LocalFlowTaskAppendHandleRemark } from './local.flow.task_appendHandleRemark.js';
 import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
@@ -78,13 +77,13 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
         assignees: handle.assignees,
       });
       if (!assignees || assignees.length === 0) {
-        this.ctx.throw.module(__ThisModule__, 1008, flowTaskId);
+        this.scope.error.TaskAssigneesCannotBeEmpty__.throw(flowTaskId);
       }
       // check confirmationAllowAppend
       if (!options.confirmationAllowAppend) {
         const assigneesOld = this.contextNode.vars.get('_assignees');
         if (!new Set(assigneesOld).isSuperset(new Set(assignees))) {
-          this.ctx.throw.module(__ThisModule__, 1009, flowTaskId);
+          this.scope.error.TaskAssigneesCannotBeAppended__.throw(flowTaskId);
         }
       }
       // save var: _assigneesConfirmed
