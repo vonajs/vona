@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 // request.body
@@ -6,11 +6,11 @@ import { Bean, BeanBase } from '@cabloy/core';
 //   data:
 
 @Bean({ scene: 'middleware' })
-export class MiddlewareValidate extends BeanBase {
+export class MiddlewareValidate extends BeanBase<ScopeModule> {
   async execute(options, next) {
     // must exists
     const validator = options.validator;
-    if (!validator) this.ctx.throw.module(__ThisModule__, 1001);
+    if (!validator) this.scope.error.ValidatorNotSpecified.throw();
     // params
     const module = options.module || this.ctx.module.info.relativeName;
     const schema = options.schema;
