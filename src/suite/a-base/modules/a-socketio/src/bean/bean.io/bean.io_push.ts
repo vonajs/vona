@@ -84,7 +84,7 @@ export class BeanIoPush extends BeanIoPublish {
     try {
       // bean
       const messageClassBase = this.messageClass.messageClass(messageClass);
-      const beanMessage = this._getBeanMessage(messageClassBase);
+      const beanMessage = this._getBeanMessage(messageClassBase, false);
       if (!beanMessage) return false;
       // render message content
       const content = await beanMessage.onChannelRender({

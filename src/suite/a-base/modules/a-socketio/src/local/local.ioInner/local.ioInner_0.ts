@@ -15,7 +15,7 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
     return this.scope.local.redis;
   }
 
-  _getBeanMessage(messageClassBase) {
+  _getBeanMessage(messageClassBase, throwError: boolean = true) {
     // beanFullName
     let beanFullName;
     if (messageClassBase.info.bean) {
@@ -28,8 +28,11 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
     // bean
     const beanMessage = this.ctx.bean._getBean(beanFullName);
     if (!beanMessage) {
-      this.ctx.logger.info(`message bean not found: ${beanFullName}`);
-      return null;
+      if (throwError) {
+        throw new Error(`message bean not found: ${beanFullName}`);
+      } else {
+        return null;
+      }
     }
     return beanMessage;
   }

@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class BeanIo0 extends BeanBase<ScopeModule> {
@@ -18,8 +18,8 @@ export class BeanIo0 extends BeanBase<ScopeModule> {
     return this.scope.local.ioInner;
   }
 
-  _getBeanMessage(messageClassBase) {
-    return this.localIOInner._getBeanMessage(messageClassBase);
+  _getBeanMessage(messageClassBase, throwError: boolean = true) {
+    return this.localIOInner._getBeanMessage(messageClassBase, throwError);
   }
 
   _getBeanChannel(channelFullName) {
