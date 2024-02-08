@@ -2,7 +2,7 @@
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
 describe('flow.set03_gatewayExclusive', () => {
-  it.only('gatewayExclusive: 1', async () => {
+  it('gatewayExclusive: 1', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
     // login as root
