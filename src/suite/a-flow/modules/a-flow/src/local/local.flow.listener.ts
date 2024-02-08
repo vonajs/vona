@@ -25,7 +25,7 @@ export class LocalFlowListener extends BeanBase {
       return this._flowListener;
     }
     // script
-    const expression = `${listenerContent};\nexport default new Listener(__contextFlow);`;
+    const expression = `${listenerContent};\nmodule.exports = new Listener(__contextFlow);`;
     // globals
     const globals: any = {};
     globals.__contextFlow = this.context;
