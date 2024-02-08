@@ -69,9 +69,9 @@ export class ModuleTools extends BeanSimple {
     }
   }
 
-  _getModuleIndexPath(module): string {
+  private _getModuleIndexPath(module): string {
     const app = this.app;
-    const pathSrc = `${module.root}/src/index.js`;
+    const pathSrc = `${module.root}/src/index.ts`;
     if ((app.meta.isTest || app.meta.isLocal) && fse.existsSync(pathSrc)) {
       return pathSrc;
     }
