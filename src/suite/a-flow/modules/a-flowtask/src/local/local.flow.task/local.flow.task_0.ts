@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
+import { LocalContextTask } from '../local.context.task.js';
 
 export class LocalFlowTask0 extends BeanBase {
   nodeInstance: any;
@@ -18,7 +19,7 @@ export class LocalFlowTask0 extends BeanBase {
 
   __init__({ nodeInstance }: any) {
     // context
-    this.contextTask = this.ctx.bean._newBean(`${__ThisModule__}.local.context.task`, {
+    this.contextTask = this.ctx.bean._newBean(LocalContextTask, {
       context: nodeInstance.context,
       contextNode: nodeInstance.contextNode,
       nodeDef: nodeInstance.contextNode._nodeDef,
