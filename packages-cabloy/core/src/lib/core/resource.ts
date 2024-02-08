@@ -10,6 +10,7 @@ export const DecoratorUse = Symbol.for('Decorator#Use');
 export class AppResource extends BeanSimple {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   aops: Record<string, IDecoratorBeanOptionsBase> = {};
+  aopsArray: IDecoratorBeanOptionsBase[] = [];
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
     const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
@@ -26,6 +27,7 @@ export class AppResource extends BeanSimple {
     const beanOptions = this.addBean(options);
     // aop
     this.aops[beanOptions.beanFullName] = beanOptions;
+    this.aopsArray.push(beanOptions);
     // ok
     return beanOptions;
   }
@@ -38,21 +40,20 @@ export class AppResource extends BeanSimple {
     const beanOptions = this.getBean(beanFullName as any);
     if (!beanOptions) return;
     // loop
-    const aops: string[] = [];
-    for (const key in this.aops) {
-      const aop = this.aops[key];
+    const aopsMatched: string[] = [];
+    for (const aop of this.aopsArray) {
       // not self
-      if (key === beanOptions.beanFullName) continue;
+      if (aop.beanFullName === beanOptions.beanFullName) continue;
       // // check if match aop
       // if (beanOptions.aop && !aop.matchAop) continue;
       // gate
       if (!this.app.meta.util.checkGate(aop.gate)) continue;
       // match
       if (__aopMatch(aop.aopMatch, beanOptions.beanFullName)) {
-        aops.push(key);
+        aopsMatched.push(aop.beanFullName);
       }
     }
-    return aops;
+    return aopsMatched;
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
