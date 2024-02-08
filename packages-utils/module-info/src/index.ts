@@ -50,6 +50,7 @@ export function parseInfo(moduleName, type = 'module'): IModuleInfo | null {
       fullName: `cabloy-suite-api-${parts[0]}-${parts[1]}`,
       relativeName: `${parts[0]}-${parts[1]}`,
       url: '',
+      originalName: '',
     };
   }
   return {
@@ -60,6 +61,7 @@ export function parseInfo(moduleName, type = 'module'): IModuleInfo | null {
     url: `${parts[0]}/${parts[1]}`,
     sync: parts[2] === 'sync',
     monkey: parts[2] === 'monkey',
+    originalName: '',
   };
 }
 

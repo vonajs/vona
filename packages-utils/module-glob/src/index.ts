@@ -197,6 +197,7 @@ function __parseModules(projectPath, cabloyConfig) {
       info.vendor = __path.vendor;
       info.source = __path.source;
       info.node_modules = __path.node_modules;
+      info.originalName = name;
       // source
       const entity = entities?.[info.relativeName];
       if (entity === true || entity === false) {
@@ -313,6 +314,7 @@ function __parseSuites(projectPath) {
       // info
       info.vendor = __path.vendor;
       info.node_modules = __path.node_modules;
+      info.originalName = name;
       // suite
       const root = path.dirname(filePkg);
       const suite = {

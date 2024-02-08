@@ -9,6 +9,7 @@ export interface IModuleInfo {
   vendor?: boolean;
   source?: boolean;
   node_modules?: boolean;
+  originalName: string;
 }
 
 export interface ISuiteModuleBase {

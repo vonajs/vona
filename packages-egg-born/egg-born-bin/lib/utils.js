@@ -260,14 +260,14 @@ const utils = {
     for (const key in suites) {
       const suite = suites[key];
       if (!suite.info.vendor) {
-        referencesNew.push({ path: `src/suite/${suite.info.relativeName}` });
+        referencesNew.push({ path: `src/suite/${suite.info.originalName}` });
       }
     }
     // modules
     for (const key in modules) {
       const module = modules[key];
       if (!module.suite && !module.info.vendor) {
-        referencesNew.push({ path: `src/module/${module.info.relativeName}/tsconfig.build.json` });
+        referencesNew.push({ path: `src/module/${module.info.originalName}/tsconfig.build.json` });
       }
     }
     //
