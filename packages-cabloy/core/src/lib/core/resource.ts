@@ -123,12 +123,14 @@ export class AppResource extends BeanSimple {
     if (virtual) return;
     // check parent
     let moduleBelong;
-    const parent = Object.getPrototypeOf(beanClass);
-    if (parent) {
+    let parent = Object.getPrototypeOf(beanClass);
+    while (parent) {
       const beanOptions = this.getBean(parent);
       if (beanOptions && beanOptions.moduleBelong) {
         moduleBelong = beanOptions.moduleBelong;
+        break;
       }
+      parent = Object.getPrototypeOf(parent);
     }
     // set to current when parent not set
     if (!moduleBelong) {
