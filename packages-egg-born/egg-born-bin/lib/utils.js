@@ -180,8 +180,8 @@ const utils = {
       console.log(chalk.red('Please copy directory: from _config to config\n'));
       process.exit(0);
     }
-    const configDefault = require(fileConfigDefault)({});
-    const configEnv = require(fileConfigEnv)({});
+    const configDefault = require(fileConfigDefault).default({});
+    const configEnv = require(fileConfigEnv).default({});
     return extend(true, {}, configDefault, configEnv);
   },
   getBaseDir() {
