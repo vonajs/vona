@@ -35,7 +35,7 @@ export class CaptchaProviderCaptcha extends BeanBase<ScopeModule> {
       }
       if (!providerName) {
         // prompt
-        const message = chalk.keyword('orange')(this.ctx.text('SMSProviderNonePrompt'));
+        const message = chalk.keyword('orange')(this.scope.locale.SMSProviderNonePrompt());
         console.log('\n' + boxen(message, boxenOptions));
         this.scope.error.SMSProviderNonePrompt.throw();
       }

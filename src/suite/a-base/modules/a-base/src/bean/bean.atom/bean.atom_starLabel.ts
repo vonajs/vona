@@ -138,11 +138,11 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
       labels = {
         1: {
           color: 'red',
-          text: this.ctx.text('Red'),
+          text: this.scope.locale.Red(),
         },
         2: {
           color: 'orange',
-          text: this.ctx.text('Orange'),
+          text: this.scope.locale.Orange(),
         },
       };
       await this.setLabels({ labels, user });

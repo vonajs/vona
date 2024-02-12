@@ -1,4 +1,5 @@
 import { Aop, BeanBase } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 const __atomClassApp = {
   module: 'a-app',
@@ -6,7 +7,7 @@ const __atomClassApp = {
 };
 
 @Aop({ match: 'category' })
-export class AopCategory extends BeanBase {
+export class AopCategory extends BeanBase<ScopeModule> {
   async children(context, next) {
     // next
     await next();
@@ -73,7 +74,7 @@ export class AopCategory extends BeanBase {
     for (const item of list) {
       const app = apps.find(_item => _item.atomStaticKey === item.categoryName);
       if (app) {
-        item.categoryNameLocale = `(${this.ctx.text('App')})${app.atomNameLocale}`;
+        item.categoryNameLocale = `(${this.scope.locale.App()})${app.atomNameLocale}`;
       }
     }
     return true;

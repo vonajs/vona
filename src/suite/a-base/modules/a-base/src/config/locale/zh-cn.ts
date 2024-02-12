@@ -159,6 +159,8 @@ export default {
   NotImplemented: '未实现',
   Unnamed: '未命名',
   BatchDelete: '批量删除',
+  App: '应用',
+  Apps: '应用',
   // role name
   root: '根',
   anonymous: '匿名',

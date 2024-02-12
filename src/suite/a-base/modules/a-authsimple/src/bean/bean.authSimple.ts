@@ -295,9 +295,9 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     if (!value) {
       // expired, send confirmation mail again
       const data = {
-        message: this.ctx.text('ConfirmationEmailExpired'),
+        message: this.scope.locale.ConfirmationEmailExpired(),
         link: '/a/authsimple/emailConfirm',
-        linkText: this.ctx.text('Resend Confirmation Email'),
+        linkText: this.scope.locale['Resend Confirmation Email'](),
       };
       const url = this.ctx.bean.base.getAlertUrl({ data });
       return this.ctx.redirect(url);
@@ -313,9 +313,9 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     // not: login antomatically
     // ok
     const data = {
-      message: this.ctx.text('ConfirmationEmailSucceeded'),
+      message: this.scope.locale.ConfirmationEmailSucceeded(),
       link: '#back',
-      linkText: this.ctx.text('Close'),
+      linkText: this.scope.locale.Close(),
     };
     const url = this.ctx.bean.base.getAlertUrl({ data });
     return this.ctx.redirect(url);
