@@ -236,7 +236,7 @@ const utils = {
     }
     await fse.outputFile(fileTypes, contentNew);
   },
-  async prepareProjectTsConfig({ suites, modules }) {
+  async prepareProjectTsConfig({ suites, modules, env }) {
     const projectPath = this.getProjectDir();
     const mode = this.getProjectMode();
     const fileTemplate = path.resolve(__dirname, `../template/_tsconfig_${mode}.json`);
@@ -256,18 +256,20 @@ const utils = {
       item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1),
     );
     // append new
-    // suites
-    for (const key in suites) {
-      const suite = suites[key];
-      if (!suite.info.vendor) {
-        referencesNew.push({ path: `src/suite/${suite.info.originalName}` });
+    if (!['unittest', 'local'].includes(env)) {
+      // suites
+      for (const key in suites) {
+        const suite = suites[key];
+        if (!suite.info.vendor) {
+          referencesNew.push({ path: `src/suite/${suite.info.originalName}` });
+        }
       }
-    }
-    // modules
-    for (const key in modules) {
-      const module = modules[key];
-      if (!module.suite && !module.info.vendor) {
-        referencesNew.push({ path: `src/module/${module.info.originalName}/tsconfig.build.json` });
+      // modules
+      for (const key in modules) {
+        const module = modules[key];
+        if (!module.suite && !module.info.vendor) {
+          referencesNew.push({ path: `src/module/${module.info.originalName}/tsconfig.build.json` });
+        }
       }
     }
     //
@@ -275,7 +277,7 @@ const utils = {
     const contentNew = { ...content, references: referencesNew };
     await fse.outputFile(fileConfig, JSON.stringify(contentNew, null, 2));
   },
-  async prepareProjectAll() {
+  async prepareProjectAll({ env }) {
     const projectPath = this.getProjectDir();
     // glob
     const { suites, modules } = await glob({
@@ -287,7 +289,7 @@ const utils = {
       loadPackage: false,
     });
     await this.prepareProjectTypes({ suites, modules });
-    await this.prepareProjectTsConfig({ suites, modules });
+    await this.prepareProjectTsConfig({ suites, modules, env });
     await this.tsc();
   },
 };
