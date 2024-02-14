@@ -1,7 +1,5 @@
 const path = require('path');
 const fse = require('fs-extra');
-const urllib = require('urllib');
-const semver = require('semver');
 const chalk = require('chalk');
 const boxen = require('boxen');
 const extend = require('@cabloy/extend').default;
