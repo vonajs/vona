@@ -90,74 +90,9 @@ const utils = {
     // proc
     return commandDev.subCommand.proc;
   },
-  async versionCheck({ moduleName, moduleVersion, scene, mode }) {
-    try {
-      const httpClient = urllib.create();
-      const url = 'https://portal.cabloy.com/api/cabloy/store/util/version';
-      const options = {
-        method: 'POST',
-        data: {
-          moduleName,
-          moduleVersion,
-          scene,
-          mode,
-        },
-        dataType: 'json',
-        followRedirect: true,
-        maxRedirects: 5,
-        timeout: 20000,
-      };
-      const res = await httpClient.request(url, options);
-      return res.data.data;
-    } catch (err) {
-      // console.log(err);
-      return null;
-    }
-  },
   getProjectMode() {
     const cabloyPath = this.__getCabloyPath();
     return cabloyPath.indexOf('packages-cabloy') > -1 ? 'source' : 'project';
-  },
-  async versionCheckCabloy({ scene }) {
-    try {
-      // cabloy
-      const cabloyPath = this.__getCabloyPath();
-      if (!cabloyPath) return;
-      const _pkg = require(path.join(cabloyPath, 'package.json'));
-      // moduleVersion
-      const moduleVersion = _pkg.version;
-      // mode
-      const mode = this.getProjectMode();
-      // versionCheck
-      const moduleVersionCurrent = await this.versionCheck({ moduleName: 'cabloy', moduleVersion, scene, mode });
-      if (!moduleVersionCurrent) return;
-      // prompt
-      this.versionPromptCabloy({ mode, moduleName: 'cabloy', moduleVersion, moduleVersionCurrent });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  versionPromptCabloy({ mode, moduleName, moduleVersion, moduleVersionCurrent }) {
-    try {
-      const lt = semver.lt(moduleVersion, moduleVersionCurrent);
-      if (!lt) return;
-      setTimeout(() => {
-        // log
-        let message = `[${chalk.keyword('cyan')(moduleName)}] new version available: ${chalk.keyword('yellow')(
-          moduleVersion,
-        )} → ${chalk.keyword('orange')(moduleVersionCurrent)}`;
-        if (mode === 'lerna') {
-          message += `\nRun ${chalk.keyword('orange')('> git pull <')} to update cabloy!`;
-          message += `\nRun ${chalk.keyword('orange')('> npm install <')} to install dependencies!`;
-        } else {
-          // message += `\nRun ${chalk.keyword('orange')('> npm update <')} to update cabloy!`;
-          // message += `\nRun ${chalk.keyword('orange')('> npm run update:test <')} to update the test modules!`;
-        }
-        console.log('\n' + boxen(message, boxenOptions));
-      }, 6000);
-    } catch (err) {
-      console.log(err);
-    }
   },
   getModulePath(moduleName) {
     const moduleFile = require.resolve(`${moduleName}/package.json`);
