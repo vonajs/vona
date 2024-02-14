@@ -21,6 +21,11 @@ class BackendStartCommand extends StartCommand {
       context.argv.title = `cabloy-server-${utils.getAppPackage().name}`;
     }
 
+    if (!context.env.NODE_OPTIONS) {
+      context.env.NODE_OPTIONS = '';
+    }
+    context.env.NODE_OPTIONS += ` --no-warnings`;
+
     await super.run(context);
   }
 
