@@ -35,11 +35,8 @@
     "start": "node ./scripts/egg-born-scripts.js backend-start",
     "start:daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon",
     "stop": "node ./scripts/egg-born-scripts.js backend-stop",
-    "commits": "./scripts/commits.sh",
-    "commits-all": "./scripts/commits-all.sh",
     "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --fix --ext .ts src",
-    "cnpm:sync": "node ./scripts/cnpm-sync.js"
+    "lint:fix": "eslint --fix --ext .ts src"
   },
   "dependencies": {
     "@cabloy/core": "workspace:^"
