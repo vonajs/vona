@@ -22,8 +22,14 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-scripts#readme",
   "dependencies": {
+    "@cabloy/extend": "workspace:^",
+    "@cabloy/module-glob": "workspace:^",
+    "@cabloy/process-helper": "workspace:^",
     "@zhennann/egg-bin": "^7.0.1",
     "@zhennann/egg-scripts": "^4.0.1",
-    "egg-born-backend": "^9.0.0"
+    "egg-born-backend": "workspace:^",
+    "egg-born-utils": "^1.1.9",
+    "boxen": "^4.2.0",
+    "chalk": "^3.0.0"
   }
 }
