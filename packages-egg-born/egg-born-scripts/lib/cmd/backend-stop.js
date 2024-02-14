@@ -14,6 +14,10 @@ class BackendStopCommand extends StopCommand {
 
     if (!context.argv._ || context.argv._.length === 0) context.argv._ = ['dist/backend'];
 
+    if (!context.argv.title) {
+      context.argv.title = `cabloy-server-${utils.getAppPackage().name}`;
+    }
+
     if (!context.env.NODE_OPTIONS) {
       context.env.NODE_OPTIONS = '';
     }
