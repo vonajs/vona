@@ -12,7 +12,12 @@ class BackendStopCommand extends StopCommand {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
 
-    if (!context.argv._ || context.argv._.length === 0) context.argv._ = ['src/backend'];
+    if (!context.argv._ || context.argv._.length === 0) context.argv._ = ['dist/backend'];
+
+    if (!context.env.NODE_OPTIONS) {
+      context.env.NODE_OPTIONS = '';
+    }
+    context.env.NODE_OPTIONS += ` --no-warnings`;
 
     await super.run(context);
   }
