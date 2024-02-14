@@ -37,9 +37,8 @@
     "stop": "node ./scripts/egg-born-scripts.js backend-stop",
     "commits": "./scripts/commits.sh",
     "commits-all": "./scripts/commits-all.sh",
-    "format": "prettier --write \"**/*.js\" \"**/*.json\" \"**/*.jsx\" \"**/*.vue\"",
-    "lint": "prettier --check \"**/*.js\" \"**/*.json\" \"**/*.jsx\" \"**/*.vue\"",
-    "eslint": "eslint --ext .js,.json,.jsx,.vue src",
+    "lint": "eslint --ext .ts src",
+    "lint:fix": "eslint --fix --ext .ts src",
     "cnpm:sync": "node ./scripts/cnpm-sync.js"
   },
   "dependencies": {

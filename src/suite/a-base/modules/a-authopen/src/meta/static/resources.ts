@@ -1,5 +1,3 @@
-import { __ThisModule__ } from '../../resource/this.js';
-
 const resources = [
   // menu
   // {
