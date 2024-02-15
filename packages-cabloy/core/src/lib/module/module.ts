@@ -60,8 +60,6 @@ export class ModuleTools extends BeanSimple {
         app.meta.modulesMonkey[module.info.relativeName] = module;
       }
     }
-    // extra: check if empty modules
-    this.__checkEmptyModules();
   }
 
   async monkey(monkeyName) {
@@ -78,38 +76,5 @@ export class ModuleTools extends BeanSimple {
       return pathSrc;
     }
     return `${module.root}/dist/index.js`;
-  }
-
-  private __checkEmptyModules() {
-    console.log('------------------- empty:');
-    for (const module of this.app.meta.modulesArray) {
-      if (!this.__checkEmptyModule(module)) continue;
-      console.log(module.info.relativeName);
-    }
-  }
-
-  private __checkEmptyModule(module: IModule) {
-    function __checkEmptyObject(obj) {
-      return Object.keys(obj).length === 0;
-    }
-    const resource = module.resource;
-    if (resource.routes.length > 0) return false;
-    if (!__checkEmptyObject(resource.Errors)) return false;
-    if (!__checkEmptyObject(resource.locales['en-us'])) return false;
-    if (!__checkEmptyObject(resource.locales['zh-cn'])) return false;
-    if (!__checkEmptyObject(resource.config(this.app))) return false;
-    if (resource.constants) return false;
-    if (resource.Monkey) return false;
-    if (resource.Main) return false;
-    if (fse.existsSync(`${module.root}/cms`)) return false;
-    if (['a-swiper', 'a-codemirror'].includes(module.info.relativeName)) return false;
-    // console.log('----suite:', module.suite);
-    if (['bz-diancai', 'cabloy-store', 'bz-study'].includes(module.suite || '')) return false;
-    const keys = Object.keys(module.resource);
-    if (keys.some(item => item.indexOf('Bean') === 0)) return false;
-    // console.log(module.info.relativeName);
-    console.log(`${module.info.originalName}/src/index.ts`);
-    console.log(module.resource);
-    return true;
   }
 }
