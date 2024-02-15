@@ -101,9 +101,10 @@ export class ModuleTools extends BeanSimple {
     if (resource.constants) return false;
     if (resource.Monkey) return false;
     if (resource.Main) return false;
-
-    console.log(module.info.relativeName);
-    console.log(`${module.root}/index.ts`);
+    // console.log('----suite:', module.suite);
+    if (['bz-diancai', 'cabloy-store', 'bz-study'].includes(module.suite || '')) return false;
+    // console.log(module.info.relativeName);
+    console.log(`${module.info.originalName}/src/index.ts`);
     console.log(module.resource);
     return true;
   }
