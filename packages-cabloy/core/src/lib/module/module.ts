@@ -105,6 +105,8 @@ export class ModuleTools extends BeanSimple {
     if (['a-swiper'].includes(module.info.relativeName)) return false;
     // console.log('----suite:', module.suite);
     if (['bz-diancai', 'cabloy-store', 'bz-study'].includes(module.suite || '')) return false;
+    const keys = Object.keys(module.resource);
+    if (keys.some(item => item.indexOf('Bean') === 0)) return false;
     // console.log(module.info.relativeName);
     console.log(`${module.info.originalName}/src/index.ts`);
     console.log(module.resource);
