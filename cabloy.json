@@ -84,7 +84,7 @@
           "a-codemirror": {
             "scripts": ["npmPublish"]
           },
-          "a-components-sync": {
+          "a-components": {
             "scripts": ["npmPublish"]
           },
           "a-dashboard": {
@@ -291,7 +291,7 @@
           "cms-themedocs": {
             "scripts": ["npmPublish"]
           },
-          "a-base-sync": {
+          "a-base": {
             "scripts": ["npmPublish"]
           },
           "a-flowgateway": {

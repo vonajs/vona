@@ -26,7 +26,7 @@ import 'cabloy-module-api-a-cli';
 import 'cabloy-module-api-a-clibooster';
 import 'cabloy-module-api-a-clipboard';
 import 'cabloy-module-api-a-codemirror';
-import 'cabloy-module-api-a-components-sync';
+import 'cabloy-module-api-a-components';
 import 'cabloy-module-api-a-dashboard';
 import 'cabloy-module-api-a-dashboardbooster';
 import 'cabloy-module-api-a-debug';

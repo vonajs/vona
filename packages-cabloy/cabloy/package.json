@@ -70,7 +70,7 @@
     "cabloy-module-api-a-clipboard": "workspace:^",
     "cabloy-module-api-a-cms": "workspace:^",
     "cabloy-module-api-a-codemirror": "workspace:^",
-    "cabloy-module-api-a-components-sync": "workspace:^",
+    "cabloy-module-api-a-components": "workspace:^",
     "cabloy-module-api-a-dashboard": "workspace:^",
     "cabloy-module-api-a-dashboardbooster": "workspace:^",
     "cabloy-module-api-a-debug": "workspace:^",
