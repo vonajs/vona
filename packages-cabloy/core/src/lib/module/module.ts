@@ -102,7 +102,7 @@ export class ModuleTools extends BeanSimple {
     if (resource.Monkey) return false;
     if (resource.Main) return false;
     if (fse.existsSync(`${module.root}/cms`)) return false;
-    if (['a-swiper'].includes(module.info.relativeName)) return false;
+    if (['a-swiper', 'a-codemirror'].includes(module.info.relativeName)) return false;
     // console.log('----suite:', module.suite);
     if (['bz-diancai', 'cabloy-store', 'bz-study'].includes(module.suite || '')) return false;
     const keys = Object.keys(module.resource);
