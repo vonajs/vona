@@ -101,6 +101,7 @@ export class ModuleTools extends BeanSimple {
     if (resource.constants) return false;
     if (resource.Monkey) return false;
     if (resource.Main) return false;
+    if (fse.existsSync(`${module.root}/cms`)) return false;
     // console.log('----suite:', module.suite);
     if (['bz-diancai', 'cabloy-store', 'bz-study'].includes(module.suite || '')) return false;
     // console.log(module.info.relativeName);
