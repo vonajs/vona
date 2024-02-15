@@ -28,7 +28,8 @@
   "scripts": {
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
-    "dev": "node ./scripts/egg-born-bin.js backend-dev",
+    "dev": "node ./scripts/egg-born-bin.js backend-dev --workers=2",
+    "dev:one": "node ./scripts/egg-born-bin.js backend-dev --workers=1",
     "test": "node ./scripts/egg-born-bin.js backend-test",
     "cov": "node ./scripts/egg-born-bin.js backend-cov",
     "build": "node ./scripts/egg-born-scripts.js backend-build",
