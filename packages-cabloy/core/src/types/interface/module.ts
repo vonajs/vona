@@ -8,8 +8,6 @@ export * from '@cabloy/module-info';
 export interface IModuleResource {
   Main: new () => IModuleMain;
   Monkey: new () => IMonkeyModule;
-  beans: Record<string, any>;
-  aops: Record<string, any>;
   locales: Record<string, any>;
   Errors: Record<number, string>;
   config: (app: CabloyApplication) => object;

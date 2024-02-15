@@ -15,12 +15,10 @@ export class BeanFlowUtils extends BeanFlowStart {
   async _executeServiceInner({ bean, parameter, globals }: any) {
     if (!bean) throw new Error('flow service bean is not set');
     // bean
-    const beanFullName = `${bean.module}.flow.service.${bean.name}`;
+    const serviceBase = this.ctx.bean.flowDef._getFlowServiceBase(bean);
+    const beanFullName = serviceBase.beanFullName;
     const beanInstance = this.ctx.bean._getBean(beanFullName);
     if (!beanInstance) throw new Error(`bean not found: ${beanFullName}`);
-    if (Object.getPrototypeOf(Object.getPrototypeOf(beanInstance)).constructor.name !== 'BeanFlowServiceBase') {
-      throw new Error(`bean should extends FlowServiceBase: ${beanFullName}`);
-    }
     // context
     const context = Object.assign({}, globals);
     if (parameter !== undefined) {

@@ -29,6 +29,10 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
     return __flowServiceBases[this.ctx.locale];
   }
 
+  _getFlowServiceBase(service) {
+    return this._getFlowServiceBases()[service.module][service.name];
+  }
+
   _getFlowBehaviorBases() {
     if (!__flowBehaviorBases[this.ctx.locale]) {
       __flowBehaviorBases[this.ctx.locale] = this._prepareFlowBehaviorBases();
@@ -54,35 +58,29 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
   _prepareFlowServiceBases() {
     const flowServiceBases: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
+      const services = module.meta && module.meta.flow && module.meta.flow.services;
+      if (!services) continue;
       const relativeName = module.info.relativeName;
-      const beans = module.resource.beans;
-      if (!beans) continue;
-      const res = this._prepareFlowServiceBasesModule(relativeName, beans);
-      if (Object.keys(res).length > 0) {
-        flowServiceBases[relativeName] = res;
+      for (const key in services) {
+        const service = services[key];
+        const beanName = service.bean;
+        let beanFullName;
+        if (typeof beanName === 'string') {
+          beanFullName = `${relativeName}.flow.service.${beanName}`;
+        } else {
+          beanFullName = `${beanName.module || relativeName}.flow.service.${beanName.name}`;
+        }
+        // group by module
+        if (!flowServiceBases[relativeName]) {
+          flowServiceBases[relativeName] = {};
+        }
+        // hold
+        flowServiceBases[relativeName][key] = {
+          ...service,
+          beanFullName,
+          titleLocale: this.ctx.text(service.title),
+        };
       }
-    }
-    return flowServiceBases;
-  }
-
-  _prepareFlowServiceBasesModule(relativeName, beans) {
-    const flowServiceBases: any = {};
-    for (const beanName in beans) {
-      if (beanName.indexOf('flow.service.') !== 0) continue;
-      // info
-      const bean = beans[beanName];
-      const serviceBase: any = {
-        title: bean.title,
-      };
-      if (bean.title) {
-        serviceBase.titleLocale = this.ctx.text(bean.title);
-      } else {
-        // prompt
-        this.ctx.logger.info('title of flow service bean should not be empty: ', `${relativeName}:${beanName}`);
-      }
-      // ok
-      const beanNameShort = beanName.substr('flow.service.'.length);
-      flowServiceBases[beanNameShort] = serviceBase;
     }
     return flowServiceBases;
   }
