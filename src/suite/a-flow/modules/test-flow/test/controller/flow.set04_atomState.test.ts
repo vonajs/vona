@@ -1,6 +1,13 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
+/**
+ * tomson:drafting
+ * tom:review
+ * jane:payMoney
+ * jannie:receiveGoods
+ * tomson:delete
+ */
 describe('flow.set04_atomState', () => {
   // atomClass info
   const atomClassModule = 'test-flow';

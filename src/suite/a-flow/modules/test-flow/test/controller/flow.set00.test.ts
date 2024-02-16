@@ -1,6 +1,13 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
+/**
+ * simple
+ * edgeSequence
+ * activityNone
+ * activityService
+ * startEventTimer
+ */
 describe('flow.set00', () => {
   it('simple', async () => {
     // ctx
