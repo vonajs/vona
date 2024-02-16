@@ -22,6 +22,7 @@ export interface ISuite extends ISuiteModuleBase {
     modules: string[];
 }
 export interface IModule extends ISuiteModuleBase {
+    suite?: string;
 }
 export interface IModulePackage {
     name: string;

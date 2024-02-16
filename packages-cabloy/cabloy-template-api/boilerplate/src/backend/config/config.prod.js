@@ -5,15 +5,10 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_{{safeKeys}}';
 
   // disabledModules
-  config.disabledModules = [
-    'test-flow', //
-    'test-note',
-  ];
+  config.disabledModules = [];
 
   // disabledSuites
-  config.disabledSuites = [
-    'test-party', //
-  ];
+  config.disabledSuites = [];
 
   // instances
   config.instances = [
