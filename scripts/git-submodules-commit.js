@@ -14,7 +14,6 @@ const subModules = [
   'src/suite/bz-diancai',
   'src/suite/bz-study',
   'src/suite/cabloy-store',
-  'src/suite/test-party',
 ];
 
 (async function () {
