@@ -24,6 +24,7 @@ miniprogram_npm
 
 # auto created
 /tsconfig.json
+/cabloy.json
 
 # should pre-compiled 
 !packages-utils/extend/dist
