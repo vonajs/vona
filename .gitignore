@@ -54,12 +54,7 @@ miniprogram_npm
 !/src/suite/a-base
 !/src/suite/a-cms
 !/src/suite/a-flow
-!/src/suite/a-dingtalk
-!/src/suite/a-paypal
-!/src/suite/a-wechat
-!/src/suite/a-wxwork
 !/src/suite/test-party
-!/src/suite/bz-diancai
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
