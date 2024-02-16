@@ -1,0 +1,15 @@
+{
+  "store": {
+    "commands": {
+      "sync": {
+        "entities": {}
+      },
+      "publish": {
+        "entities": {}
+      }
+    }
+  },
+  "source": {
+    "entities": {}
+  }
+}
