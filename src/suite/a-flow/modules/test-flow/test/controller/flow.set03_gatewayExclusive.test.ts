@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
-describe.only('flow.set03_gatewayExclusive', () => {
+describe('flow.set03_gatewayExclusive', () => {
   it('gatewayExclusive: 1', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
@@ -11,7 +11,7 @@ describe.only('flow.set03_gatewayExclusive', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/flowgateway/flow/start',
+      url: '/test/flow/flow/start',
       body: {
         flowDefKey: {
           module: mockInfo().relativeName,
@@ -33,7 +33,7 @@ describe.only('flow.set03_gatewayExclusive', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/flowgateway/flow/start',
+      url: '/test/flow/flow/start',
       body: {
         flowDefKey: {
           module: mockInfo().relativeName,

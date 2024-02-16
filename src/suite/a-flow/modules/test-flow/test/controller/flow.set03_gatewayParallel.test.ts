@@ -11,7 +11,7 @@ describe('flow.set03_gatewayParallel', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/flowgateway/flow/start',
+      url: '/test/flow/flow/start',
       body: {
         flowDefKey: {
           module: mockInfo().relativeName,
