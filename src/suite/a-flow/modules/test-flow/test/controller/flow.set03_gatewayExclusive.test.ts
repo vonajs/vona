@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
-describe('flow.set03_gatewayExclusive', () => {
+describe.only('flow.set03_gatewayExclusive', () => {
   it('gatewayExclusive: 1', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();

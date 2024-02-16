@@ -22,5 +22,8 @@ export default {
   Test_Set01_Atom_UserTask: '测试_分组01_数据_用户任务',
   Test_Set01_Atom_AssigneesConfirmation: '测试_分组01_数据_参与人确认',
   Test_Set02_Behavior_Overtime: '测试_分组02_行为_超时',
+  Test_Set03_Gateway_Parallel: '测试_分组03_网关_并行网关',
+  Test_Set03_Gateway_Exclusive: '测试_分组03_网关_排他网关',
+  Test_Set03_Gateway_Inclusive: '测试_分组03_网关_包含网关',
   Test_Set04_Atom_AtomState: '测试_分组04_数据_数据状态',
 };
