@@ -7,15 +7,10 @@ export default function (appInfo: CabloyAppInfo) {
   config.keys = appInfo.name + '_1596889047267_3245';
 
   // disabledModules
-  config.disabledModules = [
-    'test-flow', //
-    'test-note',
-  ];
+  config.disabledModules = [];
 
   // disabledSuites
-  config.disabledSuites = [
-    'test-party', //
-  ];
+  config.disabledSuites = [];
 
   // instances
   config.instances = [
