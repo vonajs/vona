@@ -25,7 +25,7 @@
       "path": "modules/a-flowtask/tsconfig.build.json"
     },
     {
-      "path": "modules/a-flowtimeline/tsconfig.build.json"
+      "path": "modules/test-flow/tsconfig.build.json"
     }
   ]
 }

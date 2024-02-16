@@ -1,0 +1,39 @@
+import { BeanBase } from '@cabloy/core';
+
+export class VersionInit extends BeanBase {
+  async run(_options) {
+    // draft:
+    //   Review: tom(father)
+    // formal:
+    //   Review: tom(father)
+    //   PayMoney: jane(mother)
+    //   ReceiveGoods: jannie(daughter)
+    let roleRights: any[] = [
+      {
+        roleName: 'family.father',
+        flowKey: 'test-flow:set04_atomState',
+        nodeDefId: 'activity_1',
+        scopeNames: 'authenticated', // 'family',
+      },
+      {
+        roleName: 'family.mother',
+        flowKey: 'test-flow:set04_atomState',
+        nodeDefId: 'activity_2',
+        scopeNames: 'authenticated', // 'family',
+      },
+      {
+        roleName: 'family.daughter',
+        flowKey: 'test-flow:set04_atomState',
+        nodeDefId: 'activity_3',
+        scopeNames: 'authenticated', // 'family',
+      },
+    ];
+    await this.ctx.bean.role.addRoleRightBatchByModeFlow({ atomClassName: 'purchaseOrder', roleRights });
+    // add role rights
+    roleRights = [
+      //
+      { roleName: 'family', action: 'read', scopeNames: 'authenticated' },
+    ];
+    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'purchaseOrder', roleRights });
+  }
+}

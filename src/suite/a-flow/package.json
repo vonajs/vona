@@ -27,6 +27,6 @@
     "cabloy-module-api-a-flowgateway": "workspace:^",
     "cabloy-module-api-a-flownode": "workspace:^",
     "cabloy-module-api-a-flowtask": "workspace:^",
-    "cabloy-module-api-a-flowtimeline": "workspace:^"
+    "cabloy-module-api-test-flow": "workspace:^"
   }
 }

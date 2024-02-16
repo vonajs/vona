@@ -4,4 +4,4 @@ import 'cabloy-module-api-a-flowchart';
 import 'cabloy-module-api-a-flowgateway';
 import 'cabloy-module-api-a-flownode';
 import 'cabloy-module-api-a-flowtask';
-import 'cabloy-module-api-a-flowtimeline';
+import 'cabloy-module-api-test-flow';
