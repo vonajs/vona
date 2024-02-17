@@ -111,13 +111,12 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
           const fullKey = groupName === 'default' ? `${moduleName}:${key}` : `${moduleName}:${groupName}:${key}`;
           // bean
           let beanFullName;
-          const beanName = cache.bean;
-          if (beanName) {
-            if (typeof beanName === 'string') {
-              beanFullName = `${moduleName}.summer.cache.${beanName}`;
-            } else {
-              beanFullName = `${beanName.module || moduleName}.summer.cache.${beanName.name}`;
-            }
+          if (cache.bean) {
+            beanFullName = this.bean.util.combineBeanFullName({
+              module: moduleName,
+              scene: 'summer.cache',
+              bean: cache.bean,
+            });
           }
           // ok
           cacheBases[fullKey] = {

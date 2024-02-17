@@ -181,13 +181,11 @@ export class BeanStats extends BeanModuleScopeBase {
         const provider = providers[key];
         const fullKey = `${module.info.relativeName}:${key}`;
         // bean
-        const beanName = provider.bean;
-        let beanFullName;
-        if (typeof beanName === 'string') {
-          beanFullName = `${module.info.relativeName}.stats.${beanName}`;
-        } else {
-          beanFullName = `${beanName.module || module.info.relativeName}.stats.${beanName.name}`;
-        }
+        const beanFullName = this.bean.util.combineBeanFullName({
+          module: module.info.relativeName,
+          scene: 'stats',
+          bean: provider.bean,
+        });
         // dependencies
         const dependencies = this._parseDependencies(fullKey, module, provider.dependencies);
         // ok

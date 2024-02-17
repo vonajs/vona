@@ -63,13 +63,11 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
       const relativeName = module.info.relativeName;
       for (const key in services) {
         const service = services[key];
-        const beanName = service.bean;
-        let beanFullName;
-        if (typeof beanName === 'string') {
-          beanFullName = `${relativeName}.flow.service.${beanName}`;
-        } else {
-          beanFullName = `${beanName.module || relativeName}.flow.service.${beanName.name}`;
-        }
+        const beanFullName = this.bean.util.combineBeanFullName({
+          module: relativeName,
+          scene: 'flow.service',
+          bean: service.bean,
+        });
         // group by module
         if (!flowServiceBases[relativeName]) {
           flowServiceBases[relativeName] = {};
@@ -92,13 +90,11 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
       if (!behaviors) continue;
       for (const key in behaviors) {
         const behavior = behaviors[key];
-        const beanName = behavior.bean;
-        let beanFullName;
-        if (typeof beanName === 'string') {
-          beanFullName = `${module.info.relativeName}.flow.behavior.${beanName}`;
-        } else {
-          beanFullName = `${beanName.module || module.info.relativeName}.flow.behavior.${beanName.name}`;
-        }
+        const beanFullName = this.bean.util.combineBeanFullName({
+          module: module.info.relativeName,
+          scene: 'flow.behavior',
+          bean: behavior.bean,
+        });
         // support fullKey and key
         const fullKey = `${module.info.relativeName}:${key}`;
         flowBehaviorBases[fullKey] = flowBehaviorBases[key] = {
@@ -118,13 +114,11 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
       if (!nodes) continue;
       for (const key in nodes) {
         const node = nodes[key];
-        const beanName = node.bean;
-        let beanFullName;
-        if (typeof beanName === 'string') {
-          beanFullName = `${module.info.relativeName}.flow.node.${beanName}`;
-        } else {
-          beanFullName = `${beanName.module || module.info.relativeName}.flow.node.${beanName.name}`;
-        }
+        const beanFullName = this.bean.util.combineBeanFullName({
+          module: module.info.relativeName,
+          scene: 'flow.node',
+          bean: node.bean,
+        });
         // support fullKey and key
         const fullKey = `${module.info.relativeName}:${key}`;
         flowNodeBases[fullKey] = flowNodeBases[key] = {
@@ -155,13 +149,11 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
       if (!edges) continue;
       for (const key in edges) {
         const edge = edges[key];
-        const beanName = edge.bean;
-        let beanFullName;
-        if (typeof beanName === 'string') {
-          beanFullName = `${module.info.relativeName}.flow.edge.${beanName}`;
-        } else {
-          beanFullName = `${beanName.module || module.info.relativeName}.flow.edge.${beanName.name}`;
-        }
+        const beanFullName = this.bean.util.combineBeanFullName({
+          module: module.info.relativeName,
+          scene: 'flow.edge',
+          bean: edge.bean,
+        });
         // support fullKey and key
         const fullKey = `${module.info.relativeName}:${key}`;
         flowEdgeBases[fullKey] = flowEdgeBases[key] = {
