@@ -9,10 +9,6 @@ export class BeanFlowBehaviorBase<T = unknown> extends BeanBase<T> {
   _behaviorDef: any;
   _behaviorBase: any;
 
-  constructor() {
-    super();
-  }
-
   protected __init__(options) {
     if (options) {
       this.flowInstance = options.flowInstance;
