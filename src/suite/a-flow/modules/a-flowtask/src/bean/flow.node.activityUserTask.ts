@@ -4,8 +4,8 @@ import FlowNodeActivityUserTaskBase from '../common/flowNodeActivityUserTaskBase
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeActivityUserTask extends FlowNodeActivityUserTaskBase {
-  // constructor(options) {
-  //   super(options);
+  // constructor() {
+  //   super();
   //   // this.atomStateDefault = 2;
   // }
 }

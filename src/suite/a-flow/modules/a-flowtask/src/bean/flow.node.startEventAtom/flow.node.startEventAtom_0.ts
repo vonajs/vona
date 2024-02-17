@@ -6,8 +6,8 @@ import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';
 export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   atomStateDefault: any;
 
-  constructor(options) {
-    super(options);
+  constructor() {
+    super();
     this.atomStateDefault = 1;
   }
 

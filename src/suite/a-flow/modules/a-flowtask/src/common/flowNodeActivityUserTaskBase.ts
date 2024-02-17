@@ -4,8 +4,8 @@ import assert from 'assert';
 export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
   atomStateDefault: any;
 
-  constructor(options) {
-    super(options);
+  constructor() {
+    super();
     this.atomStateDefault = null;
   }
 
