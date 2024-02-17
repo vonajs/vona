@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Create extends BeanAtomUtils {
   // create
@@ -22,12 +22,12 @@ export class BeanAtom0Create extends BeanAtomUtils {
       item.roleIdOwner = roleIdOwner;
     }
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    const data = await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, item, options, user },
-      fn: 'create',
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const data = await beanInstance.create({
+      atomClass,
+      item,
+      options,
+      user,
     });
     // patch data
     const key = this._patchCreateWriteData({ data, atomClassBase });
