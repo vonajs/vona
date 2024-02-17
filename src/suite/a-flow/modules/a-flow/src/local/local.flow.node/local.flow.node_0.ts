@@ -7,7 +7,7 @@ import UtilsFn from '../../common/utils.js';
 import { LocalContextNode } from '../local.context.node.js';
 import { LocalContextEdge } from '../local.context.edge.js';
 import { LocalContextFlow } from '../local.context.flow.js';
-import { LocalFlowNodeCycle } from './local.flow.node_cycle.js';
+import { LocalFlowNode } from '../local.flow.node.js';
 
 const __behaviorBaseDef = {
   id: 'behavior_0',
@@ -33,6 +33,10 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
     this._nodeBase = null;
     this._nodeBaseBean = null;
     this._behaviors = null;
+  }
+
+  get self() {
+    return Cast<LocalFlowNode>(this);
   }
 
   __init__({ context, contextEdge, nodeDef }: any) {
@@ -216,7 +220,7 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
     // nodeDef
     const nodeDef = this.contextNode._nodeDef;
     // options
-    const options = Cast<LocalFlowNodeCycle>(this).getNodeDefOptions();
+    const options = this.self.getNodeDefOptions();
     return nodeDef.type.indexOf('startEventAtom') > -1 ? options.task : options;
   }
 
