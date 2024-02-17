@@ -1,7 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanBase } from '@cabloy/core';
-import { BeanAtomStateDynamic } from './bean.atomState_dynamic.js';
-import { BeanAtomStateStatic } from './bean.atomState_static.js';
+import { BeanAtomState } from '../bean.atomState.js';
 
 export class BeanAtomState0 extends BeanBase {
   dictKeyDefault: any;
@@ -9,6 +8,10 @@ export class BeanAtomState0 extends BeanBase {
   constructor() {
     super();
     this.dictKeyDefault = 'a-dictbooster:dictAtomStateDefault';
+  }
+
+  get self() {
+    return Cast<BeanAtomState>(this);
   }
 
   async findDictItem({ atomClass, atomClassBase, atomStage, atomState }: any) {
@@ -21,11 +24,11 @@ export class BeanAtomState0 extends BeanBase {
     atomStage = this.ctx.bean.atomStage.toString({ atomStage });
     const flowStageSame = flowStage === atomStage;
     // dictKey: static
-    let dictKey = Cast<BeanAtomStateStatic>(this).static_getDictKey({ atomClass, atomClassBase, atomStage });
+    let dictKey = this.self.static_getDictKey({ atomClass, atomClassBase, atomStage });
     if (!dictKey) {
       // dictKey: dynamic
       if (flowStageSame) {
-        const dictKeyInfo = await Cast<BeanAtomStateDynamic>(this).dynamic_getDictKeyInfo({ atomClass });
+        const dictKeyInfo = await this.self.dynamic_getDictKeyInfo({ atomClass });
         dictKey = dictKeyInfo?.dictKey;
       }
     }
