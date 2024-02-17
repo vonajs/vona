@@ -7,8 +7,11 @@ export class BeanFlowEdgeBase extends BeanBase {
   contextNode: any;
   contextEdge: any;
 
-  constructor(options) {
+  constructor() {
     super();
+  }
+
+  protected __init__(options) {
     if (options) {
       this.flowInstance = options.flowInstance;
       this.edgeInstance = options.edgeInstance;
