@@ -10,7 +10,7 @@ export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
     const containerMode = options.containerMode;
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
-    const actionsRes = await Cast<BeanAtom>(this).__checkRightActionBulk_fetchActions({
+    const actionsRes = await this.self.__checkRightActionBulk_fetchActions({
       atomClass,
       atomClassBase,
       user,
@@ -28,7 +28,7 @@ export class BeanAtomRightActionsBulk extends BeanAtomRightActions {
         continue;
       }
       // right check
-      const _resCheck = await Cast<BeanAtom>(this).__checkRightActionBulk_check({
+      const _resCheck = await this.self.__checkRightActionBulk_check({
         atomClass,
         atomClassBase,
         actionRes,

@@ -53,7 +53,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
         if (_atomBasic.atomSimple) {
           if (atomClassBase.history !== false) {
             //  formal -> history
-            await Cast<BeanAtom>(this)._copy({
+            await this.self._copy({
               target: 'history',
               atomClass,
               srcKey: { atomId: key.atomId },

@@ -19,7 +19,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     const checkAtomHistory = await this._checkRightSelect_atomHistory({ atomClass, user, options });
     if (!checkAtomHistory) return false;
     // check detail
-    const detailRightInherit = await Cast<BeanAtom>(this)._checkDetailRightInherit({
+    const detailRightInherit = await this.self._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action: 'read',

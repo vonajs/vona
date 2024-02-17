@@ -108,7 +108,7 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
     });
     if (!checkRight) return null;
     // schema: use stage:formal fieldsRight
-    return await Cast<BeanAtom>(this)._prepareAtomSchema({
+    return await this.self._prepareAtomSchema({
       mode,
       atomClass,
       options: {},

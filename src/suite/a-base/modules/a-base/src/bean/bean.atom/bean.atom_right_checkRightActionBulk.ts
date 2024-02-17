@@ -117,7 +117,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
   async __checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options }: any) {
     if (!actionRes) return actionRes;
     // check detail
-    const detailRightInherit = await Cast<BeanAtom>(this)._checkDetailRightInherit({
+    const detailRightInherit = await this.self._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action: actionRes.name,

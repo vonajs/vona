@@ -50,7 +50,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
       });
     }
     // notify
-    Cast<BeanAtom>(this)._notifyStars();
+    this.self._notifyStars();
     // ok
     return { star, starCount };
   }
@@ -64,7 +64,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     // atomLabelRef
     await this._labels_atomLabelRef({ atomId: key.atomId, labels, user });
     // notify
-    Cast<BeanAtom>(this)._notifyLabels();
+    this.self._notifyLabels();
   }
 
   async _labels_atomLabel({ atomId, labels, user }: any) {

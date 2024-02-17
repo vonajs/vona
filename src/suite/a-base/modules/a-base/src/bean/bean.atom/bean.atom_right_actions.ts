@@ -51,7 +51,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
         continue;
       }
       // right check
-      const _resCheck = await Cast<BeanAtom>(this)._checkRightAction_inner({
+      const _resCheck = await this.self._checkRightAction_inner({
         atom,
         atomClass,
         action: actionRes.code,
@@ -159,7 +159,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
       return actionsRes;
     }
     // all
-    return await Cast<BeanAtom>(this).__checkRightActionBulk_fetchActions_fromMeta({
+    return await this.self.__checkRightActionBulk_fetchActions_fromMeta({
       atomClass,
       atomClassBase,
       user,

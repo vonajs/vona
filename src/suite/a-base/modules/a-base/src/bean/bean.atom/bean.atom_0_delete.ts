@@ -48,7 +48,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     // atom
     if (_atom.atomStage === 0) {
       // close draft
-      await Cast<BeanAtom>(this).closeDraft({ key });
+      await this.self.closeDraft({ key });
     } else if (_atom.atomStage === 1) {
       // delete history
       const listHistory = await this.modelAtom.select({
@@ -76,7 +76,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
           fn: 'delete',
         });
         // notify
-        Cast<BeanAtom>(this)._notifyDraftsDrafting(null, atomClass);
+        this.self._notifyDraftsDrafting(null, atomClass);
       }
       // delete formal
       await this.ctx.meta.util.executeBeanAuto({
@@ -110,7 +110,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       where: { atomId, star: 1 },
     });
     for (const item of items) {
-      Cast<BeanAtom>(this)._notifyStars({ id: item.userId });
+      this.self._notifyStars({ id: item.userId });
     }
     if (items.length > 0) {
       await this.modelAtomStar.delete({ atomId });
@@ -122,7 +122,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       where: { atomId },
     });
     for (const item of items) {
-      Cast<BeanAtom>(this)._notifyLabels({ id: item.userId });
+      this.self._notifyLabels({ id: item.userId });
     }
     if (items.length > 0) {
       await this.modelAtomLabel.delete({ atomId });

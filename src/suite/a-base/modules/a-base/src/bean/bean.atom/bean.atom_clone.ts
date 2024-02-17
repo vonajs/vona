@@ -1,8 +1,6 @@
-import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomClone extends BeanAtomStarLabel {
   async clone({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, roleIdOwner, user }: any) {
@@ -25,7 +23,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     });
     // ok
     // get atom
-    const atom = await Cast<BeanAtom>(this).read({ key: keyDraft, atomClass, options, user });
+    const atom = await this.self.read({ key: keyDraft, atomClass, options, user });
     // draft/formal
     const res = { key: keyDraft, atom };
     if (!atomClassBase.itemOnly && atom.atomStage === 0) return { draft: res };

@@ -16,7 +16,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
         // create formal
         const srcItem = await this.ctx.bean.atom.read({ key: { atomId: atomIdDraft }, user });
         srcItem.atomSimple = 1; // important
-        const keyFormal = await Cast<BeanAtom>(this)._copy({
+        const keyFormal = await this.self._copy({
           target: 'formal',
           atomClass,
           srcKey: { atomId: atomIdDraft },
@@ -58,7 +58,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
         fn: 'delete',
       });
       // notify to change draft stats
-      Cast<BeanAtom>(this)._notifyDraftsDrafting(null, atomClass);
+      this.self._notifyDraftsDrafting(null, atomClass);
     }
     // ok
     if (atom.atomStage === 0) {

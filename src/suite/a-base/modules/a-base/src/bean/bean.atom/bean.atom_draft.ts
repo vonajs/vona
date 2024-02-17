@@ -20,7 +20,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     const user = { id: atomDraft.userIdUpdated };
     // ** update draft from formal
     if (atomDraft.atomIdFormal) {
-      await Cast<BeanAtom>(this)._copy({
+      await this.self._copy({
         target: 'draft',
         atomClass,
         srcKey: { atomId: atomDraft.atomIdFormal },
@@ -53,8 +53,8 @@ export class BeanAtomDraft extends BeanAtomClone {
       }
     }
     // notify
-    Cast<BeanAtom>(this)._notifyDraftsDrafting(user, atomClass);
-    Cast<BeanAtom>(this)._notifyDraftsFlowing(user, atomClass);
+    this.self._notifyDraftsDrafting(user, atomClass);
+    this.self._notifyDraftsFlowing(user, atomClass);
   }
 
   async openDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
@@ -76,7 +76,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       };
     }
     // check simple switch
-    atom = await Cast<BeanAtom>(this)._checkSimpleSwitch({ atomClass, atomClassBase, atom, user });
+    atom = await this.self._checkSimpleSwitch({ atomClass, atomClassBase, atom, user });
     // open draft
     let res;
     if (atom.atomSimple) {
@@ -115,7 +115,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       const atomIdFormal = atom.atomIdFormal;
       keyFormal = { atomId: atomIdFormal };
       // ** copy formal from history
-      keyFormal = await Cast<BeanAtom>(this)._copy({
+      keyFormal = await this.self._copy({
         target: 'formal',
         atomClass,
         srcKey: { atomId: atom.id },
@@ -172,7 +172,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       }
       const atomRevision = atomDraft.atomRevision;
       // ** copy draft from history
-      keyDraft = await Cast<BeanAtom>(this)._copy({
+      keyDraft = await this.self._copy({
         target: 'draft',
         atomClass,
         srcKey: { atomId: atom.id },
@@ -203,7 +203,7 @@ export class BeanAtomDraft extends BeanAtomClone {
         changed = false;
       } else {
         // ** copy draft from formal
-        await Cast<BeanAtom>(this)._copy({
+        await this.self._copy({
           target: 'draft',
           atomClass,
           srcKey: { atomId: atom.id },
@@ -236,7 +236,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     if (atom.atomClosed === 1) {
       // ** copy draft from formal
       if (atom.atomIdFormal > 0) {
-        await Cast<BeanAtom>(this)._copy({
+        await this.self._copy({
           target: 'draft',
           atomClass,
           srcKey: { atomId: atom.atomIdFormal },
@@ -269,7 +269,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       userIdUpdated: user.id,
     });
     // notify
-    Cast<BeanAtom>(this)._notifyDraftsDrafting(null, atomClass);
+    this.self._notifyDraftsDrafting(null, atomClass);
   }
 
   async _createDraftFromFormal({ atomClass, atomIdFormal, user }: any) {

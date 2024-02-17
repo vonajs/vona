@@ -35,7 +35,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       // const createDelay = this.ctx.bean.atomAction.getCreateDelay({ atomClass });
       // if (!createDelay) this.ctx.throw(403);
       // check if create
-      return await Cast<BeanAtom>(this).checkRightActionBulk({
+      return await this.self.checkRightActionBulk({
         atomClass,
         action: 1,
         user,
@@ -128,7 +128,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFromViewHistory;
     }
     // check formActionRight
-    const rightFormAction = await Cast<BeanAtom>(this)._checkRightFormAction({
+    const rightFormAction = await this.self._checkRightFormAction({
       key: { atomId: atom.atomId },
       atomClass,
       atomClassBase,
@@ -144,7 +144,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFormAction;
     }
     // check flowTaskRight
-    const rightFlowTask = await Cast<BeanAtom>(this)._checkRightFlowTask({
+    const rightFlowTask = await this.self._checkRightFlowTask({
       key: { atomId: atom.atomId },
       atomClass,
       atomClassBase,
@@ -161,7 +161,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return rightFlowTask;
     }
     // check detail
-    const detailRightInherit = await Cast<BeanAtom>(this)._checkDetailRightInherit({
+    const detailRightInherit = await this.self._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action,
@@ -171,7 +171,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (!detailRightInherit) return null;
     // special for read
     if (action === 2) {
-      return await Cast<BeanAtom>(this)._checkRightRead_normal({
+      return await this.self._checkRightRead_normal({
         _atom,
         atomClass,
         user,
@@ -214,7 +214,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return null;
     }
     // stage
-    const _checkStage = Cast<BeanAtom>(this)._checkRightAction_checkStage({
+    const _checkStage = this.self._checkRightAction_checkStage({
       _atom,
       actionBase,
     });
@@ -222,7 +222,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return _checkStage;
     }
     // actionBase.enableOnStatic
-    const _enableOnStatic = Cast<BeanAtom>(this)._checkRightAction_enableOnStatic({
+    const _enableOnStatic = this.self._checkRightAction_enableOnStatic({
       _atom,
       action,
       actionBase,
@@ -419,7 +419,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       if (flow) return _atom;
     }
     // check enableOnOpened
-    const _enableOnOpened = Cast<BeanAtom>(this)._checkRightAction_enableOnOpened({
+    const _enableOnOpened = this.self._checkRightAction_enableOnOpened({
       _atomDraft,
       actionBase,
     });
@@ -461,7 +461,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return true;
     }
     // forAtomUser
-    const forAtomUser = Cast<BeanAtom>(this)._checkForAtomUser(atomClass);
+    const forAtomUser = this.self._checkForAtomUser(atomClass);
     // check formal/history
     return await this._checkRightAction_sql({
       userIdWho: user.id,

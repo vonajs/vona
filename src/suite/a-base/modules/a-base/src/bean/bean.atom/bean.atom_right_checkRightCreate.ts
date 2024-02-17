@@ -25,7 +25,7 @@ export class BeanAtomRightCheckRightCreate extends BeanAtomRightCheckRightAction
   async _checkRightCreateRole_normal({ atomClass, roleIdOwner, user, options }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check detail
-    const detailRightInherit = await Cast<BeanAtom>(this)._checkDetailRightInherit({
+    const detailRightInherit = await this.self._checkDetailRightInherit({
       atomClass,
       atomClassBase,
       action: 'create',

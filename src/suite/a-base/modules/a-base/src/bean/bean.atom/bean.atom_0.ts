@@ -1,6 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { ScopeModule } from '../../resource/this.js';
-import { BeanModuleScopeBase } from '@cabloy/core';
+import { BeanModuleScopeBase, Cast } from '@cabloy/core';
 import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
@@ -63,8 +62,8 @@ export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
     // notify
     const item = await this.modelAtom.get({ id: key.atomId });
     const user = { id: item.userIdUpdated };
-    Cast<BeanAtom>(this)._notifyDraftsDrafting(user, atomClass);
-    Cast<BeanAtom>(this)._notifyDraftsFlowing(user, atomClass);
+    this.self._notifyDraftsDrafting(user, atomClass);
+    this.self._notifyDraftsFlowing(user, atomClass);
   }
 
   async atomState({ key, atom: { atomState } }) {
@@ -101,7 +100,7 @@ export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
   async stats({ atomIds, user }: any) {
     const list: any[] = [];
     for (const atomId of atomIds) {
-      const res = await Cast<BeanAtom>(this).checkRightRead({
+      const res = await this.self.checkRightRead({
         atom: { id: atomId },
         user,
         checkFlow: true,

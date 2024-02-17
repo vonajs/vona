@@ -109,7 +109,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     // formal -> history
     if (item.atomIdFormal) {
       if (atomClassBase.history !== false) {
-        await Cast<BeanAtom>(this)._copy({
+        await this.self._copy({
           target: 'history',
           atomClass,
           srcKey: { atomId: item.atomIdFormal },
@@ -121,7 +121,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       }
     }
     // draft -> formal
-    const keyFormal = await Cast<BeanAtom>(this)._copy({
+    const keyFormal = await this.self._copy({
       target: 'formal',
       atomClass,
       srcKey: { atomId: item.atomId },
@@ -137,9 +137,9 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       atomIdFormal: keyFormal.atomId,
     });
     // notify
-    Cast<BeanAtom>(this)._notifyDraftsDrafting(user, atomClass);
+    this.self._notifyDraftsDrafting(user, atomClass);
     if (item.atomFlowId > 0) {
-      Cast<BeanAtom>(this)._notifyDraftsFlowing(user, atomClass);
+      this.self._notifyDraftsFlowing(user, atomClass);
     }
     // get formal atom
     const atomFormal = await this.modelAtom.get({ id: keyFormal.atomId });

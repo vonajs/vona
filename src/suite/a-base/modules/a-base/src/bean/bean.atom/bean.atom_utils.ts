@@ -90,7 +90,7 @@ export class BeanAtomUtils extends BeanAtom0 {
         atom = await modelItem.get({ id: atomId });
       } else {
         // not use .read for infinite loop
-        atom = await Cast<BeanAtom>(this)._get({ key, atomClass });
+        atom = await this.self._get({ key, atomClass });
       }
     } else {
       atom = await this.modelAtom.get({ id: atomId, atomClassId: atomClass.id });

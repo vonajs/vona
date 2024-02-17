@@ -33,7 +33,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
       return atom;
     }
     // forAtomUser
-    const forAtomUser = Cast<BeanAtom>(this)._checkForAtomUser(atomClass);
+    const forAtomUser = this.self._checkForAtomUser(atomClass);
     // formal/history
     const sql = await this.sqlProcedure.checkRoleRightAction({
       iid: this.ctx.instance.id,
@@ -94,7 +94,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
       return true;
     }
     // forAtomUser
-    const forAtomUser = Cast<BeanAtom>(this)._checkForAtomUser(atomClass);
+    const forAtomUser = this.self._checkForAtomUser(atomClass);
     // formal/history
     return await this._checkRightAction_sql({
       userIdWho: user.id,
