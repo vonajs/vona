@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Cast } from '@cabloy/core';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
@@ -7,6 +7,7 @@ import { LocalContextFlow } from '../local.context.flow.js';
 import { LocalFlowListener } from '../local.flow.listener.js';
 import { LocalFlowNode } from '../local.flow.node.js';
 import { LocalFlowEdge } from '../local.flow.edge.js';
+import { LocalFlowFlow } from '../local.flow.flow.js';
 
 export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   context: LocalContextFlow;
@@ -14,6 +15,10 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
 
   constructor({ flowDef: _flowDef }) {
     super();
+  }
+
+  get self() {
+    return Cast<LocalFlowFlow>(this);
   }
 
   __init__({ flowDef }: any) {
