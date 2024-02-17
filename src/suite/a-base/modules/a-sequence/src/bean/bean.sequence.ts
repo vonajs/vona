@@ -96,13 +96,11 @@ export class BeanSequence extends BeanModuleScopeBase {
       if (!providers) continue;
       for (const key in providers) {
         const provider = providers[key];
-        const beanName = provider.bean;
-        let beanFullName;
-        if (typeof beanName === 'string') {
-          beanFullName = `${module.info.relativeName}.sequence.${beanName}`;
-        } else {
-          beanFullName = `${beanName.module || module.info.relativeName}.sequence.${beanName.name}`;
-        }
+        const beanFullName = this.bean.util.combineBeanFullName({
+          module: module.info.relativeName,
+          scene: 'sequence',
+          bean: provider.bean,
+        });
         const fullKey = `${module.info.relativeName}:${key}`;
         sequences[fullKey] = {
           ...provider,

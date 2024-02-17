@@ -52,12 +52,11 @@ export class BeanEvent extends BeanModuleScopeBase {
       // bean
       const implementationName = implementations[key];
       if (!implementationName) continue;
-      let beanFullName;
-      if (typeof implementationName === 'string') {
-        beanFullName = `${module.info.relativeName}.event.${implementationName}`;
-      } else {
-        beanFullName = `${implementationName.module || module.info.relativeName}.event.${implementationName.name}`;
-      }
+      const beanFullName = this.bean.util.combineBeanFullName({
+        module: module.info.relativeName,
+        scene: 'event',
+        bean: implementationName,
+      });
       eventArray.push(beanFullName);
     }
     return eventArray;
