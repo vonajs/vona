@@ -1,13 +1,15 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
-import { MiddlewareRightAtom } from './middleware.right_atom.js';
-import { MiddlewareRightAtomClass } from './middleware.right_atomClass.js';
-import { MiddlewareRightResource } from './middleware.right_resource.js';
+import { MiddlewareRight } from '../middleware.right.js';
 
-export class MiddlewareRight0 extends BeanBase {
+export class MiddlewareRight0 extends BeanBase<ScopeModule> {
+  get self() {
+    return Cast<MiddlewareRight>(this);
+  }
+
   get constant() {
-    return this.ctx.constant.module(__ThisModule__);
+    return this.scope.constant;
   }
 
   async execute(options, next) {
@@ -41,12 +43,12 @@ export class MiddlewareRight0 extends BeanBase {
 
   async checkRight(type, options) {
     // atom
-    if (type === 'atom') return await Cast<MiddlewareRightAtom>(this).checkAtom(options);
+    if (type === 'atom') return await this.self.checkAtom(options);
 
     // atomClass
-    if (type === 'atomClass') return await Cast<MiddlewareRightAtomClass>(this).checkAtomClass(options);
+    if (type === 'atomClass') return await this.self.checkAtomClass(options);
 
     // resource
-    if (type === 'resource') return await Cast<MiddlewareRightResource>(this).checkResource(options);
+    if (type === 'resource') return await this.self.checkResource(options);
   }
 }
