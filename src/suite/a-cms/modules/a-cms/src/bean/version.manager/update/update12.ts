@@ -1,20 +1,20 @@
-import { __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run(options) {
-    await this._update12Migration(options);
+  async run() {
+    await this._update12Migration();
   }
 
-  async _update12Migration(options) {
+  async _update12Migration() {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        beanFullName: `${__ThisModule__}.version.manager`,
-        context: options,
-        fn: '_update12MigrationInstance',
+        fn: async ({ ctx }) => {
+          const selfInstance = ctx.bean._newBean(VersionUpdate);
+          await selfInstance._update12MigrationInstance();
+        },
       });
     }
   }

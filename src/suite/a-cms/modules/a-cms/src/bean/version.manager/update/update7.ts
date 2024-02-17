@@ -1,8 +1,7 @@
-import { __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run(options) {
+  async run() {
     // update cms blocks
     await this.ctx.model.query(`
       update aCmsContent set content = replace (content,'cms-pluginblock:audio','cms-pluginblock:blockAudio') where content like '%cms-pluginblock:audio%'
@@ -11,18 +10,19 @@ export class VersionUpdate extends BeanBase {
       update aCmsContent set content = replace (content,'cms-pluginblock:iframe','cms-pluginblock:blockIFrame') where content like '%cms-pluginblock:iframe%'
     `);
     // migration: languange/category/tag
-    await this._update7Migration(options);
+    await this._update7Migration();
   }
 
-  async _update7Migration(options) {
+  async _update7Migration() {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        beanFullName: `${__ThisModule__}.version.manager`,
-        context: options,
-        fn: '_update7MigrationInstance',
+        fn: async ({ ctx }) => {
+          const selfInstance = ctx.bean._newBean(VersionUpdate);
+          await selfInstance._update7MigrationInstance();
+        },
       });
     }
   }

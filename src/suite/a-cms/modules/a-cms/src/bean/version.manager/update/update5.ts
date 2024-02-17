@@ -1,11 +1,8 @@
-import { __ThisModule__ } from '../../../resource/this.js';
-
 import utils from '../../../common/utils.js';
-
 import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
-  async run(options) {
+  async run() {
     // alter table: aCmsCategory
     let sql = `
       ALTER TABLE aCmsCategory
@@ -20,18 +17,19 @@ export class VersionUpdate extends BeanBase {
     await this.ctx.model.query(sql);
 
     // atomClass
-    await this._update5AtomClassIds(options);
+    await this._update5AtomClassIds();
   }
 
-  async _update5AtomClassIds(options) {
+  async _update5AtomClassIds() {
     // all instances
     const instances = await this.ctx.bean.instance.list({ where: {} });
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        beanFullName: `${__ThisModule__}.version.manager`,
-        context: options,
-        fn: '_update5AtomClassIdsInstance',
+        fn: async ({ ctx }) => {
+          const selfInstance = ctx.bean._newBean(VersionUpdate);
+          await selfInstance._update5AtomClassIdsInstance();
+        },
       });
     }
   }
