@@ -84,7 +84,6 @@ export class CtxUtil extends BeanSimple {
   async executeBean({
     locale,
     subdomain,
-    beanModule,
     beanFullName,
     context,
     fn,
@@ -93,7 +92,6 @@ export class CtxUtil extends BeanSimple {
   }: {
     locale?: string;
     subdomain?: string;
-    beanModule?: string;
     beanFullName?: string;
     context?: any;
     fn?: IExecuteBeanCallback | string;
@@ -105,7 +103,6 @@ export class CtxUtil extends BeanSimple {
       locale: locale === undefined ? ctx.locale : locale,
       subdomain: subdomain === undefined ? ctx.subdomain : subdomain,
       context,
-      beanModule,
       beanFullName,
       transaction,
       fn,
@@ -117,7 +114,6 @@ export class CtxUtil extends BeanSimple {
   async executeBeanIsolate({
     locale,
     subdomain,
-    beanModule,
     beanFullName,
     context,
     fn,
@@ -127,7 +123,6 @@ export class CtxUtil extends BeanSimple {
   }: {
     locale?: string;
     subdomain?: string | null;
-    beanModule?: string;
     beanFullName?: string;
     context?: any;
     fn?: IExecuteBeanCallback | string;
@@ -150,7 +145,6 @@ export class CtxUtil extends BeanSimple {
       locale: locale === undefined ? ctx.locale : locale,
       subdomain: subdomain === undefined ? ctx.subdomain : subdomain,
       context,
-      beanModule,
       beanFullName,
       transaction,
       fn,

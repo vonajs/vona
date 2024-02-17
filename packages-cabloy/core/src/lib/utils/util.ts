@@ -9,6 +9,7 @@ import { Request } from 'egg';
 import { CabloyContext, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
+import { appResource } from '../core/resource.js';
 
 const __EnvTests = ['unittest', 'test'];
 
@@ -246,7 +247,6 @@ export class AppUtil extends BeanSimple {
   async executeBean({
     locale,
     subdomain,
-    beanModule,
     beanFullName,
     context,
     fn,
@@ -257,7 +257,6 @@ export class AppUtil extends BeanSimple {
   }: {
     locale?: string;
     subdomain?: string;
-    beanModule?: string;
     beanFullName?: string;
     context: any;
     fn?: any;
@@ -267,7 +266,14 @@ export class AppUtil extends BeanSimple {
     instance?: boolean;
   }) {
     // ctxModule
-    const ctxModule = beanModule || ctxCaller?.module?.info?.relativeName || ctxParent?.module?.info?.relativeName;
+    let ctxModule;
+    if (beanFullName) {
+      const beanOptions = appResource.getBean(beanFullName as any);
+      ctxModule = beanOptions?.module;
+    }
+    if (!ctxModule) {
+      ctxModule = ctxCaller?.module?.info?.relativeName || ctxParent?.module?.info?.relativeName;
+    }
     // ctx
     const ctx = await this.createAnonymousContext({ locale, subdomain, module: ctxModule, instance });
     // innerAccess
