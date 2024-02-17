@@ -1,6 +1,5 @@
 import { Cast } from '@cabloy/core';
 import { BeanAtomUtils } from './bean.atom_utils.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
 import { BeanAtom } from '../bean.atom.js';
 
