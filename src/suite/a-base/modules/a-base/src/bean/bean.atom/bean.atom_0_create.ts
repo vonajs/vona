@@ -1,10 +1,8 @@
 import { Cast } from '@cabloy/core';
-import { BeanAtom0Read } from './bean.atom_0_read.js';
-import { BeanAtom0Write } from './bean.atom_0_write.js';
-import { BeanAtomNotify } from './bean.atom_notify.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
 
 import * as ModuleInfo from '@cabloy/module-info';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0Create extends BeanAtomUtils {
   // create
@@ -52,7 +50,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
       flowTaskId: options.flowTaskId,
       returnSchema: options.returnSchema,
     };
-    const resRead = await Cast<BeanAtom0Read>(this).read({ key, atomClass, options: optionsRead, user });
+    const resRead = await Cast<BeanAtom>(this).read({ key, atomClass, options: optionsRead, user });
     if (options.returnSchema) {
       return { key, item: resRead.item, schema: resRead.schema };
     }
@@ -64,14 +62,14 @@ export class BeanAtom0Create extends BeanAtomUtils {
     // save itemId
     if (!atomClassBase.itemOnly) {
       if (itemId !== undefined) {
-        await Cast<BeanAtom0Write>(this)._update({
+        await Cast<BeanAtom>(this)._update({
           atom: { id: atomId, itemId },
         });
       }
     }
     // notify
     if (!atomClassBase.itemOnly) {
-      Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(null, atomClass);
+      Cast<BeanAtom>(this)._notifyDraftsDrafting(null, atomClass);
     }
   }
 
