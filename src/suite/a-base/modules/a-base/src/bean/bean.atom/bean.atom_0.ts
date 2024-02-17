@@ -4,6 +4,10 @@ import { BeanModuleScopeBase } from '@cabloy/core';
 import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
+  get self() {
+    return Cast<BeanAtom>(this);
+  }
+
   get atomClass() {
     return this.scope._bean.atomClass;
   }
