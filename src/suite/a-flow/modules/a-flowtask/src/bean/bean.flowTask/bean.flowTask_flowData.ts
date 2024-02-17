@@ -1,12 +1,10 @@
-import { Cast } from '@cabloy/core';
 import { BeanFlowTaskAtomState } from './bean.flowTask_atomState.js';
-import { BeanFlowTaskCheckViewWorkflow } from './bean.flowTask_checkViewWorkflow.js';
 
 export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
   async flowData({ flowId, options, user }: any) {
     options = options || {};
     // allowViewWorkflow
-    const allowViewWorkflow = await Cast<BeanFlowTaskCheckViewWorkflow>(this)._checkViewWorkflow({
+    const allowViewWorkflow = await this.self._checkViewWorkflow({
       flowId,
       user,
     });

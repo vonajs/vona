@@ -1,9 +1,13 @@
 import { Cast } from '@cabloy/core';
 import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
-import { BeanFlowTask1 } from './bean.flowTask_1.js';
+import { BeanFlowTask } from '../bean.flowTask.js';
 
 export class BeanFlowTask0 extends BeanBase<ScopeModule> {
+  get self() {
+    return Cast<BeanFlowTask>(this);
+  }
+
   get modelFlowTask() {
     return this.scope.model.flowTask;
   }
@@ -22,7 +26,7 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
   }
 
   async select({ options, user, pageForce = true, count = 0 }: any) {
-    const tasks = await Cast<BeanFlowTask1>(this)._list({ options, user, pageForce, count });
+    const tasks = await this.self._list({ options, user, pageForce, count });
     // loop
     for (const task of tasks) {
       // locale
@@ -44,19 +48,19 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
 
   async claim({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     return await taskInstance!._claim();
   }
 
   async complete({ flowTaskId, handle, formAtom, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._complete({ handle, formAtom });
   }
 
   async appendHandleRemark({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({
+    const taskInstance = await this.self._loadTaskInstance({
       flowTaskId,
       user,
       history: true,
@@ -66,32 +70,32 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
 
   async assignees({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     return await taskInstance!._assignees();
   }
 
   async assigneesConfirmation({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._assigneesConfirmation({ handle });
   }
 
   async recall({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._recall();
   }
 
   async cancelFlow({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._cancelFlow({ handle });
   }
 
   // from history
   async viewAtom({ flowTaskId, user, throwError }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({
+    const taskInstance = await this.self._loadTaskInstance({
       flowTaskId,
       user,
       history: true,
@@ -104,7 +108,7 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
   // from runtime
   async editAtom({ flowTaskId, user, throwError }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({
+    const taskInstance = await this.self._loadTaskInstance({
       flowTaskId,
       user,
       history: false,
@@ -116,31 +120,31 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
 
   async forward({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._forward({ handle });
   }
 
   async forwardRecall({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._forwardRecall();
   }
 
   async substitute({ flowTaskId, handle, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._substitute({ handle });
   }
 
   async substituteRecall({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._substituteRecall();
   }
 
   async actions({ flowTaskId, user }: any) {
     // taskInstance
-    const taskInstance = await Cast<BeanFlowTask1>(this)._loadTaskInstance({ flowTaskId, user });
+    const taskInstance = await this.self._loadTaskInstance({ flowTaskId, user });
     await taskInstance!._actions();
   }
 }
