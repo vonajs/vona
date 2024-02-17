@@ -6,6 +6,7 @@ import initData15 from '../version.manager/init/initData15.js';
 
 import { BeanRoleOthers } from './bean.role_others.js';
 import { BeanRoleBuild } from './bean.role_build.js';
+import { BeanRole } from '../bean.role.js';
 
 const __atomClassRole = {
   module: __ThisModule__,
@@ -13,6 +14,10 @@ const __atomClassRole = {
 };
 
 export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
+  get self() {
+    return Cast<BeanRole>(this);
+  }
+
   get model() {
     return this.scope.model.role;
   }
@@ -79,7 +84,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async addChild({ roleAtomId, roleId, user }: any) {
-    roleId = await Cast<BeanRoleOthers>(this)._forceRoleId({ roleAtomId, roleId });
+    roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     const key = await this.add({ roleIdParent: roleId }, user, true);
     const atom = await this.ctx.bean.atom.read({ key, user });
     return { key, atom };
@@ -87,7 +92,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
 
   async move({ roleAtomId, roleId, roleIdParent }: any) {
     // role
-    const role = await Cast<BeanRoleOthers>(this)._forceRole({ roleAtomId, roleId });
+    const role = await this.self._forceRole({ roleAtomId, roleId });
     // roleIdParentOld
     const roleIdParentOld = role.roleIdParent;
     if (roleIdParentOld === roleIdParent) return;
@@ -99,17 +104,17 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
     await this.adjustCatalog(roleIdParent);
 
     // set dirty
-    await Cast<BeanRoleBuild>(this).setDirty(true);
+    await this.self.setDirty(true);
   }
 
   async delete({ roleAtomId, roleId, force = false }: any) {
-    roleAtomId = await Cast<BeanRoleOthers>(this)._forceRoleAtomId({ roleAtomId, roleId });
+    roleAtomId = await this.self._forceRoleAtomId({ roleAtomId, roleId });
     // delete this
     await this.ctx.bean.atom.delete({ key: { atomId: roleAtomId }, options: { force } });
   }
 
   async clone({ roleAtomId, roleId, user }: any) {
-    roleAtomId = await Cast<BeanRoleOthers>(this)._forceRoleAtomId({ roleAtomId, roleId });
+    roleAtomId = await this.self._forceRoleAtomId({ roleAtomId, roleId });
     // clone
     return await this.ctx.bean.atom.clone({ key: { atomId: roleAtomId }, user });
   }
@@ -184,7 +189,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async item({ roleAtomId, roleId }: any) {
-    roleAtomId = await Cast<BeanRoleOthers>(this)._forceRoleAtomId({ roleAtomId, roleId });
+    roleAtomId = await this.self._forceRoleAtomId({ roleAtomId, roleId });
     return await this.ctx.bean.atom.read({ key: { atomId: roleAtomId } });
   }
 

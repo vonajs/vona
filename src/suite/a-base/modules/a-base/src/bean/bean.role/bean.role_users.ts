@@ -17,7 +17,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     // user, should check user right scope
     // user = { id: 0 };
     // roleId
-    roleId = await Cast<BeanRoleOthers>(this)._forceRoleId({ roleAtomId, roleId });
+    roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
     // select
     const list = await this.ctx.bean.atom.select({
