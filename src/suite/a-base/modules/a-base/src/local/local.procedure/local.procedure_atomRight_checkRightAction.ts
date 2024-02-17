@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { LocalProcedureAtomRightCheckRoleRightRead } from './local.procedure_atomRight_checkRoleRightRead.js';
-import { LocalProcedureUtilsRights } from './local.procedure_utils_rights.js';
 
 export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomRightCheckRoleRightRead {
   async checkRightAction({ iid, userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }: any) {
@@ -62,7 +60,7 @@ export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomR
 
   async _checkRightAction_rightWhere({ iid, userIdWho, atomClass, atomClassBase, action, forAtomUser, atom }: any) {
     // right
-    return await Cast<LocalProcedureUtilsRights>(this)._prepareRight({
+    return await this.self._prepareRight({
       iid,
       atomClass,
       atomClassBase,

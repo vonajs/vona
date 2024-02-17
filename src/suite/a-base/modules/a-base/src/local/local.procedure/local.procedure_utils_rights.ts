@@ -1,5 +1,3 @@
-import { Cast } from '@cabloy/core';
-import { LocalProcedureUtils } from './local.procedure_utils.js';
 import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
@@ -23,7 +21,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     const enableRightMine = enableRight.mine;
     if (!enableRightMine) return false;
     // roleScopesMine
-    const roleScopesMine = await Cast<LocalProcedureUtils>(this)._prepare_roleScopesMineOfUser({
+    const roleScopesMine = await this.self._prepare_roleScopesMineOfUser({
       atomClass,
       action,
       userIdWho,
@@ -63,7 +61,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
             `);
       }
     } else {
-      const roleScopes = await Cast<LocalProcedureUtils>(this)._prepare_roleScopesOfUser({
+      const roleScopes = await this.self._prepare_roleScopesOfUser({
         atomClass,
         action,
         userIdWho,
@@ -124,7 +122,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
             `);
       }
     } else {
-      const roleScopes = await Cast<LocalProcedureUtils>(this)._prepare_roleScopesOfRole({
+      const roleScopes = await this.self._prepare_roleScopesOfRole({
         atomClass,
         action,
         roleIdWho,

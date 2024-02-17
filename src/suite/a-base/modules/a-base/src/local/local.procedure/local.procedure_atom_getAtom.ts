@@ -1,7 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { LocalProcedureAtomSelectAtomsFormal } from './local.procedure_atom_selectAtoms_formal.js';
-import { LocalProcedureUtils } from './local.procedure_utils.js';
-import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsFormal {
   async getAtom({ options }: any) {
@@ -48,7 +45,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
       _resourceJoin = '';
 
     // cms
-    const { _cmsField, _cmsJoin, _cmsWhere } = Cast<LocalProcedureUtils>(this)._prepare_cms({
+    const { _cmsField, _cmsJoin, _cmsWhere } = this.self._prepare_cms({
       tableName,
       iid,
       mode,
@@ -88,7 +85,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
 
     // tableName
     if (tableName) {
-      const _fields = await Cast<LocalProcedureUtilsFieldsRight>(this)._prepare_fieldsRight({ options });
+      const _fields = await this.self._prepare_fieldsRight({ options });
       _itemField = `${_fields},`;
       if (!atomClassBase || !atomClassBase.itemOnly) {
         _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
@@ -132,7 +129,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     }
 
     // fields
-    const _selectFields = Cast<LocalProcedureUtils>(this)._combineFields([
+    const _selectFields = this.self._combineFields([
       _itemField,
       _cmsField,
       _atomField,
