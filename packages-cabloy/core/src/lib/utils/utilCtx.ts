@@ -81,13 +81,6 @@ export class CtxUtil extends BeanSimple {
     return info;
   }
 
-  async executeBeanAuto({ beanFullName, context, fn }) {
-    const ctx = this.ctx;
-    // in the same ctx
-    const bean = ctx.bean._getBean(beanFullName);
-    return await ctx.app.meta.util._executeBeanFn({ fn, ctx, bean, context });
-  }
-
   async executeBean({
     locale,
     subdomain,

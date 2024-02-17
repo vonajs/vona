@@ -1,4 +1,3 @@
-import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 import { BeanAtomRightPreferredRoles } from './bean.atom_right_preferredRoles.js';
 
 export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
