@@ -1,5 +1,4 @@
 import { BeanAtom0Delete } from './bean.atom_0_delete.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Enable extends BeanAtom0Delete {

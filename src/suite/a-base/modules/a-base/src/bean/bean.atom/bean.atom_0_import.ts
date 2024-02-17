@@ -1,5 +1,4 @@
 import { BeanAtom0Export } from './bean.atom_0_export.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Import extends BeanAtom0Export {

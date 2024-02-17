@@ -1,5 +1,4 @@
 import { BeanAtom0Enable } from './bean.atom_0_enable.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Export extends BeanAtom0Enable {

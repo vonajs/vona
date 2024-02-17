@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtom0Import } from './bean.atom_0_import.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0Read extends BeanAtom0Import {
   // read

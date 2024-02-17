@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtom0Default } from './bean.atom_0_default.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0Delete extends BeanAtom0Default {
   // deleteBulk
