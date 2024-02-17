@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Import } from './bean.atom_0_import.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Read extends BeanAtom0Import {
   // read
@@ -13,13 +13,8 @@ export class BeanAtom0Read extends BeanAtom0Import {
     });
     if (!atom) return null;
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    const item = await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, options, key, user },
-      fn: 'read',
-    });
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const item = await beanInstance.read({ atomClass, options, key, user });
     // ok
     const returnSchema = options.returnSchema;
     if (!returnSchema) return item;
@@ -87,13 +82,8 @@ export class BeanAtom0Read extends BeanAtom0Import {
       forAtomUser,
     });
     // readQuery
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    const sql = await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, options, user },
-      fn: 'readQuery',
-    });
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const sql = await beanInstance.readQuery({ atomClass, options, user });
     const debug = this.ctx.app.bean.debug.get('atom:sql');
     debug('===== getAtom =====\n%s', sql);
     // query
