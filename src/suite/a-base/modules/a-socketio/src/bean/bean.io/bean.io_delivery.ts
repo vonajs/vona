@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIo0 } from './bean.io_0.js';
-import { BeanIoPush } from './bean.io_push.js';
 
 export class BeanIoDelivery extends BeanIo0 {
   // called by messageBase.onDelivery
@@ -13,7 +11,7 @@ export class BeanIoDelivery extends BeanIo0 {
     }
     // to queue: push
     //   should not use await for performance
-    Cast<BeanIoPush>(this)._pushQueuePush({ options, message, messageSyncs: [messageSync], messageClass });
+    this.self._pushQueuePush({ options, message, messageSyncs: [messageSync], messageClass });
   }
 
   // offline: return false

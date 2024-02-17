@@ -1,7 +1,12 @@
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Cast } from '@cabloy/core';
+import { BeanIo } from '../bean.io.js';
 
 export class BeanIo0 extends BeanBase<ScopeModule> {
+  get self() {
+    return Cast<BeanIo>(this);
+  }
+
   get messageClass() {
     return this.scope.local.messageClass;
   }
