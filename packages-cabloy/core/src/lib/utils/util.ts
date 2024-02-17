@@ -247,6 +247,7 @@ export class AppUtil extends BeanSimple {
   async executeBean({
     locale,
     subdomain,
+    beanModule,
     beanFullName,
     context,
     fn,
@@ -257,6 +258,7 @@ export class AppUtil extends BeanSimple {
   }: {
     locale?: string;
     subdomain?: string;
+    beanModule?: string;
     beanFullName?: string;
     context: any;
     fn?: any;
@@ -266,8 +268,8 @@ export class AppUtil extends BeanSimple {
     instance?: boolean;
   }) {
     // ctxModule
-    let ctxModule;
-    if (beanFullName) {
+    let ctxModule = beanModule;
+    if (!ctxModule && beanFullName) {
       const beanOptions = appResource.getBean(beanFullName as any);
       ctxModule = beanOptions?.module;
     }
