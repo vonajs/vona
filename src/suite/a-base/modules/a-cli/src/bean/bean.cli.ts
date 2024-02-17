@@ -124,14 +124,11 @@ export class BeanCli extends BeanBase {
           // command
           const _command = this.ctx.bean.util.extend({}, command);
           // bean
-          const beanName = command.bean;
-          let beanFullName;
-          if (typeof beanName === 'string') {
-            beanFullName = `${moduleName}.cli.${beanName}`;
-          } else {
-            beanFullName = `${beanName.module || moduleName}.cli.${beanName.name}`;
-          }
-          _command.beanFullName = beanFullName;
+          _command.beanFullName = this.bean.util.combineBeanFullName({
+            module: moduleName,
+            scene: 'cli',
+            bean: command.bean,
+          });
           // resource
           let atomStaticKey = _command.resource && _command.resource.atomStaticKey;
           if (!atomStaticKey) throw new Error(`cli command resource.atomStaticKey not specified: ${fullKey}`);

@@ -364,4 +364,22 @@ export class BeanUtil extends BeanBase<ScopeModule> {
       atomClassName: parts[1],
     };
   }
+
+  combineBeanFullName({
+    module,
+    scene,
+    bean,
+  }: {
+    module?: string;
+    scene: string;
+    bean: string | { module?: string; name: string };
+  }) {
+    let beanFullName;
+    if (typeof bean === 'string') {
+      beanFullName = `${module}.${scene}.${bean}`;
+    } else {
+      beanFullName = `${bean.module || module}.${scene}.${bean.name}`;
+    }
+    return beanFullName;
+  }
 }
