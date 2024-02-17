@@ -8,7 +8,7 @@ import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
  * activityService
  * startEventTimer
  */
-describe('flow.set00', () => {
+describe.only('flow.set00', () => {
   it('simple', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();

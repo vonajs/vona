@@ -13,10 +13,6 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   context: LocalContextFlow;
   _flowListener: LocalFlowListener;
 
-  constructor({ flowDef: _flowDef }) {
-    super();
-  }
-
   get self() {
     return Cast<LocalFlowFlow>(this);
   }

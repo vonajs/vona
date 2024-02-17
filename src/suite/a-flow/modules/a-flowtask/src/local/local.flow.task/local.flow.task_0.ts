@@ -10,19 +10,15 @@ export class LocalFlowTask0 extends BeanBase<ScopeModule> {
   contextNode: any;
   contextTask: any;
 
-  constructor({ nodeInstance }: any) {
-    super();
-    this.nodeInstance = nodeInstance;
-    this.flowInstance = nodeInstance.flowInstance;
-    this.context = nodeInstance.context;
-    this.contextNode = nodeInstance.contextNode;
-  }
-
   get self() {
     return Cast<LocalFlowTask>(this);
   }
 
   __init__({ nodeInstance }: any) {
+    this.nodeInstance = nodeInstance;
+    this.flowInstance = nodeInstance.flowInstance;
+    this.context = nodeInstance.context;
+    this.contextNode = nodeInstance.contextNode;
     // context
     this.contextTask = this.ctx.bean._newBean(LocalContextTask, {
       context: nodeInstance.context,

@@ -6,12 +6,8 @@ import { BeanBase, Cast } from '@cabloy/core';
 export class Watcher extends BeanBase {
   _watchers: any;
 
-  constructor() {
-    super();
-    this._watchers = {};
-  }
-
   __init__() {
+    this._watchers = {};
     if (this.app.meta.inApp) {
       // this.app
       this.app.meta.messenger.addProvider({

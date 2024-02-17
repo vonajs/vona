@@ -25,21 +25,17 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
   _nodeBaseBean: any;
   _behaviors: any;
 
-  constructor({ flowInstance, context, contextEdge }: any) {
-    super();
+  get self() {
+    return Cast<LocalFlowNode>(this);
+  }
+
+  __init__({ flowInstance, context, contextEdge, nodeDef }: any) {
     this.flowInstance = flowInstance;
     this.context = context;
     this.contextEdge = contextEdge;
     this._nodeBase = null;
     this._nodeBaseBean = null;
     this._behaviors = null;
-  }
-
-  get self() {
-    return Cast<LocalFlowNode>(this);
-  }
-
-  __init__({ context, contextEdge, nodeDef }: any) {
     // context
     this.contextNode = this.ctx.bean._newBean(LocalContextNode, {
       context,
