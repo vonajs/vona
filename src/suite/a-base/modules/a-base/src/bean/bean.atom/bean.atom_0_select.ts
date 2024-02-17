@@ -1,6 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
@@ -15,11 +15,9 @@ export class BeanAtom0Select extends BeanAtom0Read {
     if (!options.orders) options.orders = [];
     // atomClass
     let atomClassBase;
-    let _moduleInfo;
     if (atomClass) {
       atomClass = await this.ctx.bean.atomClass.get(atomClass);
       atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
-      _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     }
     // select
     const items = await this._list({
@@ -32,12 +30,8 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // select items
     if (!count) {
       if (atomClass) {
-        const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-        await this.ctx.meta.util.executeBeanAuto({
-          beanFullName,
-          context: { atomClass, options, items, user },
-          fn: 'select',
-        });
+        const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+        await beanInstance.select({ atomClass, options, items, user });
       } else {
         await this.ctx.bean.atomBase.select({ atomClass, options, items, user });
       }
@@ -134,13 +128,8 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // selectQuery
     let sql;
     if (atomClass) {
-      const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-      const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-      sql = await this.ctx.meta.util.executeBeanAuto({
-        beanFullName,
-        context: { atomClass, options, user },
-        fn: 'selectQuery',
-      });
+      const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+      sql = await beanInstance.selectQuery({ atomClass, options, user });
     } else {
       sql = await this._selectQuery({ atomClass, options, user });
     }
