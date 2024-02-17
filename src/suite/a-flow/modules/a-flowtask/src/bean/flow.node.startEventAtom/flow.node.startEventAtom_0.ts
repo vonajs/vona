@@ -1,9 +1,7 @@
 import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
-import { FlowNodeStartEventAtomCondition } from './flow.node.startEventAtom_condition.js';
-import { FlowNodeStartEventAtomFlowActions } from './flow.node.startEventAtom_flowActions.js';
-import { FlowNodeStartEventAtomActionRightViewWorkflow } from './flow.node.startEventAtom_actionRightViewWorkflow.js';
+import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';
 
 export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   atomStateDefault: any;
@@ -11,6 +9,10 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   constructor(options) {
     super(options);
     this.atomStateDefault = 1;
+  }
+
+  get self() {
+    return Cast<FlowNodeStartEventAtom>(this);
   }
 
   get modelCondition() {
@@ -27,16 +29,16 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
 
   async deploy({ deploy, flowDefId, node, deleting, flowDef, content }: any) {
     // atomClass
-    const { atomClass } = await Cast<FlowNodeStartEventAtomCondition>(this)._getAtomClass({ flowDefId, node });
+    const { atomClass } = await this.self._getAtomClass({ flowDefId, node });
     // condition
-    await Cast<FlowNodeStartEventAtomCondition>(this)._deploy_condition({
+    await this.self._deploy_condition({
       atomClass,
       deploy,
       flowDefId,
       node,
     });
     // flow actions
-    await Cast<FlowNodeStartEventAtomFlowActions>(this)._deploy_flowActions({
+    await this.self._deploy_flowActions({
       atomClass,
       flowDefId,
       node,
@@ -45,7 +47,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
       content,
     });
     // action right: viewWorkflow
-    await Cast<FlowNodeStartEventAtomActionRightViewWorkflow>(this)._deploy_actionRightViewWorkflow({
+    await this.self._deploy_actionRightViewWorkflow({
       atomClass,
     });
     // return
