@@ -96,7 +96,12 @@ export class BeanContainer {
 
   private _createBeanInstance(beanFullName, beanClass, args) {
     // create
-    const beanInstance = new beanClass(...args);
+    let beanInstance;
+    if (beanClass.prototype.__init__) {
+      beanInstance = new beanClass();
+    } else {
+      beanInstance = new beanClass(...args);
+    }
     // app/ctx
     if (beanInstance instanceof BeanSimple) {
       // app
