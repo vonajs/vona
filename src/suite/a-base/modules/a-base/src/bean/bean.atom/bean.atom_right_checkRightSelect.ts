@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
   async checkRightSelect({ atomClass, user, options }: any) {

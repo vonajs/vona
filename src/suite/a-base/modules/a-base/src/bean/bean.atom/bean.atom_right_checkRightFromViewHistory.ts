@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightFormAction } from './bean.atom_right_checkRightFormAction.js';
 import objectHash from 'object-hash';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRightFormAction {
   async _checkRightFromViewHistory({

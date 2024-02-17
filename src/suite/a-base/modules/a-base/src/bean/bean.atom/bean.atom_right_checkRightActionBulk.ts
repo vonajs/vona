@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightAction } from './bean.atom_right_checkRightAction.js';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAction {
   // atomClass: { id, module, atomClassName }

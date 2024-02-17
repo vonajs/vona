@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomFormal } from './bean.atom_formal.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomSimple extends BeanAtomFormal {
   async _switchToSimple({ atomClass, atomClassBase, atom, user }: any) {

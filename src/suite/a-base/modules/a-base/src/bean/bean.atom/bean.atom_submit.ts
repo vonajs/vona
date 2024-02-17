@@ -1,8 +1,6 @@
-import { Cast } from '@cabloy/core';
 import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
 import { BeanAtomSimple } from './bean.atom_simple.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomSubmit extends BeanAtomSimple {
   async submit({

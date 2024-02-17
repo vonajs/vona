@@ -1,9 +1,7 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
 import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkRightFromViewHistory.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   async checkRightAction({

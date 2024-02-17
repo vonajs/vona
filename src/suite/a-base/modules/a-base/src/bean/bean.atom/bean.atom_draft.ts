@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomClone } from './bean.atom_clone.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomDraft extends BeanAtomClone {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {

@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtom0Write } from './bean.atom_0_write.js';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {

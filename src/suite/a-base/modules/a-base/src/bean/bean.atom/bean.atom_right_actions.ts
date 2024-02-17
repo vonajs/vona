@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 import { BeanAtomRightPreferredRoles } from './bean.atom_right_preferredRoles.js';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   // actions of atom

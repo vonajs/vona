@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtom0Select } from './bean.atom_0_select.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0Write extends BeanAtom0Select {
   // write

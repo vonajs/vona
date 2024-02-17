@@ -1,8 +1,6 @@
-import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count

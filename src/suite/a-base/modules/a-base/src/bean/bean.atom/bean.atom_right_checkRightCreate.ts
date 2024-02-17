@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
-import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightCreate extends BeanAtomRightCheckRightActionEnable {
   async checkRightCreate({ atomClass, user, options }: any) {
