@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { LocalFlowTaskForward } from './local.flow.task_forward.js';
-import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
   // handle: assignee/remark
@@ -82,7 +80,7 @@ export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
     await this.modelFlowTask.delete({ id: taskTo.id });
     await this.modelFlowTaskHistory.delete({ flowTaskId: taskTo.id });
     // notify
-    Cast<LocalFlowTaskNotify>(this)._notifyTaskClaimings(taskTo.userIdAssignee);
+    this.self._notifyTaskClaimings(taskTo.userIdAssignee);
     // 2. update
     // flowTask
     this.contextTask._flowTask.timeHandled = null;

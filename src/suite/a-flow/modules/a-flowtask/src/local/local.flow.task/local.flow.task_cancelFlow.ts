@@ -1,7 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { LocalFlowTaskAssignees } from './local.flow.task_assignees.js';
-import { LocalFlowTaskInit } from './local.flow.task_init.js';
-import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
   async _cancelFlow({ handle }: any) {
@@ -13,7 +10,7 @@ export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
     await this.localRight.cancelFlow({
       flowTask,
       user,
-      getOptions: () => Cast<LocalFlowTaskInit>(this)._getNodeOptionsTask(),
+      getOptions: () => this.self._getNodeOptionsTask(),
     });
     // handle
     await this._cancelFlow_handle({ handle });
@@ -26,7 +23,7 @@ export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
     const flowTask = this.contextTask._flowTask;
     const flowTaskId = flowTask.id;
     // notify
-    Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(flowTask.userIdAssignee);
+    this.self._notifyTaskHandlings(flowTask.userIdAssignee);
     // delete flowTask
     await this.modelFlowTask.delete({ id: flowTaskId });
     // flowTaskHistory update

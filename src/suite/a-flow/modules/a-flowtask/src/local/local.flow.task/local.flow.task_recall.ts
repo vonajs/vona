@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { LocalFlowTaskInit } from './local.flow.task_init.js';
-import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskRecall extends LocalFlowTaskInit {
   async _recall() {
@@ -13,7 +11,7 @@ export class LocalFlowTaskRecall extends LocalFlowTaskInit {
     // handle
     await this._recall_handle();
     // notify
-    Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(flowTask.userIdAssignee);
+    this.self._notifyTaskHandlings(flowTask.userIdAssignee);
   }
 
   async _recall_handle() {
@@ -37,7 +35,7 @@ export class LocalFlowTaskRecall extends LocalFlowTaskInit {
       [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
     );
     for (const _task of _tasks) {
-      Cast<LocalFlowTaskNotify>(this)._notifyTaskClaimings(_task.userIdAssignee);
+      this.self._notifyTaskClaimings(_task.userIdAssignee);
     }
     // delete other tasks
     await this.ctx.model.query(

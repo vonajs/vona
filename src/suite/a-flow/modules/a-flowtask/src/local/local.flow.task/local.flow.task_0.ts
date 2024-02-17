@@ -1,6 +1,7 @@
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Cast } from '@cabloy/core';
 import { LocalContextTask } from '../local.context.task.js';
+import { LocalFlowTask } from '../local.flow.task.js';
 
 export class LocalFlowTask0 extends BeanBase<ScopeModule> {
   nodeInstance: any;
@@ -15,6 +16,10 @@ export class LocalFlowTask0 extends BeanBase<ScopeModule> {
     this.flowInstance = nodeInstance.flowInstance;
     this.context = nodeInstance.context;
     this.contextNode = nodeInstance.contextNode;
+  }
+
+  get self() {
+    return Cast<LocalFlowTask>(this);
   }
 
   __init__({ nodeInstance }: any) {

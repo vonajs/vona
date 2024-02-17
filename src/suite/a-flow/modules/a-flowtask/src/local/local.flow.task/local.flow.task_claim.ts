@@ -1,7 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { LocalFlowTaskCancelFlow } from './local.flow.task_cancelFlow.js';
-import { LocalFlowTaskEvent } from './local.flow.task_event.js';
-import { LocalFlowTaskNotify } from './local.flow.task_notify.js';
 
 export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
   async _claim() {
@@ -31,7 +28,7 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
       [this.ctx.instance.id, flowTask.flowNodeId],
     );
     if (_taskRecall) {
-      Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(_taskRecall.userIdAssignee);
+      this.self._notifyTaskHandlings(_taskRecall.userIdAssignee);
       // delete task
       await this.ctx.model.query(
         `
@@ -60,7 +57,7 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
         [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
       );
       for (const _task of _tasks) {
-        Cast<LocalFlowTaskNotify>(this)._notifyTaskClaimings(_task.userIdAssignee);
+        this.self._notifyTaskClaimings(_task.userIdAssignee);
       }
       // delete other tasks
       await this.ctx.model.query(
@@ -79,10 +76,10 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
       );
     }
     // event: task.claimed
-    await Cast<LocalFlowTaskEvent>(this).raiseEventClaimed();
+    await this.self.raiseEventClaimed();
     // notify
-    Cast<LocalFlowTaskNotify>(this)._notifyTaskClaimings(flowTask.userIdAssignee);
-    Cast<LocalFlowTaskNotify>(this)._notifyTaskHandlings(flowTask.userIdAssignee);
+    this.self._notifyTaskClaimings(flowTask.userIdAssignee);
+    this.self._notifyTaskHandlings(flowTask.userIdAssignee);
     // ok
     return { timeClaimed };
   }
