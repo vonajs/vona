@@ -3,7 +3,7 @@ import { FlowNodeGatewayBase } from '../common/flowNodeGatewayBase.js';
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeGatewayParallel extends FlowNodeGatewayBase {
-  constructor(options) {
-    super(options, 'parallel');
+  constructor() {
+    super('parallel');
   }
 }

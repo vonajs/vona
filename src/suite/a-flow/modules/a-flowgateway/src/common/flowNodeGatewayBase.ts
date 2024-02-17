@@ -4,8 +4,8 @@ import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 export class FlowNodeGatewayBase extends BeanFlowNodeBase {
   gatewayMode: 'exclusive' | 'inclusive' | 'parallel';
 
-  constructor(options, gatewayMode) {
-    super(options);
+  constructor(gatewayMode) {
+    super();
     this.gatewayMode = gatewayMode;
   }
 

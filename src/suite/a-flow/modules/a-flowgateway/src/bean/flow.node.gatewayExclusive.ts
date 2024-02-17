@@ -3,7 +3,7 @@ import { FlowNodeGatewayBase } from '../common/flowNodeGatewayBase.js';
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeGatewayExclusive extends FlowNodeGatewayBase {
-  constructor(options) {
-    super(options, 'exclusive');
+  constructor() {
+    super('exclusive');
   }
 }
