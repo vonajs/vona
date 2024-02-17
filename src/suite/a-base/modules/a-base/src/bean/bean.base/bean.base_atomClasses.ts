@@ -24,7 +24,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.meta && module.meta.base && module.meta.base.atoms) {
-        const res = this._prepareAtomClassesModule(module, module.meta.base.atoms);
+        const res = this._prepareAtomClassesModule(relativeName, module.meta.base.atoms);
         if (Object.keys(res).length > 0) {
           atomClasses[relativeName] = res;
         }
@@ -60,7 +60,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     return this.ctx.constant.module(__ThisModule__).atomClass.meta;
   }
 
-  _prepareAtomClassesModule(_module, _atoms) {
+  _prepareAtomClassesModule(moduleName, _atoms) {
     const atomClasses: any = {};
     for (const key in _atoms) {
       const _atomClass = _atoms[key].info;
@@ -73,6 +73,12 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
       }
       // titleLocale
       atomClass.titleLocale = this.ctx.text(atomClass.title);
+      // beanFullName
+      atomClass.beanFullName = this.bean.util.combineBeanFullName({
+        module: moduleName,
+        scene: 'atom',
+        bean: atomClass.bean,
+      });
       // ok
       atomClasses[key] = atomClass;
     }
