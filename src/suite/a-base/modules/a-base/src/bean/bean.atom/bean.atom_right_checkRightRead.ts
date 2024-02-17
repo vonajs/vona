@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanAtomRightCheckRightCreate } from './bean.atom_right_checkRightCreate.js';
-import { BeanAtomUtils } from './bean.atom_utils.js';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
   async checkRoleRightRead({ atom: { id }, atomClass, options, roleId }: any) {
@@ -33,7 +33,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
       return atom;
     }
     // forAtomUser
-    const forAtomUser = Cast<BeanAtomUtils>(this)._checkForAtomUser(atomClass);
+    const forAtomUser = Cast<BeanAtom>(this)._checkForAtomUser(atomClass);
     // formal/history
     const sql = await this.sqlProcedure.checkRoleRightAction({
       iid: this.ctx.instance.id,
@@ -94,7 +94,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
       return true;
     }
     // forAtomUser
-    const forAtomUser = Cast<BeanAtomUtils>(this)._checkForAtomUser(atomClass);
+    const forAtomUser = Cast<BeanAtom>(this)._checkForAtomUser(atomClass);
     // formal/history
     return await this._checkRightAction_sql({
       userIdWho: user.id,

@@ -1,9 +1,7 @@
 import { Cast } from '@cabloy/core';
-import { BeanAtomClone } from './bean.atom_clone.js';
 import { BeanAtomFormal } from './bean.atom_formal.js';
-import { BeanAtomNotify } from './bean.atom_notify.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomSimple extends BeanAtomFormal {
   async _switchToSimple({ atomClass, atomClassBase, atom, user }: any) {
@@ -18,7 +16,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
         // create formal
         const srcItem = await this.ctx.bean.atom.read({ key: { atomId: atomIdDraft }, user });
         srcItem.atomSimple = 1; // important
-        const keyFormal = await Cast<BeanAtomClone>(this)._copy({
+        const keyFormal = await Cast<BeanAtom>(this)._copy({
           target: 'formal',
           atomClass,
           srcKey: { atomId: atomIdDraft },
@@ -60,7 +58,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
         fn: 'delete',
       });
       // notify to change draft stats
-      Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(null, atomClass);
+      Cast<BeanAtom>(this)._notifyDraftsDrafting(null, atomClass);
     }
     // ok
     if (atom.atomStage === 0) {

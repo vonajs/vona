@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanAtom0 } from './bean.atom_0.js';
-import { BeanAtom0Read } from './bean.atom_0_read.js';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomUtils extends BeanAtom0 {
   async _prepareAtomClassAndAtomClassBase({ key, atomClass, throwWhenEmpty = true }: any) {
@@ -90,7 +90,7 @@ export class BeanAtomUtils extends BeanAtom0 {
         atom = await modelItem.get({ id: atomId });
       } else {
         // not use .read for infinite loop
-        atom = await Cast<BeanAtom0Read>(this)._get({ key, atomClass });
+        atom = await Cast<BeanAtom>(this)._get({ key, atomClass });
       }
     } else {
       atom = await this.modelAtom.get({ id: atomId, atomClassId: atomClass.id });

@@ -1,9 +1,7 @@
 import { Cast } from '@cabloy/core';
 import { BeanAtomClone } from './bean.atom_clone.js';
-import { BeanAtomNotify } from './bean.atom_notify.js';
-import { BeanAtomSimple } from './bean.atom_simple.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomDraft extends BeanAtomClone {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
@@ -22,7 +20,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     const user = { id: atomDraft.userIdUpdated };
     // ** update draft from formal
     if (atomDraft.atomIdFormal) {
-      await Cast<BeanAtomClone>(this)._copy({
+      await Cast<BeanAtom>(this)._copy({
         target: 'draft',
         atomClass,
         srcKey: { atomId: atomDraft.atomIdFormal },
@@ -55,8 +53,8 @@ export class BeanAtomDraft extends BeanAtomClone {
       }
     }
     // notify
-    Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(user, atomClass);
-    Cast<BeanAtomNotify>(this)._notifyDraftsFlowing(user, atomClass);
+    Cast<BeanAtom>(this)._notifyDraftsDrafting(user, atomClass);
+    Cast<BeanAtom>(this)._notifyDraftsFlowing(user, atomClass);
   }
 
   async openDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
@@ -78,7 +76,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       };
     }
     // check simple switch
-    atom = await Cast<BeanAtomSimple>(this)._checkSimpleSwitch({ atomClass, atomClassBase, atom, user });
+    atom = await Cast<BeanAtom>(this)._checkSimpleSwitch({ atomClass, atomClassBase, atom, user });
     // open draft
     let res;
     if (atom.atomSimple) {
@@ -117,7 +115,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       const atomIdFormal = atom.atomIdFormal;
       keyFormal = { atomId: atomIdFormal };
       // ** copy formal from history
-      keyFormal = await Cast<BeanAtomClone>(this)._copy({
+      keyFormal = await Cast<BeanAtom>(this)._copy({
         target: 'formal',
         atomClass,
         srcKey: { atomId: atom.id },
@@ -174,7 +172,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       }
       const atomRevision = atomDraft.atomRevision;
       // ** copy draft from history
-      keyDraft = await Cast<BeanAtomClone>(this)._copy({
+      keyDraft = await Cast<BeanAtom>(this)._copy({
         target: 'draft',
         atomClass,
         srcKey: { atomId: atom.id },
@@ -205,7 +203,7 @@ export class BeanAtomDraft extends BeanAtomClone {
         changed = false;
       } else {
         // ** copy draft from formal
-        await Cast<BeanAtomClone>(this)._copy({
+        await Cast<BeanAtom>(this)._copy({
           target: 'draft',
           atomClass,
           srcKey: { atomId: atom.id },
@@ -238,7 +236,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     if (atom.atomClosed === 1) {
       // ** copy draft from formal
       if (atom.atomIdFormal > 0) {
-        await Cast<BeanAtomClone>(this)._copy({
+        await Cast<BeanAtom>(this)._copy({
           target: 'draft',
           atomClass,
           srcKey: { atomId: atom.atomIdFormal },
@@ -271,7 +269,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       userIdUpdated: user.id,
     });
     // notify
-    Cast<BeanAtomNotify>(this)._notifyDraftsDrafting(null, atomClass);
+    Cast<BeanAtom>(this)._notifyDraftsDrafting(null, atomClass);
   }
 
   async _createDraftFromFormal({ atomClass, atomIdFormal, user }: any) {

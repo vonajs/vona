@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanAtom0Write } from './bean.atom_0_write.js';
-import { BeanAtomNotify } from './bean.atom_notify.js';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {
@@ -50,7 +50,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
       });
     }
     // notify
-    Cast<BeanAtomNotify>(this)._notifyStars();
+    Cast<BeanAtom>(this)._notifyStars();
     // ok
     return { star, starCount };
   }
@@ -64,7 +64,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
     // atomLabelRef
     await this._labels_atomLabelRef({ atomId: key.atomId, labels, user });
     // notify
-    Cast<BeanAtomNotify>(this)._notifyLabels();
+    Cast<BeanAtom>(this)._notifyLabels();
   }
 
   async _labels_atomLabel({ atomId, labels, user }: any) {
