@@ -5,8 +5,8 @@ import { BeanCliBase } from 'cabloy-module-api-a-cli';
 export class CliCreatePageBase extends BeanCliBase {
   pageMode: string;
 
-  constructor(options, pageMode) {
-    super(options);
+  constructor(pageMode) {
+    super();
     this.pageMode = pageMode;
   }
 

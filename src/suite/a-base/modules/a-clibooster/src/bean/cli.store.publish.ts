@@ -11,8 +11,8 @@ import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })
 export class CliStorePublish extends CliStoreBase {
-  constructor(options) {
-    super(options, 'publish');
+  constructor() {
+    super('publish');
   }
 
   async onExecuteStoreCommandEntity({ entityName, entityConfig }: any) {

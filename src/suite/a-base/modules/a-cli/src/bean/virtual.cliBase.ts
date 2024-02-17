@@ -13,8 +13,7 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
   __template;
   LocalTemplate;
 
-  constructor(options) {
-    super();
+  protected __init__(options) {
     this.options = options;
     this.cabloyConfig = null;
     this.terminal = options.terminal !== false;

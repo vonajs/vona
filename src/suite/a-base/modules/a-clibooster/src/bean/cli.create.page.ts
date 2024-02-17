@@ -4,7 +4,7 @@ import { CliCreatePageBase } from '../common/cliCreatePage.js';
 
 @Bean({ scene: 'cli.create' })
 export class CliCreatePage extends CliCreatePageBase {
-  constructor(options) {
-    super(options, 'page');
+  constructor() {
+    super('page');
   }
 }

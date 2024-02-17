@@ -11,8 +11,8 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
   openAuthClient: any;
   _needLernaBootstrap: boolean;
 
-  constructor(options, commandName) {
-    super(options);
+  constructor(commandName) {
+    super();
     this.commandName = commandName;
     this.tokenName = `store.${commandName}`;
     this.openAuthClient = null;

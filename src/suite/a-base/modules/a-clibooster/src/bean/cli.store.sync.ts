@@ -13,8 +13,8 @@ import CliStoreBase from '../common/cliStoreBase.js';
 
 @Bean({ scene: 'cli.store' })
 export class CliStoreSync extends CliStoreBase {
-  constructor(options) {
-    super(options, 'sync');
+  constructor() {
+    super('sync');
   }
 
   async onExecuteStoreCommandEntity({ entityName }: any) {
