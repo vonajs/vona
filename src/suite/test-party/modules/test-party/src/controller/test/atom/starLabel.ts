@@ -19,11 +19,11 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     });
 
     // submit party
-    const res = await this.ctx.bean.atom.submit({
+    const res = (await this.ctx.bean.atom.submit({
       key: partyKeyDraft,
       options: { ignoreFlow: true },
       user,
-    });
+    })) as { formal };
     const partyKeyFormal = res.formal.key;
 
     // get party
