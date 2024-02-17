@@ -1,6 +1,5 @@
 import { Cast } from '@cabloy/core';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
-import { BeanAtomRightCheckRightActionBulk } from './bean.atom_right_checkRightActionBulk.js';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
 import { BeanAtomRightCheckRightFlowTask } from './bean.atom_right_checkRightFlowTask.js';
 import { BeanAtomRightCheckRightFormAction } from './bean.atom_right_checkRightFormAction.js';
@@ -8,8 +7,8 @@ import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkR
 import { BeanAtomRightCheckRightRead } from './bean.atom_right_checkRightRead.js';
 import { BeanAtomRightDetailRightInherit } from './bean.atom_right_detailRightInherit.js';
 import { BeanAtomUtils } from './bean.atom_utils.js';
-
 import * as ModuleInfo from '@cabloy/module-info';
+import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   async checkRightAction({
@@ -41,7 +40,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       // const createDelay = this.ctx.bean.atomAction.getCreateDelay({ atomClass });
       // if (!createDelay) this.ctx.throw(403);
       // check if create
-      return await Cast<BeanAtomRightCheckRightActionBulk>(this).checkRightActionBulk({
+      return await Cast<BeanAtom>(this).checkRightActionBulk({
         atomClass,
         action: 1,
         user,
