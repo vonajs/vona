@@ -1,7 +1,12 @@
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Cast } from '@cabloy/core';
+import { BeanFlow } from '../bean.flow.js';
 
 export class BeanFlow0 extends BeanBase<ScopeModule> {
+  get self() {
+    return Cast<BeanFlow>(this);
+  }
+
   get modelFlow() {
     return this.scope.model.flow;
   }

@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { BeanFlowAssignees } from './bean.flow_assignees.js';
-import { BeanFlowStart } from './bean.flow_start.js';
 
 export class BeanFlowLoad extends BeanFlowAssignees {
   async _loadFlowInstance({ flowId, history, throwError = true }: any) {
@@ -29,7 +27,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     if (!flowDef) this.scope.error.FlowDefinitionNotFound__.throw(flow.flowDefId);
     // not check atomDisabled
     // flowInstance
-    const flowInstance = Cast<BeanFlowStart>(this)._createFlowInstance({ flowDef });
+    const flowInstance = this.self._createFlowInstance({ flowDef });
     // load
     await flowInstance._load({ flow, history });
     // ok
