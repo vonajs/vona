@@ -1,6 +1,4 @@
-import { Cast } from '@cabloy/core';
 import { BeanRoleBase } from './bean.role_base.js';
-import { BeanRoleOthers } from './bean.role_others.js';
 
 export class BeanRoleAtomRights extends BeanRoleBase {
   // add role right

@@ -1,11 +1,7 @@
 import { Cast } from '@cabloy/core';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
-
 import initData15 from '../version.manager/init/initData15.js';
-
-import { BeanRoleOthers } from './bean.role_others.js';
-import { BeanRoleBuild } from './bean.role_build.js';
 import { BeanRole } from '../bean.role.js';
 
 const __atomClassRole = {

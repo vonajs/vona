@@ -1,7 +1,5 @@
-import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanRoleBuild } from './bean.role_build.js';
-import { BeanRoleOthers } from './bean.role_others.js';
 
 const __atomClassRole = {
   module: __ThisModule__,
