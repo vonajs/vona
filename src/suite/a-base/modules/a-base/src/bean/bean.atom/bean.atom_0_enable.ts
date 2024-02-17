@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Delete } from './bean.atom_0_delete.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Enable extends BeanAtom0Delete {
   async enable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
@@ -10,13 +10,8 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
       options: optionsOuter,
     });
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, key, options, user },
-      fn: 'enable',
-    });
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    await beanInstance.enable({ atomClass, key, options, user });
   }
 
   async disable({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
@@ -27,12 +22,7 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
       options: optionsOuter,
     });
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, key, options, user },
-      fn: 'disable',
-    });
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    await beanInstance.disable({ atomClass, key, options, user });
   }
 }
