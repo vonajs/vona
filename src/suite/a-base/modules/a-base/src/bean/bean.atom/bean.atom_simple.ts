@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomFormal } from './bean.atom_formal.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomSimple extends BeanAtomFormal {
   async _switchToSimple({ atomClass, atomClassBase, atom, user }: any) {
@@ -48,13 +48,8 @@ export class BeanAtomSimple extends BeanAtomFormal {
     if (atomIdDraft) {
       const atomDraft = atom.atomStage === 0 ? atom : await this.modelAtom.get({ id: atomIdDraft });
       const keyDraft = { atomId: atomDraft.id, itemId: atomDraft.itemId };
-      const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-      const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-      await this.ctx.meta.util.executeBeanAuto({
-        beanFullName,
-        context: { atomClass, key: keyDraft, user },
-        fn: 'delete',
-      });
+      const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+      await beanInstance.delete({ atomClass, key: keyDraft, user });
       // notify to change draft stats
       this.self._notifyDraftsDrafting(null, atomClass);
     }

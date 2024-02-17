@@ -1,6 +1,6 @@
 import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
 import { BeanAtomSimple } from './bean.atom_simple.js';
-import * as ModuleInfo from '@cabloy/module-info';
+import { BeanAtomBase } from '../virtual.atomBase.js';
 
 export class BeanAtomSubmit extends BeanAtomSimple {
   async submit({
@@ -32,13 +32,8 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       return { formal: { key } };
     }
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    return await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, key, options, user },
-      fn: 'submit',
-    });
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    return await beanInstance.submit({ atomClass, key, options, user });
   }
 
   async _submitBase({ atomClass, key, options, user }: any) {
