@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Default } from './bean.atom_0_default.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Delete extends BeanAtom0Default {
   // deleteBulk
@@ -23,8 +23,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       options: optionsOuter,
     });
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     // atom
     let _atom;
     if (!atomClassBase.itemOnly) {
@@ -36,11 +35,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     // itemOnly
     if (atomClassBase.itemOnly) {
       // delete as formal
-      await this.ctx.meta.util.executeBeanAuto({
-        beanFullName,
-        context: { atomClass, key, options, user },
-        fn: 'delete',
-      });
+      await beanInstance.delete({ atomClass, key, options, user });
       return;
     }
     // atom
@@ -56,11 +51,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
         },
       });
       for (const item of listHistory) {
-        await this.ctx.meta.util.executeBeanAuto({
-          beanFullName,
-          context: { atomClass, key: { atomId: item.id, itemId: item.itemId }, options, user },
-          fn: 'delete',
-        });
+        await beanInstance.delete({ atomClass, key: { atomId: item.id, itemId: item.itemId }, options, user });
       }
       // delete draft
       const itemDraft = await this.modelAtom.get({
@@ -68,27 +59,20 @@ export class BeanAtom0Delete extends BeanAtom0Default {
         atomIdFormal: _atom.id,
       });
       if (itemDraft) {
-        await this.ctx.meta.util.executeBeanAuto({
-          beanFullName,
-          context: { atomClass, key: { atomId: itemDraft.id, itemId: itemDraft.itemId }, options, user },
-          fn: 'delete',
+        await beanInstance.delete({
+          atomClass,
+          key: { atomId: itemDraft.id, itemId: itemDraft.itemId },
+          options,
+          user,
         });
         // notify
         this.self._notifyDraftsDrafting(null, atomClass);
       }
       // delete formal
-      await this.ctx.meta.util.executeBeanAuto({
-        beanFullName,
-        context: { atomClass, key: { atomId: _atom.id, itemId: _atom.itemId }, options, user },
-        fn: 'delete',
-      });
+      await beanInstance.delete({ atomClass, key: { atomId: _atom.id, itemId: _atom.itemId }, options, user });
     } else if (_atom.atomStage === 2) {
       // delete history self
-      await this.ctx.meta.util.executeBeanAuto({
-        beanFullName,
-        context: { atomClass, key: { atomId: _atom.id, itemId: _atom.itemId }, options, user },
-        fn: 'delete',
-      });
+      await beanInstance.delete({ atomClass, key: { atomId: _atom.id, itemId: _atom.itemId }, options, user });
     }
   }
 
