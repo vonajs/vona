@@ -1,17 +1,20 @@
-import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
-import { BeanFlowDefPrepare } from './bean.flowDef_prepare.js';
+import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
+import { BeanBase, Cast } from '@cabloy/core';
+import { BeanFlowDef } from '../bean.flowDef.js';
 
-export class BeanFlowDef0 extends BeanBase {
+export class BeanFlowDef0 extends BeanBase<ScopeModule> {
+  get self() {
+    return Cast<BeanFlowDef>(this);
+  }
+
   get modelFlowDef() {
-    return this.ctx.model.module(__ThisModule__).flowDef;
+    return this.scope.model.flowDef;
   }
   get modelFlowDefContent() {
-    return this.ctx.model.module(__ThisModule__).flowDefContent;
+    return this.scope.model.flowDefContent;
   }
   get modelFlowDefFull() {
-    return this.ctx.model.module(__ThisModule__).flowDefFull;
+    return this.scope.model.flowDefFull;
   }
   get atomClass() {
     return {
@@ -46,7 +49,7 @@ export class BeanFlowDef0 extends BeanBase {
 
   async _getByKey({ flowDefKey, flowDefRevision, atomStage }: any) {
     // fullKey
-    const { fullKey } = Cast<BeanFlowDefPrepare>(this)._combineFullKey({ flowDefKey });
+    const { fullKey } = this.self._combineFullKey({ flowDefKey });
     // from db
     return await this.ctx.bean.atom.readByStaticKey({
       atomClass: this.atomClass,
