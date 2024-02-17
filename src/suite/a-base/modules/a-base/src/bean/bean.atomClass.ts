@@ -38,7 +38,6 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
       resource: `${__ThisModule__}.atomClass.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'atomClass',
           context: { module, atomClassName },
           fn: '_registerLock',

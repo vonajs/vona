@@ -262,7 +262,6 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
       resource: `${__ThisModule__}.category.register.${atomClass.id}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'category',
           context: { atomClass, language, categoryName, categoryIdParent },
           fn: '_registerLock',

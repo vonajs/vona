@@ -41,7 +41,6 @@ export class BeanCacheDb extends BeanModuleScopeBase {
           resource: `${__ThisModule__}.cacheDbSet.${this.moduleScope}.${name}`,
           fn: async () => {
             return await this.ctx.meta.util.executeBeanIsolate({
-              beanModule: __ThisModule__,
               fn: async ({ ctx }) => {
                 return await ctx.cache._db.module(this.moduleScope)._set({ name, value, timeout, queue: false });
               },

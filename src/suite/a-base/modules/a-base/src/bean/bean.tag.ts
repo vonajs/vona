@@ -169,7 +169,6 @@ export class BeanTag extends BeanBase<ScopeModule> {
       resource: `${__ThisModule__}.tag.register.${atomClass.id}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'tag',
           context: { atomClass, language, tagName },
           fn: '_registerLock',

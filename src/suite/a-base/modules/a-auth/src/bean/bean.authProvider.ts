@@ -28,7 +28,6 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
       resource: `${__ThisModule__}.authProvider.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'authProvider',
           context: { module, providerName },
           fn: '_registerAuthProviderLock',
@@ -52,7 +51,6 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
 
   async authenticateDirect({ module, providerName, providerScene, query, body }: any) {
     return await this.ctx.meta.util.executeBeanIsolate({
-      beanModule: __ThisModule__,
       beanFullName: `${__ThisModule__}.local.passport`,
       context: { module, providerName, providerScene },
       fn: 'authenticate',

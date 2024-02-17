@@ -27,7 +27,6 @@ export class BeanSequence extends BeanModuleScopeBase {
       resource: `${__ThisModule__}.sequence.${moduleName}.${name}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'sequence',
           fn: async ({ bean }) => {
             return await bean.module(moduleName)._nextLock(name);

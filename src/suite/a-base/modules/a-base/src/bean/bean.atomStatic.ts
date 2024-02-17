@@ -307,7 +307,6 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
       resource: `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'atomStatic',
           context: { atomClassBase, atomClass, atomIdFormal, item },
           fn: '_updateRevisionLock',
@@ -382,7 +381,6 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
       resource: `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'atomStatic',
           context: { atomClassBase, atomClass, item },
           fn: '_registerLock',

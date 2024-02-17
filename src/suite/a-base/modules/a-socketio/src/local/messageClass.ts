@@ -26,7 +26,6 @@ export class LocalMessageClass extends BeanBase {
       resource: `${__ThisModule__}.messageClass.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           fn: async ({ ctx }) => {
             return await ctx.bean.io.messageClass._registerLock({ module, messageClassName });
           },

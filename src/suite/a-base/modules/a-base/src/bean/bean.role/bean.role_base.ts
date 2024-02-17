@@ -337,7 +337,6 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
       resource: `${__ThisModule__}.role.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'role',
           context: { roleName, roleIdParent },
           fn: '_registerLock',

@@ -46,7 +46,6 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
       resource: `${__ThisModule__}.atomAction.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'atomAction',
           context: { atomClassId, code },
           fn: '_registerLock',

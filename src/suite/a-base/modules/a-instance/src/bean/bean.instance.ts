@@ -60,7 +60,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
           subdomain: null,
-          beanModule: __ThisModule__,
           beanFullName: 'instance',
           context: { instanceBase },
           fn: '_registerLock',

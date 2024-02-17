@@ -21,7 +21,6 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
       resource: `${__ThisModule__}.atomAction.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'atomAction',
           context: { atomClassId, flowKey, nodeDefId, nodeDefName },
           fn: '_registerLockByModeFlow',
