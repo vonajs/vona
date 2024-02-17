@@ -70,7 +70,7 @@ export class LocalMessageClass extends BeanBase {
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.meta && module.meta.socketio && module.meta.socketio.messages) {
-        const res = this._prepareMessageClassesModule(module, module.meta.socketio.messages);
+        const res = this._prepareMessageClassesModule(relativeName, module.meta.socketio.messages);
         if (Object.keys(res).length > 0) {
           messageClasses[relativeName] = res;
         }
@@ -79,14 +79,21 @@ export class LocalMessageClass extends BeanBase {
     return messageClasses;
   }
 
-  _prepareMessageClassesModule(module, _messages) {
+  _prepareMessageClassesModule(moduleName, _messages) {
     const messageClasses: any = {};
     for (const key in _messages) {
       const message = this.ctx.bean.util.extend({}, _messages[key]);
-      message.info.module = module.info.relativeName;
       message.info.name = key;
       // titleLocale
       message.info.titleLocale = this.ctx.text(message.info.title);
+      // bean
+      if (message.info.bean) {
+        message.info.beanFullName = this.bean.util.combineBeanFullName({
+          module: moduleName,
+          scene: 'io.message',
+          bean: message.info.bean,
+        });
+      }
       // ok
       messageClasses[key] = message;
     }
@@ -118,7 +125,7 @@ export class LocalMessageClass extends BeanBase {
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.meta && module.meta.socketio && module.meta.socketio.channels) {
-        const res = this._prepareChannelsModule(module, module.meta.socketio.channels);
+        const res = this._prepareChannelsModule(relativeName, module.meta.socketio.channels);
         if (Object.keys(res).length > 0) {
           channels[relativeName] = res;
         }
@@ -127,14 +134,21 @@ export class LocalMessageClass extends BeanBase {
     return channels;
   }
 
-  _prepareChannelsModule(module, _channels) {
+  _prepareChannelsModule(moduleName, _channels) {
     const channels: any = {};
     for (const key in _channels) {
       const channel = this.ctx.bean.util.extend({}, _channels[key]);
-      channel.info.module = module.info.relativeName;
       channel.info.name = key;
       // titleLocale
       channel.info.titleLocale = this.ctx.text(channel.info.title);
+      // bean
+      if (channel.info.bean) {
+        channel.info.beanFullName = this.bean.util.combineBeanFullName({
+          module: moduleName,
+          scene: 'io.channel',
+          bean: channel.info.bean,
+        });
+      }
       // ok
       channels[key] = channel;
     }

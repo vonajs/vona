@@ -18,8 +18,8 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
   _getBeanMessage(messageClassBase, throwError: boolean = true) {
     // beanFullName
     let beanFullName;
-    if (messageClassBase.info.bean) {
-      beanFullName = `${messageClassBase.info.module}.io.message.${messageClassBase.info.bean}`;
+    if (messageClassBase.info.beanFullName) {
+      beanFullName = messageClassBase.info.beanFullName;
     } else if (messageClassBase.info.uniform) {
       beanFullName = 'a-message.local.ioMessageUniformBase';
     } else {
@@ -45,7 +45,7 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
       return null;
     }
     // bean
-    const beanFullName = `${channelBase.info.module}.io.channel.${channelBase.info.bean}`;
+    const beanFullName = channelBase.info.beanFullName;
     const beanChannel = this.ctx.bean._getBean(beanFullName) as BeanIoChannelBase;
     if (!beanChannel) {
       this.ctx.logger.info(`channel bean not found: ${beanFullName}`);
