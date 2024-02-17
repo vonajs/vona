@@ -29,7 +29,6 @@ export class VersionUpdate extends BeanBase {
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        beanModule: __ThisModule__,
         beanFullName: `${__ThisModule__}.version.manager`,
         context: options,
         fn: '_update5AtomClassIdsInstance',

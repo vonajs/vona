@@ -50,7 +50,6 @@ export class ControllerTestFeatSequence extends BeanBase<ScopeModule> {
     // concurrency transaction
     results = await pMap(arr, async () => {
       return await this.ctx.meta.util.executeBeanIsolate({
-        beanModule: this.ctx.module.info.relativeName,
         transaction: true,
         fn: async ({ ctx }) => {
           const res = await ctx.bean.sequence.next('test');

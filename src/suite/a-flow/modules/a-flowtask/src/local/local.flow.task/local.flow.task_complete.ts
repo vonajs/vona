@@ -35,7 +35,6 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
       resource: `${__ThisModule__}.flowTask.nodeDoneCheck.${flowNodeId}`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          beanModule: __ThisModule__,
           beanFullName: 'flowTask',
           context: { flowNodeId },
           fn: '_nodeDoneCheckLock',
