@@ -29,7 +29,7 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
     return Cast<LocalFlowNode>(this);
   }
 
-  __init__({ flowInstance, context, contextEdge, nodeDef }: any) {
+  protected __init__({ flowInstance, context, contextEdge, nodeDef }: any) {
     this.flowInstance = flowInstance;
     this.context = context;
     this.contextEdge = contextEdge;

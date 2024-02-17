@@ -6,7 +6,7 @@ import { BeanBase, Cast } from '@cabloy/core';
 export class Watcher extends BeanBase {
   _watchers: any;
 
-  __init__() {
+  protected __init__() {
     this._watchers = {};
     if (this.app.meta.inApp) {
       // this.app

@@ -17,7 +17,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
     return Cast<LocalFlowFlow>(this);
   }
 
-  __init__({ flowDef }: any) {
+  protected __init__({ flowDef }: any) {
     // context
     this.context = this.ctx.bean._newBean(LocalContextFlow, {
       flowDef,

@@ -3,17 +3,17 @@ import { BeanBase } from '@cabloy/core';
 export class TestCtx0 extends BeanBase {
   _name: string;
 
-  __init__(moduleName) {
+  protected __init__(moduleName) {
     this._name = moduleName || this.ctx.module.info.relativeName;
   }
 
-  __get__(prop) {
+  protected __get__(prop) {
     if (prop === 'magicSelf') {
       return this['magic:self'];
     }
   }
 
-  __set__(prop, value) {
+  protected __set__(prop, value) {
     if (prop === 'magicSelf') {
       this['magic:self'] = value;
     }

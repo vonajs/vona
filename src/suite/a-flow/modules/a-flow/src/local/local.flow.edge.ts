@@ -14,7 +14,7 @@ export class LocalFlowEdge extends BeanBase {
   _edgeBase: any;
   _edgeBaseBean: any;
 
-  __init__({ flowInstance, context, contextNode, edgeDef }: any) {
+  protected __init__({ flowInstance, context, contextNode, edgeDef }: any) {
     this.flowInstance = flowInstance;
     this.context = context;
     this.contextNode = contextNode;
