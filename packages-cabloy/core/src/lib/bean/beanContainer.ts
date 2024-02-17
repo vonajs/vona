@@ -75,16 +75,16 @@ export class BeanContainer {
     if (!beanOptions) {
       // class
       if (typeof beanFullName === 'function' && is.class(beanFullName)) {
-        const beanInstance = new beanFullName(...args);
-        return this._patchBeanInstance(beanInstance, args, beanFullName, false);
+        const beanInstance = this._createBeanInstance(beanFullName, beanFullName, args);
+        return this._patchBeanInstance(beanFullName, beanInstance, false);
       }
       // throw new Error(`bean not found: ${beanFullName}`);
       return null!;
     }
     // instance
-    const beanInstance = new beanOptions.beanClass(...args);
+    const beanInstance = this._createBeanInstance(beanOptions.beanFullName, beanOptions.beanClass, args);
     // patch
-    return this._patchBeanInstance(beanInstance, args, beanOptions.beanFullName, beanOptions.aop);
+    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, beanOptions.aop);
   }
 
   _newBeanScope<T>(A: Constructable<T>, moduleScope, ...args): T;
@@ -92,6 +92,32 @@ export class BeanContainer {
   _newBeanScope<T>(beanFullName: string, moduleScope, ...args): T;
   _newBeanScope<T>(beanFullName: Constructable<T> | string, moduleScope, ...args): T {
     return this._newBean(beanFullName as any, moduleScope, ...args);
+  }
+
+  private _createBeanInstance(beanFullName, beanClass, args) {
+    // create
+    const beanInstance = new beanClass(...args);
+    // app/ctx
+    if (beanInstance instanceof BeanSimple) {
+      // app
+      (<any>beanInstance).app = this.app;
+      // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
+      (<any>beanInstance).ctx = this.ctx;
+    }
+    // beanFullName
+    if (typeof beanFullName === 'string') {
+      __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
+    }
+    /// / scope
+    // this._injectBeanInstanceScope(beanInstance, beanFullName);
+    // inject
+    this._injectBeanInstance(beanInstance, beanFullName);
+    // init
+    if (beanInstance.__init__) {
+      beanInstance.__init__(...args);
+    }
+    // ok
+    return beanInstance;
   }
 
   private _injectBeanInstance(beanInstance, beanFullName) {
@@ -178,25 +204,7 @@ export class BeanContainer {
   //   });
   // }
 
-  private _patchBeanInstance(beanInstance, args, beanFullName, aop) {
-    if (beanInstance instanceof BeanSimple) {
-      // app
-      (<any>beanInstance).app = this.app;
-      // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
-      (<any>beanInstance).ctx = this.ctx;
-    }
-    // beanFullName
-    if (typeof beanFullName === 'string') {
-      __setPropertyValue(beanInstance, '__beanFullName__', beanFullName);
-    }
-    /// / scope
-    // this._injectBeanInstanceScope(beanInstance, beanFullName);
-    // inject
-    this._injectBeanInstance(beanInstance, beanFullName);
-    // init
-    if (beanInstance.__init__) {
-      beanInstance.__init__(...args);
-    }
+  private _patchBeanInstance(beanFullName, beanInstance, aop) {
     // not aop on aop
     if (aop) return beanInstance;
     // aop chains
