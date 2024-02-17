@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomClone } from './bean.atom_clone.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomDraft extends BeanAtomClone {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
@@ -10,8 +10,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       options: optionsOuter,
     });
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     // draft
     const atomIdDraft = key.atomId;
     const atomDraft = await this.modelAtom.get({ id: atomIdDraft });
@@ -43,11 +42,7 @@ export class BeanAtomDraft extends BeanAtomClone {
         });
       } else {
         // delete
-        await this.ctx.meta.util.executeBeanAuto({
-          beanFullName,
-          context: { atomClass, key, user },
-          fn: 'delete',
-        });
+        await beanInstance.delete({ atomClass, key, user });
       }
     }
     // notify

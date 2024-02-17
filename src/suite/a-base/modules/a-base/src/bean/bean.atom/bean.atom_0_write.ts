@@ -1,5 +1,5 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Select } from './bean.atom_0_select.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtom0Write extends BeanAtom0Select {
   // write
@@ -30,9 +30,6 @@ export class BeanAtom0Write extends BeanAtom0Select {
       options: optionsOuter,
       throwWhenEmpty: false,
     });
-    // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
     // support formal flow
     // if (_atomBasic.atomStage !== _atomBasic.atomSimple) this.ctx.throw(403);
     // isCreateDelay
@@ -100,11 +97,8 @@ export class BeanAtom0Write extends BeanAtom0Select {
       }
     }
     // write
-    const data = await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, target, key, item: itemWrite, options, user },
-      fn: 'write',
-    });
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const data = await beanInstance.write({ atomClass, target, key, item: itemWrite, options, user });
     // patch data
     key = this._patchCreateWriteData({ data, atomClassBase });
     // create after

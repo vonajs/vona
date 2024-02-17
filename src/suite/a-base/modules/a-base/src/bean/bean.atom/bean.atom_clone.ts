@@ -1,6 +1,6 @@
 import { __ThisModule__ } from '../../resource/this.js';
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomClone extends BeanAtomStarLabel {
   async clone({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, roleIdOwner, user }: any) {
@@ -36,8 +36,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     // atomClassBase
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     // srcItem
     if (!srcItem) {
       srcItem = await this.ctx.bean.atom.read({ key: { atomId: srcKey.atomId }, atomClass, user: null });
@@ -96,17 +95,9 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       await this._copy_updateAtomFields({ atomClassBase, target, srcItem, destItem });
     }
     // bean write
-    await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, target, key: destKey, item: destItem, options, user },
-      fn: 'write',
-    });
+    await beanInstance.write({ atomClass, target, key: destKey, item: destItem, options, user });
     // bean copy
-    await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atomClass, target, srcKey, srcItem, destKey, destItem, options, user },
-      fn: 'copy',
-    });
+    await beanInstance.copy({ atomClass, target, srcKey, srcItem, destKey, destItem, options, user });
     // copy attachments
     if (!atomClassBase.itemOnly) {
       await this._copyAttachments({ atomIdSrc: srcKey.atomId, atomIdDest: destKey.atomId });
