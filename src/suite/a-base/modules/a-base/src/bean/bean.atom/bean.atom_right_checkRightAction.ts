@@ -102,9 +102,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (!_atom) this.scope.error.ElementDoesNotExist.throw();
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check fromViewHistory
-    const rightFromViewHistory = await (
-      this as unknown as BeanAtomRightCheckRightFromViewHistory
-    )._checkRightFromViewHistory({
+    const rightFromViewHistory = await this.self._checkRightFromViewHistory({
       key: { atomId: atom.atomId },
       atom,
       atomClass,
@@ -227,16 +225,12 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     // viewWorkflow
     if (action === 16 && _atom.atomFlowId === 0) return null;
     // actionBase.enableOnAtomState
-    const _enableOnAtomState = (
-      this as unknown as BeanAtomRightCheckRightActionEnable
-    )._checkRightAction_enableOnAtomState({ _atom, actionBase });
+    const _enableOnAtomState = this.self._checkRightAction_enableOnAtomState({ _atom, actionBase });
     if (_enableOnAtomState !== true) {
       return _enableOnAtomState;
     }
     // actionBase.enableOnAtomStateReverse
-    const _enableOnAtomStateReverse = (
-      this as unknown as BeanAtomRightCheckRightActionEnable
-    )._checkRightAction_enableOnAtomStateReverse({ _atom, actionBase });
+    const _enableOnAtomStateReverse = this.self._checkRightAction_enableOnAtomStateReverse({ _atom, actionBase });
     if (_enableOnAtomStateReverse !== true) {
       return _enableOnAtomStateReverse;
     }
@@ -337,9 +331,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return null;
     }
     // 2. flow
-    const _enableOnFlowing = await (
-      this as unknown as BeanAtomRightCheckRightActionEnable
-    )._checkRightAction_enableOnFlowing({
+    const _enableOnFlowing = await this.self._checkRightAction_enableOnFlowing({
       actionBase,
       atomClassBase,
       _atom,
@@ -420,9 +412,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return _enableOnOpened;
     }
     // flow
-    const _enableOnFlowing = await (
-      this as unknown as BeanAtomRightCheckRightActionEnable
-    )._checkRightAction_enableOnFlowing({
+    const _enableOnFlowing = await this.self._checkRightAction_enableOnFlowing({
       actionBase,
       atomClassBase,
       _atom,
@@ -432,9 +422,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return _enableOnFlowing;
     }
     // enable/disable
-    const _enableOnAtomDisabled = (
-      this as unknown as BeanAtomRightCheckRightActionEnable
-    )._checkRightAction_enableOnAtomDisabled({ _atom, actionBase });
+    const _enableOnAtomDisabled = this.self._checkRightAction_enableOnAtomDisabled({ _atom, actionBase });
     if (_enableOnAtomDisabled !== true) {
       return _enableOnAtomDisabled;
     }

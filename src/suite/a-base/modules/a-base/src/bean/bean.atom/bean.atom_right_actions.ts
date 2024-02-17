@@ -141,9 +141,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     if (basic) {
       const actionsRes: any[] = [];
       for (const actionName of ['write', 'delete']) {
-        const actionRes = await (
-          this as unknown as BeanAtomRightCheckRightActionBulk
-        ).__checkRightActionBulk_fetchActions_fromMeta({
+        const actionRes = await this.self.__checkRightActionBulk_fetchActions_fromMeta({
           atomClass,
           atomClassBase,
           action: actionName,
