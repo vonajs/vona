@@ -1,7 +1,7 @@
+import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 import { BeanAtomRightCheckRightActionEnable } from './bean.atom_right_checkRightActionEnable.js';
 import { BeanAtomRightCheckRightFromViewHistory } from './bean.atom_right_checkRightFromViewHistory.js';
-import * as ModuleInfo from '@cabloy/module-info';
 
 export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   async checkRightAction({
@@ -84,20 +84,15 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
 
   async _checkRightAction_inner2({ atom, atomClass, action, stage, user, checkFlow, options }: any) {
     // atom bean
-    const _moduleInfo = ModuleInfo.parseInfo(atomClass.module)!;
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     // check right
     options = {
       ...options,
       stage,
       checkFlow,
     };
-    const beanFullName = `${_moduleInfo.relativeName}.atom.${atomClassBase.bean}`;
-    return await this.ctx.meta.util.executeBeanAuto({
-      beanFullName,
-      context: { atom, atomClass, action, options, user },
-      fn: 'checkRightAction',
-    });
+    return await beanInstance.checkRightAction({ atom, atomClass, action, options, user });
   }
 
   async _checkRightAction_base({ atom, atomClass, action, options, user }: any) {
