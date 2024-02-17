@@ -1,7 +1,12 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
+import { BeanAtomBase } from '../virtual.atomBase.js';
 
 export class BeanAtomBase0 extends BeanBase {
+  get self() {
+    return Cast<BeanAtomBase>(this);
+  }
+
   get scopeABase() {
     return this.getScope(__ThisModule__);
   }
