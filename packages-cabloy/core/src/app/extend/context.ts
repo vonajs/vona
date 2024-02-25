@@ -90,7 +90,8 @@ const context: ContextBase = {
     this[DBLEVEL] = value;
   },
   get subdomain() {
-    return typeof this[SUBDOMAIN] === 'undefined' ? (<any>this).subdomains.join('.') : this[SUBDOMAIN];
+    const self = Cast<CabloyContext>(this);
+    return typeof this[SUBDOMAIN] === 'undefined' ? self.subdomains.join('.') : this[SUBDOMAIN];
   },
   set subdomain(value) {
     this[SUBDOMAIN] = value;
