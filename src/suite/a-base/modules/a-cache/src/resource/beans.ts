@@ -18,4 +18,8 @@ declare module '@cabloy/core' {
     cacheMem: BeanCacheMem;
     cacheRedis: BeanCacheRedis;
   }
+
+  export interface CabloyContext {
+    get cache(): BeanCache;
+  }
 }

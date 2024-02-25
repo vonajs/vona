@@ -110,7 +110,8 @@ const context: ContextBase = {
     this.dbLevel = value.dbLevel;
   },
   get cache() {
-    return (<any>this).bean.cache;
+    const self = Cast<CabloyContext>(this);
+    return self.bean._getBean('cache');
   },
   tail(cb) {
     if (!this.dbMeta.master) {
