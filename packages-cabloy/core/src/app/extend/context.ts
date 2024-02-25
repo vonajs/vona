@@ -140,7 +140,8 @@ const context: ContextBase = {
   },
 
   successMore(list, index, size) {
-    (<any>this).success({
+    const self = Cast<CabloyContext>(this);
+    self.success({
       list,
       index: index + list.length,
       finished: size === -1 || size === 0 || list.length < size,
@@ -148,7 +149,8 @@ const context: ContextBase = {
   },
 
   async getPayload(options) {
-    return await raw(inflate((<any>this).req), options);
+    const self = Cast<CabloyContext>(this);
+    return await raw(inflate(self.req), options);
   },
 };
 export default context;
