@@ -21,7 +21,7 @@ const context: ContextBase = {
   get module() {
     const self = Cast<CabloyContext>(this);
     if (this[MODULE] === undefined) {
-      const url = (<any>this).req.mockUrl || (<any>this).req.url || '';
+      const url = (<any>this).req.url || '';
       let info;
       if (url.indexOf('/api/static/public/') === 0) {
         info = null;
