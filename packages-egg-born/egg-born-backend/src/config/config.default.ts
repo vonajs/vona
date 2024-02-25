@@ -204,6 +204,14 @@ module.exports = appInfo => {
     },
   };
 
+  // database
+  config.modules['a-db'] = {
+    base: {},
+    clients: {
+      default: {},
+    },
+  };
+
   // mysql
   config.mysql = {
     app: true,
