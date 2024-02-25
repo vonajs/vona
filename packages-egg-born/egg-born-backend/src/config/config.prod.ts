@@ -1,6 +1,7 @@
-// eslint-disable-next-line
-module.exports = _appInfo => {
-  const config = {} as any;
+import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
+
+export default function (_appInfo: CabloyAppInfo) {
+  const config = {} as CabloyConfigOptional;
 
   // proxy
   config.proxy = true;
@@ -18,4 +19,4 @@ module.exports = _appInfo => {
   };
 
   return config;
-};
+}

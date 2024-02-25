@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   Success: '成功',
   'Unknown Error': '未知错误',
   'Bad Request': '无效请求',

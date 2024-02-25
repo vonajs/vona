@@ -1,8 +1,9 @@
-const _config = require('../../../../build/config.js');
+import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
+import path from 'path';
+import chalk from 'chalk';
+import uuid from 'uuid';
 
-const path = require('path');
-const chalk = require('chalk');
-const uuid = require('uuid');
+const _config = require('../../../../build/config.js');
 
 const {
   detectStatus,
@@ -11,8 +12,8 @@ const {
 } = require('egg-onerror/lib/utils');
 
 // eslint-disable-next-line
-module.exports = appInfo => {
-  const config = {} as any;
+export default function (appInfo: CabloyAppInfo) {
+  const config = {} as CabloyConfigOptional;
 
   const _maintenanceEnus =
     'Under development and maintenance, the source code mode may be unstable. Please keep an eye on the development progress, or use the project mode to create a CabloyJS project.';
@@ -317,7 +318,7 @@ module.exports = appInfo => {
   };
 
   return config;
-};
+}
 
 function getFullPath(ctx, dir, filename, _options) {
   const parts = filename.split(path.sep);

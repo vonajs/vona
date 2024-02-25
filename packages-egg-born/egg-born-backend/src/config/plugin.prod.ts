@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   view: false,
   development: false,
   watcher: false,
