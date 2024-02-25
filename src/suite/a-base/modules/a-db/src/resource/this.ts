@@ -1,4 +1,4 @@
-export const __ThisModule__ = 'a-debug';
+export const __ThisModule__ = 'a-db';
 export type __ThisModuleType__ = typeof __ThisModule__;
 
-export { ScopeModuleADebug as ScopeModule } from './scope.js';
+export { ScopeModuleADb as ScopeModule } from './scope.js';

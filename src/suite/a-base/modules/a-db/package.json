@@ -1,7 +1,7 @@
 {
-  "name": "cabloy-module-api-a-debug",
+  "name": "cabloy-module-api-a-db",
   "version": "5.0.0",
-  "title": "a-debug",
+  "title": "a-db",
   "eggBornModule": {
     "fileVersion": 0,
     "dependencies": {
@@ -23,7 +23,7 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "debug",
+  "description": "db",
   "files": [
     "dist",
     "static",
@@ -39,7 +39,5 @@
     "Cabloy Module"
   ],
   "author": "zhennann",
-  "dependencies": {
-    "debug": "^4.3.4"
-  }
+  "dependencies": {}
 }
