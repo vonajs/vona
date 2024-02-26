@@ -33,17 +33,7 @@ export class BeanContainer {
   _getBean<K extends keyof IBeanRecord>(beanFullName: K): IBeanRecord[K];
   _getBean<T>(beanFullName: string): T;
   _getBean<T>(beanFullName: Constructable<T> | string): T {
-    // bean options
-    const beanOptions = appResource.getBean(beanFullName as any);
-    if (!beanOptions) {
-      // not found
-      return null!;
-    }
-    const fullName = beanOptions.beanFullName;
-    if (this[BeanContainerInstances][fullName] === undefined) {
-      this[BeanContainerInstances][fullName] = this._newBean(fullName);
-    }
-    return this[BeanContainerInstances][fullName] as T;
+    return this._getBeanSelector(beanFullName as any);
   }
 
   _getBeanSelector<T>(A: Constructable<T>, selector?: string): T;
