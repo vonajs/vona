@@ -210,8 +210,7 @@ export default function (appInfo: CabloyAppInfo) {
     defaultClient: 'default',
     clients: {},
     base: {
-      pool: { min: 0, max: 5 },
-      afterCreate,
+      pool: { min: 0, max: 5, afterCreate },
       asyncStackTraces: true,
     },
   };
