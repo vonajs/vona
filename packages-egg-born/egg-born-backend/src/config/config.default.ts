@@ -1,7 +1,7 @@
 import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
 import path from 'path';
 import chalk from 'chalk';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 
 const _config = require('../../../../build/config.js');
 

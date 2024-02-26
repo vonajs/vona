@@ -29,6 +29,7 @@
   "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
     "@cabloy/core": "workspace:^",
+    "@types/uuid": "^9.0.8",
     "egg": "^3.17.5",
     "egg-onerror": "^2.1.1",
     "jsonwebtoken": "^8.5.1",
