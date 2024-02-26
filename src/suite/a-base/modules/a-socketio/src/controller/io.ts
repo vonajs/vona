@@ -8,7 +8,7 @@ export class ControllerIo extends BeanBase<ScopeModule> {
       path: this.ctx.request.body.path,
       timestamp: this.ctx.request.body.timestamp,
       workerId: this.app.meta.workerId,
-      socketId: this.ctx.socket.id,
+      socketId: (<any>this.ctx.socket).id,
       scene: this.ctx.bean.util.getFrontClientId(),
       user: this.ctx.state.user.op,
     });
@@ -19,7 +19,7 @@ export class ControllerIo extends BeanBase<ScopeModule> {
     const res = await this.scope.local.io.unsubscribe({
       path: this.ctx.request.body.path,
       timestamp: this.ctx.request.body.timestamp,
-      socketId: this.ctx.socket.id,
+      socketId: (<any>this.ctx.socket).id,
       user: this.ctx.state.user.op,
     });
     this.ctx.success(res);
