@@ -1,3 +1,4 @@
+import knex from 'knex';
 import { BeanScopeBase, Scope, TypeModuleResource } from '@cabloy/core';
 import { IModuleLocal } from './locals.js';
 import { IModuleModel } from './models.js';
@@ -23,5 +24,13 @@ declare module '@cabloy/core' {
 
   export interface IBeanScopeConfig {
     'a-db': ReturnType<typeof config>;
+  }
+
+  export interface CabloyConfig {
+    database: {
+      defaultClient: string;
+      clients: Record<string, knex.Knex.Config>;
+      base: knex.Knex.Config;
+    };
   }
 }

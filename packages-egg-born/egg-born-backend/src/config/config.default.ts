@@ -206,10 +206,12 @@ export default function (appInfo: CabloyAppInfo) {
   };
 
   // database
-  config.modules['a-db'] = {
-    base: {},
-    clients: {
-      default: {},
+  config.database = {
+    defaultClient: 'default',
+    clients: {},
+    base: {
+      pool: { min: 0, max: 5 },
+      afterCreate,
     },
   };
 
@@ -353,16 +355,14 @@ async function onConnection(conn) {
   await sessionVariablesSet(conn);
 }
 
+async function afterCreate(conn) {
+  await sessionVariablesSet(conn);
+}
+
 async function sessionVariablesSet(conn) {
-  await sessionVariableSet(conn, 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED');
   await sessionVariableSet(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
 }
 
 async function sessionVariableSet(conn, sql) {
-  try {
-    await conn.query(sql);
-    return true;
-  } catch (error) {
-    return false;
-  }
+  await conn.query(sql);
 }
