@@ -212,6 +212,7 @@ export default function (appInfo: CabloyAppInfo) {
     base: {
       pool: { min: 0, max: 5 },
       afterCreate,
+      asyncStackTraces: true,
     },
   };
 
@@ -356,6 +357,7 @@ async function onConnection(conn) {
 }
 
 async function afterCreate(conn) {
+  console.log('--------------:', conn);
   await sessionVariablesSet(conn);
 }
 

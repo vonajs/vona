@@ -7,6 +7,13 @@ export default function (_appInfo: CabloyAppInfo) {
   config.proxy = true;
   config.ipHeaders = 'x-real-ip,x-forwarded-for';
 
+  // database
+  config.database = {
+    base: {
+      asyncStackTraces: false,
+    },
+  };
+
   // mysql
   config.mysql = {
     default: {
