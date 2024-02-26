@@ -42,7 +42,7 @@ export class LocalClient extends BeanBase<ScopeModule> {
         if (afterCreateOld) {
           await afterCreateOld(conn, clientConfig);
         } else {
-          await this.afterCreate(conn, clientConfig);
+          await this._afterCreate(conn, clientConfig);
         }
         done(null);
       } catch (err) {
@@ -61,7 +61,7 @@ export class LocalClient extends BeanBase<ScopeModule> {
     this.configDatabase.clients[clientName] = clientConfig;
   }
 
-  async afterCreate(conn, clientConfig: knex.Knex.Config) {
+  private async _afterCreate(conn, clientConfig: knex.Knex.Config) {
     if (typeof clientConfig.client === 'string' && ['mysql', 'mysql2'].includes(clientConfig.client)) {
       await this._executeQuery(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
     }
