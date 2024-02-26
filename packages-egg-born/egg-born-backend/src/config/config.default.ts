@@ -210,7 +210,8 @@ export default function (appInfo: CabloyAppInfo) {
     defaultClient: 'default',
     clients: {},
     base: {
-      pool: { min: 0, max: 5, afterCreate },
+      pool: { min: 0, max: 5 },
+      acquireConnectionTimeout: 60000 * 10,
       asyncStackTraces: true,
     },
   };
@@ -352,11 +353,6 @@ function onQuery(hook, ms, query /* , args*/) {
 }
 
 async function onConnection(conn) {
-  await sessionVariablesSet(conn);
-}
-
-async function afterCreate(conn) {
-  console.log('--------------:', conn);
   await sessionVariablesSet(conn);
 }
 

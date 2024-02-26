@@ -1,5 +1,6 @@
 import { BeanBase, Local } from '@cabloy/core';
 import knex from 'knex';
+import { promisify } from 'node:util';
 import { ScopeModule } from '../resource/this.js';
 
 @Local({ containerScope: 'app' })
@@ -30,9 +31,21 @@ export class LocalClient extends BeanBase<ScopeModule> {
       clientName = this.configDatabase.defaultClient;
     }
     // clientConfig
-    const clientConfig = this.configDatabase.clients[clientName];
+    let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;
-    return this.bean.util.extend({}, this.configDatabase.base, clientConfig);
+    // combine
+    clientConfig = this.bean.util.extend({}, this.configDatabase.base, clientConfig);
+    // patch afterCreate
+    const afterCreateOld = clientConfig.pool!.afterCreate;
+    clientConfig.pool!.afterCreate = async conn => {
+      if (afterCreateOld) {
+        await afterCreateOld(conn, clientConfig);
+      } else {
+        await this.afterCreate(conn, clientConfig);
+      }
+    };
+    // ready
+    return clientConfig;
   }
 
   setClientConfig(clientName: string, clientConfig: knex.Knex.Config) {
@@ -41,5 +54,16 @@ export class LocalClient extends BeanBase<ScopeModule> {
       clientName = this.configDatabase.defaultClient;
     }
     this.configDatabase.clients[clientName] = clientConfig;
+  }
+
+  async afterCreate(conn, clientConfig: knex.Knex.Config) {
+    if (typeof clientConfig.client === 'string' && ['mysql', 'mysql2'].includes(clientConfig.client)) {
+      await this._executeQuery(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
+    }
+  }
+
+  private async _executeQuery(conn, sql) {
+    const queryAsync = promisify(cb => conn.query(sql, cb));
+    return await queryAsync();
   }
 }
