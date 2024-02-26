@@ -15,7 +15,11 @@ export class LocalClient extends BeanBase<ScopeModule> {
     if (!clientName) {
       clientName = this.configDatabase.defaultClient;
     }
+    // clientConfig
+    const clientBase = this.configDatabase.base;
+    let clientConfig = this.configDatabase.clients[clientName];
+    clientConfig = this.bean.util.extend({}, clientBase, clientConfig);
     // client
-    this.knex = knex(this.configDatabase.clients[clientName]);
+    this.knex = knex(clientConfig);
   }
 }
