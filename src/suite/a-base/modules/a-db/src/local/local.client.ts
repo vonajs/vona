@@ -37,11 +37,16 @@ export class LocalClient extends BeanBase<ScopeModule> {
     clientConfig = this.bean.util.extend({}, this.configDatabase.base, clientConfig);
     // patch afterCreate
     const afterCreateOld = clientConfig.pool!.afterCreate;
-    clientConfig.pool!.afterCreate = async conn => {
-      if (afterCreateOld) {
-        await afterCreateOld(conn, clientConfig);
-      } else {
-        await this.afterCreate(conn, clientConfig);
+    clientConfig.pool!.afterCreate = async (conn, done) => {
+      try {
+        if (afterCreateOld) {
+          await afterCreateOld(conn, clientConfig);
+        } else {
+          await this.afterCreate(conn, clientConfig);
+        }
+        done(null);
+      } catch (err) {
+        done(err);
       }
     };
     // ready
