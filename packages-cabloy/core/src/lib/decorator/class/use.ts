@@ -15,10 +15,10 @@ export function Use(options?: IDecoratorUseOptions): PropertyDecorator {
       beanFullName = appResource.getBeanFullName(beanClass);
       if (!beanFullName) throw new Error(`beanFullName not found for: ${beanClass.name}`);
     }
-    // moduleScope
-    let moduleScope = options.moduleScope;
-    if (!moduleScope && beanClass.prototype instanceof BeanModuleScopeBase) {
-      moduleScope = parseModuleName();
+    // selector: maybe moduleScope
+    let selector = options.selector;
+    if (!selector && beanClass.prototype instanceof BeanModuleScopeBase) {
+      selector = parseModuleName();
     }
     // containerScope
     //   should dynamic get containerScope when invoke beanContainer
@@ -28,7 +28,7 @@ export function Use(options?: IDecoratorUseOptions): PropertyDecorator {
     appResource.addUse(target, {
       prop,
       beanFullName,
-      moduleScope,
+      selector,
       containerScope,
     });
   };

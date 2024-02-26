@@ -10,6 +10,6 @@ export interface IDecoratorUseOptionsBase {
 
 export interface IDecoratorUseOptions {
   beanFullName?: string;
-  moduleScope?: string;
+  selector?: string;
   containerScope?: ContainerScope;
 }
