@@ -52,8 +52,6 @@ export class BeanContainer {
   _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string): IBeanRecord[K];
   _getBeanSelector<T>(beanFullName: string, selector?: string): T;
   _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string): T {
-    // empty string if undefined/null
-    if (selector === undefined || selector === null) selector = '';
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -61,7 +59,9 @@ export class BeanContainer {
       return null!;
     }
     const fullName = beanOptions.beanFullName;
-    const key = `${fullName}#${selector}`;
+    // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
+    //   not use !selector which maybe is 0
+    const key = selector === undefined || selector === null || selector === '' ? fullName : `${fullName}#${selector}`;
     if (this[BeanContainerInstancesModule][key] === undefined) {
       this[BeanContainerInstancesModule][key] = this._newBeanSelector(fullName, selector);
     }
