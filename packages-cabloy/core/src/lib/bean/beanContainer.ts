@@ -133,25 +133,19 @@ export class BeanContainer {
     const uses = appResource.getUses(beanOptions.beanClass.prototype);
     for (const key in uses) {
       const useOptions = uses[key];
-      const moduleScope = useOptions.moduleScope;
+      const selector = useOptions.selector;
       const containerScope = useOptions.containerScope;
       this._injectBeanInstancePropLazy(
         beanInstance,
         useOptions.prop,
         useOptions.beanFullName,
-        moduleScope,
+        selector,
         containerScope,
       );
     }
   }
 
-  private _injectBeanInstancePropLazy(
-    instance,
-    prop,
-    targetBeanFullName,
-    moduleScope?: string,
-    containerScope?: string,
-  ) {
+  private _injectBeanInstancePropLazy(instance, prop, targetBeanFullName, selector?: string, containerScope?: string) {
     const self = this;
     Object.defineProperty(instance, prop, {
       enumerable: true,
@@ -159,14 +153,14 @@ export class BeanContainer {
       get() {
         const symbol = Symbol.for(`__bean_use__#${prop}`);
         if (!instance[symbol]) {
-          instance[symbol] = self._injectBeanInstanceProp(targetBeanFullName, moduleScope, containerScope);
+          instance[symbol] = self._injectBeanInstanceProp(targetBeanFullName, selector, containerScope);
         }
         return instance[symbol];
       },
     });
   }
 
-  private _injectBeanInstanceProp(targetBeanFullName, moduleScope?: string, containerScope?: string) {
+  private _injectBeanInstanceProp(targetBeanFullName, selector?: string, containerScope?: string) {
     // containerScope
     if (!containerScope) {
       const targetOptions = appResource.getBean(targetBeanFullName);
@@ -177,13 +171,14 @@ export class BeanContainer {
     }
     // targetInstance
     let targetInstance;
-    if (moduleScope) {
+    // selector maybe empty string
+    if (selector) {
       if (containerScope === 'app') {
-        targetInstance = this.app.bean._getBeanSelector(targetBeanFullName, moduleScope);
+        targetInstance = this.app.bean._getBeanSelector(targetBeanFullName, selector);
       } else if (containerScope === 'ctx') {
-        targetInstance = this._getBeanSelector(targetBeanFullName, moduleScope);
+        targetInstance = this._getBeanSelector(targetBeanFullName, selector);
       } else if (containerScope === 'new') {
-        targetInstance = this._newBeanSelector(targetBeanFullName, moduleScope);
+        targetInstance = this._newBeanSelector(targetBeanFullName, selector);
       }
     } else {
       if (containerScope === 'app') {
