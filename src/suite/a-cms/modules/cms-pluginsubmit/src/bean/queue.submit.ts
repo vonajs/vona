@@ -17,7 +17,7 @@ export class QueueSubmit extends BeanBase {
       contentType: 'text/plain',
       dataType: 'json',
       data: links.join('\n'),
-    };
+    } as any;
     const res = await this.ctx.curl(url, options);
     if (res.status !== 200) {
       // log

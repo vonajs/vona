@@ -1,7 +1,7 @@
 import is from 'is-type-of';
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { CabloyContext } from '../../types/index.js';
+import { CabloyContext, PowerPartial } from '../../types/index.js';
 import { IExecuteBeanCallback } from './util.js';
 
 export class CtxUtil extends BeanSimple {
@@ -132,7 +132,7 @@ export class CtxUtil extends BeanSimple {
     context?: any;
     fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
-    ctxParent?: Partial<CabloyContext>;
+    ctxParent?: PowerPartial<CabloyContext>;
     instance?: boolean;
   }) {
     const ctx = this.ctx;

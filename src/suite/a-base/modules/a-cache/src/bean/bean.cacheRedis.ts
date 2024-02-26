@@ -23,7 +23,7 @@ export class BeanCacheRedis extends BeanModuleScopeBase {
     }
   }
 
-  async getset(name, value, timeout) {
+  async getset(name, value, timeout?) {
     const redis = this.ctx.app.redis.get('cache');
     const key = this._getKey(name);
     let valuePrev: any;

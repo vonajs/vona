@@ -1,5 +1,6 @@
-import { EggAppConfig, PowerPartial } from 'egg';
+import { EggAppConfig } from 'egg';
 import { TypeBeanScopeConfig } from '../../index.js';
+import { PowerPartial } from '../utils/powerPartial.js';
 
 export interface CabloyConfig extends EggAppConfig {
   disabledModules: string[];

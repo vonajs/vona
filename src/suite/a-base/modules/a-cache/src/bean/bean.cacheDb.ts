@@ -8,11 +8,11 @@ export class BeanCacheDb extends BeanModuleScopeBase {
     return res ? JSON.parse(res.value) : undefined;
   }
 
-  async set(name, value, timeout) {
+  async set(name, value, timeout?) {
     await this._set({ name, value, timeout, queue: true });
   }
 
-  async getset(name, value, timeout) {
+  async getset(name, value, timeout?) {
     const res = await this._set({ name, value, timeout, queue: true });
     return res ? JSON.parse(res.value) : undefined;
   }

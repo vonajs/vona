@@ -6,7 +6,7 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { CabloyContext, IModule } from '../../types/index.js';
+import { CabloyContext, IModule, PowerPartial } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -264,7 +264,7 @@ export class AppUtil extends BeanSimple {
     fn?: any;
     transaction?: boolean;
     ctxCaller?: CabloyContext;
-    ctxParent?: Partial<CabloyContext>;
+    ctxParent?: PowerPartial<CabloyContext>;
     instance?: boolean;
   }) {
     // ctxModule
