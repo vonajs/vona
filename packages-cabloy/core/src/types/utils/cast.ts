@@ -4,4 +4,5 @@ export function Cast<T = any>(source: unknown) {
 
 declare global {
   function parseInt(num: number, radix?: number): number;
+  function parseInt(num: any, radix?: number): number;
 }

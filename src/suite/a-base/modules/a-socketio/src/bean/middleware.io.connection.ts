@@ -12,17 +12,17 @@ export class MiddlewareIoConnection extends BeanBase {
     }
     // register
     const iid = user.iid;
-    const socketId = this.ctx.socket.id;
+    const socketId = (<any>this.ctx.socket).id;
     this.ctx.bean.io._registerSocket(socketId, this.ctx.socket);
 
     // register user online
     await this.ctx.bean.userOnline.register({ user: this.ctx.state.user, isLogin: false });
     // heartbeat
     const onHeartBeat = this._onHeartBeat.bind(this);
-    this.ctx.socket.conn.on('heartbeat', onHeartBeat);
+    (<any>this.ctx.socket).conn.on('heartbeat', onHeartBeat);
     // next
     await this._next({ next, user, socketId });
-    this.ctx.socket.conn.off('heartbeat', onHeartBeat);
+    (<any>this.ctx.socket).conn.off('heartbeat', onHeartBeat);
 
     // execute when disconnect
     this.ctx.bean.io._unRegisterSocket(socketId);

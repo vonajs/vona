@@ -44,7 +44,7 @@ export class BeanBodyCrypto extends BeanBase<ScopeModule> {
     if (!configCrypto) return;
     if (this.ctx.ctxCaller) return;
     if (this.ctx.headers['x-open-auth-client']) return;
-    const contentType = this.ctx.response.headers && this.ctx.response.headers['content-type'];
+    const contentType = ((this.ctx.response.headers && this.ctx.response.headers['content-type']) as string) || '';
     if (!contentType || contentType.indexOf('application/json') === -1) return;
     const body = this.ctx.response && this.ctx.response.body;
     if (!body || typeof body !== 'object') return;

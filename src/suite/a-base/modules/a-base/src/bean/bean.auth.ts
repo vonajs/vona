@@ -36,11 +36,11 @@ export class BeanAuth extends BeanBase<ScopeModule> {
   }
 
   async login(user) {
-    if (this.ctx.req.login) {
+    if ((<any>this.ctx.req).login) {
       await this.ctx.login(user);
     } else {
       this.ctx.state.user = user;
-      this.ctx.req.user = this.ctx.bean.auth._pruneUser({ user });
+      (<any>this.ctx.req).user = this.ctx.bean.auth._pruneUser({ user });
     }
   }
 
@@ -52,11 +52,11 @@ export class BeanAuth extends BeanBase<ScopeModule> {
   }
 
   async _logout_inner() {
-    if (this.ctx.req.logout) {
+    if ((<any>this.ctx.req).logout) {
       await this.ctx.logout();
     } else {
       this.ctx.state.user = null;
-      this.ctx.req.user = null;
+      (<any>this.ctx.req).user = null;
     }
     await this.ctx.bean.user.loginAsAnonymous();
     return await this.getLoginInfo();
