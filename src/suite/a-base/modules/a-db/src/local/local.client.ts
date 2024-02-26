@@ -13,6 +13,8 @@ export class LocalClient extends BeanBase<ScopeModule> {
   protected __init__(clientName?: string) {
     // config
     const clientConfig = this.getClientConfig(clientName);
+    const debug = this.app.bean.debug.get('db');
+    debug('clientName: %s, clientConfig: %j', clientName, clientConfig);
     // client
     this.knex = knex(clientConfig);
   }
