@@ -2,7 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 import knex from 'knex';
 import { ScopeModule } from '../resource/this.js';
 
-@Local()
+@Local({ containerScope: 'app' })
 export class LocalClient extends BeanBase<ScopeModule> {
   knex: knex.Knex;
 
@@ -11,8 +11,6 @@ export class LocalClient extends BeanBase<ScopeModule> {
   }
 
   protected __init__(clientName?: string) {
-    // undefined: do nothing
-    if (clientName === undefined) return;
     // clientName
     if (!clientName) {
       clientName = this.configDatabase.defaultClient;
@@ -26,7 +24,7 @@ export class LocalClient extends BeanBase<ScopeModule> {
   }
 
   get(clientName?: string) {
-    const client = this.app.bean._getBeanScope(LocalClient, clientName || '');
+    const client = this.app.bean._getBeanSelector(LocalClient, clientName);
     return client.knex;
   }
 }
