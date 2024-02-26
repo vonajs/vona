@@ -9,7 +9,6 @@ import { BeanSimple } from './beanSimple.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
-const BeanContainerInstancesModule = Symbol.for('Bean#InstancesModule');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export class BeanContainer {
@@ -17,7 +16,6 @@ export class BeanContainer {
   private ctx: CabloyContext;
 
   private [BeanContainerInstances]: Record<string, Constructable> = {};
-  private [BeanContainerInstancesModule]: Record<string, Constructable> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;
@@ -62,10 +60,10 @@ export class BeanContainer {
     // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
     //   not use !selector which maybe is 0
     const key = selector === undefined || selector === null || selector === '' ? fullName : `${fullName}#${selector}`;
-    if (this[BeanContainerInstancesModule][key] === undefined) {
-      this[BeanContainerInstancesModule][key] = this._newBeanSelector(fullName, selector);
+    if (this[BeanContainerInstances][key] === undefined) {
+      this[BeanContainerInstances][key] = this._newBeanSelector(fullName, selector);
     }
-    return this[BeanContainerInstancesModule][key] as T;
+    return this[BeanContainerInstances][key] as T;
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;
