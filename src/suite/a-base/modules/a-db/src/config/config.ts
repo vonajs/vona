@@ -2,11 +2,12 @@ import knex from 'knex';
 
 export const config = _app => {
   return {
+    defaultClient: 'default',
+    clients: {} as Record<string, knex.Knex.Config>,
     base: {
       pool: { min: 0, max: 10 },
       afterCreate,
     } as knex.Knex.Config,
-    clients: {} as Record<string, knex.Knex.Config>,
   };
 };
 
