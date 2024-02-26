@@ -10,7 +10,9 @@ export class LocalClient extends BeanBase<ScopeModule> {
     return this.app.config.database;
   }
 
-  protected __init__(clientName: string) {
+  protected __init__(clientName?: string) {
+    // undefined: do nothing
+    if (clientName === undefined) return;
     // clientName
     if (!clientName) {
       clientName = this.configDatabase.defaultClient;
@@ -21,5 +23,10 @@ export class LocalClient extends BeanBase<ScopeModule> {
     clientConfig = this.bean.util.extend({}, clientBase, clientConfig);
     // client
     this.knex = knex(clientConfig);
+  }
+
+  get(clientName?: string) {
+    const client = this.app.bean._getBeanScope(LocalClient, clientName || '');
+    return client.knex;
   }
 }
