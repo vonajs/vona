@@ -16,6 +16,6 @@ export class BeanModuleScopeBase<T = unknown> extends BeanBase<T> {
 
   // other module's bean
   module(moduleScope: string): typeof this {
-    return this.bean._getBeanScope((<any>this).__beanFullName__, moduleScope);
+    return this.bean._getBeanSelector((<any>this).__beanFullName__, moduleScope);
   }
 }

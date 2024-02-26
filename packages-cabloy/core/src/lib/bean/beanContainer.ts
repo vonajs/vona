@@ -48,10 +48,12 @@ export class BeanContainer {
     return this[BeanContainerInstances][fullName] as T;
   }
 
-  _getBeanScope<T>(A: Constructable<T>, moduleScope): T;
-  _getBeanScope<K extends keyof IBeanRecord>(beanFullName: K, moduleScope): IBeanRecord[K];
-  _getBeanScope<T>(beanFullName: string, moduleScope): T;
-  _getBeanScope<T>(beanFullName: Constructable<T> | string, moduleScope): T {
+  _getBeanSelector<T>(A: Constructable<T>, selector?: string): T;
+  _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string): IBeanRecord[K];
+  _getBeanSelector<T>(beanFullName: string, selector?: string): T;
+  _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string): T {
+    // empty string if undefined/null
+    if (selector === undefined || selector === null) selector = '';
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -59,9 +61,9 @@ export class BeanContainer {
       return null!;
     }
     const fullName = beanOptions.beanFullName;
-    const key = `${fullName}#${moduleScope}`;
+    const key = `${fullName}#${selector}`;
     if (this[BeanContainerInstancesModule][key] === undefined) {
-      this[BeanContainerInstancesModule][key] = this._newBeanScope(fullName, moduleScope);
+      this[BeanContainerInstancesModule][key] = this._newBeanSelector(fullName, selector);
     }
     return this[BeanContainerInstancesModule][key] as T;
   }
@@ -87,11 +89,11 @@ export class BeanContainer {
     return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, beanOptions.aop);
   }
 
-  _newBeanScope<T>(A: Constructable<T>, moduleScope, ...args): T;
-  _newBeanScope<K extends keyof IBeanRecord>(beanFullName: K, moduleScope, ...args): IBeanRecord[K];
-  _newBeanScope<T>(beanFullName: string, moduleScope, ...args): T;
-  _newBeanScope<T>(beanFullName: Constructable<T> | string, moduleScope, ...args): T {
-    return this._newBean(beanFullName as any, moduleScope, ...args);
+  _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
+  _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
+  _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
+  _newBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
+    return this._newBean(beanFullName as any, selector, ...args);
   }
 
   private _createBeanInstance(beanFullName, beanClass, args) {
@@ -177,11 +179,11 @@ export class BeanContainer {
     let targetInstance;
     if (moduleScope) {
       if (containerScope === 'app') {
-        targetInstance = this.app.bean._getBeanScope(targetBeanFullName, moduleScope);
+        targetInstance = this.app.bean._getBeanSelector(targetBeanFullName, moduleScope);
       } else if (containerScope === 'ctx') {
-        targetInstance = this._getBeanScope(targetBeanFullName, moduleScope);
+        targetInstance = this._getBeanSelector(targetBeanFullName, moduleScope);
       } else if (containerScope === 'new') {
-        targetInstance = this._newBeanScope(targetBeanFullName, moduleScope);
+        targetInstance = this._newBeanSelector(targetBeanFullName, moduleScope);
       }
     } else {
       if (containerScope === 'app') {
