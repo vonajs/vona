@@ -4,6 +4,8 @@ import { ScopeModule } from '../resource/this.js';
 
 @Local()
 export class LocalClient extends BeanBase<ScopeModule> {
+  knex: knex.Knex;
+
   get configModule() {
     return this.scope.config;
   }
@@ -14,6 +16,6 @@ export class LocalClient extends BeanBase<ScopeModule> {
       clientName = this.configModule.defaultClient;
     }
     // client
-    return knex(this.configModule.clients[clientName]);
+    this.knex = knex(this.configModule.clients[clientName]);
   }
 }

@@ -26,9 +26,10 @@ export class MiddlewareHttpLog extends BeanBase<ScopeModule> {
 `;
     }
     // params
-    if (req.params && Object.keys(req.params).length > 0) {
+    const params = this.ctx.params;
+    if (params && Object.keys(params).length > 0) {
       log = `${log}params:
-  ${JSON.stringify(req.params)}
+  ${JSON.stringify(params)}
 `;
     }
     // body

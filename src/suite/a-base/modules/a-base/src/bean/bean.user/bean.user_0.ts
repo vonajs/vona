@@ -91,7 +91,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     // check if has this.ctx.state.user
     if (this.ctx.state.user) {
       // force set this.ctx.req.user
-      this.ctx.req.user = this.ctx.bean.auth._pruneUser({ user: this.ctx.state.user });
+      (<any>this.ctx.req).user = this.ctx.bean.auth._pruneUser({ user: this.ctx.state.user });
     } else {
       // always has anonymous id
       this.ctx.bean.user.anonymousId();
