@@ -6,16 +6,16 @@ import { ScopeModule } from '../resource/this.js';
 export class LocalClient extends BeanBase<ScopeModule> {
   knex: knex.Knex;
 
-  get configModule() {
-    return this.scope.config;
+  get configDatabase() {
+    return this.app.config.database;
   }
 
   protected __init__(clientName: string) {
     // clientName
     if (!clientName) {
-      clientName = this.configModule.defaultClient;
+      clientName = this.configDatabase.defaultClient;
     }
     // client
-    this.knex = knex(this.configModule.clients[clientName]);
+    this.knex = knex(this.configDatabase.clients[clientName]);
   }
 }
