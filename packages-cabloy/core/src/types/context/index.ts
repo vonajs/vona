@@ -10,5 +10,5 @@ import { BeanContainerLike } from '../../lib/bean/beanContainer.js';
 export interface CabloyContext extends ContextLocale, ContextError, ContextBase, ContextOthers, EggContext {
   app: CabloyApplication;
   bean: BeanContainerLike;
-  [key: string | symbol]: unknown;
+  [key: string | symbol]: any; // should use any rather than unknown
 }
