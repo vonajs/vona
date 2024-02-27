@@ -4,11 +4,7 @@
   "title": "a-db",
   "eggBornModule": {
     "fileVersion": 0,
-    "dependencies": {
-      "a-instance": "5.0.0",
-      "a-base": "5.0.0",
-      "a-flow": "5.0.0"
-    }
+    "dependencies": {}
   },
   "type": "module",
   "exports": {
