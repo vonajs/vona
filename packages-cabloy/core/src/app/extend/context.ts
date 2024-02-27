@@ -48,15 +48,6 @@ const context: ContextBase = {
     }
     return this[META];
   },
-  get db() {
-    if (!this[DATABASE]) {
-      this[DATABASE] = this.meta.util.createDatabase();
-    }
-    return this[DATABASE];
-  },
-  set db(value) {
-    this[DATABASE] = value;
-  },
   get dbMeta() {
     if (!this[DATABASEMETA]) {
       this[DATABASEMETA] = {

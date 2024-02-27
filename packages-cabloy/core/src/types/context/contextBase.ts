@@ -4,8 +4,6 @@ import { IModule } from '../interface/module.js';
 export interface ContextBase {
   get module(): IModule; // not union null
   get meta(): CtxMeta;
-  get db();
-  set db(value);
   get dbMeta();
   set dbMeta(metaCaller);
   get transaction();

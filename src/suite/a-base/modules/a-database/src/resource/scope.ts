@@ -34,4 +34,8 @@ declare module '@cabloy/core' {
       bases: Record<string, knex.Knex.Config>;
     };
   }
+
+  export interface CabloyContext {
+    get db(): knex.Knex | knex.Knex.Transaction;
+  }
 }
