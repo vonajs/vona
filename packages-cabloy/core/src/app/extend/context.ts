@@ -74,7 +74,7 @@ const context: ContextBase = {
     // innerAccess
     this.innerAccess = true;
     // transaction
-    this.dbMeta = value.dbMeta;
+    Cast(this).dbMeta = value.dbMeta;
     // dbLevel
     this.dbLevel = value.dbLevel;
   },
@@ -83,7 +83,7 @@ const context: ContextBase = {
     return self.bean._getBean('cache');
   },
   tail(cb) {
-    if (!this.dbMeta.master) {
+    if (!Cast(this).dbMeta.master) {
       this.ctxCaller.tail(cb);
     } else {
       this.tailCallbacks.push(cb);
