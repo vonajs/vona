@@ -1,4 +1,5 @@
 import { IModule } from '@cabloy/module-info';
+import { CabloyContext } from '../index.js';
 
 export interface IMonkeyApp {
   moduleLoading(module: IModule): Promise<void>;
@@ -12,6 +13,10 @@ export interface IModuleMain {
   moduleLoaded(module: IModule): Promise<void>;
   configLoaded(module: IModule, config: any): Promise<void>;
   metaLoaded(module: IModule, meta: any): Promise<void>;
+}
+
+export interface IModuleMainContext {
+  createContext(context: CabloyContext): void;
 }
 
 export interface IMonkeyModule {
