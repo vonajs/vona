@@ -6,7 +6,7 @@ export * from '@cabloy/module-info';
 
 // todo:
 export interface IModuleResource {
-  Main: new () => IModuleMain;
+  Main: new () => IModuleMain & IModuleMainContext;
   Monkey: new () => IMonkeyModule;
   locales: Record<string, any>;
   Errors: Record<number, string>;
