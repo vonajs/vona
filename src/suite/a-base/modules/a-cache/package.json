@@ -4,7 +4,7 @@
   "eggBornModule": {
     "fileVersion": 2,
     "dependencies": {
-      "a-db": "5.0.0"
+      "a-database": "5.0.0"
     }
   },
   "type": "module",

@@ -29,7 +29,7 @@ import 'cabloy-module-api-a-codemirror';
 import 'cabloy-module-api-a-components';
 import 'cabloy-module-api-a-dashboard';
 import 'cabloy-module-api-a-dashboardbooster';
-import 'cabloy-module-api-a-db';
+import 'cabloy-module-api-a-database';
 import 'cabloy-module-api-a-debug';
 import 'cabloy-module-api-a-detail';
 import 'cabloy-module-api-a-dict';

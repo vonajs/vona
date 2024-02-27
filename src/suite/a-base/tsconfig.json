@@ -64,7 +64,7 @@
       "path": "modules/a-dashboardbooster/tsconfig.build.json"
     },
     {
-      "path": "modules/a-db/tsconfig.build.json"
+      "path": "modules/a-database/tsconfig.build.json"
     },
     {
       "path": "modules/a-debug/tsconfig.build.json"

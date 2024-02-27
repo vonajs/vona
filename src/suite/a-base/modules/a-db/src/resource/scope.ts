@@ -5,7 +5,7 @@ import { IModuleModel } from './models.js';
 import { config, Errors, locales, constants } from '../config/index.js';
 
 @Scope()
-export class ScopeModuleADb extends BeanScopeBase {}
+export class ScopeModuleADatabase extends BeanScopeBase {}
 
 export interface ScopeModuleADb
   extends TypeModuleResource<
@@ -19,11 +19,11 @@ export interface ScopeModuleADb
 
 declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
-    'a-db': ScopeModuleADb;
+    'a-database': ScopeModuleADatabase;
   }
 
   export interface IBeanScopeConfig {
-    'a-db': ReturnType<typeof config>;
+    'a-database': ReturnType<typeof config>;
   }
 
   export interface CabloyConfig {

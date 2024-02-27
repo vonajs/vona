@@ -40,7 +40,7 @@
     "cabloy-module-api-a-codemirror": "workspace:^",
     "cabloy-module-api-a-dashboard": "workspace:^",
     "cabloy-module-api-a-dashboardbooster": "workspace:^",
-    "cabloy-module-api-a-db": "workspace:^",
+    "cabloy-module-api-a-database": "workspace:^",
     "cabloy-module-api-a-debug": "workspace:^",
     "cabloy-module-api-a-detail": "workspace:^",
     "cabloy-module-api-a-dict": "workspace:^",
