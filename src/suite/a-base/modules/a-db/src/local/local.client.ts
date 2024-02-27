@@ -12,10 +12,12 @@ export class LocalClient extends BeanBase<ScopeModule> {
   }
 
   protected __init__(clientName?: string) {
+    // name
+    const clientNameBasic = this._getClientNameBasic(clientName);
     // config
-    const clientConfig = this.getClientConfig(clientName);
+    const clientConfig = this.getClientConfig(clientNameBasic);
     const debug = this.app.bean.debug.get('db');
-    debug('clientName: %s, clientConfig: %j', clientName, clientConfig);
+    debug('clientName: %s, clientConfig: %j', clientNameBasic, clientConfig);
     // client
     this.knex = knex(clientConfig);
   }
@@ -25,11 +27,16 @@ export class LocalClient extends BeanBase<ScopeModule> {
     return client.knex;
   }
 
-  getClientConfig(clientName?: string, original: boolean = false): knex.Knex.Config {
-    // clientName
-    if (!clientName) {
-      clientName = this.configDatabase.defaultClient;
-    }
+  private _getClientNameBasic(clientName?: string) {
+    // default
+    if (!clientName) return this.configDatabase.defaultClient;
+    // split
+    clientName = clientName.split(':')[0];
+    if (!clientName) return this.configDatabase.defaultClient;
+    return clientName;
+  }
+
+  getClientConfig(clientName: string, original: boolean = false): knex.Knex.Config {
     // clientConfig
     let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;
