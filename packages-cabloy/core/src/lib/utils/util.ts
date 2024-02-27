@@ -6,7 +6,7 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { CabloyContext, IModule, PowerPartial } from '../../types/index.js';
+import { CabloyContext, Cast, IModule, PowerPartial } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -310,7 +310,7 @@ export class AppUtil extends BeanSimple {
     // execute
     let res;
     if (transaction) {
-      res = await ctx.transaction.begin(async () => {
+      res = await Cast(ctx).transaction.begin(async () => {
         return await this._executeBeanFn({ fn, ctx, bean, context });
       });
     } else {
