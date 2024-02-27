@@ -1,4 +1,3 @@
-import is from 'is-type-of';
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { CabloyContext, PowerPartial } from '../../types/index.js';
@@ -170,23 +169,6 @@ export class CtxUtil extends BeanSimple {
       params,
       headers,
       body,
-    });
-  }
-
-  createDatabase() {
-    const ctx = this.ctx;
-    const db = this.getDbOriginal();
-    return new Proxy(db, {
-      get(target, prop) {
-        const value = target[prop];
-        if (!is.function(value)) return value;
-        // if (value.name !== 'createPromise') return value;
-        // check if use transaction
-        if (!ctx.dbMeta.transaction.inTransaction) return value;
-        return function (...args) {
-          return ctx.dbMeta.transaction.connection[prop](...args);
-        };
-      },
     });
   }
 }
