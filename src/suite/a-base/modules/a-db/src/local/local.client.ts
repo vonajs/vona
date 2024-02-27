@@ -22,11 +22,6 @@ export class LocalClient extends BeanBase<ScopeModule> {
     this.knex = knex(clientConfig);
   }
 
-  get(clientName?: string) {
-    const client = this.app.bean._getBeanSelector(LocalClient, clientName);
-    return client.knex;
-  }
-
   private _getClientNameBasic(clientName?: string) {
     // default
     if (!clientName) return this.configDatabase.defaultClient;
