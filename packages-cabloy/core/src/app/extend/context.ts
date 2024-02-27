@@ -8,8 +8,6 @@ import { Cast } from '../../types/utils/cast.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
-const DATABASE = Symbol.for('Context#__database');
-const DATABASEMETA = Symbol.for('Context#__databasemeta');
 const INNERACCESS = Symbol.for('Context#__inneraccess');
 const SUBDOMAIN = Symbol.for('Context#__subdomain');
 const CTXCALLER = Symbol.for('Context#__ctxcaller');
@@ -47,25 +45,6 @@ const context: ContextBase = {
       this[META] = self.bean._newBean(CtxMeta);
     }
     return this[META];
-  },
-  get dbMeta() {
-    if (!this[DATABASEMETA]) {
-      this[DATABASEMETA] = {
-        master: true,
-        transaction: new DbTransaction(this),
-      };
-    }
-    return this[DATABASEMETA];
-  },
-  set dbMeta(metaCaller) {
-    // transaction
-    if (metaCaller.transaction.inTransaction) {
-      this.dbMeta.master = false; // false only on metaCaller.transaction=true
-      this.dbMeta.transaction = metaCaller.transaction;
-    }
-  },
-  get transaction() {
-    return this.dbMeta.transaction;
   },
   get innerAccess() {
     return this[INNERACCESS];
