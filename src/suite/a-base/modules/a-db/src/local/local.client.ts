@@ -40,6 +40,10 @@ export class LocalClient extends BeanBase<ScopeModule> {
     // clientConfig
     let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;
+    // check
+    if (!clientConfig) {
+      throw new Error(`database config not found: ${clientName}`);
+    }
     // combine
     const configBase = this.configDatabase.base;
     const configBaseClient = this.configDatabase.bases[clientConfig.client as string];
