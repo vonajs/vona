@@ -31,6 +31,7 @@ declare module '@cabloy/core' {
       defaultClient: string;
       clients: Record<string, knex.Knex.Config>;
       base: knex.Knex.Config;
+      bases: Record<string, knex.Knex.Config>;
     };
   }
 }

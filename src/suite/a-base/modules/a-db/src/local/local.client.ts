@@ -34,21 +34,9 @@ export class LocalClient extends BeanBase<ScopeModule> {
     let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;
     // combine
-    clientConfig = this.bean.util.extend({}, this.configDatabase.base, clientConfig);
-    // patch afterCreate
-    const afterCreateOld = clientConfig.pool!.afterCreate;
-    clientConfig.pool!.afterCreate = async (conn, done) => {
-      try {
-        if (afterCreateOld) {
-          await afterCreateOld(conn, clientConfig);
-        } else {
-          await this._afterCreate(conn, clientConfig);
-        }
-        done(null);
-      } catch (err) {
-        done(err);
-      }
-    };
+    const configBase = this.configDatabase.base;
+    const configBaseClient = this.configDatabase.bases[clientConfig.client as string];
+    clientConfig = this.bean.util.extend({}, configBase, configBaseClient, clientConfig);
     // ready
     return clientConfig;
   }
@@ -61,13 +49,7 @@ export class LocalClient extends BeanBase<ScopeModule> {
     this.configDatabase.clients[clientName] = clientConfig;
   }
 
-  private async _afterCreate(conn, clientConfig: knex.Knex.Config) {
-    if (typeof clientConfig.client === 'string' && ['mysql', 'mysql2'].includes(clientConfig.client)) {
-      await this._executeQuery(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
-    }
-  }
-
-  private async _executeQuery(conn, sql) {
+  async _executeQuery(conn, sql) {
     const queryAsync = promisify(cb => conn.query(sql, cb));
     return await queryAsync();
   }
