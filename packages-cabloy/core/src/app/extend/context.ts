@@ -2,7 +2,6 @@ import raw from 'raw-body';
 import inflate from 'inflation';
 import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
-import DbTransaction from '../../lib/base/dbTransaction.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { CabloyContext } from '../../types/context/index.js';
 import { Cast } from '../../types/utils/cast.js';
