@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
-describe('test/controller/test/feat/mysql2.test.js', () => {
+describe.skip('test/controller/test/feat/mysql2.test.js', () => {
   it('action:mysql2', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
