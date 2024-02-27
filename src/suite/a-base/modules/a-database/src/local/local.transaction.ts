@@ -1,32 +1,30 @@
 import { BeanBase, Local } from '@cabloy/core';
 import { ScopeModule } from '../resource/this.js';
+import knex from 'knex';
 
 @Local()
 export class LocalTransaction extends BeanBase<ScopeModule> {
-  _ctx: CabloyContext;
-  _transactionCounter: number;
-  _connection: any;
+  _transactionCounter: number = 0;
+  _connection: knex.Knex.Transaction | null = null;
 
-  constructor(ctx) {
-    this._ctx = ctx;
-    this._transactionCounter = 0;
-    this._connection = null;
-  }
   get inTransaction() {
     return this._transactionCounter > 0;
   }
+
   get connection() {
     return this._connection;
   }
-  set connection(value) {
+
+  set connection(value: knex.Knex.Transaction) {
     this._connection = value;
   }
+
   async begin(fn) {
     let res;
-    const db = this._ctx.meta.util.getDbOriginal();
+    const db = this.ctx.bean.database.getDbOriginal();
     try {
       if (++this._transactionCounter === 1) {
-        this._connection = await db.beginTransaction();
+        this._connection = await db.transaction({ isolationLevel: 'read committed' });
       }
     } catch (err) {
       this._transactionCounter--;
@@ -36,18 +34,18 @@ export class LocalTransaction extends BeanBase<ScopeModule> {
       res = await fn();
     } catch (err) {
       if (--this._transactionCounter === 0) {
-        await this._connection.rollback();
+        await this._connection!.rollback();
         this._connection = null;
       }
       throw err;
     }
     try {
       if (--this._transactionCounter === 0) {
-        await this._connection.commit();
+        await this._connection!.commit();
         this._connection = null;
       }
     } catch (err) {
-      await this._connection.rollback();
+      await this._connection!.rollback();
       this._connection = null;
       throw err;
     }

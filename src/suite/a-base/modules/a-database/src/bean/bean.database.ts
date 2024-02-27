@@ -9,7 +9,7 @@ export class BeanDatabase extends BeanBase {
   }
 
   getDbOriginal() {
-    const clientName = `:${this.ctx.dbLevel}`;
+    const clientName = this.ctx.dbLevel === 0 ? '' : `:${this.ctx.dbLevel}`;
     return this.get(clientName);
   }
 }
