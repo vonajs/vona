@@ -1,6 +1,6 @@
 import { IModuleRoute } from '../../lib/bean/resource/route/type.js';
 import { CabloyApplication } from '../application/app.js';
-import { IModuleMain, IMonkeyModule } from './monkey.js';
+import { IModuleMain, IModuleMainContext, IMonkeyModule } from './monkey.js';
 
 export * from '@cabloy/module-info';
 
@@ -26,7 +26,7 @@ declare module '@cabloy/module-info' {
   export interface IModule {
     resource: IModuleResource;
     meta: IModuleMeta;
-    mainInstance: IModuleMain;
+    mainInstance: IModuleMain & IModuleMainContext;
     monkeyInstance: IMonkeyModule;
   }
 }

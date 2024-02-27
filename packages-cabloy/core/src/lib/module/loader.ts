@@ -17,6 +17,7 @@ import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import loadReload from './reload/reload.js';
 import loadDevelopment from './reload/development.js';
+import loadContextPatch from './contextPatch.js';
 import { loadBeans } from './bean/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
@@ -48,6 +49,7 @@ export class ModuleLoader extends BeanSimple {
       loadConstants(app, modules);
       loadRoutes(app, modules);
       loadModels(app);
+      loadContextPatch(app);
       loadRedis(app);
       loadQueues(app, modules);
       loadBroadcasts(app, modules);
