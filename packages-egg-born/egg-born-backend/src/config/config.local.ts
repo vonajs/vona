@@ -16,6 +16,13 @@ export default function (_appInfo: CabloyAppInfo) {
     },
   };
 
+  // database
+  config.database = {
+    base: {
+      pool: { min: 0, max: 1 },
+    },
+  };
+
   // mysql
   config.mysql = {
     default: {

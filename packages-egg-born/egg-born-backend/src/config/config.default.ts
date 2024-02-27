@@ -2,6 +2,7 @@ import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
 import path from 'path';
 import chalk from 'chalk';
 import * as uuid from 'uuid';
+import { promisify } from 'node:util';
 
 const _config = require('../../../../build/config.js');
 
@@ -214,6 +215,30 @@ export default function (appInfo: CabloyAppInfo) {
       acquireConnectionTimeout: 60000 * 10,
       asyncStackTraces: true,
     },
+    bases: {
+      mysql: {
+        pool: {
+          afterCreate(conn, done) {
+            mysql_afterCreate(conn).then(done).catch(done);
+          },
+        },
+      },
+      mysql2: {
+        pool: {
+          afterCreate(conn, done) {
+            mysql_afterCreate(conn).then(done).catch(done);
+          },
+        },
+        connection: {
+          typeCast(field, next) {
+            if (field.type === 'JSON') {
+              return field.stringJSON();
+            }
+            return next();
+          },
+        },
+      },
+    },
   };
 
   // mysql
@@ -362,4 +387,13 @@ async function sessionVariablesSet(conn) {
 
 async function sessionVariableSet(conn, sql) {
   await conn.query(sql);
+}
+
+async function mysql_afterCreate(conn) {
+  await _executeQuery(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
+}
+
+async function _executeQuery(conn, sql) {
+  const queryAsync = promisify(cb => conn.query(sql, cb));
+  return await queryAsync();
 }
