@@ -11,11 +11,11 @@ export class LocalTransaction extends BeanBase<ScopeModule> {
     return this._transactionCounter > 0;
   }
 
-  get connection() {
+  get connection(): knex.Knex.Transaction | null {
     return this._connection;
   }
 
-  set connection(value: knex.Knex.Transaction) {
+  set connection(value: knex.Knex.Transaction | null) {
     this._connection = value;
   }
 
