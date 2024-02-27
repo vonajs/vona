@@ -7,7 +7,7 @@ import { config, Errors, locales, constants } from '../config/index.js';
 @Scope()
 export class ScopeModuleADatabase extends BeanScopeBase {}
 
-export interface ScopeModuleADb
+export interface ScopeModuleADatabase
   extends TypeModuleResource<
     IModuleLocal,
     IModuleModel,
