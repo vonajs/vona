@@ -5,6 +5,9 @@ import { ScopeModule } from '../resource/this.js';
 
 @Local({ containerScope: 'app' })
 export class LocalClient extends BeanBase<ScopeModule> {
+  clientNameOriginal?: string;
+  clientName: string;
+  clientConfig: knex.Knex.Config;
   knex: knex.Knex;
 
   get configDatabase() {
@@ -13,16 +16,17 @@ export class LocalClient extends BeanBase<ScopeModule> {
 
   protected __init__(clientName?: string) {
     // name
-    const clientNameBasic = this._getClientNameBasic(clientName);
+    this.clientNameOriginal = clientName;
+    this.clientName = this._extractClientName(clientName);
     // config
-    const clientConfig = this.getClientConfig(clientNameBasic);
+    this.clientConfig = this.getClientConfig(this.clientName);
     const debug = this.app.bean.debug.get('db');
-    debug('clientName: %s, clientConfig: %j', clientNameBasic, clientConfig);
-    // client
-    this.knex = knex(clientConfig);
+    debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
+    // knex
+    this.knex = knex(this.clientConfig);
   }
 
-  private _getClientNameBasic(clientName?: string) {
+  private _extractClientName(clientName?: string) {
     // default
     if (!clientName) return this.configDatabase.defaultClient;
     // split
