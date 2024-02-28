@@ -16,7 +16,7 @@ export class VersionManager extends BeanBase {
             PRIMARY KEY (id)
           )
         `;
-      await this.ctx.db.query(sql);
+      await this.ctx.model.query(sql);
     }
     if (options.version === 2) {
       // aInstance

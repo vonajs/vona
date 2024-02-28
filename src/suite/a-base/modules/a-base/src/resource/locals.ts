@@ -14,7 +14,6 @@ export * from '../local/layoutConfig.js';
 export * from '../local/category.js';
 export * from '../local/tag.js';
 export * from '../local/util.js';
-export * from '../local/db.js';
 
 import { LocalStash } from '../local/stash.js';
 import { LocalProcedure } from '../local/procedure.js';
@@ -32,7 +31,6 @@ import { LocalLayoutConfig } from '../local/layoutConfig.js';
 import { LocalCategory } from '../local/category.js';
 import { LocalTag } from '../local/tag.js';
 import { LocalUtil } from '../local/util.js';
-import { LocalDb } from '../local/db.js';
 
 export interface IModuleLocal {
   stash: LocalStash;
@@ -51,5 +49,4 @@ export interface IModuleLocal {
   category: LocalCategory;
   tag: LocalTag;
   util: LocalUtil;
-  db: LocalDb;
 }

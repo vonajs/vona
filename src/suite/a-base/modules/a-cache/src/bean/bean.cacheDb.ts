@@ -28,7 +28,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
       name,
     });
     if (res) {
-      await this.ctx.db.query(
+      await this.ctx.model.query(
         `
           update aCache set value=?, expired=${expired}
             where id=?
@@ -48,7 +48,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
           },
         });
       } else {
-        await this.ctx.db.query(
+        await this.ctx.model.query(
           `
             insert into aCache(iid,module,name,value,expired) values(?,?,?,?,${expired})
             `,
@@ -70,7 +70,11 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   async _has(name) {
     const sql =
       'select * from aCache where iid=? and module=? and name=? and (expired is null or expired>CURRENT_TIMESTAMP)';
-    const res = await this.ctx.db.queryOne(sql, [this.ctx.instance ? this.ctx.instance.id : 0, this.moduleScope, name]);
+    const res = await this.ctx.model.queryOne(sql, [
+      this.ctx.instance ? this.ctx.instance.id : 0,
+      this.moduleScope,
+      name,
+    ]);
     return res;
   }
 

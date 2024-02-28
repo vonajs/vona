@@ -7,7 +7,7 @@ export class VersionUpdate extends BeanBase {
     ALTER TABLE aCmsContent
       DROP COLUMN itemId
   `;
-    await this.ctx.db.query(sql);
+    await this.ctx.model.query(sql);
     // drop view: aCmsArticleViewFull
     await this.ctx.model.query('drop view aCmsArticleViewFull');
     // drop view: aCmsArticleViewSearch

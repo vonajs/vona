@@ -9,7 +9,7 @@ export class VersionManager extends BeanBase {
     }
 
     if (options.version === 2) {
-      await this.ctx.db.query(`
+      await this.ctx.model.query(`
           CREATE TABLE aVersionInit (
             id INT NOT NULL AUTO_INCREMENT,
             subdomain VARCHAR(50) NULL,

@@ -67,9 +67,9 @@ export class LocalVersion extends BeanBase {
 
     if (!options.scene) {
       // confirm table aVersion exists
-      const res = await this.ctx.db.queryOne("show tables like 'aVersion'");
+      const res = await this.ctx.model.queryOne("show tables like 'aVersion'");
       if (!res) {
-        await this.ctx.db.query(`
+        await this.ctx.model.query(`
           CREATE TABLE aVersion (
             id INT NOT NULL AUTO_INCREMENT,
             module VARCHAR(50) NULL,
@@ -122,14 +122,14 @@ export class LocalVersion extends BeanBase {
         // fileVersionOld
         let fileVersionOld = 0; // default
         if (!options.scene) {
-          const res = await this.ctx.db.queryOne('select * from aVersion where module=? order by version desc', [
+          const res = await this.ctx.model.queryOne('select * from aVersion where module=? order by version desc', [
             moduleName,
           ]);
           if (res) {
             fileVersionOld = res.version;
           }
         } else {
-          const res = await this.ctx.db.queryOne(
+          const res = await this.ctx.model.queryOne(
             'select * from aVersionInit where subdomain=? and module=? order by version desc',
             [options.subdomain, moduleName],
           );

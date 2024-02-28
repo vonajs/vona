@@ -40,7 +40,7 @@ export class BeanModelBaseInner extends BeanBase {
     tableName = tableName || this.table;
     let columns = __columns[tableName];
     if (!columns) {
-      const list = await this.ctx.db.query(`show columns from ${this.ctx.db.format('??', tableName)}`);
+      const list = await this.ctx.model.query(`show columns from ${this.ctx.db.format('??', tableName)}`);
       columns = __columns[tableName] = {};
       for (const item of list) {
         columns[item.Field] = item;
@@ -133,11 +133,11 @@ export class BeanModelBaseInner extends BeanBase {
   // ///////////
 
   async query(...args) {
-    return await this.ctx.db.query(...args);
+    return await this.ctx.model.query(...args);
   }
 
   async queryOne(...args) {
-    return await this.ctx.db.queryOne(...args);
+    return await this.ctx.model.queryOne(...args);
   }
 
   async select(...args) {
@@ -201,9 +201,9 @@ export class BeanModelBaseInner extends BeanBase {
     this._rowCheck(_args[1]);
     if (this.table && !this.disableDeleted) {
       const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.db._where(_args[1]);
-      return this.ctx.db.query(sql);
+      return this.ctx.model.query(sql);
     }
-    return await this.ctx.db.delete(..._args);
+    return await this.ctx.model.delete(..._args);
   }
 }
 

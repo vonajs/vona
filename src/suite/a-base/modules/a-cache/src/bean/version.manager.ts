@@ -19,7 +19,7 @@ export class VersionManager extends BeanBase {
             PRIMARY KEY (id)
           )
         `;
-      await this.ctx.db.query(sql);
+      await this.ctx.model.query(sql);
     }
 
     if (options.version === 2) {
@@ -28,14 +28,14 @@ export class VersionManager extends BeanBase {
       sql = `
           delete from aCache
         `;
-      await this.ctx.db.query(sql);
+      await this.ctx.model.query(sql);
       // alter table: aCache
       sql = `
           ALTER TABLE aCache
             DROP COLUMN timeout,
             ADD COLUMN expired timestamp DEFAULT NULL
         `;
-      await this.ctx.db.query(sql);
+      await this.ctx.model.query(sql);
     }
   }
 
