@@ -77,6 +77,11 @@ export class LocalClient extends BeanBase<ScopeModule> {
     }
   }
 
+  async createDatabase(databaseName) {
+    const client = this.clientConfig.client as string;
+    await mysql.query(`CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`);
+  }
+
   async _executeQuery(conn, sql) {
     const queryAsync = promisify(cb => conn.query(sql, cb));
     return await queryAsync();

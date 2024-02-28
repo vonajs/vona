@@ -38,11 +38,10 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     return dbs;
   }
 
-  async __createDatabase() {
+  async __createDatabase(client: LocalClient) {
     // create
-    const mysql = this.app.mysql.get('__ebdb');
-    const databaseName = `${dbPrefix}-${moment().format('YYYYMMDD-HHmmss')}`;
-    await mysql.query(`CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`);
+    const databaseName = `${this.databasePrefix}-${moment().format('YYYYMMDD-HHmmss')}`;
+    await client.createDatabase(databaseName);
     return databaseName;
   }
 
@@ -67,7 +66,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
       }
       const dbs = await this.__fetchDatabases(client);
       if (dbs.length === 0) {
-        databaseName = await this.__createDatabase();
+        databaseName = await this.__createDatabase(client);
       } else {
         databaseName = dbs[0].name;
       }
