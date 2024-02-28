@@ -27,20 +27,11 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   }
 
   async __fetchDatabases(client: LocalClient) {
-    // db prefix
-    const dbPrefix = this.__getDatabasePrefix();
     // dbs
     let dbs = await client.fetchDatabases(this.databasePrefix);
-    const mysql = this.app.mysql.get('__ebdb');
-    let dbs = await mysql.query(`show databases like \'${dbPrefix}-%\'`);
-    // map
-    dbs = dbs.map(db => {
-      const name = db[Object.keys(db)[0]];
-      return { name };
-    });
     // filter
     dbs = dbs.filter(db => {
-      const _time = db.name.substring(dbPrefix.length);
+      const _time = db.name.substring(this.databasePrefix.length);
       return _time.length === 16;
     });
     // ok
@@ -48,8 +39,6 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   }
 
   async __createDatabase() {
-    // db prefix
-    const dbPrefix = this.__getDatabasePrefix();
     // create
     const mysql = this.app.mysql.get('__ebdb');
     const databaseName = `${dbPrefix}-${moment().format('YYYYMMDD-HHmmss')}`;
@@ -69,21 +58,20 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
       // if enable testDatabase
       const enableTestDatabase = this.configDatabase.testDatabase;
       // get current database name
-      const databaseName = client.getDatabaseName();
+      let databaseName = client.getDatabaseName();
       const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
       // check
       if (!enableTestDatabase || isTestDatabase) {
         // donothing
         return;
       }
-      let databaseName;
       const dbs = await this.__fetchDatabases(client);
       if (dbs.length === 0) {
         databaseName = await this.__createDatabase();
       } else {
-        const db = dbs[0];
-        databaseName = db.name;
+        databaseName = dbs[0].name;
       }
+      console.log('---------name:', databaseName);
       // create test mysql
       mysqlConfig.database = databaseName;
       this.app.mysql.__ebdb_test = mysqlConfig; // database ready

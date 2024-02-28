@@ -64,7 +64,18 @@ export class LocalClient extends BeanBase<ScopeModule> {
     return connection.database || connection.filename;
   }
 
-  async fetchDatabases() {}
+  async fetchDatabases(databasePrefix) {
+    const client = this.clientConfig.client as string;
+    if (['mysql', 'mysql2'].includes(client)) {
+      const res = await this.knex.raw(`show databases like '${databasePrefix}-%'`);
+      let dbs = res[0];
+      dbs = dbs.map(db => {
+        const name = db[Object.keys(db)[0]];
+        return { name };
+      });
+      return dbs;
+    }
+  }
 
   async _executeQuery(conn, sql) {
     const queryAsync = promisify(cb => conn.query(sql, cb));
