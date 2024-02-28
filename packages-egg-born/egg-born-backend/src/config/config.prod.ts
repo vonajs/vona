@@ -9,6 +9,7 @@ export default function (_appInfo: CabloyAppInfo) {
 
   // database
   config.database = {
+    testDatabase: false,
     base: {
       asyncStackTraces: false,
     },

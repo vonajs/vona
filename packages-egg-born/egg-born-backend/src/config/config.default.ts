@@ -208,6 +208,7 @@ export default function (appInfo: CabloyAppInfo) {
 
   // database
   config.database = {
+    testDatabase: false,
     defaultClient: 'default',
     clients: {},
     base: {

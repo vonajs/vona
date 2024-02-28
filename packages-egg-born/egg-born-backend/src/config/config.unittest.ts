@@ -14,6 +14,7 @@ export default function (_appInfo: CabloyAppInfo) {
 
   // database
   config.database = {
+    testDatabase: true,
     base: {
       pool: { min: 0, max: 1 },
     },

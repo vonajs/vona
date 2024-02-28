@@ -29,6 +29,7 @@ declare module '@cabloy/core' {
 
   export interface CabloyConfig {
     database: {
+      testDatabase: boolean;
       defaultClient: string;
       clients: Record<string, knex.Knex.Config>;
       base: knex.Knex.Config;
