@@ -11,7 +11,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   }
 
   get databasePrefix() {
-    return `cabloy-test-${this.app.name}`;
+    return `cabloy_test_${this.app.name}_`;
   }
 
   async databaseInitStartup() {
@@ -32,7 +32,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     // filter
     dbs = dbs.filter(db => {
       const _time = db.name.substring(this.databasePrefix.length);
-      return _time.length === 16;
+      return _time.length === 'YYYYMMDD_HHmmss'.length;
     });
     // ok
     return dbs;
@@ -40,7 +40,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
 
   async __createDatabase(client: BeanDatabaseClient) {
     // create
-    const databaseName = `${this.databasePrefix}-${moment().format('YYYYMMDD-HHmmss')}`;
+    const databaseName = `${this.databasePrefix}${moment().format('YYYYMMDD_HHmmss')}`;
     await client.createDatabase(databaseName);
     return databaseName;
   }
