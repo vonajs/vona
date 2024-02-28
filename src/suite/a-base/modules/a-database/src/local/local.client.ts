@@ -20,7 +20,7 @@ export class LocalClient extends BeanBase<ScopeModule> {
     this.clientName = this._extractClientName(clientName);
     // config
     this.clientConfig = this.getClientConfig(this.clientName);
-    const debug = this.app.bean.debug.get('db');
+    const debug = this.app.bean.debug.get('database');
     debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this.knex = knex(this.clientConfig);
