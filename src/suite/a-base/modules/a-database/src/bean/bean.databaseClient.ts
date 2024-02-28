@@ -1,6 +1,5 @@
 import { Bean, BeanBase } from '@cabloy/core';
 import knex from 'knex';
-import { promisify } from 'node:util';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 
@@ -82,8 +81,8 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     await this.dialect.createDatabase(databaseName);
   }
 
-  async _executeQuery(conn, sql) {
-    const queryAsync = promisify(cb => conn.query(sql, cb));
-    return await queryAsync();
-  }
+  // async _executeQuery(conn, sql) {
+  //   const queryAsync = promisify(cb => conn.query(sql, cb));
+  //   return await queryAsync();
+  // }
 }
