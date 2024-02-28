@@ -5,6 +5,10 @@ import { ScopeModule } from '../resource/this.js';
 
 @Local()
 export class LocalDatabase extends BeanBase<ScopeModule> {
+  get configDatabase() {
+    return this.app.config.database;
+  }
+
   async databaseInitStartup() {
     // database
     await this.__database();
