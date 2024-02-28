@@ -2,7 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 import knex from 'knex';
 import { promisify } from 'node:util';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 
 @Bean()
 export class BeanDatabaseClient extends BeanBase<ScopeModule> {
@@ -74,13 +74,12 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     return this.dialect.getDatabaseName();
   }
 
-  async fetchDatabases(databasePrefix) {
+  async fetchDatabases(databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     return await this.dialect.fetchDatabases(databasePrefix);
   }
 
-  async createDatabase(databaseName) {
-    const client = this.clientConfig.client as string;
-    await mysql.query(`CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`);
+  async createDatabase(databaseName: string): Promise<void> {
+    await this.dialect.createDatabase(databaseName);
   }
 
   async _executeQuery(conn, sql) {

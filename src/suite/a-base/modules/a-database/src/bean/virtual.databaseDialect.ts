@@ -25,4 +25,8 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   async fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     this.ctx.throw(501);
   }
+
+  async createDatabase(_databaseName: string): Promise<void> {
+    this.ctx.throw(501);
+  }
 }

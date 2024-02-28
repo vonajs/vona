@@ -12,4 +12,10 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
     });
     return dbs;
   }
+
+  async createDatabase(databaseName: string): Promise<void> {
+    await this.client.knex.raw(
+      `CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`,
+    );
+  }
 }
