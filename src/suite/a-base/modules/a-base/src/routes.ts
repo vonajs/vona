@@ -13,7 +13,6 @@ import util from './route/util.js';
 import layoutConfig from './route/layoutConfig.js';
 import category from './route/category.js';
 import tag from './route/tag.js';
-import db from './route/db.js';
 
 let routes: IModuleRoute[] = [];
 routes = routes.concat(base);
@@ -30,6 +29,5 @@ routes = routes.concat(util);
 routes = routes.concat(layoutConfig);
 routes = routes.concat(category);
 routes = routes.concat(tag);
-routes = routes.concat(db);
 
 export { routes };
