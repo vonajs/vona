@@ -1,10 +1,10 @@
 import { Bean, BeanBase } from '@cabloy/core';
-import { LocalClient } from '../local/local.client.js';
+import { BeanDatabaseClient } from './bean.databaseClient.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
   getClient(clientName?: string) {
-    return this.app.bean._getBeanSelector(LocalClient, clientName);
+    return this.app.bean._getBeanSelector(BeanDatabaseClient, clientName);
   }
 
   get(clientName?: string) {

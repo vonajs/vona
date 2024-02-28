@@ -1,5 +1,5 @@
 import { BeanBase, Virtual } from '@cabloy/core';
-import { LocalClient } from '../local/local.client.js';
+import { BeanDatabaseClient } from './bean.databaseClient.js';
 
 export interface IFetchDatabasesResultItem {
   name: string;
@@ -7,13 +7,13 @@ export interface IFetchDatabasesResultItem {
 
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
-  client: LocalClient;
+  client: BeanDatabaseClient;
 
   get scope() {
     return this.getScope() as T;
   }
 
-  protected __init__(client: LocalClient) {
+  protected __init__(client: BeanDatabaseClient) {
     this.client = client;
   }
 
