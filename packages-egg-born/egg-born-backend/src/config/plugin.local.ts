@@ -9,11 +9,6 @@ export default {
   //   package: 'egg-static',
   // },
 
-  mysql: {
-    enable: true,
-    package: '@zhennann/egg-mysql',
-  },
-
   passport: {
     enable: true,
     package: '@zhennann/egg-passport',
