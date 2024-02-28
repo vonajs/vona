@@ -52,13 +52,13 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     }
     // client
     const client = this.app.bean.database.getClient();
+    // get current database name
+    let databaseName = client.getDatabaseName();
+    const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
     // dev/debug db
     if (this.app.meta.isLocal) {
       // if enable testDatabase
       const enableTestDatabase = this.configDatabase.testDatabase;
-      // get current database name
-      let databaseName = client.getDatabaseName();
-      const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
       // check
       if (!enableTestDatabase || isTestDatabase) {
         // donothing
@@ -71,14 +71,16 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
         databaseName = dbs[0].name;
       }
       // set config and reload client
-      // create test mysql
-      mysqlConfig.database = databaseName;
-      this.app.mysql.__ebdb_test = mysqlConfig; // database ready
-      // todo: this.ctx.db = null; // reset
-      console.log(chalk.cyan(`  database: ${mysqlConfig.database}, pid: ${process.pid}`));
+      await client.changeConfigAndReload(databaseName);
+      console.log(chalk.cyan(`  database: ${databaseName}, pid: ${process.pid}`));
     }
     // test db
-    if (this.app.meta.isTest && !this.app.mysql.__ebdb_test) {
+    if (this.app.meta.isTest) {
+      // check
+      if (isTestDatabase) {
+        // donothing
+        return;
+      }
       // drop old databases
       const mysql = this.app.mysql.get('__ebdb');
       const dbs = await this.__fetchDatabases();
