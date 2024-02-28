@@ -1,8 +1,8 @@
 import { BeanBase, Virtual } from '@cabloy/core';
 import knex from 'knex';
 
-@Virtual({ scene: 'bean' })
-export class BeanDatabaseDialect<T = unknown> extends BeanBase {
+@Virtual()
+export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   knex: knex.Knex;
 
   get scope() {
