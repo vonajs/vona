@@ -51,7 +51,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
     // offset
     const _offset = (options && options.offset) || 0;
     // offset
-    const res = await this.ctx.db.select('aSocketIOMessageView', {
+    const res = await this.ctx.model.select('aSocketIOMessageView', {
       where,
       columns: ['id'],
       orders: _orders,

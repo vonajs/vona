@@ -5,14 +5,14 @@ export class VersionUpdate extends BeanBase {
     // enable 0
     await this.ctx.model.query("SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO'");
     // add userId 0
-    await this.ctx.db.insert('aUser', {
+    await this.ctx.model.insert('aUser', {
       id: 0,
       iid: 0,
       userName: 'system',
       realName: 'system',
     });
     // add roleId 0
-    await this.ctx.db.insert('aRole', {
+    await this.ctx.model.insert('aRole', {
       id: 0,
       iid: 0,
       roleName: 'system',

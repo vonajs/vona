@@ -28,23 +28,23 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // testParty: insert/udpate/delete/get
 
     // insert
-    const res = await this.ctx.db.insert('testParty', {
+    const res = await this.ctx.model.insert('testParty', {
       iid: this.ctx.instance.id,
       deleted: 0,
       personCount: 3,
     });
     const id = res.insertId;
     // update
-    await this.ctx.db.update('testParty', {
+    await this.ctx.model.update('testParty', {
       id,
       personCount: 5,
     });
     // get
-    const item = await this.ctx.db.get('testParty', {
+    const item = await this.ctx.model.get('testParty', {
       id,
     });
     // delete
-    await this.ctx.db.delete('testParty', {
+    await this.ctx.model.delete('testParty', {
       id,
     });
     // ok

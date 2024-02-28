@@ -40,7 +40,7 @@ export class BeanModelBaseInner extends BeanBase {
     tableName = tableName || this.table;
     let columns = __columns[tableName];
     if (!columns) {
-      const list = await this.ctx.model.query(`show columns from ${this.ctx.db.format('??', tableName)}`);
+      const list = await this.ctx.model.query(`show columns from ${this.ctx.model.format('??', tableName)}`);
       columns = __columns[tableName] = {};
       for (const item of list) {
         columns[item.Field] = item;
@@ -147,7 +147,7 @@ export class BeanModelBaseInner extends BeanBase {
     _args[1] = _args[1] || {};
     _args[1].where = _args[1].where || {};
     this._rowCheck(_args[1].where);
-    return await this.ctx.db.select(..._args);
+    return await this.ctx.model.select(..._args);
   }
 
   async count(...args) {
@@ -156,7 +156,7 @@ export class BeanModelBaseInner extends BeanBase {
     for (const arg of args) _args.push(arg);
     _args[1] = _args[1] || {};
     this._rowCheck(_args[1]);
-    return await this.ctx.db.count(..._args);
+    return await this.ctx.model.count(..._args);
   }
 
   async get(...args) {
@@ -169,7 +169,7 @@ export class BeanModelBaseInner extends BeanBase {
     //   return this.ctx.db[method].apply(this.ctx.db, _args);
     // }
     this._rowCheck(_args[1]);
-    return await this.ctx.db.get(..._args);
+    return await this.ctx.model.get(..._args);
   }
 
   async insert(...args) {
@@ -180,7 +180,7 @@ export class BeanModelBaseInner extends BeanBase {
       args.unshift(this.table);
     }
     this._insertRowsCheck(args[1]);
-    return await this.ctx.db.insert(...args);
+    return await this.ctx.model.insert(...args);
   }
 
   async update(...args) {
@@ -190,7 +190,7 @@ export class BeanModelBaseInner extends BeanBase {
     if (_args[2] && _args[2].where) {
       this._rowCheck(_args[2].where);
     }
-    return await this.ctx.db.update(..._args);
+    return await this.ctx.model.update(..._args);
   }
 
   async delete(...args) {
@@ -200,7 +200,7 @@ export class BeanModelBaseInner extends BeanBase {
     _args[1] = _args[1] || {};
     this._rowCheck(_args[1]);
     if (this.table && !this.disableDeleted) {
-      const sql = this.ctx.db.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.db._where(_args[1]);
+      const sql = this.ctx.model.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.model._where(_args[1]);
       return this.ctx.model.query(sql);
     }
     return await this.ctx.model.delete(..._args);

@@ -12,4 +12,3 @@ export * from '../controller/user.js';
 export * from '../controller/category.js';
 export * from '../controller/tag.js';
 export * from '../controller/util.js';
-export * from '../controller/db.js';

@@ -22,7 +22,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
     const second = timeout ? parseInt(timeout / 1000) : timeout;
     // expired
     const expired = second ? `TIMESTAMPADD(SECOND,${second},CURRENT_TIMESTAMP)` : 'null';
-    const res = await this.ctx.db.get('aCache', {
+    const res = await this.ctx.model.get('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
       name,
@@ -79,7 +79,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   }
 
   async remove(name) {
-    await this.ctx.db.delete('aCache', {
+    await this.ctx.model.delete('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
       name,
@@ -87,7 +87,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   }
 
   async clear() {
-    await this.ctx.db.delete('aCache', {
+    await this.ctx.model.delete('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
     });
