@@ -20,6 +20,9 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
       const client = this.clientConfig.client as string;
       const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
       this._dialect = this.bean._newBean(beanFullName, this);
+      if (!this._dialect) {
+        throw new Error(`database dialect not found: ${client}`);
+      }
     }
     return this._dialect;
   }
