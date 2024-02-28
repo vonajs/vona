@@ -70,7 +70,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
       } else {
         databaseName = dbs[0].name;
       }
-      console.log('---------name:', databaseName);
+      // set config and reload client
       // create test mysql
       mysqlConfig.database = databaseName;
       this.app.mysql.__ebdb_test = mysqlConfig; // database ready

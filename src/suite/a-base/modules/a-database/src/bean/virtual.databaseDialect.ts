@@ -22,6 +22,15 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     return connection.database || connection.filename;
   }
 
+  setDatabaseName(databaseName: string) {
+    const connection = this.client.clientConfig.connection as any;
+    if (connection.database) {
+      connection.database = databaseName;
+    } else if (connection.filename) {
+      connection.filename = databaseName;
+    }
+  }
+
   async fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     this.ctx.throw(501);
   }

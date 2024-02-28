@@ -73,6 +73,18 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     return this.dialect.getDatabaseName();
   }
 
+  async changeConfigAndReload(databaseName: string): Promise<void> {
+    // set databaseName
+    this.dialect.setDatabaseName(databaseName);
+    // set config
+    const config = this.getClientConfig(this.clientName, true);
+    config.connection = this.clientConfig.connection;
+    this.setClientConfig(this.clientName, config);
+    // reload knex
+    await this.knex.destroy();
+    this.__init__(this.clientNameOriginal);
+  }
+
   async fetchDatabases(databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     return await this.dialect.fetchDatabases(databasePrefix);
   }
