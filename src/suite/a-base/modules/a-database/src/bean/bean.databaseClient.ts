@@ -93,6 +93,10 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     await this.dialect.createDatabase(databaseName);
   }
 
+  async dropDatabase(databaseName: string): Promise<void> {
+    await this.dialect.dropDatabase(databaseName);
+  }
+
   // async _executeQuery(conn, sql) {
   //   const queryAsync = promisify(cb => conn.query(sql, cb));
   //   return await queryAsync();

@@ -2,7 +2,7 @@ import moment from 'moment';
 import chalk from 'chalk';
 import { BeanBase, Local } from '@cabloy/core';
 import { ScopeModule } from '../resource/this.js';
-import { LocalClient } from 'cabloy-module-api-a-database';
+import { BeanDatabaseClient } from 'cabloy-module-api-a-database';
 
 @Local()
 export class LocalDatabase extends BeanBase<ScopeModule> {
@@ -26,7 +26,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     await this.__database();
   }
 
-  async __fetchDatabases(client: LocalClient) {
+  async __fetchDatabases(client: BeanDatabaseClient) {
     // dbs
     let dbs = await client.fetchDatabases(this.databasePrefix);
     // filter
@@ -38,7 +38,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     return dbs;
   }
 
-  async __createDatabase(client: LocalClient) {
+  async __createDatabase(client: BeanDatabaseClient) {
     // create
     const databaseName = `${this.databasePrefix}-${moment().format('YYYYMMDD-HHmmss')}`;
     await client.createDatabase(databaseName);
@@ -82,31 +82,16 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
         return;
       }
       // drop old databases
-      const mysql = this.app.mysql.get('__ebdb');
-      const dbs = await this.__fetchDatabases();
+      const dbs = await this.__fetchDatabases(client);
       for (const db of dbs) {
-        const name = db.name;
-        await mysql.query(`drop database \`${name}\``);
+        await client.dropDatabase(db.name);
       }
       // create database
-      const databaseName = await this.__createDatabase();
-      // create test mysql
-      const mysqlConfig = this.__getMysqlConfig('__ebdb');
-      mysqlConfig.database = databaseName;
-      this.app.mysql.__ebdb_test = mysqlConfig;
-      // todo: this.ctx.db = null; // reset
+      const databaseName = await this.__createDatabase(client);
+      // set config and reload client
+      await client.changeConfigAndReload(databaseName);
       // database ready
-      console.log(chalk.cyan(`  database: ${mysqlConfig.database}, pid: ${process.pid}`));
+      console.log(chalk.cyan(`  database: ${databaseName}, pid: ${process.pid}`));
     }
-    // default
-    if (!this.app.mysql.__ebdb_test) {
-      this.app.mysql.__ebdb_test = this.__getMysqlConfig('__ebdb');
-    }
-  }
-
-  // get mysql config
-  __getMysqlConfig(clientName) {
-    const mysqlConfig = this.app.config.mysql.clients[clientName];
-    return Object.assign({}, this.app.config.mysql.default, mysqlConfig);
   }
 }

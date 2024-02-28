@@ -18,4 +18,8 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
       `CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`,
     );
   }
+
+  async dropDatabase(databaseName: string): Promise<void> {
+    await this.client.knex.raw(`drop database \`${databaseName}\``);
+  }
 }

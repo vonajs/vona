@@ -38,4 +38,8 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   async createDatabase(_databaseName: string): Promise<void> {
     this.ctx.throw(501);
   }
+
+  async dropDatabase(_databaseName: string): Promise<void> {
+    this.ctx.throw(501);
+  }
 }
