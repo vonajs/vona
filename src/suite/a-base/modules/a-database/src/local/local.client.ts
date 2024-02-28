@@ -1,7 +1,8 @@
 import { BeanBase, Local } from '@cabloy/core';
 import knex from 'knex';
 import { promisify } from 'node:util';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 
 @Local({ containerScope: 'app' })
 export class LocalClient extends BeanBase<ScopeModule> {
@@ -9,9 +10,19 @@ export class LocalClient extends BeanBase<ScopeModule> {
   clientName: string;
   clientConfig: knex.Knex.Config;
   knex: knex.Knex;
+  private _dialect: VirtualDatabaseDialect;
 
   get configDatabase() {
     return this.app.config.database;
+  }
+
+  get dialect(): VirtualDatabaseDialect {
+    if (!this._dialect) {
+      const client = this.clientConfig.client as string;
+      const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
+      this._dialect = this.bean._newBean(beanFullName, this);
+    }
+    return this._dialect;
   }
 
   protected __init__(clientName?: string) {
@@ -60,21 +71,11 @@ export class LocalClient extends BeanBase<ScopeModule> {
   }
 
   getDatabaseName(): string {
-    const connection = this.clientConfig.connection as any;
-    return connection.database || connection.filename;
+    return this.dialect.getDatabaseName();
   }
 
   async fetchDatabases(databasePrefix) {
-    const client = this.clientConfig.client as string;
-    if (['mysql', 'mysql2'].includes(client)) {
-      const res = await this.knex.raw(`show databases like '${databasePrefix}-%'`);
-      let dbs = res[0];
-      dbs = dbs.map(db => {
-        const name = db[Object.keys(db)[0]];
-        return { name };
-      });
-      return dbs;
-    }
+    return await this.dialect.fetchDatabases(databasePrefix);
   }
 
   async createDatabase(databaseName) {

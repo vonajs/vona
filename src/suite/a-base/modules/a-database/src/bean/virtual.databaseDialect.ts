@@ -1,5 +1,5 @@
 import { BeanBase, Virtual } from '@cabloy/core';
-import knex from 'knex';
+import { LocalClient } from '../local/local.client.js';
 
 export interface IFetchDatabasesResultItem {
   name: string;
@@ -7,14 +7,19 @@ export interface IFetchDatabasesResultItem {
 
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
-  knex: knex.Knex;
+  client: LocalClient;
 
   get scope() {
     return this.getScope() as T;
   }
 
-  protected __init__(knex: knex.Knex) {
-    this.knex = knex;
+  protected __init__(client: LocalClient) {
+    this.client = client;
+  }
+
+  getDatabaseName(): string {
+    const connection = this.client.clientConfig.connection as any;
+    return connection.database || connection.filename;
   }
 
   async fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
