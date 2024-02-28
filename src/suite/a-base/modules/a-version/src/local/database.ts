@@ -4,6 +4,9 @@ import { BeanBase, Local } from '@cabloy/core';
 import { ScopeModule } from '../resource/this.js';
 import { BeanDatabaseClient } from 'cabloy-module-api-a-database';
 
+const __separator = '-';
+const __timeFormat = `YYYYMMDD${__separator}HHmmss`;
+
 @Local()
 export class LocalDatabase extends BeanBase<ScopeModule> {
   get configDatabase() {
@@ -11,7 +14,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   }
 
   get databasePrefix() {
-    return `cabloy_test_${this.app.name}_`;
+    return `cabloy${__separator}test${__separator}${this.app.name}${__separator}`;
   }
 
   async databaseInitStartup() {
@@ -32,7 +35,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     // filter
     dbs = dbs.filter(db => {
       const _time = db.name.substring(this.databasePrefix.length);
-      return _time.length === 'YYYYMMDD_HHmmss'.length;
+      return _time.length === __timeFormat.length;
     });
     // ok
     return dbs;
@@ -40,7 +43,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
 
   async __createDatabase(client: BeanDatabaseClient) {
     // create
-    const databaseName = `${this.databasePrefix}${moment().format('YYYYMMDD_HHmmss')}`;
+    const databaseName = `${this.databasePrefix}${moment().format(__timeFormat)}`;
     await client.createDatabase(databaseName);
     return databaseName;
   }

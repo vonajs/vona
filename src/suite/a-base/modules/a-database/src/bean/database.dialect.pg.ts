@@ -12,10 +12,10 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
   }
 
   async createDatabase(databaseName: string): Promise<void> {
-    await this.client.knex.raw(`CREATE DATABASE ${databaseName} encoding=UTF8`);
+    await this.client.knex.raw(`CREATE DATABASE "${databaseName}" encoding=UTF8`);
   }
 
   async dropDatabase(databaseName: string): Promise<void> {
-    await this.client.knex.raw(`DROP DATABASE ${databaseName}`);
+    await this.client.knex.raw(`DROP DATABASE "${databaseName}"`);
   }
 }
