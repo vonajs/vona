@@ -1,11 +1,11 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 import knex from 'knex';
 import { promisify } from 'node:util';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 
-@Local({ containerScope: 'app' })
-export class LocalClient extends BeanBase<ScopeModule> {
+@Bean()
+export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   clientNameOriginal?: string;
   clientName: string;
   clientConfig: knex.Knex.Config;
