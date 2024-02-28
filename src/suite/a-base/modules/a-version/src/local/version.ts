@@ -315,7 +315,7 @@ export class LocalVersion extends BeanBase {
         // create test mysql
         mysqlConfig.database = databaseName;
         this.app.mysql.__ebdb_test = mysqlConfig; // database ready
-        this.ctx.db = null; // reset
+        // todo: this.ctx.db = null; // reset
         console.log(chalk.cyan(`  database: ${mysqlConfig.database}, pid: ${process.pid}`));
       }
     }
@@ -334,7 +334,7 @@ export class LocalVersion extends BeanBase {
       const mysqlConfig = this.__getMysqlConfig('__ebdb');
       mysqlConfig.database = databaseName;
       this.app.mysql.__ebdb_test = mysqlConfig;
-      this.ctx.db = null; // reset
+      // todo: this.ctx.db = null; // reset
       // database ready
       console.log(chalk.cyan(`  database: ${mysqlConfig.database}, pid: ${process.pid}`));
     }
