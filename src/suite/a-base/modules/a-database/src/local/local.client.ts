@@ -59,6 +59,13 @@ export class LocalClient extends BeanBase<ScopeModule> {
     this.configDatabase.clients[clientName] = clientConfig;
   }
 
+  getDatabaseName(): string {
+    const connection = this.clientConfig.connection as any;
+    return connection.database || connection.filename;
+  }
+
+  async fetchDatabases() {}
+
   async _executeQuery(conn, sql) {
     const queryAsync = promisify(cb => conn.query(sql, cb));
     return await queryAsync();

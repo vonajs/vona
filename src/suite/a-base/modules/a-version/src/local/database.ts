@@ -2,11 +2,16 @@ import moment from 'moment';
 import chalk from 'chalk';
 import { BeanBase, Local } from '@cabloy/core';
 import { ScopeModule } from '../resource/this.js';
+import { LocalClient } from 'cabloy-module-api-a-database';
 
 @Local()
 export class LocalDatabase extends BeanBase<ScopeModule> {
   get configDatabase() {
     return this.app.config.database;
+  }
+
+  get databasePrefix() {
+    return `cabloy-test-${this.app.name}`;
   }
 
   async databaseInitStartup() {
@@ -21,14 +26,11 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
     await this.__database();
   }
 
-  __getDatabasePrefix() {
-    return `egg-born-test-${this.app.name}`;
-  }
-
-  async __fetchDatabases() {
+  async __fetchDatabases(client: LocalClient) {
     // db prefix
     const dbPrefix = this.__getDatabasePrefix();
     // dbs
+    let dbs = await client.fetchDatabases(this.databasePrefix);
     const mysql = this.app.mysql.get('__ebdb');
     let dbs = await mysql.query(`show databases like \'${dbPrefix}-%\'`);
     // map
@@ -56,24 +58,37 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   }
 
   async __database() {
+    if (this.app.meta.isProd) {
+      // donothing
+      return;
+    }
+    // client
+    const client = this.app.bean.database.getClient();
     // dev/debug db
     if (this.app.meta.isLocal) {
-      const mysqlConfig = this.__getMysqlConfig('__ebdb');
-      if ((mysqlConfig.database === 'sys' || mysqlConfig.database === 'mysql') && !this.app.mysql.__ebdb_test) {
-        let databaseName;
-        const dbs = await this.__fetchDatabases();
-        if (dbs.length === 0) {
-          databaseName = await this.__createDatabase();
-        } else {
-          const db = dbs[0];
-          databaseName = db.name;
-        }
-        // create test mysql
-        mysqlConfig.database = databaseName;
-        this.app.mysql.__ebdb_test = mysqlConfig; // database ready
-        // todo: this.ctx.db = null; // reset
-        console.log(chalk.cyan(`  database: ${mysqlConfig.database}, pid: ${process.pid}`));
+      // if enable testDatabase
+      const enableTestDatabase = this.configDatabase.testDatabase;
+      // get current database name
+      const databaseName = client.getDatabaseName();
+      const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
+      // check
+      if (!enableTestDatabase || isTestDatabase) {
+        // donothing
+        return;
       }
+      let databaseName;
+      const dbs = await this.__fetchDatabases(client);
+      if (dbs.length === 0) {
+        databaseName = await this.__createDatabase();
+      } else {
+        const db = dbs[0];
+        databaseName = db.name;
+      }
+      // create test mysql
+      mysqlConfig.database = databaseName;
+      this.app.mysql.__ebdb_test = mysqlConfig; // database ready
+      // todo: this.ctx.db = null; // reset
+      console.log(chalk.cyan(`  database: ${mysqlConfig.database}, pid: ${process.pid}`));
     }
     // test db
     if (this.app.meta.isTest && !this.app.mysql.__ebdb_test) {

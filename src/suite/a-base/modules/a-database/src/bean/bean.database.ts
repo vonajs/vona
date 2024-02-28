@@ -3,8 +3,12 @@ import { LocalClient } from '../local/local.client.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
+  getClient(clientName?: string) {
+    return this.app.bean._getBeanSelector(LocalClient, clientName);
+  }
+
   get(clientName?: string) {
-    const client = this.app.bean._getBeanSelector(LocalClient, clientName);
+    const client = this.getClient(clientName);
     return client.knex;
   }
 
