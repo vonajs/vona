@@ -78,10 +78,11 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
 
   async changeConfigAndReload(databaseName: string): Promise<void> {
     // set databaseName
-    this.dialect.setDatabaseName(databaseName);
+    const connDatabaseName = this.dialect.setDatabaseName(databaseName);
     // set config
+    //   * should not use this.clientConfig.connection, because password is hidden
     const config = this.getClientConfig(this.clientName, true);
-    config.connection = this.clientConfig.connection;
+    config.connection = Object.assign({}, config.connection, connDatabaseName);
     this.setClientConfig(this.clientName, config);
     // reload knex
     await this.knex.destroy();

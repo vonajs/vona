@@ -5,6 +5,8 @@ export interface IFetchDatabasesResultItem {
   name: string;
 }
 
+export type ISetDatabaseNameResult = { database?: string; filename?: string };
+
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   client: BeanDatabaseClient;
@@ -22,13 +24,15 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     return connection.database || connection.filename;
   }
 
-  setDatabaseName(databaseName: string) {
+  setDatabaseName(databaseName: string): ISetDatabaseNameResult {
+    const result: ISetDatabaseNameResult = {};
     const connection = this.client.clientConfig.connection as any;
     if (connection.database) {
-      connection.database = databaseName;
+      result.database = connection.database = databaseName;
     } else if (connection.filename) {
-      connection.filename = databaseName;
+      result.filename = connection.filename = databaseName;
     }
+    return result;
   }
 
   async fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
