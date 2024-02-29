@@ -146,7 +146,8 @@ export class LocalVersion extends BeanBase {
         beanModule: module.info.relativeName,
         transaction: true,
         fn: async ({ ctx }) => {
-          await this.__testModuleTransaction(ctx, module, fileVersionNew, options);
+          const beanVersion = ctx.bean._newBean(LocalVersion);
+          await beanVersion.__testModuleTransaction(module, fileVersionNew, options);
         },
       });
     }
@@ -187,7 +188,8 @@ export class LocalVersion extends BeanBase {
           beanModule: module.info.relativeName,
           transaction: true,
           fn: async ({ ctx }) => {
-            await this.__updateModuleTransaction(ctx, module, version);
+            const beanVersion = ctx.bean._newBean(LocalVersion);
+            await beanVersion.__updateModuleTransaction(module, version);
           },
         });
       } else {
@@ -197,7 +199,8 @@ export class LocalVersion extends BeanBase {
           beanModule: module.info.relativeName,
           transaction: true,
           fn: async ({ ctx }) => {
-            await this.__initModuleTransaction(ctx, module, version, options);
+            const beanVersion = ctx.bean._newBean(LocalVersion);
+            await beanVersion.__initModuleTransaction(module, version, options);
           },
         });
       }
@@ -206,27 +209,27 @@ export class LocalVersion extends BeanBase {
     }
   }
 
-  async __updateModuleTransaction(_ctx, module, version) {
+  async __updateModuleTransaction(module, version) {
     // bean
-    const beanVersion = _ctx.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = this.bean._getBean(`${module.info.relativeName}.version.manager`);
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     if (!beanVersion.update) throw new Error(`version.manager.update not exists for ${module.info.relativeName}`);
     // clear columns cache
-    _ctx.model.columnsClearAll();
+    this.ctx.model.columnsClearAll();
     // execute
     await beanVersion.update({ version });
     // insert record
     if (version > 0) {
-      await _ctx.db.insert('aVersion', {
+      await this.ctx.model.insert('aVersion', {
         module: module.info.relativeName,
         version,
       });
     }
   }
 
-  async __initModuleTransaction(_ctx, module, version, options) {
+  async __initModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = _ctx.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = this.bean._getBean(`${module.info.relativeName}.version.manager`);
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     // execute
     if (beanVersion.init) {
@@ -234,7 +237,7 @@ export class LocalVersion extends BeanBase {
     }
     // insert record
     if (version > 0) {
-      await _ctx.db.insert('aVersionInit', {
+      await this.ctx.model.insert('aVersionInit', {
         subdomain: options.subdomain,
         module: module.info.relativeName,
         version,
@@ -243,9 +246,9 @@ export class LocalVersion extends BeanBase {
   }
 
   // test module
-  async __testModuleTransaction(_ctx, module, version, options) {
+  async __testModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = _ctx.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = this.bean._getBean(`${module.info.relativeName}.version.manager`);
     // execute
     if (beanVersion && beanVersion.test) {
       await beanVersion.test({ ...options, version });
