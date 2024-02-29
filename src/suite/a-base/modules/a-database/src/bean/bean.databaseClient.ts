@@ -9,12 +9,17 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   clientNameOriginal?: string;
   clientName: string;
   clientConfig: Knex.Config;
-  knex: Knex;
-  private _dialect: VirtualDatabaseDialect;
+  private _knex: Knex;
   private _transaction: LocalTransaction;
+  private _dialect: VirtualDatabaseDialect;
 
   get configDatabase() {
     return this.app.config.database;
+  }
+
+  get db(): Knex {
+    const knex = this._transaction.inTransaction ? this._transaction.connection : this._knex;
+    return knex as Knex;
   }
 
   get dialect(): VirtualDatabaseDialect {
@@ -38,7 +43,7 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     const debug = this.app.bean.debug.get('database');
     debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
-    this.knex = knex(this.clientConfig);
+    this._knex = knex(this.clientConfig);
     // transaction
     this._transaction = this.bean._newBean(LocalTransaction, this);
   }
@@ -89,7 +94,7 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     config.connection = Object.assign({}, config.connection, connDatabaseName);
     this.setClientConfig(this.clientName, config);
     // reload knex
-    await this.knex.destroy();
+    await this._knex.destroy();
     this.__init__(this.clientNameOriginal);
   }
 
@@ -103,6 +108,10 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
 
   async dropDatabase(databaseName: string): Promise<void> {
     await this.dialect.dropDatabase(databaseName);
+  }
+
+  beginTransaction() {
+    return this._knex.transaction({ isolationLevel: 'read committed' });
   }
 
   // async _executeQuery(conn, sql) {

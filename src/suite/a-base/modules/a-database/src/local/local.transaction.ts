@@ -29,7 +29,7 @@ export class LocalTransaction extends BeanBase<ScopeModule> {
     let res;
     try {
       if (++this._transactionCounter === 1) {
-        this._connection = await this._client.knex.transaction({ isolationLevel: 'read committed' });
+        this._connection = await this._client.beginTransaction();
       }
     } catch (err) {
       this._transactionCounter--;
