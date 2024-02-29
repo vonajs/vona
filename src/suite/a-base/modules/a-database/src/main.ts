@@ -1,9 +1,10 @@
-import { BeanBase, CabloyContext, IModuleMainContext } from '@cabloy/core';
+import { BeanBase, CabloyContext, IModule, IModuleMain, IModuleMainContext } from '@cabloy/core';
 import { LocalDbMeta } from './local/local.dbMeta.js';
+import { ExtendKnex } from './extend/index.js';
 
 const DATABASEMETA = Symbol.for('Context#__databasemeta');
 
-export class Main extends BeanBase implements IModuleMainContext {
+export class Main extends BeanBase implements IModuleMainContext, IModuleMain {
   createContext(context: CabloyContext): void {
     // db
     Object.defineProperty(context, 'db', {
@@ -39,4 +40,11 @@ export class Main extends BeanBase implements IModuleMainContext {
       },
     });
   }
+
+  async moduleLoading(_module: IModule) {
+    ExtendKnex(this.app);
+  }
+  async moduleLoaded(_module: IModule) {}
+  async configLoaded(_module: IModule, _config) {}
+  async metaLoaded(_module: IModule, _meta) {}
 }
