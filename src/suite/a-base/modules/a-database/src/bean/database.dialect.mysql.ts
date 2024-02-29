@@ -25,15 +25,15 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
   }
 
   coerceColumn(column: Knex.ColumnInfo): ITableColumn {
-    this.ctx.db.client.config.client;
-    const result: ITableColumn = {};
-    let type = column.type;
-    const defaultValue = column.defaultValue;
-    const pos = type.indexOf('(');
-    if (pos > -1) type = type.substring(0, pos);
-    // default value
-    const value = column.Default;
+    // result
+    const result = { type: column.type } as ITableColumn;
     // coerce
+    result.default = this._coerceColumnValue(column.type, column.defaultValue);
+    // ok
+    return result;
+  }
+
+  private _coerceColumnValue(type: string, value) {
     if (value === null) return value;
     if (['timestamp'].includes(type) && value === 'CURRENT_TIMESTAMP') return new Date();
     if (['bit', 'bool'].includes(type)) return Boolean(value);
