@@ -1,5 +1,8 @@
 import { Bean, BeanBase } from '@cabloy/core';
 import { BeanDatabaseClient } from './bean.databaseClient.js';
+import { Knex } from 'knex';
+import { VirtualDatabaseDialect } from './virtual.databaseDialect.js';
+import { __ThisModule__ } from '../resource/this.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -20,5 +23,14 @@ export class BeanDatabase extends BeanBase {
   getDefault() {
     const client = this.getClientDefault();
     return client.db;
+  }
+
+  getDialect(client: string, schemaBuilder?: Knex.SchemaBuilder): VirtualDatabaseDialect {
+    const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
+    const dialect = this.app.bean._newBean(beanFullName, schemaBuilder) as VirtualDatabaseDialect;
+    if (!dialect) {
+      throw new Error(`database dialect not found: ${client}`);
+    }
+    return dialect;
   }
 }

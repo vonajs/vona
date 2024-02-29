@@ -1,22 +1,12 @@
 import knex, { Knex } from 'knex';
-import { IFetchDatabasesResultItem, ITableColumn, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+import { IFetchDatabasesResultItem } from '../bean/virtual.databaseDialect.js';
 import { CabloyApplication, Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
 
 export function ExtendSchemaBuilder(app: CabloyApplication) {
-  function getDialect(schemaBuilder: Knex.SchemaBuilder): VirtualDatabaseDialect {
-    const client = Cast<Knex.Client>(Cast(schemaBuilder).client).config.client;
-    const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
-    const dialect = app.bean._newBean(beanFullName, schemaBuilder) as VirtualDatabaseDialect;
-    if (!dialect) {
-      throw new Error(`database dialect not found: ${client}`);
-    }
-    return dialect;
-  }
-
-  ['fetchDatabases', 'createDatabase', 'dropDatabase', 'columns'].forEach(function (method) {
+  ['fetchDatabases', 'createDatabase', 'dropDatabase'].forEach(function (method) {
     knex.SchemaBuilder.extend(method, async function (...args) {
-      const dialect = getDialect(this);
+      const client = Cast<Knex.Client>(Cast(this).client).config.client as string;
+      const dialect = app.bean.database.getDialect(client, this);
       return await dialect[method](...args);
     });
   });
@@ -28,7 +18,6 @@ declare module 'knex' {
       fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]>;
       createDatabase(_databaseName: string): Promise<void>;
       dropDatabase(_databaseName: string): Promise<void>;
-      columns(tableName?: string): Promise<ITableColumn[]>;
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Bean } from '@cabloy/core';
 import { IFetchDatabasesResultItem, ITableColumn, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
+import { Knex } from 'knex';
 
 @Bean({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends VirtualDatabaseDialect {
@@ -23,18 +24,22 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
     await this.schemaBuilder.raw(`drop database \`${databaseName}\``);
   }
 
-  async columns(tableName?: string): Promise<ITableColumn[]> {
-    const res = await this.schemaBuilder.raw(`show columns from \`${tableName}\` `);
-    const list = res[0];
-    const columns: ITableColumn[] = [];
-    for (const item of list) {
-      const column: ITableColumn = {
-        name: item.Field,
-        type: '',
-        default: 0,
-      };
-      columns.push(column);
-    }
-    return columns;
+  coerceColumn(column: Knex.ColumnInfo): ITableColumn {
+    this.ctx.db.client.config.client;
+    const result: ITableColumn = {};
+    let type = column.type;
+    const defaultValue = column.defaultValue;
+    const pos = type.indexOf('(');
+    if (pos > -1) type = type.substring(0, pos);
+    // default value
+    const value = column.Default;
+    // coerce
+    if (value === null) return value;
+    if (['timestamp'].includes(type) && value === 'CURRENT_TIMESTAMP') return new Date();
+    if (['bit', 'bool'].includes(type)) return Boolean(value);
+    if (['float', 'double'].includes(type)) return Number(value);
+    if (['tinyint', 'smallint', 'mediumint', 'int', 'bigint'].includes(type)) return Number(value);
+    // others
+    return value;
   }
 }

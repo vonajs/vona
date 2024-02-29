@@ -6,10 +6,11 @@ export interface IFetchDatabasesResultItem {
 }
 
 export interface ITableColumn {
-  name: string;
   type: string;
   default: any;
 }
+
+export type ITableColumns = Record<string, ITableColumn>;
 
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
@@ -35,7 +36,7 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     this.ctx.throw(501);
   }
 
-  async columns(_tableName?: string): Promise<ITableColumn[]> {
+  coerceColumn(_column: Knex.ColumnInfo): ITableColumn {
     this.ctx.throw(501);
   }
 }

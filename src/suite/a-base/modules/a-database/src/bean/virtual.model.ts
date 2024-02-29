@@ -1,8 +1,6 @@
-import { BeanBase, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
+import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
 import { Knex } from 'knex';
-import { ITableColumn } from './virtual.databaseDialect.js';
-
-export type ITableColumns = Record<string, ITableColumn>;
+import { ITableColumns } from './virtual.databaseDialect.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -58,10 +56,12 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     tableName = tableName || this.table;
     let columns = __columns[tableName];
     if (!columns) {
-      const list = await this.schema.columns(tableName);
+      const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+      const dialect = this.app.bean.database.getDialect(client);
+      const list = await this.builder(tableName).columnInfo();
       columns = __columns[tableName] = {};
-      for (const item of list) {
-        columns[item.name] = item;
+      for (const name in list) {
+        columns[name] = dialect.coerceColumn(list[name]);
       }
     }
     return columns;
