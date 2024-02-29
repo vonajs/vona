@@ -4,7 +4,10 @@ import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.dat
 @Bean({ scene: 'database.dialect' })
 export class DatabaseDialectPg extends VirtualDatabaseDialect {
   async fetchDatabases(databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
-    let dbs = await this.client.db.select('datname').from('pg_database').whereILike('datname', `${databasePrefix}%`);
+    const res: any = await this.schemaBuilder.raw(
+      `select datname from pg_database where datname like '${databasePrefix}%'`,
+    );
+    let dbs = res.rows;
     dbs = dbs.map(db => {
       return { name: db.datname };
     });
@@ -12,10 +15,10 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
   }
 
   async createDatabase(databaseName: string): Promise<void> {
-    await this.client.db.raw(`CREATE DATABASE "${databaseName}" encoding=UTF8`);
+    await this.schemaBuilder.raw(`CREATE DATABASE "${databaseName}" encoding=UTF8`);
   }
 
   async dropDatabase(databaseName: string): Promise<void> {
-    await this.client.db.raw(`DROP DATABASE "${databaseName}"`);
+    await this.schemaBuilder.raw(`DROP DATABASE "${databaseName}"`);
   }
 }

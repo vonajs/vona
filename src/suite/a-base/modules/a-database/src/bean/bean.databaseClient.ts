@@ -1,7 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 import knex, { Knex } from 'knex';
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean()
 export class BeanDatabaseClient extends BeanBase<ScopeModule> {
@@ -9,7 +8,6 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   clientName: string;
   clientConfig: Knex.Config;
   private _knex: Knex;
-  private _dialect: VirtualDatabaseDialect;
 
   get configDatabase() {
     return this.app.config.database;
@@ -17,18 +15,6 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
 
   get db(): Knex {
     return this._knex;
-  }
-
-  get dialect(): VirtualDatabaseDialect {
-    if (!this._dialect) {
-      const client = this.clientConfig.client as string;
-      const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
-      this._dialect = this.bean._newBean(beanFullName, this);
-      if (!this._dialect) {
-        throw new Error(`database dialect not found: ${client}`);
-      }
-    }
-    return this._dialect;
   }
 
   protected __init__(clientName?: string) {
@@ -92,21 +78,4 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     await this._knex.destroy();
     this.__init__(this.clientNameOriginal);
   }
-
-  async fetchDatabases(databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
-    return await this.dialect.fetchDatabases(databasePrefix);
-  }
-
-  async createDatabase(databaseName: string): Promise<void> {
-    await this.dialect.createDatabase(databaseName);
-  }
-
-  async dropDatabase(databaseName: string): Promise<void> {
-    await this.dialect.dropDatabase(databaseName);
-  }
-
-  // async _executeQuery(conn, sql) {
-  //   const queryAsync = promisify(cb => conn.query(sql, cb));
-  //   return await queryAsync();
-  // }
 }

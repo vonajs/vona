@@ -14,12 +14,12 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
   }
 
   async createDatabase(databaseName: string): Promise<void> {
-    await this.client.db.raw(
+    await this.schemaBuilder.raw(
       `CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`,
     );
   }
 
   async dropDatabase(databaseName: string): Promise<void> {
-    await this.client.db.raw(`drop database \`${databaseName}\``);
+    await this.schemaBuilder.raw(`drop database \`${databaseName}\``);
   }
 }
