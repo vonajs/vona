@@ -211,7 +211,7 @@ export class LocalVersion extends BeanBase {
 
   async __updateModuleTransaction(module, version) {
     // bean
-    const beanVersion = this.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager`);
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     if (!beanVersion.update) throw new Error(`version.manager.update not exists for ${module.info.relativeName}`);
     // clear columns cache
@@ -229,7 +229,7 @@ export class LocalVersion extends BeanBase {
 
   async __initModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = this.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager`);
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     // execute
     if (beanVersion.init) {
@@ -248,7 +248,7 @@ export class LocalVersion extends BeanBase {
   // test module
   async __testModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = this.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager`);
     // execute
     if (beanVersion && beanVersion.test) {
       await beanVersion.test({ ...options, version });
