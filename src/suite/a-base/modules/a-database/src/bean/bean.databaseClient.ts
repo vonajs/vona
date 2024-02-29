@@ -2,6 +2,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 import knex, { Knex } from 'knex';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+import { LocalTransaction } from '../index.js';
 
 @Bean()
 export class BeanDatabaseClient extends BeanBase<ScopeModule> {
@@ -10,6 +11,7 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   clientConfig: Knex.Config;
   knex: Knex;
   private _dialect: VirtualDatabaseDialect;
+  private _transaction: LocalTransaction;
 
   get configDatabase() {
     return this.app.config.database;
@@ -37,6 +39,8 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     debug('clientName: %s, clientConfig: %j', this.clientName, this.clientConfig);
     // knex
     this.knex = knex(this.clientConfig);
+    // transaction
+    this._transaction = this.bean._newBean(LocalTransaction, this);
   }
 
   private _extractClientName(clientName?: string) {
