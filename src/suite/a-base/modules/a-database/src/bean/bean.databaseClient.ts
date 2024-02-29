@@ -2,6 +2,8 @@ import { Bean, BeanBase } from '@cabloy/core';
 import knex, { Knex } from 'knex';
 import { ScopeModule } from '../resource/this.js';
 
+export type ISetDatabaseNameResult = { database?: string; filename?: string };
+
 @Bean()
 export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   clientNameOriginal?: string;
@@ -63,12 +65,24 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   }
 
   getDatabaseName(): string {
-    return this.dialect.getDatabaseName();
+    const connection = this.clientConfig.connection as any;
+    return connection.database || connection.filename;
+  }
+
+  setDatabaseName(databaseName: string): ISetDatabaseNameResult {
+    const result: ISetDatabaseNameResult = {};
+    const connection = this.clientConfig.connection as any;
+    if (connection.database) {
+      result.database = connection.database = databaseName;
+    } else if (connection.filename) {
+      result.filename = connection.filename = databaseName;
+    }
+    return result;
   }
 
   async changeConfigAndReload(databaseName: string): Promise<void> {
     // set databaseName
-    const connDatabaseName = this.dialect.setDatabaseName(databaseName);
+    const connDatabaseName = this.setDatabaseName(databaseName);
     // set config
     //   * should not use this.clientConfig.connection, because password is hidden
     const config = this.getClientConfig(this.clientName, true);
