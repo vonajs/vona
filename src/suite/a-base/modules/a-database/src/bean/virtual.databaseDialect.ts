@@ -1,5 +1,6 @@
 import { BeanBase, Virtual } from '@cabloy/core';
 import { BeanDatabaseClient } from './bean.databaseClient.js';
+import { Knex } from 'knex';
 
 export interface IFetchDatabasesResultItem {
   name: string;
@@ -9,14 +10,14 @@ export type ISetDatabaseNameResult = { database?: string; filename?: string };
 
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
-  client: BeanDatabaseClient;
+  schemaBuilder: Knex.SchemaBuilder;
 
   get scope() {
     return this.getScope() as T;
   }
 
-  protected __init__(client: BeanDatabaseClient) {
-    this.client = client;
+  protected __init__(schemaBuilder: Knex.SchemaBuilder) {
+    this.schemaBuilder = schemaBuilder;
   }
 
   getDatabaseName(): string {

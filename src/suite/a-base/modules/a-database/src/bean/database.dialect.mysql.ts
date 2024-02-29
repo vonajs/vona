@@ -4,7 +4,7 @@ import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.dat
 @Bean({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends VirtualDatabaseDialect {
   async fetchDatabases(databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
-    const res = await this.client.db.raw(`show databases like '${databasePrefix}%'`);
+    const res = await this.schemaBuilder.raw(`show databases like '${databasePrefix}%'`);
     let dbs = res[0];
     dbs = dbs.map(db => {
       const name = db[Object.keys(db)[0]];
