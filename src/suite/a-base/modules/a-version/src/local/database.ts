@@ -32,7 +32,6 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   async __fetchDatabases(client: BeanDatabaseClient) {
     // dbs
     let dbs = await client.db.schema.fetchDatabases(this.databasePrefix);
-    console.log('------------------- dbs:', dbs);
     // filter
     dbs = dbs.filter(db => {
       const _time = db.name.substring(this.databasePrefix.length);
@@ -45,7 +44,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
   async __createDatabase(client: BeanDatabaseClient) {
     // create
     const databaseName = `${this.databasePrefix}${moment().format(__timeFormat)}`;
-    await client.createDatabase(databaseName);
+    await client.db.schema.createDatabase(databaseName);
     return databaseName;
   }
 
@@ -88,7 +87,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
       // drop old databases
       const dbs = await this.__fetchDatabases(client);
       for (const db of dbs) {
-        await client.dropDatabase(db.name);
+        await client.db.schema.dropDatabase(db.name);
       }
       // create database
       const databaseName = await this.__createDatabase(client);

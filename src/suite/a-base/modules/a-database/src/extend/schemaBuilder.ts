@@ -14,7 +14,7 @@ export function ExtendSchemaBuilder(app: CabloyApplication) {
     return dialect;
   }
 
-  ['fetchDatabases'].forEach(function (method) {
+  ['fetchDatabases', 'createDatabase', 'dropDatabase'].forEach(function (method) {
     knex.SchemaBuilder.extend(method, async function (...args) {
       const dialect = getDialect(this);
       return await dialect[method](...args);
@@ -26,6 +26,8 @@ declare module 'knex' {
   namespace Knex {
     interface SchemaBuilder {
       fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]>;
+      createDatabase(_databaseName: string): Promise<void>;
+      dropDatabase(_databaseName: string): Promise<void>;
     }
   }
 }
