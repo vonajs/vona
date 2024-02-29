@@ -108,13 +108,11 @@ export class LocalVersion extends BeanBase {
         let fileVersionOld = 0; // default
         if (!options.scene) {
           const res = await this.bean.model
-            .builder<EntityVersion>()
+            .builder<EntityVersion>('aVersion')
             .select('*')
-            .from('aVersion')
             .where('module', moduleName)
             .orderBy('version', 'desc')
             .first();
-          console.log('----------:', res);
           if (res) {
             fileVersionOld = res.version;
           }

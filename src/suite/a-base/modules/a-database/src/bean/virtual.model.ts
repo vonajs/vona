@@ -11,7 +11,12 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return this.ctx.db.schema;
   }
 
-  builder<TRecord2 extends {} = TRecord, TResult2 = TResult>(): Knex.QueryBuilder<TRecord2, TResult2> {
+  builder<TRecord2 extends {} = TRecord, TResult2 = TResult>(
+    tableName?: Knex.TableDescriptor | Knex.AliasDict,
+  ): Knex.QueryBuilder<TRecord2, TResult2> {
+    if (tableName) {
+      return this.ctx.db(tableName);
+    }
     return this.ctx.db.queryBuilder();
   }
 }
