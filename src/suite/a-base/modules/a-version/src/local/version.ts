@@ -106,9 +106,14 @@ export class LocalVersion extends BeanBase {
         // fileVersionOld
         let fileVersionOld = 0; // default
         if (!options.scene) {
-          const res = await this.ctx.model.queryOne('select * from aVersion where module=? order by version desc', [
-            moduleName,
-          ]);
+          const res = await this.bean.model
+            .builder()
+            .select('*')
+            .from('aVersion')
+            .where('module', moduleName)
+            .orderBy('version', 'desc')
+            .first();
+          console.log('----------:', res);
           if (res) {
             fileVersionOld = res.version;
           }
