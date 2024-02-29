@@ -9,7 +9,7 @@ export class BeanDatabase extends BeanBase {
 
   get(clientName?: string) {
     const client = this.getClient(clientName);
-    return client.knex;
+    return client.db;
   }
 
   getClientDefault() {
@@ -19,6 +19,6 @@ export class BeanDatabase extends BeanBase {
 
   getDefault() {
     const client = this.getClientDefault();
-    return client.knex;
+    return client.db;
   }
 }
