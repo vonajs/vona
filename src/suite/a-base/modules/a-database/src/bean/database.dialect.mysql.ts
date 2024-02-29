@@ -1,5 +1,5 @@
 import { Bean } from '@cabloy/core';
-import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
+import { IFetchDatabasesResultItem, ITableColumn, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
 
 @Bean({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends VirtualDatabaseDialect {
@@ -21,5 +21,20 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
 
   async dropDatabase(databaseName: string): Promise<void> {
     await this.schemaBuilder.raw(`drop database \`${databaseName}\``);
+  }
+
+  async columns(tableName?: string): Promise<ITableColumn[]> {
+    const res = await this.schemaBuilder.raw(`show columns from \`${tableName}\` `);
+    const list = res[0];
+    const columns: ITableColumn[] = [];
+    for (const item of list) {
+      const column: ITableColumn = {
+        name: item.Field,
+        type: '',
+        default: 0,
+      };
+      columns.push(column);
+    }
+    return columns;
   }
 }

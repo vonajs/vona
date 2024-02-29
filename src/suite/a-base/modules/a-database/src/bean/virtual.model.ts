@@ -1,7 +1,10 @@
 import { BeanBase, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
 import { Knex } from 'knex';
+import { ITableColumn } from './virtual.databaseDialect.js';
 
-let __columns = {};
+export type ITableColumns = Record<string, ITableColumn>;
+
+let __columns: Record<string, ITableColumns> = {};
 
 @Virtual({ scene: 'bean' })
 export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule = unknown> extends BeanBase {
@@ -55,10 +58,10 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     tableName = tableName || this.table;
     let columns = __columns[tableName];
     if (!columns) {
-      const list = await this.ctx.model.query(`show columns from ${this.ctx.model.format('??', tableName)}`);
+      const list = await this.schema.columns(tableName);
       columns = __columns[tableName] = {};
       for (const item of list) {
-        columns[item.Field] = item;
+        columns[item.name] = item;
       }
     }
     return columns;

@@ -5,6 +5,12 @@ export interface IFetchDatabasesResultItem {
   name: string;
 }
 
+export interface ITableColumn {
+  name: string;
+  type: string;
+  default: any;
+}
+
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   schemaBuilder: Knex.SchemaBuilder;
@@ -26,6 +32,10 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   }
 
   async dropDatabase(_databaseName: string): Promise<void> {
+    this.ctx.throw(501);
+  }
+
+  async columns(_tableName?: string): Promise<ITableColumn[]> {
     this.ctx.throw(501);
   }
 }

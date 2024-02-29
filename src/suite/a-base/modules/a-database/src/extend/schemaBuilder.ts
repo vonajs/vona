@@ -1,5 +1,5 @@
 import knex, { Knex } from 'knex';
-import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+import { IFetchDatabasesResultItem, ITableColumn, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 import { CabloyApplication, Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../resource/this.js';
 
@@ -14,7 +14,7 @@ export function ExtendSchemaBuilder(app: CabloyApplication) {
     return dialect;
   }
 
-  ['fetchDatabases', 'createDatabase', 'dropDatabase'].forEach(function (method) {
+  ['fetchDatabases', 'createDatabase', 'dropDatabase', 'columns'].forEach(function (method) {
     knex.SchemaBuilder.extend(method, async function (...args) {
       const dialect = getDialect(this);
       return await dialect[method](...args);
@@ -28,6 +28,7 @@ declare module 'knex' {
       fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]>;
       createDatabase(_databaseName: string): Promise<void>;
       dropDatabase(_databaseName: string): Promise<void>;
+      columns(tableName?: string): Promise<ITableColumn[]>;
     }
   }
 }
