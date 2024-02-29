@@ -1,5 +1,5 @@
 import { Bean, BeanBase } from '@cabloy/core';
-import knex from 'knex';
+import knex, { Knex } from 'knex';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 
@@ -7,8 +7,8 @@ import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtu
 export class BeanDatabaseClient extends BeanBase<ScopeModule> {
   clientNameOriginal?: string;
   clientName: string;
-  clientConfig: knex.Knex.Config;
-  knex: knex.Knex;
+  clientConfig: Knex.Config;
+  knex: Knex;
   private _dialect: VirtualDatabaseDialect;
 
   get configDatabase() {
@@ -48,7 +48,7 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     return clientName;
   }
 
-  getClientConfig(clientName: string, original: boolean = false): knex.Knex.Config {
+  getClientConfig(clientName: string, original: boolean = false): Knex.Config {
     // clientConfig
     let clientConfig = this.configDatabase.clients[clientName];
     if (original) return clientConfig;
@@ -64,7 +64,7 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     return clientConfig;
   }
 
-  setClientConfig(clientName: string, clientConfig: knex.Knex.Config) {
+  setClientConfig(clientName: string, clientConfig: Knex.Config) {
     // clientName
     if (!clientName) {
       clientName = this.configDatabase.defaultClient;
