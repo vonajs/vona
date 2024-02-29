@@ -53,20 +53,15 @@ export class LocalVersion extends BeanBase {
     options.result = {};
 
     if (!options.scene) {
-      const hasTable = await this.bean.model.schema.hasTable('aVersion');
-      console.log('---------hasTable: ', hasTable);
       // confirm table aVersion exists
-      const res = await this.ctx.model.queryOne("show tables like 'aVersion'");
-      if (!res) {
-        await this.ctx.model.query(`
-          CREATE TABLE aVersion (
-            id INT NOT NULL AUTO_INCREMENT,
-            module VARCHAR(50) NULL,
-            version INT NULL,
-            createdAt TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            PRIMARY KEY (id));
-          `);
+      const hasTableVersion = await this.bean.model.schema.hasTable('aVersion');
+      if (!hasTableVersion) {
+        await this.bean.model.schema.createTable('aVersion', function (table) {
+          table.increments();
+          table.string('module', 50);
+          table.integer('version');
+          table.timestamps(true, true, true);
+        });
       }
     }
 
