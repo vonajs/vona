@@ -21,7 +21,7 @@ export class LocalTransaction extends BeanBase<ScopeModule> {
 
   async begin(fn) {
     let res;
-    const db = this.ctx.bean.database.getDbOriginal();
+    const db = this.ctx.bean.database.getDefault();
     try {
       if (++this._transactionCounter === 1) {
         this._connection = await db.transaction({ isolationLevel: 'read committed' });

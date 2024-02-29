@@ -12,8 +12,13 @@ export class BeanDatabase extends BeanBase {
     return client.knex;
   }
 
-  getDbOriginal() {
+  getClientDefault() {
     const clientName = this.ctx.dbLevel === 0 ? '' : `:${this.ctx.dbLevel}`;
-    return this.get(clientName);
+    return this.getClient(clientName);
+  }
+
+  getDefault() {
+    const client = this.getClientDefault();
+    return client.knex;
   }
 }

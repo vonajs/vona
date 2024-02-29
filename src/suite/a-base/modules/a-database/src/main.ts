@@ -11,7 +11,7 @@ export class Main extends BeanBase implements IModuleMainContext {
       get() {
         return context.dbMeta.transaction.inTransaction
           ? context.dbMeta.transaction.connection
-          : context.bean.database.getDbOriginal();
+          : context.bean.database.getDefault();
       },
     });
     // dbMeta
