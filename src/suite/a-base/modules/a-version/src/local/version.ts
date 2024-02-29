@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { BeanBase, Local } from '@cabloy/core';
 import { __ThisModule__ } from '../resource/this.js';
 import { EntityVersion } from '../entity/version.js';
+import { EntityVersionInit } from '../entity/versionInit.js';
 
 @Local()
 export class LocalVersion extends BeanBase {
@@ -117,10 +118,12 @@ export class LocalVersion extends BeanBase {
             fileVersionOld = res.version;
           }
         } else {
-          const res = await this.ctx.model.queryOne(
-            'select * from aVersionInit where subdomain=? and module=? order by version desc',
-            [options.subdomain, moduleName],
-          );
+          const res = await this.bean.model
+            .builder<EntityVersionInit>('aVersionInit')
+            .select('*')
+            .where({ subdomain: options.subdomain, module: moduleName })
+            .orderBy('version', 'desc')
+            .first();
           if (res) {
             fileVersionOld = res.version;
           }
