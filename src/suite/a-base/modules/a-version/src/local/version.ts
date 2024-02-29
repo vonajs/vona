@@ -53,6 +53,8 @@ export class LocalVersion extends BeanBase {
     options.result = {};
 
     if (!options.scene) {
+      const hasTable = await this.bean.model.schema.hasTable('aVersion');
+      console.log('---------hasTable: ', hasTable);
       // confirm table aVersion exists
       const res = await this.ctx.model.queryOne("show tables like 'aVersion'");
       if (!res) {
