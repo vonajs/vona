@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { BeanBase, Local } from '@cabloy/core';
 import { __ThisModule__ } from '../resource/this.js';
+import { EntityVersion } from '../entity/version.js';
 
 @Local()
 export class LocalVersion extends BeanBase {
@@ -107,7 +108,7 @@ export class LocalVersion extends BeanBase {
         let fileVersionOld = 0; // default
         if (!options.scene) {
           const res = await this.bean.model
-            .builder()
+            .builder<EntityVersion>()
             .select('*')
             .from('aVersion')
             .where('module', moduleName)
