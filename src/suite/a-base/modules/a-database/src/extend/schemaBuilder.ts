@@ -1,5 +1,5 @@
 import knex, { Knex } from 'knex';
-import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 import { CabloyApplication, Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../resource/this.js';
 
@@ -20,4 +20,12 @@ export function ExtendSchemaBuilder(app: CabloyApplication) {
       return await dialect[method](...args);
     });
   });
+}
+
+declare module 'knex' {
+  namespace Knex {
+    interface SchemaBuilder {
+      fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]>;
+    }
+  }
 }

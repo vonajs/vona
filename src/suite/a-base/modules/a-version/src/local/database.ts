@@ -31,7 +31,8 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
 
   async __fetchDatabases(client: BeanDatabaseClient) {
     // dbs
-    let dbs = await client.fetchDatabases(this.databasePrefix);
+    let dbs = await client.db.schema.fetchDatabases(this.databasePrefix);
+    console.log('------------------- dbs:', dbs);
     // filter
     dbs = dbs.filter(db => {
       const _time = db.name.substring(this.databasePrefix.length);
@@ -54,7 +55,7 @@ export class LocalDatabase extends BeanBase<ScopeModule> {
       return;
     }
     // client
-    const client = this.app.bean.database.getClient();
+    const client = this.bean.database.getClientDefault();
     // get current database name
     let databaseName = client.getDatabaseName();
     const isTestDatabase = databaseName.indexOf(this.databasePrefix) === 0;
