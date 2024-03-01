@@ -34,7 +34,7 @@ export class BeanModelBaseInner extends BeanBase {
       : this.options.disableInstance;
   }
 
-  async columns(_tableName?: string) {
+  async columns(_tableName?: string): Promise<any> {
     // xx
   }
 
@@ -50,7 +50,8 @@ export class BeanModelBaseInner extends BeanBase {
     // xx
   }
 
-  async default(_data?) {
+  async default<T = any>(_data?: T): Promise<T> {
+    return _data!;
     // xx
   }
 

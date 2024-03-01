@@ -65,8 +65,8 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return data;
   }
 
-  async default(data?) {
-    data = data || {};
+  async default<T = any>(data?: T): Promise<T> {
+    data = data || ({} as T);
     // columns
     const columns = await this.columns();
     for (const columnName in columns) {
