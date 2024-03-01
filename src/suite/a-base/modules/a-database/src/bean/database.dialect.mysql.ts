@@ -1,6 +1,5 @@
 import { Bean } from '@cabloy/core';
-import { IFetchDatabasesResultItem, ITableColumn, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
-import { Knex } from 'knex';
+import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
 
 @Bean({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends VirtualDatabaseDialect {
@@ -22,24 +21,5 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
 
   async dropDatabase(databaseName: string): Promise<void> {
     await this.schemaBuilder.raw(`drop database \`${databaseName}\``);
-  }
-
-  coerceColumn(column: Knex.ColumnInfo): ITableColumn {
-    // result
-    const result = { type: column.type } as ITableColumn;
-    // coerce
-    result.default = this._coerceColumnValue(column.type, column.defaultValue);
-    // ok
-    return result;
-  }
-
-  private _coerceColumnValue(type: string, value) {
-    if (value === null) return value;
-    if (['timestamp'].includes(type) && value === 'CURRENT_TIMESTAMP') return new Date();
-    if (['bit', 'bool'].includes(type)) return Boolean(value);
-    if (['float', 'double'].includes(type)) return Number(value);
-    if (['tinyint', 'smallint', 'mediumint', 'int', 'bigint'].includes(type)) return Number(value);
-    // others
-    return value;
   }
 }
