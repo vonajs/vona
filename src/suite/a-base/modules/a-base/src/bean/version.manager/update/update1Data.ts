@@ -147,20 +147,15 @@ const tables = {
       table.integer('star').defaultTo(1);
     });
   },
-  aRoleRight: `
-          CREATE TABLE aRoleRight (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            atomClassId int(11) DEFAULT '0',
-            action int(11) DEFAULT '0',
-            scope JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
+  aRoleRight(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('roleId').defaultTo(0);
+      table.integer('atomClassId').defaultTo(0);
+      table.integer('action').defaultTo(0);
+      table.json('scope');
+    });
+  },
   aRoleRightRef: `
           CREATE TABLE aRoleRightRef (
             id int(11) NOT NULL AUTO_INCREMENT,
