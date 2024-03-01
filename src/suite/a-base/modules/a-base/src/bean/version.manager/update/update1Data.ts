@@ -230,11 +230,37 @@ const views = {
       );
     });
   },
-  aViewUserRightAtomClass: `
-create view aViewUserRightAtomClass as
-  select a.iid,a.userId as userIdWho,a.roleExpandId,a.roleId,a.roleIdBase,b.id as roleRightId,b.atomClassId,b.action,b.scope from aViewUserRoleExpand a
-    inner join aRoleRight b on a.roleIdBase=b.roleId
-  `,
+  aViewUserRightAtomClass(viewName: string, model: BeanModel): any {
+    return model.schema.createView(viewName, function (view) {
+      view.columns([
+        'iid',
+        'userIdWho',
+        'roleExpandId',
+        'roleId',
+        'roleIdBase',
+        'roleRightId',
+        'atomClassId',
+        'action',
+        'scope',
+      ]);
+      view.as(
+        model
+          .builder('aViewUserRoleExpand as a')
+          .select([
+            'a.iid',
+            'a.userId as userIdWho',
+            'a.roleExpandId',
+            'a.roleId',
+            'a.roleIdBase',
+            'b.id as roleRightId',
+            'b.atomClassId',
+            'b.action',
+            'b.scope',
+          ])
+          .innerJoin('aRoleRight as b', { 'a.roleIdBase': 'b.roleId' }),
+      );
+    });
+  },
   aViewUserRightAtomClassUser: `
 create view aViewUserRightAtomClassUser as
   select a.iid,a.userId as userIdWho,b.atomClassId,b.action,c.userId as userIdWhom from aViewUserRoleExpand a
