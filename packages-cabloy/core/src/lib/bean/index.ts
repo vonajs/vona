@@ -5,6 +5,7 @@ export * from './beanModuleScopeBase.js';
 export * from './beanSimple.js';
 export * from './resource/config/index.js';
 export * from './resource/constant/index.js';
+export * from './resource/entity/index.js';
 export * from './resource/error/index.js';
 export * from './resource/locale/index.js';
 export * from './resource/model/index.js';
