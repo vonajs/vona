@@ -353,10 +353,7 @@ create view aViewUserRightFunction as
   `,
 };
 
-const functions: any = {};
-
 export default {
   tables,
   views,
-  functions,
 };

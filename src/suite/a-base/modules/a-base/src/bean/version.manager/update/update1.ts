@@ -48,11 +48,5 @@ export class VersionUpdate extends BeanBase {
     for (const viewName of viewNames) {
       await this.ctx.model.query(update1Data.views[viewName]);
     }
-
-    // functions
-    const functionNames: any[] = [];
-    for (const functionName of functionNames) {
-      await this.ctx.model.query(update1Data.functions[functionName]);
-    }
   }
 }
