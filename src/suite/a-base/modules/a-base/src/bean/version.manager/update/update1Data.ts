@@ -96,36 +96,26 @@ const tables = {
       table.integer('atomClassIdParent').defaultTo(0);
     });
   },
-  aAtom: `
-          CREATE TABLE aAtom (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            itemId int(11) DEFAULT '0',
-            atomEnabled int(11) DEFAULT '0',
-            atomFlow int(11) DEFAULT '0',
-            atomClassId int(11) DEFAULT '0',
-            atomName varchar(255) DEFAULT NULL,
-            userIdCreated int(11) DEFAULT '0',
-            userIdUpdated int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
-  aAtomAction: `
-          CREATE TABLE aAtomAction (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomClassId int(11) DEFAULT '0',
-            code int(11) DEFAULT '0',
-            name varchar(50) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
+  aAtom(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.itemId();
+      table.integer('atomEnabled').defaultTo(0);
+      table.integer('atomFlow').defaultTo(0);
+      table.integer('atomClassId').defaultTo(0);
+      table.string('atomName', 255);
+      table.integer('userIdCreated').defaultTo(0);
+      table.integer('userIdUpdated').defaultTo(0);
+    });
+  },
+  aAtomAction(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('atomClassId').defaultTo(0);
+      table.integer('code').defaultTo(0);
+      table.string('name', 50);
+    });
+  },
   aLabel: `
           CREATE TABLE aLabel (
             id int(11) NOT NULL AUTO_INCREMENT,
