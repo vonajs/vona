@@ -9,16 +9,13 @@ export class VersionManager extends BeanBase {
     }
 
     if (options.version === 2) {
-      await this.ctx.model.query(`
-          CREATE TABLE aVersionInit (
-            id INT NOT NULL AUTO_INCREMENT,
-            subdomain VARCHAR(50) NULL,
-            module VARCHAR(50) NULL,
-            version INT NULL,
-            createdAt TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            PRIMARY KEY (id));
-          `);
+      await this.bean.model.schema.createTable('aVersionInit', function (table) {
+        table.increments();
+        table.string('subdomain', 50);
+        table.string('module', 50);
+        table.integer('version');
+        table.timestamps(true, true, true);
+      });
     }
   }
 
