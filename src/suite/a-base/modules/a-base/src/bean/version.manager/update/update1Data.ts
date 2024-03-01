@@ -166,39 +166,29 @@ const tables = {
       table.integer('roleIdScope').defaultTo(0);
     });
   },
-  aFunction: `
-          CREATE TABLE aFunction (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            module varchar(255) DEFAULT NULL,
-            name varchar(255) DEFAULT NULL,
-            title varchar(255) DEFAULT NULL,
-            scene int(11) DEFAULT '0',
-            autoRight int(11) DEFAULT '0',
-            atomClassId int(11) DEFAULT '0',
-            action int(11) DEFAULT '0',
-            sorting int(11) DEFAULT '0',
-            menu int(11) DEFAULT '0',
-            public int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
-  aFunctionStar: `
-          CREATE TABLE aFunctionStar (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            functionId int(11) DEFAULT '0',
-            star int(11) DEFAULT '1',
-            PRIMARY KEY (id)
-          )
-        `,
+  aFunction(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.string('module', 255);
+      table.string('name', 255);
+      table.string('title', 255);
+      table.integer('scene').defaultTo(0);
+      table.integer('autoRight').defaultTo(0);
+      table.integer('atomClassId').defaultTo(0);
+      table.integer('action').defaultTo(0);
+      table.integer('sorting').defaultTo(0);
+      table.integer('menu').defaultTo(0);
+      table.integer('public').defaultTo(0);
+    });
+  },
+  aFunctionStar(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.integer('functionId').defaultTo(0);
+      table.integer('star').defaultTo(1);
+    });
+  },
   aFunctionLocale: `
           CREATE TABLE aFunctionLocale (
             id int(11) NOT NULL AUTO_INCREMENT,
