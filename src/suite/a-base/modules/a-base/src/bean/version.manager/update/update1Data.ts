@@ -189,32 +189,22 @@ const tables = {
       table.integer('star').defaultTo(1);
     });
   },
-  aFunctionLocale: `
-          CREATE TABLE aFunctionLocale (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            functionId int(11) DEFAULT '0',
-            locale varchar(50) DEFAULT NULL,
-            titleLocale varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
-  aRoleFunction: `
-          CREATE TABLE aRoleFunction (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            functionId int(11) DEFAULT '0',
-            roleRightId int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aFunctionLocale(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('functionId').defaultTo(0);
+      table.string('locale', 50);
+      table.string('titleLocale', 255);
+    });
+  },
+  aRoleFunction(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('roleId').defaultTo(0);
+      table.integer('functionId').defaultTo(0);
+      table.integer('roleRightId').defaultTo(0);
+    });
+  },
 };
 
 const views = {
