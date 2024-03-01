@@ -1,23 +1,20 @@
+import { BeanModel } from 'cabloy-module-api-a-database';
+
 const tables = {
-  aUser: `
-          CREATE TABLE aUser (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            disabled int(11) DEFAULT '0',
-            userName varchar(50) DEFAULT NULL,
-            realName varchar(50) DEFAULT NULL,
-            email varchar(50) DEFAULT NULL,
-            mobile varchar(50) DEFAULT NULL,
-            avatar varchar(255) DEFAULT NULL,
-            motto varchar(255) DEFAULT NULL,
-            locale varchar(255) DEFAULT NULL,
-            anonymous int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aUser(model: BeanModel) {
+    model.schema.createTable('aUser', function (table) {
+      table.basicFields();
+      table.integer('disabled').defaultTo(0);
+      table.string('userName', 50);
+      table.string('realName', 50);
+      table.string('email', 50);
+      table.string('mobile', 50);
+      table.string('avatar', 255);
+      table.string('motto', 255);
+      table.string('locale', 255);
+      table.integer('anonymous', 0);
+    });
+  },
   aUserAgent: `
           CREATE TABLE aUserAgent (
             id int(11) NOT NULL AUTO_INCREMENT,
