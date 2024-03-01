@@ -220,10 +220,7 @@ export class LocalVersion extends BeanBase {
     await beanVersion.update({ version });
     // insert record
     if (version > 0) {
-      await this.ctx.model.insert('aVersion', {
-        module: module.info.relativeName,
-        version,
-      });
+      await this.bean.model.builder<EntityVersion>('aVersion').insert({ module: module.info.relativeName, version });
     }
   }
 
