@@ -219,11 +219,17 @@ const views = {
       );
     });
   },
-  aViewUserRoleExpand: `
-create view aViewUserRoleExpand as
-  select a.iid,a.userId,a.roleId,b.roleIdBase,b.id as roleExpandId from aUserRole a
-    left join aRoleExpand b on a.roleId=b.roleId
-  `,
+  aViewUserRoleExpand(viewName: string, model: BeanModel): any {
+    return model.schema.createView(viewName, function (view) {
+      view.columns(['iid', 'userId', 'roleId', 'roleIdBase', 'roleExpandId']);
+      view.as(
+        model
+          .builder('aUserRole as a')
+          .select(['a.iid', 'a.userId', 'a.roleId', 'b.roleIdBase', 'b.id as roleExpandId'])
+          .leftJoin('aRoleExpand as b', { 'a.roleId': 'b.roleId' }),
+      );
+    });
+  },
   aViewUserRightAtomClass: `
 create view aViewUserRightAtomClass as
   select a.iid,a.userId as userIdWho,a.roleExpandId,a.roleId,a.roleIdBase,b.id as roleRightId,b.atomClassId,b.action,b.scope from aViewUserRoleExpand a
