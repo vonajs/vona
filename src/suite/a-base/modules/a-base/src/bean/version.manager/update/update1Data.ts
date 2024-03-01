@@ -116,31 +116,21 @@ const tables = {
       table.string('name', 50);
     });
   },
-  aLabel: `
-          CREATE TABLE aLabel (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            labels JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
-  aAtomLabel: `
-          CREATE TABLE aAtomLabel (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            labels JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
+  aLabel(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.json('labels');
+    });
+  },
+  aAtomLabel(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.atomId();
+      table.json('labels');
+    });
+  },
   aAtomLabelRef: `
           CREATE TABLE aAtomLabelRef (
             id int(11) NOT NULL AUTO_INCREMENT,
