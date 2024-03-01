@@ -291,11 +291,25 @@ const views = {
       );
     });
   },
-  aViewUserRightFunction: `
-create view aViewUserRightFunction as
-  select a.iid,a.userId as userIdWho,a.roleExpandId,a.roleId,a.roleIdBase,b.id as roleFunctionId,b.functionId from aViewUserRoleExpand a
-    inner join aRoleFunction b on a.roleIdBase=b.roleId
-  `,
+  aViewUserRightFunction(viewName: string, model: BeanModel): any {
+    return model.schema.createView(viewName, function (view) {
+      view.columns(['iid', 'userIdWho', 'roleExpandId', 'roleId', 'roleIdBase', 'roleFunctionId', 'functionId']);
+      view.as(
+        model
+          .builder('aViewUserRoleExpand as a')
+          .select([
+            'a.iid',
+            'a.userId as userIdWho',
+            'a.roleExpandId',
+            'a.roleId',
+            'a.roleIdBase',
+            'b.id as roleFunctionId',
+            'b.functionId',
+          ])
+          .innerJoin('aRoleFunction as b', { 'a.roleIdBase': 'b.roleId' }),
+      );
+    });
+  },
 };
 
 export default {
