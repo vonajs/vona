@@ -2,8 +2,6 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run() {
-    // enable 0
-    await this.ctx.model.query("SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO'");
     // add userId 0
     await this.ctx.model.insert('aUser', {
       id: 0,
@@ -20,7 +18,5 @@ export class VersionUpdate extends BeanBase {
       system: 1,
       roleIdParent: -1,
     });
-    // disable 0
-    await this.ctx.model.query("SET SESSION sql_mode=''");
   }
 }

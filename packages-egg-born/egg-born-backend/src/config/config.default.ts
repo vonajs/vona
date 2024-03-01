@@ -393,6 +393,7 @@ async function sessionVariableSet(conn, sql) {
 
 async function mysql_afterCreate(conn) {
   await _executeQuery(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
+  await _executeQuery(conn, "SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO'");
 }
 
 async function _executeQuery(conn, sql) {
