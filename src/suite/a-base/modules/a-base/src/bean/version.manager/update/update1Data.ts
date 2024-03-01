@@ -131,19 +131,14 @@ const tables = {
       table.json('labels');
     });
   },
-  aAtomLabelRef: `
-          CREATE TABLE aAtomLabelRef (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            labelId int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aAtomLabelRef(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.atomId();
+      table.integer('labelId').defaultTo(0);
+    });
+  },
   aAtomStar: `
           CREATE TABLE aAtomStar (
             id int(11) NOT NULL AUTO_INCREMENT,
