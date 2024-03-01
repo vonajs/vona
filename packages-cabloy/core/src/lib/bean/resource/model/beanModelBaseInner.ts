@@ -4,8 +4,6 @@ import { IModelOptions } from './type.js';
 import { appResource } from '../../../core/resource.js';
 import { IDecoratorModelOptions } from '../../../decorator/index.js';
 
-let __columns = {};
-
 export class BeanModelBaseInner extends BeanBase {
   protected get __beanOptions() {
     return appResource.getBean((<any>this).__beanFullName__);
@@ -36,71 +34,24 @@ export class BeanModelBaseInner extends BeanBase {
       : this.options.disableInstance;
   }
 
-  async columns(tableName?: string) {
-    tableName = tableName || this.table;
-    let columns = __columns[tableName];
-    if (!columns) {
-      const list = await this.ctx.model.query(`show columns from ${this.ctx.model.format('??', tableName)}`);
-      columns = __columns[tableName] = {};
-      for (const item of list) {
-        columns[item.Field] = item;
-      }
-    }
-    return columns;
+  async columns(_tableName?: string) {
+    // xx
   }
 
-  columnsClear(tableName) {
-    tableName = tableName || this.table;
-    const exists = __columns[tableName];
-    delete __columns[tableName];
-    return exists;
+  columnsClear(_tableName) {
+    // xx
   }
 
   columnsClearAll() {
-    const exists = Object.keys(__columns).length > 0;
-    __columns = {};
-    return exists;
+    // xx
   }
 
-  async prepareData(item) {
-    // columns
-    const columns = await this.columns();
-    // data
-    const data = {};
-    for (const columnName in columns) {
-      if (item[columnName] !== undefined) {
-        data[columnName] = item[columnName];
-      }
-    }
-    return data;
+  async prepareData(_item) {
+    // xx
   }
 
-  async default(data?) {
-    data = data || {};
-    // columns
-    const columns = await this.columns();
-    for (const columnName in columns) {
-      const column = columns[columnName];
-      data[columnName] = this._coerceTypeOfDefault(column);
-    }
-    return data;
-  }
-
-  _coerceTypeOfDefault(column) {
-    // type
-    let type = column.Type;
-    const pos = type.indexOf('(');
-    if (pos > -1) type = type.substring(0, pos);
-    // default value
-    const value = column.Default;
-    // coerce
-    if (value === null) return value;
-    if (['timestamp'].includes(type) && value === 'CURRENT_TIMESTAMP') return new Date();
-    if (['bit', 'bool'].includes(type)) return Boolean(value);
-    if (['float', 'double'].includes(type)) return Number(value);
-    if (['tinyint', 'smallint', 'mediumint', 'int', 'bigint'].includes(type)) return Number(value);
-    // others
-    return value;
+  async default(_data?) {
+    // xx
   }
 
   async create(data, ...args) {

@@ -52,6 +52,29 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       : this.options.disableInstance;
   }
 
+  async prepareData(item) {
+    // columns
+    const columns = await this.columns();
+    // data
+    const data = {};
+    for (const columnName in columns) {
+      if (item[columnName] !== undefined) {
+        data[columnName] = item[columnName];
+      }
+    }
+    return data;
+  }
+
+  async default(data?) {
+    data = data || {};
+    // columns
+    const columns = await this.columns();
+    for (const columnName in columns) {
+      data[columnName] = columns[columnName].default;
+    }
+    return data;
+  }
+
   async columns(tableName?: string): Promise<ITableColumns> {
     tableName = tableName || this.table;
     let columns = __columns[tableName];
