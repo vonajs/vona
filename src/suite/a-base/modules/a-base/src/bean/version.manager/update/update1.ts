@@ -33,7 +33,7 @@ export class VersionUpdate extends BeanBase {
 
     for (const tableName of tableNames) {
       const fn = update1Data.tables[tableName];
-      await fn(this.bean.model);
+      await fn(tableName, this.bean.model);
     }
 
     // views

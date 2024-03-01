@@ -1,8 +1,8 @@
 import { BeanModel } from 'cabloy-module-api-a-database';
 
 const tables = {
-  aUser(model: BeanModel): any {
-    return model.schema.createTable('aUser', function (table) {
+  aUser(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.integer('disabled').defaultTo(0);
       table.string('userName', 50);
@@ -15,27 +15,22 @@ const tables = {
       table.integer('anonymous', 0);
     });
   },
-  aUserAgent(model: BeanModel): any {
-    return model.schema.createTable('', function (table) {
+  aUserAgent(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.integer('userId').defaultTo(0);
       table.integer('userIdAgent').defaultTo(0);
     });
   },
-  aAuthProvider: `
-          CREATE TABLE aAuthProvider (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            disabled int(11) DEFAULT '0',
-            module varchar(255) DEFAULT NULL,
-            providerName varchar(50) DEFAULT NULL,
-            config json DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
+  aAuthProvider(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('disabled').defaultTo(0);
+      table.string('module', 255);
+      table.string('providerName', 50);
+      table.json('config');
+    });
+  },
   aAuth: `
           CREATE TABLE aAuth (
             id int(11) NOT NULL AUTO_INCREMENT,
