@@ -17,12 +17,22 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
     if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
   });
+  knex.TableBuilder.extend('atomId', function () {
+    this.integer('atomId').defaultTo(0);
+    return this;
+  });
+  knex.TableBuilder.extend('itemId', function () {
+    this.integer('itemId').defaultTo(0);
+    return this;
+  });
 }
 
 declare module 'knex' {
   namespace Knex {
     interface TableBuilder {
       basicFields(options?: IBasicFieldsOptions): Knex.TableBuilder;
+      atomId(): Knex.TableBuilder;
+      itemId(): Knex.TableBuilder;
     }
   }
 }
