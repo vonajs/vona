@@ -85,6 +85,7 @@ export class BeanModelBaseInner extends BeanBase {
   // ///////////
 
   async query(...args) {
+    throw new Error('------------ model.query');
     return await this.ctx.model.query(...args);
   }
 
