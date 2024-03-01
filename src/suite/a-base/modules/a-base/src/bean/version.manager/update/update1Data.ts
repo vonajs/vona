@@ -139,19 +139,14 @@ const tables = {
       table.integer('labelId').defaultTo(0);
     });
   },
-  aAtomStar: `
-          CREATE TABLE aAtomStar (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            star int(11) DEFAULT '1',
-            PRIMARY KEY (id)
-          )
-        `,
+  aAtomStar(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.atomId();
+      table.integer('star').defaultTo(1);
+    });
+  },
   aRoleRight: `
           CREATE TABLE aRoleRight (
             id int(11) NOT NULL AUTO_INCREMENT,
