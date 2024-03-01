@@ -5,3 +5,7 @@ export interface EntityBase {
   deleted: number;
   iid: number;
 }
+
+export interface EntityItemBase extends EntityBase {
+  atomId: number;
+}
