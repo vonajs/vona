@@ -15,18 +15,13 @@ const tables = {
       table.integer('anonymous', 0);
     });
   },
-  aUserAgent: `
-          CREATE TABLE aUserAgent (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            userIdAgent int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aUserAgent(model: BeanModel): any {
+    return model.schema.createTable('', function (table) {
+      table.basicFields();
+      table.integer('userId').defaultTo(0);
+      table.integer('userIdAgent').defaultTo(0);
+    });
+  },
   aAuthProvider: `
           CREATE TABLE aAuthProvider (
             id int(11) NOT NULL AUTO_INCREMENT,
