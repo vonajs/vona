@@ -1,4 +1,5 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { EntityCache } from '../entity/cache.js';
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase {
@@ -15,19 +16,13 @@ export class VersionManager extends BeanBase {
     }
 
     if (options.version === 2) {
-      let sql;
       // delete
-      sql = `
-          delete from aCache
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.builder<EntityCache>('aCache').truncate();
       // alter table: aCache
-      sql = `
-          ALTER TABLE aCache
-            DROP COLUMN timeout,
-            ADD COLUMN expired timestamp DEFAULT NULL
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.schema.alterTable('aCache', function (table) {
+        table.dropColumn('timeout');
+        table.timestamp('expired');
+      });
     }
   }
 
