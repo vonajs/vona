@@ -40,22 +40,17 @@ const tables = {
       table.json('profile');
     });
   },
-  aRole: `
-          CREATE TABLE aRole (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleName varchar(50) DEFAULT NULL,
-            leader int(11) DEFAULT '0',
-            catalog int(11) DEFAULT '0',
-            \`system\` int(11) DEFAULT '0',
-            sorting int(11) DEFAULT '0',
-            roleIdParent int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aRole: (tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.string('roleName', 50);
+      table.integer('leader').defaultTo(0);
+      table.integer('catalog').defaultTo(0);
+      table.integer('system').defaultTo(0);
+      table.integer('sorting').defaultTo(0);
+      table.integer('roleIdParent').defaultTo(0);
+    });
+  },
   aRoleRef: `
           CREATE TABLE aRoleRef (
             id int(11) NOT NULL AUTO_INCREMENT,
