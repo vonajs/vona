@@ -17,13 +17,11 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
     if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
   });
-  knex.TableBuilder.extend('atomId', function () {
-    this.integer('atomId').defaultTo(0);
-    return this;
-  });
-  knex.TableBuilder.extend('itemId', function () {
-    this.integer('itemId').defaultTo(0);
-    return this;
+  ['atomId', 'itemId', 'userId'].forEach(function (method) {
+    knex.TableBuilder.extend(method, function () {
+      this.integer(method).defaultTo(0);
+      return this;
+    });
   });
 }
 
@@ -33,6 +31,7 @@ declare module 'knex' {
       basicFields(options?: IBasicFieldsOptions): Knex.TableBuilder;
       atomId(): Knex.TableBuilder;
       itemId(): Knex.TableBuilder;
+      userId(): Knex.TableBuilder;
     }
   }
 }

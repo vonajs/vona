@@ -31,20 +31,15 @@ const tables = {
       table.json('config');
     });
   },
-  aAuth: `
-          CREATE TABLE aAuth (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            providerId int(11) DEFAULT '0',
-            profileId varchar(255) DEFAULT NULL,
-            profile json DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `,
+  aAuth(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.integer('providerId').defaultTo(0);
+      table.string('profileId', 255);
+      table.json('profile');
+    });
+  },
   aRole: `
           CREATE TABLE aRole (
             id int(11) NOT NULL AUTO_INCREMENT,
