@@ -273,13 +273,24 @@ const views = {
       );
     });
   },
-  aViewUserRightAtom: `
-create view aViewUserRightAtom as
-  select a.iid, a.id as atomId,a.userIdCreated as userIdWhom,b.userIdWho,b.action from aAtom a,aViewUserRightAtomClassUser b
-    where a.deleted=0 and a.atomEnabled=1
-      and a.atomClassId=b.atomClassId
-      and a.userIdCreated=b.userIdWhom
-  `,
+  aViewUserRightAtom(viewName: string, model: BeanModel): any {
+    return model.schema.createView(viewName, function (view) {
+      view.columns(['iid', 'atomId', 'userIdWhom', 'userIdWho', 'action']);
+      view.as(
+        model
+          .builder('aAtom as a')
+          .select(['a.iid', 'a.id as atomId', 'a.userIdCreated as userIdWhom', 'b.userIdWho', 'b.action'])
+          .innerJoin('aViewUserRightAtomClassUser as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.userIdCreated': 'b.userIdWhom',
+          })
+          .where({
+            'a.deleted': 0,
+            'a.atomEnabled': 1,
+          }),
+      );
+    });
+  },
   aViewUserRightFunction: `
 create view aViewUserRightFunction as
   select a.iid,a.userId as userIdWho,a.roleExpandId,a.roleId,a.roleIdBase,b.id as roleFunctionId,b.functionId from aViewUserRoleExpand a
