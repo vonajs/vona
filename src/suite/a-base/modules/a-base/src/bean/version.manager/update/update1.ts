@@ -46,7 +46,8 @@ export class VersionUpdate extends BeanBase {
       'aViewUserRightFunction',
     ];
     for (const viewName of viewNames) {
-      await this.ctx.model.query(update1Data.views[viewName]);
+      const fn = update1Data.views[viewName];
+      await fn(viewName, this.bean.model);
     }
   }
 }

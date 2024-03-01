@@ -208,11 +208,17 @@ const tables = {
 };
 
 const views = {
-  aViewUserRoleRef: `
-create view aViewUserRoleRef as
-  select a.iid,a.userId,a.roleId,b.roleIdParent,b.level from aUserRole a
-    inner join aRoleRef b on a.roleId=b.roleId
-  `,
+  aViewUserRoleRef(viewName: string, model: BeanModel): any {
+    return model.schema.createView(viewName, function (view) {
+      view.columns(['iid', 'userId', 'roleId', 'roleIdParent', 'level']);
+      view.as(
+        model
+          .builder('aUserRole as a')
+          .select(['a.iid', 'a.userId', 'a.roleId', 'b.roleIdParent', 'b.level'])
+          .innerJoin('aRoleRef as b', { 'a.roleId': 'b.roleId' }),
+      );
+    });
+  },
   aViewUserRoleExpand: `
 create view aViewUserRoleExpand as
   select a.iid,a.userId,a.roleId,b.roleIdBase,b.id as roleExpandId from aUserRole a
