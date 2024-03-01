@@ -25,18 +25,18 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   }
 
   async fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
-    this.ctx.throw(501);
+    throw new Error('Not Implemented');
   }
 
   async createDatabase(_databaseName: string): Promise<void> {
-    this.ctx.throw(501);
+    throw new Error('Not Implemented');
   }
 
   async dropDatabase(_databaseName: string): Promise<void> {
-    this.ctx.throw(501);
+    throw new Error('Not Implemented');
   }
 
   coerceColumn(_column: Knex.ColumnInfo): ITableColumn {
-    this.ctx.throw(501);
+    throw new Error('Not Implemented');
   }
 }
