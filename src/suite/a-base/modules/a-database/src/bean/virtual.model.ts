@@ -52,16 +52,16 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       : this.options.disableInstance;
   }
 
-  async columns(tableName?: string) {
+  async columns(tableName?: string): Promise<ITableColumns> {
     tableName = tableName || this.table;
     let columns = __columns[tableName];
     if (!columns) {
       const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
       const dialect = this.app.bean.database.getDialect(client);
-      const list = await this.builder(tableName).columnInfo();
+      const map = await this.builder(tableName).columnInfo();
       columns = __columns[tableName] = {};
-      for (const name in list) {
-        columns[name] = dialect.coerceColumn(list[name]);
+      for (const name in map) {
+        columns[name] = dialect.coerceColumn(map[name]);
       }
     }
     return columns;
