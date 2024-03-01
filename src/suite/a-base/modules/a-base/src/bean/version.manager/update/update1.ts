@@ -32,7 +32,8 @@ export class VersionUpdate extends BeanBase {
     ];
 
     for (const tableName of tableNames) {
-      await this.ctx.model.query(update1Data.tables[tableName]);
+      const fn = update1Data.tables[tableName];
+      await fn(this.bean.model);
     }
 
     // views

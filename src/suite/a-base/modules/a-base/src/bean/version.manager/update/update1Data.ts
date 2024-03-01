@@ -1,8 +1,8 @@
 import { BeanModel } from 'cabloy-module-api-a-database';
 
 const tables = {
-  aUser(model: BeanModel) {
-    model.schema.createTable('aUser', function (table) {
+  aUser(model: BeanModel): any {
+    return model.schema.createTable('aUser', function (table) {
       table.basicFields();
       table.integer('disabled').defaultTo(0);
       table.string('userName', 50);
