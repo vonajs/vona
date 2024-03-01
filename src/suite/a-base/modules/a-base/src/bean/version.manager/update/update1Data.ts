@@ -40,7 +40,7 @@ const tables = {
       table.json('profile');
     });
   },
-  aRole: (tableName: string, model: BeanModel): any {
+  aRole(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.string('roleName', 50);
@@ -51,31 +51,21 @@ const tables = {
       table.integer('roleIdParent').defaultTo(0);
     });
   },
-  aRoleRef: `
-          CREATE TABLE aRoleRef (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            roleIdParent int(11) DEFAULT '0',
-            level int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
-  aRoleInc: `
-          CREATE TABLE aRoleInc (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            roleIdInc int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aRoleRef(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('roleId').defaultTo(0);
+      table.integer('roleIdParent').defaultTo(0);
+      table.integer('level').defaultTo(0);
+    });
+  },
+  aRoleInc(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('roleId').defaultTo(0);
+      table.integer('roleIdInc').defaultTo(0);
+    });
+  },
   aRoleIncRef: `
           CREATE TABLE aRoleIncRef (
             id int(11) NOT NULL AUTO_INCREMENT,
