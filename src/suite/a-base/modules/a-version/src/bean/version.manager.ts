@@ -10,11 +10,10 @@ export class VersionManager extends BeanBase {
 
     if (options.version === 2) {
       await this.bean.model.schema.createTable('aVersionInit', function (table) {
-        table.increments();
+        table.basicFields({ deleted: false, iid: false });
         table.string('subdomain', 50);
         table.string('module', 50);
         table.integer('version');
-        table.timestamps(true, true, true);
       });
     }
   }

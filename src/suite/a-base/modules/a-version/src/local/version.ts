@@ -59,10 +59,9 @@ export class LocalVersion extends BeanBase {
       const hasTableVersion = await this.bean.model.schema.hasTable('aVersion');
       if (!hasTableVersion) {
         await this.bean.model.schema.createTable('aVersion', function (table) {
-          table.increments();
+          table.basicFields({ deleted: false, iid: false });
           table.string('module', 50);
           table.integer('version');
-          table.timestamps(true, true, true);
         });
       }
     }

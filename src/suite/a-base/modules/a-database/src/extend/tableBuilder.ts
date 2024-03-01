@@ -1,12 +1,20 @@
 import knex from 'knex';
 import { CabloyApplication } from '@cabloy/core';
 
+export interface IBasicFieldsOptions {
+  id?: boolean;
+  timestamps?: boolean;
+  deleted?: boolean;
+  iid?: boolean;
+}
+
 export function ExtendTableBuilder(_app: CabloyApplication) {
-  knex.TableBuilder.extend('basicFields', function () {
-    this.increments();
-    this.timestamps(true, true, true);
-    this.integer('deleted').defaultTo(0);
-    this.integer('iid').defaultTo(0);
+  knex.TableBuilder.extend('basicFields', function (options?: IBasicFieldsOptions) {
+    options = options || ({} as IBasicFieldsOptions);
+    if (options.id !== false) this.increments();
+    if (options.timestamps !== false) this.timestamps(true, true, true);
+    if (options.deleted !== false) this.integer('deleted').defaultTo(0);
+    if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
   });
 }
@@ -14,7 +22,7 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
 declare module 'knex' {
   namespace Knex {
     interface TableBuilder {
-      basicFields(): Knex.TableBuilder;
+      basicFields(options?: IBasicFieldsOptions): Knex.TableBuilder;
     }
   }
 }
