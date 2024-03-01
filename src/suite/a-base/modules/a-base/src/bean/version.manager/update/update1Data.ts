@@ -66,56 +66,36 @@ const tables = {
       table.integer('roleIdInc').defaultTo(0);
     });
   },
-  aRoleIncRef: `
-          CREATE TABLE aRoleIncRef (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            roleIdInc int(11) DEFAULT '0',
-            roleIdSrc int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
-  aRoleExpand: `
-          CREATE TABLE aRoleExpand (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            roleIdBase int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
-  aUserRole: `
-          CREATE TABLE aUserRole (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
-  aAtomClass: `
-          CREATE TABLE aAtomClass (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            module varchar(255) DEFAULT NULL,
-            atomClassName varchar(255) DEFAULT NULL,
-            atomClassIdParent int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `,
+  aRoleIncRef(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('roleId').defaultTo(0);
+      table.integer('roleIdInc').defaultTo(0);
+      table.integer('roleIdSrc').defaultTo(0);
+    });
+  },
+  aRoleExpand(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.integer('roleId').defaultTo(0);
+      table.integer('roleIdBase').defaultTo(0);
+    });
+  },
+  aUserRole(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.userId();
+      table.integer('roleId').defaultTo(0);
+    });
+  },
+  aAtomClass(tableName: string, model: BeanModel): any {
+    return model.schema.createTable(tableName, function (table) {
+      table.basicFields();
+      table.string('module', 255);
+      table.string('atomClassName', 255);
+      table.integer('atomClassIdParent').defaultTo(0);
+    });
+  },
   aAtom: `
           CREATE TABLE aAtom (
             id int(11) NOT NULL AUTO_INCREMENT,
