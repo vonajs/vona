@@ -23,31 +23,47 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewRoleRightAtomClass
-    sql = `
-        create view aViewRoleRightAtomClass as
-          select a.iid,a.roleId as roleIdWho,a.roleIdBase,b.id as roleRightId,b.atomClassId,b.action,b.scope from aRoleExpand a
-            inner join aRoleRight b on a.roleIdBase=b.roleId
-          `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aViewRoleRightAtomClass', view => {
+      view.as(
+        this.bean.model
+          .builder('aRoleExpand as a')
+          .select([
+            'a.iid',
+            'a.roleId as roleIdWho',
+            'a.roleIdBase',
+            'b.id as roleRightId',
+            'b.atomClassId',
+            'b.action',
+            'b.scope',
+          ])
+          .innerJoin('aRoleRight as b', { 'a.roleIdBase': 'b.roleId' }),
+      );
+    });
 
     // aViewUserRightAtomClassRole
-    sql = `
-        create view aViewUserRightAtomClassRole as
-          select a.iid,a.userId as userIdWho,b.atomClassId,b.action,c.roleId as roleIdWhom from aViewUserRoleExpand a
-            inner join aRoleRightRef b on a.roleIdBase=b.roleId
-            inner join aRoleRef c on b.roleIdScope=c.roleIdParent
-          `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aViewUserRightAtomClassRole', view => {
+      view.as(
+        this.bean.model
+          .builder('aViewUserRoleExpand a')
+          .select(['a.iid', 'a.userId as userIdWho', 'b.atomClassId', 'b.action', 'c.roleId as roleIdWhom'])
+          .innerJoin('aRoleRightRef as b', { 'a.roleIdBase': 'b.roleId' })
+          .innerJoin('aRoleRef as c', { 'b.roleIdScope': 'c.roleIdParent' }),
+      );
+    });
 
     // aViewUserRightAtomRole
-    sql = `
-        create view aViewUserRightAtomRole as
-          select a.iid, a.id as atomId,a.roleIdOwner as roleIdWhom,b.userIdWho,b.action from aAtom a,aViewUserRightAtomClassRole b
-            where a.deleted=0 and a.atomEnabled=1
-              and a.atomClassId=b.atomClassId
-              and a.roleIdOwner=b.roleIdWhom
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aViewUserRightAtomRole', view => {
+      view.as(
+        this.bean.model
+          .builder('aAtom as a')
+          .select(['a.iid', 'a.id as atomId', 'a.roleIdOwner as roleIdWhom', 'b.userIdWho', 'b.action'])
+          .innerJoin('aViewUserRightAtomClassRole as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.roleIdOwner': 'b.roleIdWhom',
+          })
+          .where({ 'a.deleted': 0, 'a.atomEnabled': 1 }),
+      );
+    });
 
     // update exists atoms
     await this._updateAtoms(options);
