@@ -4,7 +4,7 @@ const tables = {
   aUser(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('disabled').defaultTo(0);
+      table.int0('disabled');
       table.string('userName', 50);
       table.string('realName', 50);
       table.string('email', 50);
@@ -18,8 +18,8 @@ const tables = {
   aUserAgent(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('userId').defaultTo(0);
-      table.integer('userIdAgent').defaultTo(0);
+      table.int0('userId');
+      table.int0('userIdAgent');
     });
   },
   aAuthProvider(tableName: string, model: BeanModel): any {
