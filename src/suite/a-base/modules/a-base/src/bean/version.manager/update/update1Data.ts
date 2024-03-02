@@ -144,7 +144,7 @@ const tables = {
       table.basicFields();
       table.userId();
       table.atomId();
-      table.integer('star').defaultTo(1);
+      table.int1('star');
     });
   },
   aRoleRight(tableName: string, model: BeanModel): any {
@@ -186,7 +186,7 @@ const tables = {
       table.basicFields();
       table.userId();
       table.int0('functionId');
-      table.integer('star').defaultTo(1);
+      table.int1('star');
     });
   },
   aFunctionLocale(tableName: string, model: BeanModel): any {
