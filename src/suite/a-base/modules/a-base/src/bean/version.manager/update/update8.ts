@@ -2,8 +2,6 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run(options) {
-    let sql;
-
     // aFunctionScene
     await this.bean.model.schema.createTable('aFunctionScene', function (table) {
       table.basicFields();
