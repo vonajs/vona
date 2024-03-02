@@ -44,7 +44,7 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model.schema.createView('aViewUserRightAtomClassRole', view => {
       view.as(
         this.bean.model
-          .builder('aViewUserRoleExpand a')
+          .builder('aViewUserRoleExpand as a')
           .select(['a.iid', 'a.userId as userIdWho', 'b.atomClassId', 'b.action', 'c.roleId as roleIdWhom'])
           .innerJoin('aRoleRightRef as b', { 'a.roleIdBase': 'b.roleId' })
           .innerJoin('aRoleRef as c', { 'b.roleIdScope': 'c.roleIdParent' }),
