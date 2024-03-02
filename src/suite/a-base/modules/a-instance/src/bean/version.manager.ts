@@ -7,7 +7,7 @@ export class VersionManager extends BeanBase {
       // create table: aInstance
       await this.bean.model.schema.createTable('aInstance', function (table) {
         table.basicFields({ iid: false });
-        table.integer('disabled').defaultTo(0);
+        table.int0('disabled');
         table.string('name', 255);
       });
     }

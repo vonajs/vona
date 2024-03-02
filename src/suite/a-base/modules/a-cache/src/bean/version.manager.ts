@@ -11,7 +11,7 @@ export class VersionManager extends BeanBase {
         table.string('module', 255);
         table.string('name', 255);
         table.json('value');
-        table.integer('timeout').defaultTo(0);
+        table.int0('timeout');
       });
     }
 

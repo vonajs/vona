@@ -25,7 +25,7 @@ const tables = {
   aAuthProvider(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('disabled').defaultTo(0);
+      table.int0('disabled');
       table.string('module', 255);
       table.string('providerName', 50);
       table.json('config');
@@ -35,7 +35,7 @@ const tables = {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
-      table.integer('providerId').defaultTo(0);
+      table.int0('providerId');
       table.string('profileId', 255);
       table.json('profile');
     });
@@ -44,48 +44,48 @@ const tables = {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.string('roleName', 50);
-      table.integer('leader').defaultTo(0);
-      table.integer('catalog').defaultTo(0);
-      table.integer('system').defaultTo(0);
-      table.integer('sorting').defaultTo(0);
-      table.integer('roleIdParent').defaultTo(0);
+      table.int0('leader');
+      table.int0('catalog');
+      table.int0('system');
+      table.int0('sorting');
+      table.int0('roleIdParent');
     });
   },
   aRoleRef(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleId').defaultTo(0);
-      table.integer('roleIdParent').defaultTo(0);
-      table.integer('level').defaultTo(0);
+      table.int0('roleId');
+      table.int0('roleIdParent');
+      table.int0('level');
     });
   },
   aRoleInc(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleId').defaultTo(0);
-      table.integer('roleIdInc').defaultTo(0);
+      table.int0('roleId');
+      table.int0('roleIdInc');
     });
   },
   aRoleIncRef(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleId').defaultTo(0);
-      table.integer('roleIdInc').defaultTo(0);
-      table.integer('roleIdSrc').defaultTo(0);
+      table.int0('roleId');
+      table.int0('roleIdInc');
+      table.int0('roleIdSrc');
     });
   },
   aRoleExpand(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleId').defaultTo(0);
-      table.integer('roleIdBase').defaultTo(0);
+      table.int0('roleId');
+      table.int0('roleIdBase');
     });
   },
   aUserRole(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
-      table.integer('roleId').defaultTo(0);
+      table.int0('roleId');
     });
   },
   aAtomClass(tableName: string, model: BeanModel): any {
@@ -93,26 +93,26 @@ const tables = {
       table.basicFields();
       table.string('module', 255);
       table.string('atomClassName', 255);
-      table.integer('atomClassIdParent').defaultTo(0);
+      table.int0('atomClassIdParent');
     });
   },
   aAtom(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.itemId();
-      table.integer('atomEnabled').defaultTo(0);
-      table.integer('atomFlow').defaultTo(0);
-      table.integer('atomClassId').defaultTo(0);
+      table.int0('atomEnabled');
+      table.int0('atomFlow');
+      table.int0('atomClassId');
       table.string('atomName', 255);
-      table.integer('userIdCreated').defaultTo(0);
-      table.integer('userIdUpdated').defaultTo(0);
+      table.int0('userIdCreated');
+      table.int0('userIdUpdated');
     });
   },
   aAtomAction(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('atomClassId').defaultTo(0);
-      table.integer('code').defaultTo(0);
+      table.int0('atomClassId');
+      table.int0('code');
       table.string('name', 50);
     });
   },
@@ -136,7 +136,7 @@ const tables = {
       table.basicFields();
       table.userId();
       table.atomId();
-      table.integer('labelId').defaultTo(0);
+      table.int0('labelId');
     });
   },
   aAtomStar(tableName: string, model: BeanModel): any {
@@ -150,20 +150,20 @@ const tables = {
   aRoleRight(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleId').defaultTo(0);
-      table.integer('atomClassId').defaultTo(0);
-      table.integer('action').defaultTo(0);
+      table.int0('roleId');
+      table.int0('atomClassId');
+      table.int0('action');
       table.json('scope');
     });
   },
   aRoleRightRef(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleRightId').defaultTo(0);
-      table.integer('roleId').defaultTo(0);
-      table.integer('atomClassId').defaultTo(0);
-      table.integer('action').defaultTo(0);
-      table.integer('roleIdScope').defaultTo(0);
+      table.int0('roleRightId');
+      table.int0('roleId');
+      table.int0('atomClassId');
+      table.int0('action');
+      table.int0('roleIdScope');
     });
   },
   aFunction(tableName: string, model: BeanModel): any {
@@ -172,27 +172,27 @@ const tables = {
       table.string('module', 255);
       table.string('name', 255);
       table.string('title', 255);
-      table.integer('scene').defaultTo(0);
-      table.integer('autoRight').defaultTo(0);
-      table.integer('atomClassId').defaultTo(0);
-      table.integer('action').defaultTo(0);
-      table.integer('sorting').defaultTo(0);
-      table.integer('menu').defaultTo(0);
-      table.integer('public').defaultTo(0);
+      table.int0('scene');
+      table.int0('autoRight');
+      table.int0('atomClassId');
+      table.int0('action');
+      table.int0('sorting');
+      table.int0('menu');
+      table.int0('public');
     });
   },
   aFunctionStar(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
-      table.integer('functionId').defaultTo(0);
+      table.int0('functionId');
       table.integer('star').defaultTo(1);
     });
   },
   aFunctionLocale(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('functionId').defaultTo(0);
+      table.int0('functionId');
       table.string('locale', 50);
       table.string('titleLocale', 255);
     });
@@ -200,9 +200,9 @@ const tables = {
   aRoleFunction(tableName: string, model: BeanModel): any {
     return model.schema.createTable(tableName, function (table) {
       table.basicFields();
-      table.integer('roleId').defaultTo(0);
-      table.integer('functionId').defaultTo(0);
-      table.integer('roleRightId').defaultTo(0);
+      table.int0('roleId');
+      table.int0('functionId');
+      table.int0('roleRightId');
     });
   },
 };
