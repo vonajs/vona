@@ -3,64 +3,47 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // aComment
-    let sql = `
-          CREATE TABLE aComment (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            sorting int(11) DEFAULT '0',
-            heartCount int(11) DEFAULT '0',
-            replyId int(11) DEFAULT '0',
-            replyUserId int(11) DEFAULT '0',
-            replyContent text DEFAULT NULL,
-            content text DEFAULT NULL,
-            summary text DEFAULT NULL,
-            html text DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aComment', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.userId();
+      table.int0('sorting');
+      table.int0('heartCount');
+      table.int0('replyId');
+      table.int0('replyUserId');
+      table.text('replyContent');
+      table.text('content');
+      table.text('summary');
+      table.text('html');
+    });
 
     // aViewComment
-    sql = `
-          create view aViewComment as
-            select a.*,b.userName,b.avatar,c.userName as replyUserName from aComment a
-              left join aUser b on a.userId=b.id
-              left join aUser c on a.replyUserId=c.id
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aViewComment', view => {
+      view.as(
+        this.bean.model
+          .builder('aComment as a')
+          .select(['a.*', 'b.userName', 'b.avatar', 'c.userName as replyUserName'])
+          .leftJoin('aUser as b', { 'a.userId': 'b.id' })
+          .leftJoin('aUser as c', { 'a.replyUserId': 'c.id' }),
+      );
+    });
 
     // aCommentHeart
-    sql = `
-          CREATE TABLE aCommentHeart (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            commentId int(11) DEFAULT '0',
-            heart int(11) DEFAULT '1',
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aCommentHeart', function (table) {
+      table.basicFields();
+      table.userId();
+      table.atomId();
+      table.int0('commentId');
+      table.int1('heart');
+    });
 
     // aAtom
-    sql = `
-        ALTER TABLE aAtom
-          MODIFY COLUMN updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          ADD COLUMN allowComment int(11) DEFAULT '1',
-          ADD COLUMN starCount int(11) DEFAULT '0',
-          ADD COLUMN commentCount int(11) DEFAULT '0',
-          ADD COLUMN attachmentCount int(11) DEFAULT '0',
-          ADD COLUMN readCount int(11) DEFAULT '0'
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.int1('allowComment');
+      table.int0('starCount');
+      table.int0('commentCount');
+      table.int0('attachmentCount');
+      table.int0('readCount');
+    });
   }
 }
