@@ -5,34 +5,22 @@ export class VersionUpdate extends BeanBase {
     let sql;
 
     // aFunctionScene
-    sql = `
-          CREATE TABLE aFunctionScene (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            sceneName varchar(50) DEFAULT NULL,
-            sceneMenu int(11) DEFAULT '0',
-            sceneSorting int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aFunctionScene', function (table) {
+      table.basicFields();
+      table.string('sceneName', 50);
+      table.int0('sceneMenu');
+      table.int0('sceneSorting');
+    });
 
     // aFunction: scene -> sceneId
-    sql = `
-        ALTER TABLE aFunction
-          CHANGE COLUMN scene sceneId int(11) DEFAULT '0'
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aFunction', function (table) {
+      table.renameColumn('scene', 'sceneId');
+    });
 
     // aAtom: add field roleIdOwner
-    sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN roleIdOwner int(11) DEFAULT '0'
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.int0('roleIdOwner');
+    });
 
     // aViewRoleRightAtomClass
     sql = `
