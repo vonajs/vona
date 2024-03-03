@@ -10,7 +10,7 @@ export function checkWhere(where) {
     return where;
   }
   // loop
-  let whereExists: boolean = false;
+  const wheres: Array<[key: string, value: any]> = [];
   for (const key in where) {
     const value = where[key];
     // check key or/and
@@ -28,18 +28,18 @@ export function checkWhere(where) {
         // deny
         return false;
       } else {
-        whereExists = true;
+        wheres.push([keyOrAnd, _where]);
       }
     } else if (Array.isArray(value) && value.length === 0) {
       // check array
       return false;
     } else {
       // otherwise
-      whereExists = true;
+      wheres.push([key, value]);
     }
   }
-  if (!whereExists) return true;
-  return 'whereExists';
+  if (wheres.length === 0) return true;
+  return wheres;
 }
 
 function _formatOrAnd(ors, orAnd) {
