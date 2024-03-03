@@ -1,6 +1,7 @@
+import { Cast } from '@cabloy/core';
 import { Knex } from 'knex';
 import { promisify } from 'node:util';
-import { }
+import pgTypes from 'pg-types';
 
 export const configBases: Record<string, Knex.Config> = {
   mysql: {
@@ -28,9 +29,10 @@ export const configBases: Record<string, Knex.Config> = {
   pg: {
     connection: {
       types: {
-        // getTypeParser: (...args) => {
-        //   console.log(args);
-        // },
+        getTypeParser: (oid: number, format: string): any => {
+          if (oid === 114) return pgTypes.getTypeParser(25, 'text');
+          return pgTypes.getTypeParser(oid, Cast(format));
+        },
       },
     },
   },
