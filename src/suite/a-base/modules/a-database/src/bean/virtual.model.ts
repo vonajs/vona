@@ -3,6 +3,7 @@ import { Knex } from 'knex';
 import { ITableColumns } from './virtual.databaseDialect.js';
 import { IModelSelectParams } from '../types.js';
 import { checkWhere } from '../common/checkWhere.js';
+import { buildWhere } from '../common/buildWhere.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -122,11 +123,11 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       }
     }
     // where
-    const where = checkWhere(params.where);
-    if (where === false) {
+    const wheres = checkWhere(params.where);
+    if (wheres === false) {
       return [] as TResult2[];
-    } else if (where !== true) {
-      builder.where(where);
+    } else if (wheres !== true) {
+      buildWhere(builder, wheres);
     }
     // orders
     const orders = params.orders;
