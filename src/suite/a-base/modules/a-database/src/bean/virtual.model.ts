@@ -102,4 +102,6 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     __columns = {};
     return exists;
   }
+
+  async list(params) {}
 }
