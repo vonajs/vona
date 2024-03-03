@@ -2,6 +2,7 @@ import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, Virtual, appReso
 import { Knex } from 'knex';
 import { ITableColumns } from './virtual.databaseDialect.js';
 import { IModelSelectParams } from '../types.js';
+import { checkWhere } from '../common/where.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -104,9 +105,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return exists;
   }
 
-  select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    params?: IModelSelectParams,
-  ): Knex.QueryBuilder<TRecord2, TResult2[]> {
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(params?: IModelSelectParams): Promise<TResult2[]> {
     // params
     params = params || {};
     // table
@@ -123,7 +122,12 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       }
     }
     // where
-    builder.where(params.where);
+    const where = checkWhere(params.where);
+    if (where === false) {
+      return [] as TResult2[];
+    } else if (where !== true) {
+      builder.where(where);
+    }
     // orders
     const orders = params.orders;
     if (orders) {
@@ -140,6 +144,6 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       builder.offset(params.offset);
     }
     // ready
-    return builder;
+    return (await builder) as TResult2[];
   }
 }
