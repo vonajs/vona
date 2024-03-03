@@ -104,7 +104,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return exists;
   }
 
-  select<TRecord2 extends {} = TRecord, TResult2 = TResult>(
+  select<TRecord2 extends {} = TRecord, TResult2 = TRecord2[]>(
     params?: IModelSelectParams,
   ): Knex.QueryBuilder<TRecord2, TResult2> {
     // params
@@ -113,6 +113,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     const table = params.table || this.table;
     // builder
     const builder = this.builder<TRecord2, TResult2>(table);
+    builder.select(['id', 'config']);
     // ok
     return builder;
   }
