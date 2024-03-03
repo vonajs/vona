@@ -2,7 +2,7 @@ import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, Virtual, appReso
 import { Knex } from 'knex';
 import { ITableColumns } from './virtual.databaseDialect.js';
 import { IModelSelectParams } from '../types.js';
-import { checkWhere } from '../common/where.js';
+import { checkWhere } from '../common/checkWhere.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
