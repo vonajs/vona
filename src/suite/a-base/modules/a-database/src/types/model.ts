@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 
+// join
 export type IModelSelectParamsJoinType =
   | 'join'
   | 'innerJoin'
@@ -16,12 +17,17 @@ export type IModelSelectParamsJoin = [
   IModelSelectParamsJoinOnMap | Knex.JoinCallback,
 ];
 
+// order
+export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
+export type IModelSelectParamsOrderNulls = 'first' | 'last';
+export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
+
 export interface IModelSelectParams {
   table?: Knex.TableDescriptor | Knex.AliasDict;
   where?: any;
   columns?: any;
   joins?: IModelSelectParamsJoin[];
-  orders?: any;
+  orders?: IModelSelectParamsOrder[];
   limit?: number;
   offset?: number;
 }

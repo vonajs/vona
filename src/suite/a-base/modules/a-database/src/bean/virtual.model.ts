@@ -123,7 +123,14 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       }
     }
     // where
-
+    builder.where(params.where);
+    // orders
+    const orders = params.orders;
+    if (orders) {
+      for (const [orderColumn, orderDirection, orderNulls] of orders) {
+        builder.orderBy(orderColumn, orderDirection, orderNulls);
+      }
+    }
     // limit
     if (params.limit !== undefined) {
       builder.limit(params.limit);
@@ -132,9 +139,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     if (params.offset !== undefined) {
       builder.offset(params.offset);
     }
-
-    // builder.select(['id', 'config']);
-    // ok
+    // ready
     return builder;
   }
 }
