@@ -31,7 +31,7 @@ export function buildWhere(builder: Knex.QueryBuilder, wheres) {
 function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
   // op
   let op = value.op || '='; // default is =
-  op = op.indexOf('like') > -1 ? 'LIKE' : op;
+  op = op.indexOf('like') > -1 ? 'like' : op;
   // op: null/notNull
   if (op === 'null') {
     return builder.whereNull(key);
@@ -41,6 +41,10 @@ function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
   }
   // value
   const _value = _formatValue(value);
+  // op: like
+  if (op === 'like') {
+    return builder.whereILike(key, _value);
+  }
   // op: in
   if (op === 'in') {
     if (_value === null) {
