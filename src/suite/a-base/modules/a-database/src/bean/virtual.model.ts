@@ -119,7 +119,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     const joins = params.joins;
     if (joins) {
       for (const [joinType, joinTable, joinOn] of joins) {
-        builder[joinType](joinTable, joinOn);
+        builder[joinType](joinTable, Cast(joinOn));
       }
     }
     // where
