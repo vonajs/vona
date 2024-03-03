@@ -6,6 +6,7 @@ export function buildWhere(builder: Knex.QueryBuilder, wheres) {
   // raw
   if (isRaw(wheres)) {
     builder.whereRaw(wheres);
+    return;
   }
   // loop
   for (const [key, value] of wheres) {
