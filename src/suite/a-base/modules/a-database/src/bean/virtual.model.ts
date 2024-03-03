@@ -124,6 +124,15 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     }
     // where
 
+    // limit
+    if (params.limit !== undefined) {
+      builder.limit(params.limit);
+    }
+    // offset
+    if (params.offset !== undefined) {
+      builder.offset(params.offset);
+    }
+
     // builder.select(['id', 'config']);
     // ok
     return builder;
