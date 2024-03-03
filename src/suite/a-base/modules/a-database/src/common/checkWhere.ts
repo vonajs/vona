@@ -1,3 +1,5 @@
+import { isRaw } from './utils.js';
+
 const __whereOrPlaceholder = '__or__';
 const __whereAndPlaceholder = '__and__';
 
@@ -6,13 +8,18 @@ export function checkWhere(where) {
   if (where === undefined || where === null) {
     return true;
   }
-  if (where.isRawInstance) {
+  if (isRaw(where)) {
     return where;
   }
   // loop
   const wheres: Array<[key: string, value: any]> = [];
   for (const key in where) {
     const value = where[key];
+    // raw
+    if (isRaw(value)) {
+      wheres.push([key, value]);
+      continue;
+    }
     // check key or/and
     let keyOrAnd;
     if (key.indexOf(__whereOrPlaceholder) > -1) {

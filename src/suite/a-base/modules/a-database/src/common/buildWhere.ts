@@ -1,12 +1,19 @@
 import { Knex } from 'knex';
 import moment from 'moment';
+import { isRaw } from './utils.js';
 
 export function buildWhere(builder: Knex.QueryBuilder, wheres) {
-  if (wheres.isRawInstance) {
+  // raw
+  if (isRaw(wheres)) {
     builder.whereRaw(wheres);
   }
   // loop
   for (const [key, value] of wheres) {
+    // raw
+    if (isRaw(value)) {
+      builder.where(key, value);
+      continue;
+    }
     // check key or/and
     if (['OR', 'AND'].includes(key)) {
       _formatOrAnd(builder, value, key);
