@@ -45,5 +45,16 @@
     "**/node_modules": true
   },
   "search.useIgnoreFiles": false,
-  "hide-my-secrets.hideSecrets": false
+  "hide-my-secrets.hideSecrets": false,
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "pg",
+      "database": "postgres",
+      "username": "postgres"
+    }
+  ]
 }

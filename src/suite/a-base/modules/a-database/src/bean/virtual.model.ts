@@ -104,16 +104,27 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return exists;
   }
 
-  select<TRecord2 extends {} = TRecord, TResult2 = TRecord2[]>(
+  select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
-  ): Knex.QueryBuilder<TRecord2, TResult2> {
+  ): Knex.QueryBuilder<TRecord2, TResult2[]> {
     // params
     params = params || {};
     // table
     const table = params.table || this.table;
     // builder
-    const builder = this.builder<TRecord2, TResult2>(table);
-    builder.select(['id', 'config']);
+    const builder = this.builder<TRecord2, TResult2[]>(table);
+    // columns
+    builder.select(params.columns);
+    // joins
+    const joins = params.joins;
+    if (joins) {
+      for (const [joinType, joinTable, joinOn] of joins) {
+        builder[joinType](joinTable, joinOn);
+      }
+    }
+    // where
+
+    // builder.select(['id', 'config']);
     // ok
     return builder;
   }
