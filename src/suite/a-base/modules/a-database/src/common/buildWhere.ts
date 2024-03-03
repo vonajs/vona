@@ -104,6 +104,7 @@ function _formatValue(value) {
   if (value.op === 'likeRight') return `${value.val}%`;
   // in
   if (['in', 'notIn'].includes(value.op)) {
+    if (!value.val) return null;
     const arr = typeof value.val === 'string' ? value.val.split(',') : value.val;
     if (arr.length === 0) return null;
     return arr;
