@@ -54,7 +54,7 @@ function _formatOrAnd(ors, orAnd) {
 function _formatOrAnd_or(ors) {
   if (ors === undefined || ors === null) return false;
   if (!Array.isArray(ors)) ors = [ors];
-  let whereExists: boolean = false;
+  const wheres: Array<any> = [];
   for (const or of ors) {
     const _where = checkWhere(or);
     if (_where === false) {
@@ -62,17 +62,17 @@ function _formatOrAnd_or(ors) {
     } else if (_where === true) {
       return true;
     } else {
-      whereExists = true;
+      wheres.push(_where);
     }
   }
-  if (!whereExists) return false;
-  return 'whereExists';
+  if (wheres.length === 0) return false;
+  return wheres;
 }
 
 function _formatOrAnd_and(ors) {
   if (ors === undefined || ors === null) return true;
   if (!Array.isArray(ors)) ors = [ors];
-  let whereExists: boolean = false;
+  const wheres: Array<any> = [];
   for (const or of ors) {
     const _where = checkWhere(or);
     if (_where === true) {
@@ -81,9 +81,9 @@ function _formatOrAnd_and(ors) {
       // deny
       return false;
     } else {
-      whereExists = true;
+      wheres.push(_where);
     }
   }
-  if (!whereExists) return true;
-  return 'whereExists';
+  if (wheres.length === 0) return true;
+  return wheres;
 }
