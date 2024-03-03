@@ -1,6 +1,7 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
 import { Knex } from 'knex';
 import { ITableColumns } from './virtual.databaseDialect.js';
+import { IModelSelectParams } from '../types.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -103,5 +104,5 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return exists;
   }
 
-  async list(params) {}
+  async select(params: IModelSelectParams) {}
 }
