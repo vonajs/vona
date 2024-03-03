@@ -5,27 +5,25 @@ export function buildWhere(builder: Knex.QueryBuilder, wheres) {
   if (wheres.isRawInstance) {
     builder.whereRaw(wheres);
   }
-  builder.where(builder => {
-    // loop
-    for (const [key, value] of wheres) {
-      // check key or/and
-      if (['OR', 'AND'].includes(key)) {
-        _formatOrAnd(builder, value, key);
-        continue;
-      }
-      // check value
-      if (Array.isArray(value)) {
-        builder.whereIn(key, value);
-      } else if (value === null || value === undefined) {
-        builder.whereNull(key);
-      } else if (value && !(value instanceof Date) && typeof value === 'object') {
-        _buildWhereObject(builder, value, key);
-      } else {
-        // others
-        builder.where(key, value);
-      }
+  // loop
+  for (const [key, value] of wheres) {
+    // check key or/and
+    if (['OR', 'AND'].includes(key)) {
+      _formatOrAnd(builder, value, key);
+      continue;
     }
-  });
+    // check value
+    if (Array.isArray(value)) {
+      builder.whereIn(key, value);
+    } else if (value === null || value === undefined) {
+      builder.whereNull(key);
+    } else if (value && !(value instanceof Date) && typeof value === 'object') {
+      _buildWhereObject(builder, value, key);
+    } else {
+      // others
+      builder.where(key, value);
+    }
+  }
 }
 
 function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
