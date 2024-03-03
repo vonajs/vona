@@ -7,7 +7,7 @@ export function checkWhere(where) {
     return true;
   }
   if (where.isRawInstance) {
-    return where.isRawInstance;
+    return where;
   }
   // loop
   let whereExists: boolean = false;
