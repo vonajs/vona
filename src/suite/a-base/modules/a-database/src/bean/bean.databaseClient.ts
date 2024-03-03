@@ -1,6 +1,7 @@
 import { Bean, BeanBase } from '@cabloy/core';
 import knex, { Knex } from 'knex';
 import { ScopeModule } from '../resource/this.js';
+import { configBases } from '../common/configBases.js';
 
 export type ISetDatabaseNameResult = { database?: string; filename?: string };
 
@@ -50,7 +51,7 @@ export class BeanDatabaseClient extends BeanBase<ScopeModule> {
     }
     // combine
     const configBase = this.configDatabase.base;
-    const configBaseClient = this.configDatabase.bases[clientConfig.client as string];
+    const configBaseClient = configBases[clientConfig.client as string];
     clientConfig = this.bean.util.extend({}, configBase, configBaseClient, clientConfig);
     // ready
     return clientConfig;
