@@ -239,6 +239,15 @@ export default function (appInfo: CabloyAppInfo) {
           },
         },
       },
+      pg: {
+        connection: {
+          types: {
+            getTypeParser: (...args) => {
+              console.log(args);
+            },
+          },
+        },
+      },
     },
   };
 
@@ -254,8 +263,8 @@ export default function (appInfo: CabloyAppInfo) {
           long_query_time: 0,
         },
         callback: {
-          onConnection,
-          onQuery,
+          // onConnection,
+          // onQuery,
         },
       },
       typeCast(field, next) {
@@ -368,27 +377,6 @@ function getFullPath(ctx, dir, filename, _options) {
   // files that can be accessd should be under options.dir
   if (fullPath.indexOf(staticPath) !== 0) return null;
   return fullPath;
-}
-
-function onQuery(hook, ms, query /* , args*/) {
-  if (!query._connection) return;
-  if (!hook.meta.long_query_time || hook.meta.long_query_time < ms) {
-    const message = `connectionId: ${query._connection.connectionId}, ${ms}ms ==> ${query.sql}`;
-    console.log(chalk.keyword(hook.meta.color)(message));
-  }
-}
-
-async function onConnection(conn) {
-  await sessionVariablesSet(conn);
-}
-
-async function sessionVariablesSet(conn) {
-  await sessionVariableSet(conn, 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED');
-  await sessionVariableSet(conn, 'SET SESSION explicit_defaults_for_timestamp=ON');
-}
-
-async function sessionVariableSet(conn, sql) {
-  await conn.query(sql);
 }
 
 async function mysql_afterCreate(conn) {
