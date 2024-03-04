@@ -13,7 +13,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     params?: IModelSelectParams,
     options?: IModelMethodOptions,
   ): Promise<TResult2[]>;
-  async select(table?, params?, options?) {
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, params?, options?): Promise<TResult2[]> {
     if (typeof table !== 'string') {
       table = undefined;
       options = params;
@@ -61,5 +61,17 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     return (await builder) as TResult2[];
   }
 
-  // async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(options?: IModelMethodOptions): Promise<TResult2[]> {}
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    where?: any,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    where?: any,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
+    const list = await this.select(table, { where }, options);
+    return list[0] as unknown as TResult2;
+  }
 }
