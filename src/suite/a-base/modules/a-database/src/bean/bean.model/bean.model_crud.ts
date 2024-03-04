@@ -1,16 +1,29 @@
 import { Cast } from '@cabloy/core';
 import { BeanModelKnex } from './bean.model_knex.js';
 import { IModelMethodOptions, IModelSelectParams } from '../../types.js';
+import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TRecord, TResult> {
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
     options?: IModelMethodOptions,
-  ): Promise<TResult2[]> {
+  ): Promise<TResult2[]>;
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    params?: IModelSelectParams,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2[]>;
+  async select(table?, params?, options?) {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = params;
+      params = table;
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
     // params
     params = params || {};
-    // table
-    const table = params.table || this.table;
     // builder
     const builder = this.builder<TRecord2, TResult2[]>(table);
     // columns
@@ -47,4 +60,6 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     debug('model.select: %s', builder.toQuery());
     return (await builder) as TResult2[];
   }
+
+  // async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(options?: IModelMethodOptions): Promise<TResult2[]> {}
 }

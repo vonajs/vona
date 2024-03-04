@@ -23,7 +23,6 @@ export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
 export interface IModelSelectParams {
-  table?: Knex.TableDescriptor | Knex.AliasDict;
   where?: any;
   columns?: any;
   joins?: IModelSelectParamsJoin[];
