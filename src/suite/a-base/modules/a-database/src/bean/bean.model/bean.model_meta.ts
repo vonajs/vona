@@ -1,7 +1,7 @@
 import { BeanBase, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
 
 // @ts-ignore ignore TRecord
-export class BeanModelInner<TRecord extends {}, TResult> extends BeanBase {
+export class BeanModelMeta<TRecord extends {}, TResult> extends BeanBase {
   protected get __beanOptions() {
     return appResource.getBean((<any>this).__beanFullName__);
   }

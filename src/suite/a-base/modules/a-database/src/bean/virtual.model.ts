@@ -18,35 +18,6 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return this.getScope() as TScopeModule;
   }
 
-  protected get __beanOptions() {
-    return appResource.getBean((<any>this).__beanFullName__);
-  }
-
-  protected get __modelOptions() {
-    const beanOptions = this.__beanOptions;
-    return beanOptions?.options as IDecoratorModelOptions;
-  }
-
-  get table(): string {
-    return this.__modelOptions?.table;
-  }
-
-  get options(): IModelOptions {
-    return this.__modelOptions?.options;
-  }
-
-  get disableDeleted() {
-    return this.options?.disableDeleted === undefined
-      ? this.app.config.model.disableDeleted
-      : this.options?.disableDeleted;
-  }
-
-  get disableInstance() {
-    return this.options?.disableInstance === undefined
-      ? this.app.config.model.disableInstance
-      : this.options?.disableInstance;
-  }
-
   async prepareData(item) {
     // columns
     const columns = await this.columns();
