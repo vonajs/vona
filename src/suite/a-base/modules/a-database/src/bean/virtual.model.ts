@@ -118,6 +118,10 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return this.ctx.db.raw(sql, bindings);
   }
 
+  checkWhere(where) {
+    return checkWhere(where);
+  }
+
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(params?: IModelSelectParams): Promise<TResult2[]> {
     // params
     params = params || {};
