@@ -71,7 +71,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     options?: IModelMethodOptions,
   ): Promise<TResult2>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
-    const list = await this.select(table, { where }, options);
+    const list = await this.select(table, { where, limit: 1 }, options);
     return list[0] as unknown as TResult2;
   }
 
