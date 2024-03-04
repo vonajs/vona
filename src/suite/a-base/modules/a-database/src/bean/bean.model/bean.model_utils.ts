@@ -73,4 +73,59 @@ export class BeanModelUtils<TRecord extends {}, TResult> extends BeanModelMeta<T
   checkWhere(where) {
     return checkWhere(where);
   }
+
+  private _prepareWhere(
+    builder: Knex.QueryBuilder,
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    where,
+    options?: IModelMethodOptions,
+  ) {
+    // disableInstance
+    this._prepareWhereInstance(builder, table, options);
+    // disableDeleted
+    this._prepareWhereDeleted(builder, table, options);
+    // check
+    const wheres = checkWhere(where);
+    if (wheres === false || wheres === true) {
+      return wheres;
+    }
+    // build
+    buildWhere(builder, wheres);
+  }
+
+  private _prepareWhereInstance(
+    builder: Knex.QueryBuilder,
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    options?: IModelMethodOptions,
+  ) {
+    // need not check where?.iid, for not exactly check
+    // if (where?.iid !== undefined) return;
+    let disableInstance;
+    if (options?.disableInstance === true || options?.disableInstance === false) {
+      disableInstance = options?.disableInstance;
+    } else {
+      disableInstance = this.disableInstance;
+    }
+    if (!disableInstance) {
+      builder.where(`${getTableOrTableAlias(table)}.iid`, this.ctx.instance.id);
+    }
+  }
+
+  private _prepareWhereDeleted(
+    builder: Knex.QueryBuilder,
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    options?: IModelMethodOptions,
+  ) {
+    // need not check where?.deleted, for not exactly check
+    // if (where?.deleted !== undefined) return;
+    let disableDeleted;
+    if (options?.disableDeleted === true || options?.disableDeleted === false) {
+      disableDeleted = options?.disableDeleted;
+    } else {
+      disableDeleted = this.disableDeleted;
+    }
+    if (!disableDeleted) {
+      builder.where(`${getTableOrTableAlias(table)}.deleted`, 0);
+    }
+  }
 }
