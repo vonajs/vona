@@ -53,21 +53,11 @@ function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
   }
   // op: in
   if (op === 'in') {
-    if (_value === null) {
-      builder.whereRaw('1 = 0');
-    } else {
-      builder.whereIn(key, _value);
-    }
-    return;
+    return builder.whereIn(key, _value);
   }
   // op: notIn
   if (op === 'notIn') {
-    if (_value === null) {
-      builder.whereRaw('1 = 1');
-    } else {
-      builder.whereNotIn(key, _value);
-    }
-    return;
+    return builder.whereNotIn(key, _value);
   }
   // others
   builder.where(key, _safeOp(op), _value);
