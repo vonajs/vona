@@ -36,6 +36,10 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     throw new Error('Not Implemented');
   }
 
+  async insert(_builder: Knex.QueryBuilder): Promise<number> {
+    throw new Error('Not Implemented');
+  }
+
   coerceColumn(column: Knex.ColumnInfo): ITableColumn {
     // result
     const result = { type: column.type } as ITableColumn;
@@ -43,10 +47,6 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     result.default = this._coerceColumnValue(column.type, column.defaultValue);
     // ok
     return result;
-  }
-
-  async insert(_builder: Knex.QueryBuilder): Promise<number> {
-    throw new Error('Not Implemented');
   }
 
   protected _coerceColumnValue(type: string, value) {
