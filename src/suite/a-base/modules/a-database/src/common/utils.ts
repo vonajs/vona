@@ -26,3 +26,7 @@ export function formatValueArray(value) {
   if (arr.length === 0) return null;
   return arr;
 }
+
+export function getTableOrTableAlias(table: string) {
+  return table.indexOf(' as ') > -1 ? table.split(' as ')[1].trim() : table;
+}

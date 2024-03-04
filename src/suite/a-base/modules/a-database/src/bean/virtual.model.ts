@@ -1,10 +1,10 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
 import { Knex } from 'knex';
 import { ITableColumns } from './virtual.databaseDialect.js';
-import { IModelSelectParams } from '../types.js';
+import { IModelMethodOptions, IModelSelectParams } from '../types.js';
 import { checkWhere } from '../common/checkWhere.js';
 import { buildWhere } from '../common/buildWhere.js';
-import { isRaw } from '../common/utils.js';
+import { getTableOrTableAlias, isRaw } from '../common/utils.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -37,23 +37,23 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
   }
 
   get table(): string {
-    return this.__modelOptions.table;
+    return this.__modelOptions?.table;
   }
 
   get options(): IModelOptions {
-    return this.__modelOptions.options;
+    return this.__modelOptions?.options;
   }
 
   get disableDeleted() {
-    return this.options.disableDeleted === undefined
+    return this.options?.disableDeleted === undefined
       ? this.app.config.model.disableDeleted
-      : this.options.disableDeleted;
+      : this.options?.disableDeleted;
   }
 
   get disableInstance() {
-    return this.options.disableInstance === undefined
+    return this.options?.disableInstance === undefined
       ? this.app.config.model.disableInstance
-      : this.options.disableInstance;
+      : this.options?.disableInstance;
   }
 
   async prepareData(item) {
@@ -122,7 +122,10 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return checkWhere(where);
   }
 
-  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(params?: IModelSelectParams): Promise<TResult2[]> {
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    params?: IModelSelectParams,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2[]> {
     // params
     params = params || {};
     // table
@@ -139,11 +142,9 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       }
     }
     // where
-    const wheres = checkWhere(params.where);
+    const wheres = this._prepareWhere(builder, table, params.where, options);
     if (wheres === false) {
       return [] as TResult2[];
-    } else if (wheres !== true) {
-      buildWhere(builder, wheres);
     }
     // orders
     const orders = params.orders;
@@ -162,5 +163,45 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     }
     // ready
     return (await builder) as TResult2[];
+  }
+
+  private _prepareWhere(builder: Knex.QueryBuilder, table: string, where, options?: IModelMethodOptions) {
+    // disableInstance
+    this._prepareWhereInstance(builder, table, options);
+    // check
+    const wheres = checkWhere(where);
+    if (wheres === false || wheres === true) {
+      return wheres;
+    }
+    // build
+    buildWhere(builder, wheres);
+  }
+
+  private _prepareWhereInstance(builder: Knex.QueryBuilder, table: string, options?: IModelMethodOptions) {
+    // need not check where?.iid, for not exactly check
+    // if (where?.iid !== undefined) return;
+    let disableInstance;
+    if (options?.disableInstance === true || options?.disableInstance === false) {
+      disableInstance = options?.disableInstance;
+    } else {
+      disableInstance = this.disableInstance;
+    }
+    if (disableInstance) {
+      builder.where(`${getTableOrTableAlias(table)}.iid`, this.ctx.instance.id);
+    }
+  }
+
+  private _prepareWhereDeleted(builder: Knex.QueryBuilder, options?: IModelMethodOptions) {
+    // need not check where?.deleted, for not exactly check
+    // if (where?.deleted !== undefined) return;
+    let disableInstance;
+    if (options?.disableInstance === true || options?.disableInstance === false) {
+      disableInstance = options?.disableInstance;
+    } else {
+      disableInstance = this.table ? this.disableInstance : false;
+    }
+    if (disableInstance) {
+      builder.where(`${this.table}.iid`, this.ctx.instance.id);
+    }
   }
 }

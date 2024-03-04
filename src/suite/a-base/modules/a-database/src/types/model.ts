@@ -31,3 +31,8 @@ export interface IModelSelectParams {
   limit?: number;
   offset?: number;
 }
+
+export interface IModelMethodOptions {
+  disableDeleted?: boolean;
+  disableInstance?: boolean;
+}
