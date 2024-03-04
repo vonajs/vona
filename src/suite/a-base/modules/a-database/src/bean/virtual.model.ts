@@ -165,9 +165,16 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return (await builder) as TResult2[];
   }
 
-  private _prepareWhere(builder: Knex.QueryBuilder, table: string, where, options?: IModelMethodOptions) {
+  private _prepareWhere(
+    builder: Knex.QueryBuilder,
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    where,
+    options?: IModelMethodOptions,
+  ) {
     // disableInstance
     this._prepareWhereInstance(builder, table, options);
+    // disableDeleted
+    this._prepareWhereDeleted(builder, table, options);
     // check
     const wheres = checkWhere(where);
     if (wheres === false || wheres === true) {
@@ -177,7 +184,11 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     buildWhere(builder, wheres);
   }
 
-  private _prepareWhereInstance(builder: Knex.QueryBuilder, table: string, options?: IModelMethodOptions) {
+  private _prepareWhereInstance(
+    builder: Knex.QueryBuilder,
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    options?: IModelMethodOptions,
+  ) {
     // need not check where?.iid, for not exactly check
     // if (where?.iid !== undefined) return;
     let disableInstance;
@@ -191,17 +202,21 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     }
   }
 
-  private _prepareWhereDeleted(builder: Knex.QueryBuilder, options?: IModelMethodOptions) {
+  private _prepareWhereDeleted(
+    builder: Knex.QueryBuilder,
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    options?: IModelMethodOptions,
+  ) {
     // need not check where?.deleted, for not exactly check
     // if (where?.deleted !== undefined) return;
-    let disableInstance;
-    if (options?.disableInstance === true || options?.disableInstance === false) {
-      disableInstance = options?.disableInstance;
+    let disableDeleted;
+    if (options?.disableDeleted === true || options?.disableDeleted === false) {
+      disableDeleted = options?.disableDeleted;
     } else {
-      disableInstance = this.table ? this.disableInstance : false;
+      disableDeleted = this.disableDeleted;
     }
-    if (disableInstance) {
-      builder.where(`${this.table}.iid`, this.ctx.instance.id);
+    if (disableDeleted) {
+      builder.where(`${getTableOrTableAlias(table)}.deleted`, 0);
     }
   }
 }

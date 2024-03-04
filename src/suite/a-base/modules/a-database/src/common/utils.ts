@@ -1,3 +1,4 @@
+import { Knex } from 'knex';
 import moment from 'moment';
 
 export function isRaw(raw) {
@@ -27,6 +28,7 @@ export function formatValueArray(value) {
   return arr;
 }
 
-export function getTableOrTableAlias(table: string) {
-  return table.indexOf(' as ') > -1 ? table.split(' as ')[1].trim() : table;
+export function getTableOrTableAlias(table: Knex.TableDescriptor | Knex.AliasDict) {
+  const _table = table.toString();
+  return _table.indexOf(' as ') > -1 ? _table.split(' as ')[1].trim() : _table;
 }
