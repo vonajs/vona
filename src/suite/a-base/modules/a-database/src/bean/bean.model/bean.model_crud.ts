@@ -71,6 +71,15 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     options?: IModelMethodOptions,
   ): Promise<TResult2>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = where;
+      where = table;
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // select
     const list = await this.select(table, { where, limit: 1 }, options);
     return list[0] as unknown as TResult2;
   }
@@ -113,5 +122,19 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     debug('model.count: %s', builder.toQuery());
     const res = (await builder)[0];
     return Number(res[Object.keys(res)[0]]);
+  }
+
+  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    data?: Partial<TRecord2>,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2>;
+  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    data?: Partial<TRecord2>,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2>;
+  async insert<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, data?, options?): Promise<TResult2> {
+    const list = await this.select(table, { where, limit: 1 }, options);
+    return list[0] as unknown as TResult2;
   }
 }
