@@ -1,7 +1,6 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 
-// @ts-ignore ignore TRecord
 export class BeanModelMeta extends BeanBase {
   protected get self() {
     return Cast<BeanModel>(this);
