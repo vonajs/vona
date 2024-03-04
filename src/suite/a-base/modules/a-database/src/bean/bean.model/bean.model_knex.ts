@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 import { BeanModelUtils } from './bean.model_utils.js';
 
-export class BeanModelKnex<TRecord extends {}, TResult> extends BeanModelUtils<TRecord, TResult> {
+export class BeanModelKnex<TRecord extends {}, TResult> extends BeanModelUtils {
   get schema(): Knex.SchemaBuilder {
     return this.ctx.db.schema;
   }

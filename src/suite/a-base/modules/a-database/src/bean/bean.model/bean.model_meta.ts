@@ -2,7 +2,7 @@ import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } fr
 import { BeanModel } from '../virtual.model.js';
 
 // @ts-ignore ignore TRecord
-export class BeanModelMeta<TRecord extends {}, TResult> extends BeanBase {
+export class BeanModelMeta extends BeanBase {
   protected get self() {
     return Cast<BeanModel>(this);
   }

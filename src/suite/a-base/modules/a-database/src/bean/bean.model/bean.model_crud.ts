@@ -1,4 +1,6 @@
+import { Cast } from '@cabloy/core';
 import { BeanModelKnex } from './bean.model_knex.js';
+import { IModelMethodOptions, IModelSelectParams } from '../../types.js';
 
 export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TRecord, TResult> {
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -21,7 +23,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
       }
     }
     // where
-    const wheres = this._prepareWhere(builder, table, params.where, options);
+    const wheres = this.prepareWhere(builder, table, params.where, options);
     if (wheres === false) {
       return [] as TResult2[];
     }

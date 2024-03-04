@@ -2,12 +2,14 @@ import { Cast } from '@cabloy/core';
 import { ITableColumns } from '../virtual.databaseDialect.js';
 import { BeanModelMeta } from './bean.model_meta.js';
 import { Knex } from 'knex';
-import { isRaw } from '../../common/utils.js';
+import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
+import { buildWhere } from '../../common/buildWhere.js';
+import { IModelMethodOptions } from '../../types.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
-export class BeanModelUtils<TRecord extends {}, TResult> extends BeanModelMeta<TRecord, TResult> {
+export class BeanModelUtils extends BeanModelMeta {
   async prepareData(item) {
     // columns
     const columns = await this.columns();
@@ -74,12 +76,14 @@ export class BeanModelUtils<TRecord extends {}, TResult> extends BeanModelMeta<T
     return checkWhere(where);
   }
 
-  private _prepareWhere(
+  prepareWhere(
     builder: Knex.QueryBuilder,
     table: Knex.TableDescriptor | Knex.AliasDict,
     where,
     options?: IModelMethodOptions,
   ) {
+    // table
+    table = table || this.table;
     // disableInstance
     this._prepareWhereInstance(builder, table, options);
     // disableDeleted
