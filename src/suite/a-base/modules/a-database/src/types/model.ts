@@ -31,6 +31,11 @@ export interface IModelSelectParams {
   offset?: number;
 }
 
+export interface IModelCountParams {
+  where?: any;
+  joins?: IModelSelectParamsJoin[];
+}
+
 export interface IModelMethodOptions {
   disableDeleted?: boolean;
   disableInstance?: boolean;
