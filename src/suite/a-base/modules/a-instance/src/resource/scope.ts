@@ -2,6 +2,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from '@cabloy/core';
 import { IModuleLocal } from './locals.js';
 import { IModuleModel } from './models.js';
 import { config, Errors, locales, constants } from '../config/index.js';
+import { EntityInstance } from '../entity/instance.js';
 
 @Scope()
 export class ScopeModuleAInstance extends BeanScopeBase {}
@@ -23,5 +24,9 @@ declare module '@cabloy/core' {
 
   export interface IBeanScopeConfig {
     'a-instance': ReturnType<typeof config>;
+  }
+
+  export interface CabloyContext {
+    instance: EntityInstance;
   }
 }
