@@ -197,7 +197,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     } else {
       disableInstance = this.disableInstance;
     }
-    if (disableInstance) {
+    if (!disableInstance) {
       builder.where(`${getTableOrTableAlias(table)}.iid`, this.ctx.instance.id);
     }
   }
@@ -215,7 +215,7 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     } else {
       disableDeleted = this.disableDeleted;
     }
-    if (disableDeleted) {
+    if (!disableDeleted) {
       builder.where(`${getTableOrTableAlias(table)}.deleted`, 0);
     }
   }
