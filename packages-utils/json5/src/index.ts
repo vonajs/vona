@@ -1,7 +1,8 @@
 import * as json5 from 'json5';
 
 declare global {
-  const JSON5: typeof json5;
+  // eslint-disable-next-line
+  var JSON5: typeof json5;
 }
 __patchJSON();
 
@@ -34,7 +35,7 @@ function __patchJSON() {
     });
   };
 
-  (<any>global).JSON5 = {
+  global.JSON5 = {
     parse,
     stringify: json5.stringify,
   } as typeof json5;
