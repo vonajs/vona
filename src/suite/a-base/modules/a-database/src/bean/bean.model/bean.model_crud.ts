@@ -1,3 +1,3 @@
-import { BeanModelInner } from './bean.model_inner.js';
+import { BeanModelKnex } from './bean.model_knex.js';
 
-export class BeanModelCrud extends BeanModelInner {}
+export class BeanModelCrud extends BeanModelKnex {}
