@@ -1,3 +1,4 @@
 import { BeanBase } from '@cabloy/core';
 
-export class BeanModelInner extends BeanBase {}
+// @ts-ignore ignore TRecord
+export class BeanModelInner<TRecord extends {}, TResult> extends BeanBase {}

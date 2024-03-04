@@ -1,7 +1,7 @@
 import * as json5 from 'json5';
 
 declare global {
-  var JSON5: typeof json5;
+  const JSON5: typeof json5;
 }
 __patchJSON();
 
@@ -27,14 +27,14 @@ function __patchJSON() {
 
   // json5
   const _json5Parse = json5.parse;
-  // @ts-ignore
+  // @ts-ignore ignore parse
   const parse = function (source, reviver) {
     return _json5Parse(source, function (k, v) {
       return __jsonReviver(k, v, reviver);
     });
   };
 
-  global.JSON5 = {
+  (<any>global).JSON5 = {
     parse,
     stringify: json5.stringify,
   } as typeof json5;

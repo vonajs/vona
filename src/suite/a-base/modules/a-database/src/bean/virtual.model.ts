@@ -1,30 +1,21 @@
-import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
+import { Cast, IDecoratorModelOptions, IModelOptions, Virtual, appResource } from '@cabloy/core';
 import { Knex } from 'knex';
 import { ITableColumns } from './virtual.databaseDialect.js';
 import { IModelMethodOptions, IModelSelectParams } from '../types.js';
 import { checkWhere } from '../common/checkWhere.js';
 import { buildWhere } from '../common/buildWhere.js';
 import { getTableOrTableAlias, isRaw } from '../common/utils.js';
+import { BeanModelCrud } from './bean.model/bean.model_crud.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
 @Virtual({ scene: 'bean' })
-export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule = unknown> extends BeanBase {
+export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule = unknown> extends BeanModelCrud<
+  TRecord,
+  TResult
+> {
   get scope() {
     return this.getScope() as TScopeModule;
-  }
-
-  get schema(): Knex.SchemaBuilder {
-    return this.ctx.db.schema;
-  }
-
-  builder<TRecord2 extends {} = TRecord, TResult2 = TResult>(
-    tableName?: Knex.TableDescriptor | Knex.AliasDict,
-  ): Knex.QueryBuilder<TRecord2, TResult2> {
-    if (tableName) {
-      return this.ctx.db(tableName);
-    }
-    return this.ctx.db.queryBuilder();
   }
 
   protected get __beanOptions() {
