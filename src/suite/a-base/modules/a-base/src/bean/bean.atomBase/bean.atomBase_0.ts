@@ -3,7 +3,7 @@ import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 
 export class BeanAtomBase0 extends BeanBase {
-  get self() {
+  protected get self() {
     return Cast<BeanAtomBase>(this);
   }
 

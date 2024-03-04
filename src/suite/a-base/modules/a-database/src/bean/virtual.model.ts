@@ -7,8 +7,6 @@ import { buildWhere } from '../common/buildWhere.js';
 import { getTableOrTableAlias, isRaw } from '../common/utils.js';
 import { BeanModelCrud } from './bean.model/bean.model_crud.js';
 
-let __columns: Record<string, ITableColumns> = {};
-
 @Virtual({ scene: 'bean' })
 export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule = unknown> extends BeanModelCrud<
   TRecord,
@@ -16,57 +14,6 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
 > {
   get scope() {
     return this.getScope() as TScopeModule;
-  }
-
-  async prepareData(item) {
-    // columns
-    const columns = await this.columns();
-    // data
-    const data = {};
-    for (const columnName in columns) {
-      if (item[columnName] !== undefined) {
-        data[columnName] = item[columnName];
-      }
-    }
-    return data;
-  }
-
-  async default<T = any>(data?: T): Promise<T> {
-    data = data || ({} as T);
-    // columns
-    const columns = await this.columns();
-    for (const columnName in columns) {
-      data[columnName] = columns[columnName].default;
-    }
-    return data;
-  }
-
-  async columns(tableName?: string): Promise<ITableColumns> {
-    tableName = tableName || this.table;
-    let columns = __columns[tableName];
-    if (!columns) {
-      const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
-      const dialect = this.app.bean.database.getDialect(client);
-      const map = await this.builder(tableName).columnInfo();
-      columns = __columns[tableName] = {};
-      for (const name in map) {
-        columns[name] = dialect.coerceColumn(map[name]);
-      }
-    }
-    return columns;
-  }
-
-  columnsClear(tableName) {
-    tableName = tableName || this.table;
-    const exists = __columns[tableName];
-    delete __columns[tableName];
-    return exists;
-  }
-
-  columnsClearAll() {
-    const exists = Object.keys(__columns).length > 0;
-    __columns = {};
-    return exists;
   }
 
   isRaw(raw) {

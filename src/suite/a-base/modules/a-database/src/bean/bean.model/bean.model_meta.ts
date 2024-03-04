@@ -1,7 +1,12 @@
-import { BeanBase, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
+import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
+import { BeanModel } from '../virtual.model.js';
 
 // @ts-ignore ignore TRecord
 export class BeanModelMeta<TRecord extends {}, TResult> extends BeanBase {
+  protected get self() {
+    return Cast<BeanModel>(this);
+  }
+
   protected get __beanOptions() {
     return appResource.getBean((<any>this).__beanFullName__);
   }
