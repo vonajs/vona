@@ -1,4 +1,4 @@
-import { isRaw } from './utils.js';
+import { formatValueArray, isRaw } from './utils.js';
 
 const __whereOrPlaceholder = '__or__';
 const __whereAndPlaceholder = '__and__';
@@ -37,13 +37,25 @@ export function checkWhere(where) {
       } else {
         wheres.push([keyOrAnd, _where]);
       }
-    } else if (Array.isArray(value) && value.length === 0) {
-      // check array
-      return false;
-    } else {
-      // otherwise
-      wheres.push([key, value]);
+      continue;
     }
+    // check array
+    if (Array.isArray(value) && value.length === 0) {
+      return false;
+    }
+    // check object
+    if (value && !(value instanceof Date) && typeof value === 'object') {
+      // check array
+      if (['in', 'notIn'].includes(value.op)) {
+        const arr = formatValueArray(value);
+        if (value.op === 'in' && arr === null) return false;
+        if (value.op === 'notIn' && arr === null) continue;
+        wheres.push([key, { op: value.op, val: arr }]);
+        continue;
+      }
+    }
+    // otherwise
+    wheres.push([key, value]);
   }
   if (wheres.length === 0) return true;
   return wheres;

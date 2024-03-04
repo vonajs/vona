@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
-import moment from 'moment';
-import { isRaw } from './utils.js';
+
+import { formatValue, isRaw } from './utils.js';
 
 export function buildWhere(builder: Knex.QueryBuilder, wheres) {
   // raw
@@ -46,7 +46,7 @@ function _buildWhereObject(builder: Knex.QueryBuilder, value, key) {
     return builder.whereNotNull(key);
   }
   // value
-  const _value = _formatValue(value);
+  const _value = formatValue(value);
   // op: like
   if (op === 'like') {
     return builder.whereILike(key, _value);
@@ -100,25 +100,6 @@ function _formatOrAnd_and(builder: Knex.QueryBuilder, wheres) {
       });
     }
   });
-}
-
-function _formatValue(value) {
-  if (typeof value !== 'object' || value instanceof Date) return value;
-  // date
-  if (value.type === 'Date') return moment(value.val).toDate();
-  // like
-  if (value.op === 'like') return `%${value.val}%`;
-  if (value.op === 'likeLeft') return `%${value.val}`;
-  if (value.op === 'likeRight') return `${value.val}%`;
-  // in
-  if (['in', 'notIn'].includes(value.op)) {
-    if (!value.val) return null;
-    const arr = typeof value.val === 'string' ? value.val.split(',') : value.val;
-    if (arr.length === 0) return null;
-    return arr;
-  }
-  // others
-  return value.val;
 }
 
 function _safeOp(op) {
