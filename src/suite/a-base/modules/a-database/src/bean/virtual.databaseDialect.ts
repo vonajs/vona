@@ -45,6 +45,10 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     return result;
   }
 
+  async insert(_builder: Knex.QueryBuilder): Promise<number> {
+    throw new Error('Not Implemented');
+  }
+
   protected _coerceColumnValue(type: string, value) {
     // null
     if (value === null) return value;

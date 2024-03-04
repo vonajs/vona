@@ -1,5 +1,6 @@
 import { Bean } from '@cabloy/core';
 import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
+import { Knex } from 'knex';
 
 @Bean({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends VirtualDatabaseDialect {
@@ -21,5 +22,10 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
 
   async dropDatabase(databaseName: string): Promise<void> {
     await this.schemaBuilder.raw(`drop database \`${databaseName}\``);
+  }
+
+  async insert(builder: Knex.QueryBuilder): Promise<number> {
+    const list = await builder;
+    return Number(list[0]);
   }
 }
