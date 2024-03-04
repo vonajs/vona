@@ -16,21 +16,6 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
     return this.getScope() as TScopeModule;
   }
 
-  isRaw(raw) {
-    return isRaw(raw);
-  }
-
-  raw(value: Knex.Value): Knex.Raw<any>;
-  raw<TResult2 = any>(sql: string, binding: Knex.RawBinding): Knex.Raw<TResult2>;
-  raw<TResult2 = any>(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Knex.Raw<TResult2>;
-  raw(sql, bindings?) {
-    return this.ctx.db.raw(sql, bindings);
-  }
-
-  checkWhere(where) {
-    return checkWhere(where);
-  }
-
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
     options?: IModelMethodOptions,

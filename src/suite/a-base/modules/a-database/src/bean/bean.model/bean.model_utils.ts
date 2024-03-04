@@ -2,6 +2,8 @@ import { Cast } from '@cabloy/core';
 import { ITableColumns } from '../virtual.databaseDialect.js';
 import { BeanModelMeta } from './bean.model_meta.js';
 import { Knex } from 'knex';
+import { isRaw } from '../../common/utils.js';
+import { checkWhere } from '../../common/checkWhere.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -55,5 +57,20 @@ export class BeanModelUtils<TRecord extends {}, TResult> extends BeanModelMeta<T
     const exists = Object.keys(__columns).length > 0;
     __columns = {};
     return exists;
+  }
+
+  isRaw(raw) {
+    return isRaw(raw);
+  }
+
+  raw(value: Knex.Value): Knex.Raw<any>;
+  raw<TResult2 = any>(sql: string, binding: Knex.RawBinding): Knex.Raw<TResult2>;
+  raw<TResult2 = any>(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Knex.Raw<TResult2>;
+  raw(sql, bindings?) {
+    return this.ctx.db.raw(sql, bindings);
+  }
+
+  checkWhere(where) {
+    return checkWhere(where);
   }
 }
