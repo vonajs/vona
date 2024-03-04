@@ -20,7 +20,7 @@ export const configBases: Record<string, Knex.Config> = {
     connection: {
       typeCast(field, next) {
         if (field.type === 'JSON') {
-          return field.stringJSON();
+          return field.string('utf8');
         }
         return next();
       },
