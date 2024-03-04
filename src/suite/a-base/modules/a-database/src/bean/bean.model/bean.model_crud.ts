@@ -130,10 +130,10 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     data?: Partial<TRecord2>,
     options?: IModelMethodOptions,
   ): Promise<number>;
-  async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<number> {
+  async insert<TRecord2 extends {} = TRecord>(table?, data?, _options?): Promise<number> {
     if (typeof table !== 'string') {
       table = undefined;
-      options = data;
+      _options = data;
       data = table;
     }
     // table
@@ -144,11 +144,13 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     // builder
     const builder = this.builder<TRecord2>(table);
     // insert
-    builder.insert(data).returning('id');
-    // ready
+    builder.insert(data);
+    // debug
     const debug = this.app.bean.debug.get('model');
     debug('model.insert: %s', builder.toQuery());
-    const res = (await builder)[0];
-    return Number(res.id);
+    // dialect
+    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+    const dialect = this.app.bean.database.getDialect(client);
+    return await dialect.insert(builder);
   }
 }
