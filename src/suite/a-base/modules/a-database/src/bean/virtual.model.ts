@@ -162,6 +162,8 @@ export class BeanModel<TRecord extends {} = any, TResult = any[], TScopeModule =
       builder.offset(params.offset);
     }
     // ready
+    const debug = this.app.bean.debug.get('model');
+    debug('model.select: %s', builder.toQuery());
     return (await builder) as TResult2[];
   }
 
