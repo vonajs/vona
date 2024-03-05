@@ -14,25 +14,22 @@ export type ITableColumns = Record<string, ITableColumn>;
 
 @Virtual()
 export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
-  schemaBuilder: Knex.SchemaBuilder;
-
   get scope() {
     return this.getScope() as T;
   }
 
-  protected __init__(schemaBuilder: Knex.SchemaBuilder) {
-    this.schemaBuilder = schemaBuilder;
-  }
-
-  async fetchDatabases(_databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(
+    _schemaBuilder: Knex.SchemaBuilder,
+    _databasePrefix: string,
+  ): Promise<IFetchDatabasesResultItem[]> {
     throw new Error('Not Implemented');
   }
 
-  async createDatabase(_databaseName: string): Promise<void> {
+  async createDatabase(_schemaBuilder: Knex.SchemaBuilder, _databaseName: string): Promise<void> {
     throw new Error('Not Implemented');
   }
 
-  async dropDatabase(_databaseName: string): Promise<void> {
+  async dropDatabase(_schemaBuilder: Knex.SchemaBuilder, _databaseName: string): Promise<void> {
     throw new Error('Not Implemented');
   }
 

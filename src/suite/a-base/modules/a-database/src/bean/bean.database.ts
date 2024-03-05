@@ -25,9 +25,9 @@ export class BeanDatabase extends BeanBase {
     return client.db;
   }
 
-  getDialect(client: string, schemaBuilder?: Knex.SchemaBuilder): VirtualDatabaseDialect {
+  getDialect(client: string): VirtualDatabaseDialect {
     const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
-    const dialect = this.app.bean._newBean(beanFullName, schemaBuilder) as VirtualDatabaseDialect;
+    const dialect = this.app.bean._getBean(beanFullName) as VirtualDatabaseDialect;
     if (!dialect) {
       throw new Error(`database dialect not found: ${client}`);
     }
