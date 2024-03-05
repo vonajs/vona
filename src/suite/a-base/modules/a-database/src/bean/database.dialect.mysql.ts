@@ -27,8 +27,8 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
     await schemaBuilder.raw(`drop database \`${databaseName}\``);
   }
 
-  async insert(builder: Knex.QueryBuilder): Promise<number> {
+  async insert(builder: Knex.QueryBuilder): Promise<number[]> {
     const list = await builder;
-    return Number(list[0]);
+    return list;
   }
 }
