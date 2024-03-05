@@ -57,7 +57,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     }
     // ready
     const debug = this.app.bean.debug.get('model');
-    debug('model.select: %s', builder.toQuery());
+    if (debug.enabled) debug('model.select: %s', builder.toQuery());
     return (await builder) as TResult2[];
   }
 
@@ -119,7 +119,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     }
     // ready
     const debug = this.app.bean.debug.get('model');
-    debug('model.count: %s', builder.toQuery());
+    if (debug.enabled) debug('model.count: %s', builder.toQuery());
     const res = (await builder)[0];
     return Number(res[Object.keys(res)[0]]);
   }
@@ -147,7 +147,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     builder.insert(data);
     // debug
     const debug = this.app.bean.debug.get('model');
-    debug('model.insert: %s', builder.toQuery());
+    if (debug.enabled) debug('model.insert: %s', builder.toQuery());
     // dialect
     const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
     const dialect = this.app.bean.database.getDialect(client);

@@ -40,6 +40,7 @@
   ],
   "author": "zhennann",
   "dependencies": {
+    "@types/debug": "^4.1.12",
     "debug": "^4.3.4"
   }
 }

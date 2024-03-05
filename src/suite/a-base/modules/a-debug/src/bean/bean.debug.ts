@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
-import DebugInstance from 'debug';
+import DebugInstance, { Debugger } from 'debug';
 
 const __debug_caches: any = {};
 
@@ -10,7 +10,7 @@ export class BeanDebug extends BeanBase {
     return DebugInstance;
   }
 
-  get(namespace) {
+  get(namespace): Debugger {
     if (!__debug_caches[namespace]) {
       __debug_caches[namespace] = DebugInstance(namespace);
     }
