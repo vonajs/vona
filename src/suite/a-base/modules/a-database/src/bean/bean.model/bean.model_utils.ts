@@ -97,7 +97,7 @@ export class BeanModelUtils extends BeanModelMeta {
     buildWhere(builder, wheres);
   }
 
-  private _prepareWhereByOptions(table: Knex.TableDescriptor | Knex.AliasDict, where, options?: IModelMethodOptions) {
+  protected _prepareWhereByOptions(table: Knex.TableDescriptor | Knex.AliasDict, where, options?: IModelMethodOptions) {
     // disableInstance: should check if specified
     const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
     if (where[columnNameInstance] === undefined && where.iid === undefined) {

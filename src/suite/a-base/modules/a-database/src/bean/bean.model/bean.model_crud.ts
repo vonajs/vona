@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModelKnex } from './bean.model_knex.js';
-import { IModelCountParams, IModelMethodOptions, IModelSelectParams } from '../../types.js';
+import { IModelCountParams, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
 import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TRecord, TResult> {
@@ -160,5 +160,45 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
     const dialect = this.app.bean.database.getDialect(client);
     return await dialect.insert(builder);
+  }
+
+  async update<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2> | Partial<TRecord2>[],
+    options?: IModelUpdateOptions,
+  ): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    data?: Partial<TRecord2> | Partial<TRecord2>[],
+    options?: IModelUpdateOptions,
+  ): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = data;
+      data = table;
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // data
+    data = data || {};
+    // where
+    const where = Object.assign({}, options?.where);
+    // id
+    if (data.id) {
+      where.id = data.id;
+      data = Object.assign({}, data);
+      delete data.id;
+    }
+    // builder
+    const builder = this.builder<TRecord2>(table);
+    // where
+    const wheres = this.prepareWhere(builder, table, where, options);
+    if (wheres === false) {
+      // do nothing
+      return;
+    }
+    // ready
+    await builder;
   }
 }

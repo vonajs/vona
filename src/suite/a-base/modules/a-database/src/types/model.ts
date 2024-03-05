@@ -40,3 +40,7 @@ export interface IModelMethodOptions {
   disableDeleted?: boolean;
   disableInstance?: boolean;
 }
+
+export interface IModelUpdateOptions extends IModelMethodOptions {
+  where?: any;
+}
