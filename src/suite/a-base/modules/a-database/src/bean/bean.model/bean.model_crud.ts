@@ -216,6 +216,11 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     // table
     table = table || this.table;
     if (!table) throw new Error('should specify the table name');
+    // disableDeleted
+    if (!this._checkDisableDeletedByOptions(options)) {
+      await this.update(table, { deleted: 1 }, Object.assign({}, options, { where }));
+      return;
+    }
     // builder
     const builder = this.builder<TRecord2>(table);
     // delete
