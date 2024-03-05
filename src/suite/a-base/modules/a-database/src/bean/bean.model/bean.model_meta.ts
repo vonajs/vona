@@ -1,5 +1,6 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
+import { IModelMethodOptions } from '../../types.js';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {
@@ -33,5 +34,19 @@ export class BeanModelMeta extends BeanBase {
     return this.options?.disableInstance === undefined
       ? this.app.config.model.disableInstance
       : this.options?.disableInstance;
+  }
+
+  protected _checkDisableInstanceByOptions(options?: IModelMethodOptions) {
+    if (options?.disableInstance === true || options?.disableInstance === false) {
+      return options?.disableInstance;
+    }
+    return this.disableInstance;
+  }
+
+  protected _checkDisableDeletedByOptions(options?: IModelMethodOptions) {
+    if (options?.disableDeleted === true || options?.disableDeleted === false) {
+      return options?.disableDeleted;
+    }
+    return this.disableDeleted;
   }
 }

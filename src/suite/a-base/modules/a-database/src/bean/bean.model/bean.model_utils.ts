@@ -84,10 +84,10 @@ export class BeanModelUtils extends BeanModelMeta {
   ) {
     // table
     table = table || this.table;
-    // disableInstance
-    this._prepareWhereInstance(builder, table, options);
-    // disableDeleted
-    this._prepareWhereDeleted(builder, table, options);
+    // disableInstance/disableDeleted
+    const disableWhere = {};
+    this._prepareWhereByOptions(table, disableWhere, options);
+    builder.where(disableWhere);
     // check
     const wheres = checkWhere(where);
     if (wheres === false || wheres === true) {
@@ -97,39 +97,37 @@ export class BeanModelUtils extends BeanModelMeta {
     buildWhere(builder, wheres);
   }
 
-  private _prepareWhereInstance(
-    builder: Knex.QueryBuilder,
-    table: Knex.TableDescriptor | Knex.AliasDict,
-    options?: IModelMethodOptions,
-  ) {
-    // need not check where?.iid, for not exactly check
-    // if (where?.iid !== undefined) return;
-    let disableInstance;
-    if (options?.disableInstance === true || options?.disableInstance === false) {
-      disableInstance = options?.disableInstance;
-    } else {
-      disableInstance = this.disableInstance;
+  private _prepareWhereByOptions(table: Knex.TableDescriptor | Knex.AliasDict, where, options?: IModelMethodOptions) {
+    // disableInstance: should check if specified
+    const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
+    if (where[columnNameInstance] === undefined && where.iid === undefined) {
+      if (!this._checkDisableInstanceByOptions(options)) {
+        where[columnNameInstance] = this.ctx.instance.id;
+      }
     }
-    if (!disableInstance) {
-      builder.where(`${getTableOrTableAlias(table)}.iid`, this.ctx.instance.id);
+    // disableDeleted: should check if specified
+    const columnNameDeleted = `${getTableOrTableAlias(table)}.deleted`;
+    if (where[columnNameDeleted] === undefined && where.deleted === undefined) {
+      if (!this._checkDisableDeletedByOptions(options)) {
+        where[columnNameDeleted] = 0;
+      }
     }
   }
 
-  private _prepareWhereDeleted(
-    builder: Knex.QueryBuilder,
-    table: Knex.TableDescriptor | Knex.AliasDict,
-    options?: IModelMethodOptions,
-  ) {
-    // need not check where?.deleted, for not exactly check
-    // if (where?.deleted !== undefined) return;
-    let disableDeleted;
-    if (options?.disableDeleted === true || options?.disableDeleted === false) {
-      disableDeleted = options?.disableDeleted;
-    } else {
-      disableDeleted = this.disableDeleted;
+  protected _prepareInsertDataByOptions(data, options?: IModelMethodOptions) {
+    // disableInstance: should check if specified
+    const columnNameInstance = 'iid';
+    if (data[columnNameInstance] === undefined) {
+      if (!this._checkDisableInstanceByOptions(options)) {
+        data[columnNameInstance] = this.ctx.instance.id;
+      }
     }
-    if (!disableDeleted) {
-      builder.where(`${getTableOrTableAlias(table)}.deleted`, 0);
+    // disableDeleted: should check if specified
+    const columnNameDeleted = 'deleted';
+    if (data[columnNameDeleted] === undefined) {
+      if (!this._checkDisableDeletedByOptions(options)) {
+        data[columnNameDeleted] = 0;
+      }
     }
   }
 }

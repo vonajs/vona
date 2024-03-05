@@ -133,10 +133,10 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     data?: Partial<TRecord2> | Partial<TRecord2>[],
     options?: IModelMethodOptions,
   ): Promise<number[]>;
-  async insert<TRecord2 extends {} = TRecord>(table?, data?, _options?): Promise<number[]> {
+  async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<number[]> {
     if (typeof table !== 'string') {
       table = undefined;
-      _options = data;
+      options = data;
       data = table;
     }
     // table
@@ -147,7 +147,7 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     const datas = Array.isArray(data) ? data : [data];
     // options
     for (const data of datas) {
-      this.prepareInsertData(data);
+      this._prepareInsertDataByOptions(data, options);
     }
     // builder
     const builder = this.builder<TRecord2>(table);
