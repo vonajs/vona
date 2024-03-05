@@ -252,4 +252,18 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     const dialect = this.app.bean.database.getDialect(client);
     return dialect.query(result) as unknown as TResult2[];
   }
+
+  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2>;
+  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    binding: Knex.RawBinding,
+  ): Promise<TResult2>;
+  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Promise<TResult2>;
+  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2> {
+    const res = await this.query(sql, bindings);
+    return res[0] as unknown as TResult2;
+  }
 }
