@@ -6,8 +6,8 @@ export function ExtendSchemaBuilder(app: CabloyApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase'].forEach(function (method) {
     knex.SchemaBuilder.extend(method, async function (...args) {
       const client = Cast<Knex.Client>(Cast(this).client).config.client as string;
-      const dialect = app.bean.database.getDialect(client, this);
-      return await dialect[method](...args);
+      const dialect = app.bean.database.getDialect(client);
+      return await dialect[method](this, ...args);
     });
   });
 }

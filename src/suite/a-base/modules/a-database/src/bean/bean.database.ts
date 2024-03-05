@@ -1,6 +1,5 @@
 import { Bean, BeanBase } from '@cabloy/core';
 import { BeanDatabaseClient } from './bean.databaseClient.js';
-import { Knex } from 'knex';
 import { VirtualDatabaseDialect } from './virtual.databaseDialect.js';
 import { __ThisModule__ } from '../resource/this.js';
 
