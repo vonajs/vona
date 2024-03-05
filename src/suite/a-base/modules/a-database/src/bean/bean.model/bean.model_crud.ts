@@ -124,13 +124,16 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     return Number(res[Object.keys(res)[0]]);
   }
 
-  async insert<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<number>;
+  async insert<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2> | Partial<TRecord2>[],
+    options?: IModelMethodOptions,
+  ): Promise<number[]>;
   async insert<TRecord2 extends {} = TRecord>(
     table: Knex.TableDescriptor | Knex.AliasDict,
-    data?: Partial<TRecord2>,
+    data?: Partial<TRecord2> | Partial<TRecord2>[],
     options?: IModelMethodOptions,
-  ): Promise<number>;
-  async insert<TRecord2 extends {} = TRecord>(table?, data?, _options?): Promise<number> {
+  ): Promise<number[]>;
+  async insert<TRecord2 extends {} = TRecord>(table?, data?, _options?): Promise<number[]> {
     if (typeof table !== 'string') {
       table = undefined;
       _options = data;
@@ -139,12 +142,17 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     // table
     table = table || this.table;
     if (!table) throw new Error('should specify the table name');
-    // params
+    // data
     data = data || {};
+    const datas = Array.isArray(data) ? data : [data];
+    // options
+    for (const data of datas) {
+      this.prepareInsertData(data);
+    }
     // builder
     const builder = this.builder<TRecord2>(table);
     // insert
-    builder.insert(data);
+    builder.insert(datas as unknown as any);
     // debug
     const debug = this.app.bean.debug.get('model');
     if (debug.enabled) debug('model.insert: %s', builder.toQuery());
