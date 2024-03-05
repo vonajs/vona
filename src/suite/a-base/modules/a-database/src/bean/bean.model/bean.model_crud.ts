@@ -162,13 +162,10 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     return await dialect.insert(builder);
   }
 
-  async update<TRecord2 extends {} = TRecord>(
-    data?: Partial<TRecord2> | Partial<TRecord2>[],
-    options?: IModelUpdateOptions,
-  ): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(
     table: Knex.TableDescriptor | Knex.AliasDict,
-    data?: Partial<TRecord2> | Partial<TRecord2>[],
+    data?: Partial<TRecord2>,
     options?: IModelUpdateOptions,
   ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
@@ -204,16 +201,13 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     await builder;
   }
 
-  async delete<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    where?: any,
-    options?: IModelMethodOptions,
-  ): Promise<void>;
-  async delete<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async delete<TRecord2 extends {} = TRecord>(where?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord>(
     table: Knex.TableDescriptor | Knex.AliasDict,
-    where?: any,
+    where?: Partial<TRecord2>,
     options?: IModelMethodOptions,
   ): Promise<void>;
-  async delete<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<void> {
+  async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {
       table = undefined;
       options = where;
