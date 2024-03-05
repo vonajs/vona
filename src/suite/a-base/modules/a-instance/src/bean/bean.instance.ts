@@ -4,6 +4,8 @@ import chalk from 'chalk';
 import boxen from 'boxen';
 import { Bean, BeanBase } from '@cabloy/core';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { IModelSelectParams } from 'cabloy-module-api-a-database';
+import { EntityInstance } from '../entity/instance.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -31,7 +33,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     const orders = options.orders;
     const where = options.where || { disabled: 0 }; // allow disabled=undefined
     // select
-    const _options = { where, orders } as any;
+    const _options = { where, orders } as IModelSelectParams;
     if (page.size !== 0) {
       _options.limit = page.size;
       _options.offset = page.index;
@@ -46,7 +48,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return await this.resetCache({ subdomain });
   }
 
-  async _get({ subdomain }: any) {
+  async _get({ subdomain }: any): Promise<EntityInstance | null> {
     // get
     const instance = await this.modelInstance.get({ name: subdomain });
     if (instance) return instance;
@@ -78,9 +80,9 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       title: instanceBase.title,
       config: JSON.stringify(instanceBase.config || {}),
       disabled: 0,
-    };
+    } as EntityInstance;
     const res = await this.modelInstance.insert(instance);
-    instance.id = res.insertId;
+    instance.id = res[0];
     return instance;
   }
 

@@ -3,7 +3,7 @@ import { BeanModelKnex } from './bean.model_knex.js';
 import { IModelCountParams, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
 import { Knex } from 'knex';
 
-export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TRecord, TResult> {
+export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
     options?: IModelMethodOptions,
