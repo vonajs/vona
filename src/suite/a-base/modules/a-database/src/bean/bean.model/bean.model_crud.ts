@@ -192,6 +192,40 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     }
     // builder
     const builder = this.builder<TRecord2>(table);
+    // update
+    builder.update(data);
+    // where
+    const wheres = this.prepareWhere(builder, table, where, options);
+    if (wheres === false) {
+      // do nothing
+      return;
+    }
+    // ready
+    await builder;
+  }
+
+  async delete<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    where?: any,
+    options?: IModelMethodOptions,
+  ): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: Knex.TableDescriptor | Knex.AliasDict,
+    where?: any,
+    options?: IModelMethodOptions,
+  ): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<void> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = where;
+      where = table;
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // builder
+    const builder = this.builder<TRecord2>(table);
+    // delete
+    builder.delete();
     // where
     const wheres = this.prepareWhere(builder, table, where, options);
     if (wheres === false) {
