@@ -37,6 +37,10 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     throw new Error('Not Implemented');
   }
 
+  query(_result) {
+    throw new Error('Not Implemented');
+  }
+
   coerceColumn(column: Knex.ColumnInfo): ITableColumn {
     // result
     const result = { type: column.type } as ITableColumn;

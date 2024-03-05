@@ -234,4 +234,22 @@ export class BeanModelCrud<TRecord extends {}, TResult> extends BeanModelKnex<TR
     // ready
     await builder;
   }
+
+  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2[]>;
+  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    binding: Knex.RawBinding,
+  ): Promise<TResult2[]>;
+  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Promise<TResult2[]>;
+  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2[]> {
+    const raw = this.ctx.db.raw(sql, bindings);
+    const result = await raw;
+    // dialect
+    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+    const dialect = this.app.bean.database.getDialect(client);
+    return dialect.query(result) as unknown as TResult2[];
+  }
 }

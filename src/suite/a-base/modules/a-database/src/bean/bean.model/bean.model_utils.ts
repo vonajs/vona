@@ -9,7 +9,7 @@ import { IModelMethodOptions } from '../../types.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
-export class BeanModelUtils extends BeanModelMeta {
+export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async prepareData(item) {
     // columns
     const columns = await this.columns();
@@ -66,8 +66,11 @@ export class BeanModelUtils extends BeanModelMeta {
   }
 
   raw(value: Knex.Value): Knex.Raw<any>;
-  raw<TResult2 = any>(sql: string, binding: Knex.RawBinding): Knex.Raw<TResult2>;
-  raw<TResult2 = any>(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Knex.Raw<TResult2>;
+  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql: string, binding: Knex.RawBinding): Knex.Raw<TResult2>;
+  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Knex.Raw<TResult2>;
   raw(sql, bindings?) {
     return this.ctx.db.raw(sql, bindings);
   }

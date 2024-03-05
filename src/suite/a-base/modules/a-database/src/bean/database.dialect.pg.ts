@@ -29,4 +29,8 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
     const list = await builder;
     return list.map(item => item.id);
   }
+
+  query(result) {
+    return result.rows;
+  }
 }

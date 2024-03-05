@@ -31,4 +31,8 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
     const list = await builder;
     return list;
   }
+
+  query(result) {
+    return result[0];
+  }
 }
