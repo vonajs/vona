@@ -118,24 +118,31 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return await super.update(table, data, options);
     }
     // check where and get id
+    let id;
     if (!options?.where) {
       if (data.id === undefined) {
         throw new Error('id should be specified for update method');
       }
+      id = data.id;
     } else {
       const where = data.id !== undefined ? Object.assign({}, options?.where, { id: data.id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const item = await this.get(table, where, options);
-      if (!item) {
+      const items = await this.select<TRecord2>(table, { where }, options);
+      if (items.length === 0) {
         // donothing
         return;
       }
-      data = Object.assign({}, data, { id: Cast(item).id });
+      if (items.length === 1) {
+        id = Cast(items[0]).id;
+      } else {
+        id = items.map(item => Cast(item).id);
+      }
     }
-    // update by id: options without where
+    // update by id/ids
+    options = Object.assign({}, options, { where: { id } });
     await super.update(table, data, options);
     // delete cache
-    await this.__deleteCache_key(data.id);
+    await this.__deleteCache_key(id);
   }
 
   async delete(where, ...args) {
@@ -244,7 +251,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private async __deleteCache_key(id) {
     const cache = this.__getCacheInstance();
-    await cache.del(id);
+    if (Array.isArray(id)) {
+      await cache.mdel(id);
+    } else {
+      await cache.del(id);
+    }
   }
 
   private async __deleteCache_notkey(where) {
