@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptionsCache, IModelUpdateOptions } from '../../types.js';
+import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -25,7 +25,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     ids: number[],
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
       return (await this.__mget_select(false, ids, options)) as TResult2[];
@@ -48,12 +48,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
@@ -142,14 +142,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.__deleteCache_key(id);
   }
 
-  async delete<TRecord2 extends {} = TRecord>(
-    where?: Partial<TRecord2>,
-    options?: IModelMethodOptionsCache,
-  ): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord>(where?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(
     table: string,
     where?: Partial<TRecord2>,
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {
@@ -189,7 +186,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sort: boolean,
     ids: number[],
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<(TResult2 | undefined)[]> {
     // select
     const items = await this.select<TRecord2, TResult2>(
@@ -213,7 +210,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where: object,
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();
@@ -240,7 +237,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where: { id: number },
-    options?: IModelMethodOptionsCache,
+    options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();

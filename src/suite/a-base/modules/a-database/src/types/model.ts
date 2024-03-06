@@ -36,7 +36,7 @@ export interface IModelCountParams {
   joins?: IModelSelectParamsJoin[];
 }
 
-export type IModelMethodOptionsCache = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
+export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 export type IModelUpdateOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
