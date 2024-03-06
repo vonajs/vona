@@ -135,9 +135,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();
-    const data = await cache.get(where, {
+    const cacheKey = { where, options };
+    const data = await cache.get(cacheKey, {
       fn_get: async () => {
-        return await super.get(where, { columns: ['id'] });
+        const options = Object.assign({}, cacheKey.options, { columns: ['id', 'updatedAt'] });
+        return await super.get(table, cacheKey.where, options);
       },
       ignoreNull: true,
     });
