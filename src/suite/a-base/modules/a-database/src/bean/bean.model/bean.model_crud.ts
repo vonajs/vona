@@ -178,14 +178,17 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     table = table || this.table;
     if (!table) throw new Error('should specify the table name');
     // data
-    data = data || {};
+    data = Object.assign({}, data);
     // where
     const where = Object.assign({}, options?.where);
     // id
     if (data.id) {
       where.id = data.id;
-      data = Object.assign({}, data);
       delete data.id;
+    }
+    // disableUpdateTime
+    if (!this._checkDisableUpdateTimeByOptions(options)) {
+      data.updatedAt = new Date();
     }
     // builder
     const builder = this.builder<TRecord2>(table);

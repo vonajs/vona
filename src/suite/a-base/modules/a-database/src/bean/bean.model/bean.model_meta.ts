@@ -56,7 +56,7 @@ export class BeanModelMeta extends BeanBase {
     return this.disableDeleted;
   }
 
-  protected _checkDisableUpdateTime(options?: IModelUpdateOptions) {
+  protected _checkDisableUpdateTimeByOptions(options?: IModelUpdateOptions) {
     if (options?.disableUpdateTime === true || options?.disableUpdateTime === false) {
       return options?.disableUpdateTime;
     }
