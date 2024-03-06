@@ -44,7 +44,7 @@ export interface IModelMethodOptionsGeneral {
   disableInstance?: boolean;
 }
 
-export interface IModelUpdateOptions extends IModelMethodOptionsGeneral {
+export interface IModelUpdateOptionsGeneral extends IModelMethodOptionsGeneral {
   where?: any;
   disableUpdateTime?: boolean;
 }

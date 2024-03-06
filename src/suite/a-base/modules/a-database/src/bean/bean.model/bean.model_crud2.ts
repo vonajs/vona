@@ -1,4 +1,4 @@
-import { IModelMethodOptionsGeneral, IModelUpdateOptions } from '../../types.js';
+import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
@@ -27,11 +27,14 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return res[0];
   }
 
-  async write<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
+  async write<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2>,
+    options?: IModelUpdateOptionsGeneral,
+  ): Promise<void>;
   async write<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
-    options?: IModelUpdateOptions,
+    options?: IModelUpdateOptionsGeneral,
   ): Promise<void>;
   async write(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
