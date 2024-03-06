@@ -127,7 +127,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     } else {
       const where = data.id !== undefined ? Object.assign({}, options?.where, { id: data.id }) : options?.where;
       options = Object.assign({}, options, { where: undefined });
-      const items = await this.select<TRecord2>(table, { where }, options);
+      const items = await this.select<TRecord2>(table, { where, columns: ['id'] }, options);
       if (items.length === 0) {
         // donothing
         return;
@@ -145,13 +145,48 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.__deleteCache_key(id);
   }
 
-  async delete(where, ...args) {
-    if (!this.__cacheExists()) {
-      return await super.delete(where, ...args);
+  async delete<TRecord2 extends {} = TRecord>(
+    where?: Partial<TRecord2>,
+    options?: IModelMethodOptionsCache,
+  ): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord>(
+    table: string,
+    where?: Partial<TRecord2>,
+    options?: IModelMethodOptionsCache,
+  ): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = where;
+      where = table;
     }
-    const res = await super.delete(where, ...args);
-    await this.__deleteCache_key(where);
-    return res;
+    // not use cache if specified table
+    if (table) {
+      return await super.delete(table, where, options);
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // check if cache
+    if (!this.__cacheExists()) {
+      return await super.delete(table, where, options);
+    }
+    // check where and get id
+    const items = await this.select<TRecord2>(table, { where, columns: ['id'] }, options);
+    if (items.length === 0) {
+      // donothing
+      return;
+    }
+    let id;
+    if (items.length === 1) {
+      id = Cast(items[0]).id;
+    } else {
+      id = items.map(item => Cast(item).id);
+    }
+    // delete by id/ids
+    await super.delete(table, { id }, options);
+    // delete cache
+    await this.__deleteCache_key(id);
   }
 
   private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
