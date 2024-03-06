@@ -293,9 +293,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
   }
 
-  private async __deleteCache_notkey(where) {
+  private async __deleteCache_notkey(cacheKey) {
     const cache = this.__getCacheInstance();
-    await cache.del(where);
+    await cache.del(cacheKey);
   }
 
   private __getCacheInstance() {
