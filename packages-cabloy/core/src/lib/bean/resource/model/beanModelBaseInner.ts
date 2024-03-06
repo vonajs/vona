@@ -76,6 +76,7 @@ export class BeanModelBaseInner extends BeanBase {
   }
 
   async select(..._args) {
+    return [] as any[];
     // xx
   }
 
