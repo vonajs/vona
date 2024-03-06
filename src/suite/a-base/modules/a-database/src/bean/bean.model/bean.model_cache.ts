@@ -3,18 +3,18 @@ import { BeanModel } from '../virtual.model.js';
 import { IModelMethodOptionsCache } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
-  get __cacheName() {
+  private get __cacheName() {
     const cache = this.options.cache || { module: '', name: '' };
     const moduleName = cache.module || this.moduleBelong;
     const cacheName = cache.name || this.__beanOptions?.name;
     return { module: moduleName, name: `model:${cacheName}` };
   }
 
-  get __cacheKeyAux() {
+  private get __cacheKeyAux() {
     return this.options.cacheKeyAux;
   }
 
-  get __cacheNotKey() {
+  private get __cacheNotKey() {
     return this.options.cacheNotKey !== false;
   }
 
@@ -104,7 +104,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return res;
   }
 
-  async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sort: boolean,
     ids: number[],
     options?: IModelMethodOptionsCache,
@@ -128,7 +128,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return result;
   }
 
-  async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  private async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where: object,
     options?: IModelMethodOptionsCache,
@@ -155,7 +155,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.__get_notkey(table, where, options);
   }
 
-  async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  private async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where: { id: number },
     options?: IModelMethodOptionsCache,
@@ -174,7 +174,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return item;
   }
 
-  __checkCacheKeyValid(where) {
+  private __checkCacheKeyValid(where) {
     let keys = Object.keys(where);
     if (this.__cacheKeyAux) {
       keys = keys.filter(item => item !== this.__cacheKeyAux);
@@ -182,7 +182,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return keys.length === 1 && keys[0] === 'id';
   }
 
-  __checkCacheNotKeyDataValid(where, data) {
+  private __checkCacheNotKeyDataValid(where, data) {
     for (const key in where) {
       const a = where[key];
       const b = data[key];
@@ -199,18 +199,18 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return true;
   }
 
-  async __deleteCache_key(where) {
+  private async __deleteCache_key(where) {
     if (!where.id) return;
     const cache = this.__getCacheInstance();
     await cache.del(where.id);
   }
 
-  async __deleteCache_notkey(where) {
+  private async __deleteCache_notkey(where) {
     const cache = this.__getCacheInstance();
     await cache.del(where);
   }
 
-  __getCacheInstance() {
+  private __getCacheInstance() {
     return this.ctx.bean.summer.getCache(this.__cacheName);
   }
 
@@ -219,7 +219,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await this.ctx.bean.summer.clear(this.__cacheName);
   }
 
-  __cacheExists() {
+  private __cacheExists() {
     if (!this.__cacheName) return false;
     const cachaBase = this.ctx.bean.summer._findCacheBase({
       module: this.__cacheName.module,
