@@ -138,21 +138,21 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     const cacheKey = { where, options };
     const data = await cache.get(cacheKey, {
       fn_get: async () => {
-        const options = Object.assign({}, cacheKey.options, { columns: ['id', 'updatedAt'] });
+        const options = Object.assign({}, cacheKey.options, { columns: ['id'] });
         return await super.get(table, cacheKey.where, options);
       },
       ignoreNull: true,
     });
     if (!data) return data;
     // check if exists and valid
-    const data2 = await this.__get_key({ id: data.id }, ...args);
+    const data2 = await this.__get_key(table, { id: data.id }, options);
     if (data2 && this.__checkCacheNotKeyDataValid(where, data2)) {
-      return data2;
+      return data2 as TResult2;
     }
     // delete cache
-    await this.__deleteCache_notkey(where);
+    await this.__deleteCache_notkey(cacheKey);
     // get again
-    return await this.__get_notkey(where, ...args);
+    return await this.__get_notkey(table, where, options);
   }
 
   async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -162,7 +162,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();
-    const item: TResult2 = await cache.get(where.id, {
+    const item: TResult2 | undefined = await cache.get(where.id, {
       fn_get: async () => {
         // where: maybe contain aux key
         // disableInstance: use the model options, not use options by outer
