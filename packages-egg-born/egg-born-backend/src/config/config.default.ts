@@ -100,6 +100,7 @@ export default function (appInfo: CabloyAppInfo) {
   config.model = {
     disableDeleted: false,
     disableInstance: false,
+    disableUpdateTime: false,
   };
 
   // modules
