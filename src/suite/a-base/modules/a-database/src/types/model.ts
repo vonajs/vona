@@ -37,7 +37,7 @@ export interface IModelCountParams {
 }
 
 export type IModelMethodOptionsCache = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
-export type IModelUpdateOptionsCache = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
+export type IModelUpdateOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;

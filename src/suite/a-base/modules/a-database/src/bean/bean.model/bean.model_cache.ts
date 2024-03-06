@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptionsCache, IModelUpdateOptionsCache } from '../../types.js';
+import { IModelMethodOptionsCache, IModelUpdateOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -91,14 +91,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.__get_key(table, where, options);
   }
 
-  async update<TRecord2 extends {} = TRecord>(
-    data?: Partial<TRecord2>,
-    options?: IModelUpdateOptionsCache,
-  ): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
-    options?: IModelUpdateOptionsCache,
+    options?: IModelUpdateOptions,
   ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
