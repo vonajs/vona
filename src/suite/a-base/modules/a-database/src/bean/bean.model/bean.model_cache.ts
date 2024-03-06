@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptionsCache, IModelUpdateOptions } from '../../types.js';
+import { IModelMethodOptionsCache, IModelUpdateOptionsCache } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -91,11 +91,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.__get_key(table, where, options);
   }
 
-  async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2>,
+    options?: IModelUpdateOptionsCache,
+  ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
-    options?: IModelUpdateOptions,
+    options?: IModelUpdateOptionsCache,
   ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
@@ -114,17 +117,25 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (!this.__cacheExists()) {
       return await super.update(table, data, options);
     }
-    // check where
-    let id;
+    // check where and get id
     if (!options?.where) {
-      id = data.id;
+      if (data.id === undefined) {
+        throw new Error('id should be specified for update method');
+      }
     } else {
-      await this.get(table, options?.where, options);
+      const where = data.id !== undefined ? Object.assign({}, options?.where, { id: data.id }) : options?.where;
+      options = Object.assign({}, options, { where: undefined });
+      const item = await this.get(table, where, options);
+      if (!item) {
+        // donothing
+        return;
+      }
+      data = Object.assign({}, data, { id: Cast(item).id });
     }
-
-    const res = await super.update(where, ...args);
-    await this.__deleteCache_key(where);
-    return res;
+    // update by id: options without where
+    await super.update(table, data, options);
+    // delete cache
+    await this.__deleteCache_key(data.id);
   }
 
   async delete(where, ...args) {
@@ -231,10 +242,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return true;
   }
 
-  private async __deleteCache_key(where) {
-    if (!where.id) return;
+  private async __deleteCache_key(id) {
     const cache = this.__getCacheInstance();
-    await cache.del(where.id);
+    await cache.del(id);
   }
 
   private async __deleteCache_notkey(where) {
