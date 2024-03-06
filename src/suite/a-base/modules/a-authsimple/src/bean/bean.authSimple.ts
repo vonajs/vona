@@ -226,6 +226,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
   async passwordForgot({ email }: any) {
     // user by email
     const user = await this.ctx.bean.user.exists({ email });
+    if (!user) return this.getScope('a-base').error.UserDoesNotExist.throw();
     // link
     const token = this.ctx.bean.util.uuidv4();
     const link = this.ctx.bean.base.getAbsoluteUrl(`/#!/a/authsimple/passwordReset?token=${token}`);

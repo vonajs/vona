@@ -71,7 +71,7 @@ export class BeanModelBaseInner extends BeanBase {
   }
 
   async queryOne(..._args) {
-    return { id: 0 };
+    return {} as any;
     throw new Error('------------ model.queryOne');
     // xx
   }
