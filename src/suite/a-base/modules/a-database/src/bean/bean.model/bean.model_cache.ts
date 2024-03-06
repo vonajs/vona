@@ -23,16 +23,18 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelMethodOptions,
   ): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
-      return await this.__mget_select(ids, options);
+      return (await this.__mget_select(false, ids, options)) as TResult2[];
     }
     // cache
     const cache = this.__getCacheInstance();
     let list = await cache.mget(ids, {
       fn_mget: async ids => {
-        return await this.__mget_select(ids, { disableDeleted: true });
+        return await this.__mget_select(true, ids, { disableDeleted: true });
       },
     });
+    // filter disableDeleted
     list = list.filter(item => {
+      if (!item) return false;
       if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return false;
       return true;
     });
@@ -103,9 +105,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sort: boolean,
     ids: number[],
     options?: IModelMethodOptions,
-  ): Promise<TResult2[]> {
+  ): Promise<(TResult2 | undefined)[]> {
+    // select
     const items = await this.select<TRecord2, TResult2>(
       {
         where: {
@@ -114,12 +118,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       },
       options,
     );
-    items.sort((a, b) => {
-      const indexA = ids.indexOf(Cast(a).id);
-      const indexB = ids.indexOf(Cast(b).id);
-      return indexA - indexB;
-    });
-    return items;
+    // sort
+    if (!sort) return items;
+    const result: (TResult2 | undefined)[] = [];
+    for (const id of ids) {
+      // item maybe undefined
+      result.push(items.find(item => Cast(item).id === id));
+    }
+    return result;
   }
 
   async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
