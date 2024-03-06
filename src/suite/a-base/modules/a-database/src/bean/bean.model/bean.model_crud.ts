@@ -2,22 +2,22 @@ import { Cast } from '@cabloy/core';
 import { BeanModelKnex } from './bean.model_knex.js';
 import {
   IModelCountParams,
-  IModelGetOptions,
-  IModelMethodOptions,
+  IModelGetOptionsGeneral,
+  IModelMethodOptionsGeneral,
   IModelSelectParams,
-  IModelUpdateOptions,
+  IModelUpdateOptionsGeneral,
 } from '../../types.js';
 import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<TResult2[]>;
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     params?: IModelSelectParams,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<TResult2[]>;
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, params?, options?): Promise<TResult2[]> {
     if (typeof table !== 'string') {
@@ -69,12 +69,12 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
-    options?: IModelGetOptions,
+    options?: IModelGetOptionsGeneral,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
-    options?: IModelGetOptions,
+    options?: IModelGetOptionsGeneral,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
@@ -101,8 +101,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     return item as unknown as TResult2;
   }
 
-  async count(params?: IModelCountParams, options?: IModelMethodOptions): Promise<number>;
-  async count(table: string, params?: IModelCountParams, options?: IModelMethodOptions): Promise<number>;
+  async count(params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<number>;
+  async count(table: string, params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<number>;
   async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<number> {
     if (typeof table !== 'string') {
       table = undefined;
@@ -139,12 +139,12 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
 
   async insert<TRecord2 extends {} = TRecord>(
     data?: Partial<TRecord2> | Partial<TRecord2>[],
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<number[]>;
   async insert<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2> | Partial<TRecord2>[],
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<number[]>;
   async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<number[]> {
     if (typeof table !== 'string') {
@@ -175,11 +175,14 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     return await dialect.insert(builder);
   }
 
-  async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2>,
+    options?: IModelUpdateOptionsGeneral,
+  ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
-    options?: IModelUpdateOptions,
+    options?: IModelUpdateOptionsGeneral,
   ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
@@ -217,11 +220,14 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     await builder;
   }
 
-  async delete<TRecord2 extends {} = TRecord>(where?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<void>;
+  async delete<TRecord2 extends {} = TRecord>(
+    where?: Partial<TRecord2>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(
     table: string,
     where?: Partial<TRecord2>,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {

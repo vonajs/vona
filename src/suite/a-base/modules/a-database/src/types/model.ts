@@ -49,6 +49,6 @@ export interface IModelUpdateOptionsGeneral extends IModelMethodOptionsGeneral {
   disableUpdateTime?: boolean;
 }
 
-export interface IModelGetOptions extends IModelMethodOptionsGeneral {
+export interface IModelGetOptionsGeneral extends IModelMethodOptionsGeneral {
   columns?: any;
 }
