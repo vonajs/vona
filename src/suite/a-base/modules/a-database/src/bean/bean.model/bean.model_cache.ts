@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptions } from '../../types.js';
+import { IModelMethodOptionsCache } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   get __cacheName() {
@@ -20,7 +20,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     ids: number[],
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsCache,
   ): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
       return (await this.__mget_select(false, ids, options)) as TResult2[];
@@ -43,12 +43,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsCache,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsCache,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
@@ -107,7 +107,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sort: boolean,
     ids: number[],
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsCache,
   ): Promise<(TResult2 | undefined)[]> {
     // select
     const items = await this.select<TRecord2, TResult2>(
@@ -131,7 +131,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where: object,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsCache,
   ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();
@@ -156,7 +156,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where: { id: number },
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsCache,
   ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();

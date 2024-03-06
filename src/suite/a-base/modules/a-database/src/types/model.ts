@@ -36,6 +36,10 @@ export interface IModelCountParams {
   joins?: IModelSelectParamsJoin[];
 }
 
+export interface IModelMethodOptionsCache {
+  disableDeleted?: boolean;
+}
+
 export interface IModelMethodOptions {
   disableDeleted?: boolean;
   disableInstance?: boolean;
