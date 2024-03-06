@@ -1,6 +1,5 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   get __cacheName() {
@@ -18,22 +17,15 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.options.cacheNotKey !== false;
   }
 
-  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    ids: number[],
-    options?: IModelMethodOptions,
-  ): Promise<TResult2[]> {
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(ids: number[]): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
-      return await this.__mget_select(ids, options);
+      return await this.__mget_select(ids);
     }
     // cache
-    const keys = ids.map(id => {
-      return { id, options };
-    });
     const cache = this.__getCacheInstance();
-    return await cache.mget(keys, {
-      fn_mget: async keys => {
-        const ids = keys.map(key => key.id);
-        return await this.__mget_select(ids, options);
+    return await cache.mget(ids, {
+      fn_mget: async ids => {
+        return await this.__mget_select(ids);
       },
     });
   }
@@ -73,17 +65,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return res;
   }
 
-  async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    ids: number[],
-    options?: IModelMethodOptions,
-  ): Promise<TResult2[]> {
+  async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(ids: number[]): Promise<TResult2[]> {
     const items = await this.select<TRecord2, TResult2>(
       {
         where: {
           id: ids,
         },
       },
-      options,
+      { disableDeleted: true },
     );
     items.sort((a, b) => {
       const indexA = ids.indexOf(Cast(a).id);
