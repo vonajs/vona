@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptionsCache } from '../../types.js';
+import { IModelMethodOptionsCache, IModelUpdateOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -16,6 +16,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private get __cacheNotKey() {
     return this.options.cacheNotKey !== false;
+  }
+
+  async clearCache() {
+    if (!this.__cacheExists()) return;
+    await this.ctx.bean.summer.clear(this.__cacheName);
   }
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -86,10 +91,37 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.__get_key(table, where, options);
   }
 
-  async update(where, ...args) {
-    if (!this.__cacheExists()) {
-      return await super.update(where, ...args);
+  async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(
+    table: string,
+    data?: Partial<TRecord2>,
+    options?: IModelUpdateOptions,
+  ): Promise<void>;
+  async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = data;
+      data = table;
     }
+    // not use cache if specified table
+    if (table) {
+      return await super.update(table, data, options);
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // check if cache
+    if (!this.__cacheExists()) {
+      return await super.update(table, data, options);
+    }
+    // check where
+    let id;
+    if (!options?.where) {
+      id = data.id;
+    } else {
+      await this.get(table, options?.where, options);
+    }
+
     const res = await super.update(where, ...args);
     await this.__deleteCache_key(where);
     return res;
@@ -212,11 +244,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private __getCacheInstance() {
     return this.ctx.bean.summer.getCache(this.__cacheName);
-  }
-
-  async clearCache() {
-    if (!this.__cacheExists()) return;
-    await this.ctx.bean.summer.clear(this.__cacheName);
   }
 
   private __cacheExists() {
