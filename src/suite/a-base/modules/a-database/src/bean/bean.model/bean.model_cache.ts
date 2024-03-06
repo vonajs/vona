@@ -1,5 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
+import { IModelMethodOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   get __cacheName() {
@@ -17,15 +18,19 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.options.cacheNotKey !== false;
   }
 
-  async mget(ids) {
+  async mget(ids: number[], options?: IModelMethodOptions) {
     if (!this.__cacheExists()) {
-      return await this.__mget_select(ids);
+      return await this.__mget_select(ids, options);
     }
     // cache
+    const keys = ids.map(id => {
+      return { id, options };
+    });
     const cache = this.__getCacheInstance();
-    return await cache.mget(ids, {
+    return await cache.mget(keys, {
       fn_mget: async keys => {
-        return await this.__mget_select(keys);
+        const ids = keys.map(key => key.id);
+        return await this.__mget_select(ids, options);
       },
     });
   }
@@ -65,15 +70,18 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return res;
   }
 
-  async __mget_select(keys) {
-    const items = await this.select({
-      where: {
-        id: keys,
+  async __mget_select(ids: number[], options?: IModelMethodOptions) {
+    const items = await this.select(
+      {
+        where: {
+          id: ids,
+        },
       },
-    });
+      options,
+    );
     items.sort((a, b) => {
-      const indexA = keys.indexOf(Cast(a).id);
-      const indexB = keys.indexOf(Cast(b).id);
+      const indexA = ids.indexOf(Cast(a).id);
+      const indexB = ids.indexOf(Cast(b).id);
       return indexA - indexB;
     });
     return items;
@@ -148,7 +156,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   __getCacheInstance() {
-    return (<any>this.ctx.bean).summer.getCache(this.__cacheName);
+    return this.ctx.bean.summer.getCache(this.__cacheName);
   }
 
   async clearCache() {
