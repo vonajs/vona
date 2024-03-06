@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import { BeanModelUtils } from './bean.model_utils.js';
-import { IModelMethodOptions } from '../../types.js';
+import { IModelMethodOptionsGeneral } from '../../types.js';
 
 export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
   get schema(): Knex.SchemaBuilder {
@@ -19,11 +19,11 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
   }
 
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
