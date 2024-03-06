@@ -11,6 +11,7 @@ let __columns: Record<string, ITableColumns> = {};
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async prepareData(item) {
+    if (!item) return {};
     // columns
     const columns = await this.columns();
     // data
