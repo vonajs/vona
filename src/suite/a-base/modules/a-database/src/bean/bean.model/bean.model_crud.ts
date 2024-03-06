@@ -1,6 +1,12 @@
 import { Cast } from '@cabloy/core';
 import { BeanModelKnex } from './bean.model_knex.js';
-import { IModelCountParams, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
+import {
+  IModelCountParams,
+  IModelGetOptions,
+  IModelMethodOptions,
+  IModelSelectParams,
+  IModelUpdateOptions,
+} from '../../types.js';
 import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
@@ -63,12 +69,12 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
-    options?: IModelMethodOptions,
+    options?: IModelGetOptions,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
-    options?: IModelMethodOptions,
+    options?: IModelGetOptions,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
@@ -83,8 +89,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     // table
     table = table || this.table;
     if (!table) throw new Error('should specify the table name');
+    // params
+    const params: IModelSelectParams = { where, limit: 1 };
+    if (options?.columns) {
+      params.columns = options?.columns;
+    }
     // select
-    const list = await this.select(table, { where, limit: 1 }, options);
+    const list = await this.select(table, params, options);
     const item = list[0];
     if (!item) return undefined;
     return item as unknown as TResult2;

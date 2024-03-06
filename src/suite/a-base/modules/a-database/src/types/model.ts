@@ -49,3 +49,7 @@ export interface IModelUpdateOptions extends IModelMethodOptions {
   where?: any;
   disableUpdateTime?: boolean;
 }
+
+export interface IModelGetOptions extends IModelMethodOptions {
+  columns?: any;
+}
