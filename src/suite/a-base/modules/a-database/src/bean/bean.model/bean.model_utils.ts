@@ -83,7 +83,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   prepareWhere(
     builder: Knex.QueryBuilder,
     table: Knex.TableDescriptor | Knex.AliasDict,
-    where,
+    where?,
     options?: IModelMethodOptions,
   ) {
     // table

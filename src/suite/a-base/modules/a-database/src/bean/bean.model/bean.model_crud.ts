@@ -25,7 +25,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     // params
     params = params || {};
     // builder
-    const builder = this.builder<TRecord2, TResult2[]>(table);
+    const builder = this.builder<TRecord2, TResult2>(table);
     // columns
     builder.select(params.columns);
     // joins
