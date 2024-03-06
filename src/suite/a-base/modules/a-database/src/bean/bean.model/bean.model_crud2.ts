@@ -1,10 +1,10 @@
-import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
+import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
   async create<TRecord2 extends {} = TRecord>(
     data?: Partial<TRecord2>,
-    options?: IModelMethodOptionsGeneral,
+    options?: IModelMethodOptions,
   ): Promise<number> {
     // table
     const table = this.table;
@@ -16,10 +16,7 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return res[0];
   }
 
-  async write<TRecord2 extends {} = TRecord>(
-    data?: Partial<TRecord2>,
-    options?: IModelUpdateOptionsGeneral,
-  ): Promise<void> {
+  async write<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void> {
     // table
     const table = this.table;
     if (!table) throw new Error('should specify the table name');
