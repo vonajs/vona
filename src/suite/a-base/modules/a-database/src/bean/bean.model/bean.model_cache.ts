@@ -34,13 +34,17 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | null>;
+  ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | null>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2 | null> {
+  ): Promise<TResult2 | undefined>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table?,
+    where?,
+    options?,
+  ): Promise<TResult2 | undefined> {
     if (typeof table !== 'string') {
       table = undefined;
       options = where;
@@ -132,7 +136,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table: string,
     where: { id: number },
     options?: IModelMethodOptions,
-  ): Promise<TResult2 | null> {
+  ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();
     const item: TResult2 = await cache.get(where.id, {
@@ -143,7 +147,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       },
     });
     if (!item) return item;
-    if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return null;
+    if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return undefined;
     return item;
   }
 
