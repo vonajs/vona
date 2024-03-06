@@ -111,7 +111,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return items;
   }
 
-  async __get_notkey(where, ...args) {
+  async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    where: object,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2 | undefined> {
     // cache
     const cache = this.__getCacheInstance();
     const data = await cache.get(where, {
