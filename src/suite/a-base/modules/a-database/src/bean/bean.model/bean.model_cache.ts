@@ -181,12 +181,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async clearCache() {
     if (!this.__cacheExists()) return;
-    await (<any>this.ctx.bean).summer.clear(this.__cacheName);
+    await this.ctx.bean.summer.clear(this.__cacheName);
   }
 
   __cacheExists() {
     if (!this.__cacheName) return false;
-    const cachaBase = (<any>this.ctx.bean).summer._findCacheBase({
+    const cachaBase = this.ctx.bean.summer._findCacheBase({
       module: this.__cacheName.module,
       name: this.__cacheName.name,
     });
