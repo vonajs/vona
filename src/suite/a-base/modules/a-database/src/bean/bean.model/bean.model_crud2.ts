@@ -1,11 +1,10 @@
-import { Knex } from 'knex';
 import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
   async create<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<number>;
   async create<TRecord2 extends {} = TRecord>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     data?: Partial<TRecord2>,
     options?: IModelMethodOptions,
   ): Promise<number>;
@@ -27,7 +26,7 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
 
   async write<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
   async write<TRecord2 extends {} = TRecord>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     data?: Partial<TRecord2>,
     options?: IModelUpdateOptions,
   ): Promise<void>;

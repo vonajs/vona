@@ -80,12 +80,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return checkWhere(where);
   }
 
-  prepareWhere(
-    builder: Knex.QueryBuilder,
-    table: Knex.TableDescriptor | Knex.AliasDict,
-    where?,
-    options?: IModelMethodOptions,
-  ) {
+  prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptions) {
     // table
     table = table || this.table;
     // disableInstance/disableDeleted
@@ -101,7 +96,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     buildWhere(builder, wheres);
   }
 
-  protected _prepareWhereByOptions(table: Knex.TableDescriptor | Knex.AliasDict, where, options?: IModelMethodOptions) {
+  protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptions) {
     // disableInstance: should check if specified
     const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
     if (where[columnNameInstance] === undefined && where.iid === undefined) {

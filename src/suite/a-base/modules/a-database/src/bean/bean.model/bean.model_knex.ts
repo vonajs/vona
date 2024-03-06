@@ -8,7 +8,7 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
   }
 
   builder<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table?: Knex.TableDescriptor | Knex.AliasDict,
+    table?: Knex.TableDescriptor,
   ): Knex.QueryBuilder<TRecord2, TResult2[]> {
     // table
     table = table || this.table;
@@ -22,7 +22,7 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     options?: IModelMethodOptions,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     options?: IModelMethodOptions,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(

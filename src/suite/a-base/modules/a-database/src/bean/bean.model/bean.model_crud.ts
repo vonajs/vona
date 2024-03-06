@@ -9,7 +9,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     options?: IModelMethodOptions,
   ): Promise<TResult2[]>;
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     params?: IModelSelectParams,
     options?: IModelMethodOptions,
   ): Promise<TResult2[]>;
@@ -62,12 +62,12 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    where?: any,
+    where?: object,
     options?: IModelMethodOptions,
   ): Promise<TResult2>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
-    where?: any,
+    table: string,
+    where?: object,
     options?: IModelMethodOptions,
   ): Promise<TResult2>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
@@ -85,11 +85,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async count(params?: IModelCountParams, options?: IModelMethodOptions): Promise<number>;
-  async count(
-    table: Knex.TableDescriptor | Knex.AliasDict,
-    params?: IModelCountParams,
-    options?: IModelMethodOptions,
-  ): Promise<number>;
+  async count(table: string, params?: IModelCountParams, options?: IModelMethodOptions): Promise<number>;
   async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<number> {
     if (typeof table !== 'string') {
       table = undefined;
@@ -129,7 +125,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     options?: IModelMethodOptions,
   ): Promise<number[]>;
   async insert<TRecord2 extends {} = TRecord>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     data?: Partial<TRecord2> | Partial<TRecord2>[],
     options?: IModelMethodOptions,
   ): Promise<number[]>;
@@ -164,7 +160,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
 
   async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     data?: Partial<TRecord2>,
     options?: IModelUpdateOptions,
   ): Promise<void>;
@@ -206,7 +202,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
 
   async delete<TRecord2 extends {} = TRecord>(where?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(
-    table: Knex.TableDescriptor | Knex.AliasDict,
+    table: string,
     where?: Partial<TRecord2>,
     options?: IModelMethodOptions,
   ): Promise<void>;

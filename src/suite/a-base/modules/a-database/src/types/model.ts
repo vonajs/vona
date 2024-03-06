@@ -13,7 +13,7 @@ export type IModelSelectParamsJoinType =
 export type IModelSelectParamsJoinOnMap = { [key: string]: string | number | boolean | Knex.Raw<any> };
 export type IModelSelectParamsJoin = [
   IModelSelectParamsJoinType,
-  Knex.TableDescriptor | Knex.AliasDict,
+  Knex.TableDescriptor,
   IModelSelectParamsJoinOnMap | Knex.JoinCallback,
 ];
 
