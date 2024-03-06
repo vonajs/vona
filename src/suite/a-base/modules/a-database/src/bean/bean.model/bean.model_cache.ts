@@ -1,5 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
+import { IModelMethodOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   get __cacheName() {
@@ -30,21 +31,45 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     });
   }
 
-  async get_(where, ...args) {
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    where?: object,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    where?: object,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = where;
+      where = table;
+    }
+    // not use cache if specified table
+    if (table) {
+      return await super.get(table, where, options);
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // check if cache
     if (!this.__cacheExists()) {
-      return await super.get(where, ...args);
+      return await super.get(table, where, options);
     }
     if (where.id && typeof where.id === 'object') {
       // for example: id: { op: '<', val: flowNodeId },
-      return await super.get(where, ...args);
+      return await super.get(table, where, options);
     }
     if (!this.__checkCacheKeyValid(where)) {
+      // not key
       if (this.__cacheNotKey) {
-        return await this.__get_notkey(where, ...args);
+        return await this.__get_notkey(table, where, options);
       }
-      return await super.get(where, ...args);
+      return await super.get(table, where, options);
     }
-    return await this.__get_key(where, ...args);
+    // key
+    return await this.__get_key(table, where, options);
   }
 
   async update(where, ...args) {
