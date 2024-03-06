@@ -55,42 +55,33 @@ export class BeanModelBaseInner extends BeanBase {
     // xx
   }
 
-  async create(data, ...args) {
-    const data2 = await this.prepareData(data);
-    const res = await (<any>this).insert(data2, ...args);
-    return res.insertId;
+  async create(_data, ..._args) {
+    return 0;
+    // xx
   }
 
-  async write(data, ...args) {
-    const data2 = await this.prepareData(data);
-    return await (<any>this).update(data2, ...args);
+  async write(_data, ..._args) {
+    // xx
   }
 
-  _rowCheck(row) {
-    if ((!this.table || !this.disableInstance) && row.iid === undefined) {
-      row.iid = this.ctx.instance.id;
-    }
-    if (this.table && !this.disableDeleted && row.deleted === undefined) {
-      row.deleted = 0;
-    }
+  private _rowCheck(_row) {
+    // xx
   }
 
-  _insertRowsCheck(rows) {
-    if (!Array.isArray(rows)) return this._rowCheck(rows);
-    for (const row of rows) {
-      this._rowCheck(row);
-    }
+  private _insertRowsCheck(_rows) {
+    // xx
   }
 
   // ///////////
 
-  async query(...args) {
+  async query(..._args) {
     throw new Error('------------ model.query');
-    return await this.ctx.model.query(...args);
+    // xx
   }
 
-  async queryOne(...args) {
-    return await this.ctx.model.queryOne(...args);
+  async queryOne(..._args) {
+    throw new Error('------------ model.queryOne');
+    // xx
   }
 
   async select(...args) {
