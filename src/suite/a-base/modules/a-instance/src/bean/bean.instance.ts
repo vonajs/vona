@@ -38,6 +38,9 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       _options.limit = page.size;
       _options.offset = page.index;
     }
+    //
+    await this.modelInstance.get();
+    //
     return await this.modelInstance.select(_options);
   }
 

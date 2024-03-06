@@ -18,7 +18,10 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.options.cacheNotKey !== false;
   }
 
-  async mget(ids: number[], options?: IModelMethodOptions) {
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    ids: number[],
+    options?: IModelMethodOptions,
+  ): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
       return await this.__mget_select(ids, options);
     }
@@ -35,7 +38,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     });
   }
 
-  async get(where, ...args) {
+  async get_(where, ...args) {
     if (!this.__cacheExists()) {
       return await super.get(where, ...args);
     }
@@ -70,8 +73,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return res;
   }
 
-  async __mget_select(ids: number[], options?: IModelMethodOptions) {
-    const items = await this.select(
+  async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    ids: number[],
+    options?: IModelMethodOptions,
+  ): Promise<TResult2[]> {
+    const items = await this.select<TRecord2, TResult2>(
       {
         where: {
           id: ids,
