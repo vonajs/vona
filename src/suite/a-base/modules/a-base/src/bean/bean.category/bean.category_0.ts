@@ -144,7 +144,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
       this.scope.error.CannotDeleteIfHasAtoms.throw();
     }
     // check children
-    const children = await this.children({ categoryId });
+    const children = (await this.children({ categoryId })) as any[];
     if (children.length > 0) {
       this.scope.error.CannotDeleteIfHasChildren.throw();
     }
@@ -179,7 +179,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
   // for donothing on categoryId === 0, so need not input param:atomClass
   async adjustCatalog(categoryId) {
     if (categoryId === 0) return;
-    const children = await this.children({ categoryId });
+    const children = (await this.children({ categoryId })) as any[];
     await this.model.update({
       id: categoryId,
       categoryCatalog: children.length === 0 ? 0 : 1,
@@ -195,7 +195,14 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
   }
 
   async _treeChildren({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale }: any) {
-    const list = await this.children({ atomClass, language, categoryId, categoryHidden, categoryFlag, setLocale });
+    const list = (await this.children({
+      atomClass,
+      language,
+      categoryId,
+      categoryHidden,
+      categoryFlag,
+      setLocale,
+    })) as any[];
     for (const item of list) {
       if (item.categoryCatalog) {
         // only categoryId

@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
@@ -71,8 +72,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       },
     });
     items.sort((a, b) => {
-      const indexA = keys.indexOf(a.id);
-      const indexB = keys.indexOf(b.id);
+      const indexA = keys.indexOf(Cast(a).id);
+      const indexB = keys.indexOf(Cast(b).id);
       return indexA - indexB;
     });
     return items;

@@ -71,6 +71,7 @@ export class BeanModelBaseInner extends BeanBase {
   }
 
   async queryOne(..._args) {
+    return { id: 0 };
     throw new Error('------------ model.queryOne');
     // xx
   }
@@ -81,6 +82,7 @@ export class BeanModelBaseInner extends BeanBase {
   }
 
   async count(..._args) {
+    return 0;
     // xx
   }
 
@@ -89,6 +91,7 @@ export class BeanModelBaseInner extends BeanBase {
   }
 
   async insert(..._args) {
+    return { insertId: 0 };
     // xx
   }
 
