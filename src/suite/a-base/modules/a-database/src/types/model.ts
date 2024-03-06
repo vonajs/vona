@@ -43,4 +43,5 @@ export interface IModelMethodOptions {
 
 export interface IModelUpdateOptions extends IModelMethodOptions {
   where?: any;
+  disableUpdateTime?: boolean;
 }
