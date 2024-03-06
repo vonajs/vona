@@ -34,13 +34,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2>;
+  ): Promise<TResult2 | null>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
+  ): Promise<TResult2 | null>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2 | null> {
     if (typeof table !== 'string') {
       table = undefined;
       options = where;
@@ -128,15 +128,23 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return await this.__get_notkey(where, ...args);
   }
 
-  async __get_key(where, ...args) {
+  async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    where: { id: number },
+    options?: IModelMethodOptions,
+  ): Promise<TResult2 | null> {
     // cache
     const cache = this.__getCacheInstance();
-    return await cache.get(where.id, {
+    const item: TResult2 = await cache.get(where.id, {
       fn_get: async () => {
         // where: maybe contain aux key
-        return await super.get(where, ...args);
+        // disableInstance: use the model options, not use options by outer
+        return await super.get(table, where, { disableDeleted: true });
       },
     });
+    if (!item) return item;
+    if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return null;
+    return item;
   }
 
   __checkCacheKeyValid(where) {

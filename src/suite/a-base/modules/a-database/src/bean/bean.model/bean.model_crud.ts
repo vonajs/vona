@@ -64,13 +64,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2>;
+  ): Promise<TResult2 | null>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
     options?: IModelMethodOptions,
-  ): Promise<TResult2>;
-  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2> {
+  ): Promise<TResult2 | null>;
+  async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, where?, options?): Promise<TResult2 | null> {
     if (typeof table !== 'string') {
       table = undefined;
       options = where;
@@ -81,7 +81,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     if (!table) throw new Error('should specify the table name');
     // select
     const list = await this.select(table, { where, limit: 1 }, options);
-    return list[0] as unknown as TResult2;
+    const item = list[0];
+    if (!item) return null;
+    return item as unknown as TResult2;
   }
 
   async count(params?: IModelCountParams, options?: IModelMethodOptions): Promise<number>;
