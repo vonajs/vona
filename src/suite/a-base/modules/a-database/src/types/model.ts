@@ -36,19 +36,19 @@ export interface IModelCountParams {
   joins?: IModelSelectParamsJoin[];
 }
 
-export type IModelMethodOptionsCache = Omit<IModelMethodOptions, 'disableInstance'>;
-export type IModelUpdateOptionsCache = Omit<IModelUpdateOptions, 'disableInstance'>;
+export type IModelMethodOptionsCache = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
+export type IModelUpdateOptionsCache = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
 
-export interface IModelMethodOptions {
+export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;
   disableInstance?: boolean;
 }
 
-export interface IModelUpdateOptions extends IModelMethodOptions {
+export interface IModelUpdateOptions extends IModelMethodOptionsGeneral {
   where?: any;
   disableUpdateTime?: boolean;
 }
 
-export interface IModelGetOptions extends IModelMethodOptions {
+export interface IModelGetOptions extends IModelMethodOptionsGeneral {
   columns?: any;
 }

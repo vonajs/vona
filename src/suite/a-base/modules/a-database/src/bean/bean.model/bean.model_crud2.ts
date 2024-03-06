@@ -1,12 +1,15 @@
-import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
+import { IModelMethodOptionsGeneral, IModelUpdateOptions } from '../../types.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
-  async create<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<number>;
+  async create<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<number>;
   async create<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
-    options?: IModelMethodOptions,
+    options?: IModelMethodOptionsGeneral,
   ): Promise<number>;
   async create(table?, data?, options?): Promise<number> {
     if (typeof table !== 'string') {

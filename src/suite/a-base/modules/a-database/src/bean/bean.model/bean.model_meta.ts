@@ -1,6 +1,6 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
+import { IModelMethodOptionsGeneral, IModelUpdateOptions } from '../../types.js';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {
@@ -42,14 +42,14 @@ export class BeanModelMeta extends BeanBase {
       : this.options?.disableUpdateTime;
   }
 
-  protected _checkDisableInstanceByOptions(options?: IModelMethodOptions) {
+  protected _checkDisableInstanceByOptions(options?: IModelMethodOptionsGeneral) {
     if (options?.disableInstance === true || options?.disableInstance === false) {
       return options?.disableInstance;
     }
     return this.disableInstance;
   }
 
-  protected _checkDisableDeletedByOptions(options?: IModelMethodOptions) {
+  protected _checkDisableDeletedByOptions(options?: IModelMethodOptionsGeneral) {
     if (options?.disableDeleted === true || options?.disableDeleted === false) {
       return options?.disableDeleted;
     }

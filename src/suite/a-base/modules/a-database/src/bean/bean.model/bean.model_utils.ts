@@ -5,7 +5,7 @@ import { Knex } from 'knex';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
-import { IModelMethodOptions } from '../../types.js';
+import { IModelMethodOptionsGeneral } from '../../types.js';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -80,7 +80,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return checkWhere(where);
   }
 
-  prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptions) {
+  prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptionsGeneral) {
     // table
     table = table || this.table;
     // disableInstance/disableDeleted
@@ -96,7 +96,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     buildWhere(builder, wheres);
   }
 
-  protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptions) {
+  protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptionsGeneral) {
     // disableInstance: should check if specified
     const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
     if (where[columnNameInstance] === undefined && where.iid === undefined) {
@@ -113,7 +113,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
   }
 
-  protected _prepareInsertDataByOptions(data, options?: IModelMethodOptions) {
+  protected _prepareInsertDataByOptions(data, options?: IModelMethodOptionsGeneral) {
     // disableInstance: should check if specified
     const columnNameInstance = 'iid';
     if (data[columnNameInstance] === undefined) {
