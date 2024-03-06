@@ -1,4 +1,3 @@
-import is from 'is-type-of';
 import { BeanBase } from '../../beanBase.js';
 import { IModelOptions } from './type.js';
 import { appResource } from '../../../core/resource.js';
@@ -64,14 +63,6 @@ export class BeanModelBaseInner extends BeanBase {
     // xx
   }
 
-  private _rowCheck(_row) {
-    // xx
-  }
-
-  private _insertRowsCheck(_rows) {
-    // xx
-  }
-
   // ///////////
 
   async query(..._args) {
@@ -84,96 +75,27 @@ export class BeanModelBaseInner extends BeanBase {
     // xx
   }
 
-  async select(...args) {
-    const _args = [] as any;
-    if (this.table) _args.push(this.table);
-    for (const arg of args) _args.push(arg);
-    _args[1] = _args[1] || {};
-    _args[1].where = _args[1].where || {};
-    this._rowCheck(_args[1].where);
-    return await this.ctx.model.select(..._args);
+  async select(..._args) {
+    // xx
   }
 
-  async count(...args) {
-    const _args = [] as any;
-    if (this.table) _args.push(this.table);
-    for (const arg of args) _args.push(arg);
-    _args[1] = _args[1] || {};
-    this._rowCheck(_args[1]);
-    return await this.ctx.model.count(..._args);
+  async count(..._args) {
+    // xx
   }
 
-  async get(...args) {
-    // console.log(this.constructor.name, arguments);
-    const _args = [] as any;
-    if (this.table) _args.push(this.table);
-    for (const arg of args) _args.push(arg);
-    _args[1] = _args[1] || {};
-    // if (_args[1].id) {
-    //   return this.ctx.db[method].apply(this.ctx.db, _args);
-    // }
-    this._rowCheck(_args[1]);
-    return await this.ctx.model.get(..._args);
+  async get(..._args) {
+    // xx
   }
 
-  async insert(...args) {
-    if (args.length === 0) {
-      args.push({});
-    }
-    if (this.table) {
-      args.unshift(this.table);
-    }
-    this._insertRowsCheck(args[1]);
-    return await this.ctx.model.insert(...args);
+  async insert(..._args) {
+    // xx
   }
 
-  async update(...args) {
-    const _args = [] as any;
-    if (this.table) _args.push(this.table);
-    for (const arg of args) _args.push(arg);
-    if (_args[2] && _args[2].where) {
-      this._rowCheck(_args[2].where);
-    }
-    return await this.ctx.model.update(..._args);
+  async update(..._args) {
+    // xx
   }
 
-  async delete(...args) {
-    const _args = [] as any;
-    if (this.table) _args.push(this.table);
-    for (const arg of args) _args.push(arg);
-    _args[1] = _args[1] || {};
-    this._rowCheck(_args[1]);
-    if (this.table && !this.disableDeleted) {
-      const sql = this.ctx.model.format('UPDATE ?? SET deleted=1 ', [_args[0]]) + this.ctx.model._where(_args[1]);
-      return this.ctx.model.query(sql);
-    }
-    return await this.ctx.model.delete(..._args);
+  async delete(..._args) {
+    // xx
   }
 }
-
-[
-  'literals', //
-  'escape',
-  'escapeId',
-  'format',
-  '_formatValue',
-  '_formatWhere',
-  '_where',
-  '_orders',
-  'raw',
-  '_query',
-  '_selectColumns',
-  '_limit',
-].forEach(method => {
-  Object.defineProperty(BeanModelBaseInner.prototype, method, {
-    get() {
-      if (is.function(this.ctx.db[method])) {
-        return function (this: any, ...args) {
-          return this.ctx.db[method](...args);
-        };
-      }
-      // property
-      return this.ctx.db[method];
-    },
-  });
-});
