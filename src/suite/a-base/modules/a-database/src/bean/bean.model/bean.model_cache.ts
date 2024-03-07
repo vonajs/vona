@@ -66,7 +66,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       where = table;
     }
     // not use cache if specified table
-    if (table) {
+    if (table && table !== this.table) {
       return await super.get(table, where, options);
     }
     // table
@@ -104,7 +104,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       data = table;
     }
     // not use cache if specified table
-    if (table) {
+    if (table && table !== this.table) {
       return await super.update(table, data, options);
     }
     // table
@@ -155,7 +155,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       where = table;
     }
     // not use cache if specified table
-    if (table) {
+    if (table && table !== this.table) {
       return await super.delete(table, where, options);
     }
     // table
