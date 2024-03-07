@@ -9,8 +9,6 @@ export class VersionUpdate extends BeanBase {
   }
 
   async run_atom() {
-    let sql;
-
     // aAtom: atomEnabled->atomStage
     await this.bean.model.schema.alterTable('aAtom', function (table) {
       table.renameColumn('atomEnabled', 'atomStage');
@@ -97,7 +95,6 @@ export class VersionUpdate extends BeanBase {
   }
 
   async run_categorytag() {
-    let sql;
     // aAtom: add field atomLanguage\atomCategoryId
     await this.bean.model.schema.alterTable('aAtom', function (table) {
       table.string('atomLanguage', 50);
@@ -137,8 +134,6 @@ export class VersionUpdate extends BeanBase {
   }
 
   async run_resource() {
-    let sql;
-
     // create table: aResource
     await this.bean.model.schema.createTable('aResource', function (table) {
       table.basicFields();
@@ -185,16 +180,16 @@ export class VersionUpdate extends BeanBase {
 
   async run_function() {
     // drop table: aFunction
-    await this.ctx.model.query('drop table aFunction');
+    await this.bean.model.schema.dropTable('aFunction');
     // drop table: aFunctionLocale
-    await this.ctx.model.query('drop table aFunctionLocale');
+    await this.bean.model.schema.dropTable('aFunctionLocale');
     // drop table: aFunctionScene
-    await this.ctx.model.query('drop table aFunctionScene');
+    await this.bean.model.schema.dropTable('aFunctionScene');
     // drop table: aFunctionStar
-    await this.ctx.model.query('drop table aFunctionStar');
+    await this.bean.model.schema.dropTable('aFunctionStar');
     // drop table: aRoleFunction
-    await this.ctx.model.query('drop table aRoleFunction');
+    await this.bean.model.schema.dropTable('aRoleFunction');
     // drop view: aViewUserRightFunction
-    await this.ctx.model.query('drop view aViewUserRightFunction');
+    await this.bean.model.schema.dropView('aViewUserRightFunction');
   }
 }
