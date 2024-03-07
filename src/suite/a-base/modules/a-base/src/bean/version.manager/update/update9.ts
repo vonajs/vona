@@ -157,19 +157,12 @@ export class VersionUpdate extends BeanBase {
       table.string('atomNameLocale', 255);
     });
 
-    sql = `
-          CREATE TABLE aResourceRole (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            roleId int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    // create table: aResourceRole
+    await this.bean.model.schema.createTable('aResourceRole', function (table) {
+      table.basicFields();
+      table.int0('atomId');
+      table.int0('roleId');
+    });
 
     // aViewUserRightResource
     sql = `
