@@ -71,7 +71,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
       return await super.get(table, where, options);

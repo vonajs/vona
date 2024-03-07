@@ -1,10 +1,15 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
+import { __ThisModule__ } from '../../resource/this.js';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {
     return Cast<BeanModel>(this);
+  }
+
+  public get scopeModuleADatabase() {
+    return this.bean.scope(__ThisModule__);
   }
 
   protected get __beanOptions() {
