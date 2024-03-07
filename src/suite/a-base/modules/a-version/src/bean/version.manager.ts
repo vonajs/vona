@@ -16,6 +16,14 @@ export class VersionManager extends BeanBase {
         table.integer('version');
       });
     }
+
+    if (options.version === 3) {
+      await this.bean.model.schema.createTable('aViewRecord', function (table) {
+        table.basicFields({ deleted: true, iid: false });
+        table.string('viewName', 255);
+        table.text('viewSql');
+      });
+    }
   }
 
   async init(options) {
