@@ -34,7 +34,6 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // aViewUserRightAtomClassUser
-    await this.bean.model.dropView('aViewUserRightAtom');
     await this.bean.model.schema.dropView('aViewUserRightAtomClassUser');
     await this.bean.model.schema.createView('aViewUserRightAtomClassUser', view => {
       view.as(
@@ -55,7 +54,6 @@ export class VersionUpdate extends BeanBase {
           .innerJoin('aViewUserRoleRef as c', { 'b.roleIdScope': 'c.roleIdParent' }),
       );
     });
-    await this.bean.model.createView('aViewUserRightAtom');
     // aViewRoleRightAtomClassUser
     await this.bean.model.schema.dropView('aViewRoleRightAtomClassUser');
     await this.bean.model.schema.createView('aViewRoleRightAtomClassUser', view => {
