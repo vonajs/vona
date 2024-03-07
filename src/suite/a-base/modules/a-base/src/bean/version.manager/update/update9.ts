@@ -140,37 +140,22 @@ export class VersionUpdate extends BeanBase {
     let sql;
 
     // create table: aResource
-    sql = `
-          CREATE TABLE aResource (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            description varchar(255) DEFAULT NULL,
-            resourceSorting int(11) DEFAULT '0',
-            resourceType varchar(50) DEFAULT NULL,
-            resourceConfig JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aResource', function (table) {
+      table.basicFields();
+      table.int0('atomId');
+      table.string('description', 255);
+      table.int0('resourceSorting');
+      table.string('resourceType', 50);
+      table.json('resourceConfig');
+    });
 
-    sql = `
-          CREATE TABLE aResourceLocale (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            locale varchar(50) DEFAULT NULL,
-            atomNameLocale varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    // create table: aResourceLocale
+    await this.bean.model.schema.createTable('aResourceLocale', function (table) {
+      table.basicFields();
+      table.int0('atomId');
+      table.string('locale', 50);
+      table.string('atomNameLocale', 255);
+    });
 
     sql = `
           CREATE TABLE aResourceRole (
