@@ -8,6 +8,10 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     return this.ctx.db.schema;
   }
 
+  get modelViewRecord() {
+    return this.getScope('a-version').model.viewRecord;
+  }
+
   builder<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?: Knex.TableDescriptor,
   ): Knex.QueryBuilder<TRecord2, TResult2[]> {
@@ -54,7 +58,15 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     });
     const sql = Cast(_view).toSQL();
     // record view
-    const modelViewRecord = this.getScope('a-version').model.viewRecord;
-    await modelViewRecord.insert({ viewName, viewSql: sql[0].sql });
+    await this.modelViewRecord.insert({ viewName, viewSql: sql[0].sql });
+  }
+
+  async dropView(viewName: string, removeRecord?: boolean) {
+    // drop view
+    await this.schema.dropView(viewName);
+    // remove record
+    if (removeRecord) {
+      await this.modelViewRecord.delete({ viewName });
+    }
   }
 }
