@@ -89,16 +89,11 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aAtomAction: add field bulk
-    sql = `
-        ALTER TABLE aAtomAction
-          ADD COLUMN bulk int(11) DEFAULT '0'
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtomAction', function (table) {
+      table.int0('bulk');
+    });
     //   update action:create as bulk
-    sql = `
-        update aAtomAction set bulk=1 where code=1
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.builder('aAtomAction').update({ bulk: 1 }).where('code', 1);
   }
 
   async run_categorytag() {
