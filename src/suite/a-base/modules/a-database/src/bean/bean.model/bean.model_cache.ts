@@ -27,15 +27,34 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     ids: number[],
     options?: IModelGetOptions,
-  ): Promise<TResult2[]> {
+  ): Promise<TResult2[]>;
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    ids: number[],
+    options?: IModelGetOptions,
+  ): Promise<TResult2[]>;
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table, ids, options?): Promise<TResult2[]> {
+    if (typeof table !== 'string') {
+      options = ids;
+      ids = table;
+      table = undefined;
+    }
+    // not use cache if specified table
+    if (table && table !== this.table) {
+      return (await this.__mget_select(table, ids, options)) as TResult2[];
+    }
+    // table
+    table = table || this.table;
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    // check if cache
     if (!this.__cacheExists()) {
-      return (await this.__mget_select(ids, options)) as TResult2[];
+      return (await this.__mget_select(table, ids, options)) as TResult2[];
     }
     // cache
     const cache = this.__getCacheInstance();
     let list = await cache.mget(ids, {
       fn_mget: async ids => {
-        return await this.__mget_select(ids, { disableDeleted: true });
+        return await this.__mget_select(table, ids, { disableDeleted: true });
       },
     });
     // filter disableDeleted
@@ -224,6 +243,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
     ids: number[],
     options?: IModelGetOptions,
   ): Promise<(TResult2 | undefined)[]> {
@@ -237,7 +257,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       params.columns = options?.columns;
     }
     // select
-    const items = await this.select<TRecord2, TResult2>(params, options);
+    const items = await this.select<TRecord2, TResult2>(table, params, options);
     // sort
     const result: (TResult2 | undefined)[] = [];
     for (const id of ids) {
