@@ -59,10 +59,10 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return columns;
   }
 
-  columnsClear(tableName) {
-    tableName = tableName || this.table;
-    const exists = __columns[tableName];
-    delete __columns[tableName];
+  columnsClear(table) {
+    table = table || this.table;
+    const exists = __columns[table];
+    delete __columns[table];
     return exists;
   }
 
