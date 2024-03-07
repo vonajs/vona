@@ -47,6 +47,45 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.__filterMGetColumns(list, options);
   }
 
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    params?: IModelSelectParams,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2[]>;
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    params?: IModelSelectParams,
+    options?: IModelMethodOptions,
+  ): Promise<TResult2[]>;
+  async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, params?, options?): Promise<TResult2[]> {
+    if (typeof table !== 'string') {
+      options = params;
+      params = table;
+      table = undefined;
+    }
+    // not use cache if specified table
+    if (table && table !== this.table) {
+      return await super.select(table, params, options);
+    }
+    // table
+    table = table || this.table;
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    // check if cache
+    if (!this.__cacheExists()) {
+      return await super.select(table, params, options);
+    }
+    // 1: select id
+    const params2: IModelSelectParams = Object.assign({}, params, { columns: ['id'] });
+    const items = await super.select<TRecord2>(table, params2, options);
+    if (items.length === 0) {
+      // donothing
+      return [] as TResult2[];
+    }
+    // 2: mget
+    const ids = items.map(item => Cast(item).id);
+    const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
+    return await this.mget(table, ids, options2);
+  }
+
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
     options?: IModelGetOptions,
