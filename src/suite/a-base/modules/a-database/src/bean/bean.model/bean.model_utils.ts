@@ -11,7 +11,7 @@ let __columns: Record<string, ITableColumns> = {};
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<TResult2>;
-  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string, item?): Promise<TResult2>;
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table: string, item?): Promise<TResult2>;
   async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, item?): Promise<TResult2> {
     if (typeof table !== 'string') {
       table = undefined;
