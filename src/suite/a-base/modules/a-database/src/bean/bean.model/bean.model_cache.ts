@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelGetOptions, IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
+import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -43,7 +43,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return false;
       return true;
     });
-    return list;
+    return this.__filterMGetColumns(list, options);
   }
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -186,17 +186,19 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sort: boolean,
     ids: number[],
-    options?: IModelMethodOptions,
+    options?: IModelGetOptions,
   ): Promise<(TResult2 | undefined)[]> {
-    // select
-    const items = await this.select<TRecord2, TResult2>(
-      {
-        where: {
-          id: ids,
-        },
+    // params
+    const params: IModelSelectParams = {
+      where: {
+        id: ids,
       },
-      options,
-    );
+    };
+    if (options?.columns) {
+      params.columns = options?.columns;
+    }
+    // select
+    const items = await this.select<TRecord2, TResult2>(params, options);
     // sort
     if (!sort) return items;
     const result: (TResult2 | undefined)[] = [];
@@ -251,6 +253,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (!item) return item;
     if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return undefined;
     return item;
+  }
+
+  private __filterMGetColumns(items: any[], options?: IModelGetOptions) {
+    if (items.length === 0 || !options?.columns) return items;
+    return items.map(item => {
+      return this.__filterGetColumns(item, options);
+    });
   }
 
   private __filterGetColumns(data, options?: IModelGetOptions) {
