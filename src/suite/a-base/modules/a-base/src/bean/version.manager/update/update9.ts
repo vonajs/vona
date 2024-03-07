@@ -12,36 +12,28 @@ export class VersionUpdate extends BeanBase {
     let sql;
 
     // aAtom: atomEnabled->atomStage
-    sql = `
-        ALTER TABLE aAtom
-          CHANGE COLUMN atomEnabled atomStage int(11) DEFAULT '0'
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.renameColumn('atomEnabled', 'atomStage');
+    });
 
     // aAtom: atomFlow->atomFlowId
-    sql = `
-        ALTER TABLE aAtom
-          CHANGE COLUMN atomFlow atomFlowId int(11) DEFAULT '0'
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.renameColumn('atomFlow', 'atomFlowId');
+    });
 
     // aAtom: add field atomClosed/atomIdDraft/atomIdArchive
-    sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN atomClosed int(11) DEFAULT '0',
-          ADD COLUMN atomIdDraft int(11) DEFAULT '0',
-          ADD COLUMN atomIdArchive int(11) DEFAULT '0'
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.int0('atomClosed');
+      table.int0('atomIdDraft');
+      table.int0('atomIdArchive');
+    });
 
     // aAtom: add field atomStatic/atomStaticKey/atomRevision
-    sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN atomStatic int(11) DEFAULT '0',
-          ADD COLUMN atomStaticKey varchar(255) DEFAULT NULL,
-          ADD COLUMN atomRevision int(11) DEFAULT '0'
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.int0('atomStatic');
+      table.string('atomStaticKey', 255);
+      table.int0('atomRevision');
+    });
 
     // aAtom: add field atomDisabled
     sql = `
