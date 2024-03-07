@@ -21,9 +21,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   ): Promise<TResult2[]>;
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, params?, options?): Promise<TResult2[]> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = params;
       params = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
@@ -82,9 +82,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     options?,
   ): Promise<TResult2 | undefined> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = where;
       where = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
@@ -105,9 +105,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async count(table: string, params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<number>;
   async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<number> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = params;
       params = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
@@ -148,9 +148,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   ): Promise<number[]>;
   async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<number[]> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = data;
       data = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
@@ -186,9 +186,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = data;
       data = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
@@ -231,9 +231,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
   ): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = where;
       where = table;
+      table = undefined;
     }
     // table
     table = table || this.table;

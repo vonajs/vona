@@ -30,8 +30,8 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     options?,
   ): Knex.QueryBuilder<TRecord2, TResult2[]> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = table;
+      table = undefined;
     }
     // table
     table = table || this.table;

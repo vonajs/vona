@@ -61,9 +61,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?,
   ): Promise<TResult2 | undefined> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = where;
       where = table;
+      table = undefined;
     }
     // not use cache if specified table
     if (table && table !== this.table) {
@@ -99,9 +99,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   ): Promise<void>;
   async update<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = data;
       data = table;
+      table = undefined;
     }
     // not use cache if specified table
     if (table && table !== this.table) {
@@ -150,9 +150,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   ): Promise<void>;
   async delete<TRecord2 extends {} = TRecord>(table?, where?, options?): Promise<void> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = where;
       where = table;
+      table = undefined;
     }
     // not use cache if specified table
     if (table && table !== this.table) {

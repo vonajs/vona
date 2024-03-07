@@ -10,9 +10,9 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
   ): Promise<number>;
   async create<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<number> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = data;
       data = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
@@ -32,9 +32,9 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
   ): Promise<void>;
   async write<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
     if (typeof table !== 'string') {
-      table = undefined;
       options = data;
       data = table;
+      table = undefined;
     }
     // table
     table = table || this.table;
