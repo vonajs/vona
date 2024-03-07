@@ -3,11 +3,9 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run(_options) {
     // aAtomClass: add atomClassInner
-    const sql = `
-        ALTER TABLE aAtomClass
-          ADD COLUMN atomClassInner int(11) DEFAULT '0'
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtomClass', function (table) {
+      table.int0('atomClassInner');
+    });
 
     // need not update atomClassInner: because it is deprecated
     // // update exists atomClasses
