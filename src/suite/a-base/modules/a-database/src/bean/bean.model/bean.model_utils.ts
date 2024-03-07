@@ -10,10 +10,20 @@ import { IModelMethodOptionsGeneral } from '../../types.js';
 let __columns: Record<string, ITableColumns> = {};
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
-  async prepareData(item) {
-    if (!item) return {};
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(item?: object): Promise<TResult2>;
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: string, item?): Promise<TResult2>;
+  async prepareData<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, item?): Promise<TResult2> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      item = table;
+    }
+    // table
+    table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
+    // item
+    if (!item) return {} as TResult2;
     // columns
-    const columns = await this.columns();
+    const columns = await this.columns(table);
     // data
     const data = {};
     for (const columnName in columns) {
@@ -21,7 +31,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
         data[columnName] = item[columnName];
       }
     }
-    return data;
+    return data as TResult2;
   }
 
   async default<T = any>(data?: T): Promise<T> {
