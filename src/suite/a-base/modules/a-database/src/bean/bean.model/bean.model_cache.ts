@@ -83,12 +83,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (!this.__checkCacheKeyValid(where)) {
       // not key
       if (this.__cacheNotKey) {
-        return await this.__get_notkey(table, where, options);
+        return this.__filterGetColumns(await this.__get_notkey(table, where, options), options);
       }
       return await super.get(table, where, options);
     }
     // key
-    return await this.__get_key(table, where, options);
+    return this.__filterGetColumns(await this.__get_key(table, where, options), options);
   }
 
   async update<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
@@ -251,6 +251,19 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (!item) return item;
     if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return undefined;
     return item;
+  }
+
+  private __filterGetColumns(data, options?: IModelGetOptions) {
+    if (!data || !options?.columns) return data;
+    let columns = options?.columns;
+    if (!Array.isArray(columns)) columns = columns.split(',');
+    const data2 = {};
+    for (const column of columns) {
+      if (data[column] !== undefined) {
+        data2[column] = data[column];
+      }
+    }
+    return data2;
   }
 
   private __checkCacheKeyValid(where) {
