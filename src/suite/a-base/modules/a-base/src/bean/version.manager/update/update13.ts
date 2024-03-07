@@ -2,7 +2,6 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run() {
-    let sql;
     // aRole
     await this.bean.model.schema.alterTable('aRole', function (table) {
       table.string('description', 255);
@@ -105,25 +104,31 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // view: aRoleView
-    sql = `
-          CREATE VIEW aRoleView as
-            select a.*,b.roleName as roleNameParent from aRole a
-              left join aRole b on a.roleIdParent=b.id
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aRoleView', view => {
+      view.as(
+        this.bean.model
+          .builder('aRole as a')
+          .select(['a.*', 'b.roleName as roleNameParent'])
+          .leftJoin('aRole as b', { 'a.roleIdParent': 'b.id' }),
+      );
+    });
     // view: aRoleIncludesView
-    sql = `
-          CREATE VIEW aRoleIncludesView as
-            select a.*,b.id as roleIncId,b.roleId as roleIdWho,b.roleIdInc from aRole a
-              inner join aRoleInc b on a.id=b.roleIdInc
-        `;
-    await this.ctx.model.query(sql);
-    // view: aRoleUsersView
-    sql = `
-          CREATE VIEW aRoleUserRolesView as
-            select a.*,b.id as userRoleId,b.userId as userIdWho from aRole a
-              inner join aUserRole b on a.id=b.roleId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aRoleIncludesView', view => {
+      view.as(
+        this.bean.model
+          .builder('aRole as a')
+          .select(['a.*', 'b.id as roleIncId', 'b.roleId as roleIdWho', 'b.roleIdInc'])
+          .innerJoin('aRoleInc as b', { 'a.id': 'b.roleIdInc' }),
+      );
+    });
+    // view: aRoleUserRolesView
+    await this.bean.model.schema.createView('aRoleUserRolesView', view => {
+      view.as(
+        this.bean.model
+          .builder('aRole as a')
+          .select(['a.*', 'b.id as userRoleId', 'b.userId as userIdWho'])
+          .innerJoin('aUserRole as b', { 'a.id': 'b.roleId' }),
+      );
+    });
   }
 }
