@@ -37,7 +37,8 @@ export interface IModelCountParams {
 }
 
 export type IModelMethodOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
-export type IModelUpdateOptions = Omit<IModelMethodOptionsGeneral, 'disableInstance'>;
+export type IModelUpdateOptions = Omit<IModelUpdateOptionsGeneral, 'disableInstance'>;
+export type IModelGetOptions = Omit<IModelGetOptionsGeneral, 'disableInstance'>;
 
 export interface IModelMethodOptionsGeneral {
   disableDeleted?: boolean;

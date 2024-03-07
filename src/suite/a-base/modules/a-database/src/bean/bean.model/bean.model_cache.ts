@@ -1,6 +1,6 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
-import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
+import { IModelGetOptions, IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -25,7 +25,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     ids: number[],
-    options?: IModelMethodOptions,
+    options?: IModelGetOptions,
   ): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
       return (await this.__mget_select(false, ids, options)) as TResult2[];
@@ -48,12 +48,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     where?: object,
-    options?: IModelMethodOptions,
+    options?: IModelGetOptions,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
     where?: object,
-    options?: IModelMethodOptions,
+    options?: IModelGetOptions,
   ): Promise<TResult2 | undefined>;
   async get<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
