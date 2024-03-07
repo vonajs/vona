@@ -4,6 +4,7 @@ export const config = _app => {
       'a-version': {
         aVersion: 'createdAt,updatedAt,module,version',
         aVersionInit: 'createdAt,updatedAt,subdomain+module,version',
+        aViewRecord: 'createdAt,updatedAt,viewName',
       },
       'a-authsimple': {
         aAuthSimple: 'createdAt,updatedAt,userId',
