@@ -1,6 +1,6 @@
 import { EntityBase } from '@cabloy/core';
 
-export interface EntityVersionInit extends Omit<EntityBase, 'iid' | 'deleted'> {
+export interface EntityViewRecord extends Omit<EntityBase, 'iid'> {
   subdomain: string;
   module: string;
   version: number;
