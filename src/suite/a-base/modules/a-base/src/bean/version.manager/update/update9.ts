@@ -39,8 +39,8 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewUserRightAtom
-    await this.bean.model.schema.dropView('aViewUserRightAtom');
-    await this.bean.model.schema.createView('aViewUserRightAtom', view => {
+    await this.bean.model.dropView('aViewUserRightAtom');
+    await this.bean.model.createView('aViewUserRightAtom', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
