@@ -44,14 +44,14 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return data;
   }
 
-  async columns(tableName?: string): Promise<ITableColumns> {
-    tableName = tableName || this.table;
-    let columns = __columns[tableName];
+  async columns(table?: string): Promise<ITableColumns> {
+    table = table || this.table;
+    let columns = __columns[table];
     if (!columns) {
       const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
       const dialect = this.app.bean.database.getDialect(client);
-      const map = await this.self.builder(tableName).columnInfo();
-      columns = __columns[tableName] = {};
+      const map = await this.self.builder(table).columnInfo();
+      columns = __columns[table] = {};
       for (const name in map) {
         columns[name] = dialect.coerceColumn(map[name]);
       }
