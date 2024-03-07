@@ -29,13 +29,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelGetOptions,
   ): Promise<TResult2[]> {
     if (!this.__cacheExists()) {
-      return (await this.__mget_select(false, ids, options)) as TResult2[];
+      return (await this.__mget_select(ids, options)) as TResult2[];
     }
     // cache
     const cache = this.__getCacheInstance();
     let list = await cache.mget(ids, {
       fn_mget: async ids => {
-        return await this.__mget_select(true, ids, { disableDeleted: true });
+        return await this.__mget_select(ids, { disableDeleted: true });
       },
     });
     // filter disableDeleted
@@ -224,7 +224,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    sort: boolean,
     ids: number[],
     options?: IModelGetOptions,
   ): Promise<(TResult2 | undefined)[]> {
@@ -240,7 +239,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // select
     const items = await this.select<TRecord2, TResult2>(params, options);
     // sort
-    if (!sort) return items;
     const result: (TResult2 | undefined)[] = [];
     for (const id of ids) {
       // item maybe undefined
