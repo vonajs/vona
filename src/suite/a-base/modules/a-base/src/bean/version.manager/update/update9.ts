@@ -36,22 +36,25 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aAtom: add field atomDisabled
-    sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN atomDisabled int(11) DEFAULT '0'
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.int0('atomDisabled');
+    });
 
     // alter view: aViewUserRightAtom
-    await this.ctx.model.query('drop view aViewUserRightAtom');
-    sql = `
-          create view aViewUserRightAtom as
-            select a.iid, a.id as atomId,a.userIdCreated as userIdWhom,b.userIdWho,b.action from aAtom a,aViewUserRightAtomClassUser b
-              where a.deleted=0 and a.atomStage>0
-                and a.atomClassId=b.atomClassId
-                and a.userIdCreated=b.userIdWhom
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.dropView('aViewUserRightAtom');
+    await this.bean.model.schema.createView('aViewUserRightAtom', view => {
+      view.as(
+        this.bean.model
+          .builder('aAtom as a')
+          .select(['a.iid', 'a.id as atomId', 'a.userIdCreated as userIdWhom', 'b.userIdWho', 'b.action'])
+          .innerJoin('aViewUserRightAtomClassUser as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.userIdCreated': 'b.userIdWhom',
+          })
+          .where('a.deleted', 0)
+          .where('a.atomStage', '>', 0),
+      );
+    });
 
     // alter view: aViewRoleRightAtom
     await this.ctx.model.query('drop view aViewRoleRightAtom');
