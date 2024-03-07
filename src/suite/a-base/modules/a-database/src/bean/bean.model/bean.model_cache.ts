@@ -1,6 +1,7 @@
 import { Cast } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
+import { getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -267,7 +268,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     let columns = options?.columns;
     if (!Array.isArray(columns)) columns = columns.split(',');
     const data2 = {};
-    for (const column of columns) {
+    for (let column of columns) {
+      column = getTargetColumnName(column);
+      if (column === '*') return data;
       if (data[column] !== undefined) {
         data2[column] = data[column];
       }

@@ -31,3 +31,5 @@ export function getTableOrTableAlias(table: string) {
   const _table = table.toString();
   return _table.indexOf(' as ') > -1 ? _table.split(' as ')[1].trim() : _table;
 }
+
+export function getTargetColumnName(column: string) {}
