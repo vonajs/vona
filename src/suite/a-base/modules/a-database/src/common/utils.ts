@@ -32,4 +32,8 @@ export function getTableOrTableAlias(table: string) {
   return _table.indexOf(' as ') > -1 ? _table.split(' as ')[1].trim() : _table;
 }
 
-export function getTargetColumnName(column: string) {}
+export function getTargetColumnName(column: string) {
+  if (column.indexOf(' as ') > -1) return column.split(' as ')[1].trim();
+  if (column.indexOf('.') > -1) return column.split('.')[1].trim();
+  return column;
+}
