@@ -99,35 +99,25 @@ export class VersionUpdate extends BeanBase {
   async run_categorytag() {
     let sql;
     // aAtom: add field atomLanguage\atomCategoryId
-    sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN atomLanguage varchar(50) DEFAULT NULL,
-          ADD COLUMN atomCategoryId int(11) DEFAULT '0',
-          ADD COLUMN atomTags JSON DEFAULT NULL
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aAtom', function (table) {
+      table.string('atomLanguage', 50);
+      table.int0('atomCategoryId');
+      table.json('atomTags');
+    });
 
     // create table: aCategory
-    sql = `
-          CREATE TABLE aCategory (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomClassId int(11) DEFAULT '0',
-            language varchar(50) DEFAULT NULL,
-            categoryName varchar(50) DEFAULT NULL,
-            categoryCatalog int(11) DEFAULT '0',
-            categoryHidden int(11) DEFAULT '0',
-            categorySorting int(11) DEFAULT '0',
-            categoryFlag varchar(255) DEFAULT NULL,
-            categoryIdParent int(11) DEFAULT '0',
-            categoryUrl varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aCategory', function (table) {
+      table.basicFields();
+      table.int0('atomClassId');
+      table.string('language', 50);
+      table.string('categoryName', 50);
+      table.int0('categoryCatalog');
+      table.int0('categoryHidden');
+      table.int0('categorySorting');
+      table.string('categoryFlag', 255);
+      table.int0('categoryIdParent');
+      table.string('categoryUrl', 255);
+    });
 
     // create table: aTag
     sql = `
