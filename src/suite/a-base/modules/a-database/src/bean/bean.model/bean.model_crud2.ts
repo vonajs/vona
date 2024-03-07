@@ -24,12 +24,23 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
     return res[0];
   }
 
-  async write<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void> {
+  async write<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelUpdateOptions): Promise<void>;
+  async write<TRecord2 extends {} = TRecord>(
+    table: string,
+    data?: Partial<TRecord2>,
+    options?: IModelUpdateOptions,
+  ): Promise<void>;
+  async write<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<void> {
+    if (typeof table !== 'string') {
+      table = undefined;
+      options = data;
+      data = table;
+    }
     // table
-    const table = this.table;
+    table = table || this.table;
     if (!table) throw new Error('should specify the table name');
     // data
-    const data2 = await this.prepareData(data);
+    const data2 = await this.prepareData<TRecord2>(table, data);
     // update
     await this.update(table, data2, options);
   }
