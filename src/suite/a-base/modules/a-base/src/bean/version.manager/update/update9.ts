@@ -120,36 +120,20 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aTag
-    sql = `
-          CREATE TABLE aTag (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomClassId int(11) DEFAULT '0',
-            language varchar(50) DEFAULT NULL,
-            tagName varchar(50) DEFAULT NULL,
-            tagAtomCount int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aTag', function (table) {
+      table.basicFields();
+      table.int0('atomClassId');
+      table.string('language', 50);
+      table.string('tagName', 50);
+      table.int0('tagAtomCount');
+    });
 
     // create table: aTagRef
-    sql = `
-          CREATE TABLE aTagRef (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            tagId int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createTable('aTagRef', function (table) {
+      table.basicFields();
+      table.int0('atomId');
+      table.int0('tagId');
+    });
   }
 
   async run_resource() {
