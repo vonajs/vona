@@ -4,20 +4,16 @@ export class VersionUpdate extends BeanBase {
   async run() {
     let sql;
     // aRole
-    sql = `
-      ALTER TABLE aRole
-        Add COLUMN description varchar(255) DEFAULT NULL,
-        Add COLUMN atomId int(11) DEFAULT '0',
-        Add COLUMN roleTypeCode INT(11) DEFAULT '0',
-        Add COLUMN roleConfig JSON DEFAULT NULL
-                `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aRole', function (table) {
+      table.string('description', 255);
+      table.int0('atomId');
+      table.int0('roleTypeCode');
+      table.json('roleConfig');
+    });
     // aUser
-    sql = `
-      ALTER TABLE aUser
-        Add COLUMN atomId int(11) DEFAULT '0'
-                `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.alterTable('aUser', function (table) {
+      table.int0('atomId');
+    });
     // aViewUserRightRefAtomClass
     sql = `
       create view aViewUserRightRefAtomClass as
