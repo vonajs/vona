@@ -96,12 +96,14 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // aViewRoleRightResource
-    sql = `
-        create view aViewRoleRightResource as
-          select a.iid,a.roleId as roleIdWho,a.roleIdBase,b.id as resourceRoleId,b.atomId from aRoleExpand a
-            inner join aResourceRole b on a.roleIdBase=b.roleId
-          `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.schema.createView('aViewRoleRightResource', view => {
+      view.as(
+        this.bean.model
+          .builder('aRoleExpand as a')
+          .select(['a.iid', 'a.roleId as roleIdWho', 'a.roleIdBase', 'b.id as resourceRoleId', 'b.atomId'])
+          .innerJoin('aResourceRole as b', { 'a.roleIdBase': 'b.roleId' }),
+      );
+    });
     // view: aRoleView
     sql = `
           CREATE VIEW aRoleView as
