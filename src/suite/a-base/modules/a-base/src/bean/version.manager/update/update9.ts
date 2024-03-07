@@ -179,6 +179,8 @@ export class VersionUpdate extends BeanBase {
   }
 
   async run_function() {
+    // drop view: aViewUserRightFunction
+    await this.bean.model.schema.dropView('aViewUserRightFunction');
     // drop table: aFunction
     await this.bean.model.schema.dropTable('aFunction');
     // drop table: aFunctionLocale
@@ -189,7 +191,5 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model.schema.dropTable('aFunctionStar');
     // drop table: aRoleFunction
     await this.bean.model.schema.dropTable('aRoleFunction');
-    // drop view: aViewUserRightFunction
-    await this.bean.model.schema.dropView('aViewUserRightFunction');
   }
 }
