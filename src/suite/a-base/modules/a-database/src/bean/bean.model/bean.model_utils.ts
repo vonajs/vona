@@ -19,7 +19,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // item
     if (!item) return {} as TResult2;
     // columns

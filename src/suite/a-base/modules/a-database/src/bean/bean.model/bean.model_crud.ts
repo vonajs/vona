@@ -27,7 +27,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
     // builder
@@ -88,7 +88,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // params
     const params: IModelSelectParams = { where, limit: 1 };
     if (options?.columns) {
@@ -111,7 +111,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
     // builder
@@ -154,7 +154,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // data
     data = data || {};
     const datas = Array.isArray(data) ? data : [data];
@@ -192,7 +192,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // data
     data = Object.assign({}, data);
     // where
@@ -237,7 +237,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) throw new Error('should specify the table name');
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // disableDeleted
     if (!this._checkDisableDeletedByOptions(options)) {
       await this.update(table, { deleted: 1 }, Object.assign({}, options, { where }));
