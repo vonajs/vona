@@ -111,7 +111,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
       params.columns = options?.columns;
     }
     // select
-    const list = await this.select(table, params, options);
+    const list = await this._select(table, params, options);
     const item = list[0];
     if (!item) return undefined;
     return item as unknown as TResult2;
