@@ -48,7 +48,10 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
           AND V.VIEW_DEFINITION LIKE CONCAT('%\`',T.TABLE_NAME,'\`%')
       WHERE T.TABLE_SCHEMA = DATABASE()
     `;
-    const items = await builder.distinct('dep_name').fromRaw(`(${sqlViews})`).where({ ref_name: viewName });
+    const items = await builder
+      .distinct('dep_name')
+      .fromRaw(`(${sqlViews}) as viewDependents`)
+      .where({ ref_name: viewName });
     return items.map(item => item.dep_name);
   }
 }
