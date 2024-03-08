@@ -1,4 +1,3 @@
-import { Cast } from '@cabloy/core';
 import { ITableColumns } from '../virtual.databaseDialect.js';
 import { BeanModelMeta } from './bean.model_meta.js';
 import { Knex } from 'knex';
@@ -48,8 +47,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     table = table || this.table;
     let columns = __columns[table];
     if (!columns) {
-      const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
-      const dialect = this.app.bean.database.getDialect(client);
+      const dialect = this.dialect;
       const map = await this.self.builder(table).columnInfo();
       columns = __columns[table] = {};
       for (const name in map) {

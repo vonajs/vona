@@ -242,9 +242,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const debug = this.app.bean.debug.get('model');
     if (debug.enabled) debug('model.insert: %s', builder.toQuery());
     // dialect
-    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
-    const dialect = this.app.bean.database.getDialect(client);
-    return await dialect.insert(builder);
+    return await this.dialect.insert(builder);
   }
 
   async update<TRecord2 extends {} = TRecord>(
@@ -342,9 +340,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const raw = this.ctx.db.raw(sql, bindings);
     const result = await raw;
     // dialect
-    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
-    const dialect = this.app.bean.database.getDialect(client);
-    return dialect.query(result) as unknown as TResult2[];
+    return this.dialect.query(result) as unknown as TResult2[];
   }
 
   async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2>;

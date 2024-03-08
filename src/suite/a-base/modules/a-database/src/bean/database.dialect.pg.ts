@@ -33,4 +33,6 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
   query(result) {
     return result.rows;
   }
+
+  async viewDependents(viewName: string): Promise<string[]> {}
 }
