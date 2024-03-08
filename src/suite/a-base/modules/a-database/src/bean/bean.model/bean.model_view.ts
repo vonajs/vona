@@ -40,10 +40,21 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async alterView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
+    // viewDependentsAll
+    const viewDependents = await this.viewDependentsAll(viewName);
+    // drop dependents
+    for (let i = viewDependents.length - 1; i >= 0; i--) {
+      const viewDependent = viewDependents[i];
+      await this.dropView(viewDependent, false);
+    }
     // drop view
     await this.dropView(viewName, false);
     // create view
     await this.createView(viewName, callback);
+    // create dependents
+    for (const viewDependent of viewDependents) {
+      await this.createView(viewDependent);
+    }
   }
 
   async viewDependents(viewName: string): Promise<string[]> {
