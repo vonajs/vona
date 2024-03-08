@@ -60,7 +60,9 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     await this._viewDependentsAll_inner(viewName, views);
     // swap
     swapDeps(views);
-    // ok
+    // shift
+    views.shift();
+    // ready
     return views.map(view => view.name);
   }
 
