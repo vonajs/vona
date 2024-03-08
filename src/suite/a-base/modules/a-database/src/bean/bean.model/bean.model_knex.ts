@@ -1,7 +1,6 @@
 import { Knex } from 'knex';
 import { BeanModelUtils } from './bean.model_utils.js';
 import { IModelMethodOptionsGeneral } from '../../types.js';
-import { Cast } from '@cabloy/core';
 
 export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
   get schema(): Knex.SchemaBuilder {
