@@ -7,19 +7,15 @@ export class VersionUpdate extends BeanBase {
 
   async _alterTables() {
     // aAtom: add atomState, default value is null
-    let sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN atomState varchar(255) DEFAULT NULL
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aAtom', function (table) {
+      table.string('atomState', 255);
+    });
     // aAtomAction: for workflow
     //   actionMode: 0/default 1/workflow
-    sql = `
-        ALTER TABLE aAtomAction
-          ADD COLUMN actionMode int(11) DEFAULT '0',
-          ADD COLUMN flowKey varchar(50) DEFAULT NULL,
-          ADD COLUMN nodeDefId varchar(50) DEFAULT NULL
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aAtomAction', function (table) {
+      table.int0('actionMode');
+      table.string('flowKey', 50);
+      table.string('nodeDefId', 50);
+    });
   }
 }
