@@ -103,7 +103,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aCategory
-    await this.bean.model.schema.createTable('aCategory', function (table) {
+    await this.bean.model.createTable('aCategory', function (table) {
       table.basicFields();
       table.int0('atomClassId');
       table.string('language', 50);
@@ -117,7 +117,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aTag
-    await this.bean.model.schema.createTable('aTag', function (table) {
+    await this.bean.model.createTable('aTag', function (table) {
       table.basicFields();
       table.int0('atomClassId');
       table.string('language', 50);
@@ -126,7 +126,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aTagRef
-    await this.bean.model.schema.createTable('aTagRef', function (table) {
+    await this.bean.model.createTable('aTagRef', function (table) {
       table.basicFields();
       table.int0('atomId');
       table.int0('tagId');
@@ -135,7 +135,7 @@ export class VersionUpdate extends BeanBase {
 
   async run_resource() {
     // create table: aResource
-    await this.bean.model.schema.createTable('aResource', function (table) {
+    await this.bean.model.createTable('aResource', function (table) {
       table.basicFields();
       table.int0('atomId');
       table.string('description', 255);
@@ -145,7 +145,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aResourceLocale
-    await this.bean.model.schema.createTable('aResourceLocale', function (table) {
+    await this.bean.model.createTable('aResourceLocale', function (table) {
       table.basicFields();
       table.int0('atomId');
       table.string('locale', 50);
@@ -153,7 +153,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aResourceRole
-    await this.bean.model.schema.createTable('aResourceRole', function (table) {
+    await this.bean.model.createTable('aResourceRole', function (table) {
       table.basicFields();
       table.int0('atomId');
       table.int0('roleId');

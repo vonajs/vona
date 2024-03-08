@@ -9,7 +9,7 @@ export class VersionManager extends BeanBase {
     }
 
     if (options.version === 2) {
-      await this.bean.model.schema.createTable('aVersionInit', function (table) {
+      await this.bean.model.createTable('aVersionInit', function (table) {
         table.basicFields({ deleted: false, iid: false });
         table.string('subdomain', 50);
         table.string('module', 50);
@@ -18,7 +18,7 @@ export class VersionManager extends BeanBase {
     }
 
     if (options.version === 3) {
-      await this.bean.model.schema.createTable('aViewRecord', function (table) {
+      await this.bean.model.createTable('aViewRecord', function (table) {
         table.basicFields({ deleted: true, iid: false });
         table.string('viewName', 255);
         table.text('viewSql');

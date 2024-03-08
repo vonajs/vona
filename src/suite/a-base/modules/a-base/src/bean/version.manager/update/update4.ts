@@ -3,7 +3,7 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // aComment
-    await this.bean.model.schema.createTable('aComment', function (table) {
+    await this.bean.model.createTable('aComment', function (table) {
       table.basicFields();
       table.atomId();
       table.userId();
@@ -29,7 +29,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aCommentHeart
-    await this.bean.model.schema.createTable('aCommentHeart', function (table) {
+    await this.bean.model.createTable('aCommentHeart', function (table) {
       table.basicFields();
       table.userId();
       table.atomId();

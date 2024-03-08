@@ -3,7 +3,7 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run(options) {
     // aFunctionScene
-    await this.bean.model.schema.createTable('aFunctionScene', function (table) {
+    await this.bean.model.createTable('aFunctionScene', function (table) {
       table.basicFields();
       table.string('sceneName', 50);
       table.int0('sceneMenu');

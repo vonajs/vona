@@ -6,7 +6,7 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aCache
-      await this.bean.model.schema.createTable('aCache', function (table) {
+      await this.bean.model.createTable('aCache', function (table) {
         table.basicFields();
         table.string('module', 255);
         table.string('name', 255);

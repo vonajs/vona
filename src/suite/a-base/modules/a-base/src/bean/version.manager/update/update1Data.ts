@@ -2,7 +2,7 @@ import { BeanModel } from 'cabloy-module-api-a-database';
 
 const tables = {
   aUser(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('disabled');
       table.string('userName', 50);
@@ -16,14 +16,14 @@ const tables = {
     });
   },
   aUserAgent(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('userId');
       table.int0('userIdAgent');
     });
   },
   aAuthProvider(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('disabled');
       table.string('module', 255);
@@ -32,7 +32,7 @@ const tables = {
     });
   },
   aAuth(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.int0('providerId');
@@ -41,7 +41,7 @@ const tables = {
     });
   },
   aRole(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.string('roleName', 50);
       table.int0('leader');
@@ -52,7 +52,7 @@ const tables = {
     });
   },
   aRoleRef(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleId');
       table.int0('roleIdParent');
@@ -60,14 +60,14 @@ const tables = {
     });
   },
   aRoleInc(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleId');
       table.int0('roleIdInc');
     });
   },
   aRoleIncRef(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleId');
       table.int0('roleIdInc');
@@ -75,21 +75,21 @@ const tables = {
     });
   },
   aRoleExpand(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleId');
       table.int0('roleIdBase');
     });
   },
   aUserRole(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.int0('roleId');
     });
   },
   aAtomClass(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.string('module', 255);
       table.string('atomClassName', 255);
@@ -97,7 +97,7 @@ const tables = {
     });
   },
   aAtom(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.itemId();
       table.int0('atomEnabled');
@@ -109,7 +109,7 @@ const tables = {
     });
   },
   aAtomAction(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('atomClassId');
       table.int0('code');
@@ -117,14 +117,14 @@ const tables = {
     });
   },
   aLabel(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.json('labels');
     });
   },
   aAtomLabel(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.atomId();
@@ -132,7 +132,7 @@ const tables = {
     });
   },
   aAtomLabelRef(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.atomId();
@@ -140,7 +140,7 @@ const tables = {
     });
   },
   aAtomStar(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.atomId();
@@ -148,7 +148,7 @@ const tables = {
     });
   },
   aRoleRight(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleId');
       table.int0('atomClassId');
@@ -157,7 +157,7 @@ const tables = {
     });
   },
   aRoleRightRef(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleRightId');
       table.int0('roleId');
@@ -167,7 +167,7 @@ const tables = {
     });
   },
   aFunction(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.string('module', 255);
       table.string('name', 255);
@@ -182,7 +182,7 @@ const tables = {
     });
   },
   aFunctionStar(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.userId();
       table.int0('functionId');
@@ -190,7 +190,7 @@ const tables = {
     });
   },
   aFunctionLocale(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('functionId');
       table.string('locale', 50);
@@ -198,7 +198,7 @@ const tables = {
     });
   },
   aRoleFunction(tableName: string, model: BeanModel): any {
-    return model.schema.createTable(tableName, function (table) {
+    return model.createTable(tableName, function (table) {
       table.basicFields();
       table.int0('roleId');
       table.int0('functionId');
