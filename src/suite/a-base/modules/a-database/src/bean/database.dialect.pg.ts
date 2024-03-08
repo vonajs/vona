@@ -52,7 +52,6 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
           and dep.classid = 'pg_rewrite'::regclass
     `;
     const items = await builder.distinct('dep_name').fromRaw(`(${sqlViews})`).where({ ref_name: viewName });
-    console.log(items);
     return items.map(item => item.dep_name);
   }
 }
