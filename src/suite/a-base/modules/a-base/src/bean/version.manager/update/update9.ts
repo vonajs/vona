@@ -10,9 +10,6 @@ export class VersionUpdate extends BeanBase {
 
   async run_atom() {
     // aAtom: atomEnabled->atomStage
-    await this.bean.model.dropView('aViewUserRightAtom', true);
-    await this.bean.model.dropView('aViewRoleRightAtom', true);
-    await this.bean.model.dropView('aViewUserRightAtomRole', true);
     await this.bean.model.alterTable('aAtom', function (table) {
       table.renameColumn('atomEnabled', 'atomStage');
     });

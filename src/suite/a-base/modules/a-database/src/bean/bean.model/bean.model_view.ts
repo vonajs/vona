@@ -59,9 +59,9 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async alterTable(
     tableName: string,
     callback: (tableBuilder: Knex.CreateTableBuilder) => any,
-    disableAlterViewAuto?: boolean,
+    alterViewAuto?: boolean,
   ): Promise<void> {
-    if (disableAlterViewAuto) {
+    if (!alterViewAuto) {
       // alter table
       return await this.schema.alterTable(tableName, function (table) {
         return callback(table);
