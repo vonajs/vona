@@ -200,30 +200,50 @@ export class VersionUpdate extends BeanBase {
     //   aViewUserRightAtomRole(9)
 
     // aViewUserRightAtom
-    await this.ctx.model.query('drop view aViewUserRightAtom');
-    let sql = `
-          create view aViewUserRightAtom as
-            select a.iid, a.id as atomId,a.userIdCreated as userIdWhom,
-                   b.userIdWho,b.action,b.areaKey,b.areaScope 
-              from aAtom a,aViewUserRightAtomClassUser b
-                where a.deleted=0 and a.atomStage>0
-                  and a.atomClassId=b.atomClassId
-                  and a.userIdCreated=b.userIdWhom
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aViewUserRightAtom', view => {
+      view.as(
+        this.bean.model
+          .builder('aAtom as a')
+          .select([
+            'a.iid',
+            'a.id as atomId',
+            'a.userIdCreated as userIdWhom',
+            'b.userIdWho',
+            'b.action',
+            'b.areaKey',
+            'b.areaScope',
+          ])
+          .innerJoin('aViewUserRightAtomClassUser as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.userIdCreated': 'b.userIdWhom',
+          })
+          .where('a.deleted', 0)
+          .where('a.atomStage', '>', 0),
+      );
+    });
 
     // aViewRoleRightAtom
-    await this.ctx.model.query('drop view aViewRoleRightAtom');
-    sql = `
-          create view aViewRoleRightAtom as
-            select a.iid, a.id as atomId,a.userIdCreated as userIdWhom,
-                   b.roleIdWho,b.action,b.areaKey,b.areaScope
-              from aAtom a,aViewRoleRightAtomClassUser b
-                where a.deleted=0 and a.atomStage>0
-                  and a.atomClassId=b.atomClassId
-                  and a.userIdCreated=b.userIdWhom
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aViewRoleRightAtom', view => {
+      view.as(
+        this.bean.model
+          .builder('aAtom as a')
+          .select([
+            'a.iid',
+            'a.id as atomId',
+            'a.userIdCreated as userIdWhom',
+            'b.roleIdWho',
+            'b.action',
+            'b.areaKey',
+            'b.areaScope',
+          ])
+          .innerJoin('aViewRoleRightAtomClassUser as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.userIdCreated': 'b.userIdWhom',
+          })
+          .where('a.deleted', 0)
+          .where('a.atomStage', '>', 0),
+      );
+    });
 
     // aViewUserRightAtomRole
     await this.ctx.model.query('drop view aViewUserRightAtomRole');
