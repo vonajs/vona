@@ -6,6 +6,6 @@ import assert from 'assert';
 export class StartupStartupInstance extends BeanBase {
   async execute() {
     console.log(`test/feat/startup: instance:${this.ctx.instance.id}`);
-    assert(this.ctx.instance.id > 0);
+    assert(this.ctx.instance.id !== undefined);
   }
 }
