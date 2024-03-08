@@ -82,11 +82,11 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
       categoryId: 0,
       categoryName: resourceType,
     });
-    const children = await this.ctx.bean.category.children({
+    const children = (await this.ctx.bean.category.children({
       atomClass: __atomClassResource,
       categoryId: categoryTop.id,
       setLocale: false,
-    });
+    })) as any[];
     for (const child of children) {
       if (child.categoryName.indexOf(':') === -1) {
         await this._deleteCategory(child);
