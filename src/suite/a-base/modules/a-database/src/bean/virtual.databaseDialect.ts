@@ -41,7 +41,7 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async viewDependents(_viewName: string): Promise<string[]> {
+  async viewDependents(_builder: Knex.QueryBuilder, _viewName: string): Promise<string[]> {
     throw new Error('Not Implemented');
   }
 

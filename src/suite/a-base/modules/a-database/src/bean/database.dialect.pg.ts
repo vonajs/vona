@@ -34,5 +34,25 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
     return result.rows;
   }
 
-  async viewDependents(viewName: string): Promise<string[]> {}
+  async viewDependents(builder: Knex.QueryBuilder, viewName: string): Promise<string[]> {
+    const sqlViews = `
+      select
+          ref_nsp.nspname ref_schema, ref_cl.relname ref_name, 
+          rwr_cl.relkind dep_type,
+          rwr_nsp.nspname dep_schema,
+          rwr_cl.relname dep_name
+        from pg_depend dep
+          join pg_class ref_cl on dep.refobjid = ref_cl.oid
+          join pg_namespace ref_nsp on ref_cl.relnamespace = ref_nsp.oid
+          join pg_rewrite rwr on dep.objid = rwr.oid
+          join pg_class rwr_cl on rwr.ev_class = rwr_cl.oid
+          join pg_namespace rwr_nsp on rwr_cl.relnamespace = rwr_nsp.oid
+        where
+          dep.deptype = 'n'
+          and dep.classid = 'pg_rewrite'::regclass
+    `;
+    const items = await builder.distinct('dep_name').fromRaw(sqlViews).where({ ref_name: viewName });
+    console.log(items);
+    return items.map(item => item.dep_name);
+  }
 }

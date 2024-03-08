@@ -46,7 +46,9 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async viewDependents(viewName: string): Promise<string[]> {
+    // builder
+    const builder = this.builder();
     // dialect
-    return await this.dialect.viewDependents(this.ctx.db);
+    return await this.dialect.viewDependents(builder, viewName);
   }
 }
