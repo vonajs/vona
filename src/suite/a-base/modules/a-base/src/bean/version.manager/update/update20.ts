@@ -10,28 +10,22 @@ export class VersionUpdate extends BeanBase {
 
   async _alterTables() {
     // aAtom: add atomAreaKey atomAreaValue
-    let sql = `
-        ALTER TABLE aAtom
-          ADD COLUMN atomAreaKey varchar(255) DEFAULT NULL,
-          ADD COLUMN atomAreaValue varchar(255) DEFAULT NULL
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aAtom', function (table) {
+      table.string('atomAreaKey', 255);
+      table.string('atomAreaValue', 255);
+    });
 
     // aRoleRight: add areaKey areaScope
-    sql = `
-        ALTER TABLE aRoleRight
-          ADD COLUMN areaKey varchar(255) DEFAULT NULL,
-          ADD COLUMN areaScope varchar(255) DEFAULT NULL
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aRoleRight', function (table) {
+      table.string('areaKey', 255);
+      table.string('areaScope', 255);
+    });
 
     // aRoleRightRef: add areaKey areaScope
-    sql = `
-        ALTER TABLE aRoleRightRef
-          ADD COLUMN areaKey varchar(255) DEFAULT NULL,
-          ADD COLUMN areaScope varchar(255) DEFAULT NULL
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aRoleRightRef', function (table) {
+      table.string('areaKey', 255);
+      table.string('areaScope', 255);
+    });
   }
 
   async _alterViews_aRoleRight_level1() {
