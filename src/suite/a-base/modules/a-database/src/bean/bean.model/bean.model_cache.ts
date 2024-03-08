@@ -54,7 +54,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     const cache = this.__getCacheInstance();
     let list = await cache.mget(ids, {
       fn_mget: async ids => {
-        return await super.mget(table, ids, { disableDeleted: true });
+        return await super._mget(table, ids, { disableDeleted: true });
       },
     });
     // filter disableDeleted
