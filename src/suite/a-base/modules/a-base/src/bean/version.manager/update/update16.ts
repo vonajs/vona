@@ -3,18 +3,23 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // aResource: add resourceIcon/appKey
-    let sql = `
-        ALTER TABLE aResource
-          Add COLUMN resourceIcon varchar(255) DEFAULT NULL,
-          Add COLUMN appKey varchar(50) DEFAULT NULL
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aResource', function (table) {
+      table.string('resourceIcon', 255);
+      table.string('appKey', 50);
+    });
     // create view: aResourceView
-    sql = `
-      CREATE VIEW aResourceView as
-        select a.*,b.id as appAtomId,b.atomName as appName from aResource a
-          left join aAtom b on a.iid=b.iid and b.deleted=0 and a.appKey=b.atomStaticKey and b.atomStage=1
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aResourceView', view => {
+      view.as(
+        this.bean.model
+          .builder('aResource as a')
+          .select(['a.*', 'b.id as appAtomId', 'b.atomName as appName'])
+          .leftJoin('aAtom as b', {
+            'a.iid': 'b.iid',
+            'b.deleted': 0,
+            'a.appKey': 'b.atomStaticKey',
+            'b.atomStage': 1,
+          }),
+      );
+    });
   }
 }
