@@ -1,3 +1,4 @@
+import { swapDeps } from '@cabloy/deps';
 import { CabloyApplication } from '../../types/index.js';
 
 export default function (app: CabloyApplication): [object, any[]] {
@@ -125,29 +126,5 @@ function handleDependents(ebMiddlewaresAll) {
 }
 
 function swap(middlewares) {
-  // eslint-disable-next-line
-  while (true) {
-    if (!_swap(middlewares)) break;
-  }
-}
-
-function _swap(middlewares) {
-  let result = false;
-  const middlewaresClone = middlewares.slice(0);
-  middlewaresClone.forEach(item => {
-    let deps = item.options.dependencies || [];
-    if (typeof deps === 'string') deps = deps.split(',');
-    deps.forEach(dep => {
-      if (swapDep(middlewares, dep, item.name)) result = true;
-    });
-  });
-  return result;
-}
-
-function swapDep(arr, a, b) {
-  const indexA = arr.findIndex(item => item.name === a);
-  const indexB = arr.findIndex(item => item.name === b);
-  if (indexA === -1 || indexB === -1 || indexA < indexB) return false;
-  arr.splice(indexB, 0, arr.splice(indexA, 1)[0]);
-  return true;
+  swapDeps(middlewares, { name: 'name', dependencies: 'options.dependencies' });
 }
