@@ -11,6 +11,8 @@ export class VersionUpdate extends BeanBase {
   async run_atom() {
     // aAtom: atomEnabled->atomStage
     await this.bean.model.dropView('aViewUserRightAtom', true);
+    await this.bean.model.dropView('aViewRoleRightAtom', true);
+    await this.bean.model.dropView('aViewUserRightAtomRole', true);
     await this.bean.model.alterTable('aAtom', function (table) {
       table.renameColumn('atomEnabled', 'atomStage');
     });
@@ -40,7 +42,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewUserRightAtom
-    await this.bean.model.alterView('aViewUserRightAtom', view => {
+    await this.bean.model.createView('aViewUserRightAtom', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
@@ -55,7 +57,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewRoleRightAtom
-    await this.bean.model.alterView('aViewRoleRightAtom', view => {
+    await this.bean.model.createView('aViewRoleRightAtom', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
@@ -70,7 +72,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewUserRightAtomRole
-    await this.bean.model.alterView('aViewUserRightAtomRole', view => {
+    await this.bean.model.createView('aViewUserRightAtomRole', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
