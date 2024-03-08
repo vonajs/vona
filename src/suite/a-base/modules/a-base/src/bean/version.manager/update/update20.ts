@@ -246,16 +246,26 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewUserRightAtomRole
-    await this.ctx.model.query('drop view aViewUserRightAtomRole');
-    sql = `
-          create view aViewUserRightAtomRole as
-            select a.iid, a.id as atomId,a.roleIdOwner as roleIdWhom,
-                   b.userIdWho,b.action,b.areaKey,b.areaScope
-              from aAtom a,aViewUserRightAtomClassRole b
-                where a.deleted=0 and a.atomStage>0
-                  and a.atomClassId=b.atomClassId
-                  and a.roleIdOwner=b.roleIdWhom
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aViewUserRightAtomRole', view => {
+      view.as(
+        this.bean.model
+          .builder('aAtom as a')
+          .select([
+            'a.iid',
+            'a.id as atomId',
+            'a.roleIdOwner as roleIdWhom',
+            'b.userIdWho',
+            'b.action',
+            'b.areaKey',
+            'b.areaScope',
+          ])
+          .innerJoin('aViewUserRightAtomClassRole as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.roleIdOwner': 'b.roleIdWhom',
+          })
+          .where('a.deleted', 0)
+          .where('a.atomStage', '>', 0),
+      );
+    });
   }
 }
