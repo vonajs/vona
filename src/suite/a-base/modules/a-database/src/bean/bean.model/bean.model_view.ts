@@ -1,6 +1,7 @@
 import { Cast } from '@cabloy/core';
 import { BeanModelKnex } from './bean.model_knex.js';
 import { Knex } from 'knex';
+import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 
 export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async createView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
@@ -50,5 +51,34 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     const builder = this.builder();
     // dialect
     return await this.dialect.viewDependents(builder, viewName);
+  }
+
+  async viewDependentsAll(viewName: string): Promise<string[]> {
+    // views
+    const views: ISwapDepsItem[] = [{ name: viewName, dependencies: [] }];
+    // dependencies all
+    await this._viewDependentsAll_inner(viewName, views);
+    // swap
+    swapDeps(views);
+    // ok
+    return views.map(view => view.name);
+  }
+
+  private async _viewDependentsAll_inner(viewName: string, views: ISwapDepsItem[]) {
+    const dependents = await this.viewDependents(viewName);
+    for (const dependent of dependents) {
+      // dependencies
+      const view = views.find(view => view.name === dependent);
+      if (view) {
+        const dep = Cast(view.dependencies).find(dep => dep === viewName);
+        if (!dep) {
+          Cast(view.dependencies).push(viewName);
+        }
+      } else {
+        views.push({ name: dependent, dependencies: [viewName] });
+      }
+      // next
+      await this._viewDependentsAll_inner(dependent, views);
+    }
   }
 }
