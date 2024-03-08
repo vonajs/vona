@@ -5,15 +5,22 @@ import { Knex } from 'knex';
 export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async createView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
     if (callback) {
-      let _view: Knex.ViewBuilder | null = null;
       // create view
+      let _view: Knex.ViewBuilder | null = null;
       await this.schema.createView(viewName, view => {
         callback(view);
         _view = view;
       });
+      // view sql
       const sql = Cast(_view).toSQL();
+      const viewSql = sql[0].sql;
       // record view
-      await this.modelViewRecord.insert({ viewName, viewSql: sql[0].sql });
+      const viewRecord = await this.modelViewRecord.get({ viewName });
+      if (viewRecord) {
+        await this.modelViewRecord.update({ id: viewRecord.id, viewSql });
+      } else {
+        await this.modelViewRecord.insert({ viewName, viewSql });
+      }
     } else {
       // get record
       const viewRecord = await this.modelViewRecord.get({ viewName });
@@ -32,7 +39,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async alterView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
-    await this.dropView(viewName);
+    await this.dropView(viewName, false);
     await this.createView(viewName, callback);
   }
 }
