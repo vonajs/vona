@@ -39,7 +39,16 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async alterView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
+    // drop view
     await this.dropView(viewName, false);
+    // create view
     await this.createView(viewName, callback);
+  }
+
+  async viewDependents(viewName: string): Promise<string[]> {
+    // dialect
+    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+    const dialect = this.app.bean.database.getDialect(client);
+    return await dialect.insert(builder);
   }
 }

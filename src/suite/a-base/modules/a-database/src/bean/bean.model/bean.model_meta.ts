@@ -2,6 +2,7 @@ import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } fr
 import { BeanModel } from '../virtual.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
 import { __ThisModule__ } from '../../resource/this.js';
+import { Knex } from 'knex';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {
@@ -10,6 +11,15 @@ export class BeanModelMeta extends BeanBase {
 
   public get scopeModuleADatabase() {
     return this.bean.scope(__ThisModule__);
+  }
+
+  public get modelViewRecord() {
+    return this.getScope('a-version').model.viewRecord;
+  }
+
+  public get dialect() {
+    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+    return this.app.bean.database.getDialect(client);
   }
 
   protected get __beanOptions() {

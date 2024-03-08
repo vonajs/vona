@@ -7,10 +7,6 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     return this.ctx.db.schema;
   }
 
-  get modelViewRecord() {
-    return this.getScope('a-version').model.viewRecord;
-  }
-
   builder<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?: Knex.TableDescriptor,
   ): Knex.QueryBuilder<TRecord2, TResult2[]> {
