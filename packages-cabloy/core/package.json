@@ -34,6 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "@cabloy/cluster-reload": "workspace:^",
+    "@cabloy/deps": "workspace:^",
     "@cabloy/egg-socket.io": "^6.0.0",
     "@cabloy/extend": "workspace:^",
     "@cabloy/koa-static-cache": "^5.1.8",
