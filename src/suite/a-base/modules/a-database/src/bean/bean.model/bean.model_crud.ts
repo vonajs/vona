@@ -1,5 +1,5 @@
 import { Cast } from '@cabloy/core';
-import { BeanModelKnex } from './bean.model_knex.js';
+import { BeanModelView } from './bean.model_view.js';
 import {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -9,7 +9,7 @@ import {
 } from '../../types.js';
 import { Knex } from 'knex';
 
-export class BeanModelCrud<TRecord extends {}> extends BeanModelKnex<TRecord> {
+export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
     options?: IModelMethodOptionsGeneral,
