@@ -52,18 +52,18 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // cache
     const cache = this.__getCacheInstance();
-    let list = await cache.mget(ids, {
+    let items = await cache.mget(ids, {
       fn_mget: async ids => {
         return await super._mget(table, ids, { disableDeleted: true });
       },
     });
     // filter disableDeleted
-    list = list.filter(item => {
+    items = items.filter(item => {
       if (!item) return false;
       if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return false;
       return true;
     });
-    return this.__filterMGetColumns(list, options);
+    return this.__filterMGetColumns(items, options);
   }
 
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(

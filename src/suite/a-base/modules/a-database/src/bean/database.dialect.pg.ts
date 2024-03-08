@@ -26,8 +26,8 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
 
   async insert(builder: Knex.QueryBuilder): Promise<string[]> {
     builder.returning('id');
-    const list = await builder;
-    return list.map(item => item.id);
+    const items = await builder;
+    return items.map(item => item.id);
   }
 
   query(result) {

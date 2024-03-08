@@ -28,8 +28,8 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
   }
 
   async insert(builder: Knex.QueryBuilder): Promise<string[]> {
-    const list = await builder;
-    return list;
+    const items = await builder;
+    return items;
   }
 
   query(result) {

@@ -167,8 +167,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       params.columns = options?.columns;
     }
     // select
-    const list = await this._select(table, params, options);
-    const item = list[0];
+    const items = await this._select(table, params, options);
+    const item = items[0];
     if (!item) return undefined;
     return item as unknown as TResult2;
   }
