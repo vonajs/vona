@@ -35,4 +35,20 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
   query(result) {
     return result[0];
   }
+
+  async viewDependents(builder: Knex.QueryBuilder, viewName: string): Promise<string[]> {
+    const sqlViews = `
+      SELECT T.TABLE_SCHEMA ref_schema,
+        T.TABLE_NAME ref_name,
+        V.TABLE_NAME dep_name,
+        T.TABLE_TYPE type
+      FROM INFORMATION_SCHEMA.TABLES T 
+        INNER JOIN INFORMATION_SCHEMA.VIEWS V 
+          ON V.TABLE_SCHEMA = T.TABLE_SCHEMA
+          AND V.VIEW_DEFINITION LIKE CONCAT('%\`',T.TABLE_NAME,'\`%')
+      WHERE T.TABLE_SCHEMA = DATABASE()
+    `;
+    const items = await builder.distinct('dep_name').fromRaw(`(${sqlViews})`).where({ ref_name: viewName });
+    return items.map(item => item.dep_name);
+  }
 }
