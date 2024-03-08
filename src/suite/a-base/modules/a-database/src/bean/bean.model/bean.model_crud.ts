@@ -10,6 +10,7 @@ import {
 import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
+  /** not hold undefined item if not exists */
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     ids: string[],
     options?: IModelGetOptionsGeneral,
@@ -24,10 +25,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     ids?,
     options?,
   ): Promise<(TResult2 | undefined)[]> {
-    return await this._mget<TRecord2, TResult2>(table, ids, options);
+    // mget
+    const items = await this._mget<TRecord2, TResult2>(table, ids, options);
+    // filter
+    return items.filter(item => !!item);
   }
 
-  /** hold undefined item if exists */
+  /** hold undefined item if not exists */
   protected async _mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table?,
     ids?,
