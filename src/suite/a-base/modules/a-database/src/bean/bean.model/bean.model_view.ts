@@ -48,6 +48,14 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     });
   }
 
+  async createTable(tableName: string, callback: (tableBuilder: Knex.CreateTableBuilder) => any): Promise<void> {
+    await this.schema.createTable(tableName, callback);
+  }
+
+  async dropTable(tableName: string) {
+    await this.schema.dropTable(tableName);
+  }
+
   async alterTable(
     tableName: string,
     callback: (tableBuilder: Knex.CreateTableBuilder) => any,
