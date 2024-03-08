@@ -24,7 +24,7 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
     await schemaBuilder.raw(`DROP DATABASE "${databaseName}"`);
   }
 
-  async insert(builder: Knex.QueryBuilder): Promise<number[]> {
+  async insert(builder: Knex.QueryBuilder): Promise<string[]> {
     builder.returning('id');
     const list = await builder;
     return list.map(item => item.id);

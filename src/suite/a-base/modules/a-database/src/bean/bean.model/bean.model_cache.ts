@@ -25,12 +25,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    ids: number[],
+    ids: string[],
     options?: IModelGetOptions,
   ): Promise<TResult2[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    ids: number[],
+    ids: string[],
     options?: IModelGetOptions,
   ): Promise<TResult2[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table, ids, options?): Promise<TResult2[]> {
@@ -244,7 +244,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    ids: number[],
+    ids: string[],
     options?: IModelGetOptions,
   ): Promise<(TResult2 | undefined)[]> {
     // params
@@ -296,7 +296,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private async __get_key<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    where: { id: number },
+    where: { id: string },
     options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined> {
     // cache

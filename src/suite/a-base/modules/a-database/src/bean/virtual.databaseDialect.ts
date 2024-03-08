@@ -33,7 +33,7 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async insert(_builder: Knex.QueryBuilder): Promise<number[]> {
+  async insert(_builder: Knex.QueryBuilder): Promise<string[]> {
     throw new Error('Not Implemented');
   }
 

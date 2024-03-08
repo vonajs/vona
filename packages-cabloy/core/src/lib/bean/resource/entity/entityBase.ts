@@ -1,5 +1,5 @@
 export interface EntityBase {
-  id: number;
+  id: string;
   createdAt: Date;
   updatedAt: Date;
   deleted: number;
@@ -7,5 +7,5 @@ export interface EntityBase {
 }
 
 export interface EntityItemBase extends EntityBase {
-  atomId: number;
+  atomId: string;
 }
