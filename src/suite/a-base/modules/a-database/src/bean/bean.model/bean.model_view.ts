@@ -51,7 +51,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async alterTable(
     tableName: string,
     callback: (tableBuilder: Knex.CreateTableBuilder) => any,
-    disableAlterViewAuto: boolean,
+    disableAlterViewAuto?: boolean,
   ): Promise<void> {
     if (disableAlterViewAuto) {
       // alter table
@@ -64,22 +64,6 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
         return callback(table);
       });
     });
-  }
-
-  async _viewDependentsAll_handle(viewName: string, callback: () => Promise<void>) {
-    // viewDependentsAll
-    const viewDependents = await this.viewDependentsAll(viewName);
-    // drop dependents
-    for (let i = viewDependents.length - 1; i >= 0; i--) {
-      const viewDependent = viewDependents[i];
-      await this.dropView(viewDependent, false);
-    }
-    // callback
-    await callback();
-    // create dependents
-    for (const viewDependent of viewDependents) {
-      await this.createView(viewDependent);
-    }
   }
 
   async viewDependents(viewName: string): Promise<string[]> {
@@ -117,6 +101,22 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
       }
       // next
       await this._viewDependentsAll_inner(dependent, views);
+    }
+  }
+
+  private async _viewDependentsAll_handle(viewName: string, callback: () => Promise<void>) {
+    // viewDependentsAll
+    const viewDependents = await this.viewDependentsAll(viewName);
+    // drop dependents
+    for (let i = viewDependents.length - 1; i >= 0; i--) {
+      const viewDependent = viewDependents[i];
+      await this.dropView(viewDependent, false);
+    }
+    // callback
+    await callback();
+    // create dependents
+    for (const viewDependent of viewDependents) {
+      await this.createView(viewDependent);
     }
   }
 }
