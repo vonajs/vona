@@ -9,8 +9,8 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
       // create view
       let _view: Knex.ViewBuilder | null = null;
       await this.schema.createView(viewName, view => {
-        callback(view);
         _view = view;
+        return callback(view);
       });
       // view sql
       const sql = Cast(_view).toSQL();
@@ -55,6 +55,13 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     for (const viewDependent of viewDependents) {
       await this.createView(viewDependent);
     }
+  }
+
+  async alterTable(tableName: string, callback: (tableBuilder: Knex.CreateTableBuilder) => any): Promise<void> {
+    // alter table
+    await this.schema.alterTable(tableName, function (table) {
+      callback(table);
+    });
   }
 
   async viewDependents(viewName: string): Promise<string[]> {
