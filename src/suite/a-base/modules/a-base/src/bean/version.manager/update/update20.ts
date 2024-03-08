@@ -83,15 +83,27 @@ export class VersionUpdate extends BeanBase {
     //   aViewUserRightAtomClassRole(8)
 
     // aViewUserRightRefAtomClass
-    await this.ctx.model.query('drop view aViewUserRightRefAtomClass');
-    let sql = `
-        create view aViewUserRightRefAtomClass as
-          select a.iid,a.userId as userIdWho,a.roleExpandId,a.roleId,a.roleIdBase,
-                b.id as roleRightRefId,b.roleRightId,b.atomClassId,b.action,b.roleIdScope as roleIdWhom,b.areaKey,b.areaScope
-            from aViewUserRoleExpand a
-              inner join aRoleRightRef b on a.roleIdBase=b.roleId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aViewUserRightRefAtomClass', view => {
+      view.as(
+        this.bean.model
+          .builder('aViewUserRoleExpand as a')
+          .select([
+            'a.iid',
+            'a.userId as userIdWho',
+            'a.roleExpandId',
+            'a.roleId',
+            'a.roleIdBase',
+            'b.id as roleRightRefId',
+            'b.roleRightId',
+            'b.atomClassId',
+            'b.action',
+            'b.roleIdScope as roleIdWhom',
+            'b.areaKey',
+            'b.areaScope',
+          ])
+          .innerJoin('aRoleRightRef as b', { 'a.roleIdBase': 'b.roleId' }),
+      );
+    });
 
     // aViewUserRightAtomClassUser
     await this.ctx.model.query('drop view aViewUserRightAtomClassUser');
