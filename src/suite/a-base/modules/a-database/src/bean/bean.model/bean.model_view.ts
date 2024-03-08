@@ -31,8 +31,8 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   }
 
   async dropView(viewName: string, disableRemoveRecord?: boolean) {
-    // drop view
-    await this.schema.dropView(viewName);
+    // drop view: use dropViewIfExists
+    await this.schema.dropViewIfExists(viewName);
     // remove record
     if (!disableRemoveRecord) {
       await this.modelViewRecord.delete({ viewName });
