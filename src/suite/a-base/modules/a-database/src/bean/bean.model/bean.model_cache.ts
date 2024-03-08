@@ -41,20 +41,20 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // not use cache if specified table
     if (table && table !== this.table) {
-      return (await this.__mget_select(table, ids, options)) as TResult2[];
+      return (await super.mget(table, ids, options)) as TResult2[];
     }
     // table
     table = table || this.table;
     if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
-      return (await this.__mget_select(table, ids, options)) as TResult2[];
+      return (await super.mget(table, ids, options)) as TResult2[];
     }
     // cache
     const cache = this.__getCacheInstance();
     let list = await cache.mget(ids, {
       fn_mget: async ids => {
-        return await this.__mget_select(table, ids, { disableDeleted: true });
+        return await super.mget(table, ids, { disableDeleted: true });
       },
     });
     // filter disableDeleted
@@ -240,31 +240,6 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     await super.delete(table, { id }, options);
     // delete cache
     await this.__deleteCache_key(id);
-  }
-
-  private async __mget_select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    table: string,
-    ids: string[],
-    options?: IModelGetOptions,
-  ): Promise<(TResult2 | undefined)[]> {
-    // params
-    const params: IModelSelectParams = {
-      where: {
-        id: ids,
-      },
-    };
-    if (options?.columns) {
-      params.columns = options?.columns;
-    }
-    // select
-    const items = await this.select<TRecord2, TResult2>(table, params, options);
-    // sort
-    const result: (TResult2 | undefined)[] = [];
-    for (const id of ids) {
-      // item maybe undefined
-      result.push(items.find(item => Cast(item).id === id));
-    }
-    return result;
   }
 
   private async __get_notkey<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(

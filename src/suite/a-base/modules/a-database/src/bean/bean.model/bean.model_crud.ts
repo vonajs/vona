@@ -10,6 +10,58 @@ import {
 import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    ids: string[],
+    options?: IModelGetOptionsGeneral,
+  ): Promise<(TResult2 | undefined)[]>;
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table: string,
+    ids: string[],
+    options?: IModelGetOptionsGeneral,
+  ): Promise<(TResult2 | undefined)[]>;
+  async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table?,
+    ids?,
+    options?,
+  ): Promise<(TResult2 | undefined)[]> {
+    return await this._mget<TRecord2, TResult2>(table, ids, options);
+  }
+
+  /** hold undefined item if exists */
+  protected async _mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table?,
+    ids?,
+    options?,
+  ): Promise<(TResult2 | undefined)[]> {
+    if (typeof table !== 'string') {
+      options = ids;
+      ids = table;
+      table = undefined;
+    }
+    // table
+    table = table || this.table;
+    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    // params
+    const params: IModelSelectParams = {
+      where: {
+        id: ids,
+      },
+    };
+    if (options?.columns) {
+      params.columns = options?.columns;
+    }
+    // select
+    const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
+    const items = await this._select<TRecord2, TResult2>(table, params, options2);
+    // sort
+    const result: (TResult2 | undefined)[] = [];
+    for (const id of ids) {
+      // item maybe undefined
+      result.push(items.find(item => Cast(item).id === id));
+    }
+    return result;
+  }
+
   async select<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     params?: IModelSelectParams,
     options?: IModelMethodOptionsGeneral,
