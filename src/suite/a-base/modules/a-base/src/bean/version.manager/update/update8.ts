@@ -11,12 +11,12 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aFunction: scene -> sceneId
-    await this.bean.model.schema.alterTable('aFunction', function (table) {
+    await this.bean.model.alterTable('aFunction', function (table) {
       table.renameColumn('scene', 'sceneId');
     });
 
     // aAtom: add field roleIdOwner
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.int0('roleIdOwner');
     });
 

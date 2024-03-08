@@ -12,17 +12,17 @@ export class VersionManager extends BeanBase {
       });
     }
     if (options.version === 2) {
-      await this.bean.model.schema.alterTable('aInstance', function (table) {
+      await this.bean.model.alterTable('aInstance', function (table) {
         table.string('title', 255);
       });
     }
     if (options.version === 3) {
-      await this.bean.model.schema.alterTable('aInstance', function (table) {
+      await this.bean.model.alterTable('aInstance', function (table) {
         table.json('meta');
       });
     }
     if (options.version === 4) {
-      await this.bean.model.schema.alterTable('aInstance', function (table) {
+      await this.bean.model.alterTable('aInstance', function (table) {
         table.renameColumn('meta', 'config');
       });
     }

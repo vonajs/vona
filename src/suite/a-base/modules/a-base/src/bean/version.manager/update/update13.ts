@@ -3,14 +3,14 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // aRole
-    await this.bean.model.schema.alterTable('aRole', function (table) {
+    await this.bean.model.alterTable('aRole', function (table) {
       table.string('description', 255);
       table.int0('atomId');
       table.int0('roleTypeCode');
       table.json('roleConfig');
     });
     // aUser
-    await this.bean.model.schema.alterTable('aUser', function (table) {
+    await this.bean.model.alterTable('aUser', function (table) {
       table.int0('atomId');
     });
     // aViewUserRightRefAtomClass

@@ -19,7 +19,7 @@ export class VersionManager extends BeanBase {
       // delete
       await this.bean.model.builder<EntityCache>('aCache').truncate();
       // alter table: aCache
-      await this.bean.model.schema.alterTable('aCache', function (table) {
+      await this.bean.model.alterTable('aCache', function (table) {
         table.dropColumn('timeout');
         table.timestamp('expired');
       });

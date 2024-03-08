@@ -38,7 +38,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aAtom
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.int1('allowComment');
       table.int0('starCount');
       table.int0('commentCount');

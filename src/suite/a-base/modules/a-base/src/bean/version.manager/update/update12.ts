@@ -3,7 +3,7 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run(_options) {
     // aAtomClass: add atomClassInner
-    await this.bean.model.schema.alterTable('aAtomClass', function (table) {
+    await this.bean.model.alterTable('aAtomClass', function (table) {
       table.int0('atomClassInner');
     });
 

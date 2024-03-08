@@ -10,24 +10,25 @@ export class VersionUpdate extends BeanBase {
 
   async run_atom() {
     // aAtom: atomEnabled->atomStage
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.dropView('aViewUserRightAtom', true);
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.renameColumn('atomEnabled', 'atomStage');
     });
 
     // aAtom: atomFlow->atomFlowId
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.renameColumn('atomFlow', 'atomFlowId');
     });
 
     // aAtom: add field atomClosed/atomIdDraft/atomIdArchive
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.int0('atomClosed');
       table.int0('atomIdDraft');
       table.int0('atomIdArchive');
     });
 
     // aAtom: add field atomStatic/atomStaticKey/atomRevision
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.int0('atomStatic');
       table.string('atomStaticKey', 255);
       table.int0('atomRevision');
@@ -84,7 +85,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aAtomAction: add field bulk
-    await this.bean.model.schema.alterTable('aAtomAction', function (table) {
+    await this.bean.model.alterTable('aAtomAction', function (table) {
       table.int0('bulk');
     });
     //   update action:create as bulk
@@ -93,7 +94,7 @@ export class VersionUpdate extends BeanBase {
 
   async run_categorytag() {
     // aAtom: add field atomLanguage\atomCategoryId
-    await this.bean.model.schema.alterTable('aAtom', function (table) {
+    await this.bean.model.alterTable('aAtom', function (table) {
       table.string('atomLanguage', 50);
       table.int0('atomCategoryId');
       table.json('atomTags');
