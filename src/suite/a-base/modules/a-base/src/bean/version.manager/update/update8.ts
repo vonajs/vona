@@ -21,7 +21,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewRoleRightAtomClass
-    await this.bean.model.schema.createView('aViewRoleRightAtomClass', view => {
+    await this.bean.model.createView('aViewRoleRightAtomClass', view => {
       view.as(
         this.bean.model
           .builder('aRoleExpand as a')
@@ -39,7 +39,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewUserRightAtomClassRole
-    await this.bean.model.schema.createView('aViewUserRightAtomClassRole', view => {
+    await this.bean.model.createView('aViewUserRightAtomClassRole', view => {
       view.as(
         this.bean.model
           .builder('aViewUserRoleExpand as a')
@@ -50,7 +50,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewUserRightAtomRole
-    await this.bean.model.schema.createView('aViewUserRightAtomRole', view => {
+    await this.bean.model.createView('aViewUserRightAtomRole', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')

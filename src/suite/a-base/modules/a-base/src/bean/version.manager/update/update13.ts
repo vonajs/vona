@@ -14,7 +14,7 @@ export class VersionUpdate extends BeanBase {
       table.int0('atomId');
     });
     // aViewUserRightRefAtomClass
-    await this.bean.model.schema.createView('aViewUserRightRefAtomClass', view => {
+    await this.bean.model.createView('aViewUserRightRefAtomClass', view => {
       view.as(
         this.bean.model
           .builder('aViewUserRoleExpand as a')
@@ -74,7 +74,7 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // aViewRoleRightAtomClassRole
-    await this.bean.model.schema.createView('aViewRoleRightAtomClassRole', view => {
+    await this.bean.model.createView('aViewRoleRightAtomClassRole', view => {
       view.as(
         this.bean.model
           .builder('aRoleExpand as a')
@@ -93,7 +93,7 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // aViewRoleRightResource
-    await this.bean.model.schema.createView('aViewRoleRightResource', view => {
+    await this.bean.model.createView('aViewRoleRightResource', view => {
       view.as(
         this.bean.model
           .builder('aRoleExpand as a')
@@ -102,7 +102,7 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // view: aRoleView
-    await this.bean.model.schema.createView('aRoleView', view => {
+    await this.bean.model.createView('aRoleView', view => {
       view.as(
         this.bean.model
           .builder('aRole as a')
@@ -111,7 +111,7 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // view: aRoleIncludesView
-    await this.bean.model.schema.createView('aRoleIncludesView', view => {
+    await this.bean.model.createView('aRoleIncludesView', view => {
       view.as(
         this.bean.model
           .builder('aRole as a')
@@ -120,7 +120,7 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // view: aRoleUserRolesView
-    await this.bean.model.schema.createView('aRoleUserRolesView', view => {
+    await this.bean.model.createView('aRoleUserRolesView', view => {
       view.as(
         this.bean.model
           .builder('aRole as a')

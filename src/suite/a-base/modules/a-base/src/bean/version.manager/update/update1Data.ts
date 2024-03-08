@@ -209,7 +209,7 @@ const tables = {
 
 const views = {
   aViewUserRoleRef(viewName: string, model: BeanModel): any {
-    return model.schema.createView(viewName, function (view) {
+    return model.createView(viewName, function (view) {
       view.columns(['iid', 'userId', 'roleId', 'roleIdParent', 'level']);
       view.as(
         model
@@ -220,7 +220,7 @@ const views = {
     });
   },
   aViewUserRoleExpand(viewName: string, model: BeanModel): any {
-    return model.schema.createView(viewName, function (view) {
+    return model.createView(viewName, function (view) {
       view.columns(['iid', 'userId', 'roleId', 'roleIdBase', 'roleExpandId']);
       view.as(
         model
@@ -231,7 +231,7 @@ const views = {
     });
   },
   aViewUserRightAtomClass(viewName: string, model: BeanModel): any {
-    return model.schema.createView(viewName, function (view) {
+    return model.createView(viewName, function (view) {
       view.columns([
         'iid',
         'userIdWho',
@@ -262,7 +262,7 @@ const views = {
     });
   },
   aViewUserRightAtomClassUser(viewName: string, model: BeanModel): any {
-    return model.schema.createView(viewName, function (view) {
+    return model.createView(viewName, function (view) {
       view.columns(['iid', 'userIdWho', 'atomClassId', 'action', 'userIdWhom']);
       view.as(
         model
@@ -274,7 +274,7 @@ const views = {
     });
   },
   aViewUserRightAtom(viewName: string, model: BeanModel): any {
-    return model.schema.createView(viewName, function (view) {
+    return model.createView(viewName, function (view) {
       view.columns(['iid', 'atomId', 'userIdWhom', 'userIdWho', 'action']);
       view.as(
         model
@@ -292,7 +292,7 @@ const views = {
     });
   },
   aViewUserRightFunction(viewName: string, model: BeanModel): any {
-    return model.schema.createView(viewName, function (view) {
+    return model.createView(viewName, function (view) {
       view.columns(['iid', 'userIdWho', 'roleExpandId', 'roleId', 'roleIdBase', 'roleFunctionId', 'functionId']);
       view.as(
         model

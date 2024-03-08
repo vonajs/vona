@@ -3,7 +3,7 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // aViewRoleRightAtomClassUser
-    await this.bean.model.schema.createView('aViewRoleRightAtomClassUser', view => {
+    await this.bean.model.createView('aViewRoleRightAtomClassUser', view => {
       view.columns(['iid', 'roleIdWho', 'atomClassId', 'action', 'userIdWhom']);
       view.as(
         this.bean.model
@@ -15,7 +15,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewRoleRightAtom
-    await this.bean.model.schema.createView('aViewRoleRightAtom', view => {
+    await this.bean.model.createView('aViewRoleRightAtom', view => {
       view.columns(['iid', 'atomId', 'userIdWhom', 'roleIdWho', 'action']);
       view.as(
         this.bean.model

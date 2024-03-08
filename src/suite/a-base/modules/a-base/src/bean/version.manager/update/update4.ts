@@ -18,7 +18,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewComment
-    await this.bean.model.schema.createView('aViewComment', view => {
+    await this.bean.model.createView('aViewComment', view => {
       view.as(
         this.bean.model
           .builder('aComment as a')

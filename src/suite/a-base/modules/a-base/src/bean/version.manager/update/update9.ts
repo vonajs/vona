@@ -157,7 +157,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewUserRightResource
-    await this.bean.model.schema.createView('aViewUserRightResource', view => {
+    await this.bean.model.createView('aViewUserRightResource', view => {
       view.as(
         this.bean.model
           .builder('aViewUserRoleExpand as a')
