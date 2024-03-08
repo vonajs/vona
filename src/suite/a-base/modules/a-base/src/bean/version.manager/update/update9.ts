@@ -39,8 +39,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewUserRightAtom
-    await this.bean.model.dropView('aViewUserRightAtom');
-    await this.bean.model.createView('aViewUserRightAtom', view => {
+    await this.bean.model.alterView('aViewUserRightAtom', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
@@ -55,8 +54,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewRoleRightAtom
-    await this.bean.model.schema.dropView('aViewRoleRightAtom');
-    await this.bean.model.schema.createView('aViewRoleRightAtom', view => {
+    await this.bean.model.alterView('aViewRoleRightAtom', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
@@ -71,8 +69,7 @@ export class VersionUpdate extends BeanBase {
     });
 
     // alter view: aViewUserRightAtomRole
-    await this.bean.model.schema.dropView('aViewUserRightAtomRole');
-    await this.bean.model.schema.createView('aViewUserRightAtomRole', view => {
+    await this.bean.model.alterView('aViewUserRightAtomRole', view => {
       view.as(
         this.bean.model
           .builder('aAtom as a')
@@ -180,7 +177,7 @@ export class VersionUpdate extends BeanBase {
 
   async run_function() {
     // drop view: aViewUserRightFunction
-    await this.bean.model.schema.dropView('aViewUserRightFunction');
+    await this.bean.model.dropView('aViewUserRightFunction');
     // drop table: aFunction
     await this.bean.model.schema.dropTable('aFunction');
     // drop table: aFunctionLocale

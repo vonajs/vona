@@ -30,11 +30,11 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
   }
 
-  async dropView(viewName: string, removeRecord?: boolean) {
+  async dropView(viewName: string, disableRemoveRecord?: boolean) {
     // drop view
     await this.schema.dropView(viewName);
     // remove record
-    if (removeRecord) {
+    if (!disableRemoveRecord) {
       await this.modelViewRecord.delete({ viewName });
     }
   }
@@ -42,7 +42,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
   async alterView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
     await this._viewDependentsAll_handle(viewName, async () => {
       // drop view
-      await this.dropView(viewName, false);
+      await this.dropView(viewName, true);
       // create view
       await this.createView(viewName, callback);
     });
@@ -110,7 +110,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     // drop dependents
     for (let i = viewDependents.length - 1; i >= 0; i--) {
       const viewDependent = viewDependents[i];
-      await this.dropView(viewDependent, false);
+      await this.dropView(viewDependent, true);
     }
     // callback
     await callback();

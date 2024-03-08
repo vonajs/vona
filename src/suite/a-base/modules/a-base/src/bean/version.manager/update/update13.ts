@@ -54,8 +54,7 @@ export class VersionUpdate extends BeanBase {
       );
     });
     // aViewRoleRightAtomClassUser
-    await this.bean.model.schema.dropView('aViewRoleRightAtomClassUser');
-    await this.bean.model.schema.createView('aViewRoleRightAtomClassUser', view => {
+    await this.bean.model.alterView('aViewRoleRightAtomClassUser', view => {
       view.as(
         this.bean.model
           .builder('aRoleExpand as a')
