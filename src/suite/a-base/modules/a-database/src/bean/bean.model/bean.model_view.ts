@@ -30,4 +30,9 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
       await this.modelViewRecord.delete({ viewName });
     }
   }
+
+  async alterView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
+    await this.dropView(viewName);
+    await this.createView(viewName, callback);
+  }
 }
