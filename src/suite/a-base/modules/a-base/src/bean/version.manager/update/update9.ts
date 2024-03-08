@@ -182,14 +182,14 @@ export class VersionUpdate extends BeanBase {
     // drop view: aViewUserRightFunction
     await this.bean.model.dropView('aViewUserRightFunction');
     // drop table: aFunction
-    await this.bean.model.schema.dropTable('aFunction');
+    await this.bean.model.dropTable('aFunction');
     // drop table: aFunctionLocale
-    await this.bean.model.schema.dropTable('aFunctionLocale');
+    await this.bean.model.dropTable('aFunctionLocale');
     // drop table: aFunctionScene
-    await this.bean.model.schema.dropTable('aFunctionScene');
+    await this.bean.model.dropTable('aFunctionScene');
     // drop table: aFunctionStar
-    await this.bean.model.schema.dropTable('aFunctionStar');
+    await this.bean.model.dropTable('aFunctionStar');
     // drop table: aRoleFunction
-    await this.bean.model.schema.dropTable('aRoleFunction');
+    await this.bean.model.dropTable('aRoleFunction');
   }
 }
