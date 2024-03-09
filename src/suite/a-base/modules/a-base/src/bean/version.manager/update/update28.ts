@@ -12,11 +12,9 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async run(options) {
     // aResourceRole: add roleAtomId
-    const sql = `
-        ALTER TABLE aResourceRole
-          Add COLUMN roleAtomId int(11) DEFAULT '0'
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aResourceRole', function (table) {
+      table.int0('roleAtomId');
+    });
     // adjustRoleRights
     await this._adjustResourceRoles(options);
   }
