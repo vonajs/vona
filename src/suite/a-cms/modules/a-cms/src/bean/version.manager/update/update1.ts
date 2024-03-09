@@ -3,31 +3,24 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // create table: aCmsArticle
-    let sql = `
-        CREATE TABLE aCmsArticle (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          atomId int(11) DEFAULT '0',
-          categoryId int(11) DEFAULT '0',
-          language varchar(50) DEFAULT NULL,
-          sticky int(11) DEFAULT '0',
-          keywords varchar(255) DEFAULT NULL,
-          description text DEFAULT NULL,
-          summary text DEFAULT NULL,
-          url varchar(255) DEFAULT NULL,
-          editMode int(11) DEFAULT '0',
-          slug varchar(255) DEFAULT NULL,
-          sorting int(11) DEFAULT '0',
-          flag varchar(255) DEFAULT NULL,
-          extra json DEFAULT NULL,
-          imageFirst varchar(255) DEFAULT NULL,
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aCmsArticle', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.int0('categoryId');
+      table.string('language', 50);
+      table.int0('sticky');
+      table.string('keywords', 255);
+      table.text('description');
+      table.text('summary');
+      table.string('url', 255);
+      table.int0('editMode');
+      table.string('slug', 255);
+      table.int0('sorting');
+      table.string('flag', 255);
+      table.json('extra');
+      table.string('imageFirst', 255);
+    });
+
     // create table: aCmsContent
     sql = `
         CREATE TABLE aCmsContent (
@@ -44,6 +37,8 @@ export class VersionUpdate extends BeanBase {
         )
       `;
     await this.ctx.model.query(sql);
+    await this.bean.model.createTable('', function (table) {});
+
     // create table: aCmsCategory
     sql = `
         CREATE TABLE aCmsCategory (
