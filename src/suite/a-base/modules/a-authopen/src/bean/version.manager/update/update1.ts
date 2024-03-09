@@ -3,26 +3,19 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // create table: aAuthOpen
-    let sql = `
-      CREATE TABLE aAuthOpen (
-        id int(11) NOT NULL AUTO_INCREMENT,
-        createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        deleted int(11) DEFAULT '0',
-        iid int(11) DEFAULT '0',
-        atomId int(11) DEFAULT '0',
-        description varchar(255) DEFAULT NULL,
-        userId int(11) DEFAULT '0',
-        scopeRoleId int(11) DEFAULT '0',
-        neverExpire int(11) DEFAULT '1',
-        expireTime timestamp DEFAULT NULL,
-        clientID varchar(50) DEFAULT NULL,
-        clientSecret text DEFAULT NULL,
-        clientSecretHidden int(11) DEFAULT '0',
-        PRIMARY KEY (id)
-      )
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aAuthOpen', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.description();
+      table.userId();
+      table.int0('scopeRoleId');
+      table.int0('neverExpire');
+      table.timestamp('expireTime');
+      table.string('clientID', 50);
+      table.text('clientSecret');
+      table.int0('clientSecretHidden');
+    });
+
     // view: aAuthOpenView
     sql = `
           CREATE VIEW aAuthOpenView as
