@@ -33,6 +33,11 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
       return this.string(method, length);
     });
   });
+  ['content'].forEach(function (method) {
+    knex.TableBuilder.extend(method, function (useText) {
+      return useText ? this.text(method) : this.json(method);
+    });
+  });
 }
 
 declare module 'knex' {
@@ -45,6 +50,7 @@ declare module 'knex' {
       itemId(): Knex.ColumnBuilder;
       userId(): Knex.ColumnBuilder;
       description(length?: number): Knex.ColumnBuilder;
+      content(useText?: boolean): Knex.ColumnBuilder;
     }
   }
 }
