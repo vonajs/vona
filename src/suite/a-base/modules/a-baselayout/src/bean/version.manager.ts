@@ -14,10 +14,6 @@ export class VersionManager extends BeanBase {
         table.basicFields();
         table.atomId();
         table.description();
-      });
-
-      // aLayout
-      await this.bean.model.createTable('aLayout', function (table) {
         table.int0('layoutTypeCode');
       });
 
