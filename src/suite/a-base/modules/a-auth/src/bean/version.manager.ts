@@ -5,17 +5,14 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // aAuthProvider: add scenes
-      let sql = `
-      ALTER TABLE aAuthProvider
-        ADD COLUMN scenes JSON DEFAULT NULL
-                `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aAuthProvider', function (table) {
+        table.json('scenes');
+      });
+
       // aAuth: add providerScene
-      sql = `
-      ALTER TABLE aAuth
-        ADD COLUMN providerScene varchar(255) DEFAULT NULL
-                `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aAuth', function (table) {
+        table.string('providerScene', 255);
+      });
     }
   }
 
