@@ -3,18 +3,18 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run(_options) {
     // aDict: add dictMode
-    let sql = `
-      ALTER TABLE aDict
-        Add COLUMN dictMode int(11) DEFAULT '0'
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aDict', function (table) {
+      table.int0('dictMode');
+    });
+
     // alter view: aDictViewFull
-    await this.ctx.model.query('drop view aDictViewFull');
-    sql = `
-      CREATE VIEW aDictViewFull as
-        select a.*,b.dictItems,b.dictLocales from aDict a
-          left join aDictContent b on a.id=b.itemId
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aDictViewFull', view => {
+      view.as(
+        this.bean.model
+          .builder('aDict as a')
+          .select(['a.*', 'b.dictItems', 'b.dictLocales'])
+          .leftJoin('aDictContent as b', { 'a.id': 'b.itemId' }),
+      );
+    });
   }
 }
