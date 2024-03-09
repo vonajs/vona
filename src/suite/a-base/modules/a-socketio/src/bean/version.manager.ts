@@ -5,86 +5,58 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 3) {
       // aSocketIOMessageSync
-      const sql = `
-        ALTER TABLE aSocketIOMessageSync
-          ADD COLUMN messageClassId int(11) DEFAULT '0'
-                  `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aSocketIOMessageSync', function (table) {
+        table.int0('messageClassId');
+      });
     }
 
     if (options.version === 2) {
       // aSocketIOMessageClass
-      const sql = `
-        ALTER TABLE aSocketIOMessageClass
-          ADD COLUMN uniform int(11) DEFAULT '0'
-                  `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aSocketIOMessageClass', function (table) {
+        table.int0('uniform');
+      });
     }
 
     if (options.version === 1) {
-      let sql;
-
       // create table: aSocketIOMessageClass
-      sql = `
-          CREATE TABLE aSocketIOMessageClass (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            module varchar(255) DEFAULT NULL,
-            messageClassName varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aSocketIOMessageClass', function (table) {
+        table.basicFields();
+        table.string('module', 255);
+        table.string('messageClassName', 255);
+      });
 
       // create table: aSocketIOMessage
-      sql = `
-          CREATE TABLE aSocketIOMessage (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            messageClassId int(11) DEFAULT '0',
-            messageType int(11) DEFAULT '0',
-            messageFilter varchar(255) DEFAULT NULL,
-            messageGroup int(11) DEFAULT '0',
-            messageScene varchar(50) DEFAULT NULL,
-            userIdTo int(11) DEFAULT '0',
-            userIdFrom int(11) DEFAULT '0',
-            sessionId varchar(255) DEFAULT NULL,
-            content json DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aSocketIOMessage', function (table) {
+        table.basicFields();
+        table.int0('messageClassId');
+        table.int0('messageType');
+        table.string('messageFilter', 255);
+        table.int0('messageGroup');
+        table.string('messageScene', 50);
+        table.int0('userIdTo');
+        table.int0('userIdFrom');
+        table.string('sessionId', 255);
+        table.content();
+      });
 
       // create table: aSocketIOMessageSync
-      sql = `
-          CREATE TABLE aSocketIOMessageSync (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            messageId int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            messageDirection int(11) DEFAULT '0',
-            messageRead int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aSocketIOMessageSync', function (table) {
+        table.basicFields();
+        table.int0('messageId');
+        table.int0('userId');
+        table.int0('messageDirection');
+        table.int0('messageRead');
+      });
 
       // create view: aSocketIOMessageView
-      sql = `
-          CREATE VIEW aSocketIOMessageView as
-            select a.*,b.userId,b.messageDirection,b.messageRead,b.deleted as syncDeleted from aSocketIOMessage a
-              left join aSocketIOMessageSync b on a.id=b.messageId
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createView('aSocketIOMessageView', view => {
+        view.as(
+          this.bean.model
+            .builder('aSocketIOMessage as a')
+            .select(['a.*', 'b.userId', 'b.messageDirection', 'b.messageRead', 'b.deleted as syncDeleted'])
+            .leftJoin('aSocketIOMessageSync as b', { 'a.id': 'b.messageId' }),
+        );
+      });
     }
   }
 
