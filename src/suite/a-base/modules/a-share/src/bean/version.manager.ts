@@ -4,56 +4,30 @@ import { Bean, BeanBase } from '@cabloy/core';
 export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
-      let sql;
-
       // create table: aShare
-      sql = `
-          CREATE TABLE aShare (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            uuid varchar(50) DEFAULT NULL,
-            atomId int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            host varchar(255) DEFAULT NULL,
-            url varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aShare', function (table) {
+        table.basicFields();
+        table.string('uuid', 50);
+        table.atomId();
+        table.userId();
+        table.string('host', 255);
+        table.string('url', 255);
+      });
 
       // create table: aShareRecordPV
-      sql = `
-          CREATE TABLE aShareRecordPV (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            shareId int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aShareRecordPV', function (table) {
+        table.basicFields();
+        table.int0('shareId');
+        table.userId();
+      });
 
       // create table: aShareRecordUV
-      sql = `
-          CREATE TABLE aShareRecordUV (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            userIdSource int(11) DEFAULT '0',
-            userIdTarget int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aShareRecordUV', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.int0('userIdSource');
+        table.int0('userIdTarget');
+      });
     }
   }
 
