@@ -2,10 +2,10 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run() {
-    await this._alterTables();
     await this._alterViews_aRoleRight_level1();
     await this._alterViews_aRoleRightRef_level1();
     await this._alterViews_aRoleRightRef_level2();
+    await this._alterTables();
   }
 
   async _alterTables() {
@@ -77,6 +77,11 @@ export class VersionUpdate extends BeanBase {
     //   aViewRoleRightAtomClassUser(13)
     //   aViewRoleRightAtomClassRole(13)
     //   aViewUserRightAtomClassRole(8)
+
+    // drop views
+    await this.bean.model.dropView('aViewUserRightAtom');
+    await this.bean.model.dropView('aViewRoleRightAtom');
+    await this.bean.model.dropView('aViewUserRightAtomRole');
 
     // aViewUserRightRefAtomClass
     await this.bean.model.alterView('aViewUserRightRefAtomClass', view => {
