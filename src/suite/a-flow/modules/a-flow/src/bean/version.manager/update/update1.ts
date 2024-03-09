@@ -19,12 +19,14 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create view: aFlowDefViewFull
-    sql = `
-        CREATE VIEW aFlowDefViewFull as
-          select a.*,b.content from aFlowDef a
-            left join aFlowDefContent b on a.id=b.itemId
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aFlowDefViewFull', view => {
+      view.as(
+        this.bean.model
+          .builder('aFlowDef as a')
+          .select(['a.*', 'b.content'])
+          .leftJoin('aFlowDefContent as b', { 'a.id': 'b.itemId' }),
+      );
+    });
 
     // create table: aFlow
     //  flowStatus: 1/end
