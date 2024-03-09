@@ -3,87 +3,74 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // create table: aCmsTag
-    let sql = `
-    CREATE TABLE aCmsTag (
-      id int(11) NOT NULL AUTO_INCREMENT,
-      createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      deleted int(11) DEFAULT '0',
-      iid int(11) DEFAULT '0',
-      language varchar(50) DEFAULT NULL,
-      tagName varchar(50) DEFAULT NULL,
-      articleCount int(11) DEFAULT '0',
-      PRIMARY KEY (id)
-    )
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aCmsTag', function (table) {
+      table.basicFields();
+      table.string('language', 50);
+      table.string('tagName', 50);
+      table.int0('articleCount');
+    });
+
     // create table: aCmsArticleTag
-    sql = `
-    CREATE TABLE aCmsArticleTag (
-      id int(11) NOT NULL AUTO_INCREMENT,
-      createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      deleted int(11) DEFAULT '0',
-      iid int(11) DEFAULT '0',
-      atomId int(11) DEFAULT '0',
-      itemId int(11) DEFAULT '0',
-      tags JSON DEFAULT NULL,
-      PRIMARY KEY (id)
-    )
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aCmsArticleTag', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.itemId();
+      table.json('tags');
+    });
+
     // create table: aCmsArticleTagRef
-    sql = `
-    CREATE TABLE aCmsArticleTagRef (
-      id int(11) NOT NULL AUTO_INCREMENT,
-      createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      deleted int(11) DEFAULT '0',
-      iid int(11) DEFAULT '0',
-      atomId int(11) DEFAULT '0',
-      itemId int(11) DEFAULT '0',
-      tagId int(11) DEFAULT '0',
-      PRIMARY KEY (id)
-    )
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aCmsArticleTagRef', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.itemId();
+      table.int0('tagId');
+    });
+
     // alter view: aCmsArticleView
-    await this.ctx.model.query('drop view aCmsArticleView');
-    sql = `
-    CREATE VIEW aCmsArticleView as
-      select a.*,b.categoryName,e.tags from aCmsArticle a
-        left join aCmsCategory b on a.categoryId=b.id
-        left join aCmsArticleTag e on a.id=e.itemId
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleView', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' }),
+      );
+    });
+
     // alter view: aCmsArticleViewFull
-    await this.ctx.model.query('drop view aCmsArticleViewFull');
-    sql = `
-    CREATE VIEW aCmsArticleViewFull as
-      select a.*,b.categoryName,e.tags,c.content,c.html from aCmsArticle a
-        left join aCmsCategory b on a.categoryId=b.id
-        left join aCmsContent c on a.id=c.itemId
-        left join aCmsArticleTag e on a.id=e.itemId
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleViewFull', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags', 'c.content', 'c.html'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsContent as c', { 'a.id': 'c.itemId' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' }),
+      );
+    });
+
     // create view: aCmsArticleViewSearch
-    sql = `
-    CREATE VIEW aCmsArticleViewSearch as
-      select a.*,b.categoryName,e.tags,c.content,c.html,concat(d.atomName,',',c.content) contentSearch from aCmsArticle a
-        left join aCmsCategory b on a.categoryId=b.id
-        left join aCmsContent c on a.id=c.itemId
-        left join aAtom d on a.atomId=d.id
-        left join aCmsArticleTag e on a.id=e.itemId
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aCmsArticleViewSearch', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags', 'c.content', 'c.html', 'c.content as contentSearch'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsContent as c', { 'a.id': 'c.itemId' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' }),
+      );
+    });
+
     // create view: aCmsArticleViewTag
-    sql = `
-    CREATE VIEW aCmsArticleViewTag as
-      select a.*,b.categoryName,e.tags,f.tagId from aCmsArticle a
-        left join aCmsCategory b on a.categoryId=b.id
-        left join aCmsArticleTag e on a.id=e.itemId
-        left join aCmsArticleTagRef f on a.id=f.itemId
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aCmsArticleViewTag', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags', 'f.tagId'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' })
+          .leftJoin('aCmsArticleTagRef as f', { 'a.id': 'f.itemId' }),
+      );
+    });
   }
 }
