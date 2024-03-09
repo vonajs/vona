@@ -6,7 +6,6 @@ export class VersionUpdate extends BeanBase {
     await this._update7Migration_schemas();
   }
   async _update7Migration_schemas() {
-    let sql;
     // aCmsArticle
     await this.bean.model.alterTable('aCmsArticle', function (table) {
       table.dropColumn('categoryId');
@@ -20,32 +19,35 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model.dropTable('aCmsArticleTagRef');
 
     // aCmsCategory
-    sql = 'DROP TABLE aCmsCategory';
-    await this.ctx.model.query(sql);
+    await this.bean.model.dropTable('aCmsCategory');
+
     // aCmsTag
-    sql = 'DROP TABLE aCmsTag';
-    await this.ctx.model.query(sql);
+    await this.bean.model.dropTable('aCmsTag');
+
     // aCmsArticleView
-    sql = 'DROP VIEW aCmsArticleView';
-    await this.ctx.model.query(sql);
+    await this.bean.model.dropView('aCmsArticleView');
+
     // aCmsArticleViewFull
-    await this.ctx.model.query('drop view aCmsArticleViewFull');
-    sql = `
-          CREATE VIEW aCmsArticleViewFull as
-            select a.*,b.content,b.html from aCmsArticle a
-              left join aCmsContent b on a.id=b.itemId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleViewFull', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.content', 'b.html'])
+          .leftJoin('aCmsContent as b', { 'a.id': 'b.itemId' }),
+      );
+    });
+
     // aCmsArticleViewSearch
-    await this.ctx.model.query('drop view aCmsArticleViewSearch');
-    sql = `
-          CREATE VIEW aCmsArticleViewSearch as
-            select a.*,b.content,b.html,concat(c.atomName,',',b.content) contentSearch from aCmsArticle a
-              left join aCmsContent b on a.id=b.itemId
-              left join aAtom c on a.atomId=c.id
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleViewSearch', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.content', 'b.html', 'b.content as contentSearch'])
+          .leftJoin('aCmsContent as b', { 'a.id': 'b.itemId' }),
+      );
+    });
+
     // aCmsArticleViewTag
-    await this.ctx.model.query('drop view aCmsArticleViewTag');
+    await this.bean.model.dropView('aCmsArticleViewTag');
   }
 }
