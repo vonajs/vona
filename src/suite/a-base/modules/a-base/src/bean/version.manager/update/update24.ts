@@ -79,14 +79,6 @@ export class VersionUpdate extends BeanBase {
     //   aViewUserRightAtomClassRole(8)
 
     // aViewUserRightRefAtomClass
-    await this.ctx.model.query('drop view aViewUserRightRefAtomClass');
-    let sql = `
-        create view  as
-          select 
-            from 
-              inner join  on 
-        `;
-    await this.ctx.model.query(sql);
     await this.bean.model.alterView('aViewUserRightRefAtomClass', view => {
       view.as(
         this.bean.model
@@ -108,17 +100,25 @@ export class VersionUpdate extends BeanBase {
     });
 
     // aViewUserRightAtomClassUser
-    await this.ctx.model.query('drop view aViewUserRightAtomClassUser');
-    sql = `
-        create view aViewUserRightAtomClassUser as
-          select a.iid,a.userId as userIdWho,b.atomClassId,b.action,
-                c.userId as userIdWhom,c.roleId as roleIdWhom,
-                a.roleIdBase,c.roleIdParent,c.level as roleIdParentLevel
-            from aViewUserRoleExpand a
-              inner join aRoleRightRef b on a.roleIdBase=b.roleId
-              inner join aViewUserRoleRef c on b.roleIdScope=c.roleIdParent
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aViewUserRightAtomClassUser', view => {
+      view.as(
+        this.bean.model
+          .builder('aViewUserRoleExpand as a')
+          .select([
+            'a.iid',
+            'a.userId as userIdWho',
+            'b.atomClassId',
+            'b.action',
+            'c.userId as userIdWhom',
+            'c.roleId as roleIdWhom',
+            'a.roleIdBase',
+            'c.roleIdParent',
+            'c.level as roleIdParentLevel',
+          ])
+          .innerJoin('aRoleRightRef as b', { 'a.roleIdBase': 'b.roleId' })
+          .innerJoin('aViewUserRoleRef as c', { 'b.roleIdScope': 'c.roleIdParent' }),
+      );
+    });
 
     // aViewRoleRightAtomClassUser
     await this.ctx.model.query('drop view aViewRoleRightAtomClassUser');
