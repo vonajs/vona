@@ -17,6 +17,9 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
     if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
   });
+  knex.TableBuilder.extend('id0', function (columnName) {
+    return this.integer(columnName).defaultTo(0);
+  });
   knex.TableBuilder.extend('int0', function (columnName) {
     return this.integer(columnName).defaultTo(0);
   });
