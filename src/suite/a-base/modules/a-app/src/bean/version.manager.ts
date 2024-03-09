@@ -5,65 +5,50 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aApp
-      let sql = `
-          CREATE TABLE aApp (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            description varchar(255) DEFAULT NULL,
-            appSorting int(11) DEFAULT '0',
-            appIcon varchar(255) DEFAULT NULL,
-            appIsolate int(11) DEFAULT '0',
-            appLanguage int(11) DEFAULT '0',
-            appCms int(11) DEFAULT '0',
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aApp', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.description();
+        table.int0('appSorting');
+        table.string('appIcon', 255);
+        table.int0('appIsolate');
+        table.int0('appLanguage');
+        table.int0('appCms');
+      });
 
       // create table: aAppContent
-      sql = `
-          CREATE TABLE aAppContent (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            itemId int(11) DEFAULT '0',
-            content JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aAppContent', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.itemId();
+        table.content();
+      });
 
       // create view: aAppViewFull
-      sql = `
-          CREATE VIEW aAppViewFull as
-            select a.*,b.content from aApp a
-              left join aAppContent b on a.id=b.itemId
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createView('aAppViewFull', view => {
+        view.as(
+          this.bean.model
+            .builder('aApp as a')
+            .select(['a.*', 'b.content'])
+            .leftJoin('aAppContent as b', { 'a.id': 'b.itemId' }),
+        );
+      });
     }
 
     if (options.version === 2) {
-      let sql = `
-          ALTER TABLE aApp
-            ADD COLUMN appHidden int(11) DEFAULT '0'
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aApp', function (table) {
+        table.int0('appHidden');
+      });
 
       // alter view: aAppViewFull
-      await this.ctx.model.query('drop view aAppViewFull');
-      sql = `
-          CREATE VIEW aAppViewFull as
-            select a.*,b.content from aApp a
-              left join aAppContent b on a.id=b.itemId
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterView('aAppViewFull', view => {
+        view.as(
+          this.bean.model
+            .builder('aApp as a')
+            .select(['a.*', 'b.content'])
+            .leftJoin('aAppContent as b', { 'a.id': 'b.itemId' }),
+        );
+      });
     }
   }
 
