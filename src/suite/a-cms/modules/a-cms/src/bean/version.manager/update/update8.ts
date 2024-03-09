@@ -7,6 +7,10 @@ export class VersionUpdate extends BeanBase {
   }
   async _update7Migration_schemas() {
     // aCmsArticle
+    await this.bean.model.dropView('aCmsArticleView', true);
+    await this.bean.model.dropView('aCmsArticleViewFull', true);
+    await this.bean.model.dropView('aCmsArticleViewSearch', true);
+    await this.bean.model.dropView('aCmsArticleViewTag', true);
     await this.bean.model.alterTable('aCmsArticle', function (table) {
       table.dropColumn('categoryId');
       table.dropColumn('language');
