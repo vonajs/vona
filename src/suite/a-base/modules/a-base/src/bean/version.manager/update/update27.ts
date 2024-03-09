@@ -12,11 +12,9 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async run(options) {
     // aRoleExpand: add roleAtomId
-    const sql = `
-        ALTER TABLE aRoleExpand
-          Add COLUMN roleAtomId int(11) DEFAULT '0'
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aRoleExpand', function (table) {
+      table.int0('roleAtomId');
+    });
     // adjustRoleExpands
     await this._adjustRoleExpands(options);
   }
