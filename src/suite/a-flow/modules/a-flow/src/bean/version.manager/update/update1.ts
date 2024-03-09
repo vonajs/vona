@@ -2,7 +2,6 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {
-    let sql;
     // create table: aFlowDef
     await this.bean.model.createTable('aFlowDef', function (table) {
       table.basicFields();
