@@ -3,42 +3,27 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run(_options) {
     // create table: aUserOnline
-    let sql = `
-      CREATE TABLE aUserOnline (
-        id int(11) NOT NULL AUTO_INCREMENT,
-        createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        deleted int(11) DEFAULT '0',
-        iid int(11) DEFAULT '0',
-        atomId int(11) DEFAULT '0',
-        userId int(11) DEFAULT '0',
-        loginCount int(11) DEFAULT '0',
-        loginIPLast varchar(50) DEFAULT NULL,
-        loginTimeLast timestamp DEFAULT NULL,
-        onlineCount int(11) DEFAULT '0',
-        onlineIPLast varchar(50) DEFAULT NULL,
-        onlineTimeLast timestamp DEFAULT NULL,
-        expireTime timestamp DEFAULT NULL,
-        PRIMARY KEY (id)
-      )
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aUserOnline', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.userId();
+      table.int0('loginCount');
+      table.string('loginIPLast', 50);
+      table.timestamp('loginTimeLast');
+      table.int0('onlineCount');
+      table.string('onlineIPLast', 50);
+      table.timestamp('onlineTimeLast');
+      table.timestamp('expireTime');
+    });
+
     // create table: aUserOnlineHistory
-    sql = `
-      CREATE TABLE aUserOnlineHistory (
-        id int(11) NOT NULL AUTO_INCREMENT,
-        createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        deleted int(11) DEFAULT '0',
-        iid int(11) DEFAULT '0',
-        atomId int(11) DEFAULT '0',
-        userId int(11) DEFAULT '0',
-        onlineIP varchar(50) DEFAULT NULL,
-        onlineTime timestamp DEFAULT NULL,
-        isLogin int(11) DEFAULT '0',
-        PRIMARY KEY (id)
-      )
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aUserOnlineHistory', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.userId();
+      table.string('onlineIP', 50);
+      table.timestamp('onlineTime');
+      table.int0('isLogin');
+    });
   }
 }
