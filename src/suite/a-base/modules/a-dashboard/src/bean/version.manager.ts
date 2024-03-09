@@ -5,85 +5,52 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aDashboardProfile
-      const sql = `
-          CREATE TABLE aDashboardProfile (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            profileName varchar(255) DEFAULT NULL,
-            profileValue json DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aDashboardProfile', function (table) {
+        table.basicFields();
+        table.userId();
+        table.string('profileName', 255);
+        table.json('profileValue');
+      });
     }
 
     if (options.version === 2) {
       // drop table: aDashboardProfile
-      let sql = `
-          DROP TABLE aDashboardProfile
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.dropTable('aDashboardProfile');
 
       // create table: aDashboard
-      sql = `
-          CREATE TABLE aDashboard (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            description varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-          `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aDashboard', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.description();
+      });
 
       // create table: aDashboardContent
-      sql = `
-          CREATE TABLE aDashboardContent (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            itemId int(11) DEFAULT '0',
-            content JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aDashboardContent', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.itemId();
+        table.content();
+      });
 
       // create table: aDashboardUser
-      sql = `
-          CREATE TABLE aDashboardUser (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            dashboardDefault int(11) DEFAULT '0',
-            dashboardAtomId int(11) DEFAULT '0',
-            dashboardName varchar(255) DEFAULT NULL,
-            content JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aDashboardUser', function (table) {
+        table.basicFields();
+        table.userId();
+        table.int0('dashboardDefault');
+        table.int0('dashboardAtomId');
+        table.string('dashboardName', 255);
+        table.content();
+      });
 
       // create view: aDashboardViewFull
-      sql = `
-          CREATE VIEW aDashboardViewFull as
-            select a.*,b.content from aDashboard a
-              left join aDashboardContent b on a.id=b.itemId
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createView('aDashboardViewFull', view => {
+        view.as(
+          this.bean.model
+            .builder('aDashboard as a')
+            .select(['a.*', 'b.content'])
+            .leftJoin('aDashboardContent as b', { 'a.id': 'b.itemId' }),
+        );
+      });
     }
   }
 
