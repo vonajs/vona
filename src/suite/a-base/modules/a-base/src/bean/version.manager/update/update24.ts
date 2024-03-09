@@ -180,17 +180,19 @@ export class VersionUpdate extends BeanBase {
     //   aViewUserRightAtomRole(9)
 
     // aViewUserRightAtom
-    await this.ctx.model.query('drop view aViewUserRightAtom');
-    let sql = `
-          create view aViewUserRightAtom as
-            select a.iid, a.id as atomId,a.userIdCreated as userIdWhom,
-                   b.userIdWho,b.action 
-              from aAtom a,aViewUserRightAtomClassUser b
-                where a.deleted=0 and a.atomStage>0
-                  and a.atomClassId=b.atomClassId
-                  and a.userIdCreated=b.userIdWhom
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aViewUserRightAtom', view => {
+      view.as(
+        this.bean.model
+          .builder('aAtom as a')
+          .select(['a.iid', 'a.id as atomId', 'a.userIdCreated as userIdWhom', 'b.userIdWho', 'b.action'])
+          .innerJoin('aViewUserRightAtomClassUser as b', {
+            'a.atomClassId': 'b.atomClassId',
+            'a.userIdCreated': 'b.userIdWhom',
+          })
+          .where('a.deleted', 0)
+          .where('a.atomStage', '>', 0),
+      );
+    });
 
     // aViewRoleRightAtom
     await this.ctx.model.query('drop view aViewRoleRightAtom');
