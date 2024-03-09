@@ -5,36 +5,26 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // aProgress
-      const sql = `
-        CREATE TABLE aProgress (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            progressId varchar(50) DEFAULT NULL,
-            counter int(11) DEFAULT '0',
-            done int(11) DEFAULT '0',
-            abort int(11) DEFAULT '0',
-            data text DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-                  `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aProgress', function (table) {
+        table.basicFields();
+        table.string('progressId', 50);
+        table.int0('counter');
+        table.int0('done');
+        table.int0('abort');
+        table.text('data');
+      });
     }
 
     if (options.version === 2) {
       // aProgress: add field userId
-      const sql = `
-        ALTER TABLE aProgress
-          ADD COLUMN userId int(11) DEFAULT '0'
-                  `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aProgress', function (table) {
+        table.userId();
+      });
     }
 
     if (options.version === 3) {
       // drop table: aProgress
-      await this.ctx.model.query('drop table if exists aProgress');
+      await this.bean.model.dropTable('aProgress');
     }
   }
 
