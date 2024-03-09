@@ -5,39 +5,23 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aSettings
-      let sql = `
-          CREATE TABLE aSettings (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            module varchar(255) DEFAULT NULL,
-            scene int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            value json DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aSettings', function (table) {
+        table.basicFields();
+        table.string('module', 255);
+        table.int0('scene');
+        table.userId();
+        table.json('value');
+      });
 
       // create table: aSettingsRef
-      sql = `
-          CREATE TABLE aSettingsRef (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            module varchar(255) DEFAULT NULL,
-            scene int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            name varchar(255) DEFAULT NULL,
-            value json DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aSettingsRef', function (table) {
+        table.basicFields();
+        table.string('module', 255);
+        table.int0('scene');
+        table.userId();
+        table.string('name', 255);
+        table.json('value');
+      });
     }
   }
 
