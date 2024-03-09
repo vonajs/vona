@@ -10,51 +10,34 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aLayout
-      let sql = `
-          CREATE TABLE if not exists aLayout (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            description varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-          `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aLayout', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.description();
+      });
 
       // aLayout
-      sql = `
-          ALTER TABLE aLayout
-            Add COLUMN layoutTypeCode INT(11) DEFAULT '0'
-          `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aLayout', function (table) {
+        table.int0('layoutTypeCode');
+      });
 
-      // create table: aLayoutContent
-      sql = `
-          CREATE TABLE if not exists aLayoutContent (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomId int(11) DEFAULT '0',
-            itemId int(11) DEFAULT '0',
-            content JSON DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      // create table:
+      await this.bean.model.createTable('aLayoutContent', function (table) {
+        table.basicFields();
+        table.atomId();
+        table.itemId();
+        table.content();
+      });
 
       // create view: aLayoutViewFull
-      await this.ctx.model.query('drop view if exists aLayoutViewFull');
-      sql = `
-          CREATE VIEW aLayoutViewFull as
-            select a.*,b.content from aLayout a
-              left join aLayoutContent b on a.id=b.itemId
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createView('aLayoutViewFull', view => {
+        view.as(
+          this.bean.model
+            .builder('aLayout as a')
+            .select(['a.*', 'b.content'])
+            .leftJoin('aLayoutContent as b', { 'a.id': 'b.itemId' }),
+        );
+      });
 
       // update atomClassLayout
       await this._update_atomClassLayout();
@@ -99,10 +82,9 @@ export class VersionManager extends BeanBase {
   async _update_atomClassLayout() {
     // update atomClass from a-layoutpc to a-baselayout
     //   all iid
-    await this.ctx.model.query('update aAtomClass set module=? where module=? and atomClassName=?', [
-      'a-baselayout',
-      'a-layoutpc',
-      'layout',
-    ]);
+    await this.bean.model.builder('aAtomClass').update({ module: 'a-baselayout' }).where({
+      module: 'a-layoutpc',
+      atomClassName: 'layout',
+    });
   }
 }
