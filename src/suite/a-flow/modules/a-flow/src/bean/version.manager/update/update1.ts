@@ -30,73 +30,52 @@ export class VersionUpdate extends BeanBase {
 
     // create table: aFlow
     //  flowStatus: 1/end
-    sql = `
-        CREATE TABLE aFlow (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          flowDefId int(11) DEFAULT '0',
-          flowDefKey varchar(255) DEFAULT NULL,
-          flowDefRevision int(11) DEFAULT '0',
-          flowName varchar(255) DEFAULT NULL,
-          flowStatus int(11) DEFAULT '0',
-          flowAtomId int(11) DEFAULT '0',
-          flowVars JSON DEFAULT NULL,
-          flowNodeIdCurrent int(11) DEFAULT '0',
-          flowNodeNameCurrent varchar(255) DEFAULT NULL,
-          flowUserId int(11) DEFAULT '0',
-          timeEnd timestamp DEFAULT NULL,
-          flowRemark varchar(255) DEFAULT NULL,
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aFlow', function (table) {
+      table.basicFields();
+      table.int0('flowDefId');
+      table.string('flowDefKey', 255);
+      table.int0('flowDefRevision');
+      table.string('flowName', 255);
+      table.int0('flowStatus');
+      table.int0('flowAtomId');
+      table.json('flowVars');
+      table.int0('flowNodeIdCurrent');
+      table.string('flowNodeNameCurrent', 255);
+      table.int0('flowUserId');
+      table.timestamp('timeEnd');
+      table.string('flowRemark', 255);
+    });
+
     // create table: aFlowNode
-    sql = `
-        CREATE TABLE aFlowNode (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          flowId int(11) DEFAULT '0',
-          flowNodeDefId varchar(255) DEFAULT NULL,
-          flowNodeName varchar(255) DEFAULT NULL,
-          flowNodeType varchar(50) DEFAULT NULL,
-          flowNodeIdPrev int(11) DEFAULT '0',
-          nodeVars JSON DEFAULT NULL,
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aFlowNode', function (table) {
+      table.basicFields();
+      table.int0('flowId');
+      table.string('flowNodeDefId', 255);
+      table.string('flowNodeName', 255);
+      table.string('flowNodeType', 50);
+      table.int0('flowNodeIdPrev');
+      table.json('nodeVars');
+    });
+
     // create table: aFlowHistory
     //  flowStatus: 1/end
-    sql = `
-        CREATE TABLE aFlowHistory (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          flowId int(11) DEFAULT '0',
-          flowDefId int(11) DEFAULT '0',
-          flowDefKey varchar(255) DEFAULT NULL,
-          flowDefRevision int(11) DEFAULT '0',
-          flowName varchar(255) DEFAULT NULL,
-          flowStatus int(11) DEFAULT '0',
-          flowAtomId int(11) DEFAULT '0',
-          flowVars JSON DEFAULT NULL,
-          flowNodeIdCurrent int(11) DEFAULT '0',
-          flowNodeNameCurrent varchar(255) DEFAULT NULL,
-          flowUserId int(11) DEFAULT '0',
-          timeEnd timestamp DEFAULT NULL,
-          flowRemark varchar(255) DEFAULT NULL,
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aFlowHistory', function (table) {
+      table.basicFields();
+      table.int0('flowId');
+      table.int0('flowDefId');
+      table.string('flowDefKey', 255);
+      table.int0('flowDefRevision');
+      table.string('flowName', 255);
+      table.int0('flowStatus');
+      table.int0('flowAtomId');
+      table.json('flowVars');
+      table.int0('flowNodeIdCurrent');
+      table.string('flowNodeNameCurrent', 255);
+      table.int0('flowUserId');
+      table.timestamp('timeEnd');
+      table.string('flowRemark', 255);
+    });
+
     // create table: aFlowNodeHistory
     sql = `
         CREATE TABLE aFlowNodeHistory (
