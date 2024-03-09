@@ -8,18 +8,17 @@ export class VersionUpdate extends BeanBase {
   async _update7Migration_schemas() {
     let sql;
     // aCmsArticle
-    sql = `
-        ALTER TABLE aCmsArticle
-          DROP COLUMN categoryId,
-          DROP COLUMN language
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aCmsArticle', function (table) {
+      table.dropColumn('categoryId');
+      table.dropColumn('language');
+    });
+
     // aCmsArticleTag
-    sql = 'DROP TABLE aCmsArticleTag';
-    await this.ctx.model.query(sql);
+    await this.bean.model.dropTable('aCmsArticleTag');
+
     // aCmsArticleTagRef
-    sql = 'DROP TABLE aCmsArticleTagRef';
-    await this.ctx.model.query(sql);
+    await this.bean.model.dropTable('aCmsArticleTagRef');
+
     // aCmsCategory
     sql = 'DROP TABLE aCmsCategory';
     await this.ctx.model.query(sql);
