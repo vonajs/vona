@@ -4,17 +4,14 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // alter table: aCmsCategory
-    let sql = `
-      ALTER TABLE aCmsCategory
-        ADD COLUMN atomClassId int(11) DEFAULT '0'
-                `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aCmsCategory', function (table) {
+      table.int0('atomClassId');
+    });
+
     // alter table: aCmsTag
-    sql = `
-      ALTER TABLE aCmsTag
-        ADD COLUMN atomClassId int(11) DEFAULT '0'
-                `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aCmsTag', function (table) {
+      table.int0('atomClassId');
+    });
 
     // atomClass
     await this._update5AtomClassIds();
