@@ -37,9 +37,13 @@ export class VersionManager extends BeanBase {
 
     if (options.version === 2) {
       // aFile: mime
-      await this.bean.model.alterTable('aFile', function (table) {
-        table.string('mime', 255).alter();
-      });
+      await this.bean.model.alterTable(
+        'aFile',
+        function (table) {
+          table.string('mime', 255).alter();
+        },
+        true,
+      );
     }
   }
 
