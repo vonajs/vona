@@ -28,6 +28,11 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
       return this.integer(method).defaultTo(0);
     });
   });
+  ['description'].forEach(function (method) {
+    knex.TableBuilder.extend(method, function (length = 255) {
+      return this.string(method, length);
+    });
+  });
 }
 
 declare module 'knex' {
@@ -39,6 +44,7 @@ declare module 'knex' {
       atomId(): Knex.ColumnBuilder;
       itemId(): Knex.ColumnBuilder;
       userId(): Knex.ColumnBuilder;
+      description(length?: number): Knex.ColumnBuilder;
     }
   }
 }
