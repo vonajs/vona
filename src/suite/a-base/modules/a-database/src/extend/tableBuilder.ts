@@ -26,7 +26,7 @@ export function ExtendTableBuilder(_app: CabloyApplication) {
   knex.TableBuilder.extend('int1', function (columnName) {
     return this.integer(columnName).defaultTo(1);
   });
-  ['atomId', 'itemId', 'userId'].forEach(function (method) {
+  ['atomId', 'itemId', 'userId', 'atomClassId', 'atomIdMain', 'atomClassIdMain'].forEach(function (method) {
     knex.TableBuilder.extend(method, function () {
       return this.integer(method).defaultTo(0);
     });
@@ -52,6 +52,9 @@ declare module 'knex' {
       atomId(): Knex.ColumnBuilder;
       itemId(): Knex.ColumnBuilder;
       userId(): Knex.ColumnBuilder;
+      atomClassId(): Knex.ColumnBuilder;
+      atomIdMain(): Knex.ColumnBuilder;
+      atomClassIdMain(): Knex.ColumnBuilder;
       description(length?: number): Knex.ColumnBuilder;
       content(useText?: boolean): Knex.ColumnBuilder;
     }

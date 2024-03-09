@@ -45,23 +45,15 @@ export class VersionManager extends BeanBase {
     }
     if (options.version === 2) {
       // create table: aDetailBase
-      const sql = `
-          CREATE TABLE aDetailBase (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            atomIdMain int(11) DEFAULT '0',
-            atomClassIdMain int(11) DEFAULT '0',
-            atomStage int(11) DEFAULT '0',
-            detailId int(11) DEFAULT '0',
-            detailClassId int(11) DEFAULT '0',
-            detailStaticKey varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aDetailBase', function (table) {
+        table.basicFields();
+        table.atomIdMain();
+        table.atomClassIdMain();
+        table.int0('atomStage');
+        table.int0('detailId');
+        table.int0('detailClassId');
+        table.string('detailStaticKey', 255);
+      });
     }
   }
 
