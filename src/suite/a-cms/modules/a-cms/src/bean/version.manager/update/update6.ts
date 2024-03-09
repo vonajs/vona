@@ -3,55 +3,56 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // alter table: aCmsArticle
-    let sql = `
-        ALTER TABLE aCmsArticle
-          ADD COLUMN uuid varchar(50) DEFAULT NULL
-                  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aCmsArticle', function (table) {
+      table.string('uuid', 50);
+    });
 
     // alter view: aCmsArticleView
-    await this.ctx.model.query('drop view aCmsArticleView');
-    sql = `
-          CREATE VIEW aCmsArticleView as
-            select a.*,b.categoryName,e.tags from aCmsArticle a
-              left join aCmsCategory b on a.categoryId=b.id
-              left join aCmsArticleTag e on a.id=e.itemId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleView', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' }),
+      );
+    });
 
     // alter view: aCmsArticleViewFull
-    await this.ctx.model.query('drop view aCmsArticleViewFull');
-    sql = `
-          CREATE VIEW aCmsArticleViewFull as
-            select a.*,b.categoryName,e.tags,c.content,c.html from aCmsArticle a
-              left join aCmsCategory b on a.categoryId=b.id
-              left join aCmsContent c on a.id=c.itemId
-              left join aCmsArticleTag e on a.id=e.itemId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleViewFull', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags', 'c.content', 'c.html'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsContent as c', { 'a.id': 'c.itemId' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' }),
+      );
+    });
 
     // alter view: aCmsArticleViewSearch
-    await this.ctx.model.query('drop view aCmsArticleViewSearch');
-    sql = `
-          CREATE VIEW aCmsArticleViewSearch as
-            select a.*,b.categoryName,e.tags,c.content,c.html,concat(d.atomName,',',c.content) contentSearch from aCmsArticle a
-              left join aCmsCategory b on a.categoryId=b.id
-              left join aCmsContent c on a.id=c.itemId
-              left join aAtom d on a.atomId=d.id
-              left join aCmsArticleTag e on a.id=e.itemId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleViewSearch', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags', 'c.content', 'c.html', 'c.content as contentSearch'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsContent as c', { 'a.id': 'c.itemId' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' }),
+      );
+    });
 
     // alter view: aCmsArticleViewTag
-    await this.ctx.model.query('drop view aCmsArticleViewTag');
-    sql = `
-          CREATE VIEW aCmsArticleViewTag as
-            select a.*,b.categoryName,e.tags,f.tagId from aCmsArticle a
-              left join aCmsCategory b on a.categoryId=b.id
-              left join aCmsArticleTag e on a.id=e.itemId
-              left join aCmsArticleTagRef f on a.id=f.itemId
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterView('aCmsArticleViewTag', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'e.tags', 'f.tagId'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsArticleTag as e', { 'a.id': 'e.itemId' })
+          .leftJoin('aCmsArticleTagRef as f', { 'a.id': 'f.itemId' }),
+      );
+    });
 
     // uuid
     await this._update6Uuids();
