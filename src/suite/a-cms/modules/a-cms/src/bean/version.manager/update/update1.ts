@@ -22,57 +22,45 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aCmsContent
-    sql = `
-        CREATE TABLE aCmsContent (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          atomId int(11) DEFAULT '0',
-          itemId int(11) DEFAULT '0',
-          content LONGTEXT DEFAULT NULL,
-          html LONGTEXT DEFAULT NULL,
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
-    await this.bean.model.createTable('', function (table) {});
+    await this.bean.model.createTable('aCmsContent', function (table) {
+      table.basicFields();
+      table.atomId();
+      table.itemId();
+      table.text('content', 'longtext');
+      table.text('html', 'longtext');
+    });
 
     // create table: aCmsCategory
-    sql = `
-        CREATE TABLE aCmsCategory (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          categoryName varchar(50) DEFAULT NULL,
-          language varchar(50) DEFAULT NULL,
-          catalog int(11) DEFAULT '0',
-          hidden int(11) DEFAULT '0',
-          sorting int(11) DEFAULT '0',
-          flag varchar(255) DEFAULT NULL,
-          categoryIdParent int(11) DEFAULT '0',
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aCmsCategory', function (table) {
+      table.basicFields();
+      table.string('categoryName', 50);
+      table.string('language', 50);
+      table.int0('catalog');
+      table.int0('hidden');
+      table.int0('sorting');
+      table.string('flag', 255);
+      table.int0('categoryIdParent');
+    });
+
     // create view: aCmsArticleView
-    sql = `
-        CREATE VIEW aCmsArticleView as
-          select a.*,b.categoryName from aCmsArticle a
-            left join aCmsCategory b on a.categoryId=b.id
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aCmsArticleView', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' }),
+      );
+    });
+
     // create view: aCmsArticleViewFull
-    sql = `
-        CREATE VIEW aCmsArticleViewFull as
-          select a.*,b.categoryName,c.content,c.html,concat(d.atomName,',',c.content) contentSearch from aCmsArticle a
-            left join aCmsCategory b on a.categoryId=b.id
-            left join aCmsContent c on a.id=c.itemId
-            left join aAtom d on a.atomId=d.id
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aCmsArticleViewFull', view => {
+      view.as(
+        this.bean.model
+          .builder('aCmsArticle as a')
+          .select(['a.*', 'b.categoryName', 'c.content', 'c.html', 'c.content as contentSearch'])
+          .leftJoin('aCmsCategory as b', { 'a.categoryId': 'b.id' })
+          .leftJoin('aCmsContent as c', { 'a.id': 'c.itemId' }),
+      );
+    });
   }
 }
