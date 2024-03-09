@@ -3,14 +3,12 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // drop column: aCmsContent.itemId
-    const sql = `
-    ALTER TABLE aCmsContent
-      DROP COLUMN itemId
-  `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aCmsContent', function (table) {
+      table.dropColumn('itemId');
+    });
     // drop view: aCmsArticleViewFull
-    await this.ctx.model.query('drop view aCmsArticleViewFull');
+    await this.bean.model.dropView('aCmsArticleViewFull');
     // drop view: aCmsArticleViewSearch
-    await this.ctx.model.query('drop view aCmsArticleViewSearch');
+    await this.bean.model.dropView('aCmsArticleViewSearch');
   }
 }
