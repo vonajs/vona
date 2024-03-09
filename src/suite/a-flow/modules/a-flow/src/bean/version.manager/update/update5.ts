@@ -2,19 +2,16 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {
-    let sql;
     // alter table: aFlow
-    sql = `
-      ALTER TABLE aFlow
-        ADD COLUMN flowAtomClassId int(11) DEFAULT '0'
-                `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlow', function (table) {
+      table.int0('flowAtomClassId');
+    });
+
     // alter table: aFlowHistory
-    sql = `
-      ALTER TABLE aFlowHistory
-        ADD COLUMN flowAtomClassId int(11) DEFAULT '0'
-                `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlowHistory', function (table) {
+      table.int0('flowAtomClassId');
+    });
+
     // adjust flows
     await this._adjustFlows();
   }
