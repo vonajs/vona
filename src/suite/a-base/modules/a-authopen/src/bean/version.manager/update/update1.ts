@@ -17,11 +17,13 @@ export class VersionUpdate extends BeanBase {
     });
 
     // view: aAuthOpenView
-    sql = `
-          CREATE VIEW aAuthOpenView as
-            select a.*,b.roleName as scopeRoleName from aAuthOpen a
-              left join aRole b on a.scopeRoleId=b.id
-        `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aAuthOpenView', view => {
+      view.as(
+        this.bean.model
+          .builder('aAuthOpen as a')
+          .select(['a.*', 'b.roleName as scopeRoleName'])
+          .leftJoin('aRole as b', { 'a.scopeRoleId': 'b.id' }),
+      );
+    });
   }
 }
