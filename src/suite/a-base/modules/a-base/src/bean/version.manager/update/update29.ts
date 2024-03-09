@@ -3,30 +3,31 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run(_options) {
     // aRoleFieldsRight
-    let sql = `
-        CREATE TABLE aRoleFieldsRight (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          roleId int(11) DEFAULT '0',
-          roleAtomId int(11) DEFAULT '0',
-          atomClassId int(11) DEFAULT '0',
-          fieldsRight JSON DEFAULT NULL,
-          PRIMARY KEY (id)
-        ) 
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aRoleFieldsRight', function (table) {
+      table.basicFields();
+      table.int0('roleId');
+      table.int0('roleAtomId');
+      table.int0('atomClassId');
+      table.json('fieldsRight');
+    });
 
     // aViewUserRightFields
-    sql = `
-        create view aViewUserRightFields as
-          select a.iid,a.userId as userIdWho,a.roleExpandId,a.roleId,a.roleIdBase,
-                 b.id as roleFieldsRightId,b.atomClassId,b.fieldsRight
-            from aViewUserRoleExpand a
-              inner join aRoleFieldsRight b on a.roleIdBase=b.roleId
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createView('aViewUserRightFields', view => {
+      view.as(
+        this.bean.model
+          .builder('aViewUserRoleExpand as a')
+          .select([
+            'a.iid',
+            'a.userId as userIdWho',
+            'a.roleExpandId',
+            'a.roleId',
+            'a.roleIdBase',
+            'b.id as roleFieldsRightId',
+            'b.atomClassId',
+            'b.fieldsRight',
+          ])
+          .innerJoin('aRoleFieldsRight as b', { 'a.roleIdBase': 'b.roleId' }),
+      );
+    });
   }
 }
