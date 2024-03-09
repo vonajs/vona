@@ -3,12 +3,20 @@ import { BeanBase } from '@cabloy/core';
 export class VersionUpdate extends BeanBase {
   async run() {
     // update cms blocks
-    await this.ctx.model.query(`
-      update aCmsContent set content = replace (content,'cms-pluginblock:audio','cms-pluginblock:blockAudio') where content like '%cms-pluginblock:audio%'
-    `);
-    await this.ctx.model.query(`
-      update aCmsContent set content = replace (content,'cms-pluginblock:iframe','cms-pluginblock:blockIFrame') where content like '%cms-pluginblock:iframe%'
-    `);
+    await this.bean.model
+      .builder('aCmsContent')
+      .update({
+        content: this.bean.model.raw(`replace (content,'cms-pluginblock:audio','cms-pluginblock:blockAudio')`),
+      })
+      .whereILike('content', '%cms-pluginblock:audio%');
+
+    await this.bean.model
+      .builder('aCmsContent')
+      .update({
+        content: this.bean.model.raw(`replace (content,'cms-pluginblock:iframe','cms-pluginblock:blockIFrame')`),
+      })
+      .whereILike('content', '%cms-pluginblock:iframe%');
+
     // migration: languange/category/tag
     await this._update7Migration();
   }
