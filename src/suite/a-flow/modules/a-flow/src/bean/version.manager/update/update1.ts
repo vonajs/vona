@@ -77,26 +77,18 @@ export class VersionUpdate extends BeanBase {
     });
 
     // create table: aFlowNodeHistory
-    sql = `
-        CREATE TABLE aFlowNodeHistory (
-          id int(11) NOT NULL AUTO_INCREMENT,
-          createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          deleted int(11) DEFAULT '0',
-          iid int(11) DEFAULT '0',
-          flowId int(11) DEFAULT '0',
-          flowNodeId int(11) DEFAULT '0',
-          flowNodeDefId varchar(255) DEFAULT NULL,
-          flowNodeName varchar(255) DEFAULT NULL,
-          flowNodeType varchar(50) DEFAULT NULL,
-          flowNodeIdPrev int(11) DEFAULT '0',
-          flowNodeStatus int(11) DEFAULT '0',
-          flowNodeRemark TEXT DEFAULT NULL,
-          timeDone timestamp DEFAULT NULL,
-          nodeVars JSON DEFAULT NULL,
-          PRIMARY KEY (id)
-        )
-      `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.createTable('aFlowNodeHistory', function (table) {
+      table.basicFields();
+      table.int0('flowId');
+      table.int0('flowNodeId');
+      table.string('flowNodeDefId', 255);
+      table.string('flowNodeName', 255);
+      table.string('flowNodeType', 50);
+      table.int0('flowNodeIdPrev');
+      table.int0('flowNodeStatus');
+      table.text('flowNodeRemark');
+      table.timestamp('timeDone');
+      table.json('nodeVars');
+    });
   }
 }
