@@ -5,49 +5,41 @@ export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {
       // create table: aFile
-      let sql = `
-          CREATE TABLE aFile (
-            id int(11) NOT NULL AUTO_INCREMENT,
-            createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            deleted int(11) DEFAULT '0',
-            iid int(11) DEFAULT '0',
-            userId int(11) DEFAULT '0',
-            downloadId varchar(50) DEFAULT NULL,
-            atomId int(11) DEFAULT '0',
-            mode int(11) DEFAULT '0',
-            fileSize int(11) DEFAULT '0',
-            width int(11) DEFAULT '0',
-            height int(11) DEFAULT '0',
-            filePath varchar(255) DEFAULT NULL,
-            fileName varchar(255) DEFAULT NULL,
-            realName varchar(255) DEFAULT NULL,
-            fileExt varchar(50) DEFAULT NULL,
-            encoding varchar(50) DEFAULT NULL,
-            mime varchar(50) DEFAULT NULL,
-            attachment int(11) DEFAULT '0',
-            flag varchar(255) DEFAULT NULL,
-            PRIMARY KEY (id)
-          )
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createTable('aFile', function (table) {
+        table.basicFields();
+        table.userId();
+        table.string('downloadId', 50);
+        table.atomId();
+        table.int0('mode');
+        table.int0('fileSize');
+        table.int0('width');
+        table.int0('height');
+        table.string('filePath', 255);
+        table.string('fileName', 255);
+        table.string('realName', 255);
+        table.string('fileExt', 50);
+        table.string('encoding', 50);
+        table.string('mime', 50);
+        table.int0('attachment');
+        table.string('flag', 255);
+      });
 
       // aViewFile
-      sql = `
-          create view aViewFile as
-            select a.*,b.userName,b.avatar from aFile a
-              left join aUser b on a.userId=b.id
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.createView('aViewFile', view => {
+        view.as(
+          this.bean.model
+            .builder('aFile as a')
+            .select(['a.*', 'b.userName', 'b.avatar'])
+            .leftJoin('aUser as b', { 'a.userId': 'b.id' }),
+        );
+      });
     }
 
     if (options.version === 2) {
       // aFile: mime
-      const sql = `
-        ALTER TABLE aFile
-          CHANGE COLUMN mime mime varchar(255) DEFAULT NULL
-        `;
-      await this.ctx.model.query(sql);
+      await this.bean.model.alterTable('aFile', function (table) {
+        table.string('mime', 255).alter();
+      });
     }
   }
 
