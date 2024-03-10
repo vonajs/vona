@@ -1,4 +1,4 @@
-import {} from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
 export interface EntityShare extends EntityItemBase {
   uuid: string;

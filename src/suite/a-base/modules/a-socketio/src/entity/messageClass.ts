@@ -1,4 +1,4 @@
-import {} from '@cabloy/core';
+import { EntityBase } from '@cabloy/core';
 
 export interface EntityMessageClass extends EntityBase {
   module: string;

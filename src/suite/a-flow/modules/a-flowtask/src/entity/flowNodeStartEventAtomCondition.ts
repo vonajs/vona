@@ -1,4 +1,4 @@
-import {} from '@cabloy/core';
+import { EntityBase } from '@cabloy/core';
 
 export interface EntityFlowNodeStartEventAtomCondition extends EntityBase {
   flowDefId: number;

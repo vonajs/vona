@@ -126,6 +126,19 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   await processHelper.formatFile({ fileName: fileModel });
 }
 
+async function _moduleHandle_model({ file, module, processHelper }) {
+  console.log(file);
+  let contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('EntityItemBase {') > -1) {
+    contentOld = contentOld.replace(`import {} from '@cabloy/core';`, `import { EntityItemBase } from '@cabloy/core';`);
+  } else {
+    contentOld = contentOld.replace(`import {} from '@cabloy/core';`, `import { EntityBase } from '@cabloy/core';`);
+  }
+  console.log(contentOld);
+  await fse.outputFile(file, contentOld);
+  await processHelper.formatFile({ fileName: file });
+}
+
 async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // console.log(file);
   const modelName = path.basename(fileModel).replace('.ts', '');
