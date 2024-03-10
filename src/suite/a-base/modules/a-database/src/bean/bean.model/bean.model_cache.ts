@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast, TableIdentity } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
 import { getTargetColumnName } from '../../common/utils.js';
@@ -25,12 +25,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    ids: string[],
+    ids: TableIdentity[],
     options?: IModelGetOptions,
   ): Promise<TResult2[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    ids: string[],
+    ids: TableIdentity[],
     options?: IModelGetOptions,
   ): Promise<TResult2[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table, ids, options?): Promise<TResult2[]> {

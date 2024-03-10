@@ -12,12 +12,12 @@ import { Knex } from 'knex';
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   /** not hold undefined item if not exists */
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    ids: string[],
+    ids: TableIdentity[],
     options?: IModelGetOptionsGeneral,
   ): Promise<(TResult2 | undefined)[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    ids: string[],
+    ids: TableIdentity[],
     options?: IModelGetOptionsGeneral,
   ): Promise<(TResult2 | undefined)[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
