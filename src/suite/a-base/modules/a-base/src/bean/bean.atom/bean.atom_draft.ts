@@ -13,7 +13,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     // draft
     const atomIdDraft = key.atomId;
-    const atomDraft = await this.modelAtom.get({ id: atomIdDraft });
+    const atomDraft = (await this.modelAtom.get({ id: atomIdDraft }))!;
     const user = { id: atomDraft.userIdUpdated };
     // ** update draft from formal
     if (atomDraft.atomIdFormal) {
@@ -192,7 +192,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       keyDraft = { atomId: atom.atomIdDraft };
       // check if opened
       const _item = await this.modelAtom.get({ id: keyDraft.atomId });
-      if (_item.atomClosed === 0) {
+      if (_item!.atomClosed === 0) {
         changed = false;
       } else {
         // ** copy draft from formal

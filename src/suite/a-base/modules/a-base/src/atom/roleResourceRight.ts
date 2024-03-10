@@ -62,7 +62,7 @@ export class AtomRoleResourceRight extends BeanAtomBase<ScopeModule> {
     const atomIdBak = data.atomId;
     data = Object.assign(data, {
       roleAtomId: atomIdMain,
-      roleId: role.id,
+      roleId: role!.id,
       atomId: data.atomIdTarget,
     });
     data.itemId = await this.model.create(data);
