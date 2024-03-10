@@ -41,11 +41,15 @@ async function main() {
 async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // console.log(file);
   const modelName = path.basename(fileModel).replace('.ts', '');
-  const file = path.join(module.root, 'src/resource/entities.ts');
-  const contentOld = (await fse.readFile(file)).toString();
-  if (contentOld.indexOf(`entity/${modelName}.js`) === -1) {
-    const contentNew = `${contentOld}export * from '../entity/${modelName}.js';\n`;
-    // console.log(contentNew);
+  const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
+  const file = path.join(module.root, `src/entity/${modelName}.ts`);
+  if (!fse.existsSync(file)) {
+    const contentNew = `import { EntityBase } from '@cabloy/core';
+
+export interface ${entityNameInterface} extends EntityBase {
+}
+`;
+    console.log(contentNew);
     await fse.outputFile(file, contentNew);
     // await processHelper.formatFile({ fileName: file });
   }
