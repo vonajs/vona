@@ -25,12 +25,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    ids: TableIdentity[],
+    ids: (TableIdentity | object)[],
     options?: IModelGetOptions,
   ): Promise<TResult2[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: string,
-    ids: TableIdentity[],
+    ids: (TableIdentity | object)[],
     options?: IModelGetOptions,
   ): Promise<TResult2[]>;
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table, ids, options?): Promise<TResult2[]> {
