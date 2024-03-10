@@ -100,6 +100,33 @@ function _columnTypePrefixes(type, prefixes) {
 }
 
 async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
+  const modelName = path.basename(fileModel).replace('.ts', '');
+  const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
+  const contentModel = (await fse.readFile(fileModel)).toString();
+  // const contentMatches = contentModel.match(/table:[\s]*'(.*?)'/);
+  // if (!contentMatches) {
+  //   console.log('---- not matched: ', module.info.relativeName, modelName);
+  //   return;
+  // }
+  // const tableName = contentMatches[1];
+  // if (modelName !== 'instance') return;
+  if (contentModel.indexOf('BeanModelBase, ') === -1) {
+    console.log(fileModel);
+    return;
+  }
+  // BeanModelBase
+  let contentNew = contentModel.replace('BeanModelBase, ', '');
+  contentNew = contentNew.replace(
+    `'@cabloy/core';`,
+    `'@cabloy/core';\nimport { BeanModelBase } from 'cabloy-module-api-a-database';\nimport { ${entityNameInterface} } from '../entity/${modelName}.js';\n`,
+  );
+  contentNew = contentNew.replace('BeanModelBase {', `BeanModelBase<${entityNameInterface}> {`);
+  console.log(contentNew);
+  await fse.outputFile(fileModel, contentNew);
+  await processHelper.formatFile({ fileName: fileModel });
+}
+
+async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // console.log(file);
   const modelName = path.basename(fileModel).replace('.ts', '');
   const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
