@@ -6,9 +6,23 @@ const eggBornUtils = require('egg-born-utils');
 const argv = require('./lib/parse_argv')('sync');
 const path = require('node:path');
 const gogocode = require('gogocode');
+const knex = require('knex');
+
+const pg = knex({
+  client: 'pg',
+  connection: {
+    // connectionString: config.DATABASE_URL,
+    host: 'localhost',
+    port: 5432,
+    user: 'postgres',
+    database: 'cabloy-test-cabloy-source-20240310-135400',
+    password: 'yj123456',
+  },
+});
 
 (async function () {
   await main();
+  pg.destroy();
 })();
 
 async function main() {
@@ -38,6 +52,22 @@ async function main() {
   }
 }
 
+function _coerceColumnValue(type) {
+  if (['bit', 'bool', 'boolean'].includes(type)) return 'boolean';
+  if (['int'].includes(type)) return 'number';
+  if (_columnTypePrefixes(type, ['timestamp'])) return 'Date';
+  if (_columnTypePrefixes(type, ['float', 'double'])) return 'number';
+  if (_columnTypePrefixes(type, ['tinyint', 'smallint', 'mediumint', 'bigint', 'numeric', 'integer'])) {
+    return 'number';
+  }
+  if (type === 'json') return 'object';
+  return 'string';
+}
+
+function _columnTypePrefixes(type, prefixes) {
+  return prefixes.some(prefix => type.indexOf(prefix) > -1);
+}
+
 async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // console.log(file);
   const modelName = path.basename(fileModel).replace('.ts', '');
@@ -45,10 +75,22 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   const contentModel = (await fse.readFile(fileModel)).toString();
   const contentMatches = contentModel.match(/table:[\s]*'(.*?)'/);
   if (!contentMatches) {
-    console.log('---- not matched: ', module.info.relativeName, classNameNew);
+    console.log('---- not matched: ', module.info.relativeName, modelName);
     return;
   }
-  const file = path.join(module.root, `src/entity/${modelName}.ts`);
+  const tableName = contentMatches[1];
+  // console.log(tableName);
+  // columns
+  if (tableName !== 'aAtom') return;
+  const map = await pg(tableName).columnInfo();
+  // console.log(map);
+  for (const columnName in map) {
+    const columnType = _coerceColumnValue(map[columnName].type);
+    console.log(`${columnName}: ${columnType}`);
+    // if (columnName === 'atomTags') console.log(map[columnName]);
+  }
+
+  // const file = path.join(module.root, `src/entity/${modelName}.ts`);
 }
 
 async function _moduleHandle({ module, processHelper }) {

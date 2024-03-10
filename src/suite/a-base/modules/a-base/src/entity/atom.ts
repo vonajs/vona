@@ -1,4 +1,3 @@
 import { EntityBase } from '@cabloy/core';
 
-export interface EntityAtom extends EntityBase {
-}
+export interface EntityAtom extends EntityBase {}
