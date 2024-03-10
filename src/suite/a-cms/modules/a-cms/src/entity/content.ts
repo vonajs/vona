@@ -1,4 +1,4 @@
-import { EntityItemBase } from '@cabloy/core';
+import {} from '@cabloy/core';
 
 export interface EntityContent extends EntityItemBase {
   content: string;

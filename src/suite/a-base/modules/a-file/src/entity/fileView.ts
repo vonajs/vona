@@ -1,4 +1,4 @@
-import { EntityItemBase } from '@cabloy/core';
+import {} from '@cabloy/core';
 
 export interface EntityFileView extends EntityItemBase {
   userId: number;

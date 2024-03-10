@@ -1,4 +1,4 @@
-import { EntityBase } from '@cabloy/core';
+import {} from '@cabloy/core';
 
 export interface EntityFlowNodeHistory extends EntityBase {
   flowId: number;
