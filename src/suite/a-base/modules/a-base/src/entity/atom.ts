@@ -33,4 +33,6 @@ export interface EntityAtomPro extends EntityAtom {
   atomId: TableIdentity;
   module: string;
   atomClassName: string;
+  atomCreatedAt: Date;
+  atomUpdatedAt: Date;
 }

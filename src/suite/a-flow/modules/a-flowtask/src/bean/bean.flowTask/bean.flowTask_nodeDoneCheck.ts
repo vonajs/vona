@@ -16,10 +16,14 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     // completionCondition
     const completionCondition = options.completionCondition;
     // task count
-    const taskCountTotal = await this.modelFlowTask.count({
-      flowNodeId,
-      ignoreMark: 0,
-    });
+    const taskCountTotal = parseInt(
+      await this.modelFlowTask.count({
+        where: {
+          flowNodeId,
+          ignoreMark: 0,
+        },
+      }),
+    );
     if (taskCountTotal === 0) {
       // means node has been checked and done
       // XX //   should throw error to deny the db changed for tasks has been deleted.
@@ -27,18 +31,26 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
       // neednot throw error for this method is called in this.ctx.tail
       return;
     }
-    const taskCountPassed = await this.modelFlowTask.count({
-      flowNodeId,
-      flowTaskStatus: 1,
-      handleStatus: 1,
-      ignoreMark: 0,
-    });
-    const taskCountRejected = await this.modelFlowTask.count({
-      flowNodeId,
-      flowTaskStatus: 1,
-      handleStatus: 2,
-      ignoreMark: 0,
-    });
+    const taskCountPassed = parseInt(
+      await this.modelFlowTask.count({
+        where: {
+          flowNodeId,
+          flowTaskStatus: 1,
+          handleStatus: 1,
+          ignoreMark: 0,
+        },
+      }),
+    );
+    const taskCountRejected = parseInt(
+      await this.modelFlowTask.count({
+        where: {
+          flowNodeId,
+          flowTaskStatus: 1,
+          handleStatus: 2,
+          ignoreMark: 0,
+        },
+      }),
+    );
     // check passed
     if (typeof completionCondition.passed === 'number' || completionCondition.passed.indexOf('%') === -1) {
       // absolute value

@@ -1,3 +1,4 @@
+import { EntityAtomPro } from 'cabloy-module-api-a-base';
 import { BeanFlowTaskAtomState } from './bean.flowTask_atomState.js';
 
 export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
@@ -33,8 +34,8 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
 
   async _flowData_atom({ flowId, atomId, atomClassId }: any) {
     // only read basic info
-    let atom = await this.ctx.bean.atom.model.get({ id: atomId, atomClassId });
-    if (atom.atomFlowId !== flowId) {
+    let atom = (await this.ctx.bean.atom.model.get({ id: atomId, atomClassId })) as EntityAtomPro;
+    if (!atom || atom.atomFlowId !== flowId) {
       // this.ctx.throw(403);
       // maybe old
       return null;

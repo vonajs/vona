@@ -61,7 +61,7 @@ export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
     });
     // notify
     const item = await this.modelAtom.get({ id: key.atomId });
-    const user = { id: item.userIdUpdated };
+    const user = { id: item!.userIdUpdated };
     this.self._notifyDraftsDrafting(user, atomClass);
     this.self._notifyDraftsFlowing(user, atomClass);
   }
