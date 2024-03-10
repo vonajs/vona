@@ -1,7 +1,6 @@
 import { AppMeta } from '../core/meta.js';
 import { ModuleTools } from './module.js';
 import loadRoutes from './route.js';
-import loadModels from './model.js';
 import loadConfig from './config.js';
 import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
@@ -48,7 +47,6 @@ export class ModuleLoader extends BeanSimple {
       loadErrors(app, modules);
       loadConstants(app, modules);
       loadRoutes(app, modules);
-      loadModels(app);
       loadContextPatch(app);
       loadRedis(app);
       loadQueues(app, modules);
