@@ -12,6 +12,9 @@ export class LocalFlowFlowMessage extends LocalFlowFlowNextEdges {
     }
     // publish uniform message
     const userFlow = await this.ctx.bean.user.get({ id: flowUserId });
+    if (!userFlow) {
+      return;
+    }
     const title = `${this.ctx.text.locale(userFlow.locale, 'FlowTitle')} - ${this.ctx.text.locale(
       userFlow.locale,
       this.context._flow.flowRemark || 'End',
