@@ -4,7 +4,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
   async star({ key, atom: { star = 1 }, user }) {
     // get
     const atom = await this.get({ atomId: key.atomId });
-    if (atom.atomStage !== 1) this.scope.error.OnlyValidForFormalAtom.throw();
+    if (!atom || atom.atomStage !== 1) return this.scope.error.OnlyValidForFormalAtom.throw();
     // check if exists
     let diff = 0;
     const items = await this.modelAtomStar.select({
@@ -56,7 +56,7 @@ export class BeanAtomStarLabel extends BeanAtom0Write {
   async labels({ key, atom: { labels = null }, user }: any) {
     // get
     const atom = await this.get({ atomId: key.atomId });
-    if (atom.atomStage !== 1) this.scope.error.OnlyValidForFormalAtom.throw();
+    if (!atom || atom.atomStage !== 1) this.scope.error.OnlyValidForFormalAtom.throw();
     // atomLabel
     await this._labels_atomLabel({ atomId: key.atomId, labels, user });
     // atomLabelRef
