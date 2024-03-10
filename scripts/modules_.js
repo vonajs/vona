@@ -69,6 +69,18 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 //
 
+async function _moduleHandle_modelIndex({ module, processHelper }) {
+  // index.ts
+  const file = path.join(module.root, 'src/resource/index.ts');
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('./entities.js') === -1) {
+    const contentNew = `${contentOld}export * from './entities.js';\n`;
+    console.log(contentNew);
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
+  }
+}
+
 async function _moduleHandle_ts({ file, module, processHelper }) {
   if (module.info.relativeName === 'a-base') return;
   // console.log(file);

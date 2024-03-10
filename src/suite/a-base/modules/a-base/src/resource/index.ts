@@ -6,3 +6,4 @@ export * from './atoms.js';
 export * from './locals.js';
 export * from './controllers.js';
 export * from './types.js';
+export * from './entities.js';
