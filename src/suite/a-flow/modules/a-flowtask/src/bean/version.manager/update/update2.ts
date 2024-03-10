@@ -2,26 +2,22 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {
-    let sql;
     // aFlowTask
-    sql = `
-        ALTER TABLE aFlowTask
-          ADD COLUMN ignoreMark int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdForwardFrom int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdForwardTo int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdSubstituteFrom int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdSubstituteTo int(11) DEFAULT '0'
-              `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlowTask', function (table) {
+      table.int0('ignoreMark');
+      table.int0('flowTaskIdForwardFrom');
+      table.int0('flowTaskIdForwardTo');
+      table.int0('flowTaskIdSubstituteFrom');
+      table.int0('flowTaskIdSubstituteTo');
+    });
+
     // aFlowTaskHistory
-    sql = `
-        ALTER TABLE aFlowTaskHistory
-          ADD COLUMN ignoreMark int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdForwardFrom int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdForwardTo int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdSubstituteFrom int(11) DEFAULT '0',
-          ADD COLUMN flowTaskIdSubstituteTo int(11) DEFAULT '0'
-              `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlowTaskHistory', function (table) {
+      table.int0('ignoreMark');
+      table.int0('flowTaskIdForwardFrom');
+      table.int0('flowTaskIdForwardTo');
+      table.int0('flowTaskIdSubstituteFrom');
+      table.int0('flowTaskIdSubstituteTo');
+    });
   }
 }

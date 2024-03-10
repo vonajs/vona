@@ -2,24 +2,17 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {
-    let sql;
     // aFlowTask
-    sql = `
-        ALTER TABLE aFlowTask
-          ADD COLUMN allowViewWorkflow int(11) DEFAULT '1'
-              `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlowTask', function (table) {
+      table.int1('allowViewWorkflow');
+    });
     // aFlowTaskHistory
-    sql = `
-        ALTER TABLE aFlowTaskHistory
-          ADD COLUMN allowViewWorkflow int(11) DEFAULT '1'
-              `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlowTaskHistory', function (table) {
+      table.int1('allowViewWorkflow');
+    });
     // aFlowNodeStartEventAtomCondition
-    sql = `
-        ALTER TABLE aFlowNodeStartEventAtomCondition
-          DROP COLUMN atomStage
-              `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('aFlowNodeStartEventAtomCondition', function (table) {
+      table.dropColumn('atomStage');
+    });
   }
 }
