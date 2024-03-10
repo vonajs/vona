@@ -1,4 +1,4 @@
-import {} from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
 export interface EntityCommentView extends EntityItemBase {
   userId: number;

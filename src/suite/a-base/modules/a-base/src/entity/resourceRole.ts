@@ -1,6 +1,6 @@
-import {} from '@cabloy/core';
+import { EntityItemBase, TableIdentity } from '@cabloy/core';
 
 export interface EntityResourceRole extends EntityItemBase {
   roleId: number;
-  roleAtomId: number;
+  roleAtomId: TableIdentity;
 }
