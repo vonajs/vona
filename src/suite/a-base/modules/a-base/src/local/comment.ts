@@ -273,7 +273,7 @@ export class LocalComment extends BeanBase {
 
   async _publishTitle({ userId, replyId, mode }: any) {
     const user = await this.ctx.bean.user.get({ id: userId });
-    const locale = user.locale;
+    const locale = user?.locale;
     let title;
     if (mode === 'add') {
       // add
