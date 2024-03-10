@@ -38,20 +38,20 @@ async function main() {
   }
 }
 
-async function _moduleHandle_model({ module, processHelper }) {
+async function _moduleHandle_model({ file, module, processHelper }) {
+  const fileGitKeep = `${module.root}/src/model/.gitkeep`;
   // entities
-  const file = path.join(module.root, 'src/resource/entities.ts');
-  if (!fse.existsSync(file)) {
+  if (fse.existsSync(fileGitKeep)) {
     const contentNew = `\n`;
     console.log(contentNew);
-    await fse.outputFile(file, contentNew);
-    await processHelper.formatFile({ fileName: file });
+    console.log(file);
+    // await fse.outputFile(file, contentNew);
+    // await processHelper.formatFile({ fileName: file });
   }
 }
 
 async function _moduleHandle({ module, processHelper }) {
   const file = `${module.root}/src/model`;
-  const file2 = `${module.root}/src/entity`;
   if (fse.existsSync(file)) {
     // console.log(file);
     await _moduleHandle_model({ file, module, processHelper });
