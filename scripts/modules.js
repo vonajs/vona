@@ -39,14 +39,13 @@ async function main() {
 }
 
 async function _moduleHandle_model({ module, processHelper }) {
-  // index.ts
-  const file = path.join(module.root, 'src/resource/index.ts');
-  const contentOld = (await fse.readFile(file)).toString();
-  if (contentOld.indexOf('./entities.js') === -1) {
-    const contentNew = `${contentOld}export * from './entities.js';\n`;
+  // entities
+  const file = path.join(module.root, 'src/resource/entities.ts');
+  if (!fse.existsSync(file)) {
+    const contentNew = `\n`;
     console.log(contentNew);
-    await fse.outputFile(file, contentNew);
-    await processHelper.formatFile({ fileName: file });
+    // await fse.outputFile(file, contentNew);
+    // await processHelper.formatFile({ fileName: file });
   }
 }
 
