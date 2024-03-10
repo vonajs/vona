@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean, TableIdentity } from '@cabloy/core';
 import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
 import { Knex } from 'knex';
 
@@ -24,7 +24,7 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
     await schemaBuilder.raw(`DROP DATABASE "${databaseName}"`);
   }
 
-  async insert(builder: Knex.QueryBuilder): Promise<string[]> {
+  async insert(builder: Knex.QueryBuilder): Promise<TableIdentity[]> {
     builder.returning('id');
     const items = await builder;
     return items.map(item => item.id);

@@ -1,5 +1,6 @@
+export type TableIdentity = string | number;
 export interface EntityBase {
-  id: string | number;
+  id: TableIdentity;
   createdAt: Date;
   updatedAt: Date;
   deleted: number;
@@ -7,5 +8,5 @@ export interface EntityBase {
 }
 
 export interface EntityItemBase extends EntityBase {
-  atomId: string | number;
+  atomId: TableIdentity;
 }

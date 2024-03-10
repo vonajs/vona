@@ -1,4 +1,4 @@
-import { BeanBase, Virtual } from '@cabloy/core';
+import { BeanBase, TableIdentity, Virtual } from '@cabloy/core';
 import { Knex } from 'knex';
 
 export interface IFetchDatabasesResultItem {
@@ -33,7 +33,7 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async insert(_builder: Knex.QueryBuilder): Promise<string[]> {
+  async insert(_builder: Knex.QueryBuilder): Promise<TableIdentity[]> {
     throw new Error('Not Implemented');
   }
 
