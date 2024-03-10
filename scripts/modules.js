@@ -41,18 +41,14 @@ async function main() {
 async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // console.log(file);
   const modelName = path.basename(fileModel).replace('.ts', '');
-  const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
-  const file = path.join(module.root, `src/entity/${modelName}.ts`);
-  if (!fse.existsSync(file)) {
-    const contentNew = `import { EntityBase } from '@cabloy/core';
-
-export interface ${entityNameInterface} extends EntityBase {
-}
-`;
-    console.log(contentNew);
-    await fse.outputFile(file, contentNew);
-    // await processHelper.formatFile({ fileName: file });
+  // const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
+  const contentModel = (await fse.readFile(fileModel)).toString();
+  const contentMatches = contentModel.match(/table:[\s]*'(.*?)'/);
+  if (!contentMatches) {
+    console.log('---- not matched: ', module.info.relativeName, classNameNew);
+    return;
   }
+  const file = path.join(module.root, `src/entity/${modelName}.ts`);
 }
 
 async function _moduleHandle({ module, processHelper }) {
