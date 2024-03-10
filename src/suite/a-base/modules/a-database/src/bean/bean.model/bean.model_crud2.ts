@@ -1,14 +1,18 @@
+import { TableIdentity } from '@cabloy/core';
 import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
-  async create<TRecord2 extends {} = TRecord>(data?: Partial<TRecord2>, options?: IModelMethodOptions): Promise<string>;
+  async create<TRecord2 extends {} = TRecord>(
+    data?: Partial<TRecord2>,
+    options?: IModelMethodOptions,
+  ): Promise<TableIdentity>;
   async create<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2>,
     options?: IModelMethodOptions,
-  ): Promise<string>;
-  async create<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<string> {
+  ): Promise<TableIdentity>;
+  async create<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<TableIdentity> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
