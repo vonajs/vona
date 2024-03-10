@@ -1,8 +1,8 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityBase, TableIdentity } from '@cabloy/core';
 
 export interface EntityRoleFieldsRight extends EntityBase {
   roleId: number;
-  roleAtomId: number;
+  roleAtomId: TableIdentity;
   atomClassId: number;
   fieldsRight: string;
 }

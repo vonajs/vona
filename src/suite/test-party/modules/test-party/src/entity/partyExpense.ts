@@ -1,7 +1,7 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityBase, TableIdentity } from '@cabloy/core';
 
 export interface EntityPartyExpense extends EntityBase {
-  atomIdMain: number;
+  atomIdMain: TableIdentity;
   detailLineNo: number;
   name: string;
   price: number;

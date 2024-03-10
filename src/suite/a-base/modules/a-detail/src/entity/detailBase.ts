@@ -1,7 +1,7 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityBase, TableIdentity } from '@cabloy/core';
 
 export interface EntityDetailBase extends EntityBase {
-  atomIdMain: number;
+  atomIdMain: TableIdentity;
   atomClassIdMain: number;
   atomStage: number;
   detailId: number;

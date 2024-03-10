@@ -1,4 +1,4 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityBase, TableIdentity } from '@cabloy/core';
 
 export interface EntityFlowHistory extends EntityBase {
   flowId: number;
@@ -7,7 +7,7 @@ export interface EntityFlowHistory extends EntityBase {
   flowDefRevision: number;
   flowName: string;
   flowStatus: number;
-  flowAtomId: number;
+  flowAtomId: TableIdentity;
   flowVars: string;
   flowNodeIdCurrent: number;
   flowNodeNameCurrent: string;
