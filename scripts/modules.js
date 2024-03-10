@@ -38,33 +38,26 @@ async function main() {
   }
 }
 
-async function _moduleHandle_ts({ file, module, processHelper }) {
-  if (module.info.relativeName === 'a-base') return;
-  // console.log(file);
+async function _moduleHandle_model({ module, processHelper }) {
+  // index.ts
+  const file = path.join(module.root, 'src/resource/index.ts');
   const contentOld = (await fse.readFile(file)).toString();
-  // const regexp = /import 'cabloy-module-api-([^']*?)';/g;
-  // const matches = contentOld.matchAll(regexp);
-  // const outputNew1 = [];
-  // const outputNew2 = [];
-  // const outputNew3 = [];
-  // let matchCount = 0;
-  // for (const match of matches) {
-  //   matchCount++;
-  //   const classNameOld = match[1];
-  //   const classNameNew = classPathToClassName('', classNameOld);
-  //   // console.log(classNameOld);
-  //   outputNew1.push(`export type * as ${classNameNew} from 'cabloy-module-api-${classNameOld}';`);
-  // }
-  const contentNew = `${contentOld}\nimport './types.js';\n`;
-  // console.log(contentNew);
-  // const fileNew = `${module.root}/src/types.ts`;
-  // await fse.outputFile(file, contentNew);
-  // await processHelper.formatFile({ fileName: file });
-
-  // await fse.remove(file);
+  if (contentOld.indexOf('./entities.js') === -1) {
+    const contentNew = `${contentOld}export * from './entities.js';\n`;
+    console.log(contentNew);
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
+  }
 }
 
 async function _moduleHandle({ module, processHelper }) {
+  const file = `${module.root}/src/model`;
+  const file2 = `${module.root}/src/entity`;
+  if (fse.existsSync(file)) {
+    // console.log(file);
+    await _moduleHandle_model({ file, module, processHelper });
+  }
+  return;
   // if (module.suite) return;
   // console.log(module.info.relativeName);
   // const fileFrom = `${module.root}/tsconfig.json`;
@@ -81,7 +74,7 @@ async function _moduleHandle({ module, processHelper }) {
   // }
 
   // `;
-  const pattern = `${module.root}/src/index.ts`;
+  const pattern = `${module.root}/src/model`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
@@ -98,7 +91,7 @@ async function _moduleHandle({ module, processHelper }) {
     // if (file.indexOf('cli/templates') > -1) {
     //   process.exit(0);
     // }
-    await _moduleHandle_ts({ file, module, processHelper });
+    await _moduleHandle_model({ file, module, processHelper });
   }
 }
 
