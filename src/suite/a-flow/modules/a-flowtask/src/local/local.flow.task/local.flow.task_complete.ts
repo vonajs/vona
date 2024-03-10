@@ -143,9 +143,9 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
         },
       );
       // notify
-      this.self._notifyTaskHandlings(taskFrom.userIdAssignee);
+      this.self._notifyTaskHandlings(taskFrom!.userIdAssignee);
       // next
-      flowTaskIdForwardFrom = taskFrom.flowTaskIdForwardFrom;
+      flowTaskIdForwardFrom = taskFrom!.flowTaskIdForwardFrom;
     }
   }
 
@@ -169,9 +169,9 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
         },
       );
       // notify
-      this.self._notifyTaskHandlings(taskFrom.userIdAssignee);
+      this.self._notifyTaskHandlings(taskFrom!.userIdAssignee);
       // next
-      flowTaskIdSubstituteFrom = taskFrom.flowTaskIdSubstituteFrom;
+      flowTaskIdSubstituteFrom = taskFrom!.flowTaskIdSubstituteFrom;
     }
   }
 

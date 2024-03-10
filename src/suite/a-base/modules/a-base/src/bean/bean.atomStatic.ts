@@ -319,6 +319,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
   async _updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item }: any) {
     // atomCurrent
     const atomCurrent = await this.ctx.bean.atom.modelAtom.get({ id: atomIdFormal });
+    if (!atomCurrent) return;
     // check changed again
     const changed = this._ifChanged({
       atomClassBase,
