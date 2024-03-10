@@ -76,6 +76,7 @@ export class LocalFlowTaskSubstitute extends LocalFlowTaskForward {
     const flowTask = this.contextTask._flowTask;
     // 1. delete task
     const taskTo = await this.modelFlowTask.get({ id: flowTask.flowTaskIdSubstituteTo });
+    if (!taskTo) this.ctx.throw(403);
     // delete flowTask and flowTaskHistory
     await this.modelFlowTask.delete({ id: taskTo.id });
     await this.modelFlowTaskHistory.delete({ flowTaskId: taskTo.id });
