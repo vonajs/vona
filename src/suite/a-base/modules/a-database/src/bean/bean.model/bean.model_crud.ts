@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast, TableIdentity } from '@cabloy/core';
 import { BeanModelView } from './bean.model_view.js';
 import {
   IModelCountParams,
@@ -212,13 +212,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
   async insert<TRecord2 extends {} = TRecord>(
     data?: Partial<TRecord2> | Partial<TRecord2>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<string[]>;
+  ): Promise<TableIdentity[]>;
   async insert<TRecord2 extends {} = TRecord>(
     table: string,
     data?: Partial<TRecord2> | Partial<TRecord2>[],
     options?: IModelMethodOptionsGeneral,
-  ): Promise<string[]>;
-  async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<string[]> {
+  ): Promise<TableIdentity[]>;
+  async insert<TRecord2 extends {} = TRecord>(table?, data?, options?): Promise<TableIdentity[]> {
     if (typeof table !== 'string') {
       options = data;
       data = table;
