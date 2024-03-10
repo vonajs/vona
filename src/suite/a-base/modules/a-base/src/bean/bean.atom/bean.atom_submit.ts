@@ -136,6 +136,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     }
     // get formal atom
     const atomFormal = await this.modelAtom.get({ id: keyFormal.atomId });
+    if (!atomFormal) this.ctx.throw(403);
     atomFormal.atomId = atomFormal.id;
     atomFormal.module = atomClass.module;
     atomFormal.atomClassName = atomClass.atomClassName;

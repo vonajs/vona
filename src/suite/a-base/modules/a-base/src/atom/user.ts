@@ -121,7 +121,7 @@ export class AtomUser extends BeanAtomBase<ScopeModule> {
     if (![3, 6, 7].includes(action)) return res;
     // item
     const item = await this.model.get({ id: atom.itemId });
-    if (item.anonymous) return null;
+    if (!item || item.anonymous) return null;
     // default
     return res;
   }
