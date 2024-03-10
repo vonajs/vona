@@ -38,7 +38,18 @@ async function main() {
   }
 }
 
-async function _moduleHandle_model({ file, module, processHelper }) {}
+async function _moduleHandle_model({ file, module, processHelper }) {
+  console.log(file);
+  let contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf('EntityItemBase {') > -1) {
+    contentOld = contentOld.replace(`import {} from '@cabloy/core';`, `import { EntityItemBase } from '@cabloy/core';`);
+  } else {
+    contentOld = contentOld.replace(`import {} from '@cabloy/core';`, `import { EntityBase } from '@cabloy/core';`);
+  }
+  console.log(contentOld);
+  await fse.outputFile(file, contentOld);
+  await processHelper.formatFile({ fileName: file });
+}
 
 async function _moduleHandle({ module, processHelper }) {
   // if (module.suite) return;
@@ -57,7 +68,7 @@ async function _moduleHandle({ module, processHelper }) {
   // }
 
   // `;
-  const pattern = `${module.root}/src/model`;
+  const pattern = `${module.root}/src/entity`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   for (const file of files) {
     // const contentOld = (await fse.readFile(file)).toString();
