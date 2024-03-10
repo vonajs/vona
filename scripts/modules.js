@@ -38,25 +38,20 @@ async function main() {
   }
 }
 
-async function _moduleHandle_model({ _file, module, processHelper }) {
-  const fileGitKeep = `${module.root}/src/model/.gitkeep`;
-  // entities
-  if (fse.existsSync(fileGitKeep)) {
-    const contentNew = `\n`;
-    console.log(contentNew);
-    const file = `${module.root}/src/entity/.gitkeep`;
+async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
+  // console.log(file);
+  const modelName = path.basename(fileModel).replace('.ts', '');
+  const file = path.join(module.root, 'src/resource/entities.ts');
+  const contentOld = (await fse.readFile(file)).toString();
+  if (contentOld.indexOf(`entity/${modelName}.js`) === -1) {
+    const contentNew = `${contentOld}export * from '../entity/${modelName}.js';\n`;
+    // console.log(contentNew);
     await fse.outputFile(file, contentNew);
     // await processHelper.formatFile({ fileName: file });
   }
 }
 
 async function _moduleHandle({ module, processHelper }) {
-  const file = `${module.root}/src/model`;
-  if (fse.existsSync(file)) {
-    // console.log(file);
-    await _moduleHandle_model({ file, module, processHelper });
-  }
-  return;
   // if (module.suite) return;
   // console.log(module.info.relativeName);
   // const fileFrom = `${module.root}/tsconfig.json`;
