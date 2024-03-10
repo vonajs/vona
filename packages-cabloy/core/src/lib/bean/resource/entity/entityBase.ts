@@ -1,6 +1,6 @@
 export type TableIdentity = string | number;
 export interface EntityBase {
-  id: TableIdentity;
+  id: number;
   createdAt: Date;
   updatedAt: Date;
   deleted: number;

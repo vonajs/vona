@@ -1,7 +1,8 @@
-import {} from '@cabloy/core';
+import { EntityBase, TableIdentity } from '@cabloy/core';
 
-export interface EntityAtom extends EntityBase {
-  itemId: number;
+export interface EntityAtom extends Omit<EntityBase, 'id'> {
+  id: TableIdentity;
+  itemId: TableIdentity;
   atomStage: number;
   atomFlowId: number;
   atomClassId: number;
@@ -15,8 +16,8 @@ export interface EntityAtom extends EntityBase {
   readCount: number;
   roleIdOwner: number;
   atomClosed: number;
-  atomIdDraft: number;
-  atomIdFormal: number;
+  atomIdDraft: TableIdentity;
+  atomIdFormal: TableIdentity;
   atomStatic: number;
   atomStaticKey: string;
   atomRevision: number;
