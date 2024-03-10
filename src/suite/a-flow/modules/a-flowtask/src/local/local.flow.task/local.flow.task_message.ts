@@ -12,7 +12,13 @@ export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
     }
     // publish uniform message
     const userFlow = await this.ctx.bean.user.get({ id: this.context._flow.flowUserId });
+    if (!userFlow) {
+      return;
+    }
     const userAssignee = await this.ctx.bean.user.get({ id: userIdAssignee });
+    if (!userAssignee) {
+      return;
+    }
     const title = `${this.ctx.text.locale(userAssignee.locale, 'Task')} - ${this.ctx.text.locale(
       userAssignee.locale,
       this.contextNode._flowNode.flowNodeName,
