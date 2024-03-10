@@ -28,3 +28,9 @@ export interface EntityAtom extends Omit<EntityBase, 'id'> {
   atomSimple: number;
   atomState: string;
 }
+
+export interface EntityAtomPro extends EntityAtom {
+  atomId: TableIdentity;
+  module: string;
+  atomClassName: string;
+}

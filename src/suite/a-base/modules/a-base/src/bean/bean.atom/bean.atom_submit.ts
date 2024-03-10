@@ -1,6 +1,7 @@
 import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
 import { BeanAtomSimple } from './bean.atom_simple.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
+import { EntityAtomPro } from '../../index.js';
 
 export class BeanAtomSubmit extends BeanAtomSimple {
   async submit({
@@ -135,7 +136,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       this.self._notifyDraftsFlowing(user, atomClass);
     }
     // get formal atom
-    const atomFormal = await this.modelAtom.get({ id: keyFormal.atomId });
+    const atomFormal = (await this.modelAtom.get({ id: keyFormal.atomId })) as EntityAtomPro;
     if (!atomFormal) this.ctx.throw(403);
     atomFormal.atomId = atomFormal.id;
     atomFormal.module = atomClass.module;
