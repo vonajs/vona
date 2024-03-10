@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityAtom } from '../entity/atom.js';
 
 @Model({
   table: 'aAtom',
@@ -7,7 +9,7 @@ import { BeanModelBase, Model } from '@cabloy/core';
     cacheKeyAux: 'atomClassId',
   },
 })
-export class ModelAtom extends BeanModelBase {
+export class ModelAtom extends BeanModelBase<EntityAtom> {
   // async get(where, ...args) {
   //   const debug = app.bean.debug.get('atom');
   //   debug('atom get: ', where);

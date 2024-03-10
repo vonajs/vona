@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityResource } from '../entity/resource.js';
 
 @Model({ table: 'aResource', options: { disableDeleted: false } })
-export class ModelResource extends BeanModelBase {}
+export class ModelResource extends BeanModelBase<EntityResource> {}

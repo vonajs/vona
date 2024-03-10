@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityFlow } from '../entity/flow.js';
 
 @Model({
   table: 'aFlow',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: true,
   },
 })
-export class ModelFlow extends BeanModelBase {}
+export class ModelFlow extends BeanModelBase<EntityFlow> {}

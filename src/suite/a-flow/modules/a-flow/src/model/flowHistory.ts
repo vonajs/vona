@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityFlowHistory } from '../entity/flowHistory.js';
 
 @Model({
   table: 'aFlowHistory',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelFlowHistory extends BeanModelBase {}
+export class ModelFlowHistory extends BeanModelBase<EntityFlowHistory> {}

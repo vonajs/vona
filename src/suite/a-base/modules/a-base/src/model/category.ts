@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityCategory } from '../entity/category.js';
 
 @Model({
   table: 'aCategory',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelCategory extends BeanModelBase {}
+export class ModelCategory extends BeanModelBase<EntityCategory> {}

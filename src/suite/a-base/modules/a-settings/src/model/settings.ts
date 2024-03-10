@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntitySettings } from '../entity/settings.js';
 
 @Model({ table: 'aSettings', options: { disableDeleted: true } })
-export class ModelSettings extends BeanModelBase {}
+export class ModelSettings extends BeanModelBase<EntitySettings> {}

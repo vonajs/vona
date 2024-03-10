@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityRole } from '../entity/role.js';
 
 @Model({
   table: 'aRole',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: true,
   },
 })
-export class ModelRole extends BeanModelBase {}
+export class ModelRole extends BeanModelBase<EntityRole> {}

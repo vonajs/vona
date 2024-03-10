@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityUserOnline } from '../entity/userOnline.js';
 
 @Model({
   table: 'aUserOnline',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelUserOnline extends BeanModelBase {}
+export class ModelUserOnline extends BeanModelBase<EntityUserOnline> {}

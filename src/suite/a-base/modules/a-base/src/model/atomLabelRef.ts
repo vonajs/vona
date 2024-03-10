@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityAtomLabelRef } from '../entity/atomLabelRef.js';
 
 @Model({ table: 'aAtomLabelRef', options: { disableDeleted: true } })
-export class ModelAtomLabelRef extends BeanModelBase {}
+export class ModelAtomLabelRef extends BeanModelBase<EntityAtomLabelRef> {}

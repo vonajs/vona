@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityFlowDefContent } from '../entity/flowDefContent.js';
 
 @Model({ table: 'aFlowDefContent', options: { disableDeleted: false } })
-export class ModelFlowDefContent extends BeanModelBase {}
+export class ModelFlowDefContent extends BeanModelBase<EntityFlowDefContent> {}

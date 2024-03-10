@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityPurchaseOrder } from '../entity/purchaseOrder.js';
 
 @Model({
   table: 'testFlowPurchaseOrder',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelPurchaseOrder extends BeanModelBase {}
+export class ModelPurchaseOrder extends BeanModelBase<EntityPurchaseOrder> {}

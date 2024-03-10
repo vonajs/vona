@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityAtomClass } from '../entity/atomClass.js';
 
 @Model({
   table: 'aAtomClass',
@@ -6,7 +8,7 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelAtomClass extends BeanModelBase {
+export class ModelAtomClass extends BeanModelBase<EntityAtomClass> {
   // array of object/number
   async mget(ids) {
     if (ids.length === 0) return [];

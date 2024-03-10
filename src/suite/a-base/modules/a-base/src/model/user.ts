@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityUser } from '../entity/user.js';
 
 @Model({
   table: 'aUser',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelUser extends BeanModelBase {}
+export class ModelUser extends BeanModelBase<EntityUser> {}

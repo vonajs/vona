@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityRoleRightRef } from '../entity/roleRightRef.js';
 
 @Model({ table: 'aRoleRightRef', options: { disableDeleted: true } })
-export class ModelRoleRightRef extends BeanModelBase {}
+export class ModelRoleRightRef extends BeanModelBase<EntityRoleRightRef> {}

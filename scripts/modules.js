@@ -48,7 +48,7 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   //   return;
   // }
   // const tableName = contentMatches[1];
-  if (modelName !== 'instance') return;
+  // if (modelName !== 'instance') return;
   if (contentModel.indexOf('BeanModelBase, ') === -1) {
     console.log(fileModel);
     return;
@@ -61,6 +61,8 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   );
   contentNew = contentNew.replace('BeanModelBase {', `BeanModelBase<${entityNameInterface}> {`);
   console.log(contentNew);
+  await fse.outputFile(fileModel, contentNew);
+  await processHelper.formatFile({ fileName: fileModel });
 }
 
 async function _moduleHandle({ module, processHelper }) {

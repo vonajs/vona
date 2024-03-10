@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityLabel } from '../entity/label.js';
 
 @Model({
   table: 'aLabel',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: true,
   },
 })
-export class ModelLabel extends BeanModelBase {}
+export class ModelLabel extends BeanModelBase<EntityLabel> {}

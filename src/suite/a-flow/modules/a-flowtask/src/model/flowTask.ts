@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityFlowTask } from '../entity/flowTask.js';
 
 @Model({
   table: 'aFlowTask',
@@ -6,4 +8,4 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: true,
   },
 })
-export class ModelFlowTask extends BeanModelBase {}
+export class ModelFlowTask extends BeanModelBase<EntityFlowTask> {}

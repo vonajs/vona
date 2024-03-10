@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityCommentHeart } from '../entity/commentHeart.js';
 
 @Model({ table: 'aCommentHeart', options: { disableDeleted: true } })
-export class ModelCommentHeart extends BeanModelBase {}
+export class ModelCommentHeart extends BeanModelBase<EntityCommentHeart> {}

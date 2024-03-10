@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityRoleIncRef } from '../entity/roleIncRef.js';
 
 @Model({ table: 'aRoleIncRef', options: { disableDeleted: true } })
-export class ModelRoleIncRef extends BeanModelBase {}
+export class ModelRoleIncRef extends BeanModelBase<EntityRoleIncRef> {}

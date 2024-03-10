@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityMessageClass } from '../entity/messageClass.js';
 
 @Model({
   table: 'aSocketIOMessageClass',
@@ -6,7 +8,7 @@ import { BeanModelBase, Model } from '@cabloy/core';
     disableDeleted: false,
   },
 })
-export class ModelMessageClass extends BeanModelBase {
+export class ModelMessageClass extends BeanModelBase<EntityMessageClass> {
   // array of object/number
   async mget(ids) {
     if (ids.length === 0) return [];

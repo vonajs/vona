@@ -1,4 +1,6 @@
-import { BeanModelBase, Model } from '@cabloy/core';
+import { Model } from '@cabloy/core';
+import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { EntityUserRoleRef } from '../entity/userRoleRef.js';
 
 @Model({ table: 'aUserRoleRef', options: { disableDeleted: true } })
-export class ModelUserRoleRef extends BeanModelBase {}
+export class ModelUserRoleRef extends BeanModelBase<EntityUserRoleRef> {}
