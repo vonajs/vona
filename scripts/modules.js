@@ -71,7 +71,7 @@ function _columnTypePrefixes(type, prefixes) {
 async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // console.log(file);
   const modelName = path.basename(fileModel).replace('.ts', '');
-  // const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
+  const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
   const contentModel = (await fse.readFile(fileModel)).toString();
   const contentMatches = contentModel.match(/table:[\s]*'(.*?)'/);
   if (!contentMatches) {
@@ -81,15 +81,25 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   const tableName = contentMatches[1];
   // console.log(tableName);
   // columns
-  if (tableName !== 'aAtom') return;
   const map = await pg(tableName).columnInfo();
   // console.log(map);
+  let entities = '';
   for (const columnName in map) {
+    if (['id', 'createdAt', 'updatedAt', 'deleted', 'iid', 'atomId'].includes(columnName)) continue;
     const columnType = _coerceColumnValue(map[columnName].type);
-    console.log(`${columnName}: ${columnType}`);
-    // if (columnName === 'atomTags') console.log(map[columnName]);
+    entities = `${entities}\n  ${columnName}: ${columnType};`;
   }
+  const classBase = map.atomId ? 'EntityItemBase' : 'EntityBase';
+  const contentNew = `import { ${classBase} } from '@cabloy/core';
 
+export interface ${entityNameInterface} extends ${classBase} {${entities}
+}
+`;
+  // console.log(contentNew);
+  const classFile = `${module.root}/src/entity/${modelName}.ts`;
+  console.log(classFile);
+  await fse.outputFile(classFile, contentNew);
+  await processHelper.formatFile({ fileName: classFile });
   // const file = path.join(module.root, `src/entity/${modelName}.ts`);
 }
 
