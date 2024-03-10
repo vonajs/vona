@@ -34,12 +34,12 @@ export class VersionInit extends BeanBase {
           catalog: item.catalog,
           system: item.system,
           sorting: item.sorting,
-          roleIdParent: roleParent.id,
+          roleIdParent: roleParent!.id,
         });
         if (item.roleName === 'system') {
           // superuser include system
           const roleSuperuser = await this.ctx.bean.role.getSystemRole({ roleName: 'superuser' });
-          await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser.id, roleIdInc: roleId });
+          await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
         }
       }
     }

@@ -28,7 +28,7 @@ export class VersionInit extends BeanBase {
       `
           update aAtom set roleIdOwner=? where iid=? and atomClassId<>? and roleIdOwner=?
       `,
-      [roleBuiltIn.id, this.ctx.instance.id, atomClassRole.id, roleSystem.id],
+      [roleBuiltIn!.id, this.ctx.instance.id, atomClassRole.id, roleSystem!.id],
     );
   }
 }

@@ -1,3 +1,4 @@
+import { EntityCategory } from '../../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
@@ -77,11 +78,11 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
       }
     }
     // delete all old categories
-    const categoryTop = await this.ctx.bean.category.child({
+    const categoryTop = (await this.ctx.bean.category.child({
       atomClass: __atomClassResource,
       categoryId: 0,
       categoryName: resourceType,
-    });
+    })) as EntityCategory;
     const children = (await this.ctx.bean.category.children({
       atomClass: __atomClassResource,
       categoryId: categoryTop.id,
