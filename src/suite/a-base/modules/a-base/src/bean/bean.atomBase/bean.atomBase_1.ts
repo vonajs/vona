@@ -283,11 +283,12 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
 
   async _patchAtomClassInfo_withTitle({ items }: any) {
     // atomClassIds
-    const atomClassIds = Set.unique(items.map(item => item.atomClassId));
+    const atomClassIds: number[] = Set.unique(items.map(item => item.atomClassId));
     // atomClasses
     const atomClasses = await this.ctx.bean.atomClass.model.mget(atomClassIds);
     for (const item of items) {
       const atomClass = atomClasses.find(atomClass => atomClass.id === item.atomClassId);
+      if (!atomClass) continue;
       item.module = atomClass.module;
       item.atomClassName = atomClass.atomClassName;
       // special for !atomClass

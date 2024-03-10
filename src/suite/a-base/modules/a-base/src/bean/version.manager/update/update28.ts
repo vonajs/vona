@@ -39,8 +39,10 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
     for (const resourceRole of resourceRoles) {
       const roleId = resourceRole.roleId;
       const role = await this.ctx.bean.role.get({ id: roleId });
-      const roleAtomId = role.atomId;
-      await this.modelResourceRole.update({ id: resourceRole.id, roleAtomId });
+      if (role) {
+        const roleAtomId = role.atomId;
+        await this.modelResourceRole.update({ id: resourceRole.id, roleAtomId });
+      }
     }
   }
 }
