@@ -4,6 +4,20 @@ const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
 const eggBornUtils = require('egg-born-utils');
 const argv = require('./lib/parse_argv')('sync');
+const knex = require('knex');
+const pg = knex({
+  client: 'pg',
+  connection: {
+    // connectionString: config.DATABASE_URL,
+    host: 'localhost',
+    port: 5432,
+    user: 'postgres',
+    database: 'cabloy-test-cabloy-source-20240310-135400',
+    password: 'yj123456',
+  },
+});
+
+pg.destroy();
 
 (async function () {
   await main();
@@ -68,6 +82,57 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 // export const routes: IModuleRoute[] = [];
 
 //
+
+function _coerceColumnValue(type) {
+  if (['bit', 'bool', 'boolean'].includes(type)) return 'boolean';
+  if (['int'].includes(type)) return 'number';
+  if (_columnTypePrefixes(type, ['timestamp'])) return 'Date';
+  if (_columnTypePrefixes(type, ['float', 'double'])) return 'number';
+  if (_columnTypePrefixes(type, ['tinyint', 'smallint', 'mediumint', 'bigint', 'numeric', 'integer'])) {
+    return 'number';
+  }
+  if (type === 'json') return 'string';
+  return 'string';
+}
+
+function _columnTypePrefixes(type, prefixes) {
+  return prefixes.some(prefix => type.indexOf(prefix) > -1);
+}
+
+async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
+  // console.log(file);
+  const modelName = path.basename(fileModel).replace('.ts', '');
+  const entityNameInterface = 'Entity' + modelName.charAt(0).toUpperCase() + modelName.substring(1);
+  const contentModel = (await fse.readFile(fileModel)).toString();
+  const contentMatches = contentModel.match(/table:[\s]*'(.*?)'/);
+  if (!contentMatches) {
+    console.log('---- not matched: ', module.info.relativeName, modelName);
+    return;
+  }
+  const tableName = contentMatches[1];
+  // console.log(tableName);
+  // columns
+  const map = await pg(tableName).columnInfo();
+  // console.log(map);
+  let entities = '';
+  for (const columnName in map) {
+    if (['id', 'createdAt', 'updatedAt', 'deleted', 'iid', 'atomId'].includes(columnName)) continue;
+    const columnType = _coerceColumnValue(map[columnName].type);
+    entities = `${entities}\n  ${columnName}: ${columnType};`;
+  }
+  const classBase = map.atomId ? 'EntityItemBase' : 'EntityBase';
+  const contentNew = `import { ${classBase} } from '@cabloy/core';
+
+export interface ${entityNameInterface} extends ${classBase} {${entities}
+}
+`;
+  // console.log(contentNew);
+  const classFile = `${module.root}/src/entity/${modelName}.ts`;
+  console.log(classFile);
+  await fse.outputFile(classFile, contentNew);
+  await processHelper.formatFile({ fileName: classFile });
+  // const file = path.join(module.root, `src/entity/${modelName}.ts`);
+}
 
 async function _moduleHandle_modelIndex({ module, processHelper }) {
   // index.ts
