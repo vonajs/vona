@@ -44,8 +44,8 @@ async function _moduleHandle_model({ module, processHelper }) {
   if (!fse.existsSync(file)) {
     const contentNew = `\n`;
     console.log(contentNew);
-    // await fse.outputFile(file, contentNew);
-    // await processHelper.formatFile({ fileName: file });
+    await fse.outputFile(file, contentNew);
+    await processHelper.formatFile({ fileName: file });
   }
 }
 
