@@ -187,7 +187,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     });
     const hash = await this.localSimple.calcPassword({ password: passwordNew });
     await this.modelAuthSimple.update({
-      id: auth.id,
+      id: auth!.id,
       hash,
     });
   }
@@ -217,7 +217,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     await this.cacheDb.remove(cacheKey);
     // login antomatically
     const user = await this.ctx.bean.user.get({ id: userId });
-    const data = { auth: user.email, password: passwordNew, rememberMe: false };
+    const data = { auth: user!.email, password: passwordNew, rememberMe: false };
     const user2 = await this.signin({ data, state: 'login' });
     // ok
     return user2;

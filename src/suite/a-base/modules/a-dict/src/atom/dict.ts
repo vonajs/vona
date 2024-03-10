@@ -93,8 +93,8 @@ export class AtomDict extends BeanAtomBase {
 
   async delete({ atomClass, key, options, user }: any) {
     const item = await this.ctx.bean.atom.modelAtom.get({ id: key.atomId });
-    const atomStaticKey = item.atomStaticKey;
-    const atomStage = item.atomStage;
+    const atomStaticKey = item!.atomStaticKey;
+    const atomStage = item!.atomStage;
     // super
     await super.delete({ atomClass, key, options, user });
     // delete dict

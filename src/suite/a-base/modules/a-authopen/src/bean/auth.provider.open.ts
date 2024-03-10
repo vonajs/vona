@@ -24,7 +24,7 @@ export class AuthProviderOpen extends BeanAuthProviderBase {
       // only one day
       maxAge = 0;
     } else {
-      maxAge = authOpen.expireTime - Date.now();
+      maxAge = authOpen.expireTime.valueOf() - Date.now();
     }
     return {
       module: this.providerModule,

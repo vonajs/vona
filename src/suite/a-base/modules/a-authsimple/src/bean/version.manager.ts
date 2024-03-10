@@ -18,7 +18,7 @@ export class VersionManager extends BeanBase {
       // root
       const userRoot = await this.ctx.bean.user.get({ userName: 'root' });
       await this.ctx.bean.authSimple.add({
-        userId: userRoot.id,
+        userId: userRoot!.id,
         password: options.password,
       });
       // admin

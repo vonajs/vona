@@ -26,7 +26,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
 
   async hideClientSecret({ atomId, itemId, user }: any) {
     const item = await this._forceAuthOpen({ atomId, itemId });
-    const clientSecret = await this.localAuthSimple.calcPassword({ password: item.clientSecret });
+    const clientSecret = await this.localAuthSimple.calcPassword({ password: item!.clientSecret });
     // use userId for safety
     await this.modelAuthOpen.update({
       id: itemId,
@@ -65,9 +65,9 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     }
     // atomDisabled
     const atom = await this.ctx.bean.atom.modelAtom.get({ id: authOpen.atomId });
-    if (atom.atomDisabled) return this.ctx.throw(403);
+    if (atom!.atomDisabled) return this.ctx.throw(403);
     // neverExpire/expireTime
-    if (!authOpen.neverExpire && authOpen.expireTime <= Date.now()) {
+    if (!authOpen.neverExpire && authOpen.expireTime.valueOf() <= Date.now()) {
       return this.scope.error.AuthOpenTokenExpired.throw();
     }
     // done
@@ -139,7 +139,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   async _forceAuthOpenId({ atomId, itemId }: any) {
     if (!itemId) {
       const item = await this.modelAuthOpen.get({ atomId });
-      itemId = item.id;
+      itemId = item!.id;
     }
     return itemId;
   }

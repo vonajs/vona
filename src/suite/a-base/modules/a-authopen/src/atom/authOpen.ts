@@ -116,7 +116,7 @@ export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
     const item = await this.model.get({ id: atom.itemId });
     // delete
     if (action === 101) {
-      if (item.clientSecretHidden === 1) return null;
+      if (item!.clientSecretHidden === 1) return null;
     }
     // default
     return res;
