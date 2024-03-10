@@ -9,12 +9,4 @@ import { EntityAtom } from '../entity/atom.js';
     cacheKeyAux: 'atomClassId',
   },
 })
-export class ModelAtom extends BeanModelBase<EntityAtom> {
-  // async get(where, ...args) {
-  //   const debug = app.bean.debug.get('atom');
-  //   debug('atom get: ', where);
-  //   const res = await super.get(where, ...args);
-  //   debug('atom get end: ', where, res.atomName);
-  //   return res;
-  // }
-}
+export class ModelAtom extends BeanModelBase<EntityAtom> {}
