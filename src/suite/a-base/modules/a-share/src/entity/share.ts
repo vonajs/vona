@@ -1,4 +1,8 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityShare extends EntityBase {
+export interface EntityShare extends EntityItemBase {
+  uuid: string;
+  userId: number;
+  host: string;
+  url: string;
 }

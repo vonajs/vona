@@ -1,4 +1,6 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityShareRecordUV extends EntityBase {
+export interface EntityShareRecordUV extends EntityItemBase {
+  userIdSource: number;
+  userIdTarget: number;
 }

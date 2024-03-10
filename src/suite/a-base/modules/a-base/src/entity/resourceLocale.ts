@@ -1,4 +1,6 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityResourceLocale extends EntityBase {
+export interface EntityResourceLocale extends EntityItemBase {
+  locale: string;
+  atomNameLocale: string;
 }

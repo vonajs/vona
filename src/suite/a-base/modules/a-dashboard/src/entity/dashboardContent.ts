@@ -1,4 +1,6 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityDashboardContent extends EntityBase {
+export interface EntityDashboardContent extends EntityItemBase {
+  itemId: number;
+  content: string;
 }

@@ -1,4 +1,6 @@
 import { EntityBase } from '@cabloy/core';
 
 export interface EntityLabel extends EntityBase {
+  userId: number;
+  labels: string;
 }

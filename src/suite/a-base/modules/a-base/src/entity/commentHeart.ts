@@ -1,4 +1,7 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityCommentHeart extends EntityBase {
+export interface EntityCommentHeart extends EntityItemBase {
+  userId: number;
+  commentId: number;
+  heart: number;
 }

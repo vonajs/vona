@@ -1,4 +1,20 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityArticle extends EntityBase {
+export interface EntityArticle extends EntityItemBase {
+  sticky: number;
+  keywords: string;
+  description: string;
+  summary: string;
+  url: string;
+  editMode: number;
+  slug: string;
+  sorting: number;
+  flag: string;
+  extra: string;
+  imageFirst: string;
+  audioFirst: string;
+  audioCoverFirst: string;
+  uuid: string;
+  imageCover: string;
+  renderAt: Date;
 }

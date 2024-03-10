@@ -1,4 +1,6 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityDict extends EntityBase {
+export interface EntityDict extends EntityItemBase {
+  description: string;
+  dictMode: number;
 }

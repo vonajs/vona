@@ -60,7 +60,7 @@ function _coerceColumnValue(type) {
   if (_columnTypePrefixes(type, ['tinyint', 'smallint', 'mediumint', 'bigint', 'numeric', 'integer'])) {
     return 'number';
   }
-  if (type === 'json') return 'object';
+  if (type === 'json') return 'string';
   return 'string';
 }
 

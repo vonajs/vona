@@ -1,4 +1,5 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityFlowDef extends EntityBase {
+export interface EntityFlowDef extends EntityItemBase {
+  description: string;
 }

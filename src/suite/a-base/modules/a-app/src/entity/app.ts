@@ -1,4 +1,11 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityApp extends EntityBase {
+export interface EntityApp extends EntityItemBase {
+  description: string;
+  appSorting: number;
+  appIcon: string;
+  appIsolate: number;
+  appLanguage: number;
+  appCms: number;
+  appHidden: number;
 }

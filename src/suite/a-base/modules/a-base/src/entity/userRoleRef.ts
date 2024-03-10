@@ -1,4 +1,3 @@
 import { EntityBase } from '@cabloy/core';
 
-export interface EntityUserRoleRef extends EntityBase {
-}
+export interface EntityUserRoleRef extends EntityBase {}

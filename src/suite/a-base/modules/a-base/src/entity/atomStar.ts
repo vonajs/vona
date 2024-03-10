@@ -1,4 +1,6 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityAtomStar extends EntityBase {
+export interface EntityAtomStar extends EntityItemBase {
+  userId: number;
+  star: number;
 }

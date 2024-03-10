@@ -1,4 +1,20 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityItemBase } from '@cabloy/core';
 
-export interface EntityFileView extends EntityBase {
+export interface EntityFileView extends EntityItemBase {
+  userId: number;
+  downloadId: string;
+  mode: number;
+  fileSize: number;
+  width: number;
+  height: number;
+  filePath: string;
+  fileName: string;
+  realName: string;
+  fileExt: string;
+  encoding: string;
+  mime: string;
+  attachment: number;
+  flag: string;
+  userName: string;
+  avatar: string;
 }
