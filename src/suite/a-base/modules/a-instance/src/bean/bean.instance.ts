@@ -82,7 +82,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       disabled: 0,
     } as EntityInstance;
     const res = await this.modelInstance.insert(instance);
-    instance.id = res[0];
+    instance.id = res[0] as number;
     return instance;
   }
 

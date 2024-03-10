@@ -126,6 +126,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
     const force = options && options.force;
     // role
     const role = await this.beanRole.get({ id: roleId });
+    if (!role) return;
     // parent
     const roleIdParent = role.roleIdParent;
 
@@ -183,6 +184,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
     if (![4, 5, 101, 102, 103, 104, 105, 106, 107].includes(action)) return res;
     // role
     const role = await this.model.get({ id: atom.itemId });
+    if (!role) this.ctx.throw(403);
     // delete
     if (action === 4) {
       if (role.system === 1) return null;
