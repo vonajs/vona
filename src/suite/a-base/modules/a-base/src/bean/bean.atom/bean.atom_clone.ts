@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
@@ -82,7 +83,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     if (!destKey.itemId) {
       if (!atomClassBase.itemOnly) {
         const _item = await this.modelAtom.get({ id: destKey.atomId });
-        destKey.itemId = _item.itemId;
+        destKey.itemId = _item!.itemId;
       } else {
         destKey.itemId = destKey.atomId;
       }
@@ -270,7 +271,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       where: { atomId: atomIdSrc, mode: 2 },
     });
     for (const file of files) {
-      delete file.id;
+      delete Cast(file).id;
       file.atomId = atomIdDest;
       await this.modelFile.insert(file);
     }
