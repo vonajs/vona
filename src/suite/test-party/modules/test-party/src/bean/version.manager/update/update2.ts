@@ -2,12 +2,10 @@ import { BeanBase } from '@cabloy/core';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {
-    const sql = `
-      ALTER TABLE testParty
-        ADD COLUMN partyTime timestamp DEFAULT NULL,
-        ADD COLUMN partyCountry varchar(50) DEFAULT '',
-        ADD COLUMN partyCity varchar(50) DEFAULT ''
-    `;
-    await this.ctx.model.query(sql);
+    await this.bean.model.alterTable('testParty', function (table) {
+      table.timestamp('partyTime');
+      table.string('partyCountry', 50);
+      table.string('partyCity', 50);
+    });
   }
 }
