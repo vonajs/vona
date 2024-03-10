@@ -38,14 +38,14 @@ async function main() {
   }
 }
 
-async function _moduleHandle_model({ file, module, processHelper }) {
+async function _moduleHandle_model({ _file, module, processHelper }) {
   const fileGitKeep = `${module.root}/src/model/.gitkeep`;
   // entities
   if (fse.existsSync(fileGitKeep)) {
     const contentNew = `\n`;
     console.log(contentNew);
-    console.log(file);
-    // await fse.outputFile(file, contentNew);
+    const file = `${module.root}/src/entity/.gitkeep`;
+    await fse.outputFile(file, contentNew);
     // await processHelper.formatFile({ fileName: file });
   }
 }
