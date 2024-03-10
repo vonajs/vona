@@ -34,7 +34,7 @@ export class BeanShare extends BeanBase {
         url,
       };
       const res = await this.modelShare.insert(item);
-      item.id = res.insertId;
+      item.id = res[0];
     }
     // link
     const link = this._combine_shareLink(item.uuid);
@@ -83,7 +83,7 @@ export class BeanShare extends BeanBase {
           userId,
         });
         context.result = {
-          recordId: res.insertId,
+          recordId: res[0],
         };
         // next
         await next();
@@ -105,7 +105,7 @@ export class BeanShare extends BeanBase {
           // record
           const res = await this.modelShareRecordUV.insert(uvData);
           context.result = {
-            recordId: res.insertId,
+            recordId: res[0],
           };
           // next
           await next();

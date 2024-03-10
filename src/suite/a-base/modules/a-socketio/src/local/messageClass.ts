@@ -48,7 +48,7 @@ export class LocalMessageClass extends BeanBase {
     };
     // insert
     const res2 = await this.modelMessageClass.insert(data);
-    data.id = res2.insertId;
+    data.id = res2[0];
     return data;
   }
 

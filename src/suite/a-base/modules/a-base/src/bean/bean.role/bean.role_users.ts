@@ -79,7 +79,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     // await this.ctx.bean.fields.clearSummer_fieldsRightOfAtomClass();
     await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
     // ok
-    return res.insertId;
+    return res[0];
   }
 
   async deleteUserRole({ roleAtomId, roleId, userAtomId, userId, user }: any) {

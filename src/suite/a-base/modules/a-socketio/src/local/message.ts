@@ -18,13 +18,13 @@ export class LocalMessage extends BeanBase<ScopeModule> {
   async save({ message }: any) {
     // insert
     const res = await this.modelMessage.insert(message);
-    return res.insertId;
+    return res[0];
   }
 
   async saveSync({ messageSync }: any) {
     // insert
     const res = await this.modelMessageSync.insert(messageSync);
-    return res.insertId;
+    return res[0];
   }
 
   // the first unread message
@@ -187,7 +187,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
 //     // userId===0 not save to db
 //     if (persistence && messageSync.userId !== 0) {
 //       const res = await this.modelMessageSync.insert(messageSync);
-//       messageSync.messageSyncId = res.insertId;
+//       messageSync.messageSyncId = res[0];
 //     } else {
 //       messageSync.messageSyncId = this.ctx.bean.util.uuid.v4();
 //     }

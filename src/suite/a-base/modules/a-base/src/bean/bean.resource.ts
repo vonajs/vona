@@ -263,7 +263,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       roleId,
       roleAtomId,
     });
-    return res.insertId;
+    return res[0];
   }
 
   // delete resource role

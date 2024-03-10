@@ -125,7 +125,7 @@ export class LocalDashboard extends BeanBase {
       content: dashboardSystem.content,
     };
     const res = await this.ctx.model.dashboardUser.insert(data);
-    data.id = res.insertId;
+    data.id = res[0];
     // ok
     return data;
   }

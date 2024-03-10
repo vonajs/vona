@@ -312,7 +312,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
         profileId,
         profile: _profile,
       });
-      authId = res.insertId;
+      authId = res[0];
     }
     // provider ready
     verifyUser.provider = {

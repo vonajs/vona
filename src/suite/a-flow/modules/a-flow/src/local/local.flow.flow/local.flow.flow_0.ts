@@ -178,7 +178,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
       flowUserId,
     };
     const res = await this.modelFlow.insert(data);
-    const flowId = res.insertId;
+    const flowId = res[0];
     // flowHistory
     data.flowId = flowId;
     await this.modelFlowHistory.insert(data);

@@ -54,7 +54,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
       roleId,
       roleIdInc,
     });
-    const id = res.insertId;
+    const id = res[0];
 
     // set dirty
     await this.setDirty(true);

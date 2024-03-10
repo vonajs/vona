@@ -70,7 +70,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
         action,
         scope: JSON.stringify(scope),
       });
-      roleRightId = res.insertId;
+      roleRightId = res[0];
     }
     // roleRightRef
     if (scope) {

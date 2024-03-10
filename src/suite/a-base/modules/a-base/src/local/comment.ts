@@ -142,7 +142,7 @@ export class LocalComment extends BeanBase {
       summary: summary.html,
       html,
     });
-    const commentId = res.insertId;
+    const commentId = res[0];
     // commentCount
     await this.ctx.bean.atom.comment({ key, atom: { comment: 1 }, user });
     // publish

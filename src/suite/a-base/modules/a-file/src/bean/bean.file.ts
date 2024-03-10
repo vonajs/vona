@@ -275,7 +275,7 @@ export class BeanFile extends BeanBase {
       attachment,
       flag,
     });
-    const fileId = res.insertId;
+    const fileId = res[0];
 
     // attachmentCount
     if (atomId && attachment) {

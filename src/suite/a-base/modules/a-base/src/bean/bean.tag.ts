@@ -60,7 +60,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
       tagName: data.tagName,
       tagAtomCount: data.tagAtomCount || 0,
     });
-    return res.insertId;
+    return res[0];
   }
 
   async save({ tagId, data }: any) {

@@ -240,7 +240,7 @@ export class BeanDetailCopy extends BeanDetail0 {
         detailStaticKey: this.ctx.bean.util.uuidv4(),
       };
       const res = await this.modelDetailBase.insert(data);
-      data.id = res.insertId;
+      data.id = res[0];
       detailBasesSrc.push(data);
     }
     return detailBasesSrc;

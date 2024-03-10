@@ -31,7 +31,7 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
       allowViewWorkflow: options.allowViewWorkflow,
     };
     const res = await this.modelFlowTask.insert(data);
-    const flowTaskId = res.insertId;
+    const flowTaskId = res[0];
     // flowTaskHistory
     data.flowTaskId = flowTaskId;
     await this.modelFlowTaskHistory.insert(data);

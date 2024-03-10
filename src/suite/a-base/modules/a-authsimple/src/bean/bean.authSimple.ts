@@ -113,7 +113,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
       userId: 0,
       hash,
     });
-    return res.insertId;
+    return res[0];
   }
 
   async add({ userId, password }: any) {

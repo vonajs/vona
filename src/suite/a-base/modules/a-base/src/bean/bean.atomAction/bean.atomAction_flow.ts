@@ -51,7 +51,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     };
     // insert
     const res2 = await this.model.insert(data);
-    data.id = res2.insertId;
+    data.id = res2[0];
     // role right
     const roleRights = [
       {

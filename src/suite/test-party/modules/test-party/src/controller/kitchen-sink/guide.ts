@@ -33,7 +33,7 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
       deleted: 0,
       personCount: 3,
     });
-    const id = res.insertId;
+    const id = res[0];
     // update
     await this.ctx.model.update('testParty', {
       id,
@@ -56,7 +56,7 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
 
     // insert
     const res = await this.ctx.model.party.insert({ personCount: 3 });
-    const id = res.insertId;
+    const id = res[0];
     // update
     await this.ctx.model.party.update({ id, personCount: 6 });
     // get
@@ -72,7 +72,7 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
 
     // insert
     const res = await this.ctx.model.party.insert({ personCount: 3 });
-    const id = res.insertId;
+    const id = res[0];
     // will throw error
     await this.ctx.model.party.update({ id, personCountA: 6 });
     // never here

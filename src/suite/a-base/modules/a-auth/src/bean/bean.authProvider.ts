@@ -89,7 +89,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     };
     // insert
     const res2 = await this.modelAuthProvider.insert(data);
-    data.id = res2.insertId;
+    data.id = res2[0];
     return data;
   }
 

@@ -107,6 +107,6 @@ export class BeanAtom0Create extends BeanAtomUtils {
       userIdUpdated: userId,
       roleIdOwner,
     });
-    return res.insertId;
+    return res[0];
   }
 }

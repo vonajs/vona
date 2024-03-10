@@ -134,7 +134,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     });
     // adjust catalog
     await this.adjustCatalog(data.categoryIdParent);
-    return res.insertId;
+    return res[0];
   }
 
   async delete({ categoryId }: any) {

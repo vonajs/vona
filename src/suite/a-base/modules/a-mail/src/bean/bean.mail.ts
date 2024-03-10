@@ -17,7 +17,7 @@ export class BeanMail extends BeanModuleScopeBase {
       mailSubject: message.subject,
       message: JSON.stringify(message),
     });
-    const mailId = res.insertId;
+    const mailId = res[0];
     // publish
     this.ctx.tail(async () => {
       await this.ctx.bean.io.publish({

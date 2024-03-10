@@ -99,7 +99,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
     };
     // insert
     const res2 = await this.model.insert(data);
-    data.id = res2.insertId;
+    data.id = res2[0];
     return data;
   }
 }
