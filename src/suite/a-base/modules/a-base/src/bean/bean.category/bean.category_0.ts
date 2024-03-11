@@ -140,8 +140,8 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
 
   async delete({ categoryId }: any) {
     // check atoms
-    const count = parseInt(await this.ctx.bean.atom.modelAtom.count({ where: { atomCategoryId: categoryId } }));
-    if (count > 0) {
+    const count = await this.ctx.bean.atom.modelAtom.count({ where: { atomCategoryId: categoryId } });
+    if (count.gt(0)) {
       this.scope.error.CannotDeleteIfHasAtoms.throw();
     }
     // check children

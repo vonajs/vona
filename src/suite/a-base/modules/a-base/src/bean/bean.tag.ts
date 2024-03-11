@@ -72,8 +72,8 @@ export class BeanTag extends BeanBase<ScopeModule> {
 
   async delete({ tagId }: any) {
     // check atoms
-    const count = parseInt(await this.modelTagRef.count({ where: { tagId } }));
-    if (count > 0) this.scope.error.CannotDeleteIfHasAtoms.throw();
+    const count = await this.modelTagRef.count({ where: { tagId } });
+    if (count.gt(0)) this.scope.error.CannotDeleteIfHasAtoms.throw();
 
     // delete
     await this.modelTag.delete({ id: tagId });
