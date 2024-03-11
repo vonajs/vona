@@ -18,10 +18,10 @@ export class VersionManager extends BeanBase {
       for (const roleName of roles) {
         const roleId = await this.ctx.bean.role.add({
           roleName,
-          roleIdParent: roleTemplate.id,
+          roleIdParent: roleTemplate!.id,
         });
         // role:superuser include cms-documentation
-        await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser.id, roleIdInc: roleId });
+        await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
       }
       // build roles
       await this.ctx.bean.role.setDirty(true);

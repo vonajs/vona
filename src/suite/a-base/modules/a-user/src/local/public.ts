@@ -4,6 +4,7 @@ import { BeanBase, Local } from '@cabloy/core';
 export class LocalPublic extends BeanBase {
   async profile({ userId }: any) {
     const item = await this.ctx.bean.user.get({ id: userId });
+    if (!item) return;
     const user = {
       userName: item.userName,
       avatar: item.avatar,

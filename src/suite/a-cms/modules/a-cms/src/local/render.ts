@@ -28,7 +28,10 @@ export class LocalRender extends BeanBase {
     if (!inner) {
       // check right
       const roleAnonymous = await this.ctx.bean.role.getSystemRole({ roleName: 'anonymous' });
-      const right = await this.ctx.bean.atom.checkRoleRightRead({ atom: { id: key.atomId }, roleId: roleAnonymous.id });
+      const right = await this.ctx.bean.atom.checkRoleRightRead({
+        atom: { id: key.atomId },
+        roleId: roleAnonymous!.id,
+      });
       if (!right) return null;
     }
     // maybe site.language is false

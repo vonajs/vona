@@ -19,13 +19,13 @@ export class VersionManager extends BeanBase {
       for (const roleName of roles) {
         const roleId = await this.ctx.bean.role.add({
           roleName,
-          roleIdParent: roleTemplate.id,
+          roleIdParent: roleTemplate!.id,
         });
         // role:superuser include cms-community
-        await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser.id, roleIdInc: roleId });
+        await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
         // role:activated include cms-community-writer
         if (roleName === 'cms-community-writer') {
-          await this.ctx.bean.role.addRoleInc({ roleId: roleActivated.id, roleIdInc: roleId });
+          await this.ctx.bean.role.addRoleInc({ roleId: roleActivated!.id, roleIdInc: roleId });
         }
       }
       // build roles
