@@ -45,6 +45,7 @@
     "@cabloy/set": "workspace:^",
     "@zhennann/egg-passport": "^2.1.5",
     "async": "^3.2.0",
+    "bignumber.js": "^9.1.2",
     "bottleneck": "^2.19.5",
     "bullmq": "^2.3.1",
     "chalk": "^3.0.0",

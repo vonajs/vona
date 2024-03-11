@@ -1,4 +1,4 @@
-import { Cast, TableIdentity } from '@cabloy/core';
+import { BigNumber, Cast, TableIdentity } from '@cabloy/core';
 import { BeanModelView } from './bean.model_view.js';
 import {
   IModelCountParams,
@@ -186,9 +186,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     return item as unknown as TResult2;
   }
 
-  async count(params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<string>;
-  async count(table: string, params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<string>;
-  async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<string> {
+  async count(params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+  async count(table: string, params?: IModelCountParams, options?: IModelMethodOptionsGeneral): Promise<BigNumber>;
+  async count<TRecord2 extends {} = TRecord>(table?, params?, options?): Promise<BigNumber> {
     if (typeof table !== 'string') {
       options = params;
       params = table;
@@ -213,13 +213,13 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // where
     const wheres = this.prepareWhere(builder, table, params.where, options);
     if (wheres === false) {
-      return '0';
+      return BigNumber(0);
     }
     // ready
     const debug = this.app.bean.debug.get('model');
     if (debug.enabled) debug('model.count: %s', builder.toQuery());
     const res = (await builder)[0];
-    return String(res[Object.keys(res)[0]]);
+    return BigNumber(res[Object.keys(res)[0]]);
   }
 
   async insert<TRecord2 extends {} = TRecord>(
