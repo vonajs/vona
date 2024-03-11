@@ -1,9 +1,26 @@
 import { BeanBase, Local } from '@cabloy/core';
 
 import trimHtml from '@zhennann/trim-html';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalComment extends BeanBase {
+export class LocalComment extends BeanBase<ScopeModule> {
+  get modelAtom() {
+    return this.scope.model.atom;
+  }
+
+  get modelComment() {
+    return this.scope.model.comment;
+  }
+
+  get modelCommentHeart() {
+    return this.scope.model.commentHeart;
+  }
+
+  get modelCommentView() {
+    return this.scope.model.commentView;
+  }
+
   async list({ key, options, user }: any) {
     const _options = this._adjuctOptions({ key, options });
     // sql
@@ -61,7 +78,8 @@ export class LocalComment extends BeanBase {
 
   async save_edit({ key, data: { commentId, content }, user }) {
     // comment
-    const item = await this.bean.model.commentView.get({ id: commentId });
+    const item = await this.modelCommentView.get({ id: commentId });
+    if (!item) this.ctx.throw(403);
     if (key.atomId !== item.atomId || item.userId !== user.id) this.ctx.throw(403);
     // html
     const html = await this._renderContent({
@@ -73,7 +91,7 @@ export class LocalComment extends BeanBase {
     // summary
     const summary = this._trimHtml(html);
     // update
-    await this.bean.model.comment.update({
+    await this.modelComment.update({
       id: commentId,
       content,
       summary: summary.html,
@@ -107,7 +125,7 @@ export class LocalComment extends BeanBase {
     // reply
     let reply;
     if (replyId) {
-      reply = await this.bean.model.commentView.get({ id: replyId });
+      reply = await this.modelCommentView.get({ id: replyId });
     }
     // replyUserId
     const replyUserId = reply ? reply.userId : 0;
@@ -130,7 +148,7 @@ export class LocalComment extends BeanBase {
     // summary
     const summary = this._trimHtml(html);
     // create
-    const res = await this.bean.model.comment.insert({
+    const res = await this.modelComment.insert({
       atomId: key.atomId,
       userId: user.id,
       sorting,
@@ -157,7 +175,8 @@ export class LocalComment extends BeanBase {
 
   async delete({ key, data: { commentId }, user }) {
     // comment
-    const item = await this.bean.model.comment.get({ id: commentId });
+    const item = await this.modelComment.get({ id: commentId });
+    if (!item) this.ctx.throw(403);
     // check right
     let canDeleted = key.atomId === item.atomId && item.userId === user.id;
     if (!canDeleted) {
@@ -168,9 +187,9 @@ export class LocalComment extends BeanBase {
     }
     if (!canDeleted) this.ctx.throw(403);
     // delete hearts
-    await this.bean.model.commentHeart.delete({ commentId });
+    await this.modelCommentHeart.delete({ commentId });
     // delete comment
-    await this.bean.model.comment.delete({ id: commentId });
+    await this.modelCommentHeart.delete({ id: commentId });
     // commentCount
     await this.ctx.bean.atom.comment({ key, atom: { comment: -1 }, user });
     // ok
@@ -184,7 +203,7 @@ export class LocalComment extends BeanBase {
   async heart({ key, data: { commentId, heart }, user }) {
     let diff = 0;
     // check if exists
-    const _heart = await this.bean.model.commentHeart.get({
+    const _heart = await this.modelCommentHeart.get({
       userId: user.id,
       atomId: key.atomId,
       commentId,
@@ -192,13 +211,13 @@ export class LocalComment extends BeanBase {
     if (_heart && !heart) {
       diff = -1;
       // delete
-      await this.bean.model.commentHeart.delete({
+      await this.modelCommentHeart.delete({
         id: _heart.id,
       });
     } else if (!_heart && heart) {
       diff = 1;
       // new
-      await this.bean.model.commentHeart.insert({
+      await this.modelCommentHeart.insert({
         userId: user.id,
         atomId: key.atomId,
         commentId,
@@ -206,11 +225,12 @@ export class LocalComment extends BeanBase {
       });
     }
     // get
-    const item = await this.bean.model.comment.get({ id: commentId });
+    const item = await this.modelComment.get({ id: commentId });
+    if (!item) this.ctx.throw(403);
     let heartCount = item.heartCount;
     if (diff !== 0) {
       heartCount += diff;
-      await this.bean.model.comment.update({
+      await this.modelComment.update({
         id: commentId,
         heartCount,
       });
@@ -229,7 +249,8 @@ export class LocalComment extends BeanBase {
   async _publish({ atomId, commentId, replyId, replyUserId, user, mode }: any) {
     const userIdsTo: any = {};
     // 1. atom.userIdUpdated
-    const atom = await this.bean.model.atom.get({ id: atomId });
+    const atom = await this.modelAtom.get({ id: atomId });
+    if (!atom) this.ctx.throw(403);
     const userIdUpdated = atom.userIdUpdated;
     if (userIdUpdated !== user.id) {
       const title = await this._publishTitle({ userId: userIdUpdated, replyId: 0, mode });
