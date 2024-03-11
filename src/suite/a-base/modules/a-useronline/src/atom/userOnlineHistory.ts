@@ -5,7 +5,7 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomUserOnlineHistory extends BeanAtomBase {
   get model() {
-    return this.bean.model.module(__ThisModule__).userOnlineHistory;
+    return this.scope.model.userOnlineHistory;
   }
 
   async default({ atomClass, item, options, user }: any) {

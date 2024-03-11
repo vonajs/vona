@@ -7,7 +7,7 @@ let __statsDeps;
 @Bean()
 export class BeanStats extends BeanModuleScopeBase {
   get modelStats() {
-    return this.bean.model.module(__ThisModule__).stats;
+    return this.scope.model.stats;
   }
 
   notify({ module, name, nameSub, user }: any) {

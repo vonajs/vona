@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanMail extends BeanModuleScopeBase {
+export class BeanMail extends BeanModuleScopeBase<ScopeModule> {
   get modelMail() {
-    return this.bean.model.module(__ThisModule__).mail;
+    return this.scope.model.mail;
   }
 
   // send

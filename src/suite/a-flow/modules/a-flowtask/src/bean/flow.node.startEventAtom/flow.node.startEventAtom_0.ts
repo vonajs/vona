@@ -16,7 +16,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   }
 
   get modelCondition() {
-    return this.bean.model.module(__ThisModule__).flowNodeStartEventAtomCondition;
+    return this.scope.model.flowNodeStartEventAtomCondition;
   }
 
   get modelRoleRight() {

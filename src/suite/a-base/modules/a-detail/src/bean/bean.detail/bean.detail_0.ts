@@ -3,7 +3,7 @@ import { BeanModuleScopeBase } from '@cabloy/core';
 
 export class BeanDetail0 extends BeanModuleScopeBase {
   get modelDetailBase() {
-    return this.bean.model.module(__ThisModule__).detailBase;
+    return this.scope.model.detailBase;
   }
 
   async _loopDetailClasses({ atomClass, fn }: any) {

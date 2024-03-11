@@ -13,7 +13,7 @@ const __atomClassUserOnlineHistory = {
 @Bean()
 export class BeanUserOnline extends BeanModuleScopeBase {
   get modelUserOnline() {
-    return this.bean.model.module(__ThisModule__).userOnline;
+    return this.scope.model.userOnline;
   }
 
   get configUserOnline() {

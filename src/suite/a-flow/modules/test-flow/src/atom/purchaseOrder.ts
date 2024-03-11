@@ -5,7 +5,7 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomPurchaseOrder extends BeanAtomBase {
   get model() {
-    return this.bean.model.module(__ThisModule__).purchaseOrder;
+    return this.scope.model.purchaseOrder;
   }
 
   async default({ atomClass, item, options, user }: any) {

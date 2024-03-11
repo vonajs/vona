@@ -17,11 +17,11 @@ export class BeanDict extends BeanModuleScopeBase {
   }
 
   get model() {
-    return this.bean.model.module(__ThisModule__).dict;
+    return this.scope.model.dict;
   }
 
   get modelDictContent() {
-    return this.bean.model.module(__ThisModule__).dictContent;
+    return this.scope.model.dictContent;
   }
 
   // options: separator

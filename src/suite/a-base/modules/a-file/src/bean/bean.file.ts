@@ -17,10 +17,10 @@ const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 @Bean()
 export class BeanFile extends BeanBase {
   get modelFile() {
-    return this.bean.model.module(__ThisModule__).file;
+    return this.scope.model.file;
   }
   get modelFileView() {
-    return this.bean.model.module(__ThisModule__).fileView;
+    return this.scope.model.fileView;
   }
 
   async all({ atomClass, options, user }: any) {

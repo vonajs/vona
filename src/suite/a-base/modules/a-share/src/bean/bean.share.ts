@@ -4,15 +4,15 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean()
 export class BeanShare extends BeanBase {
   get modelShare() {
-    return this.bean.model.module(__ThisModule__).share;
+    return this.scope.model.share;
   }
 
   get modelShareRecordPV() {
-    return this.bean.model.module(__ThisModule__).shareRecordPV;
+    return this.scope.model.shareRecordPV;
   }
 
   get modelShareRecordUV() {
-    return this.bean.model.module(__ThisModule__).shareRecordUV;
+    return this.scope.model.shareRecordUV;
   }
 
   async generate({ host, atomId, url, user }: any) {

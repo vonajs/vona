@@ -4,7 +4,7 @@ import { Bean, BeanBase } from '@cabloy/core';
 @Bean({ scene: 'event' })
 export class EventAccountMigration extends BeanBase {
   get modelAuthOpen() {
-    return this.bean.model.module(__ThisModule__).authOpen;
+    return this.scope.model.authOpen;
   }
   async execute(context, next) {
     const data = context.data;

@@ -5,11 +5,11 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomLayout extends BeanAtomBase {
   get model() {
-    return this.bean.model.module(__ThisModule__).layout;
+    return this.scope.model.layout;
   }
 
   get modelLayoutContent() {
-    return this.bean.model.module(__ThisModule__).layoutContent;
+    return this.scope.model.layoutContent;
   }
 
   async default({ atomClass, item, options, user }: any) {

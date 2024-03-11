@@ -6,11 +6,11 @@ import trimHtml from '@zhennann/trim-html';
 @Virtual({ scene: 'bean' })
 export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
   get modelCMSArticle() {
-    return this.bean.model.module(__ThisModule__).article;
+    return this.scope.model.article;
   }
 
   get modelCMSContent() {
-    return this.bean.model.module(__ThisModule__).content;
+    return this.scope.model.content;
   }
 
   get moduleCMSConfig() {
