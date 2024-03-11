@@ -1,5 +1,6 @@
+import { BigNumber } from 'cabloy-module-api-a-database';
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase, BigNumber } from '@cabloy/core';
+import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'stats' })
 export class StatsLabels extends BeanBase {

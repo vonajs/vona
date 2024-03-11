@@ -1,5 +1,5 @@
 import { Cast } from '@cabloy/core';
-import { BigNumber } from 'bignumber.js';
+import { BigNumber } from 'cabloy-module-api-a-database';
 import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { BeanFlowTask } from '../bean.flowTask.js';

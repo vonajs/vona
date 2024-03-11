@@ -1,5 +1,6 @@
+import { BigNumber } from 'cabloy-module-api-a-database';
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase, BigNumber } from '@cabloy/core';
+import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalMessage extends BeanBase<ScopeModule> {
