@@ -66,7 +66,7 @@ export class VersionInit extends BeanBase {
     // system roles
     for (const roleName of this.ctx.constant.module('a-base').systemRoles) {
       const role = await this.ctx.bean.role.getSystemRole({ roleName });
-      roleIds[roleName] = role.id;
+      roleIds[roleName] = role!.id;
     }
     // roles
     for (const [roleName, leader, catalog, roleNameParent] of testData.roles) {
@@ -120,7 +120,7 @@ export class VersionInit extends BeanBase {
 
     // root
     const userRoot = await this.ctx.bean.user.get({ userName: 'root' });
-    userIds.root = userRoot.id;
+    userIds.root = userRoot!.id;
     return userIds;
   }
 
