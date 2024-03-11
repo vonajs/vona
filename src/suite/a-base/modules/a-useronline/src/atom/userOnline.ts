@@ -110,6 +110,7 @@ export class AtomUserOnline extends BeanAtomBase<ScopeModule> {
     // kickOut
     if (action === 'kickOut') {
       const item = await this.model.get({ id: key.itemId });
+      if (!item) this.ctx.throw(403);
       const user = { id: item.userId };
       await this.ctx.bean.userOnline.kickOut({ user });
     }
