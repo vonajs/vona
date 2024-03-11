@@ -1,11 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 const _cacheMessageClasses: any = {};
 const _cacheChannels: any = {};
 
 @Local()
-export class LocalMessageClass extends BeanBase {
+export class LocalMessageClass extends BeanBase<ScopeModule> {
   get modelMessageClass() {
     return this.scope.model.messageClass;
   }

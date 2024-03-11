@@ -7,6 +7,10 @@ export class LocalFlowTaskService extends BeanBase<ScopeModule> {
     return this.scope.local.right;
   }
 
+  get modelFlowTask() {
+    return this.scope.model.flowTask;
+  }
+
   async select({ options, user }: any) {
     return await this.ctx.bean.flowTask.select({ options, user });
   }
@@ -53,7 +57,7 @@ export class LocalFlowTaskService extends BeanBase<ScopeModule> {
 
   async userSelectForward({ flowTaskId, params, user }: any) {
     // check right
-    const flowTask = await this.bean.model.flowTask.get({ id: flowTaskId });
+    const flowTask = await this.modelFlowTask.get({ id: flowTaskId });
     await this.localRight.forward({ flowTask, user });
     // users
     return await this.ctx.bean.user.selectGeneral({ params, user });
@@ -69,7 +73,7 @@ export class LocalFlowTaskService extends BeanBase<ScopeModule> {
 
   async userSelectSubstitute({ flowTaskId, params, user }: any) {
     // check right
-    const flowTask = await this.bean.model.flowTask.get({ id: flowTaskId });
+    const flowTask = await this.modelFlowTask.get({ id: flowTaskId });
     await this.localRight.substitute({ flowTask, user });
     // users
     return await this.ctx.bean.user.selectGeneral({ params, user });
