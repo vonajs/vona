@@ -19,7 +19,7 @@ export class ControllerTestFeatTag extends BeanBase<ScopeModule> {
         tagName: 'tagOne',
       },
     });
-    assert(!TableIdentity.isEmpty(tagId));
+    assert(TableIdentity.isValid(tagId));
 
     // parseTags: 'tagOne,tagTwo,tagThree'
     const tagIds = await this.ctx.bean.tag.parseTags({

@@ -1,4 +1,4 @@
-import { BeanBase, Controller } from '@cabloy/core';
+import { BeanBase, Controller, TableIdentity } from '@cabloy/core';
 import { ScopeModule } from '../../../resource/this.js';
 import assert from 'assert';
 
@@ -20,7 +20,7 @@ export class ControllerTestFeatCategory extends BeanBase<ScopeModule> {
         categoryIdParent: 0,
       },
     });
-    assert(categoryId > 0);
+    assert(TableIdentity.isValid(categoryId));
 
     // parseCategoryName: levelOne.levelTwo.levelThree
     const category = await this.ctx.bean.category.parseCategoryName({

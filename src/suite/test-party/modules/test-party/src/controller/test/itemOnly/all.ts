@@ -27,7 +27,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     this.atomClass = atomClass;
     // userIds
     const userIds = this.ctx.cache.mem.get('userIds');
-    const userTom = await this._getUser({ userIds, userName: 'Tom' });
+    const userTom = (await this._getUser({ userIds, userName: 'Tom' }))!;
     // const userRoot = await this._getUser({userIds, userName:'root'});
 
     // delete: force clear old data
