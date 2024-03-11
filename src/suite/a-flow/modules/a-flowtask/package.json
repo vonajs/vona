@@ -40,7 +40,5 @@
     "Cabloy Module"
   ],
   "author": "zhennann",
-  "dependencies": {
-    "bignumber.js": "^9.1.2"
-  }
+  "dependencies": {}
 }
