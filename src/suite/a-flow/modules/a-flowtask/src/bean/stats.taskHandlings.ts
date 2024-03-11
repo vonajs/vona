@@ -1,15 +1,17 @@
 import { Bean, BeanBase } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'stats' })
-export class StatsTaskHandlings extends BeanBase {
+export class StatsTaskHandlings extends BeanBase<ScopeModule> {
   async execute(context) {
     const { user } = context;
-    const modelFlowTask = this.ctx.model.module(__ThisModule__).flowTask;
+    const modelFlowTask = this.scope.model.flowTask;
     const count = await modelFlowTask.count({
-      userIdAssignee: user.id,
-      flowTaskStatus: 0,
-      timeClaimed: { op: 'notNull' },
+      where: {
+        userIdAssignee: user.id,
+        flowTaskStatus: 0,
+        timeClaimed: { op: 'notNull' },
+      },
     });
     return count;
   }
