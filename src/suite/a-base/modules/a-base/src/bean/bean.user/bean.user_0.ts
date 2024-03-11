@@ -52,7 +52,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     const userId = await this.self.add({ userName: 'anonymous', disabled: 0, anonymous: 1 });
     // addRole
     const role = await this.ctx.bean.role.getSystemRole({ roleName: 'anonymous' });
-    await this.ctx.bean.role.addUserRole({ userId, roleId: role.id });
+    await this.ctx.bean.role.addUserRole({ userId, roleId: role!.id });
     // ready
     _userAnonymous = await this.self.get({ id: userId });
     _usersAnonymous[this.ctx.instance.id] = _userAnonymous;
@@ -180,6 +180,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   async userRoleStageActivate({ userId }: any) {
     // get
     const user = await this.self.get({ id: userId });
+    if (!user) return;
     // only once
     if (user.activated) return;
     // adjust role
@@ -194,7 +195,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       // remove from registered
       if (map.registered) {
         const roleRegistered = await this.ctx.bean.role.getSystemRole({ roleName: 'registered' });
-        await this.ctx.bean.role.deleteUserRole({ userId, roleId: roleRegistered.id });
+        await this.ctx.bean.role.deleteUserRole({ userId, roleId: roleRegistered!.id });
       }
       // add to activated
       const rolesActivated = await this.ctx.bean.role.parseRoleNames({ roleNames: this.config.account.activatedRoles });
@@ -245,6 +246,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   async switchAgent({ userIdAgent }: any) {
     const op = this.ctx.user.op;
     const _user = await this.self.get({ id: userIdAgent });
+    if (!_user) this.ctx.throw(403);
     this.ctx.user.op = { id: _user.id, iid: _user.iid, anonymous: _user.anonymous };
     try {
       await this.check();
