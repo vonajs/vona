@@ -51,9 +51,9 @@ export class LocalRole extends BeanBase {
   }
 
   async addRoleInc({ roleAtomId, roleIdInc, user }: any) {
-    const res = await this.ctx.bean.role.addRoleInc({ roleAtomId, roleIdInc, user });
+    const id = await this.ctx.bean.role.addRoleInc({ roleAtomId, roleIdInc, user });
     const progressId = await this._tailBuild();
-    return { ...res, progressId };
+    return { id, progressId };
   }
 
   async removeRoleInc({ roleAtomId, roleIdInc, user }: any) {

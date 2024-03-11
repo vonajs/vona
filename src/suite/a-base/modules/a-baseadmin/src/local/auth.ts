@@ -21,6 +21,7 @@ export class LocalAuth extends BeanBase<ScopeModule> {
     await this.modelAuthProvider.update({ id, disabled });
     // item
     const item = await this.modelAuthProvider.get({ id });
+    if (!item) return;
     // changed
     await this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,
@@ -33,6 +34,7 @@ export class LocalAuth extends BeanBase<ScopeModule> {
     await this.modelAuthProvider.update({ id, config: JSON.stringify(config) });
     // item
     const item = await this.modelAuthProvider.get({ id });
+    if (!item) return;
     // changed
     await this.ctx.bean.authProviderCache.authProviderChanged({
       module: item.module,

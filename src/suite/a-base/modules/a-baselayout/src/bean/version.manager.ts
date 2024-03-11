@@ -49,7 +49,7 @@ export class VersionManager extends BeanBase {
         atomClassName: 'layout',
       });
       const exists = await this.modelRoleRight.get({
-        roleId: roleSystem.id,
+        roleId: roleSystem!.id,
         atomClassId: atomClassLayout.id,
         action: 1,
       });

@@ -10,6 +10,7 @@ export class LocalAuthScene extends BeanBase<ScopeModule> {
   async disable({ id, sceneName, disabled }: any) {
     // item
     const item = await this.modelAuthProvider.get({ id });
+    if (!item) return;
     // update
     const scenes = item.scenes ? JSON.parse(item.scenes) : {};
     if (!scenes[sceneName]) {
@@ -28,6 +29,7 @@ export class LocalAuthScene extends BeanBase<ScopeModule> {
   async save({ id, sceneName, data }: any) {
     // item
     const item = await this.modelAuthProvider.get({ id });
+    if (!item) return;
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({
       module: item.module,
       providerName: item.providerName,
@@ -70,6 +72,7 @@ export class LocalAuthScene extends BeanBase<ScopeModule> {
   async add({ id, sceneName, data }: any) {
     // item
     const item = await this.modelAuthProvider.get({ id });
+    if (!item) return;
     // update
     const scenes = item.scenes ? JSON.parse(item.scenes) : {};
     scenes[sceneName] = data;
@@ -85,6 +88,7 @@ export class LocalAuthScene extends BeanBase<ScopeModule> {
   async delete({ id, sceneName }: any) {
     // item
     const item = await this.modelAuthProvider.get({ id });
+    if (!item) return;
     // update
     const scenes = item.scenes ? JSON.parse(item.scenes) : {};
     delete scenes[sceneName];

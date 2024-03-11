@@ -86,6 +86,7 @@ export class VersionInit extends BeanBase<ScopeModule> {
   async _init_rootCliDevTest_persistence({ authOpenKey, userRoot }: any) {
     // authOpen
     const item = await this.modelAuthOpen.get({ id: authOpenKey.itemId });
+    if (!item) return;
     // name
     const name = `clidev@${this.ctx.app.name}`;
     // host
