@@ -89,6 +89,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   async move({ roleAtomId, roleId, roleIdParent }: any) {
     // role
     const role = await this.self._forceRole({ roleAtomId, roleId });
+    if (!role) return;
     // roleIdParentOld
     const roleIdParentOld = role.roleIdParent;
     if (roleIdParentOld === roleIdParent) return;
@@ -321,6 +322,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   // save
   async save({ roleId, data: { roleName, leader, sorting, catalog } }: any) {
     const role = await this.get({ id: roleId });
+    if (!role) return;
     if (roleName !== undefined) role.roleName = roleName;
     if (leader !== undefined) role.leader = leader;
     if (sorting !== undefined) role.sorting = sorting;
@@ -372,7 +374,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
           if (!roleIdParent) {
             // parent
             const roleParent = await this.getSystemRole({ roleName: role.roleIdParent });
-            roleIdParent = roleParent.id;
+            roleIdParent = roleParent!.id;
           }
         }
         // add

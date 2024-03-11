@@ -19,6 +19,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     if (roleRightId) {
       // update
       const item = await this.modelRoleRight.get({ id: roleRightId });
+      if (!item) this.ctx.throw(403);
       roleAtomId = item.roleAtomId;
       roleId = item.roleId; // maybe empty when create
     }
@@ -95,6 +96,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async deleteRoleRight({ roleRightId, user }: any) {
     // role right
     const item = await this.modelRoleRight.get({ id: roleRightId });
+    if (!item) return;
     const { roleAtomId, roleId } = item;
     // check right
     await this.self._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
