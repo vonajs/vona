@@ -5,12 +5,15 @@ import trimHtml from '@zhennann/trim-html';
 
 @Virtual({ scene: 'bean' })
 export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
+  get scopeModuleACms() {
+    return this.getScope(__ThisModule__);
+  }
   get modelCMSArticle() {
-    return this.scope.model.article;
+    return this.scopeModuleACms.model.article;
   }
 
   get modelCMSContent() {
-    return this.scope.model.content;
+    return this.scopeModuleACms.model.content;
   }
 
   get moduleCMSConfig() {
