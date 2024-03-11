@@ -56,7 +56,7 @@ export class BeanAtomRightAuxRoleScopesOfUser extends BeanAtomRightAux0 {
     if (roleIds.length === 0) return false;
     // true
     const roleAuthenticated = await this.ctx.bean.role.getSystemRole({ roleName: 'authenticated' });
-    if (roleIds.includes(roleAuthenticated.id)) return true;
+    if (roleIds.includes(roleAuthenticated!.id)) return true;
     // array
     return roleIds;
   }

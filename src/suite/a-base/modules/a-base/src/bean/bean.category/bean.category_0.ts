@@ -1,3 +1,4 @@
+import { EntityCategory } from '../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 
@@ -139,7 +140,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
 
   async delete({ categoryId }: any) {
     // check atoms
-    const count = await this.ctx.bean.atom.modelAtom.count({ atomCategoryId: categoryId });
+    const count = parseInt(await this.ctx.bean.atom.modelAtom.count({ where: { atomCategoryId: categoryId } }));
     if (count > 0) {
       this.scope.error.CannotDeleteIfHasAtoms.throw();
     }
@@ -152,7 +153,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     // category
     const category = await this.model.get({ id: categoryId });
     // parent
-    const categoryIdParent = category.categoryIdParent;
+    const categoryIdParent = category!.categoryIdParent;
 
     // delete
     await this.model.delete({ id: categoryId });
@@ -164,7 +165,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     // category
     const category = await this.model.get({ id: categoryId });
     // categoryIdParentOld
-    const categoryIdParentOld = category.categoryIdParent;
+    const categoryIdParentOld = category!.categoryIdParent;
     if (categoryIdParentOld === categoryIdParent) return;
     // move
     await this.model.update({
@@ -279,12 +280,12 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
 
   async _registerLock({ atomClass, language, categoryName, categoryIdParent }: any) {
     // get again
-    const category = await this.child({
+    const category = (await this.child({
       atomClass,
       language,
       categoryId: categoryIdParent,
       categoryName,
-    });
+    })) as EntityCategory;
     if (category) return category.id;
     // add
     return await this.add({
