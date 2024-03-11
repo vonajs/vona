@@ -1,9 +1,9 @@
 import { Cast } from '@cabloy/core';
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';
 
-export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
+export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase<ScopeModule> {
   atomStateDefault: any;
 
   constructor() {
@@ -20,11 +20,11 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   }
 
   get modelRoleRight() {
-    return this.bean.model.module('a-base').roleRight;
+    return this.getScope('a-base').model.roleRight;
   }
 
   get modelRoleRightRef() {
-    return this.bean.model.module('a-base').roleRightRef;
+    return this.getScope('a-base').model.roleRightRef;
   }
 
   async deploy({ deploy, flowDefId, node, deleting, flowDef, content }: any) {

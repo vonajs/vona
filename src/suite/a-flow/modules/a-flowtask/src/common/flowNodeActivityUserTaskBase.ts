@@ -1,12 +1,16 @@
 import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
 import assert from 'assert';
 
-export default class FlowNodeActivityUserTaskBase extends BeanFlowNodeBase {
+export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowNodeBase {
   atomStateDefault: any;
 
   constructor() {
     super();
     this.atomStateDefault = null;
+  }
+
+  get scope() {
+    return this.getScope() as T;
   }
 
   async onNodeEnter() {

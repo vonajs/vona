@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { BeanDetail0 } from './bean.detail_0.js';
 
 export class BeanDetailCopy extends BeanDetail0 {
@@ -125,12 +126,12 @@ export class BeanDetailCopy extends BeanDetail0 {
           detailKeyDest,
         });
         // set flag
-        detailBaseSrc.__copied = true;
+        Cast(detailBaseSrc).__copied = true;
       }
     }
     // loop: append the remains
     for (const detailBaseSrc of detailBasesSrc) {
-      if (detailBaseSrc.__copied) continue;
+      if (Cast(detailBaseSrc).__copied) continue;
       const detailSrc = detailsSrc.find(item => item.atomId === detailBaseSrc.detailId);
       await this._copyDetail({
         atomClassDetail,

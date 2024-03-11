@@ -7,13 +7,13 @@ export class BeanAuthProviderBase<T = unknown> extends BeanBase<T> {
   providerName: any;
   providerScene: any;
 
-  constructor({ authProvider, providerModule, providerName, providerScene }: any) {
-    super();
+  protected __init__({ authProvider, providerModule, providerName, providerScene }: any) {
     this.authProvider = authProvider;
     this.providerModule = providerModule;
     this.providerName = providerName;
     this.providerScene = providerScene;
   }
+
   // should be overrided
   async getConfigDefault(): Promise<any> {
     throw new Error('getConfigDefault not implemented');

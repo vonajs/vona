@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const __atomClassUserOnline = {
@@ -11,7 +11,7 @@ const __atomClassUserOnlineHistory = {
 };
 
 @Bean()
-export class BeanUserOnline extends BeanModuleScopeBase {
+export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
   get modelUserOnline() {
     return this.scope.model.userOnline;
   }

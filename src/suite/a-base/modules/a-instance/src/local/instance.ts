@@ -1,16 +1,21 @@
 import { BeanBase, Local } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 const __blackFields = ['startups', 'queues', 'broadcasts', 'middlewares', 'schedules'];
 
 @Local()
-export class LocalInstance extends BeanBase {
+export class LocalInstance extends BeanBase<ScopeModule> {
+  get modelInstance() {
+    return this.scope.model.instance;
+  }
+
   async item() {
-    return await this.bean.model.instance.get({ id: this.ctx.instance.id });
+    return await this.modelInstance.get({ id: this.ctx.instance.id });
   }
 
   async save({ data }: any) {
     // update
-    await this.bean.model.instance.update({
+    await this.modelInstance.update({
       id: this.ctx.instance.id,
       title: data.title,
       config: JSON.stringify(this.__configBlackFields(data.config)),
@@ -21,6 +26,7 @@ export class LocalInstance extends BeanBase {
 
   async getConfigsPreview() {
     const instance = await this.item();
+    if (!instance) this.ctx.throw(403);
     let configPreview = this.ctx.bean.util.extend({}, this.app.meta.configs, JSON.parse(instance.config));
     configPreview = this.__configBlackFields(configPreview);
     return { data: configPreview };
