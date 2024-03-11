@@ -162,7 +162,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   async _forceRoleAtomId({ roleAtomId, roleId }: any) {
     if (!roleAtomId) {
       const item = await this.get({ id: roleId });
-      roleAtomId = item.atomId;
+      roleAtomId = item!.atomId;
     }
     return roleAtomId;
   }
@@ -170,7 +170,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   async _forceRoleId({ roleAtomId, roleId }: any) {
     if (!roleId) {
       const item = await this.get({ atomId: roleAtomId });
-      roleId = item.id;
+      roleId = item!.id;
     }
     return roleId;
   }
@@ -184,6 +184,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
 
   async _forceRoleAndCheckRightRead({ roleAtomId, roleId, user }: any) {
     const role = await this._forceRole({ roleAtomId, roleId });
+    if (!role) this.ctx.throw(403);
     if (!user || user.id === 0) return role;
     // check
     const res = await this.ctx.bean.atom.checkRightRead({
