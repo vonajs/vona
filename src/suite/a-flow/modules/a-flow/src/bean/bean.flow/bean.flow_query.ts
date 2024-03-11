@@ -1,4 +1,4 @@
-import { BigNumber } from '@cabloy/core';
+import { BigNumber } from 'bignumber.js';
 import { BeanFlowLoad } from './bean.flow_load.js';
 
 export class BeanFlowQuery extends BeanFlowLoad {

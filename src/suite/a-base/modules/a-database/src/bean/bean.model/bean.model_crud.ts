@@ -1,4 +1,5 @@
-import { BigNumber, Cast, TableIdentity } from '@cabloy/core';
+import { Cast, TableIdentity } from '@cabloy/core';
+import { BigNumber } from 'bignumber.js';
 import { BeanModelView } from './bean.model_view.js';
 import {
   IModelCountParams,
