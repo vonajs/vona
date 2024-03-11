@@ -7,16 +7,16 @@ export class BeanAtomBase0 extends BeanBase {
     return Cast<BeanAtomBase>(this);
   }
 
-  get scopeABase() {
+  get scopeModuleABase() {
     return this.getScope(__ThisModule__);
   }
 
   get configModuleBase() {
-    return this.scopeABase.config;
+    return this.scopeModuleABase.config;
   }
 
   get modelResourceRole() {
-    return this.scopeABase.model.resourceRole;
+    return this.scopeModuleABase.model.resourceRole;
   }
 
   async submit({ atomClass, key, options, user }: any) {
