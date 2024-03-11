@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { BigNumber, Cast } from '@cabloy/core';
 import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from '@cabloy/core';
 import { BeanFlowTask } from '../bean.flowTask.js';
@@ -21,12 +21,13 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
     return this.scope.local.procedure;
   }
 
-  async count({ options, user }: any) {
+  async count({ options, user }: any): Promise<BigNumber> {
     return await this.select({ options, user, count: 1 });
   }
 
   async select({ options, user, pageForce = true, count = 0 }: any) {
     const tasks = await this.self._list({ options, user, pageForce, count });
+    if (count === 1) return tasks;
     // loop
     for (const task of tasks) {
       // locale

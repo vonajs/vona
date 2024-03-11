@@ -13,7 +13,7 @@ const __rows = [
 export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
   async model() {
     // model
-    const model = this.ctx.model.module('a-base').atom;
+    const model = this.getScope('a-base').model.atom;
 
     // insert one row
     await model.insert(__rows[0]);
@@ -27,10 +27,10 @@ export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
     assert.equal(list.length, 3);
 
     // read
-    const item = await model.get({
+    const item = (await model.get({
       atomStaticKey,
       atomName: 'atom-one',
-    });
+    }))!;
 
     // update one row
     await model.update({
@@ -45,7 +45,6 @@ export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
       },
       {
         where: { atomStaticKey },
-        columns: ['readCount'],
       },
     );
 
@@ -109,8 +108,8 @@ export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
     await model.delete({ atomStaticKey });
 
     // count
-    const count = await model.count({ atomStaticKey });
-    assert.equal(count, 0);
+    const count = await model.count({ where: { atomStaticKey } });
+    assert.equal(count.toNumber(), 0);
 
     // done
     this.ctx.success();

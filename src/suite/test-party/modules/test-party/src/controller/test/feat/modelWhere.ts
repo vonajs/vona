@@ -18,7 +18,7 @@ export class ControllerTestFeatModelWhere extends BeanBase<ScopeModule> {
 
   async _modelWhere() {
     // model
-    const model = this.ctx.model.module('a-base').atom;
+    const model = this.getScope('a-base').model.atom;
 
     // delete: force clear old data
     await model.delete({ atomStaticKey });
@@ -82,7 +82,7 @@ export class ControllerTestFeatModelWhere extends BeanBase<ScopeModule> {
     await model.delete({ atomStaticKey });
 
     // count
-    const count = await model.count({ atomStaticKey });
-    assert.equal(count, 0);
+    const count = await model.count({ where: { atomStaticKey } });
+    assert.equal(count.toNumber(), 0);
   }
 }
