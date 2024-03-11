@@ -129,7 +129,7 @@ export class BeanIoSave extends BeanIoPush {
   }
 
   async _onSaveSyncsPolicy_userIdsAll({ saveLimit, onSave }: any) {
-    const modelUser = this.ctx.model.module('a-base').user;
+    const modelUser = this.bean.model.module('a-base').user;
     let offset = 0;
     // eslint-disable-next-line
     while (true) {

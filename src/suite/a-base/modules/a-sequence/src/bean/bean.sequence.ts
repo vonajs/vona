@@ -8,7 +8,7 @@ export class BeanSequence extends BeanModuleScopeBase {
   async reset(name) {
     const provider = this._findSequenceProvider(name);
     const sequence = await this._get(name);
-    await this.ctx.model.update('aSequence', {
+    await this.bean.model.update('aSequence', {
       id: sequence.id,
       value: JSON.stringify(provider.start),
     });
@@ -53,13 +53,13 @@ export class BeanSequence extends BeanModuleScopeBase {
 
     // save
     if (sequence) {
-      await this.ctx.model.update('aSequence', {
+      await this.bean.model.update('aSequence', {
         id: sequence.id,
         value: JSON.stringify(value),
       });
     } else {
       // insert
-      await this.ctx.model.insert('aSequence', {
+      await this.bean.model.insert('aSequence', {
         iid: this.ctx.instance.id,
         module: this.moduleScope,
         name,
@@ -72,7 +72,7 @@ export class BeanSequence extends BeanModuleScopeBase {
 
   async _get(name) {
     // get
-    const sequence = await this.ctx.model.get('aSequence', {
+    const sequence = await this.bean.model.get('aSequence', {
       iid: this.ctx.instance.id,
       module: this.moduleScope,
       name,

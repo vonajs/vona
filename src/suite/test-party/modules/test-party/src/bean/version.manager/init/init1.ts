@@ -11,7 +11,7 @@ export class VersionInit extends BeanBase {
   async _init_rights() {
     // // types
     // for (const name of ['Birthday', 'Dance', 'Garden']) {
-    //   await this.ctx.model.partyType.insert({ name });
+    //   await this.bean.model.partyType.insert({ name });
     // }
     // add role rights
     const roleRights = [

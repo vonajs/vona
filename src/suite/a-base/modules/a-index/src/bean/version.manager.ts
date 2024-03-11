@@ -41,7 +41,7 @@ export class VersionManager extends BeanBase {
   async _createIndexesOnTable({ tableName, indexes }: any) {
     try {
       const _indexArray = indexes.split(',');
-      const list = await this.ctx.model.query(`show index from ${tableName}`);
+      const list = await this.bean.model.query(`show index from ${tableName}`);
       const map: any = {};
       for (const item of list) {
         map[item.Column_name] = item.Index_type;
@@ -58,7 +58,7 @@ export class VersionManager extends BeanBase {
           const sql = `create ${indexType} index idx_${tableName}_${fieldNameFirst} ON ${tableName} (${fieldNameArray.join(
             ',',
           )})`;
-          await this.ctx.model.query(sql);
+          await this.bean.model.query(sql);
         }
       }
     } catch (e: any) {

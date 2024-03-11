@@ -82,13 +82,13 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   }
 
   async _buildRolesRemove({ iid }: any) {
-    await this.ctx.model.query(`delete from aRoleRef where aRoleRef.iid=${iid}`);
-    await this.ctx.model.query(`delete from aRoleIncRef where aRoleIncRef.iid=${iid}`);
-    await this.ctx.model.query(`delete from aRoleExpand where aRoleExpand.iid=${iid}`);
+    await this.bean.model.query(`delete from aRoleRef where aRoleRef.iid=${iid}`);
+    await this.bean.model.query(`delete from aRoleIncRef where aRoleIncRef.iid=${iid}`);
+    await this.bean.model.query(`delete from aRoleExpand where aRoleExpand.iid=${iid}`);
   }
 
   async _buildRolesAdd({ iid, roleIdParent }, progress) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `select a.id,a.roleName,a.catalog,a.atomId from aRole a where a.iid=${iid} and a.roleIdParent=${roleIdParent}`,
     );
     for (const item of list) {
@@ -122,12 +122,12 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     let roleIdParent = roleId;
     // loop
     while (level !== -1) {
-      await this.ctx.model.query(
+      await this.bean.model.query(
         `insert into aRoleRef(iid,roleId,roleIdParent,level)
              values(${iid},${roleId},${roleIdParent},${level})
           `,
       );
-      const item = await this.ctx.model.queryOne(
+      const item = await this.bean.model.queryOne(
         `select a.roleIdParent from aRole a where a.iid=${iid} and a.id=${roleIdParent}`,
       );
       if (!item || !item.roleIdParent) {
@@ -140,7 +140,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   }
 
   async _buildRoleIncRef({ iid, roleId }: any) {
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `insert into aRoleIncRef(iid,roleId,roleIdInc,roleIdSrc)
             select ${iid},${roleId},a.roleIdInc,a.roleId from aRoleInc a
               where a.iid=${iid} and a.roleId in (select b.roleIdParent from aRoleRef b where b.iid=${iid} and b.roleId=${roleId})
@@ -149,13 +149,13 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   }
 
   async _buildRoleExpand({ iid, roleId, roleAtomId }: any) {
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
             select a.iid,${roleAtomId},a.roleId,a.roleIdParent from aRoleRef a
               where a.iid=${iid} and a.roleId=${roleId}
         `,
     );
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
             select a.iid,${roleAtomId},a.roleId,a.roleIdInc from aRoleIncRef a
               where a.iid=${iid} and a.roleId=${roleId}

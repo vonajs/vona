@@ -25,7 +25,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     // -- q: aCmsContent
 
     // for safe
-    // tableName = tableName ? this.ctx.model.format('??', tableName) : null; // not format tableName
+    // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
 
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
@@ -74,7 +74,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     }
     // need not join aResourceLocale
     // if (resource && resourceLocale) {
-    //   const _locale = this.ctx.model.format('?', resourceLocale);
+    //   const _locale = this.bean.model.format('?', resourceLocale);
     //   _resourceField = ',m.atomNameLocale';
     //   // _resourceJoin = ' inner join aResourceLocale m on m.atomId=a.id';
     //   _resourceJoin = ` inner join aResourceLocale m on m.atomId=a.id and m.locale=${_locale}`;
@@ -139,7 +139,7 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     ]);
 
     // where clause
-    let _whereClause = this.ctx.model._formatWhere(_where);
+    let _whereClause = this.bean.model._formatWhere(_where);
     if (_whereClause === false) return false;
     _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
 

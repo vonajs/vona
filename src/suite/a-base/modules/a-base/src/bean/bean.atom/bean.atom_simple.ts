@@ -31,7 +31,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
       atomIdFormal = atom.atomStage === 1 ? atom.id : atom.atomIdFormal;
     }
     // update history
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `
           update aAtom set atomSimple=1, atomIdDraft=0 
             where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?
@@ -65,7 +65,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
   async _switchToSimpleZero({ /* atomClass, atomClassBase,*/ atom, user }: any) {
     const atomIdFormal = atom.atomStage === 1 ? atom.id : atom.atomIdFormal;
     // update history's atomSimple
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `
           update aAtom set atomSimple=0
             where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?

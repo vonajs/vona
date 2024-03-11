@@ -7,7 +7,7 @@ let __statsDeps;
 @Bean()
 export class BeanStats extends BeanModuleScopeBase {
   get modelStats() {
-    return this.ctx.model.module(__ThisModule__).stats;
+    return this.bean.model.module(__ThisModule__).stats;
   }
 
   notify({ module, name, nameSub, user }: any) {

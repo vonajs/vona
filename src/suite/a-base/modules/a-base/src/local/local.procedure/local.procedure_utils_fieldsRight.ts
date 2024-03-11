@@ -19,7 +19,7 @@ export class LocalProcedureUtilsFieldsRight extends LocalProcedureResource {
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') > -1) return 'f.*';
     const schema = this.ctx.bean.validation.getSchema(options.schema);
     const properties = schema.schema.properties;
-    const columns = await this.ctx.model.columns(options.tableName);
+    const columns = await this.bean.model.columns(options.tableName);
     const fieldNames: any[] = [];
     for (const columnName in columns) {
       if (__itemBasicFieldsRead.includes(columnName) || properties[columnName]) {

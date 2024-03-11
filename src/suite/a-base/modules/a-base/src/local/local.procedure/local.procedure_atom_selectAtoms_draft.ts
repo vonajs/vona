@@ -37,7 +37,7 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
     // -- q: aCmsContent
 
     // for safe
-    // tableName = tableName ? this.ctx.model.format('??', tableName) : null; // not format tableName
+    // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
     const _where = Object.assign({}, where);
     const _orders = orders ? orders.concat() : [];
 
@@ -167,14 +167,14 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
     }
 
     // where clause
-    let _whereClause = this.ctx.model._formatWhere(_where);
+    let _whereClause = this.bean.model._formatWhere(_where);
     if (_whereClause === false) return false;
     _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
 
     // orders
-    const _orders2 = this.ctx.model._orders(_orders);
+    const _orders2 = this.bean.model._orders(_orders);
     // limit
-    const _limit = page ? this.ctx.model._limit(page.size, page.index) : '';
+    const _limit = page ? this.bean.model._limit(page.size, page.index) : '';
 
     // sql
     const _sql = `select ${_selectFields} ${_atomJoin}

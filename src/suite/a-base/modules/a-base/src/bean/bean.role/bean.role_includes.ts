@@ -87,8 +87,8 @@ export class BeanRoleIncludes extends BeanRoleBuild {
 // async includes({ roleAtomId, roleId, page, user }: any) {
 //   roleId = await this.self._forceRoleId({ roleAtomId, roleId });
 //   page = this.ctx.bean.util.page(page, false);
-//   const _limit = this.ctx.model._limit(page.size, page.index);
-//   const list = await this.ctx.model.query(
+//   const _limit = this.bean.model._limit(page.size, page.index);
+//   const list = await this.bean.model.query(
 //     `
 //     select a.*,b.roleName from aRoleInc a
 //       left join aRole b on a.roleIdInc=b.id

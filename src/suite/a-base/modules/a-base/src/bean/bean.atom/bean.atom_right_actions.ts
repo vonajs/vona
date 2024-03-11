@@ -118,7 +118,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
               where a.iid=? and a.atomClassId=? and a.userIdWho=? and b.deleted=0 and b.bulk=0 and b.actionMode=0 ${_basic}
                 order by a.action asc
         `;
-    const items = await this.ctx.model.query(sql, [this.ctx.instance.id, atomClass.id, user.id]);
+    const items = await this.bean.model.query(sql, [this.ctx.instance.id, atomClass.id, user.id]);
     return items;
   }
 
@@ -132,7 +132,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   //         where a.iid=? and a.deleted=0 and a.bulk=0 and a.actionMode=0 and a.atomClassId=? ${_basic}
   //           order by a.code asc
   //   `;
-  //   return await this.ctx.model.query(sql, [this.ctx.instance.id, atomClass.id]);
+  //   return await this.bean.model.query(sql, [this.ctx.instance.id, atomClass.id]);
   // }
 
   async __actions_fetchActions_fromMeta({ atomClass, atomClassBase, basic, user }: any) {

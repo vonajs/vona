@@ -52,7 +52,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
     // offset
     const _offset = (options && options.offset) || 0;
     // offset
-    const res = await this.ctx.model.select('aSocketIOMessageView', {
+    const res = await this.bean.model.select('aSocketIOMessageView', {
       where,
       columns: ['id'],
       orders: _orders,
@@ -98,7 +98,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
       userId: user ? user.id : 0,
     });
     if (sql) {
-      await this.ctx.model.query(sql);
+      await this.bean.model.query(sql);
     }
   }
 
@@ -110,7 +110,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
       messageIds,
       userId: user ? user.id : 0,
     });
-    await this.ctx.model.query(sql);
+    await this.bean.model.query(sql);
   }
 
   async _list({ messageClass, options, user, count }: any) {
@@ -133,7 +133,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
       offset: options.offset,
       count,
     });
-    const res = await this.ctx.model.query(sql);
+    const res = await this.bean.model.query(sql);
     return count ? res[0]._count : res;
   }
 }

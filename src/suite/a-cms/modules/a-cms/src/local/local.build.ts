@@ -567,7 +567,7 @@ export class LocalBuild extends BeanBase<ScopeModule> {
     // renderAt must be updated after file rendered
     if (data.article) {
       // update renderAt
-      await this.ctx.model.query(
+      await this.bean.model.query(
         `
           update aCmsArticle set renderAt=?
             where iid=? and atomId=?

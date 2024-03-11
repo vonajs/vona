@@ -29,7 +29,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
       count,
       history,
     });
-    const res = await this.ctx.model.query(sql);
+    const res = await this.bean.model.query(sql);
     return count ? res[0]._count : res;
   }
 
@@ -90,7 +90,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     await this.modelFlowTask.delete({ flowNodeId });
     // flowTaskHistory
     //   1. delete specificFlag=2
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `
         update aFlowTaskHistory set deleted=1
           where iid=? and deleted=0 and flowNodeId=? and flowTaskStatus=0 and specificFlag=2 
@@ -100,7 +100,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     //   2. close
     //    flowTaskStatus:1
     //    handleStatus: not changed
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `
         update aFlowTaskHistory set flowTaskStatus=1
           where iid=? and deleted=0 and flowNodeId=? and flowTaskStatus=0

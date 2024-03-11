@@ -5,7 +5,7 @@ export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition
     const flowContentFields = needFlowContent ? ',b2.content' : '';
     const flowContentJoin = needFlowContent ? 'inner join aFlowDefContent b2 on b.atomId=b2.atomId' : '';
     // order by atomStatic/conditionExpression
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
           select a.*,c.atomName,c.atomStaticKey${flowContentFields} from aFlowNodeStartEventAtomCondition a
             inner join aFlowDef b on a.flowDefId=b.atomId

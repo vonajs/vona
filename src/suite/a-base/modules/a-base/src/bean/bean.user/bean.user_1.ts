@@ -87,7 +87,7 @@ export class BeanUser1 extends BeanUser0 {
     if (email) clause.__or__.push({ email });
     if (mobile) clause.__or__.push({ mobile });
     if (clause.__or__.length === 0) return null;
-    const where = this.ctx.model._where(clause);
+    const where = this.bean.model._where(clause);
     return await this.model.queryOne(
       `select * from aUser
             ${where} and iid=? and deleted=0`,
@@ -270,13 +270,13 @@ export class BeanUser1 extends BeanUser0 {
 
 // async list({ roleId, query, anonymous, page, removePrivacy }: any) {
 //   const roleJoin = roleId ? 'left join aUserRole b on a.id=b.userId' : '';
-//   const roleWhere = roleId ? `and b.roleId=${this.ctx.model._formatValue(roleId)}` : '';
-//   const queryLike = query ? this.ctx.model._formatValue({ op: 'like', val: query }) : '';
+//   const roleWhere = roleId ? `and b.roleId=${this.bean.model._formatValue(roleId)}` : '';
+//   const queryLike = query ? this.bean.model._formatValue({ op: 'like', val: query }) : '';
 //   const queryWhere = query
 //     ? `and ( a.userName like ${queryLike} or a.realName like ${queryLike} or a.mobile like ${queryLike} )`
 //     : '';
-//   const anonymousWhere = anonymous !== undefined ? `and a.anonymous=${this.ctx.model._formatValue(anonymous)}` : '';
-//   const _limit = this.ctx.model._limit(page.size, page.index);
+//   const anonymousWhere = anonymous !== undefined ? `and a.anonymous=${this.bean.model._formatValue(anonymous)}` : '';
+//   const _limit = this.bean.model._limit(page.size, page.index);
 //   // fields
 //   const fields = await this.getFieldsSelect({ removePrivacy, alias: 'a' });
 //   // sql
@@ -290,5 +290,5 @@ export class BeanUser1 extends BeanUser0 {
 //         order by a.userName asc
 //         ${_limit}
 //   `;
-//   return await this.ctx.model.query(sql, [this.ctx.instance.id]);
+//   return await this.bean.model.query(sql, [this.ctx.instance.id]);
 // }

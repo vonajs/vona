@@ -276,7 +276,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       user,
     });
     // update history
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `
           update aAtom set atomIdDraft=?
             where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?

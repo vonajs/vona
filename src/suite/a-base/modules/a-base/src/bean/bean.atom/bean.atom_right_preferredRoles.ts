@@ -37,7 +37,7 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
       };
     });
     return roles;
-    // const roles = await this.ctx.model.query(
+    // const roles = await this.bean.model.query(
     //   `select distinct a.iid,a.roleIdWho,b.userId,c.roleName as roleNameWho from aViewRoleRightAtomClass a
     //     inner join aUserRole b on a.roleIdWho=b.roleId
     //     inner join aRole c on a.roleIdWho=c.id

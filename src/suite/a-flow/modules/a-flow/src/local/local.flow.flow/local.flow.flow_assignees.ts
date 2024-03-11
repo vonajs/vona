@@ -103,7 +103,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
           select * from aViewUserRightAtomClassRole
             where iid=? and atomClassId=? and action=? and roleIdWhom=?
       `;
-    const items = await this.ctx.model.query(sql, [
+    const items = await this.bean.model.query(sql, [
       //
       atom.iid,
       atom.atomClassId,

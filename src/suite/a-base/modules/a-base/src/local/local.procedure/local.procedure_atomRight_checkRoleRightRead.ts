@@ -40,13 +40,13 @@ export class LocalProcedureAtomRightCheckRoleRightRead extends LocalProcedureAto
       forAtomUser,
       atom,
     });
-    const _rightWhereClause = this.ctx.model._formatWhere(_rightWhere);
+    const _rightWhereClause = this.bean.model._formatWhere(_rightWhere);
     if (_rightWhereClause === false) return false;
     if (_rightWhereClause === true) return true;
     _where.__and__right = _rightWhere;
 
     // where clause
-    let _whereClause = this.ctx.model._formatWhere(_where);
+    let _whereClause = this.bean.model._formatWhere(_where);
     if (_whereClause === false) return false;
     if (_whereClause === true) return true;
     _whereClause = ` WHERE (${_whereClause})`;

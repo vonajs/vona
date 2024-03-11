@@ -25,7 +25,7 @@ export class StatsMessage extends BeanBase {
       return { [color]: count };
     } else if (keys.length === 1) {
       // message
-      const modelStats = this.ctx.model.module('a-stats').stats;
+      const modelStats = this.bean.model.module('a-stats').stats;
       const items = await modelStats.select({
         where: {
           module: __ThisModule__,

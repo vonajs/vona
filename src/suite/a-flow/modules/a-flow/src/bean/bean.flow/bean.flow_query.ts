@@ -61,7 +61,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
       count,
       mode,
     });
-    const res = await this.ctx.model.query(sql);
+    const res = await this.bean.model.query(sql);
     return count ? res[0]._count : res;
   }
 }

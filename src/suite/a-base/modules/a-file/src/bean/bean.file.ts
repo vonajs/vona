@@ -17,10 +17,10 @@ const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 @Bean()
 export class BeanFile extends BeanBase {
   get modelFile() {
-    return this.ctx.model.module(__ThisModule__).file;
+    return this.bean.model.module(__ThisModule__).file;
   }
   get modelFileView() {
-    return this.ctx.model.module(__ThisModule__).fileView;
+    return this.bean.model.module(__ThisModule__).fileView;
   }
 
   async all({ atomClass, options, user }: any) {
@@ -489,7 +489,7 @@ export class BeanFile extends BeanBase {
       return await this.modelFile.get({ downloadId, atomId });
     }
     // try to get formal
-    const file = await this.ctx.model.queryOne(
+    const file = await this.bean.model.queryOne(
       `
           select a.* from aFile a
             inner join aAtom b on a.atomId=b.id
@@ -499,7 +499,7 @@ export class BeanFile extends BeanBase {
     );
     if (file) return file;
     // no matter what atomId is: maybe ===0 or !==0
-    return await this.ctx.model.file.get({ downloadId });
+    return await this.bean.model.file.get({ downloadId });
   }
 
   async _checkRightWrite({ atomId, user }: any) {

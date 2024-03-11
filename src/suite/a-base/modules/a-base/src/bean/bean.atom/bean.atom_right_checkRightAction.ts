@@ -466,7 +466,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (sql === true) return atom;
     const debug = this.ctx.app.bean.debug.get('atom:right');
     debug('checkRightAction sql: atomId: ', atom.id);
-    const res = await this.ctx.model.queryOne(sql);
+    const res = await this.bean.model.queryOne(sql);
     debug('checkRightAction sql end: atomId: ', atom.id);
     return res;
   }

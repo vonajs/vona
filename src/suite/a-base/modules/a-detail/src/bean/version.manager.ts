@@ -27,7 +27,7 @@ export class VersionManager extends BeanBase {
       //     PRIMARY KEY (id)
       //   )
       // `;
-      // await this.ctx.model.query(sql);
+      // await this.bean.model.query(sql);
       // // create table: aDetailClass
       // sql = `
       //   CREATE TABLE aDetailClass (
@@ -41,7 +41,7 @@ export class VersionManager extends BeanBase {
       //     PRIMARY KEY (id)
       //   )
       // `;
-      // await this.ctx.model.query(sql);
+      // await this.bean.model.query(sql);
     }
     if (options.version === 2) {
       // create table: aDetailBase

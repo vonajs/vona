@@ -95,7 +95,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     const authOpen = await this.prepareAuthOpen();
     if (!authOpen) return true;
     // check
-    const right = await this.ctx.model.queryOne(
+    const right = await this.bean.model.queryOne(
       `
           select * from aViewRoleRightResource a
             where a.iid=? and a.roleIdWho=? and a.atomId=?
@@ -115,7 +115,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
       atomClass,
     });
     // check
-    const right = await this.ctx.model.queryOne(
+    const right = await this.bean.model.queryOne(
       `
         select * from aViewRoleRightAtomClass a
             where a.iid=? and a.roleIdWho=? and a.atomClassId=? and action=?
@@ -126,7 +126,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   }
 
   async getAuthOpenByAuthId({ authId }: any) {
-    return await this.ctx.model.queryOne(
+    return await this.bean.model.queryOne(
       `
           select a.* from aAuthOpenView a
             inner join aAuth b on a.id=b.profileId

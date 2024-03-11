@@ -22,9 +22,9 @@ export class LocalProcedure extends BeanBase {
     // -- c: aUser
 
     // for safe
-    where = where ? this.ctx.model._where(where) : null;
-    orders = orders ? this.ctx.model._orders(orders) : null;
-    const limit = page ? this.ctx.model._limit(page.size, page.index) : null;
+    where = where ? this.bean.model._where(where) : null;
+    orders = orders ? this.bean.model._orders(orders) : null;
+    const limit = page ? this.bean.model._limit(page.size, page.index) : null;
 
     // vars
     let _userWhere;
@@ -76,9 +76,9 @@ export class LocalProcedure extends BeanBase {
     // -- d: aFlowTaskHistory
 
     // for safe
-    where = where ? this.ctx.model._where(where) : null;
-    orders = orders ? this.ctx.model._orders(orders) : null;
-    const limit = page ? this.ctx.model._limit(page.size, page.index) : null;
+    where = where ? this.bean.model._where(where) : null;
+    orders = orders ? this.bean.model._orders(orders) : null;
+    const limit = page ? this.bean.model._limit(page.size, page.index) : null;
 
     // vars
     let _userWhere;
@@ -139,9 +139,9 @@ export class LocalProcedure extends BeanBase {
     // -- d: aFlowTaskHistory
 
     // for safe
-    where = where ? this.ctx.model._where(where) : null;
-    orders = orders ? this.ctx.model._orders(orders) : null;
-    const limit = page ? this.ctx.model._limit(page.size, page.index) : null;
+    where = where ? this.bean.model._where(where) : null;
+    orders = orders ? this.bean.model._orders(orders) : null;
+    const limit = page ? this.bean.model._limit(page.size, page.index) : null;
 
     // vars
     let _userWhere;

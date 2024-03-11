@@ -16,15 +16,15 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   }
 
   get modelCondition() {
-    return this.ctx.model.module(__ThisModule__).flowNodeStartEventAtomCondition;
+    return this.bean.model.module(__ThisModule__).flowNodeStartEventAtomCondition;
   }
 
   get modelRoleRight() {
-    return this.ctx.model.module('a-base').roleRight;
+    return this.bean.model.module('a-base').roleRight;
   }
 
   get modelRoleRightRef() {
-    return this.ctx.model.module('a-base').roleRightRef;
+    return this.bean.model.module('a-base').roleRightRef;
   }
 
   async deploy({ deploy, flowDefId, node, deleting, flowDef, content }: any) {

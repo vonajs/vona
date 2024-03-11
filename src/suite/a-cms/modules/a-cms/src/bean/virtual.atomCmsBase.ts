@@ -6,11 +6,11 @@ import trimHtml from '@zhennann/trim-html';
 @Virtual({ scene: 'bean' })
 export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
   get modelCMSArticle() {
-    return this.ctx.model.module(__ThisModule__).article;
+    return this.bean.model.module(__ThisModule__).article;
   }
 
   get modelCMSContent() {
-    return this.ctx.model.module(__ThisModule__).content;
+    return this.bean.model.module(__ThisModule__).content;
   }
 
   get moduleCMSConfig() {
@@ -233,7 +233,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
       },
     );
     // update content
-    await this.ctx.model.query('update aCmsContent a set a.content=?, a.html=? where a.iid=? and a.atomId=?', [
+    await this.bean.model.query('update aCmsContent a set a.content=?, a.html=? where a.iid=? and a.atomId=?', [
       item.content,
       html,
       this.ctx.instance.id,

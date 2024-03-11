@@ -32,7 +32,7 @@ export class VersionUpdate extends BeanBase {
 
   async _adjustFlowsInstance() {
     // flow
-    let flows = await this.ctx.model.flow.select({
+    let flows = await this.bean.model.flow.select({
       where: {
         flowAtomId: {
           op: '>',
@@ -44,11 +44,11 @@ export class VersionUpdate extends BeanBase {
       const flowAtomId = flow.flowAtomId;
       const atom = await this.ctx.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
-        await this.ctx.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
+        await this.bean.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
     }
     // flow history
-    flows = await this.ctx.model.flowHistory.select({
+    flows = await this.bean.model.flowHistory.select({
       where: {
         flowAtomId: {
           op: '>',
@@ -60,7 +60,7 @@ export class VersionUpdate extends BeanBase {
       const flowAtomId = flow.flowAtomId;
       const atom = await this.ctx.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
-        await this.ctx.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
+        await this.bean.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
     }
   }

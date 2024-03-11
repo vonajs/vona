@@ -7,23 +7,23 @@ export class LocalComment extends BeanBase {
   async list({ key, options, user }: any) {
     const _options = this._adjuctOptions({ key, options });
     // sql
-    const _where = this.ctx.model._where(_options.where);
-    const _orders = this.ctx.model._orders(_options.orders);
-    const _limit = this.ctx.model._limit(_options.limit, _options.offset);
+    const _where = this.bean.model._where(_options.where);
+    const _orders = this.bean.model._orders(_options.orders);
+    const _limit = this.bean.model._limit(_options.limit, _options.offset);
     const sql = `select a.*,(select d2.heart from aCommentHeart d2 where d2.iid=? and d2.commentId=a.id and d2.userId=?) as heart from aViewComment a
          ${_where} ${_orders} ${_limit}`;
     // select
-    return await this.ctx.model.query(sql, [this.ctx.instance.id, user.id]);
+    return await this.bean.model.query(sql, [this.ctx.instance.id, user.id]);
   }
 
   async count({ key, options, user: _user }: any) {
     const _options = this._adjuctOptions({ key, options });
     // sql
-    const _where = this.ctx.model._where(_options.where);
+    const _where = this.bean.model._where(_options.where);
     const sql = `select count(*) as count from aViewComment a
          ${_where}`;
     // query
-    const res = await this.ctx.model.queryOne(sql);
+    const res = await this.bean.model.queryOne(sql);
     return res.count;
   }
 
@@ -48,7 +48,7 @@ export class LocalComment extends BeanBase {
     const sql = `select a.*,(select d2.heart from aCommentHeart d2 where d2.iid=? and d2.commentId=a.id and d2.userId=?) as heart from aViewComment a
          where a.iid=? and a.deleted=0 and a.id=?`;
     // select
-    const list = await this.ctx.model.query(sql, [this.ctx.instance.id, user.id, this.ctx.instance.id, commentId]);
+    const list = await this.bean.model.query(sql, [this.ctx.instance.id, user.id, this.ctx.instance.id, commentId]);
     return list[0];
   }
 
@@ -61,7 +61,7 @@ export class LocalComment extends BeanBase {
 
   async save_edit({ key, data: { commentId, content }, user }) {
     // comment
-    const item = await this.ctx.model.commentView.get({ id: commentId });
+    const item = await this.bean.model.commentView.get({ id: commentId });
     if (key.atomId !== item.atomId || item.userId !== user.id) this.ctx.throw(403);
     // html
     const html = await this._renderContent({
@@ -73,7 +73,7 @@ export class LocalComment extends BeanBase {
     // summary
     const summary = this._trimHtml(html);
     // update
-    await this.ctx.model.comment.update({
+    await this.bean.model.comment.update({
       id: commentId,
       content,
       summary: summary.html,
@@ -99,7 +99,7 @@ export class LocalComment extends BeanBase {
 
   async save_add({ key, data: { replyId, content }, user }) {
     // sorting
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       'select max(sorting) as sorting from aComment where iid=? and deleted=0 and atomId=?',
       [this.ctx.instance.id, key.atomId],
     );
@@ -107,7 +107,7 @@ export class LocalComment extends BeanBase {
     // reply
     let reply;
     if (replyId) {
-      reply = await this.ctx.model.commentView.get({ id: replyId });
+      reply = await this.bean.model.commentView.get({ id: replyId });
     }
     // replyUserId
     const replyUserId = reply ? reply.userId : 0;
@@ -130,7 +130,7 @@ export class LocalComment extends BeanBase {
     // summary
     const summary = this._trimHtml(html);
     // create
-    const res = await this.ctx.model.comment.insert({
+    const res = await this.bean.model.comment.insert({
       atomId: key.atomId,
       userId: user.id,
       sorting,
@@ -157,7 +157,7 @@ export class LocalComment extends BeanBase {
 
   async delete({ key, data: { commentId }, user }) {
     // comment
-    const item = await this.ctx.model.comment.get({ id: commentId });
+    const item = await this.bean.model.comment.get({ id: commentId });
     // check right
     let canDeleted = key.atomId === item.atomId && item.userId === user.id;
     if (!canDeleted) {
@@ -168,9 +168,9 @@ export class LocalComment extends BeanBase {
     }
     if (!canDeleted) this.ctx.throw(403);
     // delete hearts
-    await this.ctx.model.commentHeart.delete({ commentId });
+    await this.bean.model.commentHeart.delete({ commentId });
     // delete comment
-    await this.ctx.model.comment.delete({ id: commentId });
+    await this.bean.model.comment.delete({ id: commentId });
     // commentCount
     await this.ctx.bean.atom.comment({ key, atom: { comment: -1 }, user });
     // ok
@@ -184,7 +184,7 @@ export class LocalComment extends BeanBase {
   async heart({ key, data: { commentId, heart }, user }) {
     let diff = 0;
     // check if exists
-    const _heart = await this.ctx.model.commentHeart.get({
+    const _heart = await this.bean.model.commentHeart.get({
       userId: user.id,
       atomId: key.atomId,
       commentId,
@@ -192,13 +192,13 @@ export class LocalComment extends BeanBase {
     if (_heart && !heart) {
       diff = -1;
       // delete
-      await this.ctx.model.commentHeart.delete({
+      await this.bean.model.commentHeart.delete({
         id: _heart.id,
       });
     } else if (!_heart && heart) {
       diff = 1;
       // new
-      await this.ctx.model.commentHeart.insert({
+      await this.bean.model.commentHeart.insert({
         userId: user.id,
         atomId: key.atomId,
         commentId,
@@ -206,11 +206,11 @@ export class LocalComment extends BeanBase {
       });
     }
     // get
-    const item = await this.ctx.model.comment.get({ id: commentId });
+    const item = await this.bean.model.comment.get({ id: commentId });
     let heartCount = item.heartCount;
     if (diff !== 0) {
       heartCount += diff;
-      await this.ctx.model.comment.update({
+      await this.bean.model.comment.update({
         id: commentId,
         heartCount,
       });
@@ -229,7 +229,7 @@ export class LocalComment extends BeanBase {
   async _publish({ atomId, commentId, replyId, replyUserId, user, mode }: any) {
     const userIdsTo: any = {};
     // 1. atom.userIdUpdated
-    const atom = await this.ctx.model.atom.get({ id: atomId });
+    const atom = await this.bean.model.atom.get({ id: atomId });
     const userIdUpdated = atom.userIdUpdated;
     if (userIdUpdated !== user.id) {
       const title = await this._publishTitle({ userId: userIdUpdated, replyId: 0, mode });

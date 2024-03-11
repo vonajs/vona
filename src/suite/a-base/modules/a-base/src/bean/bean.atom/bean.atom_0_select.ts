@@ -141,7 +141,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     if (Array.isArray(sql)) {
       items = sql;
     } else {
-      items = sql === false ? [] : await this.ctx.model.query(sql);
+      items = sql === false ? [] : await this.bean.model.query(sql);
     }
     // count
     if (count) {

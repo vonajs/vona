@@ -4,7 +4,7 @@ import { BeanRoleIncludes } from './bean.role_includes.js';
 
 export class BeanRoleOthers extends BeanRoleIncludes {
   async getUserRolesDirect({ userId }: any) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select a.* from aRole a
           left join aUserRole b on a.id=b.roleId
@@ -16,7 +16,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async getUserRolesParent({ userId }: any) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select a.* from aRole a
           left join aViewUserRoleRef b on a.id=b.roleIdParent
@@ -28,7 +28,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async getUserRolesExpand({ userId }: any) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select a.* from aRole a
           left join aViewUserRoleExpand b on a.id=b.roleIdBase
@@ -40,7 +40,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async userInRoleDirect({ userId, roleId }: any) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select count(*) as count from aUserRole a
           where a.iid=? and a.userId=? and a.roleId=?
@@ -51,7 +51,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async userInRoleParent({ userId, roleId }: any) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select count(*) as count from aViewUserRoleRef a
           where a.iid=? and a.userId=? and a.roleIdParent=?
@@ -62,7 +62,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async userInRoleExpand({ userId, roleId }: any) {
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select count(*) as count from aViewUserRoleExpand a
           where a.iid=? and a.userId=? and a.roleIdBase=?
@@ -80,11 +80,11 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     }
     // page
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
+    const _limit = this.bean.model._limit(page.size, page.index);
     // fields
     const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
     // query
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select ${fields} from aUser a
           inner join aUserRole b on a.id=b.userId
@@ -105,7 +105,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     }
     // page
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
+    const _limit = this.bean.model._limit(page.size, page.index);
     // fields
     const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
     // query
@@ -117,11 +117,11 @@ export class BeanRoleOthers extends BeanRoleIncludes {
         { 'a.realName': { op: 'like', val: query } },
         { 'a.mobile': { op: 'like', val: query } },
       ];
-      where = this.ctx.model._where(clause);
+      where = this.bean.model._where(clause);
     }
     where = where ? `${where} AND` : ' WHERE';
     // select
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select ${fields} from aUser a
           inner join aViewUserRoleRef b on a.id=b.userId
@@ -142,11 +142,11 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     }
     // page
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
+    const _limit = this.bean.model._limit(page.size, page.index);
     // fields
     const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
     // query
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       `
         select ${fields} from aUser a
           inner join aViewUserRoleExpand b on a.id=b.userId

@@ -5,12 +5,12 @@ const __blackFields = ['startups', 'queues', 'broadcasts', 'middlewares', 'sched
 @Local()
 export class LocalInstance extends BeanBase {
   async item() {
-    return await this.ctx.model.instance.get({ id: this.ctx.instance.id });
+    return await this.bean.model.instance.get({ id: this.ctx.instance.id });
   }
 
   async save({ data }: any) {
     // update
-    await this.ctx.model.instance.update({
+    await this.bean.model.instance.update({
       id: this.ctx.instance.id,
       title: data.title,
       config: JSON.stringify(this.__configBlackFields(data.config)),

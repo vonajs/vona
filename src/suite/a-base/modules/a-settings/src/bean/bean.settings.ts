@@ -6,11 +6,11 @@ import { constants } from '../config/constants.js';
 @Bean()
 export class BeanSettings extends BeanModuleScopeBase {
   get modelSettings() {
-    return this.ctx.model.module(__ThisModule__).settings;
+    return this.bean.model.module(__ThisModule__).settings;
   }
 
   get modelSettingsRef() {
-    return this.ctx.model.module(__ThisModule__).settingsRef;
+    return this.bean.model.module(__ThisModule__).settingsRef;
   }
 
   // get

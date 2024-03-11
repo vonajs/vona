@@ -7,7 +7,7 @@ const _cacheChannels: any = {};
 @Local()
 export class LocalMessageClass extends BeanBase {
   get modelMessageClass() {
-    return this.ctx.model.module(__ThisModule__).messageClass;
+    return this.bean.model.module(__ThisModule__).messageClass;
   }
 
   async getMessageClassId({ id, module, messageClassName }: any) {

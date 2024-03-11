@@ -44,7 +44,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     }
 
     // for safe
-    // tableName = tableName ? this.ctx.model.format('??', tableName) : null; // not format tableName
+    // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
     const _where = Object.assign({}, where);
     const _orders = orders ? orders.concat() : [];
 
@@ -119,7 +119,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
       _where['a.atomDisabled'] = 0;
     }
     if (needResourceLocale) {
-      const _locale = this.ctx.model.format('?', resourceLocale || this.ctx.locale);
+      const _locale = this.bean.model.format('?', resourceLocale || this.ctx.locale);
       _resourceField = ',m.atomNameLocale';
       _resourceJoin = ` inner join aResourceLocale m on m.atomId=a.id and m.locale=${_locale}`;
     } else {
@@ -206,14 +206,14 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     _where.__and__right = _rightWhere;
 
     // where clause
-    let _whereClause = this.ctx.model._formatWhere(_where);
+    let _whereClause = this.bean.model._formatWhere(_where);
     if (_whereClause === false) return false;
     _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
 
     // orders
-    const _orders2 = this.ctx.model._orders(_orders);
+    const _orders2 = this.bean.model._orders(_orders);
     // limit
-    const _limit = page ? this.ctx.model._limit(page.size, page.index) : '';
+    const _limit = page ? this.bean.model._limit(page.size, page.index) : '';
 
     // sql
     const _sql = `select ${_selectFields} ${_atomJoin}
@@ -236,7 +236,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
 
   async _selectAtoms_0_rightWhere({ iid, forAtomUser, role }: any) {
     if (forAtomUser && role) {
-      return this.ctx.model.raw(`
+      return this.bean.model.raw(`
           exists(
             select c2.userId from aViewUserRoleRef c2 where c2.iid=${iid} and a.itemId=c2.userId and c2.roleIdParent=${role}
           )

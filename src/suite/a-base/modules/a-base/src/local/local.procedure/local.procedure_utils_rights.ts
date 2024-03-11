@@ -45,7 +45,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     if (forAtomUser) {
       if (role) {
         // get users of role
-        _others = this.ctx.model.raw(`
+        _others = this.bean.model.raw(`
               exists(
                 select c.userIdWhom from aViewUserRightAtomClassUser c
                   inner join aViewUserRoleRef c2 on c.userIdWhom=c2.userId and c2.roleIdParent=${role}
@@ -53,7 +53,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
               )
             `);
       } else {
-        _others = this.ctx.model.raw(`
+        _others = this.bean.model.raw(`
               exists(
                 select c.userIdWhom from aViewUserRightAtomClassUser c
                   where c.iid=${iid} and a.itemId=c.userIdWhom and c.atomClassId=a.atomClassId and c.action=${action} and c.userIdWho=${userIdWho}
@@ -106,7 +106,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     if (forAtomUser) {
       if (role) {
         // get users of role
-        _others = this.ctx.model.raw(`
+        _others = this.bean.model.raw(`
               exists(
                 select c.userIdWhom from aViewRoleRightAtomClassUser c
                   inner join aViewUserRoleRef c2 on c.userIdWhom=c2.userId and c2.roleIdParent=${role}
@@ -114,7 +114,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
               )
             `);
       } else {
-        _others = this.ctx.model.raw(`
+        _others = this.bean.model.raw(`
               exists(
                 select c.userIdWhom from aViewRoleRightAtomClassUser c
                   where c.iid=${iid} and a.itemId=c.userIdWhom and c.atomClassId=a.atomClassId and c.action=${action} and c.roleIdWho=${roleIdWho}

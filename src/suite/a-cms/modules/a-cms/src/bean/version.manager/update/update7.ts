@@ -46,7 +46,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update7Migration_articles({ mapCagetoryIds, mapTagIds }: any) {
     // articles
-    const articles = await this.ctx.model.query(
+    const articles = await this.bean.model.query(
       `
         select a.*,b.userIdCreated,c.tags
            from aCmsArticle a
@@ -106,7 +106,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update7Migration_tags() {
     const mapTagIds: any = {};
-    const tags = await this.ctx.model.select('aCmsTag', {
+    const tags = await this.bean.model.select('aCmsTag', {
       where: {
         iid: this.ctx.instance.id,
         deleted: 0,
@@ -133,7 +133,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update7Migration_cagetories() {
     const mapCagetoryIds: any = {};
-    const categories = await this.ctx.model.select('aCmsCategory', {
+    const categories = await this.bean.model.select('aCmsCategory', {
       where: {
         iid: this.ctx.instance.id,
         deleted: 0,

@@ -5,11 +5,11 @@ import { BeanAtomBase } from 'cabloy-module-api-a-base';
 @Atom()
 export class AtomDashboard extends BeanAtomBase {
   get model() {
-    return this.ctx.model.module(__ThisModule__).dashboard;
+    return this.bean.model.module(__ThisModule__).dashboard;
   }
 
   get modelDashboardContent() {
-    return this.ctx.model.module(__ThisModule__).dashboardContent;
+    return this.bean.model.module(__ThisModule__).dashboardContent;
   }
 
   createContentDefault() {

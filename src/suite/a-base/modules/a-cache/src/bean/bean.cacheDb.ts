@@ -22,13 +22,13 @@ export class BeanCacheDb extends BeanModuleScopeBase {
     const second = timeout ? parseInt(timeout / 1000) : timeout;
     // expired
     const expired = second ? `TIMESTAMPADD(SECOND,${second},CURRENT_TIMESTAMP)` : 'null';
-    const res = await this.ctx.model.get('aCache', {
+    const res = await this.bean.model.get('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
       name,
     });
     if (res) {
-      await this.ctx.model.query(
+      await this.bean.model.query(
         `
           update aCache set value=?, expired=${expired}
             where id=?
@@ -48,7 +48,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
           },
         });
       } else {
-        await this.ctx.model.query(
+        await this.bean.model.query(
           `
             insert into aCache(iid,module,name,value,expired) values(?,?,?,?,${expired})
             `,
@@ -70,7 +70,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   async _has(name) {
     const sql =
       'select * from aCache where iid=? and module=? and name=? and (expired is null or expired>CURRENT_TIMESTAMP)';
-    const res = await this.ctx.model.queryOne(sql, [
+    const res = await this.bean.model.queryOne(sql, [
       this.ctx.instance ? this.ctx.instance.id : 0,
       this.moduleScope,
       name,
@@ -79,7 +79,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   }
 
   async remove(name) {
-    await this.ctx.model.delete('aCache', {
+    await this.bean.model.delete('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
       name,
@@ -87,7 +87,7 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   }
 
   async clear() {
-    await this.ctx.model.delete('aCache', {
+    await this.bean.model.delete('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
     });

@@ -26,7 +26,7 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
     _where.__and__right = _rightWhere;
 
     // where clause
-    const _whereClause = this.ctx.model._formatWhere(_where);
+    const _whereClause = this.bean.model._formatWhere(_where);
 
     // sql
     const _sql = `select ${_selectFields} ${_atomActionJoin}
@@ -39,7 +39,7 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
   _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any) {
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true;
-    return this.ctx.model.raw(`
+    return this.bean.model.raw(`
         exists(
           select b.atomClassId from aViewUserRightAtomClass b where b.iid=${iid} and a.atomClassId=b.atomClassId and a.code=b.action and b.userIdWho=${userIdWho}
         )

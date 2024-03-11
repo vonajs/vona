@@ -44,7 +44,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
     });
     if (sql === false) return null;
     if (sql === true) return atom;
-    return await this.ctx.model.queryOne(sql);
+    return await this.bean.model.queryOne(sql);
   }
 
   async checkRightRead({ atom: { id }, atomClass, options, user, checkFlow, disableAuthOpenCheck }: any) {

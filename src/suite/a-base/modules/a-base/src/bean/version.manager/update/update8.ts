@@ -85,7 +85,7 @@ export class VersionUpdate extends BeanBase {
     // cache
     const mapUserAtomClassRole: any = {};
     // atoms
-    const atoms = await this.ctx.model.query(
+    const atoms = await this.bean.model.query(
       'select id, atomClassId, userIdCreated from aAtom where iid=? and deleted=0',
       [this.ctx.instance.id],
     );
@@ -96,7 +96,7 @@ export class VersionUpdate extends BeanBase {
         mapValue = mapUserAtomClassRole[mapKey] = await this._getRoleIdOwner(atom.atomClassId, atom.userIdCreated);
       }
       if (mapValue > 0) {
-        await this.ctx.model.query('update aAtom set roleIdOwner=? where id=?', [mapValue, atom.id]);
+        await this.bean.model.query('update aAtom set roleIdOwner=? where id=?', [mapValue, atom.id]);
       }
     }
   }

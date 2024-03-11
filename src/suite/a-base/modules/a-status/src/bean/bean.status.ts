@@ -4,7 +4,7 @@ import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 @Bean()
 export class BeanStatus extends BeanModuleScopeBase {
   get modelStatus() {
-    return this.ctx.model.module(__ThisModule__).status;
+    return this.bean.model.module(__ThisModule__).status;
   }
 
   async get(name) {

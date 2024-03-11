@@ -217,7 +217,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
           left join aUserAgent b on a.id=b.userIdAgent
             where a.iid=? and a.deleted=0 and b.userId=?
       `;
-    return await this.ctx.model.queryOne(sql, [this.ctx.instance.id, userId]);
+    return await this.bean.model.queryOne(sql, [this.ctx.instance.id, userId]);
   }
 
   async agentsBy({ userId }: any) {
@@ -226,7 +226,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
           left join aUserAgent b on a.id=b.userId
             where a.iid=? and a.deleted=0 and b.userIdAgent=?
       `;
-    return await this.ctx.model.query(sql, [this.ctx.instance.id, userId]);
+    return await this.bean.model.query(sql, [this.ctx.instance.id, userId]);
   }
 
   async addAgent({ userIdAgent, userId }: any) {
@@ -438,24 +438,24 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       data: { userIdFrom, userIdTo },
     });
     // aAuth: delete old records
-    const list = await this.ctx.model.query(
+    const list = await this.bean.model.query(
       'select a.id,a.providerId,a.providerScene from aAuth a where a.deleted=0 and a.iid=? and a.userId=?',
       [this.ctx.instance.id, userIdFrom],
     );
     for (const item of list) {
-      await this.ctx.model.query(
+      await this.bean.model.query(
         'delete from aAuth where deleted=0 and iid=? and userId=? and providerId=? and providerScene=?',
         [this.ctx.instance.id, userIdTo, item.providerId, item.providerScene],
       );
     }
     // aAuth: update records
-    await this.ctx.model.query('update aAuth a set a.userId=? where a.deleted=0 and a.iid=? and a.userId=?', [
+    await this.bean.model.query('update aAuth a set a.userId=? where a.deleted=0 and a.iid=? and a.userId=?', [
       userIdTo,
       this.ctx.instance.id,
       userIdFrom,
     ]);
     // aUserRole
-    await this.ctx.model.query('update aUserRole a set a.userId=? where a.iid=? and a.userId=?', [
+    await this.bean.model.query('update aUserRole a set a.userId=? where a.iid=? and a.userId=?', [
       userIdTo,
       this.ctx.instance.id,
       userIdFrom,

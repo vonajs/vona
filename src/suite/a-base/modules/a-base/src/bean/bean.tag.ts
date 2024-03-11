@@ -129,7 +129,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
   }
 
   async calcAtomCount({ tagId }: any) {
-    const res = await this.ctx.model.query(
+    const res = await this.bean.model.query(
       `
         select count(*) atomCount from aTagRef a
           inner join aAtom b on a.atomId=b.id

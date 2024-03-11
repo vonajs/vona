@@ -8,9 +8,9 @@ export class BroadcastColumnsClear extends BeanBase {
     if (!sameAsCaller) {
       // clear columns cache
       if (mode === 'all') {
-        this.ctx.model.columnsClearAll();
+        this.bean.model.columnsClearAll();
       } else {
-        this.ctx.model.columnsClear(tableName);
+        this.bean.model.columnsClear(tableName);
       }
     }
   }

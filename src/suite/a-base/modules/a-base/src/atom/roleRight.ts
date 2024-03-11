@@ -66,7 +66,7 @@ export class AtomRoleRight extends BeanAtomBase<ScopeModule> {
     data.roleAtomId = roleAtomId;
     // data
     return data;
-    // const res = await this.ctx.model.insert({
+    // const res = await this.bean.model.insert({
     //   roleAtomId: atomIdMain,
     //   roleId: role.id,
     //   scope: '[]',

@@ -209,7 +209,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // field: atomIdMain
     const fieldNameAtomIdMain = atomClassBase.fields?.mappings?.atomIdMain;
     // query max
-    const res = await this.ctx.model.queryOne(
+    const res = await this.bean.model.queryOne(
       `
         select max(a.${fieldNameLineNo}) as detailLineNo from ${tableName} a
           where a.iid=? and a.deleted=0 and a.${fieldNameAtomIdMain}=?

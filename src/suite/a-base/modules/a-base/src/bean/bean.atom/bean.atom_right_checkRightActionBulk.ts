@@ -107,9 +107,9 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     // sql
     const sql = this.sqlProcedure.checkRightActionBulk(params);
     if (action) {
-      return await this.ctx.model.queryOne(sql);
+      return await this.bean.model.queryOne(sql);
     }
-    return await this.ctx.model.query(sql);
+    return await this.bean.model.query(sql);
   }
 
   async __checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options }: any) {

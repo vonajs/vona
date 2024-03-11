@@ -47,7 +47,7 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
           order by a.${fieldNameLineNo} asc`;
     }
     // to
-    const atomTo = await this.ctx.model.queryOne(sql, [
+    const atomTo = await this.bean.model.queryOne(sql, [
       this.ctx.instance.id,
       atomFrom[fieldNameAtomIdMain],
       lineNoFrom,

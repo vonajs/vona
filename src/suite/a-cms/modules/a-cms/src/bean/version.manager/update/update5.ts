@@ -34,13 +34,13 @@ export class VersionUpdate extends BeanBase {
   async _update5AtomClassIdsInstance() {
     const atomClass = await utils.atomClass2(this.ctx, null);
     // update aCmsCategory's atomClassId
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `update aCmsCategory set atomClassId=?
              where iid=?`,
       [atomClass.id, this.ctx.instance.id],
     );
     // update aCmsTag's atomClassId
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `update aCmsTag set atomClassId=?
              where iid=?`,
       [atomClass.id, this.ctx.instance.id],

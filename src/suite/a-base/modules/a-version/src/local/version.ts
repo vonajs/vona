@@ -16,7 +16,7 @@ export class LocalVersion extends BeanBase {
     try {
       const result = await this.__check({ scene: null });
       // clear columns cache
-      this.ctx.model.columnsClearAll();
+      this.bean.model.columnsClearAll();
       // broadcast
       this.app.meta.broadcast.emit({
         module: __ThisModule__,
@@ -214,7 +214,7 @@ export class LocalVersion extends BeanBase {
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     if (!beanVersion.update) throw new Error(`version.manager.update not exists for ${module.info.relativeName}`);
     // clear columns cache
-    this.ctx.model.columnsClearAll();
+    this.bean.model.columnsClearAll();
     // execute
     await beanVersion.update({ version });
     // insert record
@@ -233,7 +233,7 @@ export class LocalVersion extends BeanBase {
     }
     // insert record
     if (version > 0) {
-      await this.ctx.model.insert('aVersionInit', {
+      await this.bean.model.insert('aVersionInit', {
         subdomain: options.subdomain,
         module: module.info.relativeName,
         version,

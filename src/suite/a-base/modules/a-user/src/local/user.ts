@@ -69,7 +69,7 @@ export class LocalUser extends BeanBase {
           inner join aAuthProvider b on a.providerId=b.id
           where a.iid=? and a.userId=?
       `;
-    const list = await this.ctx.model.query(sql, [this.ctx.instance.id, user.id]);
+    const list = await this.bean.model.query(sql, [this.ctx.instance.id, user.id]);
     // 3. map
     for (const auth of list) {
       const authId = auth.id;
@@ -112,7 +112,7 @@ export class LocalUser extends BeanBase {
 
   async authenticationDisable({ authId, user }: any) {
     // must use userId in where
-    await this.ctx.model.query('delete from aAuth where iid=? and id=? and userId=?', [
+    await this.bean.model.query('delete from aAuth where iid=? and id=? and userId=?', [
       this.ctx.instance.id,
       authId,
       user.id,

@@ -50,7 +50,7 @@ export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopes
         select c.roleIdWhom from aViewRoleRightAtomClassRole c
           where c.iid=? and c.atomClassId=? and c.action=? and c.roleIdWho=?
       `;
-    const items = await this.ctx.model.query(sql, [this.ctx.instance.id, atomClassId, action, roleId]);
+    const items = await this.bean.model.query(sql, [this.ctx.instance.id, atomClassId, action, roleId]);
     const roleIds = items.map(item => item.roleIdWhom);
     // false
     if (roleIds.length === 0) return false;

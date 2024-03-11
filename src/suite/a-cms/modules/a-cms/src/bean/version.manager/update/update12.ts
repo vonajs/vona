@@ -26,7 +26,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update12Migration_articles() {
     // first, hold articles
-    const articles = await this.ctx.model.query(
+    const articles = await this.bean.model.query(
       `
         select a.id as atomId,a.atomClassId,a.atomStage,a.userIdCreated,b.content
            from aAtom a
@@ -41,13 +41,13 @@ export class VersionUpdate extends BeanBase {
       [this.ctx.instance.id],
     );
     // then, update all articles
-    await this.ctx.model.query(`
+    await this.bean.model.query(`
       update aCmsContent set content = replace (content,'cms-pluginblock:blockAudio','a-markdownblock:audio') where content like '%cms-pluginblock:blockAudio%'
     `);
-    await this.ctx.model.query(`
+    await this.bean.model.query(`
       update aCmsContent set content = replace (content,'cms-pluginblock:blockIFrame','a-markdownblock:iframe') where content like '%cms-pluginblock:blockIFrame%'
     `);
-    await this.ctx.model.query(`
+    await this.bean.model.query(`
       update aCmsContent set content = replace (content,'cabloy-dashboard:blockCourse','cabloy-course:blockCourseCodes') where content like '%cabloy-dashboard:blockCourse%'
     `);
     // loop

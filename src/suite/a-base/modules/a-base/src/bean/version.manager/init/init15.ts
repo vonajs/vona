@@ -24,7 +24,7 @@ export class VersionInit extends BeanBase {
     const roleSystem = await this.ctx.bean.role.getSystemRole({ roleName: 'system' });
     const roleBuiltIn = await this.ctx.bean.role.getSystemRole({ roleName: 'builtIn' });
     const atomClassRole = await this.ctx.bean.atomClass.get({ module: __ThisModule__, atomClassName: 'role' });
-    await this.ctx.model.query(
+    await this.bean.model.query(
       `
           update aAtom set roleIdOwner=? where iid=? and atomClassId<>? and roleIdOwner=?
       `,

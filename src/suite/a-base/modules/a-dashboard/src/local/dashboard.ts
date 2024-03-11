@@ -35,7 +35,7 @@ export class LocalDashboard extends BeanBase {
   async item({ dashboardAtomId, dashboardUserCheck = true, user }: any) {
     // try get default of dashboardUser
     if (dashboardUserCheck) {
-      const dashboardUser = await this.ctx.model.dashboardUser.get({
+      const dashboardUser = await this.bean.model.dashboardUser.get({
         dashboardAtomId,
         dashboardDefault: 1,
         userId: user.id,
@@ -54,14 +54,14 @@ export class LocalDashboard extends BeanBase {
   }
 
   async loadItemUser({ dashboardUserId, user }: any) {
-    return await this.ctx.model.dashboardUser.get({
+    return await this.bean.model.dashboardUser.get({
       id: dashboardUserId,
       userId: user.id,
     });
   }
 
   async saveItemUser({ dashboardUserId, content, user }: any) {
-    await this.ctx.model.dashboardUser.update(
+    await this.bean.model.dashboardUser.update(
       {
         content,
       },
@@ -75,7 +75,7 @@ export class LocalDashboard extends BeanBase {
   }
 
   async changeItemUserName({ dashboardUserId, dashboardName, user }: any) {
-    await this.ctx.model.dashboardUser.update(
+    await this.bean.model.dashboardUser.update(
       {
         dashboardName,
       },
@@ -89,7 +89,7 @@ export class LocalDashboard extends BeanBase {
   }
 
   async deleteItemUser({ dashboardUserId, user }: any) {
-    await this.ctx.model.dashboardUser.delete({
+    await this.bean.model.dashboardUser.delete({
       id: dashboardUserId,
       userId: user.id,
     });
@@ -105,7 +105,7 @@ export class LocalDashboard extends BeanBase {
     const id = await this.sequence.next('dashboard');
     const dashboardName = `${dashboardSystem.atomNameLocale}-${id}`;
     // update old default
-    await this.ctx.model.dashboardUser.update(
+    await this.bean.model.dashboardUser.update(
       {
         dashboardDefault: 0,
       },
@@ -124,14 +124,14 @@ export class LocalDashboard extends BeanBase {
       dashboardName,
       content: dashboardSystem.content,
     };
-    const res = await this.ctx.model.dashboardUser.insert(data);
+    const res = await this.bean.model.dashboardUser.insert(data);
     data.id = res[0];
     // ok
     return data;
   }
 
   async itemUsers({ dashboardAtomId, user }: any) {
-    return await this.ctx.model.dashboardUser.select({
+    return await this.bean.model.dashboardUser.select({
       columns: [
         'id',
         'createdAt',
@@ -152,7 +152,7 @@ export class LocalDashboard extends BeanBase {
   }
 
   async changeItemUserDefault({ dashboardAtomId, dashboardUserId, user }: any) {
-    await this.ctx.model.dashboardUser.update(
+    await this.bean.model.dashboardUser.update(
       {
         dashboardDefault: 0,
       },
@@ -163,7 +163,7 @@ export class LocalDashboard extends BeanBase {
         },
       },
     );
-    await this.ctx.model.dashboardUser.update({
+    await this.bean.model.dashboardUser.update({
       id: dashboardUserId,
       dashboardDefault: 1,
     });

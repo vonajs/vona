@@ -28,23 +28,23 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // testParty: insert/udpate/delete/get
 
     // insert
-    const res = await this.ctx.model.insert('testParty', {
+    const res = await this.bean.model.insert('testParty', {
       iid: this.ctx.instance.id,
       deleted: 0,
       personCount: 3,
     });
     const id = res[0];
     // update
-    await this.ctx.model.update('testParty', {
+    await this.bean.model.update('testParty', {
       id,
       personCount: 5,
     });
     // get
-    const item = await this.ctx.model.get('testParty', {
+    const item = await this.bean.model.get('testParty', {
       id,
     });
     // delete
-    await this.ctx.model.delete('testParty', {
+    await this.bean.model.delete('testParty', {
       id,
     });
     // ok
@@ -55,14 +55,14 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // testParty: insert/udpate/delete/get
 
     // insert
-    const res = await this.ctx.model.party.insert({ personCount: 3 });
+    const res = await this.bean.model.party.insert({ personCount: 3 });
     const id = res[0];
     // update
-    await this.ctx.model.party.update({ id, personCount: 6 });
+    await this.bean.model.party.update({ id, personCount: 6 });
     // get
-    const item = await this.ctx.model.party.get({ id });
+    const item = await this.bean.model.party.get({ id });
     // delete
-    await this.ctx.model.party.delete({ id });
+    await this.bean.model.party.delete({ id });
     // ok
     this.ctx.success(item);
   }
@@ -71,10 +71,10 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // transaction
 
     // insert
-    const res = await this.ctx.model.party.insert({ personCount: 3 });
+    const res = await this.bean.model.party.insert({ personCount: 3 });
     const id = res[0];
     // will throw error
-    await this.ctx.model.party.update({ id, personCountA: 6 });
+    await this.bean.model.party.update({ id, personCountA: 6 });
     // never here
     this.ctx.success();
   }

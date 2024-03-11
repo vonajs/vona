@@ -128,7 +128,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async atomClassesUser({ user }: any) {
     // items
-    const items = await this.ctx.model.query(
+    const items = await this.bean.model.query(
       `
         select distinct a.atomClassId,b.module,b.atomClassName from aViewUserRightAtomClass a
           inner join aAtomClass b on a.atomClassId=b.id
@@ -168,7 +168,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   async actionsUser({ atomClass, user }: any) {
     const atomClassId = await this.getAtomClassId(atomClass);
     // items
-    const items = await this.ctx.model.query(
+    const items = await this.bean.model.query(
       `
           select distinct a.atomClassId,a.action,b.id as actionId,b.name,b.bulk,b.actionMode,c.atomName as flowDefName from aViewUserRightAtomClass a
             inner join aAtomAction b on a.atomClassId=b.atomClassId and a.action=b.code
@@ -187,7 +187,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     const atomClassId = await this.getAtomClassId(atomClass);
     const clauseExcludeMine = excludeMine ? 'and scope<>0' : '';
     const clauseOnlyMine = onlyMine ? 'and scope=0' : '';
-    const res = await this.ctx.model.queryOne(
+    const res = await this.bean.model.queryOne(
       `
         select * from aViewRoleRightAtomClass 
           where iid=? and atomClassId=? and action=? ${clauseExcludeMine} ${clauseOnlyMine} and roleIdWho=?
@@ -202,7 +202,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     const atomClassId = await this.getAtomClassId(atomClass);
     const clauseExcludeMine = excludeMine ? 'and scope<>0' : '';
     const clauseOnlyMine = onlyMine ? 'and scope=0' : '';
-    const res = await this.ctx.model.queryOne(
+    const res = await this.bean.model.queryOne(
       `
         select * from aViewUserRightAtomClass 
           where iid=? and atomClassId=? and action=? ${clauseExcludeMine} ${clauseOnlyMine} and userIdWho=?
@@ -215,7 +215,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   async checkRightAtomClass({ atomClass, user }: any) {
     if (!user || user.id === 0) return true;
     const atomClassId = await this.getAtomClassId(atomClass);
-    const res = await this.ctx.model.queryOne(
+    const res = await this.bean.model.queryOne(
       `
         select * from aViewUserRightAtomClass 
           where iid=? and atomClassId=? and userIdWho=?

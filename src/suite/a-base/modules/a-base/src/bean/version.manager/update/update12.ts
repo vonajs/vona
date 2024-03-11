@@ -28,11 +28,11 @@ export class VersionUpdate extends BeanBase {
 
   // async _updateAtomClassesInstance() {
   //   // atomClasses
-  //   const atomClasses = await this.ctx.model.atomClass.select();
+  //   const atomClasses = await this.bean.model.atomClass.select();
   //   for (const atomClass of atomClasses) {
   //     const _atomClass = this.ctx.bean.base.atomClass(atomClass);
   //     if (_atomClass.inner) {
-  //       await this.ctx.model.atomClass.update({ id: atomClass.id, atomClassInner: 1 });
+  //       await this.bean.model.atomClass.update({ id: atomClass.id, atomClassInner: 1 });
   //     }
   //   }
   // }

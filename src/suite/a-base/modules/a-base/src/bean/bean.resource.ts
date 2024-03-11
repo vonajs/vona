@@ -175,7 +175,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       locale,
       atomClassIds,
     });
-    return await this.ctx.model.query(sql);
+    return await this.bean.model.query(sql);
   }
 
   // check
@@ -221,11 +221,11 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       userIdWho: user && user.id,
       resourceAtomId,
     });
-    return await this.ctx.model.queryOne(sql);
+    return await this.bean.model.queryOne(sql);
   }
 
   async resourceRoles({ key /* , user */ }: any) {
-    const items = await this.ctx.model.query(
+    const items = await this.bean.model.query(
       `
         select a.*,b.roleName from aResourceRole a
           left join aRole b on a.roleId=b.id
@@ -352,8 +352,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // items
     roleId = await this.ctx.bean.role._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
-    const items = await this.ctx.model.query(
+    const _limit = this.bean.model._limit(page.size, page.index);
+    const items = await this.bean.model.query(
       `
         select a.*,
                b.atomName,b.atomDisabled,b.atomCategoryId,
@@ -384,8 +384,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // items
     roleId = await this.ctx.bean.role._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
-    const items = await this.ctx.model.query(
+    const _limit = this.bean.model._limit(page.size, page.index);
+    const items = await this.bean.model.query(
       `
         select g.*,g.id as roleExpandId, a.id as resourceRoleId,
                b.atomName,b.atomDisabled,b.atomCategoryId,
@@ -419,8 +419,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     const locale = this.ctx.locale;
     // items
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
-    const items = await this.ctx.model.query(
+    const _limit = this.bean.model._limit(page.size, page.index);
+    const items = await this.bean.model.query(
       `
         select a.*,
                b.atomName,b.atomDisabled,b.atomCategoryId,
@@ -497,8 +497,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   //   const locale = this.ctx.locale;
   //   // list
   //   page = this.ctx.bean.util.page(page, false);
-  //   const _limit = this.ctx.model._limit(page.size, page.index);
-  //   const list = await this.ctx.model.query(`
+  //   const _limit = this.bean.model._limit(page.size, page.index);
+  //   const list = await this.bean.model.query(`
   //     select a.*,b.module,b.name,b.title,b.sceneId,g.sceneName,b.sorting,f.titleLocale from aRoleFunction a
   //       left join aFunction b on a.functionId=b.id
   //       left join aFunctionLocale f on a.functionId=f.functionId
@@ -516,8 +516,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   //   const locale = this.ctx.locale;
   //   // list
   //   page = this.ctx.bean.util.page(page, false);
-  //   const _limit = this.ctx.model._limit(page.size, page.index);
-  //   const list = await this.ctx.model.query(`
+  //   const _limit = this.bean.model._limit(page.size, page.index);
+  //   const list = await this.bean.model.query(`
   //     select d.*,d.id as roleExpandId,a.id as roleFunctionId,b.module,b.name,b.title,b.sceneId,g.sceneName,e.roleName,f.titleLocale from aRoleFunction a
   //       left join aFunction b on a.functionId=b.id
   //       left join aRoleExpand d on a.roleId=d.roleIdBase
@@ -537,8 +537,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   //   const locale = this.ctx.locale;
   //   // list
   //   page = this.ctx.bean.util.page(page, false);
-  //   const _limit = this.ctx.model._limit(page.size, page.index);
-  //   const list = await this.ctx.model.query(`
+  //   const _limit = this.bean.model._limit(page.size, page.index);
+  //   const list = await this.bean.model.query(`
   //     select a.*,b.module,b.name,b.title,b.sceneId,g.sceneName,b.sorting,f.titleLocale,e.roleName from aViewUserRightFunction a
   //       left join aFunction b on a.functionId=b.id
   //       left join aFunctionLocale f on a.functionId=f.functionId

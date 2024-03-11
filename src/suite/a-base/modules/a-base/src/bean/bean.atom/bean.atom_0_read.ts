@@ -87,7 +87,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     const debug = this.ctx.app.bean.debug.get('atom:sql');
     debug('===== getAtom =====\n%s', sql);
     // query
-    const item = sql === false ? null : await this.ctx.model.queryOne(sql);
+    const item = sql === false ? null : await this.bean.model.queryOne(sql);
     // ok
     return item;
   }

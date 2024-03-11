@@ -203,8 +203,8 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async roleRights({ roleAtomId, roleId, page }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
-    const items = await this.ctx.model.query(
+    const _limit = this.bean.model._limit(page.size, page.index);
+    const items = await this.bean.model.query(
       `
         select 
           a.*,
@@ -231,8 +231,8 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async roleSpreads({ roleAtomId, roleId, page }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
-    const items = await this.ctx.model.query(
+    const _limit = this.bean.model._limit(page.size, page.index);
+    const items = await this.bean.model.query(
       `
         select 
           d.*,
@@ -264,8 +264,8 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async atomRightsOfUser({ userAtomId, userId, page }: any) {
     userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.ctx.model._limit(page.size, page.index);
-    const items = await this.ctx.model.query(
+    const _limit = this.bean.model._limit(page.size, page.index);
+    const items = await this.bean.model.query(
       `
         select 
           a.*,
@@ -317,7 +317,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
 
   async _scopeRoles({ scope }: any) {
     if (!scope || scope.length === 0) return null;
-    const items = await this.ctx.model.query(
+    const items = await this.bean.model.query(
       `
             select a.* from aRole a
               where a.iid=? and a.id in (${scope.join(',')})

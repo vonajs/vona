@@ -5,10 +5,10 @@ export class VersionTest extends BeanBase {
     // why add these test codes
     //   - for force flowHistory.id !== flow.id
     // flowHistory
-    let res = await this.ctx.model.flowHistory.insert({});
-    await this.ctx.model.flowHistory.delete({ id: res[0] });
+    let res = await this.bean.model.flowHistory.insert({});
+    await this.bean.model.flowHistory.delete({ id: res[0] });
     // flowNodeHistory
-    res = await this.ctx.model.flowNodeHistory.insert({});
-    await this.ctx.model.flowNodeHistory.delete({ id: res[0] });
+    res = await this.bean.model.flowNodeHistory.insert({});
+    await this.bean.model.flowNodeHistory.delete({ id: res[0] });
   }
 }

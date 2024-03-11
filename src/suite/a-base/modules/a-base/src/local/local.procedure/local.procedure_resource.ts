@@ -26,7 +26,7 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
   _checkResourceLocales({ iid, locale, atomClassIds }: any) {
     // for safe
     iid = parseInt(iid);
-    locale = this.ctx.model.format('?', locale);
+    locale = this.bean.model.format('?', locale);
     // sql
     const _sql = `select a.id as atomId,a.atomName from aAtom a
             where a.iid=${iid} and a.deleted=0 and a.atomStage=1 and a.atomClassId in (${atomClassIds.join(',')})

@@ -33,7 +33,7 @@ export class VersionManager extends BeanBase {
       module: __ThisModule__,
       providerName: 'authgithub',
     });
-    await this.ctx.model.query('update aAuth a set a.providerScene=? where a.iid=? and a.providerId=?', [
+    await this.bean.model.query('update aAuth a set a.providerScene=? where a.iid=? and a.providerId=?', [
       'default',
       this.ctx.instance.id,
       provideItem.id,

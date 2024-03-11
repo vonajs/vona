@@ -234,7 +234,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
                     and b.roleTypeCode in (${roleTypes.join(',')})
           `;
       }
-      const roles = await this.ctx.model.query(sql, [this.ctx.instance.id, user.id, atomClass.id]);
+      const roles = await this.bean.model.query(sql, [this.ctx.instance.id, user.id, atomClass.id]);
       roleIds = roles.map(item => item.roleIdWhom);
     }
     return roleIds;
@@ -242,7 +242,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
 
   async _childrenTop_filter({ roleIds }: any) {
     if (roleIds.length <= 1) return roleIds;
-    const items = await this.ctx.model.query(
+    const items = await this.bean.model.query(
       `
           select * from aRoleRef a 
             where a.iid=? and a.roleId in (${roleIds.join(',')})

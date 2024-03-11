@@ -12,7 +12,7 @@ export class BeanAtomRightAuxRoleParentsOfUser extends BeanAtomRightAuxRoleWhos 
   }
 
   async __getRoleParentsOfUserRaw({ userId }: any) {
-    return await this.ctx.model.query(
+    return await this.bean.model.query(
       `
           select a.roleId,b.roleName,b.roleTypeCode from aUserRole a
             inner join aRole b on a.roleId=b.id
