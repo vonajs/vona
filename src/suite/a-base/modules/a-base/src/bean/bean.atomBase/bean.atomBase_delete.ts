@@ -17,7 +17,7 @@ export class BeanAtomBaseDelete extends BeanAtomBaseWrite {
     // tag
     if (!atomClassBase.itemOnly && atomClassBase.tag) {
       const _atomOld = await this.ctx.bean.atom.modelAtom.get({ id: atomId });
-      if (_atomOld.atomTags) {
+      if (_atomOld && _atomOld.atomTags) {
         // stage
         const atomStage = _atomOld.atomStage;
         await this.ctx.bean.tag.deleteTagRefs({ atomId });
