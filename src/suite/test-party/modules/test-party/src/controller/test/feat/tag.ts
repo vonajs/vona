@@ -1,4 +1,4 @@
-import { BeanBase, Controller } from '@cabloy/core';
+import { BeanBase, Controller, TableIdentity } from '@cabloy/core';
 import { ScopeModule } from '../../../resource/this.js';
 import assert from 'assert';
 
@@ -19,7 +19,7 @@ export class ControllerTestFeatTag extends BeanBase<ScopeModule> {
         tagName: 'tagOne',
       },
     });
-    assert(tagId > 0);
+    assert(!TableIdentity.isEmpty(tagId));
 
     // parseTags: 'tagOne,tagTwo,tagThree'
     const tagIds = await this.ctx.bean.tag.parseTags({
