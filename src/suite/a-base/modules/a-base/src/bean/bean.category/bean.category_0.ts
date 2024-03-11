@@ -1,6 +1,6 @@
 import { EntityCategory } from '../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase, BigNumber } from '@cabloy/core';
 
 export class BeanCategory0 extends BeanBase<ScopeModule> {
   get model() {
@@ -27,8 +27,16 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     });
   }
 
-  async count({ atomClass, language, categoryId, categoryHidden, categoryFlag, user }: any) {
-    return await this.children({ atomClass, language, categoryId, categoryHidden, categoryFlag, user, count: 1 });
+  async count({ atomClass, language, categoryId, categoryHidden, categoryFlag, user }: any): Promise<BigNumber> {
+    return (await this.children({
+      atomClass,
+      language,
+      categoryId,
+      categoryHidden,
+      categoryFlag,
+      user,
+      count: 1,
+    })) as BigNumber;
   }
 
   async child({

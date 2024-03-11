@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase, BigNumber } from '@cabloy/core';
 
 @Local()
 export class LocalMessage extends BeanBase<ScopeModule> {
@@ -67,7 +67,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
     return await this._list({ messageClass, options, user, count: 0 });
   }
 
-  async count({ messageClass, options, user }: any) {
+  async count({ messageClass, options, user }: any): Promise<{ count: BigNumber }> {
     const count = await this._list({ messageClass, options, user, count: 1 });
     return { count };
   }

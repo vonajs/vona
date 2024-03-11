@@ -53,9 +53,9 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       return;
     }
     // total
-    let total;
+    let total: number = 0;
     if (progressId) {
-      total = await this.model.count();
+      total = (await this.model.count()).toNumber();
     }
     // progress
     const progress = { progressId, total, progress: 0 };

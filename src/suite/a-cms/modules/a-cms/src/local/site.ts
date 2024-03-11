@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase, BigNumber } from '@cabloy/core';
 
 import fse from 'fs-extra';
 
@@ -112,7 +112,12 @@ export class LocalSite extends BeanBase<ScopeModule> {
   }
 
   async _getStatsLanguange({ atomClass, language }: any) {
-    const stats: any = {};
+    const stats = {} as {
+      atoms: BigNumber;
+      comments: BigNumber;
+      categories?: BigNumber;
+      tags?: BigNumber;
+    };
 
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
 

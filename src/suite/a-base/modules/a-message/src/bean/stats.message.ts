@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase, BigNumber } from '@cabloy/core';
 
 @Bean({ scene: 'stats' })
 export class StatsMessage extends BeanBase {
@@ -37,15 +37,15 @@ export class StatsMessage extends BeanBase {
       });
       // count
       const stat = {
-        red: 0,
-        gray: 0,
+        red: BigNumber(0),
+        gray: BigNumber(0),
       };
       for (const item of items) {
         // only level 2
         if (item.name.split('.').length !== 2) continue;
         const value = JSON.parse(item.value);
-        if (value && value.red !== undefined) stat.red += value.red;
-        if (value && value.gray !== undefined) stat.gray += value.gray;
+        if (value && value.red !== undefined) stat.red = stat.red.plus(value.red);
+        if (value && value.gray !== undefined) stat.gray = stat.gray.plus(value.gray);
       }
       // ok
       return stat;
