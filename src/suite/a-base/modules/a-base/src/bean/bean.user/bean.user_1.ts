@@ -113,6 +113,7 @@ export class BeanUser1 extends BeanUser0 {
   async changeUserName({ user }: any) {
     // check allowChangeUserName
     const item = await this.get({ id: user.id });
+    if (!item) return;
     if (item.allowChangeUserName === 0) this.ctx.throw(403);
     // change
     user = {
@@ -199,6 +200,7 @@ export class BeanUser1 extends BeanUser0 {
 
   async disable({ userAtomId, userId, disabled }: any) {
     const item = await this._forceUser({ userAtomId, userId });
+    if (!item) return;
     const key = { atomId: item.atomId, itemId: item.id };
     if (disabled) {
       await this.ctx.bean.atom.disable({ key, user: { id: 0 } });
@@ -216,7 +218,7 @@ export class BeanUser1 extends BeanUser0 {
   async _forceUserAtomId({ userAtomId, userId }: any) {
     if (!userAtomId) {
       const item = await this.get({ id: userId });
-      userAtomId = item.atomId;
+      userAtomId = item!.atomId;
     }
     return userAtomId;
   }
@@ -224,7 +226,7 @@ export class BeanUser1 extends BeanUser0 {
   async _forceUserId({ userAtomId, userId }: any) {
     if (!userId) {
       const item = await this.get({ atomId: userAtomId });
-      userId = item.id;
+      userId = item!.id;
     }
     return userId;
   }
