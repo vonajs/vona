@@ -48,9 +48,9 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
     const userId = user.id;
     const item = await this.modelUserOnline.get({ userId });
     if (!item) return false;
-    if (item.expireTime <= Date.now()) return false;
+    if (item.expireTime.valueOf() <= Date.now()) return false;
     // Renewal
-    if (item.expireTime - Date.now() < this.configUserOnlineExpired / 2) {
+    if (item.expireTime.valueOf() - Date.now() < this.configUserOnlineExpired / 2) {
       await this.modelUserOnline.update({
         id: item.id,
         expireTime: this._combineExpireTime(),
@@ -71,6 +71,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
   async _offline({ user }: any) {
     const userId = user.id;
     const item = await this.modelUserOnline.get({ userId });
+    if (!item) return;
     await this.modelUserOnline.update({
       id: item.id,
       expireTime: new Date(),

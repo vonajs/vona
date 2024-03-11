@@ -1,12 +1,12 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 const __SeparatorCode = '/';
 
 @Bean()
-export class BeanDict extends BeanModuleScopeBase {
+export class BeanDict extends BeanModuleScopeBase<ScopeModule> {
   get cacheMem() {
-    return this.ctx.cache.mem.module(__ThisModule__);
+    return this.scope._bean.cacheMem;
   }
 
   get atomClass() {
