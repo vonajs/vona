@@ -1,12 +1,14 @@
+import { BigNumber } from '@cabloy/core';
 import { BeanFlowLoad } from './bean.flow_load.js';
 
 export class BeanFlowQuery extends BeanFlowLoad {
-  async count({ options, user }: any) {
+  async count({ options, user }: any): Promise<BigNumber> {
     return await this.select({ options, user, count: 1 });
   }
 
   async select({ options, user, pageForce = true, count = 0 }: any) {
     const items = await this._list({ options, user, pageForce, count });
+    if (count === 1) return items;
     for (const item of items) {
       if (item.flowNodeNameCurrent) {
         item.flowNodeNameCurrentLocale = this.ctx.text(item.flowNodeNameCurrent);

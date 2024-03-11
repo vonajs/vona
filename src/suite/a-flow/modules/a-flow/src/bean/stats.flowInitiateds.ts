@@ -1,13 +1,15 @@
 import { Bean, BeanBase } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'stats' })
-export class StatsFlowInitiateds extends BeanBase {
+export class StatsFlowInitiateds extends BeanBase<ScopeModule> {
   async execute(context) {
     const { user } = context;
-    const modelFlow = this.ctx.model.module(__ThisModule__).flow;
+    const modelFlow = this.scope.model.flow;
     const count = await modelFlow.count({
-      flowUserId: user.id,
+      where: {
+        flowUserId: user.id,
+      },
     });
     return count;
   }
