@@ -1,3 +1,4 @@
+import { EntityUserOnline } from '../index.js';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
@@ -117,8 +118,8 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
         id: atomKey.itemId,
         loginCount: 0,
         onlineCount: 0,
-        expireTime: 0,
-      };
+        expireTime: new Date(0),
+      } as EntityUserOnline;
     }
     // isLogin
     if (isLogin) {
@@ -131,7 +132,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
       };
     } else {
       // check expireTime
-      if (item.expireTime > Date.now()) return null;
+      if (item.expireTime.valueOf() > Date.now()) return null;
       data = {
         onlineCount: item.onlineCount + 1,
         ...data,
