@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import path from 'path';
@@ -15,7 +15,7 @@ import Mime from 'mime';
 const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 
 @Bean()
-export class BeanFile extends BeanBase {
+export class BeanFile extends BeanBase<ScopeModule> {
   get modelFile() {
     return this.scope.model.file;
   }
@@ -499,7 +499,7 @@ export class BeanFile extends BeanBase {
     );
     if (file) return file;
     // no matter what atomId is: maybe ===0 or !==0
-    return await this.bean.model.file.get({ downloadId });
+    return await this.modelFile.get({ downloadId });
   }
 
   async _checkRightWrite({ atomId, user }: any) {

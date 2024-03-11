@@ -1,7 +1,7 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule } from '../../resource/this.js';
 import { BeanModuleScopeBase } from '@cabloy/core';
 
-export class BeanDetail0 extends BeanModuleScopeBase {
+export class BeanDetail0 extends BeanModuleScopeBase<ScopeModule> {
   get modelDetailBase() {
     return this.scope.model.detailBase;
   }

@@ -1,11 +1,11 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 import util from 'util';
 import passwordFn from 'password-hash-and-salt'; // should compile
 
 @Local()
-export class LocalSimple extends BeanBase {
+export class LocalSimple extends BeanBase<ScopeModule> {
   get modelAuthSimple() {
     return this.scope.model.authSimple;
   }

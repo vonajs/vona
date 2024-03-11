@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 
 @Bean()
-export class BeanStatus extends BeanModuleScopeBase {
+export class BeanStatus extends BeanModuleScopeBase<ScopeModule> {
   get modelStatus() {
     return this.scope.model.status;
   }

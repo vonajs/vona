@@ -17,4 +17,5 @@ export interface EntityFileView extends EntityItemBase {
   flag: string;
   userName: string;
   avatar: string;
+  downloadUrl: string; // virtual
 }

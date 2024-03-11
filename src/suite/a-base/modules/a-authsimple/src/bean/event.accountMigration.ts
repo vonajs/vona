@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'event' })
-export class EventAccountMigration extends BeanBase {
+export class EventAccountMigration extends BeanBase<ScopeModule> {
   async execute(context, next) {
     const data = context.data;
     const modelAuthSimple = this.scope.model.authSimple;
