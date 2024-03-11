@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase, BigNumber } from '@cabloy/core';
 
 @Bean({ scene: 'stats' })
 export class StatsLabels extends BeanBase {
@@ -7,8 +7,8 @@ export class StatsLabels extends BeanBase {
     const { user } = context;
     // root stats
     const statsRoot = {
-      red: 0,
-      orange: 0,
+      red: BigNumber(0),
+      orange: BigNumber(0),
     };
     // userLabels
     const userLabels = await this.ctx.bean.atom.getLabels({ user });
@@ -30,9 +30,9 @@ export class StatsLabels extends BeanBase {
       });
       // root
       if (userLabel.color === 'red') {
-        statsRoot.red += count;
+        statsRoot.red = statsRoot.red.plus(count);
       } else if (userLabel.color === 'orange') {
-        statsRoot.orange += count;
+        statsRoot.orange = statsRoot.orange.plus(count);
       }
     }
     // ok

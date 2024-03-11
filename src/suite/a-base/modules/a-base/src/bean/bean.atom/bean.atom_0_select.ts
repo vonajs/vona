@@ -1,10 +1,11 @@
+import { BigNumber } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
-  async count({ atomClass, options, user }: any) {
+  async count({ atomClass, options, user }: any): Promise<BigNumber> {
     return await this.select({ atomClass, options, user, count: 1 });
   }
 
