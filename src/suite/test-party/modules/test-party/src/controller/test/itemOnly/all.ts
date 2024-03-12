@@ -31,7 +31,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     // const userRoot = await this._getUser({userIds, userName:'root'});
 
     // delete: force clear old data
-    const modelHistory = this.bean.model.module('a-useronline').userOnlineHistory;
+    const modelHistory = this.getScope('a-useronline').model.userOnlineHistory;
     await modelHistory.delete({ isLogin: 2 });
 
     // user->atom
@@ -164,8 +164,8 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
           where: {
             isLogin: 2,
           },
-          orders: null,
-          page: null,
+          orders: undefined,
+          page: undefined,
         },
         user,
       });
@@ -175,7 +175,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
   }
 
   async _getUser({ userIds, userName }: any) {
-    if (!userName) return null;
+    if (!userName) return;
     const userId = userIds && userIds[userName];
     if (userId) return { id: userId };
     return await this.ctx.bean.user.get({ userName });
