@@ -41,7 +41,7 @@ export interface AtomClassMeta {
     inline: boolean;
     atomClassMain?: { module: string; name: string };
   };
-  details?: object;
+  details?: Array<AtomClass>;
   fields?: {
     mappings?: {
       atomIdMain: string;
