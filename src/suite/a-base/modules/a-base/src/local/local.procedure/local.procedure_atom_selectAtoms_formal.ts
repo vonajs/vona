@@ -50,7 +50,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // for safe
     // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
-    const _where = Object.assign({}, where);
+    const _where: any = Object.assign({}, where);
     const _orders = orders ? orders.concat() : [];
 
     // vars
@@ -204,12 +204,12 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     if (!atomClass && !star && !label) {
       _where['a.atomClassId'] = await this.self._prepare_atomClassIdsInner();
     }
-    if (atomClass && !atomClassBase.itemOnly) {
+    if (atomClass && atomClassBase && !atomClassBase.itemOnly) {
       _where['a.atomClassId'] = atomClass.id;
     }
 
     // atomIdMain
-    if (atomClass && atomClassBase.detail) {
+    if (atomClassBase && atomClassBase.detail) {
       if (atomIdMain) {
         const atomIdMainField = atomClassBase.fields?.mappings?.atomIdMain;
         _where[`f.${atomIdMainField}`] = atomIdMain;
