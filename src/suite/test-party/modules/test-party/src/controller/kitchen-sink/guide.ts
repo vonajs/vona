@@ -9,12 +9,12 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
   }
 
   async echo2() {
-    const message = this.ctx.config.message;
+    const message = this.scope.config.message;
     this.ctx.success(message);
   }
 
   async echo3() {
-    const message = this.ctx.text('Hello World');
+    const message = this.scope.locale['Hello World']();
     this.ctx.success(message);
   }
 
@@ -55,14 +55,14 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // testParty: insert/udpate/delete/get
 
     // insert
-    const res = await this.bean.model.party.insert({ personCount: 3 });
+    const res = await this.scope.model.party.insert({ personCount: 3 });
     const id = res[0];
     // update
-    await this.bean.model.party.update({ id, personCount: 6 });
+    await this.scope.model.party.update({ id, personCount: 6 });
     // get
-    const item = await this.bean.model.party.get({ id });
+    const item = await this.scope.model.party.get({ id });
     // delete
-    await this.bean.model.party.delete({ id });
+    await this.scope.model.party.delete({ id });
     // ok
     this.ctx.success(item);
   }
@@ -71,10 +71,10 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // transaction
 
     // insert
-    const res = await this.bean.model.party.insert({ personCount: 3 });
+    const res = await this.scope.model.party.insert({ personCount: 3 });
     const id = res[0];
     // will throw error
-    await this.bean.model.party.update({ id, personCountA: 6 });
+    await this.scope.model.party.update({ id, personCountA: 6 });
     // never here
     this.ctx.success();
   }
