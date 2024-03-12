@@ -1,3 +1,4 @@
+import { TableIdentity } from '@cabloy/core';
 import { AtomClassParams } from './atomClass.js';
 
 export interface SelectOptionsPage {
@@ -28,6 +29,9 @@ export interface SelectOptions {
 export interface SelectOptionsPro extends SelectOptions {
   tableName: string;
   schema: object;
+  iid: number;
+  userIdWho: number;
+  atomIdMain?: TableIdentity;
 }
 
 export interface SelectParams {
