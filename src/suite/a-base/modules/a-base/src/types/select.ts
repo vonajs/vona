@@ -24,6 +24,11 @@ export interface SelectOptions {
   mode: string;
 }
 
+export interface SelectOptionsPro extends SelectOptions {
+  tableName: string;
+  schema: object;
+}
+
 export interface SelectParams {
   atomClass?: AtomClassParams;
   options?: SelectOptions;

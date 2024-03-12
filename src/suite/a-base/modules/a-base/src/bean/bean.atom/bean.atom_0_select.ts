@@ -2,7 +2,8 @@ import { BigNumber } from 'cabloy-module-api-a-database';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
-import { AtomClass, AtomClassBase, CountParams, SelectParams } from '../../types.js';
+import { AtomClass, AtomClassBase, CountParams, SelectOptionsPro, SelectParams } from '../../types.js';
+import { EntityAtomClass } from '../../index.js';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
@@ -46,7 +47,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _list({ atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
+  async _list({ atomClass: _atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
     const {
       where,
       orders,
@@ -70,22 +71,25 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // stage
     const stage = typeof _stage === 'number' ? _stage : this.scope.constant.atom.stage[_stage];
     // tableName
+    let atomClass: EntityAtomClass | undefined;
     let atomClassBase;
     let tableName = '';
-    if (atomClass) {
+    let schema;
+    if (_atomClass) {
+      atomClass = _atomClass as EntityAtomClass;
       atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
       if (!atomClassBase) throw new Error(`atomClass not found: ${atomClass.module}:${atomClass.atomClassName}`);
       tableName = await this.getTableName({
         atomClass,
         atomClassBase,
         options,
-        mode: options.mode,
+        mode: options!.mode,
         user,
         action: 'select',
         count,
       });
       // hold for subsequent usage
-      options.tableName = tableName;
+      // options!.tableName = tableName;
       // need not, moved to local.procedure
       // // 'where' should append atomClassId, such as article/post using the same table
       // if (!atomClassBase.itemOnly) {
@@ -98,19 +102,20 @@ export class BeanAtom0Select extends BeanAtom0Read {
         options,
         user,
       });
-      options.schema = atomSchema.schema;
+      schema = atomSchema.schema;
     }
     // cms
     const cms = atomClassBase && atomClassBase.cms;
     // forAtomUser
     const forAtomUser = this.self._checkForAtomUser(atomClass);
     // options: maybe has another custom options
-    options = Object.assign({}, options, {
+    const options2: SelectOptionsPro = Object.assign({}, options, {
       iid: this.ctx.instance.id,
       userIdWho: user ? user.id : 0,
       atomClass,
       atomClassBase,
       tableName,
+      schema,
       where,
       orders,
       page,
@@ -135,9 +140,9 @@ export class BeanAtom0Select extends BeanAtom0Read {
     let sql;
     if (atomClass) {
       const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
-      sql = await beanInstance.selectQuery({ atomClass, options, user });
+      sql = await beanInstance.selectQuery({ atomClass, options: options2, user });
     } else {
-      sql = await this._selectQuery({ atomClass, options, user });
+      sql = await this._selectQuery({ atomClass, options: options2, user });
     }
     const debug = this.ctx.app.bean.debug.get('atom:sql');
     debug('===== selectAtoms =====\n%s', sql);
