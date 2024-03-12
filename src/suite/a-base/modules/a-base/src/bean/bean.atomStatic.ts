@@ -83,7 +83,7 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
           },
         },
       },
-      user: null,
+      user: undefined,
       pageForce: false,
     });
     return atoms;

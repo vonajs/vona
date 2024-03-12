@@ -52,7 +52,7 @@ export class BeanFormAction extends BeanBase {
   // atomClass: maybe main/detail
   async _prepareAtomSchemaMain({ mode, formActionMain, atomClass, user, throwError }: any) {
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
-    const atomClassMain = atomClassBase.detail.atomClassMain;
+    const atomClassMain = atomClassBase?.detail?.atomClassMain;
     // fieldsRight
     const fieldsRight = await this._prepareAtomSchema_getFieldsRight({
       mode,
