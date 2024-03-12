@@ -27,6 +27,7 @@ export interface AtomClassMeta {
   comment: boolean;
   attachment: boolean;
   cms: boolean;
+  resource: boolean;
   enableRight?: {
     mine: boolean;
     role?: {

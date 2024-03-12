@@ -84,7 +84,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       resource: 1,
       resourceLocale: locale,
     };
-    return await this.ctx.bean.atom.select({
+    return await this.ctx.bean.atom._select({
       atomClass,
       options,
       user,

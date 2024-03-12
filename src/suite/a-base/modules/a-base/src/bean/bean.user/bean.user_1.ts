@@ -176,7 +176,7 @@ export class BeanUser1 extends BeanUser0 {
   async _list({ options, user, pageForce = true, count = 0 }: any) {
     if (!options) options = {};
     // select
-    const items = await this.ctx.bean.atom.select({ atomClass: __atomClassUser, options, user, pageForce, count });
+    const items = await this.ctx.bean.atom._select({ atomClass: __atomClassUser, options, user, pageForce, count });
     // count
     if (count) return items;
     // removePrivacy
