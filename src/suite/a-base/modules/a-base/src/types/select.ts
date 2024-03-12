@@ -25,6 +25,7 @@ export interface SelectOptions {
   mode?: string;
   containerMode?: 'view' | 'edit';
   formAction?: string;
+  atomIdMain?: TableIdentity;
 }
 
 export interface SelectOptionsPro extends SelectOptions {
@@ -32,7 +33,6 @@ export interface SelectOptionsPro extends SelectOptions {
   schema: object;
   iid: number;
   userIdWho: number;
-  atomIdMain?: TableIdentity;
   atomClass?: AtomClassParams;
   atomClassBase?: AtomClassBase;
   count: number;
