@@ -234,8 +234,8 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
           where: {
             atomName: 'test:all',
           },
-          orders: null,
-          page: null,
+          orders: undefined,
+          page: undefined,
           stage,
         },
         user,
@@ -246,7 +246,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
   }
 
   async _getUser({ userIds, userName }: any) {
-    if (!userName) return null;
+    if (!userName) return;
     const userId = userIds && userIds[userName];
     if (userId) return { id: userId };
     return await this.ctx.bean.user.get({ userName });
