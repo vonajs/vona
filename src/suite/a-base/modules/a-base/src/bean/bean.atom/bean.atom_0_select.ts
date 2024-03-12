@@ -47,15 +47,15 @@ export class BeanAtom0Select extends BeanAtom0Read {
   }
 
   async _list({ atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
-    let {
+    const {
       where,
       orders,
-      page,
+      page: _page,
       star = 0,
       label = 0,
       comment = 0,
       file = 0,
-      stage = 'formal',
+      stage: _stage = 'formal',
       language,
       category = 0,
       tag = 0,
@@ -64,11 +64,11 @@ export class BeanAtom0Select extends BeanAtom0Read {
       resourceLocale,
       role = 0,
       mode,
-    } = options;
+    } = options!;
     // page
-    page = this.ctx.bean.util.page(page, pageForce);
+    const page = this.ctx.bean.util.page(_page, pageForce);
     // stage
-    stage = typeof stage === 'number' ? stage : this.ctx.constant.module(__ThisModule__).atom.stage[stage];
+    const stage = typeof _stage === 'number' ? _stage : this.scope.constant.atom.stage[_stage];
     // tableName
     let atomClassBase;
     let tableName = '';

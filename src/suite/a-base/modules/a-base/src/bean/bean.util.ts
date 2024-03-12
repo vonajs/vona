@@ -8,6 +8,7 @@ import moment from 'moment';
 import * as ModuleInfo from '@cabloy/module-info';
 import eggBornUtils from 'egg-born-utils';
 import utils from '../common/utils.js';
+import { SelectOptionsPage } from '../types.js';
 
 @Bean()
 export class BeanUtil extends BeanBase<ScopeModule> {
@@ -23,15 +24,18 @@ export class BeanUtil extends BeanBase<ScopeModule> {
     return uuid.v4().replace(/-/g, '');
   }
 
-  page(_page, force = true) {
+  page(page?: SelectOptionsPage, force = true): SelectOptionsPage {
     const pageSize = this.configModule.pageSize;
-    if (!_page) {
-      _page = force ? { index: 0 } : { index: 0, size: 0 };
+    let page2: SelectOptionsPage;
+    if (!page) {
+      page2 = force ? { index: 0 } : { index: 0, size: 0 };
+    } else {
+      page2 = page;
     }
-    if (_page.size === undefined || (force && (_page.size === 0 || _page.size === -1 || _page.size > pageSize))) {
-      _page.size = pageSize;
+    if (page2.size === undefined || (force && (page2.size === 0 || page2.size === -1 || page2.size > pageSize))) {
+      page2.size = pageSize;
     }
-    return _page;
+    return page2;
   }
 
   user(_user) {
