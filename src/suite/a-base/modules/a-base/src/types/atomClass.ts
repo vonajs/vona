@@ -51,6 +51,9 @@ export interface AtomClassMeta {
       atomItem: string;
     };
   };
+  flow?: {
+    stage: 'draft' | 'formal';
+  };
 }
 
 export interface AtomClassBase extends AtomClassMeta {

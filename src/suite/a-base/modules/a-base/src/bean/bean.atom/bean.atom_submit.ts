@@ -32,6 +32,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       // if simple, just return formal, so as for compatible with not simple
       return { formal: { key } };
     }
+    if (!atomClassBase) this.ctx.throw(403);
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     return await beanInstance.submit({ atomClass, key, options, user });
