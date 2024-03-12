@@ -49,3 +49,5 @@ export interface AtomClassBase extends AtomClassMeta {
   titleLocale: string;
   beanFullName: string;
 }
+
+export type AtomClassBaseRecord = Record<string, AtomClassBase>;

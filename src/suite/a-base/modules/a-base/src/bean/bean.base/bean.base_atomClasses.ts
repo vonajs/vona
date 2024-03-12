@@ -1,11 +1,11 @@
 import { __ThisModule__ } from '../../resource/this.js';
-import { AtomClassMeta } from '../../types.js';
+import { AtomClassBase, AtomClassBaseRecord, AtomClassMeta } from '../../types.js';
 import { BeanBaseActions } from './bean.base_actions.js';
 
-const _atomClasses: any = {};
+const _atomClasses: Record<string, Record<string, AtomClassBaseRecord>> = {};
 
 export class BeanBaseAtomClasses extends BeanBaseActions {
-  atomClasses() {
+  atomClasses(): Record<string, AtomClassBaseRecord> {
     if (!_atomClasses[this.ctx.locale]) {
       // prepare
       const atomClassesAll = this._prepareAtomClasses();
@@ -15,13 +15,13 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     return _atomClasses[this.ctx.locale];
   }
 
-  atomClass({ module, atomClassName }: any) {
+  atomClass({ module, atomClassName }: any): AtomClassBase {
     const _atomClasses = this.atomClasses();
     return _atomClasses[module] && _atomClasses[module][atomClassName];
   }
 
-  _prepareAtomClasses() {
-    const atomClasses: any = {};
+  _prepareAtomClasses(): Record<string, AtomClassBaseRecord> {
+    const atomClasses: Record<string, AtomClassBaseRecord> = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
       if (module.meta && module.meta.base && module.meta.base.atoms) {
@@ -51,23 +51,23 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     }
   }
 
-  _prepareAtomClassesModule_atomClassMeta(_atomClass: AtomClassMeta): AtomClassMeta {
+  _prepareAtomClassesModule_atomClassMeta(_atomClass: AtomClassMeta): Partial<AtomClassMeta> {
     if (_atomClass.itemOnly) {
       if (_atomClass.detail) {
-        return this.ctx.constant.module(__ThisModule__).atomClass.metaDetail;
+        return this.scope.constant.atomClass.metaDetail;
       }
-      return this.ctx.constant.module(__ThisModule__).atomClass.metaItemOnly;
+      return this.scope.constant.atomClass.metaItemOnly;
     }
-    return this.ctx.constant.module(__ThisModule__).atomClass.meta;
+    return this.scope.constant.atomClass.meta;
   }
 
-  _prepareAtomClassesModule(moduleName, _atoms) {
-    const atomClasses: any = {};
+  _prepareAtomClassesModule(moduleName, _atoms): Record<string, AtomClassBase> {
+    const atomClasses: Record<string, AtomClassBase> = {};
     for (const key in _atoms) {
       const _atomClass: AtomClassMeta = _atoms[key].info;
-      const _atomClassMeta = this._prepareAtomClassesModule_atomClassMeta(_atomClass);
+      const _atomClassMeta: Partial<AtomClassMeta> = this._prepareAtomClassesModule_atomClassMeta(_atomClass);
       // info
-      const atomClass = this.ctx.bean.util.extend({ name: key }, _atomClassMeta, _atomClass);
+      const atomClass: AtomClassBase = this.ctx.bean.util.extend({ name: key }, _atomClassMeta, _atomClass);
       // model
       if (atomClass.tableName && !atomClass.model) {
         atomClass.model = key;
