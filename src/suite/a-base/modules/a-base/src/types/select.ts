@@ -1,5 +1,5 @@
 import { TableIdentity } from '@cabloy/core';
-import { AtomClassParams } from './atomClass.js';
+import { AtomClassBase, AtomClassParams } from './atomClass.js';
 
 export interface SelectOptionsPage {
   index: number;
@@ -24,6 +24,7 @@ export interface SelectOptions {
   role: number;
   mode: string;
   containerMode?: 'view' | 'edit';
+  formAction?: string;
 }
 
 export interface SelectOptionsPro extends SelectOptions {
@@ -32,6 +33,13 @@ export interface SelectOptionsPro extends SelectOptions {
   iid: number;
   userIdWho: number;
   atomIdMain?: TableIdentity;
+  atomClass?: AtomClassParams;
+  atomClassBase?: AtomClassBase;
+}
+
+/** for inner use */
+export interface SelectOptionsProSafe extends Omit<SelectOptionsPro, 'stage'> {
+  stage: number;
 }
 
 export interface SelectParams {

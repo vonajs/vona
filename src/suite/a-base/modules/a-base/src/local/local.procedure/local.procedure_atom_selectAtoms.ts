@@ -1,8 +1,8 @@
-import { SelectOptionsPro } from '../../types.js';
+import { SelectOptionsPro, SelectOptionsProSafe } from '../../types.js';
 import { LocalProcedureBase } from './local.procedure_base.js';
 
 export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
-  async selectAtoms({ options }: { options: SelectOptionsPro }) {
+  async selectAtoms({ options: _options }: { options: SelectOptionsPro }) {
     let {
       iid,
       userIdWho,
@@ -17,7 +17,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
       comment,
       file,
       // count,
-      stage,
+      stage: _stage,
       // language,
       category,
       tag,
@@ -29,14 +29,14 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
       // forAtomUser,
       role,
       atomIdMain,
-    } = options;
+    } = _options;
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
     star = parseInt(star);
     label = parseInt(label);
     comment = parseInt(comment);
     file = parseInt(file);
-    stage = parseInt(stage);
+    const stage = parseInt(_stage);
     category = parseInt(category);
     tag = parseInt(tag);
     mine = parseInt(mine);
@@ -44,8 +44,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
     role = parseInt(role);
     atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
 
-    options = {
-      ...options,
+    const options: SelectOptionsProSafe = Object.assign({}, _options, {
       iid,
       userIdWho,
       star,
@@ -59,7 +58,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
       resource,
       role,
       atomIdMain,
-    };
+    });
 
     // formAction
     let action;
