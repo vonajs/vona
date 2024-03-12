@@ -95,7 +95,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       // }
       // schema
       const atomSchema = await this.self._prepareAtomSchema({
-        mode: options.containerMode || 'view',
+        mode: options!.containerMode || 'view',
         atomClass,
         options,
         user,

@@ -22,6 +22,7 @@ export interface SelectOptions {
   resourceLocale: string;
   role: number;
   mode: string;
+  containerMode?: 'view' | 'edit';
 }
 
 export interface SelectOptionsPro extends SelectOptions {
