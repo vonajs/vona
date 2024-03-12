@@ -1,9 +1,13 @@
 export interface AtomClass {
-  module: string;
-  atomClassName: string;
+  module?: string;
+  atomClassName?: string;
 }
 
-export type AtomClassParams = { id: number } | AtomClass;
+export type AtomClassParams = {
+  id?: number;
+  module?: string;
+  atomClassName?: string;
+};
 
 export interface AtomClassMeta {
   //

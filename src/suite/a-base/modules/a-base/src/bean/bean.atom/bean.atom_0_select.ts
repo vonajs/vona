@@ -1,9 +1,7 @@
 import { BigNumber } from 'cabloy-module-api-a-database';
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
-import { AtomClass, AtomClassBase, CountParams, SelectOptionsPro, SelectParams } from '../../types.js';
-import { EntityAtomClass } from '../../index.js';
+import { AtomClass, AtomClassBase, AtomClassParams, CountParams, SelectOptionsPro, SelectParams } from '../../types.js';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
@@ -71,12 +69,12 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // stage
     const stage = typeof _stage === 'number' ? _stage : this.scope.constant.atom.stage[_stage];
     // tableName
-    let atomClass: EntityAtomClass | undefined;
+    let atomClass: AtomClassParams | undefined;
     let atomClassBase;
     let tableName = '';
     let schema;
     if (_atomClass) {
-      atomClass = _atomClass as EntityAtomClass;
+      atomClass = _atomClass;
       atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
       if (!atomClassBase) throw new Error(`atomClass not found: ${atomClass.module}:${atomClass.atomClassName}`);
       tableName = await this.getTableName({

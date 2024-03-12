@@ -1,6 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanModuleScopeBase, TableIdentityParams } from '@cabloy/core';
-import { AtomClass, AtomClassBase } from '../types.js';
+import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { AtomClass, AtomClassBase, AtomClassParams } from '../types.js';
 import { EntityAtomClass } from '../index.js';
 
 @Bean()
@@ -16,7 +16,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     });
   }
 
-  async get(params: TableIdentityParams | AtomClass): Promise<EntityAtomClass> {
+  async get(params: AtomClassParams): Promise<EntityAtomClass> {
     return await this.__getRaw(params);
   }
 
@@ -29,7 +29,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     return atomClasses.map(item => item.id);
   }
 
-  async __getRaw(params: TableIdentityParams | AtomClass): Promise<EntityAtomClass> {
+  async __getRaw(params: AtomClassParams): Promise<EntityAtomClass> {
     if ('id' in params) {
       const res = await this.model.get(params);
       if (!res) throw new Error(`atomClass not found: ${params.id}`);
