@@ -1,4 +1,5 @@
 import { BeanBase, Local } from '@cabloy/core';
+import { AtomClassParams } from '../types.js';
 
 @Local()
 export class LocalAtom extends BeanBase {
@@ -22,8 +23,9 @@ export class LocalAtom extends BeanBase {
     return await this.ctx.bean.atom.create({ atomClass, roleIdOwner, item, options, user });
   }
 
-  async atomClass({ key, user: _user }: any) {
+  async atomClass({ key, user: _user }: any): Promise<AtomClassParams | undefined> {
     const atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
+    if (!atomClass) return;
     return {
       id: atomClass.id,
       module: atomClass.module,

@@ -18,7 +18,7 @@ export class StatsLabels extends BeanBase {
       // sub
       const count = await this.ctx.bean.atom.count({
         options: {
-          label: labelId,
+          label: parseInt(labelId),
         },
         user,
       });
