@@ -38,7 +38,7 @@ export class BeanAtomUtils extends BeanAtom0 {
       throwWhenEmpty,
     });
     if (!res) {
-      return { key: keyOuter, atom: null, atomClass: null, atomClassBase: null };
+      return { key: keyOuter, atom: undefined, atomClass: undefined, atomClassBase: undefined };
     }
     const { atomClass, atomClassBase } = res;
     // prepare atom
@@ -52,7 +52,7 @@ export class BeanAtomUtils extends BeanAtom0 {
       } else {
         // for safety: must use atomIdMain from main atom
         if (!atom) this.ctx.throw(403);
-        options.atomIdMain = atom[atomIdMainField];
+        options.atomIdMain = atom[atomIdMainField!];
       }
     }
     // ok

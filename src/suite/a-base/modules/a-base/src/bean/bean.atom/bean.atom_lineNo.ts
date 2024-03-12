@@ -22,14 +22,21 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
+    if (!atomClassBase) this.ctx.throw(403);
     // model
     const modelItem = this.getScope(atomClass.module).model[atomClassBase.model];
     // table
     const tableName = atomClassBase.tableName;
     // field: lineNo
     const fieldNameLineNo = atomClassBase.fields?.mappings?.lineNo;
+    if (!fieldNameLineNo) {
+      throw new Error(`fields.mappings.lineNo not specified: ${atomClass.module}:${atomClass.atomClassName}`);
+    }
     // field: atomIdMain
     const fieldNameAtomIdMain = atomClassBase.fields?.mappings?.atomIdMain;
+    if (!fieldNameAtomIdMain) {
+      throw new Error(`fields.mappings.atomIdMain not specified: ${atomClass.module}:${atomClass.atomClassName}`);
+    }
     // from
     let lineNoFrom = atomFrom[fieldNameLineNo];
     if (lineNoFrom === 0) {
