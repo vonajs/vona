@@ -43,3 +43,9 @@ export interface CountParams {
   user?: { id: number };
   pageForce?: boolean;
 }
+
+export interface AtomSelectQueryParams {
+  atomClass: AtomClassParams;
+  options: SelectOptionsPro;
+  user?: { id: number };
+}

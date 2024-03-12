@@ -1,7 +1,15 @@
 import { BigNumber } from 'cabloy-module-api-a-database';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
-import { AtomClass, AtomClassBase, AtomClassParams, CountParams, SelectOptionsPro, SelectParams } from '../../types.js';
+import {
+  AtomClass,
+  AtomClassBase,
+  AtomClassParams,
+  CountParams,
+  SelectOptions,
+  SelectOptionsPro,
+  SelectParams,
+} from '../../types.js';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
@@ -15,7 +23,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
   }
 
   async _select({ atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
-    if (!options) options = {};
+    if (!options) options = {} as SelectOptions;
     if (!options.where) options.where = {};
     if (!options.orders) options.orders = [];
     // atomClass
@@ -140,7 +148,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
       sql = await beanInstance.selectQuery({ atomClass, options: options2, user });
     } else {
-      sql = await this._selectQuery({ atomClass, options: options2, user });
+      sql = await this._selectQuery({ options: options2 });
     }
     const debug = this.ctx.app.bean.debug.get('atom:sql');
     debug('===== selectAtoms =====\n%s', sql);
@@ -159,7 +167,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _selectQuery({ /* atomClass, */ options, user: _user }: any) {
+  async _selectQuery({ options }: { options: SelectOptionsPro }) {
     return await this.sqlProcedure.selectAtoms({ options });
   }
 }
