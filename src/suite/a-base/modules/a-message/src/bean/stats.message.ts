@@ -1,9 +1,9 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 import { BigNumber } from 'cabloy-module-api-a-database';
 
 @Bean({ scene: 'stats' })
-export class StatsMessage extends BeanBase {
+export class StatsMessage extends BeanBase<ScopeModule> {
   async execute(context) {
     const { keys, user } = context;
     if (keys.length === 2) {
@@ -25,7 +25,7 @@ export class StatsMessage extends BeanBase {
       return { [color]: count };
     } else if (keys.length === 1) {
       // message
-      const modelStats = this.bean.model.module('a-stats').stats;
+      const modelStats = this.getScope('a-stats').model.stats;
       const items = await modelStats.select({
         where: {
           module: __ThisModule__,

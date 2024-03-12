@@ -375,7 +375,7 @@ export class LocalBuild extends BeanBase<ScopeModule> {
       options: {
         language: site.language ? site.language.current : null,
         orders: [['a.updatedAt', 'desc']],
-        page: null,
+        page: undefined,
         mode: 'search',
         stage: 'formal',
       },

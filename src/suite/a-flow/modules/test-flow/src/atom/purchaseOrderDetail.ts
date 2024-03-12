@@ -1,9 +1,9 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Atom } from '@cabloy/core';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 
 @Atom()
-export class AtomPurchaseOrderDetail extends BeanAtomBase {
+export class AtomPurchaseOrderDetail extends BeanAtomBase<ScopeModule> {
   get model() {
     return this.scope.model.purchaseOrderDetail;
   }

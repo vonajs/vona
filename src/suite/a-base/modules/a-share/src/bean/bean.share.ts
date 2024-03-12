@@ -1,8 +1,9 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { EntityShare } from '../index.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean()
-export class BeanShare extends BeanBase {
+export class BeanShare extends BeanBase<ScopeModule> {
   get modelShare() {
     return this.scope.model.share;
   }
@@ -32,9 +33,9 @@ export class BeanShare extends BeanBase {
         userId,
         host,
         url,
-      };
+      } as EntityShare;
       const res = await this.modelShare.insert(item);
-      item.id = res[0];
+      item.id = parseInt(res[0]);
     }
     // link
     const link = this._combine_shareLink(item.uuid);
