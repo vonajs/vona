@@ -6,11 +6,15 @@ import { BeanAtom0Read } from './bean.atom_0_read.js';
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
   async count({ atomClass, options, user }: any): Promise<BigNumber> {
-    return await this.select({ atomClass, options, user, count: 1 });
+    return await this._select({ atomClass, options, user, count: 1 });
   }
 
   // select
-  async select({ atomClass, options, user, pageForce = true, count = 0 }: any) {
+  async select({ atomClass, options, user, pageForce = true }: any) {
+    return await this._select({ atomClass, options, user, pageForce, count: 0 });
+  }
+
+  async _select({ atomClass, options, user, pageForce = true, count = 0 }: any) {
     if (!options) options = {};
     if (!options.where) options.where = {};
     if (!options.orders) options.orders = [];
