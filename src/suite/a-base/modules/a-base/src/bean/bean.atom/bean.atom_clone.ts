@@ -22,6 +22,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       roleIdOwner,
       user,
     });
+    if (!atomClassBase) this.ctx.throw(403);
     // ok
     // get atom
     const atom = await this.self.read({ key: keyDraft, atomClass, options, user });
@@ -62,7 +63,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       // patch atomIdMain of options
       if (atomClassBase.detail) {
         const atomIdMainField = atomClassBase.fields?.mappings?.atomIdMain;
-        options.atomIdMain = srcItem[atomIdMainField];
+        options.atomIdMain = srcItem[atomIdMainField!];
       }
       if (target === 'clone') {
         // preferredRole
