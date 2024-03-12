@@ -35,6 +35,9 @@ export interface SelectOptionsPro extends SelectOptions {
   atomIdMain?: TableIdentity;
   atomClass?: AtomClassParams;
   atomClassBase?: AtomClassBase;
+  count: number;
+  cms: boolean;
+  forAtomUser: boolean;
 }
 
 /** for inner use */

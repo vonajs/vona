@@ -1,7 +1,8 @@
+import { SelectOptionsProSafe } from '../../types.js';
 import { LocalProcedureAtomSelectAtomsDraft } from './local.procedure_atom_selectAtoms_draft.js';
 
 export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelectAtomsDraft {
-  async _selectAtoms_formal({ action, options }: any) {
+  async _selectAtoms_formal({ action, options }: { action: number; options: SelectOptionsProSafe }) {
     const {
       iid,
       userIdWho,
