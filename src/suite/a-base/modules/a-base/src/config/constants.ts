@@ -311,7 +311,7 @@ const atomClassMetaDetail = {
   comment: false,
   attachment: false,
   cms: false,
-  enableRight: false,
+  enableRight: undefined,
   fields: {
     mappings: {
       atomIdMain: 'atomIdMain',
