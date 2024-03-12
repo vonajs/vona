@@ -36,7 +36,7 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
     return _sql;
   }
 
-  _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any) {
+  _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any): any {
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true;
     return this.bean.model.raw(`
