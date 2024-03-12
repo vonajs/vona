@@ -7,6 +7,10 @@ export interface EntityBase {
   iid: number;
 }
 
+export interface TableIdentityParams {
+  id: number;
+}
+
 export interface EntityItemBase extends EntityBase {
   atomId: TableIdentity;
 }

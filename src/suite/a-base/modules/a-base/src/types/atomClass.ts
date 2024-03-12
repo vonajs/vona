@@ -1,3 +1,8 @@
+export interface AtomClass {
+  module: string;
+  atomClassName: string;
+}
+
 export interface AtomClassMeta {
   //
   bean: string | { module: string; name: string };

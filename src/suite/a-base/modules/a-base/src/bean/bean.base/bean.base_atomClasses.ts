@@ -1,4 +1,3 @@
-import { __ThisModule__ } from '../../resource/this.js';
 import { AtomClassBase, AtomClassBaseRecord, AtomClassMeta } from '../../types.js';
 import { BeanBaseActions } from './bean.base_actions.js';
 

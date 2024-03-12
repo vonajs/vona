@@ -1,5 +1,7 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase, TableIdentityParams } from '@cabloy/core';
+import { AtomClass, AtomClassBase } from '../types.js';
+import { EntityAtomClass } from '../index.js';
 
 @Bean()
 export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
@@ -7,15 +9,15 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     return this.scope.model.atomClass;
   }
 
-  async atomClass(atomClass) {
+  async atomClass(atomClass: AtomClass): Promise<AtomClassBase> {
     return this.ctx.bean.base.atomClass({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
     });
   }
 
-  async get({ id, module, atomClassName }: any) {
-    return await this.__getRaw({ id, module, atomClassName });
+  async get(params: TableIdentityParams | AtomClass): Promise<EntityAtomClass> {
+    return await this.__getRaw(params);
   }
 
   async getAtomClassIdsInner({ inner }: any) {
@@ -27,12 +29,18 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     return atomClasses.map(item => item.id);
   }
 
-  async __getRaw({ id, module, atomClassName }: any) {
-    module = module || this.moduleScope;
-    const data = id ? { id } : { module, atomClassName };
+  async __getRaw(params: TableIdentityParams | AtomClass): Promise<EntityAtomClass> {
+    if ('id' in params) {
+      const res = await this.model.get(params);
+      if (!res) throw new Error(`atomClass not found: ${params.id}`);
+      return res;
+    }
+    const module = params.module || this.moduleScope;
+    const atomClassName = params.atomClassName;
+    if (!module || !atomClassName) this.scope.error.InvalidArguments.throw();
+    const data = { module, atomClassName };
     const res = await this.model.get(data);
     if (res) return res;
-    if (!module || !atomClassName) this.scope.error.InvalidArguments.throw();
     // lock
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.atomClass.register`,
