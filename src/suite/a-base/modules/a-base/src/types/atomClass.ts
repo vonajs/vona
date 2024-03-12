@@ -16,23 +16,27 @@ export interface AtomClassMeta {
   comment: boolean;
   attachment: boolean;
   cms: boolean;
-  enableRight: {
-    mine: boolean;
-    role: {
-      scopes: boolean;
-    };
-  };
-  detail: {
+  enableRight?:
+    | {
+        mine: boolean;
+        role:
+          | {
+              scopes: boolean;
+            }
+          | boolean;
+      }
+    | boolean;
+  detail?: {
     inline: boolean;
-    atomClassMain: { module: string; name: string };
+    atomClassMain?: { module: string; name: string };
   };
-  fields: {
-    mappings: {
+  fields?: {
+    mappings?: {
       atomIdMain: string;
     };
-    dicts: Record<string, object>;
+    dicts?: Record<string, object>;
   };
-  layout: {
+  layout?: {
     config: {
       atomList: string;
       atomItem: string;

@@ -51,7 +51,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
     }
   }
 
-  _prepareAtomClassesModule_atomClassMeta(_atomClass) {
+  _prepareAtomClassesModule_atomClassMeta(_atomClass: AtomClassMeta): AtomClassMeta {
     if (_atomClass.itemOnly) {
       if (_atomClass.detail) {
         return this.ctx.constant.module(__ThisModule__).atomClass.metaDetail;

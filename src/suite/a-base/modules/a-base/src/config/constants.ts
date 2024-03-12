@@ -1,4 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
+import { AtomClassMeta } from '../types.js';
 
 // action
 const action = {
@@ -276,7 +277,8 @@ const atomClassMeta = {
       scopes: true,
     },
   },
-};
+} as Partial<AtomClassMeta>;
+
 const atomClassMetaItemOnly = {
   simple: true,
   itemOnly: true,
@@ -292,13 +294,14 @@ const atomClassMetaItemOnly = {
     mine: false,
     role: true,
   },
-};
+} as Partial<AtomClassMeta>;
+
 const atomClassMetaDetail = {
   simple: true,
   itemOnly: true,
   detail: {
     inline: true,
-    atomClassMain: null,
+    atomClassMain: undefined,
   },
   inner: true,
   language: false,
@@ -314,7 +317,7 @@ const atomClassMetaDetail = {
       atomIdMain: 'atomIdMain',
     },
   },
-};
+} as Partial<AtomClassMeta>;
 // systemRoles
 const systemRoles = [
   'root',
