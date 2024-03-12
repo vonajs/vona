@@ -11,7 +11,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
       options: optionsOuter,
       throwWhenEmpty: false,
     });
-    if (!atom) return null;
+    if (!atom || !atomClassBase) return null;
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     const item = await beanInstance.read({ atomClass, options, key, user });
