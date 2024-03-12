@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'version' })
-export class VersionManager extends BeanBase {
+export class VersionManager extends BeanBase<ScopeModule> {
   get modelRoleRight() {
-    return this.bean.model.module('a-base').roleRight;
+    return this.getScope('a-base').model.roleRight;
   }
 
   async update(options) {
