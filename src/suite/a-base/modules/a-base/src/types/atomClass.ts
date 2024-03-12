@@ -27,16 +27,12 @@ export interface AtomClassMeta {
   comment: boolean;
   attachment: boolean;
   cms: boolean;
-  enableRight?:
-    | {
-        mine: boolean;
-        role:
-          | {
-              scopes: boolean;
-            }
-          | boolean;
-      }
-    | boolean;
+  enableRight?: {
+    mine: boolean;
+    role?: {
+      scopes: boolean;
+    };
+  };
   detail?: {
     inline: boolean;
     atomClassMain?: { module: string; name: string };

@@ -20,7 +20,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
       options: optionsOuter,
       throwWhenEmpty: false,
     });
-    if (!atom) return null;
+    if (!atom || !atomClass || !atomClassBase) return null;
     // parse action code
     action = this.ctx.bean.atomAction.parseActionCode({
       action,
