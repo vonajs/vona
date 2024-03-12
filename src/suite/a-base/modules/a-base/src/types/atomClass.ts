@@ -3,6 +3,8 @@ export interface AtomClass {
   atomClassName: string;
 }
 
+export type AtomClassParams = { id: number } | AtomClass;
+
 export interface AtomClassMeta {
   //
   bean: string | { module: string; name: string };

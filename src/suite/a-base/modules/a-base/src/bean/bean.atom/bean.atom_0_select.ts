@@ -2,27 +2,28 @@ import { BigNumber } from 'cabloy-module-api-a-database';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
+import { AtomClass, AtomClassBase, CountParams, SelectParams } from '../../types.js';
 
 export class BeanAtom0Select extends BeanAtom0Read {
   // count
-  async count({ atomClass, options, user }: any): Promise<BigNumber> {
+  async count({ atomClass, options, user }: CountParams): Promise<BigNumber> {
     return await this._select({ atomClass, options, user, count: 1 });
   }
 
   // select
-  async select({ atomClass, options, user, pageForce = true }: any) {
+  async select({ atomClass, options, user, pageForce = true }: SelectParams) {
     return await this._select({ atomClass, options, user, pageForce, count: 0 });
   }
 
-  async _select({ atomClass, options, user, pageForce = true, count = 0 }: any) {
+  async _select({ atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
     if (!options) options = {};
     if (!options.where) options.where = {};
     if (!options.orders) options.orders = [];
     // atomClass
-    let atomClassBase;
+    let atomClassBase: AtomClassBase | undefined;
     if (atomClass) {
       atomClass = await this.ctx.bean.atomClass.get(atomClass);
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass as AtomClass);
     }
     // select
     const items = await this._list({
@@ -34,7 +35,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     });
     // select items
     if (!count) {
-      if (atomClass) {
+      if (atomClassBase) {
         const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
         await beanInstance.select({ atomClass, options, items, user });
       } else {
@@ -45,7 +46,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _list({ atomClass, options, user, pageForce = true, count = 0 }: any) {
+  async _list({ atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
     let {
       where,
       orders,
