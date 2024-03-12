@@ -30,9 +30,11 @@ export interface AtomClassMeta {
   resource: boolean;
   enableRight?: {
     mine: boolean;
-    role?: {
-      scopes: boolean;
-    };
+    role?:
+      | {
+          scopes: boolean;
+        }
+      | boolean;
   };
   detail?: {
     inline: boolean;

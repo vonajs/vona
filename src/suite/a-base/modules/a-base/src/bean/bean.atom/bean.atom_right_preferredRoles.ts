@@ -65,6 +65,7 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // check
+    if (typeof atomClassBase.enableRight?.role !== 'object') return undefined;
     const enableRightRoleScopes = atomClassBase.enableRight?.role?.scopes;
     if (!enableRightRoleScopes) {
       return undefined;

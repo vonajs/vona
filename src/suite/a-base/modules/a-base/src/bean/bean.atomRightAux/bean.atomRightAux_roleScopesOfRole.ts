@@ -36,7 +36,7 @@ export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopes
     }
     const enableRightRole = enableRight.role;
     if (!enableRightRole) return false;
-    const enableRightRoleScopes = enableRightRole.scopes;
+    const enableRightRoleScopes = typeof enableRightRole === 'object' && enableRightRole.scopes;
     if (!enableRightRoleScopes) {
       return await this.ctx.bean.atomClass.checkRightAtomClassActionOfRole({
         atomClass: { id: atomClassId },
