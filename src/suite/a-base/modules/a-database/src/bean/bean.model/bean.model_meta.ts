@@ -91,4 +91,7 @@ export class BeanModelMeta extends BeanBase {
   _limit(..._args) {
     return '';
   }
+  _where(..._args) {
+    return '';
+  }
 }

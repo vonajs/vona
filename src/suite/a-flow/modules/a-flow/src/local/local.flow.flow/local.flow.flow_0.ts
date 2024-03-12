@@ -155,6 +155,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
     }
     if (flowAtomId && !flowAtomClassId) {
       const atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: flowAtomId });
+      if (!atomClass) this.ctx.throw(403);
       flowAtomClassId = atomClass.id;
     }
     // flowName
