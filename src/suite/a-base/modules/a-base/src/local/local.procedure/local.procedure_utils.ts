@@ -98,7 +98,7 @@ export class LocalProcedureUtils extends LocalProcedureUtilsRights {
     let result: IModelSelectParamsJoin[] = [];
     for (const join of joins) {
       if (join) {
-        if (Array.isArray(join)) {
+        if (Array.isArray(join[0])) {
           result = result.concat(join);
         } else {
           result.push(join);
