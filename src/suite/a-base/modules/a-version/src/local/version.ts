@@ -233,11 +233,15 @@ export class LocalVersion extends BeanBase {
     }
     // insert record
     if (version > 0) {
-      await this.bean.model.insert('aVersionInit', {
-        subdomain: options.subdomain,
-        module: module.info.relativeName,
-        version,
-      });
+      await this.bean.model.insert(
+        'aVersionInit',
+        {
+          subdomain: options.subdomain,
+          module: module.info.relativeName,
+          version,
+        },
+        { disableInstance: true, disableDeleted: true },
+      );
     }
   }
 
