@@ -88,6 +88,10 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return checkWhere(where);
   }
 
+  buildWhere(builder: Knex.QueryBuilder, wheres) {
+    return buildWhere(builder, wheres);
+  }
+
   prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptionsGeneral) {
     // table
     table = table || this.table;
@@ -96,12 +100,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     this._prepareWhereByOptions(table, disableWhere, options);
     builder.where(disableWhere);
     // check
-    const wheres = checkWhere(where);
+    const wheres = this.checkWhere(where);
     if (wheres === false || wheres === true) {
       return wheres;
     }
     // build
-    buildWhere(builder, wheres);
+    this.buildWhere(builder, wheres);
   }
 
   protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptionsGeneral) {

@@ -62,7 +62,9 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     let _commentField, _commentJoin;
     let _fileField, _fileJoin;
     let _itemField, _itemJoin;
-    let _atomField, _atomJoin;
+    let _atomField;
+
+    let _tableAlias;
 
     let _resourceField, _resourceJoin;
 
@@ -174,7 +176,8 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
         _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
         this.self._prepare_orders_push(_orders, ['a.id', 'asc']);
       } else {
-        _itemJoin = `from ${tableName} f`;
+        _itemJoin = '';
+        _tableAlias = `${tableName} as f`;
         this.self._prepare_orders_push(_orders, ['f.id', 'asc']);
       }
     } else {
@@ -189,13 +192,13 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
           a.atomStatic,a.atomStaticKey,a.atomRevision,a.atomLanguage,a.atomCategoryId,a.atomTags,
           a.atomSimple,a.atomDisabled,a.atomState,
           a.allowComment,a.starCount,a.commentCount,a.attachmentCount,a.readCount,a.userIdCreated,a.userIdUpdated,a.createdAt as atomCreatedAt,a.updatedAt as atomUpdatedAt`;
-      _atomJoin = 'from aAtom a';
+      _tableAlias = 'aAtom as a';
       _where['a.deleted'] = 0;
       _where['a.iid'] = iid;
       _where['a.atomStage'] = stage;
     } else {
       _atomField = 'f.id as atomId,f.id as itemId';
-      _atomJoin = '';
+      _tableAlias = '';
       _where['f.deleted'] = 0;
       _where['f.iid'] = iid;
     }
@@ -216,23 +219,6 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       }
     }
 
-    // fields
-    let _selectFields;
-    if (count) {
-      _selectFields = 'count(*) as _count';
-    } else {
-      _selectFields = this.self._combineFields([
-        _itemField,
-        _cmsField,
-        _atomField,
-        _starField,
-        _labelField,
-        _commentField,
-        _fileField,
-        _resourceField,
-      ]);
-    }
-
     // _rightWhere
     const _rightWhere = await this._selectAtoms_formal_rightWhere({
       action,
@@ -251,35 +237,41 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     });
     _where.__and__right = _rightWhere;
 
-    // where clause
-    let _whereClause = this.bean.model._formatWhere(_where);
-    if (_whereClause === false) return false;
-    _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
-
-    // orders
-    const _orders2 = this.bean.model._orders(_orders);
-    // limit
-    const _limit = page ? this.bean.model._limit(page.size, page.index) : '';
-
-    // sql
-    const _sql = `select ${_selectFields} ${_atomJoin}
-            ${_itemJoin}
-            ${_tagJoin}
-            ${_starJoin}
-            ${_labelJoin}
-            ${_commentJoin}
-            ${_fileJoin}
-            ${_resourceJoin}
-            ${_cmsJoin}
-
-          ${_whereClause}
-
-          ${count ? '' : _orders2}
-          ${count ? '' : _limit}
-        `;
-
-    // ok
-    return _sql;
+    // builder
+    const builder = this.bean.model.builder(_tableAlias);
+    // count/select:fields
+    if (count) {
+      builder.count();
+    } else {
+      const _selectFields = this.self._combineFields([
+        _itemField,
+        _cmsField,
+        _atomField,
+        _starField,
+        _labelField,
+        _commentField,
+        _fileField,
+        _resourceField,
+      ]);
+      builder.select(_selectFields);
+    }
+    // join
+    builder.join(_itemJoin);
+    builder.join(_tagJoin);
+    builder.join(_starJoin);
+    builder.join(_labelJoin);
+    builder.join(_commentJoin);
+    builder.join(_fileJoin);
+    builder.join(_resourceJoin);
+    builder.join(_cmsJoin);
+    // where
+    builder.where(_where);
+    // orders/page
+    if (!count) {
+      builder.orderBy(_orders);
+      builder.limit(page.size!);
+      builder.offset(page.index);
+    }
   }
 
   async _selectAtoms_formal_rightWhere({
