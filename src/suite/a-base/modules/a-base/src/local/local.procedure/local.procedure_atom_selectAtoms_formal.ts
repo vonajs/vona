@@ -50,6 +50,8 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       this.ctx.throw(403);
     }
 
+    const self = this;
+
     // for safe
     // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
     const _where: any = Object.assign({}, where);
@@ -115,7 +117,11 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
         function (this: Knex.QueryBuilder) {
           return this.select('d2.star')
             .from('aAtomStar as d2')
-            .where({ 'd2.iid': iid, 'd2.atomId': 'a.id', 'd2.userId': userIdWho })
+            .where({
+              'd2.iid': iid,
+              'd2.atomId': self.bean.model.ref('a.id'),
+              'd2.userId': userIdWho,
+            })
             .as('star');
         },
       ];
@@ -139,7 +145,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
             .from('aAtomLabel as e2')
             .where({
               'e2.iid': iid,
-              'e2.atomId': 'a.id',
+              'e2.atomId': self.bean.model.ref('a.id'),
               'e2.userId': userIdWho,
             })
             .as('labels');

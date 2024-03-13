@@ -85,6 +85,10 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return this.ctx.db.raw(sql, bindings);
   }
 
+  ref<TSrc extends string>(src: TSrc): Knex.Ref<TSrc, { [K in TSrc]: TSrc }> {
+    return this.ctx.db.ref<TSrc>(src);
+  }
+
   checkWhere(where) {
     return checkWhere(where);
   }
