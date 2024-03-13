@@ -176,7 +176,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
         function (this: Knex.QueryBuilder) {
           return this.select('h2.heart')
             .from('aCommentHeart as h2')
-            .where({ 'h2.iid': iid, 'h2.commentId': 'h.id', 'h2.userId': userIdWho })
+            .where({ 'h2.iid': iid, 'h2.commentId': self.bean.model.ref('h.id'), 'h2.userId': userIdWho })
             .as('h_heart');
         },
       ];
@@ -396,6 +396,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     forAtomUser,
     role,
   }) {
+    const self = this;
     // pass through for star/label
     if (star || label) return true;
 
@@ -414,7 +415,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
         __exists__resource(this: Knex.QueryBuilder) {
           return this.select('c.resourceAtomId')
             .from('aViewUserRightResource as c')
-            .where({ 'c.iid': iid, [_itemKeyName]: 'c.resourceAtomId', 'c.userIdWho': userIdWho });
+            .where({ 'c.iid': iid, [_itemKeyName]: self.bean.model.ref('c.resourceAtomId'), 'c.userIdWho': userIdWho });
         },
       };
     }

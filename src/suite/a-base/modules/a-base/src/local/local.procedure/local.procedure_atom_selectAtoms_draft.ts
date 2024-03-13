@@ -39,6 +39,8 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
     // -- p: aCmsArticle
     // -- q: aCmsContent
 
+    const self = this;
+
     // for safe
     // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
     const _where: any = Object.assign({}, where);
@@ -102,7 +104,7 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
         function (this: Knex.QueryBuilder) {
           return this.select('h2.heart')
             .from('aCommentHeart as h2')
-            .where({ 'h2.iid': iid, 'h2.commentId': 'h.id', 'h2.userId': userIdWho })
+            .where({ 'h2.iid': iid, 'h2.commentId': self.bean.model.ref('h.id'), 'h2.userId': userIdWho })
             .as('h_heart');
         },
       ];

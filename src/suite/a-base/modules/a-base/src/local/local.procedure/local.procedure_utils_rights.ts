@@ -41,6 +41,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
   }
 
   async _prepareRightOthers({ iid, atomClass, /* atomClassBase,*/ action, userIdWho, forAtomUser, role, atom }: any) {
+    const self = this;
     // others
     let _others;
     if (forAtomUser) {
@@ -53,8 +54,8 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
               .innerJoin('aViewUserRoleRef as c2', { 'c.userIdWhom': 'c2.userId', 'c2.roleIdParent': role })
               .where({
                 'c.iid': iid,
-                'a.itemId': 'c.userIdWhom',
-                'c.atomClassId': 'a.atomClassId',
+                'a.itemId': self.bean.model.ref('c.userIdWhom'),
+                'c.atomClassId': self.bean.model.ref('a.atomClassId'),
                 'c.action': action,
                 'c.userIdWho': userIdWho,
               });
@@ -63,13 +64,15 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
       } else {
         _others = {
           __exists__others(this: Knex.QueryBuilder) {
-            return this.select('c.userIdWhom').from('aViewUserRightAtomClassUser as c').where({
-              'c.iid': iid,
-              'a.itemId': 'c.userIdWhom',
-              'c.atomClassId': 'a.atomClassId',
-              'c.action': action,
-              'c.userIdWho': userIdWho,
-            });
+            return this.select('c.userIdWhom')
+              .from('aViewUserRightAtomClassUser as c')
+              .where({
+                'c.iid': iid,
+                'a.itemId': self.bean.model.ref('c.userIdWhom'),
+                'c.atomClassId': self.bean.model.ref('a.atomClassId'),
+                'c.action': action,
+                'c.userIdWho': userIdWho,
+              });
           },
         };
       }
@@ -111,6 +114,7 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
   }
 
   async _prepareRightOfRole({ iid, atomClass, atomClassBase, action, roleIdWho, forAtomUser, role, atom }: any) {
+    const self = this;
     // enableRight
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true; // pass rights check
@@ -126,8 +130,8 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
               .innerJoin('aViewUserRoleRef as c2', { 'c.userIdWhom': 'c2.userId', 'c2.roleIdParent': role })
               .where({
                 'c.iid': iid,
-                'a.itemId': 'c.userIdWhom',
-                'c.atomClassId': 'a.atomClassId',
+                'a.itemId': self.bean.model.ref('c.userIdWhom'),
+                'c.atomClassId': self.bean.model.ref('a.atomClassId'),
                 'c.action': action,
                 'c.roleIdWho': roleIdWho,
               });
@@ -136,13 +140,15 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
       } else {
         _others = {
           __exists__others(this: Knex.QueryBuilder) {
-            return this.select('c.userIdWhom').from('aViewRoleRightAtomClassUser as c').where({
-              'c.iid': iid,
-              'a.itemId': 'c.userIdWhom',
-              'c.atomClassId': 'a.atomClassId',
-              'c.action': action,
-              'c.roleIdWho': roleIdWho,
-            });
+            return this.select('c.userIdWhom')
+              .from('aViewRoleRightAtomClassUser as c')
+              .where({
+                'c.iid': iid,
+                'a.itemId': self.bean.model.ref('c.userIdWhom'),
+                'c.atomClassId': self.bean.model.ref('a.atomClassId'),
+                'c.action': action,
+                'c.roleIdWho': roleIdWho,
+              });
           },
         };
       }
