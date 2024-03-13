@@ -4,6 +4,9 @@ import { glob } from '@cabloy/module-glob';
 import { IModule, IModuleResource } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
+const __import_type = 'Serialization';
+// const __import_type = 'Parallelization';
+
 export class ModuleTools extends BeanSimple {
   async prepare(): Promise<Record<string, IModule>> {
     const app = this.app;
@@ -37,21 +40,13 @@ export class ModuleTools extends BeanSimple {
   async load() {
     const app = this.app;
     // 1. import
-    const promises: Promise<IModuleResource>[] = [];
-    for (const module of app.meta.modulesArray) {
-      await import(this._getModuleIndexPath(module));
-      promises.push(import(this._getModuleIndexPath(module)));
-    }
-    const timeBegin = new Date();
-    console.log(`import modules begin, pid: ${process.pid}`);
-    const modulesResource = await Promise.all(promises);
-    const timeEnd = new Date();
-    console.log(`import modules end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
+    const modulesResource = await this._importModules();
+    // 2. resource
     for (let i = 0; i < modulesResource.length; i++) {
       const module = app.meta.modulesArray[i];
       module.resource = modulesResource[i];
     }
-    // 2. main / monkey
+    // 3. main / monkey
     for (const module of app.meta.modulesArray) {
       if (module.resource.Main) {
         module.mainInstance = app.bean._newBean(module.resource.Main);
@@ -77,5 +72,35 @@ export class ModuleTools extends BeanSimple {
       return pathSrc;
     }
     return `${module.root}/dist/index.js`;
+  }
+
+  private async _importModules_serialization() {
+    const modulesResource: IModuleResource[] = [];
+    for (const module of this.app.meta.modulesArray) {
+      modulesResource.push(await import(this._getModuleIndexPath(module)));
+    }
+    return modulesResource;
+  }
+
+  private async _importModules_parallelization() {
+    const promises: Promise<IModuleResource>[] = [];
+    for (const module of this.app.meta.modulesArray) {
+      promises.push(import(this._getModuleIndexPath(module)));
+    }
+    return await Promise.all(promises);
+  }
+
+  private async _importModules() {
+    const timeBegin = new Date();
+    console.log(`import modules begin, pid: ${process.pid}`);
+    let modulesResource: IModuleResource[];
+    if (__import_type === 'Serialization') {
+      modulesResource = await this._importModules_serialization();
+    } else {
+      modulesResource = await this._importModules_parallelization();
+    }
+    const timeEnd = new Date();
+    console.log(`import modules end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
+    return modulesResource;
   }
 }
