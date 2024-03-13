@@ -112,12 +112,6 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
         'h.userName as h_userName',
         'h.avatar as h_avatar',
         'h.replyUserName as h_replyUserName',
-        function (this: Knex.QueryBuilder) {
-          return this.select('h2.heart')
-            .from('aCommentHeart as h2')
-            .where({ 'h2.iid': iid, 'h2.commentId': 'h.id', 'h2.userId': userIdWho })
-            .as('h_heart');
-        },
       ];
       _commentJoin = ['innerJoin', 'aViewComment as h', { 'h.atomId': 'a.id' }];
       _where['h.iid'] = iid;
@@ -312,12 +306,19 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
   }
 
   async _selectAtoms_0_rightWhere({ iid, forAtomUser, role }: any) {
+    const self = this;
     if (forAtomUser && role) {
-      return this.bean.model.raw(`
-          exists(
-            select c2.userId from aViewUserRoleRef c2 where c2.iid=${iid} and a.itemId=c2.userId and c2.roleIdParent=${role}
-          )
-        `);
+      return {
+        __exists__role(this: Knex.QueryBuilder) {
+          return this.select('c2.userId')
+            .from('aViewUserRoleRef as c2')
+            .where({
+              'c2.iid': iid,
+              'a.itemId': self.bean.model.ref('c2.userId'),
+              'c2.roleIdParent': role,
+            });
+        },
+      };
     }
     return true;
   }
