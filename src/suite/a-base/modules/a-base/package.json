@@ -44,6 +44,7 @@
     "@cabloy/extend": "^3.0.2",
     "@zhennann/trim-html": "^0.1.12",
     "exceljs": "^4.3.0",
+    "knex": "^3.1.0",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.24.0",
     "object-hash": "^3.0.0",

@@ -39,6 +39,7 @@ export class ModuleTools extends BeanSimple {
     // 1. import
     const promises: Promise<IModuleResource>[] = [];
     for (const module of app.meta.modulesArray) {
+      await import(this._getModuleIndexPath(module));
       promises.push(import(this._getModuleIndexPath(module)));
     }
     const timeBegin = new Date();
