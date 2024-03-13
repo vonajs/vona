@@ -58,7 +58,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
       resource,
       role,
       atomIdMain,
-    });
+    }) as SelectOptionsProSafe;
 
     // formAction
     let action;
