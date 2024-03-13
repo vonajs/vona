@@ -94,6 +94,20 @@ export class LocalProcedureUtils extends LocalProcedureUtilsRights {
     return result;
   }
 
+  _combineJoins(joins: any[]): IModelSelectParamsJoin[] {
+    let result: IModelSelectParamsJoin[] = [];
+    for (const join of joins) {
+      if (join) {
+        if (Array.isArray(join)) {
+          result = result.concat(join);
+        } else {
+          result.push(join);
+        }
+      }
+    }
+    return result;
+  }
+
   _prepare_needResourceLocale(_where) {
     const __or__atomNameResource = _where.__or__atomNameResource;
     if (!__or__atomNameResource) return false;

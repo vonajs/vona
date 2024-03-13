@@ -5,6 +5,7 @@ import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
 import { IModelMethodOptionsGeneral } from '../../types.js';
+import { Cast } from '@cabloy/core';
 
 let __columns: Record<string, ITableColumns> = {};
 
@@ -90,6 +91,13 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
 
   buildWhere(builder: Knex.QueryBuilder, wheres) {
     return buildWhere(builder, wheres);
+  }
+
+  buildJoins(builder: Knex.QueryBuilder, joins) {
+    if (!joins) return;
+    for (const [joinType, joinTable, joinOn] of joins) {
+      builder[joinType](joinTable, Cast(joinOn));
+    }
   }
 
   prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptionsGeneral) {

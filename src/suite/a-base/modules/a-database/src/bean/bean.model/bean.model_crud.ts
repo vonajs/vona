@@ -115,12 +115,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // columns
     builder.select(params.columns);
     // joins
-    const joins = params.joins;
-    if (joins) {
-      for (const [joinType, joinTable, joinOn] of joins) {
-        builder[joinType](joinTable, Cast(joinOn));
-      }
-    }
+    this.buildJoins(builder, params.joins);
     // where
     const wheres = this.prepareWhere(builder, table, params.where, options);
     if (wheres === false) {

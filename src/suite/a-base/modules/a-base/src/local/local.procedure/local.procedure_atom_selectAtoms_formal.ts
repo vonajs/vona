@@ -339,14 +339,17 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       builder.select(_selectFields);
     }
     // join
-    builder.join(_itemJoin);
-    builder.join(_tagJoin);
-    builder.join(_starJoin);
-    builder.join(_labelJoin);
-    builder.join(_commentJoin);
-    builder.join(_fileJoin);
-    builder.join(_resourceJoin);
-    builder.join(_cmsJoin);
+    const _joins = this.self._combineJoins([
+      _itemJoin,
+      _tagJoin,
+      _starJoin,
+      _labelJoin,
+      _commentJoin,
+      _fileJoin,
+      _resourceJoin,
+      _cmsJoin,
+    ]);
+    builder.join(_joins);
     // where
     const wheres = this.bean.model.checkWhere(where);
     if (wheres === false) return [];
