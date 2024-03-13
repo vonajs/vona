@@ -84,9 +84,14 @@ export class LocalProcedureUtils extends LocalProcedureUtilsRights {
     }
   }
 
-  _combineFields(fields) {
-    const _fields = fields.filter(field => !!field).map(field => field.trim().replace(/(^,)|(,$)/g, ''));
-    return _fields.join(',');
+  _combineFields(fields: any[]): any[] {
+    let result = [];
+    for (const field of fields) {
+      if (field) {
+        result = result.concat(field);
+      }
+    }
+    return result;
   }
 
   _prepare_needResourceLocale(_where) {

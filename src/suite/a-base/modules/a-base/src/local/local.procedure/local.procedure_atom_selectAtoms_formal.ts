@@ -228,34 +228,59 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // tableName
     if (tableName) {
-      const _fields = await this.self._prepare_fieldsRight({ options });
-      _itemField = `${_fields},`;
+      _itemField = await this.self._prepare_fieldsRight({ options });
       if (!atomClassBase || !atomClassBase.itemOnly) {
-        _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
+        _itemJoin = ['innerJoin', `${tableName} as f`, { 'f.atomId': 'a.id' }];
         this.self._prepare_orders_push(_orders, ['a.id', 'asc']);
       } else {
-        _itemJoin = '';
+        _itemJoin = undefined;
         _tableAlias = `${tableName} as f`;
         this.self._prepare_orders_push(_orders, ['f.id', 'asc']);
       }
     } else {
-      _itemField = '';
-      _itemJoin = '';
+      _itemField = undefined;
+      _itemJoin = undefined;
       this.self._prepare_orders_push(_orders, ['a.id', 'asc']);
     }
 
     // atom
     if (!atomClassBase || !atomClassBase.itemOnly) {
-      _atomField = `a.id as atomId,a.itemId,a.atomStage,a.atomFlowId,a.atomClosed,a.atomIdDraft,a.atomIdFormal,a.roleIdOwner,a.atomClassId,a.atomName,
-          a.atomStatic,a.atomStaticKey,a.atomRevision,a.atomLanguage,a.atomCategoryId,a.atomTags,
-          a.atomSimple,a.atomDisabled,a.atomState,
-          a.allowComment,a.starCount,a.commentCount,a.attachmentCount,a.readCount,a.userIdCreated,a.userIdUpdated,a.createdAt as atomCreatedAt,a.updatedAt as atomUpdatedAt`;
+      _atomField = [
+        'a.id as atomId',
+        'a.itemId',
+        'a.atomStage',
+        'a.atomFlowId',
+        'a.atomClosed',
+        'a.atomIdDraft',
+        'a.atomIdFormal',
+        'a.roleIdOwner',
+        'a.atomClassId',
+        'a.atomName',
+        'a.atomStatic',
+        'a.atomStaticKey',
+        'a.atomRevision',
+        'a.atomLanguage',
+        'a.atomCategoryId',
+        'a.atomTags',
+        'a.atomSimple',
+        'a.atomDisabled',
+        'a.atomState',
+        'a.allowComment',
+        'a.starCount',
+        'a.commentCount',
+        'a.attachmentCount',
+        'a.readCount',
+        'a.userIdCreated',
+        'a.userIdUpdated',
+        'a.createdAt as atomCreatedAt',
+        'a.updatedAt as atomUpdatedAt',
+      ];
       _tableAlias = 'aAtom as a';
       _where['a.deleted'] = 0;
       _where['a.iid'] = iid;
       _where['a.atomStage'] = stage;
     } else {
-      _atomField = 'f.id as atomId,f.id as itemId';
+      _atomField = ['f.id as atomId', 'f.id as itemId'];
       _tableAlias = '';
       _where['f.deleted'] = 0;
       _where['f.iid'] = iid;
