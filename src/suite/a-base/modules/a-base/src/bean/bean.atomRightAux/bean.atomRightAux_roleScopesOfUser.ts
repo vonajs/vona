@@ -46,11 +46,18 @@ export class BeanAtomRightAuxRoleScopesOfUser extends BeanAtomRightAux0 {
       });
     }
     // sql
-    const sql = `
-        select c.roleIdWhom from aViewUserRightAtomClassRole c
-          where c.iid=? and c.atomClassId=? and c.action=? and c.userIdWho=?
-      `;
-    const items = await this.bean.model.query(sql, [this.ctx.instance.id, atomClassId, action, userId]);
+    const items = await this.bean.model.select(
+      'aViewUserRightAtomClassRole',
+      {
+        columns: 'roleIdWhom',
+        where: {
+          atomClassId,
+          action,
+          userIdWho: userId,
+        },
+      },
+      { disableDeleted: true },
+    );
     const roleIds = items.map(item => item.roleIdWhom);
     // false
     if (roleIds.length === 0) return false;
