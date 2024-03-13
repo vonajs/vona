@@ -23,6 +23,7 @@ export type IModelSelectParamsOrderNulls = 'first' | 'last';
 export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?, IModelSelectParamsOrderNulls?];
 
 export interface IModelSelectParams {
+  alias?: string;
   where?: any;
   columns?: any;
   joins?: IModelSelectParamsJoin[];
