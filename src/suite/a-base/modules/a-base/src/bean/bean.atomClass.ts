@@ -208,28 +208,25 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   async checkRightAtomClassActionOfUser({ atomClass, action, user, excludeMine, onlyMine }: any) {
     if (!user || user.id === 0) return true;
     const atomClassId = await this.getAtomClassId(atomClass);
-    const clauseExcludeMine = excludeMine ? 'and scope<>0' : '';
-    const clauseOnlyMine = onlyMine ? 'and scope=0' : '';
-    const res = await this.bean.model.queryOne(
-      `
-        select * from aViewUserRightAtomClass 
-          where iid=? and atomClassId=? and action=? ${clauseExcludeMine} ${clauseOnlyMine} and userIdWho=?
-      `,
-      [this.ctx.instance.id, atomClassId, action, user.id],
-    );
+    const where: any = {
+      atomClassId,
+      action,
+      userIdWho: user.id,
+    };
+    if (excludeMine) where.scope = { op: '<>', val: 0 };
+    if (onlyMine) where.scope = { op: '=', val: 0 };
+    const res = await this.bean.model.get('aViewUserRightAtomClass', where, { disableDeleted: true });
     return !!res;
   }
 
   async checkRightAtomClass({ atomClass, user }: any) {
     if (!user || user.id === 0) return true;
     const atomClassId = await this.getAtomClassId(atomClass);
-    const res = await this.bean.model.queryOne(
-      `
-        select * from aViewUserRightAtomClass 
-          where iid=? and atomClassId=? and userIdWho=?
-      `,
-      [this.ctx.instance.id, atomClassId, user.id],
-    );
+    const where = {
+      atomClassId,
+      userIdWho: user.id,
+    };
+    const res = await this.bean.model.get('aViewUserRightAtomClass', where, { disableDeleted: true });
     return !!res;
   }
 }

@@ -153,7 +153,7 @@ const tables = {
       table.int0('roleId');
       table.int0('atomClassId');
       table.int0('action');
-      table.json('scope');
+      table.text('scope'); // not use json
     });
   },
   aRoleRightRef(tableName: string, model: BeanModel): any {
