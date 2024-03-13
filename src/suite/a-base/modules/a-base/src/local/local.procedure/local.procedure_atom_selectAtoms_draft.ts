@@ -1,7 +1,10 @@
+import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomSelectAtoms0 } from './local.procedure_atom_selectAtoms_0.js';
+import { Knex } from 'knex';
+import { SelectOptionsProSafe } from '../../types.js';
 
 export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelectAtoms0 {
-  async _selectAtoms_draft({ options }: any) {
+  async _selectAtoms_draft({ options }: { options: SelectOptionsProSafe }) {
     const {
       iid,
       userIdWho,
@@ -38,18 +41,17 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
 
     // for safe
     // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
-    const _where = Object.assign({}, where);
+    const _where: any = Object.assign({}, where);
     const _orders = orders ? orders.concat() : [];
 
     // vars
-    let _tagJoin;
+    let _tagJoin: IModelSelectParamsJoin | undefined;
 
-    let _commentField, _commentJoin;
-
-    let _fileField, _fileJoin;
-
-    let _itemField, _itemJoin;
-    // let _atomField, _atomJoin;
+    let _commentField: any[] | undefined, _commentJoin: IModelSelectParamsJoin | undefined;
+    let _fileField: string[] | undefined, _fileJoin: IModelSelectParamsJoin | undefined;
+    let _itemField: string[] | undefined, _itemJoin: IModelSelectParamsJoin | undefined;
+    // let _atomField: string[] | undefined;
+    // let _tableAlias: string;
 
     // cms
     const { _cmsField, _cmsJoin, _cmsWhere } = this.self._prepare_cms({
@@ -72,56 +74,121 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
 
     // tag
     if (tag) {
-      _tagJoin = ' inner join aTagRef k on k.atomId=a.id';
+      _tagJoin = ['innerJoin', 'aTagRef as k', { 'k.atomId': 'a.id' }];
       _where['k.iid'] = iid;
       _where['k.tagId'] = tag;
     } else {
-      _tagJoin = '';
+      _tagJoin = undefined;
     }
 
     // comment
     if (comment) {
-      _commentField = `,h.id h_id,h.createdAt h_createdAt,h.updatedAt h_updatedAt,h.userId h_userId,h.sorting h_sorting,h.heartCount h_heartCount,h.replyId h_replyId,h.replyUserId h_replyUserId,h.replyContent h_replyContent,h.content h_content,h.summary h_summary,h.html h_html,h.userName h_userName,h.avatar h_avatar,h.replyUserName h_replyUserName,
-               (select h2.heart from aCommentHeart h2 where h2.iid=${iid} and h2.commentId=h.id and h2.userId=${userIdWho}) as h_heart`;
+      _commentField = [
+        'h.id as h_id',
+        'h.createdAt as h_createdAt',
+        'h.updatedAt as h_updatedAt',
+        'h.userId as h_userId',
+        'h.sorting as h_sorting',
+        'h.heartCount as h_heartCount',
+        'h.replyId as h_replyId',
+        'h.replyUserId as h_replyUserId',
+        'h.replyContent as h_replyContent',
+        'h.content as h_content',
+        'h.summary as h_summary',
+        'h.html as h_html',
+        'h.userName as h_userName',
+        'h.avatar as h_avatar',
+        'h.replyUserName as h_replyUserName',
+        function (this: Knex.QueryBuilder) {
+          return this.select('h2.heart')
+            .from('aCommentHeart as h2')
+            .where({ 'h2.iid': iid, 'h2.commentId': 'h.id', 'h2.userId': userIdWho })
+            .as('h_heart');
+        },
+      ];
+      _commentJoin = ['innerJoin', 'aViewComment as h', { 'h.atomId': 'a.id' }];
 
-      _commentJoin = ' inner join aViewComment h on h.atomId=a.id';
       _where['h.iid'] = iid;
       _where['h.deleted'] = 0;
     } else {
-      _commentField = '';
-      _commentJoin = '';
+      _commentField = undefined;
+      _commentJoin = undefined;
     }
 
     // file
     if (file) {
-      _fileField =
-        ',i.id i_id,i.createdAt i_createdAt,i.updatedAt i_updatedAt,i.userId i_userId,i.downloadId i_downloadId,i.mode i_mode,i.fileSize i_fileSize,i.width i_width,i.height i_height,i.filePath i_filePath,i.fileName i_fileName,i.realName i_realName,i.fileExt i_fileExt,i.encoding i_encoding,i.mime i_mime,i.attachment i_attachment,i.flag i_flag,i.userName i_userName,i.avatar i_avatar';
-      _fileJoin = ' inner join aViewFile i on i.atomId=a.id';
+      _fileField = [
+        'i.id as i_id',
+        'i.createdAt as i_createdAt',
+        'i.updatedAt as i_updatedAt',
+        'i.userId as i_userId',
+        'i.downloadId as i_downloadId',
+        'i.mode as i_mode',
+        'i.fileSize as i_fileSize',
+        'i.width as i_width',
+        'i.height as i_height',
+        'i.filePath as i_filePath',
+        'i.fileName as i_fileName',
+        'i.realName as i_realName',
+        'i.fileExt as i_fileExt',
+        'i.encoding as i_encoding',
+        'i.mime as i_mime',
+        'i.attachment as i_attachment',
+        'i.flag as i_flag',
+        'i.userName as i_userName',
+        'i.avatar as i_avatar',
+      ];
+      _fileJoin = ['innerJoin', 'aViewFile as i', { 'i.atomId': 'a.id' }];
       _where['i.iid'] = iid;
       _where['i.deleted'] = 0;
     } else {
-      _fileField = '';
-      _fileJoin = '';
+      _fileField = undefined;
+      _fileJoin = undefined;
     }
 
     // tableName
     if (tableName) {
-      const _fields = await this.self._prepare_fieldsRight({ options });
-      _itemField = `${_fields},`;
-      _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
+      _itemField = await this.self._prepare_fieldsRight({ options });
+      _itemJoin = ['innerJoin', `${tableName} as f`, { 'f.atomId': 'a.id' }];
       this.self._prepare_orders_push(_orders, ['a.id', 'asc']);
     } else {
-      _itemField = '';
-      _itemJoin = '';
+      _itemField = undefined;
+      _itemJoin = undefined;
       this.self._prepare_orders_push(_orders, ['a.id', 'asc']);
     }
 
     // atom
-    const _atomField = `a.id as atomId,a.itemId,a.atomStage,a.atomFlowId,a.atomClosed,a.atomIdDraft,a.atomIdFormal,a.roleIdOwner,a.atomClassId,a.atomName,
-          a.atomStatic,a.atomStaticKey,a.atomRevision,a.atomLanguage,a.atomCategoryId,a.atomTags,
-          a.atomSimple,a.atomDisabled,a.atomState,
-          a.allowComment,a.starCount,a.commentCount,a.attachmentCount,a.readCount,a.userIdCreated,a.userIdUpdated,a.createdAt as atomCreatedAt,a.updatedAt as atomUpdatedAt`;
-    const _atomJoin = 'from aAtom a';
+    const _atomField = [
+      'a.id as atomId',
+      'a.itemId',
+      'a.atomStage',
+      'a.atomFlowId',
+      'a.atomClosed',
+      'a.atomIdDraft',
+      'a.atomIdFormal',
+      'a.roleIdOwner',
+      'a.atomClassId',
+      'a.atomName',
+      'a.atomStatic',
+      'a.atomStaticKey',
+      'a.atomRevision',
+      'a.atomLanguage',
+      'a.atomCategoryId',
+      'a.atomTags',
+      'a.atomSimple',
+      'a.atomDisabled',
+      'a.atomState',
+      'a.allowComment',
+      'a.starCount',
+      'a.commentCount',
+      'a.attachmentCount',
+      'a.readCount',
+      'a.userIdCreated',
+      'a.userIdUpdated',
+      'a.createdAt as atomCreatedAt',
+      'a.updatedAt as atomUpdatedAt',
+    ];
+    const _tableAlias = 'aAtom as a';
     _where['a.deleted'] = 0;
     _where['a.iid'] = iid;
     _where['a.atomStage'] = stage;
@@ -139,24 +206,25 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
     // if (!atomClass) {
     //   _where['a.atomClassId'] = await this.self._prepare_atomClassIdsInner();
     // }
-    if (atomClass && !atomClassBase.itemOnly) {
+    if (atomClass && atomClassBase && !atomClassBase.itemOnly) {
       _where['a.atomClassId'] = atomClass.id;
     }
 
     // atomIdMain
-    if (atomClass && atomClassBase.detail) {
+    if (atomClassBase && atomClassBase.detail) {
       if (atomIdMain) {
         const atomIdMainField = atomClassBase.fields?.mappings?.atomIdMain;
         _where[`f.${atomIdMainField}`] = atomIdMain;
       }
     }
 
-    // fields
-    let _selectFields;
+    // builder
+    const builder = this.bean.model.builder(_tableAlias);
+    // count/select:fields
     if (count) {
-      _selectFields = 'count(*) as _count';
+      builder.count();
     } else {
-      _selectFields = this.self._combineFields([
+      const _selectFields = this.self._combineFields([
         //
         _itemField,
         _cmsField,
@@ -164,33 +232,37 @@ export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelect
         _commentField,
         _fileField,
       ]);
+      builder.select(_selectFields);
     }
-
-    // where clause
-    let _whereClause = this.bean.model._formatWhere(_where);
-    if (_whereClause === false) return false;
-    _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
-
-    // orders
-    const _orders2 = this.bean.model._orders(_orders);
-    // limit
-    const _limit = page ? this.bean.model._limit(page.size, page.index) : '';
-
-    // sql
-    const _sql = `select ${_selectFields} ${_atomJoin}
-            ${_itemJoin}
-            ${_tagJoin}
-            ${_commentJoin}
-            ${_fileJoin}
-            ${_cmsJoin}
-
-          ${_whereClause}
-
-          ${count ? '' : _orders2}
-          ${count ? '' : _limit}
-        `;
-
-    // ok
-    return _sql;
+    // join
+    const _joins = this.self._combineJoins([
+      //
+      _itemJoin,
+      _tagJoin,
+      _commentJoin,
+      _fileJoin,
+      _cmsJoin,
+    ]);
+    this.bean.model.buildJoins(builder, _joins);
+    // where
+    const wheres = this.bean.model.checkWhere(where);
+    if (wheres === false) return [];
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
+    // orders/page
+    if (!count) {
+      this.bean.model.buildOrders(builder, _orders);
+      if (page) {
+        this.bean.model.buildLimit(builder, page.size);
+        this.bean.model.buildOffset(builder, page.index);
+      }
+    }
+    // execute
+    const debug = this.app.bean.debug.get('atom:sql');
+    if (debug.enabled) {
+      debug('===== selectAtoms =====\n%s', builder.toQuery());
+    }
+    return await builder;
   }
 }

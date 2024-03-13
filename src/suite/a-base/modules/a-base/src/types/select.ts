@@ -41,9 +41,8 @@ export interface SelectOptionsPro extends SelectOptions {
 }
 
 /** for inner use */
-export interface SelectOptionsProSafe extends Omit<SelectOptionsPro, 'stage' | 'page'> {
+export interface SelectOptionsProSafe extends Omit<SelectOptionsPro, 'stage'> {
   stage: number;
-  page: SelectOptionsPage;
 }
 
 export interface SelectParams {
