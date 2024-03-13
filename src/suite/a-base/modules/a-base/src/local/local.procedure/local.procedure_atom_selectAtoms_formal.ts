@@ -265,13 +265,23 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     builder.join(_resourceJoin);
     builder.join(_cmsJoin);
     // where
-    builder.where(_where);
+    const wheres = this.bean.model.checkWhere(where);
+    if (wheres === false) return [];
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
     // orders/page
     if (!count) {
       builder.orderBy(_orders);
       builder.limit(page.size!);
       builder.offset(page.index);
     }
+    // execute
+    const debug = this.app.bean.debug.get('atom:sql');
+    if (debug.enabled) {
+      debug('===== selectAtoms =====\n%s', builder.toQuery());
+    }
+    return await builder;
   }
 
   async _selectAtoms_formal_rightWhere({
