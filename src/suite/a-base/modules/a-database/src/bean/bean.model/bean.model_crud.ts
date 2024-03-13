@@ -207,8 +207,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // ready
     const debug = this.app.bean.debug.get('model');
     if (debug.enabled) debug('model.count: %s', builder.toQuery());
-    const res = (await builder)[0];
-    return BigNumber(res[Object.keys(res)[0]]);
+    const res = await builder;
+    return this.extractCount(res);
   }
 
   async insert<TRecord2 extends {} = TRecord>(

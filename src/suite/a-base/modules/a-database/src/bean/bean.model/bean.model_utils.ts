@@ -4,7 +4,7 @@ import { Knex } from 'knex';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
-import { IModelMethodOptionsGeneral } from '../../types.js';
+import { BigNumber, IModelMethodOptionsGeneral } from '../../types.js';
 import { Cast } from '@cabloy/core';
 
 let __columns: Record<string, ITableColumns> = {};
@@ -137,6 +137,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
     // build
     this.buildWhere(builder, wheres);
+  }
+
+  extractCount(result) {
+    const res = Array.isArray(result) ? result[0] : result;
+    return BigNumber(res[Object.keys(res)[0]]);
   }
 
   protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptionsGeneral) {

@@ -143,25 +143,16 @@ export class BeanAtom0Select extends BeanAtom0Read {
       role,
     });
     // selectQuery
-    let sql;
+    let items;
     if (atomClass) {
       const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
-      sql = await beanInstance.selectQuery({ atomClass, options: options2, user });
+      items = await beanInstance.selectQuery({ atomClass, options: options2, user });
     } else {
-      sql = await this._selectQuery({ options: options2 });
-    }
-    const debug = this.ctx.app.bean.debug.get('atom:sql');
-    debug('===== selectAtoms =====\n%s', sql);
-    // query
-    let items;
-    if (Array.isArray(sql)) {
-      items = sql;
-    } else {
-      items = sql === false ? [] : await this.bean.model.query(sql);
+      items = await this._selectQuery({ options: options2 });
     }
     // count
     if (count) {
-      return items[0]._count;
+      return this.bean.model.extractCount(items);
     }
     // ok
     return items;
