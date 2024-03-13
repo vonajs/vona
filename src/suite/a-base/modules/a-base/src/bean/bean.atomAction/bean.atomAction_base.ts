@@ -95,7 +95,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
       atomClassId,
       code,
       name: action.name,
-      bulk: action.bulk || 0,
+      bulk: Number(action.bulk || 0),
     };
     // insert
     const res2 = await this.model.insert(data);
