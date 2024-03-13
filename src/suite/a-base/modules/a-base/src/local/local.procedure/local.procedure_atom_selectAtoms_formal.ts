@@ -67,7 +67,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     let _tableAlias: string;
 
-    let _resourceField: string[], _resourceJoin: IModelSelectParamsJoin | undefined;
+    let _resourceField: string[] | undefined, _resourceJoin: IModelSelectParamsJoin | undefined;
 
     // needResourceLocale
     const needResourceLocale = this.self._prepare_needResourceLocale(_where);
@@ -218,12 +218,12 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       _where['a.atomDisabled'] = 0;
     }
     if (needResourceLocale) {
-      const _locale = this.bean.model.format('?', resourceLocale || this.ctx.locale);
-      _resourceField = ',m.atomNameLocale';
-      _resourceJoin = ` inner join aResourceLocale m on m.atomId=a.id and m.locale=${_locale}`;
+      const _locale = resourceLocale || this.ctx.locale;
+      _resourceField = ['m.atomNameLocale'];
+      _resourceJoin = ['innerJoin', 'aResourceLocale as m', { 'm.atomId': 'a.id', 'm.locale': _locale }];
     } else {
-      _resourceField = '';
-      _resourceJoin = '';
+      _resourceField = undefined;
+      _resourceJoin = undefined;
     }
 
     // tableName
