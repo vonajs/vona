@@ -122,20 +122,11 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       return [] as TResult2[];
     }
     // orders
-    const orders = params.orders;
-    if (orders) {
-      for (const [orderColumn, orderDirection, orderNulls] of orders) {
-        builder.orderBy(orderColumn, orderDirection, orderNulls);
-      }
-    }
+    this.buildOrders(builder, params.orders);
     // limit
-    if (params.limit !== undefined) {
-      builder.limit(params.limit);
-    }
+    this.buildLimit(builder, params.limit);
     // offset
-    if (params.offset !== undefined) {
-      builder.offset(params.offset);
-    }
+    this.buildOffset(builder, params.offset);
     // ready
     const debug = this.app.bean.debug.get('model');
     if (debug.enabled) debug('model.select: %s', builder.toQuery());

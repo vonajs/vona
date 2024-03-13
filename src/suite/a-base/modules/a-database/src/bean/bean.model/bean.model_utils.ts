@@ -100,6 +100,25 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
   }
 
+  buildOrders(builder: Knex.QueryBuilder, orders) {
+    if (!orders) return;
+    for (const [orderColumn, orderDirection, orderNulls] of orders) {
+      builder.orderBy(orderColumn, orderDirection, orderNulls);
+    }
+  }
+
+  buildLimit(builder: Knex.QueryBuilder, limit) {
+    if (limit !== undefined) {
+      builder.limit(limit);
+    }
+  }
+
+  buildOffset(builder: Knex.QueryBuilder, offset) {
+    if (offset !== undefined) {
+      builder.offset(offset);
+    }
+  }
+
   prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptionsGeneral) {
     // table
     table = table || this.table;
