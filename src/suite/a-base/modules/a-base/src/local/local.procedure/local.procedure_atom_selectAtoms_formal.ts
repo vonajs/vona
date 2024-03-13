@@ -1,3 +1,4 @@
+import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
 import { SelectOptionsProSafe } from '../../types.js';
 import { LocalProcedureAtomSelectAtomsDraft } from './local.procedure_atom_selectAtoms_draft.js';
 
@@ -54,19 +55,19 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     const _orders = orders ? orders.concat() : [];
 
     // vars
-    let _tagJoin;
+    let _tagJoin: IModelSelectParamsJoin | undefined;
 
-    let _starField, _starJoin;
-    let _labelField, _labelJoin;
+    let _starField: any[] | undefined, _starJoin: IModelSelectParamsJoin | undefined;
+    let _labelField: any[] | undefined, _labelJoin: IModelSelectParamsJoin | undefined;
 
-    let _commentField, _commentJoin;
-    let _fileField, _fileJoin;
-    let _itemField, _itemJoin;
-    let _atomField;
+    let _commentField: string[] | undefined, _commentJoin: IModelSelectParamsJoin | undefined;
+    let _fileField: string[] | undefined, _fileJoin: IModelSelectParamsJoin | undefined;
+    let _itemField: string[] | undefined, _itemJoin: IModelSelectParamsJoin | undefined;
+    let _atomField: string[] | undefined;
 
-    let _tableAlias;
+    let _tableAlias: string;
 
-    let _resourceField, _resourceJoin;
+    let _resourceField, _resourceJoin: IModelSelectParamsJoin | undefined;
 
     // needResourceLocale
     const needResourceLocale = this.self._prepare_needResourceLocale(_where);
@@ -92,26 +93,33 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // tag
     if (tag) {
-      _tagJoin = ' inner join aTagRef k on k.atomId=a.id';
+      _tagJoin = ['innerJoin', 'aTagRef as k', { 'k.atomId': 'a.id' }];
       _where['k.iid'] = iid;
       _where['k.tagId'] = tag;
     } else {
-      _tagJoin = '';
+      _tagJoin = undefined;
     }
 
     // star
     if (star) {
-      _starJoin = ' inner join aAtomStar d on a.id=d.atomId';
+      _starJoin = ['innerJoin', 'aAtomStar as d', { 'a.id': 'd.atomId' }];
       _where['d.iid'] = iid;
       _where['d.userId'] = userIdWho;
       _where['d.star'] = 1;
     } else {
-      _starJoin = '';
+      _starJoin = undefined;
     }
     if (!atomClassBase || !atomClassBase.itemOnly) {
-      _starField = `,(select d2.star from aAtomStar d2 where d2.iid=${iid} and d2.atomId=a.id and d2.userId=${userIdWho}) as star`;
+      _starField = [
+        function (this: Knex.QueryBuilder) {
+          return this.select('d2.star')
+            .from('aAtomStar as d2')
+            .where({ 'd2.iid': iid, 'd2.atomId': 'a.id', 'd2.userId': userIdWho })
+            .as('star');
+        },
+      ];
     } else {
-      _starField = '';
+      _starField = undefined;
     }
 
     // label
