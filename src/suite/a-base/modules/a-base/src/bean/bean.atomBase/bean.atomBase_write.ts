@@ -42,6 +42,8 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     await this._writeValidate({ atomClass, target, key, item, options, user });
     // --- item is filtered by validation
     if (isCreateDelay) {
+      // should delete item.id, otherwise insert will error
+      delete item.id;
       // create
       const optionsCreate = { ...options, __createDelayData: item };
       item = await this.create({ atomClass, item: itemOriginal, options: optionsCreate, user });
