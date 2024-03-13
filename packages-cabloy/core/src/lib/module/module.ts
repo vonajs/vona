@@ -4,8 +4,8 @@ import { glob } from '@cabloy/module-glob';
 import { IModule, IModuleResource } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
-const __import_type = 'Serialization';
-// const __import_type = 'Parallelization';
+// const __import_type_serialization = true;
+const __import_type_serialization = false;
 
 export class ModuleTools extends BeanSimple {
   async prepare(): Promise<Record<string, IModule>> {
@@ -94,7 +94,7 @@ export class ModuleTools extends BeanSimple {
     const timeBegin = new Date();
     console.log(`import modules begin, pid: ${process.pid}`);
     let modulesResource: IModuleResource[];
-    if (__import_type === 'Serialization') {
+    if (__import_type_serialization) {
       modulesResource = await this._importModules_serialization();
     } else {
       modulesResource = await this._importModules_parallelization();
