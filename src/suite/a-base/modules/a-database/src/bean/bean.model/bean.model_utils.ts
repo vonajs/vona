@@ -113,6 +113,9 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     const columnNameInstance = `${getTableOrTableAlias(table)}.iid`;
     if (where[columnNameInstance] === undefined && where.iid === undefined) {
       if (!this._checkDisableInstanceByOptions(options)) {
+        if (!this.ctx.instance) {
+          throw new Error('ctx.instance not exists');
+        }
         where[columnNameInstance] = this.ctx.instance.id;
       }
     }
