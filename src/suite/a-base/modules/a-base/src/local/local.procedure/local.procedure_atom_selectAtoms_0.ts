@@ -261,12 +261,14 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     });
     _where.__and__right = _rightWhere;
 
-    // fields
-    let _selectFields;
+    // builder
+    const builder = this.bean.model.builder(_tableAlias);
+    // count/select:fields
     if (count) {
-      _selectFields = 'count(*) as _count';
+      builder.count();
     } else {
-      _selectFields = this.self._combineFields([
+      const _selectFields = this.self._combineFields([
+        //
         _itemField,
         _cmsField,
         _atomField,
@@ -274,35 +276,39 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
         _fileField,
         _resourceField,
       ]);
+      builder.select(_selectFields);
     }
-
-    // where clause
-    let _whereClause = this.bean.model._formatWhere(_where);
-    if (_whereClause === false) return false;
-    _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
-
-    // orders
-    const _orders2 = this.bean.model._orders(_orders);
-    // limit
-    const _limit = page ? this.bean.model._limit(page.size, page.index) : '';
-
-    // sql
-    const _sql = `select ${_selectFields} ${_atomJoin}
-            ${_itemJoin}
-            ${_tagJoin}
-            ${_commentJoin}
-            ${_fileJoin}
-            ${_resourceJoin}
-            ${_cmsJoin}
-
-          ${_whereClause}
-
-          ${count ? '' : _orders2}
-          ${count ? '' : _limit}
-        `;
-
-    // ok
-    return _sql;
+    // join
+    const _joins = this.self._combineJoins([
+      //
+      _itemJoin,
+      _tagJoin,
+      _commentJoin,
+      _fileJoin,
+      _resourceJoin,
+      _cmsJoin,
+    ]);
+    this.bean.model.buildJoins(builder, _joins);
+    // where
+    const wheres = this.bean.model.checkWhere(where);
+    if (wheres === false) return [];
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
+    // orders/page
+    if (!count) {
+      this.bean.model.buildOrders(builder, _orders);
+      if (page) {
+        this.bean.model.buildLimit(builder, page.size);
+        this.bean.model.buildOffset(builder, page.index);
+      }
+    }
+    // execute
+    const debug = this.app.bean.debug.get('atom:sql');
+    if (debug.enabled) {
+      debug('===== selectAtoms =====\n%s', builder.toQuery());
+    }
+    return await builder;
   }
 
   async _selectAtoms_0_rightWhere({ iid, forAtomUser, role }: any) {

@@ -334,6 +334,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       builder.count();
     } else {
       const _selectFields = this.self._combineFields([
+        //
         _itemField,
         _cmsField,
         _atomField,
@@ -347,6 +348,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     }
     // join
     const _joins = this.self._combineJoins([
+      //
       _itemJoin,
       _tagJoin,
       _starJoin,
