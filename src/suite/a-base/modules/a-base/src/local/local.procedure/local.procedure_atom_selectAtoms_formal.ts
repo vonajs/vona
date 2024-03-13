@@ -60,14 +60,14 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     let _starField: any[] | undefined, _starJoin: IModelSelectParamsJoin | undefined;
     let _labelField: any[] | undefined, _labelJoin: IModelSelectParamsJoin | undefined;
 
-    let _commentField: string[] | undefined, _commentJoin: IModelSelectParamsJoin | undefined;
+    let _commentField: any[] | undefined, _commentJoin: IModelSelectParamsJoin | undefined;
     let _fileField: string[] | undefined, _fileJoin: IModelSelectParamsJoin | undefined;
     let _itemField: string[] | undefined, _itemJoin: IModelSelectParamsJoin | undefined;
     let _atomField: string[] | undefined;
 
     let _tableAlias: string;
 
-    let _resourceField, _resourceJoin: IModelSelectParamsJoin | undefined;
+    let _resourceField: string[], _resourceJoin: IModelSelectParamsJoin | undefined;
 
     // needResourceLocale
     const needResourceLocale = this.self._prepare_needResourceLocale(_where);
@@ -124,42 +124,92 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // label
     if (label) {
-      _labelJoin = ' inner join aAtomLabelRef e on a.id=e.atomId';
+      _labelJoin = ['innerJoin', 'aAtomLabelRef as e', { 'a.id': 'e.atomId' }];
       _where['e.iid'] = iid;
       _where['e.userId'] = userIdWho;
       _where['e.labelId'] = label;
     } else {
-      _labelJoin = '';
+      _labelJoin = undefined;
     }
     if (!atomClassBase || !atomClassBase.itemOnly) {
-      _labelField = `,(select e2.labels from aAtomLabel e2 where e2.iid=${iid} and e2.atomId=a.id and e2.userId=${userIdWho}) as labels`;
+      _labelField = [
+        function (this: Knex.QueryBuilder) {
+          return this.select('e2.labels')
+            .from('aAtomLabel as e2')
+            .where({
+              'e2.iid': iid,
+              'e2.atomId': 'a.id',
+              'e2.userId': userIdWho,
+            })
+            .as('labels');
+        },
+      ];
     } else {
-      _labelField = '';
+      _labelField = undefined;
     }
 
     // comment
     if (comment) {
-      _commentField = `,h.id h_id,h.createdAt h_createdAt,h.updatedAt h_updatedAt,h.userId h_userId,h.sorting h_sorting,h.heartCount h_heartCount,h.replyId h_replyId,h.replyUserId h_replyUserId,h.replyContent h_replyContent,h.content h_content,h.summary h_summary,h.html h_html,h.userName h_userName,h.avatar h_avatar,h.replyUserName h_replyUserName,
-               (select h2.heart from aCommentHeart h2 where h2.iid=${iid} and h2.commentId=h.id and h2.userId=${userIdWho}) as h_heart`;
-
-      _commentJoin = ' inner join aViewComment h on h.atomId=a.id';
+      _commentField = [
+        'h.id as h_id',
+        'h.createdAt as h_createdAt',
+        'h.updatedAt as h_updatedAt',
+        'h.userId as h_userId',
+        'h.sorting as h_sorting',
+        'h.heartCount as h_heartCount',
+        'h.replyId as h_replyId',
+        'h.replyUserId as h_replyUserId',
+        'h.replyContent as h_replyContent',
+        'h.content as h_content',
+        'h.summary as h_summary',
+        'h.html as h_html',
+        'h.userName as h_userName',
+        'h.avatar as h_avatar',
+        'h.replyUserName as h_replyUserName',
+        function (this: Knex.QueryBuilder) {
+          return this.select('h2.heart')
+            .from('aCommentHeart as h2')
+            .where({ 'h2.iid': iid, 'h2.commentId': 'h.id', 'h2.userId': userIdWho })
+            .as('h_heart');
+        },
+      ];
+      _commentJoin = ['innerJoin', 'aViewComment as h', { 'h.atomId': 'a.id' }];
       _where['h.iid'] = iid;
       _where['h.deleted'] = 0;
     } else {
-      _commentField = '';
-      _commentJoin = '';
+      _commentField = undefined;
+      _commentJoin = undefined;
     }
 
     // file
     if (file) {
-      _fileField =
-        ',i.id i_id,i.createdAt i_createdAt,i.updatedAt i_updatedAt,i.userId i_userId,i.downloadId i_downloadId,i.mode i_mode,i.fileSize i_fileSize,i.width i_width,i.height i_height,i.filePath i_filePath,i.fileName i_fileName,i.realName i_realName,i.fileExt i_fileExt,i.encoding i_encoding,i.mime i_mime,i.attachment i_attachment,i.flag i_flag,i.userName i_userName,i.avatar i_avatar';
-      _fileJoin = ' inner join aViewFile i on i.atomId=a.id';
+      _fileField = [
+        'i.id as i_id',
+        'i.createdAt as i_createdAt',
+        'i.updatedAt as i_updatedAt',
+        'i.userId as i_userId',
+        'i.downloadId as i_downloadId',
+        'i.mode as i_mode',
+        'i.fileSize as i_fileSize',
+        'i.width as i_width',
+        'i.height as i_height',
+        'i.filePath as i_filePath',
+        'i.fileName as i_fileName',
+        'i.realName as i_realName',
+        'i.fileExt as i_fileExt',
+        'i.encoding as i_encoding',
+        'i.mime as i_mime',
+        'i.attachment as i_attachment',
+        'i.flag as i_flag',
+        'i.userName as i_userName',
+        'i.avatar as i_avatar',
+      ];
+      _fileJoin = ['innerJoin', 'aViewFile as i', { 'i.atomId': 'a.id' }];
       _where['i.iid'] = iid;
       _where['i.deleted'] = 0;
     } else {
-      _fileField = '';
-      _fileJoin = '';
+      _fileField = undefined;
+      _fileJoin = undefined;
     }
 
     // resource
