@@ -108,9 +108,10 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
+    // table alias
+    table = params.alias ? `${table} as ${params.alias}` : table;
     // builder
-    const tableAlias = params.alias ? `${table} as ${params.alias}` : table;
-    const builder = this.builder<TRecord2, TResult2>(tableAlias);
+    const builder = this.builder<TRecord2, TResult2>(table);
     // columns
     builder.select(params.columns);
     // joins
