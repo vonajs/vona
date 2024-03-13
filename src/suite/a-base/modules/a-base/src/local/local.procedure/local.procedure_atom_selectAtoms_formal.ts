@@ -349,7 +349,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       _resourceJoin,
       _cmsJoin,
     ]);
-    builder.join(_joins);
+    this.bean.model.buildJoins(builder, _joins);
     // where
     const wheres = this.bean.model.checkWhere(where);
     if (wheres === false) return [];
@@ -358,9 +358,9 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     }
     // orders/page
     if (!count) {
-      builder.orderBy(_orders);
-      builder.limit(page.size!);
-      builder.offset(page.index);
+      this.bean.model.buildOrders(builder, _orders);
+      this.bean.model.buildLimit(builder, page.size);
+      this.bean.model.buildOffset(builder, page.index);
     }
     // execute
     const debug = this.app.bean.debug.get('atom:sql');
@@ -399,11 +399,13 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
       } else {
         _itemKeyName = 'a.id';
       }
-      return this.bean.model.raw(`
-          exists(
-            select c.resourceAtomId from aViewUserRightResource c where c.iid=${iid} and ${_itemKeyName}=c.resourceAtomId and c.userIdWho=${userIdWho}
-          )
-        `);
+      return {
+        __exists__resource(this: Knex.QueryBuilder) {
+          return this.select('c.resourceAtomId')
+            .from('aViewUserRightResource as c')
+            .where({ 'c.iid': iid, [_itemKeyName]: 'c.resourceAtomId', 'c.userIdWho': userIdWho });
+        },
+      };
     }
 
     // mine

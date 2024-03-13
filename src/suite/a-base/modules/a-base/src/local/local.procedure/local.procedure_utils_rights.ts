@@ -1,3 +1,4 @@
+import { Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
@@ -45,20 +46,32 @@ export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {
     if (forAtomUser) {
       if (role) {
         // get users of role
-        _others = this.bean.model.raw(`
-              exists(
-                select c.userIdWhom from aViewUserRightAtomClassUser c
-                  inner join aViewUserRoleRef c2 on c.userIdWhom=c2.userId and c2.roleIdParent=${role}
-                  where c.iid=${iid} and a.itemId=c.userIdWhom and c.atomClassId=a.atomClassId and c.action=${action} and c.userIdWho=${userIdWho}
-              )
-            `);
+        _others = {
+          __exists__others(this: Knex.QueryBuilder) {
+            return this.select('c.userIdWhom')
+              .from('aViewUserRightAtomClassUser as c')
+              .innerJoin('aViewUserRoleRef as c2', { 'c.userIdWhom': 'c2.userId', 'c2.roleIdParent': role })
+              .where({
+                'c.iid': iid,
+                'a.itemId': 'c.userIdWhom',
+                'c.atomClassId': 'a.atomClassId',
+                'c.action': action,
+                'c.userIdWho': userIdWho,
+              });
+          },
+        };
       } else {
-        _others = this.bean.model.raw(`
-              exists(
-                select c.userIdWhom from aViewUserRightAtomClassUser c
-                  where c.iid=${iid} and a.itemId=c.userIdWhom and c.atomClassId=a.atomClassId and c.action=${action} and c.userIdWho=${userIdWho}
-              )
-            `);
+        _others = {
+          __exists__others(this: Knex.QueryBuilder) {
+            return this.select('c.userIdWhom').from('aViewUserRightAtomClassUser as c').where({
+              'c.iid': iid,
+              'a.itemId': 'c.userIdWhom',
+              'c.atomClassId': 'a.atomClassId',
+              'c.action': action,
+              'c.userIdWho': userIdWho,
+            });
+          },
+        };
       }
     } else {
       const roleScopes = await this.self._prepare_roleScopesOfUser({
