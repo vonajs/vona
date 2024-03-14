@@ -426,7 +426,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       .orderBy('b.atomClassId')
       .orderBy('e.resourceType')
       .orderBy('b.atomCategoryId');
-    this.bean.model.buildPage(page);
+    this.bean.model.buildPage(builder, page);
     const items = await builder;
     // locale
     this._resourceRightsLocale({ items });
