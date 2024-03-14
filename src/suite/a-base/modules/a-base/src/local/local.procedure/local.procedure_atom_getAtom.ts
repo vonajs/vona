@@ -182,8 +182,11 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
       }
     }
 
-    // fields
+    // builder
+    const builder = this.bean.model.builder(_tableAlias);
+    // select:fields
     const _selectFields = this.self._combineFields([
+      //
       _itemField,
       _cmsField,
       _atomField,
@@ -191,22 +194,29 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
       _labelField,
       _resourceField,
     ]);
-
-    // where clause
-    let _whereClause = this.bean.model._formatWhere(_where);
-    if (_whereClause === false) return false;
-    _whereClause = _whereClause === true ? '' : ` WHERE (${_whereClause})`;
-
-    // sql
-    const _sql = `select ${_selectFields} ${_atomJoin}
-            ${_itemJoin}
-            ${_resourceJoin}
-            ${_cmsJoin}
-
-          ${_whereClause}
-        `;
-
-    // ok
-    return _sql;
+    builder.select(_selectFields);
+    // join
+    const _joins = this.self._combineJoins([
+      //
+      _itemJoin,
+      _resourceJoin,
+      _cmsJoin,
+    ]);
+    this.bean.model.buildJoins(builder, _joins);
+    // where
+    const wheres = this.bean.model.checkWhere(_where);
+    if (wheres === false) return undefined;
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
+    // limit
+    builder.limit(1);
+    // execute
+    const debug = this.app.bean.debug.get('atom:sql');
+    if (debug.enabled) {
+      debug('===== getAtom =====\n%s', builder.toQuery());
+    }
+    const res = await builder;
+    return res[0];
   }
 }
