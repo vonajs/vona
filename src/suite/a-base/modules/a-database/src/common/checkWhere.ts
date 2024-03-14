@@ -3,6 +3,7 @@ import { formatValueArray, isRaw } from './utils.js';
 const __wherePlaceholderOr = '__or__';
 const __wherePlaceholderAnd = '__and__';
 const __wherePlaceholderExists = '__exists__';
+const __wherePlaceholderNotExists = '__notExists__';
 
 export function checkWhere(where) {
   if (where === true || where === false) return where;
@@ -24,6 +25,11 @@ export function checkWhere(where) {
     // check key: exists
     if (key.indexOf(__wherePlaceholderExists) > -1) {
       wheres.push(['EXISTS', value]);
+      continue;
+    }
+    // check key: not exists
+    if (key.indexOf(__wherePlaceholderNotExists) > -1) {
+      wheres.push(['NOTEXISTS', value]);
       continue;
     }
     // check key: or/and

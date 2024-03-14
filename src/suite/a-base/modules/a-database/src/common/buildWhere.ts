@@ -20,6 +20,11 @@ export function buildWhere(builder: Knex.QueryBuilder, wheres) {
       builder.whereExists(value);
       continue;
     }
+    // check key: exists
+    if (['NOTEXISTS'].includes(key)) {
+      builder.whereNotExists(value);
+      continue;
+    }
     // check key: or/and
     if (['OR', 'AND'].includes(key)) {
       _formatOrAnd(builder, value, key);
