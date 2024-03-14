@@ -46,7 +46,6 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     }
 
     // for safe
-    // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
     const _where: any = Object.assign({}, where);
     const _orders = orders ? orders.concat() : [];
 

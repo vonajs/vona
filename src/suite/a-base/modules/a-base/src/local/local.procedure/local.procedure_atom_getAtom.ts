@@ -29,7 +29,6 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     const self = this;
 
     // for safe
-    // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
 
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
