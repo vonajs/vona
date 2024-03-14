@@ -1,29 +1,12 @@
-import { TableIdentity } from '@cabloy/core';
 import { IModelSelectParamsPage } from 'cabloy-module-api-a-database';
 import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
+import { ReadOptions } from './read.js';
 
 export type SelectOptionsPage = IModelSelectParamsPage;
 
-export interface SelectOptions {
-  where?: object;
-  orders?: Array<any>;
+export interface SelectOptions extends ReadOptions {
+  orders?: Array<Array<any>>;
   page?: SelectOptionsPage;
-  star?: number;
-  label?: number;
-  comment?: number;
-  file?: number;
-  stage?: 0 | 1 | 2 | 'draft' | 'formal' | 'history';
-  language?: string;
-  category?: number;
-  tag?: number;
-  mine?: number;
-  resource?: number;
-  resourceLocale?: string;
-  role?: number;
-  mode?: string;
-  containerMode?: 'view' | 'edit';
-  formAction?: string;
-  atomIdMain?: TableIdentity;
 }
 
 export interface SelectOptionsPro extends SelectOptions {
