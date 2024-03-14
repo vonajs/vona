@@ -131,11 +131,9 @@ export class BeanUser1 extends BeanUser0 {
     return fields;
   }
 
-  async getFieldsSelect({ removePrivacy, alias }: any) {
+  async getFieldsSelect({ removePrivacy, alias }: any): Promise<string[]> {
     const fields = await this.getFields({ removePrivacy });
-    return Object.keys(fields)
-      .map(item => (alias ? `${alias}.${item}` : item))
-      .join(',');
+    return Object.keys(fields).map(item => (alias ? `${alias}.${item}` : item));
   }
 
   async count({ options, user }: any) {

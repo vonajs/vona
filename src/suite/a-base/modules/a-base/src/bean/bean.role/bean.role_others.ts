@@ -1,3 +1,4 @@
+import { IModelSelectParamsJoin, IModelSelectParamsOrder } from 'cabloy-module-api-a-database';
 import { BeanRoleIncludes } from './bean.role_includes.js';
 
 //
@@ -98,40 +99,39 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async usersOfRoleParent({ roleId, disabled, page, removePrivacy, query }: any) {
-    // disabled
-    let _disabled = '';
-    if (disabled !== undefined) {
-      _disabled = `and disabled=${parseInt(disabled)}`;
-    }
     // page
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.bean.model._limit(page.size, page.index);
     // fields
     const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
-    // query
-    let where;
+    // joins
+    const joins: IModelSelectParamsJoin[] = [['innerJoin', 'aViewUserRoleRef as b', { 'a.id': 'b.userId' }]];
+    // where
+    const where: any = {
+      'b.roleIdParent': roleId,
+    };
+    if (disabled !== undefined) {
+      where.disabled = parseInt(disabled);
+    }
     if (query) {
-      const clause: any = {};
-      clause.__or__ = [
+      where.__or__ = [
         { 'a.userName': { op: 'like', val: query } },
         { 'a.realName': { op: 'like', val: query } },
         { 'a.mobile': { op: 'like', val: query } },
       ];
-      where = this.bean.model._where(clause);
     }
-    where = where ? `${where} AND` : ' WHERE';
+    // orders
+    const orders: IModelSelectParamsOrder[] = [['a.userName']];
     // select
-    const list = await this.bean.model.query(
-      `
-        select ${fields} from aUser a
-          inner join aViewUserRoleRef b on a.id=b.userId
-            ${where} a.iid=? and a.deleted=0 ${_disabled} and b.roleIdParent=?
-            order by a.userName
-            ${_limit}
-        `,
-      [this.ctx.instance.id, roleId],
-    );
-    return list;
+    const items = await this.bean.user.model.select({
+      alias: 'a',
+      columns: fields,
+      joins,
+      where,
+      orders,
+      limit: page.limit,
+      offset: page.offset,
+    });
+    return items;
   }
 
   async usersOfRoleExpand({ roleId, disabled, page, removePrivacy }: any) {
