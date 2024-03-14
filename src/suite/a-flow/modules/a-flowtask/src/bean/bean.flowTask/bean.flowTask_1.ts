@@ -20,8 +20,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     // page
     page = this.ctx.bean.util.page(page, pageForce);
     // select
-    const sql = this.sqlProcedure.selectTasks({
-      iid: this.ctx.instance.id,
+    const items = await this.sqlProcedure.selectTasks({
       userIdWho: user ? user.id : 0,
       where,
       orders,
@@ -29,8 +28,11 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
       count,
       history,
     });
-    const res = await this.bean.model.query(sql);
-    return count ? res[0]._count : res;
+    if (count) {
+      return this.bean.model.extractCount(items);
+    }
+    // ok
+    return items;
   }
 
   async _loadTaskInstance({ flowTaskId, user, history, throwError = true }: any) {
