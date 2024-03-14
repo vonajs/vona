@@ -359,7 +359,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
     ]);
     this.bean.model.buildJoins(builder, _joins);
     // where
-    const wheres = this.bean.model.checkWhere(where);
+    const wheres = this.bean.model.checkWhere(_where);
     if (wheres === false) return [];
     if (wheres !== true) {
       this.bean.model.buildWhere(builder, wheres);

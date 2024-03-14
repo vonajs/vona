@@ -81,18 +81,13 @@ export class BeanUser1 extends BeanUser0 {
       userName = '';
     }
     // where
-    const clause: any = {};
-    clause.__or__ = [];
-    if (userName) clause.__or__.push({ userName });
-    if (email) clause.__or__.push({ email });
-    if (mobile) clause.__or__.push({ mobile });
-    if (clause.__or__.length === 0) return null;
-    const where = this.bean.model._where(clause);
-    return await this.model.queryOne(
-      `select * from aUser
-            ${where} and iid=? and deleted=0`,
-      [this.ctx.instance.id],
-    );
+    const where: any = {};
+    where.__or__ = [];
+    if (userName) where.__or__.push({ userName });
+    if (email) where.__or__.push({ email });
+    if (mobile) where.__or__.push({ mobile });
+    if (where.__or__.length === 0) return null;
+    return await this.model.get(where);
   }
 
   async save({ user }: any) {
