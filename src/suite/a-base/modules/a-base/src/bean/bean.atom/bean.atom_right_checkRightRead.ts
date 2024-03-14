@@ -33,7 +33,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
     // forAtomUser
     const forAtomUser = this.self._checkForAtomUser(atomClass);
     // formal/history
-    const sql = await this.sqlProcedure.checkRoleRightAction({
+    const res = await this.sqlProcedure.checkRoleRightAction({
       iid: this.ctx.instance.id,
       roleIdWho: roleId,
       atomClass,
@@ -42,9 +42,9 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
       action,
       forAtomUser,
     });
-    if (sql === false) return null;
-    if (sql === true) return atom;
-    return await this.bean.model.queryOne(sql);
+    if (res === false) return null;
+    if (res === true) return atom;
+    return res;
   }
 
   async checkRightRead({ atom: { id }, atomClass, options, user, checkFlow, disableAuthOpenCheck }: any) {
