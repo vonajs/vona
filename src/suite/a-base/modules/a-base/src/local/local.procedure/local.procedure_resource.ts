@@ -1,3 +1,4 @@
+import { Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
@@ -23,19 +24,31 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
     return _sql;
   }
 
-  _checkResourceLocales({ iid, locale, atomClassIds }: any) {
-    // for safe
-    iid = parseInt(iid);
-    locale = this.bean.model.format('?', locale);
+  async _checkResourceLocales({ locale, atomClassIds }: any) {
+    const self = this;
     // sql
-    const _sql = `select a.id as atomId,a.atomName from aAtom a
-            where a.iid=${iid} and a.deleted=0 and a.atomStage=1 and a.atomClassId in (${atomClassIds.join(',')})
-              and not exists(
-                select b.id from aResourceLocale b
-                  where b.iid=${iid} and b.locale=${locale} and b.atomId=a.id
-                    and (b.atomNameLocale is not null and b.atomNameLocale<>'')
-                )
-        `;
-    return _sql;
+    const res = await this.bean.atom.model.select({
+      alias: 'a',
+      columns: ['a.id as atomId', 'a.atomName'],
+      where: {
+        'a.atomStage': 1,
+        'a.atomClassId': atomClassIds,
+        __notExists__(this: Knex.QueryBuilder) {
+          return this.select(['b.id'])
+            .from('aResourceLocale as b')
+            .where({
+              'b.iid': self.bean.model.ref('a.iid'),
+              'b.atomId': self.bean.model.ref('a.id'),
+              'b.locale': locale,
+              __and__: [
+                //
+                { 'b.atomNameLocale': { op: 'notNull' } },
+                { 'b.atomNameLocale': { op: '<>', val: '' } },
+              ],
+            });
+        },
+      },
+    });
+    return res;
   }
 }

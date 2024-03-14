@@ -170,12 +170,11 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   async _checkResourceLocales({ locale }: any) {
     const atomClasses = await this._getAtomClassesResource();
     const atomClassIds = atomClasses.map(item => item.id);
-    const sql = this.sqlProcedure._checkResourceLocales({
-      iid: this.ctx.instance.id,
+    const res = await this.sqlProcedure._checkResourceLocales({
       locale,
       atomClassIds,
     });
-    return await this.bean.model.query(sql);
+    return res;
   }
 
   // check
