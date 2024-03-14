@@ -2,8 +2,8 @@ import { AtomSelectQueryParams } from '../../types.js';
 import { BeanAtomBaseDefault } from './bean.atomBase_default.js';
 
 export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
-  async selectQuery({ atomClass: _atomClass, options, user: _user }: AtomSelectQueryParams) {
-    return await this.ctx.bean.atom._selectQuery({ options });
+  async selectQuery({ atomClass, options, user }: AtomSelectQueryParams) {
+    return await this.ctx.bean.atom._selectQuery({ atomClass, options, user });
   }
 
   async select({ atomClass, options, items, user }: any) {

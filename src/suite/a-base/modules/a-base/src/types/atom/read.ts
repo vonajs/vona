@@ -1,5 +1,5 @@
 import { TableIdentity } from '@cabloy/core';
-import { AtomClassParams } from '../atomClass/index.js';
+import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
 
 export interface AtomKey {
   atomId: TableIdentity;
@@ -26,9 +26,26 @@ export interface ReadOptions {
   atomIdMain?: TableIdentity;
 }
 
+export interface ReadOptionsPro extends ReadOptions {
+  tableName: string;
+  schema: object;
+  iid: number;
+  atomClass?: AtomClassParams;
+  atomClassBase?: AtomClassBase;
+  cms: boolean;
+  forAtomUser: boolean;
+}
+
 export interface ReadParams {
   key: AtomKey;
   atomClass?: AtomClassParams;
-  options: ReadOptions;
+  options?: ReadOptions;
   user?: { id: number };
+}
+
+export interface AtomReadQueryParams {
+  atomClass: AtomClassParams;
+  options: ReadOptionsPro;
+  key: AtomKey;
+  user: { id: number };
 }

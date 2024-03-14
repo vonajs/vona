@@ -5,6 +5,7 @@ import {
   AtomClass,
   AtomClassBase,
   AtomClassParams,
+  AtomSelectQueryParams,
   CountParams,
   SelectOptions,
   SelectOptionsPro,
@@ -55,6 +56,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
 
   async _list({ atomClass: _atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
     if (!options) options = {};
+    if (!user) user = { id: 0 };
     const {
       where,
       orders,
@@ -118,7 +120,6 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // options: maybe has another custom options
     const options2: SelectOptionsPro = Object.assign({}, options, {
       iid: this.ctx.instance.id,
-      userIdWho: user ? user.id : 0,
       atomClass,
       atomClassBase,
       tableName,
@@ -149,7 +150,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
       items = await beanInstance.selectQuery({ atomClass, options: options2, user });
     } else {
-      items = await this._selectQuery({ options: options2 });
+      items = await this._selectQuery({ atomClass, options: options2, user });
     }
     // count
     if (count) {
@@ -159,7 +160,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     return items;
   }
 
-  async _selectQuery({ options }: { options: SelectOptionsPro }) {
-    return await this.sqlProcedure.selectAtoms({ options });
+  async _selectQuery({ atomClass, options, user }: AtomSelectQueryParams) {
+    return await this.sqlProcedure.selectAtoms({ atomClass, options, user });
   }
 }

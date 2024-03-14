@@ -1,11 +1,10 @@
-import { SelectOptionsPro, SelectOptionsProSafe } from '../../types.js';
+import { AtomSelectQueryParams, SelectOptionsProSafe } from '../../types.js';
 import { LocalProcedureBase } from './local.procedure_base.js';
 
 export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
-  async selectAtoms({ options: _options }: { options: SelectOptionsPro }) {
+  async selectAtoms({ atomClass: _atomClass, options: _options, user }: AtomSelectQueryParams) {
     let {
       iid,
-      userIdWho,
       // atomClass,
       // atomClassBase,
       // tableName,
@@ -31,7 +30,6 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
       atomIdMain,
     } = _options;
     iid = parseInt(iid);
-    userIdWho = parseInt(userIdWho);
     star = parseInt(star);
     label = parseInt(label);
     comment = parseInt(comment);
@@ -43,6 +41,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
     resource = parseInt(resource);
     role = parseInt(role);
     atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
+    const userIdWho = parseInt(user.id);
 
     const options: SelectOptionsProSafe = Object.assign({}, _options, {
       iid,

@@ -1,14 +1,15 @@
+import { AtomReadQueryParams } from '../../types.js';
 import { LocalProcedureAtomSelectAtomsFormal } from './local.procedure_atom_selectAtoms_formal.js';
 
 export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsFormal {
-  async getAtom({ options }: any) {
+  async getAtom({ atomClass, options, key, user }: AtomReadQueryParams) {
     let {
       iid,
-      userIdWho,
-      atomClass,
+      // userIdWho,
+      // atomClass,
       atomClassBase,
       tableName,
-      atomId,
+      // atomId,
       resource,
       /* resourceLocale,*/
       mode,
@@ -28,10 +29,10 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
 
     iid = parseInt(iid);
-    userIdWho = parseInt(userIdWho);
-    atomId = this.ctx.bean.util.parseIdSafe(atomId);
     resource = parseInt(resource);
     atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
+    const atomId = this.ctx.bean.util.parseIdSafe(key.atomId);
+    const userIdWho = parseInt(user.id);
 
     // where
     const _where: any = {};

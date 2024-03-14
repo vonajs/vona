@@ -1,3 +1,4 @@
+import { AtomReadQueryParams } from '../../types.js';
 import { BeanAtomBaseSelect } from './bean.atomBase_select.js';
 
 const __itemBasicFieldsRead = [
@@ -14,8 +15,8 @@ const __itemBasicFieldsRead = [
 ];
 
 export class BeanAtomBaseRead extends BeanAtomBaseSelect {
-  async readQuery({ atomClass, options, user }: any) {
-    return await this.ctx.bean.atom._readQuery({ atomClass, options, user });
+  async readQuery({ atomClass, options, key, user }: AtomReadQueryParams) {
+    return await this.ctx.bean.atom._readQuery({ atomClass, options, key, user });
   }
 
   async read({ atomClass, options, key, user }: any) {

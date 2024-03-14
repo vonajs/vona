@@ -1,4 +1,4 @@
-import { ReadParams } from '../../types.js';
+import { AtomReadQueryParams, ReadOptions, ReadOptionsPro, ReadParams } from '../../types.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Import } from './bean.atom_0_import.js';
 
@@ -41,6 +41,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
   async _get({ atomClass, options, key, mode, user }: ReadParams & { mode: string }) {
     if (!atomClass) this.ctx.throw(403);
     if (!options) options = {};
+    if (!user) user = { id: 0 };
     const resource = options.resource || 0;
     const resourceLocale = options.resourceLocale === false ? false : options.resourceLocale || this.ctx.locale;
     // atomClass
@@ -70,23 +71,22 @@ export class BeanAtom0Read extends BeanAtom0Import {
     // forAtomUser
     const forAtomUser = this.self._checkForAtomUser(atomClass);
     // options: maybe has another custom options
-    const options2 = Object.assign({}, options, {
+    const options2: ReadOptionsPro = Object.assign({}, options, {
       iid: this.ctx.instance.id,
-      userIdWho: user ? user.id : 0,
       atomClass,
       atomClassBase,
       tableName,
       schema,
-      atomId: key.atomId,
       resource,
       resourceLocale,
       mode,
       cms,
       forAtomUser,
     });
+
     // readQuery
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
-    const sql = await beanInstance.readQuery({ atomClass, options: options2, user });
+    const sql = await beanInstance.readQuery({ atomClass, options: options2, key, user });
     const debug = this.ctx.app.bean.debug.get('atom:sql');
     debug('===== getAtom =====\n%s', sql);
     // query
@@ -95,7 +95,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     return item;
   }
 
-  async _readQuery({ /* atomClass, */ options, user: _user }: any) {
-    return await this.sqlProcedure.getAtom({ options });
+  async _readQuery({ atomClass, options, key, user }: AtomReadQueryParams) {
+    return await this.sqlProcedure.getAtom({ atomClass, options, key, user });
   }
 }
