@@ -54,10 +54,6 @@ export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomR
     // limit
     builder.limit(1);
     // execute
-    const debug = this.app.bean.debug.get('atom:sql');
-    if (debug.enabled) {
-      debug('===== checkRightAction =====\n%s', builder.toQuery());
-    }
     const res = await builder;
     return res[0];
   }

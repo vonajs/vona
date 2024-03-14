@@ -54,10 +54,6 @@ export class LocalProcedureAtomRightCheckRoleRightRead extends LocalProcedureAto
     // limit
     builder.limit(1);
     // execute
-    const debug = this.app.bean.debug.get('atom:sql');
-    if (debug.enabled) {
-      debug('===== checkRoleRightAction =====\n%s', builder.toQuery());
-    }
     const res = await builder;
     return res[0];
   }
