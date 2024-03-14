@@ -2,7 +2,7 @@ import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightAction } from './local.procedure_atomRight_checkRightAction.js';
 
 export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {
-  checkRightActionBulk({ iid, userIdWho, atomClass, atomClassBase, action }: any) {
+  async checkRightActionBulk({ iid, userIdWho, atomClass, atomClassBase, action }: any) {
     // for safe
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
@@ -26,15 +26,22 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
     const _rightWhere = this._checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase });
     _where.__and__right = _rightWhere;
 
-    // where clause
-    const _whereClause = this.bean.model._formatWhere(_where);
-
-    // sql
-    const _sql = `select ${_selectFields} ${_atomActionJoin}
-        ${_atomClassjoin}
-        WHERE (${_whereClause})
-      `;
-    return _sql;
+    // builder
+    const builder = this.bean.model.builder(_tableAlias);
+    // select:fields
+    builder.select(_selectFields);
+    // join
+    this.bean.model.buildJoin(builder, _atomClassjoin);
+    // where
+    const wheres = this.bean.model.checkWhere(_where);
+    this.bean.model.buildWhere(builder, wheres);
+    // limit
+    if (action) {
+      builder.limit(1);
+    }
+    // execute
+    const res = await builder;
+    return action ? res[0] : res;
   }
 
   _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any): any {

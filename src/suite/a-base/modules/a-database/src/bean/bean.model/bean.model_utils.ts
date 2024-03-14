@@ -4,7 +4,7 @@ import { Knex } from 'knex';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
-import { BigNumber, IModelMethodOptionsGeneral, IModelSelectParamsPage } from '../../types.js';
+import { BigNumber, IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types.js';
 import { Cast } from '@cabloy/core';
 
 let __columns: Record<string, ITableColumns> = {};
@@ -97,7 +97,13 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return buildWhere(builder, wheres);
   }
 
-  buildJoins(builder: Knex.QueryBuilder, joins) {
+  buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin) {
+    if (!join) return;
+    const [joinType, joinTable, joinOn] = join;
+    builder[joinType](joinTable, Cast(joinOn));
+  }
+
+  buildJoins(builder: Knex.QueryBuilder, joins?: IModelSelectParamsJoin[]) {
     if (!joins) return;
     for (const [joinType, joinTable, joinOn] of joins) {
       builder[joinType](joinTable, Cast(joinOn));
