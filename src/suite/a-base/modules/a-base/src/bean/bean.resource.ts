@@ -440,28 +440,36 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     const locale = this.ctx.locale;
     // items
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.bean.model._limit(page.size, page.index);
-    const items = await this.bean.model.query(
-      `
-        select a.*,
-               b.atomName,b.atomDisabled,b.atomCategoryId,
-               f.categoryName as atomCategoryName,
-               c.module,c.atomClassName,
-               d.atomNameLocale,e.resourceType,
-               h.roleName as roleNameBase
-          from aViewUserRightResource a
-            inner join aAtom b on a.resourceAtomId=b.id
-            inner join aAtomClass c on b.atomClassId=c.id
-            left join aResourceLocale d on a.resourceAtomId=d.atomId and d.locale=?
-            left join aResource e on a.resourceAtomId=e.atomId
-            left join aCategory f on b.atomCategoryId=f.id
-            left join aRole h on a.roleIdBase=h.id
-          where a.iid=? and a.userIdWho=? and b.deleted=0 and b.atomStage=1
-            order by c.module,b.atomClassId,e.resourceType,b.atomCategoryId
-            ${_limit}
-        `,
-      [locale, this.ctx.instance.id, userId],
-    );
+    const builder = this.bean.model
+      .builderSelect('aViewUserRightResource as a', { disableDeleted: true })
+      .select([
+        'a.*',
+        'b.atomName',
+        'b.atomDisabled',
+        'b.atomCategoryId',
+        'f.categoryName as atomCategoryName',
+        'c.module',
+        'c.atomClassName',
+        'd.atomNameLocale',
+        'e.resourceType',
+        'h.roleName as roleNameBase',
+      ])
+      .innerJoin('aAtom as b', { 'a.resourceAtomId': 'b.id' })
+      .innerJoin('aAtomClass as c', { 'b.atomClassId': 'c.id' })
+      .leftJoin('aResourceLocale as d', {
+        'a.resourceAtomId': 'd.atomId',
+        'd.locale': this.bean.model.raw('?', locale),
+      })
+      .leftJoin('aResource as e', { 'a.resourceAtomId': 'e.atomId' })
+      .leftJoin('aCategory as f', { 'b.atomCategoryId': 'f.id' })
+      .leftJoin('aRole as h', { 'a.roleIdBase': 'h.id' })
+      .where({ 'a.userIdWho': userId, 'b.deleted': 0, 'b.atomStage': 1 })
+      .orderBy('c.module')
+      .orderBy('b.atomClassId')
+      .orderBy('e.resourceType')
+      .orderBy('b.atomCategoryId');
+    this.bean.model.buildPage(builder, page);
+    const items = await builder;
     // locale
     this._resourceRightsLocale({ items });
     // ok
