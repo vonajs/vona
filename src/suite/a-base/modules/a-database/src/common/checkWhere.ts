@@ -1,7 +1,8 @@
 import { formatValueArray, isRaw } from './utils.js';
 
-const __whereOrPlaceholder = '__or__';
-const __whereAndPlaceholder = '__and__';
+const __wherePlaceholderOr = '__or__';
+const __wherePlaceholderAnd = '__and__';
+const __wherePlaceholderExists = '__exists__';
 
 export function checkWhere(where) {
   if (where === true || where === false) return where;
@@ -20,11 +21,16 @@ export function checkWhere(where) {
       wheres.push([key, value]);
       continue;
     }
-    // check key or/and
+    // check key: exists
+    if (key.indexOf(__wherePlaceholderExists) > -1) {
+      wheres.push(['EXISTS', value]);
+      continue;
+    }
+    // check key: or/and
     let keyOrAnd;
-    if (key.indexOf(__whereOrPlaceholder) > -1) {
+    if (key.indexOf(__wherePlaceholderOr) > -1) {
       keyOrAnd = 'OR';
-    } else if (key.indexOf(__whereAndPlaceholder) > -1) {
+    } else if (key.indexOf(__wherePlaceholderAnd) > -1) {
       keyOrAnd = 'AND';
     }
     if (keyOrAnd) {
