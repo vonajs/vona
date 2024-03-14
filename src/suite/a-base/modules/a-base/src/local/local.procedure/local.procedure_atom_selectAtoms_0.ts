@@ -1,7 +1,6 @@
-import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
 import { SelectOptionsProSafe } from '../../types.js';
 import { LocalProcedureAtomSelectAtoms } from './local.procedure_atom_selectAtoms.js';
-import { Knex } from 'knex';
 
 export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtoms {
   async _selectAtoms_0({ options }: { options: SelectOptionsProSafe }) {

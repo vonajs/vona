@@ -28,6 +28,23 @@ export class VersionManager extends BeanBase {
 
   async init(options) {
     if (options.version === 1) {
+      // test
+      const atoms = await this.ctx.bean.atom.select({
+        atomClass: { module: 'test-party', atomClassName: 'party' },
+        options: {
+          stage: 'formal',
+          where: {
+            'a.atomName': {
+              op: 'like',
+              val: 'test',
+            },
+          },
+        },
+        user: { id: 2 },
+        pageForce: false,
+      });
+      console.log(atoms);
+      // test
       // remove publicDir
       await this._removePublicDir();
     }

@@ -74,10 +74,10 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
     // draft
     if (stage === 0) {
       // userIdWho must be set
-      return await this.self._selectAtoms_draft({ action, options });
+      return await this.self._selectAtoms_draft({ options });
     }
     if (userIdWho === 0) {
-      return await this.self._selectAtoms_0({ action, options });
+      return await this.self._selectAtoms_0({ options });
     }
     // formal/history
     return await this.self._selectAtoms_formal({ action, options });

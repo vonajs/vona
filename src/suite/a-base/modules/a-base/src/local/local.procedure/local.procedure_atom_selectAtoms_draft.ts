@@ -1,6 +1,5 @@
-import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomSelectAtoms0 } from './local.procedure_atom_selectAtoms_0.js';
-import { Knex } from 'knex';
 import { SelectOptionsProSafe } from '../../types.js';
 
 export class LocalProcedureAtomSelectAtomsDraft extends LocalProcedureAtomSelectAtoms0 {
