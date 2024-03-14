@@ -24,10 +24,10 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
     return _sql;
   }
 
-  async _checkResourceLocales({ locale, atomClassIds }: any) {
+  async _checkResourceLocales({ locale, atomClassIds }): Promise<{ atomId: number; atomName: string }[]> {
     const self = this;
     // sql
-    const res = await this.bean.atom.model.select({
+    const items = await this.bean.atom.model.select({
       alias: 'a',
       columns: ['a.id as atomId', 'a.atomName'],
       where: {
@@ -49,6 +49,6 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
         },
       },
     });
-    return res;
+    return items as unknown as { atomId: number; atomName: string }[];
   }
 }
