@@ -57,7 +57,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
           schema: schema.schema,
         },
       },
-      user: null,
+      user: undefined,
     });
     // ** old solution
     // const fields = await this._combineFields({ schema: schema.schema });

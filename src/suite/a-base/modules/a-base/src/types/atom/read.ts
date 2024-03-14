@@ -3,7 +3,7 @@ import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
 
 export interface AtomKey {
   atomId: TableIdentity;
-  itemId: TableIdentity;
+  itemId?: TableIdentity;
 }
 
 export interface ReadOptions {
@@ -24,9 +24,10 @@ export interface ReadOptions {
   containerMode?: 'view' | 'edit';
   formAction?: string;
   atomIdMain?: TableIdentity;
+  schema?: object;
 }
 
-export interface ReadOptionsPro extends ReadOptions {
+export interface ReadOptionsPro extends Omit<ReadOptions, 'schema'> {
   tableName: string;
   schema: object;
   iid: number;

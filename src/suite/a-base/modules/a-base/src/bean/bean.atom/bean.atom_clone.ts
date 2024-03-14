@@ -41,7 +41,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
     // srcItem
     if (!srcItem) {
-      srcItem = await this.ctx.bean.atom.read({ key: { atomId: srcKey.atomId }, atomClass, user: null });
+      srcItem = await this.ctx.bean.atom.read({ key: { atomId: srcKey.atomId }, atomClass, user: undefined });
     }
     if (!srcKey.itemId) {
       if (!atomClassBase.itemOnly) {

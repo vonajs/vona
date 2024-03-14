@@ -45,7 +45,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     const flowStage = atomClassBase.flow?.stage || 'draft';
     // ignoreFlow only used by draft
     const ignoreFlow = options && options.ignoreFlow;
-    const _atom = await this.ctx.bean.atom.read({ key, user: null });
+    const _atom = await this.ctx.bean.atom.read({ key, user: undefined });
     // check atom flow
     if (!ignoreFlow && flowStage === 'draft') {
       const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
