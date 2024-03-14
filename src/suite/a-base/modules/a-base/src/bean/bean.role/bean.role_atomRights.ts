@@ -203,24 +203,27 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async roleRights({ roleAtomId, roleId, page }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.bean.model._limit(page.size, page.index);
-    const items = await this.bean.model.query(
-      `
-        select 
-          a.*,
-          b.module,b.atomClassName,
-          c.name as actionName,c.bulk as actionBulk,c.actionMode,
-          d.atomName as flowDefName 
-        from aRoleRight a
-          inner join aAtomClass b on a.atomClassId=b.id
-          inner join aAtomAction c on a.atomClassId=c.atomClassId and a.action=c.code
-          left join aAtom d on c.flowKey=d.atomStaticKey and d.atomStage=1
-        where a.iid=? and a.roleId=?
-        order by b.module,a.atomClassId,a.action
-        ${_limit}
-        `,
-      [this.ctx.instance.id, roleId],
-    );
+    // builder
+    const builder = this.bean.model
+      .builderSelect('aRoleRight as a')
+      .select([
+        'a.*',
+        'b.module',
+        'b.atomClassName',
+        'c.name as actionName',
+        'c.bulk as actionBulk',
+        'c.actionMode',
+        'd.atomName as flowDefName',
+      ])
+      .innerJoin('aAtomClass as b', { 'a.atomClassId': 'b.id' })
+      .innerJoin('aAtomAction as c', { 'a.atomClassId': 'c.atomClassId', 'a.action': 'c.code' })
+      .leftJoin('aAtom as d', { 'c.flowKey': 'd.atomStaticKey', 'd.atomStage': this.bean.model.raw('?', 1) })
+      .where({ 'a.roleId': roleId })
+      .orderBy('b.module')
+      .orderBy('a.atomClassId')
+      .orderBy('a.action');
+    this.ctx.bean.model.buildPage(builder, page);
+    const items = await builder;
     // adjust
     await this._adjustItems({ items });
     // ok
@@ -231,29 +234,32 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async roleSpreads({ roleAtomId, roleId, page }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.bean.model._limit(page.size, page.index);
-    const items = await this.bean.model.query(
-      `
-        select 
-          d.*,
-          d.id as roleExpandId,
-          a.id as roleRightId,a.scope,
-          b.module,b.atomClassName,
-          c.code as actionCode,c.name as actionName,c.bulk as actionBulk,c.actionMode,
-          e.roleName as roleNameBase,
-          f.atomName as flowDefName 
-        from aRoleRight a
-          inner join aAtomClass b on a.atomClassId=b.id
-          inner join aAtomAction c on a.atomClassId=c.atomClassId and a.action=c.code
-          inner join aRoleExpand d on a.roleId=d.roleIdBase
-          inner join aRole e on d.roleIdBase=e.id
-          left join aAtom f on c.flowKey=f.atomStaticKey and f.atomStage=1
-        where d.iid=? and d.roleId=?
-        order by b.module,a.atomClassId,a.action
-        ${_limit}
-        `,
-      [this.ctx.instance.id, roleId],
-    );
+    const builder = this.bean.model
+      .builderSelect('aRoleRight as a')
+      .select([
+        'd.*',
+        'd.id as roleExpandId',
+        'a.id as roleRightId,a.scope',
+        'b.module',
+        'b.atomClassName',
+        'c.code as actionCode',
+        'c.name as actionName',
+        'c.bulk as actionBulk',
+        'c.actionMode',
+        'e.roleName as roleNameBase',
+        'f.atomName as flowDefName',
+      ])
+      .innerJoin('aAtomClass as b', { 'a.atomClassId': 'b.id' })
+      .innerJoin('aAtomAction as c', { 'a.atomClassId': 'c.atomClassId', 'a.action': 'c.code' })
+      .innerJoin('aRoleExpand as d', { 'a.roleId': 'd.roleIdBase' })
+      .innerJoin('aRole as e', { 'd.roleIdBase': 'e.id' })
+      .leftJoin('aAtom as f', { 'c.flowKey': 'f.atomStaticKey', 'f.atomStage': this.bean.model.raw('?', 1) })
+      .where({ 'd.roleId': roleId })
+      .orderBy('b.module')
+      .orderBy('a.atomClassId')
+      .orderBy('a.action');
+    this.bean.model.buildPage(builder, page);
+    const items = await builder;
     // adjust
     await this._adjustItems({ items });
     // ok
