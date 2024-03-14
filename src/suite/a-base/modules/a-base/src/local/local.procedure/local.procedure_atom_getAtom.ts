@@ -3,14 +3,14 @@ import { AtomReadQueryParams } from '../../types.js';
 import { LocalProcedureAtomSelectAtomsFormal } from './local.procedure_atom_selectAtoms_formal.js';
 
 export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsFormal {
-  async getAtom({ atomClass: _atomClass, options, key, user: _user }: AtomReadQueryParams) {
+  async getAtom({ atomClass: _atomClass, options, key: _key, user: _user }: AtomReadQueryParams) {
     let {
       iid,
       userIdWho,
+      atomId,
       atomClass,
       atomClassBase,
       tableName,
-      // atomId,
       resource,
       /* resourceLocale,*/
       mode,
@@ -33,9 +33,9 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
 
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
+    atomId = this.ctx.bean.util.parseIdSafe(atomId);
     resource = parseInt(resource);
     atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
-    const atomId = this.ctx.bean.util.parseIdSafe(key.atomId);
 
     // where
     const _where: any = {};

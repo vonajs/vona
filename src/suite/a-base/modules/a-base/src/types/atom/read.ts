@@ -32,6 +32,7 @@ export interface ReadOptionsPro extends Omit<ReadOptions, 'schema'> {
   schema: object;
   iid: number;
   userIdWho: number;
+  atomId: TableIdentity;
   atomClass: AtomClassParams;
   atomClassBase: AtomClassBase;
   cms: boolean;
