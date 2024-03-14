@@ -1,2 +1,2 @@
-export * from './types/atomClass.js';
-export * from './types/select.js';
+export * from './types/atom/index.js';
+export * from './types/atomClass/index.js';

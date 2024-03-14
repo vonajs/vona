@@ -1,6 +1,6 @@
 import { TableIdentity } from '@cabloy/core';
 import { IModelSelectParamsPage } from 'cabloy-module-api-a-database';
-import { AtomClassBase, AtomClassParams } from './atomClass.js';
+import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
 
 export type SelectOptionsPage = IModelSelectParamsPage;
 
