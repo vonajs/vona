@@ -31,8 +31,9 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async __getRaw(params: AtomClassParams): Promise<EntityAtomClass> {
     if ('id' in params) {
-      const res = await this.model.get(params);
-      if (res) return res;
+      const res = await this.model.get({ id: params.id });
+      if (!res) throw new Error(`atomClass not found: ${params.id}`);
+      return res;
     }
     const module = params.module || this.moduleScope;
     const atomClassName = params.atomClassName;
