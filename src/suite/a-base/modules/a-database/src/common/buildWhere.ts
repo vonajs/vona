@@ -15,7 +15,12 @@ export function buildWhere(builder: Knex.QueryBuilder, wheres) {
       builder.where(key, value);
       continue;
     }
-    // check key or/and
+    // check key: exists
+    if (['EXISTS'].includes(key)) {
+      builder.whereExists(value);
+      continue;
+    }
+    // check key: or/and
     if (['OR', 'AND'].includes(key)) {
       _formatOrAnd(builder, value, key);
       continue;
