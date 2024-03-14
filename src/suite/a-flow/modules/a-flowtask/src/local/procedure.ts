@@ -42,7 +42,7 @@ export class LocalProcedure extends BeanBase {
         'b.flowNodeDefId',
         'b.flowNodeName',
         'b.flowNodeType',
-        '0 as flowNodeStatus',
+        this.bean.model.raw('? as flowNodeStatus', 0),
         'c.flowDefId',
         'c.flowDefKey',
         'c.flowDefRevision',
