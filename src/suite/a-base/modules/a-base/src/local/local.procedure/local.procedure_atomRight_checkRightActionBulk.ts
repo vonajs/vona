@@ -1,3 +1,4 @@
+import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightAction } from './local.procedure_atomRight_checkRightAction.js';
 
 export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {
@@ -7,10 +8,10 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
     userIdWho = parseInt(userIdWho);
     action = parseInt(action || 0);
     // fields
-    const _selectFields = 'a.*,c.module,c.atomClassName';
+    const _selectFields = ['a.*', 'c.module', 'c.atomClassName'];
     // join
-    const _atomActionJoin = 'from aAtomAction a';
-    const _atomClassjoin = 'left join aAtomClass c on a.atomClassId=c.id';
+    const _tableAlias = 'aAtomAction as a';
+    const _atomClassjoin: IModelSelectParamsJoin = ['leftJoin', 'aAtomClass as c', { 'a.atomClassId': 'c.id' }];
     // _where
     const _where: any = {
       'a.iid': iid,

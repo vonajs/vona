@@ -10,7 +10,7 @@ export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomR
     // _where
     let _where;
     let _selectFields;
-    let _atomJoin;
+    let _tableAlias: string;
     if (!atomClassBase.itemOnly) {
       _where = {
         'a.deleted': 0,
@@ -19,16 +19,16 @@ export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomR
         // 'a.atomStage': [1, 2], viewWorkflow maybe in draft
         'a.atomClassId': atomClass.id,
       };
-      _selectFields = 'a.*';
-      _atomJoin = 'from aAtom a';
+      _selectFields = ['a.*'];
+      _tableAlias = 'aAtom as a';
     } else {
       _where = {
         'f.deleted': 0,
         'f.iid': iid,
         'f.id': atomId,
       };
-      _selectFields = 'f.*';
-      _atomJoin = `from ${atomClassBase.tableName} f`;
+      _selectFields = ['f.*'];
+      _tableAlias = `${atomClassBase.tableName} as f`;
     }
     // _rightWhere
     const _rightWhere = await this._checkRightAction_rightWhere({
@@ -40,22 +40,26 @@ export class LocalProcedureAtomRightCheckRightAction extends LocalProcedureAtomR
       forAtomUser,
       atom,
     });
-    const _rightWhereClause = this.bean.model._formatWhere(_rightWhere);
-    if (_rightWhereClause === false) return false;
-    if (_rightWhereClause === true) return true;
     _where.__and__right = _rightWhere;
 
-    // where clause
-    let _whereClause = this.bean.model._formatWhere(_where);
-    if (_whereClause === false) return false;
-    if (_whereClause === true) return true;
-    _whereClause = ` WHERE (${_whereClause})`;
-
-    // sql
-    const _sql = `select ${_selectFields} ${_atomJoin}
-        ${_whereClause}
-      `;
-    return _sql;
+    // builder
+    const builder = this.bean.model.builder(_tableAlias);
+    // select:fields
+    builder.select(_selectFields);
+    // where
+    const wheres = this.bean.model.checkWhere(_where);
+    if (wheres === false) return false;
+    if (wheres === true) return true;
+    this.bean.model.buildWhere(builder, wheres);
+    // limit
+    builder.limit(1);
+    // execute
+    const debug = this.app.bean.debug.get('atom:sql');
+    if (debug.enabled) {
+      debug('===== checkRightAction =====\n%s', builder.toQuery());
+    }
+    const res = await builder;
+    return res[0];
   }
 
   async _checkRightAction_rightWhere({ iid, userIdWho, atomClass, atomClassBase, action, forAtomUser, atom }: any) {
