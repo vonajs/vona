@@ -41,7 +41,7 @@ export interface CountParams {
 }
 
 export interface AtomSelectQueryParams {
-  atomClass: AtomClassParams;
+  atomClass?: AtomClassParams;
   options: SelectOptionsPro;
   user: { id: number };
 }

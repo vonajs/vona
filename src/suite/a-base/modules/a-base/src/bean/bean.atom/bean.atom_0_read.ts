@@ -86,11 +86,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
 
     // readQuery
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
-    const sql = await beanInstance.readQuery({ atomClass, options: options2, key, user });
-    const debug = this.ctx.app.bean.debug.get('atom:sql');
-    debug('===== getAtom =====\n%s', sql);
-    // query
-    const item = sql === false ? null : await this.bean.model.queryOne(sql);
+    const item = await beanInstance.readQuery({ atomClass, options: options2, key, user });
     // ok
     return item;
   }
