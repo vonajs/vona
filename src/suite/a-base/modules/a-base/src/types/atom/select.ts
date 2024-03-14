@@ -13,6 +13,7 @@ export interface SelectOptionsPro extends SelectOptions {
   tableName: string;
   schema: object;
   iid: number;
+  userIdWho: number;
   atomClass?: AtomClassParams;
   atomClassBase?: AtomClassBase;
   count: number;
@@ -23,7 +24,6 @@ export interface SelectOptionsPro extends SelectOptions {
 /** for inner use */
 export interface SelectOptionsProSafe extends Omit<SelectOptionsPro, 'stage'> {
   stage: number;
-  userIdWho: number;
 }
 
 export interface SelectParams {

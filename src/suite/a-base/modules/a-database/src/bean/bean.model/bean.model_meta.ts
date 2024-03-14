@@ -79,19 +79,19 @@ export class BeanModelMeta extends BeanBase {
   }
 
   /** 以下代码是临时使用 */
-  format(..._args) {
-    return '';
-  }
-  _formatWhere(..._args): any {
-    return '';
-  }
-  _orders(..._args) {
-    return '';
-  }
-  _limit(..._args) {
-    return '';
-  }
-  _where(..._args) {
-    return '';
-  }
+  // format(..._args) {
+  //   return '';
+  // }
+  // _formatWhere(..._args): any {
+  //   return '';
+  // }
+  // _orders(..._args) {
+  //   return '';
+  // }
+  // _limit(..._args) {
+  //   return '';
+  // }
+  // _where(..._args) {
+  //   return '';
+  // }
 }

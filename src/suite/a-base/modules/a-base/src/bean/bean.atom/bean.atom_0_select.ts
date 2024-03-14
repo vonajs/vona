@@ -120,6 +120,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // options: maybe has another custom options
     const options2: SelectOptionsPro = Object.assign({}, options, {
       iid: this.ctx.instance.id,
+      userIdWho: user.id,
       atomClass,
       atomClassBase,
       tableName,
