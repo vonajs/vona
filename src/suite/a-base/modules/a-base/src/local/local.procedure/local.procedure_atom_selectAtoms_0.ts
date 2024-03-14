@@ -291,10 +291,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     // orders/page
     if (!count) {
       this.bean.model.buildOrders(builder, _orders);
-      if (page) {
-        this.bean.model.buildLimit(builder, page.size);
-        this.bean.model.buildOffset(builder, page.index);
-      }
+      this.bean.model.buildPage(builder, page);
     }
     // execute
     const debug = this.app.bean.debug.get('atom:sql');

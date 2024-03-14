@@ -54,3 +54,8 @@ export interface IModelUpdateOptionsGeneral extends IModelMethodOptionsGeneral {
 export interface IModelGetOptionsGeneral extends IModelMethodOptionsGeneral {
   columns?: any;
 }
+
+export interface IModelSelectParamsPage {
+  index?: number;
+  size?: number;
+}

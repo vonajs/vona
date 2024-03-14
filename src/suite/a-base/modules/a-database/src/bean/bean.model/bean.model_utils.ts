@@ -4,7 +4,7 @@ import { Knex } from 'knex';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
-import { BigNumber, IModelMethodOptionsGeneral } from '../../types.js';
+import { BigNumber, IModelMethodOptionsGeneral, IModelSelectParamsPage } from '../../types.js';
 import { Cast } from '@cabloy/core';
 
 let __columns: Record<string, ITableColumns> = {};
@@ -111,16 +111,22 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
   }
 
-  buildLimit(builder: Knex.QueryBuilder, limit) {
-    if (limit !== undefined) {
+  buildLimit(builder: Knex.QueryBuilder, limit?: number) {
+    if (limit !== 0 && limit !== undefined) {
       builder.limit(limit);
     }
   }
 
-  buildOffset(builder: Knex.QueryBuilder, offset) {
+  buildOffset(builder: Knex.QueryBuilder, offset?: number) {
     if (offset !== undefined) {
       builder.offset(offset);
     }
+  }
+
+  buildPage(builder: Knex.QueryBuilder, page?: IModelSelectParamsPage) {
+    if (!page) return;
+    this.buildLimit(builder, page.size);
+    this.buildOffset(builder, page.index);
   }
 
   prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptionsGeneral) {
