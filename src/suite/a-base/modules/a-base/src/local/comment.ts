@@ -2,6 +2,7 @@ import { BeanBase, Local } from '@cabloy/core';
 
 import trimHtml from '@zhennann/trim-html';
 import { ScopeModule } from '../resource/this.js';
+import { Knex } from 'cabloy-module-api-a-database';
 
 @Local()
 export class LocalComment extends BeanBase<ScopeModule> {
@@ -22,15 +23,29 @@ export class LocalComment extends BeanBase<ScopeModule> {
   }
 
   async list({ key, options, user }: any) {
-    const _options = this._adjuctOptions({ key, options });
-    // sql
-    const _where = this.bean.model._where(_options.where);
-    const _orders = this.bean.model._orders(_options.orders);
-    const _limit = this.bean.model._limit(_options.limit, _options.offset);
-    const sql = `select a.*,(select d2.heart from aCommentHeart d2 where d2.iid=? and d2.commentId=a.id and d2.userId=?) as heart from aViewComment a
-         ${_where} ${_orders} ${_limit}`;
-    // select
-    return await this.bean.model.query(sql, [this.ctx.instance.id, user.id]);
+    const self = this;
+    const where = Object.assign({}, options.where, {
+      atomId: key.atomId,
+    });
+    const builder = this.bean.model
+      .builderSelect('aViewComment as a')
+      .select([
+        'a.*',
+        function (this: Knex.QueryBuilder) {
+          return this.select('d2.heart')
+            .from('aCommentHeart as d2')
+            .where({
+              'd2.iid': self.bean.model.ref('a.iid'),
+              'd2.commentId': self.bean.model.ref('a.id'),
+              'd2.userId': user.id,
+            })
+            .as('heart');
+        },
+      ])
+      .where(where);
+    this.bean.model.buildOrders(builder, options.orders);
+    this.bean.model.buildPage(builder, options.page);
+    return await builder;
   }
 
   async count({ key, options, user: _user }: any) {
