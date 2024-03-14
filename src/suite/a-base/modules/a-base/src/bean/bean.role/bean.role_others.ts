@@ -137,28 +137,31 @@ export class BeanRoleOthers extends BeanRoleIncludes {
   }
 
   async usersOfRoleExpand({ roleId, disabled, page, removePrivacy }: any) {
-    // disabled
-    let _disabled = '';
-    if (disabled !== undefined) {
-      _disabled = `and disabled=${parseInt(disabled)}`;
-    }
     // page
     page = this.ctx.bean.util.page(page, false);
-    const _limit = this.bean.model._limit(page.size, page.index);
     // fields
     const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
-    // query
-    const list = await this.bean.model.query(
-      `
-        select ${fields} from aUser a
-          inner join aViewUserRoleExpand b on a.id=b.userId
-            where a.iid=? and a.deleted=0 ${_disabled} and b.roleIdBase=?
-            order by a.userName
-            ${_limit}
-        `,
-      [this.ctx.instance.id, roleId],
-    );
-    return list;
+    // joins
+    const joins: IModelSelectParamsJoin[] = [['innerJoin', 'aViewUserRoleExpand as b', { 'a.id': 'b.userId' }]];
+    // where
+    const where: any = {
+      'b.roleIdBase': roleId,
+    };
+    if (disabled !== undefined) {
+      where['a.disabled'] = parseInt(disabled);
+    }
+    // orders
+    const orders: IModelSelectParamsOrder[] = [['a.userName']];
+    // select
+    const items = await this.bean.user.model.select({
+      alias: 'a',
+      columns: fields,
+      joins,
+      where,
+      orders,
+      page,
+    });
+    return items;
   }
 
   async _forceRoleAtomId({ roleAtomId, roleId }: any) {
