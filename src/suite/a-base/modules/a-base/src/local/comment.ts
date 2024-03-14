@@ -25,7 +25,7 @@ export class LocalComment extends BeanBase<ScopeModule> {
   async list({ key, options, user }: any) {
     const self = this;
     const where = Object.assign({}, options.where, {
-      atomId: key.atomId,
+      'a.atomId': key.atomId,
     });
     const builder = this.bean.model
       .builderSelect('aViewComment as a')
@@ -49,39 +49,36 @@ export class LocalComment extends BeanBase<ScopeModule> {
   }
 
   async count({ key, options, user: _user }: any) {
-    const _options = this._adjuctOptions({ key, options });
-    // sql
-    const _where = this.bean.model._where(_options.where);
-    const sql = `select count(*) as count from aViewComment a
-         ${_where}`;
-    // query
-    const res = await this.bean.model.queryOne(sql);
-    return res.count;
-  }
-
-  _adjuctOptions({ key, options }: any) {
-    const _options: any = {};
-    // where
-    _options.where = options.where || {};
-    _options.where.iid = this.ctx.instance.id;
-    _options.where.deleted = 0;
-    _options.where.atomId = key.atomId;
-    // orders
-    _options.orders = options.orders;
-    // page
-    if (options.page && options.page.size !== 0) {
-      _options.limit = options.page.size;
-      _options.offset = options.page.index;
-    }
-    return _options;
+    const where = Object.assign({}, options.where, {
+      atomId: key.atomId,
+    });
+    const builder = this.bean.model.builderSelect('aViewComment as a').count().where(where);
+    return this.bean.model.extractCount(await builder);
   }
 
   async item({ /* key,*/ data: { commentId }, user }) {
-    const sql = `select a.*,(select d2.heart from aCommentHeart d2 where d2.iid=? and d2.commentId=a.id and d2.userId=?) as heart from aViewComment a
-         where a.iid=? and a.deleted=0 and a.id=?`;
-    // select
-    const list = await this.bean.model.query(sql, [this.ctx.instance.id, user.id, this.ctx.instance.id, commentId]);
-    return list[0];
+    const self = this;
+    const where = {
+      'a.id': commentId,
+    };
+    const builder = this.bean.model
+      .builderSelect('aViewComment as a')
+      .select([
+        'a.*',
+        function (this: Knex.QueryBuilder) {
+          return this.select('d2.heart')
+            .from('aCommentHeart as d2')
+            .where({
+              'd2.iid': self.bean.model.ref('a.iid'),
+              'd2.commentId': self.bean.model.ref('a.id'),
+              'd2.userId': user.id,
+            })
+            .as('heart');
+        },
+      ])
+      .where(where)
+      .limit(1);
+    return (await builder)[0];
   }
 
   async save({ key, data, user }: any) {
