@@ -54,6 +54,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
   }
 
   async _list({ atomClass: _atomClass, options, user, pageForce = true, count = 0 }: SelectParams & { count: number }) {
+    if (!options) options = {};
     const {
       where,
       orders,
@@ -71,7 +72,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       resourceLocale,
       role = 0,
       mode,
-    } = options!;
+    } = options;
     // page
     const page = this.ctx.bean.util.page(_page, pageForce);
     // stage
@@ -95,7 +96,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
         count,
       });
       // hold for subsequent usage
-      // options!.tableName = tableName;
+      // options.tableName = tableName;
       // need not, moved to local.procedure
       // // 'where' should append atomClassId, such as article/post using the same table
       // if (!atomClassBase.itemOnly) {

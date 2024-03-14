@@ -1,9 +1,10 @@
+import { ReadParams } from '../../types.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Import } from './bean.atom_0_import.js';
 
 export class BeanAtom0Read extends BeanAtom0Import {
   // read
-  async read({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
+  async read({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: ReadParams) {
     // atomClass
     const { key, atom, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
@@ -37,7 +38,8 @@ export class BeanAtom0Read extends BeanAtom0Import {
     return list[0];
   }
 
-  async _get({ atomClass, options, key, mode, user }: any) {
+  async _get({ atomClass, options, key, mode, user }: ReadParams & { mode: string }) {
+    if (!atomClass) this.ctx.throw(403);
     if (!options) options = {};
     const resource = options.resource || 0;
     const resourceLocale = options.resourceLocale === false ? false : options.resourceLocale || this.ctx.locale;
@@ -54,7 +56,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
       key,
     });
     // hold for subsequent usage
-    options.tableName = tableName;
+    // options.tableName = tableName;
     // schema
     const atomSchema = await this.self._prepareAtomSchema({
       mode: options.containerMode || 'view',
@@ -62,18 +64,19 @@ export class BeanAtom0Read extends BeanAtom0Import {
       options,
       user,
     });
-    options.schema = atomSchema.schema;
+    const schema = atomSchema.schema;
     // cms
     const cms = atomClassBase && atomClassBase.cms;
     // forAtomUser
     const forAtomUser = this.self._checkForAtomUser(atomClass);
     // options: maybe has another custom options
-    options = Object.assign({}, options, {
+    const options2 = Object.assign({}, options, {
       iid: this.ctx.instance.id,
       userIdWho: user ? user.id : 0,
       atomClass,
       atomClassBase,
       tableName,
+      schema,
       atomId: key.atomId,
       resource,
       resourceLocale,
@@ -83,7 +86,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     });
     // readQuery
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
-    const sql = await beanInstance.readQuery({ atomClass, options, user });
+    const sql = await beanInstance.readQuery({ atomClass, options: options2, user });
     const debug = this.ctx.app.bean.debug.get('atom:sql');
     debug('===== getAtom =====\n%s', sql);
     // query

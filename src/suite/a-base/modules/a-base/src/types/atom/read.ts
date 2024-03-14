@@ -18,7 +18,7 @@ export interface ReadOptions {
   tag?: number;
   mine?: number;
   resource?: number;
-  resourceLocale?: string;
+  resourceLocale?: string | false;
   role?: number;
   mode?: string;
   containerMode?: 'view' | 'edit';
