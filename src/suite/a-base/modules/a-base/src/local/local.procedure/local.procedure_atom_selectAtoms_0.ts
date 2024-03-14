@@ -58,7 +58,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
     let _itemField: string[] | undefined, _itemJoin: IModelSelectParamsJoin | undefined;
     let _atomField: string[] | undefined;
 
-    let _tableAlias: string;
+    let _tableAlias: string = '';
 
     let _resourceField: string[] | undefined, _resourceJoin: IModelSelectParamsJoin | undefined;
 
@@ -220,7 +220,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
       _where['a.atomStage'] = stage;
     } else {
       _atomField = ['f.id as atomId', 'f.id as itemId'];
-      _tableAlias = '';
+      // _tableAlias = '';
       _where['f.deleted'] = 0;
       _where['f.iid'] = iid;
     }

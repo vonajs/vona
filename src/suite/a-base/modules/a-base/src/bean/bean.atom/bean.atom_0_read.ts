@@ -1,4 +1,4 @@
-import { AtomReadQueryParams, ReadOptions, ReadOptionsPro, ReadParams } from '../../types.js';
+import { AtomReadQueryParams, ReadOptionsPro, ReadParams } from '../../types.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtom0Import } from './bean.atom_0_import.js';
 

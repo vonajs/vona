@@ -30,8 +30,8 @@ export interface ReadOptionsPro extends ReadOptions {
   tableName: string;
   schema: object;
   iid: number;
-  atomClass?: AtomClassParams;
-  atomClassBase?: AtomClassBase;
+  atomClass: AtomClassParams;
+  atomClassBase: AtomClassBase;
   cms: boolean;
   forAtomUser: boolean;
 }

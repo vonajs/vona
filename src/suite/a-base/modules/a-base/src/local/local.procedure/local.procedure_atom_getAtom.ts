@@ -1,3 +1,4 @@
+import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
 import { AtomReadQueryParams } from '../../types.js';
 import { LocalProcedureAtomSelectAtomsFormal } from './local.procedure_atom_selectAtoms_formal.js';
 
@@ -25,6 +26,8 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     // -- p: aCmsArticle
     // -- q: aCmsContent
 
+    const self = this;
+
     // for safe
     // tableName = tableName ? this.bean.model.format('??', tableName) : null; // not format tableName
 
@@ -38,9 +41,11 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
     const _where: any = {};
 
     // vars
-    let _starField, _labelField;
-    let _itemField, _itemJoin;
-    let _atomField, _atomJoin;
+    let _starField: any[] | undefined, _labelField: any[] | undefined;
+    let _itemField: string[] | undefined, _itemJoin: IModelSelectParamsJoin | undefined;
+    let _atomField: string[] | undefined;
+
+    let _tableAlias: string = '';
 
     const _resourceField = '',
       _resourceJoin = '';
@@ -56,16 +61,38 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
 
     // star
     if (userIdWho && !atomClassBase.itemOnly) {
-      _starField = `,(select d.star from aAtomStar d where d.iid=${iid} and d.atomId=a.id and d.userId=${userIdWho}) as star`;
+      _starField = [
+        function (this: Knex.QueryBuilder) {
+          return this.select('d2.star')
+            .from('aAtomStar as d2')
+            .where({
+              'd2.iid': iid,
+              'd2.atomId': self.bean.model.ref('a.id'),
+              'd2.userId': userIdWho,
+            })
+            .as('star');
+        },
+      ];
     } else {
-      _starField = '';
+      _starField = undefined;
     }
 
     // label
     if (userIdWho && !atomClassBase.itemOnly) {
-      _labelField = `,(select e.labels from aAtomLabel e where e.iid=${iid} and e.atomId=a.id and e.userId=${userIdWho}) as labels`;
+      _labelField = [
+        function (this: Knex.QueryBuilder) {
+          return this.select('e2.labels')
+            .from('aAtomLabel as e2')
+            .where({
+              'e2.iid': iid,
+              'e2.atomId': self.bean.model.ref('a.id'),
+              'e2.userId': userIdWho,
+            })
+            .as('labels');
+        },
+      ];
     } else {
-      _labelField = '';
+      _labelField = undefined;
     }
 
     // resource
@@ -86,31 +113,57 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
 
     // tableName
     if (tableName) {
-      const _fields = await this.self._prepare_fieldsRight({ options });
-      _itemField = `${_fields},`;
+      _itemField = await this.self._prepare_fieldsRight({ options });
       if (!atomClassBase || !atomClassBase.itemOnly) {
-        _itemJoin = ` inner join ${tableName} f on f.atomId=a.id`;
+        _itemJoin = ['innerJoin', `${tableName} as f`, { 'f.atomId': 'a.id' }];
       } else {
-        _itemJoin = `from ${tableName} f`;
+        _itemJoin = undefined;
+        _tableAlias = `${tableName} as f`;
       }
     } else {
-      _itemField = '';
-      _itemJoin = '';
+      _itemField = undefined;
+      _itemJoin = undefined;
     }
 
     // atom
     if (!atomClassBase.itemOnly) {
-      _atomField = `a.id as atomId,a.itemId,a.atomStage,a.atomFlowId,a.atomClosed,a.atomIdDraft,a.atomIdFormal,a.roleIdOwner,a.atomClassId,a.atomName,
-          a.atomStatic,a.atomStaticKey,a.atomRevision,a.atomLanguage,a.atomCategoryId,a.atomTags,
-          a.atomSimple,a.atomDisabled,a.atomState,
-          a.allowComment,a.starCount,a.commentCount,a.attachmentCount,a.readCount,a.userIdCreated,a.userIdUpdated,a.createdAt as atomCreatedAt,a.updatedAt as atomUpdatedAt`;
-      _atomJoin = 'from aAtom a';
+      _atomField = [
+        'a.id as atomId',
+        'a.itemId',
+        'a.atomStage',
+        'a.atomFlowId',
+        'a.atomClosed',
+        'a.atomIdDraft',
+        'a.atomIdFormal',
+        'a.roleIdOwner',
+        'a.atomClassId',
+        'a.atomName',
+        'a.atomStatic',
+        'a.atomStaticKey',
+        'a.atomRevision',
+        'a.atomLanguage',
+        'a.atomCategoryId',
+        'a.atomTags',
+        'a.atomSimple',
+        'a.atomDisabled',
+        'a.atomState',
+        'a.allowComment',
+        'a.starCount',
+        'a.commentCount',
+        'a.attachmentCount',
+        'a.readCount',
+        'a.userIdCreated',
+        'a.userIdUpdated',
+        'a.createdAt as atomCreatedAt',
+        'a.updatedAt as atomUpdatedAt',
+      ];
+      _tableAlias = 'aAtom as a';
       _where['a.id'] = atomId;
       _where['a.deleted'] = 0;
       _where['a.iid'] = iid;
     } else {
-      _atomField = 'f.id as atomId,f.id as itemId';
-      _atomJoin = '';
+      _atomField = ['f.id as atomId', 'f.id as itemId'];
+      // _tableAlias = '';
       _where['f.id'] = atomId;
       _where['f.deleted'] = 0;
       _where['f.iid'] = iid;
