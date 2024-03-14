@@ -30,6 +30,7 @@ export interface IModelSelectParams {
   orders?: IModelSelectParamsOrder[];
   limit?: number;
   offset?: number;
+  page?: IModelSelectParamsPage;
 }
 
 export interface IModelCountParams {

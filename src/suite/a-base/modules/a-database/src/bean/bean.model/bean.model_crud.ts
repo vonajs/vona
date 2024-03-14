@@ -127,6 +127,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     this.buildLimit(builder, params.limit);
     // offset
     this.buildOffset(builder, params.offset);
+    // page
+    this.buildPage(builder, params.page);
     // ready
     const debug = this.app.bean.debug.get('model');
     if (debug.enabled) debug('model.select: %s', builder.toQuery());

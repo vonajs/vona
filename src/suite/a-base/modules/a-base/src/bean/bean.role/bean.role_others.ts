@@ -128,8 +128,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
       joins,
       where,
       orders,
-      limit: page.limit,
-      offset: page.offset,
+      page,
     });
     return items;
   }
