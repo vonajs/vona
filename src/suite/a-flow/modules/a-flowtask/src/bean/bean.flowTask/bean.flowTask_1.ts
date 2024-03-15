@@ -100,12 +100,16 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     //   2. close
     //    flowTaskStatus:1
     //    handleStatus: not changed
-    await this.bean.model.query(
-      `
-        update aFlowTaskHistory set flowTaskStatus=1
-          where iid=? and deleted=0 and flowNodeId=? and flowTaskStatus=0
-        `,
-      [this.ctx.instance.id, flowNodeId],
+    await this.modelFlowTaskHistory.update(
+      {
+        flowTaskStatus: 1,
+      },
+      {
+        where: {
+          flowNodeId,
+          flowTaskStatus: 0,
+        },
+      },
     );
   }
 
