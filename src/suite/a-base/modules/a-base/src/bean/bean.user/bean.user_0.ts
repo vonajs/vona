@@ -14,7 +14,11 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     return this.scope.model.user;
   }
 
-  get modelAgent() {
+  get modelUser() {
+    return this.scope.model.user;
+  }
+
+  get modelUserAgent() {
     return this.scope.model.userAgent;
   }
 
@@ -212,32 +216,36 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   }
 
   async agent({ userId }: any) {
-    const sql = `
-        select a.* from aUser a
-          left join aUserAgent b on a.id=b.userIdAgent
-            where a.iid=? and a.deleted=0 and b.userId=?
-      `;
-    return await this.bean.model.queryOne(sql, [this.ctx.instance.id, userId]);
+    const items = await this.modelUser.select({
+      alias: 'a',
+      joins: [['leftJoin', 'aUserAgent as b', { 'a.id': 'b.userIdAgent' }]],
+      where: {
+        'b.userId': userId,
+      },
+    });
+    return items[0];
   }
 
   async agentsBy({ userId }: any) {
-    const sql = `
-        select a.* from aUser a
-          left join aUserAgent b on a.id=b.userId
-            where a.iid=? and a.deleted=0 and b.userIdAgent=?
-      `;
-    return await this.bean.model.query(sql, [this.ctx.instance.id, userId]);
+    const items = await this.modelUser.select({
+      alias: 'a',
+      joins: [['leftJoin', 'aUserAgent as b', { 'a.id': 'b.userId' }]],
+      where: {
+        'b.userIdAgent': userId,
+      },
+    });
+    return items;
   }
 
   async addAgent({ userIdAgent, userId }: any) {
-    await this.modelAgent.insert({
+    await this.modelUserAgent.insert({
       userIdAgent,
       userId,
     });
   }
 
   async removeAgent({ userIdAgent, userId }: any) {
-    await this.modelAgent.delete({
+    await this.modelUserAgent.delete({
       userIdAgent,
       userId,
     });
@@ -438,6 +446,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       data: { userIdFrom, userIdTo },
     });
     // aAuth: delete old records
+    const list = await this.modelAuth.select({});
     const list = await this.bean.model.query(
       'select a.id,a.providerId,a.providerScene from aAuth a where a.deleted=0 and a.iid=? and a.userId=?',
       [this.ctx.instance.id, userIdFrom],
