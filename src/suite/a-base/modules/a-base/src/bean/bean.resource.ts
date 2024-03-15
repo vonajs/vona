@@ -224,15 +224,14 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async resourceRoles({ key /* , user */ }: any) {
-    const items = await this.bean.model.query(
-      `
-        select a.*,b.roleName from aResourceRole a
-          left join aRole b on a.roleId=b.id
-            where a.iid=? and a.atomId=?
-            order by b.roleName
-        `,
-      [this.ctx.instance.id, key.atomId],
-    );
+    const items = await this.bean.model.select('aResourceRole as a', {
+      columns: ['a.*', 'b.roleName'],
+      joins: [['leftJoin', 'aRole as b', { 'a.roleId': 'b.id' }]],
+      where: {
+        'a.atomId': key.atomId,
+      },
+      orders: [['b.roleName']],
+    });
     // locale
     for (const item of items) {
       item.roleNameLocale = this.ctx.text(item.roleName);

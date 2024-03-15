@@ -3,10 +3,12 @@ import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_a
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
   checkRightResource({ iid, userIdWho, resourceAtomId }: any) {
+    const self = this;
     // for safe
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho || 0);
     resourceAtomId = parseInt(resourceAtomId);
+
     // _rightWhere
     let _rightWhere = '';
     if (userIdWho) {
