@@ -1,8 +1,12 @@
 import { Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
+import { TableIdentity } from '@cabloy/core';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
-  async checkRightResource({ userIdWho, resourceAtomId }) {
+  async checkRightResource({
+    userIdWho,
+    resourceAtomId,
+  }): Promise<{ atomId: TableIdentity; atomName: string } | undefined> {
     const self = this;
 
     // for safe
@@ -34,7 +38,7 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
       where,
       limit: 1,
     });
-    return items[0];
+    return items[0] as unknown as { atomId: TableIdentity; atomName: string } | undefined;
   }
 
   async _checkResourceLocales({ locale, atomClassIds }): Promise<{ atomId: number; atomName: string }[]> {
