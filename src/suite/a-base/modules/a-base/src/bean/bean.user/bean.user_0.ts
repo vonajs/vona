@@ -22,6 +22,10 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     return this.scope.model.userAgent;
   }
 
+  get modelUserRole() {
+    return this.scope.model.userRole;
+  }
+
   get modelAuth() {
     return this.getScope('a-auth').model.auth;
   }
@@ -446,29 +450,36 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       data: { userIdFrom, userIdTo },
     });
     // aAuth: delete old records
-    const list = await this.modelAuth.select({});
-    const list = await this.bean.model.query(
-      'select a.id,a.providerId,a.providerScene from aAuth a where a.deleted=0 and a.iid=? and a.userId=?',
-      [this.ctx.instance.id, userIdFrom],
-    );
+    const list = await this.modelAuth.select({
+      where: {
+        userId: userIdFrom,
+      },
+    });
     for (const item of list) {
-      await this.bean.model.query(
-        'delete from aAuth where deleted=0 and iid=? and userId=? and providerId=? and providerScene=?',
-        [this.ctx.instance.id, userIdTo, item.providerId, item.providerScene],
-      );
+      await this.modelAuth.delete({
+        userId: userIdTo,
+        providerId: item.providerId,
+        providerScene: item.providerScene,
+      });
     }
     // aAuth: update records
-    await this.bean.model.query('update aAuth a set a.userId=? where a.deleted=0 and a.iid=? and a.userId=?', [
-      userIdTo,
-      this.ctx.instance.id,
-      userIdFrom,
-    ]);
+    await this.modelAuth.update(
+      {
+        userId: userIdTo,
+      },
+      {
+        where: {
+          userId: userIdFrom,
+        },
+      },
+    );
     // aUserRole
-    await this.bean.model.query('update aUserRole a set a.userId=? where a.iid=? and a.userId=?', [
-      userIdTo,
-      this.ctx.instance.id,
-      userIdFrom,
-    ]);
+    await this.modelUserRole.update(
+      {
+        userId: userIdTo,
+      },
+      { where: { userId: userIdFrom } },
+    );
     // delete user
     await this.self.delete({ userId: userIdFrom });
   }
