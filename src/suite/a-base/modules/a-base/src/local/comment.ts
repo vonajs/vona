@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Cast, Local } from '@cabloy/core';
 
 import trimHtml from '@zhennann/trim-html';
 import { ScopeModule } from '../resource/this.js';
@@ -129,11 +129,10 @@ export class LocalComment extends BeanBase<ScopeModule> {
 
   async save_add({ key, data: { replyId, content }, user }) {
     // sorting
-    const list = await this.bean.model.query(
-      'select max(sorting) as sorting from aComment where iid=? and deleted=0 and atomId=?',
-      [this.ctx.instance.id, key.atomId],
-    );
-    const sorting = (list[0].sorting || 0) + 1;
+    const list = await this.bean.model.builderSelect('aComment').max('sorting as sorting').where({
+      atomId: key.atomId,
+    });
+    const sorting = (Cast(list[0]).sorting || 0) + 1;
     // reply
     let reply;
     if (replyId) {
@@ -190,7 +189,7 @@ export class LocalComment extends BeanBase<ScopeModule> {
     const item = await this.modelComment.get({ id: commentId });
     if (!item) this.ctx.throw(403);
     // check right
-    let canDeleted = key.atomId === item.atomId && item.userId === user.id;
+    let canDeleted: any = key.atomId === item.atomId && item.userId === user.id;
     if (!canDeleted) {
       canDeleted = await this.ctx.bean.resource.checkRightResource({
         atomStaticKey: 'a-base:deleteComment',

@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { BeanModuleScopeBase, Bean } from '@cabloy/core';
 
 @Bean()
-export class BeanCacheDb extends BeanModuleScopeBase {
+export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
   async get(name) {
     const res = await this._has(name);
     return res ? JSON.parse(res.value) : undefined;
@@ -28,13 +28,11 @@ export class BeanCacheDb extends BeanModuleScopeBase {
       name,
     });
     if (res) {
-      await this.bean.model.query(
-        `
-          update aCache set value=?, expired=${expired}
-            where id=?
-          `,
-        [JSON.stringify(value), res.id],
-      );
+      await this.bean.model.update('aCache', {
+        id: res.id,
+        value: JSON.stringify(value),
+        expired,
+      });
     } else {
       if (queue) {
         await this.ctx.meta.util.lock({
@@ -48,12 +46,12 @@ export class BeanCacheDb extends BeanModuleScopeBase {
           },
         });
       } else {
-        await this.bean.model.query(
-          `
-            insert into aCache(iid,module,name,value,expired) values(?,?,?,?,${expired})
-            `,
-          [this.ctx.instance ? this.ctx.instance.id : 0, this.moduleScope, name, JSON.stringify(value)],
-        );
+        await this.bean.model.insert('aCache', {
+          module: this.moduleScope,
+          name,
+          value: JSON.stringify(value),
+          expired,
+        });
       }
     }
     // return old value
@@ -68,14 +66,14 @@ export class BeanCacheDb extends BeanModuleScopeBase {
   }
 
   async _has(name) {
-    const sql =
-      'select * from aCache where iid=? and module=? and name=? and (expired is null or expired>CURRENT_TIMESTAMP)';
-    const res = await this.bean.model.queryOne(sql, [
-      this.ctx.instance ? this.ctx.instance.id : 0,
-      this.moduleScope,
-      name,
-    ]);
-    return res;
+    const item = await this.bean.model.get('aCache', {
+      where: {
+        module: this.moduleScope,
+        name,
+        __or__: [{ expired: { op: 'isNull' } }, { expired: { op: '>', val: new Date() } }],
+      },
+    });
+    return item;
   }
 
   async remove(name) {
