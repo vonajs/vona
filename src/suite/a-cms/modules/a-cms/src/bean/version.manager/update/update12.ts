@@ -26,30 +26,68 @@ export class VersionUpdate extends BeanBase {
 
   async _update12Migration_articles() {
     // first, hold articles
-    const articles = await this.bean.model.query(
-      `
-        select a.id as atomId,a.atomClassId,a.atomStage,a.userIdCreated,b.content
-           from aAtom a
-           left join aCmsContent b on a.id=b.atomId
-            where a.iid=? and a.deleted=0 and a.atomStage=1
-              and ( 
-                        b.content like '%cms-pluginblock:blockAudio%'
-                    or  b.content like '%cms-pluginblock:blockIFrame%'
-                    or  b.content like '%cabloy-dashboard:blockCourse%'
-                  )   
-        `,
-      [this.ctx.instance.id],
-    );
+    const articles = await this.bean.model.select('aAtom as a', {
+      columns: ['a.id as atomId', 'a.atomClassId', 'a.atomStage', 'a.userIdCreated', 'b.content'],
+      joins: [['leftJoin', 'aCmsContent as b', { 'a.id': 'b.atomId' }]],
+      where: {
+        'a.atomStage': 1,
+        __or__: [
+          { 'b.content': { op: 'like', val: 'cms-pluginblock:blockAudio' } },
+          {
+            'b.content': { op: 'like', val: 'cms-pluginblock:blockIFrame' },
+          },
+          {
+            'b.content': { op: 'like', val: 'cabloy-dashboard:blockCourse' },
+          },
+        ],
+      },
+    });
     // then, update all articles
-    await this.bean.model.query(`
-      update aCmsContent set content = replace (content,'cms-pluginblock:blockAudio','a-markdownblock:audio') where content like '%cms-pluginblock:blockAudio%'
-    `);
-    await this.bean.model.query(`
-      update aCmsContent set content = replace (content,'cms-pluginblock:blockIFrame','a-markdownblock:iframe') where content like '%cms-pluginblock:blockIFrame%'
-    `);
-    await this.bean.model.query(`
-      update aCmsContent set content = replace (content,'cabloy-dashboard:blockCourse','cabloy-course:blockCourseCodes') where content like '%cabloy-dashboard:blockCourse%'
-    `);
+    await this.bean.model.update(
+      'aCmsContent',
+      {
+        content: this.bean.model.raw(`replace (??,?,?)`, [
+          'content',
+          'cms-pluginblock:blockAudio',
+          'a-markdownblock:audio',
+        ]),
+      },
+      {
+        where: {
+          content: { op: 'like', val: 'cms-pluginblock:blockAudio' },
+        },
+      },
+    );
+    await this.bean.model.update(
+      'aCmsContent',
+      {
+        content: this.bean.model.raw(`replace (??,?,?)`, [
+          'content',
+          'cms-pluginblock:blockIFrame',
+          'a-markdownblock:iframe',
+        ]),
+      },
+      {
+        where: {
+          content: { op: 'like', val: 'cms-pluginblock:blockIFrame' },
+        },
+      },
+    );
+    await this.bean.model.update(
+      'aCmsContent',
+      {
+        content: this.bean.model.raw(`replace (??,?,?)`, [
+          'content',
+          'cabloy-dashboard:blockCourse',
+          'cabloy-course:blockCourseCodes',
+        ]),
+      },
+      {
+        where: {
+          content: { op: 'like', val: 'cabloy-dashboard:blockCourse' },
+        },
+      },
+    );
     // loop
     for (const article of articles) {
       await this._update12Migration_article({ article });
