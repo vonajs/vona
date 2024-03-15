@@ -65,11 +65,11 @@ export class LocalMessage extends BeanBase<ScopeModule> {
   }
 
   async select({ messageClass, options, user }: any) {
-    return await this._list({ messageClass, options, user, count: 0 });
+    return (await this._list({ messageClass, options, user, count: 0 })) as any[];
   }
 
   async count({ messageClass, options, user }: any): Promise<{ count: BigNumber }> {
-    const count = await this._list({ messageClass, options, user, count: 1 });
+    const count = (await this._list({ messageClass, options, user, count: 1 })) as BigNumber;
     return { count };
   }
 
@@ -125,7 +125,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
     // orders
     const orders = (options && options.orders) || [['createdAt', 'asc']];
     // query
-    const sql = this.sqlProcedure.selectMessages({
+    const items = await this.sqlProcedure.selectMessages({
       iid: this.ctx.instance.id,
       where,
       orders,
@@ -133,8 +133,7 @@ export class LocalMessage extends BeanBase<ScopeModule> {
       offset: options.offset,
       count,
     });
-    const res = await this.bean.model.query(sql);
-    return count ? res[0]._count : res;
+    return count ? this.bean.model.extractCount(items) : items;
   }
 }
 
