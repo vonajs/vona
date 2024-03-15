@@ -63,7 +63,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       // iid
       const iid = this.ctx.instance.id;
       // remove
-      await this._buildRolesRemove({ iid });
+      await this._buildRolesRemove();
       // add
       await this._buildRolesAdd({ iid, roleIdParent: 0 }, progress);
       // setDirty
@@ -81,16 +81,17 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     }
   }
 
-  async _buildRolesRemove({ iid }: any) {
-    await this.bean.model.query(`delete from aRoleRef where aRoleRef.iid=${iid}`);
-    await this.bean.model.query(`delete from aRoleIncRef where aRoleIncRef.iid=${iid}`);
-    await this.bean.model.query(`delete from aRoleExpand where aRoleExpand.iid=${iid}`);
+  async _buildRolesRemove() {
+    await this.modelRoleRef.delete();
+    await this.modelRoleIncRef.delete();
+    await this.modelRoleExpand.delete();
   }
 
   async _buildRolesAdd({ iid, roleIdParent }, progress) {
-    const list = await this.bean.model.query(
-      `select a.id,a.roleName,a.catalog,a.atomId from aRole a where a.iid=${iid} and a.roleIdParent=${roleIdParent}`,
-    );
+    const list = await this.modelRole.select({
+      columns: ['id', 'roleName', 'catalog', 'atomId'],
+      where: { roleIdParent },
+    });
     for (const item of list) {
       // info
       const roleId = item.id;

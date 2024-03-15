@@ -18,8 +18,24 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
     return this.scope.model.role;
   }
 
+  get modelRole() {
+    return this.scope.model.role;
+  }
+
+  get modelRoleRef() {
+    return this.scope.model.roleRef;
+  }
+
   get modelRoleInc() {
     return this.scope.model.roleInc;
+  }
+
+  get modelRoleIncRef() {
+    return this.scope.model.roleIncRef;
+  }
+
+  get modelRoleExpand() {
+    return this.scope.model.roleExpand;
   }
 
   get modelUserRole() {
