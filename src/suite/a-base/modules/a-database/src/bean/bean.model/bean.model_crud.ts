@@ -331,33 +331,35 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     await builder;
   }
 
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2[]>;
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async __query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2[]>;
+  async __query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sql: string,
     binding: Knex.RawBinding,
   ): Promise<TResult2[]>;
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async __query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sql: string,
     bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
   ): Promise<TResult2[]>;
-  async query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2[]> {
+  async __query<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2[]> {
     const raw = this.ctx.db.raw(sql, bindings);
     const result = await raw;
     // dialect
     return this.dialect.query(result) as unknown as TResult2[];
   }
 
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(value: Knex.Value): Promise<TResult2>;
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  async __queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    value: Knex.Value,
+  ): Promise<TResult2 | undefined>;
+  async __queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sql: string,
     binding: Knex.RawBinding,
-  ): Promise<TResult2>;
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+  ): Promise<TResult2 | undefined>;
+  async __queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     sql: string,
     bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
-  ): Promise<TResult2>;
-  async queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2> {
-    const res = await this.query(sql, bindings);
-    return res[0] as unknown as TResult2;
+  ): Promise<TResult2 | undefined>;
+  async __queryOne<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql, bindings?): Promise<TResult2 | undefined> {
+    const res = await this.__query(sql, bindings);
+    return res[0] as unknown as TResult2 | undefined;
   }
 }
