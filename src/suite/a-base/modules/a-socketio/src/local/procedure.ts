@@ -75,15 +75,11 @@ export class LocalProcedure extends BeanBase<ScopeModule> {
     }
   }
 
-  delete({ iid, messageIds, userId }: any) {
-    const _messageIds = messageIds.map(item => parseInt(item)).join(',');
-
-    // sql
-    const _sql = `update aSocketIOMessageSync set deleted=1
-          where iid=${iid} and userId=${userId} and messageId in (${_messageIds})
-        `;
-
-    // ok
-    return _sql;
+  async delete({ messageIds, userId }: any) {
+    // delete
+    await this.modelMessageSync.delete({
+      userId,
+      messageId: messageIds,
+    });
   }
 }

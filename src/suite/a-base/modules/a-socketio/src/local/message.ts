@@ -102,12 +102,11 @@ export class LocalMessage extends BeanBase<ScopeModule> {
   async delete({ messageIds, user }: any) {
     if (!messageIds || messageIds.length === 0) return;
     // query
-    const sql = this.sqlProcedure.delete({
+    await this.sqlProcedure.delete({
       iid: this.ctx.instance.id,
       messageIds,
       userId: user ? user.id : 0,
     });
-    await this.bean.model.query(sql);
   }
 
   async _list({ messageClass, options, user, count }: any) {
