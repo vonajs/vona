@@ -272,13 +272,11 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
 
   async _childrenTop_filter({ roleIds }: any) {
     if (roleIds.length <= 1) return roleIds;
-    const items = await this.bean.model.query(
-      `
-          select * from aRoleRef a 
-            where a.iid=? and a.roleId in (${roleIds.join(',')})
-        `,
-      [this.ctx.instance.id],
-    );
+    const items = await this.modelRoleRef.select({
+      where: {
+        roleId: roleIds,
+      },
+    });
     const res: any[] = [];
     for (const roleId of roleIds) {
       const exists = items.some(item => {
