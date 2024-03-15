@@ -20,60 +20,46 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
     this.contextTask._flowTaskHistory.flowTaskHidden = 0; // show
     await this.modelFlowTaskHistory.update(this.contextTask._flowTaskHistory);
     // delete recall task: (specificFlag=2)
-    const _taskRecall = await this.bean.model.queryOne(
-      `
-          select id,userIdAssignee from aFlowTask
-            where iid=? and deleted=0 and flowNodeId=? and specificFlag=2
-          `,
-      [this.ctx.instance.id, flowTask.flowNodeId],
-    );
+    const _taskRecall = await this.modelFlowTask.get({
+      flowNodeId: flowTask.flowNodeId,
+      specificFlag: 2,
+    });
     if (_taskRecall) {
       this.self._notifyTaskHandlings(_taskRecall.userIdAssignee);
       // delete task
-      await this.bean.model.query(
-        `
-          delete from aFlowTask
-            where iid=? and id=?
-          `,
-        [this.ctx.instance.id, _taskRecall.id],
-      );
-      await this.bean.model.query(
-        `
-          update aFlowTaskHistory set deleted=1
-            where iid=? and deleted=0 and flowTaskId=?
-          `,
-        [this.ctx.instance.id, _taskRecall.id],
-      );
+      await this.modelFlowTask.delete({ id: _taskRecall.id });
+      await this.modelFlowTaskHistory.delete({
+        flowTaskId: _taskRecall.id,
+      });
     }
     // check if bidding
     const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     if (options.bidding) {
       // notify
-      const _tasks = await this.bean.model.query(
-        `
-          select id,userIdAssignee from aFlowTask
-            where iid=? and deleted=0 and flowNodeId=? and id<>? and (flowTaskStatus=0 and handleStatus=0)
-          `,
-        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
-      );
+      const _tasks = await this.modelFlowTask.select({
+        where: {
+          flowNodeId: flowTask.flowNodeId,
+          id: { op: '<>', val: flowTaskId },
+          flowTaskStatus: 0,
+          handleStatus: 0,
+        },
+      });
       for (const _task of _tasks) {
         this.self._notifyTaskClaimings(_task.userIdAssignee);
       }
       // delete other tasks
-      await this.bean.model.query(
-        `
-          delete from aFlowTask
-            where iid=? and flowNodeId=? and id<>? and (flowTaskStatus=0 and handleStatus=0)
-          `,
-        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
-      );
-      await this.bean.model.query(
-        `
-          update aFlowTaskHistory set deleted=1
-            where iid=? and deleted=0 and flowNodeId=? and flowTaskId<>? and (flowTaskStatus=0 and handleStatus=0)
-          `,
-        [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
-      );
+      await this.modelFlowTask.delete({
+        flowNodeId: flowTask.flowNodeId,
+        id: { op: '<>', val: flowTaskId },
+        flowTaskStatus: 0,
+        handleStatus: 0,
+      });
+      await this.modelFlowTaskHistory.delete({
+        flowNodeId: flowTask.flowNodeId,
+        flowTaskId: { op: '<>', val: flowTaskId },
+        flowTaskStatus: 0,
+        handleStatus: 0,
+      });
     }
     // event: task.claimed
     await this.self.raiseEventClaimed();
