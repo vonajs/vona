@@ -123,14 +123,14 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     let roleIdParent = roleId;
     // loop
     while (level !== -1) {
-      await this.bean.model.query(
-        `insert into aRoleRef(iid,roleId,roleIdParent,level)
-             values(${iid},${roleId},${roleIdParent},${level})
-          `,
-      );
-      const item = await this.bean.model.queryOne(
-        `select a.roleIdParent from aRole a where a.iid=${iid} and a.id=${roleIdParent}`,
-      );
+      await this.modelRoleRef.insert({
+        roleId,
+        roleIdParent,
+        level,
+      });
+      const item = await this.modelRole.get({
+        id: roleIdParent,
+      });
       if (!item || !item.roleIdParent) {
         level = -1;
       } else {
