@@ -95,12 +95,13 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     const authOpen = await this.prepareAuthOpen();
     if (!authOpen) return true;
     // check
-    const right = await this.bean.model.queryOne(
-      `
-          select * from aViewRoleRightResource a
-            where a.iid=? and a.roleIdWho=? and a.atomId=?
-        `,
-      [this.ctx.instance.id, authOpen.scopeRoleId, resourceAtomId],
+    const right = await this.bean.model.get(
+      'aViewRoleRightResource',
+      {
+        roleIdWho: authOpen.scopeRoleId,
+        atomId: resourceAtomId,
+      },
+      { disableDeleted: true },
     );
     return !!right;
   }
@@ -115,12 +116,14 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
       atomClass,
     });
     // check
-    const right = await this.bean.model.queryOne(
-      `
-        select * from aViewRoleRightAtomClass a
-            where a.iid=? and a.roleIdWho=? and a.atomClassId=? and action=?
-      `,
-      [this.ctx.instance.id, authOpen.scopeRoleId, atomClass.id, action],
+    const right = await this.bean.model.get(
+      'aViewRoleRightAtomClass',
+      {
+        roleIdWho: authOpen.scopeRoleId,
+        atomClassId: atomClass.id,
+        action,
+      },
+      { disableDeleted: true },
     );
     return !!right;
   }
