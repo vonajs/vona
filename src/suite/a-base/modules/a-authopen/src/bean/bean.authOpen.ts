@@ -129,14 +129,14 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   }
 
   async getAuthOpenByAuthId({ authId }: any) {
-    return await this.bean.model.queryOne(
-      `
-          select a.* from aAuthOpenView a
-            inner join aAuth b on a.id=b.profileId
-              where a.iid=? and a.deleted=0 and b.id=? 
-        `,
-      [this.ctx.instance.id, authId],
-    );
+    const items = await this.bean.model.select('aAuthOpenView as a', {
+      columns: ['a.*'],
+      joins: [['innerJoin', 'aAuth as b', { 'a.id': 'b.profileId' }]],
+      where: {
+        'b.id': authId,
+      },
+    });
+    return items[0];
   }
 
   async _forceAuthOpenId({ atomId, itemId }: any) {
