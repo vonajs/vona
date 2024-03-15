@@ -89,8 +89,8 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return this.ctx.db.ref<TSrc>(src);
   }
 
-  toIdentifier(name: string): Knex.Raw<any> {
-    const parts = name.split(',');
+  toIdentifier(name: string | string[]): Knex.Raw<any> {
+    const parts = Array.isArray(name) ? name : name.split(',');
     return this.raw(parts.map(_ => '??').join(','), parts);
   }
 
@@ -121,6 +121,16 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
       builder.distinct();
     } else {
       builder.distinct(distinct);
+    }
+  }
+
+  buildCount(builder: Knex.QueryBuilder, count: any, distinct: any) {
+    if (count !== undefined) {
+      builder.count(count);
+    } else if (distinct !== undefined && distinct !== false) {
+      builder.count(this.raw(`distinct ${this.toIdentifier(distinct)}`));
+    } else {
+      builder.count();
     }
   }
 

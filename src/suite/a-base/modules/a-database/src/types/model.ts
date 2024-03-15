@@ -36,6 +36,7 @@ export interface IModelSelectParams {
 
 export interface IModelCountParams {
   alias?: string;
+  count?: any;
   distinct?: any;
   where?: any;
   joins?: IModelSelectParamsJoin[];

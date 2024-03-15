@@ -197,7 +197,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     // builder
     const builder = this.builder<TRecord2>(table);
     // count
-    builder.count();
+    this.buildCount(builder, params.count, params.distinct);
     // joins
     this.buildJoins(builder, params.joins);
     // where
