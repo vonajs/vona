@@ -11,7 +11,7 @@ export class LocalProcedure extends BeanBase {
     _where['a.syncDeleted'] = 0;
     // offset
     if (typeof offset === 'number') {
-      _where['a.id'] = { op: '>', val: parseInt(offset) };
+      _where['a.id'] = { op: '>', val: offset };
     }
 
     // builder
