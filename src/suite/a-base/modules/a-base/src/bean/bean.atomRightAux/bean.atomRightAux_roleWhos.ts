@@ -22,12 +22,17 @@ export class BeanAtomRightAuxRoleWhos extends BeanAtomRightAuxRoleScopesMineOfUs
   }
 
   async __getRoleWhosOfAtomClassActionRaw({ atomClassId, action }: any) {
-    return await this.bean.model.query(
-      `
-          select distinct roleIdWho,scope from aViewRoleRightAtomClass 
-            where iid=? and atomClassId=? and action=?
-        `,
-      [this.ctx.instance.id, atomClassId, action],
+    return await this.bean.model.select(
+      'aViewRoleRightAtomClass',
+      {
+        distinct: true,
+        columns: ['roleIdWho', 'scope'],
+        where: {
+          atomClassId,
+          action,
+        },
+      },
+      { disableDeleted: true },
     );
   }
 }
