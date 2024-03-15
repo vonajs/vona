@@ -1,3 +1,4 @@
+import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanRoleAtomRights } from './bean.role_atomRights.js';
 
@@ -150,7 +151,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     function toId(name) {
       return model.toIdentifier(name);
     }
-    await model.query(
+    await Cast(model).query(
       `insert into ${toId('aRoleIncRef')}(${toId('iid,roleId,roleIdInc,roleIdSrc')})
             select ${iid},${roleId},${toId('a.roleIdInc,a.roleId')} from ${toId('aRoleInc as a')}
               where ${toId('a.iid')}=${iid} and ${toId('a.roleId')} in (select ${toId('b.roleIdParent')} from ${toId(
@@ -160,17 +161,30 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     );
   }
 
-  async _buildRoleExpand({ iid, roleId, roleAtomId }: any) {
-    await this.bean.model.query(
-      `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
-            select a.iid,${roleAtomId},a.roleId,a.roleIdParent from aRoleRef a
-              where a.iid=${iid} and a.roleId=${roleId}
+  // `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
+  //           select a.iid,${roleAtomId},a.roleId,a.roleIdParent from aRoleRef a
+  //             where a.iid=${iid} and a.roleId=${roleId}
+  //       `,
+  // `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
+  //           select a.iid,${roleAtomId},a.roleId,a.roleIdInc from aRoleIncRef a
+  //             where a.iid=${iid} and a.roleId=${roleId}
+  //       `,
+  async _buildRoleExpand({ roleId, roleAtomId }: any) {
+    const iid = this.ctx.instance.id;
+    const model = this.bean.model;
+    function toId(name) {
+      return model.toIdentifier(name);
+    }
+    await Cast(model).query(
+      `insert into ${toId('aRoleExpand')}(${toId('iid,roleAtomId,roleId,roleIdBase')})
+            select ${toId('a.iid')},${roleAtomId},${toId('a.roleId,a.roleIdParent')} from ${toId('aRoleRef as a')}
+              where ${toId('a.iid')}=${iid} and ${toId('a.roleId')}=${roleId}
         `,
     );
-    await this.bean.model.query(
-      `insert into aRoleExpand(iid,roleAtomId,roleId,roleIdBase)
-            select a.iid,${roleAtomId},a.roleId,a.roleIdInc from aRoleIncRef a
-              where a.iid=${iid} and a.roleId=${roleId}
+    await Cast(model).query(
+      `insert into ${toId('aRoleExpand')}(${toId('iid,roleAtomId,roleId,roleIdBase')})
+            select ${toId('a.iid')},${roleAtomId},${toId('a.roleId,a.roleIdInc')} from ${toId('aRoleIncRef as a')}
+              where ${toId('a.iid')}=${iid} and ${toId('a.roleId')}=${roleId}
         `,
     );
   }
