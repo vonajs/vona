@@ -27,31 +27,24 @@ export class LocalFlowTaskRecall extends LocalFlowTaskInit {
     await this.modelFlowTask.delete({ id: flowTaskId });
     await this.modelFlowTaskHistory.delete({ flowTaskId });
     // notify
-    const _tasks = await this.bean.model.query(
-      `
-          select id,userIdAssignee from aFlowTask
-            where iid=? and deleted=0 and flowNodeId=? and id<>?
-          `,
-      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
-    );
+    const _tasks = await this.modelFlowTask.select({
+      where: {
+        flowNodeId: flowTask.flowNodeId,
+        id: { op: '<>', val: flowTaskId },
+      },
+    });
     for (const _task of _tasks) {
       this.self._notifyTaskClaimings(_task.userIdAssignee);
     }
     // delete other tasks
-    await this.bean.model.query(
-      `
-          delete from aFlowTask
-            where iid=? and flowNodeId=? and id<>?
-          `,
-      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
-    );
-    await this.bean.model.query(
-      `
-          update aFlowTaskHistory set deleted=1
-            where iid=? and deleted=0 and flowNodeId=? and flowTaskId<>?
-          `,
-      [this.ctx.instance.id, flowTask.flowNodeId, flowTaskId],
-    );
+    await this.modelFlowTask.delete({
+      flowNodeId: flowTask.flowNodeId,
+      id: { op: '<>', val: flowTaskId },
+    });
+    await this.modelFlowTaskHistory.delete({
+      flowNodeId: flowTask.flowNodeId,
+      flowTaskId: { op: '<>', val: flowTaskId },
+    });
     // recall
     return await this.ctx.bean.flowTask._gotoFlowNodePrevious({
       nodeInstance: this.nodeInstance,
