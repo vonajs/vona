@@ -46,16 +46,14 @@ export class VersionUpdate extends BeanBase {
 
   async _update7Migration_articles({ mapCagetoryIds, mapTagIds }: any) {
     // articles
-    const articles = await this.bean.model.query(
-      `
-        select a.*,b.userIdCreated,c.tags
-           from aCmsArticle a
-           left join aAtom b on b.id=a.atomId
-           left join aCmsArticleTag c on c.atomId=a.atomId
-            where a.iid=? and a.deleted=0 and b.atomStage=1
-        `,
-      [this.ctx.instance.id],
-    );
+    const articles = await this.bean.model.select('aCmsArticle as a', {
+      columns: ['a.*', 'b.userIdCreated', 'c.tags'],
+      joins: [
+        ['leftJoin', 'aAtom as b', { 'b.id': 'a.atomId' }],
+        ['leftJoin', 'aCmsArticleTag as c', { 'c.atomId': 'a.atomId' }],
+      ],
+      where: { 'b.atomStage': 1 },
+    });
     // loop
     for (const article of articles) {
       await this._update7Migration_article({ mapCagetoryIds, mapTagIds, article });
