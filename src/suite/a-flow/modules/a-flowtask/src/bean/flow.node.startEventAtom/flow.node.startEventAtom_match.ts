@@ -1,21 +1,30 @@
+import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
 import { FlowNodeStartEventAtomCondition } from './flow.node.startEventAtom_condition.js';
 
 export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition {
   async _getAllConditions({ atomClassId, needFlowContent }: any) {
-    const flowContentFields = needFlowContent ? ',b2.content' : '';
-    const flowContentJoin = needFlowContent ? 'inner join aFlowDefContent b2 on b.atomId=b2.atomId' : '';
     // order by atomStatic/conditionExpression
-    const list = await this.bean.model.query(
-      `
-          select a.*,c.atomName,c.atomStaticKey${flowContentFields} from aFlowNodeStartEventAtomCondition a
-            inner join aFlowDef b on a.flowDefId=b.atomId
-            inner join aAtom c on b.atomId=c.id
-            ${flowContentJoin}
-            where a.iid=? and a.atomClassId=?
-            order by c.atomStatic asc, a.conditionExpression desc
-        `,
-      [this.ctx.instance.id, atomClassId],
-    );
+    const columns = ['a.*', 'c.atomName', 'c.atomStaticKey'];
+    const joins: IModelSelectParamsJoin[] = [
+      ['innerJoin', 'aFlowDef as b', { 'a.flowDefId': 'b.atomId' }],
+      ['innerJoin', 'aAtom as c', { 'b.atomId': 'c.id' }],
+    ];
+    const where = {
+      'a.atomClassId': atomClassId,
+    };
+    if (needFlowContent) {
+      columns.push('b2.content');
+      joins.push(['innerJoin', 'aFlowDefContent as b2', { 'b.atomId': 'b2.atomId' }]);
+    }
+    const list = await this.bean.model.select('aFlowNodeStartEventAtomCondition as a', {
+      columns,
+      joins,
+      where,
+      orders: [
+        ['c.atomStatic', 'asc'],
+        ['a.conditionExpression', 'desc'],
+      ],
+    });
     return list;
   }
 
