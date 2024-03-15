@@ -90,16 +90,13 @@ export class LocalMessage extends BeanBase<ScopeModule> {
   async _setRead({ messageClass, messageIds, all, user }: any) {
     const messageClassId = messageClass ? messageClass.id : 0;
     // query
-    const sql = this.sqlProcedure.setRead({
+    await this.sqlProcedure.setRead({
       iid: this.ctx.instance.id,
       messageClassId,
       messageIds,
       all,
       userId: user ? user.id : 0,
     });
-    if (sql) {
-      await this.bean.model.query(sql);
-    }
   }
 
   async delete({ messageIds, user }: any) {

@@ -1,7 +1,12 @@
 import { Local, BeanBase } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalProcedure extends BeanBase {
+export class LocalProcedure extends BeanBase<ScopeModule> {
+  get modelMessageSync() {
+    return this.scope.model.messageSync;
+  }
+
   async selectMessages({ where, orders, page, offset, count }: any) {
     // for safe
     const _where: any = Object.assign({}, where);
@@ -42,27 +47,32 @@ export class LocalProcedure extends BeanBase {
     return await builder;
   }
 
-  setRead({ iid, messageClassId, messageIds, all, userId }: any) {
+  async setRead({ messageClassId, messageIds, all, userId }: any) {
     if (messageIds && messageIds.length > 0) {
-      const _messageIds = messageIds.map(item => parseInt(item)).join(',');
-
-      // sql
-      const _sql = `update aSocketIOMessageSync set messageRead=1
-          where iid=${iid} and userId=${userId} and messageId in (${_messageIds})
-        `;
-
-      // ok
-      return _sql;
+      // update
+      await this.modelMessageSync.update(
+        {
+          messageRead: 1,
+        },
+        {
+          where: {
+            userId,
+            messageId: messageIds,
+          },
+        },
+      );
     } else if (messageClassId > 0 && all) {
-      // sql
-      const _sql = `update aSocketIOMessageSync set messageRead=1
-          where iid=${iid} and userId=${userId} and messageClassId=${messageClassId}
-        `;
-
-      // ok
-      return _sql;
+      // update
+      await this.modelMessageSync.update(
+        { messageRead: 1 },
+        {
+          where: {
+            userId,
+            messageClassId,
+          },
+        },
+      );
     }
-    return null;
   }
 
   delete({ iid, messageIds, userId }: any) {
