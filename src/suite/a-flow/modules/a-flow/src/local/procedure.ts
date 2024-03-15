@@ -1,4 +1,5 @@
 import { Local, BeanBase } from '@cabloy/core';
+import { Knex } from 'cabloy-module-api-a-database';
 
 @Local()
 export class LocalProcedure extends BeanBase {
@@ -82,61 +83,78 @@ export class LocalProcedure extends BeanBase {
     // -- c: aUser
     // -- d: aFlowTaskHistory
 
+    const self = this;
+
     // for safe
-    where = where ? this.bean.model._where(where) : null;
-    orders = orders ? this.bean.model._orders(orders) : null;
-    const limit = page ? this.bean.model._limit(page.size, page.index) : null;
+    const _where: any = Object.assign({}, where);
+    const _orders = orders ? orders.concat() : [];
 
     // vars
     let _userWhere;
     let _modeWhere;
 
-    //
-    const _where = where ? `${where} AND` : ' WHERE';
-    const _orders = orders || '';
-    const _limit = limit || '';
-
     // user
     if (userIdWho !== 0) {
-      _userWhere = ` and exists(select d.id from aFlowTaskHistory d where d.deleted=0 and d.flowId=a.id and d.userIdAssignee=${userIdWho})`;
-    } else {
-      _userWhere = '';
+      _where.__exists__user = function (this: Knex.QueryBuilder) {
+        return this.select(['d.id'])
+          .from('aFlowTaskHistory as d')
+          .where({
+            'd.deleted': 0,
+            'd.flowId': self.bean.model.ref('a.id'),
+            'd.userIdAssignee': userIdWho,
+          });
+      };
     }
 
     // mode
     if (mode === 'others') {
-      _modeWhere = ` and a.flowUserId<>${userIdWho}`;
-    } else {
-      _modeWhere = '';
+      _where['a.flowUserId'] = { op: '<>', val: userIdWho };
     }
 
-    // fields
-    let _selectFields;
+    // builder
+    const builder = this.bean.model.builderSelect('aFlow as a');
+    // count/select:fields
     if (count) {
-      _selectFields = 'count(*) as _count';
+      builder.count();
     } else {
-      _selectFields = `a.id,a.id as flowId,a.createdAt,a.updatedAt,a.deleted,a.iid,a.flowName,a.flowStatus,a.flowAtomId,a.flowAtomClassId,a.flowNodeIdCurrent,a.flowNodeNameCurrent,a.flowUserId,
-            c.userName,c.avatar
-          `;
+      const _selectFields = [
+        'a.id',
+        'a.id as flowId',
+        'a.createdAt',
+        'a.updatedAt',
+        'a.deleted',
+        'a.iid',
+        'a.flowName',
+        'a.flowStatus',
+        'a.flowAtomId',
+        'a.flowAtomClassId',
+        'a.flowNodeIdCurrent',
+        'a.flowNodeNameCurrent',
+        'a.flowUserId',
+        'c.userName',
+        'c.avatar',
+      ];
+      builder.select(_selectFields);
     }
-
-    // sql
-    const _sql = `select ${_selectFields} from aFlow a
-            left join aUser c on a.flowUserId=c.id
-
-          ${_where}
-           (
-             a.deleted=0 and a.iid=${iid}
-             ${_userWhere}
-             ${_modeWhere}
-           )
-
-          ${count ? '' : _orders}
-          ${count ? '' : _limit}
-        `;
-
-    // ok
-    return _sql;
+    // joins
+    builder.leftJoin('aUser as c', { 'a.flowUserId': 'c.id' });
+    // where
+    const wheres = this.bean.model.checkWhere(_where);
+    if (wheres === false) return [];
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
+    // orders/page
+    if (!count) {
+      this.bean.model.buildOrders(builder, _orders);
+      this.bean.model.buildPage(builder, page);
+    }
+    // execute
+    const debug = this.app.bean.debug.get('flow:sql');
+    if (debug.enabled) {
+      debug('===== selectFlows =====\n%s', builder.toQuery());
+    }
+    return await builder;
   }
 
   _selectFlows_History({ iid, userIdWho, where, orders, page, count }: any) {
