@@ -17,9 +17,12 @@ export class BeanModelMeta extends BeanBase {
     return this.getScope('a-version').model.viewRecord;
   }
 
+  public get dialectClient() {
+    return Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+  }
+
   public get dialect() {
-    const client = Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
-    return this.app.bean.database.getDialect(client);
+    return this.app.bean.database.getDialect(this.dialectClient);
   }
 
   protected get __beanOptions() {
