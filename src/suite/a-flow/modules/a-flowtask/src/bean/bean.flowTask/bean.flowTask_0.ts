@@ -23,14 +23,18 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
   }
 
   async count({ options, user }: any): Promise<BigNumber> {
-    return await this.select({ options, user, count: 1 });
+    return (await this._select({ options, user, count: 1 })) as BigNumber;
   }
 
-  async select({ options, user, pageForce = true, count = 0 }: any) {
+  async select({ options, user, pageForce = true }: any) {
+    return (await this._select({ options, user, pageForce, count: 0 })) as any[];
+  }
+
+  async _select({ options, user, pageForce = true, count = 0 }: any) {
     const tasks = await this.self._list({ options, user, pageForce, count });
-    if (count === 1) return tasks;
+    if (count === 1) return tasks as BigNumber;
     // loop
-    for (const task of tasks) {
+    for (const task of tasks as any[]) {
       // locale
       task.flowNodeNameLocale = this.ctx.text(task.flowNodeName);
       if (task.flowNodeRemark) {
