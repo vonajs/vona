@@ -10,6 +10,18 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     this._redisAuth = null;
   }
 
+  get model() {
+    return this.getScope('a-auth').model.auth;
+  }
+
+  get modelAuth() {
+    return this.getScope('a-auth').model.auth;
+  }
+
+  get modelAuthProvider() {
+    return this.getScope('a-auth').model.authProvider;
+  }
+
   get redisAuth() {
     if (!this._redisAuth) {
       this._redisAuth = this.ctx.app.redis.get('auth') || this.ctx.app.redis.get('cache');

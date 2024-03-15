@@ -64,12 +64,13 @@ export class LocalUser extends BeanBase {
     let listLogin = this.ctx.bean.util.extend([], this.ctx.bean.authProviderCache.getAuthProvidersConfigForLogin());
     if (listLogin.length === 0) return [];
     // 2. list aAuth
-    const sql = `
-        select a.id,a.providerId,a.providerScene,b.module,b.providerName from aAuth a
-          inner join aAuthProvider b on a.providerId=b.id
-          where a.iid=? and a.userId=?
-      `;
-    const list = await this.bean.model.query(sql, [this.ctx.instance.id, user.id]);
+    const list = await this.bean.model.select('aAuth as a', {
+      columns: ['a.id', 'a.providerId', 'a.providerScene', 'b.module', 'b.providerName'],
+      joins: [['innerJoin', 'aAuthProvider as b', { 'a.providerId': 'b.id' }]],
+      where: {
+        'a.userId': user.id,
+      },
+    });
     // 3. map
     for (const auth of list) {
       const authId = auth.id;
@@ -112,11 +113,10 @@ export class LocalUser extends BeanBase {
 
   async authenticationDisable({ authId, user }: any) {
     // must use userId in where
-    await this.bean.model.query('delete from aAuth where iid=? and id=? and userId=?', [
-      this.ctx.instance.id,
-      authId,
-      user.id,
-    ]);
+    await this.bean.auth.model.delete({
+      id: authId,
+      userId: user.id,
+    });
   }
 
   async themeLoad({ appKey, user }: any) {
