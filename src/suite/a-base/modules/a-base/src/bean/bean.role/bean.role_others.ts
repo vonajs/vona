@@ -5,72 +5,74 @@ import { BeanRoleIncludes } from './bean.role_includes.js';
 
 export class BeanRoleOthers extends BeanRoleIncludes {
   async getUserRolesDirect({ userId }: any) {
-    const list = await this.bean.model.query(
-      `
-        select a.* from aRole a
-          left join aUserRole b on a.id=b.roleId
-            where a.iid=? and b.userId=?
-        `,
-      [this.ctx.instance.id, userId],
-    );
+    const list = await this.modelRole.select({
+      alias: 'a',
+      joins: [['leftJoin', 'aUserRole as b', { 'a.id': 'b.roleId' }]],
+      where: {
+        'b.userId': userId,
+      },
+    });
     return list;
   }
 
   async getUserRolesParent({ userId }: any) {
-    const list = await this.bean.model.query(
-      `
-        select a.* from aRole a
-          left join aViewUserRoleRef b on a.id=b.roleIdParent
-            where a.iid=? and b.userId=?
-        `,
-      [this.ctx.instance.id, userId],
-    );
+    const list = await this.modelRole.select({
+      alias: 'a',
+      joins: [['leftJoin', 'aViewUserRoleRef as b', { 'a.id': 'b.roleIdParent' }]],
+      where: {
+        'b.userId': userId,
+      },
+    });
     return list;
   }
 
   async getUserRolesExpand({ userId }: any) {
-    const list = await this.bean.model.query(
-      `
-        select a.* from aRole a
-          left join aViewUserRoleExpand b on a.id=b.roleIdBase
-            where a.iid=? and b.userId=?
-        `,
-      [this.ctx.instance.id, userId],
-    );
+    const list = await this.modelRole.select({
+      alias: 'a',
+      joins: [['leftJoin', 'aViewUserRoleExpand as b', { 'a.id': 'b.roleIdBase' }]],
+      where: {
+        'b.userId': userId,
+      },
+    });
     return list;
   }
 
   async userInRoleDirect({ userId, roleId }: any) {
-    const list = await this.bean.model.query(
-      `
-        select count(*) as count from aUserRole a
-          where a.iid=? and a.userId=? and a.roleId=?
-        `,
-      [this.ctx.instance.id, userId, roleId],
-    );
-    return list[0].count > 0;
+    const count = await this.modelUserRole.count({
+      where: {
+        userId,
+        roleId,
+      },
+    });
+    return count.gt(0);
   }
 
   async userInRoleParent({ userId, roleId }: any) {
-    const list = await this.bean.model.query(
-      `
-        select count(*) as count from aViewUserRoleRef a
-          where a.iid=? and a.userId=? and a.roleIdParent=?
-        `,
-      [this.ctx.instance.id, userId, roleId],
+    const count = await this.bean.model.count(
+      'aViewUserRoleRef',
+      {
+        where: {
+          userId,
+          roleIdParent: roleId,
+        },
+      },
+      { disableDeleted: true },
     );
-    return list[0].count > 0;
+    return count.gt(0);
   }
 
   async userInRoleExpand({ userId, roleId }: any) {
-    const list = await this.bean.model.query(
-      `
-        select count(*) as count from aViewUserRoleExpand a
-          where a.iid=? and a.userId=? and a.roleIdBase=?
-        `,
-      [this.ctx.instance.id, userId, roleId],
+    const count = await this.bean.model.count(
+      'aViewUserRoleExpand',
+      {
+        where: {
+          userId,
+          roleIdBase: roleId,
+        },
+      },
+      { disableDeleted: true },
     );
-    return list[0].count > 0;
+    return count.gt(0);
   }
 
   async usersOfRoleDirect({ roleId, disabled, page, removePrivacy }: any) {
