@@ -10,16 +10,16 @@ export class EventAccountMigration extends BeanBase<ScopeModule> {
     const authSimple = await modelAuthSimple.get({ userId: data.userIdFrom });
     if (authSimple) {
       // delete old record
-      await this.bean.model.query('delete from aAuthSimple where deleted=0 and iid=? and userId=?', [
-        this.ctx.instance.id,
-        data.userIdTo,
-      ]);
+      await modelAuthSimple.delete({ userId: data.userIdTo });
       // update
-      await this.bean.model.query('update aAuthSimple a set a.userId=? where a.deleted=0 and a.iid=? and a.userId=?', [
-        data.userIdTo,
-        this.ctx.instance.id,
-        data.userIdFrom,
-      ]);
+      await modelAuthSimple.update(
+        { userId: data.userIdTo },
+        {
+          where: {
+            userId: data.userIdFrom,
+          },
+        },
+      );
     }
     // next
     await next();
