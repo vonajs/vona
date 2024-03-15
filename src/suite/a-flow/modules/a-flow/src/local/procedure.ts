@@ -3,73 +3,80 @@ import { Local, BeanBase } from '@cabloy/core';
 @Local()
 export class LocalProcedure extends BeanBase {
   // mode: mine/others/flowing/history
-  selectFlows({ iid, userIdWho, where, orders, page, count, mode }: any) {
+  async selectFlows({ iid, userIdWho, where, orders, page, count, mode }: any) {
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
 
     // mode
     if (mode === 'mine') {
-      return this._selectFlows_Mine({ iid, userIdWho, where, orders, page, count });
+      return await this._selectFlows_Mine({ iid, userIdWho, where, orders, page, count });
     } else if (mode === 'others' || mode === 'flowing') {
-      return this._selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode });
+      return await this._selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode });
     }
-    return this._selectFlows_History({ iid, userIdWho, where, orders, page, count });
+    return await this._selectFlows_History({ iid, userIdWho, where, orders, page, count });
   }
 
-  _selectFlows_Mine({ iid, userIdWho, where, orders, page, count }: any) {
+  async _selectFlows_Mine({ iid, userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlow
     // -- c: aUser
 
     // for safe
-    where = where ? this.bean.model._where(where) : null;
-    orders = orders ? this.bean.model._orders(orders) : null;
-    const limit = page ? this.bean.model._limit(page.size, page.index) : null;
-
-    // vars
-    let _userWhere;
-
-    //
-    const _where = where ? `${where} AND` : ' WHERE';
-    const _orders = orders || '';
-    const _limit = limit || '';
+    const _where: any = Object.assign({}, where);
+    const _orders = orders ? orders.concat() : [];
 
     // user
     if (userIdWho !== 0) {
-      _userWhere = ` and a.flowUserId=${userIdWho}`;
-    } else {
-      _userWhere = '';
+      _where['a.flowUserId'] = userIdWho;
     }
 
-    // fields
-    let _selectFields;
+    // builder
+    const builder = this.bean.model.builderSelect('aFlow as a');
+    // count/select:fields
     if (count) {
-      _selectFields = 'count(*) as _count';
+      builder.count();
     } else {
-      _selectFields = `a.id,a.id as flowId,a.createdAt,a.updatedAt,a.deleted,a.iid,a.flowName,a.flowStatus,a.flowAtomId,a.flowAtomClassId,a.flowNodeIdCurrent,a.flowNodeNameCurrent,a.flowUserId,
-            c.userName,c.avatar
-          `;
+      const _selectFields = [
+        'a.id',
+        'a.id as flowId',
+        'a.createdAt',
+        'a.updatedAt',
+        'a.deleted',
+        'a.iid',
+        'a.flowName',
+        'a.flowStatus',
+        'a.flowAtomId',
+        'a.flowAtomClassId',
+        'a.flowNodeIdCurrent',
+        'a.flowNodeNameCurrent',
+        'a.flowUserId',
+        'c.userName',
+        'c.avatar',
+      ];
+      builder.select(_selectFields);
     }
-
-    // sql
-    const _sql = `select ${_selectFields} from aFlow a
-            left join aUser c on a.flowUserId=c.id
-
-          ${_where}
-           (
-             a.deleted=0 and a.iid=${iid}
-             ${_userWhere}
-           )
-
-          ${count ? '' : _orders}
-          ${count ? '' : _limit}
-        `;
-
-    // ok
-    return _sql;
+    // joins
+    builder.leftJoin('aUser as c', { 'a.flowUserId': 'c.id' });
+    // where
+    const wheres = this.bean.model.checkWhere(_where);
+    if (wheres === false) return [];
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
+    // orders/page
+    if (!count) {
+      this.bean.model.buildOrders(builder, _orders);
+      this.bean.model.buildPage(builder, page);
+    }
+    // execute
+    const debug = this.app.bean.debug.get('flow:sql');
+    if (debug.enabled) {
+      debug('===== selectFlows =====\n%s', builder.toQuery());
+    }
+    return await builder;
   }
 
-  _selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode }: any) {
+  async _selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode }: any) {
     // -- tables
     // -- a: aFlow
     // -- c: aUser
