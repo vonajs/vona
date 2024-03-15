@@ -567,12 +567,15 @@ export class LocalBuild extends BeanBase<ScopeModule> {
     // renderAt must be updated after file rendered
     if (data.article) {
       // update renderAt
-      await this.bean.model.query(
-        `
-          update aCmsArticle set renderAt=?
-            where iid=? and atomId=?
-          `,
-        [data.article.renderAt, this.ctx.instance.id, data.article.atomId],
+      await this.scope.model.article.update(
+        {
+          renderAt: data.article.renderAt,
+        },
+        {
+          where: {
+            atomId: data.article.atomId,
+          },
+        },
       );
     }
     // socketio publish
