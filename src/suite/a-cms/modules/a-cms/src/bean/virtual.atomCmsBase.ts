@@ -136,7 +136,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
     if (key.atomId === 0) {
       atomOld = null;
     } else {
-      atomOld = await this.ctx.bean.atom.read({ key, user: null });
+      atomOld = await this.ctx.bean.atom.read({ key, user: undefined });
     }
     // atomId:  not use key.atomId
     const atomId = item.atomId;
@@ -236,12 +236,17 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
       },
     );
     // update content
-    await this.bean.model.query('update aCmsContent a set a.content=?, a.html=? where a.iid=? and a.atomId=?', [
-      item.content,
-      html,
-      this.ctx.instance.id,
-      atomId,
-    ]);
+    await this.modelCMSContent.update(
+      {
+        content: item.content,
+        html,
+      },
+      {
+        where: {
+          atomId,
+        },
+      },
+    );
   }
 
   async _renderContent({ item, atomId }: any) {
