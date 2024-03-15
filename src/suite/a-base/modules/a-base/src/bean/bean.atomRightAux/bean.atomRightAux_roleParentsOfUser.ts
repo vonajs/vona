@@ -12,14 +12,13 @@ export class BeanAtomRightAuxRoleParentsOfUser extends BeanAtomRightAuxRoleWhos 
   }
 
   async __getRoleParentsOfUserRaw({ userId }: any) {
-    return await this.bean.model.query(
-      `
-          select a.roleId,b.roleName,b.roleTypeCode from aUserRole a
-            inner join aRole b on a.roleId=b.id
-            where a.iid=? and a.userId=?
-            order by a.roleId desc
-        `,
-      [this.ctx.instance.id, userId],
-    );
+    return await this.bean.model.select('aUserRole as a', {
+      columns: ['a.roleId', 'b.roleName', 'b.roleTypeCode'],
+      joins: [['innerJoin', 'aRole as b', { 'a.roleId': 'b.id' }]],
+      where: {
+        'a.userId': userId,
+      },
+      orders: [['a.roleId', 'desc']],
+    });
   }
 }
