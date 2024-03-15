@@ -115,6 +115,15 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
   }
 
+  buildDistinct(builder: Knex.QueryBuilder, distinct: any) {
+    if (distinct === undefined || distinct === false) return;
+    if (distinct === true) {
+      builder.distinct();
+    } else {
+      builder.distinct(distinct);
+    }
+  }
+
   buildOrders(builder: Knex.QueryBuilder, orders) {
     if (!orders) return;
     for (const [orderColumn, orderDirection, orderNulls] of orders) {

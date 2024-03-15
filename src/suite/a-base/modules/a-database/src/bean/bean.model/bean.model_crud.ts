@@ -114,6 +114,8 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const builder = this.builder<TRecord2, TResult2>(table);
     // columns
     builder.select(params.columns);
+    // distinct
+    this.buildDistinct(builder, params.distinct);
     // joins
     this.buildJoins(builder, params.joins);
     // where
@@ -190,17 +192,14 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
     // params
     params = params || {};
+    // table alias
+    table = params.alias ? `${table} as ${params.alias}` : table;
     // builder
     const builder = this.builder<TRecord2>(table);
     // count
     builder.count();
     // joins
-    const joins = params.joins;
-    if (joins) {
-      for (const [joinType, joinTable, joinOn] of joins) {
-        builder[joinType](joinTable, Cast(joinOn));
-      }
-    }
+    this.buildJoins(builder, params.joins);
     // where
     const wheres = this.prepareWhere(builder, table, params.where, options);
     if (wheres === false) {

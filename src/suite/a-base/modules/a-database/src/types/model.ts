@@ -24,6 +24,7 @@ export type IModelSelectParamsOrder = [string, IModelSelectParamsOrderDirection?
 
 export interface IModelSelectParams {
   alias?: string;
+  distinct?: any;
   where?: any;
   columns?: any;
   joins?: IModelSelectParamsJoin[];
@@ -34,6 +35,8 @@ export interface IModelSelectParams {
 }
 
 export interface IModelCountParams {
+  alias?: string;
+  distinct?: any;
   where?: any;
   joins?: IModelSelectParamsJoin[];
 }

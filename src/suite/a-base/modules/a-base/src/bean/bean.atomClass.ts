@@ -137,9 +137,10 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async atomClassesUser({ user }: any) {
     // items
+    const items = await this.bean.model.select('aViewUserRightAtomClass as a', {});
     const items = await this.bean.model.query(
       `
-        select distinct a.atomClassId,b.module,b.atomClassName from aViewUserRightAtomClass a
+        select distinct a.atomClassId,b.module,b.atomClassName from 
           inner join aAtomClass b on a.atomClassId=b.id
             where a.iid=? and a.userIdWho=?
       `,
