@@ -17,7 +17,7 @@ export class LocalProcedure extends BeanBase {
     return await this._selectFlows_History({ iid, userIdWho, where, orders, page, count });
   }
 
-  async _selectFlows_Mine({ iid, userIdWho, where, orders, page, count }: any) {
+  async _selectFlows_Mine({ userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlow
     // -- c: aUser
@@ -77,7 +77,7 @@ export class LocalProcedure extends BeanBase {
     return await builder;
   }
 
-  async _selectFlows_Others({ iid, userIdWho, where, orders, page, count, mode }: any) {
+  async _selectFlows_Others({ userIdWho, where, orders, page, count, mode }: any) {
     // -- tables
     // -- a: aFlow
     // -- c: aUser
@@ -153,7 +153,7 @@ export class LocalProcedure extends BeanBase {
     return await builder;
   }
 
-  async _selectFlows_History({ iid, userIdWho, where, orders, page, count }: any) {
+  async _selectFlows_History({ userIdWho, where, orders, page, count }: any) {
     // -- tables
     // -- a: aFlowHistory
     // -- c: aUser
