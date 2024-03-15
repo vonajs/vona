@@ -92,13 +92,11 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     await this.modelFlowTask.delete({ flowNodeId });
     // flowTaskHistory
     //   1. delete specificFlag=2
-    await this.bean.model.query(
-      `
-        update aFlowTaskHistory set deleted=1
-          where iid=? and deleted=0 and flowNodeId=? and flowTaskStatus=0 and specificFlag=2 
-        `,
-      [this.ctx.instance.id, flowNodeId],
-    );
+    await this.modelFlowTaskHistory.delete({
+      flowNodeId,
+      flowTaskStatus: 0,
+      specificFlag: 2,
+    });
     //   2. close
     //    flowTaskStatus:1
     //    handleStatus: not changed

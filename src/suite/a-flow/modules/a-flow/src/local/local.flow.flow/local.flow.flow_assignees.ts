@@ -99,17 +99,17 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
       nodeDefId,
       nodeDefName,
     });
-    const sql = `
-          select * from aViewUserRightAtomClassRole
-            where iid=? and atomClassId=? and action=? and roleIdWhom=?
-      `;
-    const items = await this.bean.model.query(sql, [
-      //
-      atom.iid,
-      atom.atomClassId,
-      action.code,
-      atom.roleIdOwner,
-    ]);
+    const items = await this.bean.model.select(
+      'aViewUserRightAtomClassRole',
+      {
+        where: {
+          atomClassId: atom.atomClassId,
+          action: action.code,
+          roleIdWhom: atom.roleIdOwner,
+        },
+      },
+      { disableDeleted: true },
+    );
     // ok
     return items.map(item => item.userIdWho);
   }
