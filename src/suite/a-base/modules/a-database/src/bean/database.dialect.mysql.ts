@@ -32,13 +32,11 @@ export class DatabaseDialectMysql extends VirtualDatabaseDialect {
   }
 
   async fetchIndexes(schemaBuilder: Knex.SchemaBuilder, tableName: string): Promise<IFetchIndexesResultItem[]> {
-    const res: any = await schemaBuilder.raw(
-      `select indexname,indexdef from pg_indexes where tablename='${tableName}'`,
-    );
-    let items = res.rows;
+    const res: any = await schemaBuilder.raw(`show index from ${tableName}`);
+    let items = res[0];
     items = items.map(item => {
       return {
-        indexName: item.indexname,
+        indexName: item.Key_name,
       };
     });
     return items;
