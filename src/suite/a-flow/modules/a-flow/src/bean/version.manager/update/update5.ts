@@ -1,6 +1,11 @@
 import { BeanBase } from '@cabloy/core';
+import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 
-export class VersionUpdate extends BeanBase {
+export class VersionUpdate extends BeanBase<ScopeModule> {
+  constructor() {
+    super(__ThisModule__);
+  }
+
   async run(_options) {
     // alter table: aFlow
     await this.bean.model.alterTable('aFlow', function (table) {
@@ -32,7 +37,7 @@ export class VersionUpdate extends BeanBase {
 
   async _adjustFlowsInstance() {
     // flow
-    let flows = await this.bean.model.flow.select({
+    let flows = await this.scope.model.flow.select({
       where: {
         flowAtomId: {
           op: '>',
@@ -44,11 +49,11 @@ export class VersionUpdate extends BeanBase {
       const flowAtomId = flow.flowAtomId;
       const atom = await this.ctx.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
-        await this.bean.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
+        await this.scope.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
     }
     // flow history
-    flows = await this.bean.model.flowHistory.select({
+    flows = await this.scope.model.flowHistory.select({
       where: {
         flowAtomId: {
           op: '>',
@@ -60,7 +65,7 @@ export class VersionUpdate extends BeanBase {
       const flowAtomId = flow.flowAtomId;
       const atom = await this.ctx.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
-        await this.bean.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
+        await this.scope.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
     }
   }
