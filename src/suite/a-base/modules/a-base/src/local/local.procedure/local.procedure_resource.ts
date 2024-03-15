@@ -2,28 +2,39 @@ import { Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
-  checkRightResource({ iid, userIdWho, resourceAtomId }: any) {
+  async checkRightResource({ userIdWho, resourceAtomId }) {
     const self = this;
+
     // for safe
-    iid = parseInt(iid);
     userIdWho = parseInt(userIdWho || 0);
     resourceAtomId = parseInt(resourceAtomId);
 
+    // where
+    const where: any = {
+      'a.atomDisabled': 0,
+      'a.atomStage': 1,
+      'a.id': resourceAtomId,
+    };
     // _rightWhere
-    let _rightWhere = '';
     if (userIdWho) {
-      _rightWhere = `
-          and (
-            exists(select c.resourceAtomId from aViewUserRightResource c where c.iid=${iid} and c.resourceAtomId=${resourceAtomId} and c.userIdWho=${userIdWho})
-              )
-        `;
+      where.__exists__ = function (this: Knex.QueryBuilder) {
+        return this.select(['c.resourceAtomId'])
+          .from('aViewUserRightResource as c')
+          .where({
+            'c.iid': self.bean.model.ref('a.iid'),
+            'c.resourceAtomId': resourceAtomId,
+            'c.userIdWho': userIdWho,
+          });
+      };
     }
     // sql
-    const _sql = `select a.id as atomId,a.atomName from aAtom a
-            where a.iid=${iid} and a.deleted=0 and a.atomDisabled=0 and a.atomStage=1 and a.id=${resourceAtomId}
-              ${_rightWhere}
-        `;
-    return _sql;
+    const items = await this.bean.atom.model.select({
+      alias: 'a',
+      columns: ['a.id as atomId', 'a.atomName'],
+      where,
+      limit: 1,
+    });
+    return items[0];
   }
 
   async _checkResourceLocales({ locale, atomClassIds }): Promise<{ atomId: number; atomName: string }[]> {

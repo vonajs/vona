@@ -215,12 +215,11 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       if (!atom) return null;
       resourceAtomId = atom.id;
     }
-    const sql = this.sqlProcedure.checkRightResource({
-      iid: this.ctx.instance.id,
+    const res = await this.sqlProcedure.checkRightResource({
       userIdWho: user && user.id,
       resourceAtomId,
     });
-    return await this.bean.model.queryOne(sql);
+    return res;
   }
 
   async resourceRoles({ key /* , user */ }: any) {
