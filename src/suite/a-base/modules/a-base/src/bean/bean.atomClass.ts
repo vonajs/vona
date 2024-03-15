@@ -214,15 +214,14 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async checkRightAtomClassActionOfRole({ atomClass, action, roleId, excludeMine, onlyMine }: any) {
     const atomClassId = await this.getAtomClassId(atomClass);
-    const clauseExcludeMine = excludeMine ? 'and scope<>0' : '';
-    const clauseOnlyMine = onlyMine ? 'and scope=0' : '';
-    const res = await this.bean.model.queryOne(
-      `
-        select * from aViewRoleRightAtomClass 
-          where iid=? and atomClassId=? and action=? ${clauseExcludeMine} ${clauseOnlyMine} and roleIdWho=?
-      `,
-      [this.ctx.instance.id, atomClassId, action, roleId],
-    );
+    const where: any = {
+      atomClassId,
+      action,
+      roleIdWho: roleId,
+    };
+    if (excludeMine) where.scope = { op: '<>', val: 0 };
+    if (onlyMine) where.scope = { op: '=', val: 0 };
+    const res = await this.bean.model.get('aViewRoleRightAtomClass', where, { disableDeleted: true });
     return !!res;
   }
 
