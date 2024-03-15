@@ -39,26 +39,29 @@ export class VersionManager extends BeanBase {
   async test() {}
 
   async _createIndexesOnTable({ tableName, indexes }: any) {
+    const indexPrefix = `idx_${tableName}_`;
     try {
       const _indexArray = indexes.split(',');
-      const list = await this.bean.model.query(`show index from ${tableName}`);
-      const map: any = {};
+      const list = await this.bean.model.schema.fetchIndexes(tableName);
+      const map: Record<string, boolean> = {};
       for (const item of list) {
-        map[item.Column_name] = item.Index_type;
+        const indexName = item.indexName;
+        const columnName = indexName.substring(indexPrefix.length);
+        map[columnName] = true;
       }
       for (const _index of _indexArray) {
         const _arr = _index.split(':');
         const fieldNames = _arr[0];
         const fieldNameArray = fieldNames.split('+');
         const fieldNameFirst = fieldNameArray[0];
-        const indexType = _arr[1] || '';
+        const indexType = _arr[1] || undefined;
         if (!map[fieldNameFirst]) {
+          const indexName = `${indexPrefix}${fieldNameFirst}`;
+          await this.bean.model.schema.alterTable(tableName, function (table) {
+            table.index(fieldNameArray, indexName, indexType);
+          });
           // too long
           // const sql = `create ${indexType} index idx_${tableName}_${fieldNameArray.join('_')} ON ${tableName} (${fieldNameArray.join(',')})`;
-          const sql = `create ${indexType} index idx_${tableName}_${fieldNameFirst} ON ${tableName} (${fieldNameArray.join(
-            ',',
-          )})`;
-          await this.bean.model.query(sql);
         }
       }
     } catch (e: any) {
