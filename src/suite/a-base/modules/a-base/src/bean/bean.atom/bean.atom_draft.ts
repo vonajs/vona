@@ -278,12 +278,16 @@ export class BeanAtomDraft extends BeanAtomClone {
       user,
     });
     // update history
-    await this.bean.model.query(
-      `
-          update aAtom set atomIdDraft=?
-            where iid=? and deleted=0 and atomStage=2 and atomIdFormal=?
-        `,
-      [keyDraft.atomId, this.ctx.instance.id, atomIdFormal],
+    await this.modelAtom.update(
+      {
+        atomIdDraft: keyDraft.atomId,
+      },
+      {
+        where: {
+          atomStage: 2,
+          atomIdFormal,
+        },
+      },
     );
     // update formal
     await this.modelAtom.update({

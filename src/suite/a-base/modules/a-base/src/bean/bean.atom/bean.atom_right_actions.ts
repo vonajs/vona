@@ -109,16 +109,29 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
   }
 
   async __actions_fetchActions_fromDb({ atomClass, /* atomClassBase,*/ basic, user }: any) {
-    // basic?
-    const _basic = basic ? 'and b.code in (3,4)' : '';
     // actionMode=0: not flow action
-    const sql = `
-          select distinct a.atomClassId,a.action,b.id as actionId,b.name,b.code,b.bulk,b.actionMode from aViewUserRightAtomClass a
-            inner join aAtomAction b on a.atomClassId=b.atomClassId and a.action=b.code
-              where a.iid=? and a.atomClassId=? and a.userIdWho=? and b.deleted=0 and b.bulk=0 and b.actionMode=0 ${_basic}
-                order by a.action asc
-        `;
-    const items = await this.bean.model.query(sql, [this.ctx.instance.id, atomClass.id, user.id]);
+    const where = {
+      'a.atomClassId': atomClass.id,
+      'a.userIdWho': user.id,
+      'b.deleted': 0,
+      'b.bulk': 0,
+      'b.actionMode': 0,
+    };
+    // basic?
+    if (basic) {
+      where['b.code'] = [3, 4];
+    }
+    const items = await this.bean.model.select(
+      'aViewUserRightAtomClass as a',
+      {
+        distinct: true,
+        columns: ['a.atomClassId', 'a.action', 'b.id as actionId', 'b.name', 'b.code', 'b.bulk', 'b.actionMode'],
+        joins: [['innerJoin', 'aAtomAction as b', { 'a.atomClassId': 'b.atomClassId', 'a.action': 'b.code' }]],
+        where,
+        orders: [['a.action', 'asc']],
+      },
+      { disableDeleted: true },
+    );
     return items;
   }
 

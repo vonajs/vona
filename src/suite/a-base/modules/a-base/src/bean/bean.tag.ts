@@ -129,15 +129,18 @@ export class BeanTag extends BeanBase<ScopeModule> {
   }
 
   async calcAtomCount({ tagId }: any) {
-    const res = await this.bean.model.query(
-      `
-        select count(*) atomCount from aTagRef a
-          inner join aAtom b on a.atomId=b.id
-          where a.iid=? and a.tagId=? and b.iid=? and b.deleted=0 and b.atomStage=1
-        `,
-      [this.ctx.instance.id, tagId, this.ctx.instance.id],
-    );
-    return res[0].atomCount;
+    const res = await this.bean.model.count('aTagRef as a', {
+      where: {
+        joins: [['innerJoin', 'aAtom as b', { 'a.atomId': 'b.id' }]],
+        where: {
+          'a.tagId': tagId,
+          'b.iid': this.ctx.instance.id,
+          'b.deleted': 0,
+          'b.atomStage': 1,
+        },
+      },
+    });
+    return res;
   }
 
   async parseTags({ atomClass, language, tagName, force = false }: any) {
