@@ -2,46 +2,44 @@ import { Local, BeanBase } from '@cabloy/core';
 
 @Local()
 export class LocalProcedure extends BeanBase {
-  selectMessages({ iid, where, orders, page, offset, count }: any) {
+  async selectMessages({ where, orders, page, offset, count }: any) {
     // for safe
-    where = where ? this.bean.model._where(where) : null;
-    orders = orders ? this.bean.model._orders(orders) : null;
-    const limit = page ? this.bean.model._limit(page.size, page.index) : null;
+    const _where: any = Object.assign({}, where);
+    const _orders = orders ? orders.concat() : [];
 
-    //
-    const _where = where ? `${where} AND` : ' WHERE';
-    const _orders = orders || '';
-    const _limit = limit || '';
-
-    // fields
-    let _selectFields;
-    if (count) {
-      _selectFields = 'count(*) as _count';
-    } else {
-      _selectFields = 'a.*';
-    }
-
+    // syncDeleted
+    _where['a.syncDeleted'] = 0;
     // offset
-    let _offsetWhere;
     if (typeof offset === 'number') {
-      _offsetWhere = ` and a.id > ${parseInt(offset)}`;
-    } else {
-      _offsetWhere = '';
+      _where['a.id'] = { op: '>', val: parseInt(offset) };
     }
 
-    // sql
-    const _sql = `select ${_selectFields} from aSocketIOMessageView a
-          ${_where}
-           (
-             a.deleted=0 and a.syncDeleted=0 and a.iid=${iid}
-             ${_offsetWhere}
-           )
-          ${count ? '' : _orders}
-          ${count ? '' : _limit}
-        `;
-
-    // ok
-    return _sql;
+    // builder
+    const builder = this.bean.model.builderSelect('aSocketIOMessageView as a');
+    // count/select:fields
+    if (count) {
+      builder.count();
+    } else {
+      const _selectFields = ['a.*'];
+      builder.select(_selectFields);
+    }
+    // where
+    const wheres = this.bean.model.checkWhere(_where);
+    if (wheres === false) return [];
+    if (wheres !== true) {
+      this.bean.model.buildWhere(builder, wheres);
+    }
+    // orders/page
+    if (!count) {
+      this.bean.model.buildOrders(builder, _orders);
+      this.bean.model.buildPage(builder, page);
+    }
+    // execute
+    const debug = this.app.bean.debug.get('io:sql');
+    if (debug.enabled) {
+      debug('===== selectMessages =====\n%s', builder.toQuery());
+    }
+    return await builder;
   }
 
   setRead({ iid, messageClassId, messageIds, all, userId }: any) {
