@@ -61,12 +61,10 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     // progress
     const progress = { progressId, total, progress: 0 };
     try {
-      // iid
-      const iid = this.ctx.instance.id;
       // remove
       await this._buildRolesRemove();
       // add
-      await this._buildRolesAdd({ iid, roleIdParent: 0 }, progress);
+      await this._buildRolesAdd({ roleIdParent: 0 }, progress);
       // setDirty
       await this.setDirty(false);
       // done
@@ -88,7 +86,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     await this.modelRoleExpand.delete();
   }
 
-  async _buildRolesAdd({ iid, roleIdParent }, progress) {
+  async _buildRolesAdd({ roleIdParent }, progress) {
     const list = await this.modelRole.select({
       columns: ['id', 'roleName', 'catalog', 'atomId'],
       where: { roleIdParent },
@@ -99,12 +97,12 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       const roleAtomId = item.atomId;
       const catalog = item.catalog;
       // build
-      await this._buildRoleRef({ iid, roleId });
-      await this._buildRoleIncRef({ iid, roleId });
-      await this._buildRoleExpand({ iid, roleId, roleAtomId });
+      await this._buildRoleRef({ roleId });
+      await this._buildRoleIncRef({ roleId });
+      await this._buildRoleExpand({ roleId, roleAtomId });
       // catalog
       if (catalog === 1) {
-        await this._buildRolesAdd({ iid, roleIdParent: roleId }, progress);
+        await this._buildRolesAdd({ roleIdParent: roleId }, progress);
       }
       // progress
       if (progress.progressId) {
@@ -119,7 +117,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     }
   }
 
-  async _buildRoleRef({ roleId }: any) {
+  async _buildRoleRef({ roleId }) {
     let level = 0;
     let roleIdParent = roleId;
     // loop
@@ -145,7 +143,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   //           select ${iid},${roleId},a.roleIdInc,a.roleId from aRoleInc a
   //             where a.iid=${iid} and a.roleId in (select b.roleIdParent from aRoleRef b where b.iid=${iid} and b.roleId=${roleId})
   //       `,
-  async _buildRoleIncRef({ roleId }: any) {
+  async _buildRoleIncRef({ roleId }) {
     const iid = this.ctx.instance.id;
     const model = this.bean.model;
     function toId(name) {
@@ -169,7 +167,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   //           select a.iid,${roleAtomId},a.roleId,a.roleIdInc from aRoleIncRef a
   //             where a.iid=${iid} and a.roleId=${roleId}
   //       `,
-  async _buildRoleExpand({ roleId, roleAtomId }: any) {
+  async _buildRoleExpand({ roleId, roleAtomId }) {
     const iid = this.ctx.instance.id;
     const model = this.bean.model;
     function toId(name) {
