@@ -140,11 +140,22 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     }
   }
 
-  async _buildRoleIncRef({ iid, roleId }: any) {
-    await this.bean.model.query(
-      `insert into aRoleIncRef(iid,roleId,roleIdInc,roleIdSrc)
-            select ${iid},${roleId},a.roleIdInc,a.roleId from aRoleInc a
-              where a.iid=${iid} and a.roleId in (select b.roleIdParent from aRoleRef b where b.iid=${iid} and b.roleId=${roleId})
+  // `insert into aRoleIncRef(iid,roleId,roleIdInc,roleIdSrc)
+  //           select ${iid},${roleId},a.roleIdInc,a.roleId from aRoleInc a
+  //             where a.iid=${iid} and a.roleId in (select b.roleIdParent from aRoleRef b where b.iid=${iid} and b.roleId=${roleId})
+  //       `,
+  async _buildRoleIncRef({ roleId }: any) {
+    const iid = this.ctx.instance.id;
+    const model = this.bean.model;
+    function toId(name) {
+      return model.toIdentifier(name);
+    }
+    await model.query(
+      `insert into ${toId('aRoleIncRef')}(${toId('iid,roleId,roleIdInc,roleIdSrc')})
+            select ${iid},${roleId},${toId('a.roleIdInc,a.roleId')} from ${toId('aRoleInc as a')}
+              where ${toId('a.iid')}=${iid} and ${toId('a.roleId')} in (select ${toId('b.roleIdParent')} from ${toId(
+        'aRoleRef as b',
+      )} where ${toId('b.iid')}=${iid} and ${toId('b.roleId')}=${roleId})
         `,
     );
   }

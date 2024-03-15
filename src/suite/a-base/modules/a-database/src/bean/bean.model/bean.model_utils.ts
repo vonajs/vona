@@ -89,6 +89,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     return this.ctx.db.ref<TSrc>(src);
   }
 
+  toIdentifier(name: string): Knex.Raw<any> {
+    const parts = name.split(',');
+    return this.raw(parts.map(_ => '??').join(','), parts);
+  }
+
   checkWhere(where) {
     return checkWhere(where);
   }
