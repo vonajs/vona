@@ -2,6 +2,7 @@ import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from '@cabloy/core';
 import { AtomClass, AtomClassBase, AtomClassParams } from '../types.js';
 import { EntityAtomClass } from '../index.js';
+import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
 
 @Bean()
 export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
@@ -137,14 +138,17 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async atomClassesUser({ user }: any) {
     // items
-    const items = await this.bean.model.select('aViewUserRightAtomClass as a', {});
-    const items = await this.bean.model.query(
-      `
-        select distinct a.atomClassId,b.module,b.atomClassName from 
-          inner join aAtomClass b on a.atomClassId=b.id
-            where a.iid=? and a.userIdWho=?
-      `,
-      [this.ctx.instance.id, user.id],
+    const items = await this.bean.model.select(
+      'aViewUserRightAtomClass as a',
+      {
+        distinct: true,
+        columns: ['a.atomClassId', 'b.module', 'b.atomClassName'],
+        joins: [['innerJoin', 'aAtomClass as b', { 'a.atomClassId': 'b.id' }]] as IModelSelectParamsJoin[],
+        where: {
+          'a.userIdWho': user.id,
+        },
+      },
+      { disableDeleted: true },
     );
     const itemsMap: any = {};
     for (const item of items) {
@@ -178,14 +182,29 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   async actionsUser({ atomClass, user }: any) {
     const atomClassId = await this.getAtomClassId(atomClass);
     // items
-    const items = await this.bean.model.query(
-      `
-          select distinct a.atomClassId,a.action,b.id as actionId,b.name,b.bulk,b.actionMode,c.atomName as flowDefName from aViewUserRightAtomClass a
-            inner join aAtomAction b on a.atomClassId=b.atomClassId and a.action=b.code
-            left join aAtom c on b.flowKey=c.atomStaticKey and c.atomStage=1
-              where a.iid=? and a.atomClassId=? and a.userIdWho=?
-        `,
-      [this.ctx.instance.id, atomClassId, user.id],
+    const items = await this.bean.model.select(
+      'aViewUserRightAtomClass as a',
+      {
+        distinct: true,
+        columns: [
+          'a.atomClassId',
+          'a.action',
+          'b.id as actionId',
+          'b.name',
+          'b.bulk',
+          'b.actionMode',
+          'c.atomName as flowDefName',
+        ],
+        joins: [
+          ['innerJoin', 'aAtomAction as b', { 'a.atomClassId': 'b.atomClassId', 'a.action': 'b.code' }],
+          ['leftJoin', 'aAtom as c', { 'b.flowKey': 'c.atomStaticKey', 'c.atomStage': this.bean.model.raw('?', 1) }],
+        ],
+        where: {
+          'a.atomClassId': atomClassId,
+          'a.userIdWho': user.id,
+        },
+      },
+      { disableDeleted: true },
     );
     // locale
     await this.ctx.bean.role._adjustFlowActionsLocale({ items, actionNameKey: 'name' });
