@@ -326,13 +326,11 @@ export class BeanRoleAtomRights extends BeanRoleBase {
 
   async _scopeRoles({ scope }: any) {
     if (!scope || scope.length === 0) return null;
-    const items = await this.bean.model.query(
-      `
-            select a.* from aRole a
-              where a.iid=? and a.id in (${scope.join(',')})
-            `,
-      [this.ctx.instance.id],
-    );
+    const items = await this.modelRole.select({
+      where: {
+        id: scope,
+      },
+    });
     return this._translateRoleNamesLocale({ items });
   }
 

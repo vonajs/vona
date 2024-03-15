@@ -236,21 +236,35 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
       const roleRoot = await this.parseRoleName({ roleName: 'root' });
       roleIds = [roleRoot.id];
     } else {
-      let sql;
+      let roles;
       if (!roleTypes || roleTypes.length === 0) {
-        sql = `
-            select * from aViewUserRightRefAtomClass a
-              where a.iid=? and a.userIdWho=? and a.atomClassId=? and a.action=2
-          `;
+        roles = await this.bean.model.select(
+          'aViewUserRightRefAtomClass',
+          {
+            where: {
+              userIdWho: user.id,
+              atomClassId: atomClass.id,
+              action: 2,
+            },
+          },
+          { disableDeleted: true },
+        );
       } else {
-        sql = `
-            select * from aViewUserRightRefAtomClass a
-              inner join aRole b on a.roleIdWhom=b.id
-              where a.iid=? and a.userIdWho=? and a.atomClassId=? and a.action=2
-                    and b.roleTypeCode in (${roleTypes.join(',')})
-          `;
+        roles = await this.bean.model.select(
+          'aViewUserRightRefAtomClass as a',
+          {
+            columns: ['*'],
+            joins: [['innerJoin', 'aRole as b', { 'a.roleIdWhom': 'b.id' }]],
+            where: {
+              'a.userIdWho': user.id,
+              'a.atomClassId': atomClass.id,
+              'a.action': 2,
+              'b.roleTypeCode': roleTypes,
+            },
+          },
+          { disableDeleted: true },
+        );
       }
-      const roles = await this.bean.model.query(sql, [this.ctx.instance.id, user.id, atomClass.id]);
       roleIds = roles.map(item => item.roleIdWhom);
     }
     return roleIds;
