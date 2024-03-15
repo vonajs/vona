@@ -1,5 +1,9 @@
 import { Bean, TableIdentity } from '@cabloy/core';
-import { IFetchDatabasesResultItem, VirtualDatabaseDialect } from './virtual.databaseDialect.js';
+import {
+  IFetchDatabasesResultItem,
+  IFetchIndexesResultItem,
+  VirtualDatabaseDialect,
+} from './virtual.databaseDialect.js';
 import { Knex } from 'knex';
 
 @Bean({ scene: 'database.dialect' })
@@ -22,6 +26,19 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
 
   async dropDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<void> {
     await schemaBuilder.raw(`DROP DATABASE "${databaseName}"`);
+  }
+
+  async fetchIndexes(schemaBuilder: Knex.SchemaBuilder, tableName: string): Promise<IFetchIndexesResultItem[]> {
+    const res: any = await schemaBuilder.raw(
+      `select indexname,indexdef from pg_indexes where tablename='${tableName}'`,
+    );
+    let items = res.rows;
+    items = items.map(item => {
+      return {
+        indexName: item.indexname,
+      };
+    });
+    return items;
   }
 
   async insert(builder: Knex.QueryBuilder): Promise<TableIdentity[]> {

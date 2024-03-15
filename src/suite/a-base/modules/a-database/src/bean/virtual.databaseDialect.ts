@@ -5,6 +5,10 @@ export interface IFetchDatabasesResultItem {
   name: string;
 }
 
+export interface IFetchIndexesResultItem {
+  indexName: string;
+}
+
 export interface ITableColumn {
   type: string;
   default: any;
@@ -30,6 +34,10 @@ export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
   }
 
   async dropDatabase(_schemaBuilder: Knex.SchemaBuilder, _databaseName: string): Promise<void> {
+    throw new Error('Not Implemented');
+  }
+
+  async fetchIndexes(_schemaBuilder: Knex.SchemaBuilder, _tableName: string): Promise<IFetchIndexesResultItem[]> {
     throw new Error('Not Implemented');
   }
 
