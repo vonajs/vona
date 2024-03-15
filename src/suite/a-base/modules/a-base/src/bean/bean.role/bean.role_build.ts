@@ -118,7 +118,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     }
   }
 
-  async _buildRoleRef({ iid, roleId }: any) {
+  async _buildRoleRef({ roleId }: any) {
     let level = 0;
     let roleIdParent = roleId;
     // loop
