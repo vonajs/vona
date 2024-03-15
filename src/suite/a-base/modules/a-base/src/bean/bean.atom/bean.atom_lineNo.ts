@@ -42,23 +42,24 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
     if (lineNoFrom === 0) {
       lineNoFrom = 1;
     }
-    // sql
-    let sql;
+    // where/orders
+    const where = { [fieldNameAtomIdMain]: atomFrom[fieldNameAtomIdMain] };
+    let orders;
     if (direction === 'up') {
-      sql = `select a.id,a.${fieldNameLineNo} from ${tableName} a
-          where a.iid=? and a.deleted=0 and a.${fieldNameAtomIdMain}=? and a.${fieldNameLineNo}<?
-          order by a.${fieldNameLineNo} desc`;
+      where[fieldNameLineNo] = { op: '<', val: lineNoFrom };
+      orders = [[fieldNameLineNo, 'desc']];
     } else {
-      sql = `select a.id,a.${fieldNameLineNo} from ${tableName} a
-          where a.iid=? and a.deleted=0 and a.${fieldNameAtomIdMain}=? and a.${fieldNameLineNo}>?
-          order by a.${fieldNameLineNo} asc`;
+      where[fieldNameLineNo] = { op: '>', val: lineNoFrom };
+      orders = [[fieldNameLineNo, 'asc']];
     }
+    // sql
+    const items = await this.bean.model.select(tableName, {
+      columns: ['id', `${fieldNameLineNo}`],
+      where,
+      orders,
+    });
     // to
-    const atomTo = await this.bean.model.queryOne(sql, [
-      this.ctx.instance.id,
-      atomFrom[fieldNameAtomIdMain],
-      lineNoFrom,
-    ]);
+    const atomTo = items[0];
     if (!atomTo) {
       // do nothing
       return null;
