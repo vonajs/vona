@@ -198,10 +198,10 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
   }
 
   async _create_prepareDetail_detailLineNo({ atomClassBase, options, user: _user }: any) {
-    if (!atomClassBase.detail) return null;
+    if (!atomClassBase.detail) return undefined;
     // field lineNo
     const fieldNameLineNo = atomClassBase.fields?.mappings?.lineNo;
-    if (!fieldNameLineNo) return null;
+    if (!fieldNameLineNo) return undefined;
     // atomIdMain
     const atomIdMain = options.atomIdMain;
     // table
@@ -216,6 +216,6 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
         [fieldNameAtomIdMain]: atomIdMain,
       });
     const detailLineNo = this.bean.model.extractFirstNumber(res, 0).plus(1);
-    return detailLineNo;
+    return detailLineNo.toNumber();
   }
 }

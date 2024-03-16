@@ -185,13 +185,13 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     columnName?: string,
   ): T extends undefined ? BigNumber | undefined : BigNumber {
     const value = this.extractFirstValue(result, defaultValue, columnName);
-    if (value === undefined) return undefined as any;
+    if (value === undefined || value === null) return undefined as any;
     return BigNumber(value);
   }
 
   extractFirstValue(result: Array<object> | object, defaultValue?: any, columnName?: string): any | undefined {
     const value = this._extractFirstValue(result, columnName);
-    if (value === undefined) return defaultValue;
+    if (value === undefined || value === null) return defaultValue;
     return value;
   }
 
