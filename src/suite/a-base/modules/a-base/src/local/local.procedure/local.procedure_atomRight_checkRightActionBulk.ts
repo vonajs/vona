@@ -49,16 +49,19 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
   }
 
   _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any): any {
+    const self = this;
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true;
     return {
       __exists__user(this: Knex.QueryBuilder) {
-        return this.select('b.atomClassId').from('aViewUserRightAtomClass as b').where({
-          'b.iid': iid,
-          'a.atomClassId': 'b.atomClassId',
-          'a.code': 'b.action',
-          'b.userIdWho': userIdWho,
-        });
+        return this.select('b.atomClassId')
+          .from('aViewUserRightAtomClass as b')
+          .where({
+            'b.iid': iid,
+            'a.atomClassId': self.bean.model.ref('b.atomClassId'),
+            'a.code': self.bean.model.ref('b.action'),
+            'b.userIdWho': userIdWho,
+          });
       },
     };
   }
