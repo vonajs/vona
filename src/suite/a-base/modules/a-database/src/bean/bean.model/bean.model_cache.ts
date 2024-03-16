@@ -1,7 +1,7 @@
 import { Cast, TableIdentity } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
-import { getTableOrTableAlias, getTargetColumnName } from '../../common/utils.js';
+import { getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {

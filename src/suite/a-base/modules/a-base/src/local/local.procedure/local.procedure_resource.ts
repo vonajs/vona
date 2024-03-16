@@ -57,12 +57,9 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
               'b.iid': self.bean.model.ref('a.iid'),
               'b.atomId': self.bean.model.ref('a.id'),
               'b.locale': locale,
-              __and__: [
-                //
-                { 'b.atomNameLocale': { op: 'notNull' } },
-                { 'b.atomNameLocale': { op: '<>', val: '' } },
-              ],
-            });
+            })
+            .whereNotNull('b.atomNameLocale')
+            .where('b.atomNameLocale', '<>', '');
         },
       },
     });
