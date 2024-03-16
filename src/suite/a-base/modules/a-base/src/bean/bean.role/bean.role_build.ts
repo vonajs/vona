@@ -1,4 +1,3 @@
-import { Cast } from '@cabloy/core';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanRoleAtomRights } from './bean.role_atomRights.js';
 
