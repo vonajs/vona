@@ -1,7 +1,7 @@
 import { Cast, TableIdentity } from '@cabloy/core';
 import { BeanModel } from '../virtual.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
-import { getTargetColumnName } from '../../common/utils.js';
+import { getTableOrTableAlias, getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
@@ -93,7 +93,8 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return await super.select(table, params, options);
     }
     // 1: select id
-    const params2: IModelSelectParams = Object.assign({}, params, { columns: ['id'] });
+    const columnId = `${params?.alias ? params?.alias : table}.id`;
+    const params2: IModelSelectParams = Object.assign({}, params, { columns: [columnId] });
     const items = await super.select<TRecord2>(table, params2, options);
     if (items.length === 0) {
       // donothing
