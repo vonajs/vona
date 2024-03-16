@@ -18,10 +18,8 @@ export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async _set({ name, value, timeout, queue }: any) {
-    // second
-    const second = timeout ? parseInt(timeout / 1000) : timeout;
     // expired
-    const expired = second ? `TIMESTAMPADD(SECOND,${second},CURRENT_TIMESTAMP)` : 'null';
+    const expired = timeout ? new Date(Date.now() + parseInt(timeout)) : null;
     const res = await this.bean.model.get('aCache', {
       iid: this.ctx.instance ? this.ctx.instance.id : 0,
       module: this.moduleScope,
@@ -67,11 +65,9 @@ export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
 
   async _has(name) {
     const item = await this.bean.model.get('aCache', {
-      where: {
-        module: this.moduleScope,
-        name,
-        __or__: [{ expired: { op: 'isNull' } }, { expired: { op: '>', val: new Date() } }],
-      },
+      module: this.moduleScope,
+      name,
+      __or__: [{ expired: { op: 'isNull' } }, { expired: { op: '>', val: new Date() } }],
     });
     return item;
   }

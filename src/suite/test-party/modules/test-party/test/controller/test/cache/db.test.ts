@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
-describe('test/controller/test/cache/db.test.js', () => {
+describe.only('test/controller/test/cache/db.test.js', () => {
   it('action:cache:db', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();

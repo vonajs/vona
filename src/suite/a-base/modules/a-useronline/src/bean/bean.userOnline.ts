@@ -18,7 +18,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
   }
 
   get configUserOnline() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   get configUserOnlineExpired() {
