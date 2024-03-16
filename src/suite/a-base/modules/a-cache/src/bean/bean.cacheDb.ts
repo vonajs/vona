@@ -67,7 +67,7 @@ export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
     const item = await this.bean.model.get('aCache', {
       module: this.moduleScope,
       name,
-      __or__: [{ expired: { op: 'isNull' } }, { expired: { op: '>', val: new Date() } }],
+      __or__: [{ expired: { op: 'null' } }, { expired: { op: '>', val: new Date() } }],
     });
     return item;
   }
