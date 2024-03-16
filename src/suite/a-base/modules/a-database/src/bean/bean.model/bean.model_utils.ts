@@ -175,19 +175,27 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     this.buildWhere(builder, wheres);
   }
 
-  extractCount(result: Array<object> | object): BigNumber {
-    const value = this.extractFirstNumber(result);
-    if (value === undefined) return BigNumber(0);
-    return value;
+  extractCount(result: Array<object> | object, columnName?: string): BigNumber {
+    return this.extractFirstNumber(result, 0, columnName)!;
   }
 
-  extractFirstNumber(result: Array<object> | object, columnName?: string): BigNumber | undefined {
-    const value = this.extractFirstValue(result, columnName);
-    if (value === undefined) return undefined;
+  extractFirstNumber<T = number | BigNumber | undefined>(
+    result: Array<object> | object,
+    defaultValue?: T,
+    columnName?: string,
+  ): T extends undefined ? BigNumber | undefined : BigNumber {
+    const value = this.extractFirstValue(result, defaultValue, columnName);
+    if (value === undefined) return undefined as any;
     return BigNumber(value);
   }
 
-  extractFirstValue(result: Array<object> | object, columnName?: string): any | undefined {
+  extractFirstValue(result: Array<object> | object, defaultValue?: any, columnName?: string): any | undefined {
+    const value = this._extractFirstValue(result, columnName);
+    if (value === undefined) return defaultValue;
+    return value;
+  }
+
+  private _extractFirstValue(result: Array<object> | object, columnName?: string): any | undefined {
     const res = Array.isArray(result) ? result[0] : result;
     if (!res) return undefined;
     if (columnName) return res[columnName];

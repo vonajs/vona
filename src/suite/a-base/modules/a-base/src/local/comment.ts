@@ -1,4 +1,4 @@
-import { BeanBase, Cast, Local } from '@cabloy/core';
+import { BeanBase, Local } from '@cabloy/core';
 
 import trimHtml from '@zhennann/trim-html';
 import { ScopeModule } from '../resource/this.js';
@@ -129,10 +129,10 @@ export class LocalComment extends BeanBase<ScopeModule> {
 
   async save_add({ key, data: { replyId, content }, user }) {
     // sorting
-    const list = await this.bean.model.builderSelect('aComment').max('sorting as sorting').where({
+    const list = await this.bean.model.builderSelect('aComment').max('sorting').where({
       atomId: key.atomId,
     });
-    const sorting = (Cast(list[0]).sorting || 0) + 1;
+    const sorting = this.bean.model.extractFirstNumber(list, 0).plus(1);
     // reply
     let reply;
     if (replyId) {

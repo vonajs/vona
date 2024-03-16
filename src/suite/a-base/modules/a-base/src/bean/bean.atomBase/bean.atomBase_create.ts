@@ -1,4 +1,3 @@
-import { BigNumber } from 'cabloy-module-api-a-database';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase1 } from './bean.atomBase_1.js';
 
@@ -216,7 +215,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
       .where({
         [fieldNameAtomIdMain]: atomIdMain,
       });
-    const detailLineNo = this.bean.model.extractFirstNumber(res);
-    return detailLineNo ? detailLineNo.plus(1) : BigNumber(1);
+    const detailLineNo = this.bean.model.extractFirstNumber(res, 0).plus(1);
+    return detailLineNo;
   }
 }
