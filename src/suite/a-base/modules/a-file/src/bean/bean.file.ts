@@ -489,14 +489,16 @@ export class BeanFile extends BeanBase<ScopeModule> {
       return await this.modelFile.get({ downloadId, atomId });
     }
     // try to get formal
-    const file = await this.bean.model.queryOne(
-      `
-          select a.* from aFile a
-            inner join aAtom b on a.atomId=b.id
-              where a.iid=? and a.deleted=0 and a.mode=2 and a.downloadId=? and b.atomStage=1
-        `,
-      [this.ctx.instance.id, downloadId],
-    );
+    const files = await this.modelFile.select({
+      alias: 'a',
+      joins: [['innerJoin', 'aAtom as b', { 'a.atomId': 'b.id' }]],
+      where: {
+        'a.mode': 2,
+        'a.downloadId': downloadId,
+        'b.atomStage': 1,
+      },
+    });
+    const file = files[0];
     if (file) return file;
     // no matter what atomId is: maybe ===0 or !==0
     return await this.modelFile.get({ downloadId });
