@@ -1,3 +1,4 @@
+import { BigNumber } from 'cabloy-module-api-a-database';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase1 } from './bean.atomBase_1.js';
 
@@ -209,14 +210,13 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // field: atomIdMain
     const fieldNameAtomIdMain = atomClassBase.fields?.mappings?.atomIdMain;
     // query max
-    const res = await this.bean.model.queryOne(
-      `
-        select max(a.${fieldNameLineNo}) as detailLineNo from ${tableName} a
-          where a.iid=? and a.deleted=0 and a.${fieldNameAtomIdMain}=?
-        `,
-      [this.ctx.instance.id, atomIdMain],
-    );
-    const detailLineNo = res.detailLineNo;
-    return detailLineNo ? detailLineNo + 1 : 1;
+    const res = await this.bean.model
+      .builderSelect(tableName)
+      .max(fieldNameLineNo)
+      .where({
+        [fieldNameAtomIdMain]: atomIdMain,
+      });
+    const detailLineNo = this.bean.model.extractFirstNumber(res);
+    return detailLineNo ? detailLineNo.plus(1) : BigNumber(1);
   }
 }

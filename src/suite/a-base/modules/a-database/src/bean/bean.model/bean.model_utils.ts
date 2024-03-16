@@ -175,9 +175,25 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     this.buildWhere(builder, wheres);
   }
 
-  extractCount(result) {
+  extractCount(result: Array<object> | object): BigNumber {
+    const value = this.extractFirstNumber(result);
+    if (value === undefined) return BigNumber(0);
+    return value;
+  }
+
+  extractFirstNumber(result: Array<object> | object, columnName?: string): BigNumber | undefined {
+    const value = this.extractFirstValue(result, columnName);
+    if (value === undefined) return undefined;
+    return BigNumber(value);
+  }
+
+  extractFirstValue(result: Array<object> | object, columnName?: string): any | undefined {
     const res = Array.isArray(result) ? result[0] : result;
-    return BigNumber(res[Object.keys(res)[0]]);
+    if (!res) return undefined;
+    if (columnName) return res[columnName];
+    const keys = Object.keys(res);
+    if (keys.length === 0) return undefined;
+    return res[keys[0]];
   }
 
   protected _prepareWhereByOptions(table: string, where, options?: IModelMethodOptionsGeneral) {
