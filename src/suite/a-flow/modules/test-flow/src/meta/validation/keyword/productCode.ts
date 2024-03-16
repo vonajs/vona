@@ -17,14 +17,15 @@ keywords.productCode = {
         return true;
       }
       const atomId = ctx.meta.validateHost.key.atomId;
-      const item = await ctx.model.queryOne(
-        `
-          select a.id from aAtom a
-            left join testFlowProduct b on a.id=b.atomId
-              where a.atomStage=0 and a.iid=? and a.deleted=0 and b.productCode=?
-          `,
-        [ctx.instance.id, data],
-      );
+      const items = await ctx.bean.atom.model.select({
+        alias: 'a',
+        joins: [['leftJoin', 'testFlowProduct as b', { 'a.id': 'b.atomId' }]],
+        where: {
+          'a.atomStage': 0,
+          'b.productCode': data,
+        },
+      });
+      const item = items[0];
       if (item && item.id !== atomId) {
         const errors: any[] = [{ keyword: 'x-productCode', params: [], message: ctx.text('Product Code Exists') }];
         throw new ctx.bean.ajv.Ajv.ValidationError(errors);
