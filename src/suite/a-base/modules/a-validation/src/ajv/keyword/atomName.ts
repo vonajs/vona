@@ -18,14 +18,15 @@ export default {
       const atomId = ctx.meta.validateHost.key.atomId;
       const atomClass = ctx.meta.validateHost.atomClass;
       //   read by atomClass, atomLanguage, atomName
-      const atomLanguageClause = rootData.atomLanguage ? 'and a.atomLanguage=?' : '';
-      const items = await ctx.model.query(
-        `
-          select a.atomStage,a.id from aAtom a
-              where a.atomStage in (0,1) and a.iid=? and a.deleted=0 and a.atomClassId=? and a.atomName=? ${atomLanguageClause}
-          `,
-        [ctx.instance.id, atomClass.id, atomName, rootData.atomLanguage],
-      );
+      const where: any = {
+        atomStage: [0, 1],
+        atomClassId: atomClass.id,
+        atomName,
+      };
+      if (rootData.atomLanguage) {
+        where.atomLanguage = rootData.atomLanguage;
+      }
+      const items = await ctx.bean.atom.model.select({ where });
       // check draft/formal
       const checkExists = await ctx.bean.util.checkAtomIdExists({ atomId, items });
       if (checkExists) {
