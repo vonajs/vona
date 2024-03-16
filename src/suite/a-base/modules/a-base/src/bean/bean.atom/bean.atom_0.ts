@@ -74,27 +74,24 @@ export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async readCount({ key, atom: { readCount = 1 }, user: _user }) {
-    await this.modelAtom.query('update aAtom set readCount = readCount + ? where iid=? and id=?', [
-      readCount,
-      this.ctx.instance.id,
-      key.atomId,
-    ]);
+    await this.modelAtom.update({
+      id: key.atomId,
+      readCount: this.bean.model.raw('?? + ?', ['readCount', readCount]),
+    });
   }
 
   async comment({ key, atom: { comment = 1 }, user: _user }) {
-    await this.modelAtom.query('update aAtom set commentCount = commentCount + ? where iid=? and id=?', [
-      comment,
-      this.ctx.instance.id,
-      key.atomId,
-    ]);
+    await this.modelAtom.update({
+      id: key.atomId,
+      commentCount: this.bean.model.raw('?? + ?', ['commentCount', comment]),
+    });
   }
 
   async attachment({ key, atom: { attachment = 1 }, user: _user }: any) {
-    await this.modelAtom.query('update aAtom set attachmentCount = attachmentCount + ? where iid=? and id=?', [
-      attachment,
-      this.ctx.instance.id,
-      key.atomId,
-    ]);
+    await this.modelAtom.update({
+      id: key.atomId,
+      attachmentCount: this.bean.model.raw('?? + ?', ['attachmentCount', attachment]),
+    });
   }
 
   async stats({ atomIds, user }: any) {
