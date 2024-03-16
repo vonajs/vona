@@ -149,7 +149,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     function toId(name) {
       return model.toIdentifier(name);
     }
-    await Cast(model).query(
+    await model.query(
       `insert into ${toId('aRoleIncRef')}(${toId('iid,roleId,roleIdInc,roleIdSrc')})
             select ${iid},${roleId},${toId('a.roleIdInc,a.roleId')} from ${toId('aRoleInc as a')}
               where ${toId('a.iid')}=${iid} and ${toId('a.roleId')} in (select ${toId('b.roleIdParent')} from ${toId(
@@ -173,13 +173,13 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     function toId(name) {
       return model.toIdentifier(name);
     }
-    await Cast(model).query(
+    await model.query(
       `insert into ${toId('aRoleExpand')}(${toId('iid,roleAtomId,roleId,roleIdBase')})
             select ${toId('a.iid')},${roleAtomId},${toId('a.roleId,a.roleIdParent')} from ${toId('aRoleRef as a')}
               where ${toId('a.iid')}=${iid} and ${toId('a.roleId')}=${roleId}
         `,
     );
-    await Cast(model).query(
+    await model.query(
       `insert into ${toId('aRoleExpand')}(${toId('iid,roleAtomId,roleId,roleIdBase')})
             select ${toId('a.iid')},${roleAtomId},${toId('a.roleId,a.roleIdInc')} from ${toId('aRoleIncRef as a')}
               where ${toId('a.iid')}=${iid} and ${toId('a.roleId')}=${roleId}
