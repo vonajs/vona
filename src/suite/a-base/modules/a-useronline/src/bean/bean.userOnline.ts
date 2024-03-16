@@ -159,7 +159,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
         userId,
         onlineIP: data.onlineIPLast,
         onlineTime: data.onlineTimeLast,
-        isLogin,
+        isLogin: Number(isLogin),
       },
       options: {
         ignoreValidate: true,
