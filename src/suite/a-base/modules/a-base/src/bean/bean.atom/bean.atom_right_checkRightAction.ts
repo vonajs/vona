@@ -453,7 +453,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   }
 
   async _checkRightAction_sql({ userIdWho, atomClass, atomClassBase, atom, action, forAtomUser }: any) {
-    const sql = await this.sqlProcedure.checkRightAction({
+    const res = await this.sqlProcedure.checkRightAction({
       iid: this.ctx.instance.id,
       userIdWho,
       atomClass,
@@ -462,12 +462,8 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       action,
       forAtomUser,
     });
-    if (sql === false) return null;
-    if (sql === true) return atom;
-    const debug = this.ctx.app.bean.debug.get('atom:right');
-    debug('checkRightAction sql: atomId: ', atom.id);
-    const res = await this.bean.model.queryOne(sql);
-    debug('checkRightAction sql end: atomId: ', atom.id);
+    if (res === false) return null;
+    if (res === true) return atom;
     return res;
   }
 }
