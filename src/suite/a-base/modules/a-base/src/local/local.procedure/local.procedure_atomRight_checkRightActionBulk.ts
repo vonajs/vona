@@ -1,4 +1,4 @@
-import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightAction } from './local.procedure_atomRight_checkRightAction.js';
 
 export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {
@@ -47,10 +47,15 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
   _checkRightActionBulk_rightWhere({ iid, userIdWho, atomClassBase }: any): any {
     const enableRight = atomClassBase.enableRight;
     if (!enableRight) return true;
-    return this.bean.model.raw(`
-        exists(
-          select b.atomClassId from aViewUserRightAtomClass b where b.iid=${iid} and a.atomClassId=b.atomClassId and a.code=b.action and b.userIdWho=${userIdWho}
-        )
-      `);
+    return {
+      __exists__user(this: Knex.QueryBuilder) {
+        return this.select('b.atomClassId').from('aViewUserRightAtomClass as b').where({
+          'b.iid': iid,
+          'a.atomClassId': 'b.atomClassId',
+          'a.code': 'b.action',
+          'b.userIdWho': userIdWho,
+        });
+      },
+    };
   }
 }
