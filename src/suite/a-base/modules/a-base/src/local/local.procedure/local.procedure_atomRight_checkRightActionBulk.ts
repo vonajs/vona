@@ -40,6 +40,10 @@ export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureA
       builder.limit(1);
     }
     // execute
+    const debug = this.app.bean.debug.get('atom:right');
+    if (debug.enabled) {
+      debug('===== checkRightActionBulk =====\n%s', builder.toQuery());
+    }
     const res = await builder;
     return action ? res[0] : res;
   }
