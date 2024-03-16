@@ -12,6 +12,7 @@ export function formatValue(value) {
   if (value.op === 'like') return `%${value.val}%`;
   if (value.op === 'likeLeft') return `%${value.val}`;
   if (value.op === 'likeRight') return `${value.val}%`;
+  if (value.op === 'likeStrict') return `${value.val}`;
   // in
   if (['in', 'notIn'].includes(value.op)) {
     return formatValueArray(value);

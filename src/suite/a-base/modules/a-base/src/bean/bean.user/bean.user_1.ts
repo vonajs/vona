@@ -83,9 +83,9 @@ export class BeanUser1 extends BeanUser0 {
     // where
     const where: any = {};
     where.__or__ = [];
-    if (userName) where.__or__.push({ userName });
-    if (email) where.__or__.push({ email });
-    if (mobile) where.__or__.push({ mobile });
+    if (userName) where.__or__.push({ userName: { op: 'likeStrict', val: userName } });
+    if (email) where.__or__.push({ email: { op: 'likeStrict', val: email } });
+    if (mobile) where.__or__.push({ mobile: { op: 'likeStrict', val: mobile } });
     if (where.__or__.length === 0) return null;
     const items = await this.model.select({ where });
     return items[0];
