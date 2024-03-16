@@ -153,12 +153,8 @@ export class BeanAtom0Select extends BeanAtom0Read {
     } else {
       items = await this._selectQuery({ atomClass, options: options2, user });
     }
-    // count
-    if (count) {
-      return this.bean.model.extractCount(items);
-    }
     // ok
-    return items;
+    return count ? this.bean.model.extractCount(items) : items;
   }
 
   async _selectQuery({ atomClass, options, user }: AtomSelectQueryParams) {

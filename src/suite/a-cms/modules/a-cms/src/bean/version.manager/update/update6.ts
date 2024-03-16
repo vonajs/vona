@@ -1,6 +1,11 @@
 import { BeanBase } from '@cabloy/core';
+import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
 
-export class VersionUpdate extends BeanBase {
+export class VersionUpdate extends BeanBase<ScopeModule> {
+  constructor() {
+    super(__ThisModule__);
+  }
+
   async run() {
     // alter table: aCmsArticle
     await this.bean.model.alterTable('aCmsArticle', function (table) {
@@ -73,10 +78,10 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _update6UuidsInstance() {
-    const articles = await this.bean.model.article.select();
+    const articles = await this.scope.model.article.select();
     for (const article of articles) {
       const uuid = this._parseUuid(article);
-      await this.bean.model.article.update({
+      await this.scope.model.article.update({
         id: article.id,
         uuid,
       });

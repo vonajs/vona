@@ -28,11 +28,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
       count,
       history,
     });
-    if (count) {
-      return this.bean.model.extractCount(items);
-    }
-    // ok
-    return items;
+    return count ? this.bean.model.extractCount(items) : items;
   }
 
   async _loadTaskInstance({ flowTaskId, user, history, throwError = true }: any) {
