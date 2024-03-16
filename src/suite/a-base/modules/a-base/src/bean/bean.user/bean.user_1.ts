@@ -87,7 +87,8 @@ export class BeanUser1 extends BeanUser0 {
     if (email) where.__or__.push({ email });
     if (mobile) where.__or__.push({ mobile });
     if (where.__or__.length === 0) return null;
-    return await this.model.get(where);
+    const items = await this.model.select({ where });
+    return items[0];
   }
 
   async save({ user }: any) {
