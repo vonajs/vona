@@ -32,11 +32,17 @@ export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightAct
       };
     }
     // sql
-    const items = await this.bean.atom.model.select({
+    let items = await this.bean.atom.model.select({
       alias: 'a',
-      columns: ['a.id as atomId', 'a.atomName'],
+      columns: ['a.id', 'a.atomName'],
       where,
       limit: 1,
+    });
+    items = items.map(item => {
+      return {
+        ...item,
+        atomId: item.id,
+      };
     });
     return items[0] as unknown as { atomId: TableIdentity; atomName: string } | undefined;
   }
