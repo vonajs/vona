@@ -13,7 +13,7 @@ export class BeanMail extends BeanModuleScopeBase<ScopeModule> {
     const res = await this.modelMail.insert({
       scene,
       status: 0,
-      mailto: message.to,
+      mailTo: message.to,
       mailSubject: message.subject,
       message: JSON.stringify(message),
     });

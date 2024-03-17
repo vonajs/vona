@@ -2,7 +2,7 @@
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 import eggBornUtils from 'egg-born-utils';
 
-describe('test/controller/test/feat/openAuth.test.js', () => {
+describe.only('test/controller/test/feat/openAuth.test.js', () => {
   const __atomClassParty = {
     module: 'test-party',
     atomClassName: 'party',

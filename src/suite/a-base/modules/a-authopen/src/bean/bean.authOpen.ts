@@ -129,14 +129,12 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   }
 
   async getAuthOpenByAuthId({ authId }: any) {
-    const items = await this.bean.model.select('aAuthOpenView as a', {
-      columns: ['a.*'],
-      joins: [['innerJoin', 'aAuth as b', { 'a.id': 'b.profileId' }]],
-      where: {
-        'b.id': authId,
-      },
+    const authItem = await this.bean.auth.model.get({ id: authId });
+    if (!authItem) return undefined;
+    const item = await this.bean.model.get('aAuthOpenView', {
+      id: parseInt(authItem.profileId),
     });
-    return items[0];
+    return item;
   }
 
   async _forceAuthOpenId({ atomId, itemId }: any) {
