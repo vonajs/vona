@@ -6,6 +6,7 @@ export class VersionManager extends BeanBase {
     if (options.version === 1) {
       // create table: aMail
       await this.bean.model.createTable('aMail', function (table) {
+        table.basicFields();
         table.string('scene', 50);
         table.int0('status');
         table.text('mailTo');
