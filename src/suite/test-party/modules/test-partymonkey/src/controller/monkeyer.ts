@@ -5,7 +5,7 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerMonkeyer extends BeanBase<ScopeModule> {
   async test() {
-    const config = this.ctx.config.module('test-party');
+    const config = this.getScope('test-party').config;
     this.ctx.success({
       moduleName: __ThisModule__,
       monkeyed: config.monkeyed,
