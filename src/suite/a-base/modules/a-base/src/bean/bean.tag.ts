@@ -128,7 +128,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
     }
   }
 
-  async calcAtomCount({ tagId }: any) {
+  async calcAtomCount({ tagId }: any): Promise<number> {
     const res = await this.bean.model.count('aTagRef as a', {
       joins: [['innerJoin', 'aAtom as b', { 'a.atomId': 'b.id' }]],
       where: {
@@ -138,7 +138,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
         'b.atomStage': 1,
       },
     });
-    return res;
+    return res.toNumber();
   }
 
   async parseTags({ atomClass, language, tagName, force = false }: any) {
