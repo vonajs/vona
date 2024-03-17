@@ -6,6 +6,10 @@ const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
 @Virtual({ scene: 'local', name: 'ioMessageUniformBase' })
 export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> {
+  get scopeModuleAMessage() {
+    return this.getScope(__ThisModule__);
+  }
+
   async onPublish({ /* path,*/ message, messageClass, options }: any) {
     // onPublish
     return await super.onPublish({ path: __PATH_MESSAGE_UNIFORM, message, messageClass, options });
@@ -37,7 +41,7 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
   async onChannels({ options, message, messageSync, messageClass }: any) {
     let channels = await super.onChannels({ options, message, messageSync, messageClass });
     if (!channels) {
-      channels = this.ctx.config.module(__ThisModule__).socketio.message.push.channels;
+      channels = this.scopeModuleAMessage.config.socketio.message.push.channels;
     }
     return channels;
   }

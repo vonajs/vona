@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 import Chalk from 'chalk';
@@ -9,7 +9,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 
 @Local()
-export class LocalHelper extends BeanBase {
+export class LocalHelper extends BeanBase<ScopeModule> {
   cli: any;
   ProcessHelper: any;
 
@@ -36,7 +36,7 @@ export class LocalHelper extends BeanBase {
   }
 
   get moduleConfig() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
   get chalk() {
     return this.newChalk();

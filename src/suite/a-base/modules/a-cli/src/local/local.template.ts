@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Local, BeanBase } from '@cabloy/core';
 
 import fs from 'fs';
@@ -10,7 +10,7 @@ import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 
 @Local()
-export class LocalTemplate extends BeanBase {
+export class LocalTemplate extends BeanBase<ScopeModule> {
   cli: any;
 
   constructor(cli) {
@@ -35,7 +35,7 @@ export class LocalTemplate extends BeanBase {
   }
 
   get moduleConfig() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   get fileMapping() {

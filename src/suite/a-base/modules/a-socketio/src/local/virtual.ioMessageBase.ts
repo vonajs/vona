@@ -1,7 +1,12 @@
 import { BeanBase, Virtual } from '@cabloy/core';
+import { __ThisModule__ } from '../resource/this.js';
 
 @Virtual({ scene: 'local', name: 'ioMessageBase' })
 export class BeanIoMessageBase<T = unknown> extends BeanBase<T> {
+  get scopeModuleASocketio() {
+    return this.getScope(__ThisModule__);
+  }
+
   async onSessionId({ /* path,*/ message /* options*/ }: any) {
     const userIdFrom = message.userIdFrom;
     const userIdTo = message.userIdTo;

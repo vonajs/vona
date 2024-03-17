@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 @Bean({ scene: 'middleware' })
@@ -10,7 +10,7 @@ export class MiddlewareCaptchaVerify extends BeanBase<ScopeModule> {
     if (!scene && !scenes) this.scope.error.SceneNotSpecified.throw();
 
     // local.disabled
-    if (this.ctx.app.meta.isLocal && this.ctx.config.module(__ThisModule__).configFront.local.disabled) {
+    if (this.ctx.app.meta.isLocal && this.scope.config.configFront.local.disabled) {
       // next
       return await next();
     }
