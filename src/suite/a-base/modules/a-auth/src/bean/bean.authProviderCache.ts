@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 const __authProvidersConfigCache: any = {};
@@ -6,9 +6,9 @@ const __authProvidersConfigCache_login: any = {};
 const __authProvidersConfigCache_admin: any = {};
 
 @Bean()
-export class BeanAuthProviderCache extends BeanBase {
+export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
 
   getAuthProvidersConfigCache() {

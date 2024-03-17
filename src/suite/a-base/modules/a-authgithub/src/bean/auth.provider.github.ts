@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 import { Bean } from '@cabloy/core';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
@@ -6,9 +6,9 @@ import Strategy from 'passport-github';
 import StrategyMock from '../meta/passport/strategyMock.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderGithub extends BeanAuthProviderBase {
+export class AuthProviderGithub extends BeanAuthProviderBase<ScopeModule> {
   get configModule() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scope.config;
   }
   async getConfigDefault() {
     const configGitHub = this.configModule.account.github;

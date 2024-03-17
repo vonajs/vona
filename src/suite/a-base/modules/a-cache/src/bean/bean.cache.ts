@@ -5,7 +5,7 @@ export class BeanCache extends BeanBase {
   get db() {
     // always return redis
     return this.redis;
-    // const config = this.ctx.config.module(__ThisModule__);
+    // const config = this.scope.config;
     // if (config.db.redis) {
     //   return this.redis;
     // }
