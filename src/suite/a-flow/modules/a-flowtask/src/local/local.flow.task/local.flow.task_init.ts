@@ -28,7 +28,7 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
       userIdAssignee,
       specificFlag: 0,
       taskVars: '{}',
-      allowViewWorkflow: options.allowViewWorkflow,
+      allowViewWorkflow: Number(options.allowViewWorkflow),
     };
     const res = await this.modelFlowTask.insert(data);
     const flowTaskId = res[0];

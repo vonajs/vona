@@ -158,14 +158,14 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
     const timeClaimed = new Date();
     taskInstance.contextTask._flowTask.specificFlag = specificFlag;
     if (allowViewWorkflow !== undefined) {
-      taskInstance.contextTask._flowTask.allowViewWorkflow = allowViewWorkflow;
+      taskInstance.contextTask._flowTask.allowViewWorkflow = Number(allowViewWorkflow);
     }
     taskInstance.contextTask._flowTask.timeClaimed = timeClaimed;
     await taskInstance.modelFlowTask.update(taskInstance.contextTask._flowTask);
     // history
     taskInstance.contextTask._flowTaskHistory.specificFlag = specificFlag;
     if (allowViewWorkflow !== undefined) {
-      taskInstance.contextTask._flowTaskHistory.allowViewWorkflow = allowViewWorkflow;
+      taskInstance.contextTask._flowTaskHistory.allowViewWorkflow = Number(allowViewWorkflow);
     }
     taskInstance.contextTask._flowTaskHistory.timeClaimed = timeClaimed;
     await taskInstance.modelFlowTaskHistory.update(taskInstance.contextTask._flowTaskHistory);
