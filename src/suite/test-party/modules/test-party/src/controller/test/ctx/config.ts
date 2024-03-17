@@ -6,7 +6,7 @@ import assert from 'assert';
 export class ControllerTestCtxConfig extends BeanBase<ScopeModule> {
   async test() {
     // current module
-    let message = this.ctx.config.message;
+    let message = this.scope.config.message;
     assert.equal(message, 'Hello World');
 
     // other module

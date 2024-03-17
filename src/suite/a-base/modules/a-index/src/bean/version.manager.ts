@@ -1,12 +1,13 @@
 import { Bean, BeanBase } from '@cabloy/core';
 
 import chalk from 'chalk';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'version' })
-export class VersionManager extends BeanBase {
+export class VersionManager extends BeanBase<ScopeModule> {
   async update(_options) {
     // check indexes
-    if (this.ctx.config.indexesCheck) {
+    if (this.scope.config.indexesCheck) {
       // combine module's indexes
       const moduleIndexes: any = {};
       for (const relativeName in this.app.meta.modules) {
@@ -18,9 +19,9 @@ export class VersionManager extends BeanBase {
       // combine indexes all
       const indexes = this.ctx.bean.util.extend(
         {},
-        this.ctx.config.indexes,
+        this.scope.config.indexes,
         moduleIndexes,
-        this.ctx.config.indexesExtend,
+        this.scope.config.indexesExtend,
       );
       // create indexes
       for (const moduleRelativeName in indexes) {

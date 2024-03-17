@@ -1,10 +1,10 @@
 import { BeanBase, Local } from '@cabloy/core';
-import { __ThisModule__ } from '../resource/this.js';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalScene extends BeanBase {
+export class LocalScene extends BeanBase<ScopeModule> {
   get statusModule() {
-    return this.ctx.bean.status.module(__ThisModule__);
+    return this.scope._bean.status;
   }
 
   async list() {
@@ -32,7 +32,7 @@ export class LocalScene extends BeanBase {
   }
 
   async add({ sceneName, data }: any) {
-    data = this.ctx.bean.util.extend({}, this.ctx.config.scene.default, data);
+    data = this.ctx.bean.util.extend({}, this.scope.config.scene.default, data);
     await this._save({ sceneName, data });
   }
 }

@@ -1,7 +1,8 @@
 import { Bean, BeanBase } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'startup' })
-export class StartupRegisterAllWatchers extends BeanBase {
+export class StartupRegisterAllWatchers extends BeanBase<ScopeModule> {
   async execute() {
     // only in development
     if (!this.app.meta.isLocal) return;
@@ -10,7 +11,7 @@ export class StartupRegisterAllWatchers extends BeanBase {
 
   async _registerCms() {
     // config
-    const configWatchAtomClass = this.ctx.config.watch.atomClass;
+    const configWatchAtomClass = this.scope.config.watch.atomClass;
     // loop modules
     for (const module of this.app.meta.modulesArray) {
       // loop atomClasses
