@@ -130,14 +130,12 @@ export class BeanTag extends BeanBase<ScopeModule> {
 
   async calcAtomCount({ tagId }: any) {
     const res = await this.bean.model.count('aTagRef as a', {
+      joins: [['innerJoin', 'aAtom as b', { 'a.atomId': 'b.id' }]],
       where: {
-        joins: [['innerJoin', 'aAtom as b', { 'a.atomId': 'b.id' }]],
-        where: {
-          'a.tagId': tagId,
-          'b.iid': this.ctx.instance.id,
-          'b.deleted': 0,
-          'b.atomStage': 1,
-        },
+        'a.tagId': tagId,
+        'b.iid': this.ctx.instance.id,
+        'b.deleted': 0,
+        'b.atomStage': 1,
       },
     });
     return res;
