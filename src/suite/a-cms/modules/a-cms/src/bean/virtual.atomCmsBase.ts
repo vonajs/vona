@@ -17,7 +17,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
   }
 
   get moduleCMSConfig() {
-    return this.ctx.config.module(__ThisModule__);
+    return this.scopeModuleACms.config;
   }
 
   async default({ atomClass, data, item, options, user }: any) {

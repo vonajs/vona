@@ -1,4 +1,3 @@
-import { __ThisModule__ } from '../../resource/this.js';
 import { BeanIoPush } from './bean.io_push.js';
 
 export class BeanIoSave extends BeanIoPush {
@@ -28,7 +27,7 @@ export class BeanIoSave extends BeanIoPush {
     // message syncs
     let messageSyncs: any[] | null = [];
     // saveLimit
-    const saveLimit = this.ctx.config.module(__ThisModule__).message.sync.saveLimit;
+    const saveLimit = this.scope.config.message.sync.saveLimit;
     // sender
     //   not save ===0
     if (message.userIdFrom !== 0) {

@@ -82,7 +82,7 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
       },
     };
     // config
-    const configTemplate = this.ctx.config.module(__ThisModule__).socketio.message.render.templates[channelFullName];
+    const configTemplate = this.scopeModuleAMessage.config.socketio.message.render.templates[channelFullName];
     // subject
     let subject = this.ctx.text.locale(user.locale, configTemplate.subject);
     subject = this.ctx.bean.util.replaceTemplate(subject, scope);
