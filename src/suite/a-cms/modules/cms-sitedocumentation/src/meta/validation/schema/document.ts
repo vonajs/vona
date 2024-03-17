@@ -76,7 +76,7 @@ schemas.document = {
       'x-slug': true,
     },
     sticky: {
-      type: 'boolean',
+      type: 'number',
       ebType: 'toggle',
       ebTitle: 'Sticky',
       default: false,
