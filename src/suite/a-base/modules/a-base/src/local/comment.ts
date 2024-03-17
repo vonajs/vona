@@ -359,6 +359,6 @@ ${sep}
   }
 
   _trimHtml(html) {
-    return trimHtml(html, this.ctx.config.comment.trim);
+    return trimHtml(html, this.scope.config.comment.trim);
   }
 }
