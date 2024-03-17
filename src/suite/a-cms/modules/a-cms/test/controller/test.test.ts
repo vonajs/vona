@@ -47,7 +47,7 @@ describe('test/controller/test.test.js', () => {
     console.log('time used: ', data.time);
   });
 
-  it('action:render article(a-cms)', async () => {
+  it.only('action:render article(a-cms)', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
 

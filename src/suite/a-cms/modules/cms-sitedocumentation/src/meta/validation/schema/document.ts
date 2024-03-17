@@ -87,7 +87,7 @@ schemas.document = {
       ebTitle: 'Sorting',
     },
     allowComment: {
-      type: 'boolean',
+      type: 'number',
       ebType: 'toggle',
       ebTitle: 'Allow Comment',
       default: true,

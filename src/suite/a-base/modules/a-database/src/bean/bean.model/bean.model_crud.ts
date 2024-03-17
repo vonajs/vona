@@ -289,6 +289,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       // do nothing
       return;
     }
+    // debug
+    const debug = this.app.bean.debug.get('model');
+    if (debug.enabled) debug('model.update: %s', builder.toQuery());
     // ready
     await builder;
   }
@@ -326,6 +329,9 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
       // do nothing
       return;
     }
+    // debug
+    const debug = this.app.bean.debug.get('model');
+    if (debug.enabled) debug('model.delete: %s', builder.toQuery());
     // ready
     await builder;
   }
