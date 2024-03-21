@@ -31,7 +31,6 @@
     "cabloy"
   ],
   "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "stack-utils": "^2.0.6"
   }

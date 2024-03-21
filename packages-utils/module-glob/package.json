@@ -31,7 +31,6 @@
     "cabloy"
   ],
   "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
     "boxen": "^4.2.0",

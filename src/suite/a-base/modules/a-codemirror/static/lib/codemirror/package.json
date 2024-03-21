@@ -9,7 +9,6 @@
     "url": "http://marijnhaverbeke.nl"
   },
   "description": "Full-featured in-browser code editor",
-  "license": "MIT",
   "directories": {
     "lib": "./lib"
   },

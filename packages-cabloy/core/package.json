@@ -31,7 +31,6 @@
     "cabloy"
   ],
   "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "@cabloy/cluster-reload": "workspace:^",
     "@cabloy/deps": "workspace:^",

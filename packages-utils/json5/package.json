@@ -31,7 +31,6 @@
     "cabloy"
   ],
   "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "json5": "^2.1.1"
   }
