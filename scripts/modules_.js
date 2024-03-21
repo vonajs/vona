@@ -50,6 +50,38 @@ async function main() {
   }
 }
 
+async function main2() {
+  const pattern = `**/package.json`;
+  const files = await eggBornUtils.tools.globbyAsync(pattern, {
+    ignore: [
+      '**/node_modules/**',
+      'dist/**',
+      'cabloy-template-api/**',
+      'docker-compose/**',
+      '**/assets/js/**',
+      '**/static/**',
+    ],
+  });
+  for (const file of files) {
+    const fileSrc = path.join(process.cwd(), file);
+    const package = require(fileSrc);
+    if (!package.version) continue;
+    const url = `https://registry.npmjs.com/${package.name}`;
+    const res = await fetch(url);
+    const body = await res.json();
+    if (body.error !== 'Not found') continue;
+    console.log(package.name);
+    // console.log(file);
+    // console.log(body);
+    const fileDest = path.join(process.cwd(), '.assets/none/package.json');
+    const dirDest = path.join(process.cwd(), '.assets/none');
+    await fse.copyFile(fileSrc, fileDest);
+    const processHelper = new ProcessHelper(process.cwd());
+    await processHelper.npmPublish({ cwd: dirDest });
+    console.log('---- done');
+  }
+}
+
 async function _suiteHandle({ modules, suite, processHelper }) {
   // const refs = [];
   // for (const moduleName of suite.modules) {
@@ -276,7 +308,7 @@ ${contentOld}
 declare module '@cabloy/core' {
   export interface IBeanRecord {
   }
-}  
+}
 `;
   } else {
     contentNew = contentOld;
@@ -1287,7 +1319,7 @@ async function _moduleHandle_locales2({ module, processHelper }) {
   }
   const contentNew = `
   export default {
-  };  
+  };
     `;
   console.log(contentNew);
   await fse.outputFile(file, contentNew);
@@ -1503,7 +1535,7 @@ async function _moduleHandle_controller({ module, processHelper }) {
     // console.log(contentMatches);
     const contentNew = `
 import { BeanBase, Controller, Use } from '@cabloy/core';
-import { ${getScopeModuleName(module.info.relativeName)} } from '../index.js';    
+import { ${getScopeModuleName(module.info.relativeName)} } from '../index.js';
 ${contentMatches[1]}
 @Controller()
 export class ${classNameNew} extends BeanBase ${contentMatches[3]}
