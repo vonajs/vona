@@ -15,7 +15,7 @@ export class BeanContainer {
   private app: CabloyApplication;
   private ctx: CabloyContext;
 
-  private [BeanContainerInstances]: Record<string, Constructable> = {};
+  private [BeanContainerInstances]: Record<string, object> = {};
 
   constructor(app: CabloyApplication, ctx: CabloyContext) {
     this.app = app;

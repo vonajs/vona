@@ -8,8 +8,47 @@ const path = require('node:path');
 const gogocode = require('gogocode');
 
 (async function () {
-  await main();
+  await main2();
 })();
+
+async function main2() {
+  const pattern = `src/**/package.json`;
+  const files = await eggBornUtils.tools.globbyAsync(pattern, {
+    ignore: [
+      '**/node_modules/**',
+      'dist/**',
+      'cabloy-template-api/**',
+      'docker-compose/**',
+      '**/assets/js/**',
+      '**/static/**',
+    ],
+  });
+  for (const file of files) {
+    const fileSrc = path.join(process.cwd(), file);
+    const package = require(fileSrc);
+    if (!package.version) continue;
+    let name = package.name;
+    if (name.indexOf('cabloy-module') === -1 && name.indexOf('cabloy-suite') === -1) {
+      continue;
+    }
+    name = name.replace('-api-', '-front-');
+    const url = `https://registry.npmjs.com/${name}`;
+    const res = await fetch(url);
+    const body = await res.json();
+    if (body.error !== 'Not found') continue;
+    console.log(name);
+    // console.log(file);
+    // console.log(body);
+    const fileDest = path.join(process.cwd(), '.assets/none/package.json');
+    const dirDest = path.join(process.cwd(), '.assets/none');
+    package.name = name;
+    await fse.outputFile(fileDest, JSON.stringify(package, null, 2));
+    // await fse.copyFile(fileSrc, fileDest);
+    const processHelper = new ProcessHelper(process.cwd());
+    await processHelper.npmPublish({ cwd: dirDest });
+    console.log('---- done');
+  }
+}
 
 async function main() {
   // message
