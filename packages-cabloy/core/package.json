@@ -33,6 +33,7 @@
   "author": "zhennann",
   "dependencies": {
     "@cabloy/cluster-reload": "workspace:^",
+    "@cabloy/compose": "workspace:^",
     "@cabloy/deps": "workspace:^",
     "@cabloy/egg-socket.io": "^6.0.0",
     "@cabloy/extend": "workspace:^",
