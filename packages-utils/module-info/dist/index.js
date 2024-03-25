@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseName = exports.parseInfo = exports.parseModuleInfo = exports.parseModuleName = exports.ParseModuleNameLevelInit = void 0;
+exports.parseName = exports.parseInfo = exports.parseInfoFromPath = exports.parseModuleInfo = exports.parseModuleName = exports.ParseModuleNameLevelInit = void 0;
 const stack_utils_1 = __importDefault(require("stack-utils"));
 __exportStar(require("./interface.js"), exports);
 exports.ParseModuleNameLevelInit = 1;
@@ -32,9 +32,13 @@ function parseModuleInfo(level = exports.ParseModuleNameLevelInit) {
     const stackUtils = new stack_utils_1.default();
     const traces = stackUtils.capture(level);
     const trace = traces[level - 1];
-    let fileName = trace.getFileName();
-    fileName = fileName.replace(/\\/gi, '/');
-    const parts = fileName.split('/');
+    const fileName = trace.getFileName();
+    return parseInfoFromPath(fileName);
+}
+exports.parseModuleInfo = parseModuleInfo;
+function parseInfoFromPath(pathName) {
+    pathName = pathName.replace(/\\/gi, '/');
+    const parts = pathName.split('/');
     for (let i = parts.length - 1; i >= 0; i--) {
         const part = parts[i];
         if (part.indexOf('-') === -1)
@@ -44,9 +48,8 @@ function parseModuleInfo(level = exports.ParseModuleNameLevelInit) {
             continue;
         return info;
     }
-    return;
 }
-exports.parseModuleInfo = parseModuleInfo;
+exports.parseInfoFromPath = parseInfoFromPath;
 const PREFIX_A = '/api/';
 const PREFIX_B = 'cabloy-module-api-';
 const PREFIX_C = './cabloy-module-api-';
@@ -55,16 +58,16 @@ const PREFIX_D = './';
 //   first check / then -
 function parseInfo(moduleName, type = 'module') {
     if (!moduleName)
-        return null;
+        return;
     if (moduleName.indexOf('://') > -1)
-        return null;
+        return;
     if (moduleName.charAt(0) === '/')
         moduleName = moduleName.substr(1);
     let parts = moduleName.split('/').filter(item => item);
     if (parts.length < 2) {
         parts = moduleName.split('-').filter(item => item);
         if (parts.length < 2)
-            return null;
+            return;
         if (parts.length >= 5)
             parts = parts.slice(3);
     }

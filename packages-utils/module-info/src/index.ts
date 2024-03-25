@@ -13,9 +13,13 @@ export function parseModuleInfo(level: number = ParseModuleNameLevelInit): IModu
   const stackUtils = new StackUtils();
   const traces = stackUtils.capture(level);
   const trace = traces[level - 1];
-  let fileName = trace.getFileName();
-  fileName = fileName.replace(/\\/gi, '/');
-  const parts = fileName.split('/');
+  const fileName = trace.getFileName();
+  return parseInfoFromPath(fileName);
+}
+
+export function parseInfoFromPath(pathName: string): IModuleInfo | undefined {
+  pathName = pathName.replace(/\\/gi, '/');
+  const parts = pathName.split('/');
   for (let i = parts.length - 1; i >= 0; i--) {
     const part = parts[i];
     if (part.indexOf('-') === -1) continue;
@@ -23,7 +27,6 @@ export function parseModuleInfo(level: number = ParseModuleNameLevelInit): IModu
     if (!info) continue;
     return info;
   }
-  return;
 }
 
 const PREFIX_A = '/api/';
@@ -33,14 +36,14 @@ const PREFIX_D = './';
 
 // aa-hello aa/hello
 //   first check / then -
-export function parseInfo(moduleName, type = 'module'): IModuleInfo | null {
-  if (!moduleName) return null;
-  if (moduleName.indexOf('://') > -1) return null;
+export function parseInfo(moduleName, type = 'module'): IModuleInfo | undefined {
+  if (!moduleName) return;
+  if (moduleName.indexOf('://') > -1) return;
   if (moduleName.charAt(0) === '/') moduleName = moduleName.substr(1);
   let parts = moduleName.split('/').filter(item => item);
   if (parts.length < 2) {
     parts = moduleName.split('-').filter(item => item);
-    if (parts.length < 2) return null;
+    if (parts.length < 2) return;
     if (parts.length >= 5) parts = parts.slice(3);
   }
   if (type === 'suite') {
