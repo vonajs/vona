@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/module-info",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "cabloy module-info",
   "publishConfig": {
     "access": "public"

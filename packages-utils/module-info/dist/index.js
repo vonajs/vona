@@ -37,6 +37,8 @@ function parseModuleInfo(level = exports.ParseModuleNameLevelInit) {
 }
 exports.parseModuleInfo = parseModuleInfo;
 function parseInfoFromPath(pathName) {
+    if (!pathName)
+        return;
     pathName = pathName.replace(/\\/gi, '/');
     const parts = pathName.split('/');
     for (let i = parts.length - 1; i >= 0; i--) {
