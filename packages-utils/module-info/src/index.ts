@@ -17,7 +17,7 @@ export function parseModuleInfo(level: number = ParseModuleNameLevelInit): IModu
   return parseInfoFromPath(fileName);
 }
 
-export function parseInfoFromPath(pathName: string): IModuleInfo | undefined {
+export function parseInfoFromPath(pathName?: string | null): IModuleInfo | undefined {
   if (!pathName) return;
   pathName = pathName.replace(/\\/gi, '/');
   const parts = pathName.split('/');
