@@ -15,7 +15,6 @@ export class AppResource extends BeanSimple {
   addUse(target: object, options: IDecoratorUseOptionsBase) {
     const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
     uses[options.prop] = options;
-    appMetadata.defineMetadata(DecoratorUse, uses, target);
   }
 
   getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> {
