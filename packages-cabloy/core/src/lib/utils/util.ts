@@ -151,6 +151,10 @@ export class AppUtil extends BeanSimple {
     return false;
   }
 
+  isNullOrEmptyString(str?: string | undefined | null): boolean {
+    return str === undefined || str === null || str === '';
+  }
+
   compose(chains, adapter) {
     return compose(chains, adapter);
   }

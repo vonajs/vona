@@ -49,7 +49,7 @@ export class BeanContainer {
     const fullName = beanOptions.beanFullName;
     // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
     //   not use !selector which maybe is 0
-    const key = selector === undefined || selector === null || selector === '' ? fullName : `${fullName}#${selector}`;
+    const key = this.app.meta.util.isNullOrEmptyString(selector) ? fullName : `${fullName}#${selector}`;
     if (this[BeanContainerInstances][key] === undefined) {
       this[BeanContainerInstances][key] = this._newBeanSelector(fullName, selector);
     }
@@ -160,22 +160,12 @@ export class BeanContainer {
     // targetInstance
     let targetInstance;
     // selector maybe empty string
-    if (selector) {
-      if (containerScope === 'app') {
-        targetInstance = this.app.bean._getBeanSelector(targetBeanFullName, selector);
-      } else if (containerScope === 'ctx') {
-        targetInstance = this._getBeanSelector(targetBeanFullName, selector);
-      } else if (containerScope === 'new') {
-        targetInstance = this._newBeanSelector(targetBeanFullName, selector);
-      }
-    } else {
-      if (containerScope === 'app') {
-        targetInstance = this.app.bean._getBean(targetBeanFullName);
-      } else if (containerScope === 'ctx') {
-        targetInstance = this._getBean(targetBeanFullName);
-      } else if (containerScope === 'new') {
-        targetInstance = this._newBean(targetBeanFullName);
-      }
+    if (containerScope === 'app') {
+      targetInstance = this.app.bean._getBeanSelector(targetBeanFullName, selector);
+    } else if (containerScope === 'ctx') {
+      targetInstance = this._getBeanSelector(targetBeanFullName, selector);
+    } else if (containerScope === 'new') {
+      targetInstance = this._newBean(targetBeanFullName, selector);
     }
     return targetInstance;
   }
