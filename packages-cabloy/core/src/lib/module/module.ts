@@ -16,7 +16,7 @@ export class ModuleTools extends BeanSimple {
       disabledModules: app.config.disabledModules,
       disabledSuites: app.config.disabledSuites,
       log: !!app.meta.inAgent,
-      type: 'backend',
+      projectMode: 'api',
       loadPackage: true,
     });
     app.meta.suites = suites;
