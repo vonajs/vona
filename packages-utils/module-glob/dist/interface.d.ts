@@ -1,10 +1,10 @@
-import { IModule, ISuite } from '@cabloy/module-info';
+import { IModule, ISuite, TypeProjectMode } from '@cabloy/module-info';
 export interface IModuleGlobOptions {
     projectPath: string;
     disabledModules?: string[];
     disabledSuites?: string[];
     log?: boolean;
-    type: 'front' | 'backend';
+    projectMode: TypeProjectMode;
     loadPackage?: boolean;
 }
 export interface IModuleGlobContext {

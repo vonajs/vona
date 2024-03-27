@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseName = exports.parseInfo = exports.parseInfoFromPath = exports.parseModuleInfo = exports.parseModuleName = exports.ParseModuleNameLevelInit = void 0;
+exports.parseName = exports.parseInfoPro = exports.parseInfo = exports.parseInfoFromPath = exports.parseModuleInfo = exports.parseModuleName = exports.ParseModuleNameLevelInit = void 0;
 const stack_utils_1 = __importDefault(require("stack-utils"));
 __exportStar(require("./interface.js"), exports);
 exports.ParseModuleNameLevelInit = 1;
@@ -58,13 +58,13 @@ const PREFIX_C = './cabloy-module-api-';
 const PREFIX_D = './';
 // aa-hello aa/hello
 //   first check / then -
-function parseInfo(moduleName, type = 'module') {
+function parseInfo(moduleName) {
     if (!moduleName)
         return;
     if (moduleName.indexOf('://') > -1)
         return;
     if (moduleName.charAt(0) === '/')
-        moduleName = moduleName.substr(1);
+        moduleName = moduleName.substring(1);
     let parts = moduleName.split('/').filter(item => item);
     if (parts.length < 2) {
         parts = moduleName.split('-').filter(item => item);
@@ -73,28 +73,33 @@ function parseInfo(moduleName, type = 'module') {
         if (parts.length >= 5)
             parts = parts.slice(3);
     }
-    if (type === 'suite') {
-        return {
-            pid: parts[0],
-            name: parts[1],
-            fullName: `cabloy-suite-api-${parts[0]}-${parts[1]}`,
-            relativeName: `${parts[0]}-${parts[1]}`,
-            url: '',
-            originalName: '',
-        };
-    }
-    return {
+    const info = {
         pid: parts[0],
         name: parts[1],
-        fullName: `cabloy-module-api-${parts[0]}-${parts[1]}`,
         relativeName: `${parts[0]}-${parts[1]}`,
         url: `${parts[0]}/${parts[1]}`,
-        sync: parts[2] === 'sync',
-        monkey: parts[2] === 'monkey',
-        originalName: '',
+        originalName: parts.join('-'),
     };
+    if (parts[2] === 'sync')
+        info.sync = true;
+    if (parts[2] === 'monkey')
+        info.monkey = true;
+    return info;
 }
 exports.parseInfo = parseInfo;
+function parseInfoPro(moduleName, projectMode, projectEntityType) {
+    const info = parseInfo(moduleName);
+    if (!info)
+        return info;
+    let fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
+    if (info.sync)
+        fullName = `${fullName}-sync`;
+    if (info.monkey)
+        fullName = `${fullName}-monkey`;
+    info.fullName = fullName;
+    return info;
+}
+exports.parseInfoPro = parseInfoPro;
 // /api/aa/hello/home/index
 // cabloy-module-api-aa-hello
 // ./aa-hello/

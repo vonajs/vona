@@ -36,7 +36,7 @@ const boxenOptions = {
 };
 // type: front/backend
 async function glob(options) {
-    const { projectPath, disabledModules, disabledSuites, log, type, loadPackage } = options;
+    const { projectPath, disabledModules, disabledSuites, log, projectMode, loadPackage } = options;
     // context
     const context = {
         options,
@@ -55,7 +55,7 @@ async function glob(options) {
         disabledModules: __getDisabledModules(disabledModules),
         disabledSuites: __getDisabledSuites(disabledSuites),
         //
-        pathsMeta: (0, meta_js_1.getPathsMeta)(type),
+        pathsMeta: (0, meta_js_1.getPathsMeta)(projectMode),
     };
     // parse suites
     const suites = __parseSuites(context, projectPath);
@@ -71,7 +71,7 @@ async function glob(options) {
     // check suites
     __checkSuites(context, suites);
     // order
-    if (type === 'backend' && loadPackage !== false) {
+    if (projectMode === 'api' && loadPackage !== false) {
         __orderModules(context, modules);
     }
     else {
@@ -189,7 +189,7 @@ function __parseModules(context, projectPath) {
                 continue;
             }
             // info
-            const info = (0, module_info_1.parseInfo)(name, 'module');
+            const info = (0, module_info_1.parseInfoPro)(name, context.options.projectMode, 'module');
             if (!info) {
                 throw new Error(`module name is not valid: ${name}`);
             }
@@ -301,7 +301,7 @@ function __parseSuites(context, projectPath) {
                 continue;
             }
             // info
-            const info = (0, module_info_1.parseInfo)(name, 'suite');
+            const info = (0, module_info_1.parseInfoPro)(name, context.options.projectMode, 'suite');
             if (!info) {
                 throw new Error(`suite name is not valid: ${name}`);
             }

@@ -1,3 +1,5 @@
+export type TypeProjectMode = 'front' | 'api';
+export type TypeProjectEntityType = 'module' | 'suite';
 export interface IModuleInfo {
     pid: string;
     name: string;

@@ -29,17 +29,17 @@ const __pathsModules = [
         vendor: true,
     },
 ];
-function getPathsMeta(type) {
+function getPathsMeta(projectMode) {
     const suites = __pathSuites.concat([
         {
-            prefix: type === 'backend' ? 'node_modules/cabloy-suite-api-' : 'node_modules/cabloy-suite-front-',
+            prefix: `node_modules/cabloy-suite-${projectMode}-`,
             vendor: true,
             node_modules: true,
         },
     ]);
     const modules = __pathsModules.concat([
         {
-            prefix: type === 'backend' ? 'node_modules/cabloy-module-api-' : 'node_modules/cabloy-module-front-',
+            prefix: `node_modules/cabloy-module-${projectMode}-`,
             vendor: true,
             node_modules: true,
         },

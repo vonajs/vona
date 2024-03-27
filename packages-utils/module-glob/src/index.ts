@@ -6,7 +6,7 @@ import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
 import { getPathsMeta } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
-import { IModule, IModulePackage, ISuite, ISuiteModuleBase, parseInfo } from '@cabloy/module-info';
+import { IModule, IModulePackage, ISuite, ISuiteModuleBase, parseInfoPro } from '@cabloy/module-info';
 export * from './interface.js';
 
 const boxenOptions: boxen.Options = {
@@ -19,7 +19,7 @@ const boxenOptions: boxen.Options = {
 
 // type: front/backend
 export async function glob(options: IModuleGlobOptions) {
-  const { projectPath, disabledModules, disabledSuites, log, type, loadPackage } = options;
+  const { projectPath, disabledModules, disabledSuites, log, projectMode, loadPackage } = options;
   // context
   const context: IModuleGlobContext = {
     options,
@@ -38,7 +38,7 @@ export async function glob(options: IModuleGlobOptions) {
     disabledModules: __getDisabledModules(disabledModules),
     disabledSuites: __getDisabledSuites(disabledSuites),
     //
-    pathsMeta: getPathsMeta(type),
+    pathsMeta: getPathsMeta(projectMode),
   };
 
   // parse suites
@@ -57,7 +57,7 @@ export async function glob(options: IModuleGlobOptions) {
   __checkSuites(context, suites);
 
   // order
-  if (type === 'backend' && loadPackage !== false) {
+  if (projectMode === 'api' && loadPackage !== false) {
     __orderModules(context, modules);
   } else {
     context.modules = modules;
@@ -185,7 +185,7 @@ function __parseModules(context: IModuleGlobContext, projectPath) {
         continue;
       }
       // info
-      const info = parseInfo(name, 'module');
+      const info = parseInfoPro(name, context.options.projectMode, 'module');
       if (!info) {
         throw new Error(`module name is not valid: ${name}`);
       }
@@ -297,7 +297,7 @@ function __parseSuites(context: IModuleGlobContext, projectPath) {
         continue;
       }
       // info
-      const info = parseInfo(name, 'suite');
+      const info = parseInfoPro(name, context.options.projectMode, 'suite');
       if (!info) {
         throw new Error(`suite name is not valid: ${name}`);
       }
