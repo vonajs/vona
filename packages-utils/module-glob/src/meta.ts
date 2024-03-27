@@ -1,4 +1,6 @@
-export const __pathSuites = [
+import { IModuleGlobPathMetaItem, IModuleGlobPathsMeta } from './interface.js';
+
+const __pathSuites: IModuleGlobPathMetaItem[] = [
   {
     prefix: 'src/suite/',
     vendor: false,
@@ -7,49 +9,45 @@ export const __pathSuites = [
     prefix: 'src/suite-vendor/',
     vendor: true,
   },
-  {
-    prefix: 'node_modules/cabloy-suite-api-',
-    vendor: true,
-    node_modules: true,
-  },
 ];
 
-export const __pathsModules = [
+const __pathsModules: IModuleGlobPathMetaItem[] = [
   {
     prefix: 'src/module/',
     vendor: false,
-    source: true,
-    fronts: [{ js: 'front/src/main.js' }, { js: 'dist/front.js' }],
-  },
-  {
-    prefix: 'src/module-system/',
-    vendor: false,
-    source: true,
-    fronts: [{ js: 'front/src/main.js' }, { js: 'dist/front.js' }],
   },
   {
     prefix: 'src/suite/*/modules/',
     vendor: false,
-    source: true,
-    fronts: [{ js: 'front/src/main.js' }, { js: 'dist/front.js' }],
   },
   {
     prefix: 'src/module-vendor/',
     vendor: true,
-    source: false,
-    fronts: [{ js: 'dist/front.js' }, { js: 'front/src/main.js' }],
   },
   {
     prefix: 'src/suite-vendor/*/modules/',
     vendor: true,
-    source: false,
-    fronts: [{ js: 'dist/front.js' }, { js: 'front/src/main.js' }],
-  },
-  {
-    prefix: 'node_modules/cabloy-module-api-',
-    vendor: true,
-    source: false,
-    node_modules: true,
-    fronts: [{ js: 'dist/front.js' }, { js: 'front/src/main.js' }],
   },
 ];
+
+export function getPathsMeta(type): IModuleGlobPathsMeta {
+  const suites = __pathSuites.concat([
+    {
+      prefix: type === 'backend' ? 'node_modules/cabloy-suite-api-' : 'node_modules/cabloy-suite-front-',
+      vendor: true,
+      node_modules: true,
+    },
+  ]);
+  const modules = __pathsModules.concat([
+    {
+      prefix: type === 'backend' ? 'node_modules/cabloy-module-api-' : 'node_modules/cabloy-module-front-',
+      vendor: true,
+      node_modules: true,
+    },
+  ]);
+  const pathsMeta = {
+    suites,
+    modules,
+  };
+  return pathsMeta;
+}

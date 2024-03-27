@@ -4,7 +4,7 @@ import semver from 'semver';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import eggBornUtils from 'egg-born-utils';
-import { __pathSuites, __pathsModules } from './meta.js';
+import { getPathsMeta } from './meta.js';
 import { IModuleGlobContext, IModuleGlobOptions } from './interface.js';
 import { IModule, IModulePackage, ISuite, ISuiteModuleBase, parseInfo } from '@cabloy/module-info';
 export * from './interface.js';
@@ -17,7 +17,7 @@ const boxenOptions: boxen.Options = {
   borderStyle: 'round',
 } as boxen.Options;
 
-// type: front/backend/all
+// type: front/backend
 export async function glob(options: IModuleGlobOptions) {
   const { projectPath, disabledModules, disabledSuites, log, type, loadPackage } = options;
   // context
@@ -37,12 +37,14 @@ export async function glob(options: IModuleGlobOptions) {
     //
     disabledModules: __getDisabledModules(disabledModules),
     disabledSuites: __getDisabledSuites(disabledSuites),
+    //
+    pathsMeta: getPathsMeta(type),
   };
 
   // parse suites
-  const suites = __parseSuites(projectPath);
+  const suites = __parseSuites(context, projectPath);
   // parse modules
-  const modules = __parseModules(projectPath);
+  const modules = __parseModules(context, projectPath);
   // load package
   if (loadPackage !== false) {
     await __loadPackage(suites);
@@ -169,9 +171,9 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
   return enabled;
 }
 
-function __parseModules(projectPath) {
+function __parseModules(context: IModuleGlobContext, projectPath) {
   const modules: Record<string, IModule> = {};
-  for (const __path of __pathsModules) {
+  for (const __path of context.pathsMeta.modules) {
     const prefix = `${projectPath}/${__path.prefix}`;
     const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
     for (const filePkg of filePkgs) {
@@ -191,7 +193,6 @@ function __parseModules(projectPath) {
       if (modules[info.relativeName]) continue;
       // info
       info.vendor = __path.vendor;
-      info.source = __path.source;
       info.node_modules = __path.node_modules;
       info.originalName = name;
       // resource
@@ -282,9 +283,9 @@ function __getDisabledSuites(disabledSuites) {
   return disabledSuitesMap;
 }
 
-function __parseSuites(projectPath) {
+function __parseSuites(context: IModuleGlobContext, projectPath) {
   const suites: Record<string, ISuite> = {};
-  for (const __path of __pathSuites) {
+  for (const __path of context.pathsMeta.suites) {
     const prefix = `${projectPath}/${__path.prefix}`;
     const filePkgs = eggBornUtils.tools.globbySync(`${prefix}*/package.json`);
     for (const filePkg of filePkgs) {

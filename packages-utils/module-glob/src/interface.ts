@@ -25,4 +25,17 @@ export interface IModuleGlobContext {
   //
   disabledModules: Record<string, boolean>;
   disabledSuites: Record<string, boolean>;
+  //
+  pathsMeta: IModuleGlobPathsMeta;
+}
+
+export interface IModuleGlobPathMetaItem {
+  prefix: string;
+  vendor: boolean;
+  node_modules?: boolean;
+}
+
+export interface IModuleGlobPathsMeta {
+  suites: IModuleGlobPathMetaItem[];
+  modules: IModuleGlobPathMetaItem[];
 }
