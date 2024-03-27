@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.extend = void 0;
 const hasOwn = Object.prototype.hasOwnProperty;
 const toStr = Object.prototype.toString;
 const defineProperty = Object.defineProperty;
@@ -104,5 +105,5 @@ function extend(...args) {
     // Return the modified object
     return target;
 }
-exports.default = extend;
+exports.extend = extend;
 //# sourceMappingURL=index.js.map
