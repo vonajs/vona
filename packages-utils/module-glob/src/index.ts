@@ -39,13 +39,10 @@ export async function glob(options: IModuleGlobOptions) {
     disabledSuites: __getDisabledSuites(disabledSuites),
   };
 
-  // cabloy config
-  const cabloyConfig = await __loadCabloyConfig();
-
   // parse suites
   const suites = __parseSuites(projectPath);
   // parse modules
-  const modules = __parseModules(projectPath, cabloyConfig);
+  const modules = __parseModules(projectPath);
   // load package
   if (loadPackage !== false) {
     await __loadPackage(suites);
@@ -172,8 +169,7 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
   return enabled;
 }
 
-function __parseModules(projectPath, cabloyConfig) {
-  const entities = cabloyConfig.source?.entities;
+function __parseModules(projectPath) {
   const modules: Record<string, IModule> = {};
   for (const __path of __pathsModules) {
     const prefix = `${projectPath}/${__path.prefix}`;
@@ -198,11 +194,6 @@ function __parseModules(projectPath, cabloyConfig) {
       info.source = __path.source;
       info.node_modules = __path.node_modules;
       info.originalName = name;
-      // source
-      const entity = entities?.[info.relativeName];
-      if (entity === true || entity === false) {
-        info.source = entity;
-      }
       // resource
       const root = path.dirname(filePkg);
       const module = {
@@ -370,10 +361,4 @@ function __checkSuites(context, suites) {
       }
     }
   }
-}
-
-async function __loadCabloyConfig() {
-  const __cabloyConfig = eggBornUtils.cabloyConfig;
-  const { config } = await __cabloyConfig.load();
-  return config;
 }
