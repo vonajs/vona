@@ -64,7 +64,7 @@ export class LocalHelper extends BeanBase<ScopeModule> {
     return Boxen(text, options);
   }
   parseModuleInfo(moduleName) {
-    const moduleInfo = ModuleInfo.parseInfo(moduleName);
+    const moduleInfo = ModuleInfo.parseInfoPro(moduleName, 'api', 'module');
     if (!moduleInfo) throw new Error(`module name is not valid: ${moduleName}`);
     return moduleInfo;
   }
@@ -73,7 +73,7 @@ export class LocalHelper extends BeanBase<ScopeModule> {
     return this.ctx.app.meta.modules[moduleInfo.relativeName];
   }
   parseSuiteInfo(suiteName) {
-    const suiteInfo = ModuleInfo.parseInfo(suiteName, 'suite');
+    const suiteInfo = ModuleInfo.parseInfoPro(suiteName, 'api', 'suite');
     if (!suiteInfo) throw new Error(`suite name is not valid: ${suiteName}`);
     return suiteInfo;
   }
