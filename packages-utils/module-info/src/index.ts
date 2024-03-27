@@ -1,5 +1,5 @@
 import StackUtils from 'stack-utils';
-import { IModuleInfo } from './interface.js';
+import { IModuleInfo, TypeProjectEntityType, TypeProjectMode } from './interface.js';
 export * from './interface.js';
 
 export const ParseModuleNameLevelInit = 1;
@@ -37,36 +37,40 @@ const PREFIX_D = './';
 
 // aa-hello aa/hello
 //   first check / then -
-export function parseInfo(moduleName, type = 'module'): IModuleInfo | undefined {
+export function parseInfo(moduleName: string | undefined): IModuleInfo | undefined {
   if (!moduleName) return;
   if (moduleName.indexOf('://') > -1) return;
-  if (moduleName.charAt(0) === '/') moduleName = moduleName.substr(1);
+  if (moduleName.charAt(0) === '/') moduleName = moduleName.substring(1);
   let parts = moduleName.split('/').filter(item => item);
   if (parts.length < 2) {
     parts = moduleName.split('-').filter(item => item);
     if (parts.length < 2) return;
     if (parts.length >= 5) parts = parts.slice(3);
   }
-  if (type === 'suite') {
-    return {
-      pid: parts[0],
-      name: parts[1],
-      fullName: `cabloy-suite-api-${parts[0]}-${parts[1]}`,
-      relativeName: `${parts[0]}-${parts[1]}`,
-      url: '',
-      originalName: '',
-    };
-  }
-  return {
+  const info = {
     pid: parts[0],
     name: parts[1],
-    fullName: `cabloy-module-api-${parts[0]}-${parts[1]}`,
     relativeName: `${parts[0]}-${parts[1]}`,
     url: `${parts[0]}/${parts[1]}`,
-    sync: parts[2] === 'sync',
-    monkey: parts[2] === 'monkey',
-    originalName: '',
-  };
+    originalName: parts.join('-'),
+  } as IModuleInfo;
+  if (parts[2] === 'sync') info.sync = true;
+  if (parts[2] === 'monkey') info.monkey = true;
+  return info;
+}
+
+export function parseInfoPro(
+  moduleName: string | undefined,
+  projectMode: TypeProjectMode,
+  projectEntityType: TypeProjectEntityType,
+): IModuleInfo | undefined {
+  const info = parseInfo(moduleName);
+  if (!info) return info;
+  let fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
+  if (info.sync) fullName = `${fullName}-sync`;
+  if (info.monkey) fullName = `${fullName}-monkey`;
+  info.fullName = fullName;
+  return info;
 }
 
 // /api/aa/hello/home/index
