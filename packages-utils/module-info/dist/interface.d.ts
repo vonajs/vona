@@ -7,7 +7,6 @@ export interface IModuleInfo {
     sync?: boolean;
     monkey?: boolean;
     vendor?: boolean;
-    source?: boolean;
     node_modules?: boolean;
     originalName: string;
 }

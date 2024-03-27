@@ -34,7 +34,7 @@ const boxenOptions = {
     borderColor: 'yellow',
     borderStyle: 'round',
 };
-// type: front/backend/all
+// type: front/backend
 async function glob(options) {
     const { projectPath, disabledModules, disabledSuites, log, type, loadPackage } = options;
     // context
@@ -54,13 +54,13 @@ async function glob(options) {
         //
         disabledModules: __getDisabledModules(disabledModules),
         disabledSuites: __getDisabledSuites(disabledSuites),
+        //
+        pathsMeta: (0, meta_js_1.getPathsMeta)(type),
     };
-    // cabloy config
-    const cabloyConfig = await __loadCabloyConfig();
     // parse suites
-    const suites = __parseSuites(projectPath);
+    const suites = __parseSuites(context, projectPath);
     // parse modules
-    const modules = __parseModules(projectPath, cabloyConfig);
+    const modules = __parseModules(context, projectPath);
     // load package
     if (loadPackage !== false) {
         await __loadPackage(suites);
@@ -175,10 +175,9 @@ function __orderDependencies(context, modules, module, moduleRelativeName) {
     }
     return enabled;
 }
-function __parseModules(projectPath, cabloyConfig) {
-    const entities = cabloyConfig.source?.entities;
+function __parseModules(context, projectPath) {
     const modules = {};
-    for (const __path of meta_js_1.__pathsModules) {
+    for (const __path of context.pathsMeta.modules) {
         const prefix = `${projectPath}/${__path.prefix}`;
         const filePkgs = egg_born_utils_1.default.tools.globbySync(`${prefix}*/package.json`);
         for (const filePkg of filePkgs) {
@@ -199,14 +198,8 @@ function __parseModules(projectPath, cabloyConfig) {
                 continue;
             // info
             info.vendor = __path.vendor;
-            info.source = __path.source;
             info.node_modules = __path.node_modules;
             info.originalName = name;
-            // source
-            const entity = entities?.[info.relativeName];
-            if (entity === true || entity === false) {
-                info.source = entity;
-            }
             // resource
             const root = path_1.default.dirname(filePkg);
             const module = {
@@ -294,9 +287,9 @@ function __getDisabledSuites(disabledSuites) {
     }
     return disabledSuitesMap;
 }
-function __parseSuites(projectPath) {
+function __parseSuites(context, projectPath) {
     const suites = {};
-    for (const __path of meta_js_1.__pathSuites) {
+    for (const __path of context.pathsMeta.suites) {
         const prefix = `${projectPath}/${__path.prefix}`;
         const filePkgs = egg_born_utils_1.default.tools.globbySync(`${prefix}*/package.json`);
         for (const filePkg of filePkgs) {
@@ -375,10 +368,5 @@ function __checkSuites(context, suites) {
             }
         }
     }
-}
-async function __loadCabloyConfig() {
-    const __cabloyConfig = egg_born_utils_1.default.cabloyConfig;
-    const { config } = await __cabloyConfig.load();
-    return config;
 }
 //# sourceMappingURL=index.js.map
