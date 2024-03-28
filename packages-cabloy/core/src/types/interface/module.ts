@@ -10,7 +10,7 @@ export interface IModuleResource {
   Monkey: new () => IMonkeyModule;
   locales: Record<string, any>;
   Errors: Record<number, string>;
-  config: (app: CabloyApplication) => object;
+  config: (app: CabloyApplication) => object | Promise<object>;
   meta: ((app: CabloyApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
   routes: IModuleRoute[];

@@ -57,7 +57,7 @@ export default async function (app: CabloyApplication, modules: Record<string, I
 
       // module config
       if (module.resource.config) {
-        const config = module.resource.config(app);
+        const config = await module.resource.config(app);
         // configNew is not used by now
         await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'configLoaded', [module, config]);
         extend(true, ebConfig, config);
