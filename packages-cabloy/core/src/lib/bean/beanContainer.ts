@@ -185,6 +185,7 @@ export class BeanContainer {
   // }
 
   private _patchBeanInstance(beanFullName, beanInstance, aop) {
+    if (!beanFullName) return beanInstance;
     // not aop on aop
     if (aop) return beanInstance;
     // aop chains
@@ -333,6 +334,7 @@ export class BeanContainer {
   }
 
   private _prepareAopChains(beanFullName, beanInstance) {
+    if (!beanFullName) return [];
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
