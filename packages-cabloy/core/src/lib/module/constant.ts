@@ -33,20 +33,6 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
 
       // module constants
       if (module.resource.constants) extend(true, ebConstant, module.resource.constants);
-
-      // patchConstant
-      patchConstant(ebConstant);
     }
-  }
-
-  function patchConstant(ebConstant) {
-    Object.defineProperty(ebConstant, 'module', {
-      enumerable: false,
-      get() {
-        return function (moduleName) {
-          return ebConstants[moduleName];
-        };
-      },
-    });
   }
 }
