@@ -2,7 +2,7 @@ import { ScopeModule } from '../resource/this.js';
 import { Bean, BeanBase } from '@cabloy/core';
 
 import * as uuid from 'uuid';
-import extend from '@cabloy/extend';
+import { extend } from '@cabloy/extend';
 import currency from '@zhennann/currency';
 import moment from 'moment';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -43,7 +43,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
   }
 
   extend(...args) {
-    return extend.default(true, ...args);
+    return extend(true, ...args);
   }
 
   currency(options) {

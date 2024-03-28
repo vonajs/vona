@@ -1,4 +1,4 @@
-import extend from '@cabloy/extend';
+import { extend } from '@cabloy/extend';
 import { CabloyApplication, IModule } from '../../types/index.js';
 
 const CTXCONFIG = Symbol.for('Context#__config');

@@ -1,4 +1,4 @@
-import extend from '@cabloy/extend';
+import { extend } from '@cabloy/extend';
 import { CtxUtil } from '../utils/utilCtx.js';
 import { CtxMockUtil } from '../utils/mockUtilCtx.js';
 import { BeanSimple } from '../bean/beanSimple.js';

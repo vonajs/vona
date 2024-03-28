@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import extend from '@cabloy/extend';
+import { extend } from '@cabloy/extend';
 import { CabloyApplication, IModule } from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
 
