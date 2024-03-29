@@ -22,11 +22,11 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
       // maybe /favicon.ico
       if (context.module) {
         const defaultLocale = app.config.i18n.defaultLocale;
-        context.text = function (...args) {
-          return getText(context.locale || defaultLocale, ...args);
+        context.text = function (text, ...args) {
+          return getText(context.locale || defaultLocale, text, ...args);
         };
-        context.text.locale = function (locale, ...args) {
-          return getText(locale || defaultLocale, ...args);
+        context.text.locale = function (locale, text, ...args) {
+          return getText(locale || defaultLocale, text, ...args);
         };
       }
 
@@ -100,10 +100,8 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
    *
    */
 
-  function getText(locale, ...args) {
-    const key = args[0];
-    if (!key) return null;
-
+  function getText(locale: string, key: string, ...args: any[]): string {
+    if (!key) return '';
     // try locale
     let resource = ebLocales[locale] || {};
     let text = resource[key];
@@ -117,8 +115,7 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
       text = key;
     }
     // format
-    args[0] = text;
-    return localeutil.getText(...args);
+    return localeutil.getText(text, ...args);
   }
 }
 
