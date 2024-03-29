@@ -19,3 +19,8 @@ export function getLocaleText(locales: Record<string, object>, locale: string, k
   // format
   return getText(text, ...args);
 }
+
+export function formatLocale(locale) {
+  // support zh_CN, en_US => zh-CN, en-US
+  return locale.replace('_', '-').toLowerCase();
+}
