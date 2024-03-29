@@ -16,7 +16,7 @@ export class BeanScopeErrorImpl extends BeanSimple implements IModuleError {
   }
 
   throw(...args: any[]): never {
-    this.ctx.throw.module(this[BeanModuleScope], this[BeanErrorCode], ...args);
+    return this.ctx.throw.module(this[BeanModuleScope], this[BeanErrorCode], ...args);
   }
 
   parseFail(...args: any[]): IErrorObject {
