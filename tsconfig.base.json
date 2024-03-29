@@ -26,6 +26,7 @@
     "checkJs": false,
     "resolvePackageJsonImports": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "stripInternal": true
   }
 }

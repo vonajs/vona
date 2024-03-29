@@ -1,7 +1,7 @@
 declare global {
   export interface Error {
-    code: number | string;
-    status: number | string;
+    code?: number | string | undefined;
+    status?: number | string | undefined;
   }
 }
 export {};
