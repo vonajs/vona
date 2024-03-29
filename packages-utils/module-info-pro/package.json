@@ -32,6 +32,7 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "stack-utils": "^2.0.6"
+    "stack-utils": "^2.0.6",
+    "@cabloy/module-info": "workspace:^"
   }
 }
