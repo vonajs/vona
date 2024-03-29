@@ -214,6 +214,9 @@ export class BeanContainer {
         if (typeof prop === 'symbol') {
           return target[prop];
         }
+        if (__isInnerMethod(prop)) {
+          return target[prop];
+        }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
         if (!__checkAopOfDescriptorInfo(descriptorInfo)) return target[prop];
@@ -291,7 +294,7 @@ export class BeanContainer {
   private _getInstanceMethodProxy(beanFullName, beanInstance, prop, methodType) {
     const self = this;
     // not aop magic methods
-    if (['__get__', '__set__'].includes(prop)) {
+    if (__isInnerMethod(prop)) {
       return beanInstance[prop];
     }
     // aop chains
@@ -462,6 +465,10 @@ function __setPropertyValue(obj, prop, value) {
 
 function __hasMagicMothod(instance) {
   return !!instance.__get__ || !!instance.__set__;
+}
+
+function __isInnerMethod(prop) {
+  return ['__get__', '__set__', '__init__', '__dispose__'].includes(prop);
 }
 
 function __methodTypeOfDescriptor(descriptorInfo) {
