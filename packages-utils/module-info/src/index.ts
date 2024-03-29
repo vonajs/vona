@@ -1,21 +1,5 @@
-import StackUtils from 'stack-utils';
 import { IModuleInfo, TypeProjectEntityType, TypeProjectMode } from './interface.js';
 export * from './interface.js';
-
-export const ParseModuleNameLevelInit = 1;
-export function parseModuleName(level: number = ParseModuleNameLevelInit): string | undefined {
-  const info = parseModuleInfo(level + 1);
-  if (!info) return;
-  return info.relativeName;
-}
-
-export function parseModuleInfo(level: number = ParseModuleNameLevelInit): IModuleInfo | undefined {
-  const stackUtils = new StackUtils();
-  const traces = stackUtils.capture(level);
-  const trace = traces[level - 1];
-  const fileName = trace.getFileName();
-  return parseInfoFromPath(fileName);
-}
 
 export function parseInfoFromPath(pathName?: string | null): IModuleInfo | undefined {
   if (!pathName) return;

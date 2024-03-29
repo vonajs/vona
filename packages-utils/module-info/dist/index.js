@@ -13,29 +13,9 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseName = exports.parseInfoPro = exports.parseInfo = exports.parseInfoFromPath = exports.parseModuleInfo = exports.parseModuleName = exports.ParseModuleNameLevelInit = void 0;
-const stack_utils_1 = __importDefault(require("stack-utils"));
+exports.parseName = exports.parseInfoPro = exports.parseInfo = exports.parseInfoFromPath = void 0;
 __exportStar(require("./interface.js"), exports);
-exports.ParseModuleNameLevelInit = 1;
-function parseModuleName(level = exports.ParseModuleNameLevelInit) {
-    const info = parseModuleInfo(level + 1);
-    if (!info)
-        return;
-    return info.relativeName;
-}
-exports.parseModuleName = parseModuleName;
-function parseModuleInfo(level = exports.ParseModuleNameLevelInit) {
-    const stackUtils = new stack_utils_1.default();
-    const traces = stackUtils.capture(level);
-    const trace = traces[level - 1];
-    const fileName = trace.getFileName();
-    return parseInfoFromPath(fileName);
-}
-exports.parseModuleInfo = parseModuleInfo;
 function parseInfoFromPath(pathName) {
     if (!pathName)
         return;
