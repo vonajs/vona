@@ -1,4 +1,4 @@
-import { parseModuleName as _parseModuleName, ParseModuleNameLevelInit } from '@cabloy/module-info';
+import { parseModuleName as _parseModuleName, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
 
 export const ParseModuleNameLevel = ParseModuleNameLevelInit + 5;
 
