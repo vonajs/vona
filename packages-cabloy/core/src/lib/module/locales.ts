@@ -83,7 +83,7 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
         if (path.extname(name) !== '.js') continue;
         const filepath = path.join(dir, name);
         // support en_US.js => en-US.js
-        const key = formatLocale(name.split('.')[0]);
+        const key = localeutil.formatLocale(name.split('.')[0]);
         const resource = require(filepath);
 
         let locale = ebLocales[key];
