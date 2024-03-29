@@ -26,11 +26,12 @@ miniprogram_npm
 /tsconfig.json
 /cabloy.json
 
-# should pre-compiled 
+# should pre-compiled
 !packages-utils/extend/dist
 !packages-utils/process-helper/dist
 !packages-utils/module-glob/dist
 !packages-utils/module-info/dist
+!packages-utils/module-info-pro/dist
 
 /docker-compose
 !/docker-compose/config
