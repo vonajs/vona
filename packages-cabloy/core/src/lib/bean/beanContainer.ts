@@ -195,16 +195,16 @@ export class BeanContainer {
   //   });
   // }
 
-  private _patchBeanInstance(beanFullName, beanInstance, aop) {
-    if (!beanFullName) return beanInstance;
+  private _patchBeanInstance(beanFullNameOrBeanClass, beanInstance, aop) {
+    if (!beanFullNameOrBeanClass) return beanInstance;
     // not aop on aop
     if (aop) return beanInstance;
     // aop chains
-    const _aopChains = this._prepareAopChains(beanFullName, beanInstance);
+    const _aopChains = this._prepareAopChains(beanFullNameOrBeanClass, beanInstance);
     // no aop
     if (_aopChains.length === 0) return beanInstance;
     // aop
-    return this._newBeanProxy(beanFullName, beanInstance);
+    return this._newBeanProxy(beanFullNameOrBeanClass, beanInstance);
   }
 
   private _newBeanProxy(beanFullName, beanInstance) {
@@ -344,11 +344,11 @@ export class BeanContainer {
     return methodProxy;
   }
 
-  private _prepareAopChains(beanFullName, beanInstance) {
-    if (!beanFullName) return [];
+  private _prepareAopChains(beanFullNameOrBeanClass, beanInstance) {
+    if (!beanFullNameOrBeanClass) return [];
     // beanFullName maybe class
-    const beanOptions = appResource.getBean(beanFullName);
-    const host = beanOptions || beanFullName;
+    const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
+    const host = beanOptions || beanFullNameOrBeanClass;
     if (host.__aopChains__) return host.__aopChains__;
     // chains
     let chains: MetadataKey[] = [];
