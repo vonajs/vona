@@ -1,8 +1,8 @@
 import { CabloyApplication } from '../../../types/index.js';
-import { BeanContainerCreate, BeanContainerLike } from '../../bean/beanContainer.js';
+import { BeanContainer } from '../../bean/beanContainer.js';
 
 export function loadBeanContainer(app: CabloyApplication) {
-  app.bean = BeanContainerCreate(app, null) as BeanContainerLike;
+  app.bean = BeanContainer.create(app, null);
 }
 
 export function loadBeans(app: CabloyApplication) {
@@ -16,7 +16,7 @@ export function loadBeans(app: CabloyApplication) {
 
       // not check context.module
       // bean
-      context.bean = BeanContainerCreate(app, context);
+      context.bean = BeanContainer.create(app, context);
 
       return context;
     };

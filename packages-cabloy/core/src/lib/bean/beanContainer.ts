@@ -17,9 +17,20 @@ export class BeanContainer {
 
   private [BeanContainerInstances]: Record<string, unknown> = {};
 
-  constructor(app: CabloyApplication, ctx: CabloyContext) {
+  static create(app: CabloyApplication, ctx: CabloyContext | null) {
+    const beanContainer = new BeanContainer(app, ctx);
+    return new Proxy(beanContainer, {
+      get(obj, prop) {
+        if (typeof prop === 'symbol') return obj[prop];
+        if (obj[prop]) return obj[prop];
+        return obj._getBean(prop);
+      },
+    }) as BeanContainerLike;
+  }
+
+  protected constructor(app: CabloyApplication, ctx: CabloyContext | null) {
     this.app = app;
-    this.ctx = ctx;
+    this.ctx = ctx as any;
   }
 
   /** get specific module's scope */
@@ -411,17 +422,6 @@ export class BeanContainer {
 }
 
 export type BeanContainerLike = TypeBeanRecord & BeanContainer;
-
-export function BeanContainerCreate(app, ctx) {
-  const beanContainer = new BeanContainer(app, ctx);
-  return new Proxy(beanContainer, {
-    get(obj, prop) {
-      if (typeof prop === 'symbol') return obj[prop];
-      if (obj[prop]) return obj[prop];
-      return obj._getBean(prop);
-    },
-  });
-}
 
 function __checkAopOfDescriptorInfo(descriptorInfo) {
   if (!descriptorInfo) return true;
