@@ -2,7 +2,7 @@ import { IModuleLocale } from './type.js';
 import { BeanScopeLocaleImpl } from './beanScopeLocaleImpl.js';
 import { BeanSimple } from '../../beanSimple.js';
 
-const BeanModuleScope = Symbol('BeanScopeError#ModuleScope');
+const BeanModuleScope = Symbol('BeanScopeLocale#ModuleScope');
 
 export class BeanScopeLocale extends BeanSimple {
   private [BeanModuleScope]: string;
