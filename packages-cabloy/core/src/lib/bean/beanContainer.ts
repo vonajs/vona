@@ -130,6 +130,7 @@ export class BeanContainer {
     const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
     const uses = appResource.getUses(beanOptions.beanClass.prototype);
+    if (!uses) return;
     for (const key in uses) {
       const useOptions = uses[key];
       const selector = useOptions.selector;

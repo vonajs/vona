@@ -17,8 +17,8 @@ export class AppResource extends BeanSimple {
     uses[options.prop] = options;
   }
 
-  getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> {
-    return appMetadata.getOwnMetadataMap(DecoratorUse, target);
+  getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> | undefined {
+    return appMetadata.getMetadata(DecoratorUse, target);
   }
 
   addAop<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
