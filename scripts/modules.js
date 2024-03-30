@@ -22,7 +22,7 @@ async function main() {
     disabledModules: null,
     disabledSuites: null,
     log: true,
-    type: 'backend',
+    projectMode: 'api',
   });
   console.log('modules: ', modulesArray.length);
 

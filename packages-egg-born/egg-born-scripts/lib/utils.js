@@ -218,7 +218,7 @@ const utils = {
       disabledModules: null,
       disabledSuites: null,
       log: false,
-      type: 'backend',
+      projectMode: 'api',
       loadPackage: false,
     });
     await this.prepareProjectTypes({ suites, modules });
