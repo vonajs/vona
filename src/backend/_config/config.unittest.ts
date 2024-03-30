@@ -9,23 +9,6 @@ export default function (appInfo: CabloyAppInfo) {
   // modules
   config.modules = {};
 
-  // mysql
-  config.mysql = {
-    default: {
-      host: '127.0.0.1',
-      port: '3306', // for github actions
-      user: 'root',
-      password: 'root',
-      database: 'mysql', // donnot change the name
-      charset: 'utf8mb4_general_ci',
-      hook: {
-        meta: {
-          long_query_time: 200,
-        },
-      },
-    },
-  };
-
   // redis
   config.redis = {
     default: {
@@ -33,6 +16,34 @@ export default function (appInfo: CabloyAppInfo) {
       port: 6379,
       password: '',
       db: 0,
+    },
+  };
+
+  // database
+  config.database = {
+    // defaultClient: 'mysql',
+    defaultClient: 'default',
+    clients: {
+      default: {
+        client: 'pg',
+        connection: {
+          host: '127.0.0.1',
+          port: 5432,
+          user: 'postgres',
+          password: 'xxxxxx',
+          database: 'postgres', // donnot change the name
+        },
+      },
+      mysql: {
+        client: 'mysql2',
+        connection: {
+          host: '127.0.0.1',
+          port: 3306, // for github actions
+          user: 'root',
+          password: 'xxxxxx',
+          database: 'mysql', // donnot change the name
+        },
+      },
     },
   };
 

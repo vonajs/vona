@@ -36,23 +36,6 @@ export default function (appInfo: CabloyAppInfo) {
     },
   };
 
-  // mysql
-  config.mysql = {
-    default: {
-      host: 'mysql', // see: docker-compose.yml
-      port: '3306',
-      user: 'web_user',
-      password: '!%{9mov.Tw3LmcYP',
-      database: 'cabloy',
-      charset: 'utf8mb4_general_ci',
-      hook: {
-        meta: {
-          long_query_time: 500,
-        },
-      },
-    },
-  };
-
   // redis
   config.redis = {
     default: {
@@ -60,6 +43,34 @@ export default function (appInfo: CabloyAppInfo) {
       port: 6379,
       password: '',
       db: 0,
+    },
+  };
+
+  // database
+  config.database = {
+    // defaultClient: 'mysql',
+    defaultClient: 'default',
+    clients: {
+      default: {
+        client: 'pg',
+        connection: {
+          host: 'pg', // see: docker-compose.yml
+          port: 5432,
+          user: 'xxxxxx',
+          password: 'xxxxxx',
+          database: 'xxxxxx',
+        },
+      },
+      mysql: {
+        client: 'mysql2',
+        connection: {
+          host: 'mysql', // see: docker-compose.yml
+          port: 3306,
+          user: 'xxxxxx',
+          password: 'xxxxxx',
+          database: 'xxxxxx',
+        },
+      },
     },
   };
 
