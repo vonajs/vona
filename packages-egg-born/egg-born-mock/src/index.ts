@@ -1,7 +1,8 @@
 import _Bundle from 'egg-mock/bootstrap.js';
 import { CabloyApplication, CabloyContext, Cast } from '@cabloy/core';
 import Assert from 'assert';
-import { IModuleInfo, parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info';
+import { IModuleInfo } from '@cabloy/module-info';
+import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
 import { BaseMockApplication } from 'egg-mock';
 
 type TypeMockCabloyApplication<T, C> = BaseMockApplication<T, C> & CabloyApplication;
