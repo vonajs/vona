@@ -1,7 +1,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 const path = require('path');
 const { merge } = require('webpack-merge');
-const extend = require('@cabloy/extend');
+const { extend } = require('@cabloy/extend');
 const os = require('os');
 const webpack = require('webpack');
 const fse = require('fs-extra');
