@@ -469,7 +469,16 @@ function __hasMagicMothod(instance) {
 }
 
 function __isInnerMethod(prop) {
-  return ['__get__', '__set__', '__init__', '__dispose__'].includes(prop);
+  return [
+    '__get__',
+    '__set__',
+    '__init__',
+    '__dispose__',
+    'then',
+    '__v_isShallow',
+    '__v_isReadonly',
+    '__v_raw',
+  ].includes(prop);
 }
 
 function __methodTypeOfDescriptor(descriptorInfo) {
