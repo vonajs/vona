@@ -35,6 +35,9 @@ export default async function (app: CabloyApplication, modules: Record<string, I
               useCache = true;
             }
             const _config = _configs[context.module.info.relativeName];
+            _config.module = function (moduleName) {
+              return _configs[moduleName];
+            };
             if (useCache) {
               context[CTXCONFIG] = _config;
             }
