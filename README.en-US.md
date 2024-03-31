@@ -221,7 +221,3 @@ Cabloy comes from the magic spell of the Smurfs. If you spell the word Cabloy co
 ## Communication
 
 [![Chat on Telegram](https://img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg)](https://t.me/cabloyjs)
-
-## License
-
-[MIT](./LICENSE), Free commercial use
