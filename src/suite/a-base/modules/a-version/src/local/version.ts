@@ -185,7 +185,7 @@ export class LocalVersion extends BeanBase {
         // update
         await this.ctx.meta.util.executeBean({
           beanModule: module.info.relativeName,
-          transaction: true,
+          transaction: module.name !== 'a-index',
           fn: async ({ ctx }) => {
             const beanVersion = ctx.bean._newBean(LocalVersion);
             await beanVersion.__updateModuleTransaction(module, version);
