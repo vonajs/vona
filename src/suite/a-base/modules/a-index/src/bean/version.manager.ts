@@ -40,6 +40,7 @@ export class VersionManager extends BeanBase<ScopeModule> {
   async test() {}
 
   async _createIndexesOnTable({ tableName, indexes }: any) {
+    const dialectClient = this.bean.model.dialectClient;
     const indexPrefix = `idx_${tableName}_`;
     try {
       const _indexArray = indexes.split(',');
@@ -56,6 +57,9 @@ export class VersionManager extends BeanBase<ScopeModule> {
         const fieldNameArray = fieldNames.split('+');
         const fieldNameFirst = fieldNameArray[0];
         const indexType = _arr[1] || undefined;
+        if (indexType === 'fulltext' && ['pg'].includes(dialectClient)) {
+          continue;
+        }
         if (!map[fieldNameFirst]) {
           const indexName = `${indexPrefix}${fieldNameFirst}`;
           await this.bean.model.schema.alterTable(tableName, function (table) {
