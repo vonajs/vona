@@ -3,6 +3,7 @@ import path from 'path';
 import { glob } from '@cabloy/module-glob';
 import { IModule, IModuleResource } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { pathToFileURL } from 'node:url';
 
 // const __import_type_serialization = true;
 const __import_type_serialization = false;
@@ -26,9 +27,9 @@ export class ModuleTools extends BeanSimple {
     // app monkey
     let pathAppMonkey;
     if (app.meta.isTest || app.meta.isLocal) {
-      pathAppMonkey = path.resolve(process.cwd(), 'src/backend/config/monkey.mts');
+      pathAppMonkey = pathToFileURL(path.resolve(process.cwd(), 'src/backend/config/monkey.mts')).href;
     } else {
-      pathAppMonkey = path.resolve(app.options.baseDir, 'config/monkey.mjs');
+      pathAppMonkey = pathToFileURL(path.resolve(app.options.baseDir, 'config/monkey.mjs')).href;
     }
     if (fse.existsSync(pathAppMonkey)) {
       const AppMonkey = await import(pathAppMonkey);
@@ -69,9 +70,9 @@ export class ModuleTools extends BeanSimple {
     const app = this.app;
     const pathSrc = `${module.root}/src/index.ts`;
     if ((app.meta.isTest || app.meta.isLocal) && fse.existsSync(pathSrc)) {
-      return pathSrc;
+      return pathToFileURL(pathSrc).href;
     }
-    return `${module.root}/dist/index.js`;
+    return pathToFileURL(`${module.root}/dist/index.js`).href;
   }
 
   private async _importModules_serialization() {
