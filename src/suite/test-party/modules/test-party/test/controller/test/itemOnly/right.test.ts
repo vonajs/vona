@@ -7,7 +7,7 @@ const atomClass = {
   atomClassName: 'userOnlineHistory',
 };
 
-describe.only('test/controller/test/itemOnly/right.test.js', () => {
+describe('test/controller/test/itemOnly/right.test.js', () => {
   it('action:checkRightCreate', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
