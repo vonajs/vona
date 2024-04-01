@@ -38,6 +38,11 @@
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix --ext .ts src"
   },
+  "pnpm": {
+    "overrides": {
+      "@types/mime": "3.0.4"
+    }
+  },
   "dependencies": {
     "@cabloy/core": "workspace:^"
   },
