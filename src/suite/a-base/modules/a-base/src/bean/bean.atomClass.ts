@@ -219,8 +219,8 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
       action,
       roleIdWho: roleId,
     };
-    if (excludeMine) where.scope = { op: '<>', val: 0 };
-    if (onlyMine) where.scope = { op: '=', val: 0 };
+    if (excludeMine) where.scope = { op: '<>', val: '0' };
+    if (onlyMine) where.scope = { op: '=', val: '0' };
     const res = await this.bean.model.get('aViewRoleRightAtomClass', where, { disableDeleted: true });
     return !!res;
   }
@@ -233,8 +233,8 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
       action,
       userIdWho: user.id,
     };
-    if (excludeMine) where.scope = { op: '<>', val: 0 };
-    if (onlyMine) where.scope = { op: '=', val: 0 };
+    if (excludeMine) where.scope = { op: '<>', val: '0' };
+    if (onlyMine) where.scope = { op: '=', val: '0' };
     const res = await this.bean.model.get('aViewUserRightAtomClass', where, { disableDeleted: true });
     return !!res;
   }
