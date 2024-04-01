@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-source",
+  "name": "cabloy-api",
   "title": "Cabloy",
   "private": true,
   "type": "commonjs",
