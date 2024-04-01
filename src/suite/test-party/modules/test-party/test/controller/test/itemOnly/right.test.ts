@@ -7,7 +7,7 @@ const atomClass = {
   atomClassName: 'userOnlineHistory',
 };
 
-describe('test/controller/test/itemOnly/right.test.js', () => {
+describe.only('test/controller/test/itemOnly/right.test.js', () => {
   it('action:checkRightCreate', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
@@ -30,7 +30,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
             atomClass,
           },
         });
-      } catch (err) {
+      } catch (err: any) {
         assert.equal(right, false);
         assert.equal(err.code, 403);
       }
@@ -78,7 +78,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
             atomClass,
           },
         });
-      } catch (err) {
+      } catch (err: any) {
         assert.equal(right, false);
         assert.equal(err.code, 403);
       }
@@ -108,7 +108,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
             atomClass,
           },
         });
-      } catch (err) {
+      } catch (err: any) {
         assert.equal(right, false);
         assert.equal(err.code, 403);
       }
