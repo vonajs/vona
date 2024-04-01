@@ -20,7 +20,7 @@ export const configBases: Record<string, Knex.Config> = {
     connection: {
       typeCast(field, next) {
         if (field.type === 'JSON') {
-          return field.string('utf8');
+          return field.string('utf-8'); // utf8 https://github.com/sidorares/node-mysql2/pull/1662
         }
         return next();
       },

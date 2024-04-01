@@ -218,38 +218,6 @@ export default function (appInfo: CabloyAppInfo) {
     },
   };
 
-  // mysql
-  config.mysql = {
-    app: true,
-    agent: false,
-    default: {
-      debug: false,
-      hook: {
-        meta: {
-          color: 'orange',
-          long_query_time: 0,
-        },
-        callback: {
-          // onConnection,
-          // onQuery,
-        },
-      },
-      typeCast(field, next) {
-        if (field.type === 'JSON') {
-          return field.stringJSON();
-        }
-        return next();
-      },
-      //
-      connectionLimit: 10,
-      connectionLimitInner: 5,
-    },
-    clients: {
-      // donnot change the name
-      __ebdb: {},
-    },
-  };
-
   // redis
   config.redis = {
     app: true,
