@@ -100,7 +100,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
       // dependencies
       const view = views.find(view => view.name === dependent);
       if (view) {
-        const dep = Cast(view.dependencies).find(dep => dep === viewName);
+        const dep = Cast(view.dependencies).find(dep => dep.toLowerCase() === viewName.toLowerCase());
         if (!dep) {
           Cast(view.dependencies).push(viewName);
         }

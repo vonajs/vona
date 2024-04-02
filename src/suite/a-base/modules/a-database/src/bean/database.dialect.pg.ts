@@ -68,10 +68,12 @@ export class DatabaseDialectPg extends VirtualDatabaseDialect {
           dep.deptype = 'n'
           and dep.classid = 'pg_rewrite'::regclass
     `;
-    const items = await builder
+    let items = await builder
       .distinct('dep_name')
       .fromRaw(`(${sqlViews}) as depend_view`)
       .where({ ref_name: viewName });
-    return items.map(item => item.dep_name);
+    items = items.map(item => item.dep_name);
+    items = items.filter((item: string) => item.toLowerCase() !== viewName.toLowerCase());
+    return items;
   }
 }
