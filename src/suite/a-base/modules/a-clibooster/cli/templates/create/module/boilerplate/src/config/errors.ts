@@ -1,3 +1,1 @@
-export enum Errors {
-  'ModuleOld' = 1001,
-}
+export enum Errors {}
