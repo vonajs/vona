@@ -20,5 +20,7 @@
   ],
   "description": "",
   "author": "zhennann",
-  "dependencies": {}
+  "dependencies": {
+    "cabloy-module-api-a-home": "workspace:^"
+  }
 }
