@@ -1,44 +1,29 @@
 import { Bean, BeanBase } from '@cabloy/core';
-import fse from 'fs-extra';
+
+const fileVersionUpdates = [];
+const fileVersionInits = [];
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase {
   async update(options) {
-    if (options.version === 1) {
-      // do nothing
-    }
-
-    if (options.version === 2) {
-      await this.bean.model.createTable('aVersionInit', function (table) {
-        table.basicFields({ deleted: false, iid: false });
-        table.string('subdomain', 50);
-        table.string('module', 50);
-        table.integer('version');
-      });
-    }
-
-    if (options.version === 3) {
-      await this.bean.model.createTable('aViewRecord', function (table) {
-        table.basicFields({ deleted: true, iid: false });
-        table.string('viewName', 255);
-        table.text('viewSql');
-      });
+    if (fileVersionUpdates.includes(options.version)) {
+      const { VersionUpdate } = await import(`./version.manager/update/update${options.version}.js`);
+      const versionUpdate = this.ctx.bean._newBean(VersionUpdate);
+      await versionUpdate.run(options);
     }
   }
 
   async init(options) {
-    if (options.version === 1) {
-      // remove publicDir
-      await this._removePublicDir();
+    if (fileVersionInits.includes(options.version)) {
+      const { VersionInit } = await import(`./version.manager/init/init${options.version}.js`);
+      const versionInit = this.ctx.bean._newBean(VersionInit);
+      await versionInit.run(options);
     }
   }
 
-  async _removePublicDir() {
-    // only for test/local env
-    if (this.app.meta.isProd) return;
-    // path
-    const publicPath = await this.ctx.bean.base.getPath();
-    // remove
-    await fse.remove(publicPath);
+  async test() {
+    const { VersionTest } = await import('./version.manager/test/test.js');
+    const versionTest = this.ctx.bean._newBean(VersionTest);
+    await versionTest.run();
   }
 }
