@@ -1,7 +1,7 @@
 {
   "name": "cabloy-suite-api-a-home",
   "version": "5.0.0",
-  "title": "home",
+  "title": "a-home",
   "type": "module",
   "exports": {
     ".": {
@@ -20,7 +20,5 @@
   ],
   "description": "",
   "author": "zhennann",
-  "dependencies": {
-    "cabloy-module-api-a-home": "workspace:^"
-  }
+  "dependencies": {}
 }
