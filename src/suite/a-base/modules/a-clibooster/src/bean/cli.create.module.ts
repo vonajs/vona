@@ -46,7 +46,7 @@ export class CliCreateModule extends BeanCliBase {
     // templateDir
     const templateDir = this.template.resolvePath({
       moduleName: __ThisModule__,
-      path: `create/${template}`,
+      path: `create/${template}/boilerplate`,
     });
     // render
     await this.template.renderDir({ targetDir, templateDir });

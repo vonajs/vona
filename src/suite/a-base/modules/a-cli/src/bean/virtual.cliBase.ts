@@ -19,21 +19,21 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
     this.terminal = options.terminal !== false;
   }
 
-  get console() {
+  get console(): LocalConsole {
     if (!this.__console) {
       this.__console = this.ctx.bean._newBean(LocalConsole, this);
     }
     return this.__console;
   }
 
-  get helper() {
+  get helper(): LocalHelper {
     if (!this.__helper) {
       this.__helper = this.ctx.bean._newBean(LocalHelper, this);
     }
     return this.__helper;
   }
 
-  get template() {
+  get template(): LocalTemplate {
     if (!this.__template) {
       this.__template = this.ctx.bean._newBean(LocalTemplate, this);
     }
