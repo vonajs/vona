@@ -4,9 +4,9 @@ import { IModuleModel } from './models.js';
 import { config, Errors, locales, constants } from '../config/index.js';
 
 @Scope()
-export class ScopeModuleAVersion extends BeanScopeBase {}
+export class ScopeModule<%=argv.relativeNameCapitalize%> extends BeanScopeBase {}
 
-export interface ScopeModuleAVersion
+export interface ScopeModule<%=argv.relativeNameCapitalize%>
   extends TypeModuleResource<
     IModuleLocal,
     IModuleModel,
@@ -18,10 +18,10 @@ export interface ScopeModuleAVersion
 
 declare module '@cabloy/core' {
   export interface IBeanScopeRecord {
-    'a-version': ScopeModuleAVersion;
+    '<%=argv.moduleInfo.relativeName%>': ScopeModule<%=argv.relativeNameCapitalize%>;
   }
 
   export interface IBeanScopeConfig {
-    'a-version': ReturnType<typeof config>;
+    '<%=argv.moduleInfo.relativeName%>': ReturnType<typeof config>;
   }
 }
