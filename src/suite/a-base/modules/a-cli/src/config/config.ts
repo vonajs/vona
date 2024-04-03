@@ -28,6 +28,8 @@ export const config = _app => {
           '_.npmignore': '.npmignore',
           '_.eslintrc.js': '.eslintrc.js',
           '_jsconfig.json': 'jsconfig.json',
+          '_tsconfig.json': 'tsconfig.json',
+          '_tsconfig.base.json': 'tsconfig.base.json',
         },
         ignore: ['.DS_Store'],
       },
