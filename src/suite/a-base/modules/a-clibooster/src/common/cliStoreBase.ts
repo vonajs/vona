@@ -79,8 +79,8 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
       this.openAuthClient = null;
       // pnpmInstall/reload
       if (this._needReInstallDeps) {
-        await this.helper.pnpmInstall();
-        this.ctx.app.meta.reload.now();
+        // await this.helper.pnpmInstall();
+        // this.ctx.app.meta.reload.now();
       }
     } catch (err) {
       //  logout

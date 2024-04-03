@@ -60,8 +60,8 @@ export class CliCreateModule extends BeanCliBase {
       boilerplatePath: `create/${template}/boilerplate`,
     });
     // npm install
-    await this.helper.pnpmInstall();
+    // await this.helper.pnpmInstall();
     // reload
-    this.ctx.app.meta.reload.now();
+    // this.ctx.app.meta.reload.now();
   }
 }
