@@ -51,8 +51,15 @@ export class CliCreateModule extends BeanCliBase {
       boilerplatePath: `create/${template}/boilerplate`,
     });
     // render module snippets for suite
-    // if()
-
+    if (suiteName) {
+      targetDir = argv._suite.root;
+      await this.template.renderBoilerplateAndSnippets({
+        targetDir,
+        moduleName: __ThisModule__,
+        snippetsPath: `create/${template}/snippets`,
+        boilerplatePath: null,
+      });
+    }
     // npm install
     await this.helper.lernaBootstrap();
     // reload
