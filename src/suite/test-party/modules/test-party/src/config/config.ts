@@ -1,4 +1,5 @@
 import {
+  CabloyApplication,
   IModuleConfigBroadcast,
   IModuleConfigMiddleware,
   IModuleConfigQueue,
@@ -141,7 +142,7 @@ const _captchaSMS = {
   name: 'captcha',
 };
 
-export const config = app => {
+export const config = (app: CabloyApplication) => {
   return {
     // app.meta.isTest
     startups: app.meta.isTest ? startups : undefined,
