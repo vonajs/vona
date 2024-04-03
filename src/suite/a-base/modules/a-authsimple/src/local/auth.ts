@@ -1,7 +1,8 @@
 import { BeanBase, Local } from '@cabloy/core';
+import { ScopeModule } from '../resource/this.js';
 
 @Local()
-export class LocalAuth extends BeanBase {
+export class LocalAuth extends BeanBase<ScopeModule> {
   // mobile: not use
   async signup({ user, state = 'login', userName, realName, email, /* mobile,*/ password }: any) {
     return await this.ctx.bean.authSimple.signup({ user, state, userName, realName, email, /* mobile,*/ password });
