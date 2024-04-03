@@ -1,8 +1,2 @@
-import partyStatus from './dict/partyStatus.js';
-import partyType from './dict/partyType.js';
-
-const dicts = [
-  partyStatus, //
-  partyType,
-];
+const dicts = [];
 export default dicts;

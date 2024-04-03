@@ -1,9 +1,2 @@
-import appParty from './app/appParty.js';
-import appComponents from './app/appComponents.js';
-
-const apps = [
-  //
-  appParty,
-  appComponents,
-];
+const apps = [];
 export default apps;
