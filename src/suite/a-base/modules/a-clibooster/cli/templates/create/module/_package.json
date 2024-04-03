@@ -10,15 +10,22 @@
       "a-flow": "5.0.0"
     }
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "description": "<%=argv.description%>",
   "keywords": ["Cabloy Module"],
-  "scripts": {
-    "build:front": "node <%=argv.suite?'../../':''%>../../../scripts/egg-born-bin.js front-build-module",
-    "build:backend": "node <%=argv.suite?'../../':''%>../../../scripts/egg-born-bin.js backend-build-module",
-    "build:all": "npm run build:front && npm run build:backend",
-    "preversion": "npm run build:all && git add ."
-  },
   "author": "<%=argv.author%>",
-  "devDependencies": {},
+  "files": ["dist", "static", "typings"],
+  "scripts": {
+    "build": "node <%=argv.suite?'../../':''%>../../../scripts/egg-born-bin.js backend-build-module"
+  },
   "dependencies": {}
 }
