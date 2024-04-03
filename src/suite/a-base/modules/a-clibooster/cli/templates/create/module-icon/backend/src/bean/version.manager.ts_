@@ -1,5 +1,5 @@
-const fileVersionUpdates = [];
-const fileVersionInits = [];
+const fileVersionUpdates: number[] = [];
+const fileVersionInits: number[] = [];
 
 module.exports = class Version {
   async update(options) {
