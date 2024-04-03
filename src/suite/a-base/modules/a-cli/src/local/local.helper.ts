@@ -103,9 +103,9 @@ export class LocalHelper extends BeanBase<ScopeModule> {
   }
   async pnpmInstall() {
     // args
-    const args = ['install'];
+    const args = ['install', '--force'];
     // log
-    await this.console.log(`===> pnpm install`);
+    await this.console.log(`===> pnpm install --force`);
     // spawn
     await this.spawnCmd({
       cmd: 'pnpm',
