@@ -40,26 +40,25 @@ export class CliCreateModule extends BeanCliBase {
     if (!argv.force && fs.existsSync(targetDir)) {
       throw new Error(`module exists: ${moduleName}`);
     }
-    targetDir = await this.helper.ensureDir(targetDir);
     // template
     const template = argv.template;
+    // render module snippets for suite
+    if (suiteName) {
+      await this.template.renderBoilerplateAndSnippets({
+        targetDir: argv._suite.root,
+        moduleName: __ThisModule__,
+        snippetsPath: `create/${template}/snippets`,
+        boilerplatePath: null,
+      });
+    }
     // render module boilerplate
+    targetDir = await this.helper.ensureDir(targetDir);
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
       moduleName: __ThisModule__,
       snippetsPath: null,
       boilerplatePath: `create/${template}/boilerplate`,
     });
-    // render module snippets for suite
-    if (suiteName) {
-      targetDir = argv._suite.root;
-      await this.template.renderBoilerplateAndSnippets({
-        targetDir,
-        moduleName: __ThisModule__,
-        snippetsPath: `create/${template}/snippets`,
-        boilerplatePath: null,
-      });
-    }
     // npm install
     await this.helper.pnpmInstall();
     // reload
