@@ -174,7 +174,7 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
 
   async applySnippets({ targetDir, snippetsDir }: any) {
     // snippets
-    let files = eggBornUtils.tools.globbySync('*.js', {
+    let files = eggBornUtils.tools.globbySync('*.cjs', {
       cwd: snippetsDir,
       onlyFiles: true,
     });
