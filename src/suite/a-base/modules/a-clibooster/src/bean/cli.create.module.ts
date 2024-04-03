@@ -61,7 +61,7 @@ export class CliCreateModule extends BeanCliBase {
       });
     }
     // npm install
-    await this.helper.lernaBootstrap();
+    await this.helper.pnpmInstall();
     // reload
     this.ctx.app.meta.reload.now();
   }

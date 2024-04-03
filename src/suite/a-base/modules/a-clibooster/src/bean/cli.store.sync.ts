@@ -88,8 +88,8 @@ export class CliStoreSync extends CliStoreBase {
     }
     // remove temp path
     await rimraf(tempPath);
-    // npm install
-    this._needLernaBootstrap = true;
+    // pnpm install
+    this._needReInstallDeps = true;
     // synced
     return { code: 3000, args: [entityVersion] };
   }

@@ -101,6 +101,17 @@ export class LocalHelper extends BeanBase<ScopeModule> {
     }
     return registry;
   }
+  async pnpmInstall() {
+    // args
+    const args = ['install'];
+    // log
+    await this.console.log(`===> pnpm install`);
+    // spawn
+    await this.spawnCmd({
+      cmd: 'pnpm',
+      args,
+    });
+  }
   async lernaBootstrap() {
     // args
     const args = ['install'];

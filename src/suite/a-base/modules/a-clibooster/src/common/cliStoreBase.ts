@@ -9,7 +9,7 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
   commandName: any;
   tokenName: any;
   openAuthClient: any;
-  _needLernaBootstrap: boolean;
+  _needReInstallDeps: boolean;
 
   constructor(commandName) {
     super();
@@ -72,14 +72,14 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
     // execute command
     try {
       // execute
-      this._needLernaBootstrap = false;
+      this._needReInstallDeps = false;
       await this._executeStoreCommand();
       //  logout
       await this.openAuthClient.logout();
       this.openAuthClient = null;
-      // lernaBootstrap/reload
-      if (this._needLernaBootstrap) {
-        await this.helper.lernaBootstrap();
+      // pnpmInstall/reload
+      if (this._needReInstallDeps) {
+        await this.helper.pnpmInstall();
         this.ctx.app.meta.reload.now();
       }
     } catch (err) {
