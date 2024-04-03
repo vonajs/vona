@@ -56,6 +56,7 @@ miniprogram_npm
 !/src/suite/a-base
 !/src/suite/a-cms
 !/src/suite/a-flow
+!/src/suite/a-home
 !/src/suite/test-party
 
 /src/suite-vendor/*

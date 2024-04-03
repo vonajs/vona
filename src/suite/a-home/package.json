@@ -1,0 +1,26 @@
+{
+  "name": "cabloy-suite-api-a-home",
+  "version": "5.0.0",
+  "title": "home",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "description": "",
+  "author": "zhennann",
+  "dependencies": {
+    "cabloy-module-api-a-home": "workspace:^"
+  }
+}
