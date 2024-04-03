@@ -4,6 +4,8 @@ import chalk from 'chalk';
 @Bean({ scene: 'startup' })
 export class StartupOutputHomeRoute extends BeanBase {
   async execute() {
+    // only for local
+    if (!this.ctx.app.meta.isLocal) return;
     const moduleHome = this.app.meta.modules['a-home'];
     if (!moduleHome) return;
     const route = moduleHome.resource.routes.find(item => item.method === 'get');
