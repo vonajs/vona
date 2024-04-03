@@ -1,4 +1,4 @@
-const __snippet_export = "export * from '../controller/<%=argv.controllerName%>.js';";
+const __snippet_export = "export * from '../local/<%=argv.controllerName%>.js';";
 const __snippet_import =
   "import { Local<%=argv.controllerNameCapitalize%> } from '../local/<%=argv.controllerName%>.js';";
 const __snippet_interface = '<%=argv.controllerName%>: Local<%=argv.controllerNameCapitalize%>;';
