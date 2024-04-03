@@ -5,6 +5,9 @@ import chalk from 'chalk';
 export class StartupOutputHomeRoute extends BeanBase {
   async execute() {
     const url = this.ctx.bean.base.getAbsoluteUrl(`/api/a/home/hello`);
-    console.log(chalk.cyan(`  ${url}`));
+    setTimeout(() => {
+      console.log(chalk.yellow('\n=== a-home route ==='));
+      console.log(chalk.cyan('> ' + url));
+    }, 2000);
   }
 }
