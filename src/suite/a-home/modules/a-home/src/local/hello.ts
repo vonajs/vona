@@ -3,7 +3,7 @@ import { ScopeModule } from '../resource/this.js';
 
 @Local()
 export class LocalHello extends BeanBase<ScopeModule> {
-  async action({ user }) {
-    return user;
+  async hello({ user: _user }) {
+    return `Hello World!`;
   }
 }
