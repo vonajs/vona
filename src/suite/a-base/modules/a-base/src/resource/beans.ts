@@ -15,6 +15,7 @@ export * from '../bean/startup.loadSchedules.js';
 export * from '../bean/startup.loadAtomStatics.js';
 export * from '../bean/startup.checkViewHistoryRight.js';
 export * from '../bean/startup.checkResourceLocales.js';
+export * from '../bean/startup.outputHomeRoute.js';
 export * from '../bean/queue.schedule.js';
 export * from '../bean/queue.roleBuild.js';
 export * from '../bean/middleware.transaction.js';

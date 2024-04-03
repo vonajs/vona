@@ -58,28 +58,33 @@ const middlewares = {
 };
 
 // startups
-const startups = {
+const startups: Record<string, IModuleConfigStartup> = {
   loadSchedules: {
     bean: 'loadSchedules',
     // instance: true,
     debounce: true,
     after: true,
-  } as IModuleConfigStartup,
+  },
   loadAtomStatics: {
     bean: 'loadAtomStatics',
     instance: true,
     debounce: true,
-  } as IModuleConfigStartup,
+  },
   checkResourceLocales: {
     bean: 'checkResourceLocales',
     instance: true,
     debounce: true,
-  } as IModuleConfigStartup,
+  },
   checkViewHistoryRight: {
     bean: 'checkViewHistoryRight',
     instance: true,
     debounce: true,
-  } as IModuleConfigStartup,
+  },
+  outputHomeRoute: {
+    bean: 'outputHomeRoute',
+    debounce: true,
+    after: true,
+  },
 };
 
 // queues
