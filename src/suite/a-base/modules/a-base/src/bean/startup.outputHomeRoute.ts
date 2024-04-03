@@ -1,5 +1,6 @@
 import { Bean, BeanBase } from '@cabloy/core';
 import chalk from 'chalk';
+import path from 'path';
 
 @Bean({ scene: 'startup' })
 export class StartupOutputHomeRoute extends BeanBase {
@@ -10,7 +11,10 @@ export class StartupOutputHomeRoute extends BeanBase {
     if (!moduleHome) return;
     const route = moduleHome.resource.routes.find(item => item.method === 'get');
     if (!route) return;
-    const url = this.ctx.bean.base.getAbsoluteUrl(`/api/a/home/${route.path}`);
+    // host
+    const buildConfig = this.ctx.app.meta.util.requireDynamic(path.join(process.cwd(), 'build/config.js'));
+    const host = `http://127.0.0.1:${buildConfig.backend.port}`;
+    const url = `${host}/api/a/home/${route.path}`;
     setTimeout(() => {
       console.log(chalk.yellow('\n=== a-home route ==='));
       console.log(chalk.cyan('> ' + url));
