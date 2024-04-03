@@ -43,13 +43,16 @@ export class CliCreateModule extends BeanCliBase {
     targetDir = await this.helper.ensureDir(targetDir);
     // template
     const template = argv.template;
-    // templateDir
-    const templateDir = this.template.resolvePath({
+    // render module boilerplate
+    await this.template.renderBoilerplateAndSnippets({
+      targetDir,
       moduleName: __ThisModule__,
-      path: `create/${template}/boilerplate`,
+      snippetsPath: null,
+      boilerplatePath: `create/${template}/boilerplate`,
     });
-    // render
-    await this.template.renderDir({ targetDir, templateDir });
+    // render module snippets for suite
+    // if()
+
     // npm install
     await this.helper.lernaBootstrap();
     // reload
