@@ -63,6 +63,14 @@ export class LocalHelper extends BeanBase<ScopeModule> {
     }
     return Boxen(text, options);
   }
+  relativeNameToCapitalize(moduleName: string): string {
+    return moduleName
+      .split('-')
+      .map(name => {
+        return name.charAt(0).toUpperCase() + name.substring(1);
+      })
+      .join('');
+  }
   parseModuleInfo(moduleName) {
     const moduleInfo = ModuleInfo.parseInfoPro(moduleName, 'api', 'module');
     if (!moduleInfo) throw new Error(`module name is not valid: ${moduleName}`);
