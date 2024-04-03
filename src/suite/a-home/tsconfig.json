@@ -5,9 +5,5 @@
     "outDir": "dist"
   },
   "include": ["src/**/*"],
-  "references": [
-    {
-      "path": "modules/a-home/tsconfig.build.json"
-    }
-  ]
+  "references": []
 }
