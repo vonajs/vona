@@ -1,14 +1,20 @@
-const __snippet_declare = "const <%=argv.controllerName%> = require('./service/<%=argv.controllerName%>.js');";
-const __snippet_body = '<%=argv.controllerName%>,';
+const __snippet_export = "export * from '../controller/<%=argv.controllerName%>.js';";
+const __snippet_import =
+  "import { Local<%=argv.controllerNameCapitalize%> } from '../local/<%=argv.controllerName%>.js';";
+const __snippet_interface = '<%=argv.controllerName%>: Local<%=argv.controllerNameCapitalize%>;';
 
 module.exports = {
-  file: 'backend/src/services.js',
-  async transform({ cli, ast, ctx }) {
-    // code
-    let code = await cli.template.renderContent({ content: __snippet_declare });
+  file: 'src/resource/locals.ts',
+  async transform({ cli, ast /* , ctx */ }) {
+    // export
+    let code = await cli.template.renderContent({ content: __snippet_export });
     ast.before(code);
-    code = await cli.template.renderContent({ content: __snippet_body });
-    ast.replace('const services = {$$$0}', `const services = {${code} \n $$$0}`);
+    // import
+    code = await cli.template.renderContent({ content: __snippet_import });
+    ast.find('export interface IModuleLocal {$$$0}').before(code);
+    // interface
+    code = await cli.template.renderContent({ content: __snippet_interface });
+    ast.replace('export interface IModuleLocal {$$$0}', `export interface IModuleLocal {$$$0, ${code}}`);
     // ok
     return ast;
   },
