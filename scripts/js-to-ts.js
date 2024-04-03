@@ -4,8 +4,10 @@ const fs = require('node:fs/promises');
 const eggBornUtils = require('egg-born-utils');
 const argv = require('./lib/parse_argv')('sync');
 
-const extFrom = '.js';
-const extTo = '.ts';
+const extFrom = '.ts';
+const extTo = '.ts_';
+// const extFrom = '.js';
+// const extTo = '.ts';
 
 (async function () {
   await main();
