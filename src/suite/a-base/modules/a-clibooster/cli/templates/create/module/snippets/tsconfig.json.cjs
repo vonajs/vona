@@ -3,9 +3,9 @@ module.exports = {
   parseOptions: {
     language: 'json',
   },
-  async transform({ /* cli,*/ ast  , ctx }) {
+  async transform({ /* cli,*/ ast, argv /* , ctx*/ }) {
     ast.references.push({
-      path: `modules/${ctx.argv.moduleInfo.relativeName}/tsconfig.build.json`,
+      path: `modules/${argv.moduleInfo.relativeName}/tsconfig.build.json`,
     });
     // ok
     return ast;

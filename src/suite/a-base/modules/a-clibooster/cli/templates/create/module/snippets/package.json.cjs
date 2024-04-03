@@ -3,8 +3,8 @@ module.exports = {
   parseOptions: {
     language: 'json',
   },
-  async transform({ /* cli,*/ ast  , ctx }) {
-    ast.dependencies[`cabloy-module-api-${ctx.argv.moduleInfo.relativeName}`] = 'workspace:^';
+  async transform({ /* cli,*/ ast, argv /* , ctx*/ }) {
+    ast.dependencies[`cabloy-module-api-${argv.moduleInfo.relativeName}`] = 'workspace:^';
     // ok
     return ast;
   },
