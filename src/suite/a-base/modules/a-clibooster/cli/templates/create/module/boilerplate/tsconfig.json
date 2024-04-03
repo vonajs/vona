@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "<%=!argv.suite?'../':''%>../../tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true
   },
