@@ -1,4 +1,4 @@
-import { IModuleConfigBroadcast, IModuleConfigStartup } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigBroadcast, IModuleConfigStartup } from '@cabloy/core';
 
 const startups = {
   workerAlive: {
@@ -24,8 +24,6 @@ const broadcasts = {
     instance: false,
   } as IModuleConfigBroadcast,
 };
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {

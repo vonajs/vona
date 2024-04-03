@@ -1,4 +1,4 @@
-import { IModuleConfigBroadcast } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigBroadcast } from '@cabloy/core';
 
 // broadcasts
 const broadcasts = {
@@ -9,8 +9,6 @@ const broadcasts = {
     bean: 'memClear',
   } as IModuleConfigBroadcast,
 };
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {

@@ -1,4 +1,4 @@
-import { IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from '@cabloy/core';
 import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // middlewares
@@ -132,8 +132,6 @@ const summer = {
     },
   },
 } as IModuleConfigSummer;
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {

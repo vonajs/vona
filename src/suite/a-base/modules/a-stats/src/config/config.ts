@@ -1,4 +1,4 @@
-import { IModuleConfigQueue } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigQueue } from '@cabloy/core';
 
 // queues
 const queues = {
@@ -6,8 +6,6 @@ const queues = {
     bean: 'stats',
   } as IModuleConfigQueue,
 };
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {

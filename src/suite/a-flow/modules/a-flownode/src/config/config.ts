@@ -1,4 +1,4 @@
-import { IModuleConfigQueue } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigQueue } from '@cabloy/core';
 
 // queues
 const queues = {
@@ -7,8 +7,6 @@ const queues = {
     concurrency: true,
   } as IModuleConfigQueue,
 };
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {

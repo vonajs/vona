@@ -1,4 +1,4 @@
-import { IModuleConfigBroadcast } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigBroadcast } from '@cabloy/core';
 import { IModuleConfigSummerCache } from './types.js';
 
 // broadcasts
@@ -34,8 +34,6 @@ const configAll = {
 } as IModuleConfigSummerCache;
 
 const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {

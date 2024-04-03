@@ -1,4 +1,4 @@
-import { IModuleConfigMiddleware } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigMiddleware } from '@cabloy/core';
 
 // middlewares
 const middlewares = {
@@ -7,8 +7,6 @@ const middlewares = {
     global: false,
   } as IModuleConfigMiddleware,
 };
-
-import { CabloyApplication } from '@cabloy/core';
 
 export const config = (_app: CabloyApplication) => {
   return {
