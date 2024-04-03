@@ -7,7 +7,9 @@ const queues = {
   } as IModuleConfigQueue,
 };
 
-export const config = _app => {
+import { CabloyApplication } from '@cabloy/core';
+
+export const config = (_app: CabloyApplication) => {
   return {
     queues,
   };
