@@ -1,5 +1,5 @@
-export * from '../local/hello.js';
-import { LocalHello } from '../local/hello.js';
+export * from '../local/home.js';
+import { LocalHome } from '../local/home.js';
 export interface IModuleLocal {
-  hello: LocalHello;
+  home: LocalHome;
 }
