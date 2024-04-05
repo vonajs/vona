@@ -4,5 +4,5 @@ export interface JwtPayload {
 }
 
 export interface ContextState {
-  jwt: JwtPayload;
+  jwt: JwtPayload; // not use null | undefined
 }

@@ -67,7 +67,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     if ((<any>this.ctx.req).logout) {
       await this.ctx.logout();
     } else {
-      this.ctx.state.user = null;
+      this.ctx.state.user = null as any;
       (<any>this.ctx.req).user = null;
     }
     await this.ctx.bean.user.loginAsAnonymous();
