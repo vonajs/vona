@@ -59,7 +59,7 @@
     "inflation": "^2.0.0",
     "ioredis": "^5.3.2",
     "is-type-of": "^1.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "koa-compose": "^4.1.0",
     "koa-jwt2": "^1.0.3",
     "mixin-classes": "^1.0.2",
