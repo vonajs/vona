@@ -1,8 +1,12 @@
 import { EntityUser } from '../../entity/user.js';
 
 export interface StateUser {
-  op: Partial<EntityUser>;
-  agent: Partial<EntityUser>;
+  op: { id: number } & Partial<EntityUser>;
+  agent: { id: number } & Partial<EntityUser>;
+  provider: {
+    module: string;
+    providerName: string;
+  };
 }
 
 declare module '@cabloy/core' {
