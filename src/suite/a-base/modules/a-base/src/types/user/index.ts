@@ -6,6 +6,7 @@ export interface StateUser {
   provider: {
     module: string;
     providerName: string;
+    providerScene: string;
   };
 }
 
