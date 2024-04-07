@@ -13,16 +13,16 @@ export const meta = {
   base: {
     atoms: atomClasses,
     statics: {
-      'a-app.app': {
+      'a-app:app': {
         items: staticApps,
       },
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
-      'a-base.resource': {
+      'a-base:resource': {
         items: staticResources,
       },
-      'a-dict.dict': {
+      'a-dict:dict': {
         items: staticDicts,
       },
     },
