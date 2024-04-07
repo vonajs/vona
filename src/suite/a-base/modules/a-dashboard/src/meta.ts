@@ -34,10 +34,10 @@ export const meta = {
       },
     },
     statics: {
-      'a-dashboard.dashboard': {
+      'a-dashboard:dashboard': {
         items: staticDashboards,
       },
-      'a-base.resource': {
+      'a-base:resource': {
         items: staticResources,
       },
     },

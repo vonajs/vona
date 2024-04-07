@@ -60,13 +60,13 @@ export const meta = {
       'a-app:app': {
         items: staticApps,
       },
-      'a-flow.flowDef': {
+      'a-flow:flowDef': {
         items: staticFlowDefs,
       },
       'a-baselayout:layout': {
         items: staticLayouts,
       },
-      'a-base.resource': {
+      'a-base:resource': {
         items: staticResources,
       },
     },

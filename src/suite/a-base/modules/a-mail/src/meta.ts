@@ -9,7 +9,7 @@ export const meta = {
   base: {
     atoms: {},
     statics: {
-      'a-base.resource': {
+      'a-base:resource': {
         items: staticResources,
       },
     },

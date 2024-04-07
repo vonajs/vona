@@ -27,19 +27,19 @@ export const meta = (app: CabloyApplication) => {
         'a-app:app': {
           items: staticApps,
         },
-        'a-dashboard.dashboard': {
+        'a-dashboard:dashboard': {
           items: staticDashboards,
         },
         'a-baselayout:layout': {
           items: staticLayouts,
         },
-        'a-base.resource': {
+        'a-base:resource': {
           items: staticResources,
         },
         'a-dict:dict': {
           items: staticDicts,
         },
-        'a-base.role': {
+        'a-base:role': {
           items: staticRoles,
         },
       },

@@ -25,10 +25,10 @@ export const meta = {
       'a-dict:dict': {
         items: staticDicts,
       },
-      'a-base.resource': {
+      'a-base:resource': {
         items: staticResources,
       },
-      'a-base.role': {
+      'a-base:role': {
         items: staticRoles,
       },
     },

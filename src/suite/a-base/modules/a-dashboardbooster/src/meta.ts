@@ -8,7 +8,7 @@ export const meta = {
       'a-baselayout:layout': {
         items: staticLayouts,
       },
-      'a-base.resource': {
+      'a-base:resource': {
         items: staticResources,
       },
     },
