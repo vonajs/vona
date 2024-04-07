@@ -22,7 +22,7 @@ export const meta = {
       },
     },
     statics: {
-      'a-dict.dict': {
+      'a-dict:dict': {
         items: staticDicts,
       },
       'a-base.resource': {

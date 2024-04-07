@@ -4,7 +4,7 @@ export const meta = {
   base: {
     atoms: {},
     statics: {
-      'a-dict.dict': {
+      'a-dict:dict': {
         items: staticDicts,
       },
     },

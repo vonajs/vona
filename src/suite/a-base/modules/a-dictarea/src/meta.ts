@@ -14,7 +14,7 @@ export const meta = {
       'a-app:app': {
         items: staticApps,
       },
-      'a-dict.dict': {
+      'a-dict:dict': {
         items: staticDicts,
       },
       'a-baselayout.layout': {

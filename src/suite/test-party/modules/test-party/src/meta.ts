@@ -36,7 +36,7 @@ export const meta = (app: CabloyApplication) => {
         'a-base.resource': {
           items: staticResources,
         },
-        'a-dict.dict': {
+        'a-dict:dict': {
           items: staticDicts,
         },
         'a-base.role': {
