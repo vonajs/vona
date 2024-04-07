@@ -4,7 +4,7 @@ import staticLayouts from './meta/static/layouts.js';
 export const meta = {
   base: {
     statics: {
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
     },

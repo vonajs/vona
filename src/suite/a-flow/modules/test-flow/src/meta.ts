@@ -23,7 +23,7 @@ export const meta = (app: CabloyApplication) => {
         'a-flow.flowDef': {
           items: staticFlowDefs,
         },
-        'a-baselayout.layout': {
+        'a-baselayout:layout': {
           items: staticLayouts,
         },
         'a-base.resource': {

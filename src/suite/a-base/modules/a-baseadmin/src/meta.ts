@@ -5,7 +5,7 @@ import staticResources from './meta/static/resources.js';
 export const meta = {
   base: {
     statics: {
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
       'a-base.resource': {

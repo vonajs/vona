@@ -42,7 +42,7 @@ export const meta = {
       'a-app:app': {
         items: staticApps,
       },
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
       'a-base.resource': {

@@ -13,7 +13,7 @@ export const meta = {
       },
     },
     statics: {
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
       'a-base.resource': {

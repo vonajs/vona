@@ -9,7 +9,7 @@ export const meta = {
       'a-dict:dict': {
         items: staticDicts,
       },
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
       'a-base.resource': {

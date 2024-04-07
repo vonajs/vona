@@ -30,7 +30,7 @@ export const meta = (app: CabloyApplication) => {
         'a-dashboard.dashboard': {
           items: staticDashboards,
         },
-        'a-baselayout.layout': {
+        'a-baselayout:layout': {
           items: staticLayouts,
         },
         'a-base.resource': {

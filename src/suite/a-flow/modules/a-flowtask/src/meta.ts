@@ -7,7 +7,7 @@ export const meta = {
   base: {
     atoms: {},
     statics: {
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
     },

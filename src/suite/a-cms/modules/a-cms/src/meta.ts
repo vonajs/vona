@@ -27,7 +27,7 @@ export const meta = {
       'a-base.resource': {
         items: staticResources,
       },
-      'a-baselayout.layout': {
+      'a-baselayout:layout': {
         items: staticLayouts,
       },
     },
