@@ -18,7 +18,7 @@ export const meta = {
       },
     },
     statics: {
-      'a-app.app': {
+      'a-app:app': {
         items: staticApps,
       },
       'a-flow.flowDef': {

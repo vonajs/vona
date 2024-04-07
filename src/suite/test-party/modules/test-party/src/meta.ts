@@ -24,7 +24,7 @@ export const meta = (app: CabloyApplication) => {
     base: {
       atoms: atomClasses,
       statics: {
-        'a-app.app': {
+        'a-app:app': {
           items: staticApps,
         },
         'a-dashboard.dashboard': {
