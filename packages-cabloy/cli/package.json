@@ -37,6 +37,7 @@
     "@cabloy/cli-set-core": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
     "@cabloy/module-info": "workspace:^",
+    "@cabloy/module-glob": "workspace:^",
     "@zhennann/common-bin": "^4.0.0",
     "egg-born-utils": "^1.1.9",
     "boxen": "^4.2.0",

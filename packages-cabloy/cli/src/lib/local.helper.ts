@@ -2,17 +2,32 @@ import Chalk from 'chalk';
 import TableClass from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
+import { glob } from '@cabloy/module-glob';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { config } from '../config.js';
+import { BeanCliBase } from './virtual.cliBase.js';
 
 export class LocalHelper {
-  cli: any;
+  cli: BeanCliBase;
   ProcessHelper: any;
+  modulesMeta: Awaited<ReturnType<typeof glob>>;
 
   constructor(cli) {
     this.cli = cli;
     this.ProcessHelper = new ProcessHelper(this.cwd, this.console);
+  }
+
+  async getModulesMeta() {
+    // all modules
+    this.modulesMeta = await glob({
+      projectPath: this.cli.path.join(app.options.baseDir, '../..'),
+      disabledModules: app.config.disabledModules,
+      disabledSuites: app.config.disabledSuites,
+      log: !!app.meta.inAgent,
+      projectMode: 'api',
+      loadPackage: true,
+    });
   }
 
   get options() {
