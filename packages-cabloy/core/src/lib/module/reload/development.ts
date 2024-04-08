@@ -35,7 +35,7 @@ export default function (app: CabloyApplication) {
       'change',
       debounce(info => {
         _developmentChange(info);
-      }, 300),
+      }, app.config.development.debounce),
     );
     // on ready
     const _watcher2 = Cast(_watcher);
