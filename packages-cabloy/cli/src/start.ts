@@ -5,6 +5,7 @@ import eggBornUtils from 'egg-born-utils';
 import utils from './lib/utils.js';
 import CliCommand from './lib/cmd/cli.js';
 import { CmdArgv } from './types/argv.js';
+import { BeanCli } from './lib/bean.cli.js';
 const DISPATCH = Symbol.for('eb:Command#dispatch');
 const PARSE = Symbol.for('eb:Command#parse');
 
@@ -23,27 +24,20 @@ export class CabloyCommand extends CommonBin {
     // get parsed argument without handling helper and version
     const parsed = await this[PARSE](this.rawArgv);
     // argv
-    const argv: CmdArgv = {
+    const argv = {
       projectPath: process.cwd(),
-    };
+    } as CmdArgv;
     // cli
     Object.assign(argv, this._prepareCliFullName(parsed._[1]));
     // cli meta
-    const meta = await openAuthClient.post({
-      path: '/a/cli/cli/meta',
-      body: {
-        context: {
-          argv,
-        },
-      },
-    });
+    const context = { argv };
+    const beanCli = new BeanCli();
+    const meta = await beanCli.meta({ context });
     // cli run
     const rawArgv = this.rawArgv.slice();
-    rawArgv.splice(rawArgv.indexOf('cli'), 2);
-    const command = new CliCommand(rawArgv, { meta, argv, openAuthClient });
+    rawArgv.splice(rawArgv.indexOf('cabloy'), 2);
+    const command = new CliCommand(rawArgv, { meta, argv });
     await command[DISPATCH]();
-    // logout
-    await openAuthClient.logout();
     // force exit
     process.exit(0);
   }
@@ -65,14 +59,14 @@ export class CabloyCommand extends CommonBin {
       } else {
         // means show module's commands
         if (!parts[0]) parts[0] = 'core';
-        return { cliFullName: 'core:default:list', module: parts[0] };
+        return { cliFullName: 'core:default:list', set: parts[0] };
       }
     }
     if (!parts[0]) parts[0] = 'core';
     if (!parts[1]) parts[1] = 'default';
     if (!parts[2]) {
       // means show group's commands
-      return { cliFullName: 'core:default:list', module: parts[0], group: parts[1] };
+      return { cliFullName: 'core:default:list', set: parts[0], group: parts[1] };
     }
     // default
     return { cliFullName: parts.join(':') };
