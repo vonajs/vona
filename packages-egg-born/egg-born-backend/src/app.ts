@@ -13,11 +13,10 @@ export default class AppBootHook {
     this._prepareMiddlewares();
   }
 
-  async didLoad() {
-    await this.bootstrap.loadModules();
-  }
+  async didLoad() {}
 
   async serverDidReady() {
+    await this.bootstrap.loadModules();
     await this.bootstrap.versionReady();
     await this.bootstrap.socketioReady();
   }
