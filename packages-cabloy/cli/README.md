@@ -1,1 +1,1 @@
-# @cabloy/set
+# @cabloy/cli
