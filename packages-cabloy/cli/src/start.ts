@@ -4,6 +4,7 @@ import CommonBin from '@zhennann/common-bin';
 import eggBornUtils from 'egg-born-utils';
 import utils from './lib/utils.js';
 import CliCommand from './lib/cmd/cli.js';
+import { CmdArgv } from './types/argv.js';
 const DISPATCH = Symbol.for('eb:Command#dispatch');
 const PARSE = Symbol.for('eb:Command#parse');
 
@@ -22,8 +23,9 @@ export class CabloyCommand extends CommonBin {
     // get parsed argument without handling helper and version
     const parsed = await this[PARSE](this.rawArgv);
     // argv
-    const argv = {};
-    argv.projectPath = process.cwd();
+    const argv: CmdArgv = {
+      projectPath: process.cwd(),
+    };
     // cli
     Object.assign(argv, this._prepareCliFullName(parsed._[1]));
     // token / proc
