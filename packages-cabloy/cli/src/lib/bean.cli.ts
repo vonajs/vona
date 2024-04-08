@@ -1,7 +1,5 @@
 import { CmdContext } from '../types/argv.js';
-
-let __commandsMap;
-let __commandsAll;
+import { findCommand } from './commands.js';
 
 export class BeanCli {
   async meta({ context }: { context: CmdContext }) {
@@ -29,15 +27,8 @@ export class BeanCli {
   }
 
   _findCliCommand({ cliFullName }: { cliFullName: string }) {
-    if (!__commandsMap) {
-      this._collectCommands();
-    }
-    const command = __commandsMap[cliFullName];
+    const { command, BeanClass } = findCommand(cliFullName);
     if (!command) throw new Error(`cli command not found: ${cliFullName}`);
-    return command;
-  }
-
-  _commandsAll() {
-    return __commandsAll;
+    return { command, BeanClass };
   }
 }

@@ -7,35 +7,22 @@ function _collectCommands() {
   const _commandsMap: any = {};
   const _commandsAll: any = {};
   const sets = commandsConfig.sets;
-  for (const key in sets) {
-    const setModuleName = sets[key];
+  for (const setKey in sets) {
+    const setModuleName = sets[setKey];
     const setModule = require(setModuleName);
     const commands = setModule.commands;
     if (!commands) continue;
-    const _commandsModule = (_commandsAll[moduleName] = {});
+    const _commandsSet = (_commandsAll[setKey] = {});
     for (const groupName in commands) {
       const group = commands[groupName];
-      const _commandsGroup = (_commandsModule[groupName] = {});
+      const _commandsGroup = (_commandsSet[groupName] = {});
       for (const key in group) {
         const command = group[key];
-        const fullKey = `${moduleName}:${groupName}:${key}`;
-        // command
-        const _command = this.ctx.bean.util.extend({}, command);
-        // bean
-        _command.beanFullName = this.bean.util.combineBeanFullName({
-          module: moduleName,
-          scene: 'cli',
-          bean: command.bean,
-        });
-        // resource
-        let atomStaticKey = _command.resource && _command.resource.atomStaticKey;
-        if (!atomStaticKey) throw new Error(`cli command resource.atomStaticKey not specified: ${fullKey}`);
-        if (atomStaticKey.indexOf(':') === -1) {
-          atomStaticKey = `${moduleName}:${atomStaticKey}`;
-        }
-        _command.resource.atomStaticKey = atomStaticKey;
+        const fullKey = `${setKey}:${groupName}:${key}`;
+        // command BeanClass
+        const BeanClass = setModule.beans[command.bean];
         // ok
-        _commandsMap[fullKey] = _commandsGroup[key] = _command;
+        _commandsMap[fullKey] = _commandsGroup[key] = { command, BeanClass };
       }
     }
   }
@@ -46,4 +33,8 @@ function _collectCommands() {
 
 _collectCommands();
 
-export default { commandsMap: __commandsMap, commandsAll: __commandsAll };
+export const commandsMeta = { commandsMap: __commandsMap, commandsAll: __commandsAll };
+
+export function findCommand(cliFullName: string) {
+  return __commandsMap[cliFullName];
+}
