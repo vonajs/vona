@@ -1,39 +1,39 @@
-import eggBornUtils from 'egg-born-utils';
+import { glob } from '@cabloy/module-glob';
 import { LocalConsole } from './local.console.js';
 import { LocalHelper } from './local.helper.js';
+import { LocalTemplate } from './local.template.js';
+import { CmdOptions } from '../types/argv.js';
 
 export class BeanCliBase {
-  options: any;
-  cabloyConfig: any;
+  options: CmdOptions;
   terminal: any;
   __console: LocalConsole;
   __helper: LocalHelper;
-  __template;
-  LocalTemplate;
+  __template: LocalTemplate;
+  modulesMeta: Awaited<ReturnType<typeof glob>>;
 
-  protected __init__(options) {
+  constructor(options: CmdOptions) {
     this.options = options;
-    this.cabloyConfig = null;
     this.terminal = options.terminal !== false;
   }
 
   get console(): LocalConsole {
     if (!this.__console) {
-      this.__console = this.ctx.bean._newBean(LocalConsole, this);
+      this.__console = new LocalConsole(this);
     }
     return this.__console;
   }
 
   get helper(): LocalHelper {
     if (!this.__helper) {
-      this.__helper = this.ctx.bean._newBean(LocalHelper, this);
+      this.__helper = new LocalHelper(this);
     }
     return this.__helper;
   }
 
   get template(): LocalTemplate {
     if (!this.__template) {
-      this.__template = this.ctx.bean._newBean(LocalTemplate, this);
+      this.__template = new LocalTemplate(this);
     }
     return this.__template;
   }
@@ -42,20 +42,40 @@ export class BeanCliBase {
     return this.options.context;
   }
 
+  get cliFullName() {
+    return this.options.context.argv.cliFullName;
+  }
+
   async meta({ user: _user }: any): Promise<any> {
-    await this._loadCabloyConfig();
+    await this._loadModulesMeta();
     const metaLocale = this._commandMeta();
     return metaLocale;
   }
 
   async execute({ user: _user }: any): Promise<any> {
-    await this._loadCabloyConfig();
+    await this._loadModulesMeta();
   }
 
-  async _loadCabloyConfig() {
-    const { argv } = this.context;
-    this.cabloyConfig = eggBornUtils.cabloyConfig;
-    await this.cabloyConfig.load({ projectPath: argv.projectPath });
+  async _loadModulesMeta() {
+    //
+    if (this.modulesMeta) return;
+    //
+    let projectMode;
+    if (this.cliFullName.indexOf('api:') === 0) {
+      projectMode = 'api';
+    } else if (this.cliFullName.indexOf('front:') === 0) {
+      projectMode = 'front';
+    }
+    if (!projectMode) return;
+    // all modules
+    this.modulesMeta = await glob({
+      projectPath: this.context.argv.projectPath,
+      disabledModules: undefined,
+      disabledSuites: undefined,
+      log: false,
+      projectMode,
+      loadPackage: false,
+    });
   }
 
   _commandMeta() {
@@ -81,7 +101,7 @@ export class BeanCliBase {
 
   _commandMeta_group({ group }: any) {
     const metaGroup = {
-      description: this.ctx.text(group.description),
+      description: group.description,
       condition: group.condition,
       questions: {},
     };
@@ -89,7 +109,7 @@ export class BeanCliBase {
       const question = group.questions[key];
       metaGroup.questions[key] = {
         ...question,
-        message: this.ctx.text(question.message),
+        message: question.message,
       };
     }
     return metaGroup;
