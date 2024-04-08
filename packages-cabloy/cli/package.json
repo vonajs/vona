@@ -22,7 +22,6 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "bin",
     "dist/**/*.js",
     "dist/**/*.d.ts"
   ],
