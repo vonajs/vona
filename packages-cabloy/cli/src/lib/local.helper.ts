@@ -13,7 +13,7 @@ export class LocalHelper {
 
   constructor(cli) {
     this.cli = cli;
-    this.ProcessHelper = new ProcessHelper(this.cwd, this.console);
+    this.ProcessHelper = new ProcessHelper(this.cwd, this.console as any);
   }
 
   get options() {
@@ -42,7 +42,7 @@ export class LocalHelper {
     return TableClass;
   }
   get cwd() {
-    return this.context.cwd;
+    return this.context.argv.projectPath;
   }
 
   newChalk(options?) {

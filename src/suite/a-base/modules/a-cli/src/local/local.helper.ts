@@ -45,7 +45,7 @@ export class LocalHelper extends BeanBase<ScopeModule> {
     return TableClass;
   }
   get cwd() {
-    return this.context.cwd;
+    return this.context.argv.projectPath;
   }
 
   newChalk(options?) {
