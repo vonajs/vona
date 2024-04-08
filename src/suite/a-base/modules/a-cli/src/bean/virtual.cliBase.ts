@@ -10,8 +10,7 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
   terminal: any;
   __console: LocalConsole;
   __helper: LocalHelper;
-  __template;
-  LocalTemplate;
+  __template: LocalTemplate;
 
   protected __init__(options) {
     this.options = options;
