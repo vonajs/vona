@@ -41,6 +41,11 @@ export default function (appInfo: CabloyAppInfo) {
     },
   };
 
+  // development
+  config.development = {
+    debounce: 1000,
+  };
+
   // versionReady
   config.versionReady = {
     retry: {
