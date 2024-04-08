@@ -5,6 +5,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "dist/index.js",
+  "bin": {
+    "cabloy": "dist/bin/cabloy.js"
+  },
   "exports": {
     ".": {
       "types": [
