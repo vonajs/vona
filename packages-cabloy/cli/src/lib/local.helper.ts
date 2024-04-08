@@ -1,20 +1,16 @@
-import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
-
 import Chalk from 'chalk';
 import TableClass from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
+import { config } from '../config.js';
 
-@Local()
-export class LocalHelper extends BeanBase<ScopeModule> {
+export class LocalHelper {
   cli: any;
   ProcessHelper: any;
 
   constructor(cli) {
-    super();
     this.cli = cli;
     this.ProcessHelper = new ProcessHelper(this.cwd, this.console);
   }
@@ -36,7 +32,7 @@ export class LocalHelper extends BeanBase<ScopeModule> {
   }
 
   get moduleConfig() {
-    return this.scope.config;
+    return config;
   }
   get chalk() {
     return this.newChalk();

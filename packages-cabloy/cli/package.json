@@ -35,7 +35,14 @@
   "author": "zhennann",
   "dependencies": {
     "@cabloy/cli-set-core": "workspace:^",
+    "@cabloy/process-helper": "workspace:^",
+    "@cabloy/module-info": "workspace:^",
     "@zhennann/common-bin": "^4.0.0",
-    "egg-born-utils": "^1.1.9"
+    "egg-born-utils": "^1.1.9",
+    "boxen": "^4.2.0",
+    "chalk": "^3.0.0",
+    "cli-table3": "^0.6.2",
+    "gogocode": "^1.0.53",
+    "istextorbinary": "^3.3.0"
   }
 }

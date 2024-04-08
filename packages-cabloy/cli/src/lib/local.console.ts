@@ -1,11 +1,7 @@
-import { Local, BeanBase } from '@cabloy/core';
-
-@Local()
-export class LocalConsole extends BeanBase {
+export class LocalConsole {
   cli: any;
 
   constructor(cli) {
-    super();
     this.cli = cli;
   }
 
@@ -23,7 +19,7 @@ export class LocalConsole extends BeanBase {
     if (typeof data !== 'object') {
       data = { text: String(data) };
     }
-    let { progressNo, total, progress, text } = data;
+    let { text } = data;
     // logPrefix
     const logPrefix = options.logPrefix;
     if (logPrefix) {
@@ -33,14 +29,6 @@ export class LocalConsole extends BeanBase {
     if (!this.cli.terminal) {
       return console.log(text);
     }
-    // update
-    return await this.ctx.bean.progress.update({
-      progressId: this.options.progressId,
-      progressNo,
-      total,
-      progress,
-      text,
-    });
   }
 
   _adjustText(prefix, text) {
