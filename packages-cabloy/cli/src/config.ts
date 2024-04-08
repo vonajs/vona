@@ -1,4 +1,4 @@
-export const config = {
+export const commandsConfig = {
   sets: {
     core: '@cabloy/cli-set-core',
   },

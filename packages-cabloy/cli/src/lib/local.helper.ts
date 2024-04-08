@@ -4,7 +4,7 @@ import Boxen from 'boxen';
 import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
-import { config } from '../config.js';
+import { commandsConfig } from '../config.js';
 import { BeanCliBase } from './bean.cli.base.js';
 
 export class LocalHelper {
@@ -33,7 +33,7 @@ export class LocalHelper {
   }
 
   get moduleConfig() {
-    return config;
+    return commandsConfig;
   }
   get chalk() {
     return this.newChalk();

@@ -7,7 +7,7 @@ import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 import { BeanCliBase } from './bean.cli.base.js';
-import { config } from '../config.js';
+import { commandsConfig } from '../config.js';
 
 export class LocalTemplate {
   cli: BeanCliBase;
@@ -33,7 +33,7 @@ export class LocalTemplate {
   }
 
   get moduleConfig() {
-    return config;
+    return commandsConfig;
   }
 
   get fileMapping() {
