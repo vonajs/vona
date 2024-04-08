@@ -1,5 +1,7 @@
+import { BeanCliBase } from './virtual.cliBase.js';
+
 export class LocalConsole {
-  cli: any;
+  cli: BeanCliBase;
 
   constructor(cli) {
     this.cli = cli;

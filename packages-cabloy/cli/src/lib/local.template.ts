@@ -1,20 +1,18 @@
-import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
-
 import fs from 'fs';
+import fse from 'fs-extra';
 import path from 'path';
 
 import eggBornUtils from 'egg-born-utils';
 import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
+import { BeanCliBase } from './virtual.cliBase.js';
+import { config } from '../config.js';
 
-@Local()
-export class LocalTemplate extends BeanBase<ScopeModule> {
-  cli: any;
+export class LocalTemplate {
+  cli: BeanCliBase;
 
   constructor(cli) {
-    super();
     this.cli = cli;
   }
 
@@ -35,7 +33,7 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
   }
 
   get moduleConfig() {
-    return this.scope.config;
+    return config;
   }
 
   get fileMapping() {
@@ -86,7 +84,7 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
       const templateFile = path.join(templateDir, file);
       const fileName = this.parseFileBaseName(basename);
       const parentPath = path.join(targetDir, dirname);
-      const targetFile = path.join(parentPath, this.ctx.bean.util.replaceTemplate(fileName, argv));
+      const targetFile = path.join(parentPath, this.replaceTemplate(fileName, argv));
       await this.renderFile({ targetFile, templateFile });
       if (fileName !== '.gitkeep') {
         const gitkeep = path.join(parentPath, '.gitkeep');
@@ -96,6 +94,39 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
       }
     }
     return files;
+  }
+
+  replaceTemplate(content, scope) {
+    if (!content) return null;
+    return content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+      if (skip) {
+        return block.substring(skip.length);
+      }
+      const value = this.getProperty(scope, key);
+      return value !== undefined ? value : '';
+    });
+  }
+
+  getProperty(obj, name, sep?) {
+    return this._getProperty(obj, name, sep, false);
+  }
+
+  _getProperty(obj, name, sep, forceObject) {
+    if (!obj) return undefined;
+    const names = name.split(sep || '.');
+    // loop
+    for (const name of names) {
+      if (obj[name] === undefined || obj[name] === null) {
+        if (forceObject) {
+          obj[name] = {};
+        } else {
+          obj = obj[name];
+          break;
+        }
+      }
+      obj = obj[name];
+    }
+    return obj;
   }
 
   parseFileBaseName(basename) {
@@ -149,7 +180,7 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
     return {
       async: true,
       cache: false,
-      compileDebug: this.ctx.app.meta.isTest || this.ctx.app.meta.isLocal,
+      compileDebug: true,
       outputFunctionName: 'echo',
       rmWhitespace: false,
     };
@@ -158,7 +189,6 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
   getEjsData() {
     return {
       ...this.context,
-      ctx: this.ctx,
     };
   }
 
@@ -168,7 +198,6 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
       ast,
       snippet,
       ...this.context,
-      ctx: this.ctx,
     };
   }
 
@@ -244,5 +273,28 @@ export class LocalTemplate extends BeanBase<ScopeModule> {
     const num = fileName.split('-')[0];
     if (!num || isNaN(num)) return 10000;
     return parseInt(num);
+  }
+
+  requireDynamic(file) {
+    if (!file) throw new Error('file should not empty');
+    let instance = require(file);
+    const mtime = this._requireDynamic_getFileTime(file);
+    if (instance.__requireDynamic_mtime === undefined) {
+      instance.__requireDynamic_mtime = mtime;
+    } else if (instance.__requireDynamic_mtime !== mtime) {
+      delete require.cache[require.resolve(file)];
+      instance = require(file);
+      instance.__requireDynamic_mtime = mtime;
+    }
+    return instance;
+  }
+
+  private _requireDynamic_getFileTime(file) {
+    if (!path.isAbsolute(file)) return null;
+    const exists = fse.pathExistsSync(file);
+    if (!exists) return null;
+    // stat
+    const stat = fse.statSync(file);
+    return stat.mtime.valueOf();
   }
 }
