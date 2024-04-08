@@ -2,7 +2,6 @@ import Chalk from 'chalk';
 import TableClass from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
-import { glob } from '@cabloy/module-glob';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { config } from '../config.js';

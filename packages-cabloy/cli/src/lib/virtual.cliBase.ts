@@ -122,7 +122,7 @@ export class BeanCliBase {
         const option = options[key];
         metaOptions[key] = {
           ...option,
-          description: this.ctx.text(option.description),
+          description: option.description,
         };
       }
     }
@@ -133,12 +133,12 @@ export class BeanCliBase {
     // info
     const metaInfo: any = {
       version: info.version,
-      title: this.ctx.text(info.title),
-      usage: this.ctx.text(info.usage),
+      title: info.title,
+      usage: info.usage,
     };
     // usage
     if (!metaInfo.usage) {
-      metaInfo.usage = `${this.ctx.text('Usage')}: npm run cli ${argv.cliFullName} -- [options] [-h] [-v] [-t]`;
+      metaInfo.usage = `${'Usage'}: npm run cli ${argv.cliFullName} -- [options] [-h] [-v] [-t]`;
     }
     // welcomes
     metaInfo.welcomes = this._commandMeta_info_welcomes({ info });
@@ -149,15 +149,7 @@ export class BeanCliBase {
   _commandMeta_info_welcomes({ info }: any) {
     let welcomes = info.welcomes || [];
     if (!Array.isArray(welcomes)) welcomes = [welcomes];
-    welcomes = welcomes.map(item => this.ctx.text(item));
-    // helper doc
-    const configHelper = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
-    if (configHelper !== false) {
-      let url = `https://cabloy.com/${this.ctx.locale === 'zh-cn' ? 'zh-cn/' : ''}articles/cli-introduce.html`;
-      url = this.helper.chalk.keyword('cyan')(url);
-      const text = `${this.ctx.text('CliDocs')}: ${url}`;
-      welcomes.unshift(text);
-    }
+    welcomes = welcomes.map(item => item);
     return welcomes;
   }
 }
