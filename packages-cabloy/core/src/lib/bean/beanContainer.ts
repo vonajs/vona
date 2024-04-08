@@ -3,7 +3,7 @@ import { CabloyApplication, CabloyContext } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
-import { IBeanRecord, IBeanScopeRecord, TypeBeanRecord, TypeBeanScopeRecordKeys } from './type.js';
+import { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 
@@ -425,7 +425,7 @@ export class BeanContainer {
   }
 }
 
-export type BeanContainerLike = TypeBeanRecord & BeanContainer;
+export type BeanContainerLike = IBeanRecord & BeanContainer;
 
 function __checkAopOfDescriptorInfo(descriptorInfo) {
   if (!descriptorInfo) return true;
