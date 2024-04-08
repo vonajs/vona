@@ -34,5 +34,8 @@
     "cabloy"
   ],
   "author": "zhennann",
-  "dependencies": {}
+  "dependencies": {
+    "@zhennann/common-bin": "^4.0.0",
+    "egg-born-utils": "^1.1.9"
+  }
 }
