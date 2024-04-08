@@ -75,7 +75,7 @@ export class LocalHelper {
   }
   findModule(moduleName) {
     const moduleInfo = this.parseModuleInfo(moduleName);
-    return this.ctx.app.meta.modules[moduleInfo.relativeName];
+    return this.cli.modulesMeta.modules[moduleInfo.relativeName];
   }
   parseSuiteInfo(suiteName) {
     const suiteInfo = ModuleInfo.parseInfoPro(suiteName, 'api', 'suite');
@@ -84,19 +84,11 @@ export class LocalHelper {
   }
   findSuite(suiteName) {
     const suiteInfo = this.parseSuiteInfo(suiteName);
-    return this.ctx.app.meta.suites[suiteInfo.relativeName];
+    return this.cli.modulesMeta.suites[suiteInfo.relativeName];
   }
   async ensureDir(dir) {
     await fse.ensureDir(dir);
     return dir;
-  }
-  getNpmRegistry() {
-    let registry = this.cli.terminal ? this.context.env.npm_config_registry : null;
-    if (!registry) {
-      const locale = this.ctx.locale === 'zh-cn' ? 'zh-cn' : 'en-us';
-      registry = this.moduleConfig.helper.lerna.registry.locales[locale];
-    }
-    return registry;
   }
   async pnpmInstall() {
     // args
@@ -106,23 +98,6 @@ export class LocalHelper {
     // spawn
     await this.spawnCmd({
       cmd: 'pnpm',
-      args,
-    });
-  }
-  async lernaBootstrap() {
-    // args
-    const args = ['install'];
-    // registry
-    const registry = this.getNpmRegistry();
-    const registryOption = registry ? `--registry=${registry}` : '';
-    if (registryOption) {
-      args.push(registryOption);
-    }
-    // log
-    await this.console.log(`===> npm install ${registryOption}`);
-    // spawn
-    await this.spawnCmd({
-      cmd: 'npm',
       args,
     });
   }
