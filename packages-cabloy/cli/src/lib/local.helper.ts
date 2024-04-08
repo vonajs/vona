@@ -5,7 +5,7 @@ import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { config } from '../config.js';
-import { BeanCliBase } from './virtual.cliBase.js';
+import { BeanCliBase } from './bean.cli.base.js';
 
 export class LocalHelper {
   cli: BeanCliBase;

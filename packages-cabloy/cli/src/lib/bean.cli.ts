@@ -5,78 +5,27 @@ let __commandsAll;
 
 export class BeanCli {
   async meta({ context }: { context: CmdContext }) {
-    try {
-      // command
-      const { argv } = context;
-      const cliFullName = argv.cliFullName;
-      const command = await this._findCliCommand({ cliFullName });
-      // command bean
-      const beanCommand = this.ctx.bean._newBean(command.beanFullName, { command, context });
-      if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
-      // meta
-      return await beanCommand.meta({ user });
-    } finally {
-      // reload unfreeze
-      this.ctx.app.meta.reload.unfreeze();
-    }
+    // command
+    const { argv } = context;
+    const cliFullName = argv.cliFullName;
+    const { command, BeanClass } = await this._findCliCommand({ cliFullName });
+    // command bean
+    const beanCommand = new BeanClass({ command, context });
+    if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
+    // meta
+    return await beanCommand.meta();
   }
 
-  async execute({ progressId, context, user }: any) {
-    // directly
-    if (!progressId) {
-      await this._progressInBackground({ progressId, context, user });
-      return null;
-    }
-    // create progress
-    await this.ctx.bean.progress.create({ progressId });
-    // background
-    this.ctx.meta.util.runInBackground(async ({ ctx }) => {
-      const selfInstance = ctx.bean._newBean(BeanCli);
-      await selfInstance._progressInBackground({ progressId, context, user });
-    });
-    // return progressId
-    return { progressId };
-  }
-
-  async _progressInBackground({ progressId, context, user }: any) {
-    try {
-      // reload freeze
-      this.ctx.app.meta.reload.freeze();
-      // command
-      const { argv } = context;
-      const cliFullName = argv.cliFullName;
-      const command = await this._findCliCommand({ cliFullName });
-      // command bean
-      const beanCommand = this.ctx.bean._newBean(command.beanFullName, { command, context, progressId });
-      if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
-      // execute
-      await beanCommand.execute({ user });
-      // progress done
-      await this.ctx.bean.progress.done({ progressId, message: this.ctx.text('CliDone') });
-    } catch (err: any) {
-      // progress error
-      const msg = err.message;
-      let msgObject;
-      if (msg && typeof msg === 'object') {
-        msgObject = JSON.stringify(msg, null, 2);
-      }
-      let message;
-      if (this.ctx.app.meta.isProd) {
-        message = msgObject || msg;
-      } else {
-        if (msgObject) {
-          message = [msgObject, err.stack].join('\n');
-        } else {
-          message = err.stack;
-        }
-      }
-      await this.ctx.bean.progress.error({ progressId, message });
-      // throw err
-      throw err;
-    } finally {
-      // reload unfreeze
-      this.ctx.app.meta.reload.unfreeze();
-    }
+  async execute({ context }: { context: CmdContext }) {
+    // command
+    const { argv } = context;
+    const cliFullName = argv.cliFullName;
+    const { command, BeanClass } = await this._findCliCommand({ cliFullName });
+    // command bean
+    const beanCommand = new BeanClass({ command, context });
+    if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
+    // execute
+    await beanCommand.execute();
   }
 
   _findCliCommand({ cliFullName }: { cliFullName: string }) {

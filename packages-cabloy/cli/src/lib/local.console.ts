@@ -1,4 +1,4 @@
-import { BeanCliBase } from './virtual.cliBase.js';
+import { BeanCliBase } from './bean.cli.base.js';
 
 export class LocalConsole {
   cli: BeanCliBase;

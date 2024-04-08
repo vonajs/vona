@@ -46,13 +46,13 @@ export class BeanCliBase {
     return this.options.context.argv.cliFullName;
   }
 
-  async meta({ user: _user }: any): Promise<any> {
+  async meta(): Promise<any> {
     await this._loadModulesMeta();
     const metaLocale = this._commandMeta();
     return metaLocale;
   }
 
-  async execute({ user: _user }: any): Promise<any> {
+  async execute(): Promise<any> {
     await this._loadModulesMeta();
   }
 

@@ -1,4 +1,7 @@
 export const config = {
+  sets: {
+    core: '@cabloy/cli-set-core',
+  },
   helper: {
     chalk: {
       options: { level: 2 },

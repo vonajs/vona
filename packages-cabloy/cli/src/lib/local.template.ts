@@ -6,7 +6,7 @@ import eggBornUtils from 'egg-born-utils';
 import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
-import { BeanCliBase } from './virtual.cliBase.js';
+import { BeanCliBase } from './bean.cli.base.js';
 import { config } from '../config.js';
 
 export class LocalTemplate {
@@ -214,7 +214,7 @@ export class LocalTemplate {
     // for
     for (const file of files) {
       const snippetTemplatePath = path.join(snippetsDir, file);
-      const snippet = this.ctx.app.meta.util.requireDynamic(snippetTemplatePath);
+      const snippet = this.requireDynamic(snippetTemplatePath);
       if (!snippet.file) {
         throw new Error(`should provider file path for: ${file}`);
       }

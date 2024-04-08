@@ -1,12 +1,10 @@
-import { Bean } from '@cabloy/core';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from '@cabloy/cli';
 
-@Bean({ scene: 'cli.default' })
 export class CliDefaultList extends BeanCliBase {
-  async execute({ user }: any) {
+  async execute() {
     const { argv } = this.context;
     // super
-    await super.execute({ user });
+    await super.execute();
     // module/group
     const moduleWant = argv.module;
     let groupWant = argv.group;

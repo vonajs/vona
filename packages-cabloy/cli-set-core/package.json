@@ -31,5 +31,8 @@
     "cabloy"
   ],
   "author": "zhennann",
+  "peerDependencies": {
+    "@cabloy/cli": "workspace:^"
+  },
   "dependencies": {}
 }
