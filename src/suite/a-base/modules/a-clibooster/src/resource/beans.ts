@@ -12,7 +12,6 @@ export * from '../bean/cli.front.renderTableCell.js';
 export * from '../bean/cli.default.list.js';
 export * from '../bean/cli.create.pagex.js';
 export * from '../bean/cli.create.page.js';
-export * from '../bean/cli.create.module.js';
 export * from '../bean/cli.create.itemOnly.js';
 export * from '../bean/cli.create.detail.js';
 export * from '../bean/cli.create.controller.js';
