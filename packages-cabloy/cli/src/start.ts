@@ -23,17 +23,21 @@ export class CabloyCommand extends CommonBin {
     const argv = {
       projectPath: process.cwd(),
     } as ICommandArgv;
+    // indexCabloy
+    const indexCabloy = this.rawArgv.indexOf('cabloy');
     // cli
-    Object.assign(argv, this._prepareCliFullName(parsed._[1]));
+    const indexCommand = indexCabloy > -1 ? indexCabloy + 1 : 0;
+    Object.assign(argv, this._prepareCliFullName(parsed._[indexCommand]));
     // cli meta
     const context = { argv };
     const beanCli = new BeanCli();
     const meta = await beanCli.meta({ context });
     // cli run
     const rawArgv = this.rawArgv.slice();
-    const index = rawArgv.indexOf('cabloy');
-    if (index > -1) {
-      rawArgv.splice(0, index + 2);
+    if (indexCabloy > -1) {
+      rawArgv.splice(0, indexCabloy + 2);
+    } else {
+      rawArgv.splice(0, 1);
     }
     const command = new CliCommand(rawArgv, { meta, argv });
     await command[DISPATCH]();
