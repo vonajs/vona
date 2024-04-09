@@ -57,7 +57,7 @@ class EggBornBinCommand extends Command {
     });
     // cli run
     const rawArgv = this.rawArgv.slice();
-    rawArgv.splice(rawArgv.indexOf('cli'), 2);
+    rawArgv.splice(0, rawArgv.indexOf('cli') + 2);
     const command = new CliCommand(rawArgv, { meta, argv, openAuthClient });
     await command[DISPATCH]();
     // logout

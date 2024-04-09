@@ -1,5 +1,5 @@
 export interface CmdArgv {
-  [Prop: string]: any;
+  // [Prop: string]: any;
   projectPath: string;
   cliFullName: string;
   set?: string;

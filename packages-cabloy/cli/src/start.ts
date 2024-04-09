@@ -35,7 +35,7 @@ export class CabloyCommand extends CommonBin {
     const meta = await beanCli.meta({ context });
     // cli run
     const rawArgv = this.rawArgv.slice();
-    rawArgv.splice(rawArgv.indexOf('cabloy'), 2);
+    rawArgv.splice(0, rawArgv.indexOf('cabloy') + 2);
     const command = new CliCommand(rawArgv, { meta, argv });
     await command[DISPATCH]();
     // force exit
