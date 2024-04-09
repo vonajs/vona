@@ -36,7 +36,5 @@ export class CliCreateSuite extends BeanCliBase {
     });
     // render
     await this.template.renderDir({ targetDir, templateDir });
-    // reload
-    this.ctx.app.meta.reload.now();
   }
 }

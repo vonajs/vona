@@ -3,6 +3,7 @@ import { LocalConsole } from './local.console.js';
 import { LocalHelper } from './local.helper.js';
 import { LocalTemplate } from './local.template.js';
 import { CmdOptions } from '../types/argv.js';
+import { TypeProjectMode } from '@cabloy/module-info';
 
 export class BeanCliBase {
   options: CmdOptions;
@@ -56,15 +57,16 @@ export class BeanCliBase {
     await this._loadModulesMeta();
   }
 
-  async _loadModulesMeta() {
+  async _loadModulesMeta(projectMode?: TypeProjectMode) {
     //
     if (this.modulesMeta) return;
     //
-    let projectMode;
-    if (this.cliFullName.indexOf('api:') === 0) {
-      projectMode = 'api';
-    } else if (this.cliFullName.indexOf('front:') === 0) {
-      projectMode = 'front';
+    if (!projectMode) {
+      if (this.cliFullName.indexOf('api:') === 0) {
+        projectMode = 'api';
+      } else if (this.cliFullName.indexOf('front:') === 0) {
+        projectMode = 'front';
+      }
     }
     if (!projectMode) return;
     // all modules

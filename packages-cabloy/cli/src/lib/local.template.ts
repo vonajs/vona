@@ -45,23 +45,24 @@ export class LocalTemplate {
   }
 
   resolveTemplatePath({ setName, path: _path }: any) {
-    const module = this.helper.findModule(moduleName);
-    return path.join(module.root, 'cli/templates', _path);
+    const sets = this.moduleConfig.sets;
+    const modulePath = require.resolve(sets[setName]);
+    return path.join(modulePath, 'cli/templates', _path);
   }
 
-  async renderBoilerplateAndSnippets({ targetDir, moduleName, snippetsPath, boilerplatePath }: any) {
+  async renderBoilerplateAndSnippets({ targetDir, setName, snippetsPath, boilerplatePath }: any) {
     // first
     if (snippetsPath) {
-      const snippetsDir = this.resolvePath({
-        moduleName,
+      const snippetsDir = this.resolveTemplatePath({
+        setName,
         path: snippetsPath,
       });
       await this.applySnippets({ targetDir, snippetsDir });
     }
     // then
     if (boilerplatePath) {
-      const templateDir = this.resolvePath({
-        moduleName,
+      const templateDir = this.resolveTemplatePath({
+        setName,
         path: boilerplatePath,
       });
       await this.renderDir({ targetDir, templateDir });
