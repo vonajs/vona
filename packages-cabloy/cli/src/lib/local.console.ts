@@ -21,7 +21,7 @@ export class LocalConsole {
     if (typeof data !== 'object') {
       data = { text: String(data) };
     }
-    let { text } = data;
+    let { /* progressNo,*/ total, progress, text } = data;
     // logPrefix
     const logPrefix = options.logPrefix;
     if (logPrefix) {
@@ -29,6 +29,13 @@ export class LocalConsole {
     }
     // fallback
     if (!this.cli.terminal) {
+      if (total !== undefined) {
+        const progressValid = progress >= 0;
+        const progressText = `(${progressValid ? progress + 1 : '-'}/${total})`;
+        if (progressValid) {
+          text = this._adjustText(`${progressText}=> `, text);
+        }
+      }
       return console.log(text);
     }
   }

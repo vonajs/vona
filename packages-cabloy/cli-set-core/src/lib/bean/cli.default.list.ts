@@ -25,7 +25,6 @@ export class CliDefaultList extends BeanCliBase {
       const setShow = setsShow[index];
       // log
       await this.console.log({
-        progressNo: 0,
         total,
         progress: index,
         text: setShow,
