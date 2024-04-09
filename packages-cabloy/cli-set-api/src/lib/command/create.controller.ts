@@ -3,7 +3,7 @@ export default {
   info: {
     version: '5.0.0',
     title: 'Cli: Create Controller',
-    usage: 'npm run cabloy :create:controller controllerName -- [--module=]',
+    usage: 'npm run cabloy api:create:controller controllerName -- [--module=]',
   },
   options: {
     module: {
