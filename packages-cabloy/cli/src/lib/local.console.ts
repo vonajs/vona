@@ -1,3 +1,4 @@
+import { IConsoleLogData, IConsoleLogOptions } from '../types/console.js';
 import { BeanCliBase } from './bean.cli.base.js';
 
 export class LocalConsole {
@@ -15,7 +16,7 @@ export class LocalConsole {
     return this.cli.options.context;
   }
 
-  async log(data, options: any = {}) {
+  async log(data?: IConsoleLogData | string, options: IConsoleLogOptions = {}) {
     if (!data) return;
     // data
     if (typeof data !== 'object') {
@@ -29,7 +30,7 @@ export class LocalConsole {
     }
     // fallback
     if (!this.cli.terminal) {
-      if (total !== undefined) {
+      if (total !== undefined && progress !== undefined) {
         const progressValid = progress >= 0;
         const progressText = `(${progressValid ? progress + 1 : '-'}/${total})`;
         if (progressValid) {
