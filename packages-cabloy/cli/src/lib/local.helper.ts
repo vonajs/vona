@@ -1,5 +1,5 @@
 import Chalk from 'chalk';
-import TableClass from 'cli-table3';
+import TableClass, { TableConstructorOptions } from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -51,7 +51,7 @@ export class LocalHelper {
     }
     return new Chalk.Instance(options);
   }
-  newTable(options) {
+  newTable(options: TableConstructorOptions) {
     return new TableClass(options);
   }
   boxen({ text, options }: any) {
