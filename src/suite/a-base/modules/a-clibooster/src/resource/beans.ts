@@ -14,7 +14,6 @@ export * from '../bean/cli.create.pagex.js';
 export * from '../bean/cli.create.page.js';
 export * from '../bean/cli.create.itemOnly.js';
 export * from '../bean/cli.create.detail.js';
-export * from '../bean/cli.create.controller.js';
 export * from '../bean/cli.create.atomAction.js';
 export * from '../bean/cli.create.atom.js';
 export * from '../bean/cli.create.app.js';

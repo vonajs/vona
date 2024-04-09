@@ -9,7 +9,6 @@ import createApp from './command/create.app.js';
 import createAtom from './command/create.atom.js';
 import createItemOnly from './command/create.itemOnly.js';
 import createDetail from './command/create.detail.js';
-import createController from './command/create.controller.js';
 import createPage from './command/create.page.js';
 import createPagex from './command/create.pagex.js';
 import renderTableCell from './command/front.renderTableCell.js';
@@ -36,7 +35,6 @@ const commands = {
     atom: createAtom,
     itemOnly: createItemOnly,
     detail: createDetail,
-    controller: createController,
     page: createPage,
     pagex: createPagex,
   },
