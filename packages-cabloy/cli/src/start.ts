@@ -6,7 +6,7 @@ const DISPATCH = Symbol.for('eb:Command#dispatch');
 const PARSE = Symbol.for('eb:Command#parse');
 
 export class CabloyCommand extends CommonBin {
-  constructor(rawArgv) {
+  constructor(rawArgv?) {
     super(rawArgv);
     this.usage = 'Usage: cabloy [command] [options]';
   }

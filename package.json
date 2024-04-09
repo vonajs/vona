@@ -25,6 +25,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
+    "cabloy": "cabloy",
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
     "dev": "node ./scripts/egg-born-bin.js backend-dev --workers=2",
