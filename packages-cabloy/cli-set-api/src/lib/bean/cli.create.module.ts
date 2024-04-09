@@ -1,16 +1,25 @@
-import { __ThisModule__ } from '../resource/this.js';
-import { Bean } from '@cabloy/core';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
-
+import { BeanCliBase } from '@cabloy/cli';
+import { IModuleInfo, ISuite } from '@cabloy/module-info';
 import fs from 'fs';
 import path from 'path';
 
-@Bean({ scene: 'cli.create' })
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    suite: string;
+    suiteInfo: IModuleInfo;
+    _suite: ISuite;
+    moduleInfo: IModuleInfo;
+    relativeNameCapitalize: string;
+    force: boolean;
+    template: string;
+  }
+}
+
 export class CliCreateModule extends BeanCliBase {
-  async execute({ user }: any) {
+  async execute() {
     const { argv } = this.context;
     // super
-    await super.execute({ user });
+    await super.execute();
     // suite name/info
     const suiteName = argv.suite;
     if (suiteName) {
@@ -46,7 +55,7 @@ export class CliCreateModule extends BeanCliBase {
     if (suiteName) {
       await this.template.renderBoilerplateAndSnippets({
         targetDir: argv._suite.root,
-        moduleName: __ThisModule__,
+        setName: 'api',
         snippetsPath: `create/${template}/snippets`,
         boilerplatePath: null,
       });
@@ -55,13 +64,9 @@ export class CliCreateModule extends BeanCliBase {
     targetDir = await this.helper.ensureDir(targetDir);
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: __ThisModule__,
+      setName: 'api',
       snippetsPath: null,
       boilerplatePath: `create/${template}/boilerplate`,
     });
-    // npm install
-    // await this.helper.pnpmInstall();
-    // reload
-    // this.ctx.app.meta.reload.now();
   }
 }

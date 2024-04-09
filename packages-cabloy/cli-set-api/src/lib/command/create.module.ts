@@ -1,12 +1,9 @@
 export default {
   bean: 'create.module',
-  resource: {
-    atomStaticKey: 'cliCreate',
-  },
   info: {
     version: '5.0.0',
     title: 'Cli: Create Module',
-    usage: 'npm run cli :create:module moduleName -- [--template=] [--suite=] [--force]',
+    usage: 'npm run cabloy :create:module moduleName -- [--template=] [--suite=] [--force]',
   },
   options: {
     template: {
