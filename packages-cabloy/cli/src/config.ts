@@ -26,6 +26,7 @@ export const commandsConfig = {
         '_jsconfig.json': 'jsconfig.json',
         '_tsconfig.json': 'tsconfig.json',
         '_tsconfig.base.json': 'tsconfig.base.json',
+        '_tsconfig.build.json': 'tsconfig.build.json',
       },
       ignore: ['.DS_Store'],
     },
