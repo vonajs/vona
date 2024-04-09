@@ -2,6 +2,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import { IModuleInfo, ISuite } from '@cabloy/module-info';
 import fs from 'fs';
 import path from 'path';
+import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -55,7 +56,7 @@ export class CliCreateModule extends BeanCliBase {
     if (suiteName) {
       await this.template.renderBoilerplateAndSnippets({
         targetDir: argv._suite.root,
-        setName: 'api',
+        setName: __ThisSetName__,
         snippetsPath: `create/${template}/snippets`,
         boilerplatePath: null,
       });
@@ -64,7 +65,7 @@ export class CliCreateModule extends BeanCliBase {
     targetDir = await this.helper.ensureDir(targetDir);
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      setName: 'api',
+      setName: __ThisSetName__,
       snippetsPath: null,
       boilerplatePath: `create/${template}/boilerplate`,
     });

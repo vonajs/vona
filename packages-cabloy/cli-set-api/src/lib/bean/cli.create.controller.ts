@@ -1,5 +1,6 @@
 import { BeanCliBase } from '@cabloy/cli';
 import { IModuleInfo } from '@cabloy/module-info';
+import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -26,7 +27,7 @@ export class CliCreateController extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      setName: 'api',
+      setName: __ThisSetName__,
       snippetsPath: 'create/controller/snippets',
       boilerplatePath: 'create/controller/boilerplate',
     });

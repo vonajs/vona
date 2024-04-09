@@ -2,6 +2,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import { IModuleInfo } from '@cabloy/module-info';
 import fs from 'fs';
 import path from 'path';
+import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -31,7 +32,7 @@ export class CliCreateSuite extends BeanCliBase {
     targetDir = await this.helper.ensureDir(targetDir);
     // templateDir
     const templateDir = this.template.resolveTemplatePath({
-      setName: 'api',
+      setName: __ThisSetName__,
       path: 'create/suite',
     });
     // render
