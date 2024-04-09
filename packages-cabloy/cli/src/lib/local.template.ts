@@ -46,8 +46,8 @@ export class LocalTemplate {
 
   resolveTemplatePath({ setName, path: _path }: any) {
     const sets = this.moduleConfig.sets;
-    const modulePath = require.resolve(sets[setName]);
-    return path.join(modulePath, 'cli/templates', _path);
+    const modulePath = require.resolve(`${sets[setName]}/package.json`);
+    return path.join(path.dirname(modulePath), 'cli/templates', _path);
   }
 
   async renderBoilerplateAndSnippets({ targetDir, setName, snippetsPath, boilerplatePath }: any) {
