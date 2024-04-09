@@ -4,7 +4,7 @@ module.exports = {
     language: 'json',
   },
   async transform({ /* cli,*/ ast, argv /* , ctx*/ }) {
-    ast.dependencies[`cabloy-module-api-${argv.moduleInfo.relativeName}`] = 'workspace:^';
+    ast.dependencies[`cabloy-module-front-${argv.moduleInfo.relativeName}`] = 'workspace:^';
     // ok
     return ast;
   },
