@@ -8,7 +8,7 @@ export class BeanCli {
     const cliFullName = argv.cliFullName;
     const { command, BeanClass } = await this._findCliCommand({ cliFullName });
     // command bean
-    const beanCommand = new BeanClass({ command, context });
+    const beanCommand = new BeanClass({ command, context, terminal: false });
     if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
     // meta
     return await beanCommand.meta();
@@ -20,7 +20,7 @@ export class BeanCli {
     const cliFullName = argv.cliFullName;
     const { command, BeanClass } = await this._findCliCommand({ cliFullName });
     // command bean
-    const beanCommand = new BeanClass({ command, context });
+    const beanCommand = new BeanClass({ command, context, terminal: false });
     if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
     // execute
     await beanCommand.execute();
