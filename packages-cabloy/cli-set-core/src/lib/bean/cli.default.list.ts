@@ -58,7 +58,7 @@ export class CliDefaultList extends BeanCliBase {
       const groupShow = groupsShow[index];
       const _group = _set[groupShow];
       for (const commandName in _group) {
-        const _command = _group[commandName];
+        const _command = _group[commandName].command;
         const cliFullName = this._combineCliFullName({ setShow, groupShow, commandName });
         const version = _command.info.version;
         const description = _command.info.description || _command.info.title;
