@@ -1,5 +1,5 @@
 import CommonBin from '@zhennann/common-bin';
-import { CmdArgv } from './types/argv.js';
+import { ICommandArgv } from './types/argv.js';
 import { BeanCli } from './lib/bean.cli.js';
 import { CliCommand } from './lib/cli.js';
 const DISPATCH = Symbol.for('eb:Command#dispatch');
@@ -22,7 +22,7 @@ export class CabloyCommand extends CommonBin {
     // argv
     const argv = {
       projectPath: process.cwd(),
-    } as CmdArgv;
+    } as ICommandArgv;
     // cli
     Object.assign(argv, this._prepareCliFullName(parsed._[1]));
     // cli meta

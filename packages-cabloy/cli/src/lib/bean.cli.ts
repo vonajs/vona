@@ -1,8 +1,8 @@
-import { CmdContext } from '../types/argv.js';
+import { ICommandContext } from '../types/argv.js';
 import { findCommand } from './commands.js';
 
 export class BeanCli {
-  async meta({ context }: { context: CmdContext }) {
+  async meta({ context }: { context: ICommandContext }) {
     // command
     const { argv } = context;
     const cliFullName = argv.cliFullName;
@@ -14,7 +14,7 @@ export class BeanCli {
     return await beanCommand.meta();
   }
 
-  async execute({ context }: { context: CmdContext }) {
+  async execute({ context }: { context: ICommandContext }) {
     // command
     const { argv } = context;
     const cliFullName = argv.cliFullName;

@@ -1,16 +1,16 @@
-export interface CmdArgv {
+export interface ICommandArgv {
   // [Prop: string]: any;
   projectPath: string;
   cliFullName: string;
 }
 
-export interface CmdContext {
-  argv: CmdArgv;
+export interface ICommandContext {
+  argv: ICommandArgv;
 }
 
 export interface CmdOptions {
   command: CmdCommand;
-  context: CmdContext;
+  context: ICommandContext;
   terminal: boolean;
 }
 

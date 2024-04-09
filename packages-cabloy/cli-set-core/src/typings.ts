@@ -1,5 +1,5 @@
 declare module '@cabloy/cli' {
-  export interface CmdArgv {
+  export interface ICommandArgv {
     set?: string;
     group?: string;
   }
