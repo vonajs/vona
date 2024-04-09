@@ -1,13 +1,18 @@
-import { __ThisModule__ } from '../resource/this.js';
-import { Bean } from '@cabloy/core';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from '@cabloy/cli';
+import { IModuleInfo } from '@cabloy/module-info';
 
-@Bean({ scene: 'cli.create' })
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    module: string;
+    moduleInfo: IModuleInfo;
+  }
+}
+
 export class CliCreateController extends BeanCliBase {
-  async execute({ user }: any) {
+  async execute() {
     const { argv } = this.context;
     // super
-    await super.execute({ user });
+    await super.execute();
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);
@@ -21,11 +26,9 @@ export class CliCreateController extends BeanCliBase {
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: __ThisModule__,
+      setName: 'api',
       snippetsPath: 'create/controller/snippets',
       boilerplatePath: 'create/controller/boilerplate',
     });
-    // reload
-    this.ctx.app.meta.reload.now();
   }
 }
