@@ -44,7 +44,7 @@ export class LocalTemplate {
     return this.moduleConfig.template.render.ignore;
   }
 
-  resolvePath({ moduleName, path: _path }: any) {
+  resolveTemplatePath({ setName, path: _path }: any) {
     const module = this.helper.findModule(moduleName);
     return path.join(module.root, 'cli/templates', _path);
   }

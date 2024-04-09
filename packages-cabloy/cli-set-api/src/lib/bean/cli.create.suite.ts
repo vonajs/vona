@@ -1,16 +1,20 @@
-import { __ThisModule__ } from '../resource/this.js';
-import { Bean } from '@cabloy/core';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
-
+import { BeanCliBase } from '@cabloy/cli';
+import { IModuleInfo } from '@cabloy/module-info';
 import fs from 'fs';
 import path from 'path';
 
-@Bean({ scene: 'cli.create' })
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    name: string;
+    suiteInfo: IModuleInfo;
+  }
+}
+
 export class CliCreateSuite extends BeanCliBase {
-  async execute({ user }: any) {
+  async execute() {
     const { argv } = this.context;
     // super
-    await super.execute({ user });
+    await super.execute();
     // suite name/info
     const suiteName = argv.name;
     argv.suiteInfo = this.helper.parseSuiteInfo(suiteName);
@@ -26,8 +30,8 @@ export class CliCreateSuite extends BeanCliBase {
     }
     targetDir = await this.helper.ensureDir(targetDir);
     // templateDir
-    const templateDir = this.template.resolvePath({
-      moduleName: __ThisModule__,
+    const templateDir = this.template.resolveTemplatePath({
+      setName: 'api',
       path: 'create/suite',
     });
     // render

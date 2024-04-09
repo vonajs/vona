@@ -1,12 +1,9 @@
 export default {
   bean: 'create.suite',
-  resource: {
-    atomStaticKey: 'cliCreate',
-  },
   info: {
     version: '5.0.0',
     title: 'Cli: Create Suite',
-    usage: 'npm run cli :create:suite suiteName',
+    usage: 'npm run cabloy :create:suite suiteName',
   },
   options: {},
   groups: {
