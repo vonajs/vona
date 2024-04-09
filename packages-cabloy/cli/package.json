@@ -34,7 +34,9 @@
   ],
   "author": "zhennann",
   "dependencies": {
+    "@cabloy/cli-set-api": "workspace:^",
     "@cabloy/cli-set-core": "workspace:^",
+    "@cabloy/cli-set-front": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
