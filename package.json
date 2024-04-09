@@ -57,7 +57,7 @@
     "@cabloy/extend": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/process-helper": "workspace:^",
-    "@swc/core": "^1.4.12",
+    "@swc/core": "^1.4.13",
     "@swc/helpers": "^0.5.8",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.6",
@@ -83,7 +83,7 @@
     "eslint-plugin-jsdoc": "^46.10.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.24.0",
+    "eslint-plugin-vue": "^9.24.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.19.2",
     "extend2": "^1.0.1",
@@ -110,7 +110,7 @@
     "semver": "^7.6.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.2",
-    "typedoc": "^0.25.12",
+    "typedoc": "^0.25.13",
     "typescript": "5.3.3",
     "vue-eslint-parser": "^9.4.2"
   }

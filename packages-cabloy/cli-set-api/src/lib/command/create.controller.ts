@@ -1,12 +1,9 @@
 export default {
   bean: 'create.controller',
-  resource: {
-    atomStaticKey: 'cliCreate',
-  },
   info: {
     version: '5.0.0',
     title: 'Cli: Create Controller',
-    usage: 'npm run cli :create:controller controllerName -- [--module=]',
+    usage: 'npm run cabloy :create:controller controllerName -- [--module=]',
   },
   options: {
     module: {
