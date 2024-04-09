@@ -1,3 +1,7 @@
+import createSuite from './command/create.suite.js';
+
 export const commands = {
-  default: {},
+  create: {
+    suite: createSuite,
+  },
 };

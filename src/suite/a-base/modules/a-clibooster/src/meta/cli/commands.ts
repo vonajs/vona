@@ -5,7 +5,6 @@ import tokenList from './command/token.list.js';
 import toolsBabel from './command/tools.babel.js';
 import toolsIcons from './command/tools.icons.js';
 import toolsDemo from './command/tools.demo.js';
-import createSuite from './command/create.suite.js';
 import createModule from './command/create.module.js';
 import createApp from './command/create.app.js';
 import createAtom from './command/create.atom.js';
@@ -34,7 +33,6 @@ const commands = {
     demo: toolsDemo,
   },
   create: {
-    suite: createSuite,
     module: createModule,
     app: createApp,
     atom: createAtom,

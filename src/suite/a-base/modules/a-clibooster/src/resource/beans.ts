@@ -10,7 +10,6 @@ export * from '../bean/cli.store.publish.js';
 export * from '../bean/cli.git.commit.js';
 export * from '../bean/cli.front.renderTableCell.js';
 export * from '../bean/cli.default.list.js';
-export * from '../bean/cli.create.suite.js';
 export * from '../bean/cli.create.pagex.js';
 export * from '../bean/cli.create.page.js';
 export * from '../bean/cli.create.module.js';
