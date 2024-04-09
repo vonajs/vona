@@ -1,11 +1,7 @@
-import path from 'path';
-import chalk from 'chalk';
 import CommonBin from '@zhennann/common-bin';
-import eggBornUtils from 'egg-born-utils';
-import utils from './lib/utils.js';
-import CliCommand from './lib/cmd/cli.js';
 import { CmdArgv } from './types/argv.js';
 import { BeanCli } from './lib/bean.cli.js';
+import { CliCommand } from './lib/cli.js';
 const DISPATCH = Symbol.for('eb:Command#dispatch');
 const PARSE = Symbol.for('eb:Command#parse');
 

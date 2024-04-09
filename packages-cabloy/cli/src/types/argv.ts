@@ -2,8 +2,6 @@ export interface CmdArgv {
   // [Prop: string]: any;
   projectPath: string;
   cliFullName: string;
-  set?: string;
-  group?: string;
 }
 
 export interface CmdContext {

@@ -7,18 +7,18 @@ function _collectCommands() {
   const _commandsMap: any = {};
   const _commandsAll: any = {};
   const sets = commandsConfig.sets;
-  for (const setKey in sets) {
-    const setModuleName = sets[setKey];
+  for (const setName in sets) {
+    const setModuleName = sets[setName];
     const setModule = require(setModuleName);
     const commands = setModule.commands;
     if (!commands) continue;
-    const _commandsSet = (_commandsAll[setKey] = {});
+    const _commandsSet = (_commandsAll[setName] = {});
     for (const groupName in commands) {
       const group = commands[groupName];
       const _commandsGroup = (_commandsSet[groupName] = {});
       for (const key in group) {
         const command = group[key];
-        const fullKey = `${setKey}:${groupName}:${key}`;
+        const fullKey = `${setName}:${groupName}:${key}`;
         // command BeanClass
         const BeanClass = setModule.beans[command.bean];
         // ok

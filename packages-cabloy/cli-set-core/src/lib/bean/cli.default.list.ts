@@ -1,51 +1,51 @@
-import { BeanCliBase } from '@cabloy/cli';
+import { BeanCliBase, commandsMeta } from '@cabloy/cli';
 
 export class CliDefaultList extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super
     await super.execute();
-    // module/group
-    const moduleWant = argv.module;
+    // set/group
+    const setWant = argv.set;
     let groupWant = argv.group;
-    if (!moduleWant) groupWant = null;
+    if (!setWant) groupWant = undefined;
     // commandsAll
-    const commandsAll = this.ctx.bean.cli._commandsAll();
-    // modulesShow
-    let modulesShow;
-    if (moduleWant) {
-      if (!commandsAll[moduleWant]) throw new Error(`cli module not found: ${moduleWant}`);
-      modulesShow = [moduleWant];
+    const commandsAll = commandsMeta.commandsAll;
+    // setsShow
+    let setsShow;
+    if (setWant) {
+      if (!commandsAll[setWant]) throw new Error(`cli set not found: ${setWant}`);
+      setsShow = [setWant];
     } else {
-      modulesShow = Object.keys(commandsAll);
+      setsShow = Object.keys(commandsAll);
     }
     // loop
-    const total = modulesShow.length;
+    const total = setsShow.length;
     for (let index = 0; index < total; index++) {
-      const moduleShow = modulesShow[index];
+      const setShow = setsShow[index];
       // log
       await this.console.log({
         progressNo: 0,
         total,
         progress: index,
-        text: moduleShow,
+        text: setShow,
       });
       // show
-      await this._moduleShow({ moduleShow, groupWant, commandsAll });
+      await this._setShow({ setShow, groupWant, commandsAll });
     }
     // await this.console.log({ text: JSON.stringify(modulesWant) });
   }
 
-  async _moduleShow({ moduleShow, groupWant, commandsAll }: any) {
-    // _module
-    const _module = commandsAll[moduleShow];
+  async _setShow({ setShow, groupWant, commandsAll }: any) {
+    // _set
+    const _set = commandsAll[setShow];
     // groupsShow
     let groupsShow;
     if (groupWant) {
-      if (!_module[groupWant]) throw new Error(`cli module group not found: ${moduleShow}:${groupWant}`);
+      if (!_set[groupWant]) throw new Error(`cli set group not found: ${setShow}:${groupWant}`);
       groupsShow = [groupWant];
     } else {
-      groupsShow = Object.keys(_module);
+      groupsShow = Object.keys(_set);
     }
     // table
     const table = this.helper.newTable({
@@ -56,12 +56,12 @@ export class CliDefaultList extends BeanCliBase {
     const groupCount = groupsShow.length;
     for (let index = 0; index < groupCount; index++) {
       const groupShow = groupsShow[index];
-      const _group = _module[groupShow];
+      const _group = _set[groupShow];
       for (const commandName in _group) {
         const _command = _group[commandName];
-        const cliFullName = this._combineCliFullName({ moduleShow, groupShow, commandName });
+        const cliFullName = this._combineCliFullName({ setShow, groupShow, commandName });
         const version = _command.info.version;
-        const description = this.ctx.text(_command.info.description || _command.info.title);
+        const description = _command.info.description || _command.info.title;
         table.push([cliFullName, version, description]);
       }
       if (index < groupCount - 1) {
@@ -72,12 +72,12 @@ export class CliDefaultList extends BeanCliBase {
     await this.console.log({ text: table.toString() });
   }
 
-  _combineCliFullName({ moduleShow, groupShow, commandName }: any) {
+  _combineCliFullName({ setShow, groupShow, commandName }: any) {
     const parts: any[] = [];
-    if (moduleShow === 'a-clibooster') {
+    if (setShow === 'core') {
       parts.push('');
     } else {
-      parts.push(moduleShow);
+      parts.push(setShow);
     }
     if (groupShow === 'default') {
       parts.push('');

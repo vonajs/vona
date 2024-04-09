@@ -8,7 +8,7 @@ import { BeanCli } from './bean.cli.js';
 const __envFields = ['TERM', 'TERM_PROGRAM', 'TERM_PROGRAM_VERSION', 'SHELL', 'COLOR', 'LANG', 'npm_config_registry'];
 const __comment_seperator = '====================================================================';
 
-class CliCommand extends BaseCommand {
+export class CliCommand extends BaseCommand {
   constructor(rawArgv, { meta, argv }) {
     super(rawArgv);
     this.usage = meta.info.usage;
@@ -178,5 +178,3 @@ class CliCommand extends BaseCommand {
     return eggBornUtils.tools.evaluateExpression({ expression, scope: { group, context } });
   }
 }
-
-module.exports = CliCommand;
