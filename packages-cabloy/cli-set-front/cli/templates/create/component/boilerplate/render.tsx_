@@ -1,0 +1,11 @@
+import { BeanRenderBase, Local } from '@cabloy/front-core';
+import type { MotherChild } from './mother.js';
+
+export interface RenderChild extends MotherChild {}
+
+@Local()
+export class RenderChild extends BeanRenderBase {
+  render() {
+    return <div></div>;
+  }
+}

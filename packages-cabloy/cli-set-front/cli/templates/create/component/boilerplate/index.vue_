@@ -1,0 +1,11 @@
+<template>
+  <template></template>
+</template>
+
+<script setup lang="ts">
+import { useMother } from '@cabloy/front-core';
+import { MotherChild, Props, Emits } from './mother.js';
+const props = withDefaults(defineProps<Partial<Props>>(), MotherChild.$propsDefault);
+const emit = defineEmits<Emits>();
+useMother(MotherChild, props, emit);
+</script>
