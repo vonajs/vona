@@ -2,7 +2,7 @@ const __snippet_declare = "import <%=argv.pageNameShortCapitalize%> from './page
 const __snippet_body = "{ path: '<%=argv.pageName%>', component: <%=argv.pageNameShortCapitalize%> },";
 
 module.exports = {
-  file: 'src/routes.js',
+  file: 'src/routes.ts',
   async transform({ cli, ast }) {
     // code
     let code = await cli.template.renderContent({ content: __snippet_declare });

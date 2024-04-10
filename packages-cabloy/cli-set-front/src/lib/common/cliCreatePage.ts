@@ -45,7 +45,7 @@ export class CliCreatePageBase extends BeanCliBase {
     // directory
     let pageDir = path.join(targetDir, 'src/page');
     if (parts.length > 1) {
-      pageDir = path.join(pageDir, parts.slice(0, parts.length - 1).join('/'));
+      pageDir = path.join(pageDir, pageName);
     }
     await this.helper.ensureDir(pageDir);
     // render snippets
