@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
 import { useMother } from '@cabloy/front-core';
-import { MotherChild, Props, Emits } from './mother.js';
-const props = withDefaults(defineProps<Partial<Props>>(), MotherChild.$propsDefault);
+import { Mother<%=argv.pageNameShortCapitalize%>, Props, Emits } from './mother.js';
+const props = withDefaults(defineProps<Partial<Props>>(), Mother<%=argv.pageNameShortCapitalize%>.$propsDefault);
 const emit = defineEmits<Emits>();
-useMother(MotherChild, props, emit);
+useMother(Mother<%=argv.pageNameShortCapitalize%>, props, emit);
 </script>
