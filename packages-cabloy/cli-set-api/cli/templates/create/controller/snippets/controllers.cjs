@@ -2,7 +2,7 @@ const __snippet_export = "export * from '../controller/<%=argv.controllerName%>.
 
 module.exports = {
   file: 'src/resource/controllers.ts',
-  async transform({ cli, ast /* , ctx */ }) {
+  async transform({ cli, ast }) {
     // code
     const code = await cli.template.renderContent({ content: __snippet_export });
     ast.before(code);

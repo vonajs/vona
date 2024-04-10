@@ -5,7 +5,7 @@ const __snippet_interface = '<%=argv.controllerName%>: Local<%=argv.controllerNa
 
 module.exports = {
   file: 'src/resource/locals.ts',
-  async transform({ cli, ast /* , ctx */ }) {
+  async transform({ cli, ast }) {
     // export
     let code = await cli.template.renderContent({ content: __snippet_export });
     ast.before(code);
