@@ -10,7 +10,6 @@ import createAtom from './command/create.atom.js';
 import createItemOnly from './command/create.itemOnly.js';
 import createDetail from './command/create.detail.js';
 import createPage from './command/create.page.js';
-import createPagex from './command/create.pagex.js';
 import renderTableCell from './command/front.renderTableCell.js';
 import storeSync from './command/store.sync.js';
 import storePublish from './command/store.publish.js';
@@ -36,7 +35,6 @@ const commands = {
     itemOnly: createItemOnly,
     detail: createDetail,
     page: createPage,
-    pagex: createPagex,
   },
   front: {
     renderTableCell,
