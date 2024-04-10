@@ -1,12 +1,9 @@
 export default {
-  bean: 'create.pagex',
-  resource: {
-    atomStaticKey: 'cliCreate',
-  },
+  bean: 'create.page',
   info: {
     version: '5.0.0',
-    title: 'Cli: Create Page JSX Component',
-    usage: 'npm run cli :create:pagex pageName -- [--module=]',
+    title: 'Cli: Create Page TSX Component',
+    usage: 'cabloy front:create:page pageName -- [--module=]',
   },
   options: {
     module: {
