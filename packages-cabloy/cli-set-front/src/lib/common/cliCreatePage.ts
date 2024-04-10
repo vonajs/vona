@@ -1,19 +1,29 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { BeanCliBase, CmdOptions } from '@cabloy/cli';
+import { IModuleInfo } from '@cabloy/module-info';
 import path from 'path';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { __ThisSetName__ } from '../this.js';
+
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    module: string;
+    moduleInfo: IModuleInfo;
+    pageName: string;
+    pageName2: string;
+  }
+}
 
 export class CliCreatePageBase extends BeanCliBase {
   pageMode: string;
 
-  constructor(pageMode) {
-    super();
+  constructor(options: CmdOptions, pageMode) {
+    super(options);
     this.pageMode = pageMode;
   }
 
-  async execute({ user }: any) {
+  async execute() {
     const { argv } = this.context;
     // super
-    await super.execute({ user });
+    await super.execute();
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);
@@ -39,18 +49,16 @@ export class CliCreatePageBase extends BeanCliBase {
     // render snippets
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
-      moduleName: __ThisModule__,
+      setName: __ThisSetName__,
       snippetsPath: `create/${this.pageMode}/snippets`,
       boilerplatePath: null,
     });
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: pageDir,
-      moduleName: __ThisModule__,
+      setName: __ThisSetName__,
       snippetsPath: null,
       boilerplatePath: `create/${this.pageMode}/boilerplate`,
     });
-    // need not reload
-    // this.ctx.app.meta.reload.now();
   }
 }
