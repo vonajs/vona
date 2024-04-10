@@ -1,5 +1,5 @@
 import { BeanMotherBase, Local, Use } from '@cabloy/front-core';
-import { Render<%=argv.pageNameShortCapitalize%> } from './render.jsx';
+import { Render<%=argv.componentNameShortCapitalize%> } from './render.jsx';
 
 export interface Props {
   name: string;
@@ -10,11 +10,11 @@ export type Emits = {};
 export type Slots = {};
 
 @Local()
-export class Mother<%=argv.pageNameShortCapitalize%> extends BeanMotherBase<Props, Emits, Slots> {
+export class Mother<%=argv.componentNameShortCapitalize%> extends BeanMotherBase<Props, Emits, Slots> {
   static $propsDefault = {
     name: '',
   };
 
   @Use()
-  $$render: Render<%=argv.pageNameShortCapitalize%>;
+  $$render: Render<%=argv.componentNameShortCapitalize%>;
 }
