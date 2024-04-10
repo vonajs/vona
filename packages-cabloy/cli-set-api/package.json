@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli-set-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "cabloy cli-set-api",
   "publishConfig": {
     "access": "public"
