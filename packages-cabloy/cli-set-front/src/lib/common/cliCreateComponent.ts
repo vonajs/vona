@@ -44,9 +44,7 @@ export class CliCreateComponentBase extends BeanCliBase {
     argv.componentNameShortCapitalize = this.helper.firstCharToCapitalize(componentNameShort);
     // directory
     let componentDir = path.join(targetDir, 'src/component');
-    if (parts.length > 1) {
-      componentDir = path.join(componentDir, componentName);
-    }
+    componentDir = path.join(componentDir, componentName);
     await this.helper.ensureDir(componentDir);
     // render snippets
     await this.template.renderBoilerplateAndSnippets({

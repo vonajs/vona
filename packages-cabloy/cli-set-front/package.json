@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli-set-front",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "cabloy cli-set-front",
   "publishConfig": {
     "access": "public"
