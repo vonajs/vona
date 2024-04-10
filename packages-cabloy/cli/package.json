@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "cabloy cli",
   "publishConfig": {
     "access": "public"
@@ -46,6 +46,7 @@
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "cli-table3": "^0.6.2",
+    "enquirer": "^2.3.6",
     "fs-extra": "^10.1.0",
     "gogocode": "^1.0.53",
     "istextorbinary": "^3.3.0"
