@@ -1,0 +1,8 @@
+import { BeanMotherBase, Local, Use } from '@cabloy/front-core';
+import { RenderPage<%=pageNameShortCapitalize%> } from './render.jsx';
+
+@Local()
+export class MotherPage<%=pageNameShortCapitalize%> extends BeanMotherBase {
+  @Use()
+  $$render: RenderPage<%=pageNameShortCapitalize%>;
+}

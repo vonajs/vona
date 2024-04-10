@@ -60,11 +60,14 @@ export class LocalHelper {
     }
     return Boxen(text, options);
   }
+  firstCharToCapitalize(name: string) {
+    return name.charAt(0).toUpperCase() + name.substring(1);
+  }
   relativeNameToCapitalize(moduleName: string): string {
     return moduleName
       .split('-')
       .map(name => {
-        return name.charAt(0).toUpperCase() + name.substring(1);
+        return this.firstCharToCapitalize(name);
       })
       .join('');
   }
