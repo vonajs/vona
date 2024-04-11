@@ -14,7 +14,7 @@ module.exports = {
     ast.find('export interface IModuleLocal {$$$0}').before(code);
     // interface
     code = await cli.template.renderContent({ content: __snippet_interface });
-    ast.replace('export interface IModuleLocal {$$$0}', `export interface IModuleLocal {$$$0, ${code}}`);
+    ast.replace('export interface IModuleLocal {$$$0}', `export interface IModuleLocal {$$$0 ${code}}`);
     // ok
     return ast;
   },
