@@ -18,14 +18,14 @@ export class BeanBase<TScopeModule = unknown> extends BeanSimple {
     return this.__moduleBelong__ || appResource._getModuleBelong(this.__beanFullName__);
   }
 
-  get scope() {
+  protected get scope() {
     return this.getScope() as TScopeModule;
   }
 
-  getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
-  getScope<T>(moduleScope: string): T;
-  getScope(): TScopeModule;
-  getScope(moduleScope?: string) {
+  protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
+  protected getScope<T>(moduleScope: string): T;
+  protected getScope(): TScopeModule;
+  protected getScope(moduleScope?: string) {
     if (!moduleScope) {
       return this.bean.scope(this.moduleBelong) as TScopeModule;
     }
