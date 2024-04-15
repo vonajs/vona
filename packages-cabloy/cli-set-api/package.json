@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli-set-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "cabloy cli-set-api",
   "publishConfig": {
     "access": "public"
@@ -18,9 +18,9 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "cli",
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "-cli",
+    "-dist/**/*.js",
+    "-dist/**/*.d.ts"
   ],
   "scripts": {
     "lint": "eslint ."

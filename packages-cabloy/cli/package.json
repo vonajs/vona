@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "cabloy cli",
   "publishConfig": {
     "access": "public"
@@ -22,8 +22,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "-dist/**/*.js",
+    "-dist/**/*.d.ts"
   ],
   "scripts": {
     "lint": "eslint ."

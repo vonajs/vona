@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli-set-front",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "cabloy cli-set-front",
   "publishConfig": {
     "access": "public"
@@ -18,9 +18,9 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "cli",
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "-cli",
+    "-dist/**/*.js",
+    "-dist/**/*.d.ts"
   ],
   "scripts": {
     "lint": "eslint ."
