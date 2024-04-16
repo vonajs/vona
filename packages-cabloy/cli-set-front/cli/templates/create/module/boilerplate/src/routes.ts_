@@ -1,3 +1,0 @@
-import { IModuleRoute } from '@cabloy/front-core';
-
-export const routes: IModuleRoute[] = [];
