@@ -1,4 +1,12 @@
 const rules = {
+  'prefer-promise-reject-errors': 'off',
+  quotes: ['warn', 'single', { avoidEscape: true }],
+  // this rule, if on, would require explicit return type on the `render` function
+  '@typescript-eslint/explicit-function-return-type': 'off',
+  'vue/multi-word-component-names': 'off',
+  'vue/prefer-import-from-vue': 'off',
+  '@typescript-eslint/no-namespace': 'off',
+
   '@typescript-eslint/no-explicit-any': 'off',
   'prefer-const': [
     'error',
@@ -83,6 +91,16 @@ const rules = {
     {
       'ts-expect-error': 'allow-with-description',
       'ts-ignore': 'allow-with-description',
+    },
+  ],
+  '@typescript-eslint/ban-types': [
+    'error',
+    {
+      types: {
+        // un-ban a type that's banned by default
+        '{}': false,
+      },
+      extendDefaults: true,
     },
   ],
 };
