@@ -2,6 +2,13 @@
   "name": "@cabloy/lint",
   "version": "4.0.0",
   "description": "Node Style Guide for EggBorn/Cabloy.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "api",
+    "front"
+  ],
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
