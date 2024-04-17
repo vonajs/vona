@@ -80,7 +80,9 @@ const rules = {
 };
 
 module.exports = {
-  extends: 'eslint-config-egg/typescript',
+  parser: '@typescript-eslint/parser',
+  extends: ['eslint-config-egg/typescript', 'prettier'],
+  plugins: ['@typescript-eslint'],
   parserOptions: {},
   rules,
   env: {
