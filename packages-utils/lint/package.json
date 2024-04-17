@@ -1,5 +1,5 @@
 {
-  "name": "egg-born-lint-config",
+  "name": "@cabloy/lint",
   "version": "4.0.0",
   "description": "Node Style Guide for EggBorn/Cabloy.",
   "dependencies": {
