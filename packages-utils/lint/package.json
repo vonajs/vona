@@ -1,12 +1,13 @@
 {
   "name": "@cabloy/lint",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Node Style Guide for EggBorn/Cabloy.",
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "api",
+    "common",
     "front"
   ],
   "dependencies": {

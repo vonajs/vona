@@ -1,8 +1,3 @@
-module.exports = {
-  semi: true,
-  singleQuote: true,
-  bracketSpacing: true,
-  printWidth: 120,
-  arrowParens: 'avoid',
-  trailingComma: 'all',
-};
+const config = require('../api/prettier.js');
+
+module.exports = config;
