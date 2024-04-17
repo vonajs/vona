@@ -1,2 +1,2 @@
-const config = require('./packages-egg-born/egg-born-lint-config/api/prettier.js');
+const config = require('@cabloy/lint/api/prettier.js');
 module.exports = config;
