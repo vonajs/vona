@@ -1,10 +1,10 @@
 const rules = require('../common/rules.js');
 
 module.exports = {
-  parser: '@typescript-eslint/parser',
   extends: ['plugin:@typescript-eslint/recommended','plugin:vue/vue3-essential', 'prettier'],
   plugins: ['@typescript-eslint','vue'],
   parserOptions: {
+    parser: require.resolve('@typescript-eslint/parser'),
     extraFileExtensions: ['.vue'],
   },
   rules,

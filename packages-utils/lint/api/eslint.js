@@ -1,10 +1,11 @@
 const rules = require('../common/rules.js');
 
 module.exports = {
-  parser: '@typescript-eslint/parser',
   extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
   plugins: ['@typescript-eslint'],
-  parserOptions: {},
+  parserOptions: {
+    parser: require.resolve('@typescript-eslint/parser'),
+  },
   rules,
   env: {
     browser: true,
