@@ -5,17 +5,17 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "strict": true,
-    "isolatedModules": true,
     "useDefineForClassFields": true,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": false,
     "noEmitOnError": true,
+    "strict": true,
     "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "jsx": "preserve",
@@ -26,7 +26,9 @@
     "target": "ES2020",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "stripInternal": true,
-    "paths": {}
+    "resolvePackageJsonImports": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "stripInternal": true
   }
 }
