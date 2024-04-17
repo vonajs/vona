@@ -3,6 +3,14 @@
   "version": "4.0.0",
   "description": "Node Style Guide for EggBorn/Cabloy.",
   "dependencies": {
-    "eslint-config-egg": "^13.1.0"
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-jsdoc": "^46.10.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.24.1",
+    "prettier": "^3.2.5"
   }
 }

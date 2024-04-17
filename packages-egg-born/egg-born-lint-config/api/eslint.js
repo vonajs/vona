@@ -1,4 +1,12 @@
 const rules = {
+  '@typescript-eslint/no-explicit-any': 'off',
+  'prefer-const': [
+    'error',
+    {
+      destructuring: 'all',
+      ignoreReadBeforeAssign: true,
+    },
+  ],
   'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   'max-len': [
@@ -81,7 +89,7 @@ const rules = {
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: ['eslint-config-egg/typescript', 'prettier'],
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
   plugins: ['@typescript-eslint'],
   parserOptions: {},
   rules,
@@ -98,5 +106,6 @@ module.exports = {
     Page: true,
     wx: true,
     define: true,
+    Proxy: true,
   },
 };
