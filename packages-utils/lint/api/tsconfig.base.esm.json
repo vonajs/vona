@@ -1,8 +1,4 @@
 {
   "extends":"./tsconfig.base.cjs",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "vue",
-    "lib": ["esnext", "dom"],
-  }
+  "compilerOptions": {}
 }
