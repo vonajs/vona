@@ -60,9 +60,16 @@ export class BeanContainer {
     const fullName = beanOptions.beanFullName;
     // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
     //   not use !selector which maybe is 0
-    const key = this.app.meta.util.isNullOrEmptyString(selector) ? fullName : `${fullName}#${selector}`;
+    const isSelectorValid = !this.app.meta.util.isNullOrEmptyString(selector);
+    const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
     if (this[BeanContainerInstances][key] === undefined) {
-      this[BeanContainerInstances][key] = this._newBeanSelector(fullName, selector);
+      let beanInstance;
+      if (isSelectorValid) {
+        beanInstance = this._newBean(fullName, selector);
+      } else {
+        beanInstance = this._newBean(fullName);
+      }
+      this[BeanContainerInstances][key] = beanInstance;
     }
     return this[BeanContainerInstances][key] as T;
   }
