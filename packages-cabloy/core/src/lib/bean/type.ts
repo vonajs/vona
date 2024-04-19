@@ -1,5 +1,6 @@
 /** bean merge: bean.instance */
 export interface IBeanRecord {}
+export type TypeBeanRecordKeys = keyof IBeanRecord;
 
 export interface IBeanScopeRecord {}
 export type TypeBeanScopeRecordKeys = keyof IBeanScopeRecord;
