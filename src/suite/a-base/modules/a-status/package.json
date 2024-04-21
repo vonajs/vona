@@ -1,7 +1,7 @@
 {
   "name": "cabloy-module-api-a-status",
   "version": "5.0.0",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 1,
     "dependencies": {
       "a-instance": "5.0.0"

@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-useronline",
   "version": "5.0.0",
   "title": "Online Users",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 2,
     "dependencies": {
       "a-instance": "5.0.0",

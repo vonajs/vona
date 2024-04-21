@@ -1,7 +1,7 @@
 {
   "name": "cabloy-module-api-a-cache",
   "version": "5.0.0",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 2,
     "dependencies": {
       "a-database": "5.0.0"

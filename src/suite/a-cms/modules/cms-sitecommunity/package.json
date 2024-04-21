@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-sitecommunity",
   "version": "5.0.0",
   "title": "CMS:Community",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 2,
     "cms": {},
     "dependencies": {

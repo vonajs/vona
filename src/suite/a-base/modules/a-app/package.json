@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-app",
   "version": "5.0.0",
   "title": "App",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 2,
     "dependencies": {
       "a-instance": "5.0.0",

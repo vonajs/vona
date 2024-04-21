@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-layoutmobile",
   "version": "5.0.0",
   "title": "Mobile Layout",
-  "eggBornModule": {
+  "cabloyModule": {
     "dependencies": {}
   },
   "type": "module",

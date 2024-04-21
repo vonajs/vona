@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-flow",
   "version": "5.0.0",
   "title": "FlowTitle",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 5,
     "dependencies": {
       "a-instance": "5.0.0",

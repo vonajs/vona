@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-plugincopyright",
   "version": "5.0.0",
   "title": "cms:plugin:copyright",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "copyright",
       "plugin": true

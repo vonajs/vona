@@ -2,7 +2,7 @@ module.exports = {
   file: 'package.json',
   parseOptions: { language: 'json' },
   async transform({ ast, argv }) {
-    argv.fileVersion = ++ast.eggBornModule.fileVersion;
+    argv.fileVersion = ++ast.cabloyModule.fileVersion;
     return ast;
   },
 };

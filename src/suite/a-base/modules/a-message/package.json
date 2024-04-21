@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-message",
   "version": "5.0.0",
   "title": "Messages",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

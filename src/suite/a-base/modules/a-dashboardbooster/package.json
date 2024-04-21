@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-dashboardbooster",
   "version": "5.0.0",
   "title": "a-dashboardbooster",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

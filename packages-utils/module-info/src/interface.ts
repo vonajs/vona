@@ -32,7 +32,7 @@ export interface IModule extends ISuiteModuleBase {
 export interface IModulePackage {
   name: string;
   version: string;
-  eggBornModule: {
+  cabloyModule: {
     fileVersion: number;
     dependencies: Record<string, string>;
     theme: object;

@@ -129,7 +129,7 @@ function __pushModule(context, modules, moduleRelativeName) {
 
   // push this
   context.modules[moduleRelativeName] = module;
-  if (module.package && module.package.eggBornModule && module.package.eggBornModule.last === true) {
+  if (module.package && module.package.cabloyModule && module.package.cabloyModule.last === true) {
     context.modulesLast.push(module);
   } else {
     context.modulesArray.push(module);
@@ -140,11 +140,11 @@ function __pushModule(context, modules, moduleRelativeName) {
 
 function __orderDependencies(context, modules, module, moduleRelativeName) {
   if (context.options.disableCheckDependencies) return true;
-  if (!module.package.eggBornModule || !module.package.eggBornModule.dependencies) return true;
+  if (!module.package.cabloyModule || !module.package.cabloyModule.dependencies) return true;
 
   let enabled = true;
 
-  const dependencies = module.package.eggBornModule.dependencies;
+  const dependencies = module.package.cabloyModule.dependencies;
   for (const key in dependencies) {
     const subModule = modules[key];
     if (!subModule) {

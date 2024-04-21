@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-pluginmarkdowngithub",
   "version": "5.0.0",
   "title": "cms:plugin:markdowngithub",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "markdowngithub",
       "plugin": true

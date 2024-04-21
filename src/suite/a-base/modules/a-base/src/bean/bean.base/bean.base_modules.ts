@@ -20,7 +20,7 @@ export class BeanBaseModules extends BeanBaseLocales {
         description: this.ctx.text(module.package.description),
         info: module.info,
       };
-      const icon = module.package.eggBornModule && module.package.eggBornModule.icon;
+      const icon = module.package.cabloyModule && module.package.cabloyModule.icon;
       if (icon) {
         _module.icon = icon;
       }

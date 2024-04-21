@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-iconbooster",
   "version": "5.0.0",
   "title": "Icons Booster",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

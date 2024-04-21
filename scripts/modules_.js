@@ -51,7 +51,7 @@ async function main() {
 }
 
 async function main2() {
-  const pattern = `src/**/package.json`;
+  const pattern = 'src/**/package.json';
   const files = await eggBornUtils.tools.globbyAsync(pattern, {
     ignore: [
       '**/node_modules/**',
@@ -90,7 +90,7 @@ async function main2() {
 }
 
 async function main2() {
-  const pattern = `**/package.json`;
+  const pattern = '**/package.json';
   const files = await eggBornUtils.tools.globbyAsync(pattern, {
     ignore: [
       '**/node_modules/**',
@@ -188,7 +188,7 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // BeanModelBase
   let contentNew = contentModel.replace('BeanModelBase, ', '');
   contentNew = contentNew.replace(
-    `'@cabloy/core';`,
+    "'@cabloy/core';",
     `'@cabloy/core';\nimport { BeanModelBase } from 'cabloy-module-api-a-database';\nimport { ${entityNameInterface} } from '../entity/${modelName}.js';\n`,
   );
   contentNew = contentNew.replace('BeanModelBase {', `BeanModelBase<${entityNameInterface}> {`);
@@ -201,9 +201,9 @@ async function _moduleHandle_model({ file, module, processHelper }) {
   console.log(file);
   let contentOld = (await fse.readFile(file)).toString();
   if (contentOld.indexOf('EntityItemBase {') > -1) {
-    contentOld = contentOld.replace(`import {} from '@cabloy/core';`, `import { EntityItemBase } from '@cabloy/core';`);
+    contentOld = contentOld.replace("import {} from '@cabloy/core';", "import { EntityItemBase } from '@cabloy/core';");
   } else {
-    contentOld = contentOld.replace(`import {} from '@cabloy/core';`, `import { EntityBase } from '@cabloy/core';`);
+    contentOld = contentOld.replace("import {} from '@cabloy/core';", "import { EntityBase } from '@cabloy/core';");
   }
   console.log(contentOld);
   await fse.outputFile(file, contentOld);
@@ -354,13 +354,13 @@ declare module '@cabloy/core' {
   }
   //
   if (contentNew.indexOf('import {') > -1) {
-    contentNew = contentNew.replace(`import {`, `${outputNew1.join('\n')}import {`);
+    contentNew = contentNew.replace('import {', `${outputNew1.join('\n')}import {`);
   } else {
-    contentNew = contentNew.replace(`declare module`, `${outputNew1.join('\n')}\n\ndeclare module`);
+    contentNew = contentNew.replace('declare module', `${outputNew1.join('\n')}\n\ndeclare module`);
     // console.log(contentNew);
   }
   contentNew = contentNew.replace(
-    `export interface IBeanRecord {`,
+    'export interface IBeanRecord {',
     `export interface IBeanRecord {\n${outputNew2.join('\n')}`,
   );
   // console.log(contentNew);
@@ -386,7 +386,7 @@ async function _moduleHandle_useScope({ file, module, processHelper }) {
   //   .replace(/import \{ ScopeModule.*? \} from '.*?\/index\.js';/, `import { ScopeModule } from '${fileRelative}';`)
   //   .replace(`extends BeanBase {`, `extends BeanBase<ScopeModule> {`)
   //   .replace(/@Use[\s\S\n]*?scope: ScopeModule.*?;/, '');
-  const contentNew = contentOld.replace(`import { BeanBase, Controller, Use }`, `import { BeanBase, Controller }`);
+  const contentNew = contentOld.replace('import { BeanBase, Controller, Use }', 'import { BeanBase, Controller }');
   // console.log(contentNew);
   await fse.outputFile(file, contentNew);
   await processHelper.formatFile({ fileName: file });
@@ -394,7 +394,7 @@ async function _moduleHandle_useScope({ file, module, processHelper }) {
 
 async function _moduleHandle_typings({ file, module, processHelper }) {
   console.log(file);
-  const contentNew = `import 'cabloy-suite-api-a-base';`;
+  const contentNew = "import 'cabloy-suite-api-a-base';";
   // console.log(contentNew);
   // await fse.outputFile(file, contentNew);
   // await processHelper.formatFile({ fileName: file });
@@ -429,7 +429,7 @@ async function _moduleHandle_super({ file, module, processHelper }) {
   const ast1Src = ast1.generate();
   if (ast1Src.indexOf('super(') > -1) return;
   // 添加super
-  const ast2 = ast1.replace(`constructor($_$) {$$$0}`, `constructor($_$) {\nsuper();\n$$$0\n}`);
+  const ast2 = ast1.replace('constructor($_$) {$$$0}', 'constructor($_$) {\nsuper();\n$$$0\n}');
   const ast2Src = ast2.root().generate();
   // console.log(ast2Src);
   console.log(file);
@@ -474,7 +474,7 @@ async function _moduleHandle_options({ file, module, processHelper }) {
   if (outputNew1.length === 0) {
     return;
   }
-  const contentNew = contentOld.replace(`constructor(`, `${outputNew1.join('\n')}\n\nconstructor(`);
+  const contentNew = contentOld.replace('constructor(', `${outputNew1.join('\n')}\n\nconstructor(`);
   // console.log(contentNew);
   console.log(file);
   // await fse.outputFile(file, contentNew);
@@ -506,7 +506,7 @@ async function _moduleHandle_vars({ file, module, processHelper }) {
   if (outputNew1.length === 0) {
     return;
   }
-  const contentNew = contentOld.replace(`constructor(`, `${outputNew1.join('\n')}\n\nconstructor(`);
+  const contentNew = contentOld.replace('constructor(', `${outputNew1.join('\n')}\n\nconstructor(`);
   // console.log(contentNew);
   console.log(file);
   await fse.outputFile(file, contentNew);
@@ -539,11 +539,11 @@ async function _moduleHandle_thisModule({ file, module, processHelper }) {
 
 async function _moduleHandle_bean({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
-  if (contentOld.indexOf(`export interface IBeanRecord`) === -1) return;
-  if (contentOld.indexOf(`declare module '@cabloy/core'`) > -1) return;
+  if (contentOld.indexOf('export interface IBeanRecord') === -1) return;
+  if (contentOld.indexOf("declare module '@cabloy/core'") > -1) return;
   let contentNew = contentOld.replace(
-    `export interface IBeanRecord`,
-    `declare module '@cabloy/core' {\nexport interface IBeanRecord`,
+    'export interface IBeanRecord',
+    "declare module '@cabloy/core' {\nexport interface IBeanRecord",
   );
   contentNew += '}';
   // console.log(contentNew);
@@ -667,11 +667,11 @@ async function _moduleHandle_atom({ file, module, processHelper }) {
     // console.log(contentMatches);
     let importBase;
     if (module.info.relativeName === 'a-base') {
-      importBase = `import { BeanAtomBase } from '../bean/virtual.atomBase.js';`;
+      importBase = "import { BeanAtomBase } from '../bean/virtual.atomBase.js';";
     } else if (contentOld.indexOf('class.AtomCmsBase') > -1) {
-      importBase = `import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';`;
+      importBase = "import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';";
     } else {
-      importBase = `import { BeanAtomBase } from 'cabloy-module-api-a-base';`;
+      importBase = "import { BeanAtomBase } from 'cabloy-module-api-a-base';";
     }
     const contentNew = `
 import { Atom } from '@cabloy/core';
@@ -911,9 +911,9 @@ export class ${contentMatches[2]} extends BeanBase {
 ${contentMatches[3]}
   `;
   contentNew = contentNew
-    .replace(`const VersionUpdate = require`, `const {VersionUpdate} = await import`)
-    .replace(`const VersionInit = require`, `const {VersionInit} = await import`)
-    .replace(`const VersionTest = require`, `const {VersionTest} = await import`);
+    .replace('const VersionUpdate = require', 'const {VersionUpdate} = await import')
+    .replace('const VersionInit = require', 'const {VersionInit} = await import')
+    .replace('const VersionTest = require', 'const {VersionTest} = await import');
   console.log(contentNew);
   await fse.outputFile(file, contentNew);
   await processHelper.formatFile({ fileName: file });
@@ -936,10 +936,10 @@ async function _moduleHandle_eachFile({ module, processHelper }) {
     }
     console.log(file);
     const contentNew = contentOld
-      .replace(`from '@cabloy/core';`, `from '@cabloy/core';\nimport { __ThisModule__ } from '../resource/this.js';`)
-      .replace(`// const moduleInfo = module.info;`, '')
-      .replace(`const moduleInfo = module.info;`, '')
-      .replaceAll(`moduleInfo.relativeName`, '__ThisModule__');
+      .replace("from '@cabloy/core';", "from '@cabloy/core';\nimport { __ThisModule__ } from '../resource/this.js';")
+      .replace('// const moduleInfo = module.info;', '')
+      .replace('const moduleInfo = module.info;', '')
+      .replaceAll('moduleInfo.relativeName', '__ThisModule__');
     console.log(contentNew);
     await fse.outputFile(file, contentNew);
     await processHelper.formatFile({ fileName: file });
@@ -1036,9 +1036,9 @@ async function _moduleHandle_mixin({ file, module, processHelper }) {
     // 计算importName
     let importName = '';
     if (extendName === 'BeanModuleScopeBase') {
-      importName = ` import { BeanModuleScopeBase } from '@cabloy/core';`;
+      importName = " import { BeanModuleScopeBase } from '@cabloy/core';";
     } else if (extendName === 'BeanBase') {
-      importName = `import { BeanBase } from '@cabloy/core';`;
+      importName = "import { BeanBase } from '@cabloy/core';";
     } else {
       let __classPath = names[index - 1].classPath;
       const pos = __classPath.lastIndexOf('/');
@@ -1373,7 +1373,7 @@ async function _moduleHandle_locales2({ module, processHelper }) {
   import zh_cn`,
     )
     .replace(
-      `'zh-cn': zh_cn,`,
+      "'zh-cn': zh_cn,",
       `'en-us': en_us,
   'zh-cn': zh_cn,`,
     );
@@ -1616,7 +1616,7 @@ export class ${classNameNew} extends BeanBase ${contentMatches[3]}
   // pkgNew.name = pkgOld.name;
   // pkgNew.version = pkgOld.version;
   // if (pkgOld.title) pkgNew.title = pkgOld.title;
-  // pkgNew.eggBornModule = pkgOld.eggBornModule;
+  // pkgNew.cabloyModule = pkgOld.cabloyModule;
   // pkgNew.type = 'module';
   // pkgNew.exports = {
   //   '.': {
@@ -1628,7 +1628,7 @@ export class ${classNameNew} extends BeanBase ${contentMatches[3]}
   // };
   // pkgNew.description = pkgOld.description || '';
   // pkgNew.files = ['dist', 'static', 'typings']; // no need 'utils' 'test', 'cms', 'docs'
-  // if (pkgOld.eggBornModule.cms) {
+  // if (pkgOld.cabloyModule.cms) {
   //   pkgNew.files.push('cms');
   // }
   // pkgNew.scripts = pkgOld.scripts;

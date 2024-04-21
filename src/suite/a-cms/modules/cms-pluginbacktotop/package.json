@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-pluginbacktotop",
   "version": "5.0.0",
   "title": "cms:plugin:backToTop",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "backToTop",
       "plugin": true

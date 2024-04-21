@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-auth",
   "version": "5.0.0",
   "title": "Auth",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 1,
     "dependencies": {
       "a-instance": "5.0.0",

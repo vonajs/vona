@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-pluginarticle",
   "version": "5.0.0",
   "title": "cms:plugin:article",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "article",
       "plugin": true

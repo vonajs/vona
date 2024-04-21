@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-database",
   "version": "5.0.0",
   "title": "a-database",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {}
   },

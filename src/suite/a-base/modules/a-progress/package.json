@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-progress",
   "version": "5.0.0",
   "title": "a-progress",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 3,
     "dependencies": {
       "a-instance": "5.0.0",

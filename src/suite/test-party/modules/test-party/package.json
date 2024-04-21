@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-test-party",
   "version": "5.0.0",
   "title": "Party Test",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 4,
     "icon": ":business:party",
     "cms": {

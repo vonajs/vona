@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-pluginsocialshare",
   "version": "5.0.0",
   "title": "cms:plugin:SocialShare",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "SocialShare",
       "plugin": true

@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-themeblog",
   "version": "5.0.0",
   "title": "cms:theme:blog",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "blog",
       "theme": true

@@ -93,8 +93,8 @@ export class LocalVersion extends BeanBase {
 
     // fileVersionNew
     let fileVersionNew = 0;
-    if (module.package.eggBornModule && module.package.eggBornModule.fileVersion) {
-      fileVersionNew = module.package.eggBornModule.fileVersion;
+    if (module.package.cabloyModule && module.package.cabloyModule.fileVersion) {
+      fileVersionNew = module.package.cabloyModule.fileVersion;
     }
 
     if (fileVersionNew && (!options.scene || options.scene === 'init')) {

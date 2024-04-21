@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-authsms",
   "version": "5.0.0",
   "title": "Auth-SMS",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

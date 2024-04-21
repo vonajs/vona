@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-share",
   "version": "5.0.0",
   "title": "a-share",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 1,
     "dependencies": {
       "a-instance": "5.0.0",

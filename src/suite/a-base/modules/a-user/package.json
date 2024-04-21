@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-user",
   "version": "5.0.0",
   "title": "User",
-  "eggBornModule": {
+  "cabloyModule": {
     "dependencies": {
       "a-base": "5.0.0"
     }

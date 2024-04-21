@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-appbooster",
   "version": "5.0.0",
   "title": "a-appbooster",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

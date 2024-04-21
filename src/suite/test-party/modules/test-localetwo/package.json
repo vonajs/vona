@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-test-localetwo",
   "version": "5.0.0",
   "title": "Locale Two",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "locale": "zh-cn",
     "dependencies": {

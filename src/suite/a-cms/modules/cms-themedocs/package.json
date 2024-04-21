@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-themedocs",
   "version": "5.0.0",
   "title": "cms:theme:docs",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "docs",
       "theme": true

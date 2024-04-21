@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-dictbooster",
   "version": "5.0.0",
   "title": "Dict Booster",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

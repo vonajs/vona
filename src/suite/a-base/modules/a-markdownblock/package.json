@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-markdownblock",
   "version": "5.0.0",
   "title": "Markdown Basic Blocks",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

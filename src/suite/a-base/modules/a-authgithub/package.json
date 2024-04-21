@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-authgithub",
   "version": "5.0.0",
   "title": "Auth-GitHub",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 2,
     "dependencies": {
       "a-instance": "5.0.0",

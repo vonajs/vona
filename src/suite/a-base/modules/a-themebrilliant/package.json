@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-themebrilliant",
   "version": "5.0.0",
   "title": "BrilliantThemeTitle",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 0,
     "theme": true,
     "dependencies": {

@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-baseadmin",
   "version": "5.0.0",
   "title": "Basic Admin",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 3,
     "dependencies": {
       "a-base": "5.0.0"

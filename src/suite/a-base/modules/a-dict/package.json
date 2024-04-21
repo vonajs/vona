@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-a-dict",
   "version": "5.0.0",
   "title": "Dict",
-  "eggBornModule": {
+  "cabloyModule": {
     "fileVersion": 3,
     "dependencies": {
       "a-instance": "5.0.0",

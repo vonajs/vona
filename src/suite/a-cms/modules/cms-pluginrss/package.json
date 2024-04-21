@@ -2,7 +2,7 @@
   "name": "cabloy-module-api-cms-pluginrss",
   "version": "5.0.0",
   "title": "cms:plugin:rss",
-  "eggBornModule": {
+  "cabloyModule": {
     "cms": {
       "name": "rss",
       "plugin": true

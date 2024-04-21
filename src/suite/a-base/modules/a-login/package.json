@@ -1,7 +1,7 @@
 {
   "name": "cabloy-module-api-a-login",
   "version": "5.0.0",
-  "eggBornModule": {
+  "cabloyModule": {
     "dependencies": {}
   },
   "type": "module",
