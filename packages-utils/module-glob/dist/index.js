@@ -106,7 +106,15 @@ async function __loadPackage(modules) {
     const modulesPackage = await Promise.all(promises);
     for (let i = 0; i < modulesPackage.length; i++) {
         const moduleName = modulesArray[i];
-        modules[moduleName].package = JSON.parse(modulesPackage[i].toString());
+        const module = modules[moduleName];
+        module.package = JSON.parse(modulesPackage[i].toString());
+        const capabilities = module.package.cabloyModule?.capabilities;
+        if (capabilities?.icon)
+            module.info.icon = capabilities?.icon;
+        if (capabilities?.monkey)
+            module.info.monkey = capabilities?.monkey;
+        if (capabilities?.sync)
+            module.info.sync = capabilities?.sync;
     }
 }
 function __orderModules(context, modules) {
@@ -139,7 +147,7 @@ function __pushModule(context, modules, moduleRelativeName) {
     }
     // push this
     context.modules[moduleRelativeName] = module;
-    if (module.package && module.package.eggBornModule && module.package.eggBornModule.last === true) {
+    if (module.package && module.package.cabloyModule && module.package.cabloyModule.last === true) {
         context.modulesLast.push(module);
     }
     else {
@@ -150,10 +158,10 @@ function __pushModule(context, modules, moduleRelativeName) {
 function __orderDependencies(context, modules, module, moduleRelativeName) {
     if (context.options.disableCheckDependencies)
         return true;
-    if (!module.package.eggBornModule || !module.package.eggBornModule.dependencies)
+    if (!module.package.cabloyModule || !module.package.cabloyModule.dependencies)
         return true;
     let enabled = true;
-    const dependencies = module.package.eggBornModule.dependencies;
+    const dependencies = module.package.cabloyModule.dependencies;
     for (const key in dependencies) {
         const subModule = modules[key];
         if (!subModule) {
