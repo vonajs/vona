@@ -38,8 +38,6 @@ export function parseInfo(moduleName: string | undefined): IModuleInfo | undefin
     url: `${parts[0]}/${parts[1]}`,
     originalName: parts.join('-'),
   } as IModuleInfo;
-  if (parts[2] === 'sync') info.sync = true;
-  if (parts[2] === 'monkey') info.monkey = true;
   return info;
 }
 
@@ -50,10 +48,7 @@ export function parseInfoPro(
 ): IModuleInfo | undefined {
   const info = parseInfo(moduleName);
   if (!info) return info;
-  let fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
-  if (info.sync) fullName = `${fullName}-sync`;
-  if (info.monkey) fullName = `${fullName}-monkey`;
-  info.fullName = fullName;
+  info.fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
   return info;
 }
 
