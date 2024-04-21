@@ -28,7 +28,12 @@ export interface IModule extends ISuiteModuleBase {
 export interface IModulePackage {
     name: string;
     version: string;
-    eggBornModule: {
+    cabloyModule: {
+        capabilities: {
+            monkey: boolean;
+            sync: boolean;
+            icon: boolean;
+        };
         fileVersion: number;
         dependencies: Record<string, string>;
         theme: object;
