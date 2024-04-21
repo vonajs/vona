@@ -9,6 +9,7 @@ export interface IModuleInfo {
   url: string;
   sync?: boolean;
   monkey?: boolean;
+  icon?: boolean;
   vendor?: boolean;
   node_modules?: boolean;
   originalName: string;

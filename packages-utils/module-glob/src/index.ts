@@ -93,7 +93,12 @@ async function __loadPackage(modules: Record<string, ISuiteModuleBase>) {
   const modulesPackage = await Promise.all(promises);
   for (let i = 0; i < modulesPackage.length; i++) {
     const moduleName = modulesArray[i];
-    modules[moduleName].package = JSON.parse(modulesPackage[i].toString());
+    const module = modules[moduleName];
+    module.package = JSON.parse(modulesPackage[i].toString());
+    const capabilities = module.package.cabloyModule?.capabilities;
+    if (capabilities?.icon) module.info.icon = capabilities?.icon;
+    if (capabilities?.monkey) module.info.monkey = capabilities?.monkey;
+    if (capabilities?.sync) module.info.sync = capabilities?.sync;
   }
 }
 
