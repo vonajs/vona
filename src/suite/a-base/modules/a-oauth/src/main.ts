@@ -1,14 +1,14 @@
-import { BeanBase, IModule, IModuleMain } from '@cabloy/core';
+import { BeanSimple, IModuleMain } from '@cabloy/core';
 // import { LocalSessionStore } from './local/sessionStore.js';
 
-export class Main extends BeanBase implements IModuleMain {
-  async moduleLoading(_module: IModule) {}
-  async moduleLoaded(_module: IModule) {
+export class Main extends BeanSimple implements IModuleMain {
+  async moduleLoading() {}
+  async moduleLoaded() {
     if (this.app.meta.inApp) {
       // sessionStore
       // (<any>this.app).sessionStore = this.app.bean._getBean(LocalSessionStore);
     }
   }
-  async configLoaded(_module: IModule, _config) {}
-  async metaLoaded(_module: IModule, _meta) {}
+  async configLoaded(_config) {}
+  async metaLoaded(_meta) {}
 }

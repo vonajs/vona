@@ -1,6 +1,6 @@
-import { BeanBase, IModule, IMonkeyApp } from '@cabloy/core';
+import { BeanSimple, IModule, IMonkeyApp } from '@cabloy/core';
 
-export class Monkey extends BeanBase implements IMonkeyApp {
+export class Monkey extends BeanSimple implements IMonkeyApp {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
   async configLoaded(_module: IModule, _config) {}

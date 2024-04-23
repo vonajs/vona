@@ -1,4 +1,4 @@
-import { BeanBase, IModule, IMonkeyModule } from '@cabloy/core';
+import { BeanSimple, IModule, IMonkeyModule } from '@cabloy/core';
 import { __ThisModule__ } from './resource/this.js';
 
 function monkeyRoute(module: IModule, routePath, routeController) {
@@ -12,8 +12,8 @@ function monkeyConfig(_module, config) {
   config.monkeyed = true;
 }
 
-export class Monkey extends BeanBase implements IMonkeyModule {
-  async moduleLoading(_moduleSelf: IModule, module: IModule) {
+export class Monkey extends BeanSimple implements IMonkeyModule {
+  async moduleLoading(module: IModule) {
     if (module.info.relativeName !== 'test-party') return;
     // route
     monkeyRoute(module, 'test/monkey/monkeyee/test', {
@@ -21,11 +21,11 @@ export class Monkey extends BeanBase implements IMonkeyModule {
       name: 'monkeyer',
     });
   }
-  async moduleLoaded(_moduleSelf: IModule, _module: IModule) {}
-  async configLoaded(_moduleSelf: IModule, module: IModule, config) {
+  async moduleLoaded(_module: IModule) {}
+  async configLoaded(module: IModule, config) {
     if (module.info.relativeName !== 'test-party') return;
     // config
     monkeyConfig(module, config);
   }
-  async metaLoaded(_moduleSelf: IModule, _module: IModule, _meta) {}
+  async metaLoaded(_module: IModule, _meta) {}
 }

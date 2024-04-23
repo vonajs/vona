@@ -6,7 +6,7 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { CabloyContext, Cast, IModule, PowerPartial } from '../../types/index.js';
+import { CabloyContext, Cast, IModule, PowerPartial, TypeMonkeyName } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -82,7 +82,13 @@ export class AppUtil extends BeanSimple {
     return error;
   }
 
-  async monkeyModule(ebAppMonkey, ebModulesMonkey, monkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
+  async monkeyModule(
+    ebAppMonkey,
+    ebModulesMonkey,
+    monkeyName: TypeMonkeyName,
+    moduleTarget?: IModule,
+    ...monkeyData: any[]
+  ) {
     // self: main
     if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
       await moduleTarget.mainInstance[monkeyName](...monkeyData);
