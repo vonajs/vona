@@ -9,10 +9,10 @@ export interface IMonkeyApp {
 }
 
 export interface IModuleMain {
-  moduleLoading(module: IModule): Promise<void>;
-  moduleLoaded(module: IModule): Promise<void>;
-  configLoaded(module: IModule, config: any): Promise<void>;
-  metaLoaded(module: IModule, meta: any): Promise<void>;
+  moduleLoading(): Promise<void>;
+  moduleLoaded(): Promise<void>;
+  configLoaded(config: any): Promise<void>;
+  metaLoaded(meta: any): Promise<void>;
 }
 
 export interface IModuleMainContext {
@@ -20,8 +20,8 @@ export interface IModuleMainContext {
 }
 
 export interface IMonkeyModule {
-  moduleLoading(moduleSelf: IModule, module: IModule): Promise<void>;
-  moduleLoaded(moduleSelf: IModule, module: IModule): Promise<void>;
-  configLoaded(moduleSelf: IModule, module: IModule, config: any): Promise<void>;
-  metaLoaded(moduleSelf: IModule, module: IModule, meta: any): Promise<void>;
+  moduleLoading(module: IModule): Promise<void>;
+  moduleLoaded(module: IModule): Promise<void>;
+  configLoaded(module: IModule, config: any): Promise<void>;
+  metaLoaded(module: IModule, meta: any): Promise<void>;
 }

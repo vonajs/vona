@@ -51,10 +51,10 @@ export class ModuleTools extends BeanSimple {
     // 3. main / monkey
     for (const module of app.meta.modulesArray) {
       if (module.resource.Main) {
-        module.mainInstance = app.bean._newBean(module.resource.Main);
+        module.mainInstance = app.bean._newBean(module.resource.Main, module);
       }
       if (module.resource.Monkey) {
-        module.monkeyInstance = app.bean._newBean(module.resource.Monkey);
+        module.monkeyInstance = app.bean._newBean(module.resource.Monkey, module);
         app.meta.modulesMonkey[module.info.relativeName] = module;
       }
     }
@@ -63,7 +63,7 @@ export class ModuleTools extends BeanSimple {
   async monkey(monkeyName) {
     const app = this.app;
     for (const module of app.meta.modulesArray) {
-      await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, [module]);
+      await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, monkeyName, module);
     }
   }
 
