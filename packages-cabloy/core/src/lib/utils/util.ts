@@ -98,8 +98,10 @@ export class AppUtil extends BeanSimple {
       const moduleMonkey: IModule = ebModulesMonkey[key];
       if (moduleMonkey.monkeyInstance && moduleMonkey.monkeyInstance[monkeyName]) {
         if (moduleTarget === undefined) {
+          // @ts-ignore ignore
           await moduleMonkey.monkeyInstance[monkeyName](...monkeyData);
         } else {
+          // @ts-ignore ignore
           await moduleMonkey.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
         }
       }

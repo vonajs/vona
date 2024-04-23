@@ -4,7 +4,7 @@ import { AppReload } from '../module/reload/reload.js';
 import { AppUtil } from '../utils/util.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
-import { IMonkeyApp } from '../../types/interface/monkey.js';
+import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
 import { AppRouter } from '../module/route.js';
 import { AppLimiter, AppRedlock } from '../module/redis.js';
 import { QueueClient } from '../module/queue/queueClient.js';
@@ -24,7 +24,7 @@ export class AppMeta extends BeanSimple {
   mockUtil: AppMockUtil;
   reload: AppReload;
   messenger: AppMessenger;
-  appMonkey?: IMonkeyApp;
+  appMonkey?: IMonkeyApp & IMonkeySystem;
   router: AppRouter;
   limiter: AppLimiter;
   redlock: AppRedlock;

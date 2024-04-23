@@ -1,13 +1,13 @@
 import { IModuleRoute } from '../../lib/bean/resource/route/type.js';
 import { CabloyApplication } from '../application/app.js';
-import { IModuleMain, IModuleMainContext, IMonkeyModule } from './monkey.js';
+import { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
 
 export * from '@cabloy/module-info';
 
 // todo:
 export interface IModuleResource {
-  Main: new () => IModuleMain & IModuleMainContext;
-  Monkey: new () => IMonkeyModule;
+  Main: new () => IModuleMain;
+  Monkey: new () => IMonkeyModule & IMonkeySystem;
   locales: Record<string, any>;
   Errors: Record<number, string>;
   config: (app: CabloyApplication) => object | Promise<object>;
@@ -26,7 +26,7 @@ declare module '@cabloy/module-info' {
   export interface IModule {
     resource: IModuleResource;
     meta: IModuleMeta;
-    mainInstance: IModuleMain & IModuleMainContext;
-    monkeyInstance: IMonkeyModule;
+    mainInstance: IModuleMain;
+    monkeyInstance: IMonkeyModule & IMonkeySystem;
   }
 }
