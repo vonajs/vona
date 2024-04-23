@@ -3,6 +3,9 @@
   "version": "5.0.0",
   "title": "a-database",
   "cabloyModule": {
+    "capabilities": {
+      "monkey": true
+    },
     "fileVersion": 0,
     "dependencies": {}
   },
