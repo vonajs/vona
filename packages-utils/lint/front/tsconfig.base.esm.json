@@ -4,6 +4,6 @@
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "lib": ["esnext", "dom"],
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   }
 }
