@@ -22,7 +22,7 @@ miniprogram_npm
 
 # package-lock.json
 
-env/.env*.local
+env/.env*.mine
 
 # auto created
 /tsconfig.json
