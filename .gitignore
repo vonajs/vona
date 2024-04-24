@@ -27,6 +27,7 @@ miniprogram_npm
 /cabloy.json
 
 # should pre-compiled
+!packages-utils/dotenv/dist
 !packages-utils/extend/dist
 !packages-utils/process-helper/dist
 !packages-utils/module-glob/dist
