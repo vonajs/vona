@@ -1,6 +1,7 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
-import { loadEnvs } from '@cabloy/dotenv';
+import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
+import { extend } from '@cabloy/extend';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {
@@ -25,8 +26,18 @@ function createLoaderClass(Base) {
       const meta = { serverEnv: this.serverEnv, mine: 'mine' };
       const projectPath = path.join(this.options.baseDir, '../..');
       const envDir = path.join(projectPath, 'env');
-      const envs = loadEnvs(meta, envDir, '.env');
-      console.log(envs);
+      loadEnvs(meta, envDir, '.env');
+      // load config
+      const configDir = path.join(this.options.baseDir, 'config/config');
+      const files = getEnvFiles(meta, configDir, 'config', '.js');
+      if (!files) return;
+      const target = this.config;
+      for (const file of files) {
+        const config = this.loadFile(file, this.appInfo);
+        if (config) {
+          extend(true, target, config);
+        }
+      }
     }
   };
 }
