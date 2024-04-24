@@ -1,5 +1,6 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
+import { loadEnvs } from '@cabloy/dotenv';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {
@@ -20,7 +21,12 @@ function createLoaderClass(Base) {
     }
 
     _loadEnvAndConfig() {
-      // load env
+      // load envs
+      const meta = { serverEnv: this.serverEnv };
+      const baseDir = this.options.baseDir;
+      const envDir = path.join(baseDir, 'config/env');
+      const envs = loadEnvs(meta, envDir, '.env');
+      console.log(envs);
     }
   };
 }
