@@ -7,6 +7,7 @@ function createLoaderClass(Base) {
 
     loadConfig() {
       super.loadConfig();
+      this._loadEnvAndConfig();
       this.app.subdomainOffset = typeof this.config.subdomainOffset === 'undefined' ? 2 : this.config.subdomainOffset;
     }
 
@@ -16,6 +17,10 @@ function createLoaderClass(Base) {
         this.pkg.name = this.pkgCabloy.name;
       }
       return this.pkgCabloy.name;
+    }
+
+    _loadEnvAndConfig() {
+      // load env
     }
   };
 }
