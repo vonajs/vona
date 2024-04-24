@@ -13,3 +13,4 @@ console.log(configFiles);
 
 const env = loadEnvs(meta, envDir);
 console.log(env);
+// console.log(process.env);

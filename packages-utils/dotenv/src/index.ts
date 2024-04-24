@@ -1,14 +1,20 @@
 import eggBornUtils from 'egg-born-utils';
 import { cascadeExtendKeys } from 'cascade-extend';
 import dotenv from 'dotenv';
+import dotenvExpand from 'dotenv-expand';
 
 export function loadEnvs(meta: object, dir: string, prefix: string = '.env', postfix?: string): object | undefined {
+  // envfiles
   const envFiles = getEnvFiles(meta, dir, prefix, postfix);
   if (!envFiles) return undefined;
+  // dotenv
   const result = dotenv.config({ path: envFiles.reverse() });
   if (result.error) {
     throw result.error;
   }
+  // expand
+  dotenvExpand.expand(result);
+  // ok
   return result.parsed;
 }
 

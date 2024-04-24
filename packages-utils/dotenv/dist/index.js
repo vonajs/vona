@@ -7,14 +7,20 @@ exports.getEnvFiles = exports.metaToScope = exports.loadEnvs = void 0;
 const egg_born_utils_1 = __importDefault(require("egg-born-utils"));
 const cascade_extend_1 = require("cascade-extend");
 const dotenv_1 = __importDefault(require("dotenv"));
+const dotenv_expand_1 = __importDefault(require("dotenv-expand"));
 function loadEnvs(meta, dir, prefix = '.env', postfix) {
+    // envfiles
     const envFiles = getEnvFiles(meta, dir, prefix, postfix);
     if (!envFiles)
         return undefined;
+    // dotenv
     const result = dotenv_1.default.config({ path: envFiles.reverse() });
     if (result.error) {
         throw result.error;
     }
+    // expand
+    dotenv_expand_1.default.expand(result);
+    // ok
     return result.parsed;
 }
 exports.loadEnvs = loadEnvs;
