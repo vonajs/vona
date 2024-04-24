@@ -6,7 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getEnvFiles = exports.metaToScope = exports.loadEnvs = void 0;
 const egg_born_utils_1 = __importDefault(require("egg-born-utils"));
 const cascade_extend_1 = require("cascade-extend");
-function loadEnvs(_meta, _dir, _prefix = '.env', _postfix) { }
+const dotenv_1 = __importDefault(require("dotenv"));
+function loadEnvs(meta, dir, prefix = '.env', postfix) {
+    const envFiles = getEnvFiles(meta, dir, prefix, postfix);
+    if (!envFiles)
+        return undefined;
+    const result = dotenv_1.default.config({ path: envFiles.reverse() });
+    if (result.error) {
+        throw result.error;
+    }
+    return result.parsed;
+}
 exports.loadEnvs = loadEnvs;
 function metaToScope(meta) {
     const scope = {};

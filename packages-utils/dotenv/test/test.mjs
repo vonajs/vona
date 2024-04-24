@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { getEnvFiles } from '../dist/index.js';
+import { loadEnvs, getEnvFiles } from '../dist/index.js';
 
 const meta = { serverEnv: 'unittest' };
 const envDir = path.join(process.cwd(), 'src/backend/config/env');
@@ -10,3 +10,6 @@ console.log(envFiles);
 
 const configFiles = getEnvFiles(meta, configDir, 'config', '.ts');
 console.log(configFiles);
+
+const env = loadEnvs(meta, envDir);
+console.log(env);

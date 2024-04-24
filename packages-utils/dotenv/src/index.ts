@@ -1,7 +1,16 @@
 import eggBornUtils from 'egg-born-utils';
 import { cascadeExtendKeys } from 'cascade-extend';
+import dotenv from 'dotenv';
 
-export function loadEnvs(_meta: object, _dir: string, _prefix: string = '.env', _postfix?: string) {}
+export function loadEnvs(meta: object, dir: string, prefix: string = '.env', postfix?: string): object | undefined {
+  const envFiles = getEnvFiles(meta, dir, prefix, postfix);
+  if (!envFiles) return undefined;
+  const result = dotenv.config({ path: envFiles.reverse() });
+  if (result.error) {
+    throw result.error;
+  }
+  return result.parsed;
+}
 
 export function metaToScope(meta: object) {
   const scope = {};
@@ -11,7 +20,7 @@ export function metaToScope(meta: object) {
   return scope;
 }
 
-export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?: string) {
+export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?: string): string[] | undefined {
   // files
   const pattern = [`${dir}/${prefix}*`];
   let files: string[] = eggBornUtils.tools.globbySync(pattern);
