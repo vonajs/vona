@@ -1,0 +1,37 @@
+{
+  "name": "@cabloy/dotenv",
+  "version": "1.0.0",
+  "description": "cabloy dotenv",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "cabloy"
+  ],
+  "author": "zhennann",
+  "dependencies": {
+    "cascade-extend": "^1.0.3"
+  }
+}
