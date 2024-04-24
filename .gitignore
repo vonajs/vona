@@ -22,6 +22,8 @@ miniprogram_npm
 
 # package-lock.json
 
+env/.env*.local
+
 # auto created
 /tsconfig.json
 /cabloy.json
