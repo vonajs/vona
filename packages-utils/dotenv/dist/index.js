@@ -19,7 +19,7 @@ exports.metaToScope = metaToScope;
 function getEnvFiles(meta, dir, prefix, postfix) {
     // files
     const pattern = [`${dir}/${prefix}*`];
-    const files = egg_born_utils_1.default.tools.globbySync(pattern);
+    let files = egg_born_utils_1.default.tools.globbySync(pattern);
     const fileNames = files.map(item => {
         item = item.substring(dir.length + 1);
         if (postfix) {
@@ -34,8 +34,19 @@ function getEnvFiles(meta, dir, prefix, postfix) {
     }
     // scope
     const scope = metaToScope(meta);
+    // extend
     const keys = (0, cascade_extend_1.cascadeExtendKeys)(scope, source, prefix, '.');
-    return keys;
+    if (!keys)
+        return undefined;
+    // files
+    files = keys.map(key => {
+        let file = `${dir}/${key}`;
+        if (postfix) {
+            file = `${file}${postfix}`;
+        }
+        return file;
+    });
+    return files;
 }
 exports.getEnvFiles = getEnvFiles;
 //# sourceMappingURL=index.js.map

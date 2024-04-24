@@ -14,7 +14,7 @@ export function metaToScope(meta: object) {
 export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?: string) {
   // files
   const pattern = [`${dir}/${prefix}*`];
-  const files: string[] = eggBornUtils.tools.globbySync(pattern);
+  let files: string[] = eggBornUtils.tools.globbySync(pattern);
   const fileNames = files.map(item => {
     item = item.substring(dir.length + 1);
     if (postfix) {
@@ -29,6 +29,16 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?:
   }
   // scope
   const scope = metaToScope(meta);
+  // extend
   const keys = cascadeExtendKeys(scope, source, prefix, '.');
-  return keys;
+  if (!keys) return undefined;
+  // files
+  files = keys.map(key => {
+    let file = `${dir}/${key}`;
+    if (postfix) {
+      file = `${file}${postfix}`;
+    }
+    return file;
+  });
+  return files;
 }
