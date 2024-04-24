@@ -22,7 +22,7 @@ function createLoaderClass(Base) {
 
     _loadEnvAndConfig() {
       // load envs
-      const meta = { serverEnv: this.serverEnv };
+      const meta = { serverEnv: this.serverEnv, mine: 'mine' };
       const projectPath = path.join(this.options.baseDir, '../..');
       const envDir = path.join(projectPath, 'env');
       const envs = loadEnvs(meta, envDir, '.env');
