@@ -31,6 +31,8 @@ export async function glob(options: IModuleGlobOptions) {
     modulesLocal: {},
     modulesGlobal: {},
     modulesMonkey: {},
+    modulesSync: {},
+    modulesIcon: {},
     //
     suitesLocal: {},
     suitesVendor: {},
@@ -60,6 +62,10 @@ export async function glob(options: IModuleGlobOptions) {
   if (projectMode === 'api' && loadPackage !== false) {
     __orderModules(context, modules);
   } else {
+    for (const moduleName in modules) {
+      const module = modules[moduleName];
+      context.modulesArray.push(module);
+    }
     context.modules = modules;
   }
 
@@ -73,12 +79,12 @@ export async function glob(options: IModuleGlobOptions) {
     modules: context.modules,
     modulesArray: context.modulesArray,
     //
-    modulesLocal: context.modulesLocal,
-    modulesGlobal: context.modulesGlobal,
-    modulesMonkey: context.modulesMonkey,
+    // modulesLocal: context.modulesLocal,
+    // modulesGlobal: context.modulesGlobal,
+    // modulesMonkey: context.modulesMonkey,
     //
-    suitesLocal: context.suitesLocal,
-    suitesVendor: context.suitesVendor,
+    // suitesLocal: context.suitesLocal,
+    // suitesVendor: context.suitesVendor,
   };
 }
 
@@ -221,6 +227,12 @@ function __logModules(context, log) {
     if (module.info.monkey) {
       context.modulesMonkey[relativeName] = module;
     }
+    if (module.info.sync) {
+      context.modulesSync[relativeName] = module;
+    }
+    if (module.info.icon) {
+      context.modulesIcon[relativeName] = module;
+    }
     if (module.info.public) {
       context.modulesGlobal[relativeName] = module;
     } else {
@@ -239,6 +251,14 @@ function __logModules(context, log) {
   }
   console.log(chalk.yellow('\n=== Monkey Modules ==='));
   for (const key in context.modulesMonkey) {
+    console.log(chalk.cyan('> ' + key));
+  }
+  console.log(chalk.yellow('\n=== Sync Modules ==='));
+  for (const key in context.modulesSync) {
+    console.log(chalk.cyan('> ' + key));
+  }
+  console.log(chalk.yellow('\n=== Icon Modules ==='));
+  for (const key in context.modulesIcon) {
     console.log(chalk.cyan('> ' + key));
   }
   console.log(chalk.keyword('orange')(`\n=== Total Modules: ${context.modulesArray.length} ===`));

@@ -48,6 +48,8 @@ async function glob(options) {
         modulesLocal: {},
         modulesGlobal: {},
         modulesMonkey: {},
+        modulesSync: {},
+        modulesIcon: {},
         //
         suitesLocal: {},
         suitesVendor: {},
@@ -75,6 +77,10 @@ async function glob(options) {
         __orderModules(context, modules);
     }
     else {
+        for (const moduleName in modules) {
+            const module = modules[moduleName];
+            context.modulesArray.push(module);
+        }
         context.modules = modules;
     }
     // log
@@ -86,12 +92,12 @@ async function glob(options) {
         modules: context.modules,
         modulesArray: context.modulesArray,
         //
-        modulesLocal: context.modulesLocal,
-        modulesGlobal: context.modulesGlobal,
-        modulesMonkey: context.modulesMonkey,
+        // modulesLocal: context.modulesLocal,
+        // modulesGlobal: context.modulesGlobal,
+        // modulesMonkey: context.modulesMonkey,
         //
-        suitesLocal: context.suitesLocal,
-        suitesVendor: context.suitesVendor,
+        // suitesLocal: context.suitesLocal,
+        // suitesVendor: context.suitesVendor,
     };
 }
 exports.glob = glob;
@@ -228,6 +234,12 @@ function __logModules(context, log) {
         if (module.info.monkey) {
             context.modulesMonkey[relativeName] = module;
         }
+        if (module.info.sync) {
+            context.modulesSync[relativeName] = module;
+        }
+        if (module.info.icon) {
+            context.modulesIcon[relativeName] = module;
+        }
         if (module.info.public) {
             context.modulesGlobal[relativeName] = module;
         }
@@ -248,6 +260,14 @@ function __logModules(context, log) {
     }
     console.log(chalk_1.default.yellow('\n=== Monkey Modules ==='));
     for (const key in context.modulesMonkey) {
+        console.log(chalk_1.default.cyan('> ' + key));
+    }
+    console.log(chalk_1.default.yellow('\n=== Sync Modules ==='));
+    for (const key in context.modulesSync) {
+        console.log(chalk_1.default.cyan('> ' + key));
+    }
+    console.log(chalk_1.default.yellow('\n=== Icon Modules ==='));
+    for (const key in context.modulesIcon) {
         console.log(chalk_1.default.cyan('> ' + key));
     }
     console.log(chalk_1.default.keyword('orange')(`\n=== Total Modules: ${context.modulesArray.length} ===`));

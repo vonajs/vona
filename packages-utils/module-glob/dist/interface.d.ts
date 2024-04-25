@@ -16,6 +16,8 @@ export interface IModuleGlobContext {
     modulesLocal: Record<string, IModule>;
     modulesGlobal: Record<string, IModule>;
     modulesMonkey: Record<string, IModule>;
+    modulesSync: Record<string, IModule>;
+    modulesIcon: Record<string, IModule>;
     suitesLocal: Record<string, ISuite>;
     suitesVendor: Record<string, ISuite>;
     disabledModules: Record<string, boolean>;
