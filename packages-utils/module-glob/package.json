@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/module-glob",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "description": "cabloy module-glob",
   "publishConfig": {
     "access": "public"

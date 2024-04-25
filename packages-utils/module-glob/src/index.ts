@@ -100,7 +100,9 @@ async function __loadPackage(modules: Record<string, ISuiteModuleBase>) {
 
 function __orderModules(context, modules) {
   // 'a-version' first
-  __pushModule(context, modules, 'a-version');
+  if (modules['a-version']) {
+    __pushModule(context, modules, 'a-version');
+  }
   // others
   for (const key in modules) {
     if (key !== 'a-version') {
