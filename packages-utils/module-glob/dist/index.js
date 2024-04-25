@@ -36,7 +36,7 @@ const boxenOptions = {
 };
 // type: front/backend
 async function glob(options) {
-    const { projectPath, disabledModules, disabledSuites, log, projectMode, loadPackage } = options;
+    const { projectPath, disabledModules, disabledSuites, log, projectMode } = options;
     // context
     const context = {
         options,
@@ -64,25 +64,14 @@ async function glob(options) {
     // parse modules
     const modules = __parseModules(context, projectPath);
     // load package
-    if (loadPackage !== false) {
-        await __loadPackage(suites);
-        await __loadPackage(modules);
-    }
+    await __loadPackage(suites);
+    await __loadPackage(modules);
     // bind suites modules
     __bindSuitesModules(suites, modules);
     // check suites
     __checkSuites(context, suites);
     // order
-    if (projectMode === 'api' && loadPackage !== false) {
-        __orderModules(context, modules);
-    }
-    else {
-        for (const moduleName in modules) {
-            const module = modules[moduleName];
-            context.modulesArray.push(module);
-        }
-        context.modules = modules;
-    }
+    __orderModules(context, modules);
     // log
     __logModules(context, log);
     __logSuites(context, log);

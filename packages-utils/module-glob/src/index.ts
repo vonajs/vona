@@ -19,7 +19,7 @@ const boxenOptions: boxen.Options = {
 
 // type: front/backend
 export async function glob(options: IModuleGlobOptions) {
-  const { projectPath, disabledModules, disabledSuites, log, projectMode, loadPackage } = options;
+  const { projectPath, disabledModules, disabledSuites, log, projectMode } = options;
   // context
   const context: IModuleGlobContext = {
     options,
@@ -48,10 +48,8 @@ export async function glob(options: IModuleGlobOptions) {
   // parse modules
   const modules = __parseModules(context, projectPath);
   // load package
-  if (loadPackage !== false) {
-    await __loadPackage(suites);
-    await __loadPackage(modules);
-  }
+  await __loadPackage(suites);
+  await __loadPackage(modules);
   // bind suites modules
   __bindSuitesModules(suites, modules);
 
@@ -59,15 +57,7 @@ export async function glob(options: IModuleGlobOptions) {
   __checkSuites(context, suites);
 
   // order
-  if (projectMode === 'api' && loadPackage !== false) {
-    __orderModules(context, modules);
-  } else {
-    for (const moduleName in modules) {
-      const module = modules[moduleName];
-      context.modulesArray.push(module);
-    }
-    context.modules = modules;
-  }
+  __orderModules(context, modules);
 
   // log
   __logModules(context, log);
