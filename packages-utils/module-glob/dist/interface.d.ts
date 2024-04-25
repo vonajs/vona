@@ -1,7 +1,7 @@
 import { IModule, ISuite, TypeProjectMode } from '@cabloy/module-info';
 export interface IModuleGlobOptions {
-    projectPath: string;
     projectMode: TypeProjectMode;
+    projectPath: string;
     disabledModules?: string[];
     disabledSuites?: string[];
     log?: boolean;

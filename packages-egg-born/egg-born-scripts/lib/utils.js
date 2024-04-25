@@ -214,12 +214,11 @@ const utils = {
     const projectPath = this.getProjectDir();
     // glob
     const { suites, modules } = await glob({
+      projectMode: 'api',
       projectPath,
       disabledModules: null,
       disabledSuites: null,
       log: false,
-      projectMode: 'api',
-      loadPackage: false,
     });
     await this.prepareProjectTypes({ suites, modules });
     await this.prepareProjectTsConfig({ suites, modules, env });

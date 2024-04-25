@@ -14,12 +14,11 @@ export class ModuleTools extends BeanSimple {
     const app = this.app;
     // all modules
     const { suites, modules, modulesArray } = await glob({
+      projectMode: 'api',
       projectPath: path.join(app.options.baseDir, '../..'),
       disabledModules: app.config.disabledModules,
       disabledSuites: app.config.disabledSuites,
       log: !!app.meta.inAgent,
-      projectMode: 'api',
-      loadPackage: true,
     });
     app.meta.suites = suites;
     app.meta.modules = modules;
