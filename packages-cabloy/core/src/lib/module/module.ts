@@ -33,7 +33,7 @@ export class ModuleTools extends BeanSimple {
     }
     if (fse.existsSync(pathAppMonkey)) {
       const AppMonkey = await import(pathAppMonkey);
-      app.meta.appMonkey = app.bean._newBean(AppMonkey.Monkey);
+      app.meta.appMonkey = app.bean._newBean(AppMonkey.AppMonkey);
     }
     return modules;
   }
