@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/ensure-array",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "cabloy ensure array",
   "publishConfig": {
     "access": "public"
@@ -31,10 +31,5 @@
     "cabloy"
   ],
   "author": "zhennann",
-  "dependencies": {
-    "cascade-extend": "^1.0.3",
-    "dotenv": "^16.4.5",
-    "dotenv-expand": "^11.0.6",
-    "egg-born-utils": "^1.1.9"
-  }
+  "dependencies": {}
 }
