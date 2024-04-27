@@ -16,8 +16,8 @@ export class ModuleTools extends BeanSimple {
     const { suites, modules, modulesArray } = await glob({
       projectMode: 'api',
       projectPath: path.join(app.options.baseDir, '../..'),
-      disabledModules: app.config.disabledModules,
-      disabledSuites: app.config.disabledSuites,
+      disabledModules: process.env.Project_Disabled_Modules,
+      disabledSuites: process.env.Project_Disabled_Suites,
       log: !!app.meta.inAgent,
     });
     app.meta.suites = suites;

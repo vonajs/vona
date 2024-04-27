@@ -1,10 +1,5 @@
 export default {
-  base: {
-    disabledModules: [],
-    disabledSuites: [
-      // 'test-party',
-    ],
-  },
+  base: {},
   api: {},
   layout: {},
   markdown: {},

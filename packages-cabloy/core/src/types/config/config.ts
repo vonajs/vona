@@ -5,8 +5,6 @@ import { ConfigDevelopment } from './development.js';
 
 // @ts-ignore ignore the throw type check of 'development'
 export interface CabloyConfig extends EggAppConfig {
-  disabledModules: string[];
-  disabledSuites: string[];
   modules: IBeanScopeConfig;
   development: ConfigDevelopment;
 }

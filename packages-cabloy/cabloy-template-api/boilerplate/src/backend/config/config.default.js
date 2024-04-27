@@ -4,12 +4,6 @@ module.exports = appInfo => {
   // keys
   config.keys = appInfo.name + '_{{safeKeys}}';
 
-  // disabledModules
-  config.disabledModules = [];
-
-  // disabledSuites
-  config.disabledSuites = [];
-
   // subdomainOffset
   config.subdomainOffset = 2;
 

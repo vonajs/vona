@@ -4,12 +4,6 @@ module.exports = appInfo => {
   // keys
   config.keys = appInfo.name + '_{{safeKeys}}';
 
-  // disabledModules
-  config.disabledModules = [];
-
-  // disabledSuites
-  config.disabledSuites = [];
-
   // instances
   config.instances = [
     {
