@@ -219,8 +219,8 @@ const utils = {
     const { suites, modules } = await glob({
       projectMode: 'api',
       projectPath,
-      disabledModules: null,
-      disabledSuites: null,
+      disabledModules: undefined,
+      disabledSuites: undefined,
       log: false,
     });
     await this.prepareProjectTypes({ suites, modules });

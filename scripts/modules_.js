@@ -30,11 +30,11 @@ async function main() {
 
   // modules
   const { modules, modulesArray, suites } = await glob({
+    projectMode: 'api',
     projectPath: process.cwd(),
-    disabledModules: null,
+    disabledModules: undefined,
     disabledSuites: null,
     log: true,
-    projectMode: 'api',
   });
   console.log('modules: ', modulesArray.length);
 
