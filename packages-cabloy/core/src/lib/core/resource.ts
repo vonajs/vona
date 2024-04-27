@@ -3,6 +3,7 @@ import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } fr
 import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { isClass } from '../utils/isClass.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
@@ -91,7 +92,7 @@ export class AppResource extends BeanSimple {
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
-    if (typeof beanFullName === 'function' && is.class(beanFullName)) {
+    if (typeof beanFullName === 'function' && isClass(beanFullName)) {
       fullName = appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
     } else {
       fullName = beanFullName as string;

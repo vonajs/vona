@@ -14,3 +14,4 @@ export * from './lib/core/index.js';
 export * from './lib/decorator/index.js';
 export * from './lib/module/index.js';
 export * from './lib/framework/framework.js';
+export * from './lib/utils/index.js';

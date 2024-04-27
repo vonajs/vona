@@ -1,4 +1,3 @@
-import is from 'is-type-of';
 import { CabloyApplication, CabloyContext } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
@@ -6,6 +5,7 @@ import { MetadataKey } from '../core/metadata.js';
 import { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
+import { isClass } from '../utils/isClass.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -82,7 +82,7 @@ export class BeanContainer {
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
       // class
-      if (typeof beanFullName === 'function' && is.class(beanFullName)) {
+      if (typeof beanFullName === 'function' && isClass(beanFullName)) {
         const beanInstance = this._createBeanInstance(beanFullName, beanFullName, args);
         return this._patchBeanInstance(beanFullName, beanInstance, false);
       }
