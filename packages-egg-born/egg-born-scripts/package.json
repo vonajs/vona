@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-scripts#readme",
   "dependencies": {
+    "@cabloy/dotenv": "workspace:^",
     "@cabloy/extend": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/process-helper": "workspace:^",

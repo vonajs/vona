@@ -2,10 +2,10 @@ const path = require('path');
 const fse = require('fs-extra');
 const chalk = require('chalk');
 const boxen = require('boxen');
-const { extend } = require('@cabloy/extend');
 const eggBornUtils = require('egg-born-utils');
 const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
+import { loadEnvs } from '@cabloy/dotenv';
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
@@ -106,16 +106,18 @@ const utils = {
     const projectPath = this.getProjectDir();
     return require(path.join(projectPath, 'package.json'));
   },
-  loadEnvConfig({ baseDir, env }) {
-    const fileConfigDefault = path.join(baseDir, 'config/config.default.js');
-    const fileConfigEnv = path.join(baseDir, `config/config.${env}.js`);
+  loadEnvAndConfig({ baseDir, env }) {
+    // load envs
+    const meta = { serverEnv: env, mine: 'mine' };
+    const projectPath = path.join(baseDir, '../..');
+    const envDir = path.join(projectPath, 'env');
+    loadEnvs(meta, envDir, '.env');
+    // load config
+    const fileConfigDefault = path.join(baseDir, 'config/config/config.js');
     if (!fse.existsSync(fileConfigDefault)) {
       console.log(chalk.red('Please copy directory: from _config to config\n'));
       process.exit(0);
     }
-    const configDefault = require(fileConfigDefault).default({});
-    const configEnv = require(fileConfigEnv).default({});
-    return extend(true, {}, configDefault, configEnv);
   },
   getBaseDir() {
     return path.join(process.cwd(), 'dist/backend');
@@ -129,7 +131,7 @@ const utils = {
       pattern = ['src/**/test/**/*.test.ts'];
     }
     // disabledModules
-    const configEnv = this.loadEnvConfig({ baseDir, env });
+    this.loadEnvAndConfig({ baseDir, env });
     const disabledModules = configEnv.disabledModules || [];
     for (const relativeName of disabledModules) {
       pattern.push(`!src/**/${relativeName}/test/**/*.test.ts`);
