@@ -6,12 +6,6 @@ export default function (appInfo: CabloyAppInfo) {
   // keys
   config.keys = appInfo.name + '_1596889047267_3245';
 
-  // disabledModules
-  config.disabledModules = [];
-
-  // disabledSuites
-  config.disabledSuites = [];
-
   // subdomainOffset
   config.subdomainOffset = 2;
 
