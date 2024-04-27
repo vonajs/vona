@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ensureArray = void 0;
 function ensureArray(arr, sep = ',') {
-    if (arr === undefined || arr === null)
+    if (arr === undefined || arr === null || arr === '')
         return [];
     if (Array.isArray(arr))
         return arr;

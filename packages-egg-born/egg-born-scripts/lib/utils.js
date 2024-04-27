@@ -5,7 +5,8 @@ const boxen = require('boxen');
 const eggBornUtils = require('egg-born-utils');
 const { ProcessHelper } = require('@cabloy/process-helper');
 const { glob } = require('@cabloy/module-glob');
-import { loadEnvs } from '@cabloy/dotenv';
+const { loadEnvs } = require('@cabloy/dotenv');
+const { ensureArray } = require('@cabloy/ensure-array');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
@@ -132,12 +133,12 @@ const utils = {
     }
     // disabledModules
     this.loadEnvAndConfig({ baseDir, env });
-    const disabledModules = configEnv.disabledModules || [];
+    const disabledModules = ensureArray(process.env.Project_Disabled_Modules);
     for (const relativeName of disabledModules) {
       pattern.push(`!src/**/${relativeName}/test/**/*.test.ts`);
     }
     // disabledSuites
-    const disabledSuites = configEnv.disabledSuites || [];
+    const disabledSuites = ensureArray(process.env.Project_Disabled_Suites);
     for (const relativeName of disabledSuites) {
       pattern.push(`!src/**/${relativeName}/modules/*/test/**/*.test.ts`);
     }
