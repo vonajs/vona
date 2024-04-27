@@ -36,6 +36,7 @@
     "@cabloy/compose": "workspace:^",
     "@cabloy/deps": "workspace:^",
     "@cabloy/dotenv": "workspace:^",
+    "@cabloy/ensure-array": "workspace:^",
     "@cabloy/egg-socket.io": "^6.0.0",
     "@cabloy/extend": "workspace:^",
     "@cabloy/koa-static-cache": "^5.1.8",

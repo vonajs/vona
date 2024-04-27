@@ -1,7 +1,7 @@
 {
-  "name": "@cabloy/dotenv",
+  "name": "@cabloy/ensure-array",
   "version": "1.0.1",
-  "description": "cabloy dotenv",
+  "description": "cabloy ensure array",
   "publishConfig": {
     "access": "public"
   },
