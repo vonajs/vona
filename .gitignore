@@ -30,7 +30,7 @@ env/.env*.mine
 
 # should pre-compiled
 !packages-utils/dotenv/dist
-!packages-utils/ensureArray/dist
+!packages-utils/ensure-array/dist
 !packages-utils/extend/dist
 !packages-utils/process-helper/dist
 !packages-utils/module-glob/dist
