@@ -280,22 +280,22 @@ function __logSuites(context, log) {
   console.log('\n');
 }
 
-function __getDisabledModules(disabledModules) {
+function __getDisabledModules(disabledModules?: string[] | string) {
   const disabledModulesMap = {};
-  if (disabledModules && disabledModules.length > 0) {
-    for (const moduleName of disabledModules) {
-      disabledModulesMap[moduleName] = true;
-    }
+  if (!disabledModules) return disabledModulesMap;
+  if (typeof disabledModules === 'string') disabledModules = disabledModules.split(',');
+  for (const moduleName of disabledModules) {
+    disabledModulesMap[moduleName] = true;
   }
   return disabledModulesMap;
 }
 
-function __getDisabledSuites(disabledSuites) {
+function __getDisabledSuites(disabledSuites?: string[] | string) {
   const disabledSuitesMap = {};
-  if (disabledSuites && disabledSuites.length > 0) {
-    for (const suiteName of disabledSuites) {
-      disabledSuitesMap[suiteName] = true;
-    }
+  if (!disabledSuites) return disabledSuitesMap;
+  if (typeof disabledSuites === 'string') disabledSuites = disabledSuites.split(',');
+  for (const suiteName of disabledSuites) {
+    disabledSuitesMap[suiteName] = true;
   }
   return disabledSuitesMap;
 }
