@@ -32,9 +32,6 @@
     "url": "https://github.com/zhennann/cabloy/issues"
   },
   "homepage": "https://github.com/zhennann/cabloy#readme",
-  "peerDependencies": {
-    "lerna": "^7.4.2"
-  },
   "dependencies": {
     "@cabloy/core": "workspace:^",
     "cabloy-suite-api-a-base": "workspace:^",
