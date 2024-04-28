@@ -1,5 +1,5 @@
 export function compose(chains, adapter) {
-  if (!chains) chains = [];
+  chains = !chains ? [] : chains.concat();
   return function (context, next?) {
     // last called middleware #
     let index = -1;
@@ -27,7 +27,7 @@ export function compose(chains, adapter) {
 }
 
 export function composeAsync(chains, adapter) {
-  if (!chains) chains = [];
+  chains = !chains ? [] : chains.concat();
   return function (context, next?) {
     // last called middleware #
     let index = -1;
