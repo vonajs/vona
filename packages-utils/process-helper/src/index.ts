@@ -4,6 +4,7 @@ import path from 'path';
 export interface IProcessHelperSpawnOptions {
   cwd?: string;
   logPrefix?: string;
+  stdio?: any;
 }
 
 export class ProcessHelperConsole {
@@ -87,9 +88,8 @@ export class ProcessHelper {
     args: any[];
     options: IProcessHelperSpawnOptions;
   }): Promise<string> {
-    if (!options.cwd) {
-      options.cwd = this.cwd;
-    }
+    options.cwd = options.cwd || this.cwd;
+    options.stdio = options.stdio || 'inherit';
     return new Promise((resolve, reject) => {
       const logPrefix = options.logPrefix;
       const proc = ChildProcess.spawn(cmd, args, options);

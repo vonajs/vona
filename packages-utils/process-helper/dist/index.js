@@ -37,6 +37,18 @@ class ProcessHelperConsole {
 exports.ProcessHelperConsole = ProcessHelperConsole;
 class ProcessHelper {
     constructor(cwd, console) {
+        Object.defineProperty(this, "cwd", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "console", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.cwd = cwd || process.cwd();
         this.console = console || new ProcessHelperConsole();
     }
@@ -75,9 +87,8 @@ class ProcessHelper {
         return await this.spawn({ cmd, args, options });
     }
     async spawn({ cmd, args = [], options = {}, }) {
-        if (!options.cwd) {
-            options.cwd = this.cwd;
-        }
+        options.cwd = options.cwd || this.cwd;
+        options.stdio = options.stdio || 'inherit';
         return new Promise((resolve, reject) => {
             const logPrefix = options.logPrefix;
             const proc = child_process_1.default.spawn(cmd, args, options);
