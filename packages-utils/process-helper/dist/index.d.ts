@@ -2,6 +2,7 @@ export interface IProcessHelperSpawnOptions {
     cwd?: string;
     logPrefix?: string;
     stdio?: any;
+    gracefull?: boolean;
 }
 export declare class ProcessHelperConsole {
     log(data: any, options?: IProcessHelperSpawnOptions): Promise<void>;

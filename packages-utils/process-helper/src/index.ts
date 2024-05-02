@@ -1,10 +1,39 @@
 import ChildProcess from 'child_process';
 import path from 'path';
 
+// only hook once and only when ever start any child.
+const childs: Set<ChildProcess.ChildProcess> = new Set();
+let hadHook = false;
+function gracefull(proc) {
+  // save child ref
+  childs.add(proc);
+
+  // only hook once
+  /* istanbul ignore else */
+  if (!hadHook) {
+    hadHook = true;
+    let signal;
+    ['SIGINT', 'SIGQUIT', 'SIGTERM'].forEach(event => {
+      process.once(event, () => {
+        signal = event;
+        process.exit(0);
+      });
+    });
+
+    process.once('exit', () => {
+      // had test at my-helper.test.js, but coffee can't collect coverage info.
+      for (const child of childs) {
+        child.kill(signal);
+      }
+    });
+  }
+}
+
 export interface IProcessHelperSpawnOptions {
   cwd?: string;
   logPrefix?: string;
   stdio?: any;
+  gracefull?: boolean;
 }
 
 export class ProcessHelperConsole {
@@ -90,20 +119,26 @@ export class ProcessHelper {
   }): Promise<string> {
     options.cwd = options.cwd || this.cwd;
     options.stdio = options.stdio || 'inherit';
+    options.gracefull = options.gracefull ?? true;
     return new Promise((resolve, reject) => {
       const logPrefix = options.logPrefix;
       const proc = ChildProcess.spawn(cmd, args, options);
+      if (options.gracefull) gracefull(proc);
       let stdout = '';
       // let stderr = '';
-      proc.stdout.on('data', async data => {
+      proc.stdout?.on('data', async data => {
         stdout += data.toString();
         await this.console.log({ text: data.toString() }, { logPrefix });
       });
-      proc.stderr.on('data', async data => {
+      proc.stderr?.on('data', async data => {
         // stderr += data.toString();
         await this.console.log({ text: data.toString() }, { logPrefix });
       });
+      proc.once('error', err => {
+        reject(err);
+      });
       proc.once('exit', code => {
+        if (options.gracefull) childs.delete(proc);
         if (code !== 0) {
           const err = new Error(`spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`);
           (<any>err).code = 10000 + Number(code);
