@@ -17,7 +17,7 @@ class BackendTestCommand extends TestCommand {
     if (!context.env.NODE_OPTIONS) {
       context.env.NODE_OPTIONS = '';
     }
-    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.env.NODE_OPTIONS += ' --no-warnings --loader=ts-node/esm --conditions=development';
     context.argv.tscompiler = undefined;
     context.argv.eggTsHelper = undefined;
     context.argv.tsconfigPaths = undefined;
