@@ -17,7 +17,7 @@ export type TypeModuleResource<
   MODEL,
   CONFIG extends (app: CabloyApplication) => object,
   ERRORS,
-  LOCALES extends { 'zh-cn': object },
+  LOCALES,
   CONSTANTS = object,
 > = {
   _bean: TypeModuleBean;
