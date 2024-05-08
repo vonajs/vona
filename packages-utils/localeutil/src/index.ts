@@ -2,15 +2,19 @@ import { getText } from './util.js';
 
 export * from './util.js';
 
-export function getLocaleText(locales: Record<string, object>, locale: string, key: string, ...args: any[]): string {
+export function getLocaleText(
+  locales1: Record<string, object> | undefined,
+  locales2: Record<string, object> | undefined,
+  locale: string,
+  key: string,
+  ...args: any[]
+): string {
   if (!key) return '';
   // try locale
-  let resource = locales[locale] || {};
-  let text = resource[key];
+  let text = locales1?.[locale]?.[key] ?? locales2?.[locale]?.[key];
   if (text === undefined && locale !== 'en-us') {
     // try en-us
-    resource = locales['en-us'] || {};
-    text = resource[key];
+    text = locales1?.['en-us']?.[key] ?? locales2?.['en-us']?.[key];
   }
   // equal key
   if (text === undefined) {
