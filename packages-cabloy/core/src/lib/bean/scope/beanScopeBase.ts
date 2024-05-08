@@ -1,6 +1,6 @@
 import { BeanScopeBean } from './beanScopeBean.js';
 import { BeanScopeScene } from './beanScopeScene.js';
-import { BeanBase } from '../beanBase.js';
+import { BeanBaseSimple } from '../beanBaseSimple.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 import { IModule } from '@cabloy/module-info';
@@ -11,7 +11,7 @@ const BeanModuleConfig = Symbol('BeanScopeBase#BeanModuleConfig');
 const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 
-export class BeanScopeBase extends BeanBase {
+export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleConfig]: unknown;
