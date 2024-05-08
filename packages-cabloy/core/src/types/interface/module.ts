@@ -4,12 +4,17 @@ import { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
 
 export * from '@cabloy/module-info';
 
+export type TypeModuleResourceLocales = Record<string, object>;
+export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;
+export type TypeModuleResourceErrors = Record<number, string>;
+export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
+
 // todo:
 export interface IModuleResource {
   Main: new () => IModuleMain;
   Monkey: new () => IMonkeyModule & IMonkeySystem;
-  locales: Record<string, any>;
-  Errors: Record<number, string>;
+  locales: TypeModuleResourceLocales;
+  Errors: TypeModuleResourceErrors;
   config: (app: CabloyApplication) => object | Promise<object>;
   meta: ((app: CabloyApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
