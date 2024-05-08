@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { extend } from '@cabloy/extend';
 import {
   CabloyApplication,
   IModule,
@@ -61,19 +60,6 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
   }
 
   function loadLocales() {
-    // module locales
-    for (const key in modules) {
-      const module = modules[key];
-      const locales = module.resource.locales;
-      if (locales) {
-        for (const language in locales) {
-          let locale = ebLocales[language];
-          if (!locale) locale = ebLocales[language] = {};
-          extend(false, locale, locales[language]);
-        }
-      }
-    }
-
     /**
      * based on egg-i18n
      *
@@ -95,14 +81,45 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
         if (path.extname(name) !== '.js') continue;
         const filepath = path.join(dir, name);
         // support en_US.js => en-US.js
-        const key = localeutil.formatLocale(name.split('.')[0]);
+        const locale = localeutil.formatLocale(name.split('.')[0]);
         const resource = require(filepath);
-
-        let locale = ebLocales[key];
-        if (!locale) locale = ebLocales[key] = {};
-        extend(false, locale, resource);
+        _initLocales(locale, resource.default ? resource.default : resource);
       }
     }
+
+    // module locales
+    for (const moduleName in modules) {
+      const module = modules[moduleName];
+      _registerLocales(moduleName, module.resource.locales);
+    }
+  }
+
+  function _initLocales(locale, locales) {
+    if (!locales) return;
+    if (!locales.modules) {
+      // override
+      ebLocales[locale] = Object.assign({}, ebLocales[locale], locales);
+    } else {
+      const moduleMap = locales.modules;
+      for (const moduleName in moduleMap) {
+        _registerLocale(moduleName, locale, moduleMap[moduleName]);
+      }
+    }
+  }
+
+  function _registerLocales(moduleName: string, locales: TypeModuleResourceLocales) {
+    if (!locales) return;
+    for (const locale in locales) {
+      _registerLocale(moduleName, locale, locales[locale]);
+    }
+  }
+
+  function _registerLocale(moduleName: string, locale: string, moduleLocales: object) {
+    // locales: not override
+    ebLocales[locale] = Object.assign({}, moduleLocales, ebLocales[locale]);
+    // localeModules
+    if (!ebLocaleModules[moduleName]) ebLocaleModules[moduleName] = {};
+    ebLocaleModules[moduleName][locale] = Object.assign({}, moduleLocales, ebLocaleModules[moduleName][locale]);
   }
 
   /**
