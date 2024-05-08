@@ -1,12 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 import { extend } from '@cabloy/extend';
-import { CabloyApplication, IModule } from '../../types/index.js';
+import {
+  CabloyApplication,
+  IModule,
+  TypeModuleResourceLocaleModules,
+  TypeModuleResourceLocales,
+} from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
 
 export default function (app: CabloyApplication, modules: Record<string, IModule>) {
   // all locales
-  const ebLocales = {};
+  const ebLocales: TypeModuleResourceLocales = {};
+  const ebLocaleModules: TypeModuleResourceLocaleModules = {};
 
   // load locales
   loadLocales();
@@ -106,7 +112,13 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
    *
    */
 
-  function getText(_moduleScope: string | undefined, locale: string, key: string, ...args: any[]): string {
-    return localeutil.getLocaleText(ebLocales, locale, key, ...args);
+  function getText(moduleScope: string | undefined, locale: string, key: string, ...args: any[]): string {
+    return localeutil.getLocaleText(
+      moduleScope ? ebLocaleModules[moduleScope] : undefined,
+      ebLocales,
+      locale,
+      key,
+      ...args,
+    );
   }
 }
