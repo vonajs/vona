@@ -23,10 +23,16 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
       if (context.module) {
         const defaultLocale = app.config.i18n.defaultLocale;
         context.text = function (text, ...args) {
-          return getText(context.locale || defaultLocale, text, ...args);
+          return getText(undefined, context.locale || defaultLocale, text, ...args);
         };
         context.text.locale = function (locale, text, ...args) {
-          return getText(locale || defaultLocale, text, ...args);
+          return getText(undefined, locale || defaultLocale, text, ...args);
+        };
+        context.textModule = function (moduleScope, text, ...args) {
+          return getText(moduleScope, context.locale || defaultLocale, text, ...args);
+        };
+        context.textModule.locale = function (moduleScope, locale, text, ...args) {
+          return getText(moduleScope, locale || defaultLocale, text, ...args);
         };
       }
 
@@ -100,7 +106,7 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
    *
    */
 
-  function getText(locale: string, key: string, ...args: any[]): string {
+  function getText(_moduleScope: string | undefined, locale: string, key: string, ...args: any[]): string {
     return localeutil.getLocaleText(ebLocales, locale, key, ...args);
   }
 }
