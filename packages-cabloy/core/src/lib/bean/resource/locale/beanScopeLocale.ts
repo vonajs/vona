@@ -1,5 +1,4 @@
 import { IModuleLocale } from './type.js';
-import { BeanScopeLocaleImpl } from './beanScopeLocaleImpl.js';
 import { BeanSimple } from '../../beanSimple.js';
 
 const BeanModuleScope = Symbol('BeanScopeLocale#ModuleScope');
@@ -15,7 +14,7 @@ export class BeanScopeLocale extends BeanSimple {
 
   protected __get__(prop) {
     if (!this.__instances[prop]) {
-      this.__instances[prop] = BeanScopeLocaleImpl(this.ctx, this[BeanModuleScope], prop);
+      this.__instances[prop] = this.ctx.meta.locale.createScopeLocaleText(this[BeanModuleScope], prop);
     }
     return this.__instances[prop];
   }

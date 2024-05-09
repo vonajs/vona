@@ -1,3 +1,3 @@
 export * from './beanScopeLocale.js';
-export * from './beanScopeLocaleImpl.js';
+export * from './localeCtx.js';
 export * from './type.js';

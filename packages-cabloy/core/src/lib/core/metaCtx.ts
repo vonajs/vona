@@ -2,19 +2,22 @@ import { extend } from '@cabloy/extend';
 import { CtxUtil } from '../utils/utilCtx.js';
 import { CtxMockUtil } from '../utils/mockUtilCtx.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { CtxLocale } from '../bean/resource/locale/localeCtx.js';
 
 export class CtxMeta extends BeanSimple {
   util: CtxUtil;
   mockUtil: CtxMockUtil;
+  locale: CtxLocale;
   /** dynamic middleware options */
   middlewares: Record<string, any>;
 
   protected __init__() {
     // util
     this.util = this.ctx.bean._newBean(CtxUtil);
-
     // mockUtil
     this.mockUtil = this.ctx.bean._newBean(CtxMockUtil);
+    // locale
+    this.locale = this.ctx.bean._newBean(CtxLocale);
   }
 
   getMiddlewareOptions(middlewareName) {
