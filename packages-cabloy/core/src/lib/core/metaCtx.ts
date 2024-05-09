@@ -3,11 +3,13 @@ import { CtxUtil } from '../utils/utilCtx.js';
 import { CtxMockUtil } from '../utils/mockUtilCtx.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { CtxLocale } from '../bean/resource/locale/localeCtx.js';
+import { IModuleLocaleText } from '../bean/index.js';
 
 export class CtxMeta extends BeanSimple {
   util: CtxUtil;
   mockUtil: CtxMockUtil;
   locale: CtxLocale;
+  text: IModuleLocaleText;
   /** dynamic middleware options */
   middlewares: Record<string, any>;
 
@@ -18,6 +20,8 @@ export class CtxMeta extends BeanSimple {
     this.mockUtil = this.ctx.bean._newBean(CtxMockUtil);
     // locale
     this.locale = this.ctx.bean._newBean(CtxLocale);
+    // text
+    this.text = this.locale.createLocaleText();
   }
 
   getMiddlewareOptions(middlewareName) {
