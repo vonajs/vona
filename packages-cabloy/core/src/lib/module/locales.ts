@@ -21,18 +21,11 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
 
       // maybe /favicon.ico
       if (context.module) {
-        const defaultLocale = app.config.i18n.defaultLocale;
         context.text = function (text, ...args) {
-          return getText(undefined, context.locale || defaultLocale, text, ...args);
+          return context.meta.locale.getText(undefined, undefined, text, ...args);
         };
         context.text.locale = function (locale, text, ...args) {
-          return getText(undefined, locale || defaultLocale, text, ...args);
-        };
-        context.textModule = function (moduleScope, text, ...args) {
-          return getText(moduleScope, context.locale || defaultLocale, text, ...args);
-        };
-        context.textModule.locale = function (moduleScope, locale, text, ...args) {
-          return getText(moduleScope, locale || defaultLocale, text, ...args);
+          return context.meta.locale.getText(undefined, locale, text, ...args);
         };
       }
 
@@ -118,23 +111,6 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
       {},
       moduleLocales,
       app.meta.localeModules[moduleName][locale],
-    );
-  }
-
-  /**
-   * based on koa-locales
-   *
-   * https://github.com/koajs/locales/blob/master/index.js
-   *
-   */
-
-  function getText(moduleScope: string | undefined, locale: string, key: string, ...args: any[]): string {
-    return localeutil.getLocaleText(
-      moduleScope ? app.meta.localeModules[moduleScope] : undefined,
-      app.meta.locales,
-      locale,
-      key,
-      ...args,
     );
   }
 }
