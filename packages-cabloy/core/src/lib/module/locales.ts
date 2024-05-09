@@ -1,17 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import {
-  CabloyApplication,
-  IModule,
-  TypeModuleResourceLocaleModules,
-  TypeModuleResourceLocales,
-} from '../../types/index.js';
+import { CabloyApplication, IModule, TypeModuleResourceLocales } from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
 
 export default function (app: CabloyApplication, modules: Record<string, IModule>) {
   // all locales
-  const ebLocales: TypeModuleResourceLocales = {};
-  const ebLocaleModules: TypeModuleResourceLocaleModules = {};
+  app.meta.locales = {};
+  app.meta.localeModules = {};
 
   // load locales
   loadLocales();
@@ -98,7 +93,7 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
     if (!locales) return;
     if (!locales.modules) {
       // override
-      ebLocales[locale] = Object.assign({}, ebLocales[locale], locales);
+      app.meta.locales[locale] = Object.assign({}, app.meta.locales[locale], locales);
     } else {
       const moduleMap = locales.modules;
       for (const moduleName in moduleMap) {
@@ -116,10 +111,14 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
 
   function _registerLocale(moduleName: string, locale: string, moduleLocales: object) {
     // locales: not override
-    ebLocales[locale] = Object.assign({}, moduleLocales, ebLocales[locale]);
+    app.meta.locales[locale] = Object.assign({}, moduleLocales, app.meta.locales[locale]);
     // localeModules
-    if (!ebLocaleModules[moduleName]) ebLocaleModules[moduleName] = {};
-    ebLocaleModules[moduleName][locale] = Object.assign({}, moduleLocales, ebLocaleModules[moduleName][locale]);
+    if (!app.meta.localeModules[moduleName]) app.meta.localeModules[moduleName] = {};
+    app.meta.localeModules[moduleName][locale] = Object.assign(
+      {},
+      moduleLocales,
+      app.meta.localeModules[moduleName][locale],
+    );
   }
 
   /**
@@ -131,8 +130,8 @@ export default function (app: CabloyApplication, modules: Record<string, IModule
 
   function getText(moduleScope: string | undefined, locale: string, key: string, ...args: any[]): string {
     return localeutil.getLocaleText(
-      moduleScope ? ebLocaleModules[moduleScope] : undefined,
-      ebLocales,
+      moduleScope ? app.meta.localeModules[moduleScope] : undefined,
+      app.meta.locales,
       locale,
       key,
       ...args,

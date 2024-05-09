@@ -9,7 +9,14 @@ import { AppRouter } from '../module/route.js';
 import { AppLimiter, AppRedlock } from '../module/redis.js';
 import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
-import { CabloyContext, IModule, IModuleMeta, ISuite } from '../../types/index.js';
+import {
+  CabloyContext,
+  IModule,
+  IModuleMeta,
+  ISuite,
+  TypeModuleResourceLocaleModules,
+  TypeModuleResourceLocales,
+} from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 
@@ -42,6 +49,8 @@ export class AppMeta extends BeanSimple {
   configs: Record<string, any>;
   constants: Record<string, any>;
   metas: Record<string, IModuleMeta>;
+  locales: TypeModuleResourceLocales;
+  localeModules: TypeModuleResourceLocaleModules;
   //
   middlewares: any[];
   middlewaresNormal: Record<string, any>;
