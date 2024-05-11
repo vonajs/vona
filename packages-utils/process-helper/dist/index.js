@@ -81,7 +81,7 @@ class ProcessHelper {
         try {
             await this.spawnBin({
                 cmd: 'prettier',
-                args: ['--write', fileName],
+                args: ['--write', '--ignore-path', 'null', fileName],
                 options: {
                     logPrefix,
                 },
