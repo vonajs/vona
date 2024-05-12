@@ -73,8 +73,8 @@ export function parseName(moduleUrl): string | undefined {
   } else if (moduleUrl.indexOf(PREFIX_E) === 0) {
     return _parseNameLikeUrl(moduleUrl, PREFIX_E);
   } else {
-    // relativeName
-    return _parseName(moduleUrl, '');
+    // test-home test/home
+    return _parseName(moduleUrl.replace('/', '-'), '');
   }
 }
 

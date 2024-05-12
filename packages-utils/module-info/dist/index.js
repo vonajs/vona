@@ -98,8 +98,8 @@ function parseName(moduleUrl) {
         return _parseNameLikeUrl(moduleUrl, PREFIX_E);
     }
     else {
-        // relativeName
-        return _parseName(moduleUrl, '');
+        // test-home test/home
+        return _parseName(moduleUrl.replace('/', '-'), '');
     }
 }
 exports.parseName = parseName;
