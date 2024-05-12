@@ -36,6 +36,7 @@ const PREFIX_A = '/api/';
 const PREFIX_B = 'cabloy-module-api-';
 const PREFIX_C = './cabloy-module-api-';
 const PREFIX_D = './';
+const PREFIX_E = '/';
 // aa-hello aa/hello
 //   first check / then -
 function parseInfo(moduleName) {
@@ -77,19 +78,12 @@ exports.parseInfoPro = parseInfoPro;
 // ./cabloy-module-api-aa-hello/
 function parseName(moduleUrl) {
     if (!moduleUrl)
-        return null;
+        return;
     if (moduleUrl.indexOf('/api/static/') === 0) {
         moduleUrl = '/api/' + moduleUrl.substring('/api/static/'.length);
     }
     if (moduleUrl.indexOf(PREFIX_A) === 0) {
-        const posA = PREFIX_A.length;
-        const posB = moduleUrl.indexOf('/', posA) + 1;
-        if (posB === -1)
-            return null;
-        const posC = moduleUrl.indexOf('/', posB);
-        if (posC === -1)
-            return null;
-        return moduleUrl.substring(posA, posC);
+        return _parseNameLikeUrl(moduleUrl, PREFIX_A);
     }
     else if (moduleUrl.indexOf(PREFIX_B) === 0) {
         return _parseName(moduleUrl, PREFIX_B);
@@ -100,12 +94,32 @@ function parseName(moduleUrl) {
     else if (moduleUrl.indexOf(PREFIX_D) === 0) {
         return _parseName(moduleUrl, PREFIX_D);
     }
-    return null;
+    else if (moduleUrl.indexOf(PREFIX_E) === 0) {
+        return _parseNameLikeUrl(moduleUrl, PREFIX_E);
+    }
+    else {
+        // relativeName
+        return _parseName(moduleUrl, '');
+    }
 }
 exports.parseName = parseName;
+function _parseNameLikeUrl(moduleUrl, prefix) {
+    const posA = prefix.length;
+    const posB = moduleUrl.indexOf('/', posA) + 1;
+    if (posB === -1)
+        return;
+    const posC = moduleUrl.indexOf('/', posB);
+    if (posC === -1)
+        return;
+    return moduleUrl.substring(posA, posC).replace('/', '-');
+}
 function _parseName(moduleUrl, prefix) {
     const posA = prefix.length;
     let posB = moduleUrl.indexOf('/', posA);
+    if (posB === -1)
+        posB = moduleUrl.indexOf(':', posA);
+    if (posB === -1)
+        posB = moduleUrl.indexOf('.', posA);
     if (posB === -1)
         posB = moduleUrl.length;
     return moduleUrl.substring(posA, posB);
