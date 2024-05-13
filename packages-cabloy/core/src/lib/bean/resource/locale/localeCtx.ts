@@ -1,6 +1,6 @@
 import * as localeutil from '@cabloy/localeutil';
 import { BeanSimple } from '../../beanSimple.js';
-import { IModuleLocale, IModuleLocaleText } from './type.js';
+import { ILocalInfos, IModuleLocale, IModuleLocaleText } from './type.js';
 
 export class CtxLocale extends BeanSimple {
   get locale(): string {
@@ -17,7 +17,11 @@ export class CtxLocale extends BeanSimple {
     const getText = function (text: string, ...args: any[]): string {
       return self.getText(moduleScope, undefined, text, ...args);
     };
-    getText.locale = function (locale: string | undefined, text: string, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocalInfos>(
+      locale: T | undefined,
+      text: string,
+      ...args: any[]
+    ): string {
       return self.getText(moduleScope, locale, text, ...args);
     };
     return getText;
@@ -29,13 +33,18 @@ export class CtxLocale extends BeanSimple {
     const getText = function (...args: any[]): string {
       return self.getText(moduleScope, undefined, text, ...args);
     };
-    getText.locale = function (locale: string | undefined, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocalInfos>(locale: T | undefined, ...args: any[]): string {
       return self.getText(moduleScope, locale, text, ...args);
     };
     return getText;
   }
 
-  public getText(moduleScope: string | undefined, locale: string | undefined, key: string, ...args: any[]): string {
+  public getText<T extends keyof ILocalInfos>(
+    moduleScope: string | undefined,
+    locale: T | undefined,
+    key: string,
+    ...args: any[]
+  ): string {
     return localeutil.getLocaleText(
       moduleScope ? this.app.meta.localeModules[moduleScope] : undefined,
       this.app.meta.locales,
