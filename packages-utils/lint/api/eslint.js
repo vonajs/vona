@@ -2,7 +2,7 @@ const rules = require('../common/rules.js');
 
 module.exports = {
   extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   parserOptions: {
     parser: require.resolve('@typescript-eslint/parser'),
   },

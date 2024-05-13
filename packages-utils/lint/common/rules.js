@@ -1,4 +1,5 @@
 const rules = {
+  'prettier/prettier': 'error',
   'prefer-promise-reject-errors': 'off',
   quotes: ['warn', 'single', { avoidEscape: true }],
   // this rule, if on, would require explicit return type on the `render` function
@@ -66,14 +67,7 @@ const rules = {
     },
   ],
   'one-var-declaration-per-line': [0],
-  'space-before-function-paren': [
-    'error',
-    {
-      anonymous: 'always',
-      named: 'never',
-      asyncArrow: 'always',
-    },
-  ],
+  'space-before-function-paren': [0],
   'generator-star-spacing': [0],
   'newline-per-chained-call': [0],
   'vue/multi-word-component-names': [0],
