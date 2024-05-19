@@ -1,7 +1,14 @@
 const rules = {
-  'prettier/prettier': 'error',
+  'prettier/prettier': ['error', { singleQuote: true }],
   'prefer-promise-reject-errors': 'off',
-  quotes: ['warn', 'single', { avoidEscape: true }],
+  quotes: ['error', 'single', { avoidEscape: true }],
+  '@typescript-eslint/quotes': [
+    'error',
+    'single',
+    {
+      avoidEscape: true,
+    },
+  ],
   // this rule, if on, would require explicit return type on the `render` function
   '@typescript-eslint/explicit-function-return-type': 'off',
   'vue/multi-word-component-names': 'off',
