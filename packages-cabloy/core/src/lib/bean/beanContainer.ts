@@ -264,6 +264,10 @@ export class BeanContainer {
           target[prop] = value;
           return true;
         }
+        if (__isInnerMethod(prop)) {
+          target[prop] = value;
+          return true;
+        }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
         if (!__checkAopOfDescriptorInfo(descriptorInfo)) {
