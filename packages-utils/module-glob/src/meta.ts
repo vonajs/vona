@@ -32,16 +32,25 @@ const __pathsModules: IModuleGlobPathMetaItem[] = [
 ];
 
 export function getPathsMeta(projectMode: TypeProjectMode): IModuleGlobPathsMeta {
+  let brand;
+  let mode;
+  if (['zova'].includes(projectMode)) {
+    brand = projectMode;
+    mode = '';
+  } else {
+    brand = 'cabloy';
+    mode = `-${projectMode}`;
+  }
   const suites = __pathSuites.concat([
     {
-      prefix: `node_modules/cabloy-suite-${projectMode}-`,
+      prefix: `node_modules/${brand}-suite${mode}-`,
       vendor: true,
       node_modules: true,
     },
   ]);
   const modules = __pathsModules.concat([
     {
-      prefix: `node_modules/cabloy-module-${projectMode}-`,
+      prefix: `node_modules/${brand}-module${mode}-`,
       vendor: true,
       node_modules: true,
     },

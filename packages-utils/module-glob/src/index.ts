@@ -48,8 +48,8 @@ export async function glob(options: IModuleGlobOptions) {
   // parse modules
   const modules = __parseModules(context, projectPath);
   // load package
-  await __loadPackage(suites);
-  await __loadPackage(modules);
+  await __loadPackage(context, suites);
+  await __loadPackage(context, modules);
   // bind suites modules
   __bindSuitesModules(suites, modules);
 
@@ -78,7 +78,11 @@ export async function glob(options: IModuleGlobOptions) {
   };
 }
 
-async function __loadPackage(modules: Record<string, ISuiteModuleBase>) {
+function getPackageModuleNode(projectMode) {
+  return ['zova'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
+}
+
+async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>) {
   const promises: Promise<IModulePackage>[] = [];
   const modulesArray: string[] = [];
   for (const moduleName in modules) {
@@ -91,7 +95,8 @@ async function __loadPackage(modules: Record<string, ISuiteModuleBase>) {
     const moduleName = modulesArray[i];
     const module = modules[moduleName];
     module.package = JSON.parse(modulesPackage[i].toString());
-    const capabilities = module.package.cabloyModule?.capabilities;
+    const moduleNode = getPackageModuleNode(context.projectMode);
+    const capabilities = module.package[moduleNode]?.capabilities;
     if (capabilities?.icon) module.info.icon = capabilities?.icon;
     if (capabilities?.monkey) module.info.monkey = capabilities?.monkey;
     if (capabilities?.sync) module.info.sync = capabilities?.sync;
@@ -132,7 +137,8 @@ function __pushModule(context, modules, moduleRelativeName) {
 
   // push this
   context.modules[moduleRelativeName] = module;
-  if (module.package && module.package.cabloyModule && module.package.cabloyModule.last === true) {
+  const moduleNode = getPackageModuleNode(context.projectMode);
+  if (module.package && module.package[moduleNode] && module.package[moduleNode].last === true) {
     context.modulesLast.push(module);
   } else {
     context.modulesArray.push(module);
@@ -143,11 +149,12 @@ function __pushModule(context, modules, moduleRelativeName) {
 
 function __orderDependencies(context, modules, module, moduleRelativeName) {
   if (context.options.disableCheckDependencies) return true;
-  if (!module.package.cabloyModule || !module.package.cabloyModule.dependencies) return true;
+  const moduleNode = getPackageModuleNode(context.projectMode);
+  if (!module.package[moduleNode] || !module.package[moduleNode].dependencies) return true;
 
   let enabled = true;
 
-  const dependencies = module.package.cabloyModule.dependencies;
+  const dependencies = module.package[moduleNode].dependencies;
   for (const key in dependencies) {
     const subModule = modules[key];
     if (!subModule) {

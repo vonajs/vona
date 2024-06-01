@@ -1,4 +1,4 @@
-export type TypeProjectMode = 'front' | 'api';
+export type TypeProjectMode = 'front' | 'api' | 'zova';
 export type TypeProjectEntityType = 'module' | 'suite';
 
 export interface IModuleInfo {
