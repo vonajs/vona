@@ -30,7 +30,8 @@ export function parseInfo(moduleName: string | undefined): IModuleInfo | undefin
   if (parts.length < 2) {
     parts = moduleName.split('-').filter(item => item);
     if (parts.length < 2) return;
-    if (parts.length >= 5) parts = parts.slice(3);
+    if (parts.length === 4) parts = parts.slice(2);
+    if (parts.length === 5) parts = parts.slice(3);
   }
   const info = {
     pid: parts[0],
@@ -49,7 +50,11 @@ export function parseInfoPro(
 ): IModuleInfo | undefined {
   const info = parseInfo(moduleName);
   if (!info) return info;
-  info.fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
+  if (['zova'].includes(projectMode)) {
+    info.fullName = `${projectMode}-${projectEntityType}-${info.relativeName}`;
+  } else {
+    info.fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
+  }
   return info;
 }
 

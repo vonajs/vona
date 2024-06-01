@@ -51,7 +51,9 @@ function parseInfo(moduleName) {
         parts = moduleName.split('-').filter(item => item);
         if (parts.length < 2)
             return;
-        if (parts.length >= 5)
+        if (parts.length === 4)
+            parts = parts.slice(2);
+        if (parts.length === 5)
             parts = parts.slice(3);
     }
     const info = {
@@ -68,7 +70,12 @@ function parseInfoPro(moduleName, projectMode, projectEntityType) {
     const info = parseInfo(moduleName);
     if (!info)
         return info;
-    info.fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
+    if (['zova'].includes(projectMode)) {
+        info.fullName = `${projectMode}-${projectEntityType}-${info.relativeName}`;
+    }
+    else {
+        info.fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
+    }
     return info;
 }
 exports.parseInfoPro = parseInfoPro;
