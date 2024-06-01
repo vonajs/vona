@@ -64,8 +64,8 @@ async function glob(options) {
     // parse modules
     const modules = __parseModules(context, projectPath);
     // load package
-    await __loadPackage(suites);
-    await __loadPackage(modules);
+    await __loadPackage(context, suites);
+    await __loadPackage(context, modules);
     // bind suites modules
     __bindSuitesModules(suites, modules);
     // check suites
@@ -90,7 +90,10 @@ async function glob(options) {
     };
 }
 exports.glob = glob;
-async function __loadPackage(modules) {
+function getPackageModuleNode(projectMode) {
+    return ['zova'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
+}
+async function __loadPackage(context, modules) {
     const promises = [];
     const modulesArray = [];
     for (const moduleName in modules) {
@@ -103,7 +106,8 @@ async function __loadPackage(modules) {
         const moduleName = modulesArray[i];
         const module = modules[moduleName];
         module.package = JSON.parse(modulesPackage[i].toString());
-        const capabilities = module.package.cabloyModule?.capabilities;
+        const moduleNode = getPackageModuleNode(context.projectMode);
+        const capabilities = module.package[moduleNode]?.capabilities;
         if (capabilities?.icon)
             module.info.icon = capabilities?.icon;
         if (capabilities?.monkey)
@@ -144,7 +148,8 @@ function __pushModule(context, modules, moduleRelativeName) {
     }
     // push this
     context.modules[moduleRelativeName] = module;
-    if (module.package && module.package.cabloyModule && module.package.cabloyModule.last === true) {
+    const moduleNode = getPackageModuleNode(context.projectMode);
+    if (module.package && module.package[moduleNode] && module.package[moduleNode].last === true) {
         context.modulesLast.push(module);
     }
     else {
@@ -155,10 +160,11 @@ function __pushModule(context, modules, moduleRelativeName) {
 function __orderDependencies(context, modules, module, moduleRelativeName) {
     if (context.options.disableCheckDependencies)
         return true;
-    if (!module.package.cabloyModule || !module.package.cabloyModule.dependencies)
+    const moduleNode = getPackageModuleNode(context.projectMode);
+    if (!module.package[moduleNode] || !module.package[moduleNode].dependencies)
         return true;
     let enabled = true;
-    const dependencies = module.package.cabloyModule.dependencies;
+    const dependencies = module.package[moduleNode].dependencies;
     for (const key in dependencies) {
         const subModule = modules[key];
         if (!subModule) {
