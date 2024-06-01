@@ -95,7 +95,7 @@ async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>)
     const moduleName = modulesArray[i];
     const module = modules[moduleName];
     module.package = JSON.parse(modulesPackage[i].toString());
-    const moduleNode = getPackageModuleNode(context.projectMode);
+    const moduleNode = getPackageModuleNode(context.options.projectMode);
     const capabilities = module.package[moduleNode]?.capabilities;
     if (capabilities?.icon) module.info.icon = capabilities?.icon;
     if (capabilities?.monkey) module.info.monkey = capabilities?.monkey;
@@ -137,7 +137,7 @@ function __pushModule(context, modules, moduleRelativeName) {
 
   // push this
   context.modules[moduleRelativeName] = module;
-  const moduleNode = getPackageModuleNode(context.projectMode);
+  const moduleNode = getPackageModuleNode(context.options.projectMode);
   if (module.package && module.package[moduleNode] && module.package[moduleNode].last === true) {
     context.modulesLast.push(module);
   } else {
@@ -149,7 +149,7 @@ function __pushModule(context, modules, moduleRelativeName) {
 
 function __orderDependencies(context, modules, module, moduleRelativeName) {
   if (context.options.disableCheckDependencies) return true;
-  const moduleNode = getPackageModuleNode(context.projectMode);
+  const moduleNode = getPackageModuleNode(context.options.projectMode);
   if (!module.package[moduleNode] || !module.package[moduleNode].dependencies) return true;
 
   let enabled = true;
