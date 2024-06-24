@@ -26,6 +26,10 @@ export interface ISuite extends ISuiteModuleBase {
 export interface IModule extends ISuiteModuleBase {
     suite?: string;
 }
+export interface IBundleVendor {
+    match: Array<string | RegExp>;
+    output: string;
+}
 export interface IModulePackage {
     name: string;
     version: string;
@@ -40,6 +44,19 @@ export interface IModulePackage {
         theme: object;
         icon: string;
         locale: string;
+    };
+    zovaModule: {
+        capabilities: {
+            monkey: boolean;
+            sync: boolean;
+            icon: boolean;
+            theme: boolean;
+            locale: boolean;
+        };
+        dependencies: Record<string, string>;
+        bundle: {
+            vendors: Array<IBundleVendor>;
+        };
     };
     title: string;
     description: string;
