@@ -1,17 +1,22 @@
 export type TypeProjectMode = 'front' | 'api' | 'zova';
 export type TypeProjectEntityType = 'module' | 'suite';
+export interface IModuleCapabilities {
+    monkey: boolean;
+    sync: boolean;
+    icon: boolean;
+    theme: boolean;
+    locale: boolean;
+}
 export interface IModuleInfo {
     pid: string;
     name: string;
     fullName: string;
     relativeName: string;
     url: string;
-    sync?: boolean;
-    monkey?: boolean;
-    icon?: boolean;
     vendor?: boolean;
     node_modules?: boolean;
     originalName: string;
+    capabilities: IModuleCapabilities;
 }
 export interface ISuiteModuleBase {
     name: string;
@@ -46,13 +51,7 @@ export interface IModulePackage {
         locale: string;
     };
     zovaModule: {
-        capabilities: {
-            monkey: boolean;
-            sync: boolean;
-            icon: boolean;
-            theme: boolean;
-            locale: boolean;
-        };
+        capabilities: IModuleCapabilities;
         dependencies: Record<string, string>;
         bundle: {
             vendors: Array<IBundleVendor>;
