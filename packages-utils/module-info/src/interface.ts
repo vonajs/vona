@@ -18,7 +18,7 @@ export interface IModuleInfo {
   vendor?: boolean;
   node_modules?: boolean;
   originalName: string;
-  capabilities: IModuleCapabilities;
+  capabilities?: IModuleCapabilities;
 }
 
 export interface ISuiteModuleBase {
@@ -44,23 +44,23 @@ export interface IBundleVendor {
 export interface IModulePackage {
   name: string;
   version: string;
-  cabloyModule: {
-    capabilities: {
+  cabloyModule?: {
+    capabilities?: {
       monkey: boolean;
       sync: boolean;
       icon: boolean;
     };
     fileVersion: number;
-    dependencies: Record<string, string>;
+    dependencies?: Record<string, string>;
     theme: object;
     icon: string;
     locale: string;
   };
-  zovaModule: {
-    capabilities: IModuleCapabilities;
-    dependencies: Record<string, string>;
-    bundle: {
-      vendors: Array<IBundleVendor>;
+  zovaModule?: {
+    capabilities?: IModuleCapabilities;
+    dependencies?: Record<string, string>;
+    bundle?: {
+      vendors?: Array<IBundleVendor>;
     };
   };
   title: string;

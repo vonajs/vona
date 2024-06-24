@@ -97,9 +97,7 @@ async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>)
     module.package = JSON.parse(modulesPackage[i].toString());
     const moduleNode = getPackageModuleNode(context.options.projectMode);
     const capabilities = module.package[moduleNode]?.capabilities;
-    if (capabilities?.icon) module.info.icon = capabilities?.icon;
-    if (capabilities?.monkey) module.info.monkey = capabilities?.monkey;
-    if (capabilities?.sync) module.info.sync = capabilities?.sync;
+    module.info.capabilities = capabilities;
   }
 }
 
@@ -220,19 +218,19 @@ function __parseModules(context: IModuleGlobContext, projectPath) {
   return modules;
 }
 
-function __logModules(context, log) {
+function __logModules(context: IModuleGlobContext, log) {
   for (const module of context.modulesArray) {
     const relativeName = module.info.relativeName;
-    if (module.info.monkey) {
+    if (module.info.capabilities?.monkey) {
       context.modulesMonkey[relativeName] = module;
     }
-    if (module.info.sync) {
+    if (module.info.capabilities?.sync) {
       context.modulesSync[relativeName] = module;
     }
-    if (module.info.icon) {
+    if (module.info.capabilities?.icon) {
       context.modulesIcon[relativeName] = module;
     }
-    if (module.info.public) {
+    if (module.info.node_modules) {
       context.modulesGlobal[relativeName] = module;
     } else {
       context.modulesLocal[relativeName] = module;
