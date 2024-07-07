@@ -86,7 +86,7 @@ export function parseName(moduleUrl): string | undefined {
 function _parseNameLikeUrl(moduleUrl, prefix): string | undefined {
   const posA = prefix.length;
   const posB = moduleUrl.indexOf('/', posA) + 1;
-  if (posB === -1) return;
+  if (posB === 0) return;
   const posC = moduleUrl.indexOf('/', posB);
   if (posC === -1) return;
   return moduleUrl.substring(posA, posC).replace('/', '-');
