@@ -1,15 +1,15 @@
-import { ContainerScope, MetadataKey } from '../../../index.js';
+import { InjectionScope, MetadataKey } from '../../../index.js';
 
 export interface IDecoratorUseOptionsBase {
   prop: MetadataKey;
   beanFullName: string;
   /** such as: moduleScope */
   selector?: string;
-  containerScope?: ContainerScope;
+  injectionScope?: InjectionScope;
 }
 
 export interface IDecoratorUseOptions {
   beanFullName?: string;
   selector?: string;
-  containerScope?: ContainerScope;
+  injectionScope?: InjectionScope;
 }
