@@ -51,9 +51,11 @@ function getEnvFiles(meta, dir, prefix, postfix) {
     // scope
     const scope = metaToScope(meta);
     // extend
-    const keys = (0, cascade_extend_1.cascadeExtendKeys)(scope, source, prefix, '.');
+    let keys = (0, cascade_extend_1.cascadeExtendKeys)(scope, source, prefix, '.');
     if (!keys)
         return undefined;
+    // mine
+    keys = keys.filter(item => item.indexOf('.mine') === -1).concat(keys.filter(item => item.indexOf('.mine') > -1));
     // files
     files = keys.map(key => {
         let file = `${dir}/${key}`;

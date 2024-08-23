@@ -50,8 +50,10 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?:
   // scope
   const scope = metaToScope(meta);
   // extend
-  const keys = cascadeExtendKeys(scope, source, prefix, '.');
+  let keys = cascadeExtendKeys(scope, source, prefix, '.');
   if (!keys) return undefined;
+  // mine
+  keys = keys.filter(item => item.indexOf('.mine') === -1).concat(keys.filter(item => item.indexOf('.mine') > -1));
   // files
   files = keys.map(key => {
     let file = `${dir}/${key}`;
