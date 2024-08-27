@@ -149,7 +149,7 @@ export class AppUtil extends BeanSimple {
     let parsedUrl;
     try {
       parsedUrl = new URL(origin);
-    } catch (err) {
+    } catch (_) {
       return false;
     }
 
