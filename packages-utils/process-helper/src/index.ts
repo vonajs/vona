@@ -125,13 +125,13 @@ export class ProcessHelper {
       const proc = ChildProcess.spawn(cmd, args, options);
       if (options.gracefull) gracefull(proc);
       let stdout = '';
-      // let stderr = '';
+      let stderr = '';
       proc.stdout?.on('data', async data => {
         stdout += data.toString();
         await this.console.log({ text: data.toString() }, { logPrefix });
       });
       proc.stderr?.on('data', async data => {
-        // stderr += data.toString();
+        stderr += data.toString();
         await this.console.log({ text: data.toString() }, { logPrefix });
       });
       proc.once('error', err => {
@@ -140,7 +140,8 @@ export class ProcessHelper {
       proc.once('exit', code => {
         if (options.gracefull) childs.delete(proc);
         if (code !== 0) {
-          const err = new Error(`spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`);
+          const message = stderr || `spawn ${cmd} ${args.join(' ')} fail, exit code: ${code}`;
+          const err = new Error(message);
           (<any>err).code = 10000 + Number(code);
           return reject(err);
         }
