@@ -60,6 +60,6 @@ export interface IModulePackage {
     title: string;
     description: string;
     author: string;
-    dependencies: string;
+    dependencies: Record<string, string>;
 }
 //# sourceMappingURL=interface.d.ts.map
