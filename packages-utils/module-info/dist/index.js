@@ -115,9 +115,9 @@ function _parseNameLikeUrl(moduleUrl, prefix) {
     const posB = moduleUrl.indexOf('/', posA) + 1;
     if (posB === 0)
         return;
-    const posC = moduleUrl.indexOf('/', posB);
+    let posC = moduleUrl.indexOf('/', posB);
     if (posC === -1)
-        return;
+        posC = moduleUrl.length;
     return moduleUrl.substring(posA, posC).replace('/', '-');
 }
 function _parseName(moduleUrl, prefix) {
