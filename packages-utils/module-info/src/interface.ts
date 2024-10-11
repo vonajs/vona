@@ -59,6 +59,7 @@ export interface IModulePackage {
   zovaModule?: {
     capabilities?: IModuleCapabilities;
     dependencies?: Record<string, string>;
+    globalDependencies?: Record<string, string | boolean>;
     bundle?: {
       vendors?: Array<IBundleVendor>;
     };
