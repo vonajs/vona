@@ -1,7 +1,7 @@
 {
-  "name": "@cabloy/core",
+  "name": "vona-core",
   "version": "5.0.0",
-  "description": "cabloy core",
+  "description": "vona core",
   "publishConfig": {
     "access": "public"
   },

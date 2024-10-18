@@ -1,1 +1,1 @@
-# @cabloy/core
+# vona-core
