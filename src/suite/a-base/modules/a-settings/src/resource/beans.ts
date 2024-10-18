@@ -3,7 +3,7 @@ export * from '../bean/bean.settings.js';
 
 import { BeanSettings } from '../bean/bean.settings.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     settings: BeanSettings;
   }

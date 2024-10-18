@@ -127,7 +127,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // setLocales
     const locales = this.scope.config.locales;
     for (const locale in locales) {
-      const atomNameLocale = this.ctx.text.locale(locale, atomName);
+      const atomNameLocale = this.ctx.text.locale(locale as any, atomName);
       const item = items.find(_item => _item.locale === locale);
       if (item) {
         if (atomNameLocale !== item.atomNameLocale) {

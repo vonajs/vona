@@ -6,7 +6,7 @@ export * from '../bean/bean.summer.js';
 
 import { BeanSummer } from '../bean/bean.summer.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     summer: BeanSummer;
   }

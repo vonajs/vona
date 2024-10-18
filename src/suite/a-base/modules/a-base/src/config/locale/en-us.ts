@@ -52,4 +52,7 @@ export default {
   CannotDeleteIfHasChildren: 'Cannot delete if has children',
   InvalidConfiguration: 'Invalid Configuration',
   ResourceDoesNotExist__: 'Resource does not Exist: %s',
+  Red: 'Red',
+  Orange: 'Orange',
+  App: 'App',
 };

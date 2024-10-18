@@ -3,7 +3,7 @@ export * from '../bean/bean.status.js';
 
 import { BeanStatus } from '../bean/bean.status.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     status: BeanStatus;
   }

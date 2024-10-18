@@ -7,7 +7,7 @@ export * from '../bean/bean.flow.js';
 import { BeanFlowDef } from '../bean/bean.flowDef.js';
 import { BeanFlow } from '../bean/bean.flow.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     flowDef: BeanFlowDef;
     flow: BeanFlow;

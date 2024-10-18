@@ -4,7 +4,7 @@ export * from '../bean/bean.sequence.js';
 
 import { BeanSequence } from '../bean/bean.sequence.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     sequence: BeanSequence;
   }

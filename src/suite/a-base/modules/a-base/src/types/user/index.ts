@@ -11,7 +11,7 @@ export interface StateUser {
   };
 }
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface ContextState {
     user: StateUser; // not use null | undefined
   }

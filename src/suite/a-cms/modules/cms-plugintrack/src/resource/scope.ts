@@ -16,7 +16,7 @@ export interface ScopeModuleCmsPlugintrack
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'cms-plugintrack': ScopeModuleCmsPlugintrack;
   }

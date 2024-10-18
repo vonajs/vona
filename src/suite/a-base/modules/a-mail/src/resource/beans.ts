@@ -9,7 +9,7 @@ export * from '../bean/bean.mail.js';
 import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
 import { BeanMail } from '../bean/bean.mail.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     mailSceneCache: BeanMailSceneCache;
     mail: BeanMail;

@@ -40,4 +40,5 @@ export default {
   PasswordResetEmailBody,
   AuthenticationFailed: 'Authentication Failed',
   UserIsDisabled: 'User is Disabled',
+  Close: 'Close',
 };

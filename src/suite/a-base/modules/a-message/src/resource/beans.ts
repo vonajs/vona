@@ -4,7 +4,7 @@ export * from '../bean/bean.message.js';
 
 import { BeanMessage } from '../bean/bean.message.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     message: BeanMessage;
   }

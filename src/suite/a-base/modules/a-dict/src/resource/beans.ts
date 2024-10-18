@@ -3,7 +3,7 @@ export * from '../bean/bean.dict.js';
 
 import { BeanDict } from '../bean/bean.dict.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     dict: BeanDict;
   }

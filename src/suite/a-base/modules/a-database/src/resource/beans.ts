@@ -11,7 +11,7 @@ import { BeanDatabase } from '../bean/bean.database.js';
 import { BeanDatabaseClient } from '../bean/bean.databaseClient.js';
 import { BeanModel } from '../bean/virtual.model.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     database: BeanDatabase;
     databaseClient: BeanDatabaseClient;

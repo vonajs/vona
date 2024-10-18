@@ -16,7 +16,7 @@ export interface ScopeModuleCmsSitecommunity
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'cms-sitecommunity': ScopeModuleCmsSitecommunity;
   }

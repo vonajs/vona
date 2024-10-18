@@ -3,7 +3,7 @@ export * from '../bean/bean.userOnline.js';
 
 import { BeanUserOnline } from '../bean/bean.userOnline.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     userOnline: BeanUserOnline;
   }

@@ -11,7 +11,7 @@ import { BeanCacheDb } from '../bean/bean.cacheDb.js';
 import { BeanCacheMem } from '../bean/bean.cacheMem.js';
 import { BeanCacheRedis } from '../bean/bean.cacheRedis.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     cache: BeanCache;
     cacheDb: BeanCacheDb;

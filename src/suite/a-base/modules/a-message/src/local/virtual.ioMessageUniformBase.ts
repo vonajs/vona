@@ -84,10 +84,10 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
     // config
     const configTemplate = this.scopeModuleAMessage.config.socketio.message.render.templates[channelFullName];
     // subject
-    let subject = this.ctx.text.locale(user.locale, configTemplate.subject);
+    let subject = this.ctx.text.locale(user.locale as any, configTemplate.subject);
     subject = this.ctx.bean.util.replaceTemplate(subject, scope);
     // body
-    let body = this.ctx.text.locale(user.locale, configTemplate.body);
+    let body = this.ctx.text.locale(user.locale as any, configTemplate.body);
     body = this.ctx.bean.util.replaceTemplate(body, scope);
     // message
     const _message = {

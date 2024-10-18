@@ -9,7 +9,7 @@ export * from '../bean/auth.provider.sms.js';
 
 import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     smsProviderCache: BeanSmsProviderCache;
   }

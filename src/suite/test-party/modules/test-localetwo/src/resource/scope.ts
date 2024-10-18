@@ -16,7 +16,7 @@ export interface ScopeModuleTestLocaletwo
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'test-localetwo': ScopeModuleTestLocaletwo;
   }

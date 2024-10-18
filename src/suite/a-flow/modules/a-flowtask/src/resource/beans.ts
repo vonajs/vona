@@ -9,7 +9,7 @@ export * from '../bean/bean.flowTask.js';
 
 import { BeanFlowTask } from '../bean/bean.flowTask.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     flowTask: BeanFlowTask;
   }

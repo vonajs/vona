@@ -16,7 +16,7 @@ export interface ScopeModuleAFlowchart
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-flowchart': ScopeModuleAFlowchart;
   }

@@ -25,7 +25,7 @@ export * from '../bean/broadcast.test.js';
 
 import { BeanTestCtx } from '../bean/test.ctx.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     testCtx: BeanTestCtx;
   }

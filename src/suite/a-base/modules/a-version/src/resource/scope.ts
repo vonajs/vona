@@ -16,7 +16,7 @@ export interface ScopeModuleAVersion
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-version': ScopeModuleAVersion;
   }

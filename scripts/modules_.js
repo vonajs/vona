@@ -344,7 +344,7 @@ async function _moduleHandle_bean({ file, module, processHelper }) {
     contentNew = `
 ${contentOld}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
   }
 }
@@ -540,10 +540,10 @@ async function _moduleHandle_thisModule({ file, module, processHelper }) {
 async function _moduleHandle_bean({ file, module, processHelper }) {
   const contentOld = (await fse.readFile(file)).toString();
   if (contentOld.indexOf('export interface IBeanRecord') === -1) return;
-  if (contentOld.indexOf("declare module '@cabloy/core'") > -1) return;
+  if (contentOld.indexOf("declare module 'vona'") > -1) return;
   let contentNew = contentOld.replace(
     'export interface IBeanRecord',
-    "declare module '@cabloy/core' {\nexport interface IBeanRecord",
+    "declare module 'vona' {\nexport interface IBeanRecord",
   );
   contentNew += '}';
   // console.log(contentNew);

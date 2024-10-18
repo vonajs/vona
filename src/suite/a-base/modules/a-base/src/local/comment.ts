@@ -310,16 +310,16 @@ export class LocalComment extends BeanBase<ScopeModule> {
     if (mode === 'add') {
       // add
       if (replyId === 0) {
-        title = this.ctx.text.locale(locale, 'CommentPublishTitleNewComment');
+        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleNewComment');
       } else {
-        title = this.ctx.text.locale(locale, 'CommentPublishTitleReplyComment');
+        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleReplyComment');
       }
     } else {
       // edit
       if (replyId === 0) {
-        title = this.ctx.text.locale(locale, 'CommentPublishTitleEditComment');
+        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleEditComment');
       } else {
-        title = this.ctx.text.locale(locale, 'CommentPublishTitleEditReplyComment');
+        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleEditReplyComment');
       }
     }
     return title;

@@ -16,7 +16,7 @@ export interface ScopeModuleASwiper
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-swiper': ScopeModuleASwiper;
   }

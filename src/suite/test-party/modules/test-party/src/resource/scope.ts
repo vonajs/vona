@@ -16,7 +16,7 @@ export interface ScopeModuleTestParty
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'test-party': ScopeModuleTestParty;
   }

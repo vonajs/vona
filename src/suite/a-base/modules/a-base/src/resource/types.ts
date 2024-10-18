@@ -1,4 +1,4 @@
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface CtxMeta {
     validateHost: { atomClass; key; options; user };
   }

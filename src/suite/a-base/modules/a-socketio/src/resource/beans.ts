@@ -10,7 +10,7 @@ export * from '../bean/bean.io.js';
 
 import { BeanIo } from '../bean/bean.io.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     io: BeanIo;
   }

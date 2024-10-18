@@ -68,7 +68,7 @@ import { BeanAtomAction } from '../bean/bean.atomAction.js';
 import { BeanAtom } from '../bean/bean.atom.js';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     util: BeanUtil;
     user: BeanUser;

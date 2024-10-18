@@ -5,7 +5,7 @@ export * from '../bean/auth.provider.open.js';
 
 import { BeanAuthOpen } from '../bean/bean.authOpen.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     authOpen: BeanAuthOpen;
   }

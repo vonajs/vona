@@ -6,7 +6,7 @@ export * from '../bean/bean.stats.js';
 
 import { BeanStats } from '../bean/bean.stats.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     stats: BeanStats;
   }

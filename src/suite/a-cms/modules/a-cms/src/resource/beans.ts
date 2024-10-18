@@ -7,7 +7,7 @@ export * from '../bean/bean.cms.js';
 
 import { BeanCms } from '../bean/bean.cms.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     cms: BeanCms;
   }

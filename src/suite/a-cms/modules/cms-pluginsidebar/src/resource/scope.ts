@@ -16,7 +16,7 @@ export interface ScopeModuleCmsPluginsidebar
     typeof constants
   > {}
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanScopeRecord {
     'cms-pluginsidebar': ScopeModuleCmsPluginsidebar;
   }

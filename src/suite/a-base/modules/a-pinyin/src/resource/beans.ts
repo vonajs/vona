@@ -3,7 +3,7 @@ export * from '../bean/bean.pinyin.js';
 
 import { BeanPinyin } from '../bean/bean.pinyin.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     pinyin: BeanPinyin;
   }

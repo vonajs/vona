@@ -1,5 +1,5 @@
 export * from '../bean/version.manager.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {}
 }

@@ -1,3 +1,3 @@
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {}
 }

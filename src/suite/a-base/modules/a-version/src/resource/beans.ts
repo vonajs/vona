@@ -8,7 +8,7 @@ export * from '../bean/bean.worker.js';
 
 import { BeanWorker } from '../bean/bean.worker.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     worker: BeanWorker;
   }

@@ -3,7 +3,7 @@ export * from '../bean/bean.share.js';
 
 import { BeanShare } from '../bean/bean.share.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     share: BeanShare;
   }

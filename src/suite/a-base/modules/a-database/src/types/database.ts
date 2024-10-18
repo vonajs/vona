@@ -3,7 +3,7 @@ import { LocalDbMeta } from '../local/local.dbMeta.js';
 import { LocalTransaction } from '../local/local.transaction.js';
 import { ConfigDatabase } from './config.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface CabloyConfig {
     database: ConfigDatabase;
   }

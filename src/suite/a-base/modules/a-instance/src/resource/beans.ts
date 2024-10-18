@@ -7,7 +7,7 @@ export * from '../bean/middleware.instance.js';
 
 import { BeanInstance } from '../bean/bean.instance.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     instance: BeanInstance;
   }

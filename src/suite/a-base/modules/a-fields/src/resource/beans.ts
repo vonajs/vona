@@ -5,7 +5,7 @@ export * from '../bean/bean.fields.js';
 
 import { BeanFields } from '../bean/bean.fields.js';
 
-declare module '@cabloy/core' {
+declare module 'vona' {
   export interface IBeanRecord {
     fields: BeanFields;
   }
