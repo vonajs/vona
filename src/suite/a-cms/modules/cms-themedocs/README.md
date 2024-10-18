@@ -5,7 +5,7 @@ The First Documentation Theme
 ## Installation
 
 ```bash
-$ npm i cabloy-module-api-cms-themedocs
+$ npm i vona-module-cms-themedocs
 ```
 
 ## Usage

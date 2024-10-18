@@ -1,4 +1,4 @@
-import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
+import { IModuleConfigSummer } from 'vona-module-a-summer';
 
 // summer
 const summer = {

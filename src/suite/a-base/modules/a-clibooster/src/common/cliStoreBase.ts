@@ -1,6 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import eggBornUtils from 'egg-born-utils';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from 'vona-module-a-cli';
 
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';

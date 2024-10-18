@@ -1,6 +1,6 @@
 import { __ThisModule__ } from '../resource/this.js';
 import path from 'path';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from 'vona-module-a-cli';
 
 export class CliCreatePageBase extends BeanCliBase {
   pageMode: string;

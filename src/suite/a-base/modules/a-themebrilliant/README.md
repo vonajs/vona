@@ -1,3 +1,3 @@
-# cabloy-module-api-a-themebrilliant
+# vona-module-a-themebrilliant
 
 This is a cabloy theme named as `brilliant`

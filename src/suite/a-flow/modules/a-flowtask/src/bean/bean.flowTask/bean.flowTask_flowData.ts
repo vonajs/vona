@@ -1,4 +1,4 @@
-import { EntityAtomPro } from 'cabloy-module-api-a-base';
+import { EntityAtomPro } from 'vona-module-a-base';
 import { BeanFlowTaskAtomState } from './bean.flowTask_atomState.js';
 
 export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {

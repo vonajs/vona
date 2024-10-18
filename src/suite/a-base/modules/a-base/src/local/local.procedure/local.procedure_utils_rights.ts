@@ -1,4 +1,4 @@
-import { Knex } from 'cabloy-module-api-a-database';
+import { Knex } from 'vona-module-a-database';
 import { LocalProcedureUtilsFieldsRight } from './local.procedure_utils_fieldsRight.js';
 
 export class LocalProcedureUtilsRights extends LocalProcedureUtilsFieldsRight {

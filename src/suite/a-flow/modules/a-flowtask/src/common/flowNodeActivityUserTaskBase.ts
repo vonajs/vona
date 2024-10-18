@@ -1,4 +1,4 @@
-import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
+import { BeanFlowNodeBase } from 'vona-module-a-flow';
 import assert from 'assert';
 
 export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowNodeBase {

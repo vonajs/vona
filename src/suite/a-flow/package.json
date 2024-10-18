@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-suite-api-a-flow",
+  "name": "vona-suite-a-flow",
   "version": "5.0.0",
   "title": "Suite WorkFlow",
   "type": "module",
@@ -21,12 +21,12 @@
   "description": "",
   "author": "zhennann",
   "dependencies": {
-    "cabloy-module-api-a-flow": "workspace:^",
-    "cabloy-module-api-a-flowbehavior": "workspace:^",
-    "cabloy-module-api-a-flowchart": "workspace:^",
-    "cabloy-module-api-a-flowgateway": "workspace:^",
-    "cabloy-module-api-a-flownode": "workspace:^",
-    "cabloy-module-api-a-flowtask": "workspace:^",
-    "cabloy-module-api-test-flow": "workspace:^"
+    "vona-module-a-flow": "workspace:^",
+    "vona-module-a-flowbehavior": "workspace:^",
+    "vona-module-a-flowchart": "workspace:^",
+    "vona-module-a-flowgateway": "workspace:^",
+    "vona-module-a-flownode": "workspace:^",
+    "vona-module-a-flowtask": "workspace:^",
+    "vona-module-test-flow": "workspace:^"
   }
 }

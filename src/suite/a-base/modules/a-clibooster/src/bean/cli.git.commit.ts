@@ -1,5 +1,5 @@
 import { Bean, IModule, ISuite } from 'vona';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from 'vona-module-a-cli';
 
 @Bean({ scene: 'cli.git' })
 export class CliGitCommit extends BeanCliBase {

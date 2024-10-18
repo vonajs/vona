@@ -1,4 +1,4 @@
-import { BeanModel } from 'cabloy-module-api-a-database';
+import { BeanModel } from 'vona-module-a-database';
 
 const tables = {
   aUser(tableName: string, model: BeanModel): any {

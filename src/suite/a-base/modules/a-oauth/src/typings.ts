@@ -1,1 +1,1 @@
-export type * as ABase from 'cabloy-module-api-a-base';
+export type * as ABase from 'vona-module-a-base';

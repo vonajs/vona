@@ -1,1 +1,1 @@
-import 'cabloy-module-api-a-home';
+import 'vona-module-a-home';

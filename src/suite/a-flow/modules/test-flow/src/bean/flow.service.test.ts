@@ -1,5 +1,5 @@
 import { Bean } from 'vona';
-import { BeanFlowServiceBase } from 'cabloy-module-api-a-flownode';
+import { BeanFlowServiceBase } from 'vona-module-a-flownode';
 
 @Bean({ scene: 'flow.service' })
 export class FlowServiceTest extends BeanFlowServiceBase {

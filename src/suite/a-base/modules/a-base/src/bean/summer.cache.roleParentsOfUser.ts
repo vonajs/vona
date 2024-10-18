@@ -1,5 +1,5 @@
 import { Bean, BeanBase } from 'vona';
-import type { IModuleConfigSummerCacheBase } from 'cabloy-module-api-a-summer';
+import type { IModuleConfigSummerCacheBase } from 'vona-module-a-summer';
 
 @Bean({ scene: 'summer.cache' })
 export class SummerCacheRoleParentsOfUser extends BeanBase {

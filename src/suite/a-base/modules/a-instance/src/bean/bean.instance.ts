@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import boxen from 'boxen';
 import { Bean, BeanBase } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { IModelSelectParams } from 'cabloy-module-api-a-database';
+import { IModelSelectParams } from 'vona-module-a-database';
 import { EntityInstance } from '../entity/instance.js';
 
 const boxenOptions: boxen.Options = {

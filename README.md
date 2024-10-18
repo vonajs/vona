@@ -203,7 +203,7 @@ EggBornJS 关注的核心就是`模块化体系`与`模块隔离`，并以此实
 
 比如模块`egg-born-front`是框架前端的核心模块，模块`egg-born-backend`是框架后端的核心模块，模块`egg-born`是框架的命令行工具，用于创建项目骨架
 
-> 这也是为什么所有业务模块都是以`cabloy-module-api-`为命名前缀的原因
+> 这也是为什么所有业务模块都是以`vona-module-`为命名前缀的原因
 
 ### 2. 第二阶段：CabloyJS
 

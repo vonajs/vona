@@ -1,7 +1,7 @@
-import 'cabloy-module-api-a-flow';
-import 'cabloy-module-api-a-flowbehavior';
-import 'cabloy-module-api-a-flowchart';
-import 'cabloy-module-api-a-flowgateway';
-import 'cabloy-module-api-a-flownode';
-import 'cabloy-module-api-a-flowtask';
-import 'cabloy-module-api-test-flow';
+import 'vona-module-a-flow';
+import 'vona-module-a-flowbehavior';
+import 'vona-module-a-flowchart';
+import 'vona-module-a-flowgateway';
+import 'vona-module-a-flownode';
+import 'vona-module-a-flowtask';
+import 'vona-module-test-flow';

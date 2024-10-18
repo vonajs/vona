@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-module-api-a-login",
+  "name": "vona-module-a-login",
   "version": "5.0.0",
   "cabloyModule": {
     "dependencies": {}
@@ -17,7 +17,7 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "cabloy-module-api-aa-login",
+  "description": "vona-module-aa-login",
   "files": [
     "dist",
     "static",

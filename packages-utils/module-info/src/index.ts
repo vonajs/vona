@@ -15,8 +15,8 @@ export function parseInfoFromPath(pathName?: string | null): IModuleInfo | undef
 }
 
 const PREFIX_A = '/api/';
-const PREFIX_B = 'cabloy-module-api-';
-const PREFIX_C = './cabloy-module-api-';
+const PREFIX_B = 'vona-module-';
+const PREFIX_C = './vona-module-';
 const PREFIX_D = './';
 const PREFIX_E = '/';
 
@@ -50,7 +50,7 @@ export function parseInfoPro(
 ): IModuleInfo | undefined {
   const info = parseInfo(moduleName);
   if (!info) return info;
-  if (['zova'].includes(projectMode)) {
+  if (['zova', 'vona'].includes(projectMode)) {
     info.fullName = `${projectMode}-${projectEntityType}-${info.relativeName}`;
   } else {
     info.fullName = `cabloy-${projectEntityType}-${projectMode}-${info.relativeName}`;
@@ -59,9 +59,9 @@ export function parseInfoPro(
 }
 
 // /api/aa/hello/home/index
-// cabloy-module-api-aa-hello
+// vona-module-aa-hello
 // ./aa-hello/
-// ./cabloy-module-api-aa-hello/
+// ./vona-module-aa-hello/
 export function parseName(moduleUrl): string | undefined {
   if (!moduleUrl) return;
   if (moduleUrl.indexOf('/api/static/') === 0) {

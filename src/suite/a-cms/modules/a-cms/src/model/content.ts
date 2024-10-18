@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityContent } from '../entity/content.js';
 
 @Model({ table: 'aCmsContent', options: { disableDeleted: false } })

@@ -1,5 +1,5 @@
 import { Cast, TableIdentity } from 'vona';
-import { BigNumber } from 'cabloy-module-api-a-database';
+import { BigNumber } from 'vona-module-a-database';
 import { BeanModelView } from './bean.model_view.js';
 import {
   IModelCountParams,

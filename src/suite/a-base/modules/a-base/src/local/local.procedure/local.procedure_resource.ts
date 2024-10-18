@@ -1,4 +1,4 @@
-import { Knex } from 'cabloy-module-api-a-database';
+import { Knex } from 'vona-module-a-database';
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
 import { TableIdentity } from 'vona';
 

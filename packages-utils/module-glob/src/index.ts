@@ -79,7 +79,7 @@ export async function glob(options: IModuleGlobOptions) {
 }
 
 function getPackageModuleNode(projectMode) {
-  return ['zova'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
+  return ['zova', 'vona'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
 }
 
 async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>) {

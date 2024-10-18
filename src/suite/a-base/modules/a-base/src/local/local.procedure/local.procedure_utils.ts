@@ -1,4 +1,4 @@
-import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin } from 'vona-module-a-database';
 import { LocalProcedureUtilsRights } from './local.procedure_utils_rights.js';
 
 export class LocalProcedureUtils extends LocalProcedureUtilsRights {

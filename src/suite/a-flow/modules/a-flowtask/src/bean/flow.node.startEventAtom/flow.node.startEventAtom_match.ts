@@ -1,4 +1,4 @@
-import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin } from 'vona-module-a-database';
 import { FlowNodeStartEventAtomCondition } from './flow.node.startEventAtom_condition.js';
 
 export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition {

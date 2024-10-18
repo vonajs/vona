@@ -1,4 +1,4 @@
-import { IModelSelectParamsPage } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsPage } from 'vona-module-a-database';
 import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
 import { ReadOptions } from './read.js';
 

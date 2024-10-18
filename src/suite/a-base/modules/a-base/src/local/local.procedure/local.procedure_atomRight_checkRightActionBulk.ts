@@ -1,4 +1,4 @@
-import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin, Knex } from 'vona-module-a-database';
 import { LocalProcedureAtomRightCheckRightAction } from './local.procedure_atomRight_checkRightAction.js';
 
 export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {

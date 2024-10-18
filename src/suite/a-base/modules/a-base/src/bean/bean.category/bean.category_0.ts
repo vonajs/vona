@@ -1,4 +1,4 @@
-import { BigNumber } from 'cabloy-module-api-a-database';
+import { BigNumber } from 'vona-module-a-database';
 import { EntityCategory } from '../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
 import { BeanBase } from 'vona';

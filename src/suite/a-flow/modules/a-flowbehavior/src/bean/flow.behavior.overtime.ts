@@ -1,6 +1,6 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean } from 'vona';
-import { BeanFlowBehaviorBase } from 'cabloy-module-api-a-flow';
+import { BeanFlowBehaviorBase } from 'vona-module-a-flow';
 
 @Bean({ scene: 'flow.behavior' })
 export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {

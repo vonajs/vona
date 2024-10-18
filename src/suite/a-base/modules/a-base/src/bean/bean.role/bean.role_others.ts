@@ -1,4 +1,4 @@
-import { IModelSelectParamsJoin, IModelSelectParamsOrder } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin, IModelSelectParamsOrder } from 'vona-module-a-database';
 import { BeanRoleIncludes } from './bean.role_includes.js';
 
 //

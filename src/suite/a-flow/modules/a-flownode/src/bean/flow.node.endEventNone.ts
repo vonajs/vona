@@ -1,5 +1,5 @@
 import { Bean } from 'vona';
-import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
+import { BeanFlowNodeBase } from 'vona-module-a-flow';
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeEndEventNone extends BeanFlowNodeBase {

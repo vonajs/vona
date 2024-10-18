@@ -1,11 +1,11 @@
-# cabloy-module-api-cms-themeaws
+# vona-module-cms-themeaws
 
 Cabloy-CMS Theme
 
 ## Installation
 
 ```bash
-$ npm i cabloy-module-api-cms-themeaws
+$ npm i vona-module-cms-themeaws
 ```
 
 ## Usage

@@ -1,6 +1,6 @@
 import { ScopeModule } from '../resource/this.js';
 import { Atom } from 'vona';
-import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';
+import { BeanAtomCmsBase } from 'vona-module-a-cms';
 
 @Atom()
 export class AtomParty extends BeanAtomCmsBase<ScopeModule> {

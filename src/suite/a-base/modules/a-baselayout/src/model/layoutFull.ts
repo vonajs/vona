@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityLayoutFull } from '../entity/layoutFull.js';
 
 @Model({ table: 'aLayoutViewFull', options: { disableDeleted: false } })

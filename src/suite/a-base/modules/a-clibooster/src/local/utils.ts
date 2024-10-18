@@ -1,9 +1,9 @@
 import { Local, BeanBase } from 'vona';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from 'vona-module-a-cli';
 import path from 'path';
 import fse from 'fs-extra';
 
-const __JSContent = `import { BeanCliBase } from 'cabloy-module-api-a-cli';
+const __JSContent = `import { BeanCliBase } from 'vona-module-a-cli';
 
 export default class Demo extends BeanCliBase {
   // npm run cli :tools:demo

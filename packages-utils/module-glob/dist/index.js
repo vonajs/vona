@@ -91,7 +91,7 @@ async function glob(options) {
 }
 exports.glob = glob;
 function getPackageModuleNode(projectMode) {
-    return ['zova'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
+    return ['zova', 'vona'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
 }
 async function __loadPackage(context, modules) {
     const promises = [];

@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-suite-api-test-party",
+  "name": "vona-suite-test-party",
   "version": "5.0.0",
   "title": "Party Test",
   "type": "module",
@@ -21,9 +21,9 @@
   "description": "",
   "author": "zhennann",
   "dependencies": {
-    "cabloy-module-api-test-localeone": "workspace:^",
-    "cabloy-module-api-test-localetwo": "workspace:^",
-    "cabloy-module-api-test-party": "workspace:^",
-    "cabloy-module-api-test-partymonkey": "workspace:^"
+    "vona-module-test-localeone": "workspace:^",
+    "vona-module-test-localetwo": "workspace:^",
+    "vona-module-test-party": "workspace:^",
+    "vona-module-test-partymonkey": "workspace:^"
   }
 }

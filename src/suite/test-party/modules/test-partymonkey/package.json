@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-module-api-test-partymonkey",
+  "name": "vona-module-test-partymonkey",
   "version": "5.0.0",
   "title": "test-partymonkey",
   "cabloyModule": {
@@ -43,6 +43,6 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "cabloy-module-api-test-party": "^5.0.0"
+    "vona-module-test-party": "^5.0.0"
   }
 }

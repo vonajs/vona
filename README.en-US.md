@@ -186,7 +186,7 @@ EggBornJS implements a full-stack development framework with business modules as
 
 For example, the module `egg-born-front` is the core module of the frontend of the framework, while the module `egg-born-backend` is the core module of the backend of the framework, and the module `egg-born` is the command-line tool of the framework for creating the project skeleton
 
-This is why all business modules are prefixed with `cabloy-module-api-`
+This is why all business modules are prefixed with `vona-module-`
 
 ### 2\. Stage Two：CabloyJS
 

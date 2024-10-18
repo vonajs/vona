@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { BeanFlowNodeBase } from 'cabloy-module-api-a-flow';
+import { BeanFlowNodeBase } from 'vona-module-a-flow';
 
 export class FlowNodeGatewayBase extends BeanFlowNodeBase {
   gatewayMode: 'exclusive' | 'inclusive' | 'parallel';

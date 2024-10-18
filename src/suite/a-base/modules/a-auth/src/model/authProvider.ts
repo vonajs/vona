@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityAuthProvider } from '../entity/authProvider.js';
 
 @Model({ table: 'aAuthProvider', options: { disableDeleted: true } })

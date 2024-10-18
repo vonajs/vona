@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-suite-api-a-home",
+  "name": "vona-suite-a-home",
   "version": "5.0.0",
   "title": "a-home",
   "type": "module",
@@ -21,6 +21,6 @@
   "description": "",
   "author": "zhennann",
   "dependencies": {
-    "cabloy-module-api-a-home": "workspace:^"
+    "vona-module-a-home": "workspace:^"
   }
 }

@@ -1,4 +1,4 @@
-export type TypeProjectMode = 'front' | 'api' | 'zova';
+export type TypeProjectMode = 'front' | 'api' | 'zova' | 'vona';
 export type TypeProjectEntityType = 'module' | 'suite';
 export interface IModuleCapabilities {
     monkey: boolean;

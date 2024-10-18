@@ -1,6 +1,6 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Virtual } from 'vona';
-import { BeanAtomBase } from 'cabloy-module-api-a-base';
+import { BeanAtomBase } from 'vona-module-a-base';
 import trimHtml from '@zhennann/trim-html';
 
 @Virtual({ scene: 'bean' })

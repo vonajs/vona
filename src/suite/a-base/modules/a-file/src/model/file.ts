@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityFile } from '../entity/file.js';
 
 @Model({ table: 'aFile', options: { disableDeleted: false } })

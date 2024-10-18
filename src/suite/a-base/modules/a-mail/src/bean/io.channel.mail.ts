@@ -1,5 +1,5 @@
 import { Bean } from 'vona';
-import { BeanIoChannelBase } from 'cabloy-module-api-a-socketio';
+import { BeanIoChannelBase } from 'vona-module-a-socketio';
 
 import nodemailer from 'nodemailer';
 import chalk from 'chalk';

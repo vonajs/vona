@@ -1,4 +1,4 @@
-# cabloy-module-api-cms-pluginsubmit
+# vona-module-cms-pluginsubmit
 
 ## 介绍
 
@@ -9,7 +9,7 @@
 ### 安装插件
 
 ```bash
-$ npm i cabloy-module-api-cms-pluginsubmit
+$ npm i vona-module-cms-pluginsubmit
 ```
 
 > 如果主题模块已经包含了此插件就会自动安装

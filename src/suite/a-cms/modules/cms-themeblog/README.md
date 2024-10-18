@@ -5,7 +5,7 @@ The First Blog Theme
 ## Installation
 
 ```bash
-$ npm i cabloy-module-api-cms-themeblog
+$ npm i vona-module-cms-themeblog
 ```
 
 ## Usage

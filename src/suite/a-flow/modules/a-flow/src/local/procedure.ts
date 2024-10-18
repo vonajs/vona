@@ -1,5 +1,5 @@
 import { Local, BeanBase } from 'vona';
-import { Knex } from 'cabloy-module-api-a-database';
+import { Knex } from 'vona-module-a-database';
 
 @Local()
 export class LocalProcedure extends BeanBase {

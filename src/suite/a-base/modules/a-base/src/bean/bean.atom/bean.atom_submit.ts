@@ -1,4 +1,4 @@
-import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
+import { FlowNodeStartEventAtom } from 'vona-module-a-flowtask';
 import { BeanAtomSimple } from './bean.atom_simple.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { EntityAtomPro } from '../../index.js';

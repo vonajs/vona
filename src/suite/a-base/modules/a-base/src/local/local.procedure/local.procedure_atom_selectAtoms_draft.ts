@@ -1,4 +1,4 @@
-import { IModelSelectParamsJoin, Knex } from 'cabloy-module-api-a-database';
+import { IModelSelectParamsJoin, Knex } from 'vona-module-a-database';
 import { LocalProcedureAtomSelectAtoms0 } from './local.procedure_atom_selectAtoms_0.js';
 import { SelectOptionsProSafe } from '../../types.js';
 

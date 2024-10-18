@@ -5,7 +5,7 @@ The First Community Theme
 ## Installation
 
 ```bash
-$ npm i cabloy-module-api-cms-themecommunity
+$ npm i vona-module-cms-themecommunity
 ```
 
 ## Usage

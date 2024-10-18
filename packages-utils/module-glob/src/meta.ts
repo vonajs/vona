@@ -34,7 +34,7 @@ const __pathsModules: IModuleGlobPathMetaItem[] = [
 export function getPathsMeta(projectMode: TypeProjectMode): IModuleGlobPathsMeta {
   let brand;
   let mode;
-  if (['zova'].includes(projectMode)) {
+  if (['zova', 'vona'].includes(projectMode)) {
     brand = projectMode;
     mode = '';
   } else {

@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityShare } from '../entity/share.js';
 
 @Model({ table: 'aShare', options: { disableDeleted: false } })

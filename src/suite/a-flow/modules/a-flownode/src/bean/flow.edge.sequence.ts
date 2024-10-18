@@ -1,5 +1,5 @@
 import { Bean } from 'vona';
-import { BeanFlowEdgeBase } from 'cabloy-module-api-a-flow';
+import { BeanFlowEdgeBase } from 'vona-module-a-flow';
 
 @Bean({ scene: 'flow.edge' })
 export class FlowEdgeSequence extends BeanFlowEdgeBase {

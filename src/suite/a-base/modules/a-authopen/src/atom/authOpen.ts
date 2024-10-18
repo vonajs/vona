@@ -1,6 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { Atom } from 'vona';
-import { BeanAtomBase } from 'cabloy-module-api-a-base';
+import { BeanAtomBase } from 'vona-module-a-base';
 
 import randomize from 'randomatic';
 

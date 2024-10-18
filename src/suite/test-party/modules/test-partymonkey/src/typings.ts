@@ -1,2 +1,2 @@
-export type * as ABase from 'cabloy-module-api-a-base';
-import 'cabloy-module-api-test-party';
+export type * as ABase from 'vona-module-a-base';
+import 'vona-module-test-party';

@@ -5,7 +5,7 @@ export const config = (_app: CabloyApplication) => {
     theme: {
       _theme: {
         name: 'cms-themecommunity',
-        url: 'https://www.npmjs.com/package/cabloy-module-api-cms-themecommunity',
+        url: 'https://www.npmjs.com/package/vona-module-cms-themecommunity',
       },
     },
   };

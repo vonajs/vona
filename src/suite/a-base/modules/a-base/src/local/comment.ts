@@ -2,7 +2,7 @@ import { BeanBase, Local } from 'vona';
 
 import trimHtml from '@zhennann/trim-html';
 import { ScopeModule } from '../resource/this.js';
-import { Knex } from 'cabloy-module-api-a-database';
+import { Knex } from 'vona-module-a-database';
 
 @Local()
 export class LocalComment extends BeanBase<ScopeModule> {

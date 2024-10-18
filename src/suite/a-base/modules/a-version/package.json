@@ -1,5 +1,5 @@
 {
-  "name": "cabloy-module-api-a-version",
+  "name": "vona-module-a-version",
   "version": "5.0.0",
   "cabloyModule": {
     "fileVersion": 3,
@@ -20,7 +20,7 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "cabloy-module-api-a-version",
+  "description": "vona-module-a-version",
   "files": [
     "dist",
     "static",

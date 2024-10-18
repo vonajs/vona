@@ -1,5 +1,5 @@
 import { Cast } from 'vona';
-import { BigNumber } from 'cabloy-module-api-a-database';
+import { BigNumber } from 'vona-module-a-database';
 import { ScopeModule } from '../../resource/this.js';
 import { BeanBase } from 'vona';
 import { BeanFlowTask } from '../bean.flowTask.js';

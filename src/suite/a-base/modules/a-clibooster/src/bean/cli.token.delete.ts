@@ -1,5 +1,5 @@
 import { Bean } from 'vona';
-import { BeanCliBase } from 'cabloy-module-api-a-cli';
+import { BeanCliBase } from 'vona-module-a-cli';
 
 @Bean({ scene: 'cli.token' })
 export class CliTokenDelete extends BeanCliBase {

@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityRoleRef } from '../entity/roleRef.js';
 
 @Model({ table: 'aRoleRef', options: { disableDeleted: true } })

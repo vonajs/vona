@@ -1,5 +1,5 @@
 import { Model } from 'vona';
-import { BeanModelBase } from 'cabloy-module-api-a-database';
+import { BeanModelBase } from 'vona-module-a-database';
 import { EntityShareRecordUV } from '../entity/shareRecordUV.js';
 
 @Model({ table: 'aShareRecordUV', options: { disableDeleted: false } })

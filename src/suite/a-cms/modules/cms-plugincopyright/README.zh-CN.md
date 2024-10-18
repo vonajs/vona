@@ -1,6 +1,6 @@
 简体中文 | [English](./README.md)
 
-# cabloy-module-api-cms-plugincopyright
+# vona-module-cms-plugincopyright
 
 ## 介绍
 
@@ -11,7 +11,7 @@
 ### 安装插件
 
 ```bash
-$ npm i cabloy-module-api-cms-plugincopyright
+$ npm i vona-module-cms-plugincopyright
 ```
 
 > 如果主题模块已经包含了此插件就会自动安装

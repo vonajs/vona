@@ -32,7 +32,7 @@ const __pathsModules = [
 function getPathsMeta(projectMode) {
     let brand;
     let mode;
-    if (['zova'].includes(projectMode)) {
+    if (['zova', 'vona'].includes(projectMode)) {
         brand = projectMode;
         mode = '';
     }

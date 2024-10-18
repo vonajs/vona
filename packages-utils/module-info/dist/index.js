@@ -33,8 +33,8 @@ function parseInfoFromPath(pathName) {
 }
 exports.parseInfoFromPath = parseInfoFromPath;
 const PREFIX_A = '/api/';
-const PREFIX_B = 'cabloy-module-api-';
-const PREFIX_C = './cabloy-module-api-';
+const PREFIX_B = 'vona-module-';
+const PREFIX_C = './vona-module-';
 const PREFIX_D = './';
 const PREFIX_E = '/';
 // aa-hello aa/hello
@@ -70,7 +70,7 @@ function parseInfoPro(moduleName, projectMode, projectEntityType) {
     const info = parseInfo(moduleName);
     if (!info)
         return info;
-    if (['zova'].includes(projectMode)) {
+    if (['zova', 'vona'].includes(projectMode)) {
         info.fullName = `${projectMode}-${projectEntityType}-${info.relativeName}`;
     }
     else {
@@ -80,9 +80,9 @@ function parseInfoPro(moduleName, projectMode, projectEntityType) {
 }
 exports.parseInfoPro = parseInfoPro;
 // /api/aa/hello/home/index
-// cabloy-module-api-aa-hello
+// vona-module-aa-hello
 // ./aa-hello/
-// ./cabloy-module-api-aa-hello/
+// ./vona-module-aa-hello/
 function parseName(moduleUrl) {
     if (!moduleUrl)
         return;

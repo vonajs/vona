@@ -1,3 +1,3 @@
-# cabloy-module-api-a-themehyacinth
+# vona-module-a-themehyacinth
 
 This is a cabloy theme named as `hyacinth`

@@ -189,7 +189,7 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   let contentNew = contentModel.replace('BeanModelBase, ', '');
   contentNew = contentNew.replace(
     "'vona';",
-    `'vona';\nimport { BeanModelBase } from 'cabloy-module-api-a-database';\nimport { ${entityNameInterface} } from '../entity/${modelName}.js';\n`,
+    `'vona';\nimport { BeanModelBase } from 'vona-module-a-database';\nimport { ${entityNameInterface} } from '../entity/${modelName}.js';\n`,
   );
   contentNew = contentNew.replace('BeanModelBase {', `BeanModelBase<${entityNameInterface}> {`);
   console.log(contentNew);
@@ -288,7 +288,7 @@ async function _moduleHandle_backend({ file, module, processHelper }) {
   // console.log(file);
   // await fse.move(file, `${module.root}/src/typings/core/index.ts`);
   let contentOld = (await fse.readFile(file)).toString();
-  const regexp = /import 'cabloy-module-api-(.*?)';/g;
+  const regexp = /import 'vona-module-(.*?)';/g;
   const matches = contentOld.matchAll(regexp);
   const outputNew1 = [];
   const outputNew2 = [];
@@ -302,8 +302,8 @@ async function _moduleHandle_backend({ file, module, processHelper }) {
     console.log(classNameOld, classPath, classNameNew);
     // models.ts
     contentOld = contentOld.replace(
-      `import 'cabloy-module-api-${classPath}';`,
-      `export type * as ${classNameNew} from 'cabloy-module-api-${classPath}';`,
+      `import 'vona-module-${classPath}';`,
+      `export type * as ${classNameNew} from 'vona-module-${classPath}';`,
     );
   }
   // console.log(contentOld);
@@ -394,7 +394,7 @@ async function _moduleHandle_useScope({ file, module, processHelper }) {
 
 async function _moduleHandle_typings({ file, module, processHelper }) {
   console.log(file);
-  const contentNew = "import 'cabloy-suite-api-a-base';";
+  const contentNew = "import 'vona-suite-a-base';";
   // console.log(contentNew);
   // await fse.outputFile(file, contentNew);
   // await processHelper.formatFile({ fileName: file });
@@ -669,9 +669,9 @@ async function _moduleHandle_atom({ file, module, processHelper }) {
     if (module.info.relativeName === 'a-base') {
       importBase = "import { BeanAtomBase } from '../bean/virtual.atomBase.js';";
     } else if (contentOld.indexOf('class.AtomCmsBase') > -1) {
-      importBase = "import { BeanAtomCmsBase } from 'cabloy-module-api-a-cms';";
+      importBase = "import { BeanAtomCmsBase } from 'vona-module-a-cms';";
     } else {
-      importBase = "import { BeanAtomBase } from 'cabloy-module-api-a-base';";
+      importBase = "import { BeanAtomBase } from 'vona-module-a-base';";
     }
     const contentNew = `
 import { Atom } from 'vona';
@@ -1646,7 +1646,7 @@ export class ${classNameNew} extends BeanBase ${contentMatches[3]}
   // await processHelper.formatFile({ fileName: outFileName });
   // if (!module.suite) {
   //   console.log(`{
-  //   "path": "src/module/${module.package.name.substring('cabloy-module-api-'.length)}"
+  //   "path": "src/module/${module.package.name.substring('vona-module-'.length)}"
   // },`);
   // }
   // // tsconfig

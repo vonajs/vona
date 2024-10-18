@@ -1,4 +1,4 @@
-import 'cabloy-module-api-test-localeone';
-import 'cabloy-module-api-test-localetwo';
-import 'cabloy-module-api-test-party';
-import 'cabloy-module-api-test-partymonkey';
+import 'vona-module-test-localeone';
+import 'vona-module-test-localetwo';
+import 'vona-module-test-party';
+import 'vona-module-test-partymonkey';

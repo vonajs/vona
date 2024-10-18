@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-CN.md)
 
-# cabloy-module-api-cms-plugincopyright
+# vona-module-cms-plugincopyright
 
 ## Introduce
 
@@ -11,7 +11,7 @@ Use this plugin to automatically display the `copyright notice` and basic inform
 ### Install
 
 ```bash
-$ npm i cabloy-module-api-cms-plugincopyright
+$ npm i vona-module-cms-plugincopyright
 ```
 
 > If the theme module already contains this plugin, it will be installed automatically

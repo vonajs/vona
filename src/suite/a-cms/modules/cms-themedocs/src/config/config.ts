@@ -14,7 +14,7 @@ export const config = (_app: CabloyApplication) => {
       },
       _theme: {
         name: 'cms-themedocs',
-        url: 'https://www.npmjs.com/package/cabloy-module-api-cms-themedocs',
+        url: 'https://www.npmjs.com/package/vona-module-cms-themedocs',
       },
       _github: {
         user: 'zhennann',

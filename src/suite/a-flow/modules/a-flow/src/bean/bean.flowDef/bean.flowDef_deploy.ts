@@ -1,4 +1,4 @@
-import { FlowNodeStartEventAtom } from 'cabloy-module-api-a-flowtask';
+import { FlowNodeStartEventAtom } from 'vona-module-a-flowtask';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
 
