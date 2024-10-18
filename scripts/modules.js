@@ -18,7 +18,7 @@ async function main() {
 
   // modules
   const { modules, modulesArray, suites } = await glob({
-    projectMode: 'api',
+    projectMode: 'vona',
     projectPath: process.cwd(),
     disabledModules: undefined,
     disabledSuites: undefined,

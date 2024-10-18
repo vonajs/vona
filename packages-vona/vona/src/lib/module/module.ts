@@ -14,7 +14,7 @@ export class ModuleTools extends BeanSimple {
     const app = this.app;
     // all modules
     const { suites, modules, modulesArray } = await glob({
-      projectMode: 'api',
+      projectMode: 'vona',
       projectPath: path.join(app.options.baseDir, '../..'),
       disabledModules: process.env.Project_Disabled_Modules,
       disabledSuites: process.env.Project_Disabled_Suites,

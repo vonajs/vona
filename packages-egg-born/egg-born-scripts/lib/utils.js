@@ -217,7 +217,7 @@ const utils = {
     const projectPath = this.getProjectDir();
     // glob
     const { suites, modules } = await glob({
-      projectMode: 'api',
+      projectMode: 'vona',
       projectPath,
       disabledModules: undefined,
       disabledSuites: undefined,
