@@ -91,7 +91,7 @@ const utils = {
   },
   getProjectMode() {
     const vonaPath = this.__getVonaPath();
-    return vonaPath.indexOf('packages-cabloy') > -1 ? 'source' : 'project';
+    return vonaPath.indexOf('packages-vona') > -1 ? 'source' : 'project';
   },
   getModulePath(moduleName) {
     const moduleFile = require.resolve(`${moduleName}/package.json`);
@@ -99,7 +99,7 @@ const utils = {
   },
   __getVonaPath() {
     const projectPath = this.getProjectDir();
-    const cabloyPath = path.join(projectPath, 'packages-cabloy/vona');
+    const cabloyPath = path.join(projectPath, 'packages-vona/vona');
     if (fse.existsSync(cabloyPath)) return cabloyPath;
     return eggBornUtils.tools._getCabloyPath(projectPath);
   },

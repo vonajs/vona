@@ -29,7 +29,7 @@
       "path": "packages-utils/localeutil"
     },
     {
-      "path": "packages-cabloy/vona"
+      "path": "packages-vona/vona"
     },
     {
       "path": "packages-egg-born/egg-born-backend"
