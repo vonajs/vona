@@ -90,16 +90,16 @@ const utils = {
     return commandDev.subCommand.proc;
   },
   getProjectMode() {
-    const cabloyPath = this.__getCabloyPath();
-    return cabloyPath.indexOf('packages-cabloy') > -1 ? 'source' : 'project';
+    const vonaPath = this.__getVonaPath();
+    return vonaPath.indexOf('packages-cabloy') > -1 ? 'source' : 'project';
   },
   getModulePath(moduleName) {
     const moduleFile = require.resolve(`${moduleName}/package.json`);
     return path.dirname(moduleFile);
   },
-  __getCabloyPath() {
+  __getVonaPath() {
     const projectPath = this.getProjectDir();
-    const cabloyPath = path.join(projectPath, 'packages-cabloy/cabloy');
+    const cabloyPath = path.join(projectPath, 'packages-cabloy/vona');
     if (fse.existsSync(cabloyPath)) return cabloyPath;
     return eggBornUtils.tools._getCabloyPath(projectPath);
   },
