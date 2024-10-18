@@ -1,5 +1,5 @@
 {
-  "name": "cabloy",
+  "name": "vona",
   "version": "5.0.0",
   "type": "module",
   "exports": {
@@ -17,7 +17,7 @@
   "description": "A Node.js full-stack framework with workflow engine, based on koa + egg + vue + framework7",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhennann/cabloy.git"
+    "url": "git+https://github.com/cabloy/vona.git"
   },
   "author": "zhennann",
   "keywords": [
@@ -29,12 +29,11 @@
     "cabloy"
   ],
   "bugs": {
-    "url": "https://github.com/zhennann/cabloy/issues"
+    "url": "https://github.com/cabloy/vona/issues"
   },
-  "homepage": "https://github.com/zhennann/cabloy#readme",
+  "homepage": "https://github.com/cabloy/vona#readme",
   "dependencies": {
-    "@cabloy/core": "workspace:^",
-    "cabloy-suite-api-a-base": "workspace:^",
+    "vona-core": "workspace:^",
     "egg-born-backend": "workspace:^",
     "egg-born-bin": "workspace:^",
     "egg-born-scripts": "workspace:^"

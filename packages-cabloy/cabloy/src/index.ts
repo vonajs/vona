@@ -1,2 +1,1 @@
-import '@cabloy/core';
-import 'cabloy-suite-api-a-base';
+export * from 'vona-core';

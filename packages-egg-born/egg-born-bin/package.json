@@ -41,7 +41,6 @@
     "compressing": "^1.5.1",
     "egg-born-backend": "workspace:^",
     "egg-born-scripts": "workspace:^",
-    "egg-born-front": "^9.0.0",
     "egg-born-utils": "^1.2.0",
     "egg-mock": "^5.10.9",
     "enquirer": "^2.3.6",
