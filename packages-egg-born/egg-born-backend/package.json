@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
-    "vona-core": "workspace:^",
+    "vona": "workspace:^",
     "@types/uuid": "^9.0.8",
     "egg": "^3.17.5",
     "egg-onerror": "^2.1.1",

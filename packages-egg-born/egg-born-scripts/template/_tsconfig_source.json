@@ -29,9 +29,6 @@
       "path": "packages-utils/localeutil"
     },
     {
-      "path": "packages-cabloy/core"
-    },
-    {
       "path": "packages-cabloy/vona"
     },
     {

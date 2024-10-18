@@ -59,7 +59,7 @@ export default function (app: CabloyApplication) {
       'src/module-vendor',
       'src/suite',
       'src/suite-vendor',
-      'packages-cabloy/core',
+      'packages-cabloy/vona',
     ];
     const cwd = process.cwd();
     const watchDirs: any[] = [];
@@ -86,7 +86,7 @@ export default function (app: CabloyApplication) {
     app.logger.warn(`[agent:development] reload worker because ${info} changed`);
     // tsc
     if (extname !== '.mts') {
-      const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/core'];
+      const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-cabloy/vona'];
       if (__pathes.some(item => info.indexOf(item) > -1)) {
         const processHelper = new ProcessHelper();
         await processHelper.tsc();

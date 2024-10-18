@@ -1,6 +1,6 @@
 import path from 'path';
 import egg from 'egg';
-import * as Framework from 'vona-core';
+import * as Framework from "vona";
 
 const EGG_PATH = Symbol.for('egg#eggPath');
 const EGG_LOADER = Symbol.for('egg#loader');
