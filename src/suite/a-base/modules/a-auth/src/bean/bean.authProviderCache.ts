@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 const __authProvidersConfigCache: any = {};
 const __authProvidersConfigCache_login: any = {};

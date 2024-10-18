@@ -1,4 +1,4 @@
-import { TableIdentity } from '@cabloy/core';
+import { TableIdentity } from 'vona';
 import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
 
 export interface AtomKey {

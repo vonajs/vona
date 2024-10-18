@@ -1,4 +1,4 @@
-import { Aop, BeanBase, Virtual } from '@cabloy/core';
+import { Aop, BeanBase, Virtual } from 'vona';
 
 @Virtual()
 class AopSimpleBase extends BeanBase {

@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 import update1Data from './update1Data.js';
 

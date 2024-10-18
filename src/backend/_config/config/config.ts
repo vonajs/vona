@@ -1,4 +1,4 @@
-import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
+import { CabloyAppInfo, CabloyConfigOptional } from 'vona';
 
 export default function (appInfo: CabloyAppInfo) {
   const config = {} as CabloyConfigOptional;

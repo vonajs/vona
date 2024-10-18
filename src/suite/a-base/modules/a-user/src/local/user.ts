@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 
 const __appKeyDefault = 'a-app:appDefault';
 

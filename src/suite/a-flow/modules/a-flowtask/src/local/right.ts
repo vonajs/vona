@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 @Local()
 export class LocalRight extends BeanBase<ScopeModule> {

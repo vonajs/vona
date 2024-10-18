@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase, CabloyContext } from '@cabloy/core';
+import { Bean, BeanBase, CabloyContext } from 'vona';
 import { BeanAuthProviderBase } from './virtual.authProviderBase.js';
 
 @Bean()

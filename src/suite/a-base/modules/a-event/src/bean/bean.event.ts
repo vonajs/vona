@@ -1,4 +1,4 @@
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 
 const __adapter = (_context, chain) => {
   const eventBean = chain;

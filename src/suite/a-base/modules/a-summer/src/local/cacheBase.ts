@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 import { LocalMem } from './mem.js';
 import { LocalRedis } from './redis.js';
 import { LocalFetch } from './fetch.js';

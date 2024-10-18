@@ -1,4 +1,4 @@
-import { BeanBase, TableIdentity, Virtual } from '@cabloy/core';
+import { BeanBase, TableIdentity, Virtual } from 'vona';
 import { Knex } from 'knex';
 
 export interface IFetchDatabasesResultItem {

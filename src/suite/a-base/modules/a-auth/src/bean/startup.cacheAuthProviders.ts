@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'startup' })
 export class StartupCacheAuthProviders extends BeanBase {

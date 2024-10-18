@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigBroadcast } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigBroadcast } from 'vona';
 import { IModuleConfigSummerCache } from './types.js';
 
 // broadcasts

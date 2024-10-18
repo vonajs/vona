@@ -1,4 +1,4 @@
-import { CabloyContext } from '@cabloy/core';
+import { CabloyContext } from 'vona';
 
 const exists = {
   async: true,

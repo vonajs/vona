@@ -1,4 +1,4 @@
-import { EntityItemBase } from '@cabloy/core';
+import { EntityItemBase } from 'vona';
 
 export interface EntityUser extends EntityItemBase {
   disabled: number;

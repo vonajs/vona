@@ -1,4 +1,4 @@
-import { Cast, TableIdentity } from '@cabloy/core';
+import { Cast, TableIdentity } from 'vona';
 import { BigNumber } from 'cabloy-module-api-a-database';
 import { BeanModelView } from './bean.model_view.js';
 import {

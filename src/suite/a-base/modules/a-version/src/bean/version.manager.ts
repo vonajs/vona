@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import fse from 'fs-extra';
 
 @Bean({ scene: 'version' })

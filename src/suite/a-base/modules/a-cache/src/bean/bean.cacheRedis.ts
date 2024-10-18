@@ -1,4 +1,4 @@
-import { BeanModuleScopeBase, Bean } from '@cabloy/core';
+import { BeanModuleScopeBase, Bean } from 'vona';
 
 @Bean()
 export class BeanCacheRedis extends BeanModuleScopeBase {

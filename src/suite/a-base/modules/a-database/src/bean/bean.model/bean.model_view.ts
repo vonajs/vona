@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { BeanModelKnex } from './bean.model_knex.js';
 import { Knex } from 'knex';
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';

@@ -1,6 +1,6 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
-import { BeanModuleScopeBase } from '@cabloy/core';
+import { BeanModuleScopeBase } from 'vona';
 import initData15 from '../version.manager/init/initData15.js';
 import { BeanRole } from '../bean.role.js';
 

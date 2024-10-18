@@ -1,4 +1,4 @@
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 
 @Bean()
 export class BeanValidation extends BeanModuleScopeBase {

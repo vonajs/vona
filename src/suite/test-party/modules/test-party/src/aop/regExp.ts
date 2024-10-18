@@ -1,4 +1,4 @@
-import { Aop, BeanBase } from '@cabloy/core';
+import { Aop, BeanBase } from 'vona';
 
 @Aop({ match: [/^test-party.test\.\w+$/, 'testCtx'] })
 export class AopRegExp extends BeanBase {

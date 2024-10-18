@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 
 import { CliCreatePageBase } from '../common/cliCreatePage.js';
 

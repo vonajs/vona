@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 import { BeanAtomBase } from './virtual.atomBase.js';
 
 @Bean()

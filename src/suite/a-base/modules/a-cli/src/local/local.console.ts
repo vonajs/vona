@@ -1,4 +1,4 @@
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 @Local()
 export class LocalConsole extends BeanBase {

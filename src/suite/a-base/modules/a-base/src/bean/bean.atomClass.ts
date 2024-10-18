@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 import { AtomClass, AtomClassBase, AtomClassParams } from '../types.js';
 import { EntityAtomClass } from '../index.js';
 import { IModelSelectParamsJoin } from 'cabloy-module-api-a-database';

@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 const _cacheMessageClasses: any = {};
 const _cacheChannels: any = {};

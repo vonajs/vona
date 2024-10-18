@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 import util from 'util';
 import passwordFn from 'password-hash-and-salt'; // should compile

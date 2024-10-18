@@ -1,4 +1,4 @@
-import { BeanSimple, CabloyContext, IMonkeySystem } from '@cabloy/core';
+import { BeanSimple, CabloyContext, IMonkeySystem } from 'vona';
 import { LocalDbMeta } from './local/local.dbMeta.js';
 
 const DATABASEMETA = Symbol.for('Context#__databasemeta');

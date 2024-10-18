@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {

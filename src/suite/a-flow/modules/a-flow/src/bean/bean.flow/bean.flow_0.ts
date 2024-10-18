@@ -1,5 +1,5 @@
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase, Cast } from '@cabloy/core';
+import { BeanBase, Cast } from 'vona';
 import { BeanFlow } from '../bean.flow.js';
 
 export class BeanFlow0 extends BeanBase<ScopeModule> {

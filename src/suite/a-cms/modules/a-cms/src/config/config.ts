@@ -68,7 +68,7 @@ const cmsSite = {
   },
 };
 
-import { CabloyApplication } from '@cabloy/core';
+import { CabloyApplication } from 'vona';
 
 export const config = (_app: CabloyApplication) => {
   return {

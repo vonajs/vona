@@ -1,6 +1,6 @@
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from './cacheBase.js';
-import { Local } from '@cabloy/core';
+import { Local } from 'vona';
 
 @Local()
 export class LocalFetch extends CacheBase {

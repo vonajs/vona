@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../../../resource/this.js';
-import { BeanBase, Cast, Controller } from '@cabloy/core';
+import { BeanBase, Cast, Controller } from 'vona';
 import { ScopeModule } from '../../../resource/this.js';
 import assert from 'assert';
 import { LocalTest } from '../../../index.js';

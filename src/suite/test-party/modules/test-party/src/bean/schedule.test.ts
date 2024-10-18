@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'schedule' })
 export class ScheduleTest extends BeanBase {

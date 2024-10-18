@@ -1,4 +1,4 @@
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from '@cabloy/core';
+import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 import { IModuleLocal } from './locals.js';
 import { IModuleModel } from './models.js';
 import { config, Errors, locales, constants } from '../config/index.js';

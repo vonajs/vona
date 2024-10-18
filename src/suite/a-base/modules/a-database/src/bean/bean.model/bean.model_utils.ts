@@ -5,7 +5,7 @@ import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
 import { BigNumber, IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types.js';
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 
 let __columns: Record<string, ITableColumns> = {};
 

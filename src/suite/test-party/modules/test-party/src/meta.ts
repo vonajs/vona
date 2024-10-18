@@ -15,7 +15,7 @@ import staticRoles from './meta/static/roles.js';
 import cliCommands from './meta/cli/commands.js';
 // icons
 import iconGroups from './meta/icons/groups.js';
-import { CabloyApplication } from '@cabloy/core';
+import { CabloyApplication } from 'vona';
 // meta
 export const meta = (app: CabloyApplication) => {
   const meta: any = {};

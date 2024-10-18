@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanFlowTaskCheckViewWorkflow } from './bean.flowTask/bean.flowTask_checkViewWorkflow.js';
 
 @Bean()

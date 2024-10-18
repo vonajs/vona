@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigQueue } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigQueue } from 'vona';
 
 // queues
 const queues = {

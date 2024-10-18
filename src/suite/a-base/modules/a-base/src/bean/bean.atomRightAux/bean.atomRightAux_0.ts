@@ -1,3 +1,3 @@
-import { BeanModuleScopeBase } from '@cabloy/core';
+import { BeanModuleScopeBase } from 'vona';
 
 export class BeanAtomRightAux0 extends BeanModuleScopeBase {}

@@ -1,4 +1,4 @@
-import { EntityBase, TableIdentity } from '@cabloy/core';
+import { EntityBase, TableIdentity } from 'vona';
 
 export interface EntityAtom extends Omit<EntityBase, 'id'> {
   id: TableIdentity;

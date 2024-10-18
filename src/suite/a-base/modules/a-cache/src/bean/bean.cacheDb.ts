@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { BeanModuleScopeBase, Bean } from '@cabloy/core';
+import { BeanModuleScopeBase, Bean } from 'vona';
 
 @Bean()
 export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {

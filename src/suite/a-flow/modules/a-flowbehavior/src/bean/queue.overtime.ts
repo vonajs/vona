@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { FlowBehaviorOvertime } from './flow.behavior.overtime.js';
 
 @Bean({ scene: 'queue' })

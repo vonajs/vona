@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 import chalk from 'chalk';
 import { ScopeModule } from '../resource/this.js';

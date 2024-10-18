@@ -1,4 +1,4 @@
-import { Bean, IModule, ISuite } from '@cabloy/core';
+import { Bean, IModule, ISuite } from 'vona';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.git' })

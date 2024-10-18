@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { BigNumber } from 'cabloy-module-api-a-database';
 
 @Bean({ scene: 'stats' })

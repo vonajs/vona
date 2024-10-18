@@ -1,4 +1,4 @@
-import { TableIdentity } from '@cabloy/core';
+import { TableIdentity } from 'vona';
 import { IModelMethodOptions, IModelUpdateOptions } from '../../types.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 

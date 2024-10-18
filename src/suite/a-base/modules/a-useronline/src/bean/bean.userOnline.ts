@@ -1,6 +1,6 @@
 import { EntityUserOnline } from '../index.js';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 
 const __atomClassUserOnline = {
   module: __ThisModule__,

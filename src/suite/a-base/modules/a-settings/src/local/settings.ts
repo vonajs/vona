@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 
 let _instanceList: any = null;
 let _userList: any = null;

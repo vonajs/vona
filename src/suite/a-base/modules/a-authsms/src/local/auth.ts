@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 
 @Local()

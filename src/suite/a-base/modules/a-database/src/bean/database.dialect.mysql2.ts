@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { DatabaseDialectMysql } from './database.dialect.mysql.js';
 
 @Bean({ scene: 'database.dialect' })

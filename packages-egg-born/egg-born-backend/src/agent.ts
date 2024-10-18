@@ -1,4 +1,4 @@
-import { CabloyApplication, Bootstrap } from '@cabloy/core';
+import { CabloyApplication, Bootstrap } from 'vona-core';
 
 export default class AppBootHook {
   app: CabloyApplication;

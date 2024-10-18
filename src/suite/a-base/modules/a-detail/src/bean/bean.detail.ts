@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanDetailDelete } from './bean.detail/bean.detail_delete.js';
 
 @Bean()

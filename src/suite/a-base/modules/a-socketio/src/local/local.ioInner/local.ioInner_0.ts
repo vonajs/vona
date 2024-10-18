@@ -1,6 +1,6 @@
 import { BeanIoChannelBase } from '../../common/ioChannelBase.js';
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 export class LocalIoInner0 extends BeanBase<ScopeModule> {
   get messageClass() {

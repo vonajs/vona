@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 
 import { constants } from '../config/constants.js';
 

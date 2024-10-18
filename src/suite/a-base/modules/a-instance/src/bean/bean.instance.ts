@@ -1,8 +1,8 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 import { IModelSelectParams } from 'cabloy-module-api-a-database';
 import { EntityInstance } from '../entity/instance.js';

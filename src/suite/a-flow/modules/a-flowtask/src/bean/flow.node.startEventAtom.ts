@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { FlowNodeStartEventAtomActionRightViewWorkflow } from './flow.node.startEventAtom/flow.node.startEventAtom_actionRightViewWorkflow.js';
 
 @Bean({ scene: 'flow.node' })

@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Atom } from '@cabloy/core';
+import { Atom } from 'vona';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 @Atom()

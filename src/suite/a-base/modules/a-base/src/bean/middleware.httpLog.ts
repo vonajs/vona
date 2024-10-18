@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'middleware' })
 export class MiddlewareHttpLog extends BeanBase<ScopeModule> {

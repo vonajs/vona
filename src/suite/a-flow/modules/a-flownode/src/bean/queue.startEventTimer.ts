@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { FlowNodeStartEventTimer } from './flow.node.startEventTimer.js';
 
 @Bean({ scene: 'queue' })

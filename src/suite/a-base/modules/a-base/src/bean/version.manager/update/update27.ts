@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 export class VersionUpdate extends BeanBase<ScopeModule> {
   constructor() {

@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { FlowNodeGatewayBase } from '../common/flowNodeGatewayBase.js';
 
 @Bean({ scene: 'flow.node' })

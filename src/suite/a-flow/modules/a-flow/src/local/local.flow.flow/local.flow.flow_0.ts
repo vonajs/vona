@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
-import { BeanBase, Cast } from '@cabloy/core';
+import { BeanBase, Cast } from 'vona';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';

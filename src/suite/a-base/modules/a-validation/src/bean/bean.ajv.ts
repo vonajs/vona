@@ -3,7 +3,7 @@ import AjvLocalize from 'ajv-i18n';
 import AjvKeywords from 'ajv-keywords';
 import jsBeautify from 'js-beautify';
 import systemKeywords from '../ajv/keywords.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 @Bean()
 export class BeanAjv extends BeanBase {

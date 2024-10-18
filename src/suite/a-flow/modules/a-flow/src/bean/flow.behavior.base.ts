@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 
 import { BeanFlowBehaviorBase } from '../common/flowBehaviorBase.js';
 

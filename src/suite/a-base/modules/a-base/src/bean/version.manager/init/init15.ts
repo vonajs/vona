@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 import initData from './initData15.js';
 

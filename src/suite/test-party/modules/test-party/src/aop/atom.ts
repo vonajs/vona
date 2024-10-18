@@ -1,4 +1,4 @@
-import { Aop, BeanBase } from '@cabloy/core';
+import { Aop, BeanBase } from 'vona';
 import assert from 'assert';
 
 @Aop({ match: 'atom', gate: { env: 'test' } })

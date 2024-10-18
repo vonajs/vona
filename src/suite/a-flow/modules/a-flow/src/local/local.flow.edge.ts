@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 import UtilsFn from '../common/utils.js';
 import { LocalContextEdge } from './local.context.edge.js';

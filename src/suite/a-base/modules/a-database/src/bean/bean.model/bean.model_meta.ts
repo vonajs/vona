@@ -1,4 +1,4 @@
-import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from '@cabloy/core';
+import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from 'vona';
 import { BeanModel } from '../virtual.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
 import { __ThisModule__ } from '../../resource/this.js';

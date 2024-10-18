@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanIoSubscribe } from './bean.io/bean.io_subscribe.js';
 
 @Bean()

@@ -1,4 +1,4 @@
-import { IModuleRoute } from '@cabloy/core';
+import { IModuleRoute } from 'vona';
 
 export const routes: IModuleRoute[] = [
   // flow/start: not use transaction so as to save the current flow status

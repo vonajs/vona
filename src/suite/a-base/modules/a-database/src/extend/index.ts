@@ -1,4 +1,4 @@
-import { CabloyApplication } from '@cabloy/core';
+import { CabloyApplication } from 'vona';
 import { ExtendSchemaBuilder } from './schemaBuilder.js';
 import { ExtendTableBuilder } from './tableBuilder.js';
 

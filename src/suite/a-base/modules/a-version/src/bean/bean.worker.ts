@@ -1,4 +1,4 @@
-import { Bean, BeanBase, IORedis } from '@cabloy/core';
+import { Bean, BeanBase, IORedis } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 
 @Bean()

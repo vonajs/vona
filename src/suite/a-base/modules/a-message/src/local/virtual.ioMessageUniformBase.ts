@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Virtual } from '@cabloy/core';
+import { Virtual } from 'vona';
 import { BeanIoMessageBase } from 'cabloy-module-api-a-socketio';
 
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';

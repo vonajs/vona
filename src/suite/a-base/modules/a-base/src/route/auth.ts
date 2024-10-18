@@ -1,4 +1,4 @@
-import { IModuleRoute } from '@cabloy/core';
+import { IModuleRoute } from 'vona';
 
 const routes: IModuleRoute[] = [
   // auth

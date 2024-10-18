@@ -1,4 +1,4 @@
-import { BeanSimple, IModuleMain } from '@cabloy/core';
+import { BeanSimple, IModuleMain } from 'vona';
 import { Watcher } from './common/watcher.js';
 
 export class Main extends BeanSimple implements IModuleMain {

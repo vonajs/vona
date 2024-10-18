@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Virtual } from '@cabloy/core';
+import { Virtual } from 'vona';
 import { BeanAtomBase } from 'cabloy-module-api-a-base';
 import trimHtml from '@zhennann/trim-html';
 

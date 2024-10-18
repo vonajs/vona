@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanAuthProviderBase } from 'cabloy-module-api-a-auth';
 
 import Strategy from 'passport-github';

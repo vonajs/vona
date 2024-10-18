@@ -1,4 +1,4 @@
-import { CabloyContext } from '@cabloy/core';
+import { CabloyContext } from 'vona';
 
 export default {
   async: true,

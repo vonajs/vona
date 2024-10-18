@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 export class BeanFlowBehaviorBase<T = unknown> extends BeanBase<T> {
   flowInstance: any;

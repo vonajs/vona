@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
 @Bean({ scene: 'stats' })

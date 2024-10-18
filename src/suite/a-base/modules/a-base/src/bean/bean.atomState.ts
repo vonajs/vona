@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanAtomStateDynamic } from './bean.atomState/bean.atomState_dynamic.js';
 
 @Bean()

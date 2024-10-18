@@ -1,4 +1,4 @@
-import { Atom } from '@cabloy/core';
+import { Atom } from 'vona';
 import { BeanAtomBase } from '../bean/virtual.atomBase.js';
 
 //

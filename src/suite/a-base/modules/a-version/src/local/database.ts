@@ -1,6 +1,6 @@
 import moment from 'moment';
 import chalk from 'chalk';
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 import { BeanDatabaseClient } from 'cabloy-module-api-a-database';
 

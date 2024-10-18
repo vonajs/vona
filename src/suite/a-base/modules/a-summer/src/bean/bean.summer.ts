@@ -1,5 +1,5 @@
 import { LocalCache } from '../index.js';
-import { Bean, BeanModuleScopeBase } from '@cabloy/core';
+import { Bean, BeanModuleScopeBase } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
 let __cacheBases;

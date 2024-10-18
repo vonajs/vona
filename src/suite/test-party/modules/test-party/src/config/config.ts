@@ -5,7 +5,7 @@ import {
   IModuleConfigQueue,
   IModuleConfigSchedule,
   IModuleConfigStartup,
-} from '@cabloy/core';
+} from 'vona';
 import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // startups

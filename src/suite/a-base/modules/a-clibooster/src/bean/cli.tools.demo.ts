@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 
 @Bean({ scene: 'cli.tools' })

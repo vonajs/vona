@@ -1,5 +1,5 @@
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase, Cast } from '@cabloy/core';
+import { BeanBase, Cast } from 'vona';
 import { LocalContextTask } from '../local.context.task.js';
 import { LocalFlowTask } from '../local.flow.task.js';
 

@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { BeanAtomBaseExportBulk } from './bean.atomBase_exportBulk.js';
 
 export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {

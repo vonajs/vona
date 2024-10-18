@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { TestCtx1 } from './test.ctx_1.js';
 
 @Bean()

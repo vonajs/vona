@@ -1,4 +1,4 @@
-import { BeanSimple, IModule, IMonkeyModule } from '@cabloy/core';
+import { BeanSimple, IModule, IMonkeyModule } from 'vona';
 import { __ThisModule__ } from './resource/this.js';
 
 function monkeyRoute(module: IModule, routePath, routeController) {

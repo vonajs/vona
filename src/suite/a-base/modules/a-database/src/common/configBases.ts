@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { Knex } from 'knex';
 import { promisify } from 'node:util';
 import pgTypes from 'pg-types';

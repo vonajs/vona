@@ -1,4 +1,4 @@
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 import { BeanCliBase } from 'cabloy-module-api-a-cli';
 import path from 'path';
 import fse from 'fs-extra';

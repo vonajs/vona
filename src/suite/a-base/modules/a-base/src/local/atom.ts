@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 import { AtomClassParams } from '../types.js';
 
 @Local()

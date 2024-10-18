@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 const fileVersionUpdates = [1];
 const fileVersionInits = [1];

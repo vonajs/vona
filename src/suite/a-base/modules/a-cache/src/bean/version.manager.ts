@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { EntityCache } from '../entity/cache.js';
 
 @Bean({ scene: 'version' })

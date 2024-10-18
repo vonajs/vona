@@ -1,4 +1,4 @@
-import { BeanBase, Virtual } from '@cabloy/core';
+import { BeanBase, Virtual } from 'vona';
 
 @Virtual({ scene: 'bean' })
 export class BeanAuthProviderBase<T = unknown> extends BeanBase<T> {

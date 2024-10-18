@@ -1,6 +1,6 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 import { BeanUser } from '../bean.user.js';
 
 const _usersAnonymous: any = {};

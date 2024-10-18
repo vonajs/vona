@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 import fs from 'fs';
 import path from 'path';

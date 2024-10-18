@@ -1,6 +1,6 @@
 import { Knex } from 'cabloy-module-api-a-database';
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
-import { TableIdentity } from '@cabloy/core';
+import { TableIdentity } from 'vona';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
   async checkRightResource({

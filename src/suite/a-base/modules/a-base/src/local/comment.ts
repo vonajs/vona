@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 
 import trimHtml from '@zhennann/trim-html';
 import { ScopeModule } from '../resource/this.js';

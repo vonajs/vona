@@ -1,4 +1,4 @@
-import { CabloyAppInfo, CabloyConfigOptional } from '@cabloy/core';
+import { CabloyAppInfo, CabloyConfigOptional } from 'vona-core';
 import path from 'path';
 import chalk from 'chalk';
 import * as uuid from 'uuid';

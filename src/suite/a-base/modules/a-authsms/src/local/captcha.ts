@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 import { CaptchaProviderCaptcha } from '../index.js';
 
 @Local()

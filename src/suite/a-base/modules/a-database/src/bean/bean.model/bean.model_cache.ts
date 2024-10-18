@@ -1,4 +1,4 @@
-import { Cast, TableIdentity } from '@cabloy/core';
+import { Cast, TableIdentity } from 'vona';
 import { BeanModel } from '../virtual.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
 import { getTargetColumnName } from '../../common/utils.js';

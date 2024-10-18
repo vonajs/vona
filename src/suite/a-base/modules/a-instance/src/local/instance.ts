@@ -1,4 +1,4 @@
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
 const __blackFields = ['startups', 'queues', 'broadcasts', 'middlewares', 'schedules'];

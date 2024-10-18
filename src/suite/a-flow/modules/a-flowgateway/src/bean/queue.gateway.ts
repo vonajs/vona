@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase, Cast } from '@cabloy/core';
+import { Bean, BeanBase, Cast } from 'vona';
 
 @Bean({ scene: 'queue' })
 export class QueueGateway extends BeanBase {

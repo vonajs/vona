@@ -1,4 +1,4 @@
-import { Bean, TableIdentity } from '@cabloy/core';
+import { Bean, TableIdentity } from 'vona';
 import {
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,

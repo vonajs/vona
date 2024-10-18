@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { ScopeModule } from '../../resource/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';

@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanFlowServiceBase } from 'cabloy-module-api-a-flownode';
 
 @Bean({ scene: 'flow.service' })

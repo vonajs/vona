@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanFieldsFieldsRight } from './bean.fields/bean.fields_fieldsRight.js';
 
 @Bean()

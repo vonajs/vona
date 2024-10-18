@@ -1,4 +1,4 @@
-import { EntityBase } from '@cabloy/core';
+import { EntityBase } from 'vona';
 
 export interface EntityVersionInit extends Omit<EntityBase, 'iid' | 'deleted'> {
   subdomain: string;

@@ -1,6 +1,6 @@
 import objectHash from 'object-hash';
 import { CacheBase } from './cacheBase.js';
-import { Local } from '@cabloy/core';
+import { Local } from 'vona';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 @Local()

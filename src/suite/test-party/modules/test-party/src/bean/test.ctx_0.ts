@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 export class TestCtx0 extends BeanBase {
   _name: string;

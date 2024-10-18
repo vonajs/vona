@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 import testData from './testData.js';
 
 export class VersionTest extends BeanBase {

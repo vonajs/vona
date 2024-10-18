@@ -1,4 +1,4 @@
-import { BeanBase, Controller } from '@cabloy/core';
+import { BeanBase, Controller } from 'vona';
 import { ScopeModule } from '../../../resource/this.js';
 import assert from 'assert';
 import pMap from 'p-map';

@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 import * as uuid from 'uuid';
 import { extend } from '@cabloy/extend';

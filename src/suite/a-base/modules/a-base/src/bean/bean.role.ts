@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanRoleFlow } from './bean.role/bean.role_flow.js';
 
 @Bean()

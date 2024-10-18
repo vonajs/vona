@@ -1,4 +1,4 @@
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 const __subVersion = 'sub3';
 const __keyUserIndex = 2;

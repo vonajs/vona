@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import knex, { Knex } from 'knex';
 import { ScopeModule } from '../resource/this.js';
 import { configBases } from '../common/configBases.js';

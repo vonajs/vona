@@ -1,5 +1,5 @@
-import { Cast } from '@cabloy/core';
-import { BeanBase } from '@cabloy/core';
+import { Cast } from 'vona';
+import { BeanBase } from 'vona';
 import { BeanAtomState } from '../bean.atomState.js';
 
 export class BeanAtomState0 extends BeanBase {

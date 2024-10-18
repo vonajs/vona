@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../resource/this.js';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
-import { BeanBase, Cast } from '@cabloy/core';
+import { BeanBase, Cast } from 'vona';
 
 export class Watcher extends BeanBase {
   _watchers: any;

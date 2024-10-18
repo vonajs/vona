@@ -149,7 +149,7 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 // * module.exports =
 // module.exports = \[([\s\S\n]*)\]
-// import { IModuleRoute } from '@cabloy/core';
+// import { IModuleRoute } from 'vona';
 // export const routes: IModuleRoute[] = [];
 
 //
@@ -188,8 +188,8 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
   // BeanModelBase
   let contentNew = contentModel.replace('BeanModelBase, ', '');
   contentNew = contentNew.replace(
-    "'@cabloy/core';",
-    `'@cabloy/core';\nimport { BeanModelBase } from 'cabloy-module-api-a-database';\nimport { ${entityNameInterface} } from '../entity/${modelName}.js';\n`,
+    "'vona';",
+    `'vona';\nimport { BeanModelBase } from 'cabloy-module-api-a-database';\nimport { ${entityNameInterface} } from '../entity/${modelName}.js';\n`,
   );
   contentNew = contentNew.replace('BeanModelBase {', `BeanModelBase<${entityNameInterface}> {`);
   console.log(contentNew);
@@ -201,9 +201,9 @@ async function _moduleHandle_model({ file, module, processHelper }) {
   console.log(file);
   let contentOld = (await fse.readFile(file)).toString();
   if (contentOld.indexOf('EntityItemBase {') > -1) {
-    contentOld = contentOld.replace("import {} from '@cabloy/core';", "import { EntityItemBase } from '@cabloy/core';");
+    contentOld = contentOld.replace("import {} from 'vona';", "import { EntityItemBase } from 'vona';");
   } else {
-    contentOld = contentOld.replace("import {} from '@cabloy/core';", "import { EntityBase } from '@cabloy/core';");
+    contentOld = contentOld.replace("import {} from 'vona';", "import { EntityBase } from 'vona';");
   }
   console.log(contentOld);
   await fse.outputFile(file, contentOld);
@@ -232,7 +232,7 @@ async function _moduleHandle_model({ file: fileModel, module, processHelper }) {
     entities = `${entities}\n  ${columnName}: ${columnType};`;
   }
   const classBase = map.atomId ? 'EntityItemBase' : 'EntityBase';
-  const contentNew = `import { ${classBase} } from '@cabloy/core';
+  const contentNew = `import { ${classBase} } from 'vona';
 
 export interface ${entityNameInterface} extends ${classBase} {${entities}
 }
@@ -583,7 +583,7 @@ async function _moduleHandle_bean({ file, module, processHelper }) {
     }
 
     const contentNew = `
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 ${contentMatches[1]}
 
@@ -674,7 +674,7 @@ async function _moduleHandle_atom({ file, module, processHelper }) {
       importBase = "import { BeanAtomBase } from 'cabloy-module-api-a-base';";
     }
     const contentNew = `
-import { Atom } from '@cabloy/core';
+import { Atom } from 'vona';
 ${importBase}
 
 ${contentMatches[1]}
@@ -734,7 +734,7 @@ async function _moduleHandle_local({ file, module, processHelper }) {
     }
     // console.log(contentMatches);
     const contentNew = `
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 
 ${contentMatches[1]}
 
@@ -836,7 +836,7 @@ async function _moduleHandle_model({ module, processHelper }) {
     }
     // console.log(contentMatches);
     const contentNew = `
-import { BeanModelBase, Model } from '@cabloy/core';
+import { BeanModelBase, Model } from 'vona';
 
 ${contentMatches[1]}
 
@@ -902,7 +902,7 @@ async function _moduleHandle_version2({ file, module, processHelper }) {
   }
   // console.log(contentMatches);
   let contentNew = `
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 ${contentMatches[1]}
 
@@ -936,7 +936,7 @@ async function _moduleHandle_eachFile({ module, processHelper }) {
     }
     console.log(file);
     const contentNew = contentOld
-      .replace("from '@cabloy/core';", "from '@cabloy/core';\nimport { __ThisModule__ } from '../resource/this.js';")
+      .replace("from 'vona';", "from 'vona';\nimport { __ThisModule__ } from '../resource/this.js';")
       .replace('// const moduleInfo = module.info;', '')
       .replace('const moduleInfo = module.info;', '')
       .replaceAll('moduleInfo.relativeName', '__ThisModule__');
@@ -1036,9 +1036,9 @@ async function _moduleHandle_mixin({ file, module, processHelper }) {
     // 计算importName
     let importName = '';
     if (extendName === 'BeanModuleScopeBase') {
-      importName = " import { BeanModuleScopeBase } from '@cabloy/core';";
+      importName = " import { BeanModuleScopeBase } from 'vona';";
     } else if (extendName === 'BeanBase') {
-      importName = "import { BeanBase } from '@cabloy/core';";
+      importName = "import { BeanBase } from 'vona';";
     } else {
       let __classPath = names[index - 1].classPath;
       const pos = __classPath.lastIndexOf('/');
@@ -1066,7 +1066,7 @@ ${contentMatches[3]}
   const currentClassName = classPathToClassNameMixin(path.basename(file).replace('.ts', ''));
 
   const outputNew = `
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 
 @Bean()
 export class ${currentClassName} extends ${names[names.length - 1].classNameNew} {
@@ -1130,7 +1130,7 @@ async function _moduleHandle_local({ module, processHelper }) {
     }
     // console.log(contentMatches);
     const contentNew = `
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 
 ${contentMatches[1]}
 
@@ -1573,7 +1573,7 @@ async function _moduleHandle_controller({ module, processHelper }) {
     }
     // console.log(contentMatches);
     const contentNew = `
-import { BeanBase, Controller, Use } from '@cabloy/core';
+import { BeanBase, Controller, Use } from 'vona';
 import { ${getScopeModuleName(module.info.relativeName)} } from '../index.js';
 ${contentMatches[1]}
 @Controller()

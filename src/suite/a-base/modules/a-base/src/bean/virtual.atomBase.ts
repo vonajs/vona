@@ -1,4 +1,4 @@
-import { Virtual } from '@cabloy/core';
+import { Virtual } from 'vona';
 import { BeanAtomBasePerformActionBulk } from './bean.atomBase/bean.atomBase_performActionBulk.js';
 
 @Virtual({ scene: 'bean' })

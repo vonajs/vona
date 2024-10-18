@@ -1,5 +1,5 @@
 import knex from 'knex';
-import { CabloyApplication } from '@cabloy/core';
+import { CabloyApplication } from 'vona';
 
 export interface IBasicFieldsOptions {
   id?: boolean;

@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import type { IModuleConfigSummerCacheBase } from 'cabloy-module-api-a-summer';
 
 @Bean({ scene: 'summer.cache' })

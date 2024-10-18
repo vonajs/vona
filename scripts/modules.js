@@ -120,7 +120,7 @@ async function _suiteHandle({ modules, suite, processHelper }) {
 
 // * module.exports =
 // module.exports = \[([\s\S\n]*)\]
-// import { IModuleRoute } from '@cabloy/core';
+// import { IModuleRoute } from 'vona';
 // export const routes: IModuleRoute[] = [];
 
 function getScopeModuleName(moduleName) {

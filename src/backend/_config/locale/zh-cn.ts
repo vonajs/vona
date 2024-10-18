@@ -1,4 +1,4 @@
-import { CabloyLocaleOptional } from '@cabloy/core';
+import { CabloyLocaleOptional } from 'vona';
 
 export default {
   modules: {},

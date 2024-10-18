@@ -1,4 +1,4 @@
-import { Model } from '@cabloy/core';
+import { Model } from 'vona';
 import { BeanModelBase } from 'cabloy-module-api-a-database';
 import { EntityResourceLocale } from '../entity/resourceLocale.js';
 

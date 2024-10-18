@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { __ThisModule__ } from '../../resource/this.js';
 import { BeanAtomBase } from '../virtual.atomBase.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';

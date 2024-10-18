@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanCategory0 } from './bean.category/bean.category_0.js';
 
 @Bean()

@@ -1,4 +1,4 @@
-import { IModuleRoute } from '@cabloy/core';
+import { IModuleRoute } from 'vona';
 import base from './route/base.js';
 import atom from './route/atom.js';
 import atomClass from './route/atomClass.js';

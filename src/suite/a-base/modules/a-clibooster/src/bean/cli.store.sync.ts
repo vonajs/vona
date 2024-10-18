@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 
 import path from 'path';
 import os from 'os';

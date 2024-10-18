@@ -1,7 +1,7 @@
 import { BigNumber } from 'cabloy-module-api-a-database';
 import { EntityCategory } from '../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 export class BeanCategory0 extends BeanBase<ScopeModule> {
   get model() {

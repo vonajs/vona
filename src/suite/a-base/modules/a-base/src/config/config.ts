@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from 'vona';
 import { IModuleConfigSummer } from 'cabloy-module-api-a-summer';
 
 // middlewares

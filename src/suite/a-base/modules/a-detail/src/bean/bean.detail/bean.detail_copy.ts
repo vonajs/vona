@@ -1,4 +1,4 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { BeanDetail0 } from './bean.detail_0.js';
 
 export class BeanDetailCopy extends BeanDetail0 {

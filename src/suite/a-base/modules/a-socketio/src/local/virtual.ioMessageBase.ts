@@ -1,4 +1,4 @@
-import { BeanBase, Virtual } from '@cabloy/core';
+import { BeanBase, Virtual } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 
 @Virtual({ scene: 'local', name: 'ioMessageBase' })

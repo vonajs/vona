@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { LocalFlowTaskMessage } from './local.flow.task/local.flow.task_message.js';
 
 @Bean({ scene: 'local.flow' })

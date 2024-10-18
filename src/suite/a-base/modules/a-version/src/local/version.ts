@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { BeanBase, Local } from '@cabloy/core';
+import { BeanBase, Local } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';

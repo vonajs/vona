@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanAtomActionFlow } from './bean.atomAction/bean.atomAction_flow.js';
 
 @Bean()

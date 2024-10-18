@@ -1,7 +1,7 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { BigNumber } from 'cabloy-module-api-a-database';
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 import { BeanFlowTask } from '../bean.flowTask.js';
 
 export class BeanFlowTask0 extends BeanBase<ScopeModule> {

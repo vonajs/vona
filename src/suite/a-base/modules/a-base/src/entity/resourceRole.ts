@@ -1,4 +1,4 @@
-import { EntityItemBase, TableIdentity } from '@cabloy/core';
+import { EntityItemBase, TableIdentity } from 'vona';
 
 export interface EntityResourceRole extends EntityItemBase {
   roleId: number;

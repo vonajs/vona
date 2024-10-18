@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from '@cabloy/core';
+import { Local, BeanBase } from 'vona';
 import { BigNumber } from 'cabloy-module-api-a-database';
 
 import fse from 'fs-extra';

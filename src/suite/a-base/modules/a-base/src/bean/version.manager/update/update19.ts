@@ -1,6 +1,6 @@
 import { EntityCategory } from '../../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 
 const __atomClassResource = {
   module: 'a-base',

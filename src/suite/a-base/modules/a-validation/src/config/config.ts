@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigMiddleware } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigMiddleware } from 'vona';
 
 // middlewares
 const middlewares = {

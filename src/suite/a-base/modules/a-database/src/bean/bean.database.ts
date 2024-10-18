@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 import { BeanDatabaseClient } from './bean.databaseClient.js';
 import { VirtualDatabaseDialect } from './virtual.databaseDialect.js';
 import { __ThisModule__ } from '../resource/this.js';

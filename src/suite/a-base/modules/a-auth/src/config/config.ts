@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigBroadcast, IModuleConfigStartup } from '@cabloy/core';
+import { CabloyApplication, IModuleConfigBroadcast, IModuleConfigStartup } from 'vona';
 
 // startups
 const startups = {

@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanAtomPerformActionBulk } from './bean.atom/bean.atom_performActionBulk.js';
 
 @Bean()

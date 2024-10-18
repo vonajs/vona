@@ -1,4 +1,4 @@
-import { BeanModuleScopeBase, Bean } from '@cabloy/core';
+import { BeanModuleScopeBase, Bean } from 'vona';
 
 const CACHEMEMORY = Symbol('APP#__CACHEMEMORY');
 

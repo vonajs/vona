@@ -1,4 +1,4 @@
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../../../resource/this.js';
 
 export class VersionTest extends BeanBase {

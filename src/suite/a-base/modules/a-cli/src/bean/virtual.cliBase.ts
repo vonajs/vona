@@ -1,4 +1,4 @@
-import { BeanBase, Virtual } from '@cabloy/core';
+import { BeanBase, Virtual } from 'vona';
 
 import eggBornUtils from 'egg-born-utils';
 import { LocalConsole, LocalHelper, LocalTemplate } from '../index.js';

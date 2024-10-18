@@ -1,6 +1,6 @@
-import { Cast } from '@cabloy/core';
+import { Cast } from 'vona';
 import { ScopeModule } from '../../resource/this.js';
-import { BeanBase } from '@cabloy/core';
+import { BeanBase } from 'vona';
 import { MiddlewareRight } from '../middleware.right.js';
 
 export class MiddlewareRight0 extends BeanBase<ScopeModule> {

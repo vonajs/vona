@@ -1,4 +1,4 @@
-import { Bean } from '@cabloy/core';
+import { Bean } from 'vona';
 import { BeanIoChannelBase } from 'cabloy-module-api-a-socketio';
 
 import nodemailer from 'nodemailer';

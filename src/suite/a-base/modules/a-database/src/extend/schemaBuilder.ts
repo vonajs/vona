@@ -1,6 +1,6 @@
 import knex, { Knex } from 'knex';
 import { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/virtual.databaseDialect.js';
-import { CabloyApplication, Cast } from '@cabloy/core';
+import { CabloyApplication, Cast } from 'vona';
 
 export function ExtendSchemaBuilder(app: CabloyApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase', 'fetchIndexes'].forEach(function (method) {

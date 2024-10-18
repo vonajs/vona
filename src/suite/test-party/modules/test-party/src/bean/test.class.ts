@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from '@cabloy/core';
+import { Bean, BeanBase } from 'vona';
 
 class ClassBeanBase extends BeanBase {
   actionSync({ a, b }: any) {
