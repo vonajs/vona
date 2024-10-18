@@ -1,7 +1,7 @@
-import { CabloyAppInfo, CabloyConfigOptional } from "vona";
+import { CabloyAppInfo, VonaConfigOptional } from "vona";
 
 export default function (_appInfo: CabloyAppInfo) {
-  const config = {} as CabloyConfigOptional;
+  const config = {} as VonaConfigOptional;
 
   // queue
   config.queue = {

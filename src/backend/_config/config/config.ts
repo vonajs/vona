@@ -1,7 +1,7 @@
-import { CabloyAppInfo, CabloyConfigOptional } from 'vona';
+import { CabloyAppInfo, VonaConfigOptional } from 'vona';
 
 export default function (appInfo: CabloyAppInfo) {
-  const config = {} as CabloyConfigOptional;
+  const config = {} as VonaConfigOptional;
 
   // keys
   config.keys = appInfo.name + '_1596889047267_3245';

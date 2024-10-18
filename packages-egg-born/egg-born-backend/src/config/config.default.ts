@@ -1,4 +1,4 @@
-import { CabloyAppInfo, CabloyConfigOptional } from "vona";
+import { CabloyAppInfo, VonaConfigOptional } from "vona";
 import path from 'path';
 import chalk from 'chalk';
 import * as uuid from 'uuid';
@@ -13,7 +13,7 @@ const {
 
 // eslint-disable-next-line
 export default function (appInfo: CabloyAppInfo) {
-  const config = {} as CabloyConfigOptional;
+  const config = {} as VonaConfigOptional;
 
   const _maintenanceEnus =
     'Under development and maintenance, the source code mode may be unstable. Please keep an eye on the development progress, or use the project mode to create a CabloyJS project.';

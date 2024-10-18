@@ -4,7 +4,7 @@ import { LocalTransaction } from '../local/local.transaction.js';
 import { ConfigDatabase } from './config.js';
 
 declare module 'vona' {
-  export interface CabloyConfig {
+  export interface VonaConfig {
     database: ConfigDatabase;
   }
 

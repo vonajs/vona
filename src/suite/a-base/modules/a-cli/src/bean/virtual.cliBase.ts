@@ -44,16 +44,16 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
   }
 
   async meta({ user: _user }: any): Promise<any> {
-    await this._loadCabloyConfig();
+    await this._loadVonaConfig();
     const metaLocale = this._commandMeta();
     return metaLocale;
   }
 
   async execute({ user: _user }: any): Promise<any> {
-    await this._loadCabloyConfig();
+    await this._loadVonaConfig();
   }
 
-  async _loadCabloyConfig() {
+  async _loadVonaConfig() {
     const { argv } = this.context;
     this.cabloyConfig = eggBornUtils.cabloyConfig;
     await this.cabloyConfig.load({ projectPath: argv.projectPath });

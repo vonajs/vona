@@ -35,7 +35,7 @@ class CliCommand extends BaseCommand {
     // log start
     console.log(`npm run cli ${chalk.cyan(argv.cliFullName)} at %s\n`, cwd);
     // cabloy config
-    await this._loadCabloyConfig();
+    await this._loadVonaConfig();
     // log meta welcomes
     this._logMetaWelcomes();
     // prompt
@@ -50,7 +50,7 @@ class CliCommand extends BaseCommand {
     console.log(chalk.cyan('\n  cli successfully!\n'));
   }
 
-  async _loadCabloyConfig() {
+  async _loadVonaConfig() {
     this.__cabloyConfig = eggBornUtils.cabloyConfig;
     await this.__cabloyConfig.load({ projectPath: this.__argv.projectPath });
     this.cabloyConfig = this.__cabloyConfig.get();
