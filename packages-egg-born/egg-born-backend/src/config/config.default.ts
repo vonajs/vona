@@ -1,4 +1,4 @@
-import { CabloyAppInfo, VonaConfigOptional } from "vona";
+import { VonaAppInfo, VonaConfigOptional } from "vona";
 import path from 'path';
 import chalk from 'chalk';
 import * as uuid from 'uuid';
@@ -12,7 +12,7 @@ const {
 } = require('egg-onerror/lib/utils');
 
 // eslint-disable-next-line
-export default function (appInfo: CabloyAppInfo) {
+export default function (appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
 
   const _maintenanceEnus =

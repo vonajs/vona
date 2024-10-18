@@ -1,3 +1,3 @@
 import { EggAppInfo } from 'egg';
 
-export interface CabloyAppInfo extends EggAppInfo {}
+export interface VonaAppInfo extends EggAppInfo {}
