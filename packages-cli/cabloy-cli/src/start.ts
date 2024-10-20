@@ -9,10 +9,12 @@ const PARSE = Symbol.for('eb:Command#parse');
 
 export class CabloyCommand extends CommonBin {
   brandName: string;
+  defaultSetName: string;
 
   constructor(brandName: string, rawArgv?) {
     super(rawArgv);
     this.usage = `Usage: ${brandName} [command] [options]`;
+    this.defaultSetName = brandName === 'zova' ? 'front' : 'api';
     this.brandName = brandName;
     process.env.CabloyCliBrandName = brandName;
   }
@@ -62,7 +64,7 @@ export class CabloyCommand extends CommonBin {
 
   _prepareCliFullName(cliName) {
     if (!cliName) {
-      return { cliFullName: 'front:default:list' };
+      return { cliFullName: `${this.defaultSetName}:default:list` };
       // throw new Error('Please specify the cli name');
     }
     const parts = cliName.split(':');
@@ -76,15 +78,15 @@ export class CabloyCommand extends CommonBin {
         parts[2] = '';
       } else {
         // means show module's commands
-        if (!parts[0]) parts[0] = 'front';
-        return { cliFullName: 'front:default:list', set: parts[0] };
+        if (!parts[0]) parts[0] = this.defaultSetName;
+        return { cliFullName: `${this.defaultSetName}:default:list`, set: parts[0] };
       }
     }
-    if (!parts[0]) parts[0] = 'front';
+    if (!parts[0]) parts[0] = this.defaultSetName;
     if (!parts[1]) parts[1] = 'default';
     if (!parts[2]) {
       // means show group's commands
-      return { cliFullName: 'front:default:list', set: parts[0], group: parts[1] };
+      return { cliFullName: `${this.defaultSetName}:default:list`, set: parts[0], group: parts[1] };
     }
     // default
     return { cliFullName: parts.join(':') };
