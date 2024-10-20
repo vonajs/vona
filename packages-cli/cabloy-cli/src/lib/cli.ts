@@ -31,6 +31,7 @@ export class CliCommand extends BaseCommand {
     // context
     const context = { argv, cwd, env: this._adjustEnv({ env }), rawArgv };
     // log start
+    // eslint-disable-next-line no-console
     console.log(`${process.env.CabloyCliBrandName} ${chalk.cyan(argv.cliFullName)} at %s\n`, cwd);
     // log meta welcomes
     this._logMetaWelcomes();
@@ -56,11 +57,15 @@ export class CliCommand extends BaseCommand {
   _logMetaWelcomes() {
     const welcomes = this._getMetaWelcomes();
     if (!welcomes) return;
+    // eslint-disable-next-line no-console
     console.log(__comment_seperator);
     for (const welcome of welcomes) {
+      // eslint-disable-next-line no-console
       console.log(welcome);
     }
+    // eslint-disable-next-line no-console
     console.log(__comment_seperator);
+    // eslint-disable-next-line no-console
     console.log('');
   }
 
@@ -69,9 +74,13 @@ export class CliCommand extends BaseCommand {
     if (!welcomes) return;
     const welcome = welcomes[0];
     if (!welcome || welcome.indexOf('articles/cli-introduce.html') === -1) return;
+    // eslint-disable-next-line no-console
     console.log('');
+    // eslint-disable-next-line no-console
     console.log(__comment_seperator);
+    // eslint-disable-next-line no-console
     console.log(welcome);
+    // eslint-disable-next-line no-console
     console.log(__comment_seperator);
   }
 
@@ -109,6 +118,7 @@ export class CliCommand extends BaseCommand {
     if (varsWant.length === 0) return;
     // log description
     if (group.description) {
+      // eslint-disable-next-line no-console
       console.log('===>', group.description);
     }
     // prompt
