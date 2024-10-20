@@ -25,6 +25,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
+    "zova": "cd ../zova-cli && tsc -b && cd ../zova-dev && node ../zova-cli/cli/dist/bin/zova.js",
     "cabloy": "cabloy",
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
