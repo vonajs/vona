@@ -1,0 +1,6 @@
+import { BeanBase, Local } from 'zova';
+
+@Local()
+export class <%=argv.nameMeta.fullCapitalize%> extends BeanBase {
+  protected async __init__() {}
+}

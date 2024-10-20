@@ -36,6 +36,15 @@
     },
     {
       "path": "packages-egg-born/egg-born-mock"
+    },
+    {
+      "path": "packages-cli/cabloy-cli"
+    },
+    {
+      "path": "packages-cli/cli"
+    },
+    {
+      "path": "packages-cli/cli-set-api"
     }
   ]
 }

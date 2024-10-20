@@ -1,0 +1,7 @@
+import { BeanControllerBase, Local } from 'zova';
+import { ScopeModule } from '<%=cli.helper.slashPrefixForPath(argv.nameMeta.parts.length+1)%>.metadata/this.js';
+
+@Local()
+export class Controller<%=argv.nameMeta.fullCapitalize%> extends BeanControllerBase<ScopeModule> {
+  protected async __init__() {}
+}

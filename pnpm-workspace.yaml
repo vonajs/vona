@@ -1,7 +1,8 @@
 packages:
-  - 'packages-vona/*'
+  - 'packages-cli/*'
   - 'packages-egg-born/*'
   - 'packages-utils/*'
+  - 'packages-vona/*'
   - 'src/module/*'
   - 'src/module-vendor/*'
   - 'src/suite/*'

@@ -1,0 +1,20 @@
+{
+  "name": "zova-module-<%=argv.name%>",
+  "version": "5.0.0",
+  "title": "<%=argv.moduleInfo.relativeName%>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "description": "<%=argv.description%>",
+  "keywords": ["Zova Module"],
+  "author": "<%=argv.author%>",
+  "files": ["mock", "dist"],
+  "scripts": {},
+  "dependencies": {}
+}
