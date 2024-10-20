@@ -1,0 +1,13 @@
+{
+  "name": "vona-cli",
+  "title": "zova cli",
+  "private": true,
+  "type": "commonjs",
+  "description": "vona cli",
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "vona"
+  ],
+  "devDependencies": {}
+}
