@@ -25,7 +25,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "vona": "cd ./packages-cli && tsc -b && cd .. && node ../packages-cli/cli/dist/bin/vona.js",
+    "vona": "cd ./packages-cli && tsc -b && cd .. && node ./packages-cli/cli/dist/bin/vona.js",
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
     "dev": "node ./scripts/egg-born-bin.js backend-dev --workers=2",
