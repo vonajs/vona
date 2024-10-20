@@ -4,7 +4,7 @@ export const commandsConfig = {
       front: 'zova-cli-set-front',
     },
     vona: {
-      api: 'zova-cli-set-api',
+      api: 'vona-cli-set-api',
     },
   },
   helper: {

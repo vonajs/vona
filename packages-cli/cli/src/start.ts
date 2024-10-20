@@ -1,7 +1,7 @@
 import { CabloyCommand } from '@cabloy/cli';
 
-export class ZovaCommand extends CabloyCommand {
+export class VonaCommand extends CabloyCommand {
   constructor(rawArgv?) {
-    super('zova', rawArgv);
+    super('vona', rawArgv);
   }
 }

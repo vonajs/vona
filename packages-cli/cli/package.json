@@ -1,13 +1,13 @@
 {
-  "name": "zova-cli",
+  "name": "vona-cli",
   "version": "1.1.195",
-  "description": "zova cli",
+  "description": "vona cli",
   "publishConfig": {
     "access": "public"
   },
   "main": "dist/index.js",
   "bin": {
-    "zova": "dist/bin/zova.js"
+    "vona": "dist/bin/vona.js"
   },
   "exports": {
     ".": {
@@ -32,13 +32,12 @@
   },
   "keywords": [
     "framework",
-    "zova"
+    "vona"
   ],
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
     "@cabloy/cli": "workspace:^",
-    "zova-cli-set-front": "^1.1.182"
-  },
-  "gitHead": "544f25da60609ebc63c14f92057dedb289ba5946"
+    "vona-cli-set-api": "workspace:^"
+  }
 }
