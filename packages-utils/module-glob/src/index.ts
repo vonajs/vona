@@ -87,7 +87,7 @@ async function __loadPackage(context, modules: Record<string, ISuiteModuleBase>)
   const modulesArray: string[] = [];
   for (const moduleName in modules) {
     const module = modules[moduleName];
-    promises.push(fse.readFile(module.pkg));
+    promises.push(fse.readFile(module.pkg) as unknown as Promise<IModulePackage>);
     modulesArray.push(moduleName);
   }
   const modulesPackage = await Promise.all(promises);
