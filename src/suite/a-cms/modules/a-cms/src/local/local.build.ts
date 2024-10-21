@@ -356,9 +356,9 @@ export class LocalBuild extends BeanBase<ScopeModule> {
     await fse.remove(path.join(pathDist, article.url));
     if (!inner) {
       // remove sitemap
-      let xml = await fse.readFile(path.join(pathDist, 'sitemap.xml'));
+      let xml = (await fse.readFile(path.join(pathDist, 'sitemap.xml'))).toString();
       const regexp = new RegExp(` {2}<url>\\s+<loc>[^<]*${article.url}[^<]*</loc>[\\s\\S]*?</url>[\\r\\n]`);
-      xml = xml.toString().replace(regexp, '');
+      xml = xml.replace(regexp, '');
       // save
       await fse.writeFile(path.join(pathDist, 'sitemap.xml'), xml);
       // render index
@@ -547,8 +547,7 @@ export class LocalBuild extends BeanBase<ScopeModule> {
       }
     }
     // load src
-    let contentSrc = await fse.readFile(fileName);
-    contentSrc = contentSrc ? contentSrc.toString() : '';
+    let contentSrc = (await fse.readFile(fileName)).toString();
     // load includes of plugins
     const pluginIncludes = await this._loadPluginIncludes({ site, language });
     contentSrc = `${pluginIncludes}\n${contentSrc}`;

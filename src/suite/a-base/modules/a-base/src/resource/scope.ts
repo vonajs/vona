@@ -12,7 +12,7 @@ export interface ScopeModuleABase
     IModuleModel,
     typeof config,
     typeof Errors,
-    typeof locales[TypeLocaleBase],
+    (typeof locales)[TypeLocaleBase],
     typeof constants
   > {}
 
@@ -26,6 +26,6 @@ declare module 'vona' {
   }
 
   export interface IBeanScopeLocale {
-    'a-base': typeof locales[TypeLocaleBase];
+    'a-base': (typeof locales)[TypeLocaleBase];
   }
 }
