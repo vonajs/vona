@@ -16,7 +16,9 @@ export class TestCtx0 extends BeanBase {
   protected __set__(prop, value) {
     if (prop === 'magicSelf') {
       this['magic:self'] = value;
+      return true;
     }
+    return false;
   }
 
   get name() {
