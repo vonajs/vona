@@ -4,8 +4,8 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src/backend/package.json", "src/backend/config", "src/backend/demo"],
-  "exclude": ["src/backend/_config"],
+  "include": ["src/backend/package.json", "src/backend/config", "src/backend/demo", "src/backend/typing"],
+  "exclude": [],
   "ts-node": {
     "swc": true
   },

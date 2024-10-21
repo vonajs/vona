@@ -113,12 +113,6 @@ const utils = {
     const projectPath = path.join(baseDir, '../..');
     const envDir = path.join(projectPath, 'env');
     loadEnvs(meta, envDir, '.env');
-    // load config
-    const fileConfigDefault = path.join(baseDir, 'config/config/config.js');
-    if (!fse.existsSync(fileConfigDefault)) {
-      console.log(chalk.red('Please copy directory: from _config to config\n'));
-      process.exit(0);
-    }
   },
   getBaseDir() {
     return path.join(process.cwd(), 'dist/backend');
