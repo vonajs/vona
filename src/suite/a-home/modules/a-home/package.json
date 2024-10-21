@@ -32,8 +32,6 @@
     "dist",
     "static"
   ],
-  "scripts": {
-    "build": "node ../../../../../scripts/egg-born-bin.js backend-build-module"
-  },
+  "scripts": {},
   "dependencies": {}
 }
