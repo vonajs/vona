@@ -93,8 +93,8 @@ export class LocalVersion extends BeanBase {
 
     // fileVersionNew
     let fileVersionNew = 0;
-    if (module.package.cabloyModule && module.package.cabloyModule.fileVersion) {
-      fileVersionNew = module.package.cabloyModule.fileVersion;
+    if (module.package.vonaModule && module.package.vonaModule.fileVersion) {
+      fileVersionNew = module.package.vonaModule.fileVersion;
     }
 
     if (fileVersionNew && (!options.scene || options.scene === 'init')) {

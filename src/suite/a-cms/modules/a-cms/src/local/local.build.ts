@@ -53,7 +53,7 @@ export class LocalBuild extends BeanBase<ScopeModule> {
     site.plugins = {};
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
-      const plugin = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.plugin');
+      const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (plugin) {
         site.plugins[relativeName] = this.ctx.config.module(relativeName).plugin;
       }
@@ -179,7 +179,7 @@ export class LocalBuild extends BeanBase<ScopeModule> {
     // module
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
-    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.extend');
+    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
     if (!moduleExtend) return this.ctx.config.module(themeModuleName).theme;
     return this.ctx.bean.util.extend(
       {},
@@ -613,7 +613,7 @@ export class LocalBuild extends BeanBase<ScopeModule> {
     // modulesArray
     let pluginIncludes = '';
     for (const module of this.app.meta.modulesArray) {
-      const plugin = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.plugin');
+      const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (plugin && this._checkIfPluginEnable({ site, moduleName: module.info.relativeName })) {
         // path intermediate
         const pathIntermediate = await this.getPathIntermediate(language);
@@ -974,7 +974,7 @@ var env=${JSON.stringify(env, null, 2)};
       // plugins
       for (const relativeName in this.app.meta.modules) {
         const module = this.app.meta.modules[relativeName];
-        const plugin = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.plugin');
+        const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
         if (plugin) {
           const pluginPath = path.join(module.root, 'cms/plugin');
           const pluginFiles = await eggBornUtils.tools.globbyAsync(`${pluginPath}/*`, { onlyFiles: false });
@@ -1127,7 +1127,7 @@ var env=${JSON.stringify(env, null, 2)};
     // plugins
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
-      const plugin = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.plugin');
+      const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (!module.info.node_modules && !module.info.vendor && plugin) {
         site._watchers.push(path.join(module.root, 'cms'));
         // site._watchers.push(path.join(module.root, 'src'));
@@ -1195,7 +1195,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     // extend
-    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.extend');
+    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
     if (moduleExtend) {
       await this._copyThemes(pathIntermediate, moduleExtend);
     }
@@ -1217,7 +1217,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     // extend
-    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.cabloyModule.cms.extend');
+    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
     if (moduleExtend) {
       this._watcherThemes(site, moduleExtend);
     }

@@ -13,7 +13,7 @@ export class BeanBaseLocaleModules extends BeanBaseAuthProviders {
   _prepareLocaleModules() {
     const localeModules: any[] = [];
     for (const module of this.ctx.app.meta.modulesArray) {
-      const locale = module.package.cabloyModule && module.package.cabloyModule.locale;
+      const locale = module.package.vonaModule && module.package.vonaModule.locale;
       if (!locale) continue;
       const locales = locale.split(',');
       if (locales.findIndex(item => item === this.ctx.locale) > -1) {
