@@ -1,20 +1,26 @@
 {
-  "name": "zova-module-<%=argv.name%>",
+  "name": "vona-module-<%=argv.name%>",
   "version": "5.0.0",
   "title": "<%=argv.moduleInfo.relativeName%>",
+  "vonaModule": {
+    "dependencies": {
+      "a-core": "5.0.0"
+    }
+  },
   "type": "module",
   "exports": {
     ".": {
       "types": ["./src/index.ts", "./dist/index.d.ts"],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
     },
-    "./*": "./*"
+    "./package.json": "./package.json"
   },
   "description": "<%=argv.description%>",
-  "keywords": ["Zova Module"],
+  "keywords": ["Vona Module"],
   "author": "<%=argv.author%>",
-  "files": ["mock", "dist"],
+  "files": ["dist", "static"],
   "scripts": {},
   "dependencies": {}
 }

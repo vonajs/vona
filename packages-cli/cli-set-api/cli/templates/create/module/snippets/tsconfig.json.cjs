@@ -1,10 +1,12 @@
 module.exports = {
-  file: 'package.json',
+  file: 'tsconfig.json',
   parseOptions: {
     language: 'json',
   },
   async transform({ /* cli,*/ ast, argv }) {
-    ast.dependencies[`vona-module-${argv.name}`] = 'workspace:^';
+    ast.references.push({
+      path: `modules/${argv.name}/tsconfig.json`,
+    });
     // ok
     return ast;
   },
