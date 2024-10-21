@@ -179,6 +179,7 @@
     "vona-module-test-localeone": "workspace:^",
     "vona-module-test-localetwo": "workspace:^",
     "vona-module-test-partymonkey": "workspace:^",
+    "vona-module-a-core": "workspace:^",
     "vona-module-a-index": "workspace:^"
   },
   "devDependencies": {
