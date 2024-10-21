@@ -29,7 +29,6 @@
   "files": [
     "dist",
     "static",
-    "typings",
     "cms"
   ],
   "scripts": {

@@ -27,8 +27,7 @@
   "description": "",
   "files": [
     "dist",
-    "static",
-    "typings"
+    "static"
   ],
   "scripts": {
     "build:front": "node ../../../scripts/egg-born-bin.js front-build-module",

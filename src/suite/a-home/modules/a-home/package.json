@@ -30,8 +30,7 @@
   "author": "zhennann",
   "files": [
     "dist",
-    "static",
-    "typings"
+    "static"
   ],
   "scripts": {
     "build": "node ../../../../../scripts/egg-born-bin.js backend-build-module"
