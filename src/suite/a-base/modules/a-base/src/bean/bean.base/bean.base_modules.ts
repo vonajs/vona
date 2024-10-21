@@ -20,10 +20,10 @@ export class BeanBaseModules extends BeanBaseLocales {
         description: this.ctx.text(module.package.description),
         info: module.info,
       };
-      const icon = module.package.vonaModule && module.package.vonaModule.icon;
-      if (icon) {
-        _module.icon = icon;
-      }
+      // const icon = module.package.vonaModule && module.package.vonaModule.icon;
+      // if (icon) {
+      //   _module.icon = icon;
+      // }
       _module.titleLocale = this.ctx.text(_module.title);
       modules[relativeName] = _module;
     }
