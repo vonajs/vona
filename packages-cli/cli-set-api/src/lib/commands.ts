@@ -1,6 +1,7 @@
 import defaultList from './command/default.list.js';
 import createSuite from './command/create.suite.js';
 import createModule from './command/create.module.js';
+import toolsDeps from './command/tools.deps.js';
 
 export const commands = {
   default: {
@@ -12,5 +13,7 @@ export const commands = {
   },
   init: {},
   refactor: {},
-  tools: {},
+  tools: {
+    deps: toolsDeps,
+  },
 };

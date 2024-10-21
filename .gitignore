@@ -22,7 +22,11 @@ miniprogram_npm
 
 # package-lock.json
 
+# mine .env files
 env/.env*.mine
+/src/backend/config/config/config*.mine.ts
+/src/backend/typing/modules.d.ts
+**/.metadata/modules.d.ts
 
 # auto created
 /tsconfig.json
@@ -48,12 +52,8 @@ env/.env*.mine
 
 /src/backend/demo
 /src/backend/app
-/src/backend/config
 /src/backend/logs
 /src/backend/run
-/src/front/config
-/src/front/__dist
-/src/front/__runtime
 
 /src/suite/*
 !/src/suite/.gitkeep
