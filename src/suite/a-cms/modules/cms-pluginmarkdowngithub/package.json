@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginmarkdowngithub",
   "version": "5.0.0",
   "title": "cms:plugin:markdowngithub",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "markdowngithub",
       "plugin": true

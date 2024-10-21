@@ -2,7 +2,7 @@
   "name": "vona-module-cms-themeaws",
   "version": "5.0.0",
   "title": "cms:theme:aws",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "aws",
       "theme": true,

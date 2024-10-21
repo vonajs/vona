@@ -2,7 +2,7 @@
   "name": "vona-module-cms-sitedocumentation",
   "version": "5.0.0",
   "title": "CMS:Documentation",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 1,
     "dependencies": {
       "a-instance": "5.0.0",

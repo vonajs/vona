@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginbacktotop",
   "version": "5.0.0",
   "title": "cms:plugin:backToTop",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "backToTop",
       "plugin": true

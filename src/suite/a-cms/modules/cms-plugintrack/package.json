@@ -2,7 +2,7 @@
   "name": "vona-module-cms-plugintrack",
   "version": "5.0.0",
   "title": "cms:plugin:track",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "track",
       "plugin": true

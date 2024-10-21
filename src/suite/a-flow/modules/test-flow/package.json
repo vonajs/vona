@@ -2,7 +2,7 @@
   "name": "vona-module-test-flow",
   "version": "5.0.0",
   "title": "WorkFlow Test",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 4,
     "dependencies": {
       "a-instance": "5.0.0",

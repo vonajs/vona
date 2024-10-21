@@ -2,7 +2,7 @@
   "name": "vona-module-test-partymonkey",
   "version": "5.0.0",
   "title": "test-partymonkey",
-  "cabloyModule": {
+  "vonaModule": {
     "capabilities": {
       "monkey": true
     },

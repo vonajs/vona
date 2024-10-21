@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginrss",
   "version": "5.0.0",
   "title": "cms:plugin:rss",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "rss",
       "plugin": true

@@ -2,7 +2,7 @@
   "name": "vona-module-test-party",
   "version": "5.0.0",
   "title": "Party Test",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 4,
     "icon": ":business:party",
     "cms": {

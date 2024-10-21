@@ -2,7 +2,7 @@
   "name": "vona-module-a-captchasimple",
   "version": "5.0.0",
   "title": "a-captchasimple",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

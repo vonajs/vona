@@ -2,7 +2,7 @@
   "name": "vona-module-a-layoutmobile",
   "version": "5.0.0",
   "title": "Mobile Layout",
-  "cabloyModule": {
+  "vonaModule": {
     "dependencies": {}
   },
   "type": "module",

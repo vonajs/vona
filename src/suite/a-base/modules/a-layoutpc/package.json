@@ -2,7 +2,7 @@
   "name": "vona-module-a-layoutpc",
   "version": "5.0.0",
   "title": "PC Layout",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 4,
     "dependencies": {
       "a-instance": "5.0.0",

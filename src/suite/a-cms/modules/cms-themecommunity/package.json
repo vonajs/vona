@@ -2,7 +2,7 @@
   "name": "vona-module-cms-themecommunity",
   "version": "5.0.0",
   "title": "cms:theme:community",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "community",
       "theme": true

@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-version",
   "version": "5.0.0",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 3,
     "dependencies": {
       "a-database": "5.0.0"

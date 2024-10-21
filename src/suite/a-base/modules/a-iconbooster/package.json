@@ -2,7 +2,7 @@
   "name": "vona-module-a-iconbooster",
   "version": "5.0.0",
   "title": "Icons Booster",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

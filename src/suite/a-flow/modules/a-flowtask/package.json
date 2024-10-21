@@ -2,7 +2,7 @@
   "name": "vona-module-a-flowtask",
   "version": "5.0.0",
   "title": "Flow Task",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 4,
     "dependencies": {
       "a-instance": "5.0.0",

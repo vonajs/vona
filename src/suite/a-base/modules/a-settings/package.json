@@ -2,7 +2,7 @@
   "name": "vona-module-a-settings",
   "version": "5.0.0",
   "title": "Settings",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 1,
     "dependencies": {
       "a-instance": "5.0.0"

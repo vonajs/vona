@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginsubmit",
   "version": "5.0.0",
   "title": "cms:plugin:submit",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "submit",
       "plugin": true

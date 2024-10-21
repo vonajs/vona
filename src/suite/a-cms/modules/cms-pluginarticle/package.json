@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginarticle",
   "version": "5.0.0",
   "title": "cms:plugin:article",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "article",
       "plugin": true

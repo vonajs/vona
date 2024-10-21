@@ -2,7 +2,7 @@
   "name": "vona-module-cms-themeblog",
   "version": "5.0.0",
   "title": "cms:theme:blog",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "blog",
       "theme": true

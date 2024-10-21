@@ -2,7 +2,7 @@
   "name": "vona-module-a-themehyacinth",
   "version": "5.0.0",
   "title": "Hyacinth",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 0,
     "theme": true,
     "dependencies": {

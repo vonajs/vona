@@ -2,7 +2,7 @@
   "name": "vona-module-a-basefront",
   "version": "5.0.0",
   "title": "Base Front",
-  "cabloyModule": {
+  "vonaModule": {
     "dependencies": {}
   },
   "type": "module",

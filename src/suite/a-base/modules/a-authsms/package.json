@@ -2,7 +2,7 @@
   "name": "vona-module-a-authsms",
   "version": "5.0.0",
   "title": "Auth-SMS",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0",

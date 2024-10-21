@@ -38,17 +38,11 @@ export interface IBundleVendor {
 export interface IModulePackage {
     name: string;
     version: string;
-    cabloyModule?: {
-        capabilities?: {
-            monkey: boolean;
-            sync: boolean;
-            icon: boolean;
-        };
+    vonaModule?: {
+        capabilities?: IModuleCapabilities;
         fileVersion: number;
         dependencies?: Record<string, string>;
-        theme: object;
-        icon: string;
-        locale: string;
+        globalDependencies?: Record<string, string | boolean>;
     };
     zovaModule?: {
         capabilities?: IModuleCapabilities;

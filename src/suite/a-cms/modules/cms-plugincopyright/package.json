@@ -2,7 +2,7 @@
   "name": "vona-module-cms-plugincopyright",
   "version": "5.0.0",
   "title": "cms:plugin:copyright",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "copyright",
       "plugin": true

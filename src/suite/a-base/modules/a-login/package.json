@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-login",
   "version": "5.0.0",
-  "cabloyModule": {
+  "vonaModule": {
     "dependencies": {}
   },
   "type": "module",

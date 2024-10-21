@@ -2,7 +2,7 @@
   "name": "vona-module-a-codemirror",
   "version": "5.0.0",
   "title": "codemirror",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0"

@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-event",
   "version": "5.0.0",
-  "cabloyModule": {
+  "vonaModule": {
     "dependencies": {
       "a-instance": "5.0.0"
     }

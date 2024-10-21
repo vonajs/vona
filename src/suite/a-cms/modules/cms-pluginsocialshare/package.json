@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginsocialshare",
   "version": "5.0.0",
   "title": "cms:plugin:SocialShare",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "SocialShare",
       "plugin": true

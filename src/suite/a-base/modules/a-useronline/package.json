@@ -2,7 +2,7 @@
   "name": "vona-module-a-useronline",
   "version": "5.0.0",
   "title": "Online Users",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 2,
     "dependencies": {
       "a-instance": "5.0.0",

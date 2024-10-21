@@ -2,7 +2,7 @@
   "name": "vona-module-a-baseadmin",
   "version": "5.0.0",
   "title": "Basic Admin",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 3,
     "dependencies": {
       "a-base": "5.0.0"

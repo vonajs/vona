@@ -2,7 +2,7 @@
   "name": "vona-module-a-user",
   "version": "5.0.0",
   "title": "User",
-  "cabloyModule": {
+  "vonaModule": {
     "dependencies": {
       "a-base": "5.0.0"
     }

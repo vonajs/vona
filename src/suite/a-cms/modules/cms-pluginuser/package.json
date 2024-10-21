@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginuser",
   "version": "5.0.0",
   "title": "cms:plugin:user",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "user",
       "plugin": true

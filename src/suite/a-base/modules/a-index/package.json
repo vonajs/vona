@@ -2,7 +2,7 @@
   "name": "vona-module-a-index",
   "version": "5.0.0",
   "title": "a-index",
-  "cabloyModule": {
+  "vonaModule": {
     "last": true,
     "fileVersion": -1,
     "dependencies": {

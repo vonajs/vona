@@ -2,7 +2,7 @@
   "name": "vona-module-test-localetwo",
   "version": "5.0.0",
   "title": "Locale Two",
-  "cabloyModule": {
+  "vonaModule": {
     "fileVersion": 0,
     "locale": "zh-cn",
     "dependencies": {

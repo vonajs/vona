@@ -2,7 +2,7 @@
   "name": "vona-module-cms-pluginbase",
   "version": "5.0.0",
   "title": "cms:plugin:base",
-  "cabloyModule": {
+  "vonaModule": {
     "cms": {
       "name": "base",
       "plugin": true
