@@ -1,5 +1,6 @@
 import defaultList from './command/default.list.js';
 import createSuite from './command/create.suite.js';
+import createModule from './command/create.module.js';
 
 export const commands = {
   default: {
@@ -7,6 +8,7 @@ export const commands = {
   },
   create: {
     suite: createSuite,
+    module: createModule,
   },
   init: {},
   refactor: {},

@@ -206,4 +206,10 @@ export class LocalHelper {
     }
     return result;
   }
+  async removeGitkeep(parentPath: string) {
+    const gitkeep = path.join(parentPath, '.gitkeep');
+    if (fse.existsSync(gitkeep)) {
+      await fse.remove(gitkeep);
+    }
+  }
 }

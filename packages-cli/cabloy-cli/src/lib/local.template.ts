@@ -88,10 +88,7 @@ export class LocalTemplate {
       const targetFile = path.join(parentPath, this.replaceTemplate(fileName, argv));
       await this.renderFile({ targetFile, templateFile });
       if (fileName !== '.gitkeep') {
-        const gitkeep = path.join(parentPath, '.gitkeep');
-        if (fs.existsSync(gitkeep)) {
-          fs.unlinkSync(gitkeep);
-        }
+        await this.helper.removeGitkeep(parentPath);
       }
     }
     return files;
