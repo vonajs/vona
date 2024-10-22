@@ -198,7 +198,7 @@ const utils = {
       for (const key in modules) {
         const module = modules[key];
         if (!module.suite && !module.info.vendor) {
-          referencesNew.push({ path: `src/module/${module.info.originalName}/tsconfig.build.json` });
+          referencesNew.push({ path: `src/module/${module.info.originalName}/tsconfig.json` });
         }
       }
     }

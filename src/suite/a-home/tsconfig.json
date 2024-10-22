@@ -7,7 +7,7 @@
   "include": ["src/**/*"],
   "references": [
     {
-      "path": "modules/a-home/tsconfig.build.json"
+      "path": "modules/a-home/tsconfig.json"
     }
   ]
 }

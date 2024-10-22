@@ -44,7 +44,7 @@ async function _moduleHandle({ module, processHelper }) {
   // if (module.suite) return;
   // console.log(module.info.relativeName);
   // const fileFrom = `${module.root}/tsconfig.json`;
-  // const fileTo = `${module.root}/tsconfig.build.json`;
+  // const fileTo = `${module.root}/tsconfig.json`;
 
   // const contentNew = `
   // {

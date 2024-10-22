@@ -7,16 +7,16 @@
   "include": ["src/**/*"],
   "references": [
     {
-      "path": "modules/test-localeone/tsconfig.build.json"
+      "path": "modules/test-localeone/tsconfig.json"
     },
     {
-      "path": "modules/test-localetwo/tsconfig.build.json"
+      "path": "modules/test-localetwo/tsconfig.json"
     },
     {
-      "path": "modules/test-party/tsconfig.build.json"
+      "path": "modules/test-party/tsconfig.json"
     },
     {
-      "path": "modules/test-partymonkey/tsconfig.build.json"
+      "path": "modules/test-partymonkey/tsconfig.json"
     }
   ]
 }
