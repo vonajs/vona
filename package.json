@@ -59,6 +59,8 @@
     "vona-module-test-note": "workspace:^",
     "vona-module-test-userpro": "workspace:^",
     "vona-module-a-b4": "workspace:^",
+    "vona-module-a-core": "workspace:^",
+    "vona-module-a-b5": "workspace:^",
     "vona-module-a-app": "workspace:^",
     "vona-module-a-appbooster": "workspace:^",
     "vona-module-a-auth": "workspace:^",
@@ -179,7 +181,6 @@
     "vona-module-test-localeone": "workspace:^",
     "vona-module-test-localetwo": "workspace:^",
     "vona-module-test-partymonkey": "workspace:^",
-    "vona-module-a-core": "workspace:^",
     "vona-module-a-index": "workspace:^"
   },
   "devDependencies": {
