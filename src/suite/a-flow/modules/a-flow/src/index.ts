@@ -6,5 +6,3 @@ export * from './types.js';
 export * from './common/flowBehaviorBase.js';
 export * from './common/flowEdgeBase.js';
 export * from './common/flowNodeBase.js';
-
-import './typings.js';
