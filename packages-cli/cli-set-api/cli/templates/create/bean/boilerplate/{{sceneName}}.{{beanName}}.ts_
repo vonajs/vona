@@ -1,0 +1,4 @@
+import { <%=argv.decoratorName%>, BeanBase } from 'vona';
+
+@<%=argv.decoratorName%>(<%-argv.sceneName==='bean'?'':`{ scene: '${argv.sceneName}' }`%>)
+export class <%=argv.sceneNameCapitalize%><%=argv.beanNameCapitalize%> extends BeanBase {}

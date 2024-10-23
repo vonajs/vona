@@ -1,13 +1,20 @@
-import { BeanCliBase, NameMeta } from '@cabloy/cli';
+import { BeanCliBase } from '@cabloy/cli';
 import { IModuleInfo } from '@cabloy/module-info';
+import path from 'path';
+import fs from 'fs';
+import { __ThisSetName__ } from '../this.js';
 
+const __decorators = {
+  virtual: 'virtual',
+};
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     module: string;
     moduleInfo: IModuleInfo;
     sceneName: string;
     sceneNameCapitalize: string;
-    nameMeta: NameMeta;
+    beanName: string;
+    beanNameCapitalize: string;
     //
     decoratorName: string;
   }
@@ -29,24 +36,19 @@ export class CliCreateBean extends BeanCliBase {
     // target dir
     const targetDir = await this.helper.ensureDir(_module.root);
     // scene name
-    if (!argv.sceneName) {
-      argv.sceneName = this.sceneName;
-    }
-    argv.sceneNameCapitalize = this.helper.firstCharToUpperCase(argv.sceneName);
+    const sceneName = argv.sceneName; // bean/summer.cache
+    const sceneParts = sceneName.split('.');
+    argv.sceneNameCapitalize = sceneParts.map(item => this.helper.firstCharToUpperCase(item)).join();
     // bean name
-    if (!argv.beanName) {
-      argv.beanName = argv.storeName || argv.styleName || argv.themeName || argv.toolName || argv.modelName;
-    }
-    // nameMeta
-    argv.nameMeta = this.helper.parseNameMeta(argv.beanName);
+    const beanName = argv.beanName;
+    argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
+    // decoratorName
+    argv.decoratorName = __decorators[sceneName] || 'Bean';
     // directory
-    let beanDir = path.join(targetDir, 'src/bean');
-    if (argv.nameMeta.directory) {
-      beanDir = path.join(beanDir, argv.nameMeta.directory);
-    }
-    const beanFile = path.join(beanDir, `${argv.sceneName}.${argv.nameMeta.full}.ts`);
+    const beanDir = path.join(targetDir, 'src/bean');
+    const beanFile = path.join(beanDir, `${sceneName}.${beanName}.ts`);
     if (fs.existsSync(beanFile)) {
-      throw new Error(`${argv.sceneName} bean exists: ${argv.beanName}`);
+      throw new Error(`${sceneName} bean exists: ${beanName}`);
     }
     await this.helper.ensureDir(beanDir);
     // render boilerplate
