@@ -4,7 +4,7 @@ import assert from 'assert';
 import { LocalContextFlow } from './local.context.flow.js';
 
 @Bean({ scene: 'local.flow' })
-export class LocalFlowListener extends BeanBase {
+export class ServiceFlowListener extends BeanBase {
   flowInstance: any;
   context: LocalContextFlow;
   _flowListener: any;

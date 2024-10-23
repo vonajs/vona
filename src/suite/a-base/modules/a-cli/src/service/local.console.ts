@@ -1,7 +1,7 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalConsole extends BeanBase {
+@Service()
+export class ServiceConsole extends BeanBase {
   cli: any;
 
   constructor(cli) {

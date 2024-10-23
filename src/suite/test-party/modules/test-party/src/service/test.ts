@@ -1,7 +1,7 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalTest extends BeanBase {
+@Service()
+export class ServiceTest extends BeanBase {
   get name() {
     return 'localTest';
   }

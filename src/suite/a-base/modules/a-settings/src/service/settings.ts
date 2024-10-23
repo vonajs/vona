@@ -1,10 +1,10 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
 let _instanceList: any = null;
 let _userList: any = null;
 
-@Local()
-export class LocalSettings extends BeanBase {
+@Service()
+export class ServiceSettings extends BeanBase {
   // instance
 
   instanceList() {

@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalUser extends BeanBase {
+@Service()
+export class ServiceUser extends BeanBase {
   async getLabels({ user }: any) {
     return await this.ctx.bean.atom.getLabels({ user });
   }

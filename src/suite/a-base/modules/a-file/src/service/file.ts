@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalFile extends BeanBase {
+@Service()
+export class ServiceFile extends BeanBase {
   async all({ atomClass, options, user }: any) {
     return await this.ctx.bean.file.all({ atomClass, options, user });
   }

@@ -1,7 +1,7 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalStash extends BeanBase {
+@Service()
+export class ServiceStash extends BeanBase {
   _caches: any;
 
   constructor() {

@@ -1,10 +1,10 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
 const __blackFields = ['startups', 'queues', 'broadcasts', 'middlewares', 'schedules'];
 
-@Local()
-export class LocalInstance extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceInstance extends BeanBase<ScopeModule> {
   get modelInstance() {
     return this.scope.model.instance;
   }

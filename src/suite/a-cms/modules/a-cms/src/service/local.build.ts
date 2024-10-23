@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 import path from 'path';
 
@@ -15,8 +15,8 @@ import UglifyJS from 'uglify-js';
 import less from 'less';
 import utils from '../common/utils.js';
 
-@Local()
-export class LocalBuild extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceBuild extends BeanBase<ScopeModule> {
   atomClass: any;
   default: any;
 

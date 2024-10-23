@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalShare extends BeanBase {
+@Service()
+export class ServiceShare extends BeanBase {
   async generate({ host, atomId, url, user }: any) {
     return await this.ctx.bean.share.generate({ host, atomId, url, user });
   }

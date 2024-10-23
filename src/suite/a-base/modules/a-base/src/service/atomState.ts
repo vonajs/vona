@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalAtomState extends BeanBase {
+@Service()
+export class ServiceAtomState extends BeanBase {
   async getDictDynamic({ atomClass }: any) {
     const data = await this.ctx.bean.atomState.dynamic_getDict({ atomClass });
     if (!data) return null;

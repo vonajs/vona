@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 import Chalk from 'chalk';
 import TableClass from 'cli-table3';
@@ -8,8 +8,8 @@ import fse from 'fs-extra';
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 
-@Local()
-export class LocalHelper extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceHelper extends BeanBase<ScopeModule> {
   cli: any;
   ProcessHelper: any;
 

@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
-@Local()
-export class LocalTools extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceTools extends BeanBase<ScopeModule> {
   get localUtils() {
     return this.scope.local.utils;
   }

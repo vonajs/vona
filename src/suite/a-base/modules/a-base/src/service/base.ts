@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalBase extends BeanBase {
+@Service()
+export class ServiceBase extends BeanBase {
   modules() {
     return this.ctx.bean.base.modules();
   }

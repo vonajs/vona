@@ -6,7 +6,7 @@ import { LocalContextNode } from './local.context.node.js';
 import { LocalContextFlow } from './local.context.flow.js';
 
 @Bean({ scene: 'local.flow' })
-export class LocalFlowEdge extends BeanBase {
+export class ServiceFlowEdge extends BeanBase {
   flowInstance: any;
   context: LocalContextFlow;
   contextNode: LocalContextNode;

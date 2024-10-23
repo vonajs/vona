@@ -1,11 +1,11 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 import { BigNumber } from 'vona-module-a-database';
 
 import fse from 'fs-extra';
 
-@Local()
-export class LocalSite extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceSite extends BeanBase<ScopeModule> {
   async getSite({ atomClass, language, options }: any) {
     const build = this.ctx.bean.cms.build({ atomClass });
     return await build.getSite({ language, options });

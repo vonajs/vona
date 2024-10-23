@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalMessage extends BeanBase {
+@Service()
+export class ServiceMessage extends BeanBase {
   async group({ options, user }: any) {
     return await this.ctx.bean.message.group({ options, user });
   }

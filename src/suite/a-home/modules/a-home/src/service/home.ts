@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
-@Local()
-export class LocalHome extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceHome extends BeanBase<ScopeModule> {
   async echo({ user: _user }) {
     return 'Hello World!';
   }

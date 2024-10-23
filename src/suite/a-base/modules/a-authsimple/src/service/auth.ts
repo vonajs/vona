@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
-@Local()
-export class LocalAuth extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceAuth extends BeanBase<ScopeModule> {
   // mobile: not use
   async signup({ user, state = 'login', userName, realName, email, /* mobile,*/ password }: any) {
     return await this.ctx.bean.authSimple.signup({ user, state, userName, realName, email, /* mobile,*/ password });

@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalPublic extends BeanBase {
+@Service()
+export class ServicePublic extends BeanBase {
   async profile({ userId }: any) {
     const item = await this.ctx.bean.user.get({ id: userId });
     if (!item) return;

@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalFlowDef extends BeanBase {
+@Service()
+export class ServiceFlowDef extends BeanBase {
   async normalizeAssignees({ host, assignees, user }: any) {
     // check right
     assignees = await this.__checkRightNormalizeAssignees({ host, assignees, user });

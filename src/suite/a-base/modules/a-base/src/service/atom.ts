@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { AtomClassParams } from '../types.js';
 
-@Local()
-export class LocalAtom extends BeanBase {
+@Service()
+export class ServiceAtom extends BeanBase {
   async preferredRoles({ atomClass, user }: any) {
     return await this.ctx.bean.atom.preferredRoles({ atomClass, user });
   }

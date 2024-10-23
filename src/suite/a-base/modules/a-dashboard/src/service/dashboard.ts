@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
 
-@Local()
-export class LocalDashboard extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceDashboard extends BeanBase<ScopeModule> {
   get atomClass() {
     return {
       module: __ThisModule__,

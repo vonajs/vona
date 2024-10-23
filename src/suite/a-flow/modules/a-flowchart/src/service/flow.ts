@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalFlow extends BeanBase {
+@Service()
+export class ServiceFlow extends BeanBase {
   async flowChartProcess({ host, user }: any) {
     // check right
     const flowChartProcess = await this.__checkRightFlowChartProcess({ host, user });

@@ -1,4 +1,4 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 import path from 'path';
 import fse from 'fs-extra';
@@ -44,8 +44,8 @@ export default class Demo extends BeanCliBase {
 }
 `;
 
-@Local()
-export class LocalUtils extends BeanBase {
+@Service()
+export class ServiceUtils extends BeanBase {
   async demoExecute({ method, argv, cli, user }: { method: string; argv; cli: BeanCliBase; user }) {
     // js file
     const jsFile = await this._prepareJSFile({ cli });

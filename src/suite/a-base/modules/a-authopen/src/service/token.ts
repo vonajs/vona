@@ -1,11 +1,11 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 import chalk from 'chalk';
 import Table from 'cli-table3';
 import eggBornUtils from 'egg-born-utils';
 
-@Local()
-export class LocalToken extends BeanBase {
+@Service()
+export class ServiceToken extends BeanBase {
   async add({ name, host, clientID, clientSecret, log }: any) {
     // init file
     const { fileName, config } = await eggBornUtils.openAuthConfig.load();

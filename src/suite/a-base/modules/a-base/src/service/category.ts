@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalCategory extends BeanBase {
+@Service()
+export class ServiceCategory extends BeanBase {
   async child({ atomClass, language, categoryId, categoryName, categoryHidden, categoryFlag, setLocale, user }: any) {
     return await this.ctx.bean.category.child({
       atomClass,

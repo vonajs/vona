@@ -1,7 +1,7 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalProcedure extends BeanBase {
+@Service()
+export class ServiceProcedure extends BeanBase {
   async selectTasks({ userIdWho, where, orders, page, count, history }: any) {
     userIdWho = parseInt(userIdWho);
     history = parseInt(history);

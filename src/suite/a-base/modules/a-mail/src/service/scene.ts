@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
-@Local()
-export class LocalScene extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceScene extends BeanBase<ScopeModule> {
   get statusModule() {
     return this.scope._bean.status;
   }

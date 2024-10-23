@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalAtomClass extends BeanBase {
+@Service()
+export class ServiceAtomClass extends BeanBase {
   async validatorSearch({ atomClass }: any) {
     return await this.ctx.bean.atomClass.validatorSearch({ atomClass });
   }

@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalRole extends BeanBase {
+@Service()
+export class ServiceRole extends BeanBase {
   async childrenTop({ roleTypes, page, user }: any) {
     return await this.ctx.bean.role.childrenTop({ roleTypes, page, user });
   }

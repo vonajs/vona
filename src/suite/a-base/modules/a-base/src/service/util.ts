@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import pMap from 'p-map';
 
-@Local()
-export class LocalUtil extends BeanBase {
+@Service()
+export class ServiceUtil extends BeanBase {
   async performAction({ params }: any) {
     // force innerAccess as false
     params.innerAccess = false;

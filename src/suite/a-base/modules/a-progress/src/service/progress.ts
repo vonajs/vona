@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalProgress extends BeanBase {
+@Service()
+export class ServiceProgress extends BeanBase {
   async check({ progressId, counter, user }: any) {
     return await this.ctx.bean.progress.check({ progressId, counter, user });
   }

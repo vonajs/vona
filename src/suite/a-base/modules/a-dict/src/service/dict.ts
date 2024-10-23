@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalDict extends BeanBase {
+@Service()
+export class ServiceDict extends BeanBase {
   async getDict({ dictKey, user }: any) {
     // check right
     const res = await this.ctx.bean.dict._prepareDict_load({ dictKey, user, returnDict: false });

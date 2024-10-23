@@ -1,8 +1,8 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalRender extends BeanBase {
+@Service()
+export class ServiceRender extends BeanBase {
   async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
     // atomClass
     const { key, atomClass, options } = await this.ctx.bean.atom._prepareKeyAndAtomAndAtomClass({

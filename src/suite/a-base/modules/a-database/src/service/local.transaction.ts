@@ -1,9 +1,9 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 import knex from 'knex';
 
-@Local()
-export class LocalTransaction extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceTransaction extends BeanBase<ScopeModule> {
   _transactionCounter: number = 0;
   _connection: knex.Knex.Transaction | null = null;
 

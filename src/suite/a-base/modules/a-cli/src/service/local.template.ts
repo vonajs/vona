@@ -1,5 +1,5 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 import fs from 'fs';
 import path from 'path';
@@ -9,8 +9,8 @@ import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 
-@Local()
-export class LocalTemplate extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceTemplate extends BeanBase<ScopeModule> {
   cli: any;
 
   constructor(cli) {

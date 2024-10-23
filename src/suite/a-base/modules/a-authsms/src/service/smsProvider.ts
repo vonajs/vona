@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 
-@Local()
-export class LocalSmsProvider extends BeanBase {
+@Service()
+export class ServiceSmsProvider extends BeanBase {
   get statusModule() {
     return this.ctx.bean.status.module(__ThisModule__);
   }

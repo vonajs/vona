@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 
-@Local()
-export class LocalAuth extends BeanBase {
+@Service()
+export class ServiceAuth extends BeanBase {
   async signup({ user, state = 'login', userName, realName, mobile }: any) {
     // profileUser
     const profileUser = {

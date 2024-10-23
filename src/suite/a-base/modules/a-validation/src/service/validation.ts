@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalValidation extends BeanBase {
+@Service()
+export class ServiceValidation extends BeanBase {
   schema({ module, validator, schema }: any) {
     return this.ctx.bean.validation.getSchema({ module, validator, schema });
   }

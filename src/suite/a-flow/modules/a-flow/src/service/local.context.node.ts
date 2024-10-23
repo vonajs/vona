@@ -2,7 +2,7 @@ import { LocalContextEdge } from './local.context.edge.js';
 import { LocalContextFlow } from './local.context.flow.js';
 
 // not extends BeanBase
-export class LocalContextNode {
+export class ServiceContextNode {
   // contextEdge maybe null
   context: LocalContextFlow;
   contextEdge: LocalContextEdge;

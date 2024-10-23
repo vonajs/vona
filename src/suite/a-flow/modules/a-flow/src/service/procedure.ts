@@ -1,8 +1,8 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 import { Knex } from 'vona-module-a-database';
 
-@Local()
-export class LocalProcedure extends BeanBase {
+@Service()
+export class ServiceProcedure extends BeanBase {
   // mode: mine/others/flowing/history
   async selectFlows({ iid, userIdWho, where, orders, page, count, mode }: any) {
     iid = parseInt(iid);

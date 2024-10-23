@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalLayoutConfig extends BeanBase {
+@Service()
+export class ServiceLayoutConfig extends BeanBase {
   async load({ module, user }: any) {
     const name = `user-layoutConfig:${module}:${user.id}`;
     return await this.ctx.bean.status.get(name);

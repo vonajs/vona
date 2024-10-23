@@ -2,8 +2,8 @@ import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from './cacheBase.js';
 import { Local } from 'vona';
 
-@Local()
-export class LocalRedis extends CacheBase {
+@Service()
+export class ServiceRedis extends CacheBase {
   _redisSummer: any;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {

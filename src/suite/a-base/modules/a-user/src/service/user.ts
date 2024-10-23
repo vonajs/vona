@@ -1,9 +1,9 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
 const __appKeyDefault = 'a-app:appDefault';
 
-@Local()
-export class LocalUser extends BeanBase {
+@Service()
+export class ServiceUser extends BeanBase {
   async save({ data, user }: any) {
     // id
     data.id = user.id;

@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalAuthOpen extends BeanBase {
+@Service()
+export class ServiceAuthOpen extends BeanBase {
   async hideClientSecret({ key, user }: any) {
     return await this.ctx.bean.authOpen.hideClientSecret({
       atomId: key.atomId,

@@ -1,8 +1,8 @@
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalRight extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceRight extends BeanBase<ScopeModule> {
   get modelFlowTask() {
     return this.scope.model.flowTask;
   }

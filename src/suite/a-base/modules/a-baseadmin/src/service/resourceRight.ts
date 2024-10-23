@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalResourceRight extends BeanBase {
+@Service()
+export class ServiceResourceRight extends BeanBase {
   async rights({ roleAtomId, page, user }: any) {
     return await this.ctx.bean.resource.resourceRights({ roleAtomId, page, user });
   }

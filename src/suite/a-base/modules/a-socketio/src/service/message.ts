@@ -1,9 +1,9 @@
 import { BigNumber } from 'vona-module-a-database';
 import { ScopeModule } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalMessage extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceMessage extends BeanBase<ScopeModule> {
   get modelMessage() {
     return this.scope.model.message;
   }

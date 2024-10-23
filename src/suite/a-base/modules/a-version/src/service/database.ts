@@ -1,14 +1,14 @@
 import moment from 'moment';
 import chalk from 'chalk';
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 import { BeanDatabaseClient } from 'vona-module-a-database';
 
 const __separator = '-';
 const __timeFormat = `YYYYMMDD${__separator}HHmmss`;
 
-@Local()
-export class LocalDatabase extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceDatabase extends BeanBase<ScopeModule> {
   get configDatabase() {
     return this.app.config.database;
   }

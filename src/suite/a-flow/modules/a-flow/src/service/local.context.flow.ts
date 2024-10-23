@@ -1,5 +1,5 @@
 // not extends BeanBase
-export class LocalContextFlow {
+export class ServiceContextFlow {
   _flowDef: any;
   _flowDefContent: any;
   _flowId: any;

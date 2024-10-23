@@ -1,11 +1,11 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 const _cacheMessageClasses: any = {};
 const _cacheChannels: any = {};
 
-@Local()
-export class LocalMessageClass extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceMessageClass extends BeanBase<ScopeModule> {
   get modelMessageClass() {
     return this.scope.model.messageClass;
   }

@@ -1,10 +1,10 @@
 import { __ThisModule__ } from '../resource/this.js';
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 import url from 'url';
 
-@Local()
-export class LocalTools extends BeanBase {
+@Service()
+export class ServiceTools extends BeanBase {
   async submit({ links, config }: any) {
     for (const target in config.submit) {
       const targetConfig = config.submit[target];

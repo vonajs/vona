@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { CaptchaProviderCaptcha } from '../index.js';
 
-@Local()
-export class LocalCaptcha extends BeanBase {
+@Service()
+export class ServiceCaptcha extends BeanBase {
   async sendCode({ providerInstanceId, context }: any) {
     // sms provider
     const bean = this.ctx.bean._getBean(CaptchaProviderCaptcha);

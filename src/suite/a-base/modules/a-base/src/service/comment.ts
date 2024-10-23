@@ -1,11 +1,11 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
 import trimHtml from '@zhennann/trim-html';
 import { ScopeModule } from '../resource/this.js';
 import { Knex } from 'vona-module-a-database';
 
-@Local()
-export class LocalComment extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceComment extends BeanBase<ScopeModule> {
   get modelAtom() {
     return this.scope.model.atom;
   }

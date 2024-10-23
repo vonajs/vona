@@ -1,11 +1,11 @@
 import chalk from 'chalk';
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { __ThisModule__ } from '../resource/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 
-@Local()
-export class LocalVersion extends BeanBase {
+@Service()
+export class ServiceVersion extends BeanBase {
   async instanceInitStartup({ options }: any) {
     const instanceBase = options && options.instanceBase;
     await this.__instanceInit(this.ctx.subdomain, instanceBase);

@@ -1,9 +1,9 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
 import jsonwebtoken from 'jsonwebtoken';
 
-@Local()
-export class LocalJwt extends BeanBase {
+@Service()
+export class ServiceJwt extends BeanBase {
   async create({ scene = 'query' }: any) {
     // check
     if (!this.ctx.state.jwt) this.ctx.throw(403);

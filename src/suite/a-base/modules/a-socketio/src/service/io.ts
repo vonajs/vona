@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalIo extends BeanBase {
+@Service()
+export class ServiceIo extends BeanBase {
   async subscribe({ path, timestamp, workerId, socketId, scene, user }: any) {
     return await this.ctx.bean.io.subscribe({ path, timestamp, workerId, socketId, scene, user });
   }

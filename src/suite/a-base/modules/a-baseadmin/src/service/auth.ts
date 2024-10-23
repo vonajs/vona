@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 
-@Local()
-export class LocalAuth extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceAuth extends BeanBase<ScopeModule> {
   get modelAuthProvider() {
     return this.getScope('a-auth').model.authProvider;
   }

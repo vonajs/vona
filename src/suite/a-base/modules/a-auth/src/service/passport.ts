@@ -1,7 +1,7 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
-@Local()
-export class LocalPassport extends BeanBase {
+@Service()
+export class ServicePassport extends BeanBase {
   async authenticate({ module, providerName, providerScene, next }: any) {
     const providerFullName = `${module}:${providerName}`;
     const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({ module, providerName });

@@ -1,10 +1,10 @@
-import { Local, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 const __subVersion = 'sub3';
 const __keyUserIndex = 2;
 
-@Local()
-export class LocalRedis extends BeanBase {
+@Service()
+export class ServiceRedis extends BeanBase {
   _redis: any;
 
   constructor() {

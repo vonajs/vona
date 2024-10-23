@@ -1,9 +1,9 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../resource/this.js';
 import { LocalTransaction } from './local.transaction.js';
 
-@Local()
-export class LocalDbMeta extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceDbMeta extends BeanBase<ScopeModule> {
   master: boolean;
   transaction: LocalTransaction;
 

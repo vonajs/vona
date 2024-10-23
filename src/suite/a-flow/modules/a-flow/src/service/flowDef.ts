@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalFlowDef extends BeanBase {
+@Service()
+export class ServiceFlowDef extends BeanBase {
   behaviorBases() {
     return this.ctx.bean.flowDef.behaviorBases();
   }

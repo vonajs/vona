@@ -3,8 +3,8 @@ import { CacheBase } from './cacheBase.js';
 import { Local } from 'vona';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
-@Local()
-export class LocalCache extends CacheBase {
+@Service()
+export class ServiceCache extends CacheBase {
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
   }

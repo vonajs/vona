@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalUser extends BeanBase {
+@Service()
+export class ServiceUser extends BeanBase {
   async select({ query, page, user }: any) {
     return await this.ctx.bean.user.selectGeneral({ params: { query, page }, user });
   }

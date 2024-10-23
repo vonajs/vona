@@ -1,7 +1,7 @@
-import { BeanBase, Local } from 'vona';
+import { BeanBase, Service } from 'vona';
 
-@Local()
-export class LocalIcon extends BeanBase {
+@Service()
+export class ServiceIcon extends BeanBase {
   getIcons() {
     return this.ctx.bean.icon.getIcons();
   }
