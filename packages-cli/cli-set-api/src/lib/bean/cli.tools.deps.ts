@@ -76,7 +76,7 @@ export class CliToolsDeps extends BeanCliBase {
     // all globalDependencies of modules
     this.modulesMeta.modulesArray.forEach(module => {
       const deps = module.package.dependencies;
-      const globalDependencies = module.package.zovaModule?.globalDependencies;
+      const globalDependencies = module.package.vonaModule?.globalDependencies;
       if (globalDependencies) {
         for (const key in globalDependencies) {
           let version = globalDependencies[key];

@@ -43,7 +43,8 @@
     "fs-extra": "^11.2.0",
     "gogocode": "^1.0.53",
     "rimraf": "^5.0.5",
-    "urllib": "^3.24.0"
+    "urllib": "^3.24.0",
+    "vona-shared": "workspace:^"
   },
   "gitHead": "544f25da60609ebc63c14f92057dedb289ba5946"
 }

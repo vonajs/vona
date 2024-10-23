@@ -37,6 +37,6 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "vona-module-test-party": "^5.0.0"
+    "vona-module-test-party": "workspace:^"
   }
 }
