@@ -23,7 +23,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   }
 
   get sqlProcedure() {
-    return this.scope.local.procedure;
+    return this.scope.service.procedure;
   }
 
   // count

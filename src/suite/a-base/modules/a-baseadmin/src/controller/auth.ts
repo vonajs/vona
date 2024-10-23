@@ -6,14 +6,14 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
   async list() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.auth.list();
+    const res = await this.scope.service.auth.list();
     this.ctx.success(res);
   }
 
   async disable() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.auth.disable({
+    const res = await this.scope.service.auth.disable({
       id: this.ctx.request.body.id,
       disabled: this.ctx.request.body.disabled,
     });
@@ -23,7 +23,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
   async save() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.auth.save({
+    const res = await this.scope.service.auth.save({
       id: this.ctx.request.body.id,
       config: this.ctx.request.body.data,
     });

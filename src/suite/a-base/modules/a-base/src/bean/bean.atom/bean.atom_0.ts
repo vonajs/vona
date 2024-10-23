@@ -43,7 +43,7 @@ export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
   }
 
   get sqlProcedure() {
-    return this.scope.local.procedure;
+    return this.scope.service.procedure;
   }
 
   // atom other functions

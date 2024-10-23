@@ -8,7 +8,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   async select() {
     const options = this.ctx.request.body.options || {};
     options.page = this.ctx.bean.util.page(options.page, false); // false
-    const items = await this.scope.local.resource.select({
+    const items = await this.scope.service.resource.select({
       atomClass: this.ctx.request.body.atomClass,
       options,
       user: this.ctx.state.user.op,
@@ -17,7 +17,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   }
 
   async read() {
-    const res = await this.scope.local.resource.read({
+    const res = await this.scope.service.resource.read({
       atomStaticKey: this.ctx.request.body.atomStaticKey,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -26,7 +26,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   }
 
   async check() {
-    const res = await this.scope.local.resource.check({
+    const res = await this.scope.service.resource.check({
       atomStaticKeys: this.ctx.request.body.atomStaticKeys,
       user: this.ctx.state.user.op,
     });
@@ -34,7 +34,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   }
 
   async resourceRoles() {
-    const list = await this.scope.local.resource.resourceRoles({
+    const list = await this.scope.service.resource.resourceRoles({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -44,7 +44,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   async resourceRoleRemove() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.resource.resourceRoleRemove({
+    const res = await this.scope.service.resource.resourceRoleRemove({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -55,7 +55,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   async resourceRoleAdd() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.resource.resourceRoleAdd({
+    const res = await this.scope.service.resource.resourceRoleAdd({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,

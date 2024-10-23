@@ -4,7 +4,7 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerMessageClass extends BeanBase<ScopeModule> {
   async messageClass() {
-    const res = await this.scope.local.messageClass.messageClass({
+    const res = await this.scope.service.messageClass.messageClass({
       messageClass: this.ctx.request.body.messageClass,
     });
     this.ctx.success(res);

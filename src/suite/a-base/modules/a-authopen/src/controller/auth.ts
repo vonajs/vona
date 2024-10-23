@@ -7,7 +7,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     // data: { clientID, clientSecret }
-    const res = await this.scope.local.auth.signin({
+    const res = await this.scope.service.auth.signin({
       data: this.ctx.request.body.data,
     });
     this.ctx.success(res);

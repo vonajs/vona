@@ -6,7 +6,7 @@ export class ControllerAuthOpen extends BeanBase<ScopeModule> {
   async hideClientSecret() {
     // check demo
     // this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.authOpen.hideClientSecret({
+    const res = await this.scope.service.authOpen.hideClientSecret({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
@@ -16,7 +16,7 @@ export class ControllerAuthOpen extends BeanBase<ScopeModule> {
   async resetClientSecret() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.authOpen.resetClientSecret({
+    const res = await this.scope.service.authOpen.resetClientSecret({
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });

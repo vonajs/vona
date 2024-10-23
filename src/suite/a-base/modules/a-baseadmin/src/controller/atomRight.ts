@@ -5,7 +5,7 @@ import { ScopeModule } from '../resource/this.js';
 export class ControllerAtomRight extends BeanBase<ScopeModule> {
   async rights() {
     const page = this.ctx.request.body.page;
-    const items = await this.scope.local.atomRight.rights({
+    const items = await this.scope.service.atomRight.rights({
       roleAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,
@@ -16,7 +16,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
   async add() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.atomRight.add({
+    const res = await this.scope.service.atomRight.add({
       roleAtomId: this.ctx.request.body.key.atomId,
       atomClass: this.ctx.request.body.atomClassTarget,
       actionCode: this.ctx.request.body.actionCode,
@@ -30,7 +30,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
   async delete() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.atomRight.delete({
+    const res = await this.scope.service.atomRight.delete({
       roleAtomId: this.ctx.request.body.key.atomId,
       roleRightId: this.ctx.request.body.roleRightId,
       user: this.ctx.state.user.op,
@@ -40,7 +40,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
 
   async spreads() {
     const page = this.ctx.request.body.page;
-    const items = await this.scope.local.atomRight.spreads({
+    const items = await this.scope.service.atomRight.spreads({
       roleAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,

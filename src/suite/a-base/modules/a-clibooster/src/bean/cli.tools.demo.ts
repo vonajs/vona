@@ -5,7 +5,7 @@ import { BeanCliBase } from 'vona-module-a-cli';
 @Bean({ scene: 'cli.tools' })
 export class CliToolsDemo extends BeanCliBase<ScopeModule> {
   get localUtils() {
-    return this.scope.local.utils;
+    return this.scope.service.utils;
   }
 
   async execute({ user }: any) {

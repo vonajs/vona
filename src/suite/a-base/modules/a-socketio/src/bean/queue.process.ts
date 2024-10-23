@@ -5,6 +5,6 @@ import { ScopeModule } from '../resource/this.js';
 export class QueueProcess extends BeanBase<ScopeModule> {
   async execute(context) {
     const { path, options, message, messageClass } = context.data;
-    return await this.scope.local.ioInner.queueProcess({ path, options, message, messageClass });
+    return await this.scope.service.ioInner.queueProcess({ path, options, message, messageClass });
   }
 }

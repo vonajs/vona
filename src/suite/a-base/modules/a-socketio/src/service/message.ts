@@ -13,7 +13,7 @@ export class ServiceMessage extends BeanBase<ScopeModule> {
   }
 
   get sqlProcedure() {
-    return this.scope.local.procedure;
+    return this.scope.service.procedure;
   }
 
   async save({ message }: any) {

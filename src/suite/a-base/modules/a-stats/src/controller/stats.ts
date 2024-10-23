@@ -9,7 +9,7 @@ export class ControllerStats extends BeanBase<ScopeModule> {
     const provider = this.ctx.bean.stats._findStatsProvider({ module, name });
     if (!provider.user) this.ctx.throw(403);
     // get
-    const res = await this.scope.local.stats.get({
+    const res = await this.scope.service.stats.get({
       module,
       name,
       nameSub,

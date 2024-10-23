@@ -8,7 +8,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     return this.scope.model.authProvider;
   }
   get localPassport() {
-    return this.scope.local.passport;
+    return this.scope.service.passport;
   }
 
   getAuthProviderBase({ module, providerName }: any) {

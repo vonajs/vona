@@ -5,7 +5,7 @@ import { ScopeModule } from '../resource/this.js';
 export class ControllerCategory extends BeanBase<ScopeModule> {
   async child() {
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.category.child({
+    const res = await this.scope.service.category.child({
       atomClass,
       language: this.ctx.request.body.language,
       categoryId: this.ctx.request.body.categoryId,
@@ -20,7 +20,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async children() {
     const atomClass = this.ctx.request.body.atomClass;
-    const list = await this.scope.local.category.children({
+    const list = await this.scope.service.category.children({
       atomClass,
       language: this.ctx.request.body.language,
       categoryId: this.ctx.request.body.categoryId,
@@ -35,7 +35,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async tree() {
     const atomClass = this.ctx.request.body.atomClass;
-    const list = await this.scope.local.category.tree({
+    const list = await this.scope.service.category.tree({
       atomClass,
       language: this.ctx.request.body.language,
       categoryId: this.ctx.request.body.categoryId,
@@ -51,7 +51,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.category.add({
+    const res = await this.scope.service.category.add({
       atomClass,
       data: this.ctx.request.body.data,
     });
@@ -62,7 +62,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.scope.local.category.delete({
+    const res = await this.scope.service.category.delete({
       categoryId: this.ctx.request.body.categoryId,
     });
     this.ctx.success(res);
@@ -72,7 +72,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.scope.local.category.move({
+    const res = await this.scope.service.category.move({
       categoryId: this.ctx.request.body.categoryId,
       categoryIdParent: this.ctx.request.body.categoryIdParent,
     });
@@ -81,7 +81,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async item() {
     // need not param:atomClass
-    const data = await this.scope.local.category.item({
+    const data = await this.scope.service.category.item({
       categoryId: this.ctx.request.body.categoryId,
       setLocale: this.ctx.request.body.setLocale,
     });
@@ -92,7 +92,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.scope.local.category.save({
+    const res = await this.scope.service.category.save({
       categoryId: this.ctx.request.body.categoryId,
       data: this.ctx.request.body.data,
     });
@@ -101,7 +101,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async relativeTop() {
     // need not param:atomClass
-    const res = await this.scope.local.category.relativeTop({
+    const res = await this.scope.service.category.relativeTop({
       categoryId: this.ctx.request.body.categoryId,
       setLocale: this.ctx.request.body.setLocale,
     });
@@ -110,7 +110,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async parseCategoryName() {
     const atomClass = this.ctx.request.body.atomClass;
-    const category = await this.scope.local.category.parseCategoryName({
+    const category = await this.scope.service.category.parseCategoryName({
       atomClass,
       language: this.ctx.request.body.language,
       categoryName: this.ctx.request.body.categoryName,

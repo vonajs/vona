@@ -4,7 +4,7 @@ import { ScopeModule } from '../resource/this.js';
 @Service()
 export class ServiceTools extends BeanBase<ScopeModule> {
   get localUtils() {
-    return this.scope.local.utils;
+    return this.scope.service.utils;
   }
 
   async demo({ method, query, user }: any) {

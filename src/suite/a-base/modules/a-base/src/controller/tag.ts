@@ -5,7 +5,7 @@ import { ScopeModule } from '../resource/this.js';
 export class ControllerTag extends BeanBase<ScopeModule> {
   async list() {
     const atomClass = this.ctx.request.body.atomClass;
-    const list = await this.scope.local.tag.list({
+    const list = await this.scope.service.tag.list({
       atomClass,
       options: this.ctx.request.body.options,
     });
@@ -16,7 +16,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.tag.add({
+    const res = await this.scope.service.tag.add({
       atomClass,
       data: this.ctx.request.body.data,
     });
@@ -27,7 +27,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.scope.local.tag.save({
+    const res = await this.scope.service.tag.save({
       tagId: this.ctx.request.body.tagId,
       data: this.ctx.request.body.data,
     });
@@ -38,7 +38,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     // need not param:atomClass
-    const res = await this.scope.local.tag.delete({
+    const res = await this.scope.service.tag.delete({
       tagId: this.ctx.request.body.tagId,
     });
     this.ctx.success(res);

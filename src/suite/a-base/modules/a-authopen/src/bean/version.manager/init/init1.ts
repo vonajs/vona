@@ -12,7 +12,7 @@ export class VersionInit extends BeanBase<ScopeModule> {
     return this.scope.model.authOpen;
   }
   get localToken() {
-    return this.scope.local.token;
+    return this.scope.service.token;
   }
 
   async run(_options) {

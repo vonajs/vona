@@ -4,15 +4,15 @@ import { BeanBase } from 'vona';
 
 export class LocalIoInner0 extends BeanBase<ScopeModule> {
   get messageClass() {
-    return this.scope.local.messageClass;
+    return this.scope.service.messageClass;
   }
 
   get message() {
-    return this.scope.local.message;
+    return this.scope.service.message;
   }
 
   get localRedis() {
-    return this.scope.local.redis;
+    return this.scope.service.redis;
   }
 
   _getBeanMessage(messageClassBase, throwError: boolean = true) {

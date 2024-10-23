@@ -20,7 +20,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
   async list() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.scope.local.comment.list({
+    const items = await this.scope.service.comment.list({
       key: this.ctx.request.body.key,
       options,
       user: this.ctx.state.user.op,
@@ -29,7 +29,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
   }
 
   async count() {
-    const count = await this.scope.local.comment.count({
+    const count = await this.scope.service.comment.count({
       key: this.ctx.request.body.key,
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
@@ -38,7 +38,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
   }
 
   async item() {
-    const res = await this.scope.local.comment.item({
+    const res = await this.scope.service.comment.item({
       // key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -47,7 +47,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
   }
 
   async save() {
-    const res = await this.scope.local.comment.save({
+    const res = await this.scope.service.comment.save({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -56,7 +56,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
   }
 
   async delete() {
-    const res = await this.scope.local.comment.delete({
+    const res = await this.scope.service.comment.delete({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
@@ -65,7 +65,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
   }
 
   async heart() {
-    const res = await this.scope.local.comment.heart({
+    const res = await this.scope.service.comment.heart({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,

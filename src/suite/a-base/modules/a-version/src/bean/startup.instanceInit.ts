@@ -5,7 +5,7 @@ import { ScopeModule } from '../resource/this.js';
 export class StartupInstanceInit extends BeanBase<ScopeModule> {
   async execute(context) {
     const options = context.options;
-    const beanVersion = this.scope.local.version;
+    const beanVersion = this.scope.service.version;
     return await beanVersion.instanceInitStartup({ options });
   }
 }

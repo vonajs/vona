@@ -4,7 +4,7 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerIo extends BeanBase<ScopeModule> {
   async subscribe() {
-    const res = await this.scope.local.io.subscribe({
+    const res = await this.scope.service.io.subscribe({
       path: this.ctx.request.body.path,
       timestamp: this.ctx.request.body.timestamp,
       workerId: this.app.meta.workerId,
@@ -16,7 +16,7 @@ export class ControllerIo extends BeanBase<ScopeModule> {
   }
 
   async unsubscribe() {
-    const res = await this.scope.local.io.unsubscribe({
+    const res = await this.scope.service.io.unsubscribe({
       path: this.ctx.request.body.path,
       timestamp: this.ctx.request.body.timestamp,
       socketId: (<any>this.ctx.socket).id,

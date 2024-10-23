@@ -8,19 +8,19 @@ export class BeanIo0 extends BeanBase<ScopeModule> {
   }
 
   get messageClass() {
-    return this.scope.local.messageClass;
+    return this.scope.service.messageClass;
   }
 
   get message() {
-    return this.scope.local.message;
+    return this.scope.service.message;
   }
 
   get localRedis() {
-    return this.scope.local.redis;
+    return this.scope.service.redis;
   }
 
   get localIOInner() {
-    return this.scope.local.ioInner;
+    return this.scope.service.ioInner;
   }
 
   _getBeanMessage(messageClassBase, throwError: boolean = true) {

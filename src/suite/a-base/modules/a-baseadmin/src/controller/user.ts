@@ -5,7 +5,7 @@ import { ScopeModule } from '../resource/this.js';
 export class ControllerUser extends BeanBase<ScopeModule> {
   async select() {
     const page = this.ctx.bean.util.page(this.ctx.request.body.page);
-    const items = await this.scope.local.user.select({
+    const items = await this.scope.service.user.select({
       query: this.ctx.request.body.query,
       page,
       user: this.ctx.state.user.op,
@@ -15,7 +15,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async userRoles() {
     const page = this.ctx.request.body.page;
-    const items = await this.scope.local.user.userRoles({
+    const items = await this.scope.service.user.userRoles({
       userAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,
@@ -26,7 +26,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async addUserRole() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.addUserRole({
+    const res = await this.scope.service.user.addUserRole({
       userAtomId: this.ctx.request.body.key.atomId,
       roleId: this.ctx.request.body.roleId,
       user: this.ctx.state.user.op,
@@ -37,7 +37,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async deleteUserRole() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.deleteUserRole({
+    const res = await this.scope.service.user.deleteUserRole({
       userAtomId: this.ctx.request.body.key.atomId,
       roleId: this.ctx.request.body.roleId,
       user: this.ctx.state.user.op,
@@ -47,7 +47,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async atomRights() {
     const page = this.ctx.request.body.page;
-    const items = await this.scope.local.user.atomRights({
+    const items = await this.scope.service.user.atomRights({
       userAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,
@@ -57,7 +57,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async resourceRights() {
     const page = this.ctx.request.body.page;
-    const items = await this.scope.local.user.resourceRights({
+    const items = await this.scope.service.user.resourceRights({
       userAtomId: this.ctx.request.body.key.atomId,
       page,
       user: this.ctx.state.user.op,

@@ -4,11 +4,11 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerValidation extends BeanBase<ScopeModule> {
   schema() {
-    const res = this.scope.local.validation.schema(this.ctx.request.body);
+    const res = this.scope.service.validation.schema(this.ctx.request.body);
     this.ctx.success(res);
   }
   async validate() {
-    const res = await this.scope.local.validation.validate({
+    const res = await this.scope.service.validation.validate({
       params: this.ctx.request.body.params,
       data: this.ctx.request.body.data,
     });

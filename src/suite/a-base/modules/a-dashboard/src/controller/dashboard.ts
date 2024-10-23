@@ -4,7 +4,7 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerDashboard extends BeanBase<ScopeModule> {
   async itemByKey() {
-    const res = await this.scope.local.dashboard.itemByKey({
+    const res = await this.scope.service.dashboard.itemByKey({
       atomStaticKey: this.ctx.request.body.atomStaticKey,
       user: this.ctx.state.user.op,
     });
@@ -12,7 +12,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async item() {
-    const res = await this.scope.local.dashboard.item({
+    const res = await this.scope.service.dashboard.item({
       dashboardAtomId: this.ctx.request.body.key.atomId,
       dashboardUserCheck: this.ctx.request.body.dashboardUserCheck,
       user: this.ctx.state.user.op,
@@ -21,7 +21,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async loadItemUser() {
-    const res = await this.scope.local.dashboard.loadItemUser({
+    const res = await this.scope.service.dashboard.loadItemUser({
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       user: this.ctx.state.user.op,
     });
@@ -29,7 +29,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async saveItemUser() {
-    const res = await this.scope.local.dashboard.saveItemUser({
+    const res = await this.scope.service.dashboard.saveItemUser({
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       content: this.ctx.request.body.content,
       user: this.ctx.state.user.op,
@@ -38,7 +38,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async changeItemUserName() {
-    const res = await this.scope.local.dashboard.changeItemUserName({
+    const res = await this.scope.service.dashboard.changeItemUserName({
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       dashboardName: this.ctx.request.body.dashboardName,
       user: this.ctx.state.user.op,
@@ -47,7 +47,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async deleteItemUser() {
-    const res = await this.scope.local.dashboard.deleteItemUser({
+    const res = await this.scope.service.dashboard.deleteItemUser({
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       user: this.ctx.state.user.op,
     });
@@ -55,7 +55,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async createItemUser() {
-    const res = await this.scope.local.dashboard.createItemUser({
+    const res = await this.scope.service.dashboard.createItemUser({
       dashboardAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
@@ -63,7 +63,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async itemUsers() {
-    const res = await this.scope.local.dashboard.itemUsers({
+    const res = await this.scope.service.dashboard.itemUsers({
       dashboardAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
@@ -71,7 +71,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
   }
 
   async changeItemUserDefault() {
-    const res = await this.scope.local.dashboard.changeItemUserDefault({
+    const res = await this.scope.service.dashboard.changeItemUserDefault({
       dashboardAtomId: this.ctx.request.body.key.atomId,
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       user: this.ctx.state.user.op,

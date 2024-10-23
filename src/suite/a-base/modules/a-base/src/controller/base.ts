@@ -5,46 +5,46 @@ import qr from 'qr-image';
 @Controller()
 export class ControllerBase extends BeanBase<ScopeModule> {
   modules() {
-    const res = this.scope.local.base.modules();
+    const res = this.scope.service.base.modules();
     this.ctx.success(res);
   }
 
   locales() {
-    const res = this.scope.local.base.locales();
+    const res = this.scope.service.base.locales();
     this.ctx.success(res);
   }
 
   resourceTypes() {
-    const res = this.scope.local.base.resourceTypes();
+    const res = this.scope.service.base.resourceTypes();
     this.ctx.success(res);
   }
 
   async getAtomClassBase() {
-    const res = await this.scope.local.base.getAtomClassBase({
+    const res = await this.scope.service.base.getAtomClassBase({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   getActionsBase() {
-    const res = this.scope.local.base.getActionsBase({
+    const res = this.scope.service.base.getActionsBase({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   atomClasses() {
-    const res = this.scope.local.base.atomClasses();
+    const res = this.scope.service.base.atomClasses();
     this.ctx.success(res);
   }
 
   actions() {
-    const res = this.scope.local.base.actions();
+    const res = this.scope.service.base.actions();
     this.ctx.success(res);
   }
 
   themes() {
-    const res = this.scope.local.base.themes();
+    const res = this.scope.service.base.themes();
     this.ctx.success(res);
   }
 

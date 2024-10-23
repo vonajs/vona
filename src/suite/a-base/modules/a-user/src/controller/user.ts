@@ -4,7 +4,7 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerUser extends BeanBase<ScopeModule> {
   async save() {
-    const res = await this.scope.local.user.save({
+    const res = await this.scope.service.user.save({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
@@ -12,7 +12,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   }
 
   async saveAvatar() {
-    const res = await this.scope.local.user.saveAvatar({
+    const res = await this.scope.service.user.saveAvatar({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
@@ -22,7 +22,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async saveLocale() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.saveLocale({
+    const res = await this.scope.service.user.saveLocale({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
@@ -32,7 +32,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async changeUserName() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.changeUserName({
+    const res = await this.scope.service.user.changeUserName({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
@@ -40,24 +40,24 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   }
 
   async agent() {
-    const res = await this.scope.local.user.agent({ userId: this.ctx.state.user.agent.id });
+    const res = await this.scope.service.user.agent({ userId: this.ctx.state.user.agent.id });
     this.ctx.success(res);
   }
 
   async agentsBy() {
-    const res = await this.scope.local.user.agentsBy({ userId: this.ctx.state.user.agent.id });
+    const res = await this.scope.service.user.agentsBy({ userId: this.ctx.state.user.agent.id });
     this.ctx.success(res);
   }
 
   async userByMobile() {
-    const res = await this.scope.local.user.userByMobile({ mobile: this.ctx.request.body.mobile });
+    const res = await this.scope.service.user.userByMobile({ mobile: this.ctx.request.body.mobile });
     this.ctx.success(res);
   }
 
   async addAgent() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.addAgent({
+    const res = await this.scope.service.user.addAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
       userId: this.ctx.state.user.agent.id,
     });
@@ -67,7 +67,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async removeAgent() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.removeAgent({
+    const res = await this.scope.service.user.removeAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
       userId: this.ctx.state.user.agent.id,
     });
@@ -77,7 +77,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async switchAgent() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.switchAgent({
+    const res = await this.scope.service.user.switchAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
     });
     this.ctx.success(res);
@@ -86,12 +86,12 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async switchOffAgent() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.switchOffAgent();
+    const res = await this.scope.service.user.switchOffAgent();
     this.ctx.success(res);
   }
 
   async authentications() {
-    const res = await this.scope.local.user.authentications({
+    const res = await this.scope.service.user.authentications({
       user: this.ctx.state.user.agent,
     });
     this.ctx.success(res);
@@ -100,7 +100,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   async authenticationDisable() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.user.authenticationDisable({
+    const res = await this.scope.service.user.authenticationDisable({
       authId: this.ctx.request.body.authId,
       user: this.ctx.state.user.agent,
     });
@@ -108,7 +108,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   }
 
   async themeLoad() {
-    const res = await this.scope.local.user.themeLoad({
+    const res = await this.scope.service.user.themeLoad({
       appKey: this.ctx.request.body.appKey,
       user: this.ctx.state.user.agent,
     });
@@ -116,7 +116,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   }
 
   async themeSave() {
-    await this.scope.local.user.themeSave({
+    await this.scope.service.user.themeSave({
       appKey: this.ctx.request.body.appKey,
       theme: this.ctx.request.body.theme,
       user: this.ctx.state.user.agent,

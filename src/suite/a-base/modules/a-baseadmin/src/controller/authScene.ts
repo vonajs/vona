@@ -6,7 +6,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
   async disable() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.authScene.disable({
+    const res = await this.scope.service.authScene.disable({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
       disabled: this.ctx.request.body.disabled,
@@ -17,7 +17,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
   async save() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.authScene.save({
+    const res = await this.scope.service.authScene.save({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
       data: this.ctx.request.body.data,
@@ -28,7 +28,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
   async add() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.authScene.add({
+    const res = await this.scope.service.authScene.add({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
       data: this.ctx.request.body.data,
@@ -39,7 +39,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
   async delete() {
     // check demo
     this.ctx.bean.util.checkDemo();
-    const res = await this.scope.local.authScene.delete({
+    const res = await this.scope.service.authScene.delete({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
     });

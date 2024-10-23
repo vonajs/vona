@@ -21,7 +21,7 @@ export class ServiceDatabase extends BeanBase<ScopeModule> {
     // database
     await this.__database();
     // version start
-    await this.scope.local.version.__start();
+    await this.scope.service.version.__start();
   }
 
   async databaseNameStartup() {

@@ -4,14 +4,14 @@ import { ScopeModule } from '../resource/this.js';
 @Controller()
 export class ControllerAtomClass extends BeanBase<ScopeModule> {
   async validatorSearch() {
-    const res = await this.scope.local.atomClass.validatorSearch({
+    const res = await this.scope.service.atomClass.validatorSearch({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   async checkRightCreate() {
-    const res = await this.scope.local.atomClass.checkRightCreate({
+    const res = await this.scope.service.atomClass.checkRightCreate({
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
@@ -19,21 +19,21 @@ export class ControllerAtomClass extends BeanBase<ScopeModule> {
   }
 
   async atomClass() {
-    const res = await this.scope.local.atomClass.atomClass({
+    const res = await this.scope.service.atomClass.atomClass({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.ctx.success(res);
   }
 
   async atomClassesUser() {
-    const res = await this.scope.local.atomClass.atomClassesUser({
+    const res = await this.scope.service.atomClass.atomClassesUser({
       user: this.ctx.state.user.op,
     });
     this.ctx.success(res);
   }
 
   async actionsUser() {
-    const res = await this.scope.local.atomClass.actionsUser({
+    const res = await this.scope.service.atomClass.actionsUser({
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });

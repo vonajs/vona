@@ -5,6 +5,6 @@ import { ScopeModule } from '../resource/this.js';
 export class QueuePushDirect extends BeanBase<ScopeModule> {
   async execute(context) {
     const { options, content, channel } = context.data;
-    return await this.scope.local.ioInner.queuePushDirect({ options, content, channel });
+    return await this.scope.service.ioInner.queuePushDirect({ options, content, channel });
   }
 }
