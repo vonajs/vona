@@ -32,7 +32,7 @@ import { LocalCategory } from '../local/category.js';
 import { LocalTag } from '../local/tag.js';
 import { LocalUtil } from '../local/util.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   stash: LocalStash;
   procedure: LocalProcedure;
   base: LocalBase;

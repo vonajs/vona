@@ -1,5 +1,5 @@
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
-import { IModuleLocal } from './locals.js';
+import { IModuleService } from './locals.js';
 import { IModuleModel } from './models.js';
 import { config, Errors, locales, constants } from '../config/index.js';
 import { EntityInstance } from '../entity/instance.js';
@@ -9,11 +9,11 @@ export class ScopeModuleAInstance extends BeanScopeBase {}
 
 export interface ScopeModuleAInstance
   extends TypeModuleResource<
-    IModuleLocal,
+    IModuleService,
     IModuleModel,
     typeof config,
     typeof Errors,
-    typeof locales[TypeLocaleBase],
+    (typeof locales)[TypeLocaleBase],
     typeof constants
   > {}
 
@@ -27,7 +27,7 @@ declare module 'vona' {
   }
 
   export interface IBeanScopeLocale {
-    'a-instance': typeof locales[TypeLocaleBase];
+    'a-instance': (typeof locales)[TypeLocaleBase];
   }
 
   export interface CabloyContext {

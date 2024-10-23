@@ -10,7 +10,7 @@ import { LocalProcedure } from '../local/procedure.js';
 import { LocalFlow } from '../local/flow.js';
 import { LocalFlowTaskService } from '../local/flowTask.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   right: LocalRight;
   procedure: LocalProcedure;
   flow: LocalFlow;

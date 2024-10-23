@@ -13,7 +13,7 @@ import { LocalProcedure } from '../local/procedure.js';
 import { LocalFlow } from '../local/flow.js';
 import { LocalFlowDef } from '../local/flowDef.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   procedure: LocalProcedure;
   flow: LocalFlow;
   flowDef: LocalFlowDef;

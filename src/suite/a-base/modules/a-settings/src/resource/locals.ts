@@ -2,6 +2,6 @@ export * from '../local/settings.js';
 
 import { LocalSettings } from '../local/settings.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   settings: LocalSettings;
 }

@@ -4,7 +4,7 @@ export * from '../local/virtual.ioMessageUniformBase.js';
 import { LocalMessage } from '../local/message.js';
 import { BeanIoMessageUniformBase } from '../local/virtual.ioMessageUniformBase.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   message: LocalMessage;
   ioMessageUniformBase: BeanIoMessageUniformBase;
 }

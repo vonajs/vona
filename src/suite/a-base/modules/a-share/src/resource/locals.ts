@@ -2,6 +2,6 @@ export * from '../local/share.js';
 
 import { LocalShare } from '../local/share.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   share: LocalShare;
 }

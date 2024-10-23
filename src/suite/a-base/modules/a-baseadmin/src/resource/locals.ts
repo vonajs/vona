@@ -12,7 +12,7 @@ import { LocalResourceRight } from '../local/resourceRight.js';
 import { LocalAuth } from '../local/auth.js';
 import { LocalAuthScene } from '../local/authScene.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   role: LocalRole;
   user: LocalUser;
   atomRight: LocalAtomRight;

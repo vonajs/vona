@@ -2,6 +2,6 @@ export * from '../local/sequence.js';
 
 import { LocalSequence } from '../local/sequence.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   sequence: LocalSequence;
 }

@@ -1,1 +1,1 @@
-export interface IModuleLocal {}
+export interface IModuleService {}

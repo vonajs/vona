@@ -1,5 +1,5 @@
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
-import { IModuleLocal } from './locals.js';
+import { IModuleService } from './locals.js';
 import { IModuleModel } from './models.js';
 import { config, Errors, locales, constants } from '../config/index.js';
 
@@ -8,11 +8,11 @@ export class ScopeModuleAMarkdown extends BeanScopeBase {}
 
 export interface ScopeModuleAMarkdown
   extends TypeModuleResource<
-    IModuleLocal,
+    IModuleService,
     IModuleModel,
     typeof config,
     typeof Errors,
-    typeof locales[TypeLocaleBase],
+    (typeof locales)[TypeLocaleBase],
     typeof constants
   > {}
 
@@ -26,6 +26,6 @@ declare module 'vona' {
   }
 
   export interface IBeanScopeLocale {
-    'a-markdown': typeof locales[TypeLocaleBase];
+    'a-markdown': (typeof locales)[TypeLocaleBase];
   }
 }

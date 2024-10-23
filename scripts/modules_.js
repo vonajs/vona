@@ -758,7 +758,7 @@ export * from '../local/${classPath}.js';
 
 import { ${classNameNew} } from '../local/${classPath}.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   '${classPath}': ${classNameNew};
 }
       `;
@@ -767,8 +767,8 @@ export interface IModuleLocal {
         .replace('export * from', `export * from '../local/${classPath}.js';\nexport * from`)
         .replace('import {', `import { ${classNameNew} } from '../local/${classPath}.js';\nimport {`)
         .replace(
-          'export interface IModuleLocal {',
-          `export interface IModuleLocal {\n  '${classPath}': ${classNameNew};`,
+          'export interface IModuleService {',
+          `export interface IModuleService {\n  '${classPath}': ${classNameNew};`,
         );
     }
     // console.log(contentLocals);
@@ -1146,7 +1146,7 @@ ${outputNew1.join('\n')}
 
 ${outputNew2.join('\n')}
 
-export interface IModuleLocal {
+export interface IModuleService {
   ${outputNew3.join('\n')}
 }
   `;

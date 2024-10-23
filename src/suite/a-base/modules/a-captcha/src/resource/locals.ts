@@ -2,6 +2,6 @@ export * from '../local/captcha.js';
 
 import { LocalCaptcha } from '../local/captcha.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   captcha: LocalCaptcha;
 }

@@ -2,6 +2,6 @@ export * from '../local/progress.js';
 
 import { LocalProgress } from '../local/progress.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   progress: LocalProgress;
 }

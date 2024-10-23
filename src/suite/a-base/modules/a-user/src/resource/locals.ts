@@ -4,7 +4,7 @@ export * from '../local/public.js';
 import { LocalUser } from '../local/user.js';
 import { LocalPublic } from '../local/public.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   user: LocalUser;
   public: LocalPublic;
 }

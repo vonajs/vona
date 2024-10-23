@@ -4,7 +4,7 @@ export * from '../local/flowDef.js';
 import { LocalFlow } from '../local/flow.js';
 import { LocalFlowDef } from '../local/flowDef.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   flow: LocalFlow;
   flowDef: LocalFlowDef;
 }

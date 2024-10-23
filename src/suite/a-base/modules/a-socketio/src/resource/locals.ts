@@ -14,7 +14,7 @@ import { LocalMessageClass } from '../local/messageClass.js';
 import { LocalMessage } from '../local/message.js';
 import { BeanIoMessageBase } from '../local/virtual.ioMessageBase.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   redis: LocalRedis;
   procedure: LocalProcedure;
   ioInner: LocalIoInner;

@@ -9,7 +9,7 @@ import { LocalFetch } from '../local/fetch.js';
 import { LocalMem } from '../local/mem.js';
 import { LocalRedis } from '../local/redis.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   cache: LocalCache;
   fetch: LocalFetch;
   mem: LocalMem;

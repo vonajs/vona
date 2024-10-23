@@ -4,7 +4,7 @@ export * from '../local/database.js';
 import { LocalVersion } from '../local/version.js';
 import { LocalDatabase } from '../local/database.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   version: LocalVersion;
   database: LocalDatabase;
 }

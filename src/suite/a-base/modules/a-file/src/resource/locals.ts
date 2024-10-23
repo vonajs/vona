@@ -2,6 +2,6 @@ export * from '../local/file.js';
 
 import { LocalFile } from '../local/file.js';
 
-export interface IModuleLocal {
+export interface IModuleService {
   file: LocalFile;
 }
