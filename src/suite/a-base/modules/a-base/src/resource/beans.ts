@@ -1,4 +1,4 @@
-export * from '../bean/virtual.atomBase.js';
+export * from '../bean/bean.atomBase.js';
 export * from '../bean/version.manager.js';
 export * from '../bean/summer.cache.roleWhosOfAtomClassAction.js';
 export * from '../bean/summer.cache.roleScopesOfUser.js';
@@ -66,7 +66,7 @@ import { BeanAtomRightAux } from '../bean/bean.atomRightAux.js';
 import { BeanAtomClass } from '../bean/bean.atomClass.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
 import { BeanAtom } from '../bean/bean.atom.js';
-import { BeanAtomBase } from '../bean/virtual.atomBase.js';
+import { BeanAtomBase } from '../bean/bean.atomBase.js';
 
 declare module 'vona' {
   export interface IBeanRecord {

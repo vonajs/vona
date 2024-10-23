@@ -1,6 +1,6 @@
 import { BeanBase, Cast } from 'vona';
 import { __ThisModule__ } from '../../resource/this.js';
-import { BeanAtomBase } from '../virtual.atomBase.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 
 export class BeanAtomBase0 extends BeanBase {
   protected get self() {

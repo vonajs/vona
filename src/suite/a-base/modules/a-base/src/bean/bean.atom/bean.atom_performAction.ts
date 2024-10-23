@@ -1,4 +1,4 @@
-import { BeanAtomBase } from '../virtual.atomBase.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtomSchema } from './bean.atom_schema.js';
 
 export class BeanAtomPerformAction extends BeanAtomSchema {

@@ -12,26 +12,28 @@ export async function generateBeans(moduleName: string, modulePath: string) {
   for (const file of files) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
-    if (parts.length < 2 || parts[0] === 'local') continue;
+    if (parts.length < 2) continue;
+    const isBeanGlobal = parts[0] === 'bean';
     const fileNameJS = fileName.replace('.ts', '.js');
     const className = parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
-    const beanFullName = `${moduleName}.${parts.join('.')}`;
+    const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
-    contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
-    contentRecords.push(`'${beanFullName}': ${className};`);
+    if (isBeanGlobal) {
+      contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
+      contentRecords.push(`'${beanFullName}': ${className};`);
+    }
   }
   // combine
   const content = `/** beans: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-import 'zova';
-declare module 'zova' {
-export interface IBeanRecord {
-  ${contentRecords.join('\n')}
-}
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecord {
+    ${contentRecords.join('\n')}
+  }
 }
 /** beans: end */
 `;
-  return '';
   return content;
 }

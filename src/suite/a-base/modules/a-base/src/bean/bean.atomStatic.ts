@@ -1,6 +1,6 @@
 import { __ThisModule__ } from '../resource/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
-import { BeanAtomBase } from './virtual.atomBase.js';
+import { BeanAtomBase } from './bean.atomBase.js';
 
 @Bean()
 export class BeanAtomStatic extends BeanModuleScopeBase {

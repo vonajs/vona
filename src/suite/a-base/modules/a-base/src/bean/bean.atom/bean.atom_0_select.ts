@@ -1,5 +1,5 @@
 import { BigNumber } from 'vona-module-a-database';
-import { BeanAtomBase } from '../virtual.atomBase.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 import {
   AtomClass,
