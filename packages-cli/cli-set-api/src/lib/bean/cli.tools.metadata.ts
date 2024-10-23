@@ -2,6 +2,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
+import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -52,6 +53,8 @@ export class CliToolsMetadata extends BeanCliBase {
     let content = '';
     // beans
     content += await generateBeans(moduleName, modulePath);
+    // atoms
+    content += await generateAtoms(moduleName, modulePath);
     // empty
     if (!content.trim()) {
       content = 'export {};';

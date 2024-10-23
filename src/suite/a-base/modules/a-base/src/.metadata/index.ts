@@ -93,3 +93,17 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** atoms: begin */
+export * from '../atom/resource.js';
+export * from '../atom/role.js';
+export * from '../atom/roleFieldsRight.js';
+export * from '../atom/roleFieldsRightSpread.js';
+export * from '../atom/roleResourceRight.js';
+export * from '../atom/roleResourceRightSpread.js';
+export * from '../atom/roleRight.js';
+export * from '../atom/roleRightSpread.js';
+export * from '../atom/user.js';
+export * from '../atom/userAtomRight.js';
+export * from '../atom/userFieldsRight.js';
+export * from '../atom/userResourceRight.js';
+/** atoms: end */
