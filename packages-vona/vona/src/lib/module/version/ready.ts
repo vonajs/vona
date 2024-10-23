@@ -96,7 +96,7 @@ async function _versionReady(app) {
     await app.meta.util.executeBean({
       subdomain,
       beanModule: 'a-version',
-      beanFullName: 'a-version.local.version',
+      beanFullName: 'a-version.service.version',
       context: subdomain,
       fn: '__instanceTest',
     });

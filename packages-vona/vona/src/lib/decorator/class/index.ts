@@ -3,7 +3,7 @@ export * from './atom.js';
 export * from './bean.js';
 export * from './controller.js';
 export * from './model.js';
-export * from './local.js';
+export * from './service.js';
 export * from './virtual.js';
 export * from './scope.js';
 export * from './use.js';

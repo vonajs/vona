@@ -13,7 +13,7 @@ type TypeModuleBean = {
 };
 
 export type TypeModuleResource<
-  LOCAL,
+  SERVICE,
   MODEL,
   CONFIG extends (app: CabloyApplication) => object,
   ERRORS,
@@ -21,7 +21,7 @@ export type TypeModuleResource<
   CONSTANTS = object,
 > = {
   _bean: TypeModuleBean;
-  local: LOCAL;
+  service: SERVICE;
   model: MODEL;
   config: TypeModuleConfig<CONFIG>;
   error: TypeModuleErrors<ERRORS>;

@@ -5,7 +5,7 @@ import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
 export type TypeDecoratorBeanOptionsSceneBase =
-  | 'local'
+  | 'service'
   | 'aop'
   | 'virtual'
   | 'scope'
@@ -15,7 +15,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
-  | 'local'
+  | 'service'
   | 'broadcast'
   | 'startup'
   | 'queue'
@@ -76,7 +76,7 @@ export interface IDecoratorBeanOptions {
 
 export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
 
-export interface IDecoratorLocalOptions {
+export interface IDecoratorServiceOptions {
   name?: string;
   containerScope?: ContainerScope;
 }
