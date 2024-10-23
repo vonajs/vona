@@ -21,6 +21,6 @@ export class BeanFlow0 extends BeanBase<ScopeModule> {
   }
 
   get sqlProcedure() {
-    return this.scope.local.procedure;
+    return this.scope.service.procedure;
   }
 }

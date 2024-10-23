@@ -6,13 +6,13 @@ import utils from '../common/utils.js';
 export class ControllerSite extends BeanBase<ScopeModule> {
   async getConfigSiteBase() {
     const atomClass = this.ctx.request.body.atomClass;
-    const data = await this.scope.local.site.getConfigSiteBase({ atomClass });
+    const data = await this.scope.service.site.getConfigSiteBase({ atomClass });
     this.ctx.success({ data });
   }
 
   async getConfigSite() {
     const atomClass = this.ctx.request.body.atomClass;
-    const data = await this.scope.local.site.getConfigSite({ atomClass });
+    const data = await this.scope.service.site.getConfigSite({ atomClass });
     this.ctx.success({ data });
   }
 
@@ -20,7 +20,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.site.setConfigSite({
+    const res = await this.scope.service.site.setConfigSite({
       atomClass,
       data: this.ctx.request.body.data,
     });
@@ -29,7 +29,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async getConfigLanguagePreview() {
     const atomClass = this.ctx.request.body.atomClass;
-    const data = await this.scope.local.site.getConfigLanguagePreview({
+    const data = await this.scope.service.site.getConfigLanguagePreview({
       atomClass,
       language: this.ctx.request.body.language,
     });
@@ -38,7 +38,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async getConfigLanguage() {
     const atomClass = this.ctx.request.body.atomClass;
-    const data = await this.scope.local.site.getConfigLanguage({
+    const data = await this.scope.service.site.getConfigLanguage({
       atomClass,
       language: this.ctx.request.body.language,
     });
@@ -49,7 +49,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.site.setConfigLanguage({
+    const res = await this.scope.service.site.setConfigLanguage({
       atomClass,
       language: this.ctx.request.body.language,
       data: this.ctx.request.body.data,
@@ -66,7 +66,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
     // progress
     const progressId = await this.ctx.bean.progress.create();
     // build
-    this.scope.local.site.buildLanguageQueue({ atomClass, language, progressId });
+    this.scope.service.site.buildLanguageQueue({ atomClass, language, progressId });
     this.ctx.success({ progressId });
   }
 
@@ -78,19 +78,19 @@ export class ControllerSite extends BeanBase<ScopeModule> {
     // progress
     const progressId = await this.ctx.bean.progress.create();
     // build
-    this.scope.local.site.buildLanguagesQueue({ atomClass, progressId });
+    this.scope.service.site.buildLanguagesQueue({ atomClass, progressId });
     this.ctx.success({ progressId });
   }
 
   async getLanguages() {
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.site.getLanguages({ atomClass });
+    const res = await this.scope.service.site.getLanguages({ atomClass });
     this.ctx.success(res);
   }
 
   async getUrl() {
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.site.getUrl({
+    const res = await this.scope.service.site.getUrl({
       atomClass,
       language: this.ctx.request.body.language,
       path: this.ctx.request.body.path,
@@ -100,7 +100,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async getStats() {
     const atomClass = this.ctx.request.body.atomClass;
-    const res = await this.scope.local.site.getStats({
+    const res = await this.scope.service.site.getStats({
       atomClass,
       languages: this.ctx.request.body.languages,
     });
@@ -108,7 +108,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
   }
 
   async checkFile() {
-    const res = await this.scope.local.site.checkFile({
+    const res = await this.scope.service.site.checkFile({
       atomId: this.ctx.request.body.atomId,
       file: this.ctx.request.body.file,
       mtime: this.ctx.request.body.mtime,

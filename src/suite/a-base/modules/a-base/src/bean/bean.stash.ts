@@ -28,7 +28,7 @@ export class BeanStash extends BeanBase {
     }
     if (!options.stash) {
       // new bean
-      options.stash = this.ctx.bean._newBean('a-base.local.stash');
+      options.stash = this.ctx.bean._newBean('a-base.service.stash');
     }
     return options.stash;
   }

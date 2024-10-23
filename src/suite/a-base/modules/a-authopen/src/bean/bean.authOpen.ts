@@ -21,7 +21,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     return this.bean.scope('a-base').model.resourceRole;
   }
   get localAuthSimple() {
-    return this.bean.scope('a-authsimple').local.simple;
+    return this.bean.scope('a-authsimple').service.simple;
   }
 
   async hideClientSecret({ atomId, itemId, user }: any) {

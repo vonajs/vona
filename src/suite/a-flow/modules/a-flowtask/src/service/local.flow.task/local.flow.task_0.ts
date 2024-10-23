@@ -34,6 +34,6 @@ export class LocalFlowTask0 extends BeanBase<ScopeModule> {
     return this.scope.model.flowTaskHistory;
   }
   get localRight() {
-    return this.scope.local.right;
+    return this.scope.service.right;
   }
 }

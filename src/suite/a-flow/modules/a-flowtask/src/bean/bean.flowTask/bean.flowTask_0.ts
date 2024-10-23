@@ -16,10 +16,10 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
     return this.scope.model.flowTaskHistory;
   }
   get localRight() {
-    return this.scope.local.right;
+    return this.scope.service.right;
   }
   get sqlProcedure() {
-    return this.scope.local.procedure;
+    return this.scope.service.procedure;
   }
 
   async count({ options, user }: any): Promise<BigNumber> {

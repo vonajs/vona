@@ -6,7 +6,7 @@ export class ControllerFlowDef extends BeanBase<ScopeModule> {
   async normalizeAssignees() {
     const { host, assignees } = this.ctx.request.body;
     const user = this.ctx.state.user.op;
-    const res = await this.scope.local.flowDef.normalizeAssignees({
+    const res = await this.scope.service.flowDef.normalizeAssignees({
       host,
       assignees,
       user,
@@ -18,7 +18,7 @@ export class ControllerFlowDef extends BeanBase<ScopeModule> {
     const { host, params } = this.ctx.request.body;
     const user = this.ctx.state.user.op;
     const page = params.page;
-    const items = await this.scope.local.flowDef.userSelect({
+    const items = await this.scope.service.flowDef.userSelect({
       host,
       params,
       user,

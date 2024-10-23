@@ -23,7 +23,7 @@ export class BeanContainer {
       get(obj, prop) {
         if (typeof prop === 'symbol') return obj[prop];
         if (obj[prop]) return obj[prop];
-        return obj._getBean(prop);
+        return obj._getBean(prop as any);
       },
     }) as BeanContainerLike;
   }
@@ -37,19 +37,19 @@ export class BeanContainer {
   scope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
   scope<T>(moduleScope: string): T;
   scope<T>(moduleScope: string): T {
-    return this._getBean(`${moduleScope}.scope.module`);
+    return this._getBean(`${moduleScope}.scope.module` as any);
   }
 
   _getBean<T>(A: Constructable<T>): T;
   _getBean<K extends keyof IBeanRecord>(beanFullName: K): IBeanRecord[K];
-  _getBean<T>(beanFullName: string): T;
+  // _getBean<T>(beanFullName: string): T;
   _getBean<T>(beanFullName: Constructable<T> | string): T {
     return this._getBeanSelector(beanFullName as any);
   }
 
   _getBeanSelector<T>(A: Constructable<T>, selector?: string): T;
   _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string): IBeanRecord[K];
-  _getBeanSelector<T>(beanFullName: string, selector?: string): T;
+  // _getBeanSelector<T>(beanFullName: string, selector?: string): T;
   _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
@@ -65,9 +65,9 @@ export class BeanContainer {
     if (this[BeanContainerInstances][key] === undefined) {
       let beanInstance;
       if (isSelectorValid) {
-        beanInstance = this._newBean(fullName, selector);
+        beanInstance = this._newBean(fullName as any, selector);
       } else {
-        beanInstance = this._newBean(fullName);
+        beanInstance = this._newBean(fullName as any);
       }
       this[BeanContainerInstances][key] = beanInstance;
     }
@@ -76,7 +76,7 @@ export class BeanContainer {
 
   _newBean<T>(A: Constructable<T>, ...args): T;
   _newBean<K extends keyof IBeanRecord>(beanFullName: K, ...args): IBeanRecord[K];
-  _newBean<T>(beanFullName: string, ...args): T;
+  // _newBean<T>(beanFullName: string, ...args): T;
   _newBean<T>(beanFullName: Constructable<T> | string, ...args): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
@@ -97,7 +97,7 @@ export class BeanContainer {
 
   _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
   _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
-  _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
+  // _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
   _newBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
     return this._newBean(beanFullName as any, selector, ...args);
   }
@@ -405,7 +405,7 @@ export class BeanContainer {
       if (aopKey === ProxyMagic) {
         chains.push([aopKey, methodName]);
       } else {
-        const aop: any = this._getBean(aopKey as string);
+        const aop: any = this._getBean(aopKey as string as any);
         if (aop[methodName]) {
           chains.push([aopKey, methodName]);
         } else if (methodNameMagic && aop[methodNameMagic]) {

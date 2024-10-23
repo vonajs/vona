@@ -10,7 +10,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     return this.bean.scope('a-auth').model.auth;
   }
   get localSimple() {
-    return this.scope.local.simple;
+    return this.scope.service.simple;
   }
   get configModule() {
     return this.scope.config;

@@ -51,7 +51,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
 
   async authenticateDirect({ module, providerName, providerScene, query, body }: any) {
     return await this.ctx.meta.util.executeBeanIsolate({
-      beanFullName: `${__ThisModule__}.local.passport`,
+      beanFullName: `${__ThisModule__}.service.passport`,
       context: { module, providerName, providerScene },
       fn: 'authenticate',
       ctxParent: {
@@ -136,7 +136,7 @@ function _createAuthenticate() {
     ctx.params.providerName = providerName;
     ctx.params.providerScene = providerScene;
     // authenticate
-    await ctx.bean.scope(__ThisModule__).local.passport.authenticate({
+    await ctx.bean.scope(__ThisModule__).service.passport.authenticate({
       module,
       providerName,
       providerScene,

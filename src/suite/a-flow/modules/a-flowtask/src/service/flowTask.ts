@@ -4,7 +4,7 @@ import { ScopeModule } from '../resource/this.js';
 @Service({ name: 'flowTask' })
 export class ServiceFlowTaskService extends BeanBase<ScopeModule> {
   get localRight() {
-    return this.scope.local.right;
+    return this.scope.service.right;
   }
 
   get modelFlowTask() {

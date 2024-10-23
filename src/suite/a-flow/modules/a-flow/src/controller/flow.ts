@@ -8,7 +8,7 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
   async select() {
     const options = this.ctx.request.body.options;
     options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.scope.local.flow.select({
+    const items = await this.scope.service.flow.select({
       options,
       user: this.ctx.state.user.op,
     });
@@ -17,7 +17,7 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
 
   async count() {
     const options = this.ctx.request.body.options;
-    const count = await this.scope.local.flow.count({
+    const count = await this.scope.service.flow.count({
       options,
       user: this.ctx.state.user.op,
     });

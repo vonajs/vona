@@ -80,7 +80,7 @@ const context: ContextBase = {
   },
   get cache() {
     const self = Cast<CabloyContext>(this);
-    return self.bean._getBean('cache');
+    return self.bean._getBean('cache' as any);
   },
   tail(cb) {
     if (!Cast(this).dbMeta.master) {

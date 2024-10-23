@@ -7,14 +7,14 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
     // data: { mobile, rememberMe }
     const data = this.ctx.request.body.data;
     const state = this.ctx.request.body.state;
-    const res = await this.scope.local.auth.signin({ data, state });
+    const res = await this.scope.service.auth.signin({ data, state });
     this.ctx.success(res);
   }
 
   async signup() {
     const { userName, realName, mobile } = this.ctx.request.body.data;
     const state = this.ctx.request.body.state;
-    const res = await this.scope.local.auth.signup({
+    const res = await this.scope.service.auth.signup({
       user: this.ctx.state.user.agent,
       state,
       userName,
@@ -26,7 +26,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
 
   async mobileVerify() {
     const { mobile } = this.ctx.request.body.data;
-    const res = await this.scope.local.auth.mobileVerify({
+    const res = await this.scope.service.auth.mobileVerify({
       user: this.ctx.state.user.agent,
       mobile,
     });

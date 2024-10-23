@@ -6,6 +6,7 @@ import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
+import { generateServices } from './toolsMetadata/generateServices.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -64,6 +65,8 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateEntities(moduleName, modulePath);
     // models
     content += await generateModels(moduleName, modulePath);
+    // services
+    content += await generateServices(moduleName, modulePath);
     // empty
     if (!content.trim()) {
       content = 'export {};';

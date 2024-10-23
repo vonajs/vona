@@ -6,7 +6,7 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
   async flowChartProcess() {
     const { host } = this.ctx.request.body;
     const user = this.ctx.state.user.op;
-    const res = await this.scope.local.flow.flowChartProcess({
+    const res = await this.scope.service.flow.flowChartProcess({
       host,
       user,
     });

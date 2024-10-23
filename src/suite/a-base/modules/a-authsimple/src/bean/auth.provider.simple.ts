@@ -7,7 +7,7 @@ import Strategy from '../meta/passport/strategy.js';
 @Bean({ scene: 'auth.provider' })
 export class AuthProviderSimple extends BeanAuthProviderBase<ScopeModule> {
   get localSimple() {
-    return this.scope.local.simple;
+    return this.scope.service.simple;
   }
   async getConfigDefault() {
     return null;

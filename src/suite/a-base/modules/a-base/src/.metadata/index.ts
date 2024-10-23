@@ -245,3 +245,76 @@ export interface IModuleModel {
   userRoleRef: ModelUserRoleRef;
 }
 /** models: end */
+/** services: begin */
+export * from '../service/atom.js';
+export * from '../service/atomAction.js';
+export * from '../service/atomClass.js';
+export * from '../service/atomState.js';
+export * from '../service/auth.js';
+export * from '../service/base.js';
+export * from '../service/category.js';
+export * from '../service/comment.js';
+export * from '../service/jwt.js';
+export * from '../service/layoutConfig.js';
+export * from '../service/procedure.js';
+export * from '../service/resource.js';
+export * from '../service/stash.js';
+export * from '../service/tag.js';
+export * from '../service/user.js';
+export * from '../service/util.js';
+import { ServiceAtom } from '../service/atom.js';
+import { ServiceAtomAction } from '../service/atomAction.js';
+import { ServiceAtomClass } from '../service/atomClass.js';
+import { ServiceAtomState } from '../service/atomState.js';
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceBase } from '../service/base.js';
+import { ServiceCategory } from '../service/category.js';
+import { ServiceComment } from '../service/comment.js';
+import { ServiceJwt } from '../service/jwt.js';
+import { ServiceLayoutConfig } from '../service/layoutConfig.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import { ServiceResource } from '../service/resource.js';
+import { ServiceStash } from '../service/stash.js';
+import { ServiceTag } from '../service/tag.js';
+import { ServiceUser } from '../service/user.js';
+import { ServiceUtil } from '../service/util.js';
+export interface IModuleService {
+  atom: ServiceAtom;
+  atomAction: ServiceAtomAction;
+  atomClass: ServiceAtomClass;
+  atomState: ServiceAtomState;
+  auth: ServiceAuth;
+  base: ServiceBase;
+  category: ServiceCategory;
+  comment: ServiceComment;
+  jwt: ServiceJwt;
+  layoutConfig: ServiceLayoutConfig;
+  procedure: ServiceProcedure;
+  resource: ServiceResource;
+  stash: ServiceStash;
+  tag: ServiceTag;
+  user: ServiceUser;
+  util: ServiceUtil;
+}
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecord {
+    'a-base.service.atom': ServiceAtom;
+    'a-base.service.atomAction': ServiceAtomAction;
+    'a-base.service.atomClass': ServiceAtomClass;
+    'a-base.service.atomState': ServiceAtomState;
+    'a-base.service.auth': ServiceAuth;
+    'a-base.service.base': ServiceBase;
+    'a-base.service.category': ServiceCategory;
+    'a-base.service.comment': ServiceComment;
+    'a-base.service.jwt': ServiceJwt;
+    'a-base.service.layoutConfig': ServiceLayoutConfig;
+    'a-base.service.procedure': ServiceProcedure;
+    'a-base.service.resource': ServiceResource;
+    'a-base.service.stash': ServiceStash;
+    'a-base.service.tag': ServiceTag;
+    'a-base.service.user': ServiceUser;
+    'a-base.service.util': ServiceUtil;
+  }
+}
+/** services: end */

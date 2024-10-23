@@ -72,7 +72,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, 'localTest');
 
     // this module
-    res = this.scope.local.test.name;
+    res = this.scope.service.test.name;
     assert.equal(res, 'localTest');
 
     // other module

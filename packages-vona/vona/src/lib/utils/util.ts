@@ -268,7 +268,7 @@ export class AppUtil extends BeanSimple {
       ctx.dbLevel = 1;
     }
     // bean
-    const bean = beanFullName ? ctx.bean._getBean(beanFullName) : null;
+    const bean = beanFullName ? ctx.bean._getBean(beanFullName as any) : null;
     if (!bean && beanFullName && !is.function(fn)) {
       throw new Error(`bean not found: ${beanFullName}`);
     }
