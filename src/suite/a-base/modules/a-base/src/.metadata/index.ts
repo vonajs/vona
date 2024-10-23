@@ -1,4 +1,5 @@
 /** beans: begin */
+export * from '../bean/aop.category.js';
 export * from '../bean/bean.atom.js';
 export * from '../bean/bean.atomAction.js';
 export * from '../bean/bean.atomBase.js';

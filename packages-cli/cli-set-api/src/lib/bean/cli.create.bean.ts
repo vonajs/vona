@@ -5,7 +5,8 @@ import fs from 'fs';
 import { __ThisSetName__ } from '../this.js';
 
 const __decorators = {
-  virtual: 'virtual',
+  virtual: 'Virtual',
+  aop: 'Aop',
 };
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -17,6 +18,7 @@ declare module '@cabloy/cli' {
     beanNameCapitalize: string;
     //
     decoratorName: string;
+    beanOptions: string;
   }
 }
 
@@ -44,6 +46,14 @@ export class CliCreateBean extends BeanCliBase {
     argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
     // decoratorName
     argv.decoratorName = __decorators[sceneName] || 'Bean';
+    // beanOptions
+    if (sceneName === 'aop') {
+      argv.beanOptions = "{ match: 'some-bean-name' }";
+    } else if (sceneName === 'bean') {
+      argv.beanOptions = '';
+    } else {
+      argv.beanOptions = `{ scene: '${sceneName}' }`;
+    }
     // directory
     const beanDir = path.join(targetDir, 'src/bean');
     const beanFile = path.join(beanDir, `${sceneName}.${beanName}.ts`);
