@@ -19,7 +19,7 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
   }
 
   get localToken() {
-    return this.bean.scope('a-authopen').local.token;
+    return this.bean.scope('a-authopen').service.token;
   }
 
   get configModule() {

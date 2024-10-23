@@ -77,7 +77,7 @@ export class ServiceVersion extends BeanBase {
     if (options.scene === 'init' || options.scene === 'test') {
       await this.ctx.meta.util.executeBean({
         subdomain: options.subdomain,
-        beanFullName: `${__ThisModule__}.local.version`,
+        beanFullName: `${__ThisModule__}.service.version`,
         fn: '__after',
       });
     }
