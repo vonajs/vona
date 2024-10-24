@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { __ThisModule__ } from '../../../resource/this.js';
+import { __ThisModule__ } from '../../../.metadata/this.js';
 
 export class VersionTest extends BeanBase {
   async run() {

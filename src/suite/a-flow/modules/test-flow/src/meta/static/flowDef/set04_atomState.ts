@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../../resource/this.js';
+import { __ThisModule__ } from '../../../.metadata/this.js';
 import Listener from './listener/set04_atomState.spec.js';
 
 const content = {

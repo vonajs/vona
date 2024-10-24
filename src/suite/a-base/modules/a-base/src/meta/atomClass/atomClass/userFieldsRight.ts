@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../../resource/this.js';
+import { __ThisModule__ } from '../../../.metadata/this.js';
 
 const tableNameDefault = async function ({ ctx }: any) {
   const roleRoot = await ctx.bean.role.getSystemRole({ roleName: 'root' });
