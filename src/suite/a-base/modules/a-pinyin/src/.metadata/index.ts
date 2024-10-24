@@ -2,10 +2,12 @@
 export * from '../bean/bean.pinyin.js';
 export * from '../bean/version.manager.js';
 import { BeanPinyin } from '../bean/bean.pinyin.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     pinyin: BeanPinyin;
+    'a-pinyin.version.manager': VersionManager;
   }
 }
 /** beans: end */

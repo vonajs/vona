@@ -2,10 +2,12 @@
 export * from '../bean/bean.icon.js';
 export * from '../bean/version.manager.js';
 import { BeanIcon } from '../bean/bean.icon.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     icon: BeanIcon;
+    'a-icon.version.manager': VersionManager;
   }
 }
 /** beans: end */

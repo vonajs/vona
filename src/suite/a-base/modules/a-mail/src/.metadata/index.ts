@@ -8,11 +8,21 @@ export * from '../bean/startup.cacheMailScenes.js';
 export * from '../bean/version.manager.js';
 import { BeanMail } from '../bean/bean.mail.js';
 import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
+import { BroadcastMailSceneChanged } from '../bean/broadcast.mailSceneChanged.js';
+import { IoChannelMail } from '../bean/io.channel.mail.js';
+import { IoMessageMail } from '../bean/io.message.mail.js';
+import { StartupCacheMailScenes } from '../bean/startup.cacheMailScenes.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     mail: BeanMail;
     mailSceneCache: BeanMailSceneCache;
+    'a-mail.broadcast.mailSceneChanged': BroadcastMailSceneChanged;
+    'a-mail.io.channel.mail': IoChannelMail;
+    'a-mail.io.message.mail': IoMessageMail;
+    'a-mail.startup.cacheMailScenes': StartupCacheMailScenes;
+    'a-mail.version.manager': VersionManager;
   }
 }
 /** beans: end */

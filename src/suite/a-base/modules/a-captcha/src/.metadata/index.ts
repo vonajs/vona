@@ -2,10 +2,12 @@
 export * from '../bean/bean.captcha.js';
 export * from '../bean/middleware.captchaVerify.js';
 import { BeanCaptcha } from '../bean/bean.captcha.js';
+import { MiddlewareCaptchaVerify } from '../bean/middleware.captchaVerify.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     captcha: BeanCaptcha;
+    'a-captcha.middleware.captchaVerify': MiddlewareCaptchaVerify;
   }
 }
 /** beans: end */

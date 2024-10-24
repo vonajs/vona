@@ -6,10 +6,20 @@ export * from '../bean/middleware.appReady.js';
 export * from '../bean/middleware.instance.js';
 export * from '../bean/version.manager.js';
 import { BeanInstance } from '../bean/bean.instance.js';
+import { BroadcastReload } from '../bean/broadcast.reload.js';
+import { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
+import { MiddlewareAppReady } from '../bean/middleware.appReady.js';
+import { MiddlewareInstance } from '../bean/middleware.instance.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     instance: BeanInstance;
+    'a-instance.broadcast.reload': BroadcastReload;
+    'a-instance.broadcast.resetCache': BroadcastResetCache;
+    'a-instance.middleware.appReady': MiddlewareAppReady;
+    'a-instance.middleware.instance': MiddlewareInstance;
+    'a-instance.version.manager': VersionManager;
   }
 }
 /** beans: end */

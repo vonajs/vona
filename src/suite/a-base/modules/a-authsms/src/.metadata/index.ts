@@ -7,11 +7,25 @@ export * from '../bean/event.accountMigration.js';
 export * from '../bean/sms.provider.aliyun.js';
 export * from '../bean/sms.provider.test.js';
 export * from '../bean/startup.cacheSmsProviders.js';
+import { AuthProviderSms } from '../bean/auth.provider.sms.js';
 import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
+import { BroadcastSmsProviderChanged } from '../bean/broadcast.smsProviderChanged.js';
+import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
+import { EventAccountMigration } from '../bean/event.accountMigration.js';
+import { SmsProviderAliyun } from '../bean/sms.provider.aliyun.js';
+import { SmsProviderTest } from '../bean/sms.provider.test.js';
+import { StartupCacheSmsProviders } from '../bean/startup.cacheSmsProviders.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
+    'a-authsms.auth.provider.sms': AuthProviderSms;
     smsProviderCache: BeanSmsProviderCache;
+    'a-authsms.broadcast.smsProviderChanged': BroadcastSmsProviderChanged;
+    'a-authsms.captcha.provider.captcha': CaptchaProviderCaptcha;
+    'a-authsms.event.accountMigration': EventAccountMigration;
+    'a-authsms.sms.provider.aliyun': SmsProviderAliyun;
+    'a-authsms.sms.provider.test': SmsProviderTest;
+    'a-authsms.startup.cacheSmsProviders': StartupCacheSmsProviders;
   }
 }
 /** beans: end */

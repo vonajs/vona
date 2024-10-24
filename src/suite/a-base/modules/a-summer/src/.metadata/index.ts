@@ -5,10 +5,18 @@ export * from '../bean/broadcast.memDel.js';
 export * from '../bean/broadcast.memMultiDel.js';
 export * from '../bean/version.manager.js';
 import { BeanSummer } from '../bean/bean.summer.js';
+import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
+import { BroadcastMemDel } from '../bean/broadcast.memDel.js';
+import { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     summer: BeanSummer;
+    'a-summer.broadcast.memClear': BroadcastMemClear;
+    'a-summer.broadcast.memDel': BroadcastMemDel;
+    'a-summer.broadcast.memMultiDel': BroadcastMemMultiDel;
+    'a-summer.version.manager': VersionManager;
   }
 }
 /** beans: end */

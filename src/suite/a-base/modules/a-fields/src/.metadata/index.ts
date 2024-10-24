@@ -4,10 +4,16 @@ export * from '../bean/summer.cache.fieldsRightOfAtomClass.js';
 export * from '../bean/summer.cache.fieldsRightOfUser.js';
 export * from '../bean/version.manager.js';
 import { BeanFields } from '../bean/bean.fields.js';
+import { SummerCacheFieldsRightOfAtomClass } from '../bean/summer.cache.fieldsRightOfAtomClass.js';
+import { SummerCacheFieldsRightOfUser } from '../bean/summer.cache.fieldsRightOfUser.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     fields: BeanFields;
+    'a-fields.summer.cache.fieldsRightOfAtomClass': SummerCacheFieldsRightOfAtomClass;
+    'a-fields.summer.cache.fieldsRightOfUser': SummerCacheFieldsRightOfUser;
+    'a-fields.version.manager': VersionManager;
   }
 }
 /** beans: end */

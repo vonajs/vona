@@ -4,11 +4,13 @@ export * from '../bean/bean.validation.js';
 export * from '../bean/middleware.validate.js';
 import { BeanAjv } from '../bean/bean.ajv.js';
 import { BeanValidation } from '../bean/bean.validation.js';
+import { MiddlewareValidate } from '../bean/middleware.validate.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     ajv: BeanAjv;
     validation: BeanValidation;
+    'a-validation.middleware.validate': MiddlewareValidate;
   }
 }
 /** beans: end */

@@ -10,6 +10,9 @@ import { BeanCache } from '../bean/bean.cache.js';
 import { BeanCacheDb } from '../bean/bean.cacheDb.js';
 import { BeanCacheMem } from '../bean/bean.cacheMem.js';
 import { BeanCacheRedis } from '../bean/bean.cacheRedis.js';
+import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
+import { BroadcastMemRemove } from '../bean/broadcast.memRemove.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
@@ -17,6 +20,9 @@ declare module 'vona' {
     cacheDb: BeanCacheDb;
     cacheMem: BeanCacheMem;
     cacheRedis: BeanCacheRedis;
+    'a-cache.broadcast.memClear': BroadcastMemClear;
+    'a-cache.broadcast.memRemove': BroadcastMemRemove;
+    'a-cache.version.manager': VersionManager;
   }
 }
 /** beans: end */

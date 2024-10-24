@@ -2,10 +2,12 @@
 export * from '../bean/bean.debug.js';
 export * from '../bean/version.manager.js';
 import { BeanDebug } from '../bean/bean.debug.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     debug: BeanDebug;
+    'a-debug.version.manager': VersionManager;
   }
 }
 /** beans: end */

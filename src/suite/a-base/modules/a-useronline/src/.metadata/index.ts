@@ -2,10 +2,12 @@
 export * from '../bean/bean.userOnline.js';
 export * from '../bean/version.manager.js';
 import { BeanUserOnline } from '../bean/bean.userOnline.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     userOnline: BeanUserOnline;
+    'a-useronline.version.manager': VersionManager;
   }
 }
 /** beans: end */

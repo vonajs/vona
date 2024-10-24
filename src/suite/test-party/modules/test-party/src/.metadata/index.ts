@@ -26,10 +26,64 @@ export * from '../bean/test.ctx.js';
 export * from '../bean/test.ctx_0.js';
 export * from '../bean/test.ctx_1.js';
 export * from '../bean/version.manager.js';
-
+import { AopAtom } from '../bean/aop.atom.js';
+import { AopRegExp } from '../bean/aop.regExp.js';
+import { AopSimple } from '../bean/aop.simple.js';
+import { BroadcastTest } from '../bean/broadcast.test.js';
+import { CliDefaultDemo } from '../bean/cli.default.demo.js';
+import { EventHelloEcho } from '../bean/event.helloEcho.js';
+import { EventLoginInfo } from '../bean/event.loginInfo.js';
+import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
+import { EventUserVerify } from '../bean/event.userVerify.js';
+import { IoMessageSimpleChat } from '../bean/io.message.simpleChat.js';
+import { IoMessageTest } from '../bean/io.message.test.js';
+import { MiddlewareTestInterception } from '../bean/middleware.testInterception.js';
+import { MiddlewareTestRestructuring } from '../bean/middleware.testRestructuring.js';
+import { QueueTest } from '../bean/queue.test.js';
+import { ScheduleTest } from '../bean/schedule.test.js';
+import { SequenceTest } from '../bean/sequence.test.js';
+import { StartupStartupAll } from '../bean/startup.startupAll.js';
+import { StartupStartupInstance } from '../bean/startup.startupInstance.js';
+import { StatsTasksInstance } from '../bean/stats.tasksInstance.js';
+import { StatsTasksUser } from '../bean/stats.tasksUser.js';
+import { SummerCacheTest } from '../bean/summer.cache.test.js';
+import { TestApp } from '../bean/test.app.js';
+import { TestClass } from '../bean/test.class.js';
+import { TestCtx } from '../bean/test.ctx.js';
+import { TestCtx_0 } from '../bean/test.ctx_0.js';
+import { TestCtx_1 } from '../bean/test.ctx_1.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {}
+  export interface IBeanRecord {
+    'test-party.aop.atom': AopAtom;
+    'test-party.aop.regExp': AopRegExp;
+    'test-party.aop.simple': AopSimple;
+    'test-party.broadcast.test': BroadcastTest;
+    'test-party.cli.default.demo': CliDefaultDemo;
+    'test-party.event.helloEcho': EventHelloEcho;
+    'test-party.event.loginInfo': EventLoginInfo;
+    'test-party.event.loginInfoDashboard': EventLoginInfoDashboard;
+    'test-party.event.userVerify': EventUserVerify;
+    'test-party.io.message.simpleChat': IoMessageSimpleChat;
+    'test-party.io.message.test': IoMessageTest;
+    'test-party.middleware.testInterception': MiddlewareTestInterception;
+    'test-party.middleware.testRestructuring': MiddlewareTestRestructuring;
+    'test-party.queue.test': QueueTest;
+    'test-party.schedule.test': ScheduleTest;
+    'test-party.sequence.test': SequenceTest;
+    'test-party.startup.startupAll': StartupStartupAll;
+    'test-party.startup.startupInstance': StartupStartupInstance;
+    'test-party.stats.tasksInstance': StatsTasksInstance;
+    'test-party.stats.tasksUser': StatsTasksUser;
+    'test-party.summer.cache.test': SummerCacheTest;
+    'test-party.test.app': TestApp;
+    'test-party.test.class': TestClass;
+    'test-party.test.ctx': TestCtx;
+    'test-party.test.ctx_0': TestCtx_0;
+    'test-party.test.ctx_1': TestCtx_1;
+    'test-party.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** atoms: begin */

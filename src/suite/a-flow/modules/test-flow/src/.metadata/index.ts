@@ -2,10 +2,16 @@
 export * from '../bean/flow.service.startEventTimer.js';
 export * from '../bean/flow.service.test.js';
 export * from '../bean/version.manager.js';
-
+import { FlowServiceStartEventTimer } from '../bean/flow.service.startEventTimer.js';
+import { FlowServiceTest } from '../bean/flow.service.test.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {}
+  export interface IBeanRecord {
+    'test-flow.flow.service.startEventTimer': FlowServiceStartEventTimer;
+    'test-flow.flow.service.test': FlowServiceTest;
+    'test-flow.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** atoms: begin */

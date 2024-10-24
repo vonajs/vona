@@ -4,10 +4,20 @@ export * from '../bean/flow.node.gatewayInclusive.js';
 export * from '../bean/flow.node.gatewayParallel.js';
 export * from '../bean/queue.gateway.js';
 export * from '../bean/version.manager.js';
-
+import { FlowNodeGatewayExclusive } from '../bean/flow.node.gatewayExclusive.js';
+import { FlowNodeGatewayInclusive } from '../bean/flow.node.gatewayInclusive.js';
+import { FlowNodeGatewayParallel } from '../bean/flow.node.gatewayParallel.js';
+import { QueueGateway } from '../bean/queue.gateway.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {}
+  export interface IBeanRecord {
+    'a-flowgateway.flow.node.gatewayExclusive': FlowNodeGatewayExclusive;
+    'a-flowgateway.flow.node.gatewayInclusive': FlowNodeGatewayInclusive;
+    'a-flowgateway.flow.node.gatewayParallel': FlowNodeGatewayParallel;
+    'a-flowgateway.queue.gateway': QueueGateway;
+    'a-flowgateway.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** config: begin */

@@ -7,10 +7,22 @@ export * from '../bean/startup.instanceInit.js';
 export * from '../bean/startup.workerAlive.js';
 export * from '../bean/version.manager.js';
 import { BeanWorker } from '../bean/bean.worker.js';
+import { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
+import { StartupDatabaseInit } from '../bean/startup.databaseInit.js';
+import { StartupDatabaseName } from '../bean/startup.databaseName.js';
+import { StartupInstanceInit } from '../bean/startup.instanceInit.js';
+import { StartupWorkerAlive } from '../bean/startup.workerAlive.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     worker: BeanWorker;
+    'a-version.broadcast.columnsClear': BroadcastColumnsClear;
+    'a-version.startup.databaseInit': StartupDatabaseInit;
+    'a-version.startup.databaseName': StartupDatabaseName;
+    'a-version.startup.instanceInit': StartupInstanceInit;
+    'a-version.startup.workerAlive': StartupWorkerAlive;
+    'a-version.version.manager': VersionManager;
   }
 }
 /** beans: end */

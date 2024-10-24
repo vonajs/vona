@@ -1,9 +1,11 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {}
+  export interface IBeanRecord {
+    'a-oauth.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** services: begin */

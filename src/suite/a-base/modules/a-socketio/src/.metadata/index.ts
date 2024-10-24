@@ -9,10 +9,26 @@ export * from '../bean/queue.push.js';
 export * from '../bean/queue.pushDirect.js';
 export * from '../bean/version.manager.js';
 import { BeanIo } from '../bean/bean.io.js';
+import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
+import { MiddlewareIoConnection } from '../bean/middleware.io.connection.js';
+import { MiddlewareIoPacket } from '../bean/middleware.io.packet.js';
+import { QueueDelivery } from '../bean/queue.delivery.js';
+import { QueueProcess } from '../bean/queue.process.js';
+import { QueuePush } from '../bean/queue.push.js';
+import { QueuePushDirect } from '../bean/queue.pushDirect.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     io: BeanIo;
+    'a-socketio.broadcast.socketEmit': BroadcastSocketEmit;
+    'a-socketio.middleware.io.connection': MiddlewareIoConnection;
+    'a-socketio.middleware.io.packet': MiddlewareIoPacket;
+    'a-socketio.queue.delivery': QueueDelivery;
+    'a-socketio.queue.process': QueueProcess;
+    'a-socketio.queue.push': QueuePush;
+    'a-socketio.queue.pushDirect': QueuePushDirect;
+    'a-socketio.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -48,6 +64,7 @@ export * from '../service/messageClass.js';
 export * from '../service/messageClass_.js';
 export * from '../service/procedure.js';
 export * from '../service/redis.js';
+export * from '../service/virtual.ioMessageBase.js';
 import { ServiceIo } from '../service/io.js';
 import { ServiceIoInner } from '../service/ioInner.js';
 import { ServiceMessage } from '../service/message.js';
@@ -55,6 +72,7 @@ import { ServiceMessageClass } from '../service/messageClass.js';
 import { ServiceMessageClass_ } from '../service/messageClass_.js';
 import { ServiceProcedure } from '../service/procedure.js';
 import { ServiceRedis } from '../service/redis.js';
+import { ServiceVirtualIoMessageBase } from '../service/virtual.ioMessageBase.js';
 export interface IModuleService {
   io: ServiceIo;
   ioInner: ServiceIoInner;
@@ -74,6 +92,7 @@ declare module 'vona' {
     'a-socketio.service.messageClass_': ServiceMessageClass_;
     'a-socketio.service.procedure': ServiceProcedure;
     'a-socketio.service.redis': ServiceRedis;
+    'a-socketio.service.virtual.ioMessageBase': ServiceVirtualIoMessageBase;
   }
 }
 /** services: end */

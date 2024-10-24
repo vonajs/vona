@@ -2,10 +2,12 @@
 export * from '../bean/bean.share.js';
 export * from '../bean/version.manager.js';
 import { BeanShare } from '../bean/bean.share.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     share: BeanShare;
+    'a-share.version.manager': VersionManager;
   }
 }
 /** beans: end */

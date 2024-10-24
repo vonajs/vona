@@ -2,10 +2,12 @@
 export * from '../bean/bean.progress.js';
 export * from '../bean/version.manager.js';
 import { BeanProgress } from '../bean/bean.progress.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     progress: BeanProgress;
+    'a-progress.version.manager': VersionManager;
   }
 }
 /** beans: end */

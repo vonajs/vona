@@ -2,10 +2,16 @@
 export * from '../bean/flow.behavior.overtime.js';
 export * from '../bean/queue.overtime.js';
 export * from '../bean/version.manager.js';
-
+import { FlowBehaviorOvertime } from '../bean/flow.behavior.overtime.js';
+import { QueueOvertime } from '../bean/queue.overtime.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {}
+  export interface IBeanRecord {
+    'a-flowbehavior.flow.behavior.overtime': FlowBehaviorOvertime;
+    'a-flowbehavior.queue.overtime': QueueOvertime;
+    'a-flowbehavior.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** config: begin */

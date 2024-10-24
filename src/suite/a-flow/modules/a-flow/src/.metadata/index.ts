@@ -6,11 +6,17 @@ export * from '../bean/stats.flowInitiateds.js';
 export * from '../bean/version.manager.js';
 import { BeanFlow } from '../bean/bean.flow.js';
 import { BeanFlowDef } from '../bean/bean.flowDef.js';
+import { FlowBehaviorBase } from '../bean/flow.behavior.base.js';
+import { StatsFlowInitiateds } from '../bean/stats.flowInitiateds.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     flow: BeanFlow;
     flowDef: BeanFlowDef;
+    'a-flow.flow.behavior.base': FlowBehaviorBase;
+    'a-flow.stats.flowInitiateds': StatsFlowInitiateds;
+    'a-flow.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -58,9 +64,17 @@ export interface IModuleModel {
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
+export * from '../service/local.flow.js';
+export * from '../service/local.flowEdge.js';
+export * from '../service/local.flowListener.js';
+export * from '../service/local.flowNode.js';
 export * from '../service/procedure.js';
 import { ServiceFlow } from '../service/flow.js';
 import { ServiceFlowDef } from '../service/flowDef.js';
+import { ServiceLocalFlow } from '../service/local.flow.js';
+import { ServiceLocalFlowEdge } from '../service/local.flowEdge.js';
+import { ServiceLocalFlowListener } from '../service/local.flowListener.js';
+import { ServiceLocalFlowNode } from '../service/local.flowNode.js';
 import { ServiceProcedure } from '../service/procedure.js';
 export interface IModuleService {
   flow: ServiceFlow;
@@ -72,6 +86,10 @@ declare module 'vona' {
   export interface IBeanRecord {
     'a-flow.service.flow': ServiceFlow;
     'a-flow.service.flowDef': ServiceFlowDef;
+    'a-flow.service.local.flow': ServiceLocalFlow;
+    'a-flow.service.local.flowEdge': ServiceLocalFlowEdge;
+    'a-flow.service.local.flowListener': ServiceLocalFlowListener;
+    'a-flow.service.local.flowNode': ServiceLocalFlowNode;
     'a-flow.service.procedure': ServiceProcedure;
   }
 }

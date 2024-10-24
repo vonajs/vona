@@ -2,10 +2,12 @@
 export * from '../bean/bean.dict.js';
 export * from '../bean/version.manager.js';
 import { BeanDict } from '../bean/bean.dict.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     dict: BeanDict;
+    'a-dict.version.manager': VersionManager;
   }
 }
 /** beans: end */
