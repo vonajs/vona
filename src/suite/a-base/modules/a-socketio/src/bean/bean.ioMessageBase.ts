@@ -1,7 +1,7 @@
 import { BeanBase, Virtual } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 
-@Virtual({ scene: 'local', name: 'ioMessageBase' })
+@Virtual({ scene: 'bean', name: 'ioMessageBase' })
 export class BeanIoMessageBase<T = unknown> extends BeanBase<T> {
   get scopeModuleASocketio() {
     return this.getScope(__ThisModule__);

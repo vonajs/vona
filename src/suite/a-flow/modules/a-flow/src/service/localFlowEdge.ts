@@ -1,11 +1,11 @@
-import { Bean, BeanBase } from 'vona';
+import { Service, BeanBase } from 'vona';
 
 import UtilsFn from '../common/utils.js';
 import { LocalContextEdge } from '../common/local.context.edge.js';
 import { LocalContextNode } from '../common/local.context.node.js';
 import { LocalContextFlow } from '../common/local.context.flow.js';
 
-@Bean({ scene: 'service.local' })
+@Service()
 export class ServiceLocalFlowEdge extends BeanBase {
   flowInstance: any;
   context: LocalContextFlow;

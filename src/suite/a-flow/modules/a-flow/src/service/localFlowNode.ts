@@ -1,5 +1,5 @@
-import { Bean } from 'vona';
+import { Service } from 'vona';
 import { LocalFlowNodeCycle } from './local.flow.node/local.flow.node_cycle.js';
 
-@Bean({ scene: 'service.local' })
+@Service()
 export class ServiceLocalFlowNode extends LocalFlowNodeCycle {}

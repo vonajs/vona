@@ -1,5 +1,5 @@
-import { Bean } from 'vona';
+import { Service } from 'vona';
 import { LocalFlowTaskMessage } from './local.flow.task/local.flow.task_message.js';
 
-@Bean({ scene: 'service.local' })
+@Service()
 export class ServiceLocalFlowTask extends LocalFlowTaskMessage {}

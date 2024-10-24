@@ -23,8 +23,8 @@ export * from '../bean/summer.cache.test.js';
 export * from '../bean/test.app.js';
 export * from '../bean/test.class.js';
 export * from '../bean/test.ctx.js';
-export * from '../bean/test.ctx_0.js';
-export * from '../bean/test.ctx_1.js';
+export * from '../bean/test.ctx0.js';
+export * from '../bean/test.ctx1.js';
 export * from '../bean/version.manager.js';
 import { AopAtom } from '../bean/aop.atom.js';
 import { AopRegExp } from '../bean/aop.regExp.js';
@@ -50,8 +50,8 @@ import { SummerCacheTest } from '../bean/summer.cache.test.js';
 import { TestApp } from '../bean/test.app.js';
 import { TestClass } from '../bean/test.class.js';
 import { TestCtx } from '../bean/test.ctx.js';
-import { TestCtx_0 } from '../bean/test.ctx_0.js';
-import { TestCtx_1 } from '../bean/test.ctx_1.js';
+import { TestCtx0 } from '../bean/test.ctx0.js';
+import { TestCtx1 } from '../bean/test.ctx1.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -80,8 +80,8 @@ declare module 'vona' {
     'test-party.test.app': TestApp;
     'test-party.test.class': TestClass;
     'test-party.test.ctx': TestCtx;
-    'test-party.test.ctx_0': TestCtx_0;
-    'test-party.test.ctx_1': TestCtx_1;
+    'test-party.test.ctx0': TestCtx0;
+    'test-party.test.ctx1': TestCtx1;
     'test-party.version.manager': VersionManager;
   }
 }

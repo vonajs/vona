@@ -1,4 +1,4 @@
-import { TestCtx0 } from './test.ctx_0.js';
+import { TestCtx0 } from './test.ctx0.js';
 
 export class TestCtx1 extends TestCtx0 {
   async actionAsync3({ a, b }: any) {

@@ -1,7 +1,7 @@
 import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase, Cast } from 'vona';
-import { LocalContextTask } from '../local.context.task.js';
-import { LocalFlowTask } from '../local.flow.task.js';
+import { LocalContextTask } from '../../common/local.context.task.js';
+import { ServiceLocalFlowTask } from '../local.flowTask.js';
 
 export class LocalFlowTask0 extends BeanBase<ScopeModule> {
   nodeInstance: any;
@@ -11,7 +11,7 @@ export class LocalFlowTask0 extends BeanBase<ScopeModule> {
   contextTask: any;
 
   get self() {
-    return Cast<LocalFlowTask>(this);
+    return Cast<ServiceLocalFlowTask>(this);
   }
 
   protected __init__({ nodeInstance }: any) {

@@ -4,10 +4,10 @@ import { BeanBase } from 'vona';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
-import { LocalContextNode } from '../local.context.node.js';
-import { LocalContextEdge } from '../local.context.edge.js';
-import { LocalContextFlow } from '../local.context.flow.js';
-import { LocalFlowNode } from '../local.flow.node.js';
+import { LocalContextNode } from '../../common/local.context.node.js';
+import { LocalContextEdge } from '../../common/local.context.edge.js';
+import { LocalContextFlow } from '../../common/local.context.flow.js';
+import { ServiceLocalFlowNode } from '../local.flowNode.js';
 
 const __behaviorBaseDef = {
   id: 'behavior_0',
@@ -26,7 +26,7 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
   _behaviors: any;
 
   get self() {
-    return Cast<LocalFlowNode>(this);
+    return Cast<ServiceLocalFlowNode>(this);
   }
 
   protected __init__({ flowInstance, context, contextEdge, nodeDef }: any) {

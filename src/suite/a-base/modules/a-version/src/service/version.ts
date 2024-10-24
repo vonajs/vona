@@ -145,7 +145,7 @@ export class ServiceVersion extends BeanBase {
         beanModule: module.info.relativeName,
         transaction: true,
         fn: async ({ ctx }) => {
-          const beanVersion = ctx.bean._newBean(LocalVersion);
+          const beanVersion = ctx.bean._newBean(ServiceVersion);
           await beanVersion.__testModuleTransaction(module, fileVersionNew, options);
         },
       });
@@ -187,7 +187,7 @@ export class ServiceVersion extends BeanBase {
           beanModule: module.info.relativeName,
           transaction: module.name !== 'a-index',
           fn: async ({ ctx }) => {
-            const beanVersion = ctx.bean._newBean(LocalVersion);
+            const beanVersion = ctx.bean._newBean(ServiceVersion);
             await beanVersion.__updateModuleTransaction(module, version);
           },
         });
@@ -198,7 +198,7 @@ export class ServiceVersion extends BeanBase {
           beanModule: module.info.relativeName,
           transaction: true,
           fn: async ({ ctx }) => {
-            const beanVersion = ctx.bean._newBean(LocalVersion);
+            const beanVersion = ctx.bean._newBean(ServiceVersion);
             await beanVersion.__initModuleTransaction(module, version, options);
           },
         });
@@ -210,7 +210,7 @@ export class ServiceVersion extends BeanBase {
 
   async __updateModuleTransaction(module, version) {
     // bean
-    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager` as any);
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     if (!beanVersion.update) throw new Error(`version.manager.update not exists for ${module.info.relativeName}`);
     // clear columns cache
@@ -225,7 +225,7 @@ export class ServiceVersion extends BeanBase {
 
   async __initModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager` as any);
     if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
     // execute
     if (beanVersion.init) {
@@ -248,7 +248,7 @@ export class ServiceVersion extends BeanBase {
   // test module
   async __testModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager`);
+    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager` as any);
     // execute
     if (beanVersion && beanVersion.test) {
       await beanVersion.test({ ...options, version });

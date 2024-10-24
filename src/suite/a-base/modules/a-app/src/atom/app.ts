@@ -5,7 +5,7 @@ import { BeanAtomBase } from 'vona-module-a-base';
 @Atom()
 export class AtomApp extends BeanAtomBase<ScopeModule> {
   get model() {
-    return this.scope.model._app;
+    return this.scope.model.app;
   }
 
   get modelAppContent() {

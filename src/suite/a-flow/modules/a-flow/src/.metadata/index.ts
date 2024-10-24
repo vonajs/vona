@@ -64,21 +64,25 @@ export interface IModuleModel {
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
-export * from '../service/local.flow.js';
-export * from '../service/local.flowEdge.js';
-export * from '../service/local.flowListener.js';
-export * from '../service/local.flowNode.js';
+export * from '../service/localFlow.js';
+export * from '../service/localFlowEdge.js';
+export * from '../service/localFlowListener.js';
+export * from '../service/localFlowNode.js';
 export * from '../service/procedure.js';
 import { ServiceFlow } from '../service/flow.js';
 import { ServiceFlowDef } from '../service/flowDef.js';
-import { ServiceLocalFlow } from '../service/local.flow.js';
-import { ServiceLocalFlowEdge } from '../service/local.flowEdge.js';
-import { ServiceLocalFlowListener } from '../service/local.flowListener.js';
-import { ServiceLocalFlowNode } from '../service/local.flowNode.js';
+import { ServiceLocalFlow } from '../service/localFlow.js';
+import { ServiceLocalFlowEdge } from '../service/localFlowEdge.js';
+import { ServiceLocalFlowListener } from '../service/localFlowListener.js';
+import { ServiceLocalFlowNode } from '../service/localFlowNode.js';
 import { ServiceProcedure } from '../service/procedure.js';
 export interface IModuleService {
   flow: ServiceFlow;
   flowDef: ServiceFlowDef;
+  localFlow: ServiceLocalFlow;
+  localFlowEdge: ServiceLocalFlowEdge;
+  localFlowListener: ServiceLocalFlowListener;
+  localFlowNode: ServiceLocalFlowNode;
   procedure: ServiceProcedure;
 }
 import 'vona';
@@ -86,10 +90,10 @@ declare module 'vona' {
   export interface IBeanRecord {
     'a-flow.service.flow': ServiceFlow;
     'a-flow.service.flowDef': ServiceFlowDef;
-    'a-flow.service.local.flow': ServiceLocalFlow;
-    'a-flow.service.local.flowEdge': ServiceLocalFlowEdge;
-    'a-flow.service.local.flowListener': ServiceLocalFlowListener;
-    'a-flow.service.local.flowNode': ServiceLocalFlowNode;
+    'a-flow.service.localFlow': ServiceLocalFlow;
+    'a-flow.service.localFlowEdge': ServiceLocalFlowEdge;
+    'a-flow.service.localFlowListener': ServiceLocalFlowListener;
+    'a-flow.service.localFlowNode': ServiceLocalFlowNode;
     'a-flow.service.procedure': ServiceProcedure;
   }
 }

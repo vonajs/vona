@@ -54,17 +54,18 @@ export interface IModuleModel {
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowTask.js';
-export * from '../service/local.flowTask.js';
+export * from '../service/localFlowTask.js';
 export * from '../service/procedure.js';
 export * from '../service/right.js';
 import { ServiceFlow } from '../service/flow.js';
 import { ServiceFlowTask } from '../service/flowTask.js';
-import { ServiceLocalFlowTask } from '../service/local.flowTask.js';
+import { ServiceLocalFlowTask } from '../service/localFlowTask.js';
 import { ServiceProcedure } from '../service/procedure.js';
 import { ServiceRight } from '../service/right.js';
 export interface IModuleService {
   flow: ServiceFlow;
   flowTask: ServiceFlowTask;
+  localFlowTask: ServiceLocalFlowTask;
   procedure: ServiceProcedure;
   right: ServiceRight;
 }
@@ -73,7 +74,7 @@ declare module 'vona' {
   export interface IBeanRecord {
     'a-flowtask.service.flow': ServiceFlow;
     'a-flowtask.service.flowTask': ServiceFlowTask;
-    'a-flowtask.service.local.flowTask': ServiceLocalFlowTask;
+    'a-flowtask.service.localFlowTask': ServiceLocalFlowTask;
     'a-flowtask.service.procedure': ServiceProcedure;
     'a-flowtask.service.right': ServiceRight;
   }
