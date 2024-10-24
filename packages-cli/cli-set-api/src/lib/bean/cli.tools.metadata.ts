@@ -71,6 +71,15 @@ export class CliToolsMetadata extends BeanCliBase {
     // config
     const contentConfig = await generateConfig(modulePath);
     content += contentConfig;
+    // constant
+    const contentConstants = await generateConstant(modulePath);
+    content += contentConstants;
+    // locale
+    const contentLocales = await generateLocale(modulePath);
+    content += contentLocales;
+    // error
+    const contentErrors = await generateError(modulePath);
+    content += contentErrors;
     // empty
     if (!content.trim()) {
       content = 'export {};';
