@@ -1,6 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase, VonaContext } from 'vona';
-import { BeanAuthProviderBase } from './virtual.authProviderBase.js';
+import { BeanAuthProviderBase } from './bean.authProviderBase.js';
 
 @Bean()
 export class BeanAuthProvider extends BeanBase<ScopeModule> {
@@ -41,7 +41,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     const authProvider = this.getAuthProviderBase({ module, providerName });
     const beanName = authProvider.meta.bean;
     if (!beanName) throw new Error(`auth provider bean not specified: ${providerFullName}`);
-    return this.ctx.bean._newBean(`${beanName.module}.auth.provider.${beanName.name}`, {
+    return this.ctx.bean._newBean(`${beanName.module}.auth.provider.${beanName.name}` as any, {
       authProvider,
       providerModule: module,
       providerName,

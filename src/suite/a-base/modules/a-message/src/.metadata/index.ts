@@ -1,13 +1,16 @@
 /** beans: begin */
+export * from '../bean/bean.ioMessageUniformBase.js';
 export * from '../bean/bean.message.js';
 export * from '../bean/stats.message.js';
 export * from '../bean/version.manager.js';
+import { BeanIoMessageUniformBase } from '../bean/bean.ioMessageUniformBase.js';
 import { BeanMessage } from '../bean/bean.message.js';
 import { StatsMessage } from '../bean/stats.message.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
+    ioMessageUniformBase: BeanIoMessageUniformBase;
     message: BeanMessage;
     'a-message.stats.message': StatsMessage;
     'a-message.version.manager': VersionManager;
@@ -19,9 +22,7 @@ export * from '../controller/message.js';
 /** controllers: end */
 /** services: begin */
 export * from '../service/message.js';
-export * from '../service/virtual.ioMessageUniformBase.js';
 import { ServiceMessage } from '../service/message.js';
-import { ServiceVirtualIoMessageUniformBase } from '../service/virtual.ioMessageUniformBase.js';
 export interface IModuleService {
   message: ServiceMessage;
 }
@@ -29,7 +30,6 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
     'a-message.service.message': ServiceMessage;
-    'a-message.service.virtual.ioMessageUniformBase': ServiceVirtualIoMessageUniformBase;
   }
 }
 /** services: end */

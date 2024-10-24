@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'middleware' })
-export class Middleware extends BeanBase {
+export class MiddlewareAppReady extends BeanBase {
   async execute(_options, next) {
     // check appReady
     if (!this.ctx.innerAccess) {

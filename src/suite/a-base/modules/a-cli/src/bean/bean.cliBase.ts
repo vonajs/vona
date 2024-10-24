@@ -1,16 +1,16 @@
 import { BeanBase, Virtual } from 'vona';
 
 import eggBornUtils from 'egg-born-utils';
-import { LocalConsole, LocalHelper, LocalTemplate } from '../index.js';
+import { ServiceConsole, ServiceHelper, ServiceTemplate } from '../index.js';
 
 @Virtual({ scene: 'bean' })
 export class BeanCliBase<T = unknown> extends BeanBase<T> {
   options: any;
   cabloyConfig: any;
   terminal: any;
-  __console: LocalConsole;
-  __helper: LocalHelper;
-  __template: LocalTemplate;
+  __console: ServiceConsole;
+  __helper: ServiceHelper;
+  __template: ServiceTemplate;
 
   protected __init__(options) {
     this.options = options;
@@ -18,23 +18,23 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
     this.terminal = options.terminal !== false;
   }
 
-  get console(): LocalConsole {
+  get console(): ServiceConsole {
     if (!this.__console) {
-      this.__console = this.ctx.bean._newBean(LocalConsole, this);
+      this.__console = this.ctx.bean._newBean(ServiceConsole, this);
     }
     return this.__console;
   }
 
-  get helper(): LocalHelper {
+  get helper(): ServiceHelper {
     if (!this.__helper) {
-      this.__helper = this.ctx.bean._newBean(LocalHelper, this);
+      this.__helper = this.ctx.bean._newBean(ServiceHelper, this);
     }
     return this.__helper;
   }
 
-  get template(): LocalTemplate {
+  get template(): ServiceTemplate {
     if (!this.__template) {
-      this.__template = this.ctx.bean._newBean(LocalTemplate, this);
+      this.__template = this.ctx.bean._newBean(ServiceTemplate, this);
     }
     return this.__template;
   }

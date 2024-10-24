@@ -7,7 +7,7 @@ import UtilsFn from '../../common/utils.js';
 import { LocalContextNode } from '../../common/local.context.node.js';
 import { LocalContextEdge } from '../../common/local.context.edge.js';
 import { LocalContextFlow } from '../../common/local.context.flow.js';
-import { ServiceLocalFlowNode } from '../local.flowNode.js';
+import { ServiceLocalFlowNode } from '../localFlowNode.js';
 
 const __behaviorBaseDef = {
   id: 'behavior_0',

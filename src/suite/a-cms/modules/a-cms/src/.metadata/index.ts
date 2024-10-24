@@ -1,25 +1,25 @@
 /** beans: begin */
+export * from '../bean/bean.atomCmsBase.js';
 export * from '../bean/bean.cms.js';
 export * from '../bean/io.message.hotloadFile.js';
 export * from '../bean/queue.render.js';
 export * from '../bean/startup.registerAllWatchers.js';
 export * from '../bean/version.manager.js';
-export * from '../bean/virtual.atomCmsBase.js';
+import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
 import { BeanCms } from '../bean/bean.cms.js';
 import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
 import { QueueRender } from '../bean/queue.render.js';
 import { StartupRegisterAllWatchers } from '../bean/startup.registerAllWatchers.js';
 import { VersionManager } from '../bean/version.manager.js';
-import { VirtualAtomCmsBase } from '../bean/virtual.atomCmsBase.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
+    atomCmsBase: BeanAtomCmsBase;
     cms: BeanCms;
     'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
     'a-cms.queue.render': QueueRender;
     'a-cms.startup.registerAllWatchers': StartupRegisterAllWatchers;
     'a-cms.version.manager': VersionManager;
-    'a-cms.virtual.atomCmsBase': VirtualAtomCmsBase;
   }
 }
 /** beans: end */
@@ -48,20 +48,21 @@ export interface IModuleModel {
 }
 /** models: end */
 /** services: begin */
-export * from '../service/local.build.js';
+export * from '../service/build.js';
 export * from '../service/render.js';
 export * from '../service/site.js';
-import { ServiceLocalBuild } from '../service/local.build.js';
+import { ServiceBuild } from '../service/build.js';
 import { ServiceRender } from '../service/render.js';
 import { ServiceSite } from '../service/site.js';
 export interface IModuleService {
+  build: ServiceBuild;
   render: ServiceRender;
   site: ServiceSite;
 }
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecord {
-    'a-cms.service.local.build': ServiceLocalBuild;
+    'a-cms.service.build': ServiceBuild;
     'a-cms.service.render': ServiceRender;
     'a-cms.service.site': ServiceSite;
   }

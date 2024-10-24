@@ -20,14 +20,14 @@ export * from '../entity/appContent.js';
 export * from '../entity/appFull.js';
 /** entities: end */
 /** models: begin */
-export * from '../model/app.js';
+export * from '../model/app2.js';
 export * from '../model/appContent.js';
 export * from '../model/appFull.js';
-import { ModelApp } from '../model/app.js';
+import { ModelApp2 } from '../model/app2.js';
 import { ModelAppContent } from '../model/appContent.js';
 import { ModelAppFull } from '../model/appFull.js';
 export interface IModuleModel {
-  app: ModelApp;
+  app2: ModelApp2;
   appContent: ModelAppContent;
   appFull: ModelAppFull;
 }

@@ -1,17 +1,17 @@
 import { Bean, BeanBase } from 'vona';
-import { LocalBuild, LocalRender, LocalSite } from '../index.js';
+import { ServiceBuild, ServiceRender, ServiceSite } from '../index.js';
 
 @Bean()
 export class BeanCms extends BeanBase {
   get render() {
-    return this.ctx.bean._getBean(LocalRender);
+    return this.ctx.bean._getBean(ServiceRender);
   }
 
   get site() {
-    return this.ctx.bean._getBean(LocalSite);
+    return this.ctx.bean._getBean(ServiceSite);
   }
 
   build({ atomClass }: any) {
-    return this.ctx.bean._newBean(LocalBuild, atomClass);
+    return this.ctx.bean._newBean(ServiceBuild, atomClass);
   }
 }

@@ -4,10 +4,10 @@ import { BeanBase, Cast } from 'vona';
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
 import { LocalContextFlow } from '../../common/local.context.flow.js';
-import { ServiceLocalFlowListener } from '../local.flowListener.js';
-import { ServiceLocalFlowNode } from '../local.flowNode.js';
-import { ServiceLocalFlowEdge } from '../local.flowEdge.js';
-import { ServiceLocalFlow } from '../local.flow.js';
+import { ServiceLocalFlowListener } from '../localFlowListener.js';
+import { ServiceLocalFlowNode } from '../localFlowNode.js';
+import { ServiceLocalFlowEdge } from '../localFlowEdge.js';
+import { ServiceLocalFlow } from '../localFlow.js';
 
 export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   context: LocalContextFlow;

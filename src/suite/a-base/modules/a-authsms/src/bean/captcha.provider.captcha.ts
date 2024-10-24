@@ -41,7 +41,7 @@ export class CaptchaProviderCaptcha extends BeanBase<ScopeModule> {
       }
     }
     // provider
-    const provider = this.ctx.bean._getBean(`${__ThisModule__}.sms.provider.${providerName}`);
+    const provider = this.ctx.bean._getBean(`${__ThisModule__}.sms.provider.${providerName}` as any);
     const config = providers[providerName];
     return { provider, config };
   }

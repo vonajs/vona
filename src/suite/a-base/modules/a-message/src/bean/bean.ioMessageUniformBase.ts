@@ -4,7 +4,7 @@ import { BeanIoMessageBase } from 'vona-module-a-socketio';
 
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
-@Virtual({ scene: 'local', name: 'ioMessageUniformBase' })
+@Virtual({ scene: 'bean', name: 'ioMessageUniformBase' })
 export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> {
   get scopeModuleAMessage() {
     return this.getScope(__ThisModule__);
