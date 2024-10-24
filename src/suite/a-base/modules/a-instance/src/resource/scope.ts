@@ -30,7 +30,7 @@ declare module 'vona' {
     'a-instance': (typeof locales)[TypeLocaleBase];
   }
 
-  export interface CabloyContext {
+  export interface VonaContext {
     instance: EntityInstance;
   }
 }

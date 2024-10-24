@@ -1,10 +1,10 @@
-import { CabloyContext } from 'vona';
+import { VonaContext } from 'vona';
 import moment from 'moment';
 
 export default {
   errors: true,
   compile(schema) {
-    const fun = function (this: CabloyContext, data, _path, rootData, name) {
+    const fun = function (this: VonaContext, data, _path, rootData, name) {
       if (!schema) return true;
       const ctx = this;
       if (Array.isArray(data)) {
@@ -26,7 +26,7 @@ export default {
   },
 };
 
-function transformDate(fun, ctx: CabloyContext, data) {
+function transformDate(fun, ctx: VonaContext, data) {
   if (!data) return null; // support null
   const _date = moment(data);
   if (!_date.isValid()) {

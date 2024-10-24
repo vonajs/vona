@@ -1,4 +1,4 @@
-import { CabloyContext } from 'vona';
+import { VonaContext } from 'vona';
 
 const keywords: any = {};
 keywords.exists = {
@@ -6,7 +6,7 @@ keywords.exists = {
   type: 'string',
   errors: true,
   compile() {
-    return async function (this: CabloyContext, data, _path, _rootData, name) {
+    return async function (this: VonaContext, data, _path, _rootData, name) {
       const ctx = this;
       const res = await ctx.bean.user.exists({ [name]: data });
       if (res && res.id !== ctx.state.user.agent.id) {
@@ -26,7 +26,7 @@ keywords.passwordForgotEmail = {
   type: 'string',
   errors: true,
   compile() {
-    return async function (this: CabloyContext, data, _path, _rootData, name) {
+    return async function (this: VonaContext, data, _path, _rootData, name) {
       const ctx = this;
       const res = await ctx.bean.user.exists({ [name]: data });
       if (!res) {

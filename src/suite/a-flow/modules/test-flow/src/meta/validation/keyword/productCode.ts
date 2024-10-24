@@ -1,4 +1,4 @@
-import { CabloyContext } from 'vona';
+import { VonaContext } from 'vona';
 
 const keywords: any = {};
 keywords.productCode = {
@@ -6,7 +6,7 @@ keywords.productCode = {
   type: 'string',
   errors: true,
   compile() {
-    return async function (this: CabloyContext, data /* , path, rootData , name*/) {
+    return async function (this: VonaContext, data /* , path, rootData , name*/) {
       // ignore if empty
       if (!data) return true;
       // ctx

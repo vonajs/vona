@@ -1,9 +1,9 @@
-import { CabloyContext } from 'vona';
+import { VonaContext } from 'vona';
 
 export default {
   errors: true,
   compile(schema, schemaProperty) {
-    const fun = function (this: CabloyContext, data, _path, rootData) {
+    const fun = function (this: VonaContext, data, _path, rootData) {
       // notEmpty=false
       if (!schema) return true;
       // ctx

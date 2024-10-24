@@ -1,10 +1,10 @@
-import { BeanSimple, CabloyContext, IMonkeySystem } from 'vona';
+import { BeanSimple, VonaContext, IMonkeySystem } from 'vona';
 import { LocalDbMeta } from './local/local.dbMeta.js';
 
 const DATABASEMETA = Symbol.for('Context#__databasemeta');
 
 export class Monkey extends BeanSimple implements IMonkeySystem {
-  createContext(context: CabloyContext): void {
+  createContext(context: VonaContext): void {
     // db
     Object.defineProperty(context, 'db', {
       enumerable: false,

@@ -1,11 +1,11 @@
-import { CabloyContext } from 'vona';
+import { VonaContext } from 'vona';
 
 export default {
   async: true,
   type: 'string',
   errors: true,
   compile() {
-    return async function (this: CabloyContext, data, _path, rootData /* , name*/) {
+    return async function (this: VonaContext, data, _path, rootData /* , name*/) {
       // ignore if empty
       if (!data) return true;
       const slug = data.trim();

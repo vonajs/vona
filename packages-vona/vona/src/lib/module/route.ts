@@ -2,7 +2,7 @@ import is from 'is-type-of';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
-import { VonaApplication, CabloyContext, Cast, IModule } from '../../types/index.js';
+import { VonaApplication, VonaContext, Cast, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
@@ -207,7 +207,7 @@ function middlewareDeps(ctx, options) {
 }
 
 function methodToMiddleware(controllerBeanFullName, _route) {
-  return function classControllerMiddleware(this: CabloyContext, ...args) {
+  return function classControllerMiddleware(this: VonaContext, ...args) {
     const controller = this.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);

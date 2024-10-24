@@ -1,4 +1,4 @@
-import { CabloyContext, Cast } from '../../index.js';
+import { VonaContext, Cast } from '../../index.js';
 
 export default function (app) {
   // use modulesArray
@@ -100,15 +100,7 @@ export default function (app) {
     }
   };
 
-  async function _runStartupLock({
-    ctx,
-    startup,
-    instanceStartup,
-  }: {
-    ctx: CabloyContext;
-    startup?;
-    instanceStartup?;
-  }) {
+  async function _runStartupLock({ ctx, startup, instanceStartup }: { ctx: VonaContext; startup?; instanceStartup? }) {
     // ignore debounce for test
     const force = instanceStartup && instanceStartup.options && instanceStartup.options.force;
     if (!force && !ctx.app.meta.isTest) {

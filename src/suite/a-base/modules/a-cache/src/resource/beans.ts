@@ -19,7 +19,7 @@ declare module 'vona' {
     cacheRedis: BeanCacheRedis;
   }
 
-  export interface CabloyContext {
+  export interface VonaContext {
     get cache(): BeanCache;
   }
 }

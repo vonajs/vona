@@ -10,7 +10,7 @@ import { ContextState } from './contextState.js';
 export * from './contextState.js';
 
 // @ts-ignore ignore the throw type check of 'throw'/'meta'
-export interface CabloyContext extends ContextLocale, ContextError, ContextBase, ContextOthers, EggContext {
+export interface VonaContext extends ContextLocale, ContextError, ContextBase, ContextOthers, EggContext {
   app: VonaApplication;
   bean: BeanContainerLike;
   config: ContextConfig;

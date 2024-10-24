@@ -10,7 +10,7 @@ import { AppLimiter, AppRedlock } from '../module/redis.js';
 import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import {
-  CabloyContext,
+  VonaContext,
   IModule,
   IModuleMeta,
   ISuite,
@@ -69,7 +69,7 @@ export class AppMeta extends BeanSimple {
   __versionReadyError: Error;
   //
   _loadQueueWorkers: ({ subdomain }: { subdomain: string }) => void;
-  _loadSchedules: ({ ctx }: { ctx: CabloyContext }) => Promise<void>;
+  _loadSchedules: ({ ctx }: { ctx: VonaContext }) => Promise<void>;
   _runSchedule: (context) => Promise<any>;
   checkAppReady: () => Promise<boolean>;
 

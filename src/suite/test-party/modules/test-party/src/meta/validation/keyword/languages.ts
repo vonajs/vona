@@ -1,4 +1,4 @@
-import { CabloyContext } from 'vona';
+import { VonaContext } from 'vona';
 
 const keywords: any = {};
 keywords.languages = {
@@ -6,7 +6,7 @@ keywords.languages = {
   type: 'string',
   errors: true,
   compile(/* sch, parentSchema*/) {
-    return async function (this: CabloyContext, data) {
+    return async function (this: VonaContext, data) {
       const ctx = this;
       const locales = ctx.bean.base.locales();
       const index = locales.findIndex(item => item.value === data);

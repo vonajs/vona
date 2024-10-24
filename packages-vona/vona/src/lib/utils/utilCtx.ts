@@ -1,6 +1,6 @@
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { CabloyContext, PowerPartial } from '../../types/index.js';
+import { VonaContext, PowerPartial } from '../../types/index.js';
 import { IExecuteBeanCallback } from './util.js';
 
 export class CtxUtil extends BeanSimple {
@@ -131,7 +131,7 @@ export class CtxUtil extends BeanSimple {
     context?: any;
     fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
-    ctxParent?: PowerPartial<CabloyContext>;
+    ctxParent?: PowerPartial<VonaContext>;
     instance?: boolean;
   }) {
     const ctx = this.ctx;

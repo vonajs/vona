@@ -6,7 +6,7 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { CabloyContext, Cast, IModule, PowerPartial, TypeMonkeyName } from '../../types/index.js';
+import { VonaContext, Cast, IModule, PowerPartial, TypeMonkeyName } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -15,7 +15,7 @@ import { compose, composeAsync } from '@cabloy/compose';
 const __EnvTests = ['unittest', 'test'];
 
 export interface IExecuteBeanCallbackParams {
-  ctx: CabloyContext;
+  ctx: VonaContext;
   bean: any;
   context: any;
 }
@@ -176,7 +176,7 @@ export class AppUtil extends BeanSimple {
     return composeAsync(chains, adapter);
   }
 
-  async createAnonymousContext({ locale, subdomain, module, instance }): Promise<CabloyContext> {
+  async createAnonymousContext({ locale, subdomain, module, instance }): Promise<VonaContext> {
     // url
     const url = module ? this.combineFetchPath(module, '') : '/api/a/base/';
     // ctx
@@ -206,7 +206,7 @@ export class AppUtil extends BeanSimple {
       }
     }
     // ok
-    return ctx as unknown as CabloyContext;
+    return ctx as unknown as VonaContext;
   }
 
   async executeBean({
@@ -228,8 +228,8 @@ export class AppUtil extends BeanSimple {
     context: any;
     fn?: any;
     transaction?: boolean;
-    ctxCaller?: CabloyContext;
-    ctxParent?: PowerPartial<CabloyContext>;
+    ctxCaller?: VonaContext;
+    ctxParent?: PowerPartial<VonaContext>;
     instance?: boolean;
   }) {
     // ctxModule

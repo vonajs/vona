@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../resource/this.js';
-import { Bean, BeanBase, CabloyContext } from 'vona';
+import { Bean, BeanBase, VonaContext } from 'vona';
 import { BeanAuthProviderBase } from './virtual.authProviderBase.js';
 
 @Bean()
@@ -129,7 +129,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
 }
 
 function _createAuthenticate() {
-  return async function (ctx: CabloyContext, next) {
+  return async function (ctx: VonaContext, next) {
     const urlPattern = ctx.params[0];
     const [module, providerName, providerScene] = urlPattern.split('/');
     ctx.params.module = module;

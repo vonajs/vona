@@ -1,5 +1,5 @@
 import { IModule } from '@cabloy/module-info';
-import { CabloyContext } from '../index.js';
+import { VonaContext } from '../index.js';
 
 export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySystem;
 
@@ -25,5 +25,5 @@ export interface IMonkeyModule {
 }
 
 export interface IMonkeySystem {
-  createContext(context: CabloyContext): void;
+  createContext(context: VonaContext): void;
 }

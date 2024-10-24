@@ -3,7 +3,7 @@ import inflate from 'inflation';
 import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { ContextBase } from '../../types/context/contextBase.js';
-import { CabloyContext } from '../../types/context/index.js';
+import { VonaContext } from '../../types/context/index.js';
 import { Cast } from '../../types/utils/cast.js';
 
 const MODULE = Symbol.for('Context#__module');
@@ -16,7 +16,7 @@ const DBLEVEL = Symbol.for('Context#__dblevel');
 
 const context: ContextBase = {
   get module() {
-    const self = Cast<CabloyContext>(this);
+    const self = Cast<VonaContext>(this);
     if (this[MODULE] === undefined) {
       const url = self.req.url || '';
       let info;
@@ -40,7 +40,7 @@ const context: ContextBase = {
     return this[MODULE];
   },
   get meta() {
-    const self = Cast<CabloyContext>(this);
+    const self = Cast<VonaContext>(this);
     if (!this[META]) {
       this[META] = self.bean._newBean(CtxMeta);
     }
@@ -59,7 +59,7 @@ const context: ContextBase = {
     this[DBLEVEL] = value;
   },
   get subdomain() {
-    const self = Cast<CabloyContext>(this);
+    const self = Cast<VonaContext>(this);
     return typeof this[SUBDOMAIN] === 'undefined' ? self.subdomains.join('.') : this[SUBDOMAIN];
   },
   set subdomain(value) {
@@ -79,7 +79,7 @@ const context: ContextBase = {
     this.dbLevel = value.dbLevel;
   },
   get cache() {
-    const self = Cast<CabloyContext>(this);
+    const self = Cast<VonaContext>(this);
     return self.bean._getBean('cache' as any);
   },
   tail(cb) {
@@ -109,7 +109,7 @@ const context: ContextBase = {
   },
 
   successMore(list, index, size) {
-    const self = Cast<CabloyContext>(this);
+    const self = Cast<VonaContext>(this);
     self.success({
       list,
       index: index + list.length,
@@ -118,7 +118,7 @@ const context: ContextBase = {
   },
 
   async getPayload(options) {
-    const self = Cast<CabloyContext>(this);
+    const self = Cast<VonaContext>(this);
     return await raw(inflate(self.req), options);
   },
 };

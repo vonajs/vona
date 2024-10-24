@@ -8,7 +8,7 @@ declare module 'vona' {
     database: ConfigDatabase;
   }
 
-  export interface CabloyContext {
+  export interface VonaContext {
     get db(): Knex | Knex.Transaction;
     get dbMeta(): LocalDbMeta;
     set dbMeta(value: LocalDbMeta);
