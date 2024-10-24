@@ -19,11 +19,20 @@ declare module 'vona' {
 }
 /** beans: end */
 /** services: begin */
-
-export interface IModuleService {}
+export * from '../service/dbMeta.js';
+export * from '../service/transaction.js';
+import { ServiceDbMeta } from '../service/dbMeta.js';
+import { ServiceTransaction } from '../service/transaction.js';
+export interface IModuleService {
+  dbMeta: ServiceDbMeta;
+  transaction: ServiceTransaction;
+}
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {}
+  export interface IBeanRecord {
+    'a-database.service.dbMeta': ServiceDbMeta;
+    'a-database.service.transaction': ServiceTransaction;
+  }
 }
 /** services: end */
 /** locale: begin */
@@ -41,6 +50,9 @@ import { Errors } from '../config/errors.js';
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 
