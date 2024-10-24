@@ -1,5 +1,5 @@
 import { Bean, BeanBase } from 'vona';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 
 @Bean({ scene: 'queue' })
 export class QueuePush extends BeanBase<ScopeModule> {

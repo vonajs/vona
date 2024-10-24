@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from 'vona';
 import knex, { Knex } from 'knex';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import { configBases } from '../common/configBases.js';
 
 export type ISetDatabaseNameResult = { database?: string; filename?: string };

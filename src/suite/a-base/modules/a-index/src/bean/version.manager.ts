@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from 'vona';
 
 import chalk from 'chalk';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase<ScopeModule> {

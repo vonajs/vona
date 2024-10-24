@@ -1,6 +1,6 @@
 import { LocalCache } from '../index.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 
 let __cacheBases;
 

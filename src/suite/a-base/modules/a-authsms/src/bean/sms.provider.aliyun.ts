@@ -1,4 +1,4 @@
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 import * as PopCore from '@alicloud/pop-core';

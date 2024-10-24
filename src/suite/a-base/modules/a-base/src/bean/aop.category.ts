@@ -1,5 +1,5 @@
 import { Aop, BeanBase } from 'vona';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 
 const __atomClassApp = {
   module: 'a-app',

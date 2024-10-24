@@ -1,4 +1,4 @@
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanIoMessageBase } from 'vona-module-a-socketio';
 

@@ -1,5 +1,5 @@
 import { BigNumber } from 'vona-module-a-database';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 @Service()

@@ -1,4 +1,4 @@
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import { Atom } from 'vona';
 import { BeanAtomCmsBase } from 'vona-module-a-cms';
 

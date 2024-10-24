@@ -1,7 +1,7 @@
 import { BeanBase, Service } from 'vona';
 
 import trimHtml from '@zhennann/trim-html';
-import { ScopeModule } from '../resource/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import { Knex } from 'vona-module-a-database';
 
 @Service()
