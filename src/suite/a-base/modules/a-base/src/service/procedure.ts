@@ -1,4 +1,4 @@
-import { Local } from 'vona';
+import { Service } from 'vona';
 import { LocalProcedureUtils } from './local.procedure/local.procedure_utils.js';
 
 @Service()

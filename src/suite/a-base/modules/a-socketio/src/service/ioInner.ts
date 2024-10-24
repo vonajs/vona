@@ -1,4 +1,4 @@
-import { Local } from 'vona';
+import { Service } from 'vona';
 import { LocalIoInnerQueuePushDirect } from './local.ioInner/local.ioInner_queuePushDirect.js';
 
 @Service()

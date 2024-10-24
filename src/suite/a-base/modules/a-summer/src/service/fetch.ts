@@ -1,6 +1,6 @@
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from './cacheBase.js';
-import { Local } from 'vona';
+import { Service } from 'vona';
 
 @Service()
 export class ServiceFetch extends CacheBase {
