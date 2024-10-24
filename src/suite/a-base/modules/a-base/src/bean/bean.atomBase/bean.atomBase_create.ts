@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomBase1 } from './bean.atomBase_1.js';
 
 const __create_atom_basic_fields = [

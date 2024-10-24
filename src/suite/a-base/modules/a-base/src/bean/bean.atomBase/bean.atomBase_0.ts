@@ -1,5 +1,5 @@
 import { BeanBase, Cast } from 'vona';
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomBase } from '../bean.atomBase.js';
 
 export class BeanAtomBase0 extends BeanBase {

@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanRoleAtomRights } from './bean.role_atomRights.js';
 
 export class BeanRoleBuild extends BeanRoleAtomRights {
@@ -152,8 +152,8 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       `insert into ${toId('aRoleIncRef')}(${toId('iid,roleId,roleIdInc,roleIdSrc')})
             select ${iid},${roleId},${toId('a.roleIdInc,a.roleId')} from ${toId('aRoleInc as a')}
               where ${toId('a.iid')}=${iid} and ${toId('a.roleId')} in (select ${toId('b.roleIdParent')} from ${toId(
-        'aRoleRef as b',
-      )} where ${toId('b.iid')}=${iid} and ${toId('b.roleId')}=${roleId})
+                'aRoleRef as b',
+              )} where ${toId('b.iid')}=${iid} and ${toId('b.roleId')}=${roleId})
         `,
     );
   }

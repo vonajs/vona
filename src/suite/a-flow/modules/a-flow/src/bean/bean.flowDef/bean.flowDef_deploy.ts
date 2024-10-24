@@ -1,5 +1,5 @@
 import { FlowNodeStartEventAtom } from 'vona-module-a-flowtask';
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanFlowDef0 } from './bean.flowDef_0.js';
 
 export class BeanFlowDefDeploy extends BeanFlowDef0 {

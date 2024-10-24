@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanRoleBuild } from './bean.role_build.js';
 
 const __atomClassRole = {

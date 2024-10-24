@@ -1,5 +1,5 @@
 import { LocalFlowTask } from '../../index.js';
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanFlowTask0 } from './bean.flowTask_0.js';
 
 export class BeanFlowTask1 extends BeanFlowTask0 {
