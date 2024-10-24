@@ -13,18 +13,18 @@ type TypeModuleBean = {
 };
 
 export type TypeModuleResource<
-  SERVICE,
-  MODEL,
   CONFIG extends (app: VonaApplication) => object,
   ERRORS,
   LOCALES,
   CONSTANTS = object,
+  SERVICE = unknown,
+  MODEL = unknown,
 > = {
   _bean: TypeModuleBean;
-  service: SERVICE;
-  model: MODEL;
   config: TypeModuleConfig<CONFIG>;
   error: TypeModuleErrors<ERRORS>;
   locale: TypeModuleLocales<LOCALES>;
   constant: TypeModuleConstants<CONSTANTS>;
+  service: SERVICE;
+  model: MODEL;
 };

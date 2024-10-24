@@ -322,3 +322,50 @@ declare module 'vona' {
 export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
+/** constant: begin */
+export * from '../config/constants.js';
+import { constants } from '../config/constants.js';
+/** constant: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+export const locales = {
+  'en-us': locale_en_us,
+  'zh-cn': locale_zh_cn,
+};
+/** locale: end */
+/** error: begin */
+export * from '../config/errors.js';
+import { Errors } from '../config/errors.js';
+/** error: end */
+/** scope: begin */
+import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
+
+@Scope()
+export class ScopeModuleABase extends BeanScopeBase {}
+
+export interface ScopeModuleABase
+  extends TypeModuleResource<
+    typeof config,
+    typeof Errors,
+    (typeof locales)[TypeLocaleBase],
+    typeof constants,
+    IModuleService,
+    IModuleModel
+  > {}
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanScopeRecord {
+    'a-base': ScopeModuleABase;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-base': ReturnType<typeof config>;
+  }
+
+  export interface IBeanScopeLocale {
+    'a-base': (typeof locales)[TypeLocaleBase];
+  }
+}
+/** scope: end */
