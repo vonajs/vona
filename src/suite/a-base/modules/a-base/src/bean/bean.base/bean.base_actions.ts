@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanBase0 } from './bean.base_0.js';
 
 const _actions: any = {};

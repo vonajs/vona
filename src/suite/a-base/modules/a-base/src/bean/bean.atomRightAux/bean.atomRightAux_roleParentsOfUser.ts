@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomRightAuxRoleWhos } from './bean.atomRightAux_roleWhos.js';
 
 export class BeanAtomRightAuxRoleParentsOfUser extends BeanAtomRightAuxRoleWhos {

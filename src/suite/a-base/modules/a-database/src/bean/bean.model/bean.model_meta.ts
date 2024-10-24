@@ -1,7 +1,7 @@
 import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from 'vona';
 import { BeanModel } from '../bean.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { Knex } from 'knex';
 
 export class BeanModelMeta extends BeanBase {

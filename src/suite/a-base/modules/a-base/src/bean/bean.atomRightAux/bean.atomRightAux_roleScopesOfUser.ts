@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomRightAux0 } from './bean.atomRightAux_0.js';
 
 export class BeanAtomRightAuxRoleScopesOfUser extends BeanAtomRightAux0 {

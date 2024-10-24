@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../../resource/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomActionBase } from './bean.atomAction_base.js';
 
 export class BeanAtomActionFlow extends BeanAtomActionBase {
