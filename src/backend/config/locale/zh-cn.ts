@@ -1,5 +1,5 @@
-import { CabloyLocaleOptional } from 'vona';
+import { VonaLocaleOptional } from 'vona';
 
 export default {
   modules: {},
-} as CabloyLocaleOptional;
+} as VonaLocaleOptional;

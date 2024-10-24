@@ -5,8 +5,8 @@ export const localeDefault = {
   modules: {},
 };
 
-export type CabloyLocale = {
+export type VonaLocale = {
   modules: IBeanScopeLocale;
 } & typeof localeDefault;
 
-export type CabloyLocaleOptional = PowerPartial<CabloyLocale>;
+export type VonaLocaleOptional = PowerPartial<VonaLocale>;

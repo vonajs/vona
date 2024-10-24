@@ -5,7 +5,7 @@ import { extend } from '@cabloy/extend';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {
-    pkgCabloy: any = null;
+    pkgVona: any = null;
 
     loadConfig() {
       super.loadConfig();
@@ -14,11 +14,11 @@ function createLoaderClass(Base) {
     }
 
     getAppname() {
-      if (!this.pkgCabloy) {
-        this.pkgCabloy = require(path.join(process.cwd(), 'package.json'));
-        this.pkg.name = this.pkgCabloy.name;
+      if (!this.pkgVona) {
+        this.pkgVona = require(path.join(process.cwd(), 'package.json'));
+        this.pkg.name = this.pkgVona.name;
       }
-      return this.pkgCabloy.name;
+      return this.pkgVona.name;
     }
 
     _loadEnvAndConfig() {
