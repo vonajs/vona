@@ -318,3 +318,7 @@ declare module 'vona' {
   }
 }
 /** services: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
