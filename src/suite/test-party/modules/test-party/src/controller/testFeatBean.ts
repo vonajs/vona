@@ -2,7 +2,7 @@ import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, Cast, Controller } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
-import { LocalTest } from '../../../index.js';
+import { ServiceTest } from '../../../index.js';
 
 @Controller()
 export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
@@ -68,7 +68,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     let res;
 
     // general way
-    res = this.bean._getBean(LocalTest).name;
+    res = this.bean._getBean(ServiceTest).name;
     assert.equal(res, 'localTest');
 
     // this module
