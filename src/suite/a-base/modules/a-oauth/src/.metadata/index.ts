@@ -19,6 +19,9 @@ declare module 'vona' {
   }
 }
 /** services: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 
