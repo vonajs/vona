@@ -1,6 +1,6 @@
-import { __ThisModule__ } from '../../../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../../../.metadata/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
