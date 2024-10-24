@@ -44,7 +44,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // select items
     if (!count) {
       if (atomClassBase) {
-        const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+        const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
         await beanInstance.select({ atomClass, options, items, user });
       } else {
         await this.ctx.bean.atomBase.select({ atomClass, options, items, user });

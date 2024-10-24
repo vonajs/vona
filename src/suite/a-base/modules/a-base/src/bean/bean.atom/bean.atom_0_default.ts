@@ -16,7 +16,7 @@ export class BeanAtom0Default extends BeanAtom0Create {
       item.roleIdOwner = roleIdOwner;
     }
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     item = await beanInstance.default({ atomClass, item, options, user });
     // ok
     const returnSchema = options.returnSchema;

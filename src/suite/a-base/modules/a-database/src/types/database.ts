@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
-import { LocalDbMeta } from '../local/local.dbMeta.js';
-import { LocalTransaction } from '../local/local.transaction.js';
+import { ServiceDbMeta } from '../service/dbMeta.js';
+import { ServiceTransaction } from '../service/transaction.js';
 import { ConfigDatabase } from './config.js';
 
 declare module 'vona' {
@@ -10,8 +10,8 @@ declare module 'vona' {
 
   export interface VonaContext {
     get db(): Knex | Knex.Transaction;
-    get dbMeta(): LocalDbMeta;
-    set dbMeta(value: LocalDbMeta);
-    get transaction(): LocalTransaction;
+    get dbMeta(): ServiceDbMeta;
+    set dbMeta(value: ServiceDbMeta);
+    get transaction(): ServiceTransaction;
   }
 }

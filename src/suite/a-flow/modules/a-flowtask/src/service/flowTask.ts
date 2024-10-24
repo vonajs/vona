@@ -2,7 +2,7 @@ import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 
 @Service({ name: 'flowTask' })
-export class ServiceFlowTaskService extends BeanBase<ScopeModule> {
+export class ServiceFlowTask extends BeanBase<ScopeModule> {
   get localRight() {
     return this.scope.service.right;
   }

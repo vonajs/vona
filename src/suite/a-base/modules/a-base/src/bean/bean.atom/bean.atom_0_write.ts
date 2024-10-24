@@ -98,7 +98,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
       }
     }
     // write
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     const data = await beanInstance.write({ atomClass, target, key, item: itemWrite, options, user });
     // patch data
     key = this._patchCreateWriteData({ data, atomClassBase });

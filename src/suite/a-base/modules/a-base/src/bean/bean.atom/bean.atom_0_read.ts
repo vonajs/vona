@@ -14,7 +14,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     });
     if (!atom || !atomClassBase) return null;
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     const item = await beanInstance.read({ atomClass, options, key, user });
     // ok
     const returnSchema = options.returnSchema;
@@ -87,7 +87,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     });
 
     // readQuery
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     const item = await beanInstance.readQuery({ atomClass, options: options2, key, user });
     // ok
     return item;

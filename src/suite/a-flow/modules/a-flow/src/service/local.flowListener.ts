@@ -1,10 +1,10 @@
 import { Bean, BeanBase } from 'vona';
 
 import assert from 'assert';
-import { LocalContextFlow } from './local.context.flow.js';
+import { LocalContextFlow } from '../common/local.context.flow.js';
 
-@Bean({ scene: 'local.flow' })
-export class ServiceFlowListener extends BeanBase {
+@Bean({ scene: 'service.local' })
+export class ServiceLocalFlowListener extends BeanBase {
   flowInstance: any;
   context: LocalContextFlow;
   _flowListener: any;

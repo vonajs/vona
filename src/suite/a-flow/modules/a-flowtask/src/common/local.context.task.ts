@@ -1,5 +1,5 @@
 // not extends BeanBase
-export class ServiceContextTask {
+export class LocalContextTask {
   context: any;
   contextNode: any;
   _nodeDef: any;

@@ -18,10 +18,8 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const className = parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
-    if (isBeanGlobal) {
-      contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
-      contentRecords.push(`'${beanFullName}': ${className};`);
-    }
+    contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
+    contentRecords.push(`'${beanFullName}': ${className};`);
   }
   // combine
   const content = `/** beans: begin */

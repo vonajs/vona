@@ -1,4 +1,4 @@
-import { LocalFlowTask } from '../../index.js';
+import { ServiceLocalFlowTask } from '../../index.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanFlowTask0 } from './bean.flowTask_0.js';
 
@@ -58,7 +58,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
   }
 
   _createTaskInstance2({ nodeInstance }: any) {
-    const task = this.ctx.bean._newBean(LocalFlowTask, {
+    const task = this.ctx.bean._newBean(ServiceLocalFlowTask, {
       nodeInstance,
     });
     return task;

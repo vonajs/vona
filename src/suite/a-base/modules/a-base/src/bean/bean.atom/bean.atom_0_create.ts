@@ -22,7 +22,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
       item.roleIdOwner = roleIdOwner;
     }
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     const data = await beanInstance.create({
       atomClass,
       item,

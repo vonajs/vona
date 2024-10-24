@@ -13,13 +13,15 @@ export async function generateServices(moduleName: string, modulePath: string) {
   for (const file of files) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
-    if (parts.length !== 1) continue;
-    const resourceName = parts[0];
-    const className = 'Service' + resourceName.charAt(0).toUpperCase() + resourceName.substring(1);
-    const beanFullName = `${moduleName}.service.${resourceName}`;
-    contentExports.push(`export * from '../service/${resourceName}.js';`);
-    contentImports.push(`import { ${className} } from '../service/${resourceName}.js';`);
-    contentRecords.push(`'${resourceName}': ${className};`);
+    if (parts.length < 1) continue;
+    const fileNameJS = fileName.replace('.ts', '.js');
+    const className = 'Service' + parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
+    const beanFullName = `${moduleName}.service.${parts.join('.')}`;
+    contentExports.push(`export * from '../service/${fileNameJS}';`);
+    contentImports.push(`import { ${className} } from '../service/${fileNameJS}';`);
+    if (parts.length === 1) {
+      contentRecords.push(`'${parts[0]}': ${className};`);
+    }
     contentRecords2.push(`'${beanFullName}': ${className};`);
   }
   // combine

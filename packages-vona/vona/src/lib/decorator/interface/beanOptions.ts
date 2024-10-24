@@ -6,6 +6,7 @@ import { ContainerScope } from '../index.js';
 
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'service'
+  | 'service.local'
   | 'aop'
   | 'virtual'
   | 'scope'
@@ -27,7 +28,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'stats'
   | 'sequence'
   | 'test'
-  | 'local.flow'
+  | 'service.local'
   | 'flow.node'
   | 'flow.edge'
   | 'flow.behavior'

@@ -24,7 +24,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     });
     if (!atomClassBase) this.ctx.throw(403);
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     // atom
     let _atom;
     if (!atomClassBase.itemOnly) {
