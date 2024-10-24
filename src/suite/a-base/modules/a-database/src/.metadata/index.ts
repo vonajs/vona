@@ -38,6 +38,9 @@ export const locales = {
 export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 

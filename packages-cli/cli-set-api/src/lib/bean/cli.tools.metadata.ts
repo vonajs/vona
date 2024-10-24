@@ -9,6 +9,7 @@ import { generateModels } from './toolsMetadata/generateModels.js';
 import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
+import { generateMonkey } from './toolsMetadata/generateMonkey.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -83,6 +84,8 @@ export class CliToolsMetadata extends BeanCliBase {
     // error
     const contentErrors = await generateError(modulePath);
     content += contentErrors;
+    // monkey
+    content += await generateMonkey(modulePath);
     // scope
     content += await generateScope(moduleName, relativeNameCapitalize, {
       config: contentConfig,

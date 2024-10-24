@@ -1,6 +1,9 @@
 /** controllers: begin */
 export * from '../controller/monkeyer.js';
 /** controllers: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 
