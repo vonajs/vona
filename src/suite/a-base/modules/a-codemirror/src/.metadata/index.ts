@@ -1,0 +1,23 @@
+/** beans: begin */
+export * from '../bean/version.manager.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecord {}
+}
+/** beans: end */
+/** scope: begin */
+import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+
+@Scope()
+export class ScopeModuleACodemirror extends BeanScopeBase {}
+
+export interface ScopeModuleACodemirror extends TypeModuleResource<any, any, any, any, any, any> {}
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanScopeRecord {
+    'a-codemirror': ScopeModuleACodemirror;
+  }
+}
+/** scope: end */

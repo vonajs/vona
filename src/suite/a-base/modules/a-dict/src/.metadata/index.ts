@@ -1,0 +1,72 @@
+/** beans: begin */
+export * from '../bean/bean.dict.js';
+export * from '../bean/version.manager.js';
+import { BeanDict } from '../bean/bean.dict.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecord {
+    dict: BeanDict;
+  }
+}
+/** beans: end */
+/** atoms: begin */
+export * from '../atom/dict.js';
+/** atoms: end */
+/** controllers: begin */
+export * from '../controller/dict.js';
+/** controllers: end */
+/** entities: begin */
+export * from '../entity/dict.js';
+export * from '../entity/dictContent.js';
+/** entities: end */
+/** models: begin */
+export * from '../model/dict.js';
+export * from '../model/dictContent.js';
+import { ModelDict } from '../model/dict.js';
+import { ModelDictContent } from '../model/dictContent.js';
+export interface IModuleModel {
+  dict: ModelDict;
+  dictContent: ModelDictContent;
+}
+/** models: end */
+/** services: begin */
+export * from '../service/dict.js';
+import { ServiceDict } from '../service/dict.js';
+export interface IModuleService {
+  dict: ServiceDict;
+}
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecord {
+    'a-dict.service.dict': ServiceDict;
+  }
+}
+/** services: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+export const locales = {
+  'en-us': locale_en_us,
+  'zh-cn': locale_zh_cn,
+};
+/** locale: end */
+/** scope: begin */
+import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
+
+@Scope()
+export class ScopeModuleADict extends BeanScopeBase {}
+
+export interface ScopeModuleADict
+  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanScopeRecord {
+    'a-dict': ScopeModuleADict;
+  }
+
+  export interface IBeanScopeLocale {
+    'a-dict': (typeof locales)[TypeLocaleBase];
+  }
+}
+/** scope: end */

@@ -1,0 +1,26 @@
+/** beans: begin */
+export * from '../bean/bean.pinyin.js';
+export * from '../bean/version.manager.js';
+import { BeanPinyin } from '../bean/bean.pinyin.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecord {
+    pinyin: BeanPinyin;
+  }
+}
+/** beans: end */
+/** scope: begin */
+import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+
+@Scope()
+export class ScopeModuleAPinyin extends BeanScopeBase {}
+
+export interface ScopeModuleAPinyin extends TypeModuleResource<any, any, any, any, any, any> {}
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanScopeRecord {
+    'a-pinyin': ScopeModuleAPinyin;
+  }
+}
+/** scope: end */
