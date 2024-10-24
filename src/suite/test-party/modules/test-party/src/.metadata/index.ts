@@ -91,7 +91,6 @@ export * from '../atom/party.js';
 export * from '../atom/partyExpense.js';
 /** atoms: end */
 /** controllers: begin */
-export * from '../controller/TestRoleUserRole.js';
 export * from '../controller/kitchenSinkAutocomplete.js';
 export * from '../controller/kitchenSinkFormSchemaValidation.js';
 export * from '../controller/kitchenSinkGuide.js';
