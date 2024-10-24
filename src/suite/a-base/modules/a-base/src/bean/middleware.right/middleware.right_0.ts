@@ -1,5 +1,5 @@
 import { Cast } from 'vona';
-import { ScopeModule } from '../../resource/this.js';
+import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 import { MiddlewareRight } from '../middleware.right.js';
 

@@ -1,6 +1,6 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../../resource/this.js';
-import languages from './data/autocomplete-languages.json' with { type: "json" };
+import { ScopeModule } from '../../.metadata/this.js';
+import languages from './data/autocomplete-languages.json' with { type: 'json' };
 
 @Controller()
 export class ControllerKitchenSinkAutocomplete extends BeanBase<ScopeModule> {

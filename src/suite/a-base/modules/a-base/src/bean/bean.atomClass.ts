@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 import { AtomClass, AtomClassBase, AtomClassParams } from '../types.js';
 import { EntityAtomClass } from '../index.js';

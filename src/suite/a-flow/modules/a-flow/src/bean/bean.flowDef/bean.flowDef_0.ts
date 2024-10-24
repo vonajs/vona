@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
 import { BeanBase, Cast } from 'vona';
 import { BeanFlowDef } from '../bean.flowDef.js';
 

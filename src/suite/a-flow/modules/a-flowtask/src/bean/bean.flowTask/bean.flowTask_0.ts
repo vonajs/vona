@@ -1,6 +1,6 @@
 import { Cast } from 'vona';
 import { BigNumber } from 'vona-module-a-database';
-import { ScopeModule } from '../../resource/this.js';
+import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 import { BeanFlowTask } from '../bean.flowTask.js';
 

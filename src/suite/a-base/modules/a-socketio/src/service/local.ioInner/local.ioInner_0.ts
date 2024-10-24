@@ -1,5 +1,5 @@
 import { BeanIoChannelBase } from '../../common/ioChannelBase.js';
-import { ScopeModule } from '../../resource/this.js';
+import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 
 export class LocalIoInner0 extends BeanBase<ScopeModule> {

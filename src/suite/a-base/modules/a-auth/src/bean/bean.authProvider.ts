@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase, VonaContext } from 'vona';
 import { BeanAuthProviderBase } from './virtual.authProviderBase.js';
 

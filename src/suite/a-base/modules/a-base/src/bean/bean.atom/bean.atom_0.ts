@@ -1,4 +1,4 @@
-import { ScopeModule } from '../../resource/this.js';
+import { ScopeModule } from '../../.metadata/this.js';
 import { BeanModuleScopeBase, Cast } from 'vona';
 import { BeanAtom } from '../bean.atom.js';
 

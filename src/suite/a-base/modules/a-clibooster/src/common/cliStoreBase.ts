@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import eggBornUtils from 'egg-born-utils';
 import { BeanCliBase } from 'vona-module-a-cli';
 

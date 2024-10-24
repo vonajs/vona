@@ -1,4 +1,4 @@
-import { ScopeModule } from '../../resource/this.js';
+import { ScopeModule } from '../../.metadata/this.js';
 import { BeanModuleScopeBase } from 'vona';
 
 export class BeanDetail0 extends BeanModuleScopeBase<ScopeModule> {

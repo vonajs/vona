@@ -1,6 +1,6 @@
 import { BigNumber } from 'vona-module-a-database';
 import { EntityCategory } from '../../index.js';
-import { ScopeModule, __ThisModule__ } from '../../resource/this.js';
+import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 
 export class BeanCategory0 extends BeanBase<ScopeModule> {
