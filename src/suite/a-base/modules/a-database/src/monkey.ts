@@ -1,5 +1,5 @@
 import { BeanSimple, VonaContext, IMonkeySystem } from 'vona';
-import { LocalDbMeta } from './local/local.dbMeta.js';
+import { ServiceDbMeta } from './service/dbMeta.js';
 
 const DATABASEMETA = Symbol.for('Context#__databasemeta');
 
@@ -19,11 +19,11 @@ export class Monkey extends BeanSimple implements IMonkeySystem {
       enumerable: false,
       get() {
         if (!context[DATABASEMETA]) {
-          context[DATABASEMETA] = context.bean._newBean(LocalDbMeta);
+          context[DATABASEMETA] = context.bean._newBean(ServiceDbMeta);
         }
         return context[DATABASEMETA];
       },
-      set(metaCaller: LocalDbMeta) {
+      set(metaCaller: ServiceDbMeta) {
         // transaction
         if (metaCaller.transaction.inTransaction) {
           context.dbMeta.master = false; // false only on metaCaller.transaction=true
