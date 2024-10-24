@@ -1,4 +1,4 @@
-import { LocalFlowFlow } from '../../index.js';
+import { ServiceLocalFlow } from '../../index.js';
 import { BeanFlowQuery } from './bean.flow_query.js';
 
 export class BeanFlowStart extends BeanFlowQuery {
@@ -30,7 +30,7 @@ export class BeanFlowStart extends BeanFlowQuery {
   }
 
   _createFlowInstance({ flowDef }: any) {
-    const flowInstance = this.ctx.bean._newBean(LocalFlowFlow, {
+    const flowInstance = this.ctx.bean._newBean(ServiceLocalFlow, {
       flowDef,
     });
     return flowInstance;

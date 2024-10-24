@@ -1,16 +1,16 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase } from 'vona';
-import { LocalMem } from './mem.js';
-import { LocalRedis } from './redis.js';
-import { LocalFetch } from './fetch.js';
+import { ServiceMem } from '../service/mem.js';
+import { ServiceRedis } from '../service/redis.js';
+import { ServiceFetch } from '../service/fetch.js';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 export class CacheBase extends BeanBase {
   _cacheBase: IModuleConfigSummerCacheBase;
 
-  _localMem: LocalMem;
-  _localRedis: LocalRedis;
-  _localFetch: LocalFetch;
+  _localMem: ServiceMem;
+  _localRedis: ServiceRedis;
+  _localFetch: ServiceFetch;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super();

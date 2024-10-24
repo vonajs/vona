@@ -1,5 +1,5 @@
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
-import { CacheBase } from './cacheBase.js';
+import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona';
 
 @Service()

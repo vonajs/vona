@@ -3,18 +3,18 @@ import { BeanBase, Cast } from 'vona';
 
 import VarsFn from '../../common/vars.js';
 import UtilsFn from '../../common/utils.js';
-import { LocalContextFlow } from '../local.context.flow.js';
-import { LocalFlowListener } from '../local.flow.listener.js';
-import { LocalFlowNode } from '../local.flow.node.js';
-import { LocalFlowEdge } from '../local.flow.edge.js';
-import { LocalFlowFlow } from '../local.flow.flow.js';
+import { LocalContextFlow } from '../../common/local.context.flow.js';
+import { ServiceLocalFlowListener } from '../local.flowListener.js';
+import { ServiceLocalFlowNode } from '../local.flowNode.js';
+import { ServiceLocalFlowEdge } from '../local.flowEdge.js';
+import { ServiceLocalFlow } from '../local.flow.js';
 
 export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   context: LocalContextFlow;
-  _flowListener: LocalFlowListener;
+  _flowListener: ServiceLocalFlowListener;
 
   get self() {
-    return Cast<LocalFlowFlow>(this);
+    return Cast<ServiceLocalFlow>(this);
   }
 
   protected __init__({ flowDef }: any) {
@@ -23,7 +23,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
       flowDef,
     });
     // listener
-    this._flowListener = this.ctx.bean._newBean(LocalFlowListener, {
+    this._flowListener = this.ctx.bean._newBean(ServiceLocalFlowListener, {
       flowInstance: this,
       context: this.context,
     });
@@ -193,7 +193,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   _createNodeInstance2({ nodeDef, contextEdge }: any) {
-    const node = this.ctx.bean._newBean(LocalFlowNode, {
+    const node = this.ctx.bean._newBean(ServiceLocalFlowNode, {
       flowInstance: this,
       context: this.context,
       contextEdge,
@@ -218,7 +218,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   async _createEdgeInstance({ edgeDef, contextNode }: any) {
-    const edge = this.ctx.bean._newBean(LocalFlowEdge, {
+    const edge = this.ctx.bean._newBean(ServiceLocalFlowEdge, {
       flowInstance: this,
       context: this.context,
       contextNode,
