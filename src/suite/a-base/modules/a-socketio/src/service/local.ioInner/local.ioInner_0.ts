@@ -21,9 +21,9 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
     if (messageClassBase.info.beanFullName) {
       beanFullName = messageClassBase.info.beanFullName;
     } else if (messageClassBase.info.uniform) {
-      beanFullName = 'a-message.service.ioMessageUniformBase';
+      beanFullName = 'ioMessageUniformBase';
     } else {
-      beanFullName = 'a-socketio.service.ioMessageBase';
+      beanFullName = 'ioMessageBase';
     }
     // bean
     const beanMessage = this.ctx.bean._getBean(beanFullName);
