@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from 'vona';
 import { BeanDatabaseClient } from './bean.databaseClient.js';
 import { VirtualDatabaseDialect } from './virtual.databaseDialect.js';
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {

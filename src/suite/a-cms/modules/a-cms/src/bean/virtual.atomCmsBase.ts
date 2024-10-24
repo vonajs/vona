@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Virtual } from 'vona';
 import { BeanAtomBase } from 'vona-module-a-base';
 import trimHtml from '@zhennann/trim-html';

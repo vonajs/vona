@@ -13,6 +13,7 @@ import 'vona-suite-cabloy-store';
 import 'vona-suite-test-a';
 import 'vona-suite-test-party';
 import 'vona-suite-a-core';
+import 'vona-module-a-b';
 import 'vona-module-bz-login';
 import 'vona-module-test-note';
 import 'vona-module-test-userpro';

@@ -1,5 +1,5 @@
 import { BigNumber } from 'vona-module-a-database';
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'stats' })

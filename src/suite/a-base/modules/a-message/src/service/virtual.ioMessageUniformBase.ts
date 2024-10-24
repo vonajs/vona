@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Virtual } from 'vona';
 import { BeanIoMessageBase } from 'vona-module-a-socketio';
 

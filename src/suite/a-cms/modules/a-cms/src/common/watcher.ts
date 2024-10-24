@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { BeanBase, Cast } from 'vona';

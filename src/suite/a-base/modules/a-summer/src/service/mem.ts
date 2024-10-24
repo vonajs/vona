@@ -1,4 +1,4 @@
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from './cacheBase.js';
 import { Local } from 'vona';

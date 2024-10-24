@@ -1,5 +1,5 @@
 import { BeanBase, Virtual } from 'vona';
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 @Virtual({ scene: 'local', name: 'ioMessageBase' })
 export class BeanIoMessageBase<T = unknown> extends BeanBase<T> {

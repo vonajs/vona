@@ -936,7 +936,7 @@ async function _moduleHandle_eachFile({ module, processHelper }) {
     }
     console.log(file);
     const contentNew = contentOld
-      .replace("from 'vona';", "from 'vona';\nimport { __ThisModule__ } from '../resource/this.js';")
+      .replace("from 'vona';", "from 'vona';\nimport { __ThisModule__ } from '../.metadata/this.js';")
       .replace('// const moduleInfo = module.info;', '')
       .replace('const moduleInfo = module.info;', '')
       .replaceAll('moduleInfo.relativeName', '__ThisModule__');

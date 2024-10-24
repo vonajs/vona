@@ -1,5 +1,5 @@
 import { Bean, BeanBase, IORedis } from 'vona';
-import { __ThisModule__ } from '../resource/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 @Bean()
 export class BeanWorker extends BeanBase {
