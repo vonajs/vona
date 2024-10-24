@@ -4,20 +4,8 @@ import path from 'path';
 
 import fse from 'fs-extra';
 
-let _hostText: string | null = null;
-
 export class BeanBaseUtils extends BeanBaseThemes {
   get host() {
-    // test
-    if (this.ctx.app.meta.isTest) {
-      if (_hostText) return _hostText;
-      const buildConfig = this.ctx.app.meta.util.requireDynamic(path.join(process.cwd(), 'build/config.js'));
-      const hostname = buildConfig.front.dev.hostname || 'localhost';
-      const port = buildConfig.front.dev.port;
-      _hostText = `${hostname}:${port}`;
-      return _hostText;
-    }
-    // others
     const config = this.scope.config;
     return config.host || this.ctx.host;
   }
