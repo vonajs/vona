@@ -83,7 +83,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   async _checkRightAction_inner2({ atom, atomClass, action, stage, user, checkFlow, options }: any) {
     // atom bean
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     // check right
     options = {
       ...options,

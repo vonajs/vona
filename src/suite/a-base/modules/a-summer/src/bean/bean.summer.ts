@@ -1,4 +1,4 @@
-import { LocalCache } from '../index.js';
+import { ServiceCache } from '../index.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 
@@ -14,7 +14,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
     const { key } = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey: key });
     if (!cacheBase) throw new Error(`summer cache not found: ${key}`);
-    return this.ctx.bean._newBean(LocalCache, {
+    return this.ctx.bean._newBean(ServiceCache, {
       cacheBase,
     });
   }

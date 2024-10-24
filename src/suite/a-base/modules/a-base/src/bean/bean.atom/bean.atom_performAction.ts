@@ -7,7 +7,7 @@ export class BeanAtomPerformAction extends BeanAtomSchema {
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
     const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
     // performAction
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     return await beanInstance.performAction({ key, atomClass, action, item, options, user });
   }
 }
