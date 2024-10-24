@@ -1,7 +1,7 @@
 import { swapDeps } from '@cabloy/deps';
-import { CabloyApplication } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 
-export default function (app: CabloyApplication): [object, any[]] {
+export default function (app: VonaApplication): [object, any[]] {
   // use modulesArray
   const ebModulesArray = app.meta.modulesArray;
 

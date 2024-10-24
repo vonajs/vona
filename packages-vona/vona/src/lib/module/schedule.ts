@@ -1,6 +1,6 @@
-import { CabloyApplication } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   // all schedules
   const ebSchedules = (app.meta.schedules = {});
 

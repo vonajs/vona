@@ -1,11 +1,11 @@
-import { CabloyApplication } from '../../../types/index.js';
+import { VonaApplication } from '../../../types/index.js';
 import { BeanContainer } from '../../bean/beanContainer.js';
 
-export function loadBeanContainer(app: CabloyApplication) {
+export function loadBeanContainer(app: VonaApplication) {
   app.bean = BeanContainer.create(app, null);
 }
 
-export function loadBeans(app: CabloyApplication) {
+export function loadBeans(app: VonaApplication) {
   // patch context
   patchCreateContext();
 

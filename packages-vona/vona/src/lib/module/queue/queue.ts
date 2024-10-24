@@ -1,7 +1,7 @@
-import { CabloyApplication } from '../../../types/index.js';
+import { VonaApplication } from '../../../types/index.js';
 import { QueueClient } from './queueClient.js';
 
-export default function (app: CabloyApplication, modules) {
+export default function (app: VonaApplication, modules) {
   // queue
   app.meta.queue = app.bean._newBean(QueueClient);
 

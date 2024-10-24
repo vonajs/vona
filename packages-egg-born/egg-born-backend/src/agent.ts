@@ -1,7 +1,7 @@
-import { CabloyApplication, Bootstrap } from "vona";
+import { VonaApplication, Bootstrap } from 'vona';
 
 export default class AppBootHook {
-  app: CabloyApplication;
+  app: VonaApplication;
   bootstrap: Bootstrap;
 
   constructor(app) {

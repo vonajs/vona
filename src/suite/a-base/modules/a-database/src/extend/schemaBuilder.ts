@@ -1,8 +1,8 @@
 import knex, { Knex } from 'knex';
 import { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/virtual.databaseDialect.js';
-import { CabloyApplication, Cast } from 'vona';
+import { VonaApplication, Cast } from 'vona';
 
-export function ExtendSchemaBuilder(app: CabloyApplication) {
+export function ExtendSchemaBuilder(app: VonaApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase', 'fetchIndexes'].forEach(function (method) {
     knex.SchemaBuilder.extend(method, async function (...args) {
       const client = Cast<Knex.Client>(Cast(this).client).config.client as string;

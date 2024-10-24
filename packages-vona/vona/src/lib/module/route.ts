@@ -2,7 +2,7 @@ import is from 'is-type-of';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
-import { CabloyApplication, CabloyContext, Cast, IModule } from '../../types/index.js';
+import { VonaApplication, CabloyContext, Cast, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
@@ -127,7 +127,7 @@ export class AppRouter extends BeanSimple {
   }
 }
 
-export default function (app: CabloyApplication, modules: Record<string, IModule>) {
+export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // load middlewares
   loadMiddlewares(app);
 

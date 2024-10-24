@@ -1,5 +1,5 @@
 import { IModuleRoute } from '../../lib/bean/resource/route/type.js';
-import { CabloyApplication } from '../application/app.js';
+import { VonaApplication } from '../application/app.js';
 import { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
 
 export * from '@cabloy/module-info';
@@ -15,8 +15,8 @@ export interface IModuleResource {
   Monkey: new () => IMonkeyModule & IMonkeySystem;
   locales: TypeModuleResourceLocales;
   Errors: TypeModuleResourceErrors;
-  config: (app: CabloyApplication) => object | Promise<object>;
-  meta: ((app: CabloyApplication) => IModuleMeta) | IModuleMeta;
+  config: (app: VonaApplication) => object | Promise<object>;
+  meta: ((app: VonaApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
   routes: IModuleRoute[];
 }

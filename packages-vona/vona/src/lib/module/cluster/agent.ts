@@ -1,6 +1,6 @@
-import { CabloyApplication, EnumAppEvent } from '../../../types/index.js';
+import { VonaApplication, EnumAppEvent } from '../../../types/index.js';
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   // ready
   let _ready = false;
   const pids = {};

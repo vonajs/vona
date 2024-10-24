@@ -1,5 +1,5 @@
 import debounce from 'debounce';
-import { CabloyApplication } from '../../../types/application/app.js';
+import { VonaApplication } from '../../../types/application/app.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
@@ -83,6 +83,6 @@ export class AppReload extends BeanSimple {
   }
 }
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   app.meta.reload.initialize();
 }

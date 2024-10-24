@@ -1,12 +1,12 @@
 import _Bundle from 'egg-mock/bootstrap.js';
-import { CabloyApplication, CabloyContext, Cast } from 'vona';
+import { VonaApplication, CabloyContext, Cast } from 'vona';
 import Assert from 'assert';
 import { IModuleInfo } from '@cabloy/module-info';
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
 import { BaseMockApplication } from 'egg-mock';
 
-type TypeMockCabloyApplication<T, C> = BaseMockApplication<T, C> & CabloyApplication;
-export interface MockCabloyApplication extends TypeMockCabloyApplication<CabloyApplication, CabloyContext> {}
+type TypeMockCabloyApplication<T, C> = BaseMockApplication<T, C> & VonaApplication;
+export interface MockCabloyApplication extends TypeMockCabloyApplication<VonaApplication, CabloyContext> {}
 
 const ParseModuleNameLevel = ParseModuleNameLevelInit + 2;
 
@@ -15,7 +15,7 @@ if (!Bundle) {
   Bundle = global.__egg_born_mock = _Bundle;
 
   before(async function () {
-    const app = Cast<CabloyApplication>(Bundle.app);
+    const app = Cast<VonaApplication>(Bundle.app);
     // wait ready
     await Bundle.app.ready();
     // session
@@ -38,7 +38,7 @@ export const mm = Bundle.mm;
 
 export function mockUrl(url, apiPrefix = true) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app = Cast<CabloyApplication>(Bundle.app);
+  const app = Cast<VonaApplication>(Bundle.app);
   return app.meta.mockUtil.mockUrl(moduleInfo, url, apiPrefix);
 }
 export function mockInfo(): IModuleInfo {

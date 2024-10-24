@@ -10,9 +10,9 @@ const queues = {
   },
 };
 
-import { CabloyApplication } from 'vona';
+import { VonaApplication } from 'vona';
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     queues,
   };

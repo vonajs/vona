@@ -1,7 +1,7 @@
-import { CabloyApplication } from '../../../types/index.js';
+import { VonaApplication } from '../../../types/index.js';
 import { BroadcastClient } from './broadcastClient.js';
 
-export default function (app: CabloyApplication, modules) {
+export default function (app: VonaApplication, modules) {
   // broadcast
   app.meta.broadcast = app.bean._newBean(BroadcastClient);
 

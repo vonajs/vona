@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigBroadcast, IModuleConfigMiddleware, IModuleConfigQueue } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast, IModuleConfigMiddleware, IModuleConfigQueue } from 'vona';
 import { IModuleConfigSummer } from 'vona-module-a-summer';
 
 // middlewares
@@ -55,7 +55,7 @@ const summer = {
   },
 } as IModuleConfigSummer;
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     middlewares,
     queues,

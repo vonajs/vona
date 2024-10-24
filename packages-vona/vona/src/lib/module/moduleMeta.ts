@@ -1,6 +1,6 @@
-import { CabloyApplication, IModule } from '../../types/index.js';
+import { VonaApplication, IModule } from '../../types/index.js';
 
-export default async function (app: CabloyApplication, modules: Record<string, IModule>) {
+export default async function (app: VonaApplication, modules: Record<string, IModule>) {
   // all metas
   app.meta.metas = {};
 

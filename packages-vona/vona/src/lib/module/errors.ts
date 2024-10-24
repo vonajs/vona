@@ -1,9 +1,9 @@
 import { extend } from '@cabloy/extend';
 import { ErrorClass } from '../bean/resource/error/errorClass.js';
-import { CabloyApplication, IModule } from '../../types/index.js';
+import { VonaApplication, IModule } from '../../types/index.js';
 const ERROR = Symbol('Context#__error');
 
-export default function (app: CabloyApplication, modules: Record<string, IModule>) {
+export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all errors
   const ebErrors = {};
 

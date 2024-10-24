@@ -15,9 +15,9 @@ import staticRoles from './meta/static/roles.js';
 import cliCommands from './meta/cli/commands.js';
 // icons
 import iconGroups from './meta/icons/groups.js';
-import { CabloyApplication } from 'vona';
+import { VonaApplication } from 'vona';
 // meta
-export const meta = (app: CabloyApplication) => {
+export const meta = (app: VonaApplication) => {
   const meta: any = {};
 
   app.bean.util.extend(meta, {

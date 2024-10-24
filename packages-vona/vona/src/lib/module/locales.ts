@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { CabloyApplication, IModule, TypeModuleResourceLocales } from '../../types/index.js';
+import { VonaApplication, IModule, TypeModuleResourceLocales } from '../../types/index.js';
 import * as localeutil from '@cabloy/localeutil';
 
-export default function (app: CabloyApplication, modules: Record<string, IModule>) {
+export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all locales
   app.meta.locales = {};
   app.meta.localeModules = {};

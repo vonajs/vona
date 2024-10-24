@@ -8,7 +8,7 @@ import { VonaConfig } from '../config/config.js';
 export * as IORedis from 'ioredis';
 
 // @ts-ignore ignore the throw type check of 'config'
-export interface CabloyApplication extends EggApplication {
+export interface VonaApplication extends EggApplication {
   options: EggLoaderOptions;
   meta: AppMeta;
   bean: BeanContainerLike;

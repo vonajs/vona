@@ -1,4 +1,4 @@
-import { CabloyApplication, CabloyContext } from '../../types/index.js';
+import { VonaApplication, CabloyContext } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
@@ -12,12 +12,12 @@ const BeanContainerInstances = Symbol.for('Bean#Instances');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export class BeanContainer {
-  private app: CabloyApplication;
+  private app: VonaApplication;
   private ctx: CabloyContext;
 
   private [BeanContainerInstances]: Record<string, unknown> = {};
 
-  static create(app: CabloyApplication, ctx: CabloyContext | null) {
+  static create(app: VonaApplication, ctx: CabloyContext | null) {
     const beanContainer = new BeanContainer(app, ctx);
     return new Proxy(beanContainer, {
       get(obj, prop) {
@@ -28,7 +28,7 @@ export class BeanContainer {
     }) as BeanContainerLike;
   }
 
-  protected constructor(app: CabloyApplication, ctx: CabloyContext | null) {
+  protected constructor(app: VonaApplication, ctx: CabloyContext | null) {
     this.app = app;
     this.ctx = ctx as any;
   }

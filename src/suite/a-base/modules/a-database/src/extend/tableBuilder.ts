@@ -1,5 +1,5 @@
 import knex from 'knex';
-import { CabloyApplication } from 'vona';
+import { VonaApplication } from 'vona';
 
 export interface IBasicFieldsOptions {
   id?: boolean;
@@ -8,7 +8,7 @@ export interface IBasicFieldsOptions {
   iid?: boolean;
 }
 
-export function ExtendTableBuilder(_app: CabloyApplication) {
+export function ExtendTableBuilder(_app: VonaApplication) {
   knex.TableBuilder.extend('basicFields', function (options?: IBasicFieldsOptions) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) this.increments();

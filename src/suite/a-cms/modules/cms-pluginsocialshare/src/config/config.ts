@@ -1,6 +1,6 @@
-import { CabloyApplication } from 'vona';
+import { VonaApplication } from 'vona';
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     plugin: {
       wechatQrcodeTitle: '微信扫一扫：分享',

@@ -1,4 +1,4 @@
-import { CabloyApplication } from '../../../types/application/app.js';
+import { VonaApplication } from '../../../types/application/app.js';
 import { TypeModuleConfig } from '../resource/config/type.js';
 import { TypeModuleErrors } from '../resource/error/type.js';
 import { TypeModuleLocales } from '../resource/locale/type.js';
@@ -15,7 +15,7 @@ type TypeModuleBean = {
 export type TypeModuleResource<
   SERVICE,
   MODEL,
-  CONFIG extends (app: CabloyApplication) => object,
+  CONFIG extends (app: VonaApplication) => object,
   ERRORS,
   LOCALES,
   CONSTANTS = object,

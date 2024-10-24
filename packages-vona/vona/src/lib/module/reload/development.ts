@@ -3,10 +3,10 @@ import fse from 'fs-extra';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { ProcessHelper } from '@cabloy/process-helper';
-import { CabloyApplication } from '../../../types/application/app.js';
+import { VonaApplication } from '../../../types/application/app.js';
 import { Cast } from '../../../types/utils/cast.js';
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   let watcherDevelopment: chokidar.FSWatcher | null = null;
 
   // only in development

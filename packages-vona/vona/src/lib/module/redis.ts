@@ -1,6 +1,6 @@
 import Bottleneck from 'bottleneck';
 import Redlock from 'redlock';
-import { CabloyApplication } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
 export class AppLimiter extends BeanSimple {
@@ -32,7 +32,7 @@ export class AppRedlock extends BeanSimple {
   }
 }
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   // limiter
   app.meta.limiter = app.bean._newBean(AppLimiter);
   // redlock

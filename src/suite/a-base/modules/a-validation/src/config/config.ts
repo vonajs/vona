@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigMiddleware } from 'vona';
+import { VonaApplication, IModuleConfigMiddleware } from 'vona';
 
 // middlewares
 const middlewares = {
@@ -8,7 +8,7 @@ const middlewares = {
   } as IModuleConfigMiddleware,
 };
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     middlewares,
   };

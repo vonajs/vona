@@ -1,7 +1,7 @@
-import { CabloyApplication } from '../../../types/index.js';
+import { VonaApplication } from '../../../types/index.js';
 import { VersionReady } from '../version/ready.js';
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   const versionReady = app.bean._newBean(VersionReady);
   // initialize
   versionReady.initialize();

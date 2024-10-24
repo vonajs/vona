@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigQueue } from 'vona';
+import { VonaApplication, IModuleConfigQueue } from 'vona';
 
 // queues
 const queues = {
@@ -8,7 +8,7 @@ const queues = {
   } as IModuleConfigQueue,
 };
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     queues,
   };

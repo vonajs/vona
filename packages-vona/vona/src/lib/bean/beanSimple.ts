@@ -1,7 +1,7 @@
-import type { CabloyApplication, CabloyContext } from '../../types/index.js';
+import type { VonaApplication, CabloyContext } from '../../types/index.js';
 
 export class BeanSimple {
-  protected app: CabloyApplication;
+  protected app: VonaApplication;
   protected ctx: CabloyContext;
 
   protected get bean() {

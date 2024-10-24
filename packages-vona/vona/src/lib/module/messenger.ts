@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { CabloyApplication } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
 interface IMessengerCallbackContext {
@@ -112,7 +112,7 @@ export class AppMessenger extends BeanSimple {
   }
 }
 
-export default function (app: CabloyApplication) {
+export default function (app: VonaApplication) {
   // messenger
   app.meta.messenger = app.bean._newBean(AppMessenger);
 }

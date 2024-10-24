@@ -1,13 +1,13 @@
-import { CabloyApplication } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 import { loadBeanContainer } from '../module/bean/index.js';
 import { ModuleLoader } from '../module/loader.js';
 import { SocketioReady } from '../module/socketio.js';
 import { VersionReady } from '../module/version/ready.js';
 
 export class Bootstrap {
-  app: CabloyApplication;
+  app: VonaApplication;
 
-  constructor(app: CabloyApplication) {
+  constructor(app: VonaApplication) {
     this.app = app;
   }
 

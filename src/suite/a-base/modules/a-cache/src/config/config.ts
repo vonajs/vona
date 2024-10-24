@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigBroadcast } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast } from 'vona';
 
 // broadcasts
 const broadcasts = {
@@ -10,7 +10,7 @@ const broadcasts = {
   } as IModuleConfigBroadcast,
 };
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     broadcasts,
     // db

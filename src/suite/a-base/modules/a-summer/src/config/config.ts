@@ -1,4 +1,4 @@
-import { CabloyApplication, IModuleConfigBroadcast } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast } from 'vona';
 import { IModuleConfigSummerCache } from './types.js';
 
 // broadcasts
@@ -35,7 +35,7 @@ const configAll = {
 
 const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
 
-export const config = (_app: CabloyApplication) => {
+export const config = (_app: VonaApplication) => {
   return {
     broadcasts,
     summer: {

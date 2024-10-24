@@ -1,8 +1,8 @@
-import { CabloyApplication } from 'vona';
+import { VonaApplication } from 'vona';
 import { ExtendSchemaBuilder } from './schemaBuilder.js';
 import { ExtendTableBuilder } from './tableBuilder.js';
 
-export function ExtendKnex(app: CabloyApplication) {
+export function ExtendKnex(app: VonaApplication) {
   if (app.meta.inApp) {
     ExtendSchemaBuilder(app);
     ExtendTableBuilder(app);

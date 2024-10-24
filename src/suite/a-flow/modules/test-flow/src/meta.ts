@@ -8,9 +8,9 @@ import staticResources from './meta/static/resources.js';
 import staticProducts from './meta/static/products.js';
 import staticDicts from './meta/static/dicts.js';
 import flowServices from './meta/flow/services.js';
-import { CabloyApplication } from 'vona';
+import { VonaApplication } from 'vona';
 // meta
-export const meta = (app: CabloyApplication) => {
+export const meta = (app: VonaApplication) => {
   const meta: any = {};
 
   app.bean.util.extend(meta, {
