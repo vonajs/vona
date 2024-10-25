@@ -13,7 +13,7 @@ export class BeanScopeError extends BeanSimple {
     this[BeanModuleScope] = moduleScope;
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     if (!this.__instances[prop]) {
       this.__instances[prop] = this.bean._newBean(BeanScopeErrorImpl, this[BeanModuleScope], prop);
     }

@@ -12,7 +12,7 @@ export class BeanScopeLocale extends BeanSimple {
     this[BeanModuleScope] = moduleScope;
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     if (!this.__instances[prop]) {
       this.__instances[prop] = this.ctx.meta.locale.createScopeLocaleText(this[BeanModuleScope], prop);
     }

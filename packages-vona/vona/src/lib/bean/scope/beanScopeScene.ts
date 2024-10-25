@@ -14,7 +14,7 @@ export class BeanScopeScene extends BeanSimple {
     this[BeanModuleScene] = scene;
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     if (!this.__instances[prop]) {
       const beanFullName = `${this[BeanModuleScope]}.${this[BeanModuleScene]}.${prop}`;
       this.__instances[prop] = (<any>this.bean)._injectBeanInstanceProp(beanFullName);

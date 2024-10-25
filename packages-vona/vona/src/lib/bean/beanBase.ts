@@ -26,7 +26,8 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
     return this.bean.scope(moduleScope);
   }
 
-  // protected __get__(prop) {
-  //   console.log(prop);
-  // }
+  protected __get__(prop: PropertyKey) {
+    if (typeof prop === 'string' && prop.startsWith('$scope')) {
+    }
+  }
 }
