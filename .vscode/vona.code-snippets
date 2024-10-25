@@ -1,0 +1,12 @@
+/**
+ * supported code snippets as follows:
+ *   __init__
+ **/
+{
+  "__init__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "init",
+    "body": ["protected __init__() {", "  $0", "}"],
+    "description": "__init__",
+  },
+}
