@@ -425,6 +425,10 @@ declare module 'vona' {
     'a-base': ScopeModuleABase;
   }
 
+  export interface BeanBase {
+    $scopeBase: ScopeModuleABase;
+  }
+
   export interface IBeanScopeConfig {
     'a-base': ReturnType<typeof config>;
   }

@@ -208,6 +208,10 @@ declare module 'vona' {
     'test-party': ScopeModuleTestParty;
   }
 
+  export interface BeanBase {
+    $scopeTestParty: ScopeModuleTestParty;
+  }
+
   export interface IBeanScopeConfig {
     'test-party': ReturnType<typeof config>;
   }

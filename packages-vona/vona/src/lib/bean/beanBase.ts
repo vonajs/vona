@@ -1,4 +1,4 @@
-import { splitWords } from '@cabloy/last-word';
+import { splitWords } from '@cabloy/word-utils';
 import { BeanBaseSimple } from './beanBaseSimple.js';
 import { IModuleLocaleText } from './resource/locale/type.js';
 import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';

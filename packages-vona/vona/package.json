@@ -41,7 +41,7 @@
     "@cabloy/extend": "workspace:^",
     "@cabloy/koa-static-cache": "^5.1.8",
     "@cabloy/json5": "workspace:^",
-    "@cabloy/last-word": "^1.0.19",
+    "@cabloy/word-utils": "^1.0.2",
     "@cabloy/localeutil": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
