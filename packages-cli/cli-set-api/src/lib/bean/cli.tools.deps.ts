@@ -66,13 +66,13 @@ export class CliToolsDeps extends BeanCliBase {
 
   async _generatePkgFromPkgOriginal(pkgOriginal, pkgFile) {
     const depsOriginal = pkgOriginal.dependencies;
-    // all modules
-    this.modulesMeta.modulesArray.forEach(module => {
-      if (!depsOriginal[module.package.name]) {
-        const version = module.info.node_modules ? '^' + module.package.version : 'workspace:^';
-        depsOriginal[module.package.name] = version;
-      }
-    });
+    // // all modules
+    // this.modulesMeta.modulesArray.forEach(module => {
+    //   if (!depsOriginal[module.package.name]) {
+    //     const version = module.info.node_modules ? '^' + module.package.version : 'workspace:^';
+    //     depsOriginal[module.package.name] = version;
+    //   }
+    // });
     // all globalDependencies of modules
     this.modulesMeta.modulesArray.forEach(module => {
       const deps = module.package.dependencies;

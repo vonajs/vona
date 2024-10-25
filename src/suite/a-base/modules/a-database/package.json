@@ -7,7 +7,11 @@
       "monkey": true
     },
     "fileVersion": 0,
-    "dependencies": {}
+    "dependencies": {},
+    "globalDependencies": {
+      "bignumber.js": true,
+      "knex": true
+    }
   },
   "type": "module",
   "exports": {
