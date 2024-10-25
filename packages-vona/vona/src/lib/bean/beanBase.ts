@@ -1,3 +1,4 @@
+import { splitWords } from '@cabloy/last-word';
 import { BeanBaseSimple } from './beanBaseSimple.js';
 import { IModuleLocaleText } from './resource/locale/type.js';
 import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
@@ -17,7 +18,7 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
   }
 
   protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
-  protected getScope<T>(moduleScope: string): T;
+  // protected getScope<T>(moduleScope: string): T;
   protected getScope(): TScopeModule;
   protected getScope(moduleScope?: string) {
     if (!moduleScope) {
@@ -28,6 +29,11 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
 
   protected __get__(prop: PropertyKey) {
     if (typeof prop === 'string' && prop.startsWith('$scope')) {
+      let moduleName = splitWords(prop.substring('$scope'.length), true, '-');
+      if (!moduleName?.includes('-')) {
+        moduleName = 'a-' + moduleName;
+      }
+      return this.getScope(moduleName as never);
     }
   }
 }
