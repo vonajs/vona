@@ -25,4 +25,8 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
     }
     return this.bean.scope(moduleScope);
   }
+
+  // protected __get__(prop) {
+  //   console.log(prop);
+  // }
 }

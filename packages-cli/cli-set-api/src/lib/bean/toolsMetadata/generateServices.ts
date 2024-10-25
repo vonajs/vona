@@ -14,12 +14,13 @@ export async function generateServices(moduleName: string, modulePath: string) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
     if (parts.length < 1) continue;
+    const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
     const className = 'Service' + parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
     const beanFullName = `${moduleName}.service.${parts.join('.')}`;
     contentExports.push(`export * from '../service/${fileNameJS}';`);
     contentImports.push(`import { ${className} } from '../service/${fileNameJS}';`);
-    if (parts.length === 1) {
+    if (parts.length === 1 && !isIgnore) {
       contentRecords.push(`'${parts[0]}': ${className};`);
     }
     contentRecords2.push(`'${beanFullName}': ${className};`);
@@ -40,4 +41,13 @@ declare module 'vona' {
 /** services: end */
 `;
   return content;
+}
+
+function checkIgnoreOfParts(parts: string[]) {
+  const indexLast = parts.length - 1;
+  if (parts[indexLast].endsWith('_')) {
+    parts[indexLast] = parts[indexLast].substring(0, parts[indexLast].length - 1);
+    return true;
+  }
+  return false;
 }
