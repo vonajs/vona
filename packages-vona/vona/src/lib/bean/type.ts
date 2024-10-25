@@ -1,5 +1,9 @@
 /** bean merge: bean.instance */
-export interface IBeanRecord {}
+
+export interface IBeanRecordGlobal {}
+export interface IBeanRecordGeneral {}
+
+export type IBeanRecord = IBeanRecordGlobal & IBeanRecordGeneral;
 export type TypeBeanRecordKeys = keyof IBeanRecord;
 
 export interface IBeanScopeRecord {}
