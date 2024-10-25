@@ -11,6 +11,8 @@ const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
+export interface BeanContainer extends IBeanRecord {}
+
 export class BeanContainer {
   private app: VonaApplication;
   private ctx: VonaContext;
@@ -25,7 +27,7 @@ export class BeanContainer {
         if (obj[prop]) return obj[prop];
         return obj._getBean(prop as any);
       },
-    }) as BeanContainerLike;
+    });
   }
 
   protected constructor(app: VonaApplication, ctx: VonaContext | null) {
@@ -439,8 +441,6 @@ export class BeanContainer {
     return this.app.meta.util.composeAsync(chains, this.__composeForPropAdapter);
   }
 }
-
-export type BeanContainerLike = IBeanRecord & BeanContainer;
 
 function __checkAopOfDescriptorInfo(descriptorInfo) {
   if (!descriptorInfo) return true;

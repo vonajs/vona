@@ -1,5 +1,5 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../../.metadata/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 import languages from './data/autocomplete-languages.json' with { type: 'json' };
 
 @Controller()

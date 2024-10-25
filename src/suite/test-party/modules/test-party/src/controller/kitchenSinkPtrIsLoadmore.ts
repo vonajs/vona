@@ -1,5 +1,5 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../../.metadata/this.js';
+import { ScopeModule } from '../.metadata/this.js';
 const gTestListMax = 89;
 
 @Controller()
