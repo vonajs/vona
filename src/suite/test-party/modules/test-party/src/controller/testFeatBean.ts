@@ -28,21 +28,21 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, 'magic:simpleaop');
 
     // name
-    this.bean.testCtx.name = 'test-party:regexpaop:simpleaop';
+    this.bean.testCtx.name = 'test-party:simpleaop:regexpaop';
     res = this.bean.testCtx.name;
-    assert.equal(res, 'test-party:regexpaop:simpleaop');
+    assert.equal(res, 'test-party:simpleaop:regexpaop');
 
     res = this.bean.testCtx.actionSync({ a, b });
-    assert.equal(res, `${a + b}:regexpaop:simpleaop`);
+    assert.equal(res, `${a + b}:simpleaop:regexpaop`);
 
     res = await this.bean.testCtx.actionAsync({ a, b });
-    assert.equal(res, `${a + b}:regexpaop:simpleaop`);
+    assert.equal(res, `${a + b}:simpleaop:regexpaop`);
 
     res = await this.bean.testCtx.actionAsync2({ a, b });
-    assert.equal(res, `test-party:regexpaop:simpleaop:${a + b}:regexpaop:simpleaop`);
+    assert.equal(res, `test-party:simpleaop:regexpaop:${a + b}:simpleaop:regexpaop`);
 
     res = await this.bean.testCtx.actionAsync3({ a, b });
-    assert.equal(res, `test-party:regexpaop:simpleaop:${a + b}:regexpaop:simpleaop`);
+    assert.equal(res, `test-party:simpleaop:regexpaop:${a + b}:simpleaop:regexpaop`);
 
     // ctx.bean: class
     assert.equal(this.bean['test-party.test.class'], this.ctx.bean['test-party.test.class']);
