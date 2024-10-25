@@ -7,7 +7,9 @@ import { FlowServiceTest } from '../bean/flow.service.test.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'test-flow.flow.service.startEventTimer': FlowServiceStartEventTimer;
     'test-flow.flow.service.test': FlowServiceTest;
     'test-flow.version.manager': VersionManager;

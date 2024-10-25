@@ -3,7 +3,9 @@ export * from '../bean/queue.submit.js';
 import { QueueSubmit } from '../bean/queue.submit.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'cms-pluginsubmit.queue.submit': QueueSubmit;
   }
 }
@@ -16,7 +18,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'cms-pluginsubmit.service.tools': ServiceTools;
   }
 }

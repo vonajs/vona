@@ -5,8 +5,11 @@ import { BeanSettings } from '../bean/bean.settings.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     settings: BeanSettings;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-settings.version.manager': VersionManager;
   }
 }
@@ -36,7 +39,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-settings.service.settings': ServiceSettings;
   }
 }

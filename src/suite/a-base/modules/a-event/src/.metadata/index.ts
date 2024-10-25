@@ -3,9 +3,11 @@ export * from '../bean/bean.event.js';
 import { BeanEvent } from '../bean/bean.event.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     event: BeanEvent;
   }
+
+  export interface IBeanRecordGeneral {}
 }
 /** beans: end */
 /** scope: begin */

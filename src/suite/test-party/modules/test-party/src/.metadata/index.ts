@@ -55,11 +55,14 @@ import { TestCtx1 } from '../bean/test.ctx1.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
+    testCtx: BeanTestCtx;
+  }
+
+  export interface IBeanRecordGeneral {
     'test-party.aop.atom': AopAtom;
     'test-party.aop.regExp': AopRegExp;
     'test-party.aop.simple': AopSimple;
-    testCtx: BeanTestCtx;
     'test-party.broadcast.test': BroadcastTest;
     'test-party.cli.default.demo': CliDefaultDemo;
     'test-party.event.helloEcho': EventHelloEcho;
@@ -162,7 +165,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'test-party.service.test': ServiceTest;
   }
 }

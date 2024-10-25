@@ -11,8 +11,11 @@ import { StatsDeps } from '../bean/stats.deps.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     stats: BeanStats;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-stats.io.message.stats': IoMessageStats;
     'a-stats.queue.stats': QueueStats;
     'a-stats.stats.deps': StatsDeps;
@@ -41,7 +44,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-stats.service.stats': ServiceStats;
   }
 }

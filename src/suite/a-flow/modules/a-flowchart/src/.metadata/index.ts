@@ -13,7 +13,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-flowchart.service.flow': ServiceFlow;
     'a-flowchart.service.flowDef': ServiceFlowDef;
   }

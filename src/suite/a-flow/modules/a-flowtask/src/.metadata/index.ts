@@ -17,8 +17,11 @@ import { StatsTaskHandlings } from '../bean/stats.taskHandlings.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     flowTask: BeanFlowTask;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-flowtask.flow.node.activityUserTask': FlowNodeActivityUserTask;
     'a-flowtask.flow.node.endEventAtom': FlowNodeEndEventAtom;
     'a-flowtask.flow.node.startEventAtom': FlowNodeStartEventAtom;
@@ -71,7 +74,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-flowtask.service.flow': ServiceFlow;
     'a-flowtask.service.flowTask': ServiceFlowTask;
     'a-flowtask.service.localFlowTask': ServiceLocalFlowTask;

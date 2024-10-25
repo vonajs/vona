@@ -17,10 +17,13 @@ import { StartupRegisterRouters } from '../bean/startup.registerRouters.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     authProvider: BeanAuthProvider;
     authProviderBase: BeanAuthProviderBase;
     authProviderCache: BeanAuthProviderCache;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-auth.broadcast.authProviderChanged': BroadcastAuthProviderChanged;
     'a-auth.startup.cacheAuthProviders': StartupCacheAuthProviders;
     'a-auth.startup.registerPassport': StartupRegisterPassport;
@@ -51,7 +54,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-auth.service.passport': ServicePassport;
   }
 }

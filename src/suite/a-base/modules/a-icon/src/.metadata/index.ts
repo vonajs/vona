@@ -5,8 +5,11 @@ import { BeanIcon } from '../bean/bean.icon.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     icon: BeanIcon;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-icon.version.manager': VersionManager;
   }
 }
@@ -22,7 +25,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-icon.service.icon': ServiceIcon;
   }
 }

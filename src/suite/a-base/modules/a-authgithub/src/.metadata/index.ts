@@ -5,7 +5,9 @@ import { AuthProviderGithub } from '../bean/auth.provider.github.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-authgithub.auth.provider.github': AuthProviderGithub;
     'a-authgithub.version.manager': VersionManager;
   }

@@ -17,9 +17,12 @@ import { SmsProviderTest } from '../bean/sms.provider.test.js';
 import { StartupCacheSmsProviders } from '../bean/startup.cacheSmsProviders.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
-    'a-authsms.auth.provider.sms': AuthProviderSms;
+  export interface IBeanRecordGlobal {
     smsProviderCache: BeanSmsProviderCache;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-authsms.auth.provider.sms': AuthProviderSms;
     'a-authsms.broadcast.smsProviderChanged': BroadcastSmsProviderChanged;
     'a-authsms.captcha.provider.captcha': CaptchaProviderCaptcha;
     'a-authsms.event.accountMigration': EventAccountMigration;
@@ -48,7 +51,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-authsms.service.auth': ServiceAuth;
     'a-authsms.service.captcha': ServiceCaptcha;
     'a-authsms.service.smsProvider': ServiceSmsProvider;

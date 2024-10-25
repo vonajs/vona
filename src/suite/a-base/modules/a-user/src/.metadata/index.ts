@@ -5,7 +5,9 @@ import { StatsUser } from '../bean/stats.user.js';
 import { StatsUserAlert } from '../bean/stats.userAlert.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-user.stats.user': StatsUser;
     'a-user.stats.userAlert': StatsUserAlert;
   }
@@ -26,7 +28,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-user.service.public': ServicePublic;
     'a-user.service.user': ServiceUser;
   }

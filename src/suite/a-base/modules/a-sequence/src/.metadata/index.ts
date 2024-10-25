@@ -7,8 +7,11 @@ import { SequenceSimple } from '../bean/sequence.simple.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     sequence: BeanSequence;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-sequence.sequence.simple': SequenceSimple;
     'a-sequence.version.manager': VersionManager;
   }
@@ -28,7 +31,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-sequence.service.sequence': ServiceSequence;
   }
 }

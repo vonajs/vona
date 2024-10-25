@@ -5,8 +5,11 @@ import { BeanFile } from '../bean/bean.file.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     file: BeanFile;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-file.version.manager': VersionManager;
   }
 }
@@ -36,7 +39,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-file.service.file': ServiceFile;
   }
 }

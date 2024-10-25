@@ -5,8 +5,11 @@ import { BeanCaptcha } from '../bean/bean.captcha.js';
 import { MiddlewareCaptchaVerify } from '../bean/middleware.captchaVerify.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     captcha: BeanCaptcha;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-captcha.middleware.captchaVerify': MiddlewareCaptchaVerify;
   }
 }
@@ -22,7 +25,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-captcha.service.captcha': ServiceCaptcha;
   }
 }

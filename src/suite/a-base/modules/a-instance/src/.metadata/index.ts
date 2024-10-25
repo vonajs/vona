@@ -13,8 +13,11 @@ import { MiddlewareInstance } from '../bean/middleware.instance.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     instance: BeanInstance;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-instance.broadcast.reload': BroadcastReload;
     'a-instance.broadcast.resetCache': BroadcastResetCache;
     'a-instance.middleware.appReady': MiddlewareAppReady;
@@ -44,7 +47,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-instance.service.instance': ServiceInstance;
   }
 }

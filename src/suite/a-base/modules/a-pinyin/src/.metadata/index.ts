@@ -5,8 +5,11 @@ import { BeanPinyin } from '../bean/bean.pinyin.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     pinyin: BeanPinyin;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-pinyin.version.manager': VersionManager;
   }
 }

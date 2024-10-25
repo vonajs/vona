@@ -11,7 +11,9 @@ import { QueueGateway } from '../bean/queue.gateway.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-flowgateway.flow.node.gatewayExclusive': FlowNodeGatewayExclusive;
     'a-flowgateway.flow.node.gatewayInclusive': FlowNodeGatewayInclusive;
     'a-flowgateway.flow.node.gatewayParallel': FlowNodeGatewayParallel;

@@ -21,9 +21,12 @@ import { QueuePushDirect } from '../bean/queue.pushDirect.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     io: BeanIo;
     ioMessageBase: BeanIoMessageBase;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-socketio.broadcast.socketEmit': BroadcastSocketEmit;
     'a-socketio.middleware.io.connection': MiddlewareIoConnection;
     'a-socketio.middleware.io.packet': MiddlewareIoPacket;
@@ -82,7 +85,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-socketio.service.io': ServiceIo;
     'a-socketio.service.ioInner': ServiceIoInner;
     'a-socketio.service.message': ServiceMessage;

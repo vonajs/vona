@@ -11,9 +11,12 @@ import { StatsFlowInitiateds } from '../bean/stats.flowInitiateds.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     flow: BeanFlow;
     flowDef: BeanFlowDef;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-flow.flow.behavior.base': FlowBehaviorBase;
     'a-flow.stats.flowInitiateds': StatsFlowInitiateds;
     'a-flow.version.manager': VersionManager;
@@ -87,7 +90,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-flow.service.flow': ServiceFlow;
     'a-flow.service.flowDef': ServiceFlowDef;
     'a-flow.service.localFlow': ServiceLocalFlow;

@@ -9,9 +9,12 @@ import { StatsMessage } from '../bean/stats.message.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     ioMessageUniformBase: BeanIoMessageUniformBase;
     message: BeanMessage;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-message.stats.message': StatsMessage;
     'a-message.version.manager': VersionManager;
   }
@@ -28,7 +31,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-message.service.message': ServiceMessage;
   }
 }

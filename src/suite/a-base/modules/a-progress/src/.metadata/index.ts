@@ -5,8 +5,11 @@ import { BeanProgress } from '../bean/bean.progress.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     progress: BeanProgress;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-progress.version.manager': VersionManager;
   }
 }
@@ -22,7 +25,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-progress.service.progress': ServiceProgress;
   }
 }

@@ -15,8 +15,11 @@ import { StartupWorkerAlive } from '../bean/startup.workerAlive.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     worker: BeanWorker;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-version.broadcast.columnsClear': BroadcastColumnsClear;
     'a-version.startup.databaseInit': StartupDatabaseInit;
     'a-version.startup.databaseName': StartupDatabaseName;
@@ -49,7 +52,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-version.service.database': ServiceDatabase;
     'a-version.service.version': ServiceVersion;
   }

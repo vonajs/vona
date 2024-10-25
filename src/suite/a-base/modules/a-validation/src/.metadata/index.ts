@@ -7,9 +7,12 @@ import { BeanValidation } from '../bean/bean.validation.js';
 import { MiddlewareValidate } from '../bean/middleware.validate.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     ajv: BeanAjv;
     validation: BeanValidation;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-validation.middleware.validate': MiddlewareValidate;
   }
 }
@@ -25,7 +28,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-validation.service.validation': ServiceValidation;
   }
 }

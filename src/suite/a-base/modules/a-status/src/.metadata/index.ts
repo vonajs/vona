@@ -5,8 +5,11 @@ import { BeanStatus } from '../bean/bean.status.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     status: BeanStatus;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-status.version.manager': VersionManager;
   }
 }
@@ -32,7 +35,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-status.service.status': ServiceStatus;
   }
 }

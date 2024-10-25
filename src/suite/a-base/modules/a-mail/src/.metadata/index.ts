@@ -15,9 +15,12 @@ import { StartupCacheMailScenes } from '../bean/startup.cacheMailScenes.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     mail: BeanMail;
     mailSceneCache: BeanMailSceneCache;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-mail.broadcast.mailSceneChanged': BroadcastMailSceneChanged;
     'a-mail.io.channel.mail': IoChannelMail;
     'a-mail.io.message.mail': IoMessageMail;
@@ -47,7 +50,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-mail.service.scene': ServiceScene;
   }
 }

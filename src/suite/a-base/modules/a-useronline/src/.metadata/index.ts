@@ -5,8 +5,11 @@ import { BeanUserOnline } from '../bean/bean.userOnline.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     userOnline: BeanUserOnline;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-useronline.version.manager': VersionManager;
   }
 }
@@ -40,7 +43,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-useronline.service.userOnline': ServiceUserOnline;
   }
 }

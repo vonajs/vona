@@ -13,9 +13,12 @@ import { StartupRegisterAllWatchers } from '../bean/startup.registerAllWatchers.
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     atomCmsBase: BeanAtomCmsBase;
     cms: BeanCms;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
     'a-cms.queue.render': QueueRender;
     'a-cms.startup.registerAllWatchers': StartupRegisterAllWatchers;
@@ -61,7 +64,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-cms.service.build': ServiceBuild;
     'a-cms.service.render': ServiceRender;
     'a-cms.service.site': ServiceSite;

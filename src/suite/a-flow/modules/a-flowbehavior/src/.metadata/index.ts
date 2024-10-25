@@ -7,7 +7,9 @@ import { QueueOvertime } from '../bean/queue.overtime.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-flowbehavior.flow.behavior.overtime': FlowBehaviorOvertime;
     'a-flowbehavior.queue.overtime': QueueOvertime;
     'a-flowbehavior.version.manager': VersionManager;

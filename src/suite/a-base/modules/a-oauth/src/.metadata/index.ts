@@ -3,7 +3,9 @@ export * from '../bean/version.manager.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-oauth.version.manager': VersionManager;
   }
 }
@@ -16,7 +18,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-oauth.service.sessionStore': ServiceSessionStore;
   }
 }

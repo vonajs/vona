@@ -37,7 +37,9 @@ import { CliToolsIcons } from '../bean/cli.tools.icons.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-clibooster.cli.create.app': CliCreateApp;
     'a-clibooster.cli.create.atom': CliCreateAtom;
     'a-clibooster.cli.create.atomAction': CliCreateAtomAction;
@@ -73,7 +75,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-clibooster.service.tools': ServiceTools;
     'a-clibooster.service.utils': ServiceUtils;
   }

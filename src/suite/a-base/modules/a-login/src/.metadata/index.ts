@@ -9,7 +9,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-login.service.auth': ServiceAuth;
   }
 }

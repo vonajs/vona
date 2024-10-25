@@ -5,8 +5,11 @@ import { BeanDebug } from '../bean/bean.debug.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     debug: BeanDebug;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-debug.version.manager': VersionManager;
   }
 }

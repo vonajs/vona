@@ -5,8 +5,11 @@ import { BeanShare } from '../bean/bean.share.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     share: BeanShare;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-share.version.manager': VersionManager;
   }
 }
@@ -40,7 +43,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-share.service.share': ServiceShare;
   }
 }

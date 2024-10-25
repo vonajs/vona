@@ -9,9 +9,12 @@ import { EventAccountMigration } from '../bean/event.accountMigration.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
-    'a-authopen.auth.provider.open': AuthProviderOpen;
+  export interface IBeanRecordGlobal {
     authOpen: BeanAuthOpen;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-authopen.auth.provider.open': AuthProviderOpen;
     'a-authopen.event.accountMigration': EventAccountMigration;
     'a-authopen.version.manager': VersionManager;
   }
@@ -48,7 +51,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-authopen.service.auth': ServiceAuth;
     'a-authopen.service.authOpen': ServiceAuthOpen;
     'a-authopen.service.token': ServiceToken;

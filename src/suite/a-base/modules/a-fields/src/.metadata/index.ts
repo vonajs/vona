@@ -9,8 +9,11 @@ import { SummerCacheFieldsRightOfUser } from '../bean/summer.cache.fieldsRightOf
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     fields: BeanFields;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-fields.summer.cache.fieldsRightOfAtomClass': SummerCacheFieldsRightOfAtomClass;
     'a-fields.summer.cache.fieldsRightOfUser': SummerCacheFieldsRightOfUser;
     'a-fields.version.manager': VersionManager;

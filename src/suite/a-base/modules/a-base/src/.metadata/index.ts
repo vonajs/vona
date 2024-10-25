@@ -101,8 +101,7 @@ import { SummerCacheRoleWhosOfAtomClassAction } from '../bean/summer.cache.roleW
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
-    'a-base.aop.category': AopCategory;
+  export interface IBeanRecordGlobal {
     atom: BeanAtom;
     atomAction: BeanAtomAction;
     atomBase: BeanAtomBase;
@@ -122,6 +121,10 @@ declare module 'vona' {
     tag: BeanTag;
     user: BeanUser;
     util: BeanUtil;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-base.aop.category': AopCategory;
     'a-base.middleware.auth': MiddlewareAuth;
     'a-base.middleware.authOpen': MiddlewareAuthOpen;
     'a-base.middleware.cors': MiddlewareCors;
@@ -360,7 +363,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-base.service.atom': ServiceAtom;
     'a-base.service.atomAction': ServiceAtomAction;
     'a-base.service.atomClass': ServiceAtomClass;

@@ -11,8 +11,11 @@ import { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     summer: BeanSummer;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-summer.broadcast.memClear': BroadcastMemClear;
     'a-summer.broadcast.memDel': BroadcastMemDel;
     'a-summer.broadcast.memMultiDel': BroadcastMemMultiDel;
@@ -37,7 +40,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-summer.service.cache': ServiceCache;
     'a-summer.service.fetch': ServiceFetch;
     'a-summer.service.mem': ServiceMem;

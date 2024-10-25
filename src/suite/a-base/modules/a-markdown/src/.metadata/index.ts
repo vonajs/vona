@@ -5,8 +5,11 @@ import { BeanMarkdown } from '../bean/bean.markdown.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     markdown: BeanMarkdown;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-markdown.version.manager': VersionManager;
   }
 }

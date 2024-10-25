@@ -17,7 +17,9 @@ import { QueueStartEventTimer } from '../bean/queue.startEventTimer.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
     'a-flownode.flow.edge.sequence': FlowEdgeSequence;
     'a-flownode.flow.node.activityNone': FlowNodeActivityNone;
     'a-flownode.flow.node.activityService': FlowNodeActivityService;

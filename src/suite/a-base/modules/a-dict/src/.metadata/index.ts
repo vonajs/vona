@@ -5,8 +5,11 @@ import { BeanDict } from '../bean/bean.dict.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     dict: BeanDict;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-dict.version.manager': VersionManager;
   }
 }
@@ -39,7 +42,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-dict.service.dict': ServiceDict;
   }
 }

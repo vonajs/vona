@@ -17,11 +17,14 @@ import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
 import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGlobal {
     database: BeanDatabase;
     databaseClient: BeanDatabaseClient;
     model: BeanModel;
     modelBase: BeanModelBase;
+  }
+
+  export interface IBeanRecordGeneral {
     'a-database.database.dialect.mysql': DatabaseDialectMysql;
     'a-database.database.dialect.mysql2': DatabaseDialectMysql2;
     'a-database.database.dialect.pg': DatabaseDialectPg;
@@ -40,7 +43,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-database.service.dbMeta': ServiceDbMeta;
     'a-database.service.transaction': ServiceTransaction;
   }
