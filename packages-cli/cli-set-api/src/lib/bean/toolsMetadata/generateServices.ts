@@ -33,7 +33,7 @@ export interface IModuleService {
 }
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     ${contentRecords2.join('\n')}
   }
 }

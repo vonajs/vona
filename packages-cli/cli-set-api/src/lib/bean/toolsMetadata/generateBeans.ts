@@ -8,7 +8,8 @@ export async function generateBeans(moduleName: string, modulePath: string) {
   files.sort();
   const contentExports: string[] = [];
   const contentImports: string[] = [];
-  const contentRecords: string[] = [];
+  const contentRecordsGlobal: string[] = [];
+  const contentRecordsGeneral: string[] = [];
   for (const file of files) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
@@ -19,7 +20,11 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
     contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
-    contentRecords.push(`'${beanFullName}': ${className};`);
+    if (isBeanGlobal) {
+      contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
+    } else {
+      contentRecordsGeneral.push(`'${beanFullName}': ${className};`);
+    }
   }
   // combine
   const content = `/** beans: begin */
@@ -27,9 +32,13 @@ ${contentExports.join('\n')}
 ${contentImports.join('\n')}
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecord {
-    ${contentRecords.join('\n')}
+  export interface IBeanRecordGlobal {
+    ${contentRecordsGlobal.join('\n')}
   }
+
+  export interface IBeanRecordGeneral {
+    ${contentRecordsGeneral.join('\n')}
+  }  
 }
 /** beans: end */
 `;
