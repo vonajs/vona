@@ -244,7 +244,7 @@ export const routes: IModuleRoute[] = [
   },
   {
     method: 'get',
-    path: 'test/feat/bean/localTest',
+    path: 'test/feat/bean/serviceTest',
     controller: 'testFeatBean',
     middlewares: 'test',
     meta: { auth: { enable: false } },

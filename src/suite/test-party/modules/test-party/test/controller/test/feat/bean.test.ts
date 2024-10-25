@@ -12,13 +12,13 @@ describe('test/controller/test/feat/bean.test.js', () => {
     });
   });
 
-  it('action:bean.local', async () => {
+  it('action:service', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'get',
-      url: mockUrl('test/feat/bean/localTest', false),
+      url: mockUrl('test/feat/bean/serviceTest', false),
     });
   });
 });

@@ -64,20 +64,20 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     this.ctx.success();
   }
 
-  async localTest() {
+  async serviceTest() {
     let res;
 
     // general way
     res = this.bean._getBean(ServiceTest).name;
-    assert.equal(res, 'localTest');
+    assert.equal(res, 'serviceTest');
 
     // this module
     res = this.scope.service.test.name;
-    assert.equal(res, 'localTest');
+    assert.equal(res, 'serviceTest');
 
     // other module
     res = this.bean.scope(__ThisModule__).service.test.name;
-    assert.equal(res, 'localTest');
+    assert.equal(res, 'serviceTest');
 
     // ok
     this.ctx.success();
