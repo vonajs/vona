@@ -1,16 +1,14 @@
 /** beans: begin */
-export * from '../bean/bean.ioMessageUniformBase.js';
+export * from '../bean/bean.ioMessageUniformBase_.js';
 export * from '../bean/bean.message.js';
 export * from '../bean/stats.message.js';
 export * from '../bean/version.manager.js';
-import { BeanIoMessageUniformBase } from '../bean/bean.ioMessageUniformBase.js';
 import { BeanMessage } from '../bean/bean.message.js';
 import { StatsMessage } from '../bean/stats.message.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    ioMessageUniformBase: BeanIoMessageUniformBase;
     message: BeanMessage;
   }
 

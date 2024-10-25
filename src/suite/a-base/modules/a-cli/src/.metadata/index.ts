@@ -1,15 +1,13 @@
 /** beans: begin */
 export * from '../bean/bean.cli.js';
-export * from '../bean/bean.cliBase.js';
+export * from '../bean/bean.cliBase_.js';
 export * from '../bean/version.manager.js';
 import { BeanCli } from '../bean/bean.cli.js';
-import { BeanCliBase } from '../bean/bean.cliBase.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     cli: BeanCli;
-    cliBase: BeanCliBase;
   }
 
   export interface IBeanRecordGeneral {

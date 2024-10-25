@@ -1,6 +1,6 @@
 /** beans: begin */
 export * from '../bean/bean.io.js';
-export * from '../bean/bean.ioMessageBase.js';
+export * from '../bean/bean.ioMessageBase_.js';
 export * from '../bean/broadcast.socketEmit.js';
 export * from '../bean/middleware.io.connection.js';
 export * from '../bean/middleware.io.packet.js';
@@ -10,7 +10,6 @@ export * from '../bean/queue.push.js';
 export * from '../bean/queue.pushDirect.js';
 export * from '../bean/version.manager.js';
 import { BeanIo } from '../bean/bean.io.js';
-import { BeanIoMessageBase } from '../bean/bean.ioMessageBase.js';
 import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
 import { MiddlewareIoConnection } from '../bean/middleware.io.connection.js';
 import { MiddlewareIoPacket } from '../bean/middleware.io.packet.js';
@@ -23,7 +22,6 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     io: BeanIo;
-    ioMessageBase: BeanIoMessageBase;
   }
 
   export interface IBeanRecordGeneral {

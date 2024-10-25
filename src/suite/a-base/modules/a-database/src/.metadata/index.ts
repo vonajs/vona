@@ -2,7 +2,7 @@
 export * from '../bean/bean.database.js';
 export * from '../bean/bean.databaseClient.js';
 export * from '../bean/bean.model.js';
-export * from '../bean/bean.modelBase.js';
+export * from '../bean/bean.modelBase_.js';
 export * from '../bean/database.dialect.mysql.js';
 export * from '../bean/database.dialect.mysql2.js';
 export * from '../bean/database.dialect.pg.js';
@@ -10,7 +10,6 @@ export * from '../bean/virtual.databaseDialect.js';
 import { BeanDatabase } from '../bean/bean.database.js';
 import { BeanDatabaseClient } from '../bean/bean.databaseClient.js';
 import { BeanModel } from '../bean/bean.model.js';
-import { BeanModelBase } from '../bean/bean.modelBase.js';
 import { DatabaseDialectMysql } from '../bean/database.dialect.mysql.js';
 import { DatabaseDialectMysql2 } from '../bean/database.dialect.mysql2.js';
 import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
@@ -21,7 +20,6 @@ declare module 'vona' {
     database: BeanDatabase;
     databaseClient: BeanDatabaseClient;
     model: BeanModel;
-    modelBase: BeanModelBase;
   }
 
   export interface IBeanRecordGeneral {
