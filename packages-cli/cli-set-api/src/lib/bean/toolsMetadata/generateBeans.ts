@@ -14,16 +14,19 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
     if (parts.length < 2) continue;
+    const isIgnore = checkIgnoreOfParts(parts);
     const isBeanGlobal = parts[0] === 'bean';
     const fileNameJS = fileName.replace('.ts', '.js');
     const className = parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
-    contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
-    if (isBeanGlobal) {
-      contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
-    } else {
-      contentRecordsGeneral.push(`'${beanFullName}': ${className};`);
+    if (!isIgnore) {
+      contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
+      if (isBeanGlobal) {
+        contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
+      } else {
+        contentRecordsGeneral.push(`'${beanFullName}': ${className};`);
+      }
     }
   }
   // combine
@@ -43,4 +46,13 @@ declare module 'vona' {
 /** beans: end */
 `;
   return content;
+}
+
+function checkIgnoreOfParts(parts: string[]) {
+  const indexLast = parts.length - 1;
+  if (parts[indexLast].endsWith('_')) {
+    parts[indexLast] = parts[indexLast].substring(0, parts[indexLast].length - 1);
+    return true;
+  }
+  return false;
 }
