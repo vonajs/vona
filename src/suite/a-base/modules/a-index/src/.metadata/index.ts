@@ -28,6 +28,10 @@ declare module 'vona' {
     'a-index': ScopeModuleAIndex;
   }
 
+  export interface BeanBase {
+    $scopeIndex: ScopeModuleAIndex;
+  }
+
   export interface IBeanScopeConfig {
     'a-index': ReturnType<typeof config>;
   }

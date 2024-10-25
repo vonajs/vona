@@ -96,6 +96,10 @@ declare module 'vona' {
     'a-authsms': ScopeModuleAAuthsms;
   }
 
+  export interface BeanBase {
+    $scopeAuthsms: ScopeModuleAAuthsms;
+  }
+
   export interface IBeanScopeConfig {
     'a-authsms': ReturnType<typeof config>;
   }

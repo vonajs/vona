@@ -47,6 +47,10 @@ declare module 'vona' {
     'a-fields': ScopeModuleAFields;
   }
 
+  export interface BeanBase {
+    $scopeFields: ScopeModuleAFields;
+  }
+
   export interface IBeanScopeConfig {
     'a-fields': ReturnType<typeof config>;
   }

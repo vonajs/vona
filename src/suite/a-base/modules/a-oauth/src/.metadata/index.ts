@@ -39,5 +39,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-oauth': ScopeModuleAOauth;
   }
+
+  export interface BeanBase {
+    $scopeOauth: ScopeModuleAOauth;
+  }
 }
 /** scope: end */

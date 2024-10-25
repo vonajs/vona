@@ -21,6 +21,10 @@ declare module 'vona' {
     'a-themebrilliant': ScopeModuleAThemebrilliant;
   }
 
+  export interface BeanBase {
+    $scopeThemebrilliant: ScopeModuleAThemebrilliant;
+  }
+
   export interface IBeanScopeLocale {
     'a-themebrilliant': (typeof locales)[TypeLocaleBase];
   }

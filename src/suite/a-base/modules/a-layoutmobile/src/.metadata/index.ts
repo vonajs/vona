@@ -21,6 +21,10 @@ declare module 'vona' {
     'a-layoutmobile': ScopeModuleALayoutmobile;
   }
 
+  export interface BeanBase {
+    $scopeLayoutmobile: ScopeModuleALayoutmobile;
+  }
+
   export interface IBeanScopeLocale {
     'a-layoutmobile': (typeof locales)[TypeLocaleBase];
   }

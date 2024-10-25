@@ -17,5 +17,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'test-partymonkey': ScopeModuleTestPartymonkey;
   }
+
+  export interface BeanBase {
+    $scopeTestPartymonkey: ScopeModuleTestPartymonkey;
+  }
 }
 /** scope: end */

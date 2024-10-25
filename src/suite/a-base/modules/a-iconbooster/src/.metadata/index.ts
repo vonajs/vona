@@ -33,6 +33,10 @@ declare module 'vona' {
     'a-iconbooster': ScopeModuleAIconbooster;
   }
 
+  export interface BeanBase {
+    $scopeIconbooster: ScopeModuleAIconbooster;
+  }
+
   export interface IBeanScopeLocale {
     'a-iconbooster': (typeof locales)[TypeLocaleBase];
   }

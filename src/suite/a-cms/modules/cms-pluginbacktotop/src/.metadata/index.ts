@@ -16,6 +16,10 @@ declare module 'vona' {
     'cms-pluginbacktotop': ScopeModuleCmsPluginbacktotop;
   }
 
+  export interface BeanBase {
+    $scopeCmsPluginbacktotop: ScopeModuleCmsPluginbacktotop;
+  }
+
   export interface IBeanScopeConfig {
     'cms-pluginbacktotop': ReturnType<typeof config>;
   }

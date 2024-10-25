@@ -74,6 +74,10 @@ declare module 'vona' {
     'a-dashboard': ScopeModuleADashboard;
   }
 
+  export interface BeanBase {
+    $scopeDashboard: ScopeModuleADashboard;
+  }
+
   export interface IBeanScopeLocale {
     'a-dashboard': (typeof locales)[TypeLocaleBase];
   }

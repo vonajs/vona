@@ -27,5 +27,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-debug': ScopeModuleADebug;
   }
+
+  export interface BeanBase {
+    $scopeDebug: ScopeModuleADebug;
+  }
 }
 /** scope: end */

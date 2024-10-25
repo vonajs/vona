@@ -70,6 +70,10 @@ declare module 'vona' {
     'a-dict': ScopeModuleADict;
   }
 
+  export interface BeanBase {
+    $scopeDict: ScopeModuleADict;
+  }
+
   export interface IBeanScopeLocale {
     'a-dict': (typeof locales)[TypeLocaleBase];
   }

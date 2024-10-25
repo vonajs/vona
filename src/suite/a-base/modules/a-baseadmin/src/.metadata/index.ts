@@ -78,6 +78,10 @@ declare module 'vona' {
     'a-baseadmin': ScopeModuleABaseadmin;
   }
 
+  export interface BeanBase {
+    $scopeBaseadmin: ScopeModuleABaseadmin;
+  }
+
   export interface IBeanScopeLocale {
     'a-baseadmin': (typeof locales)[TypeLocaleBase];
   }

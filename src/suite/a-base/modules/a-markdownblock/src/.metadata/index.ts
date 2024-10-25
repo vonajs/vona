@@ -33,6 +33,10 @@ declare module 'vona' {
     'a-markdownblock': ScopeModuleAMarkdownblock;
   }
 
+  export interface BeanBase {
+    $scopeMarkdownblock: ScopeModuleAMarkdownblock;
+  }
+
   export interface IBeanScopeLocale {
     'a-markdownblock': (typeof locales)[TypeLocaleBase];
   }

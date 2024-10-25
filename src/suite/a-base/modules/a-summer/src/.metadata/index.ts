@@ -66,6 +66,10 @@ declare module 'vona' {
     'a-summer': ScopeModuleASummer;
   }
 
+  export interface BeanBase {
+    $scopeSummer: ScopeModuleASummer;
+  }
+
   export interface IBeanScopeConfig {
     'a-summer': ReturnType<typeof config>;
   }

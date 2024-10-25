@@ -49,5 +49,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-sequence': ScopeModuleASequence;
   }
+
+  export interface BeanBase {
+    $scopeSequence: ScopeModuleASequence;
+  }
 }
 /** scope: end */

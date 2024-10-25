@@ -23,5 +23,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-codemirror': ScopeModuleACodemirror;
   }
+
+  export interface BeanBase {
+    $scopeCodemirror: ScopeModuleACodemirror;
+  }
 }
 /** scope: end */

@@ -25,6 +25,10 @@ declare module 'vona' {
     'cms-pluginuser': ScopeModuleCmsPluginuser;
   }
 
+  export interface BeanBase {
+    $scopeCmsPluginuser: ScopeModuleCmsPluginuser;
+  }
+
   export interface IBeanScopeConfig {
     'cms-pluginuser': ReturnType<typeof config>;
   }

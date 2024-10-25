@@ -33,6 +33,10 @@ declare module 'vona' {
     'a-dictarea': ScopeModuleADictarea;
   }
 
+  export interface BeanBase {
+    $scopeDictarea: ScopeModuleADictarea;
+  }
+
   export interface IBeanScopeLocale {
     'a-dictarea': (typeof locales)[TypeLocaleBase];
   }

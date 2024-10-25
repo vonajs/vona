@@ -42,6 +42,10 @@ declare module 'vona' {
     'cms-pluginsubmit': ScopeModuleCmsPluginsubmit;
   }
 
+  export interface BeanBase {
+    $scopeCmsPluginsubmit: ScopeModuleCmsPluginsubmit;
+  }
+
   export interface IBeanScopeConfig {
     'cms-pluginsubmit': ReturnType<typeof config>;
   }

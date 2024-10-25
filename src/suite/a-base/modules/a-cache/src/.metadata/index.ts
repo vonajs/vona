@@ -53,6 +53,10 @@ declare module 'vona' {
     'a-cache': ScopeModuleACache;
   }
 
+  export interface BeanBase {
+    $scopeCache: ScopeModuleACache;
+  }
+
   export interface IBeanScopeConfig {
     'a-cache': ReturnType<typeof config>;
   }

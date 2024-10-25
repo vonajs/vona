@@ -21,6 +21,10 @@ declare module 'vona' {
     'a-themehyacinth': ScopeModuleAThemehyacinth;
   }
 
+  export interface BeanBase {
+    $scopeThemehyacinth: ScopeModuleAThemehyacinth;
+  }
+
   export interface IBeanScopeLocale {
     'a-themehyacinth': (typeof locales)[TypeLocaleBase];
   }

@@ -32,5 +32,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-flowchart': ScopeModuleAFlowchart;
   }
+
+  export interface BeanBase {
+    $scopeFlowchart: ScopeModuleAFlowchart;
+  }
 }
 /** scope: end */

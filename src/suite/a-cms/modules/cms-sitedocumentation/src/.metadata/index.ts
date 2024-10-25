@@ -40,6 +40,10 @@ declare module 'vona' {
     'cms-sitedocumentation': ScopeModuleCmsSitedocumentation;
   }
 
+  export interface BeanBase {
+    $scopeCmsSitedocumentation: ScopeModuleCmsSitedocumentation;
+  }
+
   export interface IBeanScopeConfig {
     'cms-sitedocumentation': ReturnType<typeof config>;
   }

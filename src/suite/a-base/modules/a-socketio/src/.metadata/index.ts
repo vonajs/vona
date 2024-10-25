@@ -114,6 +114,10 @@ declare module 'vona' {
     'a-socketio': ScopeModuleASocketio;
   }
 
+  export interface BeanBase {
+    $scopeSocketio: ScopeModuleASocketio;
+  }
+
   export interface IBeanScopeConfig {
     'a-socketio': ReturnType<typeof config>;
   }

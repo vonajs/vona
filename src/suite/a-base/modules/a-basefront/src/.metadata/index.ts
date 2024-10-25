@@ -21,6 +21,10 @@ declare module 'vona' {
     'a-basefront': ScopeModuleABasefront;
   }
 
+  export interface BeanBase {
+    $scopeBasefront: ScopeModuleABasefront;
+  }
+
   export interface IBeanScopeLocale {
     'a-basefront': (typeof locales)[TypeLocaleBase];
   }

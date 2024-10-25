@@ -53,6 +53,10 @@ declare module 'vona' {
     'a-icon': ScopeModuleAIcon;
   }
 
+  export interface BeanBase {
+    $scopeIcon: ScopeModuleAIcon;
+  }
+
   export interface IBeanScopeLocale {
     'a-icon': (typeof locales)[TypeLocaleBase];
   }

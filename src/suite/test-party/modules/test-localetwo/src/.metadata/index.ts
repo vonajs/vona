@@ -21,6 +21,10 @@ declare module 'vona' {
     'test-localetwo': ScopeModuleTestLocaletwo;
   }
 
+  export interface BeanBase {
+    $scopeTestLocaletwo: ScopeModuleTestLocaletwo;
+  }
+
   export interface IBeanScopeLocale {
     'test-localetwo': (typeof locales)[TypeLocaleBase];
   }

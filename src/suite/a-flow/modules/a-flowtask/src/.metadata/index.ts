@@ -110,6 +110,10 @@ declare module 'vona' {
     'a-flowtask': ScopeModuleAFlowtask;
   }
 
+  export interface BeanBase {
+    $scopeFlowtask: ScopeModuleAFlowtask;
+  }
+
   export interface IBeanScopeLocale {
     'a-flowtask': (typeof locales)[TypeLocaleBase];
   }

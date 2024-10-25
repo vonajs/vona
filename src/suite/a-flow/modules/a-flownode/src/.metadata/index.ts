@@ -58,6 +58,10 @@ declare module 'vona' {
     'a-flownode': ScopeModuleAFlownode;
   }
 
+  export interface BeanBase {
+    $scopeFlownode: ScopeModuleAFlownode;
+  }
+
   export interface IBeanScopeConfig {
     'a-flownode': ReturnType<typeof config>;
   }

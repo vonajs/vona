@@ -33,6 +33,10 @@ declare module 'vona' {
     'a-layoutpc': ScopeModuleALayoutpc;
   }
 
+  export interface BeanBase {
+    $scopeLayoutpc: ScopeModuleALayoutpc;
+  }
+
   export interface IBeanScopeLocale {
     'a-layoutpc': (typeof locales)[TypeLocaleBase];
   }

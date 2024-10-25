@@ -72,6 +72,10 @@ declare module 'vona' {
     'a-cli': ScopeModuleACli;
   }
 
+  export interface BeanBase {
+    $scopeCli: ScopeModuleACli;
+  }
+
   export interface IBeanScopeConfig {
     'a-cli': ReturnType<typeof config>;
   }

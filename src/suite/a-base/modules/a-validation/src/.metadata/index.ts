@@ -71,6 +71,10 @@ declare module 'vona' {
     'a-validation': ScopeModuleAValidation;
   }
 
+  export interface BeanBase {
+    $scopeValidation: ScopeModuleAValidation;
+  }
+
   export interface IBeanScopeConfig {
     'a-validation': ReturnType<typeof config>;
   }

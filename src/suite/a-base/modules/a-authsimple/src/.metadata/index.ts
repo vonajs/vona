@@ -88,6 +88,10 @@ declare module 'vona' {
     'a-authsimple': ScopeModuleAAuthsimple;
   }
 
+  export interface BeanBase {
+    $scopeAuthsimple: ScopeModuleAAuthsimple;
+  }
+
   export interface IBeanScopeConfig {
     'a-authsimple': ReturnType<typeof config>;
   }

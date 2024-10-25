@@ -40,6 +40,10 @@ declare module 'vona' {
     'a-captchasimple': ScopeModuleACaptchasimple;
   }
 
+  export interface BeanBase {
+    $scopeCaptchasimple: ScopeModuleACaptchasimple;
+  }
+
   export interface IBeanScopeLocale {
     'a-captchasimple': (typeof locales)[TypeLocaleBase];
   }

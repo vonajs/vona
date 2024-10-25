@@ -53,5 +53,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-status': ScopeModuleAStatus;
   }
+
+  export interface BeanBase {
+    $scopeStatus: ScopeModuleAStatus;
+  }
 }
 /** scope: end */

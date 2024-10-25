@@ -54,6 +54,10 @@ declare module 'vona' {
     'a-baselayout': ScopeModuleABaselayout;
   }
 
+  export interface BeanBase {
+    $scopeBaselayout: ScopeModuleABaselayout;
+  }
+
   export interface IBeanScopeLocale {
     'a-baselayout': (typeof locales)[TypeLocaleBase];
   }

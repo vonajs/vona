@@ -25,6 +25,10 @@ declare module 'vona' {
     'cms-themecommunity': ScopeModuleCmsThemecommunity;
   }
 
+  export interface BeanBase {
+    $scopeCmsThemecommunity: ScopeModuleCmsThemecommunity;
+  }
+
   export interface IBeanScopeConfig {
     'cms-themecommunity': ReturnType<typeof config>;
   }

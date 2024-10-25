@@ -57,6 +57,10 @@ declare module 'vona' {
     'a-user': ScopeModuleAUser;
   }
 
+  export interface BeanBase {
+    $scopeUser: ScopeModuleAUser;
+  }
+
   export interface IBeanScopeLocale {
     'a-user': (typeof locales)[TypeLocaleBase];
   }

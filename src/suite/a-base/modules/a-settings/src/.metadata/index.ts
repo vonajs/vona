@@ -78,6 +78,10 @@ declare module 'vona' {
     'a-settings': ScopeModuleASettings;
   }
 
+  export interface BeanBase {
+    $scopeSettings: ScopeModuleASettings;
+  }
+
   export interface IBeanScopeLocale {
     'a-settings': (typeof locales)[TypeLocaleBase];
   }

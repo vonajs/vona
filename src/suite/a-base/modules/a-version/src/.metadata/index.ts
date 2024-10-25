@@ -96,6 +96,10 @@ declare module 'vona' {
     'a-version': ScopeModuleAVersion;
   }
 
+  export interface BeanBase {
+    $scopeVersion: ScopeModuleAVersion;
+  }
+
   export interface IBeanScopeConfig {
     'a-version': ReturnType<typeof config>;
   }

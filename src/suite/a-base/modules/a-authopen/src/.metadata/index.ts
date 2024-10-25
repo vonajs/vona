@@ -85,6 +85,10 @@ declare module 'vona' {
     'a-authopen': ScopeModuleAAuthopen;
   }
 
+  export interface BeanBase {
+    $scopeAuthopen: ScopeModuleAAuthopen;
+  }
+
   export interface IBeanScopeLocale {
     'a-authopen': (typeof locales)[TypeLocaleBase];
   }

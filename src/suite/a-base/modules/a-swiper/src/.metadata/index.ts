@@ -23,5 +23,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-swiper': ScopeModuleASwiper;
   }
+
+  export interface BeanBase {
+    $scopeSwiper: ScopeModuleASwiper;
+  }
 }
 /** scope: end */

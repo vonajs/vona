@@ -61,5 +61,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-share': ScopeModuleAShare;
   }
+
+  export interface BeanBase {
+    $scopeShare: ScopeModuleAShare;
+  }
 }
 /** scope: end */

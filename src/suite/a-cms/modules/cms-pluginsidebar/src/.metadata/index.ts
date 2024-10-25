@@ -21,6 +21,10 @@ declare module 'vona' {
     'cms-pluginsidebar': ScopeModuleCmsPluginsidebar;
   }
 
+  export interface BeanBase {
+    $scopeCmsPluginsidebar: ScopeModuleCmsPluginsidebar;
+  }
+
   export interface IBeanScopeLocale {
     'cms-pluginsidebar': (typeof locales)[TypeLocaleBase];
   }

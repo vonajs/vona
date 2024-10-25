@@ -63,6 +63,10 @@ declare module 'vona' {
     'a-message': ScopeModuleAMessage;
   }
 
+  export interface BeanBase {
+    $scopeMessage: ScopeModuleAMessage;
+  }
+
   export interface IBeanScopeConfig {
     'a-message': ReturnType<typeof config>;
   }

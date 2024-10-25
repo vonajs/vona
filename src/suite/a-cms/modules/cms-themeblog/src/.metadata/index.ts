@@ -25,6 +25,10 @@ declare module 'vona' {
     'cms-themeblog': ScopeModuleCmsThemeblog;
   }
 
+  export interface BeanBase {
+    $scopeCmsThemeblog: ScopeModuleCmsThemeblog;
+  }
+
   export interface IBeanScopeConfig {
     'cms-themeblog': ReturnType<typeof config>;
   }

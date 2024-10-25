@@ -16,6 +16,10 @@ declare module 'vona' {
     'cms-plugintrack': ScopeModuleCmsPlugintrack;
   }
 
+  export interface BeanBase {
+    $scopeCmsPlugintrack: ScopeModuleCmsPlugintrack;
+  }
+
   export interface IBeanScopeConfig {
     'cms-plugintrack': ReturnType<typeof config>;
   }

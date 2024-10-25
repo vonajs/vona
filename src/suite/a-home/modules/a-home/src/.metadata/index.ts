@@ -39,5 +39,9 @@ declare module 'vona' {
   export interface IBeanScopeRecord {
     'a-home': ScopeModuleAHome;
   }
+
+  export interface BeanBase {
+    $scopeHome: ScopeModuleAHome;
+  }
 }
 /** scope: end */

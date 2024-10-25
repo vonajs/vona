@@ -33,6 +33,10 @@ declare module 'vona' {
     'a-dictbooster': ScopeModuleADictbooster;
   }
 
+  export interface BeanBase {
+    $scopeDictbooster: ScopeModuleADictbooster;
+  }
+
   export interface IBeanScopeLocale {
     'a-dictbooster': (typeof locales)[TypeLocaleBase];
   }
