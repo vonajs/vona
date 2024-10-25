@@ -71,12 +71,18 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     res = this.bean._getBean(ServiceTest).name;
     assert.equal(res, 'serviceTest');
 
+    res = this.bean._getBean('test-party.service.test').name;
+    assert.equal(res, 'serviceTest');
+
     // this module
     res = this.scope.service.test.name;
     assert.equal(res, 'serviceTest');
 
     // other module
     res = this.bean.scope(__ThisModule__).service.test.name;
+    assert.equal(res, 'serviceTest');
+
+    res = this.$scopeTestParty.service.test.name;
     assert.equal(res, 'serviceTest');
 
     // ok
