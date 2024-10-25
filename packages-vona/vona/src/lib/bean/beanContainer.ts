@@ -2,7 +2,7 @@ import { VonaApplication, VonaContext } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
-import { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
+import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';
@@ -11,7 +11,7 @@ const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
-export interface BeanContainer extends IBeanRecord {}
+export interface BeanContainer extends IBeanRecordGlobal {}
 
 export class BeanContainer {
   private app: VonaApplication;
