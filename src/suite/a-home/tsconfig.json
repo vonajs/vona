@@ -1,10 +1,7 @@
 {
   "extends": "../../../tsconfig.base.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist"
-  },
-  "include": ["src/**/*"],
+  "compilerOptions": {},
+  "exclude": ["modules"],
   "references": [
     {
       "path": "modules/a-home/tsconfig.json"

@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockInfo, assert } from 'egg-born-mock';
 
 describe('[your tests start from here]', () => {
   it('[atom]', async () => {

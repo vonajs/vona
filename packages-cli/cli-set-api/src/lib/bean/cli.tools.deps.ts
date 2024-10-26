@@ -42,16 +42,14 @@ export class CliToolsDeps extends BeanCliBase {
   async _generateTypeFile(projectPath: string, force: boolean) {
     const typeFile = path.join(projectPath, 'src/backend/typing/modules.d.ts');
     let content = '';
-    // all suites
-    for (const key in this.modulesMeta.suites) {
-      const suite = this.modulesMeta.suites[key];
-      content += `import '${suite.package.name}';\n`;
-    }
+    // // all suites
+    // for (const key in this.modulesMeta.suites) {
+    //   const suite = this.modulesMeta.suites[key];
+    //   content += `import '${suite.package.name}';\n`;
+    // }
     // all modules
     this.modulesMeta.modulesArray.forEach(module => {
-      if (!module.suite) {
-        content += `import '${module.package.name}';\n`;
-      }
+      content += `import '${module.package.name}';\n`;
     });
     await fse.writeFile(typeFile, content);
     // all modules: type file
