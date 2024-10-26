@@ -1,5 +1,5 @@
 import { Service, BeanBase } from 'vona';
-import { Knex } from 'vona-module-a-database';
+import { Knex } from 'knex';
 
 @Service()
 export class ServiceProcedure extends BeanBase {

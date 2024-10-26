@@ -1,4 +1,5 @@
-import { IModelSelectParamsJoin, Knex } from 'vona-module-a-database';
+import { Knex } from 'knex';
+import { IModelSelectParamsJoin } from 'vona-module-a-database';
 import { LocalProcedureAtomRightCheckRightAction } from './local.procedure_atomRight_checkRightAction.js';
 
 export class LocalProcedureAtomRightCheckRightActionBulk extends LocalProcedureAtomRightCheckRightAction {

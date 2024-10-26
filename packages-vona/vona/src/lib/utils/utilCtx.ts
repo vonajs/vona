@@ -143,7 +143,7 @@ export class CtxUtil extends BeanSimple {
         };
       }
     } else {
-      ctxParent = ctx;
+      ctxParent = ctx as unknown as PowerPartial<VonaContext>;
     }
     return await ctx.app.meta.util.executeBean({
       locale: locale === undefined ? ctx.locale : locale,

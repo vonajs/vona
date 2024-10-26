@@ -17,8 +17,9 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const isIgnore = checkIgnoreOfParts(parts);
     const isBeanGlobal = parts[0] === 'bean';
     const fileNameJS = fileName.replace('.ts', '.js');
-    const className = parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
+    let className = parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
+    if (className === 'BeanBase') className = 'BeanBase2';
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
     contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
     if (isBeanGlobal && !isIgnore) {

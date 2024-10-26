@@ -1,4 +1,5 @@
-import { IModelSelectParamsJoin, Knex } from 'vona-module-a-database';
+import { Knex } from 'knex';
+import { IModelSelectParamsJoin } from 'vona-module-a-database';
 import { LocalProcedureAtomSelectAtoms0 } from './local.procedure_atom_selectAtoms_0.js';
 import { SelectOptionsProSafe } from '../../types.js';
 

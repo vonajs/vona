@@ -1,4 +1,5 @@
-import { IModelSelectParamsJoin, Knex } from 'vona-module-a-database';
+import { IModelSelectParamsJoin } from 'vona-module-a-database';
+import { Knex } from 'knex';
 import { AtomReadQueryParams } from '../../types.js';
 import { LocalProcedureAtomSelectAtomsFormal } from './local.procedure_atom_selectAtoms_formal.js';
 
