@@ -1,6 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
-import { BigNumber } from 'vona-module-a-database';
+import { BigNumber } from 'bignumber.js';
 
 @Bean({ scene: 'stats' })
 export class StatsMessage extends BeanBase<ScopeModule> {

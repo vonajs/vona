@@ -1,4 +1,4 @@
-import { BigNumber } from 'vona-module-a-database';
+import { BigNumber } from 'bignumber.js';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 

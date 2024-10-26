@@ -1,6 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
-import { BigNumber } from 'vona-module-a-database';
+import { BigNumber } from 'bignumber.js';
 
 import fse from 'fs-extra';
 
