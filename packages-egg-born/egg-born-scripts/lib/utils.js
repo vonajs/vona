@@ -142,71 +142,6 @@ const utils = {
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
   },
-  async prepareProjectTypes({ suites, modules }) {
-    const projectPath = this.getProjectDir();
-    // suites
-    const imports = [];
-    for (const key in suites) {
-      const suite = suites[key];
-      imports.push(`import '${suite.info.fullName}';`);
-    }
-    // modules
-    for (const key in modules) {
-      const module = modules[key];
-      if (!module.suite) {
-        imports.push(`import '${module.info.fullName}';`);
-      }
-    }
-    // types.d.mts
-    const fileTypes = path.join(projectPath, 'src/backend/config/types.d.mts');
-    const contentNew = `${imports.join('\n')}\n`;
-    if (fse.existsSync(fileTypes)) {
-      const contentOld = (await fse.readFile(fileTypes)).toString();
-      if (contentNew === contentOld) return;
-    }
-    await fse.outputFile(fileTypes, contentNew);
-  },
-  async prepareProjectTsConfig({ suites, modules, env }) {
-    const projectPath = this.getProjectDir();
-    const mode = this.getProjectMode();
-    const fileTemplate = path.resolve(__dirname, `../template/_tsconfig_${mode}.json`);
-    const fileConfig = path.join(projectPath, 'tsconfig.json');
-    // content
-    let contentOld;
-    const exists = fse.existsSync(fileConfig);
-    if (exists) {
-      contentOld = (await fse.readFile(fileConfig)).toString();
-    } else {
-      contentOld = (await fse.readFile(fileTemplate)).toString();
-    }
-    const content = JSON.parse(contentOld);
-    const referencesOld = content.references;
-    // remove old
-    const referencesNew = referencesOld.filter(
-      item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1),
-    );
-    // append new
-    if (!['unittest', 'local'].includes(env)) {
-      // suites
-      for (const key in suites) {
-        const suite = suites[key];
-        if (!suite.info.vendor) {
-          referencesNew.push({ path: `src/suite/${suite.info.originalName}` });
-        }
-      }
-      // modules
-      for (const key in modules) {
-        const module = modules[key];
-        if (!module.suite && !module.info.vendor) {
-          referencesNew.push({ path: `src/module/${module.info.originalName}/tsconfig.json` });
-        }
-      }
-    }
-    //
-    if (exists && JSON.stringify(referencesNew, null, 2) === JSON.stringify(referencesOld, null, 2)) return;
-    const contentNew = { ...content, references: referencesNew };
-    await fse.outputFile(fileConfig, JSON.stringify(contentNew, null, 2));
-  },
   async prepareProjectAll({ env }) {
     const projectPath = this.getProjectDir();
     // glob
@@ -217,7 +152,6 @@ const utils = {
       disabledSuites: undefined,
       log: false,
     });
-    await this.prepareProjectTypes({ suites, modules });
     await this.prepareProjectTsConfig({ suites, modules, env });
     await this.tsc();
   },

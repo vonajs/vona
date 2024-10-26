@@ -1,4 +1,5 @@
+export type MetaMode = 'local' | 'prod' | 'unittest';
 export interface VonaConfigMeta {
   flavor: 'default' | string;
-  mode: 'local' | 'prod' | 'unittest';
+  mode: MetaMode;
 }

@@ -1,10 +1,13 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import { VonaConfigMetaMode } from 'vona-shared';
+import eggBornUtils from 'egg-born-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     force: boolean;
+    mode: VonaConfigMetaMode;
   }
 }
 
@@ -15,11 +18,12 @@ export class CliToolsDeps extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     const force = argv.force;
+    const mode = argv.mode || 'local';
     // generate
-    await this._generate(projectPath, force);
+    await this._generate(projectPath, mode, force);
   }
 
-  async _generate(projectPath: string, force: boolean) {
+  async _generate(projectPath: string, mode: VonaConfigMetaMode, force: boolean) {
     const pkgFile = path.join(projectPath, 'package.json');
     const pkgOriginalFile = path.join(projectPath, 'package.original.json');
     // check original
@@ -35,11 +39,66 @@ export class CliToolsDeps extends BeanCliBase {
     }
     // generate pkg from pkgOriginal
     await this._generatePkgFromPkgOriginal(pkgOriginal, pkgFile);
-    // generate type file
-    await this._generateTypeFile(projectPath, force);
+    // generate type modules file
+    await this._generateTypeModulesFile(projectPath, force);
+    // generate type project file
+    await this._generateTypeProjectFile(projectPath, mode);
   }
 
-  async _generateTypeFile(projectPath: string, force: boolean) {
+  _getProjectMode(projectPath: string) {
+    const vonaPath = this._getVonaPath(projectPath);
+    return vonaPath.indexOf('packages-vona') > -1 ? 'source' : 'project';
+  }
+
+  _getVonaPath(projectPath: string) {
+    return eggBornUtils.tools._getVonaPath(projectPath);
+  }
+
+  _resolveTemplatePath(file: string) {
+    return new URL(path.join('../../../templates', file), import.meta.url);
+  }
+
+  async _generateTypeProjectFile(projectPath: string, mode: VonaConfigMetaMode) {
+    const projectMode = this._getProjectMode(projectPath);
+    const fileTemplate = this._resolveTemplatePath(`_tsconfig_${projectMode}.json`);
+    const fileConfig = path.join(projectPath, 'tsconfig.json');
+    // content
+    let contentOld;
+    const exists = fse.existsSync(fileConfig);
+    if (exists) {
+      contentOld = (await fse.readFile(fileConfig)).toString();
+    } else {
+      contentOld = (await fse.readFile(fileTemplate)).toString();
+    }
+    const content = JSON.parse(contentOld);
+    const referencesOld = content.references;
+    // remove old
+    const referencesNew = referencesOld.filter(
+      item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1),
+    );
+    // append new for prod build
+    if (mode === 'prod') {
+      // suites
+      for (const key in this.modulesMeta.suites) {
+        const suite = this.modulesMeta.suites[key];
+        referencesNew.push({ path: `src/suite${suite.info.vendor ? '-vendor' : ''}/${suite.info.originalName}` });
+      }
+      // modules
+      this.modulesMeta.modulesArray.forEach(module => {
+        if (!module.suite) {
+          referencesNew.push({
+            path: `src/module${module.info.vendor ? '-vendor' : ''}/${module.info.originalName}`,
+          });
+        }
+      });
+    }
+    //
+    if (exists && JSON.stringify(referencesNew, null, 2) === JSON.stringify(referencesOld, null, 2)) return;
+    const contentNew = { ...content, references: referencesNew };
+    await fse.outputFile(fileConfig, JSON.stringify(contentNew, null, 2));
+  }
+
+  async _generateTypeModulesFile(projectPath: string, force: boolean) {
     const typeFile = path.join(projectPath, 'src/backend/typing/modules.d.ts');
     let content = '';
     // // all suites
