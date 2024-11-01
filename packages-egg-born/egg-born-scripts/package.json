@@ -21,17 +21,18 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-scripts#readme",
   "dependencies": {
-    "@cabloy/dotenv": "workspace:^",
-    "@cabloy/ensure-array": "workspace:^",
-    "@cabloy/extend": "workspace:^",
-    "@cabloy/module-glob": "workspace:^",
-    "@cabloy/process-helper": "workspace:^",
+    "@cabloy/dotenv": "^1.0.5",
+    "@cabloy/ensure-array": "^1.0.4",
+    "@cabloy/extend": "^3.0.8",
+    "@cabloy/module-glob": "^5.1.4",
+    "@cabloy/process-helper": "^1.0.8",
     "@zhennann/egg-bin": "^7.0.1",
     "@zhennann/egg-scripts": "^4.0.2",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
-    "egg-born-backend": "workspace:^",
+    "egg-born-backend": "^10.0.3",
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^10.1.0"
-  }
+  },
+  "gitHead": "9427fa560976efa36e996356b9918b5bd673d29e"
 }

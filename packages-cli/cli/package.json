@@ -37,7 +37,8 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/cli": "workspace:^",
-    "vona-cli-set-api": "workspace:^"
-  }
+    "@cabloy/cli": "^2.0.5",
+    "vona-cli-set-api": "^1.0.4"
+  },
+  "gitHead": "9427fa560976efa36e996356b9918b5bd673d29e"
 }

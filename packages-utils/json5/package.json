@@ -33,5 +33,6 @@
   "author": "zhennann",
   "dependencies": {
     "json5": "^2.1.1"
-  }
+  },
+  "gitHead": "9427fa560976efa36e996356b9918b5bd673d29e"
 }

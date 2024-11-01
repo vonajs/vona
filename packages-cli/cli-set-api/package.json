@@ -37,7 +37,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/cli": "workspace:^",
+    "@cabloy/cli": "^2.0.5",
     "@cabloy/word-utils": "^1.0.2",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.1",
@@ -45,7 +45,7 @@
     "gogocode": "^1.0.53",
     "rimraf": "^5.0.5",
     "urllib": "^3.24.0",
-    "vona-shared": "workspace:^"
+    "vona-shared": "^1.0.3"
   },
-  "gitHead": "544f25da60609ebc63c14f92057dedb289ba5946"
+  "gitHead": "9427fa560976efa36e996356b9918b5bd673d29e"
 }

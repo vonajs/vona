@@ -9,5 +9,7 @@
   "keywords": [
     "vona"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
 }

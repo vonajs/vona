@@ -32,7 +32,8 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/module-info": "workspace:^",
+    "@cabloy/module-info": "^1.1.4",
     "stack-utils": "^2.0.6"
-  }
+  },
+  "gitHead": "9427fa560976efa36e996356b9918b5bd673d29e"
 }
