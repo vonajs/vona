@@ -36,8 +36,6 @@ class BackendDevCommand extends DevCommand {
   }
 
   async run(context) {
-    await utils.prepareProjectAll({ env: 'local' });
-
     if (!context.argv.framework) {
       context.argv.framework = utils.getModulePath('egg-born-backend');
     }
@@ -45,7 +43,7 @@ class BackendDevCommand extends DevCommand {
     if (!context.env.NODE_OPTIONS) {
       context.env.NODE_OPTIONS = '';
     }
-    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.env.NODE_OPTIONS += ' --no-warnings --loader=ts-node/esm --conditions=development';
     context.argv.tscompiler = undefined;
     context.argv.eggTsHelper = undefined;
     context.argv.tsconfigPaths = undefined;

@@ -8,8 +8,6 @@ class BackendCovCommand extends CovCommand {
   }
 
   async run(context) {
-    await utils.prepareProjectAll({ env: 'unittest' });
-
     context.argv.timeout = 0;
     context.argv.exit = true;
     context.argv.extension = ['ts'];
@@ -17,7 +15,7 @@ class BackendCovCommand extends CovCommand {
     if (!context.env.NODE_OPTIONS) {
       context.env.NODE_OPTIONS = '';
     }
-    context.env.NODE_OPTIONS += ` --no-warnings --loader=ts-node/esm --conditions=development`;
+    context.env.NODE_OPTIONS += ' --no-warnings --loader=ts-node/esm --conditions=development';
     context.argv.tscompiler = undefined;
     context.argv.eggTsHelper = undefined;
     context.argv.tsconfigPaths = undefined;

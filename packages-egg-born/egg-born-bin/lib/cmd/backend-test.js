@@ -8,8 +8,6 @@ class BackendTestCommand extends TestCommand {
   }
 
   async run(context) {
-    await utils.prepareProjectAll({ env: 'unittest' });
-
     context.argv.timeout = 0;
     context.argv.exit = true;
     context.argv.extension = ['ts'];
