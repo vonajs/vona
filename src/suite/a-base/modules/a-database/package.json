@@ -2,6 +2,7 @@
   "name": "vona-module-a-database",
   "version": "5.0.1",
   "title": "a-database",
+  "private": true,
   "vonaModule": {
     "capabilities": {
       "monkey": true

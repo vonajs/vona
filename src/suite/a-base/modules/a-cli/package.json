@@ -2,6 +2,7 @@
   "name": "vona-module-a-cli",
   "version": "5.0.1",
   "title": "a-cli",
+  "private": true,
   "vonaModule": {
     "fileVersion": 0,
     "dependencies": {

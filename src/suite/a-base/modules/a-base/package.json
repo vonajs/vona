@@ -2,6 +2,7 @@
   "name": "vona-module-a-base",
   "version": "5.0.1",
   "title": "Base",
+  "private": true,
   "vonaModule": {
     "fileVersion": 30,
     "dependencies": {
