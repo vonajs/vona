@@ -561,7 +561,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   async _outputFileContent({ destFile, fileContent }: any) {
     if (Buffer.isBuffer(fileContent)) {
       // buffer
-      await fse.outputFile(destFile, fileContent);
+      await fse.outputFile(destFile, fileContent.toString());
     } else {
       // stream
       const writeStream = fs.createWriteStream(destFile);

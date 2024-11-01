@@ -11,9 +11,429 @@ importers:
 
   .:
     dependencies:
+      bignumber.js:
+        specifier: ^9.1.2
+        version: 9.1.2
+      knex:
+        specifier: ^3.1.0
+        version: 3.1.0(mysql2@3.11.3)(pg@8.13.1)
       vona:
         specifier: workspace:^
         version: link:packages-vona/vona
+      vona-module-a-app:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-app
+      vona-module-a-appbooster:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-appbooster
+      vona-module-a-auth:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-auth
+      vona-module-a-authgithub:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-authgithub
+      vona-module-a-authopen:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-authopen
+      vona-module-a-authsimple:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-authsimple
+      vona-module-a-authsms:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-authsms
+      vona-module-a-b:
+        specifier: workspace:^
+        version: link:src/module/a-b
+      vona-module-a-b11:
+        specifier: workspace:^
+        version: link:src/suite/a-b1/modules/a-b11
+      vona-module-a-b4:
+        specifier: workspace:^
+        version: link:src/suite/a-b/modules/a-b4
+      vona-module-a-b5:
+        specifier: workspace:^
+        version: link:src/suite/a-b/modules/a-b5
+      vona-module-a-base:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-base
+      vona-module-a-baseadmin:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-baseadmin
+      vona-module-a-basefront:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-basefront
+      vona-module-a-baselayout:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-baselayout
+      vona-module-a-cache:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-cache
+      vona-module-a-captcha:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-captcha
+      vona-module-a-captchasimple:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-captchasimple
+      vona-module-a-cli:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-cli
+      vona-module-a-clibooster:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-clibooster
+      vona-module-a-cms:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/a-cms
+      vona-module-a-codemirror:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-codemirror
+      vona-module-a-core:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-core/modules/a-core
+      vona-module-a-dashboard:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-dashboard
+      vona-module-a-dashboardbooster:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-dashboardbooster
+      vona-module-a-database:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-database
+      vona-module-a-debug:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-debug
+      vona-module-a-detail:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-detail
+      vona-module-a-dict:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-dict
+      vona-module-a-dictarea:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-dictarea
+      vona-module-a-dictbooster:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-dictbooster
+      vona-module-a-dingtalk:
+        specifier: workspace:^
+        version: link:src/suite/a-dingtalk/modules/a-dingtalk
+      vona-module-a-event:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-event
+      vona-module-a-fields:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-fields
+      vona-module-a-file:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-file
+      vona-module-a-flow:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/a-flow
+      vona-module-a-flowbehavior:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/a-flowbehavior
+      vona-module-a-flowchart:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/a-flowchart
+      vona-module-a-flowgateway:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/a-flowgateway
+      vona-module-a-flownode:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/a-flownode
+      vona-module-a-flowtask:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/a-flowtask
+      vona-module-a-home:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/a-home
+      vona-module-a-icon:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-icon
+      vona-module-a-iconbooster:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-iconbooster
+      vona-module-a-index:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-index
+      vona-module-a-instance:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-instance
+      vona-module-a-layoutmobile:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-layoutmobile
+      vona-module-a-layoutpc:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-layoutpc
+      vona-module-a-login:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-login
+      vona-module-a-mail:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-mail
+      vona-module-a-markdown:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-markdown
+      vona-module-a-markdownblock:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-markdownblock
+      vona-module-a-message:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-message
+      vona-module-a-oauth:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-oauth
+      vona-module-a-paypal:
+        specifier: workspace:^
+        version: link:src/suite/a-paypal/modules/a-paypal
+      vona-module-a-pinyin:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-pinyin
+      vona-module-a-progress:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-progress
+      vona-module-a-sequence:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-sequence
+      vona-module-a-settings:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-settings
+      vona-module-a-share:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-share
+      vona-module-a-socketio:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-socketio
+      vona-module-a-stats:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-stats
+      vona-module-a-status:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-status
+      vona-module-a-summer:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-summer
+      vona-module-a-swiper:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-swiper
+      vona-module-a-themebrilliant:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-themebrilliant
+      vona-module-a-themehyacinth:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-themehyacinth
+      vona-module-a-user:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-user
+      vona-module-a-useronline:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-useronline
+      vona-module-a-validation:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-validation
+      vona-module-a-version:
+        specifier: workspace:^
+        version: link:src/suite/a-base/modules/a-version
+      vona-module-a-wechat:
+        specifier: workspace:^
+        version: link:src/suite/a-wechat/modules/a-wechat
+      vona-module-a-wepay:
+        specifier: workspace:^
+        version: link:src/suite/a-wechat/modules/a-wepay
+      vona-module-a-wxwork:
+        specifier: workspace:^
+        version: link:src/suite/a-wxwork/modules/a-wxwork
+      vona-module-bz-login:
+        specifier: workspace:^
+        version: link:src/module/bz-login
+      vona-module-cabloy-cmsplugincommon:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsplugincommon
+      vona-module-cabloy-cmsthemecommunity:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemecommunity
+      vona-module-cabloy-cmsthemecommunityenus:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemecommunityenus
+      vona-module-cabloy-cmsthemecommunityzhcn:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemecommunityzhcn
+      vona-module-cabloy-cmsthemecourse:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemecourse
+      vona-module-cabloy-cmsthemecourseenus:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemecourseenus
+      vona-module-cabloy-cmsthemecoursezhcn:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemecoursezhcn
+      vona-module-cabloy-cmsthemedocs:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemedocs
+      vona-module-cabloy-cmsthemedocsenus:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemedocsenus
+      vona-module-cabloy-cmsthemedocszhcn:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemedocszhcn
+      vona-module-cabloy-cmsthemestore:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemestore
+      vona-module-cabloy-cmsthemestoreenus:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemestoreenus
+      vona-module-cabloy-cmsthemestorezhcn:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemestorezhcn
+      vona-module-cabloy-cmsthemezhennann:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-cmsthemezhennann
+      vona-module-cabloy-common:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-common
+      vona-module-cabloy-coupon:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-coupon
+      vona-module-cabloy-course:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-course
+      vona-module-cabloy-dashboard:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-dashboard
+      vona-module-cabloy-distribution:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-distribution
+      vona-module-cabloy-finance:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-finance
+      vona-module-cabloy-purchase:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-purchase
+      vona-module-cabloy-store:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-store
+      vona-module-cms-pluginarticle:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginarticle
+      vona-module-cms-pluginbacktotop:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginbacktotop
+      vona-module-cms-pluginbase:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginbase
+      vona-module-cms-plugincopyright:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-plugincopyright
+      vona-module-cms-pluginmarkdowngithub:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginmarkdowngithub
+      vona-module-cms-pluginrss:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginrss
+      vona-module-cms-pluginsidebar:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginsidebar
+      vona-module-cms-pluginsocialshare:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginsocialshare
+      vona-module-cms-pluginsubmit:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginsubmit
+      vona-module-cms-plugintrack:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-plugintrack
+      vona-module-cms-pluginuser:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-pluginuser
+      vona-module-cms-pluginwechatsdk:
+        specifier: workspace:^
+        version: link:src/suite/a-wechat/modules/cms-pluginwechatsdk
+      vona-module-cms-pluginwechatshare:
+        specifier: workspace:^
+        version: link:src/suite/a-wechat/modules/cms-pluginwechatshare
+      vona-module-cms-sitecommunity:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-sitecommunity
+      vona-module-cms-sitedocumentation:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-sitedocumentation
+      vona-module-cms-themeaws:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-themeaws
+      vona-module-cms-themeblog:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-themeblog
+      vona-module-cms-themecommunity:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-themecommunity
+      vona-module-cms-themedocs:
+        specifier: workspace:^
+        version: link:src/suite/a-cms/modules/cms-themedocs
+      vona-module-diancai-common:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-common
+      vona-module-diancai-dish:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-dish
+      vona-module-diancai-h5:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-h5
+      vona-module-diancai-icon:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-icon
+      vona-module-diancai-order:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-order
+      vona-module-diancai-store:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-store
+      vona-module-diancai-table:
+        specifier: workspace:^
+        version: link:src/suite/bz-diancai/modules/diancai-table
+      vona-module-study-admin:
+        specifier: workspace:^
+        version: link:src/suite/bz-study/modules/study-admin
+      vona-module-study-base:
+        specifier: workspace:^
+        version: link:src/suite/bz-study/modules/study-base
+      vona-module-study-h5:
+        specifier: workspace:^
+        version: link:src/suite/bz-study/modules/study-h5
+      vona-module-study-icon:
+        specifier: workspace:^
+        version: link:src/suite/bz-study/modules/study-icon
+      vona-module-study-pc:
+        specifier: workspace:^
+        version: link:src/suite/bz-study/modules/study-pc
+      vona-module-test-dingtalk:
+        specifier: workspace:^
+        version: link:src/suite/a-dingtalk/modules/test-dingtalk
+      vona-module-test-flow:
+        specifier: workspace:^
+        version: link:src/suite/a-flow/modules/test-flow
+      vona-module-test-localeone:
+        specifier: workspace:^
+        version: link:src/suite/test-party/modules/test-localeone
+      vona-module-test-localetwo:
+        specifier: workspace:^
+        version: link:src/suite/test-party/modules/test-localetwo
+      vona-module-test-note:
+        specifier: workspace:^
+        version: link:src/module/test-note
+      vona-module-test-party:
+        specifier: workspace:^
+        version: link:src/suite/test-party/modules/test-party
+      vona-module-test-partymonkey:
+        specifier: workspace:^
+        version: link:src/suite/test-party/modules/test-partymonkey
+      vona-module-test-userpro:
+        specifier: workspace:^
+        version: link:src/module/test-userpro
+      vona-module-test-wechat:
+        specifier: workspace:^
+        version: link:src/suite/a-wechat/modules/test-wechat
+      vona-module-test-wxwork:
+        specifier: workspace:^
+        version: link:src/suite/a-wxwork/modules/test-wxwork
     devDependencies:
       '@babel/core':
         specifier: ^7.24.5

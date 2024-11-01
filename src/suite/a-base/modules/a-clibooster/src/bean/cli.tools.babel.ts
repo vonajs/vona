@@ -47,6 +47,6 @@ export class CliToolsBabel extends BeanCliBase {
     if (output.error) throw new Error(`${output.error.name}: ${output.error.message}`);
     content = output.code;
     // output
-    fse.outputFileSync(fileDest, content);
+    fse.outputFileSync(fileDest, content.toString());
   }
 }
