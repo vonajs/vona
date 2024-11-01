@@ -11,4 +11,3 @@ src/backend/run
 /coverage/**
 /docker-compose/**
 **/backend/static/vendor/**
-/src/module-system/a-codemirror/backend/static/lib/codemirror
