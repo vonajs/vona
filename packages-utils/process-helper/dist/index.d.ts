@@ -39,6 +39,6 @@ export declare class ProcessHelper {
     }): Promise<string>;
     npmPublish(options?: IProcessHelperSpawnOptions): Promise<void>;
     gitCommit(message: string, options?: IProcessHelperSpawnOptions): Promise<void>;
-    tsc(options?: IProcessHelperSpawnOptions): Promise<void>;
+    tsc(args?: string[], options?: IProcessHelperSpawnOptions): Promise<void>;
 }
 //# sourceMappingURL=index.d.ts.map

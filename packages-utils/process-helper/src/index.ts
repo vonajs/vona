@@ -188,15 +188,16 @@ export class ProcessHelper {
       options,
     });
   }
-  async tsc(options?: IProcessHelperSpawnOptions) {
+  async tsc(args?: string[], options?: IProcessHelperSpawnOptions) {
+    if (!args) args = ['-b'];
     const timeBegin = new Date();
-    await this.console.log(`tsc -b begin, pid: ${process.pid}`);
+    await this.console.log('tsc -b begin');
     await this.spawnBin({
       cmd: 'tsc',
-      args: ['-b'],
+      args,
       options,
     });
     const timeEnd = new Date();
-    await this.console.log(`tsc -b end, pid: ${process.pid}: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
+    await this.console.log(`tsc -b end: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
   }
 }
