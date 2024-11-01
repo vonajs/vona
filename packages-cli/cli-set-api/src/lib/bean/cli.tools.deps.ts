@@ -74,10 +74,13 @@ export class CliToolsDeps extends BeanCliBase {
     const referencesOld = content.references;
     // remove old
     const referencesNew = referencesOld.filter(
-      item => !['src/suite/', 'src/module/'].some(item2 => item.path.indexOf(item2) > -1),
+      item =>
+        !['src/suite/', 'src/module/', 'src/suite-vendor/', 'src/module-vendor/'].some(
+          item2 => item.path.indexOf(item2) > -1,
+        ),
     );
     // append new for prod build
-    if (mode === 'prod') {
+    if (mode !== 'prod') {
       // suites
       for (const key in this.modulesMeta.suites) {
         const suite = this.modulesMeta.suites[key];
