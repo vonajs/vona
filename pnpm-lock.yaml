@@ -119,7 +119,7 @@ importers:
         version: 10.4.5
       gogocode:
         specifier: ^1.0.55
-        version: 1.0.55(vue@3.5.12(typescript@5.3.3))
+        version: 1.0.55(vue@3.5.12(typescript@5.6.3))
       http-proxy-middleware:
         specifier: ^1.3.1
         version: 1.3.1
@@ -170,16 +170,16 @@ importers:
         version: 7.6.3
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@18.19.3)(typescript@5.3.3)
+        version: 10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@18.19.3)(typescript@5.6.3)
       tsx:
         specifier: ^4.7.3
         version: 4.19.2
       typedoc:
         specifier: ^0.25.13
-        version: 0.25.13(typescript@5.3.3)
+        version: 0.25.13(typescript@5.6.3)
       typescript:
-        specifier: 5.3.3
-        version: 5.3.3
+        specifier: ^5.5.4
+        version: 5.6.3
       vue-eslint-parser:
         specifier: ^9.4.2
         version: 9.4.3(eslint@8.57.1)
@@ -224,7 +224,7 @@ importers:
         version: 11.2.0
       gogocode:
         specifier: ^1.0.53
-        version: 1.0.55(vue@3.5.12(typescript@5.3.3))
+        version: 1.0.55(vue@3.5.12(typescript@5.6.3))
       is-type-of:
         specifier: ^2.1.0
         version: 2.1.0
@@ -245,16 +245,16 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: workspace:^
+        specifier: ^2.0.5
         version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: workspace:^
+        specifier: ^1.0.4
         version: link:../cli-set-api
 
   packages-cli/cli-set-api:
     dependencies:
       '@cabloy/cli':
-        specifier: workspace:^
+        specifier: ^2.0.5
         version: link:../cabloy-cli
       '@cabloy/word-utils':
         specifier: ^1.0.2
@@ -270,7 +270,7 @@ importers:
         version: 11.2.0
       gogocode:
         specifier: ^1.0.53
-        version: 1.0.55(vue@3.5.12(typescript@5.3.3))
+        version: 1.0.55(vue@3.5.12(typescript@5.6.3))
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -278,7 +278,7 @@ importers:
         specifier: ^3.24.0
         version: 3.27.1
       vona-shared:
-        specifier: workspace:^
+        specifier: ^1.0.3
         version: link:../../packages-vona/shared
 
   packages-egg-born/egg-born-backend:
@@ -308,7 +308,7 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
       vona:
-        specifier: workspace:^
+        specifier: ^5.0.3
         version: link:../../packages-vona/vona
 
   packages-egg-born/egg-born-bin:
@@ -329,10 +329,10 @@ importers:
         specifier: ^7.8.3
         version: 7.25.9(@babel/core@7.26.0)
       '@cabloy/extend':
-        specifier: workspace:^
+        specifier: ^3.0.8
         version: link:../../packages-utils/extend
       '@cabloy/module-glob':
-        specifier: workspace:^
+        specifier: ^5.1.4
         version: link:../../packages-utils/module-glob
       '@zhennann/build':
         specifier: ^1.6.5
@@ -368,10 +368,10 @@ importers:
         specifier: ^1.5.1
         version: 1.10.1
       egg-born-backend:
-        specifier: workspace:^
+        specifier: ^10.0.3
         version: link:../egg-born-backend
       egg-born-scripts:
-        specifier: workspace:^
+        specifier: ^4.0.3
         version: link:../egg-born-scripts
       egg-born-utils:
         specifier: ^1.2.0
@@ -407,10 +407,10 @@ importers:
   packages-egg-born/egg-born-mock:
     dependencies:
       '@cabloy/module-info':
-        specifier: workspace:^
+        specifier: ^1.1.4
         version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
-        specifier: workspace:^
+        specifier: ^1.0.12
         version: link:../../packages-utils/module-info-pro
       '@types/mocha':
         specifier: ^10.0.1
@@ -425,23 +425,23 @@ importers:
   packages-egg-born/egg-born-scripts:
     dependencies:
       '@cabloy/dotenv':
-        specifier: workspace:^
+        specifier: ^1.0.5
         version: link:../../packages-utils/dotenv
       '@cabloy/ensure-array':
-        specifier: workspace:^
+        specifier: ^1.0.4
         version: link:../../packages-utils/ensure-array
       '@cabloy/extend':
-        specifier: workspace:^
+        specifier: ^3.0.8
         version: link:../../packages-utils/extend
       '@cabloy/module-glob':
-        specifier: workspace:^
+        specifier: ^5.1.4
         version: link:../../packages-utils/module-glob
       '@cabloy/process-helper':
-        specifier: workspace:^
+        specifier: ^1.0.8
         version: link:../../packages-utils/process-helper
       '@zhennann/egg-bin':
         specifier: ^7.0.1
-        version: 7.0.1(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(egg-mock@5.12.5(egg@3.28.0)(mocha@10.8.2))(typescript@5.3.3)
+        version: 7.0.1(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(egg-mock@5.12.5(egg@3.28.0)(mocha@10.8.2))(typescript@5.6.3)
       '@zhennann/egg-scripts':
         specifier: ^4.0.2
         version: 4.0.2
@@ -452,7 +452,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       egg-born-backend:
-        specifier: workspace:^
+        specifier: ^10.0.3
         version: link:../egg-born-backend
       egg-born-utils:
         specifier: ^1.2.0
@@ -496,10 +496,10 @@ importers:
     dependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.8.0
-        version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.3.3))(eslint@8.57.1)(typescript@5.3.3)
+        version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: ^7.8.0
-        version: 7.18.0(eslint@8.57.1)(typescript@5.3.3)
+        version: 7.18.0(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -527,7 +527,7 @@ importers:
   packages-utils/module-glob:
     dependencies:
       '@cabloy/module-info':
-        specifier: workspace:^
+        specifier: ^1.1.4
         version: link:../module-info
       boxen:
         specifier: ^4.2.0
@@ -545,7 +545,7 @@ importers:
   packages-utils/module-info-pro:
     dependencies:
       '@cabloy/module-info':
-        specifier: workspace:^
+        specifier: ^1.1.4
         version: link:../module-info
       stack-utils:
         specifier: ^2.0.6
@@ -560,46 +560,46 @@ importers:
   packages-vona/vona:
     dependencies:
       '@cabloy/cluster-reload':
-        specifier: workspace:^
+        specifier: ^1.0.3
         version: link:../../packages-utils/cluster-reload
       '@cabloy/compose':
-        specifier: workspace:^
+        specifier: ^1.0.5
         version: link:../../packages-utils/compose
       '@cabloy/deps':
-        specifier: workspace:^
+        specifier: ^1.0.3
         version: link:../../packages-utils/deps
       '@cabloy/dotenv':
-        specifier: workspace:^
+        specifier: ^1.0.5
         version: link:../../packages-utils/dotenv
       '@cabloy/egg-socket.io':
         specifier: ^6.0.0
         version: 6.0.0
       '@cabloy/ensure-array':
-        specifier: workspace:^
+        specifier: ^1.0.4
         version: link:../../packages-utils/ensure-array
       '@cabloy/extend':
-        specifier: workspace:^
+        specifier: ^3.0.8
         version: link:../../packages-utils/extend
       '@cabloy/json5':
-        specifier: workspace:^
+        specifier: ^1.0.3
         version: link:../../packages-utils/json5
       '@cabloy/koa-static-cache':
         specifier: ^5.1.8
         version: 5.1.8
       '@cabloy/localeutil':
-        specifier: workspace:^
+        specifier: ^1.0.7
         version: link:../../packages-utils/localeutil
       '@cabloy/module-glob':
-        specifier: workspace:^
+        specifier: ^5.1.4
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: workspace:^
+        specifier: ^1.1.4
         version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
-        specifier: workspace:^
+        specifier: ^1.0.12
         version: link:../../packages-utils/module-info-pro
       '@cabloy/set':
-        specifier: workspace:^
+        specifier: ^1.0.3
         version: link:../../packages-utils/set
       '@cabloy/word-utils':
         specifier: ^1.0.2
@@ -632,7 +632,7 @@ importers:
         specifier: ^3.17.5
         version: 3.28.0
       egg-born-mock:
-        specifier: workspace:^
+        specifier: ^6.0.3
         version: link:../../packages-egg-born/egg-born-mock
       egg-cluster:
         specifier: ^2.2.1
@@ -1055,7 +1055,7 @@ importers:
         version: 0.6.5
       gogocode:
         specifier: ^1.0.53
-        version: 1.0.55(vue@3.5.12(typescript@5.3.3))
+        version: 1.0.55(vue@3.5.12(typescript@5.6.3))
       istextorbinary:
         specifier: ^3.3.0
         version: 3.3.0
@@ -8802,8 +8802,8 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
 
-  typescript@5.3.3:
-    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+  typescript@5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -10973,21 +10973,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.3.3))(eslint@8.57.1)(typescript@5.3.3)':
+  '@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.1
-      '@typescript-eslint/parser': 7.18.0(eslint@8.57.1)(typescript@5.3.3)
+      '@typescript-eslint/parser': 7.18.0(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/scope-manager': 7.18.0
-      '@typescript-eslint/type-utils': 7.18.0(eslint@8.57.1)(typescript@5.3.3)
-      '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.3.3)
+      '@typescript-eslint/type-utils': 7.18.0(eslint@8.57.1)(typescript@5.6.3)
+      '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 7.18.0
       eslint: 8.57.1
       graphemer: 1.4.0
       ignore: 5.3.2
       natural-compare: 1.4.0
-      ts-api-utils: 1.4.0(typescript@5.3.3)
+      ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
-      typescript: 5.3.3
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -11003,16 +11003,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.3.3)':
+  '@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 7.18.0
       '@typescript-eslint/types': 7.18.0
-      '@typescript-eslint/typescript-estree': 7.18.0(typescript@5.3.3)
+      '@typescript-eslint/typescript-estree': 7.18.0(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 7.18.0
       debug: 4.3.7(supports-color@8.1.1)
       eslint: 8.57.1
     optionalDependencies:
-      typescript: 5.3.3
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -11038,15 +11038,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/type-utils@7.18.0(eslint@8.57.1)(typescript@5.3.3)':
+  '@typescript-eslint/type-utils@7.18.0(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
-      '@typescript-eslint/typescript-estree': 7.18.0(typescript@5.3.3)
-      '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.3.3)
+      '@typescript-eslint/typescript-estree': 7.18.0(typescript@5.6.3)
+      '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.6.3)
       debug: 4.3.7(supports-color@8.1.1)
       eslint: 8.57.1
-      ts-api-utils: 1.4.0(typescript@5.3.3)
+      ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
-      typescript: 5.3.3
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -11068,7 +11068,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/typescript-estree@7.18.0(typescript@5.3.3)':
+  '@typescript-eslint/typescript-estree@7.18.0(typescript@5.6.3)':
     dependencies:
       '@typescript-eslint/types': 7.18.0
       '@typescript-eslint/visitor-keys': 7.18.0
@@ -11077,9 +11077,9 @@ snapshots:
       is-glob: 4.0.3
       minimatch: 9.0.5
       semver: 7.6.3
-      ts-api-utils: 1.4.0(typescript@5.3.3)
+      ts-api-utils: 1.4.0(typescript@5.6.3)
     optionalDependencies:
-      typescript: 5.3.3
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -11098,12 +11098,12 @@ snapshots:
       - supports-color
       - typescript
 
-  '@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.3.3)':
+  '@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
       '@eslint-community/eslint-utils': 4.4.1(eslint@8.57.1)
       '@typescript-eslint/scope-manager': 7.18.0
       '@typescript-eslint/types': 7.18.0
-      '@typescript-eslint/typescript-estree': 7.18.0(typescript@5.3.3)
+      '@typescript-eslint/typescript-estree': 7.18.0(typescript@5.6.3)
       eslint: 8.57.1
     transitivePeerDependencies:
       - supports-color
@@ -11330,11 +11330,11 @@ snapshots:
       vue: 3.5.12(typescript@4.9.5)
     optional: true
 
-  '@vue/server-renderer@3.5.12(vue@3.5.12(typescript@5.3.3))':
+  '@vue/server-renderer@3.5.12(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@vue/compiler-ssr': 3.5.12
       '@vue/shared': 3.5.12
-      vue: 3.5.12(typescript@5.3.3)
+      vue: 3.5.12(typescript@5.6.3)
 
   '@vue/shared@3.0.11': {}
 
@@ -11641,7 +11641,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@zhennann/egg-bin@7.0.1(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(egg-mock@5.12.5(egg@3.28.0)(mocha@10.8.2))(typescript@5.3.3)':
+  '@zhennann/egg-bin@7.0.1(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(egg-mock@5.12.5(egg@3.28.0)(mocha@10.8.2))(typescript@5.6.3)':
     dependencies:
       '@zhennann/common-bin': 4.0.0
       c8: 9.1.0
@@ -11656,7 +11656,7 @@ snapshots:
       mochawesome-with-mocha: 7.1.3
       runscript: 1.6.0
       test: 3.3.0
-      ts-node: 10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(typescript@5.3.3)
+      ts-node: 10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(typescript@5.6.3)
       tsconfig-paths: 4.2.0
       ypkgfiles: 1.6.0
     optionalDependencies:
@@ -14289,14 +14289,14 @@ snapshots:
       merge2: 1.4.1
       slash: 3.0.0
 
-  gogocode@1.0.55(vue@3.5.12(typescript@5.3.3)):
+  gogocode@1.0.55(vue@3.5.12(typescript@5.6.3)):
     dependencies:
       '@babel/parser': 7.26.2
       glob: 7.2.3
       hyntax-yx: 1.0.9
       indent-string: 4.0.0
       recast-yx: 0.18.12
-      vue3-browser-compiler-yx: 1.0.4(vue@3.5.12(typescript@5.3.3))
+      vue3-browser-compiler-yx: 1.0.4(vue@3.5.12(typescript@5.6.3))
     transitivePeerDependencies:
       - vue
 
@@ -17495,11 +17495,11 @@ snapshots:
 
   trek-captcha@0.4.0: {}
 
-  ts-api-utils@1.4.0(typescript@5.3.3):
+  ts-api-utils@1.4.0(typescript@5.6.3):
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.6.3
 
-  ts-node@10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@18.19.3)(typescript@5.3.3):
+  ts-node@10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@18.19.3)(typescript@5.6.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -17513,7 +17513,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.3.3
+      typescript: 5.6.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
@@ -17539,7 +17539,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.7.42(@swc/helpers@0.5.13)
 
-  ts-node@10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(typescript@5.3.3):
+  ts-node@10.9.2(@swc/core@1.7.42(@swc/helpers@0.5.13))(@types/node@20.17.5)(typescript@5.6.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -17553,7 +17553,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.3.3
+      typescript: 5.6.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
@@ -17647,17 +17647,17 @@ snapshots:
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
 
-  typedoc@0.25.13(typescript@5.3.3):
+  typedoc@0.25.13(typescript@5.6.3):
     dependencies:
       lunr: 2.3.9
       marked: 4.3.0
       minimatch: 9.0.5
       shiki: 0.14.7
-      typescript: 5.3.3
+      typescript: 5.6.3
 
   typescript@4.9.5: {}
 
-  typescript@5.3.3: {}
+  typescript@5.6.3: {}
 
   uc.micro@1.0.6: {}
 
@@ -17960,7 +17960,7 @@ snapshots:
 
   vue-template-es2015-compiler@1.9.1: {}
 
-  vue3-browser-compiler-yx@1.0.4(vue@3.5.12(typescript@5.3.3)):
+  vue3-browser-compiler-yx@1.0.4(vue@3.5.12(typescript@5.6.3)):
     dependencies:
       '@babel/parser': 7.26.2
       '@babel/types': 7.26.0
@@ -17977,7 +17977,7 @@ snapshots:
       postcss-modules: 4.0.0(postcss@8.1.10)
       postcss-selector-parser: 6.0.4
       source-map: 0.6.1
-      vue: 3.5.12(typescript@5.3.3)
+      vue: 3.5.12(typescript@5.6.3)
 
   vue@3.5.12(typescript@4.9.5):
     dependencies:
@@ -17990,15 +17990,15 @@ snapshots:
       typescript: 4.9.5
     optional: true
 
-  vue@3.5.12(typescript@5.3.3):
+  vue@3.5.12(typescript@5.6.3):
     dependencies:
       '@vue/compiler-dom': 3.5.12
       '@vue/compiler-sfc': 3.5.12
       '@vue/runtime-dom': 3.5.12
-      '@vue/server-renderer': 3.5.12(vue@3.5.12(typescript@5.3.3))
+      '@vue/server-renderer': 3.5.12(vue@3.5.12(typescript@5.6.3))
       '@vue/shared': 3.5.12
     optionalDependencies:
-      typescript: 5.3.3
+      typescript: 5.6.3
 
   w3c-keyname@2.2.8: {}
 

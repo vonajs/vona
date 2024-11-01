@@ -8,8 +8,5 @@
   "license": "MIT",
   "keywords": [
     "vona"
-  ],
-  "devDependencies": {
-    "typescript": "^5.5.4"
-  }
+  ]
 }
