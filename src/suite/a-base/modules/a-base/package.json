@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-base",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "title": "Base",
   "private": true,
   "vonaModule": {
@@ -33,7 +33,7 @@
   "scripts": {},
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/extend": "^3.0.6",
+    "@cabloy/extend": "^3.0.7",
     "@cabloy/module-info": "workspace:^",
     "@koa/cors": "^5.0.0",
     "@zhennann/currency": "^1.0.3",

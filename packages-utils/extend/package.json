@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/extend",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "cabloy extend",
   "publishConfig": {
     "access": "public"

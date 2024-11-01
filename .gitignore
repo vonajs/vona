@@ -1,5 +1,3 @@
-pnpm-lock.yaml
-package-lock.json
 node_modules
 miniprogram_npm
 /typings/core
@@ -19,8 +17,6 @@ miniprogram_npm
 *.swp
 *.tmp
 *.rdb
-
-# package-lock.json
 
 # mine .env files
 env/.env*.mine
