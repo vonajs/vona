@@ -1,6 +1,6 @@
 {
   "name": "egg-born-mock",
-  "version": "6.0.3",
+  "version": "6.0.4",
   "description": "cabloy mock",
   "publishConfig": {
     "access": "public"
@@ -32,8 +32,8 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/module-info": "^1.1.4",
-    "@cabloy/module-info-pro": "^1.0.12",
+    "@cabloy/module-info": "^1.1.5",
+    "@cabloy/module-info-pro": "^1.0.13",
     "@types/mocha": "^10.0.1",
     "assert": "^2.1.0",
     "egg-mock": "^5.10.9"

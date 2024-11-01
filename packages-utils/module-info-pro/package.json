@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/module-info-pro",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "cabloy module-info-pro",
   "publishConfig": {
     "access": "public"
@@ -32,7 +32,7 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/module-info": "^1.1.4",
+    "@cabloy/module-info": "^1.1.5",
     "stack-utils": "^2.0.6"
   },
   "gitHead": "9427fa560976efa36e996356b9918b5bd673d29e"

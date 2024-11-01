@@ -187,13 +187,13 @@ importers:
   packages-cli/cabloy-cli:
     dependencies:
       '@cabloy/module-glob':
-        specifier: ^5.1.4
+        specifier: ^5.1.5
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: ^1.1.4
+        specifier: ^1.1.5
         version: link:../../packages-utils/module-info
       '@cabloy/process-helper':
-        specifier: ^1.0.8
+        specifier: ^1.0.9
         version: link:../../packages-utils/process-helper
       '@npmcli/config':
         specifier: ^8.3.4
@@ -245,16 +245,16 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^2.0.5
+        specifier: ^2.0.6
         version: link:../cabloy-cli
       vona-cli-set-api:
-        specifier: ^1.0.4
+        specifier: ^1.0.5
         version: link:../cli-set-api
 
   packages-cli/cli-set-api:
     dependencies:
       '@cabloy/cli':
-        specifier: ^2.0.5
+        specifier: ^2.0.6
         version: link:../cabloy-cli
       '@cabloy/word-utils':
         specifier: ^1.0.2
@@ -278,7 +278,7 @@ importers:
         specifier: ^3.24.0
         version: 3.27.1
       vona-shared:
-        specifier: ^1.0.3
+        specifier: ^1.0.4
         version: link:../../packages-vona/shared
 
   packages-egg-born/egg-born-backend:
@@ -308,7 +308,7 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
       vona:
-        specifier: ^5.0.3
+        specifier: ^5.0.4
         version: link:../../packages-vona/vona
 
   packages-egg-born/egg-born-bin:
@@ -329,10 +329,10 @@ importers:
         specifier: ^7.8.3
         version: 7.25.9(@babel/core@7.26.0)
       '@cabloy/extend':
-        specifier: ^3.0.8
+        specifier: ^3.0.9
         version: link:../../packages-utils/extend
       '@cabloy/module-glob':
-        specifier: ^5.1.4
+        specifier: ^5.1.5
         version: link:../../packages-utils/module-glob
       '@zhennann/build':
         specifier: ^1.6.5
@@ -368,10 +368,10 @@ importers:
         specifier: ^1.5.1
         version: 1.10.1
       egg-born-backend:
-        specifier: ^10.0.3
+        specifier: ^10.0.4
         version: link:../egg-born-backend
       egg-born-scripts:
-        specifier: ^4.0.3
+        specifier: ^4.0.4
         version: link:../egg-born-scripts
       egg-born-utils:
         specifier: ^1.2.0
@@ -407,10 +407,10 @@ importers:
   packages-egg-born/egg-born-mock:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.1.4
+        specifier: ^1.1.5
         version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
-        specifier: ^1.0.12
+        specifier: ^1.0.13
         version: link:../../packages-utils/module-info-pro
       '@types/mocha':
         specifier: ^10.0.1
@@ -425,19 +425,19 @@ importers:
   packages-egg-born/egg-born-scripts:
     dependencies:
       '@cabloy/dotenv':
-        specifier: ^1.0.5
+        specifier: ^1.0.6
         version: link:../../packages-utils/dotenv
       '@cabloy/ensure-array':
-        specifier: ^1.0.4
+        specifier: ^1.0.5
         version: link:../../packages-utils/ensure-array
       '@cabloy/extend':
-        specifier: ^3.0.8
+        specifier: ^3.0.9
         version: link:../../packages-utils/extend
       '@cabloy/module-glob':
-        specifier: ^5.1.4
+        specifier: ^5.1.5
         version: link:../../packages-utils/module-glob
       '@cabloy/process-helper':
-        specifier: ^1.0.8
+        specifier: ^1.0.9
         version: link:../../packages-utils/process-helper
       '@zhennann/egg-bin':
         specifier: ^7.0.1
@@ -452,7 +452,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       egg-born-backend:
-        specifier: ^10.0.3
+        specifier: ^10.0.4
         version: link:../egg-born-backend
       egg-born-utils:
         specifier: ^1.2.0
@@ -527,7 +527,7 @@ importers:
   packages-utils/module-glob:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.1.4
+        specifier: ^1.1.5
         version: link:../module-info
       boxen:
         specifier: ^4.2.0
@@ -545,7 +545,7 @@ importers:
   packages-utils/module-info-pro:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.1.4
+        specifier: ^1.1.5
         version: link:../module-info
       stack-utils:
         specifier: ^2.0.6
@@ -560,46 +560,46 @@ importers:
   packages-vona/vona:
     dependencies:
       '@cabloy/cluster-reload':
-        specifier: ^1.0.3
+        specifier: ^1.0.4
         version: link:../../packages-utils/cluster-reload
       '@cabloy/compose':
-        specifier: ^1.0.5
+        specifier: ^1.0.6
         version: link:../../packages-utils/compose
       '@cabloy/deps':
-        specifier: ^1.0.3
+        specifier: ^1.0.4
         version: link:../../packages-utils/deps
       '@cabloy/dotenv':
-        specifier: ^1.0.5
+        specifier: ^1.0.6
         version: link:../../packages-utils/dotenv
       '@cabloy/egg-socket.io':
         specifier: ^6.0.0
         version: 6.0.0
       '@cabloy/ensure-array':
-        specifier: ^1.0.4
+        specifier: ^1.0.5
         version: link:../../packages-utils/ensure-array
       '@cabloy/extend':
-        specifier: ^3.0.8
+        specifier: ^3.0.9
         version: link:../../packages-utils/extend
       '@cabloy/json5':
-        specifier: ^1.0.3
+        specifier: ^1.0.4
         version: link:../../packages-utils/json5
       '@cabloy/koa-static-cache':
         specifier: ^5.1.8
         version: 5.1.8
       '@cabloy/localeutil':
-        specifier: ^1.0.7
+        specifier: ^1.0.8
         version: link:../../packages-utils/localeutil
       '@cabloy/module-glob':
-        specifier: ^5.1.4
+        specifier: ^5.1.5
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
-        specifier: ^1.1.4
+        specifier: ^1.1.5
         version: link:../../packages-utils/module-info
       '@cabloy/module-info-pro':
-        specifier: ^1.0.12
+        specifier: ^1.0.13
         version: link:../../packages-utils/module-info-pro
       '@cabloy/set':
-        specifier: ^1.0.3
+        specifier: ^1.0.4
         version: link:../../packages-utils/set
       '@cabloy/word-utils':
         specifier: ^1.0.2
@@ -632,7 +632,7 @@ importers:
         specifier: ^3.17.5
         version: 3.28.0
       egg-born-mock:
-        specifier: ^6.0.3
+        specifier: ^6.0.4
         version: link:../../packages-egg-born/egg-born-mock
       egg-cluster:
         specifier: ^2.2.1
@@ -973,7 +973,7 @@ importers:
   src/suite/a-base/modules/a-base:
     dependencies:
       '@cabloy/extend':
-        specifier: ^3.0.8
+        specifier: ^3.0.9
         version: link:../../../../../packages-utils/extend
       '@cabloy/module-info':
         specifier: workspace:^
