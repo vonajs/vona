@@ -1,5 +1,4 @@
 const path = require('path');
-const fse = require('fs-extra');
 const chalk = require('chalk');
 const boxen = require('boxen');
 const eggBornUtils = require('egg-born-utils');
@@ -83,19 +82,9 @@ const utils = {
     // proc
     return commandDev.subCommand.proc;
   },
-  getProjectMode() {
-    const vonaPath = this.__getVonaPath();
-    return vonaPath.indexOf('packages-vona') > -1 ? 'source' : 'project';
-  },
   getModulePath(moduleName) {
     const moduleFile = require.resolve(`${moduleName}/package.json`);
     return path.dirname(moduleFile);
-  },
-  __getVonaPath() {
-    const projectPath = this.getProjectDir();
-    const cabloyPath = path.join(projectPath, 'packages-vona/vona');
-    if (fse.existsSync(cabloyPath)) return cabloyPath;
-    return eggBornUtils.tools._getCabloyPath(projectPath);
   },
   getAppPackage() {
     const projectPath = this.getProjectDir();
