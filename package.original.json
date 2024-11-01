@@ -25,7 +25,7 @@
     "dev:one": "npm run prerun && node ./scripts/egg-born-bin.js backend-dev --workers=1",
     "test": "npm run prerun && node ./scripts/egg-born-bin.js backend-test",
     "cov": "npm run prerun && node ./scripts/egg-born-bin.js backend-cov",
-    "build": "",
+    "build": "npm run prerun && npm run vona :tools:build",
     "start": "node ./scripts/egg-born-scripts.js backend-start",
     "start:daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon",
     "stop": "node ./scripts/egg-born-scripts.js backend-stop",
