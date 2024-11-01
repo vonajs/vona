@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-cli",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "title": "a-cli",
   "private": true,
   "vonaModule": {

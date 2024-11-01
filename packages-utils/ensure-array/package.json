@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/ensure-array",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "cabloy ensure array",
   "publishConfig": {
     "access": "public"
