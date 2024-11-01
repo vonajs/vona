@@ -4,7 +4,7 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/a-home/tsconfig.json"
+      "path": "modules/a-home"
     }
   ]
 }

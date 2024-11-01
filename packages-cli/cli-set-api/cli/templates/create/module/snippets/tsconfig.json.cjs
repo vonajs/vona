@@ -5,7 +5,7 @@ module.exports = {
   },
   async transform({ /* cli,*/ ast, argv }) {
     ast.references.push({
-      path: `modules/${argv.name}/tsconfig.json`,
+      path: `modules/${argv.name}`,
     });
     // ok
     return ast;

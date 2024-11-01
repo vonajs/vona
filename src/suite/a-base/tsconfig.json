@@ -4,172 +4,172 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/a-app/tsconfig.json"
+      "path": "modules/a-app"
     },
     {
-      "path": "modules/a-appbooster/tsconfig.json"
+      "path": "modules/a-appbooster"
     },
     {
-      "path": "modules/a-auth/tsconfig.json"
+      "path": "modules/a-auth"
     },
     {
-      "path": "modules/a-authgithub/tsconfig.json"
+      "path": "modules/a-authgithub"
     },
     {
-      "path": "modules/a-authopen/tsconfig.json"
+      "path": "modules/a-authopen"
     },
     {
-      "path": "modules/a-authsimple/tsconfig.json"
+      "path": "modules/a-authsimple"
     },
     {
-      "path": "modules/a-authsms/tsconfig.json"
+      "path": "modules/a-authsms"
     },
     {
-      "path": "modules/a-base/tsconfig.json"
+      "path": "modules/a-base"
     },
     {
-      "path": "modules/a-baseadmin/tsconfig.json"
+      "path": "modules/a-baseadmin"
     },
     {
-      "path": "modules/a-basefront/tsconfig.json"
+      "path": "modules/a-basefront"
     },
     {
-      "path": "modules/a-baselayout/tsconfig.json"
+      "path": "modules/a-baselayout"
     },
     {
-      "path": "modules/a-cache/tsconfig.json"
+      "path": "modules/a-cache"
     },
     {
-      "path": "modules/a-captcha/tsconfig.json"
+      "path": "modules/a-captcha"
     },
     {
-      "path": "modules/a-captchasimple/tsconfig.json"
+      "path": "modules/a-captchasimple"
     },
     {
-      "path": "modules/a-cli/tsconfig.json"
+      "path": "modules/a-cli"
     },
     {
-      "path": "modules/a-clibooster/tsconfig.json"
+      "path": "modules/a-clibooster"
     },
     {
-      "path": "modules/a-codemirror/tsconfig.json"
+      "path": "modules/a-codemirror"
     },
     {
-      "path": "modules/a-dashboard/tsconfig.json"
+      "path": "modules/a-dashboard"
     },
     {
-      "path": "modules/a-dashboardbooster/tsconfig.json"
+      "path": "modules/a-dashboardbooster"
     },
     {
-      "path": "modules/a-database/tsconfig.json"
+      "path": "modules/a-database"
     },
     {
-      "path": "modules/a-debug/tsconfig.json"
+      "path": "modules/a-debug"
     },
     {
-      "path": "modules/a-detail/tsconfig.json"
+      "path": "modules/a-detail"
     },
     {
-      "path": "modules/a-dict/tsconfig.json"
+      "path": "modules/a-dict"
     },
     {
-      "path": "modules/a-dictarea/tsconfig.json"
+      "path": "modules/a-dictarea"
     },
     {
-      "path": "modules/a-dictbooster/tsconfig.json"
+      "path": "modules/a-dictbooster"
     },
     {
-      "path": "modules/a-event/tsconfig.json"
+      "path": "modules/a-event"
     },
     {
-      "path": "modules/a-fields/tsconfig.json"
+      "path": "modules/a-fields"
     },
     {
-      "path": "modules/a-file/tsconfig.json"
+      "path": "modules/a-file"
     },
     {
-      "path": "modules/a-icon/tsconfig.json"
+      "path": "modules/a-icon"
     },
     {
-      "path": "modules/a-iconbooster/tsconfig.json"
+      "path": "modules/a-iconbooster"
     },
     {
-      "path": "modules/a-index/tsconfig.json"
+      "path": "modules/a-index"
     },
     {
-      "path": "modules/a-instance/tsconfig.json"
+      "path": "modules/a-instance"
     },
     {
-      "path": "modules/a-layoutmobile/tsconfig.json"
+      "path": "modules/a-layoutmobile"
     },
     {
-      "path": "modules/a-layoutpc/tsconfig.json"
+      "path": "modules/a-layoutpc"
     },
     {
-      "path": "modules/a-login/tsconfig.json"
+      "path": "modules/a-login"
     },
     {
-      "path": "modules/a-mail/tsconfig.json"
+      "path": "modules/a-mail"
     },
     {
-      "path": "modules/a-markdown/tsconfig.json"
+      "path": "modules/a-markdown"
     },
     {
-      "path": "modules/a-markdownblock/tsconfig.json"
+      "path": "modules/a-markdownblock"
     },
     {
-      "path": "modules/a-message/tsconfig.json"
+      "path": "modules/a-message"
     },
     {
-      "path": "modules/a-oauth/tsconfig.json"
+      "path": "modules/a-oauth"
     },
     {
-      "path": "modules/a-pinyin/tsconfig.json"
+      "path": "modules/a-pinyin"
     },
     {
-      "path": "modules/a-progress/tsconfig.json"
+      "path": "modules/a-progress"
     },
     {
-      "path": "modules/a-sequence/tsconfig.json"
+      "path": "modules/a-sequence"
     },
     {
-      "path": "modules/a-settings/tsconfig.json"
+      "path": "modules/a-settings"
     },
     {
-      "path": "modules/a-share/tsconfig.json"
+      "path": "modules/a-share"
     },
     {
-      "path": "modules/a-socketio/tsconfig.json"
+      "path": "modules/a-socketio"
     },
     {
-      "path": "modules/a-stats/tsconfig.json"
+      "path": "modules/a-stats"
     },
     {
-      "path": "modules/a-status/tsconfig.json"
+      "path": "modules/a-status"
     },
     {
-      "path": "modules/a-summer/tsconfig.json"
+      "path": "modules/a-summer"
     },
     {
-      "path": "modules/a-swiper/tsconfig.json"
+      "path": "modules/a-swiper"
     },
     {
-      "path": "modules/a-themebrilliant/tsconfig.json"
+      "path": "modules/a-themebrilliant"
     },
     {
-      "path": "modules/a-themehyacinth/tsconfig.json"
+      "path": "modules/a-themehyacinth"
     },
     {
-      "path": "modules/a-user/tsconfig.json"
+      "path": "modules/a-user"
     },
     {
-      "path": "modules/a-useronline/tsconfig.json"
+      "path": "modules/a-useronline"
     },
     {
-      "path": "modules/a-validation/tsconfig.json"
+      "path": "modules/a-validation"
     },
     {
-      "path": "modules/a-version/tsconfig.json"
+      "path": "modules/a-version"
     }
   ]
 }

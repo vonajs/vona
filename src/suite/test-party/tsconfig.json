@@ -4,16 +4,16 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/test-localeone/tsconfig.json"
+      "path": "modules/test-localeone"
     },
     {
-      "path": "modules/test-localetwo/tsconfig.json"
+      "path": "modules/test-localetwo"
     },
     {
-      "path": "modules/test-party/tsconfig.json"
+      "path": "modules/test-party"
     },
     {
-      "path": "modules/test-partymonkey/tsconfig.json"
+      "path": "modules/test-partymonkey"
     }
   ]
 }

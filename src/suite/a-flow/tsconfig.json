@@ -4,25 +4,25 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/a-flow/tsconfig.json"
+      "path": "modules/a-flow"
     },
     {
-      "path": "modules/a-flowbehavior/tsconfig.json"
+      "path": "modules/a-flowbehavior"
     },
     {
-      "path": "modules/a-flowchart/tsconfig.json"
+      "path": "modules/a-flowchart"
     },
     {
-      "path": "modules/a-flowgateway/tsconfig.json"
+      "path": "modules/a-flowgateway"
     },
     {
-      "path": "modules/a-flownode/tsconfig.json"
+      "path": "modules/a-flownode"
     },
     {
-      "path": "modules/a-flowtask/tsconfig.json"
+      "path": "modules/a-flowtask"
     },
     {
-      "path": "modules/test-flow/tsconfig.json"
+      "path": "modules/test-flow"
     }
   ]
 }
