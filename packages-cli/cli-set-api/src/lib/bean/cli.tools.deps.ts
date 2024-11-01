@@ -1,13 +1,13 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
-import { VonaConfigMetaMode } from 'vona-shared';
+import { VonaMetaMode } from 'vona-shared';
 import eggBornUtils from 'egg-born-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     force: boolean;
-    mode: VonaConfigMetaMode;
+    mode: VonaMetaMode;
   }
 }
 
@@ -23,7 +23,7 @@ export class CliToolsDeps extends BeanCliBase {
     await this._generate(projectPath, mode, force);
   }
 
-  async _generate(projectPath: string, mode: VonaConfigMetaMode, force: boolean) {
+  async _generate(projectPath: string, mode: VonaMetaMode, force: boolean) {
     const pkgFile = path.join(projectPath, 'package.json');
     const pkgOriginalFile = path.join(projectPath, 'package.original.json');
     // check original
@@ -58,7 +58,7 @@ export class CliToolsDeps extends BeanCliBase {
     return new URL(path.join('../../../templates', file), import.meta.url);
   }
 
-  async _generateTypeProjectFile(projectPath: string, mode: VonaConfigMetaMode) {
+  async _generateTypeProjectFile(projectPath: string, mode: VonaMetaMode) {
     const projectMode = this._getProjectMode(projectPath);
     const fileTemplate = this._resolveTemplatePath(`_tsconfig_${projectMode}.json`);
     const fileConfig = path.join(projectPath, 'tsconfig.json');

@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const boxen = require('boxen');
 const eggBornUtils = require('egg-born-utils');
 const { ProcessHelper } = require('@cabloy/process-helper');
-const { glob } = require('@cabloy/module-glob');
 const { loadEnvs } = require('@cabloy/dotenv');
 const { ensureArray } = require('@cabloy/ensure-array');
 
@@ -142,17 +141,7 @@ const utils = {
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
   },
-  async prepareProjectAll({ env }) {
-    const projectPath = this.getProjectDir();
-    // glob
-    const { suites, modules } = await glob({
-      projectMode: 'vona',
-      projectPath,
-      disabledModules: undefined,
-      disabledSuites: undefined,
-      log: false,
-    });
-    await this.prepareProjectTsConfig({ suites, modules, env });
+  async prepareProjectAll() {
     await this.tsc();
   },
 };

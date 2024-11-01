@@ -9,14 +9,7 @@
     "url": "git+https://github.com/zhennann/cabloy.git"
   },
   "author": "zhennann",
-  "keywords": [
-    "nodejs",
-    "full-stack",
-    "workflow-engine",
-    "egg-framework",
-    "framework7",
-    "cabloy"
-  ],
+  "keywords": ["nodejs", "full-stack", "workflow-engine", "egg-framework", "framework7", "cabloy"],
   "bugs": {
     "url": "https://github.com/zhennann/cabloy/issues"
   },
@@ -28,7 +21,7 @@
     "vona": "cd ./packages-cli && tsc -b && cd .. && node ./packages-cli/cli/dist/bin/vona.js",
     "cli": "node ./scripts/egg-born-bin.js cli",
     "db:reset": "node ./scripts/egg-born-bin.js backend-db-reset",
-    "dev": "node ./scripts/egg-born-bin.js backend-dev --workers=2",
+    "dev": "npm run prerun && node ./scripts/egg-born-bin.js backend-dev --workers=2",
     "dev:one": "node ./scripts/egg-born-bin.js backend-dev --workers=1",
     "test": "node ./scripts/egg-born-bin.js backend-test",
     "cov": "node ./scripts/egg-born-bin.js backend-cov",
@@ -36,6 +29,8 @@
     "start": "node ./scripts/egg-born-scripts.js backend-start",
     "start:daemon": "node ./scripts/egg-born-scripts.js backend-start --daemon",
     "stop": "node ./scripts/egg-born-scripts.js backend-stop",
+    "prerun": "vona :tools:deps && npm run tsc",
+    "tsc": "tsc --project tsconfig.json",
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix --ext .ts src"
   },
