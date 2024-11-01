@@ -1,5 +1,9 @@
 简体中文 | [English](./README.en-US.md)
 
+## todo
+
+需要先执行指令，以便初始化package.json文件 vona :tools:deps
+
 # CabloyJS 是什么
 
 CabloyJS 是一款自带`工作流引擎`的 Node.js 全栈框架，面向开发者的低代码开发平台。实现了真正意义的“`一次开发，到处运行`”的跨端跨平台理念。只需一套代码，即可同时实现`B端中后台管理系统`和`C端前台应用`。只需一套代码，即可同时跨端`PC`和`Mobile`，并且`Mobile端`是接近原生体验
