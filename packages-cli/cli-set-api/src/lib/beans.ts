@@ -4,6 +4,7 @@ import { CliCreateModule } from './bean/cli.create.module.js';
 import { CliCreateBean } from './bean/cli.create.bean.js';
 import { CliToolsDeps } from './bean/cli.tools.deps.js';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.js';
+import { CliToolsBuild } from './bean/cli.tools.build.js';
 
 export const beans = {
   'default.list': CliDefaultList,
@@ -12,4 +13,5 @@ export const beans = {
   'create.module': CliCreateModule,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
+  'tools.build': CliToolsBuild,
 };

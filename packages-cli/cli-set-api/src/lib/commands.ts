@@ -4,6 +4,7 @@ import createModule from './command/create.module.js';
 import createBean from './command/create.bean.js';
 import toolsDeps from './command/tools.deps.js';
 import toolsMetadata from './command/tools.metadata.js';
+import toolsBuild from './command/tools.build.js';
 
 export const commands = {
   default: {
@@ -19,5 +20,6 @@ export const commands = {
   tools: {
     deps: toolsDeps,
     metadata: toolsMetadata,
+    build: toolsBuild,
   },
 };
