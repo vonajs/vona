@@ -1,6 +1,6 @@
 {
   "name": "egg-born-backend",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "egg-born-backend",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
