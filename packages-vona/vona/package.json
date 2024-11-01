@@ -1,6 +1,6 @@
 {
   "name": "vona",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "vona",
   "publishConfig": {
     "access": "public"
@@ -36,22 +36,24 @@
     "@cabloy/compose": "workspace:^",
     "@cabloy/deps": "workspace:^",
     "@cabloy/dotenv": "workspace:^",
-    "@cabloy/ensure-array": "workspace:^",
     "@cabloy/egg-socket.io": "^6.0.0",
+    "@cabloy/ensure-array": "workspace:^",
     "@cabloy/extend": "workspace:^",
-    "@cabloy/koa-static-cache": "^5.1.8",
     "@cabloy/json5": "workspace:^",
-    "@cabloy/word-utils": "^1.0.2",
+    "@cabloy/koa-static-cache": "^5.1.8",
     "@cabloy/localeutil": "workspace:^",
     "@cabloy/module-glob": "workspace:^",
     "@cabloy/module-info": "workspace:^",
     "@cabloy/module-info-pro": "workspace:^",
     "@cabloy/set": "workspace:^",
+    "@cabloy/word-utils": "^1.0.2",
     "@zhennann/egg-passport": "^2.1.5",
     "async": "^3.2.0",
     "bottleneck": "^2.19.5",
     "bullmq": "^2.3.1",
     "chalk": "^3.0.0",
+    "chokidar": "^3.5.2",
+    "debounce": "^1.2.0",
     "debug": "^4.3.4",
     "egg": "^3.17.5",
     "egg-born-mock": "workspace:^",
@@ -72,13 +74,11 @@
     "passport-oauth2": "^1.6.1",
     "raw-body": "2.5.1",
     "redlock": "^4.1.0",
-    "regenerator-runtime": "^0.14.1",
     "reflect-metadata": "^0.2.1",
+    "regenerator-runtime": "^0.14.1",
     "semver": "^7.3.7",
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
-    "uuid": "^9.0.1",
-    "chokidar": "^3.5.2",
-    "debounce": "^1.2.0"
+    "uuid": "^9.0.1"
   }
 }

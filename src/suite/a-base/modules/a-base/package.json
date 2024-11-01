@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-base",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "Base",
   "vonaModule": {
     "fileVersion": 30,
@@ -32,10 +32,10 @@
   "scripts": {},
   "author": "zhennann",
   "dependencies": {
+    "@cabloy/extend": "^3.0.6",
     "@cabloy/module-info": "workspace:^",
     "@koa/cors": "^5.0.0",
     "@zhennann/currency": "^1.0.3",
-    "@cabloy/extend": "^3.0.2",
     "@zhennann/trim-html": "^0.1.12",
     "chalk": "^3.0.0",
     "exceljs": "^4.3.0",

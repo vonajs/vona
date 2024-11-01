@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-cli",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-cli",
   "vonaModule": {
     "fileVersion": 0,
@@ -33,8 +33,8 @@
   ],
   "author": "zhennann",
   "dependencies": {
-    "@cabloy/process-helper": "workspace:^",
     "@cabloy/module-info": "workspace:^",
+    "@cabloy/process-helper": "workspace:^",
     "@zhennann/ejs": "^3.0.1",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",

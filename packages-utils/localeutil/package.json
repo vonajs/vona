@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/localeutil",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "cabloy localeutil",
   "publishConfig": {
     "access": "public"
@@ -30,6 +30,5 @@
     "framework",
     "cabloy"
   ],
-  "author": "zhennann",
-  "dependencies": {}
+  "author": "zhennann"
 }

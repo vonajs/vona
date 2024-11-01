@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "@cabloy/cli",
   "publishConfig": {
     "access": "public"
@@ -34,9 +34,9 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/module-glob": "^5.0.15",
-    "@cabloy/module-info": "^1.0.23",
-    "@cabloy/process-helper": "^1.0.4",
+    "@cabloy/module-glob": "^5.1.2",
+    "@cabloy/module-info": "^1.1.2",
+    "@cabloy/process-helper": "^1.0.6",
     "@npmcli/config": "^8.3.4",
     "@zhennann/common-bin": "^4.0.0",
     "@zhennann/ejs": "^3.0.1",
