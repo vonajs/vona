@@ -3,17 +3,12 @@ const fse = require('fs-extra');
 const chalk = require('chalk');
 const boxen = require('boxen');
 const eggBornUtils = require('egg-born-utils');
-const { ProcessHelper } = require('@cabloy/process-helper');
 const { loadEnvs } = require('@cabloy/dotenv');
 const { ensureArray } = require('@cabloy/ensure-array');
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
 
 const utils = {
-  async tsc() {
-    const processHelper = new ProcessHelper();
-    await processHelper.tsc();
-  },
   async prepareToken(projectPath, tokenName, options) {
     options = options || {};
     const warnWhenEmpty = options.warnWhenEmpty;
@@ -141,8 +136,6 @@ const utils = {
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;
   },
-  async prepareProjectAll() {
-    await this.tsc();
-  },
+  async prepareProjectAll() {},
 };
 module.exports = utils;

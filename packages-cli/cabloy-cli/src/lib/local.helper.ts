@@ -12,7 +12,7 @@ import path from 'node:path';
 
 export class LocalHelper {
   cli: BeanCliBase;
-  processHelper: any;
+  processHelper: ProcessHelper;
 
   constructor(cli) {
     this.cli = cli;
@@ -157,7 +157,7 @@ export class LocalHelper {
     return await this.processHelper.spawn({ cmd, args, options });
   }
   async gitCommit({ cwd, message }: any) {
-    return await this.processHelper.gitCommit({ cwd, message });
+    return await this.processHelper.gitCommit(message, { cwd });
   }
   async getRegistry() {
     return await getRegistry();

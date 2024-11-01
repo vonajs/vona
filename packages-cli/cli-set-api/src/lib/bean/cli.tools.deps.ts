@@ -1,13 +1,12 @@
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
-import { VonaMetaMode } from 'vona-shared';
 import eggBornUtils from 'egg-born-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
+    tsc: boolean;
     force: boolean;
-    mode: VonaMetaMode;
   }
 }
 
@@ -17,13 +16,13 @@ export class CliToolsDeps extends BeanCliBase {
     // super
     await super.execute();
     const projectPath = argv.projectPath;
+    const tsc = argv.tsc;
     const force = argv.force;
-    const mode = argv.mode || 'local';
     // generate
-    await this._generate(projectPath, mode, force);
+    await this._generate(projectPath, tsc, force);
   }
 
-  async _generate(projectPath: string, mode: VonaMetaMode, force: boolean) {
+  async _generate(projectPath: string, tsc: boolean, force: boolean) {
     const pkgFile = path.join(projectPath, 'package.json');
     const pkgOriginalFile = path.join(projectPath, 'package.original.json');
     // check original
@@ -42,7 +41,11 @@ export class CliToolsDeps extends BeanCliBase {
     // generate type modules file
     await this._generateTypeModulesFile(projectPath, force);
     // generate type project file
-    await this._generateTypeProjectFile(projectPath, mode);
+    await this._generateTypeProjectFile(projectPath);
+    // tsc
+    if (tsc) {
+      await this._tsc();
+    }
   }
 
   _getProjectMode(projectPath: string) {
@@ -58,7 +61,7 @@ export class CliToolsDeps extends BeanCliBase {
     return new URL(path.join('../../../templates', file), import.meta.url);
   }
 
-  async _generateTypeProjectFile(projectPath: string, mode: VonaMetaMode) {
+  async _generateTypeProjectFile(projectPath: string) {
     const projectMode = this._getProjectMode(projectPath);
     const fileTemplate = this._resolveTemplatePath(`_tsconfig_${projectMode}.json`);
     const fileConfig = path.join(projectPath, 'tsconfig.json');
@@ -79,22 +82,6 @@ export class CliToolsDeps extends BeanCliBase {
           item2 => item.path.indexOf(item2) > -1,
         ),
     );
-    // append new for prod build
-    if (mode !== 'prod') {
-      // suites
-      for (const key in this.modulesMeta.suites) {
-        const suite = this.modulesMeta.suites[key];
-        referencesNew.push({ path: `src/suite${suite.info.vendor ? '-vendor' : ''}/${suite.info.originalName}` });
-      }
-      // modules
-      this.modulesMeta.modulesArray.forEach(module => {
-        if (!module.suite) {
-          referencesNew.push({
-            path: `src/module${module.info.vendor ? '-vendor' : ''}/${module.info.originalName}`,
-          });
-        }
-      });
-    }
     //
     if (exists && JSON.stringify(referencesNew, null, 2) === JSON.stringify(referencesOld, null, 2)) return;
     const contentNew = { ...content, references: referencesNew };
@@ -171,5 +158,9 @@ export class CliToolsDeps extends BeanCliBase {
     if (changed) {
       await this.helper.saveJSONFile(pkgOriginalFile, pkgOriginal);
     }
+  }
+
+  async _tsc() {
+    await this.helper.processHelper.tsc();
   }
 }
