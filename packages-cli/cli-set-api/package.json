@@ -1,6 +1,6 @@
 {
   "name": "vona-cli-set-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vona cli-set-api",
   "publishConfig": {
     "access": "public"
