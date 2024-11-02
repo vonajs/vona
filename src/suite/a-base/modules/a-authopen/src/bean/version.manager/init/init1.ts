@@ -90,8 +90,7 @@ export class VersionInit extends BeanBase<ScopeModule> {
     // name
     const name = `clidev@${this.ctx.app.name}`;
     // host
-    const buildConfig = this.ctx.app.meta.util.requireDynamic(path.join(process.cwd(), 'build/config.js'));
-    const host = `http://127.0.0.1:${buildConfig.backend.port}`;
+    const host = `http://127.0.0.1:${process.env.SERVER_LISTEN_PORT}`;
     // add
     await this.localToken.add({
       name,
