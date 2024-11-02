@@ -11,6 +11,7 @@ process.env.NODE_ENV = 'test';
 // spec
 const spec = utils.combineTestPattern({
   baseDir,
+  flavor: process.env.META_FLAVOR,
   env: 'unittest',
   pattern: null,
 });

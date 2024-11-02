@@ -33,6 +33,7 @@ class BackendTestCommand extends TestCommand {
     // spec
     context.argv._ = utils.combineTestPattern({
       baseDir,
+      flavor: context.argv.flavor,
       env: 'unittest',
       pattern: context.argv._,
     });

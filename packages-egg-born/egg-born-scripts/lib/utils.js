@@ -90,9 +90,9 @@ const utils = {
     const projectPath = this.getProjectDir();
     return require(path.join(projectPath, 'package.json'));
   },
-  loadEnvAndConfig({ baseDir, env }) {
+  loadEnvAndConfig({ baseDir, flavor, env }) {
     // load envs
-    const meta = { serverEnv: env, mine: 'mine' };
+    const meta = { flavor: flavor || 'normal', mode: env, mine: 'mine' };
     const projectPath = path.join(baseDir, '../..');
     const envDir = path.join(projectPath, 'env');
     loadEnvs(meta, envDir, '.env');
@@ -103,13 +103,13 @@ const utils = {
   getProjectDir() {
     return process.cwd();
   },
-  combineTestPattern({ baseDir, env, pattern }) {
+  combineTestPattern({ baseDir, flavor, env, pattern }) {
     // pattern
     if (!pattern || pattern.length === 0) {
       pattern = ['src/**/test/**/*.test.ts'];
     }
     // disabledModules
-    this.loadEnvAndConfig({ baseDir, env });
+    this.loadEnvAndConfig({ baseDir, flavor, env });
     const disabledModules = ensureArray(process.env.Project_Disabled_Modules);
     for (const relativeName of disabledModules) {
       pattern.push(`!src/**/${relativeName}/test/**/*.test.ts`);

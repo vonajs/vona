@@ -36,6 +36,7 @@ class BackendCovCommand extends CovCommand {
     // spec
     context.argv._ = utils.combineTestPattern({
       baseDir,
+      flavor: context.argv.flavor,
       env: 'unittest',
       pattern: context.argv._,
     });
