@@ -30,15 +30,5 @@ export default function (appInfo: VonaAppInfo) {
     },
   };
 
-  // redis
-  config.redis = {
-    default: {
-      host: 'redis', // see: docker-compose.yml
-      port: 6379,
-      password: '',
-      db: 0,
-    },
-  };
-
   return config;
 }
