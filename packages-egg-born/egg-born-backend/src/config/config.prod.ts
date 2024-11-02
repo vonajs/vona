@@ -1,4 +1,4 @@
-import { VonaAppInfo, VonaConfigOptional } from "vona";
+import { VonaAppInfo, VonaConfigOptional } from 'vona';
 
 export default function (_appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
@@ -12,17 +12,6 @@ export default function (_appInfo: VonaAppInfo) {
     testDatabase: false,
     base: {
       asyncStackTraces: false,
-    },
-  };
-
-  // mysql
-  config.mysql = {
-    default: {
-      hook: {
-        meta: {
-          long_query_time: 500,
-        },
-      },
     },
   };
 

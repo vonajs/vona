@@ -198,7 +198,7 @@ export default function (appInfo: VonaAppInfo) {
   // database
   config.database = {
     testDatabase: false,
-    defaultClient: 'default',
+    defaultClient: process.env.DATABASE_DEFAULT_CLIENT,
     clients: {},
     base: {
       pool: { min: 0, max: 5 },
