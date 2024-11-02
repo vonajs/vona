@@ -7,6 +7,11 @@ class BackendDevCommand extends DevCommand {
 
     this.usage = 'Usage: egg-born-bin backend-dev';
     this.options = {
+      flavor: {
+        description: 'flavor',
+        type: 'string',
+        default: 'normal',
+      },
       baseDir: {
         description: 'directory of application, default to `process.cwd()`',
         type: 'string',

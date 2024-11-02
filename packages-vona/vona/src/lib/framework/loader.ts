@@ -2,6 +2,7 @@ import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
 import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
 import { extend } from '@cabloy/extend';
+import { VonaMetaMode } from 'vona-shared';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {
@@ -23,7 +24,12 @@ function createLoaderClass(Base) {
 
     _loadEnvAndConfig() {
       // load envs
-      const meta = { serverEnv: this.serverEnv, mine: 'mine' };
+      const mode: VonaMetaMode = this.serverEnv;
+      const meta = {
+        flavor: this.app.options.flavor || 'normal',
+        mode,
+        mine: 'mine',
+      };
       const projectPath = path.join(this.options.baseDir, '../..');
       const envDir = path.join(projectPath, 'env');
       loadEnvs(meta, envDir, '.env');

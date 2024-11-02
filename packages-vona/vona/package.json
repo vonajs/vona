@@ -79,7 +79,8 @@
     "semver": "^7.3.7",
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "vona-shared": "workspace:^"
   },
   "gitHead": "72c82934d27173943963f25132b03c3f8e8933d3"
 }
