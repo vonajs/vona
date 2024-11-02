@@ -16,8 +16,8 @@ export class ModuleTools extends BeanSimple {
     const { suites, modules, modulesArray } = await glob({
       projectMode: 'vona',
       projectPath: path.join(app.options.baseDir, '../..'),
-      disabledModules: process.env.Project_Disabled_Modules,
-      disabledSuites: process.env.Project_Disabled_Suites,
+      disabledModules: process.env.PROJECT_DISABLED_MODULES,
+      disabledSuites: process.env.PROJECT_DISABLED_SUITES,
       log: !!app.meta.inAgent,
     });
     app.meta.suites = suites;

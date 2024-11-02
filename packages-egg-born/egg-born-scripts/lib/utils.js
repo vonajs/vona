@@ -110,12 +110,12 @@ const utils = {
     }
     // disabledModules
     this.loadEnvAndConfig({ baseDir, flavor, env });
-    const disabledModules = ensureArray(process.env.Project_Disabled_Modules);
+    const disabledModules = ensureArray(process.env.PROJECT_DISABLED_MODULES);
     for (const relativeName of disabledModules) {
       pattern.push(`!src/**/${relativeName}/test/**/*.test.ts`);
     }
     // disabledSuites
-    const disabledSuites = ensureArray(process.env.Project_Disabled_Suites);
+    const disabledSuites = ensureArray(process.env.PROJECT_DISABLED_SUITES);
     for (const relativeName of disabledSuites) {
       pattern.push(`!src/**/${relativeName}/modules/*/test/**/*.test.ts`);
     }
