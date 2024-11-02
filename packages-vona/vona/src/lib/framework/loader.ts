@@ -25,8 +25,9 @@ function createLoaderClass(Base) {
     _loadEnvAndConfig() {
       // load envs
       const mode: VonaMetaMode = this.serverEnv;
+      // use process.env.META_FLAVOR for test
       const meta = {
-        flavor: this.app.options.flavor || 'normal',
+        flavor: this.app.options.flavor || process.env.META_FLAVOR || 'normal',
         mode,
         mine: 'mine',
       };

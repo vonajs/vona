@@ -1,5 +1,6 @@
+export type VonaMetaFlavor = 'normal' | string;
 export type VonaMetaMode = 'local' | 'prod' | 'unittest';
 export interface VonaConfigMeta {
-  flavor: 'normal' | string;
+  flavor: VonaMetaFlavor;
   mode: VonaMetaMode;
 }

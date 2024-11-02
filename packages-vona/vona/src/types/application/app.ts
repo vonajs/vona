@@ -9,7 +9,7 @@ export * as IORedis from 'ioredis';
 
 // @ts-ignore ignore the throw type check of 'config'
 export interface VonaApplication extends EggApplication {
-  options: EggLoaderOptions;
+  options: EggLoaderOptions & { flavor };
   meta: AppMeta;
   bean: BeanContainer;
   redis: Singleton<Redis>; // Omit<Redis, 'get'> & Singleton<Redis>;

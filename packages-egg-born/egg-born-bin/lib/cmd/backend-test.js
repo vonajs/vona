@@ -28,6 +28,7 @@ class BackendTestCommand extends TestCommand {
     context.env.EGG_BASE_DIR = baseDir;
     context.env.EGG_FRAMEWORK = utils.getModulePath('egg-born-backend');
     context.env.NODE_ENV = 'test';
+    context.env.META_FLAVOR = context.argv.flavor;
 
     // spec
     context.argv._ = utils.combineTestPattern({
