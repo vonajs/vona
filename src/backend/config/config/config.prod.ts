@@ -40,33 +40,5 @@ export default function (appInfo: VonaAppInfo) {
     },
   };
 
-  // database
-  config.database = {
-    // defaultClient: 'mysql',
-    defaultClient: 'default',
-    clients: {
-      default: {
-        client: 'pg',
-        connection: {
-          host: 'pg', // see: docker-compose.yml
-          port: 5432,
-          user: 'xxxxxx',
-          password: 'xxxxxx',
-          database: 'xxxxxx',
-        },
-      },
-      mysql: {
-        client: 'mysql2',
-        connection: {
-          host: 'mysql', // see: docker-compose.yml
-          port: 3306,
-          user: 'xxxxxx',
-          password: 'xxxxxx',
-          database: 'xxxxxx',
-        },
-      },
-    },
-  };
-
   return config;
 }

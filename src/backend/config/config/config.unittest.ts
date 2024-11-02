@@ -19,33 +19,5 @@ export default function (appInfo: VonaAppInfo) {
     },
   };
 
-  // database
-  config.database = {
-    // defaultClient: 'mysql',
-    defaultClient: 'default',
-    clients: {
-      default: {
-        client: 'pg',
-        connection: {
-          host: '127.0.0.1',
-          port: 5432,
-          user: 'postgres',
-          password: 'xxxxxx',
-          database: 'postgres', // donnot change the name
-        },
-      },
-      mysql: {
-        client: 'mysql2',
-        connection: {
-          host: '127.0.0.1',
-          port: 3306, // for github actions
-          user: 'root',
-          password: 'xxxxxx',
-          database: 'mysql', // donnot change the name
-        },
-      },
-    },
-  };
-
   return config;
 }
