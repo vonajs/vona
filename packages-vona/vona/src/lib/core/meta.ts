@@ -19,7 +19,7 @@ import {
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
-import { VonaMetaFlavor } from 'vona-shared';
+import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -29,6 +29,7 @@ export class AppMeta extends BeanSimple {
   isTest: boolean;
   isLocal: boolean;
   flavor: VonaMetaFlavor;
+  mode: VonaMetaMode;
   util: AppUtil;
   mockUtil: AppMockUtil;
   reload: AppReload;
@@ -108,5 +109,6 @@ export class AppMeta extends BeanSimple {
     this.isTest = this.app.config.env === 'unittest' || this.app.config.env === 'test';
     this.isLocal = this.app.config.env === 'local';
     this.flavor = this.app.options.flavor || process.env.META_FLAVOR || 'normal';
+    this.mode = this.app.config.env as VonaMetaMode;
   }
 }
