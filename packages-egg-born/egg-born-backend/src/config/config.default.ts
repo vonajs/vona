@@ -21,7 +21,7 @@ export default function (appInfo: VonaAppInfo) {
   config.cluster = {
     listen: {
       hostname: process.env.SERVER_LISTEN_HOSTNAME,
-      port: process.env.SERVER_LISTEN_PORT,
+      port: parseInt(process.env.SERVER_LISTEN_PORT),
     },
   };
 
