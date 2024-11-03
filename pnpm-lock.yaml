@@ -65,6 +65,9 @@ importers:
       vona-module-a-baselayout:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-baselayout
+      vona-module-a-cabloy:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
       vona-module-a-cache:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-cache
@@ -314,6 +317,9 @@ importers:
       vona-module-cabloy-store:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/cabloy-store
+      vona-module-cabloy-test:
+        specifier: workspace:^
+        version: link:src/suite-vendor/cabloy-test/modules/cabloy-test
       vona-module-cms-pluginarticle:
         specifier: workspace:^
         version: link:src/suite/a-cms/modules/cms-pluginarticle
@@ -1145,6 +1151,14 @@ importers:
 
   src/module/test-userpro: {}
 
+  src/suite-vendor/a-cabloy:
+    dependencies:
+      vona-module-a-cabloy:
+        specifier: workspace:^
+        version: link:modules/a-cabloy
+
+  src/suite-vendor/a-cabloy/modules/a-cabloy: {}
+
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-core:
@@ -1157,6 +1171,14 @@ importers:
   src/suite-vendor/a-vona/modules/a-core: {}
 
   src/suite-vendor/a-vona/modules/a-vona: {}
+
+  src/suite-vendor/cabloy-test:
+    dependencies:
+      vona-module-cabloy-test:
+        specifier: workspace:^
+        version: link:modules/cabloy-test
+
+  src/suite-vendor/cabloy-test/modules/cabloy-test: {}
 
   src/suite-vendor/vona-test:
     dependencies:

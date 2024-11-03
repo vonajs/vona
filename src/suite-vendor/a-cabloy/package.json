@@ -1,0 +1,14 @@
+{
+  "name": "vona-suite-a-cabloy",
+  "version": "5.0.0",
+  "title": "a-cabloy",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "description": "",
+  "author": "",
+  "dependencies": {
+    "vona-module-a-cabloy": "workspace:^"
+  }
+}

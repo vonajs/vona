@@ -1,0 +1,14 @@
+{
+  "name": "vona-suite-cabloy-test",
+  "version": "5.0.0",
+  "title": "cabloy-test",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "description": "",
+  "author": "",
+  "dependencies": {
+    "vona-module-cabloy-test": "workspace:^"
+  }
+}
