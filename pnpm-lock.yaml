@@ -437,6 +437,9 @@ importers:
       vona-module-test-wxwork:
         specifier: workspace:^
         version: link:src/suite/a-wxwork/modules/test-wxwork
+      vona-module-vona-test:
+        specifier: workspace:^
+        version: link:src/suite-vendor/vona-test/modules/vona-test
     devDependencies:
       '@babel/core':
         specifier: ^7.24.5
@@ -1154,6 +1157,14 @@ importers:
   src/suite-vendor/a-vona/modules/a-core: {}
 
   src/suite-vendor/a-vona/modules/a-vona: {}
+
+  src/suite-vendor/vona-test:
+    dependencies:
+      vona-module-vona-test:
+        specifier: workspace:^
+        version: link:modules/vona-test
+
+  src/suite-vendor/vona-test/modules/vona-test: {}
 
   src/suite/a-b:
     dependencies:

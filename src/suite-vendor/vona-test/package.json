@@ -1,0 +1,14 @@
+{
+  "name": "vona-suite-vona-test",
+  "version": "5.0.0",
+  "title": "vona-test",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "description": "",
+  "author": "",
+  "dependencies": {
+    "vona-module-vona-test": "workspace:^"
+  }
+}
