@@ -27,8 +27,8 @@ export class BeanCli {
   }
 
   _findCliCommand({ cliFullName }: { cliFullName: string }) {
-    const { command, BeanClass } = findCommand(cliFullName);
-    if (!command) throw new Error(`cli command not found: ${cliFullName}`);
-    return { command, BeanClass };
+    const commandInfo = findCommand(cliFullName);
+    if (!commandInfo || !commandInfo.command) throw new Error(`cli command not found: ${cliFullName}`);
+    return commandInfo;
   }
 }
