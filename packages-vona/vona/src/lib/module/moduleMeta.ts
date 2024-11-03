@@ -16,9 +16,6 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
       } else {
         module.meta = module.resource.meta;
       }
-      if (module.meta) {
-        await app.meta.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, 'metaLoaded', module, module.meta);
-      }
       app.meta.metas[module.info.relativeName] = module.meta;
     }
   }

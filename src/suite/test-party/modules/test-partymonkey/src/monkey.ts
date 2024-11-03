@@ -27,5 +27,4 @@ export class Monkey extends BeanSimple implements IMonkeyModule {
     // config
     monkeyConfig(module, config);
   }
-  async metaLoaded(_module: IModule, _meta) {}
 }

@@ -7,5 +7,4 @@ export class Main extends BeanSimple implements IModuleMain {
   }
   async moduleLoaded() {}
   async configLoaded(_config) {}
-  async metaLoaded(_meta) {}
 }
