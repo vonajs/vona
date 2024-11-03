@@ -18,7 +18,8 @@ export class ModuleTools extends BeanSimple {
       projectPath: path.join(app.options.baseDir, '../..'),
       disabledModules: process.env.PROJECT_DISABLED_MODULES,
       disabledSuites: process.env.PROJECT_DISABLED_SUITES,
-      log: !!app.meta.inAgent,
+      log: false,
+      //log: !!app.meta.inAgent,
     });
     app.meta.suites = suites;
     app.meta.modules = modules;
