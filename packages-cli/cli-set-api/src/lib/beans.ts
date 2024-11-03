@@ -2,6 +2,7 @@ import { CliDefaultList } from './bean/cli.default.list.js';
 import { CliCreateSuite } from './bean/cli.create.suite.js';
 import { CliCreateModule } from './bean/cli.create.module.js';
 import { CliCreateBean } from './bean/cli.create.bean.js';
+import { CliInitMonkey } from './bean/cli.init.monkey.js';
 import { CliToolsDeps } from './bean/cli.tools.deps.js';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.js';
 import { CliToolsBuild } from './bean/cli.tools.build.js';
@@ -11,6 +12,7 @@ export const beans = {
   'create.suite': CliCreateSuite,
   'create.bean': CliCreateBean,
   'create.module': CliCreateModule,
+  'init.monkey': CliInitMonkey,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.build': CliToolsBuild,
