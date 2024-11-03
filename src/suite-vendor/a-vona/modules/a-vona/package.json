@@ -1,26 +1,34 @@
 {
-  "name": "vona-module-<%=argv.name%>",
+  "name": "vona-module-a-vona",
   "version": "5.0.0",
-  "title": "<%=argv.moduleInfo.relativeName%>",
+  "title": "a-vona",
   "vonaModule": {
     "dependencies": {
-      "a-vona": "5.0.0"
+      "a-core": "5.0.0"
     }
   },
   "type": "module",
   "exports": {
     ".": {
-      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
       "development": "./src/index.ts",
       "import": "./dist/index.js",
       "default": "./src/index.ts"
     },
     "./package.json": "./package.json"
   },
-  "description": "<%=argv.description%>",
-  "keywords": ["Vona Module"],
-  "author": "<%=argv.author%>",
-  "files": ["dist", "static"],
+  "description": "",
+  "keywords": [
+    "Vona Module"
+  ],
+  "author": "",
+  "files": [
+    "dist",
+    "static"
+  ],
   "scripts": {},
   "dependencies": {}
 }

@@ -88,7 +88,7 @@ importers:
         version: link:src/suite/a-base/modules/a-codemirror
       vona-module-a-core:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-core/modules/a-core
+        version: link:src/suite-vendor/a-vona/modules/a-core
       vona-module-a-dashboard:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-dashboard
@@ -233,6 +233,9 @@ importers:
       vona-module-a-version:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-version
+      vona-module-a-vona:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-vona
       vona-module-a-wechat:
         specifier: workspace:^
         version: link:src/suite/a-wechat/modules/a-wechat
@@ -1139,13 +1142,18 @@ importers:
 
   src/module/test-userpro: {}
 
-  src/suite-vendor/a-core:
+  src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-core:
         specifier: workspace:^
         version: link:modules/a-core
+      vona-module-a-vona:
+        specifier: workspace:^
+        version: link:modules/a-vona
 
-  src/suite-vendor/a-core/modules/a-core: {}
+  src/suite-vendor/a-vona/modules/a-core: {}
+
+  src/suite-vendor/a-vona/modules/a-vona: {}
 
   src/suite/a-b:
     dependencies:
