@@ -5,7 +5,7 @@
   "vonaModule": {
     "dependencies": {
       "a-core": "5.0.0",
-      "a-decorator": "5.0.0"
+      "a-swagger": "5.0.0"
     }
   },
   "type": "module",

@@ -11,6 +11,6 @@
   "dependencies": {
     "vona-module-a-core": "workspace:^",
     "vona-module-a-vona": "workspace:^",
-    "vona-module-a-decorator": "workspace:^"
+    "vona-module-a-swagger": "workspace:^"
   }
 }
