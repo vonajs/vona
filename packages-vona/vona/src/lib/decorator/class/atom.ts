@@ -1,17 +1,16 @@
 import { appResource } from '../../../index.js';
-import { Constructable, IDecoratorAtomOptions } from '../index.js';
+import { Constructable } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Atom(options?: IDecoratorAtomOptions): ClassDecorator {
+export function Atom(): ClassDecorator {
   return function (target) {
-    if (!options) options = {};
     // module
     const module = parseModuleName();
     // add
     appResource.addBean({
       module,
       scene: 'atom',
-      name: options.name,
+      name: undefined,
       beanClass: target as unknown as Constructable,
     });
   };

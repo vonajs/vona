@@ -72,18 +72,11 @@ export interface IDecoratorBeanOptions {
 
 export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
 
-export interface IDecoratorServiceOptions {
-  name?: string;
-  containerScope?: ContainerScope;
-}
+export interface IDecoratorServiceOptions {}
 
-export interface IDecoratorAtomOptions {
-  name?: string;
-}
+export interface IDecoratorAtomOptions {}
 
-export interface IDecoratorControllerOptions {
-  name?: string;
-}
+export interface IDecoratorControllerOptions {}
 
 type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 export interface IDecoratorAopOptions {

@@ -1,17 +1,16 @@
 import { appResource } from '../../../index.js';
-import { Constructable, IDecoratorControllerOptions } from '../index.js';
+import { Constructable } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Controller(options?: IDecoratorControllerOptions): ClassDecorator {
+export function Controller(): ClassDecorator {
   return function (target) {
-    if (!options) options = {};
     // module
     const module = parseModuleName();
     // add
     appResource.addBean({
       module,
       scene: 'controller',
-      name: options.name,
+      name: undefined,
       beanClass: target as unknown as Constructable,
     });
   };
