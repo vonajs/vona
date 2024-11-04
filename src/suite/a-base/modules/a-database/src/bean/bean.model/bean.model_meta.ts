@@ -1,4 +1,4 @@
-import { BeanBase, Cast, IDecoratorModelOptions, IModelOptions, appResource } from 'vona';
+import { BeanBase, Cast, IDecoratorModelOptions, appResource } from 'vona';
 import { BeanModel } from '../bean.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
@@ -29,17 +29,13 @@ export class BeanModelMeta extends BeanBase {
     return appResource.getBean((<any>this).__beanFullName__);
   }
 
-  protected get __modelOptions() {
+  get table(): string {
+    return this.options.table!;
+  }
+
+  get options(): IDecoratorModelOptions {
     const beanOptions = this.__beanOptions;
     return beanOptions?.options as IDecoratorModelOptions;
-  }
-
-  get table(): string {
-    return this.__modelOptions?.table;
-  }
-
-  get options(): IModelOptions {
-    return this.__modelOptions?.options;
   }
 
   get disableInstance() {
