@@ -1,4 +1,4 @@
-import { ParameterObject } from '../interfaces/open-api-spec.interface';
+import { ParameterObject } from '../interfaces/open-api-spec.interface.js';
 
 export class GlobalParametersStorageHost {
   private parameters = new Array<ParameterObject>();
@@ -19,5 +19,4 @@ export class GlobalParametersStorageHost {
 const globalRef = global as any;
 export const GlobalParametersStorage: GlobalParametersStorageHost =
   globalRef.SwaggerGlobalParametersStorage ||
-  (globalRef.SwaggerGlobalParametersStorage =
-    new GlobalParametersStorageHost());
+  (globalRef.SwaggerGlobalParametersStorage = new GlobalParametersStorageHost());

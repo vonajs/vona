@@ -1,1 +1,1 @@
-export * from './get-schema-path.util';
+export * from './get-schema-path.util.js';

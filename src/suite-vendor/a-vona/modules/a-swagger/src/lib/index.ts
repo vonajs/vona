@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-export * from './decorators';
+export * from './decorators/index.js';
 export * from './document-builder';
 export * from './interfaces';
 export * from './swagger-module';

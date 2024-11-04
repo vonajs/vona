@@ -1,29 +1,21 @@
 import { isArray, isUndefined, negate, pickBy } from 'lodash';
-import { DECORATORS } from '../constants';
-import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants';
-import { METHOD_METADATA } from '@nestjs/common/constants';
-import { isConstructor } from '@nestjs/common/utils/shared.utils';
+import { DECORATORS } from '../constants.js';
+import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
+import { METHOD_METADATA } from '@nestjs/common/constants.js';
+import { isConstructor } from '@nestjs/common/utils/shared.utils.js';
 
 export function createMethodDecorator<T = any>(
   metakey: string,
   metadata: T,
-  { overrideExisting } = { overrideExisting: true }
+  { overrideExisting } = { overrideExisting: true },
 ): MethodDecorator {
-  return (
-    target: object,
-    key: string | symbol,
-    descriptor: PropertyDescriptor
-  ) => {
+  return (target: object, key: string | symbol, descriptor: PropertyDescriptor) => {
     if (typeof metadata === 'object') {
       const prevValue = Reflect.getMetadata(metakey, descriptor.value);
       if (prevValue && !overrideExisting) {
         return descriptor;
       }
-      Reflect.defineMetadata(
-        metakey,
-        { ...prevValue, ...metadata },
-        descriptor.value
-      );
+      Reflect.defineMetadata(metakey, { ...prevValue, ...metadata }, descriptor.value);
       return descriptor;
     }
     Reflect.defineMetadata(metakey, metadata, descriptor.value);
@@ -33,9 +25,9 @@ export function createMethodDecorator<T = any>(
 
 export function createClassDecorator<T extends Array<any> = any>(
   metakey: string,
-  metadata: T = [] as T
+  metadata: T = [] as T,
 ): ClassDecorator {
-  return (target) => {
+  return target => {
     const prevValue = Reflect.getMetadata(metakey, target) || [];
     Reflect.defineMetadata(metakey, [...prevValue, ...metadata], target);
     return target;
@@ -45,19 +37,14 @@ export function createClassDecorator<T extends Array<any> = any>(
 export function createPropertyDecorator<T extends Record<string, any> = any>(
   metakey: string,
   metadata: T,
-  overrideExisting = true
+  overrideExisting = true,
 ): PropertyDecorator {
   return (target: object, propertyKey: string) => {
-    const properties =
-      Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, target) || [];
+    const properties = Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, target) || [];
 
     const key = `:${propertyKey}`;
     if (!properties.includes(key)) {
-      Reflect.defineMetadata(
-        DECORATORS.API_MODEL_PROPERTIES_ARRAY,
-        [...properties, `:${propertyKey}`],
-        target
-      );
+      Reflect.defineMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, [...properties, `:${propertyKey}`], target);
     }
     const existingMetadata = Reflect.getMetadata(metakey, target, propertyKey);
     if (existingMetadata) {
@@ -65,11 +52,11 @@ export function createPropertyDecorator<T extends Record<string, any> = any>(
       const metadataToSave = overrideExisting
         ? {
             ...existingMetadata,
-            ...newMetadata
+            ...newMetadata,
           }
         : {
             ...newMetadata,
-            ...existingMetadata
+            ...existingMetadata,
           };
 
       Reflect.defineMetadata(metakey, metadataToSave, target, propertyKey);
@@ -82,33 +69,24 @@ export function createPropertyDecorator<T extends Record<string, any> = any>(
         metakey,
         {
           type,
-          ...pickBy(metadata, negate(isUndefined))
+          ...pickBy(metadata, negate(isUndefined)),
         },
         target,
-        propertyKey
+        propertyKey,
       );
     }
   };
 }
 
-export function createMixedDecorator<T = any>(
-  metakey: string,
-  metadata: T
-): MethodDecorator & ClassDecorator {
-  return (
-    target: object,
-    key?: string | symbol,
-    descriptor?: TypedPropertyDescriptor<any>
-  ): any => {
+export function createMixedDecorator<T = any>(metakey: string, metadata: T): MethodDecorator & ClassDecorator {
+  return (target: object, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     if (descriptor) {
       let metadatas: any;
       if (Array.isArray(metadata)) {
-        const previousMetadata =
-          Reflect.getMetadata(metakey, descriptor.value) || [];
+        const previousMetadata = Reflect.getMetadata(metakey, descriptor.value) || [];
         metadatas = [...previousMetadata, ...metadata];
       } else {
-        const previousMetadata =
-          Reflect.getMetadata(metakey, descriptor.value) || {};
+        const previousMetadata = Reflect.getMetadata(metakey, descriptor.value) || {};
         metadatas = { ...previousMetadata, ...metadata };
       }
       Reflect.defineMetadata(metakey, metadatas, descriptor.value);
@@ -121,26 +99,17 @@ export function createMixedDecorator<T = any>(
 
 export function createParamDecorator<T extends Record<string, any> = any>(
   metadata: T,
-  initial: Partial<T>
+  initial: Partial<T>,
 ): MethodDecorator & ClassDecorator {
-  return (
-    target: object | Function,
-    key?: string | symbol,
-    descriptor?: TypedPropertyDescriptor<any>
-  ): any => {
+  return (target: object | Function, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     const paramOptions = {
       ...initial,
-      ...pickBy(metadata, negate(isUndefined))
+      ...pickBy(metadata, negate(isUndefined)),
     };
 
     if (descriptor) {
-      const parameters =
-        Reflect.getMetadata(DECORATORS.API_PARAMETERS, descriptor.value) || [];
-      Reflect.defineMetadata(
-        DECORATORS.API_PARAMETERS,
-        [...parameters, paramOptions],
-        descriptor.value
-      );
+      const parameters = Reflect.getMetadata(DECORATORS.API_PARAMETERS, descriptor.value) || [];
+      Reflect.defineMetadata(DECORATORS.API_PARAMETERS, [...parameters, paramOptions], descriptor.value);
       return descriptor;
     }
 
@@ -155,41 +124,27 @@ export function createParamDecorator<T extends Record<string, any> = any>(
         continue;
       }
 
-      const methodDescriptor = Object.getOwnPropertyDescriptor(
-        target.prototype,
-        propertyKey
-      );
+      const methodDescriptor = Object.getOwnPropertyDescriptor(target.prototype, propertyKey);
 
       if (!methodDescriptor) {
         continue;
       }
 
-      const isApiMethod = Reflect.hasMetadata(
-        METHOD_METADATA,
-        methodDescriptor.value
-      );
+      const isApiMethod = Reflect.hasMetadata(METHOD_METADATA, methodDescriptor.value);
 
       if (!isApiMethod) {
         continue;
       }
 
-      const parameters =
-        Reflect.getMetadata(
-          DECORATORS.API_PARAMETERS,
-          methodDescriptor.value
-        ) || [];
-      Reflect.defineMetadata(
-        DECORATORS.API_PARAMETERS,
-        [...parameters, paramOptions],
-        methodDescriptor.value
-      );
+      const parameters = Reflect.getMetadata(DECORATORS.API_PARAMETERS, methodDescriptor.value) || [];
+      Reflect.defineMetadata(DECORATORS.API_PARAMETERS, [...parameters, paramOptions], methodDescriptor.value);
     }
   };
 }
 
 export function getTypeIsArrayTuple(
   input: Function | [Function] | undefined | string | Record<string, any>,
-  isArrayFlag: boolean
+  isArrayFlag: boolean,
 ): [Function | undefined, boolean] {
   if (!input) {
     return [input as undefined, isArrayFlag];

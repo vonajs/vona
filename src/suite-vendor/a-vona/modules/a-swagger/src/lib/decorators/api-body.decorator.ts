@@ -4,15 +4,10 @@ import {
   ExamplesObject,
   ReferenceObject,
   RequestBodyObject,
-  SchemaObject
-} from '../interfaces/open-api-spec.interface';
-import { SwaggerEnumType } from '../types/swagger-enum.type';
-import {
-  addEnumArraySchema,
-  addEnumSchema,
-  isEnumArray,
-  isEnumDefined
-} from '../utils/enum.utils';
+  SchemaObject,
+} from '../interfaces/open-api-spec.interface.js';
+import { SwaggerEnumType } from '../types/swagger-enum.type.js';
+import { addEnumArraySchema, addEnumSchema, isEnumArray, isEnumDefined } from '../utils/enum.utils';
 import { createParamDecorator, getTypeIsArrayTuple } from './helpers';
 
 type RequestBodyOptions = Omit<RequestBodyObject, 'content'>;
@@ -32,19 +27,16 @@ export type ApiBodyOptions = ApiBodyMetadata | ApiBodySchemaHost;
 
 const defaultBodyMetadata: ApiBodyMetadata = {
   type: String,
-  required: true
+  required: true,
 };
 
 export function ApiBody(options: ApiBodyOptions): MethodDecorator {
-  const [type, isArray] = getTypeIsArrayTuple(
-    (options as ApiBodyMetadata).type,
-    (options as ApiBodyMetadata).isArray
-  );
+  const [type, isArray] = getTypeIsArrayTuple((options as ApiBodyMetadata).type, (options as ApiBodyMetadata).isArray);
   const param: ApiBodyMetadata & Record<string, any> = {
     in: 'body',
     ...omit(options, 'enum'),
     type,
-    isArray
+    isArray,
   };
 
   if (isEnumArray(options)) {

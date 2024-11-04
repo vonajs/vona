@@ -1,22 +1,15 @@
 import { Type } from '@nestjs/common';
-import { isFunction } from '@nestjs/common/utils/shared.utils';
+import { isFunction } from '@nestjs/common/utils/shared.utils.js';
 import { flatMap, identity } from 'lodash';
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 import { isBodyParameter } from '../utils/is-body-parameter.util';
-import { ModelPropertiesAccessor } from './model-properties-accessor';
-import {
-  ParamWithTypeMetadata,
-  ParamsWithType
-} from './parameter-metadata-accessor';
+import { ModelPropertiesAccessor } from './model-properties-accessor.js';
+import { ParamWithTypeMetadata, ParamsWithType } from './parameter-metadata-accessor.js';
 
 export class ParametersMetadataMapper {
-  constructor(
-    private readonly modelPropertiesAccessor: ModelPropertiesAccessor
-  ) {}
+  constructor(private readonly modelPropertiesAccessor: ModelPropertiesAccessor) {}
 
-  transformModelToProperties(
-    parameters: ParamsWithType
-  ): ParamWithTypeMetadata[] {
+  transformModelToProperties(parameters: ParamsWithType): ParamWithTypeMetadata[] {
     const properties = flatMap(parameters, (param: ParamWithTypeMetadata) => {
       if (!param || param.type === Object || !param.type) {
         return undefined;
@@ -34,12 +27,9 @@ export class ParametersMetadataMapper {
       const { prototype } = param.type;
 
       this.modelPropertiesAccessor.applyMetadataFactory(prototype);
-      const modelProperties =
-        this.modelPropertiesAccessor.getModelProperties(prototype);
+      const modelProperties = this.modelPropertiesAccessor.getModelProperties(prototype);
 
-      return modelProperties.map((key) =>
-        this.mergeImplicitWithExplicit(key, prototype, param)
-      );
+      return modelProperties.map(key => this.mergeImplicitWithExplicit(key, prototype, param));
     });
     return properties.filter(identity);
   }
@@ -47,16 +37,14 @@ export class ParametersMetadataMapper {
   mergeImplicitWithExplicit(
     key: string,
     prototype: Type<unknown>,
-    param: ParamWithTypeMetadata
+    param: ParamWithTypeMetadata,
   ): ParamWithTypeMetadata {
-    const reflectedParam =
-      Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES, prototype, key) ||
-      {};
+    const reflectedParam = Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES, prototype, key) || {};
 
     return {
       ...param,
       ...reflectedParam,
-      name: reflectedParam.name || key
+      name: reflectedParam.name || key,
     };
   }
 }

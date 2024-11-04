@@ -1,10 +1,7 @@
 import { isNil, isUndefined, negate, pickBy } from 'lodash';
-import { DECORATORS } from '../constants';
-import {
-  ParameterLocation,
-  ParameterObject
-} from '../interfaces/open-api-spec.interface';
-import { SwaggerEnumType } from '../types/swagger-enum.type';
+import { DECORATORS } from '../constants.js';
+import { ParameterLocation, ParameterObject } from '../interfaces/open-api-spec.interface.js';
+import { SwaggerEnumType } from '../types/swagger-enum.type.js';
 import { getEnumType, getEnumValues } from '../utils/enum.utils';
 import { createClassDecorator, createParamDecorator } from './helpers';
 
@@ -13,12 +10,10 @@ export interface ApiHeaderOptions extends Omit<ParameterObject, 'in'> {
 }
 
 const defaultHeaderOptions: Partial<ApiHeaderOptions> = {
-  name: ''
+  name: '',
 };
 
-export function ApiHeader(
-  options: ApiHeaderOptions
-): MethodDecorator & ClassDecorator {
+export function ApiHeader(options: ApiHeaderOptions): MethodDecorator & ClassDecorator {
   const param = pickBy<ApiHeaderOptions & { in: ParameterLocation }>(
     {
       name: isNil(options.name) ? defaultHeaderOptions.name : options.name,
@@ -28,10 +23,10 @@ export function ApiHeader(
       examples: options.examples,
       schema: {
         type: 'string',
-        ...(options.schema || {})
-      }
+        ...(options.schema || {}),
+      },
     },
-    negate(isUndefined)
+    negate(isUndefined),
   );
 
   if (options.enum) {
@@ -39,36 +34,20 @@ export function ApiHeader(
     param.schema = {
       ...param.schema,
       enum: enumValues,
-      type: getEnumType(enumValues)
+      type: getEnumType(enumValues),
     };
   }
 
-  return (
-    target: object | Function,
-    key?: string | symbol,
-    descriptor?: TypedPropertyDescriptor<any>
-  ): any => {
+  return (target: object | Function, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     if (descriptor) {
-      return createParamDecorator(param, defaultHeaderOptions)(
-        target,
-        key,
-        descriptor
-      );
+      return createParamDecorator(param, defaultHeaderOptions)(target, key, descriptor);
     }
-    return createClassDecorator(DECORATORS.API_HEADERS, [param])(
-      target as Function
-    );
+    return createClassDecorator(DECORATORS.API_HEADERS, [param])(target as Function);
   };
 }
 
-export const ApiHeaders = (
-  headers: ApiHeaderOptions[]
-): MethodDecorator & ClassDecorator => {
-  return (
-    target: object | Function,
-    key?: string | symbol,
-    descriptor?: TypedPropertyDescriptor<any>
-  ): any => {
-    headers.forEach((options) => ApiHeader(options)(target, key, descriptor));
+export const ApiHeaders = (headers: ApiHeaderOptions[]): MethodDecorator & ClassDecorator => {
+  return (target: object | Function, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
+    headers.forEach(options => ApiHeader(options)(target, key, descriptor));
   };
 };

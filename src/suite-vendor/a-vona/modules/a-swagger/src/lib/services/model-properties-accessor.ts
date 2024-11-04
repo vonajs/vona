@@ -1,21 +1,17 @@
 import { Type } from '@nestjs/common';
-import { isFunction, isString } from '@nestjs/common/utils/shared.utils';
+import { isFunction, isString } from '@nestjs/common/utils/shared.utils.js';
 import 'reflect-metadata';
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 import { createApiPropertyDecorator } from '../decorators/api-property.decorator';
-import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants';
+import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
 
 export class ModelPropertiesAccessor {
   getModelProperties(prototype: Type<unknown>): string[] {
-    const properties =
-      Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, prototype) ||
-      [];
+    const properties = Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, prototype) || [];
 
     return properties
       .filter(isString)
-      .filter(
-        (key: string) => key.charAt(0) === ':' && !isFunction(prototype[key])
-      )
+      .filter((key: string) => key.charAt(0) === ':' && !isFunction(prototype[key]))
       .map((key: string) => key.slice(1));
   }
 
@@ -30,7 +26,7 @@ export class ModelPropertiesAccessor {
       }
       const metadata = prototype.constructor[METADATA_FACTORY_NAME]();
       const properties = Object.keys(metadata);
-      properties.forEach((key) => {
+      properties.forEach(key => {
         createApiPropertyDecorator(metadata[key], false)(classPrototype, key);
       });
     } while (

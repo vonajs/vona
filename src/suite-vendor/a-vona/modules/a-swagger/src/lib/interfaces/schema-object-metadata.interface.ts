@@ -1,14 +1,10 @@
 import { Type } from '@nestjs/common';
 import { EnumSchemaAttributes } from './enum-schema-attributes.interface';
-import { SchemaObject } from './open-api-spec.interface';
+import { SchemaObject } from './open-api-spec.interface.js';
 
-export type EnumAllowedTypes =
-  | any[]
-  | Record<string, any>
-  | (() => any[] | Record<string, any>);
+export type EnumAllowedTypes = any[] | Record<string, any> | (() => any[] | Record<string, any>);
 
-interface SchemaObjectCommonMetadata
-  extends Omit<SchemaObject, 'type' | 'required' | 'properties' | 'enum'> {
+interface SchemaObjectCommonMetadata extends Omit<SchemaObject, 'type' | 'required' | 'properties' | 'enum'> {
   isArray?: boolean;
   name?: string;
   enum?: EnumAllowedTypes;
@@ -16,16 +12,7 @@ interface SchemaObjectCommonMetadata
 
 export type SchemaObjectMetadata =
   | (SchemaObjectCommonMetadata & {
-      type?:
-        | Type<unknown>
-        | Function
-        | [Function]
-        | 'array'
-        | 'string'
-        | 'number'
-        | 'boolean'
-        | 'integer'
-        | 'null';
+      type?: Type<unknown> | Function | [Function] | 'array' | 'string' | 'number' | 'boolean' | 'integer' | 'null';
       required?: boolean;
     })
   | ({

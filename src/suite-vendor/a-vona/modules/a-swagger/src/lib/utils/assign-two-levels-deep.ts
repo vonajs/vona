@@ -16,9 +16,7 @@ export function assignTwoLevelsDeep<TObject, T>(_dest: TObject, ...args: T[]) {
   const dest = _dest as TObject & T;
 
   for (const arg of args) {
-    for (const [key, value] of Object.entries(arg ?? {}) as Array<
-      [keyof T, T[keyof T]]
-    >) {
+    for (const [key, value] of Object.entries(arg ?? {}) as Array<[keyof T, T[keyof T]]>) {
       dest[key] = { ...dest[key], ...value };
     }
   }

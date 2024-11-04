@@ -1,4 +1,4 @@
-import { METADATA_FACTORY_NAME } from './plugin-constants';
+import { METADATA_FACTORY_NAME } from './plugin-constants.js';
 
 export class MetadataLoader {
   private static readonly refreshHooks = new Array<() => void>();
@@ -22,12 +22,10 @@ export class MetadataLoader {
     this.runHooks();
   }
 
-  private async applyMetadata(
-    meta: Array<[Promise<unknown>, Record<string, any>]>
-  ) {
+  private async applyMetadata(meta: Array<[Promise<unknown>, Record<string, any>]>) {
     const loadPromises = meta.map(async ([fileImport, fileMeta]) => {
       const fileRef = await fileImport;
-      Object.keys(fileMeta).map((key) => {
+      Object.keys(fileMeta).map(key => {
         const clsRef = fileRef[key];
         clsRef[METADATA_FACTORY_NAME] = () => fileMeta[key];
       });
@@ -36,6 +34,6 @@ export class MetadataLoader {
   }
 
   private runHooks() {
-    MetadataLoader.refreshHooks.forEach((hook) => hook());
+    MetadataLoader.refreshHooks.forEach(hook => hook());
   }
 }

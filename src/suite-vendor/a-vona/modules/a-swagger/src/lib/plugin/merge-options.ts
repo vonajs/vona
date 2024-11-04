@@ -1,4 +1,4 @@
-import { isString } from '@nestjs/common/utils/shared.utils';
+import { isString } from '@nestjs/common/utils/shared.utils.js';
 import { pluginDebugLogger } from './plugin-debug-logger';
 
 export interface PluginOptions {
@@ -24,12 +24,10 @@ const defaultOptions: PluginOptions = {
   controllerKeyOfComment: 'summary',
   introspectComments: false,
   readonly: false,
-  debug: false
+  debug: false,
 };
 
-export const mergePluginOptions = (
-  options: Record<string, any> = {}
-): PluginOptions => {
+export const mergePluginOptions = (options: Record<string, any> = {}): PluginOptions => {
   if (isString(options.dtoFileNameSuffix)) {
     options.dtoFileNameSuffix = [options.dtoFileNameSuffix];
   }
@@ -38,10 +36,8 @@ export const mergePluginOptions = (
   }
   for (const key of ['dtoFileNameSuffix', 'controllerFileNameSuffix']) {
     if (options[key] && options[key].includes('.ts')) {
-      pluginDebugLogger.warn(
-        `Skipping ${key} option ".ts" because it can cause unwanted behaviour.`
-      );
-      options[key] = options[key].filter((pattern) => pattern !== '.ts');
+      pluginDebugLogger.warn(`Skipping ${key} option ".ts" because it can cause unwanted behaviour.`);
+      options[key] = options[key].filter(pattern => pattern !== '.ts');
       if (options[key].length == 0) {
         delete options[key];
       }
@@ -49,6 +45,6 @@ export const mergePluginOptions = (
   }
   return {
     ...defaultOptions,
-    ...options
+    ...options,
   };
 };

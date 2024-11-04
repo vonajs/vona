@@ -1,5 +1,5 @@
 import { Type } from '@nestjs/common';
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 
 export const exploreGlobalApiConsumesMetadata = (metatype: Type<unknown>) => {
   const consumes = Reflect.getMetadata(DECORATORS.API_CONSUMES, metatype);
@@ -9,5 +9,5 @@ export const exploreGlobalApiConsumesMetadata = (metatype: Type<unknown>) => {
 export const exploreApiConsumesMetadata = (
   instance: object,
   prototype: Type<unknown>,
-  method: object
+  method: object,
 ): string[] | undefined => Reflect.getMetadata(DECORATORS.API_CONSUMES, method);

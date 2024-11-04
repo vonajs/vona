@@ -1,4 +1,4 @@
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 import { createClassDecorator } from './helpers';
 
 export function ApiExcludeController(disable = true): ClassDecorator {

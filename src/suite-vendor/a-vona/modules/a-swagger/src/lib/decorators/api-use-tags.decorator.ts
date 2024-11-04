@@ -1,4 +1,4 @@
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 import { createMixedDecorator } from './helpers';
 
 export function ApiTags(...tags: string[]) {

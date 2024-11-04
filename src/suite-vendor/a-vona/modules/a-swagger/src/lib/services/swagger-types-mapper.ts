@@ -1,18 +1,9 @@
 import { isFunction, isString, isUndefined, omit, omitBy, pick } from 'lodash';
-import { ApiPropertyOptions } from '../decorators';
-import {
-  BaseParameterObject,
-  ReferenceObject,
-  SchemaObject
-} from '../interfaces/open-api-spec.interface';
-import { ParamWithTypeMetadata } from './parameter-metadata-accessor';
+import { ApiPropertyOptions } from '../decorators/index.js';
+import { BaseParameterObject, ReferenceObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
+import { ParamWithTypeMetadata } from './parameter-metadata-accessor.js';
 
-type KeysToRemove =
-  | keyof ApiPropertyOptions
-  | '$ref'
-  | 'properties'
-  | 'enumName'
-  | 'enumSchema';
+type KeysToRemove = keyof ApiPropertyOptions | '$ref' | 'properties' | 'enumName' | 'enumSchema';
 
 export class SwaggerTypesMapper {
   private readonly keysToRemove: Array<KeysToRemove> = [
@@ -23,43 +14,30 @@ export class SwaggerTypesMapper {
     'enumSchema',
     'items',
     '$ref',
-    ...this.getSchemaOptionsKeys()
+    ...this.getSchemaOptionsKeys(),
   ];
 
-  mapParamTypes(
-    parameters: Array<ParamWithTypeMetadata | BaseParameterObject>
-  ) {
-    return parameters.map((param) => {
-      if (
-        this.hasSchemaDefinition(param as BaseParameterObject) ||
-        this.hasRawContentDefinition(param)
-      ) {
+  mapParamTypes(parameters: Array<ParamWithTypeMetadata | BaseParameterObject>) {
+    return parameters.map(param => {
+      if (this.hasSchemaDefinition(param as BaseParameterObject) || this.hasRawContentDefinition(param)) {
         return this.omitParamKeys(param);
       }
       const { type } = param as ParamWithTypeMetadata;
       const typeName =
-        type && isFunction(type)
-          ? this.mapTypeToOpenAPIType(type.name)
-          : this.mapTypeToOpenAPIType(type);
+        type && isFunction(type) ? this.mapTypeToOpenAPIType(type.name) : this.mapTypeToOpenAPIType(type);
 
       const paramWithTypeMetadata = omitBy(
         {
           ...param,
-          type: typeName
+          type: typeName,
         },
-        isUndefined
+        isUndefined,
       );
 
       if (this.isEnumArrayType(paramWithTypeMetadata)) {
-        return this.mapEnumArrayType(
-          paramWithTypeMetadata as ParamWithTypeMetadata,
-          this.keysToRemove
-        );
+        return this.mapEnumArrayType(paramWithTypeMetadata as ParamWithTypeMetadata, this.keysToRemove);
       } else if (paramWithTypeMetadata.isArray) {
-        return this.mapArrayType(
-          paramWithTypeMetadata as ParamWithTypeMetadata,
-          this.keysToRemove
-        );
+        return this.mapArrayType(paramWithTypeMetadata as ParamWithTypeMetadata, this.keysToRemove);
       }
       return {
         ...omit(param, this.keysToRemove),
@@ -69,10 +47,10 @@ export class SwaggerTypesMapper {
             ...((param as BaseParameterObject).schema || {}),
             enum: paramWithTypeMetadata.enum,
             type: paramWithTypeMetadata.type,
-            $ref: (paramWithTypeMetadata as ReferenceObject).$ref
+            $ref: (paramWithTypeMetadata as ReferenceObject).$ref,
           },
-          isUndefined
-        )
+          isUndefined,
+        ),
       };
     });
   }
@@ -90,15 +68,12 @@ export class SwaggerTypesMapper {
       schema: {
         ...this.getSchemaOptions(param),
         type: 'array',
-        items: param.items
-      }
+        items: param.items,
+      },
     };
   }
 
-  mapArrayType(
-    param: (ParamWithTypeMetadata & SchemaObject) | BaseParameterObject,
-    keysToRemove: KeysToRemove[]
-  ) {
+  mapArrayType(param: (ParamWithTypeMetadata & SchemaObject) | BaseParameterObject, keysToRemove: KeysToRemove[]) {
     const itemsModifierKeys = ['format', 'maximum', 'minimum', 'pattern'];
     const items =
       (param as SchemaObject).items ||
@@ -106,9 +81,9 @@ export class SwaggerTypesMapper {
         {
           ...((param as BaseParameterObject).schema || {}),
           enum: (param as ParamWithTypeMetadata).enum,
-          type: this.mapTypeToOpenAPIType((param as ParamWithTypeMetadata).type)
+          type: this.mapTypeToOpenAPIType((param as ParamWithTypeMetadata).type),
         },
-        isUndefined
+        isUndefined,
       );
     const modifierProperties = pick(param, itemsModifierKeys);
     return {
@@ -118,8 +93,8 @@ export class SwaggerTypesMapper {
         type: 'array',
         items: isString((items as any).type)
           ? { type: (items as any).type, ...modifierProperties }
-          : { ...(items as any).type, ...modifierProperties }
-      }
+          : { ...(items as any).type, ...modifierProperties },
+      },
     };
   }
 
@@ -128,9 +103,9 @@ export class SwaggerTypesMapper {
     const optionsObject: Partial<SchemaObject> = schemaKeys.reduce(
       (acc, key) => ({
         ...acc,
-        [key]: param[key]
+        [key]: param[key],
       }),
-      {}
+      {},
     );
     return omitBy(optionsObject, isUndefined);
   }
@@ -139,9 +114,7 @@ export class SwaggerTypesMapper {
     return param.isArray && param.items && param.items.enum;
   }
 
-  private hasSchemaDefinition(
-    param: BaseParameterObject
-  ): param is BaseParameterObject {
+  private hasSchemaDefinition(param: BaseParameterObject): param is BaseParameterObject {
     return !!param.schema;
   }
 
@@ -176,7 +149,7 @@ export class SwaggerTypesMapper {
       'default',
       'example',
       'oneOf',
-      'anyOf'
+      'anyOf',
     ];
   }
 }

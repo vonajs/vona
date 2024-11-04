@@ -1,21 +1,19 @@
-import { isString } from '@nestjs/common/utils/shared.utils';
-import { DECORATORS } from '../constants';
-import { ApiSchemaOptions } from '../decorators/api-schema.decorator';
+import { isString } from '@nestjs/common/utils/shared.utils.js';
+import { DECORATORS } from '../constants.js';
+import { ApiSchemaOptions } from '../decorators/api-schema.decorator.js';
+import { Constructable } from 'vona';
 
-export function getSchemaPath(model: string | Function): string {
+export function getSchemaPath(model: string | Constructable): string {
   const modelName = isString(model) ? model : getSchemaNameByClass(model);
   return `#/components/schemas/${modelName}`;
 }
 
-function getSchemaNameByClass(target: Function): string {
+function getSchemaNameByClass(target: Constructable): string {
   if (!target || typeof target !== 'function') {
     return '';
   }
 
-  const customSchema: ApiSchemaOptions[] = Reflect.getOwnMetadata(
-    DECORATORS.API_SCHEMA,
-    target
-  );
+  const customSchema: ApiSchemaOptions[] = Reflect.getOwnMetadata(DECORATORS.API_SCHEMA, target);
 
   if (!customSchema || customSchema.length === 0) {
     return target.name;
@@ -24,8 +22,8 @@ function getSchemaNameByClass(target: Function): string {
   return customSchema[0].name ?? target.name;
 }
 
-export function refs(...models: Function[]) {
-  return models.map((item) => ({
-    $ref: getSchemaPath(item.name)
+export function refs(...models: Constructable[]) {
+  return models.map(item => ({
+    $ref: getSchemaPath(item.name),
   }));
 }

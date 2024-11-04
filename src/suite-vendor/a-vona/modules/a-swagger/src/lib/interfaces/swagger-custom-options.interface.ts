@@ -1,5 +1,5 @@
 import { SwaggerUiOptions } from './swagger-ui-options.interface';
-import { OpenAPIObject } from './open-api-spec.interface';
+import { OpenAPIObject } from './open-api-spec.interface.js';
 
 export interface SwaggerCustomOptions {
   /**
@@ -40,7 +40,7 @@ export interface SwaggerCustomOptions {
   patchDocumentOnRequest?: <TRequest = any, TResponse = any>(
     req: TRequest,
     res: TResponse,
-    document: OpenAPIObject
+    document: OpenAPIObject,
   ) => OpenAPIObject;
 
   /**
@@ -103,5 +103,4 @@ export interface SwaggerCustomOptions {
    * @deprecated This property has no effect.
    */
   urls?: Record<'url' | 'name', string>[];
-
 }

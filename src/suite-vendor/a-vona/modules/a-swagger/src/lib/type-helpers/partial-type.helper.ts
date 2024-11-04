@@ -4,15 +4,15 @@ import {
   applyValidateIfDefinedDecorator,
   inheritPropertyInitializers,
   inheritTransformationMetadata,
-  inheritValidationMetadata
+  inheritValidationMetadata,
 } from '@nestjs/mapped-types';
 import { mapValues } from 'lodash';
-import { DECORATORS } from '../constants';
-import { ApiProperty } from '../decorators';
-import { MetadataLoader } from '../plugin/metadata-loader';
-import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants';
-import { ModelPropertiesAccessor } from '../services/model-properties-accessor';
-import { clonePluginMetadataFactory } from './mapped-types.utils';
+import { DECORATORS } from '../constants.js';
+import { ApiProperty } from '../decorators/index.js';
+import { MetadataLoader } from '../plugin/metadata-loader.js';
+import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
+import { ModelPropertiesAccessor } from '../services/model-properties-accessor.js';
+import { clonePluginMetadataFactory } from './mapped-types.utils.js';
 
 const modelPropertiesAccessor = new ModelPropertiesAccessor();
 
@@ -28,12 +28,10 @@ export function PartialType<T>(
      * @default true
      */
     skipNullProperties?: boolean;
-  } = {}
+  } = {},
 ): Type<Partial<T>> {
   const applyPartialDecoratorFn =
-    options.skipNullProperties === false
-      ? applyValidateIfDefinedDecorator
-      : applyIsOptionalDecorator;
+    options.skipNullProperties === false ? applyValidateIfDefinedDecorator : applyIsOptionalDecorator;
 
   const fields = modelPropertiesAccessor.getModelProperties(classRef.prototype);
 
@@ -42,46 +40,31 @@ export function PartialType<T>(
       inheritPropertyInitializers(this, classRef);
     }
   }
-  const keysWithValidationConstraints = inheritValidationMetadata(
-    classRef,
-    PartialTypeClass
-  );
+  const keysWithValidationConstraints = inheritValidationMetadata(classRef, PartialTypeClass);
   if (keysWithValidationConstraints) {
     keysWithValidationConstraints
-      .filter((key) => !fields.includes(key))
-      .forEach((key) => applyPartialDecoratorFn(PartialTypeClass, key));
+      .filter(key => !fields.includes(key))
+      .forEach(key => applyPartialDecoratorFn(PartialTypeClass, key));
   }
 
   inheritTransformationMetadata(classRef, PartialTypeClass);
 
   function applyFields(fields: string[]) {
-    clonePluginMetadataFactory(
-      PartialTypeClass as Type<unknown>,
-      classRef.prototype,
-      (metadata: Record<string, any>) =>
-        mapValues(metadata, (item) => ({ ...item, required: false }))
+    clonePluginMetadataFactory(PartialTypeClass as Type<unknown>, classRef.prototype, (metadata: Record<string, any>) =>
+      mapValues(metadata, item => ({ ...item, required: false })),
     );
 
     if (PartialTypeClass[METADATA_FACTORY_NAME]) {
-      const pluginFields = Object.keys(
-        PartialTypeClass[METADATA_FACTORY_NAME]()
-      );
-      pluginFields.forEach((key) =>
-        applyPartialDecoratorFn(PartialTypeClass, key)
-      );
+      const pluginFields = Object.keys(PartialTypeClass[METADATA_FACTORY_NAME]());
+      pluginFields.forEach(key => applyPartialDecoratorFn(PartialTypeClass, key));
     }
 
-    fields.forEach((key) => {
-      const metadata =
-        Reflect.getMetadata(
-          DECORATORS.API_MODEL_PROPERTIES,
-          classRef.prototype,
-          key
-        ) || {};
+    fields.forEach(key => {
+      const metadata = Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES, classRef.prototype, key) || {};
 
       const decoratorFactory = ApiProperty({
         ...metadata,
-        required: false
+        required: false,
       });
       decoratorFactory(PartialTypeClass.prototype, key);
       applyPartialDecoratorFn(PartialTypeClass, key);
@@ -90,9 +73,7 @@ export function PartialType<T>(
   applyFields(fields);
 
   MetadataLoader.addRefreshHook(() => {
-    const fields = modelPropertiesAccessor.getModelProperties(
-      classRef.prototype
-    );
+    const fields = modelPropertiesAccessor.getModelProperties(classRef.prototype);
     applyFields(fields);
   });
 

@@ -17,5 +17,5 @@ export const DECORATORS = {
   API_EXTENSION: `${DECORATORS_PREFIX}/apiExtension`,
   API_SCHEMA: `${DECORATORS_PREFIX}/apiSchema`,
   API_DEFAULT_GETTER: `${DECORATORS_PREFIX}/apiDefaultGetter`,
-  API_LINK: `${DECORATORS_PREFIX}/apiLink`
+  API_LINK: `${DECORATORS_PREFIX}/apiLink`,
 };

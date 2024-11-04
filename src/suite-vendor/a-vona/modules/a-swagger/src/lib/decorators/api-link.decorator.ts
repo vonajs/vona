@@ -1,5 +1,5 @@
 import { Type } from '@nestjs/common';
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 
 export interface ApiLinkOptions {
   from: Type<unknown> | Function;
@@ -47,16 +47,8 @@ export interface ApiLinkOptions {
  *
  * @see [Swagger link objects](https://swagger.io/docs/specification/links/)
  */
-export function ApiLink({
-  from,
-  fromField = 'id',
-  routeParam
-}: ApiLinkOptions): MethodDecorator {
-  return (
-    controllerPrototype: object,
-    key: string | symbol,
-    descriptor: PropertyDescriptor
-  ) => {
+export function ApiLink({ from, fromField = 'id', routeParam }: ApiLinkOptions): MethodDecorator {
+  return (controllerPrototype: object, key: string | symbol, descriptor: PropertyDescriptor) => {
     const { prototype } = from;
     if (prototype) {
       const links = Reflect.getMetadata(DECORATORS.API_LINK, prototype) ?? [];
@@ -65,7 +57,7 @@ export function ApiLink({
         method: descriptor.value,
         prototype: controllerPrototype,
         field: fromField,
-        parameter: routeParam
+        parameter: routeParam,
       });
 
       Reflect.defineMetadata(DECORATORS.API_LINK, links, prototype);

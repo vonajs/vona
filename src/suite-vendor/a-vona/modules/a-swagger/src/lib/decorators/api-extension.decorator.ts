@@ -1,16 +1,14 @@
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../constants.js';
 import { createMixedDecorator } from './helpers';
 import { clone } from 'lodash';
 
 export function ApiExtension(extensionKey: string, extensionProperties: any) {
   if (!extensionKey.startsWith('x-')) {
-    throw new Error(
-      'Extension key is not prefixed. Please ensure you prefix it with `x-`.'
-    );
+    throw new Error('Extension key is not prefixed. Please ensure you prefix it with `x-`.');
   }
 
   const extensionObject = {
-    [extensionKey]: clone(extensionProperties)
+    [extensionKey]: clone(extensionProperties),
   };
 
   return createMixedDecorator(DECORATORS.API_EXTENSION, extensionObject);

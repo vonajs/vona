@@ -1,11 +1,11 @@
 import { Type } from '@nestjs/common';
 import { identity } from 'lodash';
-import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants';
+import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
 
 export function clonePluginMetadataFactory(
   target: Type<unknown>,
   parent: Type<unknown>,
-  transformFn: (metadata: Record<string, any>) => Record<string, any> = identity
+  transformFn: (metadata: Record<string, any>) => Record<string, any> = identity,
 ) {
   let targetMetadata = {};
 
@@ -19,13 +19,9 @@ export function clonePluginMetadataFactory(
     const parentMetadata = parent.constructor[METADATA_FACTORY_NAME]();
     targetMetadata = {
       ...parentMetadata,
-      ...targetMetadata
+      ...targetMetadata,
     };
-  } while (
-    (parent = Reflect.getPrototypeOf(parent) as Type<any>) &&
-    parent !== Object.prototype &&
-    parent
-  );
+  } while ((parent = Reflect.getPrototypeOf(parent) as Type<any>) && parent !== Object.prototype && parent);
   targetMetadata = transformFn(targetMetadata);
 
   if (target[METADATA_FACTORY_NAME]) {
@@ -34,7 +30,7 @@ export function clonePluginMetadataFactory(
       const originalMetadata = originalFactory();
       return {
         ...originalMetadata,
-        ...targetMetadata
+        ...targetMetadata,
       };
     };
   } else {

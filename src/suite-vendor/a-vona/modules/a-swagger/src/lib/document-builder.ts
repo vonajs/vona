@@ -8,8 +8,8 @@ import {
   SecurityRequirementObject,
   SecuritySchemeObject,
   ServerVariableObject,
-  TagObject
-} from './interfaces/open-api-spec.interface';
+  TagObject,
+} from './interfaces/open-api-spec.interface.js';
 import { GlobalParametersStorage } from './storages/global-parameters.storage';
 
 export class DocumentBuilder {
@@ -50,18 +50,12 @@ export class DocumentBuilder {
     if (version.match(/^\d\.\d\.\d$/)) {
       this.document.openapi = version;
     } else {
-      this.logger.warn(
-        'The OpenApi version is invalid. Expecting format "x.x.x"'
-      );
+      this.logger.warn('The OpenApi version is invalid. Expecting format "x.x.x"');
     }
     return this;
   }
 
-  public addServer(
-    url: string,
-    description?: string,
-    variables?: Record<string, ServerVariableObject>
-  ): this {
+  public addServer(url: string, description?: string, variables?: Record<string, ServerVariableObject>): this {
     this.document.servers.push({ url, description, variables });
     return this;
   }
@@ -73,34 +67,28 @@ export class DocumentBuilder {
 
   public setBasePath(path: string) {
     this.logger.warn(
-      'The "setBasePath" method has been deprecated. Now, a global prefix is populated automatically. If you want to ignore it, take a look here: https://docs.nestjs.com/recipes/swagger#global-prefix. Alternatively, you can use "addServer" method to set up multiple different paths.'
+      'The "setBasePath" method has been deprecated. Now, a global prefix is populated automatically. If you want to ignore it, take a look here: https://docs.nestjs.com/recipes/swagger#global-prefix. Alternatively, you can use "addServer" method to set up multiple different paths.',
     );
     return this;
   }
 
-  public addTag(
-    name: string,
-    description = '',
-    externalDocs?: ExternalDocumentationObject
-  ): this {
+  public addTag(name: string, description = '', externalDocs?: ExternalDocumentationObject): this {
     this.document.tags = this.document.tags.concat(
       pickBy(
         {
           name,
           description,
-          externalDocs
+          externalDocs,
         },
-        negate(isUndefined)
-      ) as TagObject
+        negate(isUndefined),
+      ) as TagObject,
     );
     return this;
   }
 
   public addExtension(extensionKey: string, extensionProperties: any): this {
     if (!extensionKey.startsWith('x-')) {
-      throw new Error(
-        'Extension key is not prefixed. Please ensure you prefix it with `x-`.'
-      );
+      throw new Error('Extension key is not prefixed. Please ensure you prefix it with `x-`.');
     }
 
     this.document[extensionKey] = clone(extensionProperties);
@@ -111,7 +99,7 @@ export class DocumentBuilder {
   public addSecurity(name: string, options: SecuritySchemeObject): this {
     this.document.components.securitySchemes = {
       ...(this.document.components.securitySchemes || {}),
-      [name]: options
+      [name]: options,
     };
     return this;
   }
@@ -125,10 +113,7 @@ export class DocumentBuilder {
     return this;
   }
 
-  public addSecurityRequirements(
-    name: string | SecurityRequirementObject,
-    requirements: string[] = []
-  ): this {
+  public addSecurityRequirements(name: string | SecurityRequirementObject, requirements: string[] = []): this {
     let securityRequirement: SecurityRequirementObject;
 
     if (isString(name)) {
@@ -138,64 +123,64 @@ export class DocumentBuilder {
     }
 
     this.document.security = (this.document.security || []).concat({
-      ...securityRequirement
+      ...securityRequirement,
     });
     return this;
   }
 
   public addBearerAuth(
     options: SecuritySchemeObject = {
-      type: 'http'
+      type: 'http',
     },
-    name = 'bearer'
+    name = 'bearer',
   ): this {
     this.addSecurity(name, {
       scheme: 'bearer',
       bearerFormat: 'JWT',
-      ...options
+      ...options,
     });
     return this;
   }
 
   public addOAuth2(
     options: SecuritySchemeObject = {
-      type: 'oauth2'
+      type: 'oauth2',
     },
-    name = 'oauth2'
+    name = 'oauth2',
   ): this {
     this.addSecurity(name, {
       type: 'oauth2',
       flows: {},
-      ...options
+      ...options,
     });
     return this;
   }
 
   public addApiKey(
     options: SecuritySchemeObject = {
-      type: 'apiKey'
+      type: 'apiKey',
     },
-    name = 'api_key'
+    name = 'api_key',
   ): this {
     this.addSecurity(name, {
       type: 'apiKey',
       in: 'header',
       name,
-      ...options
+      ...options,
     });
     return this;
   }
 
   public addBasicAuth(
     options: SecuritySchemeObject = {
-      type: 'http'
+      type: 'http',
     },
-    name = 'basic'
+    name = 'basic',
   ): this {
     this.addSecurity(name, {
       type: 'http',
       scheme: 'basic',
-      ...options
+      ...options,
     });
     return this;
   }
@@ -203,15 +188,15 @@ export class DocumentBuilder {
   public addCookieAuth(
     cookieName = 'connect.sid',
     options: SecuritySchemeObject = {
-      type: 'apiKey'
+      type: 'apiKey',
     },
-    securityName = 'cookie'
+    securityName = 'cookie',
   ): this {
     this.addSecurity(securityName, {
       type: 'apiKey',
       in: 'cookie',
       name: cookieName,
-      ...options
+      ...options,
     });
     return this;
   }

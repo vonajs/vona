@@ -1,15 +1,12 @@
 import { HttpStatus, RequestMethod, Type } from '@nestjs/common';
-import { HTTP_CODE_METADATA, METHOD_METADATA } from '@nestjs/common/constants';
-import { isEmpty } from '@nestjs/common/utils/shared.utils';
+import { HTTP_CODE_METADATA, METHOD_METADATA } from '@nestjs/common/constants.js';
+import { isEmpty } from '@nestjs/common/utils/shared.utils.js';
 import { get, mapValues, omit } from 'lodash';
-import { DECORATORS } from '../constants';
-import { ApiResponse, ApiResponseMetadata } from '../decorators';
-import { SchemaObject } from '../interfaces/open-api-spec.interface';
-import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants';
-import {
-  FactoriesNeededByResponseFactory,
-  ResponseObjectFactory
-} from '../services/response-object-factory';
+import { DECORATORS } from '../constants.js';
+import { ApiResponse, ApiResponseMetadata } from '../decorators/index.js';
+import { SchemaObject } from '../interfaces/open-api-spec.interface.js';
+import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
+import { FactoriesNeededByResponseFactory, ResponseObjectFactory } from '../services/response-object-factory';
 import { mergeAndUniq } from '../utils/merge-and-uniq.util';
 
 const responseObjectFactory = new ResponseObjectFactory();
@@ -17,21 +14,13 @@ const responseObjectFactory = new ResponseObjectFactory();
 export const exploreGlobalApiResponseMetadata = (
   schemas: Record<string, SchemaObject>,
   metatype: Type<unknown>,
-  factories: FactoriesNeededByResponseFactory
+  factories: FactoriesNeededByResponseFactory,
 ) => {
-  const responses: ApiResponseMetadata[] = Reflect.getMetadata(
-    DECORATORS.API_RESPONSE,
-    metatype
-  );
+  const responses: ApiResponseMetadata[] = Reflect.getMetadata(DECORATORS.API_RESPONSE, metatype);
   const produces = Reflect.getMetadata(DECORATORS.API_PRODUCES, metatype);
   return responses
     ? {
-        responses: mapResponsesToSwaggerResponses(
-          responses,
-          schemas,
-          produces,
-          factories
-        )
+        responses: mapResponsesToSwaggerResponses(responses, schemas, produces, factories),
       }
     : undefined;
 };
@@ -41,27 +30,16 @@ export const exploreApiResponseMetadata = (
   factories: FactoriesNeededByResponseFactory,
   instance: object,
   prototype: Type<unknown>,
-  method: Function
+  method: Function,
 ) => {
   applyMetadataFactory(prototype, instance);
 
   const responses = Reflect.getMetadata(DECORATORS.API_RESPONSE, method);
   if (responses) {
-    const classProduces = Reflect.getMetadata(
-      DECORATORS.API_PRODUCES,
-      prototype
-    );
+    const classProduces = Reflect.getMetadata(DECORATORS.API_PRODUCES, prototype);
     const methodProduces = Reflect.getMetadata(DECORATORS.API_PRODUCES, method);
-    const produces = mergeAndUniq<string[]>(
-      get(classProduces, 'produces'),
-      methodProduces
-    );
-    return mapResponsesToSwaggerResponses(
-      responses,
-      schemas,
-      produces,
-      factories
-    );
+    const produces = mergeAndUniq<string[]>(get(classProduces, 'produces'), methodProduces);
+    return mapResponsesToSwaggerResponses(responses, schemas, produces, factories);
   }
   const status = getStatusCode(method);
   if (status) {
@@ -75,10 +53,7 @@ const getStatusCode = (method: Function) => {
   if (status) {
     return status;
   }
-  const requestMethod: RequestMethod = Reflect.getMetadata(
-    METHOD_METADATA,
-    method
-  );
+  const requestMethod: RequestMethod = Reflect.getMetadata(METHOD_METADATA, method);
   switch (requestMethod) {
     case RequestMethod.POST:
       return HttpStatus.CREATED;
@@ -92,14 +67,12 @@ const mapResponsesToSwaggerResponses = (
   responses: ApiResponseMetadata[],
   schemas: Record<string, SchemaObject>,
   produces: string[] = ['application/json'],
-  factories: FactoriesNeededByResponseFactory
+  factories: FactoriesNeededByResponseFactory,
 ) => {
   produces = isEmpty(produces) ? ['application/json'] : produces;
 
-  const openApiResponses = mapValues(
-    responses,
-    (response: ApiResponseMetadata) =>
-      responseObjectFactory.create(response, produces, schemas, factories)
+  const openApiResponses = mapValues(responses, (response: ApiResponseMetadata) =>
+    responseObjectFactory.create(response, produces, schemas, factories),
   );
   return mapValues(openApiResponses, omitParamType);
 };
@@ -114,10 +87,8 @@ function applyMetadataFactory(prototype: Type<unknown>, instance: object) {
       continue;
     }
     const metadata = prototype.constructor[METADATA_FACTORY_NAME]();
-    const methodKeys = Object.keys(metadata).filter(
-      (key) => typeof instance[key] === 'function'
-    );
-    methodKeys.forEach((key) => {
+    const methodKeys = Object.keys(metadata).filter(key => typeof instance[key] === 'function');
+    methodKeys.forEach(key => {
       const { summary, deprecated, tags, ...meta } = metadata[key];
 
       if (Object.keys(meta).length === 0) {
@@ -129,12 +100,8 @@ function applyMetadataFactory(prototype: Type<unknown>, instance: object) {
       ApiResponse(meta, { overrideExisting: false })(
         classPrototype,
         key,
-        Object.getOwnPropertyDescriptor(classPrototype, key)
+        Object.getOwnPropertyDescriptor(classPrototype, key),
       );
     });
-  } while (
-    (prototype = Reflect.getPrototypeOf(prototype) as Type<any>) &&
-    prototype !== Object.prototype &&
-    prototype
-  );
+  } while ((prototype = Reflect.getPrototypeOf(prototype) as Type<any>) && prototype !== Object.prototype && prototype);
 }
