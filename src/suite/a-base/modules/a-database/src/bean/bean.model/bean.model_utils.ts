@@ -47,6 +47,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
 
   async columns(table?: string): Promise<ITableColumns> {
     table = table || this.table;
+    if (!table) return {};
     let columns = __columns[table];
     if (!columns) {
       const dialect = this.dialect;
@@ -160,9 +161,10 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     this.buildOffset(builder, page.index);
   }
 
-  prepareWhere(builder: Knex.QueryBuilder, table: string, where?, options?: IModelMethodOptionsGeneral) {
+  prepareWhere(builder: Knex.QueryBuilder, table?: string, where?, options?: IModelMethodOptionsGeneral) {
     // table
     table = table || this.table;
+    if (!table) throw new Error('should specify the table name');
     // disableInstance/disableDeleted
     const disableWhere = {};
     this._prepareWhereByOptions(table, disableWhere, options);
