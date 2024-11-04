@@ -1,6 +1,6 @@
 export type TableIdentity = string | number;
 
-export interface EntityBase {
+export abstract class EntityBase {
   id: TableIdentity;
   createdAt: Date;
   updatedAt: Date;
