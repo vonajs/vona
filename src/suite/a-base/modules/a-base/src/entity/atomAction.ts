@@ -1,6 +1,6 @@
-import { EntityBase } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityAtomAction extends EntityBase {
+export interface EntityAtomAction extends EntityBaseTemp {
   atomClassId: number;
   code: number;
   name: string;

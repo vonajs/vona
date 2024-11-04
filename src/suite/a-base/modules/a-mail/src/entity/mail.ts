@@ -1,6 +1,6 @@
-import { EntityBase } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityMail extends EntityBase {
+export interface EntityMail extends EntityBaseTemp {
   scene: string;
   status: number;
   mailTo: string;

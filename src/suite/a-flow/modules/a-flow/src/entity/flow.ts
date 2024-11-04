@@ -1,6 +1,7 @@
-import { EntityBase, TableIdentity } from 'vona';
+import { TableIdentity } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityFlow extends EntityBase {
+export interface EntityFlow extends EntityBaseTemp {
   flowDefId: number;
   flowDefKey: string;
   flowDefRevision: number;

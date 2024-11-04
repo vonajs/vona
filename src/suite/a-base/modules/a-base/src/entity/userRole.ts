@@ -1,6 +1,6 @@
-import { EntityBase } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityUserRole extends EntityBase {
+export interface EntityUserRole extends EntityBaseTemp {
   userId: number;
   roleId: number;
 }

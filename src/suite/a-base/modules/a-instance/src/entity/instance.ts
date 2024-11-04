@@ -1,4 +1,4 @@
-import { EntityBase } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
 export interface EntityInstance extends Omit<EntityBase, 'iid'> {
   disabled: number;

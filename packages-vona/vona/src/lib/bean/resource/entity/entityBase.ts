@@ -1,11 +1,4 @@
 export type TableIdentity = string | number;
-export interface EntityBase {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deleted: number;
-  iid: number;
-}
 
 export interface EntityBasePro {
   id: TableIdentity;

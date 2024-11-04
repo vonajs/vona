@@ -1,6 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../../../.metadata/this.js';
 import { BeanBase } from 'vona';
-import path from 'path';
 import initData from './initData1.js';
 
 export class VersionInit extends BeanBase<ScopeModule> {

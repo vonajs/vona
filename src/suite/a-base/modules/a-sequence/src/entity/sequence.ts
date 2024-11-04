@@ -1,6 +1,6 @@
-import { EntityBase } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntitySequence extends EntityBase {
+export interface EntitySequence extends EntityBaseTemp {
   module: string;
   name: string;
   value: string;

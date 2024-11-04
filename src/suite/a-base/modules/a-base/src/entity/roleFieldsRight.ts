@@ -1,6 +1,7 @@
-import { EntityBase, TableIdentity } from 'vona';
+import { TableIdentity } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityRoleFieldsRight extends EntityBase {
+export interface EntityRoleFieldsRight extends EntityBaseTemp {
   roleId: number;
   roleAtomId: TableIdentity;
   atomClassId: number;

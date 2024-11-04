@@ -1,6 +1,7 @@
-import { EntityBase, TableIdentity } from 'vona';
+import { TableIdentity } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityPartyExpense extends EntityBase {
+export interface EntityPartyExpense extends EntityBaseTemp {
   atomIdMain: TableIdentity;
   detailLineNo: number;
   name: string;

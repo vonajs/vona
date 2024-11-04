@@ -1,6 +1,6 @@
-import { EntityBase } from 'vona';
+import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityFlowTask extends EntityBase {
+export interface EntityFlowTask extends EntityBaseTemp {
   flowId: number;
   flowNodeId: number;
   flowTaskStatus: number;

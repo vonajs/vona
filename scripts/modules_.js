@@ -203,7 +203,7 @@ async function _moduleHandle_model({ file, module, processHelper }) {
   if (contentOld.indexOf('EntityItemBase {') > -1) {
     contentOld = contentOld.replace("import {} from 'vona';", "import { EntityItemBase } from 'vona-module-a-base';");
   } else {
-    contentOld = contentOld.replace("import {} from 'vona';", "import { EntityBase } from 'vona';");
+    contentOld = contentOld.replace("import {} from 'vona';", "import { EntityBaseTemp } from 'vona-module-a-base';");
   }
   console.log(contentOld);
   await fse.outputFile(file, contentOld);
