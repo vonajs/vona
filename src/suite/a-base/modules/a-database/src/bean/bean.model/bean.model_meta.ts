@@ -29,31 +29,31 @@ export class BeanModelMeta extends BeanBase {
     return appResource.getBean((<any>this).__beanFullName__);
   }
 
-  get table(): string {
-    return this.options.table!;
+  get table(): string | undefined {
+    return this.options.table;
   }
 
   get options(): IDecoratorModelOptions {
     const beanOptions = this.__beanOptions;
-    return beanOptions?.options as IDecoratorModelOptions;
+    return (beanOptions?.options || {}) as IDecoratorModelOptions;
   }
 
   get disableInstance() {
-    return this.options?.disableInstance === undefined
+    return this.options.disableInstance === undefined
       ? this.app.config.model.disableInstance
-      : this.options?.disableInstance;
+      : this.options.disableInstance;
   }
 
   get disableDeleted() {
-    return this.options?.disableDeleted === undefined
+    return this.options.disableDeleted === undefined
       ? this.app.config.model.disableDeleted
-      : this.options?.disableDeleted;
+      : this.options.disableDeleted;
   }
 
   get disableUpdateTime() {
-    return this.options?.disableUpdateTime === undefined
+    return this.options.disableUpdateTime === undefined
       ? this.app.config.model.disableUpdateTime
-      : this.options?.disableUpdateTime;
+      : this.options.disableUpdateTime;
   }
 
   protected _checkDisableInstanceByOptions(options?: IModelMethodOptionsGeneral) {
