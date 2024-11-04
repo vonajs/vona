@@ -55,9 +55,9 @@ export class SwaggerTypesMapper {
     });
   }
 
-  mapTypeToOpenAPIType(type: string | Function): string {
+  mapTypeToOpenAPIType(type?: string | Function): string {
     if (!(type && (type as string).charAt)) {
-      return;
+      return '';
     }
     return (type as string).charAt(0).toLowerCase() + (type as string).slice(1);
   }

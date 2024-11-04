@@ -144,10 +144,10 @@ export function createParamDecorator<T extends Record<string, any> = any>(
 
 export function getTypeIsArrayTuple(
   input: Function | [Function] | undefined | string | Record<string, any>,
-  isArrayFlag: boolean,
+  isArrayFlag?: boolean,
 ): [Function | undefined, boolean] {
   if (!input) {
-    return [input as undefined, isArrayFlag];
+    return [input as undefined, !!isArrayFlag];
   }
   if (isArrayFlag) {
     return [input as Function, isArrayFlag];

@@ -1,7 +1,7 @@
 import { omit, pick } from 'lodash';
 import { ApiResponseMetadata, ApiResponseSchemaHost } from '../decorators/index.js';
-import { getSchemaPath } from '../utils';
-import { MimetypeContentWrapper } from './mimetype-content-wrapper';
+import { getSchemaPath } from '../utils/index.js';
+import { MimetypeContentWrapper } from './mimetype-content-wrapper.js';
 
 export class ResponseObjectMapper {
   private readonly mimetypeContentWrapper = new MimetypeContentWrapper();

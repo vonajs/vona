@@ -4,7 +4,7 @@ import { flatten, isFunction, isString, keyBy, mapValues, omit, omitBy, pick } f
 import { DECORATORS } from '../constants.js';
 import { ApiSchemaOptions } from '../decorators/index.js';
 import { getTypeIsArrayTuple } from '../decorators/helpers.js';
-import { exploreGlobalApiExtraModelsMetadata } from '../explorers/api-extra-models.explorer';
+import { exploreGlobalApiExtraModelsMetadata } from '../explorers/api-extra-models.explorer.js';
 import {
   BaseParameterObject,
   ParameterObject,
@@ -12,14 +12,15 @@ import {
   SchemaObject,
 } from '../interfaces/open-api-spec.interface.js';
 import { SchemaObjectMetadata } from '../interfaces/schema-object-metadata.interface.js';
-import { getSchemaPath } from '../utils';
-import { getEnumType, getEnumValues, isEnumArray, isEnumMetadata } from '../utils/enum.utils';
-import { isBodyParameter } from '../utils/is-body-parameter.util';
-import { isBuiltInType } from '../utils/is-built-in-type.util';
-import { isDateCtor } from '../utils/is-date-ctor.util';
+import { getSchemaPath } from '../utils/index.js';
+import { getEnumType, getEnumValues, isEnumArray, isEnumMetadata } from '../utils/enum.utils.js';
+import { isBodyParameter } from '../utils/is-body-parameter.util.js';
+import { isBuiltInType } from '../utils/is-built-in-type.util.js';
+import { isDateCtor } from '../utils/is-date-ctor.util.js';
 import { ModelPropertiesAccessor } from './model-properties-accessor.js';
 import { ParamWithTypeMetadata } from './parameter-metadata-accessor.js';
-import { SwaggerTypesMapper } from './swagger-types-mapper';
+import { SwaggerTypesMapper } from './swagger-types-mapper.js';
+import { Cast } from 'vona';
 
 export class SchemaObjectFactory {
   constructor(
@@ -152,7 +153,7 @@ export class SchemaObjectFactory {
    * @param pendingSchemasRefs Used internally to avoid infinite recursion
    */
   exploreModelSchema(
-    type: Type<unknown> | Function,
+    type: Type<unknown> | Function | undefined,
     schemas: Record<string, SchemaObject>,
     pendingSchemasRefs: string[] = [],
   ): string {
@@ -163,7 +164,7 @@ export class SchemaObjectFactory {
     if (!propertiesWithType) {
       return '';
     }
-    const extensionProperties = Reflect.getMetadata(DECORATORS.API_EXTENSION, type) || {};
+    const extensionProperties = Reflect.getMetadata(DECORATORS.API_EXTENSION, type as any) || {};
 
     const typeDefinition: SchemaObject = {
       type: 'object',
@@ -195,15 +196,15 @@ export class SchemaObjectFactory {
     return schemaName;
   }
 
-  getSchemaName(type: Function | Type<unknown>) {
-    const customSchema: ApiSchemaOptions[] = Reflect.getOwnMetadata(DECORATORS.API_SCHEMA, type);
+  getSchemaName(type?: Function | Type<unknown>) {
+    const customSchema: ApiSchemaOptions[] = Reflect.getOwnMetadata(DECORATORS.API_SCHEMA, type as any);
 
     if (!customSchema || customSchema.length === 0) {
-      return type.name;
+      return Cast(type).name;
     }
 
     const schemaName = customSchema[0].name;
-    return schemaName ?? type.name;
+    return schemaName ?? Cast(type).name;
   }
 
   mergePropertyWithMetadata(
@@ -216,6 +217,7 @@ export class SchemaObjectFactory {
     if (!metadata) {
       metadata = omit(Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES, prototype, key), 'link') || {};
     }
+    metadata = metadata!;
 
     if (this.isLazyTypeFunc(metadata.type as Function)) {
       metadata.type = (metadata.type as Function)();
@@ -230,7 +232,7 @@ export class SchemaObjectFactory {
   }
 
   createEnumParam(param: ParamWithTypeMetadata & BaseParameterObject, schemas: Record<string, SchemaObject>) {
-    const enumName = param.enumName;
+    const enumName = param.enumName!;
     const $ref = getSchemaPath(enumName);
 
     if (!(enumName in schemas)) {
@@ -281,7 +283,7 @@ export class SchemaObjectFactory {
     const enumName = metadata.enumName;
     const $ref = getSchemaPath(enumName);
 
-    const enumType: string = (metadata.isArray ? metadata.items['type'] : metadata.type) ?? 'string';
+    const enumType: string = (metadata.isArray ? metadata.items?.['type'] : metadata.type) ?? 'string';
 
     if (!schemas[enumName]) {
       schemas[enumName] = {
@@ -361,7 +363,7 @@ export class SchemaObjectFactory {
   transformToArraySchemaProperty(
     metadata: SchemaObjectMetadata,
     key: string,
-    type: string | Record<string, any>,
+    type?: string | Record<string, any>,
   ): SchemaObjectMetadata {
     const keysToRemove = ['type', 'enum'];
     const [movedProperties, keysToMove] = this.extractPropertyModifiers(metadata);
@@ -369,11 +371,11 @@ export class SchemaObjectFactory {
       ...omit(metadata, [...keysToRemove, ...keysToMove]),
       name: metadata.name || key,
       type: 'array',
-      items: isString(type) ? { type, ...movedProperties } : { ...type, ...movedProperties },
+      items: isString(type) ? { type, ...movedProperties } : { ...Cast(type), ...movedProperties },
     };
     schemaHost.items = omitBy(schemaHost.items, isUndefined);
 
-    return schemaHost as unknown;
+    return schemaHost as unknown as SchemaObjectMetadata;
   }
 
   mapArrayCtorParam(param: ParamWithTypeMetadata): any {
@@ -391,7 +393,7 @@ export class SchemaObjectFactory {
   createFromObjectLiteral(key: string, literalObj: Record<string, any>, schemas: Record<string, SchemaObject>) {
     const objLiteralKeys = Object.keys(literalObj);
     const properties = {};
-    const required = [];
+    const required: any[] = [];
 
     objLiteralKeys.forEach(key => {
       const propertyCompilerMetadata = literalObj[key];
@@ -533,7 +535,7 @@ export class SchemaObjectFactory {
       if (hasSchemaCombinator) {
         return {
           ...metadata,
-          type: undefined,
+          type: undefined as any,
           name: metadata.name || key,
         };
       }
@@ -549,20 +551,20 @@ export class SchemaObjectFactory {
     } as SchemaObjectMetadata;
   }
 
-  private isArrayCtor(type: Type<unknown> | string): boolean {
+  private isArrayCtor(type?: Type<unknown> | string): boolean {
     return type === Array;
   }
 
-  private isPrimitiveType(type: Type<unknown> | string): boolean {
+  private isPrimitiveType(type?: Type<unknown> | string): boolean {
     return isFunction(type) && [String, Boolean, Number].some(item => item === type);
   }
 
-  private isLazyTypeFunc(type: Function | Type<unknown> | string): type is { type: Function } & Function {
-    return isFunction(type) && type.name == 'type';
+  private isLazyTypeFunc(type?: Function | Type<unknown> | string): type is { type: Function } & Function {
+    return isFunction(type) && Cast(type).name == 'type';
   }
 
   private getTypeName(type: Type<unknown> | string): string {
-    return type && isFunction(type) ? type.name : (type as string);
+    return type && isFunction(type) ? Cast(type).name : (type as string);
   }
 
   private isObjectLiteral(obj: Record<string, any> | undefined) {
@@ -590,7 +592,7 @@ export class SchemaObjectFactory {
     return [pick(metadata, modifierKeys), modifierKeys];
   }
 
-  private hasRawContent(metadata: SchemaObjectMetadata) {
-    return 'content' in metadata;
-  }
+  // private hasRawContent(metadata: SchemaObjectMetadata) {
+  //   return 'content' in metadata;
+  // }
 }

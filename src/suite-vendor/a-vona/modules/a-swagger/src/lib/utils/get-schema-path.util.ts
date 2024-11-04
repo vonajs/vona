@@ -2,12 +2,12 @@ import { isString } from '@nestjs/common/utils/shared.utils.js';
 import { DECORATORS } from '../constants.js';
 import { ApiSchemaOptions } from '../decorators/api-schema.decorator.js';
 
-export function getSchemaPath(model: string | Function): string {
+export function getSchemaPath(model?: string | Function): string {
   const modelName = isString(model) ? model : getSchemaNameByClass(model);
   return `#/components/schemas/${modelName}`;
 }
 
-function getSchemaNameByClass(target: Function): string {
+function getSchemaNameByClass(target?: Function): string {
   if (!target || typeof target !== 'function') {
     return '';
   }

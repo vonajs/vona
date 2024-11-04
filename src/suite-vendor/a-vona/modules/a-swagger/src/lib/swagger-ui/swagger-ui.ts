@@ -1,4 +1,5 @@
 import { OpenAPIObject, SwaggerCustomOptions } from '../interfaces/index.js';
+import { SwaggerUIInitOptions } from '../interfaces/swagger-ui-init-options.interface.js';
 import { favIconHtml, htmlTemplateString, jsTemplateString } from './constants.js';
 import { buildJSInitOptions } from './helpers.js';
 
@@ -11,7 +12,7 @@ export function buildSwaggerInitJS(swaggerDoc: OpenAPIObject, customOptions: Swa
     swaggerDoc,
     swaggerUrl,
     customOptions: swaggerOptions,
-  };
+  } as SwaggerUIInitOptions;
 
   const jsInitOptions = buildJSInitOptions(swaggerInitOptions);
   return jsTemplateString.replace('<% swaggerOptions %>', jsInitOptions);
