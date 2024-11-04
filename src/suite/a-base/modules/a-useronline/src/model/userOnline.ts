@@ -4,8 +4,6 @@ import { EntityUserOnline } from '../entity/userOnline.js';
 
 @Model({
   table: 'aUserOnline',
-  options: {
-    disableDeleted: false,
-  },
+  disableDeleted: false,
 })
 export class ModelUserOnline extends BeanModelBase<EntityUserOnline> {}

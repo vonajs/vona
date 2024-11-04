@@ -4,8 +4,6 @@ import { EntityCategory } from '../entity/category.js';
 
 @Model({
   table: 'aCategory',
-  options: {
-    disableDeleted: false,
-  },
+  disableDeleted: false,
 })
 export class ModelCategory extends BeanModelBase<EntityCategory> {}

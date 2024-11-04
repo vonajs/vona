@@ -1,5 +1,5 @@
-import { appResource } from '../../../index.js';
-import { Constructable, IDecoratorModelOptions } from '../index.js';
+import { appResource, IDecoratorModelOptions } from '../../../index.js';
+import { Constructable } from '../index.js';
 import { parseModuleName } from './util.js';
 
 const __tableNames = new Set();
@@ -18,7 +18,7 @@ export function Entity(options: IDecoratorModelOptions): ClassDecorator {
     appResource.addBean({
       module,
       scene: 'model',
-      name: options.name,
+      name: undefined,
       beanClass: target as unknown as Constructable,
       options,
     });

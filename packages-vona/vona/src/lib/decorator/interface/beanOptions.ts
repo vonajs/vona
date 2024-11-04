@@ -1,5 +1,4 @@
 import { IModuleMiddlewareGate } from '../../bean/index.js';
-import { IModelOptions } from '../../bean/resource/model/type.js';
 import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
@@ -86,12 +85,6 @@ export interface IDecoratorAtomOptions {
 
 export interface IDecoratorControllerOptions {
   name?: string;
-}
-
-export interface IDecoratorModelOptions {
-  name?: string;
-  table: string;
-  options: IModelOptions;
 }
 
 export interface IDecoratorAopOptions {

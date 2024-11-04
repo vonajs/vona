@@ -2,5 +2,5 @@ import { Model } from 'vona';
 import { BeanModelBase } from 'vona-module-a-database';
 import { EntityTag } from '../entity/tag.js';
 
-@Model({ table: 'aTag', options: { disableDeleted: false } })
+@Model({ table: 'aTag', disableDeleted: false })
 export class ModelTag extends BeanModelBase<EntityTag> {}

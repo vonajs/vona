@@ -1,4 +1,5 @@
-export interface IModelOptions {
+export interface IDecoratorModelOptions {
+  table?: string;
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;

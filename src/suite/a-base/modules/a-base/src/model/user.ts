@@ -4,8 +4,6 @@ import { EntityUser } from '../entity/user.js';
 
 @Model({
   table: 'aUser',
-  options: {
-    disableDeleted: false,
-  },
+  disableDeleted: false,
 })
 export class ModelUser extends BeanModelBase<EntityUser> {}

@@ -4,8 +4,6 @@ import { EntityStatus } from '../entity/status.js';
 
 @Model({
   table: 'aStatus',
-  options: {
-    disableDeleted: true,
-  },
+  disableDeleted: true,
 })
 export class ModelStatus extends BeanModelBase<EntityStatus> {}

@@ -4,8 +4,6 @@ import { EntityMessageClass } from '../entity/messageClass.js';
 
 @Model({
   table: 'aSocketIOMessageClass',
-  options: {
-    disableDeleted: false,
-  },
+  disableDeleted: false,
 })
 export class ModelMessageClass extends BeanModelBase<EntityMessageClass> {}

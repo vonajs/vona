@@ -4,8 +4,6 @@ import { EntityAtomClass } from '../entity/atomClass.js';
 
 @Model({
   table: 'aAtomClass',
-  options: {
-    disableDeleted: false,
-  },
+  disableDeleted: false,
 })
 export class ModelAtomClass extends BeanModelBase<EntityAtomClass> {}

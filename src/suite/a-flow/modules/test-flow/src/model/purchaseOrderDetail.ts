@@ -4,8 +4,6 @@ import { EntityPurchaseOrderDetail } from '../entity/purchaseOrderDetail.js';
 
 @Model({
   table: 'testFlowPurchaseOrderDetail',
-  options: {
-    disableDeleted: false,
-  },
+  disableDeleted: false,
 })
 export class ModelPurchaseOrderDetail extends BeanModelBase<EntityPurchaseOrderDetail> {}

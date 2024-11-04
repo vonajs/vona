@@ -4,8 +4,6 @@ import { EntityLabel } from '../entity/label.js';
 
 @Model({
   table: 'aLabel',
-  options: {
-    disableDeleted: true,
-  },
+  disableDeleted: true,
 })
 export class ModelLabel extends BeanModelBase<EntityLabel> {}

@@ -4,8 +4,6 @@ import { EntityFlowNode } from '../entity/flowNode.js';
 
 @Model({
   table: 'aFlowNode',
-  options: {
-    disableDeleted: true,
-  },
+  disableDeleted: true,
 })
 export class ModelFlowNode extends BeanModelBase<EntityFlowNode> {}

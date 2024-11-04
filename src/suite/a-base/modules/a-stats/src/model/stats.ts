@@ -4,8 +4,6 @@ import { EntityStats } from '../entity/stats.js';
 
 @Model({
   table: 'aStats',
-  options: {
-    disableDeleted: true,
-  },
+  disableDeleted: true,
 })
 export class ModelStats extends BeanModelBase<EntityStats> {}
