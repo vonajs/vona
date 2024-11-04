@@ -1,4 +1,5 @@
-import { Cast, TableIdentity } from 'vona';
+import { Cast } from 'vona';
+import { TableIdentity } from 'vona-module-a-core';
 import { BeanModel } from '../bean.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types.js';
 import { getTargetColumnName } from '../../common/utils.js';

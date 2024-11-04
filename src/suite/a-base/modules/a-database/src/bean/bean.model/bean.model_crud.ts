@@ -1,4 +1,5 @@
-import { Cast, TableIdentity } from 'vona';
+import { Cast } from 'vona';
+import { TableIdentity } from 'vona-module-a-core';
 import { BigNumber } from 'bignumber.js';
 import { BeanModelView } from './bean.model_view.js';
 import {

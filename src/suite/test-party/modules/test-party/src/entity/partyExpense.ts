@@ -1,4 +1,4 @@
-import { TableIdentity } from 'vona';
+import { TableIdentity } from 'vona-module-a-core';
 import { EntityBaseTemp } from 'vona-module-a-base';
 
 export interface EntityPartyExpense extends EntityBaseTemp {

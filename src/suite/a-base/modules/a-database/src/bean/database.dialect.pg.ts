@@ -1,4 +1,5 @@
-import { Bean, TableIdentity } from 'vona';
+import { Bean } from 'vona';
+import { TableIdentity } from 'vona-module-a-core';
 import {
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,

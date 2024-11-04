@@ -1,4 +1,5 @@
-import { BeanBase, Controller, TableIdentity } from 'vona';
+import { BeanBase, Controller } from 'vona';
+import { TableIdentity } from 'vona-module-a-core';
 import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
