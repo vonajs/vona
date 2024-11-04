@@ -1,11 +1,17 @@
-import { appResource, IDecoratorModelOptions } from '../../../index.js';
+import { appResource, IDecoratorEntityOptions } from '../../../index.js';
 import { Constructable } from '../index.js';
 import { parseModuleName } from './util.js';
 
 const __tableNames = new Set();
 
-export function Entity(options: IDecoratorModelOptions): ClassDecorator {
+export function Entity(options?: IDecoratorEntityOptions): ClassDecorator;
+export function Entity(table?: string): ClassDecorator;
+export function Entity(options?: IDecoratorEntityOptions | string): ClassDecorator {
   return function (target) {
+    if (!options) options = {};
+    if (typeof options === 'string') {
+      options = { table: options } as unknown as IDecoratorEntityOptions;
+    }
     // module
     const module = parseModuleName();
     // tableName
@@ -17,7 +23,7 @@ export function Entity(options: IDecoratorModelOptions): ClassDecorator {
     // add
     appResource.addBean({
       module,
-      scene: 'model',
+      scene: 'entity',
       name: undefined,
       beanClass: target as unknown as Constructable,
       options,

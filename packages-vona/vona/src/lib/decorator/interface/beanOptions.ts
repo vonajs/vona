@@ -9,6 +9,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'virtual'
   | 'scope'
   | 'controller'
+  | 'entity'
   | 'model'
   | 'atom'
   | TypeDecoratorBeanOptionsScene;
