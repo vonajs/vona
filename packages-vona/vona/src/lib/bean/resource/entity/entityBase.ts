@@ -7,12 +7,12 @@ export interface EntityBase {
   iid: number;
 }
 
-export interface TableIdentityParams {
-  id: number;
-}
-
-export interface EntityItemBase extends EntityBase {
-  atomId: TableIdentity;
+export interface EntityBasePro {
+  id: TableIdentity;
+  createdAt: Date;
+  updatedAt: Date;
+  deleted: number;
+  iid: number;
 }
 
 export const TableIdentity = {

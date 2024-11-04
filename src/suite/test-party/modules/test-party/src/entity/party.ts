@@ -1,4 +1,4 @@
-import { EntityItemBase } from 'vona';
+import { EntityItemBase } from 'vona-module-a-base';
 
 export interface EntityParty extends EntityItemBase {
   personCount: number;

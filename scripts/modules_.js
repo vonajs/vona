@@ -201,7 +201,7 @@ async function _moduleHandle_model({ file, module, processHelper }) {
   console.log(file);
   let contentOld = (await fse.readFile(file)).toString();
   if (contentOld.indexOf('EntityItemBase {') > -1) {
-    contentOld = contentOld.replace("import {} from 'vona';", "import { EntityItemBase } from 'vona';");
+    contentOld = contentOld.replace("import {} from 'vona';", "import { EntityItemBase } from 'vona-module-a-base';");
   } else {
     contentOld = contentOld.replace("import {} from 'vona';", "import { EntityBase } from 'vona';");
   }
