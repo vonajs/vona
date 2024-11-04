@@ -1,11 +1,10 @@
 {
-  "name": "vona-module-a-vona",
+  "name": "vona-module-a-decorator",
   "version": "5.0.0",
-  "title": "a-vona",
+  "title": "a-decorator",
   "vonaModule": {
     "dependencies": {
-      "a-core": "5.0.0",
-      "a-decorator": "5.0.0"
+      "a-vona": "5.0.0"
     }
   },
   "type": "module",

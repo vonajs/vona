@@ -1,4 +1,5 @@
-export interface IDecoratorModelOptions {
+export interface IDecoratorModelOptions<T extends object = {}> {
+  entity?: T;
   table?: string;
   disableDeleted?: boolean;
   disableInstance?: boolean;

@@ -1,7 +1,7 @@
 import { TableIdentity } from 'vona-module-a-core';
 import { EntityBaseTemp } from 'vona-module-a-base';
 
-export interface EntityAtom extends Omit<EntityBaseTemp, 'id'> {
+export class EntityAtom extends Omit<EntityBaseTemp, 'id'> {
   id: TableIdentity;
   itemId: TableIdentity;
   atomStage: number;
