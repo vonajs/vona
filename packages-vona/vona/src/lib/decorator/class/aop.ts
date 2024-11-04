@@ -2,7 +2,7 @@ import { appResource } from '../../../index.js';
 import { Constructable, IDecoratorAopOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Aop<T>(options: IDecoratorAopOptions): ClassDecorator {
+export function Aop(options: IDecoratorAopOptions): ClassDecorator {
   return function (target) {
     // module
     const module = parseModuleName();
@@ -11,7 +11,7 @@ export function Aop<T>(options: IDecoratorAopOptions): ClassDecorator {
       module,
       scene: 'aop',
       name: options.name,
-      beanClass: target as unknown as Constructable<T>,
+      beanClass: target as unknown as Constructable,
       aop: true,
       aopMatch: options.match,
       gate: options.gate,

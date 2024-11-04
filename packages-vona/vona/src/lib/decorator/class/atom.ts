@@ -2,7 +2,7 @@ import { appResource } from '../../../index.js';
 import { Constructable, IDecoratorAtomOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Atom<T>(options?: IDecoratorAtomOptions): ClassDecorator {
+export function Atom(options?: IDecoratorAtomOptions): ClassDecorator {
   return function (target) {
     if (!options) options = {};
     // module
@@ -12,7 +12,7 @@ export function Atom<T>(options?: IDecoratorAtomOptions): ClassDecorator {
       module,
       scene: 'atom',
       name: options.name,
-      beanClass: target as unknown as Constructable<T>,
+      beanClass: target as unknown as Constructable,
     });
   };
 }

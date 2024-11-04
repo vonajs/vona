@@ -2,7 +2,7 @@ import { appResource } from '../../core/resource.js';
 import { Constructable, IDecoratorVirtualOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Virtual<T>(options?: IDecoratorVirtualOptions): ClassDecorator {
+export function Virtual(options?: IDecoratorVirtualOptions): ClassDecorator {
   return function (target) {
     if (!options) options = {};
     // module
@@ -13,7 +13,7 @@ export function Virtual<T>(options?: IDecoratorVirtualOptions): ClassDecorator {
       scene: options.scene || 'virtual',
       name: options.name,
       containerScope: options.containerScope,
-      beanClass: target as unknown as Constructable<T>,
+      beanClass: target as unknown as Constructable,
       virtual: true,
     });
   };

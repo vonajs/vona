@@ -56,7 +56,7 @@ export class AppResource extends BeanSimple {
     return aopsMatched;
   }
 
-  addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
+  addBean(options: Partial<IDecoratorBeanOptionsBase>) {
     let { module, scene, name, beanClass, virtual } = options;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
@@ -72,7 +72,7 @@ export class AppResource extends BeanSimple {
       beanFullName,
       name,
       moduleBelong,
-    } as IDecoratorBeanOptionsBase<T>;
+    } as IDecoratorBeanOptionsBase;
     beanOptions.__aopChains__ = null!;
     beanOptions.__aopChainsKey__ = {};
     // record

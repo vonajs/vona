@@ -2,7 +2,7 @@ import { appResource } from '../../../index.js';
 import { Constructable, IDecoratorServiceOptions } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Service<T>(options?: IDecoratorServiceOptions): ClassDecorator {
+export function Service(options?: IDecoratorServiceOptions): ClassDecorator {
   return function (target) {
     if (!options) options = {};
     // module
@@ -13,7 +13,7 @@ export function Service<T>(options?: IDecoratorServiceOptions): ClassDecorator {
       scene: 'service',
       name: options.name,
       containerScope: options.containerScope,
-      beanClass: target as unknown as Constructable<T>,
+      beanClass: target as unknown as Constructable,
     });
   };
 }

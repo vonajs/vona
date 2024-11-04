@@ -2,7 +2,7 @@ import { appResource } from '../../core/resource.js';
 import { Constructable } from '../index.js';
 import { parseModuleName } from './util.js';
 
-export function Scope<T>(): ClassDecorator {
+export function Scope(): ClassDecorator {
   return function (target) {
     // module
     const module = parseModuleName();
@@ -11,7 +11,7 @@ export function Scope<T>(): ClassDecorator {
       module,
       scene: 'scope',
       name: 'module', // force to the same name
-      beanClass: target as unknown as Constructable<T>,
+      beanClass: target as unknown as Constructable,
     });
   };
 }

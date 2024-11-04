@@ -4,7 +4,7 @@ import { parseModuleName } from './util.js';
 
 const __tableNames = new Set();
 
-export function Entity<T>(options: IDecoratorModelOptions): ClassDecorator {
+export function Entity(options: IDecoratorModelOptions): ClassDecorator {
   return function (target) {
     // module
     const module = parseModuleName();
@@ -19,7 +19,7 @@ export function Entity<T>(options: IDecoratorModelOptions): ClassDecorator {
       module,
       scene: 'model',
       name: options.name,
-      beanClass: target as unknown as Constructable<T>,
+      beanClass: target as unknown as Constructable,
       options,
     });
   };
