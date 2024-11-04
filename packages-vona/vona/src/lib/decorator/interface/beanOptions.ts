@@ -56,10 +56,8 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   beanClass: Constructable<T>;
   containerScope?: ContainerScope;
   aop: boolean | undefined;
-  aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
   moduleBelong?: string;
-  gate?: IModuleMiddlewareGate;
   options?: unknown;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
@@ -87,9 +85,9 @@ export interface IDecoratorControllerOptions {
   name?: string;
 }
 
+type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 export interface IDecoratorAopOptions {
-  name?: string;
-  match: string | RegExp | (string | RegExp)[];
+  match: TypeDecoratorAopOptionsMatch;
   gate?: IModuleMiddlewareGate;
 }
 

@@ -10,11 +10,10 @@ export function Aop(options: IDecoratorAopOptions): ClassDecorator {
     appResource.addAop({
       module,
       scene: 'aop',
-      name: options.name,
+      name: undefined,
       beanClass: target as unknown as Constructable,
       aop: true,
-      aopMatch: options.match,
-      gate: options.gate,
+      options,
     });
   };
 }

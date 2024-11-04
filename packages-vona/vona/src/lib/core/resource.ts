@@ -1,5 +1,10 @@
 import is from 'is-type-of';
-import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
+import {
+  Constructable,
+  IDecoratorAopOptions,
+  IDecoratorBeanOptionsBase,
+  IDecoratorUseOptionsBase,
+} from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
@@ -42,14 +47,15 @@ export class AppResource extends BeanSimple {
     // loop
     const aopsMatched: string[] = [];
     for (const aop of this.aopsArray) {
+      const aopOptions = aop.options as IDecoratorAopOptions;
       // not self
       if (aop.beanFullName === beanOptions.beanFullName) continue;
       // // check if match aop
       // if (beanOptions.aop && !aop.matchAop) continue;
       // gate
-      if (!this.app.meta.util.checkGate(aop.gate)) continue;
+      if (!this.app.meta.util.checkGate(aopOptions.gate)) continue;
       // match
-      if (__aopMatch(aop.aopMatch, beanOptions.beanFullName)) {
+      if (__aopMatch(aopOptions.match, beanOptions.beanFullName)) {
         aopsMatched.push(aop.beanFullName);
       }
     }
