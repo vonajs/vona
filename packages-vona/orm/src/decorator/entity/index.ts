@@ -1,1 +1,1 @@
-export * from './entity.js';
+export {};

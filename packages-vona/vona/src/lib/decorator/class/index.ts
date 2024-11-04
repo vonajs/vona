@@ -2,6 +2,7 @@ export * from './aop.js';
 export * from './atom.js';
 export * from './bean.js';
 export * from './controller.js';
+export * from './entity.js';
 export * from './model.js';
 export * from './service.js';
 export * from './virtual.js';
