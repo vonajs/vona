@@ -1,4 +1,4 @@
-import { SwaggerUiOptions } from './swagger-ui-options.interface';
+import { SwaggerUiOptions } from './swagger-ui-options.interface.js';
 import { OpenAPIObject } from './open-api-spec.interface.js';
 
 export interface SwaggerCustomOptions {

@@ -1,8 +1,4 @@
-export type OperationIdFactory = (
-  controllerKey: string,
-  methodKey: string,
-  version?: string
-) => string;
+export type OperationIdFactory = (controllerKey: string, methodKey: string, version?: string) => string;
 
 export interface SwaggerDocumentOptions {
   /**
@@ -40,11 +36,7 @@ export interface SwaggerDocumentOptions {
    *
    * @default () => `${controllerKey}_${methodKey}_from_${fieldKey}`
    */
-  linkNameFactory?: (
-    controllerKey: string,
-    methodKey: string,
-    fieldKey: string
-  ) => string;
+  linkNameFactory?: (controllerKey: string, methodKey: string, fieldKey: string) => string;
 
   /*
    * Generate tags automatically based on the controller name.

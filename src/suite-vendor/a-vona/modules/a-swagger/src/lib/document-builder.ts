@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { clone, isString, isUndefined, negate, pickBy } from 'lodash';
 import { buildDocumentBase } from './fixtures/document.base';
-import { OpenAPIObject } from './interfaces';
+import { OpenAPIObject } from './interfaces/index.js';
 import {
   ExternalDocumentationObject,
   ParameterObject,

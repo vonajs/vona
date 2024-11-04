@@ -1,14 +1,13 @@
 import { isString } from '@nestjs/common/utils/shared.utils.js';
 import { DECORATORS } from '../constants.js';
 import { ApiSchemaOptions } from '../decorators/api-schema.decorator.js';
-import { Constructable } from 'vona';
 
-export function getSchemaPath(model: string | Constructable): string {
+export function getSchemaPath(model: string | Function): string {
   const modelName = isString(model) ? model : getSchemaNameByClass(model);
   return `#/components/schemas/${modelName}`;
 }
 
-function getSchemaNameByClass(target: Constructable): string {
+function getSchemaNameByClass(target: Function): string {
   if (!target || typeof target !== 'function') {
     return '';
   }
@@ -22,7 +21,7 @@ function getSchemaNameByClass(target: Constructable): string {
   return customSchema[0].name ?? target.name;
 }
 
-export function refs(...models: Constructable[]) {
+export function refs(...models: Function[]) {
   return models.map(item => ({
     $ref: getSchemaPath(item.name),
   }));

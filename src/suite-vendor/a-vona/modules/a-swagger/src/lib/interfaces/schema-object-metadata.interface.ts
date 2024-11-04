@@ -1,5 +1,5 @@
 import { Type } from '@nestjs/common';
-import { EnumSchemaAttributes } from './enum-schema-attributes.interface';
+import { EnumSchemaAttributes } from './enum-schema-attributes.interface.js';
 import { SchemaObject } from './open-api-spec.interface.js';
 
 export type EnumAllowedTypes = any[] | Record<string, any> | (() => any[] | Record<string, any>);

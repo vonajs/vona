@@ -96,14 +96,7 @@ export interface ExternalDocumentationObject {
 }
 
 export type ParameterLocation = 'query' | 'header' | 'path' | 'cookie';
-export type ParameterStyle =
-  | 'matrix'
-  | 'label'
-  | 'form'
-  | 'simple'
-  | 'spaceDelimited'
-  | 'pipeDelimited'
-  | 'deepObject';
+export type ParameterStyle = 'matrix' | 'label' | 'form' | 'simple' | 'spaceDelimited' | 'pipeDelimited' | 'deepObject';
 
 export interface BaseParameterObject {
   description?: string;
@@ -147,8 +140,7 @@ export interface EncodingPropertyObject {
   allowReserved?: boolean;
 }
 
-export interface ResponsesObject
-  extends Record<string, ResponseObject | ReferenceObject | undefined> {
+export interface ResponsesObject extends Record<string, ResponseObject | ReferenceObject | undefined> {
   default?: ResponseObject | ReferenceObject;
 }
 

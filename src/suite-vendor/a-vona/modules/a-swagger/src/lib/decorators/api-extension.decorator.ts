@@ -1,5 +1,5 @@
 import { DECORATORS } from '../constants.js';
-import { createMixedDecorator } from './helpers';
+import { createMixedDecorator } from './helpers.js';
 import { clone } from 'lodash';
 
 export function ApiExtension(extensionKey: string, extensionProperties: any) {

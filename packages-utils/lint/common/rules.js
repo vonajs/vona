@@ -106,6 +106,7 @@ const rules = {
       types: {
         // un-ban a type that's banned by default
         '{}': false,
+        Function: false,
       },
       extendDefaults: true,
     },

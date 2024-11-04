@@ -1,10 +1,10 @@
 import { Type } from '@nestjs/common';
 import { isNil, omit } from 'lodash';
-import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface';
+import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';
 import { addEnumSchema, isEnumDefined } from '../utils/enum.utils';
-import { createParamDecorator } from './helpers';
+import { createParamDecorator } from './helpers.js';
 
 type ParameterOptions = Omit<ParameterObject, 'in' | 'schema'>;
 

@@ -1,6 +1,5 @@
 import { Type } from '@nestjs/common';
-import { Constructable } from 'vona';
 
-export function isDateCtor(type: Type<unknown> | Constructable | string): boolean {
+export function isDateCtor(type: Type<unknown> | Function | string): boolean {
   return type === Date;
 }

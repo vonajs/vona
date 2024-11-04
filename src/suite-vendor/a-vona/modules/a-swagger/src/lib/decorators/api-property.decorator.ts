@@ -1,9 +1,9 @@
 import { Type } from '@nestjs/common';
 import { DECORATORS } from '../constants.js';
-import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface';
+import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { EnumAllowedTypes, SchemaObjectMetadata } from '../interfaces/schema-object-metadata.interface.js';
 import { getEnumType, getEnumValues } from '../utils/enum.utils';
-import { createPropertyDecorator, getTypeIsArrayTuple } from './helpers';
+import { createPropertyDecorator, getTypeIsArrayTuple } from './helpers.js';
 
 export type ApiPropertyCommonOptions = SchemaObjectMetadata & {
   'x-enumNames'?: string[];

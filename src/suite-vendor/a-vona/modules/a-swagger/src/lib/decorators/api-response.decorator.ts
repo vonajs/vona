@@ -2,7 +2,7 @@ import { HttpStatus, Type } from '@nestjs/common';
 import { omit } from 'lodash';
 import { DECORATORS } from '../constants.js';
 import { ReferenceObject, ResponseObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
-import { getTypeIsArrayTuple } from './helpers';
+import { getTypeIsArrayTuple } from './helpers.js';
 
 type ApiResponseExampleValue = any;
 export interface ApiResponseExamples {
