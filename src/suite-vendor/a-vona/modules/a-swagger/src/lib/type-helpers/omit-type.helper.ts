@@ -1,4 +1,3 @@
-import { Type } from '@nestjs/common';
 import {
   inheritPropertyInitializers,
   inheritTransformationMetadata,
@@ -10,6 +9,7 @@ import { ApiProperty } from '../decorators/index.js';
 import { MetadataLoader } from '../plugin/metadata-loader.js';
 import { ModelPropertiesAccessor } from '../services/model-properties-accessor.js';
 import { clonePluginMetadataFactory } from './mapped-types.utils.js';
+import { Type } from '../common/type.interface.js';
 
 const modelPropertiesAccessor = new ModelPropertiesAccessor();
 
