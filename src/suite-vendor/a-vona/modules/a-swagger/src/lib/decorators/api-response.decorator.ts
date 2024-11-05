@@ -54,7 +54,7 @@ export function ApiResponse(
   const groupedMetadata = {
     [options.status || 'default']: omit(options, 'status'),
   };
-  return (target: object, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
+  return (target: object, _key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     if (descriptor) {
       const responses = Reflect.getMetadata(DECORATORS.API_RESPONSE, descriptor.value);
 

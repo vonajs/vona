@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { clone, isString, isUndefined, negate, pickBy } from 'lodash';
-import { buildDocumentBase } from './fixtures/document.base';
+import { buildDocumentBase } from './fixtures/document.base.js';
 import { OpenAPIObject } from './interfaces/index.js';
 import {
   ExternalDocumentationObject,
@@ -10,7 +10,7 @@ import {
   ServerVariableObject,
   TagObject,
 } from './interfaces/open-api-spec.interface.js';
-import { GlobalParametersStorage } from './storages/global-parameters.storage';
+import { GlobalParametersStorage } from './storages/global-parameters.storage.js';
 
 export class DocumentBuilder {
   private readonly logger = new Logger(DocumentBuilder.name);
@@ -56,7 +56,7 @@ export class DocumentBuilder {
   }
 
   public addServer(url: string, description?: string, variables?: Record<string, ServerVariableObject>): this {
-    this.document.servers.push({ url, description, variables });
+    this.document!.servers!.push({ url, description, variables });
     return this;
   }
 
@@ -65,7 +65,7 @@ export class DocumentBuilder {
     return this;
   }
 
-  public setBasePath(path: string) {
+  public setBasePath(_path: string) {
     this.logger.warn(
       'The "setBasePath" method has been deprecated. Now, a global prefix is populated automatically. If you want to ignore it, take a look here: https://docs.nestjs.com/recipes/swagger#global-prefix. Alternatively, you can use "addServer" method to set up multiple different paths.',
     );
@@ -73,7 +73,7 @@ export class DocumentBuilder {
   }
 
   public addTag(name: string, description = '', externalDocs?: ExternalDocumentationObject): this {
-    this.document.tags = this.document.tags.concat(
+    this.document.tags = this.document!.tags!.concat(
       pickBy(
         {
           name,
@@ -97,8 +97,8 @@ export class DocumentBuilder {
   }
 
   public addSecurity(name: string, options: SecuritySchemeObject): this {
-    this.document.components.securitySchemes = {
-      ...(this.document.components.securitySchemes || {}),
+    this.document!.components!.securitySchemes = {
+      ...(this.document!.components!.securitySchemes || {}),
       [name]: options,
     };
     return this;
@@ -117,9 +117,9 @@ export class DocumentBuilder {
     let securityRequirement: SecurityRequirementObject;
 
     if (isString(name)) {
-      securityRequirement = { [name]: requirements };
+      securityRequirement = { [name as any]: requirements };
     } else {
-      securityRequirement = name;
+      securityRequirement = name as any;
     }
 
     this.document.security = (this.document.security || []).concat({
@@ -149,6 +149,7 @@ export class DocumentBuilder {
     name = 'oauth2',
   ): this {
     this.addSecurity(name, {
+      // @ts-ignore ignore
       type: 'oauth2',
       flows: {},
       ...options,
@@ -163,6 +164,7 @@ export class DocumentBuilder {
     name = 'api_key',
   ): this {
     this.addSecurity(name, {
+      // @ts-ignore ignore
       type: 'apiKey',
       in: 'header',
       name,
@@ -178,6 +180,7 @@ export class DocumentBuilder {
     name = 'basic',
   ): this {
     this.addSecurity(name, {
+      // @ts-ignore ignore
       type: 'http',
       scheme: 'basic',
       ...options,
@@ -193,6 +196,7 @@ export class DocumentBuilder {
     securityName = 'cookie',
   ): this {
     this.addSecurity(securityName, {
+      // @ts-ignore ignore
       type: 'apiKey',
       in: 'cookie',
       name: cookieName,

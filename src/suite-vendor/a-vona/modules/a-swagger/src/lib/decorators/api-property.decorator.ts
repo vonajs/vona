@@ -2,8 +2,9 @@ import { Type } from '@nestjs/common';
 import { DECORATORS } from '../constants.js';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { EnumAllowedTypes, SchemaObjectMetadata } from '../interfaces/schema-object-metadata.interface.js';
-import { getEnumType, getEnumValues } from '../utils/enum.utils';
+import { getEnumType, getEnumValues } from '../utils/enum.utils.js';
 import { createPropertyDecorator, getTypeIsArrayTuple } from './helpers.js';
+import { Cast } from 'vona';
 
 export type ApiPropertyCommonOptions = SchemaObjectMetadata & {
   'x-enumNames'?: string[];
@@ -33,7 +34,7 @@ const isEnumArray = (
   enum: EnumAllowedTypes;
   type: any;
   items: any;
-} => opts.isArray && 'enum' in opts;
+} => (opts.isArray && 'enum' in opts) as boolean;
 
 export function ApiProperty(options: ApiPropertyOptions = {}): PropertyDecorator {
   return createApiPropertyDecorator(options);
@@ -58,9 +59,9 @@ export function createApiPropertyDecorator(
       type: getEnumType(enumValues),
       enum: enumValues,
     };
-    delete options.enum;
+    delete Cast(options).enum;
   } else if ('enum' in options) {
-    const enumValues = getEnumValues(options.enum);
+    const enumValues = getEnumValues(options.enum as any);
 
     options.enum = enumValues;
     options.type = getEnumType(enumValues);

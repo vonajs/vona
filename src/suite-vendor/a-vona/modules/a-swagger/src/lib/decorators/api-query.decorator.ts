@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterObject, ReferenceObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';
-import { addEnumArraySchema, addEnumSchema, isEnumArray, isEnumDefined } from '../utils/enum.utils';
+import { addEnumArraySchema, addEnumSchema, isEnumArray, isEnumDefined } from '../utils/enum.utils.js';
 import { createParamDecorator, getTypeIsArrayTuple } from './helpers.js';
 
 type ParameterOptions = Omit<ParameterObject, 'in' | 'schema' | 'name'>;

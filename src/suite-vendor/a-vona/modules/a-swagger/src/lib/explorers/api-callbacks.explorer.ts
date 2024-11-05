@@ -1,9 +1,9 @@
 import { Type } from '@nestjs/common';
 import { DECORATORS } from '../constants.js';
-import { getSchemaPath } from '../utils';
-import { CallBackObject } from '../interfaces/callback-object.interface';
+import { getSchemaPath } from '../utils/index.js';
+import { CallBackObject } from '../interfaces/callback-object.interface.js';
 
-export const exploreApiCallbacksMetadata = (instance: object, prototype: Type<unknown>, method: object) => {
+export const exploreApiCallbacksMetadata = (_instance: object, _prototype: Type<unknown>, method: object) => {
   const callbacksData = Reflect.getMetadata(DECORATORS.API_CALLBACKS, method);
   if (!callbacksData) return callbacksData;
 

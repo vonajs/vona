@@ -7,7 +7,7 @@ export const exploreGlobalApiConsumesMetadata = (metatype: Type<unknown>) => {
 };
 
 export const exploreApiConsumesMetadata = (
-  instance: object,
-  prototype: Type<unknown>,
+  _instance: object,
+  _prototype: Type<unknown>,
   method: object,
 ): string[] | undefined => Reflect.getMetadata(DECORATORS.API_CONSUMES, method);

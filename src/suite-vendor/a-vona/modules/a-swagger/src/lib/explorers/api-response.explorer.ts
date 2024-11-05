@@ -6,8 +6,8 @@ import { DECORATORS } from '../constants.js';
 import { ApiResponse, ApiResponseMetadata } from '../decorators/index.js';
 import { SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
-import { FactoriesNeededByResponseFactory, ResponseObjectFactory } from '../services/response-object-factory';
-import { mergeAndUniq } from '../utils/merge-and-uniq.util';
+import { FactoriesNeededByResponseFactory, ResponseObjectFactory } from '../services/response-object-factory.js';
+import { mergeAndUniq } from '../utils/merge-and-uniq.util.js';
 
 const responseObjectFactory = new ResponseObjectFactory();
 
@@ -100,7 +100,7 @@ function applyMetadataFactory(prototype: Type<unknown>, instance: object) {
       ApiResponse(meta, { overrideExisting: false })(
         classPrototype,
         key,
-        Object.getOwnPropertyDescriptor(classPrototype, key),
+        Object.getOwnPropertyDescriptor(classPrototype, key) as any,
       );
     });
   } while ((prototype = Reflect.getPrototypeOf(prototype) as Type<any>) && prototype !== Object.prototype && prototype);

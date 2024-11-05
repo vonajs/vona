@@ -6,6 +6,6 @@ export const exploreGlobalApiSecurityMetadata = (metatype: Type<unknown>) => {
   return security ? { security } : undefined;
 };
 
-export const exploreApiSecurityMetadata = (instance: object, prototype: Type<unknown>, method: object) => {
+export const exploreApiSecurityMetadata = (_instance: object, _prototype: Type<unknown>, method: object) => {
   return Reflect.getMetadata(DECORATORS.API_SECURITY, method);
 };

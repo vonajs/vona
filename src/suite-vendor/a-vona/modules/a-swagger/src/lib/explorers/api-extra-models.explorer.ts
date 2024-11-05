@@ -6,5 +6,8 @@ export const exploreGlobalApiExtraModelsMetadata = (metatype: Type<unknown>): Fu
   return extraModels || [];
 };
 
-export const exploreApiExtraModelsMetadata = (instance: object, prototype: Type<unknown>, method: object): Function[] =>
-  Reflect.getMetadata(DECORATORS.API_EXTRA_MODELS, method) || [];
+export const exploreApiExtraModelsMetadata = (
+  _instance: object,
+  _prototype: Type<unknown>,
+  method: object,
+): Function[] => Reflect.getMetadata(DECORATORS.API_EXTRA_MODELS, method) || [];

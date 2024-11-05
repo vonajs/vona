@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
 import { filter, groupBy, keyBy, mapValues, omit } from 'lodash';
 import { OpenAPIObject } from './interfaces/index.js';
-import { ModuleRoute } from './interfaces/module-route.interface';
-import { sortObjectLexicographically } from './utils/sort-object-lexicographically';
+import { ModuleRoute } from './interfaces/module-route.interface.js';
+import { sortObjectLexicographically } from './utils/sort-object-lexicographically.js';
 
 export class SwaggerTransformer {
   public normalizePaths(

@@ -2,7 +2,7 @@ import { compact, head } from 'lodash';
 import { posix } from 'path';
 import * as ts from 'typescript';
 import { ApiOperation, ApiResponse } from '../../decorators/index.js';
-import { PluginOptions } from '../merge-options';
+import { PluginOptions } from '../merge-options.js';
 import { OPENAPI_NAMESPACE } from '../plugin-constants.js';
 import {
   createLiteralFromAnyValue,
@@ -11,15 +11,16 @@ import {
   getMainCommentOfNode,
   getTsDocErrorsOfNode,
   getTsDocTagsOfNode,
-} from '../utils/ast-utils';
+} from '../utils/ast-utils.js';
 import {
   convertPath,
   getDecoratorOrUndefinedByNames,
   getTypeReferenceAsString,
   hasPropertyKey,
-} from '../utils/plugin-utils';
-import { typeReferenceToIdentifier } from '../utils/type-reference-to-identifier.util';
-import { AbstractFileVisitor } from './abstract.visitor';
+} from '../utils/plugin-utils.js';
+import { typeReferenceToIdentifier } from '../utils/type-reference-to-identifier.util.js';
+import { AbstractFileVisitor } from './abstract.visitor.js';
+import { Cast } from 'vona';
 
 type ClassMetadata = Record<string, ts.ObjectLiteralExpression>;
 
@@ -32,7 +33,7 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
   }
 
   get collectedMetadata(): Array<[ts.CallExpression, Record<string, ClassMetadata>]> {
-    const metadataWithImports = [];
+    const metadataWithImports: any[] = [];
     Object.keys(this._collectedMetadata).forEach(filePath => {
       const metadata = this._collectedMetadata[filePath];
       const path = filePath.replace(/\.[jt]s$/, '');
@@ -49,10 +50,10 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
   visit(sourceFile: ts.SourceFile, ctx: ts.TransformationContext, program: ts.Program, options: PluginOptions) {
     const typeChecker = program.getTypeChecker();
     if (!options.readonly) {
-      sourceFile = this.updateImports(sourceFile, ctx.factory, program);
+      sourceFile = Cast(this).updateImports(sourceFile, ctx.factory, program);
     }
 
-    const visitNode = (node: ts.Node): ts.Node => {
+    const visitNode = (node: ts.Node): ts.Node | undefined => {
       if (ts.isMethodDeclaration(node)) {
         try {
           const metadata: ClassMetadata = {};
@@ -60,7 +61,7 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
           if (!options.readonly) {
             return updatedNode;
           } else {
-            const filePath = this.normalizeImportPath(options.pathToSource, sourceFile.fileName);
+            const filePath = this.normalizeImportPath(options.pathToSource!, sourceFile.fileName);
 
             if (!this._collectedMetadata[filePath]) {
               this._collectedMetadata[filePath] = {};
@@ -208,14 +209,14 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
       } else {
         const keyToGenerate = options.controllerKeyOfComment;
         properties.unshift(
-          factory.createPropertyAssignment(keyToGenerate, factory.createStringLiteral(extractedComments)),
+          factory.createPropertyAssignment(keyToGenerate!, factory.createStringLiteral(extractedComments)),
         );
       }
     } else {
       // No @remarks tag was found in the comment so use the attribute set by the user
       const keyToGenerate = options.controllerKeyOfComment;
       properties.unshift(
-        factory.createPropertyAssignment(keyToGenerate, factory.createStringLiteral(extractedComments)),
+        factory.createPropertyAssignment(keyToGenerate!, factory.createStringLiteral(extractedComments)),
       );
     }
 
@@ -280,9 +281,11 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
     }
 
     return tags.map(tag => {
-      const properties = [];
-      properties.push(factory.createPropertyAssignment('status', factory.createNumericLiteral(tag.status)));
-      properties.push(factory.createPropertyAssignment('description', factory.createNumericLiteral(tag.description)));
+      const properties: any[] = [];
+      properties.push(factory.createPropertyAssignment('status', factory.createNumericLiteral(Cast(tag).status)));
+      properties.push(
+        factory.createPropertyAssignment('description', factory.createNumericLiteral(Cast(tag).description)),
+      );
       const objectLiteralExpr = factory.createObjectLiteralExpression(compact(properties));
       const methodKey = node.name.getText();
       metadata[methodKey] = objectLiteralExpr;
@@ -307,7 +310,7 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
     metadata: ClassMetadata,
     options: PluginOptions,
   ): ts.ObjectLiteralExpression {
-    let properties = [];
+    let properties: any[] = [];
     if (!options.readonly) {
       properties = properties.concat(
         existingProperties,
@@ -344,7 +347,7 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
       return undefined;
     }
     const signature = typeChecker.getSignatureFromDeclaration(node);
-    const type = typeChecker.getReturnTypeOfSignature(signature);
+    const type = typeChecker.getReturnTypeOfSignature(signature as any);
     if (!type) {
       return undefined;
     }
@@ -380,14 +383,14 @@ export class ControllerClassVisitor extends AbstractFileVisitor {
 
   getStatusCodeIdentifier(factory: ts.NodeFactory, node: ts.MethodDeclaration) {
     const decorators = ts.canHaveDecorators(node) && ts.getDecorators(node);
-    const httpCodeDecorator = getDecoratorOrUndefinedByNames(['HttpCode'], decorators, factory);
+    const httpCodeDecorator = getDecoratorOrUndefinedByNames(['HttpCode'], decorators as any, factory);
     if (httpCodeDecorator) {
       const argument = head(getDecoratorArguments(httpCodeDecorator));
       if (argument) {
         return argument;
       }
     }
-    const postDecorator = getDecoratorOrUndefinedByNames(['Post'], decorators, factory);
+    const postDecorator = getDecoratorOrUndefinedByNames(['Post'], decorators as any, factory);
     if (postDecorator) {
       return factory.createIdentifier('201');
     }

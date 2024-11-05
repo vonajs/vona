@@ -2,7 +2,7 @@ import { Type } from '@nestjs/common';
 import { isFunction, isString } from '@nestjs/common/utils/shared.utils.js';
 import 'reflect-metadata';
 import { DECORATORS } from '../constants.js';
-import { createApiPropertyDecorator } from '../decorators/api-property.decorator';
+import { createApiPropertyDecorator } from '../decorators/api-property.decorator.js';
 import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
 
 export class ModelPropertiesAccessor {

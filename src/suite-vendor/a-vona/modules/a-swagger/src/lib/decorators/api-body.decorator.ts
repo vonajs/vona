@@ -7,7 +7,7 @@ import {
   SchemaObject,
 } from '../interfaces/open-api-spec.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';
-import { addEnumArraySchema, addEnumSchema, isEnumArray, isEnumDefined } from '../utils/enum.utils';
+import { addEnumArraySchema, addEnumSchema, isEnumArray, isEnumDefined } from '../utils/enum.utils.js';
 import { createParamDecorator, getTypeIsArrayTuple } from './helpers.js';
 
 type RequestBodyOptions = Omit<RequestBodyObject, 'content'>;

@@ -48,7 +48,7 @@ export interface ApiLinkOptions {
  * @see [Swagger link objects](https://swagger.io/docs/specification/links/)
  */
 export function ApiLink({ from, fromField = 'id', routeParam }: ApiLinkOptions): MethodDecorator {
-  return (controllerPrototype: object, key: string | symbol, descriptor: PropertyDescriptor) => {
+  return (controllerPrototype: object, _key: string | symbol, descriptor: PropertyDescriptor) => {
     const { prototype } = from;
     if (prototype) {
       const links = Reflect.getMetadata(DECORATORS.API_LINK, prototype) ?? [];

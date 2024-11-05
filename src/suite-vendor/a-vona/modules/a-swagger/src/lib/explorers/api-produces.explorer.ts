@@ -6,5 +6,5 @@ export const exploreGlobalApiProducesMetadata = (metatype: Type<unknown>) => {
   return produces ? { produces } : undefined;
 };
 
-export const exploreApiProducesMetadata = (instance: object, prototype: Type<unknown>, method: object) =>
+export const exploreApiProducesMetadata = (_instance: object, _prototype: Type<unknown>, method: object) =>
   Reflect.getMetadata(DECORATORS.API_PRODUCES, method);

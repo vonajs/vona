@@ -1,6 +1,6 @@
 import { Type } from '@nestjs/common';
 import { DECORATORS } from '../constants.js';
-import { ApiOperation } from '../decorators/api-operation.decorator';
+import { ApiOperation } from '../decorators/api-operation.decorator.js';
 import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
 
 export const exploreApiOperationMetadata = (instance: object, prototype: Type<unknown>, method: object) => {
@@ -35,7 +35,7 @@ function applyMetadataFactory(prototype: Type<unknown>, instance: object) {
       ApiOperation(operationMeta, { overrideExisting: false })(
         classPrototype,
         key,
-        Object.getOwnPropertyDescriptor(classPrototype, key),
+        Object.getOwnPropertyDescriptor(classPrototype, key) as any,
       );
     });
   } while ((prototype = Reflect.getPrototypeOf(prototype) as Type<any>) && prototype !== Object.prototype && prototype);

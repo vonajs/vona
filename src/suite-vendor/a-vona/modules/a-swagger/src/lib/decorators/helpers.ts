@@ -9,7 +9,7 @@ export function createMethodDecorator<T = any>(
   metadata: T,
   { overrideExisting } = { overrideExisting: true },
 ): MethodDecorator {
-  return (target: object, key: string | symbol, descriptor: PropertyDescriptor) => {
+  return (_target: object, _key: string | symbol, descriptor: PropertyDescriptor) => {
     if (typeof metadata === 'object') {
       const prevValue = Reflect.getMetadata(metakey, descriptor.value);
       if (prevValue && !overrideExisting) {
@@ -25,7 +25,7 @@ export function createMethodDecorator<T = any>(
 
 export function createClassDecorator<T extends Array<any> = any>(
   metakey: string,
-  metadata: T = [] as T,
+  metadata: T = [] as unknown as T,
 ): ClassDecorator {
   return target => {
     const prevValue = Reflect.getMetadata(metakey, target) || [];
@@ -39,12 +39,12 @@ export function createPropertyDecorator<T extends Record<string, any> = any>(
   metadata: T,
   overrideExisting = true,
 ): PropertyDecorator {
-  return (target: object, propertyKey: string) => {
+  return (target: object, propertyKey: string | symbol) => {
     const properties = Reflect.getMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, target) || [];
 
-    const key = `:${propertyKey}`;
+    const key = `:${propertyKey as any}`;
     if (!properties.includes(key)) {
-      Reflect.defineMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, [...properties, `:${propertyKey}`], target);
+      Reflect.defineMetadata(DECORATORS.API_MODEL_PROPERTIES_ARRAY, [...properties, `:${propertyKey as any}`], target);
     }
     const existingMetadata = Reflect.getMetadata(metakey, target, propertyKey);
     if (existingMetadata) {
@@ -79,7 +79,7 @@ export function createPropertyDecorator<T extends Record<string, any> = any>(
 }
 
 export function createMixedDecorator<T = any>(metakey: string, metadata: T): MethodDecorator & ClassDecorator {
-  return (target: object, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
+  return (target: object, _key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     if (descriptor) {
       let metadatas: any;
       if (Array.isArray(metadata)) {
@@ -101,7 +101,7 @@ export function createParamDecorator<T extends Record<string, any> = any>(
   metadata: T,
   initial: Partial<T>,
 ): MethodDecorator & ClassDecorator {
-  return (target: object | Function, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
+  return (target: object | Function, _key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     const paramOptions = {
       ...initial,
       ...pickBy(metadata, negate(isUndefined)),

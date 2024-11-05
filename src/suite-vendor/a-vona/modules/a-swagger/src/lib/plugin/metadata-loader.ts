@@ -1,3 +1,4 @@
+import { Cast } from 'vona';
 import { METADATA_FACTORY_NAME } from './plugin-constants.js';
 
 export class MetadataLoader {
@@ -26,7 +27,7 @@ export class MetadataLoader {
     const loadPromises = meta.map(async ([fileImport, fileMeta]) => {
       const fileRef = await fileImport;
       Object.keys(fileMeta).map(key => {
-        const clsRef = fileRef[key];
+        const clsRef = Cast(fileRef)[key];
         clsRef[METADATA_FACTORY_NAME] = () => fileMeta[key];
       });
     });

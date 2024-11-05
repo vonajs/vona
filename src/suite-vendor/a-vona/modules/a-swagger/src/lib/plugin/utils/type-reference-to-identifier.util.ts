@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
-import { PluginOptions } from '../merge-options';
-import { pluginDebugLogger } from '../plugin-debug-logger';
-import { replaceImportPath } from './plugin-utils';
+import { PluginOptions } from '../merge-options.js';
+import { pluginDebugLogger } from '../plugin-debug-logger.js';
+import { replaceImportPath } from './plugin-utils.js';
 
 export function typeReferenceToIdentifier(
   typeReferenceDescriptor: {
@@ -13,40 +13,35 @@ export function typeReferenceToIdentifier(
   options: PluginOptions,
   factory: ts.NodeFactory,
   type: ts.Type,
-  typeImports: Record<string, string>
+  typeImports: Record<string, string>,
 ) {
   if (options.readonly) {
-    assertReferenceableType(
-      type,
-      typeReferenceDescriptor.typeName,
-      hostFilename,
-      options
-    );
+    assertReferenceableType(type, typeReferenceDescriptor.typeName, hostFilename, options);
   }
 
   const { typeReference, importPath, typeName } = replaceImportPath(
     typeReferenceDescriptor.typeName,
     hostFilename,
-    options
+    options,
   );
 
   let identifier: ts.Identifier;
   if (options.readonly && typeReference?.includes('import')) {
-    if (!typeImports[importPath]) {
-      typeImports[importPath] = typeReference;
+    if (!typeImports[importPath!]) {
+      typeImports[importPath!] = typeReference;
     }
 
     let ref = `t["${importPath}"].${typeName}`;
     if (typeReferenceDescriptor.isArray) {
-      ref = wrapTypeInArray(ref, typeReferenceDescriptor.arrayDepth);
+      ref = wrapTypeInArray(ref, typeReferenceDescriptor.arrayDepth!);
     }
     identifier = factory.createIdentifier(ref);
   } else {
     let ref = typeReference;
     if (typeReferenceDescriptor.isArray) {
-      ref = wrapTypeInArray(ref, typeReferenceDescriptor.arrayDepth);
+      ref = wrapTypeInArray(ref!, typeReferenceDescriptor.arrayDepth!);
     }
-    identifier = factory.createIdentifier(ref);
+    identifier = factory.createIdentifier(ref!);
   }
   return identifier;
 }
@@ -58,12 +53,7 @@ function wrapTypeInArray(typeRef: string, arrayDepth: number) {
   return typeRef;
 }
 
-function assertReferenceableType(
-  type: ts.Type,
-  parsedTypeName: string,
-  hostFilename: string,
-  options: PluginOptions
-) {
+function assertReferenceableType(type: ts.Type, parsedTypeName: string, hostFilename: string, options: PluginOptions) {
   if (!type.symbol) {
     return true;
   }

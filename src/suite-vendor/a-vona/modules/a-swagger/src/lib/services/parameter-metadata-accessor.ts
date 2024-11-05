@@ -1,10 +1,10 @@
 import { Type } from '@nestjs/common';
 import { PARAMTYPES_METADATA, ROUTE_ARGS_METADATA } from '@nestjs/common/constants.js';
-import { RouteParamtypes } from '@nestjs/common/enums/route-paramtypes.enum';
+import { RouteParamtypes } from '@nestjs/common/enums/route-paramtypes.enum.js';
 import { isEmpty, mapValues, omitBy } from 'lodash';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterLocation, SchemaObject } from '../interfaces/open-api-spec.interface.js';
-import { reverseObjectKeys } from '../utils/reverse-object-keys.util';
+import { reverseObjectKeys } from '../utils/reverse-object-keys.util.js';
 
 interface ParamMetadata {
   index: number;
@@ -28,7 +28,7 @@ export type ParamsWithType = Record<string, ParamWithTypeMetadata>;
 const PARAM_TOKEN_PLACEHOLDER = 'placeholder';
 
 export class ParameterMetadataAccessor {
-  explore(instance: object, prototype: Type<unknown>, method: Function): ParamsWithType {
+  explore(instance: object, _prototype: Type<unknown>, method: Function): ParamsWithType | undefined {
     const types: Type<unknown>[] = Reflect.getMetadata(PARAMTYPES_METADATA, instance, method.name);
     const routeArgsMetadata: ParamsMetadata =
       Reflect.getMetadata(ROUTE_ARGS_METADATA, instance.constructor, method.name) || {};

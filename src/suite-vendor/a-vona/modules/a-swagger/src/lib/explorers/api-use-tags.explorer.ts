@@ -17,5 +17,5 @@ export const exploreGlobalApiTagsMetadata = (autoTagControllers?: boolean) => (m
   return isEmpty ? undefined : { tags: decoratorTags };
 };
 
-export const exploreApiTagsMetadata = (instance: object, prototype: Type<unknown>, method: object) =>
+export const exploreApiTagsMetadata = (_instance: object, _prototype: Type<unknown>, method: object) =>
   Reflect.getMetadata(DECORATORS.API_TAGS, method);

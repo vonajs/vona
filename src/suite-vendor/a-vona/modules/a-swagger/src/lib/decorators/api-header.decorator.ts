@@ -2,7 +2,7 @@ import { isNil, isUndefined, negate, pickBy } from 'lodash';
 import { DECORATORS } from '../constants.js';
 import { ParameterLocation, ParameterObject } from '../interfaces/open-api-spec.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';
-import { getEnumType, getEnumValues } from '../utils/enum.utils';
+import { getEnumType, getEnumValues } from '../utils/enum.utils.js';
 import { createClassDecorator, createParamDecorator } from './helpers.js';
 
 export interface ApiHeaderOptions extends Omit<ParameterObject, 'in'> {
@@ -40,7 +40,7 @@ export function ApiHeader(options: ApiHeaderOptions): MethodDecorator & ClassDec
 
   return (target: object | Function, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
     if (descriptor) {
-      return createParamDecorator(param, defaultHeaderOptions)(target, key, descriptor);
+      return createParamDecorator(param, defaultHeaderOptions)(target, key!, descriptor);
     }
     return createClassDecorator(DECORATORS.API_HEADERS, [param])(target as Function);
   };
@@ -48,6 +48,6 @@ export function ApiHeader(options: ApiHeaderOptions): MethodDecorator & ClassDec
 
 export const ApiHeaders = (headers: ApiHeaderOptions[]): MethodDecorator & ClassDecorator => {
   return (target: object | Function, key?: string | symbol, descriptor?: TypedPropertyDescriptor<any>): any => {
-    headers.forEach(options => ApiHeader(options)(target, key, descriptor));
+    headers.forEach(options => ApiHeader(options)(target, key!, descriptor!));
   };
 };

@@ -24,7 +24,7 @@ import { DECORATORS } from '../constants.js';
  * @see [Swagger link objects](https://swagger.io/docs/specification/links/)
  */
 export function ApiDefaultGetter(type: Type<unknown> | Function, parameter: string): MethodDecorator {
-  return (prototype: object, key: string | symbol, descriptor: PropertyDescriptor) => {
+  return (prototype: object, _key: string | symbol, descriptor: PropertyDescriptor) => {
     if (type.prototype) {
       Reflect.defineMetadata(
         DECORATORS.API_DEFAULT_GETTER,
