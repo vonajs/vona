@@ -172,7 +172,7 @@ export class ModelClassVisitor extends AbstractFileVisitor {
         metadata,
         externalImports,
       );
-    } catch (err) {
+    } catch (_err) {
       return node;
     }
   }
@@ -428,7 +428,7 @@ export class ModelClassVisitor extends AbstractFileVisitor {
 
   isNullableUnion(node: ts.UnionTypeNode) {
     const nullableType = node.types.find(
-      type => type.kind === ts.SyntaxKind.NullKeyword || (ts.SyntaxKind.LiteralType && type.getText() === 'null'),
+      type => type.kind === ts.SyntaxKind.NullKeyword || (!!ts.SyntaxKind.LiteralType && type.getText() === 'null'),
     );
     const isNullable = !!nullableType;
     return { nullableType, isNullable };
