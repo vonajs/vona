@@ -2,7 +2,7 @@ import { Type } from '@nestjs/common';
 import { isFunction } from '@nestjs/common/utils/shared.utils.js';
 import { flatMap, identity } from 'lodash';
 import { DECORATORS } from '../constants.js';
-import { isBodyParameter } from '../utils/is-body-parameter.util';
+import { isBodyParameter } from '../utils/is-body-parameter.util.js';
 import { ModelPropertiesAccessor } from './model-properties-accessor.js';
 import { ParamWithTypeMetadata, ParamsWithType } from './parameter-metadata-accessor.js';
 
