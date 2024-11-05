@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { DECORATORS } from '../constants.js';
 import { getSchemaPath } from '../utils/index.js';
 import { CallBackObject } from '../interfaces/callback-object.interface.js';

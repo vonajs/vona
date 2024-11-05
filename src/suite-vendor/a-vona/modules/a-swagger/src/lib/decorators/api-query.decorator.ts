@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { omit } from 'lodash';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterObject, ReferenceObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';

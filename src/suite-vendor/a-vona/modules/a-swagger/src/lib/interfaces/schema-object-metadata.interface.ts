@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { EnumSchemaAttributes } from './enum-schema-attributes.interface.js';
 import { SchemaObject } from './open-api-spec.interface.js';
 

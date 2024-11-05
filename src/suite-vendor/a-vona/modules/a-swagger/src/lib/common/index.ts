@@ -1,1 +1,1 @@
-export * from './type.interface.js';
+export {};

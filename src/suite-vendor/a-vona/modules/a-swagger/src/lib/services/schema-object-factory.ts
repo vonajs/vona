@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { isUndefined } from '@nestjs/common/utils/shared.utils.js';
 import { flatten, isFunction, isString, keyBy, mapValues, omit, omitBy, pick } from 'lodash';
 import { DECORATORS } from '../constants.js';

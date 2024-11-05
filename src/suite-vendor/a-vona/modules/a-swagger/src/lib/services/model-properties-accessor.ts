@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { isFunction, isString } from '@nestjs/common/utils/shared.utils.js';
 import 'reflect-metadata';
 import { DECORATORS } from '../constants.js';

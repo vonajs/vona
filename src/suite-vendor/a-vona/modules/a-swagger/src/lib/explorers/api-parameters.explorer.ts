@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { assign, find, isNil, map, omitBy, some, unionWith } from 'lodash';
 import { DECORATORS } from '../constants.js';
 import { SchemaObject } from '../interfaces/open-api-spec.interface.js';

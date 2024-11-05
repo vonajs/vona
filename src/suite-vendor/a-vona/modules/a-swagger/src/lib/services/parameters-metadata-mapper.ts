@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { isFunction } from '@nestjs/common/utils/shared.utils.js';
 import { flatMap, identity } from 'lodash';
 import { DECORATORS } from '../constants.js';

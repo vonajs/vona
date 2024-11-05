@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { isFunction } from 'lodash';
 import { BUILT_IN_TYPES } from '../services/constants.js';
 

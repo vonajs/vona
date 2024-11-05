@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { identity } from 'lodash';
 import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
 

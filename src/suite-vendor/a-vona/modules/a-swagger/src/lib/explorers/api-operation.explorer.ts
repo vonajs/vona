@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { DECORATORS } from '../constants.js';
 import { ApiOperation } from '../decorators/api-operation.decorator.js';
 import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';

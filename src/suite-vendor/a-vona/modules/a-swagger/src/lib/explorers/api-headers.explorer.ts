@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { DECORATORS } from '../constants.js';
 
 export const exploreGlobalApiHeaderMetadata = (metatype: Type<unknown>) => {

@@ -1,4 +1,4 @@
-import { Type } from '@nestjs/common';
+import { Type } from 'vona';
 import { DECORATORS } from '../constants.js';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { EnumAllowedTypes, SchemaObjectMetadata } from '../interfaces/schema-object-metadata.interface.js';
