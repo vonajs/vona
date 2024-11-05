@@ -4,7 +4,6 @@ import { EntityAtom } from '../entity/atom.js';
 
 @Model({
   entity: EntityAtom,
-  table: 'aAtom',
   disableDeleted: false,
   cacheKeyAux: 'atomClassId',
 })
