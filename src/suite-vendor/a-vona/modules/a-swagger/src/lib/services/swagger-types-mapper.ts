@@ -1,4 +1,4 @@
-import { isFunction, isString, isUndefined, omit, omitBy, pick } from 'lodash';
+import { isFunction, isString, isUndefined, omit, omitBy, pick } from 'lodash-es';
 import { ApiPropertyOptions } from '../decorators/index.js';
 import { BaseParameterObject, ReferenceObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { ParamWithTypeMetadata } from './parameter-metadata-accessor.js';

@@ -1,4 +1,4 @@
-import { isNil, isUndefined, negate, pickBy } from 'lodash';
+import { isNil, isUndefined, negate, pickBy } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { ParameterLocation, ParameterObject } from '../interfaces/open-api-spec.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';

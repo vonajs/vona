@@ -1,5 +1,5 @@
 import { Type } from 'vona';
-import { omit } from 'lodash';
+import { omit } from 'lodash-es';
 import {
   ExamplesObject,
   ReferenceObject,

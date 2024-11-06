@@ -33,7 +33,7 @@
   "dependencies": {
     "@nestjs/common": "10.4.6",
     "@nestjs/mapped-types": "2.0.5",
-    "lodash": "4.17.21",
+    "lodash-es": "4.17.21",
     "reflect-metadata": "0.2.2"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"

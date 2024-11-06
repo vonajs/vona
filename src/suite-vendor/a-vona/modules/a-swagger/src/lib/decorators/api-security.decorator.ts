@@ -1,4 +1,4 @@
-import { isString } from 'lodash';
+import { isString } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { SecurityRequirementObject } from '../interfaces/open-api-spec.interface.js';
 import { extendMetadata } from '../utils/extend-metadata.util.js';

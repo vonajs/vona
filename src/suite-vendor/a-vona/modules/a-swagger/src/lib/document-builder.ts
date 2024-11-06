@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common';
-import { clone, isString, isUndefined, negate, pickBy } from 'lodash';
+import { clone, isString, isUndefined, negate, pickBy } from 'lodash-es';
 import { buildDocumentBase } from './fixtures/document.base.js';
 import { OpenAPIObject } from './interfaces/index.js';
 import {

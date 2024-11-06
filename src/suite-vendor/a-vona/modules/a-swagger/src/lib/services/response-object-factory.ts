@@ -1,4 +1,4 @@
-import { isEmpty, isFunction, omit } from 'lodash';
+import { isEmpty, isFunction, omit } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { ApiPropertyOptions, ApiResponseMetadata, ApiResponseSchemaHost } from '../decorators/index.js';
 import { LinksObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';

@@ -1,6 +1,6 @@
 import { DECORATORS } from '../constants.js';
 import { createMixedDecorator } from './helpers.js';
-import { clone } from 'lodash';
+import { clone } from 'lodash-es';
 
 export function ApiExtension(extensionKey: string, extensionProperties: any) {
   if (!extensionKey.startsWith('x-')) {

@@ -1,5 +1,5 @@
 import { Type } from 'vona';
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 import { BUILT_IN_TYPES } from '../services/constants.js';
 
 export function isBuiltInType(type: Type<unknown> | Function | string): boolean {

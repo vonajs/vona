@@ -1,7 +1,7 @@
 import { HttpStatus, RequestMethod, Type } from '@nestjs/common';
 import { HTTP_CODE_METADATA, METHOD_METADATA } from '@nestjs/common/constants.js';
 import { isEmpty } from '@nestjs/common/utils/shared.utils.js';
-import { get, mapValues, omit } from 'lodash';
+import { get, mapValues, omit } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { ApiResponse, ApiResponseMetadata } from '../decorators/index.js';
 import { SchemaObject } from '../interfaces/open-api-spec.interface.js';

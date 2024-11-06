@@ -1,4 +1,4 @@
-import { BeanBase, Cast, IDecoratorModelOptions, appResource } from 'vona';
+import { BeanBase, Cast, IDecoratorEntityOptions, IDecoratorModelOptions, appResource } from 'vona';
 import { BeanModel } from '../bean.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
@@ -30,7 +30,13 @@ export class BeanModelMeta extends BeanBase {
   }
 
   get table(): string | undefined {
-    return this.options.table;
+    let table = this.options.table;
+    if (!table && this.options.entity) {
+      const beanOptionsEntity = appResource.getBean(this.options.entity as any);
+      const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
+      table = entityOptions.table;
+    }
+    return table;
   }
 
   get options(): IDecoratorModelOptions {

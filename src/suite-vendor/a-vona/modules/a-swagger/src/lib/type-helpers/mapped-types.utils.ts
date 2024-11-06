@@ -1,5 +1,5 @@
 import { Type } from 'vona';
-import { identity } from 'lodash';
+import { identity } from 'lodash-es';
 import { METADATA_FACTORY_NAME } from '../plugin/plugin-constants.js';
 
 export function clonePluginMetadataFactory(

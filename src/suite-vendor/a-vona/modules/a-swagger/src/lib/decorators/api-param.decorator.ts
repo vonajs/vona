@@ -1,5 +1,5 @@
 import { Type } from 'vona';
-import { isNil, omit } from 'lodash';
+import { isNil, omit } from 'lodash-es';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';

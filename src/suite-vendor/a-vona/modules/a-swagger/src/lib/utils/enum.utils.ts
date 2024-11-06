@@ -1,4 +1,4 @@
-import { isString } from 'lodash';
+import { isString } from 'lodash-es';
 import { SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { SchemaObjectMetadata } from '../interfaces/schema-object-metadata.interface.js';
 import { SwaggerEnumType } from '../types/swagger-enum.type.js';

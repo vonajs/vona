@@ -1,7 +1,7 @@
 import { TableIdentity } from 'vona-module-a-core';
-import { EntityBaseTemp } from 'vona-module-a-base';
 import { OmitType } from 'vona-module-a-swagger';
 import { Entity } from 'vona';
+import { EntityBaseTemp } from '../types.js';
 
 @Entity('aAtom')
 export class EntityAtom extends OmitType(EntityBaseTemp, ['id']) {

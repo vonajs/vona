@@ -1,5 +1,5 @@
 import { HttpStatus, Type } from '@nestjs/common';
-import { omit } from 'lodash';
+import { omit } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { ReferenceObject, ResponseObject, SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { getTypeIsArrayTuple } from './helpers.js';

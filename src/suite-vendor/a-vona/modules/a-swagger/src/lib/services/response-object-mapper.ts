@@ -1,4 +1,4 @@
-import { omit, pick } from 'lodash';
+import { omit, pick } from 'lodash-es';
 import { ApiResponseMetadata, ApiResponseSchemaHost } from '../decorators/index.js';
 import { getSchemaPath } from '../utils/index.js';
 import { MimetypeContentWrapper } from './mimetype-content-wrapper.js';

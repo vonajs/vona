@@ -1,6 +1,6 @@
 import { Type } from 'vona';
 import { isUndefined } from '@nestjs/common/utils/shared.utils.js';
-import { flatten, isFunction, isString, keyBy, mapValues, omit, omitBy, pick } from 'lodash';
+import { flatten, isFunction, isString, keyBy, mapValues, omit, omitBy, pick } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { ApiSchemaOptions } from '../decorators/index.js';
 import { getTypeIsArrayTuple } from '../decorators/helpers.js';

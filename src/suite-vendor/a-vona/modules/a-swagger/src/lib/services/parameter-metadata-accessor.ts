@@ -1,7 +1,7 @@
 import { Type } from 'vona';
 import { PARAMTYPES_METADATA, ROUTE_ARGS_METADATA } from '@nestjs/common/constants.js';
 import { RouteParamtypes } from '@nestjs/common/enums/route-paramtypes.enum.js';
-import { isEmpty, mapValues, omitBy } from 'lodash';
+import { isEmpty, mapValues, omitBy } from 'lodash-es';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterLocation, SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { reverseObjectKeys } from '../utils/reverse-object-keys.util.js';

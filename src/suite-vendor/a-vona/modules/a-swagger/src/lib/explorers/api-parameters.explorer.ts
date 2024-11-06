@@ -1,5 +1,5 @@
 import { Type } from 'vona';
-import { assign, find, isNil, map, omitBy, some, unionWith } from 'lodash';
+import { assign, find, isNil, map, omitBy, some, unionWith } from 'lodash-es';
 import { DECORATORS } from '../constants.js';
 import { SchemaObject } from '../interfaces/open-api-spec.interface.js';
 import { ModelPropertiesAccessor } from '../services/model-properties-accessor.js';
