@@ -1,6 +1,6 @@
 {
   "name": "vona-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "vona cli",
   "publishConfig": {
     "access": "public"
@@ -37,8 +37,8 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/cli": "^2.0.7",
-    "vona-cli-set-api": "^1.0.6"
+    "@cabloy/cli": "^2.0.8",
+    "vona-cli-set-api": "^1.0.7"
   },
   "gitHead": "5c82b247226994b5ebf03f704e979f4fdd2400b7"
 }

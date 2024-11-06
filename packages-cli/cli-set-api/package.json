@@ -1,6 +1,6 @@
 {
   "name": "vona-cli-set-api",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "vona cli-set-api",
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/cli": "^2.0.7",
+    "@cabloy/cli": "^2.0.8",
     "@cabloy/word-utils": "^1.0.2",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.1",
@@ -45,7 +45,7 @@
     "gogocode": "^1.0.53",
     "rimraf": "^5.0.5",
     "urllib": "^3.24.0",
-    "vona-shared": "^1.0.5"
+    "vona-shared": "^1.0.6"
   },
   "gitHead": "5c82b247226994b5ebf03f704e979f4fdd2400b7"
 }

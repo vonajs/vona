@@ -1,6 +1,6 @@
 {
   "name": "egg-born-scripts",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "egg-born-scripts",
   "main": "index.js",
   "bin": {
@@ -21,16 +21,16 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-scripts#readme",
   "dependencies": {
-    "@cabloy/dotenv": "^1.0.7",
-    "@cabloy/ensure-array": "^1.0.6",
-    "@cabloy/extend": "^3.0.10",
-    "@cabloy/module-glob": "^5.1.6",
-    "@cabloy/process-helper": "^1.0.10",
+    "@cabloy/dotenv": "^1.0.8",
+    "@cabloy/ensure-array": "^1.0.7",
+    "@cabloy/extend": "^3.0.11",
+    "@cabloy/module-glob": "^5.1.7",
+    "@cabloy/process-helper": "^1.0.11",
     "@zhennann/egg-bin": "^7.0.1",
     "@zhennann/egg-scripts": "^4.0.2",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
-    "egg-born-backend": "^10.0.5",
+    "egg-born-backend": "^10.0.6",
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^10.1.0"
   },
