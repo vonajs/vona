@@ -63,8 +63,7 @@ export class ServiceHelper extends BeanBase<ScopeModule> {
     }
     return Boxen(text, options);
   }
-  relativeNameToCapitalize(moduleName: string, firstCharToUpperCase: boolean): string {
-    //return relativeNameToCapitalize()
+  relativeNameToCapitalize(moduleName: string): string {
     return moduleName
       .split('-')
       .map(name => {
