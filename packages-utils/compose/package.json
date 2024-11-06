@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/compose",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "cabloy compose",
   "publishConfig": {
     "access": "public"

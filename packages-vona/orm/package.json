@@ -1,6 +1,6 @@
 {
   "name": "vona-orm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "vona orm",
   "publishConfig": {
     "access": "public"

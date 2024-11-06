@@ -1,6 +1,6 @@
 {
   "name": "vona-module-vona-test",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "title": "vona-test",
   "vonaModule": {
     "dependencies": {

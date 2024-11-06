@@ -1,6 +1,6 @@
 {
   "name": "vona-suite-vona-test",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "title": "vona-test",
   "type": "module",
   "files": [
@@ -9,7 +9,7 @@
   "description": "",
   "author": "",
   "dependencies": {
-    "vona-module-vona-test": "^5.0.2"
+    "vona-module-vona-test": "^5.0.3"
   },
   "gitHead": "ae986753aec100a07d4107f847fc72fbae5c6b5e"
 }

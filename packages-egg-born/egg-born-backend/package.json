@@ -1,6 +1,6 @@
 {
   "name": "egg-born-backend",
-  "version": "10.0.6",
+  "version": "10.0.7",
   "description": "egg-born-backend",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,7 +35,7 @@
     "koa-jwt2": "^1.0.3",
     "utility": "^1.17.0",
     "uuid": "^9.0.1",
-    "vona": "^5.0.6"
+    "vona": "^5.0.7"
   },
   "gitHead": "ae986753aec100a07d4107f847fc72fbae5c6b5e"
 }

@@ -1,6 +1,6 @@
 {
   "name": "vona-suite-a-cabloy",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "title": "a-cabloy",
   "type": "module",
   "files": [
@@ -9,7 +9,7 @@
   "description": "",
   "author": "",
   "dependencies": {
-    "vona-module-a-cabloy": "^5.0.2"
+    "vona-module-a-cabloy": "^5.0.3"
   },
   "gitHead": "ae986753aec100a07d4107f847fc72fbae5c6b5e"
 }
