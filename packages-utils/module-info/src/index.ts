@@ -100,3 +100,13 @@ function _parseName(moduleUrl, prefix) {
   if (posB === -1) posB = moduleUrl.length;
   return moduleUrl.substring(posA, posB);
 }
+
+export function relativeNameToCapitalize(moduleName: string, firstCharToUpperCase: boolean): string {
+  return moduleName
+    .split('-')
+    .map((name, index) => {
+      if (index === 0 && !firstCharToUpperCase) return name;
+      return name.charAt(0).toUpperCase() + name.substring(1);
+    })
+    .join('');
+}

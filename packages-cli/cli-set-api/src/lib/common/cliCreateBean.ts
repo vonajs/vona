@@ -12,6 +12,9 @@ declare module '@cabloy/cli' {
     sceneNameCapitalize: string;
     name: string;
     nameCapitalize: string;
+    //
+    decoratorName: string;
+    beanOptions: string;
   }
 }
 
@@ -44,6 +47,14 @@ export class CliCreateBeanBase extends BeanCliBase {
     argv.sceneNameCapitalize = this.helper.firstCharToUpperCase(argv.sceneName);
     // name
     argv.nameCapitalize = this.helper.firstCharToUpperCase(argv.name);
+    // decoratorName
+    argv.decoratorName = argv.sceneNameCapitalize;
+    // beanOptions
+    if (argv.sceneName === 'entity') {
+      argv.beanOptions = '';
+    } else {
+      argv.beanOptions = '';
+    }
     // directory
     const beanDir = path.join(targetDir, `src/${argv.sceneName}`);
     const beanFile = path.join(beanDir, `${argv.name}.ts`);

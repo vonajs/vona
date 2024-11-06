@@ -1,5 +1,5 @@
-import { <%=argv.sceneNameCapitalize%> } from 'vona';
+import { <%=argv.decoratorName%> } from 'vona';
 import { EntityBase } from 'vona-module-a-core';
 
-@<%=argv.sceneNameCapitalize%>()
+@<%=argv.decoratorName%>()
 export class <%=argv.sceneNameCapitalize%><%=argv.nameCapitalize%> extends EntityBase {}

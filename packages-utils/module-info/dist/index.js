@@ -14,7 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseName = exports.parseInfoPro = exports.parseInfo = exports.parseInfoFromPath = void 0;
+exports.relativeNameToCapitalize = exports.parseName = exports.parseInfoPro = exports.parseInfo = exports.parseInfoFromPath = void 0;
 __exportStar(require("./interface.js"), exports);
 function parseInfoFromPath(pathName) {
     if (!pathName)
@@ -131,4 +131,15 @@ function _parseName(moduleUrl, prefix) {
         posB = moduleUrl.length;
     return moduleUrl.substring(posA, posB);
 }
+function relativeNameToCapitalize(moduleName, firstCharToUpperCase) {
+    return moduleName
+        .split('-')
+        .map((name, index) => {
+        if (index === 0 && !firstCharToUpperCase)
+            return name;
+        return name.charAt(0).toUpperCase() + name.substring(1);
+    })
+        .join('');
+}
+exports.relativeNameToCapitalize = relativeNameToCapitalize;
 //# sourceMappingURL=index.js.map
