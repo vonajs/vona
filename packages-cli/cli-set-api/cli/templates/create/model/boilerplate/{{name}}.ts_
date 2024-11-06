@@ -1,0 +1,6 @@
+import { <%=argv.decoratorName%> } from 'vona';
+import { BeanModelBase } from 'vona-module-a-database';
+import { Entity<%=argv.nameCapitalize%> } from '../entity/<%=argv.name%>.js';
+
+@<%=argv.decoratorName%>({ entity: Entity<%=argv.nameCapitalize%> })
+export class <%=argv.sceneNameCapitalize%><%=argv.nameCapitalize%> extends BeanModelBase<Entity<%=argv.nameCapitalize%>> {}
