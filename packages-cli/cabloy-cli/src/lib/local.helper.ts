@@ -9,6 +9,7 @@ import { BeanCliBase } from './bean.cli.base.js';
 import { NameMeta } from '../types/helper.js';
 import { getRegistry } from '../registry.js';
 import path from 'node:path';
+import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
 
 export class LocalHelper {
   cli: BeanCliBase;
@@ -211,5 +212,16 @@ export class LocalHelper {
     if (fse.existsSync(gitkeep)) {
       await fse.remove(gitkeep);
     }
+  }
+  combineModuleNameAndResource(moduleName: string, resourceName: string) {
+    let name = combineWordsDeduplicate(
+      ModuleInfo.relativeNameToCapitalize(moduleName, false),
+      this.firstCharToUpperCase(resourceName),
+    );
+    const firstWord = parseFirstWord(name);
+    if (firstWord === 'a') {
+      name = this.firstCharToLowerCase(name.substring(1));
+    }
+    return name;
   }
 }

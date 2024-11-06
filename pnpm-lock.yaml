@@ -630,6 +630,9 @@ importers:
       '@cabloy/process-helper':
         specifier: ^1.0.12
         version: link:../../packages-utils/process-helper
+      '@cabloy/word-utils':
+        specifier: ^1.0.3
+        version: 1.0.3
       '@npmcli/config':
         specifier: ^8.3.4
         version: 8.3.4(bluebird@3.7.2)
@@ -691,6 +694,9 @@ importers:
       '@cabloy/cli':
         specifier: ^2.0.9
         version: link:../cabloy-cli
+      '@cabloy/module-info':
+        specifier: ^1.1.9
+        version: link:../../packages-utils/module-info
       '@cabloy/word-utils':
         specifier: ^1.0.3
         version: 1.0.3

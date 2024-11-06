@@ -51,7 +51,8 @@ export class CliCreateBeanBase extends BeanCliBase {
     argv.decoratorName = argv.sceneNameCapitalize;
     // beanOptions
     if (argv.sceneName === 'entity') {
-      argv.beanOptions = '';
+      const tableName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.name);
+      argv.beanOptions = `'${tableName}'`;
     } else {
       argv.beanOptions = '';
     }
