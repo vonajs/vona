@@ -9,8 +9,9 @@
   "description": "",
   "author": "",
   "dependencies": {
-    "vona-module-a-core": "workspace:^",
-    "vona-module-a-swagger": "workspace:^",
-    "vona-module-a-vona": "workspace:^"
-  }
+    "vona-module-a-core": "^5.0.1",
+    "vona-module-a-swagger": "^5.0.1",
+    "vona-module-a-vona": "^5.0.1"
+  },
+  "gitHead": "5c82b247226994b5ebf03f704e979f4fdd2400b7"
 }

@@ -9,6 +9,7 @@
   "description": "",
   "author": "",
   "dependencies": {
-    "vona-module-cabloy-test": "workspace:^"
-  }
+    "vona-module-cabloy-test": "^5.0.1"
+  },
+  "gitHead": "5c82b247226994b5ebf03f704e979f4fdd2400b7"
 }
