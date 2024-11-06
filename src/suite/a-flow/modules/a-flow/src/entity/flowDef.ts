@@ -1,5 +1,7 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityFlowDef extends EntityItemBase {
+@Entity('aFlowDef')
+export class EntityFlowDef extends EntityItemBase {
   description: string;
 }

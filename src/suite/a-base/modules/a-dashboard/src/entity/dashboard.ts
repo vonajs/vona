@@ -1,5 +1,7 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityDashboard extends EntityItemBase {
+@Entity('aDashboard')
+export class EntityDashboard extends EntityItemBase {
   description: string;
 }

@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityParty extends EntityItemBase {
+@Entity('testParty')
+export class EntityParty extends EntityItemBase {
   personCount: number;
   partyTypeCode: number;
   partyTime: Date;

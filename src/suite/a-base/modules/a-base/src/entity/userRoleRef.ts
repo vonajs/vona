@@ -1,3 +1,5 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityUserRoleRef extends EntityBaseTemp {}
+@Entity('aUserRoleRef')
+export class EntityUserRoleRef extends EntityBaseTemp {}

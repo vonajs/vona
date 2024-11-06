@@ -1,7 +1,9 @@
 import { TableIdentity } from 'vona-module-a-core';
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityFlowHistory extends EntityBaseTemp {
+@Entity('aFlowHistory')
+export class EntityFlowHistory extends EntityBaseTemp {
   flowId: number;
   flowDefId: number;
   flowDefKey: string;

@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityArticle extends EntityItemBase {
+@Entity('aCmsArticle')
+export class EntityArticle extends EntityItemBase {
   sticky: number;
   keywords: string;
   description: string;

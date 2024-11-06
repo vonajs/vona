@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityLayoutFull extends EntityItemBase {
+@Entity('aLayoutViewFull')
+export class EntityLayoutFull extends EntityItemBase {
   description: string;
   layoutTypeCode: number;
   content: string;

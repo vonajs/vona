@@ -2,8 +2,5 @@ import { Model } from 'vona';
 import { BeanModelBase } from 'vona-module-a-database';
 import { EntityMessageClass } from '../entity/messageClass.js';
 
-@Model({
-  table: 'aSocketIOMessageClass',
-  disableDeleted: false,
-})
+@Model({ entity: EntityMessageClass, disableDeleted: false })
 export class ModelMessageClass extends BeanModelBase<EntityMessageClass> {}

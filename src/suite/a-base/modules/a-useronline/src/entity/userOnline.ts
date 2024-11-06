@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityUserOnline extends EntityItemBase {
+@Entity('aUserOnline')
+export class EntityUserOnline extends EntityItemBase {
   userId: number;
   loginCount: number;
   loginIPLast: string;

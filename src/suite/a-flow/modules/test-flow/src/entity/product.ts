@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityProduct extends EntityItemBase {
+@Entity('testFlowProduct')
+export class EntityProduct extends EntityItemBase {
   productCode: string;
   productPrice: number;
 }

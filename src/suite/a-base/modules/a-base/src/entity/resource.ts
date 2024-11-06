@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityResource extends EntityItemBase {
+@Entity('aResource')
+export class EntityResource extends EntityItemBase {
   description: string;
   resourceSorting: number;
   resourceType: string;

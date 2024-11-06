@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityShare extends EntityItemBase {
+@Entity('aShare')
+export class EntityShare extends EntityItemBase {
   uuid: string;
   userId: number;
   host: string;

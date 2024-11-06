@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityAuth extends EntityBaseTemp {
+@Entity('aAuth')
+export class EntityAuth extends EntityBaseTemp {
   userId: number;
   providerId: number;
   profileId: string;

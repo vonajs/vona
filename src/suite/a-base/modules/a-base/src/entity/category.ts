@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityCategory extends EntityBaseTemp {
+@Entity('aCategory')
+export class EntityCategory extends EntityBaseTemp {
   atomClassId: number;
   language: string;
   categoryName: string;

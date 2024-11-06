@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityResourceLocale extends EntityItemBase {
+@Entity('aResourceLocale')
+export class EntityResourceLocale extends EntityItemBase {
   locale: string;
   atomNameLocale: string;
 }

@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityAtomLabelRef extends EntityItemBase {
+@Entity('aAtomLabelRef')
+export class EntityAtomLabelRef extends EntityItemBase {
   userId: number;
   labelId: number;
 }

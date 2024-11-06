@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityShareRecordPV extends EntityBaseTemp {
+@Entity('aShareRecordPV')
+export class EntityShareRecordPV extends EntityBaseTemp {
   shareId: number;
   userId: number;
 }

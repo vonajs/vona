@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityRole extends EntityItemBase {
+@Entity('aRole')
+export class EntityRole extends EntityItemBase {
   roleName: string;
   leader: number;
   catalog: number;

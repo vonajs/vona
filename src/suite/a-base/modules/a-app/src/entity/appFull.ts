@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityAppFull extends EntityItemBase {
+@Entity('aAppViewFull')
+export class EntityAppFull extends EntityItemBase {
   description: string;
   appSorting: number;
   appIcon: string;

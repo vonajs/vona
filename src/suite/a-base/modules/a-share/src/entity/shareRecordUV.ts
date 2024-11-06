@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityShareRecordUV extends EntityItemBase {
+@Entity('aShareRecordUV')
+export class EntityShareRecordUV extends EntityItemBase {
   userIdSource: number;
   userIdTarget: number;
 }

@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityFile extends EntityItemBase {
+@Entity('aFile')
+export class EntityFile extends EntityItemBase {
   userId: number;
   downloadId: string;
   mode: number;

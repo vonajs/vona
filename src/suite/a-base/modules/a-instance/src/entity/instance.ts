@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityInstance extends Omit<EntityBaseTemp, 'iid'> {
+@Entity('aInstance')
+export class EntityInstance extends Omit<EntityBaseTemp, 'iid'> {
   disabled: number;
   name: string;
   title: string;

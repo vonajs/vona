@@ -2,5 +2,5 @@ import { Model } from 'vona';
 import { BeanModelBase } from 'vona-module-a-database';
 import { EntityAuthSimple } from '../entity/authSimple.js';
 
-@Model({ table: 'aAuthSimple', disableDeleted: true })
+@Model({ entity: EntityAuthSimple, disableDeleted: true })
 export class ModelAuthSimple extends BeanModelBase<EntityAuthSimple> {}

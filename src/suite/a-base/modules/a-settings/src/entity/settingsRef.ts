@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntitySettingsRef extends EntityBaseTemp {
+@Entity('aSettingsRef')
+export class EntitySettingsRef extends EntityBaseTemp {
   module: string;
   scene: number;
   userId: number;

@@ -2,5 +2,5 @@ import { Model } from 'vona';
 import { BeanModelBase } from 'vona-module-a-database';
 import { EntityApp } from '../entity/app.js';
 
-@Model({ table: 'aApp', disableDeleted: false })
+@Model({ entity: EntityApp, disableDeleted: false })
 export class ModelApp2 extends BeanModelBase<EntityApp> {}

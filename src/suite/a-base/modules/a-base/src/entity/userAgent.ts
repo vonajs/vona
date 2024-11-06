@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityUserAgent extends EntityBaseTemp {
+@Entity('aUserAgent')
+export class EntityUserAgent extends EntityBaseTemp {
   userId: number;
   userIdAgent: number;
 }

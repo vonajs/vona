@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityLayout extends EntityItemBase {
+@Entity('aLayout')
+export class EntityLayout extends EntityItemBase {
   description: string;
   layoutTypeCode: number;
 }

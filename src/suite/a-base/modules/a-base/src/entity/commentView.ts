@@ -1,6 +1,8 @@
 import { EntityItemBase } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityCommentView extends EntityItemBase {
+@Entity('aViewComment')
+export class EntityCommentView extends EntityItemBase {
   userId: number;
   sorting: number;
   heartCount: number;

@@ -1,7 +1,9 @@
 import { TableIdentity } from 'vona-module-a-core';
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityPurchaseOrderDetail extends EntityBaseTemp {
+@Entity('testFlowPurchaseOrderDetail')
+export class EntityPurchaseOrderDetail extends EntityBaseTemp {
   atomIdMain: TableIdentity;
   price: number;
   quantity: number;

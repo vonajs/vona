@@ -1,7 +1,9 @@
 import { TableIdentity } from 'vona-module-a-core';
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityDetailBase extends EntityBaseTemp {
+@Entity('aDetailBase')
+export class EntityDetailBase extends EntityBaseTemp {
   atomIdMain: TableIdentity;
   atomClassIdMain: number;
   atomStage: number;

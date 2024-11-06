@@ -1,6 +1,8 @@
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { Entity } from 'vona';
 
-export interface EntityMessage extends EntityBaseTemp {
+@Entity('aSocketIOMessage')
+export class EntityMessage extends EntityBaseTemp {
   messageClassId: number;
   messageType: number;
   messageFilter: string;
