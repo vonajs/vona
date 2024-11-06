@@ -33,7 +33,6 @@
   "dependencies": {
     "@nestjs/common": "10.4.6",
     "@nestjs/mapped-types": "2.0.5",
-    "@microsoft/tsdoc": "^0.15.0",
     "lodash": "4.17.21",
     "reflect-metadata": "0.2.2"
   }
