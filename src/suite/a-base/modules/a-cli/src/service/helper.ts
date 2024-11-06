@@ -63,7 +63,8 @@ export class ServiceHelper extends BeanBase<ScopeModule> {
     }
     return Boxen(text, options);
   }
-  relativeNameToCapitalize(moduleName: string): string {
+  relativeNameToCapitalize(moduleName: string, firstCharToUpperCase: boolean): string {
+    //return relativeNameToCapitalize()
     return moduleName
       .split('-')
       .map(name => {
@@ -105,7 +106,7 @@ export class ServiceHelper extends BeanBase<ScopeModule> {
     // args
     const args = ['install', '--force'];
     // log
-    await this.console.log(`===> pnpm install --force`);
+    await this.console.log('===> pnpm install --force');
     // spawn
     await this.spawnCmd({
       cmd: 'pnpm',
