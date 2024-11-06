@@ -1,6 +1,9 @@
+import { Entity } from 'vona';
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { OmitType } from 'vona-module-a-swagger';
 
-export interface EntityVersion extends Omit<EntityBaseTemp, 'iid' | 'deleted'> {
+@Entity('aVersion')
+export class EntityVersion extends OmitType(EntityBaseTemp, ['iid', 'deleted']) {
   module: string;
   version: number;
 }

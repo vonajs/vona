@@ -1,6 +1,9 @@
+import { Entity } from 'vona';
 import { EntityBaseTemp } from 'vona-module-a-base';
+import { OmitType } from 'vona-module-a-swagger';
 
-export interface EntityVersionInit extends Omit<EntityBaseTemp, 'iid' | 'deleted'> {
+@Entity('aVersionInit')
+export class EntityVersionInit extends OmitType(EntityBaseTemp, ['iid', 'deleted']) {
   subdomain: string;
   module: string;
   version: number;

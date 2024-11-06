@@ -11,6 +11,6 @@ export class EntityBaseTemp {
   iid: number;
 }
 
-export interface EntityItemBase extends EntityBaseTemp {
+export class EntityItemBase extends EntityBaseTemp {
   atomId: TableIdentity;
 }
