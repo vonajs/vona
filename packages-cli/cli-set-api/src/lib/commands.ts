@@ -2,6 +2,7 @@ import defaultList from './command/default.list.js';
 import createSuite from './command/create.suite.js';
 import createModule from './command/create.module.js';
 import createBean from './command/create.bean.js';
+import createDto from './command/create.dto.js';
 import createEntity from './command/create.entity.js';
 import initMonkey from './command/init.monkey.js';
 import initMain from './command/init.main.js';
@@ -17,6 +18,7 @@ export const commands = {
     suite: createSuite,
     module: createModule,
     bean: createBean,
+    dto: createDto,
     entity: createEntity,
   },
   init: {

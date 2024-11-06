@@ -1,0 +1,4 @@
+import { <%=argv.decoratorName%> } from 'vona';
+
+@<%=argv.decoratorName%>(<%-argv.beanOptions%>)
+export class <%=argv.sceneNameCapitalize%><%=argv.nameCapitalize%> {}
