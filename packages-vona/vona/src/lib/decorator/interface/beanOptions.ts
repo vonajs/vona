@@ -10,6 +10,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'scope'
   | 'controller'
   | 'entity'
+  | 'dto'
   | 'model'
   | 'atom'
   | TypeDecoratorBeanOptionsScene;
