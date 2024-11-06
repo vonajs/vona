@@ -1,6 +1,6 @@
 {
   "name": "vona-module-vona-test",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "vona-test",
   "vonaModule": {
     "dependencies": {
@@ -29,6 +29,5 @@
     "dist",
     "static"
   ],
-  "scripts": {},
-  "dependencies": {}
+  "scripts": {}
 }

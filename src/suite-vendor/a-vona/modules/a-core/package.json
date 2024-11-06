@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-core",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-core",
   "vonaModule": {
     "dependencies": {}
@@ -27,6 +27,5 @@
     "dist",
     "static"
   ],
-  "scripts": {},
-  "dependencies": {}
+  "scripts": {}
 }
