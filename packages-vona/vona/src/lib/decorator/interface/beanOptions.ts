@@ -77,7 +77,9 @@ export interface IDecoratorServiceOptions {}
 
 export interface IDecoratorAtomOptions {}
 
-export interface IDecoratorControllerOptions {}
+export interface IDecoratorControllerOptions {
+  path?: string;
+}
 
 type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 export interface IDecoratorAopOptions {
