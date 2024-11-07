@@ -4,6 +4,7 @@ import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
+import { generateDtos } from './toolsMetadata/generateDtos.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
 import { generateServices } from './toolsMetadata/generateServices.js';
@@ -64,6 +65,8 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateAtoms(moduleName, modulePath);
     // controllers
     content += await generateControllers(moduleName, modulePath);
+    // dtos
+    content += await generateDtos(moduleName, modulePath);
     // entities
     content += await generateEntities(moduleName, modulePath);
     // models
