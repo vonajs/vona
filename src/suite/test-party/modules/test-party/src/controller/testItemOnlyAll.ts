@@ -31,7 +31,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     // const userRoot = await this._getUser({userIds, userName:'root'});
 
     // delete: force clear old data
-    const modelHistory = this.getScope('a-useronline').model.userOnlineHistory;
+    const modelHistory = this.$scope.useronline.model.userOnlineHistory;
     await modelHistory.delete({ isLogin: 2 });
 
     // user->atom

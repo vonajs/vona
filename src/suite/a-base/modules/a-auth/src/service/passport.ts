@@ -15,7 +15,7 @@ export class ServicePassport extends BeanBase {
       providerName,
       providerScene,
     });
-    if (!beanProvider.providerSceneValid) this.getScope('a-base').error.InvalidConfiguration.throw();
+    if (!beanProvider.providerSceneValid) this.$scope.base.error.InvalidConfiguration.throw();
     // urls
     const { loginURL, callbackURL } = this.ctx.bean.authProvider._combineAuthenticateUrls({
       module,

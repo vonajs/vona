@@ -27,7 +27,7 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     if (taskCountTotal === 0) {
       // means node has been checked and done
       // XX //   should throw error to deny the db changed for tasks has been deleted.
-      // XX this.getScope('a-flow').error.FlowNodeNotFound__.throw(flowNodeId);
+      // XX this.$scope.flow.error.FlowNodeNotFound__.throw(flowNodeId);
       // neednot throw error for this method is called in this.ctx.tail
       return;
     }
@@ -95,7 +95,7 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     if (!rejectedNode) {
       // find previous task node
       const flowNode = await this._findFlowNodeHistoryPrevious({ nodeInstance });
-      if (!flowNode) this.getScope('a-flow').error.PreviousFlowNodeNotFound__.throw(flowNodeId);
+      if (!flowNode) this.$scope.flow.error.PreviousFlowNodeNotFound__.throw(flowNodeId);
       rejectedNode = flowNode.flowNodeDefId;
     }
     // nodeInstancePrev

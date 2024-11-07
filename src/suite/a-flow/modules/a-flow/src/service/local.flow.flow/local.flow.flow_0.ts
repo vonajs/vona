@@ -30,7 +30,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   get modelAtom() {
-    return this.getScope('a-base').model.atom;
+    return this.$scope.base.model.atom;
   }
   get modelFlow() {
     return this.scope.model.flow;

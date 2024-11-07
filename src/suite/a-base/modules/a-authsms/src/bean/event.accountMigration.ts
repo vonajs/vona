@@ -4,7 +4,7 @@ import { Bean, BeanBase } from 'vona';
 @Bean({ scene: 'event' })
 export class EventAccountMigration extends BeanBase {
   get modelAuth() {
-    return this.getScope('a-auth').model.auth;
+    return this.$scope.auth.model.auth;
   }
 
   async execute(context, next) {

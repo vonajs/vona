@@ -180,7 +180,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
       mtimeCurrent = stat.mtime.valueOf();
     } else {
       article = await this.ctx.bean.cms.render.getArticle({ key: { atomId }, inner: true });
-      if (!article) this.getScope('a-base').error.ElementDoesNotExist.throw();
+      if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
       // only author
       if (article.userIdUpdated !== user.id) this.ctx.throw(403);
       mtimeCurrent = article.renderAt ? article.renderAt.getTime() : 0;

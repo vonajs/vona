@@ -18,7 +18,7 @@ export class ControllerTestFeatModelWhere extends BeanBase<ScopeModule> {
 
   async _modelWhere() {
     // model
-    const model = this.getScope('a-base').model.atom;
+    const model = this.$scope.base.model.atom;
 
     // delete: force clear old data
     await model.delete({ atomStaticKey });

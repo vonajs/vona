@@ -13,7 +13,7 @@ const __rows = [
 export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
   async model() {
     // model
-    const model = this.getScope('a-base').model.atom;
+    const model = this.$scope.base.model.atom;
 
     // insert one row
     await model.insert(__rows[0]);

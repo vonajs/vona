@@ -1245,7 +1245,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const returnWaitingPath = options && options.returnWaitingPath;
     // article
     const article = await this.ctx.bean.cms.render.getArticle({ key, inner: true });
-    if (!article) this.getScope('a-base').error.ElementDoesNotExist.throw();
+    if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
     if (!article.url) return null; // not throw error
     // articleUrl
     let articleUrl = article.url;

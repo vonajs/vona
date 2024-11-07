@@ -11,15 +11,15 @@ export class BeanAuth extends BeanBase<ScopeModule> {
   }
 
   get model() {
-    return this.getScope('a-auth').model.auth;
+    return this.$scope.auth.model.auth;
   }
 
   get modelAuth() {
-    return this.getScope('a-auth').model.auth;
+    return this.$scope.auth.model.auth;
   }
 
   get modelAuthProvider() {
-    return this.getScope('a-auth').model.authProvider;
+    return this.$scope.auth.model.authProvider;
   }
 
   get redisAuth() {

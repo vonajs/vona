@@ -20,11 +20,11 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase<ScopeM
   }
 
   get modelRoleRight() {
-    return this.getScope('a-base').model.roleRight;
+    return this.$scope.base.model.roleRight;
   }
 
   get modelRoleRightRef() {
-    return this.getScope('a-base').model.roleRightRef;
+    return this.$scope.base.model.roleRightRef;
   }
 
   async deploy({ deploy, flowDefId, node, deleting, flowDef, content }: any) {

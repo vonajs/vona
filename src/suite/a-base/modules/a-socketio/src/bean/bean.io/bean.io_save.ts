@@ -128,7 +128,7 @@ export class BeanIoSave extends BeanIoPush {
   }
 
   async _onSaveSyncsPolicy_userIdsAll({ saveLimit, onSave }: any) {
-    const modelUser = this.getScope('a-base').model.user;
+    const modelUser = this.$scope.base.model.user;
     let offset = 0;
     // eslint-disable-next-line
     while (true) {

@@ -25,7 +25,7 @@ export class StatsMessage extends BeanBase<ScopeModule> {
       return { [color]: count };
     } else if (keys.length === 1) {
       // message
-      const modelStats = this.getScope('a-stats').model.stats;
+      const modelStats = this.$scope.stats.model.stats;
       const items = await modelStats.select({
         where: {
           module: __ThisModule__,

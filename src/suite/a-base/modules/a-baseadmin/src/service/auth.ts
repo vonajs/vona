@@ -4,7 +4,7 @@ import { ScopeModule } from '../.metadata/this.js';
 @Service()
 export class ServiceAuth extends BeanBase<ScopeModule> {
   get modelAuthProvider() {
-    return this.getScope('a-auth').model.authProvider;
+    return this.$scope.auth.model.authProvider;
   }
 
   async list() {

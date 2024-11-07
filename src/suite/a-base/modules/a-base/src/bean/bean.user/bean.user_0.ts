@@ -27,11 +27,11 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   }
 
   get modelAuth() {
-    return this.getScope('a-auth').model.auth;
+    return this.$scope.auth.model.auth;
   }
 
   get modelAuthProvider() {
-    return this.getScope('a-auth').model.authProvider;
+    return this.$scope.auth.model.authProvider;
   }
 
   get sequence() {

@@ -4,7 +4,7 @@ import { Bean, BeanBase } from 'vona';
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase<ScopeModule> {
   get modelRoleRight() {
-    return this.getScope('a-base').model.roleRight;
+    return this.$scope.base.model.roleRight;
   }
 
   async update(options) {

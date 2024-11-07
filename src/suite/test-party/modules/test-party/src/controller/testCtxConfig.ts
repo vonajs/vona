@@ -10,7 +10,7 @@ export class ControllerTestCtxConfig extends BeanBase<ScopeModule> {
     assert.equal(message, 'Hello World');
 
     // other module
-    message = this.getScope('test-party').config.message;
+    message = this.$scope.testParty.config.message;
     assert.equal(message, 'Hello World');
 
     // done

@@ -14,7 +14,7 @@ export class BeanModelMeta extends BeanBase {
   }
 
   public get modelViewRecord() {
-    return this.getScope('a-version').model.viewRecord;
+    return this.$scope.version.model.viewRecord;
   }
 
   public get dialectClient() {

@@ -33,7 +33,7 @@ export class VersionManager extends BeanBase {
       module: __ThisModule__,
       providerName: 'authgithub',
     });
-    await this.getScope('a-auth').model.auth.update(
+    await this.$scope.auth.model.auth.update(
       {
         providerScene: 'default',
       },

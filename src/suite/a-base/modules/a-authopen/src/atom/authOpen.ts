@@ -11,7 +11,7 @@ export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
   }
 
   get modelAuth() {
-    return this.getScope('a-auth').model.auth;
+    return this.$scope.auth.model.auth;
   }
 
   async default({ atomClass, item, options, user }: any) {

@@ -143,7 +143,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     const atomId = this.ctx.params.atomId;
     // article
     const article = await this.ctx.bean.cms.render.getArticle({ key: { atomId }, inner: false });
-    if (!article) this.getScope('a-base').error.ElementDoesNotExist.throw();
+    if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
     // language
     const language = article.atomLanguage;
     // options

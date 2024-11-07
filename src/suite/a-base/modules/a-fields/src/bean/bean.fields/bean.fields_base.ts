@@ -2,6 +2,6 @@ import { BeanBase } from 'vona';
 
 export class BeanFieldsBase extends BeanBase {
   get modelRoleFieldsRight() {
-    return this.getScope('a-base').model.roleFieldsRight;
+    return this.$scope.base.model.roleFieldsRight;
   }
 }
