@@ -12,6 +12,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/home.js';
+import { ControllerHome } from '../controller/home.js';
+export const controllers = {
+  home: ControllerHome,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/home.js';

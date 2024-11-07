@@ -1,5 +1,9 @@
 /** controllers: begin */
 export * from '../controller/util.js';
+import { ControllerUtil } from '../controller/util.js';
+export const controllers = {
+  util: ControllerUtil,
+};
 /** controllers: end */
 /** config: begin */
 export * from '../config/config.js';

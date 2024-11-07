@@ -22,6 +22,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/auth.js';
+import { ControllerAuth } from '../controller/auth.js';
+export const controllers = {
+  auth: ControllerAuth,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/authSimple.js';

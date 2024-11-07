@@ -17,6 +17,20 @@ export * from '../controller/authScene.js';
 export * from '../controller/resourceRight.js';
 export * from '../controller/role.js';
 export * from '../controller/user.js';
+import { ControllerAtomRight } from '../controller/atomRight.js';
+import { ControllerAuth } from '../controller/auth.js';
+import { ControllerAuthScene } from '../controller/authScene.js';
+import { ControllerResourceRight } from '../controller/resourceRight.js';
+import { ControllerRole } from '../controller/role.js';
+import { ControllerUser } from '../controller/user.js';
+export const controllers = {
+  atomRight: ControllerAtomRight,
+  auth: ControllerAuth,
+  authScene: ControllerAuthScene,
+  resourceRight: ControllerResourceRight,
+  role: ControllerRole,
+  user: ControllerUser,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/atomRight.js';

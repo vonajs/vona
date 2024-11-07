@@ -19,6 +19,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/cli.js';
+import { ControllerCli } from '../controller/cli.js';
+export const controllers = {
+  cli: ControllerCli,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/cli.js';

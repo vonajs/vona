@@ -15,6 +15,10 @@ export * from '../atom/dashboard.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/dashboard.js';
+import { ControllerDashboard } from '../controller/dashboard.js';
+export const controllers = {
+  dashboard: ControllerDashboard,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/dashboard.js';

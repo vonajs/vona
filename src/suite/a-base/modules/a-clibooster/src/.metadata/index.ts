@@ -63,6 +63,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/tools.js';
+import { ControllerTools } from '../controller/tools.js';
+export const controllers = {
+  tools: ControllerTools,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/tools.js';

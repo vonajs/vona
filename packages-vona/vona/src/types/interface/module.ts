@@ -1,4 +1,3 @@
-import { BeanBase } from '../../lib/bean/beanBase.js';
 import { IModuleRoute } from '../../lib/bean/resource/route/type.js';
 import { VonaApplication } from '../application/app.js';
 import { IModuleMain, IMonkeyModule, IMonkeySystem } from './monkey.js';
@@ -20,7 +19,7 @@ export interface IModuleResource {
   meta: ((app: VonaApplication) => IModuleMeta) | IModuleMeta;
   constants: unknown;
   routes: IModuleRoute[];
-  controllers: BeanBase[];
+  controllers: object[];
 }
 
 export type TypeModuleMetaGeneric = {

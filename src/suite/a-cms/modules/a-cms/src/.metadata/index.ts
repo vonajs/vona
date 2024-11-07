@@ -35,6 +35,18 @@ export * from '../controller/comment.js';
 export * from '../controller/render.js';
 export * from '../controller/rss.js';
 export * from '../controller/site.js';
+import { ControllerArticle } from '../controller/article.js';
+import { ControllerComment } from '../controller/comment.js';
+import { ControllerRender } from '../controller/render.js';
+import { ControllerRss } from '../controller/rss.js';
+import { ControllerSite } from '../controller/site.js';
+export const controllers = {
+  article: ControllerArticle,
+  comment: ControllerComment,
+  render: ControllerRender,
+  rss: ControllerRss,
+  site: ControllerSite,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/article.js';

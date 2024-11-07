@@ -16,6 +16,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/progress.js';
+import { ControllerProgress } from '../controller/progress.js';
+export const controllers = {
+  progress: ControllerProgress,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/progress.js';

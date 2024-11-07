@@ -19,6 +19,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/validation.js';
+import { ControllerValidation } from '../controller/validation.js';
+export const controllers = {
+  validation: ControllerValidation,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/validation.js';

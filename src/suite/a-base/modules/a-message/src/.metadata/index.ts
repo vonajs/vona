@@ -22,6 +22,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/message.js';
+import { ControllerMessage } from '../controller/message.js';
+export const controllers = {
+  message: ControllerMessage,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/message.js';

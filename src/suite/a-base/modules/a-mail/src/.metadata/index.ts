@@ -31,6 +31,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/scene.js';
+import { ControllerScene } from '../controller/scene.js';
+export const controllers = {
+  scene: ControllerScene,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/mail.js';

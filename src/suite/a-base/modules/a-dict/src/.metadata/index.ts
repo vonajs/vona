@@ -19,6 +19,10 @@ export * from '../atom/dict.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/dict.js';
+import { ControllerDict } from '../controller/dict.js';
+export const controllers = {
+  dict: ControllerDict,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/dict.js';

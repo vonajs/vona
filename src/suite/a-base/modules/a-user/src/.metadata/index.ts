@@ -16,6 +16,12 @@ declare module 'vona' {
 /** controllers: begin */
 export * from '../controller/public.js';
 export * from '../controller/user.js';
+import { ControllerPublic } from '../controller/public.js';
+import { ControllerUser } from '../controller/user.js';
+export const controllers = {
+  public: ControllerPublic,
+  user: ControllerUser,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/public.js';

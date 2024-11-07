@@ -43,6 +43,16 @@ export * from '../controller/io.js';
 export * from '../controller/message.js';
 export * from '../controller/messageClass.js';
 export * from '../controller/test.js';
+import { ControllerIo } from '../controller/io.js';
+import { ControllerMessage } from '../controller/message.js';
+import { ControllerMessageClass } from '../controller/messageClass.js';
+import { ControllerTest } from '../controller/test.js';
+export const controllers = {
+  io: ControllerIo,
+  message: ControllerMessage,
+  messageClass: ControllerMessageClass,
+  test: ControllerTest,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/message.js';

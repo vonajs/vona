@@ -23,6 +23,10 @@ export * from '../atom/purchaseOrderDetail.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/flow.js';
+import { ControllerFlow } from '../controller/flow.js';
+export const controllers = {
+  flow: ControllerFlow,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/product.js';

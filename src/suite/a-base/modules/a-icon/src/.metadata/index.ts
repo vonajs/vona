@@ -16,6 +16,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/icon.js';
+import { ControllerIcon } from '../controller/icon.js';
+export const controllers = {
+  icon: ControllerIcon,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/icon.js';

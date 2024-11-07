@@ -142,6 +142,104 @@ export * from '../controller/testMultilevelAuthorizationUser.js';
 export * from '../controller/testResourceAll.js';
 export * from '../controller/testResourceRight.js';
 export * from '../controller/testRoleUserRole.js';
+import { ControllerKitchenSinkAutocomplete } from '../controller/kitchenSinkAutocomplete.js';
+import { ControllerKitchenSinkFormSchemaValidation } from '../controller/kitchenSinkFormSchemaValidation.js';
+import { ControllerKitchenSinkGuide } from '../controller/kitchenSinkGuide.js';
+import { ControllerKitchenSinkPtrIsLoadmore } from '../controller/kitchenSinkPtrIsLoadmore.js';
+import { ControllerTestAtomAll } from '../controller/testAtomAll.js';
+import { ControllerTestAtomRight } from '../controller/testAtomRight.js';
+import { ControllerTestAtomStarLabel } from '../controller/testAtomStarLabel.js';
+import { ControllerTestCacheDb } from '../controller/testCacheDb.js';
+import { ControllerTestCacheMem } from '../controller/testCacheMem.js';
+import { ControllerTestCacheRedis } from '../controller/testCacheRedis.js';
+import { ControllerTestCtxConfig } from '../controller/testCtxConfig.js';
+import { ControllerTestCtxLocale } from '../controller/testCtxLocale.js';
+import { ControllerTestCtxPerformAction } from '../controller/testCtxPerformAction.js';
+import { ControllerTestCtxRequest } from '../controller/testCtxRequest.js';
+import { ControllerTestCtxResponse } from '../controller/testCtxResponse.js';
+import { ControllerTestCtxSession } from '../controller/testCtxSession.js';
+import { ControllerTestCtxTail } from '../controller/testCtxTail.js';
+import { ControllerTestCtxTransaction } from '../controller/testCtxTransaction.js';
+import { ControllerTestEventHello } from '../controller/testEventHello.js';
+import { ControllerTestFeatBean } from '../controller/testFeatBean.js';
+import { ControllerTestFeatBroadcast } from '../controller/testFeatBroadcast.js';
+import { ControllerTestFeatCategory } from '../controller/testFeatCategory.js';
+import { ControllerTestFeatFieldsRight } from '../controller/testFeatFieldsRight.js';
+import { ControllerTestFeatHttpLog } from '../controller/testFeatHttpLog.js';
+import { ControllerTestFeatInstance } from '../controller/testFeatInstance.js';
+import { ControllerTestFeatMiddleware } from '../controller/testFeatMiddleware.js';
+import { ControllerTestFeatModel } from '../controller/testFeatModel.js';
+import { ControllerTestFeatModelWhere } from '../controller/testFeatModelWhere.js';
+import { ControllerTestFeatOpenAuth } from '../controller/testFeatOpenAuth.js';
+import { ControllerTestFeatProgress } from '../controller/testFeatProgress.js';
+import { ControllerTestFeatQueue } from '../controller/testFeatQueue.js';
+import { ControllerTestFeatSendMail } from '../controller/testFeatSendMail.js';
+import { ControllerTestFeatSequence } from '../controller/testFeatSequence.js';
+import { ControllerTestFeatSettings } from '../controller/testFeatSettings.js';
+import { ControllerTestFeatSocketio } from '../controller/testFeatSocketio.js';
+import { ControllerTestFeatStats } from '../controller/testFeatStats.js';
+import { ControllerTestFeatStatus } from '../controller/testFeatStatus.js';
+import { ControllerTestFeatSummer } from '../controller/testFeatSummer.js';
+import { ControllerTestFeatTag } from '../controller/testFeatTag.js';
+import { ControllerTestFeatValidation } from '../controller/testFeatValidation.js';
+import { ControllerTestItemOnlyAll } from '../controller/testItemOnlyAll.js';
+import { ControllerTestItemOnlyRight } from '../controller/testItemOnlyRight.js';
+import { ControllerTestMonkeyMonkeyee } from '../controller/testMonkeyMonkeyee.js';
+import { ControllerTestMultilevelAuthorizationRole } from '../controller/testMultilevelAuthorizationRole.js';
+import { ControllerTestMultilevelAuthorizationUser } from '../controller/testMultilevelAuthorizationUser.js';
+import { ControllerTestResourceAll } from '../controller/testResourceAll.js';
+import { ControllerTestResourceRight } from '../controller/testResourceRight.js';
+import { ControllerTestRoleUserRole } from '../controller/testRoleUserRole.js';
+export const controllers = {
+  kitchenSinkAutocomplete: ControllerKitchenSinkAutocomplete,
+  kitchenSinkFormSchemaValidation: ControllerKitchenSinkFormSchemaValidation,
+  kitchenSinkGuide: ControllerKitchenSinkGuide,
+  kitchenSinkPtrIsLoadmore: ControllerKitchenSinkPtrIsLoadmore,
+  testAtomAll: ControllerTestAtomAll,
+  testAtomRight: ControllerTestAtomRight,
+  testAtomStarLabel: ControllerTestAtomStarLabel,
+  testCacheDb: ControllerTestCacheDb,
+  testCacheMem: ControllerTestCacheMem,
+  testCacheRedis: ControllerTestCacheRedis,
+  testCtxConfig: ControllerTestCtxConfig,
+  testCtxLocale: ControllerTestCtxLocale,
+  testCtxPerformAction: ControllerTestCtxPerformAction,
+  testCtxRequest: ControllerTestCtxRequest,
+  testCtxResponse: ControllerTestCtxResponse,
+  testCtxSession: ControllerTestCtxSession,
+  testCtxTail: ControllerTestCtxTail,
+  testCtxTransaction: ControllerTestCtxTransaction,
+  testEventHello: ControllerTestEventHello,
+  testFeatBean: ControllerTestFeatBean,
+  testFeatBroadcast: ControllerTestFeatBroadcast,
+  testFeatCategory: ControllerTestFeatCategory,
+  testFeatFieldsRight: ControllerTestFeatFieldsRight,
+  testFeatHttpLog: ControllerTestFeatHttpLog,
+  testFeatInstance: ControllerTestFeatInstance,
+  testFeatMiddleware: ControllerTestFeatMiddleware,
+  testFeatModel: ControllerTestFeatModel,
+  testFeatModelWhere: ControllerTestFeatModelWhere,
+  testFeatOpenAuth: ControllerTestFeatOpenAuth,
+  testFeatProgress: ControllerTestFeatProgress,
+  testFeatQueue: ControllerTestFeatQueue,
+  testFeatSendMail: ControllerTestFeatSendMail,
+  testFeatSequence: ControllerTestFeatSequence,
+  testFeatSettings: ControllerTestFeatSettings,
+  testFeatSocketio: ControllerTestFeatSocketio,
+  testFeatStats: ControllerTestFeatStats,
+  testFeatStatus: ControllerTestFeatStatus,
+  testFeatSummer: ControllerTestFeatSummer,
+  testFeatTag: ControllerTestFeatTag,
+  testFeatValidation: ControllerTestFeatValidation,
+  testItemOnlyAll: ControllerTestItemOnlyAll,
+  testItemOnlyRight: ControllerTestItemOnlyRight,
+  testMonkeyMonkeyee: ControllerTestMonkeyMonkeyee,
+  testMultilevelAuthorizationRole: ControllerTestMultilevelAuthorizationRole,
+  testMultilevelAuthorizationUser: ControllerTestMultilevelAuthorizationUser,
+  testResourceAll: ControllerTestResourceAll,
+  testResourceRight: ControllerTestResourceRight,
+  testRoleUserRole: ControllerTestRoleUserRole,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/party.js';

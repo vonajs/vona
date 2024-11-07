@@ -15,6 +15,10 @@ export * from '../atom/app.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/resource.js';
+import { ControllerResource } from '../controller/resource.js';
+export const controllers = {
+  resource: ControllerResource,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/app.js';

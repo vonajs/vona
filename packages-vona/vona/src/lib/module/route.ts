@@ -169,7 +169,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       }
       // controllers by decorator
       const controllers = module.resource.controllers;
-      console.log(controllers.length);
+      console.log(controllers?.length);
     }
   }
 }

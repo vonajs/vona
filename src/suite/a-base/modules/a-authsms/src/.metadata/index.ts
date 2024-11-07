@@ -36,6 +36,14 @@ declare module 'vona' {
 export * from '../controller/auth.js';
 export * from '../controller/captcha.js';
 export * from '../controller/smsProvider.js';
+import { ControllerAuth } from '../controller/auth.js';
+import { ControllerCaptcha } from '../controller/captcha.js';
+import { ControllerSmsProvider } from '../controller/smsProvider.js';
+export const controllers = {
+  auth: ControllerAuth,
+  captcha: ControllerCaptcha,
+  smsProvider: ControllerSmsProvider,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/auth.js';

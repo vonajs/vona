@@ -35,6 +35,12 @@ declare module 'vona' {
 /** controllers: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowTask.js';
+import { ControllerFlow } from '../controller/flow.js';
+import { ControllerFlowTask } from '../controller/flowTask.js';
+export const controllers = {
+  flow: ControllerFlow,
+  flowTask: ControllerFlowTask,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/flowNodeStartEventAtomCondition.js';

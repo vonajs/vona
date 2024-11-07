@@ -26,6 +26,12 @@ export * from '../atom/authOpen.js';
 /** controllers: begin */
 export * from '../controller/auth.js';
 export * from '../controller/authOpen.js';
+import { ControllerAuth } from '../controller/auth.js';
+import { ControllerAuthOpen } from '../controller/authOpen.js';
+export const controllers = {
+  auth: ControllerAuth,
+  authOpen: ControllerAuthOpen,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/authOpen.js';

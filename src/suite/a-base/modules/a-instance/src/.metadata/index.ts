@@ -28,6 +28,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/instance.js';
+import { ControllerInstance } from '../controller/instance.js';
+export const controllers = {
+  instance: ControllerInstance,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/instance.js';

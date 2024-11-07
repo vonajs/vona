@@ -20,6 +20,10 @@ export * from '../atom/userOnlineHistory.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/userOnline.js';
+import { ControllerUserOnline } from '../controller/userOnline.js';
+export const controllers = {
+  userOnline: ControllerUserOnline,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/userOnline.js';

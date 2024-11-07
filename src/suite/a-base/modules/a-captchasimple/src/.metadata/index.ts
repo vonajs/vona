@@ -12,6 +12,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/captcha.js';
+import { ControllerCaptcha } from '../controller/captcha.js';
+export const controllers = {
+  captcha: ControllerCaptcha,
+};
 /** controllers: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

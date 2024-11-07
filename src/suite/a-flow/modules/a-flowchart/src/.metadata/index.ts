@@ -1,6 +1,12 @@
 /** controllers: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
+import { ControllerFlow } from '../controller/flow.js';
+import { ControllerFlowDef } from '../controller/flowDef.js';
+export const controllers = {
+  flow: ControllerFlow,
+  flowDef: ControllerFlowDef,
+};
 /** controllers: end */
 /** services: begin */
 export * from '../service/flow.js';

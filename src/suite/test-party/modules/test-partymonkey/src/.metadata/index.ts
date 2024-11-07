@@ -1,5 +1,9 @@
 /** controllers: begin */
 export * from '../controller/monkeyer.js';
+import { ControllerMonkeyer } from '../controller/monkeyer.js';
+export const controllers = {
+  monkeyer: ControllerMonkeyer,
+};
 /** controllers: end */
 /** monkey: begin */
 export * from '../monkey.js';

@@ -16,6 +16,10 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/share.js';
+import { ControllerShare } from '../controller/share.js';
+export const controllers = {
+  share: ControllerShare,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/share.js';
