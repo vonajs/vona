@@ -54,8 +54,8 @@ declare module 'vona' {
     'a-baselayout': ScopeModuleABaselayout;
   }
 
-  export interface BeanBase {
-    $scopeBaselayout: ScopeModuleABaselayout;
+  export interface BeanScopeContainer {
+    baselayout: ScopeModuleABaselayout;
   }
 
   export interface IBeanScopeLocale {

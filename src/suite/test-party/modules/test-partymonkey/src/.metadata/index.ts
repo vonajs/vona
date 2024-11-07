@@ -18,8 +18,8 @@ declare module 'vona' {
     'test-partymonkey': ScopeModuleTestPartymonkey;
   }
 
-  export interface BeanBase {
-    $scopeTestPartymonkey: ScopeModuleTestPartymonkey;
+  export interface BeanScopeContainer {
+    testPartymonkey: ScopeModuleTestPartymonkey;
   }
 }
 /** scope: end */

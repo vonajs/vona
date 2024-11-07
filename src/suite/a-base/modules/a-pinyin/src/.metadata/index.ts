@@ -28,8 +28,8 @@ declare module 'vona' {
     'a-pinyin': ScopeModuleAPinyin;
   }
 
-  export interface BeanBase {
-    $scopePinyin: ScopeModuleAPinyin;
+  export interface BeanScopeContainer {
+    pinyin: ScopeModuleAPinyin;
   }
 }
 /** scope: end */

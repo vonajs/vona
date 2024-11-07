@@ -28,8 +28,8 @@ declare module 'vona' {
     'a-login': ScopeModuleALogin;
   }
 
-  export interface BeanBase {
-    $scopeLogin: ScopeModuleALogin;
+  export interface BeanScopeContainer {
+    login: ScopeModuleALogin;
   }
 }
 /** scope: end */

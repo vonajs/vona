@@ -72,8 +72,8 @@ declare module 'vona' {
     'a-cli': ScopeModuleACli;
   }
 
-  export interface BeanBase {
-    $scopeCli: ScopeModuleACli;
+  export interface BeanScopeContainer {
+    cli: ScopeModuleACli;
   }
 
   export interface IBeanScopeConfig {

@@ -78,8 +78,8 @@ declare module 'vona' {
     'a-baseadmin': ScopeModuleABaseadmin;
   }
 
-  export interface BeanBase {
-    $scopeBaseadmin: ScopeModuleABaseadmin;
+  export interface BeanScopeContainer {
+    baseadmin: ScopeModuleABaseadmin;
   }
 
   export interface IBeanScopeLocale {

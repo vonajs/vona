@@ -50,8 +50,8 @@ declare module 'vona' {
     'a-sequence': ScopeModuleASequence;
   }
 
-  export interface BeanBase {
-    $scopeSequence: ScopeModuleASequence;
+  export interface BeanScopeContainer {
+    sequence: ScopeModuleASequence;
   }
 }
 /** scope: end */

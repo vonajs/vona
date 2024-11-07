@@ -16,8 +16,8 @@ declare module 'vona' {
     'cms-plugintrack': ScopeModuleCmsPlugintrack;
   }
 
-  export interface BeanBase {
-    $scopeCmsPlugintrack: ScopeModuleCmsPlugintrack;
+  export interface BeanScopeContainer {
+    cmsPlugintrack: ScopeModuleCmsPlugintrack;
   }
 
   export interface IBeanScopeConfig {

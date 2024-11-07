@@ -65,8 +65,8 @@ declare module 'vona' {
     'test-flow': ScopeModuleTestFlow;
   }
 
-  export interface BeanBase {
-    $scopeTestFlow: ScopeModuleTestFlow;
+  export interface BeanScopeContainer {
+    testFlow: ScopeModuleTestFlow;
   }
 
   export interface IBeanScopeLocale {

@@ -49,8 +49,8 @@ declare module 'vona' {
     'a-flowgateway': ScopeModuleAFlowgateway;
   }
 
-  export interface BeanBase {
-    $scopeFlowgateway: ScopeModuleAFlowgateway;
+  export interface BeanScopeContainer {
+    flowgateway: ScopeModuleAFlowgateway;
   }
 
   export interface IBeanScopeConfig {

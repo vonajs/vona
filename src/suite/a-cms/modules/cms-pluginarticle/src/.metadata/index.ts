@@ -12,8 +12,8 @@ declare module 'vona' {
     'cms-pluginarticle': ScopeModuleCmsPluginarticle;
   }
 
-  export interface BeanBase {
-    $scopeCmsPluginarticle: ScopeModuleCmsPluginarticle;
+  export interface BeanScopeContainer {
+    cmsPluginarticle: ScopeModuleCmsPluginarticle;
   }
 }
 /** scope: end */

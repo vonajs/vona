@@ -78,8 +78,8 @@ declare module 'vona' {
     'a-settings': ScopeModuleASettings;
   }
 
-  export interface BeanBase {
-    $scopeSettings: ScopeModuleASettings;
+  export interface BeanScopeContainer {
+    settings: ScopeModuleASettings;
   }
 
   export interface IBeanScopeLocale {

@@ -33,8 +33,8 @@ declare module 'vona' {
     'a-dictbooster': ScopeModuleADictbooster;
   }
 
-  export interface BeanBase {
-    $scopeDictbooster: ScopeModuleADictbooster;
+  export interface BeanScopeContainer {
+    dictbooster: ScopeModuleADictbooster;
   }
 
   export interface IBeanScopeLocale {

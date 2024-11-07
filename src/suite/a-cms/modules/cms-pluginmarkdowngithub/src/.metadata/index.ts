@@ -12,8 +12,8 @@ declare module 'vona' {
     'cms-pluginmarkdowngithub': ScopeModuleCmsPluginmarkdowngithub;
   }
 
-  export interface BeanBase {
-    $scopeCmsPluginmarkdowngithub: ScopeModuleCmsPluginmarkdowngithub;
+  export interface BeanScopeContainer {
+    cmsPluginmarkdowngithub: ScopeModuleCmsPluginmarkdowngithub;
   }
 }
 /** scope: end */

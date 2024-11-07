@@ -119,8 +119,8 @@ declare module 'vona' {
     'a-clibooster': ScopeModuleAClibooster;
   }
 
-  export interface BeanBase {
-    $scopeClibooster: ScopeModuleAClibooster;
+  export interface BeanScopeContainer {
+    clibooster: ScopeModuleAClibooster;
   }
 
   export interface IBeanScopeConfig {

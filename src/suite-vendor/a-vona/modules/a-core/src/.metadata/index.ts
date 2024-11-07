@@ -12,8 +12,8 @@ declare module 'vona' {
     'a-core': ScopeModuleACore;
   }
 
-  export interface BeanBase {
-    $scopeCore: ScopeModuleACore;
+  export interface BeanScopeContainer {
+    core: ScopeModuleACore;
   }
 }
 /** scope: end */

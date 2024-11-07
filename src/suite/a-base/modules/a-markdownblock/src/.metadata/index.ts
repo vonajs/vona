@@ -33,8 +33,8 @@ declare module 'vona' {
     'a-markdownblock': ScopeModuleAMarkdownblock;
   }
 
-  export interface BeanBase {
-    $scopeMarkdownblock: ScopeModuleAMarkdownblock;
+  export interface BeanScopeContainer {
+    markdownblock: ScopeModuleAMarkdownblock;
   }
 
   export interface IBeanScopeLocale {

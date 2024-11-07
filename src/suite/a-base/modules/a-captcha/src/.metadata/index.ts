@@ -68,8 +68,8 @@ declare module 'vona' {
     'a-captcha': ScopeModuleACaptcha;
   }
 
-  export interface BeanBase {
-    $scopeCaptcha: ScopeModuleACaptcha;
+  export interface BeanScopeContainer {
+    captcha: ScopeModuleACaptcha;
   }
 
   export interface IBeanScopeConfig {

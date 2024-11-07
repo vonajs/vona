@@ -70,8 +70,8 @@ declare module 'vona' {
     'a-app': ScopeModuleAApp;
   }
 
-  export interface BeanBase {
-    $scopeApp: ScopeModuleAApp;
+  export interface BeanScopeContainer {
+    app: ScopeModuleAApp;
   }
 
   export interface IBeanScopeLocale {

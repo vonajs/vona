@@ -25,8 +25,8 @@ declare module 'vona' {
     'cms-themedocs': ScopeModuleCmsThemedocs;
   }
 
-  export interface BeanBase {
-    $scopeCmsThemedocs: ScopeModuleCmsThemedocs;
+  export interface BeanScopeContainer {
+    cmsThemedocs: ScopeModuleCmsThemedocs;
   }
 
   export interface IBeanScopeConfig {

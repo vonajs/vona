@@ -25,8 +25,8 @@ declare module 'vona' {
     'cms-pluginbase': ScopeModuleCmsPluginbase;
   }
 
-  export interface BeanBase {
-    $scopeCmsPluginbase: ScopeModuleCmsPluginbase;
+  export interface BeanScopeContainer {
+    cmsPluginbase: ScopeModuleCmsPluginbase;
   }
 
   export interface IBeanScopeConfig {

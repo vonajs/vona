@@ -425,8 +425,8 @@ declare module 'vona' {
     'a-base': ScopeModuleABase;
   }
 
-  export interface BeanBase {
-    $scopeBase: ScopeModuleABase;
+  export interface BeanScopeContainer {
+    base: ScopeModuleABase;
   }
 
   export interface IBeanScopeConfig {

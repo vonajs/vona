@@ -75,8 +75,8 @@ declare module 'vona' {
     'a-useronline': ScopeModuleAUseronline;
   }
 
-  export interface BeanBase {
-    $scopeUseronline: ScopeModuleAUseronline;
+  export interface BeanScopeContainer {
+    useronline: ScopeModuleAUseronline;
   }
 
   export interface IBeanScopeConfig {

@@ -16,8 +16,8 @@ declare module 'vona' {
     'cms-themeaws': ScopeModuleCmsThemeaws;
   }
 
-  export interface BeanBase {
-    $scopeCmsThemeaws: ScopeModuleCmsThemeaws;
+  export interface BeanScopeContainer {
+    cmsThemeaws: ScopeModuleCmsThemeaws;
   }
 
   export interface IBeanScopeConfig {

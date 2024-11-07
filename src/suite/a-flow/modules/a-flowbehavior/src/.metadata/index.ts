@@ -43,8 +43,8 @@ declare module 'vona' {
     'a-flowbehavior': ScopeModuleAFlowbehavior;
   }
 
-  export interface BeanBase {
-    $scopeFlowbehavior: ScopeModuleAFlowbehavior;
+  export interface BeanScopeContainer {
+    flowbehavior: ScopeModuleAFlowbehavior;
   }
 
   export interface IBeanScopeConfig {

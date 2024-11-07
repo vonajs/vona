@@ -82,8 +82,8 @@ declare module 'vona' {
     'a-mail': ScopeModuleAMail;
   }
 
-  export interface BeanBase {
-    $scopeMail: ScopeModuleAMail;
+  export interface BeanScopeContainer {
+    mail: ScopeModuleAMail;
   }
 
   export interface IBeanScopeConfig {

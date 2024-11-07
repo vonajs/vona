@@ -28,8 +28,8 @@ declare module 'vona' {
     'a-debug': ScopeModuleADebug;
   }
 
-  export interface BeanBase {
-    $scopeDebug: ScopeModuleADebug;
+  export interface BeanScopeContainer {
+    debug: ScopeModuleADebug;
   }
 }
 /** scope: end */

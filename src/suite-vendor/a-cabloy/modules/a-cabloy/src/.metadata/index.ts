@@ -1,0 +1,19 @@
+/** scope: begin */
+import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+
+@Scope()
+export class ScopeModuleACabloy extends BeanScopeBase {}
+
+export interface ScopeModuleACabloy extends TypeModuleResource<any, any, any, any, any, any> {}
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanScopeRecord {
+    'a-cabloy': ScopeModuleACabloy;
+  }
+
+  export interface BeanScopeContainer {
+    cabloy: ScopeModuleACabloy;
+  }
+}
+/** scope: end */

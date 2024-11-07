@@ -139,8 +139,8 @@ declare module 'vona' {
     'a-flow': ScopeModuleAFlow;
   }
 
-  export interface BeanBase {
-    $scopeFlow: ScopeModuleAFlow;
+  export interface BeanScopeContainer {
+    flow: ScopeModuleAFlow;
   }
 
   export interface IBeanScopeLocale {

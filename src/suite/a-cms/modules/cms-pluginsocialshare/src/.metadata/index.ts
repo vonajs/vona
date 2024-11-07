@@ -16,8 +16,8 @@ declare module 'vona' {
     'cms-pluginsocialshare': ScopeModuleCmsPluginsocialshare;
   }
 
-  export interface BeanBase {
-    $scopeCmsPluginsocialshare: ScopeModuleCmsPluginsocialshare;
+  export interface BeanScopeContainer {
+    cmsPluginsocialshare: ScopeModuleCmsPluginsocialshare;
   }
 
   export interface IBeanScopeConfig {

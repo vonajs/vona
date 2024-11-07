@@ -16,8 +16,8 @@ declare module 'vona' {
     'cms-pluginrss': ScopeModuleCmsPluginrss;
   }
 
-  export interface BeanBase {
-    $scopeCmsPluginrss: ScopeModuleCmsPluginrss;
+  export interface BeanScopeContainer {
+    cmsPluginrss: ScopeModuleCmsPluginrss;
   }
 
   export interface IBeanScopeConfig {

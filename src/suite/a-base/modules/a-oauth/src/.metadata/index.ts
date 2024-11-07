@@ -40,8 +40,8 @@ declare module 'vona' {
     'a-oauth': ScopeModuleAOauth;
   }
 
-  export interface BeanBase {
-    $scopeOauth: ScopeModuleAOauth;
+  export interface BeanScopeContainer {
+    oauth: ScopeModuleAOauth;
   }
 }
 /** scope: end */

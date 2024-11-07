@@ -40,8 +40,8 @@ declare module 'vona' {
     'a-captchasimple': ScopeModuleACaptchasimple;
   }
 
-  export interface BeanBase {
-    $scopeCaptchasimple: ScopeModuleACaptchasimple;
+  export interface BeanScopeContainer {
+    captchasimple: ScopeModuleACaptchasimple;
   }
 
   export interface IBeanScopeLocale {

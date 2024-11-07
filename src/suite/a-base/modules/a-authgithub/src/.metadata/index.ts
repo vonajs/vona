@@ -40,8 +40,8 @@ declare module 'vona' {
     'a-authgithub': ScopeModuleAAuthgithub;
   }
 
-  export interface BeanBase {
-    $scopeAuthgithub: ScopeModuleAAuthgithub;
+  export interface BeanScopeContainer {
+    authgithub: ScopeModuleAAuthgithub;
   }
 
   export interface IBeanScopeConfig {

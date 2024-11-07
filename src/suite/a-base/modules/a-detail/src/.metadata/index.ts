@@ -51,8 +51,8 @@ declare module 'vona' {
     'a-detail': ScopeModuleADetail;
   }
 
-  export interface BeanBase {
-    $scopeDetail: ScopeModuleADetail;
+  export interface BeanScopeContainer {
+    detail: ScopeModuleADetail;
   }
 
   export interface IBeanScopeLocale {

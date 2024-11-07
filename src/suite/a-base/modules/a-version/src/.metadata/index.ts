@@ -96,8 +96,8 @@ declare module 'vona' {
     'a-version': ScopeModuleAVersion;
   }
 
-  export interface BeanBase {
-    $scopeVersion: ScopeModuleAVersion;
+  export interface BeanScopeContainer {
+    version: ScopeModuleAVersion;
   }
 
   export interface IBeanScopeConfig {

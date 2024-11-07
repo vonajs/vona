@@ -57,8 +57,8 @@ declare module 'vona' {
     'a-user': ScopeModuleAUser;
   }
 
-  export interface BeanBase {
-    $scopeUser: ScopeModuleAUser;
+  export interface BeanScopeContainer {
+    user: ScopeModuleAUser;
   }
 
   export interface IBeanScopeLocale {

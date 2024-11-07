@@ -112,8 +112,8 @@ declare module 'vona' {
     'a-cms': ScopeModuleACms;
   }
 
-  export interface BeanBase {
-    $scopeCms: ScopeModuleACms;
+  export interface BeanScopeContainer {
+    cms: ScopeModuleACms;
   }
 
   export interface IBeanScopeConfig {

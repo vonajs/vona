@@ -82,8 +82,8 @@ declare module 'vona' {
     'a-database': ScopeModuleADatabase;
   }
 
-  export interface BeanBase {
-    $scopeDatabase: ScopeModuleADatabase;
+  export interface BeanScopeContainer {
+    database: ScopeModuleADatabase;
   }
 
   export interface IBeanScopeLocale {
