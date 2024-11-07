@@ -187,6 +187,36 @@ export * from '../controller/resource.js';
 export * from '../controller/tag.js';
 export * from '../controller/user.js';
 export * from '../controller/util.js';
+import { ControllerAtom } from '../controller/atom.js';
+import { ControllerAtomAction } from '../controller/atomAction.js';
+import { ControllerAtomClass } from '../controller/atomClass.js';
+import { ControllerAtomState } from '../controller/atomState.js';
+import { ControllerAuth } from '../controller/auth.js';
+import { ControllerBase } from '../controller/base.js';
+import { ControllerCategory } from '../controller/category.js';
+import { ControllerComment } from '../controller/comment.js';
+import { ControllerJwt } from '../controller/jwt.js';
+import { ControllerLayoutConfig } from '../controller/layoutConfig.js';
+import { ControllerResource } from '../controller/resource.js';
+import { ControllerTag } from '../controller/tag.js';
+import { ControllerUser } from '../controller/user.js';
+import { ControllerUtil } from '../controller/util.js';
+export const controllers = {
+  atom: ControllerAtom,
+  atomAction: ControllerAtomAction,
+  atomClass: ControllerAtomClass,
+  atomState: ControllerAtomState,
+  auth: ControllerAuth,
+  base: ControllerBase,
+  category: ControllerCategory,
+  comment: ControllerComment,
+  jwt: ControllerJwt,
+  layoutConfig: ControllerLayoutConfig,
+  resource: ControllerResource,
+  tag: ControllerTag,
+  user: ControllerUser,
+  util: ControllerUtil,
+};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/atom.js';

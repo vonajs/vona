@@ -77,10 +77,22 @@ export class AppRouter extends BeanSimple {
     }
 
     // register
-    this._registerRoute(_route, middlewaresLocal);
+    this._registerInner(_route, middlewaresLocal);
   }
 
-  _registerRoute(route, middlewaresLocal) {
+  unRegister(name) {
+    const app = this.app;
+    const index = app.router.stack.findIndex(layer => layer.name && layer.name === name);
+    if (index > -1) app.router.stack.splice(index, 1);
+  }
+
+  findByPath(moduleName, arg): any {
+    const app = this.app;
+    const path = app.meta.util.combineFetchPath(moduleName, arg);
+    return app.router.stack.find(layer => layer.path === path);
+  }
+
+  _registerInner(route, middlewaresLocal) {
     // app
     const app = this.app;
     // args
@@ -128,18 +140,6 @@ export class AppRouter extends BeanSimple {
       app.router[route.routeMethod](route.routePath, ...args);
     }
   }
-
-  unRegister(name) {
-    const app = this.app;
-    const index = app.router.stack.findIndex(layer => layer.name && layer.name === name);
-    if (index > -1) app.router.stack.splice(index, 1);
-  }
-
-  findByPath(moduleName, arg): any {
-    const app = this.app;
-    const path = app.meta.util.combineFetchPath(moduleName, arg);
-    return app.router.stack.find(layer => layer.path === path);
-  }
 }
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
@@ -160,13 +160,16 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
     // load routes
     for (const key in modules) {
       const module = modules[key];
-      // routes and controllers
+      // routes
       const routes = module.resource.routes;
       if (routes) {
         for (const route of routes) {
           app.meta.router.register(module.info, route);
         }
       }
+      // controllers by decorator
+      const controllers = module.resource.controllers;
+      console.log(controllers.length);
     }
   }
 }
