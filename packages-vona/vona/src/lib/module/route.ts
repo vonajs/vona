@@ -15,10 +15,7 @@ export class AppRouter extends BeanSimple {
     }
     // app
     const app = this.app;
-    // args
-    const args: any[] = [];
-    // name:
-    const routeName = route.name;
+
     // path
     const routePath = typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path;
 
@@ -30,6 +27,9 @@ export class AppRouter extends BeanSimple {
       controllerBeanFullName: '',
       action: '',
       route,
+      routeName: route.name,
+      routeMethod: route.method,
+      routePath,
     };
     // constroller
     if (route.controller) {
@@ -51,12 +51,46 @@ export class AppRouter extends BeanSimple {
     }
     _route.action = action || '';
 
+    // middlewaresLocal: route
+    const middlewaresLocal: any[] = [];
+    if (route.middlewares) {
+      let middlewares = route.middlewares;
+      if (typeof middlewares === 'string') middlewares = middlewares.split(',');
+      middlewares.forEach(key => {
+        if (is.string(key)) {
+          const item = app.meta.middlewaresNormal[key];
+          if (item) {
+            middlewaresLocal.push(wrapMiddleware(item));
+          } else {
+            middlewaresLocal.push(wrapMiddlewareApp(key, route, app));
+          }
+        } else {
+          middlewaresLocal.push(key);
+        }
+      });
+    }
+
+    // controller
+    if (route.controller) {
+      // middleware controller
+      middlewaresLocal.push(methodToMiddleware(_route.controllerBeanFullName, _route));
+    }
+
+    // register
+    this._registerRoute(_route, middlewaresLocal);
+  }
+
+  _registerRoute(route, middlewaresLocal) {
+    // app
+    const app = this.app;
+    // args
+    let args: any[] = [];
     // middlewares: start
     const fnStart = async (ctx, next) => {
       // status
       ctx[MWSTATUS] = {};
       // route
-      ctx.route = _route;
+      ctx.route = route;
       // dynamic options
       ctx.meta.middlewares = {};
       // next
@@ -82,35 +116,16 @@ export class AppRouter extends BeanSimple {
     fnStart._name = 'tailDone';
     args.push(fnTailDone);
 
-    // middlewares: route
-    if (route.middlewares) {
-      let middlewares = route.middlewares;
-      if (typeof middlewares === 'string') middlewares = middlewares.split(',');
-      middlewares.forEach(key => {
-        if (is.string(key)) {
-          const item = app.meta.middlewaresNormal[key];
-          if (item) {
-            args.push(wrapMiddleware(item));
-          } else {
-            args.push(wrapMiddlewareApp(key, route, app));
-          }
-        } else {
-          args.push(key);
-        }
-      });
-    }
-
-    // controller
-    if (route.controller) {
-      // middleware controller
-      args.push(methodToMiddleware(_route.controllerBeanFullName, _route));
+    // middlewares
+    if (middlewaresLocal.length > 0) {
+      args = args.concat(middlewaresLocal);
     }
 
     // load
-    if (routeName) {
-      app.router[route.method](routeName, routePath, ...args);
+    if (route.routeName) {
+      app.router[route.routeMethod](route.routeName, route.routePath, ...args);
     } else {
-      app.router[route.method](routePath, ...args);
+      app.router[route.routeMethod](route.routePath, ...args);
     }
   }
 
