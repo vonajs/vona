@@ -1,4 +1,3 @@
-import * as ModuleInfo from '@cabloy/module-info';
 import fse from 'fs-extra';
 import path from 'path';
 import { URL } from 'url';
@@ -6,7 +5,7 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { VonaContext, Cast, IModule, PowerPartial, TypeMonkeyName } from '../../types/index.js';
+import { VonaContext, Cast, IModule, PowerPartial, TypeMonkeyName, IModuleInfo, parseInfo } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -28,17 +27,21 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
-  combineFetchPath(moduleName, arg) {
-    if (arg.substr(0, 2) === '//') return arg.substr(1);
-    if (arg.charAt(0) === '/') return `/api${arg}`;
-    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+  combineFetchPath(moduleName: IModuleInfo | string, path: string) {
+    if (!path) path = '';
+    // ignore globalPrefix
+    if (path.startsWith('//')) return path.substring(1);
+    // ignore module path
+    if (path.startsWith('/')) return `${this.app.config.globalPrefix}${path}`;
+    // globalPrefix + module path + arg
+    const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error('invalid url');
-    return `/api/${moduleInfo.url}/${arg}`;
+    return `${this.app.config.globalPrefix}/${moduleInfo.url}/${path}`;
   }
 
   combineApiPath(moduleName, arg) {
     if (arg.charAt(0) === '/') return arg;
-    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+    const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error('invalid url');
     return `/${moduleInfo.url}/${arg}`;
   }

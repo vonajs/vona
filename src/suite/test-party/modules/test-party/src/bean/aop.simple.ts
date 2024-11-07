@@ -11,7 +11,7 @@ class AopSimpleBase extends BeanBase {
 @Aop({ match: 'testCtx' })
 export class AopSimple extends AopSimpleBase {
   // magic
-  __magic_get__(context, next) {
+  __get__(context, next) {
     next();
     const prop = context.prop;
     if (prop === 'magic') {
@@ -22,7 +22,7 @@ export class AopSimple extends AopSimpleBase {
     }
   }
 
-  __magic_set__(context, next) {
+  __set__(context, next) {
     const prop = context.prop;
     if (prop === 'name') {
       const parts = context.value.split(':');

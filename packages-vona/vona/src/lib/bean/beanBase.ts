@@ -4,8 +4,11 @@ import { BeanScopeContainer, IBeanScopeContainer } from './scope/beanScopeContai
 import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 
 const SymbolText = Symbol('SymbolText');
+const SymbolScopeContainer = Symbol('BeanBase#SymbolScopeContainer');
 
 export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
+  private [SymbolScopeContainer]: IBeanScopeContainer;
+
   protected get $text(): IModuleLocaleText {
     if (!this[SymbolText]) {
       this[SymbolText] = this.ctx.meta.locale.createLocaleText(this.moduleBelong);
@@ -18,7 +21,10 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
   }
 
   protected get $scope(): IBeanScopeContainer {
-    return this.bean._getBean(BeanScopeContainer) as unknown as IBeanScopeContainer;
+    if (!this[SymbolScopeContainer]) {
+      this[SymbolScopeContainer] = this.bean._newBean(BeanScopeContainer) as unknown as IBeanScopeContainer;
+    }
+    return this[SymbolScopeContainer];
   }
 
   protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
