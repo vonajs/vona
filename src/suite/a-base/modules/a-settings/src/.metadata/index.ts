@@ -78,7 +78,7 @@ declare module 'vona' {
     'a-settings': ScopeModuleASettings;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     settings: ScopeModuleASettings;
   }
 

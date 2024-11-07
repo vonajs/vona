@@ -114,7 +114,7 @@ declare module 'vona' {
     'a-socketio': ScopeModuleASocketio;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     socketio: ScopeModuleASocketio;
   }
 

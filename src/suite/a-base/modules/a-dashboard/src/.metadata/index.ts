@@ -74,7 +74,7 @@ declare module 'vona' {
     'a-dashboard': ScopeModuleADashboard;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     dashboard: ScopeModuleADashboard;
   }
 

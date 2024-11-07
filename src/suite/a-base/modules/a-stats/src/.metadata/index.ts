@@ -68,7 +68,7 @@ declare module 'vona' {
     'a-stats': ScopeModuleAStats;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     stats: ScopeModuleAStats;
   }
 

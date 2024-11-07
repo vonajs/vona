@@ -33,7 +33,7 @@ declare module 'vona' {
     'a-iconbooster': ScopeModuleAIconbooster;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     iconbooster: ScopeModuleAIconbooster;
   }
 

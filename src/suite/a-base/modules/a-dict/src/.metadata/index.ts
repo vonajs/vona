@@ -70,7 +70,7 @@ declare module 'vona' {
     'a-dict': ScopeModuleADict;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     dict: ScopeModuleADict;
   }
 

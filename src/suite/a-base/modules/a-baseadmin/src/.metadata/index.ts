@@ -78,7 +78,7 @@ declare module 'vona' {
     'a-baseadmin': ScopeModuleABaseadmin;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     baseadmin: ScopeModuleABaseadmin;
   }
 

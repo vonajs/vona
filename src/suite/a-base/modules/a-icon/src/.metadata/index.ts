@@ -53,7 +53,7 @@ declare module 'vona' {
     'a-icon': ScopeModuleAIcon;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     icon: ScopeModuleAIcon;
   }
 

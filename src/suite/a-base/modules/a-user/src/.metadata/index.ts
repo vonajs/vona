@@ -57,7 +57,7 @@ declare module 'vona' {
     'a-user': ScopeModuleAUser;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     user: ScopeModuleAUser;
   }
 

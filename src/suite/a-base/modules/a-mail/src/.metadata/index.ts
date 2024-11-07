@@ -82,7 +82,7 @@ declare module 'vona' {
     'a-mail': ScopeModuleAMail;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     mail: ScopeModuleAMail;
   }
 

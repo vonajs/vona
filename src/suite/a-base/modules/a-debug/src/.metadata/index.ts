@@ -28,7 +28,7 @@ declare module 'vona' {
     'a-debug': ScopeModuleADebug;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     debug: ScopeModuleADebug;
   }
 }

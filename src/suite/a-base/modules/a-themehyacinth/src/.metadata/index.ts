@@ -21,7 +21,7 @@ declare module 'vona' {
     'a-themehyacinth': ScopeModuleAThemehyacinth;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     themehyacinth: ScopeModuleAThemehyacinth;
   }
 

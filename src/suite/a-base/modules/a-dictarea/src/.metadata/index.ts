@@ -33,7 +33,7 @@ declare module 'vona' {
     'a-dictarea': ScopeModuleADictarea;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     dictarea: ScopeModuleADictarea;
   }
 

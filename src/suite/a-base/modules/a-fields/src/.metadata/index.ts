@@ -47,7 +47,7 @@ declare module 'vona' {
     'a-fields': ScopeModuleAFields;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     fields: ScopeModuleAFields;
   }
 

@@ -425,7 +425,7 @@ declare module 'vona' {
     'a-base': ScopeModuleABase;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     base: ScopeModuleABase;
   }
 

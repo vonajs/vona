@@ -12,7 +12,7 @@ declare module 'vona' {
     'a-vona': ScopeModuleAVona;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     vona: ScopeModuleAVona;
   }
 }

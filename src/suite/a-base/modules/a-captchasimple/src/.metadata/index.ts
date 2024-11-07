@@ -40,7 +40,7 @@ declare module 'vona' {
     'a-captchasimple': ScopeModuleACaptchasimple;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     captchasimple: ScopeModuleACaptchasimple;
   }
 

@@ -35,7 +35,7 @@ declare module 'vona' {
     '${moduleName}': ScopeModule${relativeNameCapitalize};
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     ${scopeVariable}: ScopeModule${relativeNameCapitalize};
   }
   

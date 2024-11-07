@@ -49,7 +49,7 @@ declare module 'vona' {
     'a-flowgateway': ScopeModuleAFlowgateway;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     flowgateway: ScopeModuleAFlowgateway;
   }
 

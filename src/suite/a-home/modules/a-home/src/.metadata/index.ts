@@ -40,7 +40,7 @@ declare module 'vona' {
     'a-home': ScopeModuleAHome;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     home: ScopeModuleAHome;
   }
 }

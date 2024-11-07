@@ -79,7 +79,7 @@ declare module 'vona' {
     'a-instance': ScopeModuleAInstance;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     instance: ScopeModuleAInstance;
   }
 

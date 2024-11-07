@@ -68,7 +68,7 @@ declare module 'vona' {
     'a-progress': ScopeModuleAProgress;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     progress: ScopeModuleAProgress;
   }
 

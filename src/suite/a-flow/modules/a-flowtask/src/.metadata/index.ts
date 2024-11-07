@@ -110,7 +110,7 @@ declare module 'vona' {
     'a-flowtask': ScopeModuleAFlowtask;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     flowtask: ScopeModuleAFlowtask;
   }
 

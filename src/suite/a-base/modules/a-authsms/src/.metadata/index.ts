@@ -96,7 +96,7 @@ declare module 'vona' {
     'a-authsms': ScopeModuleAAuthsms;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     authsms: ScopeModuleAAuthsms;
   }
 

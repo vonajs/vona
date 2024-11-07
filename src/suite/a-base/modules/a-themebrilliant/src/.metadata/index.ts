@@ -21,7 +21,7 @@ declare module 'vona' {
     'a-themebrilliant': ScopeModuleAThemebrilliant;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     themebrilliant: ScopeModuleAThemebrilliant;
   }
 

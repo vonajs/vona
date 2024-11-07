@@ -33,7 +33,7 @@ declare module 'vona' {
     'a-layoutpc': ScopeModuleALayoutpc;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     layoutpc: ScopeModuleALayoutpc;
   }
 

@@ -21,7 +21,7 @@ declare module 'vona' {
     'test-localeone': ScopeModuleTestLocaleone;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     testLocaleone: ScopeModuleTestLocaleone;
   }
 

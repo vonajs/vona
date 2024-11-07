@@ -67,7 +67,7 @@ declare module 'vona' {
     'a-file': ScopeModuleAFile;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     file: ScopeModuleAFile;
   }
 

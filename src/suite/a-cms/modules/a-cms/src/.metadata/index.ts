@@ -112,7 +112,7 @@ declare module 'vona' {
     'a-cms': ScopeModuleACms;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cms: ScopeModuleACms;
   }
 

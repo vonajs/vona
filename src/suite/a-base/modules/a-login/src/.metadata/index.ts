@@ -28,7 +28,7 @@ declare module 'vona' {
     'a-login': ScopeModuleALogin;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     login: ScopeModuleALogin;
   }
 }

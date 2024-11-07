@@ -12,7 +12,7 @@ declare module 'vona' {
     'cms-pluginmarkdowngithub': ScopeModuleCmsPluginmarkdowngithub;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cmsPluginmarkdowngithub: ScopeModuleCmsPluginmarkdowngithub;
   }
 }

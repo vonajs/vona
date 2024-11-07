@@ -62,7 +62,7 @@ declare module 'vona' {
     'a-share': ScopeModuleAShare;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     share: ScopeModuleAShare;
   }
 }

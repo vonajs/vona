@@ -12,7 +12,7 @@ declare module 'vona' {
     'a-swagger': ScopeModuleASwagger;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     swagger: ScopeModuleASwagger;
   }
 }

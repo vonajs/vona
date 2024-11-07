@@ -21,7 +21,7 @@ declare module 'vona' {
     'a-basefront': ScopeModuleABasefront;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     basefront: ScopeModuleABasefront;
   }
 

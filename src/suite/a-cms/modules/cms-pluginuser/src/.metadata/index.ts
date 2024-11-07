@@ -25,7 +25,7 @@ declare module 'vona' {
     'cms-pluginuser': ScopeModuleCmsPluginuser;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cmsPluginuser: ScopeModuleCmsPluginuser;
   }
 

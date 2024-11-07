@@ -88,7 +88,7 @@ declare module 'vona' {
     'a-authsimple': ScopeModuleAAuthsimple;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     authsimple: ScopeModuleAAuthsimple;
   }
 

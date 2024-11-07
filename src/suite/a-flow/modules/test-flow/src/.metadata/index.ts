@@ -65,7 +65,7 @@ declare module 'vona' {
     'test-flow': ScopeModuleTestFlow;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     testFlow: ScopeModuleTestFlow;
   }
 

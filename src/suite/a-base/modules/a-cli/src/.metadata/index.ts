@@ -72,7 +72,7 @@ declare module 'vona' {
     'a-cli': ScopeModuleACli;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cli: ScopeModuleACli;
   }
 

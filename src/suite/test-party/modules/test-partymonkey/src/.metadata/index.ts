@@ -18,7 +18,7 @@ declare module 'vona' {
     'test-partymonkey': ScopeModuleTestPartymonkey;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     testPartymonkey: ScopeModuleTestPartymonkey;
   }
 }

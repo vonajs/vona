@@ -54,7 +54,7 @@ declare module 'vona' {
     'a-status': ScopeModuleAStatus;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     status: ScopeModuleAStatus;
   }
 }

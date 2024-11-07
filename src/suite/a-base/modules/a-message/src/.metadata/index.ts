@@ -63,7 +63,7 @@ declare module 'vona' {
     'a-message': ScopeModuleAMessage;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     message: ScopeModuleAMessage;
   }
 

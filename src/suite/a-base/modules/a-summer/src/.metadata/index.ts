@@ -66,7 +66,7 @@ declare module 'vona' {
     'a-summer': ScopeModuleASummer;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     summer: ScopeModuleASummer;
   }
 

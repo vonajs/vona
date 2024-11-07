@@ -28,7 +28,7 @@ declare module 'vona' {
     'cms-plugincopyright': ScopeModuleCmsPlugincopyright;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cmsPlugincopyright: ScopeModuleCmsPlugincopyright;
   }
 

@@ -139,7 +139,7 @@ declare module 'vona' {
     'a-flow': ScopeModuleAFlow;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     flow: ScopeModuleAFlow;
   }
 

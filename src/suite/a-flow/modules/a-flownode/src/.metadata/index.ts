@@ -58,7 +58,7 @@ declare module 'vona' {
     'a-flownode': ScopeModuleAFlownode;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     flownode: ScopeModuleAFlownode;
   }
 

@@ -40,7 +40,7 @@ declare module 'vona' {
     'cms-sitedocumentation': ScopeModuleCmsSitedocumentation;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cmsSitedocumentation: ScopeModuleCmsSitedocumentation;
   }
 

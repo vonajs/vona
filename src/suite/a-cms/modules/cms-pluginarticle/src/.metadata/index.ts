@@ -12,7 +12,7 @@ declare module 'vona' {
     'cms-pluginarticle': ScopeModuleCmsPluginarticle;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cmsPluginarticle: ScopeModuleCmsPluginarticle;
   }
 }

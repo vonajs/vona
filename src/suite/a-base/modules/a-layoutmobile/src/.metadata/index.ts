@@ -21,7 +21,7 @@ declare module 'vona' {
     'a-layoutmobile': ScopeModuleALayoutmobile;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     layoutmobile: ScopeModuleALayoutmobile;
   }
 

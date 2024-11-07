@@ -24,7 +24,7 @@ declare module 'vona' {
     'a-event': ScopeModuleAEvent;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     event: ScopeModuleAEvent;
   }
 }

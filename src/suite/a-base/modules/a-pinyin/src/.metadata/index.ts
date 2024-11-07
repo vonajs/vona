@@ -28,7 +28,7 @@ declare module 'vona' {
     'a-pinyin': ScopeModuleAPinyin;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     pinyin: ScopeModuleAPinyin;
   }
 }

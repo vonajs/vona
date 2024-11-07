@@ -82,7 +82,7 @@ declare module 'vona' {
     'a-database': ScopeModuleADatabase;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     database: ScopeModuleADatabase;
   }
 

@@ -12,7 +12,7 @@ declare module 'vona' {
     'a-cabloy': ScopeModuleACabloy;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cabloy: ScopeModuleACabloy;
   }
 }

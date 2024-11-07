@@ -208,7 +208,7 @@ declare module 'vona' {
     'test-party': ScopeModuleTestParty;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     testParty: ScopeModuleTestParty;
   }
 

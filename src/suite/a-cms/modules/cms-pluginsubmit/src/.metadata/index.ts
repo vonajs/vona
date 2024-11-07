@@ -42,7 +42,7 @@ declare module 'vona' {
     'cms-pluginsubmit': ScopeModuleCmsPluginsubmit;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     cmsPluginsubmit: ScopeModuleCmsPluginsubmit;
   }
 

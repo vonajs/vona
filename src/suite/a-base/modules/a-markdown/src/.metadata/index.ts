@@ -37,7 +37,7 @@ declare module 'vona' {
     'a-markdown': ScopeModuleAMarkdown;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     markdown: ScopeModuleAMarkdown;
   }
 

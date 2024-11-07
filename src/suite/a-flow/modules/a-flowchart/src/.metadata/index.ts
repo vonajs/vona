@@ -33,7 +33,7 @@ declare module 'vona' {
     'a-flowchart': ScopeModuleAFlowchart;
   }
 
-  export interface BeanScopeContainer {
+  export interface IBeanScopeContainer {
     flowchart: ScopeModuleAFlowchart;
   }
 }
