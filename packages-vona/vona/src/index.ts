@@ -8,10 +8,5 @@ import Master from 'egg-cluster/lib/master.js';
 moduleAlias.addAlias('koa-static-cache', '@cabloy/koa-static-cache');
 Master.prototype.onReload = Reload;
 
+export * from './lib/index.js';
 export * from './types/index.js';
-export * from './lib/bean/index.js';
-export * from './lib/core/index.js';
-export * from './lib/decorator/index.js';
-export * from './lib/module/index.js';
-export * from './lib/framework/framework.js';
-export * from './lib/utils/index.js';

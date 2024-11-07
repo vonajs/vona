@@ -25,6 +25,9 @@ export default function (appInfo: VonaAppInfo) {
     },
   };
 
+  // globalPrefix
+  config.globalPrefix = '/api';
+
   // development
   config.development = {
     debounce: 1000,

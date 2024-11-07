@@ -7,6 +7,7 @@ import { ConfigDevelopment } from './development.js';
 export interface VonaConfig extends EggAppConfig {
   modules: IBeanScopeConfig;
   development: ConfigDevelopment;
+  globalPrefix: string;
 }
 
 export type VonaConfigOptional = PowerPartial<VonaConfig>;
