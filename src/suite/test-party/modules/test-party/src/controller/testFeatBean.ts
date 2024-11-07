@@ -82,7 +82,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     res = this.bean.scope(__ThisModule__).service.test.name;
     assert.equal(res, 'serviceTest');
 
-    res = this.$scopeTestParty.service.test.name;
+    res = this.$scope.testParty.service.test.name;
     assert.equal(res, 'serviceTest');
 
     // ok

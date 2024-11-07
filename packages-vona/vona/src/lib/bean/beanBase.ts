@@ -1,6 +1,7 @@
 import { BeanBaseSimple } from './beanBaseSimple.js';
 import { IModuleLocaleText } from './resource/locale/type.js';
-import { BeanScopeContainer } from './scope/beanScopeContainer.js';
+import { BeanScopeContainer, IBeanScopeContainer } from './scope/beanScopeContainer.js';
+import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 
 const SymbolText = Symbol('SymbolText');
 
@@ -13,10 +14,20 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
   }
 
   protected get scope(): TScopeModule {
-    return this.bean.scope(this.moduleBelong as never) as TScopeModule;
+    return this.getScope() as TScopeModule;
   }
 
-  protected get $scope(): BeanScopeContainer {
-    return this.bean._getBean(BeanScopeContainer);
+  protected get $scope(): IBeanScopeContainer {
+    return this.bean._getBean(BeanScopeContainer) as unknown as IBeanScopeContainer;
+  }
+
+  protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
+  // protected getScope<T>(moduleScope: string): T;
+  protected getScope(): TScopeModule;
+  protected getScope(moduleScope?: string) {
+    if (!moduleScope) {
+      return this.bean.scope(this.moduleBelong as never) as TScopeModule;
+    }
+    return this.bean.scope(moduleScope as never);
   }
 }

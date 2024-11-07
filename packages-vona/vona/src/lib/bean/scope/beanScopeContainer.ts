@@ -1,6 +1,8 @@
 import { splitWords } from '@cabloy/word-utils';
 import { BeanSimple } from '../beanSimple.js';
 
+export interface IBeanScopeContainer {}
+
 export class BeanScopeContainer extends BeanSimple {
   private __instances: Record<string, any> = {};
 
