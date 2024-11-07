@@ -37,7 +37,7 @@ export class BeanContainer {
 
   /** get specific module's scope */
   scope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
-  scope<T>(moduleScope: string): T;
+  // scope<T>(moduleScope: string): T;
   scope<T>(moduleScope: string): T {
     return this._getBean(`${moduleScope}.scope.module` as any);
   }

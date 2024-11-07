@@ -1,4 +1,4 @@
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { relativeNameToCapitalize } from 'vona';
 
 export interface GenerateScopeOptions {
   config: string;
@@ -11,9 +11,7 @@ export interface GenerateScopeOptions {
 export async function generateScope(moduleName: string, relativeNameCapitalize: string, options: GenerateScopeOptions) {
   // scopeVariable
   const parts = moduleName.split('-');
-  let scopeVariable =
-    parts[0] === 'a' ? toUpperCaseFirstChar(parts[1]) : parts.map(item => toUpperCaseFirstChar(item)).join('');
-  scopeVariable = '$scope' + scopeVariable;
+  const scopeVariable = parts[0] === 'a' ? parts[1] : relativeNameToCapitalize(moduleName, false);
   // combine
   const content = `/** scope: begin */
 import { BeanScopeBase, Scope, ${options.locales ? 'TypeLocaleBase,' : ''} TypeModuleResource } from 'vona';
@@ -37,7 +35,7 @@ declare module 'vona' {
     '${moduleName}': ScopeModule${relativeNameCapitalize};
   }
 
-  export interface BeanBase {
+  export interface BeanScopeContainer {
     ${scopeVariable}: ScopeModule${relativeNameCapitalize};
   }
   
