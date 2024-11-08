@@ -182,6 +182,8 @@ export default function (appInfo: VonaAppInfo) {
     maxAge: '',
     credentials: true,
     keepHeadersOnError: false,
+    secureContext: false,
+    privateNetworkAccess: false,
   };
 
   // queue

@@ -1,4 +1,5 @@
 export * from './broadcast.js';
+export * from './middleware.js';
 export * from './module.js';
 export * from './monkey.js';
 export * from './queue.js';

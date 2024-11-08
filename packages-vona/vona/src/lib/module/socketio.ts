@@ -26,7 +26,7 @@ export class SocketioReady extends BeanSimple {
         method: 'SOCKETIO',
         url: '/api/a/base/',
       });
-      const ctx = app.createAnonymousContext(reqNew);
+      const ctx = app.createAnonymousContext(reqNew) as any;
       ctx.bean.instance
         .checkAppReadyInstance({ startup: true })
         .then(res => {

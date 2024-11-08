@@ -20,11 +20,6 @@ const middlewares = {
     global: true,
     dependencies: 'instance',
   } as IModuleConfigMiddleware,
-  cors: {
-    bean: 'cors',
-    global: true,
-    dependencies: 'instance',
-  } as IModuleConfigMiddleware,
   authOpen: {
     bean: 'authOpen',
     global: true,
@@ -33,7 +28,7 @@ const middlewares = {
   auth: {
     bean: 'auth',
     global: true,
-    dependencies: 'instance',
+    // dependencies: 'instance',
     ignore: /\/version\/(update|init|test)/,
   } as IModuleConfigMiddleware,
   right: {
