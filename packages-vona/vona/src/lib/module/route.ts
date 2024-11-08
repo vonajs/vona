@@ -5,13 +5,17 @@ import loadMiddlewares from './middleware.js';
 import { VonaApplication, VonaContext, Cast, IModule } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
+import { appResource } from '../core/resource.js';
+import { Constructable } from '../decorator/type/constructable.js';
+import { IDecoratorControllerOptions } from '../decorator/index.js';
+import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
 export class AppRouter extends BeanSimple {
-  register(info, route: IModuleRoute) {
+  register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
     // info
     if (typeof info === 'string') {
-      info = ModuleInfo.parseInfo(info);
+      info = ModuleInfo.parseInfo(info)!;
     }
     // app
     const app = this.app;
@@ -92,6 +96,105 @@ export class AppRouter extends BeanSimple {
     return app.router.stack.find(layer => layer.path === path);
   }
 
+  registerController(info: ModuleInfo.IModuleInfo | string, controller: Constructable) {
+    // info
+    if (typeof info === 'string') {
+      info = ModuleInfo.parseInfo(info)!;
+    }
+    // controller options
+    const beanOptions = appResource.getBean(controller);
+    if (!beanOptions) return;
+    const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
+    const controllerPath = controllerOptions.path;
+    // descs
+    const descs = Object.getOwnPropertyDescriptors(controller.prototype);
+    for (const actionKey in descs) {
+      const desc = descs[actionKey];
+      if (['constructor'].includes(actionKey)) continue;
+      if (!desc.value || typeof desc.value !== 'function') continue;
+      this._registerControllerAction(info, controller, controllerPath, actionKey, desc);
+    }
+  }
+
+  _registerControllerAction(
+    _info: ModuleInfo.IModuleInfo,
+    _controller: Constructable,
+    _controllerPath: string | undefined,
+    _actionKey: string,
+    desc: PropertyDescriptor,
+  ) {
+    // app
+    //const app = this.app;
+
+    // actionPath/actionMethod
+    if (!Reflect.hasOwnMetadata(PATH_METADATA, desc.value)) return;
+    const actionPath = Reflect.getMetadata(PATH_METADATA, desc.value);
+    const actionMethod = Reflect.getMetadata(METHOD_METADATA, desc.value);
+    console.log(actionPath, actionMethod);
+
+    // const routePath = typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path;
+
+    // // route
+    // const _route = {
+    //   pid: info.pid,
+    //   module: info.name,
+    //   controller: route.controller,
+    //   controllerBeanFullName: '',
+    //   action: '',
+    //   route,
+    //   routeName: route.name,
+    //   routeMethod: route.method,
+    //   routePath,
+    // };
+    // // constroller
+    // if (route.controller) {
+    //   if (is.function(route.controller)) {
+    //     throw new Error(`Controller should be bean: ${info.relativeName}.${Cast(route.controller)(app).name}`);
+    //   }
+    //   let controllerBeanFullName;
+    //   if (typeof route.controller === 'string') {
+    //     controllerBeanFullName = `${info.relativeName}.controller.${route.controller}`;
+    //   } else {
+    //     controllerBeanFullName = `${route.controller.module || info.relativeName}.controller.${route.controller.name}`;
+    //   }
+    //   _route.controllerBeanFullName = controllerBeanFullName;
+    // }
+    // // action
+    // let action = route.action;
+    // if (!action && typeof route.path === 'string') {
+    //   action = route.path.substring(route.path.lastIndexOf('/') + 1);
+    // }
+    // _route.action = action || '';
+
+    // // middlewaresLocal: route
+    // const middlewaresLocal: any[] = [];
+    // if (route.middlewares) {
+    //   let middlewares = route.middlewares;
+    //   if (typeof middlewares === 'string') middlewares = middlewares.split(',');
+    //   middlewares.forEach(key => {
+    //     if (is.string(key)) {
+    //       const item = app.meta.middlewaresNormal[key];
+    //       if (item) {
+    //         middlewaresLocal.push(wrapMiddleware(item));
+    //       } else {
+    //         middlewaresLocal.push(wrapMiddlewareApp(key, route, app));
+    //       }
+    //     } else {
+    //       middlewaresLocal.push(key);
+    //     }
+    //   });
+    // }
+
+    // // controller
+    // if (route.controller) {
+    //   // middleware controller
+    //   middlewaresLocal.push(methodToMiddleware(_route.controllerBeanFullName, _route));
+    // }
+
+    // // register
+    // this._registerInner(_route, middlewaresLocal);
+  }
+
   _registerInner(route, middlewaresLocal) {
     // app
     const app = this.app;
@@ -169,7 +272,11 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       }
       // controllers by decorator
       const controllers = module.resource.controllers;
-      console.log(controllers?.length);
+      if (controllers) {
+        for (const key in controllers) {
+          app.meta.router.registerController(module.info, controllers[key]);
+        }
+      }
     }
   }
 }
