@@ -4,9 +4,6 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/a-home"
-    },
-    {
       "path": "modules/home-base"
     },
     {
