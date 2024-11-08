@@ -2,6 +2,8 @@ import { VonaContext } from '../context/index.js';
 
 export type Next = () => Promise<any>;
 
+export interface IMiddlewareRecord {}
+
 export interface IMiddlewareBase {
   enable?: boolean;
   match?: ((ctx: VonaContext) => boolean) | RegExp | string;

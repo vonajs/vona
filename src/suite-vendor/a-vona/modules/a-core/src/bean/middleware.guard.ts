@@ -1,7 +1,7 @@
 import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
 
 export interface IMiddlewareOptionsGuard extends IDecoratorMiddlewareOptions {
-  test: boolean;
+  test: string;
 }
 
 @Middleware({} as IMiddlewareOptionsGuard)

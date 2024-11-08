@@ -3,3 +3,4 @@ export * from './config.js';
 export * from './cors.js';
 export * from './development.js';
 export * from './locale.js';
+export * from './metadata.js';
