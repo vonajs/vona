@@ -9,6 +9,7 @@ import createService from './command/create.service.js';
 import createController from './command/create.controller.js';
 import initMonkey from './command/init.monkey.js';
 import initMain from './command/init.main.js';
+import initStatic from './command/init.static.js';
 import toolsDeps from './command/tools.deps.js';
 import toolsMetadata from './command/tools.metadata.js';
 import toolsBuild from './command/tools.build.js';
@@ -30,6 +31,7 @@ export const commands = {
   init: {
     monkey: initMonkey,
     main: initMain,
+    static: initStatic,
   },
   refactor: {},
   tools: {

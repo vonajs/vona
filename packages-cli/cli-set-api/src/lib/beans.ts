@@ -9,6 +9,7 @@ import { CliCreateService } from './bean/cli.create.service.js';
 import { CliCreateController } from './bean/cli.create.controller.js';
 import { CliInitMonkey } from './bean/cli.init.monkey.js';
 import { CliInitMain } from './bean/cli.init.main.js';
+import { CliInitStatic } from './bean/cli.init.static.js';
 import { CliToolsDeps } from './bean/cli.tools.deps.js';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.js';
 import { CliToolsBuild } from './bean/cli.tools.build.js';
@@ -25,6 +26,7 @@ export const beans = {
   'create.controller': CliCreateController,
   'init.monkey': CliInitMonkey,
   'init.main': CliInitMain,
+  'init.static': CliInitStatic,
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.build': CliToolsBuild,
