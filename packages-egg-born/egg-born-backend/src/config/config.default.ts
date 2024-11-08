@@ -172,6 +172,17 @@ export default function (appInfo: VonaAppInfo) {
   config.instance = {
     ignore: /\/api\/static\//,
   };
+  // cors middleware
+  config.cors = {
+    ignore: /\/api\/static\//,
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    exposeHeaders: '',
+    allowHeaders: '',
+    maxAge: '',
+    credentials: true,
+    keepHeadersOnError: false,
+  };
 
   // queue
   config.queue = {

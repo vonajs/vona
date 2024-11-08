@@ -26,9 +26,9 @@ export default class AppBootHook {
     // jwt
     let index = app.config.coreMiddleware.indexOf('session');
     if (index === -1) {
-      app.config.coreMiddleware.push('appReady', 'instance', 'jwt');
+      app.config.coreMiddleware.push('appReady', 'instance', 'cors', 'jwt');
     } else {
-      app.config.coreMiddleware.splice(index, 0, 'appReady', 'instance', 'jwt');
+      app.config.coreMiddleware.splice(index, 0, 'appReady', 'instance', 'cors', 'jwt');
     }
     // siteFile
     index = app.config.coreMiddleware.indexOf('siteFile');

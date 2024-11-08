@@ -151,9 +151,17 @@ export class AppUtil extends BeanSimple {
     return whiteListCors;
   }
 
-  isSafeDomain(ctx, origin) {
+  isSafeDomain(ctx: VonaContext, origin) {
     // origin is {protocol}{hostname}{port}...
     if (!origin || origin === 'null' || origin === null) return true;
+
+    // whiteList
+    let whiteListCors = ctx.app.config.cors.origin;
+    if (whiteListCors === '*') return true;
+    if (!whiteListCors) return false;
+    if (typeof whiteListCors === 'string') {
+      whiteListCors = whiteListCors.split(',');
+    }
 
     let parsedUrl;
     try {
@@ -162,8 +170,6 @@ export class AppUtil extends BeanSimple {
       return false;
     }
 
-    // whiteList
-    const whiteListCors = this.getWhiteListCors(ctx);
     if (
       security.utils.isSafeDomain(parsedUrl.hostname, whiteListCors) ||
       security.utils.isSafeDomain(origin, whiteListCors)

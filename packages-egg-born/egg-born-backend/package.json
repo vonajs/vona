@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/zhennann/egg-born-backend#readme",
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "@types/uuid": "^9.0.8",
     "egg": "^3.17.5",
     "egg-onerror": "^2.1.1",
@@ -36,6 +37,9 @@
     "utility": "^1.17.0",
     "uuid": "^9.0.1",
     "vona": "^5.0.7"
+  },
+  "devDependencies": {
+    "@types/koa-cors": "^0.0.6"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

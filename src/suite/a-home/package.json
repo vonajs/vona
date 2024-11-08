@@ -9,7 +9,6 @@
   "description": "",
   "author": "zhennann",
   "dependencies": {
-    "vona-module-a-home": "workspace:^",
     "vona-module-home-base": "workspace:^",
     "vona-module-home-index": "workspace:^"
   }

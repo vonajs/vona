@@ -146,9 +146,6 @@ importers:
       vona-module-a-flowtask:
         specifier: workspace:^
         version: link:src/suite/a-flow/modules/a-flowtask
-      vona-module-a-home:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/a-home
       vona-module-a-icon:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-icon
@@ -401,6 +398,12 @@ importers:
       vona-module-diancai-table:
         specifier: workspace:^
         version: link:src/suite/bz-diancai/modules/diancai-table
+      vona-module-home-base:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-base
+      vona-module-home-index:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-index
       vona-module-study-admin:
         specifier: workspace:^
         version: link:src/suite/bz-study/modules/study-admin
@@ -724,6 +727,9 @@ importers:
 
   packages-egg-born/egg-born-backend:
     dependencies:
+      '@koa/cors':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@types/uuid':
         specifier: ^9.0.8
         version: 9.0.8
@@ -751,6 +757,10 @@ importers:
       vona:
         specifier: ^5.0.7
         version: link:../../packages-vona/vona
+    devDependencies:
+      '@types/koa-cors':
+        specifier: ^0.0.6
+        version: 0.0.6
 
   packages-egg-born/egg-born-bin:
     dependencies:
@@ -2056,11 +2066,16 @@ importers:
 
   src/suite/a-home:
     dependencies:
-      vona-module-a-home:
+      vona-module-home-base:
         specifier: workspace:^
-        version: link:modules/a-home
+        version: link:modules/home-base
+      vona-module-home-index:
+        specifier: workspace:^
+        version: link:modules/home-index
 
-  src/suite/a-home/modules/a-home: {}
+  src/suite/a-home/modules/home-base: {}
+
+  src/suite/a-home/modules/home-index: {}
 
   src/suite/a-paypal:
     dependencies:
@@ -3574,24 +3589,28 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.8.0':
     resolution: {integrity: sha512-2CdPTEKxx2hJIj/B0fn8L8k2coo/FDS95smzXyi2bov5FcrP6Ohboq8roFBYgj38fkHusXjY8qt+cCH7yXWAdg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.8.0':
     resolution: {integrity: sha512-14StQBifCs/AMsySdU95OmwNJr9LOVqo6rcTFt2b7XaWpe/AyeuMJFxcndLgUewksJHpfepzCTwNdbcYmuNo6A==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.8.0':
     resolution: {integrity: sha512-qemJnAQlYqKCfWNqVv5SG8uGvw8JotwU86cuFUkq35oTB+dsSFM3b83+B1giGTKKFOh2nfWT7bvPXTKk+aUjew==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.8.0':
     resolution: {integrity: sha512-fXt5vZbnrVdXZzGj2qRnZtY3uh+NtLCaFjS2uD9w8ssdbjhbDZYlJCj2JINOjv35ttEfAD2goiYmVa5P/Ypl+g==}
@@ -3721,6 +3740,9 @@ packages:
 
   '@types/koa-compose@3.2.8':
     resolution: {integrity: sha512-4Olc63RY+MKvxMwVknCUDhRQX1pFQoBZ/lXcRLP69PQkEpze/0cr8LNqJQe5NFb/b19DWi2a5bTi2VAlQzhJuA==}
+
+  '@types/koa-cors@0.0.6':
+    resolution: {integrity: sha512-JGT9/jtFahFfmZ9YmzM/TTpkc+Bw7ZLQUCvn2sFyZXi7DI4nd4noAmyha6i2nThHvVVBfh+V9OhVwPTpVAls6A==}
 
   '@types/koa-router@7.4.8':
     resolution: {integrity: sha512-SkWlv4F9f+l3WqYNQHnWjYnyTxYthqt8W9az2RTdQW7Ay8bc00iRZcrb8MC75iEfPqnGcg2csEl8tTG1NQPD4A==}
@@ -11439,6 +11461,10 @@ snapshots:
   '@types/keygrip@1.0.6': {}
 
   '@types/koa-compose@3.2.8':
+    dependencies:
+      '@types/koa': 2.15.0
+
+  '@types/koa-cors@0.0.6':
     dependencies:
       '@types/koa': 2.15.0
 
