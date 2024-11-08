@@ -78,7 +78,7 @@ export class AppRouter extends BeanSimple {
     // controller
     if (route.controller) {
       // middleware controller
-      middlewaresLocal.push(methodToMiddleware(_route.controllerBeanFullName, _route));
+      middlewaresLocal.push(controllerActionToMiddleware(_route.controllerBeanFullName, _route));
     }
 
     // register
@@ -168,7 +168,7 @@ export class AppRouter extends BeanSimple {
     const middlewaresLocal: any[] = [];
 
     // middleware controller
-    middlewaresLocal.push(methodToMiddleware(_route.controllerBeanFullName, _route));
+    middlewaresLocal.push(controllerActionToMiddleware(_route.controllerBeanFullName, _route));
 
     // register
     this._registerInner(_route, middlewaresLocal);
@@ -310,8 +310,8 @@ function middlewareDeps(ctx, options) {
   return deps.every(key => ctx[MWSTATUS][key] !== false);
 }
 
-function methodToMiddleware(controllerBeanFullName, _route) {
-  return function classControllerMiddleware(this: VonaContext, ...args) {
+function controllerActionToMiddleware(controllerBeanFullName, _route) {
+  return async function classControllerMiddleware(this: VonaContext, ...args) {
     const controller = this.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);
@@ -319,6 +319,9 @@ function methodToMiddleware(controllerBeanFullName, _route) {
     if (!controller[_route.action]) {
       throw new Error(`controller action not found: ${controllerBeanFullName}.${_route.action}`);
     }
-    return controller[_route.action](...args);
+    const res = await controller[_route.action](...args);
+    if (this.response.body === undefined && res !== undefined) {
+      this.success(res);
+    }
   };
 }

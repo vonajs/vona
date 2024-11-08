@@ -30,8 +30,8 @@ type TypeErrorMethodParseCode = {
 type TypeErrorMethods = { success: TypeErrorMethodSuccess } & { throw: TypeErrorMethodThrow } & {
   fail: TypeErrorMethodFail;
 } & {
-    [property in TypeErrorMethodNames]: TypeErrorMethodCommon;
-  } & { parseCode: TypeErrorMethodParseCode };
+  [property in TypeErrorMethodNames]: TypeErrorMethodCommon;
+} & { parseCode: TypeErrorMethodParseCode };
 
 export interface ContextError extends TypeErrorMethods {
   createError: (data: object | Error) => Error;
