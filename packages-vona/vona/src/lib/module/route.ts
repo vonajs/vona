@@ -136,13 +136,20 @@ export class AppRouter extends BeanSimple {
     // routePath
     let routePath: RegExp | string;
     if (typeof actionPath !== 'string') {
+      // regexp
       routePath = actionPath;
     } else if (actionPath.startsWith('/')) {
+      // absolute
       routePath = app.meta.util.combineFetchPath(info, actionPath, true);
     } else {
-      routePath = app.meta.util.combineFetchPath(info, controllerPath, true);
-      if (actionPath) {
-        routePath = `${routePath}/${actionPath}`;
+      // relative
+      if (!controllerPath) {
+        routePath = app.meta.util.combineFetchPath(info, actionPath, true);
+      } else {
+        routePath = app.meta.util.combineFetchPath(info, controllerPath, true);
+        if (actionPath) {
+          routePath = `${routePath}/${actionPath}`;
+        }
       }
     }
 
