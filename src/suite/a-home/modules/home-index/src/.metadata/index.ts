@@ -1,9 +1,5 @@
 /** controllers: begin */
 export * from '../controller/index.js';
-import { ControllerIndex } from '../controller/index.js';
-export const controllers = {
-  index: ControllerIndex,
-};
 /** controllers: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';

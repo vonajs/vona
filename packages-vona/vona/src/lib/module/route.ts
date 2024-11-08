@@ -257,10 +257,10 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
         }
       }
       // controllers by decorator
-      const controllers = module.resource.controllers;
+      const controllers = appResource.scenes['controller'][key];
       if (controllers) {
         for (const key in controllers) {
-          app.meta.router.registerController(module.info, controllers[key]);
+          app.meta.router.registerController(module.info, controllers[key].beanClass);
         }
       }
     }
