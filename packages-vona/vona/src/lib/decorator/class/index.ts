@@ -4,6 +4,7 @@ export * from './bean.js';
 export * from './controller.js';
 export * from './dto.js';
 export * from './entity.js';
+export * from './middleware.js';
 export * from './model.js';
 export * from './service.js';
 export * from './virtual.js';
