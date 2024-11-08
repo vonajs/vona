@@ -8,6 +8,10 @@ const __decorators = {
   virtual: 'Virtual',
   aop: 'Aop',
 };
+const __boilerplates = {
+  middleware: 'middleware',
+};
+
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     module: string;
@@ -61,12 +65,14 @@ export class CliCreateBean extends BeanCliBase {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }
     await this.helper.ensureDir(beanDir);
+    // boilerplate name
+    const boilerplateName = __boilerplates[sceneName] || 'bean';
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
       setName: __ThisSetName__,
       snippetsPath: null,
-      boilerplatePath: 'create/bean/boilerplate',
+      boilerplatePath: `create/${boilerplateName}/boilerplate`,
     });
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });

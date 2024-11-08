@@ -1,0 +1,11 @@
+import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+
+export interface IMiddlewareOptions<%=argv.beanNameCapitalize%> extends IDecoratorMiddlewareOptions {}
+
+@Middleware({} as IMiddlewareOptions<%=argv.beanNameCapitalize%>)
+export class Middleware<%=argv.beanNameCapitalize%> extends BeanBase implements IMiddlewareExecute {
+  async execute(_options: IMiddlewareOptions<%=argv.beanNameCapitalize%>, next: Next) {
+    // next
+    return next();
+  }
+}
