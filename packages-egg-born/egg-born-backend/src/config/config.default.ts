@@ -159,7 +159,7 @@ export default function (appInfo: VonaAppInfo) {
     prefix: '/api/static/',
     preload: false,
     alias: {
-      '/favicon.ico': '/api/static/a/base/img/favicon.ico',
+      '/favicon.ico': '/api/static/home/index/img/vona.png',
     },
     getFullPath,
   };
