@@ -27,7 +27,7 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
-  combineFetchPath(moduleName: IModuleInfo | string, path: string) {
+  combineFetchPath(moduleName: IModuleInfo | string, path: string | undefined, simplify: boolean) {
     if (!path) path = '';
     // ignore globalPrefix
     if (path.startsWith('//')) return path.substring(1);
@@ -36,7 +36,13 @@ export class AppUtil extends BeanSimple {
     // globalPrefix + module path + arg
     const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error('invalid url');
-    return `${this.app.config.globalPrefix}/${moduleInfo.url}/${path}`;
+    const parts = moduleInfo.relativeName.split('-');
+    // path
+    let res = this.app.config.globalPrefix;
+    if (!simplify || parts[0] !== 'a') res = `${res}/${parts[0]}`;
+    if (!simplify || !path.startsWith(parts[1])) res = `${res}/${parts[1]}`;
+    if (path) res = `${res}/${path}`;
+    return res;
   }
 
   combineApiPath(moduleName, arg) {
@@ -181,7 +187,7 @@ export class AppUtil extends BeanSimple {
 
   async createAnonymousContext({ locale, subdomain, module, instance }): Promise<VonaContext> {
     // url
-    const url = module ? this.combineFetchPath(module, '') : '/api/a/base/';
+    const url = module ? this.combineFetchPath(module, '', false) : '/api/a/base/';
     // ctx
     const ctx = this.app.createAnonymousContext({
       method: 'post',

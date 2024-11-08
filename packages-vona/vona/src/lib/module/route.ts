@@ -21,7 +21,8 @@ export class AppRouter extends BeanSimple {
     const app = this.app;
 
     // path
-    const routePath = typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path;
+    const routePath =
+      typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path, false) : route.path;
 
     // route
     const _route = {
@@ -90,10 +91,10 @@ export class AppRouter extends BeanSimple {
     if (index > -1) app.router.stack.splice(index, 1);
   }
 
-  findByPath(moduleName, arg): any {
+  findByPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
     const app = this.app;
-    const path = app.meta.util.combineFetchPath(moduleName, arg);
-    return app.router.stack.find(layer => layer.path === path);
+    const _path = app.meta.util.combineFetchPath(moduleName, path, simplify);
+    return app.router.stack.find(layer => layer.path === _path);
   }
 
   registerController(info: ModuleInfo.IModuleInfo | string, controller: Constructable) {
@@ -104,6 +105,7 @@ export class AppRouter extends BeanSimple {
     // controller options
     const beanOptions = appResource.getBean(controller);
     if (!beanOptions) return;
+    const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
     // descs
@@ -112,87 +114,64 @@ export class AppRouter extends BeanSimple {
       const desc = descs[actionKey];
       if (['constructor'].includes(actionKey)) continue;
       if (!desc.value || typeof desc.value !== 'function') continue;
-      this._registerControllerAction(info, controller, controllerPath, actionKey, desc);
+      this._registerControllerAction(info, controller, controllerBeanFullName, controllerPath, actionKey, desc);
     }
   }
 
   _registerControllerAction(
-    _info: ModuleInfo.IModuleInfo,
-    _controller: Constructable,
-    _controllerPath: string | undefined,
-    _actionKey: string,
+    info: ModuleInfo.IModuleInfo,
+    controller: Constructable,
+    controllerBeanFullName: string,
+    controllerPath: string | undefined,
+    actionKey: string,
     desc: PropertyDescriptor,
   ) {
     // app
-    //const app = this.app;
+    const app = this.app;
 
     // actionPath/actionMethod
     if (!Reflect.hasOwnMetadata(PATH_METADATA, desc.value)) return;
-    const actionPath = Reflect.getMetadata(PATH_METADATA, desc.value);
-    const actionMethod = Reflect.getMetadata(METHOD_METADATA, desc.value);
-    console.log(actionPath, actionMethod);
+    const actionPath: RegExp | string = Reflect.getMetadata(PATH_METADATA, desc.value) || '';
+    const actionMethod: string = Reflect.getMetadata(METHOD_METADATA, desc.value);
+    // routePath
+    let routePath: RegExp | string;
+    if (typeof actionPath !== 'string') {
+      routePath = actionPath;
+    } else if (actionPath.startsWith('/')) {
+      routePath = app.meta.util.combineFetchPath(info, actionPath, true);
+    } else {
+      routePath = app.meta.util.combineFetchPath(info, controllerPath, true);
+      if (actionPath) {
+        routePath = `${routePath}/${actionPath}`;
+      }
+    }
 
-    // const routePath = typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path) : route.path;
+    // route
+    const route = {
+      meta: {},
+    };
 
-    // // route
-    // const _route = {
-    //   pid: info.pid,
-    //   module: info.name,
-    //   controller: route.controller,
-    //   controllerBeanFullName: '',
-    //   action: '',
-    //   route,
-    //   routeName: route.name,
-    //   routeMethod: route.method,
-    //   routePath,
-    // };
-    // // constroller
-    // if (route.controller) {
-    //   if (is.function(route.controller)) {
-    //     throw new Error(`Controller should be bean: ${info.relativeName}.${Cast(route.controller)(app).name}`);
-    //   }
-    //   let controllerBeanFullName;
-    //   if (typeof route.controller === 'string') {
-    //     controllerBeanFullName = `${info.relativeName}.controller.${route.controller}`;
-    //   } else {
-    //     controllerBeanFullName = `${route.controller.module || info.relativeName}.controller.${route.controller.name}`;
-    //   }
-    //   _route.controllerBeanFullName = controllerBeanFullName;
-    // }
-    // // action
-    // let action = route.action;
-    // if (!action && typeof route.path === 'string') {
-    //   action = route.path.substring(route.path.lastIndexOf('/') + 1);
-    // }
-    // _route.action = action || '';
+    // route
+    const _route = {
+      pid: info.pid,
+      module: info.name,
+      controller,
+      controllerBeanFullName,
+      action: actionKey,
+      route: route,
+      routeName: undefined,
+      routeMethod: actionMethod,
+      routePath,
+    };
 
-    // // middlewaresLocal: route
-    // const middlewaresLocal: any[] = [];
-    // if (route.middlewares) {
-    //   let middlewares = route.middlewares;
-    //   if (typeof middlewares === 'string') middlewares = middlewares.split(',');
-    //   middlewares.forEach(key => {
-    //     if (is.string(key)) {
-    //       const item = app.meta.middlewaresNormal[key];
-    //       if (item) {
-    //         middlewaresLocal.push(wrapMiddleware(item));
-    //       } else {
-    //         middlewaresLocal.push(wrapMiddlewareApp(key, route, app));
-    //       }
-    //     } else {
-    //       middlewaresLocal.push(key);
-    //     }
-    //   });
-    // }
+    // middlewaresLocal: route
+    const middlewaresLocal: any[] = [];
 
-    // // controller
-    // if (route.controller) {
-    //   // middleware controller
-    //   middlewaresLocal.push(methodToMiddleware(_route.controllerBeanFullName, _route));
-    // }
+    // middleware controller
+    middlewaresLocal.push(methodToMiddleware(_route.controllerBeanFullName, _route));
 
-    // // register
-    // this._registerInner(_route, middlewaresLocal);
+    // register
+    this._registerInner(_route, middlewaresLocal);
   }
 
   _registerInner(route, middlewaresLocal) {

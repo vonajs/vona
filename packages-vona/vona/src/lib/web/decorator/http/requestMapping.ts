@@ -2,7 +2,7 @@ import { METHOD_METADATA, PATH_METADATA } from '../../constants.js';
 import { RequestMethod } from '../../enum/requestMethod.js';
 
 export interface RequestMappingMetadata {
-  path?: string;
+  path?: RegExp | string;
   method?: RequestMethod;
 }
 
@@ -25,7 +25,7 @@ export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadat
 
 const createMappingDecorator =
   (method: RequestMethod) =>
-  (path?: string): MethodDecorator => {
+  (path?: RegExp | string): MethodDecorator => {
     return RequestMapping({
       [PATH_METADATA]: path,
       [METHOD_METADATA]: method,
