@@ -53,7 +53,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
    */
   beanFullName: string;
   module: string;
-  scene?: TypeDecoratorBeanOptionsSceneBase;
+  scene: TypeDecoratorBeanOptionsSceneBase;
   name: string;
   beanClass: Constructable<T>;
   containerScope?: ContainerScope;

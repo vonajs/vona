@@ -17,6 +17,7 @@ export class AppResource extends BeanSimple {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   aops: Record<string, IDecoratorBeanOptionsBase> = {};
   aopsArray: IDecoratorBeanOptionsBase[] = [];
+  scenes: Record<string, Record<string, IDecoratorBeanOptionsBase>> = {};
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
     const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
@@ -83,6 +84,8 @@ export class AppResource extends BeanSimple {
     beanOptions.__aopChainsKey__ = {};
     // record
     this.beans[beanOptions.beanFullName] = beanOptions;
+    if (!this.scenes[beanOptions.scene]) this.scenes[beanOptions.scene] = {};
+    this.scenes[beanOptions.scene][beanOptions.beanFullName] = beanOptions;
     // set metadata
     appMetadata.defineMetadata(DecoratorBeanFullName, beanFullName, beanOptions.beanClass);
     // ok
