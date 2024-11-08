@@ -16,6 +16,14 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
     return this[SymbolText];
   }
 
+  protected get $appUtil() {
+    return this.app.meta.util;
+  }
+
+  protected get $ctxUtil() {
+    return this.ctx.meta.util;
+  }
+
   protected get scope(): TScopeModule {
     return this.getScope() as TScopeModule;
   }
