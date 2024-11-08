@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "modules/a-home"
+    },
+    {
+      "path": "modules/home-base"
+    },
+    {
+      "path": "modules/home-index"
     }
   ]
 }
