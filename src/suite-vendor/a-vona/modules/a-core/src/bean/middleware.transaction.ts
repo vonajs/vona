@@ -5,7 +5,23 @@ export interface IMiddlewareOptionsTransaction extends IDecoratorMiddlewareOptio
 @Middleware({} as IMiddlewareOptionsTransaction)
 export class MiddlewareTransaction extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsTransaction, next: Next) {
-    // next
-    return next();
+    return await this.ctx.transaction.begin(async () => {
+      // next
+      const res = await next();
+      checkIfSuccess(this.ctx);
+      return res;
+    });
+  }
+}
+
+function checkIfSuccess(ctx) {
+  if (typeof ctx.response.body === 'object' && ctx.response.body && ctx.response.body.code !== undefined) {
+    if (ctx.response.body.code !== 0) {
+      throw ctx.app.meta.util.createError(ctx.response.body);
+    }
+  } else {
+    if (ctx.response.status !== 200) {
+      ctx.throw(ctx.response.status);
+    }
   }
 }
