@@ -18,6 +18,6 @@ export interface IMiddlewareExecute {
 
 export interface IDecoratorMiddlewareOptions extends IMiddlewareBase {
   global?: boolean;
-  dependencies?: string[] | string;
-  dependents?: string[] | string;
+  dependencies?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
+  dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
 }
