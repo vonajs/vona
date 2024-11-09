@@ -1,16 +1,13 @@
-/** beans: begin */
+/** middlewares: begin */
 export * from '../bean/middleware.guard.js';
-
 import { IMiddlewareOptionsGuard } from '../bean/middleware.guard.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {}
-
   export interface IMiddlewareRecord {
     'a-core:guard': IMiddlewareOptionsGuard;
   }
 }
-/** beans: end */
+/** middlewares: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 

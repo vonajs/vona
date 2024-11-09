@@ -1,45 +1,43 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateMiddlewares(moduleName: string, modulePath: string) {
-  const pattern = `${modulePath}/src/service/*.ts`;
+  const pattern = `${modulePath}/src/bean/middleware.*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
   const contentImports: string[] = [];
   const contentRecords: string[] = [];
-  const contentRecords2: string[] = [];
   for (const file of files) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
-    if (parts.length < 1) continue;
+    if (parts.length < 2) continue;
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
-    const className = 'Service' + parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
-    const beanFullName = `${moduleName}.service.${parts.join('.')}`;
-    contentExports.push(`export * from '../service/${fileNameJS}';`);
-    contentImports.push(`import { ${className} } from '../service/${fileNameJS}';`);
-    if (parts.length === 1 && !isIgnore) {
-      contentRecords.push(`'${parts[0]}': ${className};`);
+    // const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
+    const beanName = parts[parts.length - 1];
+    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
+    const beanNameFull = `${moduleName}:${beanName}`;
+    contentExports.push(`export * from '../bean/${fileNameJS}';`);
+    contentImports.push(`import { IMiddlewareOptions${beanNameCapitalize} } from '../bean/${fileNameJS}';`);
+    if (!isIgnore) {
+      contentRecords.push(`'${beanNameFull}': IMiddlewareOptions${beanNameCapitalize};`);
     }
-    contentRecords2.push(`'${beanFullName}': ${className};`);
   }
   // combine
-  const content = `/** services: begin */
+  const content = `/** middlewares: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-export interface IModuleService {
-  ${contentRecords.join('\n')}
-}
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    ${contentRecords2.join('\n')}
+  export interface IMiddlewareRecord {
+    ${contentRecords.join('\n')}
   }
 }
-/** services: end */
+/** middlewares: end */
 `;
   return content;
 }
