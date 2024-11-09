@@ -1,10 +1,11 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { checkIgnoreOfParts } from './utils.js';
 
 export async function generateBeans(moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/bean/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  const files = await eggBornUtils.tools.globbyAsync(pattern, { ignore: ['**/middleware.*.ts'] });
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
@@ -61,15 +62,6 @@ declare module 'vona' {
 /** beans: end */
 `;
   return content;
-}
-
-function checkIgnoreOfParts(parts: string[]) {
-  const indexLast = parts.length - 1;
-  if (parts[indexLast].endsWith('_')) {
-    parts[indexLast] = parts[indexLast].substring(0, parts[indexLast].length - 1);
-    return true;
-  }
-  return false;
 }
 
 // export interface IBeanRecordGeneral {

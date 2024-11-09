@@ -2,7 +2,7 @@ import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 
-export async function generateServices(moduleName: string, modulePath: string) {
+export async function generateMiddlewares(moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/service/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   if (files.length === 0) return '';
