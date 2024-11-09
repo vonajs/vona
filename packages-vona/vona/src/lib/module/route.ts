@@ -204,16 +204,8 @@ export class AppRouter extends BeanSimple {
       if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
     });
     for (const middlewareName of middlewaresLocalAll) {
-      const parts = middlewareName.split(':');
-      const beanFullName = `${parts[0]}.middleware.${parts[1]}`;
-      const beanOptions = appResource.scenes['middleware'][parts[0]]?.[beanFullName];
-      if (!beanOptions) throw new Error(`middleware bean not found: ${beanFullName}`);
-      const item = {
-        module: parts[0],
-        name: middlewareName,
-        options: beanOptions.options,
-        beanFullName,
-      };
+      const item = app.meta.middlewaresNormal[middlewareName];
+      if (!item) throw new Error(`middleware not found: ${middlewareName}`);
       middlewaresLocal.push(wrapMiddleware(item));
     }
 
