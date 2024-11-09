@@ -7,8 +7,10 @@ import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { Constructable } from '../decorator/type/constructable.js';
-import { IDecoratorControllerOptions } from '../decorator/index.js';
+import { IDecoratorControllerOptions, SymbolUseMiddlewareOptions } from '../decorator/index.js';
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
+import { appMetadata } from '../core/metadata.js';
+import { extend } from '@cabloy/extend';
 const MWSTATUS = Symbol('Context#__wmstatus');
 
 export class AppRouter extends BeanSimple {
@@ -108,13 +110,22 @@ export class AppRouter extends BeanSimple {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
+    const controllerMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, controller);
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
       const desc = descs[actionKey];
       if (['constructor'].includes(actionKey)) continue;
       if (!desc.value || typeof desc.value !== 'function') continue;
-      this._registerControllerAction(info, controller, controllerBeanFullName, controllerPath, actionKey, desc);
+      this._registerControllerAction(
+        info,
+        controller,
+        controllerBeanFullName,
+        controllerPath,
+        controllerMiddlewaresOptions,
+        actionKey,
+        desc,
+      );
     }
   }
 
@@ -123,6 +134,7 @@ export class AppRouter extends BeanSimple {
     controller: Constructable,
     controllerBeanFullName: string,
     controllerPath: string | undefined,
+    controllerMiddlewaresOptions: object,
     actionKey: string,
     desc: PropertyDescriptor,
   ) {
@@ -153,9 +165,12 @@ export class AppRouter extends BeanSimple {
       }
     }
 
+    // middlewares options
+    const actionMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, desc.value);
+
     // route
     const route = {
-      meta: {},
+      meta: extend(true, {}, controllerMiddlewaresOptions, actionMiddlewaresOptions),
     };
 
     // route
