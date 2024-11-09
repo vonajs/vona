@@ -8,13 +8,13 @@ export function useMiddlewareGlobal<T extends keyof IMiddlewareRecordGlobal>(
   options?: IMiddlewareRecordGlobal[T],
 ): ClassDecorator & MethodDecorator {
   return function (target: object, _prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    let middlewares;
+    let middlewaresOptions;
     if (descriptor) {
-      middlewares = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, descriptor.value);
+      middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, descriptor.value);
     } else {
-      middlewares = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, target);
+      middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, target);
     }
-    middlewares[middlewareName] = options;
+    middlewaresOptions[middlewareName] = options;
     return descriptor;
   } as any;
 }

@@ -1,0 +1,25 @@
+import { IMiddlewareRecord } from '../../../types/interface/middleware.js';
+import { appMetadata, MetadataKey } from '../../core/metadata.js';
+import { SymbolUseMiddlewareOptions } from './useMiddlewareGlobal.js';
+
+export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
+
+export function useMiddleware<T extends keyof IMiddlewareRecord>(
+  middlewareName: T,
+  options?: IMiddlewareRecord[T],
+): ClassDecorator & MethodDecorator {
+  return function (target: object, _prop?: MetadataKey, descriptor?: PropertyDescriptor) {
+    let middlewaresOptions;
+    let middlewaresLocal;
+    if (descriptor) {
+      middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, descriptor.value);
+      middlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, descriptor.value);
+    } else {
+      middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, target);
+      middlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, target);
+    }
+    middlewaresOptions[middlewareName] = options;
+    middlewaresLocal.push(middlewareName);
+    return descriptor;
+  } as any;
+}
