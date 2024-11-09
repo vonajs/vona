@@ -3,7 +3,7 @@ export * from '../bean/middleware.guard.js';
 import { IMiddlewareOptionsGuard } from '../bean/middleware.guard.js';
 import 'vona';
 declare module 'vona' {
-  export interface IMiddlewareRecord {
+  export interface IMiddlewareRecordGlobal {
     'a-core:guard': IMiddlewareOptionsGuard;
   }
 }

@@ -1,4 +1,5 @@
 import path from 'path';
+import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -10,7 +11,8 @@ export async function generateMiddlewares(moduleName: string, modulePath: string
   files.sort();
   const contentExports: string[] = [];
   const contentImports: string[] = [];
-  const contentRecords: string[] = [];
+  const contentRecordsGlobal: string[] = [];
+  const contentRecordsLocal: string[] = [];
   for (const file of files) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
@@ -22,22 +24,45 @@ export async function generateMiddlewares(moduleName: string, modulePath: string
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const beanNameFull = `${moduleName}:${beanName}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
+    if (isIgnore) continue;
+    const fileInfo = _extractInfo(file);
+    if (!fileInfo.hasInterface) continue;
     contentImports.push(`import { IMiddlewareOptions${beanNameCapitalize} } from '../bean/${fileNameJS}';`);
-    if (!isIgnore) {
-      contentRecords.push(`'${beanNameFull}': IMiddlewareOptions${beanNameCapitalize};`);
+    if (fileInfo.isGlobal) {
+      contentRecordsGlobal.push(`'${beanNameFull}': IMiddlewareOptions${beanNameCapitalize};`);
+    } else {
+      contentRecordsLocal.push(`'${beanNameFull}': IMiddlewareOptions${beanNameCapitalize};`);
     }
   }
+  // middlewareGlobal
+  const exportRecordsMiddlewareGlobal = `
+    export interface IMiddlewareRecordGlobal {
+      ${contentRecordsGlobal.join('\n')}
+    }
+`;
+  // middlewareLocal
+  const exportRecordsMiddlewareLocal = `
+export interface IMiddlewareRecordLocal {
+  ${contentRecordsLocal.join('\n')}
+}
+`;
   // combine
   const content = `/** middlewares: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
 import 'vona';
 declare module 'vona' {
-  export interface IMiddlewareRecord {
-    ${contentRecords.join('\n')}
-  }
+  ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
+  ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
 }
 /** middlewares: end */
 `;
   return content;
+}
+
+function _extractInfo(file: string) {
+  const content = fse.readFileSync(file).toString();
+  const hasInterface = content.includes('IMiddlewareOptions');
+  const isGlobal = content.match(/@Middleware\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/);
+  return { hasInterface, isGlobal };
 }

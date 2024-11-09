@@ -94,31 +94,9 @@ export * from '../bean/middleware.jsonp.js';
 export * from '../bean/middleware.right.js';
 export * from '../bean/middleware.test.js';
 export * from '../bean/middleware.transaction.js';
-import { IMiddlewareOptionsAuth } from '../bean/middleware.auth.js';
-import { IMiddlewareOptionsAuthOpen } from '../bean/middleware.authOpen.js';
-import { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
-import { IMiddlewareOptionsHttpLog } from '../bean/middleware.httpLog.js';
-import { IMiddlewareOptionsInner } from '../bean/middleware.inner.js';
-import { IMiddlewareOptionsConnectionAuth } from '../bean/middleware.io.connectionAuth.js';
-import { IMiddlewareOptionsJsonp } from '../bean/middleware.jsonp.js';
-import { IMiddlewareOptionsRight } from '../bean/middleware.right.js';
-import { IMiddlewareOptionsTest } from '../bean/middleware.test.js';
-import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
+
 import 'vona';
-declare module 'vona' {
-  export interface IMiddlewareRecord {
-    'a-base:auth': IMiddlewareOptionsAuth;
-    'a-base:authOpen': IMiddlewareOptionsAuthOpen;
-    'a-base:gate': IMiddlewareOptionsGate;
-    'a-base:httpLog': IMiddlewareOptionsHttpLog;
-    'a-base:inner': IMiddlewareOptionsInner;
-    'a-base:connectionAuth': IMiddlewareOptionsConnectionAuth;
-    'a-base:jsonp': IMiddlewareOptionsJsonp;
-    'a-base:right': IMiddlewareOptionsRight;
-    'a-base:test': IMiddlewareOptionsTest;
-    'a-base:transaction': IMiddlewareOptionsTransaction;
-  }
-}
+declare module 'vona' {}
 /** middlewares: end */
 /** atoms: begin */
 export * from '../atom/resource.js';

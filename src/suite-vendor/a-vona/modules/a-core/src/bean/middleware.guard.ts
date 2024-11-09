@@ -4,7 +4,7 @@ export interface IMiddlewareOptionsGuard extends IDecoratorMiddlewareOptions {
   test: string;
 }
 
-@Middleware({} as IMiddlewareOptionsGuard)
+@Middleware({ global: true } as IMiddlewareOptionsGuard)
 export class MiddlewareGuard extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsGuard, next: Next) {
     // next
