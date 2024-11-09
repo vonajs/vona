@@ -1,5 +1,6 @@
 import { swapDeps } from '@cabloy/deps';
 import { VonaApplication } from '../../types/index.js';
+import { appResource } from '../core/resource.js';
 
 export default function (app: VonaApplication): [object, any[]] {
   // use modulesArray
@@ -71,33 +72,54 @@ function loadMiddlewares(
 
 function loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app) {
   for (const module of ebModulesArray) {
-    const config = app.meta.configs[module.info.relativeName];
-    if (!config.middlewares) continue;
-    for (const middlewareKey in config.middlewares) {
-      const middlewareConfig = config.middlewares[middlewareKey];
-      // bean
-      const beanName = middlewareConfig.bean;
-      if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${middlewareKey}`);
-      let bean;
-      if (typeof beanName === 'string') {
-        bean = {
-          module: module.info.relativeName,
-          name: beanName,
-        };
-      } else {
-        bean = {
-          module: beanName.module || module.info.relativeName,
-          name: beanName.name,
-        };
-      }
-      // push
-      ebMiddlewaresAll.push({
+    _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app);
+    _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module);
+  }
+}
+
+function _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app) {
+  const config = app.meta.configs[module.info.relativeName];
+  if (!config.middlewares) return;
+  for (const middlewareKey in config.middlewares) {
+    const middlewareConfig = config.middlewares[middlewareKey];
+    // bean
+    const beanName = middlewareConfig.bean;
+    if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${middlewareKey}`);
+    let bean;
+    if (typeof beanName === 'string') {
+      bean = {
         module: module.info.relativeName,
-        name: middlewareKey,
-        options: middlewareConfig,
-        bean,
-      });
+        name: beanName,
+      };
+    } else {
+      bean = {
+        module: beanName.module || module.info.relativeName,
+        name: beanName.name,
+      };
     }
+    // push
+    ebMiddlewaresAll.push({
+      module: module.info.relativeName,
+      name: middlewareKey,
+      options: middlewareConfig,
+      bean,
+    });
+  }
+}
+
+function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
+  const middlewares = appResource.scenes['middleware'][module.info.relativeName];
+  if (!middlewares) return;
+  for (const key in middlewares) {
+    const beanOptions = middlewares[key];
+    if (!beanOptions.options) continue;
+    // push
+    ebMiddlewaresAll.push({
+      module: module.info.relativeName,
+      name: key,
+      options: beanOptions.options,
+      beanFullName: beanOptions.beanFullName,
+    });
   }
 }
 
