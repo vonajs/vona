@@ -15,7 +15,8 @@ export function UseMiddlewareGlobal<T extends keyof IMiddlewareRecordGlobal>(
     } else {
       middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, target);
     }
-    middlewaresOptions[middlewareName] = options;
+    const beanFullName = (middlewareName as string).replace(':', '.middleware.');
+    middlewaresOptions[beanFullName] = options;
     return descriptor;
   } as any;
 }

@@ -4,6 +4,7 @@ import { CtxMockUtil } from '../utils/mockUtilCtx.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { CtxLocale } from '../bean/resource/locale/localeCtx.js';
 import { IModuleLocaleText } from '../bean/index.js';
+import { IMiddlewareItem } from '../../types/index.js';
 
 export class CtxMeta extends BeanSimple {
   util: CtxUtil;
@@ -24,23 +25,22 @@ export class CtxMeta extends BeanSimple {
     this.text = this.locale.createLocaleText();
   }
 
-  getMiddlewareOptions(middlewareName) {
-    const item = this.app.meta.middlewaresNormal[middlewareName];
+  getMiddlewareOptions(item: IMiddlewareItem) {
     // options: meta
     const optionsMeta = item.options;
     // options: config
     let optionsConfig;
     if (item.fromConfig) {
-      const config = this.ctx.config.module(item.module);
+      const config = this.ctx.config.module(item.beanOptions.module);
       optionsConfig = config.middlewares?.[item.name];
     } else {
-      optionsConfig = this.app.config.metadata.middleware?.[item.name];
+      optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
     }
     // options: route
     const route = this.ctx.route.route;
-    const optionsRoute = route.meta?.[item.name];
+    const optionsRoute = route.meta?.[item.beanOptions.beanFullName];
     // options: dynamic
-    const optionsDynamic = this.middlewares[item.name];
+    const optionsDynamic = this.middlewares[item.beanOptions.beanFullName];
     // final options
     const options = extend(true, {}, optionsMeta, optionsConfig, optionsRoute, optionsDynamic);
     // ok

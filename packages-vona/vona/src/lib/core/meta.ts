@@ -16,6 +16,7 @@ import {
   ISuite,
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
+  IMiddlewareItem,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -56,8 +57,8 @@ export class AppMeta extends BeanSimple {
   localeModules: TypeModuleResourceLocaleModules;
   //
   middlewares: any[];
-  middlewaresNormal: Record<string, any>;
-  middlewaresGlobal: any[];
+  middlewaresNormal: Record<string, IMiddlewareItem>;
+  middlewaresGlobal: IMiddlewareItem[];
   middlewaresSocketIoConnection: any[];
   middlewaresSocketIoPacket: any[];
   //

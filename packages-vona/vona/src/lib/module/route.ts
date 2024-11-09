@@ -2,7 +2,7 @@ import is from 'is-type-of';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
-import { VonaApplication, VonaContext, Cast, IModule } from '../../types/index.js';
+import { VonaApplication, VonaContext, Cast, IModule, IMiddlewareItem } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -315,17 +315,17 @@ function wrapMiddlewareApp(key, route, app) {
   }
 }
 
-function wrapMiddleware(item) {
+function wrapMiddleware(item: IMiddlewareItem) {
   const fn = (ctx, next) => {
     // options
-    const options = ctx.meta.getMiddlewareOptions(item.name);
+    const options = ctx.meta.getMiddlewareOptions(item);
     // enable match ignore dependencies
     if (options.enable === false || !middlewareMatch(ctx, options) || !middlewareDeps(ctx, options)) {
       ctx[MWSTATUS][item.name] = false;
       return next();
     }
     // execute
-    const beanFullName = item.beanFullName || `${item.bean.module}.middleware.${item.bean.name}`;
+    const beanFullName = item.beanOptions.beanFullName;
     const beanInstance = ctx.bean._getBean(beanFullName);
     if (!beanInstance) {
       throw new Error(`middleware bean not found: ${beanFullName}`);

@@ -22,7 +22,8 @@ export function UseMiddleware<T extends keyof IMiddlewareRecordLocal>(
       middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, target);
       middlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, target);
     }
-    middlewaresOptions[middlewareName] = options;
+    const beanFullName = (middlewareName as string).replace(':', '.middleware.');
+    middlewaresOptions[beanFullName] = options;
     middlewaresLocal.push(middlewareName);
     return descriptor;
   } as any;

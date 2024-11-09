@@ -1,3 +1,4 @@
+import { IDecoratorBeanOptionsBase } from '../../lib/index.js';
 import { VonaContext } from '../context/index.js';
 
 export type Next = () => Promise<any>;
@@ -20,4 +21,11 @@ export interface IDecoratorMiddlewareOptions extends IMiddlewareBase {
   global?: boolean;
   dependencies?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
   dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
+}
+
+export interface IMiddlewareItem {
+  name: string;
+  options: IDecoratorMiddlewareOptions;
+  beanOptions: IDecoratorBeanOptionsBase;
+  fromConfig?: boolean;
 }

@@ -97,18 +97,20 @@ function _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app) {
         name: beanName.name,
       };
     }
+    const beanFullName = `${bean.module}.middleware.${bean.name}`;
+    const beanOptions = appResource.getBean(beanFullName);
     // push
     ebMiddlewaresAll.push({
-      module: module.info.relativeName,
       name: middlewareKey,
       options: middlewareConfig,
-      bean,
+      beanOptions,
       fromConfig: true,
     });
   }
 }
 
 function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
+  const scene = 'middleware';
   const middlewares = appResource.scenes['middleware'][module.info.relativeName];
   if (!middlewares) return;
   for (const key in middlewares) {
@@ -116,10 +118,9 @@ function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
     if (!beanOptions.options) continue;
     // push
     ebMiddlewaresAll.push({
-      module: module.info.relativeName,
-      name: key.replace('.middleware.', ':'),
+      name: key.replace(`.${scene}.`, ':'),
       options: beanOptions.options,
-      beanFullName: beanOptions.beanFullName,
+      beanOptions,
     });
   }
 }
