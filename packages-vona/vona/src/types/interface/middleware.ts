@@ -2,7 +2,9 @@ import { VonaContext } from '../context/index.js';
 
 export type Next = () => Promise<any>;
 
-export interface IMiddlewareRecord {}
+export interface IMiddlewareRecordGlobal {}
+export interface IMiddlewareRecordLocal {}
+export type IMiddlewareRecord = IMiddlewareRecordGlobal & IMiddlewareRecordLocal;
 
 export interface IMiddlewareBase {
   enable?: boolean;
