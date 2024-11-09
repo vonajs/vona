@@ -4,7 +4,7 @@ import { appMetadata, MetadataKey } from '../../core/metadata.js';
 export const SymbolUseMiddlewareOptions = Symbol('SymbolUseMiddlewareOptions');
 export type TypeUseMiddlewareGlobalOptions<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
 
-export function useMiddlewareGlobal<T extends keyof IMiddlewareRecordGlobal>(
+export function UseMiddlewareGlobal<T extends keyof IMiddlewareRecordGlobal>(
   middlewareName: T,
   options?: TypeUseMiddlewareGlobalOptions<IMiddlewareRecordGlobal[T]>,
 ): ClassDecorator & MethodDecorator {

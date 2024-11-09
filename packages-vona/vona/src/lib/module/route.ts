@@ -7,7 +7,11 @@ import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { Constructable } from '../decorator/type/constructable.js';
-import { IDecoratorControllerOptions, SymbolUseMiddlewareOptions } from '../decorator/index.js';
+import {
+  IDecoratorControllerOptions,
+  SymbolUseMiddlewareLocal,
+  SymbolUseMiddlewareOptions,
+} from '../decorator/index.js';
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
 import { extend } from '@cabloy/extend';
@@ -111,6 +115,7 @@ export class AppRouter extends BeanSimple {
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
     const controllerMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, controller);
+    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, controller);
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -123,6 +128,7 @@ export class AppRouter extends BeanSimple {
         controllerBeanFullName,
         controllerPath,
         controllerMiddlewaresOptions,
+        controllerMiddlewaresLocal,
         actionKey,
         desc,
       );
@@ -135,6 +141,7 @@ export class AppRouter extends BeanSimple {
     controllerBeanFullName: string,
     controllerPath: string | undefined,
     controllerMiddlewaresOptions: object,
+    controllerMiddlewaresLocal: any[],
     actionKey: string,
     desc: PropertyDescriptor,
   ) {
@@ -188,6 +195,21 @@ export class AppRouter extends BeanSimple {
 
     // middlewaresLocal: route
     const middlewaresLocal: any[] = [];
+    const actionMiddlewaresLocal = appMetadata.getOwnMetadataArray<string>(SymbolUseMiddlewareLocal, desc.value);
+    const middlewaresLocalAll = actionMiddlewaresLocal.concat(controllerMiddlewaresLocal);
+    for (const middlewareName of middlewaresLocalAll) {
+      const parts = middlewareName.split(':');
+      const beanFullName = `${parts[0]}.middleware.${parts[1]}`;
+      const beanOptions = appResource.scenes['middleware'][parts[0]]?.[beanFullName];
+      if (!beanOptions) throw new Error(`middleware bean not found: ${beanFullName}`);
+      const item = {
+        module: parts[0],
+        name: middlewareName,
+        options: beanOptions.options,
+        beanFullName,
+      };
+      middlewaresLocal.push(wrapMiddleware(item));
+    }
 
     // middleware controller
     middlewaresLocal.push(controllerActionToMiddleware(_route.controllerBeanFullName, _route));

@@ -7,8 +7,10 @@ export interface IMiddlewareOptionsDevelopment extends IDecoratorMiddlewareOptio
 
 @Middleware({ test: true, local: true } as IMiddlewareOptionsDevelopment)
 export class MiddlewareDevelopment extends BeanBase implements IMiddlewareExecute {
-  async execute(_options: IMiddlewareOptionsDevelopment, next: Next) {
+  async execute(options: IMiddlewareOptionsDevelopment, next: Next) {
     if (this.app.meta.isProd) this.ctx.throw(403);
+    if (this.app.meta.isLocal && !options.local) this.ctx.throw(403);
+    if (this.app.meta.isTest && !options.test) this.ctx.throw(403);
     // next
     return next();
   }

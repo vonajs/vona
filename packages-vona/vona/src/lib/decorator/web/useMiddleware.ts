@@ -8,7 +8,7 @@ export type TypeUseMiddlewareOptions<T> = Omit<
   'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
 >;
 
-export function useMiddleware<T extends keyof IMiddlewareRecordLocal>(
+export function UseMiddleware<T extends keyof IMiddlewareRecordLocal>(
   middlewareName: T,
   options?: TypeUseMiddlewareOptions<IMiddlewareRecordLocal[T]>,
 ): ClassDecorator & MethodDecorator {
