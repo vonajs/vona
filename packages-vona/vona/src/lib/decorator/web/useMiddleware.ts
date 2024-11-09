@@ -3,10 +3,14 @@ import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { SymbolUseMiddlewareOptions } from './useMiddlewareGlobal.js';
 
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
+export type TypeUseMiddlewareOptions<T> = Omit<
+  T,
+  'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
+>;
 
 export function useMiddleware<T extends keyof IMiddlewareRecordLocal>(
   middlewareName: T,
-  options?: IMiddlewareRecordLocal[T],
+  options?: TypeUseMiddlewareOptions<IMiddlewareRecordLocal[T]>,
 ): ClassDecorator & MethodDecorator {
   return function (target: object, _prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     let middlewaresOptions;
