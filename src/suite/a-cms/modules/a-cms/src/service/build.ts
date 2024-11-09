@@ -37,7 +37,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
   async getConfigSiteBase() {
     // config
     //    try other then default
-    const configModule = this.ctx.config.module(this.atomClass.module);
+    const configModule = this.getScope(this.atomClass.module).config;
     let configSite = this.ctx.bean.util.getProperty(configModule, `cms.sites.${this.atomClass.atomClassName}`);
     if (!configSite) {
       configSite = this.ctx.bean.util.getProperty(configModule, 'cms.site');
@@ -55,7 +55,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
       const module = this.app.meta.modules[relativeName];
       const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (plugin) {
-        site.plugins[relativeName] = this.ctx.config.module(relativeName).plugin;
+        site.plugins[relativeName] = this.getScope(relativeName as any).config.plugin;
       }
     }
     return site;
@@ -180,11 +180,11 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
-    if (!moduleExtend) return this.ctx.config.module(themeModuleName).theme;
+    if (!moduleExtend) return this.getScope(themeModuleName).config.theme;
     return this.ctx.bean.util.extend(
       {},
       this._combineThemes(moduleExtend),
-      this.ctx.config.module(themeModuleName).theme,
+      this.getScope(themeModuleName).config.theme,
     );
   }
 
@@ -1313,7 +1313,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
                 envs: false,
               },
             });
-          } catch (e) {
+          } catch (_err) {
             // nothing
           }
           // set

@@ -125,31 +125,31 @@ export class AppUtil extends BeanSimple {
     }
   }
 
-  getWhiteListCors(ctx) {
-    let whiteListCors;
-    const _config = ctx.config.module('a-base');
-    const _whiteList = (_config && _config.cors && _config.cors.whiteList) || [];
-    if (!Array.isArray(_whiteList)) {
-      whiteListCors = _whiteList.split(',');
-    } else {
-      whiteListCors = _whiteList.concat();
-    }
-    // inherits from jsonp
-    let _whiteListJsonp = _config && _config.jsonp && _config.jsonp.whiteList;
-    if (_whiteListJsonp) {
-      if (!Array.isArray(_whiteListJsonp)) {
-        _whiteListJsonp = _whiteListJsonp.split(',');
-      }
-      whiteListCors = whiteListCors.concat(_whiteListJsonp);
-    }
-    // hostSelf
-    const hostSelf = ctx.bean.base.getAbsoluteUrl();
-    if (hostSelf) {
-      whiteListCors.push(hostSelf);
-    }
-    // ok
-    return whiteListCors;
-  }
+  // getWhiteListCors(ctx) {
+  //   let whiteListCors;
+  //   const _config = ctx.config.module('a-base');
+  //   const _whiteList = (_config && _config.cors && _config.cors.whiteList) || [];
+  //   if (!Array.isArray(_whiteList)) {
+  //     whiteListCors = _whiteList.split(',');
+  //   } else {
+  //     whiteListCors = _whiteList.concat();
+  //   }
+  //   // inherits from jsonp
+  //   let _whiteListJsonp = _config && _config.jsonp && _config.jsonp.whiteList;
+  //   if (_whiteListJsonp) {
+  //     if (!Array.isArray(_whiteListJsonp)) {
+  //       _whiteListJsonp = _whiteListJsonp.split(',');
+  //     }
+  //     whiteListCors = whiteListCors.concat(_whiteListJsonp);
+  //   }
+  //   // hostSelf
+  //   const hostSelf = ctx.bean.base.getAbsoluteUrl();
+  //   if (hostSelf) {
+  //     whiteListCors.push(hostSelf);
+  //   }
+  //   // ok
+  //   return whiteListCors;
+  // }
 
   isSafeDomain(ctx: VonaContext, origin) {
     // origin is {protocol}{hostname}{port}...

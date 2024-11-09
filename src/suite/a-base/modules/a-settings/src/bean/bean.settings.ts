@@ -65,7 +65,7 @@ export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
       userId: scene === 'user' ? this.ctx.state.user.op.id : 0,
       name,
     });
-    return res ? JSON.parse(res.value) : this._parse(this.ctx.config.module(module).settings[scene], name);
+    return res ? JSON.parse(res.value) : this._parse(this.getScope(module).config.settings[scene], name);
   }
 
   _parse(data, path) {
@@ -83,7 +83,7 @@ export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
       userId: scene === 'user' ? this.ctx.state.user.op.id : 0,
     });
     // always extend config, as maybe has new values
-    const config = this.ctx.config.module(module).settings[scene];
+    const config = this.getScope(module).config.settings[scene];
     return res ? this.ctx.bean.util.extend({}, config, JSON.parse(res.value)) : config;
   }
 

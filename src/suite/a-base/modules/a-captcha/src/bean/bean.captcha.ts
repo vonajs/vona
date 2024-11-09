@@ -18,7 +18,7 @@ export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
     // default scene
     const sceneDefault = this.configModule.captcha.scenes.default;
     // module scene
-    const configModuleScene = this.ctx.config.module(module);
+    const configModuleScene = this.getScope(module).config;
     const sceneModule = this.ctx.bean.util.getProperty(configModuleScene, `captcha.scenes.${sceneName}`) || null;
     return this.ctx.bean.util.extend({}, sceneDefault, sceneModule);
   }

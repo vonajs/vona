@@ -145,7 +145,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     for (const key in account.activationProviders) {
       const relativeName = account.activationProviders[key];
       if (relativeName) {
-        const moduleConfig = this.ctx.config.module(relativeName);
+        const moduleConfig = this.getScope(relativeName).config;
         this.ctx.bean.util.extend(account.url, moduleConfig.account.url);
       }
     }
