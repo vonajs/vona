@@ -196,7 +196,13 @@ export class AppRouter extends BeanSimple {
     // middlewaresLocal: route
     const middlewaresLocal: any[] = [];
     const actionMiddlewaresLocal = appMetadata.getOwnMetadataArray<string>(SymbolUseMiddlewareLocal, desc.value);
-    const middlewaresLocalAll = actionMiddlewaresLocal.concat(controllerMiddlewaresLocal);
+    const middlewaresLocalAll: string[] = [];
+    actionMiddlewaresLocal.forEach(item => {
+      if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+    });
+    controllerMiddlewaresLocal.forEach(item => {
+      if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+    });
     for (const middlewareName of middlewaresLocalAll) {
       const parts = middlewareName.split(':');
       const beanFullName = `${parts[0]}.middleware.${parts[1]}`;
