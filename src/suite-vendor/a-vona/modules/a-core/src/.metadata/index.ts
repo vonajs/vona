@@ -1,7 +1,9 @@
 /** middlewares: begin */
+export * from '../bean/middleware.development.js';
 export * from '../bean/middleware.guard.js';
 export * from '../bean/middleware.interceptor.js';
 export * from '../bean/middleware.pipe.js';
+import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
 import { IMiddlewareOptionsGuard } from '../bean/middleware.guard.js';
 import { IMiddlewareOptionsInterceptor } from '../bean/middleware.interceptor.js';
 import { IMiddlewareOptionsPipe } from '../bean/middleware.pipe.js';
@@ -11,6 +13,10 @@ declare module 'vona' {
     'a-core:guard': IMiddlewareOptionsGuard;
     'a-core:interceptor': IMiddlewareOptionsInterceptor;
     'a-core:pipe': IMiddlewareOptionsPipe;
+  }
+
+  export interface IMiddlewareRecordLocal {
+    'a-core:development': IMiddlewareOptionsDevelopment;
   }
 }
 /** middlewares: end */
