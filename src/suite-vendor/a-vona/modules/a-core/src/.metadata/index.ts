@@ -3,10 +3,12 @@ export * from '../bean/middleware.development.js';
 export * from '../bean/middleware.guard.js';
 export * from '../bean/middleware.interceptor.js';
 export * from '../bean/middleware.pipe.js';
+export * from '../bean/middleware.transaction.js';
 import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
 import { IMiddlewareOptionsGuard } from '../bean/middleware.guard.js';
 import { IMiddlewareOptionsInterceptor } from '../bean/middleware.interceptor.js';
 import { IMiddlewareOptionsPipe } from '../bean/middleware.pipe.js';
+import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 import 'vona';
 declare module 'vona' {
   export interface IMiddlewareRecordGlobal {
@@ -17,6 +19,7 @@ declare module 'vona' {
 
   export interface IMiddlewareRecordLocal {
     'a-core:development': IMiddlewareOptionsDevelopment;
+    'a-core:transaction': IMiddlewareOptionsTransaction;
   }
 }
 /** middlewares: end */
