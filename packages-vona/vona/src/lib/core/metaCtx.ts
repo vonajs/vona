@@ -26,16 +26,23 @@ export class CtxMeta extends BeanSimple {
 
   getMiddlewareOptions(middlewareName) {
     const item = this.app.meta.middlewaresNormal[middlewareName];
-    // config options
-    const config = this.ctx.config.module(item.module);
-    const optionsConfig = config.middlewares ? config.middlewares[item.name] : null;
-    // route options
+    // options: meta
+    const optionsMeta = item.options;
+    // options: config
+    let optionsConfig;
+    if (item.fromConfig) {
+      const config = this.ctx.config.module(item.module);
+      optionsConfig = config.middlewares?.[item.name];
+    } else {
+      optionsConfig = this.app.config.metadata.middleware?.[item.name];
+    }
+    // options: route
     const route = this.ctx.route.route;
-    const optionsRoute = route.meta ? route.meta[item.name] : null;
-    // dynamic options
+    const optionsRoute = route.meta?.[item.name];
+    // options: dynamic
     const optionsDynamic = this.middlewares[item.name];
     // final options
-    const options = extend(true, {}, optionsConfig, optionsRoute, optionsDynamic);
+    const options = extend(true, {}, optionsMeta, optionsConfig, optionsRoute, optionsDynamic);
     // ok
     return options;
   }

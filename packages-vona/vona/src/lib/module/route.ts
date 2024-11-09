@@ -289,10 +289,8 @@ function wrapMiddleware(item) {
       ctx[MWSTATUS][item.name] = false;
       return next();
     }
-    // bean
-    const bean = item.bean;
     // execute
-    const beanFullName = `${bean.module}.middleware.${bean.name}`;
+    const beanFullName = item.beanFullName || `${item.bean.module}.middleware.${item.bean.name}`;
     const beanInstance = ctx.bean._getBean(beanFullName);
     if (!beanInstance) {
       throw new Error(`middleware bean not found: ${beanFullName}`);

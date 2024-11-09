@@ -103,6 +103,7 @@ function _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app) {
       name: middlewareKey,
       options: middlewareConfig,
       bean,
+      fromConfig: true,
     });
   }
 }
@@ -116,7 +117,7 @@ function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
     // push
     ebMiddlewaresAll.push({
       module: module.info.relativeName,
-      name: key,
+      name: key.replace('.middleware.', ':'),
       options: beanOptions.options,
       beanFullName: beanOptions.beanFullName,
     });
