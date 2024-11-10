@@ -3,13 +3,16 @@ import { VonaContext } from '../context/index.js';
 
 export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
-export type TypeUseMiddlewareOptions<T> = Omit<
+export type TypeUseMiddlewareLikeOptions<T> = Omit<
   T,
   'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
 >;
 
 export const SymbolUseMiddlewareOptions = Symbol('SymbolUseMiddlewareOptions');
-export type TypeUseMiddlewareGlobalOptions<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
+export type TypeUseMiddlewareGlobalLikeOptions<T> = Omit<
+  T,
+  'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
+>;
 
 export type Next = () => Promise<any>;
 
