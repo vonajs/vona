@@ -1,6 +1,13 @@
 import { IDecoratorBeanOptionsBase } from '../../lib/index.js';
 import { VonaContext } from '../context/index.js';
 
+export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
+export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
+export type TypeUseMiddlewareOptions<T> = Omit<
+  T,
+  'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
+>;
+
 export type Next = () => Promise<any>;
 
 export interface IMiddlewareRecordGlobal {}
