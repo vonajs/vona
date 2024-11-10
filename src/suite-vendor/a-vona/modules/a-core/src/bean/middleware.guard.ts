@@ -14,7 +14,11 @@ export class MiddlewareGuard extends BeanBase implements IMiddlewareExecute {
   }
 
   async execute(_options: IMiddlewareOptionsGuard, next: Next) {
-    //this.middlewareLike.
+    const res = await this.middlewareLike.composeAsync()(this.ctx, async (_ctx, _next) => {
+      // 这个_next有必要调用吗
+      await _next();
+    });
+    console.log('guard execute:', res);
     // next
     return next();
   }

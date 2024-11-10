@@ -2,6 +2,8 @@ import { IMiddlewareRecordLocal } from '../../../types/interface/middleware.js';
 import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { SymbolUseMiddlewareOptions } from './useMiddlewareGlobal.js';
 
+export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
+
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
 export type TypeUseMiddlewareOptions<T> = Omit<
   T,
@@ -17,14 +19,15 @@ export function UseMiddleware<T extends keyof IMiddlewareRecordLocal>(
     let middlewaresLocal;
     if (descriptor) {
       middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, descriptor.value);
-      middlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, descriptor.value);
+      middlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, descriptor.value);
     } else {
       middlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, target);
-      middlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, target);
+      middlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, target);
     }
     const beanFullName = (middlewareName as string).replace(':', '.middleware.');
     middlewaresOptions[beanFullName] = options;
-    middlewaresLocal.push(middlewareName);
+    if (!middlewaresLocal['middleware']) middlewaresLocal['middleware'] = [];
+    middlewaresLocal['middleware'].push(middlewareName);
     return descriptor;
   } as any;
 }

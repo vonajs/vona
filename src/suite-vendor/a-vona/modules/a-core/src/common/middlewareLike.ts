@@ -1,6 +1,13 @@
 import { swapDeps } from '@cabloy/deps';
-import pathMatching from 'egg-path-matching';
-import { appMetadata, appResource, BeanSimple, IMiddlewareItem, SymbolUseMiddlewareLocal } from 'vona';
+import { pathMatching } from 'egg-path-matching';
+import {
+  appMetadata,
+  appResource,
+  BeanSimple,
+  IMiddlewareItem,
+  SymboleMiddlewareStatus,
+  SymbolUseMiddlewareLocal,
+} from 'vona';
 
 const __adapter = (_context, chain) => {
   return {
@@ -21,46 +28,45 @@ export class MiddlewareLike extends BeanSimple {
     this._swapMiddlewares(this.middlewaresGlobal);
   }
 
-  async composeAsync() {
+  composeAsync() {
     const middlewares: any[] = [];
     // middlewares: global
     for (const item of this.middlewaresGlobal) {
-      middlewares.push(wrapMiddleware(item));
+      middlewares.push(wrapMiddleware(this.sceneName, item));
     }
     // middlewares: route
     const middlewaresLocal = this._collectRouterMiddlewares();
     for (const item of middlewaresLocal) {
-      middlewares.push(wrapMiddleware(item));
+      middlewares.push(wrapMiddleware(this.sceneName, item));
     }
     // invoke
-    await this.ctx.app.meta.util.composeAsync(middlewares, __adapter)(this.ctx, async (_ctx, _next) => {
-      // 这个_next有必要调用吗
-      await _next();
-    });
+    return this.ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
 
   private _collectRouterMiddlewares() {
     // middlewaresLocal: controller
-    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataArray<string>(
-      SymbolUseMiddlewareLocal,
-      this.ctx.getClass(),
-    );
+    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, this.ctx.getClass())[
+      this.sceneName
+    ] as string[];
     // middlewaresLocal: action
     const middlewaresLocal: IMiddlewareItem[] = [];
-    const actionMiddlewaresLocal = appMetadata.getOwnMetadataArray<string>(
-      SymbolUseMiddlewareLocal,
-      this.ctx.getHandler(),
-    );
+    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, this.ctx.getHandler())[
+      this.sceneName
+    ] as string[];
     const middlewaresLocalAll: string[] = [];
-    actionMiddlewaresLocal.forEach(item => {
-      if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
-    });
-    controllerMiddlewaresLocal.forEach(item => {
-      if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
-    });
+    if (actionMiddlewaresLocal) {
+      actionMiddlewaresLocal.forEach(item => {
+        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+      });
+    }
+    if (controllerMiddlewaresLocal) {
+      controllerMiddlewaresLocal.forEach(item => {
+        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+      });
+    }
     for (const middlewareName of middlewaresLocalAll) {
       const item = this.middlewaresNormal[middlewareName];
-      if (!item) throw new Error(`middleware not found: ${middlewareName}`);
+      if (!item) throw new Error(`${this.sceneName} not found: ${middlewareName}`);
       middlewaresLocal.push(item);
     }
     return middlewaresLocal;
@@ -76,7 +82,7 @@ export class MiddlewareLike extends BeanSimple {
       for (const dep of dependents!) {
         const middleware2 = middlewares.find(item => item.name === dep);
         if (!middleware2) {
-          throw new Error(`middleware ${dep} not found for dependents of ${middleware.name}`);
+          throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
         }
         const options = middleware2.options;
         if (!options.dependencies) options.dependencies = [];
@@ -128,20 +134,23 @@ export class MiddlewareLike extends BeanSimple {
   }
 }
 
-function wrapMiddleware(item: IMiddlewareItem) {
+function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
   const fn = (ctx, next) => {
     // options
     const options = ctx.meta.getMiddlewareOptions(item);
     // enable match ignore dependencies
-    if (options.enable === false || !middlewareMatch(ctx, options) || !middlewareDeps(ctx, options)) {
-      ctx[MWSTATUS][item.name] = false;
+    if (options.enable === false || !middlewareMatch(ctx, options) || !middlewareDeps(sceneName, ctx, options)) {
+      if (!ctx[SymboleMiddlewareStatus][sceneName]) {
+        ctx[SymboleMiddlewareStatus][sceneName] = {};
+      }
+      ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
       return next();
     }
     // execute
     const beanFullName = item.beanOptions.beanFullName;
     const beanInstance = ctx.bean._getBean(beanFullName);
     if (!beanInstance) {
-      throw new Error(`middleware bean not found: ${beanFullName}`);
+      throw new Error(`${sceneName} bean not found: ${beanFullName}`);
     }
     return beanInstance.execute(options, next);
   };
@@ -157,8 +166,8 @@ function middlewareMatch(ctx, options) {
   return match(ctx);
 }
 
-function middlewareDeps(ctx, options) {
+function middlewareDeps(sceneName: string, ctx, options) {
   let deps = options.dependencies || [];
   if (typeof deps === 'string') deps = deps.split(',');
-  return deps.every(key => ctx[MWSTATUS][key] !== false);
+  return deps.every(key => ctx[SymboleMiddlewareStatus][sceneName]?.[key] !== false);
 }

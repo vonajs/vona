@@ -9,14 +9,13 @@ import { appResource } from '../core/resource.js';
 import { Constructable } from '../decorator/type/constructable.js';
 import {
   IDecoratorControllerOptions,
+  SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
   SymbolUseMiddlewareOptions,
 } from '../decorator/index.js';
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
 import { extend } from '@cabloy/extend';
-
-export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
 
 export class AppRouter extends BeanSimple {
   register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
@@ -116,7 +115,9 @@ export class AppRouter extends BeanSimple {
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
     const controllerMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, controller);
-    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataArray(SymbolUseMiddlewareLocal, controller);
+    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, controller)[
+      'middleware'
+    ] as any[];
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -197,14 +198,20 @@ export class AppRouter extends BeanSimple {
 
     // middlewaresLocal: route
     const middlewaresLocal: any[] = [];
-    const actionMiddlewaresLocal = appMetadata.getOwnMetadataArray<string>(SymbolUseMiddlewareLocal, desc.value);
+    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, desc.value)[
+      'middleware'
+    ] as string[];
     const middlewaresLocalAll: string[] = [];
-    actionMiddlewaresLocal.forEach(item => {
-      if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
-    });
-    controllerMiddlewaresLocal.forEach(item => {
-      if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
-    });
+    if (actionMiddlewaresLocal) {
+      actionMiddlewaresLocal.forEach(item => {
+        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+      });
+    }
+    if (controllerMiddlewaresLocal) {
+      controllerMiddlewaresLocal.forEach(item => {
+        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+      });
+    }
     for (const middlewareName of middlewaresLocalAll) {
       const item = app.meta.middlewaresNormal[middlewareName];
       if (!item) throw new Error(`middleware not found: ${middlewareName}`);
