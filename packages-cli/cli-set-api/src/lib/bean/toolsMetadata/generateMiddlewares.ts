@@ -63,6 +63,6 @@ declare module 'vona' {
 function _extractInfo(file: string) {
   const content = fse.readFileSync(file).toString();
   const hasInterface = content.includes('IMiddlewareOptions');
-  const isGlobal = content.match(/@Middleware\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/);
+  const isGlobal = content.match(/@Middleware.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/);
   return { hasInterface, isGlobal };
 }
