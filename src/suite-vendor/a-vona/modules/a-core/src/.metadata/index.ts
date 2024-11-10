@@ -24,12 +24,12 @@ declare module 'vona' {
 }
 /** middlewares: end */
 /** guards: begin */
-export * from '../bean/guard.auth.js';
-import { IGuardOptionsAuth } from '../bean/guard.auth.js';
+export * from '../bean/guard.user.js';
+import { IGuardOptionsUser } from '../bean/guard.user.js';
 import 'vona';
 declare module 'vona' {
   export interface IGuardRecordLocal {
-    'a-core:auth': IGuardOptionsAuth;
+    'a-core:user': IGuardOptionsUser;
   }
 }
 /** guards: end */
