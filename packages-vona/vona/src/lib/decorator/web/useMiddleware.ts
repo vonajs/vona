@@ -1,5 +1,5 @@
-import { IMiddlewareRecordLocal } from '../../../types/interface/middleware.js';
-import { TypeUseMiddlewareOptions, UseMiddlewareLike } from './useMiddlewareLike.js';
+import { IMiddlewareRecordLocal, TypeUseMiddlewareOptions } from '../../../types/interface/middleware.js';
+import { UseMiddlewareLike } from './useMiddlewareLike.js';
 
 export function UseMiddleware<T extends keyof IMiddlewareRecordLocal>(
   middlewareName: T,
