@@ -8,6 +8,9 @@ export type TypeUseMiddlewareOptions<T> = Omit<
   'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
 >;
 
+export const SymbolUseMiddlewareOptions = Symbol('SymbolUseMiddlewareOptions');
+export type TypeUseMiddlewareGlobalOptions<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
+
 export type Next = () => Promise<any>;
 
 export interface IMiddlewareRecordGlobal {}
