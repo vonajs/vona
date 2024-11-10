@@ -9,7 +9,14 @@
     "url": "git+https://github.com/zhennann/cabloy.git"
   },
   "author": "zhennann",
-  "keywords": ["nodejs", "full-stack", "workflow-engine", "egg-framework", "framework7", "cabloy"],
+  "keywords": [
+    "nodejs",
+    "full-stack",
+    "workflow-engine",
+    "egg-framework",
+    "framework7",
+    "cabloy"
+  ],
   "bugs": {
     "url": "https://github.com/zhennann/cabloy/issues"
   },
@@ -55,7 +62,7 @@
     "@swc/core": "^1.7.36",
     "@swc/helpers": "^0.5.13",
     "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.9",
+    "@types/mocha": "^10.0.6",
     "@types/node": "18.19.3",
     "@zhennann/framework7": "^5.8.2",
     "@zhennann/socketio": "^4.0.2",

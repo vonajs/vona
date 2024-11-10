@@ -185,6 +185,7 @@ export class AppRouter extends BeanSimple {
       pid: info.pid,
       module: info.name,
       controller,
+      actionDescriptor: desc,
       controllerBeanFullName,
       action: actionKey,
       route: route,

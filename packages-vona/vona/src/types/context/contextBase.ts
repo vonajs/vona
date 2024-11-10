@@ -1,4 +1,5 @@
 import { CtxMeta } from '../../lib/core/metaCtx.js';
+import { Constructable } from '../../lib/index.js';
 import { IModule } from '../interface/module.js';
 
 export interface ContextBase {
@@ -18,4 +19,6 @@ export interface ContextBase {
   get tailCallbacks();
   successMore(list, index, size);
   getPayload(options?): Promise<any>;
+  getClass(): Constructable;
+  getHandler(): Function;
 }

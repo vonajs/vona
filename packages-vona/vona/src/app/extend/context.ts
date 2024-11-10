@@ -121,5 +121,15 @@ const context: ContextBase = {
     const self = Cast<VonaContext>(this);
     return await raw(inflate(self.req), options);
   },
+
+  getClass() {
+    const self = Cast<VonaContext>(this);
+    return self.route.controller;
+  },
+
+  getHandler() {
+    const self = Cast<VonaContext>(this);
+    return self.route.actionDescriptor.value;
+  },
 };
 export default context;

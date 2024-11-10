@@ -13,16 +13,16 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'dto'
   | 'model'
   | 'atom'
+  | 'middleware'
+  | 'guard'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
-  | 'service'
   | 'broadcast'
   | 'startup'
   | 'queue'
   | 'version'
   | 'schedule'
-  | 'middleware'
   | 'middleware.io'
   | 'event'
   | 'stats'
