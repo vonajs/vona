@@ -2,17 +2,21 @@ import is from 'is-type-of';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import loadMiddlewares from './middleware.js';
-import { VonaApplication, VonaContext, Cast, IModule, IMiddlewareItem } from '../../types/index.js';
+import {
+  VonaApplication,
+  VonaContext,
+  Cast,
+  IModule,
+  IMiddlewareItem,
+  SymbolUseMiddlewareOptions,
+  SymbolUseMiddlewareLocal,
+  SymboleMiddlewareStatus,
+} from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { Constructable } from '../decorator/type/constructable.js';
-import {
-  IDecoratorControllerOptions,
-  SymboleMiddlewareStatus,
-  SymbolUseMiddlewareLocal,
-  SymbolUseMiddlewareOptions,
-} from '../decorator/index.js';
+import { IDecoratorControllerOptions } from '../decorator/index.js';
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
 import { extend } from '@cabloy/extend';
