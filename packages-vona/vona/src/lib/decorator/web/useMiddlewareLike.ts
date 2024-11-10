@@ -1,10 +1,6 @@
+import { SymbolUseMiddlewareLocal } from '../../../types/interface/middleware.js';
 import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { SymbolUseMiddlewareOptions } from './useMiddlewareGlobal.js';
-
-export type TypeUseMiddlewareOptions<T> = Omit<
-  T,
-  'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
->;
 
 export function UseMiddlewareLike(sceneName: string, middlewareName, options?): ClassDecorator & MethodDecorator {
   return function (target: object, _prop?: MetadataKey, descriptor?: PropertyDescriptor) {
