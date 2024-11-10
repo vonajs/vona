@@ -23,6 +23,16 @@ declare module 'vona' {
   }
 }
 /** middlewares: end */
+/** guards: begin */
+export * from '../bean/guard.auth.js';
+import { IGuardOptionsAuth } from '../bean/guard.auth.js';
+import 'vona';
+declare module 'vona' {
+  export interface IGuardRecordLocal {
+    'a-core:auth': IGuardOptionsAuth;
+  }
+}
+/** guards: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 

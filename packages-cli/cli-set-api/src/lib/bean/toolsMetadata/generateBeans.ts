@@ -5,7 +5,7 @@ import { checkIgnoreOfParts } from './utils.js';
 
 export async function generateBeans(moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/bean/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern, { ignore: ['**/middleware.*.ts'] });
+  const files = await eggBornUtils.tools.globbyAsync(pattern, { ignore: ['**/middleware.*.ts', '**/guard.*.ts'] });
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];

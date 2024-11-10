@@ -7,6 +7,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @UseMiddleware('a-core:transaction')
   @UseGuard('a-b4:test')
   @UseGuard('a-b4:test1')
+  //@UseGuard('a-core:auth', { public: true })
   index() {
     return 'Hello Vona';
   }
