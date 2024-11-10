@@ -28,17 +28,20 @@ export class MiddlewareLike extends BeanSimple {
     this._swapMiddlewares(this.middlewaresGlobal);
   }
 
-  composeAsync() {
+  composeAsync(fnStart?, fnMid?, fnEnd?) {
     const middlewares: any[] = [];
+    if (fnStart) middlewares.push(fnStart);
     // middlewares: global
     for (const item of this.middlewaresGlobal) {
       middlewares.push(wrapMiddleware(this.sceneName, item));
     }
+    if (fnMid) middlewares.push(fnMid);
     // middlewares: route
     const middlewaresLocal = this._collectRouterMiddlewares();
     for (const item of middlewaresLocal) {
       middlewares.push(wrapMiddleware(this.sceneName, item));
     }
+    if (fnEnd) middlewares.push(fnEnd);
     // invoke
     return this.ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
