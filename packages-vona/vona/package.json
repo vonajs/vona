@@ -34,7 +34,7 @@
   "dependencies": {
     "@cabloy/cluster-reload": "^1.0.7",
     "@cabloy/compose": "^1.0.9",
-    "@cabloy/deps": "^1.0.7",
+    "@cabloy/deps": "workspace:^",
     "@cabloy/dotenv": "^1.0.9",
     "@cabloy/egg-socket.io": "^6.0.0",
     "@cabloy/ensure-array": "^1.0.8",

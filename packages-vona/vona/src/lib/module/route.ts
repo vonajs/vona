@@ -15,7 +15,8 @@ import {
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
 import { extend } from '@cabloy/extend';
-const MWSTATUS = Symbol('Context#__wmstatus');
+
+export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
 
 export class AppRouter extends BeanSimple {
   register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
@@ -71,7 +72,7 @@ export class AppRouter extends BeanSimple {
         if (is.string(key)) {
           const item = app.meta.middlewaresNormal[key];
           if (item) {
-            middlewaresLocal.push(wrapMiddleware(item));
+            middlewaresLocal.push(wrapMiddleware('middleware', item));
           } else {
             middlewaresLocal.push(wrapMiddlewareApp(key, route, app));
           }
@@ -207,7 +208,7 @@ export class AppRouter extends BeanSimple {
     for (const middlewareName of middlewaresLocalAll) {
       const item = app.meta.middlewaresNormal[middlewareName];
       if (!item) throw new Error(`middleware not found: ${middlewareName}`);
-      middlewaresLocal.push(wrapMiddleware(item));
+      middlewaresLocal.push(wrapMiddleware('middleware', item));
     }
 
     // middleware controller
@@ -225,7 +226,7 @@ export class AppRouter extends BeanSimple {
     // middlewares: start
     const fnStart = async (ctx, next) => {
       // status
-      ctx[MWSTATUS] = {};
+      ctx[SymboleMiddlewareStatus] = {};
       // route
       ctx.route = route;
       // dynamic options
@@ -240,7 +241,7 @@ export class AppRouter extends BeanSimple {
 
     // middlewares: globals
     app.meta.middlewaresGlobal.forEach(item => {
-      args.push(wrapMiddleware(item));
+      args.push(wrapMiddleware('middleware', item));
     });
 
     // middlewares: tailDone
@@ -316,13 +317,16 @@ function wrapMiddlewareApp(key, route, app) {
   }
 }
 
-function wrapMiddleware(item: IMiddlewareItem) {
+function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
   const fn = (ctx, next) => {
     // options
     const options = ctx.meta.getMiddlewareOptions(item);
     // enable match ignore dependencies
-    if (options.enable === false || !middlewareMatch(ctx, options) || !middlewareDeps(ctx, options)) {
-      ctx[MWSTATUS][item.name] = false;
+    if (options.enable === false || !middlewareMatch(ctx, options) || !middlewareDeps(sceneName, ctx, options)) {
+      if (!ctx[SymboleMiddlewareStatus][sceneName]) {
+        ctx[SymboleMiddlewareStatus][sceneName] = {};
+      }
+      ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
       return next();
     }
     // execute
@@ -345,10 +349,10 @@ function middlewareMatch(ctx, options) {
   return match(ctx);
 }
 
-function middlewareDeps(ctx, options) {
+function middlewareDeps(sceneName: string, ctx, options) {
   let deps = options.dependencies || [];
   if (typeof deps === 'string') deps = deps.split(',');
-  return deps.every(key => ctx[MWSTATUS][key] !== false);
+  return deps.every(key => ctx[SymboleMiddlewareStatus][sceneName]?.[key] !== false);
 }
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {

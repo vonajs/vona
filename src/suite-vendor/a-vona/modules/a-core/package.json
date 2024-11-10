@@ -28,5 +28,9 @@
     "static"
   ],
   "scripts": {},
+  "dependencies": {
+    "@cabloy/deps": "workspace:^",
+    "egg-path-matching": "^2.1.0"
+  },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

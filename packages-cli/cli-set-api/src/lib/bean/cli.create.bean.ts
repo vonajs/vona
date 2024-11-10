@@ -10,6 +10,7 @@ const __decorators = {
 };
 const __boilerplates = {
   middleware: 'middleware',
+  guard: 'guard',
 };
 
 declare module '@cabloy/cli' {

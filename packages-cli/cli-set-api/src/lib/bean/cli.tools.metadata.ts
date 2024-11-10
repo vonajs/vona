@@ -2,7 +2,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
-import { generateMiddlewares } from './toolsMetadata/generateMiddlewares.js';
+import { generateMiddlewaresLike } from './toolsMetadata/generateMiddlewares.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
@@ -63,7 +63,9 @@ export class CliToolsMetadata extends BeanCliBase {
     // beans
     content += await generateBeans(moduleName, modulePath);
     // middlewares
-    content += await generateMiddlewares(moduleName, modulePath);
+    content += await generateMiddlewaresLike('middleware', moduleName, modulePath);
+    // guards
+    content += await generateMiddlewaresLike('guard', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // controllers

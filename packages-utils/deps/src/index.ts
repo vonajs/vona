@@ -1,6 +1,6 @@
 export interface ISwapDepsItem {
   name: string;
-  dependencies: string | string[];
+  dependencies?: string | string[];
 }
 
 export interface ISwapDepsOptions {

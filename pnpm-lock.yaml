@@ -1019,7 +1019,7 @@ importers:
         specifier: ^1.0.9
         version: link:../../packages-utils/compose
       '@cabloy/deps':
-        specifier: ^1.0.7
+        specifier: workspace:^
         version: link:../../packages-utils/deps
       '@cabloy/dotenv':
         specifier: ^1.0.9
@@ -1192,7 +1192,14 @@ importers:
         specifier: ^5.0.3
         version: link:modules/a-vona
 
-  src/suite-vendor/a-vona/modules/a-core: {}
+  src/suite-vendor/a-vona/modules/a-core:
+    dependencies:
+      '@cabloy/deps':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/deps
+      egg-path-matching:
+        specifier: ^2.1.0
+        version: 2.1.0
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:
@@ -5578,6 +5585,9 @@ packages:
 
   egg-path-matching@1.1.0:
     resolution: {integrity: sha512-pHdz/q8v843jSEpLksXmJEZ8dzDNiCfTgQtgoSTT9bsLa1QFCzsdeZLag+CKTaCHsDhy3id/WjjTRF94X91y6w==}
+
+  egg-path-matching@2.1.0:
+    resolution: {integrity: sha512-g2V2ohTSf/WN1UNtUdeUAhu/xbA97uAJHgqRpRInR2KT77MRxrG4XtcsjbZudQmB5XRPvYSbnny/1m/57+UadA==}
 
   egg-redis@2.6.0:
     resolution: {integrity: sha512-QNYpRQpkyiUUBFRcCW0iehQJ0YjE3VTbeiDINguIy33iNsL5MSRoyUUV/HPEcfmPa3ydudfN6g66rrQX5x8Sqg==}
@@ -13799,6 +13809,10 @@ snapshots:
   egg-path-matching@1.1.0:
     dependencies:
       path-to-regexp: 1.9.0
+
+  egg-path-matching@2.1.0:
+    dependencies:
+      path-to-regexp: 6.3.0
 
   egg-redis@2.6.0:
     dependencies:

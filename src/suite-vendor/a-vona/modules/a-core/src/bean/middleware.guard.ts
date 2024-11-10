@@ -1,4 +1,5 @@
 import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+import { MiddlewareLike } from '../common/middlewareLike.js';
 
 export interface IMiddlewareOptionsGuard extends IDecoratorMiddlewareOptions {
   test?: string;
@@ -6,8 +7,14 @@ export interface IMiddlewareOptionsGuard extends IDecoratorMiddlewareOptions {
 
 @Middleware<IMiddlewareOptionsGuard>({ global: true })
 export class MiddlewareGuard extends BeanBase implements IMiddlewareExecute {
+  private middlewareLike: MiddlewareLike;
+
+  protected __init__() {
+    this.middlewareLike = this.bean._newBean(MiddlewareLike, 'guard');
+  }
+
   async execute(_options: IMiddlewareOptionsGuard, next: Next) {
-    console.log(_options.test, 'guard');
+    //this.middlewareLike.
     // next
     return next();
   }

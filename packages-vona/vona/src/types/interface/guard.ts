@@ -1,8 +1,12 @@
-import { IMiddlewareBase } from './middleware.js';
+import { IMiddlewareBase, Next } from './middleware.js';
 
 export interface IGuardRecordGlobal {}
 export interface IGuardRecordLocal {}
 export type IGuardRecord = IGuardRecordGlobal & IGuardRecordLocal;
+
+export interface IGuardExecute {
+  execute(options: IDecoratorGuardOptions, next: Next): Promise<any>;
+}
 
 export interface IDecoratorGuardOptions extends IMiddlewareBase {
   global?: boolean;
