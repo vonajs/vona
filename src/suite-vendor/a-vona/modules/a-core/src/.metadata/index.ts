@@ -28,7 +28,7 @@ export * from '../bean/guard.user.js';
 import { IGuardOptionsUser } from '../bean/guard.user.js';
 import 'vona';
 declare module 'vona' {
-  export interface IGuardRecordLocal {
+  export interface IGuardRecordGlobal {
     'a-core:user': IGuardOptionsUser;
   }
 }

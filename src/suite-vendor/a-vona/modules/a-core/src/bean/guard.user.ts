@@ -4,7 +4,7 @@ export interface IGuardOptionsUser extends IDecoratorGuardOptions {
   public?: boolean;
 }
 
-@Guard<IGuardOptionsUser>({ public: false })
+@Guard<IGuardOptionsUser>({ global: true, public: false })
 export class GuardUser extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsUser, next: Next) {
     // check user
