@@ -129,7 +129,7 @@ const context: ContextBase = {
 
   getHandler() {
     const self = Cast<VonaContext>(this);
-    return self.route.actionDescriptor.value;
+    return self.route.actionDescriptor?.value;
   },
 };
 export default context;
