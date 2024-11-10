@@ -37,7 +37,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
       await this.ctx.bean.user.check();
       // logined
       return await this.getLoginInfo({ clientId: true });
-    } catch (e) {
+    } catch (_err) {
       // deleted,disabled
       return await this._logout_inner();
     }
