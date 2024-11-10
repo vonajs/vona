@@ -2,7 +2,7 @@ import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, 
 
 export interface IMiddlewareOptionsInterceptor extends IDecoratorMiddlewareOptions {}
 
-@Middleware({ global: true, dependencies: 'a-core:guard' } as IMiddlewareOptionsInterceptor)
+@Middleware<IMiddlewareOptionsInterceptor>({ global: true, dependencies: 'a-core:guard' })
 export class MiddlewareInterceptor extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsInterceptor, next: Next) {
     console.log('interceptor');
