@@ -1,10 +1,10 @@
-import { BeanBase, Guard, IDecoratorGuardOptions, IGuardExecute, Next } from 'vona';
+import { BeanBase, IDecoratorInterceptorOptions, IInterceptorExecute, Interceptor, Next } from 'vona';
 
-export interface IGuardOptions<%=argv.beanNameCapitalize%> extends IDecoratorGuardOptions {}
+export interface IInterceptorOptions<%=argv.beanNameCapitalize%> extends IDecoratorInterceptorOptions {}
 
-@Guard<IGuardOptions<%=argv.beanNameCapitalize%>>({})
-export class Guard<%=argv.beanNameCapitalize%> extends BeanBase implements IGuardExecute {
-  async execute(_options: IGuardOptions<%=argv.beanNameCapitalize%>, next: Next) {
+@Interceptor<IInterceptorOptions<%=argv.beanNameCapitalize%>>({})
+export class Interceptor<%=argv.beanNameCapitalize%> extends BeanBase implements IInterceptorExecute {
+  async execute(_options: IInterceptorOptions<%=argv.beanNameCapitalize%>, next: Next) {
     // next
     return next();
   }
