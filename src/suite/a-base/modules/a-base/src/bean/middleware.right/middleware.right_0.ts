@@ -16,7 +16,7 @@ export class MiddlewareRight0 extends BeanBase<ScopeModule> {
     // ignore
     if (!options.type) {
       // others
-      return await next();
+      return next();
     }
 
     const types = options.type.split(',');
@@ -38,7 +38,7 @@ export class MiddlewareRight0 extends BeanBase<ScopeModule> {
     }
 
     // next
-    await next();
+    return next();
   }
 
   async checkRight(type, options) {

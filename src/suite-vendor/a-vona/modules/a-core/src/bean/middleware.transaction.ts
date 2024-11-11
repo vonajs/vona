@@ -20,7 +20,7 @@ function checkIfSuccess(ctx) {
       throw ctx.app.meta.util.createError(ctx.response.body);
     }
   } else {
-    if (ctx.response.status !== 200) {
+    if (ctx.response.status !== 404 && ctx.response.status !== 200) {
       ctx.throw(ctx.response.status);
     }
   }

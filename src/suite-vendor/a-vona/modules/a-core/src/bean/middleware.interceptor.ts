@@ -16,8 +16,11 @@ export class MiddlewareInterceptor extends BeanBase implements IMiddlewareExecut
     const handler = this.ctx.getHandler();
     if (!handler) return next();
     //
-    return await this.middlewareLike.composeAsync()(this.ctx, () => {
+    const res = await this.middlewareLike.composeAsync()(this.ctx, () => {
       return next();
     });
+    if (this.ctx.response.status === 404 && this.ctx.response.body === undefined) {
+      this.ctx.success(res);
+    }
   }
 }

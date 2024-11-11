@@ -21,6 +21,6 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @UseInterceptor('a-b4:test1')
   @UseInterceptorGlobal('a-b4:test2', { test: 'from action' })
   index() {
-    return 'Hello Vona';
+    //return 'Hello Vona';
   }
 }

@@ -6,6 +6,6 @@ export class MiddlewareAuth extends BeanBase {
     // check
     await this.ctx.bean.user.check(options);
     // next
-    await next();
+    return next();
   }
 }

@@ -8,6 +8,6 @@ export class MiddlewareGate extends BeanBase {
       this.ctx.throw(403);
     }
     // next
-    await next();
+    return next();
   }
 }

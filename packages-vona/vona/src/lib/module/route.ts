@@ -243,9 +243,11 @@ export class AppRouter extends BeanSimple {
       // dynamic options
       ctx.meta.middlewares = {};
       // next
-      await next();
+      const res = await next();
       // invoke callbackes: handle secondly
       await ctx.tailDone();
+      // ok
+      return res;
     };
     fnStart._name = 'start';
     args.push(fnStart);
@@ -258,9 +260,11 @@ export class AppRouter extends BeanSimple {
     // middlewares: tailDone
     const fnTailDone = async (ctx, next) => {
       // next
-      await next();
+      const res = await next();
       // invoke callbackes: handle firstly
       await ctx.tailDone();
+      // ok
+      return res;
     };
     fnStart._name = 'tailDone';
     args.push(fnTailDone);
@@ -367,7 +371,7 @@ function middlewareDeps(sceneName: string, ctx, options) {
 }
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {
-  return async function classControllerMiddleware(this: VonaContext, ...args) {
+  return function classControllerMiddleware(this: VonaContext, ...args) {
     const controller = this.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);
@@ -375,9 +379,6 @@ function controllerActionToMiddleware(controllerBeanFullName, _route) {
     if (!controller[_route.action]) {
       throw new Error(`controller action not found: ${controllerBeanFullName}.${_route.action}`);
     }
-    const res = await controller[_route.action](...args);
-    if (this.response.body === undefined && res !== undefined) {
-      this.success(res);
-    }
+    return controller[_route.action](...args);
   };
 }

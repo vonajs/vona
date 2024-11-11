@@ -6,7 +6,7 @@ export class MiddlewareAuthOpen extends BeanBase {
     // check
     this.checkAuthOpen(options);
     // next
-    await next();
+    return next();
   }
 
   checkAuthOpen(options) {
