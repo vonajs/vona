@@ -3,8 +3,8 @@ import { TypeUseMiddlewareGlobalLikeOptions } from '../../../types/interface/mid
 import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
 
 export function UseInterceptorGlobal<T extends keyof IInterceptorRecordGlobal>(
-  guardName: T,
+  interceptorName: T,
   options?: TypeUseMiddlewareGlobalLikeOptions<IInterceptorRecordGlobal[T]>,
 ): ClassDecorator & MethodDecorator {
-  return UseMiddlewareGlobalLike('interceptor', guardName, options);
+  return UseMiddlewareGlobalLike('interceptor', interceptorName, options);
 }

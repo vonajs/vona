@@ -3,8 +3,8 @@ import { TypeUseMiddlewareLikeOptions } from '../../../types/interface/middlewar
 import { UseMiddlewareLike } from './useMiddlewareLike.js';
 
 export function UseInterceptor<T extends keyof IInterceptorRecordLocal>(
-  guardName: T,
+  interceptorName: T,
   options?: TypeUseMiddlewareLikeOptions<IInterceptorRecordLocal[T]>,
 ): ClassDecorator & MethodDecorator {
-  return UseMiddlewareLike('interceptor', guardName, options);
+  return UseMiddlewareLike('interceptor', interceptorName, options);
 }
