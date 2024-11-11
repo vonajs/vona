@@ -1,4 +1,14 @@
-import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+import {
+  appMetadata,
+  BeanBase,
+  IDecoratorMiddlewareOptions,
+  IMiddlewareExecute,
+  IRouteParamPipeOptionsItem,
+  MetadataKey,
+  Middleware,
+  Next,
+  SymbolCreateRouteParamPipeOptions,
+} from 'vona';
 import { MiddlewareLike } from '../common/middlewareLike.js';
 
 export interface IMiddlewareOptionsPipe extends IDecoratorMiddlewareOptions {}
@@ -15,9 +25,28 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     // todo: support fromConfig
     const handler = this.ctx.getHandler();
     if (!handler) return next();
-    // compose
-    await this.middlewareLike.composeAsync()(this.ctx);
+    // arguments
+    this.ctx.state.arguments = await this._transformArguments();
+    // // arguments
+    // const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, IRouteParamPipeOptionsItem[]>(
+    //   SymbolCreateRouteParamPipeOptions,
+    //   this.ctx.getClass(),
+    // );
+    // const argsLength = argsMeta[handler.name].length;
+    // console.log(argsLength);
+    // // compose
+    // await this.middlewareLike.composeAsync()(this.ctx);
     // next
     return next();
+  }
+
+  async _transformArguments(): Promise<any[] | undefined> {
+    const paramtypes = appMetadata.getMetadata<any[]>(
+      'design:paramtypes',
+      this.ctx.getClass().prototype,
+      this.ctx.getHandler().name,
+    );
+    if (!paramtypes) return;
+    console.log(paramtypes.length);
   }
 }

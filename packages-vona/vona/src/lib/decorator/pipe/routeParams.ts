@@ -8,7 +8,7 @@ import { appMetadata, MetadataKey } from '../../core/metadata.js';
 export function createPipesRouteParamDecorator(paramtype: RouteParamtypes) {
   return function (data?: any, ...pipes: Function[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
-      const argsOptions = appMetadata.getOwnMetadataMap<MetadataKey, IRouteParamPipeOptionsItem[]>(
+      const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, IRouteParamPipeOptionsItem[]>(
         SymbolCreateRouteParamPipeOptions,
         target.constructor,
       );
@@ -17,8 +17,8 @@ export function createPipesRouteParamDecorator(paramtype: RouteParamtypes) {
       const paramData = hasParamData ? data : undefined;
       const paramPipes = hasParamData ? pipes : [data, ...pipes];
 
-      if (!argsOptions[prop!]) argsOptions[prop!] = [];
-      argsOptions[prop!].push({
+      if (!argsMeta[prop!]) argsMeta[prop!] = [];
+      argsMeta[prop!].push({
         index,
         paramtype,
         paramData,
