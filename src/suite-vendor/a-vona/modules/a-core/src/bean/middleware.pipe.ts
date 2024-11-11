@@ -6,7 +6,7 @@ export interface IMiddlewareOptionsPipe extends IDecoratorMiddlewareOptions {}
 export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsPipe, next: Next) {
     console.log('pipe');
-    // support fromConfig
+    // todo: support fromConfig
     const handler = this.ctx.getHandler();
     if (!handler) return next();
     // next

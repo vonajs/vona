@@ -6,7 +6,7 @@ export interface IMiddlewareOptionsInterceptor extends IDecoratorMiddlewareOptio
 export class MiddlewareInterceptor extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsInterceptor, next: Next) {
     console.log('interceptor');
-    // support fromConfig
+    // todo: support fromConfig
     const handler = this.ctx.getHandler();
     if (!handler) return next();
     // next

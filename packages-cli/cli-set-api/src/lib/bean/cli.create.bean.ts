@@ -11,6 +11,7 @@ const __decorators = {
 const __boilerplates = {
   middleware: 'middleware',
   guard: 'guard',
+  interceptor: 'interceptor',
 };
 
 declare module '@cabloy/cli' {
