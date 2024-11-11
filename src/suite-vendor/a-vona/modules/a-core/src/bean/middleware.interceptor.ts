@@ -15,7 +15,7 @@ export class MiddlewareInterceptor extends BeanBase implements IMiddlewareExecut
     // todo: support fromConfig
     const handler = this.ctx.getHandler();
     if (!handler) return next();
-    //
+    // compose
     const res = await this.middlewareLike.composeAsync()(this.ctx, () => {
       return next();
     });
