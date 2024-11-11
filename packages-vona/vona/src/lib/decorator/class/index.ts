@@ -8,6 +8,7 @@ export * from './guard.js';
 export * from './interceptor.js';
 export * from './middleware.js';
 export * from './model.js';
+export * from './pipe.js';
 export * from './service.js';
 export * from './virtual.js';
 export * from './scope.js';

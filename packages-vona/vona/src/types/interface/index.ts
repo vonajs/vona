@@ -4,5 +4,6 @@ export * from './interceptor.js';
 export * from './middleware.js';
 export * from './module.js';
 export * from './monkey.js';
+export * from './pipe.js';
 export * from './queue.js';
 export * from './schedule.js';

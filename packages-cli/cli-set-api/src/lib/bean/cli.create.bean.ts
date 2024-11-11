@@ -12,6 +12,7 @@ const __boilerplates = {
   middleware: 'middleware',
   guard: 'guard',
   interceptor: 'interceptor',
+  pipe: 'pipe',
 };
 
 declare module '@cabloy/cli' {

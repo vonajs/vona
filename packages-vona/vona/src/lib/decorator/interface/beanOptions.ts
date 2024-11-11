@@ -16,6 +16,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'middleware'
   | 'guard'
   | 'interceptor'
+  | 'pipe'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
