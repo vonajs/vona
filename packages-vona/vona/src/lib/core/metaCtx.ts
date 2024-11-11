@@ -31,8 +31,8 @@ export class CtxMeta extends BeanSimple {
     // options: config
     let optionsConfig;
     if (item.fromConfig) {
-      const config = this.ctx.config.module(item.beanOptions.module);
-      optionsConfig = config.middlewares?.[item.name];
+      const config = this.ctx.config?.module(item.beanOptions.module);
+      optionsConfig = config?.middlewares?.[item.name];
     } else {
       optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
     }

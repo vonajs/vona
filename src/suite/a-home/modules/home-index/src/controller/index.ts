@@ -2,6 +2,7 @@ import {
   BeanBase,
   Controller,
   Get,
+  Query,
   UseGuard,
   UseGuardGlobal,
   UseInterceptor,
@@ -13,6 +14,7 @@ import {
 import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
+@UseGuard('a-b4:test')
 export class ControllerIndex extends BeanBase<ScopeModule> {
   @Get('//')
   @UseMiddleware('a-core:transaction')
@@ -27,5 +29,11 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @UsePipeGlobal('a-b4:test2', { transform: true })
   index() {
     //return 'Hello Vona';
+  }
+
+  @Get('echo/:id')
+  @UseGuardGlobal('a-core:user', { public: true })
+  echo(@Query('id') id: number) {
+    return 'echo' + id;
   }
 }
