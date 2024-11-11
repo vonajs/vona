@@ -31,9 +31,9 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
     //return 'Hello Vona';
   }
 
-  @Get('echo/:id')
+  @Get('echo')
   @UseGuardGlobal('a-core:user', { public: true })
-  echo(@Query('id') id: number) {
-    return 'echo' + id;
+  echo(@Query('id') id: number, @Query('name') name: string) {
+    return 'echo' + id + '' + name;
   }
 }
