@@ -1,5 +1,7 @@
 export * from './useGuard.js';
 export * from './useGuardGlobal.js';
+export * from './useInterceptor.js';
+export * from './useInterceptorGlobal.js';
 export * from './useMiddleware.js';
 export * from './useMiddlewareGlobal.js';
 export * from './useMiddlewareGlobalLike.js';
