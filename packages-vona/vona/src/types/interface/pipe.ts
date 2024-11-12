@@ -9,8 +9,10 @@ export interface IPipeTransform<T = any, R = any> {
   transform(value: T, metadata: RouteHandlerArgumentMeta, options: IDecoratorPipeOptions): Promise<R>;
 }
 
-export interface IDecoratorPipeOptions extends IMiddlewareBase {
-  global?: boolean;
+export interface IDecoratorPipeOptions {}
+
+export interface IDecoratorPipeOptionsGlobal extends IMiddlewareBase {
+  global: true;
   dependencies?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
   dependents?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
 }

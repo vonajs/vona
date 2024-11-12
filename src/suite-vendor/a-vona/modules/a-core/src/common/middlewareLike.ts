@@ -5,9 +5,11 @@ import {
   appResource,
   BeanSimple,
   IMiddlewareItem,
+  IPipeRecordLocal,
   RouteHandlerArgumentMetaDecorator,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
+  TypeUseMiddlewareLikeOptions,
   VonaContext,
 } from 'vona';
 
@@ -169,6 +171,13 @@ export class MiddlewareLike extends BeanSimple {
     return middlewaresAll;
   }
 }
+
+// export function createArgumentPipe<T extends keyof IPipeRecordLocal>(
+//   pipeName: T,
+//   options?: TypeUseMiddlewareLikeOptions<IPipeRecordLocal[T]>,
+// ) {
+//   const item = this.middlewaresNormal[middlewareName];
+// }
 
 export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
   const fn = (ctx: VonaContext, next) => {
