@@ -27,7 +27,8 @@ export type RouteHandlerArgumentType =
   | 'files'
   | 'host'
   | 'ip'
-  | 'rawBody';
+  | 'rawBody'
+  | 'string';
 
 export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
 export interface RouteHandlerArgumentMetaDecorator {

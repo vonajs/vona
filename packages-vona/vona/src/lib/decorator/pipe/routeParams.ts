@@ -1,11 +1,11 @@
 import {
   RouteHandlerArgumentMetaDecorator,
-  RouteParamTypes,
+  RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
 } from '../../../types/interface/pipe.js';
 import { appMetadata, MetadataKey } from '../../core/metadata.js';
 
-export function createPipesRouteParamDecorator(paramType: RouteParamTypes, extractValue?: Function) {
+export function createPipesRouteParamDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: any, ...pipes: Function[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
