@@ -7,6 +7,8 @@ import { CliCreateEntity } from './bean/cli.create.entity.js';
 import { CliCreateModel } from './bean/cli.create.model.js';
 import { CliCreateService } from './bean/cli.create.service.js';
 import { CliCreateController } from './bean/cli.create.controller.js';
+import { CliInitConfig } from './bean/cli.init.config.js';
+import { CliInitLocale } from './bean/cli.init.locale.js';
 import { CliInitMonkey } from './bean/cli.init.monkey.js';
 import { CliInitMain } from './bean/cli.init.main.js';
 import { CliInitStatic } from './bean/cli.init.static.js';
@@ -24,6 +26,8 @@ export const beans = {
   'create.model': CliCreateModel,
   'create.service': CliCreateService,
   'create.controller': CliCreateController,
+  'init.config': CliInitConfig,
+  'init.locale': CliInitLocale,
   'init.monkey': CliInitMonkey,
   'init.main': CliInitMain,
   'init.static': CliInitStatic,
