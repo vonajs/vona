@@ -26,7 +26,7 @@ export default function (app: VonaApplication): [object, any[]] {
   loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app);
 
   // handle dependents
-  handleDependents(ebMiddlewaresAll);
+  handleDependents(ebMiddlewaresGlobal);
 
   // load middlewares
   loadMiddlewares(
@@ -50,11 +50,11 @@ function loadMiddlewares(
   // load
   for (const item of ebMiddlewaresAll) {
     // ignore other types, such as: socketio.connection/socketio.packet
-    const type = item.options.type;
+    const type = item.options?.type;
     if (!type) {
       // normal
       ebMiddlewaresNormal[item.name] = item;
-      if (item.options.global) {
+      if (item.options?.global) {
         ebMiddlewaresGlobal.push(item);
       }
     } else if (type === 'socketio.connection') {
@@ -110,12 +110,13 @@ function _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app) {
 }
 
 function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
+  // todo: remove this line
+  if (module.info.relativeName !== 'a-core') return;
   const scene = 'middleware';
   const middlewares = appResource.scenes['middleware'][module.info.relativeName];
   if (!middlewares) return;
   for (const key in middlewares) {
     const beanOptions = middlewares[key];
-    if (!beanOptions.options) continue;
     // push
     ebMiddlewaresAll.push({
       name: key.replace(`.${scene}.`, ':'),
@@ -125,15 +126,15 @@ function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
   }
 }
 
-function handleDependents(ebMiddlewaresAll) {
-  for (const middleware of ebMiddlewaresAll) {
+function handleDependents(ebMiddlewaresGlobal) {
+  for (const middleware of ebMiddlewaresGlobal) {
     let dependents = middleware.options.dependents;
     if (!dependents) continue;
     if (!Array.isArray(dependents)) {
       dependents = dependents.split(',');
     }
     for (const dep of dependents) {
-      const middleware2 = ebMiddlewaresAll.find(item => item.name === dep);
+      const middleware2 = ebMiddlewaresGlobal.find(item => item.name === dep);
       if (!middleware2) {
         throw new Error(`middleware ${dep} not found for dependents of ${middleware.name}`);
       }
