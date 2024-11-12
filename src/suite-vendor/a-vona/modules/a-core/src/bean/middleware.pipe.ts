@@ -75,7 +75,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     value: any,
   ) {
     // pipes
-    const pipes = this.middlewareLike.collectPipes(argMeta, (beanInstance: IPipeTransform, options) => {
+    const pipes = this.middlewareLike.collectPipes(argMeta, (beanInstance: IPipeTransform, options, value) => {
       return beanInstance.transform(value, metadata, options);
     });
   }

@@ -179,7 +179,7 @@ export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, execute
         ctx[SymboleMiddlewareStatus][sceneName] = {};
       }
       ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
-      return next();
+      return typeof next === 'function' ? next() : next;
     }
     // execute
     const beanFullName = item.beanOptions.beanFullName;
