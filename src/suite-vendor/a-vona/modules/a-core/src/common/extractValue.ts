@@ -1,37 +1,37 @@
-import { IRouteHandlerArgumentMeta, RouteParamtypes, VonaContext } from 'vona';
+import { IRouteHandlerArgumentMeta, RouteParamTypes, VonaContext } from 'vona';
 
 export function extractValue(ctx: VonaContext, argMeta: IRouteHandlerArgumentMeta) {
   return exchangeKeyForValue(argMeta.type, argMeta.field, { req: ctx.request, res: ctx.response });
 }
 
-export function exchangeKeyForValue(type: RouteParamtypes, field, { req, res }) {
+export function exchangeKeyForValue(type: RouteParamTypes, field, { req, res }) {
   switch (type) {
-    case RouteParamtypes.NEXT:
+    case RouteParamTypes.NEXT:
       return undefined;
-    case RouteParamtypes.REQUEST:
+    case RouteParamTypes.REQUEST:
       return req;
-    case RouteParamtypes.RESPONSE:
+    case RouteParamTypes.RESPONSE:
       return res;
-    case RouteParamtypes.BODY:
+    case RouteParamTypes.BODY:
       return field && req.body ? req.body[field] : req.body;
-    case RouteParamtypes.RAW_BODY:
+    case RouteParamTypes.RAW_BODY:
       return req.rawBody;
-    case RouteParamtypes.PARAM:
+    case RouteParamTypes.PARAM:
       return field ? req.params[field] : req.params;
-    case RouteParamtypes.HOST:
+    case RouteParamTypes.HOST:
       const hosts = req.hosts || {};
       return field ? hosts[field] : hosts;
-    case RouteParamtypes.QUERY:
+    case RouteParamTypes.QUERY:
       return field ? req.query[field] : req.query;
-    case RouteParamtypes.HEADERS:
+    case RouteParamTypes.HEADERS:
       return field ? req.headers[field.toLowerCase()] : req.headers;
-    case RouteParamtypes.SESSION:
+    case RouteParamTypes.SESSION:
       return req.session;
-    case RouteParamtypes.FILE:
+    case RouteParamTypes.FILE:
       return req[field || 'file'];
-    case RouteParamtypes.FILES:
+    case RouteParamTypes.FILES:
       return req.files;
-    case RouteParamtypes.IP:
+    case RouteParamTypes.IP:
       return req.ip;
     default:
       return undefined;

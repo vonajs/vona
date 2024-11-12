@@ -17,7 +17,7 @@ export interface IDecoratorPipeOptions extends IMiddlewareBase {
 
 export type Paramtype = 'body' | 'query' | 'param' | 'custom';
 
-export enum RouteParamtypes {
+export enum RouteParamTypes {
   REQUEST = 0,
   RESPONSE = 1,
   NEXT = 2,
@@ -36,7 +36,7 @@ export enum RouteParamtypes {
 export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
 export interface IRouteHandlerArgumentMeta {
   index: number;
-  type: RouteParamtypes;
+  type: RouteParamTypes;
   field?: string;
   pipes: Function[];
   extractValue?: Function;

@@ -1,6 +1,6 @@
 import { Type } from 'vona';
 import { PARAMTYPES_METADATA, ROUTE_ARGS_METADATA } from '@nestjs/common/constants.js';
-import { RouteParamtypes } from '@nestjs/common/enums/route-paramtypes.enum.js';
+import { RouteParamTypes } from '@nestjs/common/enums/route-paramtypes.enum.js';
 import { isEmpty, mapValues, omitBy } from 'lodash-es';
 import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.interface.js';
 import { ParameterLocation, SchemaObject } from '../interfaces/open-api-spec.interface.js';
@@ -57,13 +57,13 @@ export class ParameterMetadataAccessor {
   private mapParamType(key: string): string {
     const keyPair = key.split(':');
     switch (Number(keyPair[0])) {
-      case RouteParamtypes.BODY:
+      case RouteParamTypes.BODY:
         return 'body';
-      case RouteParamtypes.PARAM:
+      case RouteParamTypes.PARAM:
         return 'path';
-      case RouteParamtypes.QUERY:
+      case RouteParamTypes.QUERY:
         return 'query';
-      case RouteParamtypes.HEADERS:
+      case RouteParamTypes.HEADERS:
         return 'header';
       default:
         return PARAM_TOKEN_PLACEHOLDER;
