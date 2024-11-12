@@ -45,10 +45,12 @@ async function _transformArguments(
     // extractValue
     const value = await _extractArgumentValue(ctx, argMeta);
     // metadata
-    const metadata = {
+    const metadata: RouteHandlerArgumentMeta = {
       type: argMeta.type,
       field: argMeta.field,
       metaType: paramtypes[index],
+      method: handler.name,
+      index: argMeta.index,
     };
     // transform
     args[index] = await _transformArgument(ctx, argMeta, metadata, value);

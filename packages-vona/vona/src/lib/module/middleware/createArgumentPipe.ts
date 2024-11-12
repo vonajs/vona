@@ -7,7 +7,10 @@ export interface ArgumentPipeResult<T extends keyof IPipeRecordLocal> {
 
 export type ArgumentPipeResultFn<T extends keyof IPipeRecordLocal> = () => ArgumentPipeResult<T>;
 
-export function createArgumentPipe<T extends keyof IPipeRecordLocal>(pipeName: T, options?: IPipeRecordLocal[T]) {
+export function createArgumentPipe<T extends keyof IPipeRecordLocal>(
+  pipeName: T,
+  options?: Partial<IPipeRecordLocal[T]>,
+) {
   return {
     pipeName,
     options,

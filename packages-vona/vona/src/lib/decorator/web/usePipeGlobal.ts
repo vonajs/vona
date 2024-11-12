@@ -4,7 +4,7 @@ import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
 
 export function UsePipeGlobal<T extends keyof IPipeRecordGlobal>(
   pipeName: T,
-  options?: TypeUseMiddlewareGlobalLikeOptions<IPipeRecordGlobal[T]>,
+  options?: Partial<TypeUseMiddlewareGlobalLikeOptions<IPipeRecordGlobal[T]>>,
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareGlobalLike('pipe', pipeName, options);
 }

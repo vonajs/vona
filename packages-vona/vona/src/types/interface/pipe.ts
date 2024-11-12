@@ -47,4 +47,6 @@ export interface RouteHandlerArgumentMeta {
   type: RouteHandlerArgumentType;
   field?: string;
   metaType?: Type<any>;
+  method: string;
+  index: number;
 }

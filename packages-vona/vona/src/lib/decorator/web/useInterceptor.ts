@@ -3,7 +3,7 @@ import { UseMiddlewareLike } from './useMiddlewareLike.js';
 
 export function UseInterceptor<T extends keyof IInterceptorRecordLocal>(
   interceptorName: T,
-  options?: IInterceptorRecordLocal[T],
+  options?: Partial<IInterceptorRecordLocal[T]>,
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareLike('interceptor', interceptorName, options);
 }

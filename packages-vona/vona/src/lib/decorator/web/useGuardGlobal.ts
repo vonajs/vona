@@ -4,7 +4,7 @@ import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
 
 export function UseGuardGlobal<T extends keyof IGuardRecordGlobal>(
   guardName: T,
-  options?: TypeUseMiddlewareGlobalLikeOptions<IGuardRecordGlobal[T]>,
+  options?: Partial<TypeUseMiddlewareGlobalLikeOptions<IGuardRecordGlobal[T]>>,
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareGlobalLike('guard', guardName, options);
 }

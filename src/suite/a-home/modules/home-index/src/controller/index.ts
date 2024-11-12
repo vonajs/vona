@@ -2,6 +2,7 @@ import {
   BeanBase,
   Controller,
   Get,
+  HttpStatus,
   Query,
   UseGuard,
   UseGuardGlobal,

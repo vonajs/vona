@@ -3,7 +3,7 @@ import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
 
 export function UseMiddlewareGlobal<T extends keyof IMiddlewareRecordGlobal>(
   middlewareName: T,
-  options?: TypeUseMiddlewareGlobalLikeOptions<IMiddlewareRecordGlobal[T]>,
+  options?: Partial<TypeUseMiddlewareGlobalLikeOptions<IMiddlewareRecordGlobal[T]>>,
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareGlobalLike('middleware', middlewareName, options);
 }

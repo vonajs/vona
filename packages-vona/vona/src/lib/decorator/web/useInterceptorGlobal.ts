@@ -4,7 +4,7 @@ import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
 
 export function UseInterceptorGlobal<T extends keyof IInterceptorRecordGlobal>(
   interceptorName: T,
-  options?: TypeUseMiddlewareGlobalLikeOptions<IInterceptorRecordGlobal[T]>,
+  options?: Partial<TypeUseMiddlewareGlobalLikeOptions<IInterceptorRecordGlobal[T]>>,
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareGlobalLike('interceptor', interceptorName, options);
 }

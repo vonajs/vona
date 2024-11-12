@@ -3,7 +3,7 @@ import { UseMiddlewareLike } from './useMiddlewareLike.js';
 
 export function UseGuard<T extends keyof IGuardRecordLocal>(
   guardName: T,
-  options?: IGuardRecordLocal[T],
+  options?: Partial<IGuardRecordLocal[T]>,
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareLike('guard', guardName, options);
 }
