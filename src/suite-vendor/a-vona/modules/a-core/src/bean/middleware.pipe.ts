@@ -73,7 +73,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     argMeta: IRouteHandlerArgumentMeta,
     value: any,
   ) {
-    console.log(argMeta);
+    //
   }
 
   _extractArgumentValue(argMeta: IRouteHandlerArgumentMeta) {

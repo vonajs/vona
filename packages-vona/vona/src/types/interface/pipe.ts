@@ -1,24 +1,18 @@
 import { Type } from '../utils/type.js';
-import { IMiddlewareBase, Next } from './middleware.js';
+import { IMiddlewareBase } from './middleware.js';
 
 export interface IPipeRecordGlobal {}
 export interface IPipeRecordLocal {}
 export type IPipeRecord = IPipeRecordGlobal & IPipeRecordLocal;
 
-export interface IPipeExecute<T = any, R = any> {
-  execute(value: T, metadata: ArgumentMetadata, options: IDecoratorPipeOptions, next: Next): Promise<R>;
+export interface IPipeTransform<T = any, R = any> {
+  transform(value: T, metadata: ArgumentMetadata, options: IDecoratorPipeOptions): Promise<R>;
 }
 
 export interface IDecoratorPipeOptions extends IMiddlewareBase {
   global?: boolean;
   dependencies?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
   dependents?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
-}
-
-export interface ArgumentMetadata {
-  type: Paramtype;
-  metatype?: Type<any> | undefined;
-  data?: string | undefined;
 }
 
 export type Paramtype = 'body' | 'query' | 'param' | 'custom';
@@ -46,4 +40,10 @@ export interface IRouteHandlerArgumentMeta {
   field?: string;
   pipes: Function[];
   extractValue?: Function;
+}
+
+export interface ArgumentMetadata {
+  type: Paramtype;
+  field?: string;
+  metaType?: Type<any>;
 }

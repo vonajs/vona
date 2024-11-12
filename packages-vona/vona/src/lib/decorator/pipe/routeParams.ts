@@ -5,24 +5,25 @@ import {
 } from '../../../types/interface/pipe.js';
 import { appMetadata, MetadataKey } from '../../core/metadata.js';
 
-export function createPipesRouteParamDecorator(paramtype: RouteParamtypes) {
-  return function (data?: any, ...pipes: Function[]): ParameterDecorator {
+export function createPipesRouteParamDecorator(paramType: RouteParamtypes, extractValue?: Function) {
+  return function (field?: any, ...pipes: Function[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, IRouteHandlerArgumentMeta[]>(
         SymbolRouteHandlersArgumentsMeta,
         target.constructor,
       );
 
-      const hasParamData = typeof data !== 'function';
-      const paramData = hasParamData ? data : undefined;
-      const paramPipes = hasParamData ? pipes : [data, ...pipes];
+      const hasParamField = typeof field !== 'function';
+      const paramField = hasParamField ? field : undefined;
+      const paramPipes = hasParamField ? pipes : [field, ...pipes];
 
       if (!argsMeta[prop!]) argsMeta[prop!] = [];
       argsMeta[prop!].push({
         index,
-        paramtype,
-        paramData,
-        paramPipes,
+        type: paramType,
+        field: paramField,
+        pipes: paramPipes,
+        extractValue,
       });
     };
   };
