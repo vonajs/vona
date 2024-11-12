@@ -1,15 +1,17 @@
 import {
   appMetadata,
   BeanBase,
+  Constructable,
   IDecoratorMiddlewareOptions,
   IMiddlewareExecute,
-  IRouteParamPipeOptionsItem,
+  IRouteHandlerArgumentMeta,
   MetadataKey,
   Middleware,
   Next,
-  SymbolCreateRouteParamPipeOptions,
+  SymbolRouteHandlersArgumentsMeta,
 } from 'vona';
 import { MiddlewareLike } from '../common/middlewareLike.js';
+import { extractValue } from '../common/extractValue.js';
 
 export interface IMiddlewareOptionsPipe extends IDecoratorMiddlewareOptions {}
 
@@ -26,10 +28,10 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     const handler = this.ctx.getHandler();
     if (!handler) return next();
     // arguments
-    this.ctx.state.arguments = await this._transformArguments();
+    this.ctx.state.arguments = await this._transformArguments(this.ctx.getClass(), handler);
     // // arguments
-    // const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, IRouteParamPipeOptionsItem[]>(
-    //   SymbolCreateRouteParamPipeOptions,
+    // const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, IRouteHandlerArgumentMeta[]>(
+    //   SymbolRouteHandlersArgumentsMeta,
     //   this.ctx.getClass(),
     // );
     // const argsLength = argsMeta[handler.name].length;
@@ -40,13 +42,44 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     return next();
   }
 
-  async _transformArguments(): Promise<any[] | undefined> {
-    const paramtypes = appMetadata.getMetadata<any[]>(
-      'design:paramtypes',
-      this.ctx.getClass().prototype,
-      this.ctx.getHandler().name,
-    );
+  async _transformArguments(constroller: Constructable, handler: Function): Promise<any[] | undefined> {
+    const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', constroller.prototype, handler.name);
     if (!paramtypes) return;
-    console.log(paramtypes.length);
+
+    // meta
+    const argsMetaAll = appMetadata.getOwnMetadataMap<MetadataKey, IRouteHandlerArgumentMeta[]>(
+      SymbolRouteHandlersArgumentsMeta,
+      constroller,
+    );
+    const argsMeta = argsMetaAll[handler.name];
+    if (!argsMeta) return;
+
+    // args
+    const args = Array(paramtypes.length);
+    for (let index = 0; index < args.length; index++) {
+      const argMeta = argsMeta.find(item => item.index === index);
+      if (!argMeta) continue;
+      // extractValue
+      const value = this._extractArgumentValue(argMeta);
+      // transform
+      args[index] = await this._transformArgument(constroller, handler, argMeta, value);
+    }
+    return args;
+  }
+
+  async _transformArgument(
+    constroller: Constructable,
+    handler: Function,
+    argMeta: IRouteHandlerArgumentMeta,
+    value: any,
+  ) {
+    console.log(argMeta);
+  }
+
+  _extractArgumentValue(argMeta: IRouteHandlerArgumentMeta) {
+    if (argMeta.extractValue) {
+      return argMeta.extractValue(this.ctx, argMeta);
+    }
+    return extractValue(this.ctx, argMeta);
   }
 }

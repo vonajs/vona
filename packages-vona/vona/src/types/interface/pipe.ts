@@ -39,10 +39,11 @@ export enum RouteParamtypes {
   RAW_BODY = 12,
 }
 
-export const SymbolCreateRouteParamPipeOptions = Symbol('SymbolCreateRouteParamPipeOptions');
-export interface IRouteParamPipeOptionsItem {
+export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
+export interface IRouteHandlerArgumentMeta {
   index: number;
-  paramtype: RouteParamtypes;
-  paramData?: string;
-  paramPipes: Function[];
+  type: RouteParamtypes;
+  field?: string;
+  pipes: Function[];
+  extractValue?: Function;
 }
