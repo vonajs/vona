@@ -371,7 +371,7 @@ function middlewareMatch(ctx, options) {
 // }
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {
-  return function classControllerMiddleware(this: VonaContext, ...args) {
+  return function classControllerMiddleware(this: VonaContext) {
     const controller = this.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);
@@ -379,6 +379,6 @@ function controllerActionToMiddleware(controllerBeanFullName, _route) {
     if (!controller[_route.action]) {
       throw new Error(`controller action not found: ${controllerBeanFullName}.${_route.action}`);
     }
-    return controller[_route.action](...args);
+    return controller[_route.action](...(this.state.arguments || []));
   };
 }
