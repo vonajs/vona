@@ -1,11 +1,14 @@
-import { BeanBase, IDecoratorPipeOptions, IPipeExecute, Next, Pipe } from 'vona';
+import { ArgumentMetadata, BeanBase, IDecoratorPipeOptions, IPipeTransform, Pipe } from 'vona';
 
 export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
 
 @Pipe<IPipeOptions<%=argv.beanNameCapitalize%>>({})
-export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeExecute {
+export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeTransform {
   async execute(_options: IPipeOptions<%=argv.beanNameCapitalize%>, next: Next) {
     // next
     return next();
+  }
+  async transform(value, _metadata: ArgumentMetadata, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
+    return value;
   }
 }
