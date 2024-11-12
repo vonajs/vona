@@ -1,4 +1,5 @@
-import { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType, VonaContext } from 'vona';
+import { VonaContext } from '../../../types/context/index.js';
+import { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from '../../../types/interface/pipe.js';
 
 export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
   return exchangeKeyForValue(argMeta.type, argMeta.field, { req: ctx.request, res: ctx.response });

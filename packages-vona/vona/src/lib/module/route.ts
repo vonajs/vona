@@ -372,14 +372,14 @@ function middlewareMatch(ctx, options) {
 // }
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {
-  return function classControllerMiddleware(this: VonaContext) {
-    const controller = this.bean._getBean(controllerBeanFullName);
+  return function classControllerMiddleware(ctx: VonaContext) {
+    const controller = ctx.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);
     }
     if (!controller[_route.action]) {
       throw new Error(`controller action not found: ${controllerBeanFullName}.${_route.action}`);
     }
-    return controller[_route.action](...(this[SymbolRouteHandlersArgumentsValue] || []));
+    return controller[_route.action](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
   };
 }

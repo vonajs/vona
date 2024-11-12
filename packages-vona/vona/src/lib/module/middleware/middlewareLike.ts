@@ -1,15 +1,16 @@
 import { swapDeps } from '@cabloy/deps';
 import { pathMatching } from 'egg-path-matching';
+import { BeanSimple } from '../../bean/beanSimple.js';
 import {
-  appMetadata,
-  appResource,
-  BeanSimple,
   IMiddlewareItem,
-  RouteHandlerArgumentMetaDecorator,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
-  VonaContext,
-} from 'vona';
+} from '../../../types/interface/middleware.js';
+import { RouteHandlerArgumentMetaDecorator } from '../../../types/interface/pipe.js';
+import { appMetadata } from '../../core/metadata.js';
+import { appResource } from '../../core/resource.js';
+import { VonaContext } from '../../../types/context/index.js';
+import { Cast } from '../../../types/utils/cast.js';
 
 const __adapter = (_context, chain) => {
   return {
@@ -110,7 +111,7 @@ export class MiddlewareLike extends BeanSimple {
 
   private _handleDependents(middlewares: IMiddlewareItem[]) {
     for (const middleware of middlewares) {
-      let dependents = middleware.options.dependents;
+      let dependents = middleware.options.dependents as any;
       if (!dependents) continue;
       if (!Array.isArray(dependents)) {
         dependents = dependents.split(',') as any[];
@@ -120,7 +121,7 @@ export class MiddlewareLike extends BeanSimple {
         if (!middleware2) {
           throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
         }
-        const options = middleware2.options;
+        const options = middleware2.options as any;
         if (!options.dependencies) options.dependencies = [];
         if (!Array.isArray(options.dependencies)) {
           options.dependencies = options.dependencies.split(',') as any[];
@@ -198,7 +199,7 @@ export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, execute
     if (executeCustom) {
       return executeCustom(beanInstance, options, next);
     }
-    return beanInstance.execute(options, next);
+    return Cast(beanInstance).execute(options, next);
   };
   fn._name = item.name;
   return fn;

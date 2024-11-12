@@ -21,6 +21,7 @@ import {
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
+import { MiddlewareLike } from '../module/middleware/middlewareLike.js';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -61,6 +62,9 @@ export class AppMeta extends BeanSimple {
   middlewaresGlobal: IMiddlewareItem[];
   middlewaresSocketIoConnection: any[];
   middlewaresSocketIoPacket: any[];
+  middlewaresGuard: MiddlewareLike;
+  middlewaresInterceptor: MiddlewareLike;
+  middlewaresPipe: MiddlewareLike;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;

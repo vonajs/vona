@@ -1,6 +1,7 @@
 import { swapDeps } from '@cabloy/deps';
 import { VonaApplication } from '../../types/index.js';
 import { appResource } from '../core/resource.js';
+import { MiddlewareLike } from './middleware/middlewareLike.js';
 
 export default function (app: VonaApplication): [object, any[]] {
   // use modulesArray
@@ -22,6 +23,9 @@ export default function (app: VonaApplication): [object, any[]] {
   app.meta.middlewaresSocketIoPacket = [];
   const ebMiddlewaresSocketIoPacket = app.meta.middlewaresSocketIoPacket;
 
+  // load
+  loadAll(app);
+
   // load middlewares all
   loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app);
 
@@ -38,6 +42,12 @@ export default function (app: VonaApplication): [object, any[]] {
   );
 
   return [ebMiddlewaresNormal, ebMiddlewaresGlobal];
+}
+
+function loadAll(app: VonaApplication) {
+  app.meta.middlewaresGuard = app.bean._newBean(MiddlewareLike, 'guard');
+  app.meta.middlewaresInterceptor = app.bean._newBean(MiddlewareLike, 'interceptor');
+  app.meta.middlewaresPipe = app.bean._newBean(MiddlewareLike, 'pipe');
 }
 
 function loadMiddlewares(
