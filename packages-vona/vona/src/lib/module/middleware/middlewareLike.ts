@@ -31,7 +31,7 @@ export class MiddlewareLike extends BeanSimple {
     this._swapMiddlewares(this.middlewaresGlobal);
   }
 
-  composeAsync(fnStart?, fnMid?, fnEnd?) {
+  composeAsync(ctx: VonaContext, fnStart?, fnMid?, fnEnd?) {
     const middlewares: any[] = [];
     if (fnStart) middlewares.push(fnStart);
     // middlewares: global
@@ -40,28 +40,28 @@ export class MiddlewareLike extends BeanSimple {
     }
     if (fnMid) middlewares.push(fnMid);
     // middlewares: route
-    const middlewaresLocal = this._collectRouterMiddlewares();
+    const middlewaresLocal = this._collectRouterMiddlewares(ctx);
     for (const item of middlewaresLocal) {
       middlewares.push(wrapMiddleware(this.sceneName, item));
     }
     if (fnEnd) middlewares.push(fnEnd);
     // invoke
-    return this.ctx.app.meta.util.composeAsync(middlewares, __adapter);
+    return ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
 
-  collectPipes(argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
+  collectPipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
     const middlewares: any[] = [];
     // pipes: global
     for (const item of this.middlewaresGlobal) {
       middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
     }
     // pipes: route
-    const middlewaresLocal = this._collectRouterMiddlewares();
+    const middlewaresLocal = this._collectRouterMiddlewares(ctx);
     for (const item of middlewaresLocal) {
       middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
     }
     // pipes: arguments
-    const middlewaresArgument = this._collectArgumentMiddlewares(argMeta);
+    const middlewaresArgument = this._collectArgumentMiddlewares(ctx, argMeta);
     if (middlewaresArgument) {
       for (const item of middlewaresArgument) {
         middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
@@ -70,7 +70,7 @@ export class MiddlewareLike extends BeanSimple {
     return middlewares;
   }
 
-  private _collectArgumentMiddlewares(argMeta: RouteHandlerArgumentMetaDecorator) {
+  private _collectArgumentMiddlewares(_ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
     if (!argMeta.pipes) return;
     return argMeta.pipes.map(pipe => {
       const middlewareName = pipe();
@@ -80,14 +80,14 @@ export class MiddlewareLike extends BeanSimple {
     });
   }
 
-  private _collectRouterMiddlewares() {
+  private _collectRouterMiddlewares(ctx: VonaContext) {
     // middlewaresLocal: controller
-    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, this.ctx.getClass())[
+    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getClass())[
       this.sceneName
     ] as string[];
     // middlewaresLocal: action
     const middlewaresLocal: IMiddlewareItem[] = [];
-    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, this.ctx.getHandler())[
+    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getHandler())[
       this.sceneName
     ] as string[];
     const middlewaresLocalAll: string[] = [];

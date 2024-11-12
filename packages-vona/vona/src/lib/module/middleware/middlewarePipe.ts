@@ -11,7 +11,7 @@ import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../../decorator/type/constructable.js';
 import { extractValue } from './extractValue.js';
 
-export async function middlewareInterceptor(ctx: VonaContext, next: Next) {
+export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // todo: support fromConfig
   const handler = ctx.getHandler();
   if (!handler) return next();
@@ -63,9 +63,13 @@ async function _transformArgument(
   value: any,
 ) {
   // pipes
-  const pipes = ctx.app.meta.middlewaresPipe.collectPipes(argMeta, (beanInstance: IPipeTransform, options, value) => {
-    return beanInstance.transform(value, metadata, options);
-  });
+  const pipes = ctx.app.meta.middlewaresPipe.collectPipes(
+    ctx,
+    argMeta,
+    (beanInstance: IPipeTransform, options, value) => {
+      return beanInstance.transform(value, metadata, options);
+    },
+  );
   if (pipes.length === 0) return value;
   // apply
   for (const pipe of pipes) {

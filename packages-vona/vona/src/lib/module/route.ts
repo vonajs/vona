@@ -21,6 +21,9 @@ import { IDecoratorControllerOptions } from '../decorator/index.js';
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
 import { extend } from '@cabloy/extend';
+import { middlewareGuard } from './middleware/middlewareGuard.js';
+import { middlewareInterceptor } from './middleware/middlewareInterceptor.js';
+import { middlewarePipe } from './middleware/middlewarePipe.js';
 
 export class AppRouter extends BeanSimple {
   register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
@@ -257,6 +260,10 @@ export class AppRouter extends BeanSimple {
     app.meta.middlewaresGlobal.forEach(item => {
       args.push(wrapMiddleware('middleware', item));
     });
+    // middlewares: guard/interceptor/pipes
+    args.push(middlewareGuard);
+    args.push(middlewareInterceptor);
+    args.push(middlewarePipe);
 
     // middlewares: tailDone
     const fnTailDone = async (ctx, next) => {
