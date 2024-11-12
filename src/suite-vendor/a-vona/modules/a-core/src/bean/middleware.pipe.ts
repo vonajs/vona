@@ -62,6 +62,12 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
       if (!argMeta) continue;
       // extractValue
       const value = this._extractArgumentValue(argMeta);
+      // metadata
+      const metadata = {
+        type: argMeta.type,
+        field: argMeta.field,
+        metaType: paramtypes[index],
+      };
       // transform
       args[index] = await this._transformArgument(constroller, handler, argMeta, value);
     }
