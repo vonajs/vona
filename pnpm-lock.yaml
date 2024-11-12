@@ -188,6 +188,9 @@ importers:
       vona-module-a-pinyin:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-pinyin
+      vona-module-a-pipe:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-pipe
       vona-module-a-progress:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-progress
@@ -1185,6 +1188,9 @@ importers:
       vona-module-a-core:
         specifier: ^5.0.3
         version: link:modules/a-core
+      vona-module-a-pipe:
+        specifier: workspace:^
+        version: link:modules/a-pipe
       vona-module-a-swagger:
         specifier: ^5.0.3
         version: link:modules/a-swagger
@@ -1200,6 +1206,8 @@ importers:
       egg-path-matching:
         specifier: ^2.1.0
         version: 2.1.0
+
+  src/suite-vendor/a-vona/modules/a-pipe: {}
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:

@@ -4,10 +4,6 @@ export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipe
 
 @Pipe<IPipeOptions<%=argv.beanNameCapitalize%>>({})
 export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeTransform {
-  async execute(_options: IPipeOptions<%=argv.beanNameCapitalize%>, next: Next) {
-    // next
-    return next();
-  }
   async transform(value, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
     return value;
   }

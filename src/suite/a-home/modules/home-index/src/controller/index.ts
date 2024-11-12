@@ -12,6 +12,7 @@ import {
   UsePipeGlobal,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
+import { PipeParseInt } from 'vona-module-a-pipe';
 
 @Controller()
 @UseGuard('a-b4:test')
@@ -33,7 +34,8 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo')
   @UseGuardGlobal('a-core:user', { public: true })
-  echo(@Query('id') id: number, temp: string, @Query('name') name: string) {
+  @UsePipe('a-pipe:parseInt')
+  echo(@Query('id', PipeParseInt) id: number, temp: string, @Query('name') name: string) {
     return 'echo: ' + id + ':' + temp + ':' + name;
   }
 }

@@ -8,6 +8,7 @@ import {
   RouteHandlerArgumentMetaDecorator,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
+  VonaContext,
 } from 'vona';
 
 const __adapter = (_context, chain) => {
@@ -170,7 +171,7 @@ export class MiddlewareLike extends BeanSimple {
 }
 
 export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
-  const fn = (ctx, next) => {
+  const fn = (ctx: VonaContext, next) => {
     // options
     const options = ctx.meta.getMiddlewareOptions(item);
     // enable match ignore dependencies
@@ -183,7 +184,7 @@ export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, execute
     }
     // execute
     const beanFullName = item.beanOptions.beanFullName;
-    const beanInstance = ctx.bean._getBean(beanFullName);
+    const beanInstance = ctx.bean._getBean(beanFullName as any);
     if (!beanInstance) {
       throw new Error(`${sceneName} bean not found: ${beanFullName}`);
     }
