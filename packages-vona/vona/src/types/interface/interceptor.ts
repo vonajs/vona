@@ -8,8 +8,10 @@ export interface IInterceptorExecute {
   execute(options: IDecoratorInterceptorOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorInterceptorOptions extends IMiddlewareBase {
-  global?: boolean;
+export interface IDecoratorInterceptorOptions {}
+
+export interface IDecoratorInterceptorOptionsGlobal extends IMiddlewareBase {
+  global: true;
   dependencies?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
   dependents?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
 }

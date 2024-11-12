@@ -1,10 +1,9 @@
 import { IInterceptorRecordLocal } from '../../../types/interface/interceptor.js';
-import { TypeUseMiddlewareLikeOptions } from '../../../types/interface/middleware.js';
 import { UseMiddlewareLike } from './useMiddlewareLike.js';
 
 export function UseInterceptor<T extends keyof IInterceptorRecordLocal>(
   interceptorName: T,
-  options?: TypeUseMiddlewareLikeOptions<IInterceptorRecordLocal[T]>,
+  options?: IInterceptorRecordLocal[T],
 ): ClassDecorator & MethodDecorator {
   return UseMiddlewareLike('interceptor', interceptorName, options);
 }

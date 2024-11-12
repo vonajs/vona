@@ -1,6 +1,6 @@
-import { BeanBase, Guard, IDecoratorGuardOptions, IGuardExecute, Next } from 'vona';
+import { BeanBase, Guard, IDecoratorGuardOptionsGlobal, IGuardExecute, Next } from 'vona';
 
-export interface IGuardOptionsUser extends IDecoratorGuardOptions {
+export interface IGuardOptionsUser extends IDecoratorGuardOptionsGlobal {
   public?: boolean;
 }
 

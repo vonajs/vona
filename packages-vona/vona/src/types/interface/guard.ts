@@ -8,8 +8,10 @@ export interface IGuardExecute {
   execute(options: IDecoratorGuardOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorGuardOptions extends IMiddlewareBase {
-  global?: boolean;
+export interface IDecoratorGuardOptions {}
+
+export interface IDecoratorGuardOptionsGlobal extends IMiddlewareBase {
+  global: true;
   dependencies?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
   dependents?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
 }

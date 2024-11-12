@@ -3,10 +3,6 @@ import { VonaContext } from '../context/index.js';
 
 export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
-export type TypeUseMiddlewareLikeOptions<T> = Omit<
-  T,
-  'enable' | 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
->;
 
 export const SymbolUseMiddlewareOptions = Symbol('SymbolUseMiddlewareOptions');
 export type TypeUseMiddlewareGlobalLikeOptions<T> = Omit<
@@ -30,15 +26,17 @@ export interface IMiddlewareExecute {
   execute(options: IDecoratorMiddlewareOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorMiddlewareOptions extends IMiddlewareBase {
-  global?: boolean;
+export interface IDecoratorMiddlewareOptions {}
+
+export interface IDecoratorMiddlewareOptionsGlobal extends IMiddlewareBase {
+  global: true;
   dependencies?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
   dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
 }
 
 export interface IMiddlewareItem {
   name: string;
-  options: IDecoratorMiddlewareOptions;
+  options: IDecoratorMiddlewareOptionsGlobal;
   beanOptions: IDecoratorBeanOptionsBase;
   fromConfig?: boolean;
 }

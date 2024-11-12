@@ -3,7 +3,7 @@ import {
   RouteHandlerArgumentMeta,
   BeanBase,
   Constructable,
-  IDecoratorMiddlewareOptions,
+  IDecoratorMiddlewareOptionsGlobal,
   IMiddlewareExecute,
   IPipeTransform,
   RouteHandlerArgumentMetaDecorator,
@@ -16,7 +16,7 @@ import {
 import { MiddlewareLike } from '../common/middlewareLike.js';
 import { extractValue } from '../common/extractValue.js';
 
-export interface IMiddlewareOptionsPipe extends IDecoratorMiddlewareOptions {}
+export interface IMiddlewareOptionsPipe extends IDecoratorMiddlewareOptionsGlobal {}
 
 @Middleware<IMiddlewareOptionsPipe>({ global: true, dependencies: 'a-core:interceptor' })
 export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {

@@ -1,7 +1,7 @@
-import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+import { BeanBase, IDecoratorMiddlewareOptionsGlobal, IMiddlewareExecute, Middleware, Next } from 'vona';
 import { MiddlewareLike } from '../common/middlewareLike.js';
 
-export interface IMiddlewareOptionsInterceptor extends IDecoratorMiddlewareOptions {}
+export interface IMiddlewareOptionsInterceptor extends IDecoratorMiddlewareOptionsGlobal {}
 
 @Middleware<IMiddlewareOptionsInterceptor>({ global: true, dependencies: 'a-core:guard' })
 export class MiddlewareInterceptor extends BeanBase implements IMiddlewareExecute {
