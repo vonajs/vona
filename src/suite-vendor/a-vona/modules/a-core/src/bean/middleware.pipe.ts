@@ -11,6 +11,7 @@ import {
   Middleware,
   Next,
   SymbolRouteHandlersArgumentsMeta,
+  SymbolRouteHandlersArgumentsValue,
 } from 'vona';
 import { MiddlewareLike } from '../common/middlewareLike.js';
 import { extractValue } from '../common/extractValue.js';
@@ -30,7 +31,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     const handler = this.ctx.getHandler();
     if (!handler) return next();
     // arguments
-    this.ctx.state.arguments = await this._transformArguments(this.ctx.getClass(), handler);
+    this.ctx[SymbolRouteHandlersArgumentsValue] = await this._transformArguments(this.ctx.getClass(), handler);
     // next
     return next();
   }

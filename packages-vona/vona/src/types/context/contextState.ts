@@ -5,5 +5,4 @@ export interface JwtPayload {
 
 export interface ContextState {
   jwt: JwtPayload; // not use null | undefined
-  arguments?: any[];
 }

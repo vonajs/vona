@@ -31,6 +31,8 @@ export type RouteHandlerArgumentType =
   | 'string';
 
 export const SymbolRouteHandlersArgumentsMeta = Symbol('SymbolRouteHandlersArgumentsMeta');
+export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgumentsValue');
+
 export interface RouteHandlerArgumentMetaDecorator {
   index: number;
   type: RouteHandlerArgumentType;

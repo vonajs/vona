@@ -11,6 +11,7 @@ import {
   SymbolUseMiddlewareOptions,
   SymbolUseMiddlewareLocal,
   SymboleMiddlewareStatus,
+  SymbolRouteHandlersArgumentsValue,
 } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
@@ -379,6 +380,6 @@ function controllerActionToMiddleware(controllerBeanFullName, _route) {
     if (!controller[_route.action]) {
       throw new Error(`controller action not found: ${controllerBeanFullName}.${_route.action}`);
     }
-    return controller[_route.action](...(this.state.arguments || []));
+    return controller[_route.action](...(this[SymbolRouteHandlersArgumentsValue] || []));
   };
 }
