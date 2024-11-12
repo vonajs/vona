@@ -20,6 +20,10 @@ export function getLocaleText(
   if (text === undefined) {
     text = key;
   }
+  // support custom message
+  if (!text.replaceAll('%%', '').includes('%') && args[0]) {
+    return getText(...args);
+  }
   // format
   return getText(text, ...args);
 }

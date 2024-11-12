@@ -21,7 +21,7 @@ export class ErrorClass extends BeanSimple {
   fail(module, code, ...args) {
     const body = this.parseFail(module, code, ...args);
 
-    this.ctx.response.status = 200;
+    this.ctx.response.status = body.code < 1000 ? body.code : 500;
     this.ctx.response.type = 'application/json';
     this.ctx.response.body = { code: body.code, message: body.message }; // body maybe Error
   }
@@ -31,13 +31,13 @@ export class ErrorClass extends BeanSimple {
     const err = new Error();
     err.code = body.code;
     err.message = body.message;
-    if (body.code < 500) err.status = body.code;
+    if (body.code < 1000) err.status = body.code;
     throw err;
   }
   // code/message,args
   parseFail(module, code, ...args) {
     if (typeof code === 'object') return code;
-    return this.parseCode(module, 1, code, ...args);
+    return this.parseCode(module, 500, code, ...args);
   }
   // code/message,args
   parseSuccess(module, code, ...args) {

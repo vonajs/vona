@@ -21,7 +21,7 @@ export class PipeParseInt extends BeanBase implements IPipeTransform {
       return value;
     }
     if (!this.isNumeric(value)) {
-      this.ctx.throw(422); // Validation failed (numeric string is expected)'
+      this.ctx.throw(422, 'sss'); // Validation failed (numeric string is expected)'
     }
     return parseInt(value, 10);
   }
