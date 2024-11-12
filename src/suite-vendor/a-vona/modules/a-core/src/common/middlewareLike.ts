@@ -5,7 +5,7 @@ import {
   appResource,
   BeanSimple,
   IMiddlewareItem,
-  IRouteHandlerArgumentMeta,
+  RouteHandlerArgumentMetaDecorator,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
 } from 'vona';
@@ -47,7 +47,7 @@ export class MiddlewareLike extends BeanSimple {
     return this.ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
 
-  collectPipes(argMeta: IRouteHandlerArgumentMeta, executeCustom: Function) {
+  collectPipes(argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
     const middlewares: any[] = [];
     // pipes: global
     for (const item of this.middlewaresGlobal) {
@@ -68,7 +68,7 @@ export class MiddlewareLike extends BeanSimple {
     return middlewares;
   }
 
-  private _collectArgumentMiddlewares(argMeta: IRouteHandlerArgumentMeta) {
+  private _collectArgumentMiddlewares(argMeta: RouteHandlerArgumentMetaDecorator) {
     if (!argMeta.pipes) return;
     return argMeta.pipes.map(pipe => {
       const middlewareName = pipe();

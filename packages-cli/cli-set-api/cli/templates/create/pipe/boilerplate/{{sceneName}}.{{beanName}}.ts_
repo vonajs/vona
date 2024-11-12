@@ -1,4 +1,4 @@
-import { ArgumentMetadata, BeanBase, IDecoratorPipeOptions, IPipeTransform, Pipe } from 'vona';
+import { RouteHandlerArgumentMeta, BeanBase, IDecoratorPipeOptions, IPipeTransform, Pipe } from 'vona';
 
 export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
 
@@ -8,7 +8,7 @@ export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeT
     // next
     return next();
   }
-  async transform(value, _metadata: ArgumentMetadata, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
+  async transform(value, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
     return value;
   }
 }

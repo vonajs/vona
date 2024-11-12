@@ -1,11 +1,12 @@
 import {
   appMetadata,
+  RouteHandlerArgumentMeta,
   BeanBase,
   Constructable,
   IDecoratorMiddlewareOptions,
   IMiddlewareExecute,
   IPipeTransform,
-  IRouteHandlerArgumentMeta,
+  RouteHandlerArgumentMetaDecorator,
   MetadataKey,
   Middleware,
   Next,
@@ -31,7 +32,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     // arguments
     this.ctx.state.arguments = await this._transformArguments(this.ctx.getClass(), handler);
     // // arguments
-    // const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, IRouteHandlerArgumentMeta[]>(
+    // const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
     //   SymbolRouteHandlersArgumentsMeta,
     //   this.ctx.getClass(),
     // );
@@ -48,7 +49,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     if (!paramtypes) return;
 
     // meta
-    const argsMetaAll = appMetadata.getOwnMetadataMap<MetadataKey, IRouteHandlerArgumentMeta[]>(
+    const argsMetaAll = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
       SymbolRouteHandlersArgumentsMeta,
       constroller,
     );
@@ -69,7 +70,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
         metaType: paramtypes[index],
       };
       // transform
-      args[index] = await this._transformArgument(constroller, handler, argMeta, value);
+      args[index] = await this._transformArgument(constroller, handler, argMeta, metadata, value);
     }
     return args;
   }
@@ -77,7 +78,8 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
   async _transformArgument(
     constroller: Constructable,
     handler: Function,
-    argMeta: IRouteHandlerArgumentMeta,
+    argMeta: RouteHandlerArgumentMetaDecorator,
+    metadata: RouteHandlerArgumentMeta,
     value: any,
   ) {
     // pipes
@@ -86,7 +88,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     });
   }
 
-  _extractArgumentValue(argMeta: IRouteHandlerArgumentMeta) {
+  _extractArgumentValue(argMeta: RouteHandlerArgumentMetaDecorator) {
     if (argMeta.extractValue) {
       return argMeta.extractValue(this.ctx, argMeta);
     }
