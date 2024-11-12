@@ -2,7 +2,7 @@ import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, 
 
 export interface IMiddlewareOptionsTransaction extends IDecoratorMiddlewareOptions {}
 
-@Middleware<IMiddlewareOptionsTransaction>({})
+@Middleware<IMiddlewareOptionsTransaction>()
 export class MiddlewareTransaction extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsTransaction, next: Next) {
     return await this.ctx.transaction.begin(async () => {

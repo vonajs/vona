@@ -145,7 +145,7 @@ export class MiddlewareLike extends BeanSimple {
       // normal
       this.middlewaresNormal[item.name] = item;
       // global
-      if (item.options.global) {
+      if (item.options?.global) {
         this.middlewaresGlobal.push(item);
       }
     }
