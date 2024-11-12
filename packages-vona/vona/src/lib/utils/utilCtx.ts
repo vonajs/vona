@@ -2,6 +2,7 @@ import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { VonaContext, PowerPartial, HttpStatus, RouteHandlerArgumentMeta } from '../../types/index.js';
 import { IExecuteBeanCallback } from './util.js';
+import { appResource } from '../core/resource.js';
 
 export class CtxUtil extends BeanSimple {
   runInBackground(scope) {
@@ -174,7 +175,8 @@ export class CtxUtil extends BeanSimple {
 
   throwValidationFailed(code: HttpStatus, message: string, metadata: RouteHandlerArgumentMeta) {
     if (!this.app.meta.isProd) {
-      message = `${message}: ${this.ctx.text('ValidationFailedDev', metadata.method, metadata.index)}`;
+      const beanOptions = appResource.getBean(metadata.controller);
+      message = `${message}: ${this.ctx.text('ValidationFailedDev', beanOptions?.beanFullName, metadata.method, metadata.index)}`;
     }
     this.ctx.throw(code, message);
   }

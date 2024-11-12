@@ -50,7 +50,7 @@ export class AppRouter extends BeanSimple {
       routeMethod: route.method,
       routePath,
     };
-    // constroller
+    // controller
     if (route.controller) {
       if (is.function(route.controller)) {
         throw new Error(`Controller should be bean: ${info.relativeName}.${Cast(route.controller)(app).name}`);

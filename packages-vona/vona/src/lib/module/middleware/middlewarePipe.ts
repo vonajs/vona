@@ -23,16 +23,16 @@ export async function middlewarePipe(ctx: VonaContext, next: Next) {
 
 async function _transformArguments(
   ctx: VonaContext,
-  constroller: Constructable,
+  controller: Constructable,
   handler: Function,
 ): Promise<any[] | undefined> {
-  const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', constroller.prototype, handler.name);
+  const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', controller.prototype, handler.name);
   if (!paramtypes) return;
 
   // meta
   const argsMetaAll = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
     SymbolRouteHandlersArgumentsMeta,
-    constroller,
+    controller,
   );
   const argsMeta = argsMetaAll[handler.name];
   if (!argsMeta) return;
@@ -49,6 +49,7 @@ async function _transformArguments(
       type: argMeta.type,
       field: argMeta.field,
       metaType: paramtypes[index],
+      controller,
       method: handler.name,
       index: argMeta.index,
     };

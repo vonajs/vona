@@ -1,3 +1,4 @@
+import { Constructable } from '../../lib/index.js';
 import { Type } from '../utils/type.js';
 import { IMiddlewareBase } from './middleware.js';
 
@@ -47,6 +48,7 @@ export interface RouteHandlerArgumentMeta {
   type: RouteHandlerArgumentType;
   field?: string;
   metaType?: Type<any>;
+  controller: Constructable;
   method: string;
   index: number;
 }
