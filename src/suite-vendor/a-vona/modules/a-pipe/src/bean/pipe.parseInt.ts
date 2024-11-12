@@ -26,10 +26,8 @@ export class PipeParseInt extends BeanBase<ScopeModule> implements IPipeTransfor
     if (!this.isNumeric(value)) {
       this.$ctxUtil.throwValidationFailed(
         options.errorHttpStatusCode,
-        this.scope.locale.ValidationFailedPipeParseInt,
-        this.scope.locale.ValidationFailedPipeParseIntDev,
-        metadata.method,
-        metadata.index,
+        this.scope.locale.ValidationFailedPipeParseInt(),
+        metadata,
       );
     }
     return parseInt(value, 10);

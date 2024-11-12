@@ -1,4 +1,5 @@
 export default {
+  ValidationFailedDev: '控制器: %s, 方法: %s, 参数: %d',
   Success: '成功',
   'Unknown Error': '未知错误',
   'Bad Request': '无效请求',

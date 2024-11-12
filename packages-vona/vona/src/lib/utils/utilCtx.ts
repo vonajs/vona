@@ -1,6 +1,6 @@
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { VonaContext, PowerPartial, HttpStatus } from '../../types/index.js';
+import { VonaContext, PowerPartial, HttpStatus, RouteHandlerArgumentMeta } from '../../types/index.js';
 import { IExecuteBeanCallback } from './util.js';
 
 export class CtxUtil extends BeanSimple {
@@ -172,10 +172,10 @@ export class CtxUtil extends BeanSimple {
     });
   }
 
-  throwValidationFailed(code: HttpStatus, fnLocale: Function, fnLocaleDev: Function | undefined, ...args) {
-    if (!this.app.meta.isProd && fnLocaleDev) {
-      this.ctx.throw(code, fnLocaleDev(...args));
+  throwValidationFailed(code: HttpStatus, message: string, metadata: RouteHandlerArgumentMeta) {
+    if (!this.app.meta.isProd) {
+      message = `${message}: ${this.ctx.text('ValidationFailedDev', metadata.method, metadata.index)}`;
     }
-    this.ctx.throw(code, fnLocale());
+    this.ctx.throw(code, message);
   }
 }
