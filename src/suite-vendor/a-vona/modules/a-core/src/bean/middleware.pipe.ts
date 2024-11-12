@@ -4,6 +4,7 @@ import {
   Constructable,
   IDecoratorMiddlewareOptions,
   IMiddlewareExecute,
+  IPipeTransform,
   IRouteHandlerArgumentMeta,
   MetadataKey,
   Middleware,
@@ -73,7 +74,10 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     argMeta: IRouteHandlerArgumentMeta,
     value: any,
   ) {
-    //
+    // pipes
+    const pipes = this.middlewareLike.collectPipes(argMeta, (beanInstance: IPipeTransform, options) => {
+      return beanInstance.transform(value, metadata, options);
+    });
   }
 
   _extractArgumentValue(argMeta: IRouteHandlerArgumentMeta) {

@@ -5,6 +5,7 @@ import {
   appResource,
   BeanSimple,
   IMiddlewareItem,
+  IRouteHandlerArgumentMeta,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
 } from 'vona';
@@ -44,6 +45,37 @@ export class MiddlewareLike extends BeanSimple {
     if (fnEnd) middlewares.push(fnEnd);
     // invoke
     return this.ctx.app.meta.util.composeAsync(middlewares, __adapter);
+  }
+
+  collectPipes(argMeta: IRouteHandlerArgumentMeta, executeCustom: Function) {
+    const middlewares: any[] = [];
+    // pipes: global
+    for (const item of this.middlewaresGlobal) {
+      middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+    }
+    // pipes: route
+    const middlewaresLocal = this._collectRouterMiddlewares();
+    for (const item of middlewaresLocal) {
+      middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+    }
+    // pipes: arguments
+    const middlewaresArgument = this._collectArgumentMiddlewares(argMeta);
+    if (middlewaresArgument) {
+      for (const item of middlewaresArgument) {
+        middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+      }
+    }
+    return middlewares;
+  }
+
+  private _collectArgumentMiddlewares(argMeta: IRouteHandlerArgumentMeta) {
+    if (!argMeta.pipes) return;
+    return argMeta.pipes.map(pipe => {
+      const middlewareName = pipe();
+      const item = this.middlewaresNormal[middlewareName];
+      if (!item) throw new Error(`${this.sceneName} not found: ${middlewareName}`);
+      return item;
+    });
   }
 
   private _collectRouterMiddlewares() {
@@ -137,7 +169,7 @@ export class MiddlewareLike extends BeanSimple {
   }
 }
 
-function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
+export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
   const fn = (ctx, next) => {
     // options
     const options = ctx.meta.getMiddlewareOptions(item);
@@ -154,6 +186,9 @@ function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
     const beanInstance = ctx.bean._getBean(beanFullName);
     if (!beanInstance) {
       throw new Error(`${sceneName} bean not found: ${beanFullName}`);
+    }
+    if (executeCustom) {
+      return executeCustom(beanInstance, options, next);
     }
     return beanInstance.execute(options, next);
   };
