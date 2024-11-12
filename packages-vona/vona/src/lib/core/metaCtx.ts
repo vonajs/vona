@@ -39,10 +39,12 @@ export class CtxMeta extends BeanSimple {
     // options: route
     const route = this.ctx.route.route;
     const optionsRoute = route.meta?.[item.fromConfig ? item.name : item.beanOptions.beanFullName];
+    // options: argument pipe
+    const optionsPipe = item.pipeOptions;
     // options: dynamic
     const optionsDynamic = this.middlewares[item.fromConfig ? item.name : item.beanOptions.beanFullName];
     // final options
-    const options = extend(true, {}, optionsMeta, optionsConfig, optionsRoute, optionsDynamic);
+    const options = extend(true, {}, optionsMeta, optionsConfig, optionsRoute, optionsPipe, optionsDynamic);
     // ok
     return options;
   }

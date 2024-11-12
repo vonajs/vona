@@ -73,10 +73,10 @@ export class MiddlewareLike extends BeanSimple {
   private _collectArgumentMiddlewares(_ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
     if (!argMeta.pipes) return;
     return argMeta.pipes.map(pipe => {
-      const middlewareName = pipe();
-      const item = this.middlewaresNormal[middlewareName];
-      if (!item) throw new Error(`${this.sceneName} not found: ${middlewareName}`);
-      return item;
+      const { pipeName, options } = pipe();
+      const item = this.middlewaresNormal[pipeName];
+      if (!item) throw new Error(`${this.sceneName} not found: ${pipeName}`);
+      return { ...item, pipeOptions: options };
     });
   }
 
@@ -170,13 +170,6 @@ export class MiddlewareLike extends BeanSimple {
     return middlewaresAll;
   }
 }
-
-// export function createArgumentPipe<T extends keyof IPipeRecordLocal>(
-//   pipeName: T,
-//   options?: TypeUseMiddlewareLikeOptions<IPipeRecordLocal[T]>,
-// ) {
-//   const item = this.middlewaresNormal[middlewareName];
-// }
 
 export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
   const fn = (ctx: VonaContext, next) => {

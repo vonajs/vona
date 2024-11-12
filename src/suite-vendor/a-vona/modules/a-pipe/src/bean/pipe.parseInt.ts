@@ -1,4 +1,11 @@
-import { RouteHandlerArgumentMeta, BeanBase, IDecoratorPipeOptions, IPipeTransform, Pipe } from 'vona';
+import {
+  RouteHandlerArgumentMeta,
+  BeanBase,
+  IDecoratorPipeOptions,
+  IPipeTransform,
+  Pipe,
+  createArgumentPipe,
+} from 'vona';
 
 export interface IPipeOptionsParseInt extends IDecoratorPipeOptions {}
 
@@ -10,9 +17,9 @@ export class PipeParseInt extends BeanBase implements IPipeTransform {
   }
 }
 
-// export function ParseIntPipe(options?: IPipeOptionsParseInt) {
-//   if (!options) return createArgumentPipe('a-pipe:parseInt');
-//   return () => {
-//     return createArgumentPipe('a-pipe:parseInt', options);
-//   };
-// }
+export function ParseIntPipe(options?: IPipeOptionsParseInt) {
+  if (!options) return createArgumentPipe('a-pipe:parseInt');
+  return () => {
+    return createArgumentPipe('a-pipe:parseInt', options);
+  };
+}
