@@ -31,15 +31,6 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
     if (!handler) return next();
     // arguments
     this.ctx.state.arguments = await this._transformArguments(this.ctx.getClass(), handler);
-    // // arguments
-    // const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
-    //   SymbolRouteHandlersArgumentsMeta,
-    //   this.ctx.getClass(),
-    // );
-    // const argsLength = argsMeta[handler.name].length;
-    // console.log(argsLength);
-    // // compose
-    // await this.middlewareLike.composeAsync()(this.ctx);
     // next
     return next();
   }
@@ -62,7 +53,7 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
       const argMeta = argsMeta.find(item => item.index === index);
       if (!argMeta) continue;
       // extractValue
-      const value = this._extractArgumentValue(argMeta);
+      const value = await this._extractArgumentValue(argMeta);
       // metadata
       const metadata = {
         type: argMeta.type,
@@ -70,27 +61,27 @@ export class MiddlewarePipe extends BeanBase implements IMiddlewareExecute {
         metaType: paramtypes[index],
       };
       // transform
-      args[index] = await this._transformArgument(constroller, handler, argMeta, metadata, value);
+      args[index] = await this._transformArgument(argMeta, metadata, value);
     }
     return args;
   }
 
-  async _transformArgument(
-    constroller: Constructable,
-    handler: Function,
-    argMeta: RouteHandlerArgumentMetaDecorator,
-    metadata: RouteHandlerArgumentMeta,
-    value: any,
-  ) {
+  async _transformArgument(argMeta: RouteHandlerArgumentMetaDecorator, metadata: RouteHandlerArgumentMeta, value: any) {
     // pipes
     const pipes = this.middlewareLike.collectPipes(argMeta, (beanInstance: IPipeTransform, options, value) => {
       return beanInstance.transform(value, metadata, options);
     });
+    if (pipes.length === 0) return value;
+    // apply
+    for (const pipe of pipes) {
+      value = await pipe(this.ctx, value);
+    }
+    return value;
   }
 
-  _extractArgumentValue(argMeta: RouteHandlerArgumentMetaDecorator) {
+  async _extractArgumentValue(argMeta: RouteHandlerArgumentMetaDecorator) {
     if (argMeta.extractValue) {
-      return argMeta.extractValue(this.ctx, argMeta);
+      return await argMeta.extractValue(this.ctx, argMeta);
     }
     return extractValue(this.ctx, argMeta);
   }
