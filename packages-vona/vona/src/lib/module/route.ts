@@ -337,7 +337,7 @@ function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
     // options
     const options = ctx.meta.getMiddlewareOptions(item);
     // enable match ignore dependencies
-    if (options.enable === false || !middlewareMatch(ctx, options) || !middlewareDeps(sceneName, ctx, options)) {
+    if (options.enable === false || !middlewareMatch(ctx, options)) {
       if (!ctx[SymboleMiddlewareStatus][sceneName]) {
         ctx[SymboleMiddlewareStatus][sceneName] = {};
       }
@@ -364,11 +364,11 @@ function middlewareMatch(ctx, options) {
   return match(ctx);
 }
 
-function middlewareDeps(sceneName: string, ctx, options) {
-  let deps = options.dependencies || [];
-  if (typeof deps === 'string') deps = deps.split(',');
-  return deps.every(key => ctx[SymboleMiddlewareStatus][sceneName]?.[key] !== false);
-}
+// function middlewareDeps(sceneName: string, ctx, options) {
+//   let deps = options.dependencies || [];
+//   if (typeof deps === 'string') deps = deps.split(',');
+//   return deps.every(key => ctx[SymboleMiddlewareStatus][sceneName]?.[key] !== false);
+// }
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {
   return function classControllerMiddleware(this: VonaContext, ...args) {
