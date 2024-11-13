@@ -4,7 +4,7 @@ import { Knex } from 'knex';
 import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
-import { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types.js';
+import { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types/index.js';
 import { Cast } from 'vona';
 import { BigNumber } from 'bignumber.js';
 

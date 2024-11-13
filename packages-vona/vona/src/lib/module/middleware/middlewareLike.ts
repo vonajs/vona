@@ -25,6 +25,7 @@ export class MiddlewareLike extends BeanSimple {
   middlewaresGlobal: IMiddlewareItem[];
 
   _cacheMiddlewaresGlobal: Function[];
+  _cacheMiddlewaresHandler: Record<string, Function[]>;
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
@@ -34,15 +35,13 @@ export class MiddlewareLike extends BeanSimple {
   }
 
   composeAsync(ctx: VonaContext, fnStart?, fnMid?, fnEnd?) {
-    const middlewares: any[] = [];
+    let middlewares: any[] = [];
     if (fnStart) middlewares.push(fnStart);
     // middlewares: global
-    for (const item of this.middlewaresGlobal) {
-      middlewares.push(wrapMiddleware(this.sceneName, item));
-    }
+    middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
     if (fnMid) middlewares.push(fnMid);
     // middlewares: route
-    const middlewaresLocal = this._collectRouterMiddlewares(ctx);
+    const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
     for (const item of middlewaresLocal) {
       middlewares.push(wrapMiddleware(this.sceneName, item));
     }
@@ -56,7 +55,7 @@ export class MiddlewareLike extends BeanSimple {
     // pipes: global
     middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
     // pipes: route
-    const middlewaresLocal = this._collectRouterMiddlewares(ctx);
+    const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
     for (const item of middlewaresLocal) {
       middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
     }
@@ -90,7 +89,7 @@ export class MiddlewareLike extends BeanSimple {
     });
   }
 
-  private _collectRouterMiddlewares(ctx: VonaContext) {
+  private _collectMiddlewaresHandler(ctx: VonaContext) {
     // middlewaresLocal: controller
     const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getClass())[
       this.sceneName
