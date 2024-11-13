@@ -6,7 +6,7 @@ export class MiddlewareIoConnection extends BeanBase {
     // todo: user是否有效不必在这里判断，从而让socket支持匿名用户
     // 因此，也就不需要在之前使用middleware.io.connectionAuth
     //   因为，packet中间件会执行performAction，而performAction会走整个router范围内的web中间件，从而与web开发保持一致的中间件体系
-
+    //   如果某个controller只允许socket访问，可以通过gate中间件指定socket: true即可
     // cache userId/socketId for disconnect
     const user = this.ctx.state.user && this.ctx.state.user.op;
     if (!user || user.anonymous) {
