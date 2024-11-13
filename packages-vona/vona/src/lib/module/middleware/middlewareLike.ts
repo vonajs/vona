@@ -204,6 +204,7 @@ export class MiddlewareLike extends BeanSimple {
       if (!middlewares) continue;
       for (const key in middlewares) {
         const beanOptions = middlewares[key];
+        if (!beanOptions.options) beanOptions.options = {};
         // push
         middlewaresAll.push({
           name: key.replace(`.${this.sceneName}.`, ':'),
