@@ -1,6 +1,7 @@
 export * from './aop.js';
 export * from './atom.js';
 export * from './bean.js';
+export * from './connection.js';
 export * from './controller.js';
 export * from './dto.js';
 export * from './entity.js';
@@ -8,6 +9,7 @@ export * from './guard.js';
 export * from './interceptor.js';
 export * from './middleware.js';
 export * from './model.js';
+export * from './packet.js';
 export * from './pipe.js';
 export * from './service.js';
 export * from './virtual.js';

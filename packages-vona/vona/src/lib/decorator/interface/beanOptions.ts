@@ -17,6 +17,8 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'guard'
   | 'interceptor'
   | 'pipe'
+  | 'connection'
+  | 'packet'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
@@ -26,7 +28,6 @@ export type TypeDecoratorBeanOptionsScene =
   | 'version'
   | 'schedule'
   | 'middleware'
-  | 'middleware.io'
   | 'event'
   | 'stats'
   | 'sequence'
