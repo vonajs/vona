@@ -10,11 +10,7 @@ export * from '../bean/virtual.databaseDialect.js';
 import { BeanDatabase } from '../bean/bean.database.js';
 import { BeanDatabaseClient } from '../bean/bean.databaseClient.js';
 import { BeanModel } from '../bean/bean.model.js';
-import { BeanModelBase } from '../bean/bean.modelBase_.js';
-import { DatabaseDialectMysql } from '../bean/database.dialect.mysql.js';
-import { DatabaseDialectMysql2 } from '../bean/database.dialect.mysql2.js';
-import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
-import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -22,16 +18,18 @@ declare module 'vona' {
     databaseClient: BeanDatabaseClient;
     model: BeanModel;
   }
-
-  export interface IBeanRecordGeneral {
-    modelBase: BeanModelBase;
-    'a-database.database.dialect.mysql': DatabaseDialectMysql;
-    'a-database.database.dialect.mysql2': DatabaseDialectMysql2;
-    'a-database.database.dialect.pg': DatabaseDialectPg;
-    'a-database.virtual.databaseDialect': VirtualDatabaseDialect;
-  }
 }
 /** beans: end */
+/** middlewares: begin */
+export * from '../bean/middleware.transaction.js';
+import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
+import 'vona';
+declare module 'vona' {
+  export interface IMiddlewareRecordLocal {
+    'a-database:transaction': IMiddlewareOptionsTransaction;
+  }
+}
+/** middlewares: end */
 /** services: begin */
 export * from '../service/dbMeta.js';
 export * from '../service/transaction.js';
