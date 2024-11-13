@@ -7,6 +7,7 @@ export default function (app: VonaApplication) {
 }
 
 function loadAll(app: VonaApplication) {
+  app.meta.middlewaresGeneral = app.bean._newBean(MiddlewareLike, 'middleware');
   app.meta.middlewaresGuard = app.bean._newBean(MiddlewareLike, 'guard');
   app.meta.middlewaresInterceptor = app.bean._newBean(MiddlewareLike, 'interceptor');
   app.meta.middlewaresPipe = app.bean._newBean(MiddlewareLike, 'pipe');

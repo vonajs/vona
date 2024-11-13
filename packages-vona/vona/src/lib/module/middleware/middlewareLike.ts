@@ -1,5 +1,5 @@
 import { swapDeps } from '@cabloy/deps';
-import { pathMatching } from 'egg-path-matching';
+import pathMatching from 'egg-path-matching';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import {
   IMiddlewareItem,

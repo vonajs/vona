@@ -16,8 +16,8 @@ export interface IPipeOptionsParseInt extends IDecoratorPipeOptions {
 }
 
 @Pipe<IPipeOptionsParseInt>({ optional: false, errorHttpStatusCode: HttpStatus.BAD_REQUEST })
-export class PipeParseInt extends BeanBase<ScopeModule> implements IPipeTransform {
-  async transform(value, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsParseInt) {
+export class PipeParseInt extends BeanBase<ScopeModule> implements IPipeTransform<any, number | undefined | null> {
+  async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsParseInt) {
     if (isNil(value) && options.optional) {
       return value;
     }

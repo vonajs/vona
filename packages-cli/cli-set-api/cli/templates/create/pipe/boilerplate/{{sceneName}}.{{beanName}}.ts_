@@ -3,8 +3,8 @@ import { RouteHandlerArgumentMeta, BeanBase, IDecoratorPipeOptions, IPipeTransfo
 export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
 
 @Pipe<IPipeOptions<%=argv.beanNameCapitalize%>>()
-export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeTransform {
-  async transform(value, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
+export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeTransform<any> {
+  async transform(value: any, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptions<%=argv.beanNameCapitalize%>) {
     return value;
   }
 }
