@@ -5,6 +5,7 @@ import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
 import { Cast } from '../../types/utils/cast.js';
+import { appResource } from '../../lib/index.js';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
@@ -125,6 +126,12 @@ const context: ContextBase = {
   getClass() {
     const self = Cast<VonaContext>(this);
     return self.route.controller;
+  },
+
+  getClassBeanFullName(): string {
+    const self = Cast<VonaContext>(this);
+    const beanOptions = appResource.getBean(self.getClass());
+    return beanOptions!.beanFullName;
   },
 
   getHandler() {

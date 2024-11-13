@@ -25,7 +25,7 @@ export class MiddlewareLike extends BeanSimple {
   middlewaresGlobal: IMiddlewareItem[];
 
   _cacheMiddlewaresGlobal: Function[];
-  _cacheMiddlewaresHandler: Record<string, Function[]>;
+  _cacheMiddlewaresHandler: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
@@ -34,21 +34,14 @@ export class MiddlewareLike extends BeanSimple {
     this._swapMiddlewares(this.middlewaresGlobal);
   }
 
-  composeAsync(ctx: VonaContext, fnStart?, fnMid?, fnEnd?) {
-    const middlewares: any[] = [];
-    if (fnStart) middlewares.push(fnStart);
-    // middlewares: global
-    //middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
-    for (const item of this.middlewaresGlobal) {
-      middlewares.push(wrapMiddleware(this.sceneName, item));
-    }
-    if (fnMid) middlewares.push(fnMid);
-    // middlewares: route
-    const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
-    for (const item of middlewaresLocal) {
-      middlewares.push(wrapMiddleware(this.sceneName, item));
-    }
-    if (fnEnd) middlewares.push(fnEnd);
+  composeAsync(
+    ctx: VonaContext,
+    fnStart?: Function | Function[],
+    fnMid?: Function | Function[],
+    fnEnd?: Function | Function[],
+  ) {
+    // compose
+    const middlewares = this._composeMiddlewaresHandler(ctx, fnStart, fnMid, fnEnd);
     // invoke
     return ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
@@ -75,12 +68,13 @@ export class MiddlewareLike extends BeanSimple {
     return middlewares;
   }
 
-  public _composeMiddlewaresGlobal() {
+  private _composeMiddlewaresGlobal() {
     if (!this._cacheMiddlewaresGlobal) {
       const middlewares: Function[] = [];
       for (const item of this.middlewaresGlobal) {
         middlewares.push(wrapMiddleware(this.sceneName, item));
       }
+      this._cacheMiddlewaresGlobal = middlewares;
     }
     return this._cacheMiddlewaresGlobal;
   }
@@ -93,6 +87,32 @@ export class MiddlewareLike extends BeanSimple {
       if (!item) throw new Error(`${this.sceneName} not found: ${pipeName}`);
       return { ...item, pipeOptions: options };
     });
+  }
+
+  private _composeMiddlewaresHandler(
+    ctx: VonaContext,
+    fnStart?: Function | Function[],
+    fnMid?: Function | Function[],
+    fnEnd?: Function | Function[],
+  ) {
+    const beanFullName = ctx.getClassBeanFullName();
+    const handlerName = ctx.getHandler().name;
+    const key = `${beanFullName}:${handlerName}`;
+    if (!this._cacheMiddlewaresHandler[key]) {
+      let middlewares: Function[] = [];
+      if (fnStart) middlewares = middlewares.concat(fnStart);
+      // middlewares: global
+      middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+      if (fnMid) middlewares = middlewares.concat(fnMid);
+      // middlewares: handler
+      const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
+      for (const item of middlewaresLocal) {
+        middlewares.push(wrapMiddleware(this.sceneName, item));
+      }
+      if (fnEnd) middlewares = middlewares.concat(fnEnd);
+      this._cacheMiddlewaresHandler[key] = middlewares;
+    }
+    return this._cacheMiddlewaresHandler[key];
   }
 
   private _collectMiddlewaresHandler(ctx: VonaContext) {

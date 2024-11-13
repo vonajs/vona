@@ -21,4 +21,5 @@ export interface ContextBase {
   getPayload(options?): Promise<any>;
   getClass(): Constructable;
   getHandler(): Function;
+  getClassBeanFullName(): string;
 }
