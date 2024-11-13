@@ -1,3 +1,4 @@
+import { HttpStatus } from '../../../../types/index.js';
 import { IErrorObject } from './errorObject.js';
 
 type TypeErrorMethodNames = 'parseFail' | 'parseSuccess';
@@ -13,7 +14,7 @@ type TypeErrorMethodFail = {
 };
 
 type TypeErrorMethodThrow = {
-  (code: number | string, ...args: any[]): never;
+  (code: HttpStatus | number | string, ...args: any[]): never;
   module: (moduleName: string, code: number | string, ...args: any[]) => never;
 };
 
