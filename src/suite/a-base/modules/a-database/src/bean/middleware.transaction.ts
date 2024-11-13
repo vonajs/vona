@@ -1,16 +1,20 @@
 import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+import { TransactionIsolationLevels } from '../types/transaction.js';
 
-export interface IMiddlewareOptionsTransaction extends IDecoratorMiddlewareOptions {}
+export interface IMiddlewareOptionsTransaction extends IDecoratorMiddlewareOptions {
+  isolationLevel: TransactionIsolationLevels;
+  readOnly: boolean;
+}
 
-@Middleware<IMiddlewareOptionsTransaction>()
+@Middleware<IMiddlewareOptionsTransaction>({ isolationLevel: 'read committed', readOnly: false })
 export class MiddlewareTransaction extends BeanBase implements IMiddlewareExecute {
-  async execute(_options: IMiddlewareOptionsTransaction, next: Next) {
+  async execute(options: IMiddlewareOptionsTransaction, next: Next) {
     return await this.ctx.transaction.begin(async () => {
       // next
       const res = await next();
       checkIfSuccess(this.ctx);
       return res;
-    });
+    }, options);
   }
 }
 

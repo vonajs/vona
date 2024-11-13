@@ -34,7 +34,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo')
   @UseGuardGlobal('a-core:user', { public: true })
-  @UseMiddleware('a-database:transaction')
+  @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   echo(
     @Query('id', ParseIntPipe) id: number,
     temp: string,

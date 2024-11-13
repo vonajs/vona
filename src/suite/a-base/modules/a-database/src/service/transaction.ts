@@ -1,6 +1,7 @@
 import { BeanBase, Service } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import knex from 'knex';
+import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 
 @Service()
 export class ServiceTransaction extends BeanBase<ScopeModule> {
@@ -19,12 +20,12 @@ export class ServiceTransaction extends BeanBase<ScopeModule> {
     this._connection = value;
   }
 
-  async begin(fn) {
+  async begin(fn: Function, options?: Partial<IMiddlewareOptionsTransaction>) {
     let res;
     const db = this.ctx.bean.database.getDefault();
     try {
       if (++this._transactionCounter === 1) {
-        this._connection = await db.transaction({ isolationLevel: 'read committed' });
+        this._connection = await db.transaction(options);
       }
     } catch (err) {
       this._transactionCounter--;
