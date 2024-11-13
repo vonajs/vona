@@ -70,6 +70,10 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateMiddlewaresLike('interceptor', moduleName, modulePath);
     // pipes
     content += await generateMiddlewaresLike('pipe', moduleName, modulePath);
+    // connections
+    content += await generateMiddlewaresLike('connection', moduleName, modulePath);
+    // packets
+    content += await generateMiddlewaresLike('packet', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // controllers

@@ -13,6 +13,8 @@ const __boilerplates = {
   guard: 'guard',
   interceptor: 'interceptor',
   pipe: 'pipe',
+  connection: 'connection',
+  packet: 'packet',
 };
 
 declare module '@cabloy/cli' {
