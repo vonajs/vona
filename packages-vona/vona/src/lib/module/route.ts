@@ -9,7 +9,6 @@ import {
   IModule,
   IMiddlewareItem,
   SymbolUseMiddlewareOptions,
-  SymbolUseMiddlewareLocal,
   SymboleMiddlewareStatus,
   SymbolRouteHandlersArgumentsValue,
 } from '../../types/index.js';
@@ -77,7 +76,7 @@ export class AppRouter extends BeanSimple {
       if (typeof middlewares === 'string') middlewares = middlewares.split(',');
       middlewares.forEach(key => {
         if (is.string(key)) {
-          const item = app.meta.middlewaresNormal[key];
+          const item = app.meta.middlewaresGeneral.middlewaresNormal[key];
           if (item) {
             middlewaresLocal.push(wrapMiddleware('middleware', item));
           } else {
@@ -123,9 +122,6 @@ export class AppRouter extends BeanSimple {
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
     const controllerMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, controller);
-    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, controller)[
-      'middleware'
-    ] as any[];
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -138,7 +134,6 @@ export class AppRouter extends BeanSimple {
         controllerBeanFullName,
         controllerPath,
         controllerMiddlewaresOptions,
-        controllerMiddlewaresLocal,
         actionKey,
         desc,
       );
@@ -151,7 +146,6 @@ export class AppRouter extends BeanSimple {
     controllerBeanFullName: string,
     controllerPath: string | undefined,
     controllerMiddlewaresOptions: object,
-    controllerMiddlewaresLocal: any[],
     actionKey: string,
     desc: PropertyDescriptor,
   ) {
@@ -204,35 +198,10 @@ export class AppRouter extends BeanSimple {
       routePath,
     };
 
-    // middlewaresLocal: route
-    const middlewaresLocal: any[] = [];
-    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, desc.value)[
-      'middleware'
-    ] as string[];
-    const middlewaresLocalAll: string[] = [];
-    if (actionMiddlewaresLocal) {
-      actionMiddlewaresLocal.forEach(item => {
-        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
-      });
-    }
-    if (controllerMiddlewaresLocal) {
-      controllerMiddlewaresLocal.forEach(item => {
-        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
-      });
-    }
-    for (const middlewareName of middlewaresLocalAll) {
-      const item = app.meta.middlewaresNormal[middlewareName];
-      if (!item) throw new Error(`middleware not found: ${middlewareName}`);
-      middlewaresLocal.push(wrapMiddleware('middleware', item));
-    }
-
-    // middleware controller
-    middlewaresLocal.push(controllerActionToMiddleware(_route.controllerBeanFullName, _route));
-
     // fn
     const fn = (ctx, next) => {
       ctx.route = _route;
-      return this._registerComposeMiddlewares(ctx, _route)(ctx, next);
+      return this._registerComposeMiddlewares(ctx)(ctx, next);
     };
 
     // register
@@ -243,41 +212,17 @@ export class AppRouter extends BeanSimple {
     }
   }
 
-  _registerComposeMiddlewares(ctx, route) {
+  _registerComposeMiddlewares(ctx: VonaContext) {
     // start
-    const fnStart = async (ctx, next) => {
-      // status
-      ctx[SymboleMiddlewareStatus] = {};
-      // route
-      ctx.route = route;
-      // dynamic options
-      ctx.meta.middlewares = {};
-      // next
-      const res = await next();
-      // invoke callbackes: handle secondly
-      await ctx.tailDone();
-      // ok
-      return res;
-    };
-    fnStart._name = 'start';
+    const fnStart = routeStartMiddleware;
     // mid: guard/interceptor/pipes/tail
     const fnMid: Function[] = [];
     fnMid.push(middlewareGuard);
     fnMid.push(middlewareInterceptor);
     fnMid.push(middlewarePipe);
-    // middlewares: tailDone
-    const fnTailDone = async (ctx, next) => {
-      // next
-      const res = await next();
-      // invoke callbackes: handle firstly
-      await ctx.tailDone();
-      // ok
-      return res;
-    };
-    fnTailDone._name = 'tailDone';
-    fnMid.push(fnTailDone);
+    fnMid.push(routeTailDoneMiddleware);
     // end: controller
-    const fnEnd = controllerActionToMiddleware(route.controllerBeanFullName, route);
+    const fnEnd = classControllerMiddleware;
     // compose
     return this.app.meta.middlewaresGeneral.composeAsync(ctx, fnStart, fnMid, fnEnd);
   }
@@ -306,7 +251,7 @@ export class AppRouter extends BeanSimple {
     args.push(fnStart);
 
     // middlewares: globals
-    app.meta.middlewaresGlobal.forEach(item => {
+    app.meta.middlewaresGeneral.middlewaresGlobal.forEach(item => {
       args.push(wrapMiddleware('middleware', item));
     });
     // middlewares: guard/interceptor/pipes
@@ -438,4 +383,33 @@ function controllerActionToMiddleware(controllerBeanFullName, _route) {
     }
     return controller[_route.action](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
   };
+}
+
+function classControllerMiddleware(ctx: VonaContext) {
+  const beanFullName = ctx.getClassBeanFullName();
+  const handlerName = ctx.getHandler().name;
+  const controller = ctx.bean._getBean(beanFullName as any) as any;
+  return controller[handlerName](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
+}
+
+async function routeStartMiddleware(ctx: VonaContext, next: Function) {
+  // status
+  ctx[SymboleMiddlewareStatus] = {};
+  // dynamic options
+  ctx.meta.middlewares = {};
+  // next
+  const res = await next();
+  // invoke callbackes: handle secondly
+  await ctx.tailDone();
+  // ok
+  return res;
+}
+
+async function routeTailDoneMiddleware(ctx: VonaContext, next: Function) {
+  // next
+  const res = await next();
+  // invoke callbackes: handle firstly
+  await ctx.tailDone();
+  // ok
+  return res;
 }
