@@ -35,10 +35,13 @@ export class MiddlewareLike extends BeanSimple {
   }
 
   composeAsync(ctx: VonaContext, fnStart?, fnMid?, fnEnd?) {
-    let middlewares: any[] = [];
+    const middlewares: any[] = [];
     if (fnStart) middlewares.push(fnStart);
     // middlewares: global
-    middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+    //middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+    for (const item of this.middlewaresGlobal) {
+      middlewares.push(wrapMiddleware(this.sceneName, item));
+    }
     if (fnMid) middlewares.push(fnMid);
     // middlewares: route
     const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
@@ -51,9 +54,12 @@ export class MiddlewareLike extends BeanSimple {
   }
 
   collectPipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
-    let middlewares: Function[] = [];
+    const middlewares: Function[] = [];
     // pipes: global
-    middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+    //middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+    for (const item of this.middlewaresGlobal) {
+      middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+    }
     // pipes: route
     const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
     for (const item of middlewaresLocal) {
@@ -69,7 +75,7 @@ export class MiddlewareLike extends BeanSimple {
     return middlewares;
   }
 
-  private _composeMiddlewaresGlobal() {
+  public _composeMiddlewaresGlobal() {
     if (!this._cacheMiddlewaresGlobal) {
       const middlewares: Function[] = [];
       for (const item of this.middlewaresGlobal) {

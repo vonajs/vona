@@ -8,7 +8,7 @@ import {
   IModelMethodOptionsGeneral,
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
-} from '../../types.js';
+} from '../../types/index.js';
 import { Knex } from 'knex';
 
 export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
