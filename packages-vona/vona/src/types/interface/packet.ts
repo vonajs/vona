@@ -3,7 +3,7 @@ import { IMiddlewareBase, Next } from './middleware.js';
 export interface IPacketRecord {}
 
 export interface IPacketExecute {
-  execute(options: IDecoratorPacketOptions, next: Next): Promise<any>;
+  execute(packet: any[], options: IDecoratorPacketOptions, next: Next): Promise<any>;
 }
 
 export interface IDecoratorPacketOptions extends IMiddlewareBase {
