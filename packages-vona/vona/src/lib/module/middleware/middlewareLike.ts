@@ -218,7 +218,10 @@ export class MiddlewareLike extends BeanSimple {
     if (!middlewares) return;
     for (const key in middlewares) {
       const beanOptions = middlewares[key];
-      if (!beanOptions.options) beanOptions.options = {};
+      // for special global middleware
+      if (!beanOptions.options && ['connection', 'packet'].includes(this.sceneName)) {
+        beanOptions.options = {};
+      }
       // push
       middlewaresAll.push({
         name: key.replace(`.${this.sceneName}.`, ':'),
