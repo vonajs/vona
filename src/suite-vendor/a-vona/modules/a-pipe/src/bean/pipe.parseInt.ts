@@ -4,11 +4,9 @@ import {
   IDecoratorPipeOptions,
   IPipeTransform,
   Pipe,
-  createArgumentPipe,
   isNil,
-  ArgumentPipeResult,
-  ArgumentPipeResultFn,
   HttpStatus,
+  createArgumentPipeParse,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 
@@ -38,14 +36,4 @@ export class PipeParseInt extends BeanBase<ScopeModule> implements IPipeTransfor
   }
 }
 
-const PIPENAME = 'a-pipe:parseInt';
-type PIPENAME = typeof PIPENAME;
-
-export function ParseIntPipe(): ArgumentPipeResult<PIPENAME>;
-export function ParseIntPipe(options: Partial<IPipeOptionsParseInt>): ArgumentPipeResultFn<PIPENAME>;
-export function ParseIntPipe(options?: Partial<IPipeOptionsParseInt>): any {
-  if (!options) return createArgumentPipe(PIPENAME);
-  return () => {
-    return createArgumentPipe(PIPENAME, options);
-  };
-}
+export const ParseIntPipe = createArgumentPipeParse('a-pipe:parseInt');

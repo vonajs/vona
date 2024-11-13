@@ -16,3 +16,12 @@ export function createArgumentPipe<T extends keyof IPipeRecordLocal>(
     options,
   };
 }
+
+export function createArgumentPipeParse<T extends keyof IPipeRecordLocal>(pipeName: T) {
+  return function (options?: Partial<IPipeRecordLocal[T]>): any {
+    if (!options) return createArgumentPipe(pipeName);
+    return () => {
+      return createArgumentPipe(pipeName, options);
+    };
+  };
+}
