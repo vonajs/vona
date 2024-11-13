@@ -1,13 +1,10 @@
 /** middlewares: begin */
 export * from '../bean/middleware.development.js';
-export * from '../bean/middleware.transaction.js';
 import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
-import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 import 'vona';
 declare module 'vona' {
   export interface IMiddlewareRecordLocal {
     'a-core:development': IMiddlewareOptionsDevelopment;
-    'a-core:transaction': IMiddlewareOptionsTransaction;
   }
 }
 /** middlewares: end */
