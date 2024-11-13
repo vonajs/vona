@@ -1,5 +1,5 @@
+import { HttpStatus } from '../../../../types/enum/httpStatus.js';
 import { BeanSimple } from '../../beanSimple.js';
-import { errorsInternal } from './errorInternal.js';
 
 export class ErrorClass extends BeanSimple {
   ebErrors: any;
@@ -58,7 +58,8 @@ export class ErrorClass extends BeanSimple {
 
     let message: string;
     if (code <= 1000) {
-      message = this.ctx.meta.locale.getText(undefined, undefined, errorsInternal[code], ...args);
+      const httpStatusMessageKey = `HTTPSTATUS_${HttpStatus[code]}`;
+      message = this.ctx.meta.locale.getText(undefined, undefined, httpStatusMessageKey, ...args);
     } else {
       message = this.ctx.meta.locale.getText(module, undefined, ebError[code], ...args);
     }
