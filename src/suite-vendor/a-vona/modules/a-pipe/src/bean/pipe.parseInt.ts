@@ -38,11 +38,14 @@ export class PipeParseInt extends BeanBase<ScopeModule> implements IPipeTransfor
   }
 }
 
-export function ParseIntPipe(): ArgumentPipeResult<'a-pipe:parseInt'>;
-export function ParseIntPipe(options: Partial<IPipeOptionsParseInt>): ArgumentPipeResultFn<'a-pipe:parseInt'>;
+type PIPENAME = 'a-pipe:parseInt';
+const PIPENAME = 'a-pipe:parseInt';
+
+export function ParseIntPipe(): ArgumentPipeResult<PIPENAME>;
+export function ParseIntPipe(options: Partial<IPipeOptionsParseInt>): ArgumentPipeResultFn<PIPENAME>;
 export function ParseIntPipe(options?: Partial<IPipeOptionsParseInt>): any {
-  if (!options) return createArgumentPipe('a-pipe:parseInt');
+  if (!options) return createArgumentPipe(PIPENAME);
   return () => {
-    return createArgumentPipe('a-pipe:parseInt', options);
+    return createArgumentPipe(PIPENAME, options);
   };
 }
