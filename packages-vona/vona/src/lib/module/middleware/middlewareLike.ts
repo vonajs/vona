@@ -47,6 +47,10 @@ export class MiddlewareLike extends BeanSimple {
     return ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
 
+  composeSocketAsync() {
+    return this._composeMiddlewaresGlobal();
+  }
+
   composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
     const beanFullName = ctx.getClassBeanFullName();
     const handlerName = ctx.getHandler().name;
@@ -54,7 +58,6 @@ export class MiddlewareLike extends BeanSimple {
     if (!this._cacheMiddlewaresArgument[key]) {
       const middlewares: Function[] = [];
       // pipes: global
-      //middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
       for (const item of this.middlewaresGlobal) {
         middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
       }
@@ -188,7 +191,7 @@ export class MiddlewareLike extends BeanSimple {
       // normal
       this.middlewaresNormal[item.name] = item;
       // global
-      if (item.options?.global) {
+      if (item.options?.global || ['connection', 'packet'].includes(this.sceneName)) {
         this.middlewaresGlobal.push(item);
       }
     }
@@ -215,6 +218,11 @@ export class MiddlewareLike extends BeanSimple {
 
 export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
   const fn = (ctx: VonaContext, next) => {
+    let packet;
+    if (ctx.ctx && ctx.packet) {
+      ctx = ctx.ctx;
+      packet = ctx.packet;
+    }
     // options
     const options = ctx.meta.getMiddlewareOptions(item);
     // enable match ignore dependencies
@@ -233,6 +241,9 @@ export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, execute
     }
     if (executeCustom) {
       return executeCustom(beanInstance, options, next);
+    }
+    if (packet) {
+      return Cast(beanInstance).execute(packet, options, next);
     }
     return Cast(beanInstance).execute(options, next);
   };

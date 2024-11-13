@@ -17,12 +17,6 @@ export default function (app: VonaApplication): [object, any[]] {
   app.meta.middlewaresGlobal = [];
   const ebMiddlewaresGlobal = app.meta.middlewaresGlobal;
 
-  app.meta.middlewaresSocketIoConnection = [];
-  const ebMiddlewaresSocketIoConnection = app.meta.middlewaresSocketIoConnection;
-
-  app.meta.middlewaresSocketIoPacket = [];
-  const ebMiddlewaresSocketIoPacket = app.meta.middlewaresSocketIoPacket;
-
   // load
   loadAll(app);
 
@@ -33,13 +27,7 @@ export default function (app: VonaApplication): [object, any[]] {
   handleDependents(ebMiddlewaresGlobal);
 
   // load middlewares
-  loadMiddlewares(
-    ebMiddlewaresAll,
-    ebMiddlewaresNormal,
-    ebMiddlewaresGlobal,
-    ebMiddlewaresSocketIoConnection,
-    ebMiddlewaresSocketIoPacket,
-  );
+  loadMiddlewares(ebMiddlewaresAll, ebMiddlewaresNormal, ebMiddlewaresGlobal);
 
   return [ebMiddlewaresNormal, ebMiddlewaresGlobal];
 }
@@ -48,15 +36,11 @@ function loadAll(app: VonaApplication) {
   app.meta.middlewaresGuard = app.bean._newBean(MiddlewareLike, 'guard');
   app.meta.middlewaresInterceptor = app.bean._newBean(MiddlewareLike, 'interceptor');
   app.meta.middlewaresPipe = app.bean._newBean(MiddlewareLike, 'pipe');
+  app.meta.middlewaresConnection = app.bean._newBean(MiddlewareLike, 'connection');
+  app.meta.middlewaresPacket = app.bean._newBean(MiddlewareLike, 'packet');
 }
 
-function loadMiddlewares(
-  ebMiddlewaresAll,
-  ebMiddlewaresNormal,
-  ebMiddlewaresGlobal,
-  ebMiddlewaresSocketIoConnection,
-  ebMiddlewaresSocketIoPacket,
-) {
+function loadMiddlewares(ebMiddlewaresAll, ebMiddlewaresNormal, ebMiddlewaresGlobal) {
   // load
   for (const item of ebMiddlewaresAll) {
     // ignore other types, such as: socketio.connection/socketio.packet
@@ -67,17 +51,11 @@ function loadMiddlewares(
       if (item.options?.global) {
         ebMiddlewaresGlobal.push(item);
       }
-    } else if (type === 'socketio.connection') {
-      ebMiddlewaresSocketIoConnection.push(item);
-    } else if (type === 'socketio.packet') {
-      ebMiddlewaresSocketIoPacket.push(item);
     }
   }
 
   // global order
   swap(ebMiddlewaresGlobal);
-  swap(ebMiddlewaresSocketIoConnection);
-  swap(ebMiddlewaresSocketIoPacket);
 }
 
 function loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app) {

@@ -60,11 +60,11 @@ export class AppMeta extends BeanSimple {
   middlewares: any[];
   middlewaresNormal: Record<string, IMiddlewareItem>;
   middlewaresGlobal: IMiddlewareItem[];
-  middlewaresSocketIoConnection: any[];
-  middlewaresSocketIoPacket: any[];
   middlewaresGuard: MiddlewareLike;
   middlewaresInterceptor: MiddlewareLike;
   middlewaresPipe: MiddlewareLike;
+  middlewaresConnection: MiddlewareLike;
+  middlewaresPacket: MiddlewareLike;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;
