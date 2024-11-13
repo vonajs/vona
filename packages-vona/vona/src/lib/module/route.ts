@@ -229,8 +229,57 @@ export class AppRouter extends BeanSimple {
     // middleware controller
     middlewaresLocal.push(controllerActionToMiddleware(_route.controllerBeanFullName, _route));
 
+    // fn
+    const fn = (ctx, next) => {
+      ctx.route = _route;
+      return this._registerComposeMiddlewares(ctx, _route)(ctx, next);
+    };
+
     // register
-    this._registerInner(_route, middlewaresLocal);
+    if (_route.routeName) {
+      app.router[_route.routeMethod](_route.routeName, _route.routePath, fn);
+    } else {
+      app.router[_route.routeMethod](_route.routePath, fn);
+    }
+  }
+
+  _registerComposeMiddlewares(ctx, route) {
+    // start
+    const fnStart = async (ctx, next) => {
+      // status
+      ctx[SymboleMiddlewareStatus] = {};
+      // route
+      ctx.route = route;
+      // dynamic options
+      ctx.meta.middlewares = {};
+      // next
+      const res = await next();
+      // invoke callbackes: handle secondly
+      await ctx.tailDone();
+      // ok
+      return res;
+    };
+    fnStart._name = 'start';
+    // mid: guard/interceptor/pipes/tail
+    const fnMid: Function[] = [];
+    fnMid.push(middlewareGuard);
+    fnMid.push(middlewareInterceptor);
+    fnMid.push(middlewarePipe);
+    // middlewares: tailDone
+    const fnTailDone = async (ctx, next) => {
+      // next
+      const res = await next();
+      // invoke callbackes: handle firstly
+      await ctx.tailDone();
+      // ok
+      return res;
+    };
+    fnTailDone._name = 'tailDone';
+    fnMid.push(fnTailDone);
+    // end: controller
+    const fnEnd = controllerActionToMiddleware(route.controllerBeanFullName, route);
+    // compose
+    return this.app.meta.middlewaresGeneral.composeAsync(ctx, fnStart, fnMid, fnEnd);
   }
 
   _registerInner(route, middlewaresLocal) {
@@ -274,7 +323,7 @@ export class AppRouter extends BeanSimple {
       // ok
       return res;
     };
-    fnStart._name = 'tailDone';
+    fnTailDone._name = 'tailDone';
     args.push(fnTailDone);
 
     // middlewares
