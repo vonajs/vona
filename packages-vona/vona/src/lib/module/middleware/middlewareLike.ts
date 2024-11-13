@@ -26,6 +26,7 @@ export class MiddlewareLike extends BeanSimple {
 
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
+  _cacheMiddlewaresArgument: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
@@ -46,26 +47,32 @@ export class MiddlewareLike extends BeanSimple {
     return ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
 
-  collectPipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
-    const middlewares: Function[] = [];
-    // pipes: global
-    //middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
-    for (const item of this.middlewaresGlobal) {
-      middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
-    }
-    // pipes: route
-    const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
-    for (const item of middlewaresLocal) {
-      middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
-    }
-    // pipes: arguments
-    const middlewaresArgument = this._collectArgumentMiddlewares(ctx, argMeta);
-    if (middlewaresArgument) {
-      for (const item of middlewaresArgument) {
+  composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
+    const beanFullName = ctx.getClassBeanFullName();
+    const handlerName = ctx.getHandler().name;
+    const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
+    if (!this._cacheMiddlewaresArgument[key]) {
+      const middlewares: Function[] = [];
+      // pipes: global
+      //middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+      for (const item of this.middlewaresGlobal) {
         middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
       }
+      // pipes: route
+      const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
+      for (const item of middlewaresLocal) {
+        middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+      }
+      // pipes: arguments
+      const middlewaresArgument = this._collectArgumentMiddlewares(ctx, argMeta);
+      if (middlewaresArgument) {
+        for (const item of middlewaresArgument) {
+          middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+        }
+      }
+      this._cacheMiddlewaresArgument[key] = middlewares;
     }
-    return middlewares;
+    return this._cacheMiddlewaresArgument[key];
   }
 
   private _composeMiddlewaresGlobal() {
