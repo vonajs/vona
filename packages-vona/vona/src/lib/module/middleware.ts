@@ -1,27 +1,10 @@
 import { swapDeps } from '@cabloy/deps';
 import { VonaApplication } from '../../types/index.js';
-import { appResource } from '../core/resource.js';
 import { MiddlewareLike } from './middleware/middlewareLike.js';
 
 export default function (app: VonaApplication): [object, any[]] {
-  // use modulesArray
-  const ebModulesArray = app.meta.modulesArray;
-
-  // all middlewares
-  app.meta.middlewares = [];
-  const ebMiddlewaresAll = app.meta.middlewares;
-
-  app.meta.middlewaresNormal = {};
-  const ebMiddlewaresNormal: object = app.meta.middlewaresNormal;
-
-  app.meta.middlewaresGlobal = [];
-  const ebMiddlewaresGlobal = app.meta.middlewaresGlobal;
-
   // load
   loadAll(app);
-
-  // load middlewares all
-  loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app);
 
   // handle dependents
   handleDependents(ebMiddlewaresGlobal);
@@ -56,62 +39,6 @@ function loadMiddlewares(ebMiddlewaresAll, ebMiddlewaresNormal, ebMiddlewaresGlo
 
   // global order
   swap(ebMiddlewaresGlobal);
-}
-
-function loadMiddlewaresAll(ebMiddlewaresAll, ebModulesArray, app) {
-  for (const module of ebModulesArray) {
-    _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app);
-    _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module);
-  }
-}
-
-function _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app) {
-  const config = app.meta.configs[module.info.relativeName];
-  if (!config.middlewares) return;
-  for (const middlewareKey in config.middlewares) {
-    const middlewareConfig = config.middlewares[middlewareKey];
-    // bean
-    const beanName = middlewareConfig.bean;
-    if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${middlewareKey}`);
-    let bean;
-    if (typeof beanName === 'string') {
-      bean = {
-        module: module.info.relativeName,
-        name: beanName,
-      };
-    } else {
-      bean = {
-        module: beanName.module || module.info.relativeName,
-        name: beanName.name,
-      };
-    }
-    const beanFullName = `${bean.module}.middleware.${bean.name}`;
-    const beanOptions = appResource.getBean(beanFullName);
-    // push
-    ebMiddlewaresAll.push({
-      name: middlewareKey,
-      options: middlewareConfig,
-      beanOptions,
-      fromConfig: true,
-    });
-  }
-}
-
-function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
-  // todo: remove this line
-  if (module.info.relativeName !== 'a-core' && module.info.relativeName !== 'a-database') return;
-  const scene = 'middleware';
-  const middlewares = appResource.scenes['middleware'][module.info.relativeName];
-  if (!middlewares) return;
-  for (const key in middlewares) {
-    const beanOptions = middlewares[key];
-    // push
-    ebMiddlewaresAll.push({
-      name: key.replace(`.${scene}.`, ':'),
-      options: beanOptions.options,
-      beanOptions,
-    });
-  }
 }
 
 function handleDependents(ebMiddlewaresGlobal) {

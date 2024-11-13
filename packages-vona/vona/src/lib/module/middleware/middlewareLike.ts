@@ -11,6 +11,7 @@ import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
+import { IModule } from '@cabloy/module-info';
 
 const __adapter = (_context, chain) => {
   return {
@@ -200,20 +201,64 @@ export class MiddlewareLike extends BeanSimple {
   private _loadMiddlewaresAll() {
     const middlewaresAll: IMiddlewareItem[] = [];
     for (const module of this.app.meta.modulesArray) {
-      const middlewares = appResource.scenes[this.sceneName]?.[module.info.relativeName];
-      if (!middlewares) continue;
-      for (const key in middlewares) {
-        const beanOptions = middlewares[key];
-        if (!beanOptions.options) beanOptions.options = {};
-        // push
-        middlewaresAll.push({
-          name: key.replace(`.${this.sceneName}.`, ':'),
-          options: beanOptions.options as any,
-          beanOptions,
-        });
+      // todo: should be removed
+      if (this.sceneName === 'middleware') {
+        this._loadMiddlewaresAll_fromConfig(middlewaresAll, module);
+      }
+      // todo: remove this line
+      if (this.sceneName !== 'middleware' || ['a-core', 'a-database'].includes(module.info.relativeName)) {
+        this._loadMiddlewaresAll_fromMetadata(middlewaresAll, module);
       }
     }
     return middlewaresAll;
+  }
+
+  private _loadMiddlewaresAll_fromMetadata(middlewaresAll: IMiddlewareItem[], module: IModule) {
+    const middlewares = appResource.scenes[this.sceneName]?.[module.info.relativeName];
+    if (!middlewares) return;
+    for (const key in middlewares) {
+      const beanOptions = middlewares[key];
+      if (!beanOptions.options) beanOptions.options = {};
+      // push
+      middlewaresAll.push({
+        name: key.replace(`.${this.sceneName}.`, ':'),
+        options: beanOptions.options as any,
+        beanOptions,
+      });
+    }
+  }
+
+  // todo: should be removed
+  private _loadMiddlewaresAll_fromConfig(middlewaresAll: IMiddlewareItem[], module: IModule) {
+    const config = this.app.meta.configs[module.info.relativeName];
+    if (!config.middlewares) return;
+    for (const middlewareKey in config.middlewares) {
+      const middlewareConfig = config.middlewares[middlewareKey];
+      // bean
+      const beanName = middlewareConfig.bean;
+      if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${middlewareKey}`);
+      let bean;
+      if (typeof beanName === 'string') {
+        bean = {
+          module: module.info.relativeName,
+          name: beanName,
+        };
+      } else {
+        bean = {
+          module: beanName.module || module.info.relativeName,
+          name: beanName.name,
+        };
+      }
+      const beanFullName = `${bean.module}.middleware.${bean.name}`;
+      const beanOptions = appResource.getBean(beanFullName)!;
+      // push
+      middlewaresAll.push({
+        name: middlewareKey,
+        options: middlewareConfig,
+        beanOptions,
+        fromConfig: true,
+      });
+    }
   }
 }
 
