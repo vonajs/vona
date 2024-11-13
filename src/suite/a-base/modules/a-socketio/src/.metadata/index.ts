@@ -2,57 +2,45 @@
 export * from '../bean/bean.io.js';
 export * from '../bean/bean.ioMessageBase_.js';
 export * from '../bean/broadcast.socketEmit.js';
-export * from '../bean/middleware.io.connection.js';
-export * from '../bean/middleware.io.packet.js';
 export * from '../bean/queue.delivery.js';
 export * from '../bean/queue.process.js';
 export * from '../bean/queue.push.js';
 export * from '../bean/queue.pushDirect.js';
 export * from '../bean/version.manager.js';
 import { BeanIo } from '../bean/bean.io.js';
-import { BeanIoMessageBase } from '../bean/bean.ioMessageBase_.js';
-import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
-import { MiddlewareIoConnection } from '../bean/middleware.io.connection.js';
-import { MiddlewareIoPacket } from '../bean/middleware.io.packet.js';
-import { QueueDelivery } from '../bean/queue.delivery.js';
-import { QueueProcess } from '../bean/queue.process.js';
-import { QueuePush } from '../bean/queue.push.js';
-import { QueuePushDirect } from '../bean/queue.pushDirect.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     io: BeanIo;
   }
-
-  export interface IBeanRecordGeneral {
-    ioMessageBase: BeanIoMessageBase;
-    'a-socketio.broadcast.socketEmit': BroadcastSocketEmit;
-    'a-socketio.middleware.io.connection': MiddlewareIoConnection;
-    'a-socketio.middleware.io.packet': MiddlewareIoPacket;
-    'a-socketio.queue.delivery': QueueDelivery;
-    'a-socketio.queue.process': QueueProcess;
-    'a-socketio.queue.push': QueuePush;
-    'a-socketio.queue.pushDirect': QueuePushDirect;
-    'a-socketio.version.manager': VersionManager;
-  }
 }
 /** beans: end */
+/** connections: begin */
+export * from '../bean/connection.io.js';
+import { IConnectionOptionsIo } from '../bean/connection.io.js';
+import 'vona';
+declare module 'vona' {
+  export interface IConnectionRecord {
+    'a-socketio:io': IConnectionOptionsIo;
+  }
+}
+/** connections: end */
+/** packets: begin */
+export * from '../bean/packet.performAction.js';
+import { IPacketOptionsPerformAction } from '../bean/packet.performAction.js';
+import 'vona';
+declare module 'vona' {
+  export interface IPacketRecord {
+    'a-socketio:performAction': IPacketOptionsPerformAction;
+  }
+}
+/** packets: end */
 /** controllers: begin */
 export * from '../controller/io.js';
 export * from '../controller/message.js';
 export * from '../controller/messageClass.js';
 export * from '../controller/test.js';
-import { ControllerIo } from '../controller/io.js';
-import { ControllerMessage } from '../controller/message.js';
-import { ControllerMessageClass } from '../controller/messageClass.js';
-import { ControllerTest } from '../controller/test.js';
-export const controllers = {
-  io: ControllerIo,
-  message: ControllerMessage,
-  messageClass: ControllerMessageClass,
-  test: ControllerTest,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/message.js';

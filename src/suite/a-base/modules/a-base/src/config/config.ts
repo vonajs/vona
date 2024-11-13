@@ -46,10 +46,6 @@ const middlewares = {
     global: false,
     dependencies: 'instance',
   } as IModuleConfigMiddleware,
-  connectionAuth: {
-    bean: 'connectionAuth',
-    type: 'socketio.connection',
-  } as IModuleConfigMiddleware,
 };
 
 // startups

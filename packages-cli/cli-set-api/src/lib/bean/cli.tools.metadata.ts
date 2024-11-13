@@ -3,6 +3,7 @@ import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateMiddlewaresLike } from './toolsMetadata/generateMiddlewares.js';
+import { generateSocket } from './toolsMetadata/generateSocket.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
@@ -71,9 +72,9 @@ export class CliToolsMetadata extends BeanCliBase {
     // pipes
     content += await generateMiddlewaresLike('pipe', moduleName, modulePath);
     // connections
-    content += await generateMiddlewaresLike('connection', moduleName, modulePath);
+    content += await generateSocket('connection', moduleName, modulePath);
     // packets
-    content += await generateMiddlewaresLike('packet', moduleName, modulePath);
+    content += await generateSocket('packet', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // controllers

@@ -1,14 +1,16 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IDecoratorPacketOptions, IPacketExecute, Next, Packet } from 'vona';
 
-@Bean({ scene: 'middleware.io' })
-export class MiddlewareIoPacket extends BeanBase {
-  async execute(_options, packet, next) {
+export interface IPacketOptionsPerformAction extends IDecoratorPacketOptions {}
+
+@Packet<IPacketOptionsPerformAction>()
+export class PacketPerformAction extends BeanBase implements IPacketExecute {
+  async execute(packet: any[], _options: IPacketOptionsPerformAction, next: Next) {
     const eventName = packet[0];
     if (eventName === 'performAction') {
       await this._performAction({ params: packet[1] });
     }
     // next
-    await next();
+    return next();
   }
 
   async _performAction({ params: { id, method, url, body } }) {

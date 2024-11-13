@@ -89,7 +89,6 @@ export * from '../bean/middleware.authOpen.js';
 export * from '../bean/middleware.gate.js';
 export * from '../bean/middleware.httpLog.js';
 export * from '../bean/middleware.inner.js';
-export * from '../bean/middleware.io.connectionAuth.js';
 export * from '../bean/middleware.jsonp.js';
 export * from '../bean/middleware.right.js';
 export * from '../bean/middleware.test.js';
@@ -98,6 +97,16 @@ export * from '../bean/middleware.transaction.js';
 import 'vona';
 declare module 'vona' {}
 /** middlewares: end */
+/** connections: begin */
+export * from '../bean/connection.auth.js';
+import { IConnectionOptionsAuth } from '../bean/connection.auth.js';
+import 'vona';
+declare module 'vona' {
+  export interface IConnectionRecord {
+    'a-base:auth': IConnectionOptionsAuth;
+  }
+}
+/** connections: end */
 /** atoms: begin */
 export * from '../atom/resource.js';
 export * from '../atom/role.js';

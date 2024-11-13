@@ -1,18 +1,5 @@
-import { VonaApplication, IModuleConfigBroadcast, IModuleConfigMiddleware, IModuleConfigQueue } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast, IModuleConfigQueue } from 'vona';
 import { IModuleConfigSummer } from 'vona-module-a-summer';
-
-// middlewares
-const middlewares = {
-  connection: {
-    bean: 'connection',
-    type: 'socketio.connection',
-    dependencies: 'connectionAuth',
-  } as IModuleConfigMiddleware,
-  packet: {
-    bean: 'packet',
-    type: 'socketio.packet',
-  } as IModuleConfigMiddleware,
-};
 
 // queues
 const queues = {
@@ -57,7 +44,6 @@ const summer = {
 
 export const config = (_app: VonaApplication) => {
   return {
-    middlewares,
     queues,
     broadcasts,
     summer,
