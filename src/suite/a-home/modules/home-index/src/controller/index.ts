@@ -18,7 +18,7 @@ import { ParseIntPipe } from 'vona-module-a-pipe';
 @UseGuard('a-b4:test')
 export class ControllerIndex extends BeanBase<ScopeModule> {
   @Get('//')
-  @UseMiddleware('a-core:transaction')
+  @UseMiddleware('a-database:transaction')
   @UseGuard('a-b4:test')
   @UseGuard('a-b4:test1')
   @UseGuardGlobal('a-core:user', { public: true })
@@ -34,6 +34,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo')
   @UseGuardGlobal('a-core:user', { public: true })
+  @UseMiddleware('a-database:transaction')
   echo(
     @Query('id', ParseIntPipe) id: number,
     temp: string,

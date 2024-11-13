@@ -121,7 +121,7 @@ function _loadMiddlewaresAll_fromConfig(ebMiddlewaresAll, module, app) {
 
 function _loadMiddlewaresAll_fromMetadata(ebMiddlewaresAll, module) {
   // todo: remove this line
-  if (module.info.relativeName !== 'a-core') return;
+  if (module.info.relativeName !== 'a-core' && module.info.relativeName !== 'a-database') return;
   const scene = 'middleware';
   const middlewares = appResource.scenes['middleware'][module.info.relativeName];
   if (!middlewares) return;
