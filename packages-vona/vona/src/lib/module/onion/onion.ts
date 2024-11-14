@@ -2,6 +2,7 @@ import { swapDeps } from '@cabloy/deps';
 import pathMatching from 'egg-path-matching';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import {
+  IDecoratorMiddlewareOptionsGlobal,
   IMiddlewareItem,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
@@ -13,6 +14,7 @@ import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
 import { onionMeta, OnionSceneMeta } from './meta.js';
+import { extend } from '@cabloy/extend';
 
 const __adapter = (_context, chain) => {
   return {
@@ -26,6 +28,8 @@ export class Onion extends BeanSimple {
   sceneMeta: OnionSceneMeta;
   middlewaresNormal: Record<string, IMiddlewareItem>;
   middlewaresGlobal: IMiddlewareItem[];
+
+  _cacheMiddlewaresOptions: Record<string, IDecoratorMiddlewareOptionsGlobal> = {};
 
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
@@ -158,9 +162,27 @@ export class Onion extends BeanSimple {
     return middlewaresLocal;
   }
 
+  private _getMiddlewareOptions(item: IMiddlewareItem) {
+    if (!this._cacheMiddlewaresOptions[item.name]) {
+      // options: meta
+      const optionsMeta = item.options;
+      // options: config
+      let optionsConfig;
+      if (item.fromConfig) {
+        const config = this.app.meta.configs[item.beanOptions.module];
+        optionsConfig = config?.middlewares?.[item.name];
+      } else {
+        optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
+      }
+      this._cacheMiddlewaresOptions[item.name] = extend(true, {}, optionsMeta, optionsConfig);
+    }
+    return this._cacheMiddlewaresOptions[item.name];
+  }
+
   private _handleDependents(middlewares: IMiddlewareItem[]) {
     for (const middleware of middlewares) {
-      let dependents = middleware.options.dependents as any;
+      const middlewareOptions = this._getMiddlewareOptions(middleware);
+      let dependents = middlewareOptions.dependents as any;
       if (!dependents) continue;
       if (!Array.isArray(dependents)) {
         dependents = dependents.split(',') as any[];
@@ -170,7 +192,7 @@ export class Onion extends BeanSimple {
         if (!middleware2) {
           throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
         }
-        const options = middleware2.options as any;
+        const options = this._getMiddlewareOptions(middleware2) as any;
         if (!options.dependencies) options.dependencies = [];
         if (!Array.isArray(options.dependencies)) {
           options.dependencies = options.dependencies.split(',') as any[];
@@ -183,7 +205,13 @@ export class Onion extends BeanSimple {
   }
 
   private _swapMiddlewares(middlewares: IMiddlewareItem[]) {
-    swapDeps(middlewares, { name: 'name', dependencies: 'options.dependencies' });
+    swapDeps(middlewares, {
+      name: 'name',
+      dependencies: item => {
+        const middlewareOptions = this._getMiddlewareOptions(item as any);
+        return middlewareOptions.dependencies as any;
+      },
+    });
   }
 
   private _loadMiddlewares() {
@@ -221,10 +249,6 @@ export class Onion extends BeanSimple {
     if (!middlewares) return;
     for (const key in middlewares) {
       const beanOptions = middlewares[key];
-      // for special global middleware
-      if (!beanOptions.options && ['connection', 'packet'].includes(this.sceneName)) {
-        beanOptions.options = {};
-      }
       // push
       middlewaresAll.push({
         name: key.replace(`.${this.sceneName}.`, ':'),
@@ -276,7 +300,7 @@ export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, execute
       packet = ctx.packet;
     }
     // options
-    const options = ctx.meta.getMiddlewareOptions(item);
+    const options = ctx.meta.combineMiddlewareOptions(item);
     // enable match ignore dependencies
     if (options.enable === false || !middlewareMatch(ctx, options)) {
       if (!ctx[SymboleMiddlewareStatus][sceneName]) {

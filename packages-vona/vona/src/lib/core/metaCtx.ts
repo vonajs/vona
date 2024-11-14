@@ -25,7 +25,7 @@ export class CtxMeta extends BeanSimple {
     this.text = this.locale.createLocaleText();
   }
 
-  getMiddlewareOptions(item: IMiddlewareItem) {
+  combineMiddlewareOptions(item: IMiddlewareItem) {
     // options: meta
     const optionsMeta = item.options;
     // options: config

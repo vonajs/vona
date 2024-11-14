@@ -5,7 +5,7 @@ export interface ISwapDepsItem {
 
 export interface ISwapDepsOptions {
   name?: string;
-  dependencies?: string;
+  dependencies?: ((item: ISwapDepsItem) => string | string[] | undefined) | string;
 }
 
 export function swapDeps(items: ISwapDepsItem[], options?: ISwapDepsOptions) {
@@ -20,10 +20,12 @@ function _swapDeps(items: ISwapDepsItem[], options?: ISwapDepsOptions) {
   const keyName = options?.name || 'name';
   let result = false;
   for (const item of items) {
-    let deps = _getProperty(item, keyDependencies) || [];
+    const name = _getProperty(item, keyName);
+    let deps =
+      (typeof keyDependencies === 'function' ? keyDependencies(item) : _getProperty(item, keyDependencies)) || [];
     if (typeof deps === 'string') deps = deps.split(',');
     for (const dep of deps) {
-      if (_swapDep(items, dep, _getProperty(item, keyName))) result = true;
+      if (_swapDep(items, dep, name)) result = true;
     }
   }
   return result;
