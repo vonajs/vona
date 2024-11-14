@@ -268,7 +268,7 @@ export class MiddlewareLike extends BeanSimple {
 export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
   const fn = (ctx: VonaContext, next) => {
     let packet;
-    if (ctx.ctx && ctx.packet) {
+    if (sceneName === 'packet') {
       ctx = ctx.ctx;
       packet = ctx.packet;
     }
