@@ -67,18 +67,18 @@ export class Onion extends BeanSimple {
       const middlewares: Function[] = [];
       // pipes: global
       for (const item of this.middlewaresGlobal) {
-        middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+        middlewares.push(this._wrapMiddleware(item, executeCustom));
       }
       // pipes: route
       const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
       for (const item of middlewaresLocal) {
-        middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+        middlewares.push(this._wrapMiddleware(item, executeCustom));
       }
       // pipes: arguments
       const middlewaresArgument = this._collectArgumentMiddlewares(ctx, argMeta);
       if (middlewaresArgument) {
         for (const item of middlewaresArgument) {
-          middlewares.push(wrapMiddleware(this.sceneName, item, executeCustom));
+          middlewares.push(this._wrapMiddleware(item, executeCustom));
         }
       }
       this._cacheMiddlewaresArgument[key] = middlewares;
@@ -90,7 +90,7 @@ export class Onion extends BeanSimple {
     if (!this._cacheMiddlewaresGlobal) {
       const middlewares: Function[] = [];
       for (const item of this.middlewaresGlobal) {
-        middlewares.push(wrapMiddleware(this.sceneName, item));
+        middlewares.push(this._wrapMiddleware(item));
       }
       this._cacheMiddlewaresGlobal = middlewares;
     }
@@ -125,7 +125,7 @@ export class Onion extends BeanSimple {
       // middlewares: handler
       const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
       for (const item of middlewaresLocal) {
-        middlewares.push(wrapMiddleware(this.sceneName, item));
+        middlewares.push(this._wrapMiddleware(item));
       }
       if (fnEnd) middlewares = middlewares.concat(fnEnd);
       this._cacheMiddlewaresHandler[key] = middlewares;
@@ -177,6 +177,33 @@ export class Onion extends BeanSimple {
       this._cacheMiddlewaresOptions[item.name] = extend(true, {}, optionsMeta, optionsConfig);
     }
     return this._cacheMiddlewaresOptions[item.name];
+  }
+
+  getMiddlewareItem(middlewareName: string): IMiddlewareItem {
+    return this.middlewaresNormal[middlewareName];
+  }
+
+  combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
+    // options: meta/config
+    const optionsMetaAndConfig = this._getMiddlewareOptions(item);
+    // todo: options: from ctx.config.metadata
+    // options: route
+    let optionsRoute;
+    if (this.sceneMeta.optionsRoute) {
+      const route = ctx.route.route;
+      optionsRoute = route.meta?.[item.fromConfig ? item.name : item.beanOptions.beanFullName];
+    }
+    // options: argument pipe
+    const optionsPipe = this.sceneMeta.optionsPipe ? item.pipeOptions : undefined;
+    // options: dynamic
+    let optionsDynamic;
+    if (this.sceneMeta.optionsDynamic) {
+      optionsDynamic = ctx.middlewares[item.fromConfig ? item.name : item.beanOptions.beanFullName];
+    }
+    // final options
+    const options = extend(true, {}, optionsMetaAndConfig, optionsRoute, optionsPipe, optionsDynamic);
+    // ok
+    return options;
   }
 
   private _handleDependents(middlewares: IMiddlewareItem[]) {
@@ -290,41 +317,42 @@ export class Onion extends BeanSimple {
       });
     }
   }
-}
 
-export function wrapMiddleware(sceneName: string, item: IMiddlewareItem, executeCustom?: Function) {
-  const fn = (ctx: VonaContext, next) => {
-    let packet;
-    if (sceneName === 'packet') {
-      ctx = ctx.ctx;
-      packet = ctx.packet;
-    }
-    // options
-    const options = ctx.meta.combineMiddlewareOptions(item);
-    // enable match ignore dependencies
-    if (options.enable === false || !middlewareMatch(ctx, options)) {
-      if (!ctx[SymboleMiddlewareStatus][sceneName]) {
-        ctx[SymboleMiddlewareStatus][sceneName] = {};
+  _wrapMiddleware(item: IMiddlewareItem, executeCustom?: Function) {
+    const sceneName = this.sceneName;
+    const fn = (ctx: VonaContext, next) => {
+      let packet;
+      if (sceneName === 'packet') {
+        ctx = ctx.ctx;
+        packet = ctx.packet;
       }
-      ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
-      return typeof next === 'function' ? next() : next;
-    }
-    // execute
-    const beanFullName = item.beanOptions.beanFullName;
-    const beanInstance = ctx.bean._getBean(beanFullName as any);
-    if (!beanInstance) {
-      throw new Error(`${sceneName} bean not found: ${beanFullName}`);
-    }
-    if (executeCustom) {
-      return executeCustom(beanInstance, options, next);
-    }
-    if (packet) {
-      return Cast(beanInstance).execute(packet, options, next);
-    }
-    return Cast(beanInstance).execute(options, next);
-  };
-  fn._name = item.name;
-  return fn;
+      // options
+      const options = this.combineMiddlewareOptions(ctx, item);
+      // enable match ignore dependencies
+      if (options.enable === false || !middlewareMatch(ctx, options)) {
+        if (!ctx[SymboleMiddlewareStatus][sceneName]) {
+          ctx[SymboleMiddlewareStatus][sceneName] = {};
+        }
+        ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
+        return typeof next === 'function' ? next() : next;
+      }
+      // execute
+      const beanFullName = item.beanOptions.beanFullName;
+      const beanInstance = ctx.bean._getBean(beanFullName as any);
+      if (!beanInstance) {
+        throw new Error(`${sceneName} bean not found: ${beanFullName}`);
+      }
+      if (executeCustom) {
+        return executeCustom(beanInstance, options, next);
+      }
+      if (packet) {
+        return Cast(beanInstance).execute(packet, options, next);
+      }
+      return Cast(beanInstance).execute(options, next);
+    };
+    fn._name = item.name;
+    return fn;
+  }
 }
 
 function middlewareMatch(ctx, options) {
