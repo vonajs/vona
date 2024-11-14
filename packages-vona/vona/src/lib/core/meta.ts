@@ -20,7 +20,7 @@ import {
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
-import { MiddlewareLike } from '../module/middleware/middlewareLike.js';
+import { Onion } from '../module/onion/onion.js';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -56,12 +56,12 @@ export class AppMeta extends BeanSimple {
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //
-  middlewaresGeneral: MiddlewareLike;
-  middlewaresGuard: MiddlewareLike;
-  middlewaresInterceptor: MiddlewareLike;
-  middlewaresPipe: MiddlewareLike;
-  middlewaresConnection: MiddlewareLike;
-  middlewaresPacket: MiddlewareLike;
+  middlewaresGeneral: Onion;
+  middlewaresGuard: Onion;
+  middlewaresInterceptor: Onion;
+  middlewaresPipe: Onion;
+  middlewaresConnection: Onion;
+  middlewaresPacket: Onion;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;

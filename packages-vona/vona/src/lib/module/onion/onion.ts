@@ -20,7 +20,7 @@ const __adapter = (_context, chain) => {
   };
 };
 
-export class MiddlewareLike extends BeanSimple {
+export class Onion extends BeanSimple {
   sceneName: string;
   middlewaresNormal: Record<string, IMiddlewareItem>;
   middlewaresGlobal: IMiddlewareItem[];
