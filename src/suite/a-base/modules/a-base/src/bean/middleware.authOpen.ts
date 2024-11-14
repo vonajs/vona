@@ -13,7 +13,7 @@ export class MiddlewareAuthOpen extends BeanBase {
     // check innerAccess
     if (this.ctx.innerAccess) return;
     // check right type
-    const rightOptions = this.ctx.meta.getMiddlewareOptions('a-base:right' as any);
+    const rightOptions = this.ctx.meta.getMiddlewareOptions('right' as any);
     if (rightOptions && rightOptions.type) return;
     // isAuthOpen
     const isAuthOpen = this.ctx.bean.authOpen.isAuthOpen();
