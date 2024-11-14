@@ -12,6 +12,7 @@ import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
+import { onionMeta, OnionSceneMeta } from './meta.js';
 
 const __adapter = (_context, chain) => {
   return {
@@ -22,6 +23,7 @@ const __adapter = (_context, chain) => {
 
 export class Onion extends BeanSimple {
   sceneName: string;
+  sceneMeta: OnionSceneMeta;
   middlewaresNormal: Record<string, IMiddlewareItem>;
   middlewaresGlobal: IMiddlewareItem[];
 
@@ -31,6 +33,7 @@ export class Onion extends BeanSimple {
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
+    this.sceneMeta = onionMeta.scene[this.sceneName];
     this._loadMiddlewares();
     this._handleDependents(this.middlewaresGlobal);
     this._swapMiddlewares(this.middlewaresGlobal);
@@ -192,7 +195,7 @@ export class Onion extends BeanSimple {
       // normal
       this.middlewaresNormal[item.name] = item;
       // global
-      if (item.options?.global || ['connection', 'packet'].includes(this.sceneName)) {
+      if (!this.sceneMeta.hasLocal || item.options?.global) {
         this.middlewaresGlobal.push(item);
       }
     }
