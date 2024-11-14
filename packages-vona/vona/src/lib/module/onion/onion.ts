@@ -198,7 +198,7 @@ export class Onion extends BeanSimple {
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
-      optionsDynamic = ctx.middlewares[item.fromConfig ? item.name : item.beanOptions.beanFullName];
+      optionsDynamic = ctx.meta.middlewares[item.fromConfig ? item.name : item.beanOptions.beanFullName];
     }
     // final options
     const options = extend(true, {}, optionsMetaAndConfig, optionsRoute, optionsPipe, optionsDynamic);
