@@ -66,13 +66,9 @@ async function _transformArgument(
   value: any,
 ) {
   // pipes
-  const pipes = ctx.app.meta.middlewaresPipe.composePipes(
-    ctx,
-    argMeta,
-    (beanInstance: IPipeTransform, options, value) => {
-      return beanInstance.transform(value, metadata, options);
-    },
-  );
+  const pipes = ctx.app.meta.onionPipe.composePipes(ctx, argMeta, (beanInstance: IPipeTransform, options, value) => {
+    return beanInstance.transform(value, metadata, options);
+  });
   if (pipes.length === 0) return value;
   // apply
   for (const pipe of pipes) {

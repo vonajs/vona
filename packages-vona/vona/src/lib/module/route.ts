@@ -76,7 +76,7 @@ export class AppRouter extends BeanSimple {
       if (typeof middlewares === 'string') middlewares = middlewares.split(',');
       middlewares.forEach(key => {
         if (is.string(key)) {
-          const item = app.meta.middlewaresGeneral.middlewaresNormal[key];
+          const item = app.meta.onionMiddleware.middlewaresNormal[key];
           if (item) {
             middlewaresLocal.push(wrapMiddleware('middleware', item));
           } else {
@@ -224,7 +224,7 @@ export class AppRouter extends BeanSimple {
     // end: controller
     const fnEnd = classControllerMiddleware;
     // compose
-    return this.app.meta.middlewaresGeneral.composeAsync(ctx, fnStart, fnMid, fnEnd);
+    return this.app.meta.onionMiddleware.composeAsync(ctx, fnStart, fnMid, fnEnd);
   }
 
   _registerInner(route, middlewaresLocal) {
@@ -251,7 +251,7 @@ export class AppRouter extends BeanSimple {
     args.push(fnStart);
 
     // middlewares: globals
-    app.meta.middlewaresGeneral.middlewaresGlobal.forEach(item => {
+    app.meta.onionMiddleware.middlewaresGlobal.forEach(item => {
       args.push(wrapMiddleware('middleware', item));
     });
     // middlewares: guard/interceptor/pipes

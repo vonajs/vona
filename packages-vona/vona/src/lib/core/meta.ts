@@ -56,12 +56,12 @@ export class AppMeta extends BeanSimple {
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //
-  middlewaresGeneral: Onion;
-  middlewaresGuard: Onion;
-  middlewaresInterceptor: Onion;
-  middlewaresPipe: Onion;
-  middlewaresConnection: Onion;
-  middlewaresPacket: Onion;
+  onionMiddleware: Onion;
+  onionGuard: Onion;
+  onionInterceptor: Onion;
+  onionPipe: Onion;
+  onionConnection: Onion;
+  onionPacket: Onion;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;
