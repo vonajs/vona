@@ -1,3 +1,4 @@
+export * from './createArgumentPipe.js';
 export * from './useGuard.js';
 export * from './useGuardGlobal.js';
 export * from './useInterceptor.js';
