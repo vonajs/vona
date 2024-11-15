@@ -129,7 +129,7 @@ export class AppUtil extends BeanSimple {
 
   // getWhiteListCors(ctx) {
   //   let whiteListCors;
-  //   const _config = ctx.config.module('a-base');
+  //   const _config = ctx.bean._getScope('a-base').config;
   //   const _whiteList = (_config && _config.cors && _config.cors.whiteList) || [];
   //   if (!Array.isArray(_whiteList)) {
   //     whiteListCors = _whiteList.split(',');
