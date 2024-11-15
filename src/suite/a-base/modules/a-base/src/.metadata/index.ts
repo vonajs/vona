@@ -38,6 +38,7 @@ export * from '../bean/summer.cache.roleScopesOfRole.js';
 export * from '../bean/summer.cache.roleScopesOfUser.js';
 export * from '../bean/summer.cache.roleWhosOfAtomClassAction.js';
 export * from '../bean/version.manager.js';
+import { AopCategory } from '../bean/aop.category.js';
 import { BeanAtom } from '../bean/bean.atom.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
 import { BeanAtomBase } from '../bean/bean.atomBase.js';
@@ -57,7 +58,25 @@ import { BeanStash } from '../bean/bean.stash.js';
 import { BeanTag } from '../bean/bean.tag.js';
 import { BeanUser } from '../bean/bean.user.js';
 import { BeanUtil } from '../bean/bean.util.js';
-
+import { QueueRoleBuild } from '../bean/queue.roleBuild.js';
+import { QueueSchedule } from '../bean/queue.schedule.js';
+import { StartupCheckResourceLocales } from '../bean/startup.checkResourceLocales.js';
+import { StartupCheckViewHistoryRight } from '../bean/startup.checkViewHistoryRight.js';
+import { StartupLoadAtomStatics } from '../bean/startup.loadAtomStatics.js';
+import { StartupLoadSchedules } from '../bean/startup.loadSchedules.js';
+import { StartupOutputHomeRoute } from '../bean/startup.outputHomeRoute.js';
+import { StatsDraftsCommon } from '../bean/stats.draftsCommon.js';
+import { StatsDraftsFlowing } from '../bean/stats.draftsFlowing.js';
+import { StatsLabels } from '../bean/stats.labels.js';
+import { StatsStars } from '../bean/stats.stars.js';
+import { StatsStarsLabels } from '../bean/stats.starsLabels.js';
+import { SummerCacheAtomClassInner } from '../bean/summer.cache.atomClassInner.js';
+import { SummerCacheRoleParentsOfUser } from '../bean/summer.cache.roleParentsOfUser.js';
+import { SummerCacheRoleScopesMineOfUser } from '../bean/summer.cache.roleScopesMineOfUser.js';
+import { SummerCacheRoleScopesOfRole } from '../bean/summer.cache.roleScopesOfRole.js';
+import { SummerCacheRoleScopesOfUser } from '../bean/summer.cache.roleScopesOfUser.js';
+import { SummerCacheRoleWhosOfAtomClassAction } from '../bean/summer.cache.roleWhosOfAtomClassAction.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -80,6 +99,29 @@ declare module 'vona' {
     tag: BeanTag;
     user: BeanUser;
     util: BeanUtil;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-base.aop.category': AopCategory;
+    'a-base.queue.roleBuild': QueueRoleBuild;
+    'a-base.queue.schedule': QueueSchedule;
+    'a-base.startup.checkResourceLocales': StartupCheckResourceLocales;
+    'a-base.startup.checkViewHistoryRight': StartupCheckViewHistoryRight;
+    'a-base.startup.loadAtomStatics': StartupLoadAtomStatics;
+    'a-base.startup.loadSchedules': StartupLoadSchedules;
+    'a-base.startup.outputHomeRoute': StartupOutputHomeRoute;
+    'a-base.stats.draftsCommon': StatsDraftsCommon;
+    'a-base.stats.draftsFlowing': StatsDraftsFlowing;
+    'a-base.stats.labels': StatsLabels;
+    'a-base.stats.stars': StatsStars;
+    'a-base.stats.starsLabels': StatsStarsLabels;
+    'a-base.summer.cache.atomClassInner': SummerCacheAtomClassInner;
+    'a-base.summer.cache.roleParentsOfUser': SummerCacheRoleParentsOfUser;
+    'a-base.summer.cache.roleScopesMineOfUser': SummerCacheRoleScopesMineOfUser;
+    'a-base.summer.cache.roleScopesOfRole': SummerCacheRoleScopesOfRole;
+    'a-base.summer.cache.roleScopesOfUser': SummerCacheRoleScopesOfUser;
+    'a-base.summer.cache.roleWhosOfAtomClassAction': SummerCacheRoleWhosOfAtomClassAction;
+    'a-base.version.manager': VersionManager;
   }
 }
 /** beans: end */

@@ -7,12 +7,22 @@ export * from '../bean/startup.registerAllWatchers.js';
 export * from '../bean/version.manager.js';
 import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
 import { BeanCms } from '../bean/bean.cms.js';
-
+import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
+import { QueueRender } from '../bean/queue.render.js';
+import { StartupRegisterAllWatchers } from '../bean/startup.registerAllWatchers.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     atomCmsBase: BeanAtomCmsBase;
     cms: BeanCms;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
+    'a-cms.queue.render': QueueRender;
+    'a-cms.startup.registerAllWatchers': StartupRegisterAllWatchers;
+    'a-cms.version.manager': VersionManager;
   }
 }
 /** beans: end */

@@ -6,12 +6,20 @@ export * from '../bean/stats.flowInitiateds.js';
 export * from '../bean/version.manager.js';
 import { BeanFlow } from '../bean/bean.flow.js';
 import { BeanFlowDef } from '../bean/bean.flowDef.js';
-
+import { FlowBehaviorBase } from '../bean/flow.behavior.base.js';
+import { StatsFlowInitiateds } from '../bean/stats.flowInitiateds.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     flow: BeanFlow;
     flowDef: BeanFlowDef;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-flow.flow.behavior.base': FlowBehaviorBase;
+    'a-flow.stats.flowInitiateds': StatsFlowInitiateds;
+    'a-flow.version.manager': VersionManager;
   }
 }
 /** beans: end */

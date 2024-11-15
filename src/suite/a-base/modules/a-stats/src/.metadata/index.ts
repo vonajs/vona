@@ -5,11 +5,21 @@ export * from '../bean/queue.stats.js';
 export * from '../bean/stats.deps.js';
 export * from '../bean/version.manager.js';
 import { BeanStats } from '../bean/bean.stats.js';
-
+import { IoMessageStats } from '../bean/io.message.stats.js';
+import { QueueStats } from '../bean/queue.stats.js';
+import { StatsDeps } from '../bean/stats.deps.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     stats: BeanStats;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-stats.io.message.stats': IoMessageStats;
+    'a-stats.queue.stats': QueueStats;
+    'a-stats.stats.deps': StatsDeps;
+    'a-stats.version.manager': VersionManager;
   }
 }
 /** beans: end */

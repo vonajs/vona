@@ -8,11 +8,27 @@ export * from '../bean/stats.taskClaimings.js';
 export * from '../bean/stats.taskHandlings.js';
 export * from '../bean/version.manager.js';
 import { BeanFlowTask } from '../bean/bean.flowTask.js';
-
+import { FlowNodeActivityUserTask } from '../bean/flow.node.activityUserTask.js';
+import { FlowNodeEndEventAtom } from '../bean/flow.node.endEventAtom.js';
+import { FlowNodeStartEventAtom } from '../bean/flow.node.startEventAtom.js';
+import { IoMessageWorkflow } from '../bean/io.message.workflow.js';
+import { StatsTaskClaimings } from '../bean/stats.taskClaimings.js';
+import { StatsTaskHandlings } from '../bean/stats.taskHandlings.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     flowTask: BeanFlowTask;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-flowtask.flow.node.activityUserTask': FlowNodeActivityUserTask;
+    'a-flowtask.flow.node.endEventAtom': FlowNodeEndEventAtom;
+    'a-flowtask.flow.node.startEventAtom': FlowNodeStartEventAtom;
+    'a-flowtask.io.message.workflow': IoMessageWorkflow;
+    'a-flowtask.stats.taskClaimings': StatsTaskClaimings;
+    'a-flowtask.stats.taskHandlings': StatsTaskHandlings;
+    'a-flowtask.version.manager': VersionManager;
   }
 }
 /** beans: end */

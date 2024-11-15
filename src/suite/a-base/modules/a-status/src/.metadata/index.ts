@@ -2,11 +2,15 @@
 export * from '../bean/bean.status.js';
 export * from '../bean/version.manager.js';
 import { BeanStatus } from '../bean/bean.status.js';
-
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     status: BeanStatus;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-status.version.manager': VersionManager;
   }
 }
 /** beans: end */

@@ -8,11 +8,27 @@ export * from '../bean/queue.push.js';
 export * from '../bean/queue.pushDirect.js';
 export * from '../bean/version.manager.js';
 import { BeanIo } from '../bean/bean.io.js';
-
+import { BeanIoMessageBase } from '../bean/bean.ioMessageBase_.js';
+import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
+import { QueueDelivery } from '../bean/queue.delivery.js';
+import { QueueProcess } from '../bean/queue.process.js';
+import { QueuePush } from '../bean/queue.push.js';
+import { QueuePushDirect } from '../bean/queue.pushDirect.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     io: BeanIo;
+  }
+
+  export interface IBeanRecordGeneral {
+    ioMessageBase: BeanIoMessageBase;
+    'a-socketio.broadcast.socketEmit': BroadcastSocketEmit;
+    'a-socketio.queue.delivery': QueueDelivery;
+    'a-socketio.queue.process': QueueProcess;
+    'a-socketio.queue.push': QueuePush;
+    'a-socketio.queue.pushDirect': QueuePushDirect;
+    'a-socketio.version.manager': VersionManager;
   }
 }
 /** beans: end */

@@ -1,10 +1,16 @@
 /** beans: begin */
 export * from '../bean/auth.provider.github.js';
 export * from '../bean/version.manager.js';
-
+import { AuthProviderGithub } from '../bean/auth.provider.github.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
+    'a-authgithub.auth.provider.github': AuthProviderGithub;
+    'a-authgithub.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** config: begin */

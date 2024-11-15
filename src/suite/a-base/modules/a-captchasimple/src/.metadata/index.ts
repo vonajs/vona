@@ -1,9 +1,13 @@
 /** beans: begin */
 export * from '../bean/captcha.provider.captcha.js';
-
+import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
+    'a-captchasimple.captcha.provider.captcha': CaptchaProviderCaptcha;
+  }
 }
 /** beans: end */
 /** controllers: begin */

@@ -1,9 +1,13 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
+    'a-codemirror.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** scope: begin */

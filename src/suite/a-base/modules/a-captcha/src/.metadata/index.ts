@@ -1,12 +1,13 @@
 /** beans: begin */
 export * from '../bean/bean.captcha.js';
 import { BeanCaptcha } from '../bean/bean.captcha.js';
-
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     captcha: BeanCaptcha;
   }
+
+  export interface IBeanRecordGeneral {}
 }
 /** beans: end */
 /** middlewares: begin */

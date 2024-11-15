@@ -3,11 +3,17 @@ export * from '../bean/bean.sequence.js';
 export * from '../bean/sequence.simple.js';
 export * from '../bean/version.manager.js';
 import { BeanSequence } from '../bean/bean.sequence.js';
-
+import { SequenceSimple } from '../bean/sequence.simple.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     sequence: BeanSequence;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-sequence.sequence.simple': SequenceSimple;
+    'a-sequence.version.manager': VersionManager;
   }
 }
 /** beans: end */

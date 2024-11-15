@@ -1,10 +1,16 @@
 /** beans: begin */
 export * from '../bean/stats.user.js';
 export * from '../bean/stats.userAlert.js';
-
+import { StatsUser } from '../bean/stats.user.js';
+import { StatsUserAlert } from '../bean/stats.userAlert.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
+    'a-user.stats.user': StatsUser;
+    'a-user.stats.userAlert': StatsUserAlert;
+  }
 }
 /** beans: end */
 /** controllers: begin */

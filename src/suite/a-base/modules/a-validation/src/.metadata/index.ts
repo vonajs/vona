@@ -3,13 +3,14 @@ export * from '../bean/bean.ajv.js';
 export * from '../bean/bean.validation.js';
 import { BeanAjv } from '../bean/bean.ajv.js';
 import { BeanValidation } from '../bean/bean.validation.js';
-
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     ajv: BeanAjv;
     validation: BeanValidation;
   }
+
+  export interface IBeanRecordGeneral {}
 }
 /** beans: end */
 /** middlewares: begin */

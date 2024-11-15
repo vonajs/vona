@@ -17,10 +17,48 @@ export * from '../bean/cli.tools.babel.js';
 export * from '../bean/cli.tools.demo.js';
 export * from '../bean/cli.tools.icons.js';
 export * from '../bean/version.manager.js';
-
+import { CliCreateApp } from '../bean/cli.create.app.js';
+import { CliCreateAtom } from '../bean/cli.create.atom.js';
+import { CliCreateAtomAction } from '../bean/cli.create.atomAction.js';
+import { CliCreateDetail } from '../bean/cli.create.detail.js';
+import { CliCreateItemOnly } from '../bean/cli.create.itemOnly.js';
+import { CliCreatePage } from '../bean/cli.create.page.js';
+import { CliDefaultList } from '../bean/cli.default.list.js';
+import { CliFrontRenderTableCell } from '../bean/cli.front.renderTableCell.js';
+import { CliGitCommit } from '../bean/cli.git.commit.js';
+import { CliStorePublish } from '../bean/cli.store.publish.js';
+import { CliStoreSync } from '../bean/cli.store.sync.js';
+import { CliTokenAdd } from '../bean/cli.token.add.js';
+import { CliTokenDelete } from '../bean/cli.token.delete.js';
+import { CliTokenList } from '../bean/cli.token.list.js';
+import { CliToolsBabel } from '../bean/cli.tools.babel.js';
+import { CliToolsDemo } from '../bean/cli.tools.demo.js';
+import { CliToolsIcons } from '../bean/cli.tools.icons.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
+    'a-clibooster.cli.create.app': CliCreateApp;
+    'a-clibooster.cli.create.atom': CliCreateAtom;
+    'a-clibooster.cli.create.atomAction': CliCreateAtomAction;
+    'a-clibooster.cli.create.detail': CliCreateDetail;
+    'a-clibooster.cli.create.itemOnly': CliCreateItemOnly;
+    'a-clibooster.cli.create.page': CliCreatePage;
+    'a-clibooster.cli.default.list': CliDefaultList;
+    'a-clibooster.cli.front.renderTableCell': CliFrontRenderTableCell;
+    'a-clibooster.cli.git.commit': CliGitCommit;
+    'a-clibooster.cli.store.publish': CliStorePublish;
+    'a-clibooster.cli.store.sync': CliStoreSync;
+    'a-clibooster.cli.token.add': CliTokenAdd;
+    'a-clibooster.cli.token.delete': CliTokenDelete;
+    'a-clibooster.cli.token.list': CliTokenList;
+    'a-clibooster.cli.tools.babel': CliToolsBabel;
+    'a-clibooster.cli.tools.demo': CliToolsDemo;
+    'a-clibooster.cli.tools.icons': CliToolsIcons;
+    'a-clibooster.version.manager': VersionManager;
+  }
 }
 /** beans: end */
 /** controllers: begin */

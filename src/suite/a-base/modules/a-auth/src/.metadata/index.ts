@@ -8,13 +8,27 @@ export * from '../bean/startup.registerPassport.js';
 export * from '../bean/startup.registerRouters.js';
 export * from '../bean/version.manager.js';
 import { BeanAuthProvider } from '../bean/bean.authProvider.js';
+import { BeanAuthProviderBase } from '../bean/bean.authProviderBase_.js';
 import { BeanAuthProviderCache } from '../bean/bean.authProviderCache.js';
-
+import { BroadcastAuthProviderChanged } from '../bean/broadcast.authProviderChanged.js';
+import { StartupCacheAuthProviders } from '../bean/startup.cacheAuthProviders.js';
+import { StartupRegisterPassport } from '../bean/startup.registerPassport.js';
+import { StartupRegisterRouters } from '../bean/startup.registerRouters.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     authProvider: BeanAuthProvider;
     authProviderCache: BeanAuthProviderCache;
+  }
+
+  export interface IBeanRecordGeneral {
+    authProviderBase: BeanAuthProviderBase;
+    'a-auth.broadcast.authProviderChanged': BroadcastAuthProviderChanged;
+    'a-auth.startup.cacheAuthProviders': StartupCacheAuthProviders;
+    'a-auth.startup.registerPassport': StartupRegisterPassport;
+    'a-auth.startup.registerRouters': StartupRegisterRouters;
+    'a-auth.version.manager': VersionManager;
   }
 }
 /** beans: end */

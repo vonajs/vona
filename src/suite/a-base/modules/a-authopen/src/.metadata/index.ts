@@ -3,12 +3,20 @@ export * from '../bean/auth.provider.open.js';
 export * from '../bean/bean.authOpen.js';
 export * from '../bean/event.accountMigration.js';
 export * from '../bean/version.manager.js';
+import { AuthProviderOpen } from '../bean/auth.provider.open.js';
 import { BeanAuthOpen } from '../bean/bean.authOpen.js';
-
+import { EventAccountMigration } from '../bean/event.accountMigration.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     authOpen: BeanAuthOpen;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-authopen.auth.provider.open': AuthProviderOpen;
+    'a-authopen.event.accountMigration': EventAccountMigration;
+    'a-authopen.version.manager': VersionManager;
   }
 }
 /** beans: end */

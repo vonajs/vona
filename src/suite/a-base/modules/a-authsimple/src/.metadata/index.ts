@@ -3,12 +3,20 @@ export * from '../bean/auth.provider.simple.js';
 export * from '../bean/bean.authSimple.js';
 export * from '../bean/event.accountMigration.js';
 export * from '../bean/version.manager.js';
+import { AuthProviderSimple } from '../bean/auth.provider.simple.js';
 import { BeanAuthSimple } from '../bean/bean.authSimple.js';
-
+import { EventAccountMigration } from '../bean/event.accountMigration.js';
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     authSimple: BeanAuthSimple;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-authsimple.auth.provider.simple': AuthProviderSimple;
+    'a-authsimple.event.accountMigration': EventAccountMigration;
+    'a-authsimple.version.manager': VersionManager;
   }
 }
 /** beans: end */

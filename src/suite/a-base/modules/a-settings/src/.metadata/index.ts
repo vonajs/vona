@@ -2,11 +2,15 @@
 export * from '../bean/bean.settings.js';
 export * from '../bean/version.manager.js';
 import { BeanSettings } from '../bean/bean.settings.js';
-
+import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     settings: BeanSettings;
+  }
+
+  export interface IBeanRecordGeneral {
+    'a-settings.version.manager': VersionManager;
   }
 }
 /** beans: end */
