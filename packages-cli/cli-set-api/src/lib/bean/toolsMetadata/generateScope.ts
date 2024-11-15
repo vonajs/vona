@@ -21,12 +21,12 @@ export class ScopeModule${relativeNameCapitalize} extends BeanScopeBase {}
 
 export interface ScopeModule${relativeNameCapitalize}
   extends TypeModuleResource<
-    ${options.config ? 'typeof config' : 'any'},
-    ${options.errors ? 'typeof Errors' : 'any'},
-    ${options.locales ? '(typeof locales)[TypeLocaleBase]' : 'any'},
-    ${options.constants ? 'typeof constants' : 'any'},
-    ${options.services ? 'IModuleService' : 'any'},
-    ${options.models ? 'IModuleModel' : 'any'},
+    ${options.config ? 'typeof config' : 'never'},
+    ${options.errors ? 'typeof Errors' : 'never'},
+    ${options.locales ? '(typeof locales)[TypeLocaleBase]' : 'never'},
+    ${options.constants ? 'typeof constants' : 'never'},
+    ${options.services ? 'IModuleService' : 'never'},
+    ${options.models ? 'IModuleModel' : 'never'},
   > {}
 
 import 'vona';
