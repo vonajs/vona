@@ -288,7 +288,7 @@ export class Onion extends BeanSimple {
   // todo: should be removed
   private _loadMiddlewaresAll_fromConfig(middlewaresAll: IMiddlewareItem[], module: IModule) {
     const config = this.app.config.modules[module.info.relativeName];
-    if (!config.middlewares) return;
+    if (!config?.middlewares) return;
     for (const middlewareKey in config.middlewares) {
       const middlewareConfig = config.middlewares[middlewareKey];
       // bean

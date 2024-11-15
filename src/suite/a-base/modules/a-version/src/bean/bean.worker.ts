@@ -21,8 +21,8 @@ export class BeanWorker extends BeanBase {
   // }
 
   async setAlive() {
-    const config = this.app.meta.configs[__ThisModule__];
-    const aliveTimeout = config.worker.alive.timeout;
+    const config = this.app.config.modules[__ThisModule__];
+    const aliveTimeout = config?.worker.alive.timeout;
     const key = `workerAlive:${this.id}`;
     await this.redisCache.set(key, JSON.stringify(true), 'PX', aliveTimeout * 2);
     // await this.redisIO.set(key, JSON.stringify(true), 'PX', aliveTimeout * 2);

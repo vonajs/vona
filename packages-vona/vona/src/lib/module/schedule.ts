@@ -10,7 +10,7 @@ export default function (app: VonaApplication) {
   function loadSchedules() {
     for (const module of app.meta.modulesArray) {
       const config = app.config.modules[module.info.relativeName];
-      if (!config.schedules) continue;
+      if (!config?.schedules) continue;
       for (const scheduleKey in config.schedules) {
         const fullKey = `${module.info.relativeName}.${scheduleKey}`;
         const scheduleConfig = config.schedules[scheduleKey];

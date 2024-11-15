@@ -15,7 +15,7 @@ export default function (app: VonaApplication, modules) {
     for (const key in modules) {
       const module = modules[key];
       const config = app.config.modules[module.info.relativeName];
-      if (!config.queues) continue;
+      if (!config?.queues) continue;
       for (const queueName in config.queues) {
         const queueConfig = config.queues[queueName];
         const fullKey = `${module.info.relativeName}:${queueName}`;
