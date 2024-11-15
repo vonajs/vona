@@ -11,7 +11,7 @@ export class BeanModuleScopeBase<T = unknown> extends BeanBase<T> {
   }
 
   protected get moduleScope() {
-    return this[BeanModuleScope] || this.moduleBelong;
+    return this[BeanModuleScope] || this.ctx.module.info.relativeName;
   }
 
   // other module's bean
