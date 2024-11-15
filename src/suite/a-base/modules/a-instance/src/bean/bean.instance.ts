@@ -136,7 +136,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   }
 
   getConfig(subdomain: string): VonaConfig {
-    if (!__cacheIntancesConfig[subdomain]) throw new Error('instance config not prepared');
     return __cacheIntancesConfig[subdomain];
   }
 

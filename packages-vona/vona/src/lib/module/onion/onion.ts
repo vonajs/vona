@@ -186,7 +186,8 @@ export class Onion extends BeanSimple {
   combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
     // options: meta/config
     const optionsMetaAndConfig = this._getMiddlewareOptions(item);
-    // todo: options: from ctx.config.metadata
+    // options: instance config
+    const optionsInstanceConfig = ctx.config.metadata[item.beanOptions.scene]?.[item.name];
     // options: route
     let optionsRoute;
     if (this.sceneMeta.optionsRoute) {
@@ -201,7 +202,15 @@ export class Onion extends BeanSimple {
       optionsDynamic = ctx.meta.middlewares[item.fromConfig ? item.name : item.beanOptions.beanFullName];
     }
     // final options
-    const options = extend(true, {}, optionsMetaAndConfig, optionsRoute, optionsPipe, optionsDynamic);
+    const options = extend(
+      true,
+      {},
+      optionsMetaAndConfig,
+      optionsInstanceConfig,
+      optionsRoute,
+      optionsPipe,
+      optionsDynamic,
+    );
     // ok
     return options;
   }
