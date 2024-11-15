@@ -31,6 +31,7 @@ export class ErrorClass extends BeanSimple {
     const err = new Error();
     err.code = body.code;
     err.message = body.message;
+    err.status = __calcStatus(body.code);
     throw err;
   }
   // code/message,args
