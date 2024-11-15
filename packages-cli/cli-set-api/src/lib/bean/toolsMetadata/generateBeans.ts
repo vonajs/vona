@@ -20,7 +20,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
   const contentExports: string[] = [];
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
-  //const contentRecordsGeneral: string[] = [];
+  const contentRecordsGeneral: string[] = [];
   // middleware
   const contentImportsMiddleware: string[] = [];
   const contentRecordsMiddleware: string[] = [];
@@ -38,11 +38,11 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     if (className === 'BeanBase') className = 'BeanBase2';
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
+    contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
     if (isBeanGlobal && !isIgnore) {
-      contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
       contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
     } else {
-      //contentRecordsGeneral.push(`'${beanFullName}': ${className};`);
+      contentRecordsGeneral.push(`'${beanFullName}': ${className};`);
     }
     // middleware
     if (sceneName === 'middleware') {
@@ -66,13 +66,13 @@ declare module 'vona' {
   export interface IBeanRecordGlobal {
     ${contentRecordsGlobal.join('\n')}
   }
+
+  export interface IBeanRecordGeneral {
+    ${contentRecordsGeneral.join('\n')}
+  }
   ${contentRecordsMiddleware.length > 0 ? exportRecordsMiddleware : ''}
 }
 /** beans: end */
 `;
   return content;
 }
-
-// export interface IBeanRecordGeneral {
-//   ${contentRecordsGeneral.join('\n')}
-// }
