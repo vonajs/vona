@@ -13,7 +13,7 @@ import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
-import { onionMeta, OnionSceneMeta } from './meta.js';
+import { onionScenesMeta, OnionSceneMeta } from './meta.js';
 import { extend } from '@cabloy/extend';
 
 const __adapter = (_context, chain) => {
@@ -37,7 +37,7 @@ export class Onion extends BeanSimple {
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
-    this.sceneMeta = onionMeta.scene[this.sceneName];
+    this.sceneMeta = onionScenesMeta[this.sceneName];
     this._loadMiddlewares();
     this._handleDependents(this.middlewaresGlobal);
     this._swapMiddlewares(this.middlewaresGlobal);
