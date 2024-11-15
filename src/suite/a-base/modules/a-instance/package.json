@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "title": "Instance",
   "vonaModule": {
-    "fileVersion": 4,
+    "fileVersion": 1,
     "icon": "::module",
     "dependencies": {
       "a-cache": "5.0.0"

@@ -87,6 +87,7 @@ export class CtxUtil extends BeanSimple {
     beanModule,
     beanFullName,
     context,
+    args,
     fn,
     transaction,
     instance,
@@ -96,6 +97,7 @@ export class CtxUtil extends BeanSimple {
     beanModule?: string;
     beanFullName?: string;
     context?: any;
+    args?: any[] | any;
     fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
     instance?: boolean;
@@ -105,6 +107,7 @@ export class CtxUtil extends BeanSimple {
       locale: locale === undefined ? ctx.locale : locale,
       subdomain: subdomain === undefined ? ctx.subdomain : subdomain,
       context,
+      args,
       beanModule,
       beanFullName,
       transaction,
@@ -120,6 +123,7 @@ export class CtxUtil extends BeanSimple {
     beanModule,
     beanFullName,
     context,
+    args,
     fn,
     transaction,
     ctxParent,
@@ -130,6 +134,7 @@ export class CtxUtil extends BeanSimple {
     beanModule?: string;
     beanFullName?: string;
     context?: any;
+    args?: any[] | any;
     fn?: IExecuteBeanCallback | string;
     transaction?: boolean;
     ctxParent?: PowerPartial<VonaContext>;
@@ -150,6 +155,7 @@ export class CtxUtil extends BeanSimple {
       locale: locale === undefined ? ctx.locale : locale,
       subdomain: subdomain === undefined ? ctx.subdomain : subdomain,
       context,
+      args,
       beanModule,
       beanFullName,
       transaction,

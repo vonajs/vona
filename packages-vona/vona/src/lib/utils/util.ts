@@ -233,6 +233,7 @@ export class AppUtil extends BeanSimple {
     beanModule,
     beanFullName,
     context,
+    args,
     fn,
     transaction,
     ctxCaller,
@@ -243,7 +244,8 @@ export class AppUtil extends BeanSimple {
     subdomain?: string;
     beanModule?: string;
     beanFullName?: string;
-    context: any;
+    context?: any;
+    args?: any[] | any;
     fn?: any;
     transaction?: boolean;
     ctxCaller?: VonaContext;
@@ -294,10 +296,10 @@ export class AppUtil extends BeanSimple {
     let res;
     if (transaction) {
       res = await Cast(ctx).transaction.begin(async () => {
-        return await this._executeBeanFn({ fn, ctx, bean, context });
+        return await this._executeBeanFn({ fn, ctx, bean, context, args });
       });
     } else {
-      res = await this._executeBeanFn({ fn, ctx, bean, context });
+      res = await this._executeBeanFn({ fn, ctx, bean, context, args });
     }
     // tail done
     await ctx.tailDone();
@@ -305,16 +307,24 @@ export class AppUtil extends BeanSimple {
     return res;
   }
 
-  async _executeBeanFn({ fn, ctx, bean, context }) {
+  async _executeBeanFn({ fn, ctx, bean, context, args }) {
     let res;
     if (is.function(fn)) {
-      res = await fn({ ctx, bean, context });
+      res = await fn({ ctx, bean, context, args });
     } else {
       fn = fn || 'execute';
       if (!bean[fn]) {
         throw new Error(`bean method not found: ${bean.__beanFullName__}:${fn}`);
       }
-      res = await bean[fn](context);
+      if (context != undefined) {
+        res = await bean[fn](context);
+      } else {
+        if (Array.isArray(args)) {
+          res = await bean[fn](...args);
+        } else {
+          res = await bean[fn](args);
+        }
+      }
     }
     return res;
   }

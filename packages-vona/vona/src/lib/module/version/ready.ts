@@ -83,7 +83,7 @@ async function _versionReady(app) {
       subdomain,
       beanModule: 'a-instance',
       beanFullName: 'instance',
-      context: { subdomain },
+      args: subdomain,
       fn: 'instanceStartup',
     });
   }
