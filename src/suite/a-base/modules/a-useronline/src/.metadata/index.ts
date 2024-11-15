@@ -2,15 +2,11 @@
 export * from '../bean/bean.userOnline.js';
 export * from '../bean/version.manager.js';
 import { BeanUserOnline } from '../bean/bean.userOnline.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     userOnline: BeanUserOnline;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-useronline.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -20,10 +16,6 @@ export * from '../atom/userOnlineHistory.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/userOnline.js';
-import { ControllerUserOnline } from '../controller/userOnline.js';
-export const controllers = {
-  userOnline: ControllerUserOnline,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/userOnline.js';
@@ -71,7 +63,14 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAUseronline extends BeanScopeBase {}
 
 export interface ScopeModuleAUseronline
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel
+  > {}
 
 import 'vona';
 declare module 'vona' {

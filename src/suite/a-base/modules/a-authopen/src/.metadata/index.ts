@@ -3,20 +3,12 @@ export * from '../bean/auth.provider.open.js';
 export * from '../bean/bean.authOpen.js';
 export * from '../bean/event.accountMigration.js';
 export * from '../bean/version.manager.js';
-import { AuthProviderOpen } from '../bean/auth.provider.open.js';
 import { BeanAuthOpen } from '../bean/bean.authOpen.js';
-import { EventAccountMigration } from '../bean/event.accountMigration.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     authOpen: BeanAuthOpen;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-authopen.auth.provider.open': AuthProviderOpen;
-    'a-authopen.event.accountMigration': EventAccountMigration;
-    'a-authopen.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -26,12 +18,6 @@ export * from '../atom/authOpen.js';
 /** controllers: begin */
 export * from '../controller/auth.js';
 export * from '../controller/authOpen.js';
-import { ControllerAuth } from '../controller/auth.js';
-import { ControllerAuthOpen } from '../controller/authOpen.js';
-export const controllers = {
-  auth: ControllerAuth,
-  authOpen: ControllerAuthOpen,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/authOpen.js';
@@ -83,7 +69,14 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAAuthopen extends BeanScopeBase {}
 
 export interface ScopeModuleAAuthopen
-  extends TypeModuleResource<any, typeof Errors, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    typeof Errors,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel
+  > {}
 
 import 'vona';
 declare module 'vona' {

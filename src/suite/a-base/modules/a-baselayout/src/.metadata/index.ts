@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-baselayout.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** atoms: begin */
@@ -46,7 +42,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleABaselayout extends BeanScopeBase {}
 
 export interface ScopeModuleABaselayout
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, any, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

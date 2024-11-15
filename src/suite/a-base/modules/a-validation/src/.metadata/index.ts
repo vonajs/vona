@@ -1,28 +1,25 @@
 /** beans: begin */
 export * from '../bean/bean.ajv.js';
 export * from '../bean/bean.validation.js';
-export * from '../bean/middleware.validate.js';
 import { BeanAjv } from '../bean/bean.ajv.js';
 import { BeanValidation } from '../bean/bean.validation.js';
-import { MiddlewareValidate } from '../bean/middleware.validate.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     ajv: BeanAjv;
     validation: BeanValidation;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-validation.middleware.validate': MiddlewareValidate;
-  }
 }
 /** beans: end */
+/** middlewares: begin */
+export * from '../bean/middleware.validate.js';
+
+import 'vona';
+declare module 'vona' {}
+/** middlewares: end */
 /** controllers: begin */
 export * from '../controller/validation.js';
-import { ControllerValidation } from '../controller/validation.js';
-export const controllers = {
-  validation: ControllerValidation,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/validation.js';
@@ -64,9 +61,9 @@ export interface ScopeModuleAValidation
     typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
-    any,
+    never,
     IModuleService,
-    any
+    never
   > {}
 
 import 'vona';

@@ -4,19 +4,11 @@ export * from '../bean/summer.cache.fieldsRightOfAtomClass.js';
 export * from '../bean/summer.cache.fieldsRightOfUser.js';
 export * from '../bean/version.manager.js';
 import { BeanFields } from '../bean/bean.fields.js';
-import { SummerCacheFieldsRightOfAtomClass } from '../bean/summer.cache.fieldsRightOfAtomClass.js';
-import { SummerCacheFieldsRightOfUser } from '../bean/summer.cache.fieldsRightOfUser.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     fields: BeanFields;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-fields.summer.cache.fieldsRightOfAtomClass': SummerCacheFieldsRightOfAtomClass;
-    'a-fields.summer.cache.fieldsRightOfUser': SummerCacheFieldsRightOfUser;
-    'a-fields.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -39,7 +31,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAFields extends BeanScopeBase {}
 
 export interface ScopeModuleAFields
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, any, any> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

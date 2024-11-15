@@ -1,12 +1,6 @@
 /** controllers: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
-import { ControllerFlow } from '../controller/flow.js';
-import { ControllerFlowDef } from '../controller/flowDef.js';
-export const controllers = {
-  flow: ControllerFlow,
-  flowDef: ControllerFlowDef,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/flow.js';
@@ -31,7 +25,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleAFlowchart extends BeanScopeBase {}
 
-export interface ScopeModuleAFlowchart extends TypeModuleResource<any, any, any, any, IModuleService, any> {}
+export interface ScopeModuleAFlowchart extends TypeModuleResource<never, never, never, never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

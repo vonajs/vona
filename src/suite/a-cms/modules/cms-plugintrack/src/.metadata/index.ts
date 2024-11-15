@@ -8,7 +8,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleCmsPlugintrack extends BeanScopeBase {}
 
-export interface ScopeModuleCmsPlugintrack extends TypeModuleResource<typeof config, any, any, any, any, any> {}
+export interface ScopeModuleCmsPlugintrack
+  extends TypeModuleResource<typeof config, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

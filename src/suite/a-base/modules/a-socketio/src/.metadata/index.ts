@@ -104,7 +104,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleASocketio extends BeanScopeBase {}
 
 export interface ScopeModuleASocketio
-  extends TypeModuleResource<typeof config, any, any, any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

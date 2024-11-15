@@ -2,15 +2,11 @@
 export * from '../bean/bean.markdown.js';
 export * from '../bean/version.manager.js';
 import { BeanMarkdown } from '../bean/bean.markdown.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     markdown: BeanMarkdown;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-markdown.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -29,7 +25,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAMarkdown extends BeanScopeBase {}
 
 export interface ScopeModuleAMarkdown
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, any, any> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

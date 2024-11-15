@@ -5,30 +5,16 @@ export * from '../bean/queue.stats.js';
 export * from '../bean/stats.deps.js';
 export * from '../bean/version.manager.js';
 import { BeanStats } from '../bean/bean.stats.js';
-import { IoMessageStats } from '../bean/io.message.stats.js';
-import { QueueStats } from '../bean/queue.stats.js';
-import { StatsDeps } from '../bean/stats.deps.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     stats: BeanStats;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-stats.io.message.stats': IoMessageStats;
-    'a-stats.queue.stats': QueueStats;
-    'a-stats.stats.deps': StatsDeps;
-    'a-stats.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/stats.js';
-import { ControllerStats } from '../controller/stats.js';
-export const controllers = {
-  stats: ControllerStats,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/stats.js';
@@ -64,7 +50,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAStats extends BeanScopeBase {}
 
 export interface ScopeModuleAStats
-  extends TypeModuleResource<typeof config, any, any, any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

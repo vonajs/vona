@@ -2,24 +2,16 @@
 export * from '../bean/bean.settings.js';
 export * from '../bean/version.manager.js';
 import { BeanSettings } from '../bean/bean.settings.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     settings: BeanSettings;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-settings.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/settings.js';
-import { ControllerSettings } from '../controller/settings.js';
-export const controllers = {
-  settings: ControllerSettings,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/settings.js';
@@ -68,8 +60,8 @@ export class ScopeModuleASettings extends BeanScopeBase {}
 
 export interface ScopeModuleASettings
   extends TypeModuleResource<
-    any,
-    any,
+    never,
+    never,
     (typeof locales)[TypeLocaleBase],
     typeof constants,
     IModuleService,

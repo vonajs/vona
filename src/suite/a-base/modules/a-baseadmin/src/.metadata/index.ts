@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-baseadmin.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
@@ -17,20 +13,6 @@ export * from '../controller/authScene.js';
 export * from '../controller/resourceRight.js';
 export * from '../controller/role.js';
 export * from '../controller/user.js';
-import { ControllerAtomRight } from '../controller/atomRight.js';
-import { ControllerAuth } from '../controller/auth.js';
-import { ControllerAuthScene } from '../controller/authScene.js';
-import { ControllerResourceRight } from '../controller/resourceRight.js';
-import { ControllerRole } from '../controller/role.js';
-import { ControllerUser } from '../controller/user.js';
-export const controllers = {
-  atomRight: ControllerAtomRight,
-  auth: ControllerAuth,
-  authScene: ControllerAuthScene,
-  resourceRight: ControllerResourceRight,
-  role: ControllerRole,
-  user: ControllerUser,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/atomRight.js';
@@ -84,7 +66,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleABaseadmin extends BeanScopeBase {}
 
 export interface ScopeModuleABaseadmin
-  extends TypeModuleResource<any, typeof Errors, (typeof locales)[TypeLocaleBase], any, IModuleService, any> {}
+  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

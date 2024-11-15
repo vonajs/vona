@@ -1,16 +1,10 @@
 /** beans: begin */
 export * from '../bean/auth.provider.github.js';
 export * from '../bean/version.manager.js';
-import { AuthProviderGithub } from '../bean/auth.provider.github.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-authgithub.auth.provider.github': AuthProviderGithub;
-    'a-authgithub.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** config: begin */
@@ -32,7 +26,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAAuthgithub extends BeanScopeBase {}
 
 export interface ScopeModuleAAuthgithub
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, any, any> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

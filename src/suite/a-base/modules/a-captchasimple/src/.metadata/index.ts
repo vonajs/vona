@@ -1,21 +1,13 @@
 /** beans: begin */
 export * from '../bean/captcha.provider.captcha.js';
-import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-captchasimple.captcha.provider.captcha': CaptchaProviderCaptcha;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/captcha.js';
-import { ControllerCaptcha } from '../controller/captcha.js';
-export const controllers = {
-  captcha: ControllerCaptcha,
-};
 /** controllers: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -36,7 +28,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleACaptchasimple extends BeanScopeBase {}
 
 export interface ScopeModuleACaptchasimple
-  extends TypeModuleResource<any, typeof Errors, (typeof locales)[TypeLocaleBase], any, any, any> {}
+  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

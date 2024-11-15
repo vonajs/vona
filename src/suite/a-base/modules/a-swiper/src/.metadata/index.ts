@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-swiper.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** scope: begin */
@@ -16,7 +12,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleASwiper extends BeanScopeBase {}
 
-export interface ScopeModuleASwiper extends TypeModuleResource<any, any, any, any, any, any> {}
+export interface ScopeModuleASwiper extends TypeModuleResource<never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

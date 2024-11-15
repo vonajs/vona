@@ -8,39 +8,17 @@ export * from '../bean/stats.taskClaimings.js';
 export * from '../bean/stats.taskHandlings.js';
 export * from '../bean/version.manager.js';
 import { BeanFlowTask } from '../bean/bean.flowTask.js';
-import { FlowNodeActivityUserTask } from '../bean/flow.node.activityUserTask.js';
-import { FlowNodeEndEventAtom } from '../bean/flow.node.endEventAtom.js';
-import { FlowNodeStartEventAtom } from '../bean/flow.node.startEventAtom.js';
-import { IoMessageWorkflow } from '../bean/io.message.workflow.js';
-import { StatsTaskClaimings } from '../bean/stats.taskClaimings.js';
-import { StatsTaskHandlings } from '../bean/stats.taskHandlings.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     flowTask: BeanFlowTask;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-flowtask.flow.node.activityUserTask': FlowNodeActivityUserTask;
-    'a-flowtask.flow.node.endEventAtom': FlowNodeEndEventAtom;
-    'a-flowtask.flow.node.startEventAtom': FlowNodeStartEventAtom;
-    'a-flowtask.io.message.workflow': IoMessageWorkflow;
-    'a-flowtask.stats.taskClaimings': StatsTaskClaimings;
-    'a-flowtask.stats.taskHandlings': StatsTaskHandlings;
-    'a-flowtask.version.manager': VersionManager;
   }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowTask.js';
-import { ControllerFlow } from '../controller/flow.js';
-import { ControllerFlowTask } from '../controller/flowTask.js';
-export const controllers = {
-  flow: ControllerFlow,
-  flowTask: ControllerFlowTask,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/flowNodeStartEventAtomCondition.js';
@@ -108,7 +86,14 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAFlowtask extends BeanScopeBase {}
 
 export interface ScopeModuleAFlowtask
-  extends TypeModuleResource<any, typeof Errors, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    typeof Errors,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel
+  > {}
 
 import 'vona';
 declare module 'vona' {

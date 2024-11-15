@@ -8,33 +8,17 @@ export * from '../bean/startup.cacheMailScenes.js';
 export * from '../bean/version.manager.js';
 import { BeanMail } from '../bean/bean.mail.js';
 import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
-import { BroadcastMailSceneChanged } from '../bean/broadcast.mailSceneChanged.js';
-import { IoChannelMail } from '../bean/io.channel.mail.js';
-import { IoMessageMail } from '../bean/io.message.mail.js';
-import { StartupCacheMailScenes } from '../bean/startup.cacheMailScenes.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     mail: BeanMail;
     mailSceneCache: BeanMailSceneCache;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-mail.broadcast.mailSceneChanged': BroadcastMailSceneChanged;
-    'a-mail.io.channel.mail': IoChannelMail;
-    'a-mail.io.message.mail': IoMessageMail;
-    'a-mail.startup.cacheMailScenes': StartupCacheMailScenes;
-    'a-mail.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/scene.js';
-import { ControllerScene } from '../controller/scene.js';
-export const controllers = {
-  scene: ControllerScene,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/mail.js';
@@ -78,7 +62,14 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAMail extends BeanScopeBase {}
 
 export interface ScopeModuleAMail
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel
+  > {}
 
 import 'vona';
 declare module 'vona' {

@@ -1,9 +1,5 @@
 /** controllers: begin */
 export * from '../controller/monkeyer.js';
-import { ControllerMonkeyer } from '../controller/monkeyer.js';
-export const controllers = {
-  monkeyer: ControllerMonkeyer,
-};
 /** controllers: end */
 /** monkey: begin */
 export * from '../monkey.js';
@@ -14,7 +10,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleTestPartymonkey extends BeanScopeBase {}
 
-export interface ScopeModuleTestPartymonkey extends TypeModuleResource<any, any, any, any, any, any> {}
+export interface ScopeModuleTestPartymonkey extends TypeModuleResource<never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

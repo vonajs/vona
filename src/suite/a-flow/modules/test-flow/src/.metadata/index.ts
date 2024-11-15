@@ -2,18 +2,10 @@
 export * from '../bean/flow.service.startEventTimer.js';
 export * from '../bean/flow.service.test.js';
 export * from '../bean/version.manager.js';
-import { FlowServiceStartEventTimer } from '../bean/flow.service.startEventTimer.js';
-import { FlowServiceTest } from '../bean/flow.service.test.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'test-flow.flow.service.startEventTimer': FlowServiceStartEventTimer;
-    'test-flow.flow.service.test': FlowServiceTest;
-    'test-flow.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** atoms: begin */
@@ -23,10 +15,6 @@ export * from '../atom/purchaseOrderDetail.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/flow.js';
-import { ControllerFlow } from '../controller/flow.js';
-export const controllers = {
-  flow: ControllerFlow,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/product.js';
@@ -61,7 +49,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleTestFlow extends BeanScopeBase {}
 
 export interface ScopeModuleTestFlow
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, any, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

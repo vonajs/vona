@@ -7,28 +7,10 @@ export * from '../bean/flow.node.startEventNone.js';
 export * from '../bean/flow.node.startEventTimer.js';
 export * from '../bean/queue.startEventTimer.js';
 export * from '../bean/version.manager.js';
-import { FlowEdgeSequence } from '../bean/flow.edge.sequence.js';
-import { FlowNodeActivityNone } from '../bean/flow.node.activityNone.js';
-import { FlowNodeActivityService } from '../bean/flow.node.activityService.js';
-import { FlowNodeEndEventNone } from '../bean/flow.node.endEventNone.js';
-import { FlowNodeStartEventNone } from '../bean/flow.node.startEventNone.js';
-import { FlowNodeStartEventTimer } from '../bean/flow.node.startEventTimer.js';
-import { QueueStartEventTimer } from '../bean/queue.startEventTimer.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-flownode.flow.edge.sequence': FlowEdgeSequence;
-    'a-flownode.flow.node.activityNone': FlowNodeActivityNone;
-    'a-flownode.flow.node.activityService': FlowNodeActivityService;
-    'a-flownode.flow.node.endEventNone': FlowNodeEndEventNone;
-    'a-flownode.flow.node.startEventNone': FlowNodeStartEventNone;
-    'a-flownode.flow.node.startEventTimer': FlowNodeStartEventTimer;
-    'a-flownode.queue.startEventTimer': QueueStartEventTimer;
-    'a-flownode.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** config: begin */
@@ -50,7 +32,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAFlownode extends BeanScopeBase {}
 
 export interface ScopeModuleAFlownode
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, any, any> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

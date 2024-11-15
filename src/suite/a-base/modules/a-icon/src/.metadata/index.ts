@@ -2,24 +2,16 @@
 export * from '../bean/bean.icon.js';
 export * from '../bean/version.manager.js';
 import { BeanIcon } from '../bean/bean.icon.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     icon: BeanIcon;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-icon.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/icon.js';
-import { ControllerIcon } from '../controller/icon.js';
-export const controllers = {
-  icon: ControllerIcon,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/icon.js';
@@ -49,7 +41,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAIcon extends BeanScopeBase {}
 
 export interface ScopeModuleAIcon
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, IModuleService, any> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

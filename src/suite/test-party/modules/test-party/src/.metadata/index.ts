@@ -11,8 +11,6 @@ export * from '../bean/event.loginInfoDashboard.js';
 export * from '../bean/event.userVerify.js';
 export * from '../bean/io.message.simpleChat.js';
 export * from '../bean/io.message.test.js';
-export * from '../bean/middleware.testInterception.js';
-export * from '../bean/middleware.testRestructuring.js';
 export * from '../bean/queue.test.js';
 export * from '../bean/schedule.test.js';
 export * from '../bean/sequence.test.js';
@@ -26,69 +24,22 @@ export * from '../bean/test.class.js';
 export * from '../bean/test.ctx0.js';
 export * from '../bean/test.ctx1.js';
 export * from '../bean/version.manager.js';
-import { AopAtom } from '../bean/aop.atom.js';
-import { AopRegExp } from '../bean/aop.regExp.js';
-import { AopSimple } from '../bean/aop.simple.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
-import { BroadcastTest } from '../bean/broadcast.test.js';
-import { CliDefaultDemo } from '../bean/cli.default.demo.js';
-import { EventHelloEcho } from '../bean/event.helloEcho.js';
-import { EventLoginInfo } from '../bean/event.loginInfo.js';
-import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
-import { EventUserVerify } from '../bean/event.userVerify.js';
-import { IoMessageSimpleChat } from '../bean/io.message.simpleChat.js';
-import { IoMessageTest } from '../bean/io.message.test.js';
-import { MiddlewareTestInterception } from '../bean/middleware.testInterception.js';
-import { MiddlewareTestRestructuring } from '../bean/middleware.testRestructuring.js';
-import { QueueTest } from '../bean/queue.test.js';
-import { ScheduleTest } from '../bean/schedule.test.js';
-import { SequenceTest } from '../bean/sequence.test.js';
-import { StartupStartupAll } from '../bean/startup.startupAll.js';
-import { StartupStartupInstance } from '../bean/startup.startupInstance.js';
-import { StatsTasksInstance } from '../bean/stats.tasksInstance.js';
-import { StatsTasksUser } from '../bean/stats.tasksUser.js';
-import { SummerCacheTest } from '../bean/summer.cache.test.js';
-import { TestApp } from '../bean/test.app.js';
-import { TestClass } from '../bean/test.class.js';
-import { TestCtx0 } from '../bean/test.ctx0.js';
-import { TestCtx1 } from '../bean/test.ctx1.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     testCtx: BeanTestCtx;
   }
-
-  export interface IBeanRecordGeneral {
-    'test-party.aop.atom': AopAtom;
-    'test-party.aop.regExp': AopRegExp;
-    'test-party.aop.simple': AopSimple;
-    'test-party.broadcast.test': BroadcastTest;
-    'test-party.cli.default.demo': CliDefaultDemo;
-    'test-party.event.helloEcho': EventHelloEcho;
-    'test-party.event.loginInfo': EventLoginInfo;
-    'test-party.event.loginInfoDashboard': EventLoginInfoDashboard;
-    'test-party.event.userVerify': EventUserVerify;
-    'test-party.io.message.simpleChat': IoMessageSimpleChat;
-    'test-party.io.message.test': IoMessageTest;
-    'test-party.middleware.testInterception': MiddlewareTestInterception;
-    'test-party.middleware.testRestructuring': MiddlewareTestRestructuring;
-    'test-party.queue.test': QueueTest;
-    'test-party.schedule.test': ScheduleTest;
-    'test-party.sequence.test': SequenceTest;
-    'test-party.startup.startupAll': StartupStartupAll;
-    'test-party.startup.startupInstance': StartupStartupInstance;
-    'test-party.stats.tasksInstance': StatsTasksInstance;
-    'test-party.stats.tasksUser': StatsTasksUser;
-    'test-party.summer.cache.test': SummerCacheTest;
-    'test-party.test.app': TestApp;
-    'test-party.test.class': TestClass;
-    'test-party.test.ctx0': TestCtx0;
-    'test-party.test.ctx1': TestCtx1;
-    'test-party.version.manager': VersionManager;
-  }
 }
 /** beans: end */
+/** middlewares: begin */
+export * from '../bean/middleware.testInterception.js';
+export * from '../bean/middleware.testRestructuring.js';
+
+import 'vona';
+declare module 'vona' {}
+/** middlewares: end */
 /** atoms: begin */
 export * from '../atom/party.js';
 export * from '../atom/partyExpense.js';
@@ -142,104 +93,6 @@ export * from '../controller/testMultilevelAuthorizationUser.js';
 export * from '../controller/testResourceAll.js';
 export * from '../controller/testResourceRight.js';
 export * from '../controller/testRoleUserRole.js';
-import { ControllerKitchenSinkAutocomplete } from '../controller/kitchenSinkAutocomplete.js';
-import { ControllerKitchenSinkFormSchemaValidation } from '../controller/kitchenSinkFormSchemaValidation.js';
-import { ControllerKitchenSinkGuide } from '../controller/kitchenSinkGuide.js';
-import { ControllerKitchenSinkPtrIsLoadmore } from '../controller/kitchenSinkPtrIsLoadmore.js';
-import { ControllerTestAtomAll } from '../controller/testAtomAll.js';
-import { ControllerTestAtomRight } from '../controller/testAtomRight.js';
-import { ControllerTestAtomStarLabel } from '../controller/testAtomStarLabel.js';
-import { ControllerTestCacheDb } from '../controller/testCacheDb.js';
-import { ControllerTestCacheMem } from '../controller/testCacheMem.js';
-import { ControllerTestCacheRedis } from '../controller/testCacheRedis.js';
-import { ControllerTestCtxConfig } from '../controller/testCtxConfig.js';
-import { ControllerTestCtxLocale } from '../controller/testCtxLocale.js';
-import { ControllerTestCtxPerformAction } from '../controller/testCtxPerformAction.js';
-import { ControllerTestCtxRequest } from '../controller/testCtxRequest.js';
-import { ControllerTestCtxResponse } from '../controller/testCtxResponse.js';
-import { ControllerTestCtxSession } from '../controller/testCtxSession.js';
-import { ControllerTestCtxTail } from '../controller/testCtxTail.js';
-import { ControllerTestCtxTransaction } from '../controller/testCtxTransaction.js';
-import { ControllerTestEventHello } from '../controller/testEventHello.js';
-import { ControllerTestFeatBean } from '../controller/testFeatBean.js';
-import { ControllerTestFeatBroadcast } from '../controller/testFeatBroadcast.js';
-import { ControllerTestFeatCategory } from '../controller/testFeatCategory.js';
-import { ControllerTestFeatFieldsRight } from '../controller/testFeatFieldsRight.js';
-import { ControllerTestFeatHttpLog } from '../controller/testFeatHttpLog.js';
-import { ControllerTestFeatInstance } from '../controller/testFeatInstance.js';
-import { ControllerTestFeatMiddleware } from '../controller/testFeatMiddleware.js';
-import { ControllerTestFeatModel } from '../controller/testFeatModel.js';
-import { ControllerTestFeatModelWhere } from '../controller/testFeatModelWhere.js';
-import { ControllerTestFeatOpenAuth } from '../controller/testFeatOpenAuth.js';
-import { ControllerTestFeatProgress } from '../controller/testFeatProgress.js';
-import { ControllerTestFeatQueue } from '../controller/testFeatQueue.js';
-import { ControllerTestFeatSendMail } from '../controller/testFeatSendMail.js';
-import { ControllerTestFeatSequence } from '../controller/testFeatSequence.js';
-import { ControllerTestFeatSettings } from '../controller/testFeatSettings.js';
-import { ControllerTestFeatSocketio } from '../controller/testFeatSocketio.js';
-import { ControllerTestFeatStats } from '../controller/testFeatStats.js';
-import { ControllerTestFeatStatus } from '../controller/testFeatStatus.js';
-import { ControllerTestFeatSummer } from '../controller/testFeatSummer.js';
-import { ControllerTestFeatTag } from '../controller/testFeatTag.js';
-import { ControllerTestFeatValidation } from '../controller/testFeatValidation.js';
-import { ControllerTestItemOnlyAll } from '../controller/testItemOnlyAll.js';
-import { ControllerTestItemOnlyRight } from '../controller/testItemOnlyRight.js';
-import { ControllerTestMonkeyMonkeyee } from '../controller/testMonkeyMonkeyee.js';
-import { ControllerTestMultilevelAuthorizationRole } from '../controller/testMultilevelAuthorizationRole.js';
-import { ControllerTestMultilevelAuthorizationUser } from '../controller/testMultilevelAuthorizationUser.js';
-import { ControllerTestResourceAll } from '../controller/testResourceAll.js';
-import { ControllerTestResourceRight } from '../controller/testResourceRight.js';
-import { ControllerTestRoleUserRole } from '../controller/testRoleUserRole.js';
-export const controllers = {
-  kitchenSinkAutocomplete: ControllerKitchenSinkAutocomplete,
-  kitchenSinkFormSchemaValidation: ControllerKitchenSinkFormSchemaValidation,
-  kitchenSinkGuide: ControllerKitchenSinkGuide,
-  kitchenSinkPtrIsLoadmore: ControllerKitchenSinkPtrIsLoadmore,
-  testAtomAll: ControllerTestAtomAll,
-  testAtomRight: ControllerTestAtomRight,
-  testAtomStarLabel: ControllerTestAtomStarLabel,
-  testCacheDb: ControllerTestCacheDb,
-  testCacheMem: ControllerTestCacheMem,
-  testCacheRedis: ControllerTestCacheRedis,
-  testCtxConfig: ControllerTestCtxConfig,
-  testCtxLocale: ControllerTestCtxLocale,
-  testCtxPerformAction: ControllerTestCtxPerformAction,
-  testCtxRequest: ControllerTestCtxRequest,
-  testCtxResponse: ControllerTestCtxResponse,
-  testCtxSession: ControllerTestCtxSession,
-  testCtxTail: ControllerTestCtxTail,
-  testCtxTransaction: ControllerTestCtxTransaction,
-  testEventHello: ControllerTestEventHello,
-  testFeatBean: ControllerTestFeatBean,
-  testFeatBroadcast: ControllerTestFeatBroadcast,
-  testFeatCategory: ControllerTestFeatCategory,
-  testFeatFieldsRight: ControllerTestFeatFieldsRight,
-  testFeatHttpLog: ControllerTestFeatHttpLog,
-  testFeatInstance: ControllerTestFeatInstance,
-  testFeatMiddleware: ControllerTestFeatMiddleware,
-  testFeatModel: ControllerTestFeatModel,
-  testFeatModelWhere: ControllerTestFeatModelWhere,
-  testFeatOpenAuth: ControllerTestFeatOpenAuth,
-  testFeatProgress: ControllerTestFeatProgress,
-  testFeatQueue: ControllerTestFeatQueue,
-  testFeatSendMail: ControllerTestFeatSendMail,
-  testFeatSequence: ControllerTestFeatSequence,
-  testFeatSettings: ControllerTestFeatSettings,
-  testFeatSocketio: ControllerTestFeatSocketio,
-  testFeatStats: ControllerTestFeatStats,
-  testFeatStatus: ControllerTestFeatStatus,
-  testFeatSummer: ControllerTestFeatSummer,
-  testFeatTag: ControllerTestFeatTag,
-  testFeatValidation: ControllerTestFeatValidation,
-  testItemOnlyAll: ControllerTestItemOnlyAll,
-  testItemOnlyRight: ControllerTestItemOnlyRight,
-  testMonkeyMonkeyee: ControllerTestMonkeyMonkeyee,
-  testMultilevelAuthorizationRole: ControllerTestMultilevelAuthorizationRole,
-  testMultilevelAuthorizationUser: ControllerTestMultilevelAuthorizationUser,
-  testResourceAll: ControllerTestResourceAll,
-  testResourceRight: ControllerTestResourceRight,
-  testRoleUserRole: ControllerTestRoleUserRole,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/party.js';
@@ -295,7 +148,7 @@ export interface ScopeModuleTestParty
     typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
-    any,
+    never,
     IModuleService,
     IModuleModel
   > {}

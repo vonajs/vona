@@ -2,24 +2,16 @@
 export * from '../bean/bean.progress.js';
 export * from '../bean/version.manager.js';
 import { BeanProgress } from '../bean/bean.progress.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     progress: BeanProgress;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-progress.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/progress.js';
-import { ControllerProgress } from '../controller/progress.js';
-export const controllers = {
-  progress: ControllerProgress,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/progress.js';
@@ -61,9 +53,9 @@ export interface ScopeModuleAProgress
     typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
-    any,
+    never,
     IModuleService,
-    any
+    never
   > {}
 
 import 'vona';

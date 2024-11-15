@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-oauth.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** services: begin */
@@ -32,7 +28,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleAOauth extends BeanScopeBase {}
 
-export interface ScopeModuleAOauth extends TypeModuleResource<any, any, any, any, IModuleService, any> {}
+export interface ScopeModuleAOauth extends TypeModuleResource<never, never, never, never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

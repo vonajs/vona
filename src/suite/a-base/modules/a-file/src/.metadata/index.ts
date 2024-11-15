@@ -2,24 +2,16 @@
 export * from '../bean/bean.file.js';
 export * from '../bean/version.manager.js';
 import { BeanFile } from '../bean/bean.file.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     file: BeanFile;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-file.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/file.js';
-import { ControllerFile } from '../controller/file.js';
-export const controllers = {
-  file: ControllerFile,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/file.js';
@@ -63,7 +55,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAFile extends BeanScopeBase {}
 
 export interface ScopeModuleAFile
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

@@ -4,7 +4,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleVonaTest extends BeanScopeBase {}
 
-export interface ScopeModuleVonaTest extends TypeModuleResource<any, any, any, any, any, any> {}
+export interface ScopeModuleVonaTest extends TypeModuleResource<never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

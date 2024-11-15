@@ -7,22 +7,12 @@ export * from '../bean/startup.registerAllWatchers.js';
 export * from '../bean/version.manager.js';
 import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
 import { BeanCms } from '../bean/bean.cms.js';
-import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
-import { QueueRender } from '../bean/queue.render.js';
-import { StartupRegisterAllWatchers } from '../bean/startup.registerAllWatchers.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     atomCmsBase: BeanAtomCmsBase;
     cms: BeanCms;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
-    'a-cms.queue.render': QueueRender;
-    'a-cms.startup.registerAllWatchers': StartupRegisterAllWatchers;
-    'a-cms.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -35,18 +25,6 @@ export * from '../controller/comment.js';
 export * from '../controller/render.js';
 export * from '../controller/rss.js';
 export * from '../controller/site.js';
-import { ControllerArticle } from '../controller/article.js';
-import { ControllerComment } from '../controller/comment.js';
-import { ControllerRender } from '../controller/render.js';
-import { ControllerRss } from '../controller/rss.js';
-import { ControllerSite } from '../controller/site.js';
-export const controllers = {
-  article: ControllerArticle,
-  comment: ControllerComment,
-  render: ControllerRender,
-  rss: ControllerRss,
-  site: ControllerSite,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/article.js';
@@ -113,7 +91,7 @@ export interface ScopeModuleACms
     typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
-    any,
+    never,
     IModuleService,
     IModuleModel
   > {}

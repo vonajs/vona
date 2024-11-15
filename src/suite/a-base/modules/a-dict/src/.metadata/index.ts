@@ -2,15 +2,11 @@
 export * from '../bean/bean.dict.js';
 export * from '../bean/version.manager.js';
 import { BeanDict } from '../bean/bean.dict.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     dict: BeanDict;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-dict.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -19,10 +15,6 @@ export * from '../atom/dict.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/dict.js';
-import { ControllerDict } from '../controller/dict.js';
-export const controllers = {
-  dict: ControllerDict,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/dict.js';
@@ -66,7 +58,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADict extends BeanScopeBase {}
 
 export interface ScopeModuleADict
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

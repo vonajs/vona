@@ -7,28 +7,12 @@ export * from '../bean/event.accountMigration.js';
 export * from '../bean/sms.provider.aliyun.js';
 export * from '../bean/sms.provider.test.js';
 export * from '../bean/startup.cacheSmsProviders.js';
-import { AuthProviderSms } from '../bean/auth.provider.sms.js';
 import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
-import { BroadcastSmsProviderChanged } from '../bean/broadcast.smsProviderChanged.js';
-import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
-import { EventAccountMigration } from '../bean/event.accountMigration.js';
-import { SmsProviderAliyun } from '../bean/sms.provider.aliyun.js';
-import { SmsProviderTest } from '../bean/sms.provider.test.js';
-import { StartupCacheSmsProviders } from '../bean/startup.cacheSmsProviders.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     smsProviderCache: BeanSmsProviderCache;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-authsms.auth.provider.sms': AuthProviderSms;
-    'a-authsms.broadcast.smsProviderChanged': BroadcastSmsProviderChanged;
-    'a-authsms.captcha.provider.captcha': CaptchaProviderCaptcha;
-    'a-authsms.event.accountMigration': EventAccountMigration;
-    'a-authsms.sms.provider.aliyun': SmsProviderAliyun;
-    'a-authsms.sms.provider.test': SmsProviderTest;
-    'a-authsms.startup.cacheSmsProviders': StartupCacheSmsProviders;
   }
 }
 /** beans: end */
@@ -36,14 +20,6 @@ declare module 'vona' {
 export * from '../controller/auth.js';
 export * from '../controller/captcha.js';
 export * from '../controller/smsProvider.js';
-import { ControllerAuth } from '../controller/auth.js';
-import { ControllerCaptcha } from '../controller/captcha.js';
-import { ControllerSmsProvider } from '../controller/smsProvider.js';
-export const controllers = {
-  auth: ControllerAuth,
-  captcha: ControllerCaptcha,
-  smsProvider: ControllerSmsProvider,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/auth.js';
@@ -93,9 +69,9 @@ export interface ScopeModuleAAuthsms
     typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
-    any,
+    never,
     IModuleService,
-    any
+    never
   > {}
 
 import 'vona';

@@ -2,24 +2,16 @@
 export * from '../bean/bean.share.js';
 export * from '../bean/version.manager.js';
 import { BeanShare } from '../bean/bean.share.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     share: BeanShare;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-share.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/share.js';
-import { ControllerShare } from '../controller/share.js';
-export const controllers = {
-  share: ControllerShare,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/share.js';
@@ -58,7 +50,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleAShare extends BeanScopeBase {}
 
-export interface ScopeModuleAShare extends TypeModuleResource<any, any, any, any, IModuleService, IModuleModel> {}
+export interface ScopeModuleAShare
+  extends TypeModuleResource<never, never, never, never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

@@ -1,13 +1,12 @@
 /** beans: begin */
 export * from '../bean/bean.event.js';
 import { BeanEvent } from '../bean/bean.event.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     event: BeanEvent;
   }
-
-  export interface IBeanRecordGeneral {}
 }
 /** beans: end */
 /** scope: begin */
@@ -16,7 +15,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleAEvent extends BeanScopeBase {}
 
-export interface ScopeModuleAEvent extends TypeModuleResource<any, any, any, any, any, any> {}
+export interface ScopeModuleAEvent extends TypeModuleResource<never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

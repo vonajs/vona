@@ -1,9 +1,5 @@
 /** controllers: begin */
 export * from '../controller/auth.js';
-import { ControllerAuth } from '../controller/auth.js';
-export const controllers = {
-  auth: ControllerAuth,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/auth.js';
@@ -24,7 +20,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleALogin extends BeanScopeBase {}
 
-export interface ScopeModuleALogin extends TypeModuleResource<any, any, any, any, IModuleService, any> {}
+export interface ScopeModuleALogin extends TypeModuleResource<never, never, never, never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

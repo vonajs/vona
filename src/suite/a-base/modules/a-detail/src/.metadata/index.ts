@@ -2,15 +2,11 @@
 export * from '../bean/bean.detail.js';
 export * from '../bean/version.manager.js';
 import { BeanDetail } from '../bean/bean.detail.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     detail: BeanDetail;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-detail.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -43,7 +39,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADetail extends BeanScopeBase {}
 
 export interface ScopeModuleADetail
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], typeof constants, any, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], typeof constants, never, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

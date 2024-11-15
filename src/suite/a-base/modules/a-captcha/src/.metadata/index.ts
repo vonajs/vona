@@ -1,25 +1,22 @@
 /** beans: begin */
 export * from '../bean/bean.captcha.js';
-export * from '../bean/middleware.captchaVerify.js';
 import { BeanCaptcha } from '../bean/bean.captcha.js';
-import { MiddlewareCaptchaVerify } from '../bean/middleware.captchaVerify.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     captcha: BeanCaptcha;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-captcha.middleware.captchaVerify': MiddlewareCaptchaVerify;
-  }
 }
 /** beans: end */
+/** middlewares: begin */
+export * from '../bean/middleware.captchaVerify.js';
+
+import 'vona';
+declare module 'vona' {}
+/** middlewares: end */
 /** controllers: begin */
 export * from '../controller/captcha.js';
-import { ControllerCaptcha } from '../controller/captcha.js';
-export const controllers = {
-  captcha: ControllerCaptcha,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/captcha.js';
@@ -61,9 +58,9 @@ export interface ScopeModuleACaptcha
     typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
-    any,
+    never,
     IModuleService,
-    any
+    never
   > {}
 
 import 'vona';

@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'cms-sitecommunity.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** atoms: begin */
@@ -32,7 +28,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsSitecommunity extends BeanScopeBase {}
 
 export interface ScopeModuleCmsSitecommunity
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, any, any> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

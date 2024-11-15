@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-dashboard.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** atoms: begin */
@@ -15,10 +11,6 @@ export * from '../atom/dashboard.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/dashboard.js';
-import { ControllerDashboard } from '../controller/dashboard.js';
-export const controllers = {
-  dashboard: ControllerDashboard,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/dashboard.js';
@@ -70,7 +62,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADashboard extends BeanScopeBase {}
 
 export interface ScopeModuleADashboard
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

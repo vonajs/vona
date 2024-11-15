@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/queue.submit.js';
-import { QueueSubmit } from '../bean/queue.submit.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'cms-pluginsubmit.queue.submit': QueueSubmit;
-  }
 }
 /** beans: end */
 /** services: begin */
@@ -34,7 +30,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsPluginsubmit extends BeanScopeBase {}
 
 export interface ScopeModuleCmsPluginsubmit
-  extends TypeModuleResource<typeof config, any, any, any, IModuleService, any> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

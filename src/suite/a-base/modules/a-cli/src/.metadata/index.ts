@@ -3,26 +3,16 @@ export * from '../bean/bean.cli.js';
 export * from '../bean/bean.cliBase_.js';
 export * from '../bean/version.manager.js';
 import { BeanCli } from '../bean/bean.cli.js';
-import { BeanCliBase } from '../bean/bean.cliBase_.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     cli: BeanCli;
   }
-
-  export interface IBeanRecordGeneral {
-    cliBase: BeanCliBase;
-    'a-cli.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/cli.js';
-import { ControllerCli } from '../controller/cli.js';
-export const controllers = {
-  cli: ControllerCli,
-};
 /** controllers: end */
 /** services: begin */
 export * from '../service/cli.js';
@@ -68,7 +58,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleACli extends BeanScopeBase {}
 
 export interface ScopeModuleACli
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, IModuleService, any> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {
