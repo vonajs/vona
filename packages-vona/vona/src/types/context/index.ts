@@ -5,7 +5,6 @@ import { ContextOthers } from './contextOthers.js';
 import { ContextError } from '../../lib/bean/resource/error/errorContext.js';
 import { VonaApplication } from '../application/app.js';
 import { BeanContainer } from '../../lib/bean/beanContainer.js';
-import { ContextConfig } from './contextConfig.js';
 import { ContextState } from './contextState.js';
 export * from './contextState.js';
 
@@ -13,7 +12,6 @@ export * from './contextState.js';
 export interface VonaContext extends ContextLocale, ContextError, ContextBase, ContextOthers, EggContext {
   app: VonaApplication;
   bean: BeanContainer;
-  config: ContextConfig;
   state: ContextState;
   [key: string | symbol]: any; // should use any rather than unknown
 }

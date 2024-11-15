@@ -7,14 +7,12 @@ import { IModule } from '@cabloy/module-info';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
-const BeanModuleConfig = Symbol('BeanScopeBase#BeanModuleConfig');
 const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
-  private [BeanModuleConfig]: unknown;
   private [BeanModuleConstant]: unknown;
   private [BeanModuleBean]: BeanScopeBean;
   private __scenes: Record<string, BeanScopeScene> = {};
@@ -41,10 +39,9 @@ export class BeanScopeBase extends BeanBaseSimple {
     }
     // config
     if (prop === 'config') {
-      if (!this[BeanModuleConfig]) {
-        this[BeanModuleConfig] = this.ctx.config.module(moduleBelong);
-      }
-      return this[BeanModuleConfig];
+      // app or ctx
+      const config = this.ctx ? this.ctx.config : this.app.config;
+      return config.modules[moduleBelong];
     }
     // constant
     if (prop === 'constant') {
