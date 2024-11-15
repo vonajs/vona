@@ -3,26 +3,16 @@ export * from '../bean/bean.sequence.js';
 export * from '../bean/sequence.simple.js';
 export * from '../bean/version.manager.js';
 import { BeanSequence } from '../bean/bean.sequence.js';
-import { SequenceSimple } from '../bean/sequence.simple.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     sequence: BeanSequence;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-sequence.sequence.simple': SequenceSimple;
-    'a-sequence.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/sequence.js';
-import { ControllerSequence } from '../controller/sequence.js';
-export const controllers = {
-  sequence: ControllerSequence,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/sequence.js';
@@ -46,7 +36,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleASequence extends BeanScopeBase {}
 
-export interface ScopeModuleASequence extends TypeModuleResource<any, any, any, any, IModuleService, any> {}
+export interface ScopeModuleASequence extends TypeModuleResource<never, never, never, never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

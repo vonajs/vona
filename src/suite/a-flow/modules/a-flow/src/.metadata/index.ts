@@ -6,20 +6,12 @@ export * from '../bean/stats.flowInitiateds.js';
 export * from '../bean/version.manager.js';
 import { BeanFlow } from '../bean/bean.flow.js';
 import { BeanFlowDef } from '../bean/bean.flowDef.js';
-import { FlowBehaviorBase } from '../bean/flow.behavior.base.js';
-import { StatsFlowInitiateds } from '../bean/stats.flowInitiateds.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     flow: BeanFlow;
     flowDef: BeanFlowDef;
-  }
-
-  export interface IBeanRecordGeneral {
-    'a-flow.flow.behavior.base': FlowBehaviorBase;
-    'a-flow.stats.flowInitiateds': StatsFlowInitiateds;
-    'a-flow.version.manager': VersionManager;
   }
 }
 /** beans: end */
@@ -29,12 +21,6 @@ export * from '../atom/flowDef.js';
 /** controllers: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
-import { ControllerFlow } from '../controller/flow.js';
-import { ControllerFlowDef } from '../controller/flowDef.js';
-export const controllers = {
-  flow: ControllerFlow,
-  flowDef: ControllerFlowDef,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/flow.js';
@@ -131,7 +117,7 @@ export class ScopeModuleAFlow extends BeanScopeBase {}
 
 export interface ScopeModuleAFlow
   extends TypeModuleResource<
-    any,
+    never,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     typeof constants,

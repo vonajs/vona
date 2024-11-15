@@ -2,36 +2,25 @@
 export * from '../bean/bean.instance.js';
 export * from '../bean/broadcast.reload.js';
 export * from '../bean/broadcast.resetCache.js';
-export * from '../bean/middleware.appReady.js';
-export * from '../bean/middleware.instance.js';
 export * from '../bean/version.manager.js';
 import { BeanInstance } from '../bean/bean.instance.js';
-import { BroadcastReload } from '../bean/broadcast.reload.js';
-import { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
-import { MiddlewareAppReady } from '../bean/middleware.appReady.js';
-import { MiddlewareInstance } from '../bean/middleware.instance.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     instance: BeanInstance;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-instance.broadcast.reload': BroadcastReload;
-    'a-instance.broadcast.resetCache': BroadcastResetCache;
-    'a-instance.middleware.appReady': MiddlewareAppReady;
-    'a-instance.middleware.instance': MiddlewareInstance;
-    'a-instance.version.manager': VersionManager;
-  }
 }
 /** beans: end */
+/** middlewares: begin */
+export * from '../bean/middleware.appReady.js';
+export * from '../bean/middleware.instance.js';
+
+import 'vona';
+declare module 'vona' {}
+/** middlewares: end */
 /** controllers: begin */
 export * from '../controller/instance.js';
-import { ControllerInstance } from '../controller/instance.js';
-export const controllers = {
-  instance: ControllerInstance,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/instance.js';
@@ -75,7 +64,14 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAInstance extends BeanScopeBase {}
 
 export interface ScopeModuleAInstance
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel
+  > {}
 
 import 'vona';
 declare module 'vona' {

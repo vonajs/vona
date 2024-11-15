@@ -1,13 +1,9 @@
 /** beans: begin */
 export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-app.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** atoms: begin */
@@ -15,10 +11,6 @@ export * from '../atom/app.js';
 /** atoms: end */
 /** controllers: begin */
 export * from '../controller/resource.js';
-import { ControllerResource } from '../controller/resource.js';
-export const controllers = {
-  resource: ControllerResource,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/app.js';
@@ -66,7 +58,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAApp extends BeanScopeBase {}
 
 export interface ScopeModuleAApp
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {

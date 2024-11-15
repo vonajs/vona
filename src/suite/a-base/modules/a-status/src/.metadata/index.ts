@@ -2,24 +2,16 @@
 export * from '../bean/bean.status.js';
 export * from '../bean/version.manager.js';
 import { BeanStatus } from '../bean/bean.status.js';
-import { VersionManager } from '../bean/version.manager.js';
+
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     status: BeanStatus;
   }
-
-  export interface IBeanRecordGeneral {
-    'a-status.version.manager': VersionManager;
-  }
 }
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/status.js';
-import { ControllerStatus } from '../controller/status.js';
-export const controllers = {
-  status: ControllerStatus,
-};
 /** controllers: end */
 /** entities: begin */
 export * from '../entity/status.js';
@@ -50,7 +42,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleAStatus extends BeanScopeBase {}
 
-export interface ScopeModuleAStatus extends TypeModuleResource<any, any, any, any, IModuleService, IModuleModel> {}
+export interface ScopeModuleAStatus
+  extends TypeModuleResource<never, never, never, never, IModuleService, IModuleModel> {}
 
 import 'vona';
 declare module 'vona' {
