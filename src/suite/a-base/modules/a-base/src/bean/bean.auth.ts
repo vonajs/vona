@@ -111,12 +111,8 @@ export class BeanAuth extends BeanBase<ScopeModule> {
   }
 
   async _getConfig() {
-    // instanceConfigsFront
-    const instanceConfigsFront = this.ctx.bean.instance.getInstanceConfigsFront();
     // config
-    let config: any = {
-      modules: instanceConfigsFront,
-    };
+    let config: any = {};
     // config base
     config = this.ctx.bean.util.extend(config, {
       modules: {

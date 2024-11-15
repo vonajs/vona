@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { Cast, isNil } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -16,6 +16,7 @@ const boxenOptions: boxen.Options = {
 } as boxen.Options;
 
 const __queueInstanceStartup: any = {};
+const __cacheIntancesConfig: Record<string, object> = {};
 
 @Bean()
 export class BeanInstance extends BeanBase<ScopeModule> {
@@ -31,7 +32,8 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (!options) options = { where: null, orders: null, page: null };
     const page = this.ctx.bean.util.page(options.page, false);
     const orders = options.orders;
-    const where = options.where || { disabled: 0 }; // allow disabled=undefined
+    const where = options.where; // allow disabled=undefined
+    // const where = options.where || { disabled: 0 }; // allow disabled=undefined
     // select
     const _options = { where, orders } as IModelSelectParams;
     if (page.size !== 0) {
@@ -41,14 +43,12 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return await this.modelInstance.select(_options);
   }
 
-  async get({ subdomain }: any) {
-    // cache
-    const instance = this.cacheMem.get('instance');
-    if (instance) return instance;
-    return await this.resetCache({ subdomain });
+  async get(subdomain: string) {
+    if (isNil(subdomain)) this.ctx.throw(403);
+    return await this._get(subdomain);
   }
 
-  async _get({ subdomain }: any): Promise<EntityInstance | null> {
+  async _get(subdomain: string): Promise<EntityInstance | null> {
     // get
     const instance = await this.modelInstance.get({ name: subdomain });
     if (instance) return instance;
@@ -114,42 +114,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     }
   }
 
-  async resetCache({ subdomain }: any) {
-    // cache
-    const instance = await this._get({ subdomain });
-    if (!instance) return null;
-    // config
-    instance.config = JSON.parse(instance.config) || {};
-    // cache configs
-    const instanceConfigs = this.ctx.bean.util.extend({}, this.ctx.app.config.modules, instance.config);
-    this.cacheMem.set('instanceConfigs', instanceConfigs);
-    // cache configsFront
-    const instanceConfigsFront = this._mergeInstanceConfigFront({ instanceConfigs });
-    this.cacheMem.set('instanceConfigsFront', instanceConfigsFront);
-    // cache instance
-    this.cacheMem.set('instance', instance);
-    return instance;
-  }
-
-  getInstanceConfigs() {
-    return this.cacheMem.get('instanceConfigs');
-  }
-
-  getInstanceConfigsFront() {
-    return this.cacheMem.get('instanceConfigsFront');
-  }
-
-  _mergeInstanceConfigFront({ instanceConfigs }: any) {
-    const instanceConfigsFront: any = {};
-    for (const moduleName in instanceConfigs) {
-      const instanceConfig = instanceConfigs[moduleName];
-      if (instanceConfig.configFront) {
-        instanceConfigsFront[moduleName] = instanceConfig.configFront;
-      }
-    }
-    return instanceConfigsFront;
-  }
-
   async checkAppReady(options?: { wait?: boolean }) {
     if (!options) options = { wait: true };
     if (!this.ctx.app.meta.appReady && options.wait === false) return false;
@@ -174,8 +138,24 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return true;
   }
 
+  async resetCache(subdomain: string) {
+    await this._cacheInstanceConfig(subdomain, true);
+  }
+
+  async _cacheInstanceConfig(subdomain: string, force: boolean) {
+    if (__cacheIntancesConfig[subdomain] && !force) return;
+    const instance = await this.get(subdomain);
+    if (!instance) this.ctx.throw(403);
+    // config
+    instance.config = JSON.parse(instance.config);
+    // cache configs
+    __cacheIntancesConfig[subdomain] = this.$appUtil.extend({}, this.ctx.app.config, instance.config);
+  }
+
   // options: force/instanceBase
   async instanceStartup({ subdomain, options }: { subdomain: string; options?: object }) {
+    // cache instance config
+    await this._cacheInstanceConfig(subdomain, false);
     // queue within the same worker
     if (!__queueInstanceStartup[subdomain]) {
       __queueInstanceStartup[subdomain] = async.queue((info, cb) => {
@@ -210,7 +190,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
 
   async initInstance() {
     // instance
-    const instance = await this.get({ subdomain: this.ctx.subdomain });
+    const instance = await this.get(this.ctx.subdomain);
     if (!instance) {
       // prompt: should for local/prod
       // if (this.ctx.app.meta.isLocal) {

@@ -10,6 +10,7 @@ import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { compose, composeAsync } from '@cabloy/compose';
+import { extend } from '@cabloy/extend';
 
 const __EnvTests = ['unittest', 'test'];
 
@@ -216,7 +217,7 @@ export class AppUtil extends BeanSimple {
     });
     // instance
     if (subdomain !== undefined && subdomain !== null) {
-      ctx.instance = await ctx.bean.instance.get({ subdomain });
+      ctx.instance = await ctx.bean.instance.get(subdomain);
       // start instance
       if (instance) {
         await ctx.bean.instance.checkAppReadyInstance();
@@ -426,6 +427,10 @@ export class AppUtil extends BeanSimple {
     // stat
     const stat = fse.statSync(file);
     return stat.mtime.valueOf();
+  }
+
+  extend(...args) {
+    return extend(true, ...args);
   }
 }
 
