@@ -95,6 +95,9 @@ export default function (appInfo: VonaAppInfo) {
     disableUpdateTime: false,
   };
 
+  // instances
+  config.instances = [];
+
   // metadata
   config.metadata = {};
 

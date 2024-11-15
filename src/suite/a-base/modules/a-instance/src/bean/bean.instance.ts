@@ -1,4 +1,4 @@
-import { Cast, isNil } from 'vona';
+import { Cast, ConfigInstanceBase, isNil } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -20,9 +20,6 @@ const __cacheIntancesConfig: Record<string, object> = {};
 
 @Bean()
 export class BeanInstance extends BeanBase<ScopeModule> {
-  get cacheMem() {
-    return this.scope._bean.cacheMem;
-  }
   get modelInstance() {
     return this.scope.model.instance;
   }
@@ -53,8 +50,8 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     const instance = await this.modelInstance.get({ name: subdomain });
     if (instance) return instance;
     // instance base
-    const instanceBase = this._getInstanceBase({ subdomain });
-    if (!instanceBase) return null;
+    const configInstanceBase = this._getConfigInstanceBase(subdomain);
+    if (!configInstanceBase) return null;
     // lock
     return await this.ctx.meta.util.lock({
       subdomain: null,
@@ -63,22 +60,22 @@ export class BeanInstance extends BeanBase<ScopeModule> {
         return await this.ctx.meta.util.executeBeanIsolate({
           subdomain: null,
           beanFullName: 'instance',
-          context: { instanceBase },
+          context: { configInstanceBase },
           fn: '_registerLock',
         });
       },
     });
   }
 
-  async _registerLock({ instanceBase }: any) {
+  async _registerLock({ configInstanceBase }: { configInstanceBase: ConfigInstanceBase }) {
     // get again
-    let instance = await this.modelInstance.get({ name: instanceBase.subdomain });
+    let instance = await this.modelInstance.get({ name: configInstanceBase.subdomain });
     if (instance) return instance;
     // insert
     instance = {
-      name: instanceBase.subdomain,
-      title: instanceBase.title,
-      config: JSON.stringify(instanceBase.config || {}),
+      name: configInstanceBase.subdomain,
+      title: configInstanceBase.title,
+      config: JSON.stringify(configInstanceBase.config || {}),
       disabled: 0,
     } as EntityInstance;
     const res = await this.modelInstance.insert(instance);
@@ -86,8 +83,8 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return instance;
   }
 
-  _getInstanceBase({ subdomain }: any) {
-    const instances = this.ctx.app.config.instances || [{ subdomain: '', password: '' }];
+  _getConfigInstanceBase(subdomain: string) {
+    const instances = this.app.config.instances || [{ subdomain: '', password: '' }];
     return instances.find(item => item.subdomain === subdomain);
   }
 
@@ -100,7 +97,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     });
   }
 
-  async instanceChanged(reload = true) {
+  async instanceChanged(reload: boolean = true) {
     if (reload) {
       // force to reload instance
       await this.reload();
@@ -147,9 +144,11 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     const instance = await this.get(subdomain);
     if (!instance) this.ctx.throw(403);
     // config
-    instance.config = JSON.parse(instance.config);
+    const instanceConfig = JSON.parse(instance.config);
     // cache configs
-    __cacheIntancesConfig[subdomain] = this.$appUtil.extend({}, this.ctx.app.config, instance.config);
+    __cacheIntancesConfig[subdomain] = this.$appUtil.extend({}, this.ctx.app.config, instanceConfig, {
+      instances: undefined,
+    });
   }
 
   // options: force/instanceBase
