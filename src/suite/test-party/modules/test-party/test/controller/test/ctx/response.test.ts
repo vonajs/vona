@@ -30,7 +30,7 @@ describe('test/controller/test/ctx/response.test.js', () => {
     assert.equal(data.list.length, 2);
   });
 
-  it.only('action:response:fail', async () => {
+  it('action:response:fail', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx({ locale: 'zh-cn' });
     await ctx.meta.mockUtil.catchError(
