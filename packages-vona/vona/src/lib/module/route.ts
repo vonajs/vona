@@ -337,7 +337,7 @@ function wrapMiddlewareApp(key, route, app) {
 function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
   const fn = (ctx, next) => {
     // options
-    const options = ctx.meta.getMiddlewareOptions(item);
+    const options = ctx.meta.getMiddlewareOptions(item.name);
     // enable match ignore dependencies
     if (options.enable === false || !middlewareMatch(ctx, options)) {
       if (!ctx[SymboleMiddlewareStatus][sceneName]) {

@@ -21,7 +21,7 @@ export class ErrorClass extends BeanSimple {
   fail(module, code, ...args) {
     const body = this.parseFail(module, code, ...args);
 
-    this.ctx.response.status = body.code < 1000 ? body.code : 500;
+    this.ctx.response.status = __calcStatus(body.code);
     this.ctx.response.type = 'application/json';
     this.ctx.response.body = { code: body.code, message: body.message }; // body maybe Error
   }
@@ -31,7 +31,6 @@ export class ErrorClass extends BeanSimple {
     const err = new Error();
     err.code = body.code;
     err.message = body.message;
-    if (body.code < 1000) err.status = body.code;
     throw err;
   }
   // code/message,args
@@ -72,4 +71,8 @@ export class ErrorClass extends BeanSimple {
 function __combineErrorCode(module, code) {
   if (typeof code !== 'number' || code <= 1000) return code;
   return module ? `${module}:${code}` : code;
+}
+
+function __calcStatus(code) {
+  return typeof code !== 'string' && code < 1000 ? code : 500;
 }

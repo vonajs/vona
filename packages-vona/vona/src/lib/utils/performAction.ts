@@ -98,10 +98,14 @@ export default async function performAction({
     }
     throw ctx.createError(ctx.body);
   } else {
-    throw ctx.createError({
-      code: ctx.status,
-      message: ctx.message || ctx.body,
-    });
+    if (ctx.body && typeof ctx.body === 'object') {
+      throw ctx.createError(ctx.body);
+    } else {
+      throw ctx.createError({
+        code: ctx.status,
+        message: ctx.message,
+      });
+    }
   }
 }
 
