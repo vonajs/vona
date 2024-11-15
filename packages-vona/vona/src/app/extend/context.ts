@@ -17,8 +17,11 @@ const DBLEVEL = Symbol.for('Context#__dblevel');
 
 const context: ContextBase = {
   get config() {
-    const self = Cast<VonaContext>(this);
-    return Cast(self.bean).instance.getConfig(self.subdomain);
+    const self = Cast(this);
+    if (self.instance) {
+      return self.app.bean.instance.getConfig(self.subdomain);
+    }
+    return self.app.config;
   },
   get module() {
     const self = Cast<VonaContext>(this);
