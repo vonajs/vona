@@ -5,7 +5,7 @@ import boxen from 'boxen';
 import { Bean, BeanBase } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { IModelSelectParams } from 'vona-module-a-database';
-import { EntityInstance } from '../entity/instance.js';
+import { EntityInstance, IInstanceStartupOptions, IInstanceStartupQueueInfo } from '../entity/instance.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -131,7 +131,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (this.ctx.app.meta.appReadyInstances[subdomain]) return true;
     // instance startup
     if (options.startup === false) return false;
-    await this.instanceStartup({ subdomain });
+    await this.instanceStartup(subdomain);
     return true;
   }
 
@@ -152,12 +152,12 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   }
 
   // options: force/instanceBase
-  async instanceStartup({ subdomain, options }: { subdomain: string; options?: object }) {
+  async instanceStartup(subdomain: string, options?: IInstanceStartupOptions) {
     // cache instance config
     await this._cacheInstanceConfig(subdomain, false);
     // queue within the same worker
     if (!__queueInstanceStartup[subdomain]) {
-      __queueInstanceStartup[subdomain] = async.queue((info, cb) => {
+      __queueInstanceStartup[subdomain] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
         // check again
         const force = info.options && info.options.force;
         if (this.ctx.app.meta.appReadyInstances[info.subdomain] && !force) {
@@ -181,9 +181,10 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     // promise
     return new Promise((resolve, reject) => {
       // options
-      if (!options) options = { force: false, instanceBase: null };
+      if (!options) options = { force: false, configInstanceBase: undefined };
       // queue push
-      __queueInstanceStartup[subdomain].push({ resolve, reject, subdomain, options });
+      const info: IInstanceStartupQueueInfo = { resolve, reject, subdomain, options };
+      __queueInstanceStartup[subdomain].push(info);
     });
   }
 
@@ -214,36 +215,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     // check instance startup ready
     await this.checkAppReadyInstance();
 
-    // try to save host/protocol to config
-    if (ctxHostValid(this.ctx)) {
-      if (!instance.config['a-base']) instance.config['a-base'] = {};
-      const aBase = instance.config['a-base'];
-      if (aBase.host !== this.ctx.host || aBase.protocol !== this.ctx.protocol) {
-        aBase.host = this.ctx.host;
-        aBase.protocol = this.ctx.protocol;
-        // update
-        await this.modelInstance.update({
-          id: instance.id,
-          config: JSON.stringify(instance.config),
-        });
-        // changed
-        await this.instanceChanged(false);
-      }
-    }
-
     // ok
     this.ctx.instance = instance;
   }
-}
-
-function ctxHostValid(ctx) {
-  // not check localhost, because almost inner api call use 127.0.0.1
-  return (
-    !ctx.innerAccess &&
-    ctx.host &&
-    ctx.protocol &&
-    ctx.host.indexOf('127.0.0.1') === -1 &&
-    // ctx.host.indexOf('localhost') === -1 &&
-    ['http', 'https'].includes(ctx.protocol)
-  );
 }
