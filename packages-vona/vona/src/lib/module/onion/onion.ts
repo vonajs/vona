@@ -169,7 +169,7 @@ export class Onion extends BeanSimple {
       // options: config
       let optionsConfig;
       if (item.fromConfig) {
-        const config = this.app.meta.configs[item.beanOptions.module];
+        const config = this.app.config.modules[item.beanOptions.module];
         optionsConfig = config?.middlewares?.[item.name];
       } else {
         optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
@@ -287,7 +287,7 @@ export class Onion extends BeanSimple {
 
   // todo: should be removed
   private _loadMiddlewaresAll_fromConfig(middlewaresAll: IMiddlewareItem[], module: IModule) {
-    const config = this.app.meta.configs[module.info.relativeName];
+    const config = this.app.config.modules[module.info.relativeName];
     if (!config.middlewares) return;
     for (const middlewareKey in config.middlewares) {
       const middlewareConfig = config.middlewares[middlewareKey];

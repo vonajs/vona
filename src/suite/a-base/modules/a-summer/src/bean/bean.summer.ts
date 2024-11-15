@@ -95,7 +95,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
       const moduleName = module.info.relativeName;
       // ignore a-summer
       if (moduleName === 'a-summer') continue;
-      const config = this.ctx.app.meta.configs[moduleName];
+      const config = this.ctx.app.config.modules[moduleName];
       const summerGroups = this.ctx.bean.util.getProperty(config, 'summer.group');
       if (!summerGroups) continue;
       for (const groupName in summerGroups) {

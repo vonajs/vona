@@ -14,7 +14,7 @@ export default function (app: VonaApplication, modules) {
   function loadQueues() {
     for (const key in modules) {
       const module = modules[key];
-      const config = app.meta.configs[module.info.relativeName];
+      const config = app.config.modules[module.info.relativeName];
       if (!config.queues) continue;
       for (const queueName in config.queues) {
         const queueConfig = config.queues[queueName];

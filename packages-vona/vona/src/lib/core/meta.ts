@@ -50,7 +50,6 @@ export class AppMeta extends BeanSimple {
   modulesArray: IModule[];
   modulesMonkey: Record<string, IModule>;
   //
-  configs: Record<string, any>;
   constants: Record<string, any>;
   metas: Record<string, IModuleMeta>;
   locales: TypeModuleResourceLocales;

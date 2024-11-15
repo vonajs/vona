@@ -13,7 +13,7 @@ export default function (app) {
 
   function loadStartups() {
     for (const module of ebModulesArray) {
-      const config = app.meta.configs[module.info.relativeName];
+      const config = app.config.modules[module.info.relativeName];
       if (!config.startups) continue;
       for (const startupKey in config.startups) {
         const startupConfig = config.startups[startupKey];

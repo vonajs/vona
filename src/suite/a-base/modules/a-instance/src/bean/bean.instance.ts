@@ -121,7 +121,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     // config
     instance.config = JSON.parse(instance.config) || {};
     // cache configs
-    const instanceConfigs = this.ctx.bean.util.extend({}, this.ctx.app.meta.configs, instance.config);
+    const instanceConfigs = this.ctx.bean.util.extend({}, this.ctx.app.config.modules, instance.config);
     this.cacheMem.set('instanceConfigs', instanceConfigs);
     // cache configsFront
     const instanceConfigsFront = this._mergeInstanceConfigFront({ instanceConfigs });

@@ -14,7 +14,7 @@ export default function (app: VonaApplication, modules) {
   function loadBroadcasts() {
     for (const key in modules) {
       const module = modules[key];
-      const config = app.meta.configs[module.info.relativeName];
+      const config = app.config.modules[module.info.relativeName];
       if (!config.broadcasts) continue;
       for (const broadcastKey in config.broadcasts) {
         const broadcastConfig = config.broadcasts[broadcastKey];
