@@ -1,4 +1,4 @@
-import { Cast, ConfigInstanceBase, isNil } from 'vona';
+import { Cast, ConfigInstanceBase, isNil, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -16,7 +16,7 @@ const boxenOptions: boxen.Options = {
 } as boxen.Options;
 
 const __queueInstanceStartup: any = {};
-const __cacheIntancesConfig: Record<string, object> = {};
+const __cacheIntancesConfig: Record<string, VonaConfig> = {};
 
 @Bean()
 export class BeanInstance extends BeanBase<ScopeModule> {
@@ -133,6 +133,11 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (options.startup === false) return false;
     await this.instanceStartup(subdomain);
     return true;
+  }
+
+  getConfig(subdomain: string): VonaConfig {
+    if (!__cacheIntancesConfig[subdomain]) throw new Error('instance config not prepared');
+    return __cacheIntancesConfig[subdomain];
   }
 
   async resetCache(subdomain: string) {

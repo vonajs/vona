@@ -5,7 +5,7 @@ export class BroadcastReload extends BeanBase {
   async execute() {
     await this.ctx.bean.instance.instanceStartup(this.ctx.subdomain, {
       force: true,
-      instanceBase: null,
+      configInstanceBase: undefined,
     });
   }
 }

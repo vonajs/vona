@@ -16,6 +16,10 @@ const TAILCALLBACKS = Symbol.for('Context#__tailcallbacks');
 const DBLEVEL = Symbol.for('Context#__dblevel');
 
 const context: ContextBase = {
+  get config() {
+    const self = Cast<VonaContext>(this);
+    return Cast(self.bean).instance.getConfig(self.subdomain);
+  },
   get module() {
     const self = Cast<VonaContext>(this);
     if (this[MODULE] === undefined) {
