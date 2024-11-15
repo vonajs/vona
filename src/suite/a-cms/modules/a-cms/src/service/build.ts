@@ -55,7 +55,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
       const module = this.app.meta.modules[relativeName];
       const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (plugin) {
-        site.plugins[relativeName] = this.getScope(relativeName as any).config.plugin;
+        site.plugins[relativeName] = this.getScope(relativeName as any).config?.plugin;
       }
     }
     return site;

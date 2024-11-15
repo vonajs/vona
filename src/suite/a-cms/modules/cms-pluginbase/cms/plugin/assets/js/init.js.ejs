@@ -1,6 +1,6 @@
 <%
-const configBodyCrypto=ctx.bean._getScope('a-base').config.securityLevelProtection.body.crypto;
-const configBodyCryptoJS=ctx.bean._getScope('a-base').config.securityLevelProtection.body.cryptojs;
+const configBodyCrypto=ctx.bean.scope('a-base').config.securityLevelProtection.body.crypto;
+const configBodyCryptoJS=ctx.bean.scope('a-base').config.securityLevelProtection.body.cryptojs;
 %>
 (function () {
   $(document).ready(function () {
