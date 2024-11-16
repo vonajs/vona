@@ -20,8 +20,9 @@ export async function generateServices(moduleName: string, modulePath: string) {
     const className = 'Service' + parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
     const beanFullName = `${moduleName}.service.${parts.join('.')}`;
     contentExports.push(`export * from '../service/${fileNameJS}';`);
+    if (isIgnore) continue;
     contentImports.push(`import { ${className} } from '../service/${fileNameJS}';`);
-    if (parts.length === 1 && !isIgnore) {
+    if (parts.length === 1) {
       contentRecords.push(`'${parts[0]}': ${className};`);
     }
     contentRecords2.push(`'${beanFullName}': ${className};`);
