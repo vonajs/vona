@@ -12,7 +12,7 @@ import {
   UsePipeGlobal,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { ParseIntPipe } from 'vona-module-a-pipe';
+import { DefaultValuePipe, ParseIntPipe } from 'vona-module-a-pipe';
 
 @Controller()
 @UseGuard('a-b4:test')
@@ -36,7 +36,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @UseGuardGlobal('a-core:user', { public: true })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   echo(
-    @Query('id', ParseIntPipe) id: number,
+    @Query('id', DefaultValuePipe(0), ParseIntPipe) id: number,
     temp: string,
     @Query('name', ParseIntPipe({ optional: true })) name: string,
   ) {

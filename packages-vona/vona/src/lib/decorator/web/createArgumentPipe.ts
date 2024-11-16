@@ -18,8 +18,10 @@ export function createArgumentPipe<T extends keyof IPipeRecordLocal>(
 }
 
 export function createArgumentPipeParse<T extends keyof IPipeRecordLocal>(pipeName: T) {
-  return function (options?: Partial<IPipeRecordLocal[T]>): any {
-    if (!options) return createArgumentPipe(pipeName);
+  return function (
+    options?: IPipeRecordLocal[T] extends object ? Partial<IPipeRecordLocal[T]> : IPipeRecordLocal[T],
+  ): any {
+    if (options === undefined) return createArgumentPipe(pipeName);
     return () => {
       return createArgumentPipe(pipeName, options);
     };

@@ -1,17 +1,21 @@
 import {
   RouteHandlerArgumentMeta,
   BeanBase,
-  IDecoratorPipeOptions,
   IPipeTransform,
   Pipe,
   createArgumentPipeParse,
+  isNil,
+  isNumber,
 } from 'vona';
 
-export interface IPipeOptionsDefaultValue extends IDecoratorPipeOptions {}
+export type IPipeOptionsDefaultValue = any;
 
 @Pipe<IPipeOptionsDefaultValue>()
-export class PipeDefaultValue extends BeanBase implements IPipeTransform<any> {
-  async transform(value: any, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsDefaultValue) {
+export class PipeDefaultValue extends BeanBase implements IPipeTransform<any, IPipeOptionsDefaultValue> {
+  async transform(value: any, _metadata: RouteHandlerArgumentMeta, options: IPipeOptionsDefaultValue) {
+    if (isNil(value) || (isNumber(value) && isNaN(value as unknown as number))) {
+      return options;
+    }
     return value;
   }
 }
