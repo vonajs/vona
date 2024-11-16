@@ -1,6 +1,9 @@
 /** controllers: begin */
 export * from '../controller/index.js';
 /** controllers: end */
+/** dtos: begin */
+export * from '../dto/book.js';
+/** dtos: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 

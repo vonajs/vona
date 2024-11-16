@@ -84,7 +84,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       );
     }
     if (isNil(value)) {
-      value = {}; // maybe transform some default values
+      value = {};
     }
     this._stripProtoKeys(value);
 

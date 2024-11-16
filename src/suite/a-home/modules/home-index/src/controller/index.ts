@@ -13,6 +13,7 @@ import {
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { DefaultValuePipe, ParseIntPipe } from 'vona-module-a-pipe';
+import { DtoBook } from '../dto/book.js';
 
 @Controller()
 @UseGuard('a-b4:test')
@@ -45,7 +46,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo2')
   @UseGuardGlobal('a-core:user', { public: true })
-  echo2(@Query('id') id: object) {
-    return 'echo: ' + id;
+  echo2(@Query() book: DtoBook) {
+    return 'echo: ' + book.id + ':' + book.name;
   }
 }
