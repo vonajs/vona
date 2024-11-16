@@ -1,13 +1,10 @@
 {
-  "name": "vona-module-a-vona",
-  "version": "5.0.3",
-  "title": "a-vona",
+  "name": "vona-module-a-validator",
+  "version": "5.0.0",
+  "title": "a-validator",
   "vonaModule": {
     "dependencies": {
-      "a-core": "5.0.0",
-      "a-pipe": "5.0.0",
-      "a-validator": "5.0.0",
-      "a-swagger": "5.0.0"
+      "a-vona": "5.0.0"
     }
   },
   "type": "module",
@@ -33,5 +30,5 @@
     "static"
   ],
   "scripts": {},
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "dependencies": {}
 }
