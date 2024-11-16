@@ -10,6 +10,7 @@ import {
   isUndefined,
   isNil,
 } from 'vona';
+import { iterate } from 'iterare';
 import { types } from 'node:util';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
@@ -23,6 +24,7 @@ const __primitiveTypes = [String, Boolean, Number, Array, Object, Buffer, Date];
 export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal {
   disableErrorMessages: boolean;
   errorHttpStatusCode: HttpStatus;
+  exceptionFactory?: (errors: ValidationError[]) => any;
   expectedType?: Type<any>;
   validatorOptions: ValidatorOptions;
   transformOptions: ClassTransformOptions;
@@ -31,7 +33,7 @@ export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal {
 @Pipe<IPipeOptionsValidation>({
   global: true,
   disableErrorMessages: false,
-  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+  errorHttpStatusCode: HttpStatus.UNPROCESSABLE_CONTENT,
   //
   validatorOptions: {
     enableDebugMessages: false,
@@ -94,8 +96,13 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
     // validate
     const errors = await this._validate(entity, options.validatorOptions);
     if (errors.length > 0) {
-      // todo: throw error
-      //throw await this.exceptionFactory(errors);
+      const exceptionFactory =
+        options.exceptionFactory ||
+        (errors => {
+          return this._flattenValidationErrors(errors);
+        });
+      const messages = exceptionFactory(errors);
+      this.ctx.throw(options.errorHttpStatusCode, messages);
     }
 
     // ok
@@ -156,6 +163,42 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       return value === '' ? parseInt(value) : +value;
     }
     return value;
+  }
+
+  private _flattenValidationErrors(validationErrors: ValidationError[]): string[] {
+    return iterate(validationErrors)
+      .map(error => this._mapChildrenToValidationErrors(error))
+      .flatten()
+      .filter(item => !!item.constraints)
+      .map(item => Object.values(item.constraints))
+      .flatten()
+      .toArray();
+  }
+
+  private _mapChildrenToValidationErrors(error: ValidationError, parentPath?: string): ValidationError[] {
+    if (!(error.children && error.children.length)) {
+      return [error];
+    }
+    const validationErrors: ValidationError[] = [];
+    parentPath = parentPath ? `${parentPath}.${error.property}` : error.property;
+    for (const item of error.children) {
+      if (item.children && item.children.length) {
+        validationErrors.push(...this._mapChildrenToValidationErrors(item, parentPath));
+      }
+      validationErrors.push(this._prependConstraintsWithParentProp(parentPath, item));
+    }
+    return validationErrors;
+  }
+
+  private _prependConstraintsWithParentProp(parentPath: string, error: ValidationError): ValidationError {
+    const constraints = {};
+    for (const key in error.constraints) {
+      constraints[key] = `${parentPath}.${error.constraints[key]}`;
+    }
+    return {
+      ...error,
+      constraints,
+    };
   }
 }
 
