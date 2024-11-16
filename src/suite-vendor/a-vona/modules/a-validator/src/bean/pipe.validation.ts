@@ -153,7 +153,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       return value === true || value === 'true';
     }
     if (metaType === Number) {
-      return +value;
+      return value === '' ? parseInt(value) : +value;
     }
     return value;
   }
