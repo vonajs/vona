@@ -1,9 +1,12 @@
 /** pipes: begin */
+export * from '../bean/pipe.defaultValue.js';
 export * from '../bean/pipe.parseInt.js';
+import { IPipeOptionsDefaultValue } from '../bean/pipe.defaultValue.js';
 import { IPipeOptionsParseInt } from '../bean/pipe.parseInt.js';
 import 'vona';
 declare module 'vona' {
   export interface IPipeRecordLocal {
+    'a-pipe:defaultValue': IPipeOptionsDefaultValue;
     'a-pipe:parseInt': IPipeOptionsParseInt;
   }
 }
