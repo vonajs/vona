@@ -5,6 +5,10 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"
+    },
+    "globalDependencies": {
+      "class-transformer": true,
+      "class-validator": true
     }
   },
   "type": "module",
