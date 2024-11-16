@@ -187,7 +187,7 @@ export class Onion extends BeanSimple {
     // options: meta/config
     const optionsMetaAndConfig = this._getMiddlewareOptions(item);
     // options: instance config
-    const optionsInstanceConfig = ctx.config.metadata[item.beanOptions.scene]?.[item.name];
+    const optionsInstanceConfig = ctx.instance ? ctx.config.metadata[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
     let optionsRoute;
     if (this.sceneMeta.optionsRoute) {

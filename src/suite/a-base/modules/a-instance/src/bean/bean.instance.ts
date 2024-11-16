@@ -24,6 +24,14 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return this.scope.model.instance;
   }
 
+  get config(): VonaConfig {
+    return this.getConfig();
+  }
+
+  getConfig(subdomain?: string): VonaConfig {
+    return __cacheIntancesConfig[subdomain ?? this.ctx.subdomain];
+  }
+
   async list(options) {
     // options
     if (!options) options = { where: null, orders: null, page: null };
@@ -133,10 +141,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (options.startup === false) return false;
     await this.instanceStartup(subdomain);
     return true;
-  }
-
-  getConfig(subdomain: string): VonaConfig {
-    return __cacheIntancesConfig[subdomain];
   }
 
   async resetCache(subdomain: string) {
