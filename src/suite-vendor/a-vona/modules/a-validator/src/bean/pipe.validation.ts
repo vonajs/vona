@@ -170,7 +170,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       .map(error => this._mapChildrenToValidationErrors(error))
       .flatten()
       .filter(item => !!item.constraints)
-      .map(item => Object.values(item.constraints))
+      .map(item => Object.values(item.constraints!))
       .flatten()
       .toArray();
   }
