@@ -100,10 +100,10 @@ export class Onion extends BeanSimple {
   private _collectArgumentMiddlewares(_ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
     if (!argMeta.pipes) return;
     return argMeta.pipes.map(pipe => {
-      const { pipeName, options } = pipe();
+      const { pipeName, options, optionsPrimitive } = pipe();
       const item = this.middlewaresNormal[pipeName];
       if (!item) throw new Error(`${this.sceneName} not found: ${pipeName}`);
-      return { ...item, pipeOptions: options };
+      return { ...item, pipeOptions: options, pipeOptionsPrimitive: optionsPrimitive };
     });
   }
 
@@ -162,7 +162,7 @@ export class Onion extends BeanSimple {
     return middlewaresLocal;
   }
 
-  private _getMiddlewareOptions(item: IMiddlewareItem) {
+  private _getMiddlewareOptions(item: IMiddlewareItem, optionsPrimitive?: boolean) {
     if (!this._cacheMiddlewaresOptions[item.name]) {
       // options: meta
       const optionsMeta = item.options;
@@ -174,7 +174,11 @@ export class Onion extends BeanSimple {
       } else {
         optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
       }
-      this._cacheMiddlewaresOptions[item.name] = extend(true, {}, optionsMeta, optionsConfig);
+      if (optionsPrimitive) {
+        this._cacheMiddlewaresOptions[item.name] = optionsConfig ?? optionsMeta;
+      } else {
+        this._cacheMiddlewaresOptions[item.name] = extend(true, {}, optionsMeta, optionsConfig);
+      }
     }
     return this._cacheMiddlewaresOptions[item.name];
   }
@@ -184,8 +188,10 @@ export class Onion extends BeanSimple {
   }
 
   combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
+    // optionsPrimitive
+    const optionsPrimitive = item.pipeOptionsPrimitive;
     // options: meta/config
-    const optionsMetaAndConfig = this._getMiddlewareOptions(item);
+    const optionsMetaAndConfig = this._getMiddlewareOptions(item, optionsPrimitive);
     // options: instance config
     const optionsInstanceConfig = ctx.instance ? ctx.config.metadata[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
@@ -202,15 +208,20 @@ export class Onion extends BeanSimple {
       optionsDynamic = ctx.meta.middlewares[item.fromConfig ? item.name : item.beanOptions.beanFullName];
     }
     // final options
-    const options = extend(
-      true,
-      {},
-      optionsMetaAndConfig,
-      optionsInstanceConfig,
-      optionsRoute,
-      optionsPipe,
-      optionsDynamic,
-    );
+    let options;
+    if (optionsPrimitive) {
+      options = optionsDynamic ?? optionsPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
+    } else {
+      options = extend(
+        true,
+        {},
+        optionsMetaAndConfig,
+        optionsInstanceConfig,
+        optionsRoute,
+        optionsPipe,
+        optionsDynamic,
+      );
+    }
     // ok
     return options;
   }
@@ -335,10 +346,12 @@ export class Onion extends BeanSimple {
         ctx = ctx.ctx;
         packet = ctx.packet;
       }
+      // optionsPrimitive
+      const optionsPrimitive = item.pipeOptionsPrimitive;
       // options
       const options = this.combineMiddlewareOptions(ctx, item);
       // enable match ignore dependencies
-      if (options.enable === false || !middlewareMatch(ctx, options)) {
+      if (!optionsPrimitive && (options.enable === false || !middlewareMatch(ctx, options))) {
         if (!ctx[SymboleMiddlewareStatus][sceneName]) {
           ctx[SymboleMiddlewareStatus][sceneName] = {};
         }
