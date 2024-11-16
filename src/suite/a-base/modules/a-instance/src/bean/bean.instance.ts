@@ -25,11 +25,15 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   }
 
   get config(): VonaConfig {
-    return this.getConfig();
+    return this.getConfig()!;
   }
 
-  getConfig(subdomain?: string): VonaConfig {
-    return __cacheIntancesConfig[subdomain ?? this.ctx.subdomain];
+  getConfig(subdomain?: string): VonaConfig | undefined {
+    if (isNil(subdomain) && this.ctx?.instance) {
+      subdomain = this.ctx?.subdomain;
+    }
+    if (isNil(subdomain)) return undefined;
+    return __cacheIntancesConfig[subdomain];
   }
 
   async list(options) {
