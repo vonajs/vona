@@ -7,22 +7,50 @@ import {
   HttpStatus,
   Type,
   createArgumentPipeParse,
+  isUndefined,
+  isNil,
 } from 'vona';
+import { types } from 'node:util';
+import { plainToInstance } from 'class-transformer';
+import { validate } from 'class-validator';
 import { ValidatorOptions } from '../types/validatorOptions.js';
 import { ClassTransformOptions } from '../types/classTransformOptions.js';
+import { ScopeModule } from '../.metadata/this.js';
+import { ValidationError } from '../types/validationError.js';
 
-export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal, ValidatorOptions {
-  transform: boolean;
-  disableErrorMessages?: boolean;
-  transformOptions: ClassTransformOptions;
+const __primitiveTypes = [String, Boolean, Number, Array, Object, Buffer, Date];
+
+export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal {
+  disableErrorMessages: boolean;
   errorHttpStatusCode: HttpStatus;
-  validateCustomDecorators?: boolean;
   expectedType?: Type<any>;
+  validatorOptions: ValidatorOptions;
+  transformOptions: ClassTransformOptions;
 }
 
 @Pipe<IPipeOptionsValidation>({
   global: true,
-  transform: true,
+  disableErrorMessages: false,
+  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+  //
+  validatorOptions: {
+    enableDebugMessages: false,
+    skipUndefinedProperties: false,
+    skipNullProperties: false,
+    skipMissingProperties: false,
+    whitelist: false,
+    forbidNonWhitelisted: false,
+    forbidUnknownValues: false,
+    groups: undefined,
+    always: false,
+    strictGroups: false,
+    dismissDefaultMessages: false,
+    validationError: {
+      target: false,
+      value: false,
+    },
+    stopAtFirstError: false,
+  },
   transformOptions: {
     strategy: 'exposeAll',
     ignoreDecorators: false,
@@ -32,77 +60,102 @@ export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal, Val
     exposeDefaultValues: false,
     exposeUnsetFields: false,
   },
-  validateCustomDecorators: false,
-  //
-  enableDebugMessages: false,
-  skipUndefinedProperties: false,
-  skipNullProperties: false,
-  skipMissingProperties: false,
-  whitelist: false,
-  forbidNonWhitelisted: false,
-  forbidUnknownValues: false,
-  disableErrorMessages: false,
-  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
-  groups: undefined,
-  always: false,
-  strictGroups: false,
-  dismissDefaultMessages: false,
-  validationError: {
-    target: false,
-    value: false,
-  },
-  stopAtFirstError: false,
 })
-export class PipeValidation extends BeanBase implements IPipeTransform<any> {
+export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransform<any> {
   async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValidation) {
     if (options.expectedType) {
       metadata = { ...metadata, metaType: options.expectedType };
     }
 
-    const metatype = metadata.metatype;
-    if (!metatype || !this.toValidate(metadata)) {
-      return this.isTransformEnabled ? this.transformPrimitive(value, metadata) : value;
-    }
-    const originalValue = value;
-    value = this.toEmptyIfNil(value);
+    const metaType = metadata.metaType;
 
-    const isNil = value !== originalValue;
-    const isPrimitive = this.isPrimitive(value);
-    this.stripProtoKeys(value);
-    let entity = classTransformer.plainToClass(metatype, value, this.transformOptions);
-
-    const originalEntity = entity;
-    const isCtorNotEqual = entity.constructor !== metatype;
-
-    if (isCtorNotEqual && !isPrimitive) {
-      entity.constructor = metatype;
-    } else if (isCtorNotEqual) {
-      // when "entity" is a primitive value, we have to temporarily
-      // replace the entity to perform the validation against the original
-      // metatype defined inside the handler
-      entity = { constructor: metatype };
+    // check type
+    if (!metaType) return value;
+    if (this._isPrimitiveType(metaType)) {
+      return this._transformPrimitive(value, metadata);
     }
 
-    const errors = await this.validate(entity, this.validatorOptions);
+    // check value
+    if (this._isPrimitiveValue(value)) {
+      this.$ctxUtil.throwValidationFailed(
+        HttpStatus.BAD_REQUEST, // always 400
+        this.scope.locale.ValidationFailedPipeValidationInvalidContent(),
+        metadata,
+      );
+    }
+    if (isNil(value)) {
+      value = {}; // maybe transform some default values
+    }
+    this._stripProtoKeys(value);
+
+    // transform
+    const entity = plainToInstance(metaType, value, options.transformOptions);
+
+    // validate
+    const errors = await this._validate(entity, options.validatorOptions);
     if (errors.length > 0) {
-      throw await this.exceptionFactory(errors);
+      // todo: throw error
+      //throw await this.exceptionFactory(errors);
     }
-    if (isPrimitive) {
-      // if the value is a primitive value and the validation process has been successfully completed
-      // we have to revert the original value passed through the pipe
-      entity = originalEntity;
+
+    // ok
+    return entity;
+  }
+
+  private _validate(
+    object: object,
+    validatorOptions?: ValidatorOptions,
+  ): Promise<ValidationError[]> | ValidationError[] {
+    return validate(object, validatorOptions);
+  }
+
+  private _stripProtoKeys(value: any) {
+    if (value == null || typeof value !== 'object' || types.isTypedArray(value)) {
+      return;
     }
-    if (this.isTransformEnabled) {
-      return entity;
+    if (Array.isArray(value)) {
+      for (const v of value) {
+        this._stripProtoKeys(v);
+      }
+      return;
     }
-    if (isNil) {
-      // if the value was originally undefined or null, revert it back
-      return originalValue;
+    delete value.__proto__;
+    for (const key in value) {
+      this._stripProtoKeys(value[key]);
     }
-    // we check if the number of keys of the "validatorOptions" is higher than 1 (instead of 0)
-    // because the "forbidUnknownValues" now fallbacks to "false" (in case it wasn't explicitly specified)
-    const shouldTransformToPlain = Object.keys(this.validatorOptions).length > 1;
-    return shouldTransformToPlain ? classTransformer.classToPlain(entity, this.transformOptions) : value;
+  }
+
+  private _isPrimitiveType(metaType: Type<any>): boolean {
+    return __primitiveTypes.some(t => metaType === t);
+  }
+
+  private _isPrimitiveValue(value: unknown): boolean {
+    return ['number', 'boolean', 'string'].includes(typeof value);
+  }
+
+  private _transformPrimitive(value: any, metadata: RouteHandlerArgumentMeta) {
+    if (!metadata.field) {
+      // leave top-level query/param objects unmodified
+      return value;
+    }
+    const { type, metaType } = metadata;
+    if (type !== 'param' && type !== 'query') {
+      return value;
+    }
+    if (metaType === Boolean) {
+      if (isUndefined(value)) {
+        // This is an workaround to deal with optional boolean values since
+        // optional booleans shouldn't be parsed to a valid boolean when
+        // they were not defined
+        return undefined;
+      }
+      // Any fasly value but `undefined` will be parsed to `false`
+      return value === true || value === 'true';
+    }
+    if (metaType === Number) {
+      return +value;
+    }
+    return value;
   }
 }
 
