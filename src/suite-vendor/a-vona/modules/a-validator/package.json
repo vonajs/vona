@@ -7,8 +7,7 @@
       "a-vona": "5.0.0"
     },
     "globalDependencies": {
-      "class-transformer": true,
-      "class-validator": true
+      "zod": true
     }
   },
   "type": "module",
@@ -35,8 +34,6 @@
   ],
   "scripts": {},
   "dependencies": {
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.1",
-    "iterare": "^1.2.1"
+    "zod": "^3.23.8"
   }
 }
