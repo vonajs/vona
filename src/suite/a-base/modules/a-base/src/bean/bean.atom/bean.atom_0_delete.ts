@@ -17,12 +17,13 @@ export class BeanAtom0Delete extends BeanAtom0Default {
   // delete
   async delete({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user }: any) {
     // atomClass
-    const { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
+    let { key, atomClass, atomClassBase, options } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
     if (!atomClassBase) this.ctx.throw(403);
+    atomClassBase = atomClassBase!;
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     // atom

@@ -183,8 +183,9 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
     // delete/clone/move/addChild/roleUsers/includes/resourceAuthorizations/atomAuthorizations/fieldsAuthorizations
     if (![4, 5, 101, 102, 103, 104, 105, 106, 107].includes(action)) return res;
     // role
-    const role = await this.model.get({ id: atom.itemId });
+    let role = await this.model.get({ id: atom.itemId });
     if (!role) this.ctx.throw(403);
+    role = role!;
     // delete
     if (action === 4) {
       if (role.system === 1) return null;

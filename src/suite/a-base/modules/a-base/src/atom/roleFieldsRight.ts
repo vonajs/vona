@@ -59,7 +59,7 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
     if (!role) this.ctx.throw(403);
     data = Object.assign(data, {
       roleAtomId: atomIdMain,
-      roleId: role.id,
+      roleId: role!.id,
       atomClassId: data.atomClassIdTarget,
       // fieldsRight: data.fieldsRight,
     });

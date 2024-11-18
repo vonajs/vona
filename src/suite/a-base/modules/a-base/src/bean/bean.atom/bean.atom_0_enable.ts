@@ -11,7 +11,7 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
     });
     if (!atomClassBase) this.ctx.throw(403);
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase!.beanFullName as any);
     await beanInstance.enable({ atomClass, key, options, user });
   }
 
@@ -24,7 +24,7 @@ export class BeanAtom0Enable extends BeanAtom0Delete {
     });
     if (!atomClassBase) this.ctx.throw(403);
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase!.beanFullName as any);
     await beanInstance.disable({ atomClass, key, options, user });
   }
 }
