@@ -270,7 +270,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });
     // role
     const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
+    roleId = _role!.id;
     // delete
     await this.modelResourceRole.delete({
       atomId,
@@ -291,7 +291,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   async deleteByRole({ roleAtomId, roleId, user }: any) {
     // role
     const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
+    roleId = _role!.id;
     // delete
     await this.modelResourceRole.delete({
       roleId,

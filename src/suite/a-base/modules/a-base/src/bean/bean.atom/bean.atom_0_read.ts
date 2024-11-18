@@ -45,7 +45,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
     const resource = options.resource || 0;
     const resourceLocale = options.resourceLocale === false ? false : options.resourceLocale || this.ctx.locale;
     // atomClass
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass!);
     // tableName
     const tableName = await this.getTableName({
       atomClass,
@@ -65,7 +65,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
       options,
       user,
     });
-    const schema = atomSchema.schema;
+    const schema = atomSchema!.schema;
     // cms
     const cms = atomClassBase && atomClassBase.cms;
     // forAtomUser
@@ -84,11 +84,11 @@ export class BeanAtom0Read extends BeanAtom0Import {
       mode,
       cms,
       forAtomUser,
-    });
+    }) as any;
 
     // readQuery
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
-    const item = await beanInstance.readQuery({ atomClass, options: options2, key, user });
+    const item = await beanInstance.readQuery({ atomClass: atomClass!, options: options2, key, user });
     // ok
     return item;
   }

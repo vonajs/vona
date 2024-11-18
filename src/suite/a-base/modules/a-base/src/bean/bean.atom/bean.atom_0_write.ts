@@ -31,6 +31,7 @@ export class BeanAtom0Write extends BeanAtom0Select {
       throwWhenEmpty: false,
     });
     if (!atomClassBase) this.ctx.throw(403);
+    atomClassBase = atomClassBase!;
     // support formal flow
     // if (_atomBasic.atomStage !== _atomBasic.atomSimple) this.ctx.throw(403);
     // isCreateDelay

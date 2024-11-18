@@ -11,7 +11,7 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
 
   async _moveLineNo({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter, user: _user, direction }: any) {
     // atomClass
-    const {
+    let {
       /* key,*/
       atom: atomFrom,
       atomClass,
@@ -23,6 +23,7 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
       options: optionsOuter,
     });
     if (!atomClassBase) this.ctx.throw(403);
+    atomClassBase = atomClassBase!;
     // model
     const modelItem = this.getScope(atomClass.module).model[atomClassBase.model];
     // table

@@ -195,7 +195,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     if (!user || user.id === 0) return role;
     // check
     const res = await this.ctx.bean.atom.checkRightRead({
-      atom: { id: role.atomId },
+      atom: { id: role!.atomId },
       user,
     });
     if (!res) this.ctx.throw(403);

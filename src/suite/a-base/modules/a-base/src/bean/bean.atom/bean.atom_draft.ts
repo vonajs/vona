@@ -4,12 +4,13 @@ import { BeanAtomClone } from './bean.atom_clone.js';
 export class BeanAtomDraft extends BeanAtomClone {
   async closeDraft({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
     // atomClass
-    const { key, atomClass, atomClassBase } = await this._prepareKeyAndAtomAndAtomClass({
+    let { key, atomClass, atomClassBase } = await this._prepareKeyAndAtomAndAtomClass({
       key: keyOuter,
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
     if (!atomClassBase) this.ctx.throw(403);
+    atomClassBase = atomClassBase!;
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     // draft
@@ -60,7 +61,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     });
     if (!atomClassBase) this.ctx.throw(403);
     // check itemOnly
-    if (atomClassBase.itemOnly) {
+    if (atomClassBase!.itemOnly) {
       atom.atomId = atom.id;
       atom.itemId = atom.id;
       atom.module = atomClass.module;

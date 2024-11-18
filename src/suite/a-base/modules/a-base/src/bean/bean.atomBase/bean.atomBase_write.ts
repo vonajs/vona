@@ -84,7 +84,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
           options,
           user,
         });
-        options.schema = atomSchema.schema;
+        options.schema = atomSchema!.schema;
       }
       // itemHold
       const itemHold: any = {};

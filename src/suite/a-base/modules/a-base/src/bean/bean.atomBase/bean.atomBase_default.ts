@@ -46,9 +46,9 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
       options,
       user,
     });
-    options.schema = atomSchema.schema;
+    options.schema = atomSchema!.schema;
     // validate
-    return await this.self._readValidate_schema({ schema: atomSchema.schema, item: data });
+    return await this.self._readValidate_schema({ schema: atomSchema!.schema, item: data });
   }
 
   _default_general_data({ atomClassBase, atomClass, user }: any) {

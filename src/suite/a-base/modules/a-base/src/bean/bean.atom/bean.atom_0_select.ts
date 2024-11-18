@@ -111,7 +111,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
         options,
         user,
       });
-      schema = atomSchema.schema;
+      schema = atomSchema!.schema;
     }
     // cms
     const cms = atomClassBase && atomClassBase.cms;

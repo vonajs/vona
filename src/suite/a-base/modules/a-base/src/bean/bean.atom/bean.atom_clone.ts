@@ -28,7 +28,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     const atom = await this.self.read({ key: keyDraft, atomClass, options, user });
     // draft/formal
     const res = { key: keyDraft, atom };
-    if (!atomClassBase.itemOnly && atom.atomStage === 0) return { draft: res };
+    if (!atomClassBase!.itemOnly && atom.atomStage === 0) return { draft: res };
     return { formal: res };
   }
 
