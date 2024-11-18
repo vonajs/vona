@@ -103,6 +103,24 @@ z.ZodObject.prototype._parse = function (input) {
   return _parseObject.call(this, input);
 };
 
+////////////////////////////////////////
+////////////////////////////////////////
+//////////                    //////////
+//////////      ZodArray      //////////
+//////////                    //////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+const _parseArray = z.ZodArray.prototype._parse;
+z.ZodArray.prototype._parse = function (input) {
+  _coerceWithNil(this, input, () => {
+    if (typeof input.data === 'string') {
+      input.data = JSON.parse(input.data);
+    }
+  });
+  return _parseArray.call(this, input);
+};
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 //////////                     ////////
