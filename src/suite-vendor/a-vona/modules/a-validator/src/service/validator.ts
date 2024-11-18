@@ -22,7 +22,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     }
     // schema
     const objectSchema = this.getSchema(classType);
-    if (!objectSchema) return undefined;
+    if (!objectSchema) return value;
     const result = await objectSchema?.safeParseAsync(value);
     if (result.success) return result.data;
     // error
@@ -34,7 +34,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
   }
 
   getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {
-    const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType);
+    const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
     if (!rules) return undefined;
     let schema = z.object(rules as z.ZodRawShape);
     if (options?.passthrough) schema = schema.passthrough() as any;
