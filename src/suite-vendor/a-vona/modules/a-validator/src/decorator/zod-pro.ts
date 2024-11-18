@@ -57,12 +57,50 @@ z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
   return _parseBigInt.call(this, input);
 };
 
-/** coerce */
-function _coerce(instance, input, fn) {
-  if (instance._def.coerce !== false) {
-    if (instance._def.coerce === true) instance._def.coerce = undefined as any;
-    if (!isNil(input.data)) {
-      fn();
+//////////////////////////////////////////
+//////////////////////////////////////////
+//////////                     ///////////
+//////////      ZodBoolean      //////////
+//////////                     ///////////
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+const _parseBoolean = z.ZodBoolean.prototype._parse;
+z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
+  _coerce(this, input, () => {
+    if (input.data === 'undefined' || input.data === '') {
+      input.data = undefined;
+    } else if (input.data === 'null') {
+      input.data = null;
+    } else if (input.data === 'false' || input.data === '0') {
+      input.data = false;
+    } else {
+      input.data = Boolean(input.data);
     }
+  });
+  return _parseBoolean.call(this, input);
+};
+
+///////////////////////////////////////
+///////////////////////////////////////
+//////////                     ////////
+//////////      ZodDate        ////////
+//////////                     ////////
+///////////////////////////////////////
+///////////////////////////////////////
+
+/** coerce */
+function _coerce(_instance, input, fn) {
+  if (!isNil(input.data)) {
+    fn();
   }
 }
+
+// function _coerce(instance, input, fn) {
+//   if (instance._def.coerce !== false) {
+//     if (instance._def.coerce === true) instance._def.coerce = undefined as any;
+//     if (!isNil(input.data)) {
+//       fn();
+//     }
+//   }
+// }
