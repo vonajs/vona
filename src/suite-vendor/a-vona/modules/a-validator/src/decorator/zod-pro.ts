@@ -17,6 +17,14 @@ z.ZodString.prototype._parse = function (this: z.ZodString, input) {
   return _parseString.call(this, input);
 };
 
+/////////////////////////////////////////
+/////////////////////////////////////////
+//////////                     //////////
+//////////      ZodNumber      //////////
+//////////                     //////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+
 const _parseNumber = z.ZodNumber.prototype._parse;
 z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
   _coerce(this, input, () => {
@@ -27,6 +35,26 @@ z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
     }
   });
   return _parseNumber.call(this, input);
+};
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+//////////                     //////////
+//////////      ZodBigInt      //////////
+//////////                     //////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+const _parseBigInt = z.ZodBigInt.prototype._parse;
+z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
+  _coerce(this, input, () => {
+    if (input.data === '') {
+      input.data = undefined;
+    } else {
+      input.data = BigInt(input.data);
+    }
+  });
+  return _parseBigInt.call(this, input);
 };
 
 /** coerce */
