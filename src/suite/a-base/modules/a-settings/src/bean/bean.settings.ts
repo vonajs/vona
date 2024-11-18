@@ -89,8 +89,9 @@ export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
 
   async _saveSettings({ scene, module, data }: any) {
     module = module || this.moduleScope;
-    const validator = this._getValidator({ scene, module });
+    let validator = this._getValidator({ scene, module });
     if (!validator) this.ctx.throw(404); // not found
+    validator = validator!;
     await this.ctx.bean.validation.validate({
       module: validator.module,
       validator: validator.validator,

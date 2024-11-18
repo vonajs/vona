@@ -1,4 +1,4 @@
-import { VonaApplication, VonaContext } from '../../types/index.js';
+import { VonaApplication } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
@@ -15,12 +15,11 @@ export interface BeanContainer extends IBeanRecordGlobal {}
 
 export class BeanContainer {
   private app: VonaApplication;
-  private ctx: VonaContext;
 
   private [BeanContainerInstances]: Record<string, unknown> = {};
 
-  static create(app: VonaApplication, ctx: VonaContext | null) {
-    const beanContainer = new BeanContainer(app, ctx);
+  static create(app: VonaApplication) {
+    const beanContainer = new BeanContainer(app);
     return new Proxy(beanContainer, {
       get(obj, prop) {
         if (typeof prop === 'symbol') return obj[prop];
@@ -30,9 +29,8 @@ export class BeanContainer {
     });
   }
 
-  protected constructor(app: VonaApplication, ctx: VonaContext | null) {
+  protected constructor(app: VonaApplication) {
     this.app = app;
-    this.ctx = ctx as any;
   }
 
   /** get specific module's scope */
@@ -112,12 +110,10 @@ export class BeanContainer {
     } else {
       beanInstance = new beanClass(...args);
     }
-    // app/ctx
+    // app
     if (beanInstance instanceof BeanSimple) {
       // app
       (<any>beanInstance).app = this.app;
-      // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
-      (<any>beanInstance).ctx = this.ctx;
     }
     // beanFullName
     if (typeof beanFullName === 'string') {

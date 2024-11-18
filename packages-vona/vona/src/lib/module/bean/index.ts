@@ -2,7 +2,7 @@ import { VonaApplication } from '../../../types/index.js';
 import { BeanContainer } from '../../bean/beanContainer.js';
 
 export function loadBeanContainer(app: VonaApplication) {
-  app.bean = BeanContainer.create(app, null);
+  app.bean = BeanContainer.create(app);
 }
 
 export function loadBeans(app: VonaApplication) {
@@ -16,7 +16,7 @@ export function loadBeans(app: VonaApplication) {
 
       // not check context.module
       // bean
-      context.bean = BeanContainer.create(app, context);
+      context.bean = BeanContainer.create(app);
 
       return context;
     };

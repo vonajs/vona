@@ -75,8 +75,9 @@ export class LocalFlowTaskForward extends LocalFlowTaskRecall {
     // flowTask
     const flowTask = this.contextTask._flowTask;
     // 1. delete task
-    const taskTo = await this.modelFlowTask.get({ id: flowTask.flowTaskIdForwardTo });
+    let taskTo = await this.modelFlowTask.get({ id: flowTask.flowTaskIdForwardTo });
     if (!taskTo) this.ctx.throw(403);
+    taskTo = taskTo!;
     // delete flowTask and flowTaskHistory
     await this.modelFlowTask.delete({ id: taskTo.id });
     await this.modelFlowTaskHistory.delete({ flowTaskId: taskTo.id });

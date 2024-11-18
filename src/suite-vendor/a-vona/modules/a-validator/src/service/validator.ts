@@ -31,6 +31,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
     this.ctx.throw(options?.errorHttpStatusCode ?? HttpStatus.UNPROCESSABLE_CONTENT, issues);
+    return undefined as any;
   }
 
   getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {

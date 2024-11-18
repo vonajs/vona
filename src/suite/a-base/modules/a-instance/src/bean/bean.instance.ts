@@ -153,8 +153,9 @@ export class BeanInstance extends BeanBase<ScopeModule> {
 
   async _cacheInstanceConfig(subdomain: string, force: boolean) {
     if (__cacheIntancesConfig[subdomain] && !force) return;
-    const instance = await this.get(subdomain);
+    let instance = await this.get(subdomain);
     if (!instance) this.ctx.throw(403);
+    instance = instance!;
     // config
     const instanceConfig = JSON.parse(instance.config);
     // cache configs

@@ -259,8 +259,9 @@ export class ServiceComment extends BeanBase<ScopeModule> {
   async _publish({ atomId, commentId, replyId, replyUserId, user, mode }: any) {
     const userIdsTo: any = {};
     // 1. atom.userIdUpdated
-    const atom = await this.modelAtom.get({ id: atomId });
+    let atom = await this.modelAtom.get({ id: atomId });
     if (!atom) this.ctx.throw(403);
+    atom = atom!;
     const userIdUpdated = atom.userIdUpdated;
     if (userIdUpdated !== user.id) {
       const title = await this._publishTitle({ userId: userIdUpdated, replyId: 0, mode });

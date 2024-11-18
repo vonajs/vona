@@ -46,8 +46,9 @@ export class BeanShare extends BeanBase<ScopeModule> {
   async shareGo({ uuid, user }: any) {
     const userId = user.id;
     // get share
-    const item = await this.modelShare.get({ uuid });
+    let item = await this.modelShare.get({ uuid });
     if (!item) this.ctx.throw(404);
+    item = item!;
     // anonymous
     if (user.anonymous) {
       // redirect to login

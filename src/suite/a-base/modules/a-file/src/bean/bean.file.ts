@@ -299,8 +299,9 @@ export class BeanFile extends BeanBase<ScopeModule> {
     if (extPos > -1) downloadId = downloadId.substr(0, extPos);
 
     // get file
-    const file = await this._getFileByDownloadId({ downloadId, atomId });
+    let file = await this._getFileByDownloadId({ downloadId, atomId });
     if (!file) this.ctx.throw(404);
+    file = file!;
 
     // pre
     let fileName = file.fileName;

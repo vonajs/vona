@@ -48,6 +48,8 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @UseGuardGlobal('a-core:user', { public: true })
   @UsePipeGlobal('a-validator:validation', { strict: true })
   async echo2(@Query() book: DtoBook) {
+    //const ctx = this.app.currentContext;
+    //console.log(ctx === this.ctx);
     return book;
   }
 }
