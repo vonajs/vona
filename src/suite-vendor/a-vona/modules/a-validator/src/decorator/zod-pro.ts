@@ -27,12 +27,8 @@ z.ZodString.prototype._parse = function (this: z.ZodString, input) {
 
 const _parseNumber = z.ZodNumber.prototype._parse;
 z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
-  _coerce(this, input, () => {
-    if (input.data === '') {
-      input.data = undefined;
-    } else {
-      input.data = Number(input.data);
-    }
+  _coerceWithNil(this, input, () => {
+    input.data = Number(input.data);
   });
   return _parseNumber.call(this, input);
 };
@@ -47,12 +43,8 @@ z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
 
 const _parseBigInt = z.ZodBigInt.prototype._parse;
 z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
-  _coerce(this, input, () => {
-    if (input.data === '') {
-      input.data = undefined;
-    } else {
-      input.data = BigInt(input.data);
-    }
+  _coerceWithNil(this, input, () => {
+    input.data = BigInt(input.data);
   });
   return _parseBigInt.call(this, input);
 };
@@ -67,12 +59,8 @@ z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
 
 const _parseBoolean = z.ZodBoolean.prototype._parse;
 z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
-  _coerce(this, input, () => {
-    if (input.data === 'undefined' || input.data === '') {
-      input.data = undefined;
-    } else if (input.data === 'null') {
-      input.data = null;
-    } else if (input.data === 'false' || input.data === '0') {
+  _coerceWithNil(this, input, () => {
+    if (input.data === 'false' || input.data === '0') {
       input.data = false;
     } else {
       input.data = Boolean(input.data);
@@ -89,10 +77,37 @@ z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-/** coerce */
+const _parseDate = z.ZodDate.prototype._parse;
+z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
+  _coerceWithNil(this, input, () => {
+    input.data = new Date(input.data);
+  });
+  return _parseDate.call(this, input);
+};
+
+///////////////////////////////////////
+///////////////////////////////////////
+//////////                     ////////
+//////////      coerce        ////////
+//////////                     ////////
+///////////////////////////////////////
+///////////////////////////////////////
+
 function _coerce(_instance, input, fn) {
   if (!isNil(input.data)) {
     fn();
+  }
+}
+
+function _coerceWithNil(_instance, input, fn) {
+  if (!isNil(input.data)) {
+    if (input.data === 'undefined' || input.data === '') {
+      input.data = undefined;
+    } else if (input.data === 'null') {
+      input.data = null;
+    } else {
+      fn();
+    }
   }
 }
 
