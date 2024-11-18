@@ -85,6 +85,24 @@ z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
   return _parseDate.call(this, input);
 };
 
+/////////////////////////////////////////
+/////////////////////////////////////////
+//////////                     //////////
+//////////      ZodObject      //////////
+//////////                     //////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+const _parseObject = z.ZodObject.prototype._parse;
+z.ZodObject.prototype._parse = function (input) {
+  _coerceWithNil(this, input, () => {
+    if (typeof input.data === 'string') {
+      input.data = JSON.parse(input.data);
+    }
+  });
+  return _parseObject.call(this, input);
+};
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 //////////                     ////////
