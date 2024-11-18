@@ -9,15 +9,15 @@ declare module 'vona' {
 }
 /** pipes: end */
 /** services: begin */
-export * from '../service/validate.js';
-import { ServiceValidate } from '../service/validate.js';
+export * from '../service/validator.js';
+import { ServiceValidator } from '../service/validator.js';
 export interface IModuleService {
-  validate: ServiceValidate;
+  validator: ServiceValidator;
 }
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
-    'a-validator.service.validate': ServiceValidate;
+    'a-validator.service.validator': ServiceValidator;
   }
 }
 /** services: end */

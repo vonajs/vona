@@ -7,5 +7,4 @@ export interface ValidatorOptions<T = any> {
   disableErrorMessages: boolean;
   errorHttpStatusCode: HttpStatus;
   exceptionFactory?: (error: z.ZodError<T>) => any;
-  expectedType?: T;
 }
