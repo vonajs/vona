@@ -46,7 +46,8 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo2')
   @UseGuardGlobal('a-core:user', { public: true })
+  @UsePipeGlobal('a-validator:validation', { passthrough: true })
   echo2(@Query() book: DtoBook) {
-    return 'echo: ' + book.id + ':' + book.name;
+    return book;
   }
 }

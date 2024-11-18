@@ -21,7 +21,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
       );
     }
     // schema
-    const objectSchema = this.getSchema(classType);
+    const objectSchema = this.getSchema(classType, options);
     if (!objectSchema) return value;
     const result = await objectSchema?.safeParseAsync(value);
     if (result.success) return result.data;

@@ -4,9 +4,12 @@ import { z } from 'zod';
 
 @Dto()
 export class DtoBook {
-  @Rule(z.number())
+  @Rule(z.number().optional())
   id: number;
 
   @Rule(z.string())
   name: string;
+
+  //@Rule(z.boolean())
+  married: boolean;
 }
