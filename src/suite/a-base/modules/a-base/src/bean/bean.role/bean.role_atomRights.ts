@@ -20,12 +20,12 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       // update
       const item = await this.modelRoleRight.get({ id: roleRightId });
       if (!item) this.ctx.throw(403);
-      roleAtomId = item.roleAtomId;
-      roleId = item.roleId; // maybe empty when create
+      roleAtomId = item!.roleAtomId;
+      roleId = item!.roleId; // maybe empty when create
     }
     const _role = await this.self._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id; // force exists: support create
-    roleAtomId = _role.atomId; // force exists: support create
+    roleId = _role!.id; // force exists: support create
+    roleAtomId = _role!.atomId; // force exists: support create
     // scope: allowed [] / 0
     if (scope === undefined || scope === null) {
       scope = [];

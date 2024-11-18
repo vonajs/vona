@@ -128,7 +128,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       this.ctx.throw(401);
     }
     // disabled
-    if (userOp.disabled) this.scope.error.UserIsDisabled.throw();
+    if (userOp!.disabled) this.scope.error.UserIsDisabled.throw();
     // hold user
     stateUser.op = userOp;
     // agent
@@ -257,8 +257,9 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
 
   async switchAgent({ userIdAgent }: any) {
     const op = this.ctx.user.op;
-    const _user = await this.self.get({ id: userIdAgent });
+    let _user = await this.self.get({ id: userIdAgent });
     if (!_user) this.ctx.throw(403);
+    _user = _user!;
     this.ctx.user.op = { id: _user.id, iid: _user.iid, anonymous: _user.anonymous };
     try {
       await this.check();

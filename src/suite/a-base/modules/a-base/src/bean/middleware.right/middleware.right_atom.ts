@@ -70,7 +70,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
       if (!res) this.ctx.throw(403);
       if (!atomClassBase) this.ctx.throw(403);
       // itemId
-      if (atomClassBase.itemOnly) {
+      if (atomClassBase!.itemOnly) {
         atomKey.itemId = atomKey.atomId;
       } else {
         atomKey.itemId = res.itemId;

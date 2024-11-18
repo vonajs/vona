@@ -34,7 +34,7 @@ export class BeanAtomRightAuxRoleScopesMineOfUser extends BeanAtomRightAuxRoleSc
       // throw error
       this.ctx.throw(403);
     }
-    const enableRightMine = enableRight.mine;
+    const enableRightMine = enableRight!.mine;
     if (!enableRightMine) return false;
     return await this.ctx.bean.atomClass.checkRightAtomClassActionOfUser({
       atomClass: { id: atomClassId },

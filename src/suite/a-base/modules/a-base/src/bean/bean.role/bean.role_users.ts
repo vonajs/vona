@@ -58,10 +58,10 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
   async addUserRole({ roleAtomId, roleId, userAtomId, userId, user }: any) {
     // role
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
+    roleId = _role!.id;
     // user
     const _user = await this.ctx.bean.user._forceUserAndCheckRightRead({ userAtomId, userId, user });
-    userId = _user.id;
+    userId = _user!.id;
     // check if exists
     const item = await this.modelUserRole.get({
       userId,
@@ -85,10 +85,10 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
   async deleteUserRole({ roleAtomId, roleId, userAtomId, userId, user }: any) {
     // role
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
+    roleId = _role!.id;
     // user
     const _user = await this.ctx.bean.user._forceUserAndCheckRightRead({ userAtomId, userId, user });
-    userId = _user.id;
+    userId = _user!.id;
     // clear summer
     await this.ctx.bean.atomRightAux.clearSummersOfUser();
     // await this.ctx.bean.atomRightAux.clearSummersOfRole();

@@ -238,7 +238,7 @@ export class BeanUser1 extends BeanUser0 {
     if (!user || user.id === 0) return _user;
     // check
     const res = await this.ctx.bean.atom.checkRightRead({
-      atom: { id: _user.atomId },
+      atom: { id: _user!.atomId },
       user,
     });
     if (!res) this.ctx.throw(403);

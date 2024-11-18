@@ -246,8 +246,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });
     // role
     const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
-    roleAtomId = _role.atomId;
+    roleId = _role!.id;
+    roleAtomId = _role!.atomId;
     // check if exists
     const item = await this.modelResourceRole.get({
       atomId,

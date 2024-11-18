@@ -89,8 +89,9 @@ export class ServiceComment extends BeanBase<ScopeModule> {
 
   async save_edit({ key, data: { commentId, content }, user }) {
     // comment
-    const item = await this.modelCommentView.get({ id: commentId });
+    let item = await this.modelCommentView.get({ id: commentId });
     if (!item) this.ctx.throw(403);
+    item = item!;
     if (key.atomId !== item.atomId || item.userId !== user.id) this.ctx.throw(403);
     // html
     const html = await this._renderContent({
@@ -185,8 +186,9 @@ export class ServiceComment extends BeanBase<ScopeModule> {
 
   async delete({ key, data: { commentId }, user }) {
     // comment
-    const item = await this.modelComment.get({ id: commentId });
+    let item = await this.modelComment.get({ id: commentId });
     if (!item) this.ctx.throw(403);
+    item = item!;
     // check right
     let canDeleted: any = key.atomId === item.atomId && item.userId === user.id;
     if (!canDeleted) {
@@ -237,7 +239,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     // get
     const item = await this.modelComment.get({ id: commentId });
     if (!item) this.ctx.throw(403);
-    let heartCount = item.heartCount;
+    let heartCount = item!.heartCount;
     if (diff !== 0) {
       heartCount += diff;
       await this.modelComment.update({

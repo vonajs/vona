@@ -35,14 +35,14 @@ export class BeanRoleIncludes extends BeanRoleBuild {
   async addRoleInc({ roleAtomId, roleId, roleIdInc, user }: any) {
     // role
     const _role = await this.self._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
+    roleId = _role!.id;
     // role inc
     const _roleInc = await this.self._forceRoleAndCheckRightRead({
       roleAtomId: null,
       roleId: roleIdInc,
       user,
     });
-    roleIdInc = _roleInc.id;
+    roleIdInc = _roleInc!.id;
     // check if exists
     const item = await this.modelRoleInc.get({
       roleId,
@@ -66,14 +66,14 @@ export class BeanRoleIncludes extends BeanRoleBuild {
   async removeRoleInc({ roleAtomId, roleId, roleIdInc, user }: any) {
     // role
     const _role = await this.self._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
-    roleId = _role.id;
+    roleId = _role!.id;
     // role inc
     const _roleInc = await this.self._forceRoleAndCheckRightRead({
       roleAtomId: null,
       roleId: roleIdInc,
       user,
     });
-    roleIdInc = _roleInc.id;
+    roleIdInc = _roleInc!.id;
 
     // delete
     await this.modelRoleInc.delete({ roleId, roleIdInc });

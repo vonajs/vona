@@ -34,7 +34,7 @@ export class BeanAtomRightAuxRoleScopesOfUser extends BeanAtomRightAux0 {
       // throw error
       this.ctx.throw(403);
     }
-    const enableRightRole = enableRight.role;
+    const enableRightRole = enableRight!.role;
     if (!enableRightRole) return false;
     const enableRightRoleScopes = typeof enableRightRole === 'object' && enableRightRole.scopes;
     if (!enableRightRoleScopes) {
