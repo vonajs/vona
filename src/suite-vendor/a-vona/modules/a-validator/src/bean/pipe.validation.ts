@@ -16,12 +16,7 @@ import { z } from 'zod';
 
 const __primitiveTypes = [String, Boolean, Number, Array, Object, Buffer, Date];
 
-export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal, ValidatorOptions {
-  disableErrorMessages: boolean;
-  errorHttpStatusCode: HttpStatus;
-  exceptionFactory?: (errors: ValidationError[]) => any;
-  expectedType?: Type<any>;
-}
+export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal, ValidatorOptions {}
 
 @Pipe<IPipeOptionsValidation>({
   global: true,
