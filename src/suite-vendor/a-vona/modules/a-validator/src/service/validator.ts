@@ -29,14 +29,13 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     if (options?.disableErrorMessages) {
       this.ctx.throw(HttpStatus.BAD_REQUEST);
     }
-    const error = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error;
-    this.ctx.throw(options?.errorHttpStatusCode ?? HttpStatus.UNPROCESSABLE_CONTENT, error);
+    const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
+    this.ctx.throw(options?.errorHttpStatusCode ?? HttpStatus.UNPROCESSABLE_CONTENT, issues);
   }
 
   getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {
     const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
-    if (!rules) return undefined;
-    let schema = z.object(rules as z.ZodRawShape);
+    let schema = z.object((rules as z.ZodRawShape) || {});
     if (options?.passthrough) schema = schema.passthrough() as any;
     if (options?.strict) schema = schema.strict() as any;
     return schema as any;
