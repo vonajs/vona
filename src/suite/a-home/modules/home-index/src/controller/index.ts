@@ -46,7 +46,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo2')
   @UseGuardGlobal('a-core:user', { public: true })
-  @UsePipeGlobal('a-validator:validation', { passthrough: true })
+  @UsePipeGlobal('a-validator:validation', { strict: true })
   echo2(@Query() book: DtoBook) {
     return book;
   }

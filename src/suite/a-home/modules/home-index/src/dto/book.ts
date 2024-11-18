@@ -10,6 +10,6 @@ export class DtoBook {
   @Rule(z.string())
   name: string;
 
-  //@Rule(z.boolean())
+  @Rule(z.boolean().optional())
   married: boolean;
 }
