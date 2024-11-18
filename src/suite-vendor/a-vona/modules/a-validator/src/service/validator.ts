@@ -6,13 +6,13 @@ import { SymbolDecoratorRule } from '../decorator/rule.js';
 
 @Service()
 export class ServiceValidator extends BeanBase<ScopeModule> {
-  async validate<T>(
+  async validate<T, V = T>(
     classType: Constructable<T>,
-    value: any,
+    value: V,
     options?: ValidatorOptions,
-  ): Promise<T | undefined | null> {
+  ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
     // check value: nil, maybe need other argument derecotor to validate it
-    if (isNil(value)) return value;
+    if (isNil(value)) return value as any;
     // check value: primitive
     if (this._isPrimitiveValue(value)) {
       this.ctx.throw(
@@ -22,9 +22,9 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     }
     // schema
     const objectSchema = this.getSchema(classType, options);
-    if (!objectSchema) return value;
+    if (!objectSchema) return value as any;
     const result = await objectSchema?.safeParseAsync(value);
-    if (result.success) return result.data;
+    if (result.success) return result.data as any;
     // error
     if (options?.disableErrorMessages) {
       this.ctx.throw(HttpStatus.BAD_REQUEST);
