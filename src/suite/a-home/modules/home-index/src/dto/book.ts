@@ -1,11 +1,12 @@
 import { Dto } from 'vona';
-import { Rule, RuleType } from 'vona-module-a-validator';
+import { Rule } from 'vona-module-a-validator';
+import { z } from 'zod';
 
 @Dto()
 export class DtoBook {
-  @Rule(RuleType.number())
+  @Rule(z.number())
   id: number;
 
-  @Rule(RuleType.string())
+  @Rule(z.string())
   name: string;
 }

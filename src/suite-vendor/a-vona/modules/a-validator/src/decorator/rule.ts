@@ -9,5 +9,3 @@ export function Rule(rule: z.ZodSchema): PropertyDecorator {
     rules[prop] = rule;
   };
 }
-
-export { z as RuleType };
