@@ -490,7 +490,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     let res;
     try {
       res = await this.ctx.curl(avatar, { method: 'GET', timeout });
-    } catch (err) {
+    } catch (_err) {
       res = await this.ctx.curl(this.config.auth.avatar.default, { method: 'GET', timeout });
     }
     return res;
@@ -534,7 +534,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
         });
         // hold
         profile._avatar = res2.downloadUrl;
-      } catch (err) {
+      } catch (_err) {
         console.log('-------- avatar:', profile.avatar);
         // console.log(res);
         // console.log(err);
