@@ -132,17 +132,16 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return true;
   }
 
-  async checkAppReadyInstance(options?: { startup: boolean }) {
-    if (!options) options = { startup: true };
+  async checkAppReadyInstance(startup: boolean) {
     // chech appReady first
-    const appReady = await this.checkAppReady({ wait: options.startup !== false });
+    const appReady = await this.checkAppReady({ wait: startup !== false });
     if (!appReady) return false;
     // check appReady instance
     const subdomain = this.ctx.subdomain;
     if (subdomain === undefined) throw new Error(`subdomain not valid: ${subdomain}`);
     if (this.ctx.app.meta.appReadyInstances[subdomain]) return true;
     // instance startup
-    if (options.startup === false) return false;
+    if (startup === false) return false;
     await this.instanceStartup(subdomain);
     return true;
   }
@@ -226,7 +225,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     }
 
     // check instance startup ready
-    await this.checkAppReadyInstance();
+    await this.checkAppReadyInstance(true);
 
     // ok
     this.ctx.instance = instance;

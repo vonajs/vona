@@ -1,3 +1,4 @@
+import { VonaContext } from '../../types/context/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
 export class AppMockUtil extends BeanSimple {
@@ -14,13 +15,16 @@ export class AppMockUtil extends BeanSimple {
     return url ? `${prefix}/${url}` : `${prefix}/`;
   }
 
-  async mockCtx(options?: { locale?: string; subdomain?: string | null; module?: string }) {
+  // todo: remove module
+  async mockRunInAnonymousContextScope<T>(
+    scope: (ctx: VonaContext) => Promise<T>,
+    options?: { locale?: string; subdomain?: string; module?: string },
+  ): Promise<T> {
     options = options || {};
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
     const module = options.module;
-    const ctx = await this.app.meta.util.createAnonymousContext({ locale, subdomain, module } as any);
-    return ctx;
+    return await this.app.meta.util.runInAnonymousContextScope(scope, { locale, subdomain, module });
   }
 }
 

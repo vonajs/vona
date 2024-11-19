@@ -196,7 +196,12 @@ export class AppUtil extends BeanSimple {
 
   async runInAnonymousContextScope<T>(
     scope: (ctx: VonaContext) => Promise<T>,
-    { locale, subdomain, module, instance },
+    {
+      locale,
+      subdomain,
+      module,
+      instance,
+    }: { locale?: string; subdomain?: string; module?: string; instance?: boolean },
   ): Promise<T> {
     // url
     // todo: remove /api/a/base
@@ -224,7 +229,7 @@ export class AppUtil extends BeanSimple {
         ctx.instance = await Cast(this.app.bean).instance.get(subdomain);
         // start instance
         if (instance) {
-          await Cast(this.app.bean).instance.checkAppReadyInstance();
+          await Cast(this.app.bean).instance.checkAppReadyInstance(true);
         }
       }
       // scope

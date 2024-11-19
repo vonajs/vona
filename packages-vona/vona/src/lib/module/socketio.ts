@@ -1,5 +1,7 @@
 import { URL } from 'url';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { Cast } from '../../types/utils/cast.js';
+import { VonaContext } from '../../types/index.js';
 
 export class SocketioReady extends BeanSimple {
   initialize() {
@@ -26,19 +28,20 @@ export class SocketioReady extends BeanSimple {
         method: 'SOCKETIO',
         url: '/api/a/base/',
       });
-      const ctx = app.createAnonymousContext(reqNew) as any;
-      ctx.bean.instance
-        .checkAppReadyInstance({ startup: true })
-        .then(res => {
-          if (!res) return fn(null, false);
-          if (app.meta.util.isSafeDomain(ctx, origin)) {
-            return fn(null, true);
-          }
-          return fn(null, false);
-        })
-        .catch(() => {
-          return fn(null, false);
-        });
+      app.runInAnonymousContextScope(async ctx => {
+        Cast(app.bean)
+          .instance.checkAppReadyInstance(true)
+          .then(res => {
+            if (!res) return fn(null, false);
+            if (app.meta.util.isSafeDomain(ctx as unknown as VonaContext, origin)) {
+              return fn(null, true);
+            }
+            return fn(null, false);
+          })
+          .catch(() => {
+            return fn(null, false);
+          });
+      }, reqNew);
     };
   }
 }
