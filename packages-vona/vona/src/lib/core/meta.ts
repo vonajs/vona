@@ -21,7 +21,7 @@ import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { Onion } from '../module/onion/onion.js';
-import { ErrorClass } from '../bean/index.js';
+import { BeanScopeContainer, ErrorClass } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -35,6 +35,7 @@ export class AppMeta extends BeanSimple {
   error: ErrorClass;
   util: AppUtil;
   mockUtil: AppMockUtil;
+  scopeContainer: BeanScopeContainer;
   reload: AppReload;
   messenger: AppMessenger;
   appMonkey?: IMonkeyApp & IMonkeySystem;
@@ -95,6 +96,9 @@ export class AppMeta extends BeanSimple {
 
     // mockUtil
     this.mockUtil = this.bean._newBean(AppMockUtil);
+
+    // scopeContainer
+    this.scopeContainer = this.bean._newBean(BeanScopeContainer);
 
     // reload
     this.reload = this.bean._newBean(AppReload);
