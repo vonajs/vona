@@ -4,27 +4,27 @@ import { BeanAtomRightAuxRoleScopesOfUser } from './bean.atomRightAux_roleScopes
 export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopesOfUser {
   async getRoleScopesOfRole({ atomClass, action, roleId }: any) {
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // action
-    action = this.ctx.bean.atomAction.parseActionCode({
+    action = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
     // cache
-    return await this.ctx.bean.summer.get(
+    return await this.app.bean.summer.get(
       { module: __ThisModule__, name: 'roleScopesOfRole' },
       { atomClassId: atomClass.id, action, roleId },
     );
   }
 
   async clearSummer_roleScopesOfRole() {
-    await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'roleScopesOfRole' });
+    await this.app.bean.summer.clear({ module: __ThisModule__, name: 'roleScopesOfRole' });
   }
 
   async __getRoleScopesOfRoleRaw({ atomClassId, action, roleId }: any) {
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({ id: atomClassId });
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClass = await this.app.bean.atomClass.get({ id: atomClassId });
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // not check atomClassBase.itemOnly
     // just check atomClassBase.enableRight.role.roleScopes
     // enableRight
@@ -38,7 +38,7 @@ export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopes
     if (!enableRightRole) return false;
     const enableRightRoleScopes = typeof enableRightRole === 'object' && enableRightRole.scopes;
     if (!enableRightRoleScopes) {
-      return await this.ctx.bean.atomClass.checkRightAtomClassActionOfRole({
+      return await this.app.bean.atomClass.checkRightAtomClassActionOfRole({
         atomClass: { id: atomClassId },
         action,
         roleId,
@@ -62,7 +62,7 @@ export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopes
     // false
     if (roleIds.length === 0) return false;
     // true
-    const roleAuthenticated = await this.ctx.bean.role.getSystemRole({ roleName: 'authenticated' });
+    const roleAuthenticated = await this.app.bean.role.getSystemRole({ roleName: 'authenticated' });
     if (roleIds.includes(roleAuthenticated!.id)) return true;
     // array
     return roleIds;

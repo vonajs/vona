@@ -26,7 +26,7 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
       beanFullName = 'ioMessageBase';
     }
     // bean
-    const beanMessage = this.ctx.bean._getBean(beanFullName);
+    const beanMessage = this.app.bean._getBean(beanFullName);
     if (!beanMessage) {
       if (throwError) {
         throw new Error(`message bean not found: ${beanFullName}`);
@@ -46,7 +46,7 @@ export class LocalIoInner0 extends BeanBase<ScopeModule> {
     }
     // bean
     const beanFullName = channelBase.info.beanFullName;
-    const beanChannel = this.ctx.bean._getBean(beanFullName) as BeanIoChannelBase;
+    const beanChannel = this.app.bean._getBean(beanFullName) as BeanIoChannelBase;
     if (!beanChannel) {
       this.ctx.logger.info(`channel bean not found: ${beanFullName}`);
       return null;

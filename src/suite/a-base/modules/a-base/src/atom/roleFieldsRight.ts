@@ -20,7 +20,7 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
     // adjust
-    await this.ctx.bean.fields._fieldsRightLocale({ items: [item] });
+    await this.app.bean.fields._fieldsRightLocale({ items: [item] });
     // meta
     this._getMeta(item, options);
     // ok
@@ -41,7 +41,7 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
     // super
     await super.select({ atomClass, options, items, user });
     // adjust
-    await this.ctx.bean.fields._fieldsRightLocale({ items });
+    await this.app.bean.fields._fieldsRightLocale({ items });
     // meta
     for (const item of items) {
       this._getMeta(item, options);
@@ -55,7 +55,7 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
     const atomIdMain = options.atomIdMain;
     // add roleFieldsRight
     const roleAtomId = atomIdMain;
-    const role = await this.ctx.bean.role._forceRole({ roleAtomId });
+    const role = await this.app.bean.role._forceRole({ roleAtomId });
     if (!role) this.app.throw(403);
     data = Object.assign(data, {
       roleAtomId: atomIdMain,
@@ -81,8 +81,8 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
       await this.model.write(data);
       data.atomClassId = atomClass.id;
       // clear summer
-      await this.ctx.bean.fields.clearSummer_fieldsRightOfAtomClass();
-      await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
+      await this.app.bean.fields.clearSummer_fieldsRightOfAtomClass();
+      await this.app.bean.fields.clearSummer_fieldsRightOfUser();
     }
     // data
     return data;
@@ -96,8 +96,8 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
       id: key.itemId,
     });
     // clear summer
-    await this.ctx.bean.fields.clearSummer_fieldsRightOfAtomClass();
-    await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
+    await this.app.bean.fields.clearSummer_fieldsRightOfAtomClass();
+    await this.app.bean.fields.clearSummer_fieldsRightOfUser();
   }
 
   _getMeta(item, options) {

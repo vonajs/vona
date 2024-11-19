@@ -27,7 +27,7 @@ export class IoChannelMail extends BeanIoChannelBase {
       scene = content.scene;
     } else {
       // 2. from config cache
-      scene = this.ctx.bean.mailSceneCache.getMailSceneConfigCache(content.scene || 'system');
+      scene = this.app.bean.mailSceneCache.getMailSceneConfigCache(content.scene || 'system');
     }
     // 3. test
     if (!this._sceneValid(scene) && (this.ctx.app.meta.isTest || this.ctx.app.meta.isLocal)) {

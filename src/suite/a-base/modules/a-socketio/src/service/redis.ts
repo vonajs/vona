@@ -106,7 +106,7 @@ export class ServiceRedis extends BeanBase {
       // check if workerId valid
       let alive = workersStatus[workerId];
       if (alive === undefined) {
-        alive = !!(await this.ctx.bean.worker.getAlive({ id: workerId }));
+        alive = !!(await this.app.bean.worker.getAlive({ id: workerId }));
         workersStatus[workerId] = alive;
       }
       if (!alive) {

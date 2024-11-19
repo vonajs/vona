@@ -4,6 +4,6 @@ import { Bean, BeanBase } from 'vona';
 export class BroadcastSocketEmit extends BeanBase {
   async execute(context) {
     const data = context.data;
-    this.ctx.bean.io.broadcastSocketEmit(data);
+    this.app.bean.io.broadcastSocketEmit(data);
   }
 }

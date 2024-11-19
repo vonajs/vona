@@ -3,7 +3,7 @@ import { BeanBase, Service } from 'vona';
 @Service()
 export class ServiceAuthOpen extends BeanBase {
   async hideClientSecret({ key, user }: any) {
-    return await this.ctx.bean.authOpen.hideClientSecret({
+    return await this.app.bean.authOpen.hideClientSecret({
       atomId: key.atomId,
       itemId: key.itemId,
       user,
@@ -11,7 +11,7 @@ export class ServiceAuthOpen extends BeanBase {
   }
 
   async resetClientSecret({ key, user }: any) {
-    return await this.ctx.bean.authOpen.resetClientSecret({
+    return await this.app.bean.authOpen.resetClientSecret({
       atomId: key.atomId,
       itemId: key.itemId,
       user,

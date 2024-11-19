@@ -33,7 +33,7 @@ export class ServiceMessage extends BeanBase<ScopeModule> {
   //    where
   async offset({ messageClass, options, user }: any) {
     // messageClass
-    messageClass = await this.ctx.bean.io.messageClass.get(messageClass);
+    messageClass = await this.app.bean.io.messageClass.get(messageClass);
     // where
     const where = (options && options.where) || {};
     where.iid = this.ctx.instance.id;
@@ -78,9 +78,9 @@ export class ServiceMessage extends BeanBase<ScopeModule> {
     if (all && !messageClass) return;
     // messageClass
     if (messageClass) {
-      messageClass = await this.ctx.bean.io.messageClass.get(messageClass);
-      const messageClassBase = this.ctx.bean.io.messageClass.messageClass(messageClass);
-      const beanMessage = this.ctx.bean.io._getBeanMessage(messageClassBase);
+      messageClass = await this.app.bean.io.messageClass.get(messageClass);
+      const messageClassBase = this.app.bean.io.messageClass.messageClass(messageClass);
+      const beanMessage = this.app.bean.io._getBeanMessage(messageClassBase);
       return await beanMessage.onSetRead({ messageClass, messageIds, all, user });
     }
     // default
@@ -111,7 +111,7 @@ export class ServiceMessage extends BeanBase<ScopeModule> {
 
   async _list({ messageClass, options, user, count }: any) {
     // messageClass
-    messageClass = messageClass ? await this.ctx.bean.io.messageClass.get(messageClass) : null;
+    messageClass = messageClass ? await this.app.bean.io.messageClass.get(messageClass) : null;
     // where
     const where = (options && options.where) || {};
     if (messageClass) {
@@ -185,7 +185,7 @@ export class ServiceMessage extends BeanBase<ScopeModule> {
 //       const res = await this.modelMessageSync.insert(messageSync);
 //       messageSync.messageSyncId = res[0];
 //     } else {
-//       messageSync.messageSyncId = this.ctx.bean.util.uuid.v4();
+//       messageSync.messageSyncId = this.app.bean.util.uuid.v4();
 //     }
 //   }
 //   // ok

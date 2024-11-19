@@ -81,7 +81,7 @@ export class ServiceMessageClass extends BeanBase<ScopeModule> {
   _prepareMessageClassesModule(moduleName, _messages) {
     const messageClasses: any = {};
     for (const key in _messages) {
-      const message = this.ctx.bean.util.extend({}, _messages[key]);
+      const message = this.app.bean.util.extend({}, _messages[key]);
       message.info.name = key;
       // titleLocale
       message.info.titleLocale = this.ctx.text(message.info.title);
@@ -136,7 +136,7 @@ export class ServiceMessageClass extends BeanBase<ScopeModule> {
   _prepareChannelsModule(moduleName, _channels) {
     const channels: any = {};
     for (const key in _channels) {
-      const channel = this.ctx.bean.util.extend({}, _channels[key]);
+      const channel = this.app.bean.util.extend({}, _channels[key]);
       channel.info.name = key;
       // titleLocale
       channel.info.titleLocale = this.ctx.text(channel.info.title);

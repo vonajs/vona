@@ -35,7 +35,7 @@ export class ServiceVersion extends BeanBase {
   async __instanceInit(subdomain, instanceBase) {
     try {
       if (!instanceBase) {
-        instanceBase = this.ctx.bean.instance._getConfigInstanceBase(subdomain);
+        instanceBase = this.app.bean.instance._getConfigInstanceBase(subdomain);
       }
       if (!instanceBase) instanceBase = {};
       await this.__check({ ...instanceBase, scene: 'init', subdomain });
@@ -256,7 +256,7 @@ export class ServiceVersion extends BeanBase {
   }
 
   async __after() {
-    await this.ctx.bean.role.build();
+    await this.app.bean.role.build();
   }
 
   // get module

@@ -7,7 +7,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
   //   where, orders, page, star, label, resourceType, locale
   async select() {
     const options = this.ctx.request.body.options || {};
-    options.page = this.ctx.bean.util.page(options.page, false); // false
+    options.page = this.app.bean.util.page(options.page, false); // false
     const items = await this.scope.service.resource.select({
       atomClass: this.ctx.request.body.atomClass,
       options,
@@ -43,7 +43,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
 
   async resourceRoleRemove() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.resource.resourceRoleRemove({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,
@@ -54,7 +54,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
 
   async resourceRoleAdd() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.resource.resourceRoleAdd({
       key: this.ctx.request.body.key,
       data: this.ctx.request.body.data,

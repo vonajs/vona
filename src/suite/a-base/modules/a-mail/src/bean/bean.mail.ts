@@ -20,7 +20,7 @@ export class BeanMail extends BeanModuleScopeBase<ScopeModule> {
     const mailId = res[0];
     // publish
     this.ctx.tail(async () => {
-      await this.ctx.bean.io.publish({
+      await this.app.bean.io.publish({
         message: {
           content: { mailId },
         },

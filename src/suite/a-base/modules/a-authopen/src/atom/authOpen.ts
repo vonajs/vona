@@ -42,7 +42,7 @@ export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
 
   async create({ atomClass, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomCreate();
+    this.app.bean.util.checkDemoForAtomCreate();
     // super
     const data = await super.create({ atomClass, item, options, user });
     // user
@@ -58,7 +58,7 @@ export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
     data.itemId = await this.model.create(data);
     const itemId = data.itemId;
     // add aAuth record
-    const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const providerItem = await this.app.bean.authProvider.getAuthProvider({
       module: __ThisModule__,
       providerName: 'authopen',
     });
@@ -90,7 +90,7 @@ export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
     // super
     await super.delete({ atomClass, key, user });
     // delete aAuth record
-    const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const providerItem = await this.app.bean.authProvider.getAuthProvider({
       module: __ThisModule__,
       providerName: 'authopen',
     });

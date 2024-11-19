@@ -66,7 +66,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
       const _atomClass: AtomClassMeta = _atoms[key].info;
       const _atomClassMeta: Partial<AtomClassMeta> = this._prepareAtomClassesModule_atomClassMeta(_atomClass);
       // info
-      const atomClass: AtomClassBase = this.ctx.bean.util.extend({ name: key }, _atomClassMeta, _atomClass);
+      const atomClass: AtomClassBase = this.app.bean.util.extend({ name: key }, _atomClassMeta, _atomClass);
       // model
       if (atomClass.tableName && !atomClass.model) {
         atomClass.model = key;

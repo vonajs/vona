@@ -27,7 +27,7 @@ export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
         if (!_authProvider.meta.title) {
           throw new Error(`should specify the title of auth provider: ${providerFullName}`);
         }
-        const authProvider = this.ctx.bean.util.extend({}, _authProvider);
+        const authProvider = this.app.bean.util.extend({}, _authProvider);
         this._prepareAuthProvider(relativeName, providerName, authProvider);
         authProviders[providerFullName] = authProvider;
       }
@@ -58,7 +58,7 @@ export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
         _meta[key] = metaConfig[key];
       }
     }
-    return this.ctx.bean.util.extend({}, _meta, metaScene);
+    return this.app.bean.util.extend({}, _meta, metaScene);
   }
 
   _prepareAuthProvider_meta(relativeName, meta) {

@@ -22,7 +22,7 @@ export class BeanMailSceneCache extends BeanBase<ScopeModule> {
 
   getMailScenesConfigForAdmin() {
     let scenes = this.getMailScenesConfigCache();
-    scenes = this.ctx.bean.util.extend({}, scenes);
+    scenes = this.app.bean.util.extend({}, scenes);
     for (const sceneName in scenes) {
       const scene = scenes[sceneName];
       scene.titleLocale = this.ctx.text(scene.title);
@@ -42,7 +42,7 @@ export class BeanMailSceneCache extends BeanBase<ScopeModule> {
   }
 
   purgeScene(scene) {
-    const res = this.ctx.bean.util.extend({}, scene);
+    const res = this.app.bean.util.extend({}, scene);
     delete res.titleLocale;
     return res;
   }
@@ -52,7 +52,7 @@ export class BeanMailSceneCache extends BeanBase<ScopeModule> {
     const configDefault = this.configModule.scenes;
     // configScenes
     let configScenes = await this.statusModule.get('mailScenes');
-    configScenes = this.ctx.bean.util.extend({}, configDefault, configScenes);
+    configScenes = this.app.bean.util.extend({}, configDefault, configScenes);
     // cache
     __mailScenesConfigCache[this.ctx.subdomain] = configScenes;
   }

@@ -30,7 +30,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     options = options || {};
     // scene
     if (options.scene === undefined) {
-      options.scene = this.ctx.bean.util.getFrontClientId();
+      options.scene = this.app.bean.util.getFrontClientId();
     }
     const messageScene = options.scene;
 
@@ -65,7 +65,7 @@ export class BeanIoPublish extends BeanIoDelivery {
       _message.id = await this.message.save({ message: _message });
       _message.createdAt = new Date();
     } else {
-      _message.id = message.id || this.ctx.bean.util.uuid.v4();
+      _message.id = message.id || this.app.bean.util.uuid.v4();
       _message.createdAt = new Date();
       _message.persistence = persistence;
     }

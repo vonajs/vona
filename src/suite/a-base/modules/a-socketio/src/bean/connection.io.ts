@@ -19,10 +19,10 @@ export class ConnectionIo extends BeanBase implements IConnectionExecute {
     // register
     const iid = user.iid;
     const socketId = (<any>this.ctx.socket).id;
-    this.ctx.bean.io._registerSocket(socketId, this.ctx.socket);
+    this.app.bean.io._registerSocket(socketId, this.ctx.socket);
 
     // register user online
-    await this.ctx.bean.userOnline.register({ user: this.ctx.state.user, isLogin: false });
+    await this.app.bean.userOnline.register({ user: this.ctx.state.user, isLogin: false });
     // heartbeat
     const onHeartBeat = this._onHeartBeat.bind(this);
     (<any>this.ctx.socket).conn.on('heartbeat', onHeartBeat);
@@ -31,13 +31,13 @@ export class ConnectionIo extends BeanBase implements IConnectionExecute {
     (<any>this.ctx.socket).conn.off('heartbeat', onHeartBeat);
 
     // execute when disconnect
-    this.ctx.bean.io._unRegisterSocket(socketId);
-    await this.ctx.bean.io.unsubscribeWhenDisconnect({ iid, user, socketId });
+    this.app.bean.io._unRegisterSocket(socketId);
+    await this.app.bean.io.unsubscribeWhenDisconnect({ iid, user, socketId });
   }
 
   async _onHeartBeat() {
     const user = this.ctx.state.user;
-    const online = await this.ctx.bean.userOnline.heartBeat({ user });
+    const online = await this.app.bean.userOnline.heartBeat({ user });
     if (!online) {
       this.ctx.socket.emit('message-system', { code: 401, message: 'logout', type: 'self' });
       // close the underlying connection

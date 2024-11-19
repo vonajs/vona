@@ -29,7 +29,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
 
     // select
     if (action === 'select') {
-      const res = await this.ctx.bean.atom.checkRightSelect({
+      const res = await this.app.bean.atom.checkRightSelect({
         atomClass,
         user,
         checkFlow: options.checkFlow,
@@ -40,7 +40,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     }
 
     // actionBase
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       name: action,
@@ -49,7 +49,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     // bulk
     const bulk = actionBase.bulk;
     if (bulk) {
-      const res = await this.ctx.bean.atom.checkRightActionBulk({
+      const res = await this.app.bean.atom.checkRightActionBulk({
         atomClass,
         action,
         stage: options.stage,
@@ -58,7 +58,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
       });
       if (!res) this.app.throw(403);
     } else {
-      const res = await this.ctx.bean.atom.checkRightAction({
+      const res = await this.app.bean.atom.checkRightAction({
         atom: { id: atomKey.atomId },
         atomClass,
         action,
@@ -95,9 +95,9 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     // atomClass: support itemOnly
     let atomClass = this.ctx.request.body.atomClass;
     if (atomClass) {
-      atomClass = await this.ctx.bean.atomClass.get(atomClass);
+      atomClass = await this.app.bean.atomClass.get(atomClass);
     } else if (atomKey) {
-      atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: atomKey.atomId });
+      atomClass = await this.app.bean.atomClass.getByAtomId({ atomId: atomKey.atomId });
     }
     // check if valid & same
     if (!atomClass && !atomClassExpect) {
@@ -106,17 +106,17 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
         this.app.throw(403);
       }
     }
-    if (atomClass && atomClassExpect && !this.ctx.bean.util.checkIfSameAtomClass(atomClass, atomClassExpect)) {
+    if (atomClass && atomClassExpect && !this.app.bean.util.checkIfSameAtomClass(atomClass, atomClassExpect)) {
       this.app.throw(403);
     }
     // neednot check !!atomClassExpect
     if (!atomClass && atomClassExpect) {
-      atomClass = await this.ctx.bean.atomClass.get(atomClassExpect);
+      atomClass = await this.app.bean.atomClass.get(atomClassExpect);
     }
     // force consistent for safe
     this.ctx.request.body.atomClass = atomClass;
     // atomClassBase
-    const atomClassBase = atomClass ? await this.ctx.bean.atomClass.atomClass(atomClass) : null;
+    const atomClassBase = atomClass ? await this.app.bean.atomClass.atomClass(atomClass) : null;
     // ok
     return {
       atomKey,
@@ -150,7 +150,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
 
   async _checkAtom_prepareRoleIdOwner_inner({ atomClass, user }: any) {
     // roleIdOwner
-    const roleIdOwner = await this.ctx.bean.atom.checkRightPreferredRole({
+    const roleIdOwner = await this.app.bean.atom.checkRightPreferredRole({
       roleIdOwner: this.ctx.request.body.roleIdOwner,
       atomClass,
       user,
@@ -181,7 +181,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
         createOptions: undefined,
         __createDelayData: undefined,
       });
-      this.ctx.bean.stash.reset({ options });
+      this.app.bean.stash.reset({ options });
     }
     this.ctx.request.body.options = options;
   }

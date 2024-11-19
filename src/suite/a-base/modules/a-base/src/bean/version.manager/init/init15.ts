@@ -13,7 +13,7 @@ export class VersionInit extends BeanBase {
 
   // roles
   async _initRoles() {
-    return await this.ctx.bean.role._initSystemRoles({
+    return await this.app.bean.role._initSystemRoles({
       module: __ThisModule__,
       rolesData: initData.roles,
     });
@@ -21,9 +21,9 @@ export class VersionInit extends BeanBase {
 
   async _changeRoleIdOwner() {
     // change roleIdOwner from template.system to authenticated.builtIn for atomClass except role
-    const roleSystem = await this.ctx.bean.role.getSystemRole({ roleName: 'system' });
-    const roleBuiltIn = await this.ctx.bean.role.getSystemRole({ roleName: 'builtIn' });
-    const atomClassRole = await this.ctx.bean.atomClass.get({ module: __ThisModule__, atomClassName: 'role' });
+    const roleSystem = await this.app.bean.role.getSystemRole({ roleName: 'system' });
+    const roleBuiltIn = await this.app.bean.role.getSystemRole({ roleName: 'builtIn' });
+    const atomClassRole = await this.app.bean.atomClass.get({ module: __ThisModule__, atomClassName: 'role' });
     await this.bean.atom.model.update(
       { roleIdOwner: roleBuiltIn!.id },
       {

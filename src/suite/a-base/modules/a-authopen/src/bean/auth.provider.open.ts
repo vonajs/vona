@@ -17,7 +17,7 @@ export class AuthProviderOpen extends BeanAuthProviderBase {
   async onVerify(body) {
     const { clientID, clientSecret } = body.data;
     // verify
-    const authOpen = await this.ctx.bean.authOpen.verify({ clientID, clientSecret });
+    const authOpen = await this.app.bean.authOpen.verify({ clientID, clientSecret });
     // maxAge
     let maxAge;
     if (authOpen.neverExpire) {

@@ -13,7 +13,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
   }
 
   get beanRole() {
-    return this.ctx.bean.role;
+    return this.app.bean.role;
   }
 
   async default({ atomClass, item, options, user }: any) {
@@ -98,7 +98,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // roleIdParent
     if (key.atomId !== 0) {
       // donnot change if update
@@ -115,7 +115,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
       await this.model.write(data);
     }
     // clear summer: for roleName or roleTypeCode maybe changed
-    await this.ctx.bean.atomRightAux.clearSummersOfUser();
+    await this.app.bean.atomRightAux.clearSummersOfUser();
     // data
     return data;
   }

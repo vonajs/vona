@@ -6,13 +6,13 @@ export class StatsUserAlert extends BeanBase {
   async execute(context) {
     const { user } = context;
     // user stats
-    const statsUser = await this.ctx.bean.stats._get({
+    const statsUser = await this.app.bean.stats._get({
       module: __ThisModule__,
       fullName: 'user',
       user,
     });
     // message stats
-    const statsMessage = await this.ctx.bean.stats._get({
+    const statsMessage = await this.app.bean.stats._get({
       module: 'a-message',
       fullName: 'message',
       user,

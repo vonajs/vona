@@ -21,20 +21,20 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
       config: JSON.stringify(this.__configBlackFields(data.config)),
     });
     // changed
-    await this.ctx.bean.instance.instanceChanged();
+    await this.app.bean.instance.instanceChanged();
   }
 
   async getConfigsPreview() {
     let instance = await this.item();
     if (!instance) this.app.throw(403);
     instance = instance!;
-    let configPreview = this.ctx.bean.util.extend({}, this.app.config.modules, JSON.parse(instance.config));
+    let configPreview = this.app.bean.util.extend({}, this.app.config.modules, JSON.parse(instance.config));
     configPreview = this.__configBlackFields(configPreview);
     return { data: configPreview };
   }
 
   async reload() {
-    await this.ctx.bean.instance.reload();
+    await this.app.bean.instance.reload();
   }
 
   __configBlackFields(config) {

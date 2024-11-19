@@ -42,7 +42,7 @@ export class BeanIoSave extends BeanIoPush {
       if (persistence) {
         messageSync.id = await this.message.saveSync({ messageSync });
       } else {
-        messageSync.id = this.ctx.bean.util.uuid.v4();
+        messageSync.id = this.app.bean.util.uuid.v4();
         messageSync.persistence = persistence;
       }
       // extensible
@@ -77,7 +77,7 @@ export class BeanIoSave extends BeanIoPush {
             if (persistence) {
               messageSync.id = await this.message.saveSync({ messageSync });
             } else {
-              messageSync.id = this.ctx.bean.util.uuid.v4();
+              messageSync.id = this.app.bean.util.uuid.v4();
             }
             // extensible
             await beanMessage.onSaveSync({ path, options, message, messageSync, messageClass });

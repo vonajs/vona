@@ -13,7 +13,7 @@ export class EventAccountMigration extends BeanBase<ScopeModule> {
       where: { userId: data.userIdFrom },
     });
     for (const item of items) {
-      await this.ctx.bean.atom.delete({ key: { atomId: item.atomId } });
+      await this.app.bean.atom.delete({ key: { atomId: item.atomId } });
     }
     // next
     await next();

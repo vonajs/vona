@@ -4,21 +4,21 @@ import { BeanAtomRightAuxRoleScopesMineOfUser } from './bean.atomRightAux_roleSc
 export class BeanAtomRightAuxRoleWhos extends BeanAtomRightAuxRoleScopesMineOfUser {
   async getRoleWhosOfAtomClassAction({ atomClass, action }: any) {
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // action
-    action = this.ctx.bean.atomAction.parseActionCode({
+    action = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
     // cache
-    return await this.ctx.bean.summer.get(
+    return await this.app.bean.summer.get(
       { module: __ThisModule__, name: 'roleWhosOfAtomClassAction' },
       { atomClassId: atomClass.id, action },
     );
   }
 
   async clearSummer_roleWhosOfAtomClassAction() {
-    await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'roleWhosOfAtomClassAction' });
+    await this.app.bean.summer.clear({ module: __ThisModule__, name: 'roleWhosOfAtomClassAction' });
   }
 
   async __getRoleWhosOfAtomClassActionRaw({ atomClassId, action }: any) {

@@ -13,55 +13,55 @@ export class ServiceUser extends BeanBase {
     delete data.mobile;
     delete data.locale;
     // save
-    return await this.ctx.bean.user.save({ user: data });
+    return await this.app.bean.user.save({ user: data });
   }
 
   async saveAvatar({ data, user }: any) {
     const userData = { id: user.id, avatar: data.avatar };
-    return await this.ctx.bean.user.save({ user: userData });
+    return await this.app.bean.user.save({ user: userData });
   }
 
   async saveLocale({ data, user }: any) {
     const userData = { id: user.id, locale: data.locale };
-    return await this.ctx.bean.user.save({ user: userData });
+    return await this.app.bean.user.save({ user: userData });
   }
 
   async changeUserName({ data, user }: any) {
     const userData = { id: user.id, userName: data.userName };
-    return await this.ctx.bean.user.changeUserName({ user: userData });
+    return await this.app.bean.user.changeUserName({ user: userData });
   }
 
   async agent({ userId }: any) {
-    return await this.ctx.bean.user.agent({ userId });
+    return await this.app.bean.user.agent({ userId });
   }
 
   async agentsBy({ userId }: any) {
-    return await this.ctx.bean.user.agentsBy({ userId });
+    return await this.app.bean.user.agentsBy({ userId });
   }
 
   async userByMobile({ mobile }: any) {
-    return await this.ctx.bean.user.exists({ mobile });
+    return await this.app.bean.user.exists({ mobile });
   }
 
   async addAgent({ userIdAgent, userId }: any) {
-    return await this.ctx.bean.user.addAgent({ userIdAgent, userId });
+    return await this.app.bean.user.addAgent({ userIdAgent, userId });
   }
 
   async removeAgent({ userIdAgent, userId }: any) {
-    return await this.ctx.bean.user.removeAgent({ userIdAgent, userId });
+    return await this.app.bean.user.removeAgent({ userIdAgent, userId });
   }
 
   async switchAgent({ userIdAgent }: any) {
-    return await this.ctx.bean.user.switchAgent({ userIdAgent });
+    return await this.app.bean.user.switchAgent({ userIdAgent });
   }
 
   async switchOffAgent() {
-    return await this.ctx.bean.user.switchOffAgent();
+    return await this.app.bean.user.switchOffAgent();
   }
 
   async authentications({ user }: any) {
     // 1. get auth providers list from a-login
-    let listLogin = this.ctx.bean.util.extend([], this.ctx.bean.authProviderCache.getAuthProvidersConfigForLogin());
+    let listLogin = this.app.bean.util.extend([], this.app.bean.authProviderCache.getAuthProvidersConfigForLogin());
     if (listLogin.length === 0) return [];
     // 2. list aAuth
     const list = await this.bean.model.select('aAuth as a', {
@@ -121,12 +121,12 @@ export class ServiceUser extends BeanBase {
 
   async themeLoad({ appKey, user }: any) {
     const key = this._getThemeKey({ appKey, user });
-    return await this.ctx.bean.status.get(key);
+    return await this.app.bean.status.get(key);
   }
 
   async themeSave({ appKey, theme, user }: any) {
     const key = this._getThemeKey({ appKey, user });
-    await this.ctx.bean.status.set(key, theme);
+    await this.app.bean.status.set(key, theme);
   }
 
   _getThemeKey({ appKey, user }: any) {

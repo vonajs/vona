@@ -52,7 +52,7 @@ export class AtomLayout extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update layout

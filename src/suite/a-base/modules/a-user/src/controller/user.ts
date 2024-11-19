@@ -21,7 +21,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async saveLocale() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.saveLocale({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
@@ -31,7 +31,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async changeUserName() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.changeUserName({
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
@@ -56,7 +56,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async addAgent() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.addAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
       userId: this.ctx.state.user.agent.id,
@@ -66,7 +66,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async removeAgent() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.removeAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
       userId: this.ctx.state.user.agent.id,
@@ -76,7 +76,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async switchAgent() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.switchAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
     });
@@ -85,7 +85,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async switchOffAgent() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.switchOffAgent();
     this.app.success(res);
   }
@@ -99,7 +99,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
 
   async authenticationDisable() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.authenticationDisable({
       authId: this.ctx.request.body.authId,
       user: this.ctx.state.user.agent,

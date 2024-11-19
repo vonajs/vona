@@ -5,14 +5,14 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerScene extends BeanBase<ScopeModule> {
   async list() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.scene.list();
     this.app.success(res);
   }
 
   async save() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // adjust
     const sceneName = this.ctx.request.body.sceneName;
     const data = this.ctx.request.body.data;
@@ -40,7 +40,7 @@ export class ControllerScene extends BeanBase<ScopeModule> {
 
   async delete() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     await this.scope.service.scene.delete({
       sceneName: this.ctx.request.body.sceneName,
     });
@@ -50,7 +50,7 @@ export class ControllerScene extends BeanBase<ScopeModule> {
 
   async add() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     await this.scope.service.scene.add({
       sceneName: this.ctx.request.body.sceneName,
       data: this.ctx.request.body.data,

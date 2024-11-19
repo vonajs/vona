@@ -37,12 +37,12 @@ export class VersionInit extends BeanBase<ScopeModule> {
       { roleName: 'authenticated', action: 'deleteBulk' },
       { roleName: 'system', action: 'read', scopeNames: 'authenticated' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'authOpen', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'authOpen', roleRights });
   }
 
   async _init_roleScopes() {
     // createRoleScopes
-    await this.ctx.bean.authOpen.createRoleScopes({ roleScopes: initData.roleScopes, setDirty: true });
+    await this.app.bean.authOpen.createRoleScopes({ roleScopes: initData.roleScopes, setDirty: true });
     // add role rights
     const roleRights = [
       // template
@@ -57,14 +57,14 @@ export class VersionInit extends BeanBase<ScopeModule> {
       { roleName: 'system', action: 'resourceAuthorizations', scopeNames: 'OpenAuthScope' },
       { roleName: 'system', action: 'atomAuthorizations', scopeNames: 'OpenAuthScope' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ module: 'a-base', atomClassName: 'role', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: 'a-base', atomClassName: 'role', roleRights });
   }
 
   async _init_rootCliDevTest() {
     // only for test/local env
     if (this.ctx.app.meta.isProd || this.ctx.subdomain) return;
     // userRoot
-    const userRoot = await this.ctx.bean.user.get({ userName: 'root' });
+    const userRoot = await this.app.bean.user.get({ userName: 'root' });
     // create
     const authOpenKey = await this._init_rootCliDevTest_create({ userRoot });
     // persistence
@@ -79,7 +79,7 @@ export class VersionInit extends BeanBase<ScopeModule> {
       neverExpire: 1,
       expireTime: null,
     };
-    return await this.ctx.bean.authOpen.createAuthOpen({ item, user: userRoot });
+    return await this.app.bean.authOpen.createAuthOpen({ item, user: userRoot });
   }
 
   async _init_rootCliDevTest_persistence({ authOpenKey, userRoot }: any) {
@@ -99,6 +99,6 @@ export class VersionInit extends BeanBase<ScopeModule> {
       log: true,
     });
     // hideClientSecret
-    await this.ctx.bean.authOpen.hideClientSecret({ itemId: item.id, user: userRoot });
+    await this.app.bean.authOpen.hideClientSecret({ itemId: item.id, user: userRoot });
   }
 }

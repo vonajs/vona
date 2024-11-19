@@ -14,7 +14,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
 
   async add() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.scope.service.tag.add({
       atomClass,
@@ -25,7 +25,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
 
   async save() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // need not param:atomClass
     const res = await this.scope.service.tag.save({
       tagId: this.ctx.request.body.tagId,
@@ -36,7 +36,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
 
   async delete() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // need not param:atomClass
     const res = await this.scope.service.tag.delete({
       tagId: this.ctx.request.body.tagId,

@@ -9,9 +9,9 @@ export class VersionInit extends BeanBase {
   }
 
   async _changeTemplateRole() {
-    const role = await this.ctx.bean.role.parseRoleName({ roleName: 'template' });
-    await this.ctx.bean.role.move({ roleId: role.id, roleIdParent: 0 });
-    await this.ctx.bean.role.setDirty(true);
+    const role = await this.app.bean.role.parseRoleName({ roleName: 'template' });
+    await this.app.bean.role.move({ roleId: role.id, roleIdParent: 0 });
+    await this.app.bean.role.setDirty(true);
   }
 
   async _addRoleRightsResource() {
@@ -35,7 +35,7 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'deleteBulk' },
       { roleName: 'system', action: 'exportBulk' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'resource', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'resource', roleRights });
   }
 
   async _addRoleRightsRole() {
@@ -78,7 +78,7 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'exportBulk' },
       // { roleName: 'system', action: 'buildBulk' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'role', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'role', roleRights });
   }
 
   async _addRoleRightsUser() {
@@ -96,6 +96,6 @@ export class VersionInit extends BeanBase {
       // { roleName: 'system', action: 'deleteBulk' },
       { roleName: 'system', action: 'exportBulk' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'user', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'user', roleRights });
   }
 }

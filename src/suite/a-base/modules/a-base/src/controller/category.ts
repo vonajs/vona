@@ -49,7 +49,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async add() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.scope.service.category.add({
       atomClass,
@@ -60,7 +60,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async delete() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // need not param:atomClass
     const res = await this.scope.service.category.delete({
       categoryId: this.ctx.request.body.categoryId,
@@ -70,7 +70,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async move() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // need not param:atomClass
     const res = await this.scope.service.category.move({
       categoryId: this.ctx.request.body.categoryId,
@@ -90,7 +90,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
 
   async save() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // need not param:atomClass
     const res = await this.scope.service.category.save({
       categoryId: this.ctx.request.body.categoryId,

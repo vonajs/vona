@@ -31,7 +31,7 @@ export class MiddlewareRightResource extends MiddlewareRightAtomClass {
   }
 
   async _checkResource({ resourceAtomId, atomStaticKey }: any) {
-    return await this.ctx.bean.resource.checkRightResource({
+    return await this.app.bean.resource.checkRightResource({
       resourceAtomId,
       atomStaticKey,
       user: this.ctx.state.user.op,

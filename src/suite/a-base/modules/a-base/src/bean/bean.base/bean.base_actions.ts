@@ -69,7 +69,7 @@ export class BeanBaseActions extends BeanBase0 {
     const _actionsSystem = this.ctx.constant.module(__ThisModule__).atom.action;
     const _actionsSystemMeta = this._prepareActionsAtomClass_actionsSystemMetaAtom(atomClass);
     const _actionsSystemMetaDetail = this._prepareActionsAtomClass_actionsSystemMetaDetail(atomClass);
-    const _actionsAll = this.ctx.bean.util.extend({}, _actionsSystemMeta, _actionsSystemMetaDetail, _actions);
+    const _actionsAll = this.app.bean.util.extend({}, _actionsSystemMeta, _actionsSystemMetaDetail, _actions);
     for (const key in _actionsAll) {
       if (key === 'custom') continue;
       const action = _actionsAll[key];

@@ -5,7 +5,7 @@ export class MiddlewareAppReady extends BeanBase {
   async execute(_options, next) {
     // check appReady
     if (!this.ctx.innerAccess) {
-      await this.ctx.bean.instance.checkAppReady();
+      await this.app.bean.instance.checkAppReady();
     }
     // next
     await next();

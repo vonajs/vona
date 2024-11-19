@@ -39,7 +39,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   async list(options?) {
     // options
     if (!options) options = { where: null, orders: null, page: null };
-    const page = this.ctx.bean.util.page(options.page, false);
+    const page = this.app.bean.util.page(options.page, false);
     const orders = options.orders;
     const where = options.where; // allow disabled=undefined
     // const where = options.where || { disabled: 0 }; // allow disabled=undefined
@@ -127,7 +127,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (!options) options = { wait: true };
     if (!this.ctx.app.meta.appReady && options.wait === false) return false;
     while (!this.ctx.app.meta.appReady) {
-      await this.ctx.bean.util.sleep(300);
+      await this.app.bean.util.sleep(300);
     }
     return true;
   }

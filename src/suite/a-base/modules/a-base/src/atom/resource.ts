@@ -50,7 +50,7 @@ export class AtomResource extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update resource
@@ -65,7 +65,7 @@ export class AtomResource extends BeanAtomBase<ScopeModule> {
     // super
     await super.delete({ atomClass, key, options, user });
     // delete resource role
-    await this.ctx.bean.resource.deleteByResource({ atomId: key.atomId, user: null });
+    await this.app.bean.resource.deleteByResource({ atomId: key.atomId, user: null });
     // delete resource locales
     await this.modelResourceLocale.delete({
       atomId: key.atomId,
@@ -78,7 +78,7 @@ export class AtomResource extends BeanAtomBase<ScopeModule> {
 
   _getMeta(_options, item, showSorting) {
     // resourceTypes
-    const resourceTypes = this.ctx.bean.base.resourceTypes();
+    const resourceTypes = this.app.bean.base.resourceTypes();
     const resourceType = resourceTypes[item.resourceType];
     if (resourceType) {
       item.resourceTypeLocale = resourceType.titleLocale;

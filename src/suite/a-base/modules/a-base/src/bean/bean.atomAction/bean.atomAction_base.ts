@@ -8,7 +8,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
 
   async delete({ atomClassId, code }: any) {
     // delete roleRight
-    await this.ctx.bean.role.deleteRoleRightByAction({
+    await this.app.bean.role.deleteRoleRightByAction({
       atomClassId,
       action: code,
     });
@@ -28,7 +28,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
       actions = actions.split(',');
     }
     // atomClassId
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     const atomClassId = atomClass.id;
     // loop
     for (const _action of actions) {
@@ -62,14 +62,14 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
     if (actionCode) return actionCode;
     // atomClass
     if (!atomClass) throw new Error(`should specify the atomClass of action: ${action}`);
-    const actions = this.ctx.bean.base.actions();
+    const actions = this.app.bean.base.actions();
     const _action = actions[atomClass.module][atomClass.atomClassName][action];
     if (!_action) throw new Error(`atom action not found: ${atomClass.module}:${atomClass.atomClassName}.${action}`);
     return _action.code;
   }
 
   getCreateDelay({ atomClass }: any) {
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       code: 1,
@@ -85,8 +85,8 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
     // get
     const res = await this.model.get({ atomClassId, code });
     if (res) return res;
-    const atomClass = await this.ctx.bean.atomClass.get({ id: atomClassId });
-    const action = this.ctx.bean.base.action({
+    const atomClass = await this.app.bean.atomClass.get({ id: atomClassId });
+    const action = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       code,

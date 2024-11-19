@@ -24,11 +24,11 @@ export class VersionInit extends BeanBase {
     ];
     let needBuild = false;
     for (const item of items) {
-      const role = await this.ctx.bean.role.getSystemRole({ roleName: item.roleName });
+      const role = await this.app.bean.role.getSystemRole({ roleName: item.roleName });
       if (!role) {
         needBuild = true;
-        const roleParent = await this.ctx.bean.role.getSystemRole({ roleName: item.roleIdParent });
-        const roleId = await this.ctx.bean.role.add({
+        const roleParent = await this.app.bean.role.getSystemRole({ roleName: item.roleIdParent });
+        const roleId = await this.app.bean.role.add({
           roleName: item.roleName,
           leader: item.leader,
           catalog: item.catalog,
@@ -38,14 +38,14 @@ export class VersionInit extends BeanBase {
         });
         if (item.roleName === 'system') {
           // superuser include system
-          const roleSuperuser = await this.ctx.bean.role.getSystemRole({ roleName: 'superuser' });
-          await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
+          const roleSuperuser = await this.app.bean.role.getSystemRole({ roleName: 'superuser' });
+          await this.app.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
         }
       }
     }
     // build
     if (needBuild) {
-      await this.ctx.bean.role.setDirty(true);
+      await this.app.bean.role.setDirty(true);
     }
   }
 }

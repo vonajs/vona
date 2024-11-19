@@ -8,7 +8,7 @@ export class StatsUser extends BeanBase {
     const res = { red: 0, orange: 0 };
     for (const dep of dependencies) {
       const [module, fullName] = dep.split(':');
-      const value = await this.ctx.bean.stats._get({
+      const value = await this.app.bean.stats._get({
         module,
         fullName,
         user,

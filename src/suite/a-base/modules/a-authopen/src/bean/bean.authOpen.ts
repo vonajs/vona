@@ -64,7 +64,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
       if (clientSecret !== authOpen.clientSecret) return this.app.throw(403);
     }
     // atomDisabled
-    const atom = await this.ctx.bean.atom.modelAtom.get({ id: authOpen.atomId });
+    const atom = await this.app.bean.atom.modelAtom.get({ id: authOpen.atomId });
     if (atom!.atomDisabled) return this.app.throw(403);
     // neverExpire/expireTime
     if (!authOpen.neverExpire && authOpen.expireTime.valueOf() <= Date.now()) {
@@ -75,7 +75,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   }
 
   isAuthOpen() {
-    const provider = this.ctx.bean.util.getProperty(this.ctx, 'state.user.provider');
+    const provider = this.app.bean.util.getProperty(this.ctx, 'state.user.provider');
     if (!provider) return false;
     return provider.module === 'a-authopen' && provider.providerName === 'authopen' ? provider : null;
   }
@@ -111,7 +111,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     const authOpen = await this.prepareAuthOpen();
     if (!authOpen) return true;
     // parse action code
-    action = this.ctx.bean.atomAction.parseActionCode({
+    action = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
@@ -155,14 +155,14 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   // create aAuthOpen record for user
   async createAuthOpen({ item: { atomName, scopeRoleName, neverExpire = 1, expireTime = null }, user }) {
     // write
-    const scopeRole = await this.ctx.bean.role.parseRoleName({ roleName: scopeRoleName });
+    const scopeRole = await this.app.bean.role.parseRoleName({ roleName: scopeRoleName });
     const item = {
       atomName,
       scopeRoleId: scopeRole.id,
       neverExpire,
       expireTime,
     };
-    const authOpenKey = await this.ctx.bean.atom.write({
+    const authOpenKey = await this.app.bean.atom.write({
       atomClass: __atomClassAuthOpen,
       item,
       user,
@@ -180,11 +180,11 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
       if (roleScope.roleIdParent === 0) {
         item.roleIdParent = 0;
       } else {
-        const role = await this.ctx.bean.role.parseRoleName({ roleName: roleScope.roleIdParent });
+        const role = await this.app.bean.role.parseRoleName({ roleName: roleScope.roleIdParent });
         item.roleIdParent = role.id;
       }
       // loadAtomStatic
-      const atomKey = await this.ctx.bean.atomStatic.loadAtomStatic({
+      const atomKey = await this.app.bean.atomStatic.loadAtomStatic({
         moduleName: __ThisModule__,
         atomClass: __atomClassRole,
         item,
@@ -194,7 +194,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
         const roleName = roleScope._roleRightsRead;
         const scopeNames = [atomKey.itemId];
         const roleRights = [{ roleName, action: 'read', scopeNames }];
-        await this.ctx.bean.role.addRoleRightBatch({
+        await this.app.bean.role.addRoleRightBatch({
           module: 'a-base',
           atomClassName: 'role',
           roleRights,
@@ -203,7 +203,7 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     }
     // setDirty
     if (setDirty) {
-      await this.ctx.bean.role.setDirty(true);
+      await this.app.bean.role.setDirty(true);
     }
   }
 }

@@ -5,7 +5,7 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerAuth extends BeanBase<ScopeModule> {
   async signin() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // data: { clientID, clientSecret }
     const res = await this.scope.service.auth.signin({
       data: this.ctx.request.body.data,

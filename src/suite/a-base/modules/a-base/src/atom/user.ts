@@ -9,7 +9,7 @@ export class AtomUser extends BeanAtomBase<ScopeModule> {
   }
 
   get beanUser() {
-    return this.ctx.bean.user;
+    return this.app.bean.user;
   }
 
   async default({ atomClass, item, options, user }: any) {
@@ -66,7 +66,7 @@ export class AtomUser extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update user
@@ -85,8 +85,8 @@ export class AtomUser extends BeanAtomBase<ScopeModule> {
     // super
     await super.delete({ atomClass, key, options, user });
 
-    await this.ctx.bean.role.deleteAllUserRoles({ userId });
-    await this.ctx.bean.user.modelAuth.delete({ userId });
+    await this.app.bean.role.deleteAllUserRoles({ userId });
+    await this.app.bean.user.modelAuth.delete({ userId });
 
     // delete user
     await this.model.delete({ id: userId });

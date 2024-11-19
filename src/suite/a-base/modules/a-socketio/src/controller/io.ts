@@ -9,7 +9,7 @@ export class ControllerIo extends BeanBase<ScopeModule> {
       timestamp: this.ctx.request.body.timestamp,
       workerId: this.app.meta.workerId,
       socketId: (<any>this.ctx.socket).id,
-      scene: this.ctx.bean.util.getFrontClientId(),
+      scene: this.app.bean.util.getFrontClientId(),
       user: this.ctx.state.user.op,
     });
     this.app.success(res);

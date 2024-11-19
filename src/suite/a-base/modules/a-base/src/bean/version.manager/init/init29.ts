@@ -12,7 +12,7 @@ export class VersionInit extends BeanBase {
       //
       { roleName: 'system', action: 'fieldsAuthorizations', scopeNames: 'root' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'role', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'role', roleRights });
   }
 
   async _addRoleRightsUser() {
@@ -21,6 +21,6 @@ export class VersionInit extends BeanBase {
       //
       { roleName: 'system', action: 'fieldsAuthorizations', scopeNames: 'root' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'user', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'user', roleRights });
   }
 }

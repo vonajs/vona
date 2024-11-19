@@ -8,7 +8,7 @@ export class AtomUserFieldsRight extends BeanAtomBase {
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
     // adjust
-    await this.ctx.bean.fields._fieldsRightLocale({ items: [item] });
+    await this.app.bean.fields._fieldsRightLocale({ items: [item] });
     // meta
     this._getMeta(item, options);
     // ok
@@ -30,7 +30,7 @@ export class AtomUserFieldsRight extends BeanAtomBase {
     // super
     await super.select({ atomClass, options, items, user });
     // adjust
-    await this.ctx.bean.fields._fieldsRightLocale({ items });
+    await this.app.bean.fields._fieldsRightLocale({ items });
     // meta
     for (const item of items) {
       this._getMeta(item, options);

@@ -7,7 +7,7 @@ export class MiddlewareRightAtomClass extends MiddlewareRightAtom {
     // atomClass
     const { atomClass } = await this._checkAtom_checkAtomClassExpect({ options });
     // checkRightAtomClass
-    const res = await this.ctx.bean.atomClass.checkRightAtomClass({ atomClass, user });
+    const res = await this.app.bean.atomClass.checkRightAtomClass({ atomClass, user });
     if (!res) this.app.throw(403);
   }
 }

@@ -20,7 +20,7 @@ export class AtomRoleRight extends BeanAtomBase<ScopeModule> {
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
     // adjust
-    await this.ctx.bean.role._adjustItems({ items: [item] });
+    await this.app.bean.role._adjustItems({ items: [item] });
     // meta
     this._getMeta(item, options);
     // ok
@@ -42,7 +42,7 @@ export class AtomRoleRight extends BeanAtomBase<ScopeModule> {
     // super
     await super.select({ atomClass, options, items, user });
     // adjust
-    await this.ctx.bean.role._adjustItems({ items });
+    await this.app.bean.role._adjustItems({ items });
     // meta
     for (const item of items) {
       this._getMeta(item, options);
@@ -56,7 +56,7 @@ export class AtomRoleRight extends BeanAtomBase<ScopeModule> {
     const atomIdMain = options.atomIdMain;
     // add roleRight
     const roleAtomId = atomIdMain;
-    data.itemId = await this.ctx.bean.role.addRoleRight({
+    data.itemId = await this.app.bean.role.addRoleRight({
       roleAtomId,
       atomClassId: data.atomClassIdTarget,
       action: data.action,
@@ -79,7 +79,7 @@ export class AtomRoleRight extends BeanAtomBase<ScopeModule> {
     // update roleRight
     if (key.atomId !== 0) {
       const roleRightId = key.itemId;
-      await this.ctx.bean.role.addRoleRight({
+      await this.app.bean.role.addRoleRight({
         atomClassId: data.atomClassIdTarget,
         action: data.action,
         scope: data.scope,
@@ -96,7 +96,7 @@ export class AtomRoleRight extends BeanAtomBase<ScopeModule> {
     await super.delete({ atomClass, key, options, user });
     // delete roleRight
     const roleRightId = key.itemId;
-    await this.ctx.bean.role.deleteRoleRight({ roleRightId, user });
+    await this.app.bean.role.deleteRoleRight({ roleRightId, user });
   }
 
   _getMeta(item, _options) {

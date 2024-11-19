@@ -21,7 +21,7 @@ export class AtomRoleResourceRight extends BeanAtomBase<ScopeModule> {
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
     // adjust
-    await this.ctx.bean.resource._resourceRightsLocale({ items: [item] });
+    await this.app.bean.resource._resourceRightsLocale({ items: [item] });
     // meta
     this._getMeta(item, options);
     // ok
@@ -44,7 +44,7 @@ export class AtomRoleResourceRight extends BeanAtomBase<ScopeModule> {
     // super
     await super.select({ atomClass, options, items, user });
     // adjust
-    await this.ctx.bean.resource._resourceRightsLocale({ items });
+    await this.app.bean.resource._resourceRightsLocale({ items });
     // meta
     for (const item of items) {
       this._getMeta(item, options);
@@ -58,7 +58,7 @@ export class AtomRoleResourceRight extends BeanAtomBase<ScopeModule> {
     const atomIdMain = options.atomIdMain;
     // add resourceRole
     const roleAtomId = atomIdMain;
-    const role = await this.ctx.bean.role._forceRole({ roleAtomId });
+    const role = await this.app.bean.role._forceRole({ roleAtomId });
     const atomIdBak = data.atomId;
     data = Object.assign(data, {
       roleAtomId: atomIdMain,

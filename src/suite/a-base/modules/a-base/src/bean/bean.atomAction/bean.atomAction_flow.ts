@@ -3,7 +3,7 @@ import { BeanAtomActionBase } from './bean.atomAction_base.js';
 
 export class BeanAtomActionFlow extends BeanAtomActionBase {
   async selectFlowActions({ atomClass, flowKey }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     return await this.model.select({
       where: {
         atomClassId: atomClass.id,
@@ -38,7 +38,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     const res = await this.model.get({ atomClassId, flowKey, nodeDefId });
     if (res) return res;
     // code
-    const sequence = this.ctx.bean.sequence.module(__ThisModule__);
+    const sequence = this.app.bean.sequence.module(__ThisModule__);
     const flowActionCode = await sequence.next('flowAction');
     const data: any = {
       atomClassId,
@@ -62,7 +62,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
         scopeNames: [],
       },
     ];
-    await this.ctx.bean.role.addRoleRightBatchByModeFlow({
+    await this.app.bean.role.addRoleRightBatchByModeFlow({
       atomClassId,
       roleRights,
     });
