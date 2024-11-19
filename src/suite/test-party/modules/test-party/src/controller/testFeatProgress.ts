@@ -7,9 +7,8 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
     // create progress
     const progressId = await this.ctx.bean.progress.create();
     // background
-    this.ctx.meta.util.runInBackground(async ({ ctx }) => {
-      const selfInstance = ctx.bean._newBean(ControllerTestFeatProgress);
-      await selfInstance._progressInBackground({ progressId });
+    this.ctx.meta.util.runInBackground(async () => {
+      await this._progressInBackground({ progressId });
     });
     // return progressId
     this.app.success({ progressId });

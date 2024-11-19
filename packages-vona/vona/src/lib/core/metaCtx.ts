@@ -15,11 +15,11 @@ export class CtxMeta extends BeanSimple {
 
   protected __init__() {
     // util
-    this.util = this.ctx.bean._newBean(CtxUtil);
+    this.util = this.bean._newBean(CtxUtil);
     // mockUtil
-    this.mockUtil = this.ctx.bean._newBean(CtxMockUtil);
+    this.mockUtil = this.bean._newBean(CtxMockUtil);
     // locale
-    this.locale = this.ctx.bean._newBean(CtxLocale);
+    this.locale = this.bean._newBean(CtxLocale);
     // text
     this.text = this.locale.createLocaleText();
   }

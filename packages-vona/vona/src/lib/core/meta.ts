@@ -91,13 +91,13 @@ export class AppMeta extends BeanSimple {
     this.prepareEnv();
 
     // util
-    this.util = this.app.bean._newBean(AppUtil);
+    this.util = this.bean._newBean(AppUtil);
 
     // mockUtil
-    this.mockUtil = this.app.bean._newBean(AppMockUtil);
+    this.mockUtil = this.bean._newBean(AppMockUtil);
 
     // reload
-    this.reload = this.app.bean._newBean(AppReload);
+    this.reload = this.bean._newBean(AppReload);
 
     // resource
     this.resource = appResource;
