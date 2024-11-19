@@ -4,7 +4,7 @@ export class EntityBase {
   id: TableIdentity;
   createdAt: Date;
   updatedAt: Date;
-  deleted: number;
+  deleted: boolean;
   iid: number;
 }
 
