@@ -28,7 +28,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
 
   async passwordChange() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const { passwordOld, passwordNew } = this.ctx.request.body.data;
     await this.scope.service.auth.passwordChange({ passwordOld, passwordNew, userId: this.ctx.state.user.agent.id });
     this.app.success();
@@ -36,7 +36,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
 
   async passwordForgot() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const { email } = this.ctx.request.body.data;
     await this.scope.service.auth.passwordForgot({ email });
     this.app.success();
@@ -44,7 +44,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
 
   async passwordReset() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const { passwordNew } = this.ctx.request.body.data;
     const token = this.ctx.request.body.token;
     await this.scope.service.auth.passwordReset({ passwordNew, token });

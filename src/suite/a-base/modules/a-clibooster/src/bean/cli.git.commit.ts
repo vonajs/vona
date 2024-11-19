@@ -30,7 +30,7 @@ export class CliGitCommit extends BeanCliBase {
 
   async __prepareEntities() {
     // load all entities
-    const entityNames = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.commands.:git:commit.entities');
+    const entityNames = this.app.bean.util.getProperty(this.cabloyConfig.get(), 'cli.commands.:git:commit.entities');
     // prepare
     const entities: (ISuite | IModule)[] = [];
     for (const entityName of entityNames) {

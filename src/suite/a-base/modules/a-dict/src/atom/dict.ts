@@ -57,7 +57,7 @@ export class AtomDict extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // info
     const atomStaticKey = item.atomStaticKey;
     const atomStage = item.atomStage;
@@ -83,7 +83,7 @@ export class AtomDict extends BeanAtomBase<ScopeModule> {
       // remove dict cache
       if (atomStage === 1) {
         this.ctx.tail(() => {
-          this.ctx.bean.dict.dictCacheRemove({ dictKey: atomStaticKey });
+          this.app.bean.dict.dictCacheRemove({ dictKey: atomStaticKey });
         });
       }
     }
@@ -92,7 +92,7 @@ export class AtomDict extends BeanAtomBase<ScopeModule> {
   }
 
   async delete({ atomClass, key, options, user }: any) {
-    const item = await this.ctx.bean.atom.modelAtom.get({ id: key.atomId });
+    const item = await this.app.bean.atom.modelAtom.get({ id: key.atomId });
     const atomStaticKey = item!.atomStaticKey;
     const atomStage = item!.atomStage;
     // super
@@ -108,7 +108,7 @@ export class AtomDict extends BeanAtomBase<ScopeModule> {
     // remove dict cache
     if (atomStage === 1) {
       this.ctx.tail(() => {
-        this.ctx.bean.dict.dictCacheRemove({ dictKey: atomStaticKey });
+        this.app.bean.dict.dictCacheRemove({ dictKey: atomStaticKey });
       });
     }
   }

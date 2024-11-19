@@ -11,6 +11,6 @@ export class SummerCacheFieldsRightOfAtomClass extends BeanBase {
   }
 
   async get(key) {
-    return await this.ctx.bean.fields.__getFieldsRightOfAtomClassRaw(key);
+    return await this.app.bean.fields.__getFieldsRightOfAtomClassRaw(key);
   }
 }

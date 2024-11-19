@@ -24,7 +24,7 @@ export class LocalFlowTaskForward extends LocalFlowTaskRecall {
     const flowTask = this.contextTask._flowTask;
     const flowTaskId = flowTask.id;
     // 1. create a new task
-    const taskInstance = await this.ctx.bean.flowTask._createTaskInstance({
+    const taskInstance = await this.app.bean.flowTask._createTaskInstance({
       nodeInstance: this.nodeInstance,
       userIdAssignee: handle.assignee,
       user,

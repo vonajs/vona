@@ -7,7 +7,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update12Migration() {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -97,7 +97,7 @@ export class VersionUpdate extends BeanBase {
     // user
     const user = { id: article.userIdCreated };
     // open
-    const res = await this.ctx.bean.atom.openDraft({ key: { atomId: article.atomId }, user });
+    const res = await this.app.bean.atom.openDraft({ key: { atomId: article.atomId }, user });
     const draftKey = res.draft.key;
     // content
     let content = article.content;
@@ -105,7 +105,7 @@ export class VersionUpdate extends BeanBase {
     content = content.replace(/cms-pluginblock:blockIFrame/gi, 'a-markdownblock:iframe');
     content = content.replace(/cabloy-dashboard:blockCourse/gi, 'cabloy-course:blockCourseCodes');
     // write
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: draftKey,
       target: null,
       item: {
@@ -117,7 +117,7 @@ export class VersionUpdate extends BeanBase {
       user,
     });
     // submit
-    await this.ctx.bean.atom.submit({
+    await this.app.bean.atom.submit({
       key: draftKey,
       options: {
         ignoreRender: true,

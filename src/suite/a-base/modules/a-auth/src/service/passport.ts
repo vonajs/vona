@@ -4,20 +4,20 @@ import { Service, BeanBase } from 'vona';
 export class ServicePassport extends BeanBase {
   async authenticate({ module, providerName, providerScene, next }: any) {
     const providerFullName = `${module}:${providerName}`;
-    const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({ module, providerName });
+    const authProvider = this.app.bean.authProvider.getAuthProviderBase({ module, providerName });
     // provider scene
     if (authProvider.meta.scene && !providerScene) {
       throw new Error(`should set provider scene on callback url: ${providerFullName}`);
     }
     // bean
-    const beanProvider = this.ctx.bean.authProvider.createAuthProviderBean({
+    const beanProvider = this.app.bean.authProvider.createAuthProviderBean({
       module,
       providerName,
       providerScene,
     });
     if (!beanProvider.providerSceneValid) this.$scope.base.error.InvalidConfiguration.throw();
     // urls
-    const { loginURL, callbackURL } = this.ctx.bean.authProvider._combineAuthenticateUrls({
+    const { loginURL, callbackURL } = this.app.bean.authProvider._combineAuthenticateUrls({
       module,
       providerName,
       providerScene,
@@ -26,7 +26,7 @@ export class ServicePassport extends BeanBase {
     if (this.ctx.url.indexOf(callbackURL) === -1) {
       if (this.ctx.request.query && this.ctx.request.query.returnTo) {
         this.ctx.session.returnTo = this.ctx.request.query.returnTo;
-        this.ctx.session['x-scene'] = this.ctx.bean.util.getFrontScene();
+        this.ctx.session['x-scene'] = this.app.bean.util.getFrontScene();
       } else {
         delete this.ctx.session.returnTo; // force to delete
         delete this.ctx.session['x-scene'];
@@ -36,8 +36,8 @@ export class ServicePassport extends BeanBase {
     const config: any = {};
     config.passReqToCallback = true;
     config.failWithError = false;
-    config.loginURL = this.ctx.bean.base.getAbsoluteUrl(loginURL);
-    config.callbackURL = this.ctx.bean.base.getAbsoluteUrl(callbackURL);
+    config.loginURL = this.app.bean.base.getAbsoluteUrl(loginURL);
+    config.callbackURL = this.app.bean.base.getAbsoluteUrl(callbackURL);
     config.state = this.ctx.request.query.state;
     config.successRedirect = config.successReturnToOrRedirect =
       beanProvider.metaScene.mode === 'redirect' ? '/' : false;

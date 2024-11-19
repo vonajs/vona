@@ -21,7 +21,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, `${a + b}:regexpaop`);
 
     // ctx.bean: global
-    assert.equal(this.bean.testCtx, this.ctx.bean.testCtx);
+    assert.equal(this.bean.testCtx, this.app.bean.testCtx);
 
     // magic
     res = Cast(this.bean.testCtx).magic;
@@ -45,7 +45,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, `test-party:simpleaop:regexpaop:${a + b}:simpleaop:regexpaop`);
 
     // ctx.bean: class
-    assert.equal(this.bean['test-party.test.class'], this.ctx.bean['test-party.test.class']);
+    assert.equal(this.bean['test-party.test.class'], this.app.bean['test-party.test.class']);
 
     res = this.bean['test-party.test.class'].actionSync({ a, b });
     assert.equal(res, `${a + b}:regexpaop`);
@@ -55,9 +55,9 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
 
     // magic of self
     Cast(this.bean.testCtx).magicSelf = '__magicSelf__';
-    res = Cast(this.ctx.bean.testCtx).magicSelf;
+    res = Cast(this.app.bean.testCtx).magicSelf;
     assert.equal(res, '__magicSelf__');
-    res = Cast(this.ctx.bean.testCtx)['magic:self'];
+    res = Cast(this.app.bean.testCtx)['magic:self'];
     assert.equal(res, '__magicSelf__');
 
     // ok

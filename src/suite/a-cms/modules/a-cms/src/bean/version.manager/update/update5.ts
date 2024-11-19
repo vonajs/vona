@@ -19,7 +19,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update5AtomClassIds() {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,

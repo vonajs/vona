@@ -28,12 +28,12 @@ export class VersionInit extends BeanBase {
         scopeNames: 'authenticated', // 'family',
       },
     ];
-    await this.ctx.bean.role.addRoleRightBatchByModeFlow({ atomClassName: 'purchaseOrder', roleRights });
+    await this.app.bean.role.addRoleRightBatchByModeFlow({ atomClassName: 'purchaseOrder', roleRights });
     // add role rights
     roleRights = [
       //
       { roleName: 'family', action: 'read', scopeNames: 'authenticated' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'purchaseOrder', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'purchaseOrder', roleRights });
   }
 }

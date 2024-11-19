@@ -4,6 +4,6 @@ import { Bean, BeanBase } from 'vona';
 export class StartupCacheAuthProviders extends BeanBase {
   async execute(/* context*/) {
     // cache all authProviders
-    await this.ctx.bean.authProviderCache._cacheAuthProvidersConfig();
+    await this.app.bean.authProviderCache._cacheAuthProvidersConfig();
   }
 }

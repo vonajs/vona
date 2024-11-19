@@ -11,14 +11,14 @@ export class ServiceDashboard extends BeanBase<ScopeModule> {
   }
 
   get sequence() {
-    return this.ctx.bean.sequence.module(__ThisModule__);
+    return this.app.bean.sequence.module(__ThisModule__);
   }
 
   async itemByKey({ atomStaticKey, user }: any) {
     if (!atomStaticKey) return this.$scope.base.error.ElementDoesNotExist.throw();
     // get atomId
-    const atomClass = await this.ctx.bean.atomClass.get(this.atomClass);
-    const atom = await this.ctx.bean.atom.modelAtom.get({
+    const atomClass = await this.app.bean.atomClass.get(this.atomClass);
+    const atom = await this.app.bean.atom.modelAtom.get({
       atomClassId: atomClass.id,
       atomStaticKey,
       atomStage: 1,
@@ -26,7 +26,7 @@ export class ServiceDashboard extends BeanBase<ScopeModule> {
     if (!atom) return this.$scope.base.error.ElementDoesNotExist.throw();
     const atomId = atom.id;
     // check resource right
-    const res = await this.ctx.bean.resource.checkRightResource({ resourceAtomId: atomId, user });
+    const res = await this.app.bean.resource.checkRightResource({ resourceAtomId: atomId, user });
     if (!res) this.app.throw(403);
     // item
     return await this.item({ dashboardAtomId: atomId, user });
@@ -45,7 +45,7 @@ export class ServiceDashboard extends BeanBase<ScopeModule> {
       }
     }
     // get system
-    const dashboardSystem = await this.ctx.bean.resource.read({
+    const dashboardSystem = await this.app.bean.resource.read({
       key: { atomId: dashboardAtomId },
       user,
     });
@@ -97,7 +97,7 @@ export class ServiceDashboard extends BeanBase<ScopeModule> {
 
   async createItemUser({ dashboardAtomId, user }: any) {
     // get system
-    const dashboardSystem = await this.ctx.bean.resource.read({
+    const dashboardSystem = await this.app.bean.resource.read({
       key: { atomId: dashboardAtomId },
       user,
     });

@@ -57,7 +57,7 @@ export class BeanStats extends BeanModuleScopeBase<ScopeModule> {
       const keys = names.slice(0, names.length - i);
       const fullNameSub = keys.join('.');
       // execute
-      const value = await this.ctx.bean._getBean(provider.beanFullName).execute({
+      const value = await this.app.bean._getBean(provider.beanFullName).execute({
         keys,
         provider,
         user,
@@ -148,7 +148,7 @@ export class BeanStats extends BeanModuleScopeBase<ScopeModule> {
           value,
         },
       };
-      await this.ctx.bean.io.publish({
+      await this.app.bean.io.publish({
         path: `/a/stats/stats/${module}/${fullName}`,
         message,
         messageClass: {

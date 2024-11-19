@@ -10,7 +10,7 @@ export class ControllerTestFeatSocketio extends BeanBase<ScopeModule> {
     const options = this.ctx.request.body.options;
     const message = this.ctx.request.body.message;
     message.userIdFrom = this.ctx.state.user.op.id;
-    const res = await this.ctx.bean.io.publish({
+    const res = await this.app.bean.io.publish({
       path: _subscribePathTest,
       message,
       messageClass: {
@@ -29,7 +29,7 @@ export class ControllerTestFeatSocketio extends BeanBase<ScopeModule> {
     message.userIdFrom = this.ctx.state.user.op.id;
     message.userIdsTo = await this._collectUserIds();
     // message.userIdTo = -1;
-    const res = await this.ctx.bean.io.publish({
+    const res = await this.app.bean.io.publish({
       path: _subscribePathSimpleChat,
       message,
       messageClass: {
@@ -45,7 +45,7 @@ export class ControllerTestFeatSocketio extends BeanBase<ScopeModule> {
   async _collectUserIds() {
     const ioRedis = this.bean.scope('a-socketio').service.redis;
     const userIds = await ioRedis._getPathUsersOnline({ path: _subscribePathSimpleChat });
-    const userAdmin = await this.ctx.bean.user.get({ userName: 'admin' });
+    const userAdmin = await this.app.bean.user.get({ userName: 'admin' });
     if (userAdmin && !userIds.includes(userAdmin.id)) {
       userIds.push(userAdmin.id);
     }

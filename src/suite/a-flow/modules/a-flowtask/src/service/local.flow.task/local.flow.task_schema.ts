@@ -14,7 +14,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     const fieldsRight = await this._getFieldsRightSafe({ mode });
     // schema
     const atomClassId = this.context._atom.atomClassId;
-    const schema = await this.ctx.bean.fields.parseSchema({
+    const schema = await this.app.bean.fields.parseSchema({
       atomClass: { id: atomClassId }, // { module, atomClassName },
       fieldsRight,
     });
@@ -49,7 +49,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     const schema = await this._getSchemaSafe({ mode });
     if (!schema) return null;
     // read
-    const item = await this.ctx.bean.atom.read({
+    const item = await this.app.bean.atom.read({
       key: { atomId: atom.atomId },
       options: {
         schema: {
@@ -93,7 +93,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
   //     '_meta',
   //   ];
   //   // columnsAtom
-  //   const columnsAtom = await this.ctx.bean.atom.modelAtom.columns();
+  //   const columnsAtom = await this.app.bean.atom.modelAtom.columns();
   //   fields = fields.concat(Object.keys(columnsAtom));
   //   // schema
   //   fields = fields.concat(Object.keys(schema.properties));
@@ -116,7 +116,7 @@ export class LocalFlowTaskSchema extends LocalFlowTaskSubstitute {
     const atomClassId = this.context._atom.atomClassId;
     // fieldsRight
     const fieldsRight = await this._getFieldsRight();
-    const schema = await this.ctx.bean.fields.parseSchema({
+    const schema = await this.app.bean.fields.parseSchema({
       atomClass: { id: atomClassId }, // { module, atomClassName },
       fieldsRight,
     });

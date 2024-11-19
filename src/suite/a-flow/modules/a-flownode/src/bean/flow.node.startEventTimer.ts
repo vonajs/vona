@@ -46,18 +46,18 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     const parameterExpression = node.options && node.options.parameterExpression;
     if (bean) {
       // bean
-      const parameter = this.ctx.bean.flow.evaluateExpression({
+      const parameter = this.app.bean.flow.evaluateExpression({
         expression: parameterExpression,
         globals: null,
       });
-      await this.ctx.bean.flow.executeService({
+      await this.app.bean.flow.executeService({
         bean,
         parameter: { flowDefId, node, parameter },
         globals: null,
       });
     } else {
       // start
-      await this.ctx.bean.flow.startById({ flowDefId, startEventId: node.id });
+      await this.app.bean.flow.startById({ flowDefId, startEventId: node.id });
     }
   }
 
@@ -65,7 +65,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     const job = context.job;
     const { flowDefId, node } = context.data;
     // flowDef
-    const flowDef = await this.ctx.bean.flowDef.getById({ flowDefId });
+    const flowDef = await this.app.bean.flowDef.getById({ flowDefId });
     if (!flowDef) return false;
     // atomDisabled
     if (flowDef.atomDisabled === 1) return false;

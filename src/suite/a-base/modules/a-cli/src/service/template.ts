@@ -86,7 +86,7 @@ export class ServiceTemplate extends BeanBase<ScopeModule> {
       const templateFile = path.join(templateDir, file);
       const fileName = this.parseFileBaseName(basename);
       const parentPath = path.join(targetDir, dirname);
-      const targetFile = path.join(parentPath, this.ctx.bean.util.replaceTemplate(fileName, argv));
+      const targetFile = path.join(parentPath, this.app.bean.util.replaceTemplate(fileName, argv));
       await this.renderFile({ targetFile, templateFile });
       if (fileName !== '.gitkeep') {
         const gitkeep = path.join(parentPath, '.gitkeep');

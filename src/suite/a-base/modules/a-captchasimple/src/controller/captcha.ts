@@ -10,7 +10,7 @@ export class ControllerCaptcha extends BeanBase<ScopeModule> {
     // create
     const { token, buffer } = await captcha();
     // update
-    await this.ctx.bean.captcha.update({
+    await this.app.bean.captcha.update({
       providerInstanceId,
       data: { token },
     });

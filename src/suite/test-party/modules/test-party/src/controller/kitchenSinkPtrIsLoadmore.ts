@@ -8,7 +8,7 @@ export class ControllerKitchenSinkPtrIsLoadmore extends BeanBase<ScopeModule> {
     // page
     let page = this.ctx.request.body.page;
     // adjust page
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // items
     const items: any[] = [];
     for (let i = 0; i < page.size; i++) {

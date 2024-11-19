@@ -8,13 +8,13 @@ export class ServiceAuth extends BeanBase<ScopeModule> {
   }
 
   async list() {
-    return this.ctx.bean.authProviderCache.getAuthProvidersConfigForAdmin();
+    return this.app.bean.authProviderCache.getAuthProvidersConfigForAdmin();
   }
 
   async disable({ id, disabled }: any) {
     // check if only one
     if (disabled) {
-      const list = this.ctx.bean.authProviderCache.getAuthProvidersConfigForLogin();
+      const list = this.app.bean.authProviderCache.getAuthProvidersConfigForLogin();
       if (list.length <= 1) this.app.throw(1001);
     }
     // update
@@ -23,7 +23,7 @@ export class ServiceAuth extends BeanBase<ScopeModule> {
     const item = await this.modelAuthProvider.get({ id });
     if (!item) return;
     // changed
-    await this.ctx.bean.authProviderCache.authProviderChanged({
+    await this.app.bean.authProviderCache.authProviderChanged({
       module: item.module,
       providerName: item.providerName,
     });
@@ -36,7 +36,7 @@ export class ServiceAuth extends BeanBase<ScopeModule> {
     const item = await this.modelAuthProvider.get({ id });
     if (!item) return;
     // changed
-    await this.ctx.bean.authProviderCache.authProviderChanged({
+    await this.app.bean.authProviderCache.authProviderChanged({
       module: item.module,
       providerName: item.providerName,
     });

@@ -9,7 +9,7 @@ export class VersionInit extends BeanBase {
       // custom
       { roleName: 'system', action: 'kickOut', scopeNames: 'authenticated' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'userOnline', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'userOnline', roleRights });
     //
     roleRights = [
       //
@@ -22,6 +22,6 @@ export class VersionInit extends BeanBase {
       // { roleName: 'system', action: 'write' },
       // { roleName: 'system', action: 'clone' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'userOnlineHistory', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'userOnlineHistory', roleRights });
   }
 }

@@ -15,7 +15,7 @@ export class AtomDashboard extends BeanAtomBase<ScopeModule> {
   createContentDefault() {
     return {
       root: {
-        id: this.ctx.bean.util.uuidv4(),
+        id: this.app.bean.util.uuidv4(),
         widgets: [],
       },
     };
@@ -65,7 +65,7 @@ export class AtomDashboard extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update dashboard

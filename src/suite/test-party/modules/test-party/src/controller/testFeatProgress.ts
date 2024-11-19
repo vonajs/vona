@@ -5,7 +5,7 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
   async progress() {
     // create progress
-    const progressId = await this.ctx.bean.progress.create();
+    const progressId = await this.app.bean.progress.create();
     // background
     this.ctx.meta.util.runInBackground(async () => {
       await this._progressInBackground({ progressId });
@@ -19,12 +19,12 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
       // level one
       await this._levelOne({ progressId, progressNo: 0 });
       // progress done
-      await this.ctx.bean.progress.done({ progressId, message: this.ctx.text('WellDone') });
+      await this.app.bean.progress.done({ progressId, message: this.ctx.text('WellDone') });
       // ok
       this.app.success(true);
     } catch (err: any) {
       // progress error
-      await this.ctx.bean.progress.error({ progressId, message: err.message });
+      await this.app.bean.progress.error({ progressId, message: err.message });
       // throw err
       throw err;
     }
@@ -35,7 +35,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
     let current = 0;
     for (let i = 0; i < total; i++) {
       const text = `${this.ctx.text('LevelOne')}: ${i + 1}`;
-      await this.ctx.bean.progress.update({
+      await this.app.bean.progress.update({
         progressId,
         progressNo,
         total,
@@ -43,7 +43,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
         text,
       });
       // sleep
-      await this.ctx.bean.util.sleep(1500);
+      await this.app.bean.util.sleep(1500);
       // level two
       await this._levelTwo({ progressId, progressNo: progressNo + 1 });
     }
@@ -54,7 +54,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
     let current = 0;
     for (let i = 0; i < total; i++) {
       const text = `${this.ctx.text('LevelTwo')}: ${i + 1}`;
-      await this.ctx.bean.progress.update({
+      await this.app.bean.progress.update({
         progressId,
         progressNo,
         total,
@@ -62,7 +62,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
         text,
       });
       // sleep
-      await this.ctx.bean.util.sleep(1500);
+      await this.app.bean.util.sleep(1500);
       // level two
       await this._levelThree({ progressId, progressNo: progressNo + 1 });
     }
@@ -73,7 +73,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
     let current = 0;
     for (let i = 0; i < total; i++) {
       const text = `${this.ctx.text('LevelThree')}: ${i + 1}`;
-      await this.ctx.bean.progress.update({
+      await this.app.bean.progress.update({
         progressId,
         progressNo,
         total,
@@ -81,7 +81,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
         text,
       });
       // sleep
-      await this.ctx.bean.util.sleep(1500);
+      await this.app.bean.util.sleep(1500);
     }
   }
 }

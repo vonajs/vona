@@ -15,7 +15,7 @@ export class ControllerResourceRight extends BeanBase<ScopeModule> {
 
   async add() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.resourceRight.add({
       roleAtomId: this.ctx.request.body.key.atomId,
       atomIds: this.ctx.request.body.atomIds,
@@ -26,7 +26,7 @@ export class ControllerResourceRight extends BeanBase<ScopeModule> {
 
   async delete() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.resourceRight.delete({
       roleAtomId: this.ctx.request.body.key.atomId,
       atomId: this.ctx.request.body.atomId,

@@ -10,7 +10,7 @@ export class StatsMessage extends BeanBase<ScopeModule> {
       // messageClass
       const [module, messageClassName] = keys[1].split('_');
       const messageClass = { module, messageClassName };
-      const messageClassBase = this.ctx.bean.io.messageClass.messageClass(messageClass);
+      const messageClassBase = this.app.bean.io.messageClass.messageClass(messageClass);
       // options
       const options = {
         where: {
@@ -18,7 +18,7 @@ export class StatsMessage extends BeanBase<ScopeModule> {
         },
       };
       // count
-      const res = await this.ctx.bean.io.message.count({ messageClass, options, user });
+      const res = await this.app.bean.io.message.count({ messageClass, options, user });
       const count = res.count;
       // stat
       const color = messageClassBase.info.uniform.stats.color;

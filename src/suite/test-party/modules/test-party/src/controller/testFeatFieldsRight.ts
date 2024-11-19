@@ -93,7 +93,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
 
   // mode: allowAllFieldsRead
   async _parseSchema_mode_allowAllFieldsRead({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_allowAllFieldsRead,
     });
@@ -104,7 +104,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
 
   // mode: allowAllFieldsReadWrite
   async _parseSchema_mode_allowAllFieldsReadWrite({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_allowAllFieldsReadWrite,
     });
@@ -116,7 +116,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
 
   // mode: allowSpecificFields_1
   async _parseSchema_mode_allowSpecificFields_1({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_allowSpecificFields_1,
     });
@@ -127,7 +127,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
 
   // mode: allowSpecificFields_2
   async _parseSchema_mode_allowSpecificFields_2({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_allowSpecificFields_2,
     });
@@ -138,7 +138,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
 
   // mode: allowSpecificFields_3
   async _parseSchema_mode_allowSpecificFields_3({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_allowSpecificFields_3,
     });
@@ -148,7 +148,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
   }
   // mode: custom_array
   async _parseSchema_mode_custom_array({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_custom_array,
     });
@@ -158,7 +158,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
   }
   // mode: custom_array
   async _parseSchema_mode_custom_object({ atomClass }: any) {
-    const schemaBase = await this.ctx.bean.fields.parseSchema({
+    const schemaBase = await this.app.bean.fields.parseSchema({
       atomClass,
       fieldsRight: __testData_custom_object,
     });

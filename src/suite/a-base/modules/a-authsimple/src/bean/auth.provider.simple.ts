@@ -21,8 +21,8 @@ export class AuthProviderSimple extends BeanAuthProviderBase<ScopeModule> {
   async onVerify(body) {
     // const { auth, password, rememberMe } = body.data;
     // validate
-    await this.ctx.bean.validation.validate({ module: __ThisModule__, validator: 'signin', data: body.data });
+    await this.app.bean.validation.validate({ module: __ThisModule__, validator: 'signin', data: body.data });
     // exists
-    return await this.ctx.bean.authSimple.ensureAuthUser({ beanProvider: this, data: body.data });
+    return await this.app.bean.authSimple.ensureAuthUser({ beanProvider: this, data: body.data });
   }
 }

@@ -23,7 +23,7 @@ export class CaptchaProviderCaptcha extends BeanBase<ScopeModule> {
   }
 
   __createSMSProvider(options?) {
-    const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
+    const providers = this.app.bean.smsProviderCache.getSmsProvidersConfigCache();
     // provider name
     let providerName = options && options.providerName;
     if (!providerName) {
@@ -41,7 +41,7 @@ export class CaptchaProviderCaptcha extends BeanBase<ScopeModule> {
       }
     }
     // provider
-    const provider = this.ctx.bean._getBean(`${__ThisModule__}.sms.provider.${providerName}` as any);
+    const provider = this.app.bean._getBean(`${__ThisModule__}.sms.provider.${providerName}` as any);
     const config = providers[providerName];
     return { provider, config };
   }

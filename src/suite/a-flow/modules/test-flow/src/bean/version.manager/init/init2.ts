@@ -13,6 +13,6 @@ export class VersionInit extends BeanBase {
       { roleName: 'authenticated', action: 'exportBulk' },
       { roleName: 'system', action: 'read', scopeNames: 'authenticated' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'product', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'product', roleRights });
   }
 }

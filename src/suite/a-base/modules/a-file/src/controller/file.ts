@@ -5,7 +5,7 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerFile extends BeanBase<ScopeModule> {
   async all() {
     const options = this.ctx.request.body.options;
-    options.page = this.ctx.bean.util.page(options.page);
+    options.page = this.app.bean.util.page(options.page);
     const items = await this.scope.service.file.all({
       atomClass: this.ctx.request.body.atomClass,
       options,
@@ -16,7 +16,7 @@ export class ControllerFile extends BeanBase<ScopeModule> {
 
   async list() {
     const options = this.ctx.request.body.options;
-    options.page = this.ctx.bean.util.page(options.page, false);
+    options.page = this.app.bean.util.page(options.page, false);
     const items = await this.scope.service.file.list({
       key: this.ctx.request.body.key,
       options: this.ctx.request.body.options,

@@ -11,7 +11,7 @@ export class LocalFlowFlowMessage extends LocalFlowFlowNextEdges {
       return;
     }
     // publish uniform message
-    const userFlow = await this.ctx.bean.user.get({ id: flowUserId });
+    const userFlow = await this.app.bean.user.get({ id: flowUserId });
     if (!userFlow) {
       return;
     }
@@ -36,7 +36,7 @@ export class LocalFlowFlowMessage extends LocalFlowFlowNextEdges {
     };
     // jump out of the transaction
     this.ctx.tail(async () => {
-      await this.ctx.bean.io.publish({
+      await this.app.bean.io.publish({
         message,
         messageClass: {
           module: 'a-flow',

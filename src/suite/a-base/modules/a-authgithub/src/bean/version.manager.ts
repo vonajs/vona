@@ -9,7 +9,7 @@ export class VersionManager extends BeanBase {
     }
     if (options.version === 2) {
       // all instances
-      const instances = await this.ctx.bean.instance.list();
+      const instances = await this.app.bean.instance.list();
       for (const instance of instances) {
         await this.ctx.meta.util.executeBean({
           subdomain: instance.name,
@@ -28,7 +28,7 @@ export class VersionManager extends BeanBase {
   }
 
   async _update8AuthsInstance() {
-    const provideItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const provideItem = await this.app.bean.authProvider.getAuthProvider({
       module: __ThisModule__,
       providerName: 'authgithub',
     });

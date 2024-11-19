@@ -49,7 +49,7 @@ export class BeanSequence extends BeanModuleScopeBase {
     }
 
     // next
-    const value = await this.ctx.bean._getBean(provider.beanFullName).execute({ value: current });
+    const value = await this.app.bean._getBean(provider.beanFullName).execute({ value: current });
 
     // save
     if (sequence) {

@@ -14,7 +14,7 @@ export class ControllerTestItemOnlyRight extends BeanBase<ScopeModule> {
   }
 
   async createRaw() {
-    const itemKey = await this.ctx.bean.atom.create({
+    const itemKey = await this.app.bean.atom.create({
       atomClass: this.ctx.request.body.atomClass,
     });
     this.app.success(itemKey);

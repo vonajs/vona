@@ -57,7 +57,7 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
   async _onChannelRenderMail({ channelFullName, message, messageSync }: any) {
     // user
     const userId = messageSync.userId;
-    const user = await this.ctx.bean.user.get({ id: userId });
+    const user = await this.app.bean.user.get({ id: userId });
     if (!user) {
       this.ctx.logger.info('not found user:', userId);
       return null;
@@ -70,7 +70,7 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
     // content
     const content = JSON.parse(message.content);
     // link
-    const link = this.ctx.bean.base.getAbsoluteUrl(`/#!/a/message/autojump?id=${message.id}`);
+    const link = this.app.bean.base.getAbsoluteUrl(`/#!/a/message/autojump?id=${message.id}`);
     // scope
     const scope = {
       user,
@@ -85,10 +85,10 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
     const configTemplate = this.scopeModuleAMessage.config.socketio.message.render.templates[channelFullName];
     // subject
     let subject = this.ctx.text.locale(user.locale as any, configTemplate.subject);
-    subject = this.ctx.bean.util.replaceTemplate(subject, scope);
+    subject = this.app.bean.util.replaceTemplate(subject, scope);
     // body
     let body = this.ctx.text.locale(user.locale as any, configTemplate.body);
-    body = this.ctx.bean.util.replaceTemplate(body, scope);
+    body = this.app.bean.util.replaceTemplate(body, scope);
     // message
     const _message = {
       to,
@@ -105,7 +105,7 @@ export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> 
   _notify({ messageClass, user }: any) {
     if (user.id <= 0) return;
     // stats
-    this.ctx.bean.stats.notify({
+    this.app.bean.stats.notify({
       module: __ThisModule__,
       name: 'message',
       nameSub: `${messageClass.module}_${messageClass.messageClassName}`,

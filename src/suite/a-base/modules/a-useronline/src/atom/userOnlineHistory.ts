@@ -17,7 +17,7 @@ export class AtomUserOnlineHistory extends BeanAtomBase<ScopeModule> {
 
   async read({ atomClass, options, key, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomRead();
+    this.app.bean.util.checkDemoForAtomRead();
     // super
     const item = await super.read({ atomClass, options, key, user });
     if (!item) return null;
@@ -29,7 +29,7 @@ export class AtomUserOnlineHistory extends BeanAtomBase<ScopeModule> {
 
   async select({ atomClass, options, items, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomSelect();
+    this.app.bean.util.checkDemoForAtomSelect();
     // super
     await super.select({ atomClass, options, items, user });
     // meta

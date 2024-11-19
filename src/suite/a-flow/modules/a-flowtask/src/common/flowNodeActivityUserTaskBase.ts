@@ -15,7 +15,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
 
   async onNodeEnter() {
     // options
-    const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({
+    const options = this.app.bean.flowTask._getNodeDefOptionsTask({
       nodeInstance: this.nodeInstance,
     });
 
@@ -40,7 +40,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
     if (!res) return res;
 
     // options
-    const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({
+    const options = this.app.bean.flowTask._getNodeDefOptionsTask({
       nodeInstance: this.nodeInstance,
     });
 
@@ -53,7 +53,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
 
     // recall
     if (options.allowRecall && user.id > 0) {
-      const taskInstance = await this.ctx.bean.flowTask._createTaskInstance({
+      const taskInstance = await this.app.bean.flowTask._createTaskInstance({
         nodeInstance: this.nodeInstance,
         userIdAssignee: user.id,
         user,
@@ -63,7 +63,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
 
     // create tasks
     for (const userIdAssignee of assignees) {
-      const taskInstance = await this.ctx.bean.flowTask._createTaskInstance({
+      const taskInstance = await this.app.bean.flowTask._createTaskInstance({
         nodeInstance: this.nodeInstance,
         userIdAssignee,
         user,
@@ -87,7 +87,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
   }
 
   async onNodeClear({ options }: any) {
-    await this.ctx.bean.flowTask._clearRemains({ nodeInstance: this.nodeInstance });
+    await this.app.bean.flowTask._clearRemains({ nodeInstance: this.nodeInstance });
     // super
     return await super.onNodeClear({ options });
   }
@@ -126,7 +126,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
       this.contextNode.vars.set('_assignees', assignees);
       // user
       const user = this.flowInstance._getOpUser();
-      const taskInstance = await this.ctx.bean.flowTask._createTaskInstance({
+      const taskInstance = await this.app.bean.flowTask._createTaskInstance({
         nodeInstance: this.nodeInstance,
         userIdAssignee: user.id,
         user,
@@ -149,7 +149,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
     let allowViewWorkflow;
     if (specificFlag === 1 || specificFlag === 2) {
       const nodeInstancePrevious = await this.nodeInstance._loadNodeInstancePrevious();
-      const optionsPrevious = this.ctx.bean.flowTask._getNodeDefOptionsTask({
+      const optionsPrevious = this.app.bean.flowTask._getNodeDefOptionsTask({
         nodeInstance: nodeInstancePrevious,
       });
       allowViewWorkflow = optionsPrevious.allowViewWorkflow;
@@ -187,7 +187,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
       options = Object.assign({}, options, { atomState });
     }
     // set
-    await this.ctx.bean.flowTask._setAtomState({ context: this.context, options });
+    await this.app.bean.flowTask._setAtomState({ context: this.context, options });
   }
 
   _prepareAtomState_static({ options }: any) {
@@ -197,7 +197,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
       atomClassName: this.context._atom.atomClassName,
     };
     // dictKey
-    const dictKey = this.ctx.bean.atomState.static_getDictKey({ atomClass, atomStage });
+    const dictKey = this.app.bean.atomState.static_getDictKey({ atomClass, atomStage });
     if (!dictKey) return null;
     // atomState
     let atomState;
@@ -219,7 +219,7 @@ export default class FlowNodeActivityUserTaskBase<T = unknown> extends BeanFlowN
       atomClassName: this.context._atom.atomClassName,
     };
     // dictKey
-    const dictKeyInfo = await this.ctx.bean.atomState.dynamic_getDictKeyInfo({ atomClass });
+    const dictKeyInfo = await this.app.bean.atomState.dynamic_getDictKeyInfo({ atomClass });
     const { dictKey, mode } = dictKeyInfo;
     // atomState
     let atomState;

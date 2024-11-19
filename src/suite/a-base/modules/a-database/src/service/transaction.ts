@@ -22,7 +22,7 @@ export class ServiceTransaction extends BeanBase<ScopeModule> {
 
   async begin(fn: Function, options?: Partial<IMiddlewareOptionsTransaction>) {
     let res;
-    const db = this.ctx.bean.database.getDefault();
+    const db = this.app.bean.database.getDefault();
     try {
       if (++this._transactionCounter === 1) {
         this._connection = await db.transaction(options);

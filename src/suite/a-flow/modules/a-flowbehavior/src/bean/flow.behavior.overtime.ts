@@ -72,7 +72,7 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
     // load flow node
     let nodeInstance;
     try {
-      nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId });
+      nodeInstance = await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId });
     } catch (_err) {}
     if (!nodeInstance) {
       // here means done, so do nothing

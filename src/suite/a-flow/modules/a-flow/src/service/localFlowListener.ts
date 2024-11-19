@@ -35,7 +35,7 @@ export class ServiceLocalFlowListener extends BeanBase {
       },
     };
     // new class
-    this._flowListener = this.ctx.bean.util.evaluateExpression({ expression, globals, wrapper: true });
+    this._flowListener = this.app.bean.util.evaluateExpression({ expression, globals, wrapper: true });
     return this._flowListener;
   }
 

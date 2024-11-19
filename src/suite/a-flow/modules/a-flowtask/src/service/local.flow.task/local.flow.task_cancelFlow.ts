@@ -18,7 +18,7 @@ export class LocalFlowTaskCancelFlow extends LocalFlowTaskAssignees {
 
   async _cancelFlow_handle({ handle }: any) {
     // atomState
-    await this.ctx.bean.flowTask._setAtomState({ context: this.context, options: { atomState: -3 } });
+    await this.app.bean.flowTask._setAtomState({ context: this.context, options: { atomState: -3 } });
     // flowTask
     const flowTask = this.contextTask._flowTask;
     const flowTaskId = flowTask.id;

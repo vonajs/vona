@@ -28,7 +28,7 @@ export class BeanShare extends BeanBase<ScopeModule> {
     // insert
     if (!item) {
       item = {
-        uuid: this.ctx.bean.util.uuidv4(),
+        uuid: this.app.bean.util.uuidv4(),
         atomId,
         userId,
         host,
@@ -53,7 +53,7 @@ export class BeanShare extends BeanBase<ScopeModule> {
     if (user.anonymous) {
       // redirect to login
       const shareLink = this._combine_shareLink(uuid);
-      const url = this.ctx.bean.base.getAbsoluteUrl(`/#!${shareLink}`);
+      const url = this.app.bean.base.getAbsoluteUrl(`/#!${shareLink}`);
       this.ctx.redirect(url);
       return;
     }
@@ -62,19 +62,19 @@ export class BeanShare extends BeanBase<ScopeModule> {
       await this._share_record({ item, user });
     }
     // redirect to original url
-    const url = item.url.indexOf('http') === 0 ? item.url : this.ctx.bean.base.getAbsoluteUrl(`/#!${item.url}`);
+    const url = item.url.indexOf('http') === 0 ? item.url : this.app.bean.base.getAbsoluteUrl(`/#!${item.url}`);
     // redirect
     this.ctx.redirect(url);
   }
 
   _combine_shareLink(uuid) {
-    return this.ctx.bean.base.getAbsoluteUrl(`/api/a/share/go/${uuid}`);
+    return this.app.bean.base.getAbsoluteUrl(`/api/a/share/go/${uuid}`);
   }
 
   async _share_record({ item, user }: any) {
     const userId = user.id;
     // aShareRecordPV
-    await this.ctx.bean.event.invoke({
+    await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'shareRecordPV',
       data: { share: item, user },
@@ -99,7 +99,7 @@ export class BeanShare extends BeanBase<ScopeModule> {
     };
     const uv = await this.modelShareRecordUV.get(uvData);
     if (!uv) {
-      await this.ctx.bean.event.invoke({
+      await this.app.bean.event.invoke({
         module: __ThisModule__,
         name: 'shareRecordUV',
         data: { share: item, user },

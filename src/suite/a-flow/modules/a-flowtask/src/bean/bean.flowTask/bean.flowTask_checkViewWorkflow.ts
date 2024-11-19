@@ -12,13 +12,13 @@ export class BeanFlowTaskCheckViewWorkflow extends BeanFlowTaskSchema {
 
   async _checkViewWorkflow_checkRightAction({ flowId, user }: any) {
     // flow
-    const flowItem = await this.ctx.bean.flow.modelFlowHistory.get({ flowId });
+    const flowItem = await this.app.bean.flow.modelFlowHistory.get({ flowId });
     if (!flowItem) return false;
     const atomId = flowItem.flowAtomId;
     const atomClassId = flowItem.flowAtomClassId;
     if (!atomId) return false;
     // check atomClass action
-    const res = await this.ctx.bean.atom.checkRightAction({
+    const res = await this.app.bean.atom.checkRightAction({
       atom: { id: atomId },
       atomClass: { id: atomClassId },
       action: 'viewWorkflow',

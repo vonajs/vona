@@ -12,7 +12,7 @@ export class BeanDetailDelete extends BeanDetailCopy {
 
   async _deleteDetails_Class({ atomClassDetail, /* atomClassBaseDetail, atomClass,*/ atomKey, user }: any) {
     // select all details
-    const details = await this.ctx.bean.atom.select({
+    const details = await this.app.bean.atom.select({
       atomClass: atomClassDetail,
       options: {
         atomIdMain: atomKey.atomId,
@@ -26,7 +26,7 @@ export class BeanDetailDelete extends BeanDetailCopy {
         itemId: detail.itemId,
       };
       // delete
-      await this.ctx.bean.atom.delete({
+      await this.app.bean.atom.delete({
         key: detailKey,
         atomClass: atomClassDetail,
         user,

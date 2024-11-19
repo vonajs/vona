@@ -9,7 +9,7 @@ export class FlowNodeEndEventAtom extends BeanFlowNodeBase {
 
     // atomState: -1
     options = Object.assign({}, options, { atomState: -1 });
-    await this.ctx.bean.flowTask._setAtomState({ context: this.context, options });
+    await this.app.bean.flowTask._setAtomState({ context: this.context, options });
 
     // super
     const res = await super.onNodeEnter();

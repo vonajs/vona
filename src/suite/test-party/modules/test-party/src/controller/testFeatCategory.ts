@@ -13,7 +13,7 @@ export class ControllerTestFeatCategory extends BeanBase<ScopeModule> {
     };
 
     // add
-    const categoryId = await this.ctx.bean.category.add({
+    const categoryId = await this.app.bean.category.add({
       atomClass,
       data: {
         language: 'en-us',
@@ -24,7 +24,7 @@ export class ControllerTestFeatCategory extends BeanBase<ScopeModule> {
     assert(TableIdentity.isValid(categoryId));
 
     // parseCategoryName: levelOne.levelTwo.levelThree
-    const category = await this.ctx.bean.category.parseCategoryName({
+    const category = await this.app.bean.category.parseCategoryName({
       atomClass,
       language: 'en-us',
       categoryName: 'levelOne.levelTwo.levelThree',

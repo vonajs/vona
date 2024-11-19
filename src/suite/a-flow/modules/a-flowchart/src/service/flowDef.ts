@@ -7,7 +7,7 @@ export class ServiceFlowDef extends BeanBase {
     assignees = await this.__checkRightNormalizeAssignees({ host, assignees, user });
     if (!assignees) this.app.throw(403);
     //  normalize
-    return await this.ctx.bean.flow.normalizeAssignees(assignees);
+    return await this.app.bean.flow.normalizeAssignees(assignees);
   }
 
   async userSelect({ host, params, user }: any) {
@@ -15,12 +15,12 @@ export class ServiceFlowDef extends BeanBase {
     const rightWrite = await this.__checkRightWrite({ host, user });
     if (!rightWrite) this.app.throw(403);
     // users
-    return await this.ctx.bean.user.selectGeneral({ params, user });
+    return await this.app.bean.user.selectGeneral({ params, user });
   }
 
   async __checkRightWrite({ host, user }: any) {
     const { flowDefId } = host;
-    return await this.ctx.bean.atom.checkRightAction({
+    return await this.app.bean.atom.checkRightAction({
       atom: { id: flowDefId },
       action: 3,
       stage: 'draft',
@@ -31,7 +31,7 @@ export class ServiceFlowDef extends BeanBase {
 
   async __checkRightRead({ host, user }: any) {
     const { flowDefId } = host;
-    return await this.ctx.bean.atom.checkRightRead({
+    return await this.app.bean.atom.checkRightRead({
       atom: { id: flowDefId },
       user,
       checkFlow: true,
@@ -48,7 +48,7 @@ export class ServiceFlowDef extends BeanBase {
     // no right
     if (!rightRead) return null;
     // get assignees from flowDef
-    const flowDef = await this.ctx.bean.flowDef.getById({ flowDefId });
+    const flowDef = await this.app.bean.flowDef.getById({ flowDefId });
     if (!flowDef) return null;
     // content
     const content = flowDef.content ? JSON.parse(flowDef.content) : null;

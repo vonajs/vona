@@ -62,7 +62,7 @@ export class ServiceFetch extends CacheBase {
   get cacheBean() {
     if (!this._cacheBase.beanFullName) return null;
     if (!this._cacheBean) {
-      this._cacheBean = this.ctx.bean._newBean(this._cacheBase.beanFullName as any, this._cacheBase);
+      this._cacheBean = this.app.bean._newBean(this._cacheBase.beanFullName as any, this._cacheBase);
     }
     return this._cacheBean;
   }

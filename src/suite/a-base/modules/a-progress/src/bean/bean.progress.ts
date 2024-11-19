@@ -48,7 +48,7 @@ export class BeanProgress extends BeanModuleScopeBase<ScopeModule> {
     let progressId = options && options.progressId;
     // create
     if (!progressId) {
-      progressId = this.ctx.bean.util.uuidv4();
+      progressId = this.app.bean.util.uuidv4();
     } else {
       // check if exists
       const item = await this._getRedisValue({ progressId });
@@ -203,7 +203,7 @@ export class BeanProgress extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async _publish({ progressId, ioMessage }: any) {
-    await this.ctx.bean.io.publish({
+    await this.app.bean.io.publish({
       path: `/a/progress/update/${progressId}`,
       message: ioMessage,
       messageClass: {

@@ -13,10 +13,10 @@ export class ControllerArticle extends BeanBase<ScopeModule> {
     // stage
     options.stage = 'formal';
     // anonymous user
-    const user = await this.ctx.bean.user.anonymous();
+    const user = await this.app.bean.user.anonymous();
     // select
-    options.page = this.ctx.bean.util.page(options.page, false);
-    const items = await this.ctx.bean.atom.select({ atomClass, options, user, pageForce: false });
+    options.page = this.app.bean.util.page(options.page, false);
+    const items = await this.app.bean.atom.select({ atomClass, options, user, pageForce: false });
     // ok
     this.app.successMore(items, options.page.index, options.page.size);
   }
@@ -25,8 +25,8 @@ export class ControllerArticle extends BeanBase<ScopeModule> {
   async attachments() {
     // options
     const options = this.ctx.request.body.options || {};
-    options.page = this.ctx.bean.util.page(options.page, false);
-    const items = await this.ctx.bean.file.attachments({
+    options.page = this.app.bean.util.page(options.page, false);
+    const items = await this.app.bean.file.attachments({
       key: this.ctx.request.body.key,
       options,
       user: this.ctx.state.user.op,

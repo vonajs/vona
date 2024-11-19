@@ -37,7 +37,7 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
     this._nodeBaseBean = null;
     this._behaviors = null;
     // context
-    this.contextNode = this.ctx.bean._newBean(LocalContextNode, {
+    this.contextNode = this.app.bean._newBean(LocalContextNode, {
       context,
       contextEdge,
       nodeDef,
@@ -132,8 +132,8 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
   }
 
   _prepareBehavior(behaviorDef) {
-    const behaviorBase = this.ctx.bean.flowDef._getFlowBehaviorBase(behaviorDef.type);
-    const behaviorBean = this.ctx.bean._newBean(behaviorBase.beanFullName, {
+    const behaviorBase = this.app.bean.flowDef._getFlowBehaviorBase(behaviorDef.type);
+    const behaviorBean = this.app.bean._newBean(behaviorBase.beanFullName, {
       flowInstance: this.flowInstance,
       nodeInstance: this,
       context: this.context,
@@ -245,7 +245,7 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
 
   get nodeBaseBean() {
     if (!this._nodeBaseBean) {
-      this._nodeBaseBean = this.ctx.bean._newBean(this.nodeBase.beanFullName, {
+      this._nodeBaseBean = this.app.bean._newBean(this.nodeBase.beanFullName, {
         flowInstance: this.flowInstance,
         nodeInstance: this,
         context: this.context,
@@ -258,7 +258,7 @@ export class LocalFlowNode0 extends BeanBase<ScopeModule> {
 
   get nodeBase() {
     if (!this._nodeBase) {
-      this._nodeBase = this.ctx.bean.flowDef._getFlowNodeBase(this.contextNode._nodeDef.type);
+      this._nodeBase = this.app.bean.flowDef._getFlowNodeBase(this.contextNode._nodeDef.type);
       if (!this._nodeBase) throw new Error(`flow node not found: ${this.contextNode._nodeDef.type}`);
     }
     return this._nodeBase;

@@ -13,23 +13,23 @@ export class VersionManager extends BeanBase {
     if (options.version === 1) {
       // create roles: cms-community-writer to template
       const roles = ['cms-community-writer'];
-      const roleTemplate = await this.ctx.bean.role.getSystemRole({ roleName: 'template' });
-      const roleSuperuser = await this.ctx.bean.role.getSystemRole({ roleName: 'superuser' });
-      const roleActivated = await this.ctx.bean.role.getSystemRole({ roleName: 'activated' });
+      const roleTemplate = await this.app.bean.role.getSystemRole({ roleName: 'template' });
+      const roleSuperuser = await this.app.bean.role.getSystemRole({ roleName: 'superuser' });
+      const roleActivated = await this.app.bean.role.getSystemRole({ roleName: 'activated' });
       for (const roleName of roles) {
-        const roleId = await this.ctx.bean.role.add({
+        const roleId = await this.app.bean.role.add({
           roleName,
           roleIdParent: roleTemplate!.id,
         });
         // role:superuser include cms-community
-        await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
+        await this.app.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
         // role:activated include cms-community-writer
         if (roleName === 'cms-community-writer') {
-          await this.ctx.bean.role.addRoleInc({ roleId: roleActivated!.id, roleIdInc: roleId });
+          await this.app.bean.role.addRoleInc({ roleId: roleActivated!.id, roleIdInc: roleId });
         }
       }
       // build roles
-      await this.ctx.bean.role.setDirty(true);
+      await this.app.bean.role.setDirty(true);
 
       // add role rights
       const roleRights = [
@@ -43,7 +43,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'root', action: 'read', scopeNames: 'authenticated' },
         { roleName: 'root', action: 'read', scopeNames: 0 },
       ];
-      await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'post', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'post', roleRights });
     }
 
     if (options.version === 2) {
@@ -52,7 +52,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'root', action: 'layout', scopeNames: 'root' }, //
         { roleName: 'root', action: 'preview', scopeNames: 'root' }, //
       ];
-      await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'post', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'post', roleRights });
     }
   }
 
@@ -74,7 +74,7 @@ export class VersionManager extends BeanBase {
     const categoryIds: any = {};
     for (const item of categories) {
       // add
-      const categoryId = await this.ctx.bean.category.add({
+      const categoryId = await this.app.bean.category.add({
         atomClass,
         data: {
           language: item.language,

@@ -15,7 +15,7 @@ export class ControllerTestResourceAll extends BeanBase<ScopeModule> {
     const resourceCount = resourceStaticsAll.length;
 
     // Tom list all
-    let list = await this.ctx.bean.resource.select({
+    let list = await this.app.bean.resource.select({
       options: {
         where: {
           'a.atomStaticKey': {
@@ -36,21 +36,21 @@ export class ControllerTestResourceAll extends BeanBase<ScopeModule> {
     const resource_one = list[0];
 
     // checkRightResource
-    const res = await this.ctx.bean.resource.checkRightResource({
+    const res = await this.app.bean.resource.checkRightResource({
       atomStaticKey: resource_one.atomStaticKey,
       user: userRoot,
     });
     assert.equal(!!res, true);
 
     // check
-    list = await this.ctx.bean.resource.check({
+    list = await this.app.bean.resource.check({
       atomStaticKeys: [resource_one.atomStaticKey],
       user: userRoot,
     });
     assert.equal(list[0].passed, true);
 
     // read
-    const item = await this.ctx.bean.resource.read({
+    const item = await this.app.bean.resource.read({
       key: { atomId: resource_one.atomId },
       options: { locale: 'en-us' },
       user: userRoot,

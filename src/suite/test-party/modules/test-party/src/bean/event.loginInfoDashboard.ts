@@ -5,7 +5,7 @@ export class EventLoginInfoDashboard extends BeanBase {
   async execute(context, next) {
     const data = context.data;
     const info = data.info;
-    info.config = this.ctx.bean.util.extend(info.config, {
+    info.config = this.app.bean.util.extend(info.config, {
       modules: {},
     });
     // next

@@ -18,7 +18,7 @@ export class ControllerKitchenSinkFormSchemaValidation extends BeanBase<ScopeMod
     // try load from db cache
     const cacheName = this._getCacheName();
     let item = await this.scope._bean.cacheRedis.get(cacheName);
-    item = this.ctx.bean.util.extend({}, __ItemDefault, item);
+    item = this.app.bean.util.extend({}, __ItemDefault, item);
     // ok
     this.app.success(item);
   }

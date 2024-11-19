@@ -18,21 +18,21 @@ export class BeanValidation extends BeanModuleScopeBase {
     return {
       module,
       validator,
-      schema: this.ctx.bean.util.getProperty(meta, `validation.schemas.${schema}`),
+      schema: this.app.bean.util.getProperty(meta, `validation.schemas.${schema}`),
     };
   }
 
   getValidator({ module, validator }: any) {
     module = module || this.moduleScope;
     const meta = this.ctx.app.meta.modules[module].meta;
-    let _validator = this.ctx.bean.util.getProperty(meta, `validation.validators.${validator}`);
+    let _validator = this.app.bean.util.getProperty(meta, `validation.validators.${validator}`);
     if (!_validator) {
-      const _schema = this.ctx.bean.util.getProperty(meta, `validation.schemas.${validator}`);
+      const _schema = this.app.bean.util.getProperty(meta, `validation.schemas.${validator}`);
       if (!_schema) return null;
       _validator = {
         schemas: validator,
       };
-      this.ctx.bean.util.setProperty(meta, `validation.validators.${validator}`, _validator);
+      this.app.bean.util.setProperty(meta, `validation.validators.${validator}`, _validator);
     }
     return _validator;
   }
@@ -80,7 +80,7 @@ export class BeanValidation extends BeanModuleScopeBase {
       params.keywords = meta.validation.keywords;
     }
     // schemas
-    params.schemaRoot = this.ctx.bean.util.uuid.v4();
+    params.schemaRoot = this.app.bean.util.uuid.v4();
     const schemas = {
       [params.schemaRoot]: { ...schema, $async: true },
     };
@@ -190,7 +190,7 @@ export class BeanValidation extends BeanModuleScopeBase {
         });
       }
     } else if (atomClass) {
-      const validator = await this.ctx.bean.atom.validator({ atomClass });
+      const validator = await this.app.bean.atom.validator({ atomClass });
       if (validator) {
         // if error throw 422
         await this.validate({

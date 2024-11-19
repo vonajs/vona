@@ -11,7 +11,7 @@ export class StatsDeps extends BeanBase {
       const _keys = keys.slice(0);
       _keys.splice(0, 1, name);
       const fullName = _keys.join('.');
-      const value = await this.ctx.bean.stats._get({
+      const value = await this.app.bean.stats._get({
         module,
         name,
         fullName,

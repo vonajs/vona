@@ -6,7 +6,7 @@ export class ControllerTestFeatSendMail extends BeanBase<ScopeModule> {
   async sendMail() {
     // send
     const message = this.ctx.request.body.data;
-    await this.ctx.bean.mail.send({
+    await this.app.bean.mail.send({
       scene: 'test',
       message,
     });

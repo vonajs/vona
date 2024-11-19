@@ -8,13 +8,13 @@ export class BeanDetail0 extends BeanModuleScopeBase<ScopeModule> {
 
   async _loopDetailClasses({ atomClass, fn }: any) {
     // all details of atom
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     const atomClassDetails = atomClassBase.details;
     if (!atomClassDetails) return; // do nothing
     // loop
     for (let atomClassDetail of atomClassDetails) {
-      atomClassDetail = await this.ctx.bean.atomClass.get(atomClassDetail);
-      const atomClassBaseDetail = await this.ctx.bean.atomClass.atomClass(atomClassDetail);
+      atomClassDetail = await this.app.bean.atomClass.get(atomClassDetail);
+      const atomClassBaseDetail = await this.app.bean.atomClass.atomClass(atomClassDetail);
       await fn({ atomClassDetail, atomClassBaseDetail });
     }
   }

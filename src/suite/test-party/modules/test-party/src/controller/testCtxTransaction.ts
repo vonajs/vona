@@ -12,13 +12,13 @@ export class ControllerTestCtxTransaction extends BeanBase<ScopeModule> {
     const itemNew = this.ctx.request.body.item;
 
     // write
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: atomKey,
       item: { atomName: itemNew.atomName },
       user,
     });
     // write: throw error when personCount is 0
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: atomKey,
       item: { personCount: itemNew.personCount },
       user,

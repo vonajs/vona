@@ -20,7 +20,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
     if (!assignees || assignees.length === 0) {
       users = [];
     } else {
-      users = await this.ctx.bean.user.select({
+      users = await this.app.bean.user.select({
         options: {
           where: {
             'f.disabled': 0,
@@ -32,7 +32,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
       });
     }
     // options
-    const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
+    const options = this.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     // ok
     return {
       users,
@@ -57,7 +57,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
 
   async _assigneesConfirmation_handle({ handle }: any) {
     // options
-    const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
+    const options = this.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     // flowTaskHistory update
     this.contextTask._flowTaskHistory.flowTaskStatus = 1;
     this.contextTask._flowTaskHistory.timeHandled = new Date();
@@ -91,7 +91,7 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
     }
     // reject
     if (handle.status === 2) {
-      return await this.ctx.bean.flowTask._gotoFlowNodePrevious({
+      return await this.app.bean.flowTask._gotoFlowNodePrevious({
         nodeInstance: this.nodeInstance,
         rejectedNode: null,
       });

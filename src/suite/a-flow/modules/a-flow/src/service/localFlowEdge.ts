@@ -21,7 +21,7 @@ export class ServiceLocalFlowEdge extends BeanBase {
     this._edgeBase = null;
     this._edgeBaseBean = null;
     // context
-    this.contextEdge = this.ctx.bean._newBean(LocalContextEdge, {
+    this.contextEdge = this.app.bean._newBean(LocalContextEdge, {
       context,
       contextNode,
       edgeDef,
@@ -76,7 +76,7 @@ export class ServiceLocalFlowEdge extends BeanBase {
 
   get edgeBaseBean() {
     if (!this._edgeBaseBean) {
-      this._edgeBaseBean = this.ctx.bean._newBean(this.edgeBase.beanFullName, {
+      this._edgeBaseBean = this.app.bean._newBean(this.edgeBase.beanFullName, {
         flowInstance: this.flowInstance,
         edgeInstance: this,
         context: this.context,
@@ -88,7 +88,7 @@ export class ServiceLocalFlowEdge extends BeanBase {
   }
 
   get edgeBase() {
-    if (!this._edgeBase) this._edgeBase = this.ctx.bean.flowDef._getFlowEdgeBase(this.contextEdge._edgeDef.type);
+    if (!this._edgeBase) this._edgeBase = this.app.bean.flowDef._getFlowEdgeBase(this.contextEdge._edgeDef.type);
     return this._edgeBase;
   }
 }

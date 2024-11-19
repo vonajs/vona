@@ -20,7 +20,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
   }
   async __all() {
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({
+    const atomClass = await this.app.bean.atomClass.get({
       module: 'a-useronline',
       atomClassName: 'userOnlineHistory',
     });
@@ -48,7 +48,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     );
 
     // add useronline
-    const itemKey = await this.ctx.bean.atom.write({
+    const itemKey = await this.app.bean.atom.write({
       atomClass,
       item: {
         userId: userTom.id,
@@ -72,7 +72,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     );
 
     // get useronline
-    const userOnline = await this.ctx.bean.atom.read({ key: itemKey, atomClass });
+    const userOnline = await this.app.bean.atom.read({ key: itemKey, atomClass });
     assert.equal(userOnline.userId, userTom.id);
 
     // checkRightRead
@@ -82,7 +82,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, atomId, right] of checkRightReads) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightRead({
+      const res = await this.app.bean.atom.checkRightRead({
         atom: { id: atomId },
         atomClass,
         user,
@@ -97,7 +97,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, atomId, right] of checkRightWrites) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightAction({
+      const res = await this.app.bean.atom.checkRightAction({
         atom: { id: atomId },
         atomClass,
         action: 'write',
@@ -113,7 +113,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, atomId, right] of checkRightDeletes) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightAction({
+      const res = await this.app.bean.atom.checkRightAction({
         atom: { id: atomId },
         atomClass,
         action: 'delete',
@@ -129,7 +129,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, right] of checkRightCreates) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightCreate({
+      const res = await this.app.bean.atom.checkRightCreate({
         atomClass,
         user,
       });
@@ -137,7 +137,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     }
 
     // delete useronline
-    await this.ctx.bean.atom.delete({
+    await this.app.bean.atom.delete({
       key: itemKey,
       atomClass,
     });
@@ -158,7 +158,7 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
   async _testCheckList(userIds, userAtoms, cb) {
     for (const [userName, atomCountExpected] of userAtoms) {
       const user = await this._getUser({ userIds, userName });
-      const list = await this.ctx.bean.atom.select({
+      const list = await this.app.bean.atom.select({
         atomClass: this.atomClass,
         options: {
           where: {
@@ -178,6 +178,6 @@ export class ControllerTestItemOnlyAll extends BeanBase<ScopeModule> {
     if (!userName) return;
     const userId = userIds && userIds[userName];
     if (userId) return { id: userId };
-    return await this.ctx.bean.user.get({ userName });
+    return await this.app.bean.user.get({ userName });
   }
 }

@@ -49,9 +49,9 @@ export class ServiceRight extends BeanBase<ScopeModule> {
   async _getNodeOptionsTask({ getOptions, flowTask, nodeInstance }: any) {
     if (getOptions) return await getOptions();
     if (!nodeInstance) {
-      nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowTask.flowNodeId });
+      nodeInstance = await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId: flowTask.flowNodeId });
     }
-    return this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
+    return this.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
   }
   async _getTask({ getTask, flowTaskId }: any) {
     if (getTask) return await getTask(flowTaskId);

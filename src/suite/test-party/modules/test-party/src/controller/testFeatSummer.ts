@@ -13,11 +13,11 @@ export class ControllerTestFeatSummer extends BeanBase<ScopeModule> {
     const key3 = { id: 3 };
 
     // getCache
-    const cache = this.ctx.bean.summer.getCache({ name });
+    const cache = this.app.bean.summer.getCache({ name });
     assert.equal(!!cache, true);
-    let cacheOtherModule = this.ctx.bean.summer.module(__ThisModule__).getCache({ name });
+    let cacheOtherModule = this.app.bean.summer.module(__ThisModule__).getCache({ name });
     assert.equal(!!cacheOtherModule, true);
-    cacheOtherModule = this.ctx.bean.summer.getCache({ module: __ThisModule__, name });
+    cacheOtherModule = this.app.bean.summer.getCache({ module: __ThisModule__, name });
     assert.equal(!!cacheOtherModule, true);
 
     let value;
@@ -40,7 +40,7 @@ export class ControllerTestFeatSummer extends BeanBase<ScopeModule> {
     assert.equal(value.id, key1.id);
 
     // get: peek sleep for mem stale
-    await this.ctx.bean.util.sleep(1000);
+    await this.app.bean.util.sleep(1000);
 
     // get: peek again
     value = await cache.peek(key1, { mode: 'mem' });
@@ -49,7 +49,7 @@ export class ControllerTestFeatSummer extends BeanBase<ScopeModule> {
     assert.equal(value.id, key1.id);
 
     // get: peek sleep for redis stale
-    await this.ctx.bean.util.sleep(2000);
+    await this.app.bean.util.sleep(2000);
 
     // get: peek again
     value = await cache.peek(key1, { mode: 'mem' });

@@ -76,7 +76,7 @@ export class VersionManager extends BeanBase {
       //   { roleName: 'system', action: 'deleteBulk' },
       //   { roleName: 'system', action: 'exportBulk' },
       // ];
-      // await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'dashboard', roleRights });
+      // await this.app.bean.role.addRoleRightBatch({ atomClassName: 'dashboard', roleRights });
     }
 
     if (options.version === 3) {
@@ -96,7 +96,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'system', action: 'deleteBulk' },
         { roleName: 'system', action: 'exportBulk' },
       ];
-      await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'dashboard', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'dashboard', roleRights });
     }
   }
 

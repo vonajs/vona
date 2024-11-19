@@ -4,10 +4,10 @@ import { BeanBase, Service } from 'vona';
 export class ServiceDict extends BeanBase {
   async getDict({ dictKey, user }: any) {
     // check right
-    const res = await this.ctx.bean.dict._prepareDict_load({ dictKey, user, returnDict: false });
+    const res = await this.app.bean.dict._prepareDict_load({ dictKey, user, returnDict: false });
     if (!res) this.app.throw(403);
     // get dict
-    const dict = await this.ctx.bean.dict.getDict({ dictKey });
+    const dict = await this.app.bean.dict.getDict({ dictKey });
     // short
     return {
       dictKey,

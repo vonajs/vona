@@ -15,7 +15,7 @@ export class BeanIcon extends BeanModuleScopeBase {
     const icons: any = {};
     for (const relativeName in this.ctx.app.meta.modules) {
       const module = this.ctx.app.meta.modules[relativeName];
-      const groups = this.ctx.bean.util.getProperty(module.meta, 'icon.groups');
+      const groups = this.app.bean.util.getProperty(module.meta, 'icon.groups');
       if (groups) {
         icons[relativeName] = groups;
       }

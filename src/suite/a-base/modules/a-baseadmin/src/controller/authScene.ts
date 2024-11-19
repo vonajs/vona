@@ -5,7 +5,7 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerAuthScene extends BeanBase<ScopeModule> {
   async disable() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.authScene.disable({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
@@ -16,7 +16,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
 
   async save() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.authScene.save({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
@@ -27,7 +27,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
 
   async add() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.authScene.add({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
@@ -38,7 +38,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
 
   async delete() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.authScene.delete({
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,

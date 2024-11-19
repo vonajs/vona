@@ -7,7 +7,7 @@ export class ControllerUtil extends BeanBase<ScopeModule> {
     // atomId
     const atomId = this.ctx.params.atomId;
     // article
-    const article = await this.ctx.bean.atom.read({ key: { atomId }, user: this.ctx.state.user.op });
+    const article = await this.app.bean.atom.read({ key: { atomId }, user: this.ctx.state.user.op });
     if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
     // ok
     this.ctx.status = 200;

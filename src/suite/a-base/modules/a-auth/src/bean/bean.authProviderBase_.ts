@@ -40,7 +40,7 @@ export class BeanAuthProviderBase<T = unknown> extends BeanBase<T> {
     throw new Error('onVerify not implemented');
   }
   get configProviderCache() {
-    return this.ctx.bean.authProviderCache.getAuthProviderConfigCache(this.providerModule, this.providerName);
+    return this.app.bean.authProviderCache.getAuthProviderConfigCache(this.providerModule, this.providerName);
   }
   get configProviderScene() {
     const { configProviderScenes } = this.configProviderCache;

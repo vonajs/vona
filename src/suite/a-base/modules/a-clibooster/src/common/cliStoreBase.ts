@@ -100,7 +100,7 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
     let entityNames = argv._;
     if (entityNames.length === 0) {
       // load all entities
-      const entitiesConfig = this.ctx.bean.util.getProperty(
+      const entitiesConfig = this.app.bean.util.getProperty(
         this.cabloyConfig.get(),
         `store.commands.${this.commandName}.entities`,
       );
@@ -138,13 +138,13 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
   async _executeStoreCommandEntity({ entityName }: any) {
     try {
       // save to config
-      let entityConfig = this.ctx.bean.util.getProperty(
+      let entityConfig = this.app.bean.util.getProperty(
         this.cabloyConfig.get(),
         `store.commands.${this.commandName}.entities.${entityName}`,
       );
       if (!entityConfig) {
         entityConfig = {};
-        this.ctx.bean.util.setProperty(
+        this.app.bean.util.setProperty(
           this.cabloyConfig.get(),
           `store.commands.${this.commandName}.entities.${entityName}`,
           entityConfig,
@@ -191,7 +191,7 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
   }
 
   _logHelperDocs({ welcomes, user }: any) {
-    const configHelper = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
+    const configHelper = this.app.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
     if (configHelper === false) {
       return;
     }

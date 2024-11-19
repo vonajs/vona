@@ -20,7 +20,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
       }
     }
     // flowDef: by key+revision
-    const flowDef = await this.ctx.bean.flowDef.getByKeyAndRevision({
+    const flowDef = await this.app.bean.flowDef.getByKeyAndRevision({
       flowDefKey: flow.flowDefKey,
       flowDefRevision: flow.flowDefRevision,
     });

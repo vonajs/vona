@@ -4,7 +4,7 @@ import { BeanBase, Service } from 'vona';
 export class ServiceResource extends BeanBase {
   async read({ atomStaticKey, options, user: _user }: any) {
     // donot check user access right, but must check atomClass
-    const appItem = await this.ctx.bean.resource.readByStaticKey({ atomStaticKey, options /* , user*/ });
+    const appItem = await this.app.bean.resource.readByStaticKey({ atomStaticKey, options /* , user*/ });
     if (appItem.module !== 'a-app' || appItem.atomClassName !== 'app') this.app.throw(403);
     return appItem;
   }

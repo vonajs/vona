@@ -51,7 +51,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     const atomClassId = this.context._atom.atomClassId;
     const flowTaskId = this.contextTask._flowTaskId;
     const user = this.contextTask._user;
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: { atomId },
       atomClass: { id: atomClassId },
       item: formAtom,
@@ -98,7 +98,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
     for (const key of keys) {
       const conditionExpression = fieldsMapping[key];
       // evaluateExpression
-      const fieldValue = this.ctx.bean.flow.evaluateExpression({
+      const fieldValue = this.app.bean.flow.evaluateExpression({
         expression: conditionExpression,
         globals: {
           context: this.context,
@@ -115,7 +115,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
       }
     }
     // write
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: { atomId },
       item: data,
       options: { ignoreValidate: true },
@@ -182,7 +182,7 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
   //   // write
   //   const atomId = this.context._atom.atomId;
   //   const user = this.contextTask._user;
-  //   await this.ctx.bean.atom.write({
+  //   await this.app.bean.atom.write({
   //     key: { atomId },
   //     item: formAtom,
   //     options: { schema: schemaWrite },

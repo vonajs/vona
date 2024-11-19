@@ -50,7 +50,7 @@ export class ControllerTestMultilevelAuthorizationRole extends BeanBase<ScopeMod
       // childrenTop
       const userName = dataTest.userName;
       const userId = userIds[userName];
-      let list = await this.ctx.bean.role.childrenTop({
+      let list = await this.app.bean.role.childrenTop({
         roleTypes,
         page: null,
         user: { id: userId },
@@ -60,7 +60,7 @@ export class ControllerTestMultilevelAuthorizationRole extends BeanBase<ScopeMod
 
       if (list.length > 0) {
         const roleOne = list[0];
-        list = await this.ctx.bean.role.children({ roleTypes, roleId: roleOne.id, page: null, user: { id: userId } });
+        list = await this.app.bean.role.children({ roleTypes, roleId: roleOne.id, page: null, user: { id: userId } });
         assert.equal(list.length, dataTest.children.count, userName);
         assert.equal(list.map(item => item.roleName).join(','), dataTest.children.roleNames, userName);
       }

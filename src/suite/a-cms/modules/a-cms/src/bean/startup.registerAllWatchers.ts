@@ -15,7 +15,7 @@ export class StartupRegisterAllWatchers extends BeanBase<ScopeModule> {
     // loop modules
     for (const module of this.app.meta.modulesArray) {
       // loop atomClasses
-      const atoms = this.ctx.bean.util.getProperty(module, 'main.meta.base.atoms');
+      const atoms = this.app.bean.util.getProperty(module, 'main.meta.base.atoms');
       if (!atoms) continue;
       for (const key in atoms) {
         if (atoms[key].info.cms !== true) continue;
@@ -25,8 +25,8 @@ export class StartupRegisterAllWatchers extends BeanBase<ScopeModule> {
           atomClassName: key,
         };
         // check if watch
-        if (this.ctx.bean.util.checkIfSameAtomClass(configWatchAtomClass, atomClass)) {
-          const build = this.ctx.bean.cms.build({ atomClass });
+        if (this.app.bean.util.checkIfSameAtomClass(configWatchAtomClass, atomClass)) {
+          const build = this.app.bean.cms.build({ atomClass });
           await build.registerWatchers();
         }
       }

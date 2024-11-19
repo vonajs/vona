@@ -18,7 +18,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async setConfigSite() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.scope.service.site.setConfigSite({
       atomClass,
@@ -47,7 +47,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async setConfigLanguage() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.scope.service.site.setConfigLanguage({
       atomClass,
@@ -59,12 +59,12 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async buildLanguage() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // atomClass
     const atomClass = utils.atomClass(this.ctx.request.body.atomClass);
     const language = this.ctx.request.body.language;
     // progress
-    const progressId = await this.ctx.bean.progress.create();
+    const progressId = await this.app.bean.progress.create();
     // build
     this.scope.service.site.buildLanguageQueue({ atomClass, language, progressId });
     this.app.success({ progressId });
@@ -72,11 +72,11 @@ export class ControllerSite extends BeanBase<ScopeModule> {
 
   async buildLanguages() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // atomClass
     const atomClass = utils.atomClass(this.ctx.request.body.atomClass);
     // progress
-    const progressId = await this.ctx.bean.progress.create();
+    const progressId = await this.app.bean.progress.create();
     // build
     this.scope.service.site.buildLanguagesQueue({ atomClass, progressId });
     this.app.success({ progressId });

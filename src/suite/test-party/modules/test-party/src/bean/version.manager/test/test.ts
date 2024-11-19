@@ -12,7 +12,7 @@ export class VersionTest extends BeanBase {
   // role rights
   async _testRoleRights() {
     // // atomClass: role
-    // await this.ctx.bean.role.addRoleRightBatch({
+    // await this.app.bean.role.addRoleRightBatch({
     //   module: 'a-base',
     //   atomClassName: 'role',
     //   roleRights: testData.roleRightsRole,
@@ -21,7 +21,7 @@ export class VersionTest extends BeanBase {
 
   // role resource rights
   async _testRoleResources() {
-    await this.ctx.bean.resource.addRoleResourceBatch({
+    await this.app.bean.resource.addRoleResourceBatch({
       roleResources: testData.roleResources,
     });
   }

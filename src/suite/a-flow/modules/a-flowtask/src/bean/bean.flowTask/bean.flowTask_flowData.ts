@@ -25,7 +25,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
       user = { id: 0 };
     }
     // select flow
-    const flow = await this.ctx.bean.flow._get({ flowId, history: true, user });
+    const flow = await this.app.bean.flow._get({ flowId, history: true, user });
     // not throw error
     // if (!flow) this.app.throw(404);
     // ok
@@ -34,13 +34,13 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
 
   async _flowData_atom({ flowId, atomId, atomClassId }: any) {
     // only read basic info
-    let atom = (await this.ctx.bean.atom.model.get({ id: atomId, atomClassId })) as EntityAtomPro;
+    let atom = (await this.app.bean.atom.model.get({ id: atomId, atomClassId })) as EntityAtomPro;
     if (!atom || atom.atomFlowId !== flowId) {
       // this.app.throw(403);
       // maybe old
       return null;
     }
-    const atomClass = await this.ctx.bean.atomClass.get({ id: atomClassId });
+    const atomClass = await this.app.bean.atomClass.get({ id: atomClassId });
     atom = {
       ...atom,
       atomId,
@@ -50,7 +50,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
       atomUpdatedAt: atom.updatedAt,
     };
     // translate
-    await this.ctx.bean.atomBase._read_handleTranslate({ item: atom, atomClass, options: null, user: null });
+    await this.app.bean.atomBase._read_handleTranslate({ item: atom, atomClass, options: null, user: null });
     // ok
     return atom;
   }
@@ -77,7 +77,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
       where.__or__ = [{ 'a.userIdAssignee': user.id }, { 'a.flowTaskHidden': 0 }];
     }
     // select tasks
-    let tasks = await this.ctx.bean.flowTask.select({
+    let tasks = await this.app.bean.flowTask.select({
       options: {
         where,
         orders: [

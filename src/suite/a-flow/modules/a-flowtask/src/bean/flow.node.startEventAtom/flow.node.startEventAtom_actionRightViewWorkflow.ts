@@ -12,7 +12,7 @@ export class FlowNodeStartEventAtomActionRightViewWorkflow extends FlowNodeStart
     const roleRights = [
       { roleName: 'template.system', action: 'viewWorkflow', scopeNames: 'authenticated' }, //
     ];
-    await this.ctx.bean.role.addRoleRightBatch({
+    await this.app.bean.role.addRoleRightBatch({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       roleRights,

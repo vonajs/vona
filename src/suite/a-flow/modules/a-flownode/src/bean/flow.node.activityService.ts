@@ -16,7 +16,7 @@ export class FlowNodeActivityService extends BeanFlowNodeBase {
       );
     }
     // executeService
-    await this.ctx.bean.flow.executeService({
+    await this.app.bean.flow.executeService({
       bean,
       parameterExpression,
       globals: {

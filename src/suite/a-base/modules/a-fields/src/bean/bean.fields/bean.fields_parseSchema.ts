@@ -9,13 +9,13 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
     fieldsRight,
   }: any): Promise<{ module: string; validator: string; schema: any; isSchemaBase?: boolean } | null> {
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // atomClassMain
     if (atomClassMain) {
-      atomClassMain = await this.ctx.bean.atomClass.get(atomClassMain);
+      atomClassMain = await this.app.bean.atomClass.get(atomClassMain);
     }
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // isMain
     const isMain = (!atomClassMain && !atomClassBase.detail) || (atomClassMain && atomClass.id === atomClassMain.id);
     // schemaBase
@@ -73,7 +73,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
       validator: fieldsRight.custom.validator,
       schema: fieldsRight.custom.schema,
     };
-    return this.ctx.bean.validation.getSchema(schemaParams);
+    return this.app.bean.validation.getSchema(schemaParams);
   }
 
   async __parseSchema_checkModeGeneral({ schemaBase, fieldsRight }: any) {
@@ -133,7 +133,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
   }
 
   async __parseSchema_getSchemaBase({ atomClass }: any) {
-    return await this.ctx.bean.atom.schema({ atomClass, schema: null });
+    return await this.app.bean.atom.schema({ atomClass, schema: null });
   }
 
   async __parseSchema_getFieldsRight({ atomClass, isMain, fieldsRight }: any) {
@@ -152,7 +152,7 @@ export class BeanFieldsParseSchema extends BeanFieldsBase {
 
   async __parseSchema_prepareFieldsRight({ fieldsRight }: any) {
     // extend
-    fieldsRight = this.ctx.bean.util.extend({}, fieldsRight);
+    fieldsRight = this.app.bean.util.extend({}, fieldsRight);
     // mode
     if (!fieldsRight.mode) {
       fieldsRight.mode = 'allowAllFieldsRead';

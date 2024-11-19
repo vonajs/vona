@@ -47,14 +47,14 @@ export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition
     // match conditionExpression
     const conditionActive = _condition.conditionExpression;
     if (conditionActive) {
-      const res = this.ctx.bean.flow.evaluateExpression({
+      const res = this.app.bean.flow.evaluateExpression({
         expression: conditionActive,
         globals: { atom },
       });
       if (!res) return null;
     }
     // start
-    const flowInstance = await this.ctx.bean.flow.startById({
+    const flowInstance = await this.app.bean.flow.startById({
       flowDefId: _condition.flowDefId,
       startEventId: _condition.startEventId,
       flowUserId: userId,
@@ -68,7 +68,7 @@ export class FlowNodeStartEventAtomMatch extends FlowNodeStartEventAtomCondition
   async _checkConditionValid(context) {
     const { _condition } = context;
     // flowDef
-    const flowDef = await this.ctx.bean.flowDef.getById({ flowDefId: _condition.flowDefId });
+    const flowDef = await this.app.bean.flowDef.getById({ flowDefId: _condition.flowDefId });
     if (!flowDef) return false;
     // atomDisabled
     if (flowDef.atomDisabled === 1) return false;

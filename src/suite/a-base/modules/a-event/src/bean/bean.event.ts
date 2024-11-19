@@ -13,7 +13,7 @@ export class BeanEvent extends BeanModuleScopeBase {
   async invoke({ module, name, data, result, next }: any) {
     const eventArray = this._getEventArray({ module, name });
     const eventBeanArray = eventArray.map(item => {
-      const eventBean = this.ctx.bean._getBean(item);
+      const eventBean = this.app.bean._getBean(item);
       if (!eventBean) throw new Error(`event not found: ${item}`);
       if (!eventBean.execute) throw new Error(`event.execute not found: ${item}`);
       return eventBean;
@@ -38,7 +38,7 @@ export class BeanEvent extends BeanModuleScopeBase {
   _getEventArray({ module, name }: any) {
     module = module || this.moduleScope;
     const key = `${module}:${name}`;
-    const events = this.ctx.bean.util.getPropertyObject(this.ctx.app.meta, 'events');
+    const events = this.app.bean.util.getPropertyObject(this.ctx.app.meta, 'events');
     if (events[key]) return events[key];
     events[key] = this._collectEventArray(key);
     return events[key];

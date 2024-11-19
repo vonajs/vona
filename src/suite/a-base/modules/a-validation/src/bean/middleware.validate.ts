@@ -16,7 +16,7 @@ export class MiddlewareValidate extends BeanBase<ScopeModule> {
     const schema = options.schema;
     const data = this.ctx.request.body[options.data || 'data'];
     // if error throw 422
-    await this.ctx.bean.validation.validate({
+    await this.app.bean.validation.validate({
       module,
       validator,
       schema,

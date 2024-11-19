@@ -44,14 +44,14 @@ export class BeanFlowDef0 extends BeanBase<ScopeModule> {
   }
 
   async _getById({ flowDefId }: any) {
-    return await this.ctx.bean.atom.read({ key: { atomId: flowDefId } });
+    return await this.app.bean.atom.read({ key: { atomId: flowDefId } });
   }
 
   async _getByKey({ flowDefKey, flowDefRevision, atomStage }: any) {
     // fullKey
     const { fullKey } = this.self._combineFullKey({ flowDefKey });
     // from db
-    return await this.ctx.bean.atom.readByStaticKey({
+    return await this.app.bean.atom.readByStaticKey({
       atomClass: this.atomClass,
       atomStaticKey: fullKey,
       atomRevision: flowDefRevision,

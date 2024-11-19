@@ -52,7 +52,7 @@ export class ServiceUtils extends BeanBase {
     // require
     const DemoClass = await import(jsFile);
     // demo
-    const demo = this.ctx.bean._newBean(DemoClass.default, {
+    const demo = this.app.bean._newBean(DemoClass.default, {
       method,
       context: { argv },
       progressId: cli.options.progressId,
@@ -85,7 +85,7 @@ export class ServiceUtils extends BeanBase {
     // log
     let log = cli.helper.chalk.keyword('cyan')('> ./src/backend/demo/index.mts');
     await cli.console.log(log);
-    const url = this.ctx.bean.base.getAbsoluteUrl('/api/a/clibooster/tools/demo');
+    const url = this.app.bean.base.getAbsoluteUrl('/api/a/clibooster/tools/demo');
     log = cli.helper.chalk.keyword('cyan')(`> ${url}\n`);
     await cli.console.log(log);
     // ok

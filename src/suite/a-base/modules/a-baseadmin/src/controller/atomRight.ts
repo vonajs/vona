@@ -15,7 +15,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
 
   async add() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.atomRight.add({
       roleAtomId: this.ctx.request.body.key.atomId,
       atomClass: this.ctx.request.body.atomClassTarget,
@@ -29,7 +29,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
 
   async delete() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.atomRight.delete({
       roleAtomId: this.ctx.request.body.key.atomId,
       roleRightId: this.ctx.request.body.roleRightId,

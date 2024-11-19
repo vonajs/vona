@@ -84,7 +84,7 @@ export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
     });
     // always extend config, as maybe has new values
     const config = this.getScope(module).config.settings[scene];
-    return res ? this.ctx.bean.util.extend({}, config, JSON.parse(res.value)) : config;
+    return res ? this.app.bean.util.extend({}, config, JSON.parse(res.value)) : config;
   }
 
   async _saveSettings({ scene, module, data }: any) {
@@ -92,7 +92,7 @@ export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
     let validator = this._getValidator({ scene, module });
     if (!validator) this.app.throw(404); // not found
     validator = validator!;
-    await this.ctx.bean.validation.validate({
+    await this.app.bean.validation.validate({
       module: validator.module,
       validator: validator.validator,
       schema: null,
@@ -170,11 +170,11 @@ export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
   _getSchema({ scene, module, schemaName }: any) {
     const validator = this._getValidator({ scene, module });
     if (!validator) return null;
-    const schema = this.ctx.bean.validation.getSchema({
+    const schema = this.app.bean.validation.getSchema({
       module: validator.module,
       validator: validator.validator,
       schema: schemaName,
     });
-    return this.ctx.bean.util.extend({}, schema);
+    return this.app.bean.util.extend({}, schema);
   }
 }

@@ -10,7 +10,7 @@ export class EventAccountMigration extends BeanBase {
   async execute(context, next) {
     const data = context.data;
     // provider
-    const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const providerItem = await this.app.bean.authProvider.getAuthProvider({
       module: __ThisModule__,
       providerName: 'authsms',
     });
@@ -18,7 +18,7 @@ export class EventAccountMigration extends BeanBase {
     const authItem = await this.modelAuth.get({ userId: data.userIdFrom, providerId: providerItem.id });
     if (authItem) {
       const user = { id: data.userIdTo, mobile: authItem.profileId };
-      await this.ctx.bean.user.save({ user });
+      await this.app.bean.user.save({ user });
     }
     // next
     await next();

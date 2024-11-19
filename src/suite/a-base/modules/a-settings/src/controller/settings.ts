@@ -12,14 +12,14 @@ export class ControllerSettings extends BeanBase<ScopeModule> {
 
   async instanceLoad() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.settings.instanceLoad(this.ctx.request.body);
     this.app.success(res);
   }
 
   async instanceSave() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.settings.instanceSave(this.ctx.request.body);
     this.app.success(res);
   }

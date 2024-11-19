@@ -4,18 +4,18 @@ export class VersionInit extends BeanBase {
   async run(_options) {
     // create roles: cms-writer to template
     const roles = ['cms-writer'];
-    const roleTemplate = await this.ctx.bean.role.getSystemRole({ roleName: 'template' });
-    const roleSuperuser = await this.ctx.bean.role.getSystemRole({ roleName: 'superuser' });
+    const roleTemplate = await this.app.bean.role.getSystemRole({ roleName: 'template' });
+    const roleSuperuser = await this.app.bean.role.getSystemRole({ roleName: 'superuser' });
     for (const roleName of roles) {
-      const roleId = await this.ctx.bean.role.add({
+      const roleId = await this.app.bean.role.add({
         roleName,
         roleIdParent: roleTemplate!.id,
       });
       // role:superuser include cms-writer
-      await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
+      await this.app.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
     }
     // build roles
-    await this.ctx.bean.role.setDirty(true);
+    await this.app.bean.role.setDirty(true);
     // add role rights
     const roleRights = [
       { roleName: 'cms-writer', action: 'create' },
@@ -28,6 +28,6 @@ export class VersionInit extends BeanBase {
       { roleName: 'root', action: 'read', scopeNames: 'authenticated' },
       { roleName: 'root', action: 'read', scopeNames: 0 },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'article', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'article', roleRights });
   }
 }

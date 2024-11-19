@@ -17,7 +17,7 @@ export class ServiceAuth extends BeanBase {
     };
 
     // verify
-    const verifyUser = await this.ctx.bean.user.verify({ state, profileUser });
+    const verifyUser = await this.app.bean.user.verify({ state, profileUser });
     if (!verifyUser) this.app.throw(403);
 
     // userId
@@ -33,17 +33,17 @@ export class ServiceAuth extends BeanBase {
     if (realName) {
       userNew.realName = realName;
     }
-    await this.ctx.bean.user.save({
+    await this.app.bean.user.save({
       user: userNew,
     });
     // save mobile
-    await this.ctx.bean.user.setActivated({
+    await this.app.bean.user.setActivated({
       user: { id: userId, mobile, mobileVerified: 1 },
     });
 
     // login now
     //   always no matter login/associate
-    await this.ctx.bean.auth.login(verifyUser);
+    await this.app.bean.auth.login(verifyUser);
 
     // ok
     return verifyUser;
@@ -51,7 +51,7 @@ export class ServiceAuth extends BeanBase {
 
   // data: { mobile, rememberMe }
   async signin({ data, state = 'login' }: any) {
-    const res = await this.ctx.bean.authProvider.authenticateDirect({
+    const res = await this.app.bean.authProvider.authenticateDirect({
       module: __ThisModule__,
       providerName: 'authsms',
       query: { state },

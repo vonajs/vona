@@ -51,17 +51,17 @@ export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
 
   async _findEdgeInstancesNext({ nodeDefId, contextNode, behaviorDefId }: any) {
     // edgeDefs
-    const edgeDefs = this.ctx.bean.flowDef._findEdgesNext({
+    const edgeDefs = this.app.bean.flowDef._findEdgesNext({
       content: this.context._flowDefContent,
       behaviorDefId,
       nodeDefId,
     });
     // sort by conditionExpression
     edgeDefs.sort((a, b) => {
-      const levelA = this.ctx.bean.flowDef._calcConditionExpressionLevel({
+      const levelA = this.app.bean.flowDef._calcConditionExpressionLevel({
         conditionExpression: a.options?.conditionExpression,
       });
-      const levelB = this.ctx.bean.flowDef._calcConditionExpressionLevel({
+      const levelB = this.app.bean.flowDef._calcConditionExpressionLevel({
         conditionExpression: b.options?.conditionExpression,
       });
       return levelA - levelB;

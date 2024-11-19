@@ -57,7 +57,7 @@ export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
         module: item.module,
         atomClassName: item.atomClassName,
       };
-      await this.ctx.bean.atom._submitDirect({
+      await this.app.bean.atom._submitDirect({
         atomClass,
         key: { atomId, itemId: item.itemId },
         item,
@@ -67,11 +67,11 @@ export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
       // close draft/formal
       const atomStage = this.context._atom.atomStage;
       if (atomStage === 0) {
-        await this.ctx.bean.atom.closeDraft({
+        await this.app.bean.atom.closeDraft({
           key: { atomId },
         });
       } else if (atomStage === 1) {
-        await this.ctx.bean.atom.closeFormal({
+        await this.app.bean.atom.closeFormal({
           key: { atomId },
         });
       }

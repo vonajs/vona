@@ -18,7 +18,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
       history = 1;
     }
     // page
-    page = this.ctx.bean.util.page(page, pageForce);
+    page = this.app.bean.util.page(page, pageForce);
     // select
     const items = await this.sqlProcedure.selectTasks({
       userIdWho: user ? user.id : 0,
@@ -50,7 +50,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
       }
     }
     // load flow node
-    const nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowTask.flowNodeId, history });
+    const nodeInstance = await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId: flowTask.flowNodeId, history });
     // load task
     const task = this._createTaskInstance2({ nodeInstance });
     await task._load({ flowTask, user, history });
@@ -58,7 +58,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
   }
 
   _createTaskInstance2({ nodeInstance }: any) {
-    const task = this.ctx.bean._newBean(ServiceLocalFlowTask, {
+    const task = this.app.bean._newBean(ServiceLocalFlowTask, {
       nodeInstance,
     });
     return task;
@@ -111,7 +111,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
 
   _notifyTaskClaimings(userId) {
     if (userId) {
-      this.ctx.bean.stats.notify({
+      this.app.bean.stats.notify({
         module: __ThisModule__,
         name: 'taskClaimings',
         user: { id: userId },
@@ -121,7 +121,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
 
   _notifyTaskHandlings(userId) {
     if (userId) {
-      this.ctx.bean.stats.notify({
+      this.app.bean.stats.notify({
         module: __ThisModule__,
         name: 'taskHandlings',
         user: { id: userId },

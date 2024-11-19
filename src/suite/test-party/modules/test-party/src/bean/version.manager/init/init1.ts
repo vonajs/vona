@@ -30,7 +30,7 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'partyOverOtherTest1', scopeNames: 0 },
       { roleName: 'system', action: 'partyOverBulk' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'party', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'party', roleRights });
   }
 
   async _init_testData() {
@@ -41,7 +41,7 @@ export class VersionInit extends BeanBase {
     await this._testRoleIncs(roleIds);
 
     // set role dirty
-    await this.ctx.bean.role.setDirty(true);
+    await this.app.bean.role.setDirty(true);
 
     // users
     const userIds = await this._testUsers(roleIds);
@@ -65,12 +65,12 @@ export class VersionInit extends BeanBase {
     const roleIds: any = {};
     // system roles
     for (const roleName of this.ctx.constant.module('a-base').systemRoles) {
-      const role = await this.ctx.bean.role.getSystemRole({ roleName });
+      const role = await this.app.bean.role.getSystemRole({ roleName });
       roleIds[roleName] = role!.id;
     }
     // roles
     for (const [roleName, leader, catalog, roleNameParent] of testData.roles) {
-      roleIds[roleName] = await this.ctx.bean.role.add({
+      roleIds[roleName] = await this.app.bean.role.add({
         module: __ThisModule__,
         roleName,
         leader,
@@ -85,7 +85,7 @@ export class VersionInit extends BeanBase {
   // role incs
   async _testRoleIncs(roleIds) {
     for (const [roleId, roleIdInc] of testData.roleIncs) {
-      await this.ctx.bean.role.addRoleInc({
+      await this.app.bean.role.addRoleInc({
         roleId: roleIds[roleId],
         roleIdInc: roleIds[roleIdInc],
       });
@@ -99,17 +99,17 @@ export class VersionInit extends BeanBase {
     for (const [userName, roleName] of testData.users) {
       // add
       if (!userIds[userName]) {
-        userIds[userName] = await this.ctx.bean.user.add({
+        userIds[userName] = await this.app.bean.user.add({
           userName,
           realName: userName,
         });
         // activated
-        await this.ctx.bean.user.save({
+        await this.app.bean.user.save({
           user: { id: userIds[userName], activated: 1 },
         });
       }
       // role
-      await this.ctx.bean.role.addUserRole({
+      await this.app.bean.role.addUserRole({
         userId: userIds[userName],
         roleId: roleIds[roleName],
       });
@@ -119,7 +119,7 @@ export class VersionInit extends BeanBase {
     await this._testAuths(userIds);
 
     // root
-    const userRoot = await this.ctx.bean.user.get({ userName: 'root' });
+    const userRoot = await this.app.bean.user.get({ userName: 'root' });
     userIds.root = userRoot!.id;
     return userIds;
   }
@@ -127,15 +127,15 @@ export class VersionInit extends BeanBase {
   // role rights
   async _testRoleRights() {
     // atomClass: party
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'party', roleRights: testData.roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'party', roleRights: testData.roleRights });
     // atomClass: role
-    await this.ctx.bean.role.addRoleRightBatch({
+    await this.app.bean.role.addRoleRightBatch({
       module: 'a-base',
       atomClassName: 'role',
       roleRights: testData.roleRightsRole,
     });
     // atomClass: user
-    await this.ctx.bean.role.addRoleRightBatch({
+    await this.app.bean.role.addRoleRightBatch({
       module: 'a-base',
       atomClassName: 'user',
       roleRights: testData.roleRightsUser,
@@ -145,7 +145,7 @@ export class VersionInit extends BeanBase {
   // auths
   async _testAuths(userIds) {
     for (const userName in userIds) {
-      await this.ctx.bean.authSimple.add({
+      await this.app.bean.authSimple.add({
         userId: userIds[userName],
         password: '',
       });

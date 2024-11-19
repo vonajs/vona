@@ -11,15 +11,15 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
   async getPreferredFieldsRightOfUser({ atomClass, user }: any) {
     if (!user || user.id === 0) return null;
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // 1. fieldsRightOfAtomClass
-    const exists = await this.ctx.bean.summer.get(
+    const exists = await this.app.bean.summer.get(
       { module: __ThisModule__, name: 'fieldsRightOfAtomClass' },
       { atomClassId: atomClass.id },
     );
     if (!exists) return null;
     // 2. fieldsRightOfUser
-    const fieldsRight = await this.ctx.bean.summer.get(
+    const fieldsRight = await this.app.bean.summer.get(
       { module: __ThisModule__, name: 'fieldsRightOfUser' },
       { atomClassId: atomClass.id, userId: user.id },
     );
@@ -27,11 +27,11 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
   }
 
   async clearSummer_fieldsRightOfAtomClass() {
-    await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfAtomClass' });
+    await this.app.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfAtomClass' });
   }
 
   async clearSummer_fieldsRightOfUser() {
-    await this.ctx.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfUser' });
+    await this.app.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfUser' });
   }
 
   async __getFieldsRightOfAtomClassRaw({ atomClassId }: any) {
@@ -46,7 +46,7 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
         atomClassIdTarget: atomClassId,
       },
     };
-    const items = await this.ctx.bean.atom.select({
+    const items = await this.app.bean.atom.select({
       atomClass: __atomClass_userFieldsRight,
       options,
       user: { id: userId },

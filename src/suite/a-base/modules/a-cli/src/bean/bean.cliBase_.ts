@@ -20,21 +20,21 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
 
   get console(): ServiceConsole {
     if (!this.__console) {
-      this.__console = this.ctx.bean._newBean(ServiceConsole, this);
+      this.__console = this.app.bean._newBean(ServiceConsole, this);
     }
     return this.__console;
   }
 
   get helper(): ServiceHelper {
     if (!this.__helper) {
-      this.__helper = this.ctx.bean._newBean(ServiceHelper, this);
+      this.__helper = this.app.bean._newBean(ServiceHelper, this);
     }
     return this.__helper;
   }
 
   get template(): ServiceTemplate {
     if (!this.__template) {
-      this.__template = this.ctx.bean._newBean(ServiceTemplate, this);
+      this.__template = this.app.bean._newBean(ServiceTemplate, this);
     }
     return this.__template;
   }
@@ -132,7 +132,7 @@ export class BeanCliBase<T = unknown> extends BeanBase<T> {
     if (!Array.isArray(welcomes)) welcomes = [welcomes];
     welcomes = welcomes.map(item => this.ctx.text(item));
     // helper doc
-    const configHelper = this.ctx.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
+    const configHelper = this.app.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
     if (configHelper !== false) {
       let url = `https://cabloy.com/${this.ctx.locale === 'zh-cn' ? 'zh-cn/' : ''}articles/cli-introduce.html`;
       url = this.helper.chalk.keyword('cyan')(url);

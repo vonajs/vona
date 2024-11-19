@@ -20,7 +20,7 @@ export class ServiceAuthScene extends BeanBase<ScopeModule> {
     item.scenes = JSON.stringify(scenes);
     await this.modelAuthProvider.update(item);
     // changed
-    this.ctx.bean.authProviderCache.authProviderChanged({
+    this.app.bean.authProviderCache.authProviderChanged({
       module: item.module,
       providerName: item.providerName,
     });
@@ -30,7 +30,7 @@ export class ServiceAuthScene extends BeanBase<ScopeModule> {
     // item
     const item = await this.modelAuthProvider.get({ id });
     if (!item) return;
-    const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({
+    const authProvider = this.app.bean.authProvider.getAuthProviderBase({
       module: item.module,
       providerName: item.providerName,
     });
@@ -38,7 +38,7 @@ export class ServiceAuthScene extends BeanBase<ScopeModule> {
     const meta = authProvider.meta;
     const metaScene = this._getMetaScene(authProvider, sceneName);
     if (metaScene.validator.validator !== 'json') {
-      await this.ctx.bean.validation.validate({
+      await this.app.bean.validation.validate({
         module: metaScene.validator.module,
         validator: metaScene.validator.validator,
         data,
@@ -61,7 +61,7 @@ export class ServiceAuthScene extends BeanBase<ScopeModule> {
     }
     await this.modelAuthProvider.update(item);
     // changed
-    this.ctx.bean.authProviderCache.authProviderChanged({
+    this.app.bean.authProviderCache.authProviderChanged({
       module: item.module,
       providerName: item.providerName,
     });
@@ -79,7 +79,7 @@ export class ServiceAuthScene extends BeanBase<ScopeModule> {
     item.scenes = JSON.stringify(scenes);
     await this.modelAuthProvider.update(item);
     // changed
-    this.ctx.bean.authProviderCache.authProviderChanged({
+    this.app.bean.authProviderCache.authProviderChanged({
       module: item.module,
       providerName: item.providerName,
     });
@@ -95,7 +95,7 @@ export class ServiceAuthScene extends BeanBase<ScopeModule> {
     item.scenes = JSON.stringify(scenes);
     await this.modelAuthProvider.update(item);
     // changed
-    this.ctx.bean.authProviderCache.authProviderChanged({
+    this.app.bean.authProviderCache.authProviderChanged({
       module: item.module,
       providerName: item.providerName,
     });

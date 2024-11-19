@@ -6,14 +6,14 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerSmsProvider extends BeanBase<ScopeModule> {
   async list() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     const res = await this.scope.service.smsProvider.list();
     this.app.success(res);
   }
 
   async setCurrent() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     await this.scope.service.smsProvider.setCurrent({
       providerName: this.ctx.request.body.providerName,
     });
@@ -23,12 +23,12 @@ export class ControllerSmsProvider extends BeanBase<ScopeModule> {
 
   async save() {
     // check demo
-    this.ctx.bean.util.checkDemo();
+    this.app.bean.util.checkDemo();
     // params
     const providerName = this.ctx.request.body.providerName;
     const data = this.ctx.request.body.data;
     // validate
-    await this.ctx.bean.validation.validate({
+    await this.app.bean.validation.validate({
       module: __ThisModule__,
       validator: providerName,
       schema: null,

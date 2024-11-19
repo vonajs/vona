@@ -6,12 +6,12 @@ import assert from 'assert';
 export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
   async starLabel() {
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({ atomClassName: 'party' });
+    const atomClass = await this.app.bean.atomClass.get({ atomClassName: 'party' });
     // user
     const user = this.ctx.state.user.op;
 
     // add party:star
-    const partyKeyDraft = await this.ctx.bean.atom.write({
+    const partyKeyDraft = await this.app.bean.atom.write({
       atomClass,
       options: { preferredRole: true },
       item: { atomName: 'test:starLabel' },
@@ -19,7 +19,7 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     });
 
     // submit party
-    const res = (await this.ctx.bean.atom.submit({
+    const res = (await this.app.bean.atom.submit({
       key: partyKeyDraft,
       options: { ignoreFlow: true },
       user,
@@ -27,21 +27,21 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     const partyKeyFormal = res.formal.key;
 
     // get party
-    let party = await this.ctx.bean.atom.read({ key: partyKeyFormal, user });
+    let party = await this.app.bean.atom.read({ key: partyKeyFormal, user });
     assert.equal(party.star, null);
     assert.equal(party.labels, null);
 
     // set star/label
-    await this.ctx.bean.atom.star({ key: partyKeyFormal, atom: { star: 1 }, user });
-    await this.ctx.bean.atom.labels({ key: partyKeyFormal, atom: { labels: [1] }, user });
+    await this.app.bean.atom.star({ key: partyKeyFormal, atom: { star: 1 }, user });
+    await this.app.bean.atom.labels({ key: partyKeyFormal, atom: { labels: [1] }, user });
 
     // get party
-    party = await this.ctx.bean.atom.read({ key: partyKeyFormal, user });
+    party = await this.app.bean.atom.read({ key: partyKeyFormal, user });
     assert.equal(party.star, 1);
     assert.equal(party.labels, '[1]');
 
     // select parties
-    let parties = await this.ctx.bean.atom.select({
+    let parties = await this.app.bean.atom.select({
       user,
       options: {
         star: 1,
@@ -51,7 +51,7 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     });
     assert.equal(parties.length, 1);
 
-    parties = await this.ctx.bean.atom.select({
+    parties = await this.app.bean.atom.select({
       user,
       options: {
         label: 1,
@@ -61,7 +61,7 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     });
     assert.equal(parties.length, 1);
 
-    parties = await this.ctx.bean.atom.select({
+    parties = await this.app.bean.atom.select({
       user,
       options: {
         label: 2,
@@ -72,16 +72,16 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     assert.equal(parties.length, 0);
 
     // clear star/label
-    await this.ctx.bean.atom.star({ key: partyKeyFormal, atom: { star: 0 }, user });
-    await this.ctx.bean.atom.labels({ key: partyKeyFormal, atom: { labels: null }, user });
+    await this.app.bean.atom.star({ key: partyKeyFormal, atom: { star: 0 }, user });
+    await this.app.bean.atom.labels({ key: partyKeyFormal, atom: { labels: null }, user });
 
     // get party
-    party = await this.ctx.bean.atom.read({ key: partyKeyFormal, user });
+    party = await this.app.bean.atom.read({ key: partyKeyFormal, user });
     assert.equal(party.star, null);
     assert.equal(party.labels, null);
 
     // delete party
-    await this.ctx.bean.atom.delete({ key: partyKeyFormal, user });
+    await this.app.bean.atom.delete({ key: partyKeyFormal, user });
 
     // done
     this.app.success();

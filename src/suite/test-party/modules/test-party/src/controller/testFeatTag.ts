@@ -13,7 +13,7 @@ export class ControllerTestFeatTag extends BeanBase<ScopeModule> {
     };
 
     // add
-    const tagId = await this.ctx.bean.tag.add({
+    const tagId = await this.app.bean.tag.add({
       atomClass,
       data: {
         // language: 'en-us', // neednot set language
@@ -23,7 +23,7 @@ export class ControllerTestFeatTag extends BeanBase<ScopeModule> {
     assert(TableIdentity.isValid(tagId));
 
     // parseTags: 'tagOne,tagTwo,tagThree'
-    const tagIds = await this.ctx.bean.tag.parseTags({
+    const tagIds = await this.app.bean.tag.parseTags({
       atomClass,
       // language: 'en-us',// neednot set language
       tagName: 'tagOne,tagTwo,tagThree',

@@ -112,7 +112,7 @@ export class AtomUserOnline extends BeanAtomBase<ScopeModule> {
       const item = await this.model.get({ id: key.itemId });
       if (!item) this.app.throw(403);
       const user = { id: item!.userId };
-      await this.ctx.bean.userOnline.kickOut({ user });
+      await this.app.bean.userOnline.kickOut({ user });
     }
   }
 
@@ -122,7 +122,7 @@ export class AtomUserOnline extends BeanAtomBase<ScopeModule> {
 
   async _translate(item) {
     item.onlineStatus = this._getOnlineStatus(item);
-    const dictItem = await this.ctx.bean.dict.findItem({
+    const dictItem = await this.app.bean.dict.findItem({
       dictKey: 'a-dictbooster:dictOnlineStatus',
       code: item.onlineStatus,
     });

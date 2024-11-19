@@ -50,7 +50,7 @@ export class ControllerTestMultilevelAuthorizationUser extends BeanBase<ScopeMod
       // childrenTop
       const userName = dataTest.userName;
       const userId = userIds[userName];
-      let list = await this.ctx.bean.user.select({ options: {}, user: { id: userId } });
+      let list = await this.app.bean.user.select({ options: {}, user: { id: userId } });
       assert.equal(list.length >= dataTest.selectTop.countMin, true, userName);
       if (dataTest.selectTop.userNameContain) {
         const userNames = list.map(item => item.userName);
@@ -58,7 +58,7 @@ export class ControllerTestMultilevelAuthorizationUser extends BeanBase<ScopeMod
       }
 
       const roleId = roleIds.family;
-      list = await this.ctx.bean.user.select({
+      list = await this.app.bean.user.select({
         options: {
           role: roleId,
         },

@@ -14,7 +14,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
   }
 
   async _deploy_atomState({ atomClass }: any) {
-    const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
+    const atomClassId = await this.app.bean.atomClass.getAtomClassId(atomClass);
     // let db commit
     this.ctx.tail(async () => {
       await this.ctx.meta.util.lock({
@@ -27,13 +27,13 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
   }
 
   async _deploy_atomState_inner({ atomClass }: any) {
-    const atomClassId = await this.ctx.bean.atomClass.getAtomClassId(atomClass);
+    const atomClassId = await this.app.bean.atomClass.getAtomClassId(atomClass);
     // all flowDefs
-    const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
+    const _nodeBaseBean = this.app.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
     const conditions = await _nodeBaseBean._getAllConditions({ atomClassId, needFlowContent: true });
     if (conditions.length === 0) {
       // delete dict
-      await this.ctx.bean.atomState.dynamic_deleteDict({ atomClass });
+      await this.app.bean.atomState.dynamic_deleteDict({ atomClass });
       return;
     }
     // vars
@@ -90,13 +90,13 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     // append end
     dictItems.push(dictItemEnd);
     // save
-    await this.ctx.bean.atomState.dynamic_saveDict({ atomClass, dictItems, dictLocales, mode });
+    await this.app.bean.atomState.dynamic_saveDict({ atomClass, dictItems, dictLocales, mode });
   }
 
   async _deploy_atomState_findNodes({ startEventId, content }: any) {
     let nodeStart = null;
     let nodeEnd = null;
-    const nodeTasks = await this.ctx.bean.flowDef._loopNodes({
+    const nodeTasks = await this.app.bean.flowDef._loopNodes({
       content,
       nodeIdStart: startEventId,
       fn: async ({ nodes, node }) => {
@@ -156,7 +156,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
       title,
     };
     // dict locales
-    const locales = this.ctx.bean.base.locales();
+    const locales = this.app.bean.base.locales();
     for (const locale of locales) {
       const language = locale.value;
       const text = this.ctx.text.locale(language, title);
@@ -184,7 +184,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
       const nodeType = node.type;
       if (nodeType.indexOf('startEvent') === -1) continue;
       const _nodeBase = this.self._getFlowNodeBase(nodeType);
-      const _nodeBaseBean = this.ctx.bean._newBean(_nodeBase.beanFullName);
+      const _nodeBaseBean = this.app.bean._newBean(_nodeBase.beanFullName);
       if (_nodeBaseBean.deploy) {
         const res = await _nodeBaseBean.deploy({
           deploy: !undeploy && flowDef.atomDisabled === 0,

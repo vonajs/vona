@@ -37,7 +37,7 @@ export class BeanDetailCopy extends BeanDetail0 {
     user,
   }) {
     // select all details src
-    const detailsSrc = await this.ctx.bean.atom.select({
+    const detailsSrc = await this.app.bean.atom.select({
       atomClass: atomClassDetail,
       options: {
         atomIdMain: srcKeyAtom.atomId,
@@ -65,7 +65,7 @@ export class BeanDetailCopy extends BeanDetail0 {
       return;
     }
     // select all details dest
-    const detailsDest = await this.ctx.bean.atom.select({
+    const detailsDest = await this.app.bean.atom.select({
       atomClass: atomClassDetail,
       options: {
         atomIdMain: destKeyAtom.atomId,
@@ -103,7 +103,7 @@ export class BeanDetailCopy extends BeanDetail0 {
       const detailBaseSrc = detailBasesSrc.find(item => item.detailStaticKey === detailBaseDest.detailStaticKey);
       if (!detailBaseSrc) {
         // delete
-        await this.ctx.bean.atom.delete({
+        await this.app.bean.atom.delete({
           key: detailKeyDest,
           atomClass: atomClassDetail,
           user,
@@ -167,7 +167,7 @@ export class BeanDetailCopy extends BeanDetail0 {
   }: any) {
     // create detail
     if (!detailKeyDest) {
-      detailKeyDest = await this.ctx.bean.atom.create({
+      detailKeyDest = await this.app.bean.atom.create({
         atomClass: atomClassDetail,
         item: null,
         options: { atomIdMain: destKeyAtom.atomId },
@@ -198,7 +198,7 @@ export class BeanDetailCopy extends BeanDetail0 {
       item.createdAt = new Date();
       item.updatedAt = new Date();
     }
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: detailKeyDest,
       atomClass: atomClassDetail,
       item,
@@ -238,7 +238,7 @@ export class BeanDetailCopy extends BeanDetail0 {
         atomStage: srcAtom.atomStage,
         detailId: detailSrcMissing.atomId,
         detailClassId: atomClassDetail.id,
-        detailStaticKey: this.ctx.bean.util.uuidv4(),
+        detailStaticKey: this.app.bean.util.uuidv4(),
       };
       const res = await this.modelDetailBase.insert(data);
       data.id = res[0];

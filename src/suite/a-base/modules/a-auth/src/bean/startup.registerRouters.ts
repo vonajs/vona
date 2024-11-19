@@ -4,6 +4,6 @@ import { Bean, BeanBase } from 'vona';
 export class StartupRegisterRouters extends BeanBase {
   async execute(/* context*/) {
     // register routers
-    await this.ctx.bean.authProvider._registerRouters();
+    await this.app.bean.authProvider._registerRouters();
   }
 }

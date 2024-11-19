@@ -7,6 +7,6 @@ export class VersionInit extends BeanBase {
       // custom
       { roleName: 'system', action: 'loginLog', scopeNames: 'authenticated' },
     ];
-    await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'userOnline', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'userOnline', roleRights });
   }
 }

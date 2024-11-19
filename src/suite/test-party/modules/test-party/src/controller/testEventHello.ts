@@ -10,7 +10,7 @@ export class ControllerTestEventHello extends BeanBase<ScopeModule> {
       text: 'hello',
     };
     let result = 'world';
-    result = await this.ctx.bean.event.invoke({
+    result = await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'hello',
       data,

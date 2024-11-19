@@ -19,11 +19,11 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
 
   protected __init__({ flowDef }: any) {
     // context
-    this.context = this.ctx.bean._newBean(LocalContextFlow, {
+    this.context = this.app.bean._newBean(LocalContextFlow, {
       flowDef,
     });
     // listener
-    this._flowListener = this.ctx.bean._newBean(ServiceLocalFlowListener, {
+    this._flowListener = this.app.bean._newBean(ServiceLocalFlowListener, {
       flowInstance: this,
       context: this.context,
     });
@@ -127,7 +127,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   async _contextInit_atom({ atomId, atomClassId }: any) {
-    return await this.ctx.bean.atom.read({
+    return await this.app.bean.atom.read({
       key: { atomId },
       atomClass: { id: atomClassId },
     });
@@ -154,7 +154,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
       flowAtomClassId = 0;
     }
     if (flowAtomId && !flowAtomClassId) {
-      const atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: flowAtomId });
+      const atomClass = await this.app.bean.atomClass.getByAtomId({ atomId: flowAtomId });
       if (!atomClass) this.app.throw(403);
       flowAtomClassId = atomClass!.id;
     }
@@ -193,7 +193,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   _createNodeInstance2({ nodeDef, contextEdge }: any) {
-    const node = this.ctx.bean._newBean(ServiceLocalFlowNode, {
+    const node = this.app.bean._newBean(ServiceLocalFlowNode, {
       flowInstance: this,
       context: this.context,
       contextEdge,
@@ -218,7 +218,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   async _createEdgeInstance({ edgeDef, contextNode }: any) {
-    const edge = this.ctx.bean._newBean(ServiceLocalFlowEdge, {
+    const edge = this.app.bean._newBean(ServiceLocalFlowEdge, {
       flowInstance: this,
       context: this.context,
       contextNode,
@@ -229,7 +229,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   }
 
   _findNodeDef({ nodeDefId }: any) {
-    return this.ctx.bean.flowDef._findNode({ content: this.context._flowDefContent, nodeDefId });
+    return this.app.bean.flowDef._findNode({ content: this.context._flowDefContent, nodeDefId });
   }
 
   // contextEdge maybe null
@@ -272,7 +272,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
 
   _notifyFlowInitiateds(flowUserId) {
     if (flowUserId) {
-      this.ctx.bean.stats.notify({
+      this.app.bean.stats.notify({
         module: __ThisModule__,
         name: 'flowInitiateds',
         user: { id: flowUserId },

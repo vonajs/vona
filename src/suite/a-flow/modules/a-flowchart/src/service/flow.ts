@@ -31,13 +31,13 @@ export class ServiceFlow extends BeanBase {
   async __checkRightFlowChartProcess({ host, user }: any) {
     const { flowId } = host;
     // check right: allowViewWorkflow
-    const allowViewWorkflow = await this.ctx.bean.flowTask._checkViewWorkflow({ flowId, user });
+    const allowViewWorkflow = await this.app.bean.flowTask._checkViewWorkflow({ flowId, user });
     if (!allowViewWorkflow) return null;
     // get flow
-    const flow = await this.ctx.bean.flow.modelFlowHistory.get({ flowId });
+    const flow = await this.app.bean.flow.modelFlowHistory.get({ flowId });
     if (!flow) return null;
     // flowDef
-    const flowDef = await this.ctx.bean.flowDef.getByKeyAndRevision({
+    const flowDef = await this.app.bean.flowDef.getByKeyAndRevision({
       flowDefKey: flow.flowDefKey,
       flowDefRevision: flow.flowDefRevision,
     });

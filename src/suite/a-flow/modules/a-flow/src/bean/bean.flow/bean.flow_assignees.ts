@@ -20,7 +20,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
     const userIds = await this._adjustAssignees_userIds(str);
     if (userIds.length === 0) return [];
     // select
-    return await this.ctx.bean.user.select({
+    return await this.app.bean.user.select({
       options: {
         where: {
           'f.disabled': 0,
@@ -38,7 +38,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
     const roleIds = await this._adjustAssignees_roleIds(str);
     if (!roleIds || roleIds.length === 0) return [];
     // select
-    return await this.ctx.bean.role.model.select({
+    return await this.app.bean.role.model.select({
       where: {
         id: roleIds,
       },
@@ -83,7 +83,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
         arr.push(item.id);
       } else if (isNaN(item)) {
         // string
-        const role = await this.ctx.bean.role.parseRoleName({ roleName: item });
+        const role = await this.app.bean.role.parseRoleName({ roleName: item });
         if (!role) this.scope.error.RoleNotFound__.throw(item);
         arr.push(role.id);
       } else {

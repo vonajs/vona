@@ -6,7 +6,7 @@ export class BroadcastAuthProviderChanged extends BeanBase {
     const sameAsCaller = context.sameAsCaller;
     const data = context.data;
     if (!sameAsCaller) {
-      await this.ctx.bean.authProviderCache._cacheAuthProviderConfig(data.module, data.providerName);
+      await this.app.bean.authProviderCache._cacheAuthProviderConfig(data.module, data.providerName);
     }
   }
 }

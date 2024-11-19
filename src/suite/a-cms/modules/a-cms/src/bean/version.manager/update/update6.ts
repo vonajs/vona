@@ -65,7 +65,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _update6Uuids() {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -96,6 +96,6 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
   }
 
   _uuid() {
-    return this.ctx.bean.util.uuidv4();
+    return this.app.bean.util.uuidv4();
   }
 }

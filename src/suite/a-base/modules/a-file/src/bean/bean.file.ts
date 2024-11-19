@@ -27,7 +27,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
     // file
     options.file = 1;
     // select
-    const items = await this.ctx.bean.atom.select({
+    const items = await this.app.bean.atom.select({
       atomClass,
       options,
       user,
@@ -48,14 +48,14 @@ export class BeanFile extends BeanBase<ScopeModule> {
   // key,user maybe null
   async list({ key, options, user }: any) {
     // page
-    options.page = this.ctx.bean.util.page(options.page, false);
+    options.page = this.app.bean.util.page(options.page, false);
     // where
     options.where = options.where || {};
     // check right: atom.read or user's files
     const atomId = key && key.atomId;
     if (atomId) {
       if (user && user.id) {
-        const res = await this.ctx.bean.atom.checkRightRead({
+        const res = await this.app.bean.atom.checkRightRead({
           atom: { id: atomId },
           user,
           checkFlow: true,
@@ -90,7 +90,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   async attachments({ key, options, user }: any) {
     options = options || {};
     // filter drafts
-    options.where = this.ctx.bean.util.extend(options.where, {
+    options.where = this.app.bean.util.extend(options.where, {
       mode: 2,
       attachment: 1,
     });
@@ -113,7 +113,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
     await this.modelFile.delete({ id: file.id });
     // attachmentCount
     if (file.atomId && file.attachment) {
-      await this.ctx.bean.atom.attachment({ key: { atomId: file.atomId }, atom: { attachment: -1 } });
+      await this.app.bean.atom.attachment({ key: { atomId: file.atomId }, atom: { attachment: -1 } });
     }
   }
 
@@ -229,10 +229,10 @@ export class BeanFile extends BeanBase<ScopeModule> {
     if (fileInfo.ext === '.jpeg') fileInfo.ext = '.jpg';
 
     // dest
-    const downloadId = this.ctx.bean.util.uuidv4();
-    const _filePath = `file/${mode === 1 ? 'image' : mode === 2 ? 'file' : 'audio'}/${this.ctx.bean.util.today()}`;
-    const _fileName = this.ctx.bean.util.uuidv4();
-    const destDir = await this.ctx.bean.base.getPath(_filePath, true);
+    const downloadId = this.app.bean.util.uuidv4();
+    const _filePath = `file/${mode === 1 ? 'image' : mode === 2 ? 'file' : 'audio'}/${this.app.bean.util.today()}`;
+    const _fileName = this.app.bean.util.uuidv4();
+    const destDir = await this.app.bean.base.getPath(_filePath, true);
     const destFile = path.join(destDir, `${_fileName}${fileInfo.ext}`);
 
     // write
@@ -279,7 +279,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
 
     // attachmentCount
     if (atomId && attachment) {
-      await this.ctx.bean.atom.attachment({ key: { atomId }, atom: { attachment: 1 }, user });
+      await this.app.bean.atom.attachment({ key: { atomId }, atom: { attachment: 1 }, user });
     }
 
     // ok
@@ -318,10 +318,10 @@ export class BeanFile extends BeanBase<ScopeModule> {
     }
 
     // forward url
-    const forwardUrl = this.ctx.bean.base.getForwardUrl(`${file.filePath}/${fileName}${file.fileExt}`);
+    const forwardUrl = this.app.bean.base.getForwardUrl(`${file.filePath}/${fileName}${file.fileExt}`);
 
     // send
-    if (!this.ctx.bean.base.useAccelRedirect()) {
+    if (!this.app.bean.base.useAccelRedirect()) {
       // redirect
       this.ctx.redirect(forwardUrl);
     } else {
@@ -357,7 +357,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
     if (!file) this.app.throw(404);
 
     // absolutePath
-    const destDir = await this.ctx.bean.base.getPath(file.filePath, true);
+    const destDir = await this.app.bean.base.getPath(file.filePath, true);
     const absolutePath = path.join(destDir, `${file.fileName}${file.fileExt}`);
     // ok
     return {
@@ -378,7 +378,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   async fileUpdateCheck({ file, user }: any) {
     if (!user) {
       // check user
-      await this.ctx.bean.user.check();
+      await this.app.bean.user.check();
       user = this.ctx.state.user.op;
     }
     // check
@@ -389,7 +389,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
 
   async _fileUpdateCheck({ file, user }: any) {
     // invoke event
-    return await this.ctx.bean.event.invoke({
+    return await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'fileUpdateCheck',
       data: { file, user },
@@ -397,7 +397,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
         if (context.result !== undefined) return await next();
         // not check if !atomId
         if (file.atomId) {
-          const res = await this.ctx.bean.atom.checkRightAction({
+          const res = await this.app.bean.atom.checkRightAction({
             atom: { id: file.atomId },
             action: 3,
             stage: 'draft',
@@ -418,7 +418,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   async fileDownloadCheck({ file, user }: any) {
     if (!user) {
       // check user
-      await this.ctx.bean.user.check();
+      await this.app.bean.user.check();
       user = this.ctx.state.user.op;
     }
     // check
@@ -429,7 +429,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
 
   async _fileDownloadCheck({ file, user }: any) {
     // invoke event
-    return await this.ctx.bean.event.invoke({
+    return await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'fileDownloadCheck',
       data: { file, user },
@@ -437,7 +437,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
         if (context.result !== undefined) return await next();
         // not check if !atomId
         if (file.atomId) {
-          const res = await this.ctx.bean.atom.checkRightRead({
+          const res = await this.app.bean.atom.checkRightRead({
             atom: { id: file.atomId },
             user,
             checkFlow: true,
@@ -465,7 +465,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
 
     // cannot use * in path on windows
     const fileName = `${file.fileName}-${widthRequire}_${heightRequire}`;
-    const destFile = await this.ctx.bean.base.getPath(`${file.filePath}/${fileName}${file.fileExt}`, false);
+    const destFile = await this.app.bean.base.getPath(`${file.filePath}/${fileName}${file.fileExt}`, false);
 
     const bExists = await fse.pathExists(destFile);
     if (bExists) return fileName;
@@ -473,7 +473,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
     const width = widthRequire || parseInt((file.width * heightRequire) / file.height);
     const height = heightRequire || parseInt((file.height * widthRequire) / file.width);
 
-    const srcFile = await this.ctx.bean.base.getPath(`${file.filePath}/${file.fileName}${file.fileExt}`, false);
+    const srcFile = await this.app.bean.base.getPath(`${file.filePath}/${file.fileName}${file.fileExt}`, false);
 
     // image
     let img = await Jimp.read(srcFile);
@@ -508,7 +508,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   async _checkRightWrite({ atomId, user }: any) {
     // not check if !atomId
     if (!atomId) return;
-    const res = await this.ctx.bean.atom.checkRightAction({
+    const res = await this.app.bean.atom.checkRightAction({
       atom: { id: atomId },
       action: 3,
       // stage: 'draft', // support formal
@@ -577,6 +577,6 @@ export class BeanFile extends BeanBase<ScopeModule> {
     if (atomId) {
       url = `${url}?atomId=${atomId}`;
     }
-    return this.ctx.bean.base.getAbsoluteUrl(url);
+    return this.app.bean.base.getAbsoluteUrl(url);
   }
 }

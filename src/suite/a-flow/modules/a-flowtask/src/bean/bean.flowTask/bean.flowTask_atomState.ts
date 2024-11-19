@@ -11,7 +11,7 @@ export class BeanFlowTaskAtomState extends BeanFlowTask1 {
 
   async _setAtomState_changed({ context, atomState }: any) {
     const atomId = context._atom.atomId;
-    await this.ctx.bean.atom.atomState({
+    await this.app.bean.atom.atomState({
       key: { atomId },
       atom: { atomState },
     });
@@ -35,14 +35,14 @@ export class BeanFlowTaskAtomState extends BeanFlowTask1 {
   // async _setAtomState_check_cancelled({ context }: any) {
   //   const atom = context._atom;
   //   // atomClass
-  //   const atomClassBase = this.ctx.bean.base.atomClass({
+  //   const atomClassBase = this.app.bean.base.atomClass({
   //     module: atom.module,
   //     atomClassName: atom.atomClassName,
   //   });
   //   const atomStage = atom.atomStage === 0 ? 'draft' : atom.atomStage === 1 ? 'formal' : null;
   //   if (!atomStage) return false;
   //   // dictKey
-  //   const dictKey = this.ctx.bean.util.getProperty(atomClassBase, `fields.dicts.atomState.${atomStage}.dictKey`);
+  //   const dictKey = this.app.bean.util.getProperty(atomClassBase, `fields.dicts.atomState.${atomStage}.dictKey`);
   //   if (!dictKey) return false;
   //   // ok
   //   return true;

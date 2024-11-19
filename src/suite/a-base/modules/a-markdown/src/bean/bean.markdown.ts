@@ -18,7 +18,7 @@ export class BeanMarkdown extends BeanBase {
           return this.ctx.text.locale(locale || this.ctx.app.config.i18n.defaultLocale, text, ...args);
         },
         register: ({ params, content }) => {
-          const placeholder = `__markdown_block_placeholder__${this.ctx.bean.util.uuidv4()}`;
+          const placeholder = `__markdown_block_placeholder__${this.app.bean.util.uuidv4()}`;
           asyncs[placeholder] = { params, content };
           return placeholder;
         },
@@ -65,8 +65,8 @@ export class BeanMarkdown extends BeanBase {
   }
 
   _getHost({ host, content, locale }: any) {
-    const $util = this.ctx.bean.util.hostUtil({
-      locale: locale || this.ctx.bean.util.getProperty(host, 'atom.atomLanguage'),
+    const $util = this.app.bean.util.hostUtil({
+      locale: locale || this.app.bean.util.getProperty(host, 'atom.atomLanguage'),
     });
     return {
       $host: host, // atomId/atom

@@ -33,18 +33,18 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
 
   async _parseAssignees_users(str) {
     if (!str) return null;
-    return await this.ctx.bean.flow._adjustAssignees_userIds(str);
+    return await this.app.bean.flow._adjustAssignees_userIds(str);
   }
 
   async _parseAssignees_roles(str) {
     if (!str) return null;
     // roleIds
-    const roleIds = await this.ctx.bean.flow._adjustAssignees_roleIds(str);
+    const roleIds = await this.app.bean.flow._adjustAssignees_roleIds(str);
     if (!roleIds) return null;
     // users
     let users: any[] = [];
     for (const roleId of roleIds) {
-      const list = await this.ctx.bean.role.usersOfRoleParent({ roleId, disabled: 0, removePrivacy: true });
+      const list = await this.app.bean.role.usersOfRoleParent({ roleId, disabled: 0, removePrivacy: true });
       users = users.concat(list.map(item => item.id));
     }
     // ok
@@ -54,7 +54,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
   async _parseAssignees_vars({ nodeInstance, vars }: any) {
     if (!vars) return null;
     // vars
-    const _vars = await this.ctx.bean.flow._adjustAssignees_vars(vars);
+    const _vars = await this.app.bean.flow._adjustAssignees_vars(vars);
     // users
     let users: any[] = [];
     for (const _var of _vars) {
@@ -93,7 +93,7 @@ export class LocalFlowFlowAssignees extends LocalFlowFlow0 {
     const nodeDefName = nodeInstance.contextNode._nodeDef.name;
     const atom = this.context.atom;
     // get action
-    const action = await this.ctx.bean.atomAction.getByModeFlow({
+    const action = await this.app.bean.atomAction.getByModeFlow({
       atomClassId: atom.atomClassId,
       flowKey,
       nodeDefId,

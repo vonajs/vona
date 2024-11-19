@@ -67,8 +67,8 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
       if (item.editMode !== undefined) {
         editMode = item.editMode;
       } else {
-        const site = await this.ctx.bean.cms.render.combineSiteBase({ atomClass, mergeConfigSite: true });
-        editMode = this.ctx.bean.util.getProperty(site, 'edit.mode') || 0;
+        const site = await this.app.bean.cms.render.combineSiteBase({ atomClass, mergeConfigSite: true });
+        editMode = this.app.bean.util.getProperty(site, 'edit.mode') || 0;
       }
       if (item.slug !== undefined && target !== 'clone') {
         slug = item.slug;
@@ -83,7 +83,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
       slug,
     };
     // uuid
-    params.uuid = item.uuid || this.ctx.bean.util.uuidv4();
+    params.uuid = item.uuid || this.app.bean.util.uuidv4();
     // insert
     await this.modelCMSArticle.insert(params);
     // add content
@@ -120,9 +120,9 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
       if (atomStage === 0 || atomStage === 1) {
         const inner = atomStage === 0;
         if (renderSync) {
-          await this.ctx.bean.cms.render._renderArticlePushAsync({ atomClass, key, inner });
+          await this.app.bean.cms.render._renderArticlePushAsync({ atomClass, key, inner });
         } else {
-          await this.ctx.bean.cms.render._renderArticlePush({ atomClass, key, inner });
+          await this.app.bean.cms.render._renderArticlePush({ atomClass, key, inner });
         }
       }
     }
@@ -136,7 +136,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
     if (key.atomId === 0) {
       atomOld = null;
     } else {
-      atomOld = await this.ctx.bean.atom.read({ key, user: undefined });
+      atomOld = await this.app.bean.atom.read({ key, user: undefined });
     }
     // atomId:  not use key.atomId
     const atomId = item.atomId;
@@ -266,7 +266,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
     } else if (editMode === 1) {
       // 1: markdown
       //   always renderMarkdown, for html maybe different for stage:0/1
-      html = await this.ctx.bean.markdown.render({
+      html = await this.app.bean.markdown.render({
         host: {
           atom: item,
           atomId,
@@ -283,7 +283,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
     }
     // }
     // title
-    const title = this.ctx.bean.util.escapeHtml(item.atomName);
+    const title = this.app.bean.util.escapeHtml(item.atomName);
     html = `<!-- ${title} -->\r\n` + html;
     // ok
     return html;
@@ -305,15 +305,15 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
 
   async delete({ atomClass, key, options, user }: any) {
     // get atom for safety
-    const atomOld = await this.ctx.bean.atom.read({ key, user });
+    const atomOld = await this.app.bean.atom.read({ key, user });
 
     // delete article
     //   always renderSync=false
     if (atomOld.atomStage === 0) {
-      await this.ctx.bean.cms.render._deleteArticlePush({ atomClass, key, article: atomOld, inner: true });
+      await this.app.bean.cms.render._deleteArticlePush({ atomClass, key, article: atomOld, inner: true });
     }
     if (atomOld.atomStage === 1) {
-      await this.ctx.bean.cms.render._deleteArticlePush({ atomClass, key, article: atomOld, inner: false });
+      await this.app.bean.cms.render._deleteArticlePush({ atomClass, key, article: atomOld, inner: false });
     }
 
     // super

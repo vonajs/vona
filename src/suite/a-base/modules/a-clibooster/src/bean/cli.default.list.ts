@@ -12,7 +12,7 @@ export class CliDefaultList extends BeanCliBase {
     let groupWant = argv.group;
     if (!moduleWant) groupWant = null;
     // commandsAll
-    const commandsAll = this.ctx.bean.cli._commandsAll();
+    const commandsAll = this.app.bean.cli._commandsAll();
     // modulesShow
     let modulesShow;
     if (moduleWant) {

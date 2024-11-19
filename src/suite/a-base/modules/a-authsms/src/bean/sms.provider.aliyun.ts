@@ -7,7 +7,7 @@ import * as PopCore from '@alicloud/pop-core';
 export class SmsProviderAliyun extends BeanBase<ScopeModule> {
   async sendCode({ providerInstanceId, context, config }: any) {
     // get
-    const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
+    const providerInstance = await this.app.bean.captcha.getProviderInstance({ providerInstanceId });
     if (!providerInstance) this.app.throw(403);
     // token
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);

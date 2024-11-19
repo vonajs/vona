@@ -17,7 +17,7 @@ export class FlowNodeStartEventAtomCondition extends FlowNodeStartEventAtom0 {
       throw new Error(`atom not set for startEventAtom: ${flowDefId}.${node.id}`);
     }
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({
+    const atomClass = await this.app.bean.atomClass.get({
       module: atom.module,
       atomClassName: atom.atomClassName,
     });

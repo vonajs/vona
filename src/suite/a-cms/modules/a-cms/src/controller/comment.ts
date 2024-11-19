@@ -12,12 +12,12 @@ export class ControllerComment extends BeanBase<ScopeModule> {
     // stage
     options.stage = 'formal';
     // anonymous user
-    const user = await this.ctx.bean.user.anonymous();
+    const user = await this.app.bean.user.anonymous();
     // comment
     options.comment = 1;
     // select
-    options.page = this.ctx.bean.util.page(options.page);
-    const items = await this.ctx.bean.atom.select({ atomClass, options, user });
+    options.page = this.app.bean.util.page(options.page);
+    const items = await this.app.bean.atom.select({ atomClass, options, user });
     // ok
     this.app.successMore(items, options.page.index, options.page.size);
   }

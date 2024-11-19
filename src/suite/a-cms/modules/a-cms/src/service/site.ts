@@ -7,24 +7,24 @@ import fse from 'fs-extra';
 @Service()
 export class ServiceSite extends BeanBase<ScopeModule> {
   async getSite({ atomClass, language, options }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.getSite({ language, options });
   }
 
   async getConfigSiteBase({ atomClass }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.getConfigSiteBase();
   }
 
   async getConfigSite({ atomClass }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.getConfigSite();
   }
 
   // save site config
   async setConfigSite({ atomClass, data }: any) {
     // build
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     // save
     await build.setConfigSite({ data });
     // only in development
@@ -37,19 +37,19 @@ export class ServiceSite extends BeanBase<ScopeModule> {
   }
 
   async getConfigLanguagePreview({ atomClass, language }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.getConfigLanguagePreview({ language });
   }
 
   async getConfigLanguage({ atomClass, language }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.getConfigLanguage({ language });
   }
 
   // save language config
   async setConfigLanguage({ atomClass, language, data }: any) {
     // build
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     // save
     await build.setConfigLanguage({ language, data });
     // only in development
@@ -62,12 +62,12 @@ export class ServiceSite extends BeanBase<ScopeModule> {
   }
 
   async getLanguages({ atomClass }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.getLanguages();
   }
 
   async getUrl({ atomClass, language, path }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     const site = await build.getSite({ language });
     // check if build site first
     const siteBuilt = await build._checkIfSiteBuilt({ site, force: false });
@@ -120,12 +120,12 @@ export class ServiceSite extends BeanBase<ScopeModule> {
       tags?: BigNumber;
     };
 
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
 
     const _language = language === 'default' ? undefined : language;
 
     // atoms
-    stats.atoms = await this.ctx.bean.atom.count({
+    stats.atoms = await this.app.bean.atom.count({
       atomClass,
       options: {
         language: _language,
@@ -134,7 +134,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
     });
 
     // comments
-    stats.comments = await this.ctx.bean.atom.count({
+    stats.comments = await this.app.bean.atom.count({
       atomClass,
       options: {
         language: _language,
@@ -145,7 +145,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
 
     // categories
     if (atomClassBase.category) {
-      stats.categories = await this.ctx.bean.category.count({
+      stats.categories = await this.app.bean.category.count({
         atomClass,
         language: _language,
       });
@@ -153,7 +153,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
 
     // tags
     if (atomClassBase.tag) {
-      stats.tags = await this.ctx.bean.tag.count({
+      stats.tags = await this.app.bean.tag.count({
         atomClass,
         language: _language,
       });
@@ -179,7 +179,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
       const stat = await fse.stat(file);
       mtimeCurrent = stat.mtime.valueOf();
     } else {
-      article = await this.ctx.bean.cms.render.getArticle({ key: { atomId }, inner: true });
+      article = await this.app.bean.cms.render.getArticle({ key: { atomId }, inner: true });
       if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
       // only author
       if (article.userIdUpdated !== user.id) this.app.throw(403);

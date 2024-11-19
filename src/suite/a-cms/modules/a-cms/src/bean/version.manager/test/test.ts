@@ -29,7 +29,7 @@ export class VersionTest extends BeanBase {
     const categoryIds: any = {};
     for (const item of categories) {
       // add
-      const categoryId = await this.ctx.bean.category.add({
+      const categoryId = await this.app.bean.category.add({
         atomClass,
         data: {
           language: item.language,
@@ -56,7 +56,7 @@ export class VersionTest extends BeanBase {
     const tagIds: any = {};
     for (const item of tags) {
       // add
-      const tagId = await this.ctx.bean.tag.add({
+      const tagId = await this.app.bean.tag.add({
         atomClass,
         data: {
           language: item.language,

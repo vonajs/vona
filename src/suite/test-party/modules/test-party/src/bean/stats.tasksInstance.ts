@@ -6,7 +6,7 @@ export class StatsTasksInstance extends BeanBase {
   async execute(context) {
     const { keys } = context;
     const fullName = keys.join('.');
-    const valueOld = await this.ctx.bean.stats._get({
+    const valueOld = await this.app.bean.stats._get({
       module: __ThisModule__,
       fullName,
     });

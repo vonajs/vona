@@ -28,7 +28,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     });
     const list = res.list;
     // build
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     // site
     const site = await build.getSite({ language });
     // feed
@@ -95,7 +95,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     });
     const list = res.list;
     // build
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     // site
     const site = await build.getSite({ language });
     // feed
@@ -142,7 +142,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     // atomId
     const atomId = this.ctx.params.atomId;
     // article
-    const article = await this.ctx.bean.cms.render.getArticle({ key: { atomId }, inner: false });
+    const article = await this.app.bean.cms.render.getArticle({ key: { atomId }, inner: false });
     if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
     // language
     const language = article.atomLanguage;
@@ -161,9 +161,9 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     });
     const list = res.list;
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({ id: article.atomClassId });
+    const atomClass = await this.app.bean.atomClass.get({ id: article.atomClassId });
     // build
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     // site
     const site = await build.getSite({ language });
     // feed

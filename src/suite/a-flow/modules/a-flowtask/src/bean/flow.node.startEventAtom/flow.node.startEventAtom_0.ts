@@ -66,7 +66,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase<ScopeM
   async _autoHandle() {
     const flowId = this.context._flowId;
     // select
-    const tasks = await this.ctx.bean.flowTask.select({
+    const tasks = await this.app.bean.flowTask.select({
       options: {
         where: {
           'a.flowId': flowId,
@@ -81,8 +81,8 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase<ScopeM
     // complete automatically only on first-in
     if (this.contextNode._flowNode.flowNodeIdPrev === 0) {
       //  claim automatically
-      await this.ctx.bean.flowTask.claim({ flowTaskId, user });
-      await this.ctx.bean.flowTask.complete({
+      await this.app.bean.flowTask.claim({ flowTaskId, user });
+      await this.app.bean.flowTask.complete({
         flowTaskId,
         handle: { status: 1 },
         user,

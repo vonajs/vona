@@ -19,8 +19,8 @@ export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
     const sceneDefault = this.configModule.captcha.scenes.default;
     // module scene
     const configModuleScene = this.getScope(module).config;
-    const sceneModule = this.ctx.bean.util.getProperty(configModuleScene, `captcha.scenes.${sceneName}`) || null;
-    return this.ctx.bean.util.extend({}, sceneDefault, sceneModule);
+    const sceneModule = this.app.bean.util.getProperty(configModuleScene, `captcha.scenes.${sceneName}`) || null;
+    return this.app.bean.util.extend({}, sceneDefault, sceneModule);
   }
 
   // create provider instance
@@ -28,7 +28,7 @@ export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
     // provider
     const provider = await this.getProvider({ module, sceneName });
     // instance id
-    const providerInstanceId = this.ctx.bean.util.uuidv4();
+    const providerInstanceId = this.app.bean.util.uuidv4();
     // cache
     const key = utils.getCacheKey({ ctx: this.ctx, providerInstanceId });
     await this.cacheModule.set(key, { providerInstanceId, module, sceneName, context }, provider.timeout);

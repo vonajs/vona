@@ -22,7 +22,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async clearCache() {
     if (!this.__cacheExists()) return;
-    await this.ctx.bean.summer.clear(this.__cacheName);
+    await this.app.bean.summer.clear(this.__cacheName);
   }
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -352,12 +352,12 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   private __getCacheInstance() {
-    return this.ctx.bean.summer.getCache(this.__cacheName);
+    return this.app.bean.summer.getCache(this.__cacheName);
   }
 
   private __cacheExists() {
     if (!this.__cacheName) return false;
-    const cachaBase = this.ctx.bean.summer._findCacheBase({
+    const cachaBase = this.app.bean.summer._findCacheBase({
       module: this.__cacheName.module,
       name: this.__cacheName.name,
     });

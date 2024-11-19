@@ -46,7 +46,7 @@ export class LocalFlowTaskRecall extends LocalFlowTaskInit {
       flowTaskId: { op: '<>', val: flowTaskId },
     });
     // recall
-    return await this.ctx.bean.flowTask._gotoFlowNodePrevious({
+    return await this.app.bean.flowTask._gotoFlowNodePrevious({
       nodeInstance: this.nodeInstance,
       rejectedNode: null,
       flowNodeRemark: 'Recalled',

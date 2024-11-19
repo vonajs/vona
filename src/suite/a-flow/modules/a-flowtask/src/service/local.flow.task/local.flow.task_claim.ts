@@ -33,7 +33,7 @@ export class LocalFlowTaskClaim extends LocalFlowTaskCancelFlow {
       });
     }
     // check if bidding
-    const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
+    const options = this.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     if (options.bidding) {
       // notify
       const _tasks = await this.modelFlowTask.select({

@@ -22,7 +22,7 @@ export class ServiceTools extends BeanBase<ScopeModule> {
       ...query,
     };
     // cli
-    const cli = this.ctx.bean._newBean('cliBase', {
+    const cli = this.app.bean._newBean('cliBase', {
       command: null,
       context: { cwd: argv.projectPath },
       terminal: false,

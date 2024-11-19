@@ -27,7 +27,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
   async get({ flowId, history, user }: any) {
     // check viewWorkflow
     if (user && user.id) {
-      const res = await this.ctx.bean.flowTask._checkViewWorkflow_checkRightAction({ flowId, user });
+      const res = await this.app.bean.flowTask._checkViewWorkflow_checkRightAction({ flowId, user });
       if (res) {
         user = { id: 0 };
       }
@@ -55,7 +55,7 @@ export class BeanFlowQuery extends BeanFlowLoad {
 
   // mode: mine/others/flowing/history
   async _list({ options: { where, orders, page, mode }, user, pageForce = true, count = 0 }) {
-    page = this.ctx.bean.util.page(page, pageForce);
+    page = this.app.bean.util.page(page, pageForce);
     const items = await this.self.sqlProcedure.selectFlows({
       iid: this.ctx.instance.id,
       userIdWho: user ? user.id : 0,

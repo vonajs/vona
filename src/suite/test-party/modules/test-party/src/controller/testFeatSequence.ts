@@ -10,22 +10,22 @@ export class ControllerTestFeatSequence extends BeanBase<ScopeModule> {
     let results;
 
     // current
-    let current = await this.ctx.bean.sequence.current('test');
+    let current = await this.app.bean.sequence.current('test');
     assert.equal(current, 0);
 
     // next
-    let next = await this.ctx.bean.sequence.next('test');
+    let next = await this.app.bean.sequence.next('test');
     assert.equal(next, 1);
 
     // current
-    current = await this.ctx.bean.sequence.current('test');
+    current = await this.app.bean.sequence.current('test');
     assert.equal(current, 1);
 
     // reset
-    await this.ctx.bean.sequence.reset('test');
+    await this.app.bean.sequence.reset('test');
 
     // other module's sequence
-    const moduleSequence = this.ctx.bean.sequence.module(this.ctx.module.info.relativeName);
+    const moduleSequence = this.app.bean.sequence.module(this.ctx.module.info.relativeName);
 
     // next
     next = await moduleSequence.next('test');

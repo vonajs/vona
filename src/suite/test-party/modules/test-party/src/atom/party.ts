@@ -39,7 +39,7 @@ export class AtomParty extends BeanAtomCmsBase<ScopeModule> {
     const data = await super.create({ atomClass, item, options, user });
     // atomState
     if (item.atomStage === 1) {
-      await this.ctx.bean.atom.atomState({
+      await this.app.bean.atom.atomState({
         key: { atomId: data.atomId },
         atom: { atomState: 0 }, // ongoing
       });
@@ -95,7 +95,7 @@ export class AtomParty extends BeanAtomCmsBase<ScopeModule> {
       fnBefore: async ({ key, actionItem }) => {
         if (actionItem === 'partyOver') {
           // write
-          await this.ctx.bean.atom.write({ key, atomClass, item, options: { formAction: actionItem }, user });
+          await this.app.bean.atom.write({ key, atomClass, item, options: { formAction: actionItem }, user });
         }
       },
     });

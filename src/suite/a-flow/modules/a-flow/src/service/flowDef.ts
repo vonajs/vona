@@ -3,18 +3,18 @@ import { BeanBase, Service } from 'vona';
 @Service()
 export class ServiceFlowDef extends BeanBase {
   behaviorBases() {
-    return this.ctx.bean.flowDef.behaviorBases();
+    return this.app.bean.flowDef.behaviorBases();
   }
 
   nodeBases() {
-    return this.ctx.bean.flowDef.nodeBases();
+    return this.app.bean.flowDef.nodeBases();
   }
 
   edgeBases() {
-    return this.ctx.bean.flowDef.edgeBases();
+    return this.app.bean.flowDef.edgeBases();
   }
 
   flowServiceBases() {
-    return this.ctx.bean.flowDef.flowServiceBases();
+    return this.app.bean.flowDef.flowServiceBases();
   }
 }

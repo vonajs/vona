@@ -15,8 +15,8 @@ export class ServiceSettings extends BeanBase {
   }
 
   async instanceLoad({ module }: any) {
-    const validator = await this.ctx.bean.settings.loadValidatorInstance({ module });
-    const data = await this.ctx.bean.settings.loadSettingsInstance({ module });
+    const validator = await this.app.bean.settings.loadValidatorInstance({ module });
+    const data = await this.app.bean.settings.loadSettingsInstance({ module });
     return {
       module,
       validator: validator!.validator,
@@ -25,7 +25,7 @@ export class ServiceSettings extends BeanBase {
   }
 
   async instanceSave({ module, data }: any) {
-    await this.ctx.bean.settings.saveSettingsInstance({ module, data });
+    await this.app.bean.settings.saveSettingsInstance({ module, data });
   }
 
   // user
@@ -38,8 +38,8 @@ export class ServiceSettings extends BeanBase {
   }
 
   async userLoad({ module }: any) {
-    const validator = await this.ctx.bean.settings.loadValidatorUser({ module });
-    const data = await this.ctx.bean.settings.loadSettingsUser({ module });
+    const validator = await this.app.bean.settings.loadValidatorUser({ module });
+    const data = await this.app.bean.settings.loadSettingsUser({ module });
     return {
       module,
       validator: validator!.validator,
@@ -48,7 +48,7 @@ export class ServiceSettings extends BeanBase {
   }
 
   async userSave({ module, data }: any) {
-    await this.ctx.bean.settings.saveSettingsUser({ module, data });
+    await this.app.bean.settings.saveSettingsUser({ module, data });
   }
 
   //

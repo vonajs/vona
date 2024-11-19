@@ -23,7 +23,7 @@ export class VersionUpdate extends BeanBase {
 
   async _update7Migration() {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -63,7 +63,7 @@ export class VersionUpdate extends BeanBase {
     // user
     const user = { id: article.userIdCreated };
     // open
-    const res = await this.ctx.bean.atom.openDraft({ key: { atomId: article.atomId }, user });
+    const res = await this.app.bean.atom.openDraft({ key: { atomId: article.atomId }, user });
     const draftKey = res.draft.key;
     // atomCategoryId
     const atomCategoryId = article.categoryId === 0 ? 0 : mapCagetoryIds[article.categoryId];
@@ -77,7 +77,7 @@ export class VersionUpdate extends BeanBase {
       atomTags = JSON.stringify(atomTags);
     }
     // write
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: draftKey,
       target: null,
       item: {
@@ -91,7 +91,7 @@ export class VersionUpdate extends BeanBase {
       user,
     });
     // submit
-    await this.ctx.bean.atom.submit({
+    await this.app.bean.atom.submit({
       key: draftKey,
       options: {
         ignoreRender: true,
@@ -116,7 +116,7 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _update7Migration_tag({ mapTagIds, tag }: any) {
-    const tagIdNew = await this.ctx.bean.tag.add({
+    const tagIdNew = await this.app.bean.tag.add({
       atomClass: { id: tag.atomClassId },
       data: {
         language: tag.language,
@@ -152,7 +152,7 @@ export class VersionUpdate extends BeanBase {
         category: categoryParent,
       });
     }
-    const categoryIdNew = await this.ctx.bean.category.add({
+    const categoryIdNew = await this.app.bean.category.add({
       atomClass: { id: category.atomClassId },
       data: {
         language: category.language,

@@ -28,7 +28,7 @@ export class BeanFlowTaskSchema extends BeanFlowTaskNodeDoneCheck {
       fieldsRight = await nodeInstancePrevious._getFieldsRight();
     }
     // schema
-    const schema = await this.ctx.bean.fields.parseSchema({
+    const schema = await this.app.bean.fields.parseSchema({
       atomClass, // detail/main
       fieldsRight,
     });

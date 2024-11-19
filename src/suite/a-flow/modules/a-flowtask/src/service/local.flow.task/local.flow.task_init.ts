@@ -19,7 +19,7 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
 
   async _createFlowTask({ userIdAssignee, user }: any) {
     // options
-    const options = this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
+    const options = this.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
     // flowTask
     const data: any = {
       flowId: this.context._flowId,
@@ -77,6 +77,6 @@ export class LocalFlowTaskInit extends LocalFlowTaskEvent {
   }
 
   _getNodeOptionsTask() {
-    return this.ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
+    return this.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance: this.nodeInstance });
   }
 }

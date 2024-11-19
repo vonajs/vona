@@ -9,26 +9,26 @@ export class ControllerTestFeatStatus extends BeanBase<ScopeModule> {
     const name = '__test_enable';
 
     // get
-    let value = await this.ctx.bean.status.get(name);
+    let value = await this.app.bean.status.get(name);
     assert.equal(value, undefined);
 
     // set
-    await this.ctx.bean.status.set(name, true);
+    await this.app.bean.status.set(name, true);
 
     // get
-    value = await this.ctx.bean.status.get(name);
+    value = await this.app.bean.status.get(name);
     assert.equal(value, true);
 
     // other module's status
-    const moduleStatus = this.ctx.bean.status.module(this.ctx.module.info.relativeName);
+    const moduleStatus = this.app.bean.status.module(this.ctx.module.info.relativeName);
     value = await moduleStatus.get(name);
     assert.equal(value, true);
 
     // set
-    await this.ctx.bean.status.set(name, false);
+    await this.app.bean.status.set(name, false);
 
     // get
-    value = await this.ctx.bean.status.get(name);
+    value = await this.app.bean.status.get(name);
     assert.equal(value, false);
 
     // done

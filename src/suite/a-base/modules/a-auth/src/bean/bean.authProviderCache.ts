@@ -60,7 +60,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
   }
 
   purgeScene(scene) {
-    const res = this.ctx.bean.util.extend({}, scene);
+    const res = this.app.bean.util.extend({}, scene);
     delete res.__valid;
     delete res.titleLocale;
     return res;
@@ -104,7 +104,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
 
   _getAuthProviderConfigForLogin(providerFullName, providerConfigCache, forLogin) {
     const [module, providerName] = providerFullName.split(':');
-    const authProvider = this.ctx.bean.authProvider.getAuthProviderBase({ module, providerName });
+    const authProvider = this.app.bean.authProvider.getAuthProviderBase({ module, providerName });
     const { providerItem, configProviderScenes } = providerConfigCache;
     const providerConfigForLogin: any = {
       module,
@@ -144,7 +144,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
     if (!__authProvidersConfigCache[this.ctx.subdomain]) {
       __authProvidersConfigCache[this.ctx.subdomain] = {};
     }
-    const authProviders = this.ctx.bean.base.authProviders();
+    const authProviders = this.app.bean.base.authProviders();
     for (const key in authProviders) {
       const [module, providerName] = key.split(':');
       await this._cacheAuthProviderConfig(module, providerName);
@@ -161,7 +161,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
     }
     // bean
     const providerFullName = `${module}:${providerName}`;
-    const beanProvider = this.ctx.bean.authProvider.createAuthProviderBean({
+    const beanProvider = this.app.bean.authProvider.createAuthProviderBean({
       module,
       providerName,
       providerScene: null,
@@ -178,7 +178,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
     // config default
     const configDefault = await beanProvider.getConfigDefault();
     // provider item
-    const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const providerItem = await this.app.bean.authProvider.getAuthProvider({
       module,
       providerName,
     });
@@ -187,14 +187,14 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
     if (authProvider.meta.scene) {
       // scene: true
       const itemScenes = providerItem.scenes ? JSON.parse(providerItem.scenes) : null;
-      const scenes = this.ctx.bean.util.extend({}, configDefault && configDefault.scenes, itemScenes);
+      const scenes = this.app.bean.util.extend({}, configDefault && configDefault.scenes, itemScenes);
       configProvider = {
         scenes,
       };
     } else {
       // scene: false
       const itemConfig = providerItem.config ? JSON.parse(providerItem.config) : null;
-      configProvider = this.ctx.bean.util.extend({}, configDefault, itemConfig);
+      configProvider = this.app.bean.util.extend({}, configDefault, itemConfig);
     }
     return {
       authProvider,
@@ -235,7 +235,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
     const authProvider = beanProvider.authProvider;
     // create new beanProvider as providerScene specified
     if (authProvider.meta.scene) {
-      beanProvider = this.ctx.bean.authProvider.createAuthProviderBean({
+      beanProvider = this.app.bean.authProvider.createAuthProviderBean({
         module: beanProvider.providerModule,
         providerName: beanProvider.providerName,
         providerScene: sceneName,

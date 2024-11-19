@@ -17,7 +17,7 @@ export class CliCreateDetail extends BeanCliBase {
       throw new Error(`module does not exist: ${moduleName}`);
     }
     // atomClassMain
-    argv.atomClassMain = this.ctx.bean.util.parseAtomClass({
+    argv.atomClassMain = this.app.bean.util.parseAtomClass({
       module: argv.__ThisModule__,
       atomClassName: argv.atomClassMain,
     });

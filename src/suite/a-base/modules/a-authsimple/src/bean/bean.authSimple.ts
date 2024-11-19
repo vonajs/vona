@@ -37,7 +37,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     };
 
     // verify
-    const verifyUser = await this.ctx.bean.user.verify({ state, profileUser });
+    const verifyUser = await this.app.bean.user.verify({ state, profileUser });
     if (!verifyUser) this.app.throw(403);
 
     // userId
@@ -52,19 +52,19 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     if (state === 'login' || !user.userName || user.userName.indexOf('__') > -1) {
       userNew.userName = userName;
     }
-    await this.ctx.bean.user.save({
+    await this.app.bean.user.save({
       user: userNew,
     });
     // save email
     if (email !== verifyUser.agent.email) {
-      await this.ctx.bean.user.setActivated({
+      await this.app.bean.user.setActivated({
         user: { id: userId, email, emailConfirmed: 0 },
       });
     }
 
     // login now
     //   always no matter login/associate
-    await this.ctx.bean.auth.login(verifyUser);
+    await this.app.bean.auth.login(verifyUser);
 
     // ok
     return verifyUser;
@@ -72,7 +72,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
   // data: { auth, password, rememberMe }
   async signin({ data, state = 'login' }: any) {
-    const res = await this.ctx.bean.authProvider.authenticateDirect({
+    const res = await this.app.bean.authProvider.authenticateDirect({
       module: __ThisModule__,
       providerName: 'authsimple',
       query: { state },
@@ -88,7 +88,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
   async signinDirect({ data, state = 'login' }: any) {
     // beanProvider
-    const beanProvider = this.ctx.bean.authProvider.createAuthProviderBean({
+    const beanProvider = this.app.bean.authProvider.createAuthProviderBean({
       module: __ThisModule__,
       providerName: 'authsimple',
       providerScene: null,
@@ -96,10 +96,10 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     // profileUser
     const profileUser = await this.ensureAuthUser({ beanProvider, data });
     // verifyUser
-    const verifyUser = await this.ctx.bean.user.verify({ state, profileUser });
+    const verifyUser = await this.app.bean.user.verify({ state, profileUser });
     if (!verifyUser) this.app.throw(403);
     // login
-    await this.ctx.bean.auth.login(verifyUser);
+    await this.app.bean.auth.login(verifyUser);
     // ok
     return verifyUser;
   }
@@ -123,7 +123,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     await this.modelAuthSimple.update({ id: authSimpleId, userId });
 
     // auth
-    const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const providerItem = await this.app.bean.authProvider.getAuthProvider({
       module: __ThisModule__,
       providerName: 'authsimple',
     });
@@ -169,15 +169,15 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     };
 
     // verify
-    const verifyUser = await this.ctx.bean.user.verify({ state: 'associate', profileUser });
+    const verifyUser = await this.app.bean.user.verify({ state: 'associate', profileUser });
     if (!verifyUser) this.app.throw(403);
 
     // force kickout all login records
-    await this.ctx.bean.userOnline.kickOut({ user: { id: userId } });
+    await this.app.bean.userOnline.kickOut({ user: { id: userId } });
 
     // login now
     //   always no matter login/associate
-    // await this.ctx.bean.auth.login(verifyUser);
+    // await this.app.bean.auth.login(verifyUser);
   }
 
   async _passwordSaveNew({ passwordNew, userId }: any) {
@@ -216,7 +216,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     // clear token
     await this.cacheDb.remove(cacheKey);
     // login antomatically
-    const user = await this.ctx.bean.user.get({ id: userId });
+    const user = await this.app.bean.user.get({ id: userId });
     const data = { auth: user!.email, password: passwordNew, rememberMe: false };
     const user2 = await this.signin({ data, state: 'login' });
     // ok
@@ -225,25 +225,25 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
   async passwordForgot({ email }: any) {
     // user by email
-    const user = await this.ctx.bean.user.exists({ email });
+    const user = await this.app.bean.user.exists({ email });
     if (!user) return this.$scope.base.error.UserDoesNotExist.throw();
     // link
-    const token = this.ctx.bean.util.uuidv4();
-    const link = this.ctx.bean.base.getAbsoluteUrl(`/#!/a/authsimple/passwordReset?token=${token}`);
+    const token = this.app.bean.util.uuidv4();
+    const link = this.app.bean.base.getAbsoluteUrl(`/#!/a/authsimple/passwordReset?token=${token}`);
     // config
     const configTemplate = this.configModule.email.templates.passwordReset;
     // email subject
     let subject = this.ctx.text(configTemplate.subject);
-    subject = this.ctx.bean.util.replaceTemplate(subject, { siteName: this.ctx.instance.title });
+    subject = this.app.bean.util.replaceTemplate(subject, { siteName: this.ctx.instance.title });
     // email body
     let body = this.ctx.text(configTemplate.body);
-    body = this.ctx.bean.util.replaceTemplate(body, {
+    body = this.app.bean.util.replaceTemplate(body, {
       userName: user.userName,
       link,
       siteName: this.ctx.instance.title,
     });
     // send
-    await this.ctx.bean.mail.send({
+    await this.app.bean.mail.send({
       scene: null, // use default
       message: {
         to: email,
@@ -257,26 +257,26 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
   async emailConfirm({ email, user }: any) {
     // save email
-    await this.ctx.bean.user.setActivated({
+    await this.app.bean.user.setActivated({
       user: { id: user.id, email, emailConfirmed: 0 },
     });
     // link
-    const token = this.ctx.bean.util.uuidv4();
-    const link = this.ctx.bean.base.getAbsoluteUrl(`/api/a/authsimple/auth/emailConfirmation?token=${token}`);
+    const token = this.app.bean.util.uuidv4();
+    const link = this.app.bean.base.getAbsoluteUrl(`/api/a/authsimple/auth/emailConfirmation?token=${token}`);
     // config
     const configTemplate = this.configModule.email.templates.confirmation;
     // email subject
     let subject = this.ctx.text(configTemplate.subject);
-    subject = this.ctx.bean.util.replaceTemplate(subject, { siteName: this.ctx.instance.title });
+    subject = this.app.bean.util.replaceTemplate(subject, { siteName: this.ctx.instance.title });
     // email body
     let body = this.ctx.text(configTemplate.body);
-    body = this.ctx.bean.util.replaceTemplate(body, {
+    body = this.app.bean.util.replaceTemplate(body, {
       userName: user.userName,
       link,
       siteName: this.ctx.instance.title,
     });
     // send
-    await this.ctx.bean.mail.send({
+    await this.app.bean.mail.send({
       scene: null, // use default
       message: {
         to: email,
@@ -300,13 +300,13 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
         link: '/a/authsimple/emailConfirm',
         linkText: this.scope.locale['Resend Confirmation Email'](),
       };
-      const url = this.ctx.bean.base.getAlertUrl({ data });
+      const url = this.app.bean.base.getAlertUrl({ data });
       return this.ctx.redirect(url);
     }
     // userId
     const userId = value.userId;
     // activated
-    await this.ctx.bean.user.setActivated({
+    await this.app.bean.user.setActivated({
       user: { id: userId, emailConfirmed: 1 },
     });
     // clear token
@@ -318,7 +318,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
       link: '#back',
       linkText: this.scope.locale.Close(),
     };
-    const url = this.ctx.bean.base.getAlertUrl({ data });
+    const url = this.app.bean.base.getAlertUrl({ data });
     return this.ctx.redirect(url);
   }
 
@@ -334,7 +334,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
   async ensureAuthUser({ beanProvider, data: { auth, password, rememberMe } }) {
     // exists
-    const user = await this.ctx.bean.user.exists({ userName: auth, email: auth, mobile: auth });
+    const user = await this.app.bean.user.exists({ userName: auth, email: auth, mobile: auth });
     if (!user) return this.scope.error.AuthenticationFailed.throw();
     // disabled
     if (user.disabled) return this.scope.error.UserIsDisabled.throw();

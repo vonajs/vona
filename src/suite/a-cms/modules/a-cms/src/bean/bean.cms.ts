@@ -4,14 +4,14 @@ import { ServiceBuild, ServiceRender, ServiceSite } from '../index.js';
 @Bean()
 export class BeanCms extends BeanBase {
   get render() {
-    return this.ctx.bean._getBean(ServiceRender);
+    return this.app.bean._getBean(ServiceRender);
   }
 
   get site() {
-    return this.ctx.bean._getBean(ServiceSite);
+    return this.app.bean._getBean(ServiceSite);
   }
 
   build({ atomClass }: any) {
-    return this.ctx.bean._newBean(ServiceBuild, atomClass);
+    return this.app.bean._newBean(ServiceBuild, atomClass);
   }
 }

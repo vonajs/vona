@@ -22,7 +22,7 @@ export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
 
   getSmsProvidersConfigForAdmin() {
     let providers = this.getSmsProvidersConfigCache();
-    providers = this.ctx.bean.util.extend({}, providers);
+    providers = this.app.bean.util.extend({}, providers);
     for (const providerName in providers) {
       const provider = providers[providerName];
       provider.titleLocale = this.ctx.text(provider.title);
@@ -42,7 +42,7 @@ export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
   }
 
   purgeProvider(provider) {
-    const res = this.ctx.bean.util.extend({}, provider);
+    const res = this.app.bean.util.extend({}, provider);
     delete res.titleLocale;
     return res;
   }
@@ -52,7 +52,7 @@ export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
     const configDefault = this.configModule.sms.providers;
     // configProviders
     let configProviders = await this.statusModule.get('smsProviders');
-    configProviders = this.ctx.bean.util.extend({}, configDefault, configProviders);
+    configProviders = this.app.bean.util.extend({}, configDefault, configProviders);
     // cache
     __smsProvidersConfigCache[this.ctx.subdomain] = configProviders;
   }

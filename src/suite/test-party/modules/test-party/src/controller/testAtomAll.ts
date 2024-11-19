@@ -20,7 +20,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
   }
   async __all() {
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({ atomClassName: 'party' });
+    const atomClass = await this.app.bean.atomClass.get({ atomClassName: 'party' });
     this.atomClass = atomClass;
     // userIds
     const userIds = this.ctx.cache.mem.get('userIds');
@@ -42,7 +42,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     );
 
     // Tom add party
-    const partyKeyDraft = await this.ctx.bean.atom.write({
+    const partyKeyDraft = await this.app.bean.atom.write({
       atomClass,
       options: { preferredRole: true },
       item: { atomName: 'test:all', personCount: 3 },
@@ -65,7 +65,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     );
 
     // Tom enable(submit) party
-    const res = (await this.ctx.bean.atom.submit({
+    const res = (await this.app.bean.atom.submit({
       key: partyKeyDraft,
       options: { ignoreFlow: true },
       user: userTom,
@@ -88,18 +88,18 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     );
 
     // Tom update party
-    await this.ctx.bean.atom.write({
+    await this.app.bean.atom.write({
       key: partyKeyDraft,
       item: { personCount: 8 },
       user: userTom,
     });
 
     // Tom get party
-    const party = await this.ctx.bean.atom.read({ key: partyKeyDraft, user: userTom });
+    const party = await this.app.bean.atom.read({ key: partyKeyDraft, user: userTom });
     assert.equal(party.personCount, 8);
 
     // Tom list party
-    const parties = await this.ctx.bean.atom.select({
+    const parties = await this.app.bean.atom.select({
       atomClass,
       options: {
         where: { atomName: { val: 'test:all', op: 'likeRight' } },
@@ -115,7 +115,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     const checkRightReads = [['Tom', partyKeyFormal.atomId, true]];
     for (const [userName, atomId, right] of checkRightReads) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightRead({
+      const res = await this.app.bean.atom.checkRightRead({
         atom: { id: atomId },
         user,
       });
@@ -129,7 +129,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, atomId, right] of checkRightWrites) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightAction({
+      const res = await this.app.bean.atom.checkRightAction({
         atom: { id: atomId },
         action: 'write',
         user,
@@ -144,7 +144,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, atomId, right] of checkRightDeletes) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightAction({
+      const res = await this.app.bean.atom.checkRightAction({
         atom: { id: atomId },
         action: 'delete',
         user,
@@ -160,7 +160,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     ];
     for (const [userName, right] of checkRightCreates) {
       const user = await this._getUser({ userIds, userName });
-      const res = await this.ctx.bean.atom.checkRightCreate({
+      const res = await this.app.bean.atom.checkRightCreate({
         atomClass,
         user,
       });
@@ -170,7 +170,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     // // checkRightAction:review(flag=1)
     // const checkRightActions_1 = [[ 'Tom', partyKey.atomId, false ], [ 'Jane', partyKey.atomId, true ]];
     // for (const [ userName, atomId, right ] of checkRightActions_1) {
-    //   const res = await this.ctx.bean.atom.checkRightAction({
+    //   const res = await this.app.bean.atom.checkRightAction({
     //     atom: { id: atomId },
     //     action: 101,
     //     user: { id: userIds[userName] },
@@ -179,7 +179,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     // }
 
     // // action: review
-    // await this.ctx.bean.atom.action({
+    // await this.app.bean.atom.action({
     //   action: 101,
     //   key: partyKey,
     //   user: { id: userIds.Jane },
@@ -188,7 +188,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     // // checkRightAction:review(flag=2)
     // const checkRightActions_2 = [[ 'Tom', partyKey.atomId, false ], [ 'Jane', partyKey.atomId, false ]];
     // for (const [ userName, atomId, right ] of checkRightActions_2) {
-    //   const res = await this.ctx.bean.atom.checkRightAction({
+    //   const res = await this.app.bean.atom.checkRightAction({
     //     atom: { id: atomId },
     //     action: 101,
     //     user: { id: userIds[userName] },
@@ -197,14 +197,14 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     // }
 
     // // action: review again
-    // await this.ctx.bean.atom.action({
+    // await this.app.bean.atom.action({
     //   action: 101,
     //   key: partyKey,
     //   user: { id: userIds.Jane },
     // });
 
     // Tom delete party
-    await this.ctx.bean.atom.delete({
+    await this.app.bean.atom.delete({
       key: partyKeyFormal,
       user: userTom,
     });
@@ -228,7 +228,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
   async _testCheckList(stage, userIds, userAtoms, cb) {
     for (const [userName, atomCountExpected] of userAtoms) {
       const user = await this._getUser({ userIds, userName });
-      const list = await this.ctx.bean.atom.select({
+      const list = await this.app.bean.atom.select({
         atomClass: this.atomClass,
         options: {
           where: {
@@ -249,6 +249,6 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     if (!userName) return;
     const userId = userIds && userIds[userName];
     if (userId) return { id: userId };
-    return await this.ctx.bean.user.get({ userName });
+    return await this.app.bean.user.get({ userName });
   }
 }

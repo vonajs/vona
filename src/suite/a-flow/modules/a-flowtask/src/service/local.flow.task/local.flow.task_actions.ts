@@ -9,8 +9,8 @@ export class LocalFlowTaskActions extends LocalFlowTaskSchema {
     // check right
     await this.self.localRight.viewAtom({ flowTask, user });
     // actions
-    const nodeInstances = this.ctx.bean.flowTask._flowData_task_nodeInstancesBox();
-    const actions = await this.ctx.bean.flowTask._flowData_task_actions({
+    const nodeInstances = this.app.bean.flowTask._flowData_task_nodeInstancesBox();
+    const actions = await this.app.bean.flowTask._flowData_task_actions({
       nodeInstances,
       tasks: null,
       task: flowTask,

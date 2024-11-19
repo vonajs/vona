@@ -14,7 +14,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
     const { key } = this._prepareFullKey({ module, name, fullKey });
     const cacheBase = this._findCacheBase({ fullKey: key });
     if (!cacheBase) throw new Error(`summer cache not found: ${key}`);
-    return this.ctx.bean._newBean(ServiceCache, {
+    return this.app.bean._newBean(ServiceCache, {
       cacheBase,
     });
   }
@@ -96,7 +96,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
       // ignore a-summer
       if (moduleName === 'a-summer') continue;
       const config = this.ctx.app.config.modules[moduleName];
-      const summerGroups = this.ctx.bean.util.getProperty(config, 'summer.group');
+      const summerGroups = this.app.bean.util.getProperty(config, 'summer.group');
       if (!summerGroups) continue;
       for (const groupName in summerGroups) {
         const summerGroup = summerGroups[groupName];
@@ -105,7 +105,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
           // config
           if (cache.config) {
             const configDefault = this.confieModule.summer.config.group[groupName][cache.config];
-            cache = this.ctx.bean.util.extend({}, configDefault, cache);
+            cache = this.app.bean.util.extend({}, configDefault, cache);
           }
           // fullKey
           const fullKey = groupName === 'default' ? `${moduleName}:${key}` : `${moduleName}:${groupName}:${key}`;

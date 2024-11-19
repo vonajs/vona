@@ -13,7 +13,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
 
   getAuthProviderBase({ module, providerName }: any) {
     const providerFullName = `${module}:${providerName}`;
-    const authProviders = this.ctx.bean.base.authProviders();
+    const authProviders = this.app.bean.base.authProviders();
     return authProviders[providerFullName];
   }
 
@@ -41,7 +41,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     const authProvider = this.getAuthProviderBase({ module, providerName });
     const beanName = authProvider.meta.bean;
     if (!beanName) throw new Error(`auth provider bean not specified: ${providerFullName}`);
-    return this.ctx.bean._newBean(`${beanName.module}.auth.provider.${beanName.name}` as any, {
+    return this.app.bean._newBean(`${beanName.module}.auth.provider.${beanName.name}` as any, {
       authProvider,
       providerModule: module,
       providerName,
@@ -78,7 +78,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     const res = await this.modelAuthProvider.get({ module, providerName });
     if (res) return res;
     // data
-    // const _authProviders = this.ctx.bean.base.authProviders();
+    // const _authProviders = this.app.bean.base.authProviders();
     // const _provider = _authProviders[`${module}:${providerName}`];
     // if (!_provider) throw new Error(`authProvider ${module}:${providerName} not found!`);
     const data: any = {

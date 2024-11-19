@@ -38,22 +38,22 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     // config
     //    try other then default
     const configModule = this.getScope(this.atomClass.module).config;
-    let configSite = this.ctx.bean.util.getProperty(configModule, `cms.sites.${this.atomClass.atomClassName}`);
+    let configSite = this.app.bean.util.getProperty(configModule, `cms.sites.${this.atomClass.atomClassName}`);
     if (!configSite) {
-      configSite = this.ctx.bean.util.getProperty(configModule, 'cms.site');
+      configSite = this.app.bean.util.getProperty(configModule, 'cms.site');
     }
     if (!configSite) {
       configSite = this.moduleConfig.cms.site;
     }
 
     // site
-    const site = this.ctx.bean.util.extend({}, configSite);
+    const site = this.app.bean.util.extend({}, configSite);
 
     // plugins
     site.plugins = {};
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
-      const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
+      const plugin = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (plugin) {
         site.plugins[relativeName] = this.getScope(relativeName as any).config?.plugin;
       }
@@ -143,7 +143,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     const configSite = await this.getConfigSite();
     if (configSite) {
       if (mergeConfigSite) {
-        site = this.ctx.bean.util.extend(site, configSite);
+        site = this.app.bean.util.extend(site, configSite);
       } else {
         if (configSite.language) site.language = configSite.language;
         if (configSite.themes) site.themes = configSite.themes;
@@ -165,7 +165,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     // language(db)
     const configLanguage = await this.getConfigLanguage({ language });
     // combine
-    return this.ctx.bean.util.extend({}, siteBase, theme, configSite, configLanguage, {
+    return this.app.bean.util.extend({}, siteBase, theme, configSite, configLanguage, {
       language: language ? { current: language } : false,
     });
   }
@@ -179,9 +179,9 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     // module
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
-    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
+    const moduleExtend = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
     if (!moduleExtend) return this.getScope(themeModuleName).config.theme;
-    return this.ctx.bean.util.extend(
+    return this.app.bean.util.extend(
       {},
       this._combineThemes(moduleExtend),
       this.getScope(themeModuleName).config.theme,
@@ -214,7 +214,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     // front
     site.front = {};
     // front.env
-    site.front.env = this.ctx.bean.util.extend(
+    site.front.env = this.app.bean.util.extend(
       {
         base: site.base,
         language: site.language,
@@ -250,8 +250,8 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     if (this.ctx.app.meta.isTest || this.ctx.app.meta.isLocal) {
       // cms or cms.moduleName
       const cmsPathName = this.getCMSPathName();
-      const forwardUrl = this.ctx.bean.base.getForwardUrl(`${cmsPathName}/dist`);
-      const absoluteUrl = this.ctx.bean.base.getAbsoluteUrl(forwardUrl);
+      const forwardUrl = this.app.bean.base.getForwardUrl(`${cmsPathName}/dist`);
+      const absoluteUrl = this.app.bean.base.getAbsoluteUrl(forwardUrl);
       return absoluteUrl;
     }
     return `${site.host.url}${site.host.rootPath ? '/' + site.host.rootPath : ''}`;
@@ -265,7 +265,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     return path ? `${urlRoot}/${path}` : urlRoot;
   }
   getServerUrl(path) {
-    return this.ctx.bean.base.getAbsoluteUrl(path);
+    return this.app.bean.base.getAbsoluteUrl(path);
   }
 
   async getPathCustom(language) {
@@ -284,11 +284,11 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
   }
   async getPathCms() {
     // cms
-    return await this.ctx.bean.base.getPath(this.getCMSPathName());
+    return await this.app.bean.base.getPath(this.getCMSPathName());
   }
   async getPathRawDist() {
     // cms/dist
-    return await this.ctx.bean.base.getPath(`${this.getCMSPathName()}/dist`);
+    return await this.app.bean.base.getPath(`${this.getCMSPathName()}/dist`);
   }
 
   // ///////////////////////////////// render
@@ -309,11 +309,11 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
 
   async renderArticle({ key, inner }: any) {
     // article
-    let article = await this.ctx.bean.cms.render.getArticle({ key, inner });
+    let article = await this.app.bean.cms.render.getArticle({ key, inner });
     if (!article) {
       if (inner) return;
       // check for inner
-      article = await this.ctx.bean.cms.render.getArticle({ key, inner: true });
+      article = await this.app.bean.cms.render.getArticle({ key, inner: true });
       if (!article) return;
       inner = true;
     }
@@ -368,9 +368,9 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
 
   async _renderArticles({ site, progressId, progressNo }: any) {
     // anonymous user
-    const user = await this.ctx.bean.user.anonymous();
+    const user = await this.app.bean.user.anonymous();
     // articles
-    const articles = await this.ctx.bean.atom.select({
+    const articles = await this.app.bean.atom.select({
       atomClass: this.atomClass,
       options: {
         language: site.language ? site.language.current : null,
@@ -391,7 +391,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     const mapper = async article => {
       // progress: initialize
       if (progressId) {
-        await this.ctx.bean.progress.update({
+        await this.app.bean.progress.update({
           progressId,
           progressNo,
           total: progress1_Total,
@@ -539,7 +539,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     if (data.article) {
       hotloadFile = `atom/${data.article.atomId}`;
       // update renderAt
-      data.article.renderAt = new Date(this.ctx.bean.util.moment().unix() * 1000);
+      data.article.renderAt = new Date(this.app.bean.util.moment().unix() * 1000);
     } else {
       if ((this.app.meta.isTest || this.app.meta.isLocal) && fileDest.indexOf('.html') > -1) {
         hotloadFile = fileWrite;
@@ -591,7 +591,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
         article,
       },
     };
-    await this.ctx.bean.io.publish({
+    await this.app.bean.io.publish({
       path: `/a/cms/hotloadFile/${hotloadFile}`,
       message,
       messageClass: {
@@ -612,7 +612,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     // modulesArray
     let pluginIncludes = '';
     for (const module of this.app.meta.modulesArray) {
-      const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
+      const plugin = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (plugin && this._checkIfPluginEnable({ site, moduleName: module.info.relativeName })) {
         // path intermediate
         const pathIntermediate = await this.getPathIntermediate(language);
@@ -727,17 +727,17 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
         const key = keys[index];
         value = value ? { [key]: value } : { [key]: data._envs[name] };
       }
-      this.ctx.bean.util.extend(_env, value);
+      this.app.bean.util.extend(_env, value);
     }
     // combine
-    const env = this.ctx.bean.util.extend(site.front.env, _env);
+    const env = this.app.bean.util.extend(site.front.env, _env);
     // front.envs
     if (site.front.envs) {
       env.envs = site.front.envs;
     }
     // article
     if (data.article) {
-      env.article = this.ctx.bean.util.extend({}, data.article);
+      env.article = this.app.bean.util.extend({}, data.article);
       // delete
       env.article.summary = undefined;
       env.article.content = undefined;
@@ -880,7 +880,7 @@ var env=${JSON.stringify(env, null, 2)};
       for (const language of languages) {
         // progress: language
         if (progressId) {
-          await this.ctx.bean.progress.update({
+          await this.app.bean.progress.update({
             progressId,
             progressNo,
             total: progress0_Total,
@@ -900,7 +900,7 @@ var env=${JSON.stringify(env, null, 2)};
       // progress: done
       if (progressId) {
         if (progressNo === 0) {
-          await this.ctx.bean.progress.done({
+          await this.app.bean.progress.done({
             progressId,
             message: `${this.ctx.text('Time Used')}: ${parseInt(time)}${this.ctx.text('second2')}`,
           });
@@ -915,7 +915,7 @@ var env=${JSON.stringify(env, null, 2)};
       // error
       if (progressId) {
         if (progressNo === 0) {
-          await this.ctx.bean.progress.error({ progressId, message: err.message });
+          await this.app.bean.progress.error({ progressId, message: err.message });
         }
       }
       throw err;
@@ -933,7 +933,7 @@ var env=${JSON.stringify(env, null, 2)};
       let progress0_progress = 0;
       // progress: initialize
       if (progressId) {
-        await this.ctx.bean.progress.update({
+        await this.app.bean.progress.update({
           progressId,
           progressNo,
           total: progress0_Total,
@@ -973,7 +973,7 @@ var env=${JSON.stringify(env, null, 2)};
       // plugins
       for (const relativeName in this.app.meta.modules) {
         const module = this.app.meta.modules[relativeName];
-        const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
+        const plugin = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
         if (plugin) {
           const pluginPath = path.join(module.root, 'cms/plugin');
           const pluginFiles = await eggBornUtils.tools.globbyAsync(`${pluginPath}/*`, { onlyFiles: false });
@@ -1042,7 +1042,7 @@ var env=${JSON.stringify(env, null, 2)};
 
       // progress: render files
       if (progressId) {
-        await this.ctx.bean.progress.update({
+        await this.app.bean.progress.update({
           progressId,
           progressNo,
           total: progress0_Total,
@@ -1061,7 +1061,7 @@ var env=${JSON.stringify(env, null, 2)};
       // progress: done
       if (progressId) {
         if (progressNo === 0) {
-          await this.ctx.bean.progress.done({
+          await this.app.bean.progress.done({
             progressId,
             message: `${this.ctx.text('Time Used')}: ${parseInt(time)}${this.ctx.text('second2')}`,
           });
@@ -1076,7 +1076,7 @@ var env=${JSON.stringify(env, null, 2)};
       // error
       if (progressId) {
         if (progressNo === 0) {
-          await this.ctx.bean.progress.error({ progressId, message: err.message });
+          await this.app.bean.progress.error({ progressId, message: err.message });
         }
       }
       throw err;
@@ -1126,7 +1126,7 @@ var env=${JSON.stringify(env, null, 2)};
     // plugins
     for (const relativeName in this.app.meta.modules) {
       const module = this.app.meta.modules[relativeName];
-      const plugin = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
+      const plugin = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.plugin');
       if (!module.info.node_modules && !module.info.vendor && plugin) {
         site._watchers.push(path.join(module.root, 'cms'));
         // site._watchers.push(path.join(module.root, 'src'));
@@ -1194,7 +1194,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     // extend
-    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
+    const moduleExtend = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
     if (moduleExtend) {
       await this._copyThemes(pathIntermediate, moduleExtend);
     }
@@ -1216,7 +1216,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const module = this.app.meta.modules[themeModuleName];
     if (!module) this.scope.error.ThemeNotFound__.throw(themeModuleName);
     // extend
-    const moduleExtend = this.ctx.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
+    const moduleExtend = this.app.bean.util.getProperty(module, 'package.vonaModule.cms.extend');
     if (moduleExtend) {
       this._watcherThemes(site, moduleExtend);
     }
@@ -1234,7 +1234,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const exists = await fse.pathExists(fileName);
     if (exists || !force) return exists;
     // force build
-    const build = this.ctx.bean.cms.build({ atomClass: site.atomClass });
+    const build = this.app.bean.cms.build({ atomClass: site.atomClass });
     await build.buildLanguage({ language: site.language && site.language.current });
     return true;
   }
@@ -1244,7 +1244,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const returnPhysicalPath = options && options.returnPhysicalPath;
     const returnWaitingPath = options && options.returnWaitingPath;
     // article
-    const article = await this.ctx.bean.cms.render.getArticle({ key, inner: true });
+    const article = await this.app.bean.cms.render.getArticle({ key, inner: true });
     if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
     if (!article.url) return null; // not throw error
     // articleUrl
@@ -1264,7 +1264,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     if (!exists && returnWaitingPath) {
       // force to post a render task: special for draft and private articles
       const inner = article.atomStage === 0;
-      await this.ctx.bean.cms.render._renderArticlePush({
+      await this.app.bean.cms.render._renderArticlePush({
         atomClass: this.atomClass,
         key: { atomId: article.atomId },
         inner,
@@ -1292,7 +1292,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
     const envs: any = {};
     for (const module of this.ctx.app.meta.modulesArray) {
       // may be more atoms
-      const atoms = this.ctx.bean.util.getProperty(module, 'main.meta.base.atoms');
+      const atoms = this.app.bean.util.getProperty(module, 'main.meta.base.atoms');
       if (!atoms) continue;
       for (const key in atoms) {
         if (atoms[key].info.cms !== true) continue;
@@ -1306,7 +1306,7 @@ Sitemap: ${urlRawRoot}/sitemapindex.xml
           // getSite
           let site;
           try {
-            site = await this.ctx.bean.cms.site.getSite({
+            site = await this.app.bean.cms.site.getSite({
               atomClass,
               language,
               options: {

@@ -34,7 +34,7 @@ export class ServiceConsole extends BeanBase {
       return console.log(text);
     }
     // update
-    return await this.ctx.bean.progress.update({
+    return await this.app.bean.progress.update({
       progressId: this.options.progressId,
       progressNo,
       total,

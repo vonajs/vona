@@ -7,7 +7,7 @@ export class FlowServiceStartEventTimer extends BeanFlowServiceBase {
     // parameter
     const { flowDefId, parameter, node } = context.parameter;
     // start
-    await this.ctx.bean.flow.startById({
+    await this.app.bean.flow.startById({
       flowDefId,
       flowVars: parameter,
       flowUserId: 1,

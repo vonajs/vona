@@ -10,7 +10,7 @@ export class ControllerTestFeatStats extends BeanBase<ScopeModule> {
     const user = { id: userIds.Tom };
 
     // old
-    let value = await this.ctx.bean.stats.get({
+    let value = await this.app.bean.stats.get({
       name: 'tasksUser',
       nameSub: 'department.project',
       user,
@@ -18,14 +18,14 @@ export class ControllerTestFeatStats extends BeanBase<ScopeModule> {
     assert.equal(value, undefined);
 
     // notify
-    await this.ctx.bean.stats.notifyAsync({
+    await this.app.bean.stats.notifyAsync({
       name: 'tasksUser',
       nameSub: 'department.project',
       user,
     });
 
     // new
-    value = await this.ctx.bean.stats.get({
+    value = await this.app.bean.stats.get({
       name: 'tasksUser',
       nameSub: 'department.project',
       user,
@@ -33,7 +33,7 @@ export class ControllerTestFeatStats extends BeanBase<ScopeModule> {
     assert.equal(value, 1);
 
     // instance
-    value = await this.ctx.bean.stats.get({
+    value = await this.app.bean.stats.get({
       name: 'tasksInstance',
       user,
     });
@@ -44,7 +44,7 @@ export class ControllerTestFeatStats extends BeanBase<ScopeModule> {
   }
 
   async plus() {
-    this.ctx.bean.stats.notify({
+    this.app.bean.stats.notify({
       name: 'tasksUser',
       nameSub: 'department.project',
     });

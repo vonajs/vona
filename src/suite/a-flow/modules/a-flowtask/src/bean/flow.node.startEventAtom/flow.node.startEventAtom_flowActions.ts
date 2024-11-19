@@ -14,20 +14,20 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
     const checked: any = {};
     const nodeTasks = await this._deploy_flowActions_findNodeTasks({ content, nodeStart: node });
     // flowActions
-    const flowActions = await this.ctx.bean.atomAction.selectFlowActions({ atomClass, flowKey: flowDef.atomStaticKey });
+    const flowActions = await this.app.bean.atomAction.selectFlowActions({ atomClass, flowKey: flowDef.atomStaticKey });
     // loop one
     for (const flowAction of flowActions) {
       const nodeTask = nodeTasks.find(item => item.id === flowAction.nodeDefId);
       if (!nodeTask) {
         // delete roleRight/action
-        await this.ctx.bean.atomAction.delete({
+        await this.app.bean.atomAction.delete({
           atomClassId: atomClass.id,
           code: flowAction.code,
         });
       } else {
         // check action name
         if (nodeTask.name !== flowAction.name) {
-          await this.ctx.bean.atomAction.update({ id: flowAction.id, name: nodeTask.name });
+          await this.app.bean.atomAction.update({ id: flowAction.id, name: nodeTask.name });
         }
         // flag
         checked[nodeTask.id] = true;
@@ -37,7 +37,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
     for (const nodeTask of nodeTasks) {
       if (checked[nodeTask.id]) continue;
       // just create action
-      await this.ctx.bean.atomAction.getByModeFlow({
+      await this.app.bean.atomAction.getByModeFlow({
         atomClassId: atomClass.id,
         flowKey: flowDef.atomStaticKey,
         nodeDefId: nodeTask.id,
@@ -54,7 +54,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
       //     scopeNames: [],
       //   },
       // ];
-      // await this.ctx.bean.role.addRoleRightBatchByModeFlow({
+      // await this.app.bean.role.addRoleRightBatchByModeFlow({
       //   module: atomClass.module,
       //   atomClassName: atomClass.atomClassName,
       //   roleRights,
@@ -63,7 +63,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
   }
 
   async _deploy_flowActions_findNodeTasks({ content, nodeStart: node }: any) {
-    return await this.ctx.bean.flowDef._loopNodes({
+    return await this.app.bean.flowDef._loopNodes({
       content,
       nodeIdStart: node.id,
       fn: async ({ nodes, node }) => {
@@ -74,7 +74,7 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
         // check if activityUserTask
         if (node.type.indexOf('activityUserTask') > -1) {
           // check if auto
-          let _vars = this.ctx.bean.util.getProperty(node, 'options.assignees.vars');
+          let _vars = this.app.bean.util.getProperty(node, 'options.assignees.vars');
           if (_vars) {
             if (typeof _vars === 'string') {
               _vars = _vars.split(',');
@@ -90,11 +90,11 @@ export class FlowNodeStartEventAtomFlowActions extends FlowNodeStartEventAtomMat
 
   async _deploy_flowActions_deleting({ atomClass, flowDef }: any) {
     // flowActions
-    const flowActions = await this.ctx.bean.atomAction.selectFlowActions({ atomClass, flowKey: flowDef.atomStaticKey });
+    const flowActions = await this.app.bean.atomAction.selectFlowActions({ atomClass, flowKey: flowDef.atomStaticKey });
     // loop one
     for (const flowAction of flowActions) {
       // delete roleRight/action
-      await this.ctx.bean.atomAction.delete({
+      await this.app.bean.atomAction.delete({
         atomClassId: atomClass.id,
         code: flowAction.code,
       });

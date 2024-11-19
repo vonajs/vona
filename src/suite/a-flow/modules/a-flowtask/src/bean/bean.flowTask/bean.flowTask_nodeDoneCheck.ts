@@ -5,7 +5,7 @@ export class BeanFlowTaskNodeDoneCheck extends BeanFlowTaskFlowData {
     // load flow node
     let nodeInstance;
     try {
-      nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId });
+      nodeInstance = await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId });
     } catch (err) {}
     if (!nodeInstance) {
       // here means done

@@ -14,7 +14,7 @@ export class BeanCli extends BeanBase {
       const cliFullName = argv.cliFullName;
       const command = await this._findCliCommandAndCheckRight({ cliFullName, user });
       // command bean
-      const beanCommand = this.ctx.bean._newBean(command.beanFullName, { command, context });
+      const beanCommand = this.app.bean._newBean(command.beanFullName, { command, context });
       if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
       // meta
       return await beanCommand.meta({ user });
@@ -31,7 +31,7 @@ export class BeanCli extends BeanBase {
       return null;
     }
     // create progress
-    await this.ctx.bean.progress.create({ progressId });
+    await this.app.bean.progress.create({ progressId });
     // background
     this.ctx.meta.util.runInBackground(async ({ ctx }) => {
       const selfInstance = ctx.bean._newBean(BeanCli);
@@ -50,12 +50,12 @@ export class BeanCli extends BeanBase {
       const cliFullName = argv.cliFullName;
       const command = await this._findCliCommandAndCheckRight({ cliFullName, user });
       // command bean
-      const beanCommand = this.ctx.bean._newBean(command.beanFullName, { command, context, progressId });
+      const beanCommand = this.app.bean._newBean(command.beanFullName, { command, context, progressId });
       if (!beanCommand) throw new Error(`cli command bean not found: ${command.beanFullName}`);
       // execute
       await beanCommand.execute({ user });
       // progress done
-      await this.ctx.bean.progress.done({ progressId, message: this.ctx.text('CliDone') });
+      await this.app.bean.progress.done({ progressId, message: this.ctx.text('CliDone') });
     } catch (err: any) {
       // progress error
       const msg = err.message;
@@ -73,7 +73,7 @@ export class BeanCli extends BeanBase {
           message = err.stack;
         }
       }
-      await this.ctx.bean.progress.error({ progressId, message });
+      await this.app.bean.progress.error({ progressId, message });
       // throw err
       throw err;
     } finally {
@@ -86,7 +86,7 @@ export class BeanCli extends BeanBase {
     // command
     const command = this._findCliCommand({ cliFullName });
     // check right first
-    const right = await this.ctx.bean.resource.checkRightResource({
+    const right = await this.app.bean.resource.checkRightResource({
       atomStaticKey: command.resource.atomStaticKey,
       user,
     });
@@ -122,7 +122,7 @@ export class BeanCli extends BeanBase {
           const command = group[key];
           const fullKey = `${moduleName}:${groupName}:${key}`;
           // command
-          const _command = this.ctx.bean.util.extend({}, command);
+          const _command = this.app.bean.util.extend({}, command);
           // bean
           _command.beanFullName = this.bean.util.combineBeanFullName({
             module: moduleName,

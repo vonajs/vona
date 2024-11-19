@@ -8,7 +8,7 @@ export class BeanCacheMem extends BeanModuleScopeBase {
     if (!this.ctx.app[CACHEMEMORY]) {
       this.ctx.app[CACHEMEMORY] = {};
     }
-    return this.ctx.bean.util.getPropertyObject(
+    return this.app.bean.util.getPropertyObject(
       this.ctx.app[CACHEMEMORY],
       `${this.ctx.subdomain}&&${this.moduleScope}`,
       '&&',

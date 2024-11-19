@@ -9,22 +9,22 @@ export class QueueRender extends BeanBase {
   }
 
   async buildLanguage({ atomClass, language, progressId }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.buildLanguage({ language, progressId });
   }
 
   async buildLanguages({ atomClass, progressId }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.buildLanguages({ progressId });
   }
 
   async renderArticle({ atomClass, key, inner }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.renderArticle({ key, inner });
   }
 
   async deleteArticle({ atomClass, key, article, inner }: any) {
-    const build = this.ctx.bean.cms.build({ atomClass });
+    const build = this.app.bean.cms.build({ atomClass });
     return await build.deleteArticle({ key, article, inner });
   }
 }

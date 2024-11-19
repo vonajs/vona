@@ -11,11 +11,11 @@ export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
       return;
     }
     // publish uniform message
-    const userFlow = await this.ctx.bean.user.get({ id: this.context._flow.flowUserId });
+    const userFlow = await this.app.bean.user.get({ id: this.context._flow.flowUserId });
     if (!userFlow) {
       return;
     }
-    const userAssignee = await this.ctx.bean.user.get({ id: userIdAssignee });
+    const userAssignee = await this.app.bean.user.get({ id: userIdAssignee });
     if (!userAssignee) {
       return;
     }
@@ -41,7 +41,7 @@ export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
     };
     // jump out of the transaction
     this.ctx.tail(async () => {
-      await this.ctx.bean.io.publish({
+      await this.app.bean.io.publish({
         message,
         messageClass: {
           module: 'a-flow',

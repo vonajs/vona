@@ -55,7 +55,7 @@ export class AtomFlowDef extends BeanAtomBase<ScopeModule> {
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomWrite();
+    this.app.bean.util.checkDemoForAtomWrite();
     // super
     const data = await super.write({ atomClass, target, key, item, options, user });
     // update flowDef
@@ -77,7 +77,7 @@ export class AtomFlowDef extends BeanAtomBase<ScopeModule> {
     }
     // deploy
     if (item.atomStage === 1) {
-      await this.ctx.bean.flowDef.deploy({ flowDefId: data.atomId });
+      await this.app.bean.flowDef.deploy({ flowDefId: data.atomId });
     }
     // data
     return data;
@@ -85,9 +85,9 @@ export class AtomFlowDef extends BeanAtomBase<ScopeModule> {
 
   async delete({ atomClass, key, options, user }: any) {
     // deploy
-    const _atom = await this.ctx.bean.atom.modelAtom.get({ id: key.atomId });
+    const _atom = await this.app.bean.atom.modelAtom.get({ id: key.atomId });
     if (_atom!.atomStage === 1) {
-      await this.ctx.bean.flowDef.deploy({ flowDefId: key.atomId, undeploy: true, deleting: true });
+      await this.app.bean.flowDef.deploy({ flowDefId: key.atomId, undeploy: true, deleting: true });
     }
     // super
     await super.delete({ atomClass, key, options, user });
@@ -105,14 +105,14 @@ export class AtomFlowDef extends BeanAtomBase<ScopeModule> {
     // super
     await super.enable({ atomClass, key, options, user });
     // deploy
-    await this.ctx.bean.flowDef.deploy({ flowDefId: key.atomId });
+    await this.app.bean.flowDef.deploy({ flowDefId: key.atomId });
   }
 
   async disable({ atomClass, key, options, user }: any) {
     // super
     await super.disable({ atomClass, key, options, user });
     // deploy
-    await this.ctx.bean.flowDef.deploy({ flowDefId: key.atomId, undeploy: true });
+    await this.app.bean.flowDef.deploy({ flowDefId: key.atomId, undeploy: true });
   }
 
   _getMeta(item) {

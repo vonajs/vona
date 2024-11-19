@@ -20,7 +20,7 @@ export class IoMessageTest extends BeanIoMessageBase {
           text: `Reply: ${content.text}`,
         },
       };
-      await this.ctx.bean.io.publish({ path, message: _message, messageClass, options });
+      await this.app.bean.io.publish({ path, message: _message, messageClass, options });
     }
     return await super.onSaveSync({ path, options, message, messageSync, messageClass });
   }

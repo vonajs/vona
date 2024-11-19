@@ -23,7 +23,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustFlows() {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -46,7 +46,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
     });
     for (const flow of flows) {
       const flowAtomId = flow.flowAtomId;
-      const atom = await this.ctx.bean.atom.model.get({ id: flowAtomId });
+      const atom = await this.app.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
         await this.scope.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
@@ -62,7 +62,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
     });
     for (const flow of flows) {
       const flowAtomId = flow.flowAtomId;
-      const atom = await this.ctx.bean.atom.model.get({ id: flowAtomId });
+      const atom = await this.app.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
         await this.scope.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }

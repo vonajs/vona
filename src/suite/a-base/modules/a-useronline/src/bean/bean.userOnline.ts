@@ -61,7 +61,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
 
   async kickOut({ user }: any) {
     // redis
-    await this.ctx.bean.auth._clearRedisAuthAll({ user });
+    await this.app.bean.auth._clearRedisAuthAll({ user });
     // offline
     await this._offline({ user });
     // publish
@@ -94,7 +94,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
       userIdTo: userId,
       content,
     };
-    this.ctx.bean.io.publishMessageSystem({ message });
+    this.app.bean.io.publishMessageSystem({ message });
   }
 
   _combineExpireTime() {
@@ -107,7 +107,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
     let item = await this.modelUserOnline.get({ userId });
     if (!item) {
       //   create
-      const atomKey = await this.ctx.bean.atom.create({
+      const atomKey = await this.app.bean.atom.create({
         atomClass: __atomClassUserOnline,
         user,
         item: {
@@ -153,7 +153,7 @@ export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
   async _insertUserOnlineHistory({ user, data, isLogin }: any) {
     const userId = user.id;
     //   write
-    const atomKey = await this.ctx.bean.atom.write({
+    const atomKey = await this.app.bean.atom.write({
       atomClass: __atomClassUserOnlineHistory,
       item: {
         userId,

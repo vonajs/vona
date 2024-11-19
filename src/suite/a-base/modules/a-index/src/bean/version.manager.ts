@@ -17,7 +17,7 @@ export class VersionManager extends BeanBase<ScopeModule> {
         }
       }
       // combine indexes all
-      const indexes = this.ctx.bean.util.extend(
+      const indexes = this.app.bean.util.extend(
         {},
         this.scope.config.indexes,
         moduleIndexes,

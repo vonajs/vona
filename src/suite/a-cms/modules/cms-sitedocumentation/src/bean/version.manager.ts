@@ -13,18 +13,18 @@ export class VersionManager extends BeanBase {
     if (options.version === 1) {
       // create roles: cms-documentation-writer to template
       const roles = ['cms-documentation-writer'];
-      const roleTemplate = await this.ctx.bean.role.getSystemRole({ roleName: 'template' });
-      const roleSuperuser = await this.ctx.bean.role.getSystemRole({ roleName: 'superuser' });
+      const roleTemplate = await this.app.bean.role.getSystemRole({ roleName: 'template' });
+      const roleSuperuser = await this.app.bean.role.getSystemRole({ roleName: 'superuser' });
       for (const roleName of roles) {
-        const roleId = await this.ctx.bean.role.add({
+        const roleId = await this.app.bean.role.add({
           roleName,
           roleIdParent: roleTemplate!.id,
         });
         // role:superuser include cms-documentation
-        await this.ctx.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
+        await this.app.bean.role.addRoleInc({ roleId: roleSuperuser!.id, roleIdInc: roleId });
       }
       // build roles
-      await this.ctx.bean.role.setDirty(true);
+      await this.app.bean.role.setDirty(true);
 
       // add role rights
       const roleRights = [
@@ -40,7 +40,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'root', action: 'layout', scopeNames: 'authenticated' },
         { roleName: 'root', action: 'preview', scopeNames: 'authenticated' },
       ];
-      await this.ctx.bean.role.addRoleRightBatch({ atomClassName: 'document', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'document', roleRights });
     }
   }
 
@@ -75,7 +75,7 @@ export class VersionManager extends BeanBase {
     const categoryIds: any = {};
     for (const item of categories) {
       // add
-      const categoryId = await this.ctx.bean.category.add({
+      const categoryId = await this.app.bean.category.add({
         atomClass,
         data: {
           language: item.language,
@@ -102,7 +102,7 @@ export class VersionManager extends BeanBase {
     const tagIds: any = {};
     for (const item of tags) {
       // add
-      const tagId = await this.ctx.bean.tag.add({
+      const tagId = await this.app.bean.tag.add({
         atomClass,
         data: {
           language: item.language,

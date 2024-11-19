@@ -4,15 +4,15 @@ import { __ThisModule__ } from '../.metadata/this.js';
 @Service()
 export class ServiceSmsProvider extends BeanBase {
   get statusModule() {
-    return this.ctx.bean.status.module(__ThisModule__);
+    return this.app.bean.status.module(__ThisModule__);
   }
 
   async list() {
-    return this.ctx.bean.smsProviderCache.getSmsProvidersConfigForAdmin();
+    return this.app.bean.smsProviderCache.getSmsProvidersConfigForAdmin();
   }
 
   async setCurrent({ providerName }: any) {
-    const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
+    const providers = this.app.bean.smsProviderCache.getSmsProvidersConfigCache();
     const providerNameOld = Object.keys(providers).find(providerName => providers[providerName].current);
     if (providerNameOld) {
       providers[providerNameOld].current = false;
@@ -21,22 +21,22 @@ export class ServiceSmsProvider extends BeanBase {
     // update
     await this.statusModule.set('smsProviders', providers);
     // changed
-    await this.ctx.bean.smsProviderCache.smsProviderChanged();
+    await this.app.bean.smsProviderCache.smsProviderChanged();
   }
 
   async save({ providerName, data }: any) {
-    const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
+    const providers = this.app.bean.smsProviderCache.getSmsProvidersConfigCache();
     const providerOld = providers[providerName];
-    data = this.ctx.bean.util.extend({}, providerOld, data);
+    data = this.app.bean.util.extend({}, providerOld, data);
     await this._save({ providerName, data });
   }
 
   async _save({ providerName, data }: any) {
-    const providers = this.ctx.bean.smsProviderCache.getSmsProvidersConfigCache();
-    providers[providerName] = data ? this.ctx.bean.smsProviderCache.purgeProvider(data) : data;
+    const providers = this.app.bean.smsProviderCache.getSmsProvidersConfigCache();
+    providers[providerName] = data ? this.app.bean.smsProviderCache.purgeProvider(data) : data;
     // update
     await this.statusModule.set('smsProviders', providers);
     // changed
-    await this.ctx.bean.smsProviderCache.smsProviderChanged();
+    await this.app.bean.smsProviderCache.smsProviderChanged();
   }
 }

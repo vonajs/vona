@@ -52,7 +52,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
       edgeDefId,
     );
     // node
-    const nodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId, throwError: false });
+    const nodeInstance = await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId, throwError: false });
     if (!nodeInstance) {
       // do nothing
       //   1. maybe invoked again by mq queue, specailly in the debug environment
@@ -100,7 +100,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
       id: { op: '<', val: flowNodeId },
     });
     if (!flowNodeShadow) return null;
-    return await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowNodeShadow.id });
+    return await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId: flowNodeShadow.id });
   }
 
   async _checkShadowNodesOthers({ nodeInstance, behaviorDefId }: any) {
@@ -115,7 +115,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     });
     const flowNodeInstances: any[] = [];
     for (const flowNodeShadow of flowNodesShadow) {
-      const flowNodeInstance = await this.ctx.bean.flow._loadFlowNodeInstance({ flowNodeId: flowNodeShadow.id });
+      const flowNodeInstance = await this.app.bean.flow._loadFlowNodeInstance({ flowNodeId: flowNodeShadow.id });
       flowNodeInstances.push(flowNodeInstance);
     }
     return flowNodeInstances;
@@ -149,7 +149,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     }
     // check if has active node which will be flowing to the gateway(out)
     for (const flowNodeActive of flowNodesActive) {
-      const nodes = await this.ctx.bean.flowDef._loopNodes({
+      const nodes = await this.app.bean.flowDef._loopNodes({
         content,
         nodeIdStart: flowNodeActive.flowNodeDefId,
         fn: async ({ nodes, node }) => {

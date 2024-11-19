@@ -7,7 +7,7 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
   //   where, orders, page, mode: mine/others/flowing/history
   async select() {
     const options = this.ctx.request.body.options;
-    options.page = this.ctx.bean.util.page(options.page);
+    options.page = this.app.bean.util.page(options.page);
     const items = await this.scope.service.flow.select({
       options,
       user: this.ctx.state.user.op,

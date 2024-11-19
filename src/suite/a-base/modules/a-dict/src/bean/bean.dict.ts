@@ -136,15 +136,15 @@ export class BeanDict extends BeanModuleScopeBase<ScopeModule> {
     if (!dictKey) throw new Error('dictKey not set');
     // get atomId
     let atomId;
-    const atomClass = await this.ctx.bean.atomClass.get(this.atomClass);
-    const atom = await this.ctx.bean.atom.modelAtom.get({
+    const atomClass = await this.app.bean.atomClass.get(this.atomClass);
+    const atom = await this.app.bean.atom.modelAtom.get({
       atomClassId: atomClass.id,
       atomStaticKey: dictKey,
       atomStage: 1,
     });
     if (!atom) {
       // try preload
-      const atomKey = await this.ctx.bean.atomStatic.preloadAtomStatic({ atomStaticKey: dictKey });
+      const atomKey = await this.app.bean.atomStatic.preloadAtomStatic({ atomStaticKey: dictKey });
       if (!atomKey) throw new Error(`dict not found: ${dictKey}`);
       atomId = atomKey.atomId;
     } else {
@@ -152,12 +152,12 @@ export class BeanDict extends BeanModuleScopeBase<ScopeModule> {
     }
     // check resource right
     if (user) {
-      const res = await this.ctx.bean.resource.checkRightResource({ resourceAtomId: atomId, user });
+      const res = await this.app.bean.resource.checkRightResource({ resourceAtomId: atomId, user });
       if (!res) this.app.throw(403);
     }
     if (!returnDict) return true;
     // read
-    const dict = await this.ctx.bean.atom.read({ key: { atomId } });
+    const dict = await this.app.bean.atom.read({ key: { atomId } });
     if (!dict) return this.$scope.base.error.ElementDoesNotExist.throw();
     // ok
     return dict;
@@ -205,7 +205,7 @@ export class BeanDict extends BeanModuleScopeBase<ScopeModule> {
   }
 
   _prepareDict_titleLocale({ dict, title, locale }: any) {
-    return this.ctx.bean.util.getTitleLocale({
+    return this.app.bean.util.getTitleLocale({
       locales: dict._dictLocales,
       title,
       locale,

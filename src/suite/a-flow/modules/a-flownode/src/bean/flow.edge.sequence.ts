@@ -16,7 +16,7 @@ export class FlowEdgeSequence extends BeanFlowEdgeBase {
     // contextNodePrevious
     const contextNodePrevious = this.contextNode.contextEdge && this.contextNode.contextEdge.contextNode;
     // evaluateExpression
-    const resEnter = this.ctx.bean.flow.evaluateExpression({
+    const resEnter = this.app.bean.flow.evaluateExpression({
       expression: conditionExpression,
       globals: {
         context: this.context,

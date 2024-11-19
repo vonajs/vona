@@ -11,6 +11,6 @@ export class SummerCacheFieldsRightOfUser extends BeanBase {
   }
 
   async get(key) {
-    return await this.ctx.bean.fields.__getFieldsRightOfUserRaw(key);
+    return await this.app.bean.fields.__getFieldsRightOfUserRaw(key);
   }
 }

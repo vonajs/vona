@@ -7,7 +7,7 @@ export class EventLoginInfo extends BeanBase {
     const info = data.info;
     const provider = info.user && info.user.provider;
     if (provider && provider.module === 'a-authgithub' && provider.providerName === 'authgithub') {
-      info.config = this.ctx.bean.util.extend(info.config, {
+      info.config = this.app.bean.util.extend(info.config, {
         modules: {},
       });
     }
