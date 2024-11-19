@@ -86,7 +86,7 @@ const context: ContextBase = {
   },
   get cache() {
     const self = Cast<VonaContext>(this);
-    return self.bean._getBean('cache' as any);
+    return self.app.bean._getBean('cache' as any);
   },
   tail(cb) {
     if (!Cast(this).dbMeta.master) {
