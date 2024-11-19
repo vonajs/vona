@@ -12,7 +12,6 @@ export function Virtual(options?: IDecoratorVirtualOptions): ClassDecorator {
       module,
       scene: options.scene || 'virtual',
       name: options.name,
-      containerScope: options.containerScope,
       beanClass: target as unknown as Constructable,
       virtual: true,
     });

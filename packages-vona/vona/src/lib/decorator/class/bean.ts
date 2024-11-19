@@ -12,7 +12,6 @@ export function Bean(options?: IDecoratorBeanOptions): ClassDecorator {
       module,
       scene: options.scene || 'bean',
       name: options.name,
-      containerScope: options.containerScope,
       beanClass: target as unknown as Constructable,
     });
   };

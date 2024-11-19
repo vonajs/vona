@@ -73,7 +73,7 @@ export interface IDecoratorBeanOptions {
   /** global: if omit */
   scene?: TypeDecoratorBeanOptionsScene;
   name?: string;
-  containerScope?: ContainerScope;
+  // containerScope?: ContainerScope;
 }
 
 export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
