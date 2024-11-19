@@ -8,6 +8,6 @@ export class BeanSimple {
   }
 
   protected get bean() {
-    return this.ctx ? this.ctx.bean : this.app.bean;
+    return this.app.bean;
   }
 }
