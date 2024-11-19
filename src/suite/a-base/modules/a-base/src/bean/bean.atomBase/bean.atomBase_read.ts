@@ -16,12 +16,12 @@ const __itemBasicFieldsRead = [
 
 export class BeanAtomBaseRead extends BeanAtomBaseSelect {
   async readQuery({ atomClass, options, key, user }: AtomReadQueryParams) {
-    return await this.ctx.bean.atom._readQuery({ atomClass, options, key, user });
+    return await this.app.bean.atom._readQuery({ atomClass, options, key, user });
   }
 
   async read({ atomClass, options, key, user }: any) {
     // get
-    let item = await this.ctx.bean.atom._get({ atomClass, options, key, mode: 'full', user });
+    let item = await this.app.bean.atom._get({ atomClass, options, key, mode: 'full', user });
     if (!item) return item;
     // validate
     item = await this._readValidate({ atomClass, item, options, user });
@@ -33,7 +33,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
 
   async _read_handleTranslate({ item, atomClass, options: _options, user: _user }: any) {
     // atomClass
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // patchAtomClassInfo
     await this._patchAtomClassInfo({ item, atomClass });
     // dict translate
@@ -65,7 +65,7 @@ export class BeanAtomBaseRead extends BeanAtomBaseSelect {
 
   async _readValidate_schema({ schema, item }: any) {
     // schema
-    schema = this.ctx.bean.validation.getSchema(schema);
+    schema = this.app.bean.validation.getSchema(schema);
     const properties = schema.schema.properties;
     // filter
     for (const fieldName of Object.keys(item)) {

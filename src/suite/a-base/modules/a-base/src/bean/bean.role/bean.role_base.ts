@@ -79,14 +79,14 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
     if (data.module && data.roleName) {
       item.atomStaticKey = `${data.module}:role_${data.roleName}`;
     }
-    const roleKey = await this.ctx.bean.atom.write({
+    const roleKey = await this.app.bean.atom.write({
       key: null,
       atomClass: __atomClassRole,
       item,
       user,
     });
     // // submit
-    // await this.ctx.bean.atom.submit({
+    // await this.app.bean.atom.submit({
     //   key: roleKey,
     //   options: { ignoreFlow: true },
     //   user,
@@ -98,7 +98,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   async addChild({ roleAtomId, roleId, user }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
     const key = await this.add({ roleIdParent: roleId }, user, true);
-    const atom = await this.ctx.bean.atom.read({ key, user });
+    const atom = await this.app.bean.atom.read({ key, user });
     return { key, atom };
   }
 
@@ -123,13 +123,13 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   async delete({ roleAtomId, roleId, force = false }: any) {
     roleAtomId = await this.self._forceRoleAtomId({ roleAtomId, roleId });
     // delete this
-    await this.ctx.bean.atom.delete({ key: { atomId: roleAtomId }, options: { force } });
+    await this.app.bean.atom.delete({ key: { atomId: roleAtomId }, options: { force } });
   }
 
   async clone({ roleAtomId, roleId, user }: any) {
     roleAtomId = await this.self._forceRoleAtomId({ roleAtomId, roleId });
     // clone
-    return await this.ctx.bean.atom.clone({ key: { atomId: roleAtomId }, user });
+    return await this.app.bean.atom.clone({ key: { atomId: roleAtomId }, user });
   }
 
   // for donothing on roleId === 0
@@ -203,7 +203,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
 
   async item({ roleAtomId, roleId }: any) {
     roleAtomId = await this.self._forceRoleAtomId({ roleAtomId, roleId });
-    return await this.ctx.bean.atom.read({ key: { atomId: roleAtomId } });
+    return await this.app.bean.atom.read({ key: { atomId: roleAtomId } });
   }
 
   // child
@@ -216,9 +216,9 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   async childrenTop({ roleTypes, page, user }: any) {
     if (!user) user = { id: 0 };
     // page
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get(__atomClassRole);
+    const atomClass = await this.app.bean.atomClass.get(__atomClassRole);
     // roles by auth
     let roleIds = await this._childrenTop_byAuth({ roleTypes, atomClass, user });
     if (roleIds.length === 0) return [];
@@ -291,7 +291,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
 
   async _childrenTop_select({ roleIds, atomClass, page, user }: any) {
     // select
-    return await this.ctx.bean.atom.select({
+    return await this.app.bean.atom.select({
       atomClass,
       options: {
         orders: [['a.id', 'asc']],
@@ -313,7 +313,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   async children({ roleTypes, roleId, roleName, page, user }: any) {
     if (!user) user = { id: 0 };
     // page
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // roleId
     if (!roleId || roleId === 'root') {
       roleId = 0;
@@ -330,7 +330,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
       };
     }
     // select
-    const list = await this.ctx.bean.atom.select({
+    const list = await this.app.bean.atom.select({
       atomClass: __atomClassRole,
       options: {
         orders: [
@@ -406,7 +406,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
           }
         }
         // add
-        role = this.ctx.bean.util.extend({ module }, role, { roleIdParent });
+        role = this.app.bean.util.extend({ module }, role, { roleIdParent });
         roleIds[roleName] = await this.add(role);
       }
     }

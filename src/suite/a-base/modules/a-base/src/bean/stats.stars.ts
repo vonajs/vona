@@ -4,7 +4,7 @@ import { Bean, BeanBase } from 'vona';
 export class StatsStars extends BeanBase {
   async execute(context) {
     const { user } = context;
-    const count = await this.ctx.bean.atom.count({
+    const count = await this.app.bean.atom.count({
       options: {
         star: 1,
       },

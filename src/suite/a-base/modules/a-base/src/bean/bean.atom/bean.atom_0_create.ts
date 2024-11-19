@@ -11,8 +11,8 @@ export class BeanAtom0Create extends BeanAtomUtils {
     // for safety
     delete options.__createDelayData;
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // atomSimple
     const atomSimple = Number(Boolean(atomClassBase.simple));
     // item
@@ -22,7 +22,7 @@ export class BeanAtom0Create extends BeanAtomUtils {
       item.roleIdOwner = roleIdOwner;
     }
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName as any);
     const data = await beanInstance.create({
       atomClass,
       item,

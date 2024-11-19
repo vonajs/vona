@@ -69,7 +69,7 @@ export class VersionUpdate extends BeanBase {
 
   async _updateAtoms(_options) {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -101,7 +101,7 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _getRoleIdOwner(atomClassId, userId) {
-    return await this.ctx.bean.atom.preferredRoleId({
+    return await this.app.bean.atom.preferredRoleId({
       atomClass: { id: atomClassId },
       user: { id: userId },
       disableAuthOpenCheck: true,

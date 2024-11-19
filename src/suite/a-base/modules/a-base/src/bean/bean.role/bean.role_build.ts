@@ -6,17 +6,17 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
   async setDirty(dirty) {
     // when build done, clear summer
     if (!dirty) {
-      await this.ctx.bean.atomRightAux.clearSummersOfRole();
-      await this.ctx.bean.atomRightAux.clearSummersOfUser();
-      // await this.ctx.bean.fields.clearSummer_fieldsRightOfAtomClass();
-      await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
+      await this.app.bean.atomRightAux.clearSummersOfRole();
+      await this.app.bean.atomRightAux.clearSummersOfUser();
+      // await this.app.bean.fields.clearSummer_fieldsRightOfAtomClass();
+      await this.app.bean.fields.clearSummer_fieldsRightOfUser();
     }
     // status
-    await this.ctx.bean.status.module(__ThisModule__).set('roleDirty', dirty);
+    await this.app.bean.status.module(__ThisModule__).set('roleDirty', dirty);
   }
 
   async getDirty() {
-    return await this.ctx.bean.status.module(__ThisModule__).get('roleDirty');
+    return await this.app.bean.status.module(__ThisModule__).get('roleDirty');
   }
 
   // build roles
@@ -28,7 +28,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     if (!dirty) {
       // done
       if (progressId) {
-        await this.ctx.bean.progress.done({ progressId });
+        await this.app.bean.progress.done({ progressId });
       }
       return;
     }
@@ -48,7 +48,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
     if (!dirty) {
       // done
       if (progressId) {
-        await this.ctx.bean.progress.done({ progressId });
+        await this.app.bean.progress.done({ progressId });
       }
       return;
     }
@@ -68,12 +68,12 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       await this.setDirty(false);
       // done
       if (progressId) {
-        await this.ctx.bean.progress.done({ progressId });
+        await this.app.bean.progress.done({ progressId });
       }
     } catch (err: any) {
       // error
       if (progressId) {
-        await this.ctx.bean.progress.error({ progressId, message: err.message });
+        await this.app.bean.progress.error({ progressId, message: err.message });
       }
       throw err;
     }
@@ -105,7 +105,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       }
       // progress
       if (progress.progressId) {
-        await this.ctx.bean.progress.update({
+        await this.app.bean.progress.update({
           progressId: progress.progressId,
           progressNo: 0,
           total: progress.total,

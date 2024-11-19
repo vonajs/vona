@@ -11,6 +11,6 @@ export class SummerCacheRoleScopesOfRole extends BeanBase {
   }
 
   async get(key) {
-    return await this.ctx.bean.atomRightAux.__getRoleScopesOfRoleRaw(key);
+    return await this.app.bean.atomRightAux.__getRoleScopesOfRoleRaw(key);
   }
 }

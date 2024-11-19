@@ -36,12 +36,12 @@ export class BeanAtomClone extends BeanAtomStarLabel {
   async _copy({ target, atomClass, srcKey, srcItem, destKey, options, roleIdOwner, user }: any) {
     if (!user) user = { id: 0 };
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName as any);
     // srcItem
     if (!srcItem) {
-      srcItem = await this.ctx.bean.atom.read({ key: { atomId: srcKey.atomId }, atomClass, user: undefined });
+      srcItem = await this.app.bean.atom.read({ key: { atomId: srcKey.atomId }, atomClass, user: undefined });
     }
     if (!srcKey.itemId) {
       if (!atomClassBase.itemOnly) {
@@ -105,7 +105,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       await this._copyAttachments({ atomIdSrc: srcKey.atomId, atomIdDest: destKey.atomId });
     }
     // copy details: itemOnly maybe also has details
-    await this.ctx.bean.detail._copyDetails({
+    await this.app.bean.detail._copyDetails({
       atomClass,
       target,
       srcKeyAtom: srcKey,
@@ -231,7 +231,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       atomName = `${srcItem.atomName}-${this.ctx.text('CloneCopyText')}`;
       atomStatic = 0;
       if (atomStaticKey) {
-        atomStaticKey = this.ctx.bean.util.uuidv4();
+        atomStaticKey = this.app.bean.util.uuidv4();
       }
       atomRevision = 0;
       createdAt = new Date();

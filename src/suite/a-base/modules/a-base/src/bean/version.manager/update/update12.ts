@@ -14,7 +14,7 @@ export class VersionUpdate extends BeanBase {
 
   // async _updateAtomClasses(options) {
   //   // all instances
-  //   const instances = await this.ctx.bean.instance.list();
+  //   const instances = await this.app.bean.instance.list();
   //   for (const instance of instances) {
   //     await this.ctx.meta.util.executeBean({
   //       subdomain: instance.name,
@@ -29,7 +29,7 @@ export class VersionUpdate extends BeanBase {
   //   // atomClasses
   //   const atomClasses = await this.bean.model.atomClass.select();
   //   for (const atomClass of atomClasses) {
-  //     const _atomClass = this.ctx.bean.base.atomClass(atomClass);
+  //     const _atomClass = this.app.bean.base.atomClass(atomClass);
   //     if (_atomClass.inner) {
   //       await this.bean.model.atomClass.update({ id: atomClass.id, atomClassInner: 1 });
   //     }

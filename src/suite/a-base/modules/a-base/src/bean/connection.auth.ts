@@ -6,7 +6,7 @@ export interface IConnectionOptionsAuth extends IDecoratorConnectionOptions {}
 export class ConnectionAuth extends BeanBase implements IConnectionExecute {
   async execute(options: IConnectionOptionsAuth, next: Next) {
     // check
-    await this.ctx.bean.user.check(options);
+    await this.app.bean.user.check(options);
     // next
     return next();
   }

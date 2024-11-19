@@ -3,7 +3,7 @@ import { BeanAtomBaseDefault } from './bean.atomBase_default.js';
 
 export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
   async selectQuery({ atomClass, options, user }: AtomSelectQueryParams) {
-    return await this.ctx.bean.atom._selectQuery({ atomClass, options, user });
+    return await this.app.bean.atom._selectQuery({ atomClass, options, user });
   }
 
   async select({ atomClass, options, items, user }: any) {
@@ -11,7 +11,7 @@ export class BeanAtomBaseSelect extends BeanAtomBaseDefault {
     // validate
     await this._selectValidate({ atomClass, items, options, user });
     // atomClass
-    const atomClassBase = atomClass ? await this.ctx.bean.atomClass.atomClass(atomClass) : null;
+    const atomClassBase = atomClass ? await this.app.bean.atomClass.atomClass(atomClass) : null;
     // patchAtomClassInfo
     await this._patchAtomClassInfo({ items, atomClass });
     // dict translate

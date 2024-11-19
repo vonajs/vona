@@ -4,27 +4,27 @@ import { AtomClassParams } from '../types.js';
 @Service()
 export class ServiceAtom extends BeanBase {
   async preferredRoles({ atomClass, user }: any) {
-    return await this.ctx.bean.atom.preferredRoles({ atomClass, user });
+    return await this.app.bean.atom.preferredRoles({ atomClass, user });
   }
 
   async preferredRole({ atomClass, user }: any) {
-    return await this.ctx.bean.atom.preferredRole({ atomClass, user });
+    return await this.app.bean.atom.preferredRole({ atomClass, user });
   }
 
   async preferredRoleId({ atomClass, user }: any) {
-    return await this.ctx.bean.atom.preferredRoleId({ atomClass, user });
+    return await this.app.bean.atom.preferredRoleId({ atomClass, user });
   }
 
   async default({ atomClass, roleIdOwner, item, options, user }: any) {
-    return await this.ctx.bean.atom.default({ atomClass, roleIdOwner, item, options, user });
+    return await this.app.bean.atom.default({ atomClass, roleIdOwner, item, options, user });
   }
 
   async create({ atomClass, roleIdOwner, item, options, user }: any) {
-    return await this.ctx.bean.atom.create({ atomClass, roleIdOwner, item, options, user });
+    return await this.app.bean.atom.create({ atomClass, roleIdOwner, item, options, user });
   }
 
   async atomClass({ key, user: _user }: any): Promise<AtomClassParams | undefined> {
-    const atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
+    const atomClass = await this.app.bean.atomClass.getByAtomId({ atomId: key.atomId });
     if (!atomClass) return;
     return {
       id: atomClass.id,
@@ -34,47 +34,47 @@ export class ServiceAtom extends BeanBase {
   }
 
   async read({ key, atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.read({ key, atomClass, options, user });
+    return await this.app.bean.atom.read({ key, atomClass, options, user });
   }
 
   async select({ atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.select({ atomClass, options, user });
+    return await this.app.bean.atom.select({ atomClass, options, user });
   }
 
   async count({ atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.count({ atomClass, options, user });
+    return await this.app.bean.atom.count({ atomClass, options, user });
   }
 
   async write({ key, atomClass, roleIdOwner, item, options, user }: any) {
-    return await this.ctx.bean.atom.write({ key, atomClass, roleIdOwner, item, options, user });
+    return await this.app.bean.atom.write({ key, atomClass, roleIdOwner, item, options, user });
   }
 
   async openDraft({ key, atomClass, user }: any) {
-    return await this.ctx.bean.atom.openDraft({ key, atomClass, user });
+    return await this.app.bean.atom.openDraft({ key, atomClass, user });
   }
 
   async submit({ key, options, user }: any) {
-    return await this.ctx.bean.atom.submit({ key, options, user });
+    return await this.app.bean.atom.submit({ key, options, user });
   }
 
   async delete({ key, atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.delete({ key, atomClass, options, user });
+    return await this.app.bean.atom.delete({ key, atomClass, options, user });
   }
 
   async deleteBulk({ atomClass, keys, options, user }: any) {
-    return await this.ctx.bean.atom.deleteBulk({ atomClass, keys, options, user });
+    return await this.app.bean.atom.deleteBulk({ atomClass, keys, options, user });
   }
 
   async clone({ key, atomClass, roleIdOwner, options, user }: any) {
-    return await this.ctx.bean.atom.clone({ key, atomClass, roleIdOwner, options, user });
+    return await this.app.bean.atom.clone({ key, atomClass, roleIdOwner, options, user });
   }
 
   async enable({ key, user }: any) {
-    return await this.ctx.bean.atom.enable({ key, user });
+    return await this.app.bean.atom.enable({ key, user });
   }
 
   async disable({ key, user }: any) {
-    return await this.ctx.bean.atom.disable({ key, user });
+    return await this.app.bean.atom.disable({ key, user });
   }
 
   async exportBulk({ atomClass, options, fields, user }: any) {
@@ -86,7 +86,7 @@ export class ServiceAtom extends BeanBase {
       options,
       fn: async ({ options }) => {
         // exportBulk
-        return await this.ctx.bean.atom.exportBulk({ atomClass, options, fields, user });
+        return await this.app.bean.atom.exportBulk({ atomClass, options, fields, user });
       },
     });
   }
@@ -102,14 +102,14 @@ export class ServiceAtom extends BeanBase {
         try {
           // prepare file
           if (params.file.mode === 'buffer') {
-            const res = await this.ctx.bean.file.loadBuffer({ downloadId: file.downloadId });
+            const res = await this.app.bean.file.loadBuffer({ downloadId: file.downloadId });
             file.fileBuffer = res.buffer;
           }
           // importBulk
-          await this.ctx.bean.atom.importBulk({ atomClass, options, file, user });
+          await this.app.bean.atom.importBulk({ atomClass, options, file, user });
         } finally {
           // delete file
-          await this.ctx.bean.file.delete({ downloadId: file.downloadId });
+          await this.app.bean.file.delete({ downloadId: file.downloadId });
         }
       },
     });
@@ -124,7 +124,7 @@ export class ServiceAtom extends BeanBase {
       options,
       fn: async ({ options }) => {
         // performAction
-        return await this.ctx.bean.atom.performAction({ key, atomClass, action, item, options, user });
+        return await this.app.bean.atom.performAction({ key, atomClass, action, item, options, user });
       },
     });
   }
@@ -138,37 +138,37 @@ export class ServiceAtom extends BeanBase {
       options,
       fn: async ({ options }) => {
         // performActionBulk
-        return await this.ctx.bean.atom.performActionBulk({ keys, atomClass, action, item, options, user });
+        return await this.app.bean.atom.performActionBulk({ keys, atomClass, action, item, options, user });
       },
     });
   }
 
   async star({ key, atom, user }: any) {
-    return await this.ctx.bean.atom.star({ key, atom, user });
+    return await this.app.bean.atom.star({ key, atom, user });
   }
 
   async readCount({ key, atom, user }: any) {
-    return await this.ctx.bean.atom.readCount({ key, atom, user });
+    return await this.app.bean.atom.readCount({ key, atom, user });
   }
 
   async stats({ atomIds, user }: any) {
-    return await this.ctx.bean.atom.stats({ atomIds, user });
+    return await this.app.bean.atom.stats({ atomIds, user });
   }
 
   async labels({ key, atom, user }: any) {
-    return await this.ctx.bean.atom.labels({ key, atom, user });
+    return await this.app.bean.atom.labels({ key, atom, user });
   }
 
   async actions({ key, atomClass, options, basic, user }: any) {
-    return await this.ctx.bean.atom.actions({ key, atomClass, options, basic, user });
+    return await this.app.bean.atom.actions({ key, atomClass, options, basic, user });
   }
 
   async actionsBulk({ atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.actionsBulk({ atomClass, options, user });
+    return await this.app.bean.atom.actionsBulk({ atomClass, options, user });
   }
 
   async checkRightAction({ key, atomClass, action, stage, user, checkFlow }: any) {
-    return await this.ctx.bean.atom.checkRightAction({
+    return await this.app.bean.atom.checkRightAction({
       atom: { id: key.atomId },
       atomClass,
       action,
@@ -179,24 +179,24 @@ export class ServiceAtom extends BeanBase {
   }
 
   async schema({ atomClass, schema }: any) {
-    return await this.ctx.bean.atom.schema({ atomClass, schema });
+    return await this.app.bean.atom.schema({ atomClass, schema });
   }
 
   async validator({ atomClass }: any) {
-    return await this.ctx.bean.atom.validator({ atomClass });
+    return await this.app.bean.atom.validator({ atomClass });
   }
 
   async moveUp({ key, atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.moveUp({ key, atomClass, options, user });
+    return await this.app.bean.atom.moveUp({ key, atomClass, options, user });
   }
 
   async moveDown({ key, atomClass, options, user }: any) {
-    return await this.ctx.bean.atom.moveDown({ key, atomClass, options, user });
+    return await this.app.bean.atom.moveDown({ key, atomClass, options, user });
   }
 
   async _handleActionParams({ atomClass, action, options, fn }: any) {
     // action base
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       name: action,
@@ -205,7 +205,7 @@ export class ServiceAtom extends BeanBase {
     const params = actionBase.params || {};
     // check isTest
     if (params.progress && !this.app.meta.isTest) {
-      const progressId = await this.ctx.bean.progress.create();
+      const progressId = await this.app.bean.progress.create();
       options = Object.assign({}, options, { progressId });
       // background
       this.ctx.meta.util.runInBackground(async () => {

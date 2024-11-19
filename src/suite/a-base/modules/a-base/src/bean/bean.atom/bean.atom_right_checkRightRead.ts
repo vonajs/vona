@@ -22,7 +22,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
     });
     if (!atom || !atomClass || !atomClassBase) return null;
     // parse action code
-    action = this.ctx.bean.atomAction.parseActionCode({
+    action = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
@@ -61,7 +61,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
   }
 
   async _checkRightRead_normal({ _atom, atomClass, user, checkFlow, options: _options }: any) {
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // draft: only userIdUpdated
     // check right
     if (!atomClassBase.itemOnly) {
@@ -70,7 +70,7 @@ export class BeanAtomRightCheckRightRead extends BeanAtomRightCheckRightCreate {
         const bSelf = _atom.userIdUpdated === user.id;
         // checkFlow
         if (_atom.atomFlowId > 0 && checkFlow) {
-          const flow = await this.ctx.bean.flow.get({ flowId: _atom.atomFlowId, history: true, user });
+          const flow = await this.app.bean.flow.get({ flowId: _atom.atomFlowId, history: true, user });
           if (!flow) return null;
           return _atom;
         }

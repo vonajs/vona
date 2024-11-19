@@ -13,11 +13,11 @@ export class BeanRoleIncludes extends BeanRoleBuild {
     // user = { id: 0 };
     //
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // where
     const where = { 'f.roleIdWho': roleId };
     // select
-    const list = await this.ctx.bean.atom.select({
+    const list = await this.app.bean.atom.select({
       atomClass: __atomClassRole,
       options: {
         orders: [['f.roleName', 'asc']],
@@ -86,7 +86,7 @@ export class BeanRoleIncludes extends BeanRoleBuild {
 // // includes
 // async includes({ roleAtomId, roleId, page, user }: any) {
 //   roleId = await this.self._forceRoleId({ roleAtomId, roleId });
-//   page = this.ctx.bean.util.page(page, false);
+//   page = this.app.bean.util.page(page, false);
 //   const _limit = this.bean.model._limit(page.size, page.index);
 //   const list = await this.bean.model.query(
 //     `

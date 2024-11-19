@@ -19,7 +19,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     // create a copy
     let item = Object.assign({}, itemOriginal);
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // force delete atomDisabled
     if (!atomClassBase.itemOnly) {
       delete item.atomDisabled;
@@ -34,7 +34,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     if (!isCreateDelay) {
       if (!atomClassBase.itemOnly) {
         if (atomClassBase.tag && item.atomTags !== undefined && atomStage === 1) {
-          _atomOld = await this.ctx.bean.atom.modelAtom.get({ id: key.atomId });
+          _atomOld = await this.app.bean.atom.modelAtom.get({ id: key.atomId });
         }
       }
     }
@@ -47,7 +47,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
       // create
       const optionsCreate = { ...options, __createDelayData: item };
       item = await this.create({ atomClass, item: itemOriginal, options: optionsCreate, user });
-      key = this.ctx.bean.atom._patchCreateWriteData({ data: item, atomClassBase });
+      key = this.app.bean.atom._patchCreateWriteData({ data: item, atomClassBase });
     } else {
       // _writeAtom(update aAtom)
       if (!atomClassBase.itemOnly) {
@@ -57,9 +57,9 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     // tag
     if (!atomClassBase.itemOnly) {
       if (atomClassBase.tag && item.atomTags !== undefined) {
-        await this.ctx.bean.tag.updateTagRefs({ atomId: key.atomId, atomTags: item.atomTags });
+        await this.app.bean.tag.updateTagRefs({ atomId: key.atomId, atomTags: item.atomTags });
         if (atomStage === 1) {
-          await this.ctx.bean.tag.setTagAtomCount({ tagsNew: item.atomTags, tagsOld: _atomOld.atomTags });
+          await this.app.bean.tag.setTagAtomCount({ tagsNew: item.atomTags, tagsOld: _atomOld.atomTags });
         }
       }
     }
@@ -78,7 +78,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
       // schema
       if (!target) {
         // only save
-        const atomSchema = await this.ctx.bean.atom._prepareAtomSchema({
+        const atomSchema = await this.app.bean.atom._prepareAtomSchema({
           mode: 'edit',
           atomClass,
           options,
@@ -96,14 +96,14 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
       // filterOptions
       const filterOptions = this._writeValidate_prepareFilterOptions({ target });
       // validate
-      this.ctx.bean.util.setProperty(this.ctx, 'meta.validateHost', {
+      this.app.bean.util.setProperty(this.ctx, 'meta.validateHost', {
         atomClass,
         key,
         options,
         user,
       });
-      await this.ctx.bean.validation._validate({ atomClass, data: item, options, filterOptions });
-      this.ctx.bean.util.setProperty(this.ctx, 'meta.validateHost', null);
+      await this.app.bean.validation._validate({ atomClass, data: item, options, filterOptions });
+      this.app.bean.util.setProperty(this.ctx, 'meta.validateHost', null);
       // itemHold
       for (const field of __itemBasicFieldsWrite) {
         if (item[field] === undefined && itemHold[field] !== undefined) {
@@ -152,7 +152,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     }
     // update
     atom.id = key.atomId;
-    await this.ctx.bean.atom._update({ atom, user });
+    await this.app.bean.atom._update({ atom, user });
   }
 
   async _writeHandleResource({ atomClass, atomClassBase, key, item }: any) {
@@ -162,7 +162,7 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
     if (atomClassBase.resource && atomStage === 1) {
       // update locales
       if (item.atomName) {
-        await this.ctx.bean.resource.setLocales({
+        await this.app.bean.resource.setLocales({
           atomId,
           atomName: item.atomName,
         });
@@ -176,8 +176,8 @@ export class BeanAtomBaseWrite extends BeanAtomBaseRead {
         });
         if (!right) {
           // always add role of template.system when no records
-          const roleSystem = await this.ctx.bean.role.parseRoleName({ roleName: 'template.system' });
-          await this.ctx.bean.resource.addResourceRole({
+          const roleSystem = await this.app.bean.role.parseRoleName({ roleName: 'template.system' });
+          await this.app.bean.resource.addResourceRole({
             atomId,
             roleId: roleSystem.id,
           });

@@ -17,7 +17,7 @@ export class LocalProcedureUtilsFieldsRight extends LocalProcedureResource {
   // see also: _readValidate
   async _prepare_fieldsRight({ options }: any): Promise<string[]> {
     if (!options.schema || options.schema.isSchemaBase || options.tableName.indexOf(' ') > -1) return ['f.*'];
-    const schema = this.ctx.bean.validation.getSchema(options.schema);
+    const schema = this.app.bean.validation.getSchema(options.schema);
     const properties = schema.schema.properties;
     const columns = await this.bean.model.columns(options.tableName);
     const fieldNames: string[] = [];

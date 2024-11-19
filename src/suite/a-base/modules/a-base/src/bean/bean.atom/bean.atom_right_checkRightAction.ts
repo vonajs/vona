@@ -19,7 +19,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       throwWhenEmpty: false,
     });
     // parse action code
-    action = this.ctx.bean.atomAction.parseActionCode({
+    action = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
@@ -28,7 +28,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (action === 3 && key.atomId === 0) {
       // need not check createDelay
       //  createDelay is just a ui behavior at front
-      // const createDelay = this.ctx.bean.atomAction.getCreateDelay({ atomClass });
+      // const createDelay = this.app.bean.atomAction.getCreateDelay({ atomClass });
       // if (!createDelay) this.app.throw(403);
       // check if create
       return await this.self.checkRightActionBulk({
@@ -64,7 +64,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     options,
   }: any) {
     // parse action code
-    action = this.ctx.bean.atomAction.parseActionCode({
+    action = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
@@ -73,7 +73,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     if (!res) return res;
     // auth open check
     if (!disableAuthOpenCheck) {
-      const resAuthOpenCheck = await this.ctx.bean.authOpen.checkRightAtomAction({ atomClass, action });
+      const resAuthOpenCheck = await this.app.bean.authOpen.checkRightAtomAction({ atomClass, action });
       if (!resAuthOpenCheck) return null;
     }
     // ok
@@ -82,8 +82,8 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
 
   async _checkRightAction_inner2({ atom, atomClass, action, stage, user, checkFlow, options }: any) {
     // atom bean
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName as any);
     // check right
     options = {
       ...options,
@@ -98,7 +98,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     // atom
     const _atom = atom;
     if (!_atom) this.scope.error.ElementDoesNotExist.throw();
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // check fromViewHistory
     const rightFromViewHistory = await this.self._checkRightFromViewHistory({
       key: { atomId: atom.atomId },
@@ -190,7 +190,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       return _atom;
     }
     // actionBase
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       code: action,
@@ -198,7 +198,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     // if (!actionBase) throw new Error(`action not found: ${atomClass.module}:${atomClass.atomClassName}:${action}`);
     if (!actionBase) {
       if (action < 10000) {
-        await this.ctx.bean.atomAction.delete({ atomClassId: atomClass.id, code: action });
+        await this.app.bean.atomAction.delete({ atomClassId: atomClass.id, code: action });
       }
       return null;
     }
@@ -259,10 +259,10 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
 
   async _checkRightAction_flowAction({ _atom, atomClass, action, user }: any) {
     // actionItem
-    const actionItem = await this.ctx.bean.atomAction.model.get({ atomClassId: atomClass.id, code: action });
+    const actionItem = await this.app.bean.atomAction.model.get({ atomClassId: atomClass.id, code: action });
     if (!actionItem) return null;
     // flowTask
-    const task = await this.ctx.bean.flowTask.get({
+    const task = await this.app.bean.flowTask.get({
       options: {
         where: {
           'b.flowNodeDefId': actionItem.nodeDefId,
@@ -296,7 +296,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     const bSelf = _atom.userIdUpdated === user.id;
     // checkFlow: special for comment/stats,etcs.
     if (_atom.atomFlowId > 0 && checkFlow) {
-      const flow = await this.ctx.bean.flow.get({ flowId: _atom.atomFlowId, history: true, user });
+      const flow = await this.app.bean.flow.get({ flowId: _atom.atomFlowId, history: true, user });
       if (flow) return _atom;
     }
     // only self or flowTaskId
@@ -398,7 +398,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     }
     // checkFlow
     if (_atom.atomFlowId > 0 && !_atom.atomClosed && checkFlow) {
-      const flow = await this.ctx.bean.flow.get({ flowId: _atom.atomFlowId, history: true, user });
+      const flow = await this.app.bean.flow.get({ flowId: _atom.atomFlowId, history: true, user });
       if (flow) return _atom;
     }
     // check enableOnOpened
@@ -434,7 +434,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
   }
 
   async _checkRightAction_basic({ atomClass, _atom, action, user }: any) {
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // special check for itemOnly/enableRight=false
     if (atomClassBase.itemOnly && !atomClassBase.enableRight) {
       return true;

@@ -4,7 +4,7 @@ import { Bean, BeanBase } from 'vona';
 export class MiddlewareAuth extends BeanBase {
   async execute(options, next) {
     // check
-    await this.ctx.bean.user.check(options);
+    await this.app.bean.user.check(options);
     // next
     return next();
   }

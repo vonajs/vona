@@ -4,6 +4,6 @@ import { Bean, BeanBase } from 'vona';
 export class QueueRoleBuild extends BeanBase {
   async execute(context) {
     const { options } = context.data;
-    await this.ctx.bean.role._buildQueue(options);
+    await this.app.bean.role._buildQueue(options);
   }
 }

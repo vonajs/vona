@@ -16,9 +16,9 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     // user = { id: 0 };
     // roleId
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // select
-    const list = await this.ctx.bean.atom.select({
+    const list = await this.app.bean.atom.select({
       atomClass: __atomClassUser,
       options: {
         orders: [['f.userName', 'asc']],
@@ -35,12 +35,12 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
   async userRoles({ userAtomId, userId, page, user }: any) {
     // user, should check user right scope
     // user = { id: 0 };
-    userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
-    page = this.ctx.bean.util.page(page, false);
+    userId = await this.app.bean.user._forceUserId({ userAtomId, userId });
+    page = this.app.bean.util.page(page, false);
     // where
     const where = { 'f.userIdWho': userId };
     // select
-    const list = await this.ctx.bean.atom.select({
+    const list = await this.app.bean.atom.select({
       atomClass: __atomClassRole,
       options: {
         orders: [['f.roleName', 'asc']],
@@ -60,7 +60,7 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role!.id;
     // user
-    const _user = await this.ctx.bean.user._forceUserAndCheckRightRead({ userAtomId, userId, user });
+    const _user = await this.app.bean.user._forceUserAndCheckRightRead({ userAtomId, userId, user });
     userId = _user!.id;
     // check if exists
     const item = await this.modelUserRole.get({
@@ -74,10 +74,10 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
       roleId,
     });
     // clear summer
-    await this.ctx.bean.atomRightAux.clearSummersOfUser();
-    // await this.ctx.bean.atomRightAux.clearSummersOfRole();
-    // await this.ctx.bean.fields.clearSummer_fieldsRightOfAtomClass();
-    await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
+    await this.app.bean.atomRightAux.clearSummersOfUser();
+    // await this.app.bean.atomRightAux.clearSummersOfRole();
+    // await this.app.bean.fields.clearSummer_fieldsRightOfAtomClass();
+    await this.app.bean.fields.clearSummer_fieldsRightOfUser();
     // ok
     return res[0];
   }
@@ -87,13 +87,13 @@ export class BeanRoleUsers extends BeanRoleResourceRights {
     const _role = await this._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role!.id;
     // user
-    const _user = await this.ctx.bean.user._forceUserAndCheckRightRead({ userAtomId, userId, user });
+    const _user = await this.app.bean.user._forceUserAndCheckRightRead({ userAtomId, userId, user });
     userId = _user!.id;
     // clear summer
-    await this.ctx.bean.atomRightAux.clearSummersOfUser();
-    // await this.ctx.bean.atomRightAux.clearSummersOfRole();
-    // await this.ctx.bean.fields.clearSummer_fieldsRightOfAtomClass();
-    await this.ctx.bean.fields.clearSummer_fieldsRightOfUser();
+    await this.app.bean.atomRightAux.clearSummersOfUser();
+    // await this.app.bean.atomRightAux.clearSummersOfRole();
+    // await this.app.bean.fields.clearSummer_fieldsRightOfAtomClass();
+    await this.app.bean.fields.clearSummer_fieldsRightOfUser();
     // delete
     await this.modelUserRole.delete({
       userId,

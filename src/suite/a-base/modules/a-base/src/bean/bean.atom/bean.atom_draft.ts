@@ -12,7 +12,7 @@ export class BeanAtomDraft extends BeanAtomClone {
     if (!atomClassBase) this.app.throw(403);
     atomClassBase = atomClassBase!;
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName as any);
     // draft
     const atomIdDraft = key.atomId;
     const atomDraft = (await this.modelAtom.get({ id: atomIdDraft }))!;

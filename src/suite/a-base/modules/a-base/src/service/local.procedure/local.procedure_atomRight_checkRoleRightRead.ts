@@ -6,7 +6,7 @@ export class LocalProcedureAtomRightCheckRoleRightRead extends LocalProcedureAto
     iid = parseInt(iid);
     roleIdWho = parseInt(roleIdWho);
     action = parseInt(action);
-    const atomId = this.ctx.bean.util.parseIdSafe(atom.id);
+    const atomId = this.app.bean.util.parseIdSafe(atom.id);
     // _where
     let _where;
     let _selectFields;

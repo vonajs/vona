@@ -39,7 +39,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     const atomState = item.atomState;
     if (atomState === undefined || atomState === null) return;
     // dictItem
-    const dictItem = await this.ctx.bean.atomState.findDictItem({
+    const dictItem = await this.app.bean.atomState.findDictItem({
       atomClass: { module: item.module, atomClassName: item.atomClassName },
       atomStage: item.atomStage,
       atomState,
@@ -55,7 +55,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
   async _dictTranslate({ items, item, atomClass, atomClassBase }: any) {
     if (!atomClass && !atomClassBase) return;
     if (!atomClassBase) {
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     }
     // items
     if (item) {
@@ -93,7 +93,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     const dictKey = this._dictTranslateField_getDickKey({ item, field });
     if (!dictKey) return null;
     // dictItem
-    const dictItem = await this.ctx.bean.dict.findItem({
+    const dictItem = await this.app.bean.dict.findItem({
       dictKey,
       code,
       options: {
@@ -126,12 +126,12 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     //
     if (!item.atomDisabled) return;
     //
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: item.module,
       atomClassName: item.atomClassName,
       name: 'disable',
     });
-    const title = this.ctx.bean.util.getProperty(actionBase, 'params.atomDisabled.title') || 'Disabled';
+    const title = this.app.bean.util.getProperty(actionBase, 'params.atomDisabled.title') || 'Disabled';
     const meta = this._ensureItemMeta(item);
     meta.flags.push(this.ctx.text(title));
   }
@@ -153,7 +153,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     const categoryIdsWant = Object.keys(categoryIdsWantMap).map(categoryId => parseInt(categoryId));
     if (categoryIdsWant.length === 0) return;
     // select
-    const categoriesWant = await this.ctx.bean.category.model.mget(categoryIdsWant);
+    const categoriesWant = await this.app.bean.category.model.mget(categoryIdsWant);
     // set
     for (item of items) {
       const categoryId = item.atomCategoryId;
@@ -192,7 +192,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     if (userIdsWant.length === 0) {
       usersWant = [];
     } else {
-      usersWant = await this.ctx.bean.user.model.mget(userIdsWant);
+      usersWant = await this.app.bean.user.model.mget(userIdsWant);
     }
     // special for system user
     usersWant.push({ id: 0, userName: this.ctx.text('system') });
@@ -234,7 +234,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
       // atomClass
       let _atomClassBase = atomClassBase;
       if (!_atomClassBase) {
-        _atomClassBase = this.ctx.bean.base.atomClass({
+        _atomClassBase = this.app.bean.base.atomClass({
           module: item.module,
           atomClassName: item.atomClassName,
         });
@@ -285,14 +285,14 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     // atomClassIds
     const atomClassIds: number[] = Set.unique(items.map(item => item.atomClassId));
     // atomClasses
-    const atomClasses = await this.ctx.bean.atomClass.model.mget(atomClassIds);
+    const atomClasses = await this.app.bean.atomClass.model.mget(atomClassIds);
     for (const item of items) {
       const atomClass = atomClasses.find(atomClass => atomClass.id === item.atomClassId);
       if (!atomClass) continue;
       item.module = atomClass.module;
       item.atomClassName = atomClass.atomClassName;
       // special for !atomClass
-      const _atomClassBaseItem = await this.ctx.bean.atomClass.atomClass(atomClass);
+      const _atomClassBaseItem = await this.app.bean.atomClass.atomClass(atomClass);
       item.atomClassTitle = _atomClassBaseItem.title;
       item.atomClassTitleLocale = _atomClassBaseItem.titleLocale;
     }

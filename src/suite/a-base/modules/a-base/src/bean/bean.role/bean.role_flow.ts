@@ -14,7 +14,7 @@ export class BeanRoleFlow extends BeanRoleUsers {
     module = module || this.moduleScope;
     // const _module = this.ctx.app.meta.modules[module];
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({ id: atomClassId, module, atomClassName });
+    const atomClass = await this.app.bean.atomClass.get({ id: atomClassId, module, atomClassName });
     // write back, for use atomClassId
     module = atomClass.module;
     atomClassName = atomClass.atomClassName;
@@ -31,7 +31,7 @@ export class BeanRoleFlow extends BeanRoleUsers {
       // scope
       const scope = await this._parseScopeNames({ scopeNames: roleRight.scopeNames });
       // add role right
-      const action = await this.ctx.bean.atomAction.getByModeFlow({
+      const action = await this.app.bean.atomAction.getByModeFlow({
         atomClassId: atomClass.id,
         flowKey: roleRight.flowKey,
         nodeDefId: roleRight.nodeDefId,

@@ -42,7 +42,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
     mine = parseInt(mine);
     resource = parseInt(resource);
     role = parseInt(role);
-    atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
+    atomIdMain = this.app.bean.util.parseIdSafe(atomIdMain);
 
     const options: SelectOptionsProSafe = Object.assign({}, _options, {
       iid,
@@ -63,7 +63,7 @@ export class LocalProcedureAtomSelectAtoms extends LocalProcedureBase {
     // formAction
     let action;
     if (options.formAction) {
-      action = this.ctx.bean.atomAction.parseActionCode({
+      action = this.app.bean.atomAction.parseActionCode({
         action: options.formAction,
         atomClass: options.atomClass,
       });

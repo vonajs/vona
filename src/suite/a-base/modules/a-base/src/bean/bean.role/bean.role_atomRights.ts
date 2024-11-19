@@ -5,11 +5,11 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async addRoleRight({ roleAtomId, roleId, atomClass, atomClassId, action, scope, user, roleRightId }: any) {
     // atomClassId
     if (!atomClassId) {
-      atomClass = await this.ctx.bean.atomClass.get(atomClass);
+      atomClass = await this.app.bean.atomClass.get(atomClass);
       atomClassId = atomClass.id;
     }
     // check atomClass/action
-    const _check = await this.ctx.bean.atomClass.checkRightAtomClassActionOfUser({
+    const _check = await this.app.bean.atomClass.checkRightAtomClassActionOfUser({
       atomClass: { id: atomClassId },
       action,
       user,
@@ -47,7 +47,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     }
 
     // force action exists in db
-    await this.ctx.bean.atomAction.get({ atomClassId, code: action });
+    await this.app.bean.atomAction.get({ atomClassId, code: action });
 
     // roleRight
     if (roleRightId) {
@@ -86,8 +86,8 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       }
     }
     // clear summer
-    await this.ctx.bean.atomRightAux.clearSummersOfRole();
-    await this.ctx.bean.atomRightAux.clearSummersOfUser();
+    await this.app.bean.atomRightAux.clearSummersOfRole();
+    await this.app.bean.atomRightAux.clearSummersOfUser();
     // ok
     return roleRightId;
   }
@@ -119,16 +119,16 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     await this.modelRoleRight.delete({ id: roleRightId });
     await this.modelRoleRightRef.delete({ roleRightId });
     // clear summer
-    await this.ctx.bean.atomRightAux.clearSummersOfRole();
-    await this.ctx.bean.atomRightAux.clearSummersOfUser();
+    await this.app.bean.atomRightAux.clearSummersOfRole();
+    await this.app.bean.atomRightAux.clearSummersOfUser();
   }
 
   async deleteRoleRightByAction({ atomClassId, action }: any) {
     await this.modelRoleRight.delete({ atomClassId, action });
     await this.modelRoleRightRef.delete({ atomClassId, action });
     // clear summer
-    await this.ctx.bean.atomRightAux.clearSummersOfRole();
-    await this.ctx.bean.atomRightAux.clearSummersOfUser();
+    await this.app.bean.atomRightAux.clearSummersOfRole();
+    await this.app.bean.atomRightAux.clearSummersOfUser();
   }
 
   // const roleRights = [
@@ -143,7 +143,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     module = module || this.moduleScope;
     // const _module = this.ctx.app.meta.modules[module];
     // atomClass
-    const atomClass = await this.ctx.bean.atomClass.get({ module, atomClassName });
+    const atomClass = await this.app.bean.atomClass.get({ module, atomClassName });
     // roleRights
     if (!roleRights || !roleRights.length) return;
     for (const roleRight of roleRights) {
@@ -160,7 +160,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       // scope
       const scope = await this._parseScopeNames({ scopeNames: roleRight.scopeNames });
       // add role right
-      const actionCode = this.ctx.bean.atomAction.parseActionCode({
+      const actionCode = this.app.bean.atomAction.parseActionCode({
         action: roleRight.action,
         atomClass: {
           module,
@@ -202,7 +202,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   // role rights
   async roleRights({ roleAtomId, roleId, page }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // builder
     const builder = this.bean.model
       .builderSelect('aRoleRight as a')
@@ -222,7 +222,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       .orderBy('b.module')
       .orderBy('a.atomClassId')
       .orderBy('a.action');
-    this.ctx.bean.model.buildPage(builder, page);
+    this.app.bean.model.buildPage(builder, page);
     const items = await builder;
     // adjust
     await this._adjustItems({ items });
@@ -233,7 +233,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   // role spreads
   async roleSpreads({ roleAtomId, roleId, page }: any) {
     roleId = await this.self._forceRoleId({ roleAtomId, roleId });
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     const builder = this.bean.model
       .builderSelect('aRoleRight as a')
       .select([
@@ -268,8 +268,8 @@ export class BeanRoleAtomRights extends BeanRoleBase {
 
   // atom rights of user
   async atomRightsOfUser({ userAtomId, userId, page }: any) {
-    userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
-    page = this.ctx.bean.util.page(page, false);
+    userId = await this.app.bean.user._forceUserId({ userAtomId, userId });
+    page = this.app.bean.util.page(page, false);
     const builder = this.bean.model
       .builderSelect('aViewUserRightAtomClass as a', { disableDeleted: true })
       .select([

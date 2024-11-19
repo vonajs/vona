@@ -20,14 +20,14 @@ export class BeanAtomBase0 extends BeanBase {
   }
 
   async submit({ atomClass, key, options, user }: any) {
-    return await this.ctx.bean.atom._submitBase({ atomClass, key, options, user });
+    return await this.app.bean.atom._submitBase({ atomClass, key, options, user });
   }
 
   async enable({ /* atomClass,*/ key /* , options*/ /* , user*/ }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomEnable();
+    this.app.bean.util.checkDemoForAtomEnable();
     // enable
-    await this.ctx.bean.atom.modelAtom.update({
+    await this.app.bean.atom.modelAtom.update({
       id: key.atomId,
       atomDisabled: 0,
     });
@@ -35,9 +35,9 @@ export class BeanAtomBase0 extends BeanBase {
 
   async disable({ /* atomClass,*/ key /* , options*/ /* , user*/ }: any) {
     // check demo
-    this.ctx.bean.util.checkDemoForAtomDisable();
+    this.app.bean.util.checkDemoForAtomDisable();
     // disable
-    await this.ctx.bean.atom.modelAtom.update({
+    await this.app.bean.atom.modelAtom.update({
       id: key.atomId,
       atomDisabled: 1,
     });
@@ -52,10 +52,10 @@ export class BeanAtomBase0 extends BeanBase {
   }
 
   async checkRightAction({ atom, atomClass, action, options, user }: any) {
-    return await this.ctx.bean.atom._checkRightAction_base({ atom, atomClass, action, options, user });
+    return await this.app.bean.atom._checkRightAction_base({ atom, atomClass, action, options, user });
   }
 
   async prepareStaticItem({ moduleName, atomClass, item, register }: any) {
-    return await this.ctx.bean.atomStatic._adjustItem_base({ moduleName, atomClass, item, register });
+    return await this.app.bean.atomStatic._adjustItem_base({ moduleName, atomClass, item, register });
   }
 }

@@ -24,7 +24,7 @@ export class StatsDraftsCommon extends BeanBase<ScopeModule> {
     let atomClass;
     if (keys.length > 1) {
       const [module, atomClassName] = keys[1].split('_');
-      atomClass = await this.ctx.bean.atomClass.get({
+      atomClass = await this.app.bean.atomClass.get({
         module,
         atomClassName,
       });

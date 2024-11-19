@@ -173,7 +173,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     });
     const commentId = res[0];
     // commentCount
-    await this.ctx.bean.atom.comment({ key, atom: { comment: 1 }, user });
+    await this.app.bean.atom.comment({ key, atom: { comment: 1 }, user });
     // publish
     await this._publish({ atomId: key.atomId, commentId, replyId, replyUserId, user, mode: 'add' });
     // ok
@@ -192,7 +192,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     // check right
     let canDeleted: any = key.atomId === item.atomId && item.userId === user.id;
     if (!canDeleted) {
-      canDeleted = await this.ctx.bean.resource.checkRightResource({
+      canDeleted = await this.app.bean.resource.checkRightResource({
         atomStaticKey: 'a-base:deleteComment',
         user,
       });
@@ -203,7 +203,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     // delete comment
     await this.modelCommentHeart.delete({ id: commentId });
     // commentCount
-    await this.ctx.bean.atom.comment({ key, atom: { comment: -1 }, user });
+    await this.app.bean.atom.comment({ key, atom: { comment: -1 }, user });
     // ok
     return {
       action: 'delete',
@@ -295,7 +295,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
           },
         },
       };
-      await this.ctx.bean.io.publish({
+      await this.app.bean.io.publish({
         message,
         messageClass: {
           module: 'a-base',
@@ -306,7 +306,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
   }
 
   async _publishTitle({ userId, replyId, mode }: any) {
-    const user = await this.ctx.bean.user.get({ id: userId });
+    const user = await this.app.bean.user.get({ id: userId });
     const locale = user?.locale;
     let title;
     if (mode === 'add') {
@@ -353,7 +353,7 @@ ${sep}
 
   async _renderContent({ atomId, content, replyContent, replyUserName }: any) {
     const fullContent = this._fullContent({ content, replyContent, replyUserName });
-    return (<any>await this.ctx.bean).markdown.render({
+    return (<any>await this.app.bean).markdown.render({
       host: { atomId },
       content: fullContent,
       locale: this.ctx.locale,

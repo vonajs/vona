@@ -12,17 +12,17 @@ export class StatsLabels extends BeanBase {
       orange: BigNumber(0),
     };
     // userLabels
-    const userLabels = await this.ctx.bean.atom.getLabels({ user });
+    const userLabels = await this.app.bean.atom.getLabels({ user });
     for (const labelId of Object.keys(userLabels)) {
       const userLabel = userLabels[labelId];
       // sub
-      const count = await this.ctx.bean.atom.count({
+      const count = await this.app.bean.atom.count({
         options: {
           label: parseInt(labelId),
         },
         user,
       });
-      await this.ctx.bean.stats._set({
+      await this.app.bean.stats._set({
         module: __ThisModule__,
         name: 'labels',
         fullName: `labels.${labelId}`,

@@ -6,14 +6,14 @@ export class BeanAtom0Export extends BeanAtom0Enable {
     // atomClass
     let atomClassBase;
     if (atomClass) {
-      atomClass = await this.ctx.bean.atomClass.get(atomClass);
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClass = await this.app.bean.atomClass.get(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     }
     // export
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName);
     const resExport = await beanInstance.exportBulk({ atomClass, options, fields, user });
     // file
-    const resFile = await this.ctx.bean.file._upload({
+    const resFile = await this.app.bean.file._upload({
       fileContent: resExport.data,
       meta: resExport.meta,
       user,

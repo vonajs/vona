@@ -3,18 +3,18 @@ import { BeanBase, Service } from 'vona';
 @Service()
 export class ServiceTag extends BeanBase {
   async list({ atomClass, options }: any) {
-    return await this.ctx.bean.tag.list({ atomClass, options });
+    return await this.app.bean.tag.list({ atomClass, options });
   }
 
   async add({ atomClass, data }: any) {
-    return await this.ctx.bean.tag.add({ atomClass, data });
+    return await this.app.bean.tag.add({ atomClass, data });
   }
 
   async delete({ tagId }: any) {
-    return await this.ctx.bean.tag.delete({ tagId });
+    return await this.app.bean.tag.delete({ tagId });
   }
 
   async save({ tagId, data }: any) {
-    return await this.ctx.bean.tag.save({ tagId, data });
+    return await this.app.bean.tag.save({ tagId, data });
   }
 }

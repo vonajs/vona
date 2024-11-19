@@ -3,7 +3,7 @@ import { BeanAtomBasePerformAction } from './bean.atomBase_performAction.js';
 export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
   async performActionBulk({ keys, atomClass, action, item, options, user, fnBefore, fnAfter }: any) {
     // actionBase
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       name: action,
@@ -33,7 +33,7 @@ export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
     fnAfter,
   }) {
     // performAction
-    const performActionConfig = this.ctx.bean.util.getProperty(actionBase, 'params.performAction');
+    const performActionConfig = this.app.bean.util.getProperty(actionBase, 'params.performAction');
     if (!performActionConfig) return null;
     // policy
     const performPolicy = performActionConfig.policy;
@@ -68,7 +68,7 @@ export class BeanAtomBasePerformActionBulk extends BeanAtomBasePerformAction {
     const resKeys: any[] = [];
     for (const key of keys) {
       // check right action
-      const right = await this.ctx.bean.atom.checkRightAction({
+      const right = await this.app.bean.atom.checkRightAction({
         atom: { id: key.atomId },
         atomClass,
         action: actionItem,

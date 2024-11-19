@@ -8,7 +8,7 @@ export class StatsStarsLabels extends BeanBase {
     // stats
     let stats;
     // labels
-    stats = await this.ctx.bean.stats._get({
+    stats = await this.app.bean.stats._get({
       module: __ThisModule__,
       fullName: 'labels',
       user,
@@ -20,7 +20,7 @@ export class StatsStarsLabels extends BeanBase {
       };
     }
     // stars
-    const stars = await this.ctx.bean.stats._get({
+    const stars = await this.app.bean.stats._get({
       module: __ThisModule__,
       fullName: 'stars',
       user,

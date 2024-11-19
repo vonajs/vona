@@ -59,8 +59,8 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     // add user
     const userId = await this.self.add({ userName: 'anonymous', disabled: 0, anonymous: 1 });
     // addRole
-    const role = await this.ctx.bean.role.getSystemRole({ roleName: 'anonymous' });
-    await this.ctx.bean.role.addUserRole({ userId, roleId: role!.id });
+    const role = await this.app.bean.role.getSystemRole({ roleName: 'anonymous' });
+    await this.app.bean.role.addUserRole({ userId, roleId: role!.id });
     // ready
     _userAnonymous = await this.self.get({ id: userId });
     _usersAnonymous[this.ctx.instance.id] = _userAnonymous;
@@ -75,7 +75,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       provider: null,
     };
     // login
-    await this.ctx.bean.auth.login(user);
+    await this.app.bean.auth.login(user);
     // maxAge
     const maxAge = this.config.auth.maxAge.anonymous;
     this.ctx.session.maxAge = maxAge;
@@ -86,7 +86,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   anonymousId() {
     let _anonymousId = this.ctx.cookies.get('anonymous', { encrypt: true });
     if (!_anonymousId) {
-      _anonymousId = this.ctx.bean.util.uuidv4();
+      _anonymousId = this.app.bean.util.uuidv4();
       const maxAge = this.config.auth.maxAge.anonymous;
       this.ctx.cookies.set('anonymous', _anonymousId, { encrypt: true, maxAge });
     }
@@ -99,14 +99,14 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     // check if has this.ctx.state.user
     if (this.ctx.state.user) {
       // force set this.ctx.req.user
-      (<any>this.ctx.req).user = this.ctx.bean.auth._pruneUser({ user: this.ctx.state.user });
+      (<any>this.ctx.req).user = this.app.bean.auth._pruneUser({ user: this.ctx.state.user });
     } else {
       // always has anonymous id
-      this.ctx.bean.user.anonymousId();
+      this.app.bean.user.anonymousId();
       // check if has this.ctx.user
       if (!this.ctx.user || !this.ctx.user.op || this.ctx.user.op.iid !== this.ctx.instance.id) {
         // anonymous
-        await this.ctx.bean.user.loginAsAnonymous();
+        await this.app.bean.user.loginAsAnonymous();
       } else {
         this.ctx.state.user = await this._check_getStateUser({ ctxUser: this.ctx.user });
       }
@@ -148,7 +148,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     stateUser.agent = userAgent;
     // only check locale for agent
     // not set locale for test env
-    const checkDemo = this.ctx.bean.util.checkDemo(false);
+    const checkDemo = this.app.bean.util.checkDemo(false);
     if (checkDemo && !userAgent.locale && this.ctx.locale && !this.ctx.app.meta.isTest) {
       // set
       const userData = { id: userAgent.id, locale: this.ctx.locale };
@@ -180,8 +180,8 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     let roleNames: any = this.config.account.needActivation ? 'registered' : this.config.account.activatedRoles;
     roleNames = roleNames.split(',');
     for (const roleName of roleNames) {
-      const role = await this.ctx.bean.role.parseRoleName({ roleName });
-      await this.ctx.bean.role.addUserRole({ userId, roleId: role.id });
+      const role = await this.app.bean.role.parseRoleName({ roleName });
+      await this.app.bean.role.addUserRole({ userId, roleId: role.id });
     }
   }
 
@@ -194,7 +194,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     // adjust role
     if (this.config.account.needActivation) {
       // userRoles
-      const userRoles = await this.ctx.bean.role.getUserRolesDirect({ userId });
+      const userRoles = await this.app.bean.role.getUserRolesDirect({ userId });
       // userRolesMap
       const map: any = {};
       for (const role of userRoles) {
@@ -202,14 +202,14 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       }
       // remove from registered
       if (map.registered) {
-        const roleRegistered = await this.ctx.bean.role.getSystemRole({ roleName: 'registered' });
-        await this.ctx.bean.role.deleteUserRole({ userId, roleId: roleRegistered!.id });
+        const roleRegistered = await this.app.bean.role.getSystemRole({ roleName: 'registered' });
+        await this.app.bean.role.deleteUserRole({ userId, roleId: roleRegistered!.id });
       }
       // add to activated
-      const rolesActivated = await this.ctx.bean.role.parseRoleNames({ roleNames: this.config.account.activatedRoles });
+      const rolesActivated = await this.app.bean.role.parseRoleNames({ roleNames: this.config.account.activatedRoles });
       for (const role of rolesActivated) {
         if (!map[role.roleName]) {
-          await this.ctx.bean.role.addUserRole({ userId, roleId: role.id });
+          await this.app.bean.role.addUserRole({ userId, roleId: role.id });
         }
       }
     }
@@ -263,7 +263,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     this.ctx.user.op = { id: _user.id, iid: _user.iid, anonymous: _user.anonymous };
     try {
       await this.check();
-      await this.ctx.bean.auth.login(this.ctx.state.user);
+      await this.app.bean.auth.login(this.ctx.state.user);
       return this.ctx.state.user;
     } catch (err) {
       this.ctx.user.op = op;
@@ -278,14 +278,14 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   // state: login/associate/migrate
   async verify({ state = 'login', profileUser }: any) {
     if (state === 'migrate' || state === 'associate') {
-      this.ctx.bean.util.checkDemo();
+      this.app.bean.util.checkDemo();
     }
 
     // verifyUser
     const verifyUser: any = {};
 
     // provider
-    const providerItem = await this.ctx.bean.authProvider.getAuthProvider({
+    const providerItem = await this.app.bean.authProvider.getAuthProvider({
       module: profileUser.module,
       providerName: profileUser.provider,
     });
@@ -340,7 +340,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     if (providerScene) {
       verifyUser.provider.providerScene = providerScene;
     }
-    const scene = this.ctx.bean.util.getFrontScene();
+    const scene = this.app.bean.util.getFrontScene();
     if (scene) {
       verifyUser.provider.scene = scene;
     }
@@ -423,7 +423,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     }
 
     // user verify event
-    await this.ctx.bean.event.invoke({
+    await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'userVerify',
       data: { verifyUser, profileUser },
@@ -445,7 +445,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
 
   async accountMigration({ userIdFrom, userIdTo }: any) {
     // accountMigration event
-    await this.ctx.bean.event.invoke({
+    await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'accountMigration',
       data: { userIdFrom, userIdTo },
@@ -527,7 +527,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       };
       // upload
       try {
-        const res2 = await this.ctx.bean.file._upload({
+        const res2 = await this.app.bean.file._upload({
           fileContent: res.data,
           meta,
           user: null,

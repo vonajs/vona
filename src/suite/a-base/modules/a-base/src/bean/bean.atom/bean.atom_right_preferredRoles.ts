@@ -4,13 +4,13 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
   // preferred roles
   async preferredRoles({ atomClass, user, disableAuthOpenCheck }: any) {
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // normal check
     const roles = await this._preferredRoles_normal({ atomClass, user });
     if (!roles || roles.length === 0) return roles;
     // auth open check
     if (!disableAuthOpenCheck) {
-      const resAuthOpenCheck = await this.ctx.bean.authOpen.checkRightAtomAction({ atomClass, action: 'create' });
+      const resAuthOpenCheck = await this.app.bean.authOpen.checkRightAtomAction({ atomClass, action: 'create' });
       if (!resAuthOpenCheck) return [];
     }
     // ok
@@ -20,9 +20,9 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
   // preferred roles
   async _preferredRoles_normal({ atomClass, user }: any) {
     // 1. roleWhos
-    const roleWhos = await this.ctx.bean.atomRightAux.getRoleWhosOfAtomClassAction({ atomClass, action: 1 });
+    const roleWhos = await this.app.bean.atomRightAux.getRoleWhosOfAtomClassAction({ atomClass, action: 1 });
     // 2. roleParents
-    const roleParents = await this.ctx.bean.atomRightAux.getRoleParentsOfUser({ userId: user.id });
+    const roleParents = await this.app.bean.atomRightAux.getRoleParentsOfUser({ userId: user.id });
     // 3. filter
     let roles = roleParents.filter(item => {
       return [0, 1, 2, 3, 4].includes(item.roleTypeCode) && !!roleWhos.find(item2 => item2.roleIdWho === item.roleId);
@@ -62,8 +62,8 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
   // null: invalid
   async checkRightPreferredRole({ roleIdOwner, atomClass, user, options, disableAuthOpenCheck }: any) {
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // check
     if (typeof atomClassBase.enableRight?.role !== 'object') return undefined;
     const enableRightRoleScopes = atomClassBase.enableRight?.role?.scopes;
@@ -75,7 +75,7 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
     // roleIdOwner
     if (roleIdOwner) {
       // check
-      const res = await this.ctx.bean.atom.checkRightCreateRole({
+      const res = await this.app.bean.atom.checkRightCreateRole({
         atomClass: {
           id: atomClassId,
         },
@@ -89,7 +89,7 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
       }
     } else {
       // retrieve default one, must exists
-      roleIdOwner = await this.ctx.bean.atom.preferredRoleId({
+      roleIdOwner = await this.app.bean.atom.preferredRoleId({
         atomClass: {
           id: atomClassId,
         },

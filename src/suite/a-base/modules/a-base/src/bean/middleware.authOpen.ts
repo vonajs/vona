@@ -16,7 +16,7 @@ export class MiddlewareAuthOpen extends BeanBase {
     const rightOptions = this.ctx.meta.getMiddlewareOptions('right' as any);
     if (rightOptions && rightOptions.type) return;
     // isAuthOpen
-    const isAuthOpen = this.ctx.bean.authOpen.isAuthOpen();
+    const isAuthOpen = this.app.bean.authOpen.isAuthOpen();
     let enableAuthOpen = options.enableAuthOpen;
     const onlyAuthOpen = options.onlyAuthOpen;
     if (onlyAuthOpen) enableAuthOpen = true;

@@ -101,7 +101,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     // atomClassId
     if (!where.categoryIdParent) {
       // atomClass
-      atomClass = await this.ctx.bean.atomClass.get(atomClass);
+      atomClass = await this.app.bean.atomClass.get(atomClass);
       where.atomClassId = atomClass.id;
     }
     //
@@ -129,7 +129,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
   }
 
   async add({ atomClass, data }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // add
     const res = await this.model.insert({
       atomClassId: atomClass.id,
@@ -149,7 +149,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
 
   async delete({ categoryId }: any) {
     // check atoms
-    const count = await this.ctx.bean.atom.modelAtom.count({ where: { atomCategoryId: categoryId } });
+    const count = await this.app.bean.atom.modelAtom.count({ where: { atomCategoryId: categoryId } });
     if (count.gt(0)) {
       this.scope.error.CannotDeleteIfHasAtoms.throw();
     }
@@ -274,7 +274,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
   }
 
   async _register({ atomClass, language, categoryName, categoryIdParent }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.category.register.${atomClass.id}`,
       fn: async () => {
@@ -310,7 +310,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
   async _checkRightForCategoryHidden({ categoryHidden, user }: any) {
     if (!user || user.id === 0) return categoryHidden;
     if (categoryHidden === 0) return categoryHidden;
-    const res = await this.ctx.bean.resource.checkRightResource({
+    const res = await this.app.bean.resource.checkRightResource({
       atomStaticKey: 'a-settings:settings',
       user,
     });

@@ -16,7 +16,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // dataWrite
     const dataWrite = options.__createDelayData;
     // atomClass
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // itemOnly
     let data;
     if (atomClassBase.itemOnly) {
@@ -37,7 +37,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
         data = Object.assign(data, dataWrite);
       }
       // add
-      data.atomId = await this.ctx.bean.atom._add({ atomClass, atom: data, user });
+      data.atomId = await this.app.bean.atom._add({ atomClass, atom: data, user });
     }
     // ok
     return data;
@@ -124,7 +124,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // atomName
     if (data.atomName) return;
     // sequence
-    const sequence = this.ctx.bean.sequence.module(__ThisModule__);
+    const sequence = this.app.bean.sequence.module(__ThisModule__);
     // user
     if (atomClass.module === 'a-base' && atomClass.atomClassName === 'user') {
       const draftId = await sequence.next('draft');
@@ -143,7 +143,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
 
   async _create_prepareItem_atomStaticKey({ data, options: _options, user: _user }: any) {
     if (!data.atomStaticKey) {
-      data.atomStaticKey = this.ctx.bean.util.uuidv4();
+      data.atomStaticKey = this.app.bean.util.uuidv4();
     }
   }
 
@@ -170,13 +170,13 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // preferredRole / builtIn
     let roleId;
     if (options.preferredRole) {
-      roleId = await this.ctx.bean.atom.preferredRoleId({ atomClass, user, disableAuthOpenCheck: true });
+      roleId = await this.app.bean.atom.preferredRoleId({ atomClass, user, disableAuthOpenCheck: true });
       if (!roleId) {
         this.app.throw(403);
       }
     } else {
       const roleName = 'authenticated.builtIn';
-      const role = await this.ctx.bean.role.parseRoleName({ roleName });
+      const role = await this.app.bean.role.parseRoleName({ roleName });
       roleId = role.id;
     }
     data.roleIdOwner = roleId;
@@ -184,7 +184,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
 
   async _create_prepareItem_atomCategoryId({ atomClass, data, options: _options, user: _user }: any) {
     if (data.atomCategoryId && typeof data.atomCategoryId === 'string') {
-      const category = await this.ctx.bean.category.parseCategoryName({
+      const category = await this.app.bean.category.parseCategoryName({
         atomClass,
         language: data.atomLanguage,
         categoryName: data.atomCategoryId,

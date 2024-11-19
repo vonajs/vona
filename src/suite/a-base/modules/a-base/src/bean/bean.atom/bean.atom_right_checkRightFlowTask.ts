@@ -14,7 +14,7 @@ export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSele
       disableAuthOpenCheck,*/
     options,
   }) {
-    const actionCode = this.ctx.bean.atomAction.parseActionCode({
+    const actionCode = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
@@ -32,7 +32,7 @@ export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSele
     }
     // atomClassBase
     if (!atomClassBase) {
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     }
     if (![2, 3].includes(actionCode)) {
       //  will check enableOnFlowing on the next codes, whether or not options.flowTaskId
@@ -68,7 +68,7 @@ export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSele
       throwError,
     };
     const hintHash = objectHash(hint, { respectType: false });
-    let res = this.ctx.bean.stash.get({ options, type: 'prepareAtomSchema', key: hintHash });
+    let res = this.app.bean.stash.get({ options, type: 'prepareAtomSchema', key: hintHash });
     if (res === undefined) {
       // console.log(hintHash);
       res = await this._checkRightFlowTask_prepareAtomSchema_stash({
@@ -78,13 +78,13 @@ export class BeanAtomRightCheckRightFlowTask extends BeanAtomRightCheckRightSele
         user,
         throwError,
       });
-      this.ctx.bean.stash.set({ options, type: 'prepareAtomSchema', key: hintHash, value: res });
+      this.app.bean.stash.set({ options, type: 'prepareAtomSchema', key: hintHash, value: res });
     }
     return res;
   }
 
   async _checkRightFlowTask_prepareAtomSchema_stash({ mode, flowTaskId, atomClass, user, throwError }: any) {
-    return await this.ctx.bean.flowTask._prepareAtomSchema({
+    return await this.app.bean.flowTask._prepareAtomSchema({
       mode,
       flowTaskId,
       atomClass,

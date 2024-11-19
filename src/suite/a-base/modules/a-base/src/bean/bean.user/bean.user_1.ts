@@ -48,14 +48,14 @@ export class BeanUser1 extends BeanUser0 {
     if (userName) {
       item.atomName = userName;
     }
-    const userKey = await this.ctx.bean.atom.write({
+    const userKey = await this.app.bean.atom.write({
       key: null,
       atomClass: __atomClassUser,
       item,
       user,
     });
     // // submit
-    // await this.ctx.bean.atom.submit({
+    // await this.app.bean.atom.submit({
     //   key: userKey,
     //   options: { ignoreFlow: true },
     //   user,
@@ -64,7 +64,7 @@ export class BeanUser1 extends BeanUser0 {
     item.id = userKey.itemId;
     item.atomId = userKey.atomId;
     item.itemId = userKey.itemId;
-    await this.ctx.bean.event.invoke({
+    await this.app.bean.event.invoke({
       module: __ThisModule__,
       name: 'userAdd',
       data: { user: item },
@@ -99,7 +99,7 @@ export class BeanUser1 extends BeanUser0 {
     }
     if (user.userName) {
       const userAtomId = await this._forceUserAtomId({ userAtomId: null, userId });
-      await this.ctx.bean.atom.modelAtom.update({
+      await this.app.bean.atom.modelAtom.update({
         id: userAtomId,
         atomName: user.userName,
       });
@@ -123,7 +123,7 @@ export class BeanUser1 extends BeanUser0 {
   async getFields({ removePrivacy }: any) {
     let fields = await this.model.columns();
     if (removePrivacy) {
-      fields = this.ctx.bean.util.extend({}, fields);
+      fields = this.app.bean.util.extend({}, fields);
       const privacyFields = this.scope.config.user.privacyFields.split(',');
       for (const privacyField of privacyFields) {
         delete fields[privacyField];
@@ -170,7 +170,7 @@ export class BeanUser1 extends BeanUser0 {
   async _list({ options, user, pageForce = true, count = 0 }: any) {
     if (!options) options = {};
     // select
-    const items = await this.ctx.bean.atom._select({ atomClass: __atomClassUser, options, user, pageForce, count });
+    const items = await this.app.bean.atom._select({ atomClass: __atomClassUser, options, user, pageForce, count });
     // count
     if (count) return items;
     // removePrivacy
@@ -197,16 +197,16 @@ export class BeanUser1 extends BeanUser0 {
     if (!item) return;
     const key = { atomId: item.atomId, itemId: item.id };
     if (disabled) {
-      await this.ctx.bean.atom.disable({ key, user: { id: 0 } });
+      await this.app.bean.atom.disable({ key, user: { id: 0 } });
     } else {
-      await this.ctx.bean.atom.enable({ key, user: { id: 0 } });
+      await this.app.bean.atom.enable({ key, user: { id: 0 } });
     }
   }
 
   async delete({ userAtomId, userId }: any) {
     userAtomId = await this._forceUserAtomId({ userAtomId, userId });
     // delete this
-    await this.ctx.bean.atom.delete({ key: { atomId: userAtomId } });
+    await this.app.bean.atom.delete({ key: { atomId: userAtomId } });
   }
 
   async _forceUserAtomId({ userAtomId, userId }: any) {
@@ -237,7 +237,7 @@ export class BeanUser1 extends BeanUser0 {
     if (!_user) this.app.throw(403);
     if (!user || user.id === 0) return _user;
     // check
-    const res = await this.ctx.bean.atom.checkRightRead({
+    const res = await this.app.bean.atom.checkRightRead({
       atom: { id: _user!.atomId },
       user,
     });
@@ -255,7 +255,7 @@ export class BeanUser1 extends BeanUser0 {
 //   if (user.userName) {
 //     item.atomName = user.userName;
 //   }
-//   await this.ctx.bean.atom.write({
+//   await this.app.bean.atom.write({
 //     key: userKey,
 //     item,
 //     user: { id: 0 },

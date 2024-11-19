@@ -11,7 +11,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     const _checkPoint = actionBase.stage;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
-    const _checkPoints = this.ctx.bean.util.ensureArray(_checkPoint);
+    const _checkPoints = this.app.bean.util.ensureArray(_checkPoint);
     const __atomStages = this.ctx.constant.module(__ThisModule__).atom.stage;
     const bingo = _checkPoints.some(item => __atomStages[item] === _atom.atomStage);
     if (!bingo) {
@@ -24,7 +24,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     const _checkPoint = actionBase.enableOnAtomState;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
-    const _checkPoints = this.ctx.bean.util.ensureArray(_checkPoint);
+    const _checkPoints = this.app.bean.util.ensureArray(_checkPoint);
     const bingo = _checkPoints.some(item => {
       // eslint-disable-next-line
       return item == _atom.atomState;
@@ -39,7 +39,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     const _checkPoint = actionBase.enableOnAtomStateReverse;
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
-    const _checkPoints = this.ctx.bean.util.ensureArray(_checkPoint);
+    const _checkPoints = this.app.bean.util.ensureArray(_checkPoint);
     const bingo = _checkPoints.some(item => {
       // eslint-disable-next-line
       return item == _atom.atomState;

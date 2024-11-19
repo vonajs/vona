@@ -9,10 +9,10 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
       this.app.throw(403);
     }
     // atomClass
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     if (!atomClass) this.scope.error.ElementDoesNotExist.throw();
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // check atom history
     const checkAtomHistory = await this._checkRightSelect_atomHistory({ atomClass, user, options });
     if (!checkAtomHistory) return false;
@@ -50,7 +50,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
 
   _checkIfAtomHistory({ options }: any) {
     const whereAtomIdFormal = options.where?.['a.atomIdFormal'];
-    const stage = this.ctx.bean.atomStage.toString({ atomStage: options.stage });
+    const stage = this.app.bean.atomStage.toString({ atomStage: options.stage });
     if (stage === 'history' && !whereAtomIdFormal) {
       // no right
       this.app.throw(403);

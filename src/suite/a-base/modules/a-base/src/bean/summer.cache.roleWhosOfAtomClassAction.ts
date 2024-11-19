@@ -11,6 +11,6 @@ export class SummerCacheRoleWhosOfAtomClassAction extends BeanBase {
   }
 
   async get(key) {
-    return await this.ctx.bean.atomRightAux.__getRoleWhosOfAtomClassActionRaw(key);
+    return await this.app.bean.atomRightAux.__getRoleWhosOfAtomClassActionRaw(key);
   }
 }

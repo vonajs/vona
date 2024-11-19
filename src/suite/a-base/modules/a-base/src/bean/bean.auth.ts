@@ -34,7 +34,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
   async echo() {
     try {
       // check
-      await this.ctx.bean.user.check();
+      await this.app.bean.user.check();
       // logined
       return await this.getLoginInfo({ clientId: true });
     } catch (_err) {
@@ -52,7 +52,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
       await this.ctx.login(user);
     } else {
       this.ctx.state.user = user;
-      (<any>this.ctx.req).user = this.ctx.bean.auth._pruneUser({ user });
+      (<any>this.ctx.req).user = this.app.bean.auth._pruneUser({ user });
     }
   }
 
@@ -70,19 +70,19 @@ export class BeanAuth extends BeanBase<ScopeModule> {
       this.ctx.state.user = null as any;
       (<any>this.ctx.req).user = null;
     }
-    await this.ctx.bean.user.loginAsAnonymous();
+    await this.app.bean.user.loginAsAnonymous();
     return await this.getLoginInfo();
   }
 
   async getLoginInfo(options?) {
     options = options || {};
     const needClientId = options.clientId === true;
-    const isAuthOpen = this.ctx.bean.authOpen.isAuthOpen();
+    const isAuthOpen = this.app.bean.authOpen.isAuthOpen();
     // info
     const info: any = {
       user: this.ctx.state.user,
       instance: this._getInstance(),
-      locales: this.ctx.bean.base.locales(),
+      locales: this.app.bean.base.locales(),
     };
     // config
     if (!isAuthOpen) {
@@ -90,11 +90,11 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     }
     // clientId
     if (needClientId) {
-      info.clientId = this.ctx.bean.util.uuidv4();
+      info.clientId = this.app.bean.util.uuidv4();
     }
     // login info event
     if (!isAuthOpen) {
-      await this.ctx.bean.event.invoke({
+      await this.app.bean.event.invoke({
         name: 'loginInfo',
         data: { info },
       });
@@ -114,7 +114,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     // config
     let config: any = {};
     // config base
-    config = this.ctx.bean.util.extend(config, {
+    config = this.app.bean.util.extend(config, {
       modules: {
         'a-base': {
           account: this._getAccount(),
@@ -123,26 +123,26 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     });
     // // theme
     // const themeStatus = `user-theme:${this.ctx.state.user.agent.id}`;
-    // const theme = await this.ctx.bean.status.module('a-user').get(themeStatus);
+    // const theme = await this.app.bean.status.module('a-user').get(themeStatus);
     // if (theme) {
     //   config.theme = theme;
     // }
     // localeModules
-    config.localeModules = this.ctx.bean.base.localeModules();
+    config.localeModules = this.app.bean.base.localeModules();
     // ok
     return config;
   }
 
   _getAccount() {
     // account
-    const account = this.ctx.bean.util.extend({}, this.scope.config.account);
+    const account = this.app.bean.util.extend({}, this.scope.config.account);
     account.activatedRoles = undefined;
     // url
     for (const key in account.activationProviders) {
       const relativeName = account.activationProviders[key];
       if (relativeName) {
         const moduleConfig = this.getScope(relativeName).config;
-        this.ctx.bean.util.extend(account.url, moduleConfig.account.url);
+        this.app.bean.util.extend(account.url, moduleConfig.account.url);
       }
     }
     return account;
@@ -181,7 +181,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
     }
     // save to redis
     const key = this._getAuthRedisKey({ user });
-    if (!this.ctx.bean.util.checkDemo(false)) {
+    if (!this.app.bean.util.checkDemo(false)) {
       // demo, allowed to auth more times
       _user.token = await this.redisAuth.get(key);
     } else {
@@ -189,11 +189,11 @@ export class BeanAuth extends BeanBase<ScopeModule> {
       _user.token = null;
     }
     if (!_user.token) {
-      _user.token = this.ctx.bean.util.uuidv4();
+      _user.token = this.app.bean.util.uuidv4();
     }
     await this.redisAuth.set(key, _user.token, 'PX', this.ctx.session.maxAge);
     // register user online
-    await this.ctx.bean.userOnline.register({ user, isLogin: true });
+    await this.app.bean.userOnline.register({ user, isLogin: true });
     // ok
     return _user;
   }
@@ -214,7 +214,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
   async _sendMessageSystemLogout({ user }: any) {
     if (!user || user.op.anonymous) return;
     // send message-system
-    await this.ctx.bean.userOnline.sendMessageSystemLogout({
+    await this.app.bean.userOnline.sendMessageSystemLogout({
       user: user.op, // should use user.op
       type: 'provider',
       provider: user.provider,

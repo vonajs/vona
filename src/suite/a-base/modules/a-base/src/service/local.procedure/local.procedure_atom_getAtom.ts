@@ -33,9 +33,9 @@ export class LocalProcedureAtomGetAtom extends LocalProcedureAtomSelectAtomsForm
 
     iid = parseInt(iid);
     userIdWho = parseInt(userIdWho);
-    atomId = this.ctx.bean.util.parseIdSafe(atomId);
+    atomId = this.app.bean.util.parseIdSafe(atomId);
     resource = parseInt(resource);
-    atomIdMain = this.ctx.bean.util.parseIdSafe(atomIdMain);
+    atomIdMain = this.app.bean.util.parseIdSafe(atomIdMain);
 
     // where
     const _where: any = {};

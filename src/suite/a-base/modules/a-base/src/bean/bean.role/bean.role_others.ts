@@ -77,9 +77,9 @@ export class BeanRoleOthers extends BeanRoleIncludes {
 
   async usersOfRoleDirect({ roleId, disabled, page, removePrivacy }: any) {
     // page
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // fields
-    const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
+    const fields = await this.app.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
     // joins
     const joins: IModelSelectParamsJoin[] = [['innerJoin', 'aUserRole as b', { 'a.id': 'b.userId' }]];
     // where
@@ -105,9 +105,9 @@ export class BeanRoleOthers extends BeanRoleIncludes {
 
   async usersOfRoleParent({ roleId, disabled, page, removePrivacy, query }: any) {
     // page
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // fields
-    const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
+    const fields = await this.app.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
     // joins
     const joins: IModelSelectParamsJoin[] = [['innerJoin', 'aViewUserRoleRef as b', { 'a.id': 'b.userId' }]];
     // where
@@ -140,9 +140,9 @@ export class BeanRoleOthers extends BeanRoleIncludes {
 
   async usersOfRoleExpand({ roleId, disabled, page, removePrivacy }: any) {
     // page
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     // fields
-    const fields = await this.ctx.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
+    const fields = await this.app.bean.user.getFieldsSelect({ removePrivacy, alias: 'a' });
     // joins
     const joins: IModelSelectParamsJoin[] = [['innerJoin', 'aViewUserRoleExpand as b', { 'a.id': 'b.userId' }]];
     // where
@@ -194,7 +194,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     if (!role) this.app.throw(403);
     if (!user || user.id === 0) return role;
     // check
-    const res = await this.ctx.bean.atom.checkRightRead({
+    const res = await this.app.bean.atom.checkRightRead({
       atom: { id: role!.atomId },
       user,
     });
@@ -207,7 +207,7 @@ export class BeanRoleOthers extends BeanRoleIncludes {
     // roleId
     roleAtomId = await this._forceRoleAtomId({ roleAtomId, roleId });
     // check
-    const res = await this.ctx.bean.atom.checkRightAction({
+    const res = await this.app.bean.atom.checkRightAction({
       atom: { id: roleAtomId },
       action,
       user,

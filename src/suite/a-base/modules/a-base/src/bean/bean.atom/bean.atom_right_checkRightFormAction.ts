@@ -14,16 +14,16 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
       disableAuthOpenCheck,*/
     options,
   }) {
-    const actionCode = this.ctx.bean.atomAction.parseActionCode({
+    const actionCode = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
     // atomClassBase
     if (!atomClassBase) {
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     }
     // actionBase
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       code: actionCode,
@@ -38,7 +38,7 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
     const formAction = options?.formAction;
     let formActionCode;
     if (formAction) {
-      formActionCode = this.ctx.bean.atomAction.parseActionCode({
+      formActionCode = this.app.bean.atomAction.parseActionCode({
         action: formAction,
         atomClass,
       });
@@ -47,7 +47,7 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
     }
     if (![2, 3].includes(actionCode)) {
       // enableOnFormAction
-      const enableOnFormAction = this.ctx.bean.util.ensureArray(actionBase.enableOnFormAction);
+      const enableOnFormAction = this.app.bean.util.ensureArray(actionBase.enableOnFormAction);
       if (formActionCode === actionCode) {
         // donot effect right check
         return null;
@@ -105,7 +105,7 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
       throwError,
     };
     const hintHash = objectHash(hint, { respectType: false });
-    let res = this.ctx.bean.stash.get({ options, type: 'prepareAtomSchema', key: hintHash });
+    let res = this.app.bean.stash.get({ options, type: 'prepareAtomSchema', key: hintHash });
     if (res === undefined) {
       // console.log(hintHash);
       res = await this._checkRightFormAction_prepareAtomSchema_stash({
@@ -116,7 +116,7 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
         user,
         throwError,
       });
-      this.ctx.bean.stash.set({ options, type: 'prepareAtomSchema', key: hintHash, value: res });
+      this.app.bean.stash.set({ options, type: 'prepareAtomSchema', key: hintHash, value: res });
     }
     return res;
   }
@@ -136,7 +136,7 @@ export class BeanAtomRightCheckRightFormAction extends BeanAtomRightCheckRightFl
     });
     if (!checkRight) return null;
     // schema
-    return await this.ctx.bean.formAction._prepareAtomSchema({
+    return await this.app.bean.formAction._prepareAtomSchema({
       mode,
       formAction,
       atomClass,

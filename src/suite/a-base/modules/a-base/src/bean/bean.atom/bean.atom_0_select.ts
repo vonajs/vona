@@ -30,8 +30,8 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // atomClass
     let atomClassBase: AtomClassBase | undefined;
     if (atomClass) {
-      atomClass = await this.ctx.bean.atomClass.get(atomClass);
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass as AtomClass);
+      atomClass = await this.app.bean.atomClass.get(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass as AtomClass);
     }
     // select
     const items = await this._list({
@@ -44,10 +44,10 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // select items
     if (!count) {
       if (atomClassBase) {
-        const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+        const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName as any);
         await beanInstance.select({ atomClass, options, items, user });
       } else {
-        await this.ctx.bean.atomBase.select({ atomClass, options, items, user });
+        await this.app.bean.atomBase.select({ atomClass, options, items, user });
       }
     }
     // ok
@@ -76,7 +76,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
       mode,
     } = options;
     // page
-    const page = this.ctx.bean.util.page(_page, pageForce);
+    const page = this.app.bean.util.page(_page, pageForce);
     // stage
     const stage = typeof _stage === 'number' ? _stage : this.scope.constant.atom.stage[_stage];
     // tableName
@@ -86,7 +86,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     let schema;
     if (_atomClass) {
       atomClass = _atomClass;
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
       if (!atomClassBase) throw new Error(`atomClass not found: ${atomClass.module}:${atomClass.atomClassName}`);
       tableName = await this.getTableName({
         atomClass,
@@ -148,7 +148,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // selectQuery
     let items;
     if (atomClass) {
-      const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+      const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName);
       items = await beanInstance.selectQuery({ atomClass, options: options2, user });
     } else {
       items = await this._selectQuery({ atomClass, options: options2, user });

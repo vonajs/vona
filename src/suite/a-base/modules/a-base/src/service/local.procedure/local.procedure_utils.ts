@@ -48,11 +48,11 @@ export class LocalProcedureUtils extends LocalProcedureUtilsRights {
   }
 
   async _prepare_atomClassIdsInner() {
-    return await this.ctx.bean.atomClass.getAtomClassIdsInner({ inner: false });
+    return await this.app.bean.atomClass.getAtomClassIdsInner({ inner: false });
   }
 
   async _prepare_roleScopesMineOfUser({ atomClass, action, userIdWho }: any) {
-    const roleScopesMine = await this.ctx.bean.atomRightAux.getRoleScopesMineOfUser({
+    const roleScopesMine = await this.app.bean.atomRightAux.getRoleScopesMineOfUser({
       atomClass: { id: atomClass.id },
       action,
       userId: userIdWho,
@@ -61,7 +61,7 @@ export class LocalProcedureUtils extends LocalProcedureUtilsRights {
   }
 
   async _prepare_roleScopesOfUser({ atomClass, action, userIdWho }: any) {
-    const roleScopes = await this.ctx.bean.atomRightAux.getRoleScopesOfUser({
+    const roleScopes = await this.app.bean.atomRightAux.getRoleScopesOfUser({
       atomClass: { id: atomClass.id },
       action,
       userId: userIdWho,
@@ -70,7 +70,7 @@ export class LocalProcedureUtils extends LocalProcedureUtilsRights {
   }
 
   async _prepare_roleScopesOfRole({ atomClass, action, roleIdWho }: any) {
-    const roleScopes = await this.ctx.bean.atomRightAux.getRoleScopesOfRole({
+    const roleScopes = await this.app.bean.atomRightAux.getRoleScopesOfRole({
       atomClass: { id: atomClass.id },
       action,
       roleId: roleIdWho,

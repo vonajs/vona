@@ -5,7 +5,7 @@ export class BeanAtomUtils extends BeanAtom0 {
     const atomId = key.atomId;
     // atomClass
     if (!atomClass) {
-      atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId });
+      atomClass = await this.app.bean.atomClass.getByAtomId({ atomId });
       if (!atomClass) {
         if (throwWhenEmpty) {
           throw new Error(`atomClass not found for atom: ${atomId}`);
@@ -14,11 +14,11 @@ export class BeanAtomUtils extends BeanAtom0 {
         }
       }
     } else {
-      atomClass = await this.ctx.bean.atomClass.get(atomClass);
+      atomClass = await this.app.bean.atomClass.get(atomClass);
       if (!atomClass) this.scope.error.ElementDoesNotExist.throw();
     }
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // ok
     return { atomClass, atomClassBase };
   }

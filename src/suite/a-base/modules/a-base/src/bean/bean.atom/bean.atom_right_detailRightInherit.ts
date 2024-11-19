@@ -8,14 +8,14 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
     const atomIdMain = options?.atomIdMain;
     // atomClassBase
     if (!atomClassBase) {
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     }
     // detail
     if (!atomClassBase.detail) return true;
     // atomClassMain
     const atomClassMain = atomClassBase.detail.atomClassMain;
     // action
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       name: action,
@@ -62,7 +62,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
       formActionMain: options.formActionMain,
     };
     const hintHash = objectHash(hint, { respectType: false });
-    let res = this.ctx.bean.stash.get({ options, type: 'checkDetailRightInherit', key: hintHash });
+    let res = this.app.bean.stash.get({ options, type: 'checkDetailRightInherit', key: hintHash });
     if (res === undefined) {
       // console.log(hintHash);
       res = await this._checkDetailRightInherit_checkRightInherit_stash({
@@ -75,7 +75,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
         user,
         options,
       });
-      this.ctx.bean.stash.set({ options, type: 'checkDetailRightInherit', key: hintHash, value: res });
+      this.app.bean.stash.set({ options, type: 'checkDetailRightInherit', key: hintHash, value: res });
     }
     return res;
   }
@@ -113,7 +113,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
     } else if (flowTaskInfo) {
       schemaMain = flowTaskInfo.schema;
     } else {
-      const res = await this.ctx.bean.atom._prepareAtomSchema_atomClass({ atomClass: atomClassMain, user });
+      const res = await this.app.bean.atom._prepareAtomSchema_atomClass({ atomClass: atomClassMain, user });
       schemaMain = res.schema;
     }
     return this._checkDetailRightInherit_schemaValid({
@@ -165,7 +165,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
   }
 
   // async _checkDetailRightInherit_detailInlineMode({ atomClass, atomClassMain }: any) {
-  //   const schemaMain = await this.ctx.bean.atom._prepareAtomSchema_default({ atomClass: atomClassMain });
+  //   const schemaMain = await this.app.bean.atom._prepareAtomSchema_default({ atomClass: atomClassMain });
   //   for (const key in schemaMain.schema.properties) {
   //     const property = schemaMain.schema.properties[key];
   //     if (

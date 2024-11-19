@@ -12,7 +12,7 @@ export class StartupCheckViewHistoryRight extends BeanBase<ScopeModule> {
   }
 
   async _checkAtomClasses() {
-    const atomClasses = this.ctx.bean.base.atomClasses();
+    const atomClasses = this.app.bean.base.atomClasses();
     for (const module in atomClasses) {
       const atomClassesModule = atomClasses[module];
       for (const atomClassName in atomClassesModule) {
@@ -27,7 +27,7 @@ export class StartupCheckViewHistoryRight extends BeanBase<ScopeModule> {
   }
 
   async _checkAtomClass({ atomClass }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // check if any role exists
     const right = await this.modelRoleRight.get({
       atomClassId: atomClass.id,
@@ -39,7 +39,7 @@ export class StartupCheckViewHistoryRight extends BeanBase<ScopeModule> {
       { roleName: 'template.system', action: 'viewHistory', scopeNames: 'authenticated' }, //
       { roleName: 'authenticated', action: 'viewHistory', scopeNames: 0 }, //
     ];
-    await this.ctx.bean.role.addRoleRightBatch({
+    await this.app.bean.role.addRoleRightBatch({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       roleRights,

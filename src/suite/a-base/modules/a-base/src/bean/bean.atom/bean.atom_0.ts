@@ -53,7 +53,7 @@ export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async flow({ key, atom: { atomFlowId } }) {
-    const atomClass = await this.ctx.bean.atomClass.getByAtomId({ atomId: key.atomId });
+    const atomClass = await this.app.bean.atomClass.getByAtomId({ atomId: key.atomId });
     await this.modelAtom.update({
       id: key.atomId,
       atomFlowId,

@@ -13,12 +13,12 @@ export class SummerCacheAtomClassInner extends BeanBase {
   // key: in/notin
   async get(key) {
     const atomClasses = this.__getAtomClasses(key);
-    return await this.ctx.bean.atomClass.model.mget(atomClasses);
+    return await this.app.bean.atomClass.model.mget(atomClasses);
   }
 
   __getAtomClasses(clause) {
     const result: any[] = [];
-    const _atomClasses = this.ctx.bean.base.atomClasses();
+    const _atomClasses = this.app.bean.base.atomClasses();
     for (const module in _atomClasses) {
       const _atomClassesModule = _atomClasses[module];
       for (const atomClassName in _atomClassesModule) {

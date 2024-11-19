@@ -15,15 +15,15 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
     const actionsRes = await this.__actions_fetchActions({ atom, atomClass, atomClassBase, basic, user });
     // actions res
     const results: any[] = [];
-    this.ctx.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
-    this.ctx.bean.stash.clear({ options, type: 'prepareAtomSchema' });
+    this.app.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
+    this.app.bean.stash.clear({ options, type: 'prepareAtomSchema' });
     for (const actionRes of actionsRes) {
       actionRes.module = atomClass.module;
       actionRes.atomClassName = atomClass.atomClassName;
       // flow action
       if (actionRes.code < 10000) {
         // just for listing check, not for right check
-        const actionBase = this.ctx.bean.base.action({
+        const actionBase = this.app.bean.base.action({
           module: atomClass.module,
           atomClassName: atomClass.atomClassName,
           code: actionRes.code,
@@ -36,7 +36,7 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
       const formAction = options.formAction;
       let formActionCode;
       if (formAction) {
-        formActionCode = this.ctx.bean.atomAction.parseActionCode({
+        formActionCode = this.app.bean.atomAction.parseActionCode({
           action: formAction,
           atomClass,
         });
@@ -62,8 +62,8 @@ export class BeanAtomRightActions extends BeanAtomRightPreferredRoles {
         results.push(actionRes);
       }
     }
-    this.ctx.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
-    this.ctx.bean.stash.clear({ options, type: 'prepareAtomSchema' });
+    this.app.bean.stash.clear({ options, type: 'checkDetailRightInherit' });
+    this.app.bean.stash.clear({ options, type: 'prepareAtomSchema' });
     return results;
   }
 

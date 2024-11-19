@@ -3,19 +3,19 @@ import { BeanAtomRightCheckRightAction } from './bean.atom_right_checkRightActio
 export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAction {
   // atomClass: { id, module, atomClassName }
   async checkRightActionBulk({ atomClass, action, stage, user, options }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // normal check
     const res = await this._checkRightActionBulk_normal({ atomClass, action, stage, user, options });
     if (!res) return res;
     // auth open check
-    const resAuthOpenCheck = await this.ctx.bean.authOpen.checkRightAtomAction({ atomClass, action });
+    const resAuthOpenCheck = await this.app.bean.authOpen.checkRightAtomAction({ atomClass, action });
     if (!resAuthOpenCheck) return null;
     // ok
     return res;
   }
 
   async _checkRightActionBulk_normal({ atomClass, action, stage, user, options }: any) {
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     const actionRes = await this.__checkRightActionBulk_fetchActions({ atomClass, atomClassBase, action, user });
     return await this.__checkRightActionBulk_check({ atomClass, atomClassBase, actionRes, stage, user, options });
   }
@@ -50,7 +50,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     // actions
     let actionsRes: any[] = [];
     if (action) {
-      const actionBase = this.ctx.bean.base.action({
+      const actionBase = this.app.bean.base.action({
         module: atomClass.module,
         atomClassName: atomClass.atomClassName,
         code: action,
@@ -60,7 +60,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
       }
     } else {
       for (const actionName in metaActions) {
-        const actionBase = this.ctx.bean.base.action({
+        const actionBase = this.app.bean.base.action({
           module: atomClass.module,
           atomClassName: atomClass.atomClassName,
           name: actionName,
@@ -98,7 +98,7 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     };
     if (action) {
       // parse action code
-      action = this.ctx.bean.atomAction.parseActionCode({
+      action = this.app.bean.atomAction.parseActionCode({
         action,
         atomClass,
       });
@@ -125,14 +125,14 @@ export class BeanAtomRightCheckRightActionBulk extends BeanAtomRightCheckRightAc
     // not care about stage
     if (!stage) return actionRes;
     // action base
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: actionRes.module,
       atomClassName: actionRes.atomClassName,
       code: actionRes.code,
     });
     if (!actionBase) {
       if (actionRes.code < 10000) {
-        await this.ctx.bean.atomAction.delete({ atomClassId: actionRes.atomClassId, code: actionRes.code });
+        await this.app.bean.atomAction.delete({ atomClassId: actionRes.atomClassId, code: actionRes.code });
       }
       return null;
     }

@@ -84,7 +84,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       resource: 1,
       resourceLocale: locale,
     };
-    return await this.ctx.bean.atom._select({
+    return await this.app.bean.atom._select({
       atomClass,
       options,
       user,
@@ -96,7 +96,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   async readByStaticKey({ atomStaticKey, options, user }: any) {
     if (!atomStaticKey) return this.scope.error.ElementDoesNotExist.throw();
     // get atomId
-    const atom = await this.ctx.bean.atom.modelAtom.get({
+    const atom = await this.app.bean.atom.modelAtom.get({
       atomStaticKey,
       atomStage: 1,
     });
@@ -118,7 +118,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       locale = locale || this.ctx.locale;
     }
     options.resourceLocale = locale;
-    return await this.ctx.bean.atom.read({ key, options, user });
+    return await this.app.bean.atom.read({ key, options, user });
   }
 
   async setLocales({ atomId, atomName }: any) {
@@ -203,7 +203,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     const res = await this._checkRightResource_normal({ resourceAtomId, atomStaticKey, user });
     if (!res) return res;
     // auth open check
-    const resAuthOpenCheck = await this.ctx.bean.authOpen.checkRightResource({ resourceAtomId: res.atomId });
+    const resAuthOpenCheck = await this.app.bean.authOpen.checkRightResource({ resourceAtomId: res.atomId });
     if (!resAuthOpenCheck) return null;
     // ok
     return res;
@@ -211,7 +211,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
 
   async _checkRightResource_normal({ resourceAtomId, atomStaticKey, user }: any) {
     if (!resourceAtomId) {
-      const atom = await this.ctx.bean.atom.modelAtom.get({ atomStaticKey, atomDisabled: 0, atomStage: 1 });
+      const atom = await this.app.bean.atom.modelAtom.get({ atomStaticKey, atomDisabled: 0, atomStage: 1 });
       if (!atom) return null;
       resourceAtomId = atom.id;
     }
@@ -245,7 +245,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // atomId
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });
     // role
-    const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    const _role = await this.app.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role!.id;
     roleAtomId = _role!.atomId;
     // check if exists
@@ -269,7 +269,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // atomId
     atomId = await this._forceResourceAtomIdAndCheckRight({ atomId, atomStaticKey, user });
     // role
-    const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    const _role = await this.app.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role!.id;
     // delete
     await this.modelResourceRole.delete({
@@ -290,7 +290,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
 
   async deleteByRole({ roleAtomId, roleId, user }: any) {
     // role
-    const _role = await this.ctx.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
+    const _role = await this.app.bean.role._forceRoleAndCheckRightRead({ roleAtomId, roleId, user });
     roleId = _role!.id;
     // delete
     await this.modelResourceRole.delete({
@@ -309,7 +309,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     if (!roleResources || !roleResources.length) return;
     for (const roleResource of roleResources) {
       // role
-      const role = await this.ctx.bean.role.parseRoleName({ roleName: roleResource.roleName, force: true });
+      const role = await this.app.bean.role.parseRoleName({ roleName: roleResource.roleName, force: true });
       // atomStaticKey
       const atomStaticKey = roleResource.atomStaticKey || `${module}:${roleResource.name}`;
       await this.addResourceRole({ atomStaticKey, roleId: role.id });
@@ -326,13 +326,13 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   async _getAtomClassesResource() {
     if (__atomClassesResource) return __atomClassesResource;
     const atomClassesResource: any[] = [];
-    const atomClasses = this.ctx.bean.base.atomClasses();
+    const atomClasses = this.app.bean.base.atomClasses();
     for (const module in atomClasses) {
       const atomClassesModule = atomClasses[module];
       for (const atomClassName in atomClassesModule) {
         const atomClass = atomClassesModule[atomClassName];
         if (atomClass.resource) {
-          const item = await this.ctx.bean.atomClass.get({ module, atomClassName });
+          const item = await this.app.bean.atomClass.get({ module, atomClassName });
           atomClassesResource.push(item);
         }
       }
@@ -347,8 +347,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // check locale
     const locale = this.ctx.locale;
     // items
-    roleId = await this.ctx.bean.role._forceRoleId({ roleAtomId, roleId });
-    page = this.ctx.bean.util.page(page, false);
+    roleId = await this.app.bean.role._forceRoleId({ roleAtomId, roleId });
+    page = this.app.bean.util.page(page, false);
     const builder = this.bean.model
       .builderSelect('aResourceRole as a')
       .select([
@@ -388,8 +388,8 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // check locale
     const locale = this.ctx.locale;
     // items
-    roleId = await this.ctx.bean.role._forceRoleId({ roleAtomId, roleId });
-    page = this.ctx.bean.util.page(page, false);
+    roleId = await this.app.bean.role._forceRoleId({ roleAtomId, roleId });
+    page = this.app.bean.util.page(page, false);
     const builder = this.bean.model
       .builderSelect('aResourceRole as a')
       .select([
@@ -433,11 +433,11 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async resourceRightsOfUser({ userAtomId, userId, page }: any) {
-    userId = await this.ctx.bean.user._forceUserId({ userAtomId, userId });
+    userId = await this.app.bean.user._forceUserId({ userAtomId, userId });
     // check locale
     const locale = this.ctx.locale;
     // items
-    page = this.ctx.bean.util.page(page, false);
+    page = this.app.bean.util.page(page, false);
     const builder = this.bean.model
       .builderSelect('aViewUserRightResource as a', { disableDeleted: true })
       .select([
@@ -476,7 +476,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
 
   _resourceRightsLocale({ items }: any) {
     // resourceTypes for a-base:resource
-    const resourceTypes = this.ctx.bean.base.resourceTypes();
+    const resourceTypes = this.app.bean.base.resourceTypes();
     // locale
     for (const item of items) {
       // resource type
@@ -495,7 +495,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
 
   async _forceResourceAtomId({ atomId, atomStaticKey }: any) {
     if (!atomId) {
-      const atom = await this.ctx.bean.atom.modelAtom.get({
+      const atom = await this.app.bean.atom.modelAtom.get({
         atomStaticKey,
         atomStage: 1, // formal
       });
@@ -523,7 +523,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   //   // check locale
   //   const locale = this.ctx.locale;
   //   // list
-  //   page = this.ctx.bean.util.page(page, false);
+  //   page = this.app.bean.util.page(page, false);
   //   const _limit = this.bean.model._limit(page.size, page.index);
   //   const list = await this.bean.model.query(`
   //     select a.*,b.module,b.name,b.title,b.sceneId,g.sceneName,b.sorting,f.titleLocale from aRoleFunction a
@@ -542,7 +542,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   //   // check locale
   //   const locale = this.ctx.locale;
   //   // list
-  //   page = this.ctx.bean.util.page(page, false);
+  //   page = this.app.bean.util.page(page, false);
   //   const _limit = this.bean.model._limit(page.size, page.index);
   //   const list = await this.bean.model.query(`
   //     select d.*,d.id as roleExpandId,a.id as roleFunctionId,b.module,b.name,b.title,b.sceneId,g.sceneName,e.roleName,f.titleLocale from aRoleFunction a
@@ -563,7 +563,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
   //   // check locale
   //   const locale = this.ctx.locale;
   //   // list
-  //   page = this.ctx.bean.util.page(page, false);
+  //   page = this.app.bean.util.page(page, false);
   //   const _limit = this.bean.model._limit(page.size, page.index);
   //   const list = await this.bean.model.query(`
   //     select a.*,b.module,b.name,b.title,b.sceneId,g.sceneName,b.sorting,f.titleLocale,e.roleName from aViewUserRightFunction a

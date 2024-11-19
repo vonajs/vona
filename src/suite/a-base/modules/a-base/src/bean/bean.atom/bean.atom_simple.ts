@@ -12,7 +12,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
       if (!atomIdFormal) {
         // formal/history not exists, so copy it
         // create formal
-        const srcItem = await this.ctx.bean.atom.read({ key: { atomId: atomIdDraft }, user });
+        const srcItem = await this.app.bean.atom.read({ key: { atomId: atomIdDraft }, user });
         srcItem.atomSimple = 1; // important
         const keyFormal = await this.self._copy({
           target: 'formal',
@@ -53,7 +53,7 @@ export class BeanAtomSimple extends BeanAtomFormal {
     if (atomIdDraft) {
       const atomDraft = atom.atomStage === 0 ? atom : await this.modelAtom.get({ id: atomIdDraft });
       const keyDraft = { atomId: atomDraft.id, itemId: atomDraft.itemId };
-      const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName);
+      const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName);
       await beanInstance.delete({ atomClass, key: keyDraft, user });
       // notify to change draft stats
       this.self._notifyDraftsDrafting(null, atomClass);

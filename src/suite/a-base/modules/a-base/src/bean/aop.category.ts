@@ -17,7 +17,7 @@ export class AopCategory extends BeanBase<ScopeModule> {
     const atomClass = params.atomClass;
     if (!atomClass) return;
     // check if resource
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     if (!atomClassBase.resource) return;
 
     // locale
@@ -44,7 +44,7 @@ export class AopCategory extends BeanBase<ScopeModule> {
     if (atomClass.module !== 'a-base' || atomClass.atomClassName !== 'resource') return false;
     if (categoryIdParent !== 0) return false;
     // resourceTypes for a-base:resource
-    const resourceTypes = this.ctx.bean.base.resourceTypes();
+    const resourceTypes = this.app.bean.base.resourceTypes();
     for (const item of list) {
       // resource type
       const resourceType = resourceTypes[item.categoryName];
@@ -59,11 +59,11 @@ export class AopCategory extends BeanBase<ScopeModule> {
     if (atomClass.module !== 'a-base' || atomClass.atomClassName !== 'resource') return false;
     if (categoryIdParent === 0) return false;
     // categoryIdParent
-    const categoryParent = await this.ctx.bean.category.get({ categoryId: categoryIdParent });
+    const categoryParent = await this.app.bean.category.get({ categoryId: categoryIdParent });
     if (!categoryParent) return false;
     if (!['a-base:menu', 'a-base:mine'].includes(categoryParent.categoryName)) return false;
     const appKeys = list.map(item => item.categoryName);
-    const apps = await this.ctx.bean.resource.select({
+    const apps = await this.app.bean.resource.select({
       atomClass: __atomClassApp,
       options: {
         where: {

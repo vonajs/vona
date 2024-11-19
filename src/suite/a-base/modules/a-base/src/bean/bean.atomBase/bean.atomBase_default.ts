@@ -13,7 +13,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
   async default({ atomClass, data, item, options, user }: any) {
     data = data || {};
     // atomClass
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // validate data
     data = await this._default_validate({ atomClass, data, options, user });
     // itemOnly
@@ -24,7 +24,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
       data = await this._default_prepareItemOnly({ data, atomClassBase, atomClass, item, options, user });
     } else {
       // merge aAtom
-      data = await this.ctx.bean.atom.model.default(data);
+      data = await this.app.bean.atom.model.default(data);
       // prepare
       // item = item;
       data = await this._default_prepareItem({ data, atomClassBase, atomClass, item, options, user });
@@ -40,7 +40,7 @@ export class BeanAtomBaseDefault extends BeanAtomBaseCreate {
 
   async _default_validate({ atomClass, data, options, user }: any) {
     // schema
-    const atomSchema = await this.ctx.bean.atom._prepareAtomSchema({
+    const atomSchema = await this.app.bean.atom._prepareAtomSchema({
       mode: options.containerMode || 'view',
       atomClass,
       options,

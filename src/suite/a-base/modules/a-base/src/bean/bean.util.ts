@@ -311,7 +311,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
   async checkAtomIdExists({ atomId, items }: any) {
     if (items.length === 0) return false;
     const atomIds = new Set([atomId]);
-    const _atomOld = await this.ctx.bean.atom.modelAtom.get({ id: atomId });
+    const _atomOld = await this.app.bean.atom.modelAtom.get({ id: atomId });
     if (_atomOld) {
       if (_atomOld.atomIdDraft) {
         atomIds.add(_atomOld.atomIdDraft);

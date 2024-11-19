@@ -14,13 +14,13 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
       disableAuthOpenCheck,*/
     options,
   }) {
-    const actionCode = this.ctx.bean.atomAction.parseActionCode({
+    const actionCode = this.app.bean.atomAction.parseActionCode({
       action,
       atomClass,
     });
     // atomClassBase
     if (!atomClassBase) {
-      atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+      atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     }
     // not check for detail here
     if (atomClassBase.detail) return null;
@@ -68,7 +68,7 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
       throwError,
     };
     const hintHash = objectHash(hint, { respectType: false });
-    let res = this.ctx.bean.stash.get({ options, type: 'prepareAtomSchema', key: hintHash });
+    let res = this.app.bean.stash.get({ options, type: 'prepareAtomSchema', key: hintHash });
     if (res === undefined) {
       // console.log(hintHash);
       res = await this._checkRightFromViewHistory_prepareAtomSchema_stash({
@@ -79,7 +79,7 @@ export class BeanAtomRightCheckRightFromViewHistory extends BeanAtomRightCheckRi
         user,
         throwError,
       });
-      this.ctx.bean.stash.set({ options, type: 'prepareAtomSchema', key: hintHash, value: res });
+      this.app.bean.stash.set({ options, type: 'prepareAtomSchema', key: hintHash, value: res });
     }
     return res;
   }

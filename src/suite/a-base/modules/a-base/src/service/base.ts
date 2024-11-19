@@ -3,21 +3,21 @@ import { BeanBase, Service } from 'vona';
 @Service()
 export class ServiceBase extends BeanBase {
   modules() {
-    return this.ctx.bean.base.modules();
+    return this.app.bean.base.modules();
   }
 
   locales() {
-    return this.ctx.bean.base.locales();
+    return this.app.bean.base.locales();
   }
 
   resourceTypes() {
-    return this.ctx.bean.base.resourceTypes();
+    return this.app.bean.base.resourceTypes();
   }
 
   // id, module, atomClassName
   async getAtomClassBase({ atomClass }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
-    const atomClassBase = this.ctx.bean.base.atomClass(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
+    const atomClassBase = this.app.bean.base.atomClass(atomClass);
     return {
       atomClass,
       atomClassBase,
@@ -25,18 +25,18 @@ export class ServiceBase extends BeanBase {
   }
 
   getActionsBase({ atomClass }: any) {
-    return this.ctx.bean.base.actionsBase({ module: atomClass.module, atomClassName: atomClass.atomClassName });
+    return this.app.bean.base.actionsBase({ module: atomClass.module, atomClassName: atomClass.atomClassName });
   }
 
   atomClasses() {
-    return this.ctx.bean.base.atomClasses();
+    return this.app.bean.base.atomClasses();
   }
 
   actions() {
-    return this.ctx.bean.base.actions();
+    return this.app.bean.base.actions();
   }
 
   themes() {
-    return this.ctx.bean.base.themes();
+    return this.app.bean.base.themes();
   }
 }

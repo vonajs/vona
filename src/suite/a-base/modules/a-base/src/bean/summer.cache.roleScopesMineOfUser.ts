@@ -11,6 +11,6 @@ export class SummerCacheRoleScopesMineOfUser extends BeanBase {
   }
 
   async get(key) {
-    return await this.ctx.bean.atomRightAux.__getRoleScopesMineOfUserRaw(key);
+    return await this.app.bean.atomRightAux.__getRoleScopesMineOfUserRaw(key);
   }
 }

@@ -24,7 +24,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
     });
     if (!atomClassBase) return this.app.throw(403);
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase.beanFullName as any);
     // atom
     let _atom;
     if (!atomClassBase.itemOnly) {
@@ -115,7 +115,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
 
   async _deleteBulk_item({ atomClass, key, user }: any) {
     // check right
-    const res = await this.ctx.bean.atom.checkRightAction({
+    const res = await this.app.bean.atom.checkRightAction({
       atom: { id: key.atomId },
       atomClass,
       action: 4,

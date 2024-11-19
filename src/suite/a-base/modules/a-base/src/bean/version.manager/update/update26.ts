@@ -21,7 +21,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustRoleRights(_options) {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -37,7 +37,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
     const roleRights = await this.modelRoleRight.select();
     for (const roleRight of roleRights) {
       const roleId = roleRight.roleId;
-      const role = await this.ctx.bean.role.get({ id: roleId });
+      const role = await this.app.bean.role.get({ id: roleId });
       if (role) {
         const roleAtomId = role.atomId;
         await this.modelRoleRight.update({ id: roleRight.id, roleAtomId });

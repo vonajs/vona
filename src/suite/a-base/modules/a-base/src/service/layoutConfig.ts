@@ -4,17 +4,17 @@ import { BeanBase, Service } from 'vona';
 export class ServiceLayoutConfig extends BeanBase {
   async load({ module, user }: any) {
     const name = `user-layoutConfig:${module}:${user.id}`;
-    return await this.ctx.bean.status.get(name);
+    return await this.app.bean.status.get(name);
   }
 
   async save({ module, data, user }: any) {
     const name = `user-layoutConfig:${module}:${user.id}`;
-    await this.ctx.bean.status.set(name, data);
+    await this.app.bean.status.set(name, data);
   }
 
   async saveKey({ module, key, value, user }: any) {
     const layoutConfig = await this.load({ module, user });
-    const data = this.ctx.bean.util.extend({}, layoutConfig || {}, { [key]: value });
+    const data = this.app.bean.util.extend({}, layoutConfig || {}, { [key]: value });
     await this.save({ module, data, user });
   }
 }

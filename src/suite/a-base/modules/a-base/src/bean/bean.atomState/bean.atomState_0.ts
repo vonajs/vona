@@ -17,11 +17,11 @@ export class BeanAtomState0 extends BeanBase {
   async findDictItem({ atomClass, atomClassBase, atomStage, atomState }: any) {
     // atomClassBase
     if (!atomClassBase) {
-      atomClassBase = this.ctx.bean.base.atomClass(atomClass);
+      atomClassBase = this.app.bean.base.atomClass(atomClass);
     }
     // check flow stage: maybe not set
     const flowStage = atomClassBase.flow?.stage;
-    atomStage = this.ctx.bean.atomStage.toString({ atomStage });
+    atomStage = this.app.bean.atomStage.toString({ atomStage });
     const flowStageSame = flowStage === atomStage;
     // dictKey: static
     let dictKey = this.self.static_getDictKey({ atomClass, atomClassBase, atomStage });
@@ -34,7 +34,7 @@ export class BeanAtomState0 extends BeanBase {
     }
     if (!dictKey) return null;
     // dictItem
-    const dictItem = await this.ctx.bean.dict.findItem({
+    const dictItem = await this.app.bean.dict.findItem({
       dictKey,
       code: atomState,
     });
@@ -42,7 +42,7 @@ export class BeanAtomState0 extends BeanBase {
     // check flow stage: maybe not set
     if (flowStageSame) {
       // try default
-      return await this.ctx.bean.dict.findItem({
+      return await this.app.bean.dict.findItem({
         dictKey: this.dictKeyDefault,
         code: atomState,
       });

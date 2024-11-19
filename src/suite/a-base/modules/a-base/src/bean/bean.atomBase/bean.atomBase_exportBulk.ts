@@ -5,7 +5,7 @@ import ExcelJS from 'exceljs';
 export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
   async exportBulk({ atomClass, options, fields, user }: any) {
     // select
-    const items = await this.ctx.bean.atom.select({ atomClass, options, user, pageForce: false });
+    const items = await this.app.bean.atom.select({ atomClass, options, user, pageForce: false });
     // workbook
     const workbook = new ExcelJS.Workbook();
     workbook.creator = 'CabloyJS';
@@ -35,7 +35,7 @@ export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
     const buffer = await workbook.xlsx.writeBuffer();
     // meta
     const meta = {
-      filename: `${this.ctx.bean.util.now()}.xlsx`,
+      filename: `${this.app.bean.util.now()}.xlsx`,
       encoding: '7bit',
       mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       fields: {

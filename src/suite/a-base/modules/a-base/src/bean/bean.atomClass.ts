@@ -11,7 +11,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async atomClass(atomClass: AtomClass): Promise<AtomClassBase> {
-    return this.ctx.bean.base.atomClass({
+    return this.app.bean.base.atomClass({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
     });
@@ -23,7 +23,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async getAtomClassIdsInner({ inner }: any) {
     // cache
-    const cache = this.ctx.bean.summer.getCache({ module: __ThisModule__, name: 'atomClassInner' });
+    const cache = this.app.bean.summer.getCache({ module: __ThisModule__, name: 'atomClassInner' });
     // key
     const key = inner ? 'in' : 'notin';
     const atomClasses = await cache.get(key);
@@ -58,7 +58,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async _registerLock({ module, atomClassName }: any) {
     // atomClassBase
-    const atomClassBase = this.ctx.bean.base.atomClass({ module, atomClassName });
+    const atomClassBase = this.app.bean.base.atomClass({ module, atomClassName });
     if (!atomClassBase) throw new Error(`atomClass ${module}:${atomClassName} not found!`);
     // atom class
     const data = await this._registerLock_inner({ module, atomClassName });
@@ -66,7 +66,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     //  only for !itemOnly
     if (!atomClassBase.itemOnly) {
       for (const code of [1, 2, 3, 4]) {
-        await this.ctx.bean.atomAction._registerLock_inner({ atomClassId: data.id, code });
+        await this.app.bean.atomAction._registerLock_inner({ atomClassId: data.id, code });
       }
     }
     // ok
@@ -95,7 +95,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async getByAtomId({ atomId }: any) {
-    const atom = await this.ctx.bean.atom.get({ atomId });
+    const atom = await this.app.bean.atom.get({ atomId });
     if (!atom) return null;
     return await this.get({ id: atom.atomClassId });
     // const res = await this.model.query(
@@ -155,7 +155,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
       itemsMap[`${item.module}:${item.atomClassName}`] = item.atomClassId;
     }
     // atomClasses
-    const _atomClasses = this.ctx.bean.base.atomClasses();
+    const _atomClasses = this.app.bean.base.atomClasses();
     // atomClassesNew
     const atomClassesNew: any = {};
     for (const _moduleName in _atomClasses) {
@@ -207,7 +207,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
       { disableDeleted: true },
     );
     // locale
-    await this.ctx.bean.role._adjustFlowActionsLocale({ items, actionNameKey: 'name' });
+    await this.app.bean.role._adjustFlowActionsLocale({ items, actionNameKey: 'name' });
     // ok
     return items;
   }

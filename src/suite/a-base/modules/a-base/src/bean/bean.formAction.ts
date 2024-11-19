@@ -6,7 +6,7 @@ export class BeanFormAction extends BeanBase {
     // read
     const modeRead = mode === 'view' || mode === 'read';
     // actionBase
-    const actionBase = this.ctx.bean.base.action({
+    const actionBase = this.app.bean.base.action({
       module: atomClass.module,
       atomClassName: atomClass.atomClassName,
       name: formAction,
@@ -41,7 +41,7 @@ export class BeanFormAction extends BeanBase {
     });
     if (!fieldsRight) return null;
     // schema
-    const schema = await this.ctx.bean.fields.parseSchema({
+    const schema = await this.app.bean.fields.parseSchema({
       atomClass,
       atomClassMain: atomClass,
       fieldsRight,
@@ -51,7 +51,7 @@ export class BeanFormAction extends BeanBase {
 
   // atomClass: maybe main/detail
   async _prepareAtomSchemaMain({ mode, formActionMain, atomClass, user, throwError }: any) {
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     const atomClassMain = atomClassBase?.detail?.atomClassMain;
     // fieldsRight
     const fieldsRight = await this._prepareAtomSchema_getFieldsRight({
@@ -63,7 +63,7 @@ export class BeanFormAction extends BeanBase {
     });
     if (!fieldsRight) return null;
     // schema
-    const schema = await this.ctx.bean.fields.parseSchema({
+    const schema = await this.app.bean.fields.parseSchema({
       atomClass,
       atomClassMain,
       fieldsRight,

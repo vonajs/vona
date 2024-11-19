@@ -12,7 +12,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
   }
 
   async count({ atomClass, language }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     const where: any = {
       atomClassId: atomClass.id,
     };
@@ -42,7 +42,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
 
   async list({ atomClass, options }: any) {
     options = options || {};
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     if (!options.where) options.where = {};
     options.where.atomClassId = atomClass.id;
     if (!options.where.language) {
@@ -52,7 +52,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
   }
 
   async add({ atomClass, data }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     // add
     const res = await this.modelTag.insert({
       atomClassId: atomClass.id,
@@ -165,7 +165,7 @@ export class BeanTag extends BeanBase<ScopeModule> {
   }
 
   async _register({ atomClass, language, tagName }: any) {
-    atomClass = await this.ctx.bean.atomClass.get(atomClass);
+    atomClass = await this.app.bean.atomClass.get(atomClass);
     return await this.ctx.meta.util.lock({
       resource: `${__ThisModule__}.tag.register.${atomClass.id}`,
       fn: async () => {

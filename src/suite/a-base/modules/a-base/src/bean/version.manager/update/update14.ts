@@ -31,7 +31,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustRoles(_options) {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -44,7 +44,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustUsers(_options) {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -62,7 +62,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
       const roleId = role.id;
       const roleName = role.roleName;
       // add atom
-      const atomKey = await this.ctx.bean.atom.create({
+      const atomKey = await this.app.bean.atom.create({
         atomClass: __atomClassRole,
         item: {
           itemId: roleId,
@@ -73,7 +73,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
         },
         user: { id: 0 },
       });
-      await this.ctx.bean.atom.write({
+      await this.app.bean.atom.write({
         key: atomKey,
         item: {
           atomName: roleName,
@@ -81,7 +81,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
         user: { id: 0 },
       });
       // submit
-      await this.ctx.bean.atom.submit({
+      await this.app.bean.atom.submit({
         key: atomKey,
         options: { ignoreFlow: true },
         user: { id: 0 },
@@ -103,7 +103,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
         userName = '__Unknown User__';
       }
       // add atom
-      const atomKey = await this.ctx.bean.atom.create({
+      const atomKey = await this.app.bean.atom.create({
         atomClass: __atomClassUser,
         item: {
           itemId: userId,
@@ -112,7 +112,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
         },
         user: { id: 0 },
       });
-      await this.ctx.bean.atom.write({
+      await this.app.bean.atom.write({
         key: atomKey,
         item: {
           atomName: userName,
@@ -120,7 +120,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
         user: { id: 0 },
       });
       // submit
-      await this.ctx.bean.atom.submit({
+      await this.app.bean.atom.submit({
         key: atomKey,
         options: { ignoreFlow: true },
         user: { id: 0 },

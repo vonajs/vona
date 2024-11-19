@@ -34,26 +34,26 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     }
     if (!atomClassBase) this.app.throw(403);
     // atom bean
-    const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase!.beanFullName as any);
+    const beanInstance: BeanAtomBase = this.app.bean._getBean(atomClassBase!.beanFullName as any);
     return await beanInstance.submit({ atomClass, key, options, user });
   }
 
   async _submitBase({ atomClass, key, options, user }: any) {
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // flowStage
     const flowStage = atomClassBase.flow?.stage || 'draft';
     // ignoreFlow only used by draft
     const ignoreFlow = options && options.ignoreFlow;
-    const _atom = await this.ctx.bean.atom.read({ key, user: undefined });
+    const _atom = await this.app.bean.atom.read({ key, user: undefined });
     // check atom flow
     if (!ignoreFlow && flowStage === 'draft') {
-      const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
+      const _nodeBaseBean = this.app.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
       const flowInstance = await _nodeBaseBean._match({ atom: _atom, userId: _atom.userIdUpdated });
       if (flowInstance) {
         // set atom flow
         const atomFlowId = flowInstance.context._flowId;
-        await this.ctx.bean.atom.flow({ key, atom: { atomFlowId } });
+        await this.app.bean.atom.flow({ key, atom: { atomFlowId } });
         // ok
         return {
           flow: { id: atomFlowId },
@@ -74,7 +74,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
 
   async _submitDirect({ atomClass, key, item, options, user }: any) {
     // atomClassBase
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // flowStage
     const flowStage = atomClassBase.flow?.stage || 'draft';
     // { formal }
@@ -83,12 +83,12 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     key = result.formal.key;
     item = { ...item, id: key.itemId, atomId: key.atomId, itemId: key.itemId, atomStage: 1 };
     if (flowStage === 'formal') {
-      const _nodeBaseBean = this.ctx.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
+      const _nodeBaseBean = this.app.bean._newBean('a-flowtask.flow.node.startEventAtom') as FlowNodeStartEventAtom;
       const flowInstance = await _nodeBaseBean._match({ atom: item, userId: item.userIdUpdated });
       if (flowInstance) {
         // set atom flow
         const atomFlowId = flowInstance.context._flowId;
-        await this.ctx.bean.atom.flow({ key, atom: { atomFlowId } });
+        await this.app.bean.atom.flow({ key, atom: { atomFlowId } });
         result = {
           flow: { id: atomFlowId },
           formal: result.formal,
@@ -100,7 +100,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
   }
 
   async _submitDirect_formal({ atomClass, /* key,*/ item, options, user }: any) {
-    const atomClassBase = await this.ctx.bean.atomClass.atomClass(atomClass);
+    const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // formal -> history
     if (item.atomIdFormal) {
       if (atomClassBase.history !== false) {

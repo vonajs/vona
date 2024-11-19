@@ -24,7 +24,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustCategories({ resourceType }: any) {
     // all instances
-    const instances = await this.ctx.bean.instance.list();
+    const instances = await this.app.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
@@ -37,7 +37,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustCategoriesInstance({ resourceType }: any) {
     // select all resources
-    const list = await this.ctx.bean.resource.select({
+    const list = await this.app.bean.resource.select({
       options: {
         where: {
           resourceType,
@@ -51,7 +51,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
     for (const item of list) {
       const appKey = item.appKey || 'a-appbooster:appUnclassified';
       const categoryNames = [resourceType, appKey, item.atomCategoryName].join('.');
-      const category = await this.ctx.bean.category.parseCategoryName({
+      const category = await this.app.bean.category.parseCategoryName({
         atomClass: __atomClassResource,
         language: item.atomLanguage,
         categoryName: categoryNames,
@@ -77,12 +77,12 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
       }
     }
     // delete all old categories
-    const categoryTop = (await this.ctx.bean.category.child({
+    const categoryTop = (await this.app.bean.category.child({
       atomClass: __atomClassResource,
       categoryId: 0,
       categoryName: resourceType,
     })) as EntityCategory;
-    const children = (await this.ctx.bean.category.children({
+    const children = (await this.app.bean.category.children({
       atomClass: __atomClassResource,
       categoryId: categoryTop.id,
       setLocale: false,
@@ -96,7 +96,7 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _deleteCategory(category) {
     try {
-      await this.ctx.bean.category.delete({ categoryId: category.id });
+      await this.app.bean.category.delete({ categoryId: category.id });
     } catch (err) {
       // donot throw error
       this.ctx.logger.info(`categoryId: ${category.id}, categoryName: ${category.categoryName}`);
