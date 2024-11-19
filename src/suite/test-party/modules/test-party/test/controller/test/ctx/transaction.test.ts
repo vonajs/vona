@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
-describe.only('test/controller/test/ctx/transaction.test.js', () => {
+describe('test/controller/test/ctx/transaction.test.js', () => {
   it('action:transaction:fail', async () => {
     // ctx
     await app.meta.mockUtil.mockRunInAnonymousContextScope(async ctx => {

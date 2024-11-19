@@ -233,7 +233,11 @@ export class AppUtil extends BeanSimple {
         }
       }
       // scope
-      return await scope(ctx as unknown as VonaContext);
+      const res = await scope(ctx as unknown as VonaContext);
+      // tail done
+      await ctx.tailDone();
+      // ok
+      return res;
     }, req as Request);
   }
 
@@ -312,8 +316,6 @@ export class AppUtil extends BeanSimple {
         } else {
           res = await this._executeBeanFn({ fn, ctx, bean, context, args });
         }
-        // tail done
-        await ctx.tailDone();
         // ok
         return res;
       },

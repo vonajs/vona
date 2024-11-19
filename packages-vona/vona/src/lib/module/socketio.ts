@@ -29,7 +29,7 @@ export class SocketioReady extends BeanSimple {
         url: '/api/a/base/',
       });
       app.runInAnonymousContextScope(async ctx => {
-        Cast(app.bean)
+        return Cast(app.bean)
           .instance.checkAppReadyInstance(true)
           .then(res => {
             if (!res) return fn(null, false);
