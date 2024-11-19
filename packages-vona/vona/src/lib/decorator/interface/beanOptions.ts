@@ -1,7 +1,7 @@
 import { IModuleMiddlewareGate } from '../../bean/index.js';
 import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
-import { ContainerScope } from '../index.js';
+// import { ContainerScope } from '../index.js';
 
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'service'
