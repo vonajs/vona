@@ -18,10 +18,10 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
     return this.scope.model.authOpen;
   }
   get modelResourceRole() {
-    return this.bean.scope('a-base').model.resourceRole;
+    return this.$scope.base.model.resourceRole;
   }
   get localAuthSimple() {
-    return this.bean.scope('a-authsimple').service.simple;
+    return this.$scope.authsimple.service.simple;
   }
 
   async hideClientSecret({ atomId, itemId, user }: any) {

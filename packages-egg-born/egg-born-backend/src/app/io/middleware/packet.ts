@@ -14,7 +14,7 @@ export default function (app) {
 //     const bean = item.bean;
 //     // execute
 //     const beanFullName = `${bean.module}.middleware.io.${bean.name}`;
-//     const beanInstance = context.ctx.bean._getBean(beanFullName);
+//     const beanInstance = context.app.bean._getBean(beanFullName);
 //     if (!beanInstance) {
 //       throw new Error(`socketio middleware bean not found: ${beanFullName}`);
 //     }

@@ -360,7 +360,7 @@ export class Onion extends BeanSimple {
       }
       // execute
       const beanFullName = item.beanOptions.beanFullName;
-      const beanInstance = ctx.bean._getBean(beanFullName as any);
+      const beanInstance = ctx.app.bean._getBean(beanFullName as any);
       if (!beanInstance) {
         throw new Error(`${sceneName} bean not found: ${beanFullName}`);
       }

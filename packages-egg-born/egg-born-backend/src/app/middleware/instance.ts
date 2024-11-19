@@ -1,7 +1,7 @@
 module.exports = () => {
   return async function (ctx, next) {
     // init instance
-    await ctx.bean.instance.initInstance();
+    await ctx.app.bean.instance.initInstance();
     // next
     await next();
   };

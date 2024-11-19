@@ -348,7 +348,7 @@ function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
     }
     // execute
     const beanFullName = item.beanOptions.beanFullName;
-    const beanInstance = ctx.bean._getBean(beanFullName);
+    const beanInstance = ctx.app.bean._getBean(beanFullName);
     if (!beanInstance) {
       throw new Error(`middleware bean not found: ${beanFullName}`);
     }
@@ -374,7 +374,7 @@ function middlewareMatch(ctx, options) {
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {
   return function classControllerMiddleware(ctx: VonaContext) {
-    const controller = ctx.bean._getBean(controllerBeanFullName);
+    const controller = ctx.app.bean._getBean(controllerBeanFullName);
     if (!controller) {
       throw new Error(`controller not found: ${controllerBeanFullName}`);
     }
@@ -388,7 +388,7 @@ function controllerActionToMiddleware(controllerBeanFullName, _route) {
 function classControllerMiddleware(ctx: VonaContext) {
   const beanFullName = ctx.getClassBeanFullName();
   const handlerName = ctx.getHandler().name;
-  const controller = ctx.bean._getBean(beanFullName as any) as any;
+  const controller = ctx.app.bean._getBean(beanFullName as any) as any;
   return controller[handlerName](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
 }
 

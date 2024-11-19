@@ -11,7 +11,7 @@ export class Monkey extends BeanSimple implements IMonkeySystem {
       get() {
         return context.dbMeta.transaction.inTransaction
           ? context.dbMeta.transaction.connection
-          : context.bean.database.getDefault();
+          : this.app.bean.database.getDefault();
       },
     });
     // dbMeta
