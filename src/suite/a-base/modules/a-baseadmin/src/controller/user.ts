@@ -10,7 +10,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.app.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index!, page.size!);
   }
 
   async userRoles() {
