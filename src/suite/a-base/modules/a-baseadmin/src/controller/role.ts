@@ -10,7 +10,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async children() {
@@ -21,7 +21,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async delete() {
@@ -72,7 +72,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async includes() {
@@ -82,7 +82,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async addUserRole() {

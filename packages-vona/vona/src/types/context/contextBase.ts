@@ -19,7 +19,6 @@ export interface ContextBase {
   tail(cb);
   tailDone(): Promise<any>;
   get tailCallbacks();
-  successMore(list, index, size);
   getPayload(options?): Promise<any>;
   getClass(): Constructable;
   getHandler(): Function;

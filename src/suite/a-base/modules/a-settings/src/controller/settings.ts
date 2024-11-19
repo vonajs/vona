@@ -7,7 +7,7 @@ export class ControllerSettings extends BeanBase<ScopeModule> {
 
   instanceList() {
     const res = this.scope.service.settings.instanceList();
-    this.ctx.successMore(res, 0, -1);
+    this.app.successMore(res, 0, -1);
   }
 
   async instanceLoad() {
@@ -28,7 +28,7 @@ export class ControllerSettings extends BeanBase<ScopeModule> {
 
   userList() {
     const res = this.scope.service.settings.userList();
-    this.ctx.successMore(res, 0, -1);
+    this.app.successMore(res, 0, -1);
   }
 
   async userLoad() {

@@ -23,6 +23,6 @@ export class ControllerFlowDef extends BeanBase<ScopeModule> {
       params,
       user,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 }

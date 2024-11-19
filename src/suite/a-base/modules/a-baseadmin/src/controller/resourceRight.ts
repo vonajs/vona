@@ -10,7 +10,7 @@ export class ControllerResourceRight extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async add() {
@@ -42,6 +42,6 @@ export class ControllerResourceRight extends BeanBase<ScopeModule> {
       page,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 }

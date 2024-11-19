@@ -13,7 +13,7 @@ export class ControllerTestCtxResponse extends BeanBase<ScopeModule> {
   async successMore() {
     const page = this.ctx.request.body.page;
     const items = [{ userName: 'zhennann' }, { userName: 'root' }];
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async fail() {

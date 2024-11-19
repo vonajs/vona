@@ -29,4 +29,6 @@ type TypeErrorMethods = { success: TypeErrorMethodSuccess } & { throw: TypeError
   [property in TypeErrorMethodNames]: TypeErrorMethodCommon;
 } & { parseCode: TypeErrorMethodParseCode };
 
-export interface ApplicationError extends TypeErrorMethods {}
+export interface ApplicationError extends TypeErrorMethods {
+  successMore(list: any[], index: number, size: number): void;
+}

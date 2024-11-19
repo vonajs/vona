@@ -22,6 +22,15 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
         return app.meta.error[key](undefined, ...args);
       };
     });
+
+    // todo: maybe need not
+    app['successMore'] = function (list, index, size) {
+      app.success({
+        list,
+        index: index + list.length,
+        finished: size === -1 || size === 0 || list.length < size,
+      });
+    };
   }
 
   function loadErrors() {

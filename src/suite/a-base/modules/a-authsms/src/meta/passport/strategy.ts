@@ -29,7 +29,7 @@ Strategy.prototype.authenticate = function (req) {
   // check
   if (req.method === 'GET') {
     // not allow
-    return self.error(app.parseFail(403));
+    return self.error(ctx.app.parseFail(403));
   }
 
   // verified
@@ -40,7 +40,7 @@ Strategy.prototype.authenticate = function (req) {
     if (!user) {
       return self.fail(info);
     }
-    app.success(user);
+    ctx.app.success(user);
     self.success(user, info);
   }
 

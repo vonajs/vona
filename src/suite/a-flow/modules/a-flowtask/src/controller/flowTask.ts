@@ -12,7 +12,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, options.page.index, options.page.size);
+    this.app.successMore(items, options.page.index, options.page.size);
   }
 
   async count() {
@@ -110,7 +110,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       params,
       user,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async forward() {
@@ -139,7 +139,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       params,
       user,
     });
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 
   async substitute() {

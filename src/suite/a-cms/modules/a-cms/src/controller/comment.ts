@@ -19,6 +19,6 @@ export class ControllerComment extends BeanBase<ScopeModule> {
     options.page = this.ctx.bean.util.page(options.page);
     const items = await this.ctx.bean.atom.select({ atomClass, options, user });
     // ok
-    this.ctx.successMore(items, options.page.index, options.page.size);
+    this.app.successMore(items, options.page.index, options.page.size);
   }
 }

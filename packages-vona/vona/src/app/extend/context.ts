@@ -114,15 +114,6 @@ const context: ContextBase = {
     return this[TAILCALLBACKS];
   },
 
-  successMore(list, index, size) {
-    const self = Cast<VonaContext>(this);
-    self.success({
-      list,
-      index: index + list.length,
-      finished: size === -1 || size === 0 || list.length < size,
-    });
-  },
-
   async getPayload(options) {
     const self = Cast<VonaContext>(this);
     return await raw(inflate(self.req), options);

@@ -20,7 +20,7 @@ export class ControllerMessage extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, options.page.index, options.page.size);
+    this.app.successMore(items, options.page.index, options.page.size);
   }
 
   async count() {

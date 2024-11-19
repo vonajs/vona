@@ -18,7 +18,7 @@ export class ControllerArticle extends BeanBase<ScopeModule> {
     options.page = this.ctx.bean.util.page(options.page, false);
     const items = await this.ctx.bean.atom.select({ atomClass, options, user, pageForce: false });
     // ok
-    this.ctx.successMore(items, options.page.index, options.page.size);
+    this.app.successMore(items, options.page.index, options.page.size);
   }
 
   // attachments
@@ -31,6 +31,6 @@ export class ControllerArticle extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.successMore(items, options.page.index, options.page.size);
+    this.app.successMore(items, options.page.index, options.page.size);
   }
 }

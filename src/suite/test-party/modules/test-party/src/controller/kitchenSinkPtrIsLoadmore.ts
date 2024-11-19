@@ -20,6 +20,6 @@ export class ControllerKitchenSinkPtrIsLoadmore extends BeanBase<ScopeModule> {
       });
     }
     // ok
-    this.ctx.successMore(items, page.index, page.size);
+    this.app.successMore(items, page.index, page.size);
   }
 }
