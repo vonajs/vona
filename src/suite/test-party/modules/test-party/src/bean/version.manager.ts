@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from 'vona';
 
-const fileVersionUpdates = [1, 2, 3, 4];
+const fileVersionUpdates = [1, 2, 3, 4, 5];
 const fileVersionInits = [1];
 
 @Bean({ scene: 'version' })

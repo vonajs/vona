@@ -7,13 +7,12 @@ export class VersionUpdate extends BeanBase {
 
   async _update12Migration() {
     // all instances
-    const instances = await this.ctx.bean.instance.list({ where: {} });
+    const instances = await this.ctx.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        fn: async ({ ctx }) => {
-          const selfInstance = ctx.bean._newBean(VersionUpdate);
-          await selfInstance._update12MigrationInstance();
+        fn: async () => {
+          await this._update12MigrationInstance();
         },
       });
     }
@@ -46,7 +45,7 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model.update(
       'aCmsContent',
       {
-        content: this.bean.model.raw(`replace (??,?,?)`, [
+        content: this.bean.model.raw('replace (??,?,?)', [
           'content',
           'cms-pluginblock:blockAudio',
           'a-markdownblock:audio',
@@ -61,7 +60,7 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model.update(
       'aCmsContent',
       {
-        content: this.bean.model.raw(`replace (??,?,?)`, [
+        content: this.bean.model.raw('replace (??,?,?)', [
           'content',
           'cms-pluginblock:blockIFrame',
           'a-markdownblock:iframe',
@@ -76,7 +75,7 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model.update(
       'aCmsContent',
       {
-        content: this.bean.model.raw(`replace (??,?,?)`, [
+        content: this.bean.model.raw('replace (??,?,?)', [
           'content',
           'cabloy-dashboard:blockCourse',
           'cabloy-course:blockCourseCodes',

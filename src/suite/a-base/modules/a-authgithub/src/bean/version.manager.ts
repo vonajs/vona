@@ -9,13 +9,12 @@ export class VersionManager extends BeanBase {
     }
     if (options.version === 2) {
       // all instances
-      const instances = await this.ctx.bean.instance.list({ where: {} });
+      const instances = await this.ctx.bean.instance.list();
       for (const instance of instances) {
         await this.ctx.meta.util.executeBean({
           subdomain: instance.name,
-          fn: async ({ ctx }) => {
-            const beanInstance = ctx.bean._newBean(VersionManager);
-            await beanInstance._update8AuthsInstance();
+          fn: async () => {
+            await this._update8AuthsInstance();
           },
         });
       }

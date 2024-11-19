@@ -36,7 +36,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return __cacheIntancesConfig[subdomain];
   }
 
-  async list(options) {
+  async list(options?) {
     // options
     if (!options) options = { where: null, orders: null, page: null };
     const page = this.ctx.bean.util.page(options.page, false);

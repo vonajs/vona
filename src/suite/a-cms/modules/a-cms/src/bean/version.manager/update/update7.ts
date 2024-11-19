@@ -6,14 +6,14 @@ export class VersionUpdate extends BeanBase {
     await this.bean.model
       .builder('aCmsContent')
       .update({
-        content: this.bean.model.raw(`replace (content,'cms-pluginblock:audio','cms-pluginblock:blockAudio')`),
+        content: this.bean.model.raw("replace (content,'cms-pluginblock:audio','cms-pluginblock:blockAudio')"),
       })
       .whereILike('content', '%cms-pluginblock:audio%');
 
     await this.bean.model
       .builder('aCmsContent')
       .update({
-        content: this.bean.model.raw(`replace (content,'cms-pluginblock:iframe','cms-pluginblock:blockIFrame')`),
+        content: this.bean.model.raw("replace (content,'cms-pluginblock:iframe','cms-pluginblock:blockIFrame')"),
       })
       .whereILike('content', '%cms-pluginblock:iframe%');
 
@@ -23,13 +23,12 @@ export class VersionUpdate extends BeanBase {
 
   async _update7Migration() {
     // all instances
-    const instances = await this.ctx.bean.instance.list({ where: {} });
+    const instances = await this.ctx.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        fn: async ({ ctx }) => {
-          const selfInstance = ctx.bean._newBean(VersionUpdate);
-          await selfInstance._update7MigrationInstance();
+        fn: async () => {
+          await this._update7MigrationInstance();
         },
       });
     }

@@ -4,7 +4,7 @@ import DebugInstance, { Debugger } from 'debug';
 
 const __debug_caches: any = {};
 
-@Bean({ containerScope: 'app' })
+@Bean()
 export class BeanDebug extends BeanBase {
   get instance() {
     return DebugInstance;

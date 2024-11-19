@@ -23,13 +23,12 @@ export class VersionUpdate extends BeanBase<ScopeModule> {
 
   async _adjustFlows() {
     // all instances
-    const instances = await this.ctx.bean.instance.list({ where: {} });
+    const instances = await this.ctx.bean.instance.list();
     for (const instance of instances) {
       await this.ctx.meta.util.executeBean({
         subdomain: instance.name,
-        fn: async ({ ctx }) => {
-          const selfInstance = ctx.bean._newBean(VersionUpdate);
-          await selfInstance._adjustFlowsInstance();
+        fn: async () => {
+          await this._adjustFlowsInstance();
         },
       });
     }
