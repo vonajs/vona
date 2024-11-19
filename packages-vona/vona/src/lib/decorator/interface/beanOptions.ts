@@ -60,7 +60,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   scene: TypeDecoratorBeanOptionsSceneBase;
   name: string;
   beanClass: Constructable<T>;
-  containerScope?: ContainerScope;
+  // containerScope?: ContainerScope;
   aop: boolean | undefined;
   virtual?: boolean;
   moduleBelong?: string;
