@@ -31,7 +31,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       roleAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async clone() {
@@ -41,7 +41,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       roleAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async move() {
@@ -52,7 +52,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       roleIdParent: this.ctx.request.body.data.roleIdParent,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async addChild() {
@@ -62,7 +62,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       roleAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async roleUsers() {
@@ -93,7 +93,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       userId: this.ctx.request.body.userId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async deleteUserRole() {
@@ -104,7 +104,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       userId: this.ctx.request.body.userId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async addRoleInc() {
@@ -115,7 +115,7 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       roleIdInc: this.ctx.request.body.roleIdInc,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async removeRoleInc() {
@@ -126,6 +126,6 @@ export class ControllerRole extends BeanBase<ScopeModule> {
       roleIdInc: this.ctx.request.body.roleIdInc,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

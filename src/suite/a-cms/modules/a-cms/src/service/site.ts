@@ -168,7 +168,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
     let mtimeCurrent;
     let article;
     if (file) {
-      if (!this.ctx.app.meta.isTest && !this.ctx.app.meta.isLocal) this.ctx.throw(403);
+      if (!this.ctx.app.meta.isTest && !this.ctx.app.meta.isLocal) this.app.throw(403);
       // exists
       const exists = await fse.pathExists(file);
       if (!exists) {
@@ -182,7 +182,7 @@ export class ServiceSite extends BeanBase<ScopeModule> {
       article = await this.ctx.bean.cms.render.getArticle({ key: { atomId }, inner: true });
       if (!article) this.$scope.base.error.ElementDoesNotExist.throw();
       // only author
-      if (article.userIdUpdated !== user.id) this.ctx.throw(403);
+      if (article.userIdUpdated !== user.id) this.app.throw(403);
       mtimeCurrent = article.renderAt ? article.renderAt.getTime() : 0;
     }
 

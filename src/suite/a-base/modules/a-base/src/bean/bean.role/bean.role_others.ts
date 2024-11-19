@@ -191,14 +191,14 @@ export class BeanRoleOthers extends BeanRoleIncludes {
 
   async _forceRoleAndCheckRightRead({ roleAtomId, roleId, user }: any) {
     const role = await this._forceRole({ roleAtomId, roleId });
-    if (!role) this.ctx.throw(403);
+    if (!role) this.app.throw(403);
     if (!user || user.id === 0) return role;
     // check
     const res = await this.ctx.bean.atom.checkRightRead({
       atom: { id: role!.atomId },
       user,
     });
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
     return role;
   }
 

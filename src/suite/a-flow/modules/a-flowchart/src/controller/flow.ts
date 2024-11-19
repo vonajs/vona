@@ -10,6 +10,6 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
       host,
       user,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

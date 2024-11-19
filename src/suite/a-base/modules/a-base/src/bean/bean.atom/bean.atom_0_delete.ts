@@ -22,7 +22,7 @@ export class BeanAtom0Delete extends BeanAtom0Default {
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
-    if (!atomClassBase) return this.ctx.throw(403);
+    if (!atomClassBase) return this.app.throw(403);
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
     // atom

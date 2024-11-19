@@ -11,7 +11,7 @@ export class ControllerTestFeatQueue extends BeanBase<ScopeModule> {
       data: { a: 1, b: 2 },
     });
     assert.equal(res, 3);
-    this.ctx.success();
+    this.app.success();
   }
 
   async push() {
@@ -20,6 +20,6 @@ export class ControllerTestFeatQueue extends BeanBase<ScopeModule> {
       queueName: 'queueTest',
       data: { a: 1, b: 2 },
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

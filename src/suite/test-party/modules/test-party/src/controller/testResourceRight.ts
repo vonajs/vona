@@ -5,6 +5,6 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerTestResourceRight extends BeanBase<ScopeModule> {
   async checkRightResourceUser() {
     // checked by route/middleware
-    this.ctx.success();
+    this.app.success();
   }
 }

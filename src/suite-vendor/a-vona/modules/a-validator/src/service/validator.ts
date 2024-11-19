@@ -16,7 +16,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     if (isNil(value)) return value as any;
     // check value: primitive
     if (this._isPrimitiveValue(value)) {
-      this.ctx.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
+      this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     }
     // schema
     const objectSchema = this.getSchema(classType, options);
@@ -25,10 +25,10 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     if (result.success) return result.data as any;
     // error
     if (options?.disableErrorMessages) {
-      this.ctx.throw(errorHttpStatusCode);
+      this.app.throw(errorHttpStatusCode);
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
-    this.ctx.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
+    this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
     return undefined as any;
   }
 

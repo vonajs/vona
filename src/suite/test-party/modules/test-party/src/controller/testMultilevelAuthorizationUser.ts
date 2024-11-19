@@ -72,6 +72,6 @@ export class ControllerTestMultilevelAuthorizationUser extends BeanBase<ScopeMod
     }
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

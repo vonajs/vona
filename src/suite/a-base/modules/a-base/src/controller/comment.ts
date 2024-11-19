@@ -14,7 +14,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
         options,
       },
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async list() {
@@ -34,7 +34,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(count);
+    this.app.success(count);
   }
 
   async item() {
@@ -43,7 +43,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -52,7 +52,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -61,7 +61,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async heart() {
@@ -70,6 +70,6 @@ export class ControllerComment extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

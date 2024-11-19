@@ -6,7 +6,7 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerMonkeyer extends BeanBase<ScopeModule> {
   async test() {
     const config = this.$scope.testParty.config;
-    this.ctx.success({
+    this.app.success({
       moduleName: __ThisModule__,
       monkeyed: config.monkeyed,
     });

@@ -32,6 +32,6 @@ export class ControllerTestFeatStatus extends BeanBase<ScopeModule> {
     assert.equal(value, false);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

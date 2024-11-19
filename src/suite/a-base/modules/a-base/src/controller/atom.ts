@@ -8,7 +8,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async preferredRole() {
@@ -16,7 +16,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async preferredRoleId() {
@@ -24,7 +24,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async default() {
@@ -41,7 +41,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async create() {
@@ -57,7 +57,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async atomClass() {
@@ -65,7 +65,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async read() {
@@ -75,7 +75,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   // options
@@ -98,7 +98,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(count);
+    this.app.success(count);
   }
 
   async write() {
@@ -130,7 +130,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options,
     });
     // return value: same as create
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async openDraft() {
@@ -139,7 +139,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async submit() {
@@ -150,7 +150,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -160,7 +160,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success();
+    this.app.success();
   }
 
   async deleteBulk() {
@@ -170,7 +170,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async clone() {
@@ -181,7 +181,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async enable() {
@@ -189,7 +189,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async disable() {
@@ -197,7 +197,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async exportBulk() {
@@ -207,7 +207,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       fields: this.ctx.request.body.fields,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async importBulk() {
@@ -217,7 +217,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       file: this.ctx.request.body.file,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async performAction() {
@@ -229,7 +229,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async performActionBulk() {
@@ -241,7 +241,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async star() {
@@ -250,7 +250,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atom: this.ctx.request.body.atom,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async readCount() {
@@ -259,7 +259,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atom: this.ctx.request.body.atom,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async stats() {
@@ -267,7 +267,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atomIds: this.ctx.request.body.atomIds,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async labels() {
@@ -276,7 +276,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atom: this.ctx.request.body.atom,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async actions() {
@@ -287,7 +287,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       basic: this.ctx.request.body.basic,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async actionsBulk() {
@@ -296,7 +296,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async checkRightAction() {
@@ -308,7 +308,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       user: this.ctx.state.user.op,
       checkFlow: this.ctx.request.body.checkFlow,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async schema() {
@@ -316,14 +316,14 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       schema: this.ctx.request.body.schema,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async validator() {
     const res = await this.scope.service.atom.validator({
       atomClass: this.ctx.request.body.atomClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async moveUp() {
@@ -333,7 +333,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async moveDown() {
@@ -343,7 +343,7 @@ export class ControllerAtom extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   _prepareItemForCreate() {

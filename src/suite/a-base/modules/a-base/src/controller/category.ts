@@ -15,7 +15,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       setLocale: this.ctx.request.body.setLocale,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async children() {
@@ -30,7 +30,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       setLocale: this.ctx.request.body.setLocale,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 
   async tree() {
@@ -44,7 +44,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       setLocale: this.ctx.request.body.setLocale,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 
   async add() {
@@ -55,7 +55,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       atomClass,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -65,7 +65,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
     const res = await this.scope.service.category.delete({
       categoryId: this.ctx.request.body.categoryId,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async move() {
@@ -76,7 +76,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       categoryId: this.ctx.request.body.categoryId,
       categoryIdParent: this.ctx.request.body.categoryIdParent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async item() {
@@ -85,7 +85,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       categoryId: this.ctx.request.body.categoryId,
       setLocale: this.ctx.request.body.setLocale,
     });
-    this.ctx.success(data);
+    this.app.success(data);
   }
 
   async save() {
@@ -96,7 +96,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       categoryId: this.ctx.request.body.categoryId,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async relativeTop() {
@@ -105,7 +105,7 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       categoryId: this.ctx.request.body.categoryId,
       setLocale: this.ctx.request.body.setLocale,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async parseCategoryName() {
@@ -117,6 +117,6 @@ export class ControllerCategory extends BeanBase<ScopeModule> {
       categoryIdParent: this.ctx.request.body.categoryIdParent,
       force: false,
     });
-    this.ctx.success(category);
+    this.app.success(category);
   }
 }

@@ -39,7 +39,7 @@ export class BeanAtom0Read extends BeanAtom0Import {
   }
 
   async _get({ atomClass, options, key, mode, user }: ReadParams & { mode?: string }) {
-    if (!atomClass) this.ctx.throw(403);
+    if (!atomClass) this.app.throw(403);
     if (!options) options = {};
     if (!user) user = { id: 0 };
     const resource = options.resource || 0;

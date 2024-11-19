@@ -49,7 +49,7 @@ export class ControllerTestCacheDb extends BeanBase<ScopeModule> {
     assert.equal(value, undefined);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }
 

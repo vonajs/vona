@@ -24,7 +24,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
       scope: this.ctx.request.body.scope,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -35,7 +35,7 @@ export class ControllerAtomRight extends BeanBase<ScopeModule> {
       roleRightId: this.ctx.request.body.roleRightId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async spreads() {

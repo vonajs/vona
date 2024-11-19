@@ -10,6 +10,6 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
     const res = await this.scope.service.auth.signin({
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

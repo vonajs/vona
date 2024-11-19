@@ -27,7 +27,7 @@ export class ServiceDashboard extends BeanBase<ScopeModule> {
     const atomId = atom.id;
     // check resource right
     const res = await this.ctx.bean.resource.checkRightResource({ resourceAtomId: atomId, user });
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
     // item
     return await this.item({ dashboardAtomId: atomId, user });
   }

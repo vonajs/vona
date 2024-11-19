@@ -21,7 +21,7 @@ export class ServiceRedis extends BeanBase {
   //    key: userId:path:socketId
   //    value: timestamp,workerId,scene
   async _subscribe({ path, timestamp, workerId, socketId, scene, user }: any) {
-    if (!path) this.ctx.throw(403);
+    if (!path) this.app.throw(403);
     scene = scene || '';
     const key = `${__subVersion}:${this.ctx.instance.id}:${user.id}:${path}`;
     const value = `${timestamp},${workerId},${scene}`;
@@ -31,7 +31,7 @@ export class ServiceRedis extends BeanBase {
   }
 
   async _unsubscribe({ path, timestamp, socketId, user }: any) {
-    if (!path) this.ctx.throw(403);
+    if (!path) this.app.throw(403);
     const key = `${__subVersion}:${this.ctx.instance.id}:${user.id}:${path}`;
     // check timestamp
     const value = await this.redis.hget(key, socketId);

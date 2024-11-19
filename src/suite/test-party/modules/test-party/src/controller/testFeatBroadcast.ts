@@ -10,6 +10,6 @@ export class ControllerTestFeatBroadcast extends BeanBase<ScopeModule> {
       broadcastName: 'broadcastTest',
       data: { message: 'hello' },
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

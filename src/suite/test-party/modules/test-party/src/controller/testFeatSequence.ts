@@ -64,6 +64,6 @@ export class ControllerTestFeatSequence extends BeanBase<ScopeModule> {
     await moduleSequence.reset('test');
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

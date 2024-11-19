@@ -153,7 +153,7 @@ export class BeanDict extends BeanModuleScopeBase<ScopeModule> {
     // check resource right
     if (user) {
       const res = await this.ctx.bean.resource.checkRightResource({ resourceAtomId: atomId, user });
-      if (!res) this.ctx.throw(403);
+      if (!res) this.app.throw(403);
     }
     if (!returnDict) return true;
     // read

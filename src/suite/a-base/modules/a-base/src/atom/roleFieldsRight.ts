@@ -56,7 +56,7 @@ export class AtomRoleFieldsRight extends BeanAtomBase<ScopeModule> {
     // add roleFieldsRight
     const roleAtomId = atomIdMain;
     const role = await this.ctx.bean.role._forceRole({ roleAtomId });
-    if (!role) this.ctx.throw(403);
+    if (!role) this.app.throw(403);
     data = Object.assign(data, {
       roleAtomId: atomIdMain,
       roleId: role!.id,

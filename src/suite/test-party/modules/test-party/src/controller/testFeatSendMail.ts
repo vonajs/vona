@@ -11,6 +11,6 @@ export class ControllerTestFeatSendMail extends BeanBase<ScopeModule> {
       message,
     });
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

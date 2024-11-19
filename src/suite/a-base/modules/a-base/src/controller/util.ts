@@ -7,13 +7,13 @@ export class ControllerUtil extends BeanBase<ScopeModule> {
     const res = await this.scope.service.util.performAction({
       params: JSON.parse(this.ctx.request.query.params),
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async performActions() {
     const res = await this.scope.service.util.performActions({
       actions: this.ctx.request.body.actions,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

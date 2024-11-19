@@ -49,7 +49,7 @@ export class ControllerTestCacheMem extends BeanBase<ScopeModule> {
     assert.equal(value, null);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }
 

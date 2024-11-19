@@ -32,6 +32,6 @@ export class ControllerTestFeatTag extends BeanBase<ScopeModule> {
     assert.equal(tagIds.length, 3);
 
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 }

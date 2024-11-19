@@ -11,7 +11,7 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
       flowVars: this.ctx.request.body.flowVars,
       flowUserId: this.ctx.state.user.op.id,
     });
-    this.ctx.success({
+    this.app.success({
       flowId: flowInstance.context._flowId,
     });
   }

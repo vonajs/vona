@@ -6,46 +6,46 @@ import qr from 'qr-image';
 export class ControllerBase extends BeanBase<ScopeModule> {
   modules() {
     const res = this.scope.service.base.modules();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   locales() {
     const res = this.scope.service.base.locales();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   resourceTypes() {
     const res = this.scope.service.base.resourceTypes();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async getAtomClassBase() {
     const res = await this.scope.service.base.getAtomClassBase({
       atomClass: this.ctx.request.body.atomClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   getActionsBase() {
     const res = this.scope.service.base.getActionsBase({
       atomClass: this.ctx.request.body.atomClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   atomClasses() {
     const res = this.scope.service.base.atomClasses();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   actions() {
     const res = this.scope.service.base.actions();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   themes() {
     const res = this.scope.service.base.themes();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async qrcode() {

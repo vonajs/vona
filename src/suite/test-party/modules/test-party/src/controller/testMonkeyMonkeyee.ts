@@ -5,6 +5,6 @@ import { ScopeModule } from '../.metadata/this.js';
 @Controller()
 export class ControllerTestMonkeyMonkeyee extends BeanBase<ScopeModule> {
   async test() {
-    this.ctx.success(__ThisModule__);
+    this.app.success(__ThisModule__);
   }
 }

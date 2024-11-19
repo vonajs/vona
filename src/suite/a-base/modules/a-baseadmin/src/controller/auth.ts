@@ -7,7 +7,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.auth.list();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async disable() {
@@ -17,7 +17,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
       id: this.ctx.request.body.id,
       disabled: this.ctx.request.body.disabled,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -27,6 +27,6 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
       id: this.ctx.request.body.id,
       config: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

@@ -7,13 +7,13 @@ export class ControllerSite extends BeanBase<ScopeModule> {
   async getConfigSiteBase() {
     const atomClass = this.ctx.request.body.atomClass;
     const data = await this.scope.service.site.getConfigSiteBase({ atomClass });
-    this.ctx.success({ data });
+    this.app.success({ data });
   }
 
   async getConfigSite() {
     const atomClass = this.ctx.request.body.atomClass;
     const data = await this.scope.service.site.getConfigSite({ atomClass });
-    this.ctx.success({ data });
+    this.app.success({ data });
   }
 
   async setConfigSite() {
@@ -24,7 +24,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       atomClass,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async getConfigLanguagePreview() {
@@ -33,7 +33,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       atomClass,
       language: this.ctx.request.body.language,
     });
-    this.ctx.success({ data });
+    this.app.success({ data });
   }
 
   async getConfigLanguage() {
@@ -42,7 +42,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       atomClass,
       language: this.ctx.request.body.language,
     });
-    this.ctx.success({ data });
+    this.app.success({ data });
   }
 
   async setConfigLanguage() {
@@ -54,7 +54,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       language: this.ctx.request.body.language,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async buildLanguage() {
@@ -67,7 +67,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
     const progressId = await this.ctx.bean.progress.create();
     // build
     this.scope.service.site.buildLanguageQueue({ atomClass, language, progressId });
-    this.ctx.success({ progressId });
+    this.app.success({ progressId });
   }
 
   async buildLanguages() {
@@ -79,13 +79,13 @@ export class ControllerSite extends BeanBase<ScopeModule> {
     const progressId = await this.ctx.bean.progress.create();
     // build
     this.scope.service.site.buildLanguagesQueue({ atomClass, progressId });
-    this.ctx.success({ progressId });
+    this.app.success({ progressId });
   }
 
   async getLanguages() {
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.scope.service.site.getLanguages({ atomClass });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async getUrl() {
@@ -95,7 +95,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       language: this.ctx.request.body.language,
       path: this.ctx.request.body.path,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async getStats() {
@@ -104,7 +104,7 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       atomClass,
       languages: this.ctx.request.body.languages,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async checkFile() {
@@ -114,6 +114,6 @@ export class ControllerSite extends BeanBase<ScopeModule> {
       mtime: this.ctx.request.body.mtime,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

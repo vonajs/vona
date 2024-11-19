@@ -8,7 +8,7 @@ export class ControllerSmsProvider extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.smsProvider.list();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async setCurrent() {
@@ -18,7 +18,7 @@ export class ControllerSmsProvider extends BeanBase<ScopeModule> {
       providerName: this.ctx.request.body.providerName,
     });
     const list = await this.scope.service.smsProvider.list();
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 
   async save() {
@@ -43,6 +43,6 @@ export class ControllerSmsProvider extends BeanBase<ScopeModule> {
     // ok
     const list = await this.scope.service.smsProvider.list();
     const res = list[providerName];
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

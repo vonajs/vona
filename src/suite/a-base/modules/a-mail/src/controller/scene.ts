@@ -7,7 +7,7 @@ export class ControllerScene extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.scene.list();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -35,7 +35,7 @@ export class ControllerScene extends BeanBase<ScopeModule> {
     // ok
     const list = await this.scope.service.scene.list();
     const res = list[sceneName];
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -45,7 +45,7 @@ export class ControllerScene extends BeanBase<ScopeModule> {
       sceneName: this.ctx.request.body.sceneName,
     });
     const list = await this.scope.service.scene.list();
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 
   async add() {
@@ -56,6 +56,6 @@ export class ControllerScene extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
     });
     const list = await this.scope.service.scene.list();
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 }

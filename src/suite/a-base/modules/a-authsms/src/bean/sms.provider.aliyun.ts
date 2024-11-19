@@ -8,7 +8,7 @@ export class SmsProviderAliyun extends BeanBase<ScopeModule> {
   async sendCode({ providerInstanceId, context, config }: any) {
     // get
     const providerInstance = await this.ctx.bean.captcha.getProviderInstance({ providerInstanceId });
-    if (!providerInstance) this.ctx.throw(403);
+    if (!providerInstance) this.app.throw(403);
     // token
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
     const templateParam = { code: token };

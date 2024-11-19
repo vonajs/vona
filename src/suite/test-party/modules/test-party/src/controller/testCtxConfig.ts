@@ -14,6 +14,6 @@ export class ControllerTestCtxConfig extends BeanBase<ScopeModule> {
     assert.equal(message, 'Hello World');
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

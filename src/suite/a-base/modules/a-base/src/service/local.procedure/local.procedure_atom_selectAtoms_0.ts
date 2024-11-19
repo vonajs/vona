@@ -43,7 +43,7 @@ export class LocalProcedureAtomSelectAtoms0 extends LocalProcedureAtomSelectAtom
 
     // important
     if (!atomClass) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
 
     // for safe

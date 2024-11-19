@@ -21,7 +21,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(count);
+    this.app.success(count);
   }
 
   async claim() {
@@ -29,7 +29,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async complete() {
@@ -39,7 +39,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       formAtom: this.ctx.request.body.formAtom,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async appendHandleRemark() {
@@ -48,7 +48,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async assignees() {
@@ -56,7 +56,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async assigneesConfirmation() {
@@ -65,7 +65,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async recall() {
@@ -73,7 +73,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async cancelFlow() {
@@ -82,7 +82,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async viewAtom() {
@@ -90,7 +90,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async editAtom() {
@@ -98,7 +98,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async userSelectForward() {
@@ -119,7 +119,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async forwardRecall() {
@@ -127,7 +127,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async userSelectSubstitute() {
@@ -148,7 +148,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       handle: this.ctx.request.body.handle,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async substituteRecall() {
@@ -156,7 +156,7 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async actions() {
@@ -164,6 +164,6 @@ export class ControllerFlowTask extends BeanBase<ScopeModule> {
       flowTaskId: this.ctx.request.body.flowTaskId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

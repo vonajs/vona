@@ -41,21 +41,21 @@ export class AtomUserFieldsRight extends BeanAtomBase {
     // super
     await super.create({ atomClass, item, options, user });
     // donot go here
-    this.ctx.throw(403);
+    this.app.throw(403);
   }
 
   async write({ atomClass, target, key, item, options, user }: any) {
     // super
     await super.write({ atomClass, target, key, item, options, user });
     // donot go here
-    this.ctx.throw(403);
+    this.app.throw(403);
   }
 
   async delete({ atomClass, key, options, user }: any) {
     // super
     await super.delete({ atomClass, key, options, user });
     // donot go here
-    this.ctx.throw(403);
+    this.app.throw(403);
   }
 
   _getMeta(_item, _options) {

@@ -13,7 +13,7 @@ const __rows = [
 export class ControllerTestFeatModelWhere extends BeanBase<ScopeModule> {
   async modelWhere() {
     await this._modelWhere();
-    this.ctx.success();
+    this.app.success();
   }
 
   async _modelWhere() {

@@ -7,7 +7,7 @@ export class ControllerInstance extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.instance.item();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -16,20 +16,20 @@ export class ControllerInstance extends BeanBase<ScopeModule> {
     await this.scope.service.instance.save({
       data: this.ctx.request.body.data,
     });
-    this.ctx.success();
+    this.app.success();
   }
 
   async getConfigsPreview() {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.instance.getConfigsPreview();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async reload() {
     // check demo
     this.ctx.bean.util.checkDemo();
     await this.scope.service.instance.reload();
-    this.ctx.success();
+    this.app.success();
   }
 }

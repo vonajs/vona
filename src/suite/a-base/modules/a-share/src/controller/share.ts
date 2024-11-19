@@ -10,7 +10,7 @@ export class ControllerShare extends BeanBase<ScopeModule> {
       url: this.ctx.request.body.url,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async shareGo() {

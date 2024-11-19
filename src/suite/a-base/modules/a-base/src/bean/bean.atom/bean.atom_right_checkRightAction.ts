@@ -29,7 +29,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       // need not check createDelay
       //  createDelay is just a ui behavior at front
       // const createDelay = this.ctx.bean.atomAction.getCreateDelay({ atomClass });
-      // if (!createDelay) this.ctx.throw(403);
+      // if (!createDelay) this.app.throw(403);
       // check if create
       return await this.self.checkRightActionBulk({
         atomClass,
@@ -39,7 +39,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
       });
     }
     // others
-    if (!atom) this.ctx.throw(403);
+    if (!atom) this.app.throw(403);
     // inner
     return await this._checkRightAction_inner({
       atom,

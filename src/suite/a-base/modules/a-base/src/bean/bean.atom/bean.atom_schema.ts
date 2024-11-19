@@ -50,7 +50,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     });
     if (!res) {
       // return null;
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     return res;
   }
@@ -65,7 +65,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     });
     if (!res) {
       // return null;
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     return res;
   }
@@ -80,7 +80,7 @@ export class BeanAtomSchema extends BeanAtomLineNo {
     });
     if (!res) {
       // return null;
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     return res;
   }

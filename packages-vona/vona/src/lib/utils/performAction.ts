@@ -97,12 +97,12 @@ export default async function performAction({
       if (ctx.body.code === 0) {
         return ctx.body.data;
       }
-      throw ctx.createError(ctx.body);
+      throw ctx.app.meta.util.createError(ctx.body);
     } else {
       if (ctx.body && typeof ctx.body === 'object') {
-        throw ctx.createError(ctx.body);
+        throw ctx.app.meta.util.createError(ctx.body);
       } else {
-        throw ctx.createError({
+        throw ctx.app.meta.util.createError({
           code: ctx.status,
           message: ctx.message,
         });

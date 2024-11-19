@@ -38,7 +38,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
     // verify
     const verifyUser = await this.ctx.bean.user.verify({ state, profileUser });
-    if (!verifyUser) this.ctx.throw(403);
+    if (!verifyUser) this.app.throw(403);
 
     // userId
     const userId = verifyUser.agent.id;
@@ -97,7 +97,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     const profileUser = await this.ensureAuthUser({ beanProvider, data });
     // verifyUser
     const verifyUser = await this.ctx.bean.user.verify({ state, profileUser });
-    if (!verifyUser) this.ctx.throw(403);
+    if (!verifyUser) this.app.throw(403);
     // login
     await this.ctx.bean.auth.login(verifyUser);
     // ok
@@ -149,7 +149,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     } else {
       // verify old one
       const authSimple = await this.localSimple.verify({ userId, password: passwordOld });
-      if (!authSimple) this.ctx.throw(403);
+      if (!authSimple) this.app.throw(403);
       authSimpleId = Cast(authSimple).id;
     }
 
@@ -170,7 +170,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
 
     // verify
     const verifyUser = await this.ctx.bean.user.verify({ state: 'associate', profileUser });
-    if (!verifyUser) this.ctx.throw(403);
+    if (!verifyUser) this.app.throw(403);
 
     // force kickout all login records
     await this.ctx.bean.userOnline.kickOut({ user: { id: userId } });

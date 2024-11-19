@@ -21,7 +21,7 @@ export class MiddlewareAuthOpen extends BeanBase {
     const onlyAuthOpen = options.onlyAuthOpen;
     if (onlyAuthOpen) enableAuthOpen = true;
     // check
-    if (isAuthOpen && !enableAuthOpen) this.ctx.throw(403);
-    if (!isAuthOpen && onlyAuthOpen) this.ctx.throw(403);
+    if (isAuthOpen && !enableAuthOpen) this.app.throw(403);
+    if (!isAuthOpen && onlyAuthOpen) this.app.throw(403);
   }
 }

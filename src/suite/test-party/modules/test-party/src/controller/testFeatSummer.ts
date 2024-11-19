@@ -107,6 +107,6 @@ export class ControllerTestFeatSummer extends BeanBase<ScopeModule> {
     assert.equal(value, undefined);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

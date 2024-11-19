@@ -22,7 +22,7 @@ export class BeanAtomLineNo extends BeanAtomRightDetailRightInherit {
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
-    if (!atomClassBase) this.ctx.throw(403);
+    if (!atomClassBase) this.app.throw(403);
     atomClassBase = atomClassBase!;
     // model
     const modelItem = this.getScope(atomClass.module).model[atomClassBase.model];

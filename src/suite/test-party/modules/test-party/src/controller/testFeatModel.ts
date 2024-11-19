@@ -112,6 +112,6 @@ export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
     assert.equal(count.toNumber(), 0);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

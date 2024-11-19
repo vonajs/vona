@@ -9,7 +9,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
-    if (!atomClassBase) this.ctx.throw(403);
+    if (!atomClassBase) this.app.throw(403);
     atomClassBase = atomClassBase!;
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase.beanFullName as any);
@@ -59,7 +59,7 @@ export class BeanAtomDraft extends BeanAtomClone {
       atomClass: atomClassOuter,
       options: optionsOuter,
     });
-    if (!atomClassBase) this.ctx.throw(403);
+    if (!atomClassBase) this.app.throw(403);
     // check itemOnly
     if (atomClassBase!.itemOnly) {
       atom.atomId = atom.id;

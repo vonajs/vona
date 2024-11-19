@@ -7,7 +7,7 @@ export class ControllerAtomClass extends BeanBase<ScopeModule> {
     const res = await this.scope.service.atomClass.validatorSearch({
       atomClass: this.ctx.request.body.atomClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async checkRightCreate() {
@@ -15,21 +15,21 @@ export class ControllerAtomClass extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async atomClass() {
     const res = await this.scope.service.atomClass.atomClass({
       atomClass: this.ctx.request.body.atomClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async atomClassesUser() {
     const res = await this.scope.service.atomClass.atomClassesUser({
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async actionsUser() {
@@ -37,6 +37,6 @@ export class ControllerAtomClass extends BeanBase<ScopeModule> {
       atomClass: this.ctx.request.body.atomClass,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

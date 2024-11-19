@@ -18,7 +18,7 @@ function checkIfSuccess(ctx) {
     }
   } else {
     if (ctx.response.status !== 200) {
-      ctx.throw(ctx.response.status);
+      ctx.app.throw(ctx.response.status);
     }
   }
 }

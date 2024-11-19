@@ -18,7 +18,7 @@ export class ServiceAuth extends BeanBase {
 
     // verify
     const verifyUser = await this.ctx.bean.user.verify({ state, profileUser });
-    if (!verifyUser) this.ctx.throw(403);
+    if (!verifyUser) this.app.throw(403);
 
     // userId
     const userId = verifyUser.agent.id;

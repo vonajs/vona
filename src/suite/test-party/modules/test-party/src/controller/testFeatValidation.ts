@@ -4,14 +4,14 @@ import { ScopeModule } from '../.metadata/this.js';
 @Controller()
 export class ControllerTestFeatValidation extends BeanBase<ScopeModule> {
   async success() {
-    this.ctx.success();
+    this.app.success();
   }
 
   async fail() {
-    this.ctx.success();
+    this.app.success();
   }
 
   async schema() {
-    this.ctx.success();
+    this.app.success();
   }
 }

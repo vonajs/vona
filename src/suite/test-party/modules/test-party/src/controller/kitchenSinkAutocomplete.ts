@@ -14,6 +14,6 @@ export class ControllerKitchenSinkAutocomplete extends BeanBase<ScopeModule> {
         return item.name.toLowerCase().indexOf(query.toLowerCase()) === 0;
       });
     }
-    this.ctx.success(data);
+    this.app.success(data);
   }
 }

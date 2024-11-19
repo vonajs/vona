@@ -21,7 +21,7 @@ export class ControllerResourceRight extends BeanBase<ScopeModule> {
       atomIds: this.ctx.request.body.atomIds,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -32,7 +32,7 @@ export class ControllerResourceRight extends BeanBase<ScopeModule> {
       atomId: this.ctx.request.body.atomId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async spreads() {

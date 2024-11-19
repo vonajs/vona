@@ -32,7 +32,7 @@ export class BeanAtomRightAuxRoleScopesMineOfUser extends BeanAtomRightAuxRoleSc
     if (!enableRight) {
       // if pass right checked, should check enableRight outer
       // throw error
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     const enableRightMine = enableRight!.mine;
     if (!enableRightMine) return false;

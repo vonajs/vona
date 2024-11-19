@@ -44,7 +44,7 @@ export class BeanProgress extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async create(options?) {
-    if (!this.ctx.state.user || !this.ctx.state.user.op) return this.ctx.throw(403);
+    if (!this.ctx.state.user || !this.ctx.state.user.op) return this.app.throw(403);
     let progressId = options && options.progressId;
     // create
     if (!progressId) {
@@ -52,7 +52,7 @@ export class BeanProgress extends BeanModuleScopeBase<ScopeModule> {
     } else {
       // check if exists
       const item = await this._getRedisValue({ progressId });
-      if (item) return this.ctx.throw(403);
+      if (item) return this.app.throw(403);
     }
     // redis
     await this._setRedisValue({

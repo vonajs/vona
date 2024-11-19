@@ -9,7 +9,7 @@ export class ControllerMessage extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async select() {
@@ -30,7 +30,7 @@ export class ControllerMessage extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(count);
+    this.app.success(count);
   }
 
   async setRead() {
@@ -40,7 +40,7 @@ export class ControllerMessage extends BeanBase<ScopeModule> {
       all: this.ctx.request.body.all,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -48,6 +48,6 @@ export class ControllerMessage extends BeanBase<ScopeModule> {
       messageIds: this.ctx.request.body.messageIds,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

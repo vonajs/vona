@@ -59,7 +59,7 @@ export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
     const key = utils.getCacheKey({ ctx: this.ctx, providerInstanceId });
     // get
     const providerInstance = await this.getProviderInstance({ providerInstanceId });
-    if (!providerInstance) this.ctx.throw(403);
+    if (!providerInstance) this.app.throw(403);
     // provider
     const provider = await this.getProvider({
       module: providerInstance.module,
@@ -76,9 +76,9 @@ export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
     const key = utils.getCacheKey({ ctx: this.ctx, providerInstanceId });
     // get
     const providerInstance = await this.getProviderInstance({ providerInstanceId });
-    if (!providerInstance) this.ctx.throw(403);
+    if (!providerInstance) this.app.throw(403);
     // check if the same scene
-    if (module !== providerInstance.module || sceneName !== providerInstance.sceneName) this.ctx.throw(403);
+    if (module !== providerInstance.module || sceneName !== providerInstance.sceneName) this.app.throw(403);
     // provider
     const provider = await this.getProvider({
       module: providerInstance.module,

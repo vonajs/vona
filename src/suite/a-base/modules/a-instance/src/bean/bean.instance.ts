@@ -53,7 +53,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   }
 
   async get(subdomain: string) {
-    if (isNil(subdomain)) this.ctx.throw(403);
+    if (isNil(subdomain)) this.app.throw(403);
     return await this._get(subdomain);
   }
 
@@ -153,7 +153,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   async _cacheInstanceConfig(subdomain: string, force: boolean) {
     if (__cacheIntancesConfig[subdomain] && !force) return;
     let instance = await this.get(subdomain);
-    if (!instance) this.ctx.throw(403);
+    if (!instance) this.app.throw(403);
     instance = instance!;
     // config
     const instanceConfig = JSON.parse(instance.config);
@@ -215,13 +215,13 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       message += `\nMore info: ${chalk.keyword('cyan')(urlInfo)}`;
       console.log('\n' + boxen(message, boxenOptions));
       // }
-      return this.ctx.throw(423); // not this.ctx.fail(423)
+      return this.app.throw(423); // not this.ctx.fail(423)
     }
     // check if disabled
     if (instance.disabled) {
       // locked
       console.log('instance disabled: ', this.ctx.subdomain);
-      return this.ctx.throw(423); // not this.ctx.fail(423)
+      return this.app.throw(423); // not this.ctx.fail(423)
     }
 
     // check instance startup ready

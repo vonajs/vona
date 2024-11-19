@@ -12,7 +12,7 @@ export class ConnectionIo extends BeanBase implements IConnectionExecute {
     // cache userId/socketId for disconnect
     const user = this.ctx.state.user && this.ctx.state.user.op;
     if (!user || user.anonymous) {
-      // return this.ctx.throw(401);
+      // return this.app.throw(401);
       this.ctx.socket.emit('message-system', { code: 401, message: 'logout', type: 'self' });
       return;
     }

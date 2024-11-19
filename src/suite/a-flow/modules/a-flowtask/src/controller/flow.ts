@@ -9,6 +9,6 @@ export class ControllerFlow extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

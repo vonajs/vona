@@ -42,6 +42,6 @@ export class ControllerTestFeatSettings extends BeanBase<ScopeModule> {
     assert.equal(data, 'Less is more, while more is less');
 
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 }

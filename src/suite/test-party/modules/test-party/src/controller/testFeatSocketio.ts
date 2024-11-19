@@ -20,7 +20,7 @@ export class ControllerTestFeatSocketio extends BeanBase<ScopeModule> {
       options,
     });
     // done
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async simpleChat() {
@@ -39,7 +39,7 @@ export class ControllerTestFeatSocketio extends BeanBase<ScopeModule> {
       options,
     });
     // done
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async _collectUserIds() {

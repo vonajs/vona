@@ -9,6 +9,6 @@ export class ControllerTools extends BeanBase<ScopeModule> {
       query: this.ctx.query,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(result);
+    this.app.success(result);
   }
 }

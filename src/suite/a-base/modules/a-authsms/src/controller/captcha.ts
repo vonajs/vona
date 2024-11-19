@@ -8,6 +8,6 @@ export class ControllerCaptcha extends BeanBase<ScopeModule> {
       providerInstanceId: this.ctx.request.body.providerInstanceId,
       context: this.ctx.request.body.context,
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

@@ -32,7 +32,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
       // if simple, just return formal, so as for compatible with not simple
       return { formal: { key } };
     }
-    if (!atomClassBase) this.ctx.throw(403);
+    if (!atomClassBase) this.app.throw(403);
     // atom bean
     const beanInstance: BeanAtomBase = this.ctx.bean._getBean(atomClassBase!.beanFullName as any);
     return await beanInstance.submit({ atomClass, key, options, user });
@@ -138,7 +138,7 @@ export class BeanAtomSubmit extends BeanAtomSimple {
     }
     // get formal atom
     const atomFormal = (await this.modelAtom.get({ id: keyFormal.atomId })) as EntityAtomPro;
-    if (!atomFormal) this.ctx.throw(403);
+    if (!atomFormal) this.app.throw(403);
     atomFormal.atomId = atomFormal.id;
     atomFormal.module = atomClass.module;
     atomFormal.atomClassName = atomClass.atomClassName;

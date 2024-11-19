@@ -112,7 +112,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       }
     }
     // check user
-    if (checkUser && this.ctx.state.user.op.anonymous) this.ctx.throw(401);
+    if (checkUser && this.ctx.state.user.op.anonymous) this.app.throw(401);
   }
 
   async _check_getStateUser({ ctxUser }: any) {
@@ -125,7 +125,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
     // deleted
     if (!userOp) {
       // this.scope.error.UserDoesNotExist.throw();
-      this.ctx.throw(401);
+      this.app.throw(401);
     }
     // disabled
     if (userOp!.disabled) this.scope.error.UserIsDisabled.throw();
@@ -137,7 +137,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       userAgent = await this.agent({ userId: ctxUser.op.id });
       if (!userAgent) {
         // this.scope.error.AgentUserDoesNotExist.throw();
-        this.ctx.throw(401);
+        this.app.throw(401);
       }
       if (userAgent.id !== ctxUser.agent.id) this.scope.error.AgentUserDoesNotExist.throw();
       if (userAgent.disabled) this.scope.error.UserIsDisabled.throw();
@@ -258,7 +258,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   async switchAgent({ userIdAgent }: any) {
     const op = this.ctx.user.op;
     let _user = await this.self.get({ id: userIdAgent });
-    if (!_user) this.ctx.throw(403);
+    if (!_user) this.app.throw(403);
     _user = _user!;
     this.ctx.user.op = { id: _user.id, iid: _user.iid, anonymous: _user.anonymous };
     try {

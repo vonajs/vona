@@ -5,23 +5,23 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
   async echo() {
     const message = 'Hello World';
-    this.ctx.success(message);
+    this.app.success(message);
   }
 
   async echo2() {
     const message = this.scope.config.message;
-    this.ctx.success(message);
+    this.app.success(message);
   }
 
   async echo3() {
     const message = this.scope.locale['Hello World']();
-    this.ctx.success(message);
+    this.app.success(message);
   }
 
   async echo4() {
     const { message, markCount } = this.ctx.request.body;
     const res = `${message}${new Array(markCount + 1).join('!')}`;
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async echo6() {
@@ -48,7 +48,7 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
       id,
     });
     // ok
-    this.ctx.success(item);
+    this.app.success(item);
   }
 
   async echo7() {
@@ -64,7 +64,7 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // delete
     await this.scope.model.party.delete({ id });
     // ok
-    this.ctx.success(item);
+    this.app.success(item);
   }
 
   async echo8() {
@@ -76,12 +76,12 @@ export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
     // will throw error
     await this.scope.model.party.update({ id, personCountA: 6 });
     // never here
-    this.ctx.success();
+    this.app.success();
   }
 
   async echo9() {
     // Menu Authorization
     // ok
-    this.ctx.success('ok');
+    this.app.success('ok');
   }
 }

@@ -184,6 +184,6 @@ export class CtxUtil extends BeanSimple {
       const beanOptions = appResource.getBean(metadata.controller);
       message = `${message}: ${this.ctx.text('ValidationFailedDev', beanOptions?.beanFullName, metadata.method, metadata.index)}`;
     }
-    this.ctx.throw(code, message);
+    this.app.throw(code, message);
   }
 }

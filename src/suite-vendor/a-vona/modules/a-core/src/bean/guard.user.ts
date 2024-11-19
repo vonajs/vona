@@ -13,7 +13,7 @@ export class GuardUser extends BeanBase implements IGuardExecute {
       const user = this.ctx.state.user?.op;
       if (!user || (user.id !== 0 && user.anonymous)) {
         //return false;
-        return this.ctx.throw(401);
+        return this.app.throw(401);
       }
     }
     // next

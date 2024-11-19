@@ -90,7 +90,7 @@ export class BeanCli extends BeanBase {
       atomStaticKey: command.resource.atomStaticKey,
       user,
     });
-    if (!right) this.ctx.throw(403);
+    if (!right) this.app.throw(403);
     return command;
   }
 

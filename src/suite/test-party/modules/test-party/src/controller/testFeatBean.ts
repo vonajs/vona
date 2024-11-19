@@ -61,7 +61,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, '__magicSelf__');
 
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 
   async serviceTest() {
@@ -86,6 +86,6 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, 'serviceTest');
 
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 }

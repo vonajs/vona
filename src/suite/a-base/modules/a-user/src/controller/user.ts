@@ -8,7 +8,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async saveAvatar() {
@@ -16,7 +16,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async saveLocale() {
@@ -26,7 +26,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async changeUserName() {
@@ -36,22 +36,22 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async agent() {
     const res = await this.scope.service.user.agent({ userId: this.ctx.state.user.agent.id });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async agentsBy() {
     const res = await this.scope.service.user.agentsBy({ userId: this.ctx.state.user.agent.id });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async userByMobile() {
     const res = await this.scope.service.user.userByMobile({ mobile: this.ctx.request.body.mobile });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async addAgent() {
@@ -61,7 +61,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       userIdAgent: this.ctx.request.body.userIdAgent,
       userId: this.ctx.state.user.agent.id,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async removeAgent() {
@@ -71,7 +71,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       userIdAgent: this.ctx.request.body.userIdAgent,
       userId: this.ctx.state.user.agent.id,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async switchAgent() {
@@ -80,21 +80,21 @@ export class ControllerUser extends BeanBase<ScopeModule> {
     const res = await this.scope.service.user.switchAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async switchOffAgent() {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.user.switchOffAgent();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async authentications() {
     const res = await this.scope.service.user.authentications({
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async authenticationDisable() {
@@ -104,7 +104,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       authId: this.ctx.request.body.authId,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async themeLoad() {
@@ -112,7 +112,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       appKey: this.ctx.request.body.appKey,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async themeSave() {
@@ -121,6 +121,6 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       theme: this.ctx.request.body.theme,
       user: this.ctx.state.user.agent,
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

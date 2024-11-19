@@ -26,7 +26,7 @@ export class BeanAtomRightDetailRightInherit extends BeanAtomRightCheckRightFrom
       return true;
     }
     // atomIdMain should exists, so throw error better than return false
-    if (!atomIdMain) this.ctx.throw(403);
+    if (!atomIdMain) this.app.throw(403);
     // check
     const rightInheritStage = actionBase.rightInheritStage;
     return await this._checkDetailRightInherit_checkRightInherit({

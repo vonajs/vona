@@ -40,6 +40,6 @@ export class ControllerTestRoleUserRole extends BeanBase<ScopeModule> {
     assert.equal(res, true);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

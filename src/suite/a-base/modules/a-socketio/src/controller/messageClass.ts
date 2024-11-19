@@ -7,6 +7,6 @@ export class ControllerMessageClass extends BeanBase<ScopeModule> {
     const res = await this.scope.service.messageClass.messageClass({
       messageClass: this.ctx.request.body.messageClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

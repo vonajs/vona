@@ -7,11 +7,11 @@ export class MiddlewareRightResource extends MiddlewareRightAtomClass {
     if (options.useKey) {
       const resourceAtomId = this.ctx.request.body.key.atomId;
       const res = await this._checkResource({ resourceAtomId });
-      if (!res) this.ctx.throw(403);
+      if (!res) this.app.throw(403);
       return;
     }
     // atomStaticKey/name
-    if (!options.atomStaticKey && !options.name) this.ctx.throw(403);
+    if (!options.atomStaticKey && !options.name) this.app.throw(403);
     let atomStaticKeys = options.atomStaticKey;
     if (!atomStaticKeys && options.name) {
       const names = options.name.split(',');
@@ -27,7 +27,7 @@ export class MiddlewareRightResource extends MiddlewareRightAtomClass {
       res = await this._checkResource({ atomStaticKey });
       if (res) break; // ok when any passed
     }
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
   }
 
   async _checkResource({ resourceAtomId, atomStaticKey }: any) {

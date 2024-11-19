@@ -11,7 +11,7 @@ export class ControllerTestCtxLocale extends BeanBase<ScopeModule> {
     };
 
     // done
-    this.ctx.success(data);
+    this.app.success(data);
   }
 
   async zhcn() {
@@ -22,6 +22,6 @@ export class ControllerTestCtxLocale extends BeanBase<ScopeModule> {
     };
 
     // done
-    this.ctx.success(data);
+    this.app.success(data);
   }
 }

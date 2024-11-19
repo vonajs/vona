@@ -7,6 +7,6 @@ export class ControllerAtomState extends BeanBase<ScopeModule> {
     const res = await this.scope.service.atomState.getDictDynamic({
       atomClass: this.ctx.request.body.atomClass,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

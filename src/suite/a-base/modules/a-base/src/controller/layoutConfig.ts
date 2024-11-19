@@ -8,7 +8,7 @@ export class ControllerLayoutConfig extends BeanBase<ScopeModule> {
       module: this.ctx.request.body.module,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -17,7 +17,7 @@ export class ControllerLayoutConfig extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async saveKey() {
@@ -27,6 +27,6 @@ export class ControllerLayoutConfig extends BeanBase<ScopeModule> {
       value: this.ctx.request.body.value,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

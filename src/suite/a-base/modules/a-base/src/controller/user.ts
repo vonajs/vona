@@ -7,7 +7,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
     const res = await this.scope.service.user.getLabels({
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async setLabels() {
@@ -15,6 +15,6 @@ export class ControllerUser extends BeanBase<ScopeModule> {
       labels: this.ctx.request.body.labels,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

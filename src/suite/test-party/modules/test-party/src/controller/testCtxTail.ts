@@ -22,6 +22,6 @@ export class ControllerTestCtxTail extends BeanBase<ScopeModule> {
     Cast(this.ctx.meta)._tail_test = 2;
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

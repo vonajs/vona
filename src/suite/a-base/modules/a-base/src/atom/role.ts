@@ -60,7 +60,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
         action: 'addChild',
         user,
       });
-      if (!addChildRight) this.ctx.throw(403);
+      if (!addChildRight) this.app.throw(403);
     }
     // super
     let data = await super.create({ atomClass, item, options, user });
@@ -131,7 +131,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
     const roleIdParent = role.roleIdParent;
 
     // check if system
-    if (role.system) this.ctx.throw(403);
+    if (role.system) this.app.throw(403);
     // check if children
     if (role.catalog && !force) {
       const children = await this.beanRole.children({ roleId });
@@ -184,7 +184,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
     if (![4, 5, 101, 102, 103, 104, 105, 106, 107].includes(action)) return res;
     // role
     let role = await this.model.get({ id: atom.itemId });
-    if (!role) this.ctx.throw(403);
+    if (!role) this.app.throw(403);
     role = role!;
     // delete
     if (action === 4) {

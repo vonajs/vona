@@ -10,7 +10,7 @@ export class ControllerAuthOpen extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async resetClientSecret() {
@@ -20,6 +20,6 @@ export class ControllerAuthOpen extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

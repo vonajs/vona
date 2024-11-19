@@ -9,7 +9,7 @@ export class ControllerProgress extends BeanBase<ScopeModule> {
       counter: this.ctx.request.body.counter,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async abort() {
@@ -17,7 +17,7 @@ export class ControllerProgress extends BeanBase<ScopeModule> {
       progressId: this.ctx.request.body.progressId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success();
+    this.app.success();
   }
 
   async delete() {
@@ -25,6 +25,6 @@ export class ControllerProgress extends BeanBase<ScopeModule> {
       progressId: this.ctx.request.body.progressId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

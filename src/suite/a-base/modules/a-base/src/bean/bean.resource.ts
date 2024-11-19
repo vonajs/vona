@@ -104,7 +104,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     const atomId = atom.id;
     // check resource right
     const res = await this.checkRightResource({ resourceAtomId: atomId, user });
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
     // read
     return await this.read({ key: { atomId }, options, user });
   }
@@ -512,7 +512,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     if (!user || user.id === 0) return atomId;
     // check
     const res = await this.checkRightResource({ resourceAtomId: atomId, user });
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
     return atomId;
   }
 

@@ -5,7 +5,7 @@ export class ServiceFlow extends BeanBase {
   async flowChartProcess({ host, user }: any) {
     // check right
     const flowChartProcess = await this.__checkRightFlowChartProcess({ host, user });
-    if (!flowChartProcess) this.ctx.throw(403);
+    if (!flowChartProcess) this.app.throw(403);
     // filter options / locale
     if (flowChartProcess.nodes) {
       flowChartProcess.nodes = flowChartProcess.nodes.map(node => {

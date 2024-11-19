@@ -16,7 +16,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
     const timeEnd = new Date().getTime() / 1000;
     console.log(`-----all time used: ${timeEnd - timeStart}s`);
     // done
-    this.ctx.success();
+    this.app.success();
   }
   async __all() {
     // atomClass

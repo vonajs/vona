@@ -5,8 +5,8 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerTest extends BeanBase<ScopeModule> {
   async echo() {
     const echo = this.ctx.request.body.echo;
-    // this.ctx.throw(403);
-    this.ctx.success({
+    // this.app.throw(403);
+    this.app.success({
       echo,
       query: this.ctx.request.query,
     });

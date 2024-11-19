@@ -40,7 +40,7 @@ export class ControllerTestFeatStats extends BeanBase<ScopeModule> {
     assert.equal(value, 1);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 
   async plus() {
@@ -48,6 +48,6 @@ export class ControllerTestFeatStats extends BeanBase<ScopeModule> {
       name: 'tasksUser',
       nameSub: 'department.project',
     });
-    this.ctx.success();
+    this.app.success();
   }
 }

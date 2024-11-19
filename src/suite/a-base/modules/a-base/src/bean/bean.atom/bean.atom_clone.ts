@@ -22,7 +22,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       roleIdOwner,
       user,
     });
-    if (!atomClassBase) this.ctx.throw(403);
+    if (!atomClassBase) this.app.throw(403);
     // ok
     // get atom
     const atom = await this.self.read({ key: keyDraft, atomClass, options, user });

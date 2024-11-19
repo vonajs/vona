@@ -31,7 +31,7 @@ export class ControllerFile extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -39,14 +39,14 @@ export class ControllerFile extends BeanBase<ScopeModule> {
       fileId: this.ctx.request.body.fileId || this.ctx.request.body.data.fileId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async upload() {
     const res = await this.scope.service.file.upload({
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async uploadDataUrl() {
@@ -54,7 +54,7 @@ export class ControllerFile extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async download() {

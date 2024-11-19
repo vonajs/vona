@@ -24,6 +24,6 @@ export class ControllerTestCtxTransaction extends BeanBase<ScopeModule> {
       user,
     });
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

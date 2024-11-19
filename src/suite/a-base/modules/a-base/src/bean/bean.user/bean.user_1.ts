@@ -110,7 +110,7 @@ export class BeanUser1 extends BeanUser0 {
     // check allowChangeUserName
     const item = await this.get({ id: user.id });
     if (!item) return;
-    if (item.allowChangeUserName === 0) this.ctx.throw(403);
+    if (item.allowChangeUserName === 0) this.app.throw(403);
     // change
     user = {
       ...user,
@@ -234,14 +234,14 @@ export class BeanUser1 extends BeanUser0 {
 
   async _forceUserAndCheckRightRead({ userAtomId, userId, user }: any) {
     const _user = await this._forceUser({ userAtomId, userId });
-    if (!_user) this.ctx.throw(403);
+    if (!_user) this.app.throw(403);
     if (!user || user.id === 0) return _user;
     // check
     const res = await this.ctx.bean.atom.checkRightRead({
       atom: { id: _user!.atomId },
       user,
     });
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
     return _user;
   }
 }

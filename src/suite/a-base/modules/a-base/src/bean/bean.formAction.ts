@@ -16,13 +16,13 @@ export class BeanFormAction extends BeanBase {
     const formModeRead = formMode === 'view' || formMode === 'read';
     if (!modeRead && formModeRead) {
       // no right
-      if (throwError) this.ctx.throw(403);
+      if (throwError) this.app.throw(403);
       return null;
     }
     // fieldsRight
     const fieldsRight = actionBase.params?.form?.fieldsRight;
     if (!fieldsRight) {
-      if (throwError) this.ctx.throw(403);
+      if (throwError) this.app.throw(403);
       return null;
     }
     // ok

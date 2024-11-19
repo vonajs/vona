@@ -39,7 +39,7 @@ export class ServiceRender extends BeanBase {
     // if (!article.atomLanguage) {
     //   article.atomLanguage = this.ctx.locale;
     //   // return null;
-    //   // this.ctx.throw(1001);
+    //   // this.app.throw(1001);
     // }
     return article;
   }

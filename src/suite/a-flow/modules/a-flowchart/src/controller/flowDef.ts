@@ -11,7 +11,7 @@ export class ControllerFlowDef extends BeanBase<ScopeModule> {
       assignees,
       user,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async userSelect() {

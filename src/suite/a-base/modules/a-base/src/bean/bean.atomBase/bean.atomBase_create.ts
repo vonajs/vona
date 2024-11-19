@@ -172,7 +172,7 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     if (options.preferredRole) {
       roleId = await this.ctx.bean.atom.preferredRoleId({ atomClass, user, disableAuthOpenCheck: true });
       if (!roleId) {
-        this.ctx.throw(403);
+        this.app.throw(403);
       }
     } else {
       const roleName = 'authenticated.builtIn';

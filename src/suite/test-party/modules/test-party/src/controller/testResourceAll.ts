@@ -58,6 +58,6 @@ export class ControllerTestResourceAll extends BeanBase<ScopeModule> {
     assert.equal(!!item.atomNameLocale, true);
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

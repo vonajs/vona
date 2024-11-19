@@ -8,6 +8,6 @@ export class ControllerDict extends BeanBase<ScopeModule> {
       dictKey: this.ctx.request.body.dictKey,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

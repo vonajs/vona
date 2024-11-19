@@ -15,7 +15,7 @@ export class ControllerTestCtxRequest extends BeanBase<ScopeModule> {
     assert.equal(this.ctx.request.body.userName, 'zhennann');
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 
   async requestXML() {

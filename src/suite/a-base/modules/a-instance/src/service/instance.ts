@@ -26,7 +26,7 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
 
   async getConfigsPreview() {
     let instance = await this.item();
-    if (!instance) this.ctx.throw(403);
+    if (!instance) this.app.throw(403);
     instance = instance!;
     let configPreview = this.ctx.bean.util.extend({}, this.app.config.modules, JSON.parse(instance.config));
     configPreview = this.__configBlackFields(configPreview);

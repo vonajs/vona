@@ -8,7 +8,7 @@ export class ControllerCli extends BeanBase<ScopeModule> {
       context: this.ctx.request.body.context,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async execute() {
@@ -17,6 +17,6 @@ export class ControllerCli extends BeanBase<ScopeModule> {
       context: this.ctx.request.body.context,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

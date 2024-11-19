@@ -5,6 +5,6 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerIcon extends BeanBase<ScopeModule> {
   getIcons() {
     const res = this.scope.service.icon.getIcons();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

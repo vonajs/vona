@@ -7,6 +7,6 @@ export class ControllerJwt extends BeanBase<ScopeModule> {
     const res = await this.scope.service.jwt.create({
       scene: this.ctx.request.body.scene,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

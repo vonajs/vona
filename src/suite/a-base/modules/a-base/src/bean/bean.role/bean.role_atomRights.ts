@@ -14,12 +14,12 @@ export class BeanRoleAtomRights extends BeanRoleBase {
       action,
       user,
     });
-    if (!_check) this.ctx.throw(403);
+    if (!_check) this.app.throw(403);
     // check role right
     if (roleRightId) {
       // update
       const item = await this.modelRoleRight.get({ id: roleRightId });
-      if (!item) this.ctx.throw(403);
+      if (!item) this.app.throw(403);
       roleAtomId = item!.roleAtomId;
       roleId = item!.roleId; // maybe empty when create
     }

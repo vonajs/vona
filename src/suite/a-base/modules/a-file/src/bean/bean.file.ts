@@ -60,7 +60,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
           user,
           checkFlow: true,
         });
-        if (!res) this.ctx.throw(403);
+        if (!res) this.app.throw(403);
       }
       options.where.atomId = atomId; // add where
     } else {
@@ -104,7 +104,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   async delete({ downloadId, fileId, user }: any) {
     // file
     const file = await this.getFile({ downloadId, fileId });
-    if (!file) this.ctx.throw(404);
+    if (!file) this.app.throw(404);
     // check right
     if (user && user.id) {
       await this.fileUpdateCheck({ file, user });
@@ -294,13 +294,13 @@ export class BeanFile extends BeanBase<ScopeModule> {
 
   async download({ downloadId, atomId, width, height, user }: any) {
     // downloadId
-    if (!downloadId) this.ctx.throw(404);
+    if (!downloadId) this.app.throw(404);
     const extPos = downloadId.indexOf('.');
     if (extPos > -1) downloadId = downloadId.substr(0, extPos);
 
     // get file
     let file = await this._getFileByDownloadId({ downloadId, atomId });
-    if (!file) this.ctx.throw(404);
+    if (!file) this.app.throw(404);
     file = file!;
 
     // pre
@@ -333,7 +333,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
         `attachment; filename*=UTF-8''${encodeURIComponent(file.realName)}${file.fileExt}`,
       );
       this.ctx.set('X-Accel-Redirect', forwardUrl);
-      // this.ctx.success();
+      // this.app.success();
       this.ctx.response.status = 200;
       this.ctx.response.type = file.mime;
     }
@@ -354,7 +354,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
   // inner invoke
   async fileInfo({ downloadId, fileId }: any) {
     const file = await this.getFile({ downloadId, fileId });
-    if (!file) this.ctx.throw(404);
+    if (!file) this.app.throw(404);
 
     // absolutePath
     const destDir = await this.ctx.bean.base.getPath(file.filePath, true);
@@ -384,7 +384,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
     // check
     const result = await this._fileUpdateCheck({ file, user });
     if (result) return;
-    this.ctx.throw(403);
+    this.app.throw(403);
   }
 
   async _fileUpdateCheck({ file, user }: any) {
@@ -424,7 +424,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
     // check
     const result = await this._fileDownloadCheck({ file, user });
     if (result) return;
-    this.ctx.throw(403);
+    this.app.throw(403);
   }
 
   async _fileDownloadCheck({ file, user }: any) {
@@ -517,7 +517,7 @@ export class BeanFile extends BeanBase<ScopeModule> {
       disableAuthOpenCheck: true,
     });
     if (res && res.atomClosed === 0) return;
-    this.ctx.throw(403);
+    this.app.throw(403);
   }
 
   async _outputImageContent({ destFile, fileContent, fields, fileInfo }: any) {

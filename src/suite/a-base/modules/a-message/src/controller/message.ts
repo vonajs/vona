@@ -11,6 +11,6 @@ export class ControllerMessage extends BeanBase<ScopeModule> {
       options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(items);
+    this.app.success(items);
   }
 }

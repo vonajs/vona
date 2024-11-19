@@ -47,7 +47,7 @@ export class LocalProcedureAtomSelectAtomsFormal extends LocalProcedureAtomSelec
 
     // important
     if (!atomClass && !star && !label && !mine) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
 
     const self = this;

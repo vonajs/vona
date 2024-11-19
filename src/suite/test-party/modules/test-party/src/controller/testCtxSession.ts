@@ -16,7 +16,7 @@ export class ControllerTestCtxSession extends BeanBase<ScopeModule> {
     assert.equal(res.instance.id, this.ctx.instance.id);
     assert.equal(this.ctx.session.test_key2, 2);
     // done
-    this.ctx.success();
+    this.app.success();
   }
 
   async echo1() {
@@ -26,7 +26,7 @@ export class ControllerTestCtxSession extends BeanBase<ScopeModule> {
       url: 'test/ctx/session/echo2',
     });
     // echo back
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async echo2() {
@@ -35,7 +35,7 @@ export class ControllerTestCtxSession extends BeanBase<ScopeModule> {
     // key2
     this.ctx.session.test_key2 = 2;
     // echo back
-    this.ctx.success({
+    this.app.success({
       user: this.ctx.state.user,
       instance: this.ctx.instance,
     });

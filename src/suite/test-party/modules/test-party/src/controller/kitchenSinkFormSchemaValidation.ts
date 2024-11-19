@@ -20,7 +20,7 @@ export class ControllerKitchenSinkFormSchemaValidation extends BeanBase<ScopeMod
     let item = await this.scope._bean.cacheRedis.get(cacheName);
     item = this.ctx.bean.util.extend({}, __ItemDefault, item);
     // ok
-    this.ctx.success(item);
+    this.app.success(item);
   }
 
   async saveSimple() {
@@ -30,7 +30,7 @@ export class ControllerKitchenSinkFormSchemaValidation extends BeanBase<ScopeMod
     const cacheName = this._getCacheName();
     await this.scope._bean.cacheRedis.set(cacheName, item);
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 
   async saveValidation() {
@@ -39,12 +39,12 @@ export class ControllerKitchenSinkFormSchemaValidation extends BeanBase<ScopeMod
 
   // form-captcha signup
   signup() {
-    this.ctx.success();
+    this.app.success();
   }
 
   // form-mobile-verify
   mobileVerify() {
-    this.ctx.success();
+    this.app.success();
   }
 
   _getCacheName() {

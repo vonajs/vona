@@ -35,7 +35,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
         checkFlow: options.checkFlow,
         options: this.ctx.request.body.options,
       });
-      if (!res) this.ctx.throw(403);
+      if (!res) this.app.throw(403);
       return;
     }
 
@@ -56,7 +56,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
         options: this.ctx.request.body.options,
         user,
       });
-      if (!res) this.ctx.throw(403);
+      if (!res) this.app.throw(403);
     } else {
       const res = await this.ctx.bean.atom.checkRightAction({
         atom: { id: atomKey.atomId },
@@ -67,8 +67,8 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
         checkFlow: options.checkFlow,
         options: this.ctx.request.body.options,
       });
-      if (!res) this.ctx.throw(403);
-      if (!atomClassBase) this.ctx.throw(403);
+      if (!res) this.app.throw(403);
+      if (!atomClassBase) this.app.throw(403);
       // itemId
       if (atomClassBase!.itemOnly) {
         atomKey.itemId = atomKey.atomId;
@@ -103,11 +103,11 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
     if (!atomClass && !atomClassExpect) {
       // special for select
       if (options.action !== 'select') {
-        this.ctx.throw(403);
+        this.app.throw(403);
       }
     }
     if (atomClass && atomClassExpect && !this.ctx.bean.util.checkIfSameAtomClass(atomClass, atomClassExpect)) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     // neednot check !!atomClassExpect
     if (!atomClass && atomClassExpect) {
@@ -158,7 +158,7 @@ export class MiddlewareRightAtom extends MiddlewareRight0 {
       disableAuthOpenCheck: true,
     });
     if (roleIdOwner === null) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     if (roleIdOwner) {
       this.ctx.request.body.roleIdOwner = roleIdOwner;

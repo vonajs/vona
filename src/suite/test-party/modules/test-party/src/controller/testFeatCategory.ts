@@ -33,6 +33,6 @@ export class ControllerTestFeatCategory extends BeanBase<ScopeModule> {
     assert.equal(category.categoryName, 'levelThree');
 
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 }

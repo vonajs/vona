@@ -52,20 +52,20 @@ export class BeanAuthOpen extends BeanBase<ScopeModule> {
   async verify({ clientID, clientSecret }: any) {
     // authOpen
     const authOpen = await this.modelAuthOpen.get({ clientID });
-    if (!authOpen) return this.ctx.throw(403);
+    if (!authOpen) return this.app.throw(403);
     // clientSecret
     if (authOpen.clientSecretHidden) {
       const res = await this.localAuthSimple.verifyPassword({
         password: clientSecret,
         hash: authOpen.clientSecret,
       });
-      if (!res) return this.ctx.throw(403);
+      if (!res) return this.app.throw(403);
     } else {
-      if (clientSecret !== authOpen.clientSecret) return this.ctx.throw(403);
+      if (clientSecret !== authOpen.clientSecret) return this.app.throw(403);
     }
     // atomDisabled
     const atom = await this.ctx.bean.atom.modelAtom.get({ id: authOpen.atomId });
-    if (atom!.atomDisabled) return this.ctx.throw(403);
+    if (atom!.atomDisabled) return this.app.throw(403);
     // neverExpire/expireTime
     if (!authOpen.neverExpire && authOpen.expireTime.valueOf() <= Date.now()) {
       return this.scope.error.AuthOpenTokenExpired.throw();

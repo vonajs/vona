@@ -22,7 +22,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
       options: this.ctx.request.body.options,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async check() {
@@ -30,7 +30,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
       atomStaticKeys: this.ctx.request.body.atomStaticKeys,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async resourceRoles() {
@@ -38,7 +38,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 
   async resourceRoleRemove() {
@@ -49,7 +49,7 @@ export class ControllerResource extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async resourceRoleAdd() {
@@ -60,6 +60,6 @@ export class ControllerResource extends BeanBase<ScopeModule> {
       data: this.ctx.request.body.data,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

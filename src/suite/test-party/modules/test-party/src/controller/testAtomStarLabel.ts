@@ -84,6 +84,6 @@ export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
     await this.ctx.bean.atom.delete({ key: partyKeyFormal, user });
 
     // done
-    this.ctx.success();
+    this.app.success();
   }
 }

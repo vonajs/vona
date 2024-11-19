@@ -5,7 +5,7 @@ export class ServiceDict extends BeanBase {
   async getDict({ dictKey, user }: any) {
     // check right
     const res = await this.ctx.bean.dict._prepareDict_load({ dictKey, user, returnDict: false });
-    if (!res) this.ctx.throw(403);
+    if (!res) this.app.throw(403);
     // get dict
     const dict = await this.ctx.bean.dict.getDict({ dictKey });
     // short

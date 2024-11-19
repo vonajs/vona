@@ -7,16 +7,16 @@ export class ServiceRight extends BeanBase<ScopeModule> {
     return this.scope.model.flowTask;
   }
   _check_specificFlag_normal({ flowTask }: any) {
-    if (flowTask.specificFlag === 1 || flowTask.specificFlag === 2) this.ctx.throw(403);
+    if (flowTask.specificFlag === 1 || flowTask.specificFlag === 2) this.app.throw(403);
   }
   _check_specificFlag_0({ flowTask }: any) {
-    if (flowTask.specificFlag !== 0) this.ctx.throw(403);
+    if (flowTask.specificFlag !== 0) this.app.throw(403);
   }
   _check_specificFlag_1({ flowTask }: any) {
-    if (flowTask.specificFlag !== 1) this.ctx.throw(403);
+    if (flowTask.specificFlag !== 1) this.app.throw(403);
   }
   _check_specificFlag_2({ flowTask }: any) {
-    if (flowTask.specificFlag !== 2) this.ctx.throw(403);
+    if (flowTask.specificFlag !== 2) this.app.throw(403);
   }
   _check_sameUser({ flowTask, user }: any) {
     const flowTaskId = flowTask.flowTaskId || flowTask.id;
@@ -143,7 +143,7 @@ export class ServiceRight extends BeanBase<ScopeModule> {
         this.scope.error.TaskCannotBeRejected__.throw(flowTaskId);
       }
     } else if (!options.allowPassTask && !options.allowRejectTask) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
   }
   async recall({ flowTask, user }: any) {
@@ -168,7 +168,7 @@ export class ServiceRight extends BeanBase<ScopeModule> {
     }
     // check if flowTaskIdSubstituteFrom
     if (flowTask.flowTaskIdSubstituteFrom) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     // options
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
@@ -186,12 +186,12 @@ export class ServiceRight extends BeanBase<ScopeModule> {
     // options
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     if (!options.allowForward || !flowTask.flowTaskIdForwardTo) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     // check if claimed
     const taskTo = await this._getTask({ getTask, flowTaskId: flowTask.flowTaskIdForwardTo });
     if (taskTo.timeClaimed) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
   }
   async substitute({ flowTask, user, getOptions, disableCheckTimeClaimed }: any) {
@@ -222,12 +222,12 @@ export class ServiceRight extends BeanBase<ScopeModule> {
     const options = await this._getNodeOptionsTask({ getOptions, flowTask });
     // allowed only once, so should check flowTaskIdSubstituteFrom
     if (!options.allowSubstitute || flowTask.flowTaskIdSubstituteFrom || !flowTask.flowTaskIdSubstituteTo) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     // check if claimed
     const taskTo = await this._getTask({ getTask, flowTaskId: flowTask.flowTaskIdSubstituteTo });
     if (taskTo.timeClaimed) {
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
   }
 }

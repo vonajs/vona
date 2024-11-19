@@ -12,7 +12,7 @@ export class ControllerIo extends BeanBase<ScopeModule> {
       scene: this.ctx.bean.util.getFrontClientId(),
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async unsubscribe() {
@@ -22,6 +22,6 @@ export class ControllerIo extends BeanBase<ScopeModule> {
       socketId: (<any>this.ctx.socket).id,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

@@ -9,7 +9,7 @@ export class ControllerCaptcha extends BeanBase<ScopeModule> {
       sceneName: this.ctx.request.body.sceneName,
       context: this.ctx.request.body.context,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async refreshProviderInstance() {
@@ -19,6 +19,6 @@ export class ControllerCaptcha extends BeanBase<ScopeModule> {
       sceneName: this.ctx.request.body.sceneName,
       context: this.ctx.request.body.context,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

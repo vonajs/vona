@@ -200,7 +200,7 @@ export class BeanAuth extends BeanBase<ScopeModule> {
 
   async deserializeUser({ user }: any) {
     if (user.op.anonymous) return user;
-    // not throw 401: this.ctx.throw(401);
+    // not throw 401: this.app.throw(401);
     if (!user.token) return null;
     // check token
     const key = this._getAuthRedisKey({ user });

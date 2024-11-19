@@ -14,14 +14,14 @@ export class ControllerSettings extends BeanBase<ScopeModule> {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.settings.instanceLoad(this.ctx.request.body);
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async instanceSave() {
     // check demo
     this.ctx.bean.util.checkDemo();
     const res = await this.scope.service.settings.instanceSave(this.ctx.request.body);
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   // user
@@ -33,11 +33,11 @@ export class ControllerSettings extends BeanBase<ScopeModule> {
 
   async userLoad() {
     const res = await this.scope.service.settings.userLoad(this.ctx.request.body);
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async userSave() {
     const res = await this.scope.service.settings.userSave(this.ctx.request.body);
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

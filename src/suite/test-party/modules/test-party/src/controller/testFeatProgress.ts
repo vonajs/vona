@@ -12,7 +12,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
       await selfInstance._progressInBackground({ progressId });
     });
     // return progressId
-    this.ctx.success({ progressId });
+    this.app.success({ progressId });
   }
 
   async _progressInBackground({ progressId }: any) {
@@ -22,7 +22,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
       // progress done
       await this.ctx.bean.progress.done({ progressId, message: this.ctx.text('WellDone') });
       // ok
-      this.ctx.success(true);
+      this.app.success(true);
     } catch (err: any) {
       // progress error
       await this.ctx.bean.progress.error({ progressId, message: err.message });

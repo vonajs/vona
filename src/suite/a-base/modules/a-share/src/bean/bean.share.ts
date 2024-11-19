@@ -47,7 +47,7 @@ export class BeanShare extends BeanBase<ScopeModule> {
     const userId = user.id;
     // get share
     let item = await this.modelShare.get({ uuid });
-    if (!item) this.ctx.throw(404);
+    if (!item) this.app.throw(404);
     item = item!;
     // anonymous
     if (user.anonymous) {

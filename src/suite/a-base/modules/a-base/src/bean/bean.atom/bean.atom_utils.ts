@@ -51,7 +51,7 @@ export class BeanAtomUtils extends BeanAtom0 {
         //   just use options.atomIdMain
       } else {
         // for safety: must use atomIdMain from main atom
-        if (!atom) this.ctx.throw(403);
+        if (!atom) this.app.throw(403);
         options.atomIdMain = atom[atomIdMainField!];
       }
     }
@@ -96,7 +96,7 @@ export class BeanAtomUtils extends BeanAtom0 {
         return { key: keyOuter, atom: null };
       }
       // check if valid
-      if (atom.atomClassId !== atomClass.id) this.ctx.throw(403);
+      if (atom.atomClassId !== atomClass.id) this.app.throw(403);
       key = { atomId, itemId: atom.itemId };
     }
     return { key, atom };

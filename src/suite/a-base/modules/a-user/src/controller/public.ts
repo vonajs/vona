@@ -7,6 +7,6 @@ export class ControllerPublic extends BeanBase<ScopeModule> {
     const res = await this.scope.service.public.profile({
       userId: this.ctx.request.body.userId,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

@@ -5,6 +5,6 @@ import { ScopeModule } from '../.metadata/this.js';
 export class ControllerAuth extends BeanBase<ScopeModule> {
   async list() {
     const res = await this.scope.service.auth.list();
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

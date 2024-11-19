@@ -14,13 +14,13 @@ export class ControllerTestCtxPerformAction extends BeanBase<ScopeModule> {
         id,
       },
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async echo() {
     // body: id
     const id = this.ctx.request.body.id;
     // echo back
-    this.ctx.success(id);
+    this.app.success(id);
   }
 }

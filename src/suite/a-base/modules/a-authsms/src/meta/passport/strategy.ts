@@ -40,7 +40,7 @@ Strategy.prototype.authenticate = function (req) {
     if (!user) {
       return self.fail(info);
     }
-    ctx.success(user);
+    app.success(user);
     self.success(user, info);
   }
 

@@ -73,7 +73,7 @@ function createValidate(schemaRoot) {
       // need not output error
       // ctx.logger.error(e);
       // error
-      throw ctx.createError({
+      throw ctx.app.meta.util.createError({
         ...e,
         code: 422,
         message: e.errors,

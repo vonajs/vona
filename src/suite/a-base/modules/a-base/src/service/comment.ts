@@ -90,9 +90,9 @@ export class ServiceComment extends BeanBase<ScopeModule> {
   async save_edit({ key, data: { commentId, content }, user }) {
     // comment
     let item = await this.modelCommentView.get({ id: commentId });
-    if (!item) this.ctx.throw(403);
+    if (!item) this.app.throw(403);
     item = item!;
-    if (key.atomId !== item.atomId || item.userId !== user.id) this.ctx.throw(403);
+    if (key.atomId !== item.atomId || item.userId !== user.id) this.app.throw(403);
     // html
     const html = await this._renderContent({
       atomId: key.atomId,
@@ -187,7 +187,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
   async delete({ key, data: { commentId }, user }) {
     // comment
     let item = await this.modelComment.get({ id: commentId });
-    if (!item) this.ctx.throw(403);
+    if (!item) this.app.throw(403);
     item = item!;
     // check right
     let canDeleted: any = key.atomId === item.atomId && item.userId === user.id;
@@ -197,7 +197,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
         user,
       });
     }
-    if (!canDeleted) this.ctx.throw(403);
+    if (!canDeleted) this.app.throw(403);
     // delete hearts
     await this.modelCommentHeart.delete({ commentId });
     // delete comment
@@ -238,7 +238,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     }
     // get
     const item = await this.modelComment.get({ id: commentId });
-    if (!item) this.ctx.throw(403);
+    if (!item) this.app.throw(403);
     let heartCount = item!.heartCount;
     if (diff !== 0) {
       heartCount += diff;
@@ -262,7 +262,7 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     const userIdsTo: any = {};
     // 1. atom.userIdUpdated
     let atom = await this.modelAtom.get({ id: atomId });
-    if (!atom) this.ctx.throw(403);
+    if (!atom) this.app.throw(403);
     atom = atom!;
     const userIdUpdated = atom.userIdUpdated;
     if (userIdUpdated !== user.id) {

@@ -8,7 +8,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       atomStaticKey: this.ctx.request.body.atomStaticKey,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async item() {
@@ -17,7 +17,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardUserCheck: this.ctx.request.body.dashboardUserCheck,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async loadItemUser() {
@@ -25,7 +25,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async saveItemUser() {
@@ -34,7 +34,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       content: this.ctx.request.body.content,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async changeItemUserName() {
@@ -43,7 +43,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardName: this.ctx.request.body.dashboardName,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async deleteItemUser() {
@@ -51,7 +51,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async createItemUser() {
@@ -59,7 +59,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async itemUsers() {
@@ -67,7 +67,7 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardAtomId: this.ctx.request.body.key.atomId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async changeItemUserDefault() {
@@ -76,6 +76,6 @@ export class ControllerDashboard extends BeanBase<ScopeModule> {
       dashboardUserId: this.ctx.request.body.dashboardUserId,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

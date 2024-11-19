@@ -1,7 +1,7 @@
 import { extend } from '@cabloy/extend';
 import { ErrorClass } from '../bean/resource/error/errorClass.js';
 import { VonaApplication, IModule } from '../../types/index.js';
-const ERROR = Symbol('Context#__error');
+const SymbolError = Symbol('Application#SymbolError');
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all errors
@@ -10,37 +10,22 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   // load errors
   loadErrors();
 
-  // patch service
-  patchCreateContext();
+  // patch Error
+  patchError();
 
-  function patchCreateContext() {
-    const createContext = app.createContext as any;
-    app.createContext = (...args) => {
-      const context = createContext.call(app, ...args);
+  function patchError() {
+    // error
+    app[SymbolError] = app.bean._newBean(ErrorClass, ebErrors);
 
-      // maybe /favicon.ico
-      if (context.module) {
-        // error
-        (<any>context)[ERROR] = context.bean._newBean(ErrorClass, ebErrors);
-
-        // methods
-        ['success', 'fail', 'throw', 'parseFail', 'parseSuccess', 'parseCode'].forEach(key => {
-          context[key] = function (...args) {
-            return (<any>context)[ERROR][key](context.module.info.relativeName, ...args);
-          };
-          context[key].module = function (module, ...args) {
-            return (<any>context)[ERROR][key](module, ...args);
-          };
-        });
-      }
-
-      // createError
-      context.createError = function (data) {
-        return app.meta.util.createError(data);
+    // methods
+    ['success', 'fail', 'throw', 'parseFail', 'parseSuccess', 'parseCode'].forEach(key => {
+      app[key] = function (...args) {
+        return (<any>app)[SymbolError][key](app.ctx.module.info.relativeName, ...args);
       };
-
-      return context;
-    };
+      app[key].module = function (module, ...args) {
+        return (<any>app)[SymbolError][key](module, ...args);
+      };
+    });
   }
 
   function loadErrors() {

@@ -11,7 +11,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
       sceneName: this.ctx.request.body.sceneName,
       disabled: this.ctx.request.body.disabled,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -22,7 +22,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
       sceneName: this.ctx.request.body.sceneName,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async add() {
@@ -33,7 +33,7 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
       sceneName: this.ctx.request.body.sceneName,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -43,6 +43,6 @@ export class ControllerAuthScene extends BeanBase<ScopeModule> {
       id: this.ctx.request.body.id,
       sceneName: this.ctx.request.body.sceneName,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

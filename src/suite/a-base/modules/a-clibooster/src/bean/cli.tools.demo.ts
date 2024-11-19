@@ -13,7 +13,7 @@ export class CliToolsDemo extends BeanCliBase<ScopeModule> {
     // super
     await super.execute({ user });
     // check env
-    if (!this.ctx.app.meta.isLocal) this.ctx.throw(403);
+    if (!this.ctx.app.meta.isLocal) this.app.throw(403);
     // methods
     let methods = argv._;
     if (methods.length === 0) {

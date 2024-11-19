@@ -7,7 +7,7 @@ export class ControllerTestCtxResponse extends BeanBase<ScopeModule> {
     const res = {
       userName: 'zhennann',
     };
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async successMore() {
@@ -22,6 +22,6 @@ export class ControllerTestCtxResponse extends BeanBase<ScopeModule> {
   }
 
   async throwError() {
-    this.ctx.throw(1001);
+    this.app.throw(1001);
   }
 }

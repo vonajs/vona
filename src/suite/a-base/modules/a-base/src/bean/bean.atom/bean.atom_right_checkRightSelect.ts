@@ -6,7 +6,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     const atomIdMain = options.atomIdMain;
     if (!atomClass) {
       if (!atomIdMain) return true;
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     // atomClass
     atomClass = await this.ctx.bean.atomClass.get(atomClass);
@@ -53,7 +53,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     const stage = this.ctx.bean.atomStage.toString({ atomStage: options.stage });
     if (stage === 'history' && !whereAtomIdFormal) {
       // no right
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     if (stage === 'history' && whereAtomIdFormal) {
       return whereAtomIdFormal;

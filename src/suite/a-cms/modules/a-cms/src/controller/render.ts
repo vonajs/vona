@@ -9,6 +9,6 @@ export class ControllerRender extends BeanBase<ScopeModule> {
       key: this.ctx.request.body.key,
       options: this.ctx.request.body.options,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

@@ -23,6 +23,6 @@ export class ControllerTestEventHello extends BeanBase<ScopeModule> {
     });
     assert.equal(data.text, 'hello echo');
     assert.equal(result, 'echo.hello.world.echo.hello');
-    this.ctx.success();
+    this.app.success();
   }
 }

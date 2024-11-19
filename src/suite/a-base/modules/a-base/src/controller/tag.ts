@@ -9,7 +9,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
       atomClass,
       options: this.ctx.request.body.options,
     });
-    this.ctx.success({ list });
+    this.app.success({ list });
   }
 
   async add() {
@@ -20,7 +20,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
       atomClass,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async save() {
@@ -31,7 +31,7 @@ export class ControllerTag extends BeanBase<ScopeModule> {
       tagId: this.ctx.request.body.tagId,
       data: this.ctx.request.body.data,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 
   async delete() {
@@ -41,6 +41,6 @@ export class ControllerTag extends BeanBase<ScopeModule> {
     const res = await this.scope.service.tag.delete({
       tagId: this.ctx.request.body.tagId,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

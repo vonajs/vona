@@ -32,7 +32,7 @@ export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopes
     if (!enableRight) {
       // if pass right checked, should check enableRight outer
       // throw error
-      this.ctx.throw(403);
+      this.app.throw(403);
     }
     const enableRightRole = enableRight!.role;
     if (!enableRightRole) return false;

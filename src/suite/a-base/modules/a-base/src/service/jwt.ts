@@ -6,7 +6,7 @@ import jsonwebtoken from 'jsonwebtoken';
 export class ServiceJwt extends BeanBase {
   async create({ scene = 'query' }: any) {
     // check
-    if (!this.ctx.state.jwt) this.ctx.throw(403);
+    if (!this.ctx.state.jwt) this.app.throw(403);
     // token
     const token = this.ctx.state.jwt.token;
     // jwt payload

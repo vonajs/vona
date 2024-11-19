@@ -7,7 +7,7 @@ export class ControllerStats extends BeanBase<ScopeModule> {
     const { module, name, nameSub } = this.ctx.request.body;
     // only support user stats
     const provider = this.ctx.bean.stats._findStatsProvider({ module, name });
-    if (!provider.user) this.ctx.throw(403);
+    if (!provider.user) this.app.throw(403);
     // get
     const res = await this.scope.service.stats.get({
       module,
@@ -15,6 +15,6 @@ export class ControllerStats extends BeanBase<ScopeModule> {
       nameSub,
       user: this.ctx.state.user.op,
     });
-    this.ctx.success(res);
+    this.app.success(res);
   }
 }

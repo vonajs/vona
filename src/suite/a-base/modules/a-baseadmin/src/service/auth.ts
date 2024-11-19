@@ -15,7 +15,7 @@ export class ServiceAuth extends BeanBase<ScopeModule> {
     // check if only one
     if (disabled) {
       const list = this.ctx.bean.authProviderCache.getAuthProvidersConfigForLogin();
-      if (list.length <= 1) this.ctx.throw(1001);
+      if (list.length <= 1) this.app.throw(1001);
     }
     // update
     await this.modelAuthProvider.update({ id, disabled });

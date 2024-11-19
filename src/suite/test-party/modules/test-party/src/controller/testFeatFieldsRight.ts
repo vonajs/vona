@@ -68,7 +68,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
     const moduleTestFlow = this.app.meta.modules['test-flow'];
     if (!moduleTestFlow) {
       // do nothing
-      this.ctx.success();
+      this.app.success();
       return;
     }
     // atomClass
@@ -88,7 +88,7 @@ export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
     // mode: custom_object
     await this._parseSchema_mode_custom_object({ atomClass });
     // ok
-    this.ctx.success();
+    this.app.success();
   }
 
   // mode: allowAllFieldsRead

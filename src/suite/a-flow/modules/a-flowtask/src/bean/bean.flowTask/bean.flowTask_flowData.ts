@@ -27,7 +27,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     // select flow
     const flow = await this.ctx.bean.flow._get({ flowId, history: true, user });
     // not throw error
-    // if (!flow) this.ctx.throw(404);
+    // if (!flow) this.app.throw(404);
     // ok
     return flow;
   }
@@ -36,7 +36,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     // only read basic info
     let atom = (await this.ctx.bean.atom.model.get({ id: atomId, atomClassId })) as EntityAtomPro;
     if (!atom || atom.atomFlowId !== flowId) {
-      // this.ctx.throw(403);
+      // this.app.throw(403);
       // maybe old
       return null;
     }

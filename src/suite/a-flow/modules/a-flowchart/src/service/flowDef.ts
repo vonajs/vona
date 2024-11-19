@@ -5,7 +5,7 @@ export class ServiceFlowDef extends BeanBase {
   async normalizeAssignees({ host, assignees, user }: any) {
     // check right
     assignees = await this.__checkRightNormalizeAssignees({ host, assignees, user });
-    if (!assignees) this.ctx.throw(403);
+    if (!assignees) this.app.throw(403);
     //  normalize
     return await this.ctx.bean.flow.normalizeAssignees(assignees);
   }
@@ -13,7 +13,7 @@ export class ServiceFlowDef extends BeanBase {
   async userSelect({ host, params, user }: any) {
     // check write right
     const rightWrite = await this.__checkRightWrite({ host, user });
-    if (!rightWrite) this.ctx.throw(403);
+    if (!rightWrite) this.app.throw(403);
     // users
     return await this.ctx.bean.user.selectGeneral({ params, user });
   }
