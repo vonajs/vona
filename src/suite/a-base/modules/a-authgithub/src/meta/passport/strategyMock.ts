@@ -29,7 +29,7 @@ Strategy.prototype.authenticate = function (req) {
   // check
   if (req.method === 'POST') {
     // not allow
-    return self.error(ctx.parseFail(403));
+    return self.error(app.parseFail(403));
   }
 
   // verified

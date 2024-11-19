@@ -215,13 +215,13 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       message += `\nMore info: ${chalk.keyword('cyan')(urlInfo)}`;
       console.log('\n' + boxen(message, boxenOptions));
       // }
-      return this.app.throw(423); // not this.ctx.fail(423)
+      return this.app.throw(423); // not this.app.fail(423)
     }
     // check if disabled
     if (instance.disabled) {
       // locked
       console.log('instance disabled: ', this.ctx.subdomain);
-      return this.app.throw(423); // not this.ctx.fail(423)
+      return this.app.throw(423); // not this.app.fail(423)
     }
 
     // check instance startup ready

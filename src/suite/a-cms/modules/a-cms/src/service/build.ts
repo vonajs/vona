@@ -103,7 +103,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     let themeName = site.themes[language || 'default'];
     if (!themeName) {
       // // log info
-      // const error = this.ctx.parseFail.module(__ThisModule__, 1002, atomClass.module, atomClass.atomClassName, language);
+      // const error = this.app.parseFail.module(__ThisModule__, 1002, atomClass.module, atomClass.atomClassName, language);
       // this.ctx.logger.info(error.message);
       // use default
       if (site.language) {

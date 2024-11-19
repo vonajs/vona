@@ -16,10 +16,10 @@ export class BeanScopeErrorImpl extends BeanSimple implements IModuleError {
   }
 
   throw(...args: any[]): never {
-    return this.app.throw.module(this[BeanModuleScope], this[BeanErrorCode], ...args);
+    return this.app.meta.error.throw(this[BeanModuleScope], this[BeanErrorCode], ...args);
   }
 
   parseFail(...args: any[]): IErrorObject {
-    return this.ctx.parseFail.module(this[BeanModuleScope], this[BeanErrorCode], ...args);
+    return this.app.meta.error.parseFail(this[BeanModuleScope], this[BeanErrorCode], ...args);
   }
 }

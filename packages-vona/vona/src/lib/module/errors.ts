@@ -1,7 +1,6 @@
 import { extend } from '@cabloy/extend';
 import { ErrorClass } from '../bean/resource/error/errorClass.js';
 import { VonaApplication, IModule } from '../../types/index.js';
-const SymbolError = Symbol('Application#SymbolError');
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all errors
@@ -15,15 +14,12 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
 
   function patchError() {
     // error
-    app[SymbolError] = app.bean._newBean(ErrorClass, ebErrors);
+    app.meta.error = app.bean._newBean(ErrorClass, ebErrors);
 
     // methods
     ['success', 'fail', 'throw', 'parseFail', 'parseSuccess', 'parseCode'].forEach(key => {
       app[key] = function (...args) {
-        return (<any>app)[SymbolError][key](app.ctx.module.info.relativeName, ...args);
-      };
-      app[key].module = function (module, ...args) {
-        return (<any>app)[SymbolError][key](module, ...args);
+        return app.meta.error[key](undefined, ...args);
       };
     });
   }

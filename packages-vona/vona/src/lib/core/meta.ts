@@ -21,6 +21,7 @@ import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { Onion } from '../module/onion/onion.js';
+import { ErrorClass } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -31,6 +32,7 @@ export class AppMeta extends BeanSimple {
   isLocal: boolean;
   flavor: VonaMetaFlavor;
   mode: VonaMetaMode;
+  error: ErrorClass;
   util: AppUtil;
   mockUtil: AppMockUtil;
   reload: AppReload;

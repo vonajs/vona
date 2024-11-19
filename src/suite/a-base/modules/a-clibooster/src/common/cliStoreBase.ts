@@ -124,7 +124,7 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
       // result
       if (result.code && !result.message) {
         const args = result.args || [];
-        result.message = this.ctx.parseSuccess.module(__ThisModule__, result.code, ...args).message;
+        result.message = this.app.parseSuccess.module(__ThisModule__, result.code, ...args).message;
       }
       if (result.message) {
         await this.console.log({ text: result.message });

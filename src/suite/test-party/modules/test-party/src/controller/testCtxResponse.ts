@@ -18,7 +18,7 @@ export class ControllerTestCtxResponse extends BeanBase<ScopeModule> {
 
   async fail() {
     // Error Test
-    this.ctx.fail(1001);
+    this.app.fail(1001);
   }
 
   async throwError() {

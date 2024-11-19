@@ -45,11 +45,11 @@ export class CliStoreSync extends CliStoreBase {
     if (!res) return licenseMeta;
     // combine message
     const args = res.args || [];
-    const message1 = this.ctx.parseSuccess.module(__ThisModule__, res.code, ...args).message;
+    const message1 = this.app.parseSuccess.module(__ThisModule__, res.code, ...args).message;
     let message2 = '';
     if (licenseMeta.code) {
       const args = licenseMeta.args || [];
-      message2 = this.ctx.parseSuccess.module(__ThisModule__, licenseMeta.code, ...args).message;
+      message2 = this.app.parseSuccess.module(__ThisModule__, licenseMeta.code, ...args).message;
     }
     // ok
     return {
