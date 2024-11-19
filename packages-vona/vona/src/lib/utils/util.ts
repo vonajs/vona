@@ -194,37 +194,42 @@ export class AppUtil extends BeanSimple {
     return composeAsync(chains, adapter);
   }
 
-  async createAnonymousContext({ locale, subdomain, module, instance }): Promise<VonaContext> {
+  async runInAnonymousContextScope<T>(
+    scope: (ctx: VonaContext) => Promise<T>,
+    { locale, subdomain, module, instance },
+  ): Promise<T> {
     // url
+    // todo: remove /api/a/base
     const url = module ? this.combineFetchPath(module, '', false) : '/api/a/base/';
-    // ctx
-    const ctx = this.app.createAnonymousContext({
+    const req = {
       method: 'post',
       url,
-    } as Request);
-    (<any>ctx.req).ctx = ctx;
-    // locale
-    Object.defineProperty(ctx, 'locale', {
-      get() {
-        return locale || this.app.config.i18n.defaultLocale;
-      },
-    });
-    // subdomain
-    Object.defineProperty(ctx, 'subdomain', {
-      get() {
-        return subdomain;
-      },
-    });
-    // instance
-    if (subdomain !== undefined && subdomain !== null) {
-      ctx.instance = await ctx.bean.instance.get(subdomain);
-      // start instance
-      if (instance) {
-        await ctx.bean.instance.checkAppReadyInstance();
+    };
+    return await this.app.runInAnonymousContextScope(async ctx => {
+      (<any>ctx.req).ctx = ctx;
+      // locale
+      Object.defineProperty(ctx, 'locale', {
+        get() {
+          return locale || this.app.config.i18n.defaultLocale;
+        },
+      });
+      // subdomain
+      Object.defineProperty(ctx, 'subdomain', {
+        get() {
+          return subdomain;
+        },
+      });
+      // instance
+      if (subdomain !== undefined && subdomain !== null) {
+        ctx.instance = await Cast(this.app.bean).instance.get(subdomain);
+        // start instance
+        if (instance) {
+          await Cast(this.app.bean).instance.checkAppReadyInstance();
+        }
       }
-    }
-    // ok
-    return ctx as unknown as VonaContext;
+      // scope
+      return await scope(ctx as unknown as VonaContext);
+    }, req as Request);
   }
 
   async executeBean({
@@ -261,50 +266,54 @@ export class AppUtil extends BeanSimple {
     if (!ctxModule) {
       ctxModule = ctxCaller?.module?.info?.relativeName || ctxParent?.module?.info?.relativeName;
     }
-    // ctx
-    const ctx = await this.createAnonymousContext({ locale, subdomain, module: ctxModule, instance });
-    // innerAccess
-    ctx.innerAccess = true;
-    // ctxCaller
-    if (ctxCaller) {
-      // multipart
-      ctx.multipart = function (options) {
-        return ctxCaller.multipart(options);
-      };
-      // delegateProperties
-      delegateProperties(ctx, ctxCaller);
-      // ctxCaller
-      ctx.ctxCaller = ctxCaller;
-    }
-    // ctxParent
-    if (ctxParent) {
-      // delegateProperties
-      delegateProperties(ctx, ctxParent);
-      // dbLevel
-      ctx.dbLevel = (ctxParent.dbLevel || 0) + 1;
-    }
-    // dbLevel
-    if (!ctxCaller && !ctxParent) {
-      ctx.dbLevel = 1;
-    }
-    // bean
-    const bean = beanFullName ? ctx.bean._getBean(beanFullName as any) : null;
-    if (!bean && beanFullName && !is.function(fn)) {
-      throw new Error(`bean not found: ${beanFullName}`);
-    }
-    // execute
-    let res;
-    if (transaction) {
-      res = await Cast(ctx).transaction.begin(async () => {
-        return await this._executeBeanFn({ fn, ctx, bean, context, args });
-      });
-    } else {
-      res = await this._executeBeanFn({ fn, ctx, bean, context, args });
-    }
-    // tail done
-    await ctx.tailDone();
-    // ok
-    return res;
+    // run
+    return await this.runInAnonymousContextScope(
+      async ctx => {
+        // innerAccess
+        ctx.innerAccess = true;
+        // ctxCaller
+        if (ctxCaller) {
+          // multipart
+          ctx.multipart = function (options) {
+            return ctxCaller.multipart(options);
+          };
+          // delegateProperties
+          delegateProperties(ctx, ctxCaller);
+          // ctxCaller
+          ctx.ctxCaller = ctxCaller;
+        }
+        // ctxParent
+        if (ctxParent) {
+          // delegateProperties
+          delegateProperties(ctx, ctxParent);
+          // dbLevel
+          ctx.dbLevel = (ctxParent.dbLevel || 0) + 1;
+        }
+        // dbLevel
+        if (!ctxCaller && !ctxParent) {
+          ctx.dbLevel = 1;
+        }
+        // bean
+        const bean = beanFullName ? this.app.bean._getBean(beanFullName as any) : null;
+        if (!bean && beanFullName && !is.function(fn)) {
+          throw new Error(`bean not found: ${beanFullName}`);
+        }
+        // execute
+        let res;
+        if (transaction) {
+          res = await Cast(ctx).transaction.begin(async () => {
+            return await this._executeBeanFn({ fn, ctx, bean, context, args });
+          });
+        } else {
+          res = await this._executeBeanFn({ fn, ctx, bean, context, args });
+        }
+        // tail done
+        await ctx.tailDone();
+        // ok
+        return res;
+      },
+      { locale, subdomain, module: ctxModule, instance },
+    );
   }
 
   async _executeBeanFn({ fn, ctx, bean, context, args }) {
