@@ -201,7 +201,7 @@ export class AppUtil extends BeanSimple {
       subdomain,
       module,
       instance,
-    }: { locale?: string; subdomain?: string; module?: string; instance?: boolean },
+    }: { locale?: string; subdomain?: string | null | undefined; module?: string; instance?: boolean },
   ): Promise<T> {
     // url
     // todo: remove /api/a/base
@@ -255,7 +255,7 @@ export class AppUtil extends BeanSimple {
     instance,
   }: {
     locale?: string;
-    subdomain?: string;
+    subdomain?: string | null | undefined;
     beanModule?: string;
     beanFullName?: string;
     context?: any;

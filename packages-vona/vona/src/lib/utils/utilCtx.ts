@@ -130,7 +130,7 @@ export class CtxUtil extends BeanSimple {
     instance,
   }: {
     locale?: string;
-    subdomain?: string | null;
+    subdomain?: string | null | undefined;
     beanModule?: string;
     beanFullName?: string;
     context?: any;

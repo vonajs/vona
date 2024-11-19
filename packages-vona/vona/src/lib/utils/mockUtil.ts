@@ -18,7 +18,7 @@ export class AppMockUtil extends BeanSimple {
   // todo: remove module
   async mockRunInAnonymousContextScope<T>(
     scope: (ctx: VonaContext) => Promise<T>,
-    options?: { locale?: string; subdomain?: string; module?: string },
+    options?: { locale?: string; subdomain?: string | null | undefined; module?: string },
   ): Promise<T> {
     options = options || {};
     const locale = options.locale;
