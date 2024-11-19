@@ -11,5 +11,5 @@ export interface IDecoratorUseOptionsBase {
 export interface IDecoratorUseOptions {
   beanFullName?: keyof IBeanRecord;
   selector?: string;
-  injectionScope?: InjectionScope;
+  //injectionScope?: InjectionScope;
 }

@@ -26,16 +26,11 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
     if (!selector && beanClass.prototype instanceof BeanModuleScopeBase) {
       selector = parseModuleName();
     }
-    // injectionScope
-    //   should dynamic get injectionScope when invoke beanContainer
-    //      because class has not inited
-    const injectionScope = options.injectionScope;
     // record
     appResource.addUse(target, {
       prop,
       beanFullName,
       selector,
-      injectionScope,
     });
   };
 }
