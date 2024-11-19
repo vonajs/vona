@@ -13,7 +13,9 @@ export function ExtendTableBuilder(_app: VonaApplication) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) this.increments();
     if (options.timestamps !== false) this.timestamps(true, true, true);
-    if (options.deleted !== false) this.boolean('deleted').defaultTo(false);
+    // todo: deleted to boolean
+    if (options.deleted !== false) this.integer('deleted').defaultTo(0);
+    //if (options.deleted !== false) this.boolean('deleted').defaultTo(false);
     if (options.iid !== false) this.integer('iid').defaultTo(0);
     return this;
   });

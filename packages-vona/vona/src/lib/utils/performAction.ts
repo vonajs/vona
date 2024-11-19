@@ -38,75 +38,77 @@ export default async function performAction({
   res.statusCode = 404;
   // ctx
   const ctx = app.createContext(req, res);
+  // run
+  return await app.ctxStorage.run(ctx, async () => {
+    // locale
+    Object.defineProperty(ctx, 'locale', {
+      get() {
+        return ctxCaller.locale;
+      },
+    });
 
-  // locale
-  Object.defineProperty(ctx, 'locale', {
-    get() {
-      return ctxCaller.locale;
-    },
-  });
+    // subdomain
+    Object.defineProperty(ctx, 'subdomain', {
+      get() {
+        return ctxCaller.subdomain;
+      },
+    });
 
-  // subdomain
-  Object.defineProperty(ctx, 'subdomain', {
-    get() {
-      return ctxCaller.subdomain;
-    },
-  });
-
-  // query params body
-  if (query) {
-    ctx.req.query = ctx.request.query = query;
-  }
-  if (params) {
-    ctx.req.params = ctx.request.params = params;
-  }
-  ctx.req.body = ctx.request.body = body !== undefined ? body : {}; // not undefined
-
-  // headers
-  delegateHeaders(ctx, ctxCaller, headers);
-
-  // multipart
-  ctx.multipart = function (options) {
-    return ctxCaller.multipart(options);
-  };
-
-  // cookies
-  delegateCookies(ctx, ctxCaller);
-
-  // XX should not delegate session, because session._ctx related to ctx
-  // not delegate ctx.user, because will create req.user by state.user
-  for (const property of ['state', 'socket', 'session', 'instance']) {
-    delegateProperty(ctx, ctxCaller, property);
-  }
-
-  // ctxCaller
-  ctx.ctxCaller = ctxCaller;
-
-  // innerAccess
-  if (innerAccess !== undefined) ctx.innerAccess = innerAccess;
-
-  // invoke middleware
-  await __fnMiddleware(ctx);
-  // check result
-  if (ctx.status === 200) {
-    if (!ctx.body || ctx.body.code === undefined) {
-      // not check code, e.g. text/xml
-      return ctx.body;
+    // query params body
+    if (query) {
+      ctx.req.query = ctx.request.query = query;
     }
-    if (ctx.body.code === 0) {
-      return ctx.body.data;
+    if (params) {
+      ctx.req.params = ctx.request.params = params;
     }
-    throw ctx.createError(ctx.body);
-  } else {
-    if (ctx.body && typeof ctx.body === 'object') {
+    ctx.req.body = ctx.request.body = body !== undefined ? body : {}; // not undefined
+
+    // headers
+    delegateHeaders(ctx, ctxCaller, headers);
+
+    // multipart
+    ctx.multipart = function (options) {
+      return ctxCaller.multipart(options);
+    };
+
+    // cookies
+    delegateCookies(ctx, ctxCaller);
+
+    // XX should not delegate session, because session._ctx related to ctx
+    // not delegate ctx.user, because will create req.user by state.user
+    for (const property of ['state', 'socket', 'session', 'instance']) {
+      delegateProperty(ctx, ctxCaller, property);
+    }
+
+    // ctxCaller
+    ctx.ctxCaller = ctxCaller;
+
+    // innerAccess
+    if (innerAccess !== undefined) ctx.innerAccess = innerAccess;
+
+    // invoke middleware
+    await __fnMiddleware(ctx);
+    // check result
+    if (ctx.status === 200) {
+      if (!ctx.body || ctx.body.code === undefined) {
+        // not check code, e.g. text/xml
+        return ctx.body;
+      }
+      if (ctx.body.code === 0) {
+        return ctx.body.data;
+      }
       throw ctx.createError(ctx.body);
     } else {
-      throw ctx.createError({
-        code: ctx.status,
-        message: ctx.message,
-      });
+      if (ctx.body && typeof ctx.body === 'object') {
+        throw ctx.createError(ctx.body);
+      } else {
+        throw ctx.createError({
+          code: ctx.status,
+          message: ctx.message,
+        });
+      }
     }
-  }
+  });
 }
 
 function delegateHeaders(ctx, ctxCaller, headers) {

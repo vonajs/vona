@@ -1,14 +1,15 @@
 // eslint-disable-next-line
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 
-describe('test/controller/test/ctx/tail.test.js', () => {
+describe.only('test/controller/test/ctx/tail.test.js', () => {
   it('action:tail', async () => {
     // ctx
-    const ctx = await app.meta.mockUtil.mockCtx();
-    await ctx.meta.util.performAction({
-      innerAccess: false,
-      method: 'post',
-      url: mockUrl('test/ctx/tail', false),
+    await app.meta.mockUtil.mockRunInAnonymousContextScope(async ctx => {
+      await ctx.meta.util.performAction({
+        innerAccess: false,
+        method: 'post',
+        url: mockUrl('test/ctx/tail', false),
+      });
     });
   });
 });
