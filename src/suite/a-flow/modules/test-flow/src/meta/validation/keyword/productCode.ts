@@ -17,7 +17,7 @@ keywords.productCode = {
         return true;
       }
       const atomId = ctx.meta.validateHost.key.atomId;
-      const items = await ctx.bean.atom.model.select({
+      const items = await ctx.app.bean.atom.model.select({
         alias: 'a',
         joins: [['leftJoin', 'testFlowProduct as b', { 'a.id': 'b.atomId' }]],
         where: {
@@ -28,7 +28,7 @@ keywords.productCode = {
       const item = items[0];
       if (item && item.id !== atomId) {
         const errors: any[] = [{ keyword: 'x-productCode', params: [], message: ctx.text('Product Code Exists') }];
-        throw new ctx.bean.ajv.Ajv.ValidationError(errors);
+        throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;
     };

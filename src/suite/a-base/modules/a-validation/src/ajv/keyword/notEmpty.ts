@@ -9,7 +9,7 @@ export default {
       // ctx
       const ctx = this;
       // ignoreNotEmpty
-      const ignoreNotEmpty = ctx.bean.util.getProperty(ctx.meta, 'validateHost.options.ignoreNotEmpty');
+      const ignoreNotEmpty = ctx.app.bean.util.getProperty(ctx.meta, 'validateHost.options.ignoreNotEmpty');
       if (ignoreNotEmpty) {
         // not check
         return true;
@@ -39,7 +39,7 @@ function evaluateExpression({ expression, rootData, ctx }) {
         user: ctx.state.user && ctx.state.user.op,
       },
     };
-    return ctx.bean.util.evaluateExpression({ expression, globals });
+    return ctx.app.bean.util.evaluateExpression({ expression, globals });
   } catch (err) {
     console.log(expression, rootData);
     throw err;

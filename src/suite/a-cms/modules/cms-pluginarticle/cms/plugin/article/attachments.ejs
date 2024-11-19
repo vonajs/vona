@@ -9,7 +9,7 @@
       <ul class="list-group list-group-flush">
         <%
           // fetch
-          const items = await ctx.bean.file.attachments({
+          const items = await ctx.app.bean.file.attachments({
             key: { atomId: article.atomId },
             user: null,
           });

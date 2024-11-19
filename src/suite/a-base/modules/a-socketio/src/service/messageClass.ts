@@ -26,8 +26,8 @@ export class ServiceMessageClass extends BeanBase<ScopeModule> {
       resource: `${__ThisModule__}.messageClass.register`,
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
-          fn: async ({ ctx }) => {
-            return await ctx.bean.io.messageClass._registerLock({ module, messageClassName });
+          fn: async () => {
+            return await this.bean.io.messageClass._registerLock({ module, messageClassName });
           },
         });
       },

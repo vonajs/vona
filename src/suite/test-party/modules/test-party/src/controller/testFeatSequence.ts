@@ -51,9 +51,9 @@ export class ControllerTestFeatSequence extends BeanBase<ScopeModule> {
     results = await pMap(arr, async () => {
       return await this.ctx.meta.util.executeBeanIsolate({
         transaction: true,
-        fn: async ({ ctx }) => {
-          const res = await ctx.bean.sequence.next('test');
-          await ctx.bean.util.sleep(50);
+        fn: async () => {
+          const res = await this.app.bean.sequence.next('test');
+          await this.bean.util.sleep(50);
           return res;
         },
       });

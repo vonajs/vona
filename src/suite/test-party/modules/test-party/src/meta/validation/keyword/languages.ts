@@ -8,11 +8,11 @@ keywords.languages = {
   compile(/* sch, parentSchema*/) {
     return async function (this: VonaContext, data) {
       const ctx = this;
-      const locales = ctx.bean.base.locales();
+      const locales = ctx.app.bean.base.locales();
       const index = locales.findIndex(item => item.value === data);
       if (index > -1) return true;
       const errors: any[] = [{ keyword: 'x-languages', params: [], message: ctx.text('NotExpectedValue') }];
-      throw new ctx.bean.ajv.Ajv.ValidationError(errors);
+      throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
     };
   },
 };

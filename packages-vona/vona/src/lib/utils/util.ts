@@ -130,7 +130,7 @@ export class AppUtil extends BeanSimple {
 
   // getWhiteListCors(ctx) {
   //   let whiteListCors;
-  //   const _config = ctx.bean._getScope('a-base').config;
+  //   const _config = ctx.app.bean._getScope('a-base').config;
   //   const _whiteList = (_config && _config.cors && _config.cors.whiteList) || [];
   //   if (!Array.isArray(_whiteList)) {
   //     whiteListCors = _whiteList.split(',');
@@ -146,7 +146,7 @@ export class AppUtil extends BeanSimple {
   //     whiteListCors = whiteListCors.concat(_whiteListJsonp);
   //   }
   //   // hostSelf
-  //   const hostSelf = ctx.bean.base.getAbsoluteUrl();
+  //   const hostSelf = ctx.app.bean.base.getAbsoluteUrl();
   //   if (hostSelf) {
   //     whiteListCors.push(hostSelf);
   //   }

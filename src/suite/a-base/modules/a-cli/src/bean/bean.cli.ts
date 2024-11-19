@@ -33,9 +33,8 @@ export class BeanCli extends BeanBase {
     // create progress
     await this.app.bean.progress.create({ progressId });
     // background
-    this.ctx.meta.util.runInBackground(async ({ ctx }) => {
-      const selfInstance = ctx.bean._newBean(BeanCli);
-      await selfInstance._progressInBackground({ progressId, context, user });
+    this.ctx.meta.util.runInBackground(async () => {
+      await this._progressInBackground({ progressId, context, user });
     });
     // return progressId
     return { progressId };

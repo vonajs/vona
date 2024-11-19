@@ -144,9 +144,8 @@ export class ServiceVersion extends BeanBase {
         subdomain: options.subdomain,
         beanModule: module.info.relativeName,
         transaction: true,
-        fn: async ({ ctx }) => {
-          const beanVersion = ctx.bean._newBean(ServiceVersion);
-          await beanVersion.__testModuleTransaction(module, fileVersionNew, options);
+        fn: async () => {
+          await this.__testModuleTransaction(module, fileVersionNew, options);
         },
       });
     }
@@ -186,9 +185,8 @@ export class ServiceVersion extends BeanBase {
         await this.ctx.meta.util.executeBean({
           beanModule: module.info.relativeName,
           transaction: module.name !== 'a-index',
-          fn: async ({ ctx }) => {
-            const beanVersion = ctx.bean._newBean(ServiceVersion);
-            await beanVersion.__updateModuleTransaction(module, version);
+          fn: async () => {
+            await this.__updateModuleTransaction(module, version);
           },
         });
       } else {
@@ -197,9 +195,8 @@ export class ServiceVersion extends BeanBase {
           subdomain: options.subdomain,
           beanModule: module.info.relativeName,
           transaction: true,
-          fn: async ({ ctx }) => {
-            const beanVersion = ctx.bean._newBean(ServiceVersion);
-            await beanVersion.__initModuleTransaction(module, version, options);
+          fn: async () => {
+            await this.__initModuleTransaction(module, version, options);
           },
         });
       }

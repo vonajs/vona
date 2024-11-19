@@ -35,8 +35,8 @@ export class BeanStatus extends BeanModuleScopeBase<ScopeModule> {
           resource: `${__ThisModule__}.statusSet.${this.moduleScope}.${name}`,
           fn: async () => {
             return await this.ctx.meta.util.executeBeanIsolate({
-              fn: async ({ ctx }) => {
-                return await ctx.bean.status.module(this.moduleScope)._set({ name, value, queue: false });
+              fn: async () => {
+                return await this.bean.status.module(this.moduleScope)._set({ name, value, queue: false });
               },
             });
           },

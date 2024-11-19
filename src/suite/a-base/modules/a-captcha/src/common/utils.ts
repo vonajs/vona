@@ -1,5 +1,5 @@
 export default {
   getCacheKey({ ctx, providerInstanceId }: any) {
-    return `captcha:${ctx.bean.user.anonymousId()}:${providerInstanceId}`;
+    return `captcha:${ctx.app.bean.user.anonymousId()}:${providerInstanceId}`;
   },
 };

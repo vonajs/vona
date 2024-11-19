@@ -47,7 +47,7 @@
         if(tags && tags.length>0){
           tagsText+='<i class="fas fa-tags"></i> ';
           for(const tagId of tags){
-            const tag = await ctx.bean.tag.get({ tagId });
+            const tag = await ctx.app.bean.tag.get({ tagId });
             const tagName = tag.tagName;
             tagsText+=`<a target="_blank" href="${url('static/articles.html')}?tagId=${tagId}&tagName=${encodeURIComponent(tagName)}"><span class="num tag">${util.escapeHtml(tagName)}</span></a>`;
           }

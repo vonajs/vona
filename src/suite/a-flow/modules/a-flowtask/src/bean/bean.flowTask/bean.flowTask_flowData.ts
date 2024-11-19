@@ -138,7 +138,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
       async get(flowNodeId) {
         let nodeInstance = this._nodeInstances[flowNodeId];
         if (!nodeInstance) {
-          nodeInstance = await ctx.bean.flow._loadFlowNodeInstance({ flowNodeId });
+          nodeInstance = await ctx.app.bean.flow._loadFlowNodeInstance({ flowNodeId });
           this._nodeInstances[flowNodeId] = nodeInstance;
         }
         return nodeInstance;
@@ -147,7 +147,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
         let options = this._options[flowNodeId];
         if (!options) {
           const nodeInstance = await this.get(flowNodeId);
-          options = ctx.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
+          options = ctx.app.bean.flowTask._getNodeDefOptionsTask({ nodeInstance });
           this._options[flowNodeId] = options;
         }
         return options;
@@ -159,7 +159,7 @@ export class BeanFlowTaskFlowData extends BeanFlowTaskAtomState {
     try {
       await fn;
       return true;
-    } catch (err) {
+    } catch (_err) {
       return false;
     }
   }

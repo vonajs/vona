@@ -783,19 +783,19 @@ var env=${JSON.stringify(env, null, 2)};
     const _textLocale = this.getCurrentLocale({ site });
     return {
       now(fmt?, locale?) {
-        return self.ctx.bean.util.now(fmt, locale || _textLocale);
+        return self.ctx.app.bean.util.now(fmt, locale || _textLocale);
       },
       today(fmt?, locale?) {
-        return self.ctx.bean.util.today(fmt, locale || _textLocale);
+        return self.ctx.app.bean.util.today(fmt, locale || _textLocale);
       },
       formatDateTime(date, fmt?, locale?) {
-        return self.ctx.bean.util.formatDateTime(date, fmt, locale || _textLocale);
+        return self.ctx.app.bean.util.formatDateTime(date, fmt, locale || _textLocale);
       },
       formatDate(date, sep?, locale?) {
-        return self.ctx.bean.util.formatDate(date, sep, locale || _textLocale);
+        return self.ctx.app.bean.util.formatDate(date, sep, locale || _textLocale);
       },
       formatTime(date, sep?, locale?) {
-        return self.ctx.bean.util.formatTime(date, sep, locale || _textLocale);
+        return self.ctx.app.bean.util.formatTime(date, sep, locale || _textLocale);
       },
     };
   }
@@ -825,12 +825,12 @@ var env=${JSON.stringify(env, null, 2)};
       },
       url(fileName, language) {
         if (fileName && (fileName.indexOf('http://') === 0 || fileName.indexOf('https://') === 0)) {
-          return self.ctx.bean.util.escapeURL(fileName);
+          return self.ctx.app.bean.util.escapeURL(fileName);
         }
         let _path = self.resolvePath('', path.relative(_pathIntermediate, this._filename), fileName);
         _path = _path.replace(/\\/gi, '/');
         const _url = self.getUrl(site, language || (site.language && site.language.current), _path);
-        return self.ctx.bean.util.escapeURL(_url);
+        return self.ctx.app.bean.util.escapeURL(_url);
       },
       css(fileName) {
         _csses.push(self.resolvePath(_pathIntermediate, this._filename, fileName));
@@ -853,10 +853,10 @@ var env=${JSON.stringify(env, null, 2)};
           return self.ctx.helper.shtml(str);
         },
         escapeHtml(str) {
-          return self.ctx.bean.util.escapeHtml(str);
+          return self.ctx.app.bean.util.escapeHtml(str);
         },
         escapeURL(str) {
-          return self.ctx.bean.util.escapeURL(str);
+          return self.ctx.app.bean.util.escapeURL(str);
         },
       },
     };

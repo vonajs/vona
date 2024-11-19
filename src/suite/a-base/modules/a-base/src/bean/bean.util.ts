@@ -290,7 +290,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
       url(str) {
         if (str && (str.indexOf('http://') === 0 || str.indexOf('https://') === 0)) return this.escapeURL(str);
         if (str[0] !== '/') str = '/' + str;
-        return self.ctx.bean.base.getAbsoluteUrl(this.escapeURL(str));
+        return self.ctx.app.bean.base.getAbsoluteUrl(this.escapeURL(str));
       },
       urlFront(str) {
         return this.url(str);

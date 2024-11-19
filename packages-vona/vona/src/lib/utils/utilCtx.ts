@@ -63,7 +63,7 @@ export class CtxUtil extends BeanSimple {
     for (const key of ['x-clientid', 'x-scene']) {
       if (!headers[key]) {
         const value =
-          key === 'x-clientid' ? (<any>ctx.bean).util.getFrontClientId() : (<any>ctx.bean).util.getFrontScene();
+          key === 'x-clientid' ? (<any>ctx.app.bean).util.getFrontClientId() : (<any>ctx.app.bean).util.getFrontScene();
         if (value) {
           headers[key] = value;
         }

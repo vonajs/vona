@@ -136,7 +136,7 @@ function _createAuthenticate() {
     ctx.params.providerName = providerName;
     ctx.params.providerScene = providerScene;
     // authenticate
-    await ctx.bean.scope(__ThisModule__).service.passport.authenticate({
+    await ctx.app.bean.scope(__ThisModule__).service.passport.authenticate({
       module,
       providerName,
       providerScene,

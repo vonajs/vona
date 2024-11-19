@@ -12,12 +12,12 @@ export class StartupRegisterPassport extends BeanBase {
         return profileUser;
       }
       // user verify
-      return await ctx.bean.user.verify({ state, profileUser });
+      return await this.bean.user.verify({ state, profileUser });
     });
     // serializeUser
     this.app.passport.serializeUser(async (ctx, user) => {
       ctx.state.user = user;
-      return await ctx.bean.auth.serializeUser({ user });
+      return await this.bean.auth.serializeUser({ user });
     });
     // deserializeUser
     this.app.passport.deserializeUser(async (ctx, user) => {
@@ -25,9 +25,9 @@ export class StartupRegisterPassport extends BeanBase {
         return null;
       }
       if (ctx.state && ctx.state.user) {
-        return ctx.bean.auth._pruneUser({ user: ctx.state.user });
+        return this.bean.auth._pruneUser({ user: ctx.state.user });
       }
-      return await ctx.bean.auth.deserializeUser({ user });
+      return await this.bean.auth.deserializeUser({ user });
     });
   }
 }

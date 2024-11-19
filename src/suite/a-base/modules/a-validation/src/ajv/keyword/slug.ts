@@ -27,16 +27,16 @@ export default {
       if (rootData.atomLanguage) {
         where['a.atomLanguage'] = rootData.atomLanguage;
       }
-      const items = await ctx.bean.atom.model.select({
+      const items = await ctx.app.bean.atom.model.select({
         alias: 'a',
         joins: [['leftJoin', 'aCmsArticle as b', { 'a.id': 'b.atomId' }]],
         where,
       });
       // check draft/formal
-      const checkExists = await ctx.bean.util.checkAtomIdExists({ atomId, items });
+      const checkExists = await ctx.app.bean.util.checkAtomIdExists({ atomId, items });
       if (checkExists) {
         const errors: any[] = [{ keyword: 'x-slug', params: [], message: ctx.text('Slug Exists') }];
-        throw new ctx.bean.ajv.Ajv.ValidationError(errors);
+        throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;
     };

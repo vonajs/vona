@@ -15,7 +15,7 @@ export default ({ ctx /* flowInstance*/ }: any) => {
       if (this.context) globals.context = this.context;
       if (this.contextNode) globals.contextNode = this.contextNode;
       if (this.contextEdge) globals.contextEdge = this.contextEdge;
-      return await ctx.bean.flow.executeService({
+      return await ctx.app.bean.flow.executeService({
         bean,
         parameter,
         globals,
