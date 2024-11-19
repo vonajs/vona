@@ -6,6 +6,7 @@ import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
 import { Cast } from '../../types/utils/cast.js';
 import { appResource } from '../../lib/index.js';
+import { AsyncResource } from 'node:async_hooks';
 
 const MODULE = Symbol.for('Context#__module');
 const META = Symbol.for('Context#__meta');
@@ -89,7 +90,7 @@ const context: ContextBase = {
   },
   tail(cb) {
     if (!Cast(this).dbMeta.master) {
-      this.ctxCaller.tail(cb);
+      this.ctxCaller.tail(AsyncResource.bind(cb));
     } else {
       this.tailCallbacks.push(cb);
     }

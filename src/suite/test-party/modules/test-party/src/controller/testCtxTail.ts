@@ -10,7 +10,7 @@ export class ControllerTestCtxTail extends BeanBase<ScopeModule> {
 
     // tail
     this.ctx.tail(() => {
-      console.log('--------:', Cast(this.ctx.meta)._tail_test_caller);
+      assert.equal(Cast(this.ctx.meta)._tail_test_als_caller, undefined);
       assert.equal(Cast(this.ctx.meta)._tail_test, 2);
       this.ctx.tail(() => {
         assert.equal(Cast(this.ctx.meta)._tail_test, 3);

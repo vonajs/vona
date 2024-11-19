@@ -2,7 +2,7 @@
 import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 import { Cast } from 'vona';
 
-describe('test/controller/test/ctx/tail.test.js', () => {
+describe.only('test/controller/test/ctx/tail.test.js', () => {
   it('action:tail', async () => {
     // ctx
     await app.meta.mockUtil.mockRunInAnonymousContextScope(async ctx => {
@@ -15,10 +15,10 @@ describe('test/controller/test/ctx/tail.test.js', () => {
     });
   });
 
-  it.only('action:tail:transaction', async () => {
+  it('action:tail:transaction', async () => {
     // ctx
     await app.meta.mockUtil.mockRunInAnonymousContextScope(async ctx => {
-      Cast(ctx.meta)._tail_test_caller = 1;
+      Cast(ctx.meta)._tail_test_als_caller = 1;
       await Cast(ctx).transaction.begin(async () => {
         await ctx.meta.util.performAction({
           innerAccess: false,
