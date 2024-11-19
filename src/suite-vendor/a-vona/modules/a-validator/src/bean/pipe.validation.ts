@@ -22,7 +22,7 @@ export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal, Val
   global: true,
   // ValidatorOptions
   disableErrorMessages: false,
-  errorHttpStatusCode: HttpStatus.UNPROCESSABLE_CONTENT,
+  errorHttpStatusCode: HttpStatus.BAD_REQUEST,
   passthrough: false,
   strict: false,
 })

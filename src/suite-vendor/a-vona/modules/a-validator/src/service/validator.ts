@@ -11,14 +11,12 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     value: V,
     options?: ValidatorOptions,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
+    const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
     // check value: nil, maybe need other argument derecotor to validate it
     if (isNil(value)) return value as any;
     // check value: primitive
     if (this._isPrimitiveValue(value)) {
-      this.ctx.throw(
-        HttpStatus.BAD_REQUEST, // always 400
-        this.scope.locale.ValidationFailedPipeValidationInvalidContent(),
-      );
+      this.ctx.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     }
     // schema
     const objectSchema = this.getSchema(classType, options);
@@ -27,10 +25,10 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     if (result.success) return result.data as any;
     // error
     if (options?.disableErrorMessages) {
-      this.ctx.throw(HttpStatus.BAD_REQUEST);
+      this.ctx.throw(errorHttpStatusCode);
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
-    this.ctx.throw(options?.errorHttpStatusCode ?? HttpStatus.UNPROCESSABLE_CONTENT, issues);
+    this.ctx.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
     return undefined as any;
   }
 
