@@ -842,7 +842,7 @@ var env=${JSON.stringify(env, null, 2)};
         _envs[name] = value;
       },
       text(text, ...args) {
-        return self.ctx.text.locale(_textLocale, text, ...args);
+        return self.ctx.app.text.locale(_textLocale, text, ...args);
       },
       util: {
         time,

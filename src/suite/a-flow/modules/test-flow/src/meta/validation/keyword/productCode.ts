@@ -27,7 +27,7 @@ keywords.productCode = {
       });
       const item = items[0];
       if (item && item.id !== atomId) {
-        const errors: any[] = [{ keyword: 'x-productCode', params: [], message: ctx.text('Product Code Exists') }];
+        const errors: any[] = [{ keyword: 'x-productCode', params: [], message: ctx.app.text('Product Code Exists') }];
         throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;

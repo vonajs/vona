@@ -30,8 +30,8 @@ export default {
       // check draft/formal
       const checkExists = await ctx.app.bean.util.checkAtomIdExists({ atomId, items });
       if (checkExists) {
-        const _title = ctx.text(schemaProperty.ebTitle || 'Atom Name');
-        const message = `${_title} ${ctx.text('ExistsValidation')}`;
+        const _title = ctx.app.text(schemaProperty.ebTitle || 'Atom Name');
+        const message = `${_title} ${ctx.app.text('ExistsValidation')}`;
         const errors: any[] = [{ keyword: 'x-atomName', params: [], message }];
         throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
       }

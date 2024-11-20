@@ -285,7 +285,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
     return {
       text(text, ...args) {
         const locale = options && options.locale;
-        return self.ctx.text.locale(locale || self.ctx.app.config.i18n.defaultLocale, text, ...args);
+        return self.ctx.app.text.locale(locale || self.ctx.app.config.i18n.defaultLocale, text, ...args);
       },
       url(str) {
         if (str && (str.indexOf('http://') === 0 || str.indexOf('https://') === 0)) return this.escapeURL(str);

@@ -35,7 +35,7 @@ export default {
       // check draft/formal
       const checkExists = await ctx.app.bean.util.checkAtomIdExists({ atomId, items });
       if (checkExists) {
-        const errors: any[] = [{ keyword: 'x-slug', params: [], message: ctx.text('Slug Exists') }];
+        const errors: any[] = [{ keyword: 'x-slug', params: [], message: ctx.app.text('Slug Exists') }];
         throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
       }
       return true;
