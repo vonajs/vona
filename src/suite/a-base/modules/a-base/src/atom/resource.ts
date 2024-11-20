@@ -85,10 +85,10 @@ export class AtomResource extends BeanAtomBase<ScopeModule> {
     }
     // locale of appName
     if (item.appName) {
-      item.appNameLocale = this.ctx.text(item.appName);
+      item.appNameLocale = this.app.text(item.appName);
     }
     // locale of atomCategoryName
-    item.atomCategoryNameLocale = this.ctx.text(item.atomCategoryName);
+    item.atomCategoryNameLocale = this.app.text(item.atomCategoryName);
     // meta
     const meta = this._ensureItemMeta(item);
     // meta.flags

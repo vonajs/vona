@@ -72,7 +72,7 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
         atomClass.model = key;
       }
       // titleLocale
-      atomClass.titleLocale = this.ctx.text(atomClass.title);
+      atomClass.titleLocale = this.app.text(atomClass.title);
       // beanFullName
       atomClass.beanFullName = this.bean.util.combineBeanFullName({
         module: moduleName,

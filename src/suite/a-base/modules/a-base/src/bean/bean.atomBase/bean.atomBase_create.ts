@@ -128,11 +128,11 @@ export class BeanAtomBaseCreate extends BeanAtomBase1 {
     // user
     if (atomClass.module === 'a-base' && atomClass.atomClassName === 'user') {
       const draftId = await sequence.next('draft');
-      data.atomName = `${this.ctx.text('User')}__${draftId}`;
+      data.atomName = `${this.app.text('User')}__${draftId}`;
       return;
     }
     // atomName
-    const atomName = !atomClassBase.simple ? this.ctx.text('Draft') : this.ctx.text('Unnamed');
+    const atomName = !atomClassBase.simple ? this.app.text('Draft') : this.app.text('Unnamed');
     if (!this.configModuleBase.draft.sequence) {
       data.atomName = atomName;
       return;

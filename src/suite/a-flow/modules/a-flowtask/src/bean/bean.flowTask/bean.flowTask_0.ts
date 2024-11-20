@@ -36,12 +36,12 @@ export class BeanFlowTask0 extends BeanBase<ScopeModule> {
     // loop
     for (const task of tasks as any[]) {
       // locale
-      task.flowNodeNameLocale = this.ctx.text(task.flowNodeName);
+      task.flowNodeNameLocale = this.app.text(task.flowNodeName);
       if (task.flowNodeRemark) {
-        task.flowNodeRemarkLocale = this.ctx.text(task.flowNodeRemark);
+        task.flowNodeRemarkLocale = this.app.text(task.flowNodeRemark);
       }
       if (task.handleRemark) {
-        task.handleRemarkLocale = this.ctx.text(task.handleRemark);
+        task.handleRemarkLocale = this.app.text(task.handleRemark);
       }
     }
     return tasks;

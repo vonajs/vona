@@ -240,7 +240,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
     }
     // not use system locale
     // if (!titleLocale) {
-    //   titleLocale = this.ctx.text(title);
+    //   titleLocale = this.app.text(title);
     // }
     return titleLocale || title;
   }

@@ -21,7 +21,7 @@ export class BeanBaseResourceTypes extends BeanBaseModules {
         const fullKey = `${moduleName}:${key}`;
         resourceTypes[fullKey] = {
           ...resource,
-          titleLocale: this.ctx.text(resource.title),
+          titleLocale: this.app.text(resource.title),
         };
       }
     }

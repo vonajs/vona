@@ -59,7 +59,7 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
     for (const item of items) {
       // roleNameBase
       if (item.roleNameBase) {
-        item.roleNameBaseLocale = this.ctx.text(item.roleNameBase);
+        item.roleNameBaseLocale = this.app.text(item.roleNameBase);
       }
     }
   }

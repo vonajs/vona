@@ -15,7 +15,7 @@ export class BeanMarkdown extends BeanBase {
     const blockOptions = {
       utils: {
         text: (text, ...args) => {
-          return this.ctx.text.locale(locale || this.ctx.app.config.i18n.defaultLocale, text, ...args);
+          return this.app.text.locale(locale || this.ctx.app.config.i18n.defaultLocale, text, ...args);
         },
         register: ({ params, content }) => {
           const placeholder = `__markdown_block_placeholder__${this.app.bean.util.uuidv4()}`;

@@ -15,7 +15,7 @@ export class LocalFlowFlowMessage extends LocalFlowFlowNextEdges {
     if (!userFlow) {
       return;
     }
-    const title = `${this.ctx.text.locale(userFlow.locale as any, 'FlowTitle')} - ${this.ctx.text.locale(
+    const title = `${this.app.text.locale(userFlow.locale as any, 'FlowTitle')} - ${this.app.text.locale(
       userFlow.locale as any,
       this.context._flow.flowRemark || 'End',
     )}`;

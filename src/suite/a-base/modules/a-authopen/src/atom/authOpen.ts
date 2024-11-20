@@ -137,7 +137,7 @@ export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
       item.scopeRoleName = 'Not Specified';
     }
     if (item.scopeRoleName) {
-      item.scopeRoleNameLocale = this.ctx.text(item.scopeRoleName);
+      item.scopeRoleNameLocale = this.app.text(item.scopeRoleName);
     }
   }
 }

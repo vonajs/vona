@@ -126,7 +126,7 @@ export class AtomDict extends BeanAtomBase<ScopeModule> {
   async _getMetaTranslate(item) {
     if (['a-dictbooster:dictMode', 'a-base:dictRoleType'].includes(item.atomStaticKey)) {
       item._dictModeTitle = 'Array';
-      item._dictModeTitleLocale = this.ctx.text('Array');
+      item._dictModeTitleLocale = this.app.text('Array');
       return;
     }
     await this._dictTranslateField({

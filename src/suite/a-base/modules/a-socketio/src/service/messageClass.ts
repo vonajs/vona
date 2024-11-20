@@ -84,7 +84,7 @@ export class ServiceMessageClass extends BeanBase<ScopeModule> {
       const message = this.app.bean.util.extend({}, _messages[key]);
       message.info.name = key;
       // titleLocale
-      message.info.titleLocale = this.ctx.text(message.info.title);
+      message.info.titleLocale = this.app.text(message.info.title);
       // bean
       if (message.info.bean) {
         message.info.beanFullName = this.bean.util.combineBeanFullName({
@@ -139,7 +139,7 @@ export class ServiceMessageClass extends BeanBase<ScopeModule> {
       const channel = this.app.bean.util.extend({}, _channels[key]);
       channel.info.name = key;
       // titleLocale
-      channel.info.titleLocale = this.ctx.text(channel.info.title);
+      channel.info.titleLocale = this.app.text(channel.info.title);
       // bean
       if (channel.info.bean) {
         channel.info.beanFullName = this.bean.util.combineBeanFullName({

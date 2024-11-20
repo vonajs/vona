@@ -6,8 +6,8 @@ export class ControllerTestCtxLocale extends BeanBase<ScopeModule> {
   async enus() {
     const message = this.scope.config.message;
     const data = {
-      enus: this.ctx.text(message),
-      zhcn: this.ctx.text.locale('zh-cn', message),
+      enus: this.app.text(message),
+      zhcn: this.app.text.locale('zh-cn', message),
     };
 
     // done
@@ -17,8 +17,8 @@ export class ControllerTestCtxLocale extends BeanBase<ScopeModule> {
   async zhcn() {
     const message = this.scope.config.message;
     const data = {
-      zhcn: this.ctx.text(message),
-      enus: this.ctx.text.locale('en-us', message),
+      zhcn: this.app.text(message),
+      enus: this.app.text.locale('en-us', message),
     };
 
     // done

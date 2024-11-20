@@ -19,7 +19,7 @@ export class LocalFlowTaskMessage extends LocalFlowTaskNotify {
     if (!userAssignee) {
       return;
     }
-    const title = `${this.ctx.text.locale(userAssignee.locale as any, 'Task')} - ${this.ctx.text.locale(
+    const title = `${this.app.text.locale(userAssignee.locale as any, 'Task')} - ${this.app.text.locale(
       userAssignee.locale as any,
       this.contextNode._flowNode.flowNodeName,
     )}`;

@@ -25,7 +25,7 @@ export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
     providers = this.app.bean.util.extend({}, providers);
     for (const providerName in providers) {
       const provider = providers[providerName];
-      provider.titleLocale = this.ctx.text(provider.title);
+      provider.titleLocale = this.app.text(provider.title);
     }
     return providers;
   }

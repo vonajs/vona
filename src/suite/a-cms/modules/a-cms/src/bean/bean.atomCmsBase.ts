@@ -332,7 +332,7 @@ export class BeanAtomCmsBase<T = unknown> extends BeanAtomBase<T> {
   _cms_getMeta(_options, item, showSorting) {
     const meta = this._ensureItemMeta(item);
     // meta.flags
-    if (item.sticky) meta.flags.push(this.ctx.text('Sticky'));
+    if (item.sticky) meta.flags.push(this.app.text('Sticky'));
     if (item.sorting && showSorting) meta.flags.push(item.sorting);
     // meta.summary
     meta.summary = item.description || item.summary;

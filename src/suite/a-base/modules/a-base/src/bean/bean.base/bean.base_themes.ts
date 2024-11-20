@@ -19,10 +19,10 @@ export class BeanBaseThemes extends BeanBaseResourceTypes {
   //       const _module: any = {
   //         name: relativeName,
   //         title: module.package.title || module.info.name,
-  //         description: this.ctx.text(module.package.description),
+  //         description: this.app.text(module.package.description),
   //         info: module.info,
   //       };
-  //       _module.titleLocale = this.ctx.text(_module.title);
+  //       _module.titleLocale = this.app.text(_module.title);
   //       modules[relativeName] = _module;
   //     }
   //   }

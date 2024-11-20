@@ -127,7 +127,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     const languages: any[] = [];
     for (const item of siteBase.language.items.split(',')) {
       languages.push({
-        title: this.ctx.text(item),
+        title: this.app.text(item),
         value: item,
       });
     }
@@ -206,7 +206,7 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
       for (const item of site.language.items.split(',')) {
         site.languages.push({
           name: item,
-          title: this.ctx.text.locale(item, item),
+          title: this.app.text.locale(item, item),
           url: this.getUrl(site, item, 'index.html'),
         });
       }
@@ -885,7 +885,7 @@ var env=${JSON.stringify(env, null, 2)};
             progressNo,
             total: progress0_Total,
             progress: progress0_progress++,
-            text: site.language ? `${this.ctx.text('Build')} ${this.ctx.text(language)}` : this.ctx.text('Build'),
+            text: site.language ? `${this.app.text('Build')} ${this.app.text(language)}` : this.app.text('Build'),
           });
         }
 
@@ -902,7 +902,7 @@ var env=${JSON.stringify(env, null, 2)};
         if (progressNo === 0) {
           await this.app.bean.progress.done({
             progressId,
-            message: `${this.ctx.text('Time Used')}: ${parseInt(time)}${this.ctx.text('second2')}`,
+            message: `${this.app.text('Time Used')}: ${parseInt(time)}${this.app.text('second2')}`,
           });
         }
       }
@@ -938,7 +938,7 @@ var env=${JSON.stringify(env, null, 2)};
           progressNo,
           total: progress0_Total,
           progress: progress0_progress++,
-          text: this.ctx.text('Initialize'),
+          text: this.app.text('Initialize'),
         });
       }
 
@@ -1047,7 +1047,7 @@ var env=${JSON.stringify(env, null, 2)};
           progressNo,
           total: progress0_Total,
           progress: progress0_progress++,
-          text: this.ctx.text('Render Files'),
+          text: this.app.text('Render Files'),
         });
       }
 
@@ -1063,7 +1063,7 @@ var env=${JSON.stringify(env, null, 2)};
         if (progressNo === 0) {
           await this.app.bean.progress.done({
             progressId,
-            message: `${this.ctx.text('Time Used')}: ${parseInt(time)}${this.ctx.text('second2')}`,
+            message: `${this.app.text('Time Used')}: ${parseInt(time)}${this.app.text('second2')}`,
           });
         }
       }

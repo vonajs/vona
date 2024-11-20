@@ -56,7 +56,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
       return {
         name: item,
         title,
-        titleLocale: this.ctx.text(title),
+        titleLocale: this.app.text(title),
       };
     });
   }

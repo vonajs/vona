@@ -133,7 +133,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     });
     const title = this.app.bean.util.getProperty(actionBase, 'params.atomDisabled.title') || 'Disabled';
     const meta = this._ensureItemMeta(item);
-    meta.flags.push(this.ctx.text(title));
+    meta.flags.push(this.app.text(title));
   }
 
   async _atomCategoryIdTranslate({ items, item, atomClassBase }: any) {
@@ -195,7 +195,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
       usersWant = await this.app.bean.user.model.mget(userIdsWant);
     }
     // special for system user
-    usersWant.push({ id: 0, userName: this.ctx.text('system') });
+    usersWant.push({ id: 0, userName: this.app.text('system') });
     // set
     for (item of items) {
       for (const userIdKey of userIdsKey) {
@@ -242,7 +242,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
       if (!_atomClassBase.resource) continue;
       // set
       if (!item.atomNameLocale) {
-        item.atomNameLocale = this.ctx.text(item.atomName);
+        item.atomNameLocale = this.app.text(item.atomName);
       }
     }
   }
@@ -256,7 +256,7 @@ export class BeanAtomBase1 extends BeanAtomBase0 {
     // set
     for (item of items) {
       if (item.atomLanguage) {
-        item.atomLanguageLocale = this.ctx.text(item.atomLanguage);
+        item.atomLanguageLocale = this.app.text(item.atomLanguage);
       }
     }
   }

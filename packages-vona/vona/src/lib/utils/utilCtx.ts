@@ -182,7 +182,7 @@ export class CtxUtil extends BeanSimple {
   throwValidationFailed(code: HttpStatus, message: string, metadata: RouteHandlerArgumentMeta) {
     if (!this.app.meta.isProd) {
       const beanOptions = appResource.getBean(metadata.controller);
-      message = `${message}: ${this.ctx.text('ValidationFailedDev', beanOptions?.beanFullName, metadata.method, metadata.index)}`;
+      message = `${message}: ${this.app.text('ValidationFailedDev', beanOptions?.beanFullName, metadata.method, metadata.index)}`;
     }
     this.app.throw(code, message);
   }

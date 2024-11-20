@@ -127,7 +127,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     // setLocales
     const locales = this.scope.config.locales;
     for (const locale in locales) {
-      const atomNameLocale = this.ctx.text.locale(locale as any, atomName);
+      const atomNameLocale = this.app.text.locale(locale as any, atomName);
       const item = items.find(_item => _item.locale === locale);
       if (item) {
         if (atomNameLocale !== item.atomNameLocale) {
@@ -162,7 +162,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
       await this.modelResourceLocale.insert({
         atomId: resource.atomId,
         locale,
-        atomNameLocale: this.ctx.text.locale(locale, resource.atomName),
+        atomNameLocale: this.app.text.locale(locale, resource.atomName),
       });
     }
   }
@@ -233,7 +233,7 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
     });
     // locale
     for (const item of items) {
-      item.roleNameLocale = this.ctx.text(item.roleName);
+      item.roleNameLocale = this.app.text(item.roleName);
     }
     // ok
     return items;
@@ -485,10 +485,10 @@ export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
         item.resourceTypeLocale = resourceType.titleLocale;
       }
       // category name
-      item.atomCategoryNameLocale = this.ctx.text(item.atomCategoryName);
+      item.atomCategoryNameLocale = this.app.text(item.atomCategoryName);
       // roleNameBase
       if (item.roleNameBase) {
-        item.roleNameBaseLocale = this.ctx.text(item.roleNameBase);
+        item.roleNameBaseLocale = this.app.text(item.roleNameBase);
       }
     }
   }

@@ -108,7 +108,7 @@ export class AtomParty extends BeanAtomCmsBase<ScopeModule> {
     const meta = this._ensureItemMeta(item);
     // meta.flags
     if (layout !== 'table' && item.personCount) {
-      meta.flags.push(item.personCount + this.ctx.text('PartyPersonCountFlag'));
+      meta.flags.push(item.personCount + this.app.text('PartyPersonCountFlag'));
     }
     // meta.summary
     if (item.partyTypeCode) {

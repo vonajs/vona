@@ -12,7 +12,7 @@ export class ServiceFlow extends BeanBase {
         return {
           ...node,
           options: undefined,
-          nameLocale: this.ctx.text(node.name),
+          nameLocale: this.app.text(node.name),
         };
       });
     }

@@ -94,11 +94,11 @@ export class AtomApp extends BeanAtomBase<ScopeModule> {
 
   _getMeta(item) {
     // locale of atomCategoryName
-    item.atomCategoryNameLocale = this.ctx.text(item.atomCategoryName);
+    item.atomCategoryNameLocale = this.app.text(item.atomCategoryName);
     // meta
     const meta = this._ensureItemMeta(item);
     // meta.flags
     // meta.summary
-    meta.summary = this.ctx.text(item.description);
+    meta.summary = this.app.text(item.description);
   }
 }

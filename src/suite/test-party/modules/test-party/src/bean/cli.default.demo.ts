@@ -33,7 +33,7 @@ export class CliDefaultDemo extends BeanCliBase {
     const total = 2;
     let current = 0;
     for (let i = 0; i < total; i++) {
-      const text = `${this.ctx.text('LevelOne')}: ${i + 1}`;
+      const text = `${this.app.text('LevelOne')}: ${i + 1}`;
       await this.console.log({
         progressNo,
         total,
@@ -51,7 +51,7 @@ export class CliDefaultDemo extends BeanCliBase {
     const total = 2;
     let current = 0;
     for (let i = 0; i < total; i++) {
-      const text = `${this.ctx.text('LevelTwo')}: ${i + 1}`;
+      const text = `${this.app.text('LevelTwo')}: ${i + 1}`;
       await this.console.log({
         progressNo,
         total,
@@ -69,7 +69,7 @@ export class CliDefaultDemo extends BeanCliBase {
     const total = 3;
     let current = 0;
     for (let i = 0; i < total; i++) {
-      const text = `${this.ctx.text('LevelThree')}: ${i + 1}`;
+      const text = `${this.app.text('LevelThree')}: ${i + 1}`;
       await this.console.log({
         progressNo,
         total,

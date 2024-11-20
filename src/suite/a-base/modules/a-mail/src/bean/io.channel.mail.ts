@@ -36,7 +36,7 @@ export class IoChannelMail extends BeanIoChannelBase {
     }
     // check if empty
     if (!this._sceneValid(scene)) {
-      const message = chalk.keyword('orange')(this.ctx.text('mailhostNotConfigAlert'));
+      const message = chalk.keyword('orange')(this.app.text('mailhostNotConfigAlert'));
       console.log('\n' + boxen(message, boxenOptions));
       return false;
     }

@@ -192,12 +192,12 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     }
   }
 
-  // this.ctx.text is not good for resource
+  // this.app.text is not good for resource
   //   so, support only for atomLanguage
   _getAtomFieldValueByLocale(item, field) {
     const value = item[field];
     if (value && item.atomLanguage) {
-      return this.ctx.text.locale(item.atomLanguage, value);
+      return this.app.text.locale(item.atomLanguage, value);
     }
     return value;
   }

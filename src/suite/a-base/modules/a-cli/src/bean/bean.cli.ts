@@ -54,7 +54,7 @@ export class BeanCli extends BeanBase {
       // execute
       await beanCommand.execute({ user });
       // progress done
-      await this.app.bean.progress.done({ progressId, message: this.ctx.text('CliDone') });
+      await this.app.bean.progress.done({ progressId, message: this.app.text('CliDone') });
     } catch (err: any) {
       // progress error
       const msg = err.message;

@@ -15,10 +15,10 @@ export class BeanFlowQuery extends BeanFlowLoad {
     if (count === 1) return items as BigNumber;
     for (const item of items as any[]) {
       if (item.flowNodeNameCurrent) {
-        item.flowNodeNameCurrentLocale = this.ctx.text(item.flowNodeNameCurrent);
+        item.flowNodeNameCurrentLocale = this.app.text(item.flowNodeNameCurrent);
       }
       if (item.flowRemark) {
-        item.flowRemarkLocale = this.ctx.text(item.flowRemark);
+        item.flowRemarkLocale = this.app.text(item.flowRemark);
       }
     }
     return items;

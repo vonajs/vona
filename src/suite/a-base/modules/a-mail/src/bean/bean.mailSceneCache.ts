@@ -25,7 +25,7 @@ export class BeanMailSceneCache extends BeanBase<ScopeModule> {
     scenes = this.app.bean.util.extend({}, scenes);
     for (const sceneName in scenes) {
       const scene = scenes[sceneName];
-      scene.titleLocale = this.ctx.text(scene.title);
+      scene.titleLocale = this.app.text(scene.title);
     }
     return scenes;
   }

@@ -12,7 +12,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     if (!categoryId) return null;
     const category = await this.model.get({ id: categoryId });
     if (category && setLocale) {
-      category.categoryNameLocale = this.ctx.text(category.categoryName);
+      category.categoryNameLocale = this.app.text(category.categoryName);
     }
     return category;
   }
@@ -122,7 +122,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
     });
     if (setLocale) {
       for (const category of list) {
-        category.categoryNameLocale = this.ctx.text(category.categoryName);
+        category.categoryNameLocale = this.app.text(category.categoryName);
       }
     }
     return list;

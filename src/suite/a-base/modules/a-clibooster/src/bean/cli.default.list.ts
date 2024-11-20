@@ -63,7 +63,7 @@ export class CliDefaultList extends BeanCliBase {
         const _command = _group[commandName];
         const cliFullName = this._combineCliFullName({ moduleShow, groupShow, commandName });
         const version = _command.info.version;
-        const description = this.ctx.text(_command.info.description || _command.info.title);
+        const description = this.app.text(_command.info.description || _command.info.title);
         table.push([cliFullName, version, description]);
       }
       if (index < groupCount - 1) {

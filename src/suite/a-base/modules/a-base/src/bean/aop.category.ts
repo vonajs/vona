@@ -35,7 +35,7 @@ export class AopCategory extends BeanBase<ScopeModule> {
 
   _checkGeneral({ list }: any) {
     for (const item of list) {
-      item.categoryNameLocale = this.ctx.text(item.categoryName);
+      item.categoryNameLocale = this.app.text(item.categoryName);
     }
     return true;
   }

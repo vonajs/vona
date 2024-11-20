@@ -16,7 +16,7 @@ export class BeanAtomBaseExportBulk extends BeanAtomBaseDelete {
     const columns: any[] = [];
     for (const field of fields) {
       columns.push({
-        header: this.ctx.text(field.title),
+        header: this.app.text(field.title),
         key: field.name,
       });
     }

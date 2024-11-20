@@ -312,16 +312,16 @@ export class ServiceComment extends BeanBase<ScopeModule> {
     if (mode === 'add') {
       // add
       if (replyId === 0) {
-        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleNewComment');
+        title = this.app.text.locale(locale as any, 'CommentPublishTitleNewComment');
       } else {
-        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleReplyComment');
+        title = this.app.text.locale(locale as any, 'CommentPublishTitleReplyComment');
       }
     } else {
       // edit
       if (replyId === 0) {
-        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleEditComment');
+        title = this.app.text.locale(locale as any, 'CommentPublishTitleEditComment');
       } else {
-        title = this.ctx.text.locale(locale as any, 'CommentPublishTitleEditReplyComment');
+        title = this.app.text.locale(locale as any, 'CommentPublishTitleEditReplyComment');
       }
     }
     return title;

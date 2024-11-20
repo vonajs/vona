@@ -75,7 +75,7 @@ export class BeanBaseActions extends BeanBase0 {
       const action = _actionsAll[key];
       if (!action.code) action.code = _actionsSystem[key];
       action.name = key;
-      action.titleLocale = this.ctx.text(action.title);
+      action.titleLocale = this.app.text(action.title);
       actions[key] = action;
     }
     return actions;

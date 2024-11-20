@@ -228,7 +228,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       userIdUpdated = user.id;
       userIdCreated = user.id;
       atomFlowId = 0;
-      atomName = `${srcItem.atomName}-${this.ctx.text('CloneCopyText')}`;
+      atomName = `${srcItem.atomName}-${this.app.text('CloneCopyText')}`;
       atomStatic = 0;
       if (atomStaticKey) {
         atomStaticKey = this.app.bean.util.uuidv4();

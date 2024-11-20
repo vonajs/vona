@@ -16,7 +16,7 @@ export class ControllerKitchenSinkPtrIsLoadmore extends BeanBase<ScopeModule> {
       if (itemId > gTestListMax) break;
       items.push({
         id: itemId,
-        title: `${this.ctx.text('Item')} - ${itemId}`,
+        title: `${this.app.text('Item')} - ${itemId}`,
       });
     }
     // ok

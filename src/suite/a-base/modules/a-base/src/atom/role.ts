@@ -241,7 +241,7 @@ export class AtomRole extends BeanAtomBase<ScopeModule> {
     await this._getMetaTranslate({ item });
     // roleNameParent
     if (item.roleNameParent) {
-      item.roleNameParentLocale = this.ctx.text(item.roleNameParent);
+      item.roleNameParentLocale = this.app.text(item.roleNameParent);
     }
   }
 

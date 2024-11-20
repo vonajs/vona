@@ -119,7 +119,7 @@ export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
     }
     for (const sceneName in configProviderScenes) {
       const configProviderScene = configProviderScenes[sceneName];
-      const titleLocale = this.ctx.text(configProviderScene.title);
+      const titleLocale = this.app.text(configProviderScene.title);
       if (forLogin) {
         // login
         if (configProviderScene.__valid) {

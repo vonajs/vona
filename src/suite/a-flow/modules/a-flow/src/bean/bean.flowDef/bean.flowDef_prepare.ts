@@ -76,7 +76,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
         flowServiceBases[relativeName][key] = {
           ...service,
           beanFullName,
-          titleLocale: this.ctx.text(service.title),
+          titleLocale: this.app.text(service.title),
         };
       }
     }
@@ -100,7 +100,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
         flowBehaviorBases[fullKey] = flowBehaviorBases[key] = {
           ...behavior,
           beanFullName,
-          titleLocale: this.ctx.text(behavior.title),
+          titleLocale: this.app.text(behavior.title),
         };
       }
     }
@@ -124,7 +124,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
         flowNodeBases[fullKey] = flowNodeBases[key] = {
           ...node,
           beanFullName,
-          titleLocale: this.ctx.text(node.title),
+          titleLocale: this.app.text(node.title),
         };
       }
     }
@@ -159,7 +159,7 @@ export class BeanFlowDefPrepare extends BeanFlowDefDeploy {
         flowEdgeBases[fullKey] = flowEdgeBases[key] = {
           ...edge,
           beanFullName,
-          titleLocale: this.ctx.text(edge.title),
+          titleLocale: this.app.text(edge.title),
         };
       }
     }

@@ -15,7 +15,7 @@ export class BeanBaseLocales extends BeanBaseLocaleModules {
     const config = this.scope.config;
     for (const locale in config.locales) {
       locales.push({
-        title: this.ctx.text(config.locales[locale]),
+        title: this.app.text(config.locales[locale]),
         value: locale,
       });
     }

@@ -37,7 +37,7 @@ export class BeanBaseAuthProviders extends BeanBaseAtomClasses {
 
   _prepareAuthProvider(relativeName, _providerName, authProvider) {
     const meta = authProvider.meta;
-    meta.titleLocale = this.ctx.text(meta.title);
+    meta.titleLocale = this.app.text(meta.title);
     // meta
     this._prepareAuthProvider_meta(relativeName, meta);
     // scenes

@@ -319,7 +319,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
     for (const item of items) {
       // roleNameBase
       if (item.roleNameBase) {
-        item.roleNameBaseLocale = this.ctx.text(item.roleNameBase);
+        item.roleNameBaseLocale = this.app.text(item.roleNameBase);
       }
     }
   }
@@ -336,7 +336,7 @@ export class BeanRoleAtomRights extends BeanRoleBase {
 
   _translateRoleNamesLocale({ items }: any) {
     for (const item of items) {
-      item.roleNameLocale = this.ctx.text(item.roleName);
+      item.roleNameLocale = this.app.text(item.roleName);
     }
     return items;
   }
@@ -345,8 +345,8 @@ export class BeanRoleAtomRights extends BeanRoleBase {
   async _adjustFlowActionsLocale({ items, actionNameKey }: any) {
     for (const item of items) {
       if (item.actionMode === 1) {
-        item[`${actionNameKey}Locale`] = this.ctx.text(item[actionNameKey] || 'Unnamed');
-        item.flowDefNameLocale = this.ctx.text(item.flowDefName);
+        item[`${actionNameKey}Locale`] = this.app.text(item[actionNameKey] || 'Unnamed');
+        item.flowDefNameLocale = this.app.text(item.flowDefName);
       }
     }
   }

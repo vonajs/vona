@@ -233,10 +233,10 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     // config
     const configTemplate = this.configModule.email.templates.passwordReset;
     // email subject
-    let subject = this.ctx.text(configTemplate.subject);
+    let subject = this.app.text(configTemplate.subject);
     subject = this.app.bean.util.replaceTemplate(subject, { siteName: this.ctx.instance.title });
     // email body
-    let body = this.ctx.text(configTemplate.body);
+    let body = this.app.text(configTemplate.body);
     body = this.app.bean.util.replaceTemplate(body, {
       userName: user.userName,
       link,
@@ -266,10 +266,10 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
     // config
     const configTemplate = this.configModule.email.templates.confirmation;
     // email subject
-    let subject = this.ctx.text(configTemplate.subject);
+    let subject = this.app.text(configTemplate.subject);
     subject = this.app.bean.util.replaceTemplate(subject, { siteName: this.ctx.instance.title });
     // email body
-    let body = this.ctx.text(configTemplate.body);
+    let body = this.app.text(configTemplate.body);
     body = this.app.bean.util.replaceTemplate(body, {
       userName: user.userName,
       link,

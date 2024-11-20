@@ -159,7 +159,7 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     const locales = this.app.bean.base.locales();
     for (const locale of locales) {
       const language = locale.value;
-      const text = this.ctx.text.locale(language, title);
+      const text = this.app.text.locale(language, title);
       if (text !== title) {
         if (!dictLocales[language]) {
           dictLocales[language] = {};

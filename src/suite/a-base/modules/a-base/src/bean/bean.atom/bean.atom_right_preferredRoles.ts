@@ -32,7 +32,7 @@ export class BeanAtomRightPreferredRoles extends BeanAtomNotify {
       return {
         roleIdWho: item.roleId,
         roleNameWho: item.roleName,
-        roleNameWhoLocale: this.ctx.text(item.roleName),
+        roleNameWhoLocale: this.app.text(item.roleName),
         userId: user.id,
       };
     });
