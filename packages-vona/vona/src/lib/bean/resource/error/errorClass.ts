@@ -59,9 +59,9 @@ export class ErrorClass extends BeanSimple {
     let message: string;
     if (typeof code === 'number' && code <= 1000) {
       const httpStatusMessageKey = `HTTPSTATUS_${HttpStatus[code]}`;
-      message = this.app.meta.locale.getText(undefined, undefined, httpStatusMessageKey, ...args);
+      message = this.app.meta.locale.getText(true, undefined, undefined, httpStatusMessageKey, ...args);
     } else {
-      message = this.app.meta.locale.getText(module, undefined, ebError ? ebError[code] : code, ...args);
+      message = this.app.meta.locale.getText(false, module, undefined, ebError ? ebError[code] : code, ...args);
     }
 
     code = __combineErrorCode(module, code);

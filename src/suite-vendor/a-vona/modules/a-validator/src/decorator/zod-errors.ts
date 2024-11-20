@@ -20,8 +20,14 @@ export function setErrorMap(fnAdapter: ErrorAdapterFn) {
     return [content, args];
   }
   function _t(key: string, issue?: z.ZodIssueOptionalMessage) {
-    const [content, args] = _replaceTemplate(key, issue);
-    return fnAdapter(content, ...args);
+    // 1. pre translate
+    const content = fnAdapter(key);
+    // 2. temp translate
+    const [, args] = _replaceTemplate(content, issue);
+    let message = fnAdapter(key, ...args);
+    // 3. extact translate
+    message = replaceTemplate(message, issue)!;
+    return message;
   }
 
   function _translateIssue(issue: any) {

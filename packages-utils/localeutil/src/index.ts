@@ -3,6 +3,7 @@ import { getText } from './util.js';
 export * from './util.js';
 
 export function getLocaleText(
+  supportCustomMessage: boolean,
   locales1: Record<string, object> | undefined,
   locales2: Record<string, object> | undefined,
   locale: string,
@@ -21,7 +22,7 @@ export function getLocaleText(
     text = key;
   }
   // support custom message
-  if (!text.replaceAll('%%', '').includes('%') && args[0]) {
+  if (supportCustomMessage && !text.replaceAll('%%', '').includes('%') && args[0]) {
     return getText(...args);
   }
   // format
