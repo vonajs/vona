@@ -21,7 +21,7 @@ import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { Onion } from '../module/onion/onion.js';
-import { BeanScopeContainer, ErrorClass } from '../bean/index.js';
+import { BeanScopeContainer, ApplicationLocale, ErrorClass, IModuleLocaleText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -33,6 +33,8 @@ export class AppMeta extends BeanSimple {
   flavor: VonaMetaFlavor;
   mode: VonaMetaMode;
   error: ErrorClass;
+  locale: ApplicationLocale;
+  text: IModuleLocaleText;
   util: AppUtil;
   mockUtil: AppMockUtil;
   scopeContainer: BeanScopeContainer;
@@ -90,6 +92,12 @@ export class AppMeta extends BeanSimple {
 
     // env
     this.prepareEnv();
+
+    // locale
+    this.locale = this.bean._newBean(ApplicationLocale);
+
+    // text
+    this.text = this.locale.createLocaleText();
 
     // util
     this.util = this.bean._newBean(AppUtil);

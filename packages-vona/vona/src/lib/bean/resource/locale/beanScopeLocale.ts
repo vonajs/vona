@@ -14,7 +14,7 @@ export class BeanScopeLocale extends BeanSimple {
 
   protected __get__(prop: string) {
     if (!this.__instances[prop]) {
-      this.__instances[prop] = this.ctx.meta.locale.createScopeLocaleText(this[BeanModuleScope], prop);
+      this.__instances[prop] = this.app.meta.locale.createScopeLocaleText(this[BeanModuleScope], prop);
     }
     return this.__instances[prop];
   }

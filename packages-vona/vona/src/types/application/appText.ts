@@ -5,6 +5,6 @@ export type TypeTextContextLocale = {
   locale: <T extends keyof ILocalInfos>(locale: T | undefined, text: string, ...args: any[]) => string;
 };
 
-export interface ContextLocale {
+export interface ApplicationText {
   text: TypeTextContextLocale;
 }

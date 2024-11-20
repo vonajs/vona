@@ -15,20 +15,19 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   patchCreateContext();
 
   function patchCreateContext() {
+    // app
+    app.text = function (text, ...args) {
+      return app.meta.locale.getText(undefined, undefined, text, ...args);
+    } as any;
+    app.text.locale = function (locale, text, ...args) {
+      return app.meta.locale.getText(undefined, locale, text, ...args);
+    };
+    // ctx
     const createContext = app.createContext as any;
     app.createContext = (...args) => {
       const context = createContext.call(app, ...args);
 
-      // maybe /favicon.ico
-      if (context.module) {
-        context.text = function (text, ...args) {
-          return context.meta.locale.getText(undefined, undefined, text, ...args);
-        };
-        context.text.locale = function (locale, text, ...args) {
-          return context.meta.locale.getText(undefined, locale, text, ...args);
-        };
-      }
-
+      // system
       const __getLocale = context.__getLocale;
       context.__getLocale = function () {
         if (context.__locale) {

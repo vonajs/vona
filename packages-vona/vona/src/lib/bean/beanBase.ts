@@ -8,7 +8,7 @@ const SymbolText = Symbol('SymbolText');
 export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
   protected get $text(): IModuleLocaleText {
     if (!this[SymbolText]) {
-      this[SymbolText] = this.ctx.meta.locale.createLocaleText(this.moduleBelong);
+      this[SymbolText] = this.app.meta.locale.createLocaleText(this.moduleBelong);
     }
     return this[SymbolText];
   }
