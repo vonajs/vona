@@ -1,7 +1,7 @@
 import { replaceTemplate } from '@cabloy/word-utils';
 import { util, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 
-export type ErrorAdapterFn = (key: string, issue: z.ZodIssueOptionalMessage) => string;
+export type ErrorAdapterFn = (key: string, issue?: z.ZodIssueOptionalMessage) => string;
 
 export function setErrorMap(fn: ErrorAdapterFn) {
   const customErrorMap: ZodErrorMap = (issue, ctx) => {
@@ -9,19 +9,22 @@ export function setErrorMap(fn: ErrorAdapterFn) {
     switch (issue.code) {
       case ZodIssueCode.invalid_type:
         if (issue.received === ZodParsedType.undefined) {
-          message = fn('ZodError_invalid_type_Required', issue);
+          message = fn('ZodError_invalid_type_Required');
         } else {
           message = fn('ZodError_invalid_type_RequiredDetail', issue);
         }
         break;
       case ZodIssueCode.invalid_literal:
-        message = `Invalid literal value, expected ${JSON.stringify(issue.expected, util.jsonStringifyReplacer)}`;
+        message = fn('ZodError_invalid_literal', {
+          ...issue,
+          expected: JSON.stringify(issue.expected, util.jsonStringifyReplacer),
+        });
         break;
       case ZodIssueCode.unrecognized_keys:
-        message = `Unrecognized key(s) in object: ${util.joinValues(issue.keys, ', ')}`;
+        message = fn('ZodError_unrecognized_keys', { ...issue, keys: util.joinValues(issue.keys, ', ') as any });
         break;
       case ZodIssueCode.invalid_union:
-        message = 'Invalid input';
+        message = fn('ZodError_invalid_union');
         break;
       case ZodIssueCode.invalid_union_discriminator:
         message = `Invalid discriminator value. Expected ${util.joinValues(issue.options)}`;
@@ -123,6 +126,6 @@ export function setErrorMap(fn: ErrorAdapterFn) {
   z.setErrorMap(customErrorMap);
 }
 
-export function translateError(message: string, issue: z.ZodIssueOptionalMessage) {
+export function translateError(message: string, issue?: z.ZodIssueOptionalMessage) {
   return replaceTemplate(message, issue)!;
 }

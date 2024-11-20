@@ -1229,8 +1229,8 @@ importers:
   src/suite-vendor/a-vona/modules/a-validator:
     dependencies:
       '@cabloy/word-utils':
-        specifier: ^1.0.4
-        version: 1.0.4
+        specifier: ^1.0.5
+        version: 1.0.5
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -3037,8 +3037,8 @@ packages:
   '@cabloy/word-utils@1.0.3':
     resolution: {integrity: sha512-su11tLnoxmozu8d7vv2pecv3cyXiSCUk4GjxDf4SKmQGFRnJwQhRMq818UeDaW2iz2F8CtVdR0LOVF56Wf9DWQ==}
 
-  '@cabloy/word-utils@1.0.4':
-    resolution: {integrity: sha512-HjEA6KiW3InTdmQU4j4Fi77y76Qg3Ze691KzGN/oTtB19T9kZSnZ/Ssp8YpBQegVDb+cMoEl0IPPajoD1+542A==}
+  '@cabloy/word-utils@1.0.5':
+    resolution: {integrity: sha512-Ev2h4hh/tjyuLuiq4K+ZgFPyyQIDjQGln/RPGAtVegseU2uyKUwfGA9snuKSi4TtoukbY9jU4QoQk+/x//wN8g==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -10782,7 +10782,7 @@ snapshots:
 
   '@cabloy/word-utils@1.0.3': {}
 
-  '@cabloy/word-utils@1.0.4': {}
+  '@cabloy/word-utils@1.0.5': {}
 
   '@colors/colors@1.5.0':
     optional: true
