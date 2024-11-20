@@ -4,9 +4,22 @@ import { util, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 export type ErrorAdapterFn = (key: string, issue?: z.ZodIssueOptionalMessage) => string;
 
 export function setErrorMap(fn: ErrorAdapterFn) {
+  function _translateIssue(issue: any) {
+    for (const field of ['expected', 'received', 'validation']) {
+      if (issue[field] && typeof issue[field] === 'string') {
+        const key = field === 'validation' ? `ZodError_validations_${issue[field]}` : `ZodError_types_${issue[field]}`;
+        const value = fn(key);
+        if (value !== key) {
+          issue[field] = value;
+        }
+      }
+    }
+  }
   const customErrorMap: ZodErrorMap = (issue, ctx) => {
+    // issue
+    _translateIssue(issue);
+    // message
     let message: string;
-    _translateIssue(fn, issue);
     switch (issue.code) {
       case ZodIssueCode.invalid_type:
         if (issue.received === ZodParsedType.undefined) {
@@ -174,16 +187,4 @@ export function setErrorMap(fn: ErrorAdapterFn) {
 
 export function translateError(message: string, issue?: z.ZodIssueOptionalMessage) {
   return replaceTemplate(message, issue)!;
-}
-
-function _translateIssue(fn: ErrorAdapterFn, issue: any) {
-  for (const field of ['expected', 'received', 'validation']) {
-    if (issue[field] && typeof issue[field] === 'string') {
-      const key = field === 'validation' ? `ZodError_validations_${issue[field]}` : `ZodError_types_${issue[field]}`;
-      const value = fn(key);
-      if (value !== key) {
-        issue[field] = value;
-      }
-    }
-  }
 }
