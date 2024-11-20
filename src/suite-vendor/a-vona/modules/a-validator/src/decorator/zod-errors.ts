@@ -27,13 +27,16 @@ export function setErrorMap(fn: ErrorAdapterFn) {
         message = fn('ZodError_invalid_union');
         break;
       case ZodIssueCode.invalid_union_discriminator:
-        message = `Invalid discriminator value. Expected ${util.joinValues(issue.options)}`;
+        message = fn('ZodError_invalid_union_discriminator', {
+          ...issue,
+          options: util.joinValues(issue.options) as any,
+        });
         break;
       case ZodIssueCode.invalid_enum_value:
-        message = `Invalid enum value. Expected ${util.joinValues(issue.options)}, received '${issue.received}'`;
+        message = fn('ZodError_invalid_enum_value', { ...issue, options: util.joinValues(issue.options) as any });
         break;
       case ZodIssueCode.invalid_arguments:
-        message = 'Invalid function arguments';
+        message = fn('ZodError_invalid_arguments');
         break;
       case ZodIssueCode.invalid_return_type:
         message = 'Invalid function return type';
