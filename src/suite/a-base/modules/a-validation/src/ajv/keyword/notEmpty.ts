@@ -21,7 +21,7 @@ export default {
         if (!res) return true;
       }
       if (checkIfEmpty(schema, schemaProperty, data)) {
-        (<any>fun).errors = [{ keyword: 'notEmpty', params: [], message: this.text('RequiredField') }];
+        (<any>fun).errors = [{ keyword: 'notEmpty', params: [], message: this.app.text('RequiredField') }];
         return false;
       }
       return true;
