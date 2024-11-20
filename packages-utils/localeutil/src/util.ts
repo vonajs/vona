@@ -119,14 +119,15 @@ export function format(f) {
   } else if (lastPos < f.length) {
     str += f.slice(lastPos);
   }
-  while (a < arguments.length) {
-    const x = arguments[a++];
-    if (x === null || (typeof x !== 'object' && typeof x !== 'symbol')) {
-      str += ` ${x}`;
-    } else {
-      // str += ` ${inspect(x)}`;
-    }
-  }
+  // // append the rest args
+  // while (a < arguments.length) {
+  //   const x = arguments[a++];
+  //   if (x === null || (typeof x !== 'object' && typeof x !== 'symbol')) {
+  //     str += ` ${x}`;
+  //   } else {
+  //     // str += ` ${inspect(x)}`;
+  //   }
+  // }
   return str;
 }
 
