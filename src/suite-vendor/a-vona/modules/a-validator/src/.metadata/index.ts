@@ -29,6 +29,9 @@ export const locales = {
   'zh-cn': locale_zh_cn,
 };
 /** locale: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 
