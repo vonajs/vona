@@ -9,9 +9,9 @@ export function setErrorMap(fn: ErrorAdapterFn) {
     switch (issue.code) {
       case ZodIssueCode.invalid_type:
         if (issue.received === ZodParsedType.undefined) {
-          message = fn('ZodError_invalid_type_Required');
+          message = fn('ZodError_invalid_type_required');
         } else {
-          message = fn('ZodError_invalid_type_RequiredDetail', issue);
+          message = fn('ZodError_invalid_type_requiredDetail', issue);
         }
         break;
       case ZodIssueCode.invalid_literal:
@@ -39,30 +39,30 @@ export function setErrorMap(fn: ErrorAdapterFn) {
         message = fn('ZodError_invalid_arguments');
         break;
       case ZodIssueCode.invalid_return_type:
-        message = 'Invalid function return type';
+        message = fn('ZodError_invalid_return_type');
         break;
       case ZodIssueCode.invalid_date:
-        message = 'Invalid date';
+        message = fn('ZodError_invalid_date');
         break;
       case ZodIssueCode.invalid_string:
         if (typeof issue.validation === 'object') {
           if ('includes' in issue.validation) {
-            message = `Invalid input: must include "${issue.validation.includes}"`;
+            message = fn('ZodError_invalid_string_includes', issue);
 
             if (typeof issue.validation.position === 'number') {
-              message = `${message} at one or more positions greater than or equal to ${issue.validation.position}`;
+              message = fn('ZodError_invalid_string_includes_position', { ...issue, message });
             }
           } else if ('startsWith' in issue.validation) {
-            message = `Invalid input: must start with "${issue.validation.startsWith}"`;
+            message = fn('ZodError_invalid_string_startsWith', issue);
           } else if ('endsWith' in issue.validation) {
-            message = `Invalid input: must end with "${issue.validation.endsWith}"`;
+            message = fn('ZodError_invalid_string_endsWith', issue);
           } else {
             util.assertNever(issue.validation);
           }
         } else if (issue.validation !== 'regex') {
-          message = `Invalid ${issue.validation}`;
+          message = fn('ZodError_invalid_string_none_regex', issue);
         } else {
-          message = 'Invalid';
+          message = fn('ZodError_invalid_string');
         }
         break;
       case ZodIssueCode.too_small:

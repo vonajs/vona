@@ -1,11 +1,20 @@
 export default {
   ValidationFailedPipeValidationInvalidContent: 'Validation failed (invalid content)',
-  ZodError_invalid_type_Required: 'Required',
-  ZodError_invalid_type_RequiredDetail: 'Expected {{expected}}, received {{received}}',
+  ZodError_invalid_type_required: 'Required',
+  ZodError_invalid_type_requiredDetail: 'Expected {{expected}}, received {{received}}',
   ZodError_invalid_literal: 'Invalid literal value, expected {{expected}}',
   ZodError_unrecognized_keys: 'Unrecognized key(s) in object: {{keys}}',
   ZodError_invalid_union: 'Invalid input',
   ZodError_invalid_union_discriminator: 'Invalid discriminator value. Expected {{options}}',
   ZodError_invalid_enum_value: "Invalid enum value. Expected {{options}}, received '{{received}}'",
   ZodError_invalid_arguments: 'Invalid function arguments',
+  ZodError_invalid_return_type: 'Invalid function return type',
+  ZodError_invalid_date: 'Invalid date',
+  ZodError_invalid_string_includes: 'Invalid input: must include "{{validation.includes}}"',
+  ZodError_invalid_string_includes_position:
+    '{{message}} at one or more positions greater than or equal to {{validation.position}}',
+  ZodError_invalid_string_startsWith: 'Invalid input: must start with "{{validation.startsWith}}"',
+  ZodError_invalid_string_endsWith: 'Invalid input: must end with "{{validation.endsWith}}"',
+  ZodError_invalid_string_none_regex: 'Invalid {{validation}}',
+  ZodError_invalid_string: 'Invalid',
 };
