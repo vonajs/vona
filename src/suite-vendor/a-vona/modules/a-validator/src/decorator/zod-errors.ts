@@ -66,23 +66,42 @@ export function setErrorMap(fn: ErrorAdapterFn) {
         }
         break;
       case ZodIssueCode.too_small:
-        if (issue.type === 'array')
-          message = `Array must contain ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'at least' : 'more than'
-          } ${issue.minimum} element(s)`;
-        else if (issue.type === 'string')
-          message = `String must contain ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'at least' : 'over'
-          } ${issue.minimum} character(s)`;
-        else if (issue.type === 'number')
-          message = `Number must be ${
-            issue.exact ? 'exactly equal to ' : issue.inclusive ? 'greater than or equal to ' : 'greater than '
-          }${issue.minimum}`;
-        else if (issue.type === 'date')
-          message = `Date must be ${
-            issue.exact ? 'exactly equal to ' : issue.inclusive ? 'greater than or equal to ' : 'greater than '
-          }${new Date(Number(issue.minimum))}`;
-        else message = 'Invalid input';
+        if (issue.type === 'array') {
+          if (issue.exact) {
+            message = fn('ZodError_too_small_array_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_small_array_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_small_array_not_inclusive', issue);
+          }
+        } else if (issue.type === 'string') {
+          if (issue.exact) {
+            message = fn('ZodError_too_small_string_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_small_string_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_small_string_not_inclusive', issue);
+          }
+        } else if (issue.type === 'number') {
+          if (issue.exact) {
+            message = fn('ZodError_too_small_number_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_small_number_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_small_number_not_inclusive', issue);
+          }
+        } else if (issue.type === 'date') {
+          const minimum = new Date(Number(issue.minimum)).toString() as any;
+          if (issue.exact) {
+            message = fn('ZodError_too_small_date_exact', { ...issue, minimum });
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_small_date_inclusive', { ...issue, minimum });
+          } else {
+            message = fn('ZodError_too_small_date_not_inclusive', { ...issue, minimum });
+          }
+        } else {
+          message = fn('ZodError_invalid_input');
+        }
         break;
       case ZodIssueCode.too_big:
         if (issue.type === 'array')
