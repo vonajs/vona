@@ -92,6 +92,11 @@ export class ModuleTools extends BeanSimple {
     return await Promise.all(promises);
   }
 
+  protected async _importSpecificModule(moduleName: string) {
+    const module = this.app.meta.modules[moduleName];
+    await import(this._getModuleIndexPath(module));
+  }
+
   private async _importModules() {
     const timeBegin = new Date();
     console.log(`import modules begin, pid: ${process.pid}`);
