@@ -1,14 +1,16 @@
 import { util, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 
-export function setErrorMap(fn: Function) {
-  const customErrorMap: ZodErrorMap = (issue, _ctx) => {
+export type ErrorAdapterFn = (key: string, issue: z.ZodIssueOptionalMessage) => string;
+
+export function setErrorMap(fn: ErrorAdapterFn) {
+  const customErrorMap: ZodErrorMap = (issue, ctx) => {
     let message: string;
     switch (issue.code) {
       case ZodIssueCode.invalid_type:
         if (issue.received === ZodParsedType.undefined) {
-          message = 'Required';
+          message = fn('ZodError_invalid_type_Required', issue);
         } else {
-          message = `Expected ${issue.expected}, received ${issue.received}`;
+          message = fn('ZodError_invalid_type_RequiredDetail', issue);
         }
         break;
       case ZodIssueCode.invalid_literal:
@@ -111,11 +113,48 @@ export function setErrorMap(fn: Function) {
         message = 'Number must be finite';
         break;
       default:
-        message = _ctx.defaultError;
+        message = ctx.defaultError;
         util.assertNever(issue);
     }
     return { message };
   };
 
   z.setErrorMap(customErrorMap);
+}
+
+export function translateError(message: string, issue: object) {
+  return replaceTemplate(message, issue);
+}
+
+function replaceTemplate(content, scope) {
+  if (!content) return null;
+  return content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+    if (skip) {
+      return block.substring(skip.length);
+    }
+    const value = getProperty(scope, key);
+    return value !== undefined ? value : '';
+  });
+}
+
+function getProperty(obj, name, sep?) {
+  return _getProperty(obj, name, sep, false);
+}
+
+function _getProperty(obj, name, sep, forceObject) {
+  if (!obj) return undefined;
+  const names = name.split(sep || '.');
+  // loop
+  for (const name of names) {
+    if (obj[name] === undefined || obj[name] === null) {
+      if (forceObject) {
+        obj[name] = {};
+      } else {
+        obj = obj[name];
+        break;
+      }
+    }
+    obj = obj[name];
+  }
+  return obj;
 }
