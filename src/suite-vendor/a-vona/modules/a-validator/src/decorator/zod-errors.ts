@@ -1,3 +1,4 @@
+import { replaceTemplate } from '@cabloy/word-utils';
 import { util, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 
 export type ErrorAdapterFn = (key: string, issue: z.ZodIssueOptionalMessage) => string;
@@ -122,39 +123,6 @@ export function setErrorMap(fn: ErrorAdapterFn) {
   z.setErrorMap(customErrorMap);
 }
 
-export function translateError(message: string, issue: object) {
-  return replaceTemplate(message, issue);
-}
-
-function replaceTemplate(content, scope) {
-  if (!content) return null;
-  return content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
-    if (skip) {
-      return block.substring(skip.length);
-    }
-    const value = getProperty(scope, key);
-    return value !== undefined ? value : '';
-  });
-}
-
-function getProperty(obj, name, sep?) {
-  return _getProperty(obj, name, sep, false);
-}
-
-function _getProperty(obj, name, sep, forceObject) {
-  if (!obj) return undefined;
-  const names = name.split(sep || '.');
-  // loop
-  for (const name of names) {
-    if (obj[name] === undefined || obj[name] === null) {
-      if (forceObject) {
-        obj[name] = {};
-      } else {
-        obj = obj[name];
-        break;
-      }
-    }
-    obj = obj[name];
-  }
-  return obj;
+export function translateError(message: string, issue: z.ZodIssueOptionalMessage) {
+  return replaceTemplate(message, issue)!;
 }
