@@ -7,7 +7,7 @@ export class DtoBook {
   @Rule(z.number().optional())
   id: number;
 
-  @Rule(z.string())
+  @Rule(z.string().email())
   name: string;
 
   @Rule(z.boolean().optional())
