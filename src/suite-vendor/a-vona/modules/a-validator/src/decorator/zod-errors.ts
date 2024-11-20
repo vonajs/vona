@@ -1,9 +1,29 @@
 import { replaceTemplate } from '@cabloy/word-utils';
 import { util, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 
-export type ErrorAdapterFn = (key: string, issue?: z.ZodIssueOptionalMessage) => string;
+export type ErrorAdapterFn = (text: string, ...args: any[]) => string;
 
 export function setErrorMap(fn: ErrorAdapterFn) {
+  function _replaceTemplate(content: string, scope?: object | undefined): [string, any[]] {
+    if (!content) return [content, []];
+    if (!scope) return [content, []];
+    const args: any[] = [];
+    content = content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+      if (skip) {
+        return block.substring(skip.length);
+      }
+      let value = getProperty(scope, key);
+      value = value !== undefined ? value : '';
+      args.push(value);
+      return '%s';
+    });
+    return [content, args];
+  }
+  function _t(key: string, issue?: z.ZodIssueOptionalMessage) {
+    const [content, args] = _replaceTemplate(key, issue);
+    return fn.call(undefined, content, ...args);
+  }
+
   function _translateIssue(issue: any) {
     for (const field of ['expected', 'received', 'validation']) {
       if (issue[field] && typeof issue[field] === 'string') {
@@ -15,6 +35,7 @@ export function setErrorMap(fn: ErrorAdapterFn) {
       }
     }
   }
+  // error map
   const customErrorMap: ZodErrorMap = (issue, ctx) => {
     // issue
     _translateIssue(issue);
@@ -187,4 +208,26 @@ export function setErrorMap(fn: ErrorAdapterFn) {
 
 export function translateError(message: string, issue?: z.ZodIssueOptionalMessage) {
   return replaceTemplate(message, issue)!;
+}
+
+function getProperty(obj, name, sep?) {
+  return _getProperty(obj, name, sep, false);
+}
+
+function _getProperty(obj, name, sep, forceObject) {
+  if (!obj) return undefined;
+  const names = name.split(sep || '.');
+  // loop
+  for (const name of names) {
+    if (obj[name] === undefined || obj[name] === null) {
+      if (forceObject) {
+        obj[name] = {};
+      } else {
+        obj = obj[name];
+        break;
+      }
+    }
+    obj = obj[name];
+  }
+  return obj;
 }

@@ -1,9 +1,8 @@
 import { VonaApplication } from 'vona';
-import { setErrorMap, translateError } from './zod-errors.js';
-import { z } from 'zod';
+import { setErrorMap } from './zod-errors.js';
 
 export function errorsAdapter(app: VonaApplication) {
-  setErrorMap((key: string, issue?: z.ZodIssueOptionalMessage) => {
-    return translateError(app.text(key), issue);
+  setErrorMap((text: string, ...args: any[]) => {
+    return app.text(text, ...args);
   });
 }
