@@ -104,39 +104,62 @@ export function setErrorMap(fn: ErrorAdapterFn) {
         }
         break;
       case ZodIssueCode.too_big:
-        if (issue.type === 'array')
-          message = `Array must contain ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'at most' : 'less than'
-          } ${issue.maximum} element(s)`;
-        else if (issue.type === 'string')
-          message = `String must contain ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'at most' : 'under'
-          } ${issue.maximum} character(s)`;
-        else if (issue.type === 'number')
-          message = `Number must be ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'less than or equal to' : 'less than'
-          } ${issue.maximum}`;
-        else if (issue.type === 'bigint')
-          message = `BigInt must be ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'less than or equal to' : 'less than'
-          } ${issue.maximum}`;
-        else if (issue.type === 'date')
-          message = `Date must be ${
-            issue.exact ? 'exactly' : issue.inclusive ? 'smaller than or equal to' : 'smaller than'
-          } ${new Date(Number(issue.maximum))}`;
-        else message = 'Invalid input';
+        if (issue.type === 'array') {
+          if (issue.exact) {
+            message = fn('ZodError_too_big_array_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_big_array_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_big_array_not_inclusive', issue);
+          }
+        } else if (issue.type === 'string') {
+          if (issue.exact) {
+            message = fn('ZodError_too_big_string_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_big_string_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_big_string_not_inclusive', issue);
+          }
+        } else if (issue.type === 'number') {
+          if (issue.exact) {
+            message = fn('ZodError_too_big_number_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_big_number_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_big_number_not_inclusive', issue);
+          }
+        } else if (issue.type === 'bigint') {
+          if (issue.exact) {
+            message = fn('ZodError_too_big_number_exact', issue);
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_big_number_inclusive', issue);
+          } else {
+            message = fn('ZodError_too_big_number_not_inclusive', issue);
+          }
+        } else if (issue.type === 'date') {
+          const maximum = new Date(Number(issue.maximum)).toString() as any;
+          if (issue.exact) {
+            message = fn('ZodError_too_big_date_exact', { ...issue, maximum });
+          } else if (issue.inclusive) {
+            message = fn('ZodError_too_big_date_inclusive', { ...issue, maximum });
+          } else {
+            message = fn('ZodError_too_big_date_not_inclusive', { ...issue, maximum });
+          }
+        } else {
+          message = fn('ZodError_invalid_input');
+        }
         break;
       case ZodIssueCode.custom:
-        message = 'Invalid input';
+        message = fn('ZodError_custom');
         break;
       case ZodIssueCode.invalid_intersection_types:
-        message = 'Intersection results could not be merged';
+        message = fn('ZodError_invalid_intersection_types');
         break;
       case ZodIssueCode.not_multiple_of:
-        message = `Number must be a multiple of ${issue.multipleOf}`;
+        message = fn('ZodError_not_multiple_of', issue);
         break;
       case ZodIssueCode.not_finite:
-        message = 'Number must be finite';
+        message = fn('ZodError_not_finite');
         break;
       default:
         message = ctx.defaultError;
