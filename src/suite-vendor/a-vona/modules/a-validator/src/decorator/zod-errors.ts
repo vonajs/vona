@@ -61,7 +61,7 @@ export function setErrorMap(fn: ErrorAdapterFn) {
             util.assertNever(issue.validation);
           }
         } else if (issue.validation !== 'regex') {
-          message = fn('ZodError_invalid_string_none_regex', issue);
+          message = fn('ZodError_invalid_string_validation', issue);
         } else {
           message = fn('ZodError_invalid_string');
         }

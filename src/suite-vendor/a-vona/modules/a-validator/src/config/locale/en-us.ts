@@ -16,7 +16,7 @@ export default {
     '{{message}} at one or more positions greater than or equal to {{validation.position}}',
   ZodError_invalid_string_startsWith: 'Invalid input: must start with "{{validation.startsWith}}"',
   ZodError_invalid_string_endsWith: 'Invalid input: must end with "{{validation.endsWith}}"',
-  ZodError_invalid_string_none_regex: 'Invalid {{validation}}',
+  ZodError_invalid_string_validation: 'Invalid {{validation}}',
   ZodError_invalid_string: 'Invalid',
   ZodError_too_small_array_exact: 'Array must contain exactly {{minimum}} element(s)',
   ZodError_too_small_array_inclusive: 'Array must contain at least {{minimum}} element(s)',

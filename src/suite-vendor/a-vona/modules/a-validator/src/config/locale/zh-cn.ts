@@ -15,7 +15,7 @@ export default {
   ZodError_invalid_string_includes_position: '{{message}} 在一个或者多个位置大于或者等于 {{validation.position}}',
   ZodError_invalid_string_startsWith: '文本必须以 "{{validation.startsWith}}" 开头',
   ZodError_invalid_string_endsWith: '文本必须以 "{{validation.endsWith}}" 结尾',
-  ZodError_invalid_string_none_regex: '错误的{{validation}}格式',
+  ZodError_invalid_string_validation: '错误的{{validation}}格式',
   ZodError_invalid_string: '错误的格式',
   ZodError_too_small_array_exact: '数组元素必须为 {{minimum}} 个',
   ZodError_too_small_array_inclusive: '数组元素不得少于 {{minimum}} 个',
