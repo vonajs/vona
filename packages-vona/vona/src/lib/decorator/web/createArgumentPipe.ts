@@ -6,6 +6,10 @@ export interface ArgumentPipeInfo<T extends keyof IPipeRecord> {
   optionsPrimitive?: boolean;
 }
 
+export type CreateArgumentPipeInfoFn<T extends keyof IPipeRecord> = (
+  options?: IPipeRecord[T] extends object ? Partial<IPipeRecord[T]> : IPipeRecord[T],
+) => any;
+
 export function createArgumentPipeInfo<T extends keyof IPipeRecord>(
   pipeName: T,
   options?: IPipeRecord[T] extends object ? Partial<IPipeRecord[T]> : IPipeRecord[T],

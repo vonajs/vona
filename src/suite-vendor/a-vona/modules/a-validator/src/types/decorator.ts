@@ -1,4 +1,4 @@
-import { Constructable } from 'vona';
+import { Constructable, CreateArgumentPipeInfoFn } from 'vona';
 import { z } from 'zod';
 
-export type PipeRouteParam = Function | z.ZodSchema | Constructable;
+export type PipeRouteParam = CreateArgumentPipeInfoFn<any> | z.ZodSchema | Constructable;
