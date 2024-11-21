@@ -55,7 +55,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo3')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo3(@Query('id', defaultValue(2), z.number()) id: number) {
+  async echo3(@Query('id', DtoBook) id: number) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return id;

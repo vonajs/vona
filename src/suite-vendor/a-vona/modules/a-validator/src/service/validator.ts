@@ -13,14 +13,14 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     options?: ValidatorOptions,
     path?: string,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
-    const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
+    // const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
     // check value: nil, maybe need other argument derecotor to validate it
     value = coerceWithNil(value);
     if (isNil(value)) return value as any;
-    // check value: primitive
-    if (this._isPrimitiveValue(value)) {
-      this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
-    }
+    // // check value: primitive
+    // if (this._isPrimitiveValue(value)) {
+    //   this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
+    // }
     // schema
     const schema = this.getSchema(classType, options);
     return await this.validateSchema(schema, value, options, path);
