@@ -19,17 +19,25 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
       this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     }
     // schema
-    const objectSchema = this.getSchema(classType, options);
-    if (!objectSchema) return value as any;
-    const result = await objectSchema?.safeParseAsync(value);
+    const schema = this.getSchema(classType, options);
+    return await this.validateSchema(schema, value, options);
+  }
+
+  async validateSchema<T, V = T>(
+    schema: z.ZodSchema<T> | undefined,
+    value: V,
+    options?: ValidatorOptions,
+  ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
+    const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
+    if (!schema) return value as any;
+    const result = await schema?.safeParseAsync(value);
     if (result.success) return result.data as any;
     // error
     if (options?.disableErrorMessages) {
       this.app.throw(errorHttpStatusCode);
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
-    this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
-    return undefined as any;
+    return this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
   }
 
   getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {

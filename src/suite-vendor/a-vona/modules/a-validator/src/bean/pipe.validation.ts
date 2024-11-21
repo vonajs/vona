@@ -13,6 +13,7 @@ import { ScopeModule } from '../.metadata/this.js';
 import { z } from 'zod';
 
 const __primitiveTypes = [String, Boolean, Number, Array, Object, Buffer, Date];
+const __primitiveTypesTransform = [String, Boolean, Number, Date];
 
 export interface IPipeOptionsValidation extends IDecoratorPipeOptionsGlobal, ValidatorOptions {
   expectedType?: Type<any>;
@@ -35,7 +36,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
     // check type
     if (!metaType) return value;
     if (this._isPrimitiveType(metaType)) {
-      return this._transformPrimitive(value, metadata);
+      return await this._transformPrimitive(value, metadata, options);
     }
     // validate
     return await this.scope.service.validator.validate(metaType, value, options);
@@ -45,18 +46,27 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
     return __primitiveTypes.some(t => metaType === t);
   }
 
-  private _transformPrimitive(value: any, metadata: RouteHandlerArgumentMeta) {
+  private async _transformPrimitive(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValidation) {
     const { metaType } = metadata;
+    if (!__primitiveTypesTransform.includes(metaType as any)) return value;
+    let rule: z.ZodSchema;
     if (metaType === String) {
-      return z.string().optional().parse(value);
+      rule = z.string().optional();
     } else if (metaType === Number) {
-      return z.number().optional().parse(value);
+      rule = z.number().optional();
     } else if (metaType === Boolean) {
-      return z.boolean().optional().parse(value);
+      rule = z.boolean().optional();
     } else if (metaType === Date) {
-      return z.date().optional().parse(value);
+      rule = z.date().optional();
+    } else {
+      // never go here
+      rule = z.never();
     }
-    return value;
+    const key = metadata.field ?? '';
+    const schema = z.object({ [key]: rule } as z.ZodRawShape);
+    const obj = { [key]: value };
+    const data = await this.scope.service.validator.validateSchema(schema, obj, options);
+    return data[key];
   }
 }
 
