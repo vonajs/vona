@@ -17,7 +17,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     // check value: nil, maybe need other argument derecotor to validate it
     value = coerceWithNil(value);
     if (isNil(value)) return value as any;
-    // // check value: primitive
+    // // need not check value: primitive
     // if (this._isPrimitiveValue(value)) {
     //   this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     // }
@@ -68,7 +68,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     return this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
   }
 
-  private _isPrimitiveValue(value: unknown): boolean {
-    return ['number', 'boolean', 'string'].includes(typeof value);
-  }
+  // private _isPrimitiveValue(value: unknown): boolean {
+  //   return ['number', 'boolean', 'string'].includes(typeof value);
+  // }
 }
