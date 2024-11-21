@@ -48,13 +48,13 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
   private _transformPrimitive(value: any, metadata: RouteHandlerArgumentMeta) {
     const { metaType } = metadata;
     if (metaType === String) {
-      return z.string().parse(value);
+      return z.string().optional().parse(value);
     } else if (metaType === Number) {
-      return z.number().parse(value);
+      return z.number().optional().parse(value);
     } else if (metaType === Boolean) {
-      return z.boolean().parse(value);
+      return z.boolean().optional().parse(value);
     } else if (metaType === Date) {
-      return z.date().parse(value);
+      return z.date().optional().parse(value);
     }
     return value;
   }

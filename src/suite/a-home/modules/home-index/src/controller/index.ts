@@ -52,4 +52,12 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
     //console.log(ctx === this.ctx);
     return book;
   }
+
+  @Get('echo3')
+  @UseGuardGlobal('a-core:user', { public: true })
+  async echo3(@Query('id') id: number) {
+    //const ctx = this.app.currentContext;
+    //console.log(ctx === this.ctx);
+    return id;
+  }
 }
