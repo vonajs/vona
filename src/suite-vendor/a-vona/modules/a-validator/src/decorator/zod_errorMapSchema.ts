@@ -1,4 +1,5 @@
-import { ErrorAdapterFn } from './zod-errorMapDefault.js';
+import { z } from 'zod';
+import { LocaleAdapterFn, prepareIssue, translateError } from './zod-errorMapDefault.js';
 
 const __zodTypes = [
   'ZodString',
@@ -39,5 +40,21 @@ const __zodTypes = [
 ];
 
 export function setErrorMapSchema(localeAdapterFn: LocaleAdapterFn) {
-  //z.
+  for (const typeName of __zodTypes) {
+    const _parseOriginal = z[typeName].prototype._parse;
+    z[typeName].prototype._parse = function (this: any, input) {
+      if (this._def.errorMap && this._def.errorMap.name === 'customMap' && !this._def._errorMapPatched) {
+        this._def._errorMapPatched = true;
+        const res = this._def.errorMap({ code: 'invalid_type' }, { defaultError: undefined });
+        const key = res.message;
+        this._def.errorMap = (issue, ctx) => {
+          if (!key || issue.code !== 'invalid_type') return { message: ctx.defaultError };
+          issue = prepareIssue(localeAdapterFn, issue);
+          const message = translateError(localeAdapterFn, key, issue);
+          return { message };
+        };
+      }
+      return _parseOriginal.call(this, input);
+    };
+  }
 }
