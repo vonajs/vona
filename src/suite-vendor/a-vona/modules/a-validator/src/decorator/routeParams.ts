@@ -5,11 +5,11 @@ import {
   RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona';
-import { PipeRouteParam } from '../types/decorator.js';
+import { PipeArgument } from '../types/decorator.js';
 import { valid } from '../bean/pipe.valid.js';
 
 export function createPipesRouteParamDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
-  return function (field?: any, ...pipes: PipeRouteParam[]): ParameterDecorator {
+  return function (field?: any, ...pipes: PipeArgument[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
         SymbolRouteHandlersArgumentsMeta,
