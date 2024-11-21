@@ -5,9 +5,11 @@ import {
   RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona';
+import { PipeRouteParam } from '../types/decorator.js';
+import { ValidPipe } from '../bean/pipe.valid.js';
 
 export function createPipesRouteParamDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
-  return function (field?: any, ...pipes: Function[]): ParameterDecorator {
+  return function (field?: any, ...pipes: PipeRouteParam[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
         SymbolRouteHandlersArgumentsMeta,
@@ -16,7 +18,22 @@ export function createPipesRouteParamDecorator(paramType: RouteHandlerArgumentTy
 
       const hasParamField = typeof field === 'string';
       const paramField = hasParamField ? field : undefined;
-      const paramPipes = hasParamField ? pipes : [field, ...pipes];
+      let paramPipes = hasParamField ? pipes : [field, ...pipes];
+
+      paramPipes = paramPipes
+        .filter(paramPipe => !!paramPipe)
+        .map(paramPipe => {
+          if (paramPipe.parseAsync) {
+            // schema
+            return ValidPipe({ schema: paramPipe });
+          } else if (paramPipe.prototype?.constructor?.name) {
+            // class
+            return ValidPipe({ class: paramPipe });
+          } else {
+            // pipe
+            return paramPipe;
+          }
+        });
 
       if (!argsMeta[prop!]) argsMeta[prop!] = [];
       argsMeta[prop!].push({

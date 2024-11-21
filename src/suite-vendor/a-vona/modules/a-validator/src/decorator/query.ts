@@ -1,12 +1,9 @@
-import { Constructable } from 'vona';
-import { z } from 'zod';
 import { createPipesRouteParamDecorator } from './routeParams.js';
-
-//z.ZodSchema | Constructable
+import { PipeRouteParam } from '../types/decorator.js';
 
 export function Query(): ParameterDecorator;
-export function Query(...pipes: Function[]): ParameterDecorator;
-export function Query(property: string, ...pipes: Function[]): ParameterDecorator;
-export function Query(property?: string | Function, ...pipes: Function[]): ParameterDecorator {
+export function Query(...pipes: PipeRouteParam[]): ParameterDecorator;
+export function Query(property: string, ...pipes: PipeRouteParam[]): ParameterDecorator;
+export function Query(property?: string | PipeRouteParam, ...pipes: PipeRouteParam[]): ParameterDecorator {
   return createPipesRouteParamDecorator('query')(property, ...pipes);
 }

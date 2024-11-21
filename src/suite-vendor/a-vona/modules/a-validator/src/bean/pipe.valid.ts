@@ -5,9 +5,14 @@ import {
   IPipeTransform,
   Pipe,
   createArgumentPipeParse,
+  Constructable,
 } from 'vona';
+import { z } from 'zod';
 
-export interface IPipeOptionsValid extends IDecoratorPipeOptions {}
+export interface IPipeOptionsValid extends IDecoratorPipeOptions {
+  schema?: z.ZodSchema;
+  class?: Constructable;
+}
 
 @Pipe<IPipeOptionsValid>()
 export class PipeValid extends BeanBase implements IPipeTransform<any> {
