@@ -1049,8 +1049,8 @@ importers:
         specifier: ^5.1.8
         version: 5.1.8
       '@cabloy/localeutil':
-        specifier: ^1.0.11
-        version: 1.0.11
+        specifier: workspace:^
+        version: link:../../packages-utils/localeutil
       '@cabloy/module-glob':
         specifier: ^5.1.8
         version: link:../../packages-utils/module-glob
@@ -3041,9 +3041,6 @@ packages:
   '@cabloy/koa-static-cache@5.1.8':
     resolution: {integrity: sha512-qKYqaHk5A74ASLvXd7/WhicgHfOsOvVrZNEdGaynjnvcswWfhKYdxtwS6CJig7YsE4gaOCFT2MEXFn3RXdt+fA==}
     engines: {node: '>= 7.6.0'}
-
-  '@cabloy/localeutil@1.0.11':
-    resolution: {integrity: sha512-vH/1RMSI5rkFgOOhc2YsL6fwowaRfpTjtbZ2MnnItYNgmEAvFoiZ2hH0Sr+KAqtJp2OLpcTAqcENWSrB66u1BQ==}
 
   '@cabloy/word-utils@1.0.3':
     resolution: {integrity: sha512-su11tLnoxmozu8d7vv2pecv3cyXiSCUk4GjxDf4SKmQGFRnJwQhRMq818UeDaW2iz2F8CtVdR0LOVF56Wf9DWQ==}
@@ -10803,8 +10800,6 @@ snapshots:
       mz: 2.7.0
     transitivePeerDependencies:
       - supports-color
-
-  '@cabloy/localeutil@1.0.11': {}
 
   '@cabloy/word-utils@1.0.3': {}
 

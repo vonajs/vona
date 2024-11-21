@@ -41,7 +41,7 @@
     "@cabloy/extend": "^3.0.12",
     "@cabloy/json5": "^1.0.7",
     "@cabloy/koa-static-cache": "^5.1.8",
-    "@cabloy/localeutil": "^1.0.11",
+    "@cabloy/localeutil": "workspace:^",
     "@cabloy/module-glob": "^5.1.8",
     "@cabloy/module-info": "^1.1.8",
     "@cabloy/module-info-pro": "^1.0.16",
