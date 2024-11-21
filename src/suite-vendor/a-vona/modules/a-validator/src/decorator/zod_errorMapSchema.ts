@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { LocaleAdapterFn, prepareIssue, translateError } from './zod-errorMapDefault.js';
 
+const SymbolTranslated = Symbol('SymbolTranslated');
+
 const __zodTypes = [
   'ZodString',
   'ZodNumber',
@@ -54,7 +56,18 @@ export function setErrorMapSchema(localeAdapterFn: LocaleAdapterFn) {
           return { message };
         };
       }
-      return _parseOriginal.call(this, input);
+      const res = _parseOriginal.call(this, input);
+      for (const issue of input.parent.common.issues) {
+        if (!issue[SymbolTranslated]) {
+          issue[SymbolTranslated] = true;
+          const issue2 = prepareIssue(localeAdapterFn, issue);
+          const message = translateError(localeAdapterFn, issue.message, issue2);
+          if (message !== issue.message) {
+            issue.message = message;
+          }
+        }
+      }
+      return res;
     };
   }
 }
