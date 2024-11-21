@@ -6,7 +6,7 @@ import {
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona';
 import { PipeRouteParam } from '../types/decorator.js';
-import { ValidPipe } from '../bean/pipe.valid.js';
+import { valid } from '../bean/pipe.valid.js';
 
 export function createPipesRouteParamDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: any, ...pipes: PipeRouteParam[]): ParameterDecorator {
@@ -25,10 +25,10 @@ export function createPipesRouteParamDecorator(paramType: RouteHandlerArgumentTy
         .map(paramPipe => {
           if (paramPipe.parseAsync) {
             // schema
-            return ValidPipe({ schema: paramPipe });
+            return valid({ schema: paramPipe });
           } else if (paramPipe.prototype?.constructor?.name) {
             // class
-            return ValidPipe({ class: paramPipe });
+            return valid({ class: paramPipe });
           } else {
             // pipe
             return paramPipe;

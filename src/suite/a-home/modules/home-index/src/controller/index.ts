@@ -12,7 +12,7 @@ import {
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { DtoBook } from '../dto/book.js';
-import { DefaultValuePipe, Query, ValidPipe } from 'vona-module-a-validator';
+import { defaultValue, Query, valid } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 @Controller()
@@ -37,7 +37,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @UseGuardGlobal('a-core:user', { public: true })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   echo(
-    @Query('id', DefaultValuePipe(0), z.number()) id: number,
+    @Query('id', defaultValue(0), z.number()) id: number,
     temp: string,
     @Query('name', z.number().optional()) name: string,
   ) {
@@ -47,7 +47,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @Get('echo2')
   @UseGuardGlobal('a-core:user', { public: true })
   @UsePipeGlobal('a-validator:validation', { strict: true })
-  async echo2(@Query(ValidPipe({ class: DtoBook })) book: Partial<DtoBook>) {
+  async echo2(@Query(valid({ class: DtoBook })) book: Partial<DtoBook>) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return book;
@@ -55,7 +55,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo3')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo3(@Query('id', DefaultValuePipe(2), z.number()) id: number) {
+  async echo3(@Query('id', defaultValue(2), z.number()) id: number) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return id;
