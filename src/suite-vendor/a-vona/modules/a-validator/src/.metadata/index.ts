@@ -1,10 +1,16 @@
 /** pipes: begin */
+export * from '../bean/pipe.valid.js';
 export * from '../bean/pipe.validation.js';
+import { IPipeOptionsValid } from '../bean/pipe.valid.js';
 import { IPipeOptionsValidation } from '../bean/pipe.validation.js';
 import 'vona';
 declare module 'vona' {
   export interface IPipeRecordGlobal {
     'a-validator:validation': IPipeOptionsValidation;
+  }
+
+  export interface IPipeRecordLocal {
+    'a-validator:valid': IPipeOptionsValid;
   }
 }
 /** pipes: end */
@@ -54,5 +60,9 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-validator': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): K {
+  return key;
 }
 /** scope: end */

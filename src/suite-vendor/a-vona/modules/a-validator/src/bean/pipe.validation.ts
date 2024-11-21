@@ -62,7 +62,12 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       // never go here
       rule = z.never();
     }
-    const key = metadata.field ?? '';
+    // not field
+    if (!metadata.field) {
+      return await this.scope.service.validator.validateSchema(rule, value, options);
+    }
+    // field
+    const key = metadata.field;
     const schema = z.object({ [key]: rule } as z.ZodRawShape);
     const obj = { [key]: value };
     const data = await this.scope.service.validator.validateSchema(schema, obj, options);
