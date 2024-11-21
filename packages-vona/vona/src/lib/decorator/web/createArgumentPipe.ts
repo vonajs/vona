@@ -1,18 +1,18 @@
 import { IPipeRecord } from '../../../types/interface/pipe.js';
 
-export interface ArgumentPipeResult<T extends keyof IPipeRecord> {
+export interface ArgumentPipeInfo<T extends keyof IPipeRecord> {
   pipeName: T;
-  options?: IPipeRecord[T];
+  options?: IPipeRecord[T] extends object ? Partial<IPipeRecord[T]> : IPipeRecord[T];
   optionsPrimitive?: boolean;
 }
 
-export type ArgumentPipeResultFn<T extends keyof IPipeRecord> = () => ArgumentPipeResult<T>;
+export type ArgumentPipeInfoFn<T extends keyof IPipeRecord> = () => ArgumentPipeInfo<T>;
 
 export function createArgumentPipeInfo<T extends keyof IPipeRecord>(
   pipeName: T,
   options?: IPipeRecord[T] extends object ? Partial<IPipeRecord[T]> : IPipeRecord[T],
   optionsPrimitive?: boolean,
-) {
+): ArgumentPipeInfo<T> {
   return {
     pipeName,
     options,
