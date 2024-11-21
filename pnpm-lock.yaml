@@ -1015,6 +1015,14 @@ importers:
 
   packages-utils/set: {}
 
+  packages-utils/zod-errors-custom:
+    dependencies:
+      '@cabloy/word-utils':
+        specifier: ^1.0.5
+        version: 1.0.5
+
+  packages-utils/zod-query: {}
+
   packages-vona/orm: {}
 
   packages-vona/shared: {}
@@ -1231,9 +1239,12 @@ importers:
 
   src/suite-vendor/a-vona/modules/a-validator:
     dependencies:
-      '@cabloy/word-utils':
-        specifier: ^1.0.5
-        version: 1.0.5
+      '@cabloy/zod-errors-custom':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/zod-errors-custom
+      '@cabloy/zod-query':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/zod-query
       zod:
         specifier: ^3.23.8
         version: 3.23.8

@@ -1,6 +1,6 @@
 import { VonaApplication } from 'vona';
-import { setErrorMapDefault } from './zod-errorMapDefault.js';
-import { setErrorMapSchema } from './zod_errorMapSchema.js';
+import { setErrorMapDefault } from './errorMapDefault.js';
+import { setErrorMapSchema } from './errorMapSchema.js';
 
 export function errorsAdapter(app: VonaApplication) {
   setErrorMapDefault((text: string, ...args: any[]) => {

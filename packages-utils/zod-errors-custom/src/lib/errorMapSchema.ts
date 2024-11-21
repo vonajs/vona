@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { LocaleAdapterFn, prepareIssue, translateError } from './zod-errorMapDefault.js';
+import { LocaleAdapterFn, prepareIssue, translateError } from './utils.js';
 
 const SymbolTranslated = Symbol('SymbolTranslated');
 

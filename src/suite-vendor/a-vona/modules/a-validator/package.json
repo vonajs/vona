@@ -34,7 +34,8 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@cabloy/word-utils": "^1.0.5",
+    "@cabloy/zod-errors-custom": "workspace:^",
+    "@cabloy/zod-query": "workspace:^",
     "zod": "^3.23.8"
   }
 }
