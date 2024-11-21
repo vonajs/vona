@@ -39,7 +39,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       return await this._transformPrimitive(value, metadata, options);
     }
     // validate
-    return await this.scope.service.validator.validate(metaType, value, options);
+    return await this.scope.service.validator.validate(metaType, value, options, metadata.field);
   }
 
   private _isPrimitiveType(metaType: Type<any>): boolean {

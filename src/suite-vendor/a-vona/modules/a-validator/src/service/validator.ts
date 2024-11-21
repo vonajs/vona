@@ -10,6 +10,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     classType: Constructable<T>,
     value: V,
     options?: ValidatorOptions,
+    path?: string,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
     const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
     // check value: nil, maybe need other argument derecotor to validate it
@@ -20,7 +21,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     }
     // schema
     const schema = this.getSchema(classType, options);
-    return await this._validateSchema(schema, value, options);
+    return await this.validateSchema(schema, value, options, path);
   }
 
   async validateSchema<T, V = T>(
