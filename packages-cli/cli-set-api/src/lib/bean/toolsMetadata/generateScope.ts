@@ -55,6 +55,13 @@ declare module 'vona' {
       : ''
   }
 }
+${
+  options.locales
+    ? `\nexport function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): K {
+  return key;
+}`
+    : ''
+}
 /** scope: end */
 `;
   return content;
