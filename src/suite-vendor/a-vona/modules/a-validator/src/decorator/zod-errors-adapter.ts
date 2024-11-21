@@ -1,8 +1,12 @@
 import { VonaApplication } from 'vona';
-import { setErrorMap } from './zod-errors.js';
+import { setErrorMapDefault } from './zod-errorMapDefault.js';
+import { setErrorMapContextual } from './zod_errorMapContextual.js';
 
 export function errorsAdapter(app: VonaApplication) {
-  setErrorMap((text: string, ...args: any[]) => {
+  setErrorMapDefault((text: string, ...args: any[]) => {
+    return app.text(text, ...args);
+  });
+  setErrorMapContextual((text: string, ...args: any[]) => {
     return app.text(text, ...args);
   });
 }

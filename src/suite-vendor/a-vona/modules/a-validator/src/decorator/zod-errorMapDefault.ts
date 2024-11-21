@@ -1,9 +1,9 @@
 import { replaceTemplate } from '@cabloy/word-utils';
 import { util, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 
-export type ErrorAdapterFn = (text: string, ...args: any[]) => string;
+export type LocaleAdapterFn = (text: string, ...args: any[]) => string;
 
-export function setErrorMap(fnAdapter: ErrorAdapterFn) {
+export function setErrorMapDefault(localeAdapterFn: LocaleAdapterFn) {
   function _replaceTemplate(content: string, scope?: object | undefined): [string, any[]] {
     if (!content) return [content, []];
     if (!scope) return [content, []];
@@ -21,10 +21,10 @@ export function setErrorMap(fnAdapter: ErrorAdapterFn) {
   }
   function _t(key: string, issue?: z.ZodIssueOptionalMessage) {
     // 1. pre translate
-    const content = fnAdapter(key);
+    const content = localeAdapterFn(key);
     // 2. temp translate
     const [, args] = _replaceTemplate(content, issue);
-    let message = fnAdapter(key, ...args);
+    let message = localeAdapterFn(key, ...args);
     // 3. extact translate
     message = replaceTemplate(message, issue)!;
     return message;
@@ -34,7 +34,7 @@ export function setErrorMap(fnAdapter: ErrorAdapterFn) {
     for (const field of ['expected', 'received', 'validation']) {
       if (issue[field] && typeof issue[field] === 'string') {
         const key = field === 'validation' ? `ZodError_validations_${issue[field]}` : `ZodError_types_${issue[field]}`;
-        const value = fnAdapter(key);
+        const value = localeAdapterFn(key);
         if (value !== key) {
           issue[field] = value;
         }
