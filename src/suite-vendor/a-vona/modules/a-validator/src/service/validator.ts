@@ -20,10 +20,35 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     }
     // schema
     const schema = this.getSchema(classType, options);
-    return await this.validateSchema(schema, value, options);
+    return await this._validateSchema(schema, value, options);
   }
 
   async validateSchema<T, V = T>(
+    schema: z.ZodSchema<T> | undefined,
+    value: V,
+    options?: ValidatorOptions,
+    path?: string,
+  ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
+    // no path
+    if (!path) {
+      return await this._validateSchema(schema, value, options);
+    }
+    // path
+    const schema2 = z.object({ [path]: schema } as z.ZodRawShape);
+    const obj = { [path]: value };
+    const data = await this._validateSchema(schema2, obj, options);
+    return data[path];
+  }
+
+  getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {
+    const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
+    let schema = z.object((rules as z.ZodRawShape) || {});
+    if (options?.passthrough) schema = schema.passthrough() as any;
+    if (options?.strict) schema = schema.strict() as any;
+    return schema as any;
+  }
+
+  async _validateSchema<T, V = T>(
     schema: z.ZodSchema<T> | undefined,
     value: V,
     options?: ValidatorOptions,
@@ -38,14 +63,6 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     }
     const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
     return this.app.throw(HttpStatus.UNPROCESSABLE_CONTENT, issues);
-  }
-
-  getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {
-    const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
-    let schema = z.object((rules as z.ZodRawShape) || {});
-    if (options?.passthrough) schema = schema.passthrough() as any;
-    if (options?.strict) schema = schema.strict() as any;
-    return schema as any;
   }
 
   private _isPrimitiveValue(value: unknown): boolean {
