@@ -1,4 +1,3 @@
-import z from 'zod';
 import { Constructable } from '../../lib/index.js';
 import { Type } from '../utils/type.js';
 import { IMiddlewareBase } from './middleware.js';
@@ -41,7 +40,7 @@ export interface RouteHandlerArgumentMetaDecorator {
   index: number;
   type: RouteHandlerArgumentType;
   field?: string;
-  schema: z.ZodSchema;
+  pipes: Function[];
   extractValue?: Function;
 }
 

@@ -28,7 +28,7 @@ export function createSchemaRouteParamDecorator(paramType: RouteHandlerArgumentT
         index,
         type: paramType,
         field: paramField,
-        schema: paramSchema,
+        pipes: paramSchema,
         extractValue,
       });
     };

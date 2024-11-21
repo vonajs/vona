@@ -80,8 +80,7 @@
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
     "uuid": "^9.0.1",
-    "vona-shared": "^1.0.7",
-    "zod": "^3.23.8"
+    "vona-shared": "^1.0.7"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
