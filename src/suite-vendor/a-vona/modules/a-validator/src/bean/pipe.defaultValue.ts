@@ -20,4 +20,4 @@ export class PipeDefaultValue extends BeanBase implements IPipeTransform<any, IP
   }
 }
 
-export const DefaultValuePipe = createArgumentPipeParse('a-pipe:defaultValue', true);
+export const DefaultValuePipe = createArgumentPipeParse('a-validator:defaultValue', true);
