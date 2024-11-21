@@ -11,7 +11,6 @@ import {
   UsePipeGlobal,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { ParseIntPipe } from 'vona-module-a-pipe';
 import { DtoBook } from '../dto/book.js';
 import { DefaultValuePipe, Query, ValidPipe } from 'vona-module-a-validator';
 import { z } from 'zod';

@@ -13,9 +13,6 @@
       "path": "modules/a-swagger"
     },
     {
-      "path": "modules/a-pipe"
-    },
-    {
       "path": "modules/a-validator"
     }
   ]

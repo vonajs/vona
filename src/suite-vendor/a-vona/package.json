@@ -12,7 +12,6 @@
     "vona-module-a-core": "^5.0.3",
     "vona-module-a-swagger": "^5.0.3",
     "vona-module-a-vona": "^5.0.3",
-    "vona-module-a-pipe": "workspace:^",
     "vona-module-a-validator": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
