@@ -3,6 +3,7 @@ import { ScopeModule } from '../.metadata/this.js';
 import { ValidatorOptions } from '../types/validatorOptions.js';
 import { z } from 'zod';
 import { SymbolDecoratorRule } from '../decorator/rule.js';
+import { coerceWithNil } from '@cabloy/zod-query';
 
 @Service()
 export class ServiceValidator extends BeanBase<ScopeModule> {
@@ -14,6 +15,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
     const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
     // check value: nil, maybe need other argument derecotor to validate it
+    value = coerceWithNil(value);
     if (isNil(value)) return value as any;
     // check value: primitive
     if (this._isPrimitiveValue(value)) {

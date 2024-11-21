@@ -165,13 +165,13 @@ z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-export function _coerce(input, fn?: Function) {
+function _coerce(input, fn?: Function) {
   if (!isNil(input.data)) {
     fn?.();
   }
 }
 
-export function _coerceWithNil(input, fn?: Function) {
+function _coerceWithNil(input, fn?: Function) {
   if (!isNil(input.data)) {
     if (input.data === 'undefined' || input.data === '') {
       input.data = undefined;
@@ -181,6 +181,12 @@ export function _coerceWithNil(input, fn?: Function) {
       fn?.();
     }
   }
+}
+
+export function coerceWithNil(data: any, fn?: Function) {
+  const input = { data };
+  _coerceWithNil(input, fn);
+  return data;
 }
 
 function _getInnerType(schema: any) {
