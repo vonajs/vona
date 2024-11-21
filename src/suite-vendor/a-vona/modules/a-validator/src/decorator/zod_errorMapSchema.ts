@@ -57,13 +57,15 @@ export function setErrorMapSchema(localeAdapterFn: LocaleAdapterFn) {
         };
       }
       const res = _parseOriginal.call(this, input);
-      for (const issue of input.parent.common.issues) {
-        if (!issue[SymbolTranslated]) {
-          issue[SymbolTranslated] = true;
-          const issue2 = prepareIssue(localeAdapterFn, issue);
-          const message = translateError(localeAdapterFn, issue.message, issue2);
-          if (message !== issue.message) {
-            issue.message = message;
+      if (this._def.checks && this._def.checks.length > 0) {
+        for (const issue of input.parent.common.issues) {
+          if (!issue[SymbolTranslated]) {
+            issue[SymbolTranslated] = true;
+            const issue2 = prepareIssue(localeAdapterFn, issue);
+            const message = translateError(localeAdapterFn, issue.message, issue2);
+            if (message !== issue.message) {
+              issue.message = message;
+            }
           }
         }
       }
