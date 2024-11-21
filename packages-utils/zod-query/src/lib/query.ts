@@ -11,7 +11,7 @@ import { z } from 'zod';
 
 const _parseString = z.ZodString.prototype._parse;
 z.ZodString.prototype._parse = function (this: z.ZodString, input) {
-  _coerce(this, input, () => {
+  coerce(input, () => {
     input.data = String(input.data);
   });
   return _parseString.call(this, input);
@@ -27,7 +27,7 @@ z.ZodString.prototype._parse = function (this: z.ZodString, input) {
 
 const _parseNumber = z.ZodNumber.prototype._parse;
 z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
-  _coerceWithNil(this, input, () => {
+  coerceWithNil(input, () => {
     input.data = Number(input.data);
   });
   return _parseNumber.call(this, input);
@@ -43,7 +43,7 @@ z.ZodNumber.prototype._parse = function (this: z.ZodNumber, input) {
 
 const _parseBigInt = z.ZodBigInt.prototype._parse;
 z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
-  _coerceWithNil(this, input, () => {
+  coerceWithNil(input, () => {
     input.data = BigInt(input.data);
   });
   return _parseBigInt.call(this, input);
@@ -59,7 +59,7 @@ z.ZodBigInt.prototype._parse = function (this: z.ZodBigInt, input) {
 
 const _parseBoolean = z.ZodBoolean.prototype._parse;
 z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
-  _coerceWithNil(this, input, () => {
+  coerceWithNil(input, () => {
     if (input.data === 'false' || input.data === '0') {
       input.data = false;
     } else {
@@ -79,7 +79,7 @@ z.ZodBoolean.prototype._parse = function (this: z.ZodBoolean, input) {
 
 const _parseDate = z.ZodDate.prototype._parse;
 z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
-  _coerceWithNil(this, input, () => {
+  coerceWithNil(input, () => {
     input.data = new Date(input.data);
   });
   return _parseDate.call(this, input);
@@ -95,7 +95,7 @@ z.ZodDate.prototype._parse = function (this: z.ZodDate, input) {
 
 const _parseObject = z.ZodObject.prototype._parse;
 z.ZodObject.prototype._parse = function (input) {
-  _coerceWithNil(this, input, () => {
+  coerceWithNil(input, () => {
     if (typeof input.data === 'string') {
       input.data = JSON.parse(input.data);
     }
@@ -113,7 +113,7 @@ z.ZodObject.prototype._parse = function (input) {
 
 const _parseArray = z.ZodArray.prototype._parse;
 z.ZodArray.prototype._parse = function (input) {
-  _coerceWithNil(this, input, () => {
+  coerceWithNil(input, () => {
     if (typeof input.data === 'string') {
       input.data = JSON.parse(input.data);
     }
@@ -132,9 +132,9 @@ z.ZodArray.prototype._parse = function (input) {
 const _parseOptional = z.ZodOptional.prototype._parse;
 z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
   if (_getInnerType(this).typeName === 'ZodString') {
-    _coerce(this, input);
+    coerce(input);
   } else {
-    _coerceWithNil(this, input);
+    coerceWithNil(input);
   }
   return _parseOptional.call(this, input);
 };
@@ -150,9 +150,9 @@ z.ZodOptional.prototype._parse = function (this: z.ZodOptional<any>, input) {
 const _parseDefault = z.ZodDefault.prototype._parse;
 z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
   if (_getInnerType(this).typeName === 'ZodString') {
-    _coerce(this, input);
+    coerce(input);
   } else {
-    _coerceWithNil(this, input);
+    coerceWithNil(input);
   }
   return _parseDefault.call(this, input);
 };
@@ -165,13 +165,13 @@ z.ZodDefault.prototype._parse = function (this: z.ZodDefault<any>, input) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-function _coerce(_instance, input, fn?: Function) {
+function coerce(input, fn?: Function) {
   if (!isNil(input.data)) {
     fn?.();
   }
 }
 
-function _coerceWithNil(_instance, input, fn?: Function) {
+function coerceWithNil(input, fn?: Function) {
   if (!isNil(input.data)) {
     if (input.data === 'undefined' || input.data === '') {
       input.data = undefined;
