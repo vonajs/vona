@@ -8,7 +8,7 @@ export interface ArgumentPipeResult<T extends keyof IPipeRecord> {
 
 export type ArgumentPipeResultFn<T extends keyof IPipeRecord> = () => ArgumentPipeResult<T>;
 
-export function createArgumentPipe<T extends keyof IPipeRecord>(
+export function createArgumentPipeInfo<T extends keyof IPipeRecord>(
   pipeName: T,
   options?: IPipeRecord[T] extends object ? Partial<IPipeRecord[T]> : IPipeRecord[T],
   optionsPrimitive?: boolean,
@@ -20,11 +20,11 @@ export function createArgumentPipe<T extends keyof IPipeRecord>(
   };
 }
 
-export function createArgumentPipeParse<T extends keyof IPipeRecord>(pipeName: T, optionsPrimitive?: boolean) {
+export function createArgumentPipe<T extends keyof IPipeRecord>(pipeName: T, optionsPrimitive?: boolean) {
   return function (options?: IPipeRecord[T] extends object ? Partial<IPipeRecord[T]> : IPipeRecord[T]): any {
-    if (options === undefined) return createArgumentPipe(pipeName, undefined, optionsPrimitive);
+    if (options === undefined) return createArgumentPipeInfo(pipeName, undefined, optionsPrimitive);
     return () => {
-      return createArgumentPipe(pipeName, options, optionsPrimitive);
+      return createArgumentPipeInfo(pipeName, options, optionsPrimitive);
     };
   };
 }

@@ -6,7 +6,7 @@ import {
   IDecoratorPipeOptionsGlobal,
   HttpStatus,
   Type,
-  createArgumentPipeParse,
+  createArgumentPipe,
 } from 'vona';
 import { ValidatorOptions } from '../types/validatorOptions.js';
 import { ScopeModule } from '../.metadata/this.js';
@@ -67,4 +67,4 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
   }
 }
 
-export const ValidationPipe = createArgumentPipeParse('a-validator:validation');
+export const validation = createArgumentPipe('a-validator:validation');

@@ -4,7 +4,7 @@ import {
   IDecoratorPipeOptions,
   IPipeTransform,
   Pipe,
-  createArgumentPipeParse,
+  createArgumentPipe,
   Constructable,
   HttpStatus,
 } from 'vona';
@@ -37,4 +37,4 @@ export class PipeValid extends BeanBase<ScopeModule> implements IPipeTransform<a
   }
 }
 
-export const ValidPipe = createArgumentPipeParse('a-validator:valid');
+export const valid = createArgumentPipe('a-validator:valid');

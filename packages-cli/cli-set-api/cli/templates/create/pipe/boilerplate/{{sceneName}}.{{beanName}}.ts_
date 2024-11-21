@@ -4,7 +4,7 @@ import {
   IDecoratorPipeOptions,
   IPipeTransform,
   Pipe,
-  createArgumentPipeParse,
+  createArgumentPipe,
 } from 'vona';
 
 export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
@@ -16,4 +16,4 @@ export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeT
   }
 }
 
-export const <%=argv.beanNameCapitalize%>Pipe = createArgumentPipeParse('<%=argv.module%>:<%=argv.beanName%>');
+export const <%=argv.beanName%> = createArgumentPipe('<%=argv.module%>:<%=argv.beanName%>');

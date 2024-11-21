@@ -1,12 +1,4 @@
-import {
-  RouteHandlerArgumentMeta,
-  BeanBase,
-  IPipeTransform,
-  Pipe,
-  createArgumentPipeParse,
-  isNil,
-  isNumber,
-} from 'vona';
+import { RouteHandlerArgumentMeta, BeanBase, IPipeTransform, Pipe, createArgumentPipe, isNil, isNumber } from 'vona';
 
 export type IPipeOptionsDefaultValue = any;
 
@@ -20,4 +12,4 @@ export class PipeDefaultValue extends BeanBase implements IPipeTransform<any, IP
   }
 }
 
-export const DefaultValuePipe = createArgumentPipeParse('a-validator:defaultValue', true);
+export const defaultValue = createArgumentPipe('a-validator:defaultValue', true);
