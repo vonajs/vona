@@ -1,12 +1,9 @@
 /** pipes: begin */
-export * from '../bean/pipe.defaultValue.js';
 export * from '../bean/pipe.parseInt.js';
-import { IPipeOptionsDefaultValue } from '../bean/pipe.defaultValue.js';
 import { IPipeOptionsParseInt } from '../bean/pipe.parseInt.js';
 import 'vona';
 declare module 'vona' {
   export interface IPipeRecordLocal {
-    'a-pipe:defaultValue': IPipeOptionsDefaultValue;
     'a-pipe:parseInt': IPipeOptionsParseInt;
   }
 }
@@ -41,5 +38,9 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-pipe': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): K {
+  return key;
 }
 /** scope: end */

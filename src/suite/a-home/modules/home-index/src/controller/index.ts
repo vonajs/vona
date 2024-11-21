@@ -11,9 +11,9 @@ import {
   UsePipeGlobal,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { DefaultValuePipe, ParseIntPipe } from 'vona-module-a-pipe';
+import { ParseIntPipe } from 'vona-module-a-pipe';
 import { DtoBook } from '../dto/book.js';
-import { Query, ValidPipe } from 'vona-module-a-validator';
+import { DefaultValuePipe, Query, ValidPipe } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 @Controller()
@@ -56,7 +56,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo3')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo3(@Query('id', z.number()) id: number) {
+  async echo3(@Query('id', DefaultValuePipe(2), z.number()) id: number) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return id;

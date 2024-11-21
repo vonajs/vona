@@ -1,6 +1,8 @@
 /** pipes: begin */
+export * from '../bean/pipe.defaultValue.js';
 export * from '../bean/pipe.valid.js';
 export * from '../bean/pipe.validation.js';
+import { IPipeOptionsDefaultValue } from '../bean/pipe.defaultValue.js';
 import { IPipeOptionsValid } from '../bean/pipe.valid.js';
 import { IPipeOptionsValidation } from '../bean/pipe.validation.js';
 import 'vona';
@@ -10,6 +12,7 @@ declare module 'vona' {
   }
 
   export interface IPipeRecordLocal {
+    'a-validator:defaultValue': IPipeOptionsDefaultValue;
     'a-validator:valid': IPipeOptionsValid;
   }
 }
