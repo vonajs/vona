@@ -1,0 +1,46 @@
+{
+  "name": "@cabloy/zod-errors-custom",
+  "version": "1.0.0",
+  "description": "zod-errors-custom",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "vue3",
+    "ioc",
+    "zova"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabloy/zova.git"
+  },
+  "homepage": "https://github.com/cabloy/zova#readme",
+  "bugs": {
+    "url": "https://github.com/cabloy/zova/issues"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "prepublishOnly": "npm run tsc:publish"
+  }
+}
