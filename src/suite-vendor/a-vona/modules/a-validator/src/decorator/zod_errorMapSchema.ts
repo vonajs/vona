@@ -38,6 +38,6 @@ const __zodTypes = [
   'ZodReadonly',
 ];
 
-export function setErrorMapContextual(localeAdapterFn: LocaleAdapterFn) {
+export function setErrorMapSchema(localeAdapterFn: LocaleAdapterFn) {
   //z.
 }
