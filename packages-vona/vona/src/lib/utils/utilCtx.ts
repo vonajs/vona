@@ -1,8 +1,7 @@
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { VonaContext, PowerPartial, HttpStatus, RouteHandlerArgumentMeta } from '../../types/index.js';
+import { VonaContext, PowerPartial } from '../../types/index.js';
 import { IExecuteBeanCallback } from './util.js';
-import { appResource } from '../core/resource.js';
 
 export class CtxUtil extends BeanSimple {
   runInBackground(scope) {
