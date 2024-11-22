@@ -7,6 +7,7 @@ import createEntity from './command/create.entity.js';
 import createModel from './command/create.model.js';
 import createService from './command/create.service.js';
 import createController from './command/create.controller.js';
+import createTest from './command/create.test.js';
 import initConfig from './command/init.config.js';
 import initLocale from './command/init.locale.js';
 import initMonkey from './command/init.monkey.js';
@@ -29,6 +30,7 @@ export const commands = {
     model: createModel,
     service: createService,
     controller: createController,
+    test: createTest,
   },
   init: {
     config: initConfig,
