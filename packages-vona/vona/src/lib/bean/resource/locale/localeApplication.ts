@@ -3,11 +3,11 @@ import { BeanSimple } from '../../beanSimple.js';
 import { ILocalInfos, IModuleLocale, IModuleLocaleText } from './type.js';
 
 export class ApplicationLocale extends BeanSimple {
-  get locale(): string {
+  get locale(): keyof ILocalInfos {
     return this.ctx.locale || this.app.config.i18n.defaultLocale;
   }
 
-  set locale(value) {
+  set locale(value: keyof ILocalInfos) {
     this.ctx.locale = value;
   }
 

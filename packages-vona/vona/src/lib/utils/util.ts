@@ -260,7 +260,7 @@ export class AppUtil extends BeanSimple {
     ctxParent,
     instance,
   }: {
-    locale?: string;
+    locale?: keyof ILocalInfos;
     subdomain?: string | null | undefined;
     beanModule?: string;
     beanFullName?: string;
