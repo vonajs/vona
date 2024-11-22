@@ -9,7 +9,7 @@ export class ControllerTestCtxPerformAction extends BeanBase<ScopeModule> {
     // performAction
     const res = await this.ctx.meta.util.performAction({
       method: 'post',
-      url: 'test/ctx/performAction/echo',
+      url: '/api/test/party/test/ctx/performAction/echo',
       body: {
         id,
       },
