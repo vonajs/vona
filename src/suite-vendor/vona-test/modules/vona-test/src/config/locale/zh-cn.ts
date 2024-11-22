@@ -1,3 +1,3 @@
 export default {
-  TestLocale: 'TestLocale',
+  TestHelloWorld: '您好，世界',
 };

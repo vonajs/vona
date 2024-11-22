@@ -5,12 +5,15 @@ describe.only('locale.test.ts', () => {
     const moduleInfo = mockModuleInfo();
     await app.meta.mockUtil.mockCtx(
       async ctx => {
-        console.log('-----:', ctx.locale);
+        assert.equal(ctx.locale, 'zh-cn');
         // getText
-        assert.equal(app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestLocale'), 'TestLocale');
+        assert.equal(
+          app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'),
+          '您好，世界',
+        );
         // scope
         const scopeTest = app.bean.scope('vona-test');
-        assert.equal(scopeTest.locale.TestLocale(), 'TestLocale');
+        assert.equal(scopeTest.locale.TestHelloWorld(), '您好，世界');
       },
       { locale: 'zh-cn' },
     );
