@@ -28,18 +28,24 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
-  combineFetchPath(moduleName: IModuleInfo | string, path: string | undefined, simplify: boolean) {
+  combineFetchPath(
+    moduleName: IModuleInfo | string,
+    path: string | undefined,
+    simplify: boolean,
+    prefix?: string | boolean,
+  ) {
+    const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
     if (!path) path = '';
     // ignore globalPrefix
     if (path.startsWith('//')) return path.substring(1);
     // ignore module path
-    if (path.startsWith('/')) return `${this.app.config.globalPrefix}${path}`;
+    if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
     const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error('invalid url');
     const parts = moduleInfo.relativeName.split('-');
     // path
-    let res = this.app.config.globalPrefix;
+    let res = globalPrefix;
     if (!simplify || parts[0] !== 'a') res = `${res}/${parts[0]}`;
     if (!simplify || !path.startsWith(parts[1])) res = `${res}/${parts[1]}`;
     if (path) res = `${res}/${path}`;

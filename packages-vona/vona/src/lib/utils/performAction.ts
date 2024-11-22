@@ -17,6 +17,7 @@ export default async function performAction({
   // subdomain, deprecated
   method,
   url,
+  path,
   query,
   params,
   headers,

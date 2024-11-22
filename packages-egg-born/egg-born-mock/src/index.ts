@@ -36,10 +36,15 @@ export const app = Cast<MockCabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
 export const mm = Bundle.mm;
 
-export function mockUrl(url, apiPrefix = true) {
+export function mockPath(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
   const app = Cast<VonaApplication>(Bundle.app);
-  return app.meta.mockUtil.mockUrl(moduleInfo, url, apiPrefix);
+  return app.meta.util.combineFetchPath(moduleInfo, path, true, false);
+}
+export function mockUrl(url?: string) {
+  const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
+  const app = Cast<VonaApplication>(Bundle.app);
+  return app.meta.util.combineFetchPath(moduleInfo, url, true, true);
 }
 export function mockInfo(): IModuleInfo {
   return parseModuleInfo(ParseModuleNameLevel)!;

@@ -164,13 +164,15 @@ export class CtxUtil extends BeanSimple {
     });
   }
 
-  async performAction({ innerAccess, method, url, query, params, headers, body }: any) {
+  // todo: url -> path
+  async performAction({ innerAccess, method, url, path, query, params, headers, body }: any) {
     const ctx = this.ctx;
     return await performActionFn({
       ctxCaller: ctx,
       innerAccess,
       method,
       url,
+      path,
       query,
       params,
       headers,
