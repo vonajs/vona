@@ -4,7 +4,7 @@ import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
 describe.only('test/controller/test/ctx/transaction.test.js', () => {
   it('action:transaction:fail', async () => {
     // ctx
-    await app.meta.mockUtil.mockRunInAnonymousContextScope(async ctx => {
+    await app.meta.mockUtil.mockCtx(async ctx => {
       // login
       await ctx.meta.mockUtil.login({ auth: 'Tom' });
 
@@ -63,7 +63,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
 
   it('action:transaction:success', async () => {
     // ctx
-    await app.meta.mockUtil.mockRunInAnonymousContextScope(async ctx => {
+    await app.meta.mockUtil.mockCtx(async ctx => {
       // login
       await ctx.meta.mockUtil.login({ auth: 'Tom' });
 

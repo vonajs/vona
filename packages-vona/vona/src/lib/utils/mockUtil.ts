@@ -16,7 +16,7 @@ export class AppMockUtil extends BeanSimple {
   }
 
   // todo: remove module
-  async mockRunInAnonymousContextScope<T>(
+  async mockCtx<T>(
     scope: (ctx: VonaContext) => Promise<T>,
     options?: { locale?: string; subdomain?: string | null | undefined; module?: string },
   ): Promise<T> {
