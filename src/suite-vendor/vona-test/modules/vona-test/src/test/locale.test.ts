@@ -32,6 +32,14 @@ describe.only('locale.test.ts', () => {
       assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 0), '没有苹果');
       assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 1), '1个苹果');
       assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 2), '2个苹果');
+      // english
+      assert.equal(scopeTest.locale.TestNameApples_.locale('en-us', 'Mike', 0), 'Mike has no apples');
+      assert.equal(scopeTest.locale.TestNameApples_.locale('en-us', 'Mike', 1), 'Mike has one apple');
+      assert.equal(scopeTest.locale.TestNameApples_.locale('en-us', 'Mike', 2), 'Mike has 2 apples');
+      // chinese
+      assert.equal(scopeTest.locale.TestNameApples_.locale('zh-cn', 'Mike', 0), 'Mike没有苹果');
+      assert.equal(scopeTest.locale.TestNameApples_.locale('zh-cn', 'Mike', 1), 'Mike有1个苹果');
+      assert.equal(scopeTest.locale.TestNameApples_.locale('zh-cn', 'Mike', 2), 'Mike有2个苹果');
     });
   });
 });
