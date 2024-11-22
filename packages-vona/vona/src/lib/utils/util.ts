@@ -7,7 +7,7 @@ import Redlock from 'redlock';
 import { Request } from 'egg';
 import { VonaContext, Cast, IModule, PowerPartial, TypeMonkeyName, IModuleInfo, parseInfo } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { IModuleMiddlewareGate } from '../bean/index.js';
+import { ILocalInfos, IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { compose, composeAsync } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
@@ -207,7 +207,7 @@ export class AppUtil extends BeanSimple {
       subdomain,
       module,
       instance,
-    }: { locale?: string; subdomain?: string | null | undefined; module?: string; instance?: boolean },
+    }: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string; instance?: boolean },
   ): Promise<T> {
     // url
     // todo: remove /api/a/base

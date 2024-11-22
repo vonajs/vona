@@ -1,5 +1,6 @@
 import { VonaContext } from '../../types/context/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { ILocalInfos } from '../bean/resource/locale/type.js';
 
 export class AppMockUtil extends BeanSimple {
   parseUrlFromModuleInfo(moduleInfo, apiPrefix: string | boolean = true) {
@@ -18,7 +19,7 @@ export class AppMockUtil extends BeanSimple {
   // todo: remove module
   async mockCtx<T>(
     scope: (ctx: VonaContext) => Promise<T>,
-    options?: { locale?: string; subdomain?: string | null | undefined; module?: string },
+    options?: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
   ): Promise<T> {
     options = options || {};
     const locale = options.locale;
