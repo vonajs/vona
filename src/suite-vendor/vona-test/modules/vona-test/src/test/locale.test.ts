@@ -5,17 +5,33 @@ describe.only('locale.test.ts', () => {
     const moduleInfo = mockModuleInfo();
     await app.meta.mockUtil.mockCtx(
       async ctx => {
+        // ctx.locale
         assert.equal(ctx.locale, 'zh-cn');
         // getText
         assert.equal(
           app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'),
           '您好，世界',
         );
-        // scope
+        // scope locale
         const scopeTest = app.bean.scope('vona-test');
         assert.equal(scopeTest.locale.TestHelloWorld(), '您好，世界');
       },
       { locale: 'zh-cn' },
     );
+  });
+
+  it('action:locale:plurals', async () => {
+    await app.meta.mockUtil.mockCtx(async _ctx => {
+      // scope
+      const scopeTest = app.bean.scope('vona-test');
+      // english
+      assert.equal(scopeTest.locale.TestApples.locale('en-us', 0), 'no apples');
+      assert.equal(scopeTest.locale.TestApples.locale('en-us', 1), 'one apple');
+      assert.equal(scopeTest.locale.TestApples.locale('en-us', 2), '2 apples');
+      // chinese
+      assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 0), '没有苹果');
+      assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 1), '1个苹果');
+      assert.equal(scopeTest.locale.TestApples.locale('zh-cn', 2), '2个苹果');
+    });
   });
 });
