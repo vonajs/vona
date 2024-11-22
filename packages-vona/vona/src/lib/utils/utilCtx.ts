@@ -164,15 +164,17 @@ export class CtxUtil extends BeanSimple {
     });
   }
 
-  // todo: url -> path
-  async performAction({ innerAccess, method, url, path, query, params, headers, body }: any) {
+  // todo: url should not be relative path, should be absolute
+  //       because ctxCaller.module removed
+  //       so, maybe need provide this.scope.util.combineUrl
+  //          this result is: /api/a/user/add, thus the method of combineFetchPath not needed in performActionFn
+  async performAction({ innerAccess, method, url, query, params, headers, body }: any) {
     const ctx = this.ctx;
     return await performActionFn({
       ctxCaller: ctx,
       innerAccess,
       method,
       url,
-      path,
       query,
       params,
       headers,

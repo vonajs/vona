@@ -1,4 +1,4 @@
-import { app, mockPath } from 'egg-born-mock';
+import { app, mockUrl } from 'egg-born-mock';
 
 describe.only('test/controller/test/feat/summer.test.js', () => {
   it('action:summer', async () => {
@@ -7,7 +7,7 @@ describe.only('test/controller/test/feat/summer.test.js', () => {
       await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: mockPath('test/feat/summer', false),
+        url: mockUrl('test/feat/summer'),
       });
     });
   });

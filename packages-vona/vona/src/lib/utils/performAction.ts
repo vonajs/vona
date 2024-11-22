@@ -17,7 +17,6 @@ export default async function performAction({
   // subdomain, deprecated
   method,
   url,
-  path,
   query,
   params,
   headers,
@@ -31,7 +30,6 @@ export default async function performAction({
     __fnMiddleware = compose([middleware]);
   }
   // request
-  url = app.meta.util.combineFetchPath(ctxCaller.module && ctxCaller.module.info, url);
   const req = createRequest({ method, url }, ctxCaller);
   // response
   const res = new http.ServerResponse(req);
