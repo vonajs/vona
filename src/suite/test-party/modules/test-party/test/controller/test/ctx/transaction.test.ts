@@ -12,7 +12,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       const atomKey = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/write',
+        url: '/api/a/base/atom/write',
         body: {
           atomClass: { module: mockInfo().relativeName, atomClassName: 'party' },
         },
@@ -27,7 +27,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
         await ctx.meta.util.performAction({
           innerAccess: false,
           method: 'post',
-          url: mockUrl('test/ctx/transaction', false),
+          url: mockUrl('test/ctx/transaction'),
           body: {
             key: atomKey,
             item: itemNew,
@@ -41,7 +41,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       const item = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/read',
+        url: '/api/a/base/atom/read',
         body: {
           key: atomKey,
         },
@@ -53,7 +53,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/delete',
+        url: '/api/a/base/atom/delete',
         body: {
           key: atomKey,
         },
@@ -71,7 +71,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       const atomKey = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/write',
+        url: '/api/a/base/atom/write',
         body: {
           atomClass: { module: mockInfo().relativeName, atomClassName: 'party' },
         },
@@ -85,7 +85,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: mockUrl('test/ctx/transaction', false),
+        url: mockUrl('test/ctx/transaction'),
         body: {
           key: atomKey,
           item: itemNew,
@@ -96,7 +96,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       const item = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/read',
+        url: '/api/a/base/atom/read',
         body: {
           key: atomKey,
         },
@@ -108,7 +108,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
       await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/delete',
+        url: '/api/a/base/atom/delete',
         body: {
           key: atomKey,
         },

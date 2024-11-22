@@ -2,7 +2,6 @@ import { BeanBase } from 'vona';
 
 export class VersionUpdate extends BeanBase {
   async run(_options) {
-    console.log('subdomain: ', this.ctx.subdomain);
     // all instances
     const instances = await this.app.bean.instance.list({ where: {} });
     for (const instance of instances) {
@@ -16,7 +15,6 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _updateAtomsInstance() {
-    console.log('subdomain: ', this.ctx.subdomain);
     // throw new Error('');
   }
 }
