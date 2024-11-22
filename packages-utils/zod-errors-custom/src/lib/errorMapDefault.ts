@@ -147,7 +147,7 @@ export function setErrorMapDefault(localeAdapterFn: LocaleAdapterFn) {
         }
         break;
       case ZodIssueCode.custom:
-        message = _t('ZodError_custom');
+        message = _t((<any>issue).customMessage || 'ZodError_custom');
         break;
       case ZodIssueCode.invalid_intersection_types:
         message = _t('ZodError_invalid_intersection_types');

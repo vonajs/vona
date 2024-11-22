@@ -12,7 +12,7 @@ import {
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { DtoBook } from '../dto/book.js';
-import { defaultValue, Query, valid } from 'vona-module-a-validator';
+import { defaultValue, Query, required, valid } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 @Controller()
@@ -55,7 +55,7 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
 
   @Get('echo3')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo3(@Query('id', DtoBook) id: number) {
+  async echo3(@Query('id', required()) id: number) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return id;
