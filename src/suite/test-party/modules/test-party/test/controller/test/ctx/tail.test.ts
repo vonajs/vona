@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl } from 'egg-born-mock';
 import { Cast } from 'vona';
 
 describe.only('test/controller/test/ctx/tail.test.js', () => {
@@ -10,7 +9,7 @@ describe.only('test/controller/test/ctx/tail.test.js', () => {
       await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: mockUrl('test/ctx/tail', false),
+        url: mockUrl('test/ctx/tail'),
       });
     });
   });
@@ -23,7 +22,7 @@ describe.only('test/controller/test/ctx/tail.test.js', () => {
         await ctx.meta.util.performAction({
           innerAccess: false,
           method: 'post',
-          url: mockUrl('test/ctx/tail', false),
+          url: mockUrl('test/ctx/tail'),
         });
       });
     });

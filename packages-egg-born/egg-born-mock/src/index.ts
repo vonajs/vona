@@ -46,6 +46,6 @@ export function mockUrl(url?: string) {
   const app = Cast<VonaApplication>(Bundle.app);
   return app.meta.util.combineFetchPath(moduleInfo, url, true, true);
 }
-export function mockInfo(): IModuleInfo {
+export function mockModuleInfo(): IModuleInfo {
   return parseModuleInfo(ParseModuleNameLevel)!;
 }

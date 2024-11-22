@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, assert } from 'egg-born-mock';
 
 describe.only('test/controller/test/ctx/performAction.test.js', () => {
   it('action:performAction', async () => {

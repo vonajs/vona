@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe.only('test/controller/test/ctx/transaction.test.js', () => {
   it('action:transaction:fail', async () => {
@@ -14,7 +13,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
         method: 'post',
         url: '/api/a/base/atom/write',
         body: {
-          atomClass: { module: mockInfo().relativeName, atomClassName: 'party' },
+          atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'party' },
         },
       });
 
@@ -73,7 +72,7 @@ describe.only('test/controller/test/ctx/transaction.test.js', () => {
         method: 'post',
         url: '/api/a/base/atom/write',
         body: {
-          atomClass: { module: mockInfo().relativeName, atomClassName: 'party' },
+          atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'party' },
         },
       });
 
