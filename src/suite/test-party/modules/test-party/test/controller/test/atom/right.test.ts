@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe('test/controller/test/atom/right.test.js', () => {
   it('action:checkRightCreate', async () => {
@@ -22,7 +22,7 @@ describe('test/controller/test/atom/right.test.js', () => {
             method: 'post',
             url: mockUrl('test/atom/checkRightCreate', false),
             body: {
-              atomClass: { module: mockInfo().relativeName, atomClassName: 'party' },
+              atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'party' },
             },
           });
         },
@@ -50,7 +50,7 @@ describe('test/controller/test/atom/right.test.js', () => {
       method: 'post',
       url: mockUrl('/a/base/atom/write', false),
       body: {
-        atomClass: { module: mockInfo().relativeName, atomClassName: 'party' },
+        atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'party' },
       },
     });
 

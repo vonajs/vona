@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe('flow.set01_startEventAtom', () => {
   it('startEventAtom', async () => {
@@ -7,7 +7,7 @@ describe('flow.set01_startEventAtom', () => {
     const ctx = await app.meta.mockUtil.mockCtx();
 
     // atomClass info
-    const atomClassModule = mockInfo().relativeName;
+    const atomClassModule = mockModuleInfo().relativeName;
     const atomClassName = 'purchaseOrder';
     const atomClass = { module: atomClassModule, atomClassName };
 

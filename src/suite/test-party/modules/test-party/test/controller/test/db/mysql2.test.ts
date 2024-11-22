@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe.skip('test/controller/test/feat/mysql2.test.js', () => {
   it('action:mysql2', async () => {
@@ -7,7 +7,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     const ctx = await app.meta.mockUtil.mockCtx();
 
     // atomClass info
-    const atomClassModule = mockInfo().relativeName;
+    const atomClassModule = mockModuleInfo().relativeName;
     const atomClassName = 'party';
 
     // login as root

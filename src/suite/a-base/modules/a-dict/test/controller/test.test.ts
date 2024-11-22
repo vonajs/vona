@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockInfo, assert } from 'egg-born-mock';
+import { app, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe('[your tests start from here]', () => {
   it('[atom]', async () => {
@@ -7,7 +7,7 @@ describe('[your tests start from here]', () => {
     const ctx = await app.meta.mockUtil.mockCtx();
 
     // atomClass info
-    const atomClassModule = mockInfo().relativeName;
+    const atomClassModule = mockModuleInfo().relativeName;
     const atomClassName = 'dict';
     const atomClass = { module: atomClassModule, atomClassName };
 

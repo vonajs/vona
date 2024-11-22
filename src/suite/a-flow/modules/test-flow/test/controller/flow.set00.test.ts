@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 /**
  * simple
@@ -21,7 +21,7 @@ describe('flow.set00', () => {
       url: mockUrl('flow/start', false),
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set00_simple',
         },
         flowVars: {
@@ -43,7 +43,7 @@ describe('flow.set00', () => {
       url: mockUrl('flow/start', false),
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set00_edgeSequence',
         },
         flowVars: {
@@ -57,7 +57,7 @@ describe('flow.set00', () => {
       url: mockUrl('flow/start', false),
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set00_edgeSequence',
         },
         flowVars: {
@@ -78,7 +78,7 @@ describe('flow.set00', () => {
       url: mockUrl('flow/start', false),
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set00_activityNone',
         },
       },
@@ -96,7 +96,7 @@ describe('flow.set00', () => {
       url: mockUrl('flow/start', false),
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set00_activityService',
         },
       },
@@ -114,7 +114,7 @@ describe('flow.set00', () => {
       url: mockUrl('flow/start', false),
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set00_startEventTimer',
         },
       },

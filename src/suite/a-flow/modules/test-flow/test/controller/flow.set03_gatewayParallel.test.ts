@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe('flow.set03_gatewayParallel', () => {
   it('gatewayParallel', async () => {
@@ -14,7 +14,7 @@ describe('flow.set03_gatewayParallel', () => {
       url: '/test/flow/flow/start',
       body: {
         flowDefKey: {
-          module: mockInfo().relativeName,
+          module: mockModuleInfo().relativeName,
           name: 'set03_gatewayParallel',
         },
       },

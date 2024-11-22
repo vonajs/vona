@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
 describe('test/controller/test.test.js', () => {
   it('action:set config', async () => {
@@ -113,7 +113,7 @@ describe('test/controller/test.test.js', () => {
         method: 'post',
         url: '/a/base/atom/write',
         body: {
-          atomClass: { module: mockInfo().relativeName, atomClassName: 'article' },
+          atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'article' },
           item: {
             atomName: article.atomName,
             atomLanguage: article.atomLanguage,
@@ -132,7 +132,7 @@ describe('test/controller/test.test.js', () => {
         url: '/a/base/atom/submit',
         body: {
           key: keyDraft,
-          atomClass: { module: mockInfo().relativeName, atomClassName: 'article' },
+          atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'article' },
           options: { ignoreFlow: true },
         },
       });
