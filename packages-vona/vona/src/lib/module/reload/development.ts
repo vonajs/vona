@@ -6,6 +6,18 @@ import { ProcessHelper } from '@cabloy/process-helper';
 import { VonaApplication } from '../../../types/application/app.js';
 import { Cast } from '../../../types/utils/cast.js';
 
+const __pathesWatch = [
+  'src/backend/config',
+  'src/backend/demo',
+  'src/module',
+  'src/module-vendor',
+  'src/suite',
+  'src/suite-vendor',
+  'packages-vona/vona',
+];
+const __pathesTsc = ['src/backend/config', 'src/backend/demo', 'packages-vona/vona'];
+const __pathesIgnore = ['/src/test/'];
+
 export default function (app: VonaApplication) {
   let watcherDevelopment: chokidar.FSWatcher | null = null;
 
@@ -52,18 +64,9 @@ export default function (app: VonaApplication) {
 
   // invoked in agent
   function _collectDevelopmentWatchDirs() {
-    const __pathes = [
-      'src/backend/config',
-      'src/backend/demo',
-      'src/module',
-      'src/module-vendor',
-      'src/suite',
-      'src/suite-vendor',
-      'packages-vona/vona',
-    ];
     const cwd = process.cwd();
     const watchDirs: any[] = [];
-    for (const __path of __pathes) {
+    for (const __path of __pathesWatch) {
       const pathDir = path.join(cwd, __path);
       if (fse.existsSync(pathDir)) {
         watchDirs.push(pathDir);
@@ -77,17 +80,18 @@ export default function (app: VonaApplication) {
   }
 
   // invoked in agent
-  async function _developmentChange(info) {
+  async function _developmentChange(info: string) {
     info = info.replace(/\\/g, '/');
     // extname
     const extname = path.extname(info);
     if (!['.ts', '.mts'].includes(extname)) return;
+    // ignores
+    if (__pathesIgnore.some(item => info.includes(item))) return;
     // log
     app.logger.warn(`[agent:development] reload worker because ${info} changed`);
     // tsc
     if (extname !== '.mts') {
-      const __pathes = ['src/backend/config', 'src/backend/demo', 'packages-vona/vona'];
-      if (__pathes.some(item => info.indexOf(item) > -1)) {
+      if (__pathesTsc.some(item => info.includes(item))) {
         const processHelper = new ProcessHelper();
         await processHelper.tsc();
       }
