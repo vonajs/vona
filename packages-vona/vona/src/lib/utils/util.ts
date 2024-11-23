@@ -31,10 +31,11 @@ export class AppUtil extends BeanSimple {
   combineFetchPath(
     moduleName: IModuleInfo | string,
     path: string | undefined,
-    simplify: boolean,
     prefix?: string | boolean,
+    simplify?: boolean,
   ) {
     const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
+    simplify = simplify ?? true;
     if (!path) path = '';
     // ignore globalPrefix
     if (path.startsWith('//')) return path.substring(1);
@@ -210,8 +211,8 @@ export class AppUtil extends BeanSimple {
     }: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string; instance?: boolean },
   ): Promise<T> {
     // url
-    // todo: remove /api/a/base
-    const url = module ? this.combineFetchPath(module, '', false) : '/api/a/base/';
+    // todo: remove /api/a/base, need not set url
+    const url = module ? this.combineFetchPath(module, '', true, false) : '/api/a/base/';
     const req = {
       method: 'post',
       url,

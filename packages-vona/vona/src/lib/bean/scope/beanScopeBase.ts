@@ -4,17 +4,20 @@ import { BeanBaseSimple } from '../beanBaseSimple.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 import { IModule } from '@cabloy/module-info';
+import { BeanScopeUtil } from './beanScopeUtil.js';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
+const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleConstant]: unknown;
   private [BeanModuleBean]: BeanScopeBean;
+  private [BeanModuleUtil]: BeanScopeUtil;
   private __scenes: Record<string, BeanScopeScene> = {};
 
   get module(): IModule {
@@ -56,6 +59,13 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleBean] = this.bean._newBean(BeanScopeBean, moduleBelong);
       }
       return this[BeanModuleBean];
+    }
+    // util
+    if (prop === 'util') {
+      if (!this[BeanModuleUtil]) {
+        this[BeanModuleUtil] = this.bean._newBean(BeanScopeUtil, moduleBelong);
+      }
+      return this[BeanModuleUtil];
     }
     // scene
     if (!this.__scenes[prop]) {

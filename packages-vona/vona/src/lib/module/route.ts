@@ -35,7 +35,7 @@ export class AppRouter extends BeanSimple {
 
     // path
     const routePath =
-      typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path, false) : route.path;
+      typeof route.path === 'string' ? app.meta.util.combineFetchPath(info, route.path, true, false) : route.path;
 
     // route
     const _route = {
@@ -106,7 +106,7 @@ export class AppRouter extends BeanSimple {
 
   findByPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
     const app = this.app;
-    const _path = app.meta.util.combineFetchPath(moduleName, path, simplify);
+    const _path = app.meta.util.combineFetchPath(moduleName, path, true, simplify);
     return app.router.stack.find(layer => layer.path === _path);
   }
 
@@ -163,13 +163,13 @@ export class AppRouter extends BeanSimple {
       routePath = actionPath;
     } else if (actionPath.startsWith('/')) {
       // absolute
-      routePath = app.meta.util.combineFetchPath(info, actionPath, true);
+      routePath = app.meta.util.combineFetchPath(info, actionPath, true, true);
     } else {
       // relative
       if (!controllerPath) {
-        routePath = app.meta.util.combineFetchPath(info, actionPath, true);
+        routePath = app.meta.util.combineFetchPath(info, actionPath, true, true);
       } else {
-        routePath = app.meta.util.combineFetchPath(info, controllerPath, true);
+        routePath = app.meta.util.combineFetchPath(info, controllerPath, true, true);
         if (actionPath) {
           routePath = `${routePath}/${actionPath}`;
         }
