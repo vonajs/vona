@@ -153,7 +153,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     };
     const res = await this.ctx.meta.util.performAction({
       method: 'post',
-      url: '/a/base/comment/list',
+      url: '/api/a/base/comment/list',
       body: {
         key: { atomId },
         options,

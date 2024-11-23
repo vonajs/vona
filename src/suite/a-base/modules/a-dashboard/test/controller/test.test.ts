@@ -18,7 +18,7 @@ describe('[your tests start from here]', () => {
     const keyDraft = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass,
         item: {
@@ -33,7 +33,7 @@ describe('[your tests start from here]', () => {
     let data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/submit',
+      url: '/api/a/base/atom/submit',
       body: {
         key: keyDraft,
         atomClass,
@@ -46,7 +46,7 @@ describe('[your tests start from here]', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/read',
+      url: '/api/a/base/atom/read',
       body: {
         key: keyFormal,
         atomClass,
@@ -58,7 +58,7 @@ describe('[your tests start from here]', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/delete',
+      url: '/api/a/base/atom/delete',
       body: {
         key: keyFormal,
         atomClass,

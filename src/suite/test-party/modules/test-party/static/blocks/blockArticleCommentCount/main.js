@@ -3,8 +3,8 @@
   typeof exports === 'object' && typeof module !== 'undefined'
     ? (module.exports = factory())
     : typeof define === 'function' && define.amd
-    ? define(factory)
-    : null;
+      ? define(factory)
+      : null;
   /* eslint-enable */
 })(this, function () {
   class Block {
@@ -72,7 +72,7 @@
       };
       return await $util.performAction({
         method: 'post',
-        url: '/a/base/comment/count',
+        url: '/api/a/base/comment/count',
         body: {
           key,
           options,

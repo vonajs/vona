@@ -3,6 +3,7 @@ import { BeanSimple } from '../bean/beanSimple.js';
 import { VonaContext, PowerPartial } from '../../types/index.js';
 import { IExecuteBeanCallback } from './util.js';
 import { ILocalInfos } from '../bean/resource/locale/type.js';
+import { PerformActionParams } from './types.js';
 
 export class CtxUtil extends BeanSimple {
   runInBackground(scope) {
@@ -169,7 +170,15 @@ export class CtxUtil extends BeanSimple {
   //       because ctxCaller.module removed
   //       so, maybe need provide this.scope.util.combineUrl
   //          this result is: /api/a/user/add, thus the method of combineFetchPath not needed in performActionFn
-  async performAction({ innerAccess, method, url, query, params, headers, body }: any) {
+  async performAction<T = any>({
+    innerAccess,
+    method,
+    url,
+    query,
+    params,
+    headers,
+    body,
+  }: PerformActionParams): Promise<T> {
     const ctx = this.ctx;
     return await performActionFn({
       ctxCaller: ctx,

@@ -21,7 +21,7 @@ describe('atom:purchaseOrder', () => {
     const keyDraft = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass,
         item: {
@@ -36,7 +36,7 @@ describe('atom:purchaseOrder', () => {
     const detailKey = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass: {
           module: atomClassModule,
@@ -59,7 +59,7 @@ describe('atom:purchaseOrder', () => {
     let data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/read',
+      url: '/api/a/base/atom/read',
       body: {
         key: detailKey,
         atomClass: {
@@ -74,7 +74,7 @@ describe('atom:purchaseOrder', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/select',
+      url: '/api/a/base/atom/select',
       body: {
         atomClass: {
           module: atomClassModule,
@@ -91,7 +91,7 @@ describe('atom:purchaseOrder', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/count',
+      url: '/api/a/base/atom/count',
       body: {
         atomClass: {
           module: atomClassModule,
@@ -114,7 +114,7 @@ describe('atom:purchaseOrder', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/submit',
+      url: '/api/a/base/atom/submit',
       body: {
         key: keyDraft,
         atomClass,
@@ -127,7 +127,7 @@ describe('atom:purchaseOrder', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/read',
+      url: '/api/a/base/atom/read',
       body: {
         key: keyFormal,
         atomClass,
@@ -139,7 +139,7 @@ describe('atom:purchaseOrder', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/delete',
+      url: '/api/a/base/atom/delete',
       body: {
         key: keyFormal,
         atomClass,

@@ -18,7 +18,7 @@ describe('atom:product', () => {
     const keyDraft = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass,
         item: {
@@ -34,7 +34,7 @@ describe('atom:product', () => {
     let data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/submit',
+      url: '/api/a/base/atom/submit',
       body: {
         key: keyDraft,
         atomClass,
@@ -47,7 +47,7 @@ describe('atom:product', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/read',
+      url: '/api/a/base/atom/read',
       body: {
         key: keyFormal,
         atomClass,
@@ -59,7 +59,7 @@ describe('atom:product', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/delete',
+      url: '/api/a/base/atom/delete',
       body: {
         key: keyFormal,
         atomClass,

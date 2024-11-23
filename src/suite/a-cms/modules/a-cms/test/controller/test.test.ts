@@ -111,7 +111,7 @@ describe('test/controller/test.test.js', () => {
       const keyDraft = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/write',
+        url: '/api/a/base/atom/write',
         body: {
           atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'article' },
           item: {
@@ -129,7 +129,7 @@ describe('test/controller/test.test.js', () => {
       const data = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/submit',
+        url: '/api/a/base/atom/submit',
         body: {
           key: keyDraft,
           atomClass: { module: mockModuleInfo().relativeName, atomClassName: 'article' },
@@ -145,7 +145,7 @@ describe('test/controller/test.test.js', () => {
         await ctx.meta.util.performAction({
           innerAccess: false,
           method: 'post',
-          url: '/a/base/atom/delete',
+          url: '/api/a/base/atom/delete',
           body: {
             key: keyFormal,
           },

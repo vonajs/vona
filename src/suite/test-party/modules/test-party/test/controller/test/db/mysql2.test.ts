@@ -17,7 +17,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     const keyDraft = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass: { module: atomClassModule, atomClassName },
       },
@@ -27,7 +27,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     let data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/db/queryOne',
+      url: '/api/a/base/db/queryOne',
       body: {
         sql: 'select a.*,b.* from aAtom a, testParty b where a.id=b.atomId and a.id=?',
         params: [keyDraft.atomId],
@@ -39,7 +39,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/db/queryOne',
+      url: '/api/a/base/db/queryOne',
       body: {
         sql: 'select b.*,a.* from aAtom a, testParty b where a.id=b.atomId and a.id=?',
         params: [keyDraft.atomId],
@@ -51,7 +51,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/delete',
+      url: '/api/a/base/atom/delete',
       body: {
         key: keyDraft,
       },

@@ -8,7 +8,7 @@ export class ControllerComment extends BeanBase<ScopeModule> {
     options.comment = 1;
     const res = await this.ctx.meta.util.performAction({
       method: 'post',
-      url: '/a/base/atom/select',
+      url: '/api/a/base/atom/select',
       body: {
         atomClass: this.ctx.request.body.atomClass,
         options,

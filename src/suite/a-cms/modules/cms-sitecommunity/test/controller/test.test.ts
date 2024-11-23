@@ -101,7 +101,7 @@ describe.skip('test/controller/test.test.js', () => {
       const keyDraft = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/write',
+        url: '/api/a/base/atom/write',
         body: {
           atomClass,
           item: {
@@ -119,7 +119,7 @@ describe.skip('test/controller/test.test.js', () => {
       const data = await ctx.meta.util.performAction({
         innerAccess: false,
         method: 'post',
-        url: '/a/base/atom/submit',
+        url: '/api/a/base/atom/submit',
         body: {
           key: keyDraft,
           atomClass,
@@ -135,7 +135,7 @@ describe.skip('test/controller/test.test.js', () => {
         await ctx.meta.util.performAction({
           innerAccess: false,
           method: 'post',
-          url: '/a/base/atom/delete',
+          url: '/api/a/base/atom/delete',
           body: {
             key: keyFormal,
             atomClass,

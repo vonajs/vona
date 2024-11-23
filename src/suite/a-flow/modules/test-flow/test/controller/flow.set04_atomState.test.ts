@@ -28,7 +28,7 @@ describe('flow.set04_atomState', () => {
     keyDraft = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass,
         item: {
@@ -43,7 +43,7 @@ describe('flow.set04_atomState', () => {
     const data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/submit',
+      url: '/api/a/base/atom/submit',
       body: {
         key: keyDraft,
         atomClass,
@@ -281,7 +281,7 @@ describe('flow.set04_atomState', () => {
     const data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/select',
+      url: '/api/a/base/atom/select',
       body: {
         atomClass,
         options: {
@@ -300,7 +300,7 @@ describe('flow.set04_atomState', () => {
     await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/delete',
+      url: '/api/a/base/atom/delete',
       body: {
         key: keyFormal,
         atomClass,

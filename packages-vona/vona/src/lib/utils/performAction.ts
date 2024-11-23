@@ -1,17 +1,11 @@
 import http from 'http';
 import compose from 'koa-compose';
+import { PerformActionInnerParams } from './types.js';
+import { Cast, VonaContext } from '../../types/index.js';
 
 let __fnMiddleware;
 
-/**
- * perform action of this or that module
- * @param  {string} options options
- * @param  {string} options.method method
- * @param  {string} options.url    url
- * @param  {json} options.body   body(optional)
- * @return {promise}                response.body.data or throw error
- */
-export default async function performAction({
+export default async function performAction<T = any>({
   ctxCaller,
   innerAccess,
   // subdomain, deprecated
@@ -21,7 +15,7 @@ export default async function performAction({
   params,
   headers,
   body,
-}) {
+}: PerformActionInnerParams): Promise<T> {
   // app
   const app = ctxCaller.app;
   // middleware
@@ -36,9 +30,9 @@ export default async function performAction({
   // default status code
   res.statusCode = 404;
   // ctx
-  const ctx = app.createContext(req, res);
+  const ctx = app.createContext(req, res) as unknown as VonaContext;
   // run
-  return await app.ctxStorage.run(ctx, async () => {
+  return await app.ctxStorage.run(ctx as any, async () => {
     // locale
     Object.defineProperty(ctx, 'locale', {
       get() {
@@ -55,12 +49,12 @@ export default async function performAction({
 
     // query params body
     if (query) {
-      ctx.req.query = ctx.request.query = query;
+      Cast(ctx.req).query = Cast(ctx.request).query = query;
     }
     if (params) {
-      ctx.req.params = ctx.request.params = params;
+      Cast(ctx.req).params = Cast(ctx.request).params = params;
     }
-    ctx.req.body = ctx.request.body = body !== undefined ? body : {}; // not undefined
+    Cast(ctx.req).body = ctx.request.body = body !== undefined ? body : {}; // not undefined
 
     // headers
     delegateHeaders(ctx, ctxCaller, headers);

@@ -26,7 +26,7 @@ if (!site._categories) {
   // categories
   const res = await ctx.meta.util.performAction({
     method:'post',
-    url: '/a/base/category/tree',
+    url: '/api/a/base/category/tree',
     body: {
       atomClass: site.atomClass,
       language: site.language && site.language.current,

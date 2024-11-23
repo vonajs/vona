@@ -74,7 +74,7 @@
   <div class="header card-header">
     <h5 class="article-title"><a target="_blank" href="${util.url(
       item.url,
-      item.atomLanguage
+      item.atomLanguage,
     )}#comments">Re: ${util.escapeHtml(item.atomName)}</a></h5>
     <div class="user">
       <img class="avatar avatar32" src="${util.combineImageUrl(item.h_avatar, 32, 32)}" />
@@ -116,7 +116,7 @@
       util
         .performAction({
           method: 'post',
-          url: '/a/base/atom/stats',
+          url: '/api/a/base/atom/stats',
           body: {
             atomIds: Object.keys(atomIds),
           },
@@ -132,7 +132,7 @@
       util
         .performAction({
           method: 'post',
-          url: '/a/base/atom/readCount',
+          url: '/api/a/base/atom/readCount',
           body: {
             key: { atomId: env.article.atomId },
             atom: { readCount: 1 },
@@ -225,7 +225,7 @@
           util
             .performAction({
               method: 'post',
-              url: '/a/base/comment/delete',
+              url: '/api/a/base/comment/delete',
               body: {
                 key: { atomId },
                 data: { commentId: id },
@@ -245,14 +245,14 @@
         const url = `${
           env.site.serverUrl
         }/#!/a/basefront/comment/autoHeart?atomId=${atomId}&commentId=${id}&returnTo=${encodeURIComponent(
-          location.href
+          location.href,
         )}`;
         location.assign(url);
       } else {
         util
           .performAction({
             method: 'post',
-            url: '/a/base/comment/heart',
+            url: '/api/a/base/comment/heart',
             body: {
               key: { atomId },
               data: { commentId: id, heart },
@@ -285,7 +285,7 @@
               };
               return util.performAction({
                 method: 'post',
-                url: '/a/base/comment/list',
+                url: '/api/a/base/comment/list',
                 body: {
                   key: { atomId: env.article.atomId },
                   options,
@@ -392,7 +392,7 @@
       if (util.user.op.anonymous) {
         // url
         const url = `${env.site.serverUrl}/#!/a/basefront/atom/autoStar?atomId=${atomId}&returnTo=${encodeURIComponent(
-          location.href
+          location.href,
         )}`;
         location.assign(url);
       } else {
@@ -402,7 +402,7 @@
         util
           .performAction({
             method: 'post',
-            url: '/a/base/atom/star',
+            url: '/api/a/base/atom/star',
             body: {
               key: { atomId },
               atom: { star },

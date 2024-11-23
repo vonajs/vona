@@ -20,7 +20,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     const keyDraft = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/write',
+      url: '/api/a/base/atom/write',
       body: {
         atomClass,
         item: {
@@ -35,7 +35,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     const data = await ctx.meta.util.performAction({
       innerAccess: false,
       method: 'post',
-      url: '/a/base/atom/submit',
+      url: '/api/a/base/atom/submit',
       body: {
         key: keyDraft,
         atomClass,

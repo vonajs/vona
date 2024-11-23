@@ -11,7 +11,7 @@
   if(relativeTop===undefined){
     relativeTop=await ctx.meta.util.performAction({
       method: 'post',
-      url: '/a/base/category/relativeTop',
+      url: '/api/a/base/category/relativeTop',
       body: { categoryId: article.atomCategoryId },
     });
     // save

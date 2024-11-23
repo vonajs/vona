@@ -1,3 +1,6 @@
+/** controllers: begin */
+export * from '../controller/performAction.js';
+/** controllers: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -30,7 +33,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): K {
-  return key;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `vona-test:${K}` {
+  return `vona-test:${key}`;
 }
 /** scope: end */

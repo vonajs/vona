@@ -286,7 +286,7 @@
         return this.cors(params);
       }
       return this.ajax({
-        url: '/a/base/util/performAction',
+        url: '/api/a/base/util/performAction',
         body: {
           params: JSON.stringify(params),
         },
@@ -365,7 +365,7 @@
           .catch(err => {
             console.error(err);
             const $buttonTry = $(
-              '<button type="button" class="btn btn-warning btn-xs"><%=text("Load error, try again")%></button>'
+              '<button type="button" class="btn btn-warning btn-xs"><%=text("Load error, try again")%></button>',
             );
             $buttonTry.click(() => {
               _onFetch();
@@ -460,7 +460,7 @@
           function () {
             callback();
           },
-          false
+          false,
         );
       } else if (script.attachEvent) {
         script.attachEvent('onreadystatechange', function () {
@@ -491,7 +491,7 @@
           function () {
             callback();
           },
-          false
+          false,
         );
       } else if (link.attachEvent) {
         link.attachEvent('onreadystatechange', function () {
@@ -506,7 +506,7 @@
     echo() {
       return this.performAction({
         method: 'post',
-        url: '/a/base/auth/echo',
+        url: '/api/a/base/auth/echo',
       }).then(data => {
         this.user = data.user;
         this.clientId = data.clientId;
@@ -556,7 +556,7 @@
       util
         .performAction({
           method: 'post',
-          url: '/a/base/auth/logout',
+          url: '/api/a/base/auth/logout',
         })
         .then(() => {
           location.reload();
