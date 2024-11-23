@@ -1,6 +1,6 @@
 import http from 'http';
 import compose from 'koa-compose';
-import { PerformActionInnerParams } from './types.js';
+import { PerformActionInnerParams } from './type.js';
 import { Cast, VonaContext } from '../../types/index.js';
 
 let __fnMiddleware;

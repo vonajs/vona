@@ -5,6 +5,7 @@ import { TypeModuleLocales } from '../resource/locale/type.js';
 import { TypeModuleConstants } from '../resource/constant/type.js';
 import { IBeanRecord } from '../type.js';
 import { BeanModuleScopeBase } from '../beanModuleScopeBase.js';
+import { BeanScopeUtil } from './beanScopeUtil.js';
 
 type TypeModuleBean = {
   [property in keyof IBeanRecord as IBeanRecord[property] extends BeanModuleScopeBase
@@ -27,4 +28,5 @@ export type TypeModuleResource<
   constant: TypeModuleConstants<CONSTANTS>;
   service: SERVICE;
   model: MODEL;
+  util: BeanScopeUtil;
 };

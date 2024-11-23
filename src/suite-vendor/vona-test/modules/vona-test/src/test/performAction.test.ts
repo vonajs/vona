@@ -3,7 +3,7 @@ import { app, mockUrl, assert } from 'egg-born-mock';
 describe.only('test/controller/test/ctx/performAction.test.js', () => {
   it('action:performAction', async () => {
     const result = await app.meta.mockUtil.mockCtx(async ctx => {
-      return await ctx.meta.util.performAction<number>({
+      return await ctx.meta.util.performAction<{ id: number; url: string }>({
         method: 'post',
         url: mockUrl('performAction/echo'),
         body: {
@@ -11,6 +11,7 @@ describe.only('test/controller/test/ctx/performAction.test.js', () => {
         },
       });
     });
-    assert.equal(result, 123);
+    assert.equal(result.id, 123);
+    assert.equal(result.url, mockUrl('performAction/echo'));
   });
 });
