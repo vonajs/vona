@@ -17,15 +17,25 @@ export class AppMockUtil extends BeanSimple {
   }
 
   // todo: remove module
+  async mockCtx<T>(scope: (ctx: VonaContext) => Promise<T>): Promise<T>;
   async mockCtx<T>(
+    options: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
     scope: (ctx: VonaContext) => Promise<T>,
-    options?: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
+  ): Promise<T>;
+  async mockCtx<T>(
+    options:
+      | ((ctx: VonaContext) => Promise<T>)
+      | { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
+    scope?: (ctx: VonaContext) => Promise<T>,
   ): Promise<T> {
-    options = options || {};
+    if (typeof options === 'function') {
+      scope = options;
+      options = {};
+    }
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
     const module = options.module;
-    return await this.app.meta.util.runInAnonymousContextScope(scope, { locale, subdomain, module });
+    return await this.app.meta.util.runInAnonymousContextScope(scope!, { locale, subdomain, module });
   }
 }
 
