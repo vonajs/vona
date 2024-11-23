@@ -2,7 +2,7 @@ import * as localeutil from '@cabloy/localeutil';
 import { BeanSimple } from '../../beanSimple.js';
 import { ILocalInfos, IModuleLocale, IModuleLocaleText } from './type.js';
 
-export class ApplicationLocale extends BeanSimple {
+export class AppLocale extends BeanSimple {
   get locale(): keyof ILocalInfos {
     return this.ctx.locale || this.app.config.i18n.defaultLocale;
   }
