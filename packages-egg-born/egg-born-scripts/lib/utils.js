@@ -119,8 +119,8 @@ const utils = {
     for (const relativeName of disabledSuites) {
       pattern.push(`!src/**/${relativeName}/modules/*/src/test/**/*.test.ts`);
     }
-    // cli templates
-    pattern.push('!src/**/cli/templates/**/*.test.ts');
+    // // cli templates
+    // pattern.push('!src/**/cli/templates/**/*.test.ts');
     // expand glob
     // return eggBornUtils.tools.globbySync(pattern);
     return pattern;

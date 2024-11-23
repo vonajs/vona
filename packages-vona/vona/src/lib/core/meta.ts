@@ -16,6 +16,7 @@ import {
   ISuite,
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
+  EnumAppEvent,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -80,7 +81,6 @@ export class AppMeta extends BeanSimple {
   _loadQueueWorkers: ({ subdomain }: { subdomain: string }) => void;
   _loadSchedules: ({ ctx }: { ctx: VonaContext }) => Promise<void>;
   _runSchedule: (context) => Promise<any>;
-  checkAppReady: () => Promise<boolean>;
 
   protected __init__() {
     // workerId
@@ -125,5 +125,24 @@ export class AppMeta extends BeanSimple {
     this.isLocal = this.app.config.env === 'local';
     this.flavor = this.app.options.flavor || process.env.META_FLAVOR || 'normal';
     this.mode = this.app.config.env as VonaMetaMode;
+  }
+
+  async checkAppReady() {
+    return new Promise((resolve, reject) => {
+      // check once
+      if (this.__versionReady) {
+        resolve(true);
+      }
+      if (this.__versionReadyError) {
+        reject(this.__versionReadyError);
+      }
+      // listen
+      this.app.on(EnumAppEvent.AppReady, () => {
+        resolve(true);
+      });
+      this.app.on(EnumAppEvent.AppReadyError, err => {
+        reject(err);
+      });
+    });
   }
 }

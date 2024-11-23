@@ -3,28 +3,7 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import clearFn from './clear.js';
 
 export class VersionReady extends BeanSimple {
-  initialize() {
-    const app = this.app;
-    // checkAppReady
-    app.meta.checkAppReady = async function () {
-      return new Promise((resolve, reject) => {
-        // check once
-        if (app.meta.__versionReady) {
-          resolve(true);
-        }
-        if (app.meta.__versionReadyError) {
-          reject(app.meta.__versionReadyError);
-        }
-        // listen
-        app.on(EnumAppEvent.AppReady, () => {
-          resolve(true);
-        });
-        app.on(EnumAppEvent.AppReadyError, err => {
-          reject(err);
-        });
-      });
-    };
-  }
+  initialize() {}
   async execute() {
     const app = this.app;
     try {
