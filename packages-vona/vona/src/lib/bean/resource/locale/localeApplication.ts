@@ -46,6 +46,11 @@ export class ApplicationLocale extends BeanSimple {
     key: string,
     ...args: any[]
   ): string {
+    const pos = key.indexOf(':');
+    if (pos > -1) {
+      moduleScope = key.substring(0, pos);
+      key = key.substring(pos + 1);
+    }
     return localeutil.getLocaleText(
       supportCustomMessage,
       moduleScope ? this.app.meta.localeModules[moduleScope] : undefined,
