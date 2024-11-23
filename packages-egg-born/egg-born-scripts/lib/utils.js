@@ -106,18 +106,18 @@ const utils = {
   combineTestPattern({ baseDir, flavor, env, pattern }) {
     // pattern
     if (!pattern || pattern.length === 0) {
-      pattern = ['src/**/test/**/*.test.ts'];
+      pattern = ['src/**/src/test/**/*.test.ts'];
     }
     // disabledModules
     this.loadEnvAndConfig({ baseDir, flavor, env });
     const disabledModules = ensureArray(process.env.PROJECT_DISABLED_MODULES);
     for (const relativeName of disabledModules) {
-      pattern.push(`!src/**/${relativeName}/test/**/*.test.ts`);
+      pattern.push(`!src/**/${relativeName}/src/test/**/*.test.ts`);
     }
     // disabledSuites
     const disabledSuites = ensureArray(process.env.PROJECT_DISABLED_SUITES);
     for (const relativeName of disabledSuites) {
-      pattern.push(`!src/**/${relativeName}/modules/*/test/**/*.test.ts`);
+      pattern.push(`!src/**/${relativeName}/modules/*/src/test/**/*.test.ts`);
     }
     // cli templates
     pattern.push('!src/**/cli/templates/**/*.test.ts');
