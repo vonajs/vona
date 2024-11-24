@@ -2,7 +2,7 @@ import { app } from 'egg-born-mock';
 import { DtoUser } from '../dto/user.js';
 import { Cast, catchError, Dto } from 'vona';
 import assert from 'assert';
-import { omitType, pickType, Rule } from 'vona-module-a-validator';
+import { omitType, partialType, pickType, Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 @Dto()
@@ -36,6 +36,19 @@ describe('mappedTypes.test.ts', () => {
         return await serviceValidator.validate(pickType(DtoUser, ['id', 'name']), data, { strict: true });
       });
       assert.equal(Cast(err4?.message)[0]?.keys[0], 'married');
+      // partialType
+      const [dataNew5] = await catchError(async () => {
+        return await serviceValidator.validate(partialType(DtoUser), {}, { strict: true });
+      });
+      assert.deepEqual(dataNew5, {});
+      const [dataNew6] = await catchError(async () => {
+        return await serviceValidator.validate(
+          partialType(DtoUser, ['id', 'name']),
+          { married: true },
+          { strict: true },
+        );
+      });
+      assert.deepEqual(dataNew6, { married: true });
     });
   });
 });
