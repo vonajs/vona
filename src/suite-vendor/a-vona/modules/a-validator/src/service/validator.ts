@@ -2,8 +2,8 @@ import { appMetadata, BeanBase, Constructable, HttpStatus, isNil, Service } from
 import { ScopeModule } from '../.metadata/this.js';
 import { ValidatorOptions } from '../types/validatorOptions.js';
 import { z } from 'zod';
-import { SymbolDecoratorRule } from '../decorator/rule.js';
 import { coerceWithNil } from '@cabloy/zod-query';
+import { SymbolDecoratorRule } from '../lib/decorator/rule.js';
 
 @Service()
 export class ServiceValidator extends BeanBase<ScopeModule> {

@@ -1,4 +1,4 @@
-import { PipeArgument } from '../types/decorator.js';
+import { PipeArgument } from '../../types/decorator.js';
 import { createPipesArgumentDecorator } from './pipesArgument.js';
 
 export function Body(): ParameterDecorator;
