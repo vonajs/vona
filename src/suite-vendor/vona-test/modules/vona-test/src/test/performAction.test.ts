@@ -1,7 +1,7 @@
 import { app, mockUrl, assert } from 'egg-born-mock';
 
 describe.only('performAction.test.js', () => {
-  it('action:echo', async () => {
+  it('action:performAction', async () => {
     const result = await app.meta.mockUtil.mockCtx(async ctx => {
       return await ctx.meta.util.performAction<{ id: number; url: string }>({
         method: 'post',

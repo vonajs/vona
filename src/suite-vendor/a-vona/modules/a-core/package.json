@@ -3,7 +3,10 @@
   "version": "5.0.3",
   "title": "a-core",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "globalDependencies": {
+      "assert": true
+    }
   },
   "type": "module",
   "exports": {
@@ -28,6 +31,8 @@
     "static"
   ],
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "assert": "^2.1.0"
+  },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
