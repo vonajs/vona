@@ -35,10 +35,10 @@
       "path": "packages-vona/vona"
     },
     {
-      "path": "packages-egg-born/egg-born-backend"
+      "path": "packages-vona/vona-mock"
     },
     {
-      "path": "packages-egg-born/egg-born-mock"
+      "path": "packages-egg-born/egg-born-backend"
     }
   ]
 }

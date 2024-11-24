@@ -9,14 +9,7 @@
     "url": "git+https://github.com/zhennann/cabloy.git"
   },
   "author": "zhennann",
-  "keywords": [
-    "nodejs",
-    "full-stack",
-    "workflow-engine",
-    "egg-framework",
-    "framework7",
-    "cabloy"
-  ],
+  "keywords": ["nodejs", "full-stack", "workflow-engine", "egg-framework", "framework7", "cabloy"],
   "bugs": {
     "url": "https://github.com/zhennann/cabloy/issues"
   },
@@ -75,7 +68,6 @@
     "commander": "^11.1.0",
     "connect-history-api-fallback": "^1.6.0",
     "copy-webpack-plugin": "^7.0.0",
-    "egg-born-mock": "workspace:^",
     "egg-born-utils": "^1.2.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.19.2",
@@ -104,6 +96,7 @@
     "tsx": "^4.7.3",
     "typedoc": "^0.25.13",
     "typescript": "^5.5.4",
+    "vona-mock": "workspace:^",
     "vue-eslint-parser": "^9.4.2"
   }
 }

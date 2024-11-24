@@ -56,7 +56,6 @@
     "debounce": "^1.2.0",
     "debug": "^4.3.4",
     "egg": "^3.17.5",
-    "egg-born-mock": "^6.0.7",
     "egg-cluster": "^2.2.1",
     "egg-path-matching": "^1.0.1",
     "egg-redis": "^2.4.0",
@@ -80,7 +79,7 @@
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
     "uuid": "^9.0.1",
-    "vona-shared": "^1.0.7"
+    "vona-shared": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
