@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'vona-mock';
 
 describe.skip('test/controller/test/feat/mysql2.test.js', () => {
   it('action:mysql2', async () => {

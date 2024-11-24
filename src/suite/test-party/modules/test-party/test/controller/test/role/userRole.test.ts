@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'vona-mock';
 
 describe('test/controller/test/role/userRole.test.js', () => {
   it('action:userRole', async () => {

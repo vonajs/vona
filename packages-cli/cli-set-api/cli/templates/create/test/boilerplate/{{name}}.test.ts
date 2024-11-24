@@ -1,4 +1,4 @@
-import { app, assert } from 'egg-born-mock';
+import { app, assert } from 'vona-mock';
 
 describe('<%=argv.name%>.test.ts', () => {
   it('action:<%=argv.name%>', async () => {

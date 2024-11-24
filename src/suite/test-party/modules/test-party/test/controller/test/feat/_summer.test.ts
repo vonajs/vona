@@ -1,4 +1,4 @@
-import { app, mockUrl } from 'egg-born-mock';
+import { app, mockUrl } from 'vona-mock';
 
 describe('test/controller/test/feat/summer.test.js', () => {
   it('action:summer', async () => {

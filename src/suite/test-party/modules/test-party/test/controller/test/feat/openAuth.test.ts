@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
+import { app, mockUrl, mockModuleInfo, assert } from 'vona-mock';
 import eggBornUtils from 'egg-born-utils';
 
 describe('test/controller/test/feat/openAuth.test.js', () => {
