@@ -1,8 +1,15 @@
 import { app } from 'egg-born-mock';
 import { DtoUser } from '../dto/user.js';
-import { catchError } from 'vona';
+import { Cast, catchError, Dto } from 'vona';
 import assert from 'assert';
-import { omitType } from 'vona-module-a-validator';
+import { omitType, Rule } from 'vona-module-a-validator';
+import { z } from 'zod';
+
+@Dto()
+class DtoUserWithMarried extends omitType(DtoUser, ['married']) {
+  @Rule(z.boolean())
+  married: boolean;
+}
 
 describe('mappedTypes.test.ts', () => {
   it('action:mappedTypes', async () => {
@@ -15,10 +22,15 @@ describe('mappedTypes.test.ts', () => {
       });
       assert.deepEqual(dataNew, data, JSON.stringify(err, null, 2));
       // omitType
-      const [dataNew2, err2] = await catchError(async () => {
+      const [, err2] = await catchError(async () => {
         return await serviceValidator.validate(omitType(DtoUser, ['married']), data, { strict: true });
       });
-      assert.deepEqual(dataNew2, data, JSON.stringify(err2, null, 2));
+      assert.equal(Cast(err2?.message)[0]?.keys[0], 'married');
+      // omitType and inherit
+      const [dataNew3] = await catchError(async () => {
+        return await serviceValidator.validate(DtoUserWithMarried, data, { strict: true });
+      });
+      assert.deepEqual(dataNew3, data);
     });
   });
 });
