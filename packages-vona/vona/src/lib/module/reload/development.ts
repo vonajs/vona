@@ -16,7 +16,7 @@ const __pathesWatch = [
   'packages-vona/vona',
 ];
 const __pathesTsc = ['src/backend/config', 'src/backend/demo', 'packages-vona/vona'];
-const __pathesIgnore = ['/src/test/'];
+const __pathesIgnore = [];
 
 export default function (app: VonaApplication) {
   let watcherDevelopment: chokidar.FSWatcher | null = null;
