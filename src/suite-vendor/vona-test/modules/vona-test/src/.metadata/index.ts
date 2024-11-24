@@ -20,6 +20,7 @@ declare module 'vona' {
 /** controllers: begin */
 export * from '../controller/bean.js';
 export * from '../controller/performAction.js';
+export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
 /** controllers: end */
@@ -44,6 +45,10 @@ declare module 'vona' {
   }
 }
 /** services: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -59,7 +64,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleVonaTest extends BeanScopeBase {}
 
 export interface ScopeModuleVonaTest
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {
@@ -69,6 +74,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     vonaTest: ScopeModuleVonaTest;
+  }
+
+  export interface IBeanScopeConfig {
+    'vona-test': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {

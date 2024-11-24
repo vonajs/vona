@@ -1,6 +1,6 @@
 import { app, mockUrl } from 'egg-born-mock';
 
-describe.only('test/controller/test/feat/bean.test.js', () => {
+describe('test/controller/test/feat/bean.test.js', () => {
   it('action:bean', async () => {
     // ctx
     await app.meta.mockUtil.mockCtx(async ctx => {

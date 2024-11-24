@@ -13,7 +13,6 @@ describe('bean.test.ts', () => {
   it('action:service', async () => {
     await app.meta.mockUtil.mockCtx(async ctx => {
       await ctx.meta.util.performAction({
-        innerAccess: false,
         method: 'get',
         url: mockUrl('bean/service'),
       });
