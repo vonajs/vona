@@ -2,9 +2,11 @@
 export * from '../bean/aop.regExp.js';
 export * from '../bean/aop.simple.js';
 export * from '../bean/bean.testCtx.js';
+export * from '../bean/summer.cache.test.js';
 import { AopRegExp } from '../bean/aop.regExp.js';
 import { AopSimple } from '../bean/aop.simple.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
+import { SummerCacheTest } from '../bean/summer.cache.test.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -14,6 +16,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'vona-test.aop.regExp': AopRegExp;
     'vona-test.aop.simple': AopSimple;
+    'vona-test.summer.cache.test': SummerCacheTest;
   }
 }
 /** beans: end */

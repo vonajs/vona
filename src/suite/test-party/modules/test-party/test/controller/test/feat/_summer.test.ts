@@ -1,6 +1,6 @@
 import { app, mockUrl } from 'egg-born-mock';
 
-describe.only('test/controller/test/feat/summer.test.js', () => {
+describe('test/controller/test/feat/summer.test.js', () => {
   it('action:summer', async () => {
     // ctx
     await app.meta.mockUtil.mockCtx(async ctx => {
