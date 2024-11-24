@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, Service } from 'vona';
 
 class ClassBeanBase extends BeanBase {
   actionSync({ a, b }: any) {
@@ -6,8 +6,8 @@ class ClassBeanBase extends BeanBase {
   }
 }
 
-@Bean({ scene: 'test' })
-export class TestClass extends ClassBeanBase {
+@Service()
+export class ServiceTestClass extends ClassBeanBase {
   async actionAsync({ a, b }: any) {
     return Promise.resolve(a + b);
   }

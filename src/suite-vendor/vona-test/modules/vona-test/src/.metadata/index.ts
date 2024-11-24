@@ -1,8 +1,49 @@
+/** beans: begin */
+export * from '../bean/aop.regExp.js';
+export * from '../bean/aop.simple.js';
+export * from '../bean/bean.testCtx.js';
+import { AopRegExp } from '../bean/aop.regExp.js';
+import { AopSimple } from '../bean/aop.simple.js';
+import { BeanTestCtx } from '../bean/bean.testCtx.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    testCtx: BeanTestCtx;
+  }
+
+  export interface IBeanRecordGeneral {
+    'vona-test.aop.regExp': AopRegExp;
+    'vona-test.aop.simple': AopSimple;
+  }
+}
+/** beans: end */
 /** controllers: begin */
+export * from '../controller/bean.js';
 export * from '../controller/performAction.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
 /** controllers: end */
+/** services: begin */
+export * from '../service/test.js';
+export * from '../service/testApp.js';
+export * from '../service/testClass.js';
+import { ServiceTest } from '../service/test.js';
+import { ServiceTestApp } from '../service/testApp.js';
+import { ServiceTestClass } from '../service/testClass.js';
+export interface IModuleService {
+  test: ServiceTest;
+  testApp: ServiceTestApp;
+  testClass: ServiceTestClass;
+}
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'vona-test.service.test': ServiceTest;
+    'vona-test.service.testApp': ServiceTestApp;
+    'vona-test.service.testClass': ServiceTestClass;
+  }
+}
+/** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -18,7 +59,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleVonaTest extends BeanScopeBase {}
 
 export interface ScopeModuleVonaTest
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
 
 import 'vona';
 declare module 'vona' {

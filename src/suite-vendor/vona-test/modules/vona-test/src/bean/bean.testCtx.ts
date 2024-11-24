@@ -1,6 +1,6 @@
-import { BeanBase } from 'vona';
+import { Bean, BeanBase } from 'vona';
 
-export class TestCtx0 extends BeanBase {
+class TestCtx0 extends BeanBase {
   _name: string;
 
   protected __init__(moduleName) {
@@ -43,3 +43,12 @@ export class TestCtx0 extends BeanBase {
     return `${name}:${value}`;
   }
 }
+
+class TestCtx1 extends TestCtx0 {
+  async actionAsync3({ a, b }: any) {
+    return await this.actionAsync2({ a, b });
+  }
+}
+
+@Bean()
+export class BeanTestCtx extends TestCtx1 {}

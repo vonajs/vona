@@ -1,6 +1,6 @@
 import { Aop, BeanBase } from 'vona';
 
-@Aop({ match: [/^test-party.test\.\w+$/, 'testCtx'] })
+@Aop({ match: [/^vona-test\.service\.test\w+$/, 'testCtx'] })
 export class AopRegExp extends BeanBase {
   __get_name__(context, next) {
     next();
