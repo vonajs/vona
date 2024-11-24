@@ -22,7 +22,7 @@ import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { Onion } from '../module/onion/onion.js';
-import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText } from '../bean/index.js';
+import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText, createAppText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
   workerId: string;
@@ -98,6 +98,7 @@ export class AppMeta extends BeanSimple {
 
     // text
     this.text = this.locale.createLocaleText();
+    createAppText(this.app);
 
     // util
     this.util = this.bean._newBean(AppUtil);

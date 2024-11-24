@@ -15,13 +15,6 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   patchCreateContext();
 
   function patchCreateContext() {
-    // app
-    app.text = function (text, ...args) {
-      return app.meta.locale.getText(false, undefined, undefined, text, ...args);
-    } as any;
-    app.text.locale = function (locale, text, ...args) {
-      return app.meta.locale.getText(false, undefined, locale, text, ...args);
-    };
     // ctx
     const createContext = app.createContext as any;
     app.createContext = (...args) => {
