@@ -10,7 +10,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
   async validate<T, V = T>(
     classType: Constructable<T>,
     value: V,
-    options?: ValidatorOptions,
+    options?: Partial<ValidatorOptions>,
     path?: string,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
     // const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
@@ -29,7 +29,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
   async validateSchema<T, V = T>(
     schema: z.ZodSchema<T> | undefined,
     value: V,
-    options?: ValidatorOptions,
+    options?: Partial<ValidatorOptions>,
     path?: string,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
     // no path
@@ -43,7 +43,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     return data[path];
   }
 
-  getSchema<T>(classType: Constructable<T>, options?: ValidatorOptions): z.ZodSchema<T> | undefined {
+  getSchema<T>(classType: Constructable<T>, options?: Partial<ValidatorOptions>): z.ZodSchema<T> | undefined {
     const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
     let schema = z.object((rules as z.ZodRawShape) || {});
     if (options?.passthrough) schema = schema.passthrough() as any;
@@ -54,7 +54,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
   async _validateSchema<T, V = T>(
     schema: z.ZodSchema<T> | undefined,
     value: V,
-    options?: ValidatorOptions,
+    options?: Partial<ValidatorOptions>,
   ): Promise<V extends undefined ? undefined : V extends null ? null : T> {
     const errorHttpStatusCode = options?.errorHttpStatusCode ?? HttpStatus.BAD_REQUEST;
     if (!schema) return value as any;
