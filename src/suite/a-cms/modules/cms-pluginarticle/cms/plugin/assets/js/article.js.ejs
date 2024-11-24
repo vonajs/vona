@@ -300,7 +300,7 @@
             };
             return util.performAction({
               method: 'post',
-              url: '/a/cms/comment/all',
+              url: '/api/a/cms/comment/all',
               body: {
                 atomClass: env.site.atomClass,
                 options,
@@ -352,7 +352,7 @@
       util
         .performAction({
           method: 'post',
-          url: '/a/cms/article/list',
+          url: '/api/a/cms/article/list',
           body: {
             atomClass: env.site.atomClass,
             options,

@@ -1,6 +1,6 @@
 import { app, mockUrl, assert } from 'egg-born-mock';
 
-describe.only('performAction.test.js', () => {
+describe('performAction.test.js', () => {
   it('action:performAction', async () => {
     const result = await app.meta.mockUtil.mockCtx(async ctx => {
       return await ctx.meta.util.performAction<{ id: number; url: string }>({

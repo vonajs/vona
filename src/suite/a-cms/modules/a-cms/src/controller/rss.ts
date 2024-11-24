@@ -23,7 +23,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     // select
     const res = await this.ctx.meta.util.performAction({
       method: 'post',
-      url: '/a/cms/article/list',
+      url: '/api/a/cms/article/list',
       body: { atomClass, options },
     });
     const list = res.list;
@@ -90,7 +90,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
     // select
     const res = await this.ctx.meta.util.performAction({
       method: 'post',
-      url: '/a/cms/comment/all',
+      url: '/api/a/cms/comment/all',
       body: { atomClass, options },
     });
     const list = res.list;

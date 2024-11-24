@@ -81,7 +81,7 @@ const configBodyCryptoJS=ctx.app.bean.scope('a-base').config.securityLevelProtec
           util
             .performAction({
               method: 'post',
-              url: '/a/cms/site/checkFile',
+              url: '/api/a/cms/site/checkFile',
               body: {
                 atomId,
                 file,
@@ -133,7 +133,7 @@ const configBodyCryptoJS=ctx.app.bean.scope('a-base').config.securityLevelProtec
       util
         .performAction({
           method: 'post',
-          url: '/a/cms/render/getArticleUrl',
+          url: '/api/a/cms/render/getArticleUrl',
           body: {
             key: { atomId },
           },
