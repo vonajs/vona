@@ -1,10 +1,10 @@
 import { app } from 'vona-mock';
-import { DtoUser } from '../dto/user.js';
+import { DtoUser } from '../src/dto/user.js';
 import { Cast, catchError, Dto } from 'vona';
 import assert from 'assert';
 import { intersectionType, omitType, partialType, pickType, Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
-import { DtoProfile } from '../dto/profile.js';
+import { DtoProfile } from '../src/dto/profile.js';
 
 @Dto()
 class DtoUserWithMarried extends omitType(DtoUser, ['married']) {
