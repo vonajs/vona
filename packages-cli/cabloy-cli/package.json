@@ -34,9 +34,9 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/module-glob": "^5.1.8",
-    "@cabloy/module-info": "^1.1.8",
-    "@cabloy/process-helper": "^1.0.12",
+    "@cabloy/module-glob": "workspace:^",
+    "@cabloy/module-info": "workspace:^",
+    "@cabloy/process-helper": "workspace:^",
     "@cabloy/word-utils": "^1.0.3",
     "@npmcli/config": "^8.3.4",
     "@zhennann/common-bin": "^4.0.0",
