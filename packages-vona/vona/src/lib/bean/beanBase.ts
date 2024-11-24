@@ -26,7 +26,7 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
   }
 
   protected get $scope(): IBeanScopeContainer {
-    return this.app.meta.scopeContainer;
+    return this.app.meta.scopeContainer as unknown as IBeanScopeContainer;
   }
 
   protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
