@@ -27,6 +27,10 @@ export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
 /** controllers: end */
+/** dtos: begin */
+export * from '../dto/profile.js';
+export * from '../dto/user.js';
+/** dtos: end */
 /** services: begin */
 export * from '../service/test.js';
 export * from '../service/testApp.js';
