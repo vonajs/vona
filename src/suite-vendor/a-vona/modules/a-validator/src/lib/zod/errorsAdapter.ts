@@ -1,6 +1,5 @@
 import { VonaApplication } from 'vona';
-import { setErrorMapDefault } from './errorMapDefault.js';
-import { setErrorMapSchema } from './errorMapSchema.js';
+import { setErrorMapDefault, setErrorMapSchema } from '@cabloy/zod-errors-custom';
 
 export function errorsAdapter(app: VonaApplication) {
   setErrorMapDefault((text: string, ...args: any[]) => {

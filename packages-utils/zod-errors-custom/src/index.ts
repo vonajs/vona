@@ -1,1 +1,2 @@
-export * from './lib/errorsAdapter.js';
+export * from './lib/errorMapDefault.js';
+export * from './lib/errorMapSchema.js';

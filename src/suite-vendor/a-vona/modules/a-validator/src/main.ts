@@ -1,5 +1,5 @@
 import { BeanSimple, IModuleMain } from 'vona';
-import { errorsAdapter } from '@cabloy/zod-errors-custom';
+import { errorsAdapter } from './lib/zod/errorsAdapter.js';
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
