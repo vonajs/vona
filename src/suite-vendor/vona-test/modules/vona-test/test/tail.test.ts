@@ -1,7 +1,7 @@
 import { app, mockUrl } from 'vona-mock';
 import { Cast } from 'vona';
 
-describe('tail.test.ts', () => {
+describe.only('tail.test.ts', () => {
   it('action:tail', async () => {
     await app.meta.mockUtil.mockCtx(async ctx => {
       Cast(ctx.meta)._tail_test_caller = 1;

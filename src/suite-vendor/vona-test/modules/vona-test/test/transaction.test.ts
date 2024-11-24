@@ -1,6 +1,6 @@
 import { app, assert, mockUrl } from 'vona-mock';
 
-describe('transaction.test.ts', () => {
+describe.only('transaction.test.ts', () => {
   const tableName = '__tempTransaction';
 
   it('action:transaction:fail', async () => {

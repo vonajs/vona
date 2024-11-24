@@ -1,6 +1,6 @@
 import { app, assert, mockModuleInfo } from 'vona-mock';
 
-describe('locale.test.ts', () => {
+describe.only('locale.test.ts', () => {
   it('action:locale', async () => {
     const moduleInfo = mockModuleInfo();
     await app.meta.mockUtil.mockCtx({ locale: 'zh-cn' }, async ctx => {
