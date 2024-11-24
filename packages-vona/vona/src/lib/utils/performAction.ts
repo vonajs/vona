@@ -54,7 +54,7 @@ export default async function performAction<T = any>({
     if (params) {
       Cast(ctx.req).params = Cast(ctx.request).params = params;
     }
-    Cast(ctx.req).body = ctx.request.body = body !== undefined ? body : {}; // not undefined
+    Cast(ctx.req).body = ctx.request.body = body;
 
     // headers
     delegateHeaders(ctx, ctxCaller, headers);
