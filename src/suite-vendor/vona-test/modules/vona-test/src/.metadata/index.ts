@@ -1,6 +1,7 @@
 /** controllers: begin */
 export * from '../controller/performAction.js';
 export * from '../controller/tail.js';
+export * from '../controller/transaction.js';
 /** controllers: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

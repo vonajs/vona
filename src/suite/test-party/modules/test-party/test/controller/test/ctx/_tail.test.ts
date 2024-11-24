@@ -1,7 +1,7 @@
 import { app, mockUrl } from 'egg-born-mock';
 import { Cast } from 'vona';
 
-describe.only('test/controller/test/ctx/tail.test.js', () => {
+describe('test/controller/test/ctx/tail.test.js', () => {
   it('action:tail', async () => {
     // ctx
     await app.meta.mockUtil.mockCtx(async ctx => {

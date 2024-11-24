@@ -1,0 +1,77 @@
+import { app, assert, mockUrl } from 'egg-born-mock';
+
+describe('transaction.test.ts', () => {
+  const tableName = '__tempTransaction';
+
+  it('action:transaction:fail', async () => {
+    await app.meta.mockUtil.mockCtx(async ctx => {
+      // create table
+      await app.bean.model.createTable(tableName, function (table) {
+        table.basicFields();
+        table.string('name');
+      });
+      // create a new item
+      const res = await app.bean.model.insert(tableName, {
+        name: 'hello',
+      });
+      const id = res[0];
+
+      // try to change name
+      const itemNew = {
+        id,
+        name: 'hello!!',
+      };
+      try {
+        await ctx.meta.util.performAction({
+          method: 'post',
+          url: mockUrl('transaction/fail'),
+          body: itemNew,
+        });
+      } catch (_err) {}
+
+      // check name
+      const item = await app.bean.model.get(tableName, {
+        id,
+      });
+      assert.notEqual(item.name, itemNew.name);
+
+      // drop table
+      await app.bean.model.dropTable(tableName);
+    });
+  });
+
+  it('action:transaction:success', async () => {
+    await app.meta.mockUtil.mockCtx(async ctx => {
+      // create table
+      await app.bean.model.createTable(tableName, function (table) {
+        table.basicFields();
+        table.string('name');
+      });
+      // create a new item
+      const res = await app.bean.model.insert(tableName, {
+        name: 'hello',
+      });
+      const id = res[0];
+
+      // try to change name
+      const itemNew = {
+        id,
+        name: 'hello!!',
+      };
+      await ctx.meta.util.performAction({
+        method: 'post',
+        url: mockUrl('transaction/success'),
+        body: itemNew,
+      });
+
+      // check name
+      const item = await app.bean.model.get(tableName, {
+        id,
+      });
+      assert.equal(item.name, itemNew.name);
+
+      // drop table
+      await app.bean.model.dropTable(tableName);
+    });
+  });
+});
