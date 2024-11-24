@@ -467,6 +467,19 @@ export class AppUtil extends BeanSimple {
   }
 }
 
+export async function catchError<T>(
+  fnMethod: (...args: any[]) => Promise<T>,
+): Promise<[T, undefined] | [undefined, Error]> {
+  let error: Error | undefined;
+  let data: T | undefined;
+  try {
+    data = await fnMethod();
+  } catch (err) {
+    error = err as Error;
+  }
+  return error ? [undefined, error!] : [data!, undefined];
+}
+
 function delegateProperties(ctx, ctxCaller) {
   const req = ctx.req;
   for (const property of ['cookies', 'session', 'user', 'state']) {
