@@ -1,6 +1,6 @@
 import { app, mockUrl, mockModuleInfo, assert } from 'egg-born-mock';
 
-describe.only('test/controller/test/ctx/transaction.test.js', () => {
+describe('test/controller/test/ctx/transaction.test.js', () => {
   it('action:transaction:fail', async () => {
     // ctx
     await app.meta.mockUtil.mockCtx(async ctx => {
