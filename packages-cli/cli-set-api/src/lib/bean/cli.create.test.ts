@@ -33,7 +33,7 @@ export class CliCreateTest extends BeanCliBase {
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(argv.name, ['test']);
     // directory
-    const testDir = path.join(targetDir, 'src/test');
+    const testDir = path.join(targetDir, 'test');
     const testFile = path.join(testDir, `${argv.name}.test.ts`);
     if (fs.existsSync(testFile)) {
       throw new Error(`test exists: ${testFile}`);
