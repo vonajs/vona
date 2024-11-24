@@ -1,7 +1,7 @@
 {
-  "name": "egg-born-mock",
+  "name": "vona-mock",
   "version": "6.0.7",
-  "description": "cabloy mock",
+  "description": "vona mock",
   "publishConfig": {
     "access": "public"
   },
