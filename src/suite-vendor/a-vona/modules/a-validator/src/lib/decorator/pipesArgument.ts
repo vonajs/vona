@@ -5,8 +5,8 @@ import {
   RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona';
-import { PipeArgument } from '../../types/decorator.js';
 import { valid } from '../../bean/pipe.valid.js';
+import { PipeArgument } from '../types/decorator.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: any, ...pipes: PipeArgument[]): ParameterDecorator {

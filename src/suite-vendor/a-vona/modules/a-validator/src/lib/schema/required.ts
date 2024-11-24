@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { locale } from '../.metadata/index.js';
+import { locale } from '../../.metadata/index.js';
 
 type CustomParams = z.CustomErrorParams & { fatal?: boolean };
 

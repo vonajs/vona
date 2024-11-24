@@ -10,7 +10,7 @@ import {
 } from 'vona';
 import { z } from 'zod';
 import { ScopeModule } from '../.metadata/this.js';
-import { ValidatorOptions } from '../types/validatorOptions.js';
+import { ValidatorOptions } from '../lib/types/validatorOptions.js';
 
 export interface IPipeOptionsValid extends IDecoratorPipeOptions, ValidatorOptions {
   schema?: z.ZodSchema;

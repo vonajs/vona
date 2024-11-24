@@ -8,9 +8,9 @@ import {
   Type,
   createArgumentPipe,
 } from 'vona';
-import { ValidatorOptions } from '../types/validatorOptions.js';
 import { ScopeModule } from '../.metadata/this.js';
 import { z } from 'zod';
+import { ValidatorOptions } from '../lib/types/validatorOptions.js';
 
 const __primitiveTypes = [String, Boolean, Number, Array, Object, Buffer, Date];
 const __primitiveTypesTransform = [String, Boolean, Number, Date];
