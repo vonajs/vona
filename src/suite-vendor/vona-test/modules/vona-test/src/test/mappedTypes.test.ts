@@ -2,8 +2,9 @@ import { app } from 'egg-born-mock';
 import { DtoUser } from '../dto/user.js';
 import { Cast, catchError, Dto } from 'vona';
 import assert from 'assert';
-import { omitType, partialType, pickType, Rule } from 'vona-module-a-validator';
+import { intersectionType, omitType, partialType, pickType, Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
+import { DtoProfile } from '../dto/profile.js';
 
 @Dto()
 class DtoUserWithMarried extends omitType(DtoUser, ['married']) {
@@ -49,6 +50,11 @@ describe('mappedTypes.test.ts', () => {
         );
       });
       assert.deepEqual(dataNew6, { married: true });
+      // intersectionType
+      const [, err7] = await catchError(async () => {
+        return await serviceValidator.validate(intersectionType(DtoUser, DtoProfile), data, { strict: true });
+      });
+      assert.equal(Cast(err7?.message)[0]?.keys[0], 'email');
     });
   });
 });
