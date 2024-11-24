@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { app, mockModuleInfo, assert } from 'egg-born-mock';
+import { app, mockModuleInfo, assert } from 'vona-mock';
 
 describe('[your tests start from here]', () => {
   it('[atom]', async () => {

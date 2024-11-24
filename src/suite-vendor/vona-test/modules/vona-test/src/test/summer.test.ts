@@ -1,4 +1,4 @@
-import { app, mockUrl } from 'egg-born-mock';
+import { app, mockUrl } from 'vona-mock';
 
 describe('summer.test.ts', () => {
   it('action:summer', async () => {

@@ -1,4 +1,4 @@
-import { app, assert, mockUrl } from 'egg-born-mock';
+import { app, assert, mockUrl } from 'vona-mock';
 
 describe('transaction.test.ts', () => {
   const tableName = '__tempTransaction';

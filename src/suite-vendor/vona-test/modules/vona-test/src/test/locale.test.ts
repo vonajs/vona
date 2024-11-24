@@ -1,4 +1,4 @@
-import { app, assert, mockModuleInfo } from 'egg-born-mock';
+import { app, assert, mockModuleInfo } from 'vona-mock';
 
 describe('locale.test.ts', () => {
   it('action:locale', async () => {

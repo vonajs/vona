@@ -1,4 +1,4 @@
-import { app } from 'egg-born-mock';
+import { app } from 'vona-mock';
 import { DtoUser } from '../dto/user.js';
 import { Cast, catchError, Dto } from 'vona';
 import assert from 'assert';

@@ -1,4 +1,4 @@
-import { app, mockUrl } from 'egg-born-mock';
+import { app, mockUrl } from 'vona-mock';
 
 describe('bean.test.ts', () => {
   it('action:bean', async () => {

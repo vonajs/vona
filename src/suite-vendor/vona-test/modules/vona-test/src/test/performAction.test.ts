@@ -1,4 +1,4 @@
-import { app, mockUrl, assert } from 'egg-born-mock';
+import { app, mockUrl, assert } from 'vona-mock';
 
 describe('performAction.test.js', () => {
   it('action:performAction', async () => {
