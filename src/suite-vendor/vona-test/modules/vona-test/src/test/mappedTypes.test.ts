@@ -54,7 +54,7 @@ describe('mappedTypes.test.ts', () => {
       const [, err7] = await catchError(async () => {
         return await serviceValidator.validate(intersectionType(DtoUser, DtoProfile), data, { strict: true });
       });
-      assert.equal(Cast(err7?.message)[0]?.keys[0], 'email');
+      assert.equal(Cast(err7?.message)[0]?.path[0], 'email');
     });
   });
 });
