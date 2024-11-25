@@ -8,24 +8,6 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   // load constants
   loadConstants();
 
-  // patch service
-  patchCreateContext();
-
-  function patchCreateContext() {
-    const createContext = app.createContext as any;
-    app.createContext = (...args) => {
-      const context = createContext.call(app, ...args);
-
-      // maybe /favicon.ico
-      if (context.module) {
-        // constant
-        context.constant = ebConstants[context.module.info.relativeName];
-      }
-
-      return context;
-    };
-  }
-
   function loadConstants() {
     for (const key in modules) {
       const module = modules[key];
