@@ -24,4 +24,5 @@ export const SymbolFilterComposeContext = Symbol('SymbolFilterComposeContext');
 
 export interface IFilterComposeContext {
   err: Error;
+  method: string;
 }

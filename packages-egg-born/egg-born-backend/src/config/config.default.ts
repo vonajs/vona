@@ -296,7 +296,7 @@ export default function (appInfo: VonaAppInfo) {
       return true;
     },
     json(err, ctx: VonaContext) {
-      ctx[SymbolFilterComposeContext] = { err };
+      ctx[SymbolFilterComposeContext] = { err, method: 'json' };
       _composeFilters(ctx.app)(ctx);
     },
   };
@@ -312,7 +312,7 @@ function _composeFilters(app: VonaApplication) {
     undefined,
     (beanInstance: IFilterJson, options, next) => {
       const filterContext: IFilterComposeContext = app.ctx[SymbolFilterComposeContext];
-      return beanInstance.json(filterContext.err, options, next);
+      return beanInstance[filterContext.method](filterContext.err, options, next);
     },
   );
 }
