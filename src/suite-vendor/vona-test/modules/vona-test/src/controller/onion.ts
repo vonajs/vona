@@ -44,7 +44,7 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
   @Post('echo4')
   @UseGuardGlobal('a-core:user', { public: true })
   async echo4(@Body(array(DtoUser)) users: DtoUser[]) {
-    const a = await this.$scope.validator.service.validator.validateSchema(array(DtoUser), {});
+    const a = await this.bean.$scope.validator.service.validator.validateSchema(array(DtoUser), {});
 
     console.log(typeof users);
     return users;

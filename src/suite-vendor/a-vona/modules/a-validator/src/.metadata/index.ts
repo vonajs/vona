@@ -1,3 +1,15 @@
+/** beans: begin */
+export * from '../bean/bean.validator.js';
+import { BeanValidator } from '../bean/bean.validator.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    validator: BeanValidator;
+  }
+
+  export interface IBeanRecordGeneral {}
+}
+/** beans: end */
 /** pipes: begin */
 export * from '../bean/pipe.defaultValue.js';
 export * from '../bean/pipe.valid.js';
