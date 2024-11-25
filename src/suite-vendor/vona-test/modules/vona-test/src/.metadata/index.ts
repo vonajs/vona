@@ -22,6 +22,7 @@ declare module 'vona' {
 /** beans: end */
 /** controllers: begin */
 export * from '../controller/bean.js';
+export * from '../controller/onion.js';
 export * from '../controller/performAction.js';
 export * from '../controller/summer.js';
 export * from '../controller/tail.js';
