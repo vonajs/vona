@@ -11,6 +11,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
       '**/guard.*.ts',
       '**/interceptor.*.ts',
       '**/pipe.*.ts',
+      '**/filter.*.ts',
       '**/connection.*.ts',
       '**/packet.*.ts',
     ],

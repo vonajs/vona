@@ -1,6 +1,6 @@
-import { BeanBase, Cast, Filter, IDecoratorFilterOptions, IFilterJson, NextSync } from 'vona';
+import { BeanBase, Cast, Filter, IDecoratorFilterOptionsGlobal, IFilterJson, NextSync } from 'vona';
 
-export interface IFilterOptionsError extends IDecoratorFilterOptions {}
+export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {}
 
 @Filter<IFilterOptionsError>({ global: true })
 export class FilterError extends BeanBase implements IFilterJson {

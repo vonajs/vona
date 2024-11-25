@@ -1,4 +1,4 @@
-import { BeanBase, Controller, Get, Post, UseGuardGlobal, UseMiddleware, UsePipeGlobal } from 'vona';
+import { BeanBase, Controller, Get, Post, UseFilterGlobal, UseGuardGlobal, UseMiddleware, UsePipeGlobal } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { array, Body, defaultValue, Query, required, valid } from 'vona-module-a-validator';
 import { z } from 'zod';
@@ -43,6 +43,7 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
 
   @Post('echo4')
   @UseGuardGlobal('a-core:user', { public: true })
+  @UseFilterGlobal('a-core:error', { enable: false })
   async echo4(@Body(array(DtoUser)) users: DtoUser[]) {
     return users;
   }
