@@ -3,10 +3,7 @@ import { ValidatorOptions } from '../types/validatorOptions.js';
 import { z } from 'zod';
 import { SymbolDecoratorRule } from '../decorator/rule.js';
 
-export function getSchema<T>(
-  classType: Constructable<T>,
-  options?: Partial<ValidatorOptions>,
-): z.ZodSchema<T> | undefined {
+export function getSchema<T>(classType: Constructable<T>, options?: Partial<ValidatorOptions>): z.ZodSchema<T> {
   const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
   let schema = z.object((rules as z.ZodRawShape) || {});
   if (options?.passthrough) schema = schema.passthrough() as any;
