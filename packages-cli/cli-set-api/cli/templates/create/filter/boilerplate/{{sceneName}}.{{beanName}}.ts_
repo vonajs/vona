@@ -1,10 +1,10 @@
-import { BeanBase, IDecoratorInterceptorOptions, IInterceptorExecute, Interceptor, Next } from 'vona';
+import { BeanBase, Filter, IDecoratorFilterOptions, IFilterJson, Next } from 'vona';
 
-export interface IInterceptorOptions<%=argv.beanNameCapitalize%> extends IDecoratorInterceptorOptions {}
+export interface IFilterOptions<%=argv.beanNameCapitalize%> extends IDecoratorFilterOptions {}
 
-@Interceptor<IInterceptorOptions<%=argv.beanNameCapitalize%>>()
-export class Interceptor<%=argv.beanNameCapitalize%> extends BeanBase implements IInterceptorExecute {
-  async execute(_options: IInterceptorOptions<%=argv.beanNameCapitalize%>, next: Next) {
+@Filter<IFilterOptions<%=argv.beanNameCapitalize%>>()
+export class Filter<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterJson {
+  json(_err: Error, _options: IFilterOptions<%=argv.beanNameCapitalize%>, next: Next) {
     // next
     return next();
   }
