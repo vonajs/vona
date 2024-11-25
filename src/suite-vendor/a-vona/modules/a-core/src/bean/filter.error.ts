@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, Filter } from 'vona';
 
-@Bean({ scene: 'filter' })
+@Filter()
 export class FilterError extends BeanBase {}
