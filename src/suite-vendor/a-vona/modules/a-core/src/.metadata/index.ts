@@ -1,6 +1,5 @@
 /** beans: begin */
 export * from '../bean/filter.error.js';
-export * from '../bean/filter.error_.js';
 import { FilterError } from '../bean/filter.error.js';
 import 'vona';
 declare module 'vona' {
