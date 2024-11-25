@@ -103,7 +103,13 @@ export class Onion extends BeanSimple {
       const { pipeName, options, optionsPrimitive } = pipe();
       const item = this.middlewaresNormal[pipeName];
       if (!item) throw new Error(`${this.sceneName} not found: ${pipeName}`);
-      return { ...item, pipeOptions: options, pipeOptionsPrimitive: optionsPrimitive };
+      return {
+        ...item,
+        argumentPipe: {
+          options: options,
+          optionsPrimitive: optionsPrimitive,
+        },
+      };
     });
   }
 
@@ -189,7 +195,7 @@ export class Onion extends BeanSimple {
 
   combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
     // optionsPrimitive
-    const optionsPrimitive = item.pipeOptionsPrimitive;
+    const optionsPrimitive = item.argumentPipe?.optionsPrimitive;
     // options: meta/config
     const optionsMetaAndConfig = this._getMiddlewareOptions(item, optionsPrimitive);
     // options: instance config
@@ -201,7 +207,7 @@ export class Onion extends BeanSimple {
       optionsRoute = route.meta?.[item.fromConfig ? item.name : item.beanOptions.beanFullName];
     }
     // options: argument pipe
-    const optionsPipe = this.sceneMeta.optionsPipe ? item.pipeOptions : undefined;
+    const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe ? item.argumentPipe?.options : undefined;
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
@@ -210,7 +216,7 @@ export class Onion extends BeanSimple {
     // final options
     let options;
     if (optionsPrimitive) {
-      options = optionsDynamic ?? optionsPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
+      options = optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
     } else {
       options = extend(
         true,
@@ -218,7 +224,7 @@ export class Onion extends BeanSimple {
         optionsMetaAndConfig,
         optionsInstanceConfig,
         optionsRoute,
-        optionsPipe,
+        optionsArgumentPipe,
         optionsDynamic,
       );
     }
@@ -347,7 +353,7 @@ export class Onion extends BeanSimple {
         packet = ctx.packet;
       }
       // optionsPrimitive
-      const optionsPrimitive = item.pipeOptionsPrimitive;
+      const optionsPrimitive = item.argumentPipe?.optionsPrimitive;
       // options
       const options = this.combineMiddlewareOptions(ctx, item);
       // enable match ignore dependencies

@@ -1,7 +1,7 @@
 export interface OnionSceneMeta {
   hasLocal?: boolean;
   optionsRoute?: boolean;
-  optionsPipe?: boolean;
+  optionsArgumentPipe?: boolean;
   optionsDynamic?: boolean;
 }
 
@@ -26,7 +26,7 @@ export const onionScenesMeta: OnionScenesMeta = {
   pipe: {
     hasLocal: true,
     optionsRoute: true,
-    optionsPipe: true,
+    optionsArgumentPipe: true,
     optionsDynamic: true,
   },
   connection: {},

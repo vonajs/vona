@@ -40,6 +40,8 @@ export interface IMiddlewareItem {
   options: IDecoratorMiddlewareOptionsGlobal;
   beanOptions: IDecoratorBeanOptionsBase;
   fromConfig?: boolean;
-  pipeOptions?: IDecoratorPipeOptions;
-  pipeOptionsPrimitive?: boolean;
+  argumentPipe?: {
+    options?: IDecoratorPipeOptions;
+    optionsPrimitive?: boolean;
+  };
 }
