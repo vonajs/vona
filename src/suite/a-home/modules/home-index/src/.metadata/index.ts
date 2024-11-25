@@ -1,9 +1,6 @@
 /** controllers: begin */
 export * from '../controller/index.js';
 /** controllers: end */
-/** dtos: begin */
-export * from '../dto/book.js';
-/** dtos: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -36,7 +33,7 @@ declare module 'vona' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): K {
-  return key;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-index:${K}` {
+  return `home-index:${key}`;
 }
 /** scope: end */
