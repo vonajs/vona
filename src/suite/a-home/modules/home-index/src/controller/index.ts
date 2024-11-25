@@ -6,6 +6,6 @@ export class ControllerIndex extends BeanBase<ScopeModule> {
   @Get('//')
   @UseGuardGlobal('a-core:user', { public: true })
   index() {
-    return 'Hello Vona';
+    return this.scope.locale.helloVona();
   }
 }
