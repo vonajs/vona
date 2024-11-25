@@ -19,3 +19,9 @@ export interface IDecoratorFilterOptionsGlobal extends IMiddlewareBase {
   dependencies?: (keyof IFilterRecordGlobal)[] | keyof IFilterRecordGlobal;
   dependents?: (keyof IFilterRecordGlobal)[] | keyof IFilterRecordGlobal;
 }
+
+export const SymbolFilterComposeContext = Symbol('SymbolFilterComposeContext');
+
+export interface IFilterComposeContext {
+  err: Error;
+}

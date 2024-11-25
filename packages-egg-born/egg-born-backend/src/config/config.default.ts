@@ -1,4 +1,12 @@
-import { IFilterJson, VonaAppInfo, VonaConfigOptional, VonaContext } from 'vona';
+import {
+  IFilterComposeContext,
+  IFilterJson,
+  SymbolFilterComposeContext,
+  VonaAppInfo,
+  VonaApplication,
+  VonaConfigOptional,
+  VonaContext,
+} from 'vona';
 import path from 'path';
 import * as uuid from 'uuid';
 
@@ -288,13 +296,19 @@ export default function (appInfo: VonaAppInfo) {
       return true;
     },
     json(err, ctx: VonaContext) {
-      ctx.app.meta.onionFilter.compose(ctx, (beanInstance: IFilterJson, options, next) => {
-        return beanInstance.json(err, options, next);
-      })(ctx);
+      ctx[SymbolFilterComposeContext] = { err };
+      _composeFilters(ctx.app)(ctx);
     },
   };
 
   return config;
+}
+
+function _composeFilters(app: VonaApplication) {
+  return app.meta.onionFilter.compose(app.ctx, (beanInstance: IFilterJson, options, next) => {
+    const filterContext: IFilterComposeContext = app.ctx[SymbolFilterComposeContext];
+    return beanInstance.json(filterContext.err, options, next);
+  });
 }
 
 function getFullPath(ctx, dir, filename, _options) {
