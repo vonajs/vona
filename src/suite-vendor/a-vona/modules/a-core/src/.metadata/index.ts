@@ -18,6 +18,16 @@ declare module 'vona' {
   }
 }
 /** guards: end */
+/** interceptors: begin */
+export * from '../bean/interceptor.body.js';
+import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+import 'vona';
+declare module 'vona' {
+  export interface IInterceptorRecordGlobal {
+    'a-core:body': IInterceptorOptionsBody;
+  }
+}
+/** interceptors: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 
@@ -36,4 +46,5 @@ declare module 'vona' {
     core: ScopeModuleACore;
   }
 }
+
 /** scope: end */

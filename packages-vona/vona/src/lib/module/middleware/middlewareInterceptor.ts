@@ -6,8 +6,5 @@ export async function middlewareInterceptor(ctx: VonaContext, next: Next) {
   const handler = ctx.getHandler();
   if (!handler) return next();
   // compose
-  const res = await ctx.app.meta.onionInterceptor.composeAsync(ctx)(ctx, next);
-  if (ctx.response.status === 404 && ctx.response.body === undefined) {
-    ctx.app.success(res);
-  }
+  return await ctx.app.meta.onionInterceptor.composeAsync(ctx)(ctx, next);
 }
