@@ -178,8 +178,11 @@ export class LocalHelper {
     const pkgContent = (await fse.readFile(fileName)).toString();
     return JSON.parse(pkgContent);
   }
-  async saveJSONFile(fileName: string, json: object) {
+  async saveJSONFile(fileName: string, json: object, format?: boolean) {
     await fse.writeFile(fileName, JSON.stringify(json, null, 2) + '\n');
+    if (format !== false) {
+      await this.formatFile({ fileName });
+    }
   }
   safeSplit(str: string, sep: string = ',') {
     let left = 0;
