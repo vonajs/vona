@@ -1,3 +1,15 @@
+/** beans: begin */
+export * from '../bean/filter.error.js';
+import { FilterError } from '../bean/filter.error.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {}
+
+  export interface IBeanRecordGeneral {
+    'a-core.filter.error': FilterError;
+  }
+}
+/** beans: end */
 /** middlewares: begin */
 export * from '../bean/middleware.development.js';
 import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
