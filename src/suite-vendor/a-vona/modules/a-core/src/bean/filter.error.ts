@@ -1,10 +1,10 @@
 import { BeanBase, Filter, IDecoratorFilterOptions, IFilterJson, Next } from 'vona';
 
-export interface IFilterOptionsBody extends IDecoratorFilterOptions {}
+export interface IFilterOptionsError extends IDecoratorFilterOptions {}
 
-@Filter<IFilterOptionsBody>({ global: true })
+@Filter<IFilterOptionsError>({ global: true })
 export class FilterError extends BeanBase implements IFilterJson {
-  json(_err: Error, _options: IDecoratorFilterOptions, next: Next) {
+  json(_err: Error, _options: IFilterOptionsError, next: Next) {
     // next
     return next();
   }
