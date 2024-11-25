@@ -9,7 +9,7 @@ export function array<T>(classType: Constructable<T>, params?: z.RawCreateParams
       val = coerceWithNil(val);
       if (isNil(val)) return val;
       if (typeof val !== 'string') return val;
-      if (val[0] === '[') return JSON.parse(val);
+      if (isNil(params?.separator) && val[0] === '[') return JSON.parse(val);
       return val.split(params?.separator ?? ',');
     },
     z.array(schema(classType), params),
