@@ -39,7 +39,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       return await this._transformPrimitive(value, metadata, options);
     }
     // validate
-    return await this.scope.service.validator.validate(metaType, value, options, metadata.field);
+    return await this.bean.validator.validate(metaType, value, options, metadata.field);
   }
 
   private _isPrimitiveType(metaType: Type<any>): boolean {
@@ -63,7 +63,7 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
       rule = z.never();
     }
     // validateSchema
-    return await this.scope.service.validator.validateSchema(rule, value, options, metadata.field);
+    return await this.bean.validator.validateSchema(rule, value, options, metadata.field);
   }
 }
 

@@ -28,10 +28,10 @@ export class PipeValid extends BeanBase<ScopeModule> implements IPipeTransform<a
   async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValid) {
     if (options.schema) {
       // validateSchema
-      return await this.scope.service.validator.validateSchema(options.schema, value, options, metadata.field);
+      return await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
     } else if (options.class) {
       // validate
-      return await this.scope.service.validator.validate(options.class, value, options, metadata.field);
+      return await this.bean.validator.validate(options.class, value, options, metadata.field);
     }
     return value;
   }
