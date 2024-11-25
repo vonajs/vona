@@ -8,14 +8,12 @@ import { BeanScopeUtil } from './beanScopeUtil.js';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
-const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
-  private [BeanModuleConstant]: unknown;
   private [BeanModuleBean]: BeanScopeBean;
   private [BeanModuleUtil]: BeanScopeUtil;
   private __scenes: Record<string, BeanScopeScene> = {};
@@ -48,10 +46,7 @@ export class BeanScopeBase extends BeanBaseSimple {
     }
     // constant
     if (prop === 'constant') {
-      if (!this[BeanModuleConstant]) {
-        this[BeanModuleConstant] = this.ctx.constant.module(moduleBelong);
-      }
-      return this[BeanModuleConstant];
+      return this.app.meta.constants[moduleBelong];
     }
     // _bean
     if (prop === '_bean') {
