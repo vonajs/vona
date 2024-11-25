@@ -388,7 +388,7 @@ function controllerActionToMiddleware(controllerBeanFullName, _route) {
 
 function classControllerMiddleware(ctx: VonaContext) {
   const beanFullName = ctx.getClassBeanFullName();
-  const handlerName = ctx.getHandler().name;
+  const handlerName = ctx.getHandler()!.name;
   const controller = ctx.app.bean._getBean(beanFullName as any) as any;
   return controller[handlerName](...(ctx[SymbolRouteHandlersArgumentsValue] || []));
 }

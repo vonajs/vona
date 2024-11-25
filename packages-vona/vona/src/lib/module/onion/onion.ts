@@ -75,7 +75,7 @@ export class Onion extends BeanSimple {
 
   composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
     const beanFullName = ctx.getClassBeanFullName();
-    const handlerName = ctx.getHandler().name;
+    const handlerName = ctx.getHandler()!.name;
     const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
     if (!this._cacheMiddlewaresArgument[key]) {
       const middlewares: Function[] = [];
