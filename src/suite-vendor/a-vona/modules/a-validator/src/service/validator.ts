@@ -1,9 +1,9 @@
-import { appMetadata, BeanBase, Constructable, HttpStatus, isNil, Service } from 'vona';
+import { BeanBase, Constructable, HttpStatus, isNil, Service } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { z } from 'zod';
 import { coerceWithNil } from '@cabloy/zod-query';
-import { SymbolDecoratorRule } from '../lib/decorator/rule.js';
 import { ValidatorOptions } from '../lib/types/validatorOptions.js';
+import { getSchema } from '../lib/zod/getSchema.js';
 
 @Service()
 export class ServiceValidator extends BeanBase<ScopeModule> {
@@ -22,7 +22,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     //   this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     // }
     // schema
-    const schema = this.getSchema(classType, options);
+    const schema = getSchema(classType, options);
     return await this.validateSchema(schema, value, options, path);
   }
 
@@ -41,14 +41,6 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     const obj = { [path]: value };
     const data = await this._validateSchema(schema2, obj, options);
     return data[path];
-  }
-
-  getSchema<T>(classType: Constructable<T>, options?: Partial<ValidatorOptions>): z.ZodSchema<T> | undefined {
-    const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
-    let schema = z.object((rules as z.ZodRawShape) || {});
-    if (options?.passthrough) schema = schema.passthrough() as any;
-    if (options?.strict) schema = schema.strict() as any;
-    return schema as any;
   }
 
   async _validateSchema<T, V = T>(
