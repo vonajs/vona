@@ -29,6 +29,11 @@ export const onionScenesMeta: OnionScenesMeta = {
     optionsArgumentPipe: true,
     optionsDynamic: true,
   },
+  filter: {
+    hasLocal: true,
+    optionsRoute: true,
+    optionsDynamic: true,
+  },
   connection: {},
   packet: {},
 };
