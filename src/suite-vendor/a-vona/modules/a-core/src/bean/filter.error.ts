@@ -29,7 +29,7 @@ export class FilterError extends BeanBase implements IFilterJson {
       errorJson.stack = err.stack;
       errorJson.name = err.name;
       for (const key in err) {
-        if (!errorJson[key]) {
+        if (!['status'].includes(key) && !errorJson[key]) {
           errorJson[key] = err[key];
         }
       }
