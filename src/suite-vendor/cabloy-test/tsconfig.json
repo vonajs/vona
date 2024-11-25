@@ -4,7 +4,7 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/cabloy-test"
+      "path": "modules/cabloy-test/tsconfig.build.json"
     }
   ]
 }

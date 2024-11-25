@@ -4,10 +4,10 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/home-base"
+      "path": "modules/home-base/tsconfig.build.json"
     },
     {
-      "path": "modules/home-index"
+      "path": "modules/home-index/tsconfig.build.json"
     }
   ]
 }

@@ -4,7 +4,7 @@
   "exclude": ["modules"],
   "references": [
     {
-      "path": "modules/vona-test"
+      "path": "modules/vona-test/tsconfig.build.json"
     }
   ]
 }
