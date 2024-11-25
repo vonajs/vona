@@ -65,6 +65,7 @@ export class AppMeta extends BeanSimple {
   onionGuard: Onion;
   onionInterceptor: Onion;
   onionPipe: Onion;
+  onionFilter: Onion;
   onionConnection: Onion;
   onionPacket: Onion;
   //

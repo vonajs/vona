@@ -12,6 +12,7 @@ export type TypeUseMiddlewareGlobalLikeOptions<T> = Omit<
 >;
 
 export type Next = () => Promise<any>;
+export type NextSync = () => any;
 
 export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}

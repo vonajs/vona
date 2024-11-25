@@ -43,14 +43,28 @@ export class Onion extends BeanSimple {
     this._swapMiddlewares(this.middlewaresGlobal);
   }
 
+  compose(
+    ctx: VonaContext,
+    fnStart?: Function | Function[],
+    fnMid?: Function | Function[],
+    fnEnd?: Function | Function[],
+    executeCustom?: Function,
+  ) {
+    // compose
+    const middlewares = this._composeMiddlewaresHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
+    // invoke
+    return ctx.app.meta.util.compose(middlewares, __adapter);
+  }
+
   composeAsync(
     ctx: VonaContext,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
+    executeCustom?: Function,
   ) {
     // compose
-    const middlewares = this._composeMiddlewaresHandler(ctx, fnStart, fnMid, fnEnd);
+    const middlewares = this._composeMiddlewaresHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
     return ctx.app.meta.util.composeAsync(middlewares, __adapter);
   }
@@ -86,11 +100,11 @@ export class Onion extends BeanSimple {
     return this._cacheMiddlewaresArgument[key];
   }
 
-  private _composeMiddlewaresGlobal() {
+  private _composeMiddlewaresGlobal(executeCustom?: Function) {
     if (!this._cacheMiddlewaresGlobal) {
       const middlewares: Function[] = [];
       for (const item of this.middlewaresGlobal) {
-        middlewares.push(this._wrapMiddleware(item));
+        middlewares.push(this._wrapMiddleware(item, executeCustom));
       }
       this._cacheMiddlewaresGlobal = middlewares;
     }
@@ -118,20 +132,21 @@ export class Onion extends BeanSimple {
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
+    executeCustom?: Function,
   ) {
     const beanFullName = ctx.getClassBeanFullName();
-    const handlerName = ctx.getHandler().name;
-    const key = `${beanFullName}:${handlerName}`;
+    const handlerName = ctx.getHandler()?.name;
+    const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
     if (!this._cacheMiddlewaresHandler[key]) {
       let middlewares: Function[] = [];
       if (fnStart) middlewares = middlewares.concat(fnStart);
       // middlewares: global
-      middlewares = middlewares.concat(this._composeMiddlewaresGlobal());
+      middlewares = middlewares.concat(this._composeMiddlewaresGlobal(executeCustom));
       if (fnMid) middlewares = middlewares.concat(fnMid);
       // middlewares: handler
       const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
       for (const item of middlewaresLocal) {
-        middlewares.push(this._wrapMiddleware(item));
+        middlewares.push(this._wrapMiddleware(item, executeCustom));
       }
       if (fnEnd) middlewares = middlewares.concat(fnEnd);
       this._cacheMiddlewaresHandler[key] = middlewares;

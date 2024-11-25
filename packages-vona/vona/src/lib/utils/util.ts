@@ -465,6 +465,35 @@ export class AppUtil extends BeanSimple {
   extend(...args) {
     return extend(true, ...args);
   }
+
+  detectErrorMessage(err: Error) {
+    // detect json parse error
+    if (
+      err.status === 400 &&
+      err.name === 'SyntaxError' &&
+      this.ctx.request.is('application/json', 'application/vnd.api+json', 'application/csp-report')
+    ) {
+      return 'Problems parsing JSON';
+    }
+    return err.message;
+  }
+
+  detectStatus(err: Error) {
+    // detect status
+    let status = err.status || 500;
+    if (typeof status !== 'number') status = Number(status);
+    if (status < 200) {
+      // invalid status consider as 500, like urllib will return -1 status
+      status = 500;
+    }
+    return status;
+  }
+
+  accepts() {
+    if (this.ctx.acceptJSON) return 'json';
+    if (this.ctx.acceptJSONP) return 'js';
+    return 'html';
+  }
 }
 
 export async function catchError<T>(

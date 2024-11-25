@@ -1,10 +1,10 @@
-import { BeanBase, Filter, IDecoratorFilterOptions, IFilterJson, Next } from 'vona';
+import { BeanBase, Filter, IDecoratorFilterOptions, IFilterJson, NextSync } from 'vona';
 
 export interface IFilterOptions<%=argv.beanNameCapitalize%> extends IDecoratorFilterOptions {}
 
 @Filter<IFilterOptions<%=argv.beanNameCapitalize%>>()
 export class Filter<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterJson {
-  json(_err: Error, _options: IFilterOptions<%=argv.beanNameCapitalize%>, next: Next) {
+  json(_err: Error, _options: IFilterOptions<%=argv.beanNameCapitalize%>, next: NextSync) {
     // next
     return next();
   }

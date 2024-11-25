@@ -1,12 +1,6 @@
-import { VonaAppInfo, VonaConfigOptional } from 'vona';
+import { IFilterJson, VonaAppInfo, VonaConfigOptional, VonaContext } from 'vona';
 import path from 'path';
 import * as uuid from 'uuid';
-
-const {
-  detectStatus,
-  detectErrorMessage,
-  /* accepts,*/
-} = require('egg-onerror/lib/utils');
 
 // eslint-disable-next-line
 export default function (appInfo: VonaAppInfo) {
@@ -293,32 +287,10 @@ export default function (appInfo: VonaAppInfo) {
       }
       return true;
     },
-    json(err) {
-      const status = detectStatus(err);
-
-      this.status = status;
-      const code = err.code || err.type;
-      const message = detectErrorMessage(this, err);
-
-      // json error
-      const errorJson = {
-        code,
-        message,
-        errors: err.errors,
-      } as any;
-
-      if (status >= 500 && !this.app.meta.isProd) {
-        // provide detail error stack in local env
-        errorJson.stack = err.stack;
-        errorJson.name = err.name;
-        for (const key in err) {
-          if (!errorJson[key]) {
-            errorJson[key] = err[key];
-          }
-        }
-      }
-
-      this.body = errorJson;
+    json(err, ctx: VonaContext) {
+      ctx.app.meta.onionFilter.compose(ctx, (beanInstance: IFilterJson, options, next) => {
+        return beanInstance.json(err, options, next);
+      })(ctx);
     },
   };
 
