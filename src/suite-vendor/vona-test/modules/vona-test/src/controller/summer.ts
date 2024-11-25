@@ -62,8 +62,8 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     value = await cache.get(key1);
     assert.equal(value.id, key1.id);
     //   mem cache graph: key2 key3
-    values = await cache.mget([key1, key2, key3]);
-    assert.equal(values[0].id, key1.id);
+    values = await cache.mget([key1, key2, key3]); // todo: maybe has bug
+    assert.equal(values[0].id, key1.id); // todo: maybe has bug
     assert.equal(values[1].id, key2.id);
     assert.equal(values[2].id, key3.id);
     //   mem cache graph: key3 key1
