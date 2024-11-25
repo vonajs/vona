@@ -201,8 +201,9 @@ export class Onion extends BeanSimple {
     // options: instance config
     const optionsInstanceConfig = ctx.instance ? ctx.config.metadata[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
+    //    not use route options for argument pipe
     let optionsRoute;
-    if (this.sceneMeta.optionsRoute) {
+    if (!item.argumentPipe && this.sceneMeta.optionsRoute) {
       const route = ctx.route.route;
       optionsRoute = route.meta?.[item.fromConfig ? item.name : item.beanOptions.beanFullName];
     }
