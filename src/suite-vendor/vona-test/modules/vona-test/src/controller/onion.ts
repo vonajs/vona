@@ -44,9 +44,14 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
   @Post('echo4')
   @UseGuardGlobal('a-core:user', { public: true })
   async echo4(@Body(array(DtoUser)) users: DtoUser[]) {
-    const a = await this.bean.validator.validateSchema(array(DtoUser), {});
-
-    console.log(typeof users);
     return users;
+  }
+
+  @Get('echo5')
+  @UseGuardGlobal('a-core:user', { public: true })
+  async echo5(@Query('ids', array(Number, { separator: '-' })) ids: number[]) {
+    //const ctx = this.app.currentContext;
+    //console.log(ctx === this.ctx);
+    return ids;
   }
 }
