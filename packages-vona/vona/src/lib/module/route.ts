@@ -200,6 +200,7 @@ export class AppRouter extends BeanSimple {
 
     // fn
     const fn = (ctx, next) => {
+      throw new Error('not router');
       ctx.route = _route;
       return this._registerComposeMiddlewares(ctx)(ctx, next);
     };

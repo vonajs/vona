@@ -20,7 +20,7 @@ export interface ContextBase {
   tailDone(): Promise<any>;
   get tailCallbacks();
   getPayload(options?): Promise<any>;
-  getClass(): Constructable;
-  getHandler(): Function;
-  getClassBeanFullName(): string;
+  getClass(): Constructable | undefined;
+  getHandler(): Function | undefined;
+  getClassBeanFullName(): string | undefined;
 }

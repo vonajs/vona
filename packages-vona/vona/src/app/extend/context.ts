@@ -121,18 +121,20 @@ const context: ContextBase = {
 
   getClass() {
     const self = Cast<VonaContext>(this);
-    return self.route.controller;
+    return self.route?.controller;
   },
 
-  getClassBeanFullName(): string {
+  getClassBeanFullName(): string | undefined {
     const self = Cast<VonaContext>(this);
-    const beanOptions = appResource.getBean(self.getClass());
-    return beanOptions!.beanFullName;
+    const controller = self.getClass();
+    if (!controller) return undefined;
+    const beanOptions = appResource.getBean(controller);
+    return beanOptions?.beanFullName;
   },
 
   getHandler() {
     const self = Cast<VonaContext>(this);
-    return self.route.actionDescriptor?.value;
+    return self.route?.actionDescriptor?.value;
   },
 };
 export default context;
