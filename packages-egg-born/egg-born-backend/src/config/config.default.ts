@@ -305,10 +305,16 @@ export default function (appInfo: VonaAppInfo) {
 }
 
 function _composeFilters(app: VonaApplication) {
-  return app.meta.onionFilter.compose(app.ctx, (beanInstance: IFilterJson, options, next) => {
-    const filterContext: IFilterComposeContext = app.ctx[SymbolFilterComposeContext];
-    return beanInstance.json(filterContext.err, options, next);
-  });
+  return app.meta.onionFilter.compose(
+    app.ctx,
+    undefined,
+    undefined,
+    undefined,
+    (beanInstance: IFilterJson, options, next) => {
+      const filterContext: IFilterComposeContext = app.ctx[SymbolFilterComposeContext];
+      return beanInstance.json(filterContext.err, options, next);
+    },
+  );
 }
 
 function getFullPath(ctx, dir, filename, _options) {
