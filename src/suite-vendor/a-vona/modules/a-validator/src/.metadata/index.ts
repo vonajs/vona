@@ -29,19 +29,6 @@ declare module 'vona' {
   }
 }
 /** pipes: end */
-/** services: begin */
-export * from '../service/validator.js';
-import { ServiceValidator } from '../service/validator.js';
-export interface IModuleService {
-  validator: ServiceValidator;
-}
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-validator.service.validator': ServiceValidator;
-  }
-}
-/** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -60,7 +47,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAValidator extends BeanScopeBase {}
 
 export interface ScopeModuleAValidator
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
 
 import 'vona';
 declare module 'vona' {
