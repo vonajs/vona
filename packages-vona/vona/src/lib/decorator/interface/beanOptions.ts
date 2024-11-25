@@ -17,6 +17,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'guard'
   | 'interceptor'
   | 'pipe'
+  | 'filter'
   | 'connection'
   | 'packet'
   | TypeDecoratorBeanOptionsScene;

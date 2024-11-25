@@ -1,5 +1,6 @@
 export * from './broadcast.js';
 export * from './connection.js';
+export * from './filter.js';
 export * from './guard.js';
 export * from './interceptor.js';
 export * from './middleware.js';
