@@ -43,7 +43,7 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
 
   @Post('echo4')
   @UseGuardGlobal('a-core:user', { public: true })
-  @UseFilterGlobal('a-core:error', { enable: false })
+  @UseFilterGlobal('a-core:error', { enable: true })
   async echo4(@Body(array(DtoUser)) users: DtoUser[]) {
     return users;
   }
