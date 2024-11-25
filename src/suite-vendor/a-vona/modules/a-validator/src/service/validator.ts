@@ -43,7 +43,7 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     return data[path];
   }
 
-  async _validateSchema<T, V = T>(
+  private async _validateSchema<T, V = T>(
     schema: z.ZodSchema<T> | undefined,
     value: V,
     options?: Partial<ValidatorOptions>,
