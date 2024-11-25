@@ -13,6 +13,7 @@ const __boilerplates = {
   guard: 'guard',
   interceptor: 'interceptor',
   pipe: 'pipe',
+  filter: 'filter',
   connection: 'connection',
   packet: 'packet',
 };

@@ -4,8 +4,12 @@ export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
 export type IFilterRecord = IFilterRecordGlobal & IFilterRecordLocal;
 
-export interface IFilterExecute {
-  execute(options: IDecoratorFilterOptions, next: Next): Promise<any>;
+export interface IFilterJson {
+  json(err: Error, options: IDecoratorFilterOptions, next: Next): void;
+}
+
+export interface IFilterLog {
+  log(err: Error, options: IDecoratorFilterOptions, next: Next): void;
 }
 
 export interface IDecoratorFilterOptions {}

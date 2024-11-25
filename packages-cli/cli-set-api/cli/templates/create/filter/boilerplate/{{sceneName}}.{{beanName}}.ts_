@@ -1,0 +1,11 @@
+import { BeanBase, IDecoratorInterceptorOptions, IInterceptorExecute, Interceptor, Next } from 'vona';
+
+export interface IInterceptorOptions<%=argv.beanNameCapitalize%> extends IDecoratorInterceptorOptions {}
+
+@Interceptor<IInterceptorOptions<%=argv.beanNameCapitalize%>>()
+export class Interceptor<%=argv.beanNameCapitalize%> extends BeanBase implements IInterceptorExecute {
+  async execute(_options: IInterceptorOptions<%=argv.beanNameCapitalize%>, next: Next) {
+    // next
+    return next();
+  }
+}
