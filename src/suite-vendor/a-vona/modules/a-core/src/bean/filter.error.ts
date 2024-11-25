@@ -12,15 +12,17 @@ export class FilterError extends BeanBase implements IFilterJson {
     const status = this.app.meta.util.detectStatus(err);
 
     this.ctx.status = status;
-    const code = err.code;
+    const code = err.code ?? err.status;
     const message = this.app.meta.util.detectErrorMessage(err);
 
     // json error
     const errorJson = {
       code,
       message,
-      errors: Cast(err).errors,
     } as any;
+    if (Cast(err).errors) {
+      errorJson.errors = Cast(err).errors;
+    }
 
     if (status >= 500 && !this.app.meta.isProd) {
       // provide detail error stack in local env
