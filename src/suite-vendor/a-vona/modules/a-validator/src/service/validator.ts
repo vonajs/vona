@@ -3,7 +3,7 @@ import { ScopeModule } from '../.metadata/this.js';
 import { z } from 'zod';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { ValidatorOptions } from '../lib/types/validatorOptions.js';
-import { getSchema } from '../lib/zod/getSchema.js';
+import { schema } from '../lib/schema/schema.js';
 
 @Service()
 export class ServiceValidator extends BeanBase<ScopeModule> {
@@ -22,8 +22,8 @@ export class ServiceValidator extends BeanBase<ScopeModule> {
     //   this.app.throw(errorHttpStatusCode, this.scope.locale.ValidationFailedPipeValidationInvalidContent());
     // }
     // schema
-    const schema = getSchema(classType, options);
-    return await this.validateSchema(schema, value, options, path);
+    const _schema = schema(classType, options);
+    return await this.validateSchema(_schema, value, options, path);
   }
 
   async validateSchema<T, V = T>(

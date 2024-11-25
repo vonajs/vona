@@ -1,6 +1,6 @@
 import { BeanBase, Controller, Get, Post, UseGuardGlobal, UseMiddleware, UsePipeGlobal } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { array, Body, defaultValue, getSchema, Query, required, valid } from 'vona-module-a-validator';
+import { array, Body, defaultValue, Query, required, valid } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 
