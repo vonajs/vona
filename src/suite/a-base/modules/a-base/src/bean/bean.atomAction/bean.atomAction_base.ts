@@ -58,7 +58,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
     // is number
     if (!isNaN(action)) return parseInt(action);
     // add role right
-    const actionCode = this.ctx.constant.module('a-base').atom.action[action];
+    const actionCode = this.scope.constant.atom.action[action];
     if (actionCode) return actionCode;
     // atomClass
     if (!atomClass) throw new Error(`should specify the atomClass of action: ${action}`);

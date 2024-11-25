@@ -64,7 +64,7 @@ export class VersionInit extends BeanBase {
   async _testRoles() {
     const roleIds: any = {};
     // system roles
-    for (const roleName of this.ctx.constant.module('a-base').systemRoles) {
+    for (const roleName of this.$scope.base.constant.systemRoles) {
       const role = await this.app.bean.role.getSystemRole({ roleName });
       roleIds[roleName] = role!.id;
     }
