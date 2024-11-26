@@ -76,6 +76,8 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateOnions('connection', moduleName, modulePath);
     // packets
     content += await generateOnions('packet', moduleName, modulePath);
+    // aops
+    content += await generateOnions('aop', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // controllers

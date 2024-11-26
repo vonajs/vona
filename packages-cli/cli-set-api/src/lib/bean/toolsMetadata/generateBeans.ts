@@ -14,6 +14,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
       '**/filter.*.ts',
       '**/connection.*.ts',
       '**/packet.*.ts',
+      '**/aop.*.ts',
     ],
   });
   if (files.length === 0) return '';

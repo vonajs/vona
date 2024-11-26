@@ -46,4 +46,7 @@ export const onionScenesMeta: OnionScenesMeta = {
   packet: {
     optionsGlobalInterfaceName: 'IDecoratorPacketOptions',
   },
+  aop: {
+    optionsGlobalInterfaceName: 'IDecoratorAopOptions',
+  },
 };

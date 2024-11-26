@@ -68,7 +68,7 @@ export interface I${sceneNameCapitalize}RecordLocal {
   const content = `/** ${sceneName}s: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-${needImportOptionsGlobalInterface ? "import { IDecoratorGuardOptionsGlobal } from 'vona';" : "import 'vona';"}
+${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from 'vona';` : "import 'vona';"}
 declare module 'vona' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
