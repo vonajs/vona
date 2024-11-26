@@ -25,4 +25,5 @@ declare module 'vona' {
     'cms-pluginsocialshare': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

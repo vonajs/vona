@@ -29,4 +29,8 @@ declare module 'vona' {
     'a-basefront': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-basefront:${K}` {
+  return `a-basefront:${key}`;
+}
 /** scope: end */

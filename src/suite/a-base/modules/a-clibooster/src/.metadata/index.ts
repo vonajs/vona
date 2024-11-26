@@ -131,4 +131,8 @@ declare module 'vona' {
     'a-clibooster': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-clibooster:${K}` {
+  return `a-clibooster:${key}`;
+}
 /** scope: end */

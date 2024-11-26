@@ -24,4 +24,5 @@ declare module 'vona' {
     'cms-themeaws': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

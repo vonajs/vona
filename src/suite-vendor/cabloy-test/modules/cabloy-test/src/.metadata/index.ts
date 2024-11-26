@@ -16,4 +16,5 @@ declare module 'vona' {
     cabloyTest: ScopeModuleCabloyTest;
   }
 }
+
 /** scope: end */

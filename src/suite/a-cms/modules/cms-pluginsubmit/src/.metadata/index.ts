@@ -50,4 +50,5 @@ declare module 'vona' {
     'cms-pluginsubmit': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

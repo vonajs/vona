@@ -40,4 +40,8 @@ declare module 'vona' {
     'cms-plugincopyright': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `cms-plugincopyright:${K}` {
+  return `cms-plugincopyright:${key}`;
+}
 /** scope: end */

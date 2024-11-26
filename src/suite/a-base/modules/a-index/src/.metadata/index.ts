@@ -36,4 +36,5 @@ declare module 'vona' {
     'a-index': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

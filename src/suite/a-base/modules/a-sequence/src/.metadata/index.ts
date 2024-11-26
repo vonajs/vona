@@ -54,4 +54,5 @@ declare module 'vona' {
     sequence: ScopeModuleASequence;
   }
 }
+
 /** scope: end */

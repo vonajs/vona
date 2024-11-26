@@ -3,7 +3,6 @@ export * from '../bean/bean.cli.js';
 export * from '../bean/bean.cliBase_.js';
 export * from '../bean/version.manager.js';
 import { BeanCli } from '../bean/bean.cli.js';
-import { BeanCliBase } from '../bean/bean.cliBase_.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -12,7 +11,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    cliBase: BeanCliBase;
     'a-cli.version.manager': VersionManager;
   }
 }
@@ -83,5 +81,9 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-cli': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-cli:${K}` {
+  return `a-cli:${key}`;
 }
 /** scope: end */

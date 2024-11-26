@@ -22,4 +22,5 @@ declare module 'vona' {
     testPartymonkey: ScopeModuleTestPartymonkey;
   }
 }
+
 /** scope: end */

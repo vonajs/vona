@@ -61,4 +61,5 @@ declare module 'vona' {
     'a-cache': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

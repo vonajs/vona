@@ -29,4 +29,8 @@ declare module 'vona' {
     'a-themebrilliant': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-themebrilliant:${K}` {
+  return `a-themebrilliant:${key}`;
+}
 /** scope: end */

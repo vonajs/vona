@@ -75,4 +75,5 @@ declare module 'vona' {
     'a-summer': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

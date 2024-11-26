@@ -108,4 +108,8 @@ declare module 'vona' {
     'a-authsms': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-authsms:${K}` {
+  return `a-authsms:${key}`;
+}
 /** scope: end */

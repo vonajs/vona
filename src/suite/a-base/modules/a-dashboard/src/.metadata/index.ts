@@ -82,4 +82,8 @@ declare module 'vona' {
     'a-dashboard': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-dashboard:${K}` {
+  return `a-dashboard:${key}`;
+}
 /** scope: end */

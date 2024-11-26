@@ -16,4 +16,5 @@ declare module 'vona' {
     vona: ScopeModuleAVona;
   }
 }
+
 /** scope: end */

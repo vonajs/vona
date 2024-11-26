@@ -48,4 +48,8 @@ declare module 'vona' {
     'a-captchasimple': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-captchasimple:${K}` {
+  return `a-captchasimple:${key}`;
+}
 /** scope: end */

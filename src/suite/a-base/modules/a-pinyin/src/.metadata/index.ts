@@ -32,4 +32,5 @@ declare module 'vona' {
     pinyin: ScopeModuleAPinyin;
   }
 }
+
 /** scope: end */

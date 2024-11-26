@@ -37,4 +37,5 @@ declare module 'vona' {
     flowchart: ScopeModuleAFlowchart;
   }
 }
+
 /** scope: end */

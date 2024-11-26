@@ -73,4 +73,8 @@ declare module 'vona' {
     'test-flow': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `test-flow:${K}` {
+  return `test-flow:${key}`;
+}
 /** scope: end */

@@ -16,4 +16,5 @@ declare module 'vona' {
     swagger: ScopeModuleASwagger;
   }
 }
+
 /** scope: end */

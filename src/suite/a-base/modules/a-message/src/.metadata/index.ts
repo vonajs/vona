@@ -3,7 +3,6 @@ export * from '../bean/bean.ioMessageUniformBase_.js';
 export * from '../bean/bean.message.js';
 export * from '../bean/stats.message.js';
 export * from '../bean/version.manager.js';
-import { BeanIoMessageUniformBase } from '../bean/bean.ioMessageUniformBase_.js';
 import { BeanMessage } from '../bean/bean.message.js';
 import { StatsMessage } from '../bean/stats.message.js';
 import { VersionManager } from '../bean/version.manager.js';
@@ -14,7 +13,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    ioMessageUniformBase: BeanIoMessageUniformBase;
     'a-message.stats.message': StatsMessage;
     'a-message.version.manager': VersionManager;
   }
@@ -74,5 +72,9 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-message': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-message:${K}` {
+  return `a-message:${key}`;
 }
 /** scope: end */

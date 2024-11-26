@@ -28,4 +28,5 @@ declare module 'vona' {
     event: ScopeModuleAEvent;
   }
 }
+
 /** scope: end */

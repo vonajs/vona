@@ -29,4 +29,8 @@ declare module 'vona' {
     'cms-pluginsidebar': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `cms-pluginsidebar:${K}` {
+  return `cms-pluginsidebar:${key}`;
+}
 /** scope: end */

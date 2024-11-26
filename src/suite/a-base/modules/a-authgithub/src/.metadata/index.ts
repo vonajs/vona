@@ -52,4 +52,8 @@ declare module 'vona' {
     'a-authgithub': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-authgithub:${K}` {
+  return `a-authgithub:${key}`;
+}
 /** scope: end */

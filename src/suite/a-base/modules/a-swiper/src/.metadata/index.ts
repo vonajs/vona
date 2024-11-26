@@ -28,4 +28,5 @@ declare module 'vona' {
     swiper: ScopeModuleASwiper;
   }
 }
+
 /** scope: end */

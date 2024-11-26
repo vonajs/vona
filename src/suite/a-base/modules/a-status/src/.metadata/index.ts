@@ -59,4 +59,5 @@ declare module 'vona' {
     status: ScopeModuleAStatus;
   }
 }
+
 /** scope: end */

@@ -32,4 +32,5 @@ declare module 'vona' {
     login: ScopeModuleALogin;
   }
 }
+
 /** scope: end */

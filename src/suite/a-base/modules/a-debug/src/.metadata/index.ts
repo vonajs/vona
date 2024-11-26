@@ -32,4 +32,5 @@ declare module 'vona' {
     debug: ScopeModuleADebug;
   }
 }
+
 /** scope: end */

@@ -67,4 +67,5 @@ declare module 'vona' {
     share: ScopeModuleAShare;
   }
 }
+
 /** scope: end */

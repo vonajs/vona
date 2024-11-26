@@ -16,4 +16,5 @@ declare module 'vona' {
     homeBase: ScopeModuleHomeBase;
   }
 }
+
 /** scope: end */

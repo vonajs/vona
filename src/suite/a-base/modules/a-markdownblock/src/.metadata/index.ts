@@ -41,4 +41,8 @@ declare module 'vona' {
     'a-markdownblock': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-markdownblock:${K}` {
+  return `a-markdownblock:${key}`;
+}
 /** scope: end */

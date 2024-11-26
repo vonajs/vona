@@ -10,7 +10,6 @@ export * from '../bean/virtual.databaseDialect.js';
 import { BeanDatabase } from '../bean/bean.database.js';
 import { BeanDatabaseClient } from '../bean/bean.databaseClient.js';
 import { BeanModel } from '../bean/bean.model.js';
-import { BeanModelBase } from '../bean/bean.modelBase_.js';
 import { DatabaseDialectMysql } from '../bean/database.dialect.mysql.js';
 import { DatabaseDialectMysql2 } from '../bean/database.dialect.mysql2.js';
 import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
@@ -24,7 +23,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    modelBase: BeanModelBase;
     'a-database.database.dialect.mysql': DatabaseDialectMysql;
     'a-database.database.dialect.mysql2': DatabaseDialectMysql2;
     'a-database.database.dialect.pg': DatabaseDialectPg;
@@ -99,5 +97,9 @@ declare module 'vona' {
   export interface IBeanScopeLocale {
     'a-database': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-database:${K}` {
+  return `a-database:${key}`;
 }
 /** scope: end */

@@ -80,4 +80,8 @@ declare module 'vona' {
     'a-progress': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-progress:${K}` {
+  return `a-progress:${key}`;
+}
 /** scope: end */

@@ -124,4 +124,8 @@ declare module 'vona' {
     'a-cms': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-cms:${K}` {
+  return `a-cms:${key}`;
+}
 /** scope: end */

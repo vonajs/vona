@@ -25,4 +25,5 @@ declare module 'vona' {
     'cms-plugintrack': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

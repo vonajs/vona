@@ -28,4 +28,5 @@ declare module 'vona' {
     codemirror: ScopeModuleACodemirror;
   }
 }
+
 /** scope: end */

@@ -101,4 +101,8 @@ declare module 'vona' {
     'a-mail': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-mail:${K}` {
+  return `a-mail:${key}`;
+}
 /** scope: end */

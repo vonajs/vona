@@ -100,4 +100,8 @@ declare module 'vona' {
     'a-authsimple': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-authsimple:${K}` {
+  return `a-authsimple:${key}`;
+}
 /** scope: end */

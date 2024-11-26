@@ -86,4 +86,8 @@ declare module 'vona' {
     'a-baseadmin': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-baseadmin:${K}` {
+  return `a-baseadmin:${key}`;
+}
 /** scope: end */

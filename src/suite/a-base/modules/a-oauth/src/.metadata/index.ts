@@ -44,4 +44,5 @@ declare module 'vona' {
     oauth: ScopeModuleAOauth;
   }
 }
+
 /** scope: end */

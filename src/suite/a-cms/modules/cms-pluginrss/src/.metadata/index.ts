@@ -24,4 +24,5 @@ declare module 'vona' {
     'cms-pluginrss': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

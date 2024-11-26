@@ -16,4 +16,5 @@ declare module 'vona' {
     cabloy: ScopeModuleACabloy;
   }
 }
+
 /** scope: end */

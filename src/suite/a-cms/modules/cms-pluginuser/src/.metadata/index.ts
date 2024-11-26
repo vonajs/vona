@@ -37,4 +37,8 @@ declare module 'vona' {
     'cms-pluginuser': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `cms-pluginuser:${K}` {
+  return `cms-pluginuser:${key}`;
+}
 /** scope: end */

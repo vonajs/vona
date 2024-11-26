@@ -25,4 +25,5 @@ declare module 'vona' {
     'cms-pluginbacktotop': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

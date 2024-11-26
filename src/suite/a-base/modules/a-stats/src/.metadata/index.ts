@@ -76,4 +76,5 @@ declare module 'vona' {
     'a-stats': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */

@@ -29,4 +29,8 @@ declare module 'vona' {
     'a-themehyacinth': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-themehyacinth:${K}` {
+  return `a-themehyacinth:${key}`;
+}
 /** scope: end */

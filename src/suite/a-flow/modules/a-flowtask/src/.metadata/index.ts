@@ -125,4 +125,8 @@ declare module 'vona' {
     'a-flowtask': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-flowtask:${K}` {
+  return `a-flowtask:${key}`;
+}
 /** scope: end */

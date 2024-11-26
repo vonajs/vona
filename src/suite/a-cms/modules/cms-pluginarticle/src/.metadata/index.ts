@@ -16,4 +16,5 @@ declare module 'vona' {
     cmsPluginarticle: ScopeModuleCmsPluginarticle;
   }
 }
+
 /** scope: end */

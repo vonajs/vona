@@ -17,4 +17,5 @@ declare module 'vona' {
     cmsPluginmarkdowngithub: ScopeModuleCmsPluginmarkdowngithub;
   }
 }
+
 /** scope: end */

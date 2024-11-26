@@ -52,4 +52,8 @@ declare module 'vona' {
     'cms-sitecommunity': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `cms-sitecommunity:${K}` {
+  return `cms-sitecommunity:${key}`;
+}
 /** scope: end */

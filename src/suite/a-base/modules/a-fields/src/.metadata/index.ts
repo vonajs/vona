@@ -59,4 +59,8 @@ declare module 'vona' {
     'a-fields': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-fields:${K}` {
+  return `a-fields:${key}`;
+}
 /** scope: end */

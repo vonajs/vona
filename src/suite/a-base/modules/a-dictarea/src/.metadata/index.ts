@@ -41,4 +41,8 @@ declare module 'vona' {
     'a-dictarea': (typeof locales)[TypeLocaleBase];
   }
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-dictarea:${K}` {
+  return `a-dictarea:${key}`;
+}
 /** scope: end */
