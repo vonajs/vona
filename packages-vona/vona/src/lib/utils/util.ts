@@ -9,7 +9,7 @@ import { VonaContext, Cast, IModule, PowerPartial, TypeMonkeyName, IModuleInfo, 
 import { BeanSimple } from '../bean/beanSimple.js';
 import { ILocalInfos, IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
-import { compose, composeAsync } from '@cabloy/compose';
+import { compose as _compose, composeAsync as _composeAsync } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
 
 const __EnvTests = ['unittest', 'test'];
@@ -187,18 +187,6 @@ export class AppUtil extends BeanSimple {
       return true;
     }
     return false;
-  }
-
-  isNullOrEmptyString(str?: string | undefined | null): boolean {
-    return str === undefined || str === null || str === '';
-  }
-
-  compose(chains, adapter) {
-    return compose(chains, adapter);
-  }
-
-  composeAsync(chains, adapter) {
-    return composeAsync(chains, adapter);
   }
 
   async runInAnonymousContextScope<T>(
@@ -405,18 +393,6 @@ export class AppUtil extends BeanSimple {
     }
   }
 
-  subdomainDesp(subdomain) {
-    if (subdomain === undefined || subdomain === null) return '~';
-    return subdomain || '-';
-  }
-
-  deprecated(oldUsage, newUsage) {
-    const message = '`'
-      .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
-      .concat(newUsage, '` instead');
-    return console.warn(message);
-  }
-
   checkGate(gate?: IModuleMiddlewareGate) {
     // check none
     if (!gate) return true;
@@ -437,29 +413,6 @@ export class AppUtil extends BeanSimple {
     });
     if (!bingo) return false;
     return true;
-  }
-
-  requireDynamic(file) {
-    if (!file) throw new Error('file should not empty');
-    let instance = require(file);
-    const mtime = this._requireDynamic_getFileTime(file);
-    if (instance.__requireDynamic_mtime === undefined) {
-      instance.__requireDynamic_mtime = mtime;
-    } else if (instance.__requireDynamic_mtime !== mtime) {
-      delete require.cache[require.resolve(file)];
-      instance = require(file);
-      instance.__requireDynamic_mtime = mtime;
-    }
-    return instance;
-  }
-
-  private _requireDynamic_getFileTime(file) {
-    if (!path.isAbsolute(file)) return null;
-    const exists = fse.pathExistsSync(file);
-    if (!exists) return null;
-    // stat
-    const stat = fse.statSync(file);
-    return stat.mtime.valueOf();
   }
 
   detectErrorMessage(err: Error) {
@@ -490,6 +443,53 @@ export class AppUtil extends BeanSimple {
     if (this.ctx.acceptJSONP) return 'js';
     return 'html';
   }
+}
+
+export function isNilOrEmptyString(str?: string | undefined | null): str is null | undefined | '' {
+  return str === undefined || str === null || str === '';
+}
+
+export function compose(chains, adapter) {
+  return _compose(chains, adapter);
+}
+
+export function composeAsync(chains, adapter) {
+  return _composeAsync(chains, adapter);
+}
+
+export function subdomainDesp(subdomain) {
+  if (subdomain === undefined || subdomain === null) return '~';
+  return subdomain || '-';
+}
+
+export function deprecated(oldUsage, newUsage) {
+  const message = '`'
+    .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
+    .concat(newUsage, '` instead');
+  return console.warn(message);
+}
+
+export function requireDynamic(file: string) {
+  if (!file) throw new Error('file should not empty');
+  let instance = require(file);
+  const mtime = _requireDynamic_getFileTime(file);
+  if (instance.__requireDynamic_mtime === undefined) {
+    instance.__requireDynamic_mtime = mtime;
+  } else if (instance.__requireDynamic_mtime !== mtime) {
+    delete require.cache[require.resolve(file)];
+    instance = require(file);
+    instance.__requireDynamic_mtime = mtime;
+  }
+  return instance;
+}
+
+function _requireDynamic_getFileTime(file) {
+  if (!path.isAbsolute(file)) return null;
+  const exists = fse.pathExistsSync(file);
+  if (!exists) return null;
+  // stat
+  const stat = fse.statSync(file);
+  return stat.mtime.valueOf();
 }
 
 export function deepExtend<T = any>(...args): T {
