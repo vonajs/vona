@@ -4,7 +4,7 @@ import { IInterceptorRecord } from '../interface/interceptor.js';
 import { IMiddlewareRecord } from '../interface/middleware.js';
 import { IPacketRecord } from '../interface/packet.js';
 import { IPipeRecord } from '../interface/pipe.js';
-import { OmitNever } from '../utils/removeNever.js';
+import { OmitNever } from '../utils/omitNever.js';
 
 export interface ConfigMetadata {
   middleware: OmitNever<IMiddlewareRecord>;
