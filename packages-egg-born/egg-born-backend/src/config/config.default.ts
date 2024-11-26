@@ -288,6 +288,10 @@ export default function (appInfo: VonaAppInfo) {
       ctx[SymbolFilterComposeContext] = { err, method: 'json' };
       _composeFilters(ctx.app)(ctx);
     },
+    html(err: Error, ctx: VonaContext) {
+      ctx[SymbolFilterComposeContext] = { err, method: 'html' };
+      _composeFilters(ctx.app)(ctx);
+    },
   };
 
   return config;

@@ -28,7 +28,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "templates"
   ],
   "scripts": {},
   "dependencies": {
