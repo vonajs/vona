@@ -1,5 +1,5 @@
-import { appResource } from '../../../index.js';
-import { Constructable, IDecoratorAopOptions } from '../index.js';
+import { appResource, IDecoratorAopOptions } from '../../../index.js';
+import { Constructable } from '../index.js';
 import { parseModuleName } from './util.js';
 
 export function Aop(options: IDecoratorAopOptions): ClassDecorator {

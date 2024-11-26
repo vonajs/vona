@@ -6,7 +6,6 @@ import { __ThisSetName__ } from '../this.js';
 
 const __decorators = {
   virtual: 'Virtual',
-  aop: 'Aop',
 };
 const __boilerplates = {
   middleware: 'middleware',
@@ -16,6 +15,7 @@ const __boilerplates = {
   filter: 'filter',
   connection: 'connection',
   packet: 'packet',
+  aop: 'aop',
 };
 
 declare module '@cabloy/cli' {
@@ -57,9 +57,7 @@ export class CliCreateBean extends BeanCliBase {
     // decoratorName
     argv.decoratorName = __decorators[sceneName] || 'Bean';
     // beanOptions
-    if (sceneName === 'aop') {
-      argv.beanOptions = "{ match: 'some-bean-name' }";
-    } else if (sceneName === 'bean') {
+    if (sceneName === 'bean') {
       argv.beanOptions = '';
     } else {
       argv.beanOptions = `{ scene: '${sceneName}' }`;

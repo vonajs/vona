@@ -1,3 +1,4 @@
+export * from './aop.js';
 export * from './broadcast.js';
 export * from './connection.js';
 export * from './filter.js';

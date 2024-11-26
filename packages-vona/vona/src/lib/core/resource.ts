@@ -1,14 +1,11 @@
 import is from 'is-type-of';
-import {
-  Constructable,
-  IDecoratorAopOptions,
-  IDecoratorBeanOptionsBase,
-  IDecoratorUseOptionsBase,
-} from '../decorator/index.js';
+import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { isClass } from '../utils/isClass.js';
+import { IDecoratorAopOptions } from '../../types/interface/aop.js';
+import { Cast } from '../../types/utils/cast.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
@@ -56,7 +53,7 @@ export class AppResource extends BeanSimple {
       // // check if match aop
       // if (beanOptions.aop && !aop.matchAop) continue;
       // gate
-      if (!this.app.meta.util.checkGate(aopOptions.gate)) continue;
+      if (!this.app.meta.util.checkGate(Cast(aopOptions).gate)) continue;
       // match
       if (__aopMatch(aopOptions.match, beanOptions.beanFullName)) {
         aopsMatched.push(aop.beanFullName);

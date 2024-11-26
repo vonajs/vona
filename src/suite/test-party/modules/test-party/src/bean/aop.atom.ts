@@ -1,7 +1,7 @@
 import { Aop, BeanBase } from 'vona';
 import assert from 'assert';
 
-@Aop({ match: 'atom', gate: { env: 'unittest' } })
+@Aop({ match: 'atom', meta: { mode: 'unittest' } })
 export class AopAtom extends BeanBase {
   async create(context, next) {
     await next();

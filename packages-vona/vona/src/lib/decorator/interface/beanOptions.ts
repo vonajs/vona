@@ -1,4 +1,3 @@
-import { IModuleMiddlewareGate } from '../../bean/index.js';
 import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 // import { ContainerScope } from '../index.js';
@@ -85,12 +84,6 @@ export interface IDecoratorAtomOptions {}
 
 export interface IDecoratorControllerOptions {
   path?: string;
-}
-
-type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
-export interface IDecoratorAopOptions {
-  match: TypeDecoratorAopOptionsMatch;
-  gate?: IModuleMiddlewareGate;
 }
 
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
