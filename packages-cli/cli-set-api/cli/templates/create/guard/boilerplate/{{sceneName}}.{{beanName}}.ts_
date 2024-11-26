@@ -4,7 +4,7 @@ export interface IGuardOptions<%=argv.beanNameCapitalize%> extends IDecoratorGua
 
 @Guard<IGuardOptions<%=argv.beanNameCapitalize%>>()
 export class Guard<%=argv.beanNameCapitalize%> extends BeanBase implements IGuardExecute {
-  async execute(_options: IGuardOptions<%=argv.beanNameCapitalize%>, next: Next) {
+  async execute(_options: IGuardOptions<%=argv.beanNameCapitalize%>, next: Next): Promise<boolean> {
     // next
     return next();
   }

@@ -6,8 +6,7 @@ export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {}
 export class FilterError extends BeanBase implements IFilterJson {
   json(err: Error, _options: IFilterOptionsError, next: NextSync): boolean {
     // next
-    const res = next();
-    if (res === false) return false;
+    if (next() === true) return true;
 
     const status = this.app.meta.util.detectStatus(err);
 
