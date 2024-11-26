@@ -29,12 +29,25 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
     if (isIgnore) continue;
     const fileInfo = _extractInfo(sceneName, file, sceneMeta);
-    if (!fileInfo.hasInterface) continue;
-    contentImports.push(`import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '../bean/${fileNameJS}';`);
+    // import options
+    if (fileInfo.hasOptionsInterface) {
+      contentImports.push(
+        `import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '../bean/${fileNameJS}';`,
+      );
+    }
+    // record
     if (fileInfo.isGlobal) {
-      contentRecordsGlobal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
+      if (fileInfo.hasOptionsInterface) {
+        contentRecordsGlobal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
+      } else {
+        contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
+      }
     } else {
-      contentRecordsLocal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
+      if (fileInfo.hasOptionsInterface) {
+        contentRecordsLocal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
+      } else {
+        contentRecordsLocal.push(`'${beanNameFull}': never;`);
+      }
     }
   }
   // middlewareGlobal
@@ -66,9 +79,9 @@ declare module 'vona' {
 function _extractInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const content = fse.readFileSync(file).toString();
-  const hasInterface = content.includes(`I${sceneNameCapitalize}Options`);
+  const hasOptionsInterface = content.includes(`I${sceneNameCapitalize}Options`);
   const isGlobal = sceneMeta.hasLocal
     ? content.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/)
     : true;
-  return { hasInterface, isGlobal };
+  return { hasOptionsInterface, isGlobal };
 }

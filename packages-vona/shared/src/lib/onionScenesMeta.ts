@@ -3,6 +3,7 @@ export interface OnionSceneMeta {
   optionsRoute?: boolean;
   optionsArgumentPipe?: boolean;
   optionsDynamic?: boolean;
+  optionsGlobalInterfaceName?: string;
 }
 
 export type OnionScenesMeta = Record<string, OnionSceneMeta>;
@@ -12,28 +13,37 @@ export const onionScenesMeta: OnionScenesMeta = {
     hasLocal: true,
     optionsRoute: true,
     optionsDynamic: true,
+    optionsGlobalInterfaceName: 'IDecoratorMiddlewareOptionsGlobal',
   },
   guard: {
     hasLocal: true,
     optionsRoute: true,
     optionsDynamic: true,
+    optionsGlobalInterfaceName: 'IDecoratorGuardOptionsGlobal',
   },
   interceptor: {
     hasLocal: true,
     optionsRoute: true,
     optionsDynamic: true,
+    optionsGlobalInterfaceName: 'IDecoratorInterceptorOptionsGlobal',
   },
   pipe: {
     hasLocal: true,
     optionsRoute: true,
     optionsArgumentPipe: true,
     optionsDynamic: true,
+    optionsGlobalInterfaceName: 'IDecoratorPipeOptionsGlobal',
   },
   filter: {
     hasLocal: true,
     optionsRoute: true,
     optionsDynamic: true,
+    optionsGlobalInterfaceName: 'IDecoratorFilterOptionsGlobal',
   },
-  connection: {},
-  packet: {},
+  connection: {
+    optionsGlobalInterfaceName: 'IDecoratorConnectionOptions',
+  },
+  packet: {
+    optionsGlobalInterfaceName: 'IDecoratorPacketOptions',
+  },
 };
