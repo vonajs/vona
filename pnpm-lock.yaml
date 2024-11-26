@@ -1214,6 +1214,9 @@ importers:
       assert:
         specifier: ^2.1.0
         version: 2.1.0
+      egg-onerror:
+        specifier: ^2.4.0
+        version: 2.4.0
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:

@@ -4,12 +4,16 @@ export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
 export type IFilterRecord = IFilterRecordGlobal & IFilterRecordLocal;
 
+export interface IFilterLog {
+  log(err: Error, options: IDecoratorFilterOptions, next: NextSync): boolean;
+}
+
 export interface IFilterJson {
   json(err: Error, options: IDecoratorFilterOptions, next: NextSync): boolean;
 }
 
-export interface IFilterLog {
-  log(err: Error, options: IDecoratorFilterOptions, next: NextSync): boolean;
+export interface IFilterHtml {
+  html(err: Error, options: IDecoratorFilterOptions, next: NextSync): boolean;
 }
 
 export interface IDecoratorFilterOptions {}
