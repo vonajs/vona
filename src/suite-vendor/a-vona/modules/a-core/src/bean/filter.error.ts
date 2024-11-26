@@ -1,17 +1,10 @@
-import {
-  BeanBase,
-  Cast,
-  Filter,
-  IDecoratorFilterOptions,
-  IDecoratorFilterOptionsGlobal,
-  IFilterJson,
-  IFilterLog,
-  NextSync,
-} from 'vona';
+import { BeanBase, Cast, Filter, IDecoratorFilterOptionsGlobal, IFilterJson, IFilterLog, NextSync } from 'vona';
 
-export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {}
+export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
+  logs: Record<number | string, boolean>;
+}
 
-@Filter<IFilterOptionsError>({ global: true })
+@Filter<IFilterOptionsError>({ global: true, logs: {} })
 export class FilterError extends BeanBase implements IFilterJson, IFilterLog {
   json(err: Error, _options: IFilterOptionsError, next: NextSync): boolean {
     // next
@@ -49,7 +42,7 @@ export class FilterError extends BeanBase implements IFilterJson, IFilterLog {
     return true;
   }
 
-  log(err: Error, _options: IFilterOptionsError, next: NextSync): boolean {
+  log(err: Error, options: IFilterOptionsError, next: NextSync): boolean {
     // next
     if (next() === true) return true;
 
@@ -64,10 +57,12 @@ export class FilterError extends BeanBase implements IFilterJson, IFilterLog {
     }
 
     // todo: use new log engine
-    if (typeof err.message !== 'string') {
-      console.error(err.message);
+    if (options.logs[err.code!] !== false) {
+      if (typeof err.message !== 'string') {
+        console.error(err.message);
+      }
+      console.error(err);
     }
-    console.error(err);
 
     // handled
     return true;
