@@ -7,12 +7,11 @@ export function Aop(options: IDecoratorAopOptions): ClassDecorator {
     // module
     const module = parseModuleName();
     // add
-    appResource.addAop({
+    appResource.addBean({
       module,
       scene: 'aop',
       name: undefined,
       beanClass: target as unknown as Constructable,
-      aop: true,
       options,
     });
   };

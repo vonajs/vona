@@ -68,6 +68,7 @@ export class AppMeta extends BeanSimple {
   onionFilter: Onion;
   onionConnection: Onion;
   onionPacket: Onion;
+  onionAop: Onion;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;

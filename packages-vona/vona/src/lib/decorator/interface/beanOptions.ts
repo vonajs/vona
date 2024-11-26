@@ -61,7 +61,6 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   name: string;
   beanClass: Constructable<T>;
   // containerScope?: ContainerScope;
-  aop: boolean | undefined;
   virtual?: boolean;
   moduleBelong?: string;
   options?: unknown;
