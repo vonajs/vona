@@ -3,7 +3,6 @@ import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
-import { generateSocket } from './toolsMetadata/generateSocket.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
@@ -74,9 +73,9 @@ export class CliToolsMetadata extends BeanCliBase {
     // filters
     content += await generateOnions('filter', moduleName, modulePath);
     // connections
-    content += await generateSocket('connection', moduleName, modulePath);
+    content += await generateOnions('connection', moduleName, modulePath);
     // packets
-    content += await generateSocket('packet', moduleName, modulePath);
+    content += await generateOnions('packet', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // controllers

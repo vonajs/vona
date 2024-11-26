@@ -3,7 +3,7 @@ import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { onionScenesMeta } from 'vona-shared';
+import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
 
 export async function generateOnions(sceneName: string, moduleName: string, modulePath: string) {
   const sceneMeta = onionScenesMeta[sceneName];
@@ -28,7 +28,7 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     const beanNameFull = `${moduleName}:${beanName}`;
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
     if (isIgnore) continue;
-    const fileInfo = _extractInfo(sceneName, file);
+    const fileInfo = _extractInfo(sceneName, file, sceneMeta);
     if (!fileInfo.hasInterface) continue;
     contentImports.push(`import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '../bean/${fileNameJS}';`);
     if (fileInfo.isGlobal) {
@@ -39,7 +39,7 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
   }
   // middlewareGlobal
   const exportRecordsMiddlewareGlobal = `
-    export interface I${sceneNameCapitalize}RecordGlobal {
+    export interface I${sceneNameCapitalize}Record${sceneMeta.hasLocal ? 'Global' : ''} {
       ${contentRecordsGlobal.join('\n')}
     }
 `;
@@ -63,10 +63,12 @@ declare module 'vona' {
   return content;
 }
 
-function _extractInfo(sceneName: string, file: string) {
+function _extractInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const content = fse.readFileSync(file).toString();
   const hasInterface = content.includes(`I${sceneNameCapitalize}Options`);
-  const isGlobal = content.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/);
+  const isGlobal = sceneMeta.hasLocal
+    ? content.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/)
+    : true;
   return { hasInterface, isGlobal };
 }
