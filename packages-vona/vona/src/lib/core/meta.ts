@@ -74,7 +74,7 @@ export class AppMeta extends BeanSimple {
   schedules: Record<string, any>;
   //
   appReady: boolean;
-  appReadyInstances: Record<string, any>;
+  appReadyInstances: Record<string, boolean>;
   //
   __versionReady: boolean;
   __versionReadyError: Error;

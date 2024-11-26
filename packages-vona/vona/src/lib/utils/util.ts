@@ -24,7 +24,7 @@ export interface IExecuteBeanCallback {
 }
 
 export class AppUtil extends BeanSimple {
-  instanceStarted(subdomain) {
+  instanceStarted(subdomain: string): boolean {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
@@ -51,34 +51,6 @@ export class AppUtil extends BeanSimple {
     if (!simplify || !path.startsWith(parts[1])) res = `${res}/${parts[1]}`;
     if (path) res = `${res}/${path}`;
     return res;
-  }
-
-  combineApiPath(moduleName, arg) {
-    if (arg.charAt(0) === '/') return arg;
-    const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
-    if (!moduleInfo) throw new Error('invalid url');
-    return `/${moduleInfo.url}/${arg}`;
-  }
-
-  combineQueries(url, queries) {
-    //
-    if (!queries) return url;
-    //
-    let str = '';
-    for (const key of Object.keys(queries)) {
-      str += `${key}=${encodeURIComponent(queries[key])}&`;
-    }
-    if (str) {
-      str = str.substr(0, str.length - 1);
-    }
-    if (!str) return url;
-    //
-    if (!url) return '?' + str;
-    //
-    const pos = url.indexOf('?');
-    if (pos === -1) return `${url}?${str}`;
-    if (pos === url.length - 1) return `${url}${str}`;
-    return `${url}&${str}`;
   }
 
   createError(data, returnObject?: boolean) {
@@ -354,7 +326,7 @@ export class AppUtil extends BeanSimple {
     redlock?: Redlock;
   }) {
     // resource
-    const _lockResource = `redlock_${this.app.name}:${this.subdomainDesp(subdomain)}:${resource}`;
+    const _lockResource = `redlock_${this.app.name}:${subdomainDesp(subdomain)}:${resource}`;
     // options
     const _lockOptions = Object.assign({}, this.app.config.queue.redlock.options, options);
     // redlock
@@ -443,6 +415,34 @@ export class AppUtil extends BeanSimple {
     if (this.ctx.acceptJSONP) return 'js';
     return 'html';
   }
+}
+
+export function combineApiPath(moduleName: IModuleInfo | string, arg: string) {
+  if (arg.charAt(0) === '/') return arg;
+  const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
+  if (!moduleInfo) throw new Error('invalid url');
+  return `/${moduleInfo.url}/${arg}`;
+}
+
+export function combineQueries(url: string, queries: object): string {
+  //
+  if (!queries) return url;
+  //
+  let str = '';
+  for (const key of Object.keys(queries)) {
+    str += `${key}=${encodeURIComponent(queries[key])}&`;
+  }
+  if (str) {
+    str = str.substr(0, str.length - 1);
+  }
+  if (!str) return url;
+  //
+  if (!url) return '?' + str;
+  //
+  const pos = url.indexOf('?');
+  if (pos === -1) return `${url}?${str}`;
+  if (pos === url.length - 1) return `${url}${str}`;
+  return `${url}&${str}`;
 }
 
 export function isNilOrEmptyString(str?: string | undefined | null): str is null | undefined | '' {
