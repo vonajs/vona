@@ -1,5 +1,5 @@
-import { extend } from '@cabloy/extend';
 import { VonaApplication, IModule } from '../../types/index.js';
+import { deepExtend } from '../utils/util.js';
 
 export default async function (app: VonaApplication, modules: Record<string, IModule>) {
   // load configs
@@ -19,8 +19,7 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
           module,
           configModule,
         );
-        app.config.modules[module.info.relativeName] = extend(
-          true,
+        app.config.modules[module.info.relativeName] = deepExtend(
           {},
           configModule,
           app.config.modules[module.info.relativeName],

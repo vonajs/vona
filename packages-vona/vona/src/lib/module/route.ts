@@ -19,10 +19,10 @@ import { Constructable } from '../decorator/type/constructable.js';
 import { IDecoratorControllerOptions } from '../decorator/index.js';
 import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
-import { extend } from '@cabloy/extend';
 import { middlewareGuard } from './middleware/middlewareGuard.js';
 import { middlewareInterceptor } from './middleware/middlewareInterceptor.js';
 import { middlewarePipe } from './middleware/middlewarePipe.js';
+import { deepExtend } from '../utils/util.js';
 
 export class AppRouter extends BeanSimple {
   register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
@@ -181,7 +181,7 @@ export class AppRouter extends BeanSimple {
 
     // route
     const route = {
-      meta: extend(true, {}, controllerMiddlewaresOptions, actionMiddlewaresOptions),
+      meta: deepExtend({}, controllerMiddlewaresOptions, actionMiddlewaresOptions),
     };
 
     // route

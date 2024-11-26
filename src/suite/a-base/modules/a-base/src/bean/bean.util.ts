@@ -1,8 +1,7 @@
 import { ScopeModule } from '../.metadata/this.js';
-import { Bean, BeanBase } from 'vona';
+import { Bean, BeanBase, deepExtend } from 'vona';
 
 import * as uuid from 'uuid';
-import { extend } from '@cabloy/extend';
 import currency from '@zhennann/currency';
 import moment from 'moment';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -43,7 +42,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
   }
 
   extend(...args) {
-    return extend(true, ...args);
+    return deepExtend(...args);
   }
 
   currency(options) {

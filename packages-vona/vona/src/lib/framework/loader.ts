@@ -1,8 +1,8 @@
 import path from 'path';
 import { AppWorkerLoader, AgentWorkerLoader } from 'egg';
 import { getEnvFiles, loadEnvs } from '@cabloy/dotenv';
-import { extend } from '@cabloy/extend';
 import { VonaConfigMeta, VonaMetaMode } from 'vona-shared';
+import { deepExtend } from '../utils/util.js';
 
 function createLoaderClass(Base) {
   return class LoaderClass extends Base {
@@ -49,7 +49,7 @@ function createLoaderClass(Base) {
       for (const file of files) {
         const config = this.loadFile(file, this.appInfo);
         if (config) {
-          extend(true, target, config);
+          deepExtend(target, config);
         }
       }
     }

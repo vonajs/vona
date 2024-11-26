@@ -1,4 +1,4 @@
-import { Cast, ConfigInstanceBase, isNil, VonaConfig } from 'vona';
+import { Cast, ConfigInstanceBase, deepExtend, isNil, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -158,7 +158,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     // config
     const instanceConfig = JSON.parse(instance.config);
     // cache configs
-    __cacheIntancesConfig[subdomain] = this.$appUtil.extend({}, this.ctx.app.config, instanceConfig, {
+    __cacheIntancesConfig[subdomain] = deepExtend({}, this.ctx.app.config, instanceConfig, {
       instances: undefined,
     });
   }

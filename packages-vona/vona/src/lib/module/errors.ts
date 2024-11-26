@@ -1,6 +1,6 @@
-import { extend } from '@cabloy/extend';
 import { ErrorClass } from '../bean/resource/error/errorClass.js';
 import { VonaApplication, IModule } from '../../types/index.js';
+import { deepExtend } from '../utils/util.js';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all errors
@@ -39,7 +39,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       const ebError = (ebErrors[module.info.relativeName] = {});
 
       // module errors
-      if (module.resource.Errors) extend(true, ebError, module.resource.Errors);
+      if (module.resource.Errors) deepExtend(ebError, module.resource.Errors);
     }
   }
 }

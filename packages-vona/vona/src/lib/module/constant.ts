@@ -1,5 +1,5 @@
-import { extend } from '@cabloy/extend';
 import { VonaApplication, IModule } from '../../types/index.js';
+import { deepExtend } from '../utils/util.js';
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
   // all constants
@@ -14,7 +14,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       const ebConstant = (ebConstants[module.info.relativeName] = {});
 
       // module constants
-      if (module.resource.constants) extend(true, ebConstant, module.resource.constants);
+      if (module.resource.constants) deepExtend(ebConstant, module.resource.constants);
 
       // patchConstant
       patchConstant(ebConstant);

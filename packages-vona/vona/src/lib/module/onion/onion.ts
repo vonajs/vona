@@ -14,7 +14,7 @@ import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
 import { onionScenesMeta, OnionSceneMeta } from './meta.js';
-import { extend } from '@cabloy/extend';
+import { deepExtend } from '../../utils/util.js';
 
 const __adapter = (_context, chain) => {
   return {
@@ -199,7 +199,7 @@ export class Onion extends BeanSimple {
       if (optionsPrimitive) {
         this._cacheMiddlewaresOptions[item.name] = optionsConfig ?? optionsMeta;
       } else {
-        this._cacheMiddlewaresOptions[item.name] = extend(true, {}, optionsMeta, optionsConfig);
+        this._cacheMiddlewaresOptions[item.name] = deepExtend({}, optionsMeta, optionsConfig);
       }
     }
     return this._cacheMiddlewaresOptions[item.name];
@@ -235,8 +235,7 @@ export class Onion extends BeanSimple {
     if (optionsPrimitive) {
       options = optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
     } else {
-      options = extend(
-        true,
+      options = deepExtend(
         {},
         optionsMetaAndConfig,
         optionsInstanceConfig,

@@ -462,10 +462,6 @@ export class AppUtil extends BeanSimple {
     return stat.mtime.valueOf();
   }
 
-  extend(...args) {
-    return extend(true, ...args);
-  }
-
   detectErrorMessage(err: Error) {
     // detect json parse error
     if (
@@ -494,6 +490,10 @@ export class AppUtil extends BeanSimple {
     if (this.ctx.acceptJSONP) return 'js';
     return 'html';
   }
+}
+
+export function deepExtend<T = any>(...args): T {
+  return extend(true, ...args);
 }
 
 export async function catchError<T>(
