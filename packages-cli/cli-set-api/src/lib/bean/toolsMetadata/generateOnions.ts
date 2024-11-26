@@ -4,7 +4,7 @@ import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export async function generateMiddlewaresLike(sceneName: string, moduleName: string, modulePath: string) {
+export async function generateOnions(sceneName: string, moduleName: string, modulePath: string) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = `${modulePath}/src/bean/${sceneName}.*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);

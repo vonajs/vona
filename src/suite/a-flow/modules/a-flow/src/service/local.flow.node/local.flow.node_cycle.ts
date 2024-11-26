@@ -1,3 +1,4 @@
+import { compose, composeAsync } from 'vona';
 import { LocalFlowNode0 } from './local.flow.node_0.js';
 
 const __adapter = (context, chain) => {
@@ -115,10 +116,10 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   _behaviorsInvoke(context) {
-    return this.ctx.app.meta.util.compose(this.behaviors, __adapter)(context);
+    return compose(this.behaviors, __adapter)(context);
   }
 
   async _behaviorsInvokeAsync(context) {
-    return await this.ctx.app.meta.util.composeAsync(this.behaviors, __adapter)(context);
+    return await composeAsync(this.behaviors, __adapter)(context);
   }
 }

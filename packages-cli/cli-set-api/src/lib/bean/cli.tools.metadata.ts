@@ -2,7 +2,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
-import { generateMiddlewaresLike } from './toolsMetadata/generateMiddlewares.js';
+import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateSocket } from './toolsMetadata/generateSocket.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
@@ -64,15 +64,15 @@ export class CliToolsMetadata extends BeanCliBase {
     // beans
     content += await generateBeans(moduleName, modulePath);
     // middlewares
-    content += await generateMiddlewaresLike('middleware', moduleName, modulePath);
+    content += await generateOnions('middleware', moduleName, modulePath);
     // guards
-    content += await generateMiddlewaresLike('guard', moduleName, modulePath);
+    content += await generateOnions('guard', moduleName, modulePath);
     // interceptors
-    content += await generateMiddlewaresLike('interceptor', moduleName, modulePath);
+    content += await generateOnions('interceptor', moduleName, modulePath);
     // pipes
-    content += await generateMiddlewaresLike('pipe', moduleName, modulePath);
+    content += await generateOnions('pipe', moduleName, modulePath);
     // filters
-    content += await generateMiddlewaresLike('filter', moduleName, modulePath);
+    content += await generateOnions('filter', moduleName, modulePath);
     // connections
     content += await generateSocket('connection', moduleName, modulePath);
     // packets

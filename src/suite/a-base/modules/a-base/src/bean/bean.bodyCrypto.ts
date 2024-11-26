@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase } from 'vona';
+import { Bean, BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
 
@@ -25,7 +25,7 @@ export class BeanBodyCrypto extends BeanBase<ScopeModule> {
         jsFile += '.min';
       }
       jsFile += '.js';
-      const Loader = this.ctx.app.meta.util.requireDynamic(jsFile);
+      const Loader = requireDynamic(jsFile);
       __bodyCryptoInstance = await Loader.createBodyCrypto();
     }
     return __bodyCryptoInstance;

@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean, BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
 
@@ -40,7 +40,7 @@ export class BeanMarkdown extends BeanBase {
         block_js += '.min';
       }
       block_js += '.cjs';
-      const BlockClass = this.ctx.app.meta.util.requireDynamic(block_js);
+      const BlockClass = requireDynamic(block_js);
       // render
       const blockHost = this._getHost({ host, content, locale });
       // Block Instance

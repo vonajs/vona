@@ -1,4 +1,4 @@
-import { Bean, BeanModuleScopeBase } from 'vona';
+import { Bean, BeanModuleScopeBase, composeAsync } from 'vona';
 
 const __adapter = (_context, chain) => {
   const eventBean = chain;
@@ -24,7 +24,7 @@ export class BeanEvent extends BeanModuleScopeBase {
       result,
     };
     // invoke
-    await this.ctx.app.meta.util.composeAsync(eventBeanArray, __adapter)(context, async (context, _next) => {
+    await composeAsync(eventBeanArray, __adapter)(context, async (context, _next) => {
       if (next) {
         await next(context, _next);
       } else {

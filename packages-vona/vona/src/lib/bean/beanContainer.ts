@@ -6,6 +6,7 @@ import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKe
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';
+import { compose, composeAsync, isNilOrEmptyString } from '../utils/util.js';
 
 const ProxyMagic = Symbol.for('Bean#ProxyMagic');
 const BeanContainerInstances = Symbol.for('Bean#Instances');
@@ -60,7 +61,7 @@ export class BeanContainer {
     const fullName = beanOptions.beanFullName;
     // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
     //   not use !selector which maybe is 0
-    const isSelectorValid = !this.app.meta.util.isNullOrEmptyString(selector);
+    const isSelectorValid = !isNilOrEmptyString(selector);
     const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
     if (this[BeanContainerInstances][key] === undefined) {
       let beanInstance;
@@ -430,11 +431,11 @@ export class BeanContainer {
   };
 
   private __composeForProp(chains) {
-    return this.app.meta.util.compose(chains, this.__composeForPropAdapter);
+    return compose(chains, this.__composeForPropAdapter);
   }
 
   private __composeForPropAsync(chains) {
-    return this.app.meta.util.composeAsync(chains, this.__composeForPropAdapter);
+    return composeAsync(chains, this.__composeForPropAdapter);
   }
 }
 

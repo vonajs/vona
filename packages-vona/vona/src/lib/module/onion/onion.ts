@@ -14,7 +14,7 @@ import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
 import { onionScenesMeta, OnionSceneMeta } from './meta.js';
-import { deepExtend } from '../../utils/util.js';
+import { compose, composeAsync, deepExtend } from '../../utils/util.js';
 
 const __adapter = (_context, chain) => {
   return {
@@ -53,7 +53,7 @@ export class Onion extends BeanSimple {
     // compose
     const middlewares = this._composeMiddlewaresHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return ctx.app.meta.util.compose(middlewares, __adapter);
+    return compose(middlewares, __adapter);
   }
 
   composeAsync(
@@ -66,7 +66,7 @@ export class Onion extends BeanSimple {
     // compose
     const middlewares = this._composeMiddlewaresHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return ctx.app.meta.util.composeAsync(middlewares, __adapter);
+    return composeAsync(middlewares, __adapter);
   }
 
   composeSocketAsync() {

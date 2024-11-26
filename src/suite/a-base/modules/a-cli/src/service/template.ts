@@ -1,5 +1,5 @@
 import { ScopeModule } from '../.metadata/this.js';
-import { Service, BeanBase } from 'vona';
+import { Service, BeanBase, requireDynamic } from 'vona';
 
 import fs from 'fs';
 import path from 'path';
@@ -185,7 +185,7 @@ export class ServiceTemplate extends BeanBase<ScopeModule> {
     // for
     for (const file of files) {
       const snippetTemplatePath = path.join(snippetsDir, file);
-      const snippet = this.ctx.app.meta.util.requireDynamic(snippetTemplatePath);
+      const snippet = requireDynamic(snippetTemplatePath);
       if (!snippet.file) {
         throw new Error(`should provider file path for: ${file}`);
       }

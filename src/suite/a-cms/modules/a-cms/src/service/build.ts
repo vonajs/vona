@@ -1,5 +1,5 @@
 import { ScopeModule } from '../.metadata/this.js';
-import { Service, BeanBase } from 'vona';
+import { Service, BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
 
@@ -821,7 +821,7 @@ var env=${JSON.stringify(env, null, 2)};
       _path: '',
       require(fileName) {
         const _path = self.resolvePath('', this._filename, fileName);
-        return self.ctx.app.meta.util.requireDynamic(_path);
+        return requireDynamic(_path);
       },
       url(fileName, language) {
         if (fileName && (fileName.indexOf('http://') === 0 || fileName.indexOf('https://') === 0)) {

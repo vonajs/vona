@@ -9,6 +9,7 @@ import {
   IQueueWorks,
 } from '../../../types/index.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { subdomainDesp } from '../../utils/util.js';
 
 export class QueueClient extends BeanSimple {
   _workers: IQueueWorks = {};
@@ -203,8 +204,7 @@ export class QueueClient extends BeanSimple {
   }
 
   _combineQueueKey({ subdomain, module = '', queueName = '' }) {
-    const app = this.app;
-    subdomain = app.meta.util.subdomainDesp(subdomain);
+    subdomain = subdomainDesp(subdomain);
     return `${subdomain}||${module}||${queueName}`;
   }
 
