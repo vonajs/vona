@@ -43,9 +43,6 @@ export class FilterError extends BeanBase implements IFilterJson, IFilterLog {
   }
 
   log(err: Error, options: IFilterOptionsError, next: NextSync): boolean {
-    // next
-    if (next() === true) return true;
-
     // 403->401
     if (err.code === 403) {
       // todo: use diffrent state user
@@ -56,11 +53,16 @@ export class FilterError extends BeanBase implements IFilterJson, IFilterLog {
       }
     }
 
+    // message
+    if (err.message && typeof err.message !== 'string') {
+      err.message = JSON.stringify(err.message, null, 2);
+    }
+
+    // next
+    if (next() === true) return true;
+
     // todo: use new log engine
     if (options.logs[err.code!] !== false) {
-      if (typeof err.message !== 'string') {
-        console.error(err.message);
-      }
       console.error(err);
     }
 
