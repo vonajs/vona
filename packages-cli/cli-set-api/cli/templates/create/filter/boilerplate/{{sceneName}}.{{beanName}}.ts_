@@ -4,7 +4,7 @@ export interface IFilterOptions<%=argv.beanNameCapitalize%> extends IDecoratorFi
 
 @Filter<IFilterOptions<%=argv.beanNameCapitalize%>>()
 export class Filter<%=argv.beanNameCapitalize%> extends BeanBase implements IFilterJson {
-  json(_err: Error, _options: IFilterOptions<%=argv.beanNameCapitalize%>, next: NextSync) {
+  json(_err: Error, _options: IFilterOptions<%=argv.beanNameCapitalize%>, next: NextSync): boolean {
     // next
     return next();
   }

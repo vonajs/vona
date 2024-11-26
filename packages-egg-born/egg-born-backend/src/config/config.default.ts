@@ -278,24 +278,13 @@ export default function (appInfo: VonaAppInfo) {
 
   // onerror
   config.onerror = {
-    appErrorFilter(err, ctx) {
-      // 422
-      if (err && err.code === 422 && !ctx.app.meta.isTest) return false;
-      // 423
-      if (err && err.code === 423 && !ctx.app.meta.isTest) return false;
-      // 403
-      if (err && err.code === 403) {
-        const user = ctx && ctx.state && ctx.state.user;
-        if (user && user.op.anonymous) {
-          err.code = 401;
-          err.status = 401;
-        }
-        // should show error for more scenes
-        // if (!ctx.app.meta.isTest) return false;
-      }
-      return true;
+    appErrorFilter(err: Error, ctx: VonaContext) {
+      if (!err) return false;
+      ctx[SymbolFilterComposeContext] = { err, method: 'log' };
+      _composeFilters(ctx.app)(ctx);
+      return false;
     },
-    json(err, ctx: VonaContext) {
+    json(err: Error, ctx: VonaContext) {
       ctx[SymbolFilterComposeContext] = { err, method: 'json' };
       _composeFilters(ctx.app)(ctx);
     },
@@ -312,6 +301,7 @@ function _composeFilters(app: VonaApplication) {
     undefined,
     (beanInstance: IFilterJson, options, next) => {
       const filterContext: IFilterComposeContext = app.ctx[SymbolFilterComposeContext];
+      if (!beanInstance[filterContext.method]) return next();
       return beanInstance[filterContext.method](filterContext.err, options, next);
     },
   );
