@@ -280,21 +280,25 @@ export default function (appInfo: VonaAppInfo) {
   config.onerror = {
     appErrorFilter(err: Error, ctx: VonaContext) {
       if (!err) return false;
-      ctx[SymbolFilterComposeContext] = { err, method: 'log' };
-      _composeFilters(ctx.app)(ctx);
+      _performErrorFilters(err, ctx, 'log');
       return false;
     },
     json(err: Error, ctx: VonaContext) {
-      ctx[SymbolFilterComposeContext] = { err, method: 'json' };
-      _composeFilters(ctx.app)(ctx);
+      _performErrorFilters(err, ctx, 'json');
     },
     html(err: Error, ctx: VonaContext) {
-      ctx[SymbolFilterComposeContext] = { err, method: 'html' };
-      _composeFilters(ctx.app)(ctx);
+      _performErrorFilters(err, ctx, 'html');
     },
   };
 
   return config;
+}
+
+function _performErrorFilters(err: Error, ctx: VonaContext, method: string) {
+  return ctx.app.ctxStorage.run(ctx as any, () => {
+    ctx[SymbolFilterComposeContext] = { err, method };
+    _composeFilters(ctx.app)(ctx);
+  });
 }
 
 function _composeFilters(app: VonaApplication) {
