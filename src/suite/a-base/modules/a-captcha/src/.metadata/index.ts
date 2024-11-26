@@ -14,7 +14,11 @@ declare module 'vona' {
 export * from '../bean/middleware.captchaVerify.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona' {
+  export interface IMiddlewareRecordLocal {
+    'a-captcha:captchaVerify': never;
+  }
+}
 /** middlewares: end */
 /** controllers: begin */
 export * from '../controller/captcha.js';

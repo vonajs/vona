@@ -3,6 +3,7 @@ export * from '../bean/bean.ioMessageUniformBase_.js';
 export * from '../bean/bean.message.js';
 export * from '../bean/stats.message.js';
 export * from '../bean/version.manager.js';
+import { BeanIoMessageUniformBase } from '../bean/bean.ioMessageUniformBase_.js';
 import { BeanMessage } from '../bean/bean.message.js';
 import { StatsMessage } from '../bean/stats.message.js';
 import { VersionManager } from '../bean/version.manager.js';
@@ -13,6 +14,7 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
+    ioMessageUniformBase: BeanIoMessageUniformBase;
     'a-message.stats.message': StatsMessage;
     'a-message.version.manager': VersionManager;
   }

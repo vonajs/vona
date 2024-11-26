@@ -25,7 +25,12 @@ export * from '../bean/middleware.appReady.js';
 export * from '../bean/middleware.instance.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona' {
+  export interface IMiddlewareRecordLocal {
+    'a-instance:appReady': never;
+    'a-instance:instance': never;
+  }
+}
 /** middlewares: end */
 /** controllers: begin */
 export * from '../controller/instance.js';

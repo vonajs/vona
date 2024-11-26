@@ -3,6 +3,7 @@ export * from '../bean/bean.cli.js';
 export * from '../bean/bean.cliBase_.js';
 export * from '../bean/version.manager.js';
 import { BeanCli } from '../bean/bean.cli.js';
+import { BeanCliBase } from '../bean/bean.cliBase_.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -11,6 +12,7 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
+    cliBase: BeanCliBase;
     'a-cli.version.manager': VersionManager;
   }
 }

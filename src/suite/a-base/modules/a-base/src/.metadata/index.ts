@@ -137,7 +137,19 @@ export * from '../bean/middleware.test.js';
 export * from '../bean/middleware.transaction.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona' {
+  export interface IMiddlewareRecordLocal {
+    'a-base:auth': never;
+    'a-base:authOpen': never;
+    'a-base:gate': never;
+    'a-base:httpLog': never;
+    'a-base:inner': never;
+    'a-base:jsonp': never;
+    'a-base:right': never;
+    'a-base:test': never;
+    'a-base:transaction': never;
+  }
+}
 /** middlewares: end */
 /** connections: begin */
 export * from '../bean/connection.auth.js';

@@ -17,7 +17,11 @@ declare module 'vona' {
 export * from '../bean/middleware.validate.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona' {
+  export interface IMiddlewareRecordLocal {
+    'a-validation:validate': never;
+  }
+}
 /** middlewares: end */
 /** controllers: begin */
 export * from '../controller/validation.js';

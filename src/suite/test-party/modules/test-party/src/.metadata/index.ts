@@ -66,7 +66,12 @@ export * from '../bean/middleware.testInterception.js';
 export * from '../bean/middleware.testRestructuring.js';
 
 import 'vona';
-declare module 'vona' {}
+declare module 'vona' {
+  export interface IMiddlewareRecordLocal {
+    'test-party:testInterception': never;
+    'test-party:testRestructuring': never;
+  }
+}
 /** middlewares: end */
 /** atoms: begin */
 export * from '../atom/party.js';
