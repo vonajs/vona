@@ -16,6 +16,7 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
   const contentRecordsLocal: string[] = [];
+  let needImportOptionsGlobalInterface;
   for (const file of files) {
     const fileName = path.basename(file);
     const parts = fileName.split('.').slice(0, -1);
@@ -41,6 +42,7 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
         contentRecordsGlobal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
       } else {
         contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
+        needImportOptionsGlobalInterface = true;
       }
     } else {
       if (fileInfo.hasOptionsInterface) {
@@ -66,7 +68,7 @@ export interface I${sceneNameCapitalize}RecordLocal {
   const content = `/** ${sceneName}s: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-import 'vona';
+${needImportOptionsGlobalInterface ? "import { IDecoratorGuardOptionsGlobal } from 'vona';" : "import 'vona';"}
 declare module 'vona' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
