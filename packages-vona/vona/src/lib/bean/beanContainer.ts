@@ -93,7 +93,7 @@ export class BeanContainer {
     // instance
     const beanInstance = this._createBeanInstance(beanOptions.beanFullName, beanOptions.beanClass, args);
     // patch
-    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, beanOptions.aop);
+    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, beanOptions.scene === 'aop');
   }
 
   _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
@@ -370,8 +370,8 @@ export class BeanContainer {
     if (host.__aopChains__) return host.__aopChains__;
     // chains
     let chains: MetadataKey[] = [];
-    if (beanOptions && !beanOptions.aop) {
-      const aops = appResource.findAopsMatched(beanOptions.beanFullName);
+    if (beanOptions && beanOptions.scene !== 'aop') {
+      const aops = this.app.meta.onionAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);
       }

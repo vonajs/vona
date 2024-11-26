@@ -2,7 +2,7 @@ import { IMiddlewareOptionsMeta } from './middleware.js';
 
 export interface IAopRecord {}
 
-type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
+export type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 
 export interface IDecoratorAopOptions {
   enable?: boolean;

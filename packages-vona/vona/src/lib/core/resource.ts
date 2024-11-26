@@ -1,11 +1,8 @@
-import is from 'is-type-of';
 import { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.js';
 import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { isClass } from '../utils/isClass.js';
-import { IDecoratorAopOptions } from '../../types/interface/aop.js';
-import { Cast } from '../../types/utils/cast.js';
 
 export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
 export const DecoratorUse = Symbol.for('Decorator#Use');
@@ -23,31 +20,6 @@ export class AppResource extends BeanSimple {
 
   getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> | undefined {
     return appMetadata.getMetadata(DecoratorUse, target);
-  }
-
-  findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
-  findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): string[] | undefined;
-  findAopsMatched(beanFullName: string): string[] | undefined;
-  findAopsMatched<T>(beanFullName: Constructable<T> | string): string[] | undefined {
-    // beanOptions
-    const beanOptions = this.getBean(beanFullName as any);
-    if (!beanOptions) return;
-    // loop
-    const aopsMatched: string[] = [];
-    for (const aop of this.aopsArray) {
-      const aopOptions = aop.options as IDecoratorAopOptions;
-      // not self
-      if (aop.beanFullName === beanOptions.beanFullName) continue;
-      // // check if match aop
-      // if (beanOptions.aop && !aop.matchAop) continue;
-      // gate
-      if (!this.app.meta.util.checkGate(Cast(aopOptions).gate)) continue;
-      // match
-      if (__aopMatch(aopOptions.match, beanOptions.beanFullName)) {
-        aopsMatched.push(aop.beanFullName);
-      }
-    }
-    return aopsMatched;
   }
 
   addBean(options: Partial<IDecoratorBeanOptionsBase>) {
@@ -149,10 +121,3 @@ export class AppResource extends BeanSimple {
 }
 
 export const appResource = new AppResource();
-
-function __aopMatch(match, beanFullName) {
-  if (!Array.isArray(match)) {
-    return (typeof match === 'string' && match === beanFullName) || (is.regExp(match) && match.test(beanFullName));
-  }
-  return match.some(item => __aopMatch(item, beanFullName));
-}

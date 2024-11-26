@@ -1,3 +1,4 @@
+import is from 'is-type-of';
 import { swapDeps } from '@cabloy/deps';
 import pathMatching from 'egg-path-matching';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -5,6 +6,7 @@ import {
   IDecoratorMiddlewareOptionsGlobal,
   IMiddlewareBase,
   IMiddlewareItem,
+  IMiddlewareOptionsMeta,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
 } from '../../../types/interface/middleware.js';
@@ -16,6 +18,10 @@ import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
 import { compose, composeAsync, deepExtend } from '../../utils/util.js';
 import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
+import { Constructable } from '../../decorator/type/constructable.js';
+import { IBeanRecord } from '../../bean/type.js';
+import { IDecoratorAopOptions, TypeDecoratorAopOptionsMatch } from '../../../types/interface/aop.js';
+import { VonaApplication } from '../../../types/index.js';
 
 const __adapter = (_context, chain) => {
   return {
@@ -376,7 +382,7 @@ export class Onion extends BeanSimple {
       // enable match ignore dependencies
       if (
         !optionsPrimitive &&
-        (options.enable === false || !middlewareMatchMeta(ctx, options) || !middlewareMatch(ctx, options))
+        (options.enable === false || !middlewareMatchMeta(this.app, options.meta) || !middlewareMatch(ctx, options))
       ) {
         if (!ctx[SymboleMiddlewareStatus][sceneName]) {
           ctx[SymboleMiddlewareStatus][sceneName] = {};
@@ -401,10 +407,37 @@ export class Onion extends BeanSimple {
     fn._name = item.name;
     return fn;
   }
+
+  findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
+  findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): string[] | undefined;
+  findAopsMatched(beanFullName: string): string[] | undefined;
+  findAopsMatched<T>(beanFullName: Constructable<T> | string): string[] | undefined {
+    // beanOptions
+    const beanOptions = appResource.getBean(beanFullName as any);
+    if (!beanOptions) return;
+    // loop
+    const aopsMatched: string[] = [];
+    for (const aop of this.middlewaresGlobal) {
+      const aopOptions = this._getMiddlewareOptions(aop) as IDecoratorAopOptions;
+      // not self
+      if (aop.beanOptions.beanFullName === beanOptions.beanFullName) continue;
+      // // check if match aop
+      // if (beanOptions.scene === 'aop' && !aop.beanOptions.matchAop) continue;
+      if (aopOptions.enable === false) continue;
+      if (!middlewareMatchMeta(this.app, aopOptions.meta)) continue;
+      if (
+        (aopOptions.match && __aopMatch(aopOptions.match, beanOptions.beanFullName)) ||
+        (aopOptions.ignore && !__aopMatch(aopOptions.ignore, beanOptions.beanFullName))
+      ) {
+        aopsMatched.push(aop.beanOptions.beanFullName);
+      }
+    }
+    return aopsMatched;
+  }
 }
 
-function middlewareMatchMeta(ctx: VonaContext, options: IMiddlewareBase) {
-  return ctx.app.meta.util.checkMiddlewareOptionsMeta(options.meta);
+function middlewareMatchMeta(app: VonaApplication, meta?: IMiddlewareOptionsMeta) {
+  return app.meta.util.checkMiddlewareOptionsMeta(meta);
 }
 
 function middlewareMatch(ctx: VonaContext, options: IMiddlewareBase) {
@@ -413,6 +446,15 @@ function middlewareMatch(ctx: VonaContext, options: IMiddlewareBase) {
   }
   const match = pathMatching(options);
   return match(ctx);
+}
+
+function __aopMatch(match: TypeDecoratorAopOptionsMatch, beanFullName: string) {
+  if (!Array.isArray(match)) {
+    return (
+      (typeof match === 'string' && match === beanFullName) || (is.regExp(match) && Cast(match).test(beanFullName))
+    );
+  }
+  return match.some(item => __aopMatch(item, beanFullName));
 }
 
 // function middlewareDeps(sceneName: string, ctx, options) {
