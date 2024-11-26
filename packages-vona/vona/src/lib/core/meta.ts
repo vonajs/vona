@@ -123,7 +123,7 @@ export class AppMeta extends BeanSimple {
 
   prepareEnv() {
     this.isProd = this.app.config.env === 'prod';
-    this.isTest = this.app.config.env === 'unittest' || this.app.config.env === 'test';
+    this.isTest = this.app.config.env === 'unittest';
     this.isLocal = this.app.config.env === 'local';
     this.flavor = this.app.options.flavor || process.env.META_FLAVOR || 'normal';
     this.mode = this.app.config.env as VonaMetaMode;

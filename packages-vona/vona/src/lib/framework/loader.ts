@@ -23,6 +23,11 @@ function createLoaderClass(Base) {
       super.loadConfig();
       // load app config
       this._loadAppConfig(meta);
+      // configMeta
+      this.config.configMeta = {
+        flavor: meta.flavor,
+        mode: meta.mode,
+      };
       // subdomainOffset
       this.app.subdomainOffset = typeof this.config.subdomainOffset === 'undefined' ? 2 : this.config.subdomainOffset;
     }

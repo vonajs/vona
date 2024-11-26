@@ -12,8 +12,6 @@ import { appResource } from '../core/resource.js';
 import { compose as _compose, composeAsync as _composeAsync } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
 
-const __EnvTests = ['unittest', 'test'];
-
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
   bean: any;
@@ -377,14 +375,8 @@ export class AppUtil extends BeanSimple {
   _checkGateEnv(env?: IModuleMiddlewareGate['env']) {
     // check none
     if (!env) return true;
-    if (!Array.isArray(env)) env = env.split(',');
-    const bingo = env.some(item => {
-      if (this.app.config.env === item) return true;
-      if (__EnvTests.includes(this.app.config.env) && __EnvTests.includes(item)) return true;
-      return false;
-    });
-    if (!bingo) return false;
-    return true;
+    if (!Array.isArray(env)) return this.app.config.env === env;
+    return env.some(item => this.app.config.env === item);
   }
 
   detectErrorMessage(err: Error) {
