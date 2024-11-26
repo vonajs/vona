@@ -1,4 +1,4 @@
-import { VonaConfigEnv } from '../../../../types/index.js';
+import { VonaMetaMode } from 'vona-shared';
 
 export type TypeModuleMiddlewareRight =
   | { type: 'atom'; atomClass?: string; action: string; stage?: string; checkFlow?: boolean }
@@ -32,7 +32,7 @@ export interface IModuleMiddlewareAuthOpen {
 }
 
 export interface IModuleMiddlewareGate {
-  env?: VonaConfigEnv | VonaConfigEnv[];
+  env?: VonaMetaMode | VonaMetaMode[];
 }
 
 export interface IModuleRouteMeta {

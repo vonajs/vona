@@ -1,9 +1,10 @@
 import { EggAppConfig } from 'egg';
-import { ConfigMetadata, IBeanScopeConfig, VonaConfigEnv } from '../../index.js';
+import { ConfigMetadata, IBeanScopeConfig } from '../../index.js';
 import { PowerPartial } from '../utils/powerPartial.js';
 import { ConfigDevelopment } from './development.js';
 import { ConfigCors } from './cors.js';
 import { ConfigInstanceBase } from './instance.js';
+import { VonaConfigMeta } from 'vona-shared';
 
 // @ts-ignore ignore the throw type check of 'development'
 export interface VonaConfig extends EggAppConfig {
@@ -13,7 +14,7 @@ export interface VonaConfig extends EggAppConfig {
   cors: ConfigCors;
   metadata: ConfigMetadata;
   instances: ConfigInstanceBase[];
-  env: VonaConfigEnv;
+  configMeta: VonaConfigMeta;
 }
 
 export type VonaConfigOptional = PowerPartial<VonaConfig>;
