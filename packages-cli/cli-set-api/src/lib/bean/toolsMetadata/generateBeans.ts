@@ -36,11 +36,13 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     if (className === 'BeanBase') className = 'BeanBase2';
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
-    if (isIgnore) continue;
-    contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
-    if (isBeanGlobal) {
+    if (isBeanGlobal || !isIgnore) {
+      contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
+    }
+    if (isBeanGlobal && !isIgnore) {
       contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
-    } else {
+    }
+    if ((isBeanGlobal && isIgnore) || (!isBeanGlobal && !isIgnore)) {
       contentRecordsGeneral.push(`'${beanFullName}': ${className};`);
     }
   }
