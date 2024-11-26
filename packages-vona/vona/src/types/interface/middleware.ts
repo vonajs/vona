@@ -1,3 +1,4 @@
+import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { IDecoratorBeanOptionsBase } from '../../lib/index.js';
 import { VonaContext } from '../context/index.js';
 import { IDecoratorPipeOptions } from './pipe.js';
@@ -18,10 +19,16 @@ export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}
 export type IMiddlewareRecord = IMiddlewareRecordGlobal & IMiddlewareRecordLocal;
 
+export interface IMiddlewareOptionsMeta {
+  flavor?: VonaMetaFlavor | VonaMetaFlavor[];
+  mode?: VonaMetaMode | VonaMetaMode[];
+}
+
 export interface IMiddlewareBase {
   enable?: boolean;
   match?: ((ctx: VonaContext) => boolean) | RegExp | string;
   ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
+  meta?: IMiddlewareOptionsMeta;
 }
 
 export interface IMiddlewareExecute {

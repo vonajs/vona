@@ -5,7 +5,16 @@ import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
 import { Request } from 'egg';
-import { VonaContext, Cast, IModule, PowerPartial, TypeMonkeyName, IModuleInfo, parseInfo } from '../../types/index.js';
+import {
+  VonaContext,
+  Cast,
+  IModule,
+  PowerPartial,
+  TypeMonkeyName,
+  IModuleInfo,
+  parseInfo,
+  IMiddlewareOptionsMeta,
+} from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { ILocalInfos, IModuleMiddlewareGate } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
@@ -361,6 +370,23 @@ export class AppUtil extends BeanSimple {
       await _lock.unlock();
       throw err;
     }
+  }
+
+  checkMiddlewareOptionsMeta(meta?: IMiddlewareOptionsMeta) {
+    // check none
+    if (!meta) return true;
+    // check flavor
+    if (meta.flavor) {
+      if (!Array.isArray(meta.flavor) && meta.flavor !== this.app.meta.flavor) return false;
+      if (Array.isArray(meta.flavor) && !meta.flavor.includes(this.app.meta.flavor)) return false;
+    }
+    // check mode
+    if (meta.mode) {
+      if (!Array.isArray(meta.mode) && meta.mode !== this.app.meta.mode) return false;
+      if (Array.isArray(meta.mode) && !meta.mode.includes(this.app.meta.mode)) return false;
+    }
+    // default
+    return true;
   }
 
   checkGate(gate?: IModuleMiddlewareGate) {

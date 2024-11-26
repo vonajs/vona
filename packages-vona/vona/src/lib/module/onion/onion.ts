@@ -3,6 +3,7 @@ import pathMatching from 'egg-path-matching';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import {
   IDecoratorMiddlewareOptionsGlobal,
+  IMiddlewareBase,
   IMiddlewareItem,
   SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
@@ -373,7 +374,10 @@ export class Onion extends BeanSimple {
       // options
       const options = this.combineMiddlewareOptions(ctx, item);
       // enable match ignore dependencies
-      if (!optionsPrimitive && (options.enable === false || !middlewareMatch(ctx, options))) {
+      if (
+        !optionsPrimitive &&
+        (options.enable === false || !middlewareMatchMeta(ctx, options) || !middlewareMatch(ctx, options))
+      ) {
         if (!ctx[SymboleMiddlewareStatus][sceneName]) {
           ctx[SymboleMiddlewareStatus][sceneName] = {};
         }
@@ -399,7 +403,11 @@ export class Onion extends BeanSimple {
   }
 }
 
-function middlewareMatch(ctx, options) {
+function middlewareMatchMeta(ctx: VonaContext, options: IMiddlewareBase) {
+  return ctx.app.meta.util.checkMiddlewareOptionsMeta(options.meta);
+}
+
+function middlewareMatch(ctx: VonaContext, options: IMiddlewareBase) {
   if (!options.match && !options.ignore) {
     return true;
   }
