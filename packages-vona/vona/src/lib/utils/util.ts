@@ -28,7 +28,7 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
-  combineFetchPath(
+  combineApiPath(
     moduleName: IModuleInfo | string,
     path: string | undefined,
     prefix?: string | boolean,
@@ -172,7 +172,7 @@ export class AppUtil extends BeanSimple {
   ): Promise<T> {
     // url
     // todo: remove /api/a/base, need not set url
-    const url = module ? this.combineFetchPath(module, '', true, false) : '/api/a/base/';
+    const url = module ? this.combineApiPath(module, '', true, false) : '/api/a/base/';
     const req = {
       method: 'post',
       url,
@@ -415,13 +415,6 @@ export class AppUtil extends BeanSimple {
     if (this.ctx.acceptJSONP) return 'js';
     return 'html';
   }
-}
-
-export function combineApiPath(moduleName: IModuleInfo | string, arg: string) {
-  if (arg.charAt(0) === '/') return arg;
-  const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
-  if (!moduleInfo) throw new Error('invalid url');
-  return `/${moduleInfo.url}/${arg}`;
 }
 
 export function combineQueries(url: string, queries: object): string {

@@ -169,7 +169,7 @@ export class CtxUtil extends BeanSimple {
   // todo: url should not be relative path, should be absolute
   //       because ctxCaller.module removed
   //       so, maybe need provide this.scope.util.combineUrl
-  //          this result is: /api/a/user/add, thus the method of combineFetchPath not needed in performActionFn
+  //          this result is: /api/a/user/add, thus the method of combineApiPath not needed in performActionFn
   async performAction<T = any>({
     innerAccess,
     method,

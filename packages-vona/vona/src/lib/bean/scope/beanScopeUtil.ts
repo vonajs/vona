@@ -10,7 +10,7 @@ export class BeanScopeUtil extends BeanSimple {
     this[BeanModuleScope] = moduleScope;
   }
 
-  combineFetchPath(path: string | undefined, prefix?: string | boolean, simplify?: boolean) {
-    return this.app.meta.util.combineFetchPath(this[BeanModuleScope], path, prefix, simplify);
+  combineApiPath(path: string | undefined, prefix?: string | boolean, simplify?: boolean) {
+    return this.app.meta.util.combineApiPath(this[BeanModuleScope], path, prefix, simplify);
   }
 }
