@@ -4,13 +4,13 @@ import { IInterceptorRecord } from '../interface/interceptor.js';
 import { IMiddlewareRecord } from '../interface/middleware.js';
 import { IPacketRecord } from '../interface/packet.js';
 import { IPipeRecord } from '../interface/pipe.js';
-import { RemoveNever } from '../utils/removeNever.js';
+import { OmitNever } from '../utils/removeNever.js';
 
 export interface ConfigMetadata {
-  middleware: RemoveNever<IMiddlewareRecord>;
-  guard: RemoveNever<IGuardRecord>;
-  interceptor: RemoveNever<IInterceptorRecord>;
-  pipe: RemoveNever<IPipeRecord>;
-  connection: RemoveNever<IConnectionRecord>;
-  packet: RemoveNever<IPacketRecord>;
+  middleware: OmitNever<IMiddlewareRecord>;
+  guard: OmitNever<IGuardRecord>;
+  interceptor: OmitNever<IInterceptorRecord>;
+  pipe: OmitNever<IPipeRecord>;
+  connection: OmitNever<IConnectionRecord>;
+  packet: OmitNever<IPacketRecord>;
 }
