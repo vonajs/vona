@@ -2,7 +2,6 @@ import { VonaApplication } from '../../types/index.js';
 import { Onion } from './onion/onion.js';
 
 export default function (app: VonaApplication) {
-  // load
   loadAll(app);
 }
 

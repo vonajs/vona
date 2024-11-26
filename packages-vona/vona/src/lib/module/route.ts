@@ -1,7 +1,6 @@
 import is from 'is-type-of';
 import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
-import loadOnions from './onion.js';
 import {
   VonaApplication,
   VonaContext,
@@ -286,9 +285,6 @@ export class AppRouter extends BeanSimple {
 }
 
 export default function (app: VonaApplication, modules: Record<string, IModule>) {
-  // load onions
-  loadOnions(app);
-
   // patch router
   patchRouter();
 
