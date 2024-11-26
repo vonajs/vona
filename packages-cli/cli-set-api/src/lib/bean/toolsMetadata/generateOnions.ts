@@ -3,8 +3,10 @@ import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { onionScenesMeta } from 'vona-shared';
 
 export async function generateOnions(sceneName: string, moduleName: string, modulePath: string) {
+  const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = `${modulePath}/src/bean/${sceneName}.*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);

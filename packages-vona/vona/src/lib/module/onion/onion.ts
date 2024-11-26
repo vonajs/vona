@@ -13,8 +13,8 @@ import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
 import { Cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
-import { onionScenesMeta, OnionSceneMeta } from './meta.js';
 import { compose, composeAsync, deepExtend } from '../../utils/util.js';
+import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
 
 const __adapter = (_context, chain) => {
   return {
