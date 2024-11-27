@@ -64,6 +64,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   virtual?: boolean;
   moduleBelong?: string;
   options?: unknown;
+  optionsPrimitive?: boolean;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }

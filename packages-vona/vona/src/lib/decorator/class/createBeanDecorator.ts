@@ -3,7 +3,11 @@ import { TypeDecoratorBeanOptionsSceneBase } from '../interface/beanOptions.js';
 import { Constructable } from '../type/constructable.js';
 import { parseModuleName } from './util.js';
 
-export function createBeanDecorator<T>(scene: TypeDecoratorBeanOptionsSceneBase, options?: T): ClassDecorator {
+export function createBeanDecorator<T>(
+  scene: TypeDecoratorBeanOptionsSceneBase,
+  options?: T,
+  optionsPrimitive?: boolean,
+): ClassDecorator {
   return function (target) {
     // module
     const module = parseModuleName();
@@ -14,6 +18,7 @@ export function createBeanDecorator<T>(scene: TypeDecoratorBeanOptionsSceneBase,
       name: undefined,
       beanClass: target as unknown as Constructable,
       options,
+      optionsPrimitive,
     });
   };
 }
