@@ -6,7 +6,7 @@ import { Knex } from 'knex';
 
 export class BeanModelMeta extends BeanBase {
   protected get self() {
-    return Cast<BeanModel>(this);
+    return cast<BeanModel>(this);
   }
 
   public get scopeModuleADatabase() {
@@ -18,7 +18,7 @@ export class BeanModelMeta extends BeanBase {
   }
 
   public get dialectClient() {
-    return Cast<Knex.Client>(cast(this.ctx.db).client).config.client as string;
+    return cast<Knex.Client>(cast(this.ctx.db).client).config.client as string;
   }
 
   public get dialect() {

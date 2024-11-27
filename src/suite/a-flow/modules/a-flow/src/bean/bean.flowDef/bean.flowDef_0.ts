@@ -4,7 +4,7 @@ import { BeanFlowDef } from '../bean.flowDef.js';
 
 export class BeanFlowDef0 extends BeanBase<ScopeModule> {
   get self() {
-    return Cast<BeanFlowDef>(this);
+    return cast<BeanFlowDef>(this);
   }
 
   get modelFlowDef() {

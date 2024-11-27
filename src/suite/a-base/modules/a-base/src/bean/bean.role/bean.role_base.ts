@@ -11,7 +11,7 @@ const __atomClassRole = {
 
 export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   get self() {
-    return Cast<BeanRole>(this);
+    return cast<BeanRole>(this);
   }
 
   get model() {

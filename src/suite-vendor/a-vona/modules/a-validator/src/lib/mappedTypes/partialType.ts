@@ -14,7 +14,7 @@ export function partialType<T, K extends keyof T>(classRef: Type<T>, keys?: K[])
   if (rules) {
     for (const key in rules) {
       if (!keys || keys.includes(key as any)) {
-        rulesNew[key] = Cast<z.ZodSchema>(rules[key]).optional();
+        rulesNew[key] = cast<z.ZodSchema>(rules[key]).optional();
       } else {
         rulesNew[key] = rules[key];
       }

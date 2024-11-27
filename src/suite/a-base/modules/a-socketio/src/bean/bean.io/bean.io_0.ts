@@ -4,7 +4,7 @@ import { BeanIo } from '../bean.io.js';
 
 export class BeanIo0 extends BeanBase<ScopeModule> {
   get self() {
-    return Cast<BeanIo>(this);
+    return cast<BeanIo>(this);
   }
 
   get messageClass() {

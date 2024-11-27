@@ -1,6 +1,6 @@
 import {
   BeanBase,
-  Cast,
+  cast,
   Filter,
   HttpStatus,
   IDecoratorFilterOptionsGlobal,

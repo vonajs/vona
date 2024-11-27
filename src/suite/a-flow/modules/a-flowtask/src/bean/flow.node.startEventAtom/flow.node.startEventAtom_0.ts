@@ -12,7 +12,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase<ScopeM
   }
 
   get self() {
-    return Cast<FlowNodeStartEventAtom>(this);
+    return cast<FlowNodeStartEventAtom>(this);
   }
 
   get modelCondition() {

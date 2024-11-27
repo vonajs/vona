@@ -15,7 +15,7 @@ if (!Bundle) {
   Bundle = global.__egg_born_mock = _Bundle;
 
   before(async function () {
-    const app = Cast<VonaApplication>(Bundle.app);
+    const app = cast<VonaApplication>(Bundle.app);
     // wait ready
     await Bundle.app.ready();
     // session
@@ -32,18 +32,18 @@ if (!Bundle) {
 }
 
 export const assert = Assert;
-export const app = Cast<MockCabloyApplication>(Bundle.app);
+export const app = cast<MockCabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
 export const mm = Bundle.mm;
 
 export function mockPath(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app = Cast<VonaApplication>(Bundle.app);
+  const app = cast<VonaApplication>(Bundle.app);
   return app.meta.util.combineApiPath(moduleInfo, path, false, true);
 }
 export function mockUrl(path?: string) {
   const moduleInfo = parseModuleInfo(ParseModuleNameLevel)!;
-  const app = Cast<VonaApplication>(Bundle.app);
+  const app = cast<VonaApplication>(Bundle.app);
   return app.meta.util.combineApiPath(moduleInfo, path, true, true);
 }
 export function mockModuleInfo(): IModuleInfo {

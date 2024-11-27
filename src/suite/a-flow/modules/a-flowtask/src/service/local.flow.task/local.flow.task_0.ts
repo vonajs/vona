@@ -11,7 +11,7 @@ export class LocalFlowTask0 extends BeanBase<ScopeModule> {
   contextTask: any;
 
   get self() {
-    return Cast<ServiceLocalFlowTask>(this);
+    return cast<ServiceLocalFlowTask>(this);
   }
 
   protected __init__({ nodeInstance }: any) {

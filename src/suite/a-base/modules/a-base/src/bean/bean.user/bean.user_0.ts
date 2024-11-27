@@ -7,7 +7,7 @@ const _usersAnonymous: any = {};
 
 export class BeanUser0 extends BeanBase<ScopeModule> {
   get self() {
-    return Cast<BeanUser>(this);
+    return cast<BeanUser>(this);
   }
 
   get model() {

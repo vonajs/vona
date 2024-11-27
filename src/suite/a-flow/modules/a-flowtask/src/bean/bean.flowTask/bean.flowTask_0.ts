@@ -6,7 +6,7 @@ import { BeanFlowTask } from '../bean.flowTask.js';
 
 export class BeanFlowTask0 extends BeanBase<ScopeModule> {
   get self() {
-    return Cast<BeanFlowTask>(this);
+    return cast<BeanFlowTask>(this);
   }
 
   get modelFlowTask() {

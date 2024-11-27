@@ -7,7 +7,7 @@ import Redlock from 'redlock';
 import { Request } from 'egg';
 import {
   VonaContext,
-  Cast,
+  cast,
   IModule,
   PowerPartial,
   TypeMonkeyName,

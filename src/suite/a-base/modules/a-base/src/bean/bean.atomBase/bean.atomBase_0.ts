@@ -4,7 +4,7 @@ import { BeanAtomBase } from '../bean.atomBase.js';
 
 export class BeanAtomBase0 extends BeanBase {
   protected get self() {
-    return Cast<BeanAtomBase>(this);
+    return cast<BeanAtomBase>(this);
   }
 
   get scopeModuleABase() {

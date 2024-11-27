@@ -22,7 +22,7 @@ const context: ContextBase = {
     return self.app.bean.instance.getConfig(self.subdomain) || self.app.config;
   },
   get module() {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     if (this[MODULE] === undefined) {
       const url = self.req.url || '';
       let info;
@@ -46,7 +46,7 @@ const context: ContextBase = {
     return this[MODULE];
   },
   get meta() {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     if (!this[META]) {
       this[META] = self.bean._newBean(CtxMeta);
     }
@@ -65,7 +65,7 @@ const context: ContextBase = {
     this[DBLEVEL] = value;
   },
   get subdomain() {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     return typeof this[SUBDOMAIN] === 'undefined' ? self.subdomains.join('.') : this[SUBDOMAIN];
   },
   set subdomain(value) {
@@ -85,7 +85,7 @@ const context: ContextBase = {
     this.dbLevel = value.dbLevel;
   },
   get cache() {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     return self.app.bean._getBean('cache' as any);
   },
   tail(cb) {
@@ -115,17 +115,17 @@ const context: ContextBase = {
   },
 
   async getPayload(options) {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     return await raw(inflate(self.req), options);
   },
 
   getClass() {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     return self.route?.controller;
   },
 
   getClassBeanFullName(): string | undefined {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     const controller = self.getClass();
     if (!controller) return undefined;
     const beanOptions = appResource.getBean(controller);
@@ -133,7 +133,7 @@ const context: ContextBase = {
   },
 
   getHandler() {
-    const self = Cast<VonaContext>(this);
+    const self = cast<VonaContext>(this);
     return self.route?.actionDescriptor?.value;
   },
 };

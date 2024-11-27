@@ -14,7 +14,7 @@ export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
   _flowListener: ServiceLocalFlowListener;
 
   get self() {
-    return Cast<ServiceLocalFlow>(this);
+    return cast<ServiceLocalFlow>(this);
   }
 
   protected __init__({ flowDef }: any) {

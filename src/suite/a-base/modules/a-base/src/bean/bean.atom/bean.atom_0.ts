@@ -4,7 +4,7 @@ import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {
   get self() {
-    return Cast<BeanAtom>(this);
+    return cast<BeanAtom>(this);
   }
 
   get atomClass() {

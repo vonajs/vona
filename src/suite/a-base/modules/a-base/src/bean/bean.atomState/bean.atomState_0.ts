@@ -11,7 +11,7 @@ export class BeanAtomState0 extends BeanBase {
   }
 
   get self() {
-    return Cast<BeanAtomState>(this);
+    return cast<BeanAtomState>(this);
   }
 
   async findDictItem({ atomClass, atomClassBase, atomStage, atomState }: any) {

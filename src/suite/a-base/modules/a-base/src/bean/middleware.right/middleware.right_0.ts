@@ -5,7 +5,7 @@ import { MiddlewareRight } from '../middleware.right.js';
 
 export class MiddlewareRight0 extends BeanBase<ScopeModule> {
   get self() {
-    return Cast<MiddlewareRight>(this);
+    return cast<MiddlewareRight>(this);
   }
 
   get constant() {

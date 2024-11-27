@@ -4,7 +4,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import {
   VonaApplication,
   VonaContext,
-  Cast,
+  cast,
   IModule,
   IMiddlewareItem,
   SymbolUseMiddlewareOptions,
