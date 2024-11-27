@@ -3,6 +3,7 @@ export * from './atom.js';
 export * from './bean.js';
 export * from './connection.js';
 export * from './controller.js';
+export * from './createBeanDecorator.js';
 export * from './dto.js';
 export * from './entity.js';
 export * from './filter.js';

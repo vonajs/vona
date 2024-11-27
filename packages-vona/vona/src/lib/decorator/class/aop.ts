@@ -1,18 +1,6 @@
-import { appResource, IDecoratorAopOptions } from '../../../index.js';
-import { Constructable } from '../index.js';
-import { parseModuleName } from './util.js';
+import { IDecoratorAopOptions } from '../../../index.js';
+import { createBeanDecorator } from '../index.js';
 
 export function Aop(options: IDecoratorAopOptions): ClassDecorator {
-  return function (target) {
-    // module
-    const module = parseModuleName();
-    // add
-    appResource.addBean({
-      module,
-      scene: 'aop',
-      name: undefined,
-      beanClass: target as unknown as Constructable,
-      options,
-    });
-  };
+  return createBeanDecorator('aop', options);
 }

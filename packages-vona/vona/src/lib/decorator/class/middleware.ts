@@ -1,18 +1,6 @@
-import { appResource, IDecoratorMiddlewareOptions } from '../../../index.js';
-import { Constructable } from '../index.js';
-import { parseModuleName } from './util.js';
+import { IDecoratorMiddlewareOptions } from '../../../index.js';
+import { createBeanDecorator } from '../index.js';
 
 export function Middleware<T extends IDecoratorMiddlewareOptions>(options?: T): ClassDecorator {
-  return function (target) {
-    // module
-    const module = parseModuleName();
-    // add
-    appResource.addBean({
-      module,
-      scene: 'middleware',
-      name: undefined,
-      beanClass: target as unknown as Constructable,
-      options,
-    });
-  };
+  return createBeanDecorator('middleware', options);
 }
