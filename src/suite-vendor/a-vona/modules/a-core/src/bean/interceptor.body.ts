@@ -1,6 +1,6 @@
-import { BeanBase, IDecoratorInterceptorOptions, IInterceptorExecute, Interceptor, Next } from 'vona';
+import { BeanBase, IDecoratorInterceptorOptionsGlobal, IInterceptorExecute, Interceptor, Next } from 'vona';
 
-export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
+export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptionsGlobal {}
 
 @Interceptor<IInterceptorOptionsBody>({ global: true })
 export class InterceptorBody extends BeanBase implements IInterceptorExecute {
