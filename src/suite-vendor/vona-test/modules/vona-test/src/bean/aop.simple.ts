@@ -8,7 +8,7 @@ class AopSimpleBase extends BeanBase {
   }
 }
 
-@Aop({ match: 'testCtx' })
+@Aop({ match: 'testCtx', dependencies: 'vona-test:regExp', meta: { mode: 'unittest' } })
 export class AopSimple extends AopSimpleBase {
   // magic
   __get__(context, next) {

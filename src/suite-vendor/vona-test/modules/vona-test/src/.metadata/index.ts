@@ -1,10 +1,6 @@
 /** beans: begin */
-export * from '../bean/aop.regExp.js';
-export * from '../bean/aop.simple.js';
 export * from '../bean/bean.testCtx.js';
 export * from '../bean/summer.cache.test.js';
-import { AopRegExp } from '../bean/aop.regExp.js';
-import { AopSimple } from '../bean/aop.simple.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
 import { SummerCacheTest } from '../bean/summer.cache.test.js';
 import 'vona';
@@ -14,12 +10,22 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'vona-test.aop.regExp': AopRegExp;
-    'vona-test.aop.simple': AopSimple;
     'vona-test.summer.cache.test': SummerCacheTest;
   }
 }
 /** beans: end */
+/** aops: begin */
+export * from '../bean/aop.regExp.js';
+export * from '../bean/aop.simple.js';
+
+import { IDecoratorAopOptions } from 'vona';
+declare module 'vona' {
+  export interface IAopRecord {
+    'vona-test:regExp': IDecoratorAopOptions;
+    'vona-test:simple': IDecoratorAopOptions;
+  }
+}
+/** aops: end */
 /** controllers: begin */
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
