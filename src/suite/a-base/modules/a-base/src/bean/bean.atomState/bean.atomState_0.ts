@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { BeanBase } from 'vona';
 import { BeanAtomState } from '../bean.atomState.js';
 

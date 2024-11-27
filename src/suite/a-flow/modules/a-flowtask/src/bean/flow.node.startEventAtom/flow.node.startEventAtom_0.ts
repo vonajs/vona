@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { ScopeModule } from '../../.metadata/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';

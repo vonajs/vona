@@ -1,4 +1,4 @@
-export function Cast<T = any>(source: unknown) {
+export function cast<T = any>(source: unknown) {
   return source as T;
 }
 

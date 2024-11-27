@@ -1,5 +1,5 @@
 import _Bundle from 'egg-mock/bootstrap.js';
-import { VonaApplication, VonaContext, Cast } from 'vona';
+import { VonaApplication, VonaContext, cast } from 'vona';
 import Assert from 'assert';
 import { IModuleInfo } from '@cabloy/module-info';
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';

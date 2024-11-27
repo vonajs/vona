@@ -4,7 +4,7 @@ import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { VonaApplication } from '../../../types/application/app.js';
-import { Cast } from '../../../types/utils/cast.js';
+import { cast } from '../../../types/utils/cast.js';
 
 const __pathesWatch = [
   'src/backend/config',
@@ -32,7 +32,7 @@ export default function (app: VonaApplication) {
     const watchDirs = _collectDevelopmentWatchDirs();
     // close
     if (watcherDevelopment) {
-      const _watcher = Cast(watcherDevelopment);
+      const _watcher = cast(watcherDevelopment);
       if (!_watcher.__eb_closed) {
         if (_watcher.__eb_ready) {
           _watcher.close();
@@ -50,7 +50,7 @@ export default function (app: VonaApplication) {
       }, app.config.development.debounce),
     );
     // on ready
-    const _watcher2 = Cast(_watcher);
+    const _watcher2 = cast(_watcher);
     _watcher.once('ready', function () {
       _watcher2.__eb_ready = true;
       if (_watcher2.__eb_closing) {

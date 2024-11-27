@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { BeanModelKnex } from './bean.model_knex.js';
 import { Knex } from 'knex';
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
@@ -13,7 +13,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
         return callback(view);
       });
       // view sql
-      const sql = Cast(_view).toSQL();
+      const sql = cast(_view).toSQL();
       const viewSql = sql[0].sql;
       // record view
       const viewRecord = await this.modelViewRecord.get({ viewName });
@@ -100,9 +100,9 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
       // dependencies
       const view = views.find(view => view.name === dependent);
       if (view) {
-        const dep = Cast(view.dependencies).find(dep => dep.toLowerCase() === viewName.toLowerCase());
+        const dep = cast(view.dependencies).find(dep => dep.toLowerCase() === viewName.toLowerCase());
         if (!dep) {
-          Cast(view.dependencies).push(viewName);
+          cast(view.dependencies).push(viewName);
         }
       } else {
         views.push({ name: dependent, dependencies: [viewName] });

@@ -1,7 +1,7 @@
 import http from 'http';
 import compose from 'koa-compose';
 import { PerformActionInnerParams } from './type.js';
-import { Cast, VonaContext } from '../../types/index.js';
+import { cast, VonaContext } from '../../types/index.js';
 
 let __fnMiddleware;
 
@@ -49,12 +49,12 @@ export default async function performAction<T = any>({
 
     // query params body
     if (query) {
-      Cast(ctx.req).query = Cast(ctx.request).query = query;
+      cast(ctx.req).query = cast(ctx.request).query = query;
     }
     if (params) {
-      Cast(ctx.req).params = Cast(ctx.request).params = params;
+      cast(ctx.req).params = cast(ctx.request).params = params;
     }
-    Cast(ctx.req).body = ctx.request.body = body;
+    cast(ctx.req).body = ctx.request.body = body;
 
     // headers
     delegateHeaders(ctx, ctxCaller, headers);

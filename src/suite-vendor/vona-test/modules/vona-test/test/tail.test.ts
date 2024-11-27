@@ -1,10 +1,10 @@
 import { app, mockUrl } from 'vona-mock';
-import { Cast } from 'vona';
+import { cast } from 'vona';
 
 describe.only('tail.test.ts', () => {
   it('action:tail', async () => {
     await app.meta.mockUtil.mockCtx(async ctx => {
-      Cast(ctx.meta)._tail_test_caller = 1;
+      cast(ctx.meta)._tail_test_caller = 1;
       await ctx.meta.util.performAction({
         method: 'post',
         url: mockUrl('tail'),
@@ -14,8 +14,8 @@ describe.only('tail.test.ts', () => {
 
   it('action:tail:transaction', async () => {
     await app.meta.mockUtil.mockCtx(async ctx => {
-      Cast(ctx.meta)._tail_test_als_caller = 1;
-      await Cast(ctx).transaction.begin(async () => {
+      cast(ctx.meta)._tail_test_als_caller = 1;
+      await cast(ctx).transaction.begin(async () => {
         await ctx.meta.util.performAction({
           method: 'post',
           url: mockUrl('tail'),

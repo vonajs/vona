@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 

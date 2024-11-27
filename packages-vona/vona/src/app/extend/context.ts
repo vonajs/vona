@@ -4,7 +4,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
-import { Cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.js';
 import { appResource } from '../../lib/index.js';
 import { AsyncResource } from 'node:async_hooks';
 
@@ -18,7 +18,7 @@ const DBLEVEL = Symbol.for('Context#__dblevel');
 
 const context: ContextBase = {
   get config() {
-    const self = Cast(this);
+    const self = cast(this);
     return self.app.bean.instance.getConfig(self.subdomain) || self.app.config;
   },
   get module() {
@@ -80,7 +80,7 @@ const context: ContextBase = {
     // innerAccess
     this.innerAccess = true;
     // transaction
-    Cast(this).dbMeta = value.dbMeta;
+    cast(this).dbMeta = value.dbMeta;
     // dbLevel
     this.dbLevel = value.dbLevel;
   },
@@ -89,7 +89,7 @@ const context: ContextBase = {
     return self.app.bean._getBean('cache' as any);
   },
   tail(cb) {
-    if (!Cast(this).dbMeta.master) {
+    if (!cast(this).dbMeta.master) {
       this.ctxCaller.tail(AsyncResource.bind(cb));
     } else {
       this.tailCallbacks.push(cb);

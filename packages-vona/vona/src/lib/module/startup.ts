@@ -1,4 +1,4 @@
-import { VonaContext, Cast } from '../../index.js';
+import { VonaContext, cast } from '../../index.js';
 
 export default function (app) {
   // use modulesArray
@@ -108,7 +108,7 @@ export default function (app) {
       const cacheKey = `startupDebounce:${fullKey}${instanceStartup ? `:${ctx.instance.id}` : ''}`;
       const debounce =
         typeof startup.config.debounce === 'number' ? startup.config.debounce : ctx.app.config.queue.startup.debounce;
-      const cache = Cast(ctx.app.bean).cacheRedis.module('a-base');
+      const cache = cast(ctx.app.bean).cacheRedis.module('a-base');
       const flag = await cache.getset(cacheKey, true, debounce);
       if (flag) return;
     }

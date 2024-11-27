@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { BeanAtomBaseExportBulk } from './bean.atomBase_exportBulk.js';
 
 export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
@@ -65,7 +65,7 @@ export class BeanAtomBasePerformAction extends BeanAtomBaseExportBulk {
     const cmsRender = this.app.bean.util.getProperty(actionBase, 'params.cms.render');
     if (cmsRender) {
       // render article
-      await Cast(this.app.bean).cms.render._renderArticlePush({ key, inner: false });
+      await cast(this.app.bean).cms.render._renderArticlePush({ key, inner: false });
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
@@ -272,7 +272,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
       where: { atomId: atomIdSrc, mode: 2 },
     });
     for (const file of files) {
-      delete Cast(file).id;
+      delete cast(file).id;
       file.atomId = atomIdDest;
       await this.modelFile.insert(file);
     }

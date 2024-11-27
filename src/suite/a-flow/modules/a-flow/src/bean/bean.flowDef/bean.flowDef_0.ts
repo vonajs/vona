@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
-import { BeanBase, Cast } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { BeanFlowDef } from '../bean.flowDef.js';
 
 export class BeanFlowDef0 extends BeanBase<ScopeModule> {

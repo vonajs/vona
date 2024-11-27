@@ -4,7 +4,7 @@ import { EnumSchemaAttributes } from '../interfaces/enum-schema-attributes.inter
 import { EnumAllowedTypes, SchemaObjectMetadata } from '../interfaces/schema-object-metadata.interface.js';
 import { getEnumType, getEnumValues } from '../utils/enum.utils.js';
 import { createPropertyDecorator, getTypeIsArrayTuple } from './helpers.js';
-import { Cast } from 'vona';
+import { cast } from 'vona';
 
 export type ApiPropertyCommonOptions = SchemaObjectMetadata & {
   'x-enumNames'?: string[];
@@ -59,7 +59,7 @@ export function createApiPropertyDecorator(
       type: getEnumType(enumValues),
       enum: enumValues,
     };
-    delete Cast(options).enum;
+    delete cast(options).enum;
   } else if ('enum' in options) {
     const enumValues = getEnumValues(options.enum as any);
 

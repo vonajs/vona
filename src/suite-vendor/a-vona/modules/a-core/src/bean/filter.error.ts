@@ -26,7 +26,7 @@ export class FilterError extends BeanBase<ScopeModule> implements IFilterLog, IF
     // 403->401
     if (err.code === 403) {
       // todo: use diffrent state user
-      const user = this.ctx && this.ctx.state && Cast(this.ctx.state).user;
+      const user = this.ctx && this.ctx.state && cast(this.ctx.state).user;
       if (user && user.op.anonymous) {
         err.code = 401;
         err.status = 401;
@@ -65,8 +65,8 @@ export class FilterError extends BeanBase<ScopeModule> implements IFilterLog, IF
       code,
       message,
     } as any;
-    if (Cast(err).errors) {
-      errorJson.errors = Cast(err).errors;
+    if (cast(err).errors) {
+      errorJson.errors = cast(err).errors;
     }
 
     if (status >= 500 && !this.app.meta.isProd) {

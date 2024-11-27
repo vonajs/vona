@@ -200,10 +200,10 @@ export class AppUtil extends BeanSimple {
       });
       // instance
       if (subdomain !== undefined && subdomain !== null) {
-        ctx.instance = await Cast(this.app.bean).instance.get(subdomain);
+        ctx.instance = await cast(this.app.bean).instance.get(subdomain);
         // start instance
         if (instance) {
-          await Cast(this.app.bean).instance.checkAppReadyInstance(true);
+          await cast(this.app.bean).instance.checkAppReadyInstance(true);
         }
       }
       // scope
@@ -284,7 +284,7 @@ export class AppUtil extends BeanSimple {
         // execute
         let res;
         if (transaction) {
-          res = await Cast(ctx).transaction.begin(async () => {
+          res = await cast(ctx).transaction.begin(async () => {
             return await this._executeBeanFn({ fn, ctx, bean, context, args });
           });
         } else {

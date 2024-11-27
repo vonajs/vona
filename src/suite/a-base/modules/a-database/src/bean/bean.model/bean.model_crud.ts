@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { TableIdentity } from 'vona-module-a-core';
 import { BigNumber } from 'bignumber.js';
 import { BeanModelView } from './bean.model_view.js';
@@ -76,7 +76,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     const result: (TResult2 | undefined)[] = [];
     for (const id of ids) {
       // item maybe undefined
-      result.push(items.find(item => Cast(item).id === id));
+      result.push(items.find(item => cast(item).id === id));
     }
     return result;
   }

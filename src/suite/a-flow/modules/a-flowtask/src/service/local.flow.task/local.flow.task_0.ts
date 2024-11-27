@@ -1,5 +1,5 @@
 import { ScopeModule } from '../../.metadata/this.js';
-import { BeanBase, Cast } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { LocalContextTask } from '../../common/local.context.task.js';
 import { ServiceLocalFlowTask } from '../localFlowTask.js';
 

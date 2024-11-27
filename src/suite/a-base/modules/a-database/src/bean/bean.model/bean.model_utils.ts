@@ -5,7 +5,7 @@ import { getTableOrTableAlias, isRaw } from '../../common/utils.js';
 import { checkWhere } from '../../common/checkWhere.js';
 import { buildWhere } from '../../common/buildWhere.js';
 import { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types/index.js';
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { BigNumber } from 'bignumber.js';
 
 let __columns: Record<string, ITableColumns> = {};
@@ -107,13 +107,13 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
   buildJoin(builder: Knex.QueryBuilder, join?: IModelSelectParamsJoin) {
     if (!join) return;
     const [joinType, joinTable, joinOn] = join;
-    builder[joinType](joinTable, Cast(joinOn));
+    builder[joinType](joinTable, cast(joinOn));
   }
 
   buildJoins(builder: Knex.QueryBuilder, joins?: IModelSelectParamsJoin[]) {
     if (!joins) return;
     for (const [joinType, joinTable, joinOn] of joins) {
-      builder[joinType](joinTable, Cast(joinOn));
+      builder[joinType](joinTable, cast(joinOn));
     }
   }
 

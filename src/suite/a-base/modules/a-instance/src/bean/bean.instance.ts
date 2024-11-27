@@ -1,4 +1,4 @@
-import { Cast, ConfigInstanceBase, deepExtend, isNil, VonaConfig } from 'vona';
+import { cast, ConfigInstanceBase, deepExtend, isNil, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -178,7 +178,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
           return;
         }
         // startup
-        Cast(this.ctx.app.meta)
+        cast(this.ctx.app.meta)
           ._runStartupInstance({ subdomain: info.subdomain, options: info.options })
           .then(() => {
             info.resolve();

@@ -1,5 +1,5 @@
 import { ScopeModule } from '../../.metadata/this.js';
-import { BeanModuleScopeBase, Cast } from 'vona';
+import { BeanModuleScopeBase, cast } from 'vona';
 import { BeanAtom } from '../bean.atom.js';
 
 export class BeanAtom0 extends BeanModuleScopeBase<ScopeModule> {

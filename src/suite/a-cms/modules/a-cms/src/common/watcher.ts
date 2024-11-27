@@ -1,7 +1,7 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
-import { BeanBase, Cast } from 'vona';
+import { BeanBase, cast } from 'vona';
 
 export class Watcher extends BeanBase {
   _watchers: any;
@@ -108,7 +108,7 @@ export class Watcher extends BeanBase {
       }, 300),
     );
     // on ready
-    const _watcher2 = Cast(_watcher);
+    const _watcher2 = cast(_watcher);
     _watcher.once('ready', function () {
       _watcher2.__eb_ready = true;
       if (_watcher2.__eb_closing) {

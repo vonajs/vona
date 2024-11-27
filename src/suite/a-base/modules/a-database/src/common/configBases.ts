@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { Knex } from 'knex';
 import { promisify } from 'node:util';
 import pgTypes from 'pg-types';
@@ -31,7 +31,7 @@ export const configBases: Record<string, Knex.Config> = {
       types: {
         getTypeParser: (oid: number, format: string): any => {
           if (oid === 114) return pgTypes.getTypeParser(25, 'text');
-          return pgTypes.getTypeParser(oid, Cast(format));
+          return pgTypes.getTypeParser(oid, cast(format));
         },
       },
     },

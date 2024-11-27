@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { TableIdentity } from 'vona-module-a-core';
 import { BeanModel } from '../bean.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types/index.js';
@@ -61,7 +61,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // filter disableDeleted
     items = items.filter(item => {
       if (!item) return false;
-      if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return false;
+      if (!this._checkDisableDeletedByOptions(options) && cast(item).deleted === 1) return false;
       return true;
     });
     return this.__filterMGetColumns(items, options);
@@ -102,7 +102,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       return [] as TResult2[];
     }
     // 2: mget
-    const ids = items.map(item => Cast(item).id);
+    const ids = items.map(item => cast(item).id);
     const options2 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
     return await this.mget(table, ids, options2);
   }
@@ -191,9 +191,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         return;
       }
       if (items.length === 1) {
-        id = Cast(items[0]).id;
+        id = cast(items[0]).id;
       } else {
-        id = items.map(item => Cast(item).id);
+        id = items.map(item => cast(item).id);
       }
     }
     // update by id/ids
@@ -234,9 +234,9 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     let id;
     if (items.length === 1) {
-      id = Cast(items[0]).id;
+      id = cast(items[0]).id;
     } else {
-      id = items.map(item => Cast(item).id);
+      id = items.map(item => cast(item).id);
     }
     // delete by id/ids
     await super.delete(table, { id }, options);
@@ -286,7 +286,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       },
     });
     if (!item) return item;
-    if (!this._checkDisableDeletedByOptions(options) && Cast(item).deleted === 1) return undefined;
+    if (!this._checkDisableDeletedByOptions(options) && cast(item).deleted === 1) return undefined;
     return item;
   }
 

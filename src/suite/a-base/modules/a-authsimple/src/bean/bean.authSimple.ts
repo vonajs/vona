@@ -1,5 +1,5 @@
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase, Cast } from 'vona';
+import { Bean, BeanBase, cast } from 'vona';
 
 @Bean()
 export class BeanAuthSimple extends BeanBase<ScopeModule> {
@@ -150,7 +150,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
       // verify old one
       const authSimple = await this.localSimple.verify({ userId, password: passwordOld });
       if (!authSimple) this.app.throw(403);
-      authSimpleId = Cast(authSimple).id;
+      authSimpleId = cast(authSimple).id;
     }
 
     // save new

@@ -1,4 +1,4 @@
-import { appMetadata, Cast, Type } from 'vona';
+import { appMetadata, cast, Type } from 'vona';
 import { SymbolDecoratorRule } from '../decorator/rule.js';
 import { z } from 'zod';
 

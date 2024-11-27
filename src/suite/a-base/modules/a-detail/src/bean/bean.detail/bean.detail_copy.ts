@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { BeanDetail0 } from './bean.detail_0.js';
 
 export class BeanDetailCopy extends BeanDetail0 {
@@ -126,12 +126,12 @@ export class BeanDetailCopy extends BeanDetail0 {
           detailKeyDest,
         });
         // set flag
-        Cast(detailBaseSrc).__copied = true;
+        cast(detailBaseSrc).__copied = true;
       }
     }
     // loop: append the remains
     for (const detailBaseSrc of detailBasesSrc) {
-      if (Cast(detailBaseSrc).__copied) continue;
+      if (cast(detailBaseSrc).__copied) continue;
       const detailSrc = detailsSrc.find(item => item.atomId === detailBaseSrc.detailId);
       await this._copyDetail({
         atomClassDetail,

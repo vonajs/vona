@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanBase, Cast, Controller } from 'vona';
+import { BeanBase, cast, Controller } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 import { ServiceTest } from '../index.js';
@@ -24,7 +24,7 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(this.bean.testCtx, this.app.bean.testCtx);
 
     // magic
-    res = Cast(this.bean.testCtx).magic;
+    res = cast(this.bean.testCtx).magic;
     assert.equal(res, 'magic:simpleaop');
 
     // name
@@ -54,10 +54,10 @@ export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
     assert.equal(res, `${a + b}:regexpaop`);
 
     // magic of self
-    Cast(this.bean.testCtx).magicSelf = '__magicSelf__';
-    res = Cast(this.app.bean.testCtx).magicSelf;
+    cast(this.bean.testCtx).magicSelf = '__magicSelf__';
+    res = cast(this.app.bean.testCtx).magicSelf;
     assert.equal(res, '__magicSelf__');
-    res = Cast(this.app.bean.testCtx)['magic:self'];
+    res = cast(this.app.bean.testCtx)['magic:self'];
     assert.equal(res, '__magicSelf__');
 
     // ok

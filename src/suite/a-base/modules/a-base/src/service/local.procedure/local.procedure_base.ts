@@ -1,4 +1,4 @@
-import { BeanBase, Cast } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { ServiceProcedure } from '../procedure.js';
 
 export class LocalProcedureBase extends BeanBase {

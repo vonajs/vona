@@ -1,6 +1,6 @@
 import { app } from 'vona-mock';
 import { DtoUser } from '../src/dto/user.js';
-import { Cast, catchError, Dto } from 'vona';
+import { cast, catchError, Dto } from 'vona';
 import assert from 'assert';
 import { intersectionType, omitType, partialType, pickType, Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
@@ -26,7 +26,7 @@ describe.only('mappedTypes.test.ts', () => {
       const [, err2] = await catchError(async () => {
         return await serviceValidator.validate(omitType(DtoUser, ['married']), data, { strict: true });
       });
-      assert.equal(Cast(err2?.message)[0]?.keys[0], 'married');
+      assert.equal(cast(err2?.message)[0]?.keys[0], 'married');
       // omitType and inherit
       const [dataNew3] = await catchError(async () => {
         return await serviceValidator.validate(DtoUserWithMarried, data, { strict: true });
@@ -36,7 +36,7 @@ describe.only('mappedTypes.test.ts', () => {
       const [, err4] = await catchError(async () => {
         return await serviceValidator.validate(pickType(DtoUser, ['id', 'name']), data, { strict: true });
       });
-      assert.equal(Cast(err4?.message)[0]?.keys[0], 'married');
+      assert.equal(cast(err4?.message)[0]?.keys[0], 'married');
       // partialType
       const [dataNew5] = await catchError(async () => {
         return await serviceValidator.validate(partialType(DtoUser), {}, { strict: true });
@@ -54,7 +54,7 @@ describe.only('mappedTypes.test.ts', () => {
       const [, err7] = await catchError(async () => {
         return await serviceValidator.validate(intersectionType(DtoUser, DtoProfile), data, { strict: true });
       });
-      assert.equal(Cast(err7?.message)[0]?.path[0], 'email');
+      assert.equal(cast(err7?.message)[0]?.path[0], 'email');
     });
   });
 });

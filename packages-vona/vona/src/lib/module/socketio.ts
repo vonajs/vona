@@ -1,6 +1,6 @@
 import { URL } from 'url';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { Cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.js';
 import { VonaContext } from '../../types/index.js';
 
 export class SocketioReady extends BeanSimple {
@@ -29,7 +29,7 @@ export class SocketioReady extends BeanSimple {
         url: '/api/a/base/',
       });
       app.runInAnonymousContextScope(async ctx => {
-        return Cast(app.bean)
+        return cast(app.bean)
           .instance.checkAppReadyInstance(true)
           .then(res => {
             if (!res) return fn(null, false);

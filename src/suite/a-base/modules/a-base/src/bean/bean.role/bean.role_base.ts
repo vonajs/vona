@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
 import { BeanModuleScopeBase } from 'vona';
 import initData15 from '../version.manager/init/initData15.js';

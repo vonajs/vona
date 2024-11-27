@@ -1,4 +1,4 @@
-import { Cast } from 'vona';
+import { cast } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
@@ -26,7 +26,7 @@ export class MiddlewareJsonp extends BeanBase<ScopeModule> {
       }
     }
     // jsonp
-    const fn = Cast(this.ctx.app).jsonp(options);
+    const fn = cast(this.ctx.app).jsonp(options);
     await fn(this.ctx, next);
   }
 }

@@ -1,4 +1,4 @@
-import { BeanBase, Cast, IDecoratorEntityOptions, IDecoratorModelOptions, appResource } from 'vona';
+import { BeanBase, cast, IDecoratorEntityOptions, IDecoratorModelOptions, appResource } from 'vona';
 import { BeanModel } from '../bean.model.js';
 import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types/index.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
@@ -18,7 +18,7 @@ export class BeanModelMeta extends BeanBase {
   }
 
   public get dialectClient() {
-    return Cast<Knex.Client>(Cast(this.ctx.db).client).config.client as string;
+    return Cast<Knex.Client>(cast(this.ctx.db).client).config.client as string;
   }
 
   public get dialect() {

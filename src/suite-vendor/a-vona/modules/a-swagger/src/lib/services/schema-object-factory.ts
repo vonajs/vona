@@ -20,7 +20,7 @@ import { isDateCtor } from '../utils/is-date-ctor.util.js';
 import { ModelPropertiesAccessor } from './model-properties-accessor.js';
 import { ParamWithTypeMetadata } from './parameter-metadata-accessor.js';
 import { SwaggerTypesMapper } from './swagger-types-mapper.js';
-import { Cast } from 'vona';
+import { cast } from 'vona';
 
 export class SchemaObjectFactory {
   constructor(
@@ -200,11 +200,11 @@ export class SchemaObjectFactory {
     const customSchema: ApiSchemaOptions[] = Reflect.getOwnMetadata(DECORATORS.API_SCHEMA, type as any);
 
     if (!customSchema || customSchema.length === 0) {
-      return Cast(type).name;
+      return cast(type).name;
     }
 
     const schemaName = customSchema[0].name;
-    return schemaName ?? Cast(type).name;
+    return schemaName ?? cast(type).name;
   }
 
   mergePropertyWithMetadata(
@@ -371,7 +371,7 @@ export class SchemaObjectFactory {
       ...omit(metadata, [...keysToRemove, ...keysToMove]),
       name: metadata.name || key,
       type: 'array',
-      items: isString(type) ? { type, ...movedProperties } : { ...Cast(type), ...movedProperties },
+      items: isString(type) ? { type, ...movedProperties } : { ...cast(type), ...movedProperties },
     };
     schemaHost.items = omitBy(schemaHost.items, isUndefined);
 
@@ -560,11 +560,11 @@ export class SchemaObjectFactory {
   }
 
   private isLazyTypeFunc(type?: Function | Type<unknown> | string): type is { type: Function } & Function {
-    return isFunction(type) && Cast(type).name == 'type';
+    return isFunction(type) && cast(type).name == 'type';
   }
 
   private getTypeName(type: Type<unknown> | string): string {
-    return type && isFunction(type) ? Cast(type).name : (type as string);
+    return type && isFunction(type) ? cast(type).name : (type as string);
   }
 
   private isObjectLiteral(obj: Record<string, any> | undefined) {

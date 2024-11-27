@@ -1,6 +1,6 @@
 import debounce from 'debounce';
 import { VonaApplication } from '../../../types/application/app.js';
-import { Cast } from '../../../types/utils/cast.js';
+import { cast } from '../../../types/utils/cast.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 export class AppReload extends BeanSimple {
@@ -76,7 +76,7 @@ export class AppReload extends BeanSimple {
 
   // invoked in agent
   _reloadImmediateInAgent() {
-    Cast(process).send({
+    cast(process).send({
       to: 'master',
       action: 'reload-worker',
     });

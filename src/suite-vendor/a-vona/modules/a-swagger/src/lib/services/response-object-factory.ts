@@ -8,7 +8,7 @@ import { ModelPropertiesAccessor } from './model-properties-accessor.js';
 import { ResponseObjectMapper } from './response-object-mapper.js';
 import { SchemaObjectFactory } from './schema-object-factory.js';
 import { SwaggerTypesMapper } from './swagger-types-mapper.js';
-import { Cast } from 'vona';
+import { cast } from 'vona';
 
 export type FactoriesNeededByResponseFactory = {
   linkName: (controllerKey: string, methodKey: string, fieldKey: string) => string;
@@ -66,8 +66,8 @@ export class ResponseObjectFactory {
       };
     }
     const name = this.schemaObjectFactory.exploreModelSchema(type as Function, schemas);
-    if (isFunction(type) && Cast(type).prototype) {
-      const { prototype } = Cast(type);
+    if (isFunction(type) && cast(type).prototype) {
+      const { prototype } = cast(type);
       const links: LinksObject = {};
 
       const properties = this.modelPropertiesAccessor.getModelProperties(prototype);

@@ -1,4 +1,4 @@
-import { BeanBase, Cast } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanAtomBase } from '../bean.atomBase.js';
 

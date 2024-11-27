@@ -14,7 +14,7 @@ import { RouteHandlerArgumentMetaDecorator } from '../../../types/interface/pipe
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
-import { Cast } from '../../../types/utils/cast.js';
+import { cast } from '../../../types/utils/cast.js';
 import { IModule } from '@cabloy/module-info';
 import { compose, composeAsync, deepExtend } from '../../utils/util.js';
 import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
@@ -400,9 +400,9 @@ export class Onion extends BeanSimple {
         return executeCustom(beanInstance, options, next);
       }
       if (packet) {
-        return Cast(beanInstance).execute(packet, options, next);
+        return cast(beanInstance).execute(packet, options, next);
       }
-      return Cast(beanInstance).execute(options, next);
+      return cast(beanInstance).execute(options, next);
     };
     fn._name = item.name;
     return fn;
@@ -451,7 +451,7 @@ function middlewareMatch(ctx: VonaContext, options: IMiddlewareBase) {
 function __aopMatch(match: TypeDecoratorAopOptionsMatch, beanFullName: string) {
   if (!Array.isArray(match)) {
     return (
-      (typeof match === 'string' && match === beanFullName) || (is.regExp(match) && Cast(match).test(beanFullName))
+      (typeof match === 'string' && match === beanFullName) || (is.regExp(match) && cast(match).test(beanFullName))
     );
   }
   return match.some(item => __aopMatch(item, beanFullName));
