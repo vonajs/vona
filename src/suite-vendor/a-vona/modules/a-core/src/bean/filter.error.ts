@@ -35,7 +35,11 @@ export class FilterError extends BeanBase<ScopeModule> implements IFilterLog, IF
 
     // message
     if (err.message && typeof err.message !== 'string') {
-      err.message = JSON.stringify(err.message, null, 2);
+      if (this.app.meta.isProd) {
+        err.message = JSON.stringify(err.message);
+      } else {
+        err.message = JSON.stringify(err.message, null, 2);
+      }
     }
 
     // next

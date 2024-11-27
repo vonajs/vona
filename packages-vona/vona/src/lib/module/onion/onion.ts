@@ -121,14 +121,13 @@ export class Onion extends BeanSimple {
   private _collectArgumentMiddlewares(_ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
     if (!argMeta.pipes) return;
     return argMeta.pipes.map(pipe => {
-      const { pipeName, options, optionsPrimitive } = pipe();
+      const { pipeName, options } = pipe();
       const item = this.middlewaresNormal[pipeName];
       if (!item) throw new Error(`${this.sceneName} not found: ${pipeName}`);
       return {
         ...item,
         argumentPipe: {
           options: options,
-          optionsPrimitive: optionsPrimitive,
         },
       };
     });
@@ -191,7 +190,7 @@ export class Onion extends BeanSimple {
     return middlewaresLocal;
   }
 
-  private _getMiddlewareOptions(item: IMiddlewareItem, optionsPrimitive?: boolean) {
+  private _getMiddlewareOptions(item: IMiddlewareItem) {
     if (!this._cacheMiddlewaresOptions[item.name]) {
       // options: meta
       const optionsMeta = item.options;
@@ -203,7 +202,7 @@ export class Onion extends BeanSimple {
       } else {
         optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
       }
-      if (optionsPrimitive) {
+      if (item.beanOptions.optionsPrimitive) {
         this._cacheMiddlewaresOptions[item.name] = optionsConfig ?? optionsMeta;
       } else {
         this._cacheMiddlewaresOptions[item.name] = deepExtend({}, optionsMeta, optionsConfig);
@@ -218,9 +217,9 @@ export class Onion extends BeanSimple {
 
   combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
     // optionsPrimitive
-    const optionsPrimitive = item.argumentPipe?.optionsPrimitive;
+    const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
-    const optionsMetaAndConfig = this._getMiddlewareOptions(item, optionsPrimitive);
+    const optionsMetaAndConfig = this._getMiddlewareOptions(item);
     // options: instance config
     const optionsInstanceConfig = ctx.instance ? ctx.config.metadata[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
@@ -376,7 +375,7 @@ export class Onion extends BeanSimple {
         packet = ctx.packet;
       }
       // optionsPrimitive
-      const optionsPrimitive = item.argumentPipe?.optionsPrimitive;
+      const optionsPrimitive = item.beanOptions.optionsPrimitive;
       // options
       const options = this.combineMiddlewareOptions(ctx, item);
       // enable match ignore dependencies

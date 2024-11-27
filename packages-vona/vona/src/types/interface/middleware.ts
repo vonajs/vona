@@ -50,6 +50,5 @@ export interface IMiddlewareItem {
   fromConfig?: boolean;
   argumentPipe?: {
     options?: IDecoratorPipeOptions;
-    optionsPrimitive?: boolean;
   };
 }
