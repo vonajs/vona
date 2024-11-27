@@ -190,27 +190,6 @@ export class Onion extends BeanSimple {
     return middlewaresLocal;
   }
 
-  private _getMiddlewareOptions(item: IMiddlewareItem) {
-    if (!this._cacheMiddlewaresOptions[item.name]) {
-      // options: meta
-      const optionsMeta = item.options;
-      // options: config
-      let optionsConfig;
-      if (item.fromConfig) {
-        const config = this.app.config.modules[item.beanOptions.module];
-        optionsConfig = config?.middlewares?.[item.name];
-      } else {
-        optionsConfig = this.app.config.metadata[item.beanOptions.scene]?.[item.name];
-      }
-      if (item.beanOptions.optionsPrimitive) {
-        this._cacheMiddlewaresOptions[item.name] = optionsConfig ?? optionsMeta;
-      } else {
-        this._cacheMiddlewaresOptions[item.name] = deepExtend({}, optionsMeta, optionsConfig);
-      }
-    }
-    return this._cacheMiddlewaresOptions[item.name];
-  }
-
   getMiddlewareItem(middlewareName: string): IMiddlewareItem {
     return this.middlewaresNormal[middlewareName];
   }
@@ -219,7 +198,7 @@ export class Onion extends BeanSimple {
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
-    const optionsMetaAndConfig = this._getMiddlewareOptions(item);
+    const optionsMetaAndConfig = item.beanOptions.options;
     // options: instance config
     const optionsInstanceConfig = ctx.instance ? ctx.config.metadata[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
@@ -256,7 +235,7 @@ export class Onion extends BeanSimple {
 
   private _handleDependents(middlewares: IMiddlewareItem[]) {
     for (const middleware of middlewares) {
-      const middlewareOptions = this._getMiddlewareOptions(middleware);
+      const middlewareOptions = middleware.beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
       let dependents = middlewareOptions.dependents as any;
       if (!dependents) continue;
       if (!Array.isArray(dependents)) {
@@ -267,13 +246,13 @@ export class Onion extends BeanSimple {
         if (!middleware2) {
           throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
         }
-        const options = this._getMiddlewareOptions(middleware2) as any;
+        const options = middleware2.beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
         if (!options.dependencies) options.dependencies = [];
         if (!Array.isArray(options.dependencies)) {
-          options.dependencies = options.dependencies.split(',') as any[];
+          options.dependencies = [options.dependencies] as never[];
         }
         if (options.dependencies.findIndex(item => item === middleware.name) === -1) {
-          options.dependencies.push(middleware.name as any);
+          options.dependencies.push(middleware.name as never);
         }
       }
     }
