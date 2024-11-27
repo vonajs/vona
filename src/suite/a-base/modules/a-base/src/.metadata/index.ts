@@ -1,5 +1,4 @@
 /** beans: begin */
-export * from '../bean/aop.category.js';
 export * from '../bean/bean.atom.js';
 export * from '../bean/bean.atomAction.js';
 export * from '../bean/bean.atomBase.js';
@@ -38,7 +37,6 @@ export * from '../bean/summer.cache.roleScopesOfRole.js';
 export * from '../bean/summer.cache.roleScopesOfUser.js';
 export * from '../bean/summer.cache.roleWhosOfAtomClassAction.js';
 export * from '../bean/version.manager.js';
-import { AopCategory } from '../bean/aop.category.js';
 import { BeanAtom } from '../bean/bean.atom.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
 import { BeanAtomBase } from '../bean/bean.atomBase.js';
@@ -102,7 +100,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'a-base.aop.category': AopCategory;
     'a-base.queue.roleBuild': QueueRoleBuild;
     'a-base.queue.schedule': QueueSchedule;
     'a-base.startup.checkResourceLocales': StartupCheckResourceLocales;
@@ -161,6 +158,16 @@ declare module 'vona' {
   }
 }
 /** connections: end */
+/** aops: begin */
+export * from '../bean/aop.category.js';
+
+import { IDecoratorAopOptions } from 'vona';
+declare module 'vona' {
+  export interface IAopRecord {
+    'a-base:category': IDecoratorAopOptions;
+  }
+}
+/** aops: end */
 /** atoms: begin */
 export * from '../atom/resource.js';
 export * from '../atom/role.js';

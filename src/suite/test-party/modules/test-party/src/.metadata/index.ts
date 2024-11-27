@@ -1,5 +1,4 @@
 /** beans: begin */
-export * from '../bean/aop.atom.js';
 export * from '../bean/broadcast.test.js';
 export * from '../bean/cli.default.demo.js';
 export * from '../bean/event.helloEcho.js';
@@ -17,7 +16,6 @@ export * from '../bean/stats.tasksInstance.js';
 export * from '../bean/stats.tasksUser.js';
 export * from '../bean/summer.cache.test.js';
 export * from '../bean/version.manager.js';
-import { AopAtom } from '../bean/aop.atom.js';
 import { BroadcastTest } from '../bean/broadcast.test.js';
 import { CliDefaultDemo } from '../bean/cli.default.demo.js';
 import { EventHelloEcho } from '../bean/event.helloEcho.js';
@@ -40,7 +38,6 @@ declare module 'vona' {
   export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    'test-party.aop.atom': AopAtom;
     'test-party.broadcast.test': BroadcastTest;
     'test-party.cli.default.demo': CliDefaultDemo;
     'test-party.event.helloEcho': EventHelloEcho;
@@ -73,6 +70,16 @@ declare module 'vona' {
   }
 }
 /** middlewares: end */
+/** aops: begin */
+export * from '../bean/aop.atom.js';
+
+import { IDecoratorAopOptions } from 'vona';
+declare module 'vona' {
+  export interface IAopRecord {
+    'test-party:atom': IDecoratorAopOptions;
+  }
+}
+/** aops: end */
 /** atoms: begin */
 export * from '../atom/party.js';
 export * from '../atom/partyExpense.js';
