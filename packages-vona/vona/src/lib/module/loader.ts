@@ -41,8 +41,8 @@ export class ModuleLoader extends BeanSimple {
     await moduleTools.monkey('moduleLoading');
 
     if (meta.inApp) {
-      loadOnions(app);
       await loadConfig(app, modules);
+      loadOnions(app);
       await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
@@ -58,8 +58,8 @@ export class ModuleLoader extends BeanSimple {
       loadClusterApp(app);
       loadReload(app);
     } else {
-      loadOnions(app);
       await loadConfig(app, modules);
+      loadOnions(app);
       await loadModuleMeta(app, modules);
       loadClusterAgent(app);
       loadReload(app);
