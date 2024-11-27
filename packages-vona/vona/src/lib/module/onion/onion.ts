@@ -324,9 +324,17 @@ export class Onion extends BeanSimple {
     if (!middlewares) return;
     for (const key in middlewares) {
       const beanOptions = middlewares[key];
+      const name = key.replace(`.${this.sceneName}.`, ':');
+      // options
+      const optionsConfig = this.app.config.metadata[beanOptions.scene]?.[name];
+      if (beanOptions.optionsPrimitive) {
+        beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
+      } else {
+        beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
+      }
       // push
       middlewaresAll.push({
-        name: key.replace(`.${this.sceneName}.`, ':'),
+        name,
         options: beanOptions.options as any,
         beanOptions,
       });
@@ -356,6 +364,8 @@ export class Onion extends BeanSimple {
       }
       const beanFullName = `${bean.module}.middleware.${bean.name}`;
       const beanOptions = appResource.getBean(beanFullName)!;
+      // options
+      beanOptions.options = middlewareConfig;
       // push
       middlewaresAll.push({
         name: middlewareKey,
