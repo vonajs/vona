@@ -36,8 +36,6 @@ export class Onion extends BeanSimple {
   middlewaresNormal: Record<string, IMiddlewareItem>;
   middlewaresGlobal: IMiddlewareItem[];
 
-  _cacheMiddlewaresOptions: Record<string, IDecoratorMiddlewareOptionsGlobal> = {};
-
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
   _cacheMiddlewaresArgument: Record<string, Function[]> = {};
@@ -262,7 +260,7 @@ export class Onion extends BeanSimple {
     swapDeps(middlewares, {
       name: 'name',
       dependencies: item => {
-        const middlewareOptions = this._getMiddlewareOptions(item as any);
+        const middlewareOptions = cast<IMiddlewareItem>(item).beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
         return middlewareOptions.dependencies as any;
       },
     });
@@ -406,7 +404,7 @@ export class Onion extends BeanSimple {
     // loop
     const aopsMatched: string[] = [];
     for (const aop of this.middlewaresGlobal) {
-      const aopOptions = this._getMiddlewareOptions(aop) as IDecoratorAopOptions;
+      const aopOptions = aop.beanOptions.options as IDecoratorAopOptions;
       // not self
       if (aop.beanOptions.beanFullName === beanOptions.beanFullName) continue;
       // // check if match aop
