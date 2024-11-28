@@ -16,7 +16,7 @@ import {
   IMiddlewareOptionsMeta,
 } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { ILocalInfos, IModuleMiddlewareGate } from '../bean/index.js';
+import { ILocalInfos } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { compose as _compose, composeAsync as _composeAsync } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
@@ -387,22 +387,6 @@ export class AppUtil extends BeanSimple {
     }
     // default
     return true;
-  }
-
-  checkGate(gate?: IModuleMiddlewareGate) {
-    // check none
-    if (!gate) return true;
-    // check env
-    if (!this._checkGateEnv(gate.env)) return false;
-    // default
-    return true;
-  }
-
-  _checkGateEnv(env?: IModuleMiddlewareGate['env']) {
-    // check none
-    if (!env) return true;
-    if (!Array.isArray(env)) return this.app.config.env === env;
-    return env.some(item => this.app.config.env === item);
   }
 
   detectErrorMessage(err: Error) {

@@ -31,17 +31,12 @@ export interface IModuleMiddlewareAuthOpen {
   onlyAuthOpen?: boolean;
 }
 
-export interface IModuleMiddlewareGate {
-  env?: VonaMetaMode | VonaMetaMode[];
-}
-
 export interface IModuleRouteMeta {
   right?: TypeModuleMiddlewareRight;
   validate?: IModuleMiddlewareValidate;
   auth?: IModuleMiddlewareAuth;
   captchaVerify?: IModuleMiddlewareCaptchaVerify;
   authOpen?: IModuleMiddlewareAuthOpen;
-  gate?: IModuleMiddlewareGate;
 }
 export interface IModuleRoute {
   name?: string;
