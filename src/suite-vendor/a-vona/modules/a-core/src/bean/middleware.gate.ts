@@ -1,15 +1,15 @@
 import {
   BeanBase,
-  IDecoratorMiddlewareOptions,
+  IDecoratorMiddlewareOptionsGlobal,
   IMiddlewareExecute,
   IMiddlewareOptionsMeta,
   Middleware,
   Next,
 } from 'vona';
 
-export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptions, IMiddlewareOptionsMeta {}
+export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptionsGlobal, IMiddlewareOptionsMeta {}
 
-@Middleware<IMiddlewareOptionsGate>()
+@Middleware<IMiddlewareOptionsGate>({ global: true })
 export class MiddlewareGate extends BeanBase implements IMiddlewareExecute {
   async execute(options: IMiddlewareOptionsGate, next: Next) {
     // check gate
