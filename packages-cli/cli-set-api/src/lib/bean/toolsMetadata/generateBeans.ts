@@ -25,6 +25,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
   const contentRecordsGeneral: string[] = [];
   for (const file of files) {
     const fileName = path.basename(file);
+    if (fileName.startsWith('_')) continue;
     const parts = fileName.split('.').slice(0, -1);
     if (parts.length < 2) continue;
     const isIgnore = checkIgnoreOfParts(parts);

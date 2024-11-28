@@ -15,11 +15,6 @@ const middlewares = {
     bean: 'transaction',
     global: false,
   } as IModuleConfigMiddleware,
-  gate: {
-    bean: 'gate',
-    global: true,
-    dependencies: 'instance',
-  } as IModuleConfigMiddleware,
   authOpen: {
     bean: 'authOpen',
     global: true,

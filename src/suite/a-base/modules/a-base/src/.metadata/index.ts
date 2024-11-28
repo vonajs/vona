@@ -125,7 +125,6 @@ declare module 'vona' {
 /** middlewares: begin */
 export * from '../bean/middleware.auth.js';
 export * from '../bean/middleware.authOpen.js';
-export * from '../bean/middleware.gate.js';
 export * from '../bean/middleware.httpLog.js';
 export * from '../bean/middleware.inner.js';
 export * from '../bean/middleware.jsonp.js';
@@ -138,7 +137,6 @@ declare module 'vona' {
   export interface IMiddlewareRecordLocal {
     'a-base:auth': never;
     'a-base:authOpen': never;
-    'a-base:gate': never;
     'a-base:httpLog': never;
     'a-base:inner': never;
     'a-base:jsonp': never;
