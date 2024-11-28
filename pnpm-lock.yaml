@@ -458,6 +458,9 @@ importers:
       vona-module-vona-test:
         specifier: workspace:^
         version: link:src/suite-vendor/vona-test/modules/vona-test
+      vona-shared:
+        specifier: workspace:^
+        version: link:packages-vona/shared
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -1217,6 +1220,9 @@ importers:
       egg-onerror:
         specifier: ^2.4.0
         version: 2.4.0
+      vona-shared:
+        specifier: workspace:^
+        version: link:../../../../../packages-vona/shared
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:

@@ -1,10 +1,13 @@
 /** middlewares: begin */
 export * from '../bean/middleware.development.js';
+export * from '../bean/middleware.gate.js';
 import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
+import { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
 import 'vona';
 declare module 'vona' {
   export interface IMiddlewareRecordLocal {
     'a-core:development': IMiddlewareOptionsDevelopment;
+    'a-core:gate': IMiddlewareOptionsGate;
   }
 }
 /** middlewares: end */

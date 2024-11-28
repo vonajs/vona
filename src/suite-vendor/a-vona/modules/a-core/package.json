@@ -5,7 +5,8 @@
   "vonaModule": {
     "dependencies": {},
     "globalDependencies": {
-      "assert": true
+      "assert": true,
+      "vona-shared": true
     }
   },
   "type": "module",
@@ -34,7 +35,8 @@
   "scripts": {},
   "dependencies": {
     "assert": "^2.1.0",
-    "egg-onerror": "^2.4.0"
+    "egg-onerror": "^2.4.0",
+    "vona-shared": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }
