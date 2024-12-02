@@ -3,6 +3,7 @@ import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { isClass } from '../utils/isClass.js';
+import { registerMappedClassMetadataKey } from '../mappedClass/type.js';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
@@ -14,6 +15,7 @@ export class AppResource extends BeanSimple {
   scenes: Record<string, Record<string, IAppResourceRecord>> = {};
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
+    registerMappedClassMetadataKey(target, SymbolDecoratorUse);
     const uses = appMetadata.getOwnMetadataMap(true, SymbolDecoratorUse, target);
     uses[options.prop] = options;
   }
