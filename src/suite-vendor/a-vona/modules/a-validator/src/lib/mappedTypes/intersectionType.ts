@@ -13,7 +13,7 @@ export function intersectionType<T extends Type[]>(...classRefs: T): Intersectio
   abstract class IntersectionTypeClass {}
   const rulesNew = {};
   for (const classRef of classRefs) {
-    const rules = appMetadata.getOwnMetadataMap(SymbolDecoratorRule, classRef.prototype);
+    const rules = appMetadata.getMetadata(SymbolDecoratorRule, classRef.prototype);
     if (!rules) continue;
     Object.assign(rulesNew, rules);
   }

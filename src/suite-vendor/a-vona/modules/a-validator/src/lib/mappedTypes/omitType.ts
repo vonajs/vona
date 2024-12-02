@@ -3,7 +3,7 @@ import { SymbolDecoratorRule } from '../decorator/rule.js';
 
 export function omitType<T, K extends keyof T>(classRef: Type<T>, keys: K[]): Type<Omit<T, (typeof keys)[number]>> {
   abstract class OmitTypeClass {}
-  const rules = appMetadata.getOwnMetadataMap(SymbolDecoratorRule, classRef.prototype);
+  const rules = appMetadata.getMetadata(SymbolDecoratorRule, classRef.prototype);
   const rulesNew = {};
   if (rules) {
     for (const key in rules) {
