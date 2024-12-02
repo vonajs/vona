@@ -1,4 +1,4 @@
 export * from './intersectionType.js';
 export * from './omitType.js';
 export * from './partialType.js';
-export * from './pickType.js';
+export * from './pickClass.js';

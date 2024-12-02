@@ -1,7 +1,10 @@
-import { appMetadata, getMappedClassMetadataKeys, Type } from 'vona';
+import { appMetadata, Constructable, getMappedClassMetadataKeys } from 'vona';
 
-export function pickType<T, K extends keyof T>(classRef: Type<T>, keys: K[]): Type<Pick<T, (typeof keys)[number]>> {
-  abstract class PickTypeClass {}
+export function pickClass<T, K extends keyof T>(
+  classRef: Constructable<T>,
+  keys: K[],
+): Constructable<Pick<T, (typeof keys)[number]>> {
+  abstract class PickedClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype) || [];
   for (const metadataKey of metadataKeys) {
     const rulesNew = {};
@@ -13,7 +16,7 @@ export function pickType<T, K extends keyof T>(classRef: Type<T>, keys: K[]): Ty
         }
       }
     }
-    appMetadata.defineMetadata(metadataKey, rulesNew, PickTypeClass.prototype);
+    appMetadata.defineMetadata(metadataKey, rulesNew, PickedClass.prototype);
   }
-  return PickTypeClass as any;
+  return PickedClass as any;
 }

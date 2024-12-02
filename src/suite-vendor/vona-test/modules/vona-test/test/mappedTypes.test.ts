@@ -2,7 +2,7 @@ import { app } from 'vona-mock';
 import { DtoUser } from '../src/dto/user.js';
 import { cast, catchError, Dto } from 'vona';
 import assert from 'assert';
-import { intersectionType, omitType, partialType, pickType, Rule } from 'vona-module-a-validator';
+import { intersectionType, omitType, partialType, pickClass, Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoProfile } from '../src/dto/profile.js';
 
@@ -32,9 +32,9 @@ describe.only('mappedTypes.test.ts', () => {
         return await serviceValidator.validate(DtoUserWithMarried, data, { strict: true });
       });
       assert.deepEqual(dataNew3, data);
-      // pickType
+      // pickClass
       const [, err4] = await catchError(async () => {
-        return await serviceValidator.validate(pickType(DtoUser, ['id', 'name']), data, { strict: true });
+        return await serviceValidator.validate(pickClass(DtoUser, ['id', 'name']), data, { strict: true });
       });
       assert.equal(cast(err4?.message)[0]?.keys[0], 'married');
       // partialType
