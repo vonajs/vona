@@ -1,21 +1,25 @@
 import 'reflect-metadata';
+import { isUndefined } from '../utils/utilsShared.js';
 
 export type MetadataKey = symbol | string;
 
 export class AppMetadata {
-  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: object) {
-    Reflect.defineMetadata(metadataKey, metadataValue, target);
+  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: object, prop?: MetadataKey) {
+    if (isUndefined(prop)) {
+      Reflect.defineMetadata(metadataKey, metadataValue, target);
+    } else {
+      Reflect.defineMetadata(metadataKey, metadataValue, target, prop);
+    }
   }
 
-  getOwnMetadata<V>(metadataKey: MetadataKey, target: object): V | undefined {
-    return Reflect.getOwnMetadata(metadataKey, target);
+  getOwnMetadata<V>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): V | undefined {
+    if (isUndefined(prop)) return Reflect.getOwnMetadata(metadataKey, target);
+    return Reflect.getOwnMetadata(metadataKey, target, prop);
   }
 
   getMetadata<V>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): V | undefined {
-    if (prop) {
-      return Reflect.getMetadata(metadataKey, target, prop);
-    }
-    return Reflect.getMetadata(metadataKey, target);
+    if (isUndefined(prop)) return Reflect.getMetadata(metadataKey, target);
+    return Reflect.getMetadata(metadataKey, target, prop);
   }
 
   getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: object): Array<Entry> {
