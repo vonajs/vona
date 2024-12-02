@@ -1,8 +1,8 @@
 import { app } from 'vona-mock';
 import { DtoUser } from '../src/dto/user.js';
-import { cast, catchError, Dto } from 'vona';
+import { cast, catchError, Dto, pickClass } from 'vona';
 import assert from 'assert';
-import { intersectionType, omitType, partialType, pickClass, Rule } from 'vona-module-a-validator';
+import { intersectionType, omitType, partialType, Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoProfile } from '../src/dto/profile.js';
 
