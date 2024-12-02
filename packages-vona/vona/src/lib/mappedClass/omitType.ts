@@ -1,17 +1,26 @@
-import { appMetadata, Type } from 'vona';
-import { SymbolDecoratorRule } from '../decorator/rule.js';
+import { appMetadata } from '../core/metadata.js';
+import { Constructable } from '../decorator/type/constructable.js';
+import { getMappedClassMetadataKeys } from './utils.js';
 
-export function omitType<T, K extends keyof T>(classRef: Type<T>, keys: K[]): Type<Omit<T, (typeof keys)[number]>> {
+export function omitType<T, K extends keyof T>(
+  classRef: Constructable<T>,
+  keys: K[],
+): Constructable<Omit<T, (typeof keys)[number]>> {
   abstract class OmitTypeClass {}
-  const rules = appMetadata.getMetadata(SymbolDecoratorRule, classRef.prototype);
-  const rulesNew = {};
-  if (rules) {
-    for (const key in rules) {
-      if (!keys.includes(key as any)) {
-        rulesNew[key] = rules[key];
+  const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
+  if (metadataKeys) {
+    for (const metadataKey in metadataKeys) {
+      const rulesNew = {};
+      const rules = appMetadata.getMetadata(metadataKey, classRef.prototype);
+      if (rules) {
+        for (const key in rules) {
+          if (!keys.includes(key as any)) {
+            rulesNew[key] = rules[key];
+          }
+        }
       }
+      appMetadata.defineMetadata(metadataKey, rulesNew, OmitTypeClass.prototype);
     }
   }
-  appMetadata.defineMetadata(SymbolDecoratorRule, rulesNew, OmitTypeClass.prototype);
   return OmitTypeClass as any;
 }
