@@ -3,12 +3,12 @@ import { Constructable } from '../decorator/type/constructable.js';
 import { getMappedClassMetadataKeys } from './utils.js';
 
 export function partialClass<T>(classRef: Constructable<T>): Constructable<Partial<T>>;
-export function partialType<T, K extends keyof T>(
+export function partialClass<T, K extends keyof T>(
   classRef: Constructable<T>,
   keys: K[],
 ): Constructable<Partial<Pick<T, (typeof keys)[number]>> & Omit<T, (typeof keys)[number]>>;
-export function partialType<T, K extends keyof T>(classRef: Constructable<T>, keys?: K[]): any {
-  abstract class PartialTypeClass {}
+export function partialClass<T, K extends keyof T>(classRef: Constructable<T>, keys?: K[]): any {
+  abstract class PartialedClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
     for (const metadataKey in metadataKeys) {
@@ -28,8 +28,8 @@ export function partialType<T, K extends keyof T>(classRef: Constructable<T>, ke
           }
         }
       }
-      appMetadata.defineMetadata(metadataKey, rulesNew, PartialTypeClass.prototype);
+      appMetadata.defineMetadata(metadataKey, rulesNew, PartialedClass.prototype);
     }
   }
-  return PartialTypeClass as any;
+  return PartialedClass as any;
 }
