@@ -7,7 +7,7 @@ import {
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
 } from '../../../types/interface/pipe.js';
-import { appMetadata, MetadataKey } from '../../core/metadata.js';
+import { appMetadata } from '../../core/metadata.js';
 import { Constructable } from '../../decorator/type/constructable.js';
 import { extractValue } from './extractValue.js';
 
@@ -30,11 +30,11 @@ async function _transformArguments(
   if (!paramtypes) return;
 
   // meta
-  const argsMetaAll = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
+  const argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
     SymbolRouteHandlersArgumentsMeta,
-    controller,
+    controller.prototype,
+    handler.name,
   );
-  const argsMeta = argsMetaAll[handler.name];
   if (!argsMeta) return;
 
   // args

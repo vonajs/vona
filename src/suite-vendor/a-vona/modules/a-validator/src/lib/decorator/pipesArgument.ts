@@ -11,10 +11,16 @@ import { PipeArgument } from '../types/decorator.js';
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: any, ...pipes: PipeArgument[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
-      const argsMeta = appMetadata.getOwnMetadataMap<MetadataKey, RouteHandlerArgumentMetaDecorator[]>(
+      // only get own metadata
+      let argsMeta = appMetadata.getOwnMetadata<RouteHandlerArgumentMetaDecorator[]>(
         SymbolRouteHandlersArgumentsMeta,
-        target.constructor,
+        target,
+        prop,
       );
+      if (!argsMeta) {
+        argsMeta = [];
+        appMetadata.defineMetadata(SymbolRouteHandlersArgumentsMeta, argsMeta, target, prop);
+      }
 
       const hasParamField = typeof field === 'string';
       const paramField = hasParamField ? field : undefined;
@@ -35,8 +41,7 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
           }
         });
 
-      if (!argsMeta[prop!]) argsMeta[prop!] = [];
-      argsMeta[prop!].push({
+      argsMeta.push({
         index,
         type: paramType,
         field: paramField,
