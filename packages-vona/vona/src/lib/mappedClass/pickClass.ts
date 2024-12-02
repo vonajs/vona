@@ -1,4 +1,6 @@
-import { appMetadata, Constructable, getMappedClassMetadataKeys } from 'vona';
+import { appMetadata } from '../core/metadata.js';
+import { Constructable } from '../decorator/type/constructable.js';
+import { getMappedClassMetadataKeys } from './utils.js';
 
 export function pickClass<T, K extends keyof T>(
   classRef: Constructable<T>,

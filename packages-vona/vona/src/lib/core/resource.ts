@@ -3,7 +3,7 @@ import { MetadataKey, appMetadata } from './metadata.js';
 import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { isClass } from '../utils/isClass.js';
-import { registerMappedClassMetadataKey } from '../mappedClass/type.js';
+import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
