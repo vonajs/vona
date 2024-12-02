@@ -5,3 +5,4 @@ export * from './module/index.js';
 export * from './framework/framework.js';
 export * from './utils/index.js';
 export * from './web/index.js';
+export * from './mappedClass/index.js';
