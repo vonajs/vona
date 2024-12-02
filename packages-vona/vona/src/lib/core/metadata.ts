@@ -12,6 +12,16 @@ export class AppMetadata {
     }
   }
 
+  hasOwnMetadata(metadataKey: MetadataKey, target: object, prop?: MetadataKey): boolean {
+    if (isUndefined(prop)) return Reflect.hasOwnMetadata(metadataKey, target);
+    return Reflect.hasOwnMetadata(metadataKey, target, prop);
+  }
+
+  hasMetadata(metadataKey: MetadataKey, target: object, prop?: MetadataKey): boolean {
+    if (isUndefined(prop)) return Reflect.hasMetadata(metadataKey, target);
+    return Reflect.hasMetadata(metadataKey, target, prop);
+  }
+
   getOwnMetadata<V>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): V | undefined {
     if (isUndefined(prop)) return Reflect.getOwnMetadata(metadataKey, target);
     return Reflect.getOwnMetadata(metadataKey, target, prop);

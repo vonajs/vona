@@ -176,7 +176,11 @@ export class AppRouter extends BeanSimple {
     }
 
     // middlewares options
-    const actionMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, desc.value);
+    const actionMiddlewaresOptions = appMetadata.getOwnMetadataMap(
+      SymbolUseMiddlewareOptions,
+      controller.prototype,
+      actionKey,
+    );
 
     // route
     const route = {
