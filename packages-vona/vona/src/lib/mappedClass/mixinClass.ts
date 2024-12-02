@@ -9,7 +9,7 @@ type ClassRefsToConstructors<T extends Type[]> = {
 
 type Intersection<T extends Type[]> = Type<UnionToIntersection<ClassRefsToConstructors<T>[number]>>;
 
-export function intersectionType<T extends Type[]>(...classRefs: T): Intersection<T> {
+export function mixinClass<T extends Type[]>(...classRefs: T): Intersection<T> {
   abstract class IntersectionTypeClass {}
   const rulesNew = {};
   for (const classRef of classRefs) {

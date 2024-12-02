@@ -2,11 +2,11 @@ import { appMetadata } from '../core/metadata.js';
 import { Constructable } from '../decorator/type/constructable.js';
 import { getMappedClassMetadataKeys } from './utils.js';
 
-export function omitType<T, K extends keyof T>(
+export function omitClass<T, K extends keyof T>(
   classRef: Constructable<T>,
   keys: K[],
 ): Constructable<Omit<T, (typeof keys)[number]>> {
-  abstract class OmitTypeClass {}
+  abstract class OmitedClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
     for (const metadataKey in metadataKeys) {
@@ -19,8 +19,8 @@ export function omitType<T, K extends keyof T>(
           }
         }
       }
-      appMetadata.defineMetadata(metadataKey, rulesNew, OmitTypeClass.prototype);
+      appMetadata.defineMetadata(metadataKey, rulesNew, OmitedClass.prototype);
     }
   }
-  return OmitTypeClass as any;
+  return OmitedClass as any;
 }
