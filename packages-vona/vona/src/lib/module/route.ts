@@ -16,12 +16,14 @@ import { IModuleRoute } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { Constructable } from '../decorator/type/constructable.js';
 import { IDecoratorControllerOptions } from '../decorator/index.js';
-import { METHOD_METADATA, PATH_METADATA } from '../web/constants.js';
 import { appMetadata } from '../core/metadata.js';
 import { middlewareGuard } from './middleware/middlewareGuard.js';
 import { middlewareInterceptor } from './middleware/middlewareInterceptor.js';
 import { middlewarePipe } from './middleware/middlewarePipe.js';
 import { deepExtend } from '../utils/util.js';
+import { SymbolRequestMappingHandler } from '../web/constants.js';
+import { RequestMappingMetadata } from '../web/decorator/http/requestMapping.js';
+import { RequestMethod } from '../web/enum/requestMethod.js';
 
 export class AppRouter extends BeanSimple {
   register(info: ModuleInfo.IModuleInfo | string, route: IModuleRoute) {
@@ -152,9 +154,14 @@ export class AppRouter extends BeanSimple {
     const app = this.app;
 
     // actionPath/actionMethod
-    if (!Reflect.hasOwnMetadata(PATH_METADATA, desc.value)) return;
-    const actionPath: RegExp | string = Reflect.getMetadata(PATH_METADATA, desc.value) || '';
-    const actionMethod: string = Reflect.getMetadata(METHOD_METADATA, desc.value);
+    if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey)) return;
+    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
+      SymbolRequestMappingHandler,
+      controller.prototype,
+      actionKey,
+    )!;
+    const actionPath: RegExp | string = handlerMetadata.path || '';
+    const actionMethod: string = handlerMetadata.method || RequestMethod.GET;
     // routePath
     let routePath: RegExp | string;
     if (typeof actionPath !== 'string') {

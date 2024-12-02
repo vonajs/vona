@@ -1,4 +1,5 @@
-import { METHOD_METADATA, PATH_METADATA } from '../../constants.js';
+import { appMetadata } from '../../../core/metadata.js';
+import { SymbolRequestMappingHandler } from '../../constants.js';
 import { RequestMethod } from '../../enum/requestMethod.js';
 
 export interface RequestMappingMetadata {
@@ -7,18 +8,16 @@ export interface RequestMappingMetadata {
 }
 
 const defaultMetadata = {
-  [PATH_METADATA]: '',
-  [METHOD_METADATA]: RequestMethod.GET,
+  path: '',
+  method: RequestMethod.GET,
 };
 
 export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadata): MethodDecorator => {
-  const pathMetadata = metadata[PATH_METADATA];
-  const path = pathMetadata || '';
-  const requestMethod = metadata[METHOD_METADATA] || RequestMethod.GET;
+  const path = metadata.path || '';
+  const method = metadata.method || RequestMethod.GET;
 
-  return (_target: object, _key: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
-    Reflect.defineMetadata(PATH_METADATA, path, descriptor.value);
-    Reflect.defineMetadata(METHOD_METADATA, requestMethod, descriptor.value);
+  return (target: object, prop: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
+    appMetadata.defineMetadata(SymbolRequestMappingHandler, { path, method }, target, prop);
     return descriptor;
   };
 };
@@ -26,10 +25,7 @@ export const RequestMapping = (metadata: RequestMappingMetadata = defaultMetadat
 const createMappingDecorator =
   (method: RequestMethod) =>
   (path?: RegExp | string): MethodDecorator => {
-    return RequestMapping({
-      [PATH_METADATA]: path,
-      [METHOD_METADATA]: method,
-    });
+    return RequestMapping({ path, method });
   };
 
 /**
