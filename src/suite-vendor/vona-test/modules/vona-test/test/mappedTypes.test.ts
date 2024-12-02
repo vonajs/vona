@@ -1,13 +1,13 @@
 import { app } from 'vona-mock';
 import { DtoUser } from '../src/dto/user.js';
-import { cast, catchError, Dto, pickClass } from 'vona';
+import { cast, catchError, Dto, mixinClass, omitClass, partialClass, pickClass } from 'vona';
 import assert from 'assert';
-import { intersectionType, omitType, partialType, Rule } from 'vona-module-a-validator';
+import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoProfile } from '../src/dto/profile.js';
 
 @Dto()
-class DtoUserWithMarried extends omitType(DtoUser, ['married']) {
+class DtoUserWithMarried extends omitClass(DtoUser, ['married']) {
   @Rule(z.boolean())
   married: boolean;
 }
@@ -24,7 +24,7 @@ describe.only('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew, data, JSON.stringify(err, null, 2));
       // omitType
       const [, err2] = await catchError(async () => {
-        return await serviceValidator.validate(omitType(DtoUser, ['married']), data, { strict: true });
+        return await serviceValidator.validate(omitClass(DtoUser, ['married']), data, { strict: true });
       });
       assert.equal(cast(err2?.message)[0]?.keys[0], 'married');
       // omitType and inherit
@@ -39,12 +39,12 @@ describe.only('mappedTypes.test.ts', () => {
       assert.equal(cast(err4?.message)[0]?.keys[0], 'married');
       // partialType
       const [dataNew5] = await catchError(async () => {
-        return await serviceValidator.validate(partialType(DtoUser), {}, { strict: true });
+        return await serviceValidator.validate(partialClass(DtoUser), {}, { strict: true });
       });
       assert.deepEqual(dataNew5, {});
       const [dataNew6] = await catchError(async () => {
         return await serviceValidator.validate(
-          partialType(DtoUser, ['id', 'name']),
+          partialClass(DtoUser, ['id', 'name']),
           { married: true },
           { strict: true },
         );
@@ -52,7 +52,7 @@ describe.only('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew6, { married: true });
       // intersectionType
       const [, err7] = await catchError(async () => {
-        return await serviceValidator.validate(intersectionType(DtoUser, DtoProfile), data, { strict: true });
+        return await serviceValidator.validate(mixinClass(DtoUser, DtoProfile), data, { strict: true });
       });
       assert.equal(cast(err7?.message)[0]?.path[0], 'email');
     });
