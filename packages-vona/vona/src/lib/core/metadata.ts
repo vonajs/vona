@@ -56,17 +56,22 @@ export class AppMetadata {
   }
 
   getOwnMetadataMap<K extends PropertyKey, V>(
+    inherit: boolean,
     metadataKey: MetadataKey,
     target: object,
     prop?: MetadataKey,
   ): Record<K, V> {
     let own: Record<K, V> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
-      const parent: Record<K, V> | undefined = this.getMetadata(metadataKey, target, prop);
-      if (parent) {
-        own = Object.assign({}, parent);
-      } else {
+      if (!inherit) {
         own = {} as Record<K, V>;
+      } else {
+        const parent: Record<K, V> | undefined = this.getMetadata(metadataKey, target, prop);
+        if (parent) {
+          own = Object.assign({}, parent);
+        } else {
+          own = {} as Record<K, V>;
+        }
       }
       this.defineMetadata(metadataKey, own, target, prop);
     }
