@@ -32,14 +32,23 @@ export class AppMetadata {
     return Reflect.getMetadata(metadataKey, target, prop);
   }
 
-  getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): Array<Entry> {
+  getOwnMetadataArray<Entry>(
+    inherit: boolean,
+    metadataKey: MetadataKey,
+    target: object,
+    prop?: MetadataKey,
+  ): Array<Entry> {
     let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
-      const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target, prop);
-      if (parent) {
-        own = parent.slice();
-      } else {
+      if (!inherit) {
         own = [];
+      } else {
+        const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target, prop);
+        if (parent) {
+          own = parent.slice();
+        } else {
+          own = [];
+        }
       }
       this.defineMetadata(metadataKey, own, target, prop);
     }
