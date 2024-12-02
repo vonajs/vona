@@ -9,7 +9,7 @@ export function omitClass<T, K extends keyof T>(
   abstract class OmitedClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
-    for (const metadataKey in metadataKeys) {
+    for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
       const rulesNew = {};
       const rules = appMetadata.getMetadata(metadataKey, classRef.prototype);
       if (rules) {
