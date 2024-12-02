@@ -1,4 +1,14 @@
-import { BeanBase, Controller, Get, Post, UseFilterGlobal, UseGuardGlobal, UseMiddleware, UsePipeGlobal } from 'vona';
+import {
+  BeanBase,
+  Controller,
+  Get,
+  Post,
+  UseFilterGlobal,
+  UseGuard,
+  UseGuardGlobal,
+  UseMiddleware,
+  UsePipeGlobal,
+} from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { array, Body, defaultValue, Query, required, valid } from 'vona-module-a-validator';
 import { z } from 'zod';

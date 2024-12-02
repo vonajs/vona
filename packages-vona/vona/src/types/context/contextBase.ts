@@ -1,5 +1,5 @@
 import { CtxMeta } from '../../lib/core/metaCtx.js';
-import { Constructable } from '../../lib/index.js';
+import { Constructable, MetadataKey } from '../../lib/index.js';
 import { VonaConfig } from '../config/config.js';
 import { IModule } from '../interface/module.js';
 
@@ -21,6 +21,8 @@ export interface ContextBase {
   get tailCallbacks();
   getPayload(options?): Promise<any>;
   getClass(): Constructable | undefined;
-  getHandler(): Function | undefined;
+  getClassPrototype(): object | undefined;
   getClassBeanFullName(): string | undefined;
+  getHandler(): Function | undefined;
+  getHandlerName(): MetadataKey | undefined;
 }

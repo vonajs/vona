@@ -166,9 +166,11 @@ export class Onion extends BeanSimple {
     ] as string[];
     // middlewaresLocal: action
     const middlewaresLocal: IMiddlewareItem[] = [];
-    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getHandler()!)[
-      this.sceneName
-    ] as string[];
+    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(
+      SymbolUseMiddlewareLocal,
+      ctx.getClassPrototype()!,
+      ctx.getHandlerName()!,
+    )[this.sceneName] as string[];
     const middlewaresLocalAll: string[] = [];
     if (actionMiddlewaresLocal) {
       actionMiddlewaresLocal.forEach(item => {

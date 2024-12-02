@@ -5,7 +5,7 @@ import { CtxMeta } from '../../lib/core/metaCtx.js';
 import { ContextBase } from '../../types/context/contextBase.js';
 import { VonaContext } from '../../types/context/index.js';
 import { cast } from '../../types/utils/cast.js';
-import { appResource } from '../../lib/index.js';
+import { appResource, MetadataKey } from '../../lib/index.js';
 import { AsyncResource } from 'node:async_hooks';
 
 const MODULE = Symbol.for('Context#__module');
@@ -124,6 +124,13 @@ const context: ContextBase = {
     return self.route?.controller;
   },
 
+  getClassPrototype(): object | undefined {
+    const self = cast<VonaContext>(this);
+    const controller = self.getClass();
+    if (!controller) return undefined;
+    return controller.prototype;
+  },
+
   getClassBeanFullName(): string | undefined {
     const self = cast<VonaContext>(this);
     const controller = self.getClass();
@@ -135,6 +142,13 @@ const context: ContextBase = {
   getHandler() {
     const self = cast<VonaContext>(this);
     return self.route?.actionDescriptor?.value;
+  },
+
+  getHandlerName(): MetadataKey | undefined {
+    const self = cast<VonaContext>(this);
+    const handler = self.getHandler();
+    if (!handler) return undefined;
+    return handler.name;
   },
 };
 export default context;
