@@ -11,7 +11,7 @@ export function partialClass<T, K extends keyof T>(classRef: Constructable<T>, k
   abstract class PartialedClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
-    for (const metadataKey in metadataKeys) {
+    for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
       const metadataKeyOptions = metadataKeys[metadataKey];
       const rulesNew = {};
       const rules = appMetadata.getMetadata(metadataKey, classRef.prototype);

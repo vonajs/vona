@@ -21,7 +21,7 @@ export function mixinClass<T extends Constructable[]>(...classRefs: T): Intersec
     }
   }
   //
-  for (const metadataKey in metadataKeys) {
+  for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
     const rulesNew = {};
     for (const classRef of classRefs) {
       const rules = appMetadata.getMetadata(metadataKey, classRef.prototype);
