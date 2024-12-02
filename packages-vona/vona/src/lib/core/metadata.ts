@@ -22,36 +22,40 @@ export class AppMetadata {
     return Reflect.getMetadata(metadataKey, target, prop);
   }
 
-  getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: object): Array<Entry> {
-    let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target);
+  getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): Array<Entry> {
+    let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
-      const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target);
+      const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target, prop);
       if (parent) {
         own = parent.slice();
       } else {
         own = [];
       }
-      this.defineMetadata(metadataKey, own, target);
+      this.defineMetadata(metadataKey, own, target, prop);
     }
     return own;
   }
 
-  getOwnMetadataMap<K extends PropertyKey, V>(metadataKey: MetadataKey, target): Record<K, V> {
-    let own: Record<K, V> | undefined = this.getOwnMetadata(metadataKey, target);
+  getOwnMetadataMap<K extends PropertyKey, V>(
+    metadataKey: MetadataKey,
+    target: object,
+    prop?: MetadataKey,
+  ): Record<K, V> {
+    let own: Record<K, V> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
-      const parent: Record<K, V> | undefined = this.getMetadata(metadataKey, target);
+      const parent: Record<K, V> | undefined = this.getMetadata(metadataKey, target, prop);
       if (parent) {
         own = Object.assign({}, parent);
       } else {
         own = {} as Record<K, V>;
       }
-      this.defineMetadata(metadataKey, own, target);
+      this.defineMetadata(metadataKey, own, target, prop);
     }
     return own;
   }
 
   getDesignType(target: object, prop?: MetadataKey) {
-    return this.getMetadata('design:type', target as any, prop);
+    return this.getMetadata('design:type', target, prop);
   }
 }
 
