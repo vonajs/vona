@@ -4,8 +4,8 @@ import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { isClass } from '../utils/isClass.js';
 
-export const DecoratorBeanFullName = Symbol.for('Decorator#BeanFullName');
-export const DecoratorUse = Symbol.for('Decorator#Use');
+export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
+export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 
 export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;
 
@@ -14,12 +14,12 @@ export class AppResource extends BeanSimple {
   scenes: Record<string, Record<string, IAppResourceRecord>> = {};
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
-    const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
+    const uses = appMetadata.getOwnMetadataMap(true, SymbolDecoratorUse, target);
     uses[options.prop] = options;
   }
 
   getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> | undefined {
-    return appMetadata.getMetadata(DecoratorUse, target);
+    return appMetadata.getMetadata(SymbolDecoratorUse, target);
   }
 
   addBean(options: Partial<IDecoratorBeanOptionsBase>) {
@@ -48,13 +48,13 @@ export class AppResource extends BeanSimple {
     if (!this.scenes[scene][module]) this.scenes[scene][module] = {};
     this.scenes[scene][module][beanFullName] = beanOptions;
     // set metadata
-    appMetadata.defineMetadata(DecoratorBeanFullName, beanFullName, beanOptions.beanClass);
+    appMetadata.defineMetadata(SymbolDecoratorBeanFullName, beanFullName, beanOptions.beanClass);
     // ok
     return beanOptions;
   }
 
   getBeanFullName<T>(A: Constructable<T>): string | undefined {
-    return appMetadata.getOwnMetadata(DecoratorBeanFullName, A);
+    return appMetadata.getOwnMetadata(SymbolDecoratorBeanFullName, A);
   }
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
@@ -63,7 +63,7 @@ export class AppResource extends BeanSimple {
   getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
     if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-      fullName = appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
+      fullName = appMetadata.getOwnMetadata(SymbolDecoratorBeanFullName, beanFullName);
     } else {
       fullName = beanFullName as string;
     }
