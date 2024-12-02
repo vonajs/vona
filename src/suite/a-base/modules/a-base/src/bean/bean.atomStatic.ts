@@ -89,8 +89,9 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
     return atoms;
   }
 
-  _checkGate(item) {
-    return this.app.meta.util.checkGate(item.__gate__);
+  _checkGate(_item) {
+    return true;
+    //return this.app.meta.util.checkGate(item.__gate__);
   }
 
   _filterGate(items?: any[]) {
