@@ -161,12 +161,12 @@ export class Onion extends BeanSimple {
   private _collectMiddlewaresHandler(ctx: VonaContext) {
     if (!ctx.getClass()) return [];
     // middlewaresLocal: controller
-    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getClass())[
+    const controllerMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getClass()!)[
       this.sceneName
     ] as string[];
     // middlewaresLocal: action
     const middlewaresLocal: IMiddlewareItem[] = [];
-    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getHandler())[
+    const actionMiddlewaresLocal = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareLocal, ctx.getHandler()!)[
       this.sceneName
     ] as string[];
     const middlewaresLocalAll: string[] = [];
