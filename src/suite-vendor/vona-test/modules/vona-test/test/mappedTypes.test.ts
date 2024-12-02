@@ -22,12 +22,12 @@ describe.only('mappedTypes.test.ts', () => {
         return await serviceValidator.validate(DtoUser, data, { strict: true });
       });
       assert.deepEqual(dataNew, data, JSON.stringify(err, null, 2));
-      // omitType
+      // omitClass
       const [, err2] = await catchError(async () => {
         return await serviceValidator.validate(omitClass(DtoUser, ['married']), data, { strict: true });
       });
       assert.equal(cast(err2?.message)[0]?.keys[0], 'married');
-      // omitType and inherit
+      // omitClass and inherit
       const [dataNew3] = await catchError(async () => {
         return await serviceValidator.validate(DtoUserWithMarried, data, { strict: true });
       });
@@ -37,7 +37,7 @@ describe.only('mappedTypes.test.ts', () => {
         return await serviceValidator.validate(pickClass(DtoUser, ['id', 'name']), data, { strict: true });
       });
       assert.equal(cast(err4?.message)[0]?.keys[0], 'married');
-      // partialType
+      // partialClass
       const [dataNew5] = await catchError(async () => {
         return await serviceValidator.validate(partialClass(DtoUser), {}, { strict: true });
       });
@@ -50,7 +50,7 @@ describe.only('mappedTypes.test.ts', () => {
         );
       });
       assert.deepEqual(dataNew6, { married: true });
-      // intersectionType
+      // mixinClass
       const [, err7] = await catchError(async () => {
         return await serviceValidator.validate(mixinClass(DtoUser, DtoProfile), data, { strict: true });
       });
