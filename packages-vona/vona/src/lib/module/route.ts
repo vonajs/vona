@@ -122,7 +122,7 @@ export class AppRouter extends BeanSimple {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
-    const controllerMiddlewaresOptions = appMetadata.getOwnMetadataMap(SymbolUseMiddlewareOptions, controller);
+    const controllerMiddlewaresOptions = appMetadata.getMetadata<object>(SymbolUseMiddlewareOptions, controller);
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -146,7 +146,7 @@ export class AppRouter extends BeanSimple {
     controller: Constructable,
     controllerBeanFullName: string,
     controllerPath: string | undefined,
-    controllerMiddlewaresOptions: object,
+    controllerMiddlewaresOptions: object | undefined,
     actionKey: string,
     desc: PropertyDescriptor,
   ) {
@@ -183,7 +183,7 @@ export class AppRouter extends BeanSimple {
     }
 
     // middlewares options
-    const actionMiddlewaresOptions = appMetadata.getOwnMetadataMap(
+    const actionMiddlewaresOptions = appMetadata.getMetadata(
       SymbolUseMiddlewareOptions,
       controller.prototype,
       actionKey,
