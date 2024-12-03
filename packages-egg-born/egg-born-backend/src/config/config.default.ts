@@ -100,8 +100,8 @@ export default function (appInfo: VonaAppInfo) {
   // instances
   config.instances = [];
 
-  // metadata
-  config.metadata = {};
+  // onion
+  config.onion = {};
 
   // modules
   config.modules = {};

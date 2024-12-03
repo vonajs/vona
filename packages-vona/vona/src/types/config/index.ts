@@ -3,5 +3,5 @@ export * from './cors.js';
 export * from './development.js';
 export * from './instance.js';
 export * from './locale.js';
-export * from './metadata.js';
+export * from './onion.js';
 export * from './type.js';

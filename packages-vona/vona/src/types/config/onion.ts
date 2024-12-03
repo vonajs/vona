@@ -10,7 +10,7 @@ import { IPacketRecord } from '../interface/packet.js';
 import { IPipeRecord } from '../interface/pipe.js';
 import { OmitNever } from '../utils/omitNever.js';
 
-export interface ConfigMetadata {
+export interface ConfigOnion {
   middleware: OmitNever<IMiddlewareRecord>;
   guard: OmitNever<IGuardRecord>;
   interceptor: OmitNever<IInterceptorRecord>;
