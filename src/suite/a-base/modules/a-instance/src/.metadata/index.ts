@@ -52,7 +52,7 @@ declare module 'vona' {
 /** meta: begin */
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.version.js';
-import { IMetaOptionsIndex } from '../bean/meta.index.js';
+import { IMetaOptionsIndex } from 'vona';
 import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {

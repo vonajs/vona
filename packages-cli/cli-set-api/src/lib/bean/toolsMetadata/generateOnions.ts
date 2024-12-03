@@ -38,7 +38,7 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     // import options
     if (fileInfo.hasOptionsInterface) {
       contentImports.push(
-        `import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '${fileNameJSRelative}';`,
+        `import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '${sceneMeta.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
       );
     }
     // record
