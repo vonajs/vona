@@ -1,13 +1,13 @@
 import chalk from 'chalk';
-import { BeanBase, Service } from 'vona';
+import { BeanBase, ConfigInstanceBase, Service } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 
 @Service()
 export class ServiceVersion extends BeanBase {
-  async instanceInitStartup({ options }: any) {
-    const instanceBase = options && options.instanceBase;
+  async instanceInitStartup(options?: { instanceBase: ConfigInstanceBase }) {
+    const instanceBase = options?.instanceBase;
     await this.__instanceInit(this.ctx.subdomain, instanceBase);
   }
 
@@ -32,13 +32,13 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  async __instanceInit(subdomain, instanceBase) {
+  async __instanceInit(subdomain: string, instanceBase?: ConfigInstanceBase) {
     try {
       if (!instanceBase) {
         instanceBase = this.app.bean.instance._getConfigInstanceBase(subdomain);
       }
-      if (!instanceBase) instanceBase = {};
-      await this.__check({ ...instanceBase, scene: 'init', subdomain });
+      const optionsInit = Object.assign({}, instanceBase, { scene: 'init', subdomain });
+      await this.__check(optionsInit);
       console.log(chalk.cyan(`  The instance is initialized successfully: ${subdomain || 'default'}`));
     } catch (err) {
       console.log(chalk.cyan(`  The instance is initialized failed: ${subdomain || 'default'}`));
