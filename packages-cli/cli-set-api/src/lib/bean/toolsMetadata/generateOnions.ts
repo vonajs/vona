@@ -46,8 +46,12 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
       if (fileInfo.hasOptionsInterface) {
         contentRecordsGlobal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
       } else {
-        contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
-        needImportOptionsGlobalInterface = true;
+        if (sceneMeta.optionsGlobalInterfaceName) {
+          contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
+          needImportOptionsGlobalInterface = true;
+        } else {
+          contentRecordsGlobal.push(`'${beanNameFull}': never;`);
+        }
       }
     } else {
       if (fileInfo.hasOptionsInterface) {
