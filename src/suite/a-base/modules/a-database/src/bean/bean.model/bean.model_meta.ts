@@ -29,14 +29,14 @@ export class BeanModelMeta extends BeanBase {
     return appResource.getBean((<any>this).__beanFullName__);
   }
 
-  get table(): string | undefined {
+  get table(): string {
     let table = this.options.table;
     if (!table && this.options.entity) {
       const beanOptionsEntity = appResource.getBean(this.options.entity as any);
       const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
       table = entityOptions.table;
     }
-    return table;
+    return table!;
   }
 
   get options(): IDecoratorModelOptions {
