@@ -1,5 +1,6 @@
 import { IAopRecord } from '../interface/aop.js';
 import { IConnectionRecord } from '../interface/connection.js';
+import { IEntityRecord } from '../interface/entity.js';
 import { IFilterRecord } from '../interface/filter.js';
 import { IGuardRecord } from '../interface/guard.js';
 import { IInterceptorRecord } from '../interface/interceptor.js';
@@ -17,4 +18,5 @@ export interface ConfigMetadata {
   connection: OmitNever<IConnectionRecord>;
   packet: OmitNever<IPacketRecord>;
   aop: OmitNever<IAopRecord>;
+  entity: OmitNever<IEntityRecord>;
 }

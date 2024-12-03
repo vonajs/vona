@@ -65,7 +65,7 @@ export interface I${sceneNameCapitalize}RecordLocal {
 }
 `;
   // combine
-  const content = `/** ${sceneName}s: begin */
+  const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
 ${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from 'vona';` : "import 'vona';"}
@@ -73,7 +73,7 @@ declare module 'vona' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
 }
-/** ${sceneName}s: end */
+/** ${sceneName}: end */
 `;
   return content;
 }

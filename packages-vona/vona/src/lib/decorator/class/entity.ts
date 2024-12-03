@@ -1,4 +1,4 @@
-import { IDecoratorEntityOptions } from '../../../index.js';
+import { IDecoratorEntityOptions } from '../../../types/interface/entity.js';
 import { createBeanDecorator } from '../index.js';
 
 const __tableNames = new Set();
