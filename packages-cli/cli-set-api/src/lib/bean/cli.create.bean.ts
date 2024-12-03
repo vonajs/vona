@@ -16,6 +16,8 @@ const __boilerplates = {
   connection: 'connection',
   packet: 'packet',
   aop: 'aop',
+  metaIndex: 'metaIndex',
+  metaVersion: 'metaVersion',
 };
 
 declare module '@cabloy/cli' {
@@ -70,7 +72,8 @@ export class CliCreateBean extends BeanCliBase {
     }
     await this.helper.ensureDir(beanDir);
     // boilerplate name
-    const boilerplateName = __boilerplates[sceneName] || 'bean';
+    const boilerplateName =
+      __boilerplates[`${sceneName}${argv.beanNameCapitalize}`] || __boilerplates[sceneName] || 'bean';
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,

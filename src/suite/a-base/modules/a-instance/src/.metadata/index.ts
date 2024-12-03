@@ -2,12 +2,12 @@
 export * from '../bean/bean.instance.js';
 export * from '../bean/broadcast.reload.js';
 export * from '../bean/broadcast.resetCache.js';
-export * from '../bean/meta.version.js';
+export * from '../bean/meta.version1.js';
 export * from '../bean/version.manager.js';
 import { BeanInstance } from '../bean/bean.instance.js';
 import { BroadcastReload } from '../bean/broadcast.reload.js';
 import { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
-import { MetaVersion } from '../bean/meta.version.js';
+import { MetaVersion1 } from '../bean/meta.version1.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -18,7 +18,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-instance.broadcast.reload': BroadcastReload;
     'a-instance.broadcast.resetCache': BroadcastResetCache;
-    'a-instance.meta.version': MetaVersion;
+    'a-instance.meta.version1': MetaVersion1;
     'a-instance.version.manager': VersionManager;
   }
 }

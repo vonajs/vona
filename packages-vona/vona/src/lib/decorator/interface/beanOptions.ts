@@ -19,6 +19,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'filter'
   | 'connection'
   | 'packet'
+  | 'meta'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
