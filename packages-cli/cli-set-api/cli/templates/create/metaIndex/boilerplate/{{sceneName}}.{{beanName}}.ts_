@@ -1,5 +1,6 @@
-import { BeanBase, Meta } from 'vona';
+import { BeanBase, IMetaOptionsIndex, Meta } from 'vona';
 
-@Meta()
-export class Meta<%=argv.beanNameCapitalize%> extends BeanBase {
-}
+@Meta<IMetaOptions<%=argv.beanNameCapitalize%>>({
+  indexes: {},
+})
+export class Meta<%=argv.beanNameCapitalize%> extends BeanBase {}

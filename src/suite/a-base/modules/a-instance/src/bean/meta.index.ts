@@ -1,8 +1,6 @@
 import { BeanBase, IMetaOptionsIndex, Meta } from 'vona';
 
 @Meta<IMetaOptionsIndex>({
-  indexes: {
-    aInstance: 'name',
-  },
+  indexes: {},
 })
 export class MetaIndex extends BeanBase {}
