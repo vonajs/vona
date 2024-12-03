@@ -10,6 +10,7 @@ import {
   SymbolUseMiddlewareOptions,
   SymboleMiddlewareStatus,
   SymbolRouteHandlersArgumentsValue,
+  Next,
 } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
@@ -243,13 +244,13 @@ export class AppRouter extends BeanSimple {
     // args
     let args: any[] = [];
     // middlewares: start
-    const fnStart = async (ctx, next) => {
+    const fnStart = async (ctx: VonaContext, next: Next) => {
       // status
       ctx[SymboleMiddlewareStatus] = {};
       // route
       ctx.route = route;
       // dynamic options
-      ctx.meta.middlewares = {};
+      ctx.meta.onionDynamic = {};
       // next
       const res = await next();
       // invoke callbackes: handle secondly
@@ -403,7 +404,7 @@ async function routeStartMiddleware(ctx: VonaContext, next: Function) {
   // status
   ctx[SymboleMiddlewareStatus] = {};
   // dynamic options
-  ctx.meta.middlewares = {};
+  ctx.meta.onionDynamic = {};
   // next
   const res = await next();
   // invoke callbackes: handle secondly

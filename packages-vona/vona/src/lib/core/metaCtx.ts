@@ -2,14 +2,14 @@ import { CtxUtil } from '../utils/utilCtx.js';
 import { CtxMockUtil } from '../utils/mockUtilCtx.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 
-import { IMiddlewareRecord } from '../../types/index.js';
+import { ConfigOnion, IMiddlewareRecord, PowerPartial } from '../../types/index.js';
 
 export class CtxMeta extends BeanSimple {
   util: CtxUtil;
   mockUtil: CtxMockUtil;
 
-  /** dynamic middleware options */
-  middlewares: Record<string, any>;
+  /** dynamic onion middleware options */
+  onionDynamic: PowerPartial<ConfigOnion>;
 
   protected __init__() {
     // util
