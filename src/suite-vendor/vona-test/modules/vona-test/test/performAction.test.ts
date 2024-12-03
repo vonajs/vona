@@ -19,6 +19,9 @@ describe.only('performAction.test.js', () => {
       return await ctx.meta.util.performAction<{ id: number; url: string }>({
         method: 'post',
         url: mockUrl('performAction/echo'),
+        onion: {
+          pipe: { 'a-validator:valid': { enable: false } },
+        },
       });
     });
     assert.equal(result.id, undefined);

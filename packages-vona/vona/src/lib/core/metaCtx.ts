@@ -9,7 +9,7 @@ export class CtxMeta extends BeanSimple {
   mockUtil: CtxMockUtil;
 
   /** dynamic onion middleware options */
-  onionDynamic: PowerPartial<ConfigOnion>;
+  onionDynamic?: PowerPartial<ConfigOnion>;
 
   protected __init__() {
     // util

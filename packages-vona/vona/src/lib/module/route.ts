@@ -249,8 +249,6 @@ export class AppRouter extends BeanSimple {
       ctx[SymboleMiddlewareStatus] = {};
       // route
       ctx.route = route;
-      // dynamic options
-      ctx.meta.onionDynamic = {};
       // next
       const res = await next();
       // invoke callbackes: handle secondly
@@ -403,8 +401,6 @@ function classControllerMiddleware(ctx: VonaContext) {
 async function routeStartMiddleware(ctx: VonaContext, next: Function) {
   // status
   ctx[SymboleMiddlewareStatus] = {};
-  // dynamic options
-  ctx.meta.onionDynamic = {};
   // next
   const res = await next();
   // invoke callbackes: handle secondly

@@ -1,4 +1,4 @@
-import { VonaContext } from '../../types/index.js';
+import { ConfigOnion, PowerPartial, VonaContext } from '../../types/index.js';
 
 export interface PerformActionParams {
   innerAccess?: boolean;
@@ -9,6 +9,7 @@ export interface PerformActionParams {
   params?: object;
   headers?: object;
   body?: object;
+  onion?: PowerPartial<ConfigOnion>;
 }
 
 export interface PerformActionInnerParams {
@@ -21,4 +22,5 @@ export interface PerformActionInnerParams {
   params?: object;
   headers?: object;
   body?: object;
+  onion?: PowerPartial<ConfigOnion>;
 }

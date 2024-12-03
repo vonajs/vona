@@ -178,6 +178,7 @@ export class CtxUtil extends BeanSimple {
     params,
     headers,
     body,
+    onion,
   }: PerformActionParams): Promise<T> {
     const ctx = this.ctx;
     return await performActionFn({
@@ -189,6 +190,7 @@ export class CtxUtil extends BeanSimple {
       params,
       headers,
       body,
+      onion,
     });
   }
 }

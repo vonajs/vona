@@ -15,6 +15,7 @@ export default async function performAction<T = any>({
   params,
   headers,
   body,
+  onion,
 }: PerformActionInnerParams): Promise<T> {
   // app
   const app = ctxCaller.app;
@@ -78,6 +79,9 @@ export default async function performAction<T = any>({
 
     // innerAccess
     if (innerAccess !== undefined) ctx.innerAccess = innerAccess;
+
+    // onion
+    ctx.meta.onionDynamic = onion;
 
     // invoke middleware
     await __fnMiddleware(ctx);
