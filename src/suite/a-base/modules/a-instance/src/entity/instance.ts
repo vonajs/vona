@@ -1,12 +1,15 @@
-import { EntityBaseTemp } from 'vona-module-a-base';
-import { ConfigInstanceBase, Entity } from 'vona';
-import { OmitType } from 'vona-module-a-swagger';
+import { ConfigInstanceBase, Entity, omitClass } from 'vona';
+import { EntityBase } from 'vona-module-a-core';
+import { Rule } from 'vona-module-a-validator';
+import { z } from 'zod';
 
 @Entity('aInstance')
-export class EntityInstance extends OmitType(EntityBaseTemp, ['iid']) {
-  disabled: number;
+export class EntityInstance extends omitClass(EntityBase, ['iid']) {
+  @Rule(z.boolean())
+  disabled: boolean;
+  @Rule(z.string())
   name: string;
-  title: string;
+  @Rule(z.string())
   config: string;
 }
 

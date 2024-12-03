@@ -20,7 +20,7 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.appReady.js';
 export * from '../bean/middleware.instance.js';
 
@@ -31,13 +31,20 @@ declare module 'vona' {
     'a-instance:instance': never;
   }
 }
-/** middlewares: end */
+/** middleware: end */
+/** entity: begin */
+export * from '../entity/instance.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-instance:instance': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
 /** controllers: begin */
 export * from '../controller/instance.js';
 /** controllers: end */
-/** entities: begin */
-export * from '../entity/instance.js';
-/** entities: end */
 /** models: begin */
 export * from '../model/instance.js';
 import { ModelInstance } from '../model/instance.js';
