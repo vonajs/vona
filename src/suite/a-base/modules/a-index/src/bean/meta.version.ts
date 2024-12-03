@@ -1,45 +1,50 @@
-import { Bean, BeanBase } from 'vona';
-
+import {
+  appResource,
+  BeanBase,
+  cast,
+  deepExtend,
+  IMetaIndexExecute,
+  IMetaOptionsIndex,
+  IMetaVersionUpdate,
+  IMetaVersionUpdateOptions,
+  Meta,
+  MetaOptionsIndexModuleIndexes,
+} from 'vona';
 import chalk from 'chalk';
 import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'version' })
-export class VersionManager extends BeanBase<ScopeModule> {
-  async update(_options) {
-    // check indexes
-    if (this.scope.config.indexesCheck) {
-      // combine module's indexes
-      const moduleIndexes: any = {};
-      for (const relativeName in this.app.meta.modules) {
-        const module = this.app.meta.modules[relativeName];
-        if (module.meta && module.meta.index && module.meta.index.indexes) {
-          moduleIndexes[relativeName] = module.meta.index.indexes;
+@Meta()
+export class MetaVersion extends BeanBase<ScopeModule> implements IMetaVersionUpdate {
+  async update(_options: IMetaVersionUpdateOptions) {
+    if (!this.scope.config.indexesCheck) return;
+    for (const module of this.app.meta.modulesArray) {
+      const beanFullName = `${module.info.relativeName}.meta.index`;
+      const beanOptions = appResource.getBean(beanFullName);
+      const indexOptions = cast<IMetaOptionsIndex>(beanOptions?.options);
+      const moduleIndexesFromMeta = indexOptions?.indexes;
+      const moduleIndexesFromConfig = this.scope.config.indexes[module.info.relativeName];
+      // config>meta
+      const moduleIndexes: MetaOptionsIndexModuleIndexes = deepExtend(
+        {},
+        moduleIndexesFromMeta,
+        moduleIndexesFromConfig,
+      );
+      // execute
+      if (beanOptions) {
+        const beanIndex = this.bean._getBean<IMetaIndexExecute>(beanFullName as any);
+        if (beanIndex.execute) {
+          const res = await beanIndex.execute(indexOptions);
+          if (res) continue;
         }
       }
-      // combine indexes all
-      const indexes = this.app.bean.util.extend(
-        {},
-        this.scope.config.indexes,
-        moduleIndexes,
-        this.scope.config.indexesExtend,
-      );
-      // create indexes
-      for (const moduleRelativeName in indexes) {
-        if (this.app.meta.modules[moduleRelativeName]) {
-          const moduleIndexes = indexes[moduleRelativeName];
-          for (const tableName in moduleIndexes) {
-            await this._createIndexesOnTable({ tableName, indexes: moduleIndexes[tableName] });
-          }
-        }
+      // loop
+      for (const tableName in moduleIndexes) {
+        await this._createIndexesOnTable({ tableName, indexes: moduleIndexes[tableName] });
       }
     }
   }
 
-  async init(_options) {}
-
-  async test() {}
-
-  async _createIndexesOnTable({ tableName, indexes }: any) {
+  private async _createIndexesOnTable({ tableName, indexes }: any) {
     const dialectClient = this.bean.model.dialectClient;
     const indexPrefix = `idx_${tableName}_`;
     try {

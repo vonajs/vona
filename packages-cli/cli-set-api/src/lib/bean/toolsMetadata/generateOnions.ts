@@ -90,7 +90,7 @@ declare module 'vona' {
 function _extractInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const content = fse.readFileSync(file).toString();
-  const hasOptionsInterface = content.includes(`I${sceneNameCapitalize}Options`);
+  const hasOptionsInterface = content.includes(`@${sceneNameCapitalize}<I${sceneNameCapitalize}Options`);
   const isGlobal = sceneMeta.hasLocal
     ? content.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/)
     : true;

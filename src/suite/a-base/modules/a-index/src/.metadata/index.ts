@@ -1,15 +1,13 @@
-/** beans: begin */
-export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
+/** meta: begin */
+export * from '../bean/meta.version.js';
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-index.version.manager': VersionManager;
+  export interface IMetaRecord {
+    'a-index:version': never;
   }
 }
-/** beans: end */
+/** meta: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

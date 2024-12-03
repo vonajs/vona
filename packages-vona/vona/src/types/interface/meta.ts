@@ -5,12 +5,14 @@ export interface IMetaRecord {}
 export interface IDecoratorMetaOptions {}
 
 /** meta index */
+
+export type MetaOptionsIndexModuleIndexes = Record<string, string | string[]>;
 export interface IMetaOptionsIndex {
-  indexes: Record<string, string | string[]>;
+  indexes: MetaOptionsIndexModuleIndexes;
 }
 
 export interface IMetaIndexExecute {
-  execute(options: IMetaOptionsIndex): Promise<void>;
+  execute(options: IMetaOptionsIndex): Promise<boolean>;
 }
 
 /** meta version */
