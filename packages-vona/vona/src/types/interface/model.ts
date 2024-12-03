@@ -1,3 +1,5 @@
+export interface IModelRecord {}
+
 export interface IDecoratorModelOptions<T extends object = {}> {
   entity?: T;
   table?: string;

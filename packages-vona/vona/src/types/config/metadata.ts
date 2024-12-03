@@ -5,6 +5,7 @@ import { IFilterRecord } from '../interface/filter.js';
 import { IGuardRecord } from '../interface/guard.js';
 import { IInterceptorRecord } from '../interface/interceptor.js';
 import { IMiddlewareRecord } from '../interface/middleware.js';
+import { IModelRecord } from '../interface/model.js';
 import { IPacketRecord } from '../interface/packet.js';
 import { IPipeRecord } from '../interface/pipe.js';
 import { OmitNever } from '../utils/omitNever.js';
@@ -19,4 +20,5 @@ export interface ConfigMetadata {
   packet: OmitNever<IPacketRecord>;
   aop: OmitNever<IAopRecord>;
   entity: OmitNever<IEntityRecord>;
+  model: OmitNever<IModelRecord>;
 }

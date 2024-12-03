@@ -42,11 +42,20 @@ declare module 'vona' {
   }
 }
 /** entity: end */
+/** model: begin */
+export * from '../model/instance.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-instance:instance': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/instance.js';
 /** controllers: end */
 /** models: begin */
-export * from '../model/instance.js';
 import { ModelInstance } from '../model/instance.js';
 export interface IModuleModel {
   instance: ModelInstance;

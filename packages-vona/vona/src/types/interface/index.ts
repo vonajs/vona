@@ -6,6 +6,7 @@ export * from './filter.js';
 export * from './guard.js';
 export * from './interceptor.js';
 export * from './middleware.js';
+export * from './model.js';
 export * from './module.js';
 export * from './monkey.js';
 export * from './packet.js';

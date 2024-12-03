@@ -54,4 +54,8 @@ export const onionScenesMeta: OnionScenesMeta = {
     sceneIsolate: true,
     optionsGlobalInterfaceName: 'IDecoratorEntityOptions',
   },
+  model: {
+    sceneIsolate: true,
+    optionsGlobalInterfaceName: 'IDecoratorModelOptions',
+  },
 };
