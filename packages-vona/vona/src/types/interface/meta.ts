@@ -4,6 +4,15 @@ export interface IMetaRecord {}
 
 export interface IDecoratorMetaOptions {}
 
+/** meta index */
+export interface IMetaOptionsIndex {
+  indexes: Record<string, string | string[]>;
+}
+
+export interface IMetaIndexExecute {
+  execute(options: IMetaOptionsIndex): Promise<void>;
+}
+
 /** meta version */
 export interface IMetaVersionUpdateOptions {
   version: number;
