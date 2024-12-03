@@ -8,7 +8,9 @@ import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
 export async function generateOnions(sceneName: string, moduleName: string, modulePath: string) {
   const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const pattern = `${modulePath}/src/bean/${sceneName}.*.ts`;
+  const pattern = sceneMeta.sceneIsolate
+    ? `${modulePath}/src/${sceneName}/*.ts`
+    : `${modulePath}/src/bean/${sceneName}.*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   if (files.length === 0) return '';
   files.sort();
@@ -19,21 +21,24 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
   let needImportOptionsGlobalInterface;
   for (const file of files) {
     const fileName = path.basename(file);
+    if (fileName.startsWith('_')) continue;
     const parts = fileName.split('.').slice(0, -1);
-    if (parts.length < 2) continue;
+    if (sceneMeta.sceneIsolate && parts.length !== 1) continue;
+    if (!sceneMeta.sceneIsolate && parts.length < 2) continue;
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
+    const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
     // const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const beanNameFull = `${moduleName}:${beanName}`;
-    contentExports.push(`export * from '../bean/${fileNameJS}';`);
+    contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue;
     const fileInfo = _extractInfo(sceneName, file, sceneMeta);
     // import options
     if (fileInfo.hasOptionsInterface) {
       contentImports.push(
-        `import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '../bean/${fileNameJS}';`,
+        `import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '${fileNameJSRelative}';`,
       );
     }
     // record
