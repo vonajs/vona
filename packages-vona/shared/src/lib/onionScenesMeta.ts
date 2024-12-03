@@ -1,4 +1,5 @@
 export interface OnionSceneMeta {
+  sceneIsolate?: boolean;
   hasLocal?: boolean;
   optionsRoute?: boolean;
   optionsArgumentPipe?: boolean;
@@ -48,5 +49,9 @@ export const onionScenesMeta: OnionScenesMeta = {
   },
   aop: {
     optionsGlobalInterfaceName: 'IDecoratorAopOptions',
+  },
+  entity: {
+    sceneIsolate: true,
+    optionsGlobalInterfaceName: 'IDecoratorEntityOptions',
   },
 };
