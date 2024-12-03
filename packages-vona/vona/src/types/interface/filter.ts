@@ -16,7 +16,9 @@ export interface IFilterHtml {
   html(err: Error, options: IDecoratorFilterOptions, next: NextSync): boolean;
 }
 
-export interface IDecoratorFilterOptions {}
+export interface IDecoratorFilterOptions {
+  enable?: boolean;
+}
 
 export interface IDecoratorFilterOptionsGlobal extends IMiddlewareBase {
   global: true;

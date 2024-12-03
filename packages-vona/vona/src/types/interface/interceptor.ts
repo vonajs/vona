@@ -8,7 +8,9 @@ export interface IInterceptorExecute {
   execute(options: IDecoratorInterceptorOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorInterceptorOptions {}
+export interface IDecoratorInterceptorOptions {
+  enable?: boolean;
+}
 
 export interface IDecoratorInterceptorOptionsGlobal extends IMiddlewareBase {
   global: true;

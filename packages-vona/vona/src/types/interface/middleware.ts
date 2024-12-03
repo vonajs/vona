@@ -35,7 +35,9 @@ export interface IMiddlewareExecute {
   execute(options: IDecoratorMiddlewareOptions, next: Next): Promise<any>;
 }
 
-export interface IDecoratorMiddlewareOptions {}
+export interface IDecoratorMiddlewareOptions {
+  enable?: boolean;
+}
 
 export interface IDecoratorMiddlewareOptionsGlobal extends IMiddlewareBase {
   global: true;

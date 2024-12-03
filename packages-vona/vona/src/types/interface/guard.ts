@@ -8,7 +8,9 @@ export interface IGuardExecute {
   execute(options: IDecoratorGuardOptions, next: Next): Promise<boolean>;
 }
 
-export interface IDecoratorGuardOptions {}
+export interface IDecoratorGuardOptions {
+  enable?: boolean;
+}
 
 export interface IDecoratorGuardOptionsGlobal extends IMiddlewareBase {
   global: true;
