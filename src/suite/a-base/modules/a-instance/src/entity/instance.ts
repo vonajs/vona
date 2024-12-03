@@ -10,6 +10,8 @@ export class EntityInstance extends omitClass(EntityBase, ['iid']) {
   @Rule(z.string())
   name: string;
   @Rule(z.string())
+  title: string;
+  @Rule(z.string())
   config: string;
 }
 

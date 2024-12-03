@@ -9,6 +9,7 @@ export class VersionManager extends BeanBase {
         table.basicFields({ iid: false });
         table.boolean('disabled');
         table.string('name', 255);
+        table.string('title', 255);
         table.text('config');
       });
     }

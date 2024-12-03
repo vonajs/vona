@@ -88,7 +88,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       name: configInstanceBase.subdomain,
       title: configInstanceBase.title,
       config: JSON.stringify(configInstanceBase.config || {}),
-      disabled: 0,
+      disabled: false,
     } as EntityInstance;
     const res = await this.modelInstance.insert(instance);
     instance.id = res[0] as number;
