@@ -16,4 +16,5 @@ function loadAll(app: VonaApplication) {
   app.meta.onionAop = app.bean._newBean(Onion, 'aop');
   app.meta.onionEntity = app.bean._newBean(Onion, 'entity');
   app.meta.onionModel = app.bean._newBean(Onion, 'model');
+  app.meta.onionMeta = app.bean._newBean(Onion, 'meta');
 }
