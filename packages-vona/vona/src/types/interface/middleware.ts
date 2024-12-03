@@ -3,7 +3,6 @@ import { IDecoratorBeanOptionsBase } from '../../lib/index.js';
 import { VonaContext } from '../context/index.js';
 import { IDecoratorPipeOptions } from './pipe.js';
 
-export const SymboleMiddlewareStatus = Symbol('SymboleMiddlewareStatus');
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
 
 export const SymbolUseMiddlewareOptions = Symbol('SymbolUseMiddlewareOptions');

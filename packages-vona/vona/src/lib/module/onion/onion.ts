@@ -7,7 +7,6 @@ import {
   IMiddlewareBase,
   IMiddlewareItem,
   IMiddlewareOptionsMeta,
-  SymboleMiddlewareStatus,
   SymbolUseMiddlewareLocal,
 } from '../../../types/interface/middleware.js';
 import { RouteHandlerArgumentMetaDecorator } from '../../../types/interface/pipe.js';
@@ -377,10 +376,6 @@ export class Onion extends BeanSimple {
         !optionsPrimitive &&
         (options.enable === false || !middlewareMatchMeta(this.app, options.meta) || !middlewareMatch(ctx, options))
       ) {
-        if (!ctx[SymboleMiddlewareStatus][sceneName]) {
-          ctx[SymboleMiddlewareStatus][sceneName] = {};
-        }
-        ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
         return typeof next === 'function' ? next() : next;
       }
       // execute
@@ -449,9 +444,3 @@ function __aopMatch(match: TypeDecoratorAopOptionsMatch, beanFullName: string) {
   }
   return match.some(item => __aopMatch(item, beanFullName));
 }
-
-// function middlewareDeps(sceneName: string, ctx, options) {
-//   let deps = options.dependencies || [];
-//   if (typeof deps === 'string') deps = deps.split(',');
-//   return deps.every(key => ctx[SymboleMiddlewareStatus][sceneName]?.[key] !== false);
-// }

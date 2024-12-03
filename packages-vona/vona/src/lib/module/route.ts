@@ -8,7 +8,6 @@ import {
   IModule,
   IMiddlewareItem,
   SymbolUseMiddlewareOptions,
-  SymboleMiddlewareStatus,
   SymbolRouteHandlersArgumentsValue,
   Next,
 } from '../../types/index.js';
@@ -245,8 +244,6 @@ export class AppRouter extends BeanSimple {
     let args: any[] = [];
     // middlewares: start
     const fnStart = async (ctx: VonaContext, next: Next) => {
-      // status
-      ctx[SymboleMiddlewareStatus] = {};
       // route
       ctx.route = route;
       // next
@@ -340,16 +337,12 @@ function wrapMiddlewareApp(key, route, app) {
   }
 }
 
-function wrapMiddleware(sceneName: string, item: IMiddlewareItem) {
+function wrapMiddleware(_sceneName: string, item: IMiddlewareItem) {
   const fn = (ctx, next) => {
     // options
     const options = ctx.meta.getMiddlewareOptions(item.name);
     // enable match ignore dependencies
     if (options.enable === false || !middlewareMatch(ctx, options)) {
-      if (!ctx[SymboleMiddlewareStatus][sceneName]) {
-        ctx[SymboleMiddlewareStatus][sceneName] = {};
-      }
-      ctx[SymboleMiddlewareStatus][sceneName][item.name] = false;
       return next();
     }
     // execute
@@ -372,12 +365,6 @@ function middlewareMatch(ctx, options) {
   return match(ctx);
 }
 
-// function middlewareDeps(sceneName: string, ctx, options) {
-//   let deps = options.dependencies || [];
-//   if (typeof deps === 'string') deps = deps.split(',');
-//   return deps.every(key => ctx[SymboleMiddlewareStatus][sceneName]?.[key] !== false);
-// }
-
 function controllerActionToMiddleware(controllerBeanFullName, _route) {
   return function classControllerMiddleware(ctx: VonaContext) {
     const controller = ctx.app.bean._getBean(controllerBeanFullName);
@@ -399,8 +386,6 @@ function classControllerMiddleware(ctx: VonaContext) {
 }
 
 async function routeStartMiddleware(ctx: VonaContext, next: Function) {
-  // status
-  ctx[SymboleMiddlewareStatus] = {};
   // next
   const res = await next();
   // invoke callbackes: handle secondly
