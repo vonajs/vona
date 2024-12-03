@@ -39,16 +39,17 @@ export class MetaVersion extends BeanBase<ScopeModule> implements IMetaVersionUp
       }
       // loop
       for (const tableName in moduleIndexes) {
-        await this._createIndexesOnTable({ tableName, indexes: moduleIndexes[tableName] });
+        await this._createIndexesOnTable(tableName, moduleIndexes[tableName]);
       }
     }
   }
 
-  private async _createIndexesOnTable({ tableName, indexes }: any) {
+  private async _createIndexesOnTable(tableName: string, indexes: string | string[] | undefined) {
+    if (!indexes) return;
     const dialectClient = this.bean.model.dialectClient;
     const indexPrefix = `idx_${tableName}_`;
     try {
-      const _indexArray = indexes.split(',');
+      const _indexArray = Array.isArray(indexes) ? indexes : indexes.split(',');
       const list = await this.bean.model.schema.fetchIndexes(tableName);
       const map: Record<string, boolean> = {};
       for (const item of list) {

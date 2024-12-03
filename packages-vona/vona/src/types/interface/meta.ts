@@ -6,7 +6,7 @@ export interface IDecoratorMetaOptions {}
 
 /** meta index */
 
-export type MetaOptionsIndexModuleIndexes = Record<string, string | string[]>;
+export type MetaOptionsIndexModuleIndexes = Record<string, string | string[] | undefined>;
 export interface IMetaOptionsIndex {
   indexes: MetaOptionsIndexModuleIndexes;
 }
