@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { BeanBase, ConfigInstanceBase, Service } from 'vona';
+import { BeanBase, ConfigInstanceBase, IMetaVersionInit, IMetaVersionTest, IMetaVersionUpdate, Service } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
@@ -207,9 +207,8 @@ export class ServiceVersion extends BeanBase {
 
   async __updateModuleTransaction(module, version) {
     // bean
-    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager` as any);
-    if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
-    if (!beanVersion.update) throw new Error(`version.manager.update not exists for ${module.info.relativeName}`);
+    const beanVersion = this.__getBeanVersion<IMetaVersionUpdate>(module.info.relativeName, true);
+    if (!beanVersion.update) throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
     // clear columns cache
     this.bean.model.columnsClearAll();
     // execute
@@ -222,8 +221,7 @@ export class ServiceVersion extends BeanBase {
 
   async __initModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager` as any);
-    if (!beanVersion) throw new Error(`version.manager not exists for ${module.info.relativeName}`);
+    const beanVersion = this.__getBeanVersion<IMetaVersionInit>(module.info.relativeName, true);
     // execute
     if (beanVersion.init) {
       await beanVersion.init({ ...options, version });
@@ -245,19 +243,30 @@ export class ServiceVersion extends BeanBase {
   // test module
   async __testModuleTransaction(module, version, options) {
     // bean
-    const beanVersion = <any>this.bean._getBean(`${module.info.relativeName}.version.manager` as any);
+    const beanVersion = this.__getBeanVersion<IMetaVersionTest>(module.info.relativeName, false);
     // execute
     if (beanVersion && beanVersion.test) {
       await beanVersion.test({ ...options, version });
     }
   }
 
-  async __after() {
+  protected async __after() {
     await this.app.bean.role.build();
   }
 
   // get module
-  __getModule(moduleName) {
+  private __getModule(moduleName: string) {
     return this.app.meta.modules[moduleName];
+  }
+
+  private __getBeanVersion<T>(moduleName: string, throwErrorIfEmpty: boolean): T {
+    // bean
+    let beanVersion = this.bean._getBean(`${moduleName}.meta.version` as any);
+    if (!beanVersion) {
+      // todo: remove version.manager
+      beanVersion = <any>this.bean._getBean(`${moduleName}.version.manager` as any);
+      if (!beanVersion && throwErrorIfEmpty) throw new Error(`meta.version not exists for ${moduleName}`);
+    }
+    return beanVersion;
   }
 }
