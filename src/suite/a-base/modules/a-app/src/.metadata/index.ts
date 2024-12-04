@@ -10,6 +10,34 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/app.js';
+export * from '../entity/appContent.js';
+export * from '../entity/appFull.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-app:app': IDecoratorEntityOptions;
+    'a-app:appContent': IDecoratorEntityOptions;
+    'a-app:appFull': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/app2.js';
+export * from '../model/appContent.js';
+export * from '../model/appFull.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-app:app2': IDecoratorModelOptions;
+    'a-app:appContent': IDecoratorModelOptions;
+    'a-app:appFull': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/app.js';
 /** atoms: end */
@@ -17,14 +45,16 @@ export * from '../atom/app.js';
 export * from '../controller/resource.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/app.js';
-export * from '../entity/appContent.js';
-export * from '../entity/appFull.js';
+import { EntityApp } from '../entity/app.js';
+import { EntityAppContent } from '../entity/appContent.js';
+import { EntityAppFull } from '../entity/appFull.js';
+export interface IModuleEntity {
+  app: EntityApp;
+  appContent: EntityAppContent;
+  appFull: EntityAppFull;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/app2.js';
-export * from '../model/appContent.js';
-export * from '../model/appFull.js';
 import { ModelApp2 } from '../model/app2.js';
 import { ModelAppContent } from '../model/appContent.js';
 import { ModelAppFull } from '../model/appFull.js';
@@ -62,7 +92,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAApp extends BeanScopeBase {}
 
 export interface ScopeModuleAApp
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

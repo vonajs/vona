@@ -58,7 +58,7 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.testInterception.js';
 export * from '../bean/middleware.testRestructuring.js';
 
@@ -69,8 +69,8 @@ declare module 'vona' {
     'test-party:testRestructuring': never;
   }
 }
-/** middlewares: end */
-/** aops: begin */
+/** middleware: end */
+/** aop: begin */
 export * from '../bean/aop.atom.js';
 
 import { IDecoratorAopOptions } from 'vona';
@@ -79,7 +79,31 @@ declare module 'vona' {
     'test-party:atom': IDecoratorAopOptions;
   }
 }
-/** aops: end */
+/** aop: end */
+/** entity: begin */
+export * from '../entity/party.js';
+export * from '../entity/partyExpense.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'test-party:party': IDecoratorEntityOptions;
+    'test-party:partyExpense': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/party.js';
+export * from '../model/partyExpense.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'test-party:party': IDecoratorModelOptions;
+    'test-party:partyExpense': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/party.js';
 export * from '../atom/partyExpense.js';
@@ -135,12 +159,14 @@ export * from '../controller/testResourceRight.js';
 export * from '../controller/testRoleUserRole.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/party.js';
-export * from '../entity/partyExpense.js';
+import { EntityParty } from '../entity/party.js';
+import { EntityPartyExpense } from '../entity/partyExpense.js';
+export interface IModuleEntity {
+  party: EntityParty;
+  partyExpense: EntityPartyExpense;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/party.js';
-export * from '../model/partyExpense.js';
 import { ModelParty } from '../model/party.js';
 import { ModelPartyExpense } from '../model/partyExpense.js';
 export interface IModuleModel {
@@ -190,7 +216,8 @@ export interface ScopeModuleTestParty
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

@@ -13,7 +13,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleTestLocaletwo extends BeanScopeBase {}
 
 export interface ScopeModuleTestLocaletwo
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

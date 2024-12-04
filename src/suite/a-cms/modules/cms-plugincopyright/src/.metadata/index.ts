@@ -20,7 +20,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsPlugincopyright extends BeanScopeBase {}
 
 export interface ScopeModuleCmsPlugincopyright
-  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

@@ -14,11 +14,33 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** entities: begin */
+/** entity: begin */
 export * from '../entity/detailBase.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-detail:detailBase': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/detailBase.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-detail:detailBase': IDecoratorModelOptions;
+  }
+}
+/** model: end */
+/** entities: begin */
+import { EntityDetailBase } from '../entity/detailBase.js';
+export interface IModuleEntity {
+  detailBase: EntityDetailBase;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/detailBase.js';
 import { ModelDetailBase } from '../model/detailBase.js';
 export interface IModuleModel {
   detailBase: ModelDetailBase;
@@ -43,7 +65,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADetail extends BeanScopeBase {}
 
 export interface ScopeModuleADetail
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], typeof constants, never, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    typeof constants,
+    never,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

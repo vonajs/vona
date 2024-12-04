@@ -14,6 +14,30 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/userOnline.js';
+export * from '../entity/userOnlineHistory.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-useronline:userOnline': IDecoratorEntityOptions;
+    'a-useronline:userOnlineHistory': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/userOnline.js';
+export * from '../model/userOnlineHistory.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-useronline:userOnline': IDecoratorModelOptions;
+    'a-useronline:userOnlineHistory': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/userOnline.js';
 export * from '../atom/userOnlineHistory.js';
@@ -22,12 +46,14 @@ export * from '../atom/userOnlineHistory.js';
 export * from '../controller/userOnline.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/userOnline.js';
-export * from '../entity/userOnlineHistory.js';
+import { EntityUserOnline } from '../entity/userOnline.js';
+import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';
+export interface IModuleEntity {
+  userOnline: EntityUserOnline;
+  userOnlineHistory: EntityUserOnlineHistory;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/userOnline.js';
-export * from '../model/userOnlineHistory.js';
 import { ModelUserOnline } from '../model/userOnline.js';
 import { ModelUserOnlineHistory } from '../model/userOnlineHistory.js';
 export interface IModuleModel {
@@ -73,7 +99,8 @@ export interface ScopeModuleAUseronline
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

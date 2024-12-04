@@ -10,7 +10,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleTestPartymonkey extends BeanScopeBase {}
 
-export interface ScopeModuleTestPartymonkey extends TypeModuleResource<never, never, never, never, never, never> {}
+export interface ScopeModuleTestPartymonkey
+  extends TypeModuleResource<never, never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

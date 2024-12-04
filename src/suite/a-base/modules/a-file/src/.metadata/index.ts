@@ -14,16 +14,42 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/file.js';
+export * from '../entity/fileView.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-file:file': IDecoratorEntityOptions;
+    'a-file:fileView': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/file.js';
+export * from '../model/fileView.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-file:file': IDecoratorModelOptions;
+    'a-file:fileView': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/file.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/file.js';
-export * from '../entity/fileView.js';
+import { EntityFile } from '../entity/file.js';
+import { EntityFileView } from '../entity/fileView.js';
+export interface IModuleEntity {
+  file: EntityFile;
+  fileView: EntityFileView;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/file.js';
-export * from '../model/fileView.js';
 import { ModelFile } from '../model/file.js';
 import { ModelFileView } from '../model/fileView.js';
 export interface IModuleModel {
@@ -59,7 +85,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAFile extends BeanScopeBase {}
 
 export interface ScopeModuleAFile
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

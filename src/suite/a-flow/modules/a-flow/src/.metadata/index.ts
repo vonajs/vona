@@ -23,6 +23,50 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/flow.js';
+export * from '../entity/flowDef.js';
+export * from '../entity/flowDefContent.js';
+export * from '../entity/flowDefFull.js';
+export * from '../entity/flowHistory.js';
+export * from '../entity/flowNode.js';
+export * from '../entity/flowNodeHistory.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-flow:flow': IDecoratorEntityOptions;
+    'a-flow:flowDef': IDecoratorEntityOptions;
+    'a-flow:flowDefContent': IDecoratorEntityOptions;
+    'a-flow:flowDefFull': IDecoratorEntityOptions;
+    'a-flow:flowHistory': IDecoratorEntityOptions;
+    'a-flow:flowNode': IDecoratorEntityOptions;
+    'a-flow:flowNodeHistory': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/flow.js';
+export * from '../model/flowDef.js';
+export * from '../model/flowDefContent.js';
+export * from '../model/flowDefFull.js';
+export * from '../model/flowHistory.js';
+export * from '../model/flowNode.js';
+export * from '../model/flowNodeHistory.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-flow:flow': IDecoratorModelOptions;
+    'a-flow:flowDef': IDecoratorModelOptions;
+    'a-flow:flowDefContent': IDecoratorModelOptions;
+    'a-flow:flowDefFull': IDecoratorModelOptions;
+    'a-flow:flowHistory': IDecoratorModelOptions;
+    'a-flow:flowNode': IDecoratorModelOptions;
+    'a-flow:flowNodeHistory': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/flowDef.js';
 /** atoms: end */
@@ -31,22 +75,24 @@ export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/flow.js';
-export * from '../entity/flowDef.js';
-export * from '../entity/flowDefContent.js';
-export * from '../entity/flowDefFull.js';
-export * from '../entity/flowHistory.js';
-export * from '../entity/flowNode.js';
-export * from '../entity/flowNodeHistory.js';
+import { EntityFlow } from '../entity/flow.js';
+import { EntityFlowDef } from '../entity/flowDef.js';
+import { EntityFlowDefContent } from '../entity/flowDefContent.js';
+import { EntityFlowDefFull } from '../entity/flowDefFull.js';
+import { EntityFlowHistory } from '../entity/flowHistory.js';
+import { EntityFlowNode } from '../entity/flowNode.js';
+import { EntityFlowNodeHistory } from '../entity/flowNodeHistory.js';
+export interface IModuleEntity {
+  flow: EntityFlow;
+  flowDef: EntityFlowDef;
+  flowDefContent: EntityFlowDefContent;
+  flowDefFull: EntityFlowDefFull;
+  flowHistory: EntityFlowHistory;
+  flowNode: EntityFlowNode;
+  flowNodeHistory: EntityFlowNodeHistory;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/flow.js';
-export * from '../model/flowDef.js';
-export * from '../model/flowDefContent.js';
-export * from '../model/flowDefFull.js';
-export * from '../model/flowHistory.js';
-export * from '../model/flowNode.js';
-export * from '../model/flowNodeHistory.js';
 import { ModelFlow } from '../model/flow.js';
 import { ModelFlowDef } from '../model/flowDef.js';
 import { ModelFlowDefContent } from '../model/flowDefContent.js';
@@ -130,7 +176,8 @@ export interface ScopeModuleAFlow
     (typeof locales)[TypeLocaleBase],
     typeof constants,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

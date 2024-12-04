@@ -70,7 +70,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleABaseadmin extends BeanScopeBase {}
 
 export interface ScopeModuleABaseadmin
-  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
+  extends TypeModuleResource<
+    never,
+    typeof Errors,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

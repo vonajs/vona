@@ -10,6 +10,38 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/dashboard.js';
+export * from '../entity/dashboardContent.js';
+export * from '../entity/dashboardFull.js';
+export * from '../entity/dashboardUser.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-dashboard:dashboard': IDecoratorEntityOptions;
+    'a-dashboard:dashboardContent': IDecoratorEntityOptions;
+    'a-dashboard:dashboardFull': IDecoratorEntityOptions;
+    'a-dashboard:dashboardUser': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/dashboard.js';
+export * from '../model/dashboardContent.js';
+export * from '../model/dashboardFull.js';
+export * from '../model/dashboardUser.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-dashboard:dashboard': IDecoratorModelOptions;
+    'a-dashboard:dashboardContent': IDecoratorModelOptions;
+    'a-dashboard:dashboardFull': IDecoratorModelOptions;
+    'a-dashboard:dashboardUser': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/dashboard.js';
 /** atoms: end */
@@ -17,16 +49,18 @@ export * from '../atom/dashboard.js';
 export * from '../controller/dashboard.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/dashboard.js';
-export * from '../entity/dashboardContent.js';
-export * from '../entity/dashboardFull.js';
-export * from '../entity/dashboardUser.js';
+import { EntityDashboard } from '../entity/dashboard.js';
+import { EntityDashboardContent } from '../entity/dashboardContent.js';
+import { EntityDashboardFull } from '../entity/dashboardFull.js';
+import { EntityDashboardUser } from '../entity/dashboardUser.js';
+export interface IModuleEntity {
+  dashboard: EntityDashboard;
+  dashboardContent: EntityDashboardContent;
+  dashboardFull: EntityDashboardFull;
+  dashboardUser: EntityDashboardUser;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/dashboard.js';
-export * from '../model/dashboardContent.js';
-export * from '../model/dashboardFull.js';
-export * from '../model/dashboardUser.js';
 import { ModelDashboard } from '../model/dashboard.js';
 import { ModelDashboardContent } from '../model/dashboardContent.js';
 import { ModelDashboardFull } from '../model/dashboardFull.js';
@@ -66,7 +100,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADashboard extends BeanScopeBase {}
 
 export interface ScopeModuleADashboard
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

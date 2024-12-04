@@ -32,13 +32,39 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** entities: begin */
+/** entity: begin */
 export * from '../entity/auth.js';
 export * from '../entity/authProvider.js';
-/** entities: end */
-/** models: begin */
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-auth:auth': IDecoratorEntityOptions;
+    'a-auth:authProvider': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
 export * from '../model/auth.js';
 export * from '../model/authProvider.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-auth:auth': IDecoratorModelOptions;
+    'a-auth:authProvider': IDecoratorModelOptions;
+  }
+}
+/** model: end */
+/** entities: begin */
+import { EntityAuth } from '../entity/auth.js';
+import { EntityAuthProvider } from '../entity/authProvider.js';
+export interface IModuleEntity {
+  auth: EntityAuth;
+  authProvider: EntityAuthProvider;
+}
+/** entities: end */
+/** models: begin */
 import { ModelAuth } from '../model/auth.js';
 import { ModelAuthProvider } from '../model/authProvider.js';
 export interface IModuleModel {
@@ -84,7 +110,8 @@ export interface ScopeModuleAAuth
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

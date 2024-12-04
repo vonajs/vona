@@ -14,6 +14,30 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/dict.js';
+export * from '../entity/dictContent.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-dict:dict': IDecoratorEntityOptions;
+    'a-dict:dictContent': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/dict.js';
+export * from '../model/dictContent.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-dict:dict': IDecoratorModelOptions;
+    'a-dict:dictContent': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/dict.js';
 /** atoms: end */
@@ -21,12 +45,14 @@ export * from '../atom/dict.js';
 export * from '../controller/dict.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/dict.js';
-export * from '../entity/dictContent.js';
+import { EntityDict } from '../entity/dict.js';
+import { EntityDictContent } from '../entity/dictContent.js';
+export interface IModuleEntity {
+  dict: EntityDict;
+  dictContent: EntityDictContent;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/dict.js';
-export * from '../model/dictContent.js';
 import { ModelDict } from '../model/dict.js';
 import { ModelDictContent } from '../model/dictContent.js';
 export interface IModuleModel {
@@ -62,7 +88,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADict extends BeanScopeBase {}
 
 export interface ScopeModuleADict
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

@@ -59,6 +59,7 @@ export interface ScopeModuleAProgress
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
+    never,
     never
   > {}
 

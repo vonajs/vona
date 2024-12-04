@@ -1,17 +1,20 @@
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.development.js';
 export * from '../bean/middleware.gate.js';
 import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
 import { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
 import 'vona';
 declare module 'vona' {
-  export interface IMiddlewareRecordLocal {
-    'a-core:development': IMiddlewareOptionsDevelopment;
+  export interface IMiddlewareRecordGlobal {
     'a-core:gate': IMiddlewareOptionsGate;
   }
+
+  export interface IMiddlewareRecordLocal {
+    'a-core:development': IMiddlewareOptionsDevelopment;
+  }
 }
-/** middlewares: end */
-/** guards: begin */
+/** middleware: end */
+/** guard: begin */
 export * from '../bean/guard.user.js';
 import { IGuardOptionsUser } from '../bean/guard.user.js';
 import 'vona';
@@ -20,8 +23,8 @@ declare module 'vona' {
     'a-core:user': IGuardOptionsUser;
   }
 }
-/** guards: end */
-/** interceptors: begin */
+/** guard: end */
+/** interceptor: begin */
 export * from '../bean/interceptor.body.js';
 import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
 import 'vona';
@@ -30,8 +33,8 @@ declare module 'vona' {
     'a-core:body': IInterceptorOptionsBody;
   }
 }
-/** interceptors: end */
-/** filters: begin */
+/** interceptor: end */
+/** filter: begin */
 export * from '../bean/filter.error.js';
 import { IFilterOptionsError } from '../bean/filter.error.js';
 import 'vona';
@@ -40,7 +43,7 @@ declare module 'vona' {
     'a-core:error': IFilterOptionsError;
   }
 }
-/** filters: end */
+/** filter: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -51,7 +54,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleACore extends BeanScopeBase {}
 
-export interface ScopeModuleACore extends TypeModuleResource<typeof config, never, never, never, never, never> {}
+export interface ScopeModuleACore extends TypeModuleResource<typeof config, never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

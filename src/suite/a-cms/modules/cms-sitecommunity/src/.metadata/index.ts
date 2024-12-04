@@ -32,7 +32,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsSitecommunity extends BeanScopeBase {}
 
 export interface ScopeModuleCmsSitecommunity
-  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

@@ -86,6 +86,16 @@ export * from '../controller/message.js';
 export * from '../controller/messageClass.js';
 export * from '../controller/test.js';
 /** controllers: end */
+/** entities: begin */
+import { EntityMessage } from '../entity/message.js';
+import { EntityMessageClass } from '../entity/messageClass.js';
+import { EntityMessageSync } from '../entity/messageSync.js';
+export interface IModuleEntity {
+  message: EntityMessage;
+  messageClass: EntityMessageClass;
+  messageSync: EntityMessageSync;
+}
+/** entities: end */
 /** models: begin */
 import { ModelMessage } from '../model/message.js';
 import { ModelMessageClass } from '../model/messageClass.js';
@@ -140,7 +150,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleASocketio extends BeanScopeBase {}
 
 export interface ScopeModuleASocketio
-  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel, IModuleEntity> {}
 
 import 'vona';
 declare module 'vona' {

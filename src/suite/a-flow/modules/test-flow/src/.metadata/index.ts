@@ -16,6 +16,34 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/product.js';
+export * from '../entity/purchaseOrder.js';
+export * from '../entity/purchaseOrderDetail.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'test-flow:product': IDecoratorEntityOptions;
+    'test-flow:purchaseOrder': IDecoratorEntityOptions;
+    'test-flow:purchaseOrderDetail': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/product.js';
+export * from '../model/purchaseOrder.js';
+export * from '../model/purchaseOrderDetail.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'test-flow:product': IDecoratorModelOptions;
+    'test-flow:purchaseOrder': IDecoratorModelOptions;
+    'test-flow:purchaseOrderDetail': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/product.js';
 export * from '../atom/purchaseOrder.js';
@@ -25,14 +53,16 @@ export * from '../atom/purchaseOrderDetail.js';
 export * from '../controller/flow.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/product.js';
-export * from '../entity/purchaseOrder.js';
-export * from '../entity/purchaseOrderDetail.js';
+import { EntityProduct } from '../entity/product.js';
+import { EntityPurchaseOrder } from '../entity/purchaseOrder.js';
+import { EntityPurchaseOrderDetail } from '../entity/purchaseOrderDetail.js';
+export interface IModuleEntity {
+  product: EntityProduct;
+  purchaseOrder: EntityPurchaseOrder;
+  purchaseOrderDetail: EntityPurchaseOrderDetail;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/product.js';
-export * from '../model/purchaseOrder.js';
-export * from '../model/purchaseOrderDetail.js';
 import { ModelProduct } from '../model/product.js';
 import { ModelPurchaseOrder } from '../model/purchaseOrder.js';
 import { ModelPurchaseOrderDetail } from '../model/purchaseOrderDetail.js';
@@ -57,7 +87,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleTestFlow extends BeanScopeBase {}
 
 export interface ScopeModuleTestFlow
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

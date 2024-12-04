@@ -17,11 +17,24 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/sequence.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-sequence:sequence': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
 /** controllers: begin */
 export * from '../controller/sequence.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/sequence.js';
+import { EntitySequence } from '../entity/sequence.js';
+export interface IModuleEntity {
+  sequence: EntitySequence;
+}
 /** entities: end */
 /** services: begin */
 export * from '../service/sequence.js';
@@ -42,7 +55,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleASequence extends BeanScopeBase {}
 
-export interface ScopeModuleASequence extends TypeModuleResource<never, never, never, never, IModuleService, never> {}
+export interface ScopeModuleASequence
+  extends TypeModuleResource<never, never, never, never, IModuleService, never, IModuleEntity> {}
 
 import 'vona';
 declare module 'vona' {

@@ -13,7 +13,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {}
 }
 /** beans: end */
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.validate.js';
 
 import 'vona';
@@ -22,7 +22,7 @@ declare module 'vona' {
     'a-validation:validate': never;
   }
 }
-/** middlewares: end */
+/** middleware: end */
 /** controllers: begin */
 export * from '../controller/validation.js';
 /** controllers: end */
@@ -68,6 +68,7 @@ export interface ScopeModuleAValidation
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
+    never,
     never
   > {}
 

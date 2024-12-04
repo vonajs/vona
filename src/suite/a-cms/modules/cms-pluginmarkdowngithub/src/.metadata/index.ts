@@ -5,7 +5,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsPluginmarkdowngithub extends BeanScopeBase {}
 
 export interface ScopeModuleCmsPluginmarkdowngithub
-  extends TypeModuleResource<never, never, never, never, never, never> {}
+  extends TypeModuleResource<never, never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

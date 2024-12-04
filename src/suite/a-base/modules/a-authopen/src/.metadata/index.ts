@@ -20,6 +20,26 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/authOpen.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-authopen:authOpen': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/authOpen.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-authopen:authOpen': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/authOpen.js';
 /** atoms: end */
@@ -28,10 +48,12 @@ export * from '../controller/auth.js';
 export * from '../controller/authOpen.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/authOpen.js';
+import { EntityAuthOpen } from '../entity/authOpen.js';
+export interface IModuleEntity {
+  authOpen: EntityAuthOpen;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/authOpen.js';
 import { ModelAuthOpen } from '../model/authOpen.js';
 export interface IModuleModel {
   authOpen: ModelAuthOpen;
@@ -83,7 +105,8 @@ export interface ScopeModuleAAuthopen
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

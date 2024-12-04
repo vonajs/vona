@@ -23,14 +23,36 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/stats.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-stats:stats': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/stats.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-stats:stats': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/stats.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/stats.js';
+import { EntityStats } from '../entity/stats.js';
+export interface IModuleEntity {
+  stats: EntityStats;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/stats.js';
 import { ModelStats } from '../model/stats.js';
 export interface IModuleModel {
   stats: ModelStats;
@@ -60,7 +82,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAStats extends BeanScopeBase {}
 
 export interface ScopeModuleAStats
-  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel, IModuleEntity> {}
 
 import 'vona';
 declare module 'vona' {

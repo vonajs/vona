@@ -328,6 +328,68 @@ export * from '../controller/tag.js';
 export * from '../controller/user.js';
 export * from '../controller/util.js';
 /** controllers: end */
+/** entities: begin */
+import { EntityAtom } from '../entity/atom.js';
+import { EntityAtomAction } from '../entity/atomAction.js';
+import { EntityAtomClass } from '../entity/atomClass.js';
+import { EntityAtomLabel } from '../entity/atomLabel.js';
+import { EntityAtomLabelRef } from '../entity/atomLabelRef.js';
+import { EntityAtomStar } from '../entity/atomStar.js';
+import { EntityCategory } from '../entity/category.js';
+import { EntityComment } from '../entity/comment.js';
+import { EntityCommentHeart } from '../entity/commentHeart.js';
+import { EntityCommentView } from '../entity/commentView.js';
+import { EntityLabel } from '../entity/label.js';
+import { EntityResource } from '../entity/resource.js';
+import { EntityResourceLocale } from '../entity/resourceLocale.js';
+import { EntityResourceRole } from '../entity/resourceRole.js';
+import { EntityRole } from '../entity/role.js';
+import { EntityRoleExpand } from '../entity/roleExpand.js';
+import { EntityRoleFieldsRight } from '../entity/roleFieldsRight.js';
+import { EntityRoleInc } from '../entity/roleInc.js';
+import { EntityRoleIncRef } from '../entity/roleIncRef.js';
+import { EntityRoleRef } from '../entity/roleRef.js';
+import { EntityRoleRight } from '../entity/roleRight.js';
+import { EntityRoleRightRef } from '../entity/roleRightRef.js';
+import { EntityTag } from '../entity/tag.js';
+import { EntityTagRef } from '../entity/tagRef.js';
+import { EntityUser } from '../entity/user.js';
+import { EntityUserAgent } from '../entity/userAgent.js';
+import { EntityUserRole } from '../entity/userRole.js';
+import { EntityUserRoleIncRef } from '../entity/userRoleIncRef.js';
+import { EntityUserRoleRef } from '../entity/userRoleRef.js';
+export interface IModuleEntity {
+  atom: EntityAtom;
+  atomAction: EntityAtomAction;
+  atomClass: EntityAtomClass;
+  atomLabel: EntityAtomLabel;
+  atomLabelRef: EntityAtomLabelRef;
+  atomStar: EntityAtomStar;
+  category: EntityCategory;
+  comment: EntityComment;
+  commentHeart: EntityCommentHeart;
+  commentView: EntityCommentView;
+  label: EntityLabel;
+  resource: EntityResource;
+  resourceLocale: EntityResourceLocale;
+  resourceRole: EntityResourceRole;
+  role: EntityRole;
+  roleExpand: EntityRoleExpand;
+  roleFieldsRight: EntityRoleFieldsRight;
+  roleInc: EntityRoleInc;
+  roleIncRef: EntityRoleIncRef;
+  roleRef: EntityRoleRef;
+  roleRight: EntityRoleRight;
+  roleRightRef: EntityRoleRightRef;
+  tag: EntityTag;
+  tagRef: EntityTagRef;
+  user: EntityUser;
+  userAgent: EntityUserAgent;
+  userRole: EntityUserRole;
+  userRoleIncRef: EntityUserRoleIncRef;
+  userRoleRef: EntityUserRoleRef;
+}
+/** entities: end */
 /** models: begin */
 import { ModelAtom } from '../model/atom.js';
 import { ModelAtomAction } from '../model/atomAction.js';
@@ -496,7 +558,8 @@ export interface ScopeModuleABase
     (typeof locales)[TypeLocaleBase],
     typeof constants,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

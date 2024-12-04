@@ -26,6 +26,30 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/article.js';
+export * from '../entity/content.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-cms:article': IDecoratorEntityOptions;
+    'a-cms:content': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/article.js';
+export * from '../model/content.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-cms:article': IDecoratorModelOptions;
+    'a-cms:content': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/article.js';
 /** atoms: end */
@@ -37,12 +61,14 @@ export * from '../controller/rss.js';
 export * from '../controller/site.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/article.js';
-export * from '../entity/content.js';
+import { EntityArticle } from '../entity/article.js';
+import { EntityContent } from '../entity/content.js';
+export interface IModuleEntity {
+  article: EntityArticle;
+  content: EntityContent;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/article.js';
-export * from '../model/content.js';
 import { ModelArticle } from '../model/article.js';
 import { ModelContent } from '../model/content.js';
 export interface IModuleModel {
@@ -103,7 +129,8 @@ export interface ScopeModuleACms
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

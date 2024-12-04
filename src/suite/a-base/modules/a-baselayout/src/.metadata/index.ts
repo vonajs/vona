@@ -10,18 +10,48 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/layout.js';
+export * from '../entity/layoutContent.js';
+export * from '../entity/layoutFull.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-baselayout:layout': IDecoratorEntityOptions;
+    'a-baselayout:layoutContent': IDecoratorEntityOptions;
+    'a-baselayout:layoutFull': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/layout.js';
+export * from '../model/layoutContent.js';
+export * from '../model/layoutFull.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-baselayout:layout': IDecoratorModelOptions;
+    'a-baselayout:layoutContent': IDecoratorModelOptions;
+    'a-baselayout:layoutFull': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/layout.js';
 /** atoms: end */
 /** entities: begin */
-export * from '../entity/layout.js';
-export * from '../entity/layoutContent.js';
-export * from '../entity/layoutFull.js';
+import { EntityLayout } from '../entity/layout.js';
+import { EntityLayoutContent } from '../entity/layoutContent.js';
+import { EntityLayoutFull } from '../entity/layoutFull.js';
+export interface IModuleEntity {
+  layout: EntityLayout;
+  layoutContent: EntityLayoutContent;
+  layoutFull: EntityLayoutFull;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/layout.js';
-export * from '../model/layoutContent.js';
-export * from '../model/layoutFull.js';
 import { ModelLayout } from '../model/layout.js';
 import { ModelLayoutContent } from '../model/layoutContent.js';
 import { ModelLayoutFull } from '../model/layoutFull.js';
@@ -46,7 +76,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleABaselayout extends BeanScopeBase {}
 
 export interface ScopeModuleABaselayout
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, IModuleModel> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    IModuleModel,
+    IModuleEntity
+  > {}
 
 import 'vona';
 declare module 'vona' {

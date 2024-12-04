@@ -10,7 +10,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {}
 }
 /** beans: end */
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.captchaVerify.js';
 
 import 'vona';
@@ -19,7 +19,7 @@ declare module 'vona' {
     'a-captcha:captchaVerify': never;
   }
 }
-/** middlewares: end */
+/** middleware: end */
 /** controllers: begin */
 export * from '../controller/captcha.js';
 /** controllers: end */
@@ -65,6 +65,7 @@ export interface ScopeModuleACaptcha
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
+    never,
     never
   > {}
 

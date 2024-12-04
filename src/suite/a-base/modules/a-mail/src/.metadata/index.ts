@@ -29,14 +29,36 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/mail.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-mail:mail': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/mail.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-mail:mail': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/scene.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/mail.js';
+import { EntityMail } from '../entity/mail.js';
+export interface IModuleEntity {
+  mail: EntityMail;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/mail.js';
 import { ModelMail } from '../model/mail.js';
 export interface IModuleModel {
   mail: ModelMail;
@@ -80,7 +102,8 @@ export interface ScopeModuleAMail
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

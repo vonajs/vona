@@ -14,14 +14,36 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/status.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-status:status': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/status.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-status:status': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/status.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/status.js';
+import { EntityStatus } from '../entity/status.js';
+export interface IModuleEntity {
+  status: EntityStatus;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/status.js';
 import { ModelStatus } from '../model/status.js';
 export interface IModuleModel {
   status: ModelStatus;
@@ -47,7 +69,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAStatus extends BeanScopeBase {}
 
 export interface ScopeModuleAStatus
-  extends TypeModuleResource<never, never, never, never, IModuleService, IModuleModel> {}
+  extends TypeModuleResource<never, never, never, never, IModuleService, IModuleModel, IModuleEntity> {}
 
 import 'vona';
 declare module 'vona' {

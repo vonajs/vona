@@ -32,7 +32,7 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.transaction.js';
 import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 import 'vona';
@@ -41,7 +41,7 @@ declare module 'vona' {
     'a-database:transaction': IMiddlewareOptionsTransaction;
   }
 }
-/** middlewares: end */
+/** middleware: end */
 /** services: begin */
 export * from '../service/dbMeta.js';
 export * from '../service/transaction.js';
@@ -84,7 +84,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleADatabase extends BeanScopeBase {}
 
 export interface ScopeModuleADatabase
-  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
+  extends TypeModuleResource<
+    never,
+    typeof Errors,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

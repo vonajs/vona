@@ -110,6 +110,7 @@ export interface ScopeModuleAClibooster
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
+    never,
     never
   > {}
 

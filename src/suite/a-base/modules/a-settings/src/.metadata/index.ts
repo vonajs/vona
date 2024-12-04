@@ -14,16 +14,42 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/settings.js';
+export * from '../entity/settingsRef.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-settings:settings': IDecoratorEntityOptions;
+    'a-settings:settingsRef': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/settings.js';
+export * from '../model/settingsRef.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-settings:settings': IDecoratorModelOptions;
+    'a-settings:settingsRef': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/settings.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/settings.js';
-export * from '../entity/settingsRef.js';
+import { EntitySettings } from '../entity/settings.js';
+import { EntitySettingsRef } from '../entity/settingsRef.js';
+export interface IModuleEntity {
+  settings: EntitySettings;
+  settingsRef: EntitySettingsRef;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/settings.js';
-export * from '../model/settingsRef.js';
 import { ModelSettings } from '../model/settings.js';
 import { ModelSettingsRef } from '../model/settingsRef.js';
 export interface IModuleModel {
@@ -69,7 +95,8 @@ export interface ScopeModuleASettings
     (typeof locales)[TypeLocaleBase],
     typeof constants,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

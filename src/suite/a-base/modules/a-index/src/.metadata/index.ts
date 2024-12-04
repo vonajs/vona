@@ -18,7 +18,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleAIndex extends BeanScopeBase {}
 
-export interface ScopeModuleAIndex extends TypeModuleResource<typeof config, never, never, never, never, never> {}
+export interface ScopeModuleAIndex
+  extends TypeModuleResource<typeof config, never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

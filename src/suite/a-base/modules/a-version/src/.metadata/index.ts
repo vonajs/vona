@@ -29,13 +29,41 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** entities: begin */
+/** entity: begin */
 export * from '../entity/version.js';
 export * from '../entity/versionInit.js';
 export * from '../entity/viewRecord.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-version:version': IDecoratorEntityOptions;
+    'a-version:versionInit': IDecoratorEntityOptions;
+    'a-version:viewRecord': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/viewRecord.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-version:viewRecord': IDecoratorModelOptions;
+  }
+}
+/** model: end */
+/** entities: begin */
+import { EntityVersion } from '../entity/version.js';
+import { EntityVersionInit } from '../entity/versionInit.js';
+import { EntityViewRecord } from '../entity/viewRecord.js';
+export interface IModuleEntity {
+  version: EntityVersion;
+  versionInit: EntityVersionInit;
+  viewRecord: EntityViewRecord;
+}
 /** entities: end */
 /** models: begin */
-export * from '../model/viewRecord.js';
 import { ModelViewRecord } from '../model/viewRecord.js';
 export interface IModuleModel {
   viewRecord: ModelViewRecord;
@@ -87,7 +115,8 @@ export interface ScopeModuleAVersion
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

@@ -34,7 +34,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsPluginsubmit extends BeanScopeBase {}
 
 export interface ScopeModuleCmsPluginsubmit
-  extends TypeModuleResource<typeof config, never, never, never, IModuleService, never> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, never, never> {}
 
 import 'vona';
 declare module 'vona' {

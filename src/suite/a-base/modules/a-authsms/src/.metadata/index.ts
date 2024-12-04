@@ -87,6 +87,7 @@ export interface ScopeModuleAAuthsms
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
+    never,
     never
   > {}
 

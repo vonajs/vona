@@ -29,11 +29,24 @@ declare module 'vona' {
   }
 }
 /** beans: end */
+/** entity: begin */
+export * from '../entity/cache.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-cache:cache': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
 /** controllers: begin */
 export * from '../controller/db.js';
 /** controllers: end */
 /** entities: begin */
-export * from '../entity/cache.js';
+import { EntityCache } from '../entity/cache.js';
+export interface IModuleEntity {
+  cache: EntityCache;
+}
 /** entities: end */
 /** config: begin */
 export * from '../config/config.js';
@@ -45,7 +58,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleACache extends BeanScopeBase {}
 
-export interface ScopeModuleACache extends TypeModuleResource<typeof config, never, never, never, never, never> {}
+export interface ScopeModuleACache
+  extends TypeModuleResource<typeof config, never, never, never, never, never, IModuleEntity> {}
 
 import 'vona';
 declare module 'vona' {

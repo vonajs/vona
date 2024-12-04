@@ -14,7 +14,7 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** aops: begin */
+/** aop: begin */
 export * from '../bean/aop.regExp.js';
 export * from '../bean/aop.simple.js';
 
@@ -25,7 +25,7 @@ declare module 'vona' {
     'vona-test:simple': IDecoratorAopOptions;
   }
 }
-/** aops: end */
+/** aop: end */
 /** controllers: begin */
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
@@ -78,7 +78,15 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleVonaTest extends BeanScopeBase {}
 
 export interface ScopeModuleVonaTest
-  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    IModuleService,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

@@ -10,7 +10,7 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {}
 }
 /** beans: end */
-/** pipes: begin */
+/** pipe: begin */
 export * from '../bean/pipe.defaultValue.js';
 export * from '../bean/pipe.valid.js';
 export * from '../bean/pipe.validation.js';
@@ -28,7 +28,7 @@ declare module 'vona' {
     'a-validator:valid': IPipeOptionsValid;
   }
 }
-/** pipes: end */
+/** pipe: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -47,7 +47,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAValidator extends BeanScopeBase {}
 
 export interface ScopeModuleAValidator
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

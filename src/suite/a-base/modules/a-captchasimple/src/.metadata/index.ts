@@ -32,7 +32,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleACaptchasimple extends BeanScopeBase {}
 
 export interface ScopeModuleACaptchasimple
-  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, never, never> {}
+  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {
