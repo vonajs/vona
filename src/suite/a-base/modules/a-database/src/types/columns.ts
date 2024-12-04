@@ -2,20 +2,16 @@ import { appMetadata, appResource, Constructable, IDecoratorEntityOptions } from
 
 export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');
 
-export function columns<T>(
-  classEntity: Constructable<T>,
-  extract: (classEntity: T) => any | any[] | undefined,
-): string[] | undefined {
+export function columns<T>(classEntity: Constructable<T>, extract: (classEntity: T) => any | any[]): string[] {
   const columns = appMetadata.getMetadata(SymbolDecoratorRuleColumn, classEntity.prototype);
   const names = extract(columns as any);
-  if (names === undefined) return undefined;
   return Array.isArray(names) ? names : [names];
 }
 
 export function tableColumns<T>(
   classEntity: Constructable<T>,
   extract: (classEntity: T) => any | any[],
-): Record<string, string[] | undefined> {
+): Record<string, string[]> {
   // tableName
   const beanOptionsEntity = appResource.getBean(classEntity);
   const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
