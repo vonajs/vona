@@ -64,6 +64,12 @@ declare module 'vona' {
 /** controllers: begin */
 export * from '../controller/instance.js';
 /** controllers: end */
+/** entities: begin */
+import { EntityInstance } from '../entity/instance.js';
+export interface IModuleEntity {
+  instance: EntityInstance;
+}
+/** entities: end */
 /** models: begin */
 import { ModelInstance } from '../model/instance.js';
 export interface IModuleModel {
@@ -108,7 +114,8 @@ export interface ScopeModuleAInstance
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
-    IModuleModel
+    IModuleModel,
+    IModuleEntity
   > {}
 
 import 'vona';

@@ -6,6 +6,7 @@ import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateControllers } from './toolsMetadata/generateControllers.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
+import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
 import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
@@ -89,8 +90,9 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateControllers(moduleName, modulePath);
     // dtos
     content += await generateDtos(moduleName, modulePath);
-    // // entities
-    // content += await generateEntities(moduleName, modulePath);
+    // entities
+    const contentEntities = await generateEntities(moduleName, modulePath);
+    content += contentEntities;
     // models
     const contentModels = await generateModels(moduleName, modulePath);
     content += contentModels;
@@ -121,6 +123,7 @@ export class CliToolsMetadata extends BeanCliBase {
       constants: contentConstants,
       services: contentServices,
       models: contentModels,
+      entities: contentEntities,
     });
     // empty
     if (!content.trim()) {

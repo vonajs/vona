@@ -20,6 +20,7 @@ export type TypeModuleResource<
   CONSTANTS = object,
   SERVICE = unknown,
   MODEL = unknown,
+  ENTITY = unknown,
 > = {
   _bean: TypeModuleBean;
   config: TypeModuleConfig<CONFIG>;
@@ -28,5 +29,6 @@ export type TypeModuleResource<
   constant: TypeModuleConstants<CONSTANTS>;
   service: SERVICE;
   model: MODEL;
+  entity: ENTITY;
   util: BeanScopeUtil;
 };
