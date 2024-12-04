@@ -30,21 +30,20 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
     // const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
-    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     const beanNameFull = `${moduleName}:${beanName}`;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue;
     const fileInfo = _extractInfo(sceneName, file, sceneMeta);
     // import options
-    if (fileInfo.hasOptionsInterface) {
+    if (fileInfo.optionsCustomInterface) {
       contentImports.push(
-        `import { I${sceneNameCapitalize}Options${beanNameCapitalize} } from '${sceneMeta.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
+        `import { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
       );
     }
     // record
     if (fileInfo.isGlobal) {
-      if (fileInfo.hasOptionsInterface) {
-        contentRecordsGlobal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
+      if (fileInfo.optionsCustomInterface) {
+        contentRecordsGlobal.push(`'${beanNameFull}': ${fileInfo.optionsCustomInterface};`);
       } else {
         if (sceneMeta.optionsGlobalInterfaceName) {
           contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
@@ -54,8 +53,8 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
         }
       }
     } else {
-      if (fileInfo.hasOptionsInterface) {
-        contentRecordsLocal.push(`'${beanNameFull}': I${sceneNameCapitalize}Options${beanNameCapitalize};`);
+      if (fileInfo.optionsCustomInterface) {
+        contentRecordsLocal.push(`'${beanNameFull}': ${fileInfo.optionsCustomInterface};`);
       } else {
         contentRecordsLocal.push(`'${beanNameFull}': never;`);
       }
@@ -90,9 +89,23 @@ declare module 'vona' {
 function _extractInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const content = fse.readFileSync(file).toString();
-  const hasOptionsInterface = content.includes(`@${sceneNameCapitalize}<I${sceneNameCapitalize}Options`);
+  // optionsCustomInterface
+  let optionsCustomInterface: string | undefined;
+  let optionsCustomInterfaceFrom: string | undefined;
+  let reg = new RegExp(`@${sceneNameCapitalize}<(I${sceneNameCapitalize}Options[^>]*)>`);
+  let matches = content.match(reg);
+  if (matches) {
+    optionsCustomInterface = matches[1];
+    //optionsCustomInterfaceFrom
+    reg = new RegExp(`import {[\\s\\S]*?${optionsCustomInterface}[, ][\\s\\S]*?} from '([^']*)'`);
+    matches = content.match(reg);
+    if (matches) {
+      optionsCustomInterfaceFrom = matches[1];
+    }
+  }
+  // isGlobal
   const isGlobal = sceneMeta.hasLocal
     ? content.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/)
     : true;
-  return { hasOptionsInterface, isGlobal };
+  return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }
