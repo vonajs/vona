@@ -33,8 +33,15 @@ export function copyProperties(target: object, source: object, keysIgnore: Metad
   for (const key of Reflect.ownKeys(source)) {
     if (keysIgnore.includes(key)) continue;
     if (filter && !filter(key)) continue;
+    // desc
     const desc = Object.getOwnPropertyDescriptor(source, key)!;
     Object.defineProperty(target, key, desc);
+    // metadata
+    const metaKeys = Reflect.getOwnMetadataKeys(source, key);
+    for (const metaKey of metaKeys) {
+      const metaValue = Reflect.getOwnMetadata(metaKey, source, key);
+      Reflect.defineMetadata(metaKey, metaValue, target, key);
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { Constructable } from '../decorator/type/constructable.js';
-import { copyMetadataOfClasses } from './utils.js';
+import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
 
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
 
@@ -15,5 +15,6 @@ export function mixinClass<T extends Constructable[]>(...classRefs: T): Intersec
     TargetClass.prototype,
     classRefs.map(item => item.prototype),
   );
+  copyPropertiesOfClasses(TargetClass as any, classRefs);
   return TargetClass as any;
 }

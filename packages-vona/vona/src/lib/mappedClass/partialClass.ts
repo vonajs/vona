@@ -1,5 +1,5 @@
 import { Constructable } from '../decorator/type/constructable.js';
-import { copyMetadataOfClasses } from './utils.js';
+import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
 
 export function partialClass<T>(classRef: Constructable<T>): Constructable<Partial<T>>;
 export function partialClass<T, K extends keyof T>(
@@ -9,11 +9,12 @@ export function partialClass<T, K extends keyof T>(
 export function partialClass<T, K extends keyof T>(classRef: Constructable<T>, keys?: K[]): any {
   abstract class TargetClass {}
   copyMetadataOfClasses(TargetClass.prototype, [classRef.prototype], (rules, key, metadataKeyOptions) => {
-    if (keys && !keys.includes(key as any)) return rules[key];
+    if (keys && !keys.includes(key)) return rules[key];
     if (metadataKeyOptions?.partialClass) {
       return metadataKeyOptions?.partialClass(rules[key]);
     }
     return rules[key];
   });
+  copyPropertiesOfClasses(TargetClass as any, [classRef]);
   return TargetClass as any;
 }
