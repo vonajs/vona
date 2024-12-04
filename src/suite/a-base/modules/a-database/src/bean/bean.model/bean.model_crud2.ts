@@ -1,4 +1,4 @@
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 import { IModelMethodOptions, IModelUpdateOptions } from '../../types/index.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 

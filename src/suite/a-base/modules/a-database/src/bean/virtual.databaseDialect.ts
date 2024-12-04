@@ -1,5 +1,5 @@
 import { BeanBase, Virtual } from 'vona';
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 import { Knex } from 'knex';
 
 export interface IFetchDatabasesResultItem {

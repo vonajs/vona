@@ -1,4 +1,4 @@
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 import { AtomClassBase, AtomClassParams } from '../atomClass/index.js';
 
 export interface AtomKey {

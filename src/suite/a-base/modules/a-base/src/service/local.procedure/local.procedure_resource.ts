@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import { LocalProcedureAtomRightCheckRightActionBulk } from './local.procedure_atomRight_checkRightActionBulk.js';
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 
 export class LocalProcedureResource extends LocalProcedureAtomRightCheckRightActionBulk {
   async checkRightResource({

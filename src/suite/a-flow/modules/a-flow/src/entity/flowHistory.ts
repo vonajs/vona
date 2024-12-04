@@ -1,4 +1,4 @@
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 import { EntityBaseTemp } from 'vona-module-a-base';
 import { Entity } from 'vona';
 

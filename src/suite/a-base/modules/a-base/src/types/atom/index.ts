@@ -1,4 +1,4 @@
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 
 export * from './read.js';
 export * from './select.js';

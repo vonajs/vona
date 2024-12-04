@@ -1,4 +1,4 @@
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 import { OmitType } from 'vona-module-a-swagger';
 import { Entity } from 'vona';
 import { EntityBaseTemp } from '../types.js';

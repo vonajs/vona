@@ -1,5 +1,5 @@
 import { BeanBase, Controller } from 'vona';
-import { TableIdentity } from 'vona-module-a-core';
+import { TableIdentity } from 'vona-module-a-database';
 import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
