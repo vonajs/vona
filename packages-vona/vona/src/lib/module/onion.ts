@@ -11,8 +11,8 @@ function loadAll(app: VonaApplication) {
   app.meta.onionInterceptor = app.bean._newBean(Onion, 'interceptor');
   app.meta.onionPipe = app.bean._newBean(Onion, 'pipe');
   app.meta.onionFilter = app.bean._newBean(Onion, 'filter');
-  app.meta.onionConnection = app.bean._newBean(Onion, 'connection');
-  app.meta.onionPacket = app.bean._newBean(Onion, 'packet');
+  app.meta.onionSocketConnection = app.bean._newBean(Onion, 'socketConnection');
+  app.meta.onionSocketPacket = app.bean._newBean(Onion, 'socketPacket');
   app.meta.onionAop = app.bean._newBean(Onion, 'aop');
   app.meta.onionEntity = app.bean._newBean(Onion, 'entity');
   app.meta.onionModel = app.bean._newBean(Onion, 'model');

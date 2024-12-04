@@ -71,10 +71,10 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateOnions('pipe', moduleName, modulePath);
     // filters
     content += await generateOnions('filter', moduleName, modulePath);
-    // connections
-    content += await generateOnions('connection', moduleName, modulePath);
-    // packets
-    content += await generateOnions('packet', moduleName, modulePath);
+    // socket connections
+    content += await generateOnions('socketConnection', moduleName, modulePath);
+    // socket packets
+    content += await generateOnions('socketPacket', moduleName, modulePath);
     // aops
     content += await generateOnions('aop', moduleName, modulePath);
     // entities

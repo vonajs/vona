@@ -42,11 +42,11 @@ export const onionScenesMeta: OnionScenesMeta = {
     optionsDynamic: true,
     optionsGlobalInterfaceName: 'IDecoratorFilterOptionsGlobal',
   },
-  connection: {
-    optionsGlobalInterfaceName: 'IDecoratorConnectionOptions',
+  socketConnection: {
+    optionsGlobalInterfaceName: 'IDecoratorSocketConnectionOptions',
   },
-  packet: {
-    optionsGlobalInterfaceName: 'IDecoratorPacketOptions',
+  socketPacket: {
+    optionsGlobalInterfaceName: 'IDecoratorSocketPacketOptions',
   },
   aop: {
     optionsGlobalInterfaceName: 'IDecoratorAopOptions',

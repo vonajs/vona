@@ -17,8 +17,8 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'interceptor'
   | 'pipe'
   | 'filter'
-  | 'connection'
-  | 'packet'
+  | 'socketConnection'
+  | 'socketPacket'
   | 'meta'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =

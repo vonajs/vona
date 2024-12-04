@@ -1,6 +1,5 @@
 export * from './aop.js';
 export * from './broadcast.js';
-export * from './connection.js';
 export * from './entity.js';
 export * from './filter.js';
 export * from './guard.js';
@@ -10,7 +9,8 @@ export * from './middleware.js';
 export * from './model.js';
 export * from './module.js';
 export * from './monkey.js';
-export * from './packet.js';
 export * from './pipe.js';
 export * from './queue.js';
 export * from './schedule.js';
+export * from './socketConnection.js';
+export * from './socketPacket.js';
