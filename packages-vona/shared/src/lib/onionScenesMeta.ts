@@ -5,7 +5,6 @@ export interface OnionSceneMeta {
   optionsArgumentPipe?: boolean;
   optionsDynamic?: boolean;
   optionsGlobalInterfaceName?: string;
-  optionsCustomInterfaceFrom?: string;
 }
 
 export type OnionScenesMeta = Record<string, OnionSceneMeta>;
@@ -61,6 +60,5 @@ export const onionScenesMeta: OnionScenesMeta = {
   },
   meta: {
     optionsGlobalInterfaceName: '',
-    optionsCustomInterfaceFrom: 'vona',
   },
 };
