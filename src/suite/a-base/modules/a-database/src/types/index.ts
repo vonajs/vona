@@ -1,3 +1,4 @@
+export * from './columns.js';
 export * from './config.js';
 export * from './database.js';
 export * from './entityBase.js';

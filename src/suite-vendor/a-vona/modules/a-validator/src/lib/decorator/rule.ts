@@ -1,8 +1,8 @@
 import { appMetadata, MetadataKey, registerMappedClassMetadataKey } from 'vona';
+import { SymbolDecoratorRuleColumn } from 'vona-module-a-database';
 import { z } from 'zod';
 
 export const SymbolDecoratorRule = Symbol('SymbolDecoratorRule');
-export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');
 
 export function Rule(rule: z.ZodSchema): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {

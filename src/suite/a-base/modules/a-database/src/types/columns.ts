@@ -1,5 +1,6 @@
 import { appMetadata, appResource, Constructable, IDecoratorEntityOptions } from 'vona';
-import { SymbolDecoratorRuleColumn } from './rule.js';
+
+export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');
 
 export function columns<T>(classEntity: Constructable<T>, extract: (classEntity: T) => any | any[]): string[] {
   const columns = appMetadata.getMetadata(SymbolDecoratorRuleColumn, classEntity.prototype);
