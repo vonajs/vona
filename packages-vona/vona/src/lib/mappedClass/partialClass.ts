@@ -8,7 +8,7 @@ export function partialClass<T, K extends keyof T>(
   keys: K[],
 ): Constructable<Partial<Pick<T, (typeof keys)[number]>> & Omit<T, (typeof keys)[number]>>;
 export function partialClass<T, K extends keyof T>(classRef: Constructable<T>, keys?: K[]): any {
-  abstract class PartialedClass {}
+  abstract class TargetClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
     for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
@@ -28,8 +28,8 @@ export function partialClass<T, K extends keyof T>(classRef: Constructable<T>, k
           }
         }
       }
-      appMetadata.defineMetadata(metadataKey, rulesNew, PartialedClass.prototype);
+      appMetadata.defineMetadata(metadataKey, rulesNew, TargetClass.prototype);
     }
   }
-  return PartialedClass as any;
+  return TargetClass as any;
 }

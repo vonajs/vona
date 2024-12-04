@@ -19,3 +19,12 @@ export function registerMappedClassMetadataKey(
 export function getMappedClassMetadataKeys(target: object): MappedClassMetadataKeys | undefined {
   return appMetadata.getMetadata<MappedClassMetadataKeys>(SymbolMappedClassMetadataKeys, target);
 }
+
+export function copyProperties(target: object, source: object, keysIgnore: MetadataKey[], filter?: Function) {
+  for (const key of Reflect.ownKeys(source)) {
+    if (keysIgnore.includes(key)) continue;
+    if (filter && !filter(key)) continue;
+    const desc = Object.getOwnPropertyDescriptor(source, key)!;
+    Object.defineProperty(target, key, desc);
+  }
+}

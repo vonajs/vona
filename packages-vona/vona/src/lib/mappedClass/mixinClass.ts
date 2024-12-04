@@ -11,7 +11,7 @@ type ClassRefsToConstructors<T extends Constructable[]> = {
 type Intersection<T extends Constructable[]> = Constructable<UnionToIntersection<ClassRefsToConstructors<T>[number]>>;
 
 export function mixinClass<T extends Constructable[]>(...classRefs: T): Intersection<T> {
-  abstract class MixinedClass {}
+  abstract class TargetClass {}
   //
   const metadataKeys = {};
   for (const classRef of classRefs) {
@@ -28,7 +28,7 @@ export function mixinClass<T extends Constructable[]>(...classRefs: T): Intersec
       if (!rules) continue;
       Object.assign(rulesNew, rules);
     }
-    appMetadata.defineMetadata(metadataKey, rulesNew, MixinedClass.prototype);
+    appMetadata.defineMetadata(metadataKey, rulesNew, TargetClass.prototype);
   }
-  return MixinedClass as any;
+  return TargetClass as any;
 }

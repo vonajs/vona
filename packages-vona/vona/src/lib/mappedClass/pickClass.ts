@@ -6,7 +6,7 @@ export function pickClass<T, K extends keyof T>(
   classRef: Constructable<T>,
   keys: K[],
 ): Constructable<Pick<T, (typeof keys)[number]>> {
-  abstract class PickedClass {}
+  abstract class TargetClass {}
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
     for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
@@ -19,8 +19,8 @@ export function pickClass<T, K extends keyof T>(
           }
         }
       }
-      appMetadata.defineMetadata(metadataKey, rulesNew, PickedClass.prototype);
+      appMetadata.defineMetadata(metadataKey, rulesNew, TargetClass.prototype);
     }
   }
-  return PickedClass as any;
+  return TargetClass as any;
 }

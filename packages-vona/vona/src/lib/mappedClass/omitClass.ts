@@ -6,7 +6,8 @@ export function omitClass<T, K extends keyof T>(
   classRef: Constructable<T>,
   keys: K[],
 ): Constructable<Omit<T, (typeof keys)[number]>> {
-  abstract class OmitedClass {}
+  abstract class TargetClass {}
+  // metadataKeys
   const metadataKeys = getMappedClassMetadataKeys(classRef.prototype);
   if (metadataKeys) {
     for (const metadataKey of Object.getOwnPropertySymbols(metadataKeys)) {
@@ -19,8 +20,8 @@ export function omitClass<T, K extends keyof T>(
           }
         }
       }
-      appMetadata.defineMetadata(metadataKey, rulesNew, OmitedClass.prototype);
+      appMetadata.defineMetadata(metadataKey, rulesNew, TargetClass.prototype);
     }
   }
-  return OmitedClass as any;
+  return TargetClass as any;
 }
