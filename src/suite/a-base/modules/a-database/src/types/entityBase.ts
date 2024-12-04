@@ -10,7 +10,7 @@ export class EntityBase {
     return this.__beanOptions?.options as IDecoratorEntityOptions;
   }
 
-  getTable(): string {
+  public get table(): string {
     return this.__entityOptions.table!;
   }
 

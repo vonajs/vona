@@ -3,7 +3,7 @@ import { EntityBase } from 'vona-module-a-database';
 
 @<%=argv.decoratorName%>(<%-argv.beanOptions%>)
 export class <%=argv.sceneNameCapitalize%><%=argv.nameCapitalize%> extends EntityBase {
-  public getColumn<K extends keyof this>(column: K) {
+  public column<K extends keyof this>(column: K) {
     return column;
   }
 }

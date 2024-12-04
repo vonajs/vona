@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 @Entity('aInstance')
 export class EntityInstance extends omitClass(EntityBase, ['iid']) {
-  public getColumn<K extends keyof this>(column: K) {
+  public column<K extends keyof this>(column: K) {
     return column;
   }
   @Rule(z.boolean())
