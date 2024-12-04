@@ -23,7 +23,7 @@ export function getMappedClassMetadataKeys(target: object): MappedClassMetadataK
 
 export function copyPropertiesOfClasses(target: Constructable, sources: Constructable[], filter?: Function) {
   for (const source of sources) {
-    copyProperties(target, source, ['constructor', 'prototype', 'name', 'length'], filter); // copy static
+    copyProperties(target, source, ['constructor', 'prototype', 'length', 'name'], filter); // copy static
     copyProperties(target.prototype, source.prototype, ['constructor', 'prototype'], filter); // copy prototype
   }
 }
@@ -32,7 +32,9 @@ export function copyProperties(target: object, source: object, keysIgnore: Metad
   const protos: object[] = [];
   let _proto = source;
   while (_proto) {
-    protos.unshift(_proto);
+    if (!['Object'].includes(_proto.constructor?.name) && !Object.hasOwn(_proto, 'arguments')) {
+      protos.unshift(_proto);
+    }
     _proto = Object.getPrototypeOf(_proto);
   }
   for (const proto of protos) {
