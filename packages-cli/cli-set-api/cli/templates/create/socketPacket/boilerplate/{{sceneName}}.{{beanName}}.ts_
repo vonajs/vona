@@ -1,0 +1,11 @@
+import { BeanBase, IDecoratorSocketPacketOptions, ISocketPacketExecute, Next, SocketPacket } from 'vona';
+
+export interface ISocketPacketOptions<%=argv.beanNameCapitalize%> extends IDecoratorSocketPacketOptions {}
+
+@SocketPacket<ISocketPacketOptions<%=argv.beanNameCapitalize%>>()
+export class SocketPacket<%=argv.beanNameCapitalize%> extends BeanBase implements ISocketPacketExecute {
+  async execute(_packet: any[], _options: ISocketPacketOptions<%=argv.beanNameCapitalize%>, next: Next) {
+    // next
+    return next();
+  }
+}
