@@ -23,24 +23,31 @@ export function getMappedClassMetadataKeys(target: object): MappedClassMetadataK
 
 export function copyPropertiesOfClasses(target: Constructable, sources: Constructable[], filter?: Function) {
   for (const source of sources) {
-    copyProperties(target, source, ['constructor', 'prototype', 'name'], filter); // copy static
+    copyProperties(target, source, ['constructor', 'prototype', 'name', 'length'], filter); // copy static
     copyProperties(target.prototype, source.prototype, ['constructor', 'prototype'], filter); // copy prototype
   }
 }
 
 export function copyProperties(target: object, source: object, keysIgnore: MetadataKey[], filter?: Function) {
-  // todo: loop prototype
-  for (const key of Reflect.ownKeys(source)) {
-    if (keysIgnore.includes(key)) continue;
-    if (filter && !filter(key)) continue;
-    // desc
-    const desc = Object.getOwnPropertyDescriptor(source, key)!;
-    Object.defineProperty(target, key, desc);
-    // metadata
-    const metaKeys = Reflect.getOwnMetadataKeys(source, key);
-    for (const metaKey of metaKeys) {
-      const metaValue = Reflect.getOwnMetadata(metaKey, source, key);
-      Reflect.defineMetadata(metaKey, metaValue, target, key);
+  const protos: object[] = [];
+  let _proto = source;
+  while (_proto) {
+    protos.unshift(_proto);
+    _proto = Object.getPrototypeOf(_proto);
+  }
+  for (const proto of protos) {
+    for (const key of Reflect.ownKeys(proto)) {
+      if (keysIgnore.includes(key)) continue;
+      if (filter && !filter(key)) continue;
+      // desc
+      const desc = Object.getOwnPropertyDescriptor(proto, key)!;
+      Object.defineProperty(target, key, desc);
+      // metadata
+      const metaKeys = Reflect.getOwnMetadataKeys(proto, key);
+      for (const metaKey of metaKeys) {
+        const metaValue = Reflect.getOwnMetadata(metaKey, proto, key);
+        Reflect.defineMetadata(metaKey, metaValue, target, key);
+      }
     }
   }
 }
