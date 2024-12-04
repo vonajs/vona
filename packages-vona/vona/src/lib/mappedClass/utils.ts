@@ -29,6 +29,7 @@ export function copyPropertiesOfClasses(target: Constructable, sources: Construc
 }
 
 export function copyProperties(target: object, source: object, keysIgnore: MetadataKey[], filter?: Function) {
+  // todo: loop prototype
   for (const key of Reflect.ownKeys(source)) {
     if (keysIgnore.includes(key)) continue;
     if (filter && !filter(key)) continue;
@@ -57,7 +58,10 @@ export function copyMetadataOfClasses(target: object, sources: object[], transfo
         Object.assign(rulesNew, rules);
       } else {
         for (const key in rules) {
-          rulesNew[key] = transform(rules, key, metadataKeyOptions);
+          const ruleNew = transform(rules, key, metadataKeyOptions);
+          if (ruleNew !== undefined) {
+            rulesNew[key] = ruleNew;
+          }
         }
       }
     }
