@@ -1,10 +1,10 @@
-import { BeanBase, IDecoratorPacketOptions, IPacketExecute, Next, Packet } from 'vona';
+import { BeanBase, IDecoratorSocketPacketOptions, ISocketPacketExecute, Next, SocketPacket } from 'vona';
 
-export interface IPacketOptionsPerformAction extends IDecoratorPacketOptions {}
+export interface ISocketPacketOptionsPerformAction extends IDecoratorSocketPacketOptions {}
 
-@Packet<IPacketOptionsPerformAction>()
-export class PacketPerformAction extends BeanBase implements IPacketExecute {
-  async execute(packet: any[], _options: IPacketOptionsPerformAction, next: Next) {
+@SocketPacket<ISocketPacketOptionsPerformAction>()
+export class SocketPacketPerformAction extends BeanBase implements ISocketPacketExecute {
+  async execute(packet: any[], _options: ISocketPacketOptionsPerformAction, next: Next) {
     const eventName = packet[0];
     if (eventName === 'performAction') {
       await this._performAction({ params: packet[1] });

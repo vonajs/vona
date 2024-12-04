@@ -32,41 +32,61 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** connections: begin */
-export * from '../bean/connection.io.js';
-import { IConnectionOptionsIo } from '../bean/connection.io.js';
+/** socketConnection: begin */
+export * from '../bean/socketConnection.io.js';
+import { ISocketConnectionOptionsIo } from '../bean/socketConnection.io.js';
 import 'vona';
 declare module 'vona' {
-  export interface IConnectionRecord {
-    'a-socketio:io': IConnectionOptionsIo;
+  export interface ISocketConnectionRecord {
+    'a-socketio:io': ISocketConnectionOptionsIo;
   }
 }
-/** connections: end */
-/** packets: begin */
-export * from '../bean/packet.performAction.js';
-import { IPacketOptionsPerformAction } from '../bean/packet.performAction.js';
+/** socketConnection: end */
+/** socketPacket: begin */
+export * from '../bean/socketPacket.performAction.js';
+import { ISocketPacketOptionsPerformAction } from '../bean/socketPacket.performAction.js';
 import 'vona';
 declare module 'vona' {
-  export interface IPacketRecord {
-    'a-socketio:performAction': IPacketOptionsPerformAction;
+  export interface ISocketPacketRecord {
+    'a-socketio:performAction': ISocketPacketOptionsPerformAction;
   }
 }
-/** packets: end */
+/** socketPacket: end */
+/** entity: begin */
+export * from '../entity/message.js';
+export * from '../entity/messageClass.js';
+export * from '../entity/messageSync.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-socketio:message': IDecoratorEntityOptions;
+    'a-socketio:messageClass': IDecoratorEntityOptions;
+    'a-socketio:messageSync': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/message.js';
+export * from '../model/messageClass.js';
+export * from '../model/messageSync.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-socketio:message': IDecoratorModelOptions;
+    'a-socketio:messageClass': IDecoratorModelOptions;
+    'a-socketio:messageSync': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** controllers: begin */
 export * from '../controller/io.js';
 export * from '../controller/message.js';
 export * from '../controller/messageClass.js';
 export * from '../controller/test.js';
 /** controllers: end */
-/** entities: begin */
-export * from '../entity/message.js';
-export * from '../entity/messageClass.js';
-export * from '../entity/messageSync.js';
-/** entities: end */
 /** models: begin */
-export * from '../model/message.js';
-export * from '../model/messageClass.js';
-export * from '../model/messageSync.js';
 import { ModelMessage } from '../model/message.js';
 import { ModelMessageClass } from '../model/messageClass.js';
 import { ModelMessageSync } from '../model/messageSync.js';

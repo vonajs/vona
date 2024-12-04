@@ -122,7 +122,7 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** middlewares: begin */
+/** middleware: begin */
 export * from '../bean/middleware.auth.js';
 export * from '../bean/middleware.authOpen.js';
 export * from '../bean/middleware.httpLog.js';
@@ -145,18 +145,18 @@ declare module 'vona' {
     'a-base:transaction': never;
   }
 }
-/** middlewares: end */
-/** connections: begin */
-export * from '../bean/connection.auth.js';
-import { IConnectionOptionsAuth } from '../bean/connection.auth.js';
+/** middleware: end */
+/** socketConnection: begin */
+export * from '../bean/socketConnection.auth.js';
+import { ISocketConnectionOptionsAuth } from '../bean/socketConnection.auth.js';
 import 'vona';
 declare module 'vona' {
-  export interface IConnectionRecord {
-    'a-base:auth': IConnectionOptionsAuth;
+  export interface ISocketConnectionRecord {
+    'a-base:auth': ISocketConnectionOptionsAuth;
   }
 }
-/** connections: end */
-/** aops: begin */
+/** socketConnection: end */
+/** aop: begin */
 export * from '../bean/aop.category.js';
 
 import { IDecoratorAopOptions } from 'vona';
@@ -165,7 +165,139 @@ declare module 'vona' {
     'a-base:category': IDecoratorAopOptions;
   }
 }
-/** aops: end */
+/** aop: end */
+/** entity: begin */
+export * from '../entity/atom.js';
+export * from '../entity/atomAction.js';
+export * from '../entity/atomClass.js';
+export * from '../entity/atomLabel.js';
+export * from '../entity/atomLabelRef.js';
+export * from '../entity/atomStar.js';
+export * from '../entity/category.js';
+export * from '../entity/comment.js';
+export * from '../entity/commentHeart.js';
+export * from '../entity/commentView.js';
+export * from '../entity/label.js';
+export * from '../entity/resource.js';
+export * from '../entity/resourceLocale.js';
+export * from '../entity/resourceRole.js';
+export * from '../entity/role.js';
+export * from '../entity/roleExpand.js';
+export * from '../entity/roleFieldsRight.js';
+export * from '../entity/roleInc.js';
+export * from '../entity/roleIncRef.js';
+export * from '../entity/roleRef.js';
+export * from '../entity/roleRight.js';
+export * from '../entity/roleRightRef.js';
+export * from '../entity/tag.js';
+export * from '../entity/tagRef.js';
+export * from '../entity/user.js';
+export * from '../entity/userAgent.js';
+export * from '../entity/userRole.js';
+export * from '../entity/userRoleIncRef.js';
+export * from '../entity/userRoleRef.js';
+
+import { IDecoratorEntityOptions } from 'vona';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-base:atom': IDecoratorEntityOptions;
+    'a-base:atomAction': IDecoratorEntityOptions;
+    'a-base:atomClass': IDecoratorEntityOptions;
+    'a-base:atomLabel': IDecoratorEntityOptions;
+    'a-base:atomLabelRef': IDecoratorEntityOptions;
+    'a-base:atomStar': IDecoratorEntityOptions;
+    'a-base:category': IDecoratorEntityOptions;
+    'a-base:comment': IDecoratorEntityOptions;
+    'a-base:commentHeart': IDecoratorEntityOptions;
+    'a-base:commentView': IDecoratorEntityOptions;
+    'a-base:label': IDecoratorEntityOptions;
+    'a-base:resource': IDecoratorEntityOptions;
+    'a-base:resourceLocale': IDecoratorEntityOptions;
+    'a-base:resourceRole': IDecoratorEntityOptions;
+    'a-base:role': IDecoratorEntityOptions;
+    'a-base:roleExpand': IDecoratorEntityOptions;
+    'a-base:roleFieldsRight': IDecoratorEntityOptions;
+    'a-base:roleInc': IDecoratorEntityOptions;
+    'a-base:roleIncRef': IDecoratorEntityOptions;
+    'a-base:roleRef': IDecoratorEntityOptions;
+    'a-base:roleRight': IDecoratorEntityOptions;
+    'a-base:roleRightRef': IDecoratorEntityOptions;
+    'a-base:tag': IDecoratorEntityOptions;
+    'a-base:tagRef': IDecoratorEntityOptions;
+    'a-base:user': IDecoratorEntityOptions;
+    'a-base:userAgent': IDecoratorEntityOptions;
+    'a-base:userRole': IDecoratorEntityOptions;
+    'a-base:userRoleIncRef': IDecoratorEntityOptions;
+    'a-base:userRoleRef': IDecoratorEntityOptions;
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/atom.js';
+export * from '../model/atomAction.js';
+export * from '../model/atomClass.js';
+export * from '../model/atomLabel.js';
+export * from '../model/atomLabelRef.js';
+export * from '../model/atomStar.js';
+export * from '../model/category.js';
+export * from '../model/comment.js';
+export * from '../model/commentHeart.js';
+export * from '../model/commentView.js';
+export * from '../model/label.js';
+export * from '../model/resource.js';
+export * from '../model/resourceLocale.js';
+export * from '../model/resourceRole.js';
+export * from '../model/role.js';
+export * from '../model/roleExpand.js';
+export * from '../model/roleFieldsRight.js';
+export * from '../model/roleInc.js';
+export * from '../model/roleIncRef.js';
+export * from '../model/roleRef.js';
+export * from '../model/roleRight.js';
+export * from '../model/roleRightRef.js';
+export * from '../model/tag.js';
+export * from '../model/tagRef.js';
+export * from '../model/user.js';
+export * from '../model/userAgent.js';
+export * from '../model/userRole.js';
+export * from '../model/userRoleIncRef.js';
+export * from '../model/userRoleRef.js';
+
+import { IDecoratorModelOptions } from 'vona';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-base:atom': IDecoratorModelOptions;
+    'a-base:atomAction': IDecoratorModelOptions;
+    'a-base:atomClass': IDecoratorModelOptions;
+    'a-base:atomLabel': IDecoratorModelOptions;
+    'a-base:atomLabelRef': IDecoratorModelOptions;
+    'a-base:atomStar': IDecoratorModelOptions;
+    'a-base:category': IDecoratorModelOptions;
+    'a-base:comment': IDecoratorModelOptions;
+    'a-base:commentHeart': IDecoratorModelOptions;
+    'a-base:commentView': IDecoratorModelOptions;
+    'a-base:label': IDecoratorModelOptions;
+    'a-base:resource': IDecoratorModelOptions;
+    'a-base:resourceLocale': IDecoratorModelOptions;
+    'a-base:resourceRole': IDecoratorModelOptions;
+    'a-base:role': IDecoratorModelOptions;
+    'a-base:roleExpand': IDecoratorModelOptions;
+    'a-base:roleFieldsRight': IDecoratorModelOptions;
+    'a-base:roleInc': IDecoratorModelOptions;
+    'a-base:roleIncRef': IDecoratorModelOptions;
+    'a-base:roleRef': IDecoratorModelOptions;
+    'a-base:roleRight': IDecoratorModelOptions;
+    'a-base:roleRightRef': IDecoratorModelOptions;
+    'a-base:tag': IDecoratorModelOptions;
+    'a-base:tagRef': IDecoratorModelOptions;
+    'a-base:user': IDecoratorModelOptions;
+    'a-base:userAgent': IDecoratorModelOptions;
+    'a-base:userRole': IDecoratorModelOptions;
+    'a-base:userRoleIncRef': IDecoratorModelOptions;
+    'a-base:userRoleRef': IDecoratorModelOptions;
+  }
+}
+/** model: end */
 /** atoms: begin */
 export * from '../atom/resource.js';
 export * from '../atom/role.js';
@@ -196,67 +328,7 @@ export * from '../controller/tag.js';
 export * from '../controller/user.js';
 export * from '../controller/util.js';
 /** controllers: end */
-/** entities: begin */
-export * from '../entity/atom.js';
-export * from '../entity/atomAction.js';
-export * from '../entity/atomClass.js';
-export * from '../entity/atomLabel.js';
-export * from '../entity/atomLabelRef.js';
-export * from '../entity/atomStar.js';
-export * from '../entity/category.js';
-export * from '../entity/comment.js';
-export * from '../entity/commentHeart.js';
-export * from '../entity/commentView.js';
-export * from '../entity/label.js';
-export * from '../entity/resource.js';
-export * from '../entity/resourceLocale.js';
-export * from '../entity/resourceRole.js';
-export * from '../entity/role.js';
-export * from '../entity/roleExpand.js';
-export * from '../entity/roleFieldsRight.js';
-export * from '../entity/roleInc.js';
-export * from '../entity/roleIncRef.js';
-export * from '../entity/roleRef.js';
-export * from '../entity/roleRight.js';
-export * from '../entity/roleRightRef.js';
-export * from '../entity/tag.js';
-export * from '../entity/tagRef.js';
-export * from '../entity/user.js';
-export * from '../entity/userAgent.js';
-export * from '../entity/userRole.js';
-export * from '../entity/userRoleIncRef.js';
-export * from '../entity/userRoleRef.js';
-/** entities: end */
 /** models: begin */
-export * from '../model/atom.js';
-export * from '../model/atomAction.js';
-export * from '../model/atomClass.js';
-export * from '../model/atomLabel.js';
-export * from '../model/atomLabelRef.js';
-export * from '../model/atomStar.js';
-export * from '../model/category.js';
-export * from '../model/comment.js';
-export * from '../model/commentHeart.js';
-export * from '../model/commentView.js';
-export * from '../model/label.js';
-export * from '../model/resource.js';
-export * from '../model/resourceLocale.js';
-export * from '../model/resourceRole.js';
-export * from '../model/role.js';
-export * from '../model/roleExpand.js';
-export * from '../model/roleFieldsRight.js';
-export * from '../model/roleInc.js';
-export * from '../model/roleIncRef.js';
-export * from '../model/roleRef.js';
-export * from '../model/roleRight.js';
-export * from '../model/roleRightRef.js';
-export * from '../model/tag.js';
-export * from '../model/tagRef.js';
-export * from '../model/user.js';
-export * from '../model/userAgent.js';
-export * from '../model/userRole.js';
-export * from '../model/userRoleIncRef.js';
-export * from '../model/userRoleRef.js';
 import { ModelAtom } from '../model/atom.js';
 import { ModelAtomAction } from '../model/atomAction.js';
 import { ModelAtomClass } from '../model/atomClass.js';

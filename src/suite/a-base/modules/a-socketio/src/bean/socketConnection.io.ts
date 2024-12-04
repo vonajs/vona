@@ -1,10 +1,10 @@
-import { BeanBase, Connection, IConnectionExecute, IDecoratorConnectionOptions, Next } from 'vona';
+import { BeanBase, SocketConnection, ISocketConnectionExecute, IDecoratorSocketConnectionOptions, Next } from 'vona';
 
-export interface IConnectionOptionsIo extends IDecoratorConnectionOptions {}
+export interface ISocketConnectionOptionsIo extends IDecoratorSocketConnectionOptions {}
 
-@Connection<IConnectionOptionsIo>({ dependencies: 'a-base:auth' })
-export class ConnectionIo extends BeanBase implements IConnectionExecute {
-  async execute(_options: IConnectionOptionsIo, next: Next) {
+@SocketConnection<ISocketConnectionOptionsIo>({ dependencies: 'a-base:auth' })
+export class SocketConnectionIo extends BeanBase implements ISocketConnectionExecute {
+  async execute(_options: ISocketConnectionOptionsIo, next: Next) {
     // todo: user是否有效不必在这里判断，从而让socket支持匿名用户
     // 因此，也就不需要在之前使用middleware.io.connectionAuth
     //   因为，packet中间件会执行performAction，而performAction会走整个router范围内的web中间件，从而与web开发保持一致的中间件体系
