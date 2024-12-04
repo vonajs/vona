@@ -3,14 +3,14 @@ import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 export class EntityBase {
-  protected static get __beanOptions() {
+  protected get __beanOptions() {
     return appResource.getBean((<any>this).__beanFullName__);
   }
-  protected static get __entityOptions(): IDecoratorEntityOptions {
+  protected get __entityOptions(): IDecoratorEntityOptions {
     return this.__beanOptions?.options as IDecoratorEntityOptions;
   }
 
-  static getTable(): string {
+  getTable(): string {
     return this.__entityOptions.table!;
   }
 
