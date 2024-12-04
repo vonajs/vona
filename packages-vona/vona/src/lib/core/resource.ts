@@ -65,7 +65,7 @@ export class AppResource extends BeanSimple {
   getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
     let fullName: string | undefined;
     if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-      fullName = appMetadata.getOwnMetadata(SymbolDecoratorBeanFullName, beanFullName);
+      fullName = this.getBeanFullName(beanFullName);
     } else {
       fullName = beanFullName as string;
     }
