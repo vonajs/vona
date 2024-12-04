@@ -2,6 +2,11 @@ import { appMetadata, appResource, Constructable, IDecoratorEntityOptions } from
 
 export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');
 
+export function column<T>(classEntity: Constructable<T>, extract: (classEntity: T) => any): string {
+  const columns = appMetadata.getMetadata(SymbolDecoratorRuleColumn, classEntity.prototype);
+  return extract(columns as any);
+}
+
 export function columns<T>(classEntity: Constructable<T>, extract: (classEntity: T) => any | any[]): string[] {
   const columns = appMetadata.getMetadata(SymbolDecoratorRuleColumn, classEntity.prototype);
   const names = extract(columns as any);

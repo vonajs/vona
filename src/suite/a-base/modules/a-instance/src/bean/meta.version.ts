@@ -6,13 +6,13 @@ export class MetaVersion extends BeanBase<ScopeModule> implements IMetaVersionUp
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
       // create table: aInstance
-      const tableName = this.scope.entity.instance.getTable();
-      await this.bean.model.createTable(tableName, function (table) {
+      const entity = this.scope.entity.instance;
+      await this.bean.model.createTable(entity.getTable(), function (table) {
         table.basicFields({ iid: false });
-        table.boolean('disabled');
-        table.string('name', 255);
-        table.string('title', 255);
-        table.text('config');
+        table.boolean(entity.getColumn('disabled'));
+        table.string(entity.getColumn('name'), 255);
+        table.string(entity.getColumn('title'), 255);
+        table.text(entity.getColumn('config'));
       });
     }
   }
