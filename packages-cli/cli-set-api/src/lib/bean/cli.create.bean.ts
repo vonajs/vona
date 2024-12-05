@@ -8,16 +8,17 @@ const __decorators = {
   virtual: 'Virtual',
 };
 const __boilerplates = {
-  middleware: 'middleware',
+  aop: 'aop',
+  filter: 'filter',
   guard: 'guard',
   interceptor: 'interceptor',
-  pipe: 'pipe',
-  filter: 'filter',
-  socketConnection: 'socketConnection',
-  socketPacket: 'socketPacket',
-  aop: 'aop',
   metaIndex: 'metaIndex',
   metaVersion: 'metaVersion',
+  middleware: 'middleware',
+  pipe: 'pipe',
+  socketConnection: 'socketConnection',
+  socketPacket: 'socketPacket',
+  summerCache: 'summerCache',
 };
 
 declare module '@cabloy/cli' {
@@ -79,7 +80,7 @@ export class CliCreateBean extends BeanCliBase {
       targetDir: beanDir,
       setName: __ThisSetName__,
       snippetsPath: null,
-      boilerplatePath: `create/${boilerplateName}/boilerplate`,
+      boilerplatePath: `bean/${boilerplateName}/boilerplate`,
     });
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
