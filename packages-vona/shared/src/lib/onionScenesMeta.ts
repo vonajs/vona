@@ -58,6 +58,10 @@ export const onionScenesMeta: OnionScenesMeta = {
     sceneIsolate: true,
     optionsGlobalInterfaceName: 'IDecoratorModelOptions',
   },
+  controller: {
+    sceneIsolate: true,
+    optionsGlobalInterfaceName: 'IDecoratorControllerOptions',
+  },
   meta: {
     optionsGlobalInterfaceName: '',
   },

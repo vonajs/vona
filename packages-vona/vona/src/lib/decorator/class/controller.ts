@@ -1,4 +1,5 @@
-import { createBeanDecorator, IDecoratorControllerOptions } from '../index.js';
+import { IDecoratorControllerOptions } from '../../../types/interface/controller.js';
+import { createBeanDecorator } from '../index.js';
 
 export function Controller(options?: IDecoratorControllerOptions): ClassDecorator;
 export function Controller(path?: string): ClassDecorator;

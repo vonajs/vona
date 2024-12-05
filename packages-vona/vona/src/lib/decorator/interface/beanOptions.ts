@@ -83,10 +83,6 @@ export interface IDecoratorServiceOptions {}
 
 export interface IDecoratorAtomOptions {}
 
-export interface IDecoratorControllerOptions {
-  path?: string;
-}
-
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
 //   Partial<IDecoratorBeanOptionsBase<T>>,
 //   'beanFullName' | 'module' | 'name' | 'beanClass'

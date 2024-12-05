@@ -4,7 +4,6 @@ import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
-import { generateControllers } from './toolsMetadata/generateControllers.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
@@ -82,12 +81,12 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateOnions('entity', moduleName, modulePath);
     // models
     content += await generateOnions('model', moduleName, modulePath);
+    // controllers
+    content += await generateOnions('controller', moduleName, modulePath);
     // meta
     content += await generateOnions('meta', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
-    // controllers
-    content += await generateControllers(moduleName, modulePath);
     // dtos
     content += await generateDtos(moduleName, modulePath);
     // entities

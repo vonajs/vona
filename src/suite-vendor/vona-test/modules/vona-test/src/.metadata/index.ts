@@ -26,14 +26,26 @@ declare module 'vona' {
   }
 }
 /** aop: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
 export * from '../controller/performAction.js';
 export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'vona-test:bean': IDecoratorControllerOptions;
+    'vona-test:onion': IDecoratorControllerOptions;
+    'vona-test:performAction': IDecoratorControllerOptions;
+    'vona-test:summer': IDecoratorControllerOptions;
+    'vona-test:tail': IDecoratorControllerOptions;
+    'vona-test:transaction': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** dtos: begin */
 export * from '../dto/profile.js';
 export * from '../dto/user.js';

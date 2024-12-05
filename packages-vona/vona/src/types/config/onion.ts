@@ -1,4 +1,5 @@
 import { IAopRecord } from '../interface/aop.js';
+import { IControllerRecord } from '../interface/controller.js';
 import { IEntityRecord } from '../interface/entity.js';
 import { IFilterRecord } from '../interface/filter.js';
 import { IGuardRecord } from '../interface/guard.js';
@@ -22,5 +23,6 @@ export interface ConfigOnion {
   aop: OmitNever<IAopRecord>;
   entity: OmitNever<IEntityRecord>;
   model: OmitNever<IModelRecord>;
+  controller: OmitNever<IControllerRecord>;
   meta: OmitNever<IMetaRecord>;
 }

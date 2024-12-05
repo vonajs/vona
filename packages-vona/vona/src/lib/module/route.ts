@@ -10,12 +10,12 @@ import {
   SymbolUseMiddlewareOptions,
   SymbolRouteHandlersArgumentsValue,
   Next,
+  IDecoratorControllerOptions,
 } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { IModuleRoute } from '../bean/index.js';
 import { appResource } from '../core/resource.js';
 import { Constructable } from '../decorator/type/constructable.js';
-import { IDecoratorControllerOptions } from '../decorator/index.js';
 import { appMetadata } from '../core/metadata.js';
 import { middlewareGuard } from './middleware/middlewareGuard.js';
 import { middlewareInterceptor } from './middleware/middlewareInterceptor.js';
@@ -317,11 +317,21 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
       const controllers = appResource.scenes['controller'][key];
       if (controllers) {
         for (const key in controllers) {
-          app.meta.router.registerController(module.info, controllers[key].beanClass);
+          const controller = controllers[key].beanClass;
+          if (checkControllerEnabled(controller, app)) {
+            app.meta.router.registerController(module.info, controller);
+          }
         }
       }
     }
   }
+}
+
+function checkControllerEnabled(controller: Constructable, app: VonaApplication) {
+  const beanOptions = appResource.getBean(controller);
+  if (!beanOptions) return false;
+  const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
+  return controllerOptions.enable !== false && app.meta.util.checkMiddlewareOptionsMeta(controllerOptions.meta);
 }
 
 function wrapMiddlewareApp(key, route, app) {
