@@ -1,10 +1,10 @@
+import { Virtual } from 'vona';
 import objectHash from 'object-hash';
-import { CacheBase } from '../common/cacheBase.js';
-import { Service } from 'vona';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
+import { CacheBase } from '../common/cacheBase.js';
 
-@Service()
-export class ServiceCache extends CacheBase {
+@Virtual({ scene: 'bean' })
+export class BeanSummerCacheBase<T = unknown> extends CacheBase<T> {
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
   }

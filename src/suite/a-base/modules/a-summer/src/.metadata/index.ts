@@ -1,10 +1,12 @@
 /** beans: begin */
 export * from '../bean/bean.summer.js';
+export * from '../bean/bean.summerCacheBase_.js';
 export * from '../bean/broadcast.memClear.js';
 export * from '../bean/broadcast.memDel.js';
 export * from '../bean/broadcast.memMultiDel.js';
 export * from '../bean/version.manager.js';
 import { BeanSummer } from '../bean/bean.summer.js';
+import { BeanSummerCacheBase } from '../bean/bean.summerCacheBase_.js';
 import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
 import { BroadcastMemDel } from '../bean/broadcast.memDel.js';
 import { BroadcastMemMultiDel } from '../bean/broadcast.memMultiDel.js';
@@ -16,6 +18,7 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
+    summerCacheBase: BeanSummerCacheBase;
     'a-summer.broadcast.memClear': BroadcastMemClear;
     'a-summer.broadcast.memDel': BroadcastMemDel;
     'a-summer.broadcast.memMultiDel': BroadcastMemMultiDel;
@@ -59,7 +62,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleASummer extends BeanScopeBase {}
 
 export interface ScopeModuleASummer
-  extends TypeModuleResource<typeof config, never, never, never, IModuleService, never, never> {}
+  extends TypeModuleResource<typeof config, never, never, never, IModuleService, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {
