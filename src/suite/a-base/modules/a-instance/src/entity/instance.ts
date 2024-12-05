@@ -5,8 +5,11 @@ import { z } from 'zod';
 
 @Entity('aInstance')
 export class EntityInstance extends omitClass(EntityBase, ['iid']) {
-  public column<K extends keyof this>(column: K) {
+  public column<K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) {
     return column;
+  }
+  public columns<K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) {
+    return columns;
   }
   @Rule(z.boolean())
   disabled: boolean;
