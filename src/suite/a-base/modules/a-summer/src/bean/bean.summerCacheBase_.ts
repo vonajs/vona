@@ -3,7 +3,7 @@ import objectHash from 'object-hash';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
 
-@Virtual({ scene: 'bean' })
+@Virtual()
 export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<
   TScopeModule,
   KEY,

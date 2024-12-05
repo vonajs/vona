@@ -78,8 +78,6 @@ export interface IDecoratorBeanOptions {
   // containerScope?: ContainerScope;
 }
 
-export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
-
 export interface IDecoratorServiceOptions {}
 
 export interface IDecoratorAtomOptions {}

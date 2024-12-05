@@ -3,7 +3,7 @@ import { BeanBase, Virtual } from 'vona';
 import eggBornUtils from 'egg-born-utils';
 import { ServiceConsole, ServiceHelper, ServiceTemplate } from '../index.js';
 
-@Virtual({ scene: 'bean' })
+@Virtual()
 export class BeanCliBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
   options: any;
   cabloyConfig: any;

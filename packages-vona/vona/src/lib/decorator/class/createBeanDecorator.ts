@@ -7,6 +7,7 @@ export function createBeanDecorator<T>(
   scene: TypeDecoratorBeanOptionsSceneBase,
   options?: T,
   optionsPrimitive?: boolean,
+  virtual?: boolean,
 ): ClassDecorator {
   return function (target) {
     // module
@@ -19,6 +20,7 @@ export function createBeanDecorator<T>(
       beanClass: target as unknown as Constructable,
       options,
       optionsPrimitive,
+      virtual,
     });
   };
 }
