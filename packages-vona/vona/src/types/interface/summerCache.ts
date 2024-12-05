@@ -2,6 +2,10 @@ import { IMiddlewareBaseEnable } from './middleware.js';
 
 export interface ISummerCacheRecord {}
 
+export interface ISummerCacheGet {
+  get(key: any): Promise<any>;
+}
+
 export interface IDecoratorSummerCacheOptions extends IMiddlewareBaseEnable {
   preset?: 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
   mode?: 'all' | 'mem' | 'redis';

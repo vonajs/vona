@@ -5,17 +5,7 @@ import { IModuleConfigSummer } from 'vona-module-a-summer';
 const summer = {
   group: {
     default: {
-      test: {
-        bean: 'test',
-        mode: 'all', // mem/redis/all
-        mem: {
-          max: 2,
-          ttl: 1 * 1000,
-        },
-        redis: {
-          ttl: 3 * 1000,
-        },
-      },
+      test: {},
     },
   },
 } as IModuleConfigSummer;

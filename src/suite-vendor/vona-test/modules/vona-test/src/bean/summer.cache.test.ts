@@ -1,15 +1,16 @@
-import { Bean, BeanBase } from 'vona';
-import type { IModuleConfigSummerCacheBase } from 'vona-module-a-summer';
+import { BeanBase, ISummerCacheGet, SummerCache } from 'vona';
 
-@Bean({ scene: 'summer.cache' })
-export class SummerCacheTest extends BeanBase {
-  _cacheBase: IModuleConfigSummerCacheBase;
-
-  constructor(cacheBase: IModuleConfigSummerCacheBase) {
-    super();
-    this._cacheBase = cacheBase;
-  }
-
+@SummerCache({
+  mode: 'all',
+  mem: {
+    max: 2,
+    ttl: 1 * 1000,
+  },
+  redis: {
+    ttl: 3 * 1000,
+  },
+})
+export class SummerCacheTest extends BeanBase implements ISummerCacheGet {
   async get(key) {
     return {
       id: key.id,

@@ -1,6 +1,6 @@
 import { IDecoratorSummerCacheOptions } from '../../../index.js';
 import { createBeanDecorator } from '../index.js';
 
-export function SummerCache<T extends IDecoratorSummerCacheOptions>(options?: T): ClassDecorator {
+export function SummerCache(options?: IDecoratorSummerCacheOptions): ClassDecorator {
   return createBeanDecorator('summerCache', options);
 }
