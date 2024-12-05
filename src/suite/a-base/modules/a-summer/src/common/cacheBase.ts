@@ -5,7 +5,7 @@ import { ServiceRedis } from '../service/redis.js';
 import { ServiceFetch } from '../service/fetch.js';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
-export class CacheBase<T = unknown> extends BeanBase<T> {
+export class CacheBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
   _cacheBase: IModuleConfigSummerCacheBase;
 
   _localMem: ServiceMem;

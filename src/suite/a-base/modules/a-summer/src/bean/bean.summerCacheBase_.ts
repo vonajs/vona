@@ -4,7 +4,7 @@ import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
 
 @Virtual({ scene: 'bean' })
-export class BeanSummerCacheBase<T = unknown> extends CacheBase<T> {
+export class BeanSummerCacheBase<TScopeModule = unknown> extends CacheBase<TScopeModule> {
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
   }

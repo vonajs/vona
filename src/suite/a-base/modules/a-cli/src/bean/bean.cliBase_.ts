@@ -4,7 +4,7 @@ import eggBornUtils from 'egg-born-utils';
 import { ServiceConsole, ServiceHelper, ServiceTemplate } from '../index.js';
 
 @Virtual({ scene: 'bean' })
-export class BeanCliBase<T = unknown> extends BeanBase<T> {
+export class BeanCliBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
   options: any;
   cabloyConfig: any;
   terminal: any;
