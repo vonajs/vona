@@ -14,10 +14,11 @@ export interface ISummerCacheMGet<KEY, DATA> {
   ): Promise<Array<DATA | null | undefined>>;
 }
 
+export type TSummerCachePreset = 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
 export type TSummerCacheMode = 'all' | 'mem' | 'redis';
 
 export interface IDecoratorSummerCacheOptions extends IMiddlewareBaseEnable {
-  preset?: 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
+  preset?: TSummerCachePreset;
   mode?: TSummerCacheMode;
   mem?: {
     max?: number;
