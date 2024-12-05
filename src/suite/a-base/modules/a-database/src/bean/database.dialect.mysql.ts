@@ -1,6 +1,10 @@
 import { Bean } from 'vona';
-import { BeanDatabaseDialectBase, TableIdentity } from 'vona-module-a-database';
-import { IFetchDatabasesResultItem, IFetchIndexesResultItem } from './virtual.databaseDialect.js';
+import {
+  BeanDatabaseDialectBase,
+  IFetchDatabasesResultItem,
+  IFetchIndexesResultItem,
+  TableIdentity,
+} from 'vona-module-a-database';
 import { Knex } from 'knex';
 
 @Bean({ scene: 'database.dialect' })
