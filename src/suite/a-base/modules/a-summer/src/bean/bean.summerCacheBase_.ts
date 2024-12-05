@@ -1,21 +1,25 @@
-import { Virtual } from 'vona';
+import { TSummerCacheActionOptions, Virtual } from 'vona';
 import objectHash from 'object-hash';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
 
 @Virtual({ scene: 'bean' })
-export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<TScopeModule> {
+export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<
+  TScopeModule,
+  KEY,
+  DATA
+> {
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
   }
 
-  async get(key: KEY, options?): Promise<DATA | null | undefined> {
+  async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
     const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
     return await layered.get(keyHash, key, options);
   }
 
-  async mget(keys: KEY[], options?): Promise<DATA[]> {
+  async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | null | undefined>> {
     if (!keys || keys.length === 0) {
       return [];
     }
@@ -24,13 +28,13 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
     return await layered.mget(keysHash, keys, options);
   }
 
-  async del(key: KEY, options?) {
+  async del(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
     return await layered.del(keyHash, key, options);
   }
 
-  async mdel(keys: KEY[], options?) {
+  async mdel(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     if (!keys || keys.length === 0) {
       return [];
     }
@@ -39,18 +43,18 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
     return await layered.mdel(keysHash, keys, options);
   }
 
-  async clear(options?) {
+  async clear(options?: TSummerCacheActionOptions<KEY, DATA>) {
     const layered = this.__getLayered(options);
     return await layered.clear(options);
   }
 
-  async peek(key: KEY, options?): Promise<DATA | null | undefined> {
+  async peek(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
     const keyHash = this.__getKeyHash(key);
     const layered = this.__getLayered(options);
     return await layered.peek(keyHash, key, options);
   }
 
-  private __getLayered(options?) {
+  private __getLayered(options?: TSummerCacheActionOptions<KEY, DATA>) {
     if (!this.__getOptionsEnabled(options)) {
       return this.localFetch;
     }

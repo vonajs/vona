@@ -1,11 +1,11 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanBase } from 'vona';
+import { BeanBase, TSummerCacheActionOptions } from 'vona';
 import { ServiceMem } from '../service/mem.js';
 import { ServiceRedis } from '../service/redis.js';
 import { ServiceFetch } from '../service/fetch.js';
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
-export class CacheBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase<TScopeModule> {
   _cacheBase: IModuleConfigSummerCacheBase;
 
   _localMem: ServiceMem;
@@ -52,19 +52,19 @@ export class CacheBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
     return this._localFetch;
   }
 
-  __getOptionsEnabled(options?) {
+  __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
     if (!this.configModule.summer.enable) return false;
     if (options?.enable === false) return false;
     if (this._cacheBase.enable === false) return false;
     return true;
   }
 
-  __getOptionsMode(options) {
+  __getOptionsMode(options?: TSummerCacheActionOptions<KEY, DATA>) {
     const mode = options && options.mode;
     return mode || this._cacheBase.mode || 'all';
   }
 
-  __checkValueEmpty(value, options) {
+  __checkValueEmpty(value: DATA | null | undefined, options: TSummerCacheActionOptions<KEY, DATA>) {
     let ignoreNull;
     if (options?.ignoreNull !== undefined) {
       ignoreNull = options?.ignoreNull;
