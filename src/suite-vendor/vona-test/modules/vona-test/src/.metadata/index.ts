@@ -1,20 +1,13 @@
 /** beans: begin */
 export * from '../bean/bean.testCtx.js';
-export * from '../bean/summer.cache.test.js';
-export * from '../bean/summerCache.test.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
-import { SummerCacheTest } from '../bean/summer.cache.test.js';
-import { SummerCacheTest } from '../bean/summerCache.test.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     testCtx: BeanTestCtx;
   }
 
-  export interface IBeanRecordGeneral {
-    'vona-test.summer.cache.test': SummerCacheTest;
-    'vona-test.summerCache.test': SummerCacheTest;
-  }
+  export interface IBeanRecordGeneral {}
 }
 /** beans: end */
 /** aop: begin */
@@ -49,10 +42,26 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.test.js';
+
+import { IDecoratorSummerCacheOptions } from 'vona';
+declare module 'vona' {
+  export interface ISummerCacheRecord {
+    'vona-test:test': IDecoratorSummerCacheOptions;
+  }
+}
+/** summerCache: end */
 /** dtos: begin */
 export * from '../dto/profile.js';
 export * from '../dto/user.js';
 /** dtos: end */
+/** summerCaches: begin */
+import { SummerCacheTest } from '../bean/summerCache.test.js';
+export interface IModuleSummerCache {
+  test: SummerCacheTest;
+}
+/** summerCaches: end */
 /** services: begin */
 export * from '../service/test.js';
 export * from '../service/testApp.js';
@@ -100,7 +109,8 @@ export interface ScopeModuleVonaTest
     never,
     IModuleService,
     never,
-    never
+    never,
+    IModuleSummerCache
   > {}
 
 import 'vona';

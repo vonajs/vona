@@ -129,6 +129,7 @@ export class CliToolsMetadata extends BeanCliBase {
       services: contentServices,
       models: contentModels,
       entities: contentEntities,
+      summerCaches: contentSummerCaches,
     });
     // empty
     if (!content.trim()) {

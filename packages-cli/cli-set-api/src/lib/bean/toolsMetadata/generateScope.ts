@@ -8,6 +8,7 @@ export interface GenerateScopeOptions {
   services: string;
   models: string;
   entities: string;
+  summerCaches: string;
 }
 export async function generateScope(moduleName: string, relativeNameCapitalize: string, options: GenerateScopeOptions) {
   // scopeVariable
@@ -28,7 +29,8 @@ export interface ScopeModule${relativeNameCapitalize}
     ${options.constants ? 'typeof constants' : 'never'},
     ${options.services ? 'IModuleService' : 'never'},
     ${options.models ? 'IModuleModel' : 'never'},
-    ${options.entities ? 'IModuleEntity' : 'never'}
+    ${options.entities ? 'IModuleEntity' : 'never'},
+    ${options.summerCaches ? 'IModuleSummerCache' : 'never'}
   > {}
 
 import 'vona';

@@ -21,6 +21,7 @@ export type TypeModuleResource<
   SERVICE = unknown,
   MODEL = unknown,
   ENTITY = unknown,
+  SUMMERCACHE = unknown,
 > = {
   _bean: TypeModuleBean;
   config: TypeModuleConfig<CONFIG>;
@@ -30,5 +31,6 @@ export type TypeModuleResource<
   service: SERVICE;
   model: MODEL;
   entity: ENTITY;
+  summerCache: SUMMERCACHE;
   util: BeanScopeUtil;
 };
