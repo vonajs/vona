@@ -1,8 +1,10 @@
 /** beans: begin */
 export * from '../bean/bean.testCtx.js';
 export * from '../bean/summer.cache.test.js';
+export * from '../bean/summerCache.test.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
 import { SummerCacheTest } from '../bean/summer.cache.test.js';
+import { SummerCacheTest } from '../bean/summerCache.test.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -11,6 +13,7 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'vona-test.summer.cache.test': SummerCacheTest;
+    'vona-test.summerCache.test': SummerCacheTest;
   }
 }
 /** beans: end */

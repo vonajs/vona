@@ -1,6 +1,6 @@
 import { BeanBase, ISummerCacheGet, SummerCache } from 'vona';
 
 @SummerCache()
-export class SummerCache<%=argv.beanNameCapitalize%> extends BeanBase implements ISummerCacheGet {
+export class SummerCacheTest extends BeanBase implements ISummerCacheGet {
   async get(_key) {}
 }
