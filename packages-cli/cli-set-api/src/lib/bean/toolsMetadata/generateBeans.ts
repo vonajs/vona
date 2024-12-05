@@ -16,6 +16,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
       '**/socketPacket.*.ts',
       '**/aop.*.ts',
       '**/meta.*.ts',
+      '**/summerCache.*.ts',
     ],
   });
   if (files.length === 0) return '';

@@ -5,6 +5,7 @@ import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
+import { generateSummerCaches } from './toolsMetadata/generateSummerCaches.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
 import { generateServices } from './toolsMetadata/generateServices.js';
@@ -85,10 +86,15 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateOnions('controller', moduleName, modulePath);
     // meta
     content += await generateOnions('meta', moduleName, modulePath);
+    // summerCaches
+    content += await generateOnions('summerCache', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // dtos
     content += await generateDtos(moduleName, modulePath);
+    // summerCaches
+    const contentSummerCaches = await generateSummerCaches(moduleName, modulePath);
+    content += contentSummerCaches;
     // entities
     const contentEntities = await generateEntities(moduleName, modulePath);
     content += contentEntities;
