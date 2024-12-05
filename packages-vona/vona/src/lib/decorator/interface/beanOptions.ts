@@ -19,6 +19,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'filter'
   | 'socketConnection'
   | 'socketPacket'
+  | 'summerCache'
   | 'meta'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =

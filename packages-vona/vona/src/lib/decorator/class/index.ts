@@ -15,6 +15,7 @@ export * from './pipe.js';
 export * from './service.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';
+export * from './summerCache.js';
 export * from './virtual.js';
 export * from './scope.js';
 export * from './use.js';
