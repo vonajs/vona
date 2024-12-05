@@ -1,6 +1,5 @@
-import { Aop, BeanBase, Virtual } from 'vona';
+import { Aop, BeanBase } from 'vona';
 
-@Virtual()
 class AopSimpleBase extends BeanBase {
   actionSync(context, next) {
     next();

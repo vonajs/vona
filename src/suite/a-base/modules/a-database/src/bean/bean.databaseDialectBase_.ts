@@ -17,8 +17,8 @@ export interface ITableColumn {
 
 export type ITableColumns = Record<string, ITableColumn>;
 
-@Virtual()
-export class VirtualDatabaseDialect<T = unknown> extends BeanBase {
+@Virtual({ scene: 'bean' })
+export class BeanDatabaseDialectBase<T = unknown> extends BeanBase {
   get scope() {
     return this.getScope() as T;
   }

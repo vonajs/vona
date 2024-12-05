@@ -1,20 +1,20 @@
 /** beans: begin */
 export * from '../bean/bean.database.js';
 export * from '../bean/bean.databaseClient.js';
+export * from '../bean/bean.databaseDialectBase_.js';
 export * from '../bean/bean.model.js';
 export * from '../bean/bean.modelBase_.js';
 export * from '../bean/database.dialect.mysql.js';
 export * from '../bean/database.dialect.mysql2.js';
 export * from '../bean/database.dialect.pg.js';
-export * from '../bean/virtual.databaseDialect.js';
 import { BeanDatabase } from '../bean/bean.database.js';
 import { BeanDatabaseClient } from '../bean/bean.databaseClient.js';
+import { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase_.js';
 import { BeanModel } from '../bean/bean.model.js';
 import { BeanModelBase } from '../bean/bean.modelBase_.js';
 import { DatabaseDialectMysql } from '../bean/database.dialect.mysql.js';
 import { DatabaseDialectMysql2 } from '../bean/database.dialect.mysql2.js';
 import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
-import { VirtualDatabaseDialect } from '../bean/virtual.databaseDialect.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
@@ -24,11 +24,11 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
+    databaseDialectBase: BeanDatabaseDialectBase;
     modelBase: BeanModelBase;
     'a-database.database.dialect.mysql': DatabaseDialectMysql;
     'a-database.database.dialect.mysql2': DatabaseDialectMysql2;
     'a-database.database.dialect.pg': DatabaseDialectPg;
-    'a-database.virtual.databaseDialect': VirtualDatabaseDialect;
   }
 }
 /** beans: end */
@@ -90,6 +90,7 @@ export interface ScopeModuleADatabase
     (typeof locales)[TypeLocaleBase],
     never,
     IModuleService,
+    never,
     never,
     never
   > {}
