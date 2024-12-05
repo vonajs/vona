@@ -65,4 +65,7 @@ export const onionScenesMeta: OnionScenesMeta = {
   meta: {
     optionsGlobalInterfaceName: '',
   },
+  summerCache: {
+    optionsGlobalInterfaceName: 'IDecoratorSummerCacheOptions',
+  },
 };

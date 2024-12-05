@@ -18,4 +18,5 @@ function loadAll(app: VonaApplication) {
   app.meta.onionModel = app.bean._newBean(Onion, 'model');
   app.meta.onionController = app.bean._newBean(Onion, 'controller');
   app.meta.onionMeta = app.bean._newBean(Onion, 'meta');
+  app.meta.onionSummerCache = app.bean._newBean(Onion, 'summerCache');
 }

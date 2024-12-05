@@ -23,11 +23,14 @@ export interface IMiddlewareOptionsMeta {
   mode?: VonaMetaMode | VonaMetaMode[];
 }
 
-export interface IMiddlewareBase {
+export interface IMiddlewareBaseEnable {
   enable?: boolean;
+  meta?: IMiddlewareOptionsMeta;
+}
+
+export interface IMiddlewareBase extends IMiddlewareBaseEnable {
   match?: ((ctx: VonaContext) => boolean) | RegExp | string;
   ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
-  meta?: IMiddlewareOptionsMeta;
 }
 
 export interface IMiddlewareExecute {

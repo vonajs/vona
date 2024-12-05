@@ -1,14 +1,12 @@
-import { IMiddlewareOptionsMeta } from './middleware.js';
+import { IMiddlewareBaseEnable } from './middleware.js';
 
 export interface IAopRecord {}
 
 export type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 
-export interface IDecoratorAopOptions {
-  enable?: boolean;
+export interface IDecoratorAopOptions extends IMiddlewareBaseEnable {
   match?: TypeDecoratorAopOptionsMatch;
   ignore?: TypeDecoratorAopOptionsMatch;
-  meta?: IMiddlewareOptionsMeta;
   dependencies?: (keyof IAopRecord)[] | keyof IAopRecord;
   dependents?: (keyof IAopRecord)[] | keyof IAopRecord;
 }

@@ -6,7 +6,6 @@ import {
   IModuleConfigSchedule,
   IModuleConfigStartup,
 } from 'vona';
-import { IModuleConfigSummer } from 'vona-module-a-summer';
 
 // startups
 const startups = {
@@ -56,25 +55,6 @@ const schedules = {
     disable: true,
   } as IModuleConfigSchedule,
 };
-
-// summer
-const summer = {
-  group: {
-    default: {
-      test: {
-        bean: 'test',
-        mode: 'all', // mem/redis/all
-        mem: {
-          max: 2,
-          ttl: 1 * 1000,
-        },
-        redis: {
-          ttl: 3 * 1000,
-        },
-      },
-    },
-  },
-} as IModuleConfigSummer;
 
 const settings = {
   instance: {
@@ -152,7 +132,6 @@ export const config = (app: VonaApplication) => {
     // normal
     middlewares,
     schedules,
-    summer,
     message: 'Hello World',
     captcha: {
       scenes: {

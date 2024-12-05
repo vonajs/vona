@@ -1,9 +1,7 @@
-import { IMiddlewareOptionsMeta } from './middleware.js';
+import { IMiddlewareBaseEnable } from './middleware.js';
 
 export interface IControllerRecord {}
 
-export interface IDecoratorControllerOptions {
+export interface IDecoratorControllerOptions extends IMiddlewareBaseEnable {
   path?: string;
-  enable?: boolean;
-  meta?: IMiddlewareOptionsMeta;
 }
