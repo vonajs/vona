@@ -1,14 +1,14 @@
 import { Bean } from 'vona';
-import { TableIdentity } from 'vona-module-a-database';
 import {
+  BeanDatabaseDialectBase,
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
-  VirtualDatabaseDialect,
-} from './virtual.databaseDialect.js';
+  TableIdentity,
+} from 'vona-module-a-database';
 import { Knex } from 'knex';
 
 @Bean({ scene: 'database.dialect' })
-export class DatabaseDialectPg extends VirtualDatabaseDialect {
+export class DatabaseDialectPg extends BeanDatabaseDialectBase {
   async fetchDatabases(
     schemaBuilder: Knex.SchemaBuilder,
     databasePrefix: string,

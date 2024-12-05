@@ -1,6 +1,6 @@
 import knex, { Knex } from 'knex';
-import { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/virtual.databaseDialect.js';
 import { VonaApplication, cast } from 'vona';
+import { IFetchDatabasesResultItem, IFetchIndexesResultItem } from '../bean/bean.databaseDialectBase_.js';
 
 export function ExtendSchemaBuilder(app: VonaApplication) {
   ['fetchDatabases', 'createDatabase', 'dropDatabase', 'fetchIndexes'].forEach(function (method) {

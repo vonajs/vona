@@ -1,7 +1,7 @@
 import { Bean, BeanBase } from 'vona';
 import { BeanDatabaseClient } from './bean.databaseClient.js';
-import { VirtualDatabaseDialect } from './virtual.databaseDialect.js';
 import { __ThisModule__ } from '../.metadata/this.js';
+import { BeanDatabaseDialectBase } from './bean.databaseDialectBase_.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
@@ -24,9 +24,9 @@ export class BeanDatabase extends BeanBase {
     return client.db;
   }
 
-  getDialect(client: string): VirtualDatabaseDialect {
+  getDialect(client: string): BeanDatabaseDialectBase {
     const beanFullName = `${__ThisModule__}.database.dialect.${client}`;
-    const dialect = this.app.bean._getBean(beanFullName as any) as VirtualDatabaseDialect;
+    const dialect = this.app.bean._getBean(beanFullName as any) as BeanDatabaseDialectBase;
     if (!dialect) {
       throw new Error(`database dialect not found: ${client}`);
     }
