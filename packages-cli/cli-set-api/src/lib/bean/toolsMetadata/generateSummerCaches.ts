@@ -1,6 +1,7 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateSummerCaches(_moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/bean/summerCache.*.ts`;
@@ -17,7 +18,7 @@ export async function generateSummerCaches(_moduleName: string, modulePath: stri
     const isIgnore = checkIgnoreOfParts(parts);
     if (isIgnore) continue;
     const resourceName = parts[1];
-    const className = 'SummerCache' + resourceName.charAt(0).toUpperCase() + resourceName.substring(1);
+    const className = 'SummerCache' + toUpperCaseFirstChar(resourceName);
     contentImports.push(`import { ${className} } from '../bean/summerCache.${resourceName}.js';`);
     contentRecords.push(`'${resourceName}': ${className};`);
   }

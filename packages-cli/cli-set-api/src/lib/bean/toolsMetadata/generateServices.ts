@@ -1,6 +1,7 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateServices(moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/service/*.ts`;
@@ -17,7 +18,7 @@ export async function generateServices(moduleName: string, modulePath: string) {
     if (parts.length < 1) continue;
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
-    const className = 'Service' + parts.map(item => item.charAt(0).toUpperCase() + item.substring(1)).join('');
+    const className = 'Service' + parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanFullName = `${moduleName}.service.${parts.join('.')}`;
     contentExports.push(`export * from '../service/${fileNameJS}';`);
     if (isIgnore) continue;

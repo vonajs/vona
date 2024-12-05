@@ -12,7 +12,7 @@ export async function generateControllers(_moduleName: string, modulePath: strin
     const parts = fileName.split('.').slice(0, -1);
     if (parts.length !== 1) continue;
     const controllerName = parts[0];
-    // const className = 'Controller' + controllerName.charAt(0).toUpperCase() + controllerName.substring(1);
+    // const className = 'Controller' + toUpperCaseFirstChar(controllerName);
     contentExports.push(`export * from '../controller/${controllerName}.js';`);
   }
   // combine

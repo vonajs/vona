@@ -1,6 +1,7 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateEntities(_moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/entity/*.ts`;
@@ -17,7 +18,7 @@ export async function generateEntities(_moduleName: string, modulePath: string) 
     const isIgnore = checkIgnoreOfParts(parts);
     if (isIgnore) continue;
     const resourceName = parts[0];
-    const className = 'Entity' + resourceName.charAt(0).toUpperCase() + resourceName.substring(1);
+    const className = 'Entity' + toUpperCaseFirstChar(resourceName);
     contentImports.push(`import { ${className} } from '../entity/${resourceName}.js';`);
     contentRecords.push(`'${resourceName}': ${className};`);
   }
