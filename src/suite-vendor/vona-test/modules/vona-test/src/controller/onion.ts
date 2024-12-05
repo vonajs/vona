@@ -4,7 +4,7 @@ import { array, Body, defaultValue, Query, required, valid } from 'vona-module-a
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 
-@Controller('onion')
+@Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase<ScopeModule> {
   @Get('/')
   @UseMiddleware('a-database:transaction')

@@ -3,7 +3,7 @@ import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 import { ServiceTest } from '../service/test.js';
 
-@Controller('bean')
+@Controller({ path: 'bean', meta: { mode: 'unittest' } })
 export class ControllerBean extends BeanBase<ScopeModule> {
   @Get('test')
   async test() {

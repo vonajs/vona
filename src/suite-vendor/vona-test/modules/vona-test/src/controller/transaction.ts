@@ -4,7 +4,7 @@ import { Body } from 'vona-module-a-validator';
 
 const tableName = '__tempTransaction';
 
-@Controller('transaction')
+@Controller({ path: 'transaction', meta: { mode: 'unittest' } })
 export class ControllerTransaction extends BeanBase<ScopeModule> {
   @Post('fail')
   async fail(@Body() item: object) {
