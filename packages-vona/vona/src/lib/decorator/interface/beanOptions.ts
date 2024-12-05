@@ -5,7 +5,6 @@ import { Constructable } from '../index.js';
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'service'
   | 'aop'
-  | 'virtual'
   | 'scope'
   | 'controller'
   | 'entity'
