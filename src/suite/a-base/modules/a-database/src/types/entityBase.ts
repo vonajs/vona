@@ -3,15 +3,15 @@ import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 export class EntityBase {
-  protected get __beanOptions() {
-    return appResource.getBean((<any>this).__beanFullName__);
+  protected get beanOptions() {
+    return appResource.getBean((<any>this).__beanFullName__)!;
   }
-  protected get __entityOptions(): IDecoratorEntityOptions {
-    return this.__beanOptions?.options as IDecoratorEntityOptions;
+  protected get entityOptions(): IDecoratorEntityOptions {
+    return this.beanOptions.options as IDecoratorEntityOptions;
   }
 
   public get table(): string {
-    return this.__entityOptions.table!;
+    return this.entityOptions.table!;
   }
 
   @Rule(z.number())

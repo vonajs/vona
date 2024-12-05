@@ -1,4 +1,5 @@
 import { appResource } from '../core/resource.js';
+import { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.js';
 import { BeanSimple } from './beanSimple.js';
 
 export class BeanBaseSimple extends BeanSimple {
@@ -13,7 +14,15 @@ export class BeanBaseSimple extends BeanSimple {
     this.__moduleBelong__ = moduleBelong;
   }
 
+  protected get beanFullName() {
+    return this.__beanFullName__;
+  }
+
   protected get moduleBelong() {
     return this.__moduleBelong__ || appResource._getModuleBelong(this.__beanFullName__);
+  }
+
+  protected get beanOptions(): IDecoratorBeanOptionsBase {
+    return appResource.getBean(this.__beanFullName__)!;
   }
 }

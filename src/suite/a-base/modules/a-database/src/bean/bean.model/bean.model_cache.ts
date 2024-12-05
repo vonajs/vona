@@ -8,7 +8,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
     const cache = this.options.cache || { module: '', name: '' };
     const moduleName = cache.module || this.moduleBelong;
-    const cacheName = cache.name || this.__beanOptions?.name;
+    const cacheName = cache.name || this.beanOptions.name;
     return { module: moduleName, name: `model:${cacheName}` };
   }
 

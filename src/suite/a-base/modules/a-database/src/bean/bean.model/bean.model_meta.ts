@@ -25,10 +25,6 @@ export class BeanModelMeta extends BeanBase {
     return this.app.bean.database.getDialect(this.dialectClient);
   }
 
-  protected get __beanOptions() {
-    return appResource.getBean((<any>this).__beanFullName__);
-  }
-
   get table(): string {
     let table = this.options.table;
     if (!table && this.options.entity) {
@@ -40,8 +36,7 @@ export class BeanModelMeta extends BeanBase {
   }
 
   get options(): IDecoratorModelOptions {
-    const beanOptions = this.__beanOptions;
-    return (beanOptions?.options || {}) as IDecoratorModelOptions;
+    return (this.beanOptions.options || {}) as IDecoratorModelOptions;
   }
 
   get disableInstance() {
