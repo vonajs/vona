@@ -7,13 +7,15 @@ import {
   Next,
 } from 'vona';
 
-export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptionsGlobal, IMiddlewareOptionsMeta {}
+export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptionsGlobal {
+  gate?: IMiddlewareOptionsMeta;
+}
 
 @Middleware<IMiddlewareOptionsGate>({ global: true })
 export class MiddlewareGate extends BeanBase implements IMiddlewareExecute {
   async execute(options: IMiddlewareOptionsGate, next: Next) {
     // check gate
-    if (!this.ctx.app.meta.util.checkMiddlewareOptionsMeta(options)) {
+    if (!this.ctx.app.meta.util.checkMiddlewareOptionsMeta(options.gate)) {
       this.app.throw(403);
     }
     // next
