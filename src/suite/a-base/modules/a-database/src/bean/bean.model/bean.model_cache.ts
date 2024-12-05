@@ -54,7 +54,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // cache
     const cache = this.__getCacheInstance();
     let items = await cache.mget(ids, {
-      fn_mget: async ids => {
+      mget: async ids => {
         return await super._mget(table, ids, { disableDeleted: true });
       },
     });
@@ -253,7 +253,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     const cache = this.__getCacheInstance();
     const cacheKey = { where, options };
     const data = await cache.get(cacheKey, {
-      fn_get: async () => {
+      get: async () => {
         const options = Object.assign({}, cacheKey.options, { columns: ['id'] });
         return await super.get(table, cacheKey.where, options);
       },
@@ -279,7 +279,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // cache
     const cache = this.__getCacheInstance();
     const item: TResult2 | undefined = await cache.get(where.id, {
-      fn_get: async () => {
+      get: async () => {
         // where: maybe contain aux key
         // disableInstance: use the model options, not use options by outer
         return await super.get(table, where, { disableDeleted: true });
