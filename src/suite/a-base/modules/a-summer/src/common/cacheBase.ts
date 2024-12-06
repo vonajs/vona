@@ -1,61 +1,93 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanBase, TSummerCacheActionOptions } from 'vona';
+import { BeanBase, deepExtend, IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from 'vona';
 import { ServiceMem } from '../service/mem.js';
 import { ServiceRedis } from '../service/redis.js';
 import { ServiceFetch } from '../service/fetch.js';
-import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase<TScopeModule> {
-  _cacheBase: IModuleConfigSummerCacheBase;
+  _cacheName: string;
+  _cacheOpitons: IDecoratorSummerCacheOptions;
 
   _localMem: ServiceMem;
   _localRedis: ServiceRedis;
   _localFetch: ServiceFetch;
 
-  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
-    super();
-    this._cacheBase = cacheBase;
+  protected __init__(cacheName: string, cacheOptions?: IDecoratorSummerCacheOptions) {
+    if (cacheName) {
+      // dynamic
+      this._cacheName = cacheName;
+      this._cacheOpitons = cacheOptions!;
+    } else {
+      // summer cache
+      this._cacheName = this.beanFullName;
+      this._cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions);
+    }
+    // preset
+    if (this._cacheOpitons.preset) {
+      const configPreset = this.configModule.summer.preset[this._cacheOpitons.preset];
+      this._cacheOpitons = deepExtend({}, configPreset, this._cacheOpitons, { preset: undefined });
+    }
   }
 
-  get scopeASummer() {
+  get scopeSummer() {
     return this.getScope(__ThisModule__);
   }
 
   get configModule() {
-    return this.scopeASummer.config;
+    return this.scopeSummer.config;
   }
 
   get localMem() {
     if (!this._localMem) {
-      this._localMem = this.app.bean._newBean(`${__ThisModule__}.service.mem` as any, {
-        cacheBase: this._cacheBase,
-      });
+      this._localMem = this.app.bean._getBeanSelector(
+        `${__ThisModule__}.service.mem` as any,
+        this._cacheName,
+        this._cacheOpitons,
+      );
     }
     return this._localMem;
   }
 
   get localRedis() {
     if (!this._localRedis) {
-      this._localRedis = this.app.bean._newBean(`${__ThisModule__}.service.redis` as any, {
-        cacheBase: this._cacheBase,
-      });
+      this._localRedis = this.app.bean._getBeanSelector(
+        `${__ThisModule__}.service.redis` as any,
+        this._cacheName,
+        this._cacheOpitons,
+      );
     }
     return this._localRedis;
   }
 
   get localFetch() {
     if (!this._localFetch) {
-      this._localFetch = this.app.bean._newBean(`${__ThisModule__}.service.fetch` as any, {
-        cacheBase: this._cacheBase,
-      });
+      this._localFetch = this.app.bean._getBeanSelector(
+        `${__ThisModule__}.service.fetch` as any,
+        this._cacheName,
+        this._cacheOpitons,
+      );
     }
     return this._localFetch;
   }
 
   __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
-    if (!this.configModule.summer.enable) return false;
+    // general
+    if (
+      this.configModule.summer.enable === false ||
+      !this.app.meta.util.checkMiddlewareOptionsMeta(this.configModule.summer.meta)
+    ) {
+      return false;
+    }
+    // action options
     if (options?.enable === false) return false;
-    if (this._cacheBase.enable === false) return false;
+    // cache options
+    if (
+      this._cacheOpitons.enable === false ||
+      !this.app.meta.util.checkMiddlewareOptionsMeta(this._cacheOpitons.meta)
+    ) {
+      return false;
+    }
+    // default
     return true;
   }
 

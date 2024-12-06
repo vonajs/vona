@@ -1,4 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast, IMiddlewareOptionsMeta } from 'vona';
 import { IModuleConfigSummerCache } from './types.js';
 
 // broadcasts
@@ -40,18 +40,20 @@ export const config = (_app: VonaApplication) => {
     broadcasts,
     summer: {
       enable: true,
+      meta: {} as IMiddlewareOptionsMeta,
       group: {
         default: { dynamic: false },
         model: { dynamic: true, configDefault: 'redis' },
       },
+      preset: {
+        redis: configRedis,
+        redisWithIgnoreNull: configRedisWithIgnoreNull,
+        all: configAll,
+        allWithIgnoreNull: configAllWithIgnoreNull,
+      },
       config: {
         group: {
-          default: {
-            redis: configRedis,
-            redisWithIgnoreNull: configRedisWithIgnoreNull,
-            all: configAll,
-            allWithIgnoreNull: configAllWithIgnoreNull,
-          },
+          default: {},
           model: {
             redis: configRedis,
             redisWithIgnoreNull: configRedisWithIgnoreNull,

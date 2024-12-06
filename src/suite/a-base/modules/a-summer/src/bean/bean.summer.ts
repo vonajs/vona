@@ -6,7 +6,7 @@ let __cacheBases;
 
 @Bean()
 export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
-  get confieModule() {
+  get configModule() {
     return this.scope.config;
   }
 
@@ -62,11 +62,11 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
     let cacheBase = this._findCacheBaseInner({ fullKey: key });
     if (cacheBase) return cacheBase;
     // dynamic
-    const configGroup = this.confieModule.summer.group[group];
+    const configGroup = this.configModule.summer.group[group];
     const dynamic = configGroup.dynamic;
     if (!dynamic) return;
     // default
-    const configDefault = this.confieModule.summer.config.group[group][configGroup.configDefault];
+    const configDefault = this.configModule.summer.config.group[group][configGroup.configDefault];
     cacheBase = { ...configDefault, fullKey: key };
     // hold
     __cacheBases[key] = cacheBase;
@@ -104,7 +104,7 @@ export class BeanSummer extends BeanModuleScopeBase<ScopeModule> {
           let cache = summerGroup[key];
           // config
           if (cache.config) {
-            const configDefault = this.confieModule.summer.config.group[groupName][cache.config];
+            const configDefault = this.configModule.summer.config.group[groupName][cache.config];
             cache = this.app.bean.util.extend({}, configDefault, cache);
           }
           // fullKey

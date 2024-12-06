@@ -48,10 +48,10 @@ export class BeanContainer {
     return this._getBeanSelector(beanFullName as any);
   }
 
-  _getBeanSelector<T>(A: Constructable<T>, selector?: string): T;
-  _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string): IBeanRecord[K];
-  // _getBeanSelector<T>(beanFullName: string, selector?: string): T;
-  _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string): T {
+  _getBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
+  _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
+  // _getBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
+  _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -66,9 +66,9 @@ export class BeanContainer {
     if (this[BeanContainerInstances][key] === undefined) {
       let beanInstance;
       if (isSelectorValid) {
-        beanInstance = this._newBean(fullName as any, selector);
+        beanInstance = this._newBean(fullName as any, selector, ...args);
       } else {
-        beanInstance = this._newBean(fullName as any);
+        beanInstance = this._newBean(fullName as any, undefined, ...args);
       }
       this[BeanContainerInstances][key] = beanInstance;
     }

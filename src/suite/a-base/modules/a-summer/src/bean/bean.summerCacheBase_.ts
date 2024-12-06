@@ -1,6 +1,5 @@
-import { TSummerCacheActionOptions, Virtual } from 'vona';
+import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions, Virtual } from 'vona';
 import objectHash from 'object-hash';
-import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
 
 @Virtual()
@@ -9,8 +8,8 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
   KEY,
   DATA
 > {
-  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
-    super({ cacheBase });
+  protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
+    super.__init__(cacheName, cacheOptions);
   }
 
   async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {
