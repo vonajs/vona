@@ -23,7 +23,7 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
 
   async getAtomClassIdsInner({ inner }: any) {
     // cache
-    const cache = this.app.bean.summer.getCache({ module: __ThisModule__, name: 'atomClassInner' });
+    const cache = this.scope.summerCache.atomClassInner;
     // key
     const key = inner ? 'in' : 'notin';
     const atomClasses = await cache.get(key);
