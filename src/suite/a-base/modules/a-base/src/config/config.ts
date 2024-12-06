@@ -86,20 +86,6 @@ const queues = {
 // summer
 const summer = {
   group: {
-    default: {
-      roleScopesOfUser: {
-        bean: 'roleScopesOfUser',
-        config: 'all',
-      },
-      roleScopesOfRole: {
-        bean: 'roleScopesOfRole',
-        config: 'all',
-      },
-      roleWhosOfAtomClassAction: {
-        bean: 'roleWhosOfAtomClassAction',
-        config: 'all',
-      },
-    },
     model: {
       role: { config: 'all' },
       user: { config: 'all' },
