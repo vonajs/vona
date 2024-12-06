@@ -1,15 +1,19 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from '../common/cacheBase.js';
-import { Service } from 'vona';
+import { Service, TSummerCacheActionOptions } from 'vona';
+import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Service()
-export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<TScopeModule, KEY, DATA> {
+export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
+  extends CacheBase<TScopeModule, KEY, DATA>
+  implements ICacheLayeredBase<KEY, DATA>
+{
   private _lruCache: LRUCache<string, any>;
 
-  async get(keyHash, key, options) {
+  async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = this.lruCache.get(keyHash);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
@@ -19,7 +23,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     return value;
   }
 
-  async mget(keysHash, keys, options) {
+  async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // peek
     const values = keysHash.map(keyHash => this.lruCache.peek(keyHash));
     const keysHashMissing: any[] = [];
@@ -48,7 +52,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     return values;
   }
 
-  async del(keyHash, key, options) {
+  async del(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     // del on this worker
     this.lruCache.delete(keyHash);
     // del on other workers by broadcast
@@ -62,7 +66,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     await layered.del(keyHash, key, options);
   }
 
-  async mdel(keysHash, keys, options) {
+  async mdel(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // del on this worker
     keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
     // del on other workers by broadcast
@@ -76,7 +80,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     await layered.mdel(keysHash, keys, options);
   }
 
-  async clear(options) {
+  async clear(options?: TSummerCacheActionOptions<KEY, DATA>) {
     // clear on this worker
     this.lruCache.clear();
     // clear on other workers by broadcast
@@ -90,7 +94,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     await layered.clear(options);
   }
 
-  async peek(keyHash, key, options) {
+  async peek(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = this.lruCache.peek(keyHash);
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
@@ -99,21 +103,21 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     return value;
   }
 
-  __delRaw(keyHash, _key, _options) {
+  __delRaw(keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     _key;
     this.lruCache.delete(keyHash);
   }
 
-  __mdelRaw(keysHash, _keys, _options) {
+  __mdelRaw(keysHash: string[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
     _keys;
     keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
   }
 
-  __clearRaw(_options) {
+  __clearRaw(_options?: TSummerCacheActionOptions<KEY, DATA>) {
     this.lruCache.clear();
   }
 
-  __getLayered(options): CacheBase<TScopeModule, KEY, DATA> {
+  __getLayered(options?: TSummerCacheActionOptions<KEY, DATA>): ICacheLayeredBase<KEY, DATA> {
     const mode = this.__getOptionsMode(options);
     if (mode === 'all') {
       return this.localRedis;

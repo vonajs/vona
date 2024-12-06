@@ -1,13 +1,13 @@
 import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona';
+import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 @Service()
-export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<
-  TScopeModule,
-  KEY,
-  DATA
-> {
+export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
+  extends CacheBase<TScopeModule, KEY, DATA>
+  implements ICacheLayeredBase<KEY, DATA>
+{
   _redisSummer: any;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {

@@ -59,14 +59,6 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
     return this._localFetch;
   }
 
-  async get(
-    _keyHash: string,
-    _key: KEY,
-    _options?: TSummerCacheActionOptions<KEY, DATA>,
-  ): Promise<DATA | null | undefined> {
-    throw new Error('Method not implemented.');
-  }
-
   __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
     // general
     if (

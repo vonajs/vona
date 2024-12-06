@@ -7,13 +7,13 @@ import {
   Service,
   TSummerCacheActionOptions,
 } from 'vona';
+import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 @Service()
-export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<
-  TScopeModule,
-  KEY,
-  DATA
-> {
+export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any>
+  extends CacheBase<TScopeModule, KEY, DATA>
+  implements ICacheLayeredBase<KEY, DATA>
+{
   cacheBean?: CacheBase;
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions, cacheBean?: CacheBase) {
