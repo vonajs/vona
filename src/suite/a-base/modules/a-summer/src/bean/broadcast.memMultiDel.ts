@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean, BeanBase, cast } from 'vona';
 
 @Bean({ scene: 'broadcast' })
 export class BroadcastMemMultiDel extends BeanBase {
@@ -7,7 +7,7 @@ export class BroadcastMemMultiDel extends BeanBase {
     const { cacheName, cacheOptions, keysHash, keys, options } = context.data;
     if (!sameAsCaller) {
       const cache = this.app.bean.summer.cache(cacheName, cacheOptions);
-      cache.localMem.__mdelRaw(keysHash, keys, options);
+      cast(cache).localMem.__mdelRaw(keysHash, keys, options);
     }
   }
 }

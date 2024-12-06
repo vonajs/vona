@@ -1,4 +1,4 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean, BeanBase, cast } from 'vona';
 
 @Bean({ scene: 'broadcast' })
 export class BroadcastMemClear extends BeanBase {
@@ -7,7 +7,7 @@ export class BroadcastMemClear extends BeanBase {
     const { cacheName, cacheOptions, options } = context.data;
     if (!sameAsCaller) {
       const cache = this.app.bean.summer.cache(cacheName, cacheOptions);
-      cache.localMem.__clearRaw(options);
+      cast(cache).localMem.__clearRaw(options);
     }
   }
 }
