@@ -4,6 +4,7 @@ import { IBeanRecord } from '../bean/type.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { isClass } from '../utils/isClass.js';
 import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
+import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 
 export const SymbolDecoratorBeanFullName = Symbol('SymbolDecoratorBeanFullName');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
@@ -81,13 +82,13 @@ export class AppResource extends BeanSimple {
     scene = scene.replace(/\./gi, '');
     // bean class name
     const beanClassName = beanClass.name;
-    if (beanClassName.toLowerCase().startsWith(scene)) {
+    if (toLowerCaseFirstChar(beanClassName).startsWith(scene)) {
       name = beanClassName.substring(scene.length);
     } else {
       name = beanClassName;
     }
     // lowerCase
-    name = name.charAt(0).toLowerCase() + name.substring(1);
+    name = toLowerCaseFirstChar(name);
     return name;
   }
 
