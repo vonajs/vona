@@ -1,6 +1,5 @@
-import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
-import { Service } from 'vona';
+import { IORedis, Service } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 @Service()
@@ -8,12 +7,7 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
   extends CacheBase<TScopeModule, KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
-  _redisSummer: any;
-
-  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
-    super({ cacheBase });
-    this._redisSummer = null;
-  }
+  _redisSummer: IORedis.Redis;
 
   async get(keyHash, key, options) {
     const redisKey = this._getRedisKey(keyHash);
@@ -108,7 +102,7 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
 
   get redisSummer() {
     if (!this._redisSummer) {
-      this._redisSummer = this.ctx.app.redis.get('summer');
+      this._redisSummer = this.app.redis.get('summer');
     }
     return this._redisSummer;
   }
