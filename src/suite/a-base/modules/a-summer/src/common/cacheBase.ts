@@ -12,7 +12,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   _localRedis: ServiceRedis;
   _localFetch: ServiceFetch;
 
-  protected __init__(cacheName: string, cacheOptions?: IDecoratorSummerCacheOptions) {
+  protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
     if (cacheName) {
       // dynamic
       this._cacheName = cacheName;
