@@ -95,10 +95,6 @@ const summer = {
         bean: 'roleScopesOfRole',
         config: 'all',
       },
-      roleScopesMineOfUser: {
-        bean: 'roleScopesMineOfUser',
-        config: 'all',
-      },
       roleWhosOfAtomClassAction: {
         bean: 'roleWhosOfAtomClassAction',
         config: 'all',
