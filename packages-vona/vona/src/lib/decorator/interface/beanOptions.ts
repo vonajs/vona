@@ -47,7 +47,6 @@ export type TypeDecoratorBeanOptionsScene =
   | 'cli.tools'
   | 'io.message'
   | 'io.channel'
-  | 'summer.cache'
   | 'captcha.provider'
   | 'sms.provider'
   | 'database.dialect';
