@@ -8,7 +8,7 @@ export interface IDecoratorModelOptions<T extends object = {}> {
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
-  cacheOptions?: IDecoratorSummerCacheOptions;
+  cacheOptions?: IDecoratorSummerCacheOptions | false;
   cacheKeyAux?: string;
   cacheNotKey?: boolean;
 }

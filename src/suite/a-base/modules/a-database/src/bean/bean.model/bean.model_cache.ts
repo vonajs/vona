@@ -5,32 +5,36 @@ import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdate
 import { getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
-  private _cacheOptions: IDecoratorSummerCacheOptions;
+  private _cacheOptions: IDecoratorSummerCacheOptions | false;
 
   private get __cacheName() {
     return this.beanFullName;
   }
 
   private get __cacheOptions() {
-    if (!this._cacheOptions) {
-      // preset
-      let configPreset;
-      let preset = this.options.cacheOptions?.preset;
-      if (!preset && !this.options.cacheOptions?.mode) preset = 'redis';
-      if (preset) {
-        configPreset = this.scopeDatabase.config.summer.preset[preset];
+    if (this._cacheOptions === undefined) {
+      if (this.options.cacheOptions === false) {
+        this._cacheOptions = false;
+      } else {
+        // preset
+        let configPreset;
+        let preset = this.options.cacheOptions?.preset;
+        if (!preset && !this.options.cacheOptions?.mode) preset = 'redis';
+        if (preset) {
+          configPreset = this.scopeDatabase.config.summer.preset[preset];
+        }
+        // extend
+        this._cacheOptions = deepExtend(
+          {},
+          {
+            enable: this.scopeDatabase.config.summer.enable,
+            meta: this.scopeDatabase.config.summer.meta,
+          },
+          configPreset,
+          this.options.cacheOptions,
+          { preset: undefined },
+        );
       }
-      // extend
-      this._cacheOptions = deepExtend(
-        {},
-        {
-          enable: this.scopeDatabase.config.summer.enable,
-          meta: this.scopeDatabase.config.summer.meta,
-        },
-        configPreset,
-        this.options.cacheOptions,
-        { preset: undefined },
-      );
     }
     return this._cacheOptions;
   }
@@ -45,7 +49,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   async clearCache() {
     if (!this.__cacheExists()) return;
-    await this.app.bean.summer.clear(this.__cacheName);
+    await this.__cacheInstance.clear();
   }
 
   async mget<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
@@ -69,13 +73,13 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
       return (await super.mget(table, ids, options)) as TResult2[];
     }
     // cache
-    const cache = this.__getCacheInstance();
+    const cache = this.__cacheInstance;
     let items = await cache.mget(ids, {
       mget: async ids => {
         return await super._mget(table, ids, { disableDeleted: true });
@@ -111,7 +115,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
       return await super.select(table, params, options);
@@ -155,7 +159,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
       return await super.get(table, where, options);
@@ -193,7 +197,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
       return await super.update(table, data, options);
@@ -244,7 +248,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
     if (!this.__cacheExists()) {
       return await super.delete(table, where, options);
@@ -273,7 +277,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined> {
     // cache
-    const cache = this.__getCacheInstance();
+    const cache = this.__cacheInstance;
     const cacheKey = { where, options };
     const data = await cache.get(cacheKey, {
       get: async () => {
@@ -300,7 +304,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     options?: IModelMethodOptions,
   ): Promise<TResult2 | undefined> {
     // cache
-    const cache = this.__getCacheInstance();
+    const cache = this.__cacheInstance;
     const item: TResult2 | undefined = await cache.get(where.id, {
       get: async () => {
         // where: maybe contain aux key
@@ -361,7 +365,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   private async __deleteCache_key(id) {
-    const cache = this.__getCacheInstance();
+    const cache = this.__cacheInstance;
     if (Array.isArray(id)) {
       await cache.mdel(id);
     } else {
@@ -370,20 +374,16 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   private async __deleteCache_notkey(cacheKey) {
-    const cache = this.__getCacheInstance();
+    const cache = this.__cacheInstance;
     await cache.del(cacheKey);
   }
 
-  private __getCacheInstance() {
-    return this.app.bean.summer.getCache(this.__cacheName);
+  private get __cacheInstance() {
+    if (this.__cacheOptions === false) throw new Error('cache disabled');
+    return this.app.bean.summer.cache(this.__cacheName, this.__cacheOptions);
   }
 
   private __cacheExists() {
-    if (!this.__cacheName) return false;
-    const cachaBase = this.app.bean.summer._findCacheBase({
-      module: this.__cacheName.module,
-      name: this.__cacheName.name,
-    });
-    return !!cachaBase && cachaBase.enable !== false;
+    return this.__cacheOptions !== false;
   }
 }
