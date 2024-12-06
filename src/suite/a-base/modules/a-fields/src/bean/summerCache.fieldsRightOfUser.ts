@@ -5,7 +5,9 @@ import { ScopeModule } from '../.metadata/this.js';
 export type TSummerCacheFieldsRightOfUserKey = any;
 export type TSummerCacheFieldsRightOfUserData = any;
 
-@SummerCache()
+@SummerCache({
+  preset: 'all',
+})
 export class SummerCacheFieldsRightOfUser
   extends BeanSummerCacheBase<ScopeModule, TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>
   implements ISummerCacheGet<TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>
