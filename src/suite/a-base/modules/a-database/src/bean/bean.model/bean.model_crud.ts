@@ -46,7 +46,7 @@ export class BeanModelCrud<TRecord extends {}> extends BeanModelView<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // ids maybe empty
     if (ids.length === 0) return [];
     // ids maybe object[]

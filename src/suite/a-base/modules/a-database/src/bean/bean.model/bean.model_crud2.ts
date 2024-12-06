@@ -20,7 +20,7 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
     const data2 = await this.prepareData<TRecord2>(table, data);
     // insert
@@ -42,7 +42,7 @@ export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // data
     const data2 = await this.prepareData<TRecord2>(table, data);
     // update
