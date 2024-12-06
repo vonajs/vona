@@ -30,7 +30,6 @@ export * from '../bean/stats.draftsFlowing.js';
 export * from '../bean/stats.labels.js';
 export * from '../bean/stats.stars.js';
 export * from '../bean/stats.starsLabels.js';
-export * from '../bean/summer.cache.roleWhosOfAtomClassAction.js';
 export * from '../bean/version.manager.js';
 import { BeanAtom } from '../bean/bean.atom.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
@@ -63,7 +62,6 @@ import { StatsDraftsFlowing } from '../bean/stats.draftsFlowing.js';
 import { StatsLabels } from '../bean/stats.labels.js';
 import { StatsStars } from '../bean/stats.stars.js';
 import { StatsStarsLabels } from '../bean/stats.starsLabels.js';
-import { SummerCacheRoleWhosOfAtomClassAction } from '../bean/summer.cache.roleWhosOfAtomClassAction.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -102,7 +100,6 @@ declare module 'vona' {
     'a-base.stats.labels': StatsLabels;
     'a-base.stats.stars': StatsStars;
     'a-base.stats.starsLabels': StatsStarsLabels;
-    'a-base.summer.cache.roleWhosOfAtomClassAction': SummerCacheRoleWhosOfAtomClassAction;
     'a-base.version.manager': VersionManager;
   }
 }
