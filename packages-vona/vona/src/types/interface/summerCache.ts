@@ -30,6 +30,7 @@ export interface IDecoratorSummerCacheOptions extends IMiddlewareBaseEnable {
   };
   redis?: {
     ttl: number;
+    client?: string;
   };
   ignoreNull?: boolean;
 }

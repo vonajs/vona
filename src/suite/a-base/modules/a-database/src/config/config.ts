@@ -13,6 +13,9 @@ export const config = (_app: VonaApplication) => {
         all: configAll,
         allWithIgnoreNull: configAllWithIgnoreNull,
       },
+      redis: {
+        client: 'model',
+      },
     },
   };
 };

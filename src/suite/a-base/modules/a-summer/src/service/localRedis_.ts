@@ -103,7 +103,8 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
 
   get redisSummer() {
     if (!this._redisSummer) {
-      this._redisSummer = this.app.redis.get('summer');
+      const clientName = this._cacheOpitons.redis?.client ?? this.scopeSummer.config.summer.redis.client;
+      this._redisSummer = this.app.redis.get(clientName);
     }
     return this._redisSummer;
   }
