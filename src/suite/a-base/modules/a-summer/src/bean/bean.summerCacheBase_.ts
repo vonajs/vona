@@ -14,11 +14,11 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
     if (cacheName) {
       // dynamic
       _cacheName = cacheName;
-      _cacheOpitons = cacheOptions!;
+      _cacheOpitons = cacheOptions ?? {};
     } else {
       // summer cache
       _cacheName = this.beanFullName;
-      _cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions);
+      _cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
     }
     // preset
     let preset = _cacheOpitons.preset;

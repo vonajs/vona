@@ -22,28 +22,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
 
   private get __cacheOptions() {
     if (this[SymbolCacheOptions] === undefined) {
-      if (this.options.cacheOptions === false) {
-        this[SymbolCacheOptions] = false;
-      } else {
-        // preset
-        let configPreset;
-        let preset = this.options.cacheOptions?.preset;
-        if (!preset && !this.options.cacheOptions?.mode) preset = this.scopeDatabase.config.summer.presetDefault;
-        if (preset) {
-          configPreset = this.scopeDatabase.config.summer.preset[preset];
-        }
-        // extend
-        this[SymbolCacheOptions] = deepExtend(
-          {},
-          {
-            enable: this.scopeDatabase.config.summer.enable,
-            meta: this.scopeDatabase.config.summer.meta,
-          },
-          configPreset,
-          this.options.cacheOptions,
-          { preset: undefined },
-        );
-      }
+      this[SymbolCacheOptions] = this.__cacheOptionsInner();
     }
     return this[SymbolCacheOptions];
   }
@@ -397,6 +376,21 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheInstance() {
     if (this.__cacheOptions === false) throw new Error('cache disabled');
     return this.app.bean.summer.cache(this.__cacheName, this.__cacheOptions);
+  }
+
+  private __cacheOptionsInner() {
+    if (this.options.cacheOptions === false) return false;
+    // options
+    let _cacheOpitons = this.options.cacheOptions ?? {};
+    // preset
+    let preset = _cacheOpitons.preset;
+    if (!preset && !_cacheOpitons.mode) preset = this.scopeDatabase.config.summer.presetDefault;
+    if (preset) {
+      const configPreset = this.scopeDatabase.config.summer.preset[preset];
+      // extend
+      _cacheOpitons = deepExtend({}, configPreset, _cacheOpitons, { preset: undefined });
+    }
+    return _cacheOpitons;
   }
 
   private __cacheEnabledInner() {
