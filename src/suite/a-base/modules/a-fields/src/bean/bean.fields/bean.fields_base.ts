@@ -1,6 +1,7 @@
 import { BeanBase } from 'vona';
+import { ScopeModule } from '../../.metadata/this.js';
 
-export class BeanFieldsBase extends BeanBase {
+export class BeanFieldsBase extends BeanBase<ScopeModule> {
   get modelRoleFieldsRight() {
     return this.$scope.base.model.roleFieldsRight;
   }

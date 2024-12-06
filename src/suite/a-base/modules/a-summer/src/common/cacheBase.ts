@@ -5,27 +5,27 @@ import { ServiceLocalRedis } from '../service/localRedis_.js';
 import { ServiceLocalFetch } from '../service/localFetch_.js';
 
 export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase<TScopeModule> {
-  _cacheName: string;
-  _cacheOpitons: IDecoratorSummerCacheOptions;
+  protected _cacheName: string;
+  protected _cacheOpitons: IDecoratorSummerCacheOptions;
 
-  _localMem: ServiceLocalMem<TScopeModule, KEY, DATA>;
-  _localRedis: ServiceLocalRedis<TScopeModule, KEY, DATA>;
-  _localFetch: ServiceLocalFetch<TScopeModule, KEY, DATA>;
+  protected _localMem: ServiceLocalMem<TScopeModule, KEY, DATA>;
+  protected _localRedis: ServiceLocalRedis<TScopeModule, KEY, DATA>;
+  protected _localFetch: ServiceLocalFetch<TScopeModule, KEY, DATA>;
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
     this._cacheName = cacheName;
     this._cacheOpitons = cacheOptions;
   }
 
-  get scopeSummer() {
+  protected get scopeSummer() {
     return this.getScope(__ThisModule__);
   }
 
-  get configModule() {
+  protected get configModule() {
     return this.scopeSummer.config;
   }
 
-  get localMem() {
+  protected get localMem() {
     if (!this._localMem) {
       this._localMem = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localMem` as any,
@@ -36,7 +36,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
     return this._localMem;
   }
 
-  get localRedis() {
+  protected get localRedis() {
     if (!this._localRedis) {
       this._localRedis = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localRedis` as any,
@@ -47,7 +47,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
     return this._localRedis;
   }
 
-  get localFetch() {
+  protected get localFetch() {
     if (!this._localFetch) {
       this._localFetch = this.app.bean._getBeanSelector(
         `${__ThisModule__}.service.localFetch` as any,
@@ -59,7 +59,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
     return this._localFetch;
   }
 
-  __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
     // general
     if (
       this.configModule.summer.enable === false ||
@@ -80,11 +80,11 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
     return true;
   }
 
-  __getOptionsMode(options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected __getOptionsMode(options?: TSummerCacheActionOptions<KEY, DATA>) {
     return options?.mode ?? this._cacheOpitons.mode ?? 'all';
   }
 
-  __checkValueEmpty(value: DATA | null | undefined, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected __checkValueEmpty(value: DATA | null | undefined, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const ignoreNull = options?.ignoreNull ?? this._cacheOpitons.ignoreNull ?? false;
     if (ignoreNull) {
       return value === undefined || value === null;

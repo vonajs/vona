@@ -14,11 +14,11 @@ export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any>
   extends CacheBase<TScopeModule, KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
-  cacheBean?: CacheBase;
+  private _cacheBean?: CacheBase;
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions, cacheBean?: CacheBase) {
     super.__init__(cacheName, cacheOptions);
-    this.cacheBean = cacheBean;
+    this._cacheBean = cacheBean;
   }
 
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -26,7 +26,7 @@ export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any>
     if (fn_get) {
       return await fn_get(key, options, keyHash);
     }
-    return await cast<ISummerCacheGet<KEY, DATA>>(this.cacheBean).getNative(key, options, keyHash);
+    return await cast<ISummerCacheGet<KEY, DATA>>(this._cacheBean).getNative(key, options, keyHash);
   }
 
   async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
@@ -35,7 +35,7 @@ export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any>
     if (fn_mget) {
       return await fn_mget(keys, options, keysHash);
     }
-    const cacheBean = cast<ISummerCacheMGet<KEY, DATA> | undefined>(this.cacheBean);
+    const cacheBean = cast<ISummerCacheMGet<KEY, DATA> | undefined>(this._cacheBean);
     if (cacheBean?.mgetNative) {
       return await cacheBean.mgetNative(keys, options, keysHash);
     }

@@ -27,11 +27,11 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
   }
 
   async clearSummer_fieldsRightOfAtomClass() {
-    await this.app.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfAtomClass' });
+    await this.scope.summerCache.fieldsRightOfAtomClass.clear();
   }
 
   async clearSummer_fieldsRightOfUser() {
-    await this.app.bean.summer.clear({ module: __ThisModule__, name: 'fieldsRightOfUser' });
+    await this.scope.summerCache.fieldsRightOfUser.clear();
   }
 
   async __getFieldsRightOfAtomClassRaw({ atomClassId }: any) {
