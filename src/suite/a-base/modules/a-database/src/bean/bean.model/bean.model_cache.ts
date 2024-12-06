@@ -1,7 +1,13 @@
 import { cast, deepExtend, IDecoratorSummerCacheOptions } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
 import { BeanModel } from '../bean.model.js';
-import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types/index.js';
+import {
+  EntityBase,
+  IModelGetOptions,
+  IModelMethodOptions,
+  IModelSelectParams,
+  IModelUpdateOptions,
+} from '../../types/index.js';
 import { getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
@@ -88,7 +94,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     // filter disableDeleted
     items = items.filter(item => {
       if (!item) return false;
-      if (!this._checkDisableDeletedByOptions(options) && cast(item).deleted === 1) return false;
+      if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return false;
       return true;
     });
     return this.__filterMGetColumns(items, options);
@@ -313,7 +319,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
       },
     });
     if (!item) return item;
-    if (!this._checkDisableDeletedByOptions(options) && cast(item).deleted === 1) return undefined;
+    if (!this._checkDisableDeletedByOptions(options) && cast<EntityBase>(item).deleted) return undefined;
     return item;
   }
 

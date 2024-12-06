@@ -222,7 +222,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     const columnNameDeleted = `${getTableOrTableAlias(table)}.deleted`;
     if (where[columnNameDeleted] === undefined && where.deleted === undefined) {
       if (!this._checkDisableDeletedByOptions(options)) {
-        where[columnNameDeleted] = 0;
+        where[columnNameDeleted] = false;
       }
     }
   }
@@ -239,7 +239,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     const columnNameDeleted = 'deleted';
     if (data[columnNameDeleted] === undefined) {
       if (!this._checkDisableDeletedByOptions(options)) {
-        data[columnNameDeleted] = 0;
+        data[columnNameDeleted] = false;
       }
     }
   }
