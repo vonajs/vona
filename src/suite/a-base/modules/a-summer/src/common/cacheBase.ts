@@ -60,20 +60,11 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   }
 
   protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
-    // general
-    if (
-      this.configModule.summer.enable === false ||
-      !this.app.meta.util.checkMiddlewareOptionsMeta(this.configModule.summer.meta)
-    ) {
-      return false;
-    }
-    // action options
-    if (options?.enable === false) return false;
-    // cache options
-    if (
-      this._cacheOpitons.enable === false ||
-      !this.app.meta.util.checkMiddlewareOptionsMeta(this._cacheOpitons.meta)
-    ) {
+    // enable
+    const enable = options?.enable ?? this._cacheOpitons.enable;
+    if (enable === false) return false;
+    // meta
+    if (!this.app.meta.util.checkMiddlewareOptionsMeta(this._cacheOpitons.meta)) {
       return false;
     }
     // default

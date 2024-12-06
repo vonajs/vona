@@ -1,4 +1,4 @@
-import { cast, IDecoratorSummerCacheOptions } from 'vona';
+import { cast, deepExtend, IDecoratorSummerCacheOptions } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
 import { BeanModel } from '../bean.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types/index.js';
@@ -10,8 +10,27 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private get __cacheName() {
     return this.beanFullName;
   }
+
   private get __cacheOptions() {
     if (!this._cacheOptions) {
+      // preset
+      let configPreset;
+      let preset = this.options.cacheOptions?.preset;
+      if (!preset && !this.options.cacheOptions?.mode) preset = 'redis';
+      if (preset) {
+        configPreset = this.scopeDatabase.config.summer.preset[preset];
+      }
+      // extend
+      this._cacheOptions = deepExtend(
+        {},
+        {
+          enable: this.scopeDatabase.config.summer.enable,
+          meta: this.scopeDatabase.config.summer.meta,
+        },
+        configPreset,
+        this.options.cacheOptions,
+        { preset: undefined },
+      );
     }
     return this._cacheOptions;
   }
