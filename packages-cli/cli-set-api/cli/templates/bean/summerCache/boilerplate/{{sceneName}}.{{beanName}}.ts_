@@ -1,6 +1,18 @@
-import { BeanBase, ISummerCacheGet, SummerCache } from 'vona';
+import { ISummerCacheGet, SummerCache, TSummerCacheActionOptions } from 'vona';
+import { BeanSummerCacheBase } from 'vona-module-a-summer';
+import { ScopeModule } from '../.metadata/this.js';
+
+export type TSummerCache<%=argv.beanNameCapitalize%>Key = any;
+export type TSummerCache<%=argv.beanNameCapitalize%>Data = any;
 
 @SummerCache()
-export class SummerCache<%=argv.beanNameCapitalize%> extends BeanBase implements ISummerCacheGet {
-  async get(_key) {}
+export class SummerCache<%=argv.beanNameCapitalize%>
+  extends BeanSummerCacheBase<ScopeModule, TSummerCache<%=argv.beanNameCapitalize%>Key, TSummerCache<%=argv.beanNameCapitalize%>Data>
+  implements ISummerCacheGet<TSummerCache<%=argv.beanNameCapitalize%>Key, TSummerCache<%=argv.beanNameCapitalize%>Data>
+{
+  async getNative(
+    _key: TSummerCache<%=argv.beanNameCapitalize%>Key,
+    _options: TSummerCacheActionOptions<TSummerCache<%=argv.beanNameCapitalize%>Key, TSummerCache<%=argv.beanNameCapitalize%>Data>,
+    _keyHash: string,
+  ): Promise<TSummerCache<%=argv.beanNameCapitalize%>Data | null | undefined> {}
 }
