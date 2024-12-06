@@ -1,16 +1,16 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, deepExtend, IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from 'vona';
-import { ServiceMem } from '../service/mem.js';
-import { ServiceRedis } from '../service/redis.js';
-import { ServiceFetch } from '../service/fetch.js';
+import { ServiceLocalMem } from '../service/localMem_.js';
+import { ServiceLocalRedis } from '../service/localRedis_.js';
+import { ServiceLocalFetch } from '../service/localFetch_.js';
 
 export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase<TScopeModule> {
   _cacheName: string;
   _cacheOpitons: IDecoratorSummerCacheOptions;
 
-  _localMem: ServiceMem;
-  _localRedis: ServiceRedis;
-  _localFetch: ServiceFetch;
+  _localMem: ServiceLocalMem;
+  _localRedis: ServiceLocalRedis;
+  _localFetch: ServiceLocalFetch;
 
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
     if (cacheName) {
@@ -40,7 +40,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   get localMem() {
     if (!this._localMem) {
       this._localMem = this.app.bean._getBeanSelector(
-        `${__ThisModule__}.service.mem` as any,
+        `${__ThisModule__}.service.localMem` as any,
         this._cacheName,
         this._cacheOpitons,
       );
@@ -51,7 +51,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   get localRedis() {
     if (!this._localRedis) {
       this._localRedis = this.app.bean._getBeanSelector(
-        `${__ThisModule__}.service.redis` as any,
+        `${__ThisModule__}.service.localRedis` as any,
         this._cacheName,
         this._cacheOpitons,
       );
@@ -62,7 +62,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   get localFetch() {
     if (!this._localFetch) {
       this._localFetch = this.app.bean._getBeanSelector(
-        `${__ThisModule__}.service.fetch` as any,
+        `${__ThisModule__}.service.localFetch` as any,
         this._cacheName,
         this._cacheOpitons,
       );
