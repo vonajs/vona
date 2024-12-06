@@ -82,7 +82,7 @@ export class AppResource extends BeanSimple {
     scene = scene.replace(/\./gi, '');
     // bean class name
     const beanClassName = beanClass.name;
-    if (toLowerCaseFirstChar(beanClassName).startsWith(scene)) {
+    if (beanClassName.toLocaleUpperCase().startsWith(scene.toLocaleUpperCase())) {
       name = beanClassName.substring(scene.length);
     } else {
       name = beanClassName;
