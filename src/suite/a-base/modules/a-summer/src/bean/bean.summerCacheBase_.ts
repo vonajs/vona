@@ -1,4 +1,4 @@
-import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions, Virtual } from 'vona';
+import { deepExtend, IDecoratorSummerCacheOptions, TSummerCacheActionOptions, Virtual } from 'vona';
 import objectHash from 'object-hash';
 import { CacheBase } from '../common/cacheBase.js';
 
@@ -9,7 +9,24 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
   DATA
 > {
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
-    super.__init__(cacheName, cacheOptions);
+    let _cacheName: string;
+    let _cacheOpitons: IDecoratorSummerCacheOptions;
+    if (cacheName) {
+      // dynamic
+      _cacheName = cacheName;
+      _cacheOpitons = cacheOptions!;
+    } else {
+      // summer cache
+      _cacheName = this.beanFullName;
+      _cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions);
+    }
+    // preset
+    if (_cacheOpitons.preset) {
+      const configPreset = this.configModule.summer.preset[_cacheOpitons.preset];
+      _cacheOpitons = deepExtend({}, configPreset, _cacheOpitons, { preset: undefined });
+    }
+    // super
+    super.__init__(_cacheName, _cacheOpitons);
   }
 
   async get(key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined> {

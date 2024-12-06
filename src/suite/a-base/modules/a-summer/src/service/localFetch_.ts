@@ -1,69 +1,66 @@
-import { IModuleConfigSummerCacheBase } from '../config/types.js';
 import { CacheBase } from '../common/cacheBase.js';
-import { Service } from 'vona';
+import {
+  cast,
+  IDecoratorSummerCacheOptions,
+  ISummerCacheGet,
+  ISummerCacheMGet,
+  Service,
+  TSummerCacheActionOptions,
+} from 'vona';
 
 @Service()
-export class ServiceLocalFetch extends CacheBase {
-  _cacheBean: any;
+export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<
+  TScopeModule,
+  KEY,
+  DATA
+> {
+  cacheBean?: CacheBase;
 
-  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
-    super({ cacheBase });
-    this._cacheBean = null;
+  protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions, cacheBean?: CacheBase) {
+    super.__init__(cacheName, cacheOptions);
+    this.cacheBean = cacheBean;
   }
 
-  async get(keyHash, key, options) {
-    const fn_get = options?.fn_get;
+  async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
+    const fn_get = options?.get;
     if (fn_get) {
       return await fn_get(key, options, keyHash);
     }
-    return await this.cacheBean.get(key, options, keyHash);
+    return await cast<ISummerCacheGet<KEY, DATA>>(this.cacheBean).getNative(key, options, keyHash);
   }
 
-  async mget(keysHash, keys, options) {
+  async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // mget
-    const fn_mget = options?.fn_mget;
+    const fn_mget = options?.mget;
     if (fn_mget) {
       return await fn_mget(keys, options, keysHash);
     }
-    if (this.cacheBean && this.cacheBean.mget) {
-      return await this.cacheBean.mget(keys, options, keysHash);
+    const cacheBean = cast<ISummerCacheMGet<KEY, DATA> | undefined>(this.cacheBean);
+    if (cacheBean?.mgetNative) {
+      return await cacheBean.mgetNative(keys, options, keysHash);
     }
     // fallback
-    const values: any[] = [];
+    const values: Array<DATA | null | undefined> = [];
     for (let i = 0; i < keys.length; i++) {
       values.push(await this.get(keysHash[i], keys[i], options));
     }
     return values;
   }
 
-  async peek(_keyHash, _key, _options) {
-    _keyHash;
-    _key;
+  async peek(_keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // just return undefined
     return undefined;
   }
 
-  async del(_keyHash, _key, _options) {
-    _keyHash;
-    _key;
+  async del(_keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // do nothing
   }
 
-  async mdel(_keysHash, _keys, _options) {
-    _keysHash;
-    _keys;
+  async mdel(_keysHash: string[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
     // do nothing
   }
 
   async clear(_options) {
     // do nothing
-  }
-
-  get cacheBean() {
-    if (!this._cacheBase.beanFullName) return null;
-    if (!this._cacheBean) {
-      this._cacheBean = this.app.bean._newBean(this._cacheBase.beanFullName as any, this._cacheBase);
-    }
-    return this._cacheBean;
   }
 }

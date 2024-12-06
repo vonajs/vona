@@ -7,8 +7,8 @@ import { IModuleConfigSummerCacheBase } from '../config/types.js';
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Service()
-export class ServiceLocalMem extends CacheBase {
-  _lruCache: any;
+export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<TScopeModule, KEY, DATA> {
+  _lruCache: LRUCache;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
     super({ cacheBase });
@@ -138,12 +138,12 @@ export class ServiceLocalMem extends CacheBase {
   }
 
   get memoryInstance() {
-    if (!this.ctx.app[SUMMERCACHEMEMORY]) {
-      this.ctx.app[SUMMERCACHEMEMORY] = {};
+    if (!this.app[SUMMERCACHEMEMORY]) {
+      this.app[SUMMERCACHEMEMORY] = {};
     }
-    if (!this.ctx.app[SUMMERCACHEMEMORY][this.ctx.subdomain]) {
-      this.ctx.app[SUMMERCACHEMEMORY][this.ctx.subdomain] = {};
+    if (!this.app[SUMMERCACHEMEMORY][this.ctx.subdomain]) {
+      this.app[SUMMERCACHEMEMORY][this.ctx.subdomain] = {};
     }
-    return this.ctx.app[SUMMERCACHEMEMORY][this.ctx.subdomain];
+    return this.app[SUMMERCACHEMEMORY][this.ctx.subdomain];
   }
 }

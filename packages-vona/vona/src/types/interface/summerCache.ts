@@ -3,14 +3,18 @@ import { IMiddlewareBaseEnable } from './middleware.js';
 export interface ISummerCacheRecord {}
 
 export interface ISummerCacheGet<KEY, DATA> {
-  getNative(key: KEY, options: TSummerCacheActionOptions<KEY, DATA>, keyHash: string): Promise<DATA | null | undefined>;
+  getNative(
+    key: KEY,
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+    keyHash?: string,
+  ): Promise<DATA | null | undefined>;
 }
 
 export interface ISummerCacheMGet<KEY, DATA> {
   mgetNative(
-    keys: KEY,
-    options: TSummerCacheActionOptions<KEY, DATA>,
-    keysHash: string,
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+    keysHash?: string[],
   ): Promise<Array<DATA | null | undefined>>;
 }
 
@@ -34,10 +38,14 @@ export type TSummerCacheActionOptions<KEY, DATA> = {
   enable?: boolean;
   mode?: TSummerCacheMode;
   ignoreNull?: boolean;
-  get?: (key: KEY, options: TSummerCacheActionOptions<KEY, DATA>, keyHash: string) => Promise<DATA | null | undefined>;
+  get?: (
+    key: KEY,
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+    keyHash?: string,
+  ) => Promise<DATA | null | undefined>;
   mget?: (
-    keys: KEY,
-    options: TSummerCacheActionOptions<KEY, DATA>,
-    keysHash: string,
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+    keysHash?: string[],
   ) => Promise<Array<DATA | null | undefined>>;
 };

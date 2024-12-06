@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanBase, deepExtend, IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from 'vona';
+import { BeanBase, IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from 'vona';
 import { ServiceLocalMem } from '../service/localMem_.js';
 import { ServiceLocalRedis } from '../service/localRedis_.js';
 import { ServiceLocalFetch } from '../service/localFetch_.js';
@@ -12,21 +12,9 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   _localRedis: ServiceLocalRedis;
   _localFetch: ServiceLocalFetch;
 
-  protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
-    if (cacheName) {
-      // dynamic
-      this._cacheName = cacheName;
-      this._cacheOpitons = cacheOptions!;
-    } else {
-      // summer cache
-      this._cacheName = this.beanFullName;
-      this._cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions);
-    }
-    // preset
-    if (this._cacheOpitons.preset) {
-      const configPreset = this.configModule.summer.preset[this._cacheOpitons.preset];
-      this._cacheOpitons = deepExtend({}, configPreset, this._cacheOpitons, { preset: undefined });
-    }
+  protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
+    this._cacheName = cacheName;
+    this._cacheOpitons = cacheOptions;
   }
 
   get scopeSummer() {
@@ -65,6 +53,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
         `${__ThisModule__}.service.localFetch` as any,
         this._cacheName,
         this._cacheOpitons,
+        this,
       );
     }
     return this._localFetch;
