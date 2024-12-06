@@ -21,23 +21,13 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
       _cacheOpitons = cacheOptions ?? (this.beanOptions.options as IDecoratorSummerCacheOptions);
     }
     // preset
-    let configPreset;
     let preset = _cacheOpitons.preset;
     if (!preset && !_cacheOpitons.mode) preset = this.configModule.summer.presetDefault;
     if (preset) {
-      configPreset = this.configModule.summer.preset[preset];
+      const configPreset = this.configModule.summer.preset[preset];
+      // extend
+      _cacheOpitons = deepExtend({}, configPreset, _cacheOpitons, { preset: undefined });
     }
-    // extend
-    _cacheOpitons = deepExtend(
-      {},
-      {
-        enable: this.scopeSummer.config.summer.enable,
-        meta: this.scopeSummer.config.summer.meta,
-      },
-      configPreset,
-      _cacheOpitons,
-      { preset: undefined },
-    );
     // super
     super.__init__(_cacheName, _cacheOpitons);
   }

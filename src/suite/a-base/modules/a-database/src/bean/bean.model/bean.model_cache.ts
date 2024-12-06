@@ -10,17 +10,20 @@ import {
 } from '../../types/index.js';
 import { getTargetColumnName } from '../../common/utils.js';
 
+const SymbolCacheOptions = Symbol('SymbolCacheOptions');
+const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
+
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
-  private _cacheOptions: IDecoratorSummerCacheOptions | false;
+  private [SymbolCacheOptions]: IDecoratorSummerCacheOptions | false;
 
   private get __cacheName() {
     return this.beanFullName;
   }
 
   private get __cacheOptions() {
-    if (this._cacheOptions === undefined) {
+    if (this[SymbolCacheOptions] === undefined) {
       if (this.options.cacheOptions === false) {
-        this._cacheOptions = false;
+        this[SymbolCacheOptions] = false;
       } else {
         // preset
         let configPreset;
@@ -30,7 +33,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
           configPreset = this.scopeDatabase.config.summer.preset[preset];
         }
         // extend
-        this._cacheOptions = deepExtend(
+        this[SymbolCacheOptions] = deepExtend(
           {},
           {
             enable: this.scopeDatabase.config.summer.enable,
@@ -42,7 +45,14 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         );
       }
     }
-    return this._cacheOptions;
+    return this[SymbolCacheOptions];
+  }
+
+  private get __cacheEnabled() {
+    if (this[SymbolCacheEnabled] === undefined) {
+      this[SymbolCacheEnabled] = this.__cacheEnabledInner();
+    }
+    return this[SymbolCacheEnabled];
   }
 
   private get __cacheKeyAux() {
@@ -54,7 +64,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   }
 
   async clearCache() {
-    if (!this.__cacheExists()) return;
+    if (!this.__cacheEnabled) return;
     await this.__cacheInstance.clear();
   }
 
@@ -81,7 +91,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheExists()) {
+    if (!this.__cacheEnabled) {
       return (await super.mget(table, ids, options)) as TResult2[];
     }
     // cache
@@ -123,7 +133,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheExists()) {
+    if (!this.__cacheEnabled) {
       return await super.select(table, params, options);
     }
     // 1: select id
@@ -167,7 +177,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheExists()) {
+    if (!this.__cacheEnabled) {
       return await super.get(table, where, options);
     }
     if (where.id && typeof where.id === 'object') {
@@ -205,7 +215,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheExists()) {
+    if (!this.__cacheEnabled) {
       return await super.update(table, data, options);
     }
     // check where and get id
@@ -256,7 +266,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     table = table || this.table;
     if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // check if cache
-    if (!this.__cacheExists()) {
+    if (!this.__cacheEnabled) {
       return await super.delete(table, where, options);
     }
     // check where and get id
@@ -389,7 +399,19 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     return this.app.bean.summer.cache(this.__cacheName, this.__cacheOptions);
   }
 
-  private __cacheExists() {
-    return this.__cacheOptions !== false;
+  private __cacheEnabledInner() {
+    if (this.__cacheOptions === false) return false;
+    // enable
+    const enable =
+      this.__cacheOptions?.enable ?? this.scopeDatabase.config.summer.enable ?? this.$scope.summer.config.summer.enable;
+    if (enable === false) return false;
+    // meta
+    const meta =
+      this.__cacheOptions.meta ?? this.scopeDatabase.config.summer.meta ?? this.$scope.summer.config.summer.meta;
+    if (!this.app.meta.util.checkMiddlewareOptionsMeta(meta)) {
+      return false;
+    }
+    // default
+    return true;
   }
 }
