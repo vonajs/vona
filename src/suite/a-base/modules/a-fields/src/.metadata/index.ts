@@ -1,11 +1,7 @@
 /** beans: begin */
 export * from '../bean/bean.fields.js';
-export * from '../bean/summer.cache.fieldsRightOfAtomClass.js';
-export * from '../bean/summer.cache.fieldsRightOfUser.js';
 export * from '../bean/version.manager.js';
 import { BeanFields } from '../bean/bean.fields.js';
-import { SummerCacheFieldsRightOfAtomClass } from '../bean/summer.cache.fieldsRightOfAtomClass.js';
-import { SummerCacheFieldsRightOfUser } from '../bean/summer.cache.fieldsRightOfUser.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -14,12 +10,30 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'a-fields.summer.cache.fieldsRightOfAtomClass': SummerCacheFieldsRightOfAtomClass;
-    'a-fields.summer.cache.fieldsRightOfUser': SummerCacheFieldsRightOfUser;
     'a-fields.version.manager': VersionManager;
   }
 }
 /** beans: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.fieldsRightOfAtomClass.js';
+export * from '../bean/summerCache.fieldsRightOfUser.js';
+
+import { IDecoratorSummerCacheOptions } from 'vona';
+declare module 'vona' {
+  export interface ISummerCacheRecord {
+    'a-fields:fieldsRightOfAtomClass': IDecoratorSummerCacheOptions;
+    'a-fields:fieldsRightOfUser': IDecoratorSummerCacheOptions;
+  }
+}
+/** summerCache: end */
+/** summerCaches: begin */
+import { SummerCacheFieldsRightOfAtomClass } from '../bean/summerCache.fieldsRightOfAtomClass.js';
+import { SummerCacheFieldsRightOfUser } from '../bean/summerCache.fieldsRightOfUser.js';
+export interface IModuleSummerCache {
+  fieldsRightOfAtomClass: SummerCacheFieldsRightOfAtomClass;
+  fieldsRightOfUser: SummerCacheFieldsRightOfUser;
+}
+/** summerCaches: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -39,7 +53,16 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAFields extends BeanScopeBase {}
 
 export interface ScopeModuleAFields
-  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    never,
+    never,
+    IModuleSummerCache
+  > {}
 
 import 'vona';
 declare module 'vona' {
