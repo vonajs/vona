@@ -7,7 +7,7 @@ import { IModuleConfigSummerCacheBase } from '../config/types.js';
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Service()
-export class ServiceMem extends CacheBase {
+export class ServiceLocalMem extends CacheBase {
   _lruCache: any;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {

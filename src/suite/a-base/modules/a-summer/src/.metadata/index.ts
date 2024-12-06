@@ -27,24 +27,14 @@ declare module 'vona' {
 }
 /** beans: end */
 /** services: begin */
-export * from '../service/fetch.js';
-export * from '../service/mem.js';
-export * from '../service/redis.js';
-import { ServiceFetch } from '../service/fetch.js';
-import { ServiceMem } from '../service/mem.js';
-import { ServiceRedis } from '../service/redis.js';
-export interface IModuleService {
-  fetch: ServiceFetch;
-  mem: ServiceMem;
-  redis: ServiceRedis;
-}
+export * from '../service/localFetch_.js';
+export * from '../service/localMem_.js';
+export * from '../service/localRedis_.js';
+
+export interface IModuleService {}
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-summer.service.fetch': ServiceFetch;
-    'a-summer.service.mem': ServiceMem;
-    'a-summer.service.redis': ServiceRedis;
-  }
+  export interface IBeanRecordGeneral {}
 }
 /** services: end */
 /** config: begin */

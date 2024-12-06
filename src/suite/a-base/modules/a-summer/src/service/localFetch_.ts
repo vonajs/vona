@@ -3,7 +3,7 @@ import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona';
 
 @Service()
-export class ServiceFetch extends CacheBase {
+export class ServiceLocalFetch extends CacheBase {
   _cacheBean: any;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {

@@ -3,7 +3,7 @@ import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona';
 
 @Service()
-export class ServiceRedis extends CacheBase {
+export class ServiceLocalRedis extends CacheBase {
   _redisSummer: any;
 
   constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
