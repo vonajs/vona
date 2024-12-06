@@ -8,9 +8,9 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   _cacheName: string;
   _cacheOpitons: IDecoratorSummerCacheOptions;
 
-  _localMem: ServiceLocalMem;
-  _localRedis: ServiceLocalRedis;
-  _localFetch: ServiceLocalFetch;
+  _localMem: ServiceLocalMem<TScopeModule, KEY, DATA>;
+  _localRedis: ServiceLocalRedis<TScopeModule, KEY, DATA>;
+  _localFetch: ServiceLocalFetch<TScopeModule, KEY, DATA>;
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
     this._cacheName = cacheName;
@@ -57,6 +57,14 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
       );
     }
     return this._localFetch;
+  }
+
+  async get(
+    _keyHash: string,
+    _key: KEY,
+    _options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<DATA | null | undefined> {
+    throw new Error('Method not implemented.');
   }
 
   __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {

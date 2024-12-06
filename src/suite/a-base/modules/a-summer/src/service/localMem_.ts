@@ -2,18 +2,12 @@ import { __ThisModule__ } from '../.metadata/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona';
-import { IModuleConfigSummerCacheBase } from '../config/types.js';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Service()
 export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<TScopeModule, KEY, DATA> {
-  _lruCache: LRUCache;
-
-  constructor({ cacheBase }: { cacheBase: IModuleConfigSummerCacheBase }) {
-    super({ cacheBase });
-    this._lruCache = null;
-  }
+  private _lruCache: LRUCache<string, any>;
 
   async get(keyHash, key, options) {
     let value = this.lruCache.get(keyHash);
@@ -119,7 +113,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any> exte
     this.lruCache.clear();
   }
 
-  __getLayered(options) {
+  __getLayered(options): CacheBase<TScopeModule, KEY, DATA> {
     const mode = this.__getOptionsMode(options);
     if (mode === 'all') {
       return this.localRedis;
