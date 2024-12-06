@@ -23,7 +23,7 @@ export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> 
     // preset
     let configPreset;
     let preset = _cacheOpitons.preset;
-    if (!preset && !_cacheOpitons.mode) preset = 'all';
+    if (!preset && !_cacheOpitons.mode) preset = this.configModule.summer.presetDefault;
     if (preset) {
       configPreset = this.configModule.summer.preset[preset];
     }

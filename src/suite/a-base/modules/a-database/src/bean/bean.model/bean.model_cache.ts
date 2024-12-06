@@ -25,7 +25,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
         // preset
         let configPreset;
         let preset = this.options.cacheOptions?.preset;
-        if (!preset && !this.options.cacheOptions?.mode) preset = 'redis';
+        if (!preset && !this.options.cacheOptions?.mode) preset = this.scopeDatabase.config.summer.presetDefault;
         if (preset) {
           configPreset = this.scopeDatabase.config.summer.preset[preset];
         }

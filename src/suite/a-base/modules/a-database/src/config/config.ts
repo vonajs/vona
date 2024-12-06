@@ -1,4 +1,4 @@
-import { IMiddlewareOptionsMeta, VonaApplication } from 'vona';
+import { IMiddlewareOptionsMeta, TSummerCachePreset, VonaApplication } from 'vona';
 import { configAll, configAllWithIgnoreNull, configRedis, configRedisWithIgnoreNull } from 'vona-module-a-summer';
 
 export const config = (_app: VonaApplication) => {
@@ -6,6 +6,7 @@ export const config = (_app: VonaApplication) => {
     summer: {
       enable: true,
       meta: {} as IMiddlewareOptionsMeta,
+      presetDefault: 'redis' as TSummerCachePreset,
       preset: {
         redis: configRedis,
         redisWithIgnoreNull: configRedisWithIgnoreNull,
