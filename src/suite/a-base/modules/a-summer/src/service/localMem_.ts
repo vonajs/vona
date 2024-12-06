@@ -11,8 +11,6 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
   extends CacheBase<TScopeModule, KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
-  private _lruCache: LRUCache<string, any>;
-
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     let value = this.lruCache.get(keyHash);
     if (this.__checkValueEmpty(value, options)) {
@@ -59,13 +57,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
     this.ctx.meta.util.broadcastEmit({
       module: __ThisModule__,
       broadcastName: 'memDel',
-      data: {
-        cacheName: this._cacheName,
-        cacheOptions: this._cacheOpitons,
-        keyHash,
-        key,
-        options,
-      },
+      data: { cacheName: this._cacheName, cacheOptions: this._cacheOpitons, keyHash, key, options },
     });
     // del layered
     const layered = this.__getLayered(options);
@@ -79,7 +71,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
     this.ctx.meta.util.broadcastEmit({
       module: __ThisModule__,
       broadcastName: 'memMultiDel',
-      data: { fullKey: this._cacheBase.fullKey, keysHash, keys, options },
+      data: { cacheName: this._cacheName, cacheOptions: this._cacheOpitons, keysHash, keys, options },
     });
     // del layered
     const layered = this.__getLayered(options);
@@ -93,7 +85,7 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
     this.ctx.meta.util.broadcastEmit({
       module: __ThisModule__,
       broadcastName: 'memClear',
-      data: { fullKey: this._cacheBase.fullKey, options },
+      data: { cacheName: this._cacheName, cacheOptions: this._cacheOpitons, options },
     });
     // clear layered
     const layered = this.__getLayered(options);
@@ -114,7 +106,6 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
   }
 
   __mdelRaw(keysHash: string[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
-    _keys;
     keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
   }
 
@@ -130,14 +121,11 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
     return this.localFetch;
   }
 
-  get lruCache() {
-    if (!this._lruCache) {
-      this._lruCache = this.memoryInstance[this._cacheBase.fullKey];
-      if (!this._lruCache) {
-        this._lruCache = this.memoryInstance[this._cacheBase.fullKey] = new LRUCache(this._cacheBase.mem as any);
-      }
+  get lruCache(): LRUCache<string, any> {
+    if (!this.memoryInstance[this._cacheName]) {
+      this.memoryInstance[this._cacheName] = new LRUCache<string, any>(this._cacheOpitons.mem as any);
     }
-    return this._lruCache;
+    return this.memoryInstance[this._cacheName];
   }
 
   get memoryInstance() {

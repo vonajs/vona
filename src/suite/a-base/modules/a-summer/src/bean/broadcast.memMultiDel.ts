@@ -4,9 +4,9 @@ import { Bean, BeanBase } from 'vona';
 export class BroadcastMemMultiDel extends BeanBase {
   async execute(context) {
     const sameAsCaller = context.sameAsCaller;
-    const { fullKey, keysHash, keys, options } = context.data;
+    const { cacheName, cacheOptions, keysHash, keys, options } = context.data;
     if (!sameAsCaller) {
-      const cache = this.app.bean.summer.getCache({ fullKey });
+      const cache = this.app.bean.summer.cache(cacheName, cacheOptions);
       cache.localMem.__mdelRaw(keysHash, keys, options);
     }
   }

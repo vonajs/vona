@@ -4,9 +4,9 @@ import { Bean, BeanBase } from 'vona';
 export class BroadcastMemClear extends BeanBase {
   async execute(context) {
     const sameAsCaller = context.sameAsCaller;
-    const { fullKey, options } = context.data;
+    const { cacheName, cacheOptions, options } = context.data;
     if (!sameAsCaller) {
-      const cache = this.app.bean.summer.getCache({ fullKey });
+      const cache = this.app.bean.summer.cache(cacheName, cacheOptions);
       cache.localMem.__clearRaw(options);
     }
   }
