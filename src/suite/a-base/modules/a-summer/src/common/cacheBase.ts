@@ -84,7 +84,7 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
     return options?.mode ?? this._cacheOpitons.mode ?? 'all';
   }
 
-  __checkValueEmpty(value: DATA | null | undefined, options: TSummerCacheActionOptions<KEY, DATA>) {
+  __checkValueEmpty(value: DATA | null | undefined, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const ignoreNull = options?.ignoreNull ?? this._cacheOpitons.ignoreNull ?? false;
     if (ignoreNull) {
       return value === undefined || value === null;

@@ -59,7 +59,13 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
     this.ctx.meta.util.broadcastEmit({
       module: __ThisModule__,
       broadcastName: 'memDel',
-      data: { fullKey: this._cacheBase.fullKey, keyHash, key, options },
+      data: {
+        cacheName: this._cacheName,
+        cacheOptions: this._cacheOpitons,
+        keyHash,
+        key,
+        options,
+      },
     });
     // del layered
     const layered = this.__getLayered(options);
@@ -104,7 +110,6 @@ export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
   }
 
   __delRaw(keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
-    _key;
     this.lruCache.delete(keyHash);
   }
 
