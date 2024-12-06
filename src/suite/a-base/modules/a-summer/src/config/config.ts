@@ -14,16 +14,16 @@ const broadcasts = {
   } as IModuleConfigBroadcast,
 };
 
-const configRedis = {
+export const configRedis = {
   mode: 'redis', // only redis
   redis: {
     ttl: 20 * 60 * 1000, // 20 minutes
   },
 } as IModuleConfigSummerCache;
 
-const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
+export const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
 
-const configAll = {
+export const configAll = {
   mode: 'all',
   mem: {
     max: 500,
@@ -33,7 +33,7 @@ const configAll = {
   },
 } as IModuleConfigSummerCache;
 
-const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
+export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
 
 export const config = (_app: VonaApplication) => {
   return {
@@ -41,26 +41,11 @@ export const config = (_app: VonaApplication) => {
     summer: {
       enable: true,
       meta: {} as IMiddlewareOptionsMeta,
-      group: {
-        default: { dynamic: false },
-        model: { dynamic: true, configDefault: 'redis' },
-      },
       preset: {
         redis: configRedis,
         redisWithIgnoreNull: configRedisWithIgnoreNull,
         all: configAll,
         allWithIgnoreNull: configAllWithIgnoreNull,
-      },
-      config: {
-        group: {
-          default: {},
-          model: {
-            redis: configRedis,
-            redisWithIgnoreNull: configRedisWithIgnoreNull,
-            all: configAll,
-            allWithIgnoreNull: configAllWithIgnoreNull,
-          },
-        },
       },
     },
   };

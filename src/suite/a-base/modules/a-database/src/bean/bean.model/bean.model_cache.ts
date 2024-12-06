@@ -6,11 +6,12 @@ import { getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private _cacheOptions: IDecoratorSummerCacheOptions;
+
   private get __cacheName() {
     return this.beanFullName;
   }
   private get __cacheOptions() {
-    if (this._cacheOptions) {
+    if (!this._cacheOptions) {
     }
     return this._cacheOptions;
   }

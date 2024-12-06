@@ -9,8 +9,8 @@ export class BeanModelMeta extends BeanBase {
     return cast<BeanModel>(this);
   }
 
-  public get scopeModuleADatabase() {
-    return this.bean.scope(__ThisModule__);
+  public get scopeDatabase() {
+    return this.$scope.database;
   }
 
   public get modelViewRecord() {

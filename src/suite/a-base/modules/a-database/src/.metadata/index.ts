@@ -59,6 +59,10 @@ declare module 'vona' {
   }
 }
 /** services: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -85,7 +89,7 @@ export class ScopeModuleADatabase extends BeanScopeBase {}
 
 export interface ScopeModuleADatabase
   extends TypeModuleResource<
-    never,
+    typeof config,
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
@@ -103,6 +107,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     database: ScopeModuleADatabase;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-database': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {

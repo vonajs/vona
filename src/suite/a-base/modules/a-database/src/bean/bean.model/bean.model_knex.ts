@@ -35,7 +35,7 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // builder
     const builder = this.builder<TRecord2, TResult2>(table);
     // where

@@ -20,7 +20,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta {
     }
     // table
     table = table || this.table;
-    if (!table) return this.scopeModuleADatabase.error.ShouldSpecifyTable.throw();
+    if (!table) return this.scopeDatabase.error.ShouldSpecifyTable.throw();
     // item
     if (!item) return {} as TResult2;
     // columns
