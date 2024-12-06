@@ -1,3 +1,5 @@
+import { IDecoratorSummerCacheOptions } from './summerCache.js';
+
 export interface IModelRecord {}
 
 export interface IDecoratorModelOptions<T extends object = {}> {
@@ -6,10 +8,7 @@ export interface IDecoratorModelOptions<T extends object = {}> {
   disableDeleted?: boolean;
   disableInstance?: boolean;
   disableUpdateTime?: boolean;
-  cache?: {
-    module?: string;
-    name: string;
-  };
+  cacheOptions?: IDecoratorSummerCacheOptions;
   cacheKeyAux?: string;
   cacheNotKey?: boolean;
 }

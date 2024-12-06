@@ -1,15 +1,18 @@
-import { cast } from 'vona';
+import { cast, IDecoratorSummerCacheOptions } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
 import { BeanModel } from '../bean.model.js';
 import { IModelGetOptions, IModelMethodOptions, IModelSelectParams, IModelUpdateOptions } from '../../types/index.js';
 import { getTargetColumnName } from '../../common/utils.js';
 
 export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
+  private _cacheOptions: IDecoratorSummerCacheOptions;
   private get __cacheName() {
-    const cache = this.options.cache || { module: '', name: '' };
-    const moduleName = cache.module || this.moduleBelong;
-    const cacheName = cache.name || this.beanOptions.name;
-    return { module: moduleName, name: `model:${cacheName}` };
+    return this.beanFullName;
+  }
+  private get __cacheOptions() {
+    if (this._cacheOptions) {
+    }
+    return this._cacheOptions;
   }
 
   private get __cacheKeyAux() {
