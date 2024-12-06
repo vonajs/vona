@@ -3,7 +3,6 @@
   "version": "5.0.0",
   "title": "a-summer",
   "vonaModule": {
-    "fileVersion": 0,
     "dependencies": {
       "a-instance": "5.0.0"
     }
