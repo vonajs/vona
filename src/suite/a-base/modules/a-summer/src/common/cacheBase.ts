@@ -92,17 +92,11 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
   }
 
   __getOptionsMode(options?: TSummerCacheActionOptions<KEY, DATA>) {
-    const mode = options && options.mode;
-    return mode || this._cacheBase.mode || 'all';
+    return options?.mode ?? this._cacheOpitons.mode ?? 'all';
   }
 
   __checkValueEmpty(value: DATA | null | undefined, options: TSummerCacheActionOptions<KEY, DATA>) {
-    let ignoreNull;
-    if (options?.ignoreNull !== undefined) {
-      ignoreNull = options?.ignoreNull;
-    } else {
-      ignoreNull = this._cacheBase.ignoreNull;
-    }
+    const ignoreNull = options?.ignoreNull ?? this._cacheOpitons.ignoreNull ?? false;
     if (ignoreNull) {
       return value === undefined || value === null;
     }
