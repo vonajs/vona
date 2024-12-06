@@ -1,6 +1,7 @@
 import { BeanBase, Controller, Post } from 'vona';
 import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
+import { SummerCacheTest } from '../bean/summerCache.test.js';
 
 @Controller({ path: 'summer', meta: { mode: 'unittest' } })
 export class ControllerSummer extends BeanBase<ScopeModule> {
@@ -13,12 +14,12 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     const key3 = { id: 3 };
 
     // getCache
-    const cache = this.app.bean.summer.getCache({ name });
+    const cache = this.scope.summerCache.test;
     assert.equal(!!cache, true);
-    let cacheOtherModule = this.app.bean.summer.module(__ThisModule__).getCache({ name });
-    assert.equal(!!cacheOtherModule, true);
-    cacheOtherModule = this.app.bean.summer.getCache({ module: __ThisModule__, name });
-    assert.equal(!!cacheOtherModule, true);
+    let cacheOtherModule = this.$scope.vonaTest.summerCache.test;
+    assert.equal(cache, cacheOtherModule);
+    cacheOtherModule = this.bean.summer.cache(`${__ThisModule__}.summerCache.${name}`) as SummerCacheTest;
+    assert.equal(cache, cacheOtherModule);
 
     let value;
     let values;

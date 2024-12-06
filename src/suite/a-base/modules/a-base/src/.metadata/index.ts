@@ -30,7 +30,6 @@ export * from '../bean/stats.draftsFlowing.js';
 export * from '../bean/stats.labels.js';
 export * from '../bean/stats.stars.js';
 export * from '../bean/stats.starsLabels.js';
-export * from '../bean/summer.cache.atomClassInner.js';
 export * from '../bean/summer.cache.roleParentsOfUser.js';
 export * from '../bean/summer.cache.roleScopesMineOfUser.js';
 export * from '../bean/summer.cache.roleScopesOfRole.js';
@@ -68,7 +67,6 @@ import { StatsDraftsFlowing } from '../bean/stats.draftsFlowing.js';
 import { StatsLabels } from '../bean/stats.labels.js';
 import { StatsStars } from '../bean/stats.stars.js';
 import { StatsStarsLabels } from '../bean/stats.starsLabels.js';
-import { SummerCacheAtomClassInner } from '../bean/summer.cache.atomClassInner.js';
 import { SummerCacheRoleParentsOfUser } from '../bean/summer.cache.roleParentsOfUser.js';
 import { SummerCacheRoleScopesMineOfUser } from '../bean/summer.cache.roleScopesMineOfUser.js';
 import { SummerCacheRoleScopesOfRole } from '../bean/summer.cache.roleScopesOfRole.js';
@@ -112,7 +110,6 @@ declare module 'vona' {
     'a-base.stats.labels': StatsLabels;
     'a-base.stats.stars': StatsStars;
     'a-base.stats.starsLabels': StatsStarsLabels;
-    'a-base.summer.cache.atomClassInner': SummerCacheAtomClassInner;
     'a-base.summer.cache.roleParentsOfUser': SummerCacheRoleParentsOfUser;
     'a-base.summer.cache.roleScopesMineOfUser': SummerCacheRoleScopesMineOfUser;
     'a-base.summer.cache.roleScopesOfRole': SummerCacheRoleScopesOfRole;
@@ -298,21 +295,7 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** atoms: begin */
-export * from '../atom/resource.js';
-export * from '../atom/role.js';
-export * from '../atom/roleFieldsRight.js';
-export * from '../atom/roleFieldsRightSpread.js';
-export * from '../atom/roleResourceRight.js';
-export * from '../atom/roleResourceRightSpread.js';
-export * from '../atom/roleRight.js';
-export * from '../atom/roleRightSpread.js';
-export * from '../atom/user.js';
-export * from '../atom/userAtomRight.js';
-export * from '../atom/userFieldsRight.js';
-export * from '../atom/userResourceRight.js';
-/** atoms: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/atom.js';
 export * from '../controller/atomAction.js';
 export * from '../controller/atomClass.js';
@@ -327,7 +310,61 @@ export * from '../controller/resource.js';
 export * from '../controller/tag.js';
 export * from '../controller/user.js';
 export * from '../controller/util.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-base:atom': IDecoratorControllerOptions;
+    'a-base:atomAction': IDecoratorControllerOptions;
+    'a-base:atomClass': IDecoratorControllerOptions;
+    'a-base:atomState': IDecoratorControllerOptions;
+    'a-base:auth': IDecoratorControllerOptions;
+    'a-base:base': IDecoratorControllerOptions;
+    'a-base:category': IDecoratorControllerOptions;
+    'a-base:comment': IDecoratorControllerOptions;
+    'a-base:jwt': IDecoratorControllerOptions;
+    'a-base:layoutConfig': IDecoratorControllerOptions;
+    'a-base:resource': IDecoratorControllerOptions;
+    'a-base:tag': IDecoratorControllerOptions;
+    'a-base:user': IDecoratorControllerOptions;
+    'a-base:util': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.atomClassInner.js';
+export * from '../bean/summerCache.roleParentsOfUser.js';
+
+import { IDecoratorSummerCacheOptions } from 'vona';
+declare module 'vona' {
+  export interface ISummerCacheRecord {
+    'a-base:atomClassInner': IDecoratorSummerCacheOptions;
+    'a-base:roleParentsOfUser': IDecoratorSummerCacheOptions;
+  }
+}
+/** summerCache: end */
+/** atoms: begin */
+export * from '../atom/resource.js';
+export * from '../atom/role.js';
+export * from '../atom/roleFieldsRight.js';
+export * from '../atom/roleFieldsRightSpread.js';
+export * from '../atom/roleResourceRight.js';
+export * from '../atom/roleResourceRightSpread.js';
+export * from '../atom/roleRight.js';
+export * from '../atom/roleRightSpread.js';
+export * from '../atom/user.js';
+export * from '../atom/userAtomRight.js';
+export * from '../atom/userFieldsRight.js';
+export * from '../atom/userResourceRight.js';
+/** atoms: end */
+/** summerCaches: begin */
+import { SummerCacheAtomClassInner } from '../bean/summerCache.atomClassInner.js';
+import { SummerCacheRoleParentsOfUser } from '../bean/summerCache.roleParentsOfUser.js';
+export interface IModuleSummerCache {
+  atomClassInner: SummerCacheAtomClassInner;
+  roleParentsOfUser: SummerCacheRoleParentsOfUser;
+}
+/** summerCaches: end */
 /** entities: begin */
 import { EntityAtom } from '../entity/atom.js';
 import { EntityAtomAction } from '../entity/atomAction.js';
@@ -559,7 +596,8 @@ export interface ScopeModuleABase
     typeof constants,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    IModuleSummerCache
   > {}
 
 import 'vona';

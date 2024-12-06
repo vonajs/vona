@@ -13,16 +13,13 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
     // atomClass
     atomClass = await this.app.bean.atomClass.get(atomClass);
     // 1. fieldsRightOfAtomClass
-    const exists = await this.app.bean.summer.get(
-      { module: __ThisModule__, name: 'fieldsRightOfAtomClass' },
-      { atomClassId: atomClass.id },
-    );
+    const exists = await this.scope.summerCache.fieldsRightOfAtomClass.get({ atomClassId: atomClass.id });
     if (!exists) return null;
     // 2. fieldsRightOfUser
-    const fieldsRight = await this.app.bean.summer.get(
-      { module: __ThisModule__, name: 'fieldsRightOfUser' },
-      { atomClassId: atomClass.id, userId: user.id },
-    );
+    const fieldsRight = await this.scope.summerCache.fieldsRightOfUser.get({
+      atomClassId: atomClass.id,
+      userId: user.id,
+    });
     return fieldsRight;
   }
 
