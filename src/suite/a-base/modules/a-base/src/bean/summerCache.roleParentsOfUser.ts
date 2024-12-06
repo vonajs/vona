@@ -5,7 +5,9 @@ import { ScopeModule } from '../.metadata/this.js';
 export type TSummerCacheRoleParentsOfUserKey = any;
 export type TSummerCacheRoleParentsOfUserData = any;
 
-@SummerCache()
+@SummerCache({
+  preset: 'all',
+})
 export class SummerCacheRoleParentsOfUser
   extends BeanSummerCacheBase<ScopeModule, TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>
   implements ISummerCacheGet<TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>

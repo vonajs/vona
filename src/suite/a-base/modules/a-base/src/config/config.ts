@@ -87,10 +87,6 @@ const queues = {
 const summer = {
   group: {
     default: {
-      atomClassInner: {
-        bean: 'atomClassInner',
-        config: 'all',
-      },
       roleScopesOfUser: {
         bean: 'roleScopesOfUser',
         config: 'all',
@@ -105,10 +101,6 @@ const summer = {
       },
       roleWhosOfAtomClassAction: {
         bean: 'roleWhosOfAtomClassAction',
-        config: 'all',
-      },
-      roleParentsOfUser: {
-        bean: 'roleParentsOfUser',
         config: 'all',
       },
     },

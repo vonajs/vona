@@ -5,7 +5,9 @@ import { ScopeModule } from '../.metadata/this.js';
 export type TSummerCacheAtomClassInnerKey = any;
 export type TSummerCacheAtomClassInnerData = any;
 
-@SummerCache()
+@SummerCache({
+  preset: 'all',
+})
 export class SummerCacheAtomClassInner
   extends BeanSummerCacheBase<ScopeModule, TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>
   implements ISummerCacheGet<TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>

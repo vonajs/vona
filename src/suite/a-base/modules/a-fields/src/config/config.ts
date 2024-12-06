@@ -4,10 +4,6 @@ import { IModuleConfigSummer } from 'vona-module-a-summer';
 const summer = {
   group: {
     default: {
-      fieldsRightOfAtomClass: {
-        bean: 'fieldsRightOfAtomClass',
-        config: 'all',
-      },
       fieldsRightOfUser: {
         bean: 'fieldsRightOfUser',
         config: 'all',

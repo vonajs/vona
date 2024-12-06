@@ -5,7 +5,9 @@ import { ScopeModule } from '../.metadata/this.js';
 export type TSummerCacheFieldsRightOfAtomClassKey = any;
 export type TSummerCacheFieldsRightOfAtomClassData = any;
 
-@SummerCache()
+@SummerCache({
+  preset: 'all',
+})
 export class SummerCacheFieldsRightOfAtomClass
   extends BeanSummerCacheBase<
     ScopeModule,
