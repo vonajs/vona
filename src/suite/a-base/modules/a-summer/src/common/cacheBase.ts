@@ -53,7 +53,6 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
         `${__ThisModule__}.service.localFetch` as any,
         this._cacheName,
         this._cacheOpitons,
-        this,
       );
     }
     return this._localFetch;
