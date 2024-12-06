@@ -273,6 +273,7 @@ export default function (appInfo: VonaAppInfo) {
       io: { keyPrefix: `io_${appInfo.name}:` },
       auth: { keyPrefix: `auth_${appInfo.name}:` },
       summer: { keyPrefix: `summer_${appInfo.name}:` },
+      model: { keyPrefix: `model_${appInfo.name}:` },
     },
   };
 
