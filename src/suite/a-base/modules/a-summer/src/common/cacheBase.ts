@@ -60,10 +60,11 @@ export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends Be
 
   protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
     // enable
-    const enable = options?.enable ?? this._cacheOpitons.enable;
+    const enable = options?.enable ?? this._cacheOpitons.enable ?? this.scopeSummer.config.summer.enable;
     if (enable === false) return false;
     // meta
-    if (!this.app.meta.util.checkMiddlewareOptionsMeta(this._cacheOpitons.meta)) {
+    const meta = this._cacheOpitons.meta ?? this.scopeSummer.config.summer.meta;
+    if (!this.app.meta.util.checkMiddlewareOptionsMeta(meta)) {
       return false;
     }
     // default
