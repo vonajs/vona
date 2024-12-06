@@ -1,5 +1,5 @@
 import { CacheBase } from '../common/cacheBase.js';
-import { IORedis, Service } from 'vona';
+import { IORedis, Service, TSummerCacheActionOptions } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 @Service()
@@ -9,23 +9,23 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
 {
   _redisSummer: IORedis.Redis;
 
-  async get(keyHash, key, options) {
+  async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey(keyHash);
-    let value = await this.redisSummer.get(redisKey);
-    value = value ? JSON.parse(value) : undefined;
+    const _value = await this.redisSummer.get(redisKey);
+    let value: DATA | null | undefined = _value ? JSON.parse(_value) : undefined;
     if (this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(keyHash, key, options);
-      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheBase.redis!.ttl);
+      await this.redisSummer.set(redisKey, JSON.stringify(value), 'PX', this._cacheOpitons.redis!.ttl);
     }
     return value;
   }
 
-  async mget(keysHash, keys, options) {
+  async mget(keysHash: string[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     // peek
     const redisKeys = keysHash.map(keyHash => this._getRedisKey(keyHash));
-    let values = await this.redisSummer.mget(redisKeys);
-    values = values.map(v => (v ? JSON.parse(v) : undefined));
+    const _values = await this.redisSummer.mget(redisKeys);
+    const values: Array<DATA | null | undefined> = _values.map(v => (v ? JSON.parse(v) : undefined));
     const redisKeysMissing: any[] = [];
     const keysHashMissing: any[] = [];
     const keysMissing: any[] = [];
@@ -47,7 +47,11 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
       const multi = this.redisSummer.multi();
       for (let i = 0; i < keysHashMissing.length; i++) {
         const valueMissing = valuesMissing[i];
-        multi.setex(redisKeysMissing[i], Math.trunc(this._cacheBase.redis!.ttl / 1000), JSON.stringify(valueMissing));
+        multi.setex(
+          redisKeysMissing[i],
+          Math.trunc(this._cacheOpitons.redis!.ttl / 1000),
+          JSON.stringify(valueMissing),
+        );
         values[indexesMissing[i]] = valueMissing;
       }
       await multi.exec();
@@ -56,26 +60,24 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
     return values;
   }
 
-  async del(keyHash, _key, _options) {
-    _key;
+  async del(keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey(keyHash);
     await this.redisSummer.del(redisKey);
   }
 
-  async mdel(keysHash, _keys, _options) {
-    _keys;
+  async mdel(keysHash: string[], _keys: KEY[], _options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKeys = keysHash.map(keyHash => this._getRedisKey(keyHash));
     await this.redisSummer.del(redisKeys);
   }
 
-  async clear(_options) {
+  async clear(_options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey('*');
     const keyPrefix = this.redisSummer.options.keyPrefix;
     const keyPattern = `${keyPrefix}${redisKey}`;
     const keys = await this.redisSummer.keys(keyPattern);
     const keysDel: any[] = [];
     for (const fullKey of keys) {
-      const key = keyPrefix ? fullKey.substr(keyPrefix.length) : fullKey;
+      const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
       keysDel.push(key);
     }
     if (keysDel.length > 0) {
@@ -83,11 +85,10 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
     }
   }
 
-  async peek(keyHash, _key, _options) {
-    _key;
+  async peek(keyHash: string, _key: KEY, _options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey(keyHash);
-    let value = await this.redisSummer.get(redisKey);
-    value = value ? JSON.parse(value) : undefined;
+    const _value = await this.redisSummer.get(redisKey);
+    const value: DATA | null | undefined = _value ? JSON.parse(_value) : undefined;
     // need not call layered.peek
     // if (this.__checkValueEmpty(value, options)) {
     //   const layered = this.__getLayered(options);
@@ -96,7 +97,7 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
     return value;
   }
 
-  __getLayered(_options?) {
+  __getLayered(_options?: TSummerCacheActionOptions<KEY, DATA>) {
     return this.localFetch;
   }
 
@@ -107,8 +108,8 @@ export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
     return this._redisSummer;
   }
 
-  _getRedisKey(key) {
+  _getRedisKey(keyHash: '*' | string) {
     const iid = this.ctx.instance ? this.ctx.instance.id : 0;
-    return `${iid}!${this._cacheBase.fullKey}!${key}`;
+    return `${iid}!${this._cacheName}!${keyHash}`;
   }
 }
