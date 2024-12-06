@@ -14,8 +14,8 @@ export class SummerCacheRoleScopesMineOfUser
 {
   async getNative(
     key: TSummerCacheRoleScopesMineOfUserKey,
-    _options: TSummerCacheActionOptions<TSummerCacheRoleScopesMineOfUserKey, TSummerCacheRoleScopesMineOfUserData>,
-    _keyHash: string,
+    _options?: TSummerCacheActionOptions<TSummerCacheRoleScopesMineOfUserKey, TSummerCacheRoleScopesMineOfUserData>,
+    _keyHash?: string,
   ): Promise<TSummerCacheRoleScopesMineOfUserData | null | undefined> {
     return await this.app.bean.atomRightAux.__getRoleScopesMineOfUserRaw(key);
   }

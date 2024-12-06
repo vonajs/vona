@@ -18,8 +18,8 @@ export class SummerCacheFieldsRightOfAtomClass
 {
   async getNative(
     key: TSummerCacheFieldsRightOfAtomClassKey,
-    _options: TSummerCacheActionOptions<TSummerCacheFieldsRightOfAtomClassKey, TSummerCacheFieldsRightOfAtomClassData>,
-    _keyHash: string,
+    _options?: TSummerCacheActionOptions<TSummerCacheFieldsRightOfAtomClassKey, TSummerCacheFieldsRightOfAtomClassData>,
+    _keyHash?: string,
   ): Promise<TSummerCacheFieldsRightOfAtomClassData | null | undefined> {
     return await this.app.bean.fields.__getFieldsRightOfAtomClassRaw(key);
   }

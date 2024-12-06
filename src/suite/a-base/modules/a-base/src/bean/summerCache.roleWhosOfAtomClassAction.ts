@@ -18,11 +18,11 @@ export class SummerCacheRoleWhosOfAtomClassAction
 {
   async getNative(
     key: TSummerCacheRoleWhosOfAtomClassActionKey,
-    _options: TSummerCacheActionOptions<
+    _options?: TSummerCacheActionOptions<
       TSummerCacheRoleWhosOfAtomClassActionKey,
       TSummerCacheRoleWhosOfAtomClassActionData
     >,
-    _keyHash: string,
+    _keyHash?: string,
   ): Promise<TSummerCacheRoleWhosOfAtomClassActionData | null | undefined> {
     return await this.app.bean.atomRightAux.__getRoleWhosOfAtomClassActionRaw(key);
   }

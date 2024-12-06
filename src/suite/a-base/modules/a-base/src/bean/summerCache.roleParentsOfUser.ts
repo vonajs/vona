@@ -14,8 +14,8 @@ export class SummerCacheRoleParentsOfUser
 {
   async getNative(
     key: TSummerCacheRoleParentsOfUserKey,
-    _options: TSummerCacheActionOptions<TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>,
-    _keyHash: string,
+    _options?: TSummerCacheActionOptions<TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>,
+    _keyHash?: string,
   ): Promise<TSummerCacheRoleParentsOfUserData | null | undefined> {
     return await this.app.bean.atomRightAux.__getRoleParentsOfUserRaw(key);
   }

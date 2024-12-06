@@ -14,8 +14,8 @@ export class SummerCacheFieldsRightOfUser
 {
   async getNative(
     key: TSummerCacheFieldsRightOfUserKey,
-    _options: TSummerCacheActionOptions<TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>,
-    _keyHash: string,
+    _options?: TSummerCacheActionOptions<TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>,
+    _keyHash?: string,
   ): Promise<TSummerCacheFieldsRightOfUserData | null | undefined> {
     return await this.app.bean.fields.__getFieldsRightOfUserRaw(key);
   }

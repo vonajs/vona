@@ -15,8 +15,8 @@ export class SummerCacheAtomClassInner
   // key: in/notin
   async getNative(
     key: TSummerCacheAtomClassInnerKey,
-    _options: TSummerCacheActionOptions<TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>,
-    _keyHash: string,
+    _options?: TSummerCacheActionOptions<TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>,
+    _keyHash?: string,
   ): Promise<TSummerCacheAtomClassInnerData | null | undefined> {
     const atomClasses = this.__getAtomClasses(key);
     return await this.app.bean.atomClass.model.mget(atomClasses);
