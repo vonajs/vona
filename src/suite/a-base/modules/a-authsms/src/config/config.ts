@@ -1,11 +1,3 @@
-// startups
-const startups = {
-  cacheSmsProviders: {
-    bean: 'cacheSmsProviders',
-    instance: true,
-  },
-};
-
 // broadcasts
 const broadcasts = {
   smsProviderChanged: {
@@ -27,7 +19,6 @@ import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    startups,
     broadcasts,
     // account
     account: {

@@ -1,22 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast, IModuleConfigStartup } from 'vona';
-
-const startups = {
-  workerAlive: {
-    bean: 'workerAlive',
-  } as IModuleConfigStartup,
-  databaseInit: {
-    bean: 'databaseInit',
-    debounce: true,
-  } as IModuleConfigStartup,
-  databaseName: {
-    bean: 'databaseName',
-  } as IModuleConfigStartup,
-  instanceInit: {
-    bean: 'instanceInit',
-    instance: true,
-    debounce: true,
-  } as IModuleConfigStartup,
-};
+import { VonaApplication, IModuleConfigBroadcast } from 'vona';
 
 const broadcasts = {
   columnsClear: {
@@ -27,7 +9,6 @@ const broadcasts = {
 
 export const config = (_app: VonaApplication) => {
   return {
-    startups,
     broadcasts,
     worker: {
       alive: {

@@ -1,18 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast, IModuleConfigStartup } from 'vona';
-
-// startups
-const startups = {
-  registerPassport: {
-    bean: 'registerPassport',
-  } as IModuleConfigStartup,
-  registerRouters: {
-    bean: 'registerRouters',
-  } as IModuleConfigStartup,
-  cacheAuthProviders: {
-    bean: 'cacheAuthProviders',
-    instance: true,
-  } as IModuleConfigStartup,
-};
+import { VonaApplication, IModuleConfigBroadcast } from 'vona';
 
 // broadcasts
 const broadcasts = {
@@ -23,7 +9,6 @@ const broadcasts = {
 
 export const config = (_app: VonaApplication) => {
   return {
-    startups,
     broadcasts,
     login: {
       providers: [

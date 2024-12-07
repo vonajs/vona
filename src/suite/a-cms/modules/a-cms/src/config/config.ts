@@ -6,15 +6,6 @@ const queues = {
   },
 };
 
-// startups
-const startups = {
-  registerAllWatchers: {
-    bean: 'registerAllWatchers',
-    instance: true,
-    debounce: true,
-  },
-};
-
 const cmsSite = {
   base: {
     title: 'my blog',
@@ -73,7 +64,6 @@ import { VonaApplication } from 'vona';
 export const config = (_app: VonaApplication) => {
   return {
     queues,
-    startups,
     // article
     article: {
       trim: {

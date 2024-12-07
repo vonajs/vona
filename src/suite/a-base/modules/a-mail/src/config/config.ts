@@ -1,11 +1,3 @@
-// startups
-const startups = {
-  cacheMailScenes: {
-    bean: 'cacheMailScenes',
-    instance: true,
-  },
-};
-
 // broadcasts
 const broadcasts = {
   mailSceneChanged: {
@@ -35,7 +27,6 @@ import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    startups,
     broadcasts,
     // default
     scene: {
