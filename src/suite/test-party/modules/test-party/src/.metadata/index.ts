@@ -185,7 +185,6 @@ declare module 'vona' {
     'test-party:testFeatSettings': IDecoratorControllerOptions;
     'test-party:testFeatSocketio': IDecoratorControllerOptions;
     'test-party:testFeatStats': IDecoratorControllerOptions;
-    'test-party:testFeatStatus': IDecoratorControllerOptions;
     'test-party:testFeatTag': IDecoratorControllerOptions;
     'test-party:testFeatValidation': IDecoratorControllerOptions;
     'test-party:testItemOnlyAll': IDecoratorControllerOptions;

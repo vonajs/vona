@@ -3,13 +3,11 @@ export * from '../bean/bean.atomCmsBase.js';
 export * from '../bean/bean.cms.js';
 export * from '../bean/io.message.hotloadFile.js';
 export * from '../bean/queue.render.js';
-export * from '../bean/startup.registerAllWatchers.js';
 export * from '../bean/version.manager.js';
 import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
 import { BeanCms } from '../bean/bean.cms.js';
 import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
 import { QueueRender } from '../bean/queue.render.js';
-import { StartupRegisterAllWatchers } from '../bean/startup.registerAllWatchers.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -21,7 +19,6 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
     'a-cms.queue.render': QueueRender;
-    'a-cms.startup.registerAllWatchers': StartupRegisterAllWatchers;
     'a-cms.version.manager': VersionManager;
   }
 }
@@ -78,6 +75,16 @@ declare module 'vona' {
   }
 }
 /** meta: end */
+/** startup: begin */
+export * from '../bean/startup.registerAllWatchers.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'a-cms:registerAllWatchers': IDecoratorStartupOptions;
+  }
+}
+/** startup: end */
 /** atoms: begin */
 export * from '../atom/article.js';
 /** atoms: end */
