@@ -6,5 +6,6 @@ import { EntityAtom } from '../entity/atom.js';
   entity: EntityAtom,
   disableDeleted: false,
   cacheKeyAux: 'atomClassId',
+  cacheOptions: { preset: 'redis' },
 })
 export class ModelAtom extends BeanModelBase<EntityAtom> {}

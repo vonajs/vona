@@ -1,5 +1,4 @@
 import { VonaApplication, IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from 'vona';
-import { IModuleConfigSummer } from 'vona-module-a-summer';
 
 // middlewares
 const middlewares = {
@@ -83,27 +82,11 @@ const queues = {
   } as IModuleConfigQueue,
 };
 
-// summer
-const summer = {
-  group: {
-    model: {
-      role: { config: 'all' },
-      user: { config: 'all' },
-      atomClass: { config: 'allWithIgnoreNull' },
-      atomAction: { config: 'allWithIgnoreNull' },
-      atom: { config: 'redis' },
-      category: { config: 'all' },
-      label: { config: 'all' },
-    },
-  },
-} as IModuleConfigSummer;
-
 export const config = (_app: VonaApplication) => {
   return {
     middlewares,
     startups,
     queues,
-    summer,
     host: '',
     protocol: '',
     pageSize: 20,

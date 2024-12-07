@@ -2,5 +2,5 @@ import { Model } from 'vona';
 import { BeanModelBase } from 'vona-module-a-database';
 import { EntityUser } from '../entity/user.js';
 
-@Model({ entity: EntityUser, disableDeleted: false })
+@Model({ entity: EntityUser, disableDeleted: false, cacheOptions: { preset: 'all' } })
 export class ModelUser extends BeanModelBase<EntityUser> {}
