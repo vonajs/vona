@@ -18,6 +18,7 @@ export type TypeModuleResource<
   ERRORS,
   LOCALES,
   CONSTANTS = object,
+  STATUS = unknown,
   SERVICE = unknown,
   MODEL = unknown,
   ENTITY = unknown,
@@ -28,6 +29,7 @@ export type TypeModuleResource<
   error: TypeModuleErrors<ERRORS>;
   locale: TypeModuleLocales<LOCALES>;
   constant: TypeModuleConstants<CONSTANTS>;
+  status: STATUS;
   service: SERVICE;
   model: MODEL;
   entity: ENTITY;

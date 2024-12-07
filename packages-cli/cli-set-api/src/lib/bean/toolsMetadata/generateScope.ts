@@ -5,6 +5,7 @@ export interface GenerateScopeOptions {
   errors: string;
   locales: string;
   constants: string;
+  status: string;
   services: string;
   models: string;
   entities: string;
@@ -27,6 +28,7 @@ export interface ScopeModule${relativeNameCapitalize}
     ${options.errors ? 'typeof Errors' : 'never'},
     ${options.locales ? '(typeof locales)[TypeLocaleBase]' : 'never'},
     ${options.constants ? 'typeof constants' : 'never'},
+    ${options.status ? 'MetaStatus' : 'never'},
     ${options.services ? 'IModuleService' : 'never'},
     ${options.models ? 'IModuleModel' : 'never'},
     ${options.entities ? 'IModuleEntity' : 'never'},

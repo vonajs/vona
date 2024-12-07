@@ -130,6 +130,7 @@ export class CliToolsMetadata extends BeanCliBase {
       errors: contentErrors,
       locales: contentLocales,
       constants: contentConstants,
+      status: contentMetaStatus,
       services: contentServices,
       models: contentModels,
       entities: contentEntities,

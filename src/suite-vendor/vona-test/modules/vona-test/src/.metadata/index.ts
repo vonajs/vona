@@ -68,6 +68,9 @@ declare module 'vona' {
 export * from '../dto/profile.js';
 export * from '../dto/user.js';
 /** dtos: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** summerCaches: begin */
 import { SummerCacheTest } from '../bean/summerCache.test.js';
 export interface IModuleSummerCache {
@@ -119,6 +122,7 @@ export interface ScopeModuleVonaTest
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    MetaStatus,
     IModuleService,
     never,
     never,
