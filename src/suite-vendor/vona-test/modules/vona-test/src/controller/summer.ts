@@ -44,18 +44,18 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     await this.app.bean.util.sleep(1000);
 
     // get: peek again
-    value = await cache.peek(key1, { mode: 'mem' });
-    assert.equal(value, undefined);
     value = await cache.peek(key1, { mode: 'redis' });
     assert.equal(value.id, key1.id);
+    value = await cache.peek(key1, { mode: 'mem' });
+    assert.equal(value, undefined);
 
     // get: peek sleep for redis stale
     await this.app.bean.util.sleep(2000);
 
     // get: peek again
-    value = await cache.peek(key1, { mode: 'mem' });
-    assert.equal(value, undefined);
     value = await cache.peek(key1, { mode: 'redis' });
+    assert.equal(value, undefined);
+    value = await cache.peek(key1, { mode: 'mem' });
     assert.equal(value, undefined);
 
     // mget
@@ -74,10 +74,10 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     assert.equal(values[2].id, key3.id);
 
     // mget: peek
-    value = await cache.peek(key2, { mode: 'mem' });
-    assert.equal(value, undefined);
     value = await cache.peek(key2, { mode: 'redis' });
     assert.equal(value.id, key2.id);
+    value = await cache.peek(key2, { mode: 'mem' });
+    assert.equal(value, undefined);
 
     // del
     await cache.del(key1);
@@ -87,24 +87,24 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     await cache.mdel([key1, key2, key3]);
 
     // mdel: peek
-    value = await cache.peek(key3, { mode: 'mem' });
-    assert.equal(value, undefined);
     value = await cache.peek(key3, { mode: 'redis' });
+    assert.equal(value, undefined);
+    value = await cache.peek(key3, { mode: 'mem' });
     assert.equal(value, undefined);
 
     // clear
     values = await cache.mget([key1, key2, key3]);
     assert.equal(values[2].id, key3.id);
-    value = await cache.peek(key3, { mode: 'mem' });
-    assert.equal(value.id, key3.id);
     value = await cache.peek(key3, { mode: 'redis' });
+    assert.equal(value.id, key3.id);
+    value = await cache.peek(key3, { mode: 'mem' });
     assert.equal(value.id, key3.id);
 
     await cache.clear();
 
-    value = await cache.peek(key3, { mode: 'mem' });
-    assert.equal(value, undefined);
     value = await cache.peek(key3, { mode: 'redis' });
+    assert.equal(value, undefined);
+    value = await cache.peek(key3, { mode: 'mem' });
     assert.equal(value, undefined);
   }
 }
