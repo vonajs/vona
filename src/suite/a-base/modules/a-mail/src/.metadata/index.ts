@@ -4,14 +4,12 @@ export * from '../bean/bean.mailSceneCache.js';
 export * from '../bean/broadcast.mailSceneChanged.js';
 export * from '../bean/io.channel.mail.js';
 export * from '../bean/io.message.mail.js';
-export * from '../bean/startup.cacheMailScenes.js';
 export * from '../bean/version.manager.js';
 import { BeanMail } from '../bean/bean.mail.js';
 import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
 import { BroadcastMailSceneChanged } from '../bean/broadcast.mailSceneChanged.js';
 import { IoChannelMail } from '../bean/io.channel.mail.js';
 import { IoMessageMail } from '../bean/io.message.mail.js';
-import { StartupCacheMailScenes } from '../bean/startup.cacheMailScenes.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -24,7 +22,6 @@ declare module 'vona' {
     'a-mail.broadcast.mailSceneChanged': BroadcastMailSceneChanged;
     'a-mail.io.channel.mail': IoChannelMail;
     'a-mail.io.message.mail': IoMessageMail;
-    'a-mail.startup.cacheMailScenes': StartupCacheMailScenes;
     'a-mail.version.manager': VersionManager;
   }
 }
@@ -69,6 +66,16 @@ declare module 'vona' {
   }
 }
 /** meta: end */
+/** startup: begin */
+export * from '../bean/startup.cacheMailScenes.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'a-mail:cacheMailScenes': IDecoratorStartupOptions;
+  }
+}
+/** startup: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
