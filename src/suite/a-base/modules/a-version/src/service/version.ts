@@ -1,13 +1,21 @@
 import chalk from 'chalk';
-import { BeanBase, ConfigInstanceBase, IMetaVersionInit, IMetaVersionTest, IMetaVersionUpdate, Service } from 'vona';
+import {
+  BeanBase,
+  ConfigInstanceBase,
+  IInstanceStartupOptions,
+  IMetaVersionInit,
+  IMetaVersionTest,
+  IMetaVersionUpdate,
+  Service,
+} from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 
 @Service()
 export class ServiceVersion extends BeanBase {
-  async instanceInitStartup(options?: { instanceBase: ConfigInstanceBase }) {
-    const instanceBase = options?.instanceBase;
+  async instanceInitStartup(options?: IInstanceStartupOptions) {
+    const instanceBase = options?.configInstanceBase;
     await this.__instanceInit(this.ctx.subdomain, instanceBase);
   }
 

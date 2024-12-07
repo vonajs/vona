@@ -1,8 +1,8 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'startup' })
-export class StartupDatabaseName extends BeanBase<ScopeModule> {
+@Startup({ dependencies: 'a-version:databaseInit' })
+export class StartupDatabaseName extends BeanBase<ScopeModule> implements IStartupExecute {
   async execute() {
     return await this.scope.service.database.databaseNameStartup();
   }

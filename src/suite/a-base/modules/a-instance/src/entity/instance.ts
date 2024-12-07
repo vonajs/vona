@@ -1,4 +1,4 @@
-import { ConfigInstanceBase, Entity, omitClass } from 'vona';
+import { Entity, IInstanceStartupOptions, omitClass } from 'vona';
 import { EntityBase } from 'vona-module-a-database';
 import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
@@ -19,11 +19,6 @@ export class EntityInstance extends omitClass(EntityBase, ['iid']) {
   title: string;
   @Rule(z.string())
   config: string;
-}
-
-export interface IInstanceStartupOptions {
-  force?: boolean;
-  configInstanceBase?: ConfigInstanceBase;
 }
 
 export interface IInstanceStartupQueueInfo {

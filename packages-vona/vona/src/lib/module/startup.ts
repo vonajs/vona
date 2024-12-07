@@ -1,4 +1,4 @@
-import { VonaContext, cast } from '../../index.js';
+import { IInstanceStartupOptions, cast } from '../../index.js';
 
 export default function (app) {
   // use modulesArray
@@ -45,40 +45,40 @@ export default function (app) {
     }
   }
 
-  app.meta._runStartup = async ({ module, name, instanceStartup }) => {
+  app.meta._runStartup = async (
+    module: string,
+    name: string,
+    subdomain?: string,
+    options?: IInstanceStartupOptions,
+  ) => {
     const fullKey = `${module}:${name}`;
     const startup = ebStartups[fullKey];
     // normal
     if (!startup.config.debounce) {
-      return await _runStartupInner({ startup, instanceStartup });
+      return await _runStartupInner(startup, subdomain, options);
     }
     // debounce: lock
-    const subdomain = instanceStartup ? instanceStartup.subdomain : undefined;
     return await app.meta.util.lock({
       subdomain,
-      resource: `${instanceStartup ? 'instanceStartup' : 'startup'}.${fullKey}`,
+      resource: `startup.${fullKey}`,
       fn: async () => {
         return await app.meta.util.executeBean({
           subdomain,
           beanModule: 'a-base',
-          fn: async ({ ctx }) => {
-            await _runStartupLock({ ctx, startup, instanceStartup });
+          fn: async () => {
+            await _runStartupLock(startup, subdomain, options);
           },
         });
       },
     });
   };
 
-  app.meta._runStartupInstance = async ({ subdomain, options }) => {
+  app.meta._runStartupInstance = async (subdomain: string, options?: IInstanceStartupOptions) => {
     // run startups: not after
     for (const startup of app.meta.startupsArray) {
       if (!startup.config.disable && startup.config.instance && startup.config.after !== true) {
         console.log(`---- instance startup: ${startup.key}, pid: ${process.pid}`);
-        await app.meta._runStartup({
-          module: startup.module,
-          name: startup.name,
-          instanceStartup: { subdomain, options },
-        });
+        await app.meta._runStartup(startup.module, startup.name, subdomain, options);
       }
     }
     // set flag
@@ -87,11 +87,7 @@ export default function (app) {
     for (const startup of app.meta.startupsArray) {
       if (!startup.config.disable && startup.config.instance && startup.config.after === true) {
         console.log(`---- instance startup: ${startup.key}, pid: ${process.pid}`);
-        await app.meta._runStartup({
-          module: startup.module,
-          name: startup.name,
-          instanceStartup: { subdomain, options },
-        });
+        await app.meta._runStartup(startup.module, startup.name, subdomain, options);
       }
     }
     // load queue workers
@@ -100,33 +96,28 @@ export default function (app) {
     }
   };
 
-  async function _runStartupLock({ ctx, startup, instanceStartup }: { ctx: VonaContext; startup?; instanceStartup? }) {
+  async function _runStartupLock(startup, subdomain?: string, options?: IInstanceStartupOptions) {
     // ignore debounce for test
-    const force = instanceStartup && instanceStartup.options && instanceStartup.options.force;
-    if (!force && !ctx.app.meta.isTest) {
+    if (!options?.force && !app.meta.isTest) {
       const fullKey = `${startup.module}:${startup.name}`;
-      const cacheKey = `startupDebounce:${fullKey}${instanceStartup ? `:${ctx.instance.id}` : ''}`;
+      const cacheKey = `startupDebounce:${fullKey}${subdomain !== undefined ? `:${app.ctx.instance.id}` : ''}`;
       const debounce =
-        typeof startup.config.debounce === 'number' ? startup.config.debounce : ctx.app.config.queue.startup.debounce;
-      const cache = cast(ctx.app.bean).cacheRedis.module('a-base');
+        typeof startup.config.debounce === 'number' ? startup.config.debounce : app.config.queue.startup.debounce;
+      const cache = cast(app.bean).cacheRedis.module('a-base');
       const flag = await cache.getset(cacheKey, true, debounce);
       if (flag) return;
     }
     // perform
-    await _runStartupInner({ startup, instanceStartup });
+    await _runStartupInner(startup, subdomain, options);
   }
 
-  async function _runStartupInner({ startup, instanceStartup }) {
-    // context
-    const context = {
-      options: instanceStartup ? instanceStartup.options : undefined,
-    };
+  async function _runStartupInner(startup, subdomain?: string, options?: IInstanceStartupOptions) {
     // bean
     const bean = startup.bean;
     // execute
     return await app.meta.util.executeBean({
-      subdomain: instanceStartup ? instanceStartup.subdomain : undefined,
-      context,
+      subdomain,
+      context: options,
       beanModule: bean.module,
       beanFullName: `${bean.module}.startup.${bean.name}`,
       transaction: startup.config.transaction,

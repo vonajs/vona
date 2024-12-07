@@ -1,11 +1,11 @@
-import { cast, ConfigInstanceBase, deepExtend, isNil, sleep, VonaConfig } from 'vona';
+import { cast, ConfigInstanceBase, deepExtend, IInstanceStartupOptions, isNil, sleep, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import { Bean, BeanBase } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { IModelSelectParams } from 'vona-module-a-database';
-import { EntityInstance, IInstanceStartupOptions, IInstanceStartupQueueInfo } from '../entity/instance.js';
+import { EntityInstance, IInstanceStartupQueueInfo } from '../entity/instance.js';
 
 const boxenOptions: boxen.Options = {
   padding: 1,
@@ -179,7 +179,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
         }
         // startup
         cast(this.ctx.app.meta)
-          ._runStartupInstance({ subdomain: info.subdomain, options: info.options })
+          ._runStartupInstance(info.subdomain, info.options)
           .then(() => {
             info.resolve();
             cb();
