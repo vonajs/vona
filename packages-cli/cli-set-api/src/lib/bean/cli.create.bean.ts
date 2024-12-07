@@ -20,6 +20,7 @@ const __boilerplates = {
   socketConnection: 'socketConnection',
   socketPacket: 'socketPacket',
   summerCache: 'summerCache',
+  startup: 'startup',
 };
 
 declare module '@cabloy/cli' {

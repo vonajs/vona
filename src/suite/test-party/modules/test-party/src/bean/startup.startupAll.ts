@@ -1,9 +1,9 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 
 import assert from 'assert';
 
-@Bean({ scene: 'startup' })
-export class StartupStartupAll extends BeanBase {
+@Startup()
+export class StartupStartupAll extends BeanBase implements IStartupExecute {
   async execute() {
     console.log('test/feat/startup: all');
     assert.equal(this.ctx.instance, undefined);

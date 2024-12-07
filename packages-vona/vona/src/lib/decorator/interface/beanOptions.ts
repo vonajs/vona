@@ -19,12 +19,12 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'socketConnection'
   | 'socketPacket'
   | 'summerCache'
+  | 'startup'
   | 'meta'
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
   | 'broadcast'
-  | 'startup'
   | 'queue'
   | 'version'
   | 'schedule'
