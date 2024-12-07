@@ -135,7 +135,6 @@ export * from '../controller/testFeatSequence.js';
 export * from '../controller/testFeatSettings.js';
 export * from '../controller/testFeatSocketio.js';
 export * from '../controller/testFeatStats.js';
-export * from '../controller/testFeatStatus.js';
 export * from '../controller/testFeatTag.js';
 export * from '../controller/testFeatValidation.js';
 export * from '../controller/testItemOnlyAll.js';
