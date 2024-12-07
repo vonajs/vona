@@ -14,9 +14,16 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/progress.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-progress:progress': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/progress.js';
 import { ServiceProgress } from '../service/progress.js';
@@ -58,7 +65,9 @@ export interface ScopeModuleAProgress
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

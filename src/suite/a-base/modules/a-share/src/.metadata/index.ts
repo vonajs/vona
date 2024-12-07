@@ -42,9 +42,16 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/share.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-share:share': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** entities: begin */
 import { EntityShare } from '../entity/share.js';
 import { EntityShareRecordPV } from '../entity/shareRecordPV.js';
@@ -85,7 +92,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAShare extends BeanScopeBase {}
 
 export interface ScopeModuleAShare
-  extends TypeModuleResource<never, never, never, never, IModuleService, IModuleModel, IModuleEntity> {}
+  extends TypeModuleResource<never, never, never, never, never, IModuleService, IModuleModel, IModuleEntity, never> {}
 
 import 'vona';
 declare module 'vona' {

@@ -38,13 +38,20 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** controller: begin */
+export * from '../controller/userOnline.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-useronline:userOnline': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** atoms: begin */
 export * from '../atom/userOnline.js';
 export * from '../atom/userOnlineHistory.js';
 /** atoms: end */
-/** controllers: begin */
-export * from '../controller/userOnline.js';
-/** controllers: end */
 /** entities: begin */
 import { EntityUserOnline } from '../entity/userOnline.js';
 import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';
@@ -98,9 +105,11 @@ export interface ScopeModuleAUseronline
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

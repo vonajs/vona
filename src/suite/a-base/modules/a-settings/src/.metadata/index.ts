@@ -38,9 +38,16 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/settings.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-settings:settings': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** entities: begin */
 import { EntitySettings } from '../entity/settings.js';
 import { EntitySettingsRef } from '../entity/settingsRef.js';
@@ -94,9 +101,11 @@ export interface ScopeModuleASettings
     never,
     (typeof locales)[TypeLocaleBase],
     typeof constants,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

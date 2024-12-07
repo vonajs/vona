@@ -71,8 +71,10 @@ export interface ScopeModuleADetail
     (typeof locales)[TypeLocaleBase],
     typeof constants,
     never,
+    never,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

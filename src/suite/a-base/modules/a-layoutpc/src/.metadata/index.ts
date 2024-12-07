@@ -25,7 +25,17 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleALayoutpc extends BeanScopeBase {}
 
 export interface ScopeModuleALayoutpc
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    never,
+    never,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

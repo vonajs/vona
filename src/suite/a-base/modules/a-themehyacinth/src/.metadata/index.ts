@@ -13,7 +13,17 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAThemehyacinth extends BeanScopeBase {}
 
 export interface ScopeModuleAThemehyacinth
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    never,
+    never,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

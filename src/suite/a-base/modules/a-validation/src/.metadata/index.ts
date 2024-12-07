@@ -23,9 +23,16 @@ declare module 'vona' {
   }
 }
 /** middleware: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/validation.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-validation:validation': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/validation.js';
 import { ServiceValidation } from '../service/validation.js';
@@ -67,7 +74,9 @@ export interface ScopeModuleAValidation
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

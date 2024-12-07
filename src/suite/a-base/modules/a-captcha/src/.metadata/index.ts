@@ -20,9 +20,16 @@ declare module 'vona' {
   }
 }
 /** middleware: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/captcha.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-captcha:captcha': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/captcha.js';
 import { ServiceCaptcha } from '../service/captcha.js';
@@ -64,7 +71,9 @@ export interface ScopeModuleACaptcha
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

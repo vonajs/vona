@@ -45,7 +45,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleASummer extends BeanScopeBase {}
 
 export interface ScopeModuleASummer
-  extends TypeModuleResource<typeof config, never, never, never, IModuleService, never, never, never> {}
+  extends TypeModuleResource<typeof config, never, never, never, never, IModuleService, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

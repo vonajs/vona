@@ -10,9 +10,16 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/captcha.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-captchasimple:captcha': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -32,7 +39,17 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleACaptchasimple extends BeanScopeBase {}
 
 export interface ScopeModuleACaptchasimple
-  extends TypeModuleResource<never, typeof Errors, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
+  extends TypeModuleResource<
+    never,
+    typeof Errors,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    never,
+    never,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

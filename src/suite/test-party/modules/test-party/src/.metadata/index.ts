@@ -104,11 +104,7 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** atoms: begin */
-export * from '../atom/party.js';
-export * from '../atom/partyExpense.js';
-/** atoms: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/kitchenSinkAutocomplete.js';
 export * from '../controller/kitchenSinkFormSchemaValidation.js';
 export * from '../controller/kitchenSinkGuide.js';
@@ -156,7 +152,64 @@ export * from '../controller/testMultilevelAuthorizationUser.js';
 export * from '../controller/testResourceAll.js';
 export * from '../controller/testResourceRight.js';
 export * from '../controller/testRoleUserRole.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'test-party:kitchenSinkAutocomplete': IDecoratorControllerOptions;
+    'test-party:kitchenSinkFormSchemaValidation': IDecoratorControllerOptions;
+    'test-party:kitchenSinkGuide': IDecoratorControllerOptions;
+    'test-party:kitchenSinkPtrIsLoadmore': IDecoratorControllerOptions;
+    'test-party:testAtomAll': IDecoratorControllerOptions;
+    'test-party:testAtomRight': IDecoratorControllerOptions;
+    'test-party:testAtomStarLabel': IDecoratorControllerOptions;
+    'test-party:testCacheDb': IDecoratorControllerOptions;
+    'test-party:testCacheMem': IDecoratorControllerOptions;
+    'test-party:testCacheRedis': IDecoratorControllerOptions;
+    'test-party:testCtxConfig': IDecoratorControllerOptions;
+    'test-party:testCtxLocale': IDecoratorControllerOptions;
+    'test-party:testCtxPerformAction': IDecoratorControllerOptions;
+    'test-party:testCtxRequest': IDecoratorControllerOptions;
+    'test-party:testCtxResponse': IDecoratorControllerOptions;
+    'test-party:testCtxSession': IDecoratorControllerOptions;
+    'test-party:testCtxTail': IDecoratorControllerOptions;
+    'test-party:testCtxTransaction': IDecoratorControllerOptions;
+    'test-party:testEventHello': IDecoratorControllerOptions;
+    'test-party:testFeatBean': IDecoratorControllerOptions;
+    'test-party:testFeatBroadcast': IDecoratorControllerOptions;
+    'test-party:testFeatCategory': IDecoratorControllerOptions;
+    'test-party:testFeatFieldsRight': IDecoratorControllerOptions;
+    'test-party:testFeatHttpLog': IDecoratorControllerOptions;
+    'test-party:testFeatInstance': IDecoratorControllerOptions;
+    'test-party:testFeatMiddleware': IDecoratorControllerOptions;
+    'test-party:testFeatModel': IDecoratorControllerOptions;
+    'test-party:testFeatModelWhere': IDecoratorControllerOptions;
+    'test-party:testFeatOpenAuth': IDecoratorControllerOptions;
+    'test-party:testFeatProgress': IDecoratorControllerOptions;
+    'test-party:testFeatQueue': IDecoratorControllerOptions;
+    'test-party:testFeatSendMail': IDecoratorControllerOptions;
+    'test-party:testFeatSequence': IDecoratorControllerOptions;
+    'test-party:testFeatSettings': IDecoratorControllerOptions;
+    'test-party:testFeatSocketio': IDecoratorControllerOptions;
+    'test-party:testFeatStats': IDecoratorControllerOptions;
+    'test-party:testFeatStatus': IDecoratorControllerOptions;
+    'test-party:testFeatTag': IDecoratorControllerOptions;
+    'test-party:testFeatValidation': IDecoratorControllerOptions;
+    'test-party:testItemOnlyAll': IDecoratorControllerOptions;
+    'test-party:testItemOnlyRight': IDecoratorControllerOptions;
+    'test-party:testMonkeyMonkeyee': IDecoratorControllerOptions;
+    'test-party:testMultilevelAuthorizationRole': IDecoratorControllerOptions;
+    'test-party:testMultilevelAuthorizationUser': IDecoratorControllerOptions;
+    'test-party:testResourceAll': IDecoratorControllerOptions;
+    'test-party:testResourceRight': IDecoratorControllerOptions;
+    'test-party:testRoleUserRole': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
+/** atoms: begin */
+export * from '../atom/party.js';
+export * from '../atom/partyExpense.js';
+/** atoms: end */
 /** entities: begin */
 import { EntityParty } from '../entity/party.js';
 import { EntityPartyExpense } from '../entity/partyExpense.js';
@@ -214,9 +267,11 @@ export interface ScopeModuleTestParty
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

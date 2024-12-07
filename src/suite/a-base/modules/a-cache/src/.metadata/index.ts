@@ -39,9 +39,16 @@ declare module 'vona' {
   }
 }
 /** entity: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/db.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-cache:db': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** entities: begin */
 import { EntityCache } from '../entity/cache.js';
 export interface IModuleEntity {
@@ -59,7 +66,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleACache extends BeanScopeBase {}
 
 export interface ScopeModuleACache
-  extends TypeModuleResource<typeof config, never, never, never, never, never, IModuleEntity> {}
+  extends TypeModuleResource<typeof config, never, never, never, never, never, never, IModuleEntity, never> {}
 
 import 'vona';
 declare module 'vona' {

@@ -1,6 +1,13 @@
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/util.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'cms-plugincopyright:util': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -20,7 +27,17 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleCmsPlugincopyright extends BeanScopeBase {}
 
 export interface ScopeModuleCmsPlugincopyright
-  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, never, never, never> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    never,
+    never,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

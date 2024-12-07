@@ -49,9 +49,16 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/scene.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-mail:scene': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** entities: begin */
 import { EntityMail } from '../entity/mail.js';
 export interface IModuleEntity {
@@ -101,9 +108,11 @@ export interface ScopeModuleAMail
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

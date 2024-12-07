@@ -20,9 +20,16 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/message.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-message:message': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/message.js';
 import { ServiceMessage } from '../service/message.js';
@@ -60,7 +67,9 @@ export interface ScopeModuleAMessage
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

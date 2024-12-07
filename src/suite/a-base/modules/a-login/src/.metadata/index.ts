@@ -1,6 +1,13 @@
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/auth.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-login:auth': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/auth.js';
 import { ServiceAuth } from '../service/auth.js';
@@ -21,7 +28,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleALogin extends BeanScopeBase {}
 
 export interface ScopeModuleALogin
-  extends TypeModuleResource<never, never, never, never, IModuleService, never, never> {}
+  extends TypeModuleResource<never, never, never, never, never, IModuleService, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

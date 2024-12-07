@@ -42,12 +42,19 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** controller: begin */
+export * from '../controller/dashboard.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-dashboard:dashboard': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** atoms: begin */
 export * from '../atom/dashboard.js';
 /** atoms: end */
-/** controllers: begin */
-export * from '../controller/dashboard.js';
-/** controllers: end */
 /** entities: begin */
 import { EntityDashboard } from '../entity/dashboard.js';
 import { EntityDashboardContent } from '../entity/dashboardContent.js';
@@ -105,9 +112,11 @@ export interface ScopeModuleADashboard
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

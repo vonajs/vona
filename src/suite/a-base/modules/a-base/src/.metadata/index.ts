@@ -595,6 +595,7 @@ export interface ScopeModuleABase
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     typeof constants,
+    never,
     IModuleService,
     IModuleModel,
     IModuleEntity,

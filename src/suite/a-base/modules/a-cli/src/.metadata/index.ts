@@ -17,9 +17,16 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/cli.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-cli:cli': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/cli.js';
 export * from '../service/console.js';
@@ -69,7 +76,9 @@ export interface ScopeModuleACli
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

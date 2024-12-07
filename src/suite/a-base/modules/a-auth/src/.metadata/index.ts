@@ -109,9 +109,11 @@ export interface ScopeModuleAAuth
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

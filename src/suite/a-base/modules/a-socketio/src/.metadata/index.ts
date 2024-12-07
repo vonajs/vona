@@ -80,12 +80,22 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/io.js';
 export * from '../controller/message.js';
 export * from '../controller/messageClass.js';
 export * from '../controller/test.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-socketio:io': IDecoratorControllerOptions;
+    'a-socketio:message': IDecoratorControllerOptions;
+    'a-socketio:messageClass': IDecoratorControllerOptions;
+    'a-socketio:test': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** entities: begin */
 import { EntityMessage } from '../entity/message.js';
 import { EntityMessageClass } from '../entity/messageClass.js';
@@ -150,7 +160,17 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleASocketio extends BeanScopeBase {}
 
 export interface ScopeModuleASocketio
-  extends TypeModuleResource<typeof config, never, never, never, IModuleService, IModuleModel, IModuleEntity> {}
+  extends TypeModuleResource<
+    typeof config,
+    never,
+    never,
+    never,
+    never,
+    IModuleService,
+    IModuleModel,
+    IModuleEntity,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

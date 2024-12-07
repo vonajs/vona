@@ -10,14 +10,26 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/atomRight.js';
 export * from '../controller/auth.js';
 export * from '../controller/authScene.js';
 export * from '../controller/resourceRight.js';
 export * from '../controller/role.js';
 export * from '../controller/user.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-baseadmin:atomRight': IDecoratorControllerOptions;
+    'a-baseadmin:auth': IDecoratorControllerOptions;
+    'a-baseadmin:authScene': IDecoratorControllerOptions;
+    'a-baseadmin:resourceRight': IDecoratorControllerOptions;
+    'a-baseadmin:role': IDecoratorControllerOptions;
+    'a-baseadmin:user': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/atomRight.js';
 export * from '../service/auth.js';
@@ -75,7 +87,9 @@ export interface ScopeModuleABaseadmin
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

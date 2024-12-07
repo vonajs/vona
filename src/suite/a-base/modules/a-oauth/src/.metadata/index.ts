@@ -33,7 +33,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAOauth extends BeanScopeBase {}
 
 export interface ScopeModuleAOauth
-  extends TypeModuleResource<never, never, never, never, IModuleService, never, never> {}
+  extends TypeModuleResource<never, never, never, never, never, IModuleService, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

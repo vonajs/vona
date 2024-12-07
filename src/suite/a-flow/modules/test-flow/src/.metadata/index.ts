@@ -44,14 +44,21 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'test-flow:flow': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** atoms: begin */
 export * from '../atom/product.js';
 export * from '../atom/purchaseOrder.js';
 export * from '../atom/purchaseOrderDetail.js';
 /** atoms: end */
-/** controllers: begin */
-export * from '../controller/flow.js';
-/** controllers: end */
 /** entities: begin */
 import { EntityProduct } from '../entity/product.js';
 import { EntityPurchaseOrder } from '../entity/purchaseOrder.js';
@@ -93,8 +100,10 @@ export interface ScopeModuleTestFlow
     (typeof locales)[TypeLocaleBase],
     never,
     never,
+    never,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

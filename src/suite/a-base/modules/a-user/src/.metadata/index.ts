@@ -13,10 +13,18 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/public.js';
 export * from '../controller/user.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-user:public': IDecoratorControllerOptions;
+    'a-user:user': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/public.js';
 export * from '../service/user.js';
@@ -49,7 +57,17 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
 export class ScopeModuleAUser extends BeanScopeBase {}
 
 export interface ScopeModuleAUser
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService, never, never> {}
+  extends TypeModuleResource<
+    never,
+    never,
+    (typeof locales)[TypeLocaleBase],
+    never,
+    never,
+    IModuleService,
+    never,
+    never,
+    never
+  > {}
 
 import 'vona';
 declare module 'vona' {

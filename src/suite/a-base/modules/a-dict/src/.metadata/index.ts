@@ -38,12 +38,19 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** controller: begin */
+export * from '../controller/dict.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-dict:dict': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** atoms: begin */
 export * from '../atom/dict.js';
 /** atoms: end */
-/** controllers: begin */
-export * from '../controller/dict.js';
-/** controllers: end */
 /** entities: begin */
 import { EntityDict } from '../entity/dict.js';
 import { EntityDictContent } from '../entity/dictContent.js';
@@ -93,9 +100,11 @@ export interface ScopeModuleADict
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

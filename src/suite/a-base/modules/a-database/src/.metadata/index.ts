@@ -93,6 +93,7 @@ export interface ScopeModuleADatabase
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     never,
     never,

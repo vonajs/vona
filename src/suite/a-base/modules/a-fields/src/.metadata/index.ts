@@ -61,6 +61,7 @@ export interface ScopeModuleAFields
     never,
     never,
     never,
+    never,
     IModuleSummerCache
   > {}
 

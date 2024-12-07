@@ -1,7 +1,15 @@
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-flowchart:flow': IDecoratorControllerOptions;
+    'a-flowchart:flowDef': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
@@ -26,7 +34,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAFlowchart extends BeanScopeBase {}
 
 export interface ScopeModuleAFlowchart
-  extends TypeModuleResource<never, never, never, never, IModuleService, never, never> {}
+  extends TypeModuleResource<never, never, never, never, never, IModuleService, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

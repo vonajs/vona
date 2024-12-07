@@ -4,7 +4,8 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 @Scope()
 export class ScopeModuleCabloyTest extends BeanScopeBase {}
 
-export interface ScopeModuleCabloyTest extends TypeModuleResource<never, never, never, never, never, never, never> {}
+export interface ScopeModuleCabloyTest
+  extends TypeModuleResource<never, never, never, never, never, never, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

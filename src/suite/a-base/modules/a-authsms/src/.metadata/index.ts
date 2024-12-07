@@ -32,11 +32,20 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/auth.js';
 export * from '../controller/captcha.js';
 export * from '../controller/smsProvider.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-authsms:auth': IDecoratorControllerOptions;
+    'a-authsms:captcha': IDecoratorControllerOptions;
+    'a-authsms:smsProvider': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** services: begin */
 export * from '../service/auth.js';
 export * from '../service/captcha.js';
@@ -86,7 +95,9 @@ export interface ScopeModuleAAuthsms
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
+    never,
     never,
     never
   > {}

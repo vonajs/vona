@@ -50,16 +50,27 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** atoms: begin */
-export * from '../atom/article.js';
-/** atoms: end */
-/** controllers: begin */
+/** controller: begin */
 export * from '../controller/article.js';
 export * from '../controller/comment.js';
 export * from '../controller/render.js';
 export * from '../controller/rss.js';
 export * from '../controller/site.js';
-/** controllers: end */
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-cms:article': IDecoratorControllerOptions;
+    'a-cms:comment': IDecoratorControllerOptions;
+    'a-cms:render': IDecoratorControllerOptions;
+    'a-cms:rss': IDecoratorControllerOptions;
+    'a-cms:site': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
+/** atoms: begin */
+export * from '../atom/article.js';
+/** atoms: end */
 /** entities: begin */
 import { EntityArticle } from '../entity/article.js';
 import { EntityContent } from '../entity/content.js';
@@ -128,9 +139,11 @@ export interface ScopeModuleACms
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';

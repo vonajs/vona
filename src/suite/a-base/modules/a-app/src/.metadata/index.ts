@@ -38,12 +38,19 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** controller: begin */
+export * from '../controller/resource.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-app:resource': IDecoratorControllerOptions;
+  }
+}
+/** controller: end */
 /** atoms: begin */
 export * from '../atom/app.js';
 /** atoms: end */
-/** controllers: begin */
-export * from '../controller/resource.js';
-/** controllers: end */
 /** entities: begin */
 import { EntityApp } from '../entity/app.js';
 import { EntityAppContent } from '../entity/appContent.js';
@@ -97,9 +104,11 @@ export interface ScopeModuleAApp
     never,
     (typeof locales)[TypeLocaleBase],
     never,
+    never,
     IModuleService,
     IModuleModel,
-    IModuleEntity
+    IModuleEntity,
+    never
   > {}
 
 import 'vona';
