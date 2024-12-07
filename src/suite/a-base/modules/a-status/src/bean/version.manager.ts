@@ -9,7 +9,7 @@ export class VersionManager extends BeanBase {
         table.basicFields();
         table.string('module', 255);
         table.string('name', 255);
-        table.json('value');
+        table.text('value');
       });
     }
   }

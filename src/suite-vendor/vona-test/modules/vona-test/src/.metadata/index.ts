@@ -26,6 +26,7 @@ declare module 'vona' {
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
 export * from '../controller/performAction.js';
+export * from '../controller/status.js';
 export * from '../controller/summer.js';
 export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
@@ -36,6 +37,7 @@ declare module 'vona' {
     'vona-test:bean': IDecoratorControllerOptions;
     'vona-test:onion': IDecoratorControllerOptions;
     'vona-test:performAction': IDecoratorControllerOptions;
+    'vona-test:status': IDecoratorControllerOptions;
     'vona-test:summer': IDecoratorControllerOptions;
     'vona-test:tail': IDecoratorControllerOptions;
     'vona-test:transaction': IDecoratorControllerOptions;
