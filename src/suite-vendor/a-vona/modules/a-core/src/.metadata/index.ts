@@ -44,6 +44,19 @@ declare module 'vona' {
   }
 }
 /** filter: end */
+/** services: begin */
+export * from '../service/startup.js';
+import { ServiceStartup } from '../service/startup.js';
+export interface IModuleService {
+  startup: ServiceStartup;
+}
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-core.service.startup': ServiceStartup;
+  }
+}
+/** services: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -55,7 +68,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleACore extends BeanScopeBase {}
 
 export interface ScopeModuleACore
-  extends TypeModuleResource<typeof config, never, never, never, never, never, never, never, never> {}
+  extends TypeModuleResource<typeof config, never, never, never, never, IModuleService, never, never, never> {}
 
 import 'vona';
 declare module 'vona' {

@@ -8,7 +8,7 @@ import {
   Service,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { clearResources } from '../common/clear.js';
+import { clearResources } from '../common/clearResources.js';
 
 const SymbolStartups = Symbol('SymbolStartups');
 
