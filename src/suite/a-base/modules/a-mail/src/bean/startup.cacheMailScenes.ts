@@ -1,8 +1,8 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 
-@Bean({ scene: 'startup' })
-export class StartupCacheMailScenes extends BeanBase {
-  async execute(/* context*/) {
+@Startup({ instance: true })
+export class StartupCacheMailScenes extends BeanBase implements IStartupExecute {
+  async execute() {
     // cache all mailScenes
     await this.app.bean.mailSceneCache._cacheMailScenesConfig();
   }
