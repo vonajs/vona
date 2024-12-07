@@ -9,7 +9,9 @@ export class ControllerStatus extends BeanBase<ScopeModule> {
     // name
     const name = '__test_enable';
 
-    this.scope.status.get('sex');
+    console.log(await this.scope.status.get('enable'));
+    await this.scope.status.set('enable', true);
+    process.exit(0);
     // get
     let value = await this.app.bean.status.get(name);
     assert.equal(value, undefined);
