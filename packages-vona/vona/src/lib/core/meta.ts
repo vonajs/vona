@@ -74,6 +74,7 @@ export class AppMeta extends BeanSimple {
   onionController: Onion;
   onionMeta: Onion;
   onionSummerCache: Onion;
+  onionStartup: Onion;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;

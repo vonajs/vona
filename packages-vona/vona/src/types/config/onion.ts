@@ -10,6 +10,7 @@ import { IModelRecord } from '../interface/model.js';
 import { IPipeRecord } from '../interface/pipe.js';
 import { ISocketConnectionRecord } from '../interface/socketConnection.js';
 import { ISocketPacketRecord } from '../interface/socketPacket.js';
+import { IStartupRecord } from '../interface/startup.js';
 import { ISummerCacheRecord } from '../interface/summerCache.js';
 import { OmitNever } from '../utils/omitNever.js';
 
@@ -27,4 +28,5 @@ export interface ConfigOnion {
   controller: OmitNever<IControllerRecord>;
   meta: OmitNever<IMetaRecord>;
   summerCache: OmitNever<ISummerCacheRecord>;
+  startup: OmitNever<IStartupRecord>;
 }
