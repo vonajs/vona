@@ -391,7 +391,11 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     }
     // extend
     _cacheOpitons = deepExtend(
-      { redis: { client: this.scopeDatabase.config.summer.redis.client } },
+      {
+        enable: this.scopeDatabase.config.summer.enable,
+        meta: this.scopeDatabase.config.summer.meta,
+        redis: { client: this.scopeDatabase.config.summer.redis.client },
+      },
       configPreset,
       _cacheOpitons,
       { preset: undefined },
@@ -403,12 +407,10 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private __cacheEnabledInner() {
     if (this.__cacheOptions === false) return false;
     // enable
-    const enable =
-      this.__cacheOptions?.enable ?? this.scopeDatabase.config.summer.enable ?? this.$scope.summer.config.summer.enable;
+    const enable = this.__cacheOptions?.enable;
     if (enable === false) return false;
     // meta
-    const meta =
-      this.__cacheOptions.meta ?? this.scopeDatabase.config.summer.meta ?? this.$scope.summer.config.summer.meta;
+    const meta = this.__cacheOptions.meta;
     if (!this.app.meta.util.checkMiddlewareOptionsMeta(meta)) {
       return false;
     }
