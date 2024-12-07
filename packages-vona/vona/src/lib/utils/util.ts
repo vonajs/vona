@@ -329,7 +329,7 @@ export class AppUtil extends BeanSimple {
     subdomain?: string;
     resource: string;
     fn: () => Promise<any>;
-    options;
+    options?;
     redlock?: Redlock;
   }) {
     // resource

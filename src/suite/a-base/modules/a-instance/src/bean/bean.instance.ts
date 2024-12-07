@@ -178,8 +178,8 @@ export class BeanInstance extends BeanBase<ScopeModule> {
           return;
         }
         // startup
-        cast(this.ctx.app.meta)
-          ._runStartupInstance(info.subdomain, info.options)
+        this.scope.service.startup
+          .runStartupInstance(info.subdomain, info.options)
           .then(() => {
             info.resolve();
             cb();

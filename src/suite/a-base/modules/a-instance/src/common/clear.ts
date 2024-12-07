@@ -1,8 +1,8 @@
 import path from 'path';
 import fse from 'fs-extra';
-import { VonaApplication } from '../../../types/index.js';
+import { VonaApplication } from 'vona';
 
-export default async function (app: VonaApplication) {
+export async function clearResources(app: VonaApplication) {
   if (!app.meta.isTest) return;
   // clear keys
   await _clearRedisKeys(app.redis.get('limiter'), `b_${app.name}:*`);

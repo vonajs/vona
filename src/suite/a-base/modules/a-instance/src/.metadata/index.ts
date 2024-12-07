@@ -85,14 +85,18 @@ export interface IModuleModel {
 /** models: end */
 /** services: begin */
 export * from '../service/instance.js';
+export * from '../service/startup.js';
 import { ServiceInstance } from '../service/instance.js';
+import { ServiceStartup } from '../service/startup.js';
 export interface IModuleService {
   instance: ServiceInstance;
+  startup: ServiceStartup;
 }
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-instance.service.instance': ServiceInstance;
+    'a-instance.service.startup': ServiceStartup;
   }
 }
 /** services: end */
