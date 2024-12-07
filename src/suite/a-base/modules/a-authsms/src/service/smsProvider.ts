@@ -1,12 +1,8 @@
 import { BeanBase, Service } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceSmsProvider extends BeanBase {
-  get statusModule() {
-    return this.app.bean.status.module(__ThisModule__);
-  }
-
+export class ServiceSmsProvider extends BeanBase<ScopeModule> {
   async list() {
     return this.app.bean.smsProviderCache.getSmsProvidersConfigForAdmin();
   }
@@ -19,7 +15,7 @@ export class ServiceSmsProvider extends BeanBase {
     }
     providers[providerName].current = true;
     // update
-    await this.statusModule.set('smsProviders', providers);
+    await this.scope.status.set('smsProviders', providers);
     // changed
     await this.app.bean.smsProviderCache.smsProviderChanged();
   }
@@ -35,7 +31,7 @@ export class ServiceSmsProvider extends BeanBase {
     const providers = this.app.bean.smsProviderCache.getSmsProvidersConfigCache();
     providers[providerName] = data ? this.app.bean.smsProviderCache.purgeProvider(data) : data;
     // update
-    await this.statusModule.set('smsProviders', providers);
+    await this.scope.status.set('smsProviders', providers);
     // changed
     await this.app.bean.smsProviderCache.smsProviderChanged();
   }
