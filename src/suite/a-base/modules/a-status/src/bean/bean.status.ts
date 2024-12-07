@@ -27,7 +27,7 @@ export class BeanStatus extends BeanModuleScopeBase<ScopeModule> {
     if (status) {
       await this.modelStatus.update({
         id: status.id,
-        value: value === undefined ? undefined : JSON.stringify(value),
+        value: JSON.stringify(value),
       });
     } else {
       if (queue) {
@@ -45,7 +45,7 @@ export class BeanStatus extends BeanModuleScopeBase<ScopeModule> {
         await this.modelStatus.insert({
           module: this.moduleScope,
           name,
-          value: value === undefined ? undefined : JSON.stringify(value),
+          value: JSON.stringify(value),
         });
       }
     }

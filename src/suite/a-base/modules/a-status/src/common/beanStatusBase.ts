@@ -1,4 +1,5 @@
 import { BeanBase } from 'vona';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 export class BeanStatusBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
   protected __get__(prop: string) {
@@ -13,11 +14,51 @@ export class BeanStatusBase<TScopeModule = unknown> extends BeanBase<TScopeModul
     }
   }
 
+  private get _modelStatus() {
+    return this.$scope.status.model.status;
+  }
+
   private async _get(name: any): Promise<any> {
-    return name;
+    const status = await this._modelStatus.get({
+      module: this.moduleBelong,
+      name,
+    });
+    return status ? JSON.parse(status.value) : undefined;
   }
 
   private async _set(name: any, value: any): Promise<void> {
-    console.log(name, value);
+    await this._setInner(name, value, true);
+  }
+
+  private async _setInner(name: any, value: any, queue: boolean) {
+    const status = await this._modelStatus.get({
+      module: this.moduleBelong,
+      name,
+    });
+    if (status) {
+      await this._modelStatus.update({
+        id: status.id,
+        value: JSON.stringify(value),
+      });
+    } else {
+      if (queue) {
+        await this.ctx.meta.util.lock({
+          resource: `${__ThisModule__}.statusSet.${this.moduleBelong}.${name}`,
+          fn: async () => {
+            return await this.ctx.meta.util.executeBeanIsolate({
+              fn: async () => {
+                return await this._setInner(name, value, false);
+              },
+            });
+          },
+        });
+      } else {
+        await this._modelStatus.insert({
+          module: this.moduleBelong,
+          name,
+          value: JSON.stringify(value),
+        });
+      }
+    }
   }
 }
