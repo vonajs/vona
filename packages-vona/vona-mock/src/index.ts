@@ -21,7 +21,7 @@ if (!Bundle) {
     // session
     Bundle.app.mockSession({});
     // wait app ready
-    await app.meta.checkAppReady();
+    await app.meta.waitAppReady();
     // restore
     Bundle.mock.restore();
   });

@@ -20,7 +20,7 @@ const __cacheIntancesConfig: Record<string, VonaConfig> = {};
 
 @Bean()
 export class BeanInstance extends BeanBase<ScopeModule> {
-  get modelInstance() {
+  private get modelInstance() {
     return this.scope.model.instance;
   }
 
@@ -36,6 +36,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return __cacheIntancesConfig[subdomain];
   }
 
+  // todo: typecify
   async list(options?) {
     // options
     if (!options) options = { where: null, orders: null, page: null };
@@ -52,17 +53,24 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return await this.modelInstance.select(_options);
   }
 
+  async update(data: EntityInstance) {
+    // update
+    await this.modelInstance.update(data);
+    // changed
+    await this.scope.service.instance.instanceChanged();
+  }
+
   async get(subdomain: string) {
     if (isNil(subdomain)) this.app.throw(403);
     return await this._get(subdomain);
   }
 
-  async _get(subdomain: string): Promise<EntityInstance | null> {
+  private async _get(subdomain: string): Promise<EntityInstance | null> {
     // get
     const instance = await this.modelInstance.get({ name: subdomain });
     if (instance) return instance;
     // instance base
-    const configInstanceBase = this._getConfigInstanceBase(subdomain);
+    const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(subdomain);
     if (!configInstanceBase) return null;
     // lock
     return await this.ctx.meta.util.lock({
@@ -71,15 +79,15 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       fn: async () => {
         return await this.ctx.meta.util.executeBeanIsolate({
           subdomain: null,
-          beanFullName: 'instance',
-          context: { configInstanceBase },
-          fn: '_registerLock',
+          fn: async () => {
+            await this._registerLock(configInstanceBase);
+          },
         });
       },
     });
   }
 
-  async _registerLock({ configInstanceBase }: { configInstanceBase: ConfigInstanceBase }) {
+  private async _registerLock(configInstanceBase: ConfigInstanceBase) {
     // get again
     let instance = await this.modelInstance.get({ name: configInstanceBase.subdomain });
     if (instance) return instance;
@@ -95,11 +103,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     return instance;
   }
 
-  _getConfigInstanceBase(subdomain: string) {
-    const instances = this.app.config.instances || [{ subdomain: '', password: '' }];
-    return instances.find(item => item.subdomain === subdomain);
-  }
-
   async reload() {
     // broadcast
     this.ctx.meta.util.broadcastEmit({
@@ -107,20 +110,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
       broadcastName: 'reload',
       data: null,
     });
-  }
-
-  async instanceChanged(reload: boolean = true) {
-    if (reload) {
-      // force to reload instance
-      await this.reload();
-    } else {
-      // broadcast
-      this.ctx.meta.util.broadcastEmit({
-        module: 'a-instance',
-        broadcastName: 'resetCache',
-        data: null,
-      });
-    }
   }
 
   async checkAppReady(options?: { wait?: boolean }) {
@@ -166,7 +155,9 @@ export class BeanInstance extends BeanBase<ScopeModule> {
   // options: force/instanceBase
   async instanceStartup(subdomain: string, options?: IInstanceStartupOptions) {
     if (!options) options = {};
-    if (!options.configInstanceBase) options.configInstanceBase = this._getConfigInstanceBase(subdomain);
+    if (!options.configInstanceBase) {
+      options.configInstanceBase = this.scope.service.instance.getConfigInstanceBase(subdomain);
+    }
     // cache instance config
     await this._cacheInstanceConfig(subdomain, false);
     // queue within the same worker

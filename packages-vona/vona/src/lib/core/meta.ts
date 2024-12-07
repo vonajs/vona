@@ -135,7 +135,7 @@ export class AppMeta extends BeanSimple {
     this.mode = this.app.config.configMeta.mode;
   }
 
-  async checkAppReady() {
+  async waitAppReady() {
     return new Promise((resolve, reject) => {
       // check once
       if (this.__versionReady) {

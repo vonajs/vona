@@ -14,8 +14,8 @@ const mock = require('egg-mock');
   const app = mock.app(options);
   await app.ready();
 
-  // check app ready
-  await app.meta.checkAppReady();
+  // wait app ready
+  await app.meta.waitAppReady();
 
   // exit
   process.exit(0);
