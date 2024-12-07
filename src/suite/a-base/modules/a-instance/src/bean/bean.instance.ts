@@ -1,4 +1,4 @@
-import { cast, ConfigInstanceBase, deepExtend, IInstanceStartupOptions, isNil, sleep, VonaConfig } from 'vona';
+import { ConfigInstanceBase, deepExtend, IInstanceStartupOptions, isNil, sleep, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';

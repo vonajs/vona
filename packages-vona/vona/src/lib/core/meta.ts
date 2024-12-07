@@ -85,7 +85,7 @@ export class AppMeta extends BeanSimple {
   __versionReady: boolean;
   __versionReadyError: Error;
   //
-  _loadQueueWorkers: ({ subdomain }: { subdomain: string }) => void;
+  _loadQueueWorkers: (subdomain: string) => void;
   _loadSchedules: () => Promise<void>;
   _runSchedule: (context) => Promise<any>;
 

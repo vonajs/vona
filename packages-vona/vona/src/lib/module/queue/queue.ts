@@ -44,7 +44,7 @@ export default function (app: VonaApplication, modules) {
     }
   }
 
-  app.meta._loadQueueWorkers = ({ subdomain }) => {
+  app.meta._loadQueueWorkers = (subdomain: string) => {
     for (const fullKey in ebQueues) {
       const queue = ebQueues[fullKey];
       const info = {

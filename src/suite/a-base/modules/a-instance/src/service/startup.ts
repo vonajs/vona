@@ -10,19 +10,20 @@ import {
 import { ScopeModule } from '../.metadata/this.js';
 import { clearResources } from '../common/clear.js';
 
+const SymbolStartups = Symbol('SymbolStartups');
+
 @Service()
 export class ServiceStartup extends BeanBase<ScopeModule> {
+  private [SymbolStartups]: IMiddlewareItem<unknown, IDecoratorStartupOptions>[];
+
   async versionReady() {
     // clear keys
     await clearResources(this.app);
 
     // run startups: not after
-    for (const startup of this.app.meta.onionStartup.middlewaresGlobal) {
-      const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
-      if (startupOptions.enable === false || !this.app.meta.util.checkMiddlewareOptionsMeta(startupOptions.meta)) {
-        continue;
-      }
-      if (!startupOptions.instance && startupOptions.after !== true) {
+    for (const startup of this._startups) {
+      const startupOptions = startup.beanOptions.options;
+      if (!startupOptions?.instance && startupOptions?.after !== true) {
         console.log(`---- startup: ${startup.name}, pid: ${process.pid}`);
         await this.runStartup(startup.name);
       }
@@ -33,12 +34,9 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     this.app.meta.appReadyInstances = {};
 
     // run startups: after
-    for (const startup of this.app.meta.onionStartup.middlewaresGlobal) {
-      const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
-      if (startupOptions.enable === false || !this.app.meta.util.checkMiddlewareOptionsMeta(startupOptions.meta)) {
-        continue;
-      }
-      if (!startupOptions.instance && startupOptions.after === true) {
+    for (const startup of this._startups) {
+      const startupOptions = startup.beanOptions.options;
+      if (!startupOptions?.instance && startupOptions?.after === true) {
         console.log(`---- startup: ${startup.name}, pid: ${process.pid}`);
         await this.runStartup(startup.name);
       }
@@ -124,24 +122,36 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
 
   async runStartupInstance(subdomain: string, options?: IInstanceStartupOptions) {
     // run startups: not after
-    for (const startup of app.meta.startupsArray) {
-      if (!startup.config.disable && startup.config.instance && startup.config.after !== true) {
-        console.log(`---- instance startup: ${startup.key}, pid: ${process.pid}`);
-        await app.meta._runStartup(startup.module, startup.name, subdomain, options);
+    for (const startup of this._startups) {
+      const startupOptions = startup.beanOptions.options;
+      if (startupOptions?.instance && startupOptions?.after !== true) {
+        console.log(`---- instance startup: ${startup.name}, pid: ${process.pid}`);
+        await this.runStartup(startup.name, subdomain, options);
       }
     }
     // set flag
-    app.meta.appReadyInstances[subdomain] = true;
+    this.app.meta.appReadyInstances[subdomain] = true;
     // run startups: after
-    for (const startup of app.meta.startupsArray) {
-      if (!startup.config.disable && startup.config.instance && startup.config.after === true) {
-        console.log(`---- instance startup: ${startup.key}, pid: ${process.pid}`);
-        await app.meta._runStartup(startup.module, startup.name, subdomain, options);
+    for (const startup of this._startups) {
+      const startupOptions = startup.beanOptions.options;
+      if (startupOptions?.instance && startupOptions?.after === true) {
+        console.log(`---- instance startup: ${startup.name}, pid: ${process.pid}`);
+        await this.runStartup(startup.name, subdomain, options);
       }
     }
     // load queue workers
-    if (!app.meta.isTest) {
-      app.meta._loadQueueWorkers({ subdomain });
+    if (!this.app.meta.isTest) {
+      this.app.meta._loadQueueWorkers(subdomain);
     }
+  }
+
+  private get _startups() {
+    if (!this[SymbolStartups]) {
+      this[SymbolStartups] = this.app.meta.onionStartup.middlewaresGlobal.filter(startup => {
+        const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
+        return startupOptions.enable !== false && this.app.meta.util.checkMiddlewareOptionsMeta(startupOptions.meta);
+      }) as unknown as IMiddlewareItem<unknown, IDecoratorStartupOptions>[];
+    }
+    return this[SymbolStartups];
   }
 }

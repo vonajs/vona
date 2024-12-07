@@ -50,7 +50,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'captcha.provider'
   | 'sms.provider'
   | 'database.dialect';
-export interface IDecoratorBeanOptionsBase<T = unknown> {
+export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**
    * global: equal to name
    * others: module.scene.name
@@ -63,7 +63,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   // containerScope?: ContainerScope;
   virtual?: boolean;
   moduleBelong?: string;
-  options?: unknown;
+  options?: OPTIONS;
   optionsPrimitive?: boolean;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
