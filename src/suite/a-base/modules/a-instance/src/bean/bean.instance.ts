@@ -1,4 +1,4 @@
-import { cast, ConfigInstanceBase, deepExtend, isNil, VonaConfig } from 'vona';
+import { cast, ConfigInstanceBase, deepExtend, isNil, sleep, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import boxen from 'boxen';
@@ -127,7 +127,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (!options) options = { wait: true };
     if (!this.ctx.app.meta.appReady && options.wait === false) return false;
     while (!this.ctx.app.meta.appReady) {
-      await this.app.bean.util.sleep(300);
+      await sleep(300);
     }
     return true;
   }

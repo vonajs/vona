@@ -1,4 +1,4 @@
-import { Bean } from 'vona';
+import { Bean, sleep } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
 @Bean({ scene: 'cli.default' })
@@ -41,7 +41,7 @@ export class CliDefaultDemo extends BeanCliBase {
         text,
       });
       // sleep
-      await this.app.bean.util.sleep(200);
+      await sleep(200);
       // level two
       await this._levelTwo({ progressNo: progressNo + 1 });
     }
@@ -59,7 +59,7 @@ export class CliDefaultDemo extends BeanCliBase {
         text,
       });
       // sleep
-      await this.app.bean.util.sleep(200);
+      await sleep(200);
       // level two
       await this._levelThree({ progressNo: progressNo + 1 });
     }
@@ -77,7 +77,7 @@ export class CliDefaultDemo extends BeanCliBase {
         text,
       });
       // sleep
-      await this.app.bean.util.sleep(200);
+      await sleep(200);
     }
   }
 }

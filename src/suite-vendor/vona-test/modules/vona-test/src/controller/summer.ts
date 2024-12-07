@@ -41,7 +41,7 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     assert.equal(value.id, key1.id);
 
     // get: peek sleep for mem stale
-    await this.app.bean.util.sleep(900);
+    await sleep(900);
 
     // get: peek again
     value = await cache.peek(key1, { mode: 'redis' });
@@ -53,7 +53,7 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     });
 
     // get: peek sleep for redis stale
-    await this.app.bean.util.sleep(1900);
+    await sleep(1900);
 
     // get: peek again
     await retry({ retries: 3 }, async () => {

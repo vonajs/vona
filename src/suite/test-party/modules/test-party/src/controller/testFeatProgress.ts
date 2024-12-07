@@ -1,4 +1,4 @@
-import { BeanBase, Controller } from 'vona';
+import { BeanBase, Controller, sleep } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
@@ -43,7 +43,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
         text,
       });
       // sleep
-      await this.app.bean.util.sleep(1500);
+      await sleep(1500);
       // level two
       await this._levelTwo({ progressId, progressNo: progressNo + 1 });
     }
@@ -62,7 +62,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
         text,
       });
       // sleep
-      await this.app.bean.util.sleep(1500);
+      await sleep(1500);
       // level two
       await this._levelThree({ progressId, progressNo: progressNo + 1 });
     }
@@ -81,7 +81,7 @@ export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
         text,
       });
       // sleep
-      await this.app.bean.util.sleep(1500);
+      await sleep(1500);
     }
   }
 }
