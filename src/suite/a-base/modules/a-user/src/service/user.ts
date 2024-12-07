@@ -1,9 +1,10 @@
 import { BeanBase, Service } from 'vona';
+import { ScopeModule } from '../.metadata/this.js';
 
 const __appKeyDefault = 'a-app:appDefault';
 
 @Service()
-export class ServiceUser extends BeanBase {
+export class ServiceUser extends BeanBase<ScopeModule> {
   async save({ data, user }: any) {
     // id
     data.id = user.id;
@@ -121,12 +122,12 @@ export class ServiceUser extends BeanBase {
 
   async themeLoad({ appKey, user }: any) {
     const key = this._getThemeKey({ appKey, user });
-    return await this.app.bean.status.get(key);
+    return await this.scope.status.get(key);
   }
 
   async themeSave({ appKey, theme, user }: any) {
     const key = this._getThemeKey({ appKey, user });
-    await this.app.bean.status.set(key, theme);
+    await this.scope.status.set(key, theme);
   }
 
   _getThemeKey({ appKey, user }: any) {

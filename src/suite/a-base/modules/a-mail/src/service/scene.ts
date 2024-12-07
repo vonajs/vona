@@ -3,10 +3,6 @@ import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
 export class ServiceScene extends BeanBase<ScopeModule> {
-  get statusModule() {
-    return this.scope._bean.status;
-  }
-
   async list() {
     return this.app.bean.mailSceneCache.getMailScenesConfigForAdmin();
   }
@@ -22,7 +18,7 @@ export class ServiceScene extends BeanBase<ScopeModule> {
     const scenes = this.app.bean.mailSceneCache.getMailScenesConfigCache();
     scenes[sceneName] = data ? this.app.bean.mailSceneCache.purgeScene(data) : data;
     // update
-    await this.statusModule.set('mailScenes', scenes);
+    await this.scope.status.set('mailScenes', scenes);
     // changed
     await this.app.bean.mailSceneCache.mailSceneChanged();
   }

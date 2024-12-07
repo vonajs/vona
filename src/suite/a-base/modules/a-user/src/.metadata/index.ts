@@ -25,6 +25,19 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-user:status': never;
+  }
+}
+/** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** services: begin */
 export * from '../service/public.js';
 export * from '../service/user.js';
@@ -62,7 +75,7 @@ export interface ScopeModuleAUser
     never,
     (typeof locales)[TypeLocaleBase],
     never,
-    never,
+    MetaStatus,
     IModuleService,
     never,
     never,
