@@ -3,17 +3,11 @@ export * from '../bean/bean.authProvider.js';
 export * from '../bean/bean.authProviderBase_.js';
 export * from '../bean/bean.authProviderCache.js';
 export * from '../bean/broadcast.authProviderChanged.js';
-export * from '../bean/startup.cacheAuthProviders.js';
-export * from '../bean/startup.registerPassport.js';
-export * from '../bean/startup.registerRouters.js';
 export * from '../bean/version.manager.js';
 import { BeanAuthProvider } from '../bean/bean.authProvider.js';
 import { BeanAuthProviderBase } from '../bean/bean.authProviderBase_.js';
 import { BeanAuthProviderCache } from '../bean/bean.authProviderCache.js';
 import { BroadcastAuthProviderChanged } from '../bean/broadcast.authProviderChanged.js';
-import { StartupCacheAuthProviders } from '../bean/startup.cacheAuthProviders.js';
-import { StartupRegisterPassport } from '../bean/startup.registerPassport.js';
-import { StartupRegisterRouters } from '../bean/startup.registerRouters.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -25,9 +19,6 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     authProviderBase: BeanAuthProviderBase;
     'a-auth.broadcast.authProviderChanged': BroadcastAuthProviderChanged;
-    'a-auth.startup.cacheAuthProviders': StartupCacheAuthProviders;
-    'a-auth.startup.registerPassport': StartupRegisterPassport;
-    'a-auth.startup.registerRouters': StartupRegisterRouters;
     'a-auth.version.manager': VersionManager;
   }
 }
@@ -56,6 +47,20 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** startup: begin */
+export * from '../bean/startup.cacheAuthProviders.js';
+export * from '../bean/startup.registerPassport.js';
+export * from '../bean/startup.registerRouters.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'a-auth:cacheAuthProviders': IDecoratorStartupOptions;
+    'a-auth:registerPassport': IDecoratorStartupOptions;
+    'a-auth:registerRouters': IDecoratorStartupOptions;
+  }
+}
+/** startup: end */
 /** entities: begin */
 import { EntityAuth } from '../entity/auth.js';
 import { EntityAuthProvider } from '../entity/authProvider.js';

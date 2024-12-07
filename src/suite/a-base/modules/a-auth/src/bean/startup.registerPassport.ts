@@ -1,7 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 
-@Bean({ scene: 'startup' })
-export class StartupRegisterPassport extends BeanBase {
+@Startup()
+export class StartupRegisterPassport extends BeanBase implements IStartupExecute {
   async execute() {
     // verify
     this.app.passport.verify(async (ctx, profileUser) => {
