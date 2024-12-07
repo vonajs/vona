@@ -8,9 +8,6 @@ export class BeanMailSceneCache extends BeanBase<ScopeModule> {
   get configModule() {
     return this.scope.config;
   }
-  get statusModule() {
-    return this.scope._bean.status;
-  }
 
   getMailScenesConfigCache() {
     return __mailScenesConfigCache[this.ctx.subdomain];
@@ -51,7 +48,7 @@ export class BeanMailSceneCache extends BeanBase<ScopeModule> {
     // configDefault
     const configDefault = this.configModule.scenes;
     // configScenes
-    let configScenes = await this.statusModule.get('mailScenes');
+    let configScenes = await this.scope.status.get('mailScenes');
     configScenes = this.app.bean.util.extend({}, configDefault, configScenes);
     // cache
     __mailScenesConfigCache[this.ctx.subdomain] = configScenes;

@@ -59,6 +59,19 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-mail:status': never;
+  }
+}
+/** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** entities: begin */
 import { EntityMail } from '../entity/mail.js';
 export interface IModuleEntity {
@@ -108,7 +121,7 @@ export interface ScopeModuleAMail
     never,
     (typeof locales)[TypeLocaleBase],
     never,
-    never,
+    MetaStatus,
     IModuleService,
     IModuleModel,
     IModuleEntity,

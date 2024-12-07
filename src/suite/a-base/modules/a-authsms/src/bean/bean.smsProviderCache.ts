@@ -8,9 +8,6 @@ export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
   get configModule() {
     return this.scope.config;
   }
-  get statusModule() {
-    return this.scope._bean.status;
-  }
 
   getSmsProvidersConfigCache() {
     return __smsProvidersConfigCache[this.ctx.subdomain];
@@ -51,7 +48,7 @@ export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
     // configDefault
     const configDefault = this.configModule.sms.providers;
     // configProviders
-    let configProviders = await this.statusModule.get('smsProviders');
+    let configProviders = await this.scope.status.get('smsProviders');
     configProviders = this.app.bean.util.extend({}, configDefault, configProviders);
     // cache
     __smsProvidersConfigCache[this.ctx.subdomain] = configProviders;

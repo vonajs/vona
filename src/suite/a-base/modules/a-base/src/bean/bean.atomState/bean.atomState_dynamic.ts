@@ -7,28 +7,23 @@ const __atomClassDict = {
 };
 
 export class BeanAtomStateDynamic extends BeanAtomStateStatic {
-  // status
-  get beanStatus() {
-    return this.app.bean.status.module(__ThisModule__);
-  }
-
   async dynamic_getDictKeyInfo({ atomClass }: any) {
     const atomClassId = await this.app.bean.atomClass.getAtomClassId(atomClass);
     const statusName = `atomStateDictKey:${atomClassId}`;
-    return await this.beanStatus.get(statusName);
+    return (await this.scope.status.get(statusName as any)) as any;
   }
 
   async dynamic_setDictKeyInfo({ atomClass, dictKey, mode }: any) {
     const atomClassId = await this.app.bean.atomClass.getAtomClassId(atomClass);
     const statusName = `atomStateDictKey:${atomClassId}`;
     const dictKeyInfo = { dictKey, mode };
-    await this.beanStatus.set(statusName, dictKeyInfo);
+    await this.scope.status.set(statusName as any, dictKeyInfo as any);
   }
 
   async dynamic_clearDictKeyInfo({ atomClass }: any) {
     const atomClassId = await this.app.bean.atomClass.getAtomClassId(atomClass);
     const statusName = `atomStateDictKey:${atomClassId}`;
-    await this.beanStatus.set(statusName, null);
+    await this.scope.status.set(statusName as any, null as any);
   }
 
   async dynamic_getDict({ atomClass }: any) {

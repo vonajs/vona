@@ -46,6 +46,19 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-authsms:status': never;
+  }
+}
+/** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** services: begin */
 export * from '../service/auth.js';
 export * from '../service/captcha.js';
@@ -95,7 +108,7 @@ export interface ScopeModuleAAuthsms
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
-    never,
+    MetaStatus,
     IModuleService,
     never,
     never,

@@ -316,6 +316,16 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-base:status': never;
+  }
+}
+/** meta: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.atomClassInner.js';
 export * from '../bean/summerCache.roleParentsOfUser.js';
@@ -350,6 +360,9 @@ export * from '../atom/userAtomRight.js';
 export * from '../atom/userFieldsRight.js';
 export * from '../atom/userResourceRight.js';
 /** atoms: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** summerCaches: begin */
 import { SummerCacheAtomClassInner } from '../bean/summerCache.atomClassInner.js';
 import { SummerCacheRoleParentsOfUser } from '../bean/summerCache.roleParentsOfUser.js';
@@ -595,7 +608,7 @@ export interface ScopeModuleABase
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     typeof constants,
-    never,
+    MetaStatus,
     IModuleService,
     IModuleModel,
     IModuleEntity,

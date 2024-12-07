@@ -3,7 +3,7 @@ import { BeanRoleAtomRights } from './bean.role_atomRights.js';
 
 export class BeanRoleBuild extends BeanRoleAtomRights {
   // set dirty
-  async setDirty(dirty) {
+  async setDirty(dirty: boolean) {
     // when build done, clear summer
     if (!dirty) {
       await this.app.bean.atomRightAux.clearSummersOfRole();
@@ -12,11 +12,11 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       await this.app.bean.fields.clearSummer_fieldsRightOfUser();
     }
     // status
-    await this.app.bean.status.module(__ThisModule__).set('roleDirty', dirty);
+    await this.scope.status.set('roleDirty', dirty);
   }
 
   async getDirty() {
-    return await this.app.bean.status.module(__ThisModule__).get('roleDirty');
+    return await this.scope.status.get('roleDirty');
   }
 
   // build roles

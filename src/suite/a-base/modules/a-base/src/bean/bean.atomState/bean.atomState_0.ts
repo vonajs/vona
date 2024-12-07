@@ -1,8 +1,9 @@
 import { cast } from 'vona';
 import { BeanBase } from 'vona';
 import { BeanAtomState } from '../bean.atomState.js';
+import { ScopeModule } from '../../.metadata/this.js';
 
-export class BeanAtomState0 extends BeanBase {
+export class BeanAtomState0 extends BeanBase<ScopeModule> {
   dictKeyDefault: any;
 
   constructor() {
