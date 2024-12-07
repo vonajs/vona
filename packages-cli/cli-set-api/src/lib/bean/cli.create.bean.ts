@@ -14,6 +14,7 @@ const __boilerplates = {
   interceptor: 'interceptor',
   metaIndex: 'metaIndex',
   metaVersion: 'metaVersion',
+  metaStatus: 'metaStatus',
   middleware: 'middleware',
   pipe: 'pipe',
   socketConnection: 'socketConnection',

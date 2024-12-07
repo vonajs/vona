@@ -44,6 +44,16 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'vona-test:status': never;
+  }
+}
+/** meta: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
