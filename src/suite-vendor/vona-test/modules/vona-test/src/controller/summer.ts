@@ -46,7 +46,7 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     // get: peek again
     value = await cache.peek(key1, { mode: 'redis' });
     assert.equal(value.id, key1.id);
-    retry({ retries: 3 }, async () => {
+    await retry({ retries: 3 }, async () => {
       await sleep(100);
       value = await cache.peek(key1, { mode: 'mem' });
       assert.equal(value, undefined);
@@ -56,7 +56,7 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     await this.app.bean.util.sleep(1900);
 
     // get: peek again
-    retry({ retries: 3 }, async () => {
+    await retry({ retries: 3 }, async () => {
       await sleep(100);
       value = await cache.peek(key1, { mode: 'redis' });
       assert.equal(value, undefined);
