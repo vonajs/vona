@@ -49,16 +49,6 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/instance.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-instance:instance': IDecoratorControllerOptions;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.version.js';
