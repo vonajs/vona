@@ -1,8 +1,8 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 
-@Bean({ scene: 'startup' })
-export class StartupLoadSchedules extends BeanBase {
+@Startup({ debounce: true, after: true })
+export class StartupLoadSchedules extends BeanBase implements IStartupExecute {
   async execute() {
-    await this.app.meta._loadSchedules({ ctx: this.ctx });
+    await this.app.meta._loadSchedules();
   }
 }

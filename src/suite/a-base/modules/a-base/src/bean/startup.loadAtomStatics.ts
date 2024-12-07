@@ -1,7 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 
-@Bean({ scene: 'startup' })
-export class StartupLoadAtomStatics extends BeanBase {
+@Startup({ instance: true, debounce: true })
+export class StartupLoadAtomStatics extends BeanBase implements IStartupExecute {
   async execute() {
     await this.app.bean.atomStatic.loadAllAtomStatics();
   }

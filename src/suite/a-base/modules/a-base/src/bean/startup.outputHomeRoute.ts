@@ -1,8 +1,8 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 import chalk from 'chalk';
 
-@Bean({ scene: 'startup' })
-export class StartupOutputHomeRoute extends BeanBase {
+@Startup({ debounce: true, after: true })
+export class StartupOutputHomeRoute extends BeanBase implements IStartupExecute {
   async execute() {
     // only for local
     if (!this.ctx.app.meta.isLocal) return;

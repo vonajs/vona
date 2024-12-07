@@ -11,6 +11,7 @@ export interface IDecoratorStartupOptions extends IMiddlewareBaseEnable {
   instance?: boolean;
   debounce?: boolean | number;
   transaction?: boolean;
+  after?: boolean;
   dependencies?: (keyof IStartupRecord)[] | keyof IStartupRecord;
   dependents?: (keyof IStartupRecord)[] | keyof IStartupRecord;
 }

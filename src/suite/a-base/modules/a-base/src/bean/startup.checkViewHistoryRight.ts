@@ -1,8 +1,8 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'startup' })
-export class StartupCheckViewHistoryRight extends BeanBase<ScopeModule> {
+@Startup({ instance: true, debounce: true, dependencies: 'a-base:checkResourceLocales' })
+export class StartupCheckViewHistoryRight extends BeanBase<ScopeModule> implements IStartupExecute {
   get modelRoleRight() {
     return this.scope.model.roleRight;
   }

@@ -65,8 +65,8 @@ export default function (app: VonaApplication) {
     }
   }
 
-  app.meta._loadSchedules = async ({ ctx }) => {
-    const instances = await (<any>ctx.app.bean).instance.list();
+  app.meta._loadSchedules = async () => {
+    const instances = await (<any>app.bean).instance.list();
     for (const instance of instances) {
       __installSchedules({ subdomain: instance.name });
     }

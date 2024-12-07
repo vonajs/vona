@@ -1,7 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase, IStartupExecute, Startup } from 'vona';
 
-@Bean({ scene: 'startup' })
-export class StartupCheckResourceLocales extends BeanBase {
+@Startup({ instance: true, debounce: true, dependencies: 'a-base:loadAtomStatics' })
+export class StartupCheckResourceLocales extends BeanBase implements IStartupExecute {
   async execute() {
     await this.app.bean.resource.checkLocales();
   }

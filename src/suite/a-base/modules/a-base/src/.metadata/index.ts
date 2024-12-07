@@ -20,11 +20,6 @@ export * from '../bean/bean.user.js';
 export * from '../bean/bean.util.js';
 export * from '../bean/queue.roleBuild.js';
 export * from '../bean/queue.schedule.js';
-export * from '../bean/startup.checkResourceLocales.js';
-export * from '../bean/startup.checkViewHistoryRight.js';
-export * from '../bean/startup.loadAtomStatics.js';
-export * from '../bean/startup.loadSchedules.js';
-export * from '../bean/startup.outputHomeRoute.js';
 export * from '../bean/stats.draftsCommon.js';
 export * from '../bean/stats.draftsFlowing.js';
 export * from '../bean/stats.labels.js';
@@ -52,11 +47,6 @@ import { BeanUser } from '../bean/bean.user.js';
 import { BeanUtil } from '../bean/bean.util.js';
 import { QueueRoleBuild } from '../bean/queue.roleBuild.js';
 import { QueueSchedule } from '../bean/queue.schedule.js';
-import { StartupCheckResourceLocales } from '../bean/startup.checkResourceLocales.js';
-import { StartupCheckViewHistoryRight } from '../bean/startup.checkViewHistoryRight.js';
-import { StartupLoadAtomStatics } from '../bean/startup.loadAtomStatics.js';
-import { StartupLoadSchedules } from '../bean/startup.loadSchedules.js';
-import { StartupOutputHomeRoute } from '../bean/startup.outputHomeRoute.js';
 import { StatsDraftsCommon } from '../bean/stats.draftsCommon.js';
 import { StatsDraftsFlowing } from '../bean/stats.draftsFlowing.js';
 import { StatsLabels } from '../bean/stats.labels.js';
@@ -90,11 +80,6 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-base.queue.roleBuild': QueueRoleBuild;
     'a-base.queue.schedule': QueueSchedule;
-    'a-base.startup.checkResourceLocales': StartupCheckResourceLocales;
-    'a-base.startup.checkViewHistoryRight': StartupCheckViewHistoryRight;
-    'a-base.startup.loadAtomStatics': StartupLoadAtomStatics;
-    'a-base.startup.loadSchedules': StartupLoadSchedules;
-    'a-base.startup.outputHomeRoute': StartupOutputHomeRoute;
     'a-base.stats.draftsCommon': StatsDraftsCommon;
     'a-base.stats.draftsFlowing': StatsDraftsFlowing;
     'a-base.stats.labels': StatsLabels;
@@ -346,6 +331,24 @@ declare module 'vona' {
   }
 }
 /** summerCache: end */
+/** startup: begin */
+export * from '../bean/startup.checkResourceLocales.js';
+export * from '../bean/startup.checkViewHistoryRight.js';
+export * from '../bean/startup.loadAtomStatics.js';
+export * from '../bean/startup.loadSchedules.js';
+export * from '../bean/startup.outputHomeRoute.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'a-base:checkResourceLocales': IDecoratorStartupOptions;
+    'a-base:checkViewHistoryRight': IDecoratorStartupOptions;
+    'a-base:loadAtomStatics': IDecoratorStartupOptions;
+    'a-base:loadSchedules': IDecoratorStartupOptions;
+    'a-base:outputHomeRoute': IDecoratorStartupOptions;
+  }
+}
+/** startup: end */
 /** atoms: begin */
 export * from '../atom/resource.js';
 export * from '../atom/role.js';
