@@ -17,18 +17,6 @@ declare module 'vona' {
   }
 }
 /** beans: end */
-/** middleware: begin */
-export * from '../bean/middleware.appReady.js';
-export * from '../bean/middleware.instance.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMiddlewareRecordLocal {
-    'a-instance:appReady': never;
-    'a-instance:instance': never;
-  }
-}
-/** middleware: end */
 /** entity: begin */
 export * from '../entity/instance.js';
 
