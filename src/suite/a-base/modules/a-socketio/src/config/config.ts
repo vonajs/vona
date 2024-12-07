@@ -1,5 +1,4 @@
 import { VonaApplication, IModuleConfigBroadcast, IModuleConfigQueue } from 'vona';
-import { IModuleConfigSummer } from 'vona-module-a-summer';
 
 // queues
 const queues = {
@@ -31,22 +30,10 @@ const broadcasts = {
   } as IModuleConfigBroadcast,
 };
 
-// summer
-const summer = {
-  group: {
-    model: {
-      messageClass: {
-        config: 'allWithIgnoreNull',
-      },
-    },
-  },
-} as IModuleConfigSummer;
-
 export const config = (_app: VonaApplication) => {
   return {
     queues,
     broadcasts,
-    summer,
     message: {
       sync: {
         saveLimit: 200,
