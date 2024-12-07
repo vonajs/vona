@@ -11,6 +11,7 @@ const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
+const BeanModuleStatus = Symbol('BeanScopeBase#BeanModuleStatus');
 const BeanModuleSummerCache = Symbol('BeanScopeBase#BeanModuleSummerCache');
 
 export class BeanScopeBase extends BeanBaseSimple {
@@ -18,6 +19,7 @@ export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleBean]: BeanScopeBean;
   private [BeanModuleUtil]: BeanScopeUtil;
+  private [BeanModuleStatus]: unknown;
   private [BeanModuleSummerCache]: BeanScopeSummerCache;
   private __scenes: Record<string, BeanScopeScene> = {};
 
@@ -64,6 +66,13 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleUtil] = this.bean._newBean(BeanScopeUtil, moduleBelong);
       }
       return this[BeanModuleUtil];
+    }
+    // status
+    if (prop === 'status') {
+      if (!this[BeanModuleStatus]) {
+        this[BeanModuleStatus] = this.bean._getBean(`${moduleBelong}.meta.status` as any);
+      }
+      return this[BeanModuleStatus];
     }
     // summerCache
     if (prop === 'summerCache') {
