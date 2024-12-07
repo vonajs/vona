@@ -30,10 +30,6 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
     return this.scope.config;
   }
 
-  get beanStatus() {
-    return this.scope._bean.status;
-  }
-
   async getConfigSiteBase() {
     // config
     //    try other then default
@@ -63,25 +59,25 @@ export class ServiceBuild extends BeanBase<ScopeModule> {
 
   async getConfigSite() {
     const name = `config-site:${this.atomClass.module}:${this.atomClass.atomClassName}`;
-    return await this.beanStatus.get(name);
+    return await this.scope.status.get(name);
   }
 
   async setConfigSite({ data }: any) {
     const name = `config-site:${this.atomClass.module}:${this.atomClass.atomClassName}`;
-    await this.beanStatus.set(name, data);
+    await this.scope.status.set(name, data);
   }
 
   async getConfigLanguage({ language }: any) {
     language = language || 'default';
     const name = `config-${language}:${this.atomClass.module}:${this.atomClass.atomClassName}`;
-    return await this.beanStatus.get(name);
+    return await this.scope.status.get(name);
   }
 
   async setConfigLanguage({ language, data }: any) {
     language = language || 'default';
     const name = `config-${language}:${this.atomClass.module}:${this.atomClass.atomClassName}`;
     this._adjustConfigLanguange(data);
-    await this.beanStatus.set(name, data);
+    await this.scope.status.set(name, data);
   }
 
   async getConfigLanguagePreview({ language }: any) {

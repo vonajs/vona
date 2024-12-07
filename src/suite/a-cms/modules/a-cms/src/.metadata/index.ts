@@ -68,9 +68,22 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-cms:status': never;
+  }
+}
+/** meta: end */
 /** atoms: begin */
 export * from '../atom/article.js';
 /** atoms: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** entities: begin */
 import { EntityArticle } from '../entity/article.js';
 import { EntityContent } from '../entity/content.js';
@@ -139,7 +152,7 @@ export interface ScopeModuleACms
     typeof Errors,
     (typeof locales)[TypeLocaleBase],
     never,
-    never,
+    MetaStatus,
     IModuleService,
     IModuleModel,
     IModuleEntity,
