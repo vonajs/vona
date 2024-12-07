@@ -10,9 +10,6 @@ export * from '../bean/io.message.test.js';
 export * from '../bean/queue.test.js';
 export * from '../bean/schedule.test.js';
 export * from '../bean/sequence.test.js';
-export * from '../bean/startup.startupAll.js';
-export * from '../bean/startup.startupInstance.js';
-export * from '../bean/startup.test1.js';
 export * from '../bean/stats.tasksInstance.js';
 export * from '../bean/stats.tasksUser.js';
 export * from '../bean/summer.cache.test.js';
@@ -28,9 +25,6 @@ import { IoMessageTest } from '../bean/io.message.test.js';
 import { QueueTest } from '../bean/queue.test.js';
 import { ScheduleTest } from '../bean/schedule.test.js';
 import { SequenceTest } from '../bean/sequence.test.js';
-import { StartupStartupAll } from '../bean/startup.startupAll.js';
-import { StartupStartupInstance } from '../bean/startup.startupInstance.js';
-import { StartupTest1 } from '../bean/startup.test1.js';
 import { StatsTasksInstance } from '../bean/stats.tasksInstance.js';
 import { StatsTasksUser } from '../bean/stats.tasksUser.js';
 import { SummerCacheTest } from '../bean/summer.cache.test.js';
@@ -51,9 +45,6 @@ declare module 'vona' {
     'test-party.queue.test': QueueTest;
     'test-party.schedule.test': ScheduleTest;
     'test-party.sequence.test': SequenceTest;
-    'test-party.startup.startupAll': StartupStartupAll;
-    'test-party.startup.startupInstance': StartupStartupInstance;
-    'test-party.startup.test1': StartupTest1;
     'test-party.stats.tasksInstance': StatsTasksInstance;
     'test-party.stats.tasksUser': StatsTasksUser;
     'test-party.summer.cache.test': SummerCacheTest;
@@ -209,6 +200,18 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** startup: begin */
+export * from '../bean/startup.startupAll.js';
+export * from '../bean/startup.startupInstance.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'test-party:startupAll': IDecoratorStartupOptions;
+    'test-party:startupInstance': IDecoratorStartupOptions;
+  }
+}
+/** startup: end */
 /** atoms: begin */
 export * from '../atom/party.js';
 export * from '../atom/partyExpense.js';
