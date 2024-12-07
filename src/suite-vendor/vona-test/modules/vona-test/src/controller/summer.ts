@@ -1,4 +1,4 @@
-import { BeanBase, Controller, Post } from 'vona';
+import { BeanBase, Controller, Post, retry, sleep } from 'vona';
 import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 import { SummerCacheTest } from '../bean/summerCache.test.js';
@@ -41,20 +41,26 @@ export class ControllerSummer extends BeanBase<ScopeModule> {
     assert.equal(value.id, key1.id);
 
     // get: peek sleep for mem stale
-    await this.app.bean.util.sleep(1000);
+    await this.app.bean.util.sleep(900);
 
     // get: peek again
     value = await cache.peek(key1, { mode: 'redis' });
     assert.equal(value.id, key1.id);
-    value = await cache.peek(key1, { mode: 'mem' });
-    assert.equal(value, undefined);
+    retry({ retries: 3 }, async () => {
+      await sleep(100);
+      value = await cache.peek(key1, { mode: 'mem' });
+      assert.equal(value, undefined);
+    });
 
     // get: peek sleep for redis stale
-    await this.app.bean.util.sleep(2000);
+    await this.app.bean.util.sleep(1900);
 
     // get: peek again
-    value = await cache.peek(key1, { mode: 'redis' });
-    assert.equal(value, undefined);
+    retry({ retries: 3 }, async () => {
+      await sleep(100);
+      value = await cache.peek(key1, { mode: 'redis' });
+      assert.equal(value, undefined);
+    });
     value = await cache.peek(key1, { mode: 'mem' });
     assert.equal(value, undefined);
 

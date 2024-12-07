@@ -504,6 +504,10 @@ export async function catchError<T>(
   return error ? [undefined, error!] : [data!, undefined];
 }
 
+export async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function delegateProperties(ctx, ctxCaller) {
   const req = ctx.req;
   for (const property of ['cookies', 'session', 'user', 'state']) {
