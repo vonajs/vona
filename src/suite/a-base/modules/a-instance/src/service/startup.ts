@@ -46,13 +46,16 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     if (this.app.meta.isTest || this.app.meta.isLocal) {
       // subdomain
       const subdomain = '';
+      const options: IInstanceStartupOptions = {
+        force: false,
+        configInstanceBase: this.bean.instance._getConfigInstanceBase(subdomain),
+      };
       // init
       await this.app.meta.util.executeBean({
         subdomain,
-        beanModule: 'a-instance',
-        beanFullName: 'instance',
-        args: subdomain,
-        fn: 'instanceStartup',
+        fn: async () => {
+          await this.bean.instance.instanceStartup(subdomain, options);
+        },
       });
     }
 
