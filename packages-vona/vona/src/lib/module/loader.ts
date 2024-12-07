@@ -11,7 +11,6 @@ import loadMessenger from './messenger.js';
 import loadRedis from './redis.js';
 import loadQueues from './queue/queue.js';
 import loadBroadcasts from './broadcast/broadcast.js';
-import loadStartups from './startup.js';
 import loadSchedules from './schedule.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
@@ -53,7 +52,6 @@ export class ModuleLoader extends BeanSimple {
       loadRedis(app);
       loadQueues(app, modules);
       loadBroadcasts(app, modules);
-      loadStartups(app);
       loadSchedules(app);
       loadClusterApp(app);
       loadReload(app);
