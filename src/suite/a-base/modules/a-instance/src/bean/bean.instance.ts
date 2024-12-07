@@ -142,7 +142,7 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     if (this.ctx.app.meta.appReadyInstances[subdomain]) return true;
     // instance startup
     if (startup === false) return false;
-    await this.instanceStartup(subdomain);
+    await this.instanceStartup(subdomain, { force: false });
     return true;
   }
 
@@ -165,20 +165,22 @@ export class BeanInstance extends BeanBase<ScopeModule> {
 
   // options: force/instanceBase
   async instanceStartup(subdomain: string, options?: IInstanceStartupOptions) {
+    if (!options) options = {};
+    if (!options.configInstanceBase) options.configInstanceBase = this._getConfigInstanceBase(subdomain);
     // cache instance config
     await this._cacheInstanceConfig(subdomain, false);
     // queue within the same worker
     if (!__queueInstanceStartup[subdomain]) {
       __queueInstanceStartup[subdomain] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
         // check again
-        const force = info.options && info.options.force;
+        const force = info.options?.force;
         if (this.ctx.app.meta.appReadyInstances[info.subdomain] && !force) {
           info.resolve();
           cb();
           return;
         }
         // startup
-        this.scope.service.startup
+        this.$scope.core.service.startup
           .runStartupInstance(info.subdomain, info.options)
           .then(() => {
             info.resolve();

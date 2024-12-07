@@ -7,7 +7,7 @@ export class VersionReady extends BeanSimple {
     const app = this.app;
     try {
       // version ready
-      await cast(app.bean._getBean('a-instance.service.startup' as never)).versionReady();
+      await cast(app.bean._getBean('a-core.service.startup' as never)).versionReady();
       // record
       app.meta.__versionReady = true;
       // event: appReady

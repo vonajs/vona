@@ -9,21 +9,6 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
     return this.scope.model.instance;
   }
 
-  async item() {
-    return await this.modelInstance.get({ id: this.ctx.instance.id });
-  }
-
-  async save({ data }: any) {
-    // update
-    await this.modelInstance.update({
-      id: this.ctx.instance.id,
-      title: data.title,
-      config: JSON.stringify(this.__configBlackFields(data.config)),
-    });
-    // changed
-    await this.app.bean.instance.instanceChanged();
-  }
-
   async getConfigsPreview() {
     let instance = await this.item();
     if (!instance) this.app.throw(403);
