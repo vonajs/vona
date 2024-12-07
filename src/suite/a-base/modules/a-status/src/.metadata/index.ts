@@ -1,13 +1,9 @@
 /** beans: begin */
-export * from '../bean/bean.status.js';
 export * from '../bean/version.manager.js';
-import { BeanStatus } from '../bean/bean.status.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    status: BeanStatus;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-status.version.manager': VersionManager;
@@ -34,16 +30,6 @@ declare module 'vona' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/status.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-status:status': IDecoratorControllerOptions;
-  }
-}
-/** controller: end */
 /** entities: begin */
 import { EntityStatus } from '../entity/status.js';
 export interface IModuleEntity {
@@ -56,19 +42,6 @@ export interface IModuleModel {
   status: ModelStatus;
 }
 /** models: end */
-/** services: begin */
-export * from '../service/status.js';
-import { ServiceStatus } from '../service/status.js';
-export interface IModuleService {
-  status: ServiceStatus;
-}
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-status.service.status': ServiceStatus;
-  }
-}
-/** services: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 
@@ -76,7 +49,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
 export class ScopeModuleAStatus extends BeanScopeBase {}
 
 export interface ScopeModuleAStatus
-  extends TypeModuleResource<never, never, never, never, never, IModuleService, IModuleModel, IModuleEntity, never> {}
+  extends TypeModuleResource<never, never, never, never, never, never, IModuleModel, IModuleEntity, never> {}
 
 import 'vona';
 declare module 'vona' {

@@ -1,9 +1,14 @@
-import { EntityBaseTemp } from 'vona-module-a-base';
 import { Entity } from 'vona';
+import { EntityBase } from 'vona-module-a-database';
+import { Rule } from 'vona-module-a-validator';
+import { z } from 'zod';
 
 @Entity('aStatus')
-export class EntityStatus extends EntityBaseTemp {
+export class EntityStatus extends EntityBase {
+  @Rule(z.string())
   module: string;
+  @Rule(z.string())
   name: string;
+  @Rule(z.string())
   value: string;
 }
