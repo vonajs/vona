@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { schema } from './schema.js';
 import { coerceWithNil } from '@cabloy/zod-query';
 
-export function array<T>(classType: Constructable<T>, params?: z.RawCreateParams & { separator?: string }) {
+export function schemaArray<T>(classType: Constructable<T>, params?: z.RawCreateParams & { separator?: string }) {
   return z.preprocess(
     val => {
       val = coerceWithNil(val);
