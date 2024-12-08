@@ -20,4 +20,5 @@ function loadAll(app: VonaApplication) {
   app.meta.onionMeta = app.bean._newBean(Onion, 'meta');
   app.meta.onionSummerCache = app.bean._newBean(Onion, 'summerCache');
   app.meta.onionStartup = app.bean._newBean(Onion, 'startup');
+  app.meta.onionQueue = app.bean._newBean(Onion, 'queue');
 }
