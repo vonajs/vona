@@ -1,5 +1,6 @@
 import * as Bull from 'bullmq';
 import Redlock from 'redlock';
+import { IMiddlewareBaseEnable } from './middleware.js';
 
 export interface IQueueJobContext {
   job: Bull.Job;
@@ -32,3 +33,11 @@ export interface IQueueCallback {
 export interface IQueueCallbacks {
   [jobId: string | number]: IQueueCallback;
 }
+
+export interface IQueueRecord {}
+
+export interface IQueueExecute {
+  execute(options: IDecoratorQueueOptions): Promise<boolean>;
+}
+
+export interface IDecoratorQueueOptions extends IMiddlewareBaseEnable {}
