@@ -1,7 +1,8 @@
-import bull from 'bullmq';
+import * as Bull from 'bullmq';
+export * as Bull from 'bullmq';
 
 export interface IScheduleJobContext {
-  job: bull.Job;
+  job: Bull.Job;
   data: {
     subdomain: string;
     module: string;

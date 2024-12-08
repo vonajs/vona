@@ -1,4 +1,4 @@
-import * as bull from 'bullmq';
+import * as Bull from 'bullmq';
 import * as uuid from 'uuid';
 import {
   IQueueCallbacks,
@@ -59,7 +59,7 @@ export class QueueClient extends BeanSimple {
       prefix,
       connection: connectionWorker,
     });
-    _worker.worker = new bull.Worker(
+    _worker.worker = new Bull.Worker(
       queueKey,
       async job => {
         // concurrency
@@ -112,13 +112,13 @@ export class QueueClient extends BeanSimple {
     const queueOptions = (queueConfig.options && queueConfig.options.queue) || null;
 
     // create queue
-    const connectionQueue: bull.ConnectionOptions = app.redis.get('queue').duplicate();
+    const connectionQueue: Bull.ConnectionOptions = app.redis.get('queue').duplicate();
     const _queueOptions = Object.assign({}, queueOptions, { prefix, connection: connectionQueue });
-    _queue.queue = new bull.Queue(queueKey, _queueOptions);
+    _queue.queue = new Bull.Queue(queueKey, _queueOptions);
 
     // create events
-    const connectionEvents: bull.ConnectionOptions = app.redis.get('queue').duplicate();
-    _queue.queueEvents = new bull.QueueEvents(queueKey, { prefix, connection: connectionEvents });
+    const connectionEvents: Bull.ConnectionOptions = app.redis.get('queue').duplicate();
+    _queue.queueEvents = new Bull.QueueEvents(queueKey, { prefix, connection: connectionEvents });
     _queue.queueEvents.on('completed', ({ jobId, returnvalue }) => {
       this._callCallback(jobId, null, returnvalue);
     });

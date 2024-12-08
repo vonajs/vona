@@ -1,23 +1,23 @@
-import bull from 'bullmq';
+import * as Bull from 'bullmq';
 import Redlock from 'redlock';
 
 export interface IQueueJobContext {
-  job: bull.Job;
+  job: Bull.Job;
   data: any;
   queueNameSub: string | undefined;
 }
 
 export interface IQueueWork {
   redlock: Redlock;
-  worker: bull.Worker;
+  worker: Bull.Worker;
 }
 export interface IQueueWorks {
   [queueKey: string]: IQueueWork;
 }
 
 export interface IQueueQueue {
-  queue: bull.Queue;
-  queueEvents: bull.QueueEvents;
+  queue: Bull.Queue;
+  queueEvents: Bull.QueueEvents;
 }
 
 export interface IQueueQueues {
