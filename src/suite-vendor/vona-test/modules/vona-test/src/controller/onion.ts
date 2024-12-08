@@ -1,6 +1,6 @@
-import { BeanBase, Controller, Get, Post, UseFilterGlobal, UseGuardGlobal, UseMiddleware, UsePipeGlobal } from 'vona';
+import { BeanBase, Controller, Get, Post, UseFilterGlobal, UseGuardGlobal, UseMiddleware } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { array, Body, defaultValue, Query, required, valid } from 'vona-module-a-validator';
+import { Body, defaultValue, Query, v } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 
@@ -26,8 +26,8 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
 
   @Get('echo2')
   @UseGuardGlobal('a-core:user', { public: true })
-  @UsePipeGlobal('a-validator:validation', { strict: true })
-  async echo2(@Query(valid({ class: DtoUser })) book: Partial<DtoUser>) {
+  //async echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
+  async echo2(@Query(DtoUser) book: Partial<DtoUser>) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return book;
@@ -35,7 +35,7 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
 
   @Get('echo3')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo3(@Query('id', required()) id: number) {
+  async echo3(@Query('id', v.optional) id: number) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return id;
@@ -44,13 +44,13 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
   @Post('echo4')
   @UseGuardGlobal('a-core:user', { public: true })
   @UseFilterGlobal('a-core:error', { enable: true, logs: { 422: true } })
-  async echo4(@Body(array(DtoUser)) users: DtoUser[]) {
+  async echo4(@Body(v.array(DtoUser)) users: DtoUser[]) {
     return users;
   }
 
   @Get('echo5')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo5(@Query('ids', array(Number, { separator: '-' })) ids: number[]) {
+  async echo5(@Query('ids', v.default([1]), v.array(Number, { separator: '-' })) ids: number[]) {
     //const ctx = this.app.currentContext;
     //console.log(ctx === this.ctx);
     return ids;
