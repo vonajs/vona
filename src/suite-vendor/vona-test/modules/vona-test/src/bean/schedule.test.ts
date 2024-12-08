@@ -1,6 +1,6 @@
 import { Bean, BeanBase } from 'vona';
 
-@Bean({ scene: 'schedule' })
+@Schedule({ scene: 'schedule' })
 export class ScheduleTest extends BeanBase {
   async execute(context) {
     const job = context.job;
