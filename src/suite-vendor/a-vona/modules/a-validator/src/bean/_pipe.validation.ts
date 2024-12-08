@@ -6,7 +6,6 @@ import {
   IDecoratorPipeOptionsGlobal,
   HttpStatus,
   Type,
-  createArgumentPipe,
 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { z } from 'zod';
@@ -67,4 +66,4 @@ export class PipeValidation extends BeanBase<ScopeModule> implements IPipeTransf
   }
 }
 
-export const validation = createArgumentPipe('a-validator:validation');
+// export const validation = createArgumentPipe('a-validator:validation');
