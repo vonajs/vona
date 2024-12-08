@@ -15,25 +15,60 @@ export async function generateScope(moduleName: string, relativeNameCapitalize: 
   // scopeVariable
   const parts = moduleName.split('-');
   const scopeVariable = parts[0] === 'a' ? parts[1] : relativeNameToCapitalize(moduleName, false);
+  const contentImports: string[] = [];
+  const contentRecords: string[] = [];
+  // basic
+  contentImports.push('BeanScopeBase');
+  contentImports.push('Scope');
+  // _bean
+  contentImports.push('TypeModuleBean');
+  contentRecords.push('_bean: TypeModuleBean;');
+  // util
+  contentImports.push('BeanScopeUtil');
+  contentRecords.push('util: BeanScopeUtil;');
+  //
+  if (options.config) {
+    contentImports.push('TypeModuleConfig');
+    contentRecords.push('config: TypeModuleConfig<typeof config>;');
+  }
+  if (options.errors) {
+    contentImports.push('TypeModuleErrors');
+    contentRecords.push('error: TypeModuleErrors<typeof Errors>;');
+  }
+  if (options.locales) {
+    contentImports.push('TypeModuleLocales');
+    contentImports.push('TypeLocaleBase');
+    contentRecords.push('locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;');
+  }
+  if (options.constants) {
+    contentImports.push('TypeModuleConstants');
+    contentRecords.push('constant: TypeModuleConstants<typeof constants>;');
+  }
+  if (options.status) {
+    contentRecords.push('status: MetaStatus;');
+  }
+  if (options.services) {
+    contentRecords.push('service: IModuleService;');
+  }
+  if (options.models) {
+    contentRecords.push('model: IModuleModel;');
+  }
+  if (options.entities) {
+    contentRecords.push('entity: IModuleEntity;');
+  }
+  if (options.summerCaches) {
+    contentRecords.push('summerCache: IModuleSummerCache;');
+  }
   // combine
   const content = `/** scope: begin */
-import { BeanScopeBase, Scope, ${options.locales ? 'TypeLocaleBase,' : ''} TypeModuleResource } from 'vona';
+import { ${contentImports.join(', ')} } from 'vona';
 
 @Scope()
 export class ScopeModule${relativeNameCapitalize} extends BeanScopeBase {}
 
-export interface ScopeModule${relativeNameCapitalize}
-  extends TypeModuleResource<
-    ${options.config ? 'typeof config' : 'never'},
-    ${options.errors ? 'typeof Errors' : 'never'},
-    ${options.locales ? '(typeof locales)[TypeLocaleBase]' : 'never'},
-    ${options.constants ? 'typeof constants' : 'never'},
-    ${options.status ? 'MetaStatus' : 'never'},
-    ${options.services ? 'IModuleService' : 'never'},
-    ${options.models ? 'IModuleModel' : 'never'},
-    ${options.entities ? 'IModuleEntity' : 'never'},
-    ${options.summerCaches ? 'IModuleSummerCache' : 'never'}
-  > {}
+export interface ScopeModule${relativeNameCapitalize} {
+  ${contentRecords.join('\n')}
+}
 
 import 'vona';
 declare module 'vona' {
