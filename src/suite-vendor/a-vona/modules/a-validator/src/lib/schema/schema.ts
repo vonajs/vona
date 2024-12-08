@@ -15,9 +15,14 @@ export function schema(classType: any, options?: Partial<ValidatorOptions>): any
   if (classType.name === 'Boolean') return z.boolean();
   if (classType.name === 'Date') return z.date();
   if (classType.name === 'BigInt') return z.bigint();
+  // check if object
+  const rules = classType.prototype ? appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype) : undefined;
+  if (!rules) {
+    // not object
+    return z.any();
+  }
   // object
-  const rules = appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype);
-  let schema = z.object((rules as z.ZodRawShape) || {});
+  let schema = z.object(rules as z.ZodRawShape);
   if (options?.passthrough) schema = schema.passthrough() as any;
   if (options?.strict) schema = schema.strict() as any;
   return schema as any;
