@@ -8,6 +8,7 @@ export function schema(classType: NumberConstructor): z.ZodNumber;
 export function schema(classType: BooleanConstructor): z.ZodBoolean;
 export function schema(classType: DateConstructor): z.ZodDate;
 export function schema(classType: BigIntConstructor): z.ZodBigInt;
+export function schema(classType: ArrayConstructor): z.ZodArray<z.ZodAny>;
 export function schema<T>(classType: Constructable<T>, options?: Partial<ValidatorOptions>): z.ZodSchema<T>;
 export function schema(classType: any, options?: Partial<ValidatorOptions>): any {
   if (classType.name === 'String') return z.string();
@@ -15,6 +16,7 @@ export function schema(classType: any, options?: Partial<ValidatorOptions>): any
   if (classType.name === 'Boolean') return z.boolean();
   if (classType.name === 'Date') return z.date();
   if (classType.name === 'BigInt') return z.bigint();
+  if (classType.name === 'Array') return z.array(z.any());
   // check if object
   const rules = classType.prototype ? appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype) : undefined;
   if (!rules) {
