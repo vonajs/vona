@@ -21,6 +21,7 @@ const __boilerplates = {
   socketPacket: 'socketPacket',
   summerCache: 'summerCache',
   startup: 'startup',
+  queue: 'queue',
   schedule: 'schedule',
 };
 
