@@ -42,9 +42,6 @@ export class ServiceVersion extends BeanBase {
 
   async __instanceInit(subdomain: string, instanceBase?: ConfigInstanceBase) {
     try {
-      if (!instanceBase) {
-        instanceBase = this.app.bean.instance._getConfigInstanceBase(subdomain);
-      }
       const optionsInit = Object.assign({}, instanceBase, { scene: 'init', subdomain });
       await this.__check(optionsInit);
       console.log(chalk.cyan(`  The instance is initialized successfully: ${subdomain || 'default'}`));

@@ -1,7 +1,9 @@
+import { cast } from 'vona';
+
 module.exports = () => {
   return async function (ctx, next) {
     // init instance
-    await ctx.app.bean.instance.initInstance();
+    await cast(ctx.app.bean._getBean('a-instance.service.instance' as never)).initInstance();
     // next
     await next();
   };

@@ -127,7 +127,7 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
 
   async initInstance() {
     // instance
-    const instance = await this.get(this.ctx.subdomain);
+    const instance = await this.bean.instance.get(this.ctx.subdomain);
     if (!instance) {
       // prompt: should for local/prod
       // if (this.ctx.app.meta.isLocal) {
