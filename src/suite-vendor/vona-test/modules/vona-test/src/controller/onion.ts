@@ -1,6 +1,6 @@
 import { BeanBase, Controller, Get, Post, UseFilterGlobal, UseGuardGlobal, UseMiddleware } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { Body, defaultValue, Query, v } from 'vona-module-a-validator';
+import { Body, Query, v } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 
@@ -17,7 +17,7 @@ export class ControllerOnion extends BeanBase<ScopeModule> {
   @UseGuardGlobal('a-core:user', { public: true })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   echo(
-    @Query('id', defaultValue(0), z.number()) id: number,
+    @Query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Query('name', z.number().optional()) name: string,
   ) {
