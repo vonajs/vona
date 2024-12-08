@@ -1,11 +1,34 @@
-import { BeanBase, Service, sleep } from 'vona';
+import { BeanBase, deepExtend, IInstanceStartupOptions, isNil, Service, sleep, VonaConfig } from 'vona';
+import async from 'async';
+import chalk from 'chalk';
+import boxen from 'boxen';
 import { ScopeModule } from '../.metadata/this.js';
+import { IInstanceStartupQueueInfo } from '../entity/instance.js';
+
+const boxenOptions: boxen.Options = {
+  padding: 1,
+  margin: 1,
+  align: 'center',
+  borderColor: 'yellow',
+  borderStyle: 'round',
+} as boxen.Options;
+
+const __queueInstanceStartup: any = {};
+const __cacheIntancesConfig: Record<string, VonaConfig> = {};
 
 @Service()
 export class ServiceInstance extends BeanBase<ScopeModule> {
   getConfigInstanceBase(subdomain: string) {
     const instances = this.app.config.instances || [{ subdomain: '', password: '' }];
     return instances.find(item => item.subdomain === subdomain);
+  }
+
+  getConfig(subdomain?: string): VonaConfig | undefined {
+    if (isNil(subdomain) && this.ctx?.instance) {
+      subdomain = this.ctx?.subdomain;
+    }
+    if (isNil(subdomain)) return undefined;
+    return __cacheIntancesConfig[subdomain];
   }
 
   async instanceChanged(reload: boolean = true) {
@@ -48,9 +71,9 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
     await this._cacheInstanceConfig(subdomain, true);
   }
 
-  async _cacheInstanceConfig(subdomain: string, force: boolean) {
+  private async _cacheInstanceConfig(subdomain: string, force: boolean) {
     if (__cacheIntancesConfig[subdomain] && !force) return;
-    let instance = await this.get(subdomain);
+    let instance = await this.bean.instance.get(subdomain);
     if (!instance) this.app.throw(403);
     instance = instance!;
     // config

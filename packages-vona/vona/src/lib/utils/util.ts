@@ -203,7 +203,7 @@ export class AppUtil extends BeanSimple {
         ctx.instance = await cast(this.app.bean).instance.get(subdomain);
         // start instance
         if (instance) {
-          await cast(this.app.bean).instance.checkAppReadyInstance(true);
+          await cast(this.app.bean._getBean('a-instance.service.instance' as never)).checkAppReadyInstance(true);
         }
       }
       // scope

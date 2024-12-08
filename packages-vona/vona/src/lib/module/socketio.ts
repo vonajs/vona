@@ -29,8 +29,8 @@ export class SocketioReady extends BeanSimple {
         url: '/api/a/base/',
       });
       app.runInAnonymousContextScope(async ctx => {
-        return cast(app.bean)
-          .instance.checkAppReadyInstance(true)
+        return cast(app.bean._getBean('a-instance.service.instance' as never))
+          .checkAppReadyInstance(true)
           .then(res => {
             if (!res) return fn(null, false);
             if (app.meta.util.isSafeDomain(ctx as unknown as VonaContext, origin)) {

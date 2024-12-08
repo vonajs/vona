@@ -50,7 +50,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       await this.app.meta.util.executeBean({
         subdomain,
         fn: async () => {
-          await this.bean.instance.instanceStartup(subdomain, { force: false });
+          await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
         },
       });
     }
