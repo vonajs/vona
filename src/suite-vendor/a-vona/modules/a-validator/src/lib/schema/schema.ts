@@ -11,6 +11,7 @@ export function schema(classType: BigIntConstructor): z.ZodBigInt;
 export function schema(classType: ArrayConstructor): z.ZodArray<z.ZodAny>;
 export function schema<T>(classType: Constructable<T>, options?: Partial<ValidatorOptions>): z.ZodSchema<T>;
 export function schema(classType: any, options?: Partial<ValidatorOptions>): any {
+  if (!classType) return z.any();
   if (classType.name === 'String') return z.string();
   if (classType.name === 'Number') return z.number();
   if (classType.name === 'Boolean') return z.boolean();

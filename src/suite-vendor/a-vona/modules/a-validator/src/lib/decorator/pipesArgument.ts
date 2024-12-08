@@ -5,8 +5,9 @@ import {
   RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona';
-import { valid } from '../../bean/pipe.valid.js';
 import { PipeArgument } from '../types/decorator.js';
+import { schema } from '../schema/schema.js';
+import { valid } from '../../bean/pipe.valid.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: any, ...pipes: PipeArgument[]): ParameterDecorator {
@@ -21,28 +22,34 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
 
       const hasParamField = typeof field === 'string';
       const paramField = hasParamField ? field : undefined;
-      let paramPipes = hasParamField ? pipes : [field, ...pipes];
+      const paramPipes = hasParamField ? pipes : [field, ...pipes];
 
-      paramPipes = paramPipes
-        .filter(paramPipe => !!paramPipe)
-        .map(paramPipe => {
-          if (paramPipe.parseAsync) {
-            // schema
-            return valid({ schema: paramPipe });
-          } else if (paramPipe.prototype?.constructor?.name) {
-            // class
-            return valid({ class: paramPipe });
-          } else {
-            // pipe
-            return paramPipe;
-          }
-        });
+      const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
+      const metaType = paramtypes[index];
+      // default schema
+      let argSchema = schema(metaType);
+      // loop
+      for (let index = paramPipes.length - 1; index >= 0; index--) {
+        const paramPipe = paramPipes[index];
+        if (!paramPipe) continue;
+        if (paramPipe.parseAsync) {
+          // schema
+          argSchema = paramPipe;
+        } else if (paramPipe.prototype?.constructor?.name) {
+          // class
+          argSchema = schema(paramPipe);
+        } else {
+          // function
+          argSchema = paramPipe(argSchema);
+        }
+      }
 
       argsMeta.push({
         index,
         type: paramType,
         field: paramField,
-        pipes: paramPipes,
+        pipes: [valid({ schema: argSchema })],
+        schema: argSchema,
         extractValue,
       });
     };

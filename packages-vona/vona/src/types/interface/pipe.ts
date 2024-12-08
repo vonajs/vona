@@ -43,6 +43,7 @@ export interface RouteHandlerArgumentMetaDecorator {
   type: RouteHandlerArgumentType;
   field?: string;
   pipes: Function[];
+  schema: object; // z.ZodSchema
   extractValue?: Function;
 }
 
