@@ -12,13 +12,15 @@ declare module 'vona' {
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
 @Scope()
 export class ScopeModuleTestPartymonkey extends BeanScopeBase {}
 
-export interface ScopeModuleTestPartymonkey
-  extends TypeModuleResource<never, never, never, never, never, never, never, never, never> {}
+export interface ScopeModuleTestPartymonkey {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+}
 
 import 'vona';
 declare module 'vona' {

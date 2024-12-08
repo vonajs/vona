@@ -15,13 +15,15 @@ declare module 'vona' {
 }
 /** beans: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
 @Scope()
 export class ScopeModuleADebug extends BeanScopeBase {}
 
-export interface ScopeModuleADebug
-  extends TypeModuleResource<never, never, never, never, never, never, never, never, never> {}
+export interface ScopeModuleADebug {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+}
 
 import 'vona';
 declare module 'vona' {

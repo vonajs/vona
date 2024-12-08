@@ -23,23 +23,16 @@ export const locales = {
 };
 /** locale: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'vona';
 
 @Scope()
 export class ScopeModuleAMarkdown extends BeanScopeBase {}
 
-export interface ScopeModuleAMarkdown
-  extends TypeModuleResource<
-    never,
-    never,
-    (typeof locales)[TypeLocaleBase],
-    never,
-    never,
-    never,
-    never,
-    never,
-    never
-  > {}
+export interface ScopeModuleAMarkdown {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+}
 
 import 'vona';
 declare module 'vona' {

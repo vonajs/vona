@@ -33,23 +33,25 @@ export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
+import {
+  BeanScopeBase,
+  Scope,
+  TypeModuleBean,
+  BeanScopeUtil,
+  TypeModuleErrors,
+  TypeModuleLocales,
+  TypeLocaleBase,
+} from 'vona';
 
 @Scope()
 export class ScopeModuleACaptchasimple extends BeanScopeBase {}
 
-export interface ScopeModuleACaptchasimple
-  extends TypeModuleResource<
-    never,
-    typeof Errors,
-    (typeof locales)[TypeLocaleBase],
-    never,
-    never,
-    never,
-    never,
-    never,
-    never
-  > {}
+export interface ScopeModuleACaptchasimple {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  error: TypeModuleErrors<typeof Errors>;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+}
 
 import 'vona';
 declare module 'vona' {

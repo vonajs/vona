@@ -29,23 +29,25 @@ export const locales = {
 };
 /** locale: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
+import {
+  BeanScopeBase,
+  Scope,
+  TypeModuleBean,
+  BeanScopeUtil,
+  TypeModuleConfig,
+  TypeModuleLocales,
+  TypeLocaleBase,
+} from 'vona';
 
 @Scope()
 export class ScopeModuleAFlowbehavior extends BeanScopeBase {}
 
-export interface ScopeModuleAFlowbehavior
-  extends TypeModuleResource<
-    typeof config,
-    never,
-    (typeof locales)[TypeLocaleBase],
-    never,
-    never,
-    never,
-    never,
-    never,
-    never
-  > {}
+export interface ScopeModuleAFlowbehavior {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+}
 
 import 'vona';
 declare module 'vona' {

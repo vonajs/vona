@@ -39,13 +39,17 @@ export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
 
 @Scope()
 export class ScopeModuleASummer extends BeanScopeBase {}
 
-export interface ScopeModuleASummer
-  extends TypeModuleResource<typeof config, never, never, never, never, IModuleService, never, never, never> {}
+export interface ScopeModuleASummer {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+  service: IModuleService;
+}
 
 import 'vona';
 declare module 'vona' {

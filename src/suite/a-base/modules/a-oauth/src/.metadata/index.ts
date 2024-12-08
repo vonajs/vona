@@ -27,13 +27,16 @@ declare module 'vona' {
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
 @Scope()
 export class ScopeModuleAOauth extends BeanScopeBase {}
 
-export interface ScopeModuleAOauth
-  extends TypeModuleResource<never, never, never, never, never, IModuleService, never, never, never> {}
+export interface ScopeModuleAOauth {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  service: IModuleService;
+}
 
 import 'vona';
 declare module 'vona' {

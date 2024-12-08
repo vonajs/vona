@@ -154,23 +154,19 @@ export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
 
 @Scope()
 export class ScopeModuleASocketio extends BeanScopeBase {}
 
-export interface ScopeModuleASocketio
-  extends TypeModuleResource<
-    typeof config,
-    never,
-    never,
-    never,
-    never,
-    IModuleService,
-    IModuleModel,
-    IModuleEntity,
-    never
-  > {}
+export interface ScopeModuleASocketio {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+  service: IModuleService;
+  model: IModuleModel;
+  entity: IModuleEntity;
+}
 
 import 'vona';
 declare module 'vona' {

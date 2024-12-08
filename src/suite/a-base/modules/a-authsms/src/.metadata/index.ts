@@ -104,23 +104,29 @@ export * from '../config/errors.js';
 import { Errors } from '../config/errors.js';
 /** error: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'vona';
+import {
+  BeanScopeBase,
+  Scope,
+  TypeModuleBean,
+  BeanScopeUtil,
+  TypeModuleConfig,
+  TypeModuleErrors,
+  TypeModuleLocales,
+  TypeLocaleBase,
+} from 'vona';
 
 @Scope()
 export class ScopeModuleAAuthsms extends BeanScopeBase {}
 
-export interface ScopeModuleAAuthsms
-  extends TypeModuleResource<
-    typeof config,
-    typeof Errors,
-    (typeof locales)[TypeLocaleBase],
-    never,
-    MetaStatus,
-    IModuleService,
-    never,
-    never,
-    never
-  > {}
+export interface ScopeModuleAAuthsms {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+  error: TypeModuleErrors<typeof Errors>;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  status: MetaStatus;
+  service: IModuleService;
+}
 
 import 'vona';
 declare module 'vona' {

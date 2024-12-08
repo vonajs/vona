@@ -86,13 +86,18 @@ declare module 'vona' {
 }
 /** services: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'vona';
+import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
 @Scope()
 export class ScopeModuleAShare extends BeanScopeBase {}
 
-export interface ScopeModuleAShare
-  extends TypeModuleResource<never, never, never, never, never, IModuleService, IModuleModel, IModuleEntity, never> {}
+export interface ScopeModuleAShare {
+  _bean: TypeModuleBean;
+  util: BeanScopeUtil;
+  service: IModuleService;
+  model: IModuleModel;
+  entity: IModuleEntity;
+}
 
 import 'vona';
 declare module 'vona' {
