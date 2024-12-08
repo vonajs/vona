@@ -1,13 +1,17 @@
 /** beans: begin */
 export * from '../bean/bean.testCtx.js';
+export * from '../bean/schedule.test.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
+import { ScheduleTest } from '../bean/schedule.test.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     testCtx: BeanTestCtx;
   }
 
-  export interface IBeanRecordGeneral {}
+  export interface IBeanRecordGeneral {
+    'vona-test.schedule.test': ScheduleTest;
+  }
 }
 /** beans: end */
 /** aop: begin */
@@ -64,6 +68,16 @@ declare module 'vona' {
   }
 }
 /** summerCache: end */
+/** queue: begin */
+export * from '../bean/queue.test.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'vona-test:test': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
 /** dtos: begin */
 export * from '../dto/profile.js';
 export * from '../dto/user.js';

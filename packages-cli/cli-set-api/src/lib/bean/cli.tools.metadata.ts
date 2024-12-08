@@ -91,6 +91,8 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateOnions('summerCache', moduleName, modulePath);
     // startups
     content += await generateOnions('startup', moduleName, modulePath);
+    // queues
+    content += await generateOnions('queue', moduleName, modulePath);
     // atoms
     content += await generateAtoms(moduleName, modulePath);
     // dtos
