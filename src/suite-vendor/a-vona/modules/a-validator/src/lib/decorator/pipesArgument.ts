@@ -1,5 +1,6 @@
 import {
   appMetadata,
+  isClassStrict,
   MetadataKey,
   RouteHandlerArgumentMetaDecorator,
   RouteHandlerArgumentType,
@@ -35,7 +36,7 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
         if (paramPipe.parseAsync) {
           // schema
           argSchema = paramPipe;
-        } else if (paramPipe.prototype?.constructor?.name) {
+        } else if (isClassStrict(paramPipe)) {
           // class
           argSchema = schema(paramPipe);
         } else {
