@@ -14,7 +14,7 @@ const SymbolStartups = Symbol('SymbolStartups');
 
 @Service()
 export class ServiceStartup extends BeanBase<ScopeModule> {
-  private [SymbolStartups]: IMiddlewareItem<unknown, IDecoratorStartupOptions>[];
+  private [SymbolStartups]: IMiddlewareItem<IDecoratorStartupOptions>[];
 
   async versionReady() {
     // clear keys
@@ -149,7 +149,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       this[SymbolStartups] = this.app.meta.onionStartup.middlewaresGlobal.filter(startup => {
         const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
         return startupOptions.enable !== false && this.app.meta.util.checkMiddlewareOptionsMeta(startupOptions.meta);
-      }) as unknown as IMiddlewareItem<unknown, IDecoratorStartupOptions>[];
+      }) as unknown as IMiddlewareItem<IDecoratorStartupOptions>[];
     }
     return this[SymbolStartups];
   }
