@@ -194,6 +194,9 @@ importers:
       vona-module-a-progress:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-progress
+      vona-module-a-queue:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-queue
       vona-module-a-sequence:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-sequence
@@ -1208,6 +1211,9 @@ importers:
       vona-module-a-core:
         specifier: ^5.0.3
         version: link:modules/a-core
+      vona-module-a-queue:
+        specifier: workspace:^
+        version: link:modules/a-queue
       vona-module-a-swagger:
         specifier: ^5.0.3
         version: link:modules/a-swagger
@@ -1229,6 +1235,8 @@ importers:
       vona-shared:
         specifier: workspace:^
         version: link:../../../../../packages-vona/shared
+
+  src/suite-vendor/a-vona/modules/a-queue: {}
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:
