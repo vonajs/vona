@@ -1,5 +1,5 @@
 import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, IDecoratorQueueOptions, Service, subdomainDesp, uuidv4 } from 'vona';
+import { BeanBase, deepExtend, IDecoratorQueueOptions, IQueueRecord, Service, subdomainDesp, uuidv4 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import {
   IQueueCallbacks,
@@ -168,6 +168,16 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return this._queues[queueKey];
   }
 
+  getQueue(queueName: keyof IQueueRecord, subdomain?: string) {
+    return this._getQueue({
+      queueName,
+      data: undefined as any,
+      options: {
+        subdomain: subdomain ?? this.ctx.subdomain,
+      },
+    });
+  }
+
   _getQueue<DATA>(info: IQueueJobContext<DATA>) {
     return this._ensureQueue(info).queue;
   }
@@ -240,11 +250,11 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     });
   }
 
-  _getRepeatKey(name, repeat) {
+  getRepeatKey(jobName: string, repeat: Bull.RepeatOptions) {
     const endDate = repeat.endDate ? new Date(repeat.endDate).getTime() : '';
     const tz = repeat.tz || '';
     const suffix = (repeat.cron ? repeat.cron : String(repeat.every)) || '';
     const jobId = repeat.jobId ? repeat.jobId : '';
-    return `${name}:${jobId}:${endDate}:${tz}:${suffix}`;
+    return `${jobName}:${jobId}:${endDate}:${tz}:${suffix}`;
   }
 }

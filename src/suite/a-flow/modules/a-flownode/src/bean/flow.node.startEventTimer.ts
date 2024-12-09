@@ -75,8 +75,8 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     const nodeConfig = content.process.nodes.find(item => item.id === node.id);
     if (!nodeConfig) return false;
     // check if changed
-    const jobKeyActive = this.ctx.app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
-    const jobKeyConfig = this.ctx.app.meta.queue._getRepeatKey(
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(
       this._getJobName(flowDefId, nodeConfig),
       this._getJobRepeat(nodeConfig),
     );
@@ -87,21 +87,17 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
 
   async _deleteSchedule(context) {
     const job = context.job;
-    const jobKeyActive = this.ctx.app.meta.queue._getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
     const repeat = await job.queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
 
   async _deleteSchedule2({ flowDefId, node }: any) {
-    const jobKeyActive = this.ctx.app.meta.queue._getRepeatKey(
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
       this._getJobName(flowDefId, node),
       this._getJobRepeat(node),
     );
-    const queue = this.ctx.app.meta.queue._getQueue({
-      subdomain: this.ctx.subdomain,
-      module: __ThisModule__,
-      queueName: 'startEventTimer',
-    });
+    const queue = this.$scope.queue.service.queue.getQueue('a-flownode:startEventTimer');
     const repeat = await queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
