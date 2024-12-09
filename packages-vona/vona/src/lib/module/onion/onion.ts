@@ -5,6 +5,7 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import {
   IDecoratorMiddlewareOptionsGlobal,
   IMiddlewareBase,
+  IMiddlewareBaseEnable,
   IMiddlewareItem,
   IMiddlewareOptionsMeta,
   SymbolUseMiddlewareLocal,
@@ -29,11 +30,15 @@ const __adapter = (_context, chain) => {
   };
 };
 
-export class Onion extends BeanSimple {
+const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
+
+export class Onion<OPTIONS> extends BeanSimple {
   sceneName: string;
   sceneMeta: OnionSceneMeta;
   middlewaresNormal: Record<string, IMiddlewareItem>;
   middlewaresGlobal: IMiddlewareItem[];
+
+  private [SymbolMiddlewaresEnabled]: IMiddlewareItem<OPTIONS>[];
 
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
@@ -102,6 +107,18 @@ export class Onion extends BeanSimple {
       this._cacheMiddlewaresArgument[key] = middlewares;
     }
     return this._cacheMiddlewaresArgument[key];
+  }
+
+  get middlewaresEnabled() {
+    if (!this[SymbolMiddlewaresEnabled]) {
+      this[SymbolMiddlewaresEnabled] = this.middlewaresGlobal.filter(middlewareItem => {
+        const middlewareOptions = middlewareItem.beanOptions.options as IMiddlewareBaseEnable;
+        return (
+          middlewareOptions.enable !== false && this.app.meta.util.checkMiddlewareOptionsMeta(middlewareOptions.meta)
+        );
+      }) as unknown as IMiddlewareItem<OPTIONS>[];
+    }
+    return this[SymbolMiddlewaresEnabled];
   }
 
   private _composeMiddlewaresGlobal(executeCustom?: Function) {

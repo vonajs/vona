@@ -28,6 +28,19 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return this._queuePush(info, true);
   }
 
+  loadQueueWorkers(subdomain: string) {
+    for (const queueItem of this.app.meta.onionQueue.middlewaresEnabled) {
+      const info: IQueueJobContext<unknown> = {
+        queueName: queueItem.name as any,
+        data: undefined as any,
+        options: {
+          subdomain,
+        },
+      };
+      this._ensureWorker(info);
+    }
+  }
+
   async _clearWorkers() {
     for (const queueKey in this._workers) {
       const _worker = this._workers[queueKey];

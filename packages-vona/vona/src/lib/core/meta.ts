@@ -6,7 +6,6 @@ import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
 import { AppRouter } from '../module/route.js';
 import { AppLimiter, AppRedlock } from '../module/redis.js';
-import { QueueClient } from '../module/queue/queueClient.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import {
   IModule,
@@ -15,6 +14,21 @@ import {
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
   EnumAppEvent,
+  IDecoratorMiddlewareOptionsGlobal,
+  IDecoratorGuardOptionsGlobal,
+  IDecoratorInterceptorOptionsGlobal,
+  IDecoratorPipeOptionsGlobal,
+  IDecoratorFilterOptionsGlobal,
+  IDecoratorSocketConnectionOptions,
+  IDecoratorSocketPacketOptions,
+  IDecoratorAopOptions,
+  IDecoratorEntityOptions,
+  IDecoratorControllerOptions,
+  IDecoratorModelOptions,
+  IDecoratorMetaOptions,
+  IDecoratorSummerCacheOptions,
+  IDecoratorStartupOptions,
+  IDecoratorQueueOptions,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -43,7 +57,6 @@ export class AppMeta extends BeanSimple {
   router: AppRouter;
   limiter: AppLimiter;
   redlock: AppRedlock;
-  queue: QueueClient;
   broadcast: BroadcastClient;
   //
   resource: AppResource;
@@ -59,21 +72,21 @@ export class AppMeta extends BeanSimple {
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //
-  onionMiddleware: Onion;
-  onionGuard: Onion;
-  onionInterceptor: Onion;
-  onionPipe: Onion;
-  onionFilter: Onion;
-  onionSocketConnection: Onion;
-  onionSocketPacket: Onion;
-  onionAop: Onion;
-  onionEntity: Onion;
-  onionModel: Onion;
-  onionController: Onion;
-  onionMeta: Onion;
-  onionSummerCache: Onion;
-  onionStartup: Onion;
-  onionQueue: Onion;
+  onionMiddleware: Onion<IDecoratorMiddlewareOptionsGlobal>;
+  onionGuard: Onion<IDecoratorGuardOptionsGlobal>;
+  onionInterceptor: Onion<IDecoratorInterceptorOptionsGlobal>;
+  onionPipe: Onion<IDecoratorPipeOptionsGlobal>;
+  onionFilter: Onion<IDecoratorFilterOptionsGlobal>;
+  onionSocketConnection: Onion<IDecoratorSocketConnectionOptions>;
+  onionSocketPacket: Onion<IDecoratorSocketPacketOptions>;
+  onionAop: Onion<IDecoratorAopOptions>;
+  onionEntity: Onion<IDecoratorEntityOptions>;
+  onionModel: Onion<IDecoratorModelOptions>;
+  onionController: Onion<IDecoratorControllerOptions>;
+  onionMeta: Onion<IDecoratorMetaOptions>;
+  onionSummerCache: Onion<IDecoratorSummerCacheOptions>;
+  onionStartup: Onion<IDecoratorStartupOptions>;
+  onionQueue: Onion<IDecoratorQueueOptions>;
   //
   queues: Record<string, any>;
   broadcasts: Record<string, any>;
@@ -84,8 +97,6 @@ export class AppMeta extends BeanSimple {
   //
   __versionReady: boolean;
   __versionReadyError: Error;
-  //
-  _loadQueueWorkers: (subdomain: string) => void;
   _loadSchedules: () => Promise<void>;
   _runSchedule: (context) => Promise<any>;
 

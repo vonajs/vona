@@ -140,17 +140,11 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     }
     // load queue workers
     if (!this.app.meta.isTest) {
-      this.app.meta._loadQueueWorkers(subdomain);
+      this.$scope.queue.service.queue.loadQueueWorkers(subdomain);
     }
   }
 
   private get _startups() {
-    if (!this[SymbolStartups]) {
-      this[SymbolStartups] = this.app.meta.onionStartup.middlewaresGlobal.filter(startup => {
-        const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
-        return startupOptions.enable !== false && this.app.meta.util.checkMiddlewareOptionsMeta(startupOptions.meta);
-      }) as unknown as IMiddlewareItem<IDecoratorStartupOptions>[];
-    }
-    return this[SymbolStartups];
+    return this.app.meta.onionStartup.middlewaresEnabled;
   }
 }
