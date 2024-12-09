@@ -1,17 +1,4 @@
-import {
-  VonaApplication,
-  IModuleConfigBroadcast,
-  IModuleConfigMiddleware,
-  IModuleConfigQueue,
-  IModuleConfigSchedule,
-} from 'vona';
-
-// queues
-const queues = {
-  queueTest: {
-    bean: 'test',
-  } as IModuleConfigQueue,
-};
+import { VonaApplication, IModuleConfigBroadcast, IModuleConfigMiddleware, IModuleConfigSchedule } from 'vona';
 
 // broadcasts
 const broadcasts = {
@@ -113,7 +100,6 @@ const _captchaSMS = {
 export const config = (app: VonaApplication) => {
   return {
     // app.meta.isTest
-    queues: app.meta.isTest ? queues : undefined,
     broadcasts: app.meta.isTest ? broadcasts : undefined,
     monkeyed: app.meta.isTest ? false : undefined,
     // normal

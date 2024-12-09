@@ -4,12 +4,12 @@ import { ScopeModule } from '../.metadata/this.js';
 
 export type TypeQueue<%=argv.beanNameCapitalize%>JobData = unknown;
 
-export type TypeQueue<%=argv.beanNameCapitalize%>JobResult = unknown;
+export type TypeQueue<%=argv.beanNameCapitalize%>JobResult = void;
 
 @Queue()
 export class Queue<%=argv.beanNameCapitalize%>
   extends BeanQueueBase<ScopeModule, TypeQueue<%=argv.beanNameCapitalize%>JobData, TypeQueue<%=argv.beanNameCapitalize%>JobResult>
   implements IQueueExecute<TypeQueue<%=argv.beanNameCapitalize%>JobData, TypeQueue<%=argv.beanNameCapitalize%>JobResult>
 {
-  async execute(context: IQueueJobContext<TypeQueue<%=argv.beanNameCapitalize%>JobData>): Promise<TypeQueue<%=argv.beanNameCapitalize%>JobResult> {}
+  async execute(_context: IQueueJobContext<TypeQueue<%=argv.beanNameCapitalize%>JobData>): Promise<TypeQueue<%=argv.beanNameCapitalize%>JobResult> {}
 }

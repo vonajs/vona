@@ -123,7 +123,6 @@ export * from '../controller/testFeatModel.js';
 export * from '../controller/testFeatModelWhere.js';
 export * from '../controller/testFeatOpenAuth.js';
 export * from '../controller/testFeatProgress.js';
-export * from '../controller/testFeatQueue.js';
 export * from '../controller/testFeatSendMail.js';
 export * from '../controller/testFeatSequence.js';
 export * from '../controller/testFeatSettings.js';
@@ -173,7 +172,6 @@ declare module 'vona' {
     'test-party:testFeatModelWhere': IDecoratorControllerOptions;
     'test-party:testFeatOpenAuth': IDecoratorControllerOptions;
     'test-party:testFeatProgress': IDecoratorControllerOptions;
-    'test-party:testFeatQueue': IDecoratorControllerOptions;
     'test-party:testFeatSendMail': IDecoratorControllerOptions;
     'test-party:testFeatSequence': IDecoratorControllerOptions;
     'test-party:testFeatSettings': IDecoratorControllerOptions;
