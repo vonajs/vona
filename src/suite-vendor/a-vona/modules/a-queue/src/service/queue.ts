@@ -1,7 +1,15 @@
 import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, IDecoratorQueueOptions, IQueueExecute, Service, subdomainDesp, uuidv4 } from 'vona';
+import { BeanBase, deepExtend, IDecoratorQueueOptions, Service, subdomainDesp, uuidv4 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { IQueueCallbacks, IQueueJobContext, IQueueQueue, IQueueQueues, IQueueWork, IQueueWorks } from '../lib/types.js';
+import {
+  IQueueCallbacks,
+  IQueueExecute,
+  IQueueJobContext,
+  IQueueQueue,
+  IQueueQueues,
+  IQueueWork,
+  IQueueWorks,
+} from '../lib/types.js';
 
 @Service()
 export class ServiceQueue extends BeanBase<ScopeModule> {
@@ -213,7 +221,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
       ctxParent,
       fn: async () => {
         const beanFullName = queueItem.beanOptions.beanFullName;
-        const beanInstance = <IQueueExecute>this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IQueueExecute<DATA>>this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(info, job);
       },
     });

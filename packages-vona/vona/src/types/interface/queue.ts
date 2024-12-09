@@ -4,10 +4,6 @@ import { IMiddlewareBaseEnable } from './middleware.js';
 
 export interface IQueueRecord {}
 
-export interface IQueueExecute {
-  execute(options: IQueueJobContext, job: Bull.Job): Promise<boolean>;
-}
-
 export interface IDecoratorQueueOptions extends IMiddlewareBaseEnable {
   concurrency?: boolean;
   transaction: boolean;
