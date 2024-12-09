@@ -12,7 +12,7 @@ export interface IQueuePushOptions {
   jobOptions?: Bull.JobsOptions;
 }
 
-export interface IQueueJobInfo<DATA> {
+export interface IQueueJobContext<DATA> {
   queueName: keyof IQueueRecord;
   data: DATA;
   options?: IQueuePushOptions;
@@ -36,7 +36,7 @@ export interface IQueueQueues {
 }
 
 export interface IQueueCallback<DATA, RESULT> {
-  info: IQueueJobInfo<DATA>;
+  info: IQueueJobContext<DATA>;
   callback: (err: Error | undefined, data: RESULT | undefined) => void;
 }
 

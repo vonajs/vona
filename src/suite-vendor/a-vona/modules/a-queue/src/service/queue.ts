@@ -1,7 +1,7 @@
 import * as Bull from 'bullmq';
 import { BeanBase, deepExtend, IDecoratorQueueOptions, IQueueExecute, Service, subdomainDesp, uuidv4 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { IQueueCallbacks, IQueueJobInfo, IQueueQueue, IQueueQueues, IQueueWork, IQueueWorks } from '../lib/types.js';
+import { IQueueCallbacks, IQueueJobContext, IQueueQueue, IQueueQueues, IQueueWork, IQueueWorks } from '../lib/types.js';
 
 @Service()
 export class ServiceQueue extends BeanBase<ScopeModule> {
@@ -9,13 +9,13 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
   _queues: IQueueQueues = {};
   _queueCallbacks: IQueueCallbacks = {};
 
-  push<DATA>(info: IQueueJobInfo<DATA>) {
+  push<DATA>(info: IQueueJobContext<DATA>) {
     if (!info.options?.dbLevel) throw new Error('should specify the options.dbLevel');
     this._queuePush(info, false);
   }
 
   // { locale, subdomain, module, queueName,queueNameSub,data }
-  pushAsync<DATA>(info: IQueueJobInfo<DATA>) {
+  pushAsync<DATA>(info: IQueueJobContext<DATA>) {
     if (!info.options?.dbLevel) throw new Error('should specify the options.dbLevel');
     return this._queuePush(info, true);
   }
@@ -28,7 +28,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     this._workers = {};
   }
 
-  _createWorker<DATA>(info: IQueueJobInfo<DATA>, queueKey: string) {
+  _createWorker<DATA>(info: IQueueJobContext<DATA>, queueKey: string) {
     const app = this.app;
     // worker
     const _worker = {} as IQueueWork;
@@ -60,7 +60,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
           return await this._performTask(job);
         }
         // redlock
-        const info = job.data as IQueueJobInfo<DATA>;
+        const info = job.data as IQueueJobContext<DATA>;
         const queueNameSub = info.options?.queueNameSub;
         const _lockResource = `queue:${queueKey}${queueNameSub ? '#' + queueNameSub : ''}`;
         return await app.meta.util.lock({
@@ -95,7 +95,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return _worker;
   }
 
-  _createQueue<DATA>(info: IQueueJobInfo<DATA>, queueKey: string) {
+  _createQueue<DATA>(info: IQueueJobContext<DATA>, queueKey: string) {
     const app = this.app;
     // queue
     const _queue = {} as IQueueQueue;
@@ -125,7 +125,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return _queue;
   }
 
-  _ensureWorker<DATA>(info: IQueueJobInfo<DATA>) {
+  _ensureWorker<DATA>(info: IQueueJobContext<DATA>) {
     // queueKey
     const queueKey = this._combineQueueKey(info);
     // worker
@@ -134,7 +134,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     }
   }
 
-  _ensureQueue<DATA>(info: IQueueJobInfo<DATA>) {
+  _ensureQueue<DATA>(info: IQueueJobContext<DATA>) {
     // worker
     this._ensureWorker(info);
     // queueKey
@@ -147,7 +147,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return this._queues[queueKey];
   }
 
-  _getQueue<DATA>(info: IQueueJobInfo<DATA>) {
+  _getQueue<DATA>(info: IQueueJobContext<DATA>) {
     return this._ensureQueue(info).queue;
   }
 
@@ -159,7 +159,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     }
   }
 
-  _queuePush<DATA, RESULT>(info: IQueueJobInfo<DATA>, isAsync: boolean): Promise<RESULT> {
+  _queuePush<DATA, RESULT>(info: IQueueJobContext<DATA>, isAsync: boolean): Promise<RESULT> {
     // queue config
     const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
@@ -191,13 +191,13 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     });
   }
 
-  _combineQueueKey<DATA>(info: IQueueJobInfo<DATA>) {
+  _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
     const subdomain = subdomainDesp(info.options?.subdomain);
     return `${subdomain}||${info.queueName}`;
   }
 
   async _performTask<DATA>(job: Bull.Job) {
-    const info = job.data as IQueueJobInfo<DATA>;
+    const info = job.data as IQueueJobContext<DATA>;
     // dbLevel
     const dbLevel = info.options!.dbLevel!;
     // ctxParent

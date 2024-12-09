@@ -1,5 +1,5 @@
 import { BeanBase, VonaContext } from 'vona';
-import { IQueueJobInfo, IQueuePushOptions } from './types.js';
+import { IQueueJobContext, IQueuePushOptions } from './types.js';
 
 export class BeanQueueBase<TScopeModule = unknown, DATA = unknown> extends BeanBase<TScopeModule> {
   async pushAsync(data: DATA, options?: IQueuePushOptions) {
@@ -10,7 +10,7 @@ export class BeanQueueBase<TScopeModule = unknown, DATA = unknown> extends BeanB
     return this.$scope.queue.service.queue.push(this._prepareInfo(data, options));
   }
 
-  private _prepareInfo(data: DATA, options?: IQueuePushOptions): IQueueJobInfo<DATA> {
+  private _prepareInfo(data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
     options = Object.assign({}, options);
     if (!this.ctx) {
       options.dbLevel = !options.dbLevel ? 1 : options.dbLevel;
