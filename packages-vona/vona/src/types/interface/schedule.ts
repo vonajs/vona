@@ -14,7 +14,7 @@ export interface IScheduleJobContext {
 export interface IScheduleRecord {}
 
 export interface IScheduleExecute {
-  execute(job?: Bull.Job): Promise<void>;
+  execute(job?: Bull.Job<IScheduleJobData>): Promise<void>;
 }
 
 export interface IDecoratorScheduleOptions extends IMiddlewareBaseEnable {
@@ -22,14 +22,9 @@ export interface IDecoratorScheduleOptions extends IMiddlewareBaseEnable {
   transaction?: boolean;
 }
 
-// export interface IScheduleJobRepeat {
-//   every?: number;
-//   cron?: string;
-// }
-
 export interface IScheduleJobData {
   jobOptions: {
-    repeat: IScheduleJobRepeat;
+    repeat: Bull.RepeatOptions;
   };
 }
 

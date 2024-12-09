@@ -10,7 +10,6 @@ import loadConstants from './constant.js';
 import loadMessenger from './messenger.js';
 import loadRedis from './redis.js';
 import loadBroadcasts from './broadcast/broadcast.js';
-import loadSchedules from './schedule.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
 import loadReload from './reload/reload.js';
@@ -50,7 +49,6 @@ export class ModuleLoader extends BeanSimple {
       loadContextPatch(app);
       loadRedis(app);
       loadBroadcasts(app, modules);
-      loadSchedules(app);
       loadClusterApp(app);
       loadReload(app);
     } else {

@@ -1,4 +1,4 @@
-import { BeanBase, IScheduleExecute, Schedule } from 'vona';
+import { BeanBase, IScheduleExecute, IScheduleJobData, Schedule } from 'vona';
 import * as Bull from 'bullmq';
 
 @Schedule({
@@ -7,7 +7,7 @@ import * as Bull from 'bullmq';
   },
 })
 export class ScheduleTest extends BeanBase implements IScheduleExecute {
-  async execute(job?: Bull.Job) {
+  async execute(job?: Bull.Job<IScheduleJobData>) {
     // todo: job.data
     console.log(
       `----- Schedule Test: iid=${this.ctx.instance.id}, every=${job?.data.jobOptions.repeat.every}, ${new Date()}`,
