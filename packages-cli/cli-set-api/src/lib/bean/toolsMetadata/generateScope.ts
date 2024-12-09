@@ -10,6 +10,7 @@ export interface GenerateScopeOptions {
   models: string;
   entities: string;
   summerCaches: string;
+  queues: string;
 }
 export async function generateScope(moduleName: string, relativeNameCapitalize: string, options: GenerateScopeOptions) {
   // scopeVariable
@@ -58,6 +59,9 @@ export async function generateScope(moduleName: string, relativeNameCapitalize: 
   }
   if (options.summerCaches) {
     contentRecords.push('summerCache: IModuleSummerCache;');
+  }
+  if (options.queues) {
+    contentRecords.push('queue: IModuleQueue;');
   }
   // combine
   const content = `/** scope: begin */

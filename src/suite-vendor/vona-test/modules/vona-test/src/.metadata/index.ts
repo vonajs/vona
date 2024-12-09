@@ -87,12 +87,18 @@ export * from '../dto/user.js';
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
-/** summerCaches: begin */
+/** summerCache: begin */
 import { SummerCacheTest } from '../bean/summerCache.test.js';
 export interface IModuleSummerCache {
   test: SummerCacheTest;
 }
-/** summerCaches: end */
+/** summerCache: end */
+/** queue: begin */
+import { QueueTest } from '../bean/queue.test.js';
+export interface IModuleQueue {
+  test: QueueTest;
+}
+/** queue: end */
 /** services: begin */
 export * from '../service/test.js';
 export * from '../service/testApp.js';
@@ -148,6 +154,7 @@ export interface ScopeModuleVonaTest {
   status: MetaStatus;
   service: IModuleService;
   summerCache: IModuleSummerCache;
+  queue: IModuleQueue;
 }
 
 import 'vona';

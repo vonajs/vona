@@ -6,7 +6,7 @@ import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
 import { generateMetaStatus } from './toolsMetadata/generateMetaStatus.js';
-import { generateSummerCaches } from './toolsMetadata/generateSummerCaches.js';
+import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
 import { generateServices } from './toolsMetadata/generateServices.js';
@@ -101,8 +101,11 @@ export class CliToolsMetadata extends BeanCliBase {
     const contentMetaStatus = await generateMetaStatus(moduleName, modulePath);
     content += contentMetaStatus;
     // summerCaches
-    const contentSummerCaches = await generateSummerCaches(moduleName, modulePath);
+    const contentSummerCaches = await generateScopeResources('summerCache', moduleName, modulePath);
     content += contentSummerCaches;
+    // queues
+    const contentQueues = await generateScopeResources('queue', moduleName, modulePath);
+    content += contentQueues;
     // entities
     const contentEntities = await generateEntities(moduleName, modulePath);
     content += contentEntities;
@@ -139,6 +142,7 @@ export class CliToolsMetadata extends BeanCliBase {
       models: contentModels,
       entities: contentEntities,
       summerCaches: contentSummerCaches,
+      queues: contentQueues,
     });
     // empty
     if (!content.trim()) {
