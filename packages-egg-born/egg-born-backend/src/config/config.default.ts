@@ -194,31 +194,6 @@ export default function (appInfo: VonaAppInfo) {
     privateNetworkAccess: false,
   };
 
-  // queue
-  config.queue = {
-    redlock: {
-      clients: ['redlock'],
-      options: {
-        driftFactor: 0.01,
-        retryCount: -1,
-        retryDelay: 200,
-        retryJitter: 100,
-        lockTTL: 30 * 1000,
-      },
-    },
-    bottleneck: {
-      expiration: 60 * 1000,
-    },
-    startup: {
-      debounce: 10 * 1000,
-    },
-    worker: {
-      lockDuration: 30 * 1000,
-      maxStalledCount: 1000,
-      stalledInterval: 10 * 1000,
-    },
-  };
-
   // database
   config.database = {
     testDatabase: false,

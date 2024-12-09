@@ -7,15 +7,6 @@ export default function (_appInfo: VonaAppInfo) {
   config.proxy = true;
   config.ipHeaders = 'x-real-ip,x-forwarded-for';
 
-  // queue
-  config.queue = {
-    redlock: {
-      options: {
-        lockTTL: 8 * 1000,
-      },
-    },
-  };
-
   // database
   config.database = {
     testDatabase: true,

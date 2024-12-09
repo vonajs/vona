@@ -37,15 +37,9 @@ export interface IQueueQueues {
 
 export interface IQueueCallback<DATA, RESULT> {
   info: IQueueJobInfo<DATA>;
-  callback: (err: Error, data: RESULT) => void;
+  callback: (err: Error | undefined, data: RESULT | undefined) => void;
 }
 
 export interface IQueueCallbacks {
   [jobId: string | number]: IQueueCallback<unknown, unknown>;
-}
-
-export interface IQueueJobContext {
-  job: Bull.Job;
-  data: any;
-  queueNameSub: string | undefined;
 }

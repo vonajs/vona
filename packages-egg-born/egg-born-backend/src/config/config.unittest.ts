@@ -3,15 +3,6 @@ import { VonaAppInfo, VonaConfigOptional } from 'vona';
 export default function (_appInfo: VonaAppInfo) {
   const config = {} as VonaConfigOptional;
 
-  // queue
-  config.queue = {
-    redlock: {
-      options: {
-        lockTTL: 60 * 1000,
-      },
-    },
-  };
-
   // database
   config.database = {
     testDatabase: true,

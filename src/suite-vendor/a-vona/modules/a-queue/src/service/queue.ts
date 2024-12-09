@@ -1,5 +1,5 @@
 import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, IDecoratorQueueOptions, Service, subdomainDesp, uuidv4 } from 'vona';
+import { BeanBase, deepExtend, IDecoratorQueueOptions, IQueueExecute, Service, subdomainDesp, uuidv4 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { IQueueCallbacks, IQueueJobInfo, IQueueQueue, IQueueQueues, IQueueWork, IQueueWorks } from '../lib/types.js';
 
@@ -39,16 +39,16 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     // queueConfig.options: queue/worker/job/redlock
     const workerOptions = queueConfig?.options?.worker;
     const redlockOptions = queueConfig?.options?.redlock;
-    const _redlockOptions = Object.assign({}, app.config.queue.redlock.options, redlockOptions);
+    const _redlockOptions = Object.assign({}, this.scope.config.redlock.options, redlockOptions);
 
     // redlock
-    if (!queueConfig.concurrency) {
+    if (!queueConfig?.concurrency) {
       _worker.redlock = app.meta.redlock.create(_redlockOptions);
     }
 
     // create work
     const connectionWorker = app.redis.get('queue').duplicate();
-    const _workerOptions = Object.assign({}, app.config.queue.worker, workerOptions, {
+    const _workerOptions = Object.assign({}, this.scope.config.worker, workerOptions, {
       prefix,
       connection: connectionWorker,
     });
@@ -56,11 +56,13 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
       queueKey,
       async job => {
         // concurrency
-        if (queueConfig.concurrency) {
+        if (queueConfig?.concurrency) {
           return await this._performTask(job);
         }
         // redlock
-        const _lockResource = `queue:${queueKey}${job.data.queueNameSub ? '#' + job.data.queueNameSub : ''}`;
+        const info = job.data as IQueueJobInfo<DATA>;
+        const queueNameSub = info.options?.queueNameSub;
+        const _lockResource = `queue:${queueKey}${queueNameSub ? '#' + queueNameSub : ''}`;
         return await app.meta.util.lock({
           // subdomain: job.data.subdomain, // need not
           resource: _lockResource,
@@ -113,10 +115,10 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     const connectionEvents: Bull.ConnectionOptions = app.redis.get('queue').duplicate();
     _queue.queueEvents = new Bull.QueueEvents(queueKey, { prefix, connection: connectionEvents });
     _queue.queueEvents.on('completed', ({ jobId, returnvalue }) => {
-      this._callCallback(jobId, null, returnvalue);
+      this._callCallback(jobId, undefined, returnvalue);
     });
     _queue.queueEvents.on('failed', ({ jobId, failedReason }) => {
-      this._callCallback(jobId, failedReason, null);
+      this._callCallback(jobId, failedReason, undefined);
     });
 
     // ok
@@ -149,11 +151,11 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return this._ensureQueue(info).queue;
   }
 
-  _callCallback(jobId, failedReason, data) {
+  _callCallback<DATA>(jobId: string | number, failedReason: string | undefined, data: DATA | undefined) {
     const _callback = this._queueCallbacks[jobId];
     if (_callback) {
       delete this._queueCallbacks[jobId];
-      _callback.callback(failedReason ? new Error(failedReason) : null, data);
+      _callback.callback(failedReason ? new Error(failedReason) : undefined, data);
     }
   }
 
@@ -194,30 +196,26 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return `${subdomain}||${info.queueName}`;
   }
 
-  async _performTask(job) {
-    const app = this.app;
-    let { locale, subdomain, module, queueName, queueNameSub, data, ctxParent, dbLevel } = job.data;
+  async _performTask<DATA>(job: Bull.Job) {
+    const info = job.data as IQueueJobInfo<DATA>;
+    // dbLevel
+    const dbLevel = info.options!.dbLevel!;
     // ctxParent
-    if (!ctxParent) ctxParent = {};
-    ctxParent.dbLevel = dbLevel - 1;
-    // context
-    const context = { job, data } as IQueueJobContext;
-    if (queueNameSub) {
-      context.queueNameSub = queueNameSub;
-    }
+    const ctxParent = Object.assign({}, info.options?.ctxParent, { dbLevel: dbLevel - 1 });
     // queue config
-    const queue = app.meta.queues[`${module}:${queueName}`];
-    // bean
-    const bean = queue.bean;
+    const queueItem = this.app.meta.onionQueue.getMiddlewareItem(info.queueName);
+    const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // execute
-    return await app.meta.util.executeBean({
-      locale,
-      subdomain,
-      context,
-      beanModule: bean.module,
-      beanFullName: `${bean.module}.queue.${bean.name}`,
-      transaction: queue.config.transaction,
+    return await this.app.meta.util.executeBean({
+      locale: info.options?.locale,
+      subdomain: info.options?.subdomain,
+      transaction: queueConfig?.transaction,
       ctxParent,
+      fn: async () => {
+        const beanFullName = queueItem.beanOptions.beanFullName;
+        const beanInstance = <IQueueExecute>this.app.bean._getBean(beanFullName as any);
+        return await beanInstance.execute(info, job);
+      },
     });
   }
 

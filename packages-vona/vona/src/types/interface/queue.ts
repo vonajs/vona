@@ -5,7 +5,7 @@ import { IMiddlewareBaseEnable } from './middleware.js';
 export interface IQueueRecord {}
 
 export interface IQueueExecute {
-  execute(options: IDecoratorQueueOptions): Promise<boolean>;
+  execute(options: IQueueJobInfo, job: Bull.Job): Promise<boolean>;
 }
 
 export interface IDecoratorQueueOptions extends IMiddlewareBaseEnable {
