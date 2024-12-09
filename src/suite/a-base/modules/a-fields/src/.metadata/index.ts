@@ -26,14 +26,14 @@ declare module 'vona' {
   }
 }
 /** summerCache: end */
-/** summerCaches: begin */
+/** summerCache: begin */
 import { SummerCacheFieldsRightOfAtomClass } from '../bean/summerCache.fieldsRightOfAtomClass.js';
 import { SummerCacheFieldsRightOfUser } from '../bean/summerCache.fieldsRightOfUser.js';
 export interface IModuleSummerCache {
   fieldsRightOfAtomClass: SummerCacheFieldsRightOfAtomClass;
   fieldsRightOfUser: SummerCacheFieldsRightOfUser;
 }
-/** summerCaches: end */
+/** summerCache: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
