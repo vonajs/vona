@@ -1,4 +1,5 @@
-import { BeanBase, IQueueExecute, Queue } from 'vona';
+import { IQueueExecute, Queue } from 'vona';
+import { BeanQueueBase } from 'vona-module-a-queue';
 
 export type TypeQueueJobDataTest = {
   a: number;
@@ -6,7 +7,7 @@ export type TypeQueueJobDataTest = {
 };
 
 @Queue()
-export class QueueTest extends BeanBase implements IQueueExecute {
+export class QueueTest extends BeanQueueBase implements IQueueExecute {
   async execute(context) {
     const data = context.data;
     return data.a + data.b;
