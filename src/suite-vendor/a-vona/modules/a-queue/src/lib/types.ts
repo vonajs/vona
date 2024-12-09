@@ -12,8 +12,8 @@ export interface IQueuePushOptions {
   jobOptions?: Bull.JobsOptions;
 }
 
-export interface IQueueExecute<DATA> {
-  execute(options: IQueueJobContext<DATA>, job: Bull.Job): Promise<boolean>;
+export interface IQueueExecute<DATA = unknown, RESULT = unknown> {
+  execute(context: IQueueJobContext<DATA>, job: Bull.Job): Promise<RESULT>;
 }
 
 export interface IQueueJobContext<DATA> {
