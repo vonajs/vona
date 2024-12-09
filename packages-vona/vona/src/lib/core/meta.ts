@@ -91,15 +91,12 @@ export class AppMeta extends BeanSimple {
   onionSchedule: Onion<IDecoratorScheduleOptions>;
   //
   broadcasts: Record<string, any>;
-  schedules: Record<string, any>;
   //
   appReady: boolean;
   appReadyInstances: Record<string, boolean>;
   //
   __versionReady: boolean;
   __versionReadyError: Error;
-  _loadSchedules: () => Promise<void>;
-  _runSchedule: (context) => Promise<any>;
 
   protected __init__() {
     // workerId

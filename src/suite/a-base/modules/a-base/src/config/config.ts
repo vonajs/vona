@@ -74,9 +74,6 @@ const startups: Record<string, IModuleConfigStartup> = {
 
 // queues
 const queues = {
-  schedule: {
-    bean: 'schedule',
-  } as IModuleConfigQueue,
   roleBuild: {
     bean: 'roleBuild',
   } as IModuleConfigQueue,

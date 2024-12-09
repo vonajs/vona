@@ -7,10 +7,10 @@ import * as Bull from 'bullmq';
   },
 })
 export class ScheduleTest extends BeanBase implements IScheduleExecute {
-  async execute(job: Bull.Job) {
+  async execute(job?: Bull.Job) {
     // todo: job.data
     console.log(
-      `----- Schedule Test: iid=${this.ctx.instance.id}, every=${job.data.jobOptions.repeat.every}, ${new Date()}`,
+      `----- Schedule Test: iid=${this.ctx.instance.id}, every=${job?.data.jobOptions.repeat.every}, ${new Date()}`,
     );
   }
 }
