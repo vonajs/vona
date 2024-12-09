@@ -72,11 +72,13 @@ declare module 'vona' {
 /** summerCache: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
+export * from '../bean/queue.test1.js';
 
 import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'vona-test:test': IDecoratorQueueOptions;
+    'vona-test:test1': IDecoratorQueueOptions;
   }
 }
 /** queue: end */
@@ -95,8 +97,10 @@ export interface IModuleSummerCache {
 /** summerCache: end */
 /** queue: begin */
 import { QueueTest } from '../bean/queue.test.js';
+import { QueueTest1 } from '../bean/queue.test1.js';
 export interface IModuleQueue {
   test: QueueTest;
+  test1: QueueTest1;
 }
 /** queue: end */
 /** services: begin */

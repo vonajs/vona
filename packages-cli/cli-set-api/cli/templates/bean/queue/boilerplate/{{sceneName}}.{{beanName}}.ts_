@@ -1,6 +1,15 @@
-import { BeanBase, IStartupExecute, Startup } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueueJobContext } from 'vona-module-a-queue';
+import { ScopeModule } from '../.metadata/this.js';
+
+export type TypeQueue<%=argv.beanNameCapitalize%>JobData = unknown;
+
+export type TypeQueue<%=argv.beanNameCapitalize%>JobResult = unknown;
 
 @Queue()
-export class Startup<%=argv.beanNameCapitalize%> extends BeanBase implements IStartupExecute {
-  async execute() {}
+export class Queue<%=argv.beanNameCapitalize%>
+  extends BeanQueueBase<ScopeModule, TypeQueue<%=argv.beanNameCapitalize%>JobData, TypeQueue<%=argv.beanNameCapitalize%>JobResult>
+  implements IQueueExecute<TypeQueue<%=argv.beanNameCapitalize%>JobData, TypeQueue<%=argv.beanNameCapitalize%>JobResult>
+{
+  async execute(context: IQueueJobContext<TypeQueue<%=argv.beanNameCapitalize%>JobData>): Promise<TypeQueue<%=argv.beanNameCapitalize%>JobResult> {}
 }
