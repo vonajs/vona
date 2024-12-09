@@ -9,7 +9,7 @@ import {
   IQueueQueues,
   IQueueWork,
   IQueueWorks,
-} from '../lib/types.js';
+} from '../types/queue.js';
 
 @Service()
 export class ServiceQueue extends BeanBase<ScopeModule> {
