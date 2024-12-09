@@ -18,14 +18,14 @@ export interface IScheduleExecute {
 }
 
 export interface IDecoratorScheduleOptions extends IMiddlewareBaseEnable {
-  repeat: IScheduleJobRepeat;
+  repeat: Bull.RepeatOptions;
   transaction?: boolean;
 }
 
-export interface IScheduleJobRepeat {
-  every?: number;
-  cron?: string;
-}
+// export interface IScheduleJobRepeat {
+//   every?: number;
+//   cron?: string;
+// }
 
 export interface IScheduleJobData {
   jobOptions: {

@@ -10,6 +10,7 @@ import {
   IDecoratorModelOptions,
   IDecoratorPipeOptionsGlobal,
   IDecoratorQueueOptions,
+  IDecoratorScheduleOptions,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
@@ -38,4 +39,5 @@ function loadAll(app: VonaApplication) {
   app.meta.onionSummerCache = app.bean._newBean(Onion<IDecoratorSummerCacheOptions>, 'summerCache');
   app.meta.onionStartup = app.bean._newBean(Onion<IDecoratorStartupOptions>, 'startup');
   app.meta.onionQueue = app.bean._newBean(Onion<IDecoratorQueueOptions>, 'queue');
+  app.meta.onionSchedule = app.bean._newBean(Onion<IDecoratorScheduleOptions>, 'schedule');
 }

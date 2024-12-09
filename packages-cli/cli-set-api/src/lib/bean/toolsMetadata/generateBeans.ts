@@ -19,6 +19,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
       '**/summerCache.*.ts',
       '**/startup.*.ts',
       '**/queue.*.ts',
+      '**/schedule.*.ts',
     ],
   });
   if (files.length === 0) return '';

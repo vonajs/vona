@@ -29,6 +29,7 @@ import {
   IDecoratorSummerCacheOptions,
   IDecoratorStartupOptions,
   IDecoratorQueueOptions,
+  IDecoratorScheduleOptions,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -87,6 +88,7 @@ export class AppMeta extends BeanSimple {
   onionSummerCache: Onion<IDecoratorSummerCacheOptions>;
   onionStartup: Onion<IDecoratorStartupOptions>;
   onionQueue: Onion<IDecoratorQueueOptions>;
+  onionSchedule: Onion<IDecoratorScheduleOptions>;
   //
   broadcasts: Record<string, any>;
   schedules: Record<string, any>;
