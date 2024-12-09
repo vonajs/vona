@@ -1,6 +1,7 @@
-import { BeanBase, Service } from 'vona';
+import { BeanBase, deepExtend, IDecoratorQueueOptions, Service, uuidv4 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { IQueueCallbacks, IQueueJobInfo, IQueueQueues, IQueueWorks } from '../lib/types.js';
+import { never } from 'zod';
 
 @Service()
 export class ServiceQueue extends BeanBase<ScopeModule> {
@@ -156,32 +157,25 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     }
   }
 
-  _queuePush(info, isAsync) {
-    const app = this.app;
+  _queuePush<DATA, RESULT>(info: IQueueJobInfo<DATA>, isAsync: boolean): Promise<RESULT> {
     // queue config
-    const fullKey = `${info.module}:${info.queueName}`;
-    const queueBase = app.meta.queues[fullKey];
-    if (!queueBase) throw new Error(`queue config not found: ${fullKey}`);
-    const queueConfig = queueBase.config;
+    const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
-    const jobOptions = (queueConfig.options && queueConfig.options.job) || null;
+    const jobOptionsBase = queueConfig?.options?.job;
     // queue
     const queue = this._getQueue(info);
     // job
-    const jobId = (info.jobOptions && info.jobOptions.jobId) || uuid.v4();
-    const jobName = info.jobName || jobId;
-    const _jobOptions = Object.assign({}, jobOptions, info.jobOptions);
+    const jobId = info.options?.jobOptions?.jobId || uuidv4();
+    const jobName = info.options?.jobName || jobId;
+    const jobOptions = deepExtend({ jobId }, jobOptionsBase, info.options?.jobOptions);
     // not async
     if (!isAsync) {
       // add job
-      return queue.add(jobName, info, _jobOptions);
+      queue.add(jobName, info, jobOptions);
+      return undefined as any;
     }
     // async
     return new Promise((resolve, reject) => {
-      // jobId
-      if (!_jobOptions.jobId) {
-        _jobOptions.jobId = jobId;
-      }
       // callback
       this._queueCallbacks[jobId] = {
         info,
@@ -191,7 +185,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
         },
       };
       // add job
-      return queue.add(jobName, info, _jobOptions);
+      return queue.add(jobName, info, jobOptions);
     });
   }
 

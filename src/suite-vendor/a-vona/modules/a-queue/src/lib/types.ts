@@ -8,6 +8,8 @@ export interface IQueuePushOptions {
   queueNameSub?: string;
   dbLevel?: number;
   ctxParent?: VonaContext;
+  jobName?: string;
+  jobOptions?: Bull.JobsOptions;
 }
 
 export interface IQueueJobInfo<DATA> {
@@ -33,11 +35,17 @@ export interface IQueueQueues {
   [queueKey: string]: IQueueQueue;
 }
 
-export interface IQueueCallback {
-  info: any;
-  callback: any;
+export interface IQueueCallback<DATA, RESULT> {
+  info: IQueueJobInfo<DATA>;
+  callback: (err: Error, data: RESULT) => void;
 }
 
 export interface IQueueCallbacks {
   [jobId: string | number]: IQueueCallback;
+}
+
+export interface IQueueJobContext {
+  job: Bull.Job;
+  data: any;
+  queueNameSub: string | undefined;
 }

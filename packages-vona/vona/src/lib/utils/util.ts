@@ -4,6 +4,7 @@ import { URL } from 'url';
 import is from 'is-type-of';
 import * as security from 'egg-security';
 import Redlock from 'redlock';
+import * as uuid from 'uuid';
 import { Request } from 'egg';
 import {
   VonaContext,
@@ -506,6 +507,10 @@ export async function catchError<T>(
 
 export async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function uuidv4() {
+  return uuid.v4();
 }
 
 function delegateProperties(ctx, ctxCaller) {

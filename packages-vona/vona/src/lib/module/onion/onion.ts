@@ -194,6 +194,10 @@ export class Onion extends BeanSimple {
     return this.middlewaresNormal[middlewareName];
   }
 
+  getMiddlewareOptions<OPTIONS>(middlewareName: string): OPTIONS | undefined {
+    return this.getMiddlewareItem(middlewareName).beanOptions.options as OPTIONS | undefined;
+  }
+
   combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;

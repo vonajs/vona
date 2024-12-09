@@ -1,6 +1,6 @@
-import uuid from 'uuid';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { VonaApplication } from '../../types/index.js';
+import { uuidv4 } from '../utils/util.js';
 const eventMessengerCall = 'eb:event:messengerCall';
 
 interface IMessengerCallbackContext {
@@ -64,7 +64,7 @@ export class AppMessenger extends BeanSimple {
   _call(pid, info, cb?: IMessengerCallback) {
     const app = this.app;
     if (cb) {
-      info.echo = uuid.v4();
+      info.echo = uuidv4();
       app.messenger.once(info.echo, info => {
         return cb(info);
       });
