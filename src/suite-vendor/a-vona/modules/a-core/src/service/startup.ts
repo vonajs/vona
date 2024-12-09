@@ -10,12 +10,8 @@ import {
 import { ScopeModule } from '../.metadata/this.js';
 import { clearResources } from '../common/clearResources.js';
 
-const SymbolStartups = Symbol('SymbolStartups');
-
 @Service()
 export class ServiceStartup extends BeanBase<ScopeModule> {
-  private [SymbolStartups]: IMiddlewareItem<IDecoratorStartupOptions>[];
-
   async versionReady() {
     // clear keys
     await clearResources(this.app);

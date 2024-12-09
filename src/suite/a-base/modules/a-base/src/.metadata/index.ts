@@ -18,8 +18,6 @@ export * from '../bean/bean.stash.js';
 export * from '../bean/bean.tag.js';
 export * from '../bean/bean.user.js';
 export * from '../bean/bean.util.js';
-export * from '../bean/queue.roleBuild.js';
-export * from '../bean/queue.schedule.js';
 export * from '../bean/stats.draftsCommon.js';
 export * from '../bean/stats.draftsFlowing.js';
 export * from '../bean/stats.labels.js';
@@ -45,8 +43,6 @@ import { BeanStash } from '../bean/bean.stash.js';
 import { BeanTag } from '../bean/bean.tag.js';
 import { BeanUser } from '../bean/bean.user.js';
 import { BeanUtil } from '../bean/bean.util.js';
-import { QueueRoleBuild } from '../bean/queue.roleBuild.js';
-import { QueueSchedule } from '../bean/queue.schedule.js';
 import { StatsDraftsCommon } from '../bean/stats.draftsCommon.js';
 import { StatsDraftsFlowing } from '../bean/stats.draftsFlowing.js';
 import { StatsLabels } from '../bean/stats.labels.js';
@@ -78,8 +74,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'a-base.queue.roleBuild': QueueRoleBuild;
-    'a-base.queue.schedule': QueueSchedule;
     'a-base.stats.draftsCommon': StatsDraftsCommon;
     'a-base.stats.draftsFlowing': StatsDraftsFlowing;
     'a-base.stats.labels': StatsLabels;
@@ -349,6 +343,16 @@ declare module 'vona' {
   }
 }
 /** startup: end */
+/** queue: begin */
+export * from '../bean/queue.roleBuild.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-base:roleBuild': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
 /** atoms: begin */
 export * from '../atom/resource.js';
 export * from '../atom/role.js';
@@ -366,7 +370,7 @@ export * from '../atom/userResourceRight.js';
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
-/** summerCaches: begin */
+/** summerCache: begin */
 import { SummerCacheAtomClassInner } from '../bean/summerCache.atomClassInner.js';
 import { SummerCacheRoleParentsOfUser } from '../bean/summerCache.roleParentsOfUser.js';
 import { SummerCacheRoleScopesMineOfUser } from '../bean/summerCache.roleScopesMineOfUser.js';
@@ -381,7 +385,13 @@ export interface IModuleSummerCache {
   roleScopesOfUser: SummerCacheRoleScopesOfUser;
   roleWhosOfAtomClassAction: SummerCacheRoleWhosOfAtomClassAction;
 }
-/** summerCaches: end */
+/** summerCache: end */
+/** queue: begin */
+import { QueueRoleBuild } from '../bean/queue.roleBuild.js';
+export interface IModuleQueue {
+  roleBuild: QueueRoleBuild;
+}
+/** queue: end */
 /** entities: begin */
 import { EntityAtom } from '../entity/atom.js';
 import { EntityAtomAction } from '../entity/atomAction.js';
@@ -627,6 +637,7 @@ export interface ScopeModuleABase {
   model: IModuleModel;
   entity: IModuleEntity;
   summerCache: IModuleSummerCache;
+  queue: IModuleQueue;
 }
 
 import 'vona';
