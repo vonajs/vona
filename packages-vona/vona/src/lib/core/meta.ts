@@ -88,7 +88,6 @@ export class AppMeta extends BeanSimple {
   onionStartup: Onion<IDecoratorStartupOptions>;
   onionQueue: Onion<IDecoratorQueueOptions>;
   //
-  queues: Record<string, any>;
   broadcasts: Record<string, any>;
   schedules: Record<string, any>;
   //

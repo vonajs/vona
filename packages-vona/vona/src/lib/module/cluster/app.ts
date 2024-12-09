@@ -1,4 +1,4 @@
-import { VonaApplication } from '../../../types/index.js';
+import { cast, VonaApplication } from '../../../types/index.js';
 import { VersionReady } from '../version/ready.js';
 
 export default function (app: VonaApplication) {
@@ -7,7 +7,7 @@ export default function (app: VonaApplication) {
   versionReady.initialize();
   // eb_clear
   app.messenger.once('eb_clear', async data => {
-    await app.meta.queue._clearWorkers();
+    await cast(app.bean._getBean('a-queue.service.queue' as any)).clearWorkers();
     (<any>process).send({ to: 'master', action: 'eb_clear_done', data: { id: data.id } });
   });
 }

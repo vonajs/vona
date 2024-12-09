@@ -41,7 +41,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     }
   }
 
-  async _clearWorkers() {
+  async clearWorkers() {
     for (const queueKey in this._workers) {
       const _worker = this._workers[queueKey];
       await _worker.worker.close();
