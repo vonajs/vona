@@ -1,11 +1,7 @@
 import { BeanBase, IScheduleExecute, IScheduleJobData, Schedule } from 'vona';
 import * as Bull from 'bullmq';
 
-@Schedule({
-  repeat: {
-    every: 3000,
-  },
-})
+@Schedule({ repeat: { every: 3000 } })
 export class ScheduleTest extends BeanBase implements IScheduleExecute {
   async execute(job?: Bull.Job<IScheduleJobData>) {
     // todo: job.data

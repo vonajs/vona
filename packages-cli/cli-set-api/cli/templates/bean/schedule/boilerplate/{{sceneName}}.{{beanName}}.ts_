@@ -1,6 +1,6 @@
-import { BeanBase, IStartupExecute, Startup } from 'vona';
+import { BeanBase, IScheduleExecute, Schedule } from 'vona';
 
-@Startup()
-export class Startup<%=argv.beanNameCapitalize%> extends BeanBase implements IStartupExecute {
+@Schedule({ repeat: {} })
+export class Schedule<%=argv.beanNameCapitalize%> extends BeanBase implements IScheduleExecute {
   async execute() {}
 }
