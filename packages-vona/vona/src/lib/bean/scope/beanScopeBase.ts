@@ -5,14 +5,12 @@ import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 import { IModule } from '@cabloy/module-info';
 import { BeanScopeUtil } from './beanScopeUtil.js';
-import { BeanScopeSummerCache } from './beanScopeSummerCache.js';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 const BeanModuleStatus = Symbol('BeanScopeBase#BeanModuleStatus');
-const BeanModuleSummerCache = Symbol('BeanScopeBase#BeanModuleSummerCache');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
@@ -20,7 +18,6 @@ export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleBean]: BeanScopeBean;
   private [BeanModuleUtil]: BeanScopeUtil;
   private [BeanModuleStatus]: unknown;
-  private [BeanModuleSummerCache]: BeanScopeSummerCache;
   private __scenes: Record<string, BeanScopeScene> = {};
 
   get module(): IModule {
@@ -73,13 +70,6 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleStatus] = this.bean._getBean(`${moduleBelong}.meta.status` as any);
       }
       return this[BeanModuleStatus];
-    }
-    // summerCache
-    if (prop === 'summerCache') {
-      if (!this[BeanModuleSummerCache]) {
-        this[BeanModuleSummerCache] = this.bean._newBean(BeanScopeSummerCache, moduleBelong);
-      }
-      return this[BeanModuleSummerCache];
     }
     // scene
     if (!this.__scenes[prop]) {
