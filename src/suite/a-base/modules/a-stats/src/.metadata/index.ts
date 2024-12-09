@@ -1,12 +1,10 @@
 /** beans: begin */
 export * from '../bean/bean.stats.js';
 export * from '../bean/io.message.stats.js';
-export * from '../bean/queue.stats.js';
 export * from '../bean/stats.deps.js';
 export * from '../bean/version.manager.js';
 import { BeanStats } from '../bean/bean.stats.js';
 import { IoMessageStats } from '../bean/io.message.stats.js';
-import { QueueStats } from '../bean/queue.stats.js';
 import { StatsDeps } from '../bean/stats.deps.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
@@ -17,7 +15,6 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'a-stats.io.message.stats': IoMessageStats;
-    'a-stats.queue.stats': QueueStats;
     'a-stats.stats.deps': StatsDeps;
     'a-stats.version.manager': VersionManager;
   }
@@ -53,6 +50,22 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** queue: begin */
+export * from '../bean/queue.stats.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-stats:stats': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueStats } from '../bean/queue.stats.js';
+export interface IModuleQueue {
+  stats: QueueStats;
+}
+/** queue: end */
 /** entities: begin */
 import { EntityStats } from '../entity/stats.js';
 export interface IModuleEntity {
@@ -95,6 +108,7 @@ export interface ScopeModuleAStats {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
+  queue: IModuleQueue;
 }
 
 import 'vona';

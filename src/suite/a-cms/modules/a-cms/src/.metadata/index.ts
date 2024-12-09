@@ -2,12 +2,10 @@
 export * from '../bean/bean.atomCmsBase.js';
 export * from '../bean/bean.cms.js';
 export * from '../bean/io.message.hotloadFile.js';
-export * from '../bean/queue.render.js';
 export * from '../bean/version.manager.js';
 import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
 import { BeanCms } from '../bean/bean.cms.js';
 import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
-import { QueueRender } from '../bean/queue.render.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -18,7 +16,6 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
-    'a-cms.queue.render': QueueRender;
     'a-cms.version.manager': VersionManager;
   }
 }
@@ -85,12 +82,28 @@ declare module 'vona' {
   }
 }
 /** startup: end */
+/** queue: begin */
+export * from '../bean/queue.render.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-cms:render': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
 /** atoms: begin */
 export * from '../atom/article.js';
 /** atoms: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
+/** queue: begin */
+import { QueueRender } from '../bean/queue.render.js';
+export interface IModuleQueue {
+  render: QueueRender;
+}
+/** queue: end */
 /** entities: begin */
 import { EntityArticle } from '../entity/article.js';
 import { EntityContent } from '../entity/content.js';
@@ -172,6 +185,7 @@ export interface ScopeModuleACms {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
+  queue: IModuleQueue;
 }
 
 import 'vona';

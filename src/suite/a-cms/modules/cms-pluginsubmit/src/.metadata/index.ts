@@ -1,15 +1,19 @@
-/** beans: begin */
+/** queue: begin */
 export * from '../bean/queue.submit.js';
-import { QueueSubmit } from '../bean/queue.submit.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {}
 
-  export interface IBeanRecordGeneral {
-    'cms-pluginsubmit.queue.submit': QueueSubmit;
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'cms-pluginsubmit:submit': IDecoratorQueueOptions;
   }
 }
-/** beans: end */
+/** queue: end */
+/** queue: begin */
+import { QueueSubmit } from '../bean/queue.submit.js';
+export interface IModuleQueue {
+  submit: QueueSubmit;
+}
+/** queue: end */
 /** services: begin */
 export * from '../service/tools.js';
 import { ServiceTools } from '../service/tools.js';
@@ -38,6 +42,7 @@ export interface ScopeModuleCmsPluginsubmit {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
+  queue: IModuleQueue;
 }
 
 import 'vona';

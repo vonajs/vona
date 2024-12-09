@@ -2,18 +2,10 @@
 export * from '../bean/bean.io.js';
 export * from '../bean/bean.ioMessageBase_.js';
 export * from '../bean/broadcast.socketEmit.js';
-export * from '../bean/queue.delivery.js';
-export * from '../bean/queue.process.js';
-export * from '../bean/queue.push.js';
-export * from '../bean/queue.pushDirect.js';
 export * from '../bean/version.manager.js';
 import { BeanIo } from '../bean/bean.io.js';
 import { BeanIoMessageBase } from '../bean/bean.ioMessageBase_.js';
 import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
-import { QueueDelivery } from '../bean/queue.delivery.js';
-import { QueueProcess } from '../bean/queue.process.js';
-import { QueuePush } from '../bean/queue.push.js';
-import { QueuePushDirect } from '../bean/queue.pushDirect.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -24,10 +16,6 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     ioMessageBase: BeanIoMessageBase;
     'a-socketio.broadcast.socketEmit': BroadcastSocketEmit;
-    'a-socketio.queue.delivery': QueueDelivery;
-    'a-socketio.queue.process': QueueProcess;
-    'a-socketio.queue.push': QueuePush;
-    'a-socketio.queue.pushDirect': QueuePushDirect;
     'a-socketio.version.manager': VersionManager;
   }
 }
@@ -96,6 +84,34 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** queue: begin */
+export * from '../bean/queue.delivery.js';
+export * from '../bean/queue.process.js';
+export * from '../bean/queue.push.js';
+export * from '../bean/queue.pushDirect.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-socketio:delivery': IDecoratorQueueOptions;
+    'a-socketio:process': IDecoratorQueueOptions;
+    'a-socketio:push': IDecoratorQueueOptions;
+    'a-socketio:pushDirect': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueDelivery } from '../bean/queue.delivery.js';
+import { QueueProcess } from '../bean/queue.process.js';
+import { QueuePush } from '../bean/queue.push.js';
+import { QueuePushDirect } from '../bean/queue.pushDirect.js';
+export interface IModuleQueue {
+  delivery: QueueDelivery;
+  process: QueueProcess;
+  push: QueuePush;
+  pushDirect: QueuePushDirect;
+}
+/** queue: end */
 /** entities: begin */
 import { EntityMessage } from '../entity/message.js';
 import { EntityMessageClass } from '../entity/messageClass.js';
@@ -166,6 +182,7 @@ export interface ScopeModuleASocketio {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
+  queue: IModuleQueue;
 }
 
 import 'vona';

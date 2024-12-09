@@ -2,12 +2,10 @@
 export * from '../bean/flow.node.gatewayExclusive.js';
 export * from '../bean/flow.node.gatewayInclusive.js';
 export * from '../bean/flow.node.gatewayParallel.js';
-export * from '../bean/queue.gateway.js';
 export * from '../bean/version.manager.js';
 import { FlowNodeGatewayExclusive } from '../bean/flow.node.gatewayExclusive.js';
 import { FlowNodeGatewayInclusive } from '../bean/flow.node.gatewayInclusive.js';
 import { FlowNodeGatewayParallel } from '../bean/flow.node.gatewayParallel.js';
-import { QueueGateway } from '../bean/queue.gateway.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -17,11 +15,26 @@ declare module 'vona' {
     'a-flowgateway.flow.node.gatewayExclusive': FlowNodeGatewayExclusive;
     'a-flowgateway.flow.node.gatewayInclusive': FlowNodeGatewayInclusive;
     'a-flowgateway.flow.node.gatewayParallel': FlowNodeGatewayParallel;
-    'a-flowgateway.queue.gateway': QueueGateway;
     'a-flowgateway.version.manager': VersionManager;
   }
 }
 /** beans: end */
+/** queue: begin */
+export * from '../bean/queue.gateway.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-flowgateway:gateway': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueGateway } from '../bean/queue.gateway.js';
+export interface IModuleQueue {
+  gateway: QueueGateway;
+}
+/** queue: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -53,6 +66,7 @@ export interface ScopeModuleAFlowgateway {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  queue: IModuleQueue;
 }
 
 import 'vona';

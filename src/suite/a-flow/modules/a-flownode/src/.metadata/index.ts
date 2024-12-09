@@ -5,7 +5,6 @@ export * from '../bean/flow.node.activityService.js';
 export * from '../bean/flow.node.endEventNone.js';
 export * from '../bean/flow.node.startEventNone.js';
 export * from '../bean/flow.node.startEventTimer.js';
-export * from '../bean/queue.startEventTimer.js';
 export * from '../bean/version.manager.js';
 import { FlowEdgeSequence } from '../bean/flow.edge.sequence.js';
 import { FlowNodeActivityNone } from '../bean/flow.node.activityNone.js';
@@ -13,7 +12,6 @@ import { FlowNodeActivityService } from '../bean/flow.node.activityService.js';
 import { FlowNodeEndEventNone } from '../bean/flow.node.endEventNone.js';
 import { FlowNodeStartEventNone } from '../bean/flow.node.startEventNone.js';
 import { FlowNodeStartEventTimer } from '../bean/flow.node.startEventTimer.js';
-import { QueueStartEventTimer } from '../bean/queue.startEventTimer.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -26,11 +24,26 @@ declare module 'vona' {
     'a-flownode.flow.node.endEventNone': FlowNodeEndEventNone;
     'a-flownode.flow.node.startEventNone': FlowNodeStartEventNone;
     'a-flownode.flow.node.startEventTimer': FlowNodeStartEventTimer;
-    'a-flownode.queue.startEventTimer': QueueStartEventTimer;
     'a-flownode.version.manager': VersionManager;
   }
 }
 /** beans: end */
+/** queue: begin */
+export * from '../bean/queue.startEventTimer.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-flownode:startEventTimer': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueStartEventTimer } from '../bean/queue.startEventTimer.js';
+export interface IModuleQueue {
+  startEventTimer: QueueStartEventTimer;
+}
+/** queue: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -62,6 +75,7 @@ export interface ScopeModuleAFlownode {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -1,9 +1,7 @@
 /** beans: begin */
 export * from '../bean/flow.behavior.overtime.js';
-export * from '../bean/queue.overtime.js';
 export * from '../bean/version.manager.js';
 import { FlowBehaviorOvertime } from '../bean/flow.behavior.overtime.js';
-import { QueueOvertime } from '../bean/queue.overtime.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -11,11 +9,26 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'a-flowbehavior.flow.behavior.overtime': FlowBehaviorOvertime;
-    'a-flowbehavior.queue.overtime': QueueOvertime;
     'a-flowbehavior.version.manager': VersionManager;
   }
 }
 /** beans: end */
+/** queue: begin */
+export * from '../bean/queue.overtime.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-flowbehavior:overtime': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueOvertime } from '../bean/queue.overtime.js';
+export interface IModuleQueue {
+  overtime: QueueOvertime;
+}
+/** queue: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -47,6 +60,7 @@ export interface ScopeModuleAFlowbehavior {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  queue: IModuleQueue;
 }
 
 import 'vona';
