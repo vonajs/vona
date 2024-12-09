@@ -34,54 +34,6 @@ export class CtxUtil extends BeanSimple {
     });
   }
 
-  queuePush(info) {
-    const ctx = this.ctx;
-    ctx.app.meta.queue.push(this._queuePushInfoPrepare(info));
-  }
-
-  async queuePushAsync(info) {
-    const ctx = this.ctx;
-    return await ctx.app.meta.queue.pushAsync(this._queuePushInfoPrepare(info));
-  }
-
-  _queuePushInfoPrepare(info) {
-    const ctx = this.ctx;
-    const dbLevel = !info.dbLevel ? ctx.dbLevel + 1 : info.dbLevel;
-    const locale = info.locale === undefined ? ctx.locale : info.locale;
-    const subdomain = info.subdomain === undefined ? ctx.subdomain : info.subdomain;
-    // new info
-    info = {
-      ...info,
-      dbLevel,
-      locale,
-      subdomain,
-    };
-    if (!info.ctxParent) info.ctxParent = {};
-    if (!info.ctxParent.request) info.ctxParent.request = {};
-    if (!info.ctxParent.request.headers) info.ctxParent.request.headers = {};
-    // headers
-    const headers = info.ctxParent.request.headers;
-    for (const key of ['x-clientid', 'x-scene']) {
-      if (!headers[key]) {
-        const value =
-          key === 'x-clientid' ? (<any>ctx.app.bean).util.getFrontClientId() : (<any>ctx.app.bean).util.getFrontScene();
-        if (value) {
-          headers[key] = value;
-        }
-      }
-    }
-    for (const key of ['host', 'origin', 'referer', 'user-agent']) {
-      if (!headers[key]) {
-        const value = ctx.request.headers[key];
-        if (value) {
-          headers[key] = value;
-        }
-      }
-    }
-    // ok
-    return info;
-  }
-
   async executeBean({
     locale,
     subdomain,

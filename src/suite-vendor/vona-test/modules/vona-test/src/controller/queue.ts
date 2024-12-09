@@ -6,6 +6,7 @@ import assert from 'assert';
 export class ControllerQueue extends BeanBase<ScopeModule> {
   @Post('pushAsync')
   async pushAsync() {
+    // await this.scope.queue.test.
     const res = await this.ctx.meta.util.queuePushAsync({
       module: 'test-party',
       queueName: 'queueTest',

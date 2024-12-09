@@ -18,6 +18,11 @@ export class BeanBaseSimple extends BeanSimple {
     return this.__beanFullName__;
   }
 
+  protected get onionName() {
+    const parts = this.beanFullName.split('.');
+    return `${parts[0]}:${parts[1]}`;
+  }
+
   protected get moduleBelong() {
     return this.__moduleBelong__ || appResource._getModuleBelong(this.__beanFullName__);
   }

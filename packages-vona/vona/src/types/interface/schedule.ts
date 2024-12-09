@@ -1,6 +1,5 @@
 import * as Bull from 'bullmq';
 import { IMiddlewareBaseEnable } from './middleware.js';
-export * as Bull from 'bullmq';
 
 export interface IScheduleJobContext {
   job: Bull.Job;

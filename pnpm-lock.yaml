@@ -1074,9 +1074,6 @@ importers:
       bottleneck:
         specifier: ^2.19.5
         version: 2.19.5
-      bullmq:
-        specifier: ^2.3.1
-        version: 2.4.0
       chalk:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1236,7 +1233,14 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-vona/shared
 
-  src/suite-vendor/a-vona/modules/a-queue: {}
+  src/suite-vendor/a-vona/modules/a-queue:
+    dependencies:
+      bullmq:
+        specifier: ^2.3.1
+        version: 2.4.0
+      redlock:
+        specifier: ^4.1.0
+        version: 4.2.0
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:

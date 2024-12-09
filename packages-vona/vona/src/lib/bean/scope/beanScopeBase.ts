@@ -65,6 +65,7 @@ export class BeanScopeBase extends BeanBaseSimple {
       return this[BeanModuleUtil];
     }
     // status
+    // todo: 可能通过onion能力配置，将这段逻辑通用化
     if (prop === 'status') {
       if (!this[BeanModuleStatus]) {
         this[BeanModuleStatus] = this.bean._getBean(`${moduleBelong}.meta.status` as any);
