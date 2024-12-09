@@ -14,7 +14,7 @@ export interface IScheduleJobContext {
 export interface IScheduleRecord {}
 
 export interface IScheduleExecute {
-  execute(options: IScheduleExecuteOptions): Promise<void>;
+  execute(job: Bull.Job): Promise<void>;
 }
 
 export interface IDecoratorScheduleOptions extends IMiddlewareBaseEnable {
