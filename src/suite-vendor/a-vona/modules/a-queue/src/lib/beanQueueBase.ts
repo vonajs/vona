@@ -1,5 +1,5 @@
 import { BeanBase, VonaContext } from 'vona';
-import { IQueueJobContext, IQueuePushOptions } from './types.js';
+import { IQueueJobContext, IQueuePushOptions } from '../types/queue.js';
 
 export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unknown> extends BeanBase<TScopeModule> {
   async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT> {
