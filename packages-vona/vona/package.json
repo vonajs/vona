@@ -47,6 +47,7 @@
     "@cabloy/module-info-pro": "workspace:^",
     "@cabloy/set": "^1.0.7",
     "@cabloy/word-utils": "^1.0.2",
+    "@types/redlock": "^4.0.7",
     "@types/retry": "^0.12.5",
     "@zhennann/egg-passport": "^2.1.5",
     "async": "^3.2.0",

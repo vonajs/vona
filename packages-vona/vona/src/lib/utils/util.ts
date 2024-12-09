@@ -453,7 +453,7 @@ export function composeAsync(chains, adapter) {
   return _composeAsync(chains, adapter);
 }
 
-export function subdomainDesp(subdomain) {
+export function subdomainDesp(subdomain: string | null | undefined): string {
   if (subdomain === undefined || subdomain === null) return '~';
   return subdomain || '-';
 }

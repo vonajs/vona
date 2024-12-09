@@ -1,7 +1,7 @@
-import { BeanBase, deepExtend, IDecoratorQueueOptions, Service, uuidv4 } from 'vona';
+import * as Bull from 'bullmq';
+import { BeanBase, deepExtend, IDecoratorQueueOptions, Service, subdomainDesp, uuidv4 } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { IQueueCallbacks, IQueueJobInfo, IQueueQueues, IQueueWorks } from '../lib/types.js';
-import { never } from 'zod';
+import { IQueueCallbacks, IQueueJobInfo, IQueueQueue, IQueueQueues, IQueueWork, IQueueWorks } from '../lib/types.js';
 
 @Service()
 export class ServiceQueue extends BeanBase<ScopeModule> {
@@ -28,17 +28,17 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     this._workers = {};
   }
 
-  _createWorker(info, queueKey) {
+  _createWorker<DATA>(info: IQueueJobInfo<DATA>, queueKey: string) {
     const app = this.app;
     // worker
     const _worker = {} as IQueueWork;
     // prefix
     const prefix = `bull_${app.name}:queue`;
     // queue config
-    const queueConfig = app.meta.queues[`${info.module}:${info.queueName}`].config;
+    const queueConfig = app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/redlock
-    const workerOptions = (queueConfig.options && queueConfig.options.worker) || null;
-    const redlockOptions = (queueConfig.options && queueConfig.options.redlock) || null;
+    const workerOptions = queueConfig?.options?.worker;
+    const redlockOptions = queueConfig?.options?.redlock;
     const _redlockOptions = Object.assign({}, app.config.queue.redlock.options, redlockOptions);
 
     // redlock
@@ -93,16 +93,16 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return _worker;
   }
 
-  _createQueue(info, queueKey) {
+  _createQueue<DATA>(info: IQueueJobInfo<DATA>, queueKey: string) {
     const app = this.app;
     // queue
     const _queue = {} as IQueueQueue;
     // prefix
     const prefix = `bull_${app.name}:queue`;
     // queue config
-    const queueConfig = app.meta.queues[`${info.module}:${info.queueName}`].config;
+    const queueConfig = app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
-    const queueOptions = (queueConfig.options && queueConfig.options.queue) || null;
+    const queueOptions = queueConfig?.options?.queue;
 
     // create queue
     const connectionQueue: Bull.ConnectionOptions = app.redis.get('queue').duplicate();
@@ -123,7 +123,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return _queue;
   }
 
-  _ensureWorker(info) {
+  _ensureWorker<DATA>(info: IQueueJobInfo<DATA>) {
     // queueKey
     const queueKey = this._combineQueueKey(info);
     // worker
@@ -132,7 +132,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     }
   }
 
-  _ensureQueue(info) {
+  _ensureQueue<DATA>(info: IQueueJobInfo<DATA>) {
     // worker
     this._ensureWorker(info);
     // queueKey
@@ -145,7 +145,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return this._queues[queueKey];
   }
 
-  _getQueue(info) {
+  _getQueue<DATA>(info: IQueueJobInfo<DATA>) {
     return this._ensureQueue(info).queue;
   }
 
@@ -181,7 +181,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
         info,
         callback: (err, data) => {
           if (err) return reject(err);
-          resolve(data);
+          resolve(data as unknown as RESULT);
         },
       };
       // add job
@@ -189,9 +189,9 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     });
   }
 
-  _combineQueueKey({ subdomain, module = '', queueName = '' }) {
-    subdomain = subdomainDesp(subdomain);
-    return `${subdomain}||${module}||${queueName}`;
+  _combineQueueKey<DATA>(info: IQueueJobInfo<DATA>) {
+    const subdomain = subdomainDesp(info.options?.subdomain);
+    return `${subdomain}||${info.queueName}`;
   }
 
   async _performTask(job) {

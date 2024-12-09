@@ -41,7 +41,7 @@ export interface IQueueCallback<DATA, RESULT> {
 }
 
 export interface IQueueCallbacks {
-  [jobId: string | number]: IQueueCallback;
+  [jobId: string | number]: IQueueCallback<unknown, unknown>;
 }
 
 export interface IQueueJobContext {
