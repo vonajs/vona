@@ -1,9 +1,9 @@
 import { BeanBase, VonaContext } from 'vona';
 import { IQueueJobContext, IQueuePushOptions } from './types.js';
 
-export class BeanQueueBase<TScopeModule = unknown, DATA = unknown> extends BeanBase<TScopeModule> {
-  async pushAsync(data: DATA, options?: IQueuePushOptions) {
-    return await this.$scope.queue.service.queue.pushAsync(this._prepareInfo(data, options));
+export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unknown> extends BeanBase<TScopeModule> {
+  async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT> {
+    return await this.$scope.queue.service.queue.pushAsync<DATA, RESULT>(this._prepareInfo(data, options));
   }
 
   push(data: DATA, options?: IQueuePushOptions) {

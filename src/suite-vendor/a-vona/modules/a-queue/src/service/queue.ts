@@ -23,7 +23,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
   }
 
   // { locale, subdomain, module, queueName,queueNameSub,data }
-  pushAsync<DATA>(info: IQueueJobContext<DATA>) {
+  pushAsync<DATA, RESULT>(info: IQueueJobContext<DATA>): Promise<RESULT> {
     if (!info.options?.dbLevel) throw new Error('should specify the options.dbLevel');
     return this._queuePush(info, true);
   }
