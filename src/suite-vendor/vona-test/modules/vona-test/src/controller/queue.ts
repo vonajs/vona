@@ -6,21 +6,12 @@ import assert from 'assert';
 export class ControllerQueue extends BeanBase<ScopeModule> {
   @Post('pushAsync')
   async pushAsync() {
-    // await this.scope.queue.test.
-    const res = await this.ctx.meta.util.queuePushAsync({
-      module: 'test-party',
-      queueName: 'queueTest',
-      data: { a: 1, b: 2 },
-    });
+    const res = await this.scope.queue.test.pushAsync({ a: 1, b: 2 });
     assert.equal(res, 3);
   }
 
   @Post('push')
   async push() {
-    this.ctx.meta.util.queuePush({
-      module: 'test-party',
-      queueName: 'queueTest',
-      data: { a: 1, b: 2 },
-    });
+    this.scope.queue.test.push({ a: 1, b: 2 });
   }
 }
