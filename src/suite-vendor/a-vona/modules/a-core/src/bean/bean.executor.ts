@@ -68,6 +68,8 @@ export class BeanExecutor extends BeanBase {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
     }
+    // todo: remove
+    const ctxModule = this.ctx?.module?.info?.relativeName;
     // run
     const isolate = !this.ctx || this.ctx.dbLevel !== options.dbLevel;
     const ctxCaller = !isolate && this.ctx;
