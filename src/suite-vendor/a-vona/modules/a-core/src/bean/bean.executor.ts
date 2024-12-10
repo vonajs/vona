@@ -147,35 +147,42 @@ export class BeanExecutor extends BeanBase {
 }
 
 function _delegateProperties(ctx, ctxCaller) {
-  const req = ctx.req;
   for (const property of ['state']) {
     _delegateProperty(ctx, ctxCaller, property);
   }
   for (const property of ['headers']) {
     _delegateProperty(ctx.request, ctxCaller.request, property);
-    if (ctx.request[property]) req[property] = ctx.request[property];
+    // if (ctx.request[property]) req[property] = ctx.request[property];
   }
 }
 
 function _delegateProperty(ctx, ctxCaller, property) {
-  const keyMock = `__executeBean__mock__${property}__`;
-  const keyOriginal = `__executeBean__mock__${property}__original__`;
-  if (['headers'].includes(property)) {
-    ctx[keyOriginal] = ctx[property];
+  if (!ctxCaller[property]) return;
+  if (!ctx[property]) ctx[property] = {};
+  for (const key in ctxCaller[property]) {
+    ctx[property][key] = ctxCaller[property][key];
   }
-  Object.defineProperty(ctx, property, {
-    get() {
-      const value = ctxCaller && ctxCaller[property];
-      if (value) return value;
-      //
-      if (['headers'].includes(property)) {
-        return ctx[keyOriginal];
-      }
-      //
-      if (!ctx[keyMock]) {
-        ctx[keyMock] = {};
-      }
-      return ctx[keyMock];
-    },
-  });
 }
+
+// function _delegateProperty(ctx, ctxCaller, property) {
+//   const keyMock = `__executeBean__mock__${property}__`;
+//   const keyOriginal = `__executeBean__mock__${property}__original__`;
+//   if (['headers'].includes(property)) {
+//     ctx[keyOriginal] = ctx[property];
+//   }
+//   Object.defineProperty(ctx, property, {
+//     get() {
+//       const value = ctxCaller && ctxCaller[property];
+//       if (value) return value;
+//       //
+//       if (['headers'].includes(property)) {
+//         return ctx[keyOriginal];
+//       }
+//       //
+//       if (!ctx[keyMock]) {
+//         ctx[keyMock] = {};
+//       }
+//       return ctx[keyMock];
+//     },
+//   });
+// }
