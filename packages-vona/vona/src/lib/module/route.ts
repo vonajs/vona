@@ -111,11 +111,9 @@ export class AppRouter extends BeanSimple {
     return app.router.stack.find(layer => layer.path === _path);
   }
 
-  registerController(info: ModuleInfo.IModuleInfo | string, controller: Constructable) {
+  registerController(moduleName: string, controller: Constructable) {
     // info
-    if (typeof info === 'string') {
-      info = ModuleInfo.parseInfo(info)!;
-    }
+    const info = ModuleInfo.parseInfo(moduleName)!;
     // controller options
     const beanOptions = appResource.getBean(controller);
     if (!beanOptions) return;
@@ -303,7 +301,7 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
   }
 
   function loadRoutes() {
-    // load routes
+    // todo: remove: load routes from config
     for (const key in modules) {
       const module = modules[key];
       // routes
@@ -313,25 +311,12 @@ export default function (app: VonaApplication, modules: Record<string, IModule>)
           app.meta.router.register(module.info, route);
         }
       }
-      // controllers by decorator
-      const controllers = appResource.scenes['controller'][key];
-      if (controllers) {
-        for (const key in controllers) {
-          const controller = controllers[key].beanClass;
-          if (checkControllerEnabled(controller, app)) {
-            app.meta.router.registerController(module.info, controller);
-          }
-        }
-      }
+    }
+    // controllers by decorator
+    for (const controller of app.meta.onionController.middlewaresEnabled) {
+      app.meta.router.registerController(controller.beanOptions.module, controller.beanOptions.beanClass);
     }
   }
-}
-
-function checkControllerEnabled(controller: Constructable, app: VonaApplication) {
-  const beanOptions = appResource.getBean(controller);
-  if (!beanOptions) return false;
-  const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
-  return controllerOptions.enable !== false && app.meta.util.checkMiddlewareOptionsMeta(controllerOptions.meta);
 }
 
 function wrapMiddlewareApp(key, route, app) {

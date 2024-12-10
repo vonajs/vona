@@ -5,7 +5,7 @@ import { IRedlockLockOptions } from '../types/redlock.js';
 
 @Bean()
 export class BeanRedlock extends BeanBase<ScopeModule> {
-  private _redlock: Redlock;
+  private _redlockDefault: Redlock;
 
   public async lock<RESULT>(
     resource: string,
@@ -13,7 +13,7 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
     options?: IRedlockLockOptions,
   ): Promise<RESULT> {
     const subdomain = options?.subdomain === undefined ? this.ctx?.subdomain : options?.subdomain;
-    const redlock = options?.redlock ?? this.redlock;
+    const redlock = options?.redlock ?? this.redlockDefault;
     const lockTTL = options?.lockTTL ?? this.scope.config.redlock.lockTTL;
     // resource
     const _lockResource = `redlock_${this.app.name}:${subdomainDesp(subdomain)}:${resource}`;
@@ -50,11 +50,29 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
     }
   }
 
-  private get redlock() {
-    if (!this._redlock) {
-      this._redlock = this.create(this.scope.config.redlock.options);
+  public async lockWithCtxIsolate<RESULT>(
+    resource: string,
+    fn: FunctionAsync<RESULT>,
+    options?: IRedlockLockOptions,
+  ): Promise<RESULT> {
+    return await this.lock(
+      resource,
+      async () => {
+        return await this.ctx.meta.util.executeBeanIsolate({
+          fn: () => {
+            return fn();
+          },
+        });
+      },
+      options,
+    );
+  }
+
+  private get redlockDefault() {
+    if (!this._redlockDefault) {
+      this._redlockDefault = this.create(this.scope.config.redlock.options);
     }
-    return this._redlock;
+    return this._redlockDefault;
   }
 
   public create(options: Redlock.Options) {
