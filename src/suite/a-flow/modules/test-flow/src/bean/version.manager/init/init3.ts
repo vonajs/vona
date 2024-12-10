@@ -29,7 +29,11 @@ export class VersionInit extends BeanBase {
         scopeNames: 'authenticated', // 'family',
       },
     ];
-    await this.app.bean.role.addRoleRightBatchByModeFlow({ atomClassName: 'purchaseOrder', roleRights });
+    await this.app.bean.role.addRoleRightBatchByModeFlow({
+      module: __ThisModule__,
+      atomClassName: 'purchaseOrder',
+      roleRights,
+    });
     // add role rights
     roleRights = [
       //

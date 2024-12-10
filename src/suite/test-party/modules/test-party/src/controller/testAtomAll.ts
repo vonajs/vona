@@ -1,5 +1,5 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
@@ -20,7 +20,7 @@ export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
   }
   async __all() {
     // atomClass
-    const atomClass = await this.app.bean.atomClass.get({ atomClassName: 'party' });
+    const atomClass = await this.app.bean.atomClass.get({ module: __ThisModule__, atomClassName: 'party' });
     this.atomClass = atomClass;
     // userIds
     const userIds = this.ctx.cache.mem.get('userIds');
