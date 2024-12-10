@@ -1,4 +1,4 @@
-import { BeanBase, IQueueRecord, VonaContext } from 'vona';
+import { BeanBase, deepExtend, IQueueRecord } from 'vona';
 import { IQueueJobContext, IQueuePushOptions } from '../types/queue.js';
 
 export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unknown> extends BeanBase<TScopeModule> {
@@ -15,36 +15,42 @@ export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unkn
   }
 
   private _prepareInfo(data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
-    options = Object.assign({}, options);
+    options = deepExtend({ extraData: { headers: {} } }, options)!;
     if (!this.ctx) {
       options.dbLevel = options.dbLevel ?? 1;
     } else {
       options.dbLevel = options.dbLevel ?? this.ctx.dbLevel + 1;
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
-      // ctxParent
-      if (!options.ctxParent) options.ctxParent = {} as VonaContext;
-      if (!options.ctxParent.request) options.ctxParent.request = {} as any;
-      if (!options.ctxParent.request.headers) options.ctxParent.request.headers = {};
-      // headers
-      const headers = options.ctxParent.request.headers;
+      // extraData: headers
+      const headers = options.extraData!.headers!;
+      for (const key in this.ctx.request.headers) {
+        if (key.startsWith('x-vona-data-') && !headers[key]) {
+          const value = this.ctx.request.headers[key];
+          if (value) {
+            headers[key] = value as string;
+          }
+        }
+      }
       // for (const key of ['x-clientid', 'x-scene']) {
       //   if (!headers[key]) {
       //     const value =
-      //       key === 'x-clientid' ? (<any>ctx.app.bean).util.getFrontClientId() : (<any>ctx.app.bean).util.getFrontScene();
+      //       key === 'x-clientid'
+      //         ? (<any>ctx.app.bean).util.getFrontClientId()
+      //         : (<any>ctx.app.bean).util.getFrontScene();
       //     if (value) {
       //       headers[key] = value;
       //     }
       //   }
       // }
-      for (const key of ['host', 'origin', 'referer', 'user-agent']) {
-        if (!headers[key]) {
-          const value = this.ctx.request.headers[key];
-          if (value) {
-            headers[key] = value;
-          }
-        }
-      }
+      // for (const key of ['host', 'origin', 'referer', 'user-agent']) {
+      //   if (!headers[key]) {
+      //     const value = this.ctx.request.headers[key];
+      //     if (value) {
+      //       headers[key] = value;
+      //     }
+      //   }
+      // }
     }
     // info
     return {

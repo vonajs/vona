@@ -230,25 +230,24 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
 
   async _performTask<DATA>(job: Bull.Job) {
     const info = job.data as IQueueJobContext<DATA>;
-    // dbLevel
-    const dbLevel = info.options!.dbLevel!;
-    // ctxParent
-    const ctxParent = Object.assign({}, info.options?.ctxParent, { dbLevel: dbLevel - 1 });
     // queue config
     const queueItem = this.app.meta.onionQueue.getMiddlewareItem(info.queueName);
     const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // execute
-    return await this.app.meta.util.executeBean({
-      locale: info.options?.locale,
-      subdomain: info.options?.subdomain,
-      transaction: queueConfig?.transaction,
-      ctxParent,
-      fn: async () => {
+    return await this.bean.executor.newCtx(
+      async () => {
         const beanFullName = queueItem.beanOptions.beanFullName;
         const beanInstance = <IQueueExecute<DATA>>this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(info.data, info.options, job);
       },
-    });
+      {
+        locale: info.options?.locale,
+        subdomain: info.options?.subdomain,
+        dbLevel: info.options!.dbLevel,
+        extraData: info.options?.extraData,
+        transaction: queueConfig?.transaction,
+      },
+    );
   }
 
   getRepeatKey(jobName: string, repeat: Bull.RepeatOptions) {

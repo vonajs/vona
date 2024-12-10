@@ -1,13 +1,14 @@
 import * as Bull from 'bullmq';
 import Redlock from 'redlock';
-import { ILocalInfos, IQueueRecord, VonaContext } from 'vona';
+import { ILocalInfos, IQueueRecord } from 'vona';
+import { INewCtxExtraData } from 'vona-module-a-core';
 
 export interface IQueuePushOptions {
+  queueNameSub?: string;
   locale?: keyof ILocalInfos;
   subdomain?: string | null | undefined;
-  queueNameSub?: string;
   dbLevel?: number;
-  ctxParent?: VonaContext;
+  extraData?: INewCtxExtraData;
   jobName?: string;
   jobOptions?: Bull.JobsOptions;
 }
