@@ -3,14 +3,10 @@ import { BeanIoPublish } from './bean.io_publish.js';
 
 export class BeanIoPush extends BeanIoPublish {
   async pushDirect({ content, channel, options }: any) {
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'pushDirect',
-      data: {
-        content,
-        channel,
-        options,
-      },
+    this.scope.queue.pushDirect.push({
+      content,
+      channel,
+      options,
     });
   }
 
@@ -47,15 +43,11 @@ export class BeanIoPush extends BeanIoPublish {
     const pushEnable = await this._checkPushEnable({ options, message, messageSyncs, messageClass });
     if (!pushEnable) return;
     // queue
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'push',
-      data: {
-        options,
-        message,
-        messageSyncs,
-        messageClass,
-      },
+    this.scope.queue.push.push({
+      options,
+      message,
+      messageSyncs,
+      messageClass,
     });
   }
 

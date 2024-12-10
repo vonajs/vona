@@ -5,22 +5,6 @@ const queues = {
   registerMessageClass: {
     bean: 'registerMessageClass',
   } as IModuleConfigQueue,
-  process: {
-    bean: 'process',
-    concurrency: true,
-  } as IModuleConfigQueue,
-  delivery: {
-    bean: 'delivery',
-    concurrency: true,
-  } as IModuleConfigQueue,
-  push: {
-    bean: 'push',
-    concurrency: true,
-  } as IModuleConfigQueue,
-  pushDirect: {
-    bean: 'pushDirect',
-    concurrency: true,
-  } as IModuleConfigQueue,
 };
 
 // broadcasts

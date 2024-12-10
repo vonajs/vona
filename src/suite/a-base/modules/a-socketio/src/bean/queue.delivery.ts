@@ -1,10 +1,24 @@
-import { Bean, BeanBase } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
 import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'queue' })
-export class QueueDelivery extends BeanBase<ScopeModule> {
-  async execute(context) {
-    const { path, options, message, messageSyncs, messageClass } = context.data;
+export type TypeQueueDeliveryJobData = {
+  path;
+  options;
+  message;
+  messageSyncs;
+  messageClass;
+};
+
+export type TypeQueueDeliveryJobResult = void;
+
+@Queue({ concurrency: true })
+export class QueueDelivery
+  extends BeanQueueBase<ScopeModule, TypeQueueDeliveryJobData, TypeQueueDeliveryJobResult>
+  implements IQueueExecute<TypeQueueDeliveryJobData, TypeQueueDeliveryJobResult>
+{
+  async execute(data: TypeQueueDeliveryJobData, _options?: IQueuePushOptions): Promise<TypeQueueDeliveryJobResult> {
+    const { path, options, message, messageSyncs, messageClass } = data;
     return await this.scope.service.ioInner.queueDelivery({ path, options, message, messageSyncs, messageClass });
   }
 }

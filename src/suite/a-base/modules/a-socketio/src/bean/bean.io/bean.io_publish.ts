@@ -93,15 +93,11 @@ export class BeanIoPublish extends BeanIoDelivery {
     debug('_publish content: %j', message.content);
 
     // to queue
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'process',
-      data: {
-        path,
-        options,
-        message: _message,
-        messageClass,
-      },
+    this.scope.queue.process.push({
+      path,
+      options,
+      message: _message,
+      messageClass,
     });
 
     // ok
@@ -115,16 +111,12 @@ export class BeanIoPublish extends BeanIoDelivery {
     // to queue: delivery/push
     if (path) {
       // try delivery first, then try push if failed
-      this.ctx.meta.util.queuePush({
-        module: __ThisModule__,
-        queueName: 'delivery',
-        data: {
-          path,
-          options,
-          message,
-          messageSyncs,
-          messageClass,
-        },
+      this.scope.queue.delivery.push({
+        path,
+        options,
+        message,
+        messageSyncs,
+        messageClass,
       });
     } else {
       // push
