@@ -23,16 +23,13 @@ export class BeanSequence extends BeanModuleScopeBase {
 
   async next(name) {
     const moduleName = this.moduleScope;
-    return await this.ctx.meta.util.lock({
-      resource: `${__ThisModule__}.sequence.${moduleName}.${name}`,
-      fn: async () => {
-        return await this.ctx.meta.util.executeBeanIsolate({
-          beanFullName: 'sequence',
-          fn: async ({ bean }) => {
-            return await bean.module(moduleName)._nextLock(name);
-          },
-        });
-      },
+    return await this.bean.redlock.lock(`${__ThisModule__}.sequence.${moduleName}.${name}`, async () => {
+      return await this.ctx.meta.util.executeBeanIsolate({
+        beanFullName: 'sequence',
+        fn: async ({ bean }) => {
+          return await bean.module(moduleName)._nextLock(name);
+        },
+      });
     });
   }
 

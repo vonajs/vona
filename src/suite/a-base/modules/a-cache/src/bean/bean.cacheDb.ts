@@ -33,15 +33,12 @@ export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
       });
     } else {
       if (queue) {
-        await this.ctx.meta.util.lock({
-          resource: `${__ThisModule__}.cacheDbSet.${this.moduleScope}.${name}`,
-          fn: async () => {
-            return await this.ctx.meta.util.executeBeanIsolate({
-              fn: async ({ ctx }) => {
-                return await ctx.cache._db.module(this.moduleScope)._set({ name, value, timeout, queue: false });
-              },
-            });
-          },
+        await this.bean.redlock.lock(`${__ThisModule__}.cacheDbSet.${this.moduleScope}.${name}`, async () => {
+          return await this.ctx.meta.util.executeBeanIsolate({
+            fn: async ({ ctx }) => {
+              return await ctx.cache._db.module(this.moduleScope)._set({ name, value, timeout, queue: false });
+            },
+          });
         });
       } else {
         await this.bean.model.insert('aCache', {

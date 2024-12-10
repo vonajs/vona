@@ -24,15 +24,12 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     if (res) return res;
     if (!module || !providerName) throw new Error('Invalid arguments');
     // lock
-    return await this.ctx.meta.util.lock({
-      resource: `${__ThisModule__}.authProvider.register`,
-      fn: async () => {
-        return await this.ctx.meta.util.executeBeanIsolate({
-          beanFullName: 'authProvider',
-          context: { module, providerName },
-          fn: '_registerAuthProviderLock',
-        });
-      },
+    return await this.bean.redlock.lock(`${__ThisModule__}.authProvider.register`, async () => {
+      return await this.ctx.meta.util.executeBeanIsolate({
+        beanFullName: 'authProvider',
+        context: { module, providerName },
+        fn: '_registerAuthProviderLock',
+      });
     });
   }
 

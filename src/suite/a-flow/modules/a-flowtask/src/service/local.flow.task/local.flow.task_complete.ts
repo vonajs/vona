@@ -31,17 +31,14 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
 
   async _complete_tail({ flowTask, user }: any) {
     const flowNodeId = flowTask.flowNodeId;
-    await this.ctx.meta.util.lock({
-      resource: `${__ThisModule__}.flowTask.nodeDoneCheck.${flowNodeId}`,
-      fn: async () => {
-        return await this.ctx.meta.util.executeBeanIsolate({
-          beanFullName: 'flowTask',
-          context: { flowNodeId },
-          fn: '_nodeDoneCheckLock',
-          transaction: true,
-          ctxParent: { state: { user: { op: user } } },
-        });
-      },
+    await this.bean.redlock.lock(`${__ThisModule__}.flowTask.nodeDoneCheck.${flowNodeId}`, async () => {
+      return await this.ctx.meta.util.executeBeanIsolate({
+        beanFullName: 'flowTask',
+        context: { flowNodeId },
+        fn: '_nodeDoneCheckLock',
+        transaction: true,
+        ctxParent: { state: { user: { op: user } } },
+      });
     });
   }
 

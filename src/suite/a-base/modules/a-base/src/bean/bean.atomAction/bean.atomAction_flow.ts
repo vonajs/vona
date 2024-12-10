@@ -17,15 +17,12 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     const res = await this.model.get(data);
     if (res) return res;
     // lock
-    return await this.ctx.meta.util.lock({
-      resource: `${__ThisModule__}.atomAction.register`,
-      fn: async () => {
-        return await this.ctx.meta.util.executeBeanIsolate({
-          beanFullName: 'atomAction',
-          context: { atomClassId, flowKey, nodeDefId, nodeDefName },
-          fn: '_registerLockByModeFlow',
-        });
-      },
+    return await this.bean.redlock.lock(`${__ThisModule__}.atomAction.register`, async () => {
+      return await this.ctx.meta.util.executeBeanIsolate({
+        beanFullName: 'atomAction',
+        context: { atomClassId, flowKey, nodeDefId, nodeDefName },
+        fn: '_registerLockByModeFlow',
+      });
     });
   }
 

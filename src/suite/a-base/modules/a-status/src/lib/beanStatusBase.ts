@@ -42,15 +42,12 @@ export class BeanStatusBase<TScopeModule = unknown> extends BeanBase<TScopeModul
       });
     } else {
       if (queue) {
-        await this.ctx.meta.util.lock({
-          resource: `${__ThisModule__}.statusSet.${this.moduleBelong}.${name}`,
-          fn: async () => {
-            return await this.ctx.meta.util.executeBeanIsolate({
-              fn: async () => {
-                return await this._setInner(name, value, false);
-              },
-            });
-          },
+        await this.bean.redlock.lock(`${__ThisModule__}.statusSet.${this.moduleBelong}.${name}`, async () => {
+          return await this.ctx.meta.util.executeBeanIsolate({
+            fn: async () => {
+              return await this._setInner(name, value, false);
+            },
+          });
         });
       } else {
         await this._modelStatus.insert({

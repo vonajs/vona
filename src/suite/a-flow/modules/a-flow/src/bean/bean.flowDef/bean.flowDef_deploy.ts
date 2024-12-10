@@ -17,11 +17,8 @@ export class BeanFlowDefDeploy extends BeanFlowDef0 {
     const atomClassId = await this.app.bean.atomClass.getAtomClassId(atomClass);
     // let db commit
     this.ctx.tail(async () => {
-      await this.ctx.meta.util.lock({
-        resource: `${__ThisModule__}.flowDef.deployAtomState.${atomClassId}`,
-        fn: async () => {
-          return await this._deploy_atomState_inner({ atomClass });
-        },
+      await this.bean.redlock.lock(`${__ThisModule__}.flowDef.deployAtomState.${atomClassId}`, async () => {
+        return await this._deploy_atomState_inner({ atomClass });
       });
     });
   }
