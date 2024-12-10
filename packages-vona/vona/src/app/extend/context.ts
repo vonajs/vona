@@ -60,7 +60,7 @@ const context: ContextBase = {
     this[INNERACCESS] = value;
   },
   get dbLevel() {
-    return this[DBLEVEL] || 0;
+    return this[DBLEVEL] ?? 0;
   },
   set dbLevel(value) {
     this[DBLEVEL] = value;

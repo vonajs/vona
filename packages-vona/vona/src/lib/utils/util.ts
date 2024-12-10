@@ -270,7 +270,7 @@ export class AppUtil extends BeanSimple {
           // delegateProperties
           delegateProperties(ctx, ctxParent);
           // dbLevel
-          ctx.dbLevel = (ctxParent.dbLevel || 0) + 1;
+          ctx.dbLevel = (ctxParent.dbLevel ?? 0) + 1;
         }
         // dbLevel
         if (!ctxCaller && !ctxParent) {

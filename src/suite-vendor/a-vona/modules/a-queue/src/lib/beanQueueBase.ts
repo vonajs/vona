@@ -17,9 +17,9 @@ export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unkn
   private _prepareInfo(data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
     options = Object.assign({}, options);
     if (!this.ctx) {
-      options.dbLevel = !options.dbLevel ? 1 : options.dbLevel;
+      options.dbLevel = options.dbLevel ?? 1;
     } else {
-      options.dbLevel = !options.dbLevel ? this.ctx.dbLevel + 1 : options.dbLevel;
+      options.dbLevel = options.dbLevel ?? this.ctx.dbLevel + 1;
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
       // ctxParent
