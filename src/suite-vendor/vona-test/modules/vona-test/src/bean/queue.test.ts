@@ -1,5 +1,5 @@
 import { Queue } from 'vona';
-import { BeanQueueBase, IQueueExecute, IQueueJobContext } from 'vona-module-a-queue';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
 import { ScopeModule } from '../.metadata/this.js';
 
 export type TypeQueueTestJobData = {
@@ -14,8 +14,7 @@ export class QueueTest
   extends BeanQueueBase<ScopeModule, TypeQueueTestJobData, TypeQueueTestJobResult>
   implements IQueueExecute<TypeQueueTestJobData, TypeQueueTestJobResult>
 {
-  async execute(context: IQueueJobContext<TypeQueueTestJobData>): Promise<TypeQueueTestJobResult> {
-    const data = context.data;
+  async execute(data: TypeQueueTestJobData, _options?: IQueuePushOptions): Promise<TypeQueueTestJobResult> {
     return data.a + data.b;
   }
 }

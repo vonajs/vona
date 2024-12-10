@@ -13,7 +13,7 @@ export interface IQueuePushOptions {
 }
 
 export interface IQueueExecute<DATA = unknown, RESULT = unknown> {
-  execute(context: IQueueJobContext<DATA>, job: Bull.Job): Promise<RESULT>;
+  execute(data: DATA, options?: IQueuePushOptions, job?: Bull.Job): Promise<RESULT>;
 }
 
 export interface IQueueJobContext<DATA> {

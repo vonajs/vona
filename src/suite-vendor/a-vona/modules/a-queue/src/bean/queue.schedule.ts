@@ -1,5 +1,5 @@
 import { Queue } from 'vona';
-import { BeanQueueBase, IQueueExecute, IQueueJobContext } from 'vona-module-a-queue';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
 import * as Bull from 'bullmq';
 import { ScopeModule } from '../.metadata/this.js';
 
@@ -15,9 +15,10 @@ export class QueueSchedule
   implements IQueueExecute<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
 {
   async execute(
-    context: IQueueJobContext<TypeQueueScheduleJobData>,
-    job: Bull.Job,
+    data: TypeQueueScheduleJobData,
+    _options?: IQueuePushOptions,
+    job?: Bull.Job,
   ): Promise<TypeQueueScheduleJobResult> {
-    await this.scope.service.schedule.execute(context.data.scheduleName, job);
+    await this.scope.service.schedule.execute(data.scheduleName, job);
   }
 }
