@@ -40,7 +40,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'root', action: 'layout', scopeNames: 'authenticated' },
         { roleName: 'root', action: 'preview', scopeNames: 'authenticated' },
       ];
-      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'document', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'document', roleRights });
     }
   }
 

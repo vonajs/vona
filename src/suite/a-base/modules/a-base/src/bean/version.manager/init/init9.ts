@@ -23,6 +23,6 @@ export class VersionInit extends BeanBase {
     //   { roleName: 'system', action: 'deleteBulk' },
     //   { roleName: 'system', action: 'exportBulk' },
     // ];
-    // await this.app.bean.role.addRoleRightBatch({ atomClassName: 'resource', roleRights });
+    // await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'resource', roleRights });
   }
 }

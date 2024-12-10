@@ -43,7 +43,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'root', action: 'read', scopeNames: 'authenticated' },
         { roleName: 'root', action: 'read', scopeNames: 0 },
       ];
-      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'post', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'post', roleRights });
     }
 
     if (options.version === 2) {
@@ -52,7 +52,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'root', action: 'layout', scopeNames: 'root' }, //
         { roleName: 'root', action: 'preview', scopeNames: 'root' }, //
       ];
-      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'post', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'post', roleRights });
     }
   }
 

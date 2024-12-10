@@ -1,4 +1,5 @@
 import { Bean, BeanBase } from 'vona';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 @Bean({ scene: 'version' })
 export class VersionManager extends BeanBase {
@@ -76,7 +77,7 @@ export class VersionManager extends BeanBase {
       //   { roleName: 'system', action: 'deleteBulk' },
       //   { roleName: 'system', action: 'exportBulk' },
       // ];
-      // await this.app.bean.role.addRoleRightBatch({ atomClassName: 'dashboard', roleRights });
+      // await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'dashboard', roleRights });
     }
 
     if (options.version === 3) {
@@ -96,7 +97,7 @@ export class VersionManager extends BeanBase {
         { roleName: 'system', action: 'deleteBulk' },
         { roleName: 'system', action: 'exportBulk' },
       ];
-      await this.app.bean.role.addRoleRightBatch({ atomClassName: 'dashboard', roleRights });
+      await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'dashboard', roleRights });
     }
   }
 

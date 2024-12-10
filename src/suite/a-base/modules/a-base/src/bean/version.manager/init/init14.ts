@@ -1,4 +1,5 @@
 import { BeanBase } from 'vona';
+import { __ThisModule__ } from '../../../.metadata/this.js';
 
 export class VersionInit extends BeanBase {
   async run() {
@@ -35,7 +36,7 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'deleteBulk' },
       { roleName: 'system', action: 'exportBulk' },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'resource', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'resource', roleRights });
   }
 
   async _addRoleRightsRole() {
@@ -78,7 +79,7 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'exportBulk' },
       // { roleName: 'system', action: 'buildBulk' },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'role', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'role', roleRights });
   }
 
   async _addRoleRightsUser() {
@@ -96,6 +97,6 @@ export class VersionInit extends BeanBase {
       // { roleName: 'system', action: 'deleteBulk' },
       { roleName: 'system', action: 'exportBulk' },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'user', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'user', roleRights });
   }
 }

@@ -30,7 +30,7 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'partyOverOtherTest1', scopeNames: 0 },
       { roleName: 'system', action: 'partyOverBulk' },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'party', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'party', roleRights });
   }
 
   async _init_testData() {
@@ -127,7 +127,11 @@ export class VersionInit extends BeanBase {
   // role rights
   async _testRoleRights() {
     // atomClass: party
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'party', roleRights: testData.roleRights });
+    await this.app.bean.role.addRoleRightBatch({
+      module: __ThisModule__,
+      atomClassName: 'party',
+      roleRights: testData.roleRights,
+    });
     // atomClass: role
     await this.app.bean.role.addRoleRightBatch({
       module: 'a-base',

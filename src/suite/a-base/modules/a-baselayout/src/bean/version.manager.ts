@@ -70,7 +70,7 @@ export class VersionManager extends BeanBase<ScopeModule> {
           { roleName: 'system', action: 'deleteBulk' },
           { roleName: 'system', action: 'exportBulk' },
         ];
-        await this.app.bean.role.addRoleRightBatch({ atomClassName: 'layout', roleRights });
+        await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'layout', roleRights });
       }
     }
   }

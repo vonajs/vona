@@ -37,7 +37,7 @@ export class VersionInit extends BeanBase<ScopeModule> {
       { roleName: 'authenticated', action: 'deleteBulk' },
       { roleName: 'system', action: 'read', scopeNames: 'authenticated' },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'authOpen', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'authOpen', roleRights });
   }
 
   async _init_roleScopes() {

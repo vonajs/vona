@@ -1,4 +1,5 @@
 import { BeanBase } from 'vona';
+import { __ThisModule__ } from '../../../.metadata/this.js';
 
 export class VersionInit extends BeanBase {
   async run(_options) {
@@ -18,6 +19,6 @@ export class VersionInit extends BeanBase {
       { roleName: 'system', action: 'deleteBulk' },
       { roleName: 'system', action: 'exportBulk' },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'dict', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'dict', roleRights });
   }
 }

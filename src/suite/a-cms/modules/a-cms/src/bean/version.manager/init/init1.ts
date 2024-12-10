@@ -1,4 +1,5 @@
 import { BeanBase } from 'vona';
+import { __ThisModule__ } from '../../../.metadata/this.js';
 
 export class VersionInit extends BeanBase {
   async run(_options) {
@@ -28,6 +29,6 @@ export class VersionInit extends BeanBase {
       { roleName: 'root', action: 'read', scopeNames: 'authenticated' },
       { roleName: 'root', action: 'read', scopeNames: 0 },
     ];
-    await this.app.bean.role.addRoleRightBatch({ atomClassName: 'article', roleRights });
+    await this.app.bean.role.addRoleRightBatch({ module: __ThisModule__, atomClassName: 'article', roleRights });
   }
 }
