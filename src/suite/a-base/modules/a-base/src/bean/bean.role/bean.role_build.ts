@@ -33,11 +33,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       return;
     }
     // queue
-    await this.ctx.meta.util.queuePushAsync({
-      module: __ThisModule__,
-      queueName: 'roleBuild',
-      data: { options },
-    });
+    await this.scope.queue.roleBuild.pushAsync({ options });
   }
 
   async _buildQueue(options) {

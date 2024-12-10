@@ -1,4 +1,4 @@
-import { VonaApplication, IModuleConfigMiddleware, IModuleConfigQueue, IModuleConfigStartup } from 'vona';
+import { VonaApplication, IModuleConfigMiddleware, IModuleConfigStartup } from 'vona';
 
 // middlewares
 const middlewares = {
@@ -72,18 +72,10 @@ const startups: Record<string, IModuleConfigStartup> = {
   },
 };
 
-// queues
-const queues = {
-  roleBuild: {
-    bean: 'roleBuild',
-  } as IModuleConfigQueue,
-};
-
 export const config = (_app: VonaApplication) => {
   return {
     middlewares,
     startups,
-    queues,
     host: '',
     protocol: '',
     pageSize: 20,

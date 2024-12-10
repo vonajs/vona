@@ -1,4 +1,4 @@
-import { Bean } from 'vona';
+import { Bean, cast } from 'vona';
 
 import path from 'path';
 import fse from 'fs-extra';
@@ -341,7 +341,7 @@ export class CliStorePublish extends CliStoreBase {
       }
       //
       const stats = fse.statSync(fileLocal);
-      zip.file(file, fse.readFileSync(fileLocal), { date: stats.mtime });
+      zip.file(file, cast(fse.readFileSync(fileLocal)), { date: stats.mtime });
     }
     const buffer = await zip.generateAsync({ type: 'uint8array' });
     // hash

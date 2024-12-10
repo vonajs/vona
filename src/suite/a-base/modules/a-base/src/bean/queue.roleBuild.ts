@@ -1,9 +1,18 @@
-import { Bean, BeanBase } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'queue' })
-export class QueueRoleBuild extends BeanBase {
-  async execute(context) {
-    const { options } = context.data;
+export type TypeQueueRoleBuildJobData = { options };
+
+export type TypeQueueRoleBuildJobResult = void;
+
+@Queue()
+export class QueueRoleBuild
+  extends BeanQueueBase<ScopeModule, TypeQueueRoleBuildJobData, TypeQueueRoleBuildJobResult>
+  implements IQueueExecute<TypeQueueRoleBuildJobData, TypeQueueRoleBuildJobResult>
+{
+  async execute(data: TypeQueueRoleBuildJobData, _options?: IQueuePushOptions): Promise<TypeQueueRoleBuildJobResult> {
+    const { options } = data;
     await this.app.bean.role._buildQueue(options);
   }
 }
