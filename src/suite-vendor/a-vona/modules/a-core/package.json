@@ -36,6 +36,7 @@
   "dependencies": {
     "assert": "^2.1.0",
     "egg-onerror": "^2.4.0",
+    "koa-compose": "^4.1.0",
     "vona-shared": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"

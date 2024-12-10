@@ -1,4 +1,4 @@
-import { ContextState, ILocalInfos } from 'vona';
+import { ConfigOnion, ContextState, ILocalInfos, PowerPartial, VonaContext } from 'vona';
 
 export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
@@ -19,4 +19,29 @@ export interface IExecutorMockCtxOptions {
   transaction?: boolean;
   instance?: boolean;
   extraData?: IExecutorMockCtxExtraData;
+}
+
+export interface IPerformActionParams {
+  innerAccess?: boolean;
+  // subdomain, deprecated
+  method: 'post' | 'get';
+  url: string;
+  query?: object;
+  params?: object;
+  headers?: object;
+  body?: object;
+  onion?: PowerPartial<ConfigOnion>;
+}
+
+export interface IPerformActionInnerParams {
+  ctxCaller: VonaContext;
+  innerAccess?: boolean;
+  // subdomain, deprecated
+  method: 'post' | 'get';
+  url: string;
+  query?: object;
+  params?: object;
+  headers?: object;
+  body?: object;
+  onion?: PowerPartial<ConfigOnion>;
 }

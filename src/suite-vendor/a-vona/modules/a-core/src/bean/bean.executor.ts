@@ -1,8 +1,40 @@
 import { Bean, BeanBase, FunctionAsync } from 'vona';
-import { IExecutorMockCtxOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
+import {
+  IExecutorMockCtxOptions,
+  IPerformActionParams,
+  IRunInAnonymousContextScopeOptions,
+} from '../types/executor.js';
+import { performActionInner } from '../lib/performAction.js';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
+  // todo: url should not be relative path, should be absolute
+  //       because ctxCaller.module removed
+  //       so, maybe need provide this.scope.util.combineUrl
+  //          this result is: /api/a/user/add, thus the method of combineApiPath not needed in performActionInner
+  async performAction<T = any>({
+    innerAccess,
+    method,
+    url,
+    query,
+    params,
+    headers,
+    body,
+    onion,
+  }: IPerformActionParams): Promise<T> {
+    return await performActionInner({
+      ctxCaller: this.ctx,
+      innerAccess,
+      method,
+      url,
+      query,
+      params,
+      headers,
+      body,
+      onion,
+    });
+  }
+
   runInBackground(fn: FunctionAsync<void>) {
     this.ctx.runInBackground(async () => {
       return await this.newCtxIsolate(async () => {

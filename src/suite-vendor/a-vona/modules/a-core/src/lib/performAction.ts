@@ -1,11 +1,11 @@
 import http from 'http';
 import compose from 'koa-compose';
-import { PerformActionInnerParams } from './type.js';
-import { cast, VonaContext } from '../../types/index.js';
+import { IPerformActionInnerParams } from '../types/executor.js';
+import { cast, VonaContext } from 'vona';
 
 let __fnMiddleware;
 
-export default async function performAction<T = any>({
+export async function performActionInner<T = any>({
   ctxCaller,
   innerAccess,
   // subdomain, deprecated
@@ -16,7 +16,7 @@ export default async function performAction<T = any>({
   headers,
   body,
   onion,
-}: PerformActionInnerParams): Promise<T> {
+}: IPerformActionInnerParams): Promise<T> {
   // app
   const app = ctxCaller.app;
   // middleware
