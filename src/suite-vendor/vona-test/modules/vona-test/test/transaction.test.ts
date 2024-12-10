@@ -4,7 +4,7 @@ describe.only('transaction.test.ts', () => {
   const tableName = '__tempTransaction';
 
   it('action:transaction:fail', async () => {
-    await app.meta.mockUtil.mockCtx(async ctx => {
+    await app.meta.mockUtil.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableName, function (table) {
         table.basicFields();
@@ -22,7 +22,7 @@ describe.only('transaction.test.ts', () => {
         name: 'hello!!',
       };
       try {
-        await ctx.meta.util.performAction({
+        await app.bean.executor.performAction({
           method: 'post',
           url: mockUrl('transaction/fail'),
           body: itemNew,
@@ -41,7 +41,7 @@ describe.only('transaction.test.ts', () => {
   });
 
   it('action:transaction:success', async () => {
-    await app.meta.mockUtil.mockCtx(async ctx => {
+    await app.meta.mockUtil.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableName, function (table) {
         table.basicFields();
@@ -58,7 +58,7 @@ describe.only('transaction.test.ts', () => {
         id,
         name: 'hello!!',
       };
-      await ctx.meta.util.performAction({
+      await app.bean.executor.performAction({
         method: 'post',
         url: mockUrl('transaction/success'),
         body: itemNew,

@@ -2,8 +2,8 @@ import { app, mockUrl, assert } from 'vona-mock';
 
 describe.only('performAction.test.js', () => {
   it('action:performAction', async () => {
-    const result = await app.meta.mockUtil.mockCtx(async ctx => {
-      return await ctx.meta.util.performAction<{ id: number; url: string }>({
+    const result = await app.meta.mockUtil.mockCtx(async () => {
+      return await app.bean.executor.performAction<{ id: number; url: string }>({
         method: 'post',
         url: mockUrl('performAction/echo'),
         body: {
@@ -15,8 +15,8 @@ describe.only('performAction.test.js', () => {
     assert.equal(result.url, mockUrl('performAction/echo'));
   });
   it('action:performAction:onionDynamic', async () => {
-    const result = await app.meta.mockUtil.mockCtx(async ctx => {
-      return await ctx.meta.util.performAction<{ id: number; url: string }>({
+    const result = await app.meta.mockUtil.mockCtx(async () => {
+      return await app.bean.executor.performAction<{ id: number; url: string }>({
         method: 'post',
         url: mockUrl('performAction/echo'),
         onion: {

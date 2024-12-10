@@ -1,4 +1,4 @@
-import { VonaContext } from '../../types/context/index.js';
+import { FunctionAsync } from '../../types/index.js';
 import { cast } from '../../types/utils/cast.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { ILocalInfos } from '../bean/resource/locale/type.js';
@@ -18,26 +18,24 @@ export class AppMockUtil extends BeanSimple {
   }
 
   // todo: remove module
-  async mockCtx<T>(scope: (ctx: VonaContext) => Promise<T>): Promise<T>;
+  async mockCtx<T>(fn: FunctionAsync<T>): Promise<T>;
   async mockCtx<T>(
     options: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
-    scope: (ctx: VonaContext) => Promise<T>,
+    fn: FunctionAsync<T>,
   ): Promise<T>;
   async mockCtx<T>(
-    options:
-      | ((ctx: VonaContext) => Promise<T>)
-      | { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
-    scope?: (ctx: VonaContext) => Promise<T>,
+    options: FunctionAsync<T> | { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string },
+    fn?: FunctionAsync<T>,
   ): Promise<T> {
     if (typeof options === 'function') {
-      scope = options;
+      fn = options;
       options = {};
     }
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
     const module = options.module;
     const beanExecutor = cast(this.app.bean._getBean('executor' as any));
-    return await beanExecutor.runInAnonymousContextScope(scope!, { locale, subdomain, module });
+    return await beanExecutor.runInAnonymousContextScope(fn!, { locale, subdomain, module });
   }
 }
 
