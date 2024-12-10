@@ -24,6 +24,7 @@ export class SocketioReady extends BeanSimple {
       }
 
       // check
+      // todo:
       const reqNew = Object.assign({}, req, {
         method: 'SOCKETIO',
         url: '/api/a/base/',

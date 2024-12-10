@@ -1,4 +1,4 @@
-import { BeanBase, Service } from 'vona';
+import { BeanBase, FunctionAsync, Service } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import knex from 'knex';
 import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
@@ -20,8 +20,8 @@ export class ServiceTransaction extends BeanBase<ScopeModule> {
     this._connection = value;
   }
 
-  async begin(fn: Function, options?: Partial<IMiddlewareOptionsTransaction>) {
-    let res;
+  async begin<RESULT>(fn: FunctionAsync<RESULT>, options?: Partial<IMiddlewareOptionsTransaction>): Promise<RESULT> {
+    let res: RESULT;
     const db = this.app.bean.database.getDefault();
     try {
       if (++this._transactionCounter === 1) {

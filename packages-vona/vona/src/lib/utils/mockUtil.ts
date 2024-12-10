@@ -1,4 +1,5 @@
 import { VonaContext } from '../../types/context/index.js';
+import { cast } from '../../types/utils/cast.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { ILocalInfos } from '../bean/resource/locale/type.js';
 
@@ -35,7 +36,8 @@ export class AppMockUtil extends BeanSimple {
     const locale = options.locale;
     const subdomain = options.subdomain !== undefined ? options.subdomain : '';
     const module = options.module;
-    return await this.app.meta.util.runInAnonymousContextScope(scope!, { locale, subdomain, module });
+    const beanExecutor = cast(this.app.bean._getBean('executor' as any));
+    return await beanExecutor.runInAnonymousContextScope(scope!, { locale, subdomain, module });
   }
 }
 
