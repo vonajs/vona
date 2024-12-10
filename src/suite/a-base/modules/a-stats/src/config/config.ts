@@ -1,14 +1,5 @@
-import { VonaApplication, IModuleConfigQueue } from 'vona';
-
-// queues
-const queues = {
-  stats: {
-    bean: 'stats',
-  } as IModuleConfigQueue,
-};
+import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
-  return {
-    queues,
-  };
+  return {};
 };

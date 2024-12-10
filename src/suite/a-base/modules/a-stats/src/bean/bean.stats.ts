@@ -1,5 +1,6 @@
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
+import { TypeQueueStatsJobData } from './queue.stats.js';
 
 let __stats;
 let __statsDeps;
@@ -28,21 +29,21 @@ export class BeanStats extends BeanModuleScopeBase<ScopeModule> {
     const provider = this._findStatsProvider({ module, name });
     if (provider.user && !user) return;
     // queue
-    const method = async ? 'queuePushAsync' : 'queuePush';
-    return this.ctx.meta.util[method]({
-      module: __ThisModule__,
-      queueName: 'stats',
-      queueNameSub: provider.user ? 'user' : 'instance',
-      data: {
+    const method = async ? 'pushAsync' : 'push';
+    return this.scope.queue.stats[method](
+      {
         module,
         name,
         nameSub,
         user,
       },
-    });
+      {
+        queueNameSub: provider.user ? 'user' : 'instance',
+      },
+    );
   }
 
-  async _notify_queue({ module, name, nameSub, user }: any) {
+  async _notify_queue({ module, name, nameSub, user }: TypeQueueStatsJobData) {
     // loop names
     await this._notify_queue_names({ module, name, nameSub, user });
     // deps
