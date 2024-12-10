@@ -7,18 +7,18 @@ export interface IRunInAnonymousContextScopeOptions {
   module?: string; // todo: remove
 }
 
-export interface IExecutorMockCtxExtraData {
+export interface INewCtxExtraData {
   headers?: Record<string, string>;
   state?: ContextState;
 }
 
-export interface IExecutorMockCtxOptions {
+export interface INewCtxOptions {
   locale?: keyof ILocalInfos;
   subdomain?: string | null | undefined;
   dbLevel?: number;
   transaction?: boolean;
   instance?: boolean;
-  extraData?: IExecutorMockCtxExtraData;
+  extraData?: INewCtxExtraData;
 }
 
 export interface IPerformActionParams {

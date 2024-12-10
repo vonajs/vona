@@ -1,9 +1,5 @@
 import { Bean, BeanBase, FunctionAsync } from 'vona';
-import {
-  IExecutorMockCtxOptions,
-  IPerformActionParams,
-  IRunInAnonymousContextScopeOptions,
-} from '../types/executor.js';
+import { INewCtxOptions, IPerformActionParams, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
 
 @Bean()
@@ -87,7 +83,7 @@ export class BeanExecutor extends BeanBase {
     }, req as any);
   }
 
-  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: IExecutorMockCtxOptions): Promise<RESULT> {
+  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     if (!this.ctx) {
       options.dbLevel = options.dbLevel ?? 1; // same as isolate
@@ -97,7 +93,7 @@ export class BeanExecutor extends BeanBase {
     return await this.newCtx(fn, options);
   }
 
-  async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: IExecutorMockCtxOptions): Promise<RESULT> {
+  async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     if (!this.ctx) {
       options.dbLevel = options.dbLevel ?? 1; // same as isolate
