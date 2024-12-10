@@ -5,7 +5,6 @@ import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
 import { AppRouter } from '../module/route.js';
-import { AppLimiter, AppRedlock } from '../module/redis.js';
 import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import {
   IModule,
@@ -72,8 +71,6 @@ export class AppMeta extends BeanSimple {
   messenger: AppMessenger;
   appMonkey?: IMonkeyApp & IMonkeySystem;
   router: AppRouter;
-  limiter: AppLimiter;
-  redlock: AppRedlock;
   broadcast: BroadcastClient;
   //
   resource: AppResource;

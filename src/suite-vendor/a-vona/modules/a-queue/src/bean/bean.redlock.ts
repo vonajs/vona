@@ -13,11 +13,12 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
     options?: IRedlockLockOptions,
   ): Promise<RESULT> {
     const subdomain = options?.subdomain === undefined ? this.ctx?.subdomain : options?.subdomain;
+    const redlock = options?.redlock ?? this.redlock;
+    const lockTTL = options?.lockTTL ?? this.scope.config.redlock.lockTTL;
     // resource
     const _lockResource = `redlock_${this.app.name}:${subdomainDesp(subdomain)}:${resource}`;
     // lock
-    const lockTTL = this.scope.config.redlock.lockTTL;
-    let _lock = await this.redlock.lock(_lockResource, lockTTL);
+    let _lock = await redlock.lock(_lockResource, lockTTL);
     // timer
     let _lockTimer = null as any;
     const _lockDone = () => {
@@ -51,16 +52,12 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
 
   private get redlock() {
     if (!this._redlock) {
-      this._redlock = this._createRedlock();
+      this._redlock = this.create(this.scope.config.redlock.options);
     }
     return this._redlock;
   }
 
-  private get redlockOptions() {
-    return this.scope.config.redlock.options;
-  }
-
-  private _createRedlock() {
+  public create(options: Redlock.Options) {
     // clients
     const clients = [] as any;
     for (const clientName of this.scope.config.redlock.clients) {
@@ -68,6 +65,6 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
       clients.push(client);
     }
     // create
-    return new Redlock(clients, this.redlockOptions);
+    return new Redlock(clients, options);
   }
 }

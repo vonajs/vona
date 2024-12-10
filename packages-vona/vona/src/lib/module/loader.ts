@@ -8,7 +8,6 @@ import loadLocales from './locales.js';
 import loadErrors from './errors.js';
 import loadConstants from './constant.js';
 import loadMessenger from './messenger.js';
-import loadRedis from './redis.js';
 import loadBroadcasts from './broadcast/broadcast.js';
 import loadClusterApp from './cluster/app.js';
 import loadClusterAgent from './cluster/agent.js';
@@ -47,7 +46,6 @@ export class ModuleLoader extends BeanSimple {
       loadConstants(app, modules);
       loadRoutes(app, modules);
       loadContextPatch(app);
-      loadRedis(app);
       loadBroadcasts(app, modules);
       loadClusterApp(app);
       loadReload(app);
