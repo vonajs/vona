@@ -1,10 +1,22 @@
-import { Bean, BeanBase } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+import { ScopeModule } from '../.metadata/this.js';
 import { FlowBehaviorOvertime } from './flow.behavior.overtime.js';
 
-@Bean({ scene: 'queue' })
-export class QueueOvertime extends BeanBase {
-  async execute(context) {
+export type TypeQueueOvertimeJobData = {
+  flowNodeId: number;
+  behaviorDefId: number;
+};
+
+export type TypeQueueOvertimeJobResult = void;
+
+@Queue()
+export class QueueOvertime
+  extends BeanQueueBase<ScopeModule, TypeQueueOvertimeJobData, TypeQueueOvertimeJobResult>
+  implements IQueueExecute<TypeQueueOvertimeJobData, TypeQueueOvertimeJobResult>
+{
+  async execute(data: TypeQueueOvertimeJobData, _options?: IQueuePushOptions): Promise<TypeQueueOvertimeJobResult> {
     const _behaviorBean = this.app.bean._newBean(FlowBehaviorOvertime);
-    await _behaviorBean._runJob(context);
+    await _behaviorBean._runJob(data);
   }
 }

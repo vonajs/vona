@@ -1,9 +1,10 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanFlowBehaviorBase } from 'vona-module-a-flow';
+import { TypeQueueOvertimeJobData } from './queue.overtime.js';
 
 @Bean({ scene: 'flow.behavior' })
-export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
+export class FlowBehaviorOvertime extends BeanFlowBehaviorBase<ScopeModule> {
   async enter(_context, next) {
     // addJob
     const flowId = this.context._flowId;
@@ -59,16 +60,12 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
 
   async _deleteJob({ flowId, flowNodeId, behaviorDefId }: any) {
     const jobId = this._getJobName({ flowId, flowNodeId, behaviorDefId });
-    const queue = this.ctx.app.meta.queue._getQueue({
-      subdomain: this.ctx.subdomain,
-      module: __ThisModule__,
-      queueName: 'overtime',
-    });
+    const queue = this.scope.queue.overtime.getQueue();
     await queue.remove(jobId);
   }
 
-  async _runJob(context) {
-    const { flowNodeId, behaviorDefId } = context.data;
+  async _runJob(data: TypeQueueOvertimeJobData) {
+    const { flowNodeId, behaviorDefId } = data;
     // load flow node
     let nodeInstance;
     try {

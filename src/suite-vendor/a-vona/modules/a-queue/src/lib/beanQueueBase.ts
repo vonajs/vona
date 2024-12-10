@@ -1,4 +1,4 @@
-import { BeanBase, VonaContext } from 'vona';
+import { BeanBase, IQueueRecord, VonaContext } from 'vona';
 import { IQueueJobContext, IQueuePushOptions } from '../types/queue.js';
 
 export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unknown> extends BeanBase<TScopeModule> {
@@ -8,6 +8,10 @@ export class BeanQueueBase<TScopeModule = unknown, DATA = unknown, RESULT = unkn
 
   push(data: DATA, options?: IQueuePushOptions) {
     return this.$scope.queue.service.queue.push(this._prepareInfo(data, options));
+  }
+
+  getQueue(subdomain?: string) {
+    return this.$scope.queue.service.queue.getQueue(this.onionName as keyof IQueueRecord, subdomain);
   }
 
   private _prepareInfo(data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {

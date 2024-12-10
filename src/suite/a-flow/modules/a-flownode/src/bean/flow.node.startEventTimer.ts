@@ -97,7 +97,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
       this._getJobName(flowDefId, node),
       this._getJobRepeat(node),
     );
-    const queue = this.$scope.queue.service.queue.getQueue('a-flownode:startEventTimer');
+    const queue = this.scope.queue.startEventTimer.getQueue();
     const repeat = await queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }

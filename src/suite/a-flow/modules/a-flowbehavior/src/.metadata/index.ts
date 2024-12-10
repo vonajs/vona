@@ -15,6 +15,7 @@ declare module 'vona' {
 /** beans: end */
 /** queue: begin */
 export * from '../bean/queue.overtime.js';
+export * from '../bean/queue.overtime_.js';
 
 import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {

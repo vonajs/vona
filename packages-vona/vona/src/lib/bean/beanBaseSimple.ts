@@ -20,7 +20,7 @@ export class BeanBaseSimple extends BeanSimple {
 
   protected get onionName() {
     const parts = this.beanFullName.split('.');
-    return `${parts[0]}:${parts[1]}`;
+    return `${parts[0]}:${parts[2]}`;
   }
 
   protected get moduleBelong() {

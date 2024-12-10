@@ -1,0 +1,7 @@
+import { Bean, BeanBase } from 'vona';
+import { FlowBehaviorOvertime } from './flow.behavior.overtime.js';
+
+@Bean({ scene: 'queue' })
+export class QueueOvertime extends BeanBase {
+  async execute(context) {}
+}
