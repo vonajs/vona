@@ -1,7 +1,8 @@
 import Redlock from 'redlock';
-import { Bean, BeanBase, FunctionAsync, IExecuteBeanOptions, subdomainDesp } from 'vona';
+import { Bean, BeanBase, FunctionAsync, subdomainDesp } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { IRedlockLockOptions } from '../types/redlock.js';
+import { INewCtxOptions } from 'vona-module-a-core';
 
 @Bean()
 export class BeanRedlock extends BeanBase<ScopeModule> {
@@ -53,19 +54,12 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
   public async lockIsolate<RESULT>(
     resource: string,
     fn: FunctionAsync<RESULT>,
-    options?: IRedlockLockOptions,
-    optionsIsolate?: IExecuteBeanOptions,
+    options?: IRedlockLockOptions & INewCtxOptions,
   ): Promise<RESULT> {
     return await this.lock(
       resource,
       async () => {
-        // todo: 选项需要重构
-        const _optionsIsolate = Object.assign({}, optionsIsolate, {
-          fn: () => {
-            return fn();
-          },
-        });
-        return await this.ctx.meta.util.executeBeanIsolate(_optionsIsolate);
+        return await this.bean.executor.newCtxIsolate(fn, options);
       },
       options,
     );
