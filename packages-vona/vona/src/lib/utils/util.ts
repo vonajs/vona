@@ -4,7 +4,6 @@ import { URL } from 'url';
 import is from 'is-type-of';
 import * as security from 'egg-security';
 import * as uuid from 'uuid';
-import { Request } from 'egg';
 import {
   VonaContext,
   cast,
@@ -166,53 +165,6 @@ export class AppUtil extends BeanSimple {
       return true;
     }
     return false;
-  }
-
-  async runInAnonymousContextScope<T>(
-    scope: (ctx: VonaContext) => Promise<T>,
-    {
-      locale,
-      subdomain,
-      module,
-      instance,
-    }: { locale?: keyof ILocalInfos; subdomain?: string | null | undefined; module?: string; instance?: boolean },
-  ): Promise<T> {
-    // url
-    // todo: remove /api/a/base, need not set url
-    const url = module ? this.combineApiPath(module, '', true, false) : '/api/a/base/';
-    const req = {
-      method: 'post',
-      url,
-    };
-    return await this.app.runInAnonymousContextScope(async ctx => {
-      (<any>ctx.req).ctx = ctx;
-      // locale
-      Object.defineProperty(ctx, 'locale', {
-        get() {
-          return locale || this.app.config.i18n.defaultLocale;
-        },
-      });
-      // subdomain
-      Object.defineProperty(ctx, 'subdomain', {
-        get() {
-          return subdomain;
-        },
-      });
-      // instance
-      if (subdomain !== undefined && subdomain !== null) {
-        ctx.instance = await cast(this.app.bean).instance.get(subdomain);
-        // start instance
-        if (instance) {
-          await cast(this.app.bean._getBean('a-instance.service.instance' as never)).checkAppReadyInstance(true);
-        }
-      }
-      // scope
-      const res = await scope(ctx as unknown as VonaContext);
-      // tail done
-      await ctx.tailDone();
-      // ok
-      return res;
-    }, req as Request);
   }
 
   async executeBean({
