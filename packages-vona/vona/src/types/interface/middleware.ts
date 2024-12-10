@@ -11,6 +11,7 @@ export type TypeUseMiddlewareGlobalLikeOptions<T> = Omit<
   'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
 >;
 
+export type FunctionAsync<RESULT> = () => Promise<RESULT>;
 export type Next = () => Promise<any>;
 export type NextSync = () => any;
 

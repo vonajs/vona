@@ -25,7 +25,7 @@ export class AppRedlock extends BeanSimple {
     // clients
     const clients = [] as any;
     for (const clientName of this.app.config.queue.redlock.clients) {
-      const client = this.app.redis.get(clientName) || this.app.redis.get('limiter');
+      const client = this.app.redis.get(clientName);
       clients.push(client);
     }
     return new Redlock(clients, options);

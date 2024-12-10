@@ -1,3 +1,15 @@
+/** beans: begin */
+export * from '../bean/bean.redlock.js';
+import { BeanRedlock } from '../bean/bean.redlock.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    redlock: BeanRedlock;
+  }
+
+  export interface IBeanRecordGeneral {}
+}
+/** beans: end */
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
 

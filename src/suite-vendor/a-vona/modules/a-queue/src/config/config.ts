@@ -7,12 +7,13 @@ export const config = (app: VonaApplication) => {
   return {
     redlock: {
       clients: ['redlock'] as string[],
+      lockTTL: lockTTL * 1000,
+      // https://github.com/mike-marcacci/node-redlock#configuration
       options: {
         driftFactor: 0.01,
         retryCount: -1,
         retryDelay: 200,
         retryJitter: 100,
-        lockTTL: lockTTL * 1000,
       } as Redlock.Options,
     },
     bottleneck: {
