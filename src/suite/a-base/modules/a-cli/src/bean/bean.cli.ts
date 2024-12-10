@@ -33,7 +33,7 @@ export class BeanCli extends BeanBase {
     // create progress
     await this.app.bean.progress.create({ progressId });
     // background
-    this.ctx.meta.util.runInBackground(async () => {
+    this.bean.executor.runInBackground(async () => {
       await this._progressInBackground({ progressId, context, user });
     });
     // return progressId

@@ -16,15 +16,17 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     const scheduleItem = this.app.meta.onionSchedule.getMiddlewareItem(scheduleName);
     const scheduleConfig = this.app.meta.onionSchedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
     // execute
-    return await this.ctx.meta.util.executeBean({
-      transaction: scheduleConfig?.transaction,
-      instance: true,
-      fn: async () => {
+    return await this.bean.executor.newCtx(
+      async () => {
         const beanFullName = scheduleItem.beanOptions.beanFullName;
         const beanInstance = <IScheduleExecute>this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(job);
       },
-    });
+      {
+        transaction: scheduleConfig?.transaction,
+        instance: true,
+      },
+    );
   }
 
   private async __deleteSchedule(job: Bull.Job) {

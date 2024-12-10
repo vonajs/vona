@@ -42,19 +42,24 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     });
   }
 
-  async authenticateDirect({ module, providerName, providerScene, query, body }: any) {
-    return await this.ctx.meta.util.executeBeanIsolate({
-      beanFullName: `${__ThisModule__}.service.passport`,
-      context: { module, providerName, providerScene },
-      fn: 'authenticate',
-      ctxParent: {
-        session: this.ctx.session,
-        cookies: this.ctx.cookies,
-        user: this.ctx.user,
-        state: this.ctx.state,
-        request: { headers: this.ctx.headers, query, body },
+  async authenticateDirect({ module, providerName, providerScene, query: _query, body: _body }: any) {
+    // todo: authenticate内部使用了app.passport.authenticate，可能需要调整
+    //    直接参考passport原始文档，重新实现
+    return await this.bean.executor.newCtxIsolate(
+      async () => {
+        return await this.scope.service.passport.authenticate({ module, providerName, providerScene });
       },
-    });
+      {
+        extraData: {
+          // todo: 可能需要重新调整参数
+          //session: this.ctx.session,
+          //cookies: this.ctx.cookies,
+          //user: this.ctx.user,
+          state: this.ctx.state,
+          //request: { headers: this.ctx.headers, query, body },
+        },
+      },
+    );
   }
 
   _combineAuthenticateUrls({ module, providerName, providerScene }: any) {

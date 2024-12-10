@@ -57,7 +57,6 @@ export class BeanInstance extends BeanBase<ScopeModule> {
         return await this._registerLock(configInstanceBase);
       },
       { subdomain: null },
-      { subdomain: null },
     );
   }
 

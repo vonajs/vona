@@ -86,15 +86,16 @@ export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
     });
     // invoke provider verify
     const _moduleInfo = ModuleInfo.parseInfo(provider.module)!;
-    await this.ctx.meta.util.executeBean({
-      beanFullName: `${_moduleInfo.relativeName}.captcha.provider.${provider.name}`,
-      context: {
+    await this.bean.executor.newCtx(async () => {
+      // todo: 需要添加verify的接口类型
+      const beanFullName = `${_moduleInfo.relativeName}.captcha.provider.${provider.name}`;
+      const beanInstance = this.bean._getBean(beanFullName as any);
+      return await beanInstance.verify({
         providerInstanceId,
         context: providerInstance.context,
         data: providerInstance.data,
         dataInput,
-      },
-      fn: 'verify',
+      });
     });
     // // clear
     // await cache.remove(key);

@@ -30,7 +30,7 @@ export class ControllerAuth extends BeanBase<ScopeModule> {
     // check demo
     this.app.bean.util.checkDemo();
     const { passwordOld, passwordNew } = this.ctx.request.body.data;
-    await this.scope.service.auth.passwordChange({ passwordOld, passwordNew, userId: this.ctx.state.user.agent.id });
+    await this.scope.service.auth.passwordChange({ passwordOld, passwordNew, userId: this.ctx.state.user.agent!.id });
     this.app.success();
   }
 

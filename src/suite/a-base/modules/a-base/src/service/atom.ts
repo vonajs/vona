@@ -208,7 +208,7 @@ export class ServiceAtom extends BeanBase {
       const progressId = await this.app.bean.progress.create();
       options = Object.assign({}, options, { progressId });
       // background
-      this.ctx.meta.util.runInBackground(async () => {
+      this.bean.executor.runInBackground(async () => {
         // handle next
         await this._handleActionParams_transaction({ options, params, fn });
       });

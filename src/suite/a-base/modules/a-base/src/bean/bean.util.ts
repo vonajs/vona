@@ -301,7 +301,7 @@ export class BeanUtil extends BeanBase<ScopeModule> {
         return self.escapeURL(str);
       },
       performAction({ method, url, body }: any) {
-        return self.ctx.meta.util.performAction({ method, url, body });
+        return self.bean.executor.performAction({ method, url, body });
       },
     };
   }

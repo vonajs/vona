@@ -309,7 +309,6 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
       async () => {
         return await this._updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item });
       },
-      {},
       { transaction: true },
     );
   }
@@ -381,7 +380,6 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
       async () => {
         return await this._registerLock({ atomClassBase, atomClass, item });
       },
-      {},
       { transaction: true },
     );
   }

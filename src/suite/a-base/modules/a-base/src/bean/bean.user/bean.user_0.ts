@@ -272,7 +272,7 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
   }
 
   async switchOffAgent() {
-    return await this.switchAgent({ userIdAgent: this.ctx.state.user.agent.id });
+    return await this.switchAgent({ userIdAgent: this.ctx.state.user.agent!.id });
   }
 
   // state: login/associate/migrate
@@ -354,8 +354,8 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       // should check user so as to create this.ctx.state.user
       await this.check();
       // check if this.ctx.state.user exists
-      if (!this.ctx.state.user || this.ctx.state.user.agent.anonymous) return false;
-      userId = this.ctx.state.user.agent.id;
+      if (!this.ctx.state.user || this.ctx.state.user.agent!.anonymous) return false;
+      userId = this.ctx.state.user.agent!.id;
       // migrate
       if (authUserId !== userId) {
         await this.accountMigration({ userIdFrom: userId, userIdTo: authUserId });
@@ -369,8 +369,8 @@ export class BeanUser0 extends BeanBase<ScopeModule> {
       // should check user so as to create this.ctx.state.user
       await this.check();
       // check if this.ctx.state.user exists
-      if (!this.ctx.state.user || this.ctx.state.user.agent.anonymous) return false;
-      userId = this.ctx.state.user.agent.id;
+      if (!this.ctx.state.user || this.ctx.state.user.agent!.anonymous) return false;
+      userId = this.ctx.state.user.agent!.id;
       // associated
       // update user
       await this._updateUserInfo(userId, profileUser.profile, columns);

@@ -8,7 +8,7 @@ const exists = {
     return async function (this: VonaContext, data, _path, _rootData, name) {
       const ctx = this;
       const res = await ctx.app.bean.user.exists({ [name]: data });
-      if (res && (!ctx.state.user || res.id !== ctx.state.user.agent.id)) {
+      if (res && (!ctx.state.user || res.id !== ctx.state.user.agent!.id)) {
         const errors: any[] = [{ keyword: 'x-exists', params: [], message: ctx.app.text('User Exists') }];
         throw new ctx.app.bean.ajv.Ajv.ValidationError(errors);
       }

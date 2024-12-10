@@ -40,12 +40,12 @@ export class ControllerUser extends BeanBase<ScopeModule> {
   }
 
   async agent() {
-    const res = await this.scope.service.user.agent({ userId: this.ctx.state.user.agent.id });
+    const res = await this.scope.service.user.agent({ userId: this.ctx.state.user.agent!.id });
     this.app.success(res);
   }
 
   async agentsBy() {
-    const res = await this.scope.service.user.agentsBy({ userId: this.ctx.state.user.agent.id });
+    const res = await this.scope.service.user.agentsBy({ userId: this.ctx.state.user.agent!.id });
     this.app.success(res);
   }
 
@@ -59,7 +59,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
     this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.addAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
-      userId: this.ctx.state.user.agent.id,
+      userId: this.ctx.state.user.agent!.id,
     });
     this.app.success(res);
   }
@@ -69,7 +69,7 @@ export class ControllerUser extends BeanBase<ScopeModule> {
     this.app.bean.util.checkDemo();
     const res = await this.scope.service.user.removeAgent({
       userIdAgent: this.ctx.request.body.userIdAgent,
-      userId: this.ctx.state.user.agent.id,
+      userId: this.ctx.state.user.agent!.id,
     });
     this.app.success(res);
   }
