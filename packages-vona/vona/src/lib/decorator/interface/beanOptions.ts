@@ -26,8 +26,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'
-  | 'queue' // todo: removed
-  | 'schedule' // todo: removed
   | 'broadcast'
   | 'version'
   | 'middleware'

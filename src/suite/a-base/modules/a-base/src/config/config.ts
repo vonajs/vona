@@ -1,4 +1,4 @@
-import { VonaApplication, IModuleConfigMiddleware, IModuleConfigStartup } from 'vona';
+import { VonaApplication, IModuleConfigMiddleware } from 'vona';
 
 // middlewares
 const middlewares = {
@@ -42,40 +42,39 @@ const middlewares = {
   } as IModuleConfigMiddleware,
 };
 
-// startups
-const startups: Record<string, IModuleConfigStartup> = {
-  loadSchedules: {
-    bean: 'loadSchedules',
-    // instance: true,
-    debounce: true,
-    after: true,
-  },
-  loadAtomStatics: {
-    bean: 'loadAtomStatics',
-    instance: true,
-    debounce: true,
-  },
-  checkResourceLocales: {
-    bean: 'checkResourceLocales',
-    instance: true,
-    debounce: true,
-  },
-  checkViewHistoryRight: {
-    bean: 'checkViewHistoryRight',
-    instance: true,
-    debounce: true,
-  },
-  outputHomeRoute: {
-    bean: 'outputHomeRoute',
-    debounce: true,
-    after: true,
-  },
-};
+// // startups
+// const startups: Record<string, IModuleConfigStartup> = {
+//   loadSchedules: {
+//     bean: 'loadSchedules',
+//     // instance: true,
+//     debounce: true,
+//     after: true,
+//   },
+//   loadAtomStatics: {
+//     bean: 'loadAtomStatics',
+//     instance: true,
+//     debounce: true,
+//   },
+//   checkResourceLocales: {
+//     bean: 'checkResourceLocales',
+//     instance: true,
+//     debounce: true,
+//   },
+//   checkViewHistoryRight: {
+//     bean: 'checkViewHistoryRight',
+//     instance: true,
+//     debounce: true,
+//   },
+//   outputHomeRoute: {
+//     bean: 'outputHomeRoute',
+//     debounce: true,
+//     after: true,
+//   },
+// };
 
 export const config = (_app: VonaApplication) => {
   return {
     middlewares,
-    startups,
     host: '',
     protocol: '',
     pageSize: 20,

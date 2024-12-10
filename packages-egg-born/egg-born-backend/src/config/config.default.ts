@@ -241,7 +241,6 @@ export default function (appInfo: VonaAppInfo) {
     },
     clients: {
       redlock: {},
-      limiter: {},
       queue: {},
       broadcast: {},
       cache: { keyPrefix: `cache_${appInfo.name}:` },

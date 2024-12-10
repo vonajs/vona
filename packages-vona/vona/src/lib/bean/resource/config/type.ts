@@ -11,23 +11,3 @@ export interface IModuleConfigMiddleware {
   global?: boolean;
   dependencies?: string | string[];
 }
-
-export interface IModuleConfigQueue {
-  bean: string | { module: string; name: string };
-}
-
-export interface IModuleConfigStartup {
-  bean: string | { module: string; name: string };
-  instance?: boolean;
-  debounce?: boolean;
-  after?: boolean;
-}
-
-export interface IModuleConfigSchedule {
-  bean: string | { module: string; name: string };
-  repeat: {
-    every?: number;
-    cron?: string;
-  };
-  disable?: boolean;
-}
