@@ -7,7 +7,7 @@ describe('test/controller/test/ctx/session.test.js', () => {
     const ctx = await app.meta.mockUtil.mockCtx();
 
     // anonymous
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/ctx/session', false),
@@ -18,7 +18,7 @@ describe('test/controller/test/ctx/session.test.js', () => {
     await ctx.meta.mockUtil.logout();
 
     // test again
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/ctx/session', false),

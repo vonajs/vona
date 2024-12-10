@@ -22,7 +22,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
       // checkRightCreate
       let data;
       try {
-        data = await ctx.meta.util.performAction({
+        data = await ctx.app.bean.executor.performAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/itemOnly/checkRightCreate', false),
@@ -49,7 +49,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
     await ctx.meta.mockUtil.login({ auth: 'Tom' });
 
     // create
-    const itemKey = await ctx.meta.util.performAction({
+    const itemKey = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/itemOnly/createRaw', false),
@@ -69,7 +69,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
       // checkRightRead
       let data;
       try {
-        data = await ctx.meta.util.performAction({
+        data = await ctx.app.bean.executor.performActionrmAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/itemOnly/checkRightRead', false),
@@ -99,7 +99,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
       // checkRightWrite
       let data;
       try {
-        data = await ctx.meta.util.performAction({
+        data = await ctx.app.bean.executor.performActionrmAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/itemOnly/checkRightWrite', false),
@@ -120,7 +120,7 @@ describe('test/controller/test/itemOnly/right.test.js', () => {
 
     // delete
     await ctx.meta.mockUtil.login({ auth: 'root' });
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('/a/base/atom/delete', false),

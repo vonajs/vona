@@ -16,7 +16,7 @@ describe('test/controller/test/function/right.test.js', () => {
       // checkRightResourceUser
       let data;
       try {
-        data = await ctx.meta.util.performAction({
+        data = await ctx.app.bean.executor.performAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/resource/checkRightResourceUser', false),

@@ -25,7 +25,7 @@ describe('flow.set04_atomState', () => {
     await ctx.meta.mockUtil.login({ auth: 'tomson' });
 
     // create
-    keyDraft = await ctx.meta.util.performAction({
+    keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -40,7 +40,7 @@ describe('flow.set04_atomState', () => {
     assert(!!keyDraft);
 
     // submit
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/submit',
@@ -61,7 +61,7 @@ describe('flow.set04_atomState', () => {
     await ctx.meta.mockUtil.login({ auth: 'tom' });
 
     // select task from history
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -79,7 +79,7 @@ describe('flow.set04_atomState', () => {
     assert(!!flowTask);
 
     // select task
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -98,7 +98,7 @@ describe('flow.set04_atomState', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -108,7 +108,7 @@ describe('flow.set04_atomState', () => {
     });
 
     // complete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/complete',
@@ -134,7 +134,7 @@ describe('flow.set04_atomState', () => {
     await ctx.meta.mockUtil.login({ auth: 'jane' });
 
     // select task from history
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -152,7 +152,7 @@ describe('flow.set04_atomState', () => {
     assert(!!flowTask);
 
     // select task
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -171,7 +171,7 @@ describe('flow.set04_atomState', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -181,7 +181,7 @@ describe('flow.set04_atomState', () => {
     });
 
     // complete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/complete',
@@ -206,7 +206,7 @@ describe('flow.set04_atomState', () => {
     await ctx.meta.mockUtil.login({ auth: 'jannie' });
 
     // select task from history
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -224,7 +224,7 @@ describe('flow.set04_atomState', () => {
     assert(!!flowTask);
 
     // select task
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -243,7 +243,7 @@ describe('flow.set04_atomState', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -253,7 +253,7 @@ describe('flow.set04_atomState', () => {
     });
 
     // complete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/complete',
@@ -278,7 +278,7 @@ describe('flow.set04_atomState', () => {
     await ctx.meta.mockUtil.login({ auth: 'tomson' });
 
     // select formal
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/select',
@@ -297,7 +297,7 @@ describe('flow.set04_atomState', () => {
     const keyFormal = { atomId: formal.atomId };
 
     // delete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/delete',

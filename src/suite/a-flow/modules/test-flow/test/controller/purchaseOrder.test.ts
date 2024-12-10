@@ -18,7 +18,7 @@ describe('atom:purchaseOrder', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // create
-    const keyDraft = await ctx.meta.util.performAction({
+    const keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -33,7 +33,7 @@ describe('atom:purchaseOrder', () => {
     assert(!!keyDraft);
 
     // detail: create
-    const detailKey = await ctx.meta.util.performAction({
+    const detailKey = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -56,7 +56,7 @@ describe('atom:purchaseOrder', () => {
     assert(!!keyDraft);
 
     // detail: read
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/read',
@@ -71,7 +71,7 @@ describe('atom:purchaseOrder', () => {
     assert(!!data);
 
     // detail: select
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/select',
@@ -88,7 +88,7 @@ describe('atom:purchaseOrder', () => {
     assert(!!data);
 
     // detail: count
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/count',
@@ -111,7 +111,7 @@ describe('atom:purchaseOrder', () => {
     // assert(result.body.code === 0);
 
     // submit
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/submit',
@@ -124,7 +124,7 @@ describe('atom:purchaseOrder', () => {
     assert(!!keyFormal);
 
     // read
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/read',
@@ -136,7 +136,7 @@ describe('atom:purchaseOrder', () => {
     assert(!!data);
 
     // delete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/delete',

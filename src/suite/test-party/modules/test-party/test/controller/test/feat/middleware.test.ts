@@ -7,7 +7,7 @@ describe('test/controller/test/feat/middleware.test.js', () => {
     const ctx = await app.meta.mockUtil.mockCtx();
 
     // success
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/feat/middleware/interception', false),
@@ -21,7 +21,7 @@ describe('test/controller/test/feat/middleware.test.js', () => {
     // fail
     await ctx.meta.mockUtil.catchError(
       async function () {
-        return await ctx.meta.util.performAction({
+        return await ctx.app.bean.executor.performActionrmAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/feat/middleware/interception', false),
@@ -41,7 +41,7 @@ describe('test/controller/test/feat/middleware.test.js', () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
     // success
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/feat/middleware/restructuring', false),

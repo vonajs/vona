@@ -14,7 +14,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // create
-    const keyDraft = await ctx.meta.util.performAction({
+    const keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -24,7 +24,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     });
 
     // query
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/db/queryOne',
@@ -36,7 +36,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     assert.equal(data.id, keyDraft.itemId);
 
     // query
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/db/queryOne',
@@ -48,7 +48,7 @@ describe.skip('test/controller/test/feat/mysql2.test.js', () => {
     assert.equal(data.id, keyDraft.atomId);
 
     // delete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/delete',

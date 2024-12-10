@@ -5,7 +5,7 @@ describe('test/controller/test/resource/all.test.js', () => {
   it('action:all', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/resource/all', false),

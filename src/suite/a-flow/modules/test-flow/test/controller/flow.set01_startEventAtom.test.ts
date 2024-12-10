@@ -15,7 +15,7 @@ describe('flow.set01_startEventAtom', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // create
-    const keyDraft = await ctx.meta.util.performAction({
+    const keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -30,7 +30,7 @@ describe('flow.set01_startEventAtom', () => {
     assert(!!keyDraft);
 
     // submit
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/submit',
@@ -43,7 +43,7 @@ describe('flow.set01_startEventAtom', () => {
     // assert(!!flowId);
 
     // select
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/select',
@@ -62,7 +62,7 @@ describe('flow.set01_startEventAtom', () => {
     const keyFormal = { atomId: formal.atomId };
 
     // delete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/delete',

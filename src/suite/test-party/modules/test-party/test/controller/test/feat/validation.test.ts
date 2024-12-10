@@ -20,7 +20,7 @@ describe('test/controller/test/feat/validation.test.js', () => {
 
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/feat/validation/success', false),
@@ -49,7 +49,7 @@ describe('test/controller/test/feat/validation.test.js', () => {
     // ctx
     try {
       const ctx = await app.meta.mockUtil.mockCtx();
-      await ctx.meta.util.performAction({
+      await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: mockUrl('test/feat/validation/fail', false),
@@ -75,7 +75,7 @@ describe('test/controller/test/feat/validation.test.js', () => {
 
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/feat/validation/schema', false),

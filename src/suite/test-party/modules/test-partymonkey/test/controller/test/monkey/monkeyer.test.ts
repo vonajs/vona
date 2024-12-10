@@ -5,7 +5,7 @@ describe('test/controller/test/monkey/monkeyer.test.js', () => {
   it('action:test', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('/test/party/test/monkey/monkeyee/test', false),

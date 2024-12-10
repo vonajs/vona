@@ -8,7 +8,7 @@ describe('flow.set03_gatewayExclusive', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/test/flow/flow/start',
@@ -30,7 +30,7 @@ describe('flow.set03_gatewayExclusive', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/test/flow/flow/start',

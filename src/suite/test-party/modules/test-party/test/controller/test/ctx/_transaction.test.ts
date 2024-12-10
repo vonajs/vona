@@ -8,7 +8,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
       await ctx.meta.mockUtil.login({ auth: 'Tom' });
 
       // create
-      const atomKey = await ctx.meta.util.performAction({
+      const atomKey = await ctx.app.bean.executor.performAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/write',
@@ -23,7 +23,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
         personCount: 0,
       };
       try {
-        await ctx.meta.util.performAction({
+        await ctx.app.bean.executor.performActionrmAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/ctx/transaction'),
@@ -37,7 +37,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
       }
 
       // check info
-      const item = await ctx.meta.util.performAction({
+      const item = await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/read',
@@ -49,7 +49,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
       assert.equal(item.personCount, 0);
 
       // delete
-      await ctx.meta.util.performAction({
+      await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/delete',
@@ -67,7 +67,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
       await ctx.meta.mockUtil.login({ auth: 'Tom' });
 
       // create
-      const atomKey = await ctx.meta.util.performAction({
+      const atomKey = await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/write',
@@ -81,7 +81,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
         atomName: 'test:transaction',
         personCount: 3,
       };
-      await ctx.meta.util.performAction({
+      await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: mockUrl('test/ctx/transaction'),
@@ -92,7 +92,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
       });
 
       // check info
-      const item = await ctx.meta.util.performAction({
+      const item = await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/read',
@@ -104,7 +104,7 @@ describe('test/controller/test/ctx/transaction.test.js', () => {
       assert.equal(item.personCount, itemNew.personCount);
 
       // delete
-      await ctx.meta.util.performAction({
+      await ctx.app.bean.executor.performActionrmAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/delete',

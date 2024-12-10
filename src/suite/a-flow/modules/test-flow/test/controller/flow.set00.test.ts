@@ -15,7 +15,7 @@ describe('flow.set00', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('flow/start', false),
@@ -37,7 +37,7 @@ describe('flow.set00', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('flow/start', false),
@@ -51,7 +51,7 @@ describe('flow.set00', () => {
         },
       },
     });
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('flow/start', false),
@@ -72,7 +72,7 @@ describe('flow.set00', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('flow/start', false),
@@ -90,7 +90,7 @@ describe('flow.set00', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('flow/start', false),
@@ -108,7 +108,7 @@ describe('flow.set00', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
     // flow start
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('flow/start', false),

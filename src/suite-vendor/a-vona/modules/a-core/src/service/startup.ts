@@ -170,6 +170,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     }
     // src/backend/app/public
     await fse.remove(path.join(app.options.baseDir, 'app/public/1'));
+    await fse.remove(path.join(app.options.baseDir.replace('dist/backend', 'src/backend'), 'app/public/1'));
   }
 
   private async _clearRedisKeys(redis, pattern) {

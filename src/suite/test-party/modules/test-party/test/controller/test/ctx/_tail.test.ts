@@ -6,7 +6,7 @@ describe('test/controller/test/ctx/tail.test.js', () => {
     // ctx
     await app.meta.mockUtil.mockCtx(async ctx => {
       cast(ctx.meta)._tail_test_caller = 1;
-      await ctx.meta.util.performAction({
+      await ctx.app.bean.executor.performAction({
         innerAccess: false,
         method: 'post',
         url: mockUrl('test/ctx/tail'),
@@ -19,7 +19,7 @@ describe('test/controller/test/ctx/tail.test.js', () => {
     await app.meta.mockUtil.mockCtx(async ctx => {
       cast(ctx.meta)._tail_test_als_caller = 1;
       await cast(ctx).transaction.begin(async () => {
-        await ctx.meta.util.performAction({
+        await ctx.app.bean.executor.performActionrmAction({
           innerAccess: false,
           method: 'post',
           url: mockUrl('test/ctx/tail'),

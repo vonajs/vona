@@ -17,7 +17,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // create
-    const keyDraft = await ctx.meta.util.performAction({
+    const keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -32,7 +32,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     assert(!!keyDraft);
 
     // submit
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/submit',
@@ -53,7 +53,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // select task
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -72,7 +72,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -82,7 +82,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     });
 
     // complete: rejected
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/complete',
@@ -104,7 +104,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // select task
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -123,7 +123,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -133,7 +133,7 @@ describe('flow.set01_atomUserTaskRejectCancelFlow', () => {
     });
 
     // cancelFlow
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/cancelFlow',

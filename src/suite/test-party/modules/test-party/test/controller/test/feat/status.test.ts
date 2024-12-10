@@ -5,7 +5,7 @@ describe('test/controller/test/feat/status.test.js', () => {
   it('action:status', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/feat/status', false),

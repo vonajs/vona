@@ -5,7 +5,7 @@ describe('test/controller/test/feat/modelWhere.test.js', () => {
   it('action:modelWhere', async () => {
     // ctx
     const ctx = await app.meta.mockUtil.mockCtx();
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'get',
       url: mockUrl('test/feat/modelWhere', false),

@@ -10,7 +10,7 @@ describe('test/controller/test/atom/starLabel.test.js', () => {
     await ctx.meta.mockUtil.login({ auth: 'Tom' });
 
     // do
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('test/atom/starLabel', false),

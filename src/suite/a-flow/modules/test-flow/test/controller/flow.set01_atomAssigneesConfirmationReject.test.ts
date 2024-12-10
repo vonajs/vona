@@ -19,7 +19,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // create
-    keyDraft = await ctx.meta.util.performAction({
+    keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -34,7 +34,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     assert(!!keyDraft);
 
     // submit
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/submit',
@@ -48,7 +48,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
 
     // select task
     // select task
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -66,7 +66,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     assert(!!flowTask);
 
     // assigneesConfirmation: rejected
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/assigneesConfirmation',
@@ -87,7 +87,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // select task
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -105,7 +105,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -115,7 +115,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     });
 
     // complete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/complete',
@@ -137,7 +137,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // select task
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -155,7 +155,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     assert(!!flowTask);
 
     // assignees
-    taskAssignees = await ctx.meta.util.performAction({
+    taskAssignees = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/assignees',
@@ -167,7 +167,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
 
     // assigneesConfirmation: passed
     const assigneesUsers = taskAssignees.users.map(item => item.id);
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/assigneesConfirmation',
@@ -194,7 +194,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     await ctx.meta.mockUtil.login({ auth: taskAssignee.userName });
 
     // select task
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/select',
@@ -213,7 +213,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     assert(!!flowTask);
 
     // claim
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/claim',
@@ -223,7 +223,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     });
 
     // complete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/a/flowtask/task/complete',
@@ -250,7 +250,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // select
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/select',
@@ -269,7 +269,7 @@ describe('flow.set01_atomAssigneesConfirmationReject', () => {
     const keyFormal = { atomId: formal.atomId };
 
     // delete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/delete',

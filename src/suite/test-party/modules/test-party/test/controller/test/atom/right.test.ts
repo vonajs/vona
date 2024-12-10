@@ -17,7 +17,7 @@ describe('test/controller/test/atom/right.test.js', () => {
       // checkRightCreate
       await ctx.meta.mockUtil.catchError(
         async function () {
-          return await ctx.meta.util.performAction({
+          return await ctx.app.bean.executor.performAction({
             innerAccess: false,
             method: 'post',
             url: mockUrl('test/atom/checkRightCreate', false),
@@ -45,7 +45,7 @@ describe('test/controller/test/atom/right.test.js', () => {
     await ctx.meta.mockUtil.login({ auth: 'Tom' });
 
     // create
-    const partyKeyDraft = await ctx.meta.util.performAction({
+    const partyKeyDraft = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('/a/base/atom/write', false),
@@ -65,7 +65,7 @@ describe('test/controller/test/atom/right.test.js', () => {
       // checkRightRead
       await ctx.meta.mockUtil.catchError(
         async function () {
-          return await ctx.meta.util.performAction({
+          return await ctx.app.bean.executor.performActionrmAction({
             innerAccess: false,
             method: 'post',
             url: mockUrl('test/atom/checkRightRead', false),
@@ -95,7 +95,7 @@ describe('test/controller/test/atom/right.test.js', () => {
       // checkRightWrite
       await ctx.meta.mockUtil.catchError(
         async function () {
-          return await ctx.meta.util.performAction({
+          return await ctx.app.bean.executor.performActionrmAction({
             innerAccess: false,
             method: 'post',
             url: mockUrl('test/atom/checkRightWrite', false),
@@ -116,7 +116,7 @@ describe('test/controller/test/atom/right.test.js', () => {
 
     // submit
     await ctx.meta.mockUtil.login({ auth: 'Tom' });
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('/a/base/atom/submit', false),
@@ -177,7 +177,7 @@ describe('test/controller/test/atom/right.test.js', () => {
 
     // delete
     await ctx.meta.mockUtil.login({ auth: 'Tom' });
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performActionrmAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('/a/base/atom/delete', false),
