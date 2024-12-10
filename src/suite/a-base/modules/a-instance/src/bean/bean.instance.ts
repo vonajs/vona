@@ -51,16 +51,12 @@ export class BeanInstance extends BeanBase<ScopeModule> {
     const configInstanceBase = this.scope.service.instance.getConfigInstanceBase(subdomain);
     if (!configInstanceBase) return null;
     // lock
-    return await this.bean.redlock.lock(
+    return await this.bean.redlock.lockIsolate(
       `${__ThisModule__}.registerInstance.${subdomain}`,
       async () => {
-        return await this.ctx.meta.util.executeBeanIsolate({
-          subdomain: null,
-          fn: async () => {
-            await this._registerLock(configInstanceBase);
-          },
-        });
+        return await this._registerLock(configInstanceBase);
       },
+      {},
       { subdomain: null },
     );
   }

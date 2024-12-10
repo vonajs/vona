@@ -166,12 +166,8 @@ export class BeanTag extends BeanBase<ScopeModule> {
 
   async _register({ atomClass, language, tagName }: any) {
     atomClass = await this.app.bean.atomClass.get(atomClass);
-    return await this.bean.redlock.lock(`${__ThisModule__}.tag.register.${atomClass.id}`, async () => {
-      return await this.ctx.meta.util.executeBeanIsolate({
-        beanFullName: 'tag',
-        context: { atomClass, language, tagName },
-        fn: '_registerLock',
-      });
+    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.tag.register.${atomClass.id}`, async () => {
+      return await this._registerLock({ atomClass, language, tagName });
     });
   }
 

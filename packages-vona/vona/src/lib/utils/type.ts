@@ -31,4 +31,5 @@ export interface IExecuteBeanOptions {
   subdomain?: string | null | undefined;
   transaction?: boolean;
   instance?: boolean;
+  ctxParent?: PowerPartial<VonaContext>;
 }

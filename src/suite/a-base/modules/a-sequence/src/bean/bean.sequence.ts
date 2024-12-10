@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 let __sequences;
 
 @Bean()
-export class BeanSequence extends BeanModuleScopeBase {
+export class BeanSequence extends BeanModuleScopeBase<ScopeModule> {
   async reset(name) {
     const provider = this._findSequenceProvider(name);
     const sequence = await this._get(name);
@@ -23,13 +23,8 @@ export class BeanSequence extends BeanModuleScopeBase {
 
   async next(name) {
     const moduleName = this.moduleScope;
-    return await this.bean.redlock.lock(`${__ThisModule__}.sequence.${moduleName}.${name}`, async () => {
-      return await this.ctx.meta.util.executeBeanIsolate({
-        beanFullName: 'sequence',
-        fn: async ({ bean }) => {
-          return await bean.module(moduleName)._nextLock(name);
-        },
-      });
+    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.sequence.${moduleName}.${name}`, async () => {
+      return await this.bean.sequence.module(moduleName)._nextLock(name);
     });
   }
 

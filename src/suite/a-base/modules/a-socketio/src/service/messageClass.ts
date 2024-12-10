@@ -22,12 +22,8 @@ export class ServiceMessageClass extends BeanBase<ScopeModule> {
     if (res) return res;
     if (!module || !messageClassName) throw new Error('Invalid arguments');
     // lock
-    return await this.bean.redlock.lock(`${__ThisModule__}.messageClass.register`, async () => {
-      return await this.ctx.meta.util.executeBeanIsolate({
-        fn: async () => {
-          return await this.bean.io.messageClass._registerLock({ module, messageClassName });
-        },
-      });
+    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.messageClass.register`, async () => {
+      return await this._registerLock({ module, messageClassName });
     });
   }
 
