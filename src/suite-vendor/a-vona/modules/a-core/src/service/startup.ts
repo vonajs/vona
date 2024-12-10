@@ -44,12 +44,14 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       // subdomain
       const subdomain = '';
       // init
-      await this.app.meta.util.executeBean({
-        subdomain,
-        fn: async () => {
+      await this.bean.executor.newCtx(
+        async () => {
           await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
         },
-      });
+        {
+          subdomain,
+        },
+      );
     }
 
     // version test
@@ -57,12 +59,14 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       // subdomain
       const subdomain = '';
       // test
-      await this.app.meta.util.executeBean({
-        subdomain,
-        fn: async () => {
+      await this.bean.executor.newCtx(
+        async () => {
           await this.$scope.version.service.version.__instanceTest(subdomain);
         },
-      });
+        {
+          subdomain,
+        },
+      );
     }
   }
 
@@ -77,12 +81,14 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     return await this.bean.redlock.lock(
       `startup.${startupName}`,
       async () => {
-        return await this.app.meta.util.executeBean({
-          subdomain,
-          fn: async () => {
+        return await this.bean.executor.newCtx(
+          async () => {
             await this._runStartupLock(startup, subdomain, options);
           },
-        });
+          {
+            subdomain,
+          },
+        );
       },
       {
         subdomain,
@@ -110,14 +116,16 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
   async _runStartupInner(startup: IMiddlewareItem, subdomain?: string, options?: IInstanceStartupOptions) {
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // execute
-    return await this.app.meta.util.executeBean({
-      subdomain,
-      transaction: startupOptions.transaction,
-      fn: async () => {
+    return await this.bean.executor.newCtx(
+      async () => {
         const bean = cast<IStartupExecute>(this.bean._getBean(startup.beanOptions.beanFullName as any));
         await bean.execute(options);
       },
-    });
+      {
+        subdomain,
+        transaction: startupOptions.transaction,
+      },
+    );
   }
 
   async runStartupInstance(subdomain: string, options?: IInstanceStartupOptions) {
