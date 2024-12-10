@@ -36,10 +36,9 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
       async () => {
         return await this.bean.flowTask._nodeDoneCheckLock({ flowNodeId });
       },
-      {},
       {
         transaction: true,
-        ctxParent: { state: { user: { op: user } } },
+        extraData: { state: { user: { op: user } } },
       },
     );
   }
