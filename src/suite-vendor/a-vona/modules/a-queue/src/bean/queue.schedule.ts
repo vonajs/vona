@@ -1,10 +1,10 @@
-import { Queue } from 'vona';
+import { IScheduleRecord, Queue } from 'vona';
 import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
 import * as Bull from 'bullmq';
 import { ScopeModule } from '../.metadata/this.js';
 
 export type TypeQueueScheduleJobData = {
-  scheduleName: string;
+  scheduleName: keyof IScheduleRecord;
 };
 
 export type TypeQueueScheduleJobResult = void;

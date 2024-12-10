@@ -1,10 +1,10 @@
-import { BeanBase, cast, IDecoratorScheduleOptions, IScheduleExecute, Service } from 'vona';
+import { BeanBase, cast, IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, Service } from 'vona';
 import * as Bull from 'bullmq';
 import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
 export class ServiceSchedule extends BeanBase<ScopeModule> {
-  async execute(scheduleName: string, job?: Bull.Job) {
+  async execute(scheduleName: keyof IScheduleRecord, job?: Bull.Job) {
     // ignore on test
     if (this.app.meta.isTest) return;
     // check if valid
@@ -33,7 +33,7 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
 
-  private __checkJobValid(scheduleName: string, job: Bull.Job) {
+  private __checkJobValid(scheduleName: keyof IScheduleRecord, job: Bull.Job) {
     // schedule: maybe not exists
     const scheduleItem = this.app.meta.onionSchedule.getMiddlewareItem(scheduleName);
     if (!scheduleItem) return false;
@@ -51,7 +51,7 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     return true;
   }
 
-  private __getJobName(subdomain: string, scheduleName: string) {
+  private __getJobName(subdomain: string, scheduleName: keyof IScheduleRecord) {
     return `${subdomain}.${scheduleName.replace(':', '.schedule.')}`; // not use :
   }
 

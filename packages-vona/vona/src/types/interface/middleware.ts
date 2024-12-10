@@ -47,7 +47,7 @@ export interface IDecoratorMiddlewareOptionsGlobal extends IMiddlewareBase {
   dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
 }
 
-export interface IMiddlewareItem<OPTIONS = unknown, T = unknown> {
+export interface IMiddlewareItem<OPTIONS = unknown, MIDDLEWARENAME = string, T = unknown> {
   name: string;
   options: IDecoratorMiddlewareOptionsGlobal;
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;

@@ -32,13 +32,13 @@ const __adapter = (_context, chain) => {
 
 const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
 
-export class Onion<OPTIONS> extends BeanSimple {
+export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
   sceneName: string;
   sceneMeta: OnionSceneMeta;
-  middlewaresNormal: Record<string, IMiddlewareItem>;
-  middlewaresGlobal: IMiddlewareItem[];
+  middlewaresNormal: Record<string, IMiddlewareItem<OPTIONS, MIDDLEWARENAME>>;
+  middlewaresGlobal: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[];
 
-  private [SymbolMiddlewaresEnabled]: IMiddlewareItem<OPTIONS>[];
+  private [SymbolMiddlewaresEnabled]: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[];
 
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
@@ -116,7 +116,7 @@ export class Onion<OPTIONS> extends BeanSimple {
         return (
           middlewareOptions.enable !== false && this.app.meta.util.checkMiddlewareOptionsMeta(middlewareOptions.meta)
         );
-      }) as unknown as IMiddlewareItem<OPTIONS>[];
+      }) as unknown as IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[];
     }
     return this[SymbolMiddlewaresEnabled];
   }
@@ -182,7 +182,7 @@ export class Onion<OPTIONS> extends BeanSimple {
       ctx.getClass()!,
     )?.[this.sceneName] as string[];
     // middlewaresLocal: action
-    const middlewaresLocal: IMiddlewareItem[] = [];
+    const middlewaresLocal: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[] = [];
     const actionMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseMiddlewareLocal,
       ctx.getClassPrototype()!,
@@ -207,7 +207,7 @@ export class Onion<OPTIONS> extends BeanSimple {
     return middlewaresLocal;
   }
 
-  getMiddlewareItem(middlewareName: string): IMiddlewareItem {
+  getMiddlewareItem(middlewareName: string): IMiddlewareItem<OPTIONS, MIDDLEWARENAME> {
     return this.middlewaresNormal[middlewareName];
   }
 
@@ -215,7 +215,7 @@ export class Onion<OPTIONS> extends BeanSimple {
     return this.getMiddlewareItem(middlewareName).beanOptions.options as OPTIONS | undefined;
   }
 
-  combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem) {
+  combineMiddlewareOptions(ctx: VonaContext, item: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>) {
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
@@ -258,7 +258,7 @@ export class Onion<OPTIONS> extends BeanSimple {
     return options;
   }
 
-  private _handleDependents(middlewares: IMiddlewareItem[]) {
+  private _handleDependents(middlewares: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[]) {
     for (const middleware of middlewares) {
       const middlewareOptions = middleware.beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
       let dependents = middlewareOptions.dependents as any;
@@ -283,11 +283,12 @@ export class Onion<OPTIONS> extends BeanSimple {
     }
   }
 
-  private _swapMiddlewares(middlewares: IMiddlewareItem[]) {
+  private _swapMiddlewares(middlewares: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[]) {
     swapDeps(middlewares, {
       name: 'name',
       dependencies: item => {
-        const middlewareOptions = cast<IMiddlewareItem>(item).beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
+        const middlewareOptions = cast<IMiddlewareItem<OPTIONS, MIDDLEWARENAME>>(item).beanOptions
+          .options as IDecoratorMiddlewareOptionsGlobal;
         return middlewareOptions.dependencies as any;
       },
     });
@@ -309,7 +310,7 @@ export class Onion<OPTIONS> extends BeanSimple {
   }
 
   private _loadMiddlewaresAll() {
-    const middlewaresAll: IMiddlewareItem[] = [];
+    const middlewaresAll: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[] = [];
     for (const module of this.app.meta.modulesArray) {
       // todo: should be removed
       if (this.sceneName === 'middleware') {
@@ -323,7 +324,10 @@ export class Onion<OPTIONS> extends BeanSimple {
     return middlewaresAll;
   }
 
-  private _loadMiddlewaresAll_fromMetadata(middlewaresAll: IMiddlewareItem[], module: IModule) {
+  private _loadMiddlewaresAll_fromMetadata(
+    middlewaresAll: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[],
+    module: IModule,
+  ) {
     const middlewares = appResource.scenes[this.sceneName]?.[module.info.relativeName];
     if (!middlewares) return;
     for (const key in middlewares) {
@@ -340,13 +344,13 @@ export class Onion<OPTIONS> extends BeanSimple {
       middlewaresAll.push({
         name,
         options: beanOptions.options as any,
-        beanOptions,
+        beanOptions: beanOptions as any,
       });
     }
   }
 
   // todo: should be removed
-  private _loadMiddlewaresAll_fromConfig(middlewaresAll: IMiddlewareItem[], module: IModule) {
+  private _loadMiddlewaresAll_fromConfig(middlewaresAll: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[], module: IModule) {
     const config = this.app.config.modules[module.info.relativeName];
     if (!config?.middlewares) return;
     for (const middlewareKey in config.middlewares) {
@@ -374,13 +378,13 @@ export class Onion<OPTIONS> extends BeanSimple {
       middlewaresAll.push({
         name: middlewareKey,
         options: middlewareConfig,
-        beanOptions,
+        beanOptions: beanOptions as any,
         fromConfig: true,
       });
     }
   }
 
-  _wrapMiddleware(item: IMiddlewareItem, executeCustom?: Function) {
+  _wrapMiddleware(item: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>, executeCustom?: Function) {
     const sceneName = this.sceneName;
     const fn = (ctx: VonaContext, next) => {
       let packet;
