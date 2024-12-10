@@ -44,12 +44,8 @@ export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
     const res = await this.model.get(data);
     if (res) return res;
     // lock
-    return await this.bean.redlock.lock(`${__ThisModule__}.atomClass.register`, async () => {
-      return await this.ctx.meta.util.executeBeanIsolate({
-        beanFullName: 'atomClass',
-        context: { module, atomClassName },
-        fn: '_registerLock',
-      });
+    return await this.bean.redlock.lockWithCtxIsolate(`${__ThisModule__}.atomClass.register`, async () => {
+      return await this._registerLock({ module, atomClassName });
     });
   }
 
