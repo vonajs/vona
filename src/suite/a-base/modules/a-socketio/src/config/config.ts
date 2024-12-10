@@ -1,11 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast, IModuleConfigQueue } from 'vona';
-
-// queues
-const queues = {
-  registerMessageClass: {
-    bean: 'registerMessageClass',
-  } as IModuleConfigQueue,
-};
+import { VonaApplication, IModuleConfigBroadcast } from 'vona';
 
 // broadcasts
 const broadcasts = {
@@ -16,7 +9,6 @@ const broadcasts = {
 
 export const config = (_app: VonaApplication) => {
   return {
-    queues,
     broadcasts,
     message: {
       sync: {

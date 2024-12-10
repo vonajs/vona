@@ -1,4 +1,4 @@
-import { Bean } from 'vona';
+import { Bean, cast } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
 import path from 'path';
@@ -91,7 +91,7 @@ ${symbols.join('\n')}
   async _combineSymbol({ file, iconName }: any) {
     // svg
     const xml = await fse.readFile(file);
-    const svg = await this.parseXML({ xml });
+    const svg = cast(await this.parseXML({ xml }));
     // patch
     delete svg.defs;
     delete svg.metadata;
