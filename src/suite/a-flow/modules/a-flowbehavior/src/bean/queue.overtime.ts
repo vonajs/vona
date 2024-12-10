@@ -4,6 +4,7 @@ import { ScopeModule } from '../.metadata/this.js';
 import { FlowBehaviorOvertime } from './flow.behavior.overtime.js';
 
 export type TypeQueueOvertimeJobData = {
+  flowId: number;
   flowNodeId: number;
   behaviorDefId: number;
 };

@@ -41,21 +41,21 @@ export class FlowBehaviorOvertime extends BeanFlowBehaviorBase<ScopeModule> {
     // push
     const jobName = this._getJobName({ flowId, flowNodeId, behaviorDefId });
     const jobId = jobName;
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'overtime',
-      queueNameSub: flowId,
-      jobName,
-      jobOptions: {
-        delay,
-        jobId,
-      },
-      data: {
+    this.scope.queue.overtime.push(
+      {
         flowId,
         flowNodeId,
         behaviorDefId,
       },
-    });
+      {
+        queueNameSub: flowId,
+        jobName,
+        jobOptions: {
+          delay,
+          jobId,
+        },
+      },
+    );
   }
 
   async _deleteJob({ flowId, flowNodeId, behaviorDefId }: any) {
