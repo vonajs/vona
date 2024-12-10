@@ -57,7 +57,7 @@ export class ServiceAuth extends BeanBase {
       query: { state },
       body: { data },
     });
-    // const res = await this.ctx.meta.util.performAction({
+    // const res = await this.bean.executor.performAction({
     //   method: 'post',
     //   url: `/a/auth/passport/a-authsms/authsms?state=${state}`,
     //   body: { data },

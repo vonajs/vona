@@ -78,7 +78,7 @@ export class BeanAuthSimple extends BeanBase<ScopeModule> {
       query: { state },
       body: { data },
     });
-    // const res = await this.ctx.meta.util.performAction({
+    // const res = await this.bean.executor.performAction({
     //   method: 'post',
     //   url: `/a/auth/passport/a-authsimple/authsimple?state=${state}`,
     //   body: { data },

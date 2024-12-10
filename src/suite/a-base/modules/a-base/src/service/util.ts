@@ -7,7 +7,7 @@ export class ServiceUtil extends BeanBase {
     // force innerAccess as false
     params.innerAccess = false;
     // performAction
-    return await this.ctx.meta.util.performAction(params);
+    return await this.bean.executor.performAction(params);
   }
 
   async performActions({ actions }: any) {

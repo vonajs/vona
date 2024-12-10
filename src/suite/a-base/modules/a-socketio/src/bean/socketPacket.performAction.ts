@@ -31,7 +31,7 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
         innerAccess: false, // force innerAccess as false
       };
       // performAction
-      const data = await this.ctx.meta.util.performAction(params);
+      const data = await this.bean.executor.performAction(params);
       this.ctx.socket.emit('performAction-callback', {
         id,
         result: {

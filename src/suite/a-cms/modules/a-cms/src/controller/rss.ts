@@ -21,7 +21,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
       mode: 'default',
     };
     // select
-    const res = await this.ctx.meta.util.performAction({
+    const res = await this.bean.executor.performAction({
       method: 'post',
       url: '/api/a/cms/article/list',
       body: { atomClass, options },
@@ -88,7 +88,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
       page: { index: 0 },
     };
     // select
-    const res = await this.ctx.meta.util.performAction({
+    const res = await this.bean.executor.performAction({
       method: 'post',
       url: '/api/a/cms/comment/all',
       body: { atomClass, options },
@@ -151,7 +151,7 @@ export class ControllerRss extends BeanBase<ScopeModule> {
       orders: [['updatedAt', 'desc']],
       page: { index: 0 },
     };
-    const res = await this.ctx.meta.util.performAction({
+    const res = await this.bean.executor.performAction({
       method: 'post',
       url: '/api/a/base/comment/list',
       body: {

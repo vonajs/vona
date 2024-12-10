@@ -8,7 +8,7 @@ export class ControllerTestCtxSession extends BeanBase<ScopeModule> {
     // key1
     this.ctx.session.test_key1 = 1;
     // echo1
-    const res = await this.ctx.meta.util.performAction({
+    const res = await this.bean.executor.performAction({
       method: 'post',
       url: 'test/ctx/session/echo1',
     });
@@ -21,7 +21,7 @@ export class ControllerTestCtxSession extends BeanBase<ScopeModule> {
 
   async echo1() {
     // echo2
-    const res = await this.ctx.meta.util.performAction({
+    const res = await this.bean.executor.performAction({
       method: 'post',
       url: 'test/ctx/session/echo2',
     });
