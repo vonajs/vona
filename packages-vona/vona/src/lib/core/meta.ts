@@ -30,6 +30,22 @@ import {
   IDecoratorStartupOptions,
   IDecoratorQueueOptions,
   IDecoratorScheduleOptions,
+  IMiddlewareRecord,
+  IGuardRecord,
+  IInterceptorRecord,
+  IPipeRecord,
+  IFilterRecord,
+  ISocketConnectionRecord,
+  ISocketPacketRecord,
+  IAopRecord,
+  IEntityRecord,
+  IModelRecord,
+  IControllerRecord,
+  IMetaRecord,
+  ISummerCacheRecord,
+  IStartupRecord,
+  IQueueRecord,
+  IScheduleRecord,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -73,22 +89,22 @@ export class AppMeta extends BeanSimple {
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //
-  onionMiddleware: Onion<IDecoratorMiddlewareOptionsGlobal>;
-  onionGuard: Onion<IDecoratorGuardOptionsGlobal>;
-  onionInterceptor: Onion<IDecoratorInterceptorOptionsGlobal>;
-  onionPipe: Onion<IDecoratorPipeOptionsGlobal>;
-  onionFilter: Onion<IDecoratorFilterOptionsGlobal>;
-  onionSocketConnection: Onion<IDecoratorSocketConnectionOptions>;
-  onionSocketPacket: Onion<IDecoratorSocketPacketOptions>;
-  onionAop: Onion<IDecoratorAopOptions>;
-  onionEntity: Onion<IDecoratorEntityOptions>;
-  onionModel: Onion<IDecoratorModelOptions>;
-  onionController: Onion<IDecoratorControllerOptions>;
-  onionMeta: Onion<IDecoratorMetaOptions>;
-  onionSummerCache: Onion<IDecoratorSummerCacheOptions>;
-  onionStartup: Onion<IDecoratorStartupOptions>;
-  onionQueue: Onion<IDecoratorQueueOptions>;
-  onionSchedule: Onion<IDecoratorScheduleOptions>;
+  onionMiddleware: Onion<IDecoratorMiddlewareOptionsGlobal, keyof IMiddlewareRecord>;
+  onionGuard: Onion<IDecoratorGuardOptionsGlobal, keyof IGuardRecord>;
+  onionInterceptor: Onion<IDecoratorInterceptorOptionsGlobal, keyof IInterceptorRecord>;
+  onionPipe: Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
+  onionFilter: Onion<IDecoratorFilterOptionsGlobal, keyof IFilterRecord>;
+  onionSocketConnection: Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>;
+  onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
+  onionAop: Onion<IDecoratorAopOptions, keyof IAopRecord>;
+  onionEntity: Onion<IDecoratorEntityOptions, keyof IEntityRecord>;
+  onionModel: Onion<IDecoratorModelOptions, keyof IModelRecord>;
+  onionController: Onion<IDecoratorControllerOptions, keyof IControllerRecord>;
+  onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
+  onionSummerCache: Onion<IDecoratorSummerCacheOptions, keyof ISummerCacheRecord>;
+  onionStartup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;
+  onionQueue: Onion<IDecoratorQueueOptions, keyof IQueueRecord>;
+  onionSchedule: Onion<IDecoratorScheduleOptions, keyof IScheduleRecord>;
   //
   broadcasts: Record<string, any>;
   //
