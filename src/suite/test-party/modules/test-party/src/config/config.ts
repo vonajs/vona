@@ -1,4 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast, IModuleConfigMiddleware, IModuleConfigSchedule } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast, IModuleConfigMiddleware } from 'vona';
 
 // broadcasts
 const broadcasts = {
@@ -18,17 +18,6 @@ const middlewares = {
     global: false,
     dependencies: 'instance',
   } as IModuleConfigMiddleware,
-};
-
-// schedules
-const schedules = {
-  test: {
-    bean: 'test',
-    repeat: {
-      every: 3000,
-    },
-    disable: true,
-  } as IModuleConfigSchedule,
 };
 
 const settings = {
@@ -104,7 +93,6 @@ export const config = (app: VonaApplication) => {
     monkeyed: app.meta.isTest ? false : undefined,
     // normal
     middlewares,
-    schedules,
     message: 'Hello World',
     captcha: {
       scenes: {
