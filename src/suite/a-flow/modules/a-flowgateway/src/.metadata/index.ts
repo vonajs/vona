@@ -21,6 +21,7 @@ declare module 'vona' {
 /** beans: end */
 /** queue: begin */
 export * from '../bean/queue.gateway.js';
+export * from '../bean/queue.gateway_.js';
 
 import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {

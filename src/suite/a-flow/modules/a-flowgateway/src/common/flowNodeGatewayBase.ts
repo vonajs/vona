@@ -1,8 +1,10 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
+import { TypeGatewayMode } from '../types.js';
+import { TypeQueueGatewayJobData } from '../bean/queue.gateway.js';
 
-export class FlowNodeGatewayBase extends BeanFlowNodeBase {
-  gatewayMode: 'exclusive' | 'inclusive' | 'parallel';
+export class FlowNodeGatewayBase extends BeanFlowNodeBase<ScopeModule> {
+  gatewayMode: TypeGatewayMode;
 
   constructor(gatewayMode) {
     super();
@@ -29,19 +31,16 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     };
     // jump out of the transaction
     this.ctx.tail(async () => {
-      await this.ctx.meta.util.queuePushAsync({
-        module: __ThisModule__,
-        queueName: 'gateway',
+      await this.scope.queue.gateway.pushAsync(data, {
         queueNameSub: `${flowId}:${nodeDefId}:${behaviorDefId || ''}`,
-        data,
       });
     });
     // break
     return false;
   }
 
-  async _runCheck(context) {
-    const { flowId, flowNodeId, nodeDefId, edgeDefId, behaviorDefId } = context.data;
+  async _runCheck(data: TypeQueueGatewayJobData) {
+    const { flowId, flowNodeId, nodeDefId, edgeDefId, behaviorDefId } = data;
     const debug = this.ctx.app.bean.debug.get('flow');
     debug(
       'gateway %s: flowId:%d, flowNodeId:%d, nodeDefId:%s, edgeDefId:%s',
