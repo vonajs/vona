@@ -1,3 +1,15 @@
+/** beans: begin */
+export * from '../bean/bean.executor.js';
+import { BeanExecutor } from '../bean/bean.executor.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    executor: BeanExecutor;
+  }
+
+  export interface IBeanRecordGeneral {}
+}
+/** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.development.js';
 export * from '../bean/middleware.gate.js';
