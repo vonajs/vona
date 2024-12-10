@@ -187,23 +187,25 @@ export class ServiceVersion extends BeanBase {
     try {
       if (!options.scene) {
         // update
-        await this.ctx.meta.util.executeBean({
-          beanModule: module.info.relativeName,
-          transaction: module.name !== 'a-index',
-          fn: async () => {
+        await this.bean.executor.newCtx(
+          async () => {
             await this.__updateModuleTransaction(module, version);
           },
-        });
+          {
+            transaction: module.name !== 'a-index',
+          },
+        );
       } else {
         // init
-        await this.ctx.meta.util.executeBean({
-          subdomain: options.subdomain,
-          beanModule: module.info.relativeName,
-          transaction: true,
-          fn: async () => {
+        await this.bean.executor.newCtx(
+          async () => {
             await this.__initModuleTransaction(module, version, options);
           },
-        });
+          {
+            subdomain: options.subdomain,
+            transaction: true,
+          },
+        );
       }
     } catch (err) {
       throw err;
