@@ -7,7 +7,7 @@ export type TypeQueueRenderJobData =
       queueAction: 'buildLanguage';
       atomClass;
       language;
-      progressId;
+      progressId?;
     }
   | {
       queueAction: 'buildLanguages';

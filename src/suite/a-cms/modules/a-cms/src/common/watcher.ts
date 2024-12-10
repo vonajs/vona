@@ -1,9 +1,9 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { BeanBase, cast } from 'vona';
 
-export class Watcher extends BeanBase {
+export class Watcher extends BeanBase<ScopeModule> {
   _watchers: any;
 
   protected __init__() {
@@ -122,16 +122,16 @@ export class Watcher extends BeanBase {
 
   // invoked in this.app
   async _change({ subdomain, atomClass, language }: any) {
-    this.app.meta.queue.push({
-      subdomain,
-      module: __ThisModule__,
-      queueName: 'render',
-      queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-      data: {
+    this.scope.queue.render.push(
+      {
         queueAction: 'buildLanguage',
         atomClass,
         language,
       },
-    });
+      {
+        subdomain,
+        queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
+      },
+    );
   }
 }
