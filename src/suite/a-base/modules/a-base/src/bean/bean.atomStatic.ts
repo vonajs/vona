@@ -304,14 +304,14 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
   }
 
   async _updateRevision({ atomClassBase, atomClass, atomIdFormal, item }: any) {
-    return await this.bean.redlock.lock(`${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`, async () => {
-      return await this.ctx.meta.util.executeBeanIsolate({
-        beanFullName: 'atomStatic',
-        context: { atomClassBase, atomClass, atomIdFormal, item },
-        fn: '_updateRevisionLock',
-        transaction: true,
-      });
-    });
+    return await this.bean.redlock.lockIsolate(
+      `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
+      async () => {
+        return await this._updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item });
+      },
+      {},
+      { transaction: true },
+    );
   }
 
   async _updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item }: any) {
@@ -376,14 +376,14 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
   }
 
   async _register({ atomClassBase, atomClass, item }: any) {
-    return await this.bean.redlock.lock(`${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`, async () => {
-      return await this.ctx.meta.util.executeBeanIsolate({
-        beanFullName: 'atomStatic',
-        context: { atomClassBase, atomClass, item },
-        fn: '_registerLock',
-        transaction: true,
-      });
-    });
+    return await this.bean.redlock.lockIsolate(
+      `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
+      async () => {
+        return await this._registerLock({ atomClassBase, atomClass, item });
+      },
+      {},
+      { transaction: true },
+    );
   }
 
   async _registerLock({ /* atomClassBase,*/ atomClass, item }: any) {

@@ -1,5 +1,5 @@
 import Redlock from 'redlock';
-import { Bean, BeanBase, FunctionAsync, subdomainDesp } from 'vona';
+import { Bean, BeanBase, FunctionAsync, IExecuteBeanOptions, subdomainDesp } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { IRedlockLockOptions } from '../types/redlock.js';
 
@@ -50,19 +50,22 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
     }
   }
 
-  public async lockWithCtxIsolate<RESULT>(
+  public async lockIsolate<RESULT>(
     resource: string,
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockOptions,
+    optionsIsolate?: IExecuteBeanOptions,
   ): Promise<RESULT> {
     return await this.lock(
       resource,
       async () => {
-        return await this.ctx.meta.util.executeBeanIsolate({
+        // todo: 选项需要重构
+        const _optionsIsolate = Object.assign({}, optionsIsolate, {
           fn: () => {
             return fn();
           },
         });
+        return await this.ctx.meta.util.executeBeanIsolate(_optionsIsolate);
       },
       options,
     );

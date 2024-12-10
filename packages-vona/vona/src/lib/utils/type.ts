@@ -1,4 +1,5 @@
 import { ConfigOnion, PowerPartial, VonaContext } from '../../types/index.js';
+import { ILocalInfos } from '../bean/index.js';
 
 export interface PerformActionParams {
   innerAccess?: boolean;
@@ -23,4 +24,11 @@ export interface PerformActionInnerParams {
   headers?: object;
   body?: object;
   onion?: PowerPartial<ConfigOnion>;
+}
+
+export interface IExecuteBeanOptions {
+  locale?: keyof ILocalInfos;
+  subdomain?: string | null | undefined;
+  transaction?: boolean;
+  instance?: boolean;
 }
