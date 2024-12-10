@@ -1,10 +1,10 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 import url from 'url';
 
 @Service()
-export class ServiceTools extends BeanBase {
+export class ServiceTools extends BeanBase<ScopeModule> {
   async submit({ links, config }: any) {
     for (const target in config.submit) {
       const targetConfig = config.submit[target];
@@ -23,15 +23,11 @@ export class ServiceTools extends BeanBase {
     }
     // queue
     this.ctx.tail(() => {
-      this.ctx.meta.util.queuePush({
-        module: __ThisModule__,
-        queueName: 'submit',
-        data: {
-          target,
-          targetConfig,
-          hostname,
-          links,
-        },
+      this.scope.queue.submit.push({
+        target,
+        targetConfig,
+        hostname,
+        links,
       });
     });
   }

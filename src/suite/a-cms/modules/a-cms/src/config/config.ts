@@ -1,11 +1,3 @@
-// queues
-const queues = {
-  render: {
-    bean: 'render',
-    concurrency: true,
-  },
-};
-
 const cmsSite = {
   base: {
     title: 'my blog',
@@ -63,7 +55,6 @@ import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    queues,
     // article
     article: {
       trim: {

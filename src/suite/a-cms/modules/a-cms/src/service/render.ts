@@ -1,8 +1,8 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 @Service()
-export class ServiceRender extends BeanBase {
+export class ServiceRender extends BeanBase<ScopeModule> {
   async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
     // atomClass
     const { key, atomClass, options } = await this.app.bean.atom._prepareKeyAndAtomAndAtomClass({
@@ -50,18 +50,10 @@ export class ServiceRender extends BeanBase {
     }
     this.ctx.tail(async () => {
       // queue
-      await this.ctx.meta.util.queuePushAsync({
-        module: __ThisModule__,
-        queueName: 'render',
-        queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-        data: {
-          queueAction: 'deleteArticle',
-          atomClass,
-          key,
-          article,
-          inner,
-        },
-      });
+      await this.scope.queue.render.pushAsync(
+        { queueAction: 'deleteArticle', atomClass, key, article, inner },
+        { queueNameSub: `${atomClass.module}:${atomClass.atomClassName}` },
+      );
     });
   }
 
@@ -71,18 +63,12 @@ export class ServiceRender extends BeanBase {
     }
     this.ctx.tail(() => {
       // queue
-      this.ctx.meta.util.queuePush({
-        module: __ThisModule__,
-        queueName: 'render',
-        queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-        data: {
-          queueAction: 'deleteArticle',
-          atomClass,
-          key,
-          article,
-          inner,
+      this.scope.queue.render.push(
+        { queueAction: 'deleteArticle', atomClass, key, article, inner },
+        {
+          queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
         },
-      });
+      );
     });
   }
 
@@ -92,17 +78,10 @@ export class ServiceRender extends BeanBase {
     }
     this.ctx.tail(async () => {
       // queue
-      await this.ctx.meta.util.queuePushAsync({
-        module: __ThisModule__,
-        queueName: 'render',
-        queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-        data: {
-          queueAction: 'renderArticle',
-          atomClass,
-          key,
-          inner,
-        },
-      });
+      await this.scope.queue.render.pushAsync(
+        { queueAction: 'renderArticle', atomClass, key, inner },
+        { queueNameSub: `${atomClass.module}:${atomClass.atomClassName}` },
+      );
     });
   }
 
@@ -112,17 +91,10 @@ export class ServiceRender extends BeanBase {
     }
     this.ctx.tail(() => {
       // queue
-      this.ctx.meta.util.queuePush({
-        module: __ThisModule__,
-        queueName: 'render',
-        queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-        data: {
-          queueAction: 'renderArticle',
-          atomClass,
-          key,
-          inner,
-        },
-      });
+      this.scope.queue.render.push(
+        { queueAction: 'renderArticle', atomClass, key, inner },
+        { queueNameSub: `${atomClass.module}:${atomClass.atomClassName}` },
+      );
     });
   }
 }

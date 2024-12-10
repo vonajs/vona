@@ -77,31 +77,25 @@ export class ServiceSite extends BeanBase<ScopeModule> {
 
   buildLanguagesQueue({ atomClass, progressId }: any) {
     // queue
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'render',
-      queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-      data: {
-        queueAction: 'buildLanguages',
-        atomClass,
-        progressId,
-      },
-    });
+    this.scope.queue.render.push(
+      { queueAction: 'buildLanguages', atomClass, progressId },
+      { queueNameSub: `${atomClass.module}:${atomClass.atomClassName}` },
+    );
   }
 
   buildLanguageQueue({ atomClass, language, progressId }: any) {
     // queue
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'render',
-      queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
-      data: {
+    this.scope.queue.render.push(
+      {
         queueAction: 'buildLanguage',
         atomClass,
         language,
         progressId,
       },
-    });
+      {
+        queueNameSub: `${atomClass.module}:${atomClass.atomClassName}`,
+      },
+    );
   }
 
   async getStats({ atomClass, languages }: any) {

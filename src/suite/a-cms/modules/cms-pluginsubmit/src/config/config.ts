@@ -1,15 +1,7 @@
-import { VonaApplication, IModuleConfigQueue } from 'vona';
-
-// queues
-const queues = {
-  submit: {
-    bean: 'submit',
-  } as IModuleConfigQueue,
-};
+import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    queues,
     // plugin
     plugin: {
       submit: {

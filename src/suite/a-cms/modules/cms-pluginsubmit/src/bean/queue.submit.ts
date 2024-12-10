@@ -1,15 +1,29 @@
-import { Bean, BeanBase } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'queue' })
-export class QueueSubmit extends BeanBase {
-  async execute(context) {
-    const { target, targetConfig, hostname, links } = context.data;
+export type TypeQueueSubmitJobData = {
+  target: any;
+  targetConfig: any;
+  hostname: any;
+  links: any;
+};
+
+export type TypeQueueSubmitJobResult = void;
+
+@Queue()
+export class QueueSubmit
+  extends BeanQueueBase<ScopeModule, TypeQueueSubmitJobData, TypeQueueSubmitJobResult>
+  implements IQueueExecute<TypeQueueSubmitJobData, TypeQueueSubmitJobResult>
+{
+  async execute(data: TypeQueueSubmitJobData, _options?: IQueuePushOptions): Promise<TypeQueueSubmitJobResult> {
+    const { target, targetConfig, hostname, links } = data;
     if (target === 'baidu') {
       await this._queueSubmitBaidu({ target, targetConfig, hostname, links });
     }
   }
 
-  async _queueSubmitBaidu({ targetConfig, hostname, links }: any) {
+  private async _queueSubmitBaidu({ targetConfig, hostname, links }: any) {
     // submit
     const url = `http://data.zz.baidu.com/urls?site=${hostname}&token=${targetConfig.token}`;
     const options = {

@@ -1,9 +1,30 @@
-import { Bean, BeanBase } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+import { ScopeModule } from '../.metadata/this.js';
 
-@Bean({ scene: 'queue' })
-export class QueueRender extends BeanBase {
-  async execute(context) {
-    const data = context.data;
+export type TypeQueueRenderJobData =
+  | {
+      queueAction: 'buildLanguage';
+      atomClass;
+      language;
+      progressId;
+    }
+  | {
+      queueAction: 'buildLanguages';
+      atomClass;
+      progressId;
+    }
+  | { queueAction: 'renderArticle'; atomClass; key; inner }
+  | { queueAction: 'deleteArticle'; atomClass; key; article; inner };
+
+export type TypeQueueRenderJobResult = unknown;
+
+@Queue({ concurrency: true })
+export class QueueRender
+  extends BeanQueueBase<ScopeModule, TypeQueueRenderJobData, TypeQueueRenderJobResult>
+  implements IQueueExecute<TypeQueueRenderJobData, TypeQueueRenderJobResult>
+{
+  async execute(data: TypeQueueRenderJobData, _options?: IQueuePushOptions): Promise<TypeQueueRenderJobResult> {
     const queueAction = data.queueAction;
     return await this[queueAction](data);
   }
