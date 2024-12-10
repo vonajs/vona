@@ -74,10 +74,9 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       return await this._runStartupInner(startup, subdomain, options);
     }
     // debounce: lock
-    return await this.app.meta.util.lock({
-      subdomain,
-      resource: `startup.${startupName}`,
-      fn: async () => {
+    return await this.bean.redlock.lock(
+      `startup.${startupName}`,
+      async () => {
         return await this.app.meta.util.executeBean({
           subdomain,
           fn: async () => {
@@ -85,7 +84,10 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
           },
         });
       },
-    });
+      {
+        subdomain,
+      },
+    );
   }
 
   async _runStartupLock(startup: IMiddlewareItem, subdomain?: string, options?: IInstanceStartupOptions) {
