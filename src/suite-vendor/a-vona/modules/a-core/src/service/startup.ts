@@ -7,14 +7,15 @@ import {
   IStartupExecute,
   Service,
 } from 'vona';
+import path from 'path';
+import fse from 'fs-extra';
 import { ScopeModule } from '../.metadata/this.js';
-import { clearResources } from '../common/clearResources.js';
 
 @Service()
 export class ServiceStartup extends BeanBase<ScopeModule> {
   async versionReady() {
     // clear keys
-    await clearResources(this.app);
+    await this._clearResources();
 
     // run startups: not after
     for (const startup of this._startups) {
@@ -142,5 +143,41 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
 
   private get _startups() {
     return this.app.meta.onionStartup.middlewaresEnabled;
+  }
+
+  private async _clearResources() {
+    const app = this.app;
+    if (!app.meta.isTest) return;
+    // clear keys
+    await this._clearRedisKeys(app.redis.get('limiter'), `b_${app.name}:*`);
+    await this._clearRedisKeys(app.redis.get('queue'), `bull_${app.name}:*`);
+    // broadcast channel has subscribed
+    // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);
+    // redlock
+    for (const clientName of app.config.queue.redlock.clients) {
+      await this._clearRedisKeys(app.redis.get(clientName), `redlock_${app.name}:*`);
+    }
+    for (const clientName in app.config.redis.clients) {
+      if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
+      if (clientName.includes('redlock')) continue;
+      const client = app.config.redis.clients[clientName];
+      await this._clearRedisKeys(app.redis.get(clientName), `${client.keyPrefix}*`);
+    }
+    // src/backend/app/public
+    await fse.remove(path.join(app.options.baseDir, 'app/public/1'));
+  }
+
+  private async _clearRedisKeys(redis, pattern) {
+    if (!redis) return;
+    const keyPrefix = redis.options.keyPrefix;
+    const keys = await redis.keys(pattern);
+    const keysDel: string[] = [];
+    for (const fullKey of keys) {
+      const key = keyPrefix ? fullKey.substr(keyPrefix.length) : fullKey;
+      keysDel.push(key);
+    }
+    if (keysDel.length > 0) {
+      await redis.del(keysDel);
+    }
   }
 }
