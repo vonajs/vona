@@ -3,7 +3,6 @@ import path from 'path';
 import { URL } from 'url';
 import is from 'is-type-of';
 import * as security from 'egg-security';
-import Redlock from 'redlock';
 import * as uuid from 'uuid';
 import { Request } from 'egg';
 import {
@@ -318,59 +317,6 @@ export class AppUtil extends BeanSimple {
       }
     }
     return res;
-  }
-
-  async lock({
-    subdomain,
-    resource,
-    fn,
-    options,
-    redlock,
-  }: {
-    subdomain?: string;
-    resource: string;
-    fn: () => Promise<any>;
-    options?;
-    redlock?: Redlock;
-  }) {
-    // resource
-    const _lockResource = `redlock_${this.app.name}:${subdomainDesp(subdomain)}:${resource}`;
-    // options
-    const _lockOptions = Object.assign({}, this.app.config.queue.redlock.options, options);
-    // redlock
-    if (!redlock) {
-      redlock = this.app.meta.redlock.create(_lockOptions);
-    }
-    let _lock = await redlock.lock(_lockResource, _lockOptions.lockTTL);
-    // timer
-    let _lockTimer = null as any;
-    const _lockDone = () => {
-      if (_lockTimer) {
-        clearInterval(_lockTimer);
-        _lockTimer = null;
-      }
-    };
-    _lockTimer = setInterval(() => {
-      _lock
-        .extend(_lockOptions.lockTTL)
-        .then(lock => {
-          _lock = lock;
-        })
-        .catch(err => {
-          this.app.logger.error(err);
-          _lockDone();
-        });
-    }, _lockOptions.lockTTL / 2);
-    try {
-      const res = await fn();
-      _lockDone();
-      await _lock.unlock();
-      return res;
-    } catch (err) {
-      _lockDone();
-      await _lock.unlock();
-      throw err;
-    }
   }
 
   checkMiddlewareOptionsMeta(meta?: IMiddlewareOptionsMeta) {

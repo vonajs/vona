@@ -51,7 +51,6 @@
     "@types/retry": "^0.12.5",
     "@zhennann/egg-passport": "^2.1.5",
     "async": "^3.2.0",
-    "bottleneck": "^2.19.5",
     "bullmq": "^2.3.1",
     "chalk": "^3.0.0",
     "chokidar": "^3.5.2",
