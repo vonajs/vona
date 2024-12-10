@@ -48,7 +48,7 @@ export interface IDecoratorMiddlewareOptionsGlobal extends IMiddlewareBase {
 }
 
 export interface IMiddlewareItem<OPTIONS = unknown, MIDDLEWARENAME = string, T = unknown> {
-  name: string;
+  name: MIDDLEWARENAME;
   options: IDecoratorMiddlewareOptionsGlobal;
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
   fromConfig?: boolean;

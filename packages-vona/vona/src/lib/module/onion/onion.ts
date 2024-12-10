@@ -1,5 +1,5 @@
 import is from 'is-type-of';
-import { swapDeps } from '@cabloy/deps';
+import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 import pathMatching from 'egg-path-matching';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import {
@@ -32,10 +32,10 @@ const __adapter = (_context, chain) => {
 
 const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
 
-export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
+export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
   sceneName: string;
   sceneMeta: OnionSceneMeta;
-  middlewaresNormal: Record<string, IMiddlewareItem<OPTIONS, MIDDLEWARENAME>>;
+  middlewaresNormal: Record<MIDDLEWARENAME, IMiddlewareItem<OPTIONS, MIDDLEWARENAME>>;
   middlewaresGlobal: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[];
 
   private [SymbolMiddlewaresEnabled]: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[];
@@ -235,7 +235,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
       if (item.fromConfig) {
-        optionsDynamic = ctx.meta.onionDynamic?.[item.name];
+        optionsDynamic = ctx.meta.onionDynamic?.[item.name as any];
       } else {
         optionsDynamic = ctx.meta.onionDynamic?.[item.beanOptions.scene]?.[item.name];
       }
@@ -284,7 +284,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
   }
 
   private _swapMiddlewares(middlewares: IMiddlewareItem<OPTIONS, MIDDLEWARENAME>[]) {
-    swapDeps(middlewares, {
+    swapDeps(middlewares as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
         const middlewareOptions = cast<IMiddlewareItem<OPTIONS, MIDDLEWARENAME>>(item).beanOptions
@@ -296,7 +296,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
 
   private _loadMiddlewares() {
     const middlewaresAll = this._loadMiddlewaresAll();
-    this.middlewaresNormal = {};
+    this.middlewaresNormal = {} as Record<MIDDLEWARENAME, IMiddlewareItem<OPTIONS, MIDDLEWARENAME>>;
     this.middlewaresGlobal = [];
     // load
     for (const item of middlewaresAll) {
@@ -332,7 +332,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
     if (!middlewares) return;
     for (const key in middlewares) {
       const beanOptions = middlewares[key];
-      const name = key.replace(`.${this.sceneName}.`, ':');
+      const name = key.replace(`.${this.sceneName}.`, ':') as MIDDLEWARENAME;
       // options
       const optionsConfig = this.app.config.onion[beanOptions.scene]?.[name];
       if (beanOptions.optionsPrimitive) {
@@ -376,7 +376,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME> extends BeanSimple {
       beanOptions.options = middlewareConfig;
       // push
       middlewaresAll.push({
-        name: middlewareKey,
+        name: middlewareKey as MIDDLEWARENAME,
         options: middlewareConfig,
         beanOptions: beanOptions as any,
         fromConfig: true,
