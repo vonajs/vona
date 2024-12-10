@@ -1,22 +1,17 @@
 import fse from 'fs-extra';
 import path from 'path';
 import { URL } from 'url';
-import is from 'is-type-of';
 import * as security from 'egg-security';
 import * as uuid from 'uuid';
 import {
   VonaContext,
-  cast,
   IModule,
-  PowerPartial,
   TypeMonkeyName,
   IModuleInfo,
   parseInfo,
   IMiddlewareOptionsMeta,
 } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { ILocalInfos } from '../bean/index.js';
-import { appResource } from '../core/resource.js';
 import { compose as _compose, composeAsync as _composeAsync } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
 
