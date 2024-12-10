@@ -80,11 +80,14 @@ export class ServiceVersion extends BeanBase {
 
     // check if role dirty for init/test
     if (options.scene === 'init' || options.scene === 'test') {
-      await this.ctx.meta.util.executeBean({
-        subdomain: options.subdomain,
-        beanFullName: `${__ThisModule__}.service.version`,
-        fn: '__after',
-      });
+      await this.bean.executor.newCtx(
+        async () => {
+          await this.__after();
+        },
+        {
+          subdomain: options.subdomain,
+        },
+      );
     }
 
     // ok
@@ -145,14 +148,15 @@ export class ServiceVersion extends BeanBase {
 
     if (options.scene === 'test') {
       // test module
-      await this.ctx.meta.util.executeBean({
-        subdomain: options.subdomain,
-        beanModule: module.info.relativeName,
-        transaction: true,
-        fn: async () => {
+      await this.bean.executor.newCtx(
+        async () => {
           await this.__testModuleTransaction(module, fileVersionNew, options);
         },
-      });
+        {
+          subdomain: options.subdomain,
+          transaction: true,
+        },
+      );
     }
   }
 
@@ -258,6 +262,7 @@ export class ServiceVersion extends BeanBase {
   }
 
   protected async __after() {
+    // todo: raise event
     await this.app.bean.role.build();
   }
 
