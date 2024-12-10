@@ -1,4 +1,4 @@
-import { IBroadcastExecuteContext } from '../../../types/index.js';
+import { cast, IBroadcastExecuteContext } from '../../../types/index.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 export class BroadcastClient extends BeanSimple {
@@ -55,13 +55,18 @@ export class BroadcastClient extends BeanSimple {
     const instanceStarted = app.meta.util.instanceStarted(subdomain);
     if (!instanceStarted && broadcast.config.instance !== false) return;
     // execute
-    return await app.meta.util.executeBean({
-      locale,
-      subdomain,
-      context,
-      beanModule: bean.module,
-      beanFullName: `${bean.module}.broadcast.${bean.name}`,
-      transaction: broadcast.config.transaction,
-    });
+    // todo: 需要重构
+    return await cast(this.bean).executor.newCtx(
+      async () => {
+        const beanFullName = `${bean.module}.broadcast.${bean.name}`;
+        const beanInstance = this.app.bean._getBean(beanFullName as any);
+        return await cast(beanInstance).execute(context);
+      },
+      {
+        locale,
+        subdomain,
+        transaction: broadcast.config.transaction,
+      },
+    );
   }
 }
