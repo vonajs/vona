@@ -3,6 +3,14 @@ import { IExecutorMockCtxOptions, IRunInAnonymousContextScopeOptions } from '../
 
 @Bean()
 export class BeanExecutor extends BeanBase {
+  runInBackground(fn: FunctionAsync<void>) {
+    this.ctx.runInBackground(async () => {
+      return await this.newCtxIsolate(async () => {
+        return await fn();
+      });
+    });
+  }
+
   async runInAnonymousContextScope<RESULT>(
     fn: FunctionAsync<RESULT>,
     options?: IRunInAnonymousContextScopeOptions,
@@ -46,6 +54,7 @@ export class BeanExecutor extends BeanBase {
       return res;
     }, req as any);
   }
+
   async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: IExecutorMockCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     if (!this.ctx) {

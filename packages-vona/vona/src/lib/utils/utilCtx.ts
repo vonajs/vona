@@ -1,8 +1,5 @@
 import performActionFn from './performAction.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { VonaContext, PowerPartial } from '../../types/index.js';
-import { IExecuteBeanCallback } from './util.js';
-import { ILocalInfos } from '../bean/resource/locale/type.js';
 import { PerformActionParams } from './type.js';
 
 export class CtxUtil extends BeanSimple {
