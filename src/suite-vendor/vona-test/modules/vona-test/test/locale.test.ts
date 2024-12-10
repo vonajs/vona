@@ -3,7 +3,8 @@ import { app, assert, mockModuleInfo } from 'vona-mock';
 describe.only('locale.test.ts', () => {
   it('action:locale', async () => {
     const moduleInfo = mockModuleInfo();
-    await app.meta.mockUtil.mockCtx({ locale: 'zh-cn' }, async ctx => {
+    await app.meta.mockUtil.mockCtx({ locale: 'zh-cn' }, async () => {
+      const ctx = app.ctx;
       // ctx.locale
       assert.equal(ctx.locale, 'zh-cn');
       // getText
@@ -16,7 +17,7 @@ describe.only('locale.test.ts', () => {
   });
 
   it('action:locale:plurals', async () => {
-    await app.meta.mockUtil.mockCtx(async _ctx => {
+    await app.meta.mockUtil.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
       // english

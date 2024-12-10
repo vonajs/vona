@@ -30,8 +30,8 @@
 
 - **Feat**
 
-- 重构 ctx.meta.util.performAction
-- 采用 ctx.meta.util.performAction 重构单元测试用例
+- 重构 ctx.app.bean.executor.performAction
+- 采用 ctx.app.bean.executor.performAction 重构单元测试用例
 - error code：增加模块名称作为前缀，便于排查问题来源
 
 - **Refactor**

@@ -9,7 +9,7 @@ describe('test/controller/test.test.js', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('site/setConfigSite', false),
@@ -39,7 +39,7 @@ describe('test/controller/test.test.js', () => {
     // login as root
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
-    const data = await ctx.meta.util.performAction({
+    const data = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: mockUrl('site/buildLanguages', false),
@@ -108,7 +108,7 @@ describe('test/controller/test.test.js', () => {
     ];
     for (const article of articles) {
       // create
-      const keyDraft = await ctx.meta.util.performAction({
+      const keyDraft = await ctx.app.bean.executor.performAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/write',
@@ -126,7 +126,7 @@ describe('test/controller/test.test.js', () => {
       assert(!!keyDraft);
 
       // submit
-      const data = await ctx.meta.util.performAction({
+      const data = await ctx.app.bean.executor.performAction({
         innerAccess: false,
         method: 'post',
         url: '/api/a/base/atom/submit',
@@ -142,7 +142,7 @@ describe('test/controller/test.test.js', () => {
       // special test
       if (article.special) {
         // delete
-        await ctx.meta.util.performAction({
+        await ctx.app.bean.executor.performAction({
           innerAccess: false,
           method: 'post',
           url: '/api/a/base/atom/delete',

@@ -7,7 +7,7 @@ const options = {
   ],
 };
 // tags
-const tags = await ctx.meta.util.performAction({
+const tags = await ctx.app.bean.executor.performAction({
   method: 'post',
   url: '/api/a/base/tag/list',
   body: {

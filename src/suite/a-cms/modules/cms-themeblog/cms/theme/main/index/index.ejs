@@ -18,7 +18,7 @@
             mode: 'default',
           };
           // select
-          const data=await ctx.meta.util.performAction({
+          const data=await ctx.app.bean.executor.performAction({
             method:'post',
             url: '/api/a/cms/article/list',
             body: {

@@ -15,7 +15,7 @@ describe.skip('test/controller/test.test.js', () => {
     await ctx.meta.mockUtil.login({ auth: 'root' });
 
     // create
-    const keyDraft = await ctx.meta.util.performAction({
+    const keyDraft = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/write',
@@ -29,7 +29,7 @@ describe.skip('test/controller/test.test.js', () => {
     assert(!!keyDraft);
 
     // submit
-    let data = await ctx.meta.util.performAction({
+    let data = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/submit',
@@ -43,7 +43,7 @@ describe.skip('test/controller/test.test.js', () => {
     assert(!!keyFormal);
 
     // read
-    data = await ctx.meta.util.performAction({
+    data = await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/read',
@@ -55,7 +55,7 @@ describe.skip('test/controller/test.test.js', () => {
     assert(!!data);
 
     // delete
-    await ctx.meta.util.performAction({
+    await ctx.app.bean.executor.performAction({
       innerAccess: false,
       method: 'post',
       url: '/api/a/base/atom/delete',
