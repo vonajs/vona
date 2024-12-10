@@ -1,9 +1,11 @@
-import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean } from 'vona';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { Bean, cast } from 'vona';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
+import * as Bull from 'bullmq';
+import { TypeQueueStartEventTimerJobData } from './queue.startEventTimer.js';
 
 @Bean({ scene: 'flow.node' })
-export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
+export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
   async deploy({ deploy, flowDefId, node }: any) {
     if (deploy) {
       await this._addSchedule({ flowDefId, node });
@@ -18,27 +20,27 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     if (!repeat.every && !repeat.cron) return;
     // push
     const jobName = this._getJobName(flowDefId, node);
-    this.ctx.meta.util.queuePush({
-      module: __ThisModule__,
-      queueName: 'startEventTimer',
-      jobName,
-      jobOptions: {
-        repeat,
-      },
-      data: {
+    this.scope.queue.startEventTimer.push(
+      {
         flowDefId,
         node,
       },
-    });
+      {
+        jobName,
+        jobOptions: {
+          repeat,
+        },
+      },
+    );
   }
 
-  async _runSchedule(context) {
-    const { flowDefId, node } = context.data;
+  async _runSchedule(data: TypeQueueStartEventTimerJobData, job?: Bull.Job) {
+    const { flowDefId, node } = data;
     // ignore on test
     if (this.ctx.app.meta.isTest) return;
     // check if valid
-    if (!(await this._checkJobValid(context))) {
-      await this._deleteSchedule(context);
+    if (job && !(await this._checkJobValid(data, job))) {
+      await this._deleteSchedule(job);
       return;
     }
     // bean/parameterExpression
@@ -61,9 +63,8 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     }
   }
 
-  async _checkJobValid(context) {
-    const job = context.job;
-    const { flowDefId, node } = context.data;
+  async _checkJobValid(data: TypeQueueStartEventTimerJobData, job: Bull.Job) {
+    const { flowDefId, node } = data;
     // flowDef
     const flowDef = await this.app.bean.flowDef.getById({ flowDefId });
     if (!flowDef) return false;
@@ -85,10 +86,9 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     return true;
   }
 
-  async _deleteSchedule(context) {
-    const job = context.job;
+  async _deleteSchedule(job: Bull.Job) {
     const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
-    const repeat = await job.queue.repeat;
+    const repeat = await cast(job).queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
 

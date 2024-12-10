@@ -30,6 +30,7 @@ declare module 'vona' {
 /** beans: end */
 /** queue: begin */
 export * from '../bean/queue.startEventTimer.js';
+export * from '../bean/queue.startEventTimer_.js';
 
 import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {

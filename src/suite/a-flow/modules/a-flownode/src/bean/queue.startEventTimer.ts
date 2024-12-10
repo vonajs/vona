@@ -1,10 +1,26 @@
-import { Bean, BeanBase } from 'vona';
+import { Queue } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueueJobContext } from 'vona-module-a-queue';
+import * as Bull from 'bullmq';
+import { ScopeModule } from '../.metadata/this.js';
 import { FlowNodeStartEventTimer } from './flow.node.startEventTimer.js';
 
-@Bean({ scene: 'queue' })
-export class QueueStartEventTimer extends BeanBase {
-  async execute(context) {
+export type TypeQueueStartEventTimerJobData = {
+  flowDefId: number;
+  node: any;
+};
+
+export type TypeQueueStartEventTimerJobResult = void;
+
+@Queue({ concurrency: true })
+export class QueueStartEventTimer
+  extends BeanQueueBase<ScopeModule, TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>
+  implements IQueueExecute<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>
+{
+  async execute(
+    context: IQueueJobContext<TypeQueueStartEventTimerJobData>,
+    job: Bull.Job,
+  ): Promise<TypeQueueStartEventTimerJobResult> {
     const _nodeBaseBean = this.app.bean._newBean(FlowNodeStartEventTimer);
-    await _nodeBaseBean._runSchedule(context);
+    await _nodeBaseBean._runSchedule(context.data, job);
   }
 }
