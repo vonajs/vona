@@ -10,7 +10,7 @@ export interface IDecoratorQueueOptions extends IMiddlewareBaseEnable {
   options?: {
     queue?: Bull.QueueOptions;
     worker?: Bull.WorkerOptions;
-    redlock?: Redlock.Options;
+    redlock?: Redlock.Options & { lockTTL?: number };
     job?: Bull.JobsOptions;
   };
 }

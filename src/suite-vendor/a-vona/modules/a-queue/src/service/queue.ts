@@ -61,6 +61,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     const workerOptions = queueConfig?.options?.worker;
     const redlockOptions = queueConfig?.options?.redlock;
     const _redlockOptions = Object.assign({}, this.$scope.redlock.config.redlock.options, redlockOptions);
+    const _lockTTL = redlockOptions?.lockTTL ?? this.$scope.redlock.config.redlock.lockTTL;
 
     // redlock
     if (!queueConfig?.concurrency) {
@@ -92,6 +93,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
           {
             // subdomain: job.data.subdomain, // need not
             redlock: _worker.redlock,
+            lockTTL: _lockTTL,
           },
         );
       },
