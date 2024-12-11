@@ -1,9 +1,10 @@
-import { app, assert } from 'vona-mock';
+import assert from 'assert';
+import { app } from 'vona-mock';
 
 describe('<%=argv.name%>.test.ts', () => {
   it('action:<%=argv.name%>', async () => {
-    await app.meta.mockUtil.mockCtx(async ctx => {
-      assert.equal(ctx.subdomain, '');
+    await app.bean.executor.mockCtx(async () => {
+      assert.equal(this.ctx.subdomain, '');
     });
   });
 });
