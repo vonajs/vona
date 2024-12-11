@@ -3,12 +3,12 @@ import { BeanRedlockBase, IRedlockLockIsolateOptions, IRedlockLockOptions } from
 
 export interface Meta<%=argv.beanNameCapitalize%> {
   lock<RESULT>(
-    resource: 'authProvider.register',
+    resource: 'name',
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockOptions,
   ): Promise<RESULT>;
   lockIsolate<RESULT>(
-    resource: 'authProvider.register',
+    resource: 'name',
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockIsolateOptions,
   ): Promise<RESULT>;

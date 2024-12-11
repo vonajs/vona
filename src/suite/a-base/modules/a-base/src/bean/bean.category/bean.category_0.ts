@@ -275,7 +275,7 @@ export class BeanCategory0 extends BeanBase<ScopeModule> {
 
   async _register({ atomClass, language, categoryName, categoryIdParent }: any) {
     atomClass = await this.app.bean.atomClass.get(atomClass);
-    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.category.register.${atomClass.id}`, async () => {
+    return await this.scope.redlock.lockIsolate(`category.register.${atomClass.id}`, async () => {
       return await this._registerLock({ atomClass, language, categoryName, categoryIdParent });
     });
   }

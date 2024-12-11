@@ -363,7 +363,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async _register({ roleName, roleIdParent }: any) {
-    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.role.register`, async () => {
+    return await this.scope.redlock.lockIsolate('role.register', async () => {
       return await this._registerLock({ roleName, roleIdParent });
     });
   }

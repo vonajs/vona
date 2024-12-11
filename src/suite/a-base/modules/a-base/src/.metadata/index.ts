@@ -296,11 +296,13 @@ declare module 'vona' {
 }
 /** controller: end */
 /** meta: begin */
+export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.status.js';
 
 import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
+    'a-base:redlock': never;
     'a-base:status': never;
   }
 }
@@ -370,6 +372,9 @@ export * from '../atom/userResourceRight.js';
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** summerCache: begin */
 import { SummerCacheAtomClassInner } from '../bean/summerCache.atomClassInner.js';
 import { SummerCacheRoleParentsOfUser } from '../bean/summerCache.roleParentsOfUser.js';
@@ -633,6 +638,7 @@ export interface ScopeModuleABase {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
   status: MetaStatus;
+  redlock: MetaRedlock;
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;

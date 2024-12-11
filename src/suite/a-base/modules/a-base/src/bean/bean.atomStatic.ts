@@ -1,9 +1,9 @@
-import { __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 import { BeanAtomBase } from './bean.atomBase.js';
 
 @Bean()
-export class BeanAtomStatic extends BeanModuleScopeBase {
+export class BeanAtomStatic extends BeanModuleScopeBase<ScopeModule> {
   async loadAllAtomStatics() {
     const modules = this._loadAllAtomStatics_prepare();
     const count = modules.length;
@@ -304,8 +304,8 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
   }
 
   async _updateRevision({ atomClassBase, atomClass, atomIdFormal, item }: any) {
-    return await this.bean.redlock.lockIsolate(
-      `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
+    return await this.scope.redlock.lockIsolate(
+      `atomStatic.register.${item.atomStaticKey}`,
       async () => {
         return await this._updateRevisionLock({ atomClassBase, atomClass, atomIdFormal, item });
       },
@@ -375,8 +375,8 @@ export class BeanAtomStatic extends BeanModuleScopeBase {
   }
 
   async _register({ atomClassBase, atomClass, item }: any) {
-    return await this.bean.redlock.lockIsolate(
-      `${__ThisModule__}.atomStatic.register.${item.atomStaticKey}`,
+    return await this.scope.redlock.lockIsolate(
+      `atomStatic.register.${item.atomStaticKey}`,
       async () => {
         return await this._registerLock({ atomClassBase, atomClass, item });
       },
