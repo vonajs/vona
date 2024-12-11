@@ -96,22 +96,20 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
   }
 
   async _deleteSchedule(job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
-      job.data!.options!.jobName!,
-      job.data!.options!.jobOptions!.repeat!,
-    );
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.name, job.opts.repeat!);
     const repeat = await cast(job).queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
 
-  async _deleteSchedule2({ flowDefId, node }: any) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
-      this._getJobName(flowDefId, node),
-      this._getJobRepeat(node),
-    );
-    const queue = this.scope.queue.startEventTimer.getQueue();
-    const repeat = await queue.repeat;
-    await repeat.removeRepeatableByKey(jobKeyActive);
+  // cannot remove job, because no job info
+  async _deleteSchedule2({ flowDefId: _flowDefId, node: _node }: any) {
+    // const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
+    //   this._getJobName(flowDefId, node),
+    //   this._getJobRepeat(node),
+    // );
+    // const queue = this.scope.queue.startEventTimer.getQueue();
+    // const repeat = await queue.repeat;
+    // await repeat.removeRepeatableByKey(jobKeyActive);
   }
 
   _getJobName(flowDefId, node) {
