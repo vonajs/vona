@@ -1,4 +1,3 @@
-import { AppMockUtil } from '../utils/mockUtil.js';
 import { AppReload } from '../module/reload/reload.js';
 import { AppUtil, uuidv4 } from '../utils/util.js';
 import { BeanSimple } from '../bean/beanSimple.js';
@@ -65,7 +64,6 @@ export class AppMeta extends BeanSimple {
   locale: AppLocale;
   text: IModuleLocaleText;
   util: AppUtil;
-  mockUtil: AppMockUtil;
   scopeContainer: BeanScopeContainer;
   reload: AppReload;
   messenger: AppMessenger;
@@ -131,9 +129,6 @@ export class AppMeta extends BeanSimple {
 
     // util
     this.util = this.bean._newBean(AppUtil);
-
-    // mockUtil
-    this.mockUtil = this.bean._newBean(AppMockUtil);
 
     // scopeContainer
     this.scopeContainer = this.bean._newBean(BeanScopeContainer);
