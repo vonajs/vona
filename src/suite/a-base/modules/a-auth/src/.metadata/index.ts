@@ -47,6 +47,16 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-auth:redlock': never;
+  }
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheAuthProviders.js';
 export * from '../bean/startup.registerPassport.js';
