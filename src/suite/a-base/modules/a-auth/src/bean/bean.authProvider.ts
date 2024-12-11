@@ -24,7 +24,7 @@ export class BeanAuthProvider extends BeanBase<ScopeModule> {
     if (res) return res;
     if (!module || !providerName) throw new Error('Invalid arguments');
     // lock
-    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.authProvider.register`, async () => {
+    return await this.scope.redlock.lockIsolate('authProvider.register', async () => {
       return await this._registerAuthProviderLock({ module, providerName });
     });
   }

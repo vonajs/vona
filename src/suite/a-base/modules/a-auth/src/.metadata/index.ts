@@ -71,6 +71,9 @@ declare module 'vona' {
   }
 }
 /** startup: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** entities: begin */
 import { EntityAuth } from '../entity/auth.js';
 import { EntityAuthProvider } from '../entity/authProvider.js';
@@ -131,6 +134,7 @@ export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  redlock: MetaRedlock;
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;

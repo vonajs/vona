@@ -11,6 +11,7 @@ const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 const BeanModuleStatus = Symbol('BeanScopeBase#BeanModuleStatus');
+const BeanModuleRedlock = Symbol('BeanScopeBase#BeanModuleRedlock');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
@@ -18,6 +19,7 @@ export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleBean]: BeanScopeBean;
   private [BeanModuleUtil]: BeanScopeUtil;
   private [BeanModuleStatus]: unknown;
+  private [BeanModuleRedlock]: unknown;
   private __scenes: Record<string, BeanScopeScene> = {};
 
   get module(): IModule {
@@ -71,6 +73,12 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleStatus] = this.bean._getBean(`${moduleBelong}.meta.status` as any);
       }
       return this[BeanModuleStatus];
+    }
+    if (prop === 'redlock') {
+      if (!this[BeanModuleRedlock]) {
+        this[BeanModuleRedlock] = this.bean._getBean(`${moduleBelong}.meta.redlock` as any);
+      }
+      return this[BeanModuleRedlock];
     }
     // scene
     if (!this.__scenes[prop]) {

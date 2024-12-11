@@ -5,7 +5,7 @@ import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
-import { generateMetaStatus } from './toolsMetadata/generateMetaStatus.js';
+import { generateMetaStatus, generateMetaRedlock } from './toolsMetadata/generateMetaStatus.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
 import { generateModels } from './toolsMetadata/generateModels.js';
@@ -102,6 +102,9 @@ export class CliToolsMetadata extends BeanCliBase {
     // meta status
     const contentMetaStatus = await generateMetaStatus(moduleName, modulePath);
     content += contentMetaStatus;
+    // meta redlock
+    const contentMetaRedlock = await generateMetaRedlock(moduleName, modulePath);
+    content += contentMetaRedlock;
     // summerCaches
     const contentSummerCaches = await generateScopeResources('summerCache', moduleName, modulePath);
     content += contentSummerCaches;
@@ -140,6 +143,7 @@ export class CliToolsMetadata extends BeanCliBase {
       locales: contentLocales,
       constants: contentConstants,
       status: contentMetaStatus,
+      redlock: contentMetaRedlock,
       services: contentServices,
       models: contentModels,
       entities: contentEntities,

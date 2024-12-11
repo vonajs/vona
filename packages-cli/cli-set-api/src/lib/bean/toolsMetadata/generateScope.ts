@@ -6,6 +6,7 @@ export interface GenerateScopeOptions {
   locales: string;
   constants: string;
   status: string;
+  redlock: string;
   services: string;
   models: string;
   entities: string;
@@ -47,6 +48,9 @@ export async function generateScope(moduleName: string, relativeNameCapitalize: 
   }
   if (options.status) {
     contentRecords.push('status: MetaStatus;');
+  }
+  if (options.redlock) {
+    contentRecords.push('redlock: MetaRedlock;');
   }
   if (options.services) {
     contentRecords.push('service: IModuleService;');

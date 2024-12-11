@@ -11,3 +11,15 @@ import { MetaStatus } from '../bean/meta.status.js';
 `;
   return content;
 }
+
+export async function generateMetaRedlock(_moduleName: string, modulePath: string) {
+  const pattern = `${modulePath}/src/bean/meta.redlock.ts`;
+  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  if (files.length === 0) return '';
+  // combine
+  const content = `/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
+`;
+  return content;
+}

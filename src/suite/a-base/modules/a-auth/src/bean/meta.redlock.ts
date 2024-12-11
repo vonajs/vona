@@ -1,7 +1,12 @@
 import { FunctionAsync, Meta } from 'vona';
-import { BeanRedlockBase, IRedlockLockIsolateOptions } from 'vona-module-a-redlock';
+import { BeanRedlockBase, IRedlockLockIsolateOptions, IRedlockLockOptions } from 'vona-module-a-redlock';
 
 export interface MetaRedlock {
+  lock<RESULT>(
+    resource: 'authProvider.register',
+    fn: FunctionAsync<RESULT>,
+    options?: IRedlockLockOptions,
+  ): Promise<RESULT>;
   lockIsolate<RESULT>(
     resource: 'authProvider.register',
     fn: FunctionAsync<RESULT>,
