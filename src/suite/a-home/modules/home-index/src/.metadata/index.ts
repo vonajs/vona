@@ -8,6 +8,16 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** startup: begin */
+export * from '../bean/startup.outputHomeApi.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'home-index:outputHomeApi': IDecoratorStartupOptions;
+  }
+}
+/** startup: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

@@ -332,7 +332,6 @@ export * from '../bean/startup.checkResourceLocales.js';
 export * from '../bean/startup.checkViewHistoryRight.js';
 export * from '../bean/startup.loadAtomStatics.js';
 export * from '../bean/startup.loadSchedules.js';
-export * from '../bean/startup.outputHomeRoute.js';
 
 import { IDecoratorStartupOptions } from 'vona';
 declare module 'vona' {
@@ -341,7 +340,6 @@ declare module 'vona' {
     'a-base:checkViewHistoryRight': IDecoratorStartupOptions;
     'a-base:loadAtomStatics': IDecoratorStartupOptions;
     'a-base:loadSchedules': IDecoratorStartupOptions;
-    'a-base:outputHomeRoute': IDecoratorStartupOptions;
   }
 }
 /** startup: end */

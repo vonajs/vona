@@ -34,6 +34,7 @@
   "dependencies": {
     "@cabloy/module-info": "workspace:^",
     "boxen": "^4.2.0",
+    "chalk": "^3.0.0",
     "egg-born-utils": "^1.2.0"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"

@@ -20,6 +20,9 @@ importers:
       bullmq:
         specifier: ^2.3.1
         version: 2.4.0
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
       knex:
         specifier: ^3.1.0
         version: 3.1.0(mysql2@3.11.5)(pg@8.13.1)
@@ -552,9 +555,6 @@ importers:
       bluebird:
         specifier: ^3.7.2
         version: 3.7.2
-      chalk:
-        specifier: ^3.0.0
-        version: 3.0.0
       commander:
         specifier: ^11.1.0
         version: 11.1.0
@@ -998,6 +998,9 @@ importers:
       boxen:
         specifier: ^4.2.0
         version: 4.2.0
+      chalk:
+        specifier: ^3.0.0
+        version: 3.0.0
       egg-born-utils:
         specifier: ^1.2.0
         version: 1.2.1
@@ -1259,6 +1262,9 @@ importers:
       assert:
         specifier: ^2.1.0
         version: 2.1.0
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
       egg-onerror:
         specifier: ^2.4.0
         version: 2.4.0
