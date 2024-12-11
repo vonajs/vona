@@ -1,4 +1,5 @@
-import { app, mockUrl, assert } from 'vona-mock';
+import assert from 'assert';
+import { app, mockUrl } from 'vona-mock';
 
 describe.only('performAction.test.js', () => {
   it('action:performAction', async () => {
