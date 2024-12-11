@@ -1,12 +1,12 @@
-import { BeanBase, IScheduleExecute, IScheduleJobData, Schedule } from 'vona';
-import * as Bull from 'bullmq';
+import { BeanBase, Schedule } from 'vona';
+import { IScheduleExecute, TypeScheduleJob } from 'vona-module-a-schedule';
 
 @Schedule({ repeat: { every: 3000 } })
 export class ScheduleTest extends BeanBase implements IScheduleExecute {
-  async execute(job?: Bull.Job<IScheduleJobData>) {
+  async execute(job?: TypeScheduleJob) {
     // todo: job.data
     console.log(
-      `----- Schedule Test: iid=${this.ctx.instance.id}, every=${job?.data.jobOptions.repeat.every}, ${new Date()}`,
+      `----- Schedule Test: iid=${this.ctx.instance.id}, every=${job?.data.options?.jobOptions?.repeat?.every}, ${new Date()}`,
     );
   }
 }

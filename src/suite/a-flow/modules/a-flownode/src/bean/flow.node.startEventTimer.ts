@@ -1,8 +1,8 @@
 import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Bean, cast } from 'vona';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
-import * as Bull from 'bullmq';
-import { TypeQueueStartEventTimerJobData } from './queue.startEventTimer.js';
+import { TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult } from './queue.startEventTimer.js';
+import { TypeQueueJob } from 'vona-module-a-queue';
 
 @Bean({ scene: 'flow.node' })
 export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
@@ -34,7 +34,10 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
     );
   }
 
-  async _runSchedule(data: TypeQueueStartEventTimerJobData, job?: Bull.Job) {
+  async _runSchedule(
+    data: TypeQueueStartEventTimerJobData,
+    job?: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>,
+  ) {
     const { flowDefId, node } = data;
     // ignore on test
     if (this.ctx.app.meta.isTest) return;
@@ -63,7 +66,10 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
     }
   }
 
-  async _checkJobValid(data: TypeQueueStartEventTimerJobData, job: Bull.Job) {
+  async _checkJobValid(
+    data: TypeQueueStartEventTimerJobData,
+    job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>,
+  ) {
     const { flowDefId, node } = data;
     // flowDef
     const flowDef = await this.app.bean.flowDef.getById({ flowDefId });
@@ -76,7 +82,10 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
     const nodeConfig = content.process.nodes.find(item => item.id === node.id);
     if (!nodeConfig) return false;
     // check if changed
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
+      job.data!.options!.jobName!,
+      job.data!.options!.jobOptions!.repeat!,
+    );
     const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(
       this._getJobName(flowDefId, nodeConfig),
       this._getJobRepeat(nodeConfig),
@@ -86,8 +95,11 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
     return true;
   }
 
-  async _deleteSchedule(job: Bull.Job) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+  async _deleteSchedule(job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>) {
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
+      job.data!.options!.jobName!,
+      job.data!.options!.jobOptions!.repeat!,
+    );
     const repeat = await cast(job).queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }

@@ -1,10 +1,10 @@
-import { BeanBase, cast, IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, Service } from 'vona';
-import * as Bull from 'bullmq';
+import { BeanBase, cast, IDecoratorScheduleOptions, IScheduleRecord, Service } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
+import { IScheduleExecute, TypeScheduleJob } from '../types/schedule.js';
 
 @Service()
 export class ServiceSchedule extends BeanBase<ScopeModule> {
-  async execute(scheduleName: keyof IScheduleRecord, job?: Bull.Job) {
+  async execute(scheduleName: keyof IScheduleRecord, job?: TypeScheduleJob) {
     // ignore on test
     if (this.app.meta.isTest) return;
     // check if valid
@@ -29,13 +29,16 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     );
   }
 
-  private async __deleteSchedule(job: Bull.Job) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+  private async __deleteSchedule(job: TypeScheduleJob) {
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
+      job.data!.options!.jobName!,
+      job.data!.options!.jobOptions!.repeat!,
+    );
     const repeat = await cast(job).queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
 
-  private __checkJobValid(scheduleName: keyof IScheduleRecord, job: Bull.Job) {
+  private __checkJobValid(scheduleName: keyof IScheduleRecord, job: TypeScheduleJob) {
     // schedule: maybe not exists
     const scheduleItem = this.app.meta.onionSchedule.getMiddlewareItem(scheduleName);
     if (!scheduleItem) return false;
@@ -45,7 +48,10 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     }
     // check if changed
     const scheduleConfig = this.app.meta.onionSchedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
+      job.data!.options!.jobName!,
+      job.data!.options!.jobOptions!.repeat!,
+    );
     const jobNameConfig = this.__getJobName(this.ctx.subdomain, scheduleName);
     const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(jobNameConfig, scheduleConfig!.repeat);
     if (jobKeyActive !== jobKeyConfig) return false;

@@ -1,7 +1,7 @@
 import { IScheduleRecord, Queue } from 'vona';
-import * as Bull from 'bullmq';
 import { ScopeModule } from '../.metadata/this.js';
 import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+import { TypeScheduleJob } from '../types/schedule.js';
 
 export type TypeQueueScheduleJobData = {
   scheduleName: keyof IScheduleRecord;
@@ -17,7 +17,7 @@ export class QueueSchedule
   async execute(
     data: TypeQueueScheduleJobData,
     _options?: IQueuePushOptions,
-    job?: Bull.Job,
+    job?: TypeScheduleJob,
   ): Promise<TypeQueueScheduleJobResult> {
     await this.scope.service.schedule.execute(data.scheduleName, job);
   }

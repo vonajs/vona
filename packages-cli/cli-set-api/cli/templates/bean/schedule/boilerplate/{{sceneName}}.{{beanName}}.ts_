@@ -1,4 +1,5 @@
-import { BeanBase, IScheduleExecute, Schedule } from 'vona';
+import { BeanBase, Schedule } from 'vona';
+import { IScheduleExecute } from 'vona-module-a-schedule';
 
 @Schedule({ repeat: {} })
 export class Schedule<%=argv.beanNameCapitalize%> extends BeanBase implements IScheduleExecute {

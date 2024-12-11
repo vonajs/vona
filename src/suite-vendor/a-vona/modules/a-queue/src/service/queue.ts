@@ -9,6 +9,7 @@ import {
   IQueueQueues,
   IQueueWork,
   IQueueWorks,
+  TypeQueueJob,
 } from '../types/queue.js';
 
 @Service()
@@ -204,6 +205,8 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
     const jobOptions = deepExtend({ jobId }, jobOptionsBase, info.options?.jobOptions);
+    // change info
+    info = deepExtend({}, info, { options: { jobName, jobOptions } });
     // not async
     if (!isAsync) {
       // add job
@@ -230,8 +233,8 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     return `${subdomain}||${info.queueName}`;
   }
 
-  async _performTask<DATA>(job: Bull.Job) {
-    const info = job.data as IQueueJobContext<DATA>;
+  async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
+    const info = job.data;
     // queue config
     const queueItem = this.app.meta.onionQueue.getMiddlewareItem(info.queueName);
     const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);

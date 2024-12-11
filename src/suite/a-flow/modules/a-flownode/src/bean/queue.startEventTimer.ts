@@ -1,6 +1,5 @@
 import { Queue } from 'vona';
-import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
-import * as Bull from 'bullmq';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions, TypeQueueJob } from 'vona-module-a-queue';
 import { ScopeModule } from '../.metadata/this.js';
 import { FlowNodeStartEventTimer } from './flow.node.startEventTimer.js';
 
@@ -19,7 +18,7 @@ export class QueueStartEventTimer
   async execute(
     data: TypeQueueStartEventTimerJobData,
     _options?: IQueuePushOptions,
-    job?: Bull.Job,
+    job?: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>,
   ): Promise<TypeQueueStartEventTimerJobResult> {
     const _nodeBaseBean = this.app.bean._newBean(FlowNodeStartEventTimer);
     await _nodeBaseBean._runSchedule(data, job);
