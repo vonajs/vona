@@ -1,16 +1,15 @@
-/** services: begin */
-export * from '../service/queue.js';
-import { ServiceQueue } from '../service/queue.js';
-export interface IModuleService {
-  queue: ServiceQueue;
-}
+/** beans: begin */
+export * from '../bean/bean.redlock.js';
+import { BeanRedlock } from '../bean/bean.redlock.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-queue.service.queue': ServiceQueue;
+  export interface IBeanRecordGlobal {
+    redlock: BeanRedlock;
   }
+
+  export interface IBeanRecordGeneral {}
 }
-/** services: end */
+/** beans: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -19,27 +18,26 @@ import { config } from '../config/config.js';
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
 
 @Scope()
-export class ScopeModuleAQueue extends BeanScopeBase {}
+export class ScopeModuleARedlock extends BeanScopeBase {}
 
-export interface ScopeModuleAQueue {
+export interface ScopeModuleARedlock {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
 }
 
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-queue': ScopeModuleAQueue;
+    'a-redlock': ScopeModuleARedlock;
   }
 
   export interface IBeanScopeContainer {
-    queue: ScopeModuleAQueue;
+    redlock: ScopeModuleARedlock;
   }
 
   export interface IBeanScopeConfig {
-    'a-queue': ReturnType<typeof config>;
+    'a-redlock': ReturnType<typeof config>;
   }
 }
 

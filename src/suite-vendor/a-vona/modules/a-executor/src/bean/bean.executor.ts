@@ -16,7 +16,7 @@ export class BeanExecutor extends BeanBase {
     params,
     headers,
     body,
-    onion,
+    onions,
   }: IPerformActionParams): Promise<T> {
     return await performActionInner({
       ctxCaller: this.ctx,
@@ -27,7 +27,7 @@ export class BeanExecutor extends BeanBase {
       params,
       headers,
       body,
-      onion,
+      onions,
     });
   }
 

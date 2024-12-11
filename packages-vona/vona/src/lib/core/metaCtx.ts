@@ -6,7 +6,7 @@ import { ConfigOnions, IMiddlewareRecord, PowerPartial } from '../../types/index
 export class CtxMeta extends BeanSimple {
   util: CtxUtil;
 
-  /** dynamic onion middleware options */
+  /** dynamic onions middleware options */
   onionsDynamic?: PowerPartial<ConfigOnions>;
 
   protected __init__() {
