@@ -3,7 +3,7 @@ import { BeanRedlockBase, IRedlockLockIsolateOptions } from 'vona-module-a-redlo
 
 export interface MetaRedlock {
   lockIsolate<RESULT>(
-    resource: string,
+    resource: 'authProvider.register',
     fn: FunctionAsync<RESULT>,
     options?: IRedlockLockIsolateOptions,
   ): Promise<RESULT>;
