@@ -129,7 +129,7 @@ export class BeanExecutor extends BeanBase {
           // ctxCaller
           ctx.ctxCaller = ctxCaller;
         }
-        // ctxParent
+        // extraData
         if (options.extraData) {
           // delegateProperties
           _delegateProperties(ctx, {
