@@ -3,21 +3,27 @@ import { app, assert, mockModuleInfo } from 'vona-mock';
 describe.only('locale.test.ts', () => {
   it('action:locale', async () => {
     const moduleInfo = mockModuleInfo();
-    await app.meta.mockUtil.mockCtx({ locale: 'zh-cn' }, async () => {
-      const ctx = app.ctx;
-      // ctx.locale
-      assert.equal(ctx.locale, 'zh-cn');
-      // getText
-      assert.equal(app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'), '您好，世界');
-      assert.equal(app.meta.locale.getText(false, undefined, ctx.locale, 'vona-test:TestHelloWorld'), '您好，世界');
-      // scope locale
-      const scopeTest = app.bean.scope('vona-test');
-      assert.equal(scopeTest.locale.TestHelloWorld(), '您好，世界');
-    });
+    await app.bean.executor.mockCtx(
+      async () => {
+        const ctx = app.ctx;
+        // ctx.locale
+        assert.equal(ctx.locale, 'zh-cn');
+        // getText
+        assert.equal(
+          app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'),
+          '您好，世界',
+        );
+        assert.equal(app.meta.locale.getText(false, undefined, ctx.locale, 'vona-test:TestHelloWorld'), '您好，世界');
+        // scope locale
+        const scopeTest = app.bean.scope('vona-test');
+        assert.equal(scopeTest.locale.TestHelloWorld(), '您好，世界');
+      },
+      { locale: 'zh-cn' },
+    );
   });
 
   it('action:locale:plurals', async () => {
-    await app.meta.mockUtil.mockCtx(async () => {
+    await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.bean.scope('vona-test');
       // english

@@ -4,7 +4,7 @@ describe.only('transaction.test.ts', () => {
   const tableName = '__tempTransaction';
 
   it('action:transaction:fail', async () => {
-    await app.meta.mockUtil.mockCtx(async () => {
+    await app.bean.executor.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableName, function (table) {
         table.basicFields();
@@ -41,7 +41,7 @@ describe.only('transaction.test.ts', () => {
   });
 
   it('action:transaction:success', async () => {
-    await app.meta.mockUtil.mockCtx(async () => {
+    await app.bean.executor.mockCtx(async () => {
       // create table
       await app.bean.model.createTable(tableName, function (table) {
         table.basicFields();
