@@ -15,7 +15,7 @@ export async function performActionInner<T = any>({
   params,
   headers,
   body,
-  onion,
+  onions,
 }: IPerformActionInnerParams): Promise<T> {
   // app
   const app = ctxCaller.app;
@@ -81,7 +81,7 @@ export async function performActionInner<T = any>({
     if (innerAccess !== undefined) ctx.innerAccess = innerAccess;
 
     // onion
-    ctx.meta.onionDynamic = onion;
+    ctx.meta.onionsDynamic = onions;
 
     // invoke middleware
     await __fnMiddleware(ctx);

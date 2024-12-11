@@ -221,7 +221,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     // options: meta/config
     const optionsMetaAndConfig = item.beanOptions.options;
     // options: instance config
-    const optionsInstanceConfig = ctx.instance ? ctx.config.onion[item.beanOptions.scene]?.[item.name] : undefined;
+    const optionsInstanceConfig = ctx.instance ? ctx.config.onions[item.beanOptions.scene]?.[item.name] : undefined;
     // options: route
     //    not use route options for argument pipe
     let optionsRoute;
@@ -235,9 +235,9 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
       if (item.fromConfig) {
-        optionsDynamic = ctx.meta.onionDynamic?.[item.name as any];
+        optionsDynamic = ctx.meta.onionsDynamic?.[item.name as any];
       } else {
-        optionsDynamic = ctx.meta.onionDynamic?.[item.beanOptions.scene]?.[item.name];
+        optionsDynamic = ctx.meta.onionsDynamic?.[item.beanOptions.scene]?.[item.name];
       }
     }
     // final options
@@ -334,7 +334,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
       const beanOptions = middlewares[key];
       const name = key.replace(`.${this.sceneName}.`, ':') as MIDDLEWARENAME;
       // options
-      const optionsConfig = this.app.config.onion[beanOptions.scene]?.[name];
+      const optionsConfig = this.app.config.onions[beanOptions.scene]?.[name];
       if (beanOptions.optionsPrimitive) {
         beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
       } else {

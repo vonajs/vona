@@ -1,4 +1,4 @@
-import { ConfigOnion, ContextState, ILocalInfos, PowerPartial, VonaContext } from 'vona';
+import { ConfigOnions, ContextState, ILocalInfos, PowerPartial, VonaContext } from 'vona';
 
 export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
@@ -30,7 +30,7 @@ export interface IPerformActionParams {
   params?: object;
   headers?: object;
   body?: object;
-  onion?: PowerPartial<ConfigOnion>;
+  onions?: PowerPartial<ConfigOnions>;
 }
 
 export interface IPerformActionInnerParams {
@@ -43,5 +43,5 @@ export interface IPerformActionInnerParams {
   params?: object;
   headers?: object;
   body?: object;
-  onion?: PowerPartial<ConfigOnion>;
+  onions?: PowerPartial<ConfigOnions>;
 }

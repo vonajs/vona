@@ -7,6 +7,6 @@ import { BeanBase, IStartupExecute, Startup } from 'vona';
 })
 export class StartupLoadSchedules extends BeanBase implements IStartupExecute {
   async execute() {
-    await this.$scope.queue.service.schedule.loadSchedules();
+    await this.$scope.schedule.service.schedule.loadSchedules();
   }
 }

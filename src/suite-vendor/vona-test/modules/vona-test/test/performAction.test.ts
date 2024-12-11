@@ -15,12 +15,12 @@ describe.only('performAction.test.js', () => {
     assert.equal(result.id, 123);
     assert.equal(result.url, mockUrl('performAction/echo'));
   });
-  it('action:performAction:onionDynamic', async () => {
+  it('action:performAction:onionsDynamic', async () => {
     const result = await app.bean.executor.mockCtx(async () => {
       return await app.bean.executor.performAction<{ id: number; url: string }>({
         method: 'post',
         url: mockUrl('performAction/echo'),
-        onion: {
+        onions: {
           pipe: { 'a-validator:valid': { enable: false } },
         },
       });

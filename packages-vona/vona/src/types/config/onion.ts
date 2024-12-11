@@ -16,7 +16,7 @@ import { IStartupRecord } from '../interface/startup.js';
 import { ISummerCacheRecord } from '../interface/summerCache.js';
 import { OmitNever } from '../utils/omitNever.js';
 
-export interface ConfigOnion {
+export interface ConfigOnions {
   middleware: OmitNever<IMiddlewareRecord>;
   guard: OmitNever<IGuardRecord>;
   interceptor: OmitNever<IInterceptorRecord>;
