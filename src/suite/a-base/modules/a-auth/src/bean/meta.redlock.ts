@@ -1,7 +1,13 @@
-import { Meta } from 'vona';
-import { BeanRedlockBase } from 'vona-module-a-redlock';
+import { FunctionAsync, Meta } from 'vona';
+import { BeanRedlockBase, IRedlockLockIsolateOptions } from 'vona-module-a-redlock';
 
-export interface MetaRedlock {}
+export interface MetaRedlock {
+  lockIsolate<RESULT>(
+    resource: string,
+    fn: FunctionAsync<RESULT>,
+    options?: IRedlockLockIsolateOptions,
+  ): Promise<RESULT>;
+}
 
 @Meta()
 export class MetaRedlock extends BeanRedlockBase {}

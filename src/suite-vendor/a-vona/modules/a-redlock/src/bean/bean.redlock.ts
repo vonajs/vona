@@ -1,8 +1,7 @@
 import Redlock from 'redlock';
 import { Bean, BeanBase, FunctionAsync, subdomainDesp } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
-import { IRedlockLockOptions } from '../types/redlock.js';
-import { INewCtxOptions } from 'vona-module-a-executor';
+import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 
 @Bean()
 export class BeanRedlock extends BeanBase<ScopeModule> {
@@ -54,7 +53,7 @@ export class BeanRedlock extends BeanBase<ScopeModule> {
   public async lockIsolate<RESULT>(
     resource: string,
     fn: FunctionAsync<RESULT>,
-    options?: IRedlockLockOptions & INewCtxOptions,
+    options?: IRedlockLockIsolateOptions,
   ): Promise<RESULT> {
     return await this.lock(
       resource,
