@@ -30,12 +30,13 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
   }
 
   private async __deleteSchedule(job: TypeScheduleJob) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
+    const jobKeyActiveWithId = this.$scope.queue.service.queue.getRepeatKey(
       job.data!.options!.jobName!,
       job.data!.options!.jobOptions!.repeat!,
+      job.data!.options!.jobOptions!.jobId!,
     );
     const repeat = await cast(job).queue.repeat;
-    await repeat.removeRepeatableByKey(jobKeyActive);
+    await repeat.removeRepeatableByKey(jobKeyActiveWithId);
   }
 
   private __checkJobValid(scheduleName: keyof IScheduleRecord, job: TypeScheduleJob) {

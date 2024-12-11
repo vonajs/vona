@@ -255,11 +255,11 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     );
   }
 
-  getRepeatKey(jobName: string, repeat: Bull.RepeatOptions) {
+  getRepeatKey(jobName: string, repeat: Bull.RepeatOptions, jobId?: string) {
     const endDate = repeat.endDate ? new Date(repeat.endDate).getTime() : '';
     const tz = repeat.tz || '';
-    const suffix = (repeat.cron ? repeat.cron : String(repeat.every)) || '';
-    const jobId = repeat.jobId ? repeat.jobId : '';
-    return `${jobName}:${jobId}:${endDate}:${tz}:${suffix}`;
+    const pattern = repeat.pattern || repeat.cron;
+    const suffix = (pattern ? pattern : String(repeat.every)) || '';
+    return `${jobName}:${jobId ?? ''}:${endDate}:${tz}:${suffix}`;
   }
 }
