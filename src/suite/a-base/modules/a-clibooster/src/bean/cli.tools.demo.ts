@@ -22,7 +22,7 @@ export class CliToolsDemo extends BeanCliBase<ScopeModule> {
     // loop
     for (const method of methods) {
       // log
-      const log = this.helper.chalk.keyword('yellow')(`\n=== method: ${method} ===\n`);
+      const log = this.helper.chalk.yellow(`\n=== method: ${method} ===\n`);
       await this.console.log(log);
       // execute
       const res = await this.localUtils.demoExecute({ method, argv, cli: this, user });

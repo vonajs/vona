@@ -196,7 +196,7 @@ export default class CliStoreBase extends BeanCliBase<ScopeModule> {
       return;
     }
     const url = this._getCabloyDocsURL({ slug: 'cli-store', user });
-    const text = this.helper.chalk.keyword('cyan')(url);
+    const text = this.helper.chalk.cyan(url);
     welcomes.push(`${this.app.text('CliStoreDocs')}: ${text}`);
   }
 }

@@ -2,7 +2,7 @@ import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 import chalk from 'chalk';
-import boxen from 'boxen';
+import * as Boxen from 'boxen';
 
 const boxenOptions = {
   padding: 1,
@@ -10,7 +10,7 @@ const boxenOptions = {
   align: 'center',
   borderColor: 'yellow',
   borderStyle: 'round',
-} as boxen.Options;
+} as Boxen.Options;
 
 @Bean({ scene: 'sms.provider' })
 export class SmsProviderTest extends BeanBase<ScopeModule> {
@@ -19,10 +19,8 @@ export class SmsProviderTest extends BeanBase<ScopeModule> {
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);
     // prompt
     const message =
-      chalk.keyword('cyan')('Test SMS Verification Code To: ') +
-      chalk.keyword('yellow')(context.mobile) +
-      chalk.keyword('orange')('\n' + token);
-    console.log('\n' + boxen(message, boxenOptions));
+      chalk.cyan('Test SMS Verification Code To: ') + chalk.yellow(context.mobile) + chalk.hex('#FF8800')('\n' + token);
+    console.log('\n' + Boxen.default(message, boxenOptions));
     // ok
     return { token };
   }

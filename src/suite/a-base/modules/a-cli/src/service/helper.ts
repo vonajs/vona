@@ -1,7 +1,7 @@
 import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
-import Chalk from 'chalk';
+import * as Chalk from 'chalk';
 import TableClass from 'cli-table3';
 import Boxen from 'boxen';
 import fse from 'fs-extra';
@@ -52,7 +52,7 @@ export class ServiceHelper extends BeanBase<ScopeModule> {
     if (!options) {
       options = this.moduleConfig.helper.chalk.options;
     }
-    return new Chalk.Instance(options);
+    return new Chalk.Chalk(options);
   }
   newTable(options) {
     return new TableClass(options);

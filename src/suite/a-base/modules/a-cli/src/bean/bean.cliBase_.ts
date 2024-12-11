@@ -135,7 +135,7 @@ export class BeanCliBase<TScopeModule = unknown> extends BeanBase<TScopeModule> 
     const configHelper = this.app.bean.util.getProperty(this.cabloyConfig.get(), 'cli.helper');
     if (configHelper !== false) {
       let url = `https://cabloy.com/${this.ctx.locale === 'zh-cn' ? 'zh-cn/' : ''}articles/cli-introduce.html`;
-      url = this.helper.chalk.keyword('cyan')(url);
+      url = this.helper.chalk.cyan(url);
       const text = `${this.app.text('CliDocs')}: ${url}`;
       welcomes.unshift(text);
     }

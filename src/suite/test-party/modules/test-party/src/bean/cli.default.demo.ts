@@ -11,7 +11,7 @@ export class CliDefaultDemo extends BeanCliBase {
     // super
     await super.execute({ user });
     // chalk
-    let text = this.helper.chalk.keyword('orange')('chalk test');
+    let text = this.helper.chalk.hex('#FF8800')('chalk test');
     await this.console.log({ text });
     // boxen
     text = this.helper.boxen({ text: 'boxen test' });

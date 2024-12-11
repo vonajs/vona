@@ -17,7 +17,7 @@ export class CliTokenDelete extends BeanCliBase {
       log: false,
     });
     // chalk
-    const text = this.helper.chalk.keyword('cyan')(`\n  ${fileName}\n`);
+    const text = this.helper.chalk.cyan(`\n  ${fileName}\n`);
     await this.console.log({ text });
   }
 }
