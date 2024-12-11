@@ -21,7 +21,6 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (!startupOptions?.instance && startupOptions?.after !== true) {
-        console.log(`---- startup: ${startup.name}, pid: ${process.pid}`);
         await this.runStartup(startup.name);
       }
     }
@@ -34,7 +33,6 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (!startupOptions?.instance && startupOptions?.after === true) {
-        console.log(`---- startup: ${startup.name}, pid: ${process.pid}`);
         await this.runStartup(startup.name);
       }
     }
@@ -99,7 +97,11 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     );
   }
 
-  async _runStartupLock(startup: IMiddlewareItem, subdomain?: string, options?: IInstanceStartupOptions) {
+  async _runStartupLock(
+    startup: IMiddlewareItem<IDecoratorStartupOptions>,
+    subdomain?: string,
+    options?: IInstanceStartupOptions,
+  ) {
     // ignore debounce for test
     if (!options?.force && !this.app.meta.isTest) {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
@@ -114,7 +116,14 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     await this._runStartupInner(startup, subdomain, options);
   }
 
-  async _runStartupInner(startup: IMiddlewareItem, subdomain?: string, options?: IInstanceStartupOptions) {
+  async _runStartupInner(
+    startup: IMiddlewareItem<IDecoratorStartupOptions>,
+    subdomain?: string,
+    options?: IInstanceStartupOptions,
+  ) {
+    console.log(
+      `----${startup.beanOptions?.options?.instance ? ' instance' : ''} startup: ${startup.name}, pid: ${process.pid}`,
+    );
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // execute
     return await this.bean.executor.newCtx(
@@ -134,7 +143,6 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (startupOptions?.instance && startupOptions?.after !== true) {
-        console.log(`---- instance startup: ${startup.name}, pid: ${process.pid}`);
         await this.runStartup(startup.name, subdomain, options);
       }
     }
@@ -144,7 +152,6 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     for (const startup of this._startups) {
       const startupOptions = startup.beanOptions.options;
       if (startupOptions?.instance && startupOptions?.after === true) {
-        console.log(`---- instance startup: ${startup.name}, pid: ${process.pid}`);
         await this.runStartup(startup.name, subdomain, options);
       }
     }
