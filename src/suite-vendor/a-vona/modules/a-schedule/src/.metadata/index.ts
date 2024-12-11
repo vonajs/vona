@@ -1,10 +1,10 @@
 /** startup: begin */
-export * from '../bean/startup.loadSchedule.js';
+export * from '../bean/startup.loadSchedules.js';
 
 import { IDecoratorStartupOptions } from 'vona';
 declare module 'vona' {
   export interface IStartupRecord {
-    'a-schedule:loadSchedule': IDecoratorStartupOptions;
+    'a-schedule:loadSchedules': IDecoratorStartupOptions;
   }
 }
 /** startup: end */

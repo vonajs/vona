@@ -39,27 +39,36 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       }
     }
 
-    // version init
+    // version init : force: should be false
     if (this.app.meta.isTest || this.app.meta.isLocal) {
-      // subdomain
       const subdomain = '';
-      // init
       await this.bean.executor.newCtx(
         async () => {
-          // force: should be false
           await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
         },
         {
           subdomain,
         },
       );
+    } else {
+      // all instances
+      const instances = await this.bean.instance.list();
+      for (const instance of instances) {
+        const subdomain = instance.name;
+        await this.bean.executor.newCtx(
+          async () => {
+            await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
+          },
+          {
+            subdomain,
+          },
+        );
+      }
     }
 
     // version test
     if (this.app.meta.isTest) {
-      // subdomain
       const subdomain = '';
-      // test
       await this.bean.executor.newCtx(
         async () => {
           await this.$scope.version.service.version.__instanceTest(subdomain);
