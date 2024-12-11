@@ -6,6 +6,7 @@
     "dependencies": {},
     "globalDependencies": {
       "assert": true,
+      "boxen": true,
       "chalk": true,
       "fs-extra": true,
       "vona-shared": true
