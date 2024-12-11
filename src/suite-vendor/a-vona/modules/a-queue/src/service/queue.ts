@@ -60,7 +60,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     // queueConfig.options: queue/worker/job/redlock
     const workerOptions = queueConfig?.options?.worker;
     const redlockOptions = queueConfig?.options?.redlock;
-    const _redlockOptions = Object.assign({}, this.scope.config.redlock.options, redlockOptions);
+    const _redlockOptions = Object.assign({}, this.$scope.redlock.config.redlock.options, redlockOptions);
 
     // redlock
     if (!queueConfig?.concurrency) {

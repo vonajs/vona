@@ -157,7 +157,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
     // broadcast channel has subscribed
     // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);
     // redlock
-    for (const clientName of this.$scope.queue.config.redlock.clients) {
+    for (const clientName of this.$scope.redlock.config.redlock.clients) {
       await this._clearRedisKeys(app.redis.get(clientName), `redlock_${app.name}:*`);
     }
     for (const clientName in app.config.redis.clients) {
