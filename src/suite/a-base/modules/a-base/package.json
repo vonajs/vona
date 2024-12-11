@@ -40,9 +40,7 @@
     "@zhennann/trim-html": "^0.1.12",
     "exceljs": "^4.3.0",
     "jsonwebtoken": "^9.0.2",
-    "moment": "^2.24.0",
     "object-hash": "^3.0.0",
-    "qr-image": "^3.2.0",
-    "uuid": "^9.0.1"
+    "qr-image": "^3.2.0"
   }
 }

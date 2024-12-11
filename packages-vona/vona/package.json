@@ -70,7 +70,7 @@
     "koa-jwt2": "^1.0.3",
     "mixin-classes": "^1.0.2",
     "module-alias": "^2.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.30.1",
     "passport-oauth2": "^1.6.1",
     "raw-body": "2.5.1",
     "redlock": "^4.1.0",
@@ -80,7 +80,7 @@
     "semver": "^7.3.7",
     "socket.io": "^2.3.0",
     "supertest": "^4.0.2",
-    "uuid": "^9.0.1",
+    "uuid": "^11.0.3",
     "vona-shared": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
