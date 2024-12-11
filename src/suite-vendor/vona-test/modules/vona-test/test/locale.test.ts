@@ -1,8 +1,10 @@
 import { app, assert, mockModuleInfo } from 'vona-mock';
+import { __ThisModule__ } from '../src/.metadata/this.js';
 
 describe.only('locale.test.ts', () => {
   it('action:locale', async () => {
     const moduleInfo = mockModuleInfo();
+    assert.equal(moduleInfo.relativeName, __ThisModule__);
     await app.bean.executor.mockCtx(
       async () => {
         const ctx = app.ctx;

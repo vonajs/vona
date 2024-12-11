@@ -1,6 +1,5 @@
 import _Bundle from 'egg-mock/bootstrap.js';
 import { VonaApplication, VonaContext, cast } from 'vona';
-import Assert from 'assert';
 import { IModuleInfo } from '@cabloy/module-info';
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
 import { BaseMockApplication } from 'egg-mock';
@@ -31,7 +30,6 @@ if (!Bundle) {
   });
 }
 
-export const assert = Assert;
 export const app = cast<MockCabloyApplication>(Bundle.app);
 export const mock = Bundle.mock;
 export const mm = Bundle.mm;
