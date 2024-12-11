@@ -1,0 +1,9 @@
+import { Meta } from 'vona';
+import { BeanRedlockBase } from 'vona-module-a-redlock';
+
+export interface Meta<%=argv.beanNameCapitalize%> {
+  
+}
+
+@Meta()
+export class Meta<%=argv.beanNameCapitalize%> extends BeanRedlockBase {}
