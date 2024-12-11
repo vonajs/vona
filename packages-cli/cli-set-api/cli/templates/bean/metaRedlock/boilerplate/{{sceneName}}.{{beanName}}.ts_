@@ -1,8 +1,17 @@
-import { Meta } from 'vona';
-import { BeanRedlockBase } from 'vona-module-a-redlock';
+import { FunctionAsync, Meta } from 'vona';
+import { BeanRedlockBase, IRedlockLockIsolateOptions, IRedlockLockOptions } from 'vona-module-a-redlock';
 
 export interface Meta<%=argv.beanNameCapitalize%> {
-  
+  lock<RESULT>(
+    resource: 'authProvider.register',
+    fn: FunctionAsync<RESULT>,
+    options?: IRedlockLockOptions,
+  ): Promise<RESULT>;
+  lockIsolate<RESULT>(
+    resource: 'authProvider.register',
+    fn: FunctionAsync<RESULT>,
+    options?: IRedlockLockIsolateOptions,
+  ): Promise<RESULT>;
 }
 
 @Meta()
