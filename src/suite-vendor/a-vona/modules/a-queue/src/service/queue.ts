@@ -205,8 +205,8 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
     const jobOptions = deepExtend({ jobId }, jobOptionsBase, info.options?.jobOptions);
-    // change info
-    info = deepExtend({}, info, { options: { jobName, jobOptions } });
+    // should not change info, hold original info.options?.jobName, info.options?.jobOptions
+    // info = deepExtend({}, info, { options: { jobName, jobOptions } });
     // not async
     if (!isAsync) {
       // add job
