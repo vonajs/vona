@@ -1,10 +1,10 @@
 import Redlock from 'redlock';
-import { Bean, BeanBase, FunctionAsync, subdomainDesp } from 'vona';
+import { BeanBase, FunctionAsync, Service, subdomainDesp } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 
-@Bean()
-export class BeanRedlock extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceRedlock extends BeanBase<ScopeModule> {
   private _redlockDefault: Redlock;
 
   public async lock<RESULT>(

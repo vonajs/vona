@@ -64,7 +64,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
 
     // redlock
     if (!queueConfig?.concurrency) {
-      _worker.redlock = this.bean.redlock.create(_redlockOptions);
+      _worker.redlock = this.$scope.redlock.service.redlock.create(_redlockOptions);
     }
 
     // create work
@@ -84,7 +84,7 @@ export class ServiceQueue extends BeanBase<ScopeModule> {
         const info = job.data as IQueueJobContext<DATA>;
         const queueNameSub = info.options?.queueNameSub;
         const _lockResource = `queue:${queueKey}${queueNameSub ? '#' + queueNameSub : ''}`;
-        return await this.bean.redlock.lock(
+        return await this.$scope.redlock.service.redlock.lock(
           _lockResource,
           async () => {
             return await this._performTask(job);

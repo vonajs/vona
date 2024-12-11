@@ -6,11 +6,11 @@ export class BeanRedlockBase<TScopeModule = unknown> extends BeanBase<TScopeModu
   protected __get__(prop: string) {
     if (prop === 'lock') {
       return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockOptions) => {
-        return this.bean.redlock.lock(this._prepareResource(resource), fn, options);
+        return this.$scope.redlock.service.redlock.lock(this._prepareResource(resource), fn, options);
       };
     } else if (prop === 'lockIsolate') {
       return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockIsolateOptions) => {
-        return this.bean.redlock.lockIsolate(this._prepareResource(resource), fn, options);
+        return this.$scope.redlock.service.redlock.lockIsolate(this._prepareResource(resource), fn, options);
       };
     }
   }
