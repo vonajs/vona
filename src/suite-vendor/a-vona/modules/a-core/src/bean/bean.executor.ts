@@ -93,6 +93,16 @@ export class BeanExecutor extends BeanBase {
     return await this.newCtx(fn, options);
   }
 
+  async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+    options = Object.assign({}, options);
+    if (!this.ctx) {
+      options.subdomain = options.subdomain === undefined ? '' : options.subdomain;
+    } else {
+      options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
+    }
+    return await this.newCtx(fn, options);
+  }
+
   async newCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     if (!this.ctx) {
