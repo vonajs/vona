@@ -60,14 +60,7 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     return `${subdomain}.${scheduleName.replace(':', '.schedule.')}`; // not use :
   }
 
-  public async loadSchedules() {
-    const instances = await this.bean.instance.list();
-    for (const instance of instances) {
-      this.loadSchedulesInstance(instance.name);
-    }
-  }
-
-  public async loadSchedulesInstance(subdomain: string) {
+  public async loadSchedules(subdomain: string) {
     for (const scheduleItem of this.app.meta.onionSchedule.middlewaresEnabled) {
       const scheduleName = scheduleItem.name;
       // push

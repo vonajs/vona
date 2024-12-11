@@ -1,17 +1,16 @@
 import { Bean } from 'vona';
 import { BeanIoChannelBase } from 'vona-module-a-socketio';
-
 import nodemailer from 'nodemailer';
 import chalk from 'chalk';
-import boxen from 'boxen';
+import * as Boxen from 'boxen';
 
-const boxenOptions: boxen.Options = {
+const boxenOptions: Boxen.Options = {
   padding: 1,
   margin: 1,
   align: 'center',
   borderColor: 'yellow',
   borderStyle: 'round',
-} as boxen.Options;
+} as Boxen.Options;
 
 @Bean({ scene: 'io.channel' })
 export class IoChannelMail extends BeanIoChannelBase {
@@ -36,8 +35,8 @@ export class IoChannelMail extends BeanIoChannelBase {
     }
     // check if empty
     if (!this._sceneValid(scene)) {
-      const message = chalk.keyword('orange')(this.app.text('mailhostNotConfigAlert'));
-      console.log('\n' + boxen(message, boxenOptions));
+      const message = chalk.hex('#FF8800')(this.app.text('mailhostNotConfigAlert'));
+      console.log('\n' + Boxen.default(message, boxenOptions));
       return false;
     }
     // transporter
@@ -48,10 +47,8 @@ export class IoChannelMail extends BeanIoChannelBase {
     if (sceneTest) {
       const url = nodemailer.getTestMessageUrl(res);
       const message =
-        chalk.keyword('cyan')('Test Mail To: ') +
-        chalk.keyword('yellow')(content.message.to) +
-        chalk.keyword('orange')('\n' + url);
-      console.log('\n' + boxen(message, boxenOptions));
+        chalk.cyan('Test Mail To: ') + chalk.yellow(content.message.to) + chalk.hex('#FF8800')('\n' + url);
+      console.log('\n' + Boxen.default(message, boxenOptions));
     }
     // done
     return true;

@@ -1,17 +1,17 @@
 import { BeanBase, deepExtend, IInstanceStartupOptions, isNil, Service, sleep, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
-import boxen from 'boxen';
+import * as Boxen from 'boxen';
 import { ScopeModule } from '../.metadata/this.js';
 import { IInstanceStartupQueueInfo } from '../entity/instance.js';
 
-const boxenOptions: boxen.Options = {
+const boxenOptions: Boxen.Options = {
   padding: 1,
   margin: 1,
   align: 'center',
   borderColor: 'yellow',
   borderStyle: 'round',
-} as boxen.Options;
+} as Boxen.Options;
 
 const __queueInstanceStartup: any = {};
 const __cacheIntancesConfig: Record<string, VonaConfig> = {};
@@ -135,10 +135,10 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
         this.ctx.locale === 'zh-cn'
           ? 'https://cabloy.com/zh-cn/articles/multi-instance.html'
           : 'https://cabloy.com/articles/multi-instance.html';
-      let message = `Please add instance in ${chalk.keyword('cyan')('src/backend/config/config.[env].js')}`;
-      message += '\n' + chalk.keyword('orange')(`{ subdomain: '${this.ctx.subdomain}', password: '', title: '' }`);
-      message += `\nMore info: ${chalk.keyword('cyan')(urlInfo)}`;
-      console.log('\n' + boxen(message, boxenOptions));
+      let message = `Please add instance in ${chalk.cyan('src/backend/config/config.[env].js')}`;
+      message += '\n' + chalk.hex('#FF8800')(`{ subdomain: '${this.ctx.subdomain}', password: '', title: '' }`);
+      message += `\nMore info: ${chalk.cyan(urlInfo)}`;
+      console.log('\n' + Boxen.default(message, boxenOptions));
       // }
       return this.app.throw(423); // not this.app.fail(423)
     }
