@@ -23,6 +23,12 @@
     },
     {
       "path": "modules/a-schedule/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-executor/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-redlock/tsconfig.build.json"
     }
   ]
 }

@@ -56,9 +56,6 @@ importers:
       vona-module-a-b11:
         specifier: workspace:^
         version: link:src/suite/a-b1/modules/a-b11
-      vona-module-a-b4:
-        specifier: workspace:^
-        version: link:src/suite/a-b/modules/a-b4
       vona-module-a-b5:
         specifier: workspace:^
         version: link:src/suite/a-b/modules/a-b5
@@ -74,9 +71,6 @@ importers:
       vona-module-a-baselayout:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-baselayout
-      vona-module-a-cabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
       vona-module-a-cache:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-cache
@@ -203,9 +197,6 @@ importers:
       vona-module-a-queue:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-queue
-      vona-module-a-schedule:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-schedule
       vona-module-a-sequence:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-sequence
@@ -257,9 +248,6 @@ importers:
       vona-module-a-version:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-version
-      vona-module-a-vona:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-vona
       vona-module-a-wechat:
         specifier: workspace:^
         version: link:src/suite/a-wechat/modules/a-wechat
@@ -338,9 +326,6 @@ importers:
       vona-module-cabloy-store:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/cabloy-store
-      vona-module-cabloy-test:
-        specifier: workspace:^
-        version: link:src/suite-vendor/cabloy-test/modules/cabloy-test
       vona-module-cms-pluginarticle:
         specifier: workspace:^
         version: link:src/suite/a-cms/modules/cms-pluginarticle
@@ -419,12 +404,6 @@ importers:
       vona-module-diancai-table:
         specifier: workspace:^
         version: link:src/suite/bz-diancai/modules/diancai-table
-      vona-module-home-base:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-base
-      vona-module-home-index:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-index
       vona-module-study-admin:
         specifier: workspace:^
         version: link:src/suite/bz-study/modules/study-admin
@@ -470,9 +449,6 @@ importers:
       vona-module-test-wxwork:
         specifier: workspace:^
         version: link:src/suite/a-wxwork/modules/test-wxwork
-      vona-module-vona-test:
-        specifier: workspace:^
-        version: link:src/suite-vendor/vona-test/modules/vona-test
       vona-shared:
         specifier: workspace:^
         version: link:packages-vona/shared
@@ -1223,9 +1199,15 @@ importers:
       vona-module-a-core:
         specifier: ^5.0.3
         version: link:modules/a-core
+      vona-module-a-executor:
+        specifier: workspace:^
+        version: link:modules/a-executor
       vona-module-a-queue:
         specifier: workspace:^
         version: link:modules/a-queue
+      vona-module-a-redlock:
+        specifier: workspace:^
+        version: link:modules/a-redlock
       vona-module-a-schedule:
         specifier: workspace:^
         version: link:modules/a-schedule
@@ -1257,6 +1239,8 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-vona/shared
 
+  src/suite-vendor/a-vona/modules/a-executor: {}
+
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
       '@types/redlock':
@@ -1268,6 +1252,8 @@ importers:
       redlock:
         specifier: ^4.1.0
         version: 4.2.0
+
+  src/suite-vendor/a-vona/modules/a-redlock: {}
 
   src/suite-vendor/a-vona/modules/a-schedule: {}
 
