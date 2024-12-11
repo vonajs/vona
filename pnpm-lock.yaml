@@ -203,6 +203,9 @@ importers:
       vona-module-a-queue:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-queue
+      vona-module-a-schedule:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-schedule
       vona-module-a-sequence:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-sequence
@@ -215,6 +218,9 @@ importers:
       vona-module-a-socketio:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-socketio
+      vona-module-a-startup:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-startup
       vona-module-a-stats:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-stats
@@ -1220,6 +1226,12 @@ importers:
       vona-module-a-queue:
         specifier: workspace:^
         version: link:modules/a-queue
+      vona-module-a-schedule:
+        specifier: workspace:^
+        version: link:modules/a-schedule
+      vona-module-a-startup:
+        specifier: workspace:^
+        version: link:modules/a-startup
       vona-module-a-swagger:
         specifier: ^5.0.3
         version: link:modules/a-swagger
@@ -1256,6 +1268,10 @@ importers:
       redlock:
         specifier: ^4.1.0
         version: 4.2.0
+
+  src/suite-vendor/a-vona/modules/a-schedule: {}
+
+  src/suite-vendor/a-vona/modules/a-startup: {}
 
   src/suite-vendor/a-vona/modules/a-swagger:
     dependencies:

@@ -17,6 +17,12 @@
     },
     {
       "path": "modules/a-queue/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-startup/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-schedule/tsconfig.build.json"
     }
   ]
 }
