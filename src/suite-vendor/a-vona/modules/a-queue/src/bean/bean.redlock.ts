@@ -2,7 +2,7 @@ import Redlock from 'redlock';
 import { Bean, BeanBase, FunctionAsync, subdomainDesp } from 'vona';
 import { ScopeModule } from '../.metadata/this.js';
 import { IRedlockLockOptions } from '../types/redlock.js';
-import { INewCtxOptions } from 'vona-module-a-core';
+import { INewCtxOptions } from 'vona-module-a-executor';
 
 @Bean()
 export class BeanRedlock extends BeanBase<ScopeModule> {

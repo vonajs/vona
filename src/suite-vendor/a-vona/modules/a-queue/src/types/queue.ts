@@ -1,7 +1,7 @@
 import * as Bull from 'bullmq';
 import Redlock from 'redlock';
 import { ILocalInfos, IQueueRecord } from 'vona';
-import { INewCtxExtraData } from 'vona-module-a-core';
+import { INewCtxExtraData } from 'vona-module-a-executor';
 
 export interface IQueuePushOptions {
   queueNameSub?: string;
