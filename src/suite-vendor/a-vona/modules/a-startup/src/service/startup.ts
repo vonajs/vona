@@ -46,6 +46,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       // init
       await this.bean.executor.newCtx(
         async () => {
+          // force: should be false
           await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
         },
         {
