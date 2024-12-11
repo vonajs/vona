@@ -33,7 +33,7 @@ export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
       });
     } else {
       if (queue) {
-        await this.bean.redlock.lockIsolate(`${__ThisModule__}.cacheDbSet.${this.moduleScope}.${name}`, async () => {
+        await this.scope.redlock.lockIsolate(`cacheDbSet.${this.moduleScope}.${name}`, async () => {
           return await this.ctx.cache._db.module(this.moduleScope)._set({ name, value, timeout, queue: false });
         });
       } else {

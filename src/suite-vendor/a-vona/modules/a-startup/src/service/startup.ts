@@ -78,7 +78,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       return await this._runStartupInner(startup, subdomain, options);
     }
     // debounce: lock
-    return await this.bean.redlock.lockIsolate(
+    return await this.scope.redlock.lockIsolate(
       `startup.${startupName}`,
       async () => {
         return await this._runStartupLock(startup, subdomain, options);

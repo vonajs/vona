@@ -84,6 +84,16 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-socketio:redlock': never;
+  }
+}
+/** meta: end */
 /** queue: begin */
 export * from '../bean/queue.delivery.js';
 export * from '../bean/queue.process.js';
@@ -100,6 +110,9 @@ declare module 'vona' {
   }
 }
 /** queue: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** queue: begin */
 import { QueueDelivery } from '../bean/queue.delivery.js';
 import { QueueProcess } from '../bean/queue.process.js';
@@ -179,6 +192,7 @@ export interface ScopeModuleASocketio {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  redlock: MetaRedlock;
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;

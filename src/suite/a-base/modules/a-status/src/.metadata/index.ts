@@ -30,6 +30,19 @@ declare module 'vona' {
   }
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-status:redlock': never;
+  }
+}
+/** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** entities: begin */
 import { EntityStatus } from '../entity/status.js';
 export interface IModuleEntity {
@@ -51,6 +64,7 @@ export class ScopeModuleAStatus extends BeanScopeBase {}
 export interface ScopeModuleAStatus {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  redlock: MetaRedlock;
   model: IModuleModel;
   entity: IModuleEntity;
 }

@@ -49,6 +49,19 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-cache:redlock': never;
+  }
+}
+/** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** entities: begin */
 import { EntityCache } from '../entity/cache.js';
 export interface IModuleEntity {
@@ -69,6 +82,7 @@ export interface ScopeModuleACache {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  redlock: MetaRedlock;
   entity: IModuleEntity;
 }
 

@@ -31,8 +31,8 @@ export class LocalFlowTaskComplete extends LocalFlowTaskClaim {
 
   async _complete_tail({ flowTask, user }: any) {
     const flowNodeId = flowTask.flowNodeId;
-    await this.bean.redlock.lockIsolate(
-      `${__ThisModule__}.flowTask.nodeDoneCheck.${flowNodeId}`,
+    await this.scope.redlock.lockIsolate(
+      `flowTask.nodeDoneCheck.${flowNodeId}`,
       async () => {
         return await this.bean.flowTask._nodeDoneCheckLock({ flowNodeId });
       },

@@ -42,7 +42,7 @@ export class BeanStatusBase<TScopeModule = unknown> extends BeanBase<TScopeModul
       });
     } else {
       if (queue) {
-        await this.bean.redlock.lockIsolate(`${__ThisModule__}.statusSet.${this.moduleBelong}.${name}`, async () => {
+        await this.$scope.status.redlock.lockIsolate(`statusSet.${this.moduleBelong}.${name}`, async () => {
           return await this._setInner(name, value, false);
         });
       } else {

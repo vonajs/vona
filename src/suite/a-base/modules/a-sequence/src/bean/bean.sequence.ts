@@ -23,7 +23,7 @@ export class BeanSequence extends BeanModuleScopeBase<ScopeModule> {
 
   async next(name) {
     const moduleName = this.moduleScope;
-    return await this.bean.redlock.lockIsolate(`${__ThisModule__}.sequence.${moduleName}.${name}`, async () => {
+    return await this.scope.redlock.lockIsolate(`sequence.${moduleName}.${name}`, async () => {
       return await this.bean.sequence.module(moduleName)._nextLock(name);
     });
   }

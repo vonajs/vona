@@ -39,16 +39,21 @@ declare module 'vona' {
 /** model: end */
 /** meta: begin */
 export * from '../bean/meta.index.js';
+export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.version.js';
 import { IMetaOptionsIndex } from 'vona';
 import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-instance:index': IMetaOptionsIndex;
+    'a-instance:redlock': never;
     'a-instance:version': never;
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** entities: begin */
 import { EntityInstance } from '../entity/instance.js';
 export interface IModuleEntity {
@@ -105,6 +110,7 @@ export interface ScopeModuleAInstance {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  redlock: MetaRedlock;
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;

@@ -79,9 +79,22 @@ declare module 'vona' {
   }
 }
 /** controller: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-flow:redlock': never;
+  }
+}
+/** meta: end */
 /** atoms: begin */
 export * from '../atom/flowDef.js';
 /** atoms: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** entities: begin */
 import { EntityFlow } from '../entity/flow.js';
 import { EntityFlowDef } from '../entity/flowDef.js';
@@ -192,6 +205,7 @@ export interface ScopeModuleAFlow {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
+  redlock: MetaRedlock;
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
