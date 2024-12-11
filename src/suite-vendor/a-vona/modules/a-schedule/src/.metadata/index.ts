@@ -1,3 +1,19 @@
+/** queue: begin */
+export * from '../bean/queue.schedule.js';
+
+import { IDecoratorQueueOptions } from 'vona';
+declare module 'vona' {
+  export interface IQueueRecord {
+    'a-schedule:schedule': IDecoratorQueueOptions;
+  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueSchedule } from '../bean/queue.schedule.js';
+export interface IModuleQueue {
+  schedule: QueueSchedule;
+}
+/** queue: end */
 /** services: begin */
 export * from '../service/schedule.js';
 import { ServiceSchedule } from '../service/schedule.js';
@@ -21,6 +37,7 @@ export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
+  queue: IModuleQueue;
 }
 
 import 'vona';

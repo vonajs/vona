@@ -95,9 +95,7 @@ export class ServiceStartup extends BeanBase<ScopeModule> {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
       const cacheKey = `startupDebounce:${startup.name}${subdomain !== undefined ? `:${this.ctx.instance.id}` : ''}`;
       const debounce =
-        typeof startupOptions.debounce === 'number'
-          ? startupOptions.debounce
-          : this.$scope.queue.config.startup.debounce;
+        typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
       const cache = this.bean.cacheRedis.module('a-instance');
       const flag = await cache.getset(cacheKey, true, debounce);
       if (flag) return;

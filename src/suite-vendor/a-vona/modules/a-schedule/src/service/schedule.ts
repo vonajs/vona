@@ -30,7 +30,7 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
   }
 
   private async __deleteSchedule(job: Bull.Job) {
-    const jobKeyActive = this.scope.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
     const repeat = await cast(job).queue.repeat;
     await repeat.removeRepeatableByKey(jobKeyActive);
   }
@@ -45,9 +45,9 @@ export class ServiceSchedule extends BeanBase<ScopeModule> {
     }
     // check if changed
     const scheduleConfig = this.app.meta.onionSchedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
-    const jobKeyActive = this.scope.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.data.jobName, job.data.jobOptions.repeat);
     const jobNameConfig = this.__getJobName(this.ctx.subdomain, scheduleName);
-    const jobKeyConfig = this.scope.service.queue.getRepeatKey(jobNameConfig, scheduleConfig!.repeat);
+    const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(jobNameConfig, scheduleConfig!.repeat);
     if (jobKeyActive !== jobKeyConfig) return false;
     // ok
     return true;

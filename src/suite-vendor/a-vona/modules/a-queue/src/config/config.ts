@@ -5,9 +5,6 @@ import { VonaApplication } from 'vona';
 export const config = (app: VonaApplication) => {
   const lockTTL = app.meta.isLocal ? 8 : app.meta.isTest ? 60 : 30;
   return {
-    startup: {
-      debounce: 10 * 1000,
-    },
     redlock: {
       clients: ['redlock'] as string[],
       lockTTL: lockTTL * 1000,
