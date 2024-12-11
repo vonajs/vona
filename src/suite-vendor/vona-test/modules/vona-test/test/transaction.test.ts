@@ -1,4 +1,5 @@
-import { app, assert, mockUrl } from 'vona-mock';
+import assert from 'assert';
+import { app, mockUrl } from 'vona-mock';
 
 describe.only('transaction.test.ts', () => {
   const tableName = '__tempTransaction';
