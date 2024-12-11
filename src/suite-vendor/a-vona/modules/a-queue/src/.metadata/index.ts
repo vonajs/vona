@@ -28,18 +28,14 @@ export interface IModuleQueue {
 /** queue: end */
 /** services: begin */
 export * from '../service/queue.js';
-export * from '../service/schedule.js';
 import { ServiceQueue } from '../service/queue.js';
-import { ServiceSchedule } from '../service/schedule.js';
 export interface IModuleService {
   queue: ServiceQueue;
-  schedule: ServiceSchedule;
 }
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-queue.service.queue': ServiceQueue;
-    'a-queue.service.schedule': ServiceSchedule;
   }
 }
 /** services: end */

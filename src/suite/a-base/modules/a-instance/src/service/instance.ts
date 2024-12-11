@@ -103,7 +103,7 @@ export class ServiceInstance extends BeanBase<ScopeModule> {
           return;
         }
         // startup
-        this.$scope.core.service.startup
+        this.$scope.startup.service.startup
           .runStartupInstance(info.subdomain, info.options)
           .then(() => {
             info.resolve();
