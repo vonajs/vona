@@ -30,7 +30,5 @@
   ],
   "scripts": {},
   "author": "zhennann",
-  "dependencies": {
-    "chalk": "^3.0.0"
-  }
+  "dependencies": {}
 }

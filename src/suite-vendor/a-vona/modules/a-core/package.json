@@ -7,6 +7,7 @@
     "globalDependencies": {
       "assert": true,
       "chalk": true,
+      "fs-extra": true,
       "vona-shared": true
     }
   },
@@ -36,8 +37,10 @@
   "scripts": {},
   "dependencies": {
     "assert": "^2.1.0",
+    "boxen": "^8.0.1",
     "chalk": "^5.3.0",
     "egg-onerror": "^2.4.0",
+    "fs-extra": "^11.2.0",
     "vona-shared": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
