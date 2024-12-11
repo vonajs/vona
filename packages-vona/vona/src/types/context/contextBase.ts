@@ -11,8 +11,8 @@ export interface ContextBase {
   set innerAccess(value);
   get dbLevel();
   set dbLevel(value);
-  get subdomain();
-  set subdomain(value);
+  get subdomain(): string;
+  set subdomain(value: string);
   get ctxCaller();
   set ctxCaller(value);
   get cache();
