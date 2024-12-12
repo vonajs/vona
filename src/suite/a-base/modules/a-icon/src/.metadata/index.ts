@@ -50,6 +50,11 @@ declare module 'vona' {
     'a-icon.service.icon': ServiceIcon;
   }
 }
+declare module 'vona-module-a-icon' {
+  export interface ServiceIcon {
+    get scope(): ScopeModuleAIcon;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

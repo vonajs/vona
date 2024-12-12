@@ -126,6 +126,11 @@ declare module 'vona' {
     'a-dict.service.dict': ServiceDict;
   }
 }
+declare module 'vona-module-a-dict' {
+  export interface ServiceDict {
+    get scope(): ScopeModuleADict;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

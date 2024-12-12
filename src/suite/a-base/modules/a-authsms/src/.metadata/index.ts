@@ -138,6 +138,19 @@ declare module 'vona' {
     'a-authsms.service.smsProvider': ServiceSmsProvider;
   }
 }
+declare module 'vona-module-a-authsms' {
+  export interface ServiceAuth {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface ServiceCaptcha {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface ServiceSmsProvider {
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

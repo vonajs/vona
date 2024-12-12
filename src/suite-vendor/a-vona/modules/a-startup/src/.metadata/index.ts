@@ -28,6 +28,11 @@ declare module 'vona' {
     'a-startup.service.startup': ServiceStartup;
   }
 }
+declare module 'vona-module-a-startup' {
+  export interface ServiceStartup {
+    get scope(): ScopeModuleAStartup;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

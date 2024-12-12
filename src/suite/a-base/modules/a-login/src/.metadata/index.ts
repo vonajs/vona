@@ -25,6 +25,11 @@ declare module 'vona' {
     'a-login.service.auth': ServiceAuth;
   }
 }
+declare module 'vona-module-a-login' {
+  export interface ServiceAuth {
+    get scope(): ScopeModuleALogin;
+  }
+}
 /** services: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

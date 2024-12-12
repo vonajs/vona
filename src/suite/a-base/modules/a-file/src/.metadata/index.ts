@@ -111,6 +111,11 @@ declare module 'vona' {
     'a-file.service.file': ServiceFile;
   }
 }
+declare module 'vona-module-a-file' {
+  export interface ServiceFile {
+    get scope(): ScopeModuleAFile;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

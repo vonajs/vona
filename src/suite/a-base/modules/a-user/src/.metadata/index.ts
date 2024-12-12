@@ -77,6 +77,15 @@ declare module 'vona' {
     'a-user.service.user': ServiceUser;
   }
 }
+declare module 'vona-module-a-user' {
+  export interface ServicePublic {
+    get scope(): ScopeModuleAUser;
+  }
+
+  export interface ServiceUser {
+    get scope(): ScopeModuleAUser;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

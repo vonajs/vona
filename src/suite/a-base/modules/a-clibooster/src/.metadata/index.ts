@@ -165,6 +165,15 @@ declare module 'vona' {
     'a-clibooster.service.utils': ServiceUtils;
   }
 }
+declare module 'vona-module-a-clibooster' {
+  export interface ServiceTools {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface ServiceUtils {
+    get scope(): ScopeModuleAClibooster;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

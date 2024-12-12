@@ -31,6 +31,11 @@ declare module 'vona' {
     'cms-pluginsubmit.service.tools': ServiceTools;
   }
 }
+declare module 'vona-module-cms-pluginsubmit' {
+  export interface ServiceTools {
+    get scope(): ScopeModuleCmsPluginsubmit;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

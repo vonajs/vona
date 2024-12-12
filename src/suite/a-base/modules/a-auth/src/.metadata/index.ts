@@ -158,6 +158,11 @@ declare module 'vona' {
     'a-auth.service.passport': ServicePassport;
   }
 }
+declare module 'vona-module-a-auth' {
+  export interface ServicePassport {
+    get scope(): ScopeModuleAAuth;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

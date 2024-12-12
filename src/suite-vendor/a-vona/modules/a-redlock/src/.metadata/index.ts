@@ -10,6 +10,11 @@ declare module 'vona' {
     'a-redlock.service.redlock': ServiceRedlock;
   }
 }
+declare module 'vona-module-a-redlock' {
+  export interface ServiceRedlock {
+    get scope(): ScopeModuleARedlock;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

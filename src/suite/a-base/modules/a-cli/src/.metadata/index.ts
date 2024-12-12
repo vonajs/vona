@@ -65,6 +65,23 @@ declare module 'vona' {
     'a-cli.service.template': ServiceTemplate;
   }
 }
+declare module 'vona-module-a-cli' {
+  export interface ServiceCli {
+    get scope(): ScopeModuleACli;
+  }
+
+  export interface ServiceConsole {
+    get scope(): ScopeModuleACli;
+  }
+
+  export interface ServiceHelper {
+    get scope(): ScopeModuleACli;
+  }
+
+  export interface ServiceTemplate {
+    get scope(): ScopeModuleACli;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

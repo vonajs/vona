@@ -27,6 +27,11 @@ declare module 'vona' {
     'a-oauth.service.sessionStore': ServiceSessionStore;
   }
 }
+declare module 'vona-module-a-oauth' {
+  export interface ServiceSessionStore {
+    get scope(): ScopeModuleAOauth;
+  }
+}
 /** services: end */
 /** main: begin */
 export * from '../main.js';

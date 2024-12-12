@@ -214,6 +214,27 @@ declare module 'vona' {
     'a-flowtask.service.right': ServiceRight;
   }
 }
+declare module 'vona-module-a-flowtask' {
+  export interface ServiceFlow {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ServiceFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ServiceLocalFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ServiceProcedure {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ServiceRight {
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

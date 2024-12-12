@@ -135,6 +135,11 @@ declare module 'vona' {
     'a-app.service.resource': ServiceResource;
   }
 }
+declare module 'vona-module-a-app' {
+  export interface ServiceResource {
+    get scope(): ScopeModuleAApp;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

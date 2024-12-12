@@ -60,6 +60,11 @@ declare module 'vona' {
     'a-message.service.message': ServiceMessage;
   }
 }
+declare module 'vona-module-a-message' {
+  export interface ServiceMessage {
+    get scope(): ScopeModuleAMessage;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

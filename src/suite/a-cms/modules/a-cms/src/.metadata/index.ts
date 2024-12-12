@@ -222,6 +222,19 @@ declare module 'vona' {
     'a-cms.service.site': ServiceSite;
   }
 }
+declare module 'vona-module-a-cms' {
+  export interface ServiceBuild {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ServiceRender {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ServiceSite {
+    get scope(): ScopeModuleACms;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

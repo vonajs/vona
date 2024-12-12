@@ -92,6 +92,31 @@ declare module 'vona' {
     'a-baseadmin.service.user': ServiceUser;
   }
 }
+declare module 'vona-module-a-baseadmin' {
+  export interface ServiceAtomRight {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ServiceAuth {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ServiceAuthScene {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ServiceResourceRight {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ServiceRole {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ServiceUser {
+    get scope(): ScopeModuleABaseadmin;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

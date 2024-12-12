@@ -529,6 +529,11 @@ declare module 'vona' {
     'test-party.service.test': ServiceTest;
   }
 }
+declare module 'vona-module-test-party' {
+  export interface ServiceTest {
+    get scope(): ScopeModuleTestParty;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

@@ -57,6 +57,11 @@ declare module 'vona' {
     'a-captcha.service.captcha': ServiceCaptcha;
   }
 }
+declare module 'vona-module-a-captcha' {
+  export interface ServiceCaptcha {
+    get scope(): ScopeModuleACaptcha;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

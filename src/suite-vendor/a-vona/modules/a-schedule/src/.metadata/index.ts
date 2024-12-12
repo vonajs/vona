@@ -46,6 +46,11 @@ declare module 'vona' {
     'a-schedule.service.schedule': ServiceSchedule;
   }
 }
+declare module 'vona-module-a-schedule' {
+  export interface ServiceSchedule {
+    get scope(): ScopeModuleASchedule;
+  }
+}
 /** services: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

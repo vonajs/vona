@@ -64,6 +64,11 @@ declare module 'vona' {
     'a-validation.service.validation': ServiceValidation;
   }
 }
+declare module 'vona-module-a-validation' {
+  export interface ServiceValidation {
+    get scope(): ScopeModuleAValidation;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

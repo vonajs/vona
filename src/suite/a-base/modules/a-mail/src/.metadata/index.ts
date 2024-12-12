@@ -155,6 +155,11 @@ declare module 'vona' {
     'a-mail.service.scene': ServiceScene;
   }
 }
+declare module 'vona-module-a-mail' {
+  export interface ServiceScene {
+    get scope(): ScopeModuleAMail;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

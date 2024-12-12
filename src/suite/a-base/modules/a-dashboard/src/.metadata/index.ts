@@ -152,6 +152,11 @@ declare module 'vona' {
     'a-dashboard.service.dashboard': ServiceDashboard;
   }
 }
+declare module 'vona-module-a-dashboard' {
+  export interface ServiceDashboard {
+    get scope(): ScopeModuleADashboard;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

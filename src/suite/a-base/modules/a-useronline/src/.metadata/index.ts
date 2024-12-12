@@ -132,6 +132,11 @@ declare module 'vona' {
     'a-useronline.service.userOnline': ServiceUserOnline;
   }
 }
+declare module 'vona-module-a-useronline' {
+  export interface ServiceUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

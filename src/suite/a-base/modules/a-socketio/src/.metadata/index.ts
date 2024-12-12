@@ -269,6 +269,31 @@ declare module 'vona' {
     'a-socketio.service.redis': ServiceRedis;
   }
 }
+declare module 'vona-module-a-socketio' {
+  export interface ServiceIo {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ServiceIoInner {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ServiceMessage {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ServiceMessageClass {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ServiceProcedure {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ServiceRedis {
+    get scope(): ScopeModuleASocketio;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

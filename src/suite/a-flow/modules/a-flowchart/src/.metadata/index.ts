@@ -35,6 +35,15 @@ declare module 'vona' {
     'a-flowchart.service.flowDef': ServiceFlowDef;
   }
 }
+declare module 'vona-module-a-flowchart' {
+  export interface ServiceFlow {
+    get scope(): ScopeModuleAFlowchart;
+  }
+
+  export interface ServiceFlowDef {
+    get scope(): ScopeModuleAFlowchart;
+  }
+}
 /** services: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

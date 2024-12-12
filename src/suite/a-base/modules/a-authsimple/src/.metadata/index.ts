@@ -112,6 +112,15 @@ declare module 'vona' {
     'a-authsimple.service.simple': ServiceSimple;
   }
 }
+declare module 'vona-module-a-authsimple' {
+  export interface ServiceAuth {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+
+  export interface ServiceSimple {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

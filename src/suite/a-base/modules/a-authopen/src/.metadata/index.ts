@@ -137,6 +137,19 @@ declare module 'vona' {
     'a-authopen.service.token': ServiceToken;
   }
 }
+declare module 'vona-module-a-authopen' {
+  export interface ServiceAuth {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface ServiceAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface ServiceToken {
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
 /** services: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

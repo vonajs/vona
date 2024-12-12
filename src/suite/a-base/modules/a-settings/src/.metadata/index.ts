@@ -111,6 +111,11 @@ declare module 'vona' {
     'a-settings.service.settings': ServiceSettings;
   }
 }
+declare module 'vona-module-a-settings' {
+  export interface ServiceSettings {
+    get scope(): ScopeModuleASettings;
+  }
+}
 /** services: end */
 /** constant: begin */
 export * from '../config/constants.js';

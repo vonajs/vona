@@ -129,6 +129,11 @@ declare module 'vona' {
     'a-stats.service.stats': ServiceStats;
   }
 }
+declare module 'vona-module-a-stats' {
+  export interface ServiceStats {
+    get scope(): ScopeModuleAStats;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

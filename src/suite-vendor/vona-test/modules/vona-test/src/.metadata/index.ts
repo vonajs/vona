@@ -192,6 +192,19 @@ declare module 'vona' {
     'vona-test.service.testClass': ServiceTestClass;
   }
 }
+declare module 'vona-module-vona-test' {
+  export interface ServiceTest {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ServiceTestApp {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ServiceTestClass {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

@@ -50,6 +50,11 @@ declare module 'vona' {
     'a-progress.service.progress': ServiceProgress;
   }
 }
+declare module 'vona-module-a-progress' {
+  export interface ServiceProgress {
+    get scope(): ScopeModuleAProgress;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

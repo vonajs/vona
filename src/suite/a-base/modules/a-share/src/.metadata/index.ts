@@ -128,6 +128,11 @@ declare module 'vona' {
     'a-share.service.share': ServiceShare;
   }
 }
+declare module 'vona-module-a-share' {
+  export interface ServiceShare {
+    get scope(): ScopeModuleAShare;
+  }
+}
 /** services: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
