@@ -29,6 +29,9 @@
     },
     {
       "path": "modules/a-redlock/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-onion/tsconfig.build.json"
     }
   ]
 }

@@ -17,7 +17,8 @@
     "vona-module-a-startup": "workspace:^",
     "vona-module-a-schedule": "workspace:^",
     "vona-module-a-executor": "workspace:^",
-    "vona-module-a-redlock": "workspace:^"
+    "vona-module-a-redlock": "workspace:^",
+    "vona-module-a-onion": "workspace:^"
   },
   "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
 }

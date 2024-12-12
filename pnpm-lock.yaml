@@ -209,6 +209,9 @@ importers:
       vona-module-a-oauth:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-oauth
+      vona-module-a-onion:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-onion
       vona-module-a-paypal:
         specifier: workspace:^
         version: link:src/suite/a-paypal/modules/a-paypal
@@ -1241,6 +1244,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:modules/a-executor
+      vona-module-a-onion:
+        specifier: workspace:^
+        version: link:modules/a-onion
       vona-module-a-queue:
         specifier: workspace:^
         version: link:modules/a-queue
@@ -1295,6 +1301,8 @@ importers:
       koa-compose:
         specifier: ^4.1.0
         version: 4.1.0
+
+  src/suite-vendor/a-vona/modules/a-onion: {}
 
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
