@@ -45,10 +45,13 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     if (className === 'BeanBase') className = 'BeanBase2';
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
-    contentScopes.push(`
-      export interface ${className} {
-        get scope(): ${scopeModuleName};
-      }`);
+    if (!isBeanGlobal || !isIgnore) {
+      // ignore virtual
+      contentScopes.push(`
+        export interface ${className} {
+          get scope(): ${scopeModuleName};
+        }`);
+    }
     if (isBeanGlobal || !isIgnore) {
       contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
     }
