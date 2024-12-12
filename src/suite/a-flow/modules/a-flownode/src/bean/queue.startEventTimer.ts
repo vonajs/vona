@@ -1,5 +1,4 @@
-import { Queue } from 'vona';
-import { BeanQueueBase, IQueueExecute, IQueuePushOptions, TypeQueueJob } from 'vona-module-a-queue';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions, Queue, TypeQueueJob } from 'vona-module-a-queue';
 import { FlowNodeStartEventTimer } from './flow.node.startEventTimer.js';
 
 export type TypeQueueStartEventTimerJobData = {
