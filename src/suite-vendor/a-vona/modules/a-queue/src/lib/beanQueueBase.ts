@@ -1,5 +1,5 @@
-import { BeanBase, deepExtend, IQueueRecord } from 'vona';
-import { IQueueJobContext, IQueuePushOptions } from '../types/queue.js';
+import { BeanBase, deepExtend } from 'vona';
+import { IQueueJobContext, IQueuePushOptions, IQueueRecord } from '../types/queue.js';
 
 export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT> {

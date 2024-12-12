@@ -1,5 +1,5 @@
-import { cast, Queue } from 'vona';
-import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+import { cast } from 'vona';
+import { BeanQueueBase, IQueueExecute, IQueuePushOptions, Queue } from 'vona-module-a-queue';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { TypeGatewayMode } from '../types.js';
 

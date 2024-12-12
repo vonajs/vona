@@ -1,11 +1,13 @@
 import * as Bull from 'bullmq';
-import { BeanBase, deepExtend, IDecoratorQueueOptions, IQueueRecord, Service, subdomainDesp, uuidv4 } from 'vona';
+import { BeanBase, deepExtend, Service, subdomainDesp, uuidv4 } from 'vona';
 import {
+  IDecoratorQueueOptions,
   IQueueCallbacks,
   IQueueExecute,
   IQueueJobContext,
   IQueueQueue,
   IQueueQueues,
+  IQueueRecord,
   IQueueWork,
   IQueueWorks,
   TypeQueueJob,
@@ -29,9 +31,9 @@ export class ServiceQueue extends BeanBase {
   }
 
   loadQueueWorkers(subdomain: string) {
-    for (const queueItem of this.app.meta.onionQueue.middlewaresEnabled) {
+    for (const queueItem of this.bean.onion.queue.middlewaresEnabled) {
       const info: IQueueJobContext<unknown> = {
-        queueName: queueItem.name as any,
+        queueName: queueItem.name as never,
         data: undefined as any,
         options: {
           subdomain,
@@ -56,7 +58,7 @@ export class ServiceQueue extends BeanBase {
     // prefix
     const prefix = `bull_${app.name}:queue`;
     // queue config
-    const queueConfig = app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = app.bean.onion.queue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/redlock
     const workerOptions = queueConfig?.options?.worker;
     const redlockOptions = queueConfig?.options?.redlock;
@@ -126,7 +128,7 @@ export class ServiceQueue extends BeanBase {
     // prefix
     const prefix = `bull_${app.name}:queue`;
     // queue config
-    const queueConfig = app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = app.bean.onion.queue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
     const queueOptions = queueConfig?.options?.queue;
 
@@ -195,7 +197,7 @@ export class ServiceQueue extends BeanBase {
 
   _queuePush<DATA, RESULT>(info: IQueueJobContext<DATA>, isAsync: boolean): Promise<RESULT> {
     // queue config
-    const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueConfig = this.bean.onion.queue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
     const jobOptionsBase = queueConfig?.options?.job;
     // queue
@@ -235,8 +237,8 @@ export class ServiceQueue extends BeanBase {
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
     const info = job.data;
     // queue config
-    const queueItem = this.app.meta.onionQueue.getMiddlewareItem(info.queueName);
-    const queueConfig = this.app.meta.onionQueue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
+    const queueItem = this.bean.onion.queue.getMiddlewareItem(info.queueName);
+    const queueConfig = this.bean.onion.queue.getMiddlewareOptions<IDecoratorQueueOptions>(info.queueName);
     // execute
     return await this.bean.executor.newCtx(
       async () => {
