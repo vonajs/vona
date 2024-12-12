@@ -12,6 +12,15 @@
     "globalDependencies": {
       "bignumber.js": true,
       "knex": true
+    },
+    "onions": {
+      "model": {
+        "sceneIsolate": true,
+        "optionsGlobalInterfaceName": "IDecoratorModelOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-database",
+        "scopeResource": true,
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -30,7 +39,8 @@
   "description": "db",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "keywords": [

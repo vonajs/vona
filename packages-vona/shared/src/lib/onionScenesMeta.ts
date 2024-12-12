@@ -49,19 +49,12 @@ export const onionScenesMeta: OnionScenesMeta = {
     sceneIsolate: true,
     optionsGlobalInterfaceName: 'IDecoratorEntityOptions',
   },
-  model: {
-    sceneIsolate: true,
-    optionsGlobalInterfaceName: 'IDecoratorModelOptions',
-  },
   controller: {
     sceneIsolate: true,
     optionsGlobalInterfaceName: 'IDecoratorControllerOptions',
   },
   meta: {
     optionsGlobalInterfaceName: '',
-  },
-  summerCache: {
-    optionsGlobalInterfaceName: 'IDecoratorSummerCacheOptions',
   },
   startup: {
     optionsGlobalInterfaceName: 'IDecoratorStartupOptions',
