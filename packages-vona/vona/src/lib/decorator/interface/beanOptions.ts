@@ -2,6 +2,8 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 // import { ContainerScope } from '../index.js';
 
+export interface ISceneCustomRecord {}
+
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'service'
   | 'aop'
@@ -21,6 +23,7 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'summerCache'
   | 'startup'
   | 'meta'
+  | keyof ISceneCustomRecord
   | TypeDecoratorBeanOptionsScene;
 export type TypeDecoratorBeanOptionsScene =
   | 'bean'

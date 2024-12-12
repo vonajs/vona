@@ -73,4 +73,8 @@ declare module 'vona' {
   export interface ConfigOnions {
     queue: OmitNever<IQueueRecord>;
   }
+
+  export interface ISceneCustomRecord {
+    queue: never;
+  }
 }

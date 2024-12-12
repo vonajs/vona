@@ -26,4 +26,8 @@ declare module 'vona' {
   export interface ConfigOnions {
     schedule: OmitNever<IScheduleRecord>;
   }
+
+  export interface ISceneCustomRecord {
+    schedule: never;
+  }
 }

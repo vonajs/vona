@@ -22,7 +22,6 @@ const __boilerplates = {
   socketPacket: 'socketPacket',
   summerCache: 'summerCache',
   startup: 'startup',
-  queue: 'queue',
 };
 
 declare module '@cabloy/cli' {
