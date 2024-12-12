@@ -30,4 +30,8 @@ export class BeanBaseSimple extends BeanSimple {
   protected get beanOptions(): IDecoratorBeanOptionsBase {
     return appResource.getBean(this.__beanFullName__)!;
   }
+
+  protected get onionOptions(): unknown | undefined {
+    return this.beanOptions.options;
+  }
 }

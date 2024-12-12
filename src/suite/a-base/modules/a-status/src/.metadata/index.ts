@@ -50,8 +50,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-status' {
   export interface EntityStatus {
-    column<K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

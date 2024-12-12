@@ -1,23 +1,16 @@
-import { appResource, BeanBaseSimple, IDecoratorEntityOptions } from 'vona';
+import { BeanBaseSimple, cast, IDecoratorEntityOptions } from 'vona';
 import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 
 export class EntityBase extends BeanBaseSimple {
-  protected get beanOptions() {
-    return appResource.getBean((<any>this).__beanFullName__)!;
-  }
-  protected get entityOptions(): IDecoratorEntityOptions {
-    return this.beanOptions.options as IDecoratorEntityOptions;
-  }
-
   public get table(): string {
-    return this.entityOptions.table!;
+    return cast<IDecoratorEntityOptions>(this.onionOptions).table!;
   }
 
-  protected column(column: string) {
+  public column(column: string) {
     return column;
   }
-  protected columns(...columns: string[]) {
+  public columns(...columns: string[]) {
     return columns;
   }
 
