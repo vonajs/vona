@@ -22,6 +22,23 @@ declare module 'vona' {
     'a-summer.broadcast.memMultiDel': BroadcastMemMultiDel;
   }
 }
+declare module 'vona-module-a-summer' {
+  export interface BeanSummer {
+    get scope(): ScopeModuleASummer;
+  }
+
+  export interface BroadcastMemClear {
+    get scope(): ScopeModuleASummer;
+  }
+
+  export interface BroadcastMemDel {
+    get scope(): ScopeModuleASummer;
+  }
+
+  export interface BroadcastMemMultiDel {
+    get scope(): ScopeModuleASummer;
+  }
+}
 /** beans: end */
 /** services: begin */
 export * from '../service/localFetch_.js';
