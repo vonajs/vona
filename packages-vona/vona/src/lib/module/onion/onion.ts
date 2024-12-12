@@ -15,13 +15,13 @@ import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
 import { cast } from '../../../types/utils/cast.js';
-import { IModule } from '@cabloy/module-info';
+import { IModule, OnionSceneMeta } from '@cabloy/module-info';
 import { compose, composeAsync, deepExtend } from '../../utils/util.js';
-import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
 import { Constructable } from '../../decorator/type/constructable.js';
 import { IBeanRecord } from '../../bean/type.js';
 import { IDecoratorAopOptions, TypeDecoratorAopOptionsMatch } from '../../../types/interface/aop.js';
 import { VonaApplication } from '../../../types/index.js';
+import { getOnionScenesMeta } from 'vona-shared';
 
 const __adapter = (_context, chain) => {
   return {
@@ -46,7 +46,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
-    this.sceneMeta = onionScenesMeta[this.sceneName];
+    this.sceneMeta = getOnionScenesMeta(this.app.meta.modules)[this.sceneName];
     this._loadMiddlewares();
     this._handleDependents(this.middlewaresGlobal);
     this._swapMiddlewares(this.middlewaresGlobal);

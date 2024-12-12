@@ -12,6 +12,7 @@ import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
+import { getOnionScenesMeta } from 'vona-shared';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -58,44 +59,46 @@ export class CliToolsMetadata extends BeanCliBase {
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
+    // onionScenesMeta
+    const onionScenesMeta = getOnionScenesMeta(this.helper.cli.modulesMeta.modules);
     // content
     let content = '';
     // beans
     content += await generateBeans(moduleName, modulePath);
     // middlewares
-    content += await generateOnions('middleware', moduleName, modulePath);
+    content += await generateOnions('middleware', onionScenesMeta, moduleName, modulePath);
     // guards
-    content += await generateOnions('guard', moduleName, modulePath);
+    content += await generateOnions('guard', onionScenesMeta, moduleName, modulePath);
     // interceptors
-    content += await generateOnions('interceptor', moduleName, modulePath);
+    content += await generateOnions('interceptor', onionScenesMeta, moduleName, modulePath);
     // pipes
-    content += await generateOnions('pipe', moduleName, modulePath);
+    content += await generateOnions('pipe', onionScenesMeta, moduleName, modulePath);
     // filters
-    content += await generateOnions('filter', moduleName, modulePath);
+    content += await generateOnions('filter', onionScenesMeta, moduleName, modulePath);
     // socket connections
-    content += await generateOnions('socketConnection', moduleName, modulePath);
+    content += await generateOnions('socketConnection', onionScenesMeta, moduleName, modulePath);
     // socket packets
-    content += await generateOnions('socketPacket', moduleName, modulePath);
+    content += await generateOnions('socketPacket', onionScenesMeta, moduleName, modulePath);
     // aops
-    content += await generateOnions('aop', moduleName, modulePath);
+    content += await generateOnions('aop', onionScenesMeta, moduleName, modulePath);
     // entities
-    content += await generateOnions('entity', moduleName, modulePath);
+    content += await generateOnions('entity', onionScenesMeta, moduleName, modulePath);
     // models
-    content += await generateOnions('model', moduleName, modulePath);
+    content += await generateOnions('model', onionScenesMeta, moduleName, modulePath);
     // controllers
-    content += await generateOnions('controller', moduleName, modulePath);
+    content += await generateOnions('controller', onionScenesMeta, moduleName, modulePath);
     // meta
-    content += await generateOnions('meta', moduleName, modulePath);
+    content += await generateOnions('meta', onionScenesMeta, moduleName, modulePath);
     // summerCaches
-    content += await generateOnions('summerCache', moduleName, modulePath);
+    content += await generateOnions('summerCache', onionScenesMeta, moduleName, modulePath);
     // startups
-    content += await generateOnions('startup', moduleName, modulePath);
+    content += await generateOnions('startup', onionScenesMeta, moduleName, modulePath);
     // queues
-    content += await generateOnions('queue', moduleName, modulePath);
+    content += await generateOnions('queue', onionScenesMeta, moduleName, modulePath);
     // schedules
-    content += await generateOnions('schedule', moduleName, modulePath);
+    content += await generateOnions('schedule', onionScenesMeta, moduleName, modulePath);
     // atoms
-    content += await generateOnions('atom', moduleName, modulePath);
+    content += await generateOnions('atom', onionScenesMeta, moduleName, modulePath);
     // atoms
     //content += await generateAtoms(moduleName, modulePath);
     // dtos

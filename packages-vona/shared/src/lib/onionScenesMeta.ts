@@ -1,13 +1,4 @@
-export interface OnionSceneMeta {
-  sceneIsolate?: boolean;
-  hasLocal?: boolean;
-  optionsRoute?: boolean;
-  optionsArgumentPipe?: boolean;
-  optionsDynamic?: boolean;
-  optionsGlobalInterfaceName?: string;
-}
-
-export type OnionScenesMeta = Record<string, OnionSceneMeta>;
+import { IModule, OnionScenesMeta } from '@cabloy/module-info';
 
 export const onionScenesMeta: OnionScenesMeta = {
   // todo: remove
@@ -78,7 +69,23 @@ export const onionScenesMeta: OnionScenesMeta = {
   queue: {
     optionsGlobalInterfaceName: 'IDecoratorQueueOptions',
   },
-  schedule: {
-    optionsGlobalInterfaceName: 'IDecoratorScheduleOptions',
-  },
 };
+
+let __result: OnionScenesMeta;
+export function getOnionScenesMeta(modules: Record<string, IModule>) {
+  if (!__result) {
+    __result = _getOnionScenesMeta(modules);
+  }
+  return __result;
+}
+
+export function _getOnionScenesMeta(modules: Record<string, IModule>) {
+  let result = Object.assign({}, onionScenesMeta);
+  for (const moduleName in modules) {
+    const module = modules[moduleName];
+    const onions = module.package.vonaModule?.onions;
+    if (!onions) continue;
+    result = Object.assign(result, onions);
+  }
+  return result;
+}

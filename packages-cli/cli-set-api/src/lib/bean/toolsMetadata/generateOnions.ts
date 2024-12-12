@@ -3,9 +3,14 @@ import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
+import { OnionSceneMeta, OnionScenesMeta } from '@cabloy/module-info';
 
-export async function generateOnions(sceneName: string, moduleName: string, modulePath: string) {
+export async function generateOnions(
+  sceneName: string,
+  onionScenesMeta: OnionScenesMeta,
+  moduleName: string,
+  modulePath: string,
+) {
   const scopeModuleName = getScopeModuleName(moduleName);
   const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);

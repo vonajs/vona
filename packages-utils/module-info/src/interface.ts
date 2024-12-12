@@ -41,6 +41,17 @@ export interface IBundleVendor {
   output: string;
 }
 
+export interface OnionSceneMeta {
+  sceneIsolate?: boolean;
+  hasLocal?: boolean;
+  optionsRoute?: boolean;
+  optionsArgumentPipe?: boolean;
+  optionsDynamic?: boolean;
+  optionsGlobalInterfaceName?: string;
+}
+
+export type OnionScenesMeta = Record<string, OnionSceneMeta>;
+
 export interface IModulePackage {
   name: string;
   version: string;
@@ -49,6 +60,7 @@ export interface IModulePackage {
     fileVersion: number;
     dependencies?: Record<string, string>;
     globalDependencies?: Record<string, string | boolean>;
+    onions?: OnionScenesMeta;
   };
   zovaModule?: {
     capabilities?: IModuleCapabilities;
