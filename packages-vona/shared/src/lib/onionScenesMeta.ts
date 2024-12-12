@@ -10,6 +10,10 @@ export interface OnionSceneMeta {
 export type OnionScenesMeta = Record<string, OnionSceneMeta>;
 
 export const onionScenesMeta: OnionScenesMeta = {
+  // todo: remove
+  atom: {
+    sceneIsolate: true,
+  },
   middleware: {
     hasLocal: true,
     optionsRoute: true,

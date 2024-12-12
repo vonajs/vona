@@ -3,7 +3,6 @@ import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
-import { generateAtoms } from './toolsMetadata/generateAtoms.js';
 import { generateDtos } from './toolsMetadata/generateDtos.js';
 import { generateMetaStatus, generateMetaRedlock } from './toolsMetadata/generateMetaStatus.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
@@ -96,7 +95,9 @@ export class CliToolsMetadata extends BeanCliBase {
     // schedules
     content += await generateOnions('schedule', moduleName, modulePath);
     // atoms
-    content += await generateAtoms(moduleName, modulePath);
+    content += await generateOnions('atom', moduleName, modulePath);
+    // atoms
+    //content += await generateAtoms(moduleName, modulePath);
     // dtos
     content += await generateDtos(moduleName, modulePath);
     // meta status

@@ -2,8 +2,4 @@ import { Virtual } from 'vona';
 import { BeanAtomBasePerformActionBulk } from './bean.atomBase/bean.atomBase_performActionBulk.js';
 
 @Virtual()
-export class BeanAtomBase<T = unknown> extends BeanAtomBasePerformActionBulk {
-  get scope() {
-    return this.getScope() as T;
-  }
-}
+export class BeanAtomBase<_T = any> extends BeanAtomBasePerformActionBulk {}

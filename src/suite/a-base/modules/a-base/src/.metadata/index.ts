@@ -1,7 +1,7 @@
 /** beans: begin */
 export * from '../bean/bean.atom.js';
 export * from '../bean/bean.atomAction.js';
-export * from '../bean/bean.atomBase.js';
+export * from '../bean/bean.atomBase_.js';
 export * from '../bean/bean.atomClass.js';
 export * from '../bean/bean.atomRightAux.js';
 export * from '../bean/bean.atomStage.js';
@@ -26,7 +26,7 @@ export * from '../bean/stats.starsLabels.js';
 export * from '../bean/version.manager.js';
 import { BeanAtom } from '../bean/bean.atom.js';
 import { BeanAtomAction } from '../bean/bean.atomAction.js';
-import { BeanAtomBase } from '../bean/bean.atomBase.js';
+import { BeanAtomBase } from '../bean/bean.atomBase_.js';
 import { BeanAtomClass } from '../bean/bean.atomClass.js';
 import { BeanAtomRightAux } from '../bean/bean.atomRightAux.js';
 import { BeanAtomStage } from '../bean/bean.atomStage.js';
@@ -54,7 +54,6 @@ declare module 'vona' {
   export interface IBeanRecordGlobal {
     atom: BeanAtom;
     atomAction: BeanAtomAction;
-    atomBase: BeanAtomBase;
     atomClass: BeanAtomClass;
     atomRightAux: BeanAtomRightAux;
     atomStage: BeanAtomStage;
@@ -74,6 +73,7 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
+    atomBase: BeanAtomBase;
     'a-base.stats.draftsCommon': StatsDraftsCommon;
     'a-base.stats.draftsFlowing': StatsDraftsFlowing;
     'a-base.stats.labels': StatsLabels;
@@ -88,10 +88,6 @@ declare module 'vona-module-a-base' {
   }
 
   export interface BeanAtomAction {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomBase {
     get scope(): ScopeModuleABase;
   }
 
@@ -722,7 +718,7 @@ declare module 'vona-module-a-base' {
   }
 }
 /** queue: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/resource.js';
 export * from '../atom/role.js';
 export * from '../atom/roleFieldsRight.js';
@@ -735,7 +731,74 @@ export * from '../atom/user.js';
 export * from '../atom/userAtomRight.js';
 export * from '../atom/userFieldsRight.js';
 export * from '../atom/userResourceRight.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-base:resource': never;
+    'a-base:role': never;
+    'a-base:roleFieldsRight': never;
+    'a-base:roleFieldsRightSpread': never;
+    'a-base:roleResourceRight': never;
+    'a-base:roleResourceRightSpread': never;
+    'a-base:roleRight': never;
+    'a-base:roleRightSpread': never;
+    'a-base:user': never;
+    'a-base:userAtomRight': never;
+    'a-base:userFieldsRight': never;
+    'a-base:userResourceRight': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface AtomResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleFieldsRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleFieldsRightSpread {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleResourceRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleResourceRightSpread {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleRightSpread {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserAtomRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserFieldsRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserResourceRight {
+    get scope(): ScopeModuleABase;
+  }
+}
+/** atom: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
