@@ -2,12 +2,8 @@ import { __ThisModule__ } from '../../../.metadata/this.js';
 import { BeanBase } from 'vona';
 
 export class VersionUpdate extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   get modelResourceRole() {
-    return this.scope.model.resourceRole;
+    return this.$scope.base.model.resourceRole;
   }
 
   async run(options) {

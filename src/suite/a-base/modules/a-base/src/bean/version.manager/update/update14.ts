@@ -11,15 +11,11 @@ const __atomClassUser = {
 };
 
 export class VersionUpdate extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   get modelRole() {
-    return this.scope.model.role;
+    return this.$scope.base.model.role;
   }
   get modelUser() {
-    return this.scope.model.user;
+    return this.$scope.base.model.user;
   }
 
   async run(options) {

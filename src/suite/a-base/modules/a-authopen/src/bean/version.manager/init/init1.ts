@@ -3,15 +3,11 @@ import { BeanBase } from 'vona';
 import initData from './initData1.js';
 
 export class VersionInit extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   get modelAuthOpen() {
-    return this.scope.model.authOpen;
+    return this.$scope.authopen.model.authOpen;
   }
   get localToken() {
-    return this.scope.service.token;
+    return this.$scope.authopen.service.token;
   }
 
   async run(_options) {

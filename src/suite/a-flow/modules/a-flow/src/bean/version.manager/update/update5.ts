@@ -1,11 +1,6 @@
 import { BeanBase } from 'vona';
-import { __ThisModule__ } from '../../../.metadata/this.js';
 
 export class VersionUpdate extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   async run(_options) {
     // alter table: aFlow
     await this.bean.model.alterTable('aFlow', function (table) {
@@ -38,7 +33,7 @@ export class VersionUpdate extends BeanBase {
 
   async _adjustFlowsInstance() {
     // flow
-    let flows = await this.scope.model.flow.select({
+    let flows = await this.$scope.flow.model.flow.select({
       where: {
         flowAtomId: {
           op: '>',
@@ -50,11 +45,11 @@ export class VersionUpdate extends BeanBase {
       const flowAtomId = flow.flowAtomId;
       const atom = await this.app.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
-        await this.scope.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
+        await this.$scope.flow.model.flow.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
     }
     // flow history
-    flows = await this.scope.model.flowHistory.select({
+    flows = await this.$scope.flow.model.flowHistory.select({
       where: {
         flowAtomId: {
           op: '>',
@@ -66,7 +61,7 @@ export class VersionUpdate extends BeanBase {
       const flowAtomId = flow.flowAtomId;
       const atom = await this.app.bean.atom.model.get({ id: flowAtomId });
       if (atom) {
-        await this.scope.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
+        await this.$scope.flow.model.flowHistory.update({ id: flow.id, flowAtomClassId: atom.atomClassId });
       }
     }
   }

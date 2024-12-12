@@ -8,12 +8,8 @@ const __atomClassResource = {
 };
 
 export class VersionUpdate extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   get modelAtom() {
-    return this.scope.model.atom;
+    return this.$scope.base.model.atom;
   }
 
   async run() {

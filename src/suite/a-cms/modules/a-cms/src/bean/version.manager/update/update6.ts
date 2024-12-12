@@ -1,11 +1,6 @@
 import { BeanBase } from 'vona';
-import { __ThisModule__ } from '../../../.metadata/this.js';
 
 export class VersionUpdate extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   async run() {
     // alter table: aCmsArticle
     await this.bean.model.alterTable('aCmsArticle', function (table) {
@@ -79,10 +74,10 @@ export class VersionUpdate extends BeanBase {
   }
 
   async _update6UuidsInstance() {
-    const articles = await this.scope.model.article.select();
+    const articles = await this.$scope.cms.model.article.select();
     for (const article of articles) {
       const uuid = this._parseUuid(article);
-      await this.scope.model.article.update({
+      await this.$scope.cms.model.article.update({
         id: article.id,
         uuid,
       });

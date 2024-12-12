@@ -4,10 +4,6 @@ import { BeanBase } from 'vona';
 import initData from './initData2.js';
 
 export class VersionInit extends BeanBase {
-  constructor() {
-    super(__ThisModule__);
-  }
-
   async run(options) {
     // roles
     const roleIds = await this._initRoles();
@@ -44,7 +40,7 @@ export class VersionInit extends BeanBase {
     userRoot.item.mobile = options.mobile;
     users.push(userRoot);
     // user: admin
-    const demo = this.scope.config.configFront.demo;
+    const demo = this.$scope.base.config.configFront.demo;
     if (demo.enable) {
       const userAdmin = this.app.bean.util.extend({}, initData.users.admin);
       users.push(userAdmin);
