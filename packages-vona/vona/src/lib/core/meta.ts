@@ -27,7 +27,6 @@ import {
   IDecoratorSummerCacheOptions,
   IDecoratorStartupOptions,
   IDecoratorQueueOptions,
-  IDecoratorScheduleOptions,
   IMiddlewareRecord,
   IGuardRecord,
   IInterceptorRecord,
@@ -43,7 +42,6 @@ import {
   ISummerCacheRecord,
   IStartupRecord,
   IQueueRecord,
-  IScheduleRecord,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -99,7 +97,6 @@ export class AppMeta extends BeanSimple {
   onionSummerCache: Onion<IDecoratorSummerCacheOptions, keyof ISummerCacheRecord>;
   onionStartup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;
   onionQueue: Onion<IDecoratorQueueOptions, keyof IQueueRecord>;
-  onionSchedule: Onion<IDecoratorScheduleOptions, keyof IScheduleRecord>;
   //
   broadcasts: Record<string, any>;
   //

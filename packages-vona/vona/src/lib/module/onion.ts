@@ -12,7 +12,6 @@ import {
   IDecoratorModelOptions,
   IDecoratorPipeOptionsGlobal,
   IDecoratorQueueOptions,
-  IDecoratorScheduleOptions,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
@@ -26,7 +25,6 @@ import {
   IModelRecord,
   IPipeRecord,
   IQueueRecord,
-  IScheduleRecord,
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IStartupRecord,
@@ -73,5 +71,4 @@ function loadAll(app: VonaApplication) {
   );
   app.meta.onionStartup = app.bean._newBean(Onion<IDecoratorStartupOptions, keyof IStartupRecord>, 'startup');
   app.meta.onionQueue = app.bean._newBean(Onion<IDecoratorQueueOptions, keyof IQueueRecord>, 'queue');
-  app.meta.onionSchedule = app.bean._newBean(Onion<IDecoratorScheduleOptions, keyof IScheduleRecord>, 'schedule');
 }

@@ -1,5 +1,5 @@
-import { BeanBase, cast, IDecoratorScheduleOptions, IScheduleRecord, Service } from 'vona';
-import { IScheduleExecute, TypeScheduleJob } from '../types/schedule.js';
+import { BeanBase, cast, Service } from 'vona';
+import { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
 
 @Service()
 export class ServiceSchedule extends BeanBase {
@@ -12,8 +12,8 @@ export class ServiceSchedule extends BeanBase {
       return;
     }
     // schedule config
-    const scheduleItem = this.app.meta.onionSchedule.getMiddlewareItem(scheduleName);
-    const scheduleConfig = this.app.meta.onionSchedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
+    const scheduleItem = this.bean.onion.schedule.getMiddlewareItem(scheduleName);
+    const scheduleConfig = this.bean.onion.schedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
     // execute
     return await this.bean.executor.newCtx(
       async () => {
@@ -36,14 +36,14 @@ export class ServiceSchedule extends BeanBase {
 
   private __checkJobValid(scheduleName: keyof IScheduleRecord, job: TypeScheduleJob) {
     // schedule: maybe not exists
-    const scheduleItem = this.app.meta.onionSchedule.getMiddlewareItem(scheduleName);
+    const scheduleItem = this.bean.onion.schedule.getMiddlewareItem(scheduleName);
     if (!scheduleItem) return false;
     // check disable
-    if (-1 === this.app.meta.onionSchedule.middlewaresEnabled.findIndex(item => item.name === scheduleName)) {
+    if (-1 === this.bean.onion.schedule.middlewaresEnabled.findIndex(item => item.name === scheduleName)) {
       return false;
     }
     // check if changed
-    const scheduleConfig = this.app.meta.onionSchedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
+    const scheduleConfig = this.app.bean.onion.schedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
     const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
       job.data!.options!.jobName!,
       job.data!.options!.jobOptions!.repeat!,
@@ -56,12 +56,12 @@ export class ServiceSchedule extends BeanBase {
   }
 
   private __getJobName(subdomain: string, scheduleName: keyof IScheduleRecord) {
-    return `${subdomain}.${scheduleName.replace(':', '.schedule.')}`; // not use :
+    return `${subdomain}.${cast<string>(scheduleName).replace(':', '.schedule.')}`; // not use :
   }
 
   public async loadSchedules(subdomain?: string) {
     if (subdomain === undefined) subdomain = this.ctx.subdomain;
-    for (const scheduleItem of this.app.meta.onionSchedule.middlewaresEnabled) {
+    for (const scheduleItem of this.bean.onion.schedule.middlewaresEnabled) {
       const scheduleName = scheduleItem.name;
       // push
       const jobName = this.__getJobName(subdomain, scheduleName);
