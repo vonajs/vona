@@ -53,7 +53,7 @@ export class BeanBaseActions extends BeanBase0 {
   }
 
   _prepareActionsAtomClass_actionsSystemMetaAtom(atomClass) {
-    const constantAtom = this.scope.constant.atom;
+    const constantAtom = this.self.scope.constant.atom;
     return atomClass.info.itemOnly ? constantAtom.actionMetaItemOnly : constantAtom.actionMeta;
   }
 
@@ -66,7 +66,7 @@ export class BeanBaseActions extends BeanBase0 {
   _prepareActionsAtomClass(_module, atomClass) {
     const actions: any = {};
     const _actions = atomClass.actions;
-    const _actionsSystem = this.scope.constant.atom.action;
+    const _actionsSystem = this.self.scope.constant.atom.action;
     const _actionsSystemMeta = this._prepareActionsAtomClass_actionsSystemMetaAtom(atomClass);
     const _actionsSystemMetaDetail = this._prepareActionsAtomClass_actionsSystemMetaDetail(atomClass);
     const _actionsAll = this.app.bean.util.extend({}, _actionsSystemMeta, _actionsSystemMetaDetail, _actions);

@@ -28,7 +28,7 @@ export class BeanUser1 extends BeanUser0 {
     // if exists
     if (needCheck) {
       const res = await this.exists({ userName, email, mobile });
-      if (res) this.scope.error.ElementExists.throw();
+      if (res) this.self.scope.error.ElementExists.throw();
     }
     if (!user) {
       user = { id: 0 };
@@ -124,7 +124,7 @@ export class BeanUser1 extends BeanUser0 {
     let fields = await this.model.columns();
     if (removePrivacy) {
       fields = this.app.bean.util.extend({}, fields);
-      const privacyFields = this.scope.config.user.privacyFields.split(',');
+      const privacyFields = this.self.scope.config.user.privacyFields.split(',');
       for (const privacyField of privacyFields) {
         delete fields[privacyField];
       }

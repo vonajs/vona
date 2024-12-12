@@ -11,19 +11,19 @@ export class BeanUser0 extends BeanBase {
   }
 
   get model() {
-    return this.scope.model.user;
+    return this.self.scope.model.user;
   }
 
   get modelUser() {
-    return this.scope.model.user;
+    return this.self.scope.model.user;
   }
 
   get modelUserAgent() {
-    return this.scope.model.userAgent;
+    return this.self.scope.model.userAgent;
   }
 
   get modelUserRole() {
-    return this.scope.model.userRole;
+    return this.self.scope.model.userRole;
   }
 
   get modelAuth() {
@@ -35,15 +35,15 @@ export class BeanUser0 extends BeanBase {
   }
 
   get sequence() {
-    return this.scope._bean.sequence;
+    return this.self.scope._bean.sequence;
   }
 
   get config() {
-    return this.scope.config;
+    return this.self.scope.config;
   }
 
   get sqlProcedure() {
-    return this.scope.service.procedure;
+    return this.self.scope.service.procedure;
   }
 
   async anonymous() {
@@ -128,7 +128,7 @@ export class BeanUser0 extends BeanBase {
       this.app.throw(401);
     }
     // disabled
-    if (userOp!.disabled) this.scope.error.UserIsDisabled.throw();
+    if (userOp!.disabled) this.self.scope.error.UserIsDisabled.throw();
     // hold user
     stateUser.op = userOp;
     // agent
@@ -139,8 +139,8 @@ export class BeanUser0 extends BeanBase {
         // this.scope.error.AgentUserDoesNotExist.throw();
         this.app.throw(401);
       }
-      if (userAgent.id !== ctxUser.agent.id) this.scope.error.AgentUserDoesNotExist.throw();
-      if (userAgent.disabled) this.scope.error.UserIsDisabled.throw();
+      if (userAgent.id !== ctxUser.agent.id) this.self.scope.error.AgentUserDoesNotExist.throw();
+      if (userAgent.disabled) this.self.scope.error.UserIsDisabled.throw();
     } else {
       userAgent = userOp;
     }
@@ -317,7 +317,7 @@ export class BeanUser0 extends BeanBase {
       }
     } else {
       if (state === 'migrate' || profileUser.authShouldExists === true) {
-        this.scope.error.TheAuthShouldBeEnabled.throw();
+        this.self.scope.error.TheAuthShouldBeEnabled.throw();
       }
       // add
       const _profile = JSON.stringify(profileUser.profile);

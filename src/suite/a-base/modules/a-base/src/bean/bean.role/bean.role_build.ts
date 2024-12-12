@@ -12,11 +12,11 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       await this.app.bean.fields.clearSummer_fieldsRightOfUser();
     }
     // status
-    await this.scope.status.set('roleDirty', dirty);
+    await this.self.scope.status.set('roleDirty', dirty);
   }
 
   async getDirty() {
-    return await this.scope.status.get('roleDirty');
+    return await this.self.scope.status.get('roleDirty');
   }
 
   // build roles
@@ -33,7 +33,7 @@ export class BeanRoleBuild extends BeanRoleAtomRights {
       return;
     }
     // queue
-    await this.scope.queue.roleBuild.pushAsync({ options });
+    await this.self.scope.queue.roleBuild.pushAsync({ options });
   }
 
   async _buildQueue(options) {

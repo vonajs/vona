@@ -1,8 +1,13 @@
-import { BeanModuleScopeBase } from 'vona';
+import { BeanModuleScopeBase, cast } from 'vona';
+import { BeanDetail } from '../bean.detail.js';
 
 export class BeanDetail0 extends BeanModuleScopeBase {
+  protected get self() {
+    return cast<BeanDetail>(this);
+  }
+
   get modelDetailBase() {
-    return this.scope.model.detailBase;
+    return this.self.scope.model.detailBase;
   }
 
   async _loopDetailClasses({ atomClass, fn }: any) {

@@ -53,11 +53,11 @@ export class BeanBaseAtomClasses extends BeanBaseActions {
   _prepareAtomClassesModule_atomClassMeta(_atomClass: AtomClassMeta): Partial<AtomClassMeta> {
     if (_atomClass.itemOnly) {
       if (_atomClass.detail) {
-        return this.scope.constant.atomClass.metaDetail;
+        return this.self.scope.constant.atomClass.metaDetail;
       }
-      return this.scope.constant.atomClass.metaItemOnly;
+      return this.self.scope.constant.atomClass.metaItemOnly;
     }
-    return this.scope.constant.atomClass.meta;
+    return this.self.scope.constant.atomClass.meta;
   }
 
   _prepareAtomClassesModule(moduleName, _atoms): Record<string, AtomClassBase> {

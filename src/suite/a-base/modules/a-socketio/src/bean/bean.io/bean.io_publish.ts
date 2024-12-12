@@ -93,7 +93,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     debug('_publish content: %j', message.content);
 
     // to queue
-    this.scope.queue.process.push({
+    this.self.scope.queue.process.push({
       path,
       options,
       message: _message,
@@ -111,7 +111,7 @@ export class BeanIoPublish extends BeanIoDelivery {
     // to queue: delivery/push
     if (path) {
       // try delivery first, then try push if failed
-      this.scope.queue.delivery.push({
+      this.self.scope.queue.delivery.push({
         path,
         options,
         message,

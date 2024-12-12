@@ -1,11 +1,16 @@
 import { BigNumber } from 'bignumber.js';
 import { EntityCategory } from '../../index.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
-import { BeanBase } from 'vona';
+import { BeanBase, cast } from 'vona';
+import { BeanCategory } from '../bean.category.js';
 
 export class BeanCategory0 extends BeanBase {
+  protected get self() {
+    return cast<BeanCategory>(this);
+  }
+
   get model() {
-    return this.scope.model.category;
+    return this.self.scope.model.category;
   }
 
   async get({ categoryId, setLocale }: any) {
@@ -151,12 +156,12 @@ export class BeanCategory0 extends BeanBase {
     // check atoms
     const count = await this.app.bean.atom.modelAtom.count({ where: { atomCategoryId: categoryId } });
     if (count.gt(0)) {
-      this.scope.error.CannotDeleteIfHasAtoms.throw();
+      this.self.scope.error.CannotDeleteIfHasAtoms.throw();
     }
     // check children
     const children = (await this.children({ categoryId })) as any[];
     if (children.length > 0) {
-      this.scope.error.CannotDeleteIfHasChildren.throw();
+      this.self.scope.error.CannotDeleteIfHasChildren.throw();
     }
 
     // category
@@ -275,7 +280,7 @@ export class BeanCategory0 extends BeanBase {
 
   async _register({ atomClass, language, categoryName, categoryIdParent }: any) {
     atomClass = await this.app.bean.atomClass.get(atomClass);
-    return await this.scope.redlock.lockIsolate(`category.register.${atomClass.id}`, async () => {
+    return await this.self.scope.redlock.lockIsolate(`category.register.${atomClass.id}`, async () => {
       return await this._registerLock({ atomClass, language, categoryName, categoryIdParent });
     });
   }

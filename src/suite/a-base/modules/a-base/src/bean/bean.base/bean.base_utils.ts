@@ -6,12 +6,12 @@ import fse from 'fs-extra';
 
 export class BeanBaseUtils extends BeanBaseThemes {
   get host() {
-    const config = this.scope.config;
+    const config = this.self.scope.config;
     return config.host || this.ctx.host;
   }
 
   get protocol() {
-    const config = this.scope.config;
+    const config = this.self.scope.config;
     return config.protocol || this.ctx.protocol;
   }
 
@@ -36,7 +36,7 @@ export class BeanBaseUtils extends BeanBaseThemes {
       return this.ctx.app.config.static.dir;
     }
     const dir =
-      this.scope.config.publicDir || path.join(require('os').homedir(), 'cabloy', this.ctx.app.name, 'public');
+      this.self.scope.config.publicDir || path.join(require('os').homedir(), 'cabloy', this.ctx.app.name, 'public');
     await fse.ensureDir(dir);
     return dir;
   }

@@ -23,7 +23,7 @@ export default class CliStoreBase extends BeanCliBase {
   }
 
   get configModule() {
-    return this.scope.config;
+    return this.$scope.clibooster.config;
   }
 
   async meta({ user }: any) {

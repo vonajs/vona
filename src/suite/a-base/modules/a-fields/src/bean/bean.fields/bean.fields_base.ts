@@ -1,5 +1,5 @@
 import { BeanBase, cast } from 'vona';
-import { BeanFields } from 'vona-module-a-fields';
+import { BeanFields } from '../bean.fields.js';
 
 export class BeanFieldsBase extends BeanBase {
   protected get self() {

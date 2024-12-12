@@ -8,11 +8,7 @@ export type TSummerCacheRoleWhosOfAtomClassActionData = any;
   preset: 'all',
 })
 export class SummerCacheRoleWhosOfAtomClassAction
-  extends BeanSummerCacheBase<
-    ScopeModule,
-    TSummerCacheRoleWhosOfAtomClassActionKey,
-    TSummerCacheRoleWhosOfAtomClassActionData
-  >
+  extends BeanSummerCacheBase<TSummerCacheRoleWhosOfAtomClassActionKey, TSummerCacheRoleWhosOfAtomClassActionData>
   implements ISummerCacheGet<TSummerCacheRoleWhosOfAtomClassActionKey, TSummerCacheRoleWhosOfAtomClassActionData>
 {
   async getNative(

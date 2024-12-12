@@ -4,11 +4,11 @@ import { BeanAtomRightAuxRoleWhos } from './bean.atomRightAux_roleWhos.js';
 export class BeanAtomRightAuxRoleParentsOfUser extends BeanAtomRightAuxRoleWhos {
   async getRoleParentsOfUser({ userId }: any) {
     // cache
-    return await this.scope.summerCache.roleParentsOfUser.get({ userId });
+    return await this.self.scope.summerCache.roleParentsOfUser.get({ userId });
   }
 
   async clearSummer_roleParentsOfUser() {
-    await this.scope.summerCache.roleParentsOfUser.clear();
+    await this.self.scope.summerCache.roleParentsOfUser.clear();
   }
 
   async __getRoleParentsOfUserRaw({ userId }: any) {

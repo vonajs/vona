@@ -8,7 +8,7 @@ export class MiddlewareRight0 extends BeanBase {
   }
 
   get constant() {
-    return this.scope.constant;
+    return this.self.scope.constant;
   }
 
   async execute(options, next) {
