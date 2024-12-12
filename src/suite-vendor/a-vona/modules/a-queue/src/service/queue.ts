@@ -1,6 +1,5 @@
 import * as Bull from 'bullmq';
 import { BeanBase, deepExtend, IDecoratorQueueOptions, IQueueRecord, Service, subdomainDesp, uuidv4 } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import {
   IQueueCallbacks,
   IQueueExecute,
@@ -13,7 +12,7 @@ import {
 } from '../types/queue.js';
 
 @Service()
-export class ServiceQueue extends BeanBase<ScopeModule> {
+export class ServiceQueue extends BeanBase {
   _workers: IQueueWorks = {};
   _queues: IQueueQueues = {};
   _queueCallbacks: IQueueCallbacks = {};

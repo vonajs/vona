@@ -10,7 +10,6 @@ import {
   NextSync,
 } from 'vona';
 import ErrorView from 'egg-onerror/lib/error_view.js';
-import { ScopeModule } from '../.metadata/this.js';
 import path from 'node:path';
 import fs from 'node:fs';
 
@@ -21,7 +20,7 @@ export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
 const __cacheViewTemplates: Record<string, any> = {};
 
 @Filter<IFilterOptionsError>({ global: true, logs: {} })
-export class FilterError extends BeanBase<ScopeModule> implements IFilterLog, IFilterJson, IFilterHtml {
+export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IFilterHtml {
   log(err: Error, options: IFilterOptionsError, next: NextSync): boolean {
     // 403->401
     if (err.code === 403) {

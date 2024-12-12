@@ -10,6 +10,11 @@ declare module 'vona' {
     'a-queue.service.queue': ServiceQueue;
   }
 }
+declare module 'vona-module-a-queue' {
+  export interface ServiceQueue {
+    get scope(): ScopeModuleAQueue;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';
