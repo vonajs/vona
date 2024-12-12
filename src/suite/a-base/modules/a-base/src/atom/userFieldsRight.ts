@@ -1,5 +1,5 @@
 import { Atom } from 'vona';
-import { BeanAtomBase } from '../bean/bean.atomBase.js';
+import { BeanAtomBase } from '../bean/bean.atomBase_.js';
 
 @Atom()
 export class AtomUserFieldsRight extends BeanAtomBase {

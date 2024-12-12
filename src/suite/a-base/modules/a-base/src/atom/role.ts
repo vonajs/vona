@@ -1,6 +1,6 @@
 import { ScopeModule } from '../.metadata/this.js';
 import { Atom } from 'vona';
-import { BeanAtomBase } from '../bean/bean.atomBase.js';
+import { BeanAtomBase } from '../bean/bean.atomBase_.js';
 
 @Atom()
 export class AtomRole extends BeanAtomBase<ScopeModule> {
