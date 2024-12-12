@@ -9,7 +9,8 @@
     "onions": {
       "schedule": {
         "optionsGlobalInterfaceName": "IDecoratorScheduleOptions",
-        "optionsGlobalInterfaceFrom": "vona-module-a-schedule"
+        "optionsGlobalInterfaceFrom": "vona-module-a-schedule",
+        "boilerplate": "cli/boilerplate"
       }
     }
   },
@@ -33,7 +34,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}

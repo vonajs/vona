@@ -3,6 +3,7 @@ import { IModuleInfo } from '@cabloy/module-info';
 import path from 'path';
 import fs from 'fs';
 import { __ThisSetName__ } from '../this.js';
+import { getOnionScenesMeta } from 'vona-shared';
 
 const __decorators = {
   virtual: 'Virtual',
@@ -23,7 +24,6 @@ const __boilerplates = {
   summerCache: 'summerCache',
   startup: 'startup',
   queue: 'queue',
-  schedule: 'schedule',
 };
 
 declare module '@cabloy/cli' {
@@ -78,8 +78,8 @@ export class CliCreateBean extends BeanCliBase {
     }
     await this.helper.ensureDir(beanDir);
     // boilerplate name
-    const boilerplateName =
-      __boilerplates[`${sceneName}${argv.beanNameCapitalize}`] || __boilerplates[sceneName] || 'bean';
+    const boilerplates = this._getBoilerplates();
+    const boilerplateName = boilerplates[`${sceneName}${argv.beanNameCapitalize}`] || boilerplates[sceneName] || 'bean';
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
@@ -89,5 +89,18 @@ export class CliCreateBean extends BeanCliBase {
     });
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+  }
+
+  private _getBoilerplates() {
+    const result = Object.assign({}, __boilerplates);
+    // onionScenesMeta
+    const onionScenesMeta = getOnionScenesMeta(this.helper.cli.modulesMeta.modules);
+    for (const sceneName in onionScenesMeta) {
+      const boilerplate = onionScenesMeta[sceneName].boilerplate;
+      if (boilerplate) {
+        result[sceneName] = boilerplate;
+      }
+    }
+    return result;
   }
 }

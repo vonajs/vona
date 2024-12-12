@@ -49,6 +49,7 @@ export interface OnionSceneMeta {
   optionsDynamic?: boolean;
   optionsGlobalInterfaceName?: string;
   optionsGlobalInterfaceFrom?: string;
+  boilerplate?: string;
 }
 
 export type OnionScenesMeta = Record<string, OnionSceneMeta>;
