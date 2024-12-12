@@ -31,6 +31,31 @@ declare module 'vona' {
     'a-database.database.dialect.pg': DatabaseDialectPg;
   }
 }
+declare module 'vona-module-a-database' {
+  export interface BeanDatabase {
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface BeanDatabaseClient {
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface BeanModel {
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface DatabaseDialectMysql {
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface DatabaseDialectMysql2 {
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface DatabaseDialectPg {
+    get scope(): ScopeModuleADatabase;
+  }
+}
 /** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.transaction.js';
@@ -39,6 +64,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMiddlewareRecordLocal {
     'a-database:transaction': IMiddlewareOptionsTransaction;
+  }
+}
+declare module 'vona-module-a-database' {
+  export interface MiddlewareTransaction {
+    get scope(): ScopeModuleADatabase;
   }
 }
 /** middleware: end */

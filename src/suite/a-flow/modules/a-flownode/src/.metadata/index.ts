@@ -27,6 +27,35 @@ declare module 'vona' {
     'a-flownode.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-flownode' {
+  export interface FlowEdgeSequence {
+    get scope(): ScopeModuleAFlownode;
+  }
+
+  export interface FlowNodeActivityNone {
+    get scope(): ScopeModuleAFlownode;
+  }
+
+  export interface FlowNodeActivityService {
+    get scope(): ScopeModuleAFlownode;
+  }
+
+  export interface FlowNodeEndEventNone {
+    get scope(): ScopeModuleAFlownode;
+  }
+
+  export interface FlowNodeStartEventNone {
+    get scope(): ScopeModuleAFlownode;
+  }
+
+  export interface FlowNodeStartEventTimer {
+    get scope(): ScopeModuleAFlownode;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFlownode;
+  }
+}
 /** beans: end */
 /** queue: begin */
 export * from '../bean/queue.startEventTimer.js';
@@ -35,6 +64,11 @@ import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-flownode:startEventTimer': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-flownode' {
+  export interface QueueStartEventTimer {
+    get scope(): ScopeModuleAFlownode;
   }
 }
 /** queue: end */

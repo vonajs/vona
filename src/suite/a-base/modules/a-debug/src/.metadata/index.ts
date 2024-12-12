@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-debug.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-debug' {
+  export interface BeanDebug {
+    get scope(): ScopeModuleADebug;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleADebug;
+  }
+}
 /** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

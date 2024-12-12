@@ -82,6 +82,107 @@ declare module 'vona' {
     'a-base.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface BeanAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomBase {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomRightAux {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomStage {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomState {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomStatic {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAuth {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanBase2 {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanBodyCrypto {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanFormAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanStash {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanUtil {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StatsDraftsCommon {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StatsDraftsFlowing {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StatsLabels {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StatsStars {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StatsStarsLabels {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.auth.js';
@@ -106,6 +207,39 @@ declare module 'vona' {
     'a-base:transaction': never;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface MiddlewareAuth {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareAuthOpen {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareHttpLog {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareInner {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareJsonp {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareTest {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareTransaction {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** middleware: end */
 /** socketConnection: begin */
 export * from '../bean/socketConnection.auth.js';
@@ -116,6 +250,11 @@ declare module 'vona' {
     'a-base:auth': ISocketConnectionOptionsAuth;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface SocketConnectionAuth {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** socketConnection: end */
 /** aop: begin */
 export * from '../bean/aop.category.js';
@@ -124,6 +263,11 @@ import { IDecoratorAopOptions } from 'vona';
 declare module 'vona' {
   export interface IAopRecord {
     'a-base:category': IDecoratorAopOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface AopCategory {
+    get scope(): ScopeModuleABase;
   }
 }
 /** aop: end */
@@ -192,6 +336,123 @@ declare module 'vona' {
     'a-base:userRoleRef': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface EntityAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityAtomLabel {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityAtomLabelRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityAtomStar {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityComment {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityCommentHeart {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityCommentView {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityLabel {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityResourceLocale {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityResourceRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleExpand {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleFieldsRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleInc {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleIncRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityRoleRightRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityTagRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityUserAgent {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityUserRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityUserRoleIncRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EntityUserRoleRef {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/atom.js';
@@ -258,6 +519,123 @@ declare module 'vona' {
     'a-base:userRoleRef': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface ModelAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelAtomLabel {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelAtomLabelRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelAtomStar {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelComment {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelCommentHeart {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelCommentView {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelLabel {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelResourceLocale {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelResourceRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleExpand {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleFieldsRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleInc {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleIncRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelRoleRightRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelTagRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelUserAgent {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelUserRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelUserRoleIncRef {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ModelUserRoleRef {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/atom.js';
@@ -294,6 +672,63 @@ declare module 'vona' {
     'a-base:util': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface ControllerAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomState {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAuth {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerBase {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerComment {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerJwt {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerLayoutConfig {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerUtil {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -304,6 +739,15 @@ declare module 'vona' {
   export interface IMetaRecord {
     'a-base:redlock': never;
     'a-base:status': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MetaStatus {
+    get scope(): ScopeModuleABase;
   }
 }
 /** meta: end */
@@ -326,6 +770,31 @@ declare module 'vona' {
     'a-base:roleWhosOfAtomClassAction': IDecoratorSummerCacheOptions;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface SummerCacheAtomClassInner {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface SummerCacheRoleParentsOfUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface SummerCacheRoleScopesMineOfUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface SummerCacheRoleScopesOfRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface SummerCacheRoleScopesOfUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface SummerCacheRoleWhosOfAtomClassAction {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** summerCache: end */
 /** startup: begin */
 export * from '../bean/startup.checkResourceLocales.js';
@@ -340,6 +809,19 @@ declare module 'vona' {
     'a-base:loadAtomStatics': IDecoratorStartupOptions;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface StartupCheckResourceLocales {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StartupCheckViewHistoryRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StartupLoadAtomStatics {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** startup: end */
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
@@ -348,6 +830,11 @@ import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-base:roleBuild': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface QueueRoleBuild {
+    get scope(): ScopeModuleABase;
   }
 }
 /** queue: end */

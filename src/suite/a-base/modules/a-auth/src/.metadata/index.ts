@@ -22,6 +22,23 @@ declare module 'vona' {
     'a-auth.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-auth' {
+  export interface BeanAuthProvider {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface BeanAuthProviderCache {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface BroadcastAuthProviderChanged {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAAuth;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/auth.js';
@@ -32,6 +49,15 @@ declare module 'vona' {
   export interface IEntityRecord {
     'a-auth:auth': IDecoratorEntityOptions;
     'a-auth:authProvider': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface EntityAuth {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface EntityAuthProvider {
+    get scope(): ScopeModuleAAuth;
   }
 }
 /** entity: end */
@@ -46,6 +72,15 @@ declare module 'vona' {
     'a-auth:authProvider': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-auth' {
+  export interface ModelAuth {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface ModelAuthProvider {
+    get scope(): ScopeModuleAAuth;
+  }
+}
 /** model: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -54,6 +89,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-auth:redlock': never;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAAuth;
   }
 }
 /** meta: end */
@@ -68,6 +108,19 @@ declare module 'vona' {
     'a-auth:cacheAuthProviders': IDecoratorStartupOptions;
     'a-auth:registerPassport': IDecoratorStartupOptions;
     'a-auth:registerRouters': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface StartupCacheAuthProviders {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface StartupRegisterPassport {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface StartupRegisterRouters {
+    get scope(): ScopeModuleAAuth;
   }
 }
 /** startup: end */

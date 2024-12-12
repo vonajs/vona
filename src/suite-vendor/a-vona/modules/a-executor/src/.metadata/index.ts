@@ -9,6 +9,11 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {}
 }
+declare module 'vona-module-a-executor' {
+  export interface BeanExecutor {
+    get scope(): ScopeModuleAExecutor;
+  }
+}
 /** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

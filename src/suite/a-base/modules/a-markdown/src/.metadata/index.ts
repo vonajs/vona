@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-markdown.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-markdown' {
+  export interface BeanMarkdown {
+    get scope(): ScopeModuleAMarkdown;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAMarkdown;
+  }
+}
 /** beans: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

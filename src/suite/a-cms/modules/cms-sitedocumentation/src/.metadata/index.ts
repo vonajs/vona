@@ -9,6 +9,11 @@ declare module 'vona' {
     'cms-sitedocumentation.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-cms-sitedocumentation' {
+  export interface VersionManager {
+    get scope(): ScopeModuleCmsSitedocumentation;
+  }
+}
 /** beans: end */
 /** atoms: begin */
 export * from '../atom/document.js';

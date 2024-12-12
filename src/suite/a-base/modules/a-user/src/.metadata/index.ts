@@ -12,6 +12,15 @@ declare module 'vona' {
     'a-user.stats.userAlert': StatsUserAlert;
   }
 }
+declare module 'vona-module-a-user' {
+  export interface StatsUser {
+    get scope(): ScopeModuleAUser;
+  }
+
+  export interface StatsUserAlert {
+    get scope(): ScopeModuleAUser;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/public.js';
@@ -24,6 +33,15 @@ declare module 'vona' {
     'a-user:user': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-user' {
+  export interface ControllerPublic {
+    get scope(): ScopeModuleAUser;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleAUser;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
@@ -32,6 +50,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-user:status': never;
+  }
+}
+declare module 'vona-module-a-user' {
+  export interface MetaStatus {
+    get scope(): ScopeModuleAUser;
   }
 }
 /** meta: end */

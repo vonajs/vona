@@ -25,6 +25,31 @@ declare module 'vona' {
     'a-mail.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-mail' {
+  export interface BeanMail {
+    get scope(): ScopeModuleAMail;
+  }
+
+  export interface BeanMailSceneCache {
+    get scope(): ScopeModuleAMail;
+  }
+
+  export interface BroadcastMailSceneChanged {
+    get scope(): ScopeModuleAMail;
+  }
+
+  export interface IoChannelMail {
+    get scope(): ScopeModuleAMail;
+  }
+
+  export interface IoMessageMail {
+    get scope(): ScopeModuleAMail;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAMail;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/mail.js';
@@ -33,6 +58,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-mail:mail': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface EntityMail {
+    get scope(): ScopeModuleAMail;
   }
 }
 /** entity: end */
@@ -45,6 +75,11 @@ declare module 'vona' {
     'a-mail:mail': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-mail' {
+  export interface ModelMail {
+    get scope(): ScopeModuleAMail;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/scene.js';
@@ -53,6 +88,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-mail:scene': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface ControllerScene {
+    get scope(): ScopeModuleAMail;
   }
 }
 /** controller: end */
@@ -65,6 +105,11 @@ declare module 'vona' {
     'a-mail:status': never;
   }
 }
+declare module 'vona-module-a-mail' {
+  export interface MetaStatus {
+    get scope(): ScopeModuleAMail;
+  }
+}
 /** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheMailScenes.js';
@@ -73,6 +118,11 @@ import { IDecoratorStartupOptions } from 'vona';
 declare module 'vona' {
   export interface IStartupRecord {
     'a-mail:cacheMailScenes': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface StartupCacheMailScenes {
+    get scope(): ScopeModuleAMail;
   }
 }
 /** startup: end */

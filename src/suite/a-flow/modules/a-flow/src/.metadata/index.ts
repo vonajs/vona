@@ -22,6 +22,27 @@ declare module 'vona' {
     'a-flow.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-flow' {
+  export interface BeanFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface BeanFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface FlowBehaviorBase {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface StatsFlowInitiateds {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFlow;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/flow.js';
@@ -42,6 +63,35 @@ declare module 'vona' {
     'a-flow:flowHistory': IDecoratorEntityOptions;
     'a-flow:flowNode': IDecoratorEntityOptions;
     'a-flow:flowNodeHistory': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-flow' {
+  export interface EntityFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface EntityFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface EntityFlowDefContent {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface EntityFlowDefFull {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface EntityFlowHistory {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface EntityFlowNode {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface EntityFlowNodeHistory {
+    get scope(): ScopeModuleAFlow;
   }
 }
 /** entity: end */
@@ -66,6 +116,35 @@ declare module 'vona' {
     'a-flow:flowNodeHistory': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-flow' {
+  export interface ModelFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ModelFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ModelFlowDefContent {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ModelFlowDefFull {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ModelFlowHistory {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ModelFlowNode {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ModelFlowNodeHistory {
+    get scope(): ScopeModuleAFlow;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/flow.js';
@@ -78,6 +157,15 @@ declare module 'vona' {
     'a-flow:flowDef': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-flow' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ControllerFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -86,6 +174,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-flow:redlock': never;
+  }
+}
+declare module 'vona-module-a-flow' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAFlow;
   }
 }
 /** meta: end */

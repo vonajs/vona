@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-status.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-status' {
+  export interface VersionManager {
+    get scope(): ScopeModuleAStatus;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/status.js';
@@ -17,6 +22,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-status:status': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-status' {
+  export interface EntityStatus {
+    get scope(): ScopeModuleAStatus;
   }
 }
 /** entity: end */
@@ -29,6 +39,11 @@ declare module 'vona' {
     'a-status:status': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-status' {
+  export interface ModelStatus {
+    get scope(): ScopeModuleAStatus;
+  }
+}
 /** model: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -37,6 +52,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-status:redlock': never;
+  }
+}
+declare module 'vona-module-a-status' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAStatus;
   }
 }
 /** meta: end */

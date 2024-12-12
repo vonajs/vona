@@ -16,6 +16,19 @@ declare module 'vona' {
     'a-sequence.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-sequence' {
+  export interface BeanSequence {
+    get scope(): ScopeModuleASequence;
+  }
+
+  export interface SequenceSimple {
+    get scope(): ScopeModuleASequence;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleASequence;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/sequence.js';
@@ -24,6 +37,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-sequence:sequence': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-sequence' {
+  export interface EntitySequence {
+    get scope(): ScopeModuleASequence;
   }
 }
 /** entity: end */
@@ -36,6 +54,11 @@ declare module 'vona' {
     'a-sequence:sequence': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-sequence' {
+  export interface ControllerSequence {
+    get scope(): ScopeModuleASequence;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -44,6 +67,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-sequence:redlock': never;
+  }
+}
+declare module 'vona-module-a-sequence' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleASequence;
   }
 }
 /** meta: end */

@@ -12,6 +12,15 @@ declare module 'vona' {
     'a-flowbehavior.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-flowbehavior' {
+  export interface FlowBehaviorOvertime {
+    get scope(): ScopeModuleAFlowbehavior;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFlowbehavior;
+  }
+}
 /** beans: end */
 /** queue: begin */
 export * from '../bean/queue.overtime.js';
@@ -20,6 +29,11 @@ import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-flowbehavior:overtime': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-flowbehavior' {
+  export interface QueueOvertime {
+    get scope(): ScopeModuleAFlowbehavior;
   }
 }
 /** queue: end */

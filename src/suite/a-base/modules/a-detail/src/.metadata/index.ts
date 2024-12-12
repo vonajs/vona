@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-detail.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-detail' {
+  export interface BeanDetail {
+    get scope(): ScopeModuleADetail;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleADetail;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/detailBase.js';
@@ -23,6 +32,11 @@ declare module 'vona' {
     'a-detail:detailBase': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-detail' {
+  export interface EntityDetailBase {
+    get scope(): ScopeModuleADetail;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/detailBase.js';
@@ -31,6 +45,11 @@ import { IDecoratorModelOptions } from 'vona';
 declare module 'vona' {
   export interface IModelRecord {
     'a-detail:detailBase': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-detail' {
+  export interface ModelDetailBase {
+    get scope(): ScopeModuleADetail;
   }
 }
 /** model: end */

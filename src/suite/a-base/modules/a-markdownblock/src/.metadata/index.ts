@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-markdownblock.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-markdownblock' {
+  export interface VersionManager {
+    get scope(): ScopeModuleAMarkdownblock;
+  }
+}
 /** beans: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

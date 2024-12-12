@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-layoutpc.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-layoutpc' {
+  export interface VersionManager {
+    get scope(): ScopeModuleALayoutpc;
+  }
+}
 /** beans: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

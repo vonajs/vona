@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-dict.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-dict' {
+  export interface BeanDict {
+    get scope(): ScopeModuleADict;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleADict;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/dict.js';
@@ -23,6 +32,15 @@ declare module 'vona' {
   export interface IEntityRecord {
     'a-dict:dict': IDecoratorEntityOptions;
     'a-dict:dictContent': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-dict' {
+  export interface EntityDict {
+    get scope(): ScopeModuleADict;
+  }
+
+  export interface EntityDictContent {
+    get scope(): ScopeModuleADict;
   }
 }
 /** entity: end */
@@ -37,6 +55,15 @@ declare module 'vona' {
     'a-dict:dictContent': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-dict' {
+  export interface ModelDict {
+    get scope(): ScopeModuleADict;
+  }
+
+  export interface ModelDictContent {
+    get scope(): ScopeModuleADict;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/dict.js';
@@ -45,6 +72,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-dict:dict': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-dict' {
+  export interface ControllerDict {
+    get scope(): ScopeModuleADict;
   }
 }
 /** controller: end */

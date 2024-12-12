@@ -16,6 +16,19 @@ declare module 'vona' {
     'a-version.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-version' {
+  export interface BeanWorker {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface BroadcastColumnsClear {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAVersion;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/version.js';
@@ -30,6 +43,19 @@ declare module 'vona' {
     'a-version:viewRecord': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-version' {
+  export interface EntityVersion {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface EntityVersionInit {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface EntityViewRecord {
+    get scope(): ScopeModuleAVersion;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/viewRecord.js';
@@ -38,6 +64,11 @@ import { IDecoratorModelOptions } from 'vona';
 declare module 'vona' {
   export interface IModelRecord {
     'a-version:viewRecord': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface ModelViewRecord {
+    get scope(): ScopeModuleAVersion;
   }
 }
 /** model: end */
@@ -54,6 +85,23 @@ declare module 'vona' {
     'a-version:databaseName': IDecoratorStartupOptions;
     'a-version:instanceInit': IDecoratorStartupOptions;
     'a-version:workerAlive': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface StartupDatabaseInit {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface StartupDatabaseName {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface StartupInstanceInit {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface StartupWorkerAlive {
+    get scope(): ScopeModuleAVersion;
   }
 }
 /** startup: end */

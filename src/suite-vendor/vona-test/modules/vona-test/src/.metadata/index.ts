@@ -9,6 +9,11 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {}
 }
+declare module 'vona-module-vona-test' {
+  export interface BeanTestCtx {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
 /** beans: end */
 /** aop: begin */
 export * from '../bean/aop.regExp.js';
@@ -19,6 +24,15 @@ declare module 'vona' {
   export interface IAopRecord {
     'vona-test:regExp': IDecoratorAopOptions;
     'vona-test:simple': IDecoratorAopOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface AopRegExp {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface AopSimple {
+    get scope(): ScopeModuleVonaTest;
   }
 }
 /** aop: end */
@@ -45,6 +59,39 @@ declare module 'vona' {
     'vona-test:transaction': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-vona-test' {
+  export interface ControllerBean {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerOnion {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerPerformAction {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerQueue {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerStatus {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerSummer {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerTail {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerTransaction {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
@@ -53,6 +100,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'vona-test:status': never;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface MetaStatus {
+    get scope(): ScopeModuleVonaTest;
   }
 }
 /** meta: end */
@@ -65,6 +117,11 @@ declare module 'vona' {
     'vona-test:test': IDecoratorSummerCacheOptions;
   }
 }
+declare module 'vona-module-vona-test' {
+  export interface SummerCacheTest {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
 /** summerCache: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
@@ -75,6 +132,11 @@ declare module 'vona' {
     'vona-test:test': IDecoratorQueueOptions;
   }
 }
+declare module 'vona-module-vona-test' {
+  export interface QueueTest {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
 /** queue: end */
 /** schedule: begin */
 export * from '../bean/schedule.test.js';
@@ -83,6 +145,11 @@ import { IDecoratorScheduleOptions } from 'vona';
 declare module 'vona' {
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface ScheduleTest {
+    get scope(): ScopeModuleVonaTest;
   }
 }
 /** schedule: end */

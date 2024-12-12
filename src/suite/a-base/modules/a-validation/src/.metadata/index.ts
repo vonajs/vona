@@ -12,6 +12,15 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {}
 }
+declare module 'vona-module-a-validation' {
+  export interface BeanAjv {
+    get scope(): ScopeModuleAValidation;
+  }
+
+  export interface BeanValidation {
+    get scope(): ScopeModuleAValidation;
+  }
+}
 /** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.validate.js';
@@ -22,6 +31,11 @@ declare module 'vona' {
     'a-validation:validate': never;
   }
 }
+declare module 'vona-module-a-validation' {
+  export interface MiddlewareValidate {
+    get scope(): ScopeModuleAValidation;
+  }
+}
 /** middleware: end */
 /** controller: begin */
 export * from '../controller/validation.js';
@@ -30,6 +44,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-validation:validation': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-validation' {
+  export interface ControllerValidation {
+    get scope(): ScopeModuleAValidation;
   }
 }
 /** controller: end */

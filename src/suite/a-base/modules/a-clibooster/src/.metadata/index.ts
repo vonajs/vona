@@ -60,6 +60,79 @@ declare module 'vona' {
     'a-clibooster.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-clibooster' {
+  export interface CliCreateApp {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliCreateAtom {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliCreateAtomAction {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliCreateDetail {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliCreateItemOnly {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliCreatePage {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliDefaultList {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliFrontRenderTableCell {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliGitCommit {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliStorePublish {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliStoreSync {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliTokenAdd {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliTokenDelete {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliTokenList {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliToolsBabel {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliToolsDemo {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface CliToolsIcons {
+    get scope(): ScopeModuleAClibooster;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAClibooster;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/tools.js';
@@ -68,6 +141,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-clibooster:tools': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-clibooster' {
+  export interface ControllerTools {
+    get scope(): ScopeModuleAClibooster;
   }
 }
 /** controller: end */

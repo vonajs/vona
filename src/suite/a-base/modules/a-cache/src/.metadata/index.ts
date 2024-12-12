@@ -28,6 +28,35 @@ declare module 'vona' {
     'a-cache.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-cache' {
+  export interface BeanCache {
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BeanCacheDb {
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BeanCacheMem {
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BeanCacheRedis {
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BroadcastMemClear {
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BroadcastMemRemove {
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleACache;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/cache.js';
@@ -36,6 +65,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-cache:cache': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-cache' {
+  export interface EntityCache {
+    get scope(): ScopeModuleACache;
   }
 }
 /** entity: end */
@@ -48,6 +82,11 @@ declare module 'vona' {
     'a-cache:db': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-cache' {
+  export interface ControllerDb {
+    get scope(): ScopeModuleACache;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -56,6 +95,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-cache:redlock': never;
+  }
+}
+declare module 'vona-module-a-cache' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleACache;
   }
 }
 /** meta: end */

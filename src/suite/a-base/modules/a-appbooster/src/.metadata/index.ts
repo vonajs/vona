@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-appbooster.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-appbooster' {
+  export interface VersionManager {
+    get scope(): ScopeModuleAAppbooster;
+  }
+}
 /** beans: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

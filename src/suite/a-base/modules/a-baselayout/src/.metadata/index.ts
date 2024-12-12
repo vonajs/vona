@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-baselayout.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-baselayout' {
+  export interface VersionManager {
+    get scope(): ScopeModuleABaselayout;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/layout.js';
@@ -23,6 +28,19 @@ declare module 'vona' {
     'a-baselayout:layoutFull': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-baselayout' {
+  export interface EntityLayout {
+    get scope(): ScopeModuleABaselayout;
+  }
+
+  export interface EntityLayoutContent {
+    get scope(): ScopeModuleABaselayout;
+  }
+
+  export interface EntityLayoutFull {
+    get scope(): ScopeModuleABaselayout;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/layout.js';
@@ -35,6 +53,19 @@ declare module 'vona' {
     'a-baselayout:layout': IDecoratorModelOptions;
     'a-baselayout:layoutContent': IDecoratorModelOptions;
     'a-baselayout:layoutFull': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-baselayout' {
+  export interface ModelLayout {
+    get scope(): ScopeModuleABaselayout;
+  }
+
+  export interface ModelLayoutContent {
+    get scope(): ScopeModuleABaselayout;
+  }
+
+  export interface ModelLayoutFull {
+    get scope(): ScopeModuleABaselayout;
   }
 }
 /** model: end */

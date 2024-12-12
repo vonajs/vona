@@ -16,6 +16,15 @@ declare module 'vona' {
     'a-cli.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-cli' {
+  export interface BeanCli {
+    get scope(): ScopeModuleACli;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleACli;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/cli.js';
@@ -24,6 +33,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-cli:cli': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-cli' {
+  export interface ControllerCli {
+    get scope(): ScopeModuleACli;
   }
 }
 /** controller: end */

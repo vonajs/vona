@@ -19,6 +19,23 @@ declare module 'vona' {
     'a-authsimple.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-authsimple' {
+  export interface AuthProviderSimple {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+
+  export interface BeanAuthSimple {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+
+  export interface EventAccountMigration {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/authSimple.js';
@@ -27,6 +44,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-authsimple:authSimple': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-authsimple' {
+  export interface EntityAuthSimple {
+    get scope(): ScopeModuleAAuthsimple;
   }
 }
 /** entity: end */
@@ -39,6 +61,11 @@ declare module 'vona' {
     'a-authsimple:authSimple': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-authsimple' {
+  export interface ModelAuthSimple {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/auth.js';
@@ -47,6 +74,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-authsimple:auth': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-authsimple' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleAAuthsimple;
   }
 }
 /** controller: end */

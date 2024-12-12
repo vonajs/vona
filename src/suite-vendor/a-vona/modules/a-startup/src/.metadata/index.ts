@@ -7,6 +7,11 @@ declare module 'vona' {
     'a-startup:redlock': never;
   }
 }
+declare module 'vona-module-a-startup' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAStartup;
+  }
+}
 /** meta: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';

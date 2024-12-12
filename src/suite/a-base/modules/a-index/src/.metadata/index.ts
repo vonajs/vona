@@ -7,6 +7,11 @@ declare module 'vona' {
     'a-index:version': never;
   }
 }
+declare module 'vona-module-a-index' {
+  export interface MetaVersion {
+    get scope(): ScopeModuleAIndex;
+  }
+}
 /** meta: end */
 /** config: begin */
 export * from '../config/config.js';

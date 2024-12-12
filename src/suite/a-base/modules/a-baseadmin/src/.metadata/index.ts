@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-baseadmin.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-baseadmin' {
+  export interface VersionManager {
+    get scope(): ScopeModuleABaseadmin;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/atomRight.js';
@@ -27,6 +32,31 @@ declare module 'vona' {
     'a-baseadmin:resourceRight': IDecoratorControllerOptions;
     'a-baseadmin:role': IDecoratorControllerOptions;
     'a-baseadmin:user': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-baseadmin' {
+  export interface ControllerAtomRight {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerAuth {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerAuthScene {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerResourceRight {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerRole {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleABaseadmin;
   }
 }
 /** controller: end */

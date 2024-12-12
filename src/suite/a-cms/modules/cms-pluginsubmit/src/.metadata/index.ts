@@ -7,6 +7,11 @@ declare module 'vona' {
     'cms-pluginsubmit:submit': IDecoratorQueueOptions;
   }
 }
+declare module 'vona-module-cms-pluginsubmit' {
+  export interface QueueSubmit {
+    get scope(): ScopeModuleCmsPluginsubmit;
+  }
+}
 /** queue: end */
 /** queue: begin */
 import { QueueSubmit } from '../bean/queue.submit.js';

@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-app.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-app' {
+  export interface VersionManager {
+    get scope(): ScopeModuleAApp;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/app.js';
@@ -21,6 +26,19 @@ declare module 'vona' {
     'a-app:app': IDecoratorEntityOptions;
     'a-app:appContent': IDecoratorEntityOptions;
     'a-app:appFull': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-app' {
+  export interface EntityApp {
+    get scope(): ScopeModuleAApp;
+  }
+
+  export interface EntityAppContent {
+    get scope(): ScopeModuleAApp;
+  }
+
+  export interface EntityAppFull {
+    get scope(): ScopeModuleAApp;
   }
 }
 /** entity: end */
@@ -37,6 +55,19 @@ declare module 'vona' {
     'a-app:appFull': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-app' {
+  export interface ModelApp2 {
+    get scope(): ScopeModuleAApp;
+  }
+
+  export interface ModelAppContent {
+    get scope(): ScopeModuleAApp;
+  }
+
+  export interface ModelAppFull {
+    get scope(): ScopeModuleAApp;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/resource.js';
@@ -45,6 +76,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-app:resource': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-app' {
+  export interface ControllerResource {
+    get scope(): ScopeModuleAApp;
   }
 }
 /** controller: end */

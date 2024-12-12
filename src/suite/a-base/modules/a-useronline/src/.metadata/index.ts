@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-useronline.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-useronline' {
+  export interface BeanUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/userOnline.js';
@@ -23,6 +32,15 @@ declare module 'vona' {
   export interface IEntityRecord {
     'a-useronline:userOnline': IDecoratorEntityOptions;
     'a-useronline:userOnlineHistory': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-useronline' {
+  export interface EntityUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+
+  export interface EntityUserOnlineHistory {
+    get scope(): ScopeModuleAUseronline;
   }
 }
 /** entity: end */
@@ -37,6 +55,15 @@ declare module 'vona' {
     'a-useronline:userOnlineHistory': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-useronline' {
+  export interface ModelUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+
+  export interface ModelUserOnlineHistory {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/userOnline.js';
@@ -45,6 +72,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-useronline:userOnline': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-useronline' {
+  export interface ControllerUserOnline {
+    get scope(): ScopeModuleAUseronline;
   }
 }
 /** controller: end */

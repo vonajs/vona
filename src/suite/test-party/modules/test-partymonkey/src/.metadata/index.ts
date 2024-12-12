@@ -7,6 +7,11 @@ declare module 'vona' {
     'test-partymonkey:monkeyer': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-test-partymonkey' {
+  export interface ControllerMonkeyer {
+    get scope(): ScopeModuleTestPartymonkey;
+  }
+}
 /** controller: end */
 /** monkey: begin */
 export * from '../monkey.js';

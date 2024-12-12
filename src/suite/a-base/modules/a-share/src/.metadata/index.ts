@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-share.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-share' {
+  export interface BeanShare {
+    get scope(): ScopeModuleAShare;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAShare;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/share.js';
@@ -25,6 +34,19 @@ declare module 'vona' {
     'a-share:share': IDecoratorEntityOptions;
     'a-share:shareRecordPV': IDecoratorEntityOptions;
     'a-share:shareRecordUV': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-share' {
+  export interface EntityShare {
+    get scope(): ScopeModuleAShare;
+  }
+
+  export interface EntityShareRecordPV {
+    get scope(): ScopeModuleAShare;
+  }
+
+  export interface EntityShareRecordUV {
+    get scope(): ScopeModuleAShare;
   }
 }
 /** entity: end */
@@ -41,6 +63,19 @@ declare module 'vona' {
     'a-share:shareRecordUV': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-share' {
+  export interface ModelShare {
+    get scope(): ScopeModuleAShare;
+  }
+
+  export interface ModelShareRecordPV {
+    get scope(): ScopeModuleAShare;
+  }
+
+  export interface ModelShareRecordUV {
+    get scope(): ScopeModuleAShare;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/share.js';
@@ -49,6 +84,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-share:share': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-share' {
+  export interface ControllerShare {
+    get scope(): ScopeModuleAShare;
   }
 }
 /** controller: end */

@@ -7,6 +7,11 @@ declare module 'vona' {
     'cms-plugincopyright:util': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-cms-plugincopyright' {
+  export interface ControllerUtil {
+    get scope(): ScopeModuleCmsPlugincopyright;
+  }
+}
 /** controller: end */
 /** config: begin */
 export * from '../config/config.js';

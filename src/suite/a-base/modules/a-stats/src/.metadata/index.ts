@@ -19,6 +19,23 @@ declare module 'vona' {
     'a-stats.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-stats' {
+  export interface BeanStats {
+    get scope(): ScopeModuleAStats;
+  }
+
+  export interface IoMessageStats {
+    get scope(): ScopeModuleAStats;
+  }
+
+  export interface StatsDeps {
+    get scope(): ScopeModuleAStats;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAStats;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/stats.js';
@@ -27,6 +44,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-stats:stats': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-stats' {
+  export interface EntityStats {
+    get scope(): ScopeModuleAStats;
   }
 }
 /** entity: end */
@@ -39,6 +61,11 @@ declare module 'vona' {
     'a-stats:stats': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-stats' {
+  export interface ModelStats {
+    get scope(): ScopeModuleAStats;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/stats.js';
@@ -49,6 +76,11 @@ declare module 'vona' {
     'a-stats:stats': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-stats' {
+  export interface ControllerStats {
+    get scope(): ScopeModuleAStats;
+  }
+}
 /** controller: end */
 /** queue: begin */
 export * from '../bean/queue.stats.js';
@@ -57,6 +89,11 @@ import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-stats:stats': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-stats' {
+  export interface QueueStats {
+    get scope(): ScopeModuleAStats;
   }
 }
 /** queue: end */

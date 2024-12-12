@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-settings.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-settings' {
+  export interface BeanSettings {
+    get scope(): ScopeModuleASettings;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleASettings;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/settings.js';
@@ -23,6 +32,15 @@ declare module 'vona' {
   export interface IEntityRecord {
     'a-settings:settings': IDecoratorEntityOptions;
     'a-settings:settingsRef': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-settings' {
+  export interface EntitySettings {
+    get scope(): ScopeModuleASettings;
+  }
+
+  export interface EntitySettingsRef {
+    get scope(): ScopeModuleASettings;
   }
 }
 /** entity: end */
@@ -37,6 +55,15 @@ declare module 'vona' {
     'a-settings:settingsRef': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-settings' {
+  export interface ModelSettings {
+    get scope(): ScopeModuleASettings;
+  }
+
+  export interface ModelSettingsRef {
+    get scope(): ScopeModuleASettings;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/settings.js';
@@ -45,6 +72,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-settings:settings': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-settings' {
+  export interface ControllerSettings {
+    get scope(): ScopeModuleASettings;
   }
 }
 /** controller: end */

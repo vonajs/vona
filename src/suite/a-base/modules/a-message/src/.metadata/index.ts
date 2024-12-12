@@ -19,6 +19,19 @@ declare module 'vona' {
     'a-message.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-message' {
+  export interface BeanMessage {
+    get scope(): ScopeModuleAMessage;
+  }
+
+  export interface StatsMessage {
+    get scope(): ScopeModuleAMessage;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAMessage;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/message.js';
@@ -27,6 +40,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-message:message': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-message' {
+  export interface ControllerMessage {
+    get scope(): ScopeModuleAMessage;
   }
 }
 /** controller: end */

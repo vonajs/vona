@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-icon.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-icon' {
+  export interface BeanIcon {
+    get scope(): ScopeModuleAIcon;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAIcon;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/icon.js';
@@ -21,6 +30,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-icon:icon': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-icon' {
+  export interface ControllerIcon {
+    get scope(): ScopeModuleAIcon;
   }
 }
 /** controller: end */

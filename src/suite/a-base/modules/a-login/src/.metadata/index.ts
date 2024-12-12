@@ -7,6 +7,11 @@ declare module 'vona' {
     'a-login:auth': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-login' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleALogin;
+  }
+}
 /** controller: end */
 /** services: begin */
 export * from '../service/auth.js';

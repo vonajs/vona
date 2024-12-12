@@ -7,6 +7,11 @@ declare module 'vona' {
     'home-index:index': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-home-index' {
+  export interface ControllerIndex {
+    get scope(): ScopeModuleHomeIndex;
+  }
+}
 /** controller: end */
 /** startup: begin */
 export * from '../bean/startup.outputHomeApi.js';
@@ -15,6 +20,11 @@ import { IDecoratorStartupOptions } from 'vona';
 declare module 'vona' {
   export interface IStartupRecord {
     'home-index:outputHomeApi': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-home-index' {
+  export interface StartupOutputHomeApi {
+    get scope(): ScopeModuleHomeIndex;
   }
 }
 /** startup: end */

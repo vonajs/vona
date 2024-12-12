@@ -9,6 +9,15 @@ declare module 'vona' {
     'a-flowchart:flowDef': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-flowchart' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlowchart;
+  }
+
+  export interface ControllerFlowDef {
+    get scope(): ScopeModuleAFlowchart;
+  }
+}
 /** controller: end */
 /** services: begin */
 export * from '../service/flow.js';

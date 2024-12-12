@@ -19,6 +19,23 @@ declare module 'vona' {
     'a-authopen.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-authopen' {
+  export interface AuthProviderOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface BeanAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface EventAccountMigration {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/authOpen.js';
@@ -27,6 +44,11 @@ import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-authopen:authOpen': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface EntityAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
   }
 }
 /** entity: end */
@@ -39,6 +61,11 @@ declare module 'vona' {
     'a-authopen:authOpen': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-authopen' {
+  export interface ModelAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/auth.js';
@@ -49,6 +76,15 @@ declare module 'vona' {
   export interface IControllerRecord {
     'a-authopen:auth': IDecoratorControllerOptions;
     'a-authopen:authOpen': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface ControllerAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
   }
 }
 /** controller: end */

@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-pinyin.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-pinyin' {
+  export interface BeanPinyin {
+    get scope(): ScopeModuleAPinyin;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAPinyin;
+  }
+}
 /** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

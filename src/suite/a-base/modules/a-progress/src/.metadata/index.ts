@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-progress.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-progress' {
+  export interface BeanProgress {
+    get scope(): ScopeModuleAProgress;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAProgress;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/progress.js';
@@ -21,6 +30,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-progress:progress': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-progress' {
+  export interface ControllerProgress {
+    get scope(): ScopeModuleAProgress;
   }
 }
 /** controller: end */

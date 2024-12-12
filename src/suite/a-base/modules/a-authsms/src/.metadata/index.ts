@@ -28,6 +28,35 @@ declare module 'vona' {
     'a-authsms.sms.provider.test': SmsProviderTest;
   }
 }
+declare module 'vona-module-a-authsms' {
+  export interface AuthProviderSms {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface BeanSmsProviderCache {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface BroadcastSmsProviderChanged {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface CaptchaProviderCaptcha {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface EventAccountMigration {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface SmsProviderAliyun {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface SmsProviderTest {
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
 /** beans: end */
 /** controller: begin */
 export * from '../controller/auth.js';
@@ -42,6 +71,19 @@ declare module 'vona' {
     'a-authsms:smsProvider': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-authsms' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface ControllerCaptcha {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface ControllerSmsProvider {
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
@@ -52,6 +94,11 @@ declare module 'vona' {
     'a-authsms:status': never;
   }
 }
+declare module 'vona-module-a-authsms' {
+  export interface MetaStatus {
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
 /** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheSmsProviders.js';
@@ -60,6 +107,11 @@ import { IDecoratorStartupOptions } from 'vona';
 declare module 'vona' {
   export interface IStartupRecord {
     'a-authsms:cacheSmsProviders': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-authsms' {
+  export interface StartupCacheSmsProviders {
+    get scope(): ScopeModuleAAuthsms;
   }
 }
 /** startup: end */

@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-dashboard.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-dashboard' {
+  export interface VersionManager {
+    get scope(): ScopeModuleADashboard;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/dashboard.js';
@@ -23,6 +28,23 @@ declare module 'vona' {
     'a-dashboard:dashboardContent': IDecoratorEntityOptions;
     'a-dashboard:dashboardFull': IDecoratorEntityOptions;
     'a-dashboard:dashboardUser': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-dashboard' {
+  export interface EntityDashboard {
+    get scope(): ScopeModuleADashboard;
+  }
+
+  export interface EntityDashboardContent {
+    get scope(): ScopeModuleADashboard;
+  }
+
+  export interface EntityDashboardFull {
+    get scope(): ScopeModuleADashboard;
+  }
+
+  export interface EntityDashboardUser {
+    get scope(): ScopeModuleADashboard;
   }
 }
 /** entity: end */
@@ -41,6 +63,23 @@ declare module 'vona' {
     'a-dashboard:dashboardUser': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-dashboard' {
+  export interface ModelDashboard {
+    get scope(): ScopeModuleADashboard;
+  }
+
+  export interface ModelDashboardContent {
+    get scope(): ScopeModuleADashboard;
+  }
+
+  export interface ModelDashboardFull {
+    get scope(): ScopeModuleADashboard;
+  }
+
+  export interface ModelDashboardUser {
+    get scope(): ScopeModuleADashboard;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/dashboard.js';
@@ -49,6 +88,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-dashboard:dashboard': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-dashboard' {
+  export interface ControllerDashboard {
+    get scope(): ScopeModuleADashboard;
   }
 }
 /** controller: end */

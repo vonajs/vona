@@ -19,6 +19,19 @@ declare module 'vona' {
     'a-socketio.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-socketio' {
+  export interface BeanIo {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface BroadcastSocketEmit {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleASocketio;
+  }
+}
 /** beans: end */
 /** socketConnection: begin */
 export * from '../bean/socketConnection.io.js';
@@ -29,6 +42,11 @@ declare module 'vona' {
     'a-socketio:io': ISocketConnectionOptionsIo;
   }
 }
+declare module 'vona-module-a-socketio' {
+  export interface SocketConnectionIo {
+    get scope(): ScopeModuleASocketio;
+  }
+}
 /** socketConnection: end */
 /** socketPacket: begin */
 export * from '../bean/socketPacket.performAction.js';
@@ -37,6 +55,11 @@ import 'vona';
 declare module 'vona' {
   export interface ISocketPacketRecord {
     'a-socketio:performAction': ISocketPacketOptionsPerformAction;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface SocketPacketPerformAction {
+    get scope(): ScopeModuleASocketio;
   }
 }
 /** socketPacket: end */
@@ -53,6 +76,19 @@ declare module 'vona' {
     'a-socketio:messageSync': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-socketio' {
+  export interface EntityMessage {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface EntityMessageClass {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface EntityMessageSync {
+    get scope(): ScopeModuleASocketio;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/message.js';
@@ -65,6 +101,19 @@ declare module 'vona' {
     'a-socketio:message': IDecoratorModelOptions;
     'a-socketio:messageClass': IDecoratorModelOptions;
     'a-socketio:messageSync': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface ModelMessage {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ModelMessageClass {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ModelMessageSync {
+    get scope(): ScopeModuleASocketio;
   }
 }
 /** model: end */
@@ -83,6 +132,23 @@ declare module 'vona' {
     'a-socketio:test': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-socketio' {
+  export interface ControllerIo {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ControllerMessage {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ControllerMessageClass {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ControllerTest {
+    get scope(): ScopeModuleASocketio;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -91,6 +157,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-socketio:redlock': never;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleASocketio;
   }
 }
 /** meta: end */
@@ -107,6 +178,23 @@ declare module 'vona' {
     'a-socketio:process': IDecoratorQueueOptions;
     'a-socketio:push': IDecoratorQueueOptions;
     'a-socketio:pushDirect': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface QueueDelivery {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface QueueProcess {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface QueuePush {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface QueuePushDirect {
+    get scope(): ScopeModuleASocketio;
   }
 }
 /** queue: end */

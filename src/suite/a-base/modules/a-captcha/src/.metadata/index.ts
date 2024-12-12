@@ -9,6 +9,11 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {}
 }
+declare module 'vona-module-a-captcha' {
+  export interface BeanCaptcha {
+    get scope(): ScopeModuleACaptcha;
+  }
+}
 /** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.captchaVerify.js';
@@ -19,6 +24,11 @@ declare module 'vona' {
     'a-captcha:captchaVerify': never;
   }
 }
+declare module 'vona-module-a-captcha' {
+  export interface MiddlewareCaptchaVerify {
+    get scope(): ScopeModuleACaptcha;
+  }
+}
 /** middleware: end */
 /** controller: begin */
 export * from '../controller/captcha.js';
@@ -27,6 +37,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-captcha:captcha': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-captcha' {
+  export interface ControllerCaptcha {
+    get scope(): ScopeModuleACaptcha;
   }
 }
 /** controller: end */

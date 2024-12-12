@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-oauth.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-oauth' {
+  export interface VersionManager {
+    get scope(): ScopeModuleAOauth;
+  }
+}
 /** beans: end */
 /** services: begin */
 export * from '../service/sessionStore.js';

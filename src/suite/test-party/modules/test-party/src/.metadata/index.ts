@@ -45,6 +45,59 @@ declare module 'vona' {
     'test-party.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-test-party' {
+  export interface BroadcastTest {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface CliDefaultDemo {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventHelloEcho {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventLoginInfo {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventLoginInfoDashboard {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventUserVerify {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface IoMessageSimpleChat {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface IoMessageTest {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface SequenceTest {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface StatsTasksInstance {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface StatsTasksUser {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface SummerCacheTest {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleTestParty;
+  }
+}
 /** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.testInterception.js';
@@ -57,6 +110,15 @@ declare module 'vona' {
     'test-party:testRestructuring': never;
   }
 }
+declare module 'vona-module-test-party' {
+  export interface MiddlewareTestInterception {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface MiddlewareTestRestructuring {
+    get scope(): ScopeModuleTestParty;
+  }
+}
 /** middleware: end */
 /** aop: begin */
 export * from '../bean/aop.atom.js';
@@ -65,6 +127,11 @@ import { IDecoratorAopOptions } from 'vona';
 declare module 'vona' {
   export interface IAopRecord {
     'test-party:atom': IDecoratorAopOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface AopAtom {
+    get scope(): ScopeModuleTestParty;
   }
 }
 /** aop: end */
@@ -79,6 +146,15 @@ declare module 'vona' {
     'test-party:partyExpense': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-test-party' {
+  export interface EntityParty {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EntityPartyExpense {
+    get scope(): ScopeModuleTestParty;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/party.js';
@@ -89,6 +165,15 @@ declare module 'vona' {
   export interface IModelRecord {
     'test-party:party': IDecoratorModelOptions;
     'test-party:partyExpense': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface ModelParty {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ModelPartyExpense {
+    get scope(): ScopeModuleTestParty;
   }
 }
 /** model: end */
@@ -189,6 +274,187 @@ declare module 'vona' {
     'test-party:testRoleUserRole': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-test-party' {
+  export interface ControllerKitchenSinkAutocomplete {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerKitchenSinkFormSchemaValidation {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerKitchenSinkGuide {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerKitchenSinkPtrIsLoadmore {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestAtomAll {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestAtomRight {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestAtomStarLabel {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCacheDb {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCacheMem {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCacheRedis {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxConfig {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxLocale {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxPerformAction {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxRequest {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxResponse {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxSession {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxTail {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestCtxTransaction {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestEventHello {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatBean {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatBroadcast {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatCategory {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatFieldsRight {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatHttpLog {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatInstance {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatMiddleware {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatModel {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatModelWhere {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatOpenAuth {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatProgress {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatSendMail {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatSequence {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatSettings {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatSocketio {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatStats {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatTag {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestFeatValidation {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestItemOnlyAll {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestItemOnlyRight {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestMonkeyMonkeyee {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestMultilevelAuthorizationRole {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestMultilevelAuthorizationUser {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestResourceAll {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestResourceRight {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ControllerTestRoleUserRole {
+    get scope(): ScopeModuleTestParty;
+  }
+}
 /** controller: end */
 /** startup: begin */
 export * from '../bean/startup.startupAll.js';
@@ -199,6 +465,15 @@ declare module 'vona' {
   export interface IStartupRecord {
     'test-party:startupAll': IDecoratorStartupOptions;
     'test-party:startupInstance': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface StartupStartupAll {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface StartupStartupInstance {
+    get scope(): ScopeModuleTestParty;
   }
 }
 /** startup: end */

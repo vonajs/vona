@@ -19,6 +19,23 @@ declare module 'vona' {
     'a-cms.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-cms' {
+  export interface BeanAtomCmsBase {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface BeanCms {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface IoMessageHotloadFile {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleACms;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/article.js';
@@ -31,6 +48,15 @@ declare module 'vona' {
     'a-cms:content': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-cms' {
+  export interface EntityArticle {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface EntityContent {
+    get scope(): ScopeModuleACms;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/article.js';
@@ -41,6 +67,15 @@ declare module 'vona' {
   export interface IModelRecord {
     'a-cms:article': IDecoratorModelOptions;
     'a-cms:content': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface ModelArticle {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ModelContent {
+    get scope(): ScopeModuleACms;
   }
 }
 /** model: end */
@@ -61,6 +96,27 @@ declare module 'vona' {
     'a-cms:site': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-cms' {
+  export interface ControllerArticle {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerComment {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerRender {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerRss {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerSite {
+    get scope(): ScopeModuleACms;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
@@ -69,6 +125,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-cms:status': never;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface MetaStatus {
+    get scope(): ScopeModuleACms;
   }
 }
 /** meta: end */
@@ -81,6 +142,11 @@ declare module 'vona' {
     'a-cms:registerAllWatchers': IDecoratorStartupOptions;
   }
 }
+declare module 'vona-module-a-cms' {
+  export interface StartupRegisterAllWatchers {
+    get scope(): ScopeModuleACms;
+  }
+}
 /** startup: end */
 /** queue: begin */
 export * from '../bean/queue.render.js';
@@ -89,6 +155,11 @@ import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-cms:render': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface QueueRender {
+    get scope(): ScopeModuleACms;
   }
 }
 /** queue: end */

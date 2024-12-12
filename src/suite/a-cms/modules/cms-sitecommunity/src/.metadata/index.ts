@@ -9,6 +9,11 @@ declare module 'vona' {
     'cms-sitecommunity.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-cms-sitecommunity' {
+  export interface VersionManager {
+    get scope(): ScopeModuleCmsSitecommunity;
+  }
+}
 /** beans: end */
 /** atoms: begin */
 export * from '../atom/post.js';

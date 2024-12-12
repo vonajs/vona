@@ -12,6 +12,15 @@ declare module 'vona' {
     'a-authgithub.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-authgithub' {
+  export interface AuthProviderGithub {
+    get scope(): ScopeModuleAAuthgithub;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAAuthgithub;
+  }
+}
 /** beans: end */
 /** config: begin */
 export * from '../config/config.js';

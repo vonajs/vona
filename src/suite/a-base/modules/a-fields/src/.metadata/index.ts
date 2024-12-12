@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-fields.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-fields' {
+  export interface BeanFields {
+    get scope(): ScopeModuleAFields;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFields;
+  }
+}
 /** beans: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.fieldsRightOfAtomClass.js';
@@ -23,6 +32,15 @@ declare module 'vona' {
   export interface ISummerCacheRecord {
     'a-fields:fieldsRightOfAtomClass': IDecoratorSummerCacheOptions;
     'a-fields:fieldsRightOfUser': IDecoratorSummerCacheOptions;
+  }
+}
+declare module 'vona-module-a-fields' {
+  export interface SummerCacheFieldsRightOfAtomClass {
+    get scope(): ScopeModuleAFields;
+  }
+
+  export interface SummerCacheFieldsRightOfUser {
+    get scope(): ScopeModuleAFields;
   }
 }
 /** summerCache: end */

@@ -15,6 +15,19 @@ declare module 'vona' {
     'test-flow.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-test-flow' {
+  export interface FlowServiceStartEventTimer {
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface FlowServiceTest {
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleTestFlow;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/product.js';
@@ -27,6 +40,19 @@ declare module 'vona' {
     'test-flow:product': IDecoratorEntityOptions;
     'test-flow:purchaseOrder': IDecoratorEntityOptions;
     'test-flow:purchaseOrderDetail': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-test-flow' {
+  export interface EntityProduct {
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface EntityPurchaseOrder {
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface EntityPurchaseOrderDetail {
+    get scope(): ScopeModuleTestFlow;
   }
 }
 /** entity: end */
@@ -43,6 +69,19 @@ declare module 'vona' {
     'test-flow:purchaseOrderDetail': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-test-flow' {
+  export interface ModelProduct {
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface ModelPurchaseOrder {
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface ModelPurchaseOrderDetail {
+    get scope(): ScopeModuleTestFlow;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/flow.js';
@@ -51,6 +90,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'test-flow:flow': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-test-flow' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleTestFlow;
   }
 }
 /** controller: end */

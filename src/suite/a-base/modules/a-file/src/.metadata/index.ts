@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-file.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-file' {
+  export interface BeanFile {
+    get scope(): ScopeModuleAFile;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFile;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/file.js';
@@ -23,6 +32,15 @@ declare module 'vona' {
   export interface IEntityRecord {
     'a-file:file': IDecoratorEntityOptions;
     'a-file:fileView': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-file' {
+  export interface EntityFile {
+    get scope(): ScopeModuleAFile;
+  }
+
+  export interface EntityFileView {
+    get scope(): ScopeModuleAFile;
   }
 }
 /** entity: end */
@@ -37,6 +55,15 @@ declare module 'vona' {
     'a-file:fileView': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-file' {
+  export interface ModelFile {
+    get scope(): ScopeModuleAFile;
+  }
+
+  export interface ModelFileView {
+    get scope(): ScopeModuleAFile;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/file.js';
@@ -45,6 +72,11 @@ import { IDecoratorControllerOptions } from 'vona';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-file:file': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-file' {
+  export interface ControllerFile {
+    get scope(): ScopeModuleAFile;
   }
 }
 /** controller: end */

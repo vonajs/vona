@@ -9,6 +9,11 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {}
 }
+declare module 'vona-module-a-validator' {
+  export interface BeanValidator {
+    get scope(): ScopeModuleAValidator;
+  }
+}
 /** beans: end */
 /** pipe: begin */
 export * from '../bean/pipe.valid.js';
@@ -17,6 +22,11 @@ import 'vona';
 declare module 'vona' {
   export interface IPipeRecordLocal {
     'a-validator:valid': IPipeOptionsValid;
+  }
+}
+declare module 'vona-module-a-validator' {
+  export interface PipeValid {
+    get scope(): ScopeModuleAValidator;
   }
 }
 /** pipe: end */

@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-swiper.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-swiper' {
+  export interface VersionManager {
+    get scope(): ScopeModuleASwiper;
+  }
+}
 /** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

@@ -9,6 +9,11 @@ declare module 'vona' {
     'a-codemirror.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-codemirror' {
+  export interface VersionManager {
+    get scope(): ScopeModuleACodemirror;
+  }
+}
 /** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

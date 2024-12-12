@@ -13,6 +13,15 @@ declare module 'vona' {
     'a-core:development': IMiddlewareOptionsDevelopment;
   }
 }
+declare module 'vona-module-a-core' {
+  export interface MiddlewareDevelopment {
+    get scope(): ScopeModuleACore;
+  }
+
+  export interface MiddlewareGate {
+    get scope(): ScopeModuleACore;
+  }
+}
 /** middleware: end */
 /** guard: begin */
 export * from '../bean/guard.user.js';
@@ -21,6 +30,11 @@ import 'vona';
 declare module 'vona' {
   export interface IGuardRecordGlobal {
     'a-core:user': IGuardOptionsUser;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface GuardUser {
+    get scope(): ScopeModuleACore;
   }
 }
 /** guard: end */
@@ -33,6 +47,11 @@ declare module 'vona' {
     'a-core:body': IInterceptorOptionsBody;
   }
 }
+declare module 'vona-module-a-core' {
+  export interface InterceptorBody {
+    get scope(): ScopeModuleACore;
+  }
+}
 /** interceptor: end */
 /** filter: begin */
 export * from '../bean/filter.error.js';
@@ -41,6 +60,11 @@ import 'vona';
 declare module 'vona' {
   export interface IFilterRecordGlobal {
     'a-core:error': IFilterOptionsError;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface FilterError {
+    get scope(): ScopeModuleACore;
   }
 }
 /** filter: end */

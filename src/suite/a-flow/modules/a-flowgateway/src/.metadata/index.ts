@@ -18,6 +18,23 @@ declare module 'vona' {
     'a-flowgateway.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-flowgateway' {
+  export interface FlowNodeGatewayExclusive {
+    get scope(): ScopeModuleAFlowgateway;
+  }
+
+  export interface FlowNodeGatewayInclusive {
+    get scope(): ScopeModuleAFlowgateway;
+  }
+
+  export interface FlowNodeGatewayParallel {
+    get scope(): ScopeModuleAFlowgateway;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFlowgateway;
+  }
+}
 /** beans: end */
 /** queue: begin */
 export * from '../bean/queue.gateway.js';
@@ -26,6 +43,11 @@ import { IDecoratorQueueOptions } from 'vona';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-flowgateway:gateway': IDecoratorQueueOptions;
+  }
+}
+declare module 'vona-module-a-flowgateway' {
+  export interface QueueGateway {
+    get scope(): ScopeModuleAFlowgateway;
   }
 }
 /** queue: end */

@@ -31,6 +31,39 @@ declare module 'vona' {
     'a-flowtask.version.manager': VersionManager;
   }
 }
+declare module 'vona-module-a-flowtask' {
+  export interface BeanFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface FlowNodeActivityUserTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface FlowNodeEndEventAtom {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface FlowNodeStartEventAtom {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface IoMessageWorkflow {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface StatsTaskClaimings {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface StatsTaskHandlings {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface VersionManager {
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/flowNodeStartEventAtomCondition.js';
@@ -43,6 +76,19 @@ declare module 'vona' {
     'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorEntityOptions;
     'a-flowtask:flowTask': IDecoratorEntityOptions;
     'a-flowtask:flowTaskHistory': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-flowtask' {
+  export interface EntityFlowNodeStartEventAtomCondition {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface EntityFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface EntityFlowTaskHistory {
+    get scope(): ScopeModuleAFlowtask;
   }
 }
 /** entity: end */
@@ -59,6 +105,19 @@ declare module 'vona' {
     'a-flowtask:flowTaskHistory': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-flowtask' {
+  export interface ModelFlowNodeStartEventAtomCondition {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ModelFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ModelFlowTaskHistory {
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
 /** model: end */
 /** controller: begin */
 export * from '../controller/flow.js';
@@ -71,6 +130,15 @@ declare module 'vona' {
     'a-flowtask:flowTask': IDecoratorControllerOptions;
   }
 }
+declare module 'vona-module-a-flowtask' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ControllerFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
 /** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
@@ -79,6 +147,11 @@ import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-flowtask:redlock': never;
+  }
+}
+declare module 'vona-module-a-flowtask' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAFlowtask;
   }
 }
 /** meta: end */
