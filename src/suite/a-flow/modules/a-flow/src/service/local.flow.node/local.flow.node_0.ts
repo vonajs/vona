@@ -1,5 +1,4 @@
 import { cast } from 'vona';
-import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 
 import VarsFn from '../../common/vars.js';
@@ -45,16 +44,16 @@ export class LocalFlowNode0 extends BeanBase {
   }
 
   get modelFlow() {
-    return this.scope.model.flow;
+    return this.self.scope.model.flow;
   }
   get modelFlowHistory() {
-    return this.scope.model.flowHistory;
+    return this.self.scope.model.flowHistory;
   }
   get modelFlowNode() {
-    return this.scope.model.flowNode;
+    return this.self.scope.model.flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.scope.model.flowNodeHistory;
+    return this.self.scope.model.flowNodeHistory;
   }
   get behaviors() {
     if (!this._behaviors) {

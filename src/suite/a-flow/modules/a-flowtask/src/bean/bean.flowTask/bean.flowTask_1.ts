@@ -44,7 +44,7 @@ export class BeanFlowTask1 extends BeanFlowTask0 {
     }
     if (!flowTask) {
       if (throwError) {
-        this.scope.error.TaskNotFound__.throw(flowTaskId);
+        this.self.scope.error.TaskNotFound__.throw(flowTaskId);
       } else {
         return null;
       }

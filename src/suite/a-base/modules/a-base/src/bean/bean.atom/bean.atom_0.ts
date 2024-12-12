@@ -1,4 +1,3 @@
-import { ScopeModule } from '../../.metadata/this.js';
 import { BeanModuleScopeBase, cast } from 'vona';
 import { BeanAtom } from '../bean.atom.js';
 
@@ -8,42 +7,42 @@ export class BeanAtom0 extends BeanModuleScopeBase {
   }
 
   get atomClass() {
-    return this.scope._bean.atomClass;
+    return this.self.scope._bean.atomClass;
   }
 
   get model() {
-    return this.scope.model.atom;
+    return this.self.scope.model.atom;
   }
 
   get modelAtom() {
-    return this.scope.model.atom;
+    return this.self.scope.model.atom;
   }
 
   get modelAtomStar() {
-    return this.scope.model.atomStar;
+    return this.self.scope.model.atomStar;
   }
 
   get modelLabel() {
-    return this.scope.model.label;
+    return this.self.scope.model.label;
   }
 
   get modelAtomLabel() {
-    return this.scope.model.atomLabel;
+    return this.self.scope.model.atomLabel;
   }
 
   get modelAtomLabelRef() {
-    return this.scope.model.atomLabelRef;
+    return this.self.scope.model.atomLabelRef;
   }
   get modelFile() {
     return this.bean.scope('a-file').model.file;
   }
 
   get sequence() {
-    return this.scope._bean.sequence;
+    return this.self.scope._bean.sequence;
   }
 
   get sqlProcedure() {
-    return this.scope.service.procedure;
+    return this.self.scope.service.procedure;
   }
 
   // atom other functions

@@ -75,13 +75,13 @@ export class LocalFlowTaskAssignees extends LocalFlowTaskAppendHandleRemark {
         assignees: handle.assignees,
       });
       if (!assignees || assignees.length === 0) {
-        this.scope.error.TaskAssigneesCannotBeEmpty__.throw(flowTaskId);
+        this.self.scope.error.TaskAssigneesCannotBeEmpty__.throw(flowTaskId);
       }
       // check confirmationAllowAppend
       if (!options.confirmationAllowAppend) {
         const assigneesOld = this.contextNode.vars.get('_assignees');
         if (!new Set(assigneesOld).isSuperset(new Set(assignees))) {
-          this.scope.error.TaskAssigneesCannotBeAppended__.throw(flowTaskId);
+          this.self.scope.error.TaskAssigneesCannotBeAppended__.throw(flowTaskId);
         }
       }
       // save var: _assigneesConfirmed

@@ -1,5 +1,4 @@
 import { cast } from 'vona';
-import { ScopeModule } from '../../.metadata/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';
 
@@ -16,7 +15,7 @@ export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   }
 
   get modelCondition() {
-    return this.scope.model.flowNodeStartEventAtomCondition;
+    return this.self.scope.model.flowNodeStartEventAtomCondition;
   }
 
   get modelRoleRight() {

@@ -1,4 +1,3 @@
-import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase, cast } from 'vona';
 import { LocalContextTask } from '../../common/local.context.task.js';
 import { ServiceLocalFlowTask } from '../localFlowTask.js';
@@ -28,12 +27,12 @@ export class LocalFlowTask0 extends BeanBase {
   }
 
   get modelFlowTask() {
-    return this.scope.model.flowTask;
+    return this.self.scope.model.flowTask;
   }
   get modelFlowTaskHistory() {
-    return this.scope.model.flowTaskHistory;
+    return this.self.scope.model.flowTaskHistory;
   }
   get localRight() {
-    return this.scope.service.right;
+    return this.self.scope.service.right;
   }
 }

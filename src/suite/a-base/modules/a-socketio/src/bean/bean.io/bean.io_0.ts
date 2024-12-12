@@ -1,4 +1,3 @@
-import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase, cast } from 'vona';
 import { BeanIo } from '../bean.io.js';
 

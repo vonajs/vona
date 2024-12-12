@@ -1,6 +1,5 @@
 import { cast } from 'vona';
 import { BigNumber } from 'bignumber.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 import { BeanFlowTask } from '../bean.flowTask.js';
 
@@ -10,16 +9,16 @@ export class BeanFlowTask0 extends BeanBase {
   }
 
   get modelFlowTask() {
-    return this.scope.model.flowTask;
+    return this.self.scope.model.flowTask;
   }
   get modelFlowTaskHistory() {
-    return this.scope.model.flowTaskHistory;
+    return this.self.scope.model.flowTaskHistory;
   }
   get localRight() {
-    return this.scope.service.right;
+    return this.self.scope.service.right;
   }
   get sqlProcedure() {
-    return this.scope.service.procedure;
+    return this.self.scope.service.procedure;
   }
 
   async count({ options, user }: any): Promise<BigNumber> {
