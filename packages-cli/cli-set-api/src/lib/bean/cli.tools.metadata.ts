@@ -64,7 +64,7 @@ export class CliToolsMetadata extends BeanCliBase {
     // content
     let content = '';
     // beans
-    content += await generateBeans(moduleName, modulePath);
+    content += await generateBeans(onionScenesMeta, moduleName, modulePath);
     // middlewares
     content += await generateOnions('middleware', onionScenesMeta, moduleName, modulePath);
     // guards

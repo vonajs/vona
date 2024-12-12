@@ -2,27 +2,15 @@ import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
+import { OnionScenesMeta } from '@cabloy/module-info';
 
-export async function generateBeans(moduleName: string, modulePath: string) {
+export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName: string, modulePath: string) {
   const scopeModuleName = getScopeModuleName(moduleName);
   const pattern = `${modulePath}/src/bean/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern, {
-    ignore: [
-      '**/middleware.*.ts',
-      '**/guard.*.ts',
-      '**/interceptor.*.ts',
-      '**/pipe.*.ts',
-      '**/filter.*.ts',
-      '**/socketConnection.*.ts',
-      '**/socketPacket.*.ts',
-      '**/aop.*.ts',
-      '**/meta.*.ts',
-      '**/summerCache.*.ts',
-      '**/startup.*.ts',
-      '**/queue.*.ts',
-      '**/schedule.*.ts',
-    ],
-  });
+  // ignore
+  const ignore = Object.keys(onionScenesMeta).map(item => `**/${item}.*.ts`);
+  // files
+  const files = await eggBornUtils.tools.globbyAsync(pattern, { ignore });
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
