@@ -72,10 +72,27 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** controller: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/userOnline.js';
 export * from '../atom/userOnlineHistory.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-useronline:userOnline': never;
+    'a-useronline:userOnlineHistory': never;
+  }
+}
+declare module 'vona-module-a-useronline' {
+  export interface AtomUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+
+  export interface AtomUserOnlineHistory {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
+/** atom: end */
 /** entities: begin */
 import { EntityUserOnline } from '../entity/userOnline.js';
 import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';

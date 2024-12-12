@@ -72,9 +72,21 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** controller: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/dict.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-dict:dict': never;
+  }
+}
+declare module 'vona-module-a-dict' {
+  export interface AtomDict {
+    get scope(): ScopeModuleADict;
+  }
+}
+/** atom: end */
 /** entities: begin */
 import { EntityDict } from '../entity/dict.js';
 import { EntityDictContent } from '../entity/dictContent.js';

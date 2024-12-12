@@ -84,9 +84,21 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** controller: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/authOpen.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-authopen:authOpen': never;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface AtomAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
+/** atom: end */
 /** entities: begin */
 import { EntityAuthOpen } from '../entity/authOpen.js';
 export interface IModuleEntity {

@@ -72,9 +72,21 @@ declare module 'vona-module-a-app' {
   }
 }
 /** controller: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/app.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-app:app': never;
+  }
+}
+declare module 'vona-module-a-app' {
+  export interface AtomApp {
+    get scope(): ScopeModuleAApp;
+  }
+}
+/** atom: end */
 /** entities: begin */
 import { EntityApp } from '../entity/app.js';
 import { EntityAppContent } from '../entity/appContent.js';

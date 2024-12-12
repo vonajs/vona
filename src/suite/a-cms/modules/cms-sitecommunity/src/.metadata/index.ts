@@ -15,9 +15,21 @@ declare module 'vona-module-cms-sitecommunity' {
   }
 }
 /** beans: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/post.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'cms-sitecommunity:post': never;
+  }
+}
+declare module 'vona-module-cms-sitecommunity' {
+  export interface AtomPost {
+    get scope(): ScopeModuleCmsSitecommunity;
+  }
+}
+/** atom: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

@@ -80,9 +80,21 @@ declare module 'vona-module-a-dashboard' {
   }
 }
 /** controller: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/dashboard.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-dashboard:dashboard': never;
+  }
+}
+declare module 'vona-module-a-dashboard' {
+  export interface AtomDashboard {
+    get scope(): ScopeModuleADashboard;
+  }
+}
+/** atom: end */
 /** entities: begin */
 import { EntityDashboard } from '../entity/dashboard.js';
 import { EntityDashboardContent } from '../entity/dashboardContent.js';

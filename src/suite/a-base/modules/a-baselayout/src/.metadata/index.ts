@@ -57,9 +57,21 @@ declare module 'vona-module-a-baselayout' {
   }
 }
 /** model: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/layout.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-baselayout:layout': never;
+  }
+}
+declare module 'vona-module-a-baselayout' {
+  export interface AtomLayout {
+    get scope(): ScopeModuleABaselayout;
+  }
+}
+/** atom: end */
 /** entities: begin */
 import { EntityLayout } from '../entity/layout.js';
 import { EntityLayoutContent } from '../entity/layoutContent.js';

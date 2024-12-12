@@ -15,9 +15,21 @@ declare module 'vona-module-cms-sitedocumentation' {
   }
 }
 /** beans: end */
-/** atoms: begin */
+/** atom: begin */
 export * from '../atom/document.js';
-/** atoms: end */
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'cms-sitedocumentation:document': never;
+  }
+}
+declare module 'vona-module-cms-sitedocumentation' {
+  export interface AtomDocument {
+    get scope(): ScopeModuleCmsSitedocumentation;
+  }
+}
+/** atom: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
