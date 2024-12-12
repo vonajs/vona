@@ -3,13 +3,14 @@ import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export async function generateEntities(_moduleName: string, modulePath: string) {
+export async function generateEntities(moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/entity/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   if (files.length === 0) return '';
   files.sort();
   const contentImports: string[] = [];
   const contentRecords: string[] = [];
+  const contentColumns: string[] = [];
   for (const file of files) {
     const fileName = path.basename(file);
     if (fileName.startsWith('_')) continue;
@@ -21,6 +22,11 @@ export async function generateEntities(_moduleName: string, modulePath: string) 
     const className = 'Entity' + toUpperCaseFirstChar(resourceName);
     contentImports.push(`import { ${className} } from '../entity/${resourceName}.js';`);
     contentRecords.push(`'${resourceName}': ${className};`);
+    contentColumns.push(`
+    export interface ${className} {
+      column<K extends keyof Omit<${className}, 'column' | 'columns' | 'table'>>(column: K): K;
+      columns<K extends keyof Omit<${className}, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    }`);
   }
   if (contentImports.length === 0) return '';
   // combine
@@ -28,6 +34,9 @@ export async function generateEntities(_moduleName: string, modulePath: string) 
 ${contentImports.join('\n')}
 export interface IModuleEntity {
   ${contentRecords.join('\n')}
+}
+declare module 'vona-module-${moduleName}' {
+  ${contentColumns.join('\n')} 
 }
 /** entities: end */
 `;

@@ -65,7 +65,6 @@ declare module 'vona-module-a-instance' {
     columns<K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
   }
 }
-
 /** entities: end */
 /** models: begin */
 import { ModelInstance } from '../model/instance.js';
