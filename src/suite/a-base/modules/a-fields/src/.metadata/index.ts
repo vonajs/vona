@@ -27,7 +27,7 @@ declare module 'vona-module-a-fields' {
 export * from '../bean/summerCache.fieldsRightOfAtomClass.js';
 export * from '../bean/summerCache.fieldsRightOfUser.js';
 
-import { IDecoratorSummerCacheOptions } from 'vona';
+import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 declare module 'vona' {
   export interface ISummerCacheRecord {
     'a-fields:fieldsRightOfAtomClass': IDecoratorSummerCacheOptions;
@@ -42,6 +42,14 @@ declare module 'vona-module-a-fields' {
   export interface SummerCacheFieldsRightOfUser {
     get scope(): ScopeModuleAFields;
   }
+}
+/** summerCache: end */
+/** summerCache: begin */
+import { SummerCacheFieldsRightOfAtomClass } from '../bean/summerCache.fieldsRightOfAtomClass.js';
+import { SummerCacheFieldsRightOfUser } from '../bean/summerCache.fieldsRightOfUser.js';
+export interface IModuleSummerCache {
+  fieldsRightOfAtomClass: SummerCacheFieldsRightOfAtomClass;
+  fieldsRightOfUser: SummerCacheFieldsRightOfUser;
 }
 /** summerCache: end */
 /** config: begin */
@@ -75,6 +83,7 @@ export interface ScopeModuleAFields {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  summerCache: IModuleSummerCache;
 }
 
 import 'vona';

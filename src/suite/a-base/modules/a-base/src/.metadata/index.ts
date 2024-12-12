@@ -720,7 +720,7 @@ export * from '../bean/summerCache.roleScopesOfRole.js';
 export * from '../bean/summerCache.roleScopesOfUser.js';
 export * from '../bean/summerCache.roleWhosOfAtomClassAction.js';
 
-import { IDecoratorSummerCacheOptions } from 'vona';
+import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 declare module 'vona' {
   export interface ISummerCacheRecord {
     'a-base:atomClassInner': IDecoratorSummerCacheOptions;
@@ -755,6 +755,22 @@ declare module 'vona-module-a-base' {
   export interface SummerCacheRoleWhosOfAtomClassAction {
     get scope(): ScopeModuleABase;
   }
+}
+/** summerCache: end */
+/** summerCache: begin */
+import { SummerCacheAtomClassInner } from '../bean/summerCache.atomClassInner.js';
+import { SummerCacheRoleParentsOfUser } from '../bean/summerCache.roleParentsOfUser.js';
+import { SummerCacheRoleScopesMineOfUser } from '../bean/summerCache.roleScopesMineOfUser.js';
+import { SummerCacheRoleScopesOfRole } from '../bean/summerCache.roleScopesOfRole.js';
+import { SummerCacheRoleScopesOfUser } from '../bean/summerCache.roleScopesOfUser.js';
+import { SummerCacheRoleWhosOfAtomClassAction } from '../bean/summerCache.roleWhosOfAtomClassAction.js';
+export interface IModuleSummerCache {
+  atomClassInner: SummerCacheAtomClassInner;
+  roleParentsOfUser: SummerCacheRoleParentsOfUser;
+  roleScopesMineOfUser: SummerCacheRoleScopesMineOfUser;
+  roleScopesOfRole: SummerCacheRoleScopesOfRole;
+  roleScopesOfUser: SummerCacheRoleScopesOfUser;
+  roleWhosOfAtomClassAction: SummerCacheRoleWhosOfAtomClassAction;
 }
 /** summerCache: end */
 /** startup: begin */
@@ -1267,6 +1283,7 @@ export interface ScopeModuleABase {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
+  summerCache: IModuleSummerCache;
   queue: IModuleQueue;
 }
 
