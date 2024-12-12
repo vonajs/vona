@@ -10,8 +10,8 @@ import {
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 @Service()
-export class ServiceLocalFetch<TScopeModule = unknown, KEY = any, DATA = any>
-  extends CacheBase<TScopeModule, KEY, DATA>
+export class ServiceLocalFetch<KEY = any, DATA = any>
+  extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {

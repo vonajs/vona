@@ -13,7 +13,7 @@ export type TypeQueueDeliveryJobResult = void;
 
 @Queue({ concurrency: true })
 export class QueueDelivery
-  extends BeanQueueBase<ScopeModule, TypeQueueDeliveryJobData, TypeQueueDeliveryJobResult>
+  extends BeanQueueBase<TypeQueueDeliveryJobData, TypeQueueDeliveryJobResult>
   implements IQueueExecute<TypeQueueDeliveryJobData, TypeQueueDeliveryJobResult>
 {
   async execute(data: TypeQueueDeliveryJobData, _options?: IQueuePushOptions): Promise<TypeQueueDeliveryJobResult> {

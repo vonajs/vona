@@ -7,7 +7,7 @@ export type TypeQueuePushDirectJobResult = any;
 
 @Queue({ concurrency: true })
 export class QueuePushDirect
-  extends BeanQueueBase<ScopeModule, TypeQueuePushDirectJobData, TypeQueuePushDirectJobResult>
+  extends BeanQueueBase<TypeQueuePushDirectJobData, TypeQueuePushDirectJobResult>
   implements IQueueExecute<TypeQueuePushDirectJobData, TypeQueuePushDirectJobResult>
 {
   async execute(data: TypeQueuePushDirectJobData, _options?: IQueuePushOptions): Promise<TypeQueuePushDirectJobResult> {

@@ -7,8 +7,8 @@ import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
 @Service()
-export class ServiceLocalMem<TScopeModule = unknown, KEY = any, DATA = any>
-  extends CacheBase<TScopeModule, KEY, DATA>
+export class ServiceLocalMem<KEY = any, DATA = any>
+  extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {

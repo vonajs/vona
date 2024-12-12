@@ -8,7 +8,7 @@ export type TSummerCacheFieldsRightOfUserData = any;
   preset: 'all',
 })
 export class SummerCacheFieldsRightOfUser
-  extends BeanSummerCacheBase<ScopeModule, TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>
+  extends BeanSummerCacheBase<TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>
   implements ISummerCacheGet<TSummerCacheFieldsRightOfUserKey, TSummerCacheFieldsRightOfUserData>
 {
   async getNative(

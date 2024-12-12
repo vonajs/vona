@@ -10,7 +10,7 @@ export type TypeQueueTestJobResult = number;
 
 @Queue()
 export class QueueTest
-  extends BeanQueueBase<ScopeModule, TypeQueueTestJobData, TypeQueueTestJobResult>
+  extends BeanQueueBase<TypeQueueTestJobData, TypeQueueTestJobResult>
   implements IQueueExecute<TypeQueueTestJobData, TypeQueueTestJobResult>
 {
   async execute(data: TypeQueueTestJobData, _options?: IQueuePushOptions): Promise<TypeQueueTestJobResult> {

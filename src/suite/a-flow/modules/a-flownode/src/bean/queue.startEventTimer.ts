@@ -11,7 +11,7 @@ export type TypeQueueStartEventTimerJobResult = void;
 
 @Queue({ concurrency: true })
 export class QueueStartEventTimer
-  extends BeanQueueBase<ScopeModule, TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>
+  extends BeanQueueBase<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>
   implements IQueueExecute<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>
 {
   async execute(

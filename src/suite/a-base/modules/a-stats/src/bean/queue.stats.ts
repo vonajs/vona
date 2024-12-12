@@ -7,7 +7,7 @@ export type TypeQueueStatsJobResult = void;
 
 @Queue()
 export class QueueStats
-  extends BeanQueueBase<ScopeModule, TypeQueueStatsJobData, TypeQueueStatsJobResult>
+  extends BeanQueueBase<TypeQueueStatsJobData, TypeQueueStatsJobResult>
   implements IQueueExecute<TypeQueueStatsJobData, TypeQueueStatsJobResult>
 {
   async execute(data: TypeQueueStatsJobData, _options?: IQueuePushOptions): Promise<TypeQueueStatsJobResult> {

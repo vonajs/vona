@@ -20,7 +20,7 @@ export type TypeQueueRenderJobResult = unknown;
 
 @Queue({ concurrency: true })
 export class QueueRender
-  extends BeanQueueBase<ScopeModule, TypeQueueRenderJobData, TypeQueueRenderJobResult>
+  extends BeanQueueBase<TypeQueueRenderJobData, TypeQueueRenderJobResult>
   implements IQueueExecute<TypeQueueRenderJobData, TypeQueueRenderJobResult>
 {
   async execute(data: TypeQueueRenderJobData, _options?: IQueuePushOptions): Promise<TypeQueueRenderJobResult> {

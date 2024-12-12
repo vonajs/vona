@@ -12,7 +12,7 @@ export type TypeQueueOvertimeJobResult = void;
 
 @Queue()
 export class QueueOvertime
-  extends BeanQueueBase<ScopeModule, TypeQueueOvertimeJobData, TypeQueueOvertimeJobResult>
+  extends BeanQueueBase<TypeQueueOvertimeJobData, TypeQueueOvertimeJobResult>
   implements IQueueExecute<TypeQueueOvertimeJobData, TypeQueueOvertimeJobResult>
 {
   async execute(data: TypeQueueOvertimeJobData, _options?: IQueuePushOptions): Promise<TypeQueueOvertimeJobResult> {

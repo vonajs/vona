@@ -8,7 +8,7 @@ export type TSummerCacheRoleScopesMineOfUserData = any;
   preset: 'all',
 })
 export class SummerCacheRoleScopesMineOfUser
-  extends BeanSummerCacheBase<ScopeModule, TSummerCacheRoleScopesMineOfUserKey, TSummerCacheRoleScopesMineOfUserData>
+  extends BeanSummerCacheBase<TSummerCacheRoleScopesMineOfUserKey, TSummerCacheRoleScopesMineOfUserData>
   implements ISummerCacheGet<TSummerCacheRoleScopesMineOfUserKey, TSummerCacheRoleScopesMineOfUserData>
 {
   async getNative(

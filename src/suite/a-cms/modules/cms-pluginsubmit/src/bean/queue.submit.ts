@@ -12,7 +12,7 @@ export type TypeQueueSubmitJobResult = void;
 
 @Queue()
 export class QueueSubmit
-  extends BeanQueueBase<ScopeModule, TypeQueueSubmitJobData, TypeQueueSubmitJobResult>
+  extends BeanQueueBase<TypeQueueSubmitJobData, TypeQueueSubmitJobResult>
   implements IQueueExecute<TypeQueueSubmitJobData, TypeQueueSubmitJobResult>
 {
   async execute(data: TypeQueueSubmitJobData, _options?: IQueuePushOptions): Promise<TypeQueueSubmitJobResult> {

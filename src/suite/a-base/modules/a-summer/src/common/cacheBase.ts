@@ -4,13 +4,13 @@ import { ServiceLocalMem } from '../service/localMem_.js';
 import { ServiceLocalRedis } from '../service/localRedis_.js';
 import { ServiceLocalFetch } from '../service/localFetch_.js';
 
-export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase {
+export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   protected _cacheName: string;
   protected _cacheOpitons: IDecoratorSummerCacheOptions;
 
-  protected _localMem: ServiceLocalMem<TScopeModule, KEY, DATA>;
-  protected _localRedis: ServiceLocalRedis<TScopeModule, KEY, DATA>;
-  protected _localFetch: ServiceLocalFetch<TScopeModule, KEY, DATA>;
+  protected _localMem: ServiceLocalMem<KEY, DATA>;
+  protected _localRedis: ServiceLocalRedis<KEY, DATA>;
+  protected _localFetch: ServiceLocalFetch<KEY, DATA>;
 
   protected __init__(cacheName: string, cacheOptions: IDecoratorSummerCacheOptions) {
     this._cacheName = cacheName;

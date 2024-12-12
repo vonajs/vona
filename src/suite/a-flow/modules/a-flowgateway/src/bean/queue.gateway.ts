@@ -22,7 +22,7 @@ export type TypeQueueGatewayJobResult = void;
   },
 })
 export class QueueGateway
-  extends BeanQueueBase<ScopeModule, TypeQueueGatewayJobData, TypeQueueGatewayJobResult>
+  extends BeanQueueBase<TypeQueueGatewayJobData, TypeQueueGatewayJobResult>
   implements IQueueExecute<TypeQueueGatewayJobData, TypeQueueGatewayJobResult>
 {
   async execute(data: TypeQueueGatewayJobData, _options?: IQueuePushOptions): Promise<TypeQueueGatewayJobResult> {

@@ -15,7 +15,7 @@ export type TSummerCacheTestData = { id: number; name: string };
   },
 })
 export class SummerCacheTest
-  extends BeanSummerCacheBase<ScopeModule, TSummerCacheTestKey, TSummerCacheTestData>
+  extends BeanSummerCacheBase<TSummerCacheTestKey, TSummerCacheTestData>
   implements ISummerCacheGet<TSummerCacheTestKey, TSummerCacheTestData>
 {
   async getNative(

@@ -3,11 +3,7 @@ import objectHash from 'object-hash';
 import { CacheBase } from '../common/cacheBase.js';
 
 @Virtual()
-export class BeanSummerCacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends CacheBase<
-  TScopeModule,
-  KEY,
-  DATA
-> {
+export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, DATA> {
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorSummerCacheOptions) {
     let _cacheName: string;
     let _cacheOpitons: IDecoratorSummerCacheOptions;

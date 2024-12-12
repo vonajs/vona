@@ -3,8 +3,8 @@ import { IORedis, Service, TSummerCacheActionOptions } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 
 @Service()
-export class ServiceLocalRedis<TScopeModule = unknown, KEY = any, DATA = any>
-  extends CacheBase<TScopeModule, KEY, DATA>
+export class ServiceLocalRedis<KEY = any, DATA = any>
+  extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
   _redisSummer: IORedis.Redis;

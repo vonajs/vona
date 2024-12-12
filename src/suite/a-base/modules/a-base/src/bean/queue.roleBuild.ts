@@ -7,7 +7,7 @@ export type TypeQueueRoleBuildJobResult = void;
 
 @Queue()
 export class QueueRoleBuild
-  extends BeanQueueBase<ScopeModule, TypeQueueRoleBuildJobData, TypeQueueRoleBuildJobResult>
+  extends BeanQueueBase<TypeQueueRoleBuildJobData, TypeQueueRoleBuildJobResult>
   implements IQueueExecute<TypeQueueRoleBuildJobData, TypeQueueRoleBuildJobResult>
 {
   async execute(data: TypeQueueRoleBuildJobData, _options?: IQueuePushOptions): Promise<TypeQueueRoleBuildJobResult> {

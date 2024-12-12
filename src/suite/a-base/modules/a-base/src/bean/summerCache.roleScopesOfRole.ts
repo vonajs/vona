@@ -8,7 +8,7 @@ export type TSummerCacheRoleScopesOfRoleData = any;
   preset: 'all',
 })
 export class SummerCacheRoleScopesOfRole
-  extends BeanSummerCacheBase<ScopeModule, TSummerCacheRoleScopesOfRoleKey, TSummerCacheRoleScopesOfRoleData>
+  extends BeanSummerCacheBase<TSummerCacheRoleScopesOfRoleKey, TSummerCacheRoleScopesOfRoleData>
   implements ISummerCacheGet<TSummerCacheRoleScopesOfRoleKey, TSummerCacheRoleScopesOfRoleData>
 {
   async getNative(

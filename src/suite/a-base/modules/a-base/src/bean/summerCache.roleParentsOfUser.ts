@@ -8,7 +8,7 @@ export type TSummerCacheRoleParentsOfUserData = any;
   preset: 'all',
 })
 export class SummerCacheRoleParentsOfUser
-  extends BeanSummerCacheBase<ScopeModule, TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>
+  extends BeanSummerCacheBase<TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>
   implements ISummerCacheGet<TSummerCacheRoleParentsOfUserKey, TSummerCacheRoleParentsOfUserData>
 {
   async getNative(

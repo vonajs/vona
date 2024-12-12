@@ -8,7 +8,7 @@ export type TSummerCacheAtomClassInnerData = any;
   preset: 'all',
 })
 export class SummerCacheAtomClassInner
-  extends BeanSummerCacheBase<ScopeModule, TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>
+  extends BeanSummerCacheBase<TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>
   implements ISummerCacheGet<TSummerCacheAtomClassInnerKey, TSummerCacheAtomClassInnerData>
 {
   // key: in/notin
