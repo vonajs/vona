@@ -22,7 +22,6 @@ import {
   IDecoratorAopOptions,
   IDecoratorEntityOptions,
   IDecoratorControllerOptions,
-  IDecoratorModelOptions,
   IDecoratorMetaOptions,
   IDecoratorStartupOptions,
   IMiddlewareRecord,
@@ -34,7 +33,6 @@ import {
   ISocketPacketRecord,
   IAopRecord,
   IEntityRecord,
-  IModelRecord,
   IControllerRecord,
   IMetaRecord,
   IStartupRecord,
@@ -87,7 +85,6 @@ export class AppMeta extends BeanSimple {
   onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
   onionAop: Onion<IDecoratorAopOptions, keyof IAopRecord>;
   onionEntity: Onion<IDecoratorEntityOptions, keyof IEntityRecord>;
-  onionModel: Onion<IDecoratorModelOptions, keyof IModelRecord>;
   onionController: Onion<IDecoratorControllerOptions, keyof IControllerRecord>;
   onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
   onionStartup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;

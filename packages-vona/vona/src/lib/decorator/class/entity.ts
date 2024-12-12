@@ -13,7 +13,7 @@ export function Entity(options?: IDecoratorEntityOptions | string): ClassDecorat
   // tableName
   const tableName = options.table;
   if (__tableNames.has(tableName)) {
-    throw new Error(`model table exists: ${tableName}`);
+    throw new Error(`entity table exists: ${tableName}`);
   }
   __tableNames.add(tableName);
   return createBeanDecorator('entity', options);

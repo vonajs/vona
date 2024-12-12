@@ -6,7 +6,6 @@ import { IGuardRecord } from '../interface/guard.js';
 import { IInterceptorRecord } from '../interface/interceptor.js';
 import { IMetaRecord } from '../interface/meta.js';
 import { IMiddlewareRecord } from '../interface/middleware.js';
-import { IModelRecord } from '../interface/model.js';
 import { IPipeRecord } from '../interface/pipe.js';
 import { ISocketConnectionRecord } from '../interface/socketConnection.js';
 import { ISocketPacketRecord } from '../interface/socketPacket.js';
@@ -23,7 +22,6 @@ export interface ConfigOnions {
   socketPacket: OmitNever<ISocketPacketRecord>;
   aop: OmitNever<IAopRecord>;
   entity: OmitNever<IEntityRecord>;
-  model: OmitNever<IModelRecord>;
   controller: OmitNever<IControllerRecord>;
   meta: OmitNever<IMetaRecord>;
   startup: OmitNever<IStartupRecord>;

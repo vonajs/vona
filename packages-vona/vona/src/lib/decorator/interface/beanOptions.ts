@@ -11,7 +11,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'controller'
   | 'entity'
   | 'dto'
-  | 'model'
   | 'atom'
   | 'middleware'
   | 'guard'
