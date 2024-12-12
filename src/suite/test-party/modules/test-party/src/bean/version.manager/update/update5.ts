@@ -5,12 +5,14 @@ export class VersionUpdate extends BeanBase {
     // all instances
     const instances = await this.app.bean.instance.list({ where: {} });
     for (const instance of instances) {
-      await this.ctx.meta.util.executeBean({
-        subdomain: instance.name,
-        fn: async () => {
+      await this.bean.executor.newCtx(
+        async () => {
           await this._updateAtomsInstance();
         },
-      });
+        {
+          subdomain: instance.name,
+        },
+      );
     }
   }
 
