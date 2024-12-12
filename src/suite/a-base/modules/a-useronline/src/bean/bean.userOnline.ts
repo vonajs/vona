@@ -1,5 +1,5 @@
 import { EntityUserOnline } from '../index.js';
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 const __atomClassUserOnline = {
@@ -12,7 +12,7 @@ const __atomClassUserOnlineHistory = {
 };
 
 @Bean()
-export class BeanUserOnline extends BeanModuleScopeBase<ScopeModule> {
+export class BeanUserOnline extends BeanModuleScopeBase {
   get modelUserOnline() {
     return this.scope.model.userOnline;
   }

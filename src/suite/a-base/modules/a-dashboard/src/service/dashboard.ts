@@ -1,5 +1,5 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 
 @Service()
 export class ServiceDashboard extends BeanBase {

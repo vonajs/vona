@@ -1,11 +1,11 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanAuthProviderBase } from 'vona-module-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderSms extends BeanAuthProviderBase<ScopeModule> {
+export class AuthProviderSms extends BeanAuthProviderBase {
   async getConfigDefault() {
     return null;
   }

@@ -1,11 +1,11 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import eggBornUtils from 'egg-born-utils';
 import { BeanCliBase } from 'vona-module-a-cli';
 
 // const __storeTokenHost = 'https://portal.cabloy.com';
 // const __storeTokenHost = 'http://localhost:9192';
 
-export default class CliStoreBase extends BeanCliBase<ScopeModule> {
+export default class CliStoreBase extends BeanCliBase {
   commandName: any;
   tokenName: any;
   openAuthClient: any;

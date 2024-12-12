@@ -5,7 +5,7 @@ import Strategy from 'passport-github';
 import StrategyMock from '../meta/passport/strategyMock.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderGithub extends BeanAuthProviderBase<ScopeModule> {
+export class AuthProviderGithub extends BeanAuthProviderBase {
   get configModule() {
     return this.scope.config;
   }

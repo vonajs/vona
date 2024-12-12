@@ -1,8 +1,8 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 @Bean()
-export class BeanMail extends BeanModuleScopeBase<ScopeModule> {
+export class BeanMail extends BeanModuleScopeBase {
   get modelMail() {
     return this.scope.model.mail;
   }

@@ -1,5 +1,5 @@
 import { EntityShare } from '../index.js';
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean()

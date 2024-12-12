@@ -3,7 +3,7 @@ import { Bean, BeanModuleScopeBase } from 'vona';
 import { constants } from '../config/constants.js';
 
 @Bean()
-export class BeanSettings extends BeanModuleScopeBase<ScopeModule> {
+export class BeanSettings extends BeanModuleScopeBase {
   get modelSettings() {
     return this.scope.model.settings;
   }

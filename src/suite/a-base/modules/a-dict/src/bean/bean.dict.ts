@@ -1,10 +1,10 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 const __SeparatorCode = '/';
 
 @Bean()
-export class BeanDict extends BeanModuleScopeBase<ScopeModule> {
+export class BeanDict extends BeanModuleScopeBase {
   get cacheMem() {
     return this.scope._bean.cacheMem;
   }

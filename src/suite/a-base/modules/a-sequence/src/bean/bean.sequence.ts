@@ -1,10 +1,10 @@
-import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 let __sequences;
 
 @Bean()
-export class BeanSequence extends BeanModuleScopeBase<ScopeModule> {
+export class BeanSequence extends BeanModuleScopeBase {
   async reset(name) {
     const provider = this._findSequenceProvider(name);
     const sequence = await this._get(name);

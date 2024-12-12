@@ -1,10 +1,10 @@
-import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanFlowBehaviorBase } from 'vona-module-a-flow';
 import { TypeQueueOvertimeJobData } from './queue.overtime.js';
 
 @Bean({ scene: 'flow.behavior' })
-export class FlowBehaviorOvertime extends BeanFlowBehaviorBase<ScopeModule> {
+export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
   async enter(_context, next) {
     // addJob
     const flowId = this.context._flowId;

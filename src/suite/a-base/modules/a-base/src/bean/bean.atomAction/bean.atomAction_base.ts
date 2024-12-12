@@ -1,7 +1,7 @@
-import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanModuleScopeBase } from 'vona';
 
-export class BeanAtomActionBase extends BeanModuleScopeBase<ScopeModule> {
+export class BeanAtomActionBase extends BeanModuleScopeBase {
   get model() {
     return this.scope.model.atomAction;
   }

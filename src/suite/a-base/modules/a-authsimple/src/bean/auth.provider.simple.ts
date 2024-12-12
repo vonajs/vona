@@ -1,11 +1,11 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanAuthProviderBase } from 'vona-module-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
 @Bean({ scene: 'auth.provider' })
-export class AuthProviderSimple extends BeanAuthProviderBase<ScopeModule> {
+export class AuthProviderSimple extends BeanAuthProviderBase {
   get localSimple() {
     return this.scope.service.simple;
   }

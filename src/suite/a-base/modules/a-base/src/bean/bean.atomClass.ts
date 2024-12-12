@@ -1,11 +1,11 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 import { AtomClass, AtomClassBase, AtomClassParams } from '../types.js';
 import { EntityAtomClass } from '../index.js';
 import { IModelSelectParamsJoin } from 'vona-module-a-database';
 
 @Bean()
-export class BeanAtomClass extends BeanModuleScopeBase<ScopeModule> {
+export class BeanAtomClass extends BeanModuleScopeBase {
   get model() {
     return this.scope.model.atomClass;
   }

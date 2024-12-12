@@ -1,8 +1,8 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanModuleScopeBase, Bean } from 'vona';
 
 @Bean()
-export class BeanCacheDb extends BeanModuleScopeBase<ScopeModule> {
+export class BeanCacheDb extends BeanModuleScopeBase {
   async get(name) {
     const res = await this._has(name);
     return res ? JSON.parse(res.value) : undefined;

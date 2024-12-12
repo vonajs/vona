@@ -1,9 +1,9 @@
-import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
 import { TypeGatewayMode } from '../types.js';
 import { TypeQueueGatewayJobData } from '../bean/queue.gateway.js';
 
-export class FlowNodeGatewayBase extends BeanFlowNodeBase<ScopeModule> {
+export class FlowNodeGatewayBase extends BeanFlowNodeBase {
   gatewayMode: TypeGatewayMode;
 
   constructor(gatewayMode) {

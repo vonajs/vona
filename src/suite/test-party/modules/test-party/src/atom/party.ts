@@ -2,7 +2,7 @@ import { Atom } from 'vona';
 import { BeanAtomCmsBase } from 'vona-module-a-cms';
 
 @Atom()
-export class AtomParty extends BeanAtomCmsBase<ScopeModule> {
+export class AtomParty extends BeanAtomCmsBase {
   get model() {
     return this.scope.model.party;
   }

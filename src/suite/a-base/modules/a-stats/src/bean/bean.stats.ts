@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 import { TypeQueueStatsJobData } from './queue.stats.js';
 
@@ -6,7 +6,7 @@ let __stats;
 let __statsDeps;
 
 @Bean()
-export class BeanStats extends BeanModuleScopeBase<ScopeModule> {
+export class BeanStats extends BeanModuleScopeBase {
   get modelStats() {
     return this.scope.model.stats;
   }

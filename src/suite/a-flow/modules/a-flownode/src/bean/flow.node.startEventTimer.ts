@@ -1,11 +1,11 @@
-import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, cast } from 'vona';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
 import { TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult } from './queue.startEventTimer.js';
 import { TypeQueueJob } from 'vona-module-a-queue';
 
 @Bean({ scene: 'flow.node' })
-export class FlowNodeStartEventTimer extends BeanFlowNodeBase<ScopeModule> {
+export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
   async deploy({ deploy, flowDefId, node }: any) {
     if (deploy) {
       await this._addSchedule({ flowDefId, node });

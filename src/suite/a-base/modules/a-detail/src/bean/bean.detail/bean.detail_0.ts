@@ -1,7 +1,7 @@
 import { ScopeModule } from '../../.metadata/this.js';
 import { BeanModuleScopeBase } from 'vona';
 
-export class BeanDetail0 extends BeanModuleScopeBase<ScopeModule> {
+export class BeanDetail0 extends BeanModuleScopeBase {
   get modelDetailBase() {
     return this.scope.model.detailBase;
   }

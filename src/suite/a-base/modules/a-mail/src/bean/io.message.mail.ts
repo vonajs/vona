@@ -2,7 +2,7 @@ import { Bean } from 'vona';
 import { BeanIoMessageBase } from 'vona-module-a-socketio';
 
 @Bean({ scene: 'io.message' })
-export class IoMessageMail extends BeanIoMessageBase<ScopeModule> {
+export class IoMessageMail extends BeanIoMessageBase {
   async onChannelRender({ channelFullName, options, message, messageSync, messageClass }: any) {
     if (channelFullName === 'a-mail:mail') {
       return await this._onChannelRenderMail({ options, message, messageSync, messageClass });

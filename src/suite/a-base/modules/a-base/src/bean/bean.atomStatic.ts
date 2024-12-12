@@ -1,9 +1,9 @@
-import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 import { BeanAtomBase } from './bean.atomBase_.js';
 
 @Bean()
-export class BeanAtomStatic extends BeanModuleScopeBase<ScopeModule> {
+export class BeanAtomStatic extends BeanModuleScopeBase {
   async loadAllAtomStatics() {
     const modules = this._loadAllAtomStatics_prepare();
     const count = modules.length;

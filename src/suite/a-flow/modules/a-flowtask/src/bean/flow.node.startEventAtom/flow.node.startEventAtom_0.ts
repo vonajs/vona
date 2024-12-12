@@ -3,7 +3,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import FlowNodeActivityUserTaskBase from '../../common/flowNodeActivityUserTaskBase.js';
 import { FlowNodeStartEventAtom } from '../flow.node.startEventAtom.js';
 
-export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase<ScopeModule> {
+export class FlowNodeStartEventAtom0 extends FlowNodeActivityUserTaskBase {
   atomStateDefault: any;
 
   constructor() {

@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 import chalk from 'chalk';

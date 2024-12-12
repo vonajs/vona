@@ -1,11 +1,11 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Atom } from 'vona';
 import { BeanAtomBase } from 'vona-module-a-base';
 
 import randomize from 'randomatic';
 
 @Atom()
-export class AtomAuthOpen extends BeanAtomBase<ScopeModule> {
+export class AtomAuthOpen extends BeanAtomBase {
   get model() {
     return this.scope.model.authOpen;
   }

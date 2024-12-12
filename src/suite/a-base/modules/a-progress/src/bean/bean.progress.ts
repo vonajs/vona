@@ -1,8 +1,8 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 @Bean()
-export class BeanProgress extends BeanModuleScopeBase<ScopeModule> {
+export class BeanProgress extends BeanModuleScopeBase {
   _redis: any;
 
   get configModule() {

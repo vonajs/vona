@@ -2,7 +2,7 @@ import { Atom } from 'vona';
 import { BeanAtomBase } from 'vona-module-a-base';
 
 @Atom()
-export class AtomPurchaseOrderDetail extends BeanAtomBase<ScopeModule> {
+export class AtomPurchaseOrderDetail extends BeanAtomBase {
   get model() {
     return this.scope.model.purchaseOrderDetail;
   }

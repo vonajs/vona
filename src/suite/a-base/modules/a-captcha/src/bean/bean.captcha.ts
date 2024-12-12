@@ -4,7 +4,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import utils from '../common/utils.js';
 
 @Bean()
-export class BeanCaptcha extends BeanModuleScopeBase<ScopeModule> {
+export class BeanCaptcha extends BeanModuleScopeBase {
   get configModule() {
     return this.scope.config;
   }

@@ -1,4 +1,4 @@
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 let __atomClassesResource: any = null;
@@ -9,7 +9,7 @@ const __atomClass = {
 };
 
 @Bean()
-export class BeanResource extends BeanModuleScopeBase<ScopeModule> {
+export class BeanResource extends BeanModuleScopeBase {
   get model() {
     return this.scope.model.resource;
   }

@@ -1,5 +1,5 @@
 import { cast } from 'vona';
-import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 import { BeanModuleScopeBase } from 'vona';
 import initData15 from '../version.manager/init/initData15.js';
 import { BeanRole } from '../bean.role.js';
@@ -9,49 +9,49 @@ const __atomClassRole = {
   atomClassName: 'role',
 };
 
-export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
+export class BeanRoleBase extends BeanModuleScopeBase {
   get self() {
     return cast<BeanRole>(this);
   }
 
   get model() {
-    return this.scope.model.role;
+    return this.self.scope.model.role;
   }
 
   get modelRole() {
-    return this.scope.model.role;
+    return this.self.scope.model.role;
   }
 
   get modelRoleRef() {
-    return this.scope.model.roleRef;
+    return this.self.scope.model.roleRef;
   }
 
   get modelRoleInc() {
-    return this.scope.model.roleInc;
+    return this.self.scope.model.roleInc;
   }
 
   get modelRoleIncRef() {
-    return this.scope.model.roleIncRef;
+    return this.self.scope.model.roleIncRef;
   }
 
   get modelRoleExpand() {
-    return this.scope.model.roleExpand;
+    return this.self.scope.model.roleExpand;
   }
 
   get modelUserRole() {
-    return this.scope.model.userRole;
+    return this.self.scope.model.userRole;
   }
 
   get modelRoleRight() {
-    return this.scope.model.roleRight;
+    return this.self.scope.model.roleRight;
   }
 
   get modelRoleRightRef() {
-    return this.scope.model.roleRightRef;
+    return this.self.scope.model.roleRightRef;
   }
 
   get modelAtom() {
-    return this.scope.model.atom;
+    return this.self.scope.model.atom;
   }
 
   async get(where) {
@@ -363,7 +363,7 @@ export class BeanRoleBase extends BeanModuleScopeBase<ScopeModule> {
   }
 
   async _register({ roleName, roleIdParent }: any) {
-    return await this.scope.redlock.lockIsolate('role.register', async () => {
+    return await this.self.scope.redlock.lockIsolate('role.register', async () => {
       return await this._registerLock({ roleName, roleIdParent });
     });
   }
