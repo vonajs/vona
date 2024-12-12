@@ -5,7 +5,7 @@ import { BeanIoMessageBase } from 'vona-module-a-socketio';
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';
 
 @Virtual()
-export class BeanIoMessageUniformBase<T = unknown> extends BeanIoMessageBase<T> {
+export class BeanIoMessageUniformBase extends BeanIoMessageBase {
   get scopeModuleAMessage() {
     return this.getScope(__ThisModule__);
   }

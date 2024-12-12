@@ -13,10 +13,10 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
     // atomClass
     atomClass = await this.app.bean.atomClass.get(atomClass);
     // 1. fieldsRightOfAtomClass
-    const exists = await this.scope.summerCache.fieldsRightOfAtomClass.get({ atomClassId: atomClass.id });
+    const exists = await this.self.scope.summerCache.fieldsRightOfAtomClass.get({ atomClassId: atomClass.id });
     if (!exists) return null;
     // 2. fieldsRightOfUser
-    const fieldsRight = await this.scope.summerCache.fieldsRightOfUser.get({
+    const fieldsRight = await this.self.scope.summerCache.fieldsRightOfUser.get({
       atomClassId: atomClass.id,
       userId: user.id,
     });
@@ -24,11 +24,11 @@ export class BeanFieldsFieldsRight extends BeanFieldsParseSchema {
   }
 
   async clearSummer_fieldsRightOfAtomClass() {
-    await this.scope.summerCache.fieldsRightOfAtomClass.clear();
+    await this.self.scope.summerCache.fieldsRightOfAtomClass.clear();
   }
 
   async clearSummer_fieldsRightOfUser() {
-    await this.scope.summerCache.fieldsRightOfUser.clear();
+    await this.self.scope.summerCache.fieldsRightOfUser.clear();
   }
 
   async __getFieldsRightOfAtomClassRaw({ atomClassId }: any) {

@@ -2,7 +2,7 @@ import { BeanBase, cast } from 'vona';
 import { BeanFlow } from '../bean.flow.js';
 
 export class BeanFlow0 extends BeanBase {
-  get self() {
+  protected get self() {
     return cast<BeanFlow>(this);
   }
 

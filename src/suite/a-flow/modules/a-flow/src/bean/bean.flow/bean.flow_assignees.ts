@@ -84,7 +84,7 @@ export class BeanFlowAssignees extends BeanFlow0 {
       } else if (isNaN(item)) {
         // string
         const role = await this.app.bean.role.parseRoleName({ roleName: item });
-        if (!role) this.scope.error.RoleNotFound__.throw(item);
+        if (!role) this.self.scope.error.RoleNotFound__.throw(item);
         arr.push(role.id);
       } else {
         // number

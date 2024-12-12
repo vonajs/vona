@@ -2,24 +2,24 @@ import { BeanBase, cast } from 'vona';
 import { BeanIo } from '../bean.io.js';
 
 export class BeanIo0 extends BeanBase {
-  get self() {
+  protected get self() {
     return cast<BeanIo>(this);
   }
 
   get messageClass() {
-    return this.scope.service.messageClass;
+    return this.self.scope.service.messageClass;
   }
 
   get message() {
-    return this.scope.service.message;
+    return this.self.scope.service.message;
   }
 
   get localRedis() {
-    return this.scope.service.redis;
+    return this.self.scope.service.redis;
   }
 
   get localIOInner() {
-    return this.scope.service.ioInner;
+    return this.self.scope.service.ioInner;
   }
 
   _getBeanMessage(messageClassBase, throwError: boolean = true) {

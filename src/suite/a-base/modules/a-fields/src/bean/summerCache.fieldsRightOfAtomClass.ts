@@ -8,11 +8,7 @@ export type TSummerCacheFieldsRightOfAtomClassData = any;
   preset: 'all',
 })
 export class SummerCacheFieldsRightOfAtomClass
-  extends BeanSummerCacheBase<
-    ScopeModule,
-    TSummerCacheFieldsRightOfAtomClassKey,
-    TSummerCacheFieldsRightOfAtomClassData
-  >
+  extends BeanSummerCacheBase<TSummerCacheFieldsRightOfAtomClassKey, TSummerCacheFieldsRightOfAtomClassData>
   implements ISummerCacheGet<TSummerCacheFieldsRightOfAtomClassKey, TSummerCacheFieldsRightOfAtomClassData>
 {
   async getNative(

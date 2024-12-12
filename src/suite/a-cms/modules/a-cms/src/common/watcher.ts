@@ -122,7 +122,7 @@ export class Watcher extends BeanBase {
 
   // invoked in this.app
   async _change({ subdomain, atomClass, language }: any) {
-    this.scope.queue.render.push(
+    this.$scope.cms.queue.render.push(
       {
         queueAction: 'buildLanguage',
         atomClass,

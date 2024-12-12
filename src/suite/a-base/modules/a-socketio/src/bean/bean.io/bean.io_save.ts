@@ -27,7 +27,7 @@ export class BeanIoSave extends BeanIoPush {
     // message syncs
     let messageSyncs: any[] | null = [];
     // saveLimit
-    const saveLimit = this.scope.config.message.sync.saveLimit;
+    const saveLimit = this.self.scope.config.message.sync.saveLimit;
     // sender
     //   not save ===0
     if (message.userIdFrom !== 0) {

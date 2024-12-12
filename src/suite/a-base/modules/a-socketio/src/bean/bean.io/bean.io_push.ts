@@ -3,7 +3,7 @@ import { BeanIoPublish } from './bean.io_publish.js';
 
 export class BeanIoPush extends BeanIoPublish {
   async pushDirect({ content, channel, options }: any) {
-    this.scope.queue.pushDirect.push({
+    this.self.scope.queue.pushDirect.push({
       content,
       channel,
       options,
@@ -43,7 +43,7 @@ export class BeanIoPush extends BeanIoPublish {
     const pushEnable = await this._checkPushEnable({ options, message, messageSyncs, messageClass });
     if (!pushEnable) return;
     // queue
-    this.scope.queue.push.push({
+    this.self.scope.queue.push.push({
       options,
       message,
       messageSyncs,
