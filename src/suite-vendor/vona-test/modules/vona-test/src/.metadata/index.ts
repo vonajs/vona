@@ -141,7 +141,7 @@ declare module 'vona-module-vona-test' {
 /** schedule: begin */
 export * from '../bean/schedule.test.js';
 
-import { IDecoratorScheduleOptions } from 'vona';
+import { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
 declare module 'vona' {
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
