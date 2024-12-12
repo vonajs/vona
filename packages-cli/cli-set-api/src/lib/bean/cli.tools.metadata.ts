@@ -65,40 +65,10 @@ export class CliToolsMetadata extends BeanCliBase {
     let content = '';
     // beans
     content += await generateBeans(onionScenesMeta, moduleName, modulePath);
-    // middlewares
-    content += await generateOnions('middleware', onionScenesMeta, moduleName, modulePath);
-    // guards
-    content += await generateOnions('guard', onionScenesMeta, moduleName, modulePath);
-    // interceptors
-    content += await generateOnions('interceptor', onionScenesMeta, moduleName, modulePath);
-    // pipes
-    content += await generateOnions('pipe', onionScenesMeta, moduleName, modulePath);
-    // filters
-    content += await generateOnions('filter', onionScenesMeta, moduleName, modulePath);
-    // socket connections
-    content += await generateOnions('socketConnection', onionScenesMeta, moduleName, modulePath);
-    // socket packets
-    content += await generateOnions('socketPacket', onionScenesMeta, moduleName, modulePath);
-    // aops
-    content += await generateOnions('aop', onionScenesMeta, moduleName, modulePath);
-    // entities
-    content += await generateOnions('entity', onionScenesMeta, moduleName, modulePath);
-    // models
-    content += await generateOnions('model', onionScenesMeta, moduleName, modulePath);
-    // controllers
-    content += await generateOnions('controller', onionScenesMeta, moduleName, modulePath);
-    // meta
-    content += await generateOnions('meta', onionScenesMeta, moduleName, modulePath);
-    // summerCaches
-    content += await generateOnions('summerCache', onionScenesMeta, moduleName, modulePath);
-    // startups
-    content += await generateOnions('startup', onionScenesMeta, moduleName, modulePath);
-    // queues
-    content += await generateOnions('queue', onionScenesMeta, moduleName, modulePath);
-    // schedules
-    content += await generateOnions('schedule', onionScenesMeta, moduleName, modulePath);
-    // atoms
-    content += await generateOnions('atom', onionScenesMeta, moduleName, modulePath);
+    // onions
+    for (const sceneName in onionScenesMeta) {
+      content += await generateOnions(sceneName, onionScenesMeta, moduleName, modulePath);
+    }
     // atoms
     //content += await generateAtoms(moduleName, modulePath);
     // dtos
