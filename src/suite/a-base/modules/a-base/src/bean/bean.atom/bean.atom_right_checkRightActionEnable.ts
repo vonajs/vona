@@ -12,7 +12,7 @@ export class BeanAtomRightCheckRightActionEnable extends BeanAtomRightCheckRight
     if (_checkPoint === undefined || _checkPoint === null) return true;
     // check
     const _checkPoints = this.app.bean.util.ensureArray(_checkPoint);
-    const __atomStages = this.scope.constant.atom.stage;
+    const __atomStages = this.self.scope.constant.atom.stage;
     const bingo = _checkPoints.some(item => __atomStages[item] === _atom.atomStage);
     if (!bingo) {
       return null;

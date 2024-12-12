@@ -11,11 +11,11 @@ export class BeanAtomRightAuxRoleScopesOfRole extends BeanAtomRightAuxRoleScopes
       atomClass,
     });
     // cache
-    return await this.scope.summerCache.roleScopesOfRole.get({ atomClassId: atomClass.id, action, roleId });
+    return await this.self.scope.summerCache.roleScopesOfRole.get({ atomClassId: atomClass.id, action, roleId });
   }
 
   async clearSummer_roleScopesOfRole() {
-    await this.scope.summerCache.roleScopesOfRole.clear();
+    await this.self.scope.summerCache.roleScopesOfRole.clear();
   }
 
   async __getRoleScopesOfRoleRaw({ atomClassId, action, roleId }: any) {

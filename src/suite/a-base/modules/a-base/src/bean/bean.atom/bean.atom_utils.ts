@@ -15,7 +15,7 @@ export class BeanAtomUtils extends BeanAtom0 {
       }
     } else {
       atomClass = await this.app.bean.atomClass.get(atomClass);
-      if (!atomClass) this.scope.error.ElementDoesNotExist.throw();
+      if (!atomClass) this.self.scope.error.ElementDoesNotExist.throw();
     }
     // atomClassBase
     const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
@@ -64,7 +64,7 @@ export class BeanAtomUtils extends BeanAtom0 {
     let { key, atom } = await this._prepareKeyAndAtom_inner({ key: keyOuter, atomClass, atomClassBase });
     // check if empty
     if (!atom && throwWhenEmpty) {
-      this.scope.error.ElementDoesNotExist.throw();
+      this.self.scope.error.ElementDoesNotExist.throw();
     }
     if (!atom) return { key, atom };
     // patch

@@ -97,7 +97,7 @@ export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {
     let { stage, checkFlow } = options || {};
     // atom
     const _atom = atom;
-    if (!_atom) this.scope.error.ElementDoesNotExist.throw();
+    if (!_atom) this.self.scope.error.ElementDoesNotExist.throw();
     const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // check fromViewHistory
     const rightFromViewHistory = await this.self._checkRightFromViewHistory({

@@ -17,7 +17,7 @@ export class BeanAtomActionFlow extends BeanAtomActionBase {
     const res = await this.model.get(data);
     if (res) return res;
     // lock
-    return await this.scope.redlock.lockIsolate('atomAction.register', async () => {
+    return await this.self.scope.redlock.lockIsolate('atomAction.register', async () => {
       return await this._registerLockByModeFlow({ atomClassId, flowKey, nodeDefId, nodeDefName });
     });
   }

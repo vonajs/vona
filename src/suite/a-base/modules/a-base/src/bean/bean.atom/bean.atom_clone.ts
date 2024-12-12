@@ -171,7 +171,7 @@ export class BeanAtomClone extends BeanAtomStarLabel {
     // atomSimple
     const atomSimple = srcItem.atomSimple;
     // atomStage
-    let atomStage = this.scope.constant.atom.stage[target];
+    let atomStage = this.self.scope.constant.atom.stage[target];
     if (atomStage === undefined) {
       atomStage = atomSimple; // support simple when target='clone'
     }

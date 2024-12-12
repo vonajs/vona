@@ -10,7 +10,7 @@ export class BeanAtomRightCheckRightSelect extends BeanAtomRightCheckRightRead {
     }
     // atomClass
     atomClass = await this.app.bean.atomClass.get(atomClass);
-    if (!atomClass) this.scope.error.ElementDoesNotExist.throw();
+    if (!atomClass) this.self.scope.error.ElementDoesNotExist.throw();
     // atomClassBase
     const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
     // check atom history

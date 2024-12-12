@@ -1,9 +1,14 @@
 import { __ThisModule__ } from '../../.metadata/this.js';
-import { BeanModuleScopeBase } from 'vona';
+import { BeanModuleScopeBase, cast } from 'vona';
+import { BeanAtomAction } from '../bean.atomAction.js';
 
 export class BeanAtomActionBase extends BeanModuleScopeBase {
+  protected get self() {
+    return cast<BeanAtomAction>(this);
+  }
+
   get model() {
-    return this.scope.model.atomAction;
+    return this.self.scope.model.atomAction;
   }
 
   async delete({ atomClassId, code }: any) {
@@ -42,7 +47,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     const res = await this.model.get(data);
     if (res) return res;
     // lock
-    return await this.scope.redlock.lockIsolate('atomAction.register', async () => {
+    return await this.self.scope.redlock.lockIsolate('atomAction.register', async () => {
       return await this._registerLock({ atomClassId, code });
     });
   }
@@ -51,7 +56,7 @@ export class BeanAtomActionBase extends BeanModuleScopeBase {
     // is number
     if (!isNaN(action)) return parseInt(action);
     // add role right
-    const actionCode = this.scope.constant.atom.action[action];
+    const actionCode = this.self.scope.constant.atom.action[action];
     if (actionCode) return actionCode;
     // atomClass
     if (!atomClass) throw new Error(`should specify the atomClass of action: ${action}`);

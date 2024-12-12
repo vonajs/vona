@@ -78,7 +78,7 @@ export class BeanAtom0Select extends BeanAtom0Read {
     // page
     const page = this.app.bean.util.page(_page, pageForce);
     // stage
-    const stage = typeof _stage === 'number' ? _stage : this.scope.constant.atom.stage[_stage];
+    const stage = typeof _stage === 'number' ? _stage : this.self.scope.constant.atom.stage[_stage];
     // tableName
     let atomClass: AtomClassParams | undefined;
     let atomClassBase;
