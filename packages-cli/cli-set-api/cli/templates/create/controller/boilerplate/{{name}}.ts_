@@ -1,5 +1,4 @@
 import { BeanBase, <%=argv.decoratorName%> } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @<%=argv.decoratorName%>(<%-argv.beanOptions%>)
-export class <%=argv.sceneNameCapitalize%><%=argv.nameCapitalize%> extends BeanBase<ScopeModule> {}
+export class <%=argv.sceneNameCapitalize%><%=argv.nameCapitalize%> extends BeanBase {}
