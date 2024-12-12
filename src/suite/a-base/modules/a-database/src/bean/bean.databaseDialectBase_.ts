@@ -18,7 +18,7 @@ export interface ITableColumn {
 export type ITableColumns = Record<string, ITableColumn>;
 
 @Virtual()
-export class BeanDatabaseDialectBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanDatabaseDialectBase extends BeanBase {
   async fetchDatabases(
     _schemaBuilder: Knex.SchemaBuilder,
     _databasePrefix: string,

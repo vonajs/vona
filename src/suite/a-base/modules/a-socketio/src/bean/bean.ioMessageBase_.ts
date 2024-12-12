@@ -2,7 +2,7 @@ import { BeanBase, Virtual } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 
 @Virtual()
-export class BeanIoMessageBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanIoMessageBase extends BeanBase {
   get scopeModuleASocketio() {
     return this.getScope(__ThisModule__);
   }

@@ -2,7 +2,6 @@ import { BeanBase, deepExtend, IInstanceStartupOptions, isNil, Service, sleep, V
 import async from 'async';
 import chalk from 'chalk';
 import * as Boxen from 'boxen';
-import { ScopeModule } from '../.metadata/this.js';
 import { IInstanceStartupQueueInfo } from '../entity/instance.js';
 
 const boxenOptions: Boxen.Options = {
@@ -17,7 +16,7 @@ const __queueInstanceStartup: any = {};
 const __cacheIntancesConfig: Record<string, VonaConfig> = {};
 
 @Service()
-export class ServiceInstance extends BeanBase<ScopeModule> {
+export class ServiceInstance extends BeanBase {
   getConfigInstanceBase(subdomain: string) {
     const instances = this.app.config.instances || [{ subdomain: '', password: '' }];
     return instances.find(item => item.subdomain === subdomain);

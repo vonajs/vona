@@ -1,7 +1,7 @@
 import { BeanBase, Virtual } from 'vona';
 
 @Virtual()
-export class BeanAuthProviderBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanAuthProviderBase extends BeanBase {
   authProvider: any;
   providerModule: any;
   providerName: any;

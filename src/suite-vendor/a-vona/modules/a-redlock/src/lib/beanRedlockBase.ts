@@ -2,7 +2,7 @@ import { BeanBase, FunctionAsync } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 
-export class BeanRedlockBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanRedlockBase extends BeanBase {
   protected __get__(prop: string) {
     if (prop === 'lock') {
       return (resource: string, fn: FunctionAsync<any>, options?: IRedlockLockOptions) => {

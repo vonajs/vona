@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 
-export class BeanStatusBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanStatusBase extends BeanBase {
   protected __get__(prop: string) {
     if (prop === 'get') {
       return (name: any) => {

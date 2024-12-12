@@ -1,6 +1,6 @@
 import { BeanBase } from 'vona';
 
-export class BeanFlowBehaviorBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanFlowBehaviorBase extends BeanBase {
   flowInstance: any;
   nodeInstance: any;
   context: any;

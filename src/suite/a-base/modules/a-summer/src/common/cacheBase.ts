@@ -4,7 +4,7 @@ import { ServiceLocalMem } from '../service/localMem_.js';
 import { ServiceLocalRedis } from '../service/localRedis_.js';
 import { ServiceLocalFetch } from '../service/localFetch_.js';
 
-export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase<TScopeModule> {
+export class CacheBase<TScopeModule = unknown, KEY = any, DATA = any> extends BeanBase {
   protected _cacheName: string;
   protected _cacheOpitons: IDecoratorSummerCacheOptions;
 
