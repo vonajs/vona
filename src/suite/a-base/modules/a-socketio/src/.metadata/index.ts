@@ -48,6 +48,12 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** socketConnection: end */
+/** socketConnection: begin */
+import { SocketConnectionIo } from '../bean/socketConnection.io.js';
+export interface IModuleSocketConnection {
+  io: SocketConnectionIo;
+}
+/** socketConnection: end */
 /** socketPacket: begin */
 export * from '../bean/socketPacket.performAction.js';
 import { ISocketPacketOptionsPerformAction } from '../bean/socketPacket.performAction.js';
@@ -61,6 +67,12 @@ declare module 'vona-module-a-socketio' {
   export interface SocketPacketPerformAction {
     get scope(): ScopeModuleASocketio;
   }
+}
+/** socketPacket: end */
+/** socketPacket: begin */
+import { SocketPacketPerformAction } from '../bean/socketPacket.performAction.js';
+export interface IModuleSocketPacket {
+  performAction: SocketPacketPerformAction;
 }
 /** socketPacket: end */
 /** entity: begin */
@@ -153,6 +165,12 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** meta: end */
+/** meta: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+export interface IModuleMeta {
+  redlock: MetaRedlock;
+}
+/** meta: end */
 /** queue: begin */
 export * from '../bean/queue.delivery.js';
 export * from '../bean/queue.process.js';
@@ -186,9 +204,6 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** queue: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** queue: begin */
 import { QueueDelivery } from '../bean/queue.delivery.js';
 import { QueueProcess } from '../bean/queue.process.js';
@@ -201,6 +216,9 @@ export interface IModuleQueue {
   pushDirect: QueuePushDirect;
 }
 /** queue: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** entities: begin */
 import { EntityMessage } from '../entity/message.js';
 import { EntityMessageClass } from '../entity/messageClass.js';
@@ -313,7 +331,23 @@ export interface ScopeModuleASocketio {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModuleQueue;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

@@ -88,7 +88,23 @@ export interface ScopeModuleAFlowgateway {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  queue: IModuleQueue;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

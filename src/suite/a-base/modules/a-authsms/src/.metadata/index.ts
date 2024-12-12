@@ -100,6 +100,12 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** meta: end */
+/** meta: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+export interface IModuleMeta {
+  status: MetaStatus;
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheSmsProviders.js';
 
@@ -113,6 +119,12 @@ declare module 'vona-module-a-authsms' {
   export interface StartupCacheSmsProviders {
     get scope(): ScopeModuleAAuthsms;
   }
+}
+/** startup: end */
+/** startup: begin */
+import { StartupCacheSmsProviders } from '../bean/startup.cacheSmsProviders.js';
+export interface IModuleStartup {
+  cacheSmsProviders: StartupCacheSmsProviders;
 }
 /** startup: end */
 /** meta status: begin */
@@ -191,6 +203,23 @@ export interface ScopeModuleAAuthsms {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

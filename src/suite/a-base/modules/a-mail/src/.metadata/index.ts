@@ -107,6 +107,12 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** meta: end */
+/** meta: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+export interface IModuleMeta {
+  status: MetaStatus;
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheMailScenes.js';
 
@@ -120,6 +126,12 @@ declare module 'vona-module-a-mail' {
   export interface StartupCacheMailScenes {
     get scope(): ScopeModuleAMail;
   }
+}
+/** startup: end */
+/** startup: begin */
+import { StartupCacheMailScenes } from '../bean/startup.cacheMailScenes.js';
+export interface IModuleStartup {
+  cacheMailScenes: StartupCacheMailScenes;
 }
 /** startup: end */
 /** meta status: begin */
@@ -196,6 +208,23 @@ export interface ScopeModuleAMail {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

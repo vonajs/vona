@@ -36,6 +36,14 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** aop: end */
+/** aop: begin */
+import { AopRegExp } from '../bean/aop.regExp.js';
+import { AopSimple } from '../bean/aop.simple.js';
+export interface IModuleAop {
+  regExp: AopRegExp;
+  simple: AopSimple;
+}
+/** aop: end */
 /** controller: begin */
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
@@ -108,6 +116,12 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** meta: end */
+/** meta: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+export interface IModuleMeta {
+  status: MetaStatus;
+}
+/** meta: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
@@ -123,25 +137,31 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** summerCache: end */
+/** summerCache: begin */
+import { SummerCacheTest } from '../bean/summerCache.test.js';
+export interface IModuleSummerCache {
+  test: SummerCacheTest;
+}
+/** summerCache: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
-export * from '../bean/queue.test1.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona' {
   export interface IQueueRecord {
     'vona-test:test': IDecoratorQueueOptions;
-    'vona-test:test1': IDecoratorQueueOptions;
   }
 }
 declare module 'vona-module-vona-test' {
   export interface QueueTest {
     get scope(): ScopeModuleVonaTest;
   }
-
-  export interface QueueTest1 {
-    get scope(): ScopeModuleVonaTest;
-  }
+}
+/** queue: end */
+/** queue: begin */
+import { QueueTest } from '../bean/queue.test.js';
+export interface IModuleQueue {
+  test: QueueTest;
 }
 /** queue: end */
 /** schedule: begin */
@@ -159,6 +179,12 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** schedule: end */
+/** schedule: begin */
+import { ScheduleTest } from '../bean/schedule.test.js';
+export interface IModuleSchedule {
+  test: ScheduleTest;
+}
+/** schedule: end */
 /** dtos: begin */
 export * from '../dto/profile.js';
 export * from '../dto/user.js';
@@ -166,20 +192,6 @@ export * from '../dto/user.js';
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
-/** summerCache: begin */
-import { SummerCacheTest } from '../bean/summerCache.test.js';
-export interface IModuleSummerCache {
-  test: SummerCacheTest;
-}
-/** summerCache: end */
-/** queue: begin */
-import { QueueTest } from '../bean/queue.test.js';
-import { QueueTest1 } from '../bean/queue.test1.js';
-export interface IModuleQueue {
-  test: QueueTest;
-  test1: QueueTest1;
-}
-/** queue: end */
 /** services: begin */
 export * from '../service/test.js';
 export * from '../service/testApp.js';
@@ -247,8 +259,23 @@ export interface ScopeModuleVonaTest {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
-  summerCache: IModuleSummerCache;
-  queue: IModuleQueue;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

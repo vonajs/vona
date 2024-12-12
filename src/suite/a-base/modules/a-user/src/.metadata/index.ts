@@ -58,6 +58,12 @@ declare module 'vona-module-a-user' {
   }
 }
 /** meta: end */
+/** meta: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+export interface IModuleMeta {
+  status: MetaStatus;
+}
+/** meta: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
@@ -107,6 +113,23 @@ export interface ScopeModuleAUser {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';
