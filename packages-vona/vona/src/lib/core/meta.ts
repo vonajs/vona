@@ -24,7 +24,6 @@ import {
   IDecoratorControllerOptions,
   IDecoratorModelOptions,
   IDecoratorMetaOptions,
-  IDecoratorSummerCacheOptions,
   IDecoratorStartupOptions,
   IMiddlewareRecord,
   IGuardRecord,
@@ -38,7 +37,6 @@ import {
   IModelRecord,
   IControllerRecord,
   IMetaRecord,
-  ISummerCacheRecord,
   IStartupRecord,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
@@ -92,7 +90,6 @@ export class AppMeta extends BeanSimple {
   onionModel: Onion<IDecoratorModelOptions, keyof IModelRecord>;
   onionController: Onion<IDecoratorControllerOptions, keyof IControllerRecord>;
   onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
-  onionSummerCache: Onion<IDecoratorSummerCacheOptions, keyof ISummerCacheRecord>;
   onionStartup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;
   //
   broadcasts: Record<string, any>;

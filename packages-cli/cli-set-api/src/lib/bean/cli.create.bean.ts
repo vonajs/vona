@@ -20,7 +20,6 @@ const __boilerplates = {
   pipe: 'pipe',
   socketConnection: 'socketConnection',
   socketPacket: 'socketPacket',
-  summerCache: 'summerCache',
   startup: 'startup',
 };
 
