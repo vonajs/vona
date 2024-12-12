@@ -141,6 +141,15 @@ declare module 'vona' {
     'a-version.service.version': ServiceVersion;
   }
 }
+declare module 'vona-module-a-version' {
+  export interface ServiceDatabase {
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface ServiceVersion {
+    get scope(): ScopeModuleAVersion;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

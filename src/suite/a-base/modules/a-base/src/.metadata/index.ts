@@ -1169,6 +1169,71 @@ declare module 'vona' {
     'a-base.service.util': ServiceUtil;
   }
 }
+declare module 'vona-module-a-base' {
+  export interface ServiceAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceAtomState {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceAuth {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceBase {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceComment {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceJwt {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceLayoutConfig {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceProcedure {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceStash {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ServiceUtil {
+    get scope(): ScopeModuleABase;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

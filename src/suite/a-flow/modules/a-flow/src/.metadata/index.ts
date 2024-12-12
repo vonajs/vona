@@ -280,6 +280,35 @@ declare module 'vona' {
     'a-flow.service.procedure': ServiceProcedure;
   }
 }
+declare module 'vona-module-a-flow' {
+  export interface ServiceFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ServiceFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ServiceLocalFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ServiceLocalFlowEdge {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ServiceLocalFlowListener {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ServiceLocalFlowNode {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ServiceProcedure {
+    get scope(): ScopeModuleAFlow;
+  }
+}
 /** services: end */
 /** constant: begin */
 export * from '../config/constants.js';

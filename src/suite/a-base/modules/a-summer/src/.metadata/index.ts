@@ -50,6 +50,19 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {}
 }
+declare module 'vona-module-a-summer' {
+  export interface ServiceLocalFetch {
+    get scope(): ScopeModuleASummer;
+  }
+
+  export interface ServiceLocalMem {
+    get scope(): ScopeModuleASummer;
+  }
+
+  export interface ServiceLocalRedis {
+    get scope(): ScopeModuleASummer;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

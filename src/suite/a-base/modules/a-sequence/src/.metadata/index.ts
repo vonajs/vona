@@ -98,6 +98,11 @@ declare module 'vona' {
     'a-sequence.service.sequence': ServiceSequence;
   }
 }
+declare module 'vona-module-a-sequence' {
+  export interface ServiceSequence {
+    get scope(): ScopeModuleASequence;
+  }
+}
 /** services: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

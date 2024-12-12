@@ -116,6 +116,11 @@ declare module 'vona' {
     'a-instance.service.instance': ServiceInstance;
   }
 }
+declare module 'vona-module-a-instance' {
+  export interface ServiceInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';

@@ -84,6 +84,15 @@ declare module 'vona' {
     'a-database.service.transaction': ServiceTransaction;
   }
 }
+declare module 'vona-module-a-database' {
+  export interface ServiceDbMeta {
+    get scope(): ScopeModuleADatabase;
+  }
+
+  export interface ServiceTransaction {
+    get scope(): ScopeModuleADatabase;
+  }
+}
 /** services: end */
 /** config: begin */
 export * from '../config/config.js';
