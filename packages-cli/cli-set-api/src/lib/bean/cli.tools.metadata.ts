@@ -68,12 +68,15 @@ export class CliToolsMetadata extends BeanCliBase {
     // onions
     const scopeResources = {};
     for (const sceneName in onionScenesMeta) {
+      const onionSceneMeta = onionScenesMeta[sceneName];
       // general
       content += await generateOnions(sceneName, onionScenesMeta, moduleName, modulePath);
       // scope resources
-      const contentScopeResource = await generateScopeResources(sceneName, onionScenesMeta, moduleName, modulePath);
-      content += contentScopeResource;
-      scopeResources[sceneName] = contentScopeResource;
+      if (onionSceneMeta.scopeResource) {
+        const contentScopeResource = await generateScopeResources(sceneName, onionScenesMeta, moduleName, modulePath);
+        content += contentScopeResource;
+        scopeResources[sceneName] = contentScopeResource;
+      }
     }
     // dtos
     content += await generateDtos(moduleName, modulePath);

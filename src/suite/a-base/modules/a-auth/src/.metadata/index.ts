@@ -89,12 +89,6 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** meta: end */
-/** meta: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-export interface IModuleMeta {
-  redlock: MetaRedlock;
-}
-/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheAuthProviders.js';
 export * from '../bean/startup.registerPassport.js';
@@ -120,16 +114,6 @@ declare module 'vona-module-a-auth' {
   export interface StartupRegisterRouters {
     get scope(): ScopeModuleAAuth;
   }
-}
-/** startup: end */
-/** startup: begin */
-import { StartupCacheAuthProviders } from '../bean/startup.cacheAuthProviders.js';
-import { StartupRegisterPassport } from '../bean/startup.registerPassport.js';
-import { StartupRegisterRouters } from '../bean/startup.registerRouters.js';
-export interface IModuleStartup {
-  cacheAuthProviders: StartupCacheAuthProviders;
-  registerPassport: StartupRegisterPassport;
-  registerRouters: StartupRegisterRouters;
 }
 /** startup: end */
 /** meta redlock: begin */
@@ -215,23 +199,7 @@ export interface ScopeModuleAAuth {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
   queue: IModulequeue;
-  schedule: IModuleschedule;
 }
 
 import 'vona';

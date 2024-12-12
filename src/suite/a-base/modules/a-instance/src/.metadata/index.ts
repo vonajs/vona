@@ -83,16 +83,6 @@ declare module 'vona-module-a-instance' {
   }
 }
 /** meta: end */
-/** meta: begin */
-import { MetaIndex } from '../bean/meta.index.js';
-import { MetaRedlock } from '../bean/meta.redlock.js';
-import { MetaVersion } from '../bean/meta.version.js';
-export interface IModuleMeta {
-  index: MetaIndex;
-  redlock: MetaRedlock;
-  version: MetaVersion;
-}
-/** meta: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -167,23 +157,7 @@ export interface ScopeModuleAInstance {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
   queue: IModulequeue;
-  schedule: IModuleschedule;
 }
 
 import 'vona';

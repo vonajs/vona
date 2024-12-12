@@ -13,12 +13,6 @@ declare module 'vona-module-a-schedule' {
   }
 }
 /** startup: end */
-/** startup: begin */
-import { StartupLoadSchedules } from '../bean/startup.loadSchedules.js';
-export interface IModuleStartup {
-  loadSchedules: StartupLoadSchedules;
-}
-/** startup: end */
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
 
@@ -68,23 +62,7 @@ export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
   queue: IModulequeue;
-  schedule: IModuleschedule;
 }
 
 import 'vona';

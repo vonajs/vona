@@ -318,26 +318,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** middleware: end */
-/** middleware: begin */
-import { MiddlewareAuth } from '../bean/middleware.auth.js';
-import { MiddlewareAuthOpen } from '../bean/middleware.authOpen.js';
-import { MiddlewareHttpLog } from '../bean/middleware.httpLog.js';
-import { MiddlewareInner } from '../bean/middleware.inner.js';
-import { MiddlewareJsonp } from '../bean/middleware.jsonp.js';
-import { MiddlewareRight } from '../bean/middleware.right.js';
-import { MiddlewareTest } from '../bean/middleware.test.js';
-import { MiddlewareTransaction } from '../bean/middleware.transaction.js';
-export interface IModuleMiddleware {
-  auth: MiddlewareAuth;
-  authOpen: MiddlewareAuthOpen;
-  httpLog: MiddlewareHttpLog;
-  inner: MiddlewareInner;
-  jsonp: MiddlewareJsonp;
-  right: MiddlewareRight;
-  test: MiddlewareTest;
-  transaction: MiddlewareTransaction;
-}
-/** middleware: end */
 /** socketConnection: begin */
 export * from '../bean/socketConnection.auth.js';
 import { ISocketConnectionOptionsAuth } from '../bean/socketConnection.auth.js';
@@ -353,12 +333,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** socketConnection: end */
-/** socketConnection: begin */
-import { SocketConnectionAuth } from '../bean/socketConnection.auth.js';
-export interface IModuleSocketConnection {
-  auth: SocketConnectionAuth;
-}
-/** socketConnection: end */
 /** aop: begin */
 export * from '../bean/aop.category.js';
 
@@ -372,12 +346,6 @@ declare module 'vona-module-a-base' {
   export interface AopCategory {
     get scope(): ScopeModuleABase;
   }
-}
-/** aop: end */
-/** aop: begin */
-import { AopCategory } from '../bean/aop.category.js';
-export interface IModuleAop {
-  category: AopCategory;
 }
 /** aop: end */
 /** entity: begin */
@@ -744,14 +712,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** meta: end */
-/** meta: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-import { MetaStatus } from '../bean/meta.status.js';
-export interface IModuleMeta {
-  redlock: MetaRedlock;
-  status: MetaStatus;
-}
-/** meta: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.atomClassInner.js';
 export * from '../bean/summerCache.roleParentsOfUser.js';
@@ -797,22 +757,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** summerCache: end */
-/** summerCache: begin */
-import { SummerCacheAtomClassInner } from '../bean/summerCache.atomClassInner.js';
-import { SummerCacheRoleParentsOfUser } from '../bean/summerCache.roleParentsOfUser.js';
-import { SummerCacheRoleScopesMineOfUser } from '../bean/summerCache.roleScopesMineOfUser.js';
-import { SummerCacheRoleScopesOfRole } from '../bean/summerCache.roleScopesOfRole.js';
-import { SummerCacheRoleScopesOfUser } from '../bean/summerCache.roleScopesOfUser.js';
-import { SummerCacheRoleWhosOfAtomClassAction } from '../bean/summerCache.roleWhosOfAtomClassAction.js';
-export interface IModuleSummerCache {
-  atomClassInner: SummerCacheAtomClassInner;
-  roleParentsOfUser: SummerCacheRoleParentsOfUser;
-  roleScopesMineOfUser: SummerCacheRoleScopesMineOfUser;
-  roleScopesOfRole: SummerCacheRoleScopesOfRole;
-  roleScopesOfUser: SummerCacheRoleScopesOfUser;
-  roleWhosOfAtomClassAction: SummerCacheRoleWhosOfAtomClassAction;
-}
-/** summerCache: end */
 /** startup: begin */
 export * from '../bean/startup.checkResourceLocales.js';
 export * from '../bean/startup.checkViewHistoryRight.js';
@@ -838,16 +782,6 @@ declare module 'vona-module-a-base' {
   export interface StartupLoadAtomStatics {
     get scope(): ScopeModuleABase;
   }
-}
-/** startup: end */
-/** startup: begin */
-import { StartupCheckResourceLocales } from '../bean/startup.checkResourceLocales.js';
-import { StartupCheckViewHistoryRight } from '../bean/startup.checkViewHistoryRight.js';
-import { StartupLoadAtomStatics } from '../bean/startup.loadAtomStatics.js';
-export interface IModuleStartup {
-  checkResourceLocales: StartupCheckResourceLocales;
-  checkViewHistoryRight: StartupCheckViewHistoryRight;
-  loadAtomStatics: StartupLoadAtomStatics;
 }
 /** startup: end */
 /** queue: begin */
@@ -1333,23 +1267,7 @@ export interface ScopeModuleABase {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
   queue: IModulequeue;
-  schedule: IModuleschedule;
 }
 
 import 'vona';
