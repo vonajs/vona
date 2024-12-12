@@ -59,6 +59,13 @@ import { EntityInstance } from '../entity/instance.js';
 export interface IModuleEntity {
   instance: EntityInstance;
 }
+declare module 'vona-module-a-instance' {
+  export interface EntityInstance {
+    column<K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
+
 /** entities: end */
 /** models: begin */
 import { ModelInstance } from '../model/instance.js';

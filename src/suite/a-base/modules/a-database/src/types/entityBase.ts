@@ -14,6 +14,13 @@ export class EntityBase {
     return this.entityOptions.table!;
   }
 
+  protected column(column: string) {
+    return column;
+  }
+  protected columns(...columns: string[]) {
+    return columns;
+  }
+
   @Rule(z.number())
   id: number;
   @Rule(z.date())
