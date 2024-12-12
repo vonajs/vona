@@ -1,8 +1,8 @@
-import { appResource, IDecoratorEntityOptions } from 'vona';
+import { appResource, BeanBaseSimple, IDecoratorEntityOptions } from 'vona';
 import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 
-export class EntityBase {
+export class EntityBase extends BeanBaseSimple {
   protected get beanOptions() {
     return appResource.getBean((<any>this).__beanFullName__)!;
   }
