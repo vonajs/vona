@@ -62,8 +62,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-authopen' {
   export interface EntityAuthOpen {
-    column<K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

@@ -41,8 +41,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-detail' {
   export interface EntityDetailBase {
-    column<K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

@@ -24,8 +24,8 @@ export async function generateEntities(moduleName: string, modulePath: string) {
     contentRecords.push(`'${resourceName}': ${className};`);
     contentColumns.push(`
     export interface ${className} {
-      column<K extends keyof Omit<${className}, 'column' | 'columns' | 'table'>>(column: K): K;
-      columns<K extends keyof Omit<${className}, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+      column: <K extends keyof Omit<${className}, 'column' | 'columns' | 'table'>>(column: K) => K;
+      columns: <K extends keyof Omit<${className}, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
     }`);
   }
   if (contentImports.length === 0) return '';

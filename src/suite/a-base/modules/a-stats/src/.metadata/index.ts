@@ -73,8 +73,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-stats' {
   export interface EntityStats {
-    column<K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

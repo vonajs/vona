@@ -113,13 +113,13 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-cms' {
   export interface EntityArticle {
-    column<K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityContent {
-    column<K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

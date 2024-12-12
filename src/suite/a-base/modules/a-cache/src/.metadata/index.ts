@@ -69,8 +69,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-cache' {
   export interface EntityCache {
-    column<K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

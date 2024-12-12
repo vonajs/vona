@@ -86,8 +86,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-mail' {
   export interface EntityMail {
-    column<K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

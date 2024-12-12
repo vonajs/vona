@@ -60,13 +60,13 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-dict' {
   export interface EntityDict {
-    column<K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityDictContent {
-    column<K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

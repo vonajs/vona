@@ -456,148 +456,148 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-base' {
   export interface EntityAtom {
-    column<K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityAtomAction {
-    column<K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityAtomClass {
-    column<K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityAtomLabel {
-    column<K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityAtomLabelRef {
-    column<K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityAtomStar {
-    column<K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityCategory {
-    column<K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityComment {
-    column<K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityCommentHeart {
-    column<K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityCommentView {
-    column<K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityLabel {
-    column<K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityResource {
-    column<K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityResourceLocale {
-    column<K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityResourceRole {
-    column<K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRole {
-    column<K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleExpand {
-    column<K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleFieldsRight {
-    column<K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleInc {
-    column<K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleIncRef {
-    column<K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleRef {
-    column<K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleRight {
-    column<K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityRoleRightRef {
-    column<K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityTag {
-    column<K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityTagRef {
-    column<K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUser {
-    column<K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUserAgent {
-    column<K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUserRole {
-    column<K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUserRoleIncRef {
-    column<K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityUserRoleRef {
-    column<K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

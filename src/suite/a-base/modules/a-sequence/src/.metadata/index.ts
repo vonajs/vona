@@ -57,8 +57,8 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-sequence' {
   export interface EntitySequence {
-    column<K extends keyof Omit<EntitySequence, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntitySequence, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntitySequence, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntitySequence, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */

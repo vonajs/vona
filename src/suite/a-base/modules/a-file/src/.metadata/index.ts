@@ -57,13 +57,13 @@ export interface IModuleEntity {
 }
 declare module 'vona-module-a-file' {
   export interface EntityFile {
-    column<K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 
   export interface EntityFileView {
-    column<K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(column: K): K;
-    columns<K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+    column: <K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
 /** entities: end */
