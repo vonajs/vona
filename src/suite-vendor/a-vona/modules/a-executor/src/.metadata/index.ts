@@ -24,7 +24,6 @@ export class ScopeModuleAExecutor extends BeanScopeBase {}
 export interface ScopeModuleAExecutor {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

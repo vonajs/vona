@@ -50,7 +50,6 @@ export interface ScopeModuleAStartup {
   config: TypeModuleConfig<typeof config>;
   redlock: MetaRedlock;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';

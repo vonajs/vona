@@ -79,7 +79,6 @@ export interface ScopeModuleASummer {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -24,7 +24,6 @@ export class ScopeModuleAOnion extends BeanScopeBase {}
 export interface ScopeModuleAOnion {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';
