@@ -5,6 +5,14 @@
   "vonaModule": {
     "dependencies": {
       "a-instance": "5.0.0"
+    },
+    "onions": {
+      "summerCache": {
+        "optionsGlobalInterfaceName": "IDecoratorSummerCacheOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-summer",
+        "scopeResource": true,
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -23,7 +31,8 @@
   "description": "Layered Cache",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "keywords": [

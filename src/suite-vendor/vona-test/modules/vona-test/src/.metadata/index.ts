@@ -111,7 +111,7 @@ declare module 'vona-module-vona-test' {
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
-import { IDecoratorSummerCacheOptions } from 'vona';
+import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 declare module 'vona' {
   export interface ISummerCacheRecord {
     'vona-test:test': IDecoratorSummerCacheOptions;
@@ -121,6 +121,12 @@ declare module 'vona-module-vona-test' {
   export interface SummerCacheTest {
     get scope(): ScopeModuleVonaTest;
   }
+}
+/** summerCache: end */
+/** summerCache: begin */
+import { SummerCacheTest } from '../bean/summerCache.test.js';
+export interface IModuleSummerCache {
+  test: SummerCacheTest;
 }
 /** summerCache: end */
 /** queue: begin */
@@ -233,6 +239,7 @@ export interface ScopeModuleVonaTest {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
+  summerCache: IModuleSummerCache;
   queue: IModuleQueue;
 }
 
