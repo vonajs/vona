@@ -65,35 +65,7 @@ declare module 'vona' {
     'a-flow:flowNodeHistory': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-flow' {
-  export interface EntityFlow {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface EntityFlowDef {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface EntityFlowDefContent {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface EntityFlowDefFull {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface EntityFlowHistory {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface EntityFlowNode {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface EntityFlowNodeHistory {
-    get scope(): ScopeModuleAFlow;
-  }
-}
+declare module 'vona-module-a-flow' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/flow.js';

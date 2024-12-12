@@ -76,19 +76,7 @@ declare module 'vona' {
     'a-socketio:messageSync': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-socketio' {
-  export interface EntityMessage {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface EntityMessageClass {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface EntityMessageSync {
-    get scope(): ScopeModuleASocketio;
-  }
-}
+declare module 'vona-module-a-socketio' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/message.js';

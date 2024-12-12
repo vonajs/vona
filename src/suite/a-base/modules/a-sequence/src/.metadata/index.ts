@@ -39,11 +39,7 @@ declare module 'vona' {
     'a-sequence:sequence': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-sequence' {
-  export interface EntitySequence {
-    get scope(): ScopeModuleASequence;
-  }
-}
+declare module 'vona-module-a-sequence' {}
 /** entity: end */
 /** controller: begin */
 export * from '../controller/sequence.js';

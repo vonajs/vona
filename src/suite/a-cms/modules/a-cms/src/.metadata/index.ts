@@ -1,29 +1,25 @@
 /** beans: begin */
-export * from '../bean/bean.atomCmsBase.js';
+export * from '../bean/bean.atomCmsBase_.js';
 export * from '../bean/bean.cms.js';
 export * from '../bean/io.message.hotloadFile.js';
 export * from '../bean/version.manager.js';
-import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
+import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase_.js';
 import { BeanCms } from '../bean/bean.cms.js';
 import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
-    atomCmsBase: BeanAtomCmsBase;
     cms: BeanCms;
   }
 
   export interface IBeanRecordGeneral {
+    atomCmsBase: BeanAtomCmsBase;
     'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
     'a-cms.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-cms' {
-  export interface BeanAtomCmsBase {
-    get scope(): ScopeModuleACms;
-  }
-
   export interface BeanCms {
     get scope(): ScopeModuleACms;
   }
@@ -48,15 +44,7 @@ declare module 'vona' {
     'a-cms:content': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-cms' {
-  export interface EntityArticle {
-    get scope(): ScopeModuleACms;
-  }
-
-  export interface EntityContent {
-    get scope(): ScopeModuleACms;
-  }
-}
+declare module 'vona-module-a-cms' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/article.js';

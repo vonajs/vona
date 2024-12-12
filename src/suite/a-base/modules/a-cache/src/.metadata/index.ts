@@ -67,11 +67,7 @@ declare module 'vona' {
     'a-cache:cache': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-cache' {
-  export interface EntityCache {
-    get scope(): ScopeModuleACache;
-  }
-}
+declare module 'vona-module-a-cache' {}
 /** entity: end */
 /** controller: begin */
 export * from '../controller/db.js';

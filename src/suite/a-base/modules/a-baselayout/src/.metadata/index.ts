@@ -28,19 +28,7 @@ declare module 'vona' {
     'a-baselayout:layoutFull': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-baselayout' {
-  export interface EntityLayout {
-    get scope(): ScopeModuleABaselayout;
-  }
-
-  export interface EntityLayoutContent {
-    get scope(): ScopeModuleABaselayout;
-  }
-
-  export interface EntityLayoutFull {
-    get scope(): ScopeModuleABaselayout;
-  }
-}
+declare module 'vona-module-a-baselayout' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/layout.js';

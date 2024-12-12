@@ -46,11 +46,7 @@ declare module 'vona' {
     'a-authsimple:authSimple': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-authsimple' {
-  export interface EntityAuthSimple {
-    get scope(): ScopeModuleAAuthsimple;
-  }
-}
+declare module 'vona-module-a-authsimple' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/authSimple.js';

@@ -34,15 +34,7 @@ declare module 'vona' {
     'a-file:fileView': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-file' {
-  export interface EntityFile {
-    get scope(): ScopeModuleAFile;
-  }
-
-  export interface EntityFileView {
-    get scope(): ScopeModuleAFile;
-  }
-}
+declare module 'vona-module-a-file' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/file.js';

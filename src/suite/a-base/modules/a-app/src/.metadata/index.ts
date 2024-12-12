@@ -28,19 +28,7 @@ declare module 'vona' {
     'a-app:appFull': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-app' {
-  export interface EntityApp {
-    get scope(): ScopeModuleAApp;
-  }
-
-  export interface EntityAppContent {
-    get scope(): ScopeModuleAApp;
-  }
-
-  export interface EntityAppFull {
-    get scope(): ScopeModuleAApp;
-  }
-}
+declare module 'vona-module-a-app' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/app2.js';

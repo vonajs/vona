@@ -34,15 +34,7 @@ declare module 'vona' {
     'a-dict:dictContent': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-dict' {
-  export interface EntityDict {
-    get scope(): ScopeModuleADict;
-  }
-
-  export interface EntityDictContent {
-    get scope(): ScopeModuleADict;
-  }
-}
+declare module 'vona-module-a-dict' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/dict.js';

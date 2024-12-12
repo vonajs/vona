@@ -46,11 +46,7 @@ declare module 'vona' {
     'a-stats:stats': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-stats' {
-  export interface EntityStats {
-    get scope(): ScopeModuleAStats;
-  }
-}
+declare module 'vona-module-a-stats' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/stats.js';

@@ -30,23 +30,7 @@ declare module 'vona' {
     'a-dashboard:dashboardUser': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-dashboard' {
-  export interface EntityDashboard {
-    get scope(): ScopeModuleADashboard;
-  }
-
-  export interface EntityDashboardContent {
-    get scope(): ScopeModuleADashboard;
-  }
-
-  export interface EntityDashboardFull {
-    get scope(): ScopeModuleADashboard;
-  }
-
-  export interface EntityDashboardUser {
-    get scope(): ScopeModuleADashboard;
-  }
-}
+declare module 'vona-module-a-dashboard' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/dashboard.js';

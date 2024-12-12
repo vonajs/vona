@@ -51,15 +51,7 @@ declare module 'vona' {
     'a-auth:authProvider': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-auth' {
-  export interface EntityAuth {
-    get scope(): ScopeModuleAAuth;
-  }
-
-  export interface EntityAuthProvider {
-    get scope(): ScopeModuleAAuth;
-  }
-}
+declare module 'vona-module-a-auth' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/auth.js';

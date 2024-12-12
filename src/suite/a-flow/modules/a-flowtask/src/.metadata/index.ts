@@ -78,19 +78,7 @@ declare module 'vona' {
     'a-flowtask:flowTaskHistory': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-flowtask' {
-  export interface EntityFlowNodeStartEventAtomCondition {
-    get scope(): ScopeModuleAFlowtask;
-  }
-
-  export interface EntityFlowTask {
-    get scope(): ScopeModuleAFlowtask;
-  }
-
-  export interface EntityFlowTaskHistory {
-    get scope(): ScopeModuleAFlowtask;
-  }
-}
+declare module 'vona-module-a-flowtask' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/flowNodeStartEventAtomCondition.js';

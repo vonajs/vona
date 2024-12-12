@@ -32,11 +32,7 @@ declare module 'vona' {
     'a-detail:detailBase': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-detail' {
-  export interface EntityDetailBase {
-    get scope(): ScopeModuleADetail;
-  }
-}
+declare module 'vona-module-a-detail' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/detailBase.js';

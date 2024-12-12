@@ -36,19 +36,7 @@ declare module 'vona' {
     'a-share:shareRecordUV': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-share' {
-  export interface EntityShare {
-    get scope(): ScopeModuleAShare;
-  }
-
-  export interface EntityShareRecordPV {
-    get scope(): ScopeModuleAShare;
-  }
-
-  export interface EntityShareRecordUV {
-    get scope(): ScopeModuleAShare;
-  }
-}
+declare module 'vona-module-a-share' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/share.js';

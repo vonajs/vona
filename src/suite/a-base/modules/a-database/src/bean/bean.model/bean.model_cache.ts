@@ -1,6 +1,6 @@
 import { cast, deepExtend, IDecoratorSummerCacheOptions } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
-import { BeanModel } from '../bean.model.js';
+import { BeanModel } from '../bean.model_.js';
 import {
   EntityBase,
   IModelGetOptions,

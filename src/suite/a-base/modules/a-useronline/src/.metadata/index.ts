@@ -34,15 +34,7 @@ declare module 'vona' {
     'a-useronline:userOnlineHistory': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-useronline' {
-  export interface EntityUserOnline {
-    get scope(): ScopeModuleAUseronline;
-  }
-
-  export interface EntityUserOnlineHistory {
-    get scope(): ScopeModuleAUseronline;
-  }
-}
+declare module 'vona-module-a-useronline' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/userOnline.js';

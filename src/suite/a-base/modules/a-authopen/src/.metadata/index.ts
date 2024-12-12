@@ -46,11 +46,7 @@ declare module 'vona' {
     'a-authopen:authOpen': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-authopen' {
-  export interface EntityAuthOpen {
-    get scope(): ScopeModuleAAuthopen;
-  }
-}
+declare module 'vona-module-a-authopen' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/authOpen.js';

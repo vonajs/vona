@@ -35,10 +35,12 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
-    contentScopes.push(`
-    export interface ${className} {
-      get scope(): ${scopeModuleName};
-    }`);
+    if (!['entity', 'dto'].includes(sceneName)) {
+      contentScopes.push(`
+        export interface ${className} {
+          get scope(): ${scopeModuleName};
+        }`);
+    }
     if (isIgnore) continue;
     const fileInfo = _extractInfo(sceneName, file, sceneMeta);
     // import options

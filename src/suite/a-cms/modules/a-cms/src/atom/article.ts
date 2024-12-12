@@ -1,5 +1,5 @@
 import { Atom } from 'vona';
-import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase.js';
+import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase_.js';
 
 @Atom()
 export class AtomArticle extends BeanAtomCmsBase {

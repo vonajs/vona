@@ -43,19 +43,7 @@ declare module 'vona' {
     'a-version:viewRecord': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-version' {
-  export interface EntityVersion {
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface EntityVersionInit {
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface EntityViewRecord {
-    get scope(): ScopeModuleAVersion;
-  }
-}
+declare module 'vona-module-a-version' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/viewRecord.js';

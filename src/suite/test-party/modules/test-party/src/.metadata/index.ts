@@ -146,15 +146,7 @@ declare module 'vona' {
     'test-party:partyExpense': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-test-party' {
-  export interface EntityParty {
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface EntityPartyExpense {
-    get scope(): ScopeModuleTestParty;
-  }
-}
+declare module 'vona-module-test-party' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/party.js';

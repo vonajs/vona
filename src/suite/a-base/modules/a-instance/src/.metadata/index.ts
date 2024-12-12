@@ -39,11 +39,7 @@ declare module 'vona' {
     'a-instance:instance': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-instance' {
-  export interface EntityInstance {
-    get scope(): ScopeModuleAInstance;
-  }
-}
+declare module 'vona-module-a-instance' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/instance.js';

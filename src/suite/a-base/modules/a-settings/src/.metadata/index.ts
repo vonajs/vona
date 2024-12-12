@@ -34,15 +34,7 @@ declare module 'vona' {
     'a-settings:settingsRef': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-settings' {
-  export interface EntitySettings {
-    get scope(): ScopeModuleASettings;
-  }
-
-  export interface EntitySettingsRef {
-    get scope(): ScopeModuleASettings;
-  }
-}
+declare module 'vona-module-a-settings' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/settings.js';

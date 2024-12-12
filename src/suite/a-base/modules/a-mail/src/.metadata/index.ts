@@ -60,11 +60,7 @@ declare module 'vona' {
     'a-mail:mail': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-mail' {
-  export interface EntityMail {
-    get scope(): ScopeModuleAMail;
-  }
-}
+declare module 'vona-module-a-mail' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/mail.js';

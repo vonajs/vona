@@ -42,19 +42,7 @@ declare module 'vona' {
     'test-flow:purchaseOrderDetail': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-test-flow' {
-  export interface EntityProduct {
-    get scope(): ScopeModuleTestFlow;
-  }
-
-  export interface EntityPurchaseOrder {
-    get scope(): ScopeModuleTestFlow;
-  }
-
-  export interface EntityPurchaseOrderDetail {
-    get scope(): ScopeModuleTestFlow;
-  }
-}
+declare module 'vona-module-test-flow' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/product.js';

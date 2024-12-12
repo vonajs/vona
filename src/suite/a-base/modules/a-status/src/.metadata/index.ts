@@ -24,11 +24,7 @@ declare module 'vona' {
     'a-status:status': IDecoratorEntityOptions;
   }
 }
-declare module 'vona-module-a-status' {
-  export interface EntityStatus {
-    get scope(): ScopeModuleAStatus;
-  }
-}
+declare module 'vona-module-a-status' {}
 /** entity: end */
 /** model: begin */
 export * from '../model/status.js';
