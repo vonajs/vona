@@ -21,7 +21,7 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
     return this.ctx.meta.util;
   }
 
-  protected get scope(): TScopeModule {
+  public get scope(): TScopeModule {
     return this.getScope() as TScopeModule;
   }
 

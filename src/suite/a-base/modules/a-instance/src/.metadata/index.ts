@@ -16,6 +16,11 @@ declare module 'vona' {
     'a-instance.broadcast.resetCache': BroadcastResetCache;
   }
 }
+declare module 'vona-module-a-instance' {
+  export interface BeanInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/instance.js';

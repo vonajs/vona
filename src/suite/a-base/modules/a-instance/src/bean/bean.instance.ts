@@ -1,11 +1,11 @@
 import { ConfigInstanceBase, isNil, VonaConfig } from 'vona';
 import { Bean, BeanBase } from 'vona';
-import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { IModelSelectParams } from 'vona-module-a-database';
 import { EntityInstance } from '../entity/instance.js';
 
 @Bean()
-export class BeanInstance extends BeanBase<ScopeModule> {
+export class BeanInstance extends BeanBase {
   private get modelInstance() {
     return this.scope.model.instance;
   }
