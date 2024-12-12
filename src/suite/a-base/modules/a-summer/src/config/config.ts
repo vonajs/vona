@@ -1,5 +1,10 @@
-import { VonaApplication, IModuleConfigBroadcast, IMiddlewareOptionsMeta, TSummerCachePreset } from 'vona';
-import { IModuleConfigSummerCache } from './types.js';
+import {
+  VonaApplication,
+  IModuleConfigBroadcast,
+  IMiddlewareOptionsMeta,
+  TSummerCachePreset,
+  IDecoratorSummerCacheOptions,
+} from 'vona';
 
 // broadcasts
 const broadcasts = {
@@ -19,7 +24,7 @@ export const configRedis = {
   redis: {
     ttl: 20 * 60 * 1000, // 20 minutes
   },
-} as IModuleConfigSummerCache;
+} as IDecoratorSummerCacheOptions;
 
 export const configRedisWithIgnoreNull = { ...configRedis, ignoreNull: true };
 
@@ -31,7 +36,7 @@ export const configAll = {
   redis: {
     ttl: 20 * 60 * 1000, // 20 minutes
   },
-} as IModuleConfigSummerCache;
+} as IDecoratorSummerCacheOptions;
 
 export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
 
