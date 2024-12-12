@@ -75,7 +75,6 @@ export interface ScopeModuleAIcon {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';

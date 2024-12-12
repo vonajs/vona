@@ -169,7 +169,6 @@ export interface ScopeModuleTestFlow {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModuleQueue;
 }
 
 import 'vona';

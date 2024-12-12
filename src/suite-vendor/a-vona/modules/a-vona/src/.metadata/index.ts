@@ -7,7 +7,6 @@ export class ScopeModuleAVona extends BeanScopeBase {}
 export interface ScopeModuleAVona {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

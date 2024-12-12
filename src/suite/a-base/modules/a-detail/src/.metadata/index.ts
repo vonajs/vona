@@ -100,7 +100,6 @@ export interface ScopeModuleADetail {
   constant: TypeModuleConstants<typeof constants>;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModuleQueue;
 }
 
 import 'vona';

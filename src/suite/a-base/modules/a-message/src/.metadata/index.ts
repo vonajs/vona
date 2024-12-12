@@ -98,7 +98,6 @@ export interface ScopeModuleAMessage {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';

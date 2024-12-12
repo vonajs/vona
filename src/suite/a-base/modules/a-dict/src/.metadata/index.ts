@@ -153,7 +153,6 @@ export interface ScopeModuleADict {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModuleQueue;
 }
 
 import 'vona';

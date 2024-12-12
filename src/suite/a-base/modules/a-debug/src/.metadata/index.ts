@@ -32,7 +32,6 @@ export class ScopeModuleADebug extends BeanScopeBase {}
 export interface ScopeModuleADebug {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

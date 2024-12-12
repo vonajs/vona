@@ -24,7 +24,6 @@ export class ScopeModuleASwiper extends BeanScopeBase {}
 export interface ScopeModuleASwiper {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

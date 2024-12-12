@@ -199,7 +199,6 @@ export interface ScopeModuleAAuth {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModuleQueue;
 }
 
 import 'vona';

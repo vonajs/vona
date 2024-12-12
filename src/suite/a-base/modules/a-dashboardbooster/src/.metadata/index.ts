@@ -33,7 +33,6 @@ export interface ScopeModuleADashboardbooster {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  queue: IModuleQueue;
 }
 
 import 'vona';

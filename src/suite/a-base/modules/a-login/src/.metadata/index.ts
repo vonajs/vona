@@ -41,7 +41,6 @@ export interface ScopeModuleALogin {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';

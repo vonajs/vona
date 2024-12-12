@@ -61,7 +61,6 @@ export interface ScopeModuleACaptchasimple {
   util: BeanScopeUtil;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  queue: IModuleQueue;
 }
 
 import 'vona';

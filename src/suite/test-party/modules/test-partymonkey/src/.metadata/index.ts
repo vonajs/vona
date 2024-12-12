@@ -25,7 +25,6 @@ export class ScopeModuleTestPartymonkey extends BeanScopeBase {}
 export interface ScopeModuleTestPartymonkey {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

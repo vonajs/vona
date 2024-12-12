@@ -7,7 +7,6 @@ export class ScopeModuleCmsPluginmarkdowngithub extends BeanScopeBase {}
 export interface ScopeModuleCmsPluginmarkdowngithub {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

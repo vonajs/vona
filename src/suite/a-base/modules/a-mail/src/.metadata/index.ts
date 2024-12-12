@@ -196,7 +196,6 @@ export interface ScopeModuleAMail {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModuleQueue;
 }
 
 import 'vona';

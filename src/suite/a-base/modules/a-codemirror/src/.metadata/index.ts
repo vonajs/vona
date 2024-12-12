@@ -24,7 +24,6 @@ export class ScopeModuleACodemirror extends BeanScopeBase {}
 export interface ScopeModuleACodemirror {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

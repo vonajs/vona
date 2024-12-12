@@ -29,7 +29,6 @@ export interface ScopeModuleCmsThemedocs {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  queue: IModuleQueue;
 }
 
 import 'vona';

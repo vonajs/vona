@@ -32,7 +32,6 @@ export class ScopeModuleAPinyin extends BeanScopeBase {}
 export interface ScopeModuleAPinyin {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -7,7 +7,6 @@ export class ScopeModuleCmsPluginarticle extends BeanScopeBase {}
 export interface ScopeModuleCmsPluginarticle {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

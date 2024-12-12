@@ -107,7 +107,6 @@ export interface ScopeModuleAUser {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';

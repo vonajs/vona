@@ -46,7 +46,6 @@ export interface ScopeModuleHomeIndex {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  queue: IModuleQueue;
 }
 
 import 'vona';

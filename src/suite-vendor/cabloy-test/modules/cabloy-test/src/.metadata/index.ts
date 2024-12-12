@@ -7,7 +7,6 @@ export class ScopeModuleCabloyTest extends BeanScopeBase {}
 export interface ScopeModuleCabloyTest {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModuleQueue;
 }
 
 import 'vona';

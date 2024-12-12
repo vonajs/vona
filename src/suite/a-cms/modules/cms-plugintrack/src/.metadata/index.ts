@@ -12,7 +12,6 @@ export interface ScopeModuleCmsPlugintrack {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  queue: IModuleQueue;
 }
 
 import 'vona';

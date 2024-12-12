@@ -55,7 +55,6 @@ export interface ScopeModuleAFlowchart {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
-  queue: IModuleQueue;
 }
 
 import 'vona';
