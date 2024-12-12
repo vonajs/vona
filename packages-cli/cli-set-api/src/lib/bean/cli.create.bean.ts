@@ -3,7 +3,6 @@ import { IModuleInfo } from '@cabloy/module-info';
 import path from 'path';
 import fs from 'fs';
 import { __ThisSetName__ } from '../this.js';
-import { getOnionScenesMeta } from 'vona-shared';
 
 const __decorators = {
   virtual: 'Virtual',
@@ -93,12 +92,15 @@ export class CliCreateBean extends BeanCliBase {
 
   private _getBoilerplates() {
     const result = Object.assign({}, __boilerplates);
-    // onionScenesMeta
-    const onionScenesMeta = getOnionScenesMeta(this.helper.cli.modulesMeta.modules);
-    for (const sceneName in onionScenesMeta) {
-      const boilerplate = onionScenesMeta[sceneName].boilerplate;
-      if (boilerplate) {
-        result[sceneName] = boilerplate;
+    for (const moduleName in this.helper.cli.modulesMeta.modules) {
+      const module = this.helper.cli.modulesMeta.modules[moduleName];
+      const onions = module.package.vonaModule?.onions;
+      if (!onions) continue;
+      for (const sceneName in onions) {
+        const boilerplate = onions[sceneName].boilerplate;
+        if (boilerplate) {
+          result[sceneName] = path.join(module.root, boilerplate);
+        }
       }
     }
     return result;
