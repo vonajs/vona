@@ -1,6 +1,6 @@
 import * as Bull from 'bullmq';
 import Redlock from 'redlock';
-import { ILocalInfos, IQueueRecord } from 'vona';
+import { ILocalInfos, IMiddlewareBaseEnable, OmitNever, Onion } from 'vona';
 import { INewCtxExtraData } from 'vona-module-a-executor';
 
 export interface IQueuePushOptions {
@@ -48,4 +48,29 @@ export interface IQueueCallback<DATA, RESULT> {
 
 export interface IQueueCallbacks {
   [jobId: string | number]: IQueueCallback<unknown, unknown>;
+}
+
+export interface IQueueRecord {}
+
+export interface IDecoratorQueueOptions extends IMiddlewareBaseEnable {
+  concurrency?: boolean;
+  transaction?: boolean;
+  options?: {
+    queue?: Bull.QueueOptions;
+    worker?: Bull.WorkerOptions;
+    redlock?: Redlock.Options & { lockTTL?: number };
+    job?: Bull.JobsOptions;
+  };
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    queue: Onion<IDecoratorQueueOptions, keyof IQueueRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    queue: OmitNever<IQueueRecord>;
+  }
 }

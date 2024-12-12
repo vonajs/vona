@@ -66,9 +66,6 @@ export const onionScenesMeta: OnionScenesMeta = {
   startup: {
     optionsGlobalInterfaceName: 'IDecoratorStartupOptions',
   },
-  queue: {
-    optionsGlobalInterfaceName: 'IDecoratorQueueOptions',
-  },
 };
 
 let __result: OnionScenesMeta;

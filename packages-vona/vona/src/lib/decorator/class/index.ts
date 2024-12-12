@@ -12,7 +12,6 @@ export * from './meta.js';
 export * from './middleware.js';
 export * from './model.js';
 export * from './pipe.js';
-export * from './queue.js';
 export * from './service.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';

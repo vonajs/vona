@@ -11,7 +11,6 @@ import {
   IDecoratorMiddlewareOptionsGlobal,
   IDecoratorModelOptions,
   IDecoratorPipeOptionsGlobal,
-  IDecoratorQueueOptions,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
@@ -24,7 +23,6 @@ import {
   IMiddlewareRecord,
   IModelRecord,
   IPipeRecord,
-  IQueueRecord,
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IStartupRecord,
@@ -70,5 +68,4 @@ function loadAll(app: VonaApplication) {
     'summerCache',
   );
   app.meta.onionStartup = app.bean._newBean(Onion<IDecoratorStartupOptions, keyof IStartupRecord>, 'startup');
-  app.meta.onionQueue = app.bean._newBean(Onion<IDecoratorQueueOptions, keyof IQueueRecord>, 'queue');
 }

@@ -8,7 +8,6 @@ import { IMetaRecord } from '../interface/meta.js';
 import { IMiddlewareRecord } from '../interface/middleware.js';
 import { IModelRecord } from '../interface/model.js';
 import { IPipeRecord } from '../interface/pipe.js';
-import { IQueueRecord } from '../interface/queue.js';
 import { ISocketConnectionRecord } from '../interface/socketConnection.js';
 import { ISocketPacketRecord } from '../interface/socketPacket.js';
 import { IStartupRecord } from '../interface/startup.js';
@@ -30,5 +29,4 @@ export interface ConfigOnions {
   meta: OmitNever<IMetaRecord>;
   summerCache: OmitNever<ISummerCacheRecord>;
   startup: OmitNever<IStartupRecord>;
-  queue: OmitNever<IQueueRecord>;
 }

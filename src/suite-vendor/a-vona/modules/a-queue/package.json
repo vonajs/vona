@@ -9,6 +9,13 @@
     "globalDependencies": {
       "bullmq": true,
       "redlock": true
+    },
+    "onions": {
+      "queue": {
+        "optionsGlobalInterfaceName": "IDecoratorQueueOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-queue",
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -31,7 +38,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {

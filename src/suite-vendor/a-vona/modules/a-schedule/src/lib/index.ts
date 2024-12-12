@@ -1,1 +1,1 @@
-export * from './decorator/schedule.js';
+export * from './schedule.js';
