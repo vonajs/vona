@@ -99,6 +99,27 @@ declare module 'vona-module-test-party' {
   }
 }
 /** beans: end */
+/** atom: begin */
+export * from '../atom/party.js';
+export * from '../atom/partyExpense.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'test-party:party': never;
+    'test-party:partyExpense': never;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface AtomParty {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface AtomPartyExpense {
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** atom: end */
 /** middleware: begin */
 export * from '../bean/middleware.testInterception.js';
 export * from '../bean/middleware.testRestructuring.js';
@@ -469,27 +490,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** startup: end */
-/** atom: begin */
-export * from '../atom/party.js';
-export * from '../atom/partyExpense.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'test-party:party': never;
-    'test-party:partyExpense': never;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface AtomParty {
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface AtomPartyExpense {
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** atom: end */
 /** entities: begin */
 import { EntityParty } from '../entity/party.js';
 import { EntityPartyExpense } from '../entity/partyExpense.js';

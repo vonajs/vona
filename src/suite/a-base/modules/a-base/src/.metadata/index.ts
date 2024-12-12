@@ -180,6 +180,87 @@ declare module 'vona-module-a-base' {
   }
 }
 /** beans: end */
+/** atom: begin */
+export * from '../atom/resource.js';
+export * from '../atom/role.js';
+export * from '../atom/roleFieldsRight.js';
+export * from '../atom/roleFieldsRightSpread.js';
+export * from '../atom/roleResourceRight.js';
+export * from '../atom/roleResourceRightSpread.js';
+export * from '../atom/roleRight.js';
+export * from '../atom/roleRightSpread.js';
+export * from '../atom/user.js';
+export * from '../atom/userAtomRight.js';
+export * from '../atom/userFieldsRight.js';
+export * from '../atom/userResourceRight.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-base:resource': never;
+    'a-base:role': never;
+    'a-base:roleFieldsRight': never;
+    'a-base:roleFieldsRightSpread': never;
+    'a-base:roleResourceRight': never;
+    'a-base:roleResourceRightSpread': never;
+    'a-base:roleRight': never;
+    'a-base:roleRightSpread': never;
+    'a-base:user': never;
+    'a-base:userAtomRight': never;
+    'a-base:userFieldsRight': never;
+    'a-base:userResourceRight': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface AtomResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRole {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleFieldsRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleFieldsRightSpread {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleResourceRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleResourceRightSpread {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleRightSpread {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserAtomRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserFieldsRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserResourceRight {
+    get scope(): ScopeModuleABase;
+  }
+}
+/** atom: end */
 /** middleware: begin */
 export * from '../bean/middleware.auth.js';
 export * from '../bean/middleware.authOpen.js';
@@ -718,87 +799,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** queue: end */
-/** atom: begin */
-export * from '../atom/resource.js';
-export * from '../atom/role.js';
-export * from '../atom/roleFieldsRight.js';
-export * from '../atom/roleFieldsRightSpread.js';
-export * from '../atom/roleResourceRight.js';
-export * from '../atom/roleResourceRightSpread.js';
-export * from '../atom/roleRight.js';
-export * from '../atom/roleRightSpread.js';
-export * from '../atom/user.js';
-export * from '../atom/userAtomRight.js';
-export * from '../atom/userFieldsRight.js';
-export * from '../atom/userResourceRight.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-base:resource': never;
-    'a-base:role': never;
-    'a-base:roleFieldsRight': never;
-    'a-base:roleFieldsRightSpread': never;
-    'a-base:roleResourceRight': never;
-    'a-base:roleResourceRightSpread': never;
-    'a-base:roleRight': never;
-    'a-base:roleRightSpread': never;
-    'a-base:user': never;
-    'a-base:userAtomRight': never;
-    'a-base:userFieldsRight': never;
-    'a-base:userResourceRight': never;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface AtomResource {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRole {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleFieldsRight {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleFieldsRightSpread {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleResourceRight {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleResourceRightSpread {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleRight {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleRightSpread {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUser {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUserAtomRight {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUserFieldsRight {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUserResourceRight {
-    get scope(): ScopeModuleABase;
-  }
-}
-/** atom: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

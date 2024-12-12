@@ -23,6 +23,27 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** beans: end */
+/** atom: begin */
+export * from '../atom/userOnline.js';
+export * from '../atom/userOnlineHistory.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-useronline:userOnline': never;
+    'a-useronline:userOnlineHistory': never;
+  }
+}
+declare module 'vona-module-a-useronline' {
+  export interface AtomUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+
+  export interface AtomUserOnlineHistory {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
+/** atom: end */
 /** entity: begin */
 export * from '../entity/userOnline.js';
 export * from '../entity/userOnlineHistory.js';
@@ -72,27 +93,6 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** controller: end */
-/** atom: begin */
-export * from '../atom/userOnline.js';
-export * from '../atom/userOnlineHistory.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-useronline:userOnline': never;
-    'a-useronline:userOnlineHistory': never;
-  }
-}
-declare module 'vona-module-a-useronline' {
-  export interface AtomUserOnline {
-    get scope(): ScopeModuleAUseronline;
-  }
-
-  export interface AtomUserOnlineHistory {
-    get scope(): ScopeModuleAUseronline;
-  }
-}
-/** atom: end */
 /** entities: begin */
 import { EntityUserOnline } from '../entity/userOnline.js';
 import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';

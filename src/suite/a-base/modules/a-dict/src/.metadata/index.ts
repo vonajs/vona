@@ -23,6 +23,21 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** beans: end */
+/** atom: begin */
+export * from '../atom/dict.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-dict:dict': never;
+  }
+}
+declare module 'vona-module-a-dict' {
+  export interface AtomDict {
+    get scope(): ScopeModuleADict;
+  }
+}
+/** atom: end */
 /** entity: begin */
 export * from '../entity/dict.js';
 export * from '../entity/dictContent.js';
@@ -72,21 +87,6 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** controller: end */
-/** atom: begin */
-export * from '../atom/dict.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-dict:dict': never;
-  }
-}
-declare module 'vona-module-a-dict' {
-  export interface AtomDict {
-    get scope(): ScopeModuleADict;
-  }
-}
-/** atom: end */
 /** entities: begin */
 import { EntityDict } from '../entity/dict.js';
 import { EntityDictContent } from '../entity/dictContent.js';

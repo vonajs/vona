@@ -44,6 +44,21 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** beans: end */
+/** atom: begin */
+export * from '../atom/flowDef.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-flow:flowDef': never;
+  }
+}
+declare module 'vona-module-a-flow' {
+  export interface AtomFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+}
+/** atom: end */
 /** entity: begin */
 export * from '../entity/flow.js';
 export * from '../entity/flowDef.js';
@@ -154,21 +169,6 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** meta: end */
-/** atom: begin */
-export * from '../atom/flowDef.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-flow:flowDef': never;
-  }
-}
-declare module 'vona-module-a-flow' {
-  export interface AtomFlowDef {
-    get scope(): ScopeModuleAFlow;
-  }
-}
-/** atom: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */

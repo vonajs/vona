@@ -33,6 +33,21 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** beans: end */
+/** atom: begin */
+export * from '../atom/article.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-cms:article': never;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface AtomArticle {
+    get scope(): ScopeModuleACms;
+  }
+}
+/** atom: end */
 /** entity: begin */
 export * from '../entity/article.js';
 export * from '../entity/content.js';
@@ -151,21 +166,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** queue: end */
-/** atom: begin */
-export * from '../atom/article.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-cms:article': never;
-  }
-}
-declare module 'vona-module-a-cms' {
-  export interface AtomArticle {
-    get scope(): ScopeModuleACms;
-  }
-}
-/** atom: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
