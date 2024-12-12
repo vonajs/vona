@@ -49,6 +49,7 @@ export interface OnionSceneMeta {
   optionsDynamic?: boolean;
   optionsGlobalInterfaceName?: string;
   optionsGlobalInterfaceFrom?: string;
+  scopeResource?: boolean;
   boilerplate?: string;
 }
 

@@ -10,10 +10,13 @@ export interface GenerateScopeOptions {
   services: string;
   models: string;
   entities: string;
-  summerCaches: string;
-  queues: string;
 }
-export async function generateScope(moduleName: string, relativeNameCapitalize: string, options: GenerateScopeOptions) {
+export async function generateScope(
+  moduleName: string,
+  relativeNameCapitalize: string,
+  scopeResources: Record<string, boolean>,
+  options: GenerateScopeOptions,
+) {
   // scopeVariable
   const parts = moduleName.split('-');
   const scopeVariable = parts[0] === 'a' ? parts[1] : relativeNameToCapitalize(moduleName, false);
@@ -61,11 +64,9 @@ export async function generateScope(moduleName: string, relativeNameCapitalize: 
   if (options.entities) {
     contentRecords.push('entity: IModuleEntity;');
   }
-  if (options.summerCaches) {
-    contentRecords.push('summerCache: IModuleSummerCache;');
-  }
-  if (options.queues) {
-    contentRecords.push('queue: IModuleQueue;');
+  // loop
+  for (const sceneName in scopeResources) {
+    contentRecords.push(`${sceneName}: IModule${sceneName};`);
   }
   // combine
   const content = `/** scope: begin */

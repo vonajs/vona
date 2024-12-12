@@ -2,8 +2,14 @@ import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { checkIgnoreOfParts } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { OnionScenesMeta } from '@cabloy/module-info';
 
-export async function generateScopeResources(sceneName: string, _moduleName: string, modulePath: string) {
+export async function generateScopeResources(
+  sceneName: string,
+  _onionScenesMeta: OnionScenesMeta,
+  _moduleName: string,
+  modulePath: string,
+) {
   //const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = `${modulePath}/src/bean/${sceneName}.*.ts`;

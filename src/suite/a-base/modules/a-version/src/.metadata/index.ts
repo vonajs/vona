@@ -93,6 +93,18 @@ declare module 'vona-module-a-version' {
   }
 }
 /** startup: end */
+/** startup: begin */
+import { StartupDatabaseInit } from '../bean/startup.databaseInit.js';
+import { StartupDatabaseName } from '../bean/startup.databaseName.js';
+import { StartupInstanceInit } from '../bean/startup.instanceInit.js';
+import { StartupWorkerAlive } from '../bean/startup.workerAlive.js';
+export interface IModuleStartup {
+  databaseInit: StartupDatabaseInit;
+  databaseName: StartupDatabaseName;
+  instanceInit: StartupInstanceInit;
+  workerAlive: StartupWorkerAlive;
+}
+/** startup: end */
 /** entities: begin */
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
@@ -191,6 +203,23 @@ export interface ScopeModuleAVersion {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

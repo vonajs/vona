@@ -66,11 +66,15 @@ export class CliToolsMetadata extends BeanCliBase {
     // beans
     content += await generateBeans(onionScenesMeta, moduleName, modulePath);
     // onions
+    const scopeResources = {};
     for (const sceneName in onionScenesMeta) {
+      // general
       content += await generateOnions(sceneName, onionScenesMeta, moduleName, modulePath);
+      // scope resources
+      const contentScopeResource = await generateScopeResources(sceneName, onionScenesMeta, moduleName, modulePath);
+      content += contentScopeResource;
+      scopeResources[sceneName] = contentScopeResource;
     }
-    // atoms
-    //content += await generateAtoms(moduleName, modulePath);
     // dtos
     content += await generateDtos(moduleName, modulePath);
     // meta status
@@ -79,12 +83,6 @@ export class CliToolsMetadata extends BeanCliBase {
     // meta redlock
     const contentMetaRedlock = await generateMetaRedlock(moduleName, modulePath);
     content += contentMetaRedlock;
-    // summerCaches
-    const contentSummerCaches = await generateScopeResources('summerCache', moduleName, modulePath);
-    content += contentSummerCaches;
-    // queues
-    const contentQueues = await generateScopeResources('queue', moduleName, modulePath);
-    content += contentQueues;
     // entities
     const contentEntities = await generateEntities(moduleName, modulePath);
     content += contentEntities;
@@ -111,7 +109,7 @@ export class CliToolsMetadata extends BeanCliBase {
     // main
     content += await generateMain(modulePath);
     // scope
-    content += await generateScope(moduleName, relativeNameCapitalize, {
+    content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
       config: contentConfig,
       errors: contentErrors,
       locales: contentLocales,
@@ -121,8 +119,6 @@ export class CliToolsMetadata extends BeanCliBase {
       services: contentServices,
       models: contentModels,
       entities: contentEntities,
-      summerCaches: contentSummerCaches,
-      queues: contentQueues,
     });
     // empty
     if (!content.trim()) {

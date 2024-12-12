@@ -23,6 +23,14 @@ declare module 'vona-module-a-core' {
   }
 }
 /** middleware: end */
+/** middleware: begin */
+import { MiddlewareDevelopment } from '../bean/middleware.development.js';
+import { MiddlewareGate } from '../bean/middleware.gate.js';
+export interface IModuleMiddleware {
+  development: MiddlewareDevelopment;
+  gate: MiddlewareGate;
+}
+/** middleware: end */
 /** guard: begin */
 export * from '../bean/guard.user.js';
 import { IGuardOptionsUser } from '../bean/guard.user.js';
@@ -36,6 +44,12 @@ declare module 'vona-module-a-core' {
   export interface GuardUser {
     get scope(): ScopeModuleACore;
   }
+}
+/** guard: end */
+/** guard: begin */
+import { GuardUser } from '../bean/guard.user.js';
+export interface IModuleGuard {
+  user: GuardUser;
 }
 /** guard: end */
 /** interceptor: begin */
@@ -53,6 +67,12 @@ declare module 'vona-module-a-core' {
   }
 }
 /** interceptor: end */
+/** interceptor: begin */
+import { InterceptorBody } from '../bean/interceptor.body.js';
+export interface IModuleInterceptor {
+  body: InterceptorBody;
+}
+/** interceptor: end */
 /** filter: begin */
 export * from '../bean/filter.error.js';
 import { IFilterOptionsError } from '../bean/filter.error.js';
@@ -66,6 +86,12 @@ declare module 'vona-module-a-core' {
   export interface FilterError {
     get scope(): ScopeModuleACore;
   }
+}
+/** filter: end */
+/** filter: begin */
+import { FilterError } from '../bean/filter.error.js';
+export interface IModuleFilter {
+  error: FilterError;
 }
 /** filter: end */
 /** config: begin */
@@ -82,6 +108,23 @@ export interface ScopeModuleACore {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';

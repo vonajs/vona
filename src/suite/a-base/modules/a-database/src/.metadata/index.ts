@@ -68,6 +68,12 @@ declare module 'vona-module-a-database' {
   }
 }
 /** middleware: end */
+/** middleware: begin */
+import { MiddlewareTransaction } from '../bean/middleware.transaction.js';
+export interface IModuleMiddleware {
+  transaction: MiddlewareTransaction;
+}
+/** middleware: end */
 /** services: begin */
 export * from '../service/dbMeta.js';
 export * from '../service/transaction.js';
@@ -138,6 +144,23 @@ export interface ScopeModuleADatabase {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
+  atom: IModuleatom;
+  middleware: IModulemiddleware;
+  guard: IModuleguard;
+  interceptor: IModuleinterceptor;
+  pipe: IModulepipe;
+  filter: IModulefilter;
+  socketConnection: IModulesocketConnection;
+  socketPacket: IModulesocketPacket;
+  aop: IModuleaop;
+  entity: IModuleentity;
+  model: IModulemodel;
+  controller: IModulecontroller;
+  meta: IModulemeta;
+  summerCache: IModulesummerCache;
+  startup: IModulestartup;
+  queue: IModulequeue;
+  schedule: IModuleschedule;
 }
 
 import 'vona';
