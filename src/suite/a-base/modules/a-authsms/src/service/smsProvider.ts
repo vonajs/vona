@@ -2,7 +2,7 @@ import { BeanBase, Service } from 'vona';
 import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceSmsProvider extends BeanBase<ScopeModule> {
+export class ServiceSmsProvider extends BeanBase {
   async list() {
     return this.app.bean.smsProviderCache.getSmsProvidersConfigForAdmin();
   }

@@ -1,8 +1,7 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean()
-export class BeanAuth extends BeanBase<ScopeModule> {
+export class BeanAuth extends BeanBase {
   _redisAuth: any;
 
   constructor() {

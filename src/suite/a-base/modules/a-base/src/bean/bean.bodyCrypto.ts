@@ -8,7 +8,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 let __bodyCryptoInstance = null;
 
 @Bean()
-export class BeanBodyCrypto extends BeanBase<ScopeModule> {
+export class BeanBodyCrypto extends BeanBase {
   get configModule() {
     return this.scope.config;
   }

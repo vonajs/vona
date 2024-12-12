@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerUser extends BeanBase<ScopeModule> {
+export class ControllerUser extends BeanBase {
   async save() {
     const res = await this.scope.service.user.save({
       data: this.ctx.request.body.data,

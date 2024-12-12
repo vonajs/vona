@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanAuthProviderBase } from 'vona-module-a-auth';
 

@@ -1,8 +1,7 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceLayoutConfig extends BeanBase<ScopeModule> {
+export class ServiceLayoutConfig extends BeanBase {
   async load({ module, user }: any) {
     const name = `user-layoutConfig:${module}:${user.id}` as const;
     return await this.scope.status.get(name);

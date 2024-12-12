@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerDashboard extends BeanBase<ScopeModule> {
+export class ControllerDashboard extends BeanBase {
   async itemByKey() {
     const res = await this.scope.service.dashboard.itemByKey({
       atomStaticKey: this.ctx.request.body.atomStaticKey,

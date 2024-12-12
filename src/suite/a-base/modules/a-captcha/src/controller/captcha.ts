@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerCaptcha extends BeanBase<ScopeModule> {
+export class ControllerCaptcha extends BeanBase {
   async createProviderInstance() {
     const res = await this.scope.service.captcha.createProviderInstance({
       module: this.ctx.request.body.module,

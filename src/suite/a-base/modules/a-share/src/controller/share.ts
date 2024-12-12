@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerShare extends BeanBase<ScopeModule> {
+export class ControllerShare extends BeanBase {
   async generate() {
     const res = await this.scope.service.share.generate({
       host: this.ctx.request.body.host,

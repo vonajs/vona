@@ -5,7 +5,7 @@ import { BigNumber } from 'bignumber.js';
 import fse from 'fs-extra';
 
 @Service()
-export class ServiceSite extends BeanBase<ScopeModule> {
+export class ServiceSite extends BeanBase {
   async getSite({ atomClass, language, options }: any) {
     const build = this.app.bean.cms.build({ atomClass });
     return await build.getSite({ language, options });

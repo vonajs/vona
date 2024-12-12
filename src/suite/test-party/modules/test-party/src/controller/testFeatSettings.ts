@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestFeatSettings extends BeanBase<ScopeModule> {
+export class ControllerTestFeatSettings extends BeanBase {
   async settings() {
     // user
 

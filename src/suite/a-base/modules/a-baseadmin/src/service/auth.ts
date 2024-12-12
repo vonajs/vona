@@ -1,8 +1,7 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceAuth extends BeanBase<ScopeModule> {
+export class ServiceAuth extends BeanBase {
   get modelAuthProvider() {
     return this.$scope.auth.model.authProvider;
   }

@@ -1,8 +1,7 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'event' })
-export class EventAccountMigration extends BeanBase<ScopeModule> {
+export class EventAccountMigration extends BeanBase {
   get modelAuthOpen() {
     return this.scope.model.authOpen;
   }

@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase, deepExtend } from 'vona';
 
 import * as uuid from 'uuid';
@@ -10,7 +9,7 @@ import utils from '../common/utils.js';
 import { SelectOptionsPage } from '../types.js';
 
 @Bean()
-export class BeanUtil extends BeanBase<ScopeModule> {
+export class BeanUtil extends BeanBase {
   get configModule() {
     return this.scope.config;
   }

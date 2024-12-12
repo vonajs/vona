@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase, requireDynamic } from 'vona';
 
 import fs from 'fs';
@@ -10,7 +9,7 @@ import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
 
 @Service()
-export class ServiceTemplate extends BeanBase<ScopeModule> {
+export class ServiceTemplate extends BeanBase {
   cli: any;
 
   constructor(cli) {

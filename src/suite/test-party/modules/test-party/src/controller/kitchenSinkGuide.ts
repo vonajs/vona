@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerKitchenSinkGuide extends BeanBase<ScopeModule> {
+export class ControllerKitchenSinkGuide extends BeanBase {
   async echo() {
     const message = 'Hello World';
     this.app.success(message);

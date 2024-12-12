@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestCacheRedis extends BeanBase<ScopeModule> {
+export class ControllerTestCacheRedis extends BeanBase {
   async redis() {
     let res;
     let value;

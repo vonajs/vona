@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerLayoutConfig extends BeanBase<ScopeModule> {
+export class ControllerLayoutConfig extends BeanBase {
   async load() {
     const res = await this.scope.service.layoutConfig.load({
       module: this.ctx.request.body.module,

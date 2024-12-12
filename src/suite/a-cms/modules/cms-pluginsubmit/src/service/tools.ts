@@ -4,7 +4,7 @@ import { Service, BeanBase } from 'vona';
 import url from 'url';
 
 @Service()
-export class ServiceTools extends BeanBase<ScopeModule> {
+export class ServiceTools extends BeanBase {
   async submit({ links, config }: any) {
     for (const target in config.submit) {
       const targetConfig = config.submit[target];

@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 import * as ModuleInfo from '@cabloy/module-info';

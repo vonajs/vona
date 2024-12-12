@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../../../.metadata/this.js';
 
-export class VersionUpdate extends BeanBase<ScopeModule> {
+export class VersionUpdate extends BeanBase {
   constructor() {
     super(__ThisModule__);
   }

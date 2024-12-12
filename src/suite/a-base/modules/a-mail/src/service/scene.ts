@@ -1,8 +1,7 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceScene extends BeanBase<ScopeModule> {
+export class ServiceScene extends BeanBase {
   async list() {
     return this.app.bean.mailSceneCache.getMailScenesConfigForAdmin();
   }

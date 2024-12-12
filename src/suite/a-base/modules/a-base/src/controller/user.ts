@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerUser extends BeanBase<ScopeModule> {
+export class ControllerUser extends BeanBase {
   async getLabels() {
     const res = await this.scope.service.user.getLabels({
       user: this.ctx.state.user.op,

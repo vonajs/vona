@@ -9,7 +9,7 @@ import { ServiceLocalFlowNode } from '../localFlowNode.js';
 import { ServiceLocalFlowEdge } from '../localFlowEdge.js';
 import { ServiceLocalFlow } from '../localFlow.js';
 
-export class LocalFlowFlow0 extends BeanBase<ScopeModule> {
+export class LocalFlowFlow0 extends BeanBase {
   context: LocalContextFlow;
   _flowListener: ServiceLocalFlowListener;
 

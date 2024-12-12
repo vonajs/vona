@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerCli extends BeanBase<ScopeModule> {
+export class ControllerCli extends BeanBase {
   async meta() {
     const res = await this.scope.service.cli.meta({
       context: this.ctx.request.body.context,

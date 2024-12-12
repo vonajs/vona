@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerRss extends BeanBase<ScopeModule> {
+export class ControllerRss extends BeanBase {
   async feed() {
     // params
     //   module

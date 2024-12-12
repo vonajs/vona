@@ -1,5 +1,4 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 const __ItemDefault = {
   userName: '',
   password: '',
@@ -13,7 +12,7 @@ const __ItemDefault = {
 };
 
 @Controller()
-export class ControllerKitchenSinkFormSchemaValidation extends BeanBase<ScopeModule> {
+export class ControllerKitchenSinkFormSchemaValidation extends BeanBase {
   async load() {
     // try load from db cache
     const cacheName = this._getCacheName();

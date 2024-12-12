@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestCtxPerformAction extends BeanBase<ScopeModule> {
+export class ControllerTestCtxPerformAction extends BeanBase {
   async performAction() {
     // param: id
     const id = this.ctx.request.body.id;

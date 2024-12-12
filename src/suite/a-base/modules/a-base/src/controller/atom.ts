@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerAtom extends BeanBase<ScopeModule> {
+export class ControllerAtom extends BeanBase {
   async preferredRoles() {
     const res = await this.scope.service.atom.preferredRoles({
       atomClass: this.ctx.request.body.atomClass,

@@ -1,6 +1,5 @@
 import { ISummerCacheGet, SummerCache, TSummerCacheActionOptions } from 'vona';
 import { BeanSummerCacheBase } from 'vona-module-a-summer';
-import { ScopeModule } from '../.metadata/this.js';
 
 export type TSummerCacheRoleScopesOfRoleKey = any;
 export type TSummerCacheRoleScopesOfRoleData = any;

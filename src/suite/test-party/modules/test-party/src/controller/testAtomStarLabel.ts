@@ -3,7 +3,7 @@ import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestAtomStarLabel extends BeanBase<ScopeModule> {
+export class ControllerTestAtomStarLabel extends BeanBase {
   async starLabel() {
     // atomClass
     const atomClass = await this.app.bean.atomClass.get({ module: __ThisModule__, atomClassName: 'party' });

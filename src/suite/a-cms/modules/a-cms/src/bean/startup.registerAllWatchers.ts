@@ -1,8 +1,7 @@
 import { BeanBase, IStartupExecute, Startup } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Startup({ instance: true, debounce: true })
-export class StartupRegisterAllWatchers extends BeanBase<ScopeModule> implements IStartupExecute {
+export class StartupRegisterAllWatchers extends BeanBase implements IStartupExecute {
   async execute() {
     // only in development
     if (!this.app.meta.isLocal) return;

@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerAtomClass extends BeanBase<ScopeModule> {
+export class ControllerAtomClass extends BeanBase {
   async validatorSearch() {
     const res = await this.scope.service.atomClass.validatorSearch({
       atomClass: this.ctx.request.body.atomClass,

@@ -7,7 +7,7 @@ const __atomClassResource = {
   atomClassName: 'resource',
 };
 
-export class VersionUpdate extends BeanBase<ScopeModule> {
+export class VersionUpdate extends BeanBase {
   constructor() {
     super(__ThisModule__);
   }

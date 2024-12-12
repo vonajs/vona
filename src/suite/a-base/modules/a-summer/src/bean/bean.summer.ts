@@ -1,5 +1,4 @@
 import { Bean, BeanModuleScopeBase, IDecoratorSummerCacheOptions } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { BeanSummerCacheBase } from './bean.summerCacheBase_.js';
 
 @Bean()

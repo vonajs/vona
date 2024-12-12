@@ -2,7 +2,7 @@ import { ScopeModule, __ThisModule__ } from '../../../.metadata/this.js';
 import { BeanBase } from 'vona';
 import initData from './initData1.js';
 
-export class VersionInit extends BeanBase<ScopeModule> {
+export class VersionInit extends BeanBase {
   constructor() {
     super(__ThisModule__);
   }

@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerRender extends BeanBase<ScopeModule> {
+export class ControllerRender extends BeanBase {
   async getArticleUrl() {
     const res = await this.scope.service.render.getArticleUrl({
       atomClass: this.ctx.request.body.atomClass,

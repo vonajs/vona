@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerValidation extends BeanBase<ScopeModule> {
+export class ControllerValidation extends BeanBase {
   schema() {
     const res = this.scope.service.validation.schema(this.ctx.request.body);
     this.app.success(res);

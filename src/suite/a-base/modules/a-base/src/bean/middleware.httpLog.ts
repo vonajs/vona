@@ -1,8 +1,7 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'middleware' })
-export class MiddlewareHttpLog extends BeanBase<ScopeModule> {
+export class MiddlewareHttpLog extends BeanBase {
   async execute(_options, next) {
     await next();
 

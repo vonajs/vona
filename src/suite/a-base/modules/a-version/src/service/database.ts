@@ -1,14 +1,13 @@
 import moment from 'moment';
 import chalk from 'chalk';
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { BeanDatabaseClient } from 'vona-module-a-database';
 
 const __separator = '-';
 const __timeFormat = `YYYYMMDD${__separator}HHmmss`;
 
 @Service()
-export class ServiceDatabase extends BeanBase<ScopeModule> {
+export class ServiceDatabase extends BeanBase {
   get configDatabase() {
     return this.app.config.database;
   }

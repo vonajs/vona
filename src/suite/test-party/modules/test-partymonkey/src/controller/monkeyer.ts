@@ -1,9 +1,8 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerMonkeyer extends BeanBase<ScopeModule> {
+export class ControllerMonkeyer extends BeanBase {
   async test() {
     const config = this.$scope.testParty.config;
     this.app.success({

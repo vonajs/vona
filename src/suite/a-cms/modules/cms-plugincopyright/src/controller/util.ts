@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerUtil extends BeanBase<ScopeModule> {
+export class ControllerUtil extends BeanBase {
   async md() {
     // atomId
     const atomId = this.ctx.params.atomId;

@@ -3,7 +3,7 @@ import { Bean, BeanBase, VonaContext } from 'vona';
 import { BeanAuthProviderBase } from './bean.authProviderBase_.js';
 
 @Bean()
-export class BeanAuthProvider extends BeanBase<ScopeModule> {
+export class BeanAuthProvider extends BeanBase {
   get modelAuthProvider() {
     return this.scope.model.authProvider;
   }

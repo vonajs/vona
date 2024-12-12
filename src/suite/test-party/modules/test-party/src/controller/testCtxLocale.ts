@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestCtxLocale extends BeanBase<ScopeModule> {
+export class ControllerTestCtxLocale extends BeanBase {
   async enus() {
     const message = this.scope.config.message;
     const data = {

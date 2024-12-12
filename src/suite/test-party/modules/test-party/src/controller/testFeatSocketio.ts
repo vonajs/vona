@@ -1,11 +1,10 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 const _subscribePathTest = '/test/party/test';
 const _subscribePathSimpleChat = '/test/party/simpleChat';
 
 @Controller()
-export class ControllerTestFeatSocketio extends BeanBase<ScopeModule> {
+export class ControllerTestFeatSocketio extends BeanBase {
   async publish() {
     const options = this.ctx.request.body.options;
     const message = this.ctx.request.body.message;

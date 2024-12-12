@@ -1,8 +1,7 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'stats' })
-export class StatsDraftsCommon extends BeanBase<ScopeModule> {
+export class StatsDraftsCommon extends BeanBase {
   async execute(context) {
     const { keys, provider, user } = context;
     // params

@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 import chalk from 'chalk';
@@ -13,7 +12,7 @@ const boxenOptions = {
 } as Boxen.Options;
 
 @Bean({ scene: 'sms.provider' })
-export class SmsProviderTest extends BeanBase<ScopeModule> {
+export class SmsProviderTest extends BeanBase {
   async sendCode({ context }: any) {
     // token
     const token = this.__prefix0(parseInt(Math.random() * 10000), 4);

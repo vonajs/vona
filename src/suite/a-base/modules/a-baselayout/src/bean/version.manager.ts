@@ -2,7 +2,7 @@ import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'version' })
-export class VersionManager extends BeanBase<ScopeModule> {
+export class VersionManager extends BeanBase {
   get modelRoleRight() {
     return this.$scope.base.model.roleRight;
   }

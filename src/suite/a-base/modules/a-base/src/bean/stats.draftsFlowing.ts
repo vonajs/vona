@@ -1,8 +1,7 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'stats' })
-export class StatsDraftsFlowing extends BeanBase<ScopeModule> {
+export class StatsDraftsFlowing extends BeanBase {
   async execute(context) {
     const { user } = context;
     const modelAtom = this.scope.model.atom;

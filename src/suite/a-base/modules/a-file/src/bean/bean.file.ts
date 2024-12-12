@@ -15,7 +15,7 @@ import Mime from 'mime';
 const REGEXP_DATA_URL = /^data:([^;]+);[^,]*base64,(.*)/;
 
 @Bean()
-export class BeanFile extends BeanBase<ScopeModule> {
+export class BeanFile extends BeanBase {
   get modelFile() {
     return this.scope.model.file;
   }

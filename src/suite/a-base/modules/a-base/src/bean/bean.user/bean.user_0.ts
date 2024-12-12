@@ -5,7 +5,7 @@ import { BeanUser } from '../bean.user.js';
 
 const _usersAnonymous: any = {};
 
-export class BeanUser0 extends BeanBase<ScopeModule> {
+export class BeanUser0 extends BeanBase {
   get self() {
     return cast<BeanUser>(this);
   }

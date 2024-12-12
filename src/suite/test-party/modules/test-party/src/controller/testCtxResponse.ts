@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestCtxResponse extends BeanBase<ScopeModule> {
+export class ControllerTestCtxResponse extends BeanBase {
   async success() {
     const res = {
       userName: 'zhennann',

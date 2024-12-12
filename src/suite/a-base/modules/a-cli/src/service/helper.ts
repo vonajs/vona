@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 import * as Chalk from 'chalk';
@@ -9,7 +8,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 
 @Service()
-export class ServiceHelper extends BeanBase<ScopeModule> {
+export class ServiceHelper extends BeanBase {
   cli: any;
   ProcessHelper: any;
 

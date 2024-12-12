@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerComment extends BeanBase<ScopeModule> {
+export class ControllerComment extends BeanBase {
   async all() {
     const options = this.ctx.request.body.options;
     options.comment = 1;

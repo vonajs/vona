@@ -11,10 +11,9 @@ import {
   MetaOptionsIndexModuleIndexes,
 } from 'vona';
 import chalk from 'chalk';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Meta()
-export class MetaVersion extends BeanBase<ScopeModule> implements IMetaVersionUpdate {
+export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(_options: IMetaVersionUpdateOptions) {
     if (!this.scope.config.indexesCheck) return;
     for (const module of this.app.meta.modulesArray) {

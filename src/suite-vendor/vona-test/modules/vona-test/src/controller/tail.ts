@@ -1,9 +1,8 @@
 import { BeanBase, cast, Controller, Post } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller({ path: 'tail', meta: { mode: 'unittest' } })
-export class ControllerTail extends BeanBase<ScopeModule> {
+export class ControllerTail extends BeanBase {
   @Post()
   tail() {
     // 1

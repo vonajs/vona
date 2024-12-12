@@ -3,7 +3,7 @@ import { EntityCategory } from '../../index.js';
 import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 
-export class BeanCategory0 extends BeanBase<ScopeModule> {
+export class BeanCategory0 extends BeanBase {
   get model() {
     return this.scope.model.category;
   }

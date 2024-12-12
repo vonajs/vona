@@ -1,10 +1,9 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestEventHello extends BeanBase<ScopeModule> {
+export class ControllerTestEventHello extends BeanBase {
   async hello() {
     const data = {
       text: 'hello',

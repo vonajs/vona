@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestAtomRight extends BeanBase<ScopeModule> {
+export class ControllerTestAtomRight extends BeanBase {
   async checkRightCreate() {
     // checked by route/middleware
     this.app.success(this.ctx.request.body.atomClass);

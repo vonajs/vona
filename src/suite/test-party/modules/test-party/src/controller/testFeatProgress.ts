@@ -1,8 +1,7 @@
 import { BeanBase, Controller, sleep } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestFeatProgress extends BeanBase<ScopeModule> {
+export class ControllerTestFeatProgress extends BeanBase {
   async progress() {
     // create progress
     const progressId = await this.app.bean.progress.create();

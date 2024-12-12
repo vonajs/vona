@@ -5,7 +5,7 @@ const _cacheMessageClasses: any = {};
 const _cacheChannels: any = {};
 
 @Service()
-export class ServiceMessageClass extends BeanBase<ScopeModule> {
+export class ServiceMessageClass extends BeanBase {
   get modelMessageClass() {
     return this.scope.model.messageClass;
   }

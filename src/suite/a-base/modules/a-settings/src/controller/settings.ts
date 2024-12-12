@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerSettings extends BeanBase<ScopeModule> {
+export class ControllerSettings extends BeanBase {
   // instance
 
   instanceList() {

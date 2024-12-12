@@ -1,8 +1,7 @@
 import { BeanBase, IStartupExecute, Startup } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Startup()
-export class StartupWorkerAlive extends BeanBase<ScopeModule> implements IStartupExecute {
+export class StartupWorkerAlive extends BeanBase implements IStartupExecute {
   async execute() {
     const aliveTimeout = this.scope.config.worker.alive.timeout;
     // interval

@@ -1,10 +1,9 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 import pMap from 'p-map';
 
 @Controller()
-export class ControllerTestFeatSequence extends BeanBase<ScopeModule> {
+export class ControllerTestFeatSequence extends BeanBase {
   async sequence() {
     const arr = [1, 2, 3, 4, 5];
     let results;

@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 

@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerAuthOpen extends BeanBase<ScopeModule> {
+export class ControllerAuthOpen extends BeanBase {
   async hideClientSecret() {
     // check demo
     // this.app.bean.util.checkDemo();

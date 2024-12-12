@@ -2,7 +2,7 @@ import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 import { Bean, BeanBase, cast } from 'vona';
 
 @Bean()
-export class BeanAuthSimple extends BeanBase<ScopeModule> {
+export class BeanAuthSimple extends BeanBase {
   get modelAuthSimple() {
     return this.scope.model.authSimple;
   }

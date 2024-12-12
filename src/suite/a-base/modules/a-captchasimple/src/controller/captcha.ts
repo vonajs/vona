@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import captcha from 'trek-captcha';
 
 @Controller()
-export class ControllerCaptcha extends BeanBase<ScopeModule> {
+export class ControllerCaptcha extends BeanBase {
   async image() {
     // providerInstanceId
     const providerInstanceId = this.ctx.query.providerInstanceId;

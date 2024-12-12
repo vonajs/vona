@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTools extends BeanBase<ScopeModule> {
+export class ControllerTools extends BeanBase {
   async demo() {
     const result = await this.scope.service.tools.demo({
       method: this.ctx.params.method,

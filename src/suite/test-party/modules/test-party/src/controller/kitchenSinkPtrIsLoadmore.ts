@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 const gTestListMax = 89;
 
 @Controller()
-export class ControllerKitchenSinkPtrIsLoadmore extends BeanBase<ScopeModule> {
+export class ControllerKitchenSinkPtrIsLoadmore extends BeanBase {
   async list() {
     // page
     let page = this.ctx.request.body.page;

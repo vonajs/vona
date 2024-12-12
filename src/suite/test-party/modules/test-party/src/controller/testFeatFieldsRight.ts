@@ -1,5 +1,4 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 const __testData_allowAllFieldsRead = {
@@ -63,7 +62,7 @@ const __testData_custom_object = {
 };
 
 @Controller()
-export class ControllerTestFeatFieldsRight extends BeanBase<ScopeModule> {
+export class ControllerTestFeatFieldsRight extends BeanBase {
   async parseSchema() {
     const moduleTestFlow = this.app.meta.modules['test-flow'];
     if (!moduleTestFlow) {

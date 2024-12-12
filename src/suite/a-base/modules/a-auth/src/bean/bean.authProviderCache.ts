@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 const __authProvidersConfigCache: any = {};
@@ -6,7 +5,7 @@ const __authProvidersConfigCache_login: any = {};
 const __authProvidersConfigCache_admin: any = {};
 
 @Bean()
-export class BeanAuthProviderCache extends BeanBase<ScopeModule> {
+export class BeanAuthProviderCache extends BeanBase {
   get configModule() {
     return this.scope.config;
   }

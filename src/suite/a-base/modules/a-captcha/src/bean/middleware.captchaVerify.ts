@@ -1,8 +1,7 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 @Bean({ scene: 'middleware' })
-export class MiddlewareCaptchaVerify extends BeanBase<ScopeModule> {
+export class MiddlewareCaptchaVerify extends BeanBase {
   async execute(options, next) {
     // must exists
     const scene = options.scene;

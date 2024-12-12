@@ -1,8 +1,7 @@
 import { BeanBase, IMetaVersionUpdate, IMetaVersionUpdateOptions, Meta } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Meta()
-export class MetaVersion extends BeanBase<ScopeModule> implements IMetaVersionUpdate {
+export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
     if (options.version === 1) {
       // create table: aInstance

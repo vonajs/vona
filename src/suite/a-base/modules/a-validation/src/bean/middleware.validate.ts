@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 // request.body
@@ -6,7 +5,7 @@ import { Bean, BeanBase } from 'vona';
 //   data:
 
 @Bean({ scene: 'middleware' })
-export class MiddlewareValidate extends BeanBase<ScopeModule> {
+export class MiddlewareValidate extends BeanBase {
   async execute(options, next) {
     // must exists
     const validator = options.validator;

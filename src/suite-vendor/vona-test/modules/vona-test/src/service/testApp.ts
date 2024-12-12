@@ -1,8 +1,7 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceTestApp extends BeanBase<ScopeModule> {
+export class ServiceTestApp extends BeanBase {
   actionSync({ a, b }: any) {
     return a + b;
   }

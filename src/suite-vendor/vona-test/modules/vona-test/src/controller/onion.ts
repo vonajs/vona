@@ -1,11 +1,10 @@
 import { BeanBase, Controller, Get, Post, UseFilterGlobal, UseGuardGlobal, UseMiddleware } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { Body, Query, v } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
-export class ControllerOnion extends BeanBase<ScopeModule> {
+export class ControllerOnion extends BeanBase {
   @Get('/')
   @UseMiddleware('a-database:transaction')
   @UseGuardGlobal('a-core:user', { public: true })

@@ -1,9 +1,8 @@
 import { BeanBase, cast, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestCtxTail extends BeanBase<ScopeModule> {
+export class ControllerTestCtxTail extends BeanBase {
   async tail() {
     // 1
     cast(this.ctx.meta)._tail_test = 1;

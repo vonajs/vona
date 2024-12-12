@@ -1,10 +1,9 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 const __smsProvidersConfigCache: any = {};
 
 @Bean()
-export class BeanSmsProviderCache extends BeanBase<ScopeModule> {
+export class BeanSmsProviderCache extends BeanBase {
   get configModule() {
     return this.scope.config;
   }

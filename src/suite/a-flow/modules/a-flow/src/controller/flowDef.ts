@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerFlowDef extends BeanBase<ScopeModule> {
+export class ControllerFlowDef extends BeanBase {
   behaviorBases() {
     const res = this.scope.service.flowDef.behaviorBases();
     this.app.success(res);

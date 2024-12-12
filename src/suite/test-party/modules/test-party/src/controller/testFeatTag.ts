@@ -1,10 +1,9 @@
 import { BeanBase, Controller } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestFeatTag extends BeanBase<ScopeModule> {
+export class ControllerTestFeatTag extends BeanBase {
   async tag() {
     // atomClass
     const atomClass = {

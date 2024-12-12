@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerAuth extends BeanBase<ScopeModule> {
+export class ControllerAuth extends BeanBase {
   async list() {
     const res = await this.scope.service.auth.list();
     this.app.success(res);

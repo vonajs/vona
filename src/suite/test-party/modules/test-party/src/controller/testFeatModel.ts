@@ -1,5 +1,4 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 const atomStaticKey = '--model--test--';
@@ -10,7 +9,7 @@ const __rows = [
 ];
 
 @Controller()
-export class ControllerTestFeatModel extends BeanBase<ScopeModule> {
+export class ControllerTestFeatModel extends BeanBase {
   async model() {
     // model
     const model = this.$scope.base.model.atom;

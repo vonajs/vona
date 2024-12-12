@@ -10,7 +10,7 @@ const __atomClassUser = {
   atomClassName: 'user',
 };
 
-export class VersionUpdate extends BeanBase<ScopeModule> {
+export class VersionUpdate extends BeanBase {
   constructor() {
     super(__ThisModule__);
   }

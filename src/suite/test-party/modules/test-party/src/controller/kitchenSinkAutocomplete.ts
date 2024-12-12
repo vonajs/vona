@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import languages from './data/autocomplete-languages.json' with { type: 'json' };
 
 @Controller()
-export class ControllerKitchenSinkAutocomplete extends BeanBase<ScopeModule> {
+export class ControllerKitchenSinkAutocomplete extends BeanBase {
   async languages() {
     const query = this.ctx.params.query;
     let data;

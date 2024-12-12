@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerUtil extends BeanBase<ScopeModule> {
+export class ControllerUtil extends BeanBase {
   async performAction() {
     const res = await this.scope.service.util.performAction({
       params: JSON.parse(this.ctx.request.query.params),

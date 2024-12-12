@@ -13,7 +13,7 @@ const boxenOptions: Boxen.Options = {
 } as Boxen.Options;
 
 @Bean({ scene: 'captcha.provider' })
-export class CaptchaProviderCaptcha extends BeanBase<ScopeModule> {
+export class CaptchaProviderCaptcha extends BeanBase {
   async verify(_context) {
     const { providerInstanceId, context, data, dataInput } = _context;
     // sms provider

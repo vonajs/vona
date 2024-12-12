@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerIo extends BeanBase<ScopeModule> {
+export class ControllerIo extends BeanBase {
   async subscribe() {
     const res = await this.scope.service.io.subscribe({
       path: this.ctx.request.body.path,

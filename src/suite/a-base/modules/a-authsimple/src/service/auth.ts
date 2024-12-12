@@ -1,8 +1,7 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceAuth extends BeanBase<ScopeModule> {
+export class ServiceAuth extends BeanBase {
   // mobile: not use
   async signup({ user, state = 'login', userName, realName, email, /* mobile,*/ password }: any) {
     return await this.app.bean.authSimple.signup({ user, state, userName, realName, email, /* mobile,*/ password });

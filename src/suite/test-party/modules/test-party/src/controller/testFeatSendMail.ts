@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestFeatSendMail extends BeanBase<ScopeModule> {
+export class ControllerTestFeatSendMail extends BeanBase {
   async sendMail() {
     // send
     const message = this.ctx.request.body.data;

@@ -2,7 +2,7 @@ import { BeanBase, Service } from 'vona';
 import { ScopeModule, __ThisModule__ } from '../.metadata/this.js';
 
 @Service()
-export class ServiceDashboard extends BeanBase<ScopeModule> {
+export class ServiceDashboard extends BeanBase {
   get atomClass() {
     return {
       module: __ThisModule__,

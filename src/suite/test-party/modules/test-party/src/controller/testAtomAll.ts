@@ -3,7 +3,7 @@ import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestAtomAll extends BeanBase<ScopeModule> {
+export class ControllerTestAtomAll extends BeanBase {
   atomClass: any;
 
   async all() {

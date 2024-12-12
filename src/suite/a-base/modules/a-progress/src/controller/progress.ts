@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerProgress extends BeanBase<ScopeModule> {
+export class ControllerProgress extends BeanBase {
   async check() {
     const res = await this.scope.service.progress.check({
       progressId: this.ctx.request.body.progressId,

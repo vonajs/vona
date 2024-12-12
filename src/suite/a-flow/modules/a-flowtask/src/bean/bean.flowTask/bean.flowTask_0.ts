@@ -4,7 +4,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase } from 'vona';
 import { BeanFlowTask } from '../bean.flowTask.js';
 
-export class BeanFlowTask0 extends BeanBase<ScopeModule> {
+export class BeanFlowTask0 extends BeanBase {
   get self() {
     return cast<BeanFlowTask>(this);
   }

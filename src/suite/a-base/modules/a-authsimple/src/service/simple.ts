@@ -1,11 +1,10 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 import util from 'util';
 import passwordFn from 'password-hash-and-salt'; // should compile
 
 @Service()
-export class ServiceSimple extends BeanBase<ScopeModule> {
+export class ServiceSimple extends BeanBase {
   get modelAuthSimple() {
     return this.scope.model.authSimple;
   }

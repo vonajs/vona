@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import utils from '../common/utils.js';
 
 @Controller()
-export class ControllerSite extends BeanBase<ScopeModule> {
+export class ControllerSite extends BeanBase {
   async getConfigSiteBase() {
     const atomClass = this.ctx.request.body.atomClass;
     const data = await this.scope.service.site.getConfigSiteBase({ atomClass });

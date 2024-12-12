@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerCategory extends BeanBase<ScopeModule> {
+export class ControllerCategory extends BeanBase {
   async child() {
     const atomClass = this.ctx.request.body.atomClass;
     const res = await this.scope.service.category.child({

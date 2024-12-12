@@ -15,7 +15,7 @@ const __behaviorBaseDef = {
   type: 'base',
 };
 
-export class LocalFlowNode0 extends BeanBase<ScopeModule> {
+export class LocalFlowNode0 extends BeanBase {
   // contextEdge maybe null
   flowInstance: any;
   context: LocalContextFlow;

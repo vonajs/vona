@@ -1,9 +1,8 @@
 import { BigNumber } from 'bignumber.js';
-import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 @Service()
-export class ServiceMessage extends BeanBase<ScopeModule> {
+export class ServiceMessage extends BeanBase {
   get modelMessage() {
     return this.scope.model.message;
   }

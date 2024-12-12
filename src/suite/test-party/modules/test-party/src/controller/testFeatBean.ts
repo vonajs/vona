@@ -1,11 +1,10 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, cast, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 import { ServiceTest } from '../index.js';
 
 @Controller()
-export class ControllerTestFeatBean extends BeanBase<ScopeModule> {
+export class ControllerTestFeatBean extends BeanBase {
   async beanTest() {
     const a = 3;
     const b = 4;

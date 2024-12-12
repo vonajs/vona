@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestCacheMem extends BeanBase<ScopeModule> {
+export class ControllerTestCacheMem extends BeanBase {
   async mem() {
     let res;
     let value;

@@ -3,7 +3,7 @@ import chokidar from 'chokidar';
 import debounce from 'debounce';
 import { BeanBase, cast } from 'vona';
 
-export class Watcher extends BeanBase<ScopeModule> {
+export class Watcher extends BeanBase {
   _watchers: any;
 
   protected __init__() {

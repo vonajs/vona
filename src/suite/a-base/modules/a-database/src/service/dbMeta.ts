@@ -1,9 +1,8 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { ServiceTransaction } from './transaction.js';
 
 @Service()
-export class ServiceDbMeta extends BeanBase<ScopeModule> {
+export class ServiceDbMeta extends BeanBase {
   master: boolean;
   transaction: ServiceTransaction;
 

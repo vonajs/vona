@@ -1,10 +1,9 @@
 import { BeanBase, Service } from 'vona';
 import trimHtml from '@zhennann/trim-html';
-import { ScopeModule } from '../.metadata/this.js';
 import { Knex } from 'knex';
 
 @Service()
-export class ServiceComment extends BeanBase<ScopeModule> {
+export class ServiceComment extends BeanBase {
   get modelAtom() {
     return this.scope.model.atom;
   }

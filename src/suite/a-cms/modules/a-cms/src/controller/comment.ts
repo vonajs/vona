@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import utils from '../common/utils.js';
 
 @Controller()
-export class ControllerComment extends BeanBase<ScopeModule> {
+export class ControllerComment extends BeanBase {
   async all() {
     // atomClass
     const atomClass = utils.atomClass(this.ctx.request.body.atomClass);

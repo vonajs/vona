@@ -3,7 +3,7 @@ import { Bean, BeanBase } from 'vona';
 import { BigNumber } from 'bignumber.js';
 
 @Bean({ scene: 'stats' })
-export class StatsMessage extends BeanBase<ScopeModule> {
+export class StatsMessage extends BeanBase {
   async execute(context) {
     const { keys, user } = context;
     if (keys.length === 2) {

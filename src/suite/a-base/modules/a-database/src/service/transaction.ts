@@ -1,10 +1,9 @@
 import { BeanBase, FunctionAsync, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import knex from 'knex';
 import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 
 @Service()
-export class ServiceTransaction extends BeanBase<ScopeModule> {
+export class ServiceTransaction extends BeanBase {
   _transactionCounter: number = 0;
   _connection: knex.Knex.Transaction | null = null;
 

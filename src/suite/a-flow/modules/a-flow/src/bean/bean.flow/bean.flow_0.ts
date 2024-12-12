@@ -2,7 +2,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { BeanBase, cast } from 'vona';
 import { BeanFlow } from '../bean.flow.js';
 
-export class BeanFlow0 extends BeanBase<ScopeModule> {
+export class BeanFlow0 extends BeanBase {
   get self() {
     return cast<BeanFlow>(this);
   }

@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerAuth extends BeanBase<ScopeModule> {
+export class ControllerAuth extends BeanBase {
   // return current user auth info
   //   { op:{id},agent:{id},provider}
   async echo() {

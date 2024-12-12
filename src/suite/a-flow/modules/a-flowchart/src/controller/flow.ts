@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerFlow extends BeanBase<ScopeModule> {
+export class ControllerFlow extends BeanBase {
   async flowChartProcess() {
     const { host } = this.ctx.request.body;
     const user = this.ctx.state.user.op;

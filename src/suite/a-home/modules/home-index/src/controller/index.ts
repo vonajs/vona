@@ -1,8 +1,7 @@
 import { BeanBase, Controller, Get, UseGuardGlobal } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerIndex extends BeanBase<ScopeModule> {
+export class ControllerIndex extends BeanBase {
   @Get('//')
   @UseGuardGlobal('a-core:user', { public: true })
   index() {

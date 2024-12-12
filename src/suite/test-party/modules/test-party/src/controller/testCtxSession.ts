@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestCtxSession extends BeanBase<ScopeModule> {
+export class ControllerTestCtxSession extends BeanBase {
   async session() {
     // key1
     this.ctx.session.test_key1 = 1;

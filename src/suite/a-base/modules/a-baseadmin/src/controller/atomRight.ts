@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerAtomRight extends BeanBase<ScopeModule> {
+export class ControllerAtomRight extends BeanBase {
   async rights() {
     const page = this.ctx.request.body.page;
     const items = await this.scope.service.atomRight.rights({

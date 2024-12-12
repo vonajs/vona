@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestMultilevelAuthorizationRole extends BeanBase<ScopeModule> {
+export class ControllerTestMultilevelAuthorizationRole extends BeanBase {
   async role() {
     // userIds
     const userIds = this.ctx.cache.mem.get('userIds');

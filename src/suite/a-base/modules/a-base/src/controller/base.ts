@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import qr from 'qr-image';
 
 @Controller()
-export class ControllerBase extends BeanBase<ScopeModule> {
+export class ControllerBase extends BeanBase {
   modules() {
     const res = this.scope.service.base.modules();
     this.app.success(res);

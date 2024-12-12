@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 
 import initData from './initData2.js';
 
-export class VersionInit extends BeanBase<ScopeModule> {
+export class VersionInit extends BeanBase {
   constructor() {
     super(__ThisModule__);
   }

@@ -1,8 +1,7 @@
 import { Service, BeanBase } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceProcedure extends BeanBase<ScopeModule> {
+export class ServiceProcedure extends BeanBase {
   get modelMessageSync() {
     return this.scope.model.messageSync;
   }

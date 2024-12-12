@@ -1,10 +1,9 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 const __mailScenesConfigCache: any = {};
 
 @Bean()
-export class BeanMailSceneCache extends BeanBase<ScopeModule> {
+export class BeanMailSceneCache extends BeanBase {
   get configModule() {
     return this.scope.config;
   }

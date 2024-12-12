@@ -9,7 +9,6 @@ import {
   HttpStatus,
 } from 'vona';
 import { z } from 'zod';
-import { ScopeModule } from '../.metadata/this.js';
 import { ValidatorOptions } from '../lib/types/validatorOptions.js';
 
 export interface IPipeOptionsValid extends IDecoratorPipeOptions, ValidatorOptions {
@@ -24,7 +23,7 @@ export interface IPipeOptionsValid extends IDecoratorPipeOptions, ValidatorOptio
   passthrough: false,
   strict: false,
 })
-export class PipeValid extends BeanBase<ScopeModule> implements IPipeTransform<any> {
+export class PipeValid extends BeanBase implements IPipeTransform<any> {
   async transform(value: any, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsValid) {
     if (options.schema) {
       // validateSchema

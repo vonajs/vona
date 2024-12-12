@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
@@ -16,7 +15,7 @@ import less from 'less';
 import utils from '../common/utils.js';
 
 @Service()
-export class ServiceBuild extends BeanBase<ScopeModule> {
+export class ServiceBuild extends BeanBase {
   atomClass: any;
   default: any;
 

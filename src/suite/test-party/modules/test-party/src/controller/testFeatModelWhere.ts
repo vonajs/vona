@@ -1,5 +1,4 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 const atomStaticKey = '--modelWhere--test--';
@@ -10,7 +9,7 @@ const __rows = [
 ];
 
 @Controller()
-export class ControllerTestFeatModelWhere extends BeanBase<ScopeModule> {
+export class ControllerTestFeatModelWhere extends BeanBase {
   async modelWhere() {
     await this._modelWhere();
     this.app.success();

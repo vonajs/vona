@@ -13,7 +13,7 @@ const __atomClassAuthOpen = {
 };
 
 @Bean()
-export class BeanAuthOpen extends BeanBase<ScopeModule> {
+export class BeanAuthOpen extends BeanBase {
   get modelAuthOpen() {
     return this.scope.model.authOpen;
   }

@@ -2,7 +2,7 @@ import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
 import { Service, BeanBase } from 'vona';
 
 @Service()
-export class ServiceRender extends BeanBase<ScopeModule> {
+export class ServiceRender extends BeanBase {
   async getArticleUrl({ key: keyOuter, atomClass: atomClassOuter, options: optionsOuter }: any) {
     // atomClass
     const { key, atomClass, options } = await this.app.bean.atom._prepareKeyAndAtomAndAtomClass({

@@ -1,4 +1,3 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanModuleScopeBase } from 'vona';
 
 import { constants } from '../config/constants.js';

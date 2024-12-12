@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerFile extends BeanBase<ScopeModule> {
+export class ControllerFile extends BeanBase {
   async all() {
     const options = this.ctx.request.body.options;
     options.page = this.app.bean.util.page(options.page);

@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestResourceRight extends BeanBase<ScopeModule> {
+export class ControllerTestResourceRight extends BeanBase {
   async checkRightResourceUser() {
     // checked by route/middleware
     this.app.success();

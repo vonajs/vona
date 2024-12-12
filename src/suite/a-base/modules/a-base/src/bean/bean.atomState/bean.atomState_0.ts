@@ -3,7 +3,7 @@ import { BeanBase } from 'vona';
 import { BeanAtomState } from '../bean.atomState.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
-export class BeanAtomState0 extends BeanBase<ScopeModule> {
+export class BeanAtomState0 extends BeanBase {
   dictKeyDefault: any;
 
   constructor() {

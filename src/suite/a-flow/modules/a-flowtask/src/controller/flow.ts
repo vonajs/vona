@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerFlow extends BeanBase<ScopeModule> {
+export class ControllerFlow extends BeanBase {
   async data() {
     const res = await this.scope.service.flow.data({
       flowId: this.ctx.request.body.flowId,

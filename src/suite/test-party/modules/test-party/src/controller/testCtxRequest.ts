@@ -1,9 +1,8 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller()
-export class ControllerTestCtxRequest extends BeanBase<ScopeModule> {
+export class ControllerTestCtxRequest extends BeanBase {
   async request() {
     // param
     assert.equal(this.ctx.params.id, '1');

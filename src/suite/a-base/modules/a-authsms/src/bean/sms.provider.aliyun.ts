@@ -1,10 +1,9 @@
-import { ScopeModule } from '../.metadata/this.js';
 import { Bean, BeanBase } from 'vona';
 
 import * as PopCore from '@alicloud/pop-core';
 
 @Bean({ scene: 'sms.provider' })
-export class SmsProviderAliyun extends BeanBase<ScopeModule> {
+export class SmsProviderAliyun extends BeanBase {
   async sendCode({ providerInstanceId, context, config }: any) {
     // get
     const providerInstance = await this.app.bean.captcha.getProviderInstance({ providerInstanceId });

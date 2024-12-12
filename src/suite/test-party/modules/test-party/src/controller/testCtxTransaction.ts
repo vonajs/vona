@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestCtxTransaction extends BeanBase<ScopeModule> {
+export class ControllerTestCtxTransaction extends BeanBase {
   async transaction() {
     // user
     const user = this.ctx.state.user.op;

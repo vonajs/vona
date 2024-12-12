@@ -1,9 +1,8 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerSmsProvider extends BeanBase<ScopeModule> {
+export class ControllerSmsProvider extends BeanBase {
   async list() {
     // check demo
     this.app.bean.util.checkDemo();

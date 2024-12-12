@@ -1,5 +1,4 @@
 import { Aop, BeanBase } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 const __atomClassApp = {
   module: 'a-app',
@@ -7,7 +6,7 @@ const __atomClassApp = {
 };
 
 @Aop({ match: 'category' })
-export class AopCategory extends BeanBase<ScopeModule> {
+export class AopCategory extends BeanBase {
   async children(context, next) {
     // next
     await next();

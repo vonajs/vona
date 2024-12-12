@@ -1,10 +1,9 @@
 import { BeanBase, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 const __appKeyDefault = 'a-app:appDefault';
 
 @Service()
-export class ServiceUser extends BeanBase<ScopeModule> {
+export class ServiceUser extends BeanBase {
   async save({ data, user }: any) {
     // id
     data.id = user.id;

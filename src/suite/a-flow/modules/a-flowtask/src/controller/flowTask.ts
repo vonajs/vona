@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerFlowTask extends BeanBase<ScopeModule> {
+export class ControllerFlowTask extends BeanBase {
   // options
   //   where, orders, page, history
   async select() {

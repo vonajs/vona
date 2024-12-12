@@ -1,8 +1,7 @@
 import { BeanBase, Controller } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Controller()
-export class ControllerTestFeatMiddleware extends BeanBase<ScopeModule> {
+export class ControllerTestFeatMiddleware extends BeanBase {
   async interception() {
     const { a, b } = this.ctx.request.body;
     const c = parseInt(a) + parseInt(b);
