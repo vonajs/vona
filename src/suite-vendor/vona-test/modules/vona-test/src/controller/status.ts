@@ -1,9 +1,8 @@
 import { BeanBase, Controller, Post } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller({ path: 'status', meta: { mode: 'unittest' } })
-export class ControllerStatus extends BeanBase<ScopeModule> {
+export class ControllerStatus extends BeanBase {
   @Post()
   async status() {
     // get

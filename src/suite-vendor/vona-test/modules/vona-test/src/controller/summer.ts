@@ -1,10 +1,10 @@
 import { BeanBase, Controller, Post, retry, sleep } from 'vona';
-import { __ThisModule__, ScopeModule } from '../.metadata/this.js';
+import { __ThisModule__ } from '../.metadata/this.js';
 import assert from 'assert';
 import { SummerCacheTest } from '../bean/summerCache.test.js';
 
 @Controller({ path: 'summer', meta: { mode: 'unittest' } })
-export class ControllerSummer extends BeanBase<ScopeModule> {
+export class ControllerSummer extends BeanBase {
   @Post()
   async test() {
     // name

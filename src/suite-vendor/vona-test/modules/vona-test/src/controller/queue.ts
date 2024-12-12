@@ -1,9 +1,8 @@
 import { BeanBase, Controller, Post } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import assert from 'assert';
 
 @Controller({ path: 'queue', meta: { mode: 'unittest' } })
-export class ControllerQueue extends BeanBase<ScopeModule> {
+export class ControllerQueue extends BeanBase {
   @Post('pushAsync')
   async pushAsync() {
     const res = await this.scope.queue.test.pushAsync({ a: 1, b: 2 });
