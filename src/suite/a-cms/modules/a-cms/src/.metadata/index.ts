@@ -136,12 +136,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** meta: end */
-/** meta: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-export interface IModuleMeta {
-  status: MetaStatus;
-}
-/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.registerAllWatchers.js';
 
@@ -155,12 +149,6 @@ declare module 'vona-module-a-cms' {
   export interface StartupRegisterAllWatchers {
     get scope(): ScopeModuleACms;
   }
-}
-/** startup: end */
-/** startup: begin */
-import { StartupRegisterAllWatchers } from '../bean/startup.registerAllWatchers.js';
-export interface IModuleStartup {
-  registerAllWatchers: StartupRegisterAllWatchers;
 }
 /** startup: end */
 /** queue: begin */
@@ -292,23 +280,7 @@ export interface ScopeModuleACms {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
-  queue: IModulequeue;
-  schedule: IModuleschedule;
+  queue: IModuleQueue;
 }
 
 import 'vona';

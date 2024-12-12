@@ -31,7 +31,7 @@ export interface ScopeModuleARedlock {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

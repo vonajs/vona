@@ -138,7 +138,7 @@ export interface ScopeModuleADatabase {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -7,7 +7,7 @@ export class ScopeModuleASwagger extends BeanScopeBase {}
 export interface ScopeModuleASwagger {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

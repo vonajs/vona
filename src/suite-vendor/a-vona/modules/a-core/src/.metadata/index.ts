@@ -82,7 +82,7 @@ export interface ScopeModuleACore {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

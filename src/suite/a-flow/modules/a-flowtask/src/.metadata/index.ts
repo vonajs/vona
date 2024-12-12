@@ -143,12 +143,6 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** meta: end */
-/** meta: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-export interface IModuleMeta {
-  redlock: MetaRedlock;
-}
-/** meta: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -277,23 +271,7 @@ export interface ScopeModuleAFlowtask {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
-  queue: IModulequeue;
-  schedule: IModuleschedule;
+  queue: IModuleQueue;
 }
 
 import 'vona';

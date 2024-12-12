@@ -31,7 +31,7 @@ export interface ScopeModuleAQueue {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -51,7 +51,7 @@ export interface ScopeModuleAValidator {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

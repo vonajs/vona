@@ -62,7 +62,7 @@ export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

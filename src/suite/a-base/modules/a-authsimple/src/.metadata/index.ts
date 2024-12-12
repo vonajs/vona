@@ -162,7 +162,7 @@ export interface ScopeModuleAAuthsimple {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -37,12 +37,6 @@ declare module 'vona-module-a-validation' {
   }
 }
 /** middleware: end */
-/** middleware: begin */
-import { MiddlewareValidate } from '../bean/middleware.validate.js';
-export interface IModuleMiddleware {
-  validate: MiddlewareValidate;
-}
-/** middleware: end */
 /** controller: begin */
 export * from '../controller/validation.js';
 
@@ -114,23 +108,7 @@ export interface ScopeModuleAValidation {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
-  queue: IModulequeue;
-  schedule: IModuleschedule;
+  queue: IModuleQueue;
 }
 
 import 'vona';

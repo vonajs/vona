@@ -36,14 +36,6 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** aop: end */
-/** aop: begin */
-import { AopRegExp } from '../bean/aop.regExp.js';
-import { AopSimple } from '../bean/aop.simple.js';
-export interface IModuleAop {
-  regExp: AopRegExp;
-  simple: AopSimple;
-}
-/** aop: end */
 /** controller: begin */
 export * from '../controller/bean.js';
 export * from '../controller/onion.js';
@@ -116,12 +108,6 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** meta: end */
-/** meta: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-export interface IModuleMeta {
-  status: MetaStatus;
-}
-/** meta: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
@@ -135,12 +121,6 @@ declare module 'vona-module-vona-test' {
   export interface SummerCacheTest {
     get scope(): ScopeModuleVonaTest;
   }
-}
-/** summerCache: end */
-/** summerCache: begin */
-import { SummerCacheTest } from '../bean/summerCache.test.js';
-export interface IModuleSummerCache {
-  test: SummerCacheTest;
 }
 /** summerCache: end */
 /** queue: begin */
@@ -177,12 +157,6 @@ declare module 'vona-module-vona-test' {
   export interface ScheduleTest {
     get scope(): ScopeModuleVonaTest;
   }
-}
-/** schedule: end */
-/** schedule: begin */
-import { ScheduleTest } from '../bean/schedule.test.js';
-export interface IModuleSchedule {
-  test: ScheduleTest;
 }
 /** schedule: end */
 /** dtos: begin */
@@ -259,23 +233,7 @@ export interface ScopeModuleVonaTest {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
-  queue: IModulequeue;
-  schedule: IModuleschedule;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -116,7 +116,7 @@ export interface ScopeModuleASequence {
   redlock: MetaRedlock;
   service: IModuleService;
   entity: IModuleEntity;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

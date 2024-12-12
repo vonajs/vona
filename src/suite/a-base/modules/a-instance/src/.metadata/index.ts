@@ -157,7 +157,7 @@ export interface ScopeModuleAInstance {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

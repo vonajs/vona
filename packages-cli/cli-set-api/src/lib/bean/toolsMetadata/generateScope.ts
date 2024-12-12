@@ -1,3 +1,4 @@
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { relativeNameToCapitalize } from 'vona';
 
 export interface GenerateScopeOptions {
@@ -66,7 +67,8 @@ export async function generateScope(
   }
   // loop
   for (const sceneName in scopeResources) {
-    contentRecords.push(`${sceneName}: IModule${sceneName};`);
+    const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
+    contentRecords.push(`${sceneName}: IModule${sceneNameCapitalize};`);
   }
   // combine
   const content = `/** scope: begin */

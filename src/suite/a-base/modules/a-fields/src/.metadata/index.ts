@@ -44,14 +44,6 @@ declare module 'vona-module-a-fields' {
   }
 }
 /** summerCache: end */
-/** summerCache: begin */
-import { SummerCacheFieldsRightOfAtomClass } from '../bean/summerCache.fieldsRightOfAtomClass.js';
-import { SummerCacheFieldsRightOfUser } from '../bean/summerCache.fieldsRightOfUser.js';
-export interface IModuleSummerCache {
-  fieldsRightOfAtomClass: SummerCacheFieldsRightOfAtomClass;
-  fieldsRightOfUser: SummerCacheFieldsRightOfUser;
-}
-/** summerCache: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -83,23 +75,7 @@ export interface ScopeModuleAFields {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
-  queue: IModulequeue;
-  schedule: IModuleschedule;
+  queue: IModuleQueue;
 }
 
 import 'vona';

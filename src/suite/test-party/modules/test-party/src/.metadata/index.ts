@@ -141,14 +141,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** middleware: end */
-/** middleware: begin */
-import { MiddlewareTestInterception } from '../bean/middleware.testInterception.js';
-import { MiddlewareTestRestructuring } from '../bean/middleware.testRestructuring.js';
-export interface IModuleMiddleware {
-  testInterception: MiddlewareTestInterception;
-  testRestructuring: MiddlewareTestRestructuring;
-}
-/** middleware: end */
 /** aop: begin */
 export * from '../bean/aop.atom.js';
 
@@ -162,12 +154,6 @@ declare module 'vona-module-test-party' {
   export interface AopAtom {
     get scope(): ScopeModuleTestParty;
   }
-}
-/** aop: end */
-/** aop: begin */
-import { AopAtom } from '../bean/aop.atom.js';
-export interface IModuleAop {
-  atom: AopAtom;
 }
 /** aop: end */
 /** entity: begin */
@@ -504,14 +490,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** startup: end */
-/** startup: begin */
-import { StartupStartupAll } from '../bean/startup.startupAll.js';
-import { StartupStartupInstance } from '../bean/startup.startupInstance.js';
-export interface IModuleStartup {
-  startupAll: StartupStartupAll;
-  startupInstance: StartupStartupInstance;
-}
-/** startup: end */
 /** entities: begin */
 import { EntityParty } from '../entity/party.js';
 import { EntityPartyExpense } from '../entity/partyExpense.js';
@@ -597,23 +575,7 @@ export interface ScopeModuleTestParty {
   service: IModuleService;
   model: IModuleModel;
   entity: IModuleEntity;
-  atom: IModuleatom;
-  middleware: IModulemiddleware;
-  guard: IModuleguard;
-  interceptor: IModuleinterceptor;
-  pipe: IModulepipe;
-  filter: IModulefilter;
-  socketConnection: IModulesocketConnection;
-  socketPacket: IModulesocketPacket;
-  aop: IModuleaop;
-  entity: IModuleentity;
-  model: IModulemodel;
-  controller: IModulecontroller;
-  meta: IModulemeta;
-  summerCache: IModulesummerCache;
-  startup: IModulestartup;
-  queue: IModulequeue;
-  schedule: IModuleschedule;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -130,7 +130,7 @@ export interface ScopeModuleACache {
   config: TypeModuleConfig<typeof config>;
   redlock: MetaRedlock;
   entity: IModuleEntity;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';

@@ -89,7 +89,7 @@ export interface ScopeModuleAStatus {
   redlock: MetaRedlock;
   model: IModuleModel;
   entity: IModuleEntity;
-  queue: IModulequeue;
+  queue: IModuleQueue;
 }
 
 import 'vona';
