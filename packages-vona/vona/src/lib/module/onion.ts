@@ -14,7 +14,6 @@ import {
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
-  IDecoratorSummerCacheOptions,
   IEntityRecord,
   IFilterRecord,
   IGuardRecord,
@@ -63,9 +62,5 @@ function loadAll(app: VonaApplication) {
     'controller',
   );
   app.meta.onionMeta = app.bean._newBean(Onion<IDecoratorMetaOptions, keyof IMetaRecord>, 'meta');
-  app.meta.onionSummerCache = app.bean._newBean(
-    Onion<IDecoratorSummerCacheOptions, keyof ISummerCacheRecord>,
-    'summerCache',
-  );
   app.meta.onionStartup = app.bean._newBean(Onion<IDecoratorStartupOptions, keyof IStartupRecord>, 'startup');
 }

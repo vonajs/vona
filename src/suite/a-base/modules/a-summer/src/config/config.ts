@@ -1,10 +1,5 @@
-import {
-  VonaApplication,
-  IModuleConfigBroadcast,
-  IMiddlewareOptionsMeta,
-  TSummerCachePreset,
-  IDecoratorSummerCacheOptions,
-} from 'vona';
+import { VonaApplication, IModuleConfigBroadcast, IMiddlewareOptionsMeta } from 'vona';
+import { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
 
 // broadcasts
 const broadcasts = {

@@ -20,7 +20,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'filter'
   | 'socketConnection'
   | 'socketPacket'
-  | 'summerCache'
   | 'startup'
   | 'meta'
   | keyof ISceneCustomRecord

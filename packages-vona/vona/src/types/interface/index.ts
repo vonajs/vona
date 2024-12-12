@@ -14,4 +14,3 @@ export * from './pipe.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';
 export * from './startup.js';
-export * from './summerCache.js';
