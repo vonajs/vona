@@ -1,9 +1,8 @@
 import { BeanBase, cast, IDecoratorScheduleOptions, IScheduleRecord, Service } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { IScheduleExecute, TypeScheduleJob } from '../types/schedule.js';
 
 @Service()
-export class ServiceSchedule extends BeanBase<ScopeModule> {
+export class ServiceSchedule extends BeanBase {
   async execute(scheduleName: keyof IScheduleRecord, job?: TypeScheduleJob) {
     // ignore on test
     if (this.app.meta.isTest) return;

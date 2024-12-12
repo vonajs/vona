@@ -1,5 +1,4 @@
 import { IScheduleRecord, Queue } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { BeanQueueBase, IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
 import { TypeScheduleJob } from '../types/schedule.js';
 
@@ -11,7 +10,7 @@ export type TypeQueueScheduleJobResult = void;
 
 @Queue()
 export class QueueSchedule
-  extends BeanQueueBase<ScopeModule, TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
+  extends BeanQueueBase<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
   implements IQueueExecute<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
 {
   async execute(

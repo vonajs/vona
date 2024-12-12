@@ -9,10 +9,9 @@ import {
 } from 'vona';
 import path from 'path';
 import fse from 'fs-extra';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Service()
-export class ServiceStartup extends BeanBase<ScopeModule> {
+export class ServiceStartup extends BeanBase {
   async versionReady() {
     // clear keys
     await this._clearResources();

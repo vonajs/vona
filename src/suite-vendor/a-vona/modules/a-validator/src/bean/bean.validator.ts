@@ -1,12 +1,11 @@
 import { Bean, BeanBase, Constructable, HttpStatus, isNil } from 'vona';
-import { ScopeModule } from '../.metadata/this.js';
 import { z } from 'zod';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { ValidatorOptions } from '../lib/types/validatorOptions.js';
 import { schema } from '../lib/schema/schema.js';
 
 @Bean()
-export class BeanValidator extends BeanBase<ScopeModule> {
+export class BeanValidator extends BeanBase {
   async validate<T, V = T>(
     classType: Constructable<T>,
     value: V,
