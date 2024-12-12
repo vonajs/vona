@@ -12,7 +12,6 @@ export * from './module.js';
 export * from './monkey.js';
 export * from './pipe.js';
 export * from './queue.js';
-export * from './schedule.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';
 export * from './startup.js';
