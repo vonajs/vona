@@ -1,11 +1,12 @@
 import path from 'path';
 import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
-import { checkIgnoreOfParts } from './utils.js';
+import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { OnionSceneMeta, onionScenesMeta } from 'vona-shared';
 
 export async function generateOnions(sceneName: string, moduleName: string, modulePath: string) {
+  const scopeModuleName = getScopeModuleName(moduleName);
   const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = sceneMeta.sceneIsolate
@@ -15,6 +16,8 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
+  const contentScopesImports: string[] = [];
+  const contentScopes: string[] = [];
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
   const contentRecordsLocal: string[] = [];
@@ -28,10 +31,16 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
     const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
-    // const className = parts.map(item => toUpperCaseFirstChar(item)).join('');
+    const className =
+      (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
+    contentScopesImports.push(`import { ${className} } from '${fileNameJSRelative}';`);
+    contentScopes.push(`
+    export interface ${className} {
+      get scope(): ${scopeModuleName};
+    }`);
     if (isIgnore) continue;
     const fileInfo = _extractInfo(sceneName, file, sceneMeta);
     // import options
@@ -75,11 +84,15 @@ export interface I${sceneNameCapitalize}RecordLocal {
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
+${contentScopesImports.join('\n')}
 ${contentImports.join('\n')}
 ${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from 'vona';` : "import 'vona';"}
 declare module 'vona' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
+}
+declare module 'vona-module-${moduleName}' {
+  ${contentScopes.join('\n')} 
 }
 /** ${sceneName}: end */
 `;

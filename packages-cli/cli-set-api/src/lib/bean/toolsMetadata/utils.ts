@@ -1,3 +1,5 @@
+import { stringToCapitalize } from '@cabloy/word-utils';
+
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
   if (parts[indexLast].endsWith('_')) {
@@ -5,4 +7,8 @@ export function checkIgnoreOfParts(parts: string[]) {
     return true;
   }
   return false;
+}
+
+export function getScopeModuleName(moduleName: string) {
+  return `ScopeModule${stringToCapitalize(moduleName, '-')}`;
 }

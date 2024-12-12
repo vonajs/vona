@@ -16,14 +16,10 @@ declare module 'vona' {
     'a-instance.broadcast.resetCache': BroadcastResetCache;
   }
 }
-declare module 'vona-module-a-instance' {
-  export interface BeanInstance {
-    get scope(): ScopeModuleAInstance;
-  }
-}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/instance.js';
+import { EntityInstance } from '../entity/instance.js';
 
 import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
@@ -31,9 +27,15 @@ declare module 'vona' {
     'a-instance:instance': IDecoratorEntityOptions;
   }
 }
+declare module 'vona-module-a-instance' {
+  export interface EntityInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/instance.js';
+import { ModelInstance } from '../model/instance.js';
 
 import { IDecoratorModelOptions } from 'vona';
 declare module 'vona' {
@@ -41,11 +43,19 @@ declare module 'vona' {
     'a-instance:instance': IDecoratorModelOptions;
   }
 }
+declare module 'vona-module-a-instance' {
+  export interface ModelInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+}
 /** model: end */
 /** meta: begin */
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.version.js';
+import { MetaIndex } from '../bean/meta.index.js';
+import { MetaRedlock } from '../bean/meta.redlock.js';
+import { MetaVersion } from '../bean/meta.version.js';
 import { IMetaOptionsIndex } from 'vona';
 import 'vona';
 declare module 'vona' {
@@ -53,6 +63,19 @@ declare module 'vona' {
     'a-instance:index': IMetaOptionsIndex;
     'a-instance:redlock': never;
     'a-instance:version': never;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface MetaIndex {
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface MetaVersion {
+    get scope(): ScopeModuleAInstance;
   }
 }
 /** meta: end */

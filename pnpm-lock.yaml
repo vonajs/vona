@@ -673,8 +673,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/process-helper
       '@cabloy/word-utils':
-        specifier: ^1.0.3
-        version: 1.0.6
+        specifier: ^1.0.7
+        version: 1.0.7
       '@npmcli/config':
         specifier: ^8.3.4
         version: 8.3.4(bluebird@3.7.2)
@@ -740,8 +740,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/module-info
       '@cabloy/word-utils':
-        specifier: ^1.0.3
-        version: 1.0.6
+        specifier: ^1.0.7
+        version: 1.0.7
       compressing:
         specifier: ^1.10.0
         version: 1.10.1
@@ -1033,8 +1033,8 @@ importers:
   packages-utils/zod-errors-custom:
     dependencies:
       '@cabloy/word-utils':
-        specifier: ^1.0.5
-        version: 1.0.6
+        specifier: ^1.0.7
+        version: 1.0.7
 
   packages-utils/zod-query: {}
 
@@ -1087,8 +1087,8 @@ importers:
         specifier: ^1.0.7
         version: link:../../packages-utils/set
       '@cabloy/word-utils':
-        specifier: ^1.0.2
-        version: 1.0.6
+        specifier: ^1.0.7
+        version: 1.0.7
       '@types/redlock':
         specifier: ^4.0.7
         version: 4.0.7
@@ -3077,8 +3077,8 @@ packages:
     resolution: {integrity: sha512-qKYqaHk5A74ASLvXd7/WhicgHfOsOvVrZNEdGaynjnvcswWfhKYdxtwS6CJig7YsE4gaOCFT2MEXFn3RXdt+fA==}
     engines: {node: '>= 7.6.0'}
 
-  '@cabloy/word-utils@1.0.6':
-    resolution: {integrity: sha512-0Up+v47se3I1nRLSGMFf8qKKz76iks0sJH1wSPqyN384X+Qoa/ZhtOMAYdduTTgwnsgO/DMP7B7Dz0xwkbSOEQ==}
+  '@cabloy/word-utils@1.0.7':
+    resolution: {integrity: sha512-mXMbPm3NrwzhMjZfmf3VESbG9QaRPrmf7xLjaIaJt5AAe+Zk2+/+QyaZoLSwM+z0ok9rsa3YIHkvz4gHKDW8HA==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -3658,28 +3658,24 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.10.1':
     resolution: {integrity: sha512-x0L2Pd9weQ6n8dI1z1Isq00VHFvpBClwQJvrt3NHzmR+1wCT/gcYl1tp9P5xHh3ldM8Cn4UjWCw+7PaUgg8FcQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.10.1':
     resolution: {integrity: sha512-yyYEwQcObV3AUsC79rSzN9z6kiWxKAVJ6Ntwq2N9YoZqSPYph+4/Am5fM1xEQYf/kb99csj0FgOelomJSobxQA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.10.1':
     resolution: {integrity: sha512-tcaS43Ydd7Fk7sW5ROpaf2Kq1zR+sI5K0RM+0qYLYYurvsJruj3GhBCaiN3gkzd8m/8wkqNqtVklWaQYSDsyqA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.10.1':
     resolution: {integrity: sha512-D3Qo1voA7AkbOzQ2UGuKNHfYGKL6eejN8VWOoQYtGHHQi1p5KK/Q7V1ku55oxXBsj79Ny5FRMqiRJpVGad7bjQ==}
@@ -10893,7 +10889,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@cabloy/word-utils@1.0.6': {}
+  '@cabloy/word-utils@1.0.7': {}
 
   '@colors/colors@1.5.0':
     optional: true
