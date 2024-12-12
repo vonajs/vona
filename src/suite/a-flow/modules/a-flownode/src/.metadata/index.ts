@@ -60,7 +60,7 @@ declare module 'vona-module-a-flownode' {
 /** queue: begin */
 export * from '../bean/queue.startEventTimer.js';
 
-import { IDecoratorQueueOptions } from 'vona';
+import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-flownode:startEventTimer': IDecoratorQueueOptions;

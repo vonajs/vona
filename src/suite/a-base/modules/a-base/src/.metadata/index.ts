@@ -787,7 +787,7 @@ declare module 'vona-module-a-base' {
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
 
-import { IDecoratorQueueOptions } from 'vona';
+import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-base:roleBuild': IDecoratorQueueOptions;

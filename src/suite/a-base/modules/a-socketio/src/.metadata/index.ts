@@ -159,7 +159,7 @@ export * from '../bean/queue.process.js';
 export * from '../bean/queue.push.js';
 export * from '../bean/queue.pushDirect.js';
 
-import { IDecoratorQueueOptions } from 'vona';
+import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-socketio:delivery': IDecoratorQueueOptions;

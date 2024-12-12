@@ -81,7 +81,7 @@ declare module 'vona-module-a-stats' {
 /** queue: begin */
 export * from '../bean/queue.stats.js';
 
-import { IDecoratorQueueOptions } from 'vona';
+import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-stats:stats': IDecoratorQueueOptions;

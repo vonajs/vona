@@ -39,7 +39,7 @@ declare module 'vona-module-a-flowgateway' {
 /** queue: begin */
 export * from '../bean/queue.gateway.js';
 
-import { IDecoratorQueueOptions } from 'vona';
+import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona' {
   export interface IQueueRecord {
     'a-flowgateway:gateway': IDecoratorQueueOptions;
