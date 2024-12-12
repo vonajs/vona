@@ -22,7 +22,7 @@ export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
     for (const edgeInstance of edgeInstances) {
       // check if end
       if (this.context._flow.flowStatus !== this.constant.flow.status.flowing) {
-        this.scope.error.FlowCompleted__.throw(this.context._flowId);
+        this.self.scope.error.FlowCompleted__.throw(this.context._flowId);
       }
       // enter
       const resEnter = await edgeInstance.enter();
@@ -45,7 +45,7 @@ export class LocalFlowFlowNextEdges extends LocalFlowFlowEndFlow {
     if (resBingo) return true;
     // should throw exception
     //   should has a default edge(_calcConditionExpressionLevel===3), which is followed by endEventNone
-    this.scope.error.NoMatchedFlowEdge__.throw(contextNode._flowNodeId);
+    this.self.scope.error.NoMatchedFlowEdge__.throw(contextNode._flowNodeId);
     // return false;
   }
 

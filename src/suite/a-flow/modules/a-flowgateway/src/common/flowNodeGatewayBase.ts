@@ -31,7 +31,7 @@ export class FlowNodeGatewayBase extends BeanFlowNodeBase {
     };
     // jump out of the transaction
     this.ctx.tail(async () => {
-      await this.scope.queue.gateway.pushAsync(data, {
+      await this.$scope.flowgateway.queue.gateway.pushAsync(data, {
         queueNameSub: `${flowId}:${nodeDefId}:${behaviorDefId || ''}`,
       });
     });

@@ -33,19 +33,19 @@ export class LocalFlowFlow0 extends BeanBase {
     return this.$scope.base.model.atom;
   }
   get modelFlow() {
-    return this.scope.model.flow;
+    return this.self.scope.model.flow;
   }
   get modelFlowHistory() {
-    return this.scope.model.flowHistory;
+    return this.self.scope.model.flowHistory;
   }
   get modelFlowNode() {
-    return this.scope.model.flowNode;
+    return this.self.scope.model.flowNode;
   }
   get modelFlowNodeHistory() {
-    return this.scope.model.flowNodeHistory;
+    return this.self.scope.model.flowNodeHistory;
   }
   get constant() {
-    return this.scope.constant;
+    return this.self.scope.constant;
   }
 
   async start({ flowName, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
@@ -204,7 +204,7 @@ export class LocalFlowFlow0 extends BeanBase {
 
   async _loadNodeInstance({ flowNode, history }: any) {
     const nodeDef = this._findNodeDef({ nodeDefId: flowNode.flowNodeDefId });
-    if (!nodeDef) this.scope.error.FlowNodeDefinitionNotFound__.throw(flowNode.flowNodeDefId);
+    if (!nodeDef) this.self.scope.error.FlowNodeDefinitionNotFound__.throw(flowNode.flowNodeDefId);
     const node = this._createNodeInstance2({ nodeDef });
     await node._load({ flowNode, history });
     return node;

@@ -10,7 +10,7 @@ export class LocalFlowFlowEndFlow extends LocalFlowFlowAssignees {
     const timeEnd = new Date();
     // check if end
     if (this.context._flow.flowStatus === flowStatus) {
-      this.scope.error.FlowCompleted__.throw(flowId);
+      this.self.scope.error.FlowCompleted__.throw(flowId);
     }
     // handle atom
     await this._endFlow_handleAtom(options);
