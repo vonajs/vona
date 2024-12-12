@@ -16,7 +16,6 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
-  const contentScopesImports: string[] = [];
   const contentScopes: string[] = [];
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
@@ -36,7 +35,6 @@ export async function generateOnions(sceneName: string, moduleName: string, modu
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
-    contentScopesImports.push(`import { ${className} } from '${fileNameJSRelative}';`);
     contentScopes.push(`
     export interface ${className} {
       get scope(): ${scopeModuleName};
@@ -84,7 +82,6 @@ export interface I${sceneNameCapitalize}RecordLocal {
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
-${contentScopesImports.join('\n')}
 ${contentImports.join('\n')}
 ${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from 'vona';` : "import 'vona';"}
 declare module 'vona' {

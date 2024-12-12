@@ -1,9 +1,10 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { checkIgnoreOfParts } from './utils.js';
+import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
 
 export async function generateBeans(moduleName: string, modulePath: string) {
+  const scopeModuleName = getScopeModuleName(moduleName);
   const pattern = `${modulePath}/src/bean/*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern, {
     ignore: [
@@ -25,6 +26,7 @@ export async function generateBeans(moduleName: string, modulePath: string) {
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
+  const contentScopes: string[] = [];
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
   const contentRecordsGeneral: string[] = [];
@@ -43,6 +45,10 @@ export async function generateBeans(moduleName: string, modulePath: string) {
     const beanFullName = isBeanGlobal ? parts[1] : `${moduleName}.${parts.join('.')}`;
     if (className === 'BeanBase') className = 'BeanBase2';
     contentExports.push(`export * from '../bean/${fileNameJS}';`);
+    contentScopes.push(`
+      export interface ${className} {
+        get scope(): ${scopeModuleName};
+      }`);
     if (isBeanGlobal || !isIgnore) {
       contentImports.push(`import { ${className} } from '../bean/${fileNameJS}';`);
     }
@@ -66,6 +72,9 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     ${contentRecordsGeneral.join('\n')}
   }
+}
+declare module 'vona-module-${moduleName}' {
+  ${contentScopes.join('\n')} 
 }
 /** beans: end */
 `;

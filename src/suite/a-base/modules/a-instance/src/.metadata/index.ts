@@ -16,10 +16,22 @@ declare module 'vona' {
     'a-instance.broadcast.resetCache': BroadcastResetCache;
   }
 }
+declare module 'vona-module-a-instance' {
+  export interface BeanInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface BroadcastReload {
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface BroadcastResetCache {
+    get scope(): ScopeModuleAInstance;
+  }
+}
 /** beans: end */
 /** entity: begin */
 export * from '../entity/instance.js';
-import { EntityInstance } from '../entity/instance.js';
 
 import { IDecoratorEntityOptions } from 'vona';
 declare module 'vona' {
@@ -35,7 +47,6 @@ declare module 'vona-module-a-instance' {
 /** entity: end */
 /** model: begin */
 export * from '../model/instance.js';
-import { ModelInstance } from '../model/instance.js';
 
 import { IDecoratorModelOptions } from 'vona';
 declare module 'vona' {
@@ -53,9 +64,6 @@ declare module 'vona-module-a-instance' {
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.version.js';
-import { MetaIndex } from '../bean/meta.index.js';
-import { MetaRedlock } from '../bean/meta.redlock.js';
-import { MetaVersion } from '../bean/meta.version.js';
 import { IMetaOptionsIndex } from 'vona';
 import 'vona';
 declare module 'vona' {
