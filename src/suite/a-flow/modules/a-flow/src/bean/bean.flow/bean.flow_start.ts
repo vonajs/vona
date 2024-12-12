@@ -7,16 +7,16 @@ export class BeanFlowStart extends BeanFlowQuery {
     const { fullKey } = this.app.bean.flowDef._combineFullKey({ flowDefKey });
     // get flow def
     const flowDef = await this.app.bean.flowDef.getByKey({ flowDefKey });
-    if (!flowDef) this.scope.error.FlowDefinitionNotFound__.throw(fullKey);
-    if (flowDef.atomDisabled === 1) this.scope.error.FlowDefinitionDisabled__.throw(fullKey);
+    if (!flowDef) this.self.scope.error.FlowDefinitionNotFound__.throw(fullKey);
+    if (flowDef.atomDisabled === 1) this.self.scope.error.FlowDefinitionDisabled__.throw(fullKey);
     return await this._start({ flowDef, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId });
   }
 
   async startById({ flowDefId, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId }: any) {
     // get flow def
     const flowDef = await this.app.bean.flowDef.getById({ flowDefId });
-    if (!flowDef) this.scope.error.FlowDefinitionNotFound__.throw(flowDefId);
-    if (flowDef.atomDisabled === 1) this.scope.error.FlowDefinitionDisabled__.throw(flowDef.atomStaticKey);
+    if (!flowDef) this.self.scope.error.FlowDefinitionNotFound__.throw(flowDefId);
+    if (flowDef.atomDisabled === 1) this.self.scope.error.FlowDefinitionDisabled__.throw(flowDef.atomStaticKey);
     return await this._start({ flowDef, flowAtomId, flowAtomClassId, flowVars, flowUserId, startEventId });
   }
 

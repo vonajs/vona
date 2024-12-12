@@ -8,13 +8,13 @@ export class BeanFlowDef0 extends BeanBase {
   }
 
   get modelFlowDef() {
-    return this.scope.model.flowDef;
+    return this.self.scope.model.flowDef;
   }
   get modelFlowDefContent() {
-    return this.scope.model.flowDefContent;
+    return this.self.scope.model.flowDefContent;
   }
   get modelFlowDefFull() {
-    return this.scope.model.flowDefFull;
+    return this.self.scope.model.flowDefFull;
   }
   get atomClass() {
     return {

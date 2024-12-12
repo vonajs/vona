@@ -14,7 +14,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     }
     if (!flow) {
       if (throwError) {
-        this.scope.error.FlowNotFound__.throw(flowId);
+        this.self.scope.error.FlowNotFound__.throw(flowId);
       } else {
         return null;
       }
@@ -24,7 +24,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
       flowDefKey: flow.flowDefKey,
       flowDefRevision: flow.flowDefRevision,
     });
-    if (!flowDef) this.scope.error.FlowDefinitionNotFound__.throw(flow.flowDefId);
+    if (!flowDef) this.self.scope.error.FlowDefinitionNotFound__.throw(flow.flowDefId);
     // not check atomDisabled
     // flowInstance
     const flowInstance = this.self._createFlowInstance({ flowDef });
@@ -47,7 +47,7 @@ export class BeanFlowLoad extends BeanFlowAssignees {
     }
     if (!flowNode) {
       if (throwError) {
-        this.scope.error.FlowNodeNotFound__.throw(flowNodeId);
+        this.self.scope.error.FlowNodeNotFound__.throw(flowNodeId);
       } else {
         return null;
       }

@@ -1,17 +1,22 @@
 import { BeanIoChannelBase } from '../../common/ioChannelBase.js';
-import { BeanBase } from 'vona';
+import { BeanBase, cast } from 'vona';
+import { ServiceIoInner } from '../ioInner.js';
 
 export class LocalIoInner0 extends BeanBase {
+  protected get self() {
+    return cast<ServiceIoInner>(this);
+  }
+
   get messageClass() {
-    return this.scope.service.messageClass;
+    return this.self.scope.service.messageClass;
   }
 
   get message() {
-    return this.scope.service.message;
+    return this.self.scope.service.message;
   }
 
   get localRedis() {
-    return this.scope.service.redis;
+    return this.self.scope.service.redis;
   }
 
   _getBeanMessage(messageClassBase, throwError: boolean = true) {
@@ -61,7 +66,7 @@ export class LocalIoInner0 extends BeanBase {
     }
     // from db
     // saveLimit
-    const saveLimit = this.scope.config.message.sync.saveLimit;
+    const saveLimit = this.self.scope.config.message.sync.saveLimit;
     const modelMessageSync = this.message.modelMessageSync;
     let offset = 0;
     // eslint-disable-next-line
