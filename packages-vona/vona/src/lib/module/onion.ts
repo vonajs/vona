@@ -25,7 +25,6 @@ import {
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IStartupRecord,
-  ISummerCacheRecord,
   VonaApplication,
 } from '../../types/index.js';
 import { Onion } from './onion/onion.js';
