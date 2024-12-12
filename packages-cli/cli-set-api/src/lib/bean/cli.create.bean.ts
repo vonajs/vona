@@ -3,6 +3,7 @@ import { IModuleInfo } from '@cabloy/module-info';
 import path from 'path';
 import fs from 'fs';
 import { __ThisSetName__ } from '../this.js';
+import { getOnionScenesMeta } from 'vona-shared';
 
 const __decorators = {
   virtual: 'Virtual',
@@ -56,6 +57,10 @@ export class CliCreateBean extends BeanCliBase {
     const sceneName = argv.sceneName; // bean/summer.cache
     const sceneParts = sceneName.split('.');
     argv.sceneNameCapitalize = sceneParts.map(item => this.helper.firstCharToUpperCase(item)).join();
+    // scene meta
+    // onionScenesMeta
+    const onionScenesMeta = getOnionScenesMeta(this.helper.cli.modulesMeta.modules);
+    const onionSceneMeta = onionScenesMeta[sceneName];
     // bean name
     const beanName = argv.beanName;
     argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
@@ -68,8 +73,8 @@ export class CliCreateBean extends BeanCliBase {
       argv.beanOptions = `{ scene: '${sceneName}' }`;
     }
     // directory
-    const beanDir = path.join(targetDir, 'src/bean');
-    const beanFile = path.join(beanDir, `${sceneName}.${beanName}.ts`);
+    const beanDir = path.join(targetDir, onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean');
+    const beanFile = path.join(beanDir, onionSceneMeta.sceneIsolate ? `${beanName}.ts` : `${sceneName}.${beanName}.ts`);
     if (fs.existsSync(beanFile)) {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }

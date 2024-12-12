@@ -41,21 +41,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-instance' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/instance.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-instance:instance': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-instance' {
-  export interface ModelInstance {
-    get scope(): ScopeModuleAInstance;
-  }
-}
-/** model: end */
 /** meta: begin */
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
@@ -83,6 +68,21 @@ declare module 'vona-module-a-instance' {
   }
 }
 /** meta: end */
+/** model: begin */
+export * from '../model/instance.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-instance:instance': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface ModelInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
