@@ -61,6 +61,22 @@ export interface IModuleEntity {
   shareRecordPV: EntityShareRecordPV;
   shareRecordUV: EntityShareRecordUV;
 }
+declare module 'vona-module-a-share' {
+  export interface EntityShare {
+    column<K extends keyof Omit<EntityShare, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityShare, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityShareRecordPV {
+    column<K extends keyof Omit<EntityShareRecordPV, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityShareRecordPV, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityShareRecordUV {
+    column<K extends keyof Omit<EntityShareRecordUV, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityShareRecordUV, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelShare } from '../model/share.js';

@@ -67,6 +67,12 @@ import { EntityCache } from '../entity/cache.js';
 export interface IModuleEntity {
   cache: EntityCache;
 }
+declare module 'vona-module-a-cache' {
+  export interface EntityCache {
+    column<K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** config: begin */
 export * from '../config/config.js';

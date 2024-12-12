@@ -59,6 +59,17 @@ export interface IModuleEntity {
   userOnline: EntityUserOnline;
   userOnlineHistory: EntityUserOnlineHistory;
 }
+declare module 'vona-module-a-useronline' {
+  export interface EntityUserOnline {
+    column<K extends keyof Omit<EntityUserOnline, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityUserOnline, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityUserOnlineHistory {
+    column<K extends keyof Omit<EntityUserOnlineHistory, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityUserOnlineHistory, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelUserOnline } from '../model/userOnline.js';

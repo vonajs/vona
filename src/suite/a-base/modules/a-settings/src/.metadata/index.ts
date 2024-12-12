@@ -55,6 +55,17 @@ export interface IModuleEntity {
   settings: EntitySettings;
   settingsRef: EntitySettingsRef;
 }
+declare module 'vona-module-a-settings' {
+  export interface EntitySettings {
+    column<K extends keyof Omit<EntitySettings, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntitySettings, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntitySettingsRef {
+    column<K extends keyof Omit<EntitySettingsRef, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntitySettingsRef, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelSettings } from '../model/settings.js';

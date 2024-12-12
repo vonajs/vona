@@ -68,6 +68,22 @@ export interface IModuleEntity {
   purchaseOrder: EntityPurchaseOrder;
   purchaseOrderDetail: EntityPurchaseOrderDetail;
 }
+declare module 'vona-module-test-flow' {
+  export interface EntityProduct {
+    column<K extends keyof Omit<EntityProduct, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityProduct, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityPurchaseOrder {
+    column<K extends keyof Omit<EntityPurchaseOrder, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityPurchaseOrder, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityPurchaseOrderDetail {
+    column<K extends keyof Omit<EntityPurchaseOrderDetail, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityPurchaseOrderDetail, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelProduct } from '../model/product.js';

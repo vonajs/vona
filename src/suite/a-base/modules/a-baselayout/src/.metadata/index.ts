@@ -50,6 +50,22 @@ export interface IModuleEntity {
   layoutContent: EntityLayoutContent;
   layoutFull: EntityLayoutFull;
 }
+declare module 'vona-module-a-baselayout' {
+  export interface EntityLayout {
+    column<K extends keyof Omit<EntityLayout, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityLayout, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityLayoutContent {
+    column<K extends keyof Omit<EntityLayoutContent, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityLayoutContent, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityLayoutFull {
+    column<K extends keyof Omit<EntityLayoutFull, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityLayoutFull, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelLayout } from '../model/layout.js';

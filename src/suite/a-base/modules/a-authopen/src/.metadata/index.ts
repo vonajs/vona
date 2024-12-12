@@ -60,6 +60,12 @@ import { EntityAuthOpen } from '../entity/authOpen.js';
 export interface IModuleEntity {
   authOpen: EntityAuthOpen;
 }
+declare module 'vona-module-a-authopen' {
+  export interface EntityAuthOpen {
+    column<K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelAuthOpen } from '../model/authOpen.js';

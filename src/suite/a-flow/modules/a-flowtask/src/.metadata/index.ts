@@ -94,6 +94,24 @@ export interface IModuleEntity {
   flowTask: EntityFlowTask;
   flowTaskHistory: EntityFlowTaskHistory;
 }
+declare module 'vona-module-a-flowtask' {
+  export interface EntityFlowNodeStartEventAtomCondition {
+    column<K extends keyof Omit<EntityFlowNodeStartEventAtomCondition, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityFlowNodeStartEventAtomCondition, 'column' | 'columns' | 'table'>>(
+      ...columns: K[]
+    ): K[];
+  }
+
+  export interface EntityFlowTask {
+    column<K extends keyof Omit<EntityFlowTask, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityFlowTask, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityFlowTaskHistory {
+    column<K extends keyof Omit<EntityFlowTaskHistory, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityFlowTaskHistory, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelFlowNodeStartEventAtomCondition } from '../model/flowNodeStartEventAtomCondition.js';

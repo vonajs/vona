@@ -55,6 +55,12 @@ import { EntityAuthSimple } from '../entity/authSimple.js';
 export interface IModuleEntity {
   authSimple: EntityAuthSimple;
 }
+declare module 'vona-module-a-authsimple' {
+  export interface EntityAuthSimple {
+    column<K extends keyof Omit<EntityAuthSimple, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityAuthSimple, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelAuthSimple } from '../model/authSimple.js';

@@ -71,6 +71,12 @@ import { EntityStats } from '../entity/stats.js';
 export interface IModuleEntity {
   stats: EntityStats;
 }
+declare module 'vona-module-a-stats' {
+  export interface EntityStats {
+    column<K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelStats } from '../model/stats.js';

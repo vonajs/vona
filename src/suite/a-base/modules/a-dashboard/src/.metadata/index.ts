@@ -66,6 +66,27 @@ export interface IModuleEntity {
   dashboardFull: EntityDashboardFull;
   dashboardUser: EntityDashboardUser;
 }
+declare module 'vona-module-a-dashboard' {
+  export interface EntityDashboard {
+    column<K extends keyof Omit<EntityDashboard, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityDashboard, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityDashboardContent {
+    column<K extends keyof Omit<EntityDashboardContent, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityDashboardContent, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityDashboardFull {
+    column<K extends keyof Omit<EntityDashboardFull, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityDashboardFull, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityDashboardUser {
+    column<K extends keyof Omit<EntityDashboardUser, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityDashboardUser, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelDashboard } from '../model/dashboard.js';

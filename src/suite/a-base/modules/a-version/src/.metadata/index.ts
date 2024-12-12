@@ -66,6 +66,22 @@ export interface IModuleEntity {
   versionInit: EntityVersionInit;
   viewRecord: EntityViewRecord;
 }
+declare module 'vona-module-a-version' {
+  export interface EntityVersion {
+    column<K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityVersionInit {
+    column<K extends keyof Omit<EntityVersionInit, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityVersionInit, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityViewRecord {
+    column<K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelViewRecord } from '../model/viewRecord.js';

@@ -39,6 +39,12 @@ import { EntityDetailBase } from '../entity/detailBase.js';
 export interface IModuleEntity {
   detailBase: EntityDetailBase;
 }
+declare module 'vona-module-a-detail' {
+  export interface EntityDetailBase {
+    column<K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelDetailBase } from '../model/detailBase.js';

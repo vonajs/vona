@@ -134,6 +134,22 @@ export interface IModuleEntity {
   messageClass: EntityMessageClass;
   messageSync: EntityMessageSync;
 }
+declare module 'vona-module-a-socketio' {
+  export interface EntityMessage {
+    column<K extends keyof Omit<EntityMessage, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityMessage, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityMessageClass {
+    column<K extends keyof Omit<EntityMessageClass, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityMessageClass, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityMessageSync {
+    column<K extends keyof Omit<EntityMessageSync, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityMessageSync, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelMessage } from '../model/message.js';

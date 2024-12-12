@@ -60,6 +60,22 @@ export interface IModuleEntity {
   appContent: EntityAppContent;
   appFull: EntityAppFull;
 }
+declare module 'vona-module-a-app' {
+  export interface EntityApp {
+    column<K extends keyof Omit<EntityApp, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityApp, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityAppContent {
+    column<K extends keyof Omit<EntityAppContent, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityAppContent, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityAppFull {
+    column<K extends keyof Omit<EntityAppFull, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityAppFull, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelApp2 } from '../model/app2.js';

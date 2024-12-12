@@ -81,6 +81,17 @@ export interface IModuleEntity {
   auth: EntityAuth;
   authProvider: EntityAuthProvider;
 }
+declare module 'vona-module-a-auth' {
+  export interface EntityAuth {
+    column<K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityAuthProvider {
+    column<K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelAuth } from '../model/auth.js';

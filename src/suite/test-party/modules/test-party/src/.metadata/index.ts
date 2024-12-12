@@ -213,6 +213,17 @@ export interface IModuleEntity {
   party: EntityParty;
   partyExpense: EntityPartyExpense;
 }
+declare module 'vona-module-test-party' {
+  export interface EntityParty {
+    column<K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+
+  export interface EntityPartyExpense {
+    column<K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(column: K): K;
+    columns<K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(...columns: K[]): K[];
+  }
+}
 /** entities: end */
 /** models: begin */
 import { ModelParty } from '../model/party.js';
