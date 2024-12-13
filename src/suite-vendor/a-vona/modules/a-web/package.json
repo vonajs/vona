@@ -5,6 +5,12 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"
+    },
+    "onions": {
+      "dto": {
+        "sceneIsolate": true,
+        "boilerplate": "cli/dto/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -27,7 +33,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}

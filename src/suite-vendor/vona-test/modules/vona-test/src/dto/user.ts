@@ -1,5 +1,5 @@
-import { Dto } from 'vona';
 import { Rule } from 'vona-module-a-validator';
+import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
 
 @Dto()
