@@ -1,5 +1,5 @@
-import { IDecoratorControllerOptions } from '../../../types/interface/controller.js';
-import { createBeanDecorator } from '../index.js';
+import { createBeanDecorator } from 'vona';
+import { IDecoratorControllerOptions } from '../types/controller.js';
 
 export function Controller(options?: IDecoratorControllerOptions): ClassDecorator;
 export function Controller(path?: string): ClassDecorator;

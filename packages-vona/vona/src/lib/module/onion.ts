@@ -1,8 +1,6 @@
 import {
   IAopRecord,
-  IControllerRecord,
   IDecoratorAopOptions,
-  IDecoratorControllerOptions,
   IDecoratorFilterOptionsGlobal,
   IDecoratorGuardOptionsGlobal,
   IDecoratorInterceptorOptionsGlobal,
@@ -50,10 +48,6 @@ function loadAll(app: VonaApplication) {
     'socketPacket',
   );
   app.meta.onionAop = app.bean._newBean(Onion<IDecoratorAopOptions, keyof IAopRecord>, 'aop');
-  app.meta.onionController = app.bean._newBean(
-    Onion<IDecoratorControllerOptions, keyof IControllerRecord>,
-    'controller',
-  );
   app.meta.onionMeta = app.bean._newBean(Onion<IDecoratorMetaOptions, keyof IMetaRecord>, 'meta');
   app.meta.onionStartup = app.bean._newBean(Onion<IDecoratorStartupOptions, keyof IStartupRecord>, 'startup');
 }

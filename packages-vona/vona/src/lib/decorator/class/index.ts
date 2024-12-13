@@ -1,7 +1,6 @@
 export * from './aop.js';
 export * from './atom.js';
 export * from './bean.js';
-export * from './controller.js';
 export * from './createBeanDecorator.js';
 export * from './filter.js';
 export * from './guard.js';

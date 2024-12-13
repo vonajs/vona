@@ -7,7 +7,6 @@ export interface ISceneCustomRecord {}
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'aop'
   | 'scope'
-  | 'controller'
   | 'atom'
   | 'middleware'
   | 'guard'
