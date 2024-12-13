@@ -23,21 +23,6 @@ declare module 'vona-module-a-file' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/file.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-file:file': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-file' {
-  export interface ControllerFile {
-    get scope(): ScopeModuleAFile;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/file.js';
 export * from '../entity/fileView.js';
@@ -130,6 +115,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/file.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-file:file': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-file' {
+  export interface ControllerFile {
+    get scope(): ScopeModuleAFile;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

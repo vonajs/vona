@@ -30,21 +30,6 @@ declare module 'vona-module-a-app' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/resource.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-app:resource': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-app' {
-  export interface ControllerResource {
-    get scope(): ScopeModuleAApp;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/app.js';
 export * from '../entity/appContent.js';
@@ -154,6 +139,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/resource.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-app:resource': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-app' {
+  export interface ControllerResource {
+    get scope(): ScopeModuleAApp;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

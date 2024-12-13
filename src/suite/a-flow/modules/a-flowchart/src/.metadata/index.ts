@@ -1,24 +1,3 @@
-/** controller: begin */
-export * from '../controller/flow.js';
-export * from '../controller/flowDef.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-flowchart:flow': IDecoratorControllerOptions;
-    'a-flowchart:flowDef': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-flowchart' {
-  export interface ControllerFlow {
-    get scope(): ScopeModuleAFlowchart;
-  }
-
-  export interface ControllerFlowDef {
-    get scope(): ScopeModuleAFlowchart;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
@@ -57,6 +36,27 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+export * from '../controller/flowDef.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-flowchart:flow': IDecoratorControllerOptions;
+    'a-flowchart:flowDef': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-flowchart' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlowchart;
+  }
+
+  export interface ControllerFlowDef {
+    get scope(): ScopeModuleAFlowchart;
+  }
+}
+/** controller: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

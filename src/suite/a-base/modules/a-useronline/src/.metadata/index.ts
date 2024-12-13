@@ -44,21 +44,6 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/userOnline.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-useronline:userOnline': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-useronline' {
-  export interface ControllerUserOnline {
-    get scope(): ScopeModuleAUseronline;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/userOnline.js';
 export * from '../entity/userOnlineHistory.js';
@@ -151,6 +136,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/userOnline.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-useronline:userOnline': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-useronline' {
+  export interface ControllerUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

@@ -30,21 +30,6 @@ declare module 'vona-module-a-captcha' {
   }
 }
 /** middleware: end */
-/** controller: begin */
-export * from '../controller/captcha.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-captcha:captcha': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-captcha' {
-  export interface ControllerCaptcha {
-    get scope(): ScopeModuleACaptcha;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/captcha.js';
 
@@ -74,6 +59,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/captcha.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-captcha:captcha': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-captcha' {
+  export interface ControllerCaptcha {
+    get scope(): ScopeModuleACaptcha;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

@@ -30,21 +30,6 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/sequence.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-sequence:sequence': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-sequence' {
-  export interface ControllerSequence {
-    get scope(): ScopeModuleASequence;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -114,6 +99,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/sequence.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-sequence:sequence': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-sequence' {
+  export interface ControllerSequence {
+    get scope(): ScopeModuleASequence;
+  }
+}
+/** controller: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */

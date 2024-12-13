@@ -23,21 +23,6 @@ declare module 'vona-module-a-icon' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/icon.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-icon:icon': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-icon' {
-  export interface ControllerIcon {
-    get scope(): ScopeModuleAIcon;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/icon.js';
 
@@ -67,6 +52,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/icon.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-icon:icon': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-icon' {
+  export interface ControllerIcon {
+    get scope(): ScopeModuleAIcon;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

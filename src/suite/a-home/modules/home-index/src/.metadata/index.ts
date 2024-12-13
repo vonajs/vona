@@ -1,18 +1,3 @@
-/** controller: begin */
-export * from '../controller/index.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'home-index:index': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-home-index' {
-  export interface ControllerIndex {
-    get scope(): ScopeModuleHomeIndex;
-  }
-}
-/** controller: end */
 /** startup: begin */
 export * from '../bean/startup.outputHomeApi.js';
 
@@ -28,6 +13,21 @@ declare module 'vona-module-home-index' {
   }
 }
 /** startup: end */
+/** controller: begin */
+export * from '../controller/index.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'home-index:index': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-home-index' {
+  export interface ControllerIndex {
+    get scope(): ScopeModuleHomeIndex;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

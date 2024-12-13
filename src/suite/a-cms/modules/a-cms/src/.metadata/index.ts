@@ -48,45 +48,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/article.js';
-export * from '../controller/comment.js';
-export * from '../controller/render.js';
-export * from '../controller/rss.js';
-export * from '../controller/site.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-cms:article': IDecoratorControllerOptions;
-    'a-cms:comment': IDecoratorControllerOptions;
-    'a-cms:render': IDecoratorControllerOptions;
-    'a-cms:rss': IDecoratorControllerOptions;
-    'a-cms:site': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-cms' {
-  export interface ControllerArticle {
-    get scope(): ScopeModuleACms;
-  }
-
-  export interface ControllerComment {
-    get scope(): ScopeModuleACms;
-  }
-
-  export interface ControllerRender {
-    get scope(): ScopeModuleACms;
-  }
-
-  export interface ControllerRss {
-    get scope(): ScopeModuleACms;
-  }
-
-  export interface ControllerSite {
-    get scope(): ScopeModuleACms;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -248,6 +209,45 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/article.js';
+export * from '../controller/comment.js';
+export * from '../controller/render.js';
+export * from '../controller/rss.js';
+export * from '../controller/site.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-cms:article': IDecoratorControllerOptions;
+    'a-cms:comment': IDecoratorControllerOptions;
+    'a-cms:render': IDecoratorControllerOptions;
+    'a-cms:rss': IDecoratorControllerOptions;
+    'a-cms:site': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface ControllerArticle {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerComment {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerRender {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerRss {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ControllerSite {
+    get scope(): ScopeModuleACms;
+  }
+}
+/** controller: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

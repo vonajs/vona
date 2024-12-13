@@ -348,99 +348,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** aop: end */
-/** controller: begin */
-export * from '../controller/atom.js';
-export * from '../controller/atomAction.js';
-export * from '../controller/atomClass.js';
-export * from '../controller/atomState.js';
-export * from '../controller/auth.js';
-export * from '../controller/base.js';
-export * from '../controller/category.js';
-export * from '../controller/comment.js';
-export * from '../controller/jwt.js';
-export * from '../controller/layoutConfig.js';
-export * from '../controller/resource.js';
-export * from '../controller/tag.js';
-export * from '../controller/user.js';
-export * from '../controller/util.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-base:atom': IDecoratorControllerOptions;
-    'a-base:atomAction': IDecoratorControllerOptions;
-    'a-base:atomClass': IDecoratorControllerOptions;
-    'a-base:atomState': IDecoratorControllerOptions;
-    'a-base:auth': IDecoratorControllerOptions;
-    'a-base:base': IDecoratorControllerOptions;
-    'a-base:category': IDecoratorControllerOptions;
-    'a-base:comment': IDecoratorControllerOptions;
-    'a-base:jwt': IDecoratorControllerOptions;
-    'a-base:layoutConfig': IDecoratorControllerOptions;
-    'a-base:resource': IDecoratorControllerOptions;
-    'a-base:tag': IDecoratorControllerOptions;
-    'a-base:user': IDecoratorControllerOptions;
-    'a-base:util': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface ControllerAtom {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAtomAction {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAtomClass {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAtomState {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAuth {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerBase {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerCategory {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerComment {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerJwt {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerLayoutConfig {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerResource {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerTag {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerUser {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerUtil {
-    get scope(): ScopeModuleABase;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.status.js';
@@ -1257,6 +1164,99 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/atom.js';
+export * from '../controller/atomAction.js';
+export * from '../controller/atomClass.js';
+export * from '../controller/atomState.js';
+export * from '../controller/auth.js';
+export * from '../controller/base.js';
+export * from '../controller/category.js';
+export * from '../controller/comment.js';
+export * from '../controller/jwt.js';
+export * from '../controller/layoutConfig.js';
+export * from '../controller/resource.js';
+export * from '../controller/tag.js';
+export * from '../controller/user.js';
+export * from '../controller/util.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-base:atom': IDecoratorControllerOptions;
+    'a-base:atomAction': IDecoratorControllerOptions;
+    'a-base:atomClass': IDecoratorControllerOptions;
+    'a-base:atomState': IDecoratorControllerOptions;
+    'a-base:auth': IDecoratorControllerOptions;
+    'a-base:base': IDecoratorControllerOptions;
+    'a-base:category': IDecoratorControllerOptions;
+    'a-base:comment': IDecoratorControllerOptions;
+    'a-base:jwt': IDecoratorControllerOptions;
+    'a-base:layoutConfig': IDecoratorControllerOptions;
+    'a-base:resource': IDecoratorControllerOptions;
+    'a-base:tag': IDecoratorControllerOptions;
+    'a-base:user': IDecoratorControllerOptions;
+    'a-base:util': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface ControllerAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomState {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAuth {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerBase {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerComment {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerJwt {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerLayoutConfig {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerUtil {
+    get scope(): ScopeModuleABase;
+  }
+}
+/** controller: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

@@ -18,7 +18,7 @@ declare module 'vona-module-a-captchasimple' {
 /** controller: begin */
 export * from '../controller/captcha.js';
 
-import { IDecoratorControllerOptions } from 'vona';
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona' {
   export interface IControllerRecord {
     'a-captchasimple:captcha': IDecoratorControllerOptions;

@@ -58,33 +58,6 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/auth.js';
-export * from '../controller/captcha.js';
-export * from '../controller/smsProvider.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-authsms:auth': IDecoratorControllerOptions;
-    'a-authsms:captcha': IDecoratorControllerOptions;
-    'a-authsms:smsProvider': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-authsms' {
-  export interface ControllerAuth {
-    get scope(): ScopeModuleAAuthsms;
-  }
-
-  export interface ControllerCaptcha {
-    get scope(): ScopeModuleAAuthsms;
-  }
-
-  export interface ControllerSmsProvider {
-    get scope(): ScopeModuleAAuthsms;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -162,6 +135,33 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/auth.js';
+export * from '../controller/captcha.js';
+export * from '../controller/smsProvider.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-authsms:auth': IDecoratorControllerOptions;
+    'a-authsms:captcha': IDecoratorControllerOptions;
+    'a-authsms:smsProvider': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-authsms' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface ControllerCaptcha {
+    get scope(): ScopeModuleAAuthsms;
+  }
+
+  export interface ControllerSmsProvider {
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
+/** controller: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

@@ -23,21 +23,6 @@ declare module 'vona-module-a-progress' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/progress.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-progress:progress': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-progress' {
-  export interface ControllerProgress {
-    get scope(): ScopeModuleAProgress;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/progress.js';
 
@@ -67,6 +52,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/progress.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-progress:progress': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-progress' {
+  export interface ControllerProgress {
+    get scope(): ScopeModuleAProgress;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

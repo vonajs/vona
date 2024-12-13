@@ -156,6 +156,119 @@ declare module 'vona-module-test-party' {
   }
 }
 /** aop: end */
+/** startup: begin */
+export * from '../bean/startup.startupAll.js';
+export * from '../bean/startup.startupInstance.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'test-party:startupAll': IDecoratorStartupOptions;
+    'test-party:startupInstance': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface StartupStartupAll {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface StartupStartupInstance {
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** startup: end */
+/** entity: begin */
+export * from '../entity/party.js';
+export * from '../entity/partyExpense.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'test-party:party': IDecoratorEntityOptions;
+    'test-party:partyExpense': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-test-party' {}
+/** entity: end */
+/** entity: begin */
+import { EntityParty } from '../entity/party.js';
+import { EntityPartyExpense } from '../entity/partyExpense.js';
+export interface IModuleEntity {
+  party: EntityParty;
+  partyExpense: EntityPartyExpense;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-test-party' {
+  export interface EntityParty {
+    column: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityPartyExpense {
+    column: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/party.js';
+export * from '../model/partyExpense.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'test-party:party': IDecoratorModelOptions;
+    'test-party:partyExpense': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface ModelParty {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ModelPartyExpense {
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelParty } from '../model/party.js';
+import { ModelPartyExpense } from '../model/partyExpense.js';
+export interface IModuleModel {
+  party: ModelParty;
+  partyExpense: ModelPartyExpense;
+}
+/** model: end */
+/** service: begin */
+export * from '../service/test.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IServiceRecord {
+    'test-party:test': never;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface ServiceTest {
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceTest } from '../service/test.js';
+export interface IModuleService {
+  test: ServiceTest;
+}
+/** service: end */
+/** service: begin */
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'test-party.service.test': ServiceTest;
+  }
+}
+/** service: end */
 /** controller: begin */
 export * from '../controller/kitchenSinkAutocomplete.js';
 export * from '../controller/kitchenSinkFormSchemaValidation.js';
@@ -203,7 +316,7 @@ export * from '../controller/testResourceAll.js';
 export * from '../controller/testResourceRight.js';
 export * from '../controller/testRoleUserRole.js';
 
-import { IDecoratorControllerOptions } from 'vona';
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona' {
   export interface IControllerRecord {
     'test-party:kitchenSinkAutocomplete': IDecoratorControllerOptions;
@@ -435,119 +548,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** controller: end */
-/** startup: begin */
-export * from '../bean/startup.startupAll.js';
-export * from '../bean/startup.startupInstance.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'test-party:startupAll': IDecoratorStartupOptions;
-    'test-party:startupInstance': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface StartupStartupAll {
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface StartupStartupInstance {
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** startup: end */
-/** entity: begin */
-export * from '../entity/party.js';
-export * from '../entity/partyExpense.js';
-
-import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'test-party:party': IDecoratorEntityOptions;
-    'test-party:partyExpense': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-test-party' {}
-/** entity: end */
-/** entity: begin */
-import { EntityParty } from '../entity/party.js';
-import { EntityPartyExpense } from '../entity/partyExpense.js';
-export interface IModuleEntity {
-  party: EntityParty;
-  partyExpense: EntityPartyExpense;
-}
-/** entity: end */
-/** entity: begin */
-declare module 'vona-module-test-party' {
-  export interface EntityParty {
-    column: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityPartyExpense {
-    column: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entity: end */
-/** model: begin */
-export * from '../model/party.js';
-export * from '../model/partyExpense.js';
-
-import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
-  export interface IModelRecord {
-    'test-party:party': IDecoratorModelOptions;
-    'test-party:partyExpense': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface ModelParty {
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface ModelPartyExpense {
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** model: end */
-/** model: begin */
-import { ModelParty } from '../model/party.js';
-import { ModelPartyExpense } from '../model/partyExpense.js';
-export interface IModuleModel {
-  party: ModelParty;
-  partyExpense: ModelPartyExpense;
-}
-/** model: end */
-/** service: begin */
-export * from '../service/test.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IServiceRecord {
-    'test-party:test': never;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface ServiceTest {
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** service: end */
-/** service: begin */
-import { ServiceTest } from '../service/test.js';
-export interface IModuleService {
-  test: ServiceTest;
-}
-/** service: end */
-/** service: begin */
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'test-party.service.test': ServiceTest;
-  }
-}
-/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

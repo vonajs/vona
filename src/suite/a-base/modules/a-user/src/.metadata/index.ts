@@ -22,27 +22,6 @@ declare module 'vona-module-a-user' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/public.js';
-export * from '../controller/user.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-user:public': IDecoratorControllerOptions;
-    'a-user:user': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-user' {
-  export interface ControllerPublic {
-    get scope(): ScopeModuleAUser;
-  }
-
-  export interface ControllerUser {
-    get scope(): ScopeModuleAUser;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -96,6 +75,27 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/public.js';
+export * from '../controller/user.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-user:public': IDecoratorControllerOptions;
+    'a-user:user': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-user' {
+  export interface ControllerPublic {
+    get scope(): ScopeModuleAUser;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleAUser;
+  }
+}
+/** controller: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

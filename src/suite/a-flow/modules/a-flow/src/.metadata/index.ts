@@ -59,27 +59,6 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/flow.js';
-export * from '../controller/flowDef.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-flow:flow': IDecoratorControllerOptions;
-    'a-flow:flowDef': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-flow' {
-  export interface ControllerFlow {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface ControllerFlowDef {
-    get scope(): ScopeModuleAFlow;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -326,6 +305,27 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+export * from '../controller/flowDef.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-flow:flow': IDecoratorControllerOptions;
+    'a-flow:flowDef': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-flow' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ControllerFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+}
+/** controller: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */

@@ -30,21 +30,6 @@ declare module 'vona-module-a-dashboard' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/dashboard.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-dashboard:dashboard': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-dashboard' {
-  export interface ControllerDashboard {
-    get scope(): ScopeModuleADashboard;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/dashboard.js';
 export * from '../entity/dashboardContent.js';
@@ -171,6 +156,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/dashboard.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-dashboard:dashboard': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-dashboard' {
+  export interface ControllerDashboard {
+    get scope(): ScopeModuleADashboard;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

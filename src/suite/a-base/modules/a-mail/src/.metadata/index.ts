@@ -51,21 +51,6 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/scene.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-mail:scene': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-mail' {
-  export interface ControllerScene {
-    get scope(): ScopeModuleAMail;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -171,6 +156,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/scene.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-mail:scene': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface ControllerScene {
+    get scope(): ScopeModuleAMail;
+  }
+}
+/** controller: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

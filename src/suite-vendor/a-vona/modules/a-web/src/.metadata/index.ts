@@ -1,6 +1,3 @@
-/** monkey: begin */
-export * from '../monkey.js';
-/** monkey: end */
 /** beans: begin */
 export * from '../bean/bean.router.js';
 import { BeanRouter } from '../bean/bean.router.js';
@@ -18,6 +15,9 @@ declare module 'vona-module-a-web' {
   }
 }
 /** beans: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

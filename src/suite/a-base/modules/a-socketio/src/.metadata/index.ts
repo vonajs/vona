@@ -63,39 +63,6 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** socketPacket: end */
-/** controller: begin */
-export * from '../controller/io.js';
-export * from '../controller/message.js';
-export * from '../controller/messageClass.js';
-export * from '../controller/test.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-socketio:io': IDecoratorControllerOptions;
-    'a-socketio:message': IDecoratorControllerOptions;
-    'a-socketio:messageClass': IDecoratorControllerOptions;
-    'a-socketio:test': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-socketio' {
-  export interface ControllerIo {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface ControllerMessage {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface ControllerMessageClass {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface ControllerTest {
-    get scope(): ScopeModuleASocketio;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -310,6 +277,39 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/io.js';
+export * from '../controller/message.js';
+export * from '../controller/messageClass.js';
+export * from '../controller/test.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-socketio:io': IDecoratorControllerOptions;
+    'a-socketio:message': IDecoratorControllerOptions;
+    'a-socketio:messageClass': IDecoratorControllerOptions;
+    'a-socketio:test': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface ControllerIo {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ControllerMessage {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ControllerMessageClass {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ControllerTest {
+    get scope(): ScopeModuleASocketio;
+  }
+}
+/** controller: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */

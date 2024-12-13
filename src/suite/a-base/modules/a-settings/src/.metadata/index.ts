@@ -23,21 +23,6 @@ declare module 'vona-module-a-settings' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/settings.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-settings:settings': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-settings' {
-  export interface ControllerSettings {
-    get scope(): ScopeModuleASettings;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/settings.js';
 export * from '../entity/settingsRef.js';
@@ -130,6 +115,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/settings.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-settings:settings': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-settings' {
+  export interface ControllerSettings {
+    get scope(): ScopeModuleASettings;
+  }
+}
+/** controller: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';

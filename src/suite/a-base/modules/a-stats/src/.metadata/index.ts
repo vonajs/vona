@@ -37,21 +37,6 @@ declare module 'vona-module-a-stats' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/stats.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-stats:stats': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-stats' {
-  export interface ControllerStats {
-    get scope(): ScopeModuleAStats;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/stats.js';
 
@@ -148,6 +133,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/stats.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-stats:stats': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-stats' {
+  export interface ControllerStats {
+    get scope(): ScopeModuleAStats;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

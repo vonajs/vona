@@ -15,51 +15,6 @@ declare module 'vona-module-a-baseadmin' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/atomRight.js';
-export * from '../controller/auth.js';
-export * from '../controller/authScene.js';
-export * from '../controller/resourceRight.js';
-export * from '../controller/role.js';
-export * from '../controller/user.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-baseadmin:atomRight': IDecoratorControllerOptions;
-    'a-baseadmin:auth': IDecoratorControllerOptions;
-    'a-baseadmin:authScene': IDecoratorControllerOptions;
-    'a-baseadmin:resourceRight': IDecoratorControllerOptions;
-    'a-baseadmin:role': IDecoratorControllerOptions;
-    'a-baseadmin:user': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-baseadmin' {
-  export interface ControllerAtomRight {
-    get scope(): ScopeModuleABaseadmin;
-  }
-
-  export interface ControllerAuth {
-    get scope(): ScopeModuleABaseadmin;
-  }
-
-  export interface ControllerAuthScene {
-    get scope(): ScopeModuleABaseadmin;
-  }
-
-  export interface ControllerResourceRight {
-    get scope(): ScopeModuleABaseadmin;
-  }
-
-  export interface ControllerRole {
-    get scope(): ScopeModuleABaseadmin;
-  }
-
-  export interface ControllerUser {
-    get scope(): ScopeModuleABaseadmin;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/atomRight.js';
 export * from '../service/auth.js';
@@ -134,6 +89,51 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/atomRight.js';
+export * from '../controller/auth.js';
+export * from '../controller/authScene.js';
+export * from '../controller/resourceRight.js';
+export * from '../controller/role.js';
+export * from '../controller/user.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-baseadmin:atomRight': IDecoratorControllerOptions;
+    'a-baseadmin:auth': IDecoratorControllerOptions;
+    'a-baseadmin:authScene': IDecoratorControllerOptions;
+    'a-baseadmin:resourceRight': IDecoratorControllerOptions;
+    'a-baseadmin:role': IDecoratorControllerOptions;
+    'a-baseadmin:user': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-baseadmin' {
+  export interface ControllerAtomRight {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerAuth {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerAuthScene {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerResourceRight {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerRole {
+    get scope(): ScopeModuleABaseadmin;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleABaseadmin;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

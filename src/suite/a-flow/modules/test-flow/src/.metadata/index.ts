@@ -56,21 +56,6 @@ declare module 'vona-module-test-flow' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/flow.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'test-flow:flow': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-test-flow' {
-  export interface ControllerFlow {
-    get scope(): ScopeModuleTestFlow;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/product.js';
 export * from '../entity/purchaseOrder.js';
@@ -151,6 +136,21 @@ export interface IModuleModel {
   purchaseOrderDetail: ModelPurchaseOrderDetail;
 }
 /** model: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'test-flow:flow': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-test-flow' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleTestFlow;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

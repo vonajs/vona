@@ -1,18 +1,3 @@
-/** controller: begin */
-export * from '../controller/auth.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-login:auth': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-login' {
-  export interface ControllerAuth {
-    get scope(): ScopeModuleALogin;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/auth.js';
 
@@ -42,6 +27,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/auth.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-login:auth': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-login' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleALogin;
+  }
+}
+/** controller: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

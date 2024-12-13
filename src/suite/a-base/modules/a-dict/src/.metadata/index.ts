@@ -38,21 +38,6 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/dict.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-dict:dict': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-dict' {
-  export interface ControllerDict {
-    get scope(): ScopeModuleADict;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/dict.js';
 export * from '../entity/dictContent.js';
@@ -145,6 +130,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/dict.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-dict:dict': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-dict' {
+  export interface ControllerDict {
+    get scope(): ScopeModuleADict;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

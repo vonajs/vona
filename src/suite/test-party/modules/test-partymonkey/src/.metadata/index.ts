@@ -1,7 +1,7 @@
 /** controller: begin */
 export * from '../controller/monkeyer.js';
 
-import { IDecoratorControllerOptions } from 'vona';
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
 declare module 'vona' {
   export interface IControllerRecord {
     'test-partymonkey:monkeyer': IDecoratorControllerOptions;

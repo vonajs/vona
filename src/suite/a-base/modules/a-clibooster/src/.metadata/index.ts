@@ -134,21 +134,6 @@ declare module 'vona-module-a-clibooster' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/tools.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-clibooster:tools': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-clibooster' {
-  export interface ControllerTools {
-    get scope(): ScopeModuleAClibooster;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/tools.js';
 export * from '../service/utils.js';
@@ -187,6 +172,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/tools.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-clibooster:tools': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-clibooster' {
+  export interface ControllerTools {
+    get scope(): ScopeModuleAClibooster;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

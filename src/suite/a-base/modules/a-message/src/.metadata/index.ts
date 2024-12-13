@@ -33,21 +33,6 @@ declare module 'vona-module-a-message' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/message.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-message:message': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-message' {
-  export interface ControllerMessage {
-    get scope(): ScopeModuleAMessage;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/message.js';
 
@@ -77,6 +62,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/message.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-message:message': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-message' {
+  export interface ControllerMessage {
+    get scope(): ScopeModuleAMessage;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

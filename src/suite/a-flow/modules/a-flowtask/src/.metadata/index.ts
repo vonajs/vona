@@ -65,27 +65,6 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/flow.js';
-export * from '../controller/flowTask.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-flowtask:flow': IDecoratorControllerOptions;
-    'a-flowtask:flowTask': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-flowtask' {
-  export interface ControllerFlow {
-    get scope(): ScopeModuleAFlowtask;
-  }
-
-  export interface ControllerFlowTask {
-    get scope(): ScopeModuleAFlowtask;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -250,6 +229,27 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+export * from '../controller/flowTask.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-flowtask:flow': IDecoratorControllerOptions;
+    'a-flowtask:flowTask': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-flowtask' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ControllerFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
+/** controller: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */

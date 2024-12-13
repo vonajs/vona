@@ -26,21 +26,6 @@ declare module 'vona-module-a-cli' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/cli.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-cli:cli': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-cli' {
-  export interface ControllerCli {
-    get scope(): ScopeModuleACli;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/cli.js';
 export * from '../service/console.js';
@@ -97,6 +82,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/cli.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-cli:cli': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-cli' {
+  export interface ControllerCli {
+    get scope(): ScopeModuleACli;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

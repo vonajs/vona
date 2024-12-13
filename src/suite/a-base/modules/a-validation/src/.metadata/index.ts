@@ -37,21 +37,6 @@ declare module 'vona-module-a-validation' {
   }
 }
 /** middleware: end */
-/** controller: begin */
-export * from '../controller/validation.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-validation:validation': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-validation' {
-  export interface ControllerValidation {
-    get scope(): ScopeModuleAValidation;
-  }
-}
-/** controller: end */
 /** service: begin */
 export * from '../service/validation.js';
 
@@ -81,6 +66,21 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/validation.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-validation:validation': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-validation' {
+  export interface ControllerValidation {
+    get scope(): ScopeModuleAValidation;
+  }
+}
+/** controller: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

@@ -52,27 +52,6 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** atom: end */
-/** controller: begin */
-export * from '../controller/auth.js';
-export * from '../controller/authOpen.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-authopen:auth': IDecoratorControllerOptions;
-    'a-authopen:authOpen': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-authopen' {
-  export interface ControllerAuth {
-    get scope(): ScopeModuleAAuthopen;
-  }
-
-  export interface ControllerAuthOpen {
-    get scope(): ScopeModuleAAuthopen;
-  }
-}
-/** controller: end */
 /** entity: begin */
 export * from '../entity/authOpen.js';
 
@@ -166,6 +145,27 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/auth.js';
+export * from '../controller/authOpen.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-authopen:auth': IDecoratorControllerOptions;
+    'a-authopen:authOpen': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface ControllerAuth {
+    get scope(): ScopeModuleAAuthopen;
+  }
+
+  export interface ControllerAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

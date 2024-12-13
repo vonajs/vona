@@ -58,21 +58,6 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** beans: end */
-/** controller: begin */
-export * from '../controller/db.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-cache:db': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-a-cache' {
-  export interface ControllerDb {
-    get scope(): ScopeModuleACache;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -113,6 +98,21 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** entity: end */
+/** controller: begin */
+export * from '../controller/db.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-cache:db': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-cache' {
+  export interface ControllerDb {
+    get scope(): ScopeModuleACache;
+  }
+}
+/** controller: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
