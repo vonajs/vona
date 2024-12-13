@@ -9,7 +9,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'aop'
   | 'scope'
   | 'controller'
-  | 'dto'
   | 'atom'
   | 'middleware'
   | 'guard'

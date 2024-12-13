@@ -165,6 +165,19 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** schedule: end */
+/** dto: begin */
+export * from '../dto/profile.js';
+export * from '../dto/user.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IDtoRecord {
+    'vona-test:profile': never;
+    'vona-test:user': never;
+  }
+}
+declare module 'vona-module-vona-test' {}
+/** dto: end */
 /** dtos: begin */
 export * from '../dto/profile.js';
 export * from '../dto/user.js';

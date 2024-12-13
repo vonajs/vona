@@ -2,7 +2,6 @@ import defaultList from './command/default.list.js';
 import createSuite from './command/create.suite.js';
 import createModule from './command/create.module.js';
 import createBean from './command/create.bean.js';
-import createDto from './command/create.dto.js';
 import createService from './command/create.service.js';
 import createController from './command/create.controller.js';
 import createTest from './command/create.test.js';
@@ -23,7 +22,6 @@ export const commands = {
     suite: createSuite,
     module: createModule,
     bean: createBean,
-    dto: createDto,
     service: createService,
     controller: createController,
     test: createTest,
