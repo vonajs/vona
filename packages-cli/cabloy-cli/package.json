@@ -44,6 +44,7 @@
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "cli-table3": "^0.6.2",
+    "esbuild": "^0.23.0",
     "egg-born-utils": "^1.2.0",
     "enquirer": "^2.3.6",
     "fs-extra": "^11.2.0",
@@ -51,6 +52,7 @@
     "is-type-of": "^2.1.0",
     "istextorbinary": "^3.3.0",
     "semver": "^7.6.2",
+    "tmp": "^0.2.3",
     "urllib": "^3.24.0"
   },
   "devDependencies": {

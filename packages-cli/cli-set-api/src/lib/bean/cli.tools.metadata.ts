@@ -81,7 +81,7 @@ export class CliToolsMetadata extends BeanCliBase {
       }
       // metadata custom
       if (sceneMeta.metadataCustom) {
-        content += await generateMetadataCustom(sceneName, sceneMeta, moduleName, modulePath);
+        content += await generateMetadataCustom(this.helper, sceneName, sceneMeta, moduleName, modulePath);
       }
     }
     // dtos

@@ -66,12 +66,14 @@ export function getOnionScenesMeta(modules: Record<string, IModule>) {
 }
 
 export function _getOnionScenesMeta(modules: Record<string, IModule>) {
-  let result = Object.assign({}, onionScenesMeta);
+  const result = Object.assign({}, onionScenesMeta);
   for (const moduleName in modules) {
     const module = modules[moduleName];
     const onions = module.package.vonaModule?.onions;
     if (!onions) continue;
-    result = Object.assign(result, onions);
+    for (const sceneName in onions) {
+      result[sceneName] = { ...onions[sceneName], module };
+    }
   }
   return result;
 }

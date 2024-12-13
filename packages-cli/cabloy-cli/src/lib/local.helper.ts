@@ -10,6 +10,9 @@ import { NameMeta } from '../types/helper.js';
 import { getRegistry } from '../registry.js';
 import path from 'node:path';
 import { combineWordsDeduplicate, parseFirstWord } from '@cabloy/word-utils';
+import tmp from 'tmp';
+import { build as esBuild } from 'esbuild';
+import { pathToFileURL } from 'node:url';
 
 export class LocalHelper {
   cli: BeanCliBase;
@@ -226,5 +229,34 @@ export class LocalHelper {
       name = this.firstCharToLowerCase(name.substring(1));
     }
     return name;
+  }
+  async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT> {
+    // temp
+    const fileTempObj = tmp.fileSync({ postfix: '.mjs' });
+    const fileTemp = fileTempObj.name;
+    // build
+    const esBuildConfig = this._createEsbuildConfig(fileName, fileTemp);
+    await esBuild(esBuildConfig as any);
+    // load
+    const instance = await import(this._pathToHref(fileTemp));
+    const result = await fn(instance);
+    // delete temp
+    fileTempObj.removeCallback();
+    // ok
+    return result;
+  }
+  private _createEsbuildConfig(fileSrc: string, fileDest: string) {
+    return {
+      platform: 'node',
+      format: 'esm',
+      bundle: true,
+      packages: 'external',
+      resolveExtensions: ['.mjs', '.js', '.mts', '.ts', '.json'],
+      entryPoints: [fileSrc],
+      outfile: fileDest,
+    };
+  }
+  private _pathToHref(fileName: string): string {
+    return path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
   }
 }

@@ -57,6 +57,44 @@ declare module 'vona-module-a-instance' {
   }
 }
 /** meta: end */
+/** entity: begin */
+export * from '../entity/instance.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-instance:instance': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-instance' {}
+/** entity: end */
+/** entity: begin */
+import { EntityInstance } from '../entity/instance.js';
+export interface IModuleEntity {
+  instance: EntityInstance;
+}
+/** entity: end */
+hello; /** model: begin */
+export * from '../model/instance.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-instance:instance': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface ModelInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelInstance } from '../model/instance.js';
+export interface IModuleModel {
+  instance: ModelInstance;
+}
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -123,6 +161,8 @@ export interface ScopeModuleAInstance {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
   service: IModuleService;
+  entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

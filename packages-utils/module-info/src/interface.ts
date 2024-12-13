@@ -42,6 +42,7 @@ export interface IBundleVendor {
 }
 
 export interface OnionSceneMeta {
+  module?: IModule;
   sceneIsolate?: boolean;
   hasLocal?: boolean;
   optionsRoute?: boolean;
