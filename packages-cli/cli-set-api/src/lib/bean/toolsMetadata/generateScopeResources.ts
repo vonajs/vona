@@ -6,13 +6,15 @@ import { OnionScenesMeta } from '@cabloy/module-info';
 
 export async function generateScopeResources(
   sceneName: string,
-  _onionScenesMeta: OnionScenesMeta,
+  onionScenesMeta: OnionScenesMeta,
   _moduleName: string,
   modulePath: string,
 ) {
-  //const sceneMeta = onionScenesMeta[sceneName];
+  const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const pattern = `${modulePath}/src/bean/${sceneName}.*.ts`;
+  const pattern = sceneMeta.sceneIsolate
+    ? `${modulePath}/src/${sceneName}/*.ts`
+    : `${modulePath}/src/bean/${sceneName}.*.ts`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
   if (files.length === 0) return '';
   files.sort();

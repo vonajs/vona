@@ -1,7 +1,6 @@
 import path from 'path';
-import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
-import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
+import { checkIgnoreOfParts, getScopeModuleName, globBeanFiles } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { OnionSceneMeta, OnionScenesMeta } from '@cabloy/module-info';
 
@@ -14,6 +13,8 @@ export async function generateOnions(
   const scopeModuleName = getScopeModuleName(moduleName);
   const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
+  const globFiles = await globBeanFiles(sceneName, onionScenesMeta, moduleName, modulePath);
+  if (globFiles.length === 0) return '';
   const pattern = sceneMeta.sceneIsolate
     ? `${modulePath}/src/${sceneName}/*.ts`
     : `${modulePath}/src/bean/${sceneName}.*.ts`;
@@ -101,28 +102,4 @@ declare module 'vona-module-${moduleName}' {
 /** ${sceneName}: end */
 `;
   return content;
-}
-
-function _extractInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
-  const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const content = fse.readFileSync(file).toString();
-  // optionsCustomInterface
-  let optionsCustomInterface: string | undefined;
-  let optionsCustomInterfaceFrom: string | undefined;
-  let reg = new RegExp(`@${sceneNameCapitalize}<(I${sceneNameCapitalize}Options[^>]*)>`);
-  let matches = content.match(reg);
-  if (matches) {
-    optionsCustomInterface = matches[1];
-    //optionsCustomInterfaceFrom
-    reg = new RegExp(`import {[\\s\\S]*?${optionsCustomInterface}[, ][\\s\\S]*?} from '([^']*)'`);
-    matches = content.match(reg);
-    if (matches) {
-      optionsCustomInterfaceFrom = matches[1];
-    }
-  }
-  // isGlobal
-  const isGlobal = sceneMeta.hasLocal
-    ? content.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*?export class/)
-    : true;
-  return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }
