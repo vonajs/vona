@@ -103,19 +103,13 @@ export interface IModuleModel {
   instance: ModelInstance;
 }
 /** model: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/instance.js';
-import { ServiceInstance } from '../service/instance.js';
-export interface IModuleService {
-  instance: ServiceInstance;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-instance.service.instance': ServiceInstance;
+  export interface IServiceRecord {
+    'a-instance:instance': never;
   }
 }
 declare module 'vona-module-a-instance' {
@@ -123,7 +117,19 @@ declare module 'vona-module-a-instance' {
     get scope(): ScopeModuleAInstance;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceInstance } from '../service/instance.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-instance.service.instance': ServiceInstance;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -156,7 +162,6 @@ export interface ScopeModuleAInstance {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

@@ -127,20 +127,15 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/database.js';
 export * from '../service/version.js';
-import { ServiceDatabase } from '../service/database.js';
-import { ServiceVersion } from '../service/version.js';
-export interface IModuleService {
-  database: ServiceDatabase;
-  version: ServiceVersion;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-version.service.database': ServiceDatabase;
-    'a-version.service.version': ServiceVersion;
+  export interface IServiceRecord {
+    'a-version:database': never;
+    'a-version:version': never;
   }
 }
 declare module 'vona-module-a-version' {
@@ -152,7 +147,18 @@ declare module 'vona-module-a-version' {
     get scope(): ScopeModuleAVersion;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceDatabase } from '../service/database.js';
+import { ServiceVersion } from '../service/version.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-version.service.database': ServiceDatabase;
+    'a-version.service.version': ServiceVersion;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -190,7 +196,6 @@ export interface ScopeModuleAVersion {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

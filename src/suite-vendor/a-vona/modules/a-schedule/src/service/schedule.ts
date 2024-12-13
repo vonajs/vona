@@ -1,5 +1,6 @@
-import { BeanBase, cast, Service } from 'vona';
+import { BeanBase, cast } from 'vona';
 import { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceSchedule extends BeanBase {

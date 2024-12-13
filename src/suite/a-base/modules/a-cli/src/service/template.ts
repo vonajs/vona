@@ -1,4 +1,4 @@
-import { Service, BeanBase, requireDynamic } from 'vona';
+import { BeanBase, requireDynamic } from 'vona';
 
 import fs from 'fs';
 import path from 'path';
@@ -7,6 +7,7 @@ import eggBornUtils from 'egg-born-utils';
 import isTextOrBinary from 'istextorbinary';
 import ejs from '@zhennann/ejs';
 import gogocode from 'gogocode';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceTemplate extends BeanBase {

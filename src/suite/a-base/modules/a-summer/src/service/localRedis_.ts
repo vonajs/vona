@@ -1,7 +1,8 @@
 import { CacheBase } from '../common/cacheBase.js';
-import { IORedis, Service } from 'vona';
+import { IORedis } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 import { TSummerCacheActionOptions } from '../types/summerCache.js';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceLocalRedis<KEY = any, DATA = any>

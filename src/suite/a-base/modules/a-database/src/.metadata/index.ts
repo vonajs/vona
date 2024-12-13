@@ -68,20 +68,15 @@ declare module 'vona-module-a-database' {
   }
 }
 /** middleware: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/dbMeta.js';
 export * from '../service/transaction.js';
-import { ServiceDbMeta } from '../service/dbMeta.js';
-import { ServiceTransaction } from '../service/transaction.js';
-export interface IModuleService {
-  dbMeta: ServiceDbMeta;
-  transaction: ServiceTransaction;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-database.service.dbMeta': ServiceDbMeta;
-    'a-database.service.transaction': ServiceTransaction;
+  export interface IServiceRecord {
+    'a-database:dbMeta': never;
+    'a-database:transaction': never;
   }
 }
 declare module 'vona-module-a-database' {
@@ -93,7 +88,18 @@ declare module 'vona-module-a-database' {
     get scope(): ScopeModuleADatabase;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceDbMeta } from '../service/dbMeta.js';
+import { ServiceTransaction } from '../service/transaction.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-database.service.dbMeta': ServiceDbMeta;
+    'a-database.service.transaction': ServiceTransaction;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -137,7 +143,6 @@ export interface ScopeModuleADatabase {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

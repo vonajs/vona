@@ -85,19 +85,13 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** entity: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/sequence.js';
-import { ServiceSequence } from '../service/sequence.js';
-export interface IModuleService {
-  sequence: ServiceSequence;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-sequence.service.sequence': ServiceSequence;
+  export interface IServiceRecord {
+    'a-sequence:sequence': never;
   }
 }
 declare module 'vona-module-a-sequence' {
@@ -105,7 +99,19 @@ declare module 'vona-module-a-sequence' {
     get scope(): ScopeModuleASequence;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceSequence } from '../service/sequence.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-sequence.service.sequence': ServiceSequence;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -116,7 +122,6 @@ export interface ScopeModuleASequence {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
 }
 

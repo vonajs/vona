@@ -1,4 +1,4 @@
-import { Service, BeanBase, requireDynamic } from 'vona';
+import { BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
 
@@ -13,6 +13,7 @@ import babel from '@babel/core';
 import UglifyJS from 'uglify-js';
 import less from 'less';
 import utils from '../common/utils.js';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceBuild extends BeanBase {

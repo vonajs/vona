@@ -5,10 +5,10 @@ import {
   IInstanceStartupOptions,
   IMiddlewareItem,
   IStartupExecute,
-  Service,
 } from 'vona';
 import path from 'path';
 import fse from 'fs-extra';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceStartup extends BeanBase {

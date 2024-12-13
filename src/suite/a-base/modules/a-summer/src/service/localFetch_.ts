@@ -1,5 +1,5 @@
 import { CacheBase } from '../common/cacheBase.js';
-import { cast, Service } from 'vona';
+import { cast } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 import {
   IDecoratorSummerCacheOptions,
@@ -7,6 +7,7 @@ import {
   ISummerCacheMGet,
   TSummerCacheActionOptions,
 } from '../types/summerCache.js';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceLocalFetch<KEY = any, DATA = any>

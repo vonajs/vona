@@ -6,11 +6,11 @@ import {
   IMetaVersionInit,
   IMetaVersionTest,
   IMetaVersionUpdate,
-  Service,
 } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceVersion extends BeanBase {
