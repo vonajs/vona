@@ -17,7 +17,7 @@ declare module 'vona-module-a-schedule' {
 export * from '../bean/queue.schedule.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-schedule:schedule': IDecoratorQueueOptions;
   }

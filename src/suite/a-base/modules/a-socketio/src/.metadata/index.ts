@@ -84,7 +84,7 @@ export * from '../entity/messageClass.js';
 export * from '../entity/messageSync.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-socketio:message': IDecoratorEntityOptions;
     'a-socketio:messageClass': IDecoratorEntityOptions;
@@ -127,7 +127,7 @@ export * from '../model/messageClass.js';
 export * from '../model/messageSync.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-socketio:message': IDecoratorModelOptions;
     'a-socketio:messageClass': IDecoratorModelOptions;
@@ -165,7 +165,7 @@ export * from '../bean/queue.push.js';
 export * from '../bean/queue.pushDirect.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-socketio:delivery': IDecoratorQueueOptions;
     'a-socketio:process': IDecoratorQueueOptions;
@@ -284,7 +284,7 @@ export * from '../controller/messageClass.js';
 export * from '../controller/test.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-socketio:io': IDecoratorControllerOptions;
     'a-socketio:message': IDecoratorControllerOptions;

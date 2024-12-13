@@ -69,7 +69,7 @@ export * from '../entity/versionInit.js';
 export * from '../entity/viewRecord.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-version:version': IDecoratorEntityOptions;
     'a-version:versionInit': IDecoratorEntityOptions;
@@ -110,7 +110,7 @@ declare module 'vona-module-a-version' {
 export * from '../model/viewRecord.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-version:viewRecord': IDecoratorModelOptions;
   }

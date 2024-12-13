@@ -85,7 +85,7 @@ declare module 'vona-module-a-mail' {
 export * from '../entity/mail.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-mail:mail': IDecoratorEntityOptions;
   }
@@ -110,7 +110,7 @@ declare module 'vona-module-a-mail' {
 export * from '../model/mail.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-mail:mail': IDecoratorModelOptions;
   }
@@ -160,7 +160,7 @@ declare module 'vona' {
 export * from '../controller/scene.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-mail:scene': IDecoratorControllerOptions;
   }

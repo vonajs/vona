@@ -41,7 +41,7 @@ export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-flowchart:flow': IDecoratorControllerOptions;
     'a-flowchart:flowDef': IDecoratorControllerOptions;

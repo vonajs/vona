@@ -26,7 +26,7 @@ declare module 'vona-module-a-flowbehavior' {
 export * from '../bean/queue.overtime.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-flowbehavior:overtime': IDecoratorQueueOptions;
   }

@@ -62,7 +62,7 @@ export * from '../entity/purchaseOrder.js';
 export * from '../entity/purchaseOrderDetail.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'test-flow:product': IDecoratorEntityOptions;
     'test-flow:purchaseOrder': IDecoratorEntityOptions;
@@ -105,7 +105,7 @@ export * from '../model/purchaseOrder.js';
 export * from '../model/purchaseOrderDetail.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'test-flow:product': IDecoratorModelOptions;
     'test-flow:purchaseOrder': IDecoratorModelOptions;
@@ -140,7 +140,7 @@ export interface IModuleModel {
 export * from '../controller/flow.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'test-flow:flow': IDecoratorControllerOptions;
   }

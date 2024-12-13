@@ -86,7 +86,7 @@ export * from '../entity/flowTask.js';
 export * from '../entity/flowTaskHistory.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorEntityOptions;
     'a-flowtask:flowTask': IDecoratorEntityOptions;
@@ -133,7 +133,7 @@ export * from '../model/flowTask.js';
 export * from '../model/flowTaskHistory.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorModelOptions;
     'a-flowtask:flowTask': IDecoratorModelOptions;
@@ -234,7 +234,7 @@ export * from '../controller/flow.js';
 export * from '../controller/flowTask.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-flowtask:flow': IDecoratorControllerOptions;
     'a-flowtask:flowTask': IDecoratorControllerOptions;

@@ -80,7 +80,7 @@ export * from '../controller/public.js';
 export * from '../controller/user.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-user:public': IDecoratorControllerOptions;
     'a-user:user': IDecoratorControllerOptions;

@@ -98,7 +98,7 @@ export * from '../controller/role.js';
 export * from '../controller/user.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-baseadmin:atomRight': IDecoratorControllerOptions;
     'a-baseadmin:auth': IDecoratorControllerOptions;

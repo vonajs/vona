@@ -61,7 +61,7 @@ declare module 'vona-module-a-instance' {
 export * from '../entity/instance.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-instance:instance': IDecoratorEntityOptions;
   }
@@ -86,7 +86,7 @@ declare module 'vona-module-a-instance' {
 export * from '../model/instance.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-instance:instance': IDecoratorModelOptions;
   }

@@ -41,7 +41,7 @@ declare module 'vona-module-a-stats' {
 export * from '../entity/stats.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-stats:stats': IDecoratorEntityOptions;
   }
@@ -66,7 +66,7 @@ declare module 'vona-module-a-stats' {
 export * from '../model/stats.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-stats:stats': IDecoratorModelOptions;
   }
@@ -87,7 +87,7 @@ export interface IModuleModel {
 export * from '../bean/queue.stats.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-stats:stats': IDecoratorQueueOptions;
   }
@@ -137,7 +137,7 @@ declare module 'vona' {
 export * from '../controller/stats.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-stats:stats': IDecoratorControllerOptions;
   }

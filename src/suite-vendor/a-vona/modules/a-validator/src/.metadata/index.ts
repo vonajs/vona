@@ -19,7 +19,7 @@ declare module 'vona-module-a-validator' {
 export * from '../bean/pipe.valid.js';
 import { IPipeOptionsValid } from '../bean/pipe.valid.js';
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-aspect' {
   export interface IPipeRecordLocal {
     'a-validator:valid': IPipeOptionsValid;
   }

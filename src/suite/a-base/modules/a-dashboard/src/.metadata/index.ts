@@ -37,7 +37,7 @@ export * from '../entity/dashboardFull.js';
 export * from '../entity/dashboardUser.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-dashboard:dashboard': IDecoratorEntityOptions;
     'a-dashboard:dashboardContent': IDecoratorEntityOptions;
@@ -89,7 +89,7 @@ export * from '../model/dashboardFull.js';
 export * from '../model/dashboardUser.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-dashboard:dashboard': IDecoratorModelOptions;
     'a-dashboard:dashboardContent': IDecoratorModelOptions;
@@ -160,7 +160,7 @@ declare module 'vona' {
 export * from '../controller/dashboard.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-dashboard:dashboard': IDecoratorControllerOptions;
   }

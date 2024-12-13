@@ -56,7 +56,7 @@ declare module 'vona' {
 export * from '../controller/icon.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-icon:icon': IDecoratorControllerOptions;
   }

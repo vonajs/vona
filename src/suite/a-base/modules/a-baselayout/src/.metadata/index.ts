@@ -36,7 +36,7 @@ export * from '../entity/layoutContent.js';
 export * from '../entity/layoutFull.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-baselayout:layout': IDecoratorEntityOptions;
     'a-baselayout:layoutContent': IDecoratorEntityOptions;
@@ -79,7 +79,7 @@ export * from '../model/layoutContent.js';
 export * from '../model/layoutFull.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-baselayout:layout': IDecoratorModelOptions;
     'a-baselayout:layoutContent': IDecoratorModelOptions;

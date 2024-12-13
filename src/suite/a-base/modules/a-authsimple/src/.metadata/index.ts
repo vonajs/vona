@@ -41,7 +41,7 @@ declare module 'vona-module-a-authsimple' {
 export * from '../entity/authSimple.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-authsimple:authSimple': IDecoratorEntityOptions;
   }
@@ -66,7 +66,7 @@ declare module 'vona-module-a-authsimple' {
 export * from '../model/authSimple.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-authsimple:authSimple': IDecoratorModelOptions;
   }
@@ -125,7 +125,7 @@ declare module 'vona' {
 export * from '../controller/auth.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-authsimple:auth': IDecoratorControllerOptions;
   }

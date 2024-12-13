@@ -28,7 +28,7 @@ export * from '../entity/file.js';
 export * from '../entity/fileView.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-file:file': IDecoratorEntityOptions;
     'a-file:fileView': IDecoratorEntityOptions;
@@ -62,7 +62,7 @@ export * from '../model/file.js';
 export * from '../model/fileView.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-file:file': IDecoratorModelOptions;
     'a-file:fileView': IDecoratorModelOptions;
@@ -119,7 +119,7 @@ declare module 'vona' {
 export * from '../controller/file.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-file:file': IDecoratorControllerOptions;
   }

@@ -55,7 +55,7 @@ declare module 'vona-module-vona-test' {
 export * from '../bean/summerCache.test.js';
 
 import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-declare module 'vona' {
+declare module 'vona-module-a-summer' {
   export interface ISummerCacheRecord {
     'vona-test:test': IDecoratorSummerCacheOptions;
   }
@@ -76,7 +76,7 @@ export interface IModuleSummerCache {
 export * from '../bean/queue.test.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'vona-test:test': IDecoratorQueueOptions;
   }
@@ -97,7 +97,7 @@ export interface IModuleQueue {
 export * from '../bean/schedule.test.js';
 
 import { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
-declare module 'vona' {
+declare module 'vona-module-a-schedule' {
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
   }
@@ -179,7 +179,7 @@ export * from '../controller/tail.js';
 export * from '../controller/transaction.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'vona-test:bean': IDecoratorControllerOptions;
     'vona-test:onion': IDecoratorControllerOptions;

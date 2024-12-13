@@ -83,7 +83,7 @@ export * from '../entity/article.js';
 export * from '../entity/content.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-cms:article': IDecoratorEntityOptions;
     'a-cms:content': IDecoratorEntityOptions;
@@ -117,7 +117,7 @@ export * from '../model/article.js';
 export * from '../model/content.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-cms:article': IDecoratorModelOptions;
     'a-cms:content': IDecoratorModelOptions;
@@ -145,7 +145,7 @@ export interface IModuleModel {
 export * from '../bean/queue.render.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-cms:render': IDecoratorQueueOptions;
   }
@@ -217,7 +217,7 @@ export * from '../controller/rss.js';
 export * from '../controller/site.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-cms:article': IDecoratorControllerOptions;
     'a-cms:comment': IDecoratorControllerOptions;

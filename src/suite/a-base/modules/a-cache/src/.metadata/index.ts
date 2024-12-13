@@ -77,7 +77,7 @@ declare module 'vona-module-a-cache' {
 export * from '../entity/cache.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-cache:cache': IDecoratorEntityOptions;
   }
@@ -102,7 +102,7 @@ declare module 'vona-module-a-cache' {
 export * from '../controller/db.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-cache:db': IDecoratorControllerOptions;
   }

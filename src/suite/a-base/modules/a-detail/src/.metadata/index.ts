@@ -27,7 +27,7 @@ declare module 'vona-module-a-detail' {
 export * from '../entity/detailBase.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-detail:detailBase': IDecoratorEntityOptions;
   }
@@ -52,7 +52,7 @@ declare module 'vona-module-a-detail' {
 export * from '../model/detailBase.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-detail:detailBase': IDecoratorModelOptions;
   }

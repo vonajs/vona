@@ -428,7 +428,7 @@ export * from '../entity/userRoleIncRef.js';
 export * from '../entity/userRoleRef.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-base:atom': IDecoratorEntityOptions;
     'a-base:atomAction': IDecoratorEntityOptions;
@@ -705,7 +705,7 @@ export * from '../model/userRoleIncRef.js';
 export * from '../model/userRoleRef.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-base:atom': IDecoratorModelOptions;
     'a-base:atomAction': IDecoratorModelOptions;
@@ -927,7 +927,7 @@ export * from '../bean/summerCache.roleScopesOfUser.js';
 export * from '../bean/summerCache.roleWhosOfAtomClassAction.js';
 
 import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-declare module 'vona' {
+declare module 'vona-module-a-summer' {
   export interface ISummerCacheRecord {
     'a-base:atomClassInner': IDecoratorSummerCacheOptions;
     'a-base:roleParentsOfUser': IDecoratorSummerCacheOptions;
@@ -983,7 +983,7 @@ export interface IModuleSummerCache {
 export * from '../bean/queue.roleBuild.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'a-base:roleBuild': IDecoratorQueueOptions;
   }
@@ -1181,7 +1181,7 @@ export * from '../controller/user.js';
 export * from '../controller/util.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-base:atom': IDecoratorControllerOptions;
     'a-base:atomAction': IDecoratorControllerOptions;

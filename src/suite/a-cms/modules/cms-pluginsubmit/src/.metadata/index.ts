@@ -2,7 +2,7 @@
 export * from '../bean/queue.submit.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
-declare module 'vona' {
+declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
     'cms-pluginsubmit:submit': IDecoratorQueueOptions;
   }

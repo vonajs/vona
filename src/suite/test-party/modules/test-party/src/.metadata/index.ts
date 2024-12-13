@@ -182,7 +182,7 @@ export * from '../entity/party.js';
 export * from '../entity/partyExpense.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'test-party:party': IDecoratorEntityOptions;
     'test-party:partyExpense': IDecoratorEntityOptions;
@@ -216,7 +216,7 @@ export * from '../model/party.js';
 export * from '../model/partyExpense.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'test-party:party': IDecoratorModelOptions;
     'test-party:partyExpense': IDecoratorModelOptions;
@@ -317,7 +317,7 @@ export * from '../controller/testResourceRight.js';
 export * from '../controller/testRoleUserRole.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'test-party:kitchenSinkAutocomplete': IDecoratorControllerOptions;
     'test-party:kitchenSinkFormSchemaValidation': IDecoratorControllerOptions;

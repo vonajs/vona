@@ -56,7 +56,7 @@ declare module 'vona-module-a-authopen' {
 export * from '../entity/authOpen.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-authopen:authOpen': IDecoratorEntityOptions;
   }
@@ -81,7 +81,7 @@ declare module 'vona-module-a-authopen' {
 export * from '../model/authOpen.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-authopen:authOpen': IDecoratorModelOptions;
   }
@@ -150,7 +150,7 @@ export * from '../controller/auth.js';
 export * from '../controller/authOpen.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-authopen:auth': IDecoratorControllerOptions;
     'a-authopen:authOpen': IDecoratorControllerOptions;

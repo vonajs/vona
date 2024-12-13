@@ -34,7 +34,7 @@ declare module 'vona-module-a-status' {
 export * from '../entity/status.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-status:status': IDecoratorEntityOptions;
   }
@@ -59,7 +59,7 @@ declare module 'vona-module-a-status' {
 export * from '../model/status.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-status:status': IDecoratorModelOptions;
   }

@@ -36,7 +36,7 @@ export * from '../entity/appContent.js';
 export * from '../entity/appFull.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-app:app': IDecoratorEntityOptions;
     'a-app:appContent': IDecoratorEntityOptions;
@@ -79,7 +79,7 @@ export * from '../model/appContent.js';
 export * from '../model/appFull.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-app:app2': IDecoratorModelOptions;
     'a-app:appContent': IDecoratorModelOptions;
@@ -143,7 +143,7 @@ declare module 'vona' {
 export * from '../controller/resource.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-app:resource': IDecoratorControllerOptions;
   }

@@ -84,7 +84,7 @@ export * from '../entity/flowNode.js';
 export * from '../entity/flowNodeHistory.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-flow:flow': IDecoratorEntityOptions;
     'a-flow:flowDef': IDecoratorEntityOptions;
@@ -163,7 +163,7 @@ export * from '../model/flowNode.js';
 export * from '../model/flowNodeHistory.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-flow:flow': IDecoratorModelOptions;
     'a-flow:flowDef': IDecoratorModelOptions;
@@ -310,7 +310,7 @@ export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-flow:flow': IDecoratorControllerOptions;
     'a-flow:flowDef': IDecoratorControllerOptions;

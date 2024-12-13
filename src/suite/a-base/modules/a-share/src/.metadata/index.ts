@@ -29,7 +29,7 @@ export * from '../entity/shareRecordPV.js';
 export * from '../entity/shareRecordUV.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-share:share': IDecoratorEntityOptions;
     'a-share:shareRecordPV': IDecoratorEntityOptions;
@@ -72,7 +72,7 @@ export * from '../model/shareRecordPV.js';
 export * from '../model/shareRecordUV.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-share:share': IDecoratorModelOptions;
     'a-share:shareRecordPV': IDecoratorModelOptions;
@@ -136,7 +136,7 @@ declare module 'vona' {
 export * from '../controller/share.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-share:share': IDecoratorControllerOptions;
   }

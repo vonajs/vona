@@ -87,7 +87,7 @@ export * from '../entity/auth.js';
 export * from '../entity/authProvider.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-auth:auth': IDecoratorEntityOptions;
     'a-auth:authProvider': IDecoratorEntityOptions;
@@ -121,7 +121,7 @@ export * from '../model/auth.js';
 export * from '../model/authProvider.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-auth:auth': IDecoratorModelOptions;
     'a-auth:authProvider': IDecoratorModelOptions;

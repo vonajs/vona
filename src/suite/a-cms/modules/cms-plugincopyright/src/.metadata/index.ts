@@ -2,7 +2,7 @@
 export * from '../controller/util.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'cms-plugincopyright:util': IDecoratorControllerOptions;
   }

@@ -49,7 +49,7 @@ declare module 'vona-module-a-sequence' {
 export * from '../entity/sequence.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-sequence:sequence': IDecoratorEntityOptions;
   }
@@ -103,7 +103,7 @@ declare module 'vona' {
 export * from '../controller/sequence.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-sequence:sequence': IDecoratorControllerOptions;
   }

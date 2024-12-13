@@ -28,7 +28,7 @@ export * from '../bean/summerCache.fieldsRightOfAtomClass.js';
 export * from '../bean/summerCache.fieldsRightOfUser.js';
 
 import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
-declare module 'vona' {
+declare module 'vona-module-a-summer' {
   export interface ISummerCacheRecord {
     'a-fields:fieldsRightOfAtomClass': IDecoratorSummerCacheOptions;
     'a-fields:fieldsRightOfUser': IDecoratorSummerCacheOptions;

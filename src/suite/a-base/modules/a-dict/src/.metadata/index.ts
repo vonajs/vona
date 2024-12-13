@@ -43,7 +43,7 @@ export * from '../entity/dict.js';
 export * from '../entity/dictContent.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-dict:dict': IDecoratorEntityOptions;
     'a-dict:dictContent': IDecoratorEntityOptions;
@@ -77,7 +77,7 @@ export * from '../model/dict.js';
 export * from '../model/dictContent.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-dict:dict': IDecoratorModelOptions;
     'a-dict:dictContent': IDecoratorModelOptions;
@@ -134,7 +134,7 @@ declare module 'vona' {
 export * from '../controller/dict.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-dict:dict': IDecoratorControllerOptions;
   }

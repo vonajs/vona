@@ -49,7 +49,7 @@ export * from '../entity/userOnline.js';
 export * from '../entity/userOnlineHistory.js';
 
 import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IEntityRecord {
     'a-useronline:userOnline': IDecoratorEntityOptions;
     'a-useronline:userOnlineHistory': IDecoratorEntityOptions;
@@ -83,7 +83,7 @@ export * from '../model/userOnline.js';
 export * from '../model/userOnlineHistory.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona' {
+declare module 'vona-module-a-database' {
   export interface IModelRecord {
     'a-useronline:userOnline': IDecoratorModelOptions;
     'a-useronline:userOnlineHistory': IDecoratorModelOptions;
@@ -140,7 +140,7 @@ declare module 'vona' {
 export * from '../controller/userOnline.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
-declare module 'vona' {
+declare module 'vona-module-a-web' {
   export interface IControllerRecord {
     'a-useronline:userOnline': IDecoratorControllerOptions;
   }
