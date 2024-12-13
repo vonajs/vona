@@ -1,32 +1,20 @@
-/** service: begin */
-export * from '../service/router.js';
-
+/** beans: begin */
+export * from '../bean/bean.router.js';
+import { BeanRouter } from '../bean/bean.router.js';
 import 'vona';
 declare module 'vona' {
-  export interface IServiceRecord {
-    'a-web:router': never;
+  export interface IBeanRecordGlobal {
+    router: BeanRouter;
   }
+
+  export interface IBeanRecordGeneral {}
 }
 declare module 'vona-module-a-web' {
-  export interface ServiceRouter {
+  export interface BeanRouter {
     get scope(): ScopeModuleAWeb;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceRouter } from '../service/router.js';
-export interface IModuleService {
-  router: ServiceRouter;
-}
-/** service: end */
-/** service: begin */
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-web.service.router': ServiceRouter;
-  }
-}
-/** service: end */
+/** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -36,7 +24,6 @@ export class ScopeModuleAWeb extends BeanScopeBase {}
 export interface ScopeModuleAWeb {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  service: IModuleService;
 }
 
 import 'vona';
