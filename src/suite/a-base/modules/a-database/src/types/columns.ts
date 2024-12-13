@@ -1,4 +1,5 @@
-import { appMetadata, appResource, Constructable, IDecoratorEntityOptions } from 'vona';
+import { appMetadata, appResource, Constructable } from 'vona';
+import { IDecoratorEntityOptions } from './onionEntity.js';
 
 export const SymbolDecoratorRuleColumn = Symbol('SymbolDecoratorRuleColumn');
 
