@@ -2,7 +2,6 @@ import defaultList from './command/default.list.js';
 import createSuite from './command/create.suite.js';
 import createModule from './command/create.module.js';
 import createBean from './command/create.bean.js';
-import createController from './command/create.controller.js';
 import createTest from './command/create.test.js';
 import initConfig from './command/init.config.js';
 import initLocale from './command/init.locale.js';
@@ -21,7 +20,6 @@ export const commands = {
     suite: createSuite,
     module: createModule,
     bean: createBean,
-    controller: createController,
     test: createTest,
   },
   init: {

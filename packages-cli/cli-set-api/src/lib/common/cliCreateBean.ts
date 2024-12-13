@@ -50,11 +50,7 @@ export class CliCreateBeanBase extends BeanCliBase {
     // decoratorName
     argv.decoratorName = argv.sceneNameCapitalize;
     // beanOptions
-    if (argv.sceneName === 'controller') {
-      argv.beanOptions = `'${argv.name}'`;
-    } else {
-      argv.beanOptions = '';
-    }
+    argv.beanOptions = '';
     // directory
     const beanDir = path.join(targetDir, `src/${argv.sceneName}`);
     const beanFile = path.join(beanDir, `${argv.name}.ts`);

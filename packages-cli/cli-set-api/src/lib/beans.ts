@@ -2,7 +2,6 @@ import { CliDefaultList } from './bean/cli.default.list.js';
 import { CliCreateSuite } from './bean/cli.create.suite.js';
 import { CliCreateModule } from './bean/cli.create.module.js';
 import { CliCreateBean } from './bean/cli.create.bean.js';
-import { CliCreateController } from './bean/cli.create.controller.js';
 import { CliCreateTest } from './bean/cli.create.test.js';
 import { CliInitConfig } from './bean/cli.init.config.js';
 import { CliInitLocale } from './bean/cli.init.locale.js';
@@ -18,7 +17,6 @@ export const beans = {
   'create.suite': CliCreateSuite,
   'create.bean': CliCreateBean,
   'create.module': CliCreateModule,
-  'create.controller': CliCreateController,
   'create.test': CliCreateTest,
   'init.config': CliInitConfig,
   'init.locale': CliInitLocale,

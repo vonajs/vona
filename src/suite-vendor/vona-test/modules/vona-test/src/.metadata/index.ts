@@ -176,7 +176,6 @@ export * from '../controller/queue.js';
 export * from '../controller/status.js';
 export * from '../controller/summer.js';
 export * from '../controller/tail.js';
-export * from '../controller/test1.js';
 export * from '../controller/transaction.js';
 
 import { IDecoratorControllerOptions } from 'vona-module-a-web';
@@ -189,7 +188,6 @@ declare module 'vona' {
     'vona-test:status': IDecoratorControllerOptions;
     'vona-test:summer': IDecoratorControllerOptions;
     'vona-test:tail': IDecoratorControllerOptions;
-    'vona-test:test1': IDecoratorControllerOptions;
     'vona-test:transaction': IDecoratorControllerOptions;
   }
 }
@@ -219,10 +217,6 @@ declare module 'vona-module-vona-test' {
   }
 
   export interface ControllerTail {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerTest1 {
     get scope(): ScopeModuleVonaTest;
   }
 
