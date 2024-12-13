@@ -3,6 +3,6 @@ export * from './config.js';
 export * from './database.js';
 export * from './entityBase.js';
 export * from './model.js';
-export * from './onion.js';
+export * from './onionModel.js';
 export * from './tableIdentity.js';
 export * from './transaction.js';
