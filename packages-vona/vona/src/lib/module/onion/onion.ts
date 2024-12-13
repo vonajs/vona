@@ -10,7 +10,6 @@ import {
   IMiddlewareOptionsMeta,
   SymbolUseMiddlewareLocal,
 } from '../../../types/interface/middleware.js';
-import { RouteHandlerArgumentMetaDecorator } from '../../../types/interface/pipe.js';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { VonaContext } from '../../../types/context/index.js';
@@ -42,7 +41,6 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
 
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
-  _cacheMiddlewaresArgument: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
@@ -82,33 +80,6 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     return this._composeMiddlewaresGlobal();
   }
 
-  composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
-    const beanFullName = ctx.getClassBeanFullName();
-    const handlerName = ctx.getHandler()!.name;
-    const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
-    if (!this._cacheMiddlewaresArgument[key]) {
-      const middlewares: Function[] = [];
-      // pipes: global
-      for (const item of this.middlewaresGlobal) {
-        middlewares.push(this._wrapMiddleware(item, executeCustom));
-      }
-      // pipes: route
-      const middlewaresLocal = this._collectMiddlewaresHandler(ctx);
-      for (const item of middlewaresLocal) {
-        middlewares.push(this._wrapMiddleware(item, executeCustom));
-      }
-      // pipes: arguments
-      const middlewaresArgument = this._collectArgumentMiddlewares(ctx, argMeta);
-      if (middlewaresArgument) {
-        for (const item of middlewaresArgument) {
-          middlewares.push(this._wrapMiddleware(item, executeCustom));
-        }
-      }
-      this._cacheMiddlewaresArgument[key] = middlewares;
-    }
-    return this._cacheMiddlewaresArgument[key];
-  }
-
   get middlewaresEnabled() {
     if (!this[SymbolMiddlewaresEnabled]) {
       this[SymbolMiddlewaresEnabled] = this.middlewaresGlobal.filter(middlewareItem => {
@@ -130,21 +101,6 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
       this._cacheMiddlewaresGlobal = middlewares;
     }
     return this._cacheMiddlewaresGlobal;
-  }
-
-  private _collectArgumentMiddlewares(_ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
-    if (!argMeta.pipes) return;
-    return argMeta.pipes.map(pipe => {
-      const { pipeName, options } = pipe();
-      const item = this.middlewaresNormal[pipeName];
-      if (!item) throw new Error(`${this.sceneName} not found: ${pipeName}`);
-      return {
-        ...item,
-        argumentPipe: {
-          options: options,
-        },
-      };
-    });
   }
 
   private _composeMiddlewaresHandler(
@@ -174,7 +130,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     return this._cacheMiddlewaresHandler[key];
   }
 
-  private _collectMiddlewaresHandler(ctx: VonaContext) {
+  public _collectMiddlewaresHandler(ctx: VonaContext) {
     if (!ctx.getClass()) return [];
     // middlewaresLocal: controller
     const controllerMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(

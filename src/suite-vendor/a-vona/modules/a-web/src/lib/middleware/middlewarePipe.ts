@@ -1,15 +1,14 @@
+import { appMetadata, Constructable, Next, Onion, VonaContext } from 'vona';
+import { extractValue } from './extractValue.js';
 import {
-  appMetadata,
-  Constructable,
+  IDecoratorPipeOptionsGlobal,
+  IPipeRecord,
   IPipeTransform,
-  Next,
   RouteHandlerArgumentMeta,
   RouteHandlerArgumentMetaDecorator,
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
-  VonaContext,
-} from 'vona';
-import { extractValue } from './extractValue.js';
+} from 'vona-module-a-aspect';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // todo: support fromConfig
@@ -66,7 +65,7 @@ async function _transformArgument(
   value: any,
 ) {
   // pipes
-  const pipes = ctx.app.meta.onionPipe.composePipes(ctx, argMeta, (beanInstance: IPipeTransform, options, value) => {
+  const pipes = composePipes(ctx, argMeta, (beanInstance: IPipeTransform, options, value) => {
     return beanInstance.transform(value, metadata, options);
   });
   if (pipes.length === 0) return value;
@@ -82,4 +81,52 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
     return await argMeta.extractValue(ctx, argMeta);
   }
   return extractValue(ctx, argMeta);
+}
+
+const __cacheMiddlewaresArgument: Record<string, Function[]> = {};
+
+function composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: Function) {
+  const onionPipe = ctx.app.bean.onion.pipe;
+  const beanFullName = ctx.getClassBeanFullName();
+  const handlerName = ctx.getHandler()!.name;
+  const key = `${beanFullName}:${handlerName}:${argMeta.index}`;
+  if (!__cacheMiddlewaresArgument[key]) {
+    const middlewares: Function[] = [];
+    // pipes: global
+    for (const item of onionPipe.middlewaresGlobal) {
+      middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
+    }
+    // pipes: route
+    const middlewaresLocal = onionPipe._collectMiddlewaresHandler(ctx);
+    for (const item of middlewaresLocal) {
+      middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
+    }
+    // pipes: arguments
+    const middlewaresArgument = _collectArgumentMiddlewares(onionPipe, argMeta);
+    if (middlewaresArgument) {
+      for (const item of middlewaresArgument) {
+        middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
+      }
+    }
+    __cacheMiddlewaresArgument[key] = middlewares;
+  }
+  return __cacheMiddlewaresArgument[key];
+}
+
+function _collectArgumentMiddlewares(
+  onionPipe: Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>,
+  argMeta: RouteHandlerArgumentMetaDecorator,
+) {
+  if (!argMeta.pipes) return;
+  return argMeta.pipes.map(pipe => {
+    const { pipeName, options } = pipe();
+    const item = onionPipe.middlewaresNormal[pipeName];
+    if (!item) throw new Error(`${onionPipe.sceneName} not found: ${pipeName}`);
+    return {
+      ...item,
+      argumentPipe: {
+        options: options,
+      },
+    };
+  });
 }

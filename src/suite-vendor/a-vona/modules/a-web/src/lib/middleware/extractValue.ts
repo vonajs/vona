@@ -1,4 +1,5 @@
-import { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType, VonaContext } from 'vona';
+import { VonaContext } from 'vona';
+import { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from 'vona-module-a-aspect';
 
 export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {
   return exchangeKeyForValue(argMeta.type, argMeta.field, { req: ctx.request, res: ctx.response });

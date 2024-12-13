@@ -1,4 +1,4 @@
-import { IPipeRecord } from '../../../types/interface/pipe.js';
+import { IPipeRecord } from '../types/pipe.js';
 
 export interface ArgumentPipeInfo<T extends keyof IPipeRecord> {
   pipeName: T;

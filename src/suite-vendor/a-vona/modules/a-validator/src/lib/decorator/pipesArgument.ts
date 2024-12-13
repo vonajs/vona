@@ -1,14 +1,12 @@
-import {
-  appMetadata,
-  isClassStrict,
-  MetadataKey,
-  RouteHandlerArgumentMetaDecorator,
-  RouteHandlerArgumentType,
-  SymbolRouteHandlersArgumentsMeta,
-} from 'vona';
+import { appMetadata, isClassStrict, MetadataKey } from 'vona';
 import { PipeArgument } from '../types/decorator.js';
 import { schema } from '../schema/schema.js';
 import { valid } from '../../bean/pipe.valid.js';
+import {
+  RouteHandlerArgumentMetaDecorator,
+  RouteHandlerArgumentType,
+  SymbolRouteHandlersArgumentsMeta,
+} from 'vona-module-a-aspect';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: any, ...pipes: PipeArgument[]): ParameterDecorator {

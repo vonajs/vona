@@ -12,7 +12,6 @@ import {
   RequestMappingMetadata,
   RequestMethod,
   SymbolRequestMappingHandler,
-  SymbolRouteHandlersArgumentsValue,
   SymbolUseMiddlewareOptions,
   VonaContext,
 } from 'vona';
@@ -23,6 +22,7 @@ import { IDecoratorControllerOptions } from '../types/controller.js';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.js';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.js';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
+import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-aspect';
 
 @Bean()
 export class BeanRouter extends BeanBase {

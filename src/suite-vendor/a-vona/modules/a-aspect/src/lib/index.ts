@@ -1,3 +1,4 @@
+export * from './createArgumentPipe.js';
 export * from './filter.js';
 export * from './pipe.js';
 export * from './useFilter.js';

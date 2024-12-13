@@ -1,11 +1,5 @@
-import {
-  RouteHandlerArgumentMeta,
-  BeanBase,
-  IDecoratorPipeOptions,
-  IPipeTransform,
-  Pipe,
-  createArgumentPipe,
-} from 'vona';
+import { BeanBase } from 'vona';
+import { IDecoratorPipeOptions, IPipeTransform, Pipe, RouteHandlerArgumentMeta } from 'vona-module-a-aspect';
 
 export interface IPipeOptions<%=argv.beanNameCapitalize%> extends IDecoratorPipeOptions {}
 
@@ -15,5 +9,3 @@ export class Pipe<%=argv.beanNameCapitalize%> extends BeanBase implements IPipeT
     return value;
   }
 }
-
-export const <%=argv.beanName%> = createArgumentPipe('<%=argv.module%>:<%=argv.beanName%>');
