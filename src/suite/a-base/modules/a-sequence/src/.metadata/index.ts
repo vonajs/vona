@@ -102,6 +102,12 @@ declare module 'vona-module-a-sequence' {
 /** service: end */
 /** service: begin */
 import { ServiceSequence } from '../service/sequence.js';
+export interface IModuleService {
+  sequence: ServiceSequence;
+}
+/** service: end */
+/** service: begin */
+import { ServiceSequence } from '../service/sequence.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -123,6 +129,7 @@ export interface ScopeModuleASequence {
   util: BeanScopeUtil;
   redlock: MetaRedlock;
   entity: IModuleEntity;
+  service: IModuleService;
 }
 
 import 'vona';

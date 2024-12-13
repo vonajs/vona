@@ -30,6 +30,12 @@ declare module 'vona-module-a-login' {
 /** service: end */
 /** service: begin */
 import { ServiceAuth } from '../service/auth.js';
+export interface IModuleService {
+  auth: ServiceAuth;
+}
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -46,6 +52,7 @@ export class ScopeModuleALogin extends BeanScopeBase {}
 export interface ScopeModuleALogin {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  service: IModuleService;
 }
 
 import 'vona';

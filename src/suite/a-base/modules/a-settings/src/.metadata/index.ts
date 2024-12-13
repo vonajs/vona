@@ -118,6 +118,12 @@ declare module 'vona-module-a-settings' {
 /** service: end */
 /** service: begin */
 import { ServiceSettings } from '../service/settings.js';
+export interface IModuleService {
+  settings: ServiceSettings;
+}
+/** service: end */
+/** service: begin */
+import { ServiceSettings } from '../service/settings.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -158,6 +164,7 @@ export interface ScopeModuleASettings {
   constant: TypeModuleConstants<typeof constants>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

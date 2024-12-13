@@ -13,6 +13,7 @@
       },
       "service": {
         "sceneIsolate": true,
+        "scopeResource": true,
         "boilerplate": "cli/service/boilerplate",
         "metadataCustom": "cli/service/metadata/generate.ts"
       }

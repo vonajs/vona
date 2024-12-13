@@ -159,6 +159,12 @@ declare module 'vona-module-a-mail' {
 /** service: end */
 /** service: begin */
 import { ServiceScene } from '../service/scene.js';
+export interface IModuleService {
+  scene: ServiceScene;
+}
+/** service: end */
+/** service: begin */
+import { ServiceScene } from '../service/scene.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -203,6 +209,7 @@ export interface ScopeModuleAMail {
   status: MetaStatus;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

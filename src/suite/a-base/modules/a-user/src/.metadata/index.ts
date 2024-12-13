@@ -82,6 +82,14 @@ declare module 'vona-module-a-user' {
 /** service: begin */
 import { ServicePublic } from '../service/public.js';
 import { ServiceUser } from '../service/user.js';
+export interface IModuleService {
+  public: ServicePublic;
+  user: ServiceUser;
+}
+/** service: end */
+/** service: begin */
+import { ServicePublic } from '../service/public.js';
+import { ServiceUser } from '../service/user.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -112,6 +120,7 @@ export interface ScopeModuleAUser {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
+  service: IModuleService;
 }
 
 import 'vona';

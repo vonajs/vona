@@ -151,6 +151,14 @@ declare module 'vona-module-a-version' {
 /** service: begin */
 import { ServiceDatabase } from '../service/database.js';
 import { ServiceVersion } from '../service/version.js';
+export interface IModuleService {
+  database: ServiceDatabase;
+  version: ServiceVersion;
+}
+/** service: end */
+/** service: begin */
+import { ServiceDatabase } from '../service/database.js';
+import { ServiceVersion } from '../service/version.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -198,6 +206,7 @@ export interface ScopeModuleAVersion {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

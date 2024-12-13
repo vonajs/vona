@@ -92,6 +92,14 @@ declare module 'vona-module-a-database' {
 /** service: begin */
 import { ServiceDbMeta } from '../service/dbMeta.js';
 import { ServiceTransaction } from '../service/transaction.js';
+export interface IModuleService {
+  dbMeta: ServiceDbMeta;
+  transaction: ServiceTransaction;
+}
+/** service: end */
+/** service: begin */
+import { ServiceDbMeta } from '../service/dbMeta.js';
+import { ServiceTransaction } from '../service/transaction.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -143,6 +151,7 @@ export interface ScopeModuleADatabase {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

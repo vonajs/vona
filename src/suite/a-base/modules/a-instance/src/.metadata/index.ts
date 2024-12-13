@@ -120,6 +120,12 @@ declare module 'vona-module-a-instance' {
 /** service: end */
 /** service: begin */
 import { ServiceInstance } from '../service/instance.js';
+export interface IModuleService {
+  instance: ServiceInstance;
+}
+/** service: end */
+/** service: begin */
+import { ServiceInstance } from '../service/instance.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -164,6 +170,7 @@ export interface ScopeModuleAInstance {
   redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

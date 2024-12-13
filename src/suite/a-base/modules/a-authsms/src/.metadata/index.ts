@@ -146,6 +146,16 @@ declare module 'vona-module-a-authsms' {
 import { ServiceAuth } from '../service/auth.js';
 import { ServiceCaptcha } from '../service/captcha.js';
 import { ServiceSmsProvider } from '../service/smsProvider.js';
+export interface IModuleService {
+  auth: ServiceAuth;
+  captcha: ServiceCaptcha;
+  smsProvider: ServiceSmsProvider;
+}
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceCaptcha } from '../service/captcha.js';
+import { ServiceSmsProvider } from '../service/smsProvider.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -196,6 +206,7 @@ export interface ScopeModuleAAuthsms {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
+  service: IModuleService;
 }
 
 import 'vona';

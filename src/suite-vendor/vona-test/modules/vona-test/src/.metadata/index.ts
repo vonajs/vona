@@ -209,6 +209,16 @@ declare module 'vona-module-vona-test' {
 import { ServiceTest } from '../service/test.js';
 import { ServiceTestApp } from '../service/testApp.js';
 import { ServiceTestClass } from '../service/testClass.js';
+export interface IModuleService {
+  test: ServiceTest;
+  testApp: ServiceTestApp;
+  testClass: ServiceTestClass;
+}
+/** service: end */
+/** service: begin */
+import { ServiceTest } from '../service/test.js';
+import { ServiceTestApp } from '../service/testApp.js';
+import { ServiceTestClass } from '../service/testClass.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -255,6 +265,7 @@ export interface ScopeModuleVonaTest {
   status: MetaStatus;
   summerCache: IModuleSummerCache;
   queue: IModuleQueue;
+  service: IModuleService;
 }
 
 import 'vona';

@@ -32,6 +32,12 @@ declare module 'vona-module-a-oauth' {
 /** service: end */
 /** service: begin */
 import { ServiceSessionStore } from '../service/sessionStore.js';
+export interface IModuleService {
+  sessionStore: ServiceSessionStore;
+}
+/** service: end */
+/** service: begin */
+import { ServiceSessionStore } from '../service/sessionStore.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -51,6 +57,7 @@ export class ScopeModuleAOauth extends BeanScopeBase {}
 export interface ScopeModuleAOauth {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  service: IModuleService;
 }
 
 import 'vona';

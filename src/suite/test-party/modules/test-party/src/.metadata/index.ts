@@ -536,6 +536,12 @@ declare module 'vona-module-test-party' {
 /** service: end */
 /** service: begin */
 import { ServiceTest } from '../service/test.js';
+export interface IModuleService {
+  test: ServiceTest;
+}
+/** service: end */
+/** service: begin */
+import { ServiceTest } from '../service/test.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -582,6 +588,7 @@ export interface ScopeModuleTestParty {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

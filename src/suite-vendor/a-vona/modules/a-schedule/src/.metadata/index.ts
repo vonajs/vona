@@ -51,6 +51,12 @@ declare module 'vona-module-a-schedule' {
 /** service: end */
 /** service: begin */
 import { ServiceSchedule } from '../service/schedule.js';
+export interface IModuleService {
+  schedule: ServiceSchedule;
+}
+/** service: end */
+/** service: begin */
+import { ServiceSchedule } from '../service/schedule.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -68,6 +74,7 @@ export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   queue: IModuleQueue;
+  service: IModuleService;
 }
 
 import 'vona';

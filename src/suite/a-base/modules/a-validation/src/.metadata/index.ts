@@ -69,6 +69,12 @@ declare module 'vona-module-a-validation' {
 /** service: end */
 /** service: begin */
 import { ServiceValidation } from '../service/validation.js';
+export interface IModuleService {
+  validation: ServiceValidation;
+}
+/** service: end */
+/** service: begin */
+import { ServiceValidation } from '../service/validation.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -113,6 +119,7 @@ export interface ScopeModuleAValidation {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

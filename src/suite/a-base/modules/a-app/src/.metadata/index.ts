@@ -142,6 +142,12 @@ declare module 'vona-module-a-app' {
 /** service: end */
 /** service: begin */
 import { ServiceResource } from '../service/resource.js';
+export interface IModuleService {
+  resource: ServiceResource;
+}
+/** service: end */
+/** service: begin */
+import { ServiceResource } from '../service/resource.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -169,6 +175,7 @@ export interface ScopeModuleAApp {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

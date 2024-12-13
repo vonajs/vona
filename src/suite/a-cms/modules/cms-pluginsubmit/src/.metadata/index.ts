@@ -36,6 +36,12 @@ declare module 'vona-module-cms-pluginsubmit' {
 /** service: end */
 /** service: begin */
 import { ServiceTools } from '../service/tools.js';
+export interface IModuleService {
+  tools: ServiceTools;
+}
+/** service: end */
+/** service: begin */
+import { ServiceTools } from '../service/tools.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -58,6 +64,7 @@ export interface ScopeModuleCmsPluginsubmit {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   queue: IModuleQueue;
+  service: IModuleService;
 }
 
 import 'vona';

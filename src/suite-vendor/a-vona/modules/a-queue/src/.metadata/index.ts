@@ -15,6 +15,12 @@ declare module 'vona-module-a-queue' {
 /** service: end */
 /** service: begin */
 import { ServiceQueue } from '../service/queue.js';
+export interface IModuleService {
+  queue: ServiceQueue;
+}
+/** service: end */
+/** service: begin */
+import { ServiceQueue } from '../service/queue.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -36,6 +42,7 @@ export interface ScopeModuleAQueue {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  service: IModuleService;
 }
 
 import 'vona';

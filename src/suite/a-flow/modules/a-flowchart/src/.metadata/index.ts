@@ -43,6 +43,14 @@ declare module 'vona-module-a-flowchart' {
 /** service: begin */
 import { ServiceFlow } from '../service/flow.js';
 import { ServiceFlowDef } from '../service/flowDef.js';
+export interface IModuleService {
+  flow: ServiceFlow;
+  flowDef: ServiceFlowDef;
+}
+/** service: end */
+/** service: begin */
+import { ServiceFlow } from '../service/flow.js';
+import { ServiceFlowDef } from '../service/flowDef.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -60,6 +68,7 @@ export class ScopeModuleAFlowchart extends BeanScopeBase {}
 export interface ScopeModuleAFlowchart {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  service: IModuleService;
 }
 
 import 'vona';

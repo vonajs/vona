@@ -150,6 +150,16 @@ declare module 'vona-module-a-authopen' {
 import { ServiceAuth } from '../service/auth.js';
 import { ServiceAuthOpen } from '../service/authOpen.js';
 import { ServiceToken } from '../service/token.js';
+export interface IModuleService {
+  auth: ServiceAuth;
+  authOpen: ServiceAuthOpen;
+  token: ServiceToken;
+}
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceAuthOpen } from '../service/authOpen.js';
+import { ServiceToken } from '../service/token.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -192,6 +202,7 @@ export interface ScopeModuleAAuthopen {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

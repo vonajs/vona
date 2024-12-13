@@ -122,6 +122,14 @@ declare module 'vona-module-a-authsimple' {
 /** service: begin */
 import { ServiceAuth } from '../service/auth.js';
 import { ServiceSimple } from '../service/simple.js';
+export interface IModuleService {
+  auth: ServiceAuth;
+  simple: ServiceSimple;
+}
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceSimple } from '../service/simple.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -169,6 +177,7 @@ export interface ScopeModuleAAuthsimple {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

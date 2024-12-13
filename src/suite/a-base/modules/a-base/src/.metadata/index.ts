@@ -1215,6 +1215,42 @@ import { ServiceStash } from '../service/stash.js';
 import { ServiceTag } from '../service/tag.js';
 import { ServiceUser } from '../service/user.js';
 import { ServiceUtil } from '../service/util.js';
+export interface IModuleService {
+  atom: ServiceAtom;
+  atomAction: ServiceAtomAction;
+  atomClass: ServiceAtomClass;
+  atomState: ServiceAtomState;
+  auth: ServiceAuth;
+  base: ServiceBase;
+  category: ServiceCategory;
+  comment: ServiceComment;
+  jwt: ServiceJwt;
+  layoutConfig: ServiceLayoutConfig;
+  procedure: ServiceProcedure;
+  resource: ServiceResource;
+  stash: ServiceStash;
+  tag: ServiceTag;
+  user: ServiceUser;
+  util: ServiceUtil;
+}
+/** service: end */
+/** service: begin */
+import { ServiceAtom } from '../service/atom.js';
+import { ServiceAtomAction } from '../service/atomAction.js';
+import { ServiceAtomClass } from '../service/atomClass.js';
+import { ServiceAtomState } from '../service/atomState.js';
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceBase } from '../service/base.js';
+import { ServiceCategory } from '../service/category.js';
+import { ServiceComment } from '../service/comment.js';
+import { ServiceJwt } from '../service/jwt.js';
+import { ServiceLayoutConfig } from '../service/layoutConfig.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import { ServiceResource } from '../service/resource.js';
+import { ServiceStash } from '../service/stash.js';
+import { ServiceTag } from '../service/tag.js';
+import { ServiceUser } from '../service/user.js';
+import { ServiceUtil } from '../service/util.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -1292,6 +1328,7 @@ export interface ScopeModuleABase {
   model: IModuleModel;
   summerCache: IModuleSummerCache;
   queue: IModuleQueue;
+  service: IModuleService;
 }
 
 import 'vona';

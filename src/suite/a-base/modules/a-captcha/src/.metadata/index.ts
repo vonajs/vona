@@ -62,6 +62,12 @@ declare module 'vona-module-a-captcha' {
 /** service: end */
 /** service: begin */
 import { ServiceCaptcha } from '../service/captcha.js';
+export interface IModuleService {
+  captcha: ServiceCaptcha;
+}
+/** service: end */
+/** service: begin */
+import { ServiceCaptcha } from '../service/captcha.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -106,6 +112,7 @@ export interface ScopeModuleACaptcha {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

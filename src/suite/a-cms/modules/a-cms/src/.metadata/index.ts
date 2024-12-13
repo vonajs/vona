@@ -232,6 +232,16 @@ declare module 'vona-module-a-cms' {
 import { ServiceBuild } from '../service/build.js';
 import { ServiceRender } from '../service/render.js';
 import { ServiceSite } from '../service/site.js';
+export interface IModuleService {
+  build: ServiceBuild;
+  render: ServiceRender;
+  site: ServiceSite;
+}
+/** service: end */
+/** service: begin */
+import { ServiceBuild } from '../service/build.js';
+import { ServiceRender } from '../service/render.js';
+import { ServiceSite } from '../service/site.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -288,6 +298,7 @@ export interface ScopeModuleACms {
   entity: IModuleEntity;
   model: IModuleModel;
   queue: IModuleQueue;
+  service: IModuleService;
 }
 
 import 'vona';

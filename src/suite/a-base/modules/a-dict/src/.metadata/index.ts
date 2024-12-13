@@ -133,6 +133,12 @@ declare module 'vona-module-a-dict' {
 /** service: end */
 /** service: begin */
 import { ServiceDict } from '../service/dict.js';
+export interface IModuleService {
+  dict: ServiceDict;
+}
+/** service: end */
+/** service: begin */
+import { ServiceDict } from '../service/dict.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -160,6 +166,7 @@ export interface ScopeModuleADict {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

@@ -162,6 +162,12 @@ declare module 'vona-module-a-auth' {
 /** service: end */
 /** service: begin */
 import { ServicePassport } from '../service/passport.js';
+export interface IModuleService {
+  passport: ServicePassport;
+}
+/** service: end */
+/** service: begin */
+import { ServicePassport } from '../service/passport.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -206,6 +212,7 @@ export interface ScopeModuleAAuth {
   redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

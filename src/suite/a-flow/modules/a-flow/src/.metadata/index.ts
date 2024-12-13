@@ -302,6 +302,24 @@ import { ServiceLocalFlowEdge } from '../service/localFlowEdge.js';
 import { ServiceLocalFlowListener } from '../service/localFlowListener.js';
 import { ServiceLocalFlowNode } from '../service/localFlowNode.js';
 import { ServiceProcedure } from '../service/procedure.js';
+export interface IModuleService {
+  flow: ServiceFlow;
+  flowDef: ServiceFlowDef;
+  localFlow: ServiceLocalFlow;
+  localFlowEdge: ServiceLocalFlowEdge;
+  localFlowListener: ServiceLocalFlowListener;
+  localFlowNode: ServiceLocalFlowNode;
+  procedure: ServiceProcedure;
+}
+/** service: end */
+/** service: begin */
+import { ServiceFlow } from '../service/flow.js';
+import { ServiceFlowDef } from '../service/flowDef.js';
+import { ServiceLocalFlow } from '../service/localFlow.js';
+import { ServiceLocalFlowEdge } from '../service/localFlowEdge.js';
+import { ServiceLocalFlowListener } from '../service/localFlowListener.js';
+import { ServiceLocalFlowNode } from '../service/localFlowNode.js';
+import { ServiceProcedure } from '../service/procedure.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -358,6 +376,7 @@ export interface ScopeModuleAFlow {
   redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

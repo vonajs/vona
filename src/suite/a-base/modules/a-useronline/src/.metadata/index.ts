@@ -139,6 +139,12 @@ declare module 'vona-module-a-useronline' {
 /** service: end */
 /** service: begin */
 import { ServiceUserOnline } from '../service/userOnline.js';
+export interface IModuleService {
+  userOnline: ServiceUserOnline;
+}
+/** service: end */
+/** service: begin */
+import { ServiceUserOnline } from '../service/userOnline.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -179,6 +185,7 @@ export interface ScopeModuleAUseronline {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

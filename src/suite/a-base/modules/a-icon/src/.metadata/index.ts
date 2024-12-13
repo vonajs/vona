@@ -55,6 +55,12 @@ declare module 'vona-module-a-icon' {
 /** service: end */
 /** service: begin */
 import { ServiceIcon } from '../service/icon.js';
+export interface IModuleService {
+  icon: ServiceIcon;
+}
+/** service: end */
+/** service: begin */
+import { ServiceIcon } from '../service/icon.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -80,6 +86,7 @@ export interface ScopeModuleAIcon {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

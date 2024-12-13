@@ -230,6 +230,20 @@ import { ServiceFlowTask } from '../service/flowTask.js';
 import { ServiceLocalFlowTask } from '../service/localFlowTask.js';
 import { ServiceProcedure } from '../service/procedure.js';
 import { ServiceRight } from '../service/right.js';
+export interface IModuleService {
+  flow: ServiceFlow;
+  flowTask: ServiceFlowTask;
+  localFlowTask: ServiceLocalFlowTask;
+  procedure: ServiceProcedure;
+  right: ServiceRight;
+}
+/** service: end */
+/** service: begin */
+import { ServiceFlow } from '../service/flow.js';
+import { ServiceFlowTask } from '../service/flowTask.js';
+import { ServiceLocalFlowTask } from '../service/localFlowTask.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import { ServiceRight } from '../service/right.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -278,6 +292,7 @@ export interface ScopeModuleAFlowtask {
   redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

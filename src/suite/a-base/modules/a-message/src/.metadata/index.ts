@@ -65,6 +65,12 @@ declare module 'vona-module-a-message' {
 /** service: end */
 /** service: begin */
 import { ServiceMessage } from '../service/message.js';
+export interface IModuleService {
+  message: ServiceMessage;
+}
+/** service: end */
+/** service: begin */
+import { ServiceMessage } from '../service/message.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -103,6 +109,7 @@ export interface ScopeModuleAMessage {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

@@ -173,6 +173,14 @@ declare module 'vona-module-a-clibooster' {
 /** service: begin */
 import { ServiceTools } from '../service/tools.js';
 import { ServiceUtils } from '../service/utils.js';
+export interface IModuleService {
+  tools: ServiceTools;
+  utils: ServiceUtils;
+}
+/** service: end */
+/** service: begin */
+import { ServiceTools } from '../service/tools.js';
+import { ServiceUtils } from '../service/utils.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -218,6 +226,7 @@ export interface ScopeModuleAClibooster {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

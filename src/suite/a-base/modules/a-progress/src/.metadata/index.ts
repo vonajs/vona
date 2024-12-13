@@ -55,6 +55,12 @@ declare module 'vona-module-a-progress' {
 /** service: end */
 /** service: begin */
 import { ServiceProgress } from '../service/progress.js';
+export interface IModuleService {
+  progress: ServiceProgress;
+}
+/** service: end */
+/** service: begin */
+import { ServiceProgress } from '../service/progress.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -99,6 +105,7 @@ export interface ScopeModuleAProgress {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
 }
 
 import 'vona';

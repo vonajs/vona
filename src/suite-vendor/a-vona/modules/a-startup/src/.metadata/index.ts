@@ -30,6 +30,12 @@ declare module 'vona-module-a-startup' {
 /** service: end */
 /** service: begin */
 import { ServiceStartup } from '../service/startup.js';
+export interface IModuleService {
+  startup: ServiceStartup;
+}
+/** service: end */
+/** service: begin */
+import { ServiceStartup } from '../service/startup.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -55,6 +61,7 @@ export interface ScopeModuleAStartup {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   redlock: MetaRedlock;
+  service: IModuleService;
 }
 
 import 'vona';

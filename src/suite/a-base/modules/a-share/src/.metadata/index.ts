@@ -135,6 +135,12 @@ declare module 'vona-module-a-share' {
 /** service: end */
 /** service: begin */
 import { ServiceShare } from '../service/share.js';
+export interface IModuleService {
+  share: ServiceShare;
+}
+/** service: end */
+/** service: begin */
+import { ServiceShare } from '../service/share.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -153,6 +159,7 @@ export interface ScopeModuleAShare {
   util: BeanScopeUtil;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

@@ -159,6 +159,12 @@ declare module 'vona-module-a-dashboard' {
 /** service: end */
 /** service: begin */
 import { ServiceDashboard } from '../service/dashboard.js';
+export interface IModuleService {
+  dashboard: ServiceDashboard;
+}
+/** service: end */
+/** service: begin */
+import { ServiceDashboard } from '../service/dashboard.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -186,6 +192,7 @@ export interface ScopeModuleADashboard {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  service: IModuleService;
 }
 
 import 'vona';

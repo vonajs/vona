@@ -136,6 +136,12 @@ declare module 'vona-module-a-stats' {
 /** service: end */
 /** service: begin */
 import { ServiceStats } from '../service/stats.js';
+export interface IModuleService {
+  stats: ServiceStats;
+}
+/** service: end */
+/** service: begin */
+import { ServiceStats } from '../service/stats.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -160,6 +166,7 @@ export interface ScopeModuleAStats {
   entity: IModuleEntity;
   model: IModuleModel;
   queue: IModuleQueue;
+  service: IModuleService;
 }
 
 import 'vona';

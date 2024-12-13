@@ -15,6 +15,12 @@ declare module 'vona-module-a-redlock' {
 /** service: end */
 /** service: begin */
 import { ServiceRedlock } from '../service/redlock.js';
+export interface IModuleService {
+  redlock: ServiceRedlock;
+}
+/** service: end */
+/** service: begin */
+import { ServiceRedlock } from '../service/redlock.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -36,6 +42,7 @@ export interface ScopeModuleARedlock {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  service: IModuleService;
 }
 
 import 'vona';
