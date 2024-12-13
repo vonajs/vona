@@ -93,6 +93,7 @@ export interface IGlobBeanFile {
 }
 
 export interface IMetadataCustomGenerateOptions {
+  cli: any;
   sceneName: string;
   sceneNameCapitalize: string;
   sceneMeta: OnionSceneMeta;
