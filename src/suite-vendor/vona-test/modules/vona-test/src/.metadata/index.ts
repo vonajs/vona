@@ -36,63 +36,6 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** aop: end */
-/** controller: begin */
-export * from '../controller/bean.js';
-export * from '../controller/onion.js';
-export * from '../controller/performAction.js';
-export * from '../controller/queue.js';
-export * from '../controller/status.js';
-export * from '../controller/summer.js';
-export * from '../controller/tail.js';
-export * from '../controller/transaction.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'vona-test:bean': IDecoratorControllerOptions;
-    'vona-test:onion': IDecoratorControllerOptions;
-    'vona-test:performAction': IDecoratorControllerOptions;
-    'vona-test:queue': IDecoratorControllerOptions;
-    'vona-test:status': IDecoratorControllerOptions;
-    'vona-test:summer': IDecoratorControllerOptions;
-    'vona-test:tail': IDecoratorControllerOptions;
-    'vona-test:transaction': IDecoratorControllerOptions;
-  }
-}
-declare module 'vona-module-vona-test' {
-  export interface ControllerBean {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerOnion {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerPerformAction {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerQueue {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerStatus {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerSummer {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerTail {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ControllerTransaction {
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** controller: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -225,6 +168,69 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../controller/bean.js';
+export * from '../controller/onion.js';
+export * from '../controller/performAction.js';
+export * from '../controller/queue.js';
+export * from '../controller/status.js';
+export * from '../controller/summer.js';
+export * from '../controller/tail.js';
+export * from '../controller/test1.js';
+export * from '../controller/transaction.js';
+
+import { IDecoratorControllerOptions } from 'vona-module-a-web';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'vona-test:bean': IDecoratorControllerOptions;
+    'vona-test:onion': IDecoratorControllerOptions;
+    'vona-test:performAction': IDecoratorControllerOptions;
+    'vona-test:queue': IDecoratorControllerOptions;
+    'vona-test:status': IDecoratorControllerOptions;
+    'vona-test:summer': IDecoratorControllerOptions;
+    'vona-test:tail': IDecoratorControllerOptions;
+    'vona-test:test1': IDecoratorControllerOptions;
+    'vona-test:transaction': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface ControllerBean {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerOnion {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerPerformAction {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerQueue {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerStatus {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerSummer {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerTail {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerTest1 {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ControllerTransaction {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** controller: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */

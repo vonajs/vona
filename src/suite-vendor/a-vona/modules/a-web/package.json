@@ -16,6 +16,12 @@
         "scopeResource": true,
         "boilerplate": "cli/service/boilerplate",
         "metadataCustom": "cli/service/metadata/generate.ts"
+      },
+      "controller": {
+        "sceneIsolate": true,
+        "optionsGlobalInterfaceName": "IDecoratorControllerOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-web",
+        "boilerplate": "cli/controller/boilerplate"
       }
     }
   },

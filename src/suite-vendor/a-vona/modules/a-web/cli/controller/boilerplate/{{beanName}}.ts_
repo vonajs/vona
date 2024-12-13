@@ -1,0 +1,5 @@
+import { BeanBase } from 'vona';
+import { Controller } from 'vona-module-a-web';
+
+@Controller('<%=argv.beanName%>')
+export class Controller<%=argv.beanNameCapitalize%> extends BeanBase {}
