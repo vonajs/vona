@@ -1,4 +1,5 @@
-import { BeanBase, Controller, sleep } from 'vona';
+import { BeanBase, sleep } from 'vona';
+import { Controller } from 'vona-module-a-web';
 
 @Controller()
 export class ControllerTestFeatProgress extends BeanBase {

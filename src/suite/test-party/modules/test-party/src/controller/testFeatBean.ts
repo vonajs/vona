@@ -1,6 +1,7 @@
-import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanBase, cast, Controller } from 'vona';
 import assert from 'assert';
+import { BeanBase, cast } from 'vona';
+import { Controller } from 'vona-module-a-web';
+import { __ThisModule__ } from '../.metadata/this.js';
 import { ServiceTest } from '../index.js';
 
 @Controller()

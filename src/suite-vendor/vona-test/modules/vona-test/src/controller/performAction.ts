@@ -1,5 +1,6 @@
-import { BeanBase, Controller, Post } from 'vona';
+import { BeanBase, Post } from 'vona';
 import { Body } from 'vona-module-a-validator';
+import { Controller } from 'vona-module-a-web';
 
 @Controller({ path: 'performAction', meta: { mode: 'unittest' } })
 export class ControllerPerformAction extends BeanBase {

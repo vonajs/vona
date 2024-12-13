@@ -1,5 +1,4 @@
-import { VonaContext } from '../../../types/context/index.js';
-import { Next } from '../../../types/interface/middleware.js';
+import { Next, VonaContext } from 'vona';
 
 export async function middlewareGuard(ctx: VonaContext, next: Next) {
   // check innerAccess

@@ -1,4 +1,5 @@
-import { BeanBase, cast, Controller } from 'vona';
+import { BeanBase, cast } from 'vona';
+import { Controller } from 'vona-module-a-web';
 import assert from 'assert';
 
 @Controller()

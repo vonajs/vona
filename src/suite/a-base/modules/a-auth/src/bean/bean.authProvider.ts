@@ -120,8 +120,8 @@ export class BeanAuthProvider extends BeanBase {
       },
     ] as const;
     for (const route of routes) {
-      this.ctx.app.meta.router.unRegister(route.name);
-      this.ctx.app.meta.router.register(__ThisModule__, route);
+      this.bean.router.unRegister(route.name);
+      this.bean.router.register(__ThisModule__, route);
     }
   }
 }

@@ -1,5 +1,6 @@
-import { BeanBase, Controller, Post } from 'vona';
+import { BeanBase, Post } from 'vona';
 import assert from 'assert';
+import { Controller } from 'vona-module-a-web';
 
 @Controller({ path: 'status', meta: { mode: 'unittest' } })
 export class ControllerStatus extends BeanBase {

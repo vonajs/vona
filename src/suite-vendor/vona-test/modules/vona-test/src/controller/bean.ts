@@ -1,7 +1,8 @@
-import { BeanBase, cast, Controller, Get } from 'vona';
+import { BeanBase, cast, Get } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import assert from 'assert';
 import { ServiceTest } from '../service/test.js';
+import { Controller } from 'vona-module-a-web';
 
 @Controller({ path: 'bean', meta: { mode: 'unittest' } })
 export class ControllerBean extends BeanBase {
