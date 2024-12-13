@@ -80,33 +80,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowtask' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/flowNodeStartEventAtomCondition.js';
-export * from '../model/flowTask.js';
-export * from '../model/flowTaskHistory.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorModelOptions;
-    'a-flowtask:flowTask': IDecoratorModelOptions;
-    'a-flowtask:flowTaskHistory': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-flowtask' {
-  export interface ModelFlowNodeStartEventAtomCondition {
-    get scope(): ScopeModuleAFlowtask;
-  }
-
-  export interface ModelFlowTask {
-    get scope(): ScopeModuleAFlowtask;
-  }
-
-  export interface ModelFlowTaskHistory {
-    get scope(): ScopeModuleAFlowtask;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowTask.js';
@@ -143,6 +116,43 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** meta: end */
+/** model: begin */
+export * from '../model/flowNodeStartEventAtomCondition.js';
+export * from '../model/flowTask.js';
+export * from '../model/flowTaskHistory.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorModelOptions;
+    'a-flowtask:flowTask': IDecoratorModelOptions;
+    'a-flowtask:flowTaskHistory': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-flowtask' {
+  export interface ModelFlowNodeStartEventAtomCondition {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ModelFlowTask {
+    get scope(): ScopeModuleAFlowtask;
+  }
+
+  export interface ModelFlowTaskHistory {
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelFlowNodeStartEventAtomCondition } from '../model/flowNodeStartEventAtomCondition.js';
+import { ModelFlowTask } from '../model/flowTask.js';
+import { ModelFlowTaskHistory } from '../model/flowTaskHistory.js';
+export interface IModuleModel {
+  flowNodeStartEventAtomCondition: ModelFlowNodeStartEventAtomCondition;
+  flowTask: ModelFlowTask;
+  flowTaskHistory: ModelFlowTaskHistory;
+}
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -176,16 +186,6 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelFlowNodeStartEventAtomCondition } from '../model/flowNodeStartEventAtomCondition.js';
-import { ModelFlowTask } from '../model/flowTask.js';
-import { ModelFlowTaskHistory } from '../model/flowTaskHistory.js';
-export interface IModuleModel {
-  flowNodeStartEventAtomCondition: ModelFlowNodeStartEventAtomCondition;
-  flowTask: ModelFlowTask;
-  flowTaskHistory: ModelFlowTaskHistory;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowTask.js';
@@ -269,8 +269,8 @@ export interface ScopeModuleAFlowtask {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

@@ -61,27 +61,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cms' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/article.js';
-export * from '../model/content.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-cms:article': IDecoratorModelOptions;
-    'a-cms:content': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-cms' {
-  export interface ModelArticle {
-    get scope(): ScopeModuleACms;
-  }
-
-  export interface ModelContent {
-    get scope(): ScopeModuleACms;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/article.js';
 export * from '../controller/comment.js';
@@ -151,6 +130,35 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** startup: end */
+/** model: begin */
+export * from '../model/article.js';
+export * from '../model/content.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-cms:article': IDecoratorModelOptions;
+    'a-cms:content': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface ModelArticle {
+    get scope(): ScopeModuleACms;
+  }
+
+  export interface ModelContent {
+    get scope(): ScopeModuleACms;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelArticle } from '../model/article.js';
+import { ModelContent } from '../model/content.js';
+export interface IModuleModel {
+  article: ModelArticle;
+  content: ModelContent;
+}
+/** model: end */
 /** queue: begin */
 export * from '../bean/queue.render.js';
 
@@ -194,14 +202,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelArticle } from '../model/article.js';
-import { ModelContent } from '../model/content.js';
-export interface IModuleModel {
-  article: ModelArticle;
-  content: ModelContent;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/build.js';
 export * from '../service/render.js';
@@ -278,8 +278,8 @@ export interface ScopeModuleACms {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
   queue: IModuleQueue;
 }
 

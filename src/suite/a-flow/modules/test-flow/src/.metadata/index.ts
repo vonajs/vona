@@ -71,12 +71,27 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-flow' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'test-flow:flow': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-test-flow' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleTestFlow;
+  }
+}
+/** controller: end */
 /** model: begin */
 export * from '../model/product.js';
 export * from '../model/purchaseOrder.js';
 export * from '../model/purchaseOrderDetail.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'test-flow:product': IDecoratorModelOptions;
@@ -98,21 +113,16 @@ declare module 'vona-module-test-flow' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/flow.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'test-flow:flow': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelProduct } from '../model/product.js';
+import { ModelPurchaseOrder } from '../model/purchaseOrder.js';
+import { ModelPurchaseOrderDetail } from '../model/purchaseOrderDetail.js';
+export interface IModuleModel {
+  product: ModelProduct;
+  purchaseOrder: ModelPurchaseOrder;
+  purchaseOrderDetail: ModelPurchaseOrderDetail;
 }
-declare module 'vona-module-test-flow' {
-  export interface ControllerFlow {
-    get scope(): ScopeModuleTestFlow;
-  }
-}
-/** controller: end */
+/** model: end */
 /** entities: begin */
 import { EntityProduct } from '../entity/product.js';
 import { EntityPurchaseOrder } from '../entity/purchaseOrder.js';
@@ -139,16 +149,6 @@ declare module 'vona-module-test-flow' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelProduct } from '../model/product.js';
-import { ModelPurchaseOrder } from '../model/purchaseOrder.js';
-import { ModelPurchaseOrderDetail } from '../model/purchaseOrderDetail.js';
-export interface IModuleModel {
-  product: ModelProduct;
-  purchaseOrder: ModelPurchaseOrder;
-  purchaseOrderDetail: ModelPurchaseOrderDetail;
-}
-/** models: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -167,8 +167,8 @@ export interface ScopeModuleTestFlow {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

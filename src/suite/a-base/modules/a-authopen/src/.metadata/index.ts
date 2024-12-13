@@ -63,21 +63,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authopen' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/authOpen.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-authopen:authOpen': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-authopen' {
-  export interface ModelAuthOpen {
-    get scope(): ScopeModuleAAuthopen;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/auth.js';
 export * from '../controller/authOpen.js';
@@ -99,6 +84,27 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** controller: end */
+/** model: begin */
+export * from '../model/authOpen.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-authopen:authOpen': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface ModelAuthOpen {
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelAuthOpen } from '../model/authOpen.js';
+export interface IModuleModel {
+  authOpen: ModelAuthOpen;
+}
+/** model: end */
 /** entities: begin */
 import { EntityAuthOpen } from '../entity/authOpen.js';
 export interface IModuleEntity {
@@ -111,12 +117,6 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelAuthOpen } from '../model/authOpen.js';
-export interface IModuleModel {
-  authOpen: ModelAuthOpen;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/auth.js';
 export * from '../service/authOpen.js';
@@ -183,8 +183,8 @@ export interface ScopeModuleAAuthopen {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

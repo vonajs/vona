@@ -45,21 +45,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-version' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/viewRecord.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-version:viewRecord': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-version' {
-  export interface ModelViewRecord {
-    get scope(): ScopeModuleAVersion;
-  }
-}
-/** model: end */
 /** startup: begin */
 export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';
@@ -93,6 +78,27 @@ declare module 'vona-module-a-version' {
   }
 }
 /** startup: end */
+/** model: begin */
+export * from '../model/viewRecord.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-version:viewRecord': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface ModelViewRecord {
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelViewRecord } from '../model/viewRecord.js';
+export interface IModuleModel {
+  viewRecord: ModelViewRecord;
+}
+/** model: end */
 /** entities: begin */
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
@@ -119,12 +125,6 @@ declare module 'vona-module-a-version' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelViewRecord } from '../model/viewRecord.js';
-export interface IModuleModel {
-  viewRecord: ModelViewRecord;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/database.js';
 export * from '../service/version.js';
@@ -189,8 +189,8 @@ export interface ScopeModuleAVersion {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

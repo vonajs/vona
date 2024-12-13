@@ -51,11 +51,26 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dict' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/dict.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-dict:dict': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-dict' {
+  export interface ControllerDict {
+    get scope(): ScopeModuleADict;
+  }
+}
+/** controller: end */
 /** model: begin */
 export * from '../model/dict.js';
 export * from '../model/dictContent.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-dict:dict': IDecoratorModelOptions;
@@ -72,21 +87,14 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/dict.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-dict:dict': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelDict } from '../model/dict.js';
+import { ModelDictContent } from '../model/dictContent.js';
+export interface IModuleModel {
+  dict: ModelDict;
+  dictContent: ModelDictContent;
 }
-declare module 'vona-module-a-dict' {
-  export interface ControllerDict {
-    get scope(): ScopeModuleADict;
-  }
-}
-/** controller: end */
+/** model: end */
 /** entities: begin */
 import { EntityDict } from '../entity/dict.js';
 import { EntityDictContent } from '../entity/dictContent.js';
@@ -106,14 +114,6 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelDict } from '../model/dict.js';
-import { ModelDictContent } from '../model/dictContent.js';
-export interface IModuleModel {
-  dict: ModelDict;
-  dictContent: ModelDictContent;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/dict.js';
 import { ServiceDict } from '../service/dict.js';
@@ -151,8 +151,8 @@ export interface ScopeModuleADict {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

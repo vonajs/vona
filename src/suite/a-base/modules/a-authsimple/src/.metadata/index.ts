@@ -48,21 +48,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsimple' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/authSimple.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-authsimple:authSimple': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-authsimple' {
-  export interface ModelAuthSimple {
-    get scope(): ScopeModuleAAuthsimple;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/auth.js';
 
@@ -78,6 +63,27 @@ declare module 'vona-module-a-authsimple' {
   }
 }
 /** controller: end */
+/** model: begin */
+export * from '../model/authSimple.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-authsimple:authSimple': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-authsimple' {
+  export interface ModelAuthSimple {
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelAuthSimple } from '../model/authSimple.js';
+export interface IModuleModel {
+  authSimple: ModelAuthSimple;
+}
+/** model: end */
 /** entities: begin */
 import { EntityAuthSimple } from '../entity/authSimple.js';
 export interface IModuleEntity {
@@ -90,12 +96,6 @@ declare module 'vona-module-a-authsimple' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelAuthSimple } from '../model/authSimple.js';
-export interface IModuleModel {
-  authSimple: ModelAuthSimple;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/auth.js';
 export * from '../service/simple.js';
@@ -160,8 +160,8 @@ export interface ScopeModuleAAuthsimple {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

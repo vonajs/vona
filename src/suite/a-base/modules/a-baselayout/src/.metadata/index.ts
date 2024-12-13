@@ -50,7 +50,7 @@ export * from '../model/layout.js';
 export * from '../model/layoutContent.js';
 export * from '../model/layoutFull.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-baselayout:layout': IDecoratorModelOptions;
@@ -70,6 +70,16 @@ declare module 'vona-module-a-baselayout' {
   export interface ModelLayoutFull {
     get scope(): ScopeModuleABaselayout;
   }
+}
+/** model: end */
+/** model: begin */
+import { ModelLayout } from '../model/layout.js';
+import { ModelLayoutContent } from '../model/layoutContent.js';
+import { ModelLayoutFull } from '../model/layoutFull.js';
+export interface IModuleModel {
+  layout: ModelLayout;
+  layoutContent: ModelLayoutContent;
+  layoutFull: ModelLayoutFull;
 }
 /** model: end */
 /** entities: begin */
@@ -98,16 +108,6 @@ declare module 'vona-module-a-baselayout' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelLayout } from '../model/layout.js';
-import { ModelLayoutContent } from '../model/layoutContent.js';
-import { ModelLayoutFull } from '../model/layoutFull.js';
-export interface IModuleModel {
-  layout: ModelLayout;
-  layoutContent: ModelLayoutContent;
-  layoutFull: ModelLayoutFull;
-}
-/** models: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -126,8 +126,8 @@ export interface ScopeModuleABaselayout {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

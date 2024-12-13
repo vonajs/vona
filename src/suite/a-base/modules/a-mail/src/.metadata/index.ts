@@ -62,21 +62,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-mail' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/mail.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-mail:mail': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-mail' {
-  export interface ModelMail {
-    get scope(): ScopeModuleAMail;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/scene.js';
 
@@ -122,6 +107,27 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** startup: end */
+/** model: begin */
+export * from '../model/mail.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-mail:mail': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface ModelMail {
+    get scope(): ScopeModuleAMail;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelMail } from '../model/mail.js';
+export interface IModuleModel {
+  mail: ModelMail;
+}
+/** model: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
@@ -137,12 +143,6 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelMail } from '../model/mail.js';
-export interface IModuleModel {
-  mail: ModelMail;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/scene.js';
 import { ServiceScene } from '../service/scene.js';
@@ -194,8 +194,8 @@ export interface ScopeModuleAMail {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

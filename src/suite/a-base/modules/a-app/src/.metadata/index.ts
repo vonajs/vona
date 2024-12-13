@@ -45,12 +45,27 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-app' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/resource.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-app:resource': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-app' {
+  export interface ControllerResource {
+    get scope(): ScopeModuleAApp;
+  }
+}
+/** controller: end */
 /** model: begin */
 export * from '../model/app2.js';
 export * from '../model/appContent.js';
 export * from '../model/appFull.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-app:app2': IDecoratorModelOptions;
@@ -72,21 +87,16 @@ declare module 'vona-module-a-app' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/resource.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-app:resource': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelApp2 } from '../model/app2.js';
+import { ModelAppContent } from '../model/appContent.js';
+import { ModelAppFull } from '../model/appFull.js';
+export interface IModuleModel {
+  app2: ModelApp2;
+  appContent: ModelAppContent;
+  appFull: ModelAppFull;
 }
-declare module 'vona-module-a-app' {
-  export interface ControllerResource {
-    get scope(): ScopeModuleAApp;
-  }
-}
-/** controller: end */
+/** model: end */
 /** entities: begin */
 import { EntityApp } from '../entity/app.js';
 import { EntityAppContent } from '../entity/appContent.js';
@@ -113,16 +123,6 @@ declare module 'vona-module-a-app' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelApp2 } from '../model/app2.js';
-import { ModelAppContent } from '../model/appContent.js';
-import { ModelAppFull } from '../model/appFull.js';
-export interface IModuleModel {
-  app2: ModelApp2;
-  appContent: ModelAppContent;
-  appFull: ModelAppFull;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/resource.js';
 import { ServiceResource } from '../service/resource.js';
@@ -160,8 +160,8 @@ export interface ScopeModuleAApp {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

@@ -48,21 +48,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-stats' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/stats.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-stats:stats': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-stats' {
-  export interface ModelStats {
-    get scope(): ScopeModuleAStats;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/stats.js';
 
@@ -78,6 +63,27 @@ declare module 'vona-module-a-stats' {
   }
 }
 /** controller: end */
+/** model: begin */
+export * from '../model/stats.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-stats:stats': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-stats' {
+  export interface ModelStats {
+    get scope(): ScopeModuleAStats;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelStats } from '../model/stats.js';
+export interface IModuleModel {
+  stats: ModelStats;
+}
+/** model: end */
 /** queue: begin */
 export * from '../bean/queue.stats.js';
 
@@ -111,12 +117,6 @@ declare module 'vona-module-a-stats' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelStats } from '../model/stats.js';
-export interface IModuleModel {
-  stats: ModelStats;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/stats.js';
 import { ServiceStats } from '../service/stats.js';
@@ -150,8 +150,8 @@ export interface ScopeModuleAStats {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
   queue: IModuleQueue;
 }
 

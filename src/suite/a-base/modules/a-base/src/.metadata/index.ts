@@ -415,6 +415,147 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/atom.js';
+export * from '../controller/atomAction.js';
+export * from '../controller/atomClass.js';
+export * from '../controller/atomState.js';
+export * from '../controller/auth.js';
+export * from '../controller/base.js';
+export * from '../controller/category.js';
+export * from '../controller/comment.js';
+export * from '../controller/jwt.js';
+export * from '../controller/layoutConfig.js';
+export * from '../controller/resource.js';
+export * from '../controller/tag.js';
+export * from '../controller/user.js';
+export * from '../controller/util.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-base:atom': IDecoratorControllerOptions;
+    'a-base:atomAction': IDecoratorControllerOptions;
+    'a-base:atomClass': IDecoratorControllerOptions;
+    'a-base:atomState': IDecoratorControllerOptions;
+    'a-base:auth': IDecoratorControllerOptions;
+    'a-base:base': IDecoratorControllerOptions;
+    'a-base:category': IDecoratorControllerOptions;
+    'a-base:comment': IDecoratorControllerOptions;
+    'a-base:jwt': IDecoratorControllerOptions;
+    'a-base:layoutConfig': IDecoratorControllerOptions;
+    'a-base:resource': IDecoratorControllerOptions;
+    'a-base:tag': IDecoratorControllerOptions;
+    'a-base:user': IDecoratorControllerOptions;
+    'a-base:util': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface ControllerAtom {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomAction {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomClass {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAtomState {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerAuth {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerBase {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerCategory {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerComment {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerJwt {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerLayoutConfig {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerResource {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerTag {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerUser {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface ControllerUtil {
+    get scope(): ScopeModuleABase;
+  }
+}
+/** controller: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-base:redlock': never;
+    'a-base:status': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MetaStatus {
+    get scope(): ScopeModuleABase;
+  }
+}
+/** meta: end */
+/** startup: begin */
+export * from '../bean/startup.checkResourceLocales.js';
+export * from '../bean/startup.checkViewHistoryRight.js';
+export * from '../bean/startup.loadAtomStatics.js';
+
+import { IDecoratorStartupOptions } from 'vona';
+declare module 'vona' {
+  export interface IStartupRecord {
+    'a-base:checkResourceLocales': IDecoratorStartupOptions;
+    'a-base:checkViewHistoryRight': IDecoratorStartupOptions;
+    'a-base:loadAtomStatics': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface StartupCheckResourceLocales {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StartupCheckViewHistoryRight {
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StartupLoadAtomStatics {
+    get scope(): ScopeModuleABase;
+  }
+}
+/** startup: end */
 /** model: begin */
 export * from '../model/atom.js';
 export * from '../model/atomAction.js';
@@ -446,7 +587,7 @@ export * from '../model/userRole.js';
 export * from '../model/userRoleIncRef.js';
 export * from '../model/userRoleRef.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-base:atom': IDecoratorModelOptions;
@@ -598,120 +739,68 @@ declare module 'vona-module-a-base' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/atom.js';
-export * from '../controller/atomAction.js';
-export * from '../controller/atomClass.js';
-export * from '../controller/atomState.js';
-export * from '../controller/auth.js';
-export * from '../controller/base.js';
-export * from '../controller/category.js';
-export * from '../controller/comment.js';
-export * from '../controller/jwt.js';
-export * from '../controller/layoutConfig.js';
-export * from '../controller/resource.js';
-export * from '../controller/tag.js';
-export * from '../controller/user.js';
-export * from '../controller/util.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-base:atom': IDecoratorControllerOptions;
-    'a-base:atomAction': IDecoratorControllerOptions;
-    'a-base:atomClass': IDecoratorControllerOptions;
-    'a-base:atomState': IDecoratorControllerOptions;
-    'a-base:auth': IDecoratorControllerOptions;
-    'a-base:base': IDecoratorControllerOptions;
-    'a-base:category': IDecoratorControllerOptions;
-    'a-base:comment': IDecoratorControllerOptions;
-    'a-base:jwt': IDecoratorControllerOptions;
-    'a-base:layoutConfig': IDecoratorControllerOptions;
-    'a-base:resource': IDecoratorControllerOptions;
-    'a-base:tag': IDecoratorControllerOptions;
-    'a-base:user': IDecoratorControllerOptions;
-    'a-base:util': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelAtom } from '../model/atom.js';
+import { ModelAtomAction } from '../model/atomAction.js';
+import { ModelAtomClass } from '../model/atomClass.js';
+import { ModelAtomLabel } from '../model/atomLabel.js';
+import { ModelAtomLabelRef } from '../model/atomLabelRef.js';
+import { ModelAtomStar } from '../model/atomStar.js';
+import { ModelCategory } from '../model/category.js';
+import { ModelComment } from '../model/comment.js';
+import { ModelCommentHeart } from '../model/commentHeart.js';
+import { ModelCommentView } from '../model/commentView.js';
+import { ModelLabel } from '../model/label.js';
+import { ModelResource } from '../model/resource.js';
+import { ModelResourceLocale } from '../model/resourceLocale.js';
+import { ModelResourceRole } from '../model/resourceRole.js';
+import { ModelRole } from '../model/role.js';
+import { ModelRoleExpand } from '../model/roleExpand.js';
+import { ModelRoleFieldsRight } from '../model/roleFieldsRight.js';
+import { ModelRoleInc } from '../model/roleInc.js';
+import { ModelRoleIncRef } from '../model/roleIncRef.js';
+import { ModelRoleRef } from '../model/roleRef.js';
+import { ModelRoleRight } from '../model/roleRight.js';
+import { ModelRoleRightRef } from '../model/roleRightRef.js';
+import { ModelTag } from '../model/tag.js';
+import { ModelTagRef } from '../model/tagRef.js';
+import { ModelUser } from '../model/user.js';
+import { ModelUserAgent } from '../model/userAgent.js';
+import { ModelUserRole } from '../model/userRole.js';
+import { ModelUserRoleIncRef } from '../model/userRoleIncRef.js';
+import { ModelUserRoleRef } from '../model/userRoleRef.js';
+export interface IModuleModel {
+  atom: ModelAtom;
+  atomAction: ModelAtomAction;
+  atomClass: ModelAtomClass;
+  atomLabel: ModelAtomLabel;
+  atomLabelRef: ModelAtomLabelRef;
+  atomStar: ModelAtomStar;
+  category: ModelCategory;
+  comment: ModelComment;
+  commentHeart: ModelCommentHeart;
+  commentView: ModelCommentView;
+  label: ModelLabel;
+  resource: ModelResource;
+  resourceLocale: ModelResourceLocale;
+  resourceRole: ModelResourceRole;
+  role: ModelRole;
+  roleExpand: ModelRoleExpand;
+  roleFieldsRight: ModelRoleFieldsRight;
+  roleInc: ModelRoleInc;
+  roleIncRef: ModelRoleIncRef;
+  roleRef: ModelRoleRef;
+  roleRight: ModelRoleRight;
+  roleRightRef: ModelRoleRightRef;
+  tag: ModelTag;
+  tagRef: ModelTagRef;
+  user: ModelUser;
+  userAgent: ModelUserAgent;
+  userRole: ModelUserRole;
+  userRoleIncRef: ModelUserRoleIncRef;
+  userRoleRef: ModelUserRoleRef;
 }
-declare module 'vona-module-a-base' {
-  export interface ControllerAtom {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAtomAction {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAtomClass {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAtomState {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerAuth {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerBase {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerCategory {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerComment {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerJwt {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerLayoutConfig {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerResource {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerTag {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerUser {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface ControllerUtil {
-    get scope(): ScopeModuleABase;
-  }
-}
-/** controller: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-export * from '../bean/meta.status.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-base:redlock': never;
-    'a-base:status': never;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface MetaRedlock {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MetaStatus {
-    get scope(): ScopeModuleABase;
-  }
-}
-/** meta: end */
+/** model: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.atomClassInner.js';
 export * from '../bean/summerCache.roleParentsOfUser.js';
@@ -773,33 +862,6 @@ export interface IModuleSummerCache {
   roleWhosOfAtomClassAction: SummerCacheRoleWhosOfAtomClassAction;
 }
 /** summerCache: end */
-/** startup: begin */
-export * from '../bean/startup.checkResourceLocales.js';
-export * from '../bean/startup.checkViewHistoryRight.js';
-export * from '../bean/startup.loadAtomStatics.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-base:checkResourceLocales': IDecoratorStartupOptions;
-    'a-base:checkViewHistoryRight': IDecoratorStartupOptions;
-    'a-base:loadAtomStatics': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface StartupCheckResourceLocales {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface StartupCheckViewHistoryRight {
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface StartupLoadAtomStatics {
-    get scope(): ScopeModuleABase;
-  }
-}
-/** startup: end */
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
 
@@ -1035,68 +1097,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelAtom } from '../model/atom.js';
-import { ModelAtomAction } from '../model/atomAction.js';
-import { ModelAtomClass } from '../model/atomClass.js';
-import { ModelAtomLabel } from '../model/atomLabel.js';
-import { ModelAtomLabelRef } from '../model/atomLabelRef.js';
-import { ModelAtomStar } from '../model/atomStar.js';
-import { ModelCategory } from '../model/category.js';
-import { ModelComment } from '../model/comment.js';
-import { ModelCommentHeart } from '../model/commentHeart.js';
-import { ModelCommentView } from '../model/commentView.js';
-import { ModelLabel } from '../model/label.js';
-import { ModelResource } from '../model/resource.js';
-import { ModelResourceLocale } from '../model/resourceLocale.js';
-import { ModelResourceRole } from '../model/resourceRole.js';
-import { ModelRole } from '../model/role.js';
-import { ModelRoleExpand } from '../model/roleExpand.js';
-import { ModelRoleFieldsRight } from '../model/roleFieldsRight.js';
-import { ModelRoleInc } from '../model/roleInc.js';
-import { ModelRoleIncRef } from '../model/roleIncRef.js';
-import { ModelRoleRef } from '../model/roleRef.js';
-import { ModelRoleRight } from '../model/roleRight.js';
-import { ModelRoleRightRef } from '../model/roleRightRef.js';
-import { ModelTag } from '../model/tag.js';
-import { ModelTagRef } from '../model/tagRef.js';
-import { ModelUser } from '../model/user.js';
-import { ModelUserAgent } from '../model/userAgent.js';
-import { ModelUserRole } from '../model/userRole.js';
-import { ModelUserRoleIncRef } from '../model/userRoleIncRef.js';
-import { ModelUserRoleRef } from '../model/userRoleRef.js';
-export interface IModuleModel {
-  atom: ModelAtom;
-  atomAction: ModelAtomAction;
-  atomClass: ModelAtomClass;
-  atomLabel: ModelAtomLabel;
-  atomLabelRef: ModelAtomLabelRef;
-  atomStar: ModelAtomStar;
-  category: ModelCategory;
-  comment: ModelComment;
-  commentHeart: ModelCommentHeart;
-  commentView: ModelCommentView;
-  label: ModelLabel;
-  resource: ModelResource;
-  resourceLocale: ModelResourceLocale;
-  resourceRole: ModelResourceRole;
-  role: ModelRole;
-  roleExpand: ModelRoleExpand;
-  roleFieldsRight: ModelRoleFieldsRight;
-  roleInc: ModelRoleInc;
-  roleIncRef: ModelRoleIncRef;
-  roleRef: ModelRoleRef;
-  roleRight: ModelRoleRight;
-  roleRightRef: ModelRoleRightRef;
-  tag: ModelTag;
-  tagRef: ModelTagRef;
-  user: ModelUser;
-  userAgent: ModelUserAgent;
-  userRole: ModelUserRole;
-  userRoleIncRef: ModelUserRoleIncRef;
-  userRoleRef: ModelUserRoleRef;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/atom.js';
 export * from '../service/atomAction.js';
@@ -1281,8 +1281,8 @@ export interface ScopeModuleABase {
   status: MetaStatus;
   redlock: MetaRedlock;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
   summerCache: IModuleSummerCache;
   queue: IModuleQueue;
 }

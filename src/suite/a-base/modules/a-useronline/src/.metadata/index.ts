@@ -57,11 +57,26 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-useronline' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/userOnline.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-useronline:userOnline': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-useronline' {
+  export interface ControllerUserOnline {
+    get scope(): ScopeModuleAUseronline;
+  }
+}
+/** controller: end */
 /** model: begin */
 export * from '../model/userOnline.js';
 export * from '../model/userOnlineHistory.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-useronline:userOnline': IDecoratorModelOptions;
@@ -78,21 +93,14 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/userOnline.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-useronline:userOnline': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelUserOnline } from '../model/userOnline.js';
+import { ModelUserOnlineHistory } from '../model/userOnlineHistory.js';
+export interface IModuleModel {
+  userOnline: ModelUserOnline;
+  userOnlineHistory: ModelUserOnlineHistory;
 }
-declare module 'vona-module-a-useronline' {
-  export interface ControllerUserOnline {
-    get scope(): ScopeModuleAUseronline;
-  }
-}
-/** controller: end */
+/** model: end */
 /** entities: begin */
 import { EntityUserOnline } from '../entity/userOnline.js';
 import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';
@@ -112,14 +120,6 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelUserOnline } from '../model/userOnline.js';
-import { ModelUserOnlineHistory } from '../model/userOnlineHistory.js';
-export interface IModuleModel {
-  userOnline: ModelUserOnline;
-  userOnlineHistory: ModelUserOnlineHistory;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/userOnline.js';
 import { ServiceUserOnline } from '../service/userOnline.js';
@@ -170,8 +170,8 @@ export interface ScopeModuleAUseronline {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

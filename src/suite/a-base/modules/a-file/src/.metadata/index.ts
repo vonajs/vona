@@ -36,11 +36,26 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-file' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/file.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-file:file': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-file' {
+  export interface ControllerFile {
+    get scope(): ScopeModuleAFile;
+  }
+}
+/** controller: end */
 /** model: begin */
 export * from '../model/file.js';
 export * from '../model/fileView.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-file:file': IDecoratorModelOptions;
@@ -57,21 +72,14 @@ declare module 'vona-module-a-file' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/file.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-file:file': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelFile } from '../model/file.js';
+import { ModelFileView } from '../model/fileView.js';
+export interface IModuleModel {
+  file: ModelFile;
+  fileView: ModelFileView;
 }
-declare module 'vona-module-a-file' {
-  export interface ControllerFile {
-    get scope(): ScopeModuleAFile;
-  }
-}
-/** controller: end */
+/** model: end */
 /** entities: begin */
 import { EntityFile } from '../entity/file.js';
 import { EntityFileView } from '../entity/fileView.js';
@@ -91,14 +99,6 @@ declare module 'vona-module-a-file' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelFile } from '../model/file.js';
-import { ModelFileView } from '../model/fileView.js';
-export interface IModuleModel {
-  file: ModelFile;
-  fileView: ModelFileView;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/file.js';
 import { ServiceFile } from '../service/file.js';
@@ -136,8 +136,8 @@ export interface ScopeModuleAFile {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

@@ -38,12 +38,27 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-share' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/share.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-share:share': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-share' {
+  export interface ControllerShare {
+    get scope(): ScopeModuleAShare;
+  }
+}
+/** controller: end */
 /** model: begin */
 export * from '../model/share.js';
 export * from '../model/shareRecordPV.js';
 export * from '../model/shareRecordUV.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-share:share': IDecoratorModelOptions;
@@ -65,21 +80,16 @@ declare module 'vona-module-a-share' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/share.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-share:share': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelShare } from '../model/share.js';
+import { ModelShareRecordPV } from '../model/shareRecordPV.js';
+import { ModelShareRecordUV } from '../model/shareRecordUV.js';
+export interface IModuleModel {
+  share: ModelShare;
+  shareRecordPV: ModelShareRecordPV;
+  shareRecordUV: ModelShareRecordUV;
 }
-declare module 'vona-module-a-share' {
-  export interface ControllerShare {
-    get scope(): ScopeModuleAShare;
-  }
-}
-/** controller: end */
+/** model: end */
 /** entities: begin */
 import { EntityShare } from '../entity/share.js';
 import { EntityShareRecordPV } from '../entity/shareRecordPV.js';
@@ -106,16 +116,6 @@ declare module 'vona-module-a-share' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelShare } from '../model/share.js';
-import { ModelShareRecordPV } from '../model/shareRecordPV.js';
-import { ModelShareRecordUV } from '../model/shareRecordUV.js';
-export interface IModuleModel {
-  share: ModelShare;
-  shareRecordPV: ModelShareRecordPV;
-  shareRecordUV: ModelShareRecordUV;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/share.js';
 import { ServiceShare } from '../service/share.js';
@@ -144,8 +144,8 @@ export interface ScopeModuleAShare {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

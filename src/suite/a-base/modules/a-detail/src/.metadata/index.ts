@@ -37,7 +37,7 @@ declare module 'vona-module-a-detail' {}
 /** model: begin */
 export * from '../model/detailBase.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-detail:detailBase': IDecoratorModelOptions;
@@ -47,6 +47,12 @@ declare module 'vona-module-a-detail' {
   export interface ModelDetailBase {
     get scope(): ScopeModuleADetail;
   }
+}
+/** model: end */
+/** model: begin */
+import { ModelDetailBase } from '../model/detailBase.js';
+export interface IModuleModel {
+  detailBase: ModelDetailBase;
 }
 /** model: end */
 /** entities: begin */
@@ -61,12 +67,6 @@ declare module 'vona-module-a-detail' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelDetailBase } from '../model/detailBase.js';
-export interface IModuleModel {
-  detailBase: ModelDetailBase;
-}
-/** models: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';
@@ -98,8 +98,8 @@ export interface ScopeModuleADetail {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

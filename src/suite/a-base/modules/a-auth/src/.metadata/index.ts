@@ -53,27 +53,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-auth' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/auth.js';
-export * from '../model/authProvider.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-auth:auth': IDecoratorModelOptions;
-    'a-auth:authProvider': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-auth' {
-  export interface ModelAuth {
-    get scope(): ScopeModuleAAuth;
-  }
-
-  export interface ModelAuthProvider {
-    get scope(): ScopeModuleAAuth;
-  }
-}
-/** model: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -116,6 +95,35 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** startup: end */
+/** model: begin */
+export * from '../model/auth.js';
+export * from '../model/authProvider.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-auth:auth': IDecoratorModelOptions;
+    'a-auth:authProvider': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface ModelAuth {
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface ModelAuthProvider {
+    get scope(): ScopeModuleAAuth;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelAuth } from '../model/auth.js';
+import { ModelAuthProvider } from '../model/authProvider.js';
+export interface IModuleModel {
+  auth: ModelAuth;
+  authProvider: ModelAuthProvider;
+}
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -138,14 +146,6 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelAuth } from '../model/auth.js';
-import { ModelAuthProvider } from '../model/authProvider.js';
-export interface IModuleModel {
-  auth: ModelAuth;
-  authProvider: ModelAuthProvider;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/passport.js';
 import { ServicePassport } from '../service/passport.js';
@@ -197,8 +197,8 @@ export interface ScopeModuleAAuth {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

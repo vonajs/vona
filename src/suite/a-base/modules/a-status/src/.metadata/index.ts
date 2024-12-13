@@ -26,21 +26,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-status' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/status.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-status:status': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-status' {
-  export interface ModelStatus {
-    get scope(): ScopeModuleAStatus;
-  }
-}
-/** model: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -56,6 +41,27 @@ declare module 'vona-module-a-status' {
   }
 }
 /** meta: end */
+/** model: begin */
+export * from '../model/status.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-status:status': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-status' {
+  export interface ModelStatus {
+    get scope(): ScopeModuleAStatus;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelStatus } from '../model/status.js';
+export interface IModuleModel {
+  status: ModelStatus;
+}
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -71,12 +77,6 @@ declare module 'vona-module-a-status' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelStatus } from '../model/status.js';
-export interface IModuleModel {
-  status: ModelStatus;
-}
-/** models: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -87,8 +87,8 @@ export interface ScopeModuleAStatus {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   redlock: MetaRedlock;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

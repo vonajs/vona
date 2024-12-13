@@ -169,27 +169,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/party.js';
-export * from '../model/partyExpense.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'test-party:party': IDecoratorModelOptions;
-    'test-party:partyExpense': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface ModelParty {
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface ModelPartyExpense {
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/kitchenSinkAutocomplete.js';
 export * from '../controller/kitchenSinkFormSchemaValidation.js';
@@ -490,6 +469,35 @@ declare module 'vona-module-test-party' {
   }
 }
 /** startup: end */
+/** model: begin */
+export * from '../model/party.js';
+export * from '../model/partyExpense.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'test-party:party': IDecoratorModelOptions;
+    'test-party:partyExpense': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface ModelParty {
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface ModelPartyExpense {
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelParty } from '../model/party.js';
+import { ModelPartyExpense } from '../model/partyExpense.js';
+export interface IModuleModel {
+  party: ModelParty;
+  partyExpense: ModelPartyExpense;
+}
+/** model: end */
 /** entities: begin */
 import { EntityParty } from '../entity/party.js';
 import { EntityPartyExpense } from '../entity/partyExpense.js';
@@ -509,14 +517,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelParty } from '../model/party.js';
-import { ModelPartyExpense } from '../model/partyExpense.js';
-export interface IModuleModel {
-  party: ModelParty;
-  partyExpense: ModelPartyExpense;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/test.js';
 import { ServiceTest } from '../service/test.js';
@@ -573,8 +573,8 @@ export interface ScopeModuleTestParty {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

@@ -82,6 +82,42 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flow' {}
 /** entity: end */
+/** controller: begin */
+export * from '../controller/flow.js';
+export * from '../controller/flowDef.js';
+
+import { IDecoratorControllerOptions } from 'vona';
+declare module 'vona' {
+  export interface IControllerRecord {
+    'a-flow:flow': IDecoratorControllerOptions;
+    'a-flow:flowDef': IDecoratorControllerOptions;
+  }
+}
+declare module 'vona-module-a-flow' {
+  export interface ControllerFlow {
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface ControllerFlowDef {
+    get scope(): ScopeModuleAFlow;
+  }
+}
+/** controller: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-flow:redlock': never;
+  }
+}
+declare module 'vona-module-a-flow' {
+  export interface MetaRedlock {
+    get scope(): ScopeModuleAFlow;
+  }
+}
+/** meta: end */
 /** model: begin */
 export * from '../model/flow.js';
 export * from '../model/flowDef.js';
@@ -91,7 +127,7 @@ export * from '../model/flowHistory.js';
 export * from '../model/flowNode.js';
 export * from '../model/flowNodeHistory.js';
 
-import { IDecoratorModelOptions } from 'vona';
+import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-flow:flow': IDecoratorModelOptions;
@@ -133,42 +169,24 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** model: end */
-/** controller: begin */
-export * from '../controller/flow.js';
-export * from '../controller/flowDef.js';
-
-import { IDecoratorControllerOptions } from 'vona';
-declare module 'vona' {
-  export interface IControllerRecord {
-    'a-flow:flow': IDecoratorControllerOptions;
-    'a-flow:flowDef': IDecoratorControllerOptions;
-  }
+/** model: begin */
+import { ModelFlow } from '../model/flow.js';
+import { ModelFlowDef } from '../model/flowDef.js';
+import { ModelFlowDefContent } from '../model/flowDefContent.js';
+import { ModelFlowDefFull } from '../model/flowDefFull.js';
+import { ModelFlowHistory } from '../model/flowHistory.js';
+import { ModelFlowNode } from '../model/flowNode.js';
+import { ModelFlowNodeHistory } from '../model/flowNodeHistory.js';
+export interface IModuleModel {
+  flow: ModelFlow;
+  flowDef: ModelFlowDef;
+  flowDefContent: ModelFlowDefContent;
+  flowDefFull: ModelFlowDefFull;
+  flowHistory: ModelFlowHistory;
+  flowNode: ModelFlowNode;
+  flowNodeHistory: ModelFlowNodeHistory;
 }
-declare module 'vona-module-a-flow' {
-  export interface ControllerFlow {
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface ControllerFlowDef {
-    get scope(): ScopeModuleAFlow;
-  }
-}
-/** controller: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-flow:redlock': never;
-  }
-}
-declare module 'vona-module-a-flow' {
-  export interface MetaRedlock {
-    get scope(): ScopeModuleAFlow;
-  }
-}
-/** meta: end */
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -226,24 +244,6 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelFlow } from '../model/flow.js';
-import { ModelFlowDef } from '../model/flowDef.js';
-import { ModelFlowDefContent } from '../model/flowDefContent.js';
-import { ModelFlowDefFull } from '../model/flowDefFull.js';
-import { ModelFlowHistory } from '../model/flowHistory.js';
-import { ModelFlowNode } from '../model/flowNode.js';
-import { ModelFlowNodeHistory } from '../model/flowNodeHistory.js';
-export interface IModuleModel {
-  flow: ModelFlow;
-  flowDef: ModelFlowDef;
-  flowDefContent: ModelFlowDefContent;
-  flowDefFull: ModelFlowDefFull;
-  flowHistory: ModelFlowHistory;
-  flowNode: ModelFlowNode;
-  flowNodeHistory: ModelFlowNodeHistory;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
@@ -349,8 +349,8 @@ export interface ScopeModuleAFlow {
   constant: TypeModuleConstants<typeof constants>;
   redlock: MetaRedlock;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';

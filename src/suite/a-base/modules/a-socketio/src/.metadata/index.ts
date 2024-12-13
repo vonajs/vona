@@ -78,33 +78,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-socketio' {}
 /** entity: end */
-/** model: begin */
-export * from '../model/message.js';
-export * from '../model/messageClass.js';
-export * from '../model/messageSync.js';
-
-import { IDecoratorModelOptions } from 'vona';
-declare module 'vona' {
-  export interface IModelRecord {
-    'a-socketio:message': IDecoratorModelOptions;
-    'a-socketio:messageClass': IDecoratorModelOptions;
-    'a-socketio:messageSync': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-socketio' {
-  export interface ModelMessage {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface ModelMessageClass {
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface ModelMessageSync {
-    get scope(): ScopeModuleASocketio;
-  }
-}
-/** model: end */
 /** controller: begin */
 export * from '../controller/io.js';
 export * from '../controller/message.js';
@@ -153,6 +126,43 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** meta: end */
+/** model: begin */
+export * from '../model/message.js';
+export * from '../model/messageClass.js';
+export * from '../model/messageSync.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IModelRecord {
+    'a-socketio:message': IDecoratorModelOptions;
+    'a-socketio:messageClass': IDecoratorModelOptions;
+    'a-socketio:messageSync': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface ModelMessage {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ModelMessageClass {
+    get scope(): ScopeModuleASocketio;
+  }
+
+  export interface ModelMessageSync {
+    get scope(): ScopeModuleASocketio;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelMessage } from '../model/message.js';
+import { ModelMessageClass } from '../model/messageClass.js';
+import { ModelMessageSync } from '../model/messageSync.js';
+export interface IModuleModel {
+  message: ModelMessage;
+  messageClass: ModelMessageClass;
+  messageSync: ModelMessageSync;
+}
+/** model: end */
 /** queue: begin */
 export * from '../bean/queue.delivery.js';
 export * from '../bean/queue.process.js';
@@ -227,16 +237,6 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** entities: end */
-/** models: begin */
-import { ModelMessage } from '../model/message.js';
-import { ModelMessageClass } from '../model/messageClass.js';
-import { ModelMessageSync } from '../model/messageSync.js';
-export interface IModuleModel {
-  message: ModelMessage;
-  messageClass: ModelMessageClass;
-  messageSync: ModelMessageSync;
-}
-/** models: end */
 /** services: begin */
 export * from '../service/io.js';
 export * from '../service/ioInner.js';
@@ -311,8 +311,8 @@ export interface ScopeModuleASocketio {
   config: TypeModuleConfig<typeof config>;
   redlock: MetaRedlock;
   service: IModuleService;
-  model: IModuleModel;
   entity: IModuleEntity;
+  model: IModuleModel;
   queue: IModuleQueue;
 }
 
