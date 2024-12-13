@@ -4,7 +4,6 @@ import { CliCreateModule } from './bean/cli.create.module.js';
 import { CliCreateBean } from './bean/cli.create.bean.js';
 import { CliCreateDto } from './bean/cli.create.dto.js';
 import { CliCreateEntity } from './bean/cli.create.entity.js';
-import { CliCreateModel } from './bean/cli.create.model.js';
 import { CliCreateService } from './bean/cli.create.service.js';
 import { CliCreateController } from './bean/cli.create.controller.js';
 import { CliCreateTest } from './bean/cli.create.test.js';
@@ -24,7 +23,6 @@ export const beans = {
   'create.module': CliCreateModule,
   'create.dto': CliCreateDto,
   'create.entity': CliCreateEntity,
-  'create.model': CliCreateModel,
   'create.service': CliCreateService,
   'create.controller': CliCreateController,
   'create.test': CliCreateTest,

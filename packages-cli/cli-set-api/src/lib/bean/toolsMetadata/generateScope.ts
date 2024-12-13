@@ -9,7 +9,6 @@ export interface GenerateScopeOptions {
   status: string;
   redlock: string;
   services: string;
-  models: string;
   entities: string;
 }
 export async function generateScope(
@@ -58,9 +57,6 @@ export async function generateScope(
   }
   if (options.services) {
     contentRecords.push('service: IModuleService;');
-  }
-  if (options.models) {
-    contentRecords.push('model: IModuleModel;');
   }
   if (options.entities) {
     contentRecords.push('entity: IModuleEntity;');

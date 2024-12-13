@@ -7,7 +7,6 @@ import { generateDtos } from './toolsMetadata/generateDtos.js';
 import { generateMetaStatus, generateMetaRedlock } from './toolsMetadata/generateMetaStatus.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateEntities } from './toolsMetadata/generateEntities.js';
-import { generateModels } from './toolsMetadata/generateModels.js';
 import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
@@ -91,9 +90,6 @@ export class CliToolsMetadata extends BeanCliBase {
     // entities
     const contentEntities = await generateEntities(moduleName, modulePath);
     content += contentEntities;
-    // models
-    const contentModels = await generateModels(moduleName, modulePath);
-    content += contentModels;
     // services
     const contentServices = await generateServices(moduleName, modulePath);
     content += contentServices;
@@ -122,7 +118,6 @@ export class CliToolsMetadata extends BeanCliBase {
       status: contentMetaStatus,
       redlock: contentMetaRedlock,
       services: contentServices,
-      models: contentModels,
       entities: contentEntities,
     });
     // empty
