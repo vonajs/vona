@@ -80,3 +80,25 @@ export interface IModulePackage {
   author: string;
   dependencies: Record<string, string>;
 }
+
+export interface IGlobBeanFile {
+  file: string;
+  fileName: string;
+  fileNameJS: string;
+  fileNameJSRelative: string;
+  className: string;
+  beanName: string;
+  beanNameFull: string;
+  isIgnore: boolean;
+}
+
+export interface IMetadataCustomGenerateOptions {
+  sceneName: string;
+  sceneNameCapitalize: string;
+  sceneMeta: OnionSceneMeta;
+  moduleName: string;
+  modulePath: string;
+  globFiles: IGlobBeanFile[];
+}
+
+export type TypeMetadataCustomGenerate = (options: IMetadataCustomGenerateOptions) => Promise<string>;

@@ -4,17 +4,6 @@ import path from 'path';
 import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
 
-export interface IGlobBeanFile {
-  file: string;
-  fileName: string;
-  fileNameJS: string;
-  fileNameJSRelative: string;
-  className: string;
-  beanName: string;
-  beanNameFull: string;
-  isIgnore: boolean;
-}
-
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
   if (parts[indexLast].endsWith('_')) {
