@@ -32,6 +32,9 @@
     },
     {
       "path": "modules/a-onion/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-web/tsconfig.build.json"
     }
   ]
 }

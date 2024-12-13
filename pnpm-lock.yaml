@@ -284,6 +284,9 @@ importers:
       vona-module-a-vona:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-vona
+      vona-module-a-web:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-web
       vona-module-a-wechat:
         specifier: workspace:^
         version: link:src/suite/a-wechat/modules/a-wechat
@@ -1274,6 +1277,9 @@ importers:
       vona-module-a-vona:
         specifier: ^5.0.3
         version: link:modules/a-vona
+      vona-module-a-web:
+        specifier: workspace:^
+        version: link:modules/a-web
 
   src/suite-vendor/a-vona/modules/a-core:
     dependencies:
@@ -1359,6 +1365,8 @@ importers:
         version: 3.24.1
 
   src/suite-vendor/a-vona/modules/a-vona: {}
+
+  src/suite-vendor/a-vona/modules/a-web: {}
 
   src/suite-vendor/cabloy-test:
     dependencies:
