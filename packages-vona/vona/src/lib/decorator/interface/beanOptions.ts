@@ -5,7 +5,6 @@ import { Constructable } from '../index.js';
 export interface ISceneCustomRecord {}
 
 export type TypeDecoratorBeanOptionsSceneBase =
-  | 'service'
   | 'aop'
   | 'scope'
   | 'controller'
@@ -72,8 +71,6 @@ export interface IDecoratorBeanOptions {
   name?: string;
   // containerScope?: ContainerScope;
 }
-
-export interface IDecoratorServiceOptions {}
 
 export interface IDecoratorAtomOptions {}
 

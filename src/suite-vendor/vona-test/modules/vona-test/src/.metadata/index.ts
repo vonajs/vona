@@ -178,10 +178,33 @@ declare module 'vona' {
 }
 declare module 'vona-module-vona-test' {}
 /** dto: end */
-/** dtos: begin */
-export * from '../dto/profile.js';
-export * from '../dto/user.js';
-/** dtos: end */
+/** service: begin */
+export * from '../service/test.js';
+export * from '../service/testApp.js';
+export * from '../service/testClass.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IServiceRecord {
+    'vona-test:test': never;
+    'vona-test:testApp': never;
+    'vona-test:testClass': never;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface ServiceTest {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ServiceTestApp {
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ServiceTestClass {
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** service: end */
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
