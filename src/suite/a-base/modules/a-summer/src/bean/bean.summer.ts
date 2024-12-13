@@ -1,8 +1,9 @@
-import { Bean, BeanModuleScopeBase, IDecoratorSummerCacheOptions } from 'vona';
+import { Bean, BeanBase } from 'vona';
 import { BeanSummerCacheBase } from './bean.summerCacheBase_.js';
+import { IDecoratorSummerCacheOptions } from '../types/summerCache.js';
 
 @Bean()
-export class BeanSummer extends BeanModuleScopeBase {
+export class BeanSummer extends BeanBase {
   cache(cacheName: string, cacheOptions?: IDecoratorSummerCacheOptions): BeanSummerCacheBase {
     if (cacheName.includes('.summerCache.')) {
       return this.app.bean._getBeanSelector(cacheName as any, undefined, cacheOptions);

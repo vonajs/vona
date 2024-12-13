@@ -1,5 +1,11 @@
-import { IMiddlewareOptionsMeta, TSummerCachePreset, VonaApplication } from 'vona';
-import { configAll, configAllWithIgnoreNull, configRedis, configRedisWithIgnoreNull } from 'vona-module-a-summer';
+import { IMiddlewareOptionsMeta, VonaApplication } from 'vona';
+import {
+  configAll,
+  configAllWithIgnoreNull,
+  configRedis,
+  configRedisWithIgnoreNull,
+  TSummerCachePreset,
+} from 'vona-module-a-summer';
 
 export const config = (_app: VonaApplication) => {
   return {
