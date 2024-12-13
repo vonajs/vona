@@ -49,8 +49,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceFlow } from '../service/flow.js';
-import { ServiceFlowDef } from '../service/flowDef.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

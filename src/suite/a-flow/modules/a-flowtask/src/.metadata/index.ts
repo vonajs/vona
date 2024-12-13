@@ -239,11 +239,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceFlow } from '../service/flow.js';
-import { ServiceFlowTask } from '../service/flowTask.js';
-import { ServiceLocalFlowTask } from '../service/localFlowTask.js';
-import { ServiceProcedure } from '../service/procedure.js';
-import { ServiceRight } from '../service/right.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
