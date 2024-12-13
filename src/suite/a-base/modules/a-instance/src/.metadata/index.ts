@@ -61,18 +61,11 @@ declare module 'vona-module-a-instance' {
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
 /** entities: begin */
-import { EntityBook } from '../entity/book.js';
 import { EntityInstance } from '../entity/instance.js';
 export interface IModuleEntity {
-  book: EntityBook;
   instance: EntityInstance;
 }
 declare module 'vona-module-a-instance' {
-  export interface EntityBook {
-    column: <K extends keyof Omit<EntityBook, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityBook, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
   export interface EntityInstance {
     column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
     columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
@@ -130,7 +123,6 @@ export interface ScopeModuleAInstance {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
   service: IModuleService;
-  entity: IModuleEntity;
 }
 
 import 'vona';

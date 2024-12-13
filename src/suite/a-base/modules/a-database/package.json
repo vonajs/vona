@@ -19,7 +19,8 @@
         "optionsGlobalInterfaceName": "IDecoratorEntityOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-database",
         "scopeResource": true,
-        "boilerplate": "cli/entity/boilerplate"
+        "boilerplate": "cli/entity/boilerplate",
+        "metadataCustom": "cli/entity/metadata/generate.ts"
       },
       "model": {
         "sceneIsolate": true,

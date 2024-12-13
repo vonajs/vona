@@ -51,6 +51,7 @@ export interface OnionSceneMeta {
   optionsGlobalInterfaceFrom?: string;
   scopeResource?: boolean;
   boilerplate?: string;
+  metadataCustom?: string;
 }
 
 export type OnionScenesMeta = Record<string, OnionSceneMeta>;

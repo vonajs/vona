@@ -12,6 +12,7 @@ import { generateConfig, generateConstant, generateError, generateLocale } from 
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
 import { getOnionScenesMeta } from 'vona-shared';
+import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -77,6 +78,10 @@ export class CliToolsMetadata extends BeanCliBase {
           content += contentScopeResource;
           scopeResources[sceneName] = contentScopeResource;
         }
+      }
+      // metadata custom
+      if (onionSceneMeta.metadataCustom) {
+        content += await generateMetadataCustom(sceneName, onionScenesMeta, moduleName, modulePath);
       }
     }
     // dtos
