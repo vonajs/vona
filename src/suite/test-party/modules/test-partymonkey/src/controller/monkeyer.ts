@@ -1,5 +1,6 @@
+import { BeanBase } from 'vona';
+import { Controller } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanBase, Controller } from 'vona';
 
 @Controller()
 export class ControllerMonkeyer extends BeanBase {
