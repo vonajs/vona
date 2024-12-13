@@ -1,4 +1,4 @@
-import { TSummerCacheActionOptions } from 'vona';
+import { TSummerCacheActionOptions } from '../types/summerCache.js';
 
 export interface ICacheLayeredBase<KEY, DATA> {
   get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<DATA | null | undefined>;

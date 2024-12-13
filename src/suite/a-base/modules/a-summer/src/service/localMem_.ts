@@ -1,8 +1,9 @@
 import { __ThisModule__ } from '../.metadata/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from '../common/cacheBase.js';
-import { Service, TSummerCacheActionOptions } from 'vona';
+import { Service } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
+import { TSummerCacheActionOptions } from '../types/summerCache.js';
 
 const SUMMERCACHEMEMORY = Symbol('APP#__SUMMERCACHEMEMORY');
 
