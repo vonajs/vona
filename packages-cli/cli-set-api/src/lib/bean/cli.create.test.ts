@@ -9,6 +9,7 @@ declare module '@cabloy/cli' {
     module: string;
     moduleInfo: IModuleInfo;
     name: string;
+    nameCapitalize: string;
     nameMeta: NameMeta;
   }
 }

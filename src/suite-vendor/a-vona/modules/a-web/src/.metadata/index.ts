@@ -1,3 +1,6 @@
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** beans: begin */
 export * from '../bean/bean.router.js';
 import { BeanRouter } from '../bean/bean.router.js';

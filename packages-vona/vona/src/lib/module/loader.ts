@@ -1,7 +1,6 @@
 import { AppMeta } from '../core/meta.js';
 import { ModuleTools } from './module.js';
 import loadOnions from './onion.js';
-import loadRoutes from './route.js';
 import loadConfig from './config.js';
 import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
@@ -44,7 +43,6 @@ export class ModuleLoader extends BeanSimple {
       loadLocales(app, modules);
       loadErrors(app, modules);
       loadConstants(app, modules);
-      loadRoutes(app, modules);
       loadContextPatch(app);
       loadBroadcasts(app, modules);
       loadClusterApp(app);
