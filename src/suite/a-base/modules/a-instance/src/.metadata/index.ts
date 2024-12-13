@@ -74,7 +74,15 @@ export interface IModuleEntity {
   instance: EntityInstance;
 }
 /** entity: end */
-hello; /** model: begin */
+/** entity: begin */
+declare module 'vona-module-a-instance' {
+  export interface EntityInstance {
+    column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
+/** model: begin */
 export * from '../model/instance.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
@@ -98,18 +106,6 @@ export interface IModuleModel {
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityInstance } from '../entity/instance.js';
-export interface IModuleEntity {
-  instance: EntityInstance;
-}
-declare module 'vona-module-a-instance' {
-  export interface EntityInstance {
-    column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/instance.js';
 import { ServiceInstance } from '../service/instance.js';

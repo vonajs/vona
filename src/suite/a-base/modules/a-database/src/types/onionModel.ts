@@ -4,7 +4,7 @@ import { IDecoratorEntityOptions } from './onionEntity.js';
 
 export interface IModelRecord {}
 
-export interface IDecoratorModelOptions<T extends IDecoratorEntityOptions> {
+export interface IDecoratorModelOptions<T extends IDecoratorEntityOptions = IDecoratorEntityOptions> {
   entity?: T;
   table?: string;
   disableDeleted?: boolean;

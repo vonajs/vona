@@ -9,7 +9,6 @@ export interface GenerateScopeOptions {
   status: string;
   redlock: string;
   services: string;
-  entities: string;
 }
 export async function generateScope(
   moduleName: string,
