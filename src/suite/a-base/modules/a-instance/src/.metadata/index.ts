@@ -70,15 +70,21 @@ declare module 'vona-module-a-instance' {
 /** meta: end */
 /** model: begin */
 export * from '../model/instance.js';
+export * from '../model/test1.js';
 
 import { IDecoratorModelOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IModelRecord {
     'a-instance:instance': IDecoratorModelOptions;
+    'a-instance:test1': IDecoratorModelOptions;
   }
 }
 declare module 'vona-module-a-instance' {
   export interface ModelInstance {
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface ModelTest1 {
     get scope(): ScopeModuleAInstance;
   }
 }
@@ -100,8 +106,10 @@ declare module 'vona-module-a-instance' {
 /** entities: end */
 /** models: begin */
 import { ModelInstance } from '../model/instance.js';
+import { ModelTest1 } from '../model/test1.js';
 export interface IModuleModel {
   instance: ModelInstance;
+  test1: ModelTest1;
 }
 /** models: end */
 /** services: begin */

@@ -1,5 +1,0 @@
-import { BeanModelBase, Model } from 'vona-module-a-database';
-import { Entity<%=argv.nameCapitalize%> } from '../entity/<%=argv.name%>.js';
-
-@Model({ entity: Entity<%=argv.nameCapitalize%> })
-export class Model<%=argv.nameCapitalize%> extends BeanModelBase<Entity<%=argv.nameCapitalize%>> {}
