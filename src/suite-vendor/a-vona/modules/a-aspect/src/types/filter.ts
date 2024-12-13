@@ -1,4 +1,4 @@
-import { IMiddlewareBase, NextSync } from './middleware.js';
+import { IMiddlewareBase, NextSync, OmitNever, Onion } from 'vona';
 
 export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
@@ -31,4 +31,20 @@ export const SymbolFilterComposeContext = Symbol('SymbolFilterComposeContext');
 export interface IFilterComposeContext {
   err: Error;
   method: string;
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    filter: Onion<IDecoratorFilterOptions, keyof IFilterRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    filter: OmitNever<IFilterRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    filter: never;
+  }
 }

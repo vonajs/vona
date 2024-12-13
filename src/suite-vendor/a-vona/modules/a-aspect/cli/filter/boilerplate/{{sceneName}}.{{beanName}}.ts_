@@ -1,4 +1,5 @@
-import { BeanBase, Filter, IDecoratorFilterOptions, IFilterJson, NextSync } from 'vona';
+import { BeanBase, NextSync } from 'vona';
+import { Filter, IDecoratorFilterOptions, IFilterJson } from 'vona-module-a-aspect';
 
 export interface IFilterOptions<%=argv.beanNameCapitalize%> extends IDecoratorFilterOptions {}
 

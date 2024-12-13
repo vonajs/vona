@@ -1,6 +1,5 @@
 export * from './aop.js';
 export * from './broadcast.js';
-export * from './filter.js';
 export * from './guard.js';
 export * from './interceptor.js';
 export * from './meta.js';

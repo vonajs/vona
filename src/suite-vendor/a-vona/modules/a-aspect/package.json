@@ -3,7 +3,16 @@
   "version": "5.0.0",
   "title": "a-aspect",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "filter": {
+        "hasLocal": true,
+        "optionsRoute": true,
+        "optionsDynamic": true,
+        "optionsGlobalInterfaceName": "IDecoratorFilterOptionsGlobal",
+        "optionsGlobalInterfaceFrom": "vona-module-a-aspect"
+      }
+    }
   },
   "type": "module",
   "exports": {
@@ -25,7 +34,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}

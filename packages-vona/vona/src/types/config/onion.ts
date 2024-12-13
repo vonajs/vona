@@ -1,5 +1,4 @@
 import { IAopRecord } from '../interface/aop.js';
-import { IFilterRecord } from '../interface/filter.js';
 import { IGuardRecord } from '../interface/guard.js';
 import { IInterceptorRecord } from '../interface/interceptor.js';
 import { IMetaRecord } from '../interface/meta.js';
@@ -15,7 +14,6 @@ export interface ConfigOnions {
   guard: OmitNever<IGuardRecord>;
   interceptor: OmitNever<IInterceptorRecord>;
   pipe: OmitNever<IPipeRecord>;
-  filter: OmitNever<IFilterRecord>;
   socketConnection: OmitNever<ISocketConnectionRecord>;
   socketPacket: OmitNever<ISocketPacketRecord>;
   aop: OmitNever<IAopRecord>;
