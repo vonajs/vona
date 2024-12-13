@@ -125,7 +125,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceInstance } from '../service/instance.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

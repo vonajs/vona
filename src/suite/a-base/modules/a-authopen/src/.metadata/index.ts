@@ -157,9 +157,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceAuthOpen } from '../service/authOpen.js';
-import { ServiceToken } from '../service/token.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

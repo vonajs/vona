@@ -67,7 +67,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceCaptcha } from '../service/captcha.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

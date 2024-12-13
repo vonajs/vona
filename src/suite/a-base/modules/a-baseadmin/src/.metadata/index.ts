@@ -122,12 +122,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceAtomRight } from '../service/atomRight.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceAuthScene } from '../service/authScene.js';
-import { ServiceResourceRight } from '../service/resourceRight.js';
-import { ServiceRole } from '../service/role.js';
-import { ServiceUser } from '../service/user.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

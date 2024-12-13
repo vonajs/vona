@@ -298,12 +298,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceIo } from '../service/io.js';
-import { ServiceIoInner } from '../service/ioInner.js';
-import { ServiceMessage } from '../service/message.js';
-import { ServiceMessageClass } from '../service/messageClass.js';
-import { ServiceProcedure } from '../service/procedure.js';
-import { ServiceRedis } from '../service/redis.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

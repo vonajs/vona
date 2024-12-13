@@ -138,7 +138,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceDict } from '../service/dict.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

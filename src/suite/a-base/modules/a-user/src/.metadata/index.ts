@@ -88,8 +88,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServicePublic } from '../service/public.js';
-import { ServiceUser } from '../service/user.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

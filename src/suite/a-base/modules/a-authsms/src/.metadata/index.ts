@@ -153,9 +153,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceCaptcha } from '../service/captcha.js';
-import { ServiceSmsProvider } from '../service/smsProvider.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

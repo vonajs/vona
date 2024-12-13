@@ -60,7 +60,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceIcon } from '../service/icon.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

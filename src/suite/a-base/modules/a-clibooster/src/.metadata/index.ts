@@ -179,8 +179,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceTools } from '../service/tools.js';
-import { ServiceUtils } from '../service/utils.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

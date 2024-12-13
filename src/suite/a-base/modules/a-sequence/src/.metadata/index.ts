@@ -107,7 +107,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceSequence } from '../service/sequence.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

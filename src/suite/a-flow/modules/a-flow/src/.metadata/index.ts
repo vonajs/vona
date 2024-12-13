@@ -313,13 +313,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceFlow } from '../service/flow.js';
-import { ServiceFlowDef } from '../service/flowDef.js';
-import { ServiceLocalFlow } from '../service/localFlow.js';
-import { ServiceLocalFlowEdge } from '../service/localFlowEdge.js';
-import { ServiceLocalFlowListener } from '../service/localFlowListener.js';
-import { ServiceLocalFlowNode } from '../service/localFlowNode.js';
-import { ServiceProcedure } from '../service/procedure.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

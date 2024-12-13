@@ -87,10 +87,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceCli } from '../service/cli.js';
-import { ServiceConsole } from '../service/console.js';
-import { ServiceHelper } from '../service/helper.js';
-import { ServiceTemplate } from '../service/template.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

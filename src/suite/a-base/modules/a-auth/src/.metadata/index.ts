@@ -167,7 +167,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServicePassport } from '../service/passport.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

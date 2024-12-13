@@ -98,8 +98,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceDbMeta } from '../service/dbMeta.js';
-import { ServiceTransaction } from '../service/transaction.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

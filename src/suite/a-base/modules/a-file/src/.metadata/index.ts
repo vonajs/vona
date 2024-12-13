@@ -123,7 +123,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceFile } from '../service/file.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

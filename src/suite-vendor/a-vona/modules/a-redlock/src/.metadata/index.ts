@@ -20,7 +20,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceRedlock } from '../service/redlock.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

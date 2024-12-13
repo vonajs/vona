@@ -74,7 +74,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceValidation } from '../service/validation.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

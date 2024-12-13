@@ -37,7 +37,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceSessionStore } from '../service/sessionStore.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

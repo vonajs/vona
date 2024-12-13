@@ -70,7 +70,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceMessage } from '../service/message.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {

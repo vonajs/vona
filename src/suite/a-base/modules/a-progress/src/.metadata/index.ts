@@ -60,7 +60,6 @@ export interface IModuleService {
 }
 /** service: end */
 /** service: begin */
-import { ServiceProgress } from '../service/progress.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
