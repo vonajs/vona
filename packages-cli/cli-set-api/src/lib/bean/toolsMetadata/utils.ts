@@ -1,4 +1,4 @@
-import { OnionSceneMeta, OnionScenesMeta } from '@cabloy/module-info';
+import { OnionSceneMeta } from '@cabloy/module-info';
 import { stringToCapitalize, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import path from 'path';
 import fse from 'fs-extra';
@@ -30,12 +30,11 @@ export function getScopeModuleName(moduleName: string) {
 
 export async function globBeanFiles(
   sceneName: string,
-  onionScenesMeta: OnionScenesMeta,
+  sceneMeta: OnionSceneMeta,
   moduleName: string,
   modulePath: string,
 ): Promise<IGlobBeanFile[]> {
   const result: IGlobBeanFile[] = [];
-  const sceneMeta = onionScenesMeta[sceneName];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const pattern = sceneMeta.sceneIsolate
     ? `${modulePath}/src/${sceneName}/*.ts`
