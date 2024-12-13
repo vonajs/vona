@@ -1,4 +1,5 @@
-import { BeanBase, SummerCache } from 'vona';
+import { BeanBase } from 'vona';
+import { SummerCache } from 'vona-module-a-summer';
 
 @SummerCache({
   mode: 'all', // mem/redis/all
