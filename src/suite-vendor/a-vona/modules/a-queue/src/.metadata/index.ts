@@ -1,13 +1,10 @@
-/** services: begin */
+/** service: begin */
 export * from '../service/queue.js';
-import { ServiceQueue } from '../service/queue.js';
-export interface IModuleService {
-  queue: ServiceQueue;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-queue.service.queue': ServiceQueue;
+  export interface IServiceRecord {
+    'a-queue:queue': never;
   }
 }
 declare module 'vona-module-a-queue' {
@@ -15,7 +12,16 @@ declare module 'vona-module-a-queue' {
     get scope(): ScopeModuleAQueue;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceQueue } from '../service/queue.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-queue.service.queue': ServiceQueue;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -30,7 +36,6 @@ export interface ScopeModuleAQueue {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
 }
 
 import 'vona';

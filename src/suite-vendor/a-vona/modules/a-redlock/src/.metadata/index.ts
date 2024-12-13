@@ -1,13 +1,10 @@
-/** services: begin */
+/** service: begin */
 export * from '../service/redlock.js';
-import { ServiceRedlock } from '../service/redlock.js';
-export interface IModuleService {
-  redlock: ServiceRedlock;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-redlock.service.redlock': ServiceRedlock;
+  export interface IServiceRecord {
+    'a-redlock:redlock': never;
   }
 }
 declare module 'vona-module-a-redlock' {
@@ -15,7 +12,16 @@ declare module 'vona-module-a-redlock' {
     get scope(): ScopeModuleARedlock;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceRedlock } from '../service/redlock.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-redlock.service.redlock': ServiceRedlock;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -30,7 +36,6 @@ export interface ScopeModuleARedlock {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
 }
 
 import 'vona';

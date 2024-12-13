@@ -149,20 +149,15 @@ declare module 'vona-module-a-clibooster' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/tools.js';
 export * from '../service/utils.js';
-import { ServiceTools } from '../service/tools.js';
-import { ServiceUtils } from '../service/utils.js';
-export interface IModuleService {
-  tools: ServiceTools;
-  utils: ServiceUtils;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-clibooster.service.tools': ServiceTools;
-    'a-clibooster.service.utils': ServiceUtils;
+  export interface IServiceRecord {
+    'a-clibooster:tools': never;
+    'a-clibooster:utils': never;
   }
 }
 declare module 'vona-module-a-clibooster' {
@@ -174,7 +169,18 @@ declare module 'vona-module-a-clibooster' {
     get scope(): ScopeModuleAClibooster;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceTools } from '../service/tools.js';
+import { ServiceUtils } from '../service/utils.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-clibooster.service.tools': ServiceTools;
+    'a-clibooster.service.utils': ServiceUtils;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -212,7 +218,6 @@ export interface ScopeModuleAClibooster {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

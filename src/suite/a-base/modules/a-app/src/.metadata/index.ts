@@ -125,16 +125,13 @@ export interface IModuleModel {
   appFull: ModelAppFull;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/resource.js';
-import { ServiceResource } from '../service/resource.js';
-export interface IModuleService {
-  resource: ServiceResource;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-app.service.resource': ServiceResource;
+  export interface IServiceRecord {
+    'a-app:resource': never;
   }
 }
 declare module 'vona-module-a-app' {
@@ -142,7 +139,16 @@ declare module 'vona-module-a-app' {
     get scope(): ScopeModuleAApp;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceResource } from '../service/resource.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-app.service.resource': ServiceResource;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -161,7 +167,6 @@ export interface ScopeModuleAApp {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

@@ -98,20 +98,15 @@ export interface IModuleModel {
   authSimple: ModelAuthSimple;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/auth.js';
 export * from '../service/simple.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceSimple } from '../service/simple.js';
-export interface IModuleService {
-  auth: ServiceAuth;
-  simple: ServiceSimple;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-authsimple.service.auth': ServiceAuth;
-    'a-authsimple.service.simple': ServiceSimple;
+  export interface IServiceRecord {
+    'a-authsimple:auth': never;
+    'a-authsimple:simple': never;
   }
 }
 declare module 'vona-module-a-authsimple' {
@@ -123,7 +118,18 @@ declare module 'vona-module-a-authsimple' {
     get scope(): ScopeModuleAAuthsimple;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceSimple } from '../service/simple.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-authsimple.service.auth': ServiceAuth;
+    'a-authsimple.service.simple': ServiceSimple;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -161,7 +167,6 @@ export interface ScopeModuleAAuthsimple {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

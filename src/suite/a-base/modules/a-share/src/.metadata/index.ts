@@ -118,16 +118,13 @@ export interface IModuleModel {
   shareRecordUV: ModelShareRecordUV;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/share.js';
-import { ServiceShare } from '../service/share.js';
-export interface IModuleService {
-  share: ServiceShare;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-share.service.share': ServiceShare;
+  export interface IServiceRecord {
+    'a-share:share': never;
   }
 }
 declare module 'vona-module-a-share' {
@@ -135,7 +132,16 @@ declare module 'vona-module-a-share' {
     get scope(): ScopeModuleAShare;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceShare } from '../service/share.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-share.service.share': ServiceShare;
+  }
+}
+/** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -145,7 +151,6 @@ export class ScopeModuleAShare extends BeanScopeBase {}
 export interface ScopeModuleAShare {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

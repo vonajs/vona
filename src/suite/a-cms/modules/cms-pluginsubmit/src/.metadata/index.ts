@@ -19,16 +19,13 @@ export interface IModuleQueue {
   submit: QueueSubmit;
 }
 /** queue: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/tools.js';
-import { ServiceTools } from '../service/tools.js';
-export interface IModuleService {
-  tools: ServiceTools;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'cms-pluginsubmit.service.tools': ServiceTools;
+  export interface IServiceRecord {
+    'cms-pluginsubmit:tools': never;
   }
 }
 declare module 'vona-module-cms-pluginsubmit' {
@@ -36,7 +33,16 @@ declare module 'vona-module-cms-pluginsubmit' {
     get scope(): ScopeModuleCmsPluginsubmit;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceTools } from '../service/tools.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'cms-pluginsubmit.service.tools': ServiceTools;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -51,7 +57,6 @@ export interface ScopeModuleCmsPluginsubmit {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
   queue: IModuleQueue;
 }
 

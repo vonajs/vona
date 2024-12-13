@@ -142,19 +142,13 @@ export interface IModuleModel {
   mail: ModelMail;
 }
 /** model: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/scene.js';
-import { ServiceScene } from '../service/scene.js';
-export interface IModuleService {
-  scene: ServiceScene;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-mail.service.scene': ServiceScene;
+  export interface IServiceRecord {
+    'a-mail:scene': never;
   }
 }
 declare module 'vona-module-a-mail' {
@@ -162,7 +156,19 @@ declare module 'vona-module-a-mail' {
     get scope(): ScopeModuleAMail;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceScene } from '../service/scene.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-mail.service.scene': ServiceScene;
+  }
+}
+/** service: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -195,7 +201,6 @@ export interface ScopeModuleAMail {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

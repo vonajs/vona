@@ -48,16 +48,13 @@ declare module 'vona-module-a-message' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/message.js';
-import { ServiceMessage } from '../service/message.js';
-export interface IModuleService {
-  message: ServiceMessage;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-message.service.message': ServiceMessage;
+  export interface IServiceRecord {
+    'a-message:message': never;
   }
 }
 declare module 'vona-module-a-message' {
@@ -65,7 +62,16 @@ declare module 'vona-module-a-message' {
     get scope(): ScopeModuleAMessage;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceMessage } from '../service/message.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-message.service.message': ServiceMessage;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -97,7 +103,6 @@ export interface ScopeModuleAMessage {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

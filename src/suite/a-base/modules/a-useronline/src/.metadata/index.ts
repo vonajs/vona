@@ -122,16 +122,13 @@ export interface IModuleModel {
   userOnlineHistory: ModelUserOnlineHistory;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/userOnline.js';
-import { ServiceUserOnline } from '../service/userOnline.js';
-export interface IModuleService {
-  userOnline: ServiceUserOnline;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-useronline.service.userOnline': ServiceUserOnline;
+  export interface IServiceRecord {
+    'a-useronline:userOnline': never;
   }
 }
 declare module 'vona-module-a-useronline' {
@@ -139,7 +136,16 @@ declare module 'vona-module-a-useronline' {
     get scope(): ScopeModuleAUseronline;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceUserOnline } from '../service/userOnline.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-useronline.service.userOnline': ServiceUserOnline;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -171,7 +177,6 @@ export interface ScopeModuleAUseronline {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

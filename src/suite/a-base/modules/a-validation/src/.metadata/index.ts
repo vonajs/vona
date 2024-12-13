@@ -52,16 +52,13 @@ declare module 'vona-module-a-validation' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/validation.js';
-import { ServiceValidation } from '../service/validation.js';
-export interface IModuleService {
-  validation: ServiceValidation;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-validation.service.validation': ServiceValidation;
+  export interface IServiceRecord {
+    'a-validation:validation': never;
   }
 }
 declare module 'vona-module-a-validation' {
@@ -69,7 +66,16 @@ declare module 'vona-module-a-validation' {
     get scope(): ScopeModuleAValidation;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceValidation } from '../service/validation.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-validation.service.validation': ServiceValidation;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -107,7 +113,6 @@ export interface ScopeModuleAValidation {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

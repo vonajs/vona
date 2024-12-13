@@ -45,16 +45,13 @@ declare module 'vona-module-a-captcha' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/captcha.js';
-import { ServiceCaptcha } from '../service/captcha.js';
-export interface IModuleService {
-  captcha: ServiceCaptcha;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-captcha.service.captcha': ServiceCaptcha;
+  export interface IServiceRecord {
+    'a-captcha:captcha': never;
   }
 }
 declare module 'vona-module-a-captcha' {
@@ -62,7 +59,16 @@ declare module 'vona-module-a-captcha' {
     get scope(): ScopeModuleACaptcha;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceCaptcha } from '../service/captcha.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-captcha.service.captcha': ServiceCaptcha;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -100,7 +106,6 @@ export interface ScopeModuleACaptcha {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

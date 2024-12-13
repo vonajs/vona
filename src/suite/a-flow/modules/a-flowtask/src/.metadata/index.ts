@@ -185,35 +185,21 @@ export interface IModuleModel {
   flowTaskHistory: ModelFlowTaskHistory;
 }
 /** model: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowTask.js';
 export * from '../service/localFlowTask.js';
 export * from '../service/procedure.js';
 export * from '../service/right.js';
-import { ServiceFlow } from '../service/flow.js';
-import { ServiceFlowTask } from '../service/flowTask.js';
-import { ServiceLocalFlowTask } from '../service/localFlowTask.js';
-import { ServiceProcedure } from '../service/procedure.js';
-import { ServiceRight } from '../service/right.js';
-export interface IModuleService {
-  flow: ServiceFlow;
-  flowTask: ServiceFlowTask;
-  localFlowTask: ServiceLocalFlowTask;
-  procedure: ServiceProcedure;
-  right: ServiceRight;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-flowtask.service.flow': ServiceFlow;
-    'a-flowtask.service.flowTask': ServiceFlowTask;
-    'a-flowtask.service.localFlowTask': ServiceLocalFlowTask;
-    'a-flowtask.service.procedure': ServiceProcedure;
-    'a-flowtask.service.right': ServiceRight;
+  export interface IServiceRecord {
+    'a-flowtask:flow': never;
+    'a-flowtask:flowTask': never;
+    'a-flowtask:localFlowTask': never;
+    'a-flowtask:procedure': never;
+    'a-flowtask:right': never;
   }
 }
 declare module 'vona-module-a-flowtask' {
@@ -237,7 +223,27 @@ declare module 'vona-module-a-flowtask' {
     get scope(): ScopeModuleAFlowtask;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceFlow } from '../service/flow.js';
+import { ServiceFlowTask } from '../service/flowTask.js';
+import { ServiceLocalFlowTask } from '../service/localFlowTask.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import { ServiceRight } from '../service/right.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-flowtask.service.flow': ServiceFlow;
+    'a-flowtask.service.flowTask': ServiceFlowTask;
+    'a-flowtask.service.localFlowTask': ServiceLocalFlowTask;
+    'a-flowtask.service.procedure': ServiceProcedure;
+    'a-flowtask.service.right': ServiceRight;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -270,7 +276,6 @@ export interface ScopeModuleAFlowtask {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

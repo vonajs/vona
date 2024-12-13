@@ -13,19 +13,13 @@ declare module 'vona-module-a-startup' {
   }
 }
 /** meta: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/startup.js';
-import { ServiceStartup } from '../service/startup.js';
-export interface IModuleService {
-  startup: ServiceStartup;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-startup.service.startup': ServiceStartup;
+  export interface IServiceRecord {
+    'a-startup:startup': never;
   }
 }
 declare module 'vona-module-a-startup' {
@@ -33,7 +27,19 @@ declare module 'vona-module-a-startup' {
     get scope(): ScopeModuleAStartup;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceStartup } from '../service/startup.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-startup.service.startup': ServiceStartup;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -49,7 +55,6 @@ export interface ScopeModuleAStartup {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   redlock: MetaRedlock;
-  service: IModuleService;
 }
 
 import 'vona';

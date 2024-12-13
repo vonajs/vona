@@ -58,23 +58,15 @@ declare module 'vona-module-a-user' {
   }
 }
 /** meta: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/public.js';
 export * from '../service/user.js';
-import { ServicePublic } from '../service/public.js';
-import { ServiceUser } from '../service/user.js';
-export interface IModuleService {
-  public: ServicePublic;
-  user: ServiceUser;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-user.service.public': ServicePublic;
-    'a-user.service.user': ServiceUser;
+  export interface IServiceRecord {
+    'a-user:public': never;
+    'a-user:user': never;
   }
 }
 declare module 'vona-module-a-user' {
@@ -86,7 +78,21 @@ declare module 'vona-module-a-user' {
     get scope(): ScopeModuleAUser;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServicePublic } from '../service/public.js';
+import { ServiceUser } from '../service/user.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-user.service.public': ServicePublic;
+    'a-user.service.user': ServiceUser;
+  }
+}
+/** service: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -106,7 +112,6 @@ export interface ScopeModuleAUser {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
-  service: IModuleService;
 }
 
 import 'vona';

@@ -60,36 +60,23 @@ declare module 'vona-module-a-baseadmin' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/atomRight.js';
 export * from '../service/auth.js';
 export * from '../service/authScene.js';
 export * from '../service/resourceRight.js';
 export * from '../service/role.js';
 export * from '../service/user.js';
-import { ServiceAtomRight } from '../service/atomRight.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceAuthScene } from '../service/authScene.js';
-import { ServiceResourceRight } from '../service/resourceRight.js';
-import { ServiceRole } from '../service/role.js';
-import { ServiceUser } from '../service/user.js';
-export interface IModuleService {
-  atomRight: ServiceAtomRight;
-  auth: ServiceAuth;
-  authScene: ServiceAuthScene;
-  resourceRight: ServiceResourceRight;
-  role: ServiceRole;
-  user: ServiceUser;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-baseadmin.service.atomRight': ServiceAtomRight;
-    'a-baseadmin.service.auth': ServiceAuth;
-    'a-baseadmin.service.authScene': ServiceAuthScene;
-    'a-baseadmin.service.resourceRight': ServiceResourceRight;
-    'a-baseadmin.service.role': ServiceRole;
-    'a-baseadmin.service.user': ServiceUser;
+  export interface IServiceRecord {
+    'a-baseadmin:atomRight': never;
+    'a-baseadmin:auth': never;
+    'a-baseadmin:authScene': never;
+    'a-baseadmin:resourceRight': never;
+    'a-baseadmin:role': never;
+    'a-baseadmin:user': never;
   }
 }
 declare module 'vona-module-a-baseadmin' {
@@ -117,7 +104,26 @@ declare module 'vona-module-a-baseadmin' {
     get scope(): ScopeModuleABaseadmin;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceAtomRight } from '../service/atomRight.js';
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceAuthScene } from '../service/authScene.js';
+import { ServiceResourceRight } from '../service/resourceRight.js';
+import { ServiceRole } from '../service/role.js';
+import { ServiceUser } from '../service/user.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-baseadmin.service.atomRight': ServiceAtomRight;
+    'a-baseadmin.service.auth': ServiceAuth;
+    'a-baseadmin.service.authScene': ServiceAuthScene;
+    'a-baseadmin.service.resourceRight': ServiceResourceRight;
+    'a-baseadmin.service.role': ServiceRole;
+    'a-baseadmin.service.user': ServiceUser;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -149,7 +155,6 @@ export interface ScopeModuleABaseadmin {
   util: BeanScopeUtil;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

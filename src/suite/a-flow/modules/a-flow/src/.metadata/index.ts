@@ -243,10 +243,7 @@ export interface IModuleModel {
   flowNodeHistory: ModelFlowNodeHistory;
 }
 /** model: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
 export * from '../service/localFlow.js';
@@ -254,32 +251,17 @@ export * from '../service/localFlowEdge.js';
 export * from '../service/localFlowListener.js';
 export * from '../service/localFlowNode.js';
 export * from '../service/procedure.js';
-import { ServiceFlow } from '../service/flow.js';
-import { ServiceFlowDef } from '../service/flowDef.js';
-import { ServiceLocalFlow } from '../service/localFlow.js';
-import { ServiceLocalFlowEdge } from '../service/localFlowEdge.js';
-import { ServiceLocalFlowListener } from '../service/localFlowListener.js';
-import { ServiceLocalFlowNode } from '../service/localFlowNode.js';
-import { ServiceProcedure } from '../service/procedure.js';
-export interface IModuleService {
-  flow: ServiceFlow;
-  flowDef: ServiceFlowDef;
-  localFlow: ServiceLocalFlow;
-  localFlowEdge: ServiceLocalFlowEdge;
-  localFlowListener: ServiceLocalFlowListener;
-  localFlowNode: ServiceLocalFlowNode;
-  procedure: ServiceProcedure;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-flow.service.flow': ServiceFlow;
-    'a-flow.service.flowDef': ServiceFlowDef;
-    'a-flow.service.localFlow': ServiceLocalFlow;
-    'a-flow.service.localFlowEdge': ServiceLocalFlowEdge;
-    'a-flow.service.localFlowListener': ServiceLocalFlowListener;
-    'a-flow.service.localFlowNode': ServiceLocalFlowNode;
-    'a-flow.service.procedure': ServiceProcedure;
+  export interface IServiceRecord {
+    'a-flow:flow': never;
+    'a-flow:flowDef': never;
+    'a-flow:localFlow': never;
+    'a-flow:localFlowEdge': never;
+    'a-flow:localFlowListener': never;
+    'a-flow:localFlowNode': never;
+    'a-flow:procedure': never;
   }
 }
 declare module 'vona-module-a-flow' {
@@ -311,7 +293,31 @@ declare module 'vona-module-a-flow' {
     get scope(): ScopeModuleAFlow;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceFlow } from '../service/flow.js';
+import { ServiceFlowDef } from '../service/flowDef.js';
+import { ServiceLocalFlow } from '../service/localFlow.js';
+import { ServiceLocalFlowEdge } from '../service/localFlowEdge.js';
+import { ServiceLocalFlowListener } from '../service/localFlowListener.js';
+import { ServiceLocalFlowNode } from '../service/localFlowNode.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-flow.service.flow': ServiceFlow;
+    'a-flow.service.flowDef': ServiceFlowDef;
+    'a-flow.service.localFlow': ServiceLocalFlow;
+    'a-flow.service.localFlowEdge': ServiceLocalFlowEdge;
+    'a-flow.service.localFlowListener': ServiceLocalFlowListener;
+    'a-flow.service.localFlowNode': ServiceLocalFlowNode;
+    'a-flow.service.procedure': ServiceProcedure;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';
@@ -350,7 +356,6 @@ export interface ScopeModuleAFlow {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

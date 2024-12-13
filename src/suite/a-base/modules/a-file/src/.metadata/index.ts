@@ -101,16 +101,13 @@ export interface IModuleModel {
   fileView: ModelFileView;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/file.js';
-import { ServiceFile } from '../service/file.js';
-export interface IModuleService {
-  file: ServiceFile;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-file.service.file': ServiceFile;
+  export interface IServiceRecord {
+    'a-file:file': never;
   }
 }
 declare module 'vona-module-a-file' {
@@ -118,7 +115,16 @@ declare module 'vona-module-a-file' {
     get scope(): ScopeModuleAFile;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceFile } from '../service/file.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-file.service.file': ServiceFile;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -137,7 +143,6 @@ export interface ScopeModuleAFile {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

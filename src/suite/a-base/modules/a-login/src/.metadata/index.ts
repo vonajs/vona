@@ -13,16 +13,13 @@ declare module 'vona-module-a-login' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/auth.js';
-import { ServiceAuth } from '../service/auth.js';
-export interface IModuleService {
-  auth: ServiceAuth;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-login.service.auth': ServiceAuth;
+  export interface IServiceRecord {
+    'a-login:auth': never;
   }
 }
 declare module 'vona-module-a-login' {
@@ -30,7 +27,16 @@ declare module 'vona-module-a-login' {
     get scope(): ScopeModuleALogin;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-login.service.auth': ServiceAuth;
+  }
+}
+/** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -40,7 +46,6 @@ export class ScopeModuleALogin extends BeanScopeBase {}
 export interface ScopeModuleALogin {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  service: IModuleService;
 }
 
 import 'vona';

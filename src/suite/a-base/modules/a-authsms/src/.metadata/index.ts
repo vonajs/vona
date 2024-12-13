@@ -115,27 +115,17 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** startup: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/auth.js';
 export * from '../service/captcha.js';
 export * from '../service/smsProvider.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceCaptcha } from '../service/captcha.js';
-import { ServiceSmsProvider } from '../service/smsProvider.js';
-export interface IModuleService {
-  auth: ServiceAuth;
-  captcha: ServiceCaptcha;
-  smsProvider: ServiceSmsProvider;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-authsms.service.auth': ServiceAuth;
-    'a-authsms.service.captcha': ServiceCaptcha;
-    'a-authsms.service.smsProvider': ServiceSmsProvider;
+  export interface IServiceRecord {
+    'a-authsms:auth': never;
+    'a-authsms:captcha': never;
+    'a-authsms:smsProvider': never;
   }
 }
 declare module 'vona-module-a-authsms' {
@@ -151,7 +141,23 @@ declare module 'vona-module-a-authsms' {
     get scope(): ScopeModuleAAuthsms;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceCaptcha } from '../service/captcha.js';
+import { ServiceSmsProvider } from '../service/smsProvider.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-authsms.service.auth': ServiceAuth;
+    'a-authsms.service.captcha': ServiceCaptcha;
+    'a-authsms.service.smsProvider': ServiceSmsProvider;
+  }
+}
+/** service: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -190,7 +196,6 @@ export interface ScopeModuleAAuthsms {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
-  service: IModuleService;
 }
 
 import 'vona';

@@ -15,16 +15,13 @@ declare module 'vona-module-a-oauth' {
   }
 }
 /** beans: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/sessionStore.js';
-import { ServiceSessionStore } from '../service/sessionStore.js';
-export interface IModuleService {
-  sessionStore: ServiceSessionStore;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-oauth.service.sessionStore': ServiceSessionStore;
+  export interface IServiceRecord {
+    'a-oauth:sessionStore': never;
   }
 }
 declare module 'vona-module-a-oauth' {
@@ -32,7 +29,16 @@ declare module 'vona-module-a-oauth' {
     get scope(): ScopeModuleAOauth;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceSessionStore } from '../service/sessionStore.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-oauth.service.sessionStore': ServiceSessionStore;
+  }
+}
+/** service: end */
 /** main: begin */
 export * from '../main.js';
 /** main: end */
@@ -45,7 +51,6 @@ export class ScopeModuleAOauth extends BeanScopeBase {}
 export interface ScopeModuleAOauth {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  service: IModuleService;
 }
 
 import 'vona';

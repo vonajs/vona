@@ -116,16 +116,13 @@ export interface IModuleModel {
   dictContent: ModelDictContent;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/dict.js';
-import { ServiceDict } from '../service/dict.js';
-export interface IModuleService {
-  dict: ServiceDict;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-dict.service.dict': ServiceDict;
+  export interface IServiceRecord {
+    'a-dict:dict': never;
   }
 }
 declare module 'vona-module-a-dict' {
@@ -133,7 +130,16 @@ declare module 'vona-module-a-dict' {
     get scope(): ScopeModuleADict;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceDict } from '../service/dict.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-dict.service.dict': ServiceDict;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -152,7 +158,6 @@ export interface ScopeModuleADict {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

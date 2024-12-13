@@ -1093,13 +1093,7 @@ export interface IModuleQueue {
   roleBuild: QueueRoleBuild;
 }
 /** queue: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/atom.js';
 export * from '../service/atomAction.js';
 export * from '../service/atomClass.js';
@@ -1116,59 +1110,26 @@ export * from '../service/stash.js';
 export * from '../service/tag.js';
 export * from '../service/user.js';
 export * from '../service/util.js';
-import { ServiceAtom } from '../service/atom.js';
-import { ServiceAtomAction } from '../service/atomAction.js';
-import { ServiceAtomClass } from '../service/atomClass.js';
-import { ServiceAtomState } from '../service/atomState.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceBase } from '../service/base.js';
-import { ServiceCategory } from '../service/category.js';
-import { ServiceComment } from '../service/comment.js';
-import { ServiceJwt } from '../service/jwt.js';
-import { ServiceLayoutConfig } from '../service/layoutConfig.js';
-import { ServiceProcedure } from '../service/procedure.js';
-import { ServiceResource } from '../service/resource.js';
-import { ServiceStash } from '../service/stash.js';
-import { ServiceTag } from '../service/tag.js';
-import { ServiceUser } from '../service/user.js';
-import { ServiceUtil } from '../service/util.js';
-export interface IModuleService {
-  atom: ServiceAtom;
-  atomAction: ServiceAtomAction;
-  atomClass: ServiceAtomClass;
-  atomState: ServiceAtomState;
-  auth: ServiceAuth;
-  base: ServiceBase;
-  category: ServiceCategory;
-  comment: ServiceComment;
-  jwt: ServiceJwt;
-  layoutConfig: ServiceLayoutConfig;
-  procedure: ServiceProcedure;
-  resource: ServiceResource;
-  stash: ServiceStash;
-  tag: ServiceTag;
-  user: ServiceUser;
-  util: ServiceUtil;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-base.service.atom': ServiceAtom;
-    'a-base.service.atomAction': ServiceAtomAction;
-    'a-base.service.atomClass': ServiceAtomClass;
-    'a-base.service.atomState': ServiceAtomState;
-    'a-base.service.auth': ServiceAuth;
-    'a-base.service.base': ServiceBase;
-    'a-base.service.category': ServiceCategory;
-    'a-base.service.comment': ServiceComment;
-    'a-base.service.jwt': ServiceJwt;
-    'a-base.service.layoutConfig': ServiceLayoutConfig;
-    'a-base.service.procedure': ServiceProcedure;
-    'a-base.service.resource': ServiceResource;
-    'a-base.service.stash': ServiceStash;
-    'a-base.service.tag': ServiceTag;
-    'a-base.service.user': ServiceUser;
-    'a-base.service.util': ServiceUtil;
+  export interface IServiceRecord {
+    'a-base:atom': never;
+    'a-base:atomAction': never;
+    'a-base:atomClass': never;
+    'a-base:atomState': never;
+    'a-base:auth': never;
+    'a-base:base': never;
+    'a-base:category': never;
+    'a-base:comment': never;
+    'a-base:jwt': never;
+    'a-base:layoutConfig': never;
+    'a-base:procedure': never;
+    'a-base:resource': never;
+    'a-base:stash': never;
+    'a-base:tag': never;
+    'a-base:user': never;
+    'a-base:util': never;
   }
 }
 declare module 'vona-module-a-base' {
@@ -1236,7 +1197,52 @@ declare module 'vona-module-a-base' {
     get scope(): ScopeModuleABase;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceAtom } from '../service/atom.js';
+import { ServiceAtomAction } from '../service/atomAction.js';
+import { ServiceAtomClass } from '../service/atomClass.js';
+import { ServiceAtomState } from '../service/atomState.js';
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceBase } from '../service/base.js';
+import { ServiceCategory } from '../service/category.js';
+import { ServiceComment } from '../service/comment.js';
+import { ServiceJwt } from '../service/jwt.js';
+import { ServiceLayoutConfig } from '../service/layoutConfig.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import { ServiceResource } from '../service/resource.js';
+import { ServiceStash } from '../service/stash.js';
+import { ServiceTag } from '../service/tag.js';
+import { ServiceUser } from '../service/user.js';
+import { ServiceUtil } from '../service/util.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-base.service.atom': ServiceAtom;
+    'a-base.service.atomAction': ServiceAtomAction;
+    'a-base.service.atomClass': ServiceAtomClass;
+    'a-base.service.atomState': ServiceAtomState;
+    'a-base.service.auth': ServiceAuth;
+    'a-base.service.base': ServiceBase;
+    'a-base.service.category': ServiceCategory;
+    'a-base.service.comment': ServiceComment;
+    'a-base.service.jwt': ServiceJwt;
+    'a-base.service.layoutConfig': ServiceLayoutConfig;
+    'a-base.service.procedure': ServiceProcedure;
+    'a-base.service.resource': ServiceResource;
+    'a-base.service.stash': ServiceStash;
+    'a-base.service.tag': ServiceTag;
+    'a-base.service.user': ServiceUser;
+    'a-base.service.util': ServiceUtil;
+  }
+}
+/** service: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -1282,7 +1288,6 @@ export interface ScopeModuleABase {
   constant: TypeModuleConstants<typeof constants>;
   status: MetaStatus;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
   summerCache: IModuleSummerCache;

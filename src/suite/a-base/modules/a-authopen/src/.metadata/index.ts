@@ -119,24 +119,17 @@ export interface IModuleModel {
   authOpen: ModelAuthOpen;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/auth.js';
 export * from '../service/authOpen.js';
 export * from '../service/token.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceAuthOpen } from '../service/authOpen.js';
-import { ServiceToken } from '../service/token.js';
-export interface IModuleService {
-  auth: ServiceAuth;
-  authOpen: ServiceAuthOpen;
-  token: ServiceToken;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-authopen.service.auth': ServiceAuth;
-    'a-authopen.service.authOpen': ServiceAuthOpen;
-    'a-authopen.service.token': ServiceToken;
+  export interface IServiceRecord {
+    'a-authopen:auth': never;
+    'a-authopen:authOpen': never;
+    'a-authopen:token': never;
   }
 }
 declare module 'vona-module-a-authopen' {
@@ -152,7 +145,20 @@ declare module 'vona-module-a-authopen' {
     get scope(): ScopeModuleAAuthopen;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceAuthOpen } from '../service/authOpen.js';
+import { ServiceToken } from '../service/token.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-authopen.service.auth': ServiceAuth;
+    'a-authopen.service.authOpen': ServiceAuthOpen;
+    'a-authopen.service.token': ServiceToken;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -184,7 +190,6 @@ export interface ScopeModuleAAuthopen {
   util: BeanScopeUtil;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

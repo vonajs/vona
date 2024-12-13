@@ -38,16 +38,13 @@ declare module 'vona-module-a-icon' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/icon.js';
-import { ServiceIcon } from '../service/icon.js';
-export interface IModuleService {
-  icon: ServiceIcon;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-icon.service.icon': ServiceIcon;
+  export interface IServiceRecord {
+    'a-icon:icon': never;
   }
 }
 declare module 'vona-module-a-icon' {
@@ -55,7 +52,16 @@ declare module 'vona-module-a-icon' {
     get scope(): ScopeModuleAIcon;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceIcon } from '../service/icon.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-icon.service.icon': ServiceIcon;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -74,7 +80,6 @@ export interface ScopeModuleAIcon {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

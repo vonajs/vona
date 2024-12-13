@@ -519,16 +519,13 @@ export interface IModuleModel {
   partyExpense: ModelPartyExpense;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/test.js';
-import { ServiceTest } from '../service/test.js';
-export interface IModuleService {
-  test: ServiceTest;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'test-party.service.test': ServiceTest;
+  export interface IServiceRecord {
+    'test-party:test': never;
   }
 }
 declare module 'vona-module-test-party' {
@@ -536,7 +533,16 @@ declare module 'vona-module-test-party' {
     get scope(): ScopeModuleTestParty;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceTest } from '../service/test.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'test-party.service.test': ServiceTest;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -574,7 +580,6 @@ export interface ScopeModuleTestParty {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

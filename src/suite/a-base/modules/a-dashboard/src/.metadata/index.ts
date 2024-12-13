@@ -142,16 +142,13 @@ export interface IModuleModel {
   dashboardUser: ModelDashboardUser;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/dashboard.js';
-import { ServiceDashboard } from '../service/dashboard.js';
-export interface IModuleService {
-  dashboard: ServiceDashboard;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-dashboard.service.dashboard': ServiceDashboard;
+  export interface IServiceRecord {
+    'a-dashboard:dashboard': never;
   }
 }
 declare module 'vona-module-a-dashboard' {
@@ -159,7 +156,16 @@ declare module 'vona-module-a-dashboard' {
     get scope(): ScopeModuleADashboard;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceDashboard } from '../service/dashboard.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-dashboard.service.dashboard': ServiceDashboard;
+  }
+}
+/** service: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -178,7 +184,6 @@ export interface ScopeModuleADashboard {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

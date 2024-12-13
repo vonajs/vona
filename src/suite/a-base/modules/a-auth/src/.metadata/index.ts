@@ -145,19 +145,13 @@ export interface IModuleModel {
   authProvider: ModelAuthProvider;
 }
 /** model: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/passport.js';
-import { ServicePassport } from '../service/passport.js';
-export interface IModuleService {
-  passport: ServicePassport;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-auth.service.passport': ServicePassport;
+  export interface IServiceRecord {
+    'a-auth:passport': never;
   }
 }
 declare module 'vona-module-a-auth' {
@@ -165,7 +159,19 @@ declare module 'vona-module-a-auth' {
     get scope(): ScopeModuleAAuth;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServicePassport } from '../service/passport.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-auth.service.passport': ServicePassport;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -198,7 +204,6 @@ export interface ScopeModuleAAuth {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

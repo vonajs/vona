@@ -119,16 +119,13 @@ export interface IModuleQueue {
   stats: QueueStats;
 }
 /** queue: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/stats.js';
-import { ServiceStats } from '../service/stats.js';
-export interface IModuleService {
-  stats: ServiceStats;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-stats.service.stats': ServiceStats;
+  export interface IServiceRecord {
+    'a-stats:stats': never;
   }
 }
 declare module 'vona-module-a-stats' {
@@ -136,7 +133,16 @@ declare module 'vona-module-a-stats' {
     get scope(): ScopeModuleAStats;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceStats } from '../service/stats.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-stats.service.stats': ServiceStats;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -151,7 +157,6 @@ export interface ScopeModuleAStats {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
   queue: IModuleQueue;

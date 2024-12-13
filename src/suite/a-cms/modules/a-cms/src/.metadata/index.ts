@@ -201,27 +201,17 @@ export interface IModuleQueue {
   render: QueueRender;
 }
 /** queue: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/build.js';
 export * from '../service/render.js';
 export * from '../service/site.js';
-import { ServiceBuild } from '../service/build.js';
-import { ServiceRender } from '../service/render.js';
-import { ServiceSite } from '../service/site.js';
-export interface IModuleService {
-  build: ServiceBuild;
-  render: ServiceRender;
-  site: ServiceSite;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-cms.service.build': ServiceBuild;
-    'a-cms.service.render': ServiceRender;
-    'a-cms.service.site': ServiceSite;
+  export interface IServiceRecord {
+    'a-cms:build': never;
+    'a-cms:render': never;
+    'a-cms:site': never;
   }
 }
 declare module 'vona-module-a-cms' {
@@ -237,7 +227,23 @@ declare module 'vona-module-a-cms' {
     get scope(): ScopeModuleACms;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceBuild } from '../service/build.js';
+import { ServiceRender } from '../service/render.js';
+import { ServiceSite } from '../service/site.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-cms.service.build': ServiceBuild;
+    'a-cms.service.render': ServiceRender;
+    'a-cms.service.site': ServiceSite;
+  }
+}
+/** service: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -279,7 +285,6 @@ export interface ScopeModuleACms {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
   queue: IModuleQueue;

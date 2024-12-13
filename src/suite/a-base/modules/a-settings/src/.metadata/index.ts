@@ -101,16 +101,13 @@ export interface IModuleModel {
   settingsRef: ModelSettingsRef;
 }
 /** model: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/settings.js';
-import { ServiceSettings } from '../service/settings.js';
-export interface IModuleService {
-  settings: ServiceSettings;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-settings.service.settings': ServiceSettings;
+  export interface IServiceRecord {
+    'a-settings:settings': never;
   }
 }
 declare module 'vona-module-a-settings' {
@@ -118,7 +115,16 @@ declare module 'vona-module-a-settings' {
     get scope(): ScopeModuleASettings;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceSettings } from '../service/settings.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-settings.service.settings': ServiceSettings;
+  }
+}
+/** service: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';
@@ -150,7 +156,6 @@ export interface ScopeModuleASettings {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
 }

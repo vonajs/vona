@@ -19,20 +19,15 @@ declare module 'vona-module-a-flowchart' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
-import { ServiceFlow } from '../service/flow.js';
-import { ServiceFlowDef } from '../service/flowDef.js';
-export interface IModuleService {
-  flow: ServiceFlow;
-  flowDef: ServiceFlowDef;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-flowchart.service.flow': ServiceFlow;
-    'a-flowchart.service.flowDef': ServiceFlowDef;
+  export interface IServiceRecord {
+    'a-flowchart:flow': never;
+    'a-flowchart:flowDef': never;
   }
 }
 declare module 'vona-module-a-flowchart' {
@@ -44,7 +39,18 @@ declare module 'vona-module-a-flowchart' {
     get scope(): ScopeModuleAFlowchart;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceFlow } from '../service/flow.js';
+import { ServiceFlowDef } from '../service/flowDef.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-flowchart.service.flow': ServiceFlow;
+    'a-flowchart.service.flowDef': ServiceFlowDef;
+  }
+}
+/** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -54,7 +60,6 @@ export class ScopeModuleAFlowchart extends BeanScopeBase {}
 export interface ScopeModuleAFlowchart {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  service: IModuleService;
 }
 
 import 'vona';

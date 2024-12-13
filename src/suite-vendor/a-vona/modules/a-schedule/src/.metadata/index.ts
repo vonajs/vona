@@ -34,16 +34,13 @@ export interface IModuleQueue {
   schedule: QueueSchedule;
 }
 /** queue: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/schedule.js';
-import { ServiceSchedule } from '../service/schedule.js';
-export interface IModuleService {
-  schedule: ServiceSchedule;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-schedule.service.schedule': ServiceSchedule;
+  export interface IServiceRecord {
+    'a-schedule:schedule': never;
   }
 }
 declare module 'vona-module-a-schedule' {
@@ -51,7 +48,16 @@ declare module 'vona-module-a-schedule' {
     get scope(): ScopeModuleASchedule;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceSchedule } from '../service/schedule.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-schedule.service.schedule': ServiceSchedule;
+  }
+}
+/** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -61,7 +67,6 @@ export class ScopeModuleASchedule extends BeanScopeBase {}
 export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  service: IModuleService;
   queue: IModuleQueue;
 }
 

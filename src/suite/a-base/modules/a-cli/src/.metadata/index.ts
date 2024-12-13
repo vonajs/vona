@@ -41,28 +41,19 @@ declare module 'vona-module-a-cli' {
   }
 }
 /** controller: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/cli.js';
 export * from '../service/console.js';
 export * from '../service/helper.js';
 export * from '../service/template.js';
-import { ServiceCli } from '../service/cli.js';
-import { ServiceConsole } from '../service/console.js';
-import { ServiceHelper } from '../service/helper.js';
-import { ServiceTemplate } from '../service/template.js';
-export interface IModuleService {
-  cli: ServiceCli;
-  console: ServiceConsole;
-  helper: ServiceHelper;
-  template: ServiceTemplate;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-cli.service.cli': ServiceCli;
-    'a-cli.service.console': ServiceConsole;
-    'a-cli.service.helper': ServiceHelper;
-    'a-cli.service.template': ServiceTemplate;
+  export interface IServiceRecord {
+    'a-cli:cli': never;
+    'a-cli:console': never;
+    'a-cli:helper': never;
+    'a-cli:template': never;
   }
 }
 declare module 'vona-module-a-cli' {
@@ -82,7 +73,22 @@ declare module 'vona-module-a-cli' {
     get scope(): ScopeModuleACli;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceCli } from '../service/cli.js';
+import { ServiceConsole } from '../service/console.js';
+import { ServiceHelper } from '../service/helper.js';
+import { ServiceTemplate } from '../service/template.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-cli.service.cli': ServiceCli;
+    'a-cli.service.console': ServiceConsole;
+    'a-cli.service.helper': ServiceHelper;
+    'a-cli.service.template': ServiceTemplate;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -114,7 +120,6 @@ export interface ScopeModuleACli {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
 }
 
 import 'vona';

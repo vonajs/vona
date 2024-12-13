@@ -236,39 +236,23 @@ export interface IModuleQueue {
   pushDirect: QueuePushDirect;
 }
 /** queue: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/io.js';
 export * from '../service/ioInner.js';
 export * from '../service/message.js';
 export * from '../service/messageClass.js';
 export * from '../service/procedure.js';
 export * from '../service/redis.js';
-import { ServiceIo } from '../service/io.js';
-import { ServiceIoInner } from '../service/ioInner.js';
-import { ServiceMessage } from '../service/message.js';
-import { ServiceMessageClass } from '../service/messageClass.js';
-import { ServiceProcedure } from '../service/procedure.js';
-import { ServiceRedis } from '../service/redis.js';
-export interface IModuleService {
-  io: ServiceIo;
-  ioInner: ServiceIoInner;
-  message: ServiceMessage;
-  messageClass: ServiceMessageClass;
-  procedure: ServiceProcedure;
-  redis: ServiceRedis;
-}
+
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGeneral {
-    'a-socketio.service.io': ServiceIo;
-    'a-socketio.service.ioInner': ServiceIoInner;
-    'a-socketio.service.message': ServiceMessage;
-    'a-socketio.service.messageClass': ServiceMessageClass;
-    'a-socketio.service.procedure': ServiceProcedure;
-    'a-socketio.service.redis': ServiceRedis;
+  export interface IServiceRecord {
+    'a-socketio:io': never;
+    'a-socketio:ioInner': never;
+    'a-socketio:message': never;
+    'a-socketio:messageClass': never;
+    'a-socketio:procedure': never;
+    'a-socketio:redis': never;
   }
 }
 declare module 'vona-module-a-socketio' {
@@ -296,7 +280,29 @@ declare module 'vona-module-a-socketio' {
     get scope(): ScopeModuleASocketio;
   }
 }
-/** services: end */
+/** service: end */
+/** service: begin */
+import { ServiceIo } from '../service/io.js';
+import { ServiceIoInner } from '../service/ioInner.js';
+import { ServiceMessage } from '../service/message.js';
+import { ServiceMessageClass } from '../service/messageClass.js';
+import { ServiceProcedure } from '../service/procedure.js';
+import { ServiceRedis } from '../service/redis.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-socketio.service.io': ServiceIo;
+    'a-socketio.service.ioInner': ServiceIoInner;
+    'a-socketio.service.message': ServiceMessage;
+    'a-socketio.service.messageClass': ServiceMessageClass;
+    'a-socketio.service.procedure': ServiceProcedure;
+    'a-socketio.service.redis': ServiceRedis;
+  }
+}
+/** service: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -312,7 +318,6 @@ export interface ScopeModuleASocketio {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   redlock: MetaRedlock;
-  service: IModuleService;
   entity: IModuleEntity;
   model: IModuleModel;
   queue: IModuleQueue;

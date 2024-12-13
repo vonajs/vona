@@ -40,16 +40,13 @@ declare module 'vona-module-a-summer' {
   }
 }
 /** beans: end */
-/** services: begin */
+/** service: begin */
 export * from '../service/localFetch_.js';
 export * from '../service/localMem_.js';
 export * from '../service/localRedis_.js';
 
-export interface IModuleService {}
 import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGeneral {}
-}
+declare module 'vona' {}
 declare module 'vona-module-a-summer' {
   export interface ServiceLocalFetch {
     get scope(): ScopeModuleASummer;
@@ -63,7 +60,7 @@ declare module 'vona-module-a-summer' {
     get scope(): ScopeModuleASummer;
   }
 }
-/** services: end */
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -78,7 +75,6 @@ export interface ScopeModuleASummer {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  service: IModuleService;
 }
 
 import 'vona';
