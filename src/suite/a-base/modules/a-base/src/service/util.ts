@@ -1,4 +1,5 @@
-import { BeanBase, Service } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 import pMap from 'p-map';
 
 @Service()

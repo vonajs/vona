@@ -205,21 +205,10 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** service: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** services: begin */
-export * from '../service/test.js';
-export * from '../service/testApp.js';
-export * from '../service/testClass.js';
+/** service: begin */
 import { ServiceTest } from '../service/test.js';
 import { ServiceTestApp } from '../service/testApp.js';
 import { ServiceTestClass } from '../service/testClass.js';
-export interface IModuleService {
-  test: ServiceTest;
-  testApp: ServiceTestApp;
-  testClass: ServiceTestClass;
-}
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
@@ -228,20 +217,10 @@ declare module 'vona' {
     'vona-test.service.testClass': ServiceTestClass;
   }
 }
-declare module 'vona-module-vona-test' {
-  export interface ServiceTest {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ServiceTestApp {
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface ServiceTestClass {
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** services: end */
+/** service: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -274,7 +253,6 @@ export interface ScopeModuleVonaTest {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   status: MetaStatus;
-  service: IModuleService;
   summerCache: IModuleSummerCache;
   queue: IModuleQueue;
 }

@@ -1,6 +1,7 @@
 import moment from 'moment';
 import chalk from 'chalk';
-import { BeanBase, Service } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 import { BeanDatabaseClient } from 'vona-module-a-database';
 
 const __separator = '-';

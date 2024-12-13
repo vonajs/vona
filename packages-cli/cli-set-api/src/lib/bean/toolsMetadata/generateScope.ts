@@ -8,7 +8,6 @@ export interface GenerateScopeOptions {
   constants: string;
   status: string;
   redlock: string;
-  services: string;
 }
 export async function generateScope(
   moduleName: string,
@@ -53,9 +52,6 @@ export async function generateScope(
   }
   if (options.redlock) {
     contentRecords.push('redlock: MetaRedlock;');
-  }
-  if (options.services) {
-    contentRecords.push('service: IModuleService;');
   }
   // loop
   for (const sceneName in scopeResources) {

@@ -5,7 +5,6 @@ import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateMetaStatus, generateMetaRedlock } from './toolsMetadata/generateMetaStatus.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
-import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
@@ -88,9 +87,6 @@ export class CliToolsMetadata extends BeanCliBase {
     // meta redlock
     const contentMetaRedlock = await generateMetaRedlock(moduleName, modulePath);
     content += contentMetaRedlock;
-    // services
-    const contentServices = await generateServices(moduleName, modulePath);
-    content += contentServices;
     // config
     const contentConfig = await generateConfig(modulePath);
     content += contentConfig;
@@ -115,7 +111,6 @@ export class CliToolsMetadata extends BeanCliBase {
       constants: contentConstants,
       status: contentMetaStatus,
       redlock: contentMetaRedlock,
-      services: contentServices,
     });
     // empty
     if (!content.trim()) {

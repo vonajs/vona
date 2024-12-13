@@ -1,4 +1,5 @@
-import { BeanBase, Service } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 const __appKeyDefault = 'a-app:appDefault';
 
