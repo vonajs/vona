@@ -32,6 +32,7 @@ declare module '@cabloy/cli' {
     sceneNameCapitalize: string;
     beanName: string;
     beanNameCapitalize: string;
+    moduleResourceName: string;
     //
     decoratorName: string;
     beanOptions: string;
@@ -72,6 +73,8 @@ export class CliCreateBean extends BeanCliBase {
     } else {
       argv.beanOptions = `{ scene: '${sceneName}' }`;
     }
+    // moduleResourceName
+    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.beanName);
     // directory
     const beanDir = path.join(targetDir, onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean');
     const beanFile = path.join(beanDir, onionSceneMeta.sceneIsolate ? `${beanName}.ts` : `${sceneName}.${beanName}.ts`);

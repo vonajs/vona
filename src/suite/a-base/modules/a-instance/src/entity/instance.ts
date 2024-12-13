@@ -1,5 +1,5 @@
-import { Entity, IInstanceStartupOptions, omitClass } from 'vona';
-import { EntityBase } from 'vona-module-a-database';
+import { IInstanceStartupOptions, omitClass } from 'vona';
+import { Entity, EntityBase } from 'vona-module-a-database';
 import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 

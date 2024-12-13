@@ -1,0 +1,4 @@
+import { Entity, EntityBase } from 'vona-module-a-database';
+
+@Entity('<%=argv.moduleResourceName%>')
+export class Entity<%=argv.beanNameCapitalize%> extends EntityBase {}
