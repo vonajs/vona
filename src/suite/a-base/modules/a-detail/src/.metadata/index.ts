@@ -26,13 +26,27 @@ declare module 'vona-module-a-detail' {
 /** entity: begin */
 export * from '../entity/detailBase.js';
 
-import { IDecoratorEntityOptions } from 'vona';
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-detail:detailBase': IDecoratorEntityOptions;
   }
 }
 declare module 'vona-module-a-detail' {}
+/** entity: end */
+/** entity: begin */
+import { EntityDetailBase } from '../entity/detailBase.js';
+export interface IModuleEntity {
+  detailBase: EntityDetailBase;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-detail' {
+  export interface EntityDetailBase {
+    column: <K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/detailBase.js';
@@ -55,18 +69,6 @@ export interface IModuleModel {
   detailBase: ModelDetailBase;
 }
 /** model: end */
-/** entities: begin */
-import { EntityDetailBase } from '../entity/detailBase.js';
-export interface IModuleEntity {
-  detailBase: EntityDetailBase;
-}
-declare module 'vona-module-a-detail' {
-  export interface EntityDetailBase {
-    column: <K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityDetailBase, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';

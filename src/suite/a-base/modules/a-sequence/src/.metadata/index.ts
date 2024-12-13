@@ -30,17 +30,6 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/sequence.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-sequence:sequence': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-sequence' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/sequence.js';
 
@@ -71,21 +60,34 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** meta: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** entities: begin */
+/** entity: begin */
+export * from '../entity/sequence.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-sequence:sequence': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-sequence' {}
+/** entity: end */
+/** entity: begin */
 import { EntitySequence } from '../entity/sequence.js';
 export interface IModuleEntity {
   sequence: EntitySequence;
 }
+/** entity: end */
+/** entity: begin */
 declare module 'vona-module-a-sequence' {
   export interface EntitySequence {
     column: <K extends keyof Omit<EntitySequence, 'column' | 'columns' | 'table'>>(column: K) => K;
     columns: <K extends keyof Omit<EntitySequence, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** entities: end */
+/** entity: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** services: begin */
 export * from '../service/sequence.js';
 import { ServiceSequence } from '../service/sequence.js';

@@ -156,19 +156,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** aop: end */
-/** entity: begin */
-export * from '../entity/party.js';
-export * from '../entity/partyExpense.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'test-party:party': IDecoratorEntityOptions;
-    'test-party:partyExpense': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-test-party' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/kitchenSinkAutocomplete.js';
 export * from '../controller/kitchenSinkFormSchemaValidation.js';
@@ -469,6 +456,40 @@ declare module 'vona-module-test-party' {
   }
 }
 /** startup: end */
+/** entity: begin */
+export * from '../entity/party.js';
+export * from '../entity/partyExpense.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'test-party:party': IDecoratorEntityOptions;
+    'test-party:partyExpense': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-test-party' {}
+/** entity: end */
+/** entity: begin */
+import { EntityParty } from '../entity/party.js';
+import { EntityPartyExpense } from '../entity/partyExpense.js';
+export interface IModuleEntity {
+  party: EntityParty;
+  partyExpense: EntityPartyExpense;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-test-party' {
+  export interface EntityParty {
+    column: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityPartyExpense {
+    column: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/party.js';
 export * from '../model/partyExpense.js';
@@ -498,25 +519,6 @@ export interface IModuleModel {
   partyExpense: ModelPartyExpense;
 }
 /** model: end */
-/** entities: begin */
-import { EntityParty } from '../entity/party.js';
-import { EntityPartyExpense } from '../entity/partyExpense.js';
-export interface IModuleEntity {
-  party: EntityParty;
-  partyExpense: EntityPartyExpense;
-}
-declare module 'vona-module-test-party' {
-  export interface EntityParty {
-    column: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityParty, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityPartyExpense {
-    column: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityPartyExpense, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/test.js';
 import { ServiceTest } from '../service/test.js';

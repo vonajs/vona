@@ -52,17 +52,6 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/authOpen.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-authopen:authOpen': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-authopen' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/auth.js';
 export * from '../controller/authOpen.js';
@@ -84,6 +73,31 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/authOpen.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-authopen:authOpen': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-authopen' {}
+/** entity: end */
+/** entity: begin */
+import { EntityAuthOpen } from '../entity/authOpen.js';
+export interface IModuleEntity {
+  authOpen: EntityAuthOpen;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-authopen' {
+  export interface EntityAuthOpen {
+    column: <K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/authOpen.js';
 
@@ -105,18 +119,6 @@ export interface IModuleModel {
   authOpen: ModelAuthOpen;
 }
 /** model: end */
-/** entities: begin */
-import { EntityAuthOpen } from '../entity/authOpen.js';
-export interface IModuleEntity {
-  authOpen: EntityAuthOpen;
-}
-declare module 'vona-module-a-authopen' {
-  export interface EntityAuthOpen {
-    column: <K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAuthOpen, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/auth.js';
 export * from '../service/authOpen.js';

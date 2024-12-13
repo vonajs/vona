@@ -23,19 +23,6 @@ declare module 'vona-module-a-file' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/file.js';
-export * from '../entity/fileView.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-file:file': IDecoratorEntityOptions;
-    'a-file:fileView': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-file' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/file.js';
 
@@ -51,6 +38,40 @@ declare module 'vona-module-a-file' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/file.js';
+export * from '../entity/fileView.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-file:file': IDecoratorEntityOptions;
+    'a-file:fileView': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-file' {}
+/** entity: end */
+/** entity: begin */
+import { EntityFile } from '../entity/file.js';
+import { EntityFileView } from '../entity/fileView.js';
+export interface IModuleEntity {
+  file: EntityFile;
+  fileView: EntityFileView;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-file' {
+  export interface EntityFile {
+    column: <K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFileView {
+    column: <K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/file.js';
 export * from '../model/fileView.js';
@@ -80,25 +101,6 @@ export interface IModuleModel {
   fileView: ModelFileView;
 }
 /** model: end */
-/** entities: begin */
-import { EntityFile } from '../entity/file.js';
-import { EntityFileView } from '../entity/fileView.js';
-export interface IModuleEntity {
-  file: EntityFile;
-  fileView: EntityFileView;
-}
-declare module 'vona-module-a-file' {
-  export interface EntityFile {
-    column: <K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFile, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFileView {
-    column: <K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFileView, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/file.js';
 import { ServiceFile } from '../service/file.js';

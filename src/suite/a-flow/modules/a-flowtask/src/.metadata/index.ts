@@ -65,21 +65,6 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/flowNodeStartEventAtomCondition.js';
-export * from '../entity/flowTask.js';
-export * from '../entity/flowTaskHistory.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorEntityOptions;
-    'a-flowtask:flowTask': IDecoratorEntityOptions;
-    'a-flowtask:flowTaskHistory': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-flowtask' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowTask.js';
@@ -116,6 +101,53 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** meta: end */
+/** entity: begin */
+export * from '../entity/flowNodeStartEventAtomCondition.js';
+export * from '../entity/flowTask.js';
+export * from '../entity/flowTaskHistory.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-flowtask:flowNodeStartEventAtomCondition': IDecoratorEntityOptions;
+    'a-flowtask:flowTask': IDecoratorEntityOptions;
+    'a-flowtask:flowTaskHistory': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-flowtask' {}
+/** entity: end */
+/** entity: begin */
+import { EntityFlowNodeStartEventAtomCondition } from '../entity/flowNodeStartEventAtomCondition.js';
+import { EntityFlowTask } from '../entity/flowTask.js';
+import { EntityFlowTaskHistory } from '../entity/flowTaskHistory.js';
+export interface IModuleEntity {
+  flowNodeStartEventAtomCondition: EntityFlowNodeStartEventAtomCondition;
+  flowTask: EntityFlowTask;
+  flowTaskHistory: EntityFlowTaskHistory;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-flowtask' {
+  export interface EntityFlowNodeStartEventAtomCondition {
+    column: <K extends keyof Omit<EntityFlowNodeStartEventAtomCondition, 'column' | 'columns' | 'table'>>(
+      column: K,
+    ) => K;
+    columns: <K extends keyof Omit<EntityFlowNodeStartEventAtomCondition, 'column' | 'columns' | 'table'>>(
+      ...columns: K[]
+    ) => K[];
+  }
+
+  export interface EntityFlowTask {
+    column: <K extends keyof Omit<EntityFlowTask, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowTask, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowTaskHistory {
+    column: <K extends keyof Omit<EntityFlowTaskHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowTaskHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/flowNodeStartEventAtomCondition.js';
 export * from '../model/flowTask.js';
@@ -156,36 +188,6 @@ export interface IModuleModel {
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityFlowNodeStartEventAtomCondition } from '../entity/flowNodeStartEventAtomCondition.js';
-import { EntityFlowTask } from '../entity/flowTask.js';
-import { EntityFlowTaskHistory } from '../entity/flowTaskHistory.js';
-export interface IModuleEntity {
-  flowNodeStartEventAtomCondition: EntityFlowNodeStartEventAtomCondition;
-  flowTask: EntityFlowTask;
-  flowTaskHistory: EntityFlowTaskHistory;
-}
-declare module 'vona-module-a-flowtask' {
-  export interface EntityFlowNodeStartEventAtomCondition {
-    column: <K extends keyof Omit<EntityFlowNodeStartEventAtomCondition, 'column' | 'columns' | 'table'>>(
-      column: K,
-    ) => K;
-    columns: <K extends keyof Omit<EntityFlowNodeStartEventAtomCondition, 'column' | 'columns' | 'table'>>(
-      ...columns: K[]
-    ) => K[];
-  }
-
-  export interface EntityFlowTask {
-    column: <K extends keyof Omit<EntityFlowTask, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowTask, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowTaskHistory {
-    column: <K extends keyof Omit<EntityFlowTaskHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowTaskHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowTask.js';

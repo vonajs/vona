@@ -15,17 +15,6 @@ declare module 'vona-module-a-status' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/status.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-status:status': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-status' {}
-/** entity: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -41,6 +30,31 @@ declare module 'vona-module-a-status' {
   }
 }
 /** meta: end */
+/** entity: begin */
+export * from '../entity/status.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-status:status': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-status' {}
+/** entity: end */
+/** entity: begin */
+import { EntityStatus } from '../entity/status.js';
+export interface IModuleEntity {
+  status: EntityStatus;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-status' {
+  export interface EntityStatus {
+    column: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/status.js';
 
@@ -65,18 +79,6 @@ export interface IModuleModel {
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityStatus } from '../entity/status.js';
-export interface IModuleEntity {
-  status: EntityStatus;
-}
-declare module 'vona-module-a-status' {
-  export interface EntityStatus {
-    column: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityStatus, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

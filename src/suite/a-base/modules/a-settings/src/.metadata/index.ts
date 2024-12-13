@@ -23,19 +23,6 @@ declare module 'vona-module-a-settings' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/settings.js';
-export * from '../entity/settingsRef.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-settings:settings': IDecoratorEntityOptions;
-    'a-settings:settingsRef': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-settings' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/settings.js';
 
@@ -51,6 +38,40 @@ declare module 'vona-module-a-settings' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/settings.js';
+export * from '../entity/settingsRef.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-settings:settings': IDecoratorEntityOptions;
+    'a-settings:settingsRef': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-settings' {}
+/** entity: end */
+/** entity: begin */
+import { EntitySettings } from '../entity/settings.js';
+import { EntitySettingsRef } from '../entity/settingsRef.js';
+export interface IModuleEntity {
+  settings: EntitySettings;
+  settingsRef: EntitySettingsRef;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-settings' {
+  export interface EntitySettings {
+    column: <K extends keyof Omit<EntitySettings, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntitySettings, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntitySettingsRef {
+    column: <K extends keyof Omit<EntitySettingsRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntitySettingsRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/settings.js';
 export * from '../model/settingsRef.js';
@@ -80,25 +101,6 @@ export interface IModuleModel {
   settingsRef: ModelSettingsRef;
 }
 /** model: end */
-/** entities: begin */
-import { EntitySettings } from '../entity/settings.js';
-import { EntitySettingsRef } from '../entity/settingsRef.js';
-export interface IModuleEntity {
-  settings: EntitySettings;
-  settingsRef: EntitySettingsRef;
-}
-declare module 'vona-module-a-settings' {
-  export interface EntitySettings {
-    column: <K extends keyof Omit<EntitySettings, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntitySettings, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntitySettingsRef {
-    column: <K extends keyof Omit<EntitySettingsRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntitySettingsRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/settings.js';
 import { ServiceSettings } from '../service/settings.js';

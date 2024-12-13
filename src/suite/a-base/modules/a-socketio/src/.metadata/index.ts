@@ -63,21 +63,6 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** socketPacket: end */
-/** entity: begin */
-export * from '../entity/message.js';
-export * from '../entity/messageClass.js';
-export * from '../entity/messageSync.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-socketio:message': IDecoratorEntityOptions;
-    'a-socketio:messageClass': IDecoratorEntityOptions;
-    'a-socketio:messageSync': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-socketio' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/io.js';
 export * from '../controller/message.js';
@@ -126,6 +111,49 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** meta: end */
+/** entity: begin */
+export * from '../entity/message.js';
+export * from '../entity/messageClass.js';
+export * from '../entity/messageSync.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-socketio:message': IDecoratorEntityOptions;
+    'a-socketio:messageClass': IDecoratorEntityOptions;
+    'a-socketio:messageSync': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-socketio' {}
+/** entity: end */
+/** entity: begin */
+import { EntityMessage } from '../entity/message.js';
+import { EntityMessageClass } from '../entity/messageClass.js';
+import { EntityMessageSync } from '../entity/messageSync.js';
+export interface IModuleEntity {
+  message: EntityMessage;
+  messageClass: EntityMessageClass;
+  messageSync: EntityMessageSync;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-socketio' {
+  export interface EntityMessage {
+    column: <K extends keyof Omit<EntityMessage, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityMessage, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityMessageClass {
+    column: <K extends keyof Omit<EntityMessageClass, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityMessageClass, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityMessageSync {
+    column: <K extends keyof Omit<EntityMessageSync, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityMessageSync, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/message.js';
 export * from '../model/messageClass.js';
@@ -211,32 +239,6 @@ export interface IModuleQueue {
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityMessage } from '../entity/message.js';
-import { EntityMessageClass } from '../entity/messageClass.js';
-import { EntityMessageSync } from '../entity/messageSync.js';
-export interface IModuleEntity {
-  message: EntityMessage;
-  messageClass: EntityMessageClass;
-  messageSync: EntityMessageSync;
-}
-declare module 'vona-module-a-socketio' {
-  export interface EntityMessage {
-    column: <K extends keyof Omit<EntityMessage, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityMessage, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityMessageClass {
-    column: <K extends keyof Omit<EntityMessageClass, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityMessageClass, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityMessageSync {
-    column: <K extends keyof Omit<EntityMessageSync, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityMessageSync, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/io.js';
 export * from '../service/ioInner.js';

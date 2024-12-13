@@ -38,19 +38,6 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/dict.js';
-export * from '../entity/dictContent.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-dict:dict': IDecoratorEntityOptions;
-    'a-dict:dictContent': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-dict' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/dict.js';
 
@@ -66,6 +53,40 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/dict.js';
+export * from '../entity/dictContent.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-dict:dict': IDecoratorEntityOptions;
+    'a-dict:dictContent': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-dict' {}
+/** entity: end */
+/** entity: begin */
+import { EntityDict } from '../entity/dict.js';
+import { EntityDictContent } from '../entity/dictContent.js';
+export interface IModuleEntity {
+  dict: EntityDict;
+  dictContent: EntityDictContent;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-dict' {
+  export interface EntityDict {
+    column: <K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityDictContent {
+    column: <K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/dict.js';
 export * from '../model/dictContent.js';
@@ -95,25 +116,6 @@ export interface IModuleModel {
   dictContent: ModelDictContent;
 }
 /** model: end */
-/** entities: begin */
-import { EntityDict } from '../entity/dict.js';
-import { EntityDictContent } from '../entity/dictContent.js';
-export interface IModuleEntity {
-  dict: EntityDict;
-  dictContent: EntityDictContent;
-}
-declare module 'vona-module-a-dict' {
-  export interface EntityDict {
-    column: <K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityDict, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityDictContent {
-    column: <K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityDictContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/dict.js';
 import { ServiceDict } from '../service/dict.js';

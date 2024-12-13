@@ -37,17 +37,6 @@ declare module 'vona-module-a-stats' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/stats.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-stats:stats': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-stats' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/stats.js';
 
@@ -63,6 +52,31 @@ declare module 'vona-module-a-stats' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/stats.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-stats:stats': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-stats' {}
+/** entity: end */
+/** entity: begin */
+import { EntityStats } from '../entity/stats.js';
+export interface IModuleEntity {
+  stats: EntityStats;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-stats' {
+  export interface EntityStats {
+    column: <K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/stats.js';
 
@@ -105,18 +119,6 @@ export interface IModuleQueue {
   stats: QueueStats;
 }
 /** queue: end */
-/** entities: begin */
-import { EntityStats } from '../entity/stats.js';
-export interface IModuleEntity {
-  stats: EntityStats;
-}
-declare module 'vona-module-a-stats' {
-  export interface EntityStats {
-    column: <K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityStats, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/stats.js';
 import { ServiceStats } from '../service/stats.js';

@@ -30,21 +30,6 @@ declare module 'vona-module-a-app' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/app.js';
-export * from '../entity/appContent.js';
-export * from '../entity/appFull.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-app:app': IDecoratorEntityOptions;
-    'a-app:appContent': IDecoratorEntityOptions;
-    'a-app:appFull': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-app' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/resource.js';
 
@@ -60,6 +45,49 @@ declare module 'vona-module-a-app' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/app.js';
+export * from '../entity/appContent.js';
+export * from '../entity/appFull.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-app:app': IDecoratorEntityOptions;
+    'a-app:appContent': IDecoratorEntityOptions;
+    'a-app:appFull': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-app' {}
+/** entity: end */
+/** entity: begin */
+import { EntityApp } from '../entity/app.js';
+import { EntityAppContent } from '../entity/appContent.js';
+import { EntityAppFull } from '../entity/appFull.js';
+export interface IModuleEntity {
+  app: EntityApp;
+  appContent: EntityAppContent;
+  appFull: EntityAppFull;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-app' {
+  export interface EntityApp {
+    column: <K extends keyof Omit<EntityApp, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityApp, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAppContent {
+    column: <K extends keyof Omit<EntityAppContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAppContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAppFull {
+    column: <K extends keyof Omit<EntityAppFull, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAppFull, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/app2.js';
 export * from '../model/appContent.js';
@@ -97,32 +125,6 @@ export interface IModuleModel {
   appFull: ModelAppFull;
 }
 /** model: end */
-/** entities: begin */
-import { EntityApp } from '../entity/app.js';
-import { EntityAppContent } from '../entity/appContent.js';
-import { EntityAppFull } from '../entity/appFull.js';
-export interface IModuleEntity {
-  app: EntityApp;
-  appContent: EntityAppContent;
-  appFull: EntityAppFull;
-}
-declare module 'vona-module-a-app' {
-  export interface EntityApp {
-    column: <K extends keyof Omit<EntityApp, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityApp, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAppContent {
-    column: <K extends keyof Omit<EntityAppContent, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAppContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAppFull {
-    column: <K extends keyof Omit<EntityAppFull, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAppFull, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/resource.js';
 import { ServiceResource } from '../service/resource.js';

@@ -59,29 +59,6 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/flow.js';
-export * from '../entity/flowDef.js';
-export * from '../entity/flowDefContent.js';
-export * from '../entity/flowDefFull.js';
-export * from '../entity/flowHistory.js';
-export * from '../entity/flowNode.js';
-export * from '../entity/flowNodeHistory.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-flow:flow': IDecoratorEntityOptions;
-    'a-flow:flowDef': IDecoratorEntityOptions;
-    'a-flow:flowDefContent': IDecoratorEntityOptions;
-    'a-flow:flowDefFull': IDecoratorEntityOptions;
-    'a-flow:flowHistory': IDecoratorEntityOptions;
-    'a-flow:flowNode': IDecoratorEntityOptions;
-    'a-flow:flowNodeHistory': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-flow' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/flow.js';
 export * from '../controller/flowDef.js';
@@ -118,6 +95,85 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** meta: end */
+/** entity: begin */
+export * from '../entity/flow.js';
+export * from '../entity/flowDef.js';
+export * from '../entity/flowDefContent.js';
+export * from '../entity/flowDefFull.js';
+export * from '../entity/flowHistory.js';
+export * from '../entity/flowNode.js';
+export * from '../entity/flowNodeHistory.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-flow:flow': IDecoratorEntityOptions;
+    'a-flow:flowDef': IDecoratorEntityOptions;
+    'a-flow:flowDefContent': IDecoratorEntityOptions;
+    'a-flow:flowDefFull': IDecoratorEntityOptions;
+    'a-flow:flowHistory': IDecoratorEntityOptions;
+    'a-flow:flowNode': IDecoratorEntityOptions;
+    'a-flow:flowNodeHistory': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-flow' {}
+/** entity: end */
+/** entity: begin */
+import { EntityFlow } from '../entity/flow.js';
+import { EntityFlowDef } from '../entity/flowDef.js';
+import { EntityFlowDefContent } from '../entity/flowDefContent.js';
+import { EntityFlowDefFull } from '../entity/flowDefFull.js';
+import { EntityFlowHistory } from '../entity/flowHistory.js';
+import { EntityFlowNode } from '../entity/flowNode.js';
+import { EntityFlowNodeHistory } from '../entity/flowNodeHistory.js';
+export interface IModuleEntity {
+  flow: EntityFlow;
+  flowDef: EntityFlowDef;
+  flowDefContent: EntityFlowDefContent;
+  flowDefFull: EntityFlowDefFull;
+  flowHistory: EntityFlowHistory;
+  flowNode: EntityFlowNode;
+  flowNodeHistory: EntityFlowNodeHistory;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-flow' {
+  export interface EntityFlow {
+    column: <K extends keyof Omit<EntityFlow, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlow, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowDef {
+    column: <K extends keyof Omit<EntityFlowDef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowDef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowDefContent {
+    column: <K extends keyof Omit<EntityFlowDefContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowDefContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowDefFull {
+    column: <K extends keyof Omit<EntityFlowDefFull, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowDefFull, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowHistory {
+    column: <K extends keyof Omit<EntityFlowHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowNode {
+    column: <K extends keyof Omit<EntityFlowNode, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowNode, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityFlowNodeHistory {
+    column: <K extends keyof Omit<EntityFlowNodeHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityFlowNodeHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/flow.js';
 export * from '../model/flowDef.js';
@@ -190,60 +246,6 @@ export interface IModuleModel {
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityFlow } from '../entity/flow.js';
-import { EntityFlowDef } from '../entity/flowDef.js';
-import { EntityFlowDefContent } from '../entity/flowDefContent.js';
-import { EntityFlowDefFull } from '../entity/flowDefFull.js';
-import { EntityFlowHistory } from '../entity/flowHistory.js';
-import { EntityFlowNode } from '../entity/flowNode.js';
-import { EntityFlowNodeHistory } from '../entity/flowNodeHistory.js';
-export interface IModuleEntity {
-  flow: EntityFlow;
-  flowDef: EntityFlowDef;
-  flowDefContent: EntityFlowDefContent;
-  flowDefFull: EntityFlowDefFull;
-  flowHistory: EntityFlowHistory;
-  flowNode: EntityFlowNode;
-  flowNodeHistory: EntityFlowNodeHistory;
-}
-declare module 'vona-module-a-flow' {
-  export interface EntityFlow {
-    column: <K extends keyof Omit<EntityFlow, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlow, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowDef {
-    column: <K extends keyof Omit<EntityFlowDef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowDef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowDefContent {
-    column: <K extends keyof Omit<EntityFlowDefContent, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowDefContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowDefFull {
-    column: <K extends keyof Omit<EntityFlowDefFull, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowDefFull, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowHistory {
-    column: <K extends keyof Omit<EntityFlowHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowNode {
-    column: <K extends keyof Omit<EntityFlowNode, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowNode, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityFlowNodeHistory {
-    column: <K extends keyof Omit<EntityFlowNodeHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityFlowNodeHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';

@@ -348,73 +348,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** aop: end */
-/** entity: begin */
-export * from '../entity/atom.js';
-export * from '../entity/atomAction.js';
-export * from '../entity/atomClass.js';
-export * from '../entity/atomLabel.js';
-export * from '../entity/atomLabelRef.js';
-export * from '../entity/atomStar.js';
-export * from '../entity/category.js';
-export * from '../entity/comment.js';
-export * from '../entity/commentHeart.js';
-export * from '../entity/commentView.js';
-export * from '../entity/label.js';
-export * from '../entity/resource.js';
-export * from '../entity/resourceLocale.js';
-export * from '../entity/resourceRole.js';
-export * from '../entity/role.js';
-export * from '../entity/roleExpand.js';
-export * from '../entity/roleFieldsRight.js';
-export * from '../entity/roleInc.js';
-export * from '../entity/roleIncRef.js';
-export * from '../entity/roleRef.js';
-export * from '../entity/roleRight.js';
-export * from '../entity/roleRightRef.js';
-export * from '../entity/tag.js';
-export * from '../entity/tagRef.js';
-export * from '../entity/user.js';
-export * from '../entity/userAgent.js';
-export * from '../entity/userRole.js';
-export * from '../entity/userRoleIncRef.js';
-export * from '../entity/userRoleRef.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-base:atom': IDecoratorEntityOptions;
-    'a-base:atomAction': IDecoratorEntityOptions;
-    'a-base:atomClass': IDecoratorEntityOptions;
-    'a-base:atomLabel': IDecoratorEntityOptions;
-    'a-base:atomLabelRef': IDecoratorEntityOptions;
-    'a-base:atomStar': IDecoratorEntityOptions;
-    'a-base:category': IDecoratorEntityOptions;
-    'a-base:comment': IDecoratorEntityOptions;
-    'a-base:commentHeart': IDecoratorEntityOptions;
-    'a-base:commentView': IDecoratorEntityOptions;
-    'a-base:label': IDecoratorEntityOptions;
-    'a-base:resource': IDecoratorEntityOptions;
-    'a-base:resourceLocale': IDecoratorEntityOptions;
-    'a-base:resourceRole': IDecoratorEntityOptions;
-    'a-base:role': IDecoratorEntityOptions;
-    'a-base:roleExpand': IDecoratorEntityOptions;
-    'a-base:roleFieldsRight': IDecoratorEntityOptions;
-    'a-base:roleInc': IDecoratorEntityOptions;
-    'a-base:roleIncRef': IDecoratorEntityOptions;
-    'a-base:roleRef': IDecoratorEntityOptions;
-    'a-base:roleRight': IDecoratorEntityOptions;
-    'a-base:roleRightRef': IDecoratorEntityOptions;
-    'a-base:tag': IDecoratorEntityOptions;
-    'a-base:tagRef': IDecoratorEntityOptions;
-    'a-base:user': IDecoratorEntityOptions;
-    'a-base:userAgent': IDecoratorEntityOptions;
-    'a-base:userRole': IDecoratorEntityOptions;
-    'a-base:userRoleIncRef': IDecoratorEntityOptions;
-    'a-base:userRoleRef': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-base' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/atom.js';
 export * from '../controller/atomAction.js';
@@ -556,6 +489,283 @@ declare module 'vona-module-a-base' {
   }
 }
 /** startup: end */
+/** entity: begin */
+export * from '../entity/atom.js';
+export * from '../entity/atomAction.js';
+export * from '../entity/atomClass.js';
+export * from '../entity/atomLabel.js';
+export * from '../entity/atomLabelRef.js';
+export * from '../entity/atomStar.js';
+export * from '../entity/category.js';
+export * from '../entity/comment.js';
+export * from '../entity/commentHeart.js';
+export * from '../entity/commentView.js';
+export * from '../entity/label.js';
+export * from '../entity/resource.js';
+export * from '../entity/resourceLocale.js';
+export * from '../entity/resourceRole.js';
+export * from '../entity/role.js';
+export * from '../entity/roleExpand.js';
+export * from '../entity/roleFieldsRight.js';
+export * from '../entity/roleInc.js';
+export * from '../entity/roleIncRef.js';
+export * from '../entity/roleRef.js';
+export * from '../entity/roleRight.js';
+export * from '../entity/roleRightRef.js';
+export * from '../entity/tag.js';
+export * from '../entity/tagRef.js';
+export * from '../entity/user.js';
+export * from '../entity/userAgent.js';
+export * from '../entity/userRole.js';
+export * from '../entity/userRoleIncRef.js';
+export * from '../entity/userRoleRef.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-base:atom': IDecoratorEntityOptions;
+    'a-base:atomAction': IDecoratorEntityOptions;
+    'a-base:atomClass': IDecoratorEntityOptions;
+    'a-base:atomLabel': IDecoratorEntityOptions;
+    'a-base:atomLabelRef': IDecoratorEntityOptions;
+    'a-base:atomStar': IDecoratorEntityOptions;
+    'a-base:category': IDecoratorEntityOptions;
+    'a-base:comment': IDecoratorEntityOptions;
+    'a-base:commentHeart': IDecoratorEntityOptions;
+    'a-base:commentView': IDecoratorEntityOptions;
+    'a-base:label': IDecoratorEntityOptions;
+    'a-base:resource': IDecoratorEntityOptions;
+    'a-base:resourceLocale': IDecoratorEntityOptions;
+    'a-base:resourceRole': IDecoratorEntityOptions;
+    'a-base:role': IDecoratorEntityOptions;
+    'a-base:roleExpand': IDecoratorEntityOptions;
+    'a-base:roleFieldsRight': IDecoratorEntityOptions;
+    'a-base:roleInc': IDecoratorEntityOptions;
+    'a-base:roleIncRef': IDecoratorEntityOptions;
+    'a-base:roleRef': IDecoratorEntityOptions;
+    'a-base:roleRight': IDecoratorEntityOptions;
+    'a-base:roleRightRef': IDecoratorEntityOptions;
+    'a-base:tag': IDecoratorEntityOptions;
+    'a-base:tagRef': IDecoratorEntityOptions;
+    'a-base:user': IDecoratorEntityOptions;
+    'a-base:userAgent': IDecoratorEntityOptions;
+    'a-base:userRole': IDecoratorEntityOptions;
+    'a-base:userRoleIncRef': IDecoratorEntityOptions;
+    'a-base:userRoleRef': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-base' {}
+/** entity: end */
+/** entity: begin */
+import { EntityAtom } from '../entity/atom.js';
+import { EntityAtomAction } from '../entity/atomAction.js';
+import { EntityAtomClass } from '../entity/atomClass.js';
+import { EntityAtomLabel } from '../entity/atomLabel.js';
+import { EntityAtomLabelRef } from '../entity/atomLabelRef.js';
+import { EntityAtomStar } from '../entity/atomStar.js';
+import { EntityCategory } from '../entity/category.js';
+import { EntityComment } from '../entity/comment.js';
+import { EntityCommentHeart } from '../entity/commentHeart.js';
+import { EntityCommentView } from '../entity/commentView.js';
+import { EntityLabel } from '../entity/label.js';
+import { EntityResource } from '../entity/resource.js';
+import { EntityResourceLocale } from '../entity/resourceLocale.js';
+import { EntityResourceRole } from '../entity/resourceRole.js';
+import { EntityRole } from '../entity/role.js';
+import { EntityRoleExpand } from '../entity/roleExpand.js';
+import { EntityRoleFieldsRight } from '../entity/roleFieldsRight.js';
+import { EntityRoleInc } from '../entity/roleInc.js';
+import { EntityRoleIncRef } from '../entity/roleIncRef.js';
+import { EntityRoleRef } from '../entity/roleRef.js';
+import { EntityRoleRight } from '../entity/roleRight.js';
+import { EntityRoleRightRef } from '../entity/roleRightRef.js';
+import { EntityTag } from '../entity/tag.js';
+import { EntityTagRef } from '../entity/tagRef.js';
+import { EntityUser } from '../entity/user.js';
+import { EntityUserAgent } from '../entity/userAgent.js';
+import { EntityUserRole } from '../entity/userRole.js';
+import { EntityUserRoleIncRef } from '../entity/userRoleIncRef.js';
+import { EntityUserRoleRef } from '../entity/userRoleRef.js';
+export interface IModuleEntity {
+  atom: EntityAtom;
+  atomAction: EntityAtomAction;
+  atomClass: EntityAtomClass;
+  atomLabel: EntityAtomLabel;
+  atomLabelRef: EntityAtomLabelRef;
+  atomStar: EntityAtomStar;
+  category: EntityCategory;
+  comment: EntityComment;
+  commentHeart: EntityCommentHeart;
+  commentView: EntityCommentView;
+  label: EntityLabel;
+  resource: EntityResource;
+  resourceLocale: EntityResourceLocale;
+  resourceRole: EntityResourceRole;
+  role: EntityRole;
+  roleExpand: EntityRoleExpand;
+  roleFieldsRight: EntityRoleFieldsRight;
+  roleInc: EntityRoleInc;
+  roleIncRef: EntityRoleIncRef;
+  roleRef: EntityRoleRef;
+  roleRight: EntityRoleRight;
+  roleRightRef: EntityRoleRightRef;
+  tag: EntityTag;
+  tagRef: EntityTagRef;
+  user: EntityUser;
+  userAgent: EntityUserAgent;
+  userRole: EntityUserRole;
+  userRoleIncRef: EntityUserRoleIncRef;
+  userRoleRef: EntityUserRoleRef;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-base' {
+  export interface EntityAtom {
+    column: <K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAtomAction {
+    column: <K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAtomClass {
+    column: <K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAtomLabel {
+    column: <K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAtomLabelRef {
+    column: <K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAtomStar {
+    column: <K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityCategory {
+    column: <K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityComment {
+    column: <K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityCommentHeart {
+    column: <K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityCommentView {
+    column: <K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityLabel {
+    column: <K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityResource {
+    column: <K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityResourceLocale {
+    column: <K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityResourceRole {
+    column: <K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRole {
+    column: <K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleExpand {
+    column: <K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleFieldsRight {
+    column: <K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleInc {
+    column: <K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleIncRef {
+    column: <K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleRef {
+    column: <K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleRight {
+    column: <K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityRoleRightRef {
+    column: <K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityTag {
+    column: <K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityTagRef {
+    column: <K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityUser {
+    column: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityUserAgent {
+    column: <K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityUserRole {
+    column: <K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityUserRoleIncRef {
+    column: <K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityUserRoleRef {
+    column: <K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/atom.js';
 export * from '../model/atomAction.js';
@@ -889,214 +1099,6 @@ import { MetaStatus } from '../bean/meta.status.js';
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityAtom } from '../entity/atom.js';
-import { EntityAtomAction } from '../entity/atomAction.js';
-import { EntityAtomClass } from '../entity/atomClass.js';
-import { EntityAtomLabel } from '../entity/atomLabel.js';
-import { EntityAtomLabelRef } from '../entity/atomLabelRef.js';
-import { EntityAtomStar } from '../entity/atomStar.js';
-import { EntityCategory } from '../entity/category.js';
-import { EntityComment } from '../entity/comment.js';
-import { EntityCommentHeart } from '../entity/commentHeart.js';
-import { EntityCommentView } from '../entity/commentView.js';
-import { EntityLabel } from '../entity/label.js';
-import { EntityResource } from '../entity/resource.js';
-import { EntityResourceLocale } from '../entity/resourceLocale.js';
-import { EntityResourceRole } from '../entity/resourceRole.js';
-import { EntityRole } from '../entity/role.js';
-import { EntityRoleExpand } from '../entity/roleExpand.js';
-import { EntityRoleFieldsRight } from '../entity/roleFieldsRight.js';
-import { EntityRoleInc } from '../entity/roleInc.js';
-import { EntityRoleIncRef } from '../entity/roleIncRef.js';
-import { EntityRoleRef } from '../entity/roleRef.js';
-import { EntityRoleRight } from '../entity/roleRight.js';
-import { EntityRoleRightRef } from '../entity/roleRightRef.js';
-import { EntityTag } from '../entity/tag.js';
-import { EntityTagRef } from '../entity/tagRef.js';
-import { EntityUser } from '../entity/user.js';
-import { EntityUserAgent } from '../entity/userAgent.js';
-import { EntityUserRole } from '../entity/userRole.js';
-import { EntityUserRoleIncRef } from '../entity/userRoleIncRef.js';
-import { EntityUserRoleRef } from '../entity/userRoleRef.js';
-export interface IModuleEntity {
-  atom: EntityAtom;
-  atomAction: EntityAtomAction;
-  atomClass: EntityAtomClass;
-  atomLabel: EntityAtomLabel;
-  atomLabelRef: EntityAtomLabelRef;
-  atomStar: EntityAtomStar;
-  category: EntityCategory;
-  comment: EntityComment;
-  commentHeart: EntityCommentHeart;
-  commentView: EntityCommentView;
-  label: EntityLabel;
-  resource: EntityResource;
-  resourceLocale: EntityResourceLocale;
-  resourceRole: EntityResourceRole;
-  role: EntityRole;
-  roleExpand: EntityRoleExpand;
-  roleFieldsRight: EntityRoleFieldsRight;
-  roleInc: EntityRoleInc;
-  roleIncRef: EntityRoleIncRef;
-  roleRef: EntityRoleRef;
-  roleRight: EntityRoleRight;
-  roleRightRef: EntityRoleRightRef;
-  tag: EntityTag;
-  tagRef: EntityTagRef;
-  user: EntityUser;
-  userAgent: EntityUserAgent;
-  userRole: EntityUserRole;
-  userRoleIncRef: EntityUserRoleIncRef;
-  userRoleRef: EntityUserRoleRef;
-}
-declare module 'vona-module-a-base' {
-  export interface EntityAtom {
-    column: <K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAtom, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAtomAction {
-    column: <K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAtomAction, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAtomClass {
-    column: <K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAtomClass, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAtomLabel {
-    column: <K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAtomLabel, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAtomLabelRef {
-    column: <K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAtomLabelRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAtomStar {
-    column: <K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAtomStar, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityCategory {
-    column: <K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityCategory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityComment {
-    column: <K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityComment, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityCommentHeart {
-    column: <K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityCommentHeart, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityCommentView {
-    column: <K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityCommentView, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityLabel {
-    column: <K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityLabel, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityResource {
-    column: <K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityResource, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityResourceLocale {
-    column: <K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityResourceLocale, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityResourceRole {
-    column: <K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityResourceRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRole {
-    column: <K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleExpand {
-    column: <K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleExpand, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleFieldsRight {
-    column: <K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleFieldsRight, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleInc {
-    column: <K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleInc, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleIncRef {
-    column: <K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleRef {
-    column: <K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleRight {
-    column: <K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleRight, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityRoleRightRef {
-    column: <K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityRoleRightRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityTag {
-    column: <K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityTag, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityTagRef {
-    column: <K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityTagRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityUser {
-    column: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUser, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityUserAgent {
-    column: <K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUserAgent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityUserRole {
-    column: <K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUserRole, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityUserRoleIncRef {
-    column: <K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUserRoleIncRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityUserRoleRef {
-    column: <K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUserRoleRef, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/atom.js';
 export * from '../service/atomAction.js';

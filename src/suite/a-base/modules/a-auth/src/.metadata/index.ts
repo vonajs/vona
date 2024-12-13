@@ -40,19 +40,6 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/auth.js';
-export * from '../entity/authProvider.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-auth:auth': IDecoratorEntityOptions;
-    'a-auth:authProvider': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-auth' {}
-/** entity: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -95,6 +82,40 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** startup: end */
+/** entity: begin */
+export * from '../entity/auth.js';
+export * from '../entity/authProvider.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-auth:auth': IDecoratorEntityOptions;
+    'a-auth:authProvider': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-auth' {}
+/** entity: end */
+/** entity: begin */
+import { EntityAuth } from '../entity/auth.js';
+import { EntityAuthProvider } from '../entity/authProvider.js';
+export interface IModuleEntity {
+  auth: EntityAuth;
+  authProvider: EntityAuthProvider;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-auth' {
+  export interface EntityAuth {
+    column: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityAuthProvider {
+    column: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/auth.js';
 export * from '../model/authProvider.js';
@@ -127,25 +148,6 @@ export interface IModuleModel {
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
-/** entities: begin */
-import { EntityAuth } from '../entity/auth.js';
-import { EntityAuthProvider } from '../entity/authProvider.js';
-export interface IModuleEntity {
-  auth: EntityAuth;
-  authProvider: EntityAuthProvider;
-}
-declare module 'vona-module-a-auth' {
-  export interface EntityAuth {
-    column: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAuth, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityAuthProvider {
-    column: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAuthProvider, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/passport.js';
 import { ServicePassport } from '../service/passport.js';

@@ -23,21 +23,6 @@ declare module 'vona-module-a-share' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/share.js';
-export * from '../entity/shareRecordPV.js';
-export * from '../entity/shareRecordUV.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-share:share': IDecoratorEntityOptions;
-    'a-share:shareRecordPV': IDecoratorEntityOptions;
-    'a-share:shareRecordUV': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-share' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/share.js';
 
@@ -53,6 +38,49 @@ declare module 'vona-module-a-share' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/share.js';
+export * from '../entity/shareRecordPV.js';
+export * from '../entity/shareRecordUV.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-share:share': IDecoratorEntityOptions;
+    'a-share:shareRecordPV': IDecoratorEntityOptions;
+    'a-share:shareRecordUV': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-share' {}
+/** entity: end */
+/** entity: begin */
+import { EntityShare } from '../entity/share.js';
+import { EntityShareRecordPV } from '../entity/shareRecordPV.js';
+import { EntityShareRecordUV } from '../entity/shareRecordUV.js';
+export interface IModuleEntity {
+  share: EntityShare;
+  shareRecordPV: EntityShareRecordPV;
+  shareRecordUV: EntityShareRecordUV;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-share' {
+  export interface EntityShare {
+    column: <K extends keyof Omit<EntityShare, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityShare, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityShareRecordPV {
+    column: <K extends keyof Omit<EntityShareRecordPV, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityShareRecordPV, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityShareRecordUV {
+    column: <K extends keyof Omit<EntityShareRecordUV, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityShareRecordUV, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/share.js';
 export * from '../model/shareRecordPV.js';
@@ -90,32 +118,6 @@ export interface IModuleModel {
   shareRecordUV: ModelShareRecordUV;
 }
 /** model: end */
-/** entities: begin */
-import { EntityShare } from '../entity/share.js';
-import { EntityShareRecordPV } from '../entity/shareRecordPV.js';
-import { EntityShareRecordUV } from '../entity/shareRecordUV.js';
-export interface IModuleEntity {
-  share: EntityShare;
-  shareRecordPV: EntityShareRecordPV;
-  shareRecordUV: EntityShareRecordUV;
-}
-declare module 'vona-module-a-share' {
-  export interface EntityShare {
-    column: <K extends keyof Omit<EntityShare, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityShare, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityShareRecordPV {
-    column: <K extends keyof Omit<EntityShareRecordPV, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityShareRecordPV, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityShareRecordUV {
-    column: <K extends keyof Omit<EntityShareRecordUV, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityShareRecordUV, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/share.js';
 import { ServiceShare } from '../service/share.js';

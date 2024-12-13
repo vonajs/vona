@@ -30,21 +30,6 @@ declare module 'vona-module-a-version' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/version.js';
-export * from '../entity/versionInit.js';
-export * from '../entity/viewRecord.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-version:version': IDecoratorEntityOptions;
-    'a-version:versionInit': IDecoratorEntityOptions;
-    'a-version:viewRecord': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-version' {}
-/** entity: end */
 /** startup: begin */
 export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';
@@ -78,6 +63,49 @@ declare module 'vona-module-a-version' {
   }
 }
 /** startup: end */
+/** entity: begin */
+export * from '../entity/version.js';
+export * from '../entity/versionInit.js';
+export * from '../entity/viewRecord.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-version:version': IDecoratorEntityOptions;
+    'a-version:versionInit': IDecoratorEntityOptions;
+    'a-version:viewRecord': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-version' {}
+/** entity: end */
+/** entity: begin */
+import { EntityVersion } from '../entity/version.js';
+import { EntityVersionInit } from '../entity/versionInit.js';
+import { EntityViewRecord } from '../entity/viewRecord.js';
+export interface IModuleEntity {
+  version: EntityVersion;
+  versionInit: EntityVersionInit;
+  viewRecord: EntityViewRecord;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-version' {
+  export interface EntityVersion {
+    column: <K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityVersionInit {
+    column: <K extends keyof Omit<EntityVersionInit, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityVersionInit, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityViewRecord {
+    column: <K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/viewRecord.js';
 
@@ -99,32 +127,6 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 /** model: end */
-/** entities: begin */
-import { EntityVersion } from '../entity/version.js';
-import { EntityVersionInit } from '../entity/versionInit.js';
-import { EntityViewRecord } from '../entity/viewRecord.js';
-export interface IModuleEntity {
-  version: EntityVersion;
-  versionInit: EntityVersionInit;
-  viewRecord: EntityViewRecord;
-}
-declare module 'vona-module-a-version' {
-  export interface EntityVersion {
-    column: <K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityVersion, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityVersionInit {
-    column: <K extends keyof Omit<EntityVersionInit, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityVersionInit, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityViewRecord {
-    column: <K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityViewRecord, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/database.js';
 export * from '../service/version.js';

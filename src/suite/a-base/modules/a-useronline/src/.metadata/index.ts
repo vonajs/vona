@@ -44,19 +44,6 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/userOnline.js';
-export * from '../entity/userOnlineHistory.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-useronline:userOnline': IDecoratorEntityOptions;
-    'a-useronline:userOnlineHistory': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-useronline' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/userOnline.js';
 
@@ -72,6 +59,40 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/userOnline.js';
+export * from '../entity/userOnlineHistory.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-useronline:userOnline': IDecoratorEntityOptions;
+    'a-useronline:userOnlineHistory': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-useronline' {}
+/** entity: end */
+/** entity: begin */
+import { EntityUserOnline } from '../entity/userOnline.js';
+import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';
+export interface IModuleEntity {
+  userOnline: EntityUserOnline;
+  userOnlineHistory: EntityUserOnlineHistory;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-useronline' {
+  export interface EntityUserOnline {
+    column: <K extends keyof Omit<EntityUserOnline, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserOnline, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityUserOnlineHistory {
+    column: <K extends keyof Omit<EntityUserOnlineHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityUserOnlineHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/userOnline.js';
 export * from '../model/userOnlineHistory.js';
@@ -101,25 +122,6 @@ export interface IModuleModel {
   userOnlineHistory: ModelUserOnlineHistory;
 }
 /** model: end */
-/** entities: begin */
-import { EntityUserOnline } from '../entity/userOnline.js';
-import { EntityUserOnlineHistory } from '../entity/userOnlineHistory.js';
-export interface IModuleEntity {
-  userOnline: EntityUserOnline;
-  userOnlineHistory: EntityUserOnlineHistory;
-}
-declare module 'vona-module-a-useronline' {
-  export interface EntityUserOnline {
-    column: <K extends keyof Omit<EntityUserOnline, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUserOnline, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityUserOnlineHistory {
-    column: <K extends keyof Omit<EntityUserOnlineHistory, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityUserOnlineHistory, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/userOnline.js';
 import { ServiceUserOnline } from '../service/userOnline.js';

@@ -56,21 +56,6 @@ declare module 'vona-module-test-flow' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/product.js';
-export * from '../entity/purchaseOrder.js';
-export * from '../entity/purchaseOrderDetail.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'test-flow:product': IDecoratorEntityOptions;
-    'test-flow:purchaseOrder': IDecoratorEntityOptions;
-    'test-flow:purchaseOrderDetail': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-test-flow' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/flow.js';
 
@@ -86,6 +71,49 @@ declare module 'vona-module-test-flow' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/product.js';
+export * from '../entity/purchaseOrder.js';
+export * from '../entity/purchaseOrderDetail.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'test-flow:product': IDecoratorEntityOptions;
+    'test-flow:purchaseOrder': IDecoratorEntityOptions;
+    'test-flow:purchaseOrderDetail': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-test-flow' {}
+/** entity: end */
+/** entity: begin */
+import { EntityProduct } from '../entity/product.js';
+import { EntityPurchaseOrder } from '../entity/purchaseOrder.js';
+import { EntityPurchaseOrderDetail } from '../entity/purchaseOrderDetail.js';
+export interface IModuleEntity {
+  product: EntityProduct;
+  purchaseOrder: EntityPurchaseOrder;
+  purchaseOrderDetail: EntityPurchaseOrderDetail;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-test-flow' {
+  export interface EntityProduct {
+    column: <K extends keyof Omit<EntityProduct, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityProduct, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityPurchaseOrder {
+    column: <K extends keyof Omit<EntityPurchaseOrder, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityPurchaseOrder, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityPurchaseOrderDetail {
+    column: <K extends keyof Omit<EntityPurchaseOrderDetail, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityPurchaseOrderDetail, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/product.js';
 export * from '../model/purchaseOrder.js';
@@ -123,32 +151,6 @@ export interface IModuleModel {
   purchaseOrderDetail: ModelPurchaseOrderDetail;
 }
 /** model: end */
-/** entities: begin */
-import { EntityProduct } from '../entity/product.js';
-import { EntityPurchaseOrder } from '../entity/purchaseOrder.js';
-import { EntityPurchaseOrderDetail } from '../entity/purchaseOrderDetail.js';
-export interface IModuleEntity {
-  product: EntityProduct;
-  purchaseOrder: EntityPurchaseOrder;
-  purchaseOrderDetail: EntityPurchaseOrderDetail;
-}
-declare module 'vona-module-test-flow' {
-  export interface EntityProduct {
-    column: <K extends keyof Omit<EntityProduct, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityProduct, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityPurchaseOrder {
-    column: <K extends keyof Omit<EntityPurchaseOrder, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityPurchaseOrder, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityPurchaseOrderDetail {
-    column: <K extends keyof Omit<EntityPurchaseOrderDetail, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityPurchaseOrderDetail, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

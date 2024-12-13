@@ -58,17 +58,6 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/cache.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-cache:cache': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-cache' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/db.js';
 
@@ -99,21 +88,34 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** meta: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
-/** entities: begin */
+/** entity: begin */
+export * from '../entity/cache.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-cache:cache': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-cache' {}
+/** entity: end */
+/** entity: begin */
 import { EntityCache } from '../entity/cache.js';
 export interface IModuleEntity {
   cache: EntityCache;
 }
+/** entity: end */
+/** entity: begin */
 declare module 'vona-module-a-cache' {
   export interface EntityCache {
     column: <K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(column: K) => K;
     columns: <K extends keyof Omit<EntityCache, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
   }
 }
-/** entities: end */
+/** entity: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

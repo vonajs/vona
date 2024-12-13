@@ -37,17 +37,6 @@ declare module 'vona-module-a-authsimple' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/authSimple.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-authsimple:authSimple': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-authsimple' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/auth.js';
 
@@ -63,6 +52,31 @@ declare module 'vona-module-a-authsimple' {
   }
 }
 /** controller: end */
+/** entity: begin */
+export * from '../entity/authSimple.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-authsimple:authSimple': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-authsimple' {}
+/** entity: end */
+/** entity: begin */
+import { EntityAuthSimple } from '../entity/authSimple.js';
+export interface IModuleEntity {
+  authSimple: EntityAuthSimple;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-authsimple' {
+  export interface EntityAuthSimple {
+    column: <K extends keyof Omit<EntityAuthSimple, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityAuthSimple, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/authSimple.js';
 
@@ -84,18 +98,6 @@ export interface IModuleModel {
   authSimple: ModelAuthSimple;
 }
 /** model: end */
-/** entities: begin */
-import { EntityAuthSimple } from '../entity/authSimple.js';
-export interface IModuleEntity {
-  authSimple: EntityAuthSimple;
-}
-declare module 'vona-module-a-authsimple' {
-  export interface EntityAuthSimple {
-    column: <K extends keyof Omit<EntityAuthSimple, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityAuthSimple, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/auth.js';
 export * from '../service/simple.js';

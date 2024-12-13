@@ -51,17 +51,6 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** beans: end */
-/** entity: begin */
-export * from '../entity/mail.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-mail:mail': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-mail' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/scene.js';
 
@@ -107,6 +96,31 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** startup: end */
+/** entity: begin */
+export * from '../entity/mail.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-mail:mail': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-mail' {}
+/** entity: end */
+/** entity: begin */
+import { EntityMail } from '../entity/mail.js';
+export interface IModuleEntity {
+  mail: EntityMail;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-mail' {
+  export interface EntityMail {
+    column: <K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/mail.js';
 
@@ -131,18 +145,6 @@ export interface IModuleModel {
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
-/** entities: begin */
-import { EntityMail } from '../entity/mail.js';
-export interface IModuleEntity {
-  mail: EntityMail;
-}
-declare module 'vona-module-a-mail' {
-  export interface EntityMail {
-    column: <K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityMail, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/scene.js';
 import { ServiceScene } from '../service/scene.js';

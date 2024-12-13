@@ -35,7 +35,7 @@ export * from '../entity/layout.js';
 export * from '../entity/layoutContent.js';
 export * from '../entity/layoutFull.js';
 
-import { IDecoratorEntityOptions } from 'vona';
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
 declare module 'vona' {
   export interface IEntityRecord {
     'a-baselayout:layout': IDecoratorEntityOptions;
@@ -44,6 +44,34 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-baselayout' {}
+/** entity: end */
+/** entity: begin */
+import { EntityLayout } from '../entity/layout.js';
+import { EntityLayoutContent } from '../entity/layoutContent.js';
+import { EntityLayoutFull } from '../entity/layoutFull.js';
+export interface IModuleEntity {
+  layout: EntityLayout;
+  layoutContent: EntityLayoutContent;
+  layoutFull: EntityLayoutFull;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-baselayout' {
+  export interface EntityLayout {
+    column: <K extends keyof Omit<EntityLayout, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityLayout, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityLayoutContent {
+    column: <K extends keyof Omit<EntityLayoutContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityLayoutContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityLayoutFull {
+    column: <K extends keyof Omit<EntityLayoutFull, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityLayoutFull, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
 /** entity: end */
 /** model: begin */
 export * from '../model/layout.js';
@@ -82,32 +110,6 @@ export interface IModuleModel {
   layoutFull: ModelLayoutFull;
 }
 /** model: end */
-/** entities: begin */
-import { EntityLayout } from '../entity/layout.js';
-import { EntityLayoutContent } from '../entity/layoutContent.js';
-import { EntityLayoutFull } from '../entity/layoutFull.js';
-export interface IModuleEntity {
-  layout: EntityLayout;
-  layoutContent: EntityLayoutContent;
-  layoutFull: EntityLayoutFull;
-}
-declare module 'vona-module-a-baselayout' {
-  export interface EntityLayout {
-    column: <K extends keyof Omit<EntityLayout, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityLayout, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityLayoutContent {
-    column: <K extends keyof Omit<EntityLayoutContent, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityLayoutContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityLayoutFull {
-    column: <K extends keyof Omit<EntityLayoutFull, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityLayoutFull, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

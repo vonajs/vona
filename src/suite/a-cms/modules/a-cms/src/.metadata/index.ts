@@ -48,19 +48,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** atom: end */
-/** entity: begin */
-export * from '../entity/article.js';
-export * from '../entity/content.js';
-
-import { IDecoratorEntityOptions } from 'vona';
-declare module 'vona' {
-  export interface IEntityRecord {
-    'a-cms:article': IDecoratorEntityOptions;
-    'a-cms:content': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-cms' {}
-/** entity: end */
 /** controller: begin */
 export * from '../controller/article.js';
 export * from '../controller/comment.js';
@@ -130,6 +117,40 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** startup: end */
+/** entity: begin */
+export * from '../entity/article.js';
+export * from '../entity/content.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona' {
+  export interface IEntityRecord {
+    'a-cms:article': IDecoratorEntityOptions;
+    'a-cms:content': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-cms' {}
+/** entity: end */
+/** entity: begin */
+import { EntityArticle } from '../entity/article.js';
+import { EntityContent } from '../entity/content.js';
+export interface IModuleEntity {
+  article: EntityArticle;
+  content: EntityContent;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-cms' {
+  export interface EntityArticle {
+    column: <K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+
+  export interface EntityContent {
+    column: <K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
 /** model: begin */
 export * from '../model/article.js';
 export * from '../model/content.js';
@@ -183,25 +204,6 @@ export interface IModuleQueue {
 /** meta status: begin */
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
-/** entities: begin */
-import { EntityArticle } from '../entity/article.js';
-import { EntityContent } from '../entity/content.js';
-export interface IModuleEntity {
-  article: EntityArticle;
-  content: EntityContent;
-}
-declare module 'vona-module-a-cms' {
-  export interface EntityArticle {
-    column: <K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityArticle, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-
-  export interface EntityContent {
-    column: <K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityContent, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entities: end */
 /** services: begin */
 export * from '../service/build.js';
 export * from '../service/render.js';
