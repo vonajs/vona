@@ -1,9 +1,10 @@
 import { OmitNever, Onion } from 'vona';
 import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+import { IDecoratorEntityOptions } from './onionEntity.js';
 
 export interface IModelRecord {}
 
-export interface IDecoratorModelOptions<T extends object = {}> {
+export interface IDecoratorModelOptions<T extends IDecoratorEntityOptions> {
   entity?: T;
   table?: string;
   disableDeleted?: boolean;
@@ -16,7 +17,7 @@ export interface IDecoratorModelOptions<T extends object = {}> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    model: Onion<IDecoratorModelOptions, keyof IModelRecord>;
+    model: Onion<IDecoratorModelOptions<IDecoratorEntityOptions>, keyof IModelRecord>;
   }
 }
 

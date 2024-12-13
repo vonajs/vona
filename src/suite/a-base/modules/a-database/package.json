@@ -14,12 +14,19 @@
       "knex": true
     },
     "onions": {
+      "entity": {
+        "sceneIsolate": true,
+        "optionsGlobalInterfaceName": "IDecoratorEntityOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-database",
+        "scopeResource": true,
+        "boilerplate": "cli/entity/boilerplate"
+      },
       "model": {
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorModelOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-database",
         "scopeResource": true,
-        "boilerplate": "cli/boilerplate"
+        "boilerplate": "cli/model/boilerplate"
       }
     }
   },
