@@ -1,6 +1,6 @@
-import { BeanBase, cast, IDecoratorEntityOptions, IDecoratorModelOptions, appResource } from 'vona';
+import { BeanBase, cast, IDecoratorEntityOptions, appResource } from 'vona';
 import { BeanModel } from '../bean.model_.js';
-import { IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types/index.js';
+import { IDecoratorModelOptions, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral } from '../../types/index.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import { Knex } from 'knex';
 
