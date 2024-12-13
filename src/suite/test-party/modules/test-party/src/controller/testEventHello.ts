@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-mport { BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import { Controller } from 'vona-module-a-web';
 import assert from 'assert';
 

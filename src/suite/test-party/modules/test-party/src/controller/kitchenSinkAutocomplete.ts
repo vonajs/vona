@@ -1,4 +1,4 @@
-mport { BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import { Controller } from 'vona-module-a-web';
 import languages from './data/autocomplete-languages.json' with { type: 'json' };
 
