@@ -83,6 +83,12 @@ declare module 'vona-module-a-instance' {
   }
 }
 /** model: end */
+/** model: begin */
+import { ModelInstance } from '../model/instance.js';
+export interface IModuleModel {
+  instance: ModelInstance;
+}
+/** model: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */
@@ -150,6 +156,7 @@ export interface ScopeModuleAInstance {
   redlock: MetaRedlock;
   service: IModuleService;
   entity: IModuleEntity;
+  model: IModuleModel;
 }
 
 import 'vona';
