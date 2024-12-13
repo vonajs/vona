@@ -1,5 +1,4 @@
-import { Model } from 'vona';
-import { BeanModelBase } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityCategory } from '../entity/category.js';
 
 @Model({ entity: EntityCategory, disableDeleted: false, cacheOptions: { preset: 'all' } })

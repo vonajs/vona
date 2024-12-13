@@ -1,5 +1,4 @@
-import { Model } from 'vona';
-import { BeanModelBase } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityDashboardUser } from '../entity/dashboardUser.js';
 
 @Model({ entity: EntityDashboardUser, disableDeleted: false })

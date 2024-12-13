@@ -1,5 +1,4 @@
-import { Model } from 'vona';
-import { BeanModelBase } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityRoleRightRef } from '../entity/roleRightRef.js';
 
 @Model({ entity: EntityRoleRightRef, disableDeleted: true })

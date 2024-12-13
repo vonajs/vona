@@ -1,5 +1,4 @@
-import { Model } from 'vona';
-import { BeanModelBase } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityMessage } from '../entity/message.js';
 
 @Model({ entity: EntityMessage, disableDeleted: false })

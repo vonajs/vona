@@ -1,5 +1,4 @@
-import { Model } from 'vona';
-import { BeanModelBase } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityDict } from '../entity/dict.js';
 
 @Model({ entity: EntityDict, disableDeleted: false })

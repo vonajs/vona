@@ -1,5 +1,4 @@
-import { Model } from 'vona';
-import { BeanModelBase } from 'vona-module-a-database';
+import { BeanModelBase, Model } from 'vona-module-a-database';
 import { EntityParty } from '../entity/party.js';
 
 @Model({ entity: EntityParty, disableDeleted: false })
