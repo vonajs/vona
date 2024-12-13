@@ -50,6 +50,9 @@ importers:
       vona-module-a-appbooster:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-appbooster
+      vona-module-a-aspect:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-aspect
       vona-module-a-auth:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-auth
@@ -1247,6 +1250,9 @@ importers:
 
   src/suite-vendor/a-vona:
     dependencies:
+      vona-module-a-aspect:
+        specifier: workspace:^
+        version: link:modules/a-aspect
       vona-module-a-core:
         specifier: ^5.0.3
         version: link:modules/a-core
@@ -1280,6 +1286,8 @@ importers:
       vona-module-a-web:
         specifier: workspace:^
         version: link:modules/a-web
+
+  src/suite-vendor/a-vona/modules/a-aspect: {}
 
   src/suite-vendor/a-vona/modules/a-core:
     dependencies:
