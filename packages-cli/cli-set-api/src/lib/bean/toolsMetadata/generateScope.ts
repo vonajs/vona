@@ -58,9 +58,6 @@ export async function generateScope(
   if (options.services) {
     contentRecords.push('service: IModuleService;');
   }
-  if (options.entities) {
-    contentRecords.push('entity: IModuleEntity;');
-  }
   // loop
   for (const sceneName in scopeResources) {
     const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
