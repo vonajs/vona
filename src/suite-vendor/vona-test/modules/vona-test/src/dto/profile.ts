@@ -1,4 +1,4 @@
-import { Dto } from 'vona';
+import { Dto } from 'vona-module-a-web';
 import { Rule } from 'vona-module-a-validator';
 import { z } from 'zod';
 
