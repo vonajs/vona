@@ -12,6 +12,15 @@
         "optionsGlobalInterfaceName": "IDecoratorFilterOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "cli/filter/boilerplate"
+      },
+      "pipe": {
+        "hasLocal": true,
+        "optionsRoute": true,
+        "optionsArgumentPipe": true,
+        "optionsDynamic": true,
+        "optionsGlobalInterfaceName": "IDecoratorPipeOptionsGlobal",
+        "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
+        "boilerplate": "cli/pipe/boilerplate"
       }
     }
   },

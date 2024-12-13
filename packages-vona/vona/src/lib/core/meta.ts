@@ -14,7 +14,6 @@ import {
   IDecoratorMiddlewareOptionsGlobal,
   IDecoratorGuardOptionsGlobal,
   IDecoratorInterceptorOptionsGlobal,
-  IDecoratorPipeOptionsGlobal,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorAopOptions,
@@ -23,7 +22,6 @@ import {
   IMiddlewareRecord,
   IGuardRecord,
   IInterceptorRecord,
-  IPipeRecord,
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IAopRecord,
@@ -71,7 +69,6 @@ export class AppMeta extends BeanSimple {
   onionMiddleware: Onion<IDecoratorMiddlewareOptionsGlobal, keyof IMiddlewareRecord>;
   onionGuard: Onion<IDecoratorGuardOptionsGlobal, keyof IGuardRecord>;
   onionInterceptor: Onion<IDecoratorInterceptorOptionsGlobal, keyof IInterceptorRecord>;
-  onionPipe: Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
   onionSocketConnection: Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>;
   onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
   onionAop: Onion<IDecoratorAopOptions, keyof IAopRecord>;

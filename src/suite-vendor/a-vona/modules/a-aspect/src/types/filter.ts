@@ -35,7 +35,7 @@ export interface IFilterComposeContext {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    filter: Onion<IDecoratorFilterOptions, keyof IFilterRecord>;
+    filter: Onion<IDecoratorFilterOptionsGlobal, keyof IFilterRecord>;
   }
 }
 

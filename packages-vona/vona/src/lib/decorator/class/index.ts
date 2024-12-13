@@ -6,7 +6,6 @@ export * from './guard.js';
 export * from './interceptor.js';
 export * from './meta.js';
 export * from './middleware.js';
-export * from './pipe.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';
 export * from './startup.js';

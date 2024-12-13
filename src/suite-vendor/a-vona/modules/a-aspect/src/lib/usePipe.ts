@@ -1,5 +1,5 @@
-import { IPipeRecordLocal } from '../../../types/interface/pipe.js';
-import { UseMiddlewareLike } from './useMiddlewareLike.js';
+import { UseMiddlewareLike } from 'vona';
+import { IPipeRecordLocal } from '../types/pipe.js';
 
 export function UsePipe<T extends keyof IPipeRecordLocal>(
   pipeName: T,

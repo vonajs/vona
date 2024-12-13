@@ -11,7 +11,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'middleware'
   | 'guard'
   | 'interceptor'
-  | 'pipe'
   | 'socketConnection'
   | 'socketPacket'
   | 'startup'

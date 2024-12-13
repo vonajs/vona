@@ -1,7 +1,6 @@
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { IDecoratorBeanOptionsBase } from '../../lib/index.js';
 import { VonaContext } from '../context/index.js';
-import { IDecoratorPipeOptions } from './pipe.js';
 
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
 
@@ -54,6 +53,6 @@ export interface IMiddlewareItem<OPTIONS = unknown, MIDDLEWARENAME = string, T =
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
   fromConfig?: boolean;
   argumentPipe?: {
-    options?: IDecoratorPipeOptions;
+    options?: object; // IDecoratorPipeOptions;
   };
 }

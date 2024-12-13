@@ -1,6 +1,5 @@
-import { Constructable } from '../../lib/index.js';
-import { Type } from '../utils/type.js';
-import { IMiddlewareBase } from './middleware.js';
+import { Constructable, IMiddlewareBase, OmitNever, Onion, Type } from 'vona';
+import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
 export interface IPipeRecordLocal {}
@@ -43,7 +42,7 @@ export interface RouteHandlerArgumentMetaDecorator {
   type: RouteHandlerArgumentType;
   field?: string;
   pipes: Function[];
-  schema: object; // z.ZodSchema
+  schema: z.ZodSchema;
   extractValue?: Function;
 }
 
@@ -54,4 +53,20 @@ export interface RouteHandlerArgumentMeta {
   controller: Constructable;
   method: string;
   index: number;
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    pipe: Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    pipe: OmitNever<IPipeRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    pipe: never;
+  }
 }

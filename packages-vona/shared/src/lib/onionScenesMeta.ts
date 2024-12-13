@@ -23,13 +23,6 @@ export const onionScenesMeta: OnionScenesMeta = {
     optionsDynamic: true,
     optionsGlobalInterfaceName: 'IDecoratorInterceptorOptionsGlobal',
   },
-  pipe: {
-    hasLocal: true,
-    optionsRoute: true,
-    optionsArgumentPipe: true,
-    optionsDynamic: true,
-    optionsGlobalInterfaceName: 'IDecoratorPipeOptionsGlobal',
-  },
   socketConnection: {
     optionsGlobalInterfaceName: 'IDecoratorSocketConnectionOptions',
   },

@@ -1,6 +1,5 @@
-import { IPipeRecordGlobal } from '../../../types/interface/pipe.js';
-import { TypeUseMiddlewareGlobalLikeOptions } from '../../../types/interface/middleware.js';
-import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
+import { TypeUseMiddlewareGlobalLikeOptions, UseMiddlewareGlobalLike } from 'vona';
+import { IPipeRecordGlobal } from '../types/pipe.js';
 
 export function UsePipeGlobal<T extends keyof IPipeRecordGlobal>(
   pipeName: T,
