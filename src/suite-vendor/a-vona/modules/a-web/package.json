@@ -3,9 +3,10 @@
   "version": "5.0.0",
   "title": "a-web",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
+    "capabilities": {
+      "monkey": true
     },
+    "dependencies": {},
     "onions": {
       "dto": {
         "sceneIsolate": true,

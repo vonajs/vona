@@ -3,9 +3,7 @@
   "version": "5.0.0",
   "title": "a-schedule",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    },
+    "dependencies": {},
     "onions": {
       "schedule": {
         "optionsGlobalInterfaceName": "IDecoratorScheduleOptions",
