@@ -70,7 +70,7 @@ export async function globBeanFiles(
   return result;
 }
 
-export function extractInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
+export function extractBeanInfo(sceneName: string, file: string, sceneMeta: OnionSceneMeta) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const content = fse.readFileSync(file).toString();
   // optionsCustomInterface

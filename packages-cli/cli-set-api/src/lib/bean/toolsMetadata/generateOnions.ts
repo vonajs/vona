@@ -1,8 +1,6 @@
-import path from 'path';
-import eggBornUtils from 'egg-born-utils';
-import { checkIgnoreOfParts, getScopeModuleName, globBeanFiles } from './utils.js';
+import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { OnionSceneMeta, OnionScenesMeta } from '@cabloy/module-info';
+import { OnionScenesMeta } from '@cabloy/module-info';
 
 export async function generateOnions(
   sceneName: string,
@@ -15,31 +13,15 @@ export async function generateOnions(
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const globFiles = await globBeanFiles(sceneName, onionScenesMeta, moduleName, modulePath);
   if (globFiles.length === 0) return '';
-  const pattern = sceneMeta.sceneIsolate
-    ? `${modulePath}/src/${sceneName}/*.ts`
-    : `${modulePath}/src/bean/${sceneName}.*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
-  if (files.length === 0) return '';
-  files.sort();
+  //
   const contentExports: string[] = [];
   const contentScopes: string[] = [];
   const contentImports: string[] = [];
   const contentRecordsGlobal: string[] = [];
   const contentRecordsLocal: string[] = [];
   let needImportOptionsGlobalInterface;
-  for (const file of files) {
-    const fileName = path.basename(file);
-    if (fileName.startsWith('_')) continue;
-    const parts = fileName.split('.').slice(0, -1);
-    if (sceneMeta.sceneIsolate && parts.length !== 1) continue;
-    if (!sceneMeta.sceneIsolate && parts.length < 2) continue;
-    const isIgnore = checkIgnoreOfParts(parts);
-    const fileNameJS = fileName.replace('.ts', '.js');
-    const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
-    const className =
-      (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
-    const beanName = parts[parts.length - 1];
-    const beanNameFull = `${moduleName}:${beanName}`;
+  for (const globFile of globFiles) {
+    const { file, fileNameJSRelative, className, beanNameFull, isIgnore } = globFile;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (!['entity', 'dto'].includes(sceneName)) {
       contentScopes.push(`
@@ -48,7 +30,7 @@ export async function generateOnions(
         }`);
     }
     if (isIgnore) continue;
-    const fileInfo = _extractInfo(sceneName, file, sceneMeta);
+    const fileInfo = extractBeanInfo(sceneName, file, sceneMeta);
     // import options
     if (fileInfo.optionsCustomInterface) {
       contentImports.push(
