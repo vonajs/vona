@@ -1,6 +1,6 @@
 import { TableIdentity } from 'vona-module-a-database';
 import { OmitType } from 'vona-module-a-swagger';
-import { Entity } from 'vona';
+import { Entity } from 'vona-module-a-database';
 import { EntityBaseTemp } from '../types.js';
 
 @Entity('aAtom')

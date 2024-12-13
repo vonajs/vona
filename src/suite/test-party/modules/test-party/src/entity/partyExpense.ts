@@ -1,6 +1,6 @@
 import { TableIdentity } from 'vona-module-a-database';
 import { EntityBaseTemp } from 'vona-module-a-base';
-import { Entity } from 'vona';
+import { Entity } from 'vona-module-a-database';
 
 @Entity('testPartyExpense')
 export class EntityPartyExpense extends EntityBaseTemp {
