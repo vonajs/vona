@@ -1,7 +1,6 @@
 import {
   IAopRecord,
   IDecoratorAopOptions,
-  IDecoratorFilterOptionsGlobal,
   IDecoratorGuardOptionsGlobal,
   IDecoratorInterceptorOptionsGlobal,
   IDecoratorMetaOptions,
@@ -10,7 +9,6 @@ import {
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
-  IFilterRecord,
   IGuardRecord,
   IInterceptorRecord,
   IMetaRecord,
@@ -38,7 +36,6 @@ function loadAll(app: VonaApplication) {
     'interceptor',
   );
   app.meta.onionPipe = app.bean._newBean(Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>, 'pipe');
-  app.meta.onionFilter = app.bean._newBean(Onion<IDecoratorFilterOptionsGlobal, keyof IFilterRecord>, 'filter');
   app.meta.onionSocketConnection = app.bean._newBean(
     Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>,
     'socketConnection',

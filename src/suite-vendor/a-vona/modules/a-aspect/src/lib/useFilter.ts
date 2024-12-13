@@ -1,5 +1,5 @@
-import { IFilterRecordLocal } from '../../../types/interface/filter.js';
-import { UseMiddlewareLike } from './useMiddlewareLike.js';
+import { UseMiddlewareLike } from 'vona';
+import { IFilterRecordLocal } from '../types/filter.js';
 
 export function UseFilter<T extends keyof IFilterRecordLocal>(
   filterName: T,

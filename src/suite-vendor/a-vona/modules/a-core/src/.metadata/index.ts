@@ -57,7 +57,7 @@ declare module 'vona-module-a-core' {
 export * from '../bean/filter.error.js';
 import { IFilterOptionsError } from '../bean/filter.error.js';
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-aspect' {
   export interface IFilterRecordGlobal {
     'a-core:error': IFilterOptionsError;
   }

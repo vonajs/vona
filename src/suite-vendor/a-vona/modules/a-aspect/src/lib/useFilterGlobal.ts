@@ -1,6 +1,5 @@
-import { IFilterRecordGlobal } from '../../../types/interface/filter.js';
-import { TypeUseMiddlewareGlobalLikeOptions } from '../../../types/interface/middleware.js';
-import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
+import { TypeUseMiddlewareGlobalLikeOptions, UseMiddlewareGlobalLike } from 'vona';
+import { IFilterRecordGlobal } from '../types/filter.js';
 
 export function UseFilterGlobal<T extends keyof IFilterRecordGlobal>(
   filterName: T,

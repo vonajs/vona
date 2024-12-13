@@ -73,7 +73,7 @@ export interface I${sceneNameCapitalize}RecordLocal {
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
 ${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}';` : "import 'vona';"}
-declare module 'vona' {
+declare module '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
 }

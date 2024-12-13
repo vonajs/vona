@@ -10,7 +10,6 @@ const __decorators = {
 };
 const __boilerplates = {
   aop: 'aop',
-  filter: 'filter',
   guard: 'guard',
   interceptor: 'interceptor',
   metaIndex: 'metaIndex',

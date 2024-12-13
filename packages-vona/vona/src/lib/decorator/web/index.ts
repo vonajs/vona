@@ -1,6 +1,4 @@
 export * from './createArgumentPipe.js';
-export * from './useFilter.js';
-export * from './useFilterGlobal.js';
 export * from './useGuard.js';
 export * from './useGuardGlobal.js';
 export * from './useInterceptor.js';
