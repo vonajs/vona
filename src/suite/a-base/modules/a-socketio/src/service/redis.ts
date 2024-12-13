@@ -1,4 +1,5 @@
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 const __subVersion = 'sub3';
 const __keyUserIndex = 2;

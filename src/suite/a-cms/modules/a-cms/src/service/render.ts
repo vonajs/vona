@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 @Service()
 export class ServiceRender extends BeanBase {

@@ -1,4 +1,5 @@
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 import util from 'util';
 import passwordFn from 'password-hash-and-salt'; // should compile

@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 const _cacheMessageClasses: any = {};
 const _cacheChannels: any = {};

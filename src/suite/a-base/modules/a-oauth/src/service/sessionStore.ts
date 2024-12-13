@@ -1,4 +1,5 @@
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
 

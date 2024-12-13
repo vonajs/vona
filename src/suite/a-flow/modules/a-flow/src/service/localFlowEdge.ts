@@ -1,4 +1,5 @@
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 
 import UtilsFn from '../common/utils.js';
 import { LocalContextEdge } from '../common/local.context.edge.js';

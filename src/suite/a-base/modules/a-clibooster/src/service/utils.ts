@@ -1,4 +1,5 @@
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 import { BeanCliBase } from 'vona-module-a-cli';
 import path from 'path';
 import fse from 'fs-extra';

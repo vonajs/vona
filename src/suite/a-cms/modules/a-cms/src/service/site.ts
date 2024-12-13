@@ -1,5 +1,6 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Service, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-web';
 import { BigNumber } from 'bignumber.js';
 
 import fse from 'fs-extra';
