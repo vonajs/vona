@@ -1,4 +1,4 @@
-import { BeanBase } from 'vona';
+iimport { BeanBase } from 'vona';
 import { Controller } from 'vona-module-a-web';
 import { __ThisModule__ } from '../.metadata/this.js';
 

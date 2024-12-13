@@ -1,4 +1,4 @@
-mport { BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import { Controller } from 'vona-module-a-web';
 import { TableIdentity } from 'vona-module-a-database';
 import assert from 'assert';
