@@ -10,7 +10,8 @@
         "optionsRoute": true,
         "optionsDynamic": true,
         "optionsGlobalInterfaceName": "IDecoratorFilterOptionsGlobal",
-        "optionsGlobalInterfaceFrom": "vona-module-a-aspect"
+        "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
+        "boilerplate": "cli/filter/boilerplate"
       }
     }
   },
