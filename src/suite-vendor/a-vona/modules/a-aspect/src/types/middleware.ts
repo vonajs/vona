@@ -1,13 +1,5 @@
-import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
-import {
-  IDecoratorBeanOptionsBase,
-  IOnionSliceBase,
-  IOnionSliceEnable,
-  Next,
-  OmitNever,
-  Onion,
-  VonaContext,
-} from 'vona';
+import { IOnionSlice, IOnionSliceBase, Next, OmitNever, Onion } from 'vona';
+import { IDecoratorPipeOptions } from './pipe.js';
 
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
 
@@ -21,11 +13,6 @@ export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}
 export type IMiddlewareRecord = IMiddlewareRecordGlobal & IMiddlewareRecordLocal;
 
-export interface IMiddlewareBase extends IOnionSliceBase {
-  match?: ((ctx: VonaContext) => boolean) | RegExp | string;
-  ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
-}
-
 export interface IMiddlewareExecute {
   execute(options: IDecoratorMiddlewareOptions, next: Next): Promise<any>;
 }
@@ -34,20 +21,20 @@ export interface IDecoratorMiddlewareOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorMiddlewareOptionsGlobal extends IMiddlewareBase {
+export interface IDecoratorMiddlewareOptionsGlobal extends IOnionSliceBase {
   global: true;
   dependencies?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
   dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
 }
 
-// todo: 继承自IOnionSlice
-export interface IMiddlewareItem<OPTIONS = unknown, MIDDLEWARENAME = string, T = unknown> {
-  name: MIDDLEWARENAME;
+export interface IMiddlewareItem<OPTIONS = unknown, SLICENAME = string, T = unknown>
+  extends IOnionSlice<OPTIONS, SLICENAME, T> {
+  // todo: remove
   options: IDecoratorMiddlewareOptionsGlobal;
-  beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
+  // todo: remove
   fromConfig?: boolean;
   argumentPipe?: {
-    options?: object; // todo: IDecoratorPipeOptions;
+    options?: IDecoratorPipeOptions;
   };
 }
 

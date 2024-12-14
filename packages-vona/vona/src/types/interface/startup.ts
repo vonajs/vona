@@ -1,5 +1,5 @@
 import { ConfigInstanceBase } from '../config/instance.js';
-import { IMiddlewareBaseEnable } from './middleware.js';
+import { IOnionSliceEnable } from './onion.js';
 
 export interface IStartupRecord {}
 
@@ -7,7 +7,7 @@ export interface IStartupExecute {
   execute(options?: IInstanceStartupOptions): Promise<void>;
 }
 
-export interface IDecoratorStartupOptions extends IMiddlewareBaseEnable {
+export interface IDecoratorStartupOptions extends IOnionSliceEnable {
   instance?: boolean;
   debounce?: boolean | number;
   transaction?: boolean;

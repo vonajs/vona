@@ -1,4 +1,4 @@
-import { IMiddlewareBase, Next, OmitNever, Onion } from 'vona';
+import { IOnionSliceBase, Next, OmitNever, Onion } from 'vona';
 
 export interface IInterceptorRecordGlobal {}
 export interface IInterceptorRecordLocal {}
@@ -12,7 +12,7 @@ export interface IDecoratorInterceptorOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorInterceptorOptionsGlobal extends IMiddlewareBase {
+export interface IDecoratorInterceptorOptionsGlobal extends IOnionSliceBase {
   global: true;
   dependencies?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
   dependents?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;

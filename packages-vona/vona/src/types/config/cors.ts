@@ -1,7 +1,7 @@
 import { VonaContext } from '../context/index.js';
-import { IMiddlewareBase } from '../interface/middleware.js';
+import { IOnionSliceBase } from '../interface/onion.js';
 
-export interface ConfigCors extends IMiddlewareBase {
+export interface ConfigCors extends IOnionSliceBase {
   origin: ((ctx: VonaContext) => boolean) | string[] | string;
   allowMethods: string[] | string;
   exposeHeaders: string[] | string;

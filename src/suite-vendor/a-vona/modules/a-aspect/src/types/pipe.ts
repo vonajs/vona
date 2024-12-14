@@ -1,4 +1,4 @@
-import { Constructable, IMiddlewareBase, OmitNever, Onion, Type } from 'vona';
+import { Constructable, IOnionSliceBase, OmitNever, Onion, Type } from 'vona';
 import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
@@ -13,7 +13,7 @@ export interface IDecoratorPipeOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorPipeOptionsGlobal extends IMiddlewareBase {
+export interface IDecoratorPipeOptionsGlobal extends IOnionSliceBase {
   global: true;
   dependencies?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
   dependents?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
