@@ -1,9 +1,10 @@
-import { BeanBase, deepExtend, IInstanceStartupOptions, isNil, sleep, VonaConfig } from 'vona';
+import { BeanBase, deepExtend, isNil, sleep, VonaConfig } from 'vona';
 import async from 'async';
 import chalk from 'chalk';
 import * as Boxen from 'boxen';
 import { IInstanceStartupQueueInfo } from '../entity/instance.js';
 import { Service } from 'vona-module-a-web';
+import { IInstanceStartupOptions } from 'vona-module-a-startup';
 
 const boxenOptions: Boxen.Options = {
   padding: 1,

@@ -1,7 +1,8 @@
-import { BeanBase, cast, IDecoratorStartupOptions, IInstanceStartupOptions, IOnionSlice, IStartupExecute } from 'vona';
+import { BeanBase, cast, IOnionSlice } from 'vona';
 import path from 'path';
 import fse from 'fs-extra';
 import { Service } from 'vona-module-a-web';
+import { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute } from '../types/startup.js';
 
 @Service()
 export class ServiceStartup extends BeanBase {
@@ -72,7 +73,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   async runStartup(startupName: string, subdomain?: string, options?: IInstanceStartupOptions) {
-    const startup = this.app.meta.onionStartup.middlewaresNormal[startupName];
+    const startup = this.bean.onion.startup.middlewaresNormal[startupName];
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // normal
     if (!startupOptions.debounce) {
@@ -155,7 +156,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   private get _startups() {
-    return this.app.meta.onionStartup.middlewaresEnabled;
+    return this.bean.onion.startup.middlewaresEnabled;
   }
 
   private async _clearResources() {
