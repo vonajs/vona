@@ -18,14 +18,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-sequence' {
   export interface BeanSequence {
+    /** @internal */
     get scope(): ScopeModuleASequence;
   }
 
   export interface SequenceSimple {
+    /** @internal */
     get scope(): ScopeModuleASequence;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleASequence;
   }
 }
@@ -41,6 +44,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-sequence' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleASequence;
   }
 }
@@ -81,6 +85,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-sequence' {
   export interface ServiceSequence {
+    /** @internal */
     get scope(): ScopeModuleASequence;
   }
 }
@@ -110,6 +115,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-sequence' {
   export interface ControllerSequence {
+    /** @internal */
     get scope(): ScopeModuleASequence;
   }
 }

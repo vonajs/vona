@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-settings' {
   export interface BeanSettings {
+    /** @internal */
     get scope(): ScopeModuleASettings;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleASettings;
   }
 }
@@ -70,10 +72,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-settings' {
   export interface ModelSettings {
+    /** @internal */
     get scope(): ScopeModuleASettings;
   }
 
   export interface ModelSettingsRef {
+    /** @internal */
     get scope(): ScopeModuleASettings;
   }
 }
@@ -97,6 +101,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-settings' {
   export interface ServiceSettings {
+    /** @internal */
     get scope(): ScopeModuleASettings;
   }
 }
@@ -126,6 +131,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-settings' {
   export interface ControllerSettings {
+    /** @internal */
     get scope(): ScopeModuleASettings;
   }
 }

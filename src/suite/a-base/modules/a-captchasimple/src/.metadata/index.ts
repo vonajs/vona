@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-captchasimple' {
   export interface CaptchaProviderCaptcha {
+    /** @internal */
     get scope(): ScopeModuleACaptchasimple;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-captchasimple' {
   export interface ControllerCaptcha {
+    /** @internal */
     get scope(): ScopeModuleACaptchasimple;
   }
 }

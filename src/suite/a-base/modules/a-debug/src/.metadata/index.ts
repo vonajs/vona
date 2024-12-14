@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-debug' {
   export interface BeanDebug {
+    /** @internal */
     get scope(): ScopeModuleADebug;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleADebug;
   }
 }

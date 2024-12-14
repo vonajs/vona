@@ -9,6 +9,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-cms-pluginsubmit' {
   export interface QueueSubmit {
+    /** @internal */
     get scope(): ScopeModuleCmsPluginsubmit;
   }
 }
@@ -30,6 +31,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-cms-pluginsubmit' {
   export interface ServiceTools {
+    /** @internal */
     get scope(): ScopeModuleCmsPluginsubmit;
   }
 }

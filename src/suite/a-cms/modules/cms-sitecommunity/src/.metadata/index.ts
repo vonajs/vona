@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-cms-sitecommunity' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleCmsSitecommunity;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-cms-sitecommunity' {
   export interface AtomPost {
+    /** @internal */
     get scope(): ScopeModuleCmsSitecommunity;
   }
 }

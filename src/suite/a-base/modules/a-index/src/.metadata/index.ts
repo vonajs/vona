@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-index' {
   export interface MetaVersion {
+    /** @internal */
     get scope(): ScopeModuleAIndex;
   }
 }

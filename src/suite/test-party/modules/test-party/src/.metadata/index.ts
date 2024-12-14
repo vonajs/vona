@@ -47,54 +47,67 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface BroadcastTest {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface CliDefaultDemo {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface EventHelloEcho {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface EventLoginInfo {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface EventLoginInfoDashboard {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface EventUserVerify {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface IoMessageSimpleChat {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface IoMessageTest {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface SequenceTest {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface StatsTasksInstance {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface StatsTasksUser {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface SummerCacheTest {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -112,10 +125,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface AtomParty {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface AtomPartyExpense {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -133,10 +148,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface MiddlewareTestInterception {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface MiddlewareTestRestructuring {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -152,6 +169,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface AopAtom {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -169,10 +187,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface StartupStartupAll {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface StartupStartupInstance {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -224,10 +244,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-test-party' {
   export interface ModelParty {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ModelPartyExpense {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -251,6 +273,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface ServiceTest {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }
@@ -368,182 +391,227 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-test-party' {
   export interface ControllerKitchenSinkAutocomplete {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerKitchenSinkFormSchemaValidation {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerKitchenSinkGuide {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerKitchenSinkPtrIsLoadmore {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestAtomAll {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestAtomRight {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestAtomStarLabel {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCacheDb {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCacheMem {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCacheRedis {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxConfig {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxLocale {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxPerformAction {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxRequest {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxResponse {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxSession {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxTail {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestCtxTransaction {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestEventHello {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatBean {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatBroadcast {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatCategory {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatFieldsRight {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatHttpLog {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatInstance {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatMiddleware {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatModel {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatModelWhere {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatOpenAuth {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatProgress {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatSendMail {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatSequence {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatSettings {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatSocketio {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatStats {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatTag {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestFeatValidation {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestItemOnlyAll {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestItemOnlyRight {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestMonkeyMonkeyee {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestMultilevelAuthorizationRole {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestMultilevelAuthorizationUser {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestResourceAll {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestResourceRight {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 
   export interface ControllerTestRoleUserRole {
+    /** @internal */
     get scope(): ScopeModuleTestParty;
   }
 }

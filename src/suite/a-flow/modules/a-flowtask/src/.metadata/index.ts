@@ -33,34 +33,42 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowtask' {
   export interface BeanFlowTask {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface FlowNodeActivityUserTask {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface FlowNodeEndEventAtom {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface FlowNodeStartEventAtom {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface IoMessageWorkflow {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface StatsTaskClaimings {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface StatsTaskHandlings {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 }
@@ -76,6 +84,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowtask' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 }
@@ -142,14 +151,17 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-flowtask' {
   export interface ModelFlowNodeStartEventAtomCondition {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ModelFlowTask {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ModelFlowTaskHistory {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 }
@@ -183,22 +195,27 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowtask' {
   export interface ServiceFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ServiceFlowTask {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ServiceLocalFlowTask {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ServiceProcedure {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ServiceRight {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 }
@@ -242,10 +259,12 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-flowtask' {
   export interface ControllerFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 
   export interface ControllerFlowTask {
+    /** @internal */
     get scope(): ScopeModuleAFlowtask;
   }
 }

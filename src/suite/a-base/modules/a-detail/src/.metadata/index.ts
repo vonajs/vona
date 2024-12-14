@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-detail' {
   export interface BeanDetail {
+    /** @internal */
     get scope(): ScopeModuleADetail;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleADetail;
   }
 }
@@ -59,6 +61,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-detail' {
   export interface ModelDetailBase {
+    /** @internal */
     get scope(): ScopeModuleADetail;
   }
 }

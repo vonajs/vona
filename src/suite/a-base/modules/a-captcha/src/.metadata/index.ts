@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-captcha' {
   export interface BeanCaptcha {
+    /** @internal */
     get scope(): ScopeModuleACaptcha;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-captcha' {
   export interface MiddlewareCaptchaVerify {
+    /** @internal */
     get scope(): ScopeModuleACaptcha;
   }
 }
@@ -41,6 +43,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-captcha' {
   export interface ServiceCaptcha {
+    /** @internal */
     get scope(): ScopeModuleACaptcha;
   }
 }
@@ -70,6 +73,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-captcha' {
   export interface ControllerCaptcha {
+    /** @internal */
     get scope(): ScopeModuleACaptcha;
   }
 }

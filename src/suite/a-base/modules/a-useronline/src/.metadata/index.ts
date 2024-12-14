@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-useronline' {
   export interface BeanUserOnline {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 }
@@ -36,10 +38,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-useronline' {
   export interface AtomUserOnline {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 
   export interface AtomUserOnlineHistory {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 }
@@ -91,10 +95,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-useronline' {
   export interface ModelUserOnline {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 
   export interface ModelUserOnlineHistory {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 }
@@ -118,6 +124,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-useronline' {
   export interface ServiceUserOnline {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 }
@@ -147,6 +154,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-useronline' {
   export interface ControllerUserOnline {
+    /** @internal */
     get scope(): ScopeModuleAUseronline;
   }
 }

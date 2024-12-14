@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-core' {
   export interface MiddlewareDevelopment {
+    /** @internal */
     get scope(): ScopeModuleACore;
   }
 
   export interface MiddlewareGate {
+    /** @internal */
     get scope(): ScopeModuleACore;
   }
 }
@@ -34,6 +36,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-core' {
   export interface GuardUser {
+    /** @internal */
     get scope(): ScopeModuleACore;
   }
 }
@@ -49,6 +52,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-core' {
   export interface InterceptorBody {
+    /** @internal */
     get scope(): ScopeModuleACore;
   }
 }
@@ -64,6 +68,7 @@ declare module 'vona-module-a-aspect' {
 }
 declare module 'vona-module-a-core' {
   export interface FilterError {
+    /** @internal */
     get scope(): ScopeModuleACore;
   }
 }

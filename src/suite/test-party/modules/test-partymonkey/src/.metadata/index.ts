@@ -9,6 +9,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-test-partymonkey' {
   export interface ControllerMonkeyer {
+    /** @internal */
     get scope(): ScopeModuleTestPartymonkey;
   }
 }

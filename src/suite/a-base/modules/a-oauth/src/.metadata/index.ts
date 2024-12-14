@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-oauth' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAOauth;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-oauth' {
   export interface ServiceSessionStore {
+    /** @internal */
     get scope(): ScopeModuleAOauth;
   }
 }

@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-cms-sitedocumentation' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleCmsSitedocumentation;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-cms-sitedocumentation' {
   export interface AtomDocument {
+    /** @internal */
     get scope(): ScopeModuleCmsSitedocumentation;
   }
 }

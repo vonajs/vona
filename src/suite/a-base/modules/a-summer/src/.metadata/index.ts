@@ -24,18 +24,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-summer' {
   export interface BeanSummer {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 
   export interface BroadcastMemClear {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 
   export interface BroadcastMemDel {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 
   export interface BroadcastMemMultiDel {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 }
@@ -49,14 +53,17 @@ import 'vona';
 declare module 'vona' {}
 declare module 'vona-module-a-summer' {
   export interface ServiceLocalFetch {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 
   export interface ServiceLocalMem {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 
   export interface ServiceLocalRedis {
+    /** @internal */
     get scope(): ScopeModuleASummer;
   }
 }

@@ -27,26 +27,32 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-mail' {
   export interface BeanMail {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 
   export interface BeanMailSceneCache {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 
   export interface BroadcastMailSceneChanged {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 
   export interface IoChannelMail {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 
   export interface IoMessageMail {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 }
@@ -62,6 +68,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-mail' {
   export interface MetaStatus {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 }
@@ -77,6 +84,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-mail' {
   export interface StartupCacheMailScenes {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 }
@@ -117,6 +125,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-mail' {
   export interface ModelMail {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 }
@@ -138,6 +147,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-mail' {
   export interface ServiceScene {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 }
@@ -167,6 +177,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-mail' {
   export interface ControllerScene {
+    /** @internal */
     get scope(): ScopeModuleAMail;
   }
 }

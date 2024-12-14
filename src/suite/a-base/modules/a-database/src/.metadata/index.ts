@@ -33,22 +33,27 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-database' {
   export interface BeanDatabase {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 
   export interface BeanDatabaseClient {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 
   export interface DatabaseDialectMysql {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 
   export interface DatabaseDialectMysql2 {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 
   export interface DatabaseDialectPg {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 }
@@ -64,6 +69,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-database' {
   export interface MiddlewareTransaction {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 }
@@ -81,10 +87,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-database' {
   export interface ServiceDbMeta {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 
   export interface ServiceTransaction {
+    /** @internal */
     get scope(): ScopeModuleADatabase;
   }
 }

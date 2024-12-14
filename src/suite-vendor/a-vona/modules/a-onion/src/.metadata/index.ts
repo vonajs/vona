@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
+    /** @internal */
     get scope(): ScopeModuleAOnion;
   }
 }

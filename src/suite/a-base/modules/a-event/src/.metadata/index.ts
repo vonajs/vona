@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-event' {
   export interface BeanEvent {
+    /** @internal */
     get scope(): ScopeModuleAEvent;
   }
 }

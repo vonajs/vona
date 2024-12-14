@@ -14,10 +14,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-validation' {
   export interface BeanAjv {
+    /** @internal */
     get scope(): ScopeModuleAValidation;
   }
 
   export interface BeanValidation {
+    /** @internal */
     get scope(): ScopeModuleAValidation;
   }
 }
@@ -33,6 +35,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-validation' {
   export interface MiddlewareValidate {
+    /** @internal */
     get scope(): ScopeModuleAValidation;
   }
 }
@@ -48,6 +51,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-validation' {
   export interface ServiceValidation {
+    /** @internal */
     get scope(): ScopeModuleAValidation;
   }
 }
@@ -77,6 +81,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-validation' {
   export interface ControllerValidation {
+    /** @internal */
     get scope(): ScopeModuleAValidation;
   }
 }

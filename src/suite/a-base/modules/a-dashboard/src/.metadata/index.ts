@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dashboard' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dashboard' {
   export interface AtomDashboard {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 }
@@ -99,18 +101,22 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-dashboard' {
   export interface ModelDashboard {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 
   export interface ModelDashboardContent {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 
   export interface ModelDashboardFull {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 
   export interface ModelDashboardUser {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 }
@@ -138,6 +144,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dashboard' {
   export interface ServiceDashboard {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 }
@@ -167,6 +174,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-dashboard' {
   export interface ControllerDashboard {
+    /** @internal */
     get scope(): ScopeModuleADashboard;
   }
 }

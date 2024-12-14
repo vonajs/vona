@@ -21,18 +21,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsimple' {
   export interface AuthProviderSimple {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 
   export interface BeanAuthSimple {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 
   export interface EventAccountMigration {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 }
@@ -73,6 +77,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-authsimple' {
   export interface ModelAuthSimple {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 }
@@ -96,10 +101,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsimple' {
   export interface ServiceAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 
   export interface ServiceSimple {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 }
@@ -132,6 +139,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-authsimple' {
   export interface ControllerAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
 }

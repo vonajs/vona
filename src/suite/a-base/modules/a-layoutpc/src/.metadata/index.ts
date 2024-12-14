@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-layoutpc' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleALayoutpc;
   }
 }

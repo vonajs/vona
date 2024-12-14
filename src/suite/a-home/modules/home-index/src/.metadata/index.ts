@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-home-index' {
   export interface StartupOutputHomeApi {
+    /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
 }
@@ -24,6 +25,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-home-index' {
   export interface ControllerIndex {
+    /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
 }

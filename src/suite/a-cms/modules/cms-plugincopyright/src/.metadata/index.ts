@@ -9,6 +9,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-cms-plugincopyright' {
   export interface ControllerUtil {
+    /** @internal */
     get scope(): ScopeModuleCmsPlugincopyright;
   }
 }

@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-pinyin' {
   export interface BeanPinyin {
+    /** @internal */
     get scope(): ScopeModuleAPinyin;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAPinyin;
   }
 }

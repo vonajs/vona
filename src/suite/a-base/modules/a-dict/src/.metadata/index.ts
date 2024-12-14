@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dict' {
   export interface BeanDict {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 }
@@ -34,6 +36,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dict' {
   export interface AtomDict {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 }
@@ -85,10 +88,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-dict' {
   export interface ModelDict {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 
   export interface ModelDictContent {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 }
@@ -112,6 +117,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-dict' {
   export interface ServiceDict {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 }
@@ -141,6 +147,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-dict' {
   export interface ControllerDict {
+    /** @internal */
     get scope(): ScopeModuleADict;
   }
 }

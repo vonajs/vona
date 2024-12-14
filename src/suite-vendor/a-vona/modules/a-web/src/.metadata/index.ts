@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-web' {
   export interface BeanRouter {
+    /** @internal */
     get scope(): ScopeModuleAWeb;
   }
 }

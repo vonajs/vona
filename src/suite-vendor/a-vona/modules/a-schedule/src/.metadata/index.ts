@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-schedule' {
   export interface StartupLoadSchedules {
+    /** @internal */
     get scope(): ScopeModuleASchedule;
   }
 }
@@ -24,6 +25,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-schedule' {
   export interface QueueSchedule {
+    /** @internal */
     get scope(): ScopeModuleASchedule;
   }
 }
@@ -45,6 +47,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-schedule' {
   export interface ServiceSchedule {
+    /** @internal */
     get scope(): ScopeModuleASchedule;
   }
 }

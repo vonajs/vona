@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-login' {
   export interface ServiceAuth {
+    /** @internal */
     get scope(): ScopeModuleALogin;
   }
 }
@@ -38,6 +39,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-login' {
   export interface ControllerAuth {
+    /** @internal */
     get scope(): ScopeModuleALogin;
   }
 }

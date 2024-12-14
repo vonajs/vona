@@ -21,18 +21,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-stats' {
   export interface BeanStats {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 
   export interface IoMessageStats {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 
   export interface StatsDeps {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 }
@@ -73,6 +77,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-stats' {
   export interface ModelStats {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 }
@@ -94,6 +99,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-stats' {
   export interface QueueStats {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 }
@@ -115,6 +121,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-stats' {
   export interface ServiceStats {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 }
@@ -144,6 +151,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-stats' {
   export interface ControllerStats {
+    /** @internal */
     get scope(): ScopeModuleAStats;
   }
 }

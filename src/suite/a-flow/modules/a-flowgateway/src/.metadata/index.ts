@@ -20,18 +20,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowgateway' {
   export interface FlowNodeGatewayExclusive {
+    /** @internal */
     get scope(): ScopeModuleAFlowgateway;
   }
 
   export interface FlowNodeGatewayInclusive {
+    /** @internal */
     get scope(): ScopeModuleAFlowgateway;
   }
 
   export interface FlowNodeGatewayParallel {
+    /** @internal */
     get scope(): ScopeModuleAFlowgateway;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFlowgateway;
   }
 }
@@ -47,6 +51,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-flowgateway' {
   export interface QueueGateway {
+    /** @internal */
     get scope(): ScopeModuleAFlowgateway;
   }
 }

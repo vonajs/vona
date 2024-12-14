@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-status' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAStatus;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-status' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleAStatus;
   }
 }
@@ -66,6 +68,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-status' {
   export interface ModelStatus {
+    /** @internal */
     get scope(): ScopeModuleAStatus;
   }
 }

@@ -21,18 +21,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authopen' {
   export interface AuthProviderOpen {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 
   export interface BeanAuthOpen {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 
   export interface EventAccountMigration {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 }
@@ -48,6 +52,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authopen' {
   export interface AtomAuthOpen {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 }
@@ -88,6 +93,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-authopen' {
   export interface ModelAuthOpen {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 }
@@ -113,14 +119,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authopen' {
   export interface ServiceAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 
   export interface ServiceAuthOpen {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 
   export interface ServiceToken {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 }
@@ -158,10 +167,12 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-authopen' {
   export interface ControllerAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 
   export interface ControllerAuthOpen {
+    /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
 }

@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-validator' {
   export interface BeanValidator {
+    /** @internal */
     get scope(): ScopeModuleAValidator;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona-module-a-aspect' {
 }
 declare module 'vona-module-a-validator' {
   export interface PipeValid {
+    /** @internal */
     get scope(): ScopeModuleAValidator;
   }
 }

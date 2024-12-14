@@ -14,10 +14,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowbehavior' {
   export interface FlowBehaviorOvertime {
+    /** @internal */
     get scope(): ScopeModuleAFlowbehavior;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFlowbehavior;
   }
 }
@@ -33,6 +35,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-flowbehavior' {
   export interface QueueOvertime {
+    /** @internal */
     get scope(): ScopeModuleAFlowbehavior;
   }
 }

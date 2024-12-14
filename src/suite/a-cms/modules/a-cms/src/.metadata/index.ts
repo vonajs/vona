@@ -21,14 +21,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cms' {
   export interface BeanCms {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface IoMessageHotloadFile {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -44,6 +47,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cms' {
   export interface AtomArticle {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -59,6 +63,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cms' {
   export interface MetaStatus {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -74,6 +79,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cms' {
   export interface StartupRegisterAllWatchers {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -125,10 +131,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-cms' {
   export interface ModelArticle {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ModelContent {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -152,6 +160,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-cms' {
   export interface QueueRender {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -177,14 +186,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cms' {
   export interface ServiceBuild {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ServiceRender {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ServiceSite {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }
@@ -228,22 +240,27 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-cms' {
   export interface ControllerArticle {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ControllerComment {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ControllerRender {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ControllerRss {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 
   export interface ControllerSite {
+    /** @internal */
     get scope(): ScopeModuleACms;
   }
 }

@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-share' {
   export interface BeanShare {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 }
@@ -81,14 +83,17 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-share' {
   export interface ModelShare {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 
   export interface ModelShareRecordPV {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 
   export interface ModelShareRecordUV {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 }
@@ -114,6 +119,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-share' {
   export interface ServiceShare {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 }
@@ -143,6 +149,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-share' {
   export interface ControllerShare {
+    /** @internal */
     get scope(): ScopeModuleAShare;
   }
 }

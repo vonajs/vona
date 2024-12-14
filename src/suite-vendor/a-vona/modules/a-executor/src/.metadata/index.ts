@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-executor' {
   export interface BeanExecutor {
+    /** @internal */
     get scope(): ScopeModuleAExecutor;
   }
 }

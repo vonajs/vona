@@ -17,14 +17,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-flow' {
   export interface FlowServiceStartEventTimer {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 
   export interface FlowServiceTest {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 }
@@ -44,14 +47,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-flow' {
   export interface AtomProduct {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 
   export interface AtomPurchaseOrder {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 
   export interface AtomPurchaseOrderDetail {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 }
@@ -114,14 +120,17 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-test-flow' {
   export interface ModelProduct {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 
   export interface ModelPurchaseOrder {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 
   export interface ModelPurchaseOrderDetail {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 }
@@ -147,6 +156,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-test-flow' {
   export interface ControllerFlow {
+    /** @internal */
     get scope(): ScopeModuleTestFlow;
   }
 }

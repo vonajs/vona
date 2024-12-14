@@ -30,30 +30,37 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cache' {
   export interface BeanCache {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 
   export interface BeanCacheDb {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 
   export interface BeanCacheMem {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 
   export interface BeanCacheRedis {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 
   export interface BroadcastMemClear {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 
   export interface BroadcastMemRemove {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 }
@@ -69,6 +76,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cache' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 }
@@ -109,6 +117,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-cache' {
   export interface ControllerDb {
+    /** @internal */
     get scope(): ScopeModuleACache;
   }
 }

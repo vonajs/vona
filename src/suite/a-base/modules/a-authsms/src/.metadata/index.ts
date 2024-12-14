@@ -30,30 +30,37 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsms' {
   export interface AuthProviderSms {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface BeanSmsProviderCache {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface BroadcastSmsProviderChanged {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface CaptchaProviderCaptcha {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface EventAccountMigration {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface SmsProviderAliyun {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface SmsProviderTest {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 }
@@ -69,6 +76,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsms' {
   export interface MetaStatus {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 }
@@ -84,6 +92,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsms' {
   export interface StartupCacheSmsProviders {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 }
@@ -103,14 +112,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsms' {
   export interface ServiceAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface ServiceCaptcha {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface ServiceSmsProvider {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 }
@@ -150,14 +162,17 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-authsms' {
   export interface ControllerAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface ControllerCaptcha {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 
   export interface ControllerSmsProvider {
+    /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
 }

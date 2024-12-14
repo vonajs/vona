@@ -84,98 +84,122 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface BeanAtom {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAtomAction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAtomClass {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAtomRightAux {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAtomStage {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAtomState {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAtomStatic {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanAuth {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanBase2 {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanBodyCrypto {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanCategory {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanFormAction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanResource {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanRole {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanStash {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanTag {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface BeanUtil {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StatsDraftsCommon {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StatsDraftsFlowing {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StatsLabels {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StatsStars {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StatsStarsLabels {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -213,50 +237,62 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface AtomResource {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRole {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRoleFieldsRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRoleFieldsRightSpread {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRoleResourceRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRoleResourceRightSpread {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRoleRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomRoleRightSpread {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomUserAtomRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomUserFieldsRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface AtomUserResourceRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -286,34 +322,42 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface MiddlewareAuth {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareAuthOpen {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareHttpLog {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareInner {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareJsonp {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareTest {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MiddlewareTransaction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -329,6 +373,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface SocketConnectionAuth {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -344,6 +389,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface AopCategory {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -361,10 +407,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface MetaStatus {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -384,14 +432,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface StartupCheckResourceLocales {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StartupCheckViewHistoryRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface StartupLoadAtomStatics {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -740,118 +791,147 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-base' {
   export interface ModelAtom {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelAtomAction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelAtomClass {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelAtomLabel {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelAtomLabelRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelAtomStar {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelCategory {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelComment {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelCommentHeart {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelCommentView {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelLabel {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelResource {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelResourceLocale {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelResourceRole {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRole {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleExpand {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleFieldsRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleInc {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleIncRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleRight {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelRoleRightRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelTag {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelTagRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelUserAgent {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelUserRole {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelUserRoleIncRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ModelUserRoleRef {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -939,26 +1019,32 @@ declare module 'vona-module-a-summer' {
 }
 declare module 'vona-module-a-base' {
   export interface SummerCacheAtomClassInner {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface SummerCacheRoleParentsOfUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface SummerCacheRoleScopesMineOfUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface SummerCacheRoleScopesOfRole {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface SummerCacheRoleScopesOfUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface SummerCacheRoleWhosOfAtomClassAction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -990,6 +1076,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-base' {
   export interface QueueRoleBuild {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -1041,66 +1128,82 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-base' {
   export interface ServiceAtom {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceAtomAction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceAtomClass {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceAtomState {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceAuth {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceBase {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceCategory {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceComment {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceJwt {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceLayoutConfig {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceProcedure {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceResource {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceStash {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceTag {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ServiceUtil {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }
@@ -1201,58 +1304,72 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-base' {
   export interface ControllerAtom {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerAtomAction {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerAtomClass {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerAtomState {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerAuth {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerBase {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerCategory {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerComment {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerJwt {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerLayoutConfig {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerResource {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerTag {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerUser {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 
   export interface ControllerUtil {
+    /** @internal */
     get scope(): ScopeModuleABase;
   }
 }

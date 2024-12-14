@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-markdown' {
   export interface BeanMarkdown {
+    /** @internal */
     get scope(): ScopeModuleAMarkdown;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAMarkdown;
   }
 }

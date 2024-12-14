@@ -24,22 +24,27 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flow' {
   export interface BeanFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface BeanFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface FlowBehaviorBase {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface StatsFlowInitiateds {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 }
@@ -55,6 +60,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flow' {
   export interface AtomFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 }
@@ -70,6 +76,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flow' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 }
@@ -176,30 +183,37 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-flow' {
   export interface ModelFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ModelFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ModelFlowDefContent {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ModelFlowDefFull {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ModelFlowHistory {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ModelFlowNode {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ModelFlowNodeHistory {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 }
@@ -245,30 +259,37 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flow' {
   export interface ServiceFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ServiceFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ServiceLocalFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ServiceLocalFlowEdge {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ServiceLocalFlowListener {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ServiceLocalFlowNode {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ServiceProcedure {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 }
@@ -318,10 +339,12 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-flow' {
   export interface ControllerFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 
   export interface ControllerFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlow;
   }
 }

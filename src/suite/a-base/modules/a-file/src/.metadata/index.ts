@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-file' {
   export interface BeanFile {
+    /** @internal */
     get scope(): ScopeModuleAFile;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFile;
   }
 }
@@ -70,10 +72,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-file' {
   export interface ModelFile {
+    /** @internal */
     get scope(): ScopeModuleAFile;
   }
 
   export interface ModelFileView {
+    /** @internal */
     get scope(): ScopeModuleAFile;
   }
 }
@@ -97,6 +101,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-file' {
   export interface ServiceFile {
+    /** @internal */
     get scope(): ScopeModuleAFile;
   }
 }
@@ -126,6 +131,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-file' {
   export interface ControllerFile {
+    /** @internal */
     get scope(): ScopeModuleAFile;
   }
 }

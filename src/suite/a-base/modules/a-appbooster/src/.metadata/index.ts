@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-appbooster' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAAppbooster;
   }
 }

@@ -62,74 +62,92 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-clibooster' {
   export interface CliCreateApp {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliCreateAtom {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliCreateAtomAction {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliCreateDetail {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliCreateItemOnly {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliCreatePage {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliDefaultList {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliFrontRenderTableCell {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliGitCommit {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliStorePublish {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliStoreSync {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliTokenAdd {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliTokenDelete {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliTokenList {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliToolsBabel {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliToolsDemo {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface CliToolsIcons {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 }
@@ -147,10 +165,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-clibooster' {
   export interface ServiceTools {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 
   export interface ServiceUtils {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 }
@@ -183,6 +203,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-clibooster' {
   export interface ControllerTools {
+    /** @internal */
     get scope(): ScopeModuleAClibooster;
   }
 }

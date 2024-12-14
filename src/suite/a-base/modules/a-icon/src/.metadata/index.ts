@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-icon' {
   export interface BeanIcon {
+    /** @internal */
     get scope(): ScopeModuleAIcon;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAIcon;
   }
 }
@@ -34,6 +36,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-icon' {
   export interface ServiceIcon {
+    /** @internal */
     get scope(): ScopeModuleAIcon;
   }
 }
@@ -63,6 +66,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-icon' {
   export interface ControllerIcon {
+    /** @internal */
     get scope(): ScopeModuleAIcon;
   }
 }

@@ -24,18 +24,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-auth' {
   export interface BeanAuthProvider {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
   export interface BeanAuthProviderCache {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
   export interface BroadcastAuthProviderChanged {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }
@@ -51,6 +55,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-auth' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }
@@ -70,14 +75,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-auth' {
   export interface StartupCacheAuthProviders {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
   export interface StartupRegisterPassport {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
   export interface StartupRegisterRouters {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }
@@ -129,10 +137,12 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-auth' {
   export interface ModelAuth {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 
   export interface ModelAuthProvider {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }
@@ -156,6 +166,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-auth' {
   export interface ServicePassport {
+    /** @internal */
     get scope(): ScopeModuleAAuth;
   }
 }

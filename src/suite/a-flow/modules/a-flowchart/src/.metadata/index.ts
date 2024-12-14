@@ -11,10 +11,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flowchart' {
   export interface ServiceFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlowchart;
   }
 
   export interface ServiceFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlowchart;
   }
 }
@@ -49,10 +51,12 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-flowchart' {
   export interface ControllerFlow {
+    /** @internal */
     get scope(): ScopeModuleAFlowchart;
   }
 
   export interface ControllerFlowDef {
+    /** @internal */
     get scope(): ScopeModuleAFlowchart;
   }
 }

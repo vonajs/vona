@@ -18,10 +18,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cli' {
   export interface BeanCli {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 }
@@ -43,18 +45,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-cli' {
   export interface ServiceCli {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 
   export interface ServiceConsole {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 
   export interface ServiceHelper {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 
   export interface ServiceTemplate {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 }
@@ -93,6 +99,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-cli' {
   export interface ControllerCli {
+    /** @internal */
     get scope(): ScopeModuleACli;
   }
 }

@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-redlock' {
   export interface ServiceRedlock {
+    /** @internal */
     get scope(): ScopeModuleARedlock;
   }
 }

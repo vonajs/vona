@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-progress' {
   export interface BeanProgress {
+    /** @internal */
     get scope(): ScopeModuleAProgress;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAProgress;
   }
 }
@@ -34,6 +36,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-progress' {
   export interface ServiceProgress {
+    /** @internal */
     get scope(): ScopeModuleAProgress;
   }
 }
@@ -63,6 +66,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-progress' {
   export interface ControllerProgress {
+    /** @internal */
     get scope(): ScopeModuleAProgress;
   }
 }

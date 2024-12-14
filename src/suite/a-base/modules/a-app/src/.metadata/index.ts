@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-app' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-app' {
   export interface AtomApp {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 }
@@ -88,14 +90,17 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-app' {
   export interface ModelApp2 {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 
   export interface ModelAppContent {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 
   export interface ModelAppFull {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 }
@@ -121,6 +126,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-app' {
   export interface ServiceResource {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 }
@@ -150,6 +156,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-app' {
   export interface ControllerResource {
+    /** @internal */
     get scope(): ScopeModuleAApp;
   }
 }

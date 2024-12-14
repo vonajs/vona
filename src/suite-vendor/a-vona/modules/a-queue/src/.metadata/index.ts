@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-queue' {
   export interface ServiceQueue {
+    /** @internal */
     get scope(): ScopeModuleAQueue;
   }
 }

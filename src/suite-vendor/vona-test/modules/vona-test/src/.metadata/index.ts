@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-vona-test' {
   export interface BeanTestCtx {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -28,10 +29,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-vona-test' {
   export interface AopRegExp {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface AopSimple {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -47,6 +50,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-vona-test' {
   export interface MetaStatus {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -62,6 +66,7 @@ declare module 'vona-module-a-summer' {
 }
 declare module 'vona-module-vona-test' {
   export interface SummerCacheTest {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -83,6 +88,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-vona-test' {
   export interface QueueTest {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -104,6 +110,7 @@ declare module 'vona-module-a-schedule' {
 }
 declare module 'vona-module-vona-test' {
   export interface ScheduleTest {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -136,14 +143,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-vona-test' {
   export interface ServiceTest {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ServiceTestApp {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ServiceTestClass {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }
@@ -198,30 +208,37 @@ declare module 'vona-module-vona-test' {
   }
 
   export interface ControllerOnion {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ControllerPerformAction {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ControllerQueue {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ControllerStatus {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ControllerSummer {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ControllerTail {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 
   export interface ControllerTransaction {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 }

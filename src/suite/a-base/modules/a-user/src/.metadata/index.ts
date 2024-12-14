@@ -14,10 +14,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-user' {
   export interface StatsUser {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 
   export interface StatsUserAlert {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 }
@@ -33,6 +35,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-user' {
   export interface MetaStatus {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 }
@@ -50,10 +53,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-user' {
   export interface ServicePublic {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 
   export interface ServiceUser {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 }
@@ -88,10 +93,12 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-user' {
   export interface ControllerPublic {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 
   export interface ControllerUser {
+    /** @internal */
     get scope(): ScopeModuleAUser;
   }
 }

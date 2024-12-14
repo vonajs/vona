@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-baselayout' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleABaselayout;
   }
 }
@@ -26,6 +27,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-baselayout' {
   export interface AtomLayout {
+    /** @internal */
     get scope(): ScopeModuleABaselayout;
   }
 }
@@ -88,14 +90,17 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-baselayout' {
   export interface ModelLayout {
+    /** @internal */
     get scope(): ScopeModuleABaselayout;
   }
 
   export interface ModelLayoutContent {
+    /** @internal */
     get scope(): ScopeModuleABaselayout;
   }
 
   export interface ModelLayoutFull {
+    /** @internal */
     get scope(): ScopeModuleABaselayout;
   }
 }

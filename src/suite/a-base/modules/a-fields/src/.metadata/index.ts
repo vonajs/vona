@@ -15,10 +15,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-fields' {
   export interface BeanFields {
+    /** @internal */
     get scope(): ScopeModuleAFields;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFields;
   }
 }
@@ -36,10 +38,12 @@ declare module 'vona-module-a-summer' {
 }
 declare module 'vona-module-a-fields' {
   export interface SummerCacheFieldsRightOfAtomClass {
+    /** @internal */
     get scope(): ScopeModuleAFields;
   }
 
   export interface SummerCacheFieldsRightOfUser {
+    /** @internal */
     get scope(): ScopeModuleAFields;
   }
 }

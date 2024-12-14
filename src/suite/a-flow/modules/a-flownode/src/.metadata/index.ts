@@ -29,30 +29,37 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-flownode' {
   export interface FlowEdgeSequence {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 
   export interface FlowNodeActivityNone {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 
   export interface FlowNodeActivityService {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 
   export interface FlowNodeEndEventNone {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 
   export interface FlowNodeStartEventNone {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 
   export interface FlowNodeStartEventTimer {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 }
@@ -68,6 +75,7 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-flownode' {
   export interface QueueStartEventTimer {
+    /** @internal */
     get scope(): ScopeModuleAFlownode;
   }
 }

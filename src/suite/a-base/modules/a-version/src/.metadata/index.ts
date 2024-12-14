@@ -18,14 +18,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-version' {
   export interface BeanWorker {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 
   export interface BroadcastColumnsClear {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 }
@@ -47,18 +50,22 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-version' {
   export interface StartupDatabaseInit {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 
   export interface StartupDatabaseName {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 
   export interface StartupInstanceInit {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 
   export interface StartupWorkerAlive {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 }
@@ -117,6 +124,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-version' {
   export interface ModelViewRecord {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 }
@@ -140,10 +148,12 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-version' {
   export interface ServiceDatabase {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 
   export interface ServiceVersion {
+    /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 }

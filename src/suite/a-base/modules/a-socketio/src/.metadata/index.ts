@@ -21,14 +21,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-socketio' {
   export interface BeanIo {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface BroadcastSocketEmit {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -44,6 +47,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-socketio' {
   export interface SocketConnectionIo {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -59,6 +63,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-socketio' {
   export interface SocketPacketPerformAction {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -74,6 +79,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-socketio' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -136,14 +142,17 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-socketio' {
   export interface ModelMessage {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ModelMessageClass {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ModelMessageSync {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -175,18 +184,22 @@ declare module 'vona-module-a-queue' {
 }
 declare module 'vona-module-a-socketio' {
   export interface QueueDelivery {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface QueueProcess {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface QueuePush {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface QueuePushDirect {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -224,26 +237,32 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-socketio' {
   export interface ServiceIo {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ServiceIoInner {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ServiceMessage {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ServiceMessageClass {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ServiceProcedure {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ServiceRedis {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }
@@ -294,18 +313,22 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-socketio' {
   export interface ControllerIo {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ControllerMessage {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ControllerMessageClass {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 
   export interface ControllerTest {
+    /** @internal */
     get scope(): ScopeModuleASocketio;
   }
 }

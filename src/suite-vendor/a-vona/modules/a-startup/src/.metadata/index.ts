@@ -9,6 +9,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-startup' {
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleAStartup;
   }
 }
@@ -24,6 +25,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-startup' {
   export interface ServiceStartup {
+    /** @internal */
     get scope(): ScopeModuleAStartup;
   }
 }

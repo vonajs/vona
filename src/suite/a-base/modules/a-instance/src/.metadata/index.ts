@@ -18,14 +18,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-instance' {
   export interface BeanInstance {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 
   export interface BroadcastReload {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 
   export interface BroadcastResetCache {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 }
@@ -45,14 +48,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-instance' {
   export interface MetaIndex {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 
   export interface MetaRedlock {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 
   export interface MetaVersion {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 }
@@ -93,6 +99,7 @@ declare module 'vona-module-a-database' {
 }
 declare module 'vona-module-a-instance' {
   export interface ModelInstance {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 }
@@ -114,6 +121,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-instance' {
   export interface ServiceInstance {
+    /** @internal */
     get scope(): ScopeModuleAInstance;
   }
 }

@@ -21,14 +21,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-message' {
   export interface BeanMessage {
+    /** @internal */
     get scope(): ScopeModuleAMessage;
   }
 
   export interface StatsMessage {
+    /** @internal */
     get scope(): ScopeModuleAMessage;
   }
 
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleAMessage;
   }
 }
@@ -44,6 +47,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-message' {
   export interface ServiceMessage {
+    /** @internal */
     get scope(): ScopeModuleAMessage;
   }
 }
@@ -73,6 +77,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-message' {
   export interface ControllerMessage {
+    /** @internal */
     get scope(): ScopeModuleAMessage;
   }
 }

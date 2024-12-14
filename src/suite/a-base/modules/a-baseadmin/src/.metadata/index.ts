@@ -11,6 +11,7 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-baseadmin' {
   export interface VersionManager {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 }
@@ -36,26 +37,32 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-baseadmin' {
   export interface ServiceAtomRight {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ServiceAuth {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ServiceAuthScene {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ServiceResourceRight {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ServiceRole {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ServiceUser {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 }
@@ -110,26 +117,32 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-a-baseadmin' {
   export interface ControllerAtomRight {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ControllerAuth {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ControllerAuthScene {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ControllerResourceRight {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ControllerRole {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 
   export interface ControllerUser {
+    /** @internal */
     get scope(): ScopeModuleABaseadmin;
   }
 }
