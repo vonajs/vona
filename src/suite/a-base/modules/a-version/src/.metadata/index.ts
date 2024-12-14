@@ -33,43 +33,6 @@ declare module 'vona-module-a-version' {
   }
 }
 /** beans: end */
-/** startup: begin */
-export * from '../bean/startup.databaseInit.js';
-export * from '../bean/startup.databaseName.js';
-export * from '../bean/startup.instanceInit.js';
-export * from '../bean/startup.workerAlive.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-version:databaseInit': IDecoratorStartupOptions;
-    'a-version:databaseName': IDecoratorStartupOptions;
-    'a-version:instanceInit': IDecoratorStartupOptions;
-    'a-version:workerAlive': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-version' {
-  export interface StartupDatabaseInit {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface StartupDatabaseName {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface StartupInstanceInit {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface StartupWorkerAlive {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-}
-/** startup: end */
 /** entity: begin */
 export * from '../entity/version.js';
 export * from '../entity/versionInit.js';
@@ -135,6 +98,43 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 /** model: end */
+/** startup: begin */
+export * from '../bean/startup.databaseInit.js';
+export * from '../bean/startup.databaseName.js';
+export * from '../bean/startup.instanceInit.js';
+export * from '../bean/startup.workerAlive.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-version:databaseInit': IDecoratorStartupOptions;
+    'a-version:databaseName': IDecoratorStartupOptions;
+    'a-version:instanceInit': IDecoratorStartupOptions;
+    'a-version:workerAlive': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface StartupDatabaseInit {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface StartupDatabaseName {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface StartupInstanceInit {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+
+  export interface StartupWorkerAlive {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/database.js';
 export * from '../service/version.js';

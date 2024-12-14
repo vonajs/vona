@@ -1,4 +1,5 @@
-import { BeanBase, IStartupExecute, Startup } from 'vona';
+import { BeanBase } from 'vona';
+import { IStartupExecute, Startup } from 'vona-module-a-startup';
 
 @Startup()
 export class StartupRegisterPassport extends BeanBase implements IStartupExecute {

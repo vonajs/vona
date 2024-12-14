@@ -1,8 +1,8 @@
 /** startup: begin */
 export * from '../bean/startup.outputHomeApi.js';
 
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'home-index:outputHomeApi': IDecoratorStartupOptions;
   }

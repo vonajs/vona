@@ -336,36 +336,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** meta: end */
-/** startup: begin */
-export * from '../bean/startup.checkResourceLocales.js';
-export * from '../bean/startup.checkViewHistoryRight.js';
-export * from '../bean/startup.loadAtomStatics.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-base:checkResourceLocales': IDecoratorStartupOptions;
-    'a-base:checkViewHistoryRight': IDecoratorStartupOptions;
-    'a-base:loadAtomStatics': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface StartupCheckResourceLocales {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface StartupCheckViewHistoryRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface StartupLoadAtomStatics {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-}
-/** startup: end */
 /** entity: begin */
 export * from '../entity/atom.js';
 export * from '../entity/atomAction.js';
@@ -1087,6 +1057,36 @@ export interface IModuleQueue {
   roleBuild: QueueRoleBuild;
 }
 /** queue: end */
+/** startup: begin */
+export * from '../bean/startup.checkResourceLocales.js';
+export * from '../bean/startup.checkViewHistoryRight.js';
+export * from '../bean/startup.loadAtomStatics.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-base:checkResourceLocales': IDecoratorStartupOptions;
+    'a-base:checkViewHistoryRight': IDecoratorStartupOptions;
+    'a-base:loadAtomStatics': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface StartupCheckResourceLocales {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StartupCheckViewHistoryRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface StartupLoadAtomStatics {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/atom.js';
 export * from '../service/atomAction.js';
