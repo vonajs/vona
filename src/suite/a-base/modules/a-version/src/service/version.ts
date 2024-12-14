@@ -5,7 +5,7 @@ import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 import { Service } from 'vona-module-a-web';
 import { IInstanceStartupOptions } from 'vona-module-a-startup';
-import { IMetaVersionInit, IMetaVersionTest, IMetaVersionUpdate } from 'vona-module-a-meta';
+import { IMetaVersionInit, IMetaVersionTest, IMetaVersionUpdate } from '../types/version.js';
 
 @Service()
 export class ServiceVersion extends BeanBase {

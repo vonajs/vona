@@ -5,25 +5,38 @@ import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
 import { IModule } from '@cabloy/module-info';
 import { BeanScopeUtil } from './beanScopeUtil.js';
+import { getOnionMetasMeta } from 'vona-shared';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleBean = Symbol('BeanScopeBase#BeanModuleBean');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
-const BeanModuleStatus = Symbol('BeanScopeBase#BeanModuleStatus');
-const BeanModuleRedlock = Symbol('BeanScopeBase#BeanModuleRedlock');
 
 export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleError]: BeanScopeError;
   private [BeanModuleLocale]: BeanScopeLocale;
   private [BeanModuleBean]: BeanScopeBean;
   private [BeanModuleUtil]: BeanScopeUtil;
-  private [BeanModuleStatus]: unknown;
-  private [BeanModuleRedlock]: unknown;
+  private __onionMetaNames: Record<string, boolean>;
   private __scenes: Record<string, BeanScopeScene> = {};
+  private __metas: Record<string, unknown> = {};
 
   get module(): IModule {
     return this.app.meta.modules[this.moduleBelong];
+  }
+
+  private get onionMetaNames() {
+    if (!this.__onionMetaNames) {
+      this.__onionMetaNames = {};
+      const onionMetasMeta = getOnionMetasMeta(this.app.meta.modules);
+      for (const metaName in onionMetasMeta) {
+        const onionMetaMeta = onionMetasMeta[metaName];
+        if (onionMetaMeta.scopeResource) {
+          this.__onionMetaNames[metaName] = true;
+        }
+      }
+    }
+    return this.__onionMetaNames;
   }
 
   protected __get__(prop: string) {
@@ -66,19 +79,12 @@ export class BeanScopeBase extends BeanBaseSimple {
       }
       return this[BeanModuleUtil];
     }
-    // status
-    // todo: 可能通过onion能力配置，将这段逻辑通用化
-    if (prop === 'status') {
-      if (!this[BeanModuleStatus]) {
-        this[BeanModuleStatus] = this.bean._getBean(`${moduleBelong}.meta.status` as any);
+    // meta
+    if (this.onionMetaNames[prop]) {
+      if (!this.__metas[prop]) {
+        this.__metas[prop] = this.bean._getBean(`${moduleBelong}.meta.${prop}` as any);
       }
-      return this[BeanModuleStatus];
-    }
-    if (prop === 'redlock') {
-      if (!this[BeanModuleRedlock]) {
-        this[BeanModuleRedlock] = this.bean._getBean(`${moduleBelong}.meta.redlock` as any);
-      }
-      return this[BeanModuleRedlock];
+      return this.__metas[prop];
     }
     // scene
     if (!this.__scenes[prop]) {

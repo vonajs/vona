@@ -1,13 +1,8 @@
-import { appResource, BeanBase, cast, deepExtend } from 'vona';
 import chalk from 'chalk';
-import {
-  IMetaIndexExecute,
-  IMetaOptionsIndex,
-  IMetaVersionUpdate,
-  IMetaVersionUpdateOptions,
-  Meta,
-  MetaOptionsIndexModuleIndexes,
-} from 'vona-module-a-meta';
+import { appResource, BeanBase, cast, deepExtend } from 'vona';
+import { Meta } from 'vona-module-a-meta';
+import { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.js';
 
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
