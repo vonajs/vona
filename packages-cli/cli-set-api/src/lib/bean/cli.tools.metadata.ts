@@ -57,7 +57,7 @@ export class CliToolsMetadata extends BeanCliBase {
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
     // onionScenesMeta
-    const onionScenesMeta = getOnionScenesMeta(this.helper.cli.modulesMeta.modules);
+    const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     // content
     let content = '';
     // beans

@@ -59,7 +59,7 @@ export class CliCreateBean extends BeanCliBase {
     argv.sceneNameCapitalize = sceneParts.map(item => this.helper.firstCharToUpperCase(item)).join();
     // scene meta
     // onionScenesMeta
-    const onionScenesMeta = getOnionScenesMeta(this.helper.cli.modulesMeta.modules);
+    const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     const onionSceneMeta = onionScenesMeta[sceneName];
     // bean name
     const beanName = argv.beanName;
@@ -97,8 +97,8 @@ export class CliCreateBean extends BeanCliBase {
 
   private _getBoilerplates() {
     const result = Object.assign({}, __boilerplates);
-    for (const moduleName in this.helper.cli.modulesMeta.modules) {
-      const module = this.helper.cli.modulesMeta.modules[moduleName];
+    for (const moduleName in this.modulesMeta.modules) {
+      const module = this.modulesMeta.modules[moduleName];
       const onions = module.package.vonaModule?.onions;
       if (!onions) continue;
       for (const sceneName in onions) {
