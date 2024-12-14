@@ -1,4 +1,6 @@
-import { BeanBase, IMetaOptionsIndex, Meta } from 'vona';
+import { BeanBase } from 'vona';
+import { IMetaOptionsIndex } from 'vona-module-a-index';
+import { Meta } from 'vona-module-a-meta';
 
 @Meta<IMetaOptions<%=argv.beanNameCapitalize%>>({
   indexes: {},

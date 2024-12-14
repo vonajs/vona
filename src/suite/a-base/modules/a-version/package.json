@@ -5,6 +5,11 @@
     "fileVersion": 3,
     "dependencies": {
       "a-database": "5.0.0"
+    },
+    "metas": {
+      "version": {
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -23,7 +28,8 @@
   "description": "vona-module-a-version",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "keywords": [

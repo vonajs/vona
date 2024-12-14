@@ -1,11 +1,11 @@
 import { IModule, OnionScenesMeta } from '@cabloy/module-info';
 
-let __result: OnionScenesMeta;
+let __onionScenesMeta: OnionScenesMeta;
 export function getOnionScenesMeta(modules: Record<string, IModule>) {
-  if (!__result) {
-    __result = _getOnionScenesMeta(modules);
+  if (!__onionScenesMeta) {
+    __onionScenesMeta = _getOnionScenesMeta(modules);
   }
-  return __result;
+  return __onionScenesMeta;
 }
 
 export function _getOnionScenesMeta(modules: Record<string, IModule>) {

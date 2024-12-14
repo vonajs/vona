@@ -8,6 +8,11 @@
     "dependencies": {
       "a-instance": "5.0.0",
       "a-base": "5.0.0"
+    },
+    "metas": {
+      "index": {
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -26,7 +31,8 @@
   "description": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "author": "zhennann",

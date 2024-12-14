@@ -5,6 +5,11 @@
     "fileVersion": 1,
     "dependencies": {
       "a-instance": "5.0.0"
+    },
+    "metas": {
+      "status": {
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -23,7 +28,8 @@
   "description": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "author": "zhennann",
