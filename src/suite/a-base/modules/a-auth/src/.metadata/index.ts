@@ -60,36 +60,6 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** meta: end */
-/** startup: begin */
-export * from '../bean/startup.cacheAuthProviders.js';
-export * from '../bean/startup.registerPassport.js';
-export * from '../bean/startup.registerRouters.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-auth:cacheAuthProviders': IDecoratorStartupOptions;
-    'a-auth:registerPassport': IDecoratorStartupOptions;
-    'a-auth:registerRouters': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-auth' {
-  export interface StartupCacheAuthProviders {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-
-  export interface StartupRegisterPassport {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-
-  export interface StartupRegisterRouters {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-}
-/** startup: end */
 /** entity: begin */
 export * from '../entity/auth.js';
 export * from '../entity/authProvider.js';
@@ -155,6 +125,36 @@ export interface IModuleModel {
   authProvider: ModelAuthProvider;
 }
 /** model: end */
+/** startup: begin */
+export * from '../bean/startup.cacheAuthProviders.js';
+export * from '../bean/startup.registerPassport.js';
+export * from '../bean/startup.registerRouters.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-auth:cacheAuthProviders': IDecoratorStartupOptions;
+    'a-auth:registerPassport': IDecoratorStartupOptions;
+    'a-auth:registerRouters': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface StartupCacheAuthProviders {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface StartupRegisterPassport {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface StartupRegisterRouters {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/passport.js';
 

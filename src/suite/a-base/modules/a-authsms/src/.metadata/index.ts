@@ -84,8 +84,8 @@ declare module 'vona-module-a-authsms' {
 /** startup: begin */
 export * from '../bean/startup.cacheSmsProviders.js';
 
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
   export interface IStartupRecord {
     'a-authsms:cacheSmsProviders': IDecoratorStartupOptions;
   }

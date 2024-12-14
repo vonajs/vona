@@ -1,19 +1,3 @@
-/** startup: begin */
-export * from '../bean/startup.loadSchedules.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-schedule:loadSchedules': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-schedule' {
-  export interface StartupLoadSchedules {
-    /** @internal */
-    get scope(): ScopeModuleASchedule;
-  }
-}
-/** startup: end */
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
 
@@ -36,6 +20,22 @@ export interface IModuleQueue {
   schedule: QueueSchedule;
 }
 /** queue: end */
+/** startup: begin */
+export * from '../bean/startup.loadSchedules.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-schedule:loadSchedules': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-schedule' {
+  export interface StartupLoadSchedules {
+    /** @internal */
+    get scope(): ScopeModuleASchedule;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/schedule.js';
 

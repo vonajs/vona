@@ -73,22 +73,6 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** meta: end */
-/** startup: begin */
-export * from '../bean/startup.cacheMailScenes.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-mail:cacheMailScenes': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-mail' {
-  export interface StartupCacheMailScenes {
-    /** @internal */
-    get scope(): ScopeModuleAMail;
-  }
-}
-/** startup: end */
 /** entity: begin */
 export * from '../entity/mail.js';
 
@@ -136,6 +120,22 @@ export interface IModuleModel {
   mail: ModelMail;
 }
 /** model: end */
+/** startup: begin */
+export * from '../bean/startup.cacheMailScenes.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-mail:cacheMailScenes': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface StartupCacheMailScenes {
+    /** @internal */
+    get scope(): ScopeModuleAMail;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/scene.js';
 
