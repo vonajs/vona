@@ -11,9 +11,6 @@ export const onionScenesMeta: OnionScenesMeta = {
   socketPacket: {
     optionsGlobalInterfaceName: 'IDecoratorSocketPacketOptions',
   },
-  aop: {
-    optionsGlobalInterfaceName: 'IDecoratorAopOptions',
-  },
   meta: {
     optionsGlobalInterfaceName: '',
   },

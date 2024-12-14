@@ -9,7 +9,6 @@ const __decorators = {
   virtual: 'Virtual',
 };
 const __boilerplates = {
-  aop: 'aop',
   metaIndex: 'metaIndex',
   metaVersion: 'metaVersion',
   metaStatus: 'metaStatus',

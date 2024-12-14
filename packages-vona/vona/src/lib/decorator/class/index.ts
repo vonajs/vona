@@ -1,4 +1,3 @@
-export * from './aop.js';
 export * from './atom.js';
 export * from './bean.js';
 export * from './createBeanDecorator.js';

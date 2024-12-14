@@ -45,6 +45,11 @@
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "cli/middleware/boilerplate"
+      },
+      "aop": {
+        "optionsGlobalInterfaceName": "IDecoratorAopOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
+        "boilerplate": "cli/aop/boilerplate"
       }
     }
   },

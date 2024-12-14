@@ -1,3 +1,4 @@
+export * from './aop.js';
 export * from './filter.js';
 export * from './guard.js';
 export * from './interceptor.js';
