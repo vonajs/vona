@@ -242,6 +242,9 @@ importers:
       vona-module-a-share:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-share
+      vona-module-a-socket:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-socket
       vona-module-a-socketio:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-socketio
@@ -1271,6 +1274,9 @@ importers:
       vona-module-a-schedule:
         specifier: workspace:^
         version: link:modules/a-schedule
+      vona-module-a-socket:
+        specifier: workspace:^
+        version: link:modules/a-socket
       vona-module-a-startup:
         specifier: workspace:^
         version: link:modules/a-startup
@@ -1339,6 +1345,8 @@ importers:
   src/suite-vendor/a-vona/modules/a-redlock: {}
 
   src/suite-vendor/a-vona/modules/a-schedule: {}
+
+  src/suite-vendor/a-vona/modules/a-socket: {}
 
   src/suite-vendor/a-vona/modules/a-startup: {}
 
