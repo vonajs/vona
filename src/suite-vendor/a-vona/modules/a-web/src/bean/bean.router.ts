@@ -7,12 +7,10 @@ import {
   Constructable,
   deepExtend,
   IModuleRoute,
-  IOnionSlice,
   Next,
   RequestMappingMetadata,
   RequestMethod,
   SymbolRequestMappingHandler,
-  SymbolUseOnionOptions,
   VonaContext,
 } from 'vona';
 import is from 'is-type-of';
@@ -23,6 +21,7 @@ import { middlewareGuard } from '../lib/middleware/middlewareGuard.js';
 import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.js';
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-aspect';
+import { IOnionSlice, SymbolUseOnionOptions } from 'vona-module-a-onion';
 
 @Bean()
 export class BeanRouter extends BeanBase {

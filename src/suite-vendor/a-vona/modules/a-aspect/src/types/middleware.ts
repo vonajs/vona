@@ -1,5 +1,6 @@
-import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, Next, OmitNever, Onion } from 'vona';
+import { Next, OmitNever } from 'vona';
 import { IDecoratorPipeOptions } from './pipe.js';
+import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}

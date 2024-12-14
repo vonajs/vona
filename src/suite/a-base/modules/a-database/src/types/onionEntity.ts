@@ -1,4 +1,5 @@
-import { OmitNever, Onion } from 'vona';
+import { OmitNever } from 'vona';
+import { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IEntityRecord {}
 

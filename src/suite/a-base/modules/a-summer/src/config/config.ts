@@ -1,5 +1,6 @@
-import { VonaApplication, IModuleConfigBroadcast, IOnionOptionsMeta } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast } from 'vona';
 import { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
+import { IOnionOptionsMeta } from 'vona-module-a-onion';
 
 // broadcasts
 const broadcasts = {

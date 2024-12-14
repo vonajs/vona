@@ -1,4 +1,5 @@
-import { IOnionOptionsEnable, OmitNever, Onion } from 'vona';
+import { OmitNever } from 'vona';
+import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IControllerRecord {}
 

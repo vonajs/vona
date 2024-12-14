@@ -1,6 +1,7 @@
-import { OmitNever, Onion } from 'vona';
+import { OmitNever } from 'vona';
 import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import { IDecoratorEntityOptions } from './onionEntity.js';
+import { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IModelRecord {}
 

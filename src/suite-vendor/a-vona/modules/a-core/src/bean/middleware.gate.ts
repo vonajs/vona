@@ -1,5 +1,6 @@
-import { BeanBase, IOnionOptionsMeta, Next } from 'vona';
+import { BeanBase, Next } from 'vona';
 import { IDecoratorMiddlewareOptionsGlobal, IMiddlewareExecute, Middleware } from 'vona-module-a-aspect';
+import { IOnionOptionsMeta } from 'vona-module-a-onion';
 
 export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptionsGlobal {
   gate?: IOnionOptionsMeta;

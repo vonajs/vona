@@ -1,4 +1,5 @@
-import { appMetadata, MetadataKey, SymbolUseOnionLocal, SymbolUseOnionOptions } from 'vona';
+import { appMetadata, MetadataKey } from 'vona';
+import { SymbolUseOnionLocal, SymbolUseOnionOptions } from 'vona-module-a-onion';
 
 export function UseOnionBase(sceneName: string, middlewareName, options?): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {

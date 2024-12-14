@@ -1,4 +1,4 @@
-import { appMetadata, Constructable, Next, Onion, VonaContext } from 'vona';
+import { appMetadata, Constructable, Next, VonaContext } from 'vona';
 import { extractValue } from './extractValue.js';
 import {
   IDecoratorPipeOptionsGlobal,
@@ -9,6 +9,7 @@ import {
   SymbolRouteHandlersArgumentsMeta,
   SymbolRouteHandlersArgumentsValue,
 } from 'vona-module-a-aspect';
+import { ServiceOnion } from 'vona-module-a-onion';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
   // todo: support fromConfig

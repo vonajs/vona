@@ -1,4 +1,4 @@
-import { TypeUseOnionGlobalBaseOptions } from 'vona';
+import { TypeUseOnionGlobalBaseOptions } from 'vona-module-a-onion';
 import { IInterceptorRecordGlobal } from '../../types/interceptor.js';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 

@@ -1,4 +1,5 @@
-import { IOnionOptionsMeta, VonaApplication } from 'vona';
+import { VonaApplication } from 'vona';
+import { IOnionOptionsMeta } from 'vona-module-a-onion';
 import {
   configAll,
   configAllWithIgnoreNull,

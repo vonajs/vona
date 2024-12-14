@@ -1,10 +1,10 @@
-import { Onion } from 'vona';
+import { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IServiceRecord {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    service: Onion<never, keyof IServiceRecord>;
+    service: ServiceOnion<never, keyof IServiceRecord>;
   }
 }
 

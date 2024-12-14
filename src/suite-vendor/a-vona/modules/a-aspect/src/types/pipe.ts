@@ -1,4 +1,5 @@
-import { Constructable, IOnionOptionsBase, IOnionOptionsDeps, OmitNever, Onion, Type } from 'vona';
+import { Constructable, OmitNever, Type } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
 import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
