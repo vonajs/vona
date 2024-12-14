@@ -3,12 +3,12 @@ import fse from 'fs-extra';
 import path from 'path';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
-import { generateMetaStatus, generateMetaRedlock } from './toolsMetadata/generateMetaStatus.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
+import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourcesMeta.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
-import { getOnionScenesMeta } from 'vona-shared';
+import { getOnionMetasMeta, getOnionScenesMeta } from 'vona-shared';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
 
 declare module '@cabloy/cli' {
@@ -76,17 +76,32 @@ export class CliToolsMetadata extends BeanCliBase {
           scopeResources[sceneName] = contentScopeResource;
         }
       }
+      // metas
+      if (sceneName === 'meta') {
+        const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
+        for (const metaName in onionMetasMeta) {
+          const metaMeta = onionMetasMeta[metaName];
+          if (metaMeta.scopeResource) {
+            const contentScopeResourceMeta = await generateScopeResourcesMeta(
+              metaName,
+              metaMeta,
+              sceneName,
+              sceneMeta,
+              moduleName,
+              modulePath,
+            );
+            if (contentScopeResourceMeta) {
+              content += contentScopeResourceMeta;
+              scopeResources[metaName] = contentScopeResourceMeta;
+            }
+          }
+        }
+      }
       // metadata custom
       if (sceneMeta.metadataCustom) {
         content += await generateMetadataCustom(this, sceneName, sceneMeta, moduleName, modulePath);
       }
     }
-    // meta status
-    const contentMetaStatus = await generateMetaStatus(moduleName, modulePath);
-    content += contentMetaStatus;
-    // meta redlock
-    const contentMetaRedlock = await generateMetaRedlock(moduleName, modulePath);
-    content += contentMetaRedlock;
     // config
     const contentConfig = await generateConfig(modulePath);
     content += contentConfig;
@@ -109,8 +124,6 @@ export class CliToolsMetadata extends BeanCliBase {
       errors: contentErrors,
       locales: contentLocales,
       constants: contentConstants,
-      status: contentMetaStatus,
-      redlock: contentMetaRedlock,
     });
     // empty
     if (!content.trim()) {

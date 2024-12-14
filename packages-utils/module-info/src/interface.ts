@@ -57,6 +57,7 @@ export interface OnionSceneMeta {
 
 export interface OnionMetaMeta {
   module?: IModule;
+  scopeResource?: boolean;
   boilerplate?: string;
   metadataCustom?: string;
 }

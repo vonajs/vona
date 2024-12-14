@@ -6,8 +6,6 @@ export interface GenerateScopeOptions {
   errors: string;
   locales: string;
   constants: string;
-  status: string;
-  redlock: string;
 }
 export async function generateScope(
   moduleName: string,
@@ -46,12 +44,6 @@ export async function generateScope(
   if (options.constants) {
     contentImports.push('TypeModuleConstants');
     contentRecords.push('constant: TypeModuleConstants<typeof constants>;');
-  }
-  if (options.status) {
-    contentRecords.push('status: MetaStatus;');
-  }
-  if (options.redlock) {
-    contentRecords.push('redlock: MetaRedlock;');
   }
   // loop
   for (const sceneName in scopeResources) {

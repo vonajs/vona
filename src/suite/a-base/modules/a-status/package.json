@@ -8,6 +8,7 @@
     },
     "metas": {
       "status": {
+        "scopeResource": true,
         "boilerplate": "cli/boilerplate"
       }
     }

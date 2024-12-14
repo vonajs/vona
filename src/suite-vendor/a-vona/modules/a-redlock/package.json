@@ -6,6 +6,7 @@
     "dependencies": {},
     "metas": {
       "redlock": {
+        "scopeResource": true,
         "boilerplate": "cli/boilerplate"
       }
     }
