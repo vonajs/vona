@@ -44,22 +44,6 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-auth:redlock': never;
-  }
-}
-declare module 'vona-module-a-auth' {
-  export interface MetaRedlock {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/auth.js';
 export * from '../entity/authProvider.js';
@@ -125,6 +109,22 @@ export interface IModuleModel {
   authProvider: ModelAuthProvider;
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-auth:redlock': never;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheAuthProviders.js';
 export * from '../bean/startup.registerPassport.js';

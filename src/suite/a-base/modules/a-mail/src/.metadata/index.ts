@@ -57,22 +57,6 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.status.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-mail:status': never;
-  }
-}
-declare module 'vona-module-a-mail' {
-  export interface MetaStatus {
-    /** @internal */
-    get scope(): ScopeModuleAMail;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/mail.js';
 
@@ -120,6 +104,22 @@ export interface IModuleModel {
   mail: ModelMail;
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-mail:status': never;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface MetaStatus {
+    /** @internal */
+    get scope(): ScopeModuleAMail;
+  }
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.cacheMailScenes.js';
 

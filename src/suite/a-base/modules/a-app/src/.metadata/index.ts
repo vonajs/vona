@@ -16,22 +16,6 @@ declare module 'vona-module-a-app' {
   }
 }
 /** beans: end */
-/** atom: begin */
-export * from '../atom/app.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-app:app': never;
-  }
-}
-declare module 'vona-module-a-app' {
-  export interface AtomApp {
-    /** @internal */
-    get scope(): ScopeModuleAApp;
-  }
-}
-/** atom: end */
 /** entity: begin */
 export * from '../entity/app.js';
 export * from '../entity/appContent.js';
@@ -115,6 +99,22 @@ export interface IModuleModel {
   appFull: ModelAppFull;
 }
 /** model: end */
+/** atom: begin */
+export * from '../atom/app.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-app:app': never;
+  }
+}
+declare module 'vona-module-a-app' {
+  export interface AtomApp {
+    /** @internal */
+    get scope(): ScopeModuleAApp;
+  }
+}
+/** atom: end */
 /** service: begin */
 export * from '../service/resource.js';
 

@@ -36,38 +36,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** beans: end */
-/** atom: begin */
-export * from '../atom/article.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-cms:article': never;
-  }
-}
-declare module 'vona-module-a-cms' {
-  export interface AtomArticle {
-    /** @internal */
-    get scope(): ScopeModuleACms;
-  }
-}
-/** atom: end */
-/** meta: begin */
-export * from '../bean/meta.status.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-cms:status': never;
-  }
-}
-declare module 'vona-module-a-cms' {
-  export interface MetaStatus {
-    /** @internal */
-    get scope(): ScopeModuleACms;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/article.js';
 export * from '../entity/content.js';
@@ -133,6 +101,38 @@ export interface IModuleModel {
   content: ModelContent;
 }
 /** model: end */
+/** atom: begin */
+export * from '../atom/article.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-cms:article': never;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface AtomArticle {
+    /** @internal */
+    get scope(): ScopeModuleACms;
+  }
+}
+/** atom: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-cms:status': never;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface MetaStatus {
+    /** @internal */
+    get scope(): ScopeModuleACms;
+  }
+}
+/** meta: end */
 /** queue: begin */
 export * from '../bean/queue.render.js';
 

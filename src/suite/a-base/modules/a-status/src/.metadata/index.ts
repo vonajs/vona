@@ -16,22 +16,6 @@ declare module 'vona-module-a-status' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-status:redlock': never;
-  }
-}
-declare module 'vona-module-a-status' {
-  export interface MetaRedlock {
-    /** @internal */
-    get scope(): ScopeModuleAStatus;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/status.js';
 
@@ -79,6 +63,22 @@ export interface IModuleModel {
   status: ModelStatus;
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-status:redlock': never;
+  }
+}
+declare module 'vona-module-a-status' {
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleAStatus;
+  }
+}
+/** meta: end */
 /** meta redlock: begin */
 import { MetaRedlock } from '../bean/meta.redlock.js';
 /** meta redlock: end */

@@ -32,36 +32,6 @@ declare module 'vona-module-test-flow' {
   }
 }
 /** beans: end */
-/** atom: begin */
-export * from '../atom/product.js';
-export * from '../atom/purchaseOrder.js';
-export * from '../atom/purchaseOrderDetail.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'test-flow:product': never;
-    'test-flow:purchaseOrder': never;
-    'test-flow:purchaseOrderDetail': never;
-  }
-}
-declare module 'vona-module-test-flow' {
-  export interface AtomProduct {
-    /** @internal */
-    get scope(): ScopeModuleTestFlow;
-  }
-
-  export interface AtomPurchaseOrder {
-    /** @internal */
-    get scope(): ScopeModuleTestFlow;
-  }
-
-  export interface AtomPurchaseOrderDetail {
-    /** @internal */
-    get scope(): ScopeModuleTestFlow;
-  }
-}
-/** atom: end */
 /** entity: begin */
 export * from '../entity/product.js';
 export * from '../entity/purchaseOrder.js';
@@ -145,6 +115,36 @@ export interface IModuleModel {
   purchaseOrderDetail: ModelPurchaseOrderDetail;
 }
 /** model: end */
+/** atom: begin */
+export * from '../atom/product.js';
+export * from '../atom/purchaseOrder.js';
+export * from '../atom/purchaseOrderDetail.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'test-flow:product': never;
+    'test-flow:purchaseOrder': never;
+    'test-flow:purchaseOrderDetail': never;
+  }
+}
+declare module 'vona-module-test-flow' {
+  export interface AtomProduct {
+    /** @internal */
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface AtomPurchaseOrder {
+    /** @internal */
+    get scope(): ScopeModuleTestFlow;
+  }
+
+  export interface AtomPurchaseOrderDetail {
+    /** @internal */
+    get scope(): ScopeModuleTestFlow;
+  }
+}
+/** atom: end */
 /** controller: begin */
 export * from '../controller/flow.js';
 

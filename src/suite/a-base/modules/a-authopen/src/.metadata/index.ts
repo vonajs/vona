@@ -41,22 +41,6 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** beans: end */
-/** atom: begin */
-export * from '../atom/authOpen.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-authopen:authOpen': never;
-  }
-}
-declare module 'vona-module-a-authopen' {
-  export interface AtomAuthOpen {
-    /** @internal */
-    get scope(): ScopeModuleAAuthopen;
-  }
-}
-/** atom: end */
 /** entity: begin */
 export * from '../entity/authOpen.js';
 
@@ -104,6 +88,22 @@ export interface IModuleModel {
   authOpen: ModelAuthOpen;
 }
 /** model: end */
+/** atom: begin */
+export * from '../atom/authOpen.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-authopen:authOpen': never;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface AtomAuthOpen {
+    /** @internal */
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
+/** atom: end */
 /** service: begin */
 export * from '../service/auth.js';
 export * from '../service/authOpen.js';

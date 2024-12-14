@@ -16,22 +16,6 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.status.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'vona-test:status': never;
-  }
-}
-declare module 'vona-module-vona-test' {
-  export interface MetaStatus {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** meta: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
@@ -77,6 +61,22 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** aop: end */
+/** meta: begin */
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'vona-test:status': never;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface MetaStatus {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** meta: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
 

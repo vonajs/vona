@@ -73,22 +73,6 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-flowtask:redlock': never;
-  }
-}
-declare module 'vona-module-a-flowtask' {
-  export interface MetaRedlock {
-    /** @internal */
-    get scope(): ScopeModuleAFlowtask;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/flowNodeStartEventAtomCondition.js';
 export * from '../entity/flowTask.js';
@@ -176,6 +160,22 @@ export interface IModuleModel {
   flowTaskHistory: ModelFlowTaskHistory;
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-flowtask:redlock': never;
+  }
+}
+declare module 'vona-module-a-flowtask' {
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
+/** meta: end */
 /** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowTask.js';

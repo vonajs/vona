@@ -204,122 +204,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** beans: end */
-/** atom: begin */
-export * from '../atom/resource.js';
-export * from '../atom/role.js';
-export * from '../atom/roleFieldsRight.js';
-export * from '../atom/roleFieldsRightSpread.js';
-export * from '../atom/roleResourceRight.js';
-export * from '../atom/roleResourceRightSpread.js';
-export * from '../atom/roleRight.js';
-export * from '../atom/roleRightSpread.js';
-export * from '../atom/user.js';
-export * from '../atom/userAtomRight.js';
-export * from '../atom/userFieldsRight.js';
-export * from '../atom/userResourceRight.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-base:resource': never;
-    'a-base:role': never;
-    'a-base:roleFieldsRight': never;
-    'a-base:roleFieldsRightSpread': never;
-    'a-base:roleResourceRight': never;
-    'a-base:roleResourceRightSpread': never;
-    'a-base:roleRight': never;
-    'a-base:roleRightSpread': never;
-    'a-base:user': never;
-    'a-base:userAtomRight': never;
-    'a-base:userFieldsRight': never;
-    'a-base:userResourceRight': never;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface AtomResource {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRole {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleFieldsRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleFieldsRightSpread {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleResourceRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleResourceRightSpread {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomRoleRightSpread {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUser {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUserAtomRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUserFieldsRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface AtomUserResourceRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-}
-/** atom: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-export * from '../bean/meta.status.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-base:redlock': never;
-    'a-base:status': never;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface MetaRedlock {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MetaStatus {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/atom.js';
 export * from '../entity/atomAction.js';
@@ -938,6 +822,99 @@ export interface IModuleSummerCache {
   roleWhosOfAtomClassAction: SummerCacheRoleWhosOfAtomClassAction;
 }
 /** summerCache: end */
+/** atom: begin */
+export * from '../atom/resource.js';
+export * from '../atom/role.js';
+export * from '../atom/roleFieldsRight.js';
+export * from '../atom/roleFieldsRightSpread.js';
+export * from '../atom/roleResourceRight.js';
+export * from '../atom/roleResourceRightSpread.js';
+export * from '../atom/roleRight.js';
+export * from '../atom/roleRightSpread.js';
+export * from '../atom/user.js';
+export * from '../atom/userAtomRight.js';
+export * from '../atom/userFieldsRight.js';
+export * from '../atom/userResourceRight.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-base:resource': never;
+    'a-base:role': never;
+    'a-base:roleFieldsRight': never;
+    'a-base:roleFieldsRightSpread': never;
+    'a-base:roleResourceRight': never;
+    'a-base:roleResourceRightSpread': never;
+    'a-base:roleRight': never;
+    'a-base:roleRightSpread': never;
+    'a-base:user': never;
+    'a-base:userAtomRight': never;
+    'a-base:userFieldsRight': never;
+    'a-base:userResourceRight': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface AtomResource {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRole {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleFieldsRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleFieldsRightSpread {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleResourceRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleResourceRightSpread {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomRoleRightSpread {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUser {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserAtomRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserFieldsRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface AtomUserResourceRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** atom: end */
 /** middleware: begin */
 export * from '../bean/middleware.auth.js';
 export * from '../bean/middleware.authOpen.js';
@@ -1019,6 +996,29 @@ declare module 'vona-module-a-base' {
   }
 }
 /** aop: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.status.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-base:redlock': never;
+    'a-base:status': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MetaStatus {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** meta: end */
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
 

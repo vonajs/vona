@@ -33,22 +33,6 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.redlock.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-sequence:redlock': never;
-  }
-}
-declare module 'vona-module-a-sequence' {
-  export interface MetaRedlock {
-    /** @internal */
-    get scope(): ScopeModuleASequence;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/sequence.js';
 
@@ -74,6 +58,22 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** entity: end */
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-sequence:redlock': never;
+  }
+}
+declare module 'vona-module-a-sequence' {
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleASequence;
+  }
+}
+/** meta: end */
 /** service: begin */
 export * from '../service/sequence.js';
 

@@ -33,36 +33,6 @@ declare module 'vona-module-a-instance' {
   }
 }
 /** beans: end */
-/** meta: begin */
-export * from '../bean/meta.index.js';
-export * from '../bean/meta.redlock.js';
-export * from '../bean/meta.version.js';
-import { IMetaOptionsIndex } from 'vona';
-import 'vona';
-declare module 'vona' {
-  export interface IMetaRecord {
-    'a-instance:index': IMetaOptionsIndex;
-    'a-instance:redlock': never;
-    'a-instance:version': never;
-  }
-}
-declare module 'vona-module-a-instance' {
-  export interface MetaIndex {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-
-  export interface MetaRedlock {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-
-  export interface MetaVersion {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-}
-/** meta: end */
 /** entity: begin */
 export * from '../entity/instance.js';
 
@@ -110,6 +80,36 @@ export interface IModuleModel {
   instance: ModelInstance;
 }
 /** model: end */
+/** meta: begin */
+export * from '../bean/meta.index.js';
+export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.version.js';
+import { IMetaOptionsIndex } from 'vona';
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-instance:index': IMetaOptionsIndex;
+    'a-instance:redlock': never;
+    'a-instance:version': never;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface MetaIndex {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface MetaVersion {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** meta: end */
 /** service: begin */
 export * from '../service/instance.js';
 

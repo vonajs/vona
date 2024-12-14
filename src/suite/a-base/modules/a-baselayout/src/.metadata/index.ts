@@ -16,22 +16,6 @@ declare module 'vona-module-a-baselayout' {
   }
 }
 /** beans: end */
-/** atom: begin */
-export * from '../atom/layout.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IAtomRecord {
-    'a-baselayout:layout': never;
-  }
-}
-declare module 'vona-module-a-baselayout' {
-  export interface AtomLayout {
-    /** @internal */
-    get scope(): ScopeModuleABaselayout;
-  }
-}
-/** atom: end */
 /** entity: begin */
 export * from '../entity/layout.js';
 export * from '../entity/layoutContent.js';
@@ -115,6 +99,22 @@ export interface IModuleModel {
   layoutFull: ModelLayoutFull;
 }
 /** model: end */
+/** atom: begin */
+export * from '../atom/layout.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IAtomRecord {
+    'a-baselayout:layout': never;
+  }
+}
+declare module 'vona-module-a-baselayout' {
+  export interface AtomLayout {
+    /** @internal */
+    get scope(): ScopeModuleABaselayout;
+  }
+}
+/** atom: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
