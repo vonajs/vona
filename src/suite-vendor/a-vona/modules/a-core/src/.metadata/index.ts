@@ -41,22 +41,6 @@ declare module 'vona-module-a-core' {
   }
 }
 /** guard: end */
-/** interceptor: begin */
-export * from '../bean/interceptor.body.js';
-import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
-import 'vona';
-declare module 'vona' {
-  export interface IInterceptorRecordGlobal {
-    'a-core:body': IInterceptorOptionsBody;
-  }
-}
-declare module 'vona-module-a-core' {
-  export interface InterceptorBody {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-}
-/** interceptor: end */
 /** filter: begin */
 export * from '../bean/filter.error.js';
 import { IFilterOptionsError } from '../bean/filter.error.js';
@@ -73,6 +57,22 @@ declare module 'vona-module-a-core' {
   }
 }
 /** filter: end */
+/** interceptor: begin */
+export * from '../bean/interceptor.body.js';
+import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IInterceptorRecordGlobal {
+    'a-core:body': IInterceptorOptionsBody;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface InterceptorBody {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** interceptor: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
