@@ -9,6 +9,7 @@ import {
   compose,
   composeAsync,
   deepExtend,
+  SymbolProxyDisable,
   VonaApplication,
   VonaContext,
 } from 'vona';
@@ -34,6 +35,7 @@ const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
 
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
+  protected [SymbolProxyDisable]: boolean = true;
   sceneName: string;
   sceneMeta: OnionSceneMeta;
   middlewaresNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
