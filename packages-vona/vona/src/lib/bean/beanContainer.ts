@@ -207,8 +207,6 @@ export class BeanContainer {
     if (!beanFullNameOrBeanClass) return beanInstance;
     // not aop on aop
     if (aop) return beanInstance;
-    // SymbolProxyDisable
-    if (beanInstance[SymbolProxyDisable]) return beanInstance;
     // aop chains
     const _aopChains = this._prepareAopChains(beanFullNameOrBeanClass, beanInstance);
     // no aop
@@ -373,7 +371,7 @@ export class BeanContainer {
     if (host.__aopChains__) return host.__aopChains__;
     // chains
     let chains: MetadataKey[] = [];
-    if (beanOptions && beanOptions.scene !== 'aop') {
+    if (!beanInstance[SymbolProxyDisable] && beanOptions && beanOptions.scene !== 'aop') {
       const aops = this.app.meta.onionAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);

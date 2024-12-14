@@ -11,7 +11,7 @@ export class ServiceFilter extends BeanBase {
     });
   }
 
-  _composeFilters(ctx: VonaContext) {
+  private _composeFilters(ctx: VonaContext) {
     return this.app.bean.onion.filter.compose(
       ctx,
       undefined,
