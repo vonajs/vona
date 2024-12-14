@@ -76,10 +76,6 @@ export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
     return composeAsync(middlewares, __adapter);
   }
 
-  composeSocketAsync() {
-    return this._composeMiddlewaresGlobal();
-  }
-
   get middlewaresEnabled() {
     if (!this[SymbolMiddlewaresEnabled]) {
       this[SymbolMiddlewaresEnabled] = this.middlewaresGlobal.filter(middlewareItem => {
@@ -90,6 +86,10 @@ export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
     return this[SymbolMiddlewaresEnabled];
+  }
+
+  public get composedMiddlewaresGlobal() {
+    return this._composeMiddlewaresGlobal();
   }
 
   private _composeMiddlewaresGlobal(executeCustom?: Function) {
