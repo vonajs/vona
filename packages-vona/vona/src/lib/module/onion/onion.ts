@@ -7,6 +7,7 @@ import {
   IOnionOptionsBase,
   IOnionOptionsEnable,
   IOnionOptionsMeta,
+  SymbolUseOnionLocal,
 } from '../../../types/interface/onion.js';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
@@ -133,13 +134,13 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     if (!ctx.getClass()) return [];
     // middlewaresLocal: controller
     const controllerMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(
-      SymbolUseMiddlewareLocal,
+      SymbolUseOnionLocal,
       ctx.getClass()!,
     )?.[this.sceneName] as string[];
     // middlewaresLocal: action
     const middlewaresLocal: IOnionSlice<OPTIONS, MIDDLEWARENAME>[] = [];
     const actionMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(
-      SymbolUseMiddlewareLocal,
+      SymbolUseOnionLocal,
       ctx.getClassPrototype()!,
       ctx.getHandlerName()!,
     )?.[this.sceneName] as string[];

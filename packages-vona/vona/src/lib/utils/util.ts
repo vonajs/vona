@@ -3,14 +3,7 @@ import path from 'path';
 import { URL } from 'url';
 import * as security from 'egg-security';
 import * as uuid from 'uuid';
-import {
-  VonaContext,
-  IModule,
-  TypeMonkeyName,
-  IModuleInfo,
-  parseInfo,
-  IMiddlewareOptionsMeta,
-} from '../../types/index.js';
+import { VonaContext, IModule, TypeMonkeyName, IModuleInfo, parseInfo } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { compose as _compose, composeAsync as _composeAsync } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';

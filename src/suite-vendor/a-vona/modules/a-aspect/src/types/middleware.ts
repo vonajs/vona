@@ -1,14 +1,6 @@
 import { IOnionOptionsBase, IOnionSlice, Next, OmitNever, Onion } from 'vona';
 import { IDecoratorPipeOptions } from './pipe.js';
 
-export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
-
-export const SymbolUseMiddlewareOptions = Symbol('SymbolUseMiddlewareOptions');
-export type TypeUseMiddlewareGlobalLikeOptions<T> = Omit<
-  T,
-  'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
->;
-
 export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}
 export type IMiddlewareRecord = IMiddlewareRecordGlobal & IMiddlewareRecordLocal;

@@ -1,15 +1,9 @@
-import { appMetadata, MetadataKey } from 'vona';
-import { SymbolUseMiddlewareLocal, SymbolUseMiddlewareOptions } from '../../types/middleware.js';
+import { appMetadata, MetadataKey, SymbolUseOnionLocal, SymbolUseOnionOptions } from 'vona';
 
 export function UseOnionBase(sceneName: string, middlewareName, options?): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const middlewaresOptions = appMetadata.getOwnMetadataMap(false, SymbolUseMiddlewareOptions, target, prop);
-    const middlewaresLocal = appMetadata.getOwnMetadataMap<string, string[]>(
-      false,
-      SymbolUseMiddlewareLocal,
-      target,
-      prop,
-    );
+    const middlewaresOptions = appMetadata.getOwnMetadataMap(false, SymbolUseOnionOptions, target, prop);
+    const middlewaresLocal = appMetadata.getOwnMetadataMap<string, string[]>(false, SymbolUseOnionLocal, target, prop);
     //
     const beanFullName = (middlewareName as string).replace(':', `.${sceneName}.`);
     middlewaresOptions[beanFullName] = options;

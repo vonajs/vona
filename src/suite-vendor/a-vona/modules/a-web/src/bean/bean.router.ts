@@ -6,13 +6,13 @@ import {
   cast,
   Constructable,
   deepExtend,
-  IMiddlewareItem,
   IModuleRoute,
+  IOnionSlice,
   Next,
   RequestMappingMetadata,
   RequestMethod,
   SymbolRequestMappingHandler,
-  SymbolUseMiddlewareOptions,
+  SymbolUseOnionOptions,
   VonaContext,
 } from 'vona';
 import is from 'is-type-of';
@@ -77,7 +77,7 @@ export class BeanRouter extends BeanBase {
       if (typeof middlewares === 'string') middlewares = middlewares.split(',');
       middlewares.forEach(key => {
         if (is.string(key)) {
-          const item = app.meta.onionMiddleware.middlewaresNormal[key];
+          const item = app.bean.onion.middleware.middlewaresNormal[key];
           if (item) {
             middlewaresLocal.push(wrapMiddleware('middleware', item));
           } else {
@@ -120,7 +120,7 @@ export class BeanRouter extends BeanBase {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
-    const controllerMiddlewaresOptions = appMetadata.getMetadata<object>(SymbolUseMiddlewareOptions, controller);
+    const controllerMiddlewaresOptions = appMetadata.getMetadata<object>(SymbolUseOnionOptions, controller);
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -181,11 +181,7 @@ export class BeanRouter extends BeanBase {
     }
 
     // middlewares options
-    const actionMiddlewaresOptions = appMetadata.getMetadata(
-      SymbolUseMiddlewareOptions,
-      controller.prototype,
-      actionKey,
-    );
+    const actionMiddlewaresOptions = appMetadata.getMetadata(SymbolUseOnionOptions, controller.prototype, actionKey);
 
     // route
     const route = {
@@ -232,7 +228,7 @@ export class BeanRouter extends BeanBase {
     // end: controller
     const fnEnd = classControllerMiddleware;
     // compose
-    return this.app.meta.onionMiddleware.composeAsync(ctx, fnStart, fnMid, fnEnd);
+    return this.app.bean.onion.middleware.composeAsync(ctx, fnStart, fnMid, fnEnd);
   }
 
   _registerInner(route, middlewaresLocal) {
@@ -255,7 +251,7 @@ export class BeanRouter extends BeanBase {
     args.push(fnStart);
 
     // middlewares: globals
-    app.meta.onionMiddleware.middlewaresGlobal.forEach(item => {
+    app.bean.onion.middleware.middlewaresGlobal.forEach(item => {
       args.push(wrapMiddleware('middleware', item));
     });
     // middlewares: guard/interceptor/pipes
@@ -302,7 +298,7 @@ function wrapMiddlewareApp(key, route, app) {
   }
 }
 
-function wrapMiddleware(_sceneName: string, item: IMiddlewareItem) {
+function wrapMiddleware(_sceneName: string, item: IOnionSlice) {
   const fn = (ctx, next) => {
     // options
     const options = ctx.meta.getMiddlewareOptions(item.name);
