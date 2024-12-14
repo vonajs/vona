@@ -5,7 +5,7 @@
   "vonaModule": {
     "dependencies": {},
     "onions": {
-      "filter": {
+      "startup": {
         "optionsGlobalInterfaceName": "IDecoratorStartupOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-startup",
         "boilerplate": "cli/boilerplate"
