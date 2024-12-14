@@ -10,6 +10,12 @@
       "a-status": "5.0.0",
       "a-sequence": "5.0.0",
       "a-summer": "5.0.0"
+    },
+    "onions": {
+      "atom": {
+        "sceneIsolate": true,
+        "boilerplate": "cli/atom/boilerplate"
+      }
     }
   },
   "type": "module",

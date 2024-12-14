@@ -1,5 +1,4 @@
-import { Atom } from 'vona';
-import { BeanAtomBase } from 'vona-module-a-base';
+import { Atom, BeanAtomBase } from 'vona-module-a-base';
 
 @Atom()
 export class AtomPartyExpense extends BeanAtomBase {

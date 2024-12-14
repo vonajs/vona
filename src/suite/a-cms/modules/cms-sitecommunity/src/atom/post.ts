@@ -1,4 +1,4 @@
-import { Atom } from 'vona';
+import { Atom } from 'vona-module-a-base';
 import { BeanAtomCmsBase } from 'vona-module-a-cms';
 
 @Atom()

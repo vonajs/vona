@@ -1,3 +1,4 @@
+// todo: remove
 export type TypeModuleMiddlewareRight =
   | { type: 'atom'; atomClass?: string; action: string; stage?: string; checkFlow?: boolean }
   | { type: 'atomClass' }

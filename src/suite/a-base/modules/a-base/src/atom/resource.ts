@@ -1,5 +1,5 @@
-import { Atom } from 'vona';
 import { BeanAtomBase } from '../bean/bean.atomBase_.js';
+import { Atom } from '../lib/atom.js';
 
 @Atom()
 export class AtomResource extends BeanAtomBase {

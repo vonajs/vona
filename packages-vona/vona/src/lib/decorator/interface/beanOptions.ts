@@ -6,7 +6,6 @@ export interface ISceneCustomRecord {}
 
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'scope'
-  | 'atom'
   | 'meta'
   | keyof ISceneCustomRecord
   | TypeDecoratorBeanOptionsScene;
@@ -60,8 +59,6 @@ export interface IDecoratorBeanOptions {
   name?: string;
   // containerScope?: ContainerScope;
 }
-
-export interface IDecoratorAtomOptions {}
 
 // export type IDecoratorBeanOptions<T = unknown> = Omit<
 //   Partial<IDecoratorBeanOptionsBase<T>>,

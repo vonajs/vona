@@ -1,4 +1,4 @@
-import { Atom } from 'vona';
+import { Atom } from '../lib/atom.js';
 import { BeanAtomBase } from '../bean/bean.atomBase_.js';
 
 //

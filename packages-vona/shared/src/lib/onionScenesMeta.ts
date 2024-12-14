@@ -2,9 +2,6 @@ import { IModule, OnionScenesMeta } from '@cabloy/module-info';
 
 export const onionScenesMeta: OnionScenesMeta = {
   // todo: remove
-  atom: {
-    sceneIsolate: true,
-  },
   meta: {
     optionsGlobalInterfaceName: '',
   },

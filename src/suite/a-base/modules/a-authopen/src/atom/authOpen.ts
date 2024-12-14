@@ -1,5 +1,5 @@
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Atom } from 'vona';
+import { Atom } from 'vona-module-a-base';
 import { BeanAtomBase } from 'vona-module-a-base';
 
 import randomize from 'randomatic';
