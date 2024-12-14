@@ -37,6 +37,7 @@ export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName
       // ignore virtual
       contentScopes.push(`
         export interface ${className} {
+          /** @internal */
           get scope(): ${scopeModuleName};
         }`);
     }

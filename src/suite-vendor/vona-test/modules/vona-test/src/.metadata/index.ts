@@ -193,6 +193,7 @@ declare module 'vona-module-a-web' {
 }
 declare module 'vona-module-vona-test' {
   export interface ControllerBean {
+    /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
 

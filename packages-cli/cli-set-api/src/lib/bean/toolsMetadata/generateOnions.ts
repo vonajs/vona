@@ -25,6 +25,7 @@ export async function generateOnions(
     if (!['entity', 'dto'].includes(sceneName)) {
       contentScopes.push(`
         export interface ${className} {
+          /** @internal */
           get scope(): ${scopeModuleName};
         }`);
     }
