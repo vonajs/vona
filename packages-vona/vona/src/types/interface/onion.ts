@@ -27,7 +27,6 @@ export interface IOnionOptionsBase extends IOnionOptionsEnable {
   ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
 }
 
-// todo: 继承自IOnionSlice
 export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
   name: ONIONNAME;
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;

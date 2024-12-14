@@ -8,6 +8,7 @@ import {
   IOnionOptionsEnable,
   IOnionOptionsMeta,
   SymbolUseOnionLocal,
+  IOnionOptionsDeps,
 } from '../../../types/interface/onion.js';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
@@ -30,13 +31,13 @@ const __adapter = (_context, chain) => {
 
 const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
 
-export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
+export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
   sceneName: string;
   sceneMeta: OnionSceneMeta;
-  middlewaresNormal: Record<MIDDLEWARENAME, IOnionSlice<OPTIONS, MIDDLEWARENAME>>;
-  middlewaresGlobal: IOnionSlice<OPTIONS, MIDDLEWARENAME>[];
+  middlewaresNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
+  middlewaresGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
 
-  private [SymbolMiddlewaresEnabled]: IOnionSlice<OPTIONS, MIDDLEWARENAME>[];
+  private [SymbolMiddlewaresEnabled]: IOnionSlice<OPTIONS, ONIONNAME>[];
 
   _cacheMiddlewaresGlobal: Function[];
   _cacheMiddlewaresHandler: Record<string, Function[]> = {};
@@ -87,7 +88,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
           middlewareOptions.enable !== false &&
           cast(this.app.bean).onion.checkOnionSlicOptionsMeta(middlewareOptions.meta)
         );
-      }) as unknown as IOnionSlice<OPTIONS, MIDDLEWARENAME>[];
+      }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
     return this[SymbolMiddlewaresEnabled];
   }
@@ -138,7 +139,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
       ctx.getClass()!,
     )?.[this.sceneName] as string[];
     // middlewaresLocal: action
-    const middlewaresLocal: IOnionSlice<OPTIONS, MIDDLEWARENAME>[] = [];
+    const middlewaresLocal: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     const actionMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
       ctx.getClassPrototype()!,
@@ -163,7 +164,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     return middlewaresLocal;
   }
 
-  getMiddlewareItem(middlewareName: string): IOnionSlice<OPTIONS, MIDDLEWARENAME> {
+  getMiddlewareItem(middlewareName: string): IOnionSlice<OPTIONS, ONIONNAME> {
     return this.middlewaresNormal[middlewareName];
   }
 
@@ -171,7 +172,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     return this.getMiddlewareItem(middlewareName).beanOptions.options as OPTIONS | undefined;
   }
 
-  combineMiddlewareOptions(ctx: VonaContext, item: IOnionSlice<OPTIONS, MIDDLEWARENAME>) {
+  combineMiddlewareOptions(ctx: VonaContext, item: IOnionSlice<OPTIONS, ONIONNAME>) {
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
@@ -214,9 +215,9 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     return options;
   }
 
-  private _handleDependents(middlewares: IOnionSlice<OPTIONS, MIDDLEWARENAME>[]) {
+  private _handleDependents(middlewares: IOnionSlice<OPTIONS, ONIONNAME>[]) {
     for (const middleware of middlewares) {
-      const middlewareOptions = middleware.beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
+      const middlewareOptions = middleware.beanOptions.options as IOnionOptionsDeps<string>;
       let dependents = middlewareOptions.dependents as any;
       if (!dependents) continue;
       if (!Array.isArray(dependents)) {
@@ -227,7 +228,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
         if (!middleware2) {
           throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
         }
-        const options = middleware2.beanOptions.options as IDecoratorMiddlewareOptionsGlobal;
+        const options = middleware2.beanOptions.options as IOnionOptionsDeps<string>;
         if (!options.dependencies) options.dependencies = [];
         if (!Array.isArray(options.dependencies)) {
           options.dependencies = [options.dependencies] as never[];
@@ -239,12 +240,12 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     }
   }
 
-  private _swapMiddlewares(middlewares: IOnionSlice<OPTIONS, MIDDLEWARENAME>[]) {
+  private _swapMiddlewares(middlewares: IOnionSlice<OPTIONS, ONIONNAME>[]) {
     swapDeps(middlewares as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
-        const middlewareOptions = cast<IOnionSlice<OPTIONS, MIDDLEWARENAME>>(item).beanOptions
-          .options as IDecoratorMiddlewareOptionsGlobal;
+        const middlewareOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
+          .options as IOnionOptionsDeps<string>;
         return middlewareOptions.dependencies as any;
       },
     });
@@ -252,21 +253,21 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
 
   private _loadMiddlewares() {
     const middlewaresAll = this._loadMiddlewaresAll();
-    this.middlewaresNormal = {} as Record<MIDDLEWARENAME, IOnionSlice<OPTIONS, MIDDLEWARENAME>>;
+    this.middlewaresNormal = {} as Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
     this.middlewaresGlobal = [];
     // load
     for (const item of middlewaresAll) {
       // normal
       this.middlewaresNormal[item.name] = item;
       // global
-      if (!this.sceneMeta.hasLocal || item.options?.global) {
+      if (!this.sceneMeta.hasLocal || cast(item.beanOptions.options)?.global) {
         this.middlewaresGlobal.push(item);
       }
     }
   }
 
   private _loadMiddlewaresAll() {
-    const middlewaresAll: IOnionSlice<OPTIONS, MIDDLEWARENAME>[] = [];
+    const middlewaresAll: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     for (const module of this.app.meta.modulesArray) {
       // todo: should be removed
       if (this.sceneName === 'middleware') {
@@ -280,12 +281,12 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     return middlewaresAll;
   }
 
-  private _loadMiddlewaresAll_fromMetadata(middlewaresAll: IOnionSlice<OPTIONS, MIDDLEWARENAME>[], module: IModule) {
+  private _loadMiddlewaresAll_fromMetadata(middlewaresAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
     const middlewares = appResource.scenes[this.sceneName]?.[module.info.relativeName];
     if (!middlewares) return;
     for (const key in middlewares) {
       const beanOptions = middlewares[key];
-      const name = key.replace(`.${this.sceneName}.`, ':') as MIDDLEWARENAME;
+      const name = key.replace(`.${this.sceneName}.`, ':') as ONIONNAME;
       // options
       const optionsConfig = this.app.config.onions[beanOptions.scene]?.[name];
       if (beanOptions.optionsPrimitive) {
@@ -294,16 +295,17 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
         beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
       }
       // push
+      // todo: remove options/as any
       middlewaresAll.push({
         name,
         options: beanOptions.options as any,
         beanOptions: beanOptions as any,
-      });
+      } as any);
     }
   }
 
   // todo: should be removed
-  private _loadMiddlewaresAll_fromConfig(middlewaresAll: IOnionSlice<OPTIONS, MIDDLEWARENAME>[], module: IModule) {
+  private _loadMiddlewaresAll_fromConfig(middlewaresAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
     const config = this.app.config.modules[module.info.relativeName];
     if (!config?.middlewares) return;
     for (const middlewareKey in config.middlewares) {
@@ -328,16 +330,17 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
       // options
       beanOptions.options = middlewareConfig;
       // push
+      // todo: remove options/fromConfig/as any
       middlewaresAll.push({
-        name: middlewareKey as MIDDLEWARENAME,
+        name: middlewareKey as ONIONNAME,
         options: middlewareConfig,
         beanOptions: beanOptions as any,
         fromConfig: true,
-      });
+      } as any);
     }
   }
 
-  _wrapMiddleware(item: IOnionSlice<OPTIONS, MIDDLEWARENAME>, executeCustom?: Function) {
+  _wrapMiddleware(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
     const sceneName = this.sceneName;
     const fn = (ctx: VonaContext, next) => {
       let packet;
