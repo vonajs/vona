@@ -1,4 +1,5 @@
-import { IOnionOptionsDeps, IOnionOptionsEnable, OmitNever, Onion } from 'vona';
+import { OmitNever } from 'vona';
+import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IAopRecord {}
 
@@ -11,7 +12,7 @@ export interface IDecoratorAopOptions extends IOnionOptionsEnable, IOnionOptions
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    aop: Onion<IDecoratorAopOptions, keyof IAopRecord>;
+    aop: ServiceOnion<IDecoratorAopOptions, keyof IAopRecord>;
   }
 }
 

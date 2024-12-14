@@ -65,7 +65,7 @@ export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    queue: Onion<IDecoratorQueueOptions, keyof IQueueRecord>;
+    queue: ServiceOnion<IDecoratorQueueOptions, keyof IQueueRecord>;
   }
 }
 

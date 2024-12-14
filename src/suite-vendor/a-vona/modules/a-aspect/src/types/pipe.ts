@@ -55,7 +55,7 @@ export interface RouteHandlerArgumentMeta {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    pipe: Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
+    pipe: ServiceOnion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>;
   }
 }
 

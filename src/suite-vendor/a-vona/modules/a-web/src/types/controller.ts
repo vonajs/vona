@@ -8,7 +8,7 @@ export interface IDecoratorControllerOptions extends IOnionOptionsEnable {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    controller: Onion<IDecoratorControllerOptions, keyof IControllerRecord>;
+    controller: ServiceOnion<IDecoratorControllerOptions, keyof IControllerRecord>;
   }
 }
 

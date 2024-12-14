@@ -12,7 +12,7 @@ export interface IDecoratorSocketPacketOptions
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    socketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
+    socketPacket: ServiceOnion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
   }
 }
 

@@ -8,7 +8,7 @@ export interface IDecoratorEntityOptions {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    entity: Onion<IDecoratorEntityOptions, keyof IEntityRecord>;
+    entity: ServiceOnion<IDecoratorEntityOptions, keyof IEntityRecord>;
   }
 }
 

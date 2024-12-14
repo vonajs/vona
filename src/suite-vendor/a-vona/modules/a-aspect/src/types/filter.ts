@@ -1,5 +1,5 @@
 import { NextSync, OmitNever } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps } from 'vona-module-a-onion';
+import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
@@ -34,7 +34,7 @@ export interface IFilterComposeContext {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    filter: Onion<IDecoratorFilterOptionsGlobal, keyof IFilterRecord>;
+    filter: ServiceOnion<IDecoratorFilterOptionsGlobal, keyof IFilterRecord>;
   }
 }
 

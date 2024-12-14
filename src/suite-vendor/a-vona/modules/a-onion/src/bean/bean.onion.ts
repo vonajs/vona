@@ -1,4 +1,6 @@
-import { Bean, BeanBase, IOnionOptionsMeta, Onion, SymbolProxyDisable } from 'vona';
+import { Bean, BeanBase, SymbolProxyDisable } from 'vona';
+import { IOnionOptionsMeta } from '../types/onion.js';
+import { ServiceOnion } from '../service/onion_.js';
 
 @Bean()
 export class BeanOnion extends BeanBase {
@@ -7,7 +9,7 @@ export class BeanOnion extends BeanBase {
 
   protected __get__(prop: string) {
     if (!this.__instances[prop]) {
-      this.__instances[prop] = this.bean._newBean(Onion, prop);
+      this.__instances[prop] = this.bean._getBeanSelector(ServiceOnion, prop);
     }
     return this.__instances[prop];
   }

@@ -21,12 +21,7 @@ export * from '../service/onion_.js';
 
 import 'vona';
 declare module 'vona' {}
-declare module 'vona-module-a-onion' {
-  export interface ServiceOnion {
-    /** @internal */
-    get scope(): ScopeModuleAOnion;
-  }
-}
+declare module 'vona-module-a-onion' {}
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';

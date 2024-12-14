@@ -6,7 +6,7 @@ export interface IDecoratorMetaOptions {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    meta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
+    meta: ServiceOnion<IDecoratorMetaOptions, keyof IMetaRecord>;
   }
 }
 

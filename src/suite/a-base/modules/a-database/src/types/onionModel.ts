@@ -19,7 +19,7 @@ export interface IDecoratorModelOptions<T extends object = {}> {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    model: Onion<IDecoratorModelOptions<IDecoratorEntityOptions>, keyof IModelRecord>;
+    model: ServiceOnion<IDecoratorModelOptions<IDecoratorEntityOptions>, keyof IModelRecord>;
   }
 }
 

@@ -18,7 +18,7 @@ export interface IDecoratorScheduleOptions extends IOnionOptionsEnable {
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    schedule: Onion<IDecoratorScheduleOptions, keyof IScheduleRecord>;
+    schedule: ServiceOnion<IDecoratorScheduleOptions, keyof IScheduleRecord>;
   }
 }
 

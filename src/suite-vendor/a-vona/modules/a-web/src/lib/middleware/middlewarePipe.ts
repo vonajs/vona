@@ -114,7 +114,7 @@ function composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorat
 }
 
 function _collectArgumentMiddlewares(
-  onionPipe: Onion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>,
+  onionPipe: ServiceOnion<IDecoratorPipeOptionsGlobal, keyof IPipeRecord>,
   argMeta: RouteHandlerArgumentMetaDecorator,
 ) {
   if (!argMeta.pipes) return;
