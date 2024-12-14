@@ -1,4 +1,4 @@
-import { Meta } from 'vona';
+import { Meta } from 'vona-module-a-meta';
 import { BeanStatusBase } from 'vona-module-a-status';
 
 export interface MetaStatus {
