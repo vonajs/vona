@@ -1,12 +1,4 @@
-import {
-  IFilterComposeContext,
-  IFilterJson,
-  SymbolFilterComposeContext,
-  VonaAppInfo,
-  VonaApplication,
-  VonaConfigOptional,
-  VonaContext,
-} from 'vona';
+import { VonaAppInfo, VonaConfigOptional, VonaContext } from 'vona';
 import path from 'path';
 import * as uuid from 'uuid';
 
@@ -255,39 +247,23 @@ export default function (appInfo: VonaAppInfo) {
   config.onerror = {
     appErrorFilter(err: Error, ctx: VonaContext) {
       if (!err) return false;
-      _performErrorFilters(err, ctx, 'log');
+      _performErrorFilters(ctx, err, 'log');
       return false;
     },
     json(err: Error, ctx: VonaContext) {
-      _performErrorFilters(err, ctx, 'json');
+      _performErrorFilters(ctx, err, 'json');
     },
     html(err: Error, ctx: VonaContext) {
-      _performErrorFilters(err, ctx, 'html');
+      _performErrorFilters(ctx, err, 'html');
     },
   };
 
   return config;
 }
 
-function _performErrorFilters(err: Error, ctx: VonaContext, method: string) {
-  return ctx.app.ctxStorage.run(ctx as any, () => {
-    ctx[SymbolFilterComposeContext] = { err, method };
-    _composeFilters(ctx.app)(ctx);
-  });
-}
-
-function _composeFilters(app: VonaApplication) {
-  return app.meta.onionFilter.compose(
-    app.ctx,
-    undefined,
-    undefined,
-    undefined,
-    (beanInstance: IFilterJson, options, next) => {
-      const filterContext: IFilterComposeContext = app.ctx[SymbolFilterComposeContext];
-      if (!beanInstance[filterContext.method]) return next();
-      return beanInstance[filterContext.method](filterContext.err, options, next);
-    },
-  );
+function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
+  const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as any;
+  return beanFilter.performErrorFilters(ctx, err, method);
 }
 
 function getFullPath(ctx, dir, filename, _options) {
