@@ -135,29 +135,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** atom: end */
-/** startup: begin */
-export * from '../bean/startup.startupAll.js';
-export * from '../bean/startup.startupInstance.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'test-party:startupAll': IDecoratorStartupOptions;
-    'test-party:startupInstance': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface StartupStartupAll {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface StartupStartupInstance {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** startup: end */
 /** entity: begin */
 export * from '../entity/party.js';
 export * from '../entity/partyExpense.js';
@@ -262,6 +239,29 @@ declare module 'vona-module-test-party' {
   }
 }
 /** aop: end */
+/** startup: begin */
+export * from '../bean/startup.startupAll.js';
+export * from '../bean/startup.startupInstance.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'test-party:startupAll': IDecoratorStartupOptions;
+    'test-party:startupInstance': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface StartupStartupAll {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface StartupStartupInstance {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/test.js';
 

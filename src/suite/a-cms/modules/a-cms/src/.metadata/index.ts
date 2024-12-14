@@ -68,22 +68,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** meta: end */
-/** startup: begin */
-export * from '../bean/startup.registerAllWatchers.js';
-
-import { IDecoratorStartupOptions } from 'vona';
-declare module 'vona' {
-  export interface IStartupRecord {
-    'a-cms:registerAllWatchers': IDecoratorStartupOptions;
-  }
-}
-declare module 'vona-module-a-cms' {
-  export interface StartupRegisterAllWatchers {
-    /** @internal */
-    get scope(): ScopeModuleACms;
-  }
-}
-/** startup: end */
 /** entity: begin */
 export * from '../entity/article.js';
 export * from '../entity/content.js';
@@ -171,6 +155,22 @@ export interface IModuleQueue {
   render: QueueRender;
 }
 /** queue: end */
+/** startup: begin */
+export * from '../bean/startup.registerAllWatchers.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-cms:registerAllWatchers': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-cms' {
+  export interface StartupRegisterAllWatchers {
+    /** @internal */
+    get scope(): ScopeModuleACms;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/build.js';
 export * from '../service/render.js';
