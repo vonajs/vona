@@ -10,6 +10,7 @@ import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
 import { getOnionMetasMeta, getOnionScenesMeta } from 'vona-shared';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -73,7 +74,7 @@ export class CliToolsMetadata extends BeanCliBase {
         const contentScopeResource = await generateScopeResources(sceneName, sceneMeta, moduleName, modulePath);
         if (contentScopeResource) {
           content += contentScopeResource;
-          scopeResources[sceneName] = contentScopeResource;
+          scopeResources[sceneName] = `IModule${toUpperCaseFirstChar(sceneName)}`;
         }
       }
       // metas
@@ -92,7 +93,7 @@ export class CliToolsMetadata extends BeanCliBase {
             );
             if (contentScopeResourceMeta) {
               content += contentScopeResourceMeta;
-              scopeResources[metaName] = contentScopeResourceMeta;
+              scopeResources[metaName] = `Meta${toUpperCaseFirstChar(metaName)}`;
             }
           }
         }
