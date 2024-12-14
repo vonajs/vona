@@ -7,8 +7,6 @@ export interface ISceneCustomRecord {}
 export type TypeDecoratorBeanOptionsSceneBase =
   | 'scope'
   | 'atom'
-  | 'socketConnection'
-  | 'socketPacket'
   | 'meta'
   | keyof ISceneCustomRecord
   | TypeDecoratorBeanOptionsScene;

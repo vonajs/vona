@@ -11,11 +11,7 @@ import {
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
   EnumAppEvent,
-  IDecoratorSocketConnectionOptions,
-  IDecoratorSocketPacketOptions,
   IDecoratorMetaOptions,
-  ISocketConnectionRecord,
-  ISocketPacketRecord,
   IMetaRecord,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
@@ -56,8 +52,6 @@ export class AppMeta extends BeanSimple {
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //
-  onionSocketConnection: Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>;
-  onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
   onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
   //
   broadcasts: Record<string, any>;

@@ -3,7 +3,19 @@
   "version": "5.0.0",
   "title": "a-socket",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "socketConnection": {
+        "optionsGlobalInterfaceName": "IDecoratorSocketConnectionOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-socket",
+        "boilerplate": "cli/socketConnection/boilerplate"
+      },
+      "socketPacket": {
+        "optionsGlobalInterfaceName": "IDecoratorSocketPacketOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-socket",
+        "boilerplate": "cli/socketPacket/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
@@ -25,7 +37,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}

@@ -13,8 +13,6 @@ const __boilerplates = {
   metaVersion: 'metaVersion',
   metaStatus: 'metaStatus',
   metaRedlock: 'metaRedlock',
-  socketConnection: 'socketConnection',
-  socketPacket: 'socketPacket',
 };
 
 declare module '@cabloy/cli' {

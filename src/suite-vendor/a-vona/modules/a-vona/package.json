@@ -11,6 +11,7 @@
       "a-queue": "5.0.0",
       "a-redlock": "5.0.0",
       "a-schedule": "5.0.0",
+      "a-socket": "5.0.0",
       "a-startup": "5.0.0",
       "a-swagger": "5.0.0",
       "a-validator": "5.0.0",

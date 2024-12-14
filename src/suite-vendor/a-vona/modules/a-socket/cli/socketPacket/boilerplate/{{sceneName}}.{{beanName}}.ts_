@@ -1,4 +1,5 @@
-import { BeanBase, IDecoratorSocketPacketOptions, ISocketPacketExecute, Next, SocketPacket } from 'vona';
+import { BeanBase, Next } from 'vona';
+import { IDecoratorSocketPacketOptions, ISocketPacketExecute, SocketPacket } from 'vona-module-a-socket';
 
 export interface ISocketPacketOptions<%=argv.beanNameCapitalize%> extends IDecoratorSocketPacketOptions {}
 

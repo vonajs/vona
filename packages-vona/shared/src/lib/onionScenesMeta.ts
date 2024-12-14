@@ -5,12 +5,6 @@ export const onionScenesMeta: OnionScenesMeta = {
   atom: {
     sceneIsolate: true,
   },
-  socketConnection: {
-    optionsGlobalInterfaceName: 'IDecoratorSocketConnectionOptions',
-  },
-  socketPacket: {
-    optionsGlobalInterfaceName: 'IDecoratorSocketPacketOptions',
-  },
   meta: {
     optionsGlobalInterfaceName: '',
   },

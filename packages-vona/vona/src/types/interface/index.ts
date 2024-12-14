@@ -3,5 +3,3 @@ export * from './meta.js';
 export * from './module.js';
 export * from './monkey.js';
 export * from './onion.js';
-export * from './socketConnection.js';
-export * from './socketPacket.js';

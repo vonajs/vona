@@ -1,4 +1,5 @@
-import { BeanBase, SocketConnection, ISocketConnectionExecute, IDecoratorSocketConnectionOptions, Next } from 'vona';
+import { BeanBase, Next } from 'vona';
+import { IDecoratorSocketConnectionOptions, ISocketConnectionExecute, SocketConnection } from 'vona-module-a-socket';
 
 export interface ISocketConnectionOptionsAuth extends IDecoratorSocketConnectionOptions {}
 
