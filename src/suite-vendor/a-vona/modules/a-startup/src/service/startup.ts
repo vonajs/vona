@@ -1,11 +1,4 @@
-import {
-  BeanBase,
-  cast,
-  IDecoratorStartupOptions,
-  IInstanceStartupOptions,
-  IMiddlewareItem,
-  IStartupExecute,
-} from 'vona';
+import { BeanBase, cast, IDecoratorStartupOptions, IInstanceStartupOptions, IOnionSlice, IStartupExecute } from 'vona';
 import path from 'path';
 import fse from 'fs-extra';
 import { Service } from 'vona-module-a-web';
@@ -98,7 +91,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   async _runStartupLock(
-    startup: IMiddlewareItem<IDecoratorStartupOptions>,
+    startup: IOnionSlice<IDecoratorStartupOptions>,
     subdomain?: string,
     options?: IInstanceStartupOptions,
   ) {
@@ -117,7 +110,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   async _runStartupInner(
-    startup: IMiddlewareItem<IDecoratorStartupOptions>,
+    startup: IOnionSlice<IDecoratorStartupOptions>,
     subdomain?: string,
     options?: IInstanceStartupOptions,
   ) {

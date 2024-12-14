@@ -1,6 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Middleware } from 'vona-module-a-aspect';
 
-@Bean({ scene: 'middleware' })
+@Middleware()
 export class MiddlewareTest extends BeanBase {
   async execute(_options, next) {
     if (!this.ctx.app.meta.isTest) this.app.throw(403);

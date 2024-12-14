@@ -1,6 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Middleware } from 'vona-module-a-aspect';
 
-@Bean({ scene: 'middleware' })
+@Middleware()
 export class MiddlewareHttpLog extends BeanBase {
   async execute(_options, next) {
     await next();

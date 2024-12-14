@@ -1,4 +1,4 @@
-import { TypeUseOnionGlobalBaseOptions } from '../../types/middleware.js';
+import { TypeUseOnionGlobalBaseOptions } from 'vona';
 import { IPipeRecordGlobal } from '../../types/pipe.js';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 

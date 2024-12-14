@@ -1,5 +1,5 @@
+import { TypeUseOnionGlobalBaseOptions } from 'vona';
 import { IInterceptorRecordGlobal } from '../../types/interceptor.js';
-import { TypeUseOnionGlobalBaseOptions } from '../../types/middleware.js';
 import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 
 export function UseInterceptorGlobal<T extends keyof IInterceptorRecordGlobal>(

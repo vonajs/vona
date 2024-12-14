@@ -1,6 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Middleware } from 'vona-module-a-aspect';
 
-@Bean({ scene: 'middleware' })
+@Middleware()
 export class MiddlewareInner extends BeanBase {
   async execute(_options, next) {
     if (!this.ctx.innerAccess) this.app.throw(403);

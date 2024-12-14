@@ -1,5 +1,6 @@
-import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+import { IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware } from 'vona-module-a-aspect';
 import { TransactionIsolationLevels } from '../types/transaction.js';
+import { BeanBase, Next } from 'vona';
 
 export interface IMiddlewareOptionsTransaction extends IDecoratorMiddlewareOptions {
   isolationLevel: TransactionIsolationLevels;

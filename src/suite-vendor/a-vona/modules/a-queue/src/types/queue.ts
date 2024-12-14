@@ -1,6 +1,6 @@
 import * as Bull from 'bullmq';
 import Redlock from 'redlock';
-import { ILocalInfos, IMiddlewareBaseEnable, OmitNever, Onion } from 'vona';
+import { ILocalInfos, IOnionOptionsEnable, OmitNever, Onion } from 'vona';
 import { INewCtxExtraData } from 'vona-module-a-executor';
 
 export interface IQueuePushOptions {
@@ -52,7 +52,7 @@ export interface IQueueCallbacks {
 
 export interface IQueueRecord {}
 
-export interface IDecoratorQueueOptions extends IMiddlewareBaseEnable {
+export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
   concurrency?: boolean;
   transaction?: boolean;
   options?: {

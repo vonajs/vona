@@ -1,4 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast, IMiddlewareOptionsMeta } from 'vona';
+import { VonaApplication, IModuleConfigBroadcast, IOnionOptionsMeta } from 'vona';
 import { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
 
 // broadcasts
@@ -40,7 +40,7 @@ export const config = (_app: VonaApplication) => {
     broadcasts,
     summer: {
       enable: true,
-      meta: {} as IMiddlewareOptionsMeta,
+      meta: {} as IOnionOptionsMeta,
       presetDefault: 'all' as TSummerCachePreset,
       preset: {
         redis: configRedis,

@@ -1,4 +1,4 @@
-import { Bean, BeanBase, IOnionSliceOptionsMeta, Onion } from 'vona';
+import { Bean, BeanBase, IOnionOptionsMeta, Onion } from 'vona';
 
 @Bean()
 export class BeanOnion extends BeanBase {
@@ -11,7 +11,7 @@ export class BeanOnion extends BeanBase {
     return this.__instances[prop];
   }
 
-  public checkOnionSlicOptionsMeta(meta?: IOnionSliceOptionsMeta) {
+  public checkOnionSlicOptionsMeta(meta?: IOnionOptionsMeta) {
     // check none
     if (!meta) return true;
     // check flavor

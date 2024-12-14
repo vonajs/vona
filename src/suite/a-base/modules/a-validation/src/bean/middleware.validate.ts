@@ -1,10 +1,11 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Middleware } from 'vona-module-a-aspect';
 
 // request.body
 //   validate: module(optional), validator, schema(optional)
 //   data:
 
-@Bean({ scene: 'middleware' })
+@Middleware()
 export class MiddlewareValidate extends BeanBase {
   async execute(options, next) {
     // must exists

@@ -1,8 +1,8 @@
-import { IMiddlewareBaseEnable, OmitNever, Onion } from 'vona';
+import { IOnionOptionsEnable, OmitNever, Onion } from 'vona';
 
 export interface IControllerRecord {}
 
-export interface IDecoratorControllerOptions extends IMiddlewareBaseEnable {
+export interface IDecoratorControllerOptions extends IOnionOptionsEnable {
   path?: string;
 }
 

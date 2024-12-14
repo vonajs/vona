@@ -1,4 +1,4 @@
-import { IMiddlewareBaseEnable, OmitNever, Onion } from 'vona';
+import { IOnionOptionsEnable, OmitNever, Onion } from 'vona';
 
 export interface ISummerCacheRecord {}
 
@@ -21,7 +21,7 @@ export interface ISummerCacheMGet<KEY, DATA> {
 export type TSummerCachePreset = 'redis' | 'all' | 'redisWithIgnoreNull' | 'allWithIgnoreNull';
 export type TSummerCacheMode = 'all' | 'mem' | 'redis';
 
-export interface IDecoratorSummerCacheOptions extends IMiddlewareBaseEnable {
+export interface IDecoratorSummerCacheOptions extends IOnionOptionsEnable {
   preset?: TSummerCachePreset;
   mode?: TSummerCacheMode;
   mem?: {
