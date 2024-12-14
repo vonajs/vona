@@ -1,4 +1,4 @@
-import { ConfigInstanceBase } from '../config/instance.js';
+import { ConfigInstanceBase, OmitNever, Onion } from 'vona';
 
 export interface IMetaRecord {}
 
@@ -39,4 +39,20 @@ export interface IMetaVersionInit {
 
 export interface IMetaVersionTest {
   test(options: IMetaVersionTestOptions): Promise<void>;
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    meta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    meta: OmitNever<IMetaRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    meta: never;
+  }
 }

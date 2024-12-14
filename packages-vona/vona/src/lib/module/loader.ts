@@ -1,6 +1,5 @@
 import { AppMeta } from '../core/meta.js';
 import { ModuleTools } from './module.js';
-import loadOnions from './onion.js';
 import loadConfig from './config.js';
 import loadModuleMeta from './moduleMeta.js';
 import loadLocales from './locales.js';
@@ -37,7 +36,6 @@ export class ModuleLoader extends BeanSimple {
 
     if (meta.inApp) {
       await loadConfig(app, modules);
-      loadOnions(app);
       await loadModuleMeta(app, modules);
       loadBeans(app);
       loadLocales(app, modules);
@@ -49,7 +47,6 @@ export class ModuleLoader extends BeanSimple {
       loadReload(app);
     } else {
       await loadConfig(app, modules);
-      loadOnions(app);
       await loadModuleMeta(app, modules);
       loadClusterAgent(app);
       loadReload(app);

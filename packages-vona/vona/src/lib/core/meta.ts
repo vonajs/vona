@@ -11,13 +11,10 @@ import {
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
   EnumAppEvent,
-  IDecoratorMetaOptions,
-  IMetaRecord,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
-import { Onion } from '../module/onion/onion.js';
 import { BeanScopeContainer, AppLocale, ErrorClass, IModuleLocaleText, createAppText } from '../bean/index.js';
 
 export class AppMeta extends BeanSimple {
@@ -51,8 +48,6 @@ export class AppMeta extends BeanSimple {
   metas: Record<string, IModuleMeta>;
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
-  //
-  onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
   //
   broadcasts: Record<string, any>;
   //
