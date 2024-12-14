@@ -1,5 +1,5 @@
 import { ConfigInstanceBase } from '../config/instance.js';
-import { IOnionSliceEnable } from './onion.js';
+import { IOnionOptionsEnable } from './onion.js';
 
 export interface IStartupRecord {}
 
@@ -7,7 +7,7 @@ export interface IStartupExecute {
   execute(options?: IInstanceStartupOptions): Promise<void>;
 }
 
-export interface IDecoratorStartupOptions extends IOnionSliceEnable {
+export interface IDecoratorStartupOptions extends IOnionOptionsEnable {
   instance?: boolean;
   debounce?: boolean | number;
   transaction?: boolean;

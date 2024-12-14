@@ -1,4 +1,4 @@
-import { IOnionSliceBase, Next, OmitNever, Onion } from 'vona';
+import { IOnionOptionsBase, Next, OmitNever, Onion } from 'vona';
 
 export interface IGuardRecordGlobal {}
 export interface IGuardRecordLocal {}
@@ -12,7 +12,7 @@ export interface IDecoratorGuardOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorGuardOptionsGlobal extends IOnionSliceBase {
+export interface IDecoratorGuardOptionsGlobal extends IOnionOptionsBase {
   global: true;
   dependencies?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
   dependents?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;

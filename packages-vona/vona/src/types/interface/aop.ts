@@ -1,10 +1,10 @@
-import { IOnionSliceEnable } from './onion.js';
+import { IOnionOptionsEnable } from './onion.js';
 
 export interface IAopRecord {}
 
 export type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 
-export interface IDecoratorAopOptions extends IOnionSliceEnable {
+export interface IDecoratorAopOptions extends IOnionOptionsEnable {
   match?: TypeDecoratorAopOptionsMatch;
   ignore?: TypeDecoratorAopOptionsMatch;
   dependencies?: (keyof IAopRecord)[] | keyof IAopRecord;

@@ -2,17 +2,17 @@ import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 import { VonaContext } from '../context/index.js';
 import { IDecoratorBeanOptionsBase } from '../../lib/decorator/interface/beanOptions.js';
 
-export interface IOnionSliceEnable {
+export interface IOnionOptionsEnable {
   enable?: boolean;
-  meta?: IOnionSliceOptionsMeta;
+  meta?: IOnionOptionsMeta;
 }
 
-export interface IOnionSliceOptionsMeta {
+export interface IOnionOptionsMeta {
   flavor?: VonaMetaFlavor | VonaMetaFlavor[];
   mode?: VonaMetaMode | VonaMetaMode[];
 }
 
-export interface IOnionSliceBase extends IOnionSliceEnable {
+export interface IOnionOptionsBase extends IOnionOptionsEnable {
   match?: ((ctx: VonaContext) => boolean) | RegExp | string;
   ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
 }

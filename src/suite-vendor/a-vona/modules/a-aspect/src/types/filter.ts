@@ -1,4 +1,4 @@
-import { IOnionSliceBase, NextSync, OmitNever, Onion } from 'vona';
+import { IOnionOptionsBase, NextSync, OmitNever, Onion } from 'vona';
 
 export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
@@ -20,7 +20,7 @@ export interface IDecoratorFilterOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorFilterOptionsGlobal extends IOnionSliceBase {
+export interface IDecoratorFilterOptionsGlobal extends IOnionOptionsBase {
   global: true;
   dependencies?: (keyof IFilterRecordGlobal)[] | keyof IFilterRecordGlobal;
   dependents?: (keyof IFilterRecordGlobal)[] | keyof IFilterRecordGlobal;

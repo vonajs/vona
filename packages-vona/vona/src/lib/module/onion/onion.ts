@@ -4,9 +4,9 @@ import pathMatching from 'egg-path-matching';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import {
   IOnionSlice,
-  IOnionSliceBase,
-  IOnionSliceEnable,
-  IOnionSliceOptionsMeta,
+  IOnionOptionsBase,
+  IOnionOptionsEnable,
+  IOnionOptionsMeta,
 } from '../../../types/interface/onion.js';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
@@ -81,7 +81,7 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
   get middlewaresEnabled() {
     if (!this[SymbolMiddlewaresEnabled]) {
       this[SymbolMiddlewaresEnabled] = this.middlewaresGlobal.filter(middlewareItem => {
-        const middlewareOptions = middlewareItem.beanOptions.options as IOnionSliceEnable;
+        const middlewareOptions = middlewareItem.beanOptions.options as IOnionOptionsEnable;
         return (
           middlewareOptions.enable !== false &&
           cast(this.app.bean).onion.checkOnionSlicOptionsMeta(middlewareOptions.meta)
@@ -401,11 +401,11 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
   }
 }
 
-function middlewareMatchMeta(app: VonaApplication, meta?: IOnionSliceOptionsMeta) {
+function middlewareMatchMeta(app: VonaApplication, meta?: IOnionOptionsMeta) {
   return cast(app.bean).onion.checkOnionSlicOptionsMeta(meta);
 }
 
-function middlewareMatch(ctx: VonaContext, options: IOnionSliceBase) {
+function middlewareMatch(ctx: VonaContext, options: IOnionOptionsBase) {
   if (!options.match && !options.ignore) {
     return true;
   }
