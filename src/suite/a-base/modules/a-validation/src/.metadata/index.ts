@@ -28,7 +28,7 @@ declare module 'vona-module-a-validation' {
 export * from '../bean/middleware.validate.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordLocal {
     'a-validation:validate': never;
   }

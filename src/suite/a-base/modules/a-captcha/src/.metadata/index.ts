@@ -20,7 +20,7 @@ declare module 'vona-module-a-captcha' {
 export * from '../bean/middleware.captchaVerify.js';
 
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordLocal {
     'a-captcha:captchaVerify': never;
   }

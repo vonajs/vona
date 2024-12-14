@@ -62,7 +62,7 @@ declare module 'vona-module-a-database' {
 export * from '../bean/middleware.transaction.js';
 import { IMiddlewareOptionsTransaction } from '../bean/middleware.transaction.js';
 import 'vona';
-declare module 'vona' {
+declare module 'vona-module-a-aspect' {
   export interface IMiddlewareRecordLocal {
     'a-database:transaction': IMiddlewareOptionsTransaction;
   }

@@ -297,71 +297,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** atom: end */
-/** middleware: begin */
-export * from '../bean/middleware.auth.js';
-export * from '../bean/middleware.authOpen.js';
-export * from '../bean/middleware.httpLog.js';
-export * from '../bean/middleware.inner.js';
-export * from '../bean/middleware.jsonp.js';
-export * from '../bean/middleware.right.js';
-export * from '../bean/middleware.test.js';
-export * from '../bean/middleware.transaction.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMiddlewareRecordLocal {
-    'a-base:auth': never;
-    'a-base:authOpen': never;
-    'a-base:httpLog': never;
-    'a-base:inner': never;
-    'a-base:jsonp': never;
-    'a-base:right': never;
-    'a-base:test': never;
-    'a-base:transaction': never;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface MiddlewareAuth {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareAuthOpen {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareHttpLog {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareInner {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareJsonp {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareRight {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareTest {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface MiddlewareTransaction {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-}
-/** middleware: end */
 /** socketConnection: begin */
 export * from '../bean/socketConnection.auth.js';
 import { ISocketConnectionOptionsAuth } from '../bean/socketConnection.auth.js';
@@ -1065,6 +1000,71 @@ export interface IModuleSummerCache {
   roleWhosOfAtomClassAction: SummerCacheRoleWhosOfAtomClassAction;
 }
 /** summerCache: end */
+/** middleware: begin */
+export * from '../bean/middleware.auth.js';
+export * from '../bean/middleware.authOpen.js';
+export * from '../bean/middleware.httpLog.js';
+export * from '../bean/middleware.inner.js';
+export * from '../bean/middleware.jsonp.js';
+export * from '../bean/middleware.right.js';
+export * from '../bean/middleware.test.js';
+export * from '../bean/middleware.transaction.js';
+
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IMiddlewareRecordLocal {
+    'a-base:auth': never;
+    'a-base:authOpen': never;
+    'a-base:httpLog': never;
+    'a-base:inner': never;
+    'a-base:jsonp': never;
+    'a-base:right': never;
+    'a-base:test': never;
+    'a-base:transaction': never;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface MiddlewareAuth {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareAuthOpen {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareHttpLog {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareInner {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareJsonp {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareRight {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareTest {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface MiddlewareTransaction {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** middleware: end */
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
 

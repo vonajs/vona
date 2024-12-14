@@ -1,46 +1,3 @@
-/** middleware: begin */
-export * from '../bean/middleware.development.js';
-export * from '../bean/middleware.gate.js';
-import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
-import { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
-import 'vona';
-declare module 'vona' {
-  export interface IMiddlewareRecordGlobal {
-    'a-core:gate': IMiddlewareOptionsGate;
-  }
-
-  export interface IMiddlewareRecordLocal {
-    'a-core:development': IMiddlewareOptionsDevelopment;
-  }
-}
-declare module 'vona-module-a-core' {
-  export interface MiddlewareDevelopment {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-
-  export interface MiddlewareGate {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-}
-/** middleware: end */
-/** guard: begin */
-export * from '../bean/guard.user.js';
-import { IGuardOptionsUser } from '../bean/guard.user.js';
-import 'vona';
-declare module 'vona-module-a-aspect' {
-  export interface IGuardRecordGlobal {
-    'a-core:user': IGuardOptionsUser;
-  }
-}
-declare module 'vona-module-a-core' {
-  export interface GuardUser {
-    /** @internal */
-    get scope(): ScopeModuleACore;
-  }
-}
-/** guard: end */
 /** filter: begin */
 export * from '../bean/filter.error.js';
 import { IFilterOptionsError } from '../bean/filter.error.js';
@@ -73,6 +30,49 @@ declare module 'vona-module-a-core' {
   }
 }
 /** interceptor: end */
+/** guard: begin */
+export * from '../bean/guard.user.js';
+import { IGuardOptionsUser } from '../bean/guard.user.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IGuardRecordGlobal {
+    'a-core:user': IGuardOptionsUser;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface GuardUser {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** guard: end */
+/** middleware: begin */
+export * from '../bean/middleware.development.js';
+export * from '../bean/middleware.gate.js';
+import { IMiddlewareOptionsDevelopment } from '../bean/middleware.development.js';
+import { IMiddlewareOptionsGate } from '../bean/middleware.gate.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IMiddlewareRecordGlobal {
+    'a-core:gate': IMiddlewareOptionsGate;
+  }
+
+  export interface IMiddlewareRecordLocal {
+    'a-core:development': IMiddlewareOptionsDevelopment;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface MiddlewareDevelopment {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+
+  export interface MiddlewareGate {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** middleware: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

@@ -135,29 +135,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** atom: end */
-/** middleware: begin */
-export * from '../bean/middleware.testInterception.js';
-export * from '../bean/middleware.testRestructuring.js';
-
-import 'vona';
-declare module 'vona' {
-  export interface IMiddlewareRecordLocal {
-    'test-party:testInterception': never;
-    'test-party:testRestructuring': never;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface MiddlewareTestInterception {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface MiddlewareTestRestructuring {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** middleware: end */
 /** aop: begin */
 export * from '../bean/aop.atom.js';
 
@@ -262,6 +239,29 @@ export interface IModuleModel {
   partyExpense: ModelPartyExpense;
 }
 /** model: end */
+/** middleware: begin */
+export * from '../bean/middleware.testInterception.js';
+export * from '../bean/middleware.testRestructuring.js';
+
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IMiddlewareRecordLocal {
+    'test-party:testInterception': never;
+    'test-party:testRestructuring': never;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface MiddlewareTestInterception {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface MiddlewareTestRestructuring {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** middleware: end */
 /** service: begin */
 export * from '../service/test.js';
 
