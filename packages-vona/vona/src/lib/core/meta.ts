@@ -14,11 +14,9 @@ import {
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorMetaOptions,
-  IDecoratorStartupOptions,
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IMetaRecord,
-  IStartupRecord,
 } from '../../types/index.js';
 import { AppResource, appResource } from './resource.js';
 import { AppMetadata, appMetadata } from './metadata.js';
@@ -61,7 +59,6 @@ export class AppMeta extends BeanSimple {
   onionSocketConnection: Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>;
   onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
   onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
-  onionStartup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;
   //
   broadcasts: Record<string, any>;
   //

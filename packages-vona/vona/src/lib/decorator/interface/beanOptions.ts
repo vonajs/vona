@@ -9,7 +9,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'atom'
   | 'socketConnection'
   | 'socketPacket'
-  | 'startup'
   | 'meta'
   | keyof ISceneCustomRecord
   | TypeDecoratorBeanOptionsScene;

@@ -5,4 +5,3 @@ export * from './monkey.js';
 export * from './onion.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';
-export * from './startup.js';

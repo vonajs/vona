@@ -4,7 +4,6 @@ export * from './createBeanDecorator.js';
 export * from './meta.js';
 export * from './socketConnection.js';
 export * from './socketPacket.js';
-export * from './startup.js';
 export * from './virtual.js';
 export * from './scope.js';
 export * from './use.js';

@@ -14,9 +14,6 @@ export const onionScenesMeta: OnionScenesMeta = {
   meta: {
     optionsGlobalInterfaceName: '',
   },
-  startup: {
-    optionsGlobalInterfaceName: 'IDecoratorStartupOptions',
-  },
 };
 
 let __result: OnionScenesMeta;

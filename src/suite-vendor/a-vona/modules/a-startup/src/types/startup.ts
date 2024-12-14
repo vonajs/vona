@@ -1,5 +1,4 @@
-import { ConfigInstanceBase } from '../config/instance.js';
-import { IOnionOptionsDeps, IOnionOptionsEnable } from './onion.js';
+import { ConfigInstanceBase, IOnionOptionsDeps, IOnionOptionsEnable, OmitNever, Onion } from 'vona';
 
 export interface IStartupRecord {}
 
@@ -17,4 +16,20 @@ export interface IDecoratorStartupOptions extends IOnionOptionsEnable, IOnionOpt
 export interface IInstanceStartupOptions {
   force?: boolean;
   configInstanceBase?: ConfigInstanceBase;
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    startup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    startup: OmitNever<IStartupRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    startup: never;
+  }
 }

@@ -2,11 +2,9 @@ import {
   IDecoratorMetaOptions,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
-  IDecoratorStartupOptions,
   IMetaRecord,
   ISocketConnectionRecord,
   ISocketPacketRecord,
-  IStartupRecord,
   VonaApplication,
 } from '../../types/index.js';
 import { Onion } from './onion/onion.js';
@@ -25,5 +23,4 @@ function loadAll(app: VonaApplication) {
     'socketPacket',
   );
   app.meta.onionMeta = app.bean._newBean(Onion<IDecoratorMetaOptions, keyof IMetaRecord>, 'meta');
-  app.meta.onionStartup = app.bean._newBean(Onion<IDecoratorStartupOptions, keyof IStartupRecord>, 'startup');
 }

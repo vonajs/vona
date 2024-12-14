@@ -3,7 +3,14 @@
   "version": "5.0.0",
   "title": "a-startup",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "filter": {
+        "optionsGlobalInterfaceName": "IDecoratorStartupOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-startup",
+        "boilerplate": "cli/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
@@ -25,7 +32,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}
