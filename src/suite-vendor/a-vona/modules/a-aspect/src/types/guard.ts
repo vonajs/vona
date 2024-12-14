@@ -1,4 +1,4 @@
-import { IMiddlewareBase, Next } from './middleware.js';
+import { IMiddlewareBase, Next, OmitNever, Onion } from 'vona';
 
 export interface IGuardRecordGlobal {}
 export interface IGuardRecordLocal {}
@@ -16,4 +16,20 @@ export interface IDecoratorGuardOptionsGlobal extends IMiddlewareBase {
   global: true;
   dependencies?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
   dependents?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    guard: Onion<IDecoratorGuardOptionsGlobal, keyof IGuardRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    guard: OmitNever<IGuardRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    guard: never;
+  }
 }

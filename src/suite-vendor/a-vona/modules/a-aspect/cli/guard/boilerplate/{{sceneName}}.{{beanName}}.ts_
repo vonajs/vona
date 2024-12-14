@@ -1,4 +1,5 @@
-import { BeanBase, Guard, IDecoratorGuardOptions, IGuardExecute, Next } from 'vona';
+import { BeanBase, Next } from 'vona';
+import { Guard, IDecoratorGuardOptions, IGuardExecute } from 'vona-module-a-aspect';
 
 export interface IGuardOptions<%=argv.beanNameCapitalize%> extends IDecoratorGuardOptions {}
 

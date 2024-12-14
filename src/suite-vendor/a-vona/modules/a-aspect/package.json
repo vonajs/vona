@@ -29,6 +29,14 @@
         "optionsGlobalInterfaceName": "IDecoratorInterceptorOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "cli/interceptor/boilerplate"
+      },
+      "guard": {
+        "hasLocal": true,
+        "optionsRoute": true,
+        "optionsDynamic": true,
+        "optionsGlobalInterfaceName": "IDecoratorGuardOptionsGlobal",
+        "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
+        "boilerplate": "cli/guard/boilerplate"
       }
     }
   },
