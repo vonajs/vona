@@ -1,7 +1,8 @@
-import { Bean, BeanBase, IOnionOptionsMeta, Onion } from 'vona';
+import { Bean, BeanBase, IOnionOptionsMeta, Onion, SymbolProxyDisable } from 'vona';
 
 @Bean()
 export class BeanOnion extends BeanBase {
+  protected [SymbolProxyDisable]: boolean = true;
   private __instances: Record<string, any> = {};
 
   protected __get__(prop: string) {

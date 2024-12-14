@@ -8,8 +8,9 @@ import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';
 import { compose, composeAsync, isNilOrEmptyString } from '../utils/util.js';
 
-const ProxyMagic = Symbol.for('Bean#ProxyMagic');
-const BeanContainerInstances = Symbol.for('Bean#Instances');
+const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
+const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
+export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
 // const BeanInstanceScope = Symbol('BeanInstance#Scope');
 
 export interface BeanContainer extends IBeanRecordGlobal {}
@@ -17,7 +18,7 @@ export interface BeanContainer extends IBeanRecordGlobal {}
 export class BeanContainer {
   private app: VonaApplication;
 
-  private [BeanContainerInstances]: Record<string, unknown> = {};
+  private [SymbolBeanContainerInstances]: Record<string, unknown> = {};
 
   static create(app: VonaApplication) {
     const beanContainer = new BeanContainer(app);
@@ -63,16 +64,16 @@ export class BeanContainer {
     //   not use !selector which maybe is 0
     const isSelectorValid = !isNilOrEmptyString(selector);
     const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
-    if (this[BeanContainerInstances][key] === undefined) {
+    if (this[SymbolBeanContainerInstances][key] === undefined) {
       let beanInstance;
       if (isSelectorValid) {
         beanInstance = this._newBean(fullName as any, selector, ...args);
       } else {
         beanInstance = this._newBean(fullName as any, undefined, ...args);
       }
-      this[BeanContainerInstances][key] = beanInstance;
+      this[SymbolBeanContainerInstances][key] = beanInstance;
     }
-    return this[BeanContainerInstances][key] as T;
+    return this[SymbolBeanContainerInstances][key] as T;
   }
 
   _newBean<T>(A: Constructable<T>, ...args): T;
@@ -206,6 +207,8 @@ export class BeanContainer {
     if (!beanFullNameOrBeanClass) return beanInstance;
     // not aop on aop
     if (aop) return beanInstance;
+    // SymbolProxyDisable
+    if (beanInstance[SymbolProxyDisable]) return beanInstance;
     // aop chains
     const _aopChains = this._prepareAopChains(beanFullNameOrBeanClass, beanInstance);
     // no aop
@@ -378,7 +381,7 @@ export class BeanContainer {
     }
     // magic self
     if (__hasMagicMothod(beanInstance)) {
-      chains.push(ProxyMagic);
+      chains.push(SymbolProxyMagic);
     }
     // hold
     host.__aopChains__ = chains;
@@ -401,7 +404,7 @@ export class BeanContainer {
     const _aopChains = this._getAopChains(beanFullName);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
-      if (aopKey === ProxyMagic) {
+      if (aopKey === SymbolProxyMagic) {
         chains.push([aopKey, methodName]);
       } else {
         const aop: any = this._getBean(aopKey as string as any);
@@ -418,8 +421,8 @@ export class BeanContainer {
 
   private __composeForPropAdapter = (_context, chain) => {
     const [aopKey, methodName] = chain;
-    // ProxyMagic
-    if (aopKey === ProxyMagic) return null;
+    // SymbolProxyMagic
+    if (aopKey === SymbolProxyMagic) return null;
     // chain
     const aop = this._getBean(aopKey);
     if (!aop) throw new Error(`aop not found: ${chain}`);
