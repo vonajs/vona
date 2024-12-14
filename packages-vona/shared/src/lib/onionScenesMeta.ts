@@ -5,18 +5,6 @@ export const onionScenesMeta: OnionScenesMeta = {
   atom: {
     sceneIsolate: true,
   },
-  middleware: {
-    hasLocal: true,
-    optionsRoute: true,
-    optionsDynamic: true,
-    optionsGlobalInterfaceName: 'IDecoratorMiddlewareOptionsGlobal',
-  },
-  guard: {
-    hasLocal: true,
-    optionsRoute: true,
-    optionsDynamic: true,
-    optionsGlobalInterfaceName: 'IDecoratorGuardOptionsGlobal',
-  },
   socketConnection: {
     optionsGlobalInterfaceName: 'IDecoratorSocketConnectionOptions',
   },

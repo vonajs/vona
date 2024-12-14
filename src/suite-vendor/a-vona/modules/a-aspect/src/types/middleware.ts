@@ -1,6 +1,5 @@
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
-import { IDecoratorBeanOptionsBase } from '../../lib/index.js';
-import { VonaContext } from '../context/index.js';
+import { IDecoratorBeanOptionsBase, Next, OmitNever, Onion, VonaContext } from 'vona';
 
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
 
@@ -9,10 +8,6 @@ export type TypeUseMiddlewareGlobalLikeOptions<T> = Omit<
   T,
   'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'
 >;
-
-export type FunctionAsync<RESULT> = () => Promise<RESULT>;
-export type Next = () => Promise<any>;
-export type NextSync = () => any;
 
 export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}
@@ -47,12 +42,29 @@ export interface IDecoratorMiddlewareOptionsGlobal extends IMiddlewareBase {
   dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
 }
 
+// todo: 继承自IOnionSlice
 export interface IMiddlewareItem<OPTIONS = unknown, MIDDLEWARENAME = string, T = unknown> {
   name: MIDDLEWARENAME;
   options: IDecoratorMiddlewareOptionsGlobal;
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
   fromConfig?: boolean;
   argumentPipe?: {
-    options?: object; // IDecoratorPipeOptions;
+    options?: object; // todo: IDecoratorPipeOptions;
   };
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    middleware: Onion<IDecoratorMiddlewareOptionsGlobal, keyof IMiddlewareRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    middleware: OmitNever<IMiddlewareRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    middleware: never;
+  }
 }

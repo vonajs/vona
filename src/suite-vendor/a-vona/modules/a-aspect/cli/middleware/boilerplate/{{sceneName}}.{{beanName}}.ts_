@@ -1,4 +1,5 @@
-import { BeanBase, IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware, Next } from 'vona';
+import { BeanBase, Next } from 'vona';
+import { IDecoratorMiddlewareOptions, IMiddlewareExecute, Middleware } from 'vona-module-a-aspect';
 
 export interface IMiddlewareOptions<%=argv.beanNameCapitalize%> extends IDecoratorMiddlewareOptions {}
 

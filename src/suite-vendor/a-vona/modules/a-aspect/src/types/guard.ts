@@ -1,4 +1,5 @@
-import { IMiddlewareBase, Next, OmitNever, Onion } from 'vona';
+import { Next, OmitNever, Onion } from 'vona';
+import { IMiddlewareBase } from './middleware.js';
 
 export interface IGuardRecordGlobal {}
 export interface IGuardRecordLocal {}
