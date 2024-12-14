@@ -1,4 +1,4 @@
-import { Constructable, IOnionOptionsBase, OmitNever, Onion, Type } from 'vona';
+import { Constructable, IOnionOptionsBase, IOnionOptionsDeps, OmitNever, Onion, Type } from 'vona';
 import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
@@ -13,10 +13,8 @@ export interface IDecoratorPipeOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorPipeOptionsGlobal extends IOnionOptionsBase {
+export interface IDecoratorPipeOptionsGlobal extends IOnionOptionsBase, IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   global: true;
-  dependencies?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
-  dependents?: (keyof IPipeRecordGlobal)[] | keyof IPipeRecordGlobal;
 }
 
 export type RouteHandlerArgumentType =

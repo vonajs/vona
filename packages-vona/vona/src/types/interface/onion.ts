@@ -12,6 +12,11 @@ export interface IOnionOptionsEnable {
   meta?: IOnionOptionsMeta;
 }
 
+export interface IOnionOptionsDeps<T> {
+  dependencies?: T[] | T;
+  dependents?: T[] | T;
+}
+
 export interface IOnionOptionsMeta {
   flavor?: VonaMetaFlavor | VonaMetaFlavor[];
   mode?: VonaMetaMode | VonaMetaMode[];
@@ -23,7 +28,7 @@ export interface IOnionOptionsBase extends IOnionOptionsEnable {
 }
 
 // todo: 继承自IOnionSlice
-export interface IOnionSlice<OPTIONS = unknown, SLICENAME = string, T = unknown> {
-  name: SLICENAME;
+export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
+  name: ONIONNAME;
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
 }

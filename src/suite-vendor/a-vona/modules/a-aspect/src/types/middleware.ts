@@ -1,4 +1,4 @@
-import { IOnionOptionsBase, IOnionSlice, Next, OmitNever, Onion } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, Next, OmitNever, Onion } from 'vona';
 import { IDecoratorPipeOptions } from './pipe.js';
 
 export interface IMiddlewareRecordGlobal {}
@@ -13,14 +13,14 @@ export interface IDecoratorMiddlewareOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorMiddlewareOptionsGlobal extends IOnionOptionsBase {
+export interface IDecoratorMiddlewareOptionsGlobal
+  extends IOnionOptionsBase,
+    IOnionOptionsDeps<keyof IMiddlewareRecordGlobal> {
   global: true;
-  dependencies?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
-  dependents?: (keyof IMiddlewareRecordGlobal)[] | keyof IMiddlewareRecordGlobal;
 }
 
-export interface IMiddlewareItem<OPTIONS = unknown, SLICENAME = string, T = unknown>
-  extends IOnionSlice<OPTIONS, SLICENAME, T> {
+export interface IMiddlewareItem<OPTIONS = unknown, ONIONNAME = string, T = unknown>
+  extends IOnionSlice<OPTIONS, ONIONNAME, T> {
   // todo: remove
   options: IDecoratorMiddlewareOptionsGlobal;
   // todo: remove

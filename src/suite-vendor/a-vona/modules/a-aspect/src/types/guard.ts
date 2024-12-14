@@ -1,4 +1,4 @@
-import { IOnionOptionsBase, Next, OmitNever, Onion } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps, Next, OmitNever, Onion } from 'vona';
 
 export interface IGuardRecordGlobal {}
 export interface IGuardRecordLocal {}
@@ -12,10 +12,8 @@ export interface IDecoratorGuardOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorGuardOptionsGlobal extends IOnionOptionsBase {
+export interface IDecoratorGuardOptionsGlobal extends IOnionOptionsBase, IOnionOptionsDeps<keyof IGuardRecordGlobal> {
   global: true;
-  dependencies?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
-  dependents?: (keyof IGuardRecordGlobal)[] | keyof IGuardRecordGlobal;
 }
 
 declare module 'vona-module-a-onion' {

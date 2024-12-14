@@ -181,16 +181,16 @@ export class Onion<OPTIONS, MIDDLEWARENAME extends string> extends BeanSimple {
     // options: route
     //    not use route options for argument pipe
     let optionsRoute;
-    if (!item.argumentPipe && this.sceneMeta.optionsRoute) {
+    if (!cast(item).argumentPipe && this.sceneMeta.optionsRoute) {
       const route = ctx.route?.route;
-      optionsRoute = route?.meta?.[item.fromConfig ? item.name : item.beanOptions.beanFullName];
+      optionsRoute = route?.meta?.[cast(item).fromConfig ? item.name : item.beanOptions.beanFullName];
     }
     // options: argument pipe
-    const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe ? item.argumentPipe?.options : undefined;
+    const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe ? cast(item).argumentPipe?.options : undefined;
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
-      if (item.fromConfig) {
+      if (cast(item).fromConfig) {
         optionsDynamic = ctx.meta.onionsDynamic?.[item.name as any];
       } else {
         optionsDynamic = ctx.meta.onionsDynamic?.[item.beanOptions.scene]?.[item.name];

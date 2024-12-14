@@ -1,4 +1,4 @@
-import { IOnionOptionsBase, NextSync, OmitNever, Onion } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps, NextSync, OmitNever, Onion } from 'vona';
 
 export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
@@ -20,10 +20,8 @@ export interface IDecoratorFilterOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorFilterOptionsGlobal extends IOnionOptionsBase {
+export interface IDecoratorFilterOptionsGlobal extends IOnionOptionsBase, IOnionOptionsDeps<keyof IFilterRecordGlobal> {
   global: true;
-  dependencies?: (keyof IFilterRecordGlobal)[] | keyof IFilterRecordGlobal;
-  dependents?: (keyof IFilterRecordGlobal)[] | keyof IFilterRecordGlobal;
 }
 
 export const SymbolFilterComposeContext = Symbol('SymbolFilterComposeContext');

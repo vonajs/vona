@@ -1,4 +1,4 @@
-import { IOnionOptionsBase, Next, OmitNever, Onion } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps, Next, OmitNever, Onion } from 'vona';
 
 export interface IInterceptorRecordGlobal {}
 export interface IInterceptorRecordLocal {}
@@ -12,10 +12,10 @@ export interface IDecoratorInterceptorOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorInterceptorOptionsGlobal extends IOnionOptionsBase {
+export interface IDecoratorInterceptorOptionsGlobal
+  extends IOnionOptionsBase,
+    IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {
   global: true;
-  dependencies?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
-  dependents?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
 }
 
 declare module 'vona-module-a-onion' {
