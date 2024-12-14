@@ -1,6 +1,7 @@
-import { BeanBase, IMetaOptionsIndex, Meta } from 'vona';
+import { BeanBase } from 'vona';
 import { EntityInstance } from '../entity/instance.js';
 import { tableColumns } from 'vona-module-a-database';
+import { IMetaOptionsIndex, Meta } from 'vona-module-a-meta';
 
 @Meta<IMetaOptionsIndex>({
   indexes: {

@@ -1,4 +1,5 @@
-import { FunctionAsync, Meta } from 'vona';
+import { FunctionAsync } from 'vona';
+import { Meta } from 'vona-module-a-meta';
 import { BeanRedlockBase, IRedlockLockIsolateOptions } from 'vona-module-a-redlock';
 
 export interface MetaRedlock {

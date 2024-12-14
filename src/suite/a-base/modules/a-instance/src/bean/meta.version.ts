@@ -1,4 +1,5 @@
-import { BeanBase, IMetaVersionUpdate, IMetaVersionUpdateOptions, Meta } from 'vona';
+import { BeanBase } from 'vona';
+import { IMetaVersionUpdate, IMetaVersionUpdateOptions, Meta } from 'vona-module-a-meta';
 
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {

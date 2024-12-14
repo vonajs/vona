@@ -84,7 +84,7 @@ export interface IModuleModel {
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.version.js';
-import { IMetaOptionsIndex } from 'vona';
+import { IMetaOptionsIndex } from 'vona-module-a-meta';
 import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
