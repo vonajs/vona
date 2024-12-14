@@ -40,6 +40,9 @@ declare module 'vona-module-a-user' {
   }
 }
 /** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** service: begin */
 export * from '../service/public.js';
 export * from '../service/user.js';
@@ -103,9 +106,6 @@ declare module 'vona-module-a-user' {
   }
 }
 /** controller: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

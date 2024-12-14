@@ -81,6 +81,9 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** startup: begin */
 export * from '../bean/startup.cacheSmsProviders.js';
 
@@ -177,9 +180,6 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** controller: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

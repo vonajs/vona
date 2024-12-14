@@ -236,6 +236,9 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowDef.js';
@@ -349,9 +352,6 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** controller: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';
@@ -389,9 +389,9 @@ export interface ScopeModuleAFlow {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  redlock: MetaRedlock;
   service: IModuleService;
 }
 

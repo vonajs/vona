@@ -120,6 +120,9 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** startup: begin */
 export * from '../bean/startup.cacheMailScenes.js';
 
@@ -182,9 +185,6 @@ declare module 'vona-module-a-mail' {
   }
 }
 /** controller: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -216,9 +216,9 @@ export interface ScopeModuleAMail {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  status: MetaStatus;
   entity: IModuleEntity;
   model: IModuleModel;
+  status: MetaStatus;
   service: IModuleService;
 }
 

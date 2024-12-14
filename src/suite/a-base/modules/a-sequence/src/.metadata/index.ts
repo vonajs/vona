@@ -74,6 +74,9 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** service: begin */
 export * from '../service/sequence.js';
 
@@ -120,9 +123,6 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** controller: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 
@@ -132,8 +132,8 @@ export class ScopeModuleASequence extends BeanScopeBase {}
 export interface ScopeModuleASequence {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
+  redlock: MetaRedlock;
   service: IModuleService;
 }
 

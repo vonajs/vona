@@ -106,6 +106,9 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** controller: begin */
 export * from '../controller/db.js';
 
@@ -122,9 +125,6 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** controller: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -139,8 +139,8 @@ export interface ScopeModuleACache {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
+  redlock: MetaRedlock;
 }
 
 import 'vona';

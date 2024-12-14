@@ -91,9 +91,9 @@ export class ScopeModuleAStatus extends BeanScopeBase {}
 export interface ScopeModuleAStatus {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  redlock: MetaRedlock;
 }
 
 import 'vona';

@@ -1019,6 +1019,12 @@ declare module 'vona-module-a-base' {
   }
 }
 /** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
 
@@ -1374,12 +1380,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** controller: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -1423,11 +1423,11 @@ export interface ScopeModuleABase {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
-  status: MetaStatus;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
   summerCache: IModuleSummerCache;
+  status: MetaStatus;
+  redlock: MetaRedlock;
   queue: IModuleQueue;
   service: IModuleService;
 }

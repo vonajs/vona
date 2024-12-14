@@ -133,6 +133,9 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** meta: end */
+/** meta status: begin */
+import { MetaStatus } from '../bean/meta.status.js';
+/** meta status: end */
 /** queue: begin */
 export * from '../bean/queue.render.js';
 
@@ -265,9 +268,6 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** controller: end */
-/** meta status: begin */
-import { MetaStatus } from '../bean/meta.status.js';
-/** meta status: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -308,9 +308,9 @@ export interface ScopeModuleACms {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  status: MetaStatus;
   entity: IModuleEntity;
   model: IModuleModel;
+  status: MetaStatus;
   queue: IModuleQueue;
   service: IModuleService;
 }

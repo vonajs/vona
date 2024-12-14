@@ -14,6 +14,9 @@ declare module 'vona-module-a-startup' {
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** service: begin */
 export * from '../service/startup.js';
 
@@ -44,9 +47,6 @@ declare module 'vona' {
   }
 }
 /** service: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

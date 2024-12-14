@@ -125,6 +125,9 @@ declare module 'vona-module-a-auth' {
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** startup: begin */
 export * from '../bean/startup.cacheAuthProviders.js';
 export * from '../bean/startup.registerPassport.js';
@@ -185,9 +188,6 @@ declare module 'vona' {
   }
 }
 /** service: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -219,9 +219,9 @@ export interface ScopeModuleAAuth {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  redlock: MetaRedlock;
   service: IModuleService;
 }
 

@@ -176,6 +176,9 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** service: begin */
 export * from '../service/flow.js';
 export * from '../service/flowTask.js';
@@ -269,9 +272,6 @@ declare module 'vona-module-a-flowtask' {
   }
 }
 /** controller: end */
-/** meta redlock: begin */
-import { MetaRedlock } from '../bean/meta.redlock.js';
-/** meta redlock: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -303,9 +303,9 @@ export interface ScopeModuleAFlowtask {
   util: BeanScopeUtil;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  redlock: MetaRedlock;
   entity: IModuleEntity;
   model: IModuleModel;
+  redlock: MetaRedlock;
   service: IModuleService;
 }
 
