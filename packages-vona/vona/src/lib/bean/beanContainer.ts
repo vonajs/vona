@@ -1,4 +1,4 @@
-import { VonaApplication } from '../../types/index.js';
+import { cast, VonaApplication } from '../../types/index.js';
 import { Constructable } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { MetadataKey } from '../core/metadata.js';
@@ -94,7 +94,7 @@ export class BeanContainer {
     // instance
     const beanInstance = this._createBeanInstance(beanOptions.beanFullName, beanOptions.beanClass, args);
     // patch
-    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, beanOptions.scene === 'aop');
+    return this._patchBeanInstance(beanOptions.beanFullName, beanInstance, cast(beanOptions.scene) === 'aop');
   }
 
   _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
@@ -371,8 +371,9 @@ export class BeanContainer {
     if (host.__aopChains__) return host.__aopChains__;
     // chains
     let chains: MetadataKey[] = [];
-    if (!beanInstance[SymbolProxyDisable] && beanOptions && beanOptions.scene !== 'aop') {
-      const aops = this.app.meta.onionAop.findAopsMatched(beanOptions.beanFullName);
+    if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
+      const beanAop = this.app.bean._getBean('a-aspect.service.aop' as never) as any;
+      const aops = beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);
       }

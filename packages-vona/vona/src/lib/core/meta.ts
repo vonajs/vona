@@ -13,12 +13,10 @@ import {
   EnumAppEvent,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
-  IDecoratorAopOptions,
   IDecoratorMetaOptions,
   IDecoratorStartupOptions,
   ISocketConnectionRecord,
   ISocketPacketRecord,
-  IAopRecord,
   IMetaRecord,
   IStartupRecord,
 } from '../../types/index.js';
@@ -62,7 +60,6 @@ export class AppMeta extends BeanSimple {
   //
   onionSocketConnection: Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>;
   onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
-  onionAop: Onion<IDecoratorAopOptions, keyof IAopRecord>;
   onionMeta: Onion<IDecoratorMetaOptions, keyof IMetaRecord>;
   onionStartup: Onion<IDecoratorStartupOptions, keyof IStartupRecord>;
   //

@@ -5,7 +5,6 @@ import { Constructable } from '../index.js';
 export interface ISceneCustomRecord {}
 
 export type TypeDecoratorBeanOptionsSceneBase =
-  | 'aop'
   | 'scope'
   | 'atom'
   | 'socketConnection'
