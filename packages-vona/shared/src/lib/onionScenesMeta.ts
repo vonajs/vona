@@ -1,12 +1,5 @@
 import { IModule, OnionScenesMeta } from '@cabloy/module-info';
 
-export const onionScenesMeta: OnionScenesMeta = {
-  // todo: remove
-  meta: {
-    optionsGlobalInterfaceName: '',
-  },
-};
-
 let __result: OnionScenesMeta;
 export function getOnionScenesMeta(modules: Record<string, IModule>) {
   if (!__result) {
@@ -16,7 +9,7 @@ export function getOnionScenesMeta(modules: Record<string, IModule>) {
 }
 
 export function _getOnionScenesMeta(modules: Record<string, IModule>) {
-  const result = Object.assign({}, onionScenesMeta);
+  const result = {};
   for (const moduleName in modules) {
     const module = modules[moduleName];
     const onions = module.package.vonaModule?.onions;
