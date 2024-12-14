@@ -3,7 +3,6 @@ export * from './atom.js';
 export * from './bean.js';
 export * from './createBeanDecorator.js';
 export * from './guard.js';
-export * from './interceptor.js';
 export * from './meta.js';
 export * from './middleware.js';
 export * from './socketConnection.js';

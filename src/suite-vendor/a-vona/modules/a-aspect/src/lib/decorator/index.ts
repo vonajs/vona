@@ -1,3 +1,3 @@
 export * from './filter.js';
-export * from './interceptor.js';
 export * from './pipe.js';
+export * from './interceptor.js';

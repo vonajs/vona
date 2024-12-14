@@ -1,4 +1,4 @@
-import { IMiddlewareBase, Next } from './middleware.js';
+import { IMiddlewareBase, Next, OmitNever, Onion } from 'vona';
 
 export interface IInterceptorRecordGlobal {}
 export interface IInterceptorRecordLocal {}
@@ -16,4 +16,20 @@ export interface IDecoratorInterceptorOptionsGlobal extends IMiddlewareBase {
   global: true;
   dependencies?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
   dependents?: (keyof IInterceptorRecordGlobal)[] | keyof IInterceptorRecordGlobal;
+}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    interceptor: Onion<IDecoratorInterceptorOptionsGlobal, keyof IInterceptorRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    interceptor: OmitNever<IInterceptorRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    interceptor: never;
+  }
 }
