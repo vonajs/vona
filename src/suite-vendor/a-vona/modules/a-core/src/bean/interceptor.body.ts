@@ -1,4 +1,5 @@
-import { BeanBase, IDecoratorInterceptorOptionsGlobal, IInterceptorExecute, Interceptor, Next } from 'vona';
+import { BeanBase, Next } from 'vona';
+import { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute, Interceptor } from 'vona-module-a-aspect';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptionsGlobal {}
 

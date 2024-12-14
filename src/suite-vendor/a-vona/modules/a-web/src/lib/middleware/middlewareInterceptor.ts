@@ -5,5 +5,5 @@ export async function middlewareInterceptor(ctx: VonaContext, next: Next) {
   const handler = ctx.getHandler();
   if (!handler) return next();
   // compose
-  return await ctx.app.meta.onionInterceptor.composeAsync(ctx)(ctx, next);
+  return await ctx.app.bean.onion.interceptor.composeAsync(ctx)(ctx, next);
 }
