@@ -7,7 +7,7 @@ export interface IStartupExecute {
   execute(options?: IInstanceStartupOptions): Promise<void>;
 }
 
-export interface IDecoratorStartupOptions extends IOnionOptionsEnable, IOnionOptionsDeps<IStartupRecord> {
+export interface IDecoratorStartupOptions extends IOnionOptionsEnable, IOnionOptionsDeps<keyof IStartupRecord> {
   instance?: boolean;
   debounce?: boolean | number;
   transaction?: boolean;
