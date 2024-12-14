@@ -3,16 +3,10 @@ import { IModuleInfo } from '@cabloy/module-info';
 import path from 'path';
 import fs from 'fs';
 import { __ThisSetName__ } from '../this.js';
-import { getOnionScenesMeta } from 'vona-shared';
+import { getOnionScenesMeta, getOnionMetasMeta } from 'vona-shared';
 
 const __decorators = {
   virtual: 'Virtual',
-};
-const __boilerplates = {
-  metaIndex: 'metaIndex',
-  metaVersion: 'metaVersion',
-  metaStatus: 'metaStatus',
-  metaRedlock: 'metaRedlock',
 };
 
 declare module '@cabloy/cli' {
@@ -75,7 +69,7 @@ export class CliCreateBean extends BeanCliBase {
     await this.helper.ensureDir(beanDir);
     // boilerplate name
     const boilerplates = this._getBoilerplates();
-    const boilerplateName = boilerplates[`${sceneName}${argv.beanNameCapitalize}`] || boilerplates[sceneName] || 'bean';
+    const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName] || 'bean';
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
@@ -88,16 +82,21 @@ export class CliCreateBean extends BeanCliBase {
   }
 
   private _getBoilerplates() {
-    const result = Object.assign({}, __boilerplates);
-    for (const moduleName in this.modulesMeta.modules) {
-      const module = this.modulesMeta.modules[moduleName];
-      const onions = module.package.vonaModule?.onions;
-      if (!onions) continue;
-      for (const sceneName in onions) {
-        const boilerplate = onions[sceneName].boilerplate;
-        if (boilerplate) {
-          result[sceneName] = path.join(module.root, boilerplate);
-        }
+    const result = {};
+    // scenes
+    const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
+    for (const sceneName in onionScenesMeta) {
+      const onionSceneMeta = onionScenesMeta[sceneName];
+      if (onionSceneMeta.boilerplate) {
+        result[sceneName] = path.join(onionSceneMeta.module!.root, onionSceneMeta.boilerplate);
+      }
+    }
+    // metas
+    const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
+    for (const sceneName in onionMetasMeta) {
+      const onionMetaMeta = onionMetasMeta[sceneName];
+      if (onionMetaMeta.boilerplate) {
+        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, onionMetaMeta.boilerplate);
       }
     }
     return result;
