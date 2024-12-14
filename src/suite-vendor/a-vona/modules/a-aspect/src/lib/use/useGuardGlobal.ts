@@ -1,6 +1,5 @@
-import { IGuardRecordGlobal } from '../../../types/interface/guard.js';
-import { TypeUseMiddlewareGlobalLikeOptions } from '../../../types/interface/middleware.js';
-import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
+import { TypeUseMiddlewareGlobalLikeOptions, UseMiddlewareGlobalLike } from 'vona';
+import { IGuardRecordGlobal } from '../../types/guard.js';
 
 export function UseGuardGlobal<T extends keyof IGuardRecordGlobal>(
   guardName: T,

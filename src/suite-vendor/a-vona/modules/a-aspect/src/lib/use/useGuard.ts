@@ -1,5 +1,5 @@
-import { IGuardRecordLocal } from '../../../types/interface/guard.js';
-import { UseMiddlewareLike } from './useMiddlewareLike.js';
+import { UseMiddlewareLike } from 'vona';
+import { IGuardRecordLocal } from '../../types/guard.js';
 
 export function UseGuard<T extends keyof IGuardRecordLocal>(
   guardName: T,

@@ -9,7 +9,6 @@ export type TypeDecoratorBeanOptionsSceneBase =
   | 'scope'
   | 'atom'
   | 'middleware'
-  | 'guard'
   | 'socketConnection'
   | 'socketPacket'
   | 'startup'
