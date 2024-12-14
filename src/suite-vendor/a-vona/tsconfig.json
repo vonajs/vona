@@ -41,6 +41,9 @@
     },
     {
       "path": "modules/a-socket/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-meta/tsconfig.build.json"
     }
   ]
 }

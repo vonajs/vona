@@ -209,6 +209,9 @@ importers:
       vona-module-a-message:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-message
+      vona-module-a-meta:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-meta
       vona-module-a-oauth:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-oauth
@@ -1262,6 +1265,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:modules/a-executor
+      vona-module-a-meta:
+        specifier: workspace:^
+        version: link:modules/a-meta
       vona-module-a-onion:
         specifier: workspace:^
         version: link:modules/a-onion
@@ -1327,6 +1333,8 @@ importers:
       koa-compose:
         specifier: ^4.1.0
         version: 4.1.0
+
+  src/suite-vendor/a-vona/modules/a-meta: {}
 
   src/suite-vendor/a-vona/modules/a-onion: {}
 
