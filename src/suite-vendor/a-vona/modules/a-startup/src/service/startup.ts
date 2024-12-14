@@ -52,7 +52,8 @@ export class ServiceStartup extends BeanBase {
       const instances = await this.bean.instance.list();
       for (const instance of instances) {
         const subdomain = instance.name;
-        await this.bean.executor.newCtx(
+        // need not await
+        this.bean.executor.newCtx(
           async () => {
             await this.$scope.instance.service.instance.instanceStartup(subdomain, { force: false });
           },
