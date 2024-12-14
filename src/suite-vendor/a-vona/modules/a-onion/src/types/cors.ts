@@ -1,5 +1,5 @@
-import { VonaContext } from '../context/index.js';
-import { IOnionOptionsBase } from '../interface/onion.js';
+import { VonaContext } from 'vona';
+import { IOnionOptionsBase } from './onion.js';
 
 export interface ConfigCors extends IOnionOptionsBase {
   origin: ((ctx: VonaContext) => boolean) | string[] | string;
@@ -11,4 +11,10 @@ export interface ConfigCors extends IOnionOptionsBase {
   keepHeadersOnError: boolean;
   secureContext: boolean;
   privateNetworkAccess: boolean;
+}
+
+declare module 'vona' {
+  export interface VonaConfig {
+    cors: ConfigCors;
+  }
 }

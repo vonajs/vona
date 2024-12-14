@@ -1,4 +1,5 @@
-import { IOnionOptionsBase, IOnionOptionsDeps, NextSync, OmitNever, Onion } from 'vona';
+import { NextSync, OmitNever } from 'vona';
+import { IOnionOptionsBase, IOnionOptionsDeps } from 'vona-module-a-onion';
 
 export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}

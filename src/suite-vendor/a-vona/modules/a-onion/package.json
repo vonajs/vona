@@ -28,5 +28,7 @@
     "static"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "egg-path-matching": "^1.0.1"
+  }
 }

@@ -1,22 +1,27 @@
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
+import { IModule, OnionSceneMeta } from '@cabloy/module-info';
 import pathMatching from 'egg-path-matching';
-import { BeanSimple } from '../../bean/beanSimple.js';
 import {
-  IOnionSlice,
+  appMetadata,
+  appResource,
+  BeanBase,
+  cast,
+  compose,
+  composeAsync,
+  deepExtend,
+  VonaApplication,
+  VonaContext,
+} from 'vona';
+import { Service } from 'vona-module-a-web';
+import { getOnionScenesMeta } from 'vona-shared';
+import {
   IOnionOptionsBase,
+  IOnionOptionsDeps,
   IOnionOptionsEnable,
   IOnionOptionsMeta,
+  IOnionSlice,
   SymbolUseOnionLocal,
-  IOnionOptionsDeps,
-} from '../../../types/interface/onion.js';
-import { appMetadata } from '../../core/metadata.js';
-import { appResource } from '../../core/resource.js';
-import { VonaContext } from '../../../types/context/index.js';
-import { cast } from '../../../types/utils/cast.js';
-import { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import { compose, composeAsync, deepExtend } from '../../utils/util.js';
-import { VonaApplication } from '../../../types/index.js';
-import { getOnionScenesMeta } from 'vona-shared';
+} from '../types/onion.js';
 
 const __adapter = (_context, chain) => {
   return {
@@ -27,7 +32,8 @@ const __adapter = (_context, chain) => {
 
 const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
 
-export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
+@Service()
+export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   sceneName: string;
   sceneMeta: OnionSceneMeta;
   middlewaresNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
