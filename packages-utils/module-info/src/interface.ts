@@ -55,7 +55,14 @@ export interface OnionSceneMeta {
   metadataCustom?: string;
 }
 
+export interface OnionMetaMeta {
+  module?: IModule;
+  boilerplate?: string;
+  metadataCustom?: string;
+}
+
 export type OnionScenesMeta = Record<string, OnionSceneMeta>;
+export type OnionMetasMeta = Record<string, OnionMetaMeta>;
 
 export interface IModulePackage {
   name: string;
@@ -66,6 +73,7 @@ export interface IModulePackage {
     dependencies?: Record<string, string>;
     globalDependencies?: Record<string, string | boolean>;
     onions?: OnionScenesMeta;
+    metas?: OnionMetasMeta;
   };
   zovaModule?: {
     capabilities?: IModuleCapabilities;
