@@ -1,16 +1,10 @@
 import chalk from 'chalk';
-import {
-  BeanBase,
-  ConfigInstanceBase,
-  IInstanceStartupOptions,
-  IMetaVersionInit,
-  IMetaVersionTest,
-  IMetaVersionUpdate,
-} from 'vona';
+import { BeanBase, ConfigInstanceBase, IMetaVersionInit, IMetaVersionTest, IMetaVersionUpdate } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 import { Service } from 'vona-module-a-web';
+import { IInstanceStartupOptions } from 'vona-module-a-startup';
 
 @Service()
 export class ServiceVersion extends BeanBase {
