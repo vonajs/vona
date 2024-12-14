@@ -162,23 +162,6 @@ export class AppUtil extends BeanSimple {
     return false;
   }
 
-  checkMiddlewareOptionsMeta(meta?: IMiddlewareOptionsMeta) {
-    // check none
-    if (!meta) return true;
-    // check flavor
-    if (meta.flavor) {
-      if (!Array.isArray(meta.flavor) && meta.flavor !== this.app.meta.flavor) return false;
-      if (Array.isArray(meta.flavor) && !meta.flavor.includes(this.app.meta.flavor)) return false;
-    }
-    // check mode
-    if (meta.mode) {
-      if (!Array.isArray(meta.mode) && meta.mode !== this.app.meta.mode) return false;
-      if (Array.isArray(meta.mode) && !meta.mode.includes(this.app.meta.mode)) return false;
-    }
-    // default
-    return true;
-  }
-
   detectErrorMessage(err: Error) {
     // detect json parse error
     if (

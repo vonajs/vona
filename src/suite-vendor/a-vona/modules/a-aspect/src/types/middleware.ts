@@ -1,5 +1,13 @@
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
-import { IDecoratorBeanOptionsBase, Next, OmitNever, Onion, VonaContext } from 'vona';
+import {
+  IDecoratorBeanOptionsBase,
+  IOnionSliceBase,
+  IOnionSliceEnable,
+  Next,
+  OmitNever,
+  Onion,
+  VonaContext,
+} from 'vona';
 
 export const SymbolUseMiddlewareLocal = Symbol('SymbolUseMiddlewareLocal');
 
@@ -13,17 +21,7 @@ export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}
 export type IMiddlewareRecord = IMiddlewareRecordGlobal & IMiddlewareRecordLocal;
 
-export interface IMiddlewareOptionsMeta {
-  flavor?: VonaMetaFlavor | VonaMetaFlavor[];
-  mode?: VonaMetaMode | VonaMetaMode[];
-}
-
-export interface IMiddlewareBaseEnable {
-  enable?: boolean;
-  meta?: IMiddlewareOptionsMeta;
-}
-
-export interface IMiddlewareBase extends IMiddlewareBaseEnable {
+export interface IMiddlewareBase extends IOnionSliceBase {
   match?: ((ctx: VonaContext) => boolean) | RegExp | string;
   ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
 }

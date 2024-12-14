@@ -14,8 +14,6 @@ const __boilerplates = {
   metaVersion: 'metaVersion',
   metaStatus: 'metaStatus',
   metaRedlock: 'metaRedlock',
-  middleware: 'middleware',
-  pipe: 'pipe',
   socketConnection: 'socketConnection',
   socketPacket: 'socketPacket',
   startup: 'startup',

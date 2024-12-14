@@ -412,7 +412,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
     if (enable === false) return false;
     // meta
     const meta = this.__cacheOptions.meta;
-    if (!this.app.meta.util.checkMiddlewareOptionsMeta(meta)) {
+    if (!this.app.bean.onion.checkOnionSlicOptionsMeta(meta)) {
       return false;
     }
     // default

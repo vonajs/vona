@@ -1,9 +1,10 @@
-import { TypeUseMiddlewareGlobalLikeOptions, UseMiddlewareGlobalLike } from 'vona';
+import { TypeUseMiddlewareGlobalLikeOptions } from '../../types/middleware.js';
 import { IPipeRecordGlobal } from '../../types/pipe.js';
+import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 
 export function UsePipeGlobal<T extends keyof IPipeRecordGlobal>(
   pipeName: T,
   options?: Partial<TypeUseMiddlewareGlobalLikeOptions<IPipeRecordGlobal[T]>>,
 ): ClassDecorator & MethodDecorator {
-  return UseMiddlewareGlobalLike('pipe', pipeName, options);
+  return UseOnionGlobalBase('pipe', pipeName, options);
 }

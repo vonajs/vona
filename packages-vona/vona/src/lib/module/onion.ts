@@ -2,12 +2,10 @@ import {
   IAopRecord,
   IDecoratorAopOptions,
   IDecoratorMetaOptions,
-  IDecoratorMiddlewareOptionsGlobal,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
   IMetaRecord,
-  IMiddlewareRecord,
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IStartupRecord,
@@ -20,10 +18,6 @@ export default function (app: VonaApplication) {
 }
 
 function loadAll(app: VonaApplication) {
-  app.meta.onionMiddleware = app.bean._newBean(
-    Onion<IDecoratorMiddlewareOptionsGlobal, keyof IMiddlewareRecord>,
-    'middleware',
-  );
   app.meta.onionSocketConnection = app.bean._newBean(
     Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>,
     'socketConnection',

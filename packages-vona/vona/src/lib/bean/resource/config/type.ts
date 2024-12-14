@@ -6,6 +6,7 @@ export interface IModuleConfigBroadcast {
   bean: string | { module: string; name: string };
 }
 
+// todo: remove
 export interface IModuleConfigMiddleware {
   bean: string | { module: string; name: string };
   global?: boolean;

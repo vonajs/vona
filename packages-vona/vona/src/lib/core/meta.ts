@@ -11,13 +11,11 @@ import {
   TypeModuleResourceLocaleModules,
   TypeModuleResourceLocales,
   EnumAppEvent,
-  IDecoratorMiddlewareOptionsGlobal,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorAopOptions,
   IDecoratorMetaOptions,
   IDecoratorStartupOptions,
-  IMiddlewareRecord,
   ISocketConnectionRecord,
   ISocketPacketRecord,
   IAopRecord,
@@ -62,7 +60,6 @@ export class AppMeta extends BeanSimple {
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
   //
-  onionMiddleware: Onion<IDecoratorMiddlewareOptionsGlobal, keyof IMiddlewareRecord>;
   onionSocketConnection: Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>;
   onionSocketPacket: Onion<IDecoratorSocketPacketOptions, keyof ISocketPacketRecord>;
   onionAop: Onion<IDecoratorAopOptions, keyof IAopRecord>;

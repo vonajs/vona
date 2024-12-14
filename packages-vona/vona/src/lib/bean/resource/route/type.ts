@@ -3,6 +3,7 @@ export type TypeModuleMiddlewareRight =
   | { type: 'atomClass' }
   | { type: 'resource'; module?: string; name?: string; useKey?: boolean };
 
+// todo: remove
 export interface IModuleMiddlewareValidate {
   module?: string;
   validator?: string;

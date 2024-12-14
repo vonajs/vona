@@ -1,7 +1,7 @@
-import { SymbolUseMiddlewareOptions } from '../../../types/interface/middleware.js';
-import { appMetadata, MetadataKey } from '../../core/metadata.js';
+import { appMetadata, MetadataKey } from 'vona';
+import { SymbolUseMiddlewareOptions } from '../../types/middleware.js';
 
-export function UseMiddlewareGlobalLike(sceneName: string, middlewareName, options?): ClassDecorator & MethodDecorator {
+export function UseOnionGlobalBase(sceneName: string, middlewareName, options?): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     const middlewaresOptions = appMetadata.getOwnMetadataMap(false, SymbolUseMiddlewareOptions, target, prop);
     const beanFullName = (middlewareName as string).replace(':', `.${sceneName}.`);

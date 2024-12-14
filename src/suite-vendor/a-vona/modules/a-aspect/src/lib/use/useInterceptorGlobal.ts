@@ -1,9 +1,10 @@
-import { TypeUseMiddlewareGlobalLikeOptions, UseMiddlewareGlobalLike } from 'vona';
 import { IInterceptorRecordGlobal } from '../../types/interceptor.js';
+import { TypeUseMiddlewareGlobalLikeOptions } from '../../types/middleware.js';
+import { UseOnionGlobalBase } from './useOnionGlobalBase.js';
 
 export function UseInterceptorGlobal<T extends keyof IInterceptorRecordGlobal>(
   interceptorName: T,
   options?: Partial<TypeUseMiddlewareGlobalLikeOptions<IInterceptorRecordGlobal[T]>>,
 ): ClassDecorator & MethodDecorator {
-  return UseMiddlewareGlobalLike('interceptor', interceptorName, options);
+  return UseOnionGlobalBase('interceptor', interceptorName, options);
 }
