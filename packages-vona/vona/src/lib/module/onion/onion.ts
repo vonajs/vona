@@ -85,8 +85,7 @@ export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
       this[SymbolMiddlewaresEnabled] = this.middlewaresGlobal.filter(middlewareItem => {
         const middlewareOptions = middlewareItem.beanOptions.options as IOnionOptionsEnable;
         return (
-          middlewareOptions.enable !== false &&
-          cast(this.app.bean).onion.checkOnionSlicOptionsMeta(middlewareOptions.meta)
+          middlewareOptions.enable !== false && cast(this.app.bean).onion.checkOnionOptionsMeta(middlewareOptions.meta)
         );
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
@@ -164,12 +163,17 @@ export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
     return middlewaresLocal;
   }
 
-  getMiddlewareItem(middlewareName: string): IOnionSlice<OPTIONS, ONIONNAME> {
+  getMiddlewareItem(middlewareName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
     return this.middlewaresNormal[middlewareName];
   }
 
-  getMiddlewareOptions<OPTIONS>(middlewareName: string): OPTIONS | undefined {
+  getMiddlewareOptions<OPTIONS>(middlewareName: ONIONNAME): OPTIONS | undefined {
     return this.getMiddlewareItem(middlewareName).beanOptions.options as OPTIONS | undefined;
+  }
+
+  getMiddlewareOptionsDynamic<OPTIONS>(middlewareName: ONIONNAME): OPTIONS | undefined {
+    const item = this.getMiddlewareItem(middlewareName);
+    return this.combineMiddlewareOptions(this.ctx, item);
   }
 
   combineMiddlewareOptions(ctx: VonaContext, item: IOnionSlice<OPTIONS, ONIONNAME>) {
@@ -406,7 +410,7 @@ export class Onion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
 }
 
 function middlewareMatchMeta(app: VonaApplication, meta?: IOnionOptionsMeta) {
-  return cast(app.bean).onion.checkOnionSlicOptionsMeta(meta);
+  return cast(app.bean).onion.checkOnionOptionsMeta(meta);
 }
 
 function middlewareMatch(ctx: VonaContext, options: IOnionOptionsBase) {

@@ -11,7 +11,7 @@ export class BeanOnion extends BeanBase {
     return this.__instances[prop];
   }
 
-  public checkOnionSlicOptionsMeta(meta?: IOnionOptionsMeta) {
+  public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
     // check none
     if (!meta) return true;
     // check flavor

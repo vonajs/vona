@@ -9,7 +9,7 @@ export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptionsGloba
 export class MiddlewareGate extends BeanBase implements IMiddlewareExecute {
   async execute(options: IMiddlewareOptionsGate, next: Next) {
     // check gate
-    if (!this.app.bean.onion.checkOnionSlicOptionsMeta(options.gate)) {
+    if (!this.app.bean.onion.checkOnionOptionsMeta(options.gate)) {
       this.app.throw(403);
     }
     // next

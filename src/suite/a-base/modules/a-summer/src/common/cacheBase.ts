@@ -65,7 +65,7 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
     if (enable === false) return false;
     // meta
     const meta = this._cacheOpitons.meta ?? this.scopeSummer.config.summer.meta;
-    if (!this.app.bean.onion.checkOnionSlicOptionsMeta(meta)) {
+    if (!this.app.bean.onion.checkOnionOptionsMeta(meta)) {
       return false;
     }
     // default
