@@ -16,29 +16,6 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** beans: end */
-/** aop: begin */
-export * from '../bean/aop.regExp.js';
-export * from '../bean/aop.simple.js';
-
-import { IDecoratorAopOptions } from 'vona';
-declare module 'vona' {
-  export interface IAopRecord {
-    'vona-test:regExp': IDecoratorAopOptions;
-    'vona-test:simple': IDecoratorAopOptions;
-  }
-}
-declare module 'vona-module-vona-test' {
-  export interface AopRegExp {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface AopSimple {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** aop: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -77,6 +54,29 @@ export interface IModuleSummerCache {
   test: SummerCacheTest;
 }
 /** summerCache: end */
+/** aop: begin */
+export * from '../bean/aop.regExp.js';
+export * from '../bean/aop.simple.js';
+
+import { IDecoratorAopOptions } from 'vona-module-a-aspect';
+declare module 'vona-module-a-aspect' {
+  export interface IAopRecord {
+    'vona-test:regExp': IDecoratorAopOptions;
+    'vona-test:simple': IDecoratorAopOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface AopRegExp {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface AopSimple {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** aop: end */
 /** queue: begin */
 export * from '../bean/queue.test.js';
 

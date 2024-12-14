@@ -135,22 +135,6 @@ declare module 'vona-module-test-party' {
   }
 }
 /** atom: end */
-/** aop: begin */
-export * from '../bean/aop.atom.js';
-
-import { IDecoratorAopOptions } from 'vona';
-declare module 'vona' {
-  export interface IAopRecord {
-    'test-party:atom': IDecoratorAopOptions;
-  }
-}
-declare module 'vona-module-test-party' {
-  export interface AopAtom {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-}
-/** aop: end */
 /** startup: begin */
 export * from '../bean/startup.startupAll.js';
 export * from '../bean/startup.startupInstance.js';
@@ -262,6 +246,22 @@ declare module 'vona-module-test-party' {
   }
 }
 /** middleware: end */
+/** aop: begin */
+export * from '../bean/aop.atom.js';
+
+import { IDecoratorAopOptions } from 'vona-module-a-aspect';
+declare module 'vona-module-a-aspect' {
+  export interface IAopRecord {
+    'test-party:atom': IDecoratorAopOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface AopAtom {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** aop: end */
 /** service: begin */
 export * from '../service/test.js';
 

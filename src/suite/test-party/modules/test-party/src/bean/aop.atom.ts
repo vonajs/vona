@@ -1,5 +1,6 @@
-import { Aop, BeanBase } from 'vona';
 import assert from 'assert';
+import { BeanBase } from 'vona';
+import { Aop } from 'vona-module-a-aspect';
 
 @Aop({ match: 'atom', meta: { mode: 'unittest' } })
 export class AopAtom extends BeanBase {

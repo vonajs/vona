@@ -1,4 +1,5 @@
-import { Aop, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Aop } from 'vona-module-a-aspect';
 
 @Aop({ match: [/^vona-test\.service\.test\w+$/, 'testCtx'], meta: { mode: 'unittest' } })
 export class AopRegExp extends BeanBase {

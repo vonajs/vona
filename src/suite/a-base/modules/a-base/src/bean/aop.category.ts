@@ -1,4 +1,5 @@
-import { Aop, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Aop } from 'vona-module-a-aspect';
 
 const __atomClassApp = {
   module: 'a-app',

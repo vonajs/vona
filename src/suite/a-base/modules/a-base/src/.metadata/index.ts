@@ -313,22 +313,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** socketConnection: end */
-/** aop: begin */
-export * from '../bean/aop.category.js';
-
-import { IDecoratorAopOptions } from 'vona';
-declare module 'vona' {
-  export interface IAopRecord {
-    'a-base:category': IDecoratorAopOptions;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface AopCategory {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-}
-/** aop: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.status.js';
@@ -1065,6 +1049,22 @@ declare module 'vona-module-a-base' {
   }
 }
 /** middleware: end */
+/** aop: begin */
+export * from '../bean/aop.category.js';
+
+import { IDecoratorAopOptions } from 'vona-module-a-aspect';
+declare module 'vona-module-a-aspect' {
+  export interface IAopRecord {
+    'a-base:category': IDecoratorAopOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface AopCategory {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** aop: end */
 /** queue: begin */
 export * from '../bean/queue.roleBuild.js';
 

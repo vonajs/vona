@@ -1,4 +1,5 @@
-import { Aop, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
+import { Aop } from 'vona-module-a-aspect';
 
 class AopSimpleBase extends BeanBase {
   actionSync(context, next) {
