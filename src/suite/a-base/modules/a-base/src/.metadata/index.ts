@@ -297,22 +297,6 @@ declare module 'vona-module-a-base' {
   }
 }
 /** atom: end */
-/** socketConnection: begin */
-export * from '../bean/socketConnection.auth.js';
-import { ISocketConnectionOptionsAuth } from '../bean/socketConnection.auth.js';
-import 'vona';
-declare module 'vona' {
-  export interface ISocketConnectionRecord {
-    'a-base:auth': ISocketConnectionOptionsAuth;
-  }
-}
-declare module 'vona-module-a-base' {
-  export interface SocketConnectionAuth {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-}
-/** socketConnection: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.status.js';
@@ -1057,6 +1041,22 @@ export interface IModuleQueue {
   roleBuild: QueueRoleBuild;
 }
 /** queue: end */
+/** socketConnection: begin */
+export * from '../bean/socketConnection.auth.js';
+import { ISocketConnectionOptionsAuth } from '../bean/socketConnection.auth.js';
+import 'vona';
+declare module 'vona-module-a-socket' {
+  export interface ISocketConnectionRecord {
+    'a-base:auth': ISocketConnectionOptionsAuth;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface SocketConnectionAuth {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** socketConnection: end */
 /** startup: begin */
 export * from '../bean/startup.checkResourceLocales.js';
 export * from '../bean/startup.checkViewHistoryRight.js';

@@ -1,4 +1,4 @@
-import { createBeanDecorator } from '../index.js';
+import { createBeanDecorator } from 'vona';
 
 export function Atom(): ClassDecorator {
   return createBeanDecorator('atom');

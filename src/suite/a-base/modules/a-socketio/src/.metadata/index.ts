@@ -36,38 +36,6 @@ declare module 'vona-module-a-socketio' {
   }
 }
 /** beans: end */
-/** socketConnection: begin */
-export * from '../bean/socketConnection.io.js';
-import { ISocketConnectionOptionsIo } from '../bean/socketConnection.io.js';
-import 'vona';
-declare module 'vona' {
-  export interface ISocketConnectionRecord {
-    'a-socketio:io': ISocketConnectionOptionsIo;
-  }
-}
-declare module 'vona-module-a-socketio' {
-  export interface SocketConnectionIo {
-    /** @internal */
-    get scope(): ScopeModuleASocketio;
-  }
-}
-/** socketConnection: end */
-/** socketPacket: begin */
-export * from '../bean/socketPacket.performAction.js';
-import { ISocketPacketOptionsPerformAction } from '../bean/socketPacket.performAction.js';
-import 'vona';
-declare module 'vona' {
-  export interface ISocketPacketRecord {
-    'a-socketio:performAction': ISocketPacketOptionsPerformAction;
-  }
-}
-declare module 'vona-module-a-socketio' {
-  export interface SocketPacketPerformAction {
-    /** @internal */
-    get scope(): ScopeModuleASocketio;
-  }
-}
-/** socketPacket: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -216,6 +184,38 @@ export interface IModuleQueue {
   pushDirect: QueuePushDirect;
 }
 /** queue: end */
+/** socketConnection: begin */
+export * from '../bean/socketConnection.io.js';
+import { ISocketConnectionOptionsIo } from '../bean/socketConnection.io.js';
+import 'vona';
+declare module 'vona-module-a-socket' {
+  export interface ISocketConnectionRecord {
+    'a-socketio:io': ISocketConnectionOptionsIo;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface SocketConnectionIo {
+    /** @internal */
+    get scope(): ScopeModuleASocketio;
+  }
+}
+/** socketConnection: end */
+/** socketPacket: begin */
+export * from '../bean/socketPacket.performAction.js';
+import { ISocketPacketOptionsPerformAction } from '../bean/socketPacket.performAction.js';
+import 'vona';
+declare module 'vona-module-a-socket' {
+  export interface ISocketPacketRecord {
+    'a-socketio:performAction': ISocketPacketOptionsPerformAction;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface SocketPacketPerformAction {
+    /** @internal */
+    get scope(): ScopeModuleASocketio;
+  }
+}
+/** socketPacket: end */
 /** service: begin */
 export * from '../service/io.js';
 export * from '../service/ioInner.js';
