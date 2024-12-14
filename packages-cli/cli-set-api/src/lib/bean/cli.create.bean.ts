@@ -11,7 +11,6 @@ const __decorators = {
 const __boilerplates = {
   aop: 'aop',
   guard: 'guard',
-  interceptor: 'interceptor',
   metaIndex: 'metaIndex',
   metaVersion: 'metaVersion',
   metaStatus: 'metaStatus',

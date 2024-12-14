@@ -2,14 +2,12 @@ import {
   IAopRecord,
   IDecoratorAopOptions,
   IDecoratorGuardOptionsGlobal,
-  IDecoratorInterceptorOptionsGlobal,
   IDecoratorMetaOptions,
   IDecoratorMiddlewareOptionsGlobal,
   IDecoratorSocketConnectionOptions,
   IDecoratorSocketPacketOptions,
   IDecoratorStartupOptions,
   IGuardRecord,
-  IInterceptorRecord,
   IMetaRecord,
   IMiddlewareRecord,
   ISocketConnectionRecord,
@@ -29,10 +27,6 @@ function loadAll(app: VonaApplication) {
     'middleware',
   );
   app.meta.onionGuard = app.bean._newBean(Onion<IDecoratorGuardOptionsGlobal, keyof IGuardRecord>, 'guard');
-  app.meta.onionInterceptor = app.bean._newBean(
-    Onion<IDecoratorInterceptorOptionsGlobal, keyof IInterceptorRecord>,
-    'interceptor',
-  );
   app.meta.onionSocketConnection = app.bean._newBean(
     Onion<IDecoratorSocketConnectionOptions, keyof ISocketConnectionRecord>,
     'socketConnection',

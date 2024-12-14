@@ -1,5 +1,5 @@
-import { IInterceptorRecordLocal } from '../../../types/interface/interceptor.js';
-import { UseMiddlewareLike } from './useMiddlewareLike.js';
+import { UseMiddlewareLike } from 'vona';
+import { IInterceptorRecordLocal } from '../../types/interceptor.js';
 
 export function UseInterceptor<T extends keyof IInterceptorRecordLocal>(
   interceptorName: T,

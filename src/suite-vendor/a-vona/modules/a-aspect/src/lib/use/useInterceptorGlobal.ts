@@ -1,6 +1,5 @@
-import { IInterceptorRecordGlobal } from '../../../types/interface/interceptor.js';
-import { TypeUseMiddlewareGlobalLikeOptions } from '../../../types/interface/middleware.js';
-import { UseMiddlewareGlobalLike } from './useMiddlewareGlobalLike.js';
+import { TypeUseMiddlewareGlobalLikeOptions, UseMiddlewareGlobalLike } from 'vona';
+import { IInterceptorRecordGlobal } from '../../types/interceptor.js';
 
 export function UseInterceptorGlobal<T extends keyof IInterceptorRecordGlobal>(
   interceptorName: T,

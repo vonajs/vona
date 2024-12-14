@@ -1,6 +1,5 @@
 import { IAopRecord } from '../interface/aop.js';
 import { IGuardRecord } from '../interface/guard.js';
-import { IInterceptorRecord } from '../interface/interceptor.js';
 import { IMetaRecord } from '../interface/meta.js';
 import { IMiddlewareRecord } from '../interface/middleware.js';
 import { ISocketConnectionRecord } from '../interface/socketConnection.js';
@@ -11,7 +10,6 @@ import { OmitNever } from '../utils/omitNever.js';
 export interface ConfigOnions {
   middleware: OmitNever<IMiddlewareRecord>;
   guard: OmitNever<IGuardRecord>;
-  interceptor: OmitNever<IInterceptorRecord>;
   socketConnection: OmitNever<ISocketConnectionRecord>;
   socketPacket: OmitNever<ISocketPacketRecord>;
   aop: OmitNever<IAopRecord>;

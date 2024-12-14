@@ -17,12 +17,6 @@ export const onionScenesMeta: OnionScenesMeta = {
     optionsDynamic: true,
     optionsGlobalInterfaceName: 'IDecoratorGuardOptionsGlobal',
   },
-  interceptor: {
-    hasLocal: true,
-    optionsRoute: true,
-    optionsDynamic: true,
-    optionsGlobalInterfaceName: 'IDecoratorInterceptorOptionsGlobal',
-  },
   socketConnection: {
     optionsGlobalInterfaceName: 'IDecoratorSocketConnectionOptions',
   },
