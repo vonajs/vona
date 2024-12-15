@@ -98,7 +98,7 @@ function composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorat
       middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
     }
     // pipes: route
-    const middlewaresLocal = onionPipe._collectMiddlewaresHandler(ctx);
+    const middlewaresLocal = onionPipe._collectOnionsHandler(ctx);
     for (const item of middlewaresLocal) {
       middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
     }

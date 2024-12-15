@@ -250,7 +250,7 @@ export class BeanRouter extends BeanBase {
     args.push(fnStart);
 
     // middlewares: globals
-    args.push(...app.bean.onion.middleware.composedMiddlewaresGlobal);
+    args.push(...app.bean.onion.middleware.composedOnionsGlobal);
     // middlewares: guard/interceptor/pipes
     args.push(middlewareGuard);
     args.push(middlewareInterceptor);
@@ -299,7 +299,7 @@ function wrapMiddlewareApp(key, route, app) {
 function wrapMiddleware(_sceneName: string, item: IOnionSlice) {
   const fn = (ctx: VonaContext, next) => {
     // options
-    const options = ctx.app.bean.onion.middleware.getMiddlewareOptionsDynamic(item.name as never) as any;
+    const options = ctx.app.bean.onion.middleware.getOnionOptionsDynamic(item.name as never) as any;
     // enable match ignore dependencies
     if (options.enable === false || !middlewareMatch(ctx, options)) {
       return next();

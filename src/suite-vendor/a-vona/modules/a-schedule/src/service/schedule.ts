@@ -13,8 +13,8 @@ export class ServiceSchedule extends BeanBase {
       return;
     }
     // schedule config
-    const scheduleItem = this.bean.onion.schedule.getMiddlewareItem(scheduleName);
-    const scheduleConfig = this.bean.onion.schedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
+    const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
+    const scheduleConfig = this.bean.onion.schedule.getOnionOptions<IDecoratorScheduleOptions>(scheduleName);
     // execute
     return await this.bean.executor.newCtx(
       async () => {
@@ -37,14 +37,14 @@ export class ServiceSchedule extends BeanBase {
 
   private __checkJobValid(scheduleName: keyof IScheduleRecord, job: TypeScheduleJob) {
     // schedule: maybe not exists
-    const scheduleItem = this.bean.onion.schedule.getMiddlewareItem(scheduleName);
+    const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
     if (!scheduleItem) return false;
     // check disable
     if (-1 === this.bean.onion.schedule.middlewaresEnabled.findIndex(item => item.name === scheduleName)) {
       return false;
     }
     // check if changed
-    const scheduleConfig = this.app.bean.onion.schedule.getMiddlewareOptions<IDecoratorScheduleOptions>(scheduleName);
+    const scheduleConfig = this.app.bean.onion.schedule.getOnionOptions<IDecoratorScheduleOptions>(scheduleName);
     const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
       job.data!.options!.jobName!,
       job.data!.options!.jobOptions!.repeat!,
