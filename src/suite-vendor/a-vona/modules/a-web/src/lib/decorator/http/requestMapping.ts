@@ -1,6 +1,5 @@
-import { appMetadata } from '../../../core/metadata.js';
-import { SymbolRequestMappingHandler } from '../../constants.js';
-import { RequestMethod } from '../../enum/requestMethod.js';
+import { appMetadata } from 'vona';
+import { RequestMethod, SymbolRequestMappingHandler } from '../../../types/http.js';
 
 export interface RequestMappingMetadata {
   path?: RegExp | string;

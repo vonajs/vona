@@ -1,3 +1,5 @@
+export const SymbolRequestMappingHandler = Symbol('SymbolRequestMappingHandler');
+
 export enum RequestMethod {
   GET = 'get',
   POST = 'post',
