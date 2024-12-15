@@ -44,6 +44,9 @@
     },
     {
       "path": "modules/a-meta/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-broadcast/tsconfig.build.json"
     }
   ]
 }
