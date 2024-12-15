@@ -222,25 +222,25 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   private _handleDependents(onions: IOnionSlice<OPTIONS, ONIONNAME>[]) {
-    for (const middleware of onions) {
-      const onionOptions = middleware.beanOptions.options as IOnionOptionsDeps<string>;
+    for (const onion of onions) {
+      const onionOptions = onion.beanOptions.options as IOnionOptionsDeps<string>;
       let dependents = onionOptions.dependents as any;
       if (!dependents) continue;
       if (!Array.isArray(dependents)) {
         dependents = dependents.split(',') as any[];
       }
       for (const dep of dependents!) {
-        const middleware2 = onions.find(item => item.name === dep);
-        if (!middleware2) {
-          throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
+        const onion2 = onions.find(item => item.name === dep);
+        if (!onion2) {
+          throw new Error(`${this.sceneName} ${dep} not found for dependents of ${onion.name}`);
         }
-        const options = middleware2.beanOptions.options as IOnionOptionsDeps<string>;
+        const options = onion2.beanOptions.options as IOnionOptionsDeps<string>;
         if (!options.dependencies) options.dependencies = [];
         if (!Array.isArray(options.dependencies)) {
           options.dependencies = [options.dependencies] as never[];
         }
-        if (options.dependencies.findIndex(item => item === middleware.name) === -1) {
-          options.dependencies.push(middleware.name as never);
+        if (options.dependencies.findIndex(item => item === onion.name) === -1) {
+          options.dependencies.push(onion.name as never);
         }
       }
     }
@@ -361,7 +361,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       // enable match ignore dependencies
       if (
         !optionsPrimitive &&
-        (options.enable === false || !middlewareMatchMeta(this.app, options.meta) || !middlewareMatch(ctx, options))
+        (options.enable === false || !onionMatchMeta(this.app, options.meta) || !onionMatch(ctx, options))
       ) {
         return typeof next === 'function' ? next() : next;
       }
@@ -384,11 +384,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 }
 
-function middlewareMatchMeta(app: VonaApplication, meta?: IOnionOptionsMeta) {
+function onionMatchMeta(app: VonaApplication, meta?: IOnionOptionsMeta) {
   return cast(app.bean).onion.checkOnionOptionsMeta(meta);
 }
 
-function middlewareMatch(ctx: VonaContext, options: IOnionOptionsBase) {
+function onionMatch(ctx: VonaContext, options: IOnionOptionsBase) {
   if (!options.match && !options.ignore) {
     return true;
   }
