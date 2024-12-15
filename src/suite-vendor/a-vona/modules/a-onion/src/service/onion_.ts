@@ -122,8 +122,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       onions = onions.concat(this._composeOnionsGlobal(executeCustom));
       if (fnMid) onions = onions.concat(fnMid);
       // onions: handler
-      const middlewaresLocal = this._collectOnionsHandler(ctx);
-      for (const item of middlewaresLocal) {
+      const onionsLocal = this._collectOnionsHandler(ctx);
+      for (const item of onionsLocal) {
         onions.push(this._wrapOnion(item, executeCustom));
       }
       if (fnEnd) onions = onions.concat(fnEnd);
@@ -134,47 +134,47 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
 
   public _collectOnionsHandler(ctx: VonaContext) {
     if (!ctx.getClass()) return [];
-    // middlewaresLocal: controller
-    const controllerMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(
+    // onionsLocal: controller
+    const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
       ctx.getClass()!,
     )?.[this.sceneName] as string[];
-    // middlewaresLocal: action
-    const middlewaresLocal: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
-    const actionMiddlewaresLocal = appMetadata.getMetadata<Record<string, string[]>>(
+    // onionsLocal: action
+    const onionsLocal: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
+    const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
       SymbolUseOnionLocal,
       ctx.getClassPrototype()!,
       ctx.getHandlerName()!,
     )?.[this.sceneName] as string[];
-    const middlewaresLocalAll: string[] = [];
-    if (actionMiddlewaresLocal) {
-      actionMiddlewaresLocal.forEach(item => {
-        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+    const onionsLocalAll: string[] = [];
+    if (actionOnionsLocal) {
+      actionOnionsLocal.forEach(item => {
+        if (!onionsLocalAll.includes(item)) onionsLocalAll.push(item);
       });
     }
-    if (controllerMiddlewaresLocal) {
-      controllerMiddlewaresLocal.forEach(item => {
-        if (!middlewaresLocalAll.includes(item)) middlewaresLocalAll.push(item);
+    if (controllerOnionsLocal) {
+      controllerOnionsLocal.forEach(item => {
+        if (!onionsLocalAll.includes(item)) onionsLocalAll.push(item);
       });
     }
-    for (const middlewareName of middlewaresLocalAll) {
-      const item = this.onionsNormal[middlewareName];
-      if (!item) throw new Error(`${this.sceneName} not found: ${middlewareName}`);
-      middlewaresLocal.push(item);
+    for (const onionName of onionsLocalAll) {
+      const item = this.onionsNormal[onionName];
+      if (!item) throw new Error(`${this.sceneName} not found: ${onionName}`);
+      onionsLocal.push(item);
     }
-    return middlewaresLocal;
+    return onionsLocal;
   }
 
-  getOnionSlice(middlewareName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
-    return this.onionsNormal[middlewareName];
+  getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
+    return this.onionsNormal[onionName];
   }
 
-  getOnionOptions<OPTIONS>(middlewareName: ONIONNAME): OPTIONS | undefined {
-    return this.getOnionSlice(middlewareName).beanOptions.options as OPTIONS | undefined;
+  getOnionOptions<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
+    return this.getOnionSlice(onionName).beanOptions.options as OPTIONS | undefined;
   }
 
-  getOnionOptionsDynamic<OPTIONS>(middlewareName: ONIONNAME): OPTIONS | undefined {
-    const item = this.getOnionSlice(middlewareName);
+  getOnionOptionsDynamic<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
+    const item = this.getOnionSlice(onionName);
     return this.combineOnionOptions(this.ctx, item);
   }
 
