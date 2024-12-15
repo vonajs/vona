@@ -95,18 +95,18 @@ function composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorat
     const middlewares: Function[] = [];
     // pipes: global
     for (const item of onionPipe.onionsGlobal) {
-      middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
+      middlewares.push(onionPipe._wrapOnion(item, executeCustom));
     }
     // pipes: route
     const middlewaresLocal = onionPipe._collectOnionsHandler(ctx);
     for (const item of middlewaresLocal) {
-      middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
+      middlewares.push(onionPipe._wrapOnion(item, executeCustom));
     }
     // pipes: arguments
     const middlewaresArgument = _collectArgumentMiddlewares(onionPipe, argMeta);
     if (middlewaresArgument) {
       for (const item of middlewaresArgument) {
-        middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
+        middlewares.push(onionPipe._wrapOnion(item, executeCustom));
       }
     }
     __cacheMiddlewaresArgument[key] = middlewares;

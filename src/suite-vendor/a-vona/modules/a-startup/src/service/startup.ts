@@ -157,7 +157,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   private get _startups() {
-    return this.bean.onion.startup.middlewaresEnabled;
+    return this.bean.onion.startup.onionsEnabled;
   }
 
   private async _clearResources() {

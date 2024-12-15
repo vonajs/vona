@@ -62,9 +62,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     executeCustom?: Function,
   ) {
     // compose
-    const middlewares = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
+    const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return compose(middlewares, __adapter);
+    return compose(onions, __adapter);
   }
 
   composeAsync(
@@ -75,18 +75,16 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     executeCustom?: Function,
   ) {
     // compose
-    const middlewares = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
+    const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return composeAsync(middlewares, __adapter);
+    return composeAsync(onions, __adapter);
   }
 
-  get middlewaresEnabled() {
+  get onionsEnabled() {
     if (!this[SymbolOnionsEnabled]) {
-      this[SymbolOnionsEnabled] = this.onionsGlobal.filter(middlewareItem => {
-        const middlewareOptions = middlewareItem.beanOptions.options as IOnionOptionsEnable;
-        return (
-          middlewareOptions.enable !== false && cast(this.app.bean).onion.checkOnionOptionsMeta(middlewareOptions.meta)
-        );
+      this[SymbolOnionsEnabled] = this.onionsGlobal.filter(onionSlice => {
+        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable;
+        return onionOptions.enable !== false && cast(this.app.bean).onion.checkOnionOptionsMeta(onionOptions.meta);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
     return this[SymbolOnionsEnabled];
@@ -98,11 +96,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
 
   private _composeOnionsGlobal(executeCustom?: Function) {
     if (!this._cacheOnionsGlobal) {
-      const middlewares: Function[] = [];
+      const onions: Function[] = [];
       for (const item of this.onionsGlobal) {
-        middlewares.push(this._wrapMiddleware(item, executeCustom));
+        onions.push(this._wrapOnion(item, executeCustom));
       }
-      this._cacheOnionsGlobal = middlewares;
+      this._cacheOnionsGlobal = onions;
     }
     return this._cacheOnionsGlobal;
   }
@@ -118,18 +116,18 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     const handlerName = ctx.getHandler()?.name;
     const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
     if (!this._cacheOnionsHandler[key]) {
-      let middlewares: Function[] = [];
-      if (fnStart) middlewares = middlewares.concat(fnStart);
-      // middlewares: global
-      middlewares = middlewares.concat(this._composeOnionsGlobal(executeCustom));
-      if (fnMid) middlewares = middlewares.concat(fnMid);
-      // middlewares: handler
+      let onions: Function[] = [];
+      if (fnStart) onions = onions.concat(fnStart);
+      // onions: global
+      onions = onions.concat(this._composeOnionsGlobal(executeCustom));
+      if (fnMid) onions = onions.concat(fnMid);
+      // onions: handler
       const middlewaresLocal = this._collectOnionsHandler(ctx);
       for (const item of middlewaresLocal) {
-        middlewares.push(this._wrapMiddleware(item, executeCustom));
+        onions.push(this._wrapOnion(item, executeCustom));
       }
-      if (fnEnd) middlewares = middlewares.concat(fnEnd);
-      this._cacheOnionsHandler[key] = middlewares;
+      if (fnEnd) onions = onions.concat(fnEnd);
+      this._cacheOnionsHandler[key] = onions;
     }
     return this._cacheOnionsHandler[key];
   }
@@ -223,16 +221,16 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return options;
   }
 
-  private _handleDependents(middlewares: IOnionSlice<OPTIONS, ONIONNAME>[]) {
-    for (const middleware of middlewares) {
-      const middlewareOptions = middleware.beanOptions.options as IOnionOptionsDeps<string>;
-      let dependents = middlewareOptions.dependents as any;
+  private _handleDependents(onions: IOnionSlice<OPTIONS, ONIONNAME>[]) {
+    for (const middleware of onions) {
+      const onionOptions = middleware.beanOptions.options as IOnionOptionsDeps<string>;
+      let dependents = onionOptions.dependents as any;
       if (!dependents) continue;
       if (!Array.isArray(dependents)) {
         dependents = dependents.split(',') as any[];
       }
       for (const dep of dependents!) {
-        const middleware2 = middlewares.find(item => item.name === dep);
+        const middleware2 = onions.find(item => item.name === dep);
         if (!middleware2) {
           throw new Error(`${this.sceneName} ${dep} not found for dependents of ${middleware.name}`);
         }
@@ -248,23 +246,23 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     }
   }
 
-  private _swapOnions(middlewares: IOnionSlice<OPTIONS, ONIONNAME>[]) {
-    swapDeps(middlewares as ISwapDepsItem[], {
+  private _swapOnions(onions: IOnionSlice<OPTIONS, ONIONNAME>[]) {
+    swapDeps(onions as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
-        const middlewareOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
+        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
           .options as IOnionOptionsDeps<string>;
-        return middlewareOptions.dependencies as any;
+        return onionOptions.dependencies as any;
       },
     });
   }
 
   private _loadOnions() {
-    const middlewaresAll = this._loadOnionsAll();
+    const onionsAll = this._loadOnionsAll();
     this.onionsNormal = {} as Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
     this.onionsGlobal = [];
     // load
-    for (const item of middlewaresAll) {
+    for (const item of onionsAll) {
       // normal
       this.onionsNormal[item.name] = item;
       // global
@@ -275,25 +273,25 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   private _loadOnionsAll() {
-    const middlewaresAll: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
+    const onionsAll: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     for (const module of this.app.meta.modulesArray) {
       // todo: should be removed
       if (this.sceneName === 'middleware') {
-        this._loadOnionsAll_fromConfig(middlewaresAll, module);
+        this._loadOnionsAll_fromConfig(onionsAll, module);
       }
       // todo: remove this line
       if (this.sceneName !== 'middleware' || ['a-core', 'a-database'].includes(module.info.relativeName)) {
-        this._loadOnionsAll_fromMetadata(middlewaresAll, module);
+        this._loadOnionsAll_fromMetadata(onionsAll, module);
       }
     }
-    return middlewaresAll;
+    return onionsAll;
   }
 
-  private _loadOnionsAll_fromMetadata(middlewaresAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
-    const middlewares = appResource.scenes[this.sceneName]?.[module.info.relativeName];
-    if (!middlewares) return;
-    for (const key in middlewares) {
-      const beanOptions = middlewares[key];
+  private _loadOnionsAll_fromMetadata(onionsAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
+    const onions = appResource.scenes[this.sceneName]?.[module.info.relativeName];
+    if (!onions) return;
+    for (const key in onions) {
+      const beanOptions = onions[key];
       const name = key.replace(`.${this.sceneName}.`, ':') as ONIONNAME;
       // options
       const optionsConfig = this.app.config.onions[beanOptions.scene]?.[name];
@@ -304,7 +302,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       }
       // push
       // todo: remove options/as any
-      middlewaresAll.push({
+      onionsAll.push({
         name,
         options: beanOptions.options as any,
         beanOptions: beanOptions as any,
@@ -313,14 +311,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   // todo: should be removed
-  private _loadOnionsAll_fromConfig(middlewaresAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
+  private _loadOnionsAll_fromConfig(onionsAll: IOnionSlice<OPTIONS, ONIONNAME>[], module: IModule) {
     const config = this.app.config.modules[module.info.relativeName];
     if (!config?.middlewares) return;
-    for (const middlewareKey in config.middlewares) {
-      const middlewareConfig = config.middlewares[middlewareKey];
+    for (const onionKey in config.middlewares) {
+      const onionConfig = config.middlewares[onionKey];
       // bean
-      const beanName = middlewareConfig.bean;
-      if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${middlewareKey}`);
+      const beanName = onionConfig.bean;
+      if (!beanName) throw new Error(`bean not set for middleware: ${module.info.relativeName}.${onionKey}`);
       let bean;
       if (typeof beanName === 'string') {
         bean = {
@@ -336,19 +334,19 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       const beanFullName = `${bean.module}.middleware.${bean.name}`;
       const beanOptions = appResource.getBean(beanFullName)!;
       // options
-      beanOptions.options = middlewareConfig;
+      beanOptions.options = onionConfig;
       // push
       // todo: remove options/fromConfig/as any
-      middlewaresAll.push({
-        name: middlewareKey as ONIONNAME,
-        options: middlewareConfig,
+      onionsAll.push({
+        name: onionKey as ONIONNAME,
+        options: onionConfig,
         beanOptions: beanOptions as any,
         fromConfig: true,
       } as any);
     }
   }
 
-  _wrapMiddleware(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
+  _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
     const sceneName = this.sceneName;
     const fn = (ctx: VonaContext, next) => {
       let packet;

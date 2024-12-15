@@ -40,7 +40,7 @@ export class ServiceSchedule extends BeanBase {
     const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
     if (!scheduleItem) return false;
     // check disable
-    if (-1 === this.bean.onion.schedule.middlewaresEnabled.findIndex(item => item.name === scheduleName)) {
+    if (-1 === this.bean.onion.schedule.onionsEnabled.findIndex(item => item.name === scheduleName)) {
       return false;
     }
     // check if changed
@@ -62,7 +62,7 @@ export class ServiceSchedule extends BeanBase {
 
   public async loadSchedules(subdomain?: string) {
     if (subdomain === undefined) subdomain = this.ctx.subdomain;
-    for (const scheduleItem of this.bean.onion.schedule.middlewaresEnabled) {
+    for (const scheduleItem of this.bean.onion.schedule.onionsEnabled) {
       const scheduleName = scheduleItem.name;
       // push
       const jobName = this.__getJobName(subdomain, scheduleName);
