@@ -1,13 +1,17 @@
-import { Bean, BeanBase } from 'vona';
-
 import assert from 'assert';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastTest extends BeanBase {
-  async execute(context) {
-    const sameAsCaller = context.sameAsCaller;
-    const data = context.data;
-    if (!sameAsCaller) {
+export type TypeBroadcastTestJobData = {
+  message: string;
+};
+
+@Broadcast()
+export class BroadcastTest
+  extends BeanBroadcastBase<TypeBroadcastTestJobData>
+  implements IBroadcastExecute<TypeBroadcastTestJobData>
+{
+  async execute(data: TypeBroadcastTestJobData, isEmitter?: boolean) {
+    if (!isEmitter) {
       // do something
     }
     // locale

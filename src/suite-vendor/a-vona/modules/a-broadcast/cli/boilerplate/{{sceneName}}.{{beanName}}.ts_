@@ -1,13 +1,11 @@
-import { BeanQueueBase, IQueueExecute, IQueuePushOptions, Queue } from 'vona-module-a-queue';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-export type TypeQueue<%=argv.beanNameCapitalize%>JobData = unknown;
+export type TypeBroadcast<%=argv.beanNameCapitalize%>JobData = unknown;
 
-export type TypeQueue<%=argv.beanNameCapitalize%>JobResult = void;
-
-@Queue()
-export class Queue<%=argv.beanNameCapitalize%>
-  extends BeanQueueBase<TypeQueue<%=argv.beanNameCapitalize%>JobData, TypeQueue<%=argv.beanNameCapitalize%>JobResult>
-  implements IQueueExecute<TypeQueue<%=argv.beanNameCapitalize%>JobData, TypeQueue<%=argv.beanNameCapitalize%>JobResult>
+@Broadcast()
+export class Broadcast<%=argv.beanNameCapitalize%>
+  extends BeanBroadcastBase<TypeBroadcast<%=argv.beanNameCapitalize%>JobData>
+  implements IBroadcastExecute<TypeBroadcast<%=argv.beanNameCapitalize%>JobData>
 {
-  async execute(_data: TypeQueue<%=argv.beanNameCapitalize%>JobData, _options?: IQueuePushOptions): Promise<TypeQueue<%=argv.beanNameCapitalize%>JobResult> {}
+  async execute(_data: TypeBroadcast<%=argv.beanNameCapitalize%>JobData, _isEmitter?: boolean) {}
 }
