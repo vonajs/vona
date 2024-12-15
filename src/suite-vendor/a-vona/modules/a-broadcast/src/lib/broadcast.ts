@@ -1,6 +1,6 @@
 import { createBeanDecorator } from 'vona';
-import { IDecoratorQueueOptions } from '../types/queue.js';
+import { IDecoratorBroadcastOptions } from '../types/broadcast.js';
 
-export function Queue(options?: IDecoratorQueueOptions): ClassDecorator {
-  return createBeanDecorator('queue', options);
+export function Broadcast(options?: IDecoratorBroadcastOptions): ClassDecorator {
+  return createBeanDecorator('broadcast', options);
 }

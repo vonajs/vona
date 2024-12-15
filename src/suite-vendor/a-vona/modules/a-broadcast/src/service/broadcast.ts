@@ -1,5 +1,5 @@
 import { Service } from 'vona-module-a-web';
-import { IBroadcastJobContext } from '../types/broadcast.js';
+import { IBroadcastExecute, IBroadcastJobContext, IDecoratorBroadcastOptions } from '../types/broadcast.js';
 import { BeanBase, IORedis } from 'vona';
 
 @Service()
@@ -17,7 +17,7 @@ export class ServiceBroadcast extends BeanBase {
     this.__sub = app.redis.get('broadcast').duplicate();
     this.__sub.subscribe(this.__channelName, function () {});
     this.__sub.on('message', (_channel, info) => {
-      this._performTasks(JSON.parse(info))
+      this._performTask(JSON.parse(info))
         .then(() => {
           // do nothing
         })
@@ -32,41 +32,24 @@ export class ServiceBroadcast extends BeanBase {
     this.__pub.publish(this.__channelName, JSON.stringify(info));
   }
 
-  async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
-    const app = this.app;
-    // context
-    const context: IBroadcastExecuteContext = { data };
-    if (__callerId === this.__callerId) {
-      context.sameAsCaller = true;
-    }
-    // broadcasts
-    const broadcastArray = app.meta.broadcasts[`${module}:${broadcastName}`];
-    if (!broadcastArray) return;
-    // loop
-    for (const broadcast of broadcastArray) {
-      await this._performTask({ broadcast, context, locale, subdomain });
-    }
-  }
-
-  async _performTask({ broadcast, context, locale, subdomain }) {
-    const app = this.app;
-    const bean = broadcast.bean;
-    // execute as global when broadcast.config.instance === false
-    // ignore when instance not started
-    const instanceStarted = app.meta.util.instanceStarted(subdomain);
-    if (!instanceStarted && broadcast.config.instance !== false) return;
+  async _performTask<DATA>(info: IBroadcastJobContext<DATA>) {
+    // isEmitter
+    const isEmitter = info.callerId === this.__callerId;
+    // broadcast config
+    const broadcastItem = this.bean.onion.broadcast.getOnionSlice(info.broadcastName);
+    const broadcastConfig = this.bean.onion.broadcast.getOnionOptions<IDecoratorBroadcastOptions>(info.broadcastName);
     // execute
-    // todo: 需要重构
-    return await cast(this.bean).executor.newCtx(
+    return await this.bean.executor.newCtx(
       async () => {
-        const beanFullName = `${bean.module}.broadcast.${bean.name}`;
-        const beanInstance = this.app.bean._getBean(beanFullName as any);
-        return await cast(beanInstance).execute(context);
+        const beanFullName = broadcastItem.beanOptions.beanFullName;
+        const beanInstance = <IBroadcastExecute<DATA>>this.app.bean._getBean(beanFullName as any);
+        return await beanInstance.execute(info.data, isEmitter);
       },
       {
-        locale,
-        subdomain,
-        transaction: broadcast.config.transaction,
+        locale: info.options?.locale,
+        subdomain: info.options?.subdomain,
+        transaction: broadcastConfig?.transaction,
+        instance: broadcastConfig?.instance !== false,
       },
     );
   }

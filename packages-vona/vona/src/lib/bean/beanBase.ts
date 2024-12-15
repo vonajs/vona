@@ -13,14 +13,6 @@ export class BeanBase extends BeanBaseSimple {
     return this[SymbolText];
   }
 
-  protected get $appUtil() {
-    return this.app.meta.util;
-  }
-
-  protected get $ctxUtil() {
-    return this.ctx.meta.util;
-  }
-
   public get scope(): unknown {
     return this.getScope();
   }

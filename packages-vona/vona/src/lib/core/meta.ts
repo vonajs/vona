@@ -3,7 +3,6 @@ import { AppUtil, uuidv4 } from '../utils/util.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { AppMessenger } from '../module/messenger.js';
 import { IMonkeyApp, IMonkeySystem } from '../../types/interface/monkey.js';
-import { BroadcastClient } from '../module/broadcast/broadcastClient.js';
 import {
   IModule,
   IModuleMeta,
@@ -34,7 +33,6 @@ export class AppMeta extends BeanSimple {
   reload: AppReload;
   messenger: AppMessenger;
   appMonkey?: IMonkeyApp & IMonkeySystem;
-  broadcast: BroadcastClient;
   //
   resource: AppResource;
   metadata: AppMetadata;
@@ -48,8 +46,6 @@ export class AppMeta extends BeanSimple {
   metas: Record<string, IModuleMeta>;
   locales: TypeModuleResourceLocales;
   localeModules: TypeModuleResourceLocaleModules;
-  //
-  broadcasts: Record<string, any>;
   //
   appReady: boolean;
   appReadyInstances: Record<string, boolean>;

@@ -1,10 +1,7 @@
 import { VonaApplication } from '../../../../index.js';
 
+// todo: remove
 export type TypeModuleConfig<T extends (app: VonaApplication) => object> = ReturnType<T>;
-
-export interface IModuleConfigBroadcast {
-  bean: string | { module: string; name: string };
-}
 
 // todo: remove
 export interface IModuleConfigMiddleware {

@@ -1,15 +1,21 @@
-import { BeanBase } from 'vona';
-import { IBroadcastJobContext } from '../types/broadcast.js';
+import { BeanBase, deepExtend } from 'vona';
+import { IBroadcastEmitOptions, IBroadcastJobContext } from '../types/broadcast.js';
 
 export class BeanBroadcastBase<DATA = unknown> extends BeanBase {
-  emit(data: DATA) {
-    return this.$scope.broadcast.service.broadcast.emit(this._prepareInfo(data));
+  emit(data: DATA, options?: IBroadcastEmitOptions) {
+    return this.$scope.broadcast.service.broadcast.emit(this._prepareInfo(data, options));
   }
 
-  private _prepareInfo(data: DATA): IBroadcastJobContext<DATA> {
+  private _prepareInfo(data: DATA, options?: IBroadcastEmitOptions): IBroadcastJobContext<DATA> {
+    options = deepExtend({}, options)!;
+    if (this.ctx) {
+      options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
+      options.subdomain = options.subdomain === undefined ? this.ctx.subdomain : options.subdomain;
+    }
     return {
       broadcastName: this.onionName as never,
       data,
+      options,
     };
   }
 }
