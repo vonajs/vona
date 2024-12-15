@@ -74,7 +74,7 @@ export class ServiceStartup extends BeanBase {
   }
 
   async runStartup(startupName: string, subdomain?: string, options?: IInstanceStartupOptions) {
-    const startup = this.bean.onion.startup.middlewaresNormal[startupName];
+    const startup = this.bean.onion.startup.onionsNormal[startupName];
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // normal
     if (!startupOptions.debounce) {

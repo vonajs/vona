@@ -15,7 +15,7 @@ export class ServiceAop extends BeanBase {
     if (!beanOptions) return;
     // loop
     const aopsMatched: string[] = [];
-    for (const aop of this.bean.onion.aop.middlewaresGlobal) {
+    for (const aop of this.bean.onion.aop.onionsGlobal) {
       const aopOptions = aop.beanOptions.options as IDecoratorAopOptions;
       // not self
       if (aop.beanOptions.beanFullName === beanOptions.beanFullName) continue;

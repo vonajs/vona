@@ -31,27 +31,27 @@ const __adapter = (_context, chain) => {
   };
 };
 
-const SymbolMiddlewaresEnabled = Symbol('SymbolMiddlewaresEnabled');
+const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   protected [SymbolProxyDisable]: boolean = true;
   sceneName: string;
   sceneMeta: OnionSceneMeta;
-  middlewaresNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
-  middlewaresGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
+  onionsNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
+  onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
 
-  private [SymbolMiddlewaresEnabled]: IOnionSlice<OPTIONS, ONIONNAME>[];
+  private [SymbolOnionsEnabled]: IOnionSlice<OPTIONS, ONIONNAME>[];
 
-  _cacheMiddlewaresGlobal: Function[];
-  _cacheMiddlewaresHandler: Record<string, Function[]> = {};
+  _cacheOnionsGlobal: Function[];
+  _cacheOnionsHandler: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string) {
     this.sceneName = sceneName;
     this.sceneMeta = getOnionScenesMeta(this.app.meta.modules)[this.sceneName];
     this._loadMiddlewares();
-    this._handleDependents(this.middlewaresGlobal);
-    this._swapMiddlewares(this.middlewaresGlobal);
+    this._handleDependents(this.onionsGlobal);
+    this._swapMiddlewares(this.onionsGlobal);
   }
 
   compose(
@@ -81,15 +81,15 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   get middlewaresEnabled() {
-    if (!this[SymbolMiddlewaresEnabled]) {
-      this[SymbolMiddlewaresEnabled] = this.middlewaresGlobal.filter(middlewareItem => {
+    if (!this[SymbolOnionsEnabled]) {
+      this[SymbolOnionsEnabled] = this.onionsGlobal.filter(middlewareItem => {
         const middlewareOptions = middlewareItem.beanOptions.options as IOnionOptionsEnable;
         return (
           middlewareOptions.enable !== false && cast(this.app.bean).onion.checkOnionOptionsMeta(middlewareOptions.meta)
         );
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
-    return this[SymbolMiddlewaresEnabled];
+    return this[SymbolOnionsEnabled];
   }
 
   public get composedMiddlewaresGlobal() {
@@ -97,14 +97,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   private _composeMiddlewaresGlobal(executeCustom?: Function) {
-    if (!this._cacheMiddlewaresGlobal) {
+    if (!this._cacheOnionsGlobal) {
       const middlewares: Function[] = [];
-      for (const item of this.middlewaresGlobal) {
+      for (const item of this.onionsGlobal) {
         middlewares.push(this._wrapMiddleware(item, executeCustom));
       }
-      this._cacheMiddlewaresGlobal = middlewares;
+      this._cacheOnionsGlobal = middlewares;
     }
-    return this._cacheMiddlewaresGlobal;
+    return this._cacheOnionsGlobal;
   }
 
   private _composeMiddlewaresHandler(
@@ -117,7 +117,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     const beanFullName = ctx.getClassBeanFullName();
     const handlerName = ctx.getHandler()?.name;
     const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
-    if (!this._cacheMiddlewaresHandler[key]) {
+    if (!this._cacheOnionsHandler[key]) {
       let middlewares: Function[] = [];
       if (fnStart) middlewares = middlewares.concat(fnStart);
       // middlewares: global
@@ -129,9 +129,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
         middlewares.push(this._wrapMiddleware(item, executeCustom));
       }
       if (fnEnd) middlewares = middlewares.concat(fnEnd);
-      this._cacheMiddlewaresHandler[key] = middlewares;
+      this._cacheOnionsHandler[key] = middlewares;
     }
-    return this._cacheMiddlewaresHandler[key];
+    return this._cacheOnionsHandler[key];
   }
 
   public _collectMiddlewaresHandler(ctx: VonaContext) {
@@ -160,7 +160,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       });
     }
     for (const middlewareName of middlewaresLocalAll) {
-      const item = this.middlewaresNormal[middlewareName];
+      const item = this.onionsNormal[middlewareName];
       if (!item) throw new Error(`${this.sceneName} not found: ${middlewareName}`);
       middlewaresLocal.push(item);
     }
@@ -168,7 +168,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   }
 
   getMiddlewareItem(middlewareName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
-    return this.middlewaresNormal[middlewareName];
+    return this.onionsNormal[middlewareName];
   }
 
   getMiddlewareOptions<OPTIONS>(middlewareName: ONIONNAME): OPTIONS | undefined {
@@ -261,15 +261,15 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
 
   private _loadMiddlewares() {
     const middlewaresAll = this._loadMiddlewaresAll();
-    this.middlewaresNormal = {} as Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
-    this.middlewaresGlobal = [];
+    this.onionsNormal = {} as Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
+    this.onionsGlobal = [];
     // load
     for (const item of middlewaresAll) {
       // normal
-      this.middlewaresNormal[item.name] = item;
+      this.onionsNormal[item.name] = item;
       // global
       if (!this.sceneMeta.hasLocal || cast(item.beanOptions.options)?.global) {
-        this.middlewaresGlobal.push(item);
+        this.onionsGlobal.push(item);
       }
     }
   }

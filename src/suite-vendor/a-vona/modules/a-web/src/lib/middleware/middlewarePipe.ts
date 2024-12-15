@@ -94,7 +94,7 @@ function composePipes(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorat
   if (!__cacheMiddlewaresArgument[key]) {
     const middlewares: Function[] = [];
     // pipes: global
-    for (const item of onionPipe.middlewaresGlobal) {
+    for (const item of onionPipe.onionsGlobal) {
       middlewares.push(onionPipe._wrapMiddleware(item, executeCustom));
     }
     // pipes: route
@@ -121,7 +121,7 @@ function _collectArgumentMiddlewares(
   if (!argMeta.pipes) return;
   return argMeta.pipes.map(pipe => {
     const { pipeName, options } = pipe();
-    const item = onionPipe.middlewaresNormal[pipeName];
+    const item = onionPipe.onionsNormal[pipeName];
     if (!item) throw new Error(`${onionPipe.sceneName} not found: ${pipeName}`);
     return {
       ...item,

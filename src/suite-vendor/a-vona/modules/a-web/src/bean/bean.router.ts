@@ -76,7 +76,7 @@ export class BeanRouter extends BeanBase {
       if (typeof middlewares === 'string') middlewares = middlewares.split(',');
       middlewares.forEach(key => {
         if (is.string(key)) {
-          const item = app.bean.onion.middleware.middlewaresNormal[key];
+          const item = app.bean.onion.middleware.onionsNormal[key];
           if (item) {
             middlewaresLocal.push(wrapMiddleware('middleware', item));
           } else {
