@@ -2,34 +2,7 @@ import { cast, IBroadcastExecuteContext } from '../../../types/index.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 export class BroadcastClient extends BeanSimple {
-  __callerId: string = '';
-  channelName: string | null = null;
-  sub: any = null;
-  pub: any = null;
-
-  protected __init__() {
-    const app = this.app;
-    this.__callerId = app.meta.workerId;
-    this.channelName = `broadcast_${this.app.name}:`;
-    this.pub = app.redis.get('broadcast').duplicate();
-    this.sub = app.redis.get('broadcast').duplicate();
-    this.sub.subscribe(this.channelName, function () {});
-    this.sub.on('message', (_channel, info) => {
-      this._performTasks(JSON.parse(info))
-        .then(() => {
-          // do nothing
-        })
-        .catch(err => {
-          app.logger.error(err);
-        });
-    });
-  }
-
-  // { locale, subdomain, module, broadcastName, data }
-  emit(info) {
-    info.__callerId = this.__callerId;
-    this.pub.publish(this.channelName, JSON.stringify(info));
-  }
+  protected __init__() {}
 
   async _performTasks({ __callerId, locale, subdomain, module, broadcastName, data }) {
     const app = this.app;

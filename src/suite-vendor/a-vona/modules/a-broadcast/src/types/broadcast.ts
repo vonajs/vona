@@ -1,5 +1,10 @@
-import { OmitNever } from 'vona';
+import { ILocalInfos, OmitNever } from 'vona';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+
+export interface IBroadcastEmitOptions {
+  locale?: keyof ILocalInfos;
+  subdomain?: string | null | undefined;
+}
 
 export interface IBroadcastExecute<DATA = unknown> {
   execute(data: DATA, sameAsCaller?: boolean): Promise<void>;
@@ -8,7 +13,8 @@ export interface IBroadcastExecute<DATA = unknown> {
 export interface IBroadcastJobContext<DATA> {
   broadcastName: keyof IBroadcastRecord;
   data: DATA;
-  callerId: string;
+  options?: IBroadcastEmitOptions;
+  callerId?: string;
 }
 
 export interface IBroadcastRecord {}
