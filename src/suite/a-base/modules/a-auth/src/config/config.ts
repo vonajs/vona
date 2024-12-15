@@ -1,15 +1,7 @@
-import { VonaApplication, IModuleConfigBroadcast } from 'vona';
-
-// broadcasts
-const broadcasts = {
-  authProviderChanged: {
-    bean: 'authProviderChanged',
-  } as IModuleConfigBroadcast,
-};
+import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    broadcasts,
     login: {
       providers: [
         {

@@ -1,11 +1,17 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastAuthProviderChanged extends BeanBase {
-  async execute(context) {
-    const sameAsCaller = context.sameAsCaller;
-    const data = context.data;
-    if (!sameAsCaller) {
+export type TypeBroadcastAuthProviderChangedJobData = {
+  module: string;
+  providerName: string;
+};
+
+@Broadcast()
+export class BroadcastAuthProviderChanged
+  extends BeanBroadcastBase<TypeBroadcastAuthProviderChangedJobData>
+  implements IBroadcastExecute<TypeBroadcastAuthProviderChangedJobData>
+{
+  async execute(data: TypeBroadcastAuthProviderChangedJobData, isEmitter?: boolean) {
+    if (!isEmitter) {
       await this.app.bean.authProviderCache._cacheAuthProviderConfig(data.module, data.providerName);
     }
   }

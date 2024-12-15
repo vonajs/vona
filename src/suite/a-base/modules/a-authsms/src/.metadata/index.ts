@@ -1,14 +1,12 @@
 /** beans: begin */
 export * from '../bean/auth.provider.sms.js';
 export * from '../bean/bean.smsProviderCache.js';
-export * from '../bean/broadcast.smsProviderChanged.js';
 export * from '../bean/captcha.provider.captcha.js';
 export * from '../bean/event.accountMigration.js';
 export * from '../bean/sms.provider.aliyun.js';
 export * from '../bean/sms.provider.test.js';
 import { AuthProviderSms } from '../bean/auth.provider.sms.js';
 import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
-import { BroadcastSmsProviderChanged } from '../bean/broadcast.smsProviderChanged.js';
 import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
 import { EventAccountMigration } from '../bean/event.accountMigration.js';
 import { SmsProviderAliyun } from '../bean/sms.provider.aliyun.js';
@@ -21,7 +19,6 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'a-authsms.auth.provider.sms': AuthProviderSms;
-    'a-authsms.broadcast.smsProviderChanged': BroadcastSmsProviderChanged;
     'a-authsms.captcha.provider.captcha': CaptchaProviderCaptcha;
     'a-authsms.event.accountMigration': EventAccountMigration;
     'a-authsms.sms.provider.aliyun': SmsProviderAliyun;
@@ -35,11 +32,6 @@ declare module 'vona-module-a-authsms' {
   }
 
   export interface BeanSmsProviderCache {
-    /** @internal */
-    get scope(): ScopeModuleAAuthsms;
-  }
-
-  export interface BroadcastSmsProviderChanged {
     /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
@@ -65,6 +57,29 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** beans: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.smsProviderChanged.js';
+export * from '../bean/broadcast.smsProviderChanged_.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-authsms:smsProviderChanged': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-authsms' {
+  export interface BroadcastSmsProviderChanged {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastSmsProviderChanged } from '../bean/broadcast.smsProviderChanged.js';
+export interface IModuleBroadcast {
+  smsProviderChanged: BroadcastSmsProviderChanged;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -217,6 +232,7 @@ export interface ScopeModuleAAuthsms {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  broadcast: IModuleBroadcast;
   status: MetaStatus;
   service: IModuleService;
 }

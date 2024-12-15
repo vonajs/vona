@@ -3,15 +3,11 @@ export * from '../bean/bean.cache.js';
 export * from '../bean/bean.cacheDb.js';
 export * from '../bean/bean.cacheMem.js';
 export * from '../bean/bean.cacheRedis.js';
-export * from '../bean/broadcast.memClear.js';
-export * from '../bean/broadcast.memRemove.js';
 export * from '../bean/version.manager.js';
 import { BeanCache } from '../bean/bean.cache.js';
 import { BeanCacheDb } from '../bean/bean.cacheDb.js';
 import { BeanCacheMem } from '../bean/bean.cacheMem.js';
 import { BeanCacheRedis } from '../bean/bean.cacheRedis.js';
-import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
-import { BroadcastMemRemove } from '../bean/broadcast.memRemove.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -23,8 +19,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'a-cache.broadcast.memClear': BroadcastMemClear;
-    'a-cache.broadcast.memRemove': BroadcastMemRemove;
     'a-cache.version.manager': VersionManager;
   }
 }
@@ -45,16 +39,6 @@ declare module 'vona-module-a-cache' {
   }
 
   export interface BeanCacheRedis {
-    /** @internal */
-    get scope(): ScopeModuleACache;
-  }
-
-  export interface BroadcastMemClear {
-    /** @internal */
-    get scope(): ScopeModuleACache;
-  }
-
-  export interface BroadcastMemRemove {
     /** @internal */
     get scope(): ScopeModuleACache;
   }
@@ -90,6 +74,39 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** entity: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.memClear.js';
+export * from '../bean/broadcast.memClear_.js';
+export * from '../bean/broadcast.memRemove.js';
+export * from '../bean/broadcast.memRemove_.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-cache:memClear': IDecoratorBroadcastOptions;
+    'a-cache:memRemove': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-cache' {
+  export interface BroadcastMemClear {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BroadcastMemRemove {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastMemClear } from '../bean/broadcast.memClear.js';
+import { BroadcastMemRemove } from '../bean/broadcast.memRemove.js';
+export interface IModuleBroadcast {
+  memClear: BroadcastMemClear;
+  memRemove: BroadcastMemRemove;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -140,6 +157,7 @@ export interface ScopeModuleACache {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   entity: IModuleEntity;
+  broadcast: IModuleBroadcast;
   redlock: MetaRedlock;
 }
 

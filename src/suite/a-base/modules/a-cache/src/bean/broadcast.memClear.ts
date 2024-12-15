@@ -1,11 +1,16 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastMemClear extends BeanBase {
-  async execute(context) {
-    const sameAsCaller = context.sameAsCaller;
-    const data = context.data;
-    if (!sameAsCaller) {
+export type TypeBroadcastMemClearJobData = {
+  moduleName: string;
+};
+
+@Broadcast()
+export class BroadcastMemClear
+  extends BeanBroadcastBase<TypeBroadcastMemClearJobData>
+  implements IBroadcastExecute<TypeBroadcastMemClearJobData>
+{
+  async execute(data: TypeBroadcastMemClearJobData, isEmitter?: boolean) {
+    if (!isEmitter) {
       const moduleCache = this.ctx.cache.mem.module(data.moduleName);
       moduleCache._clear();
     }

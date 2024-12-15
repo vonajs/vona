@@ -1,10 +1,3 @@
-// broadcasts
-const broadcasts = {
-  smsProviderChanged: {
-    bean: 'smsProviderChanged',
-  },
-};
-
 // captcha scenes
 // const _captchaSimple = {
 //   module: 'a-captchasimple',
@@ -19,7 +12,6 @@ import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    broadcasts,
     // account
     account: {
       url: {
