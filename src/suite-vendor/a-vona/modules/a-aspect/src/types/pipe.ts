@@ -1,5 +1,5 @@
 import { Constructable, OmitNever, Type } from 'vona';
-import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, ServiceOnion } from 'vona-module-a-onion';
 import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
@@ -52,6 +52,13 @@ export interface RouteHandlerArgumentMeta {
   controller: Constructable;
   method: string;
   index: number;
+}
+
+export interface IPipeItemArgument<OPTIONS = unknown, ONIONNAME = string, T = unknown>
+  extends IOnionSlice<OPTIONS, ONIONNAME, T> {
+  argumentPipe?: {
+    options?: IDecoratorPipeOptions;
+  };
 }
 
 declare module 'vona-module-a-onion' {
