@@ -1,6 +1,6 @@
-import { BeanBase, Get } from 'vona';
+import { BeanBase } from 'vona';
 import { UseGuardGlobal } from 'vona-module-a-aspect';
-import { Controller } from 'vona-module-a-web';
+import { Controller, Get } from 'vona-module-a-web';
 
 @Controller()
 export class ControllerIndex extends BeanBase {

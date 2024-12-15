@@ -1,8 +1,8 @@
-import { BeanBase, Get, Post } from 'vona';
+import { BeanBase } from 'vona';
 import { Body, Query, v } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
-import { Controller } from 'vona-module-a-web';
+import { Controller, Get, Post } from 'vona-module-a-web';
 import { UseFilterGlobal, UseGuardGlobal, UseMiddleware } from 'vona-module-a-aspect';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })

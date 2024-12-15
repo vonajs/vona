@@ -8,9 +8,6 @@ import {
   deepExtend,
   IModuleRoute,
   Next,
-  RequestMappingMetadata,
-  RequestMethod,
-  SymbolRequestMappingHandler,
   VonaContext,
 } from 'vona';
 import is from 'is-type-of';
@@ -22,6 +19,8 @@ import { middlewareInterceptor } from '../lib/middleware/middlewareInterceptor.j
 import { middlewarePipe } from '../lib/middleware/middlewarePipe.js';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-aspect';
 import { IOnionSlice, SymbolUseOnionOptions } from 'vona-module-a-onion';
+import { RequestMethod, SymbolRequestMappingHandler } from '../types/http.js';
+import { RequestMappingMetadata } from '../lib/decorator/http/requestMapping.js';
 
 @Bean()
 export class BeanRouter extends BeanBase {
