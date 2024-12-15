@@ -1,5 +1,4 @@
 /** beans: begin */
-export * from '../bean/broadcast.test.js';
 export * from '../bean/cli.default.demo.js';
 export * from '../bean/event.helloEcho.js';
 export * from '../bean/event.loginInfo.js';
@@ -12,7 +11,6 @@ export * from '../bean/stats.tasksInstance.js';
 export * from '../bean/stats.tasksUser.js';
 export * from '../bean/summer.cache.test.js';
 export * from '../bean/version.manager.js';
-import { BroadcastTest } from '../bean/broadcast.test.js';
 import { CliDefaultDemo } from '../bean/cli.default.demo.js';
 import { EventHelloEcho } from '../bean/event.helloEcho.js';
 import { EventLoginInfo } from '../bean/event.loginInfo.js';
@@ -30,7 +28,6 @@ declare module 'vona' {
   export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    'test-party.broadcast.test': BroadcastTest;
     'test-party.cli.default.demo': CliDefaultDemo;
     'test-party.event.helloEcho': EventHelloEcho;
     'test-party.event.loginInfo': EventLoginInfo;
@@ -46,11 +43,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-test-party' {
-  export interface BroadcastTest {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
   export interface CliDefaultDemo {
     /** @internal */
     get scope(): ScopeModuleTestParty;
@@ -239,6 +231,37 @@ declare module 'vona-module-test-party' {
   }
 }
 /** aop: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.test.js';
+export * from '../bean/broadcast.test1.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'test-party:test': IDecoratorBroadcastOptions;
+    'test-party:test1': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface BroadcastTest {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface BroadcastTest1 {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastTest } from '../bean/broadcast.test.js';
+import { BroadcastTest1 } from '../bean/broadcast.test1.js';
+export interface IModuleBroadcast {
+  test: BroadcastTest;
+  test1: BroadcastTest1;
+}
+/** broadcast: end */
 /** startup: begin */
 export * from '../bean/startup.startupAll.js';
 export * from '../bean/startup.startupInstance.js';
@@ -655,6 +678,7 @@ export interface ScopeModuleTestParty {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   service: IModuleService;
 }
 

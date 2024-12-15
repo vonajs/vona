@@ -1,11 +1,4 @@
-import { VonaApplication, IModuleConfigBroadcast, IModuleConfigMiddleware } from 'vona';
-
-// broadcasts
-const broadcasts = {
-  broadcastTest: {
-    bean: 'test',
-  } as IModuleConfigBroadcast,
-};
+import { VonaApplication, IModuleConfigMiddleware } from 'vona';
 
 const middlewares = {
   testInterception: {
@@ -89,7 +82,6 @@ const _captchaSMS = {
 export const config = (app: VonaApplication) => {
   return {
     // app.meta.isTest
-    broadcasts: app.meta.isTest ? broadcasts : undefined,
     monkeyed: app.meta.isTest ? false : undefined,
     // normal
     middlewares,
