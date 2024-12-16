@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/bean.event.js';
-import { BeanEvent } from '../bean/bean.event.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    event: BeanEvent;
-  }
-
-  export interface IBeanRecordGeneral {}
-}
-declare module 'vona-module-a-event' {
-  export interface BeanEvent {
-    /** @internal */
-    get scope(): ScopeModuleAEvent;
-  }
-}
-/** beans: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

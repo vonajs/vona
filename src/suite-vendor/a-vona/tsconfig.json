@@ -47,6 +47,9 @@
     },
     {
       "path": "modules/a-broadcast/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-event/tsconfig.build.json"
     }
   ]
 }

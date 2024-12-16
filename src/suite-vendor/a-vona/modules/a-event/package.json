@@ -1,9 +1,10 @@
 {
   "name": "vona-module-a-event",
   "version": "5.0.0",
+  "title": "a-event",
   "vonaModule": {
     "dependencies": {
-      "a-instance": "5.0.0"
+      "a-vona": "5.0.0"
     }
   },
   "type": "module",
@@ -20,13 +21,14 @@
     "./package.json": "./package.json"
   },
   "description": "",
+  "keywords": [
+    "Vona Module"
+  ],
+  "author": "",
   "files": [
     "dist",
     "static"
   ],
   "scripts": {},
-  "author": "zhennann",
-  "dependencies": {
-    "assert": "^2.0.0"
-  }
+  "dependencies": {}
 }
