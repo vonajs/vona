@@ -1,5 +1,6 @@
 import { Next, OmitNever } from 'vona';
 import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IMiddlewareRecordGlobal {}
 export interface IMiddlewareRecordLocal {}
@@ -14,7 +15,7 @@ export interface IDecoratorMiddlewareOptions {
 }
 
 export interface IDecoratorMiddlewareOptionsGlobal
-  extends IOnionOptionsBase,
+  extends IOnionOptionsBase<keyof IApiPathRecord>,
     IOnionOptionsDeps<keyof IMiddlewareRecordGlobal> {
   global: true;
 }

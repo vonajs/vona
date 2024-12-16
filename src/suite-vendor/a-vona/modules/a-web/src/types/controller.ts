@@ -1,6 +1,8 @@
 import { OmitNever } from 'vona';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
+export interface IApiPathRecord {}
+
 export interface IControllerRecord {}
 
 export interface IDecoratorControllerOptions extends IOnionOptionsEnable {
