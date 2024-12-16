@@ -28,7 +28,6 @@ const __adapter = (_context, chain) => {
   };
 };
 
-const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 const SymbolOnionsEnabledWithSelector = Symbol('SymbolOnionsEnabledWithSelector');
 
 @Service()
@@ -39,7 +38,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   onionsNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
   onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
 
-  private [SymbolOnionsEnabled]: IOnionSlice<OPTIONS, ONIONNAME>[];
   private [SymbolOnionsEnabledWithSelector]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
 
   _cacheOnionsGlobal: Function[];
@@ -79,27 +77,12 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return composeAsync(onions, __adapter);
   }
 
-  getOnionsEnabled() {
-    if (!this[SymbolOnionsEnabled]) {
-      this[SymbolOnionsEnabled] = this.onionsGlobal.filter(onionSlice => {
-        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable;
-        return onionOptions.enable !== false && this.bean.onion.checkOnionOptionsMeta(onionOptions.meta);
-      }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
-    }
-    return this[SymbolOnionsEnabled];
-  }
-
-  getOnionsEnabledWithSelector(selector: string) {
+  getOnionsEnabled(selector?: string) {
+    if (!selector) selector = '';
     if (!this[SymbolOnionsEnabledWithSelector][selector]) {
       this[SymbolOnionsEnabledWithSelector][selector] = this.onionsGlobal.filter(onionSlice => {
         const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
-        if (onionOptions.enable === false) return false;
-        if (!this.bean.onion.checkOnionOptionsMeta(onionOptions.meta)) return false;
-        if (!onionOptions.match && !onionOptions.ignore) return true;
-        return (
-          (onionOptions.match && __onionMatchSelector(onionOptions.match, selector)) ||
-          (onionOptions.ignore && !__onionMatchSelector(onionOptions.ignore, selector))
-        );
+        return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
     return this[SymbolOnionsEnabledWithSelector][selector];
