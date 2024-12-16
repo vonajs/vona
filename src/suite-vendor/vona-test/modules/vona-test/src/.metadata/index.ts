@@ -103,15 +103,22 @@ declare module 'vona-module-vona-test' {
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
 /** queue: begin */
+export * from '../bean/queue.helloEcho.js';
 export * from '../bean/queue.test.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
+    'vona-test:helloEcho': IDecoratorQueueOptions;
     'vona-test:test': IDecoratorQueueOptions;
   }
 }
 declare module 'vona-module-vona-test' {
+  export interface QueueHelloEcho {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+
   export interface QueueTest {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
@@ -119,8 +126,10 @@ declare module 'vona-module-vona-test' {
 }
 /** queue: end */
 /** queue: begin */
+import { QueueHelloEcho } from '../bean/queue.helloEcho.js';
 import { QueueTest } from '../bean/queue.test.js';
 export interface IModuleQueue {
+  helloEcho: QueueHelloEcho;
   test: QueueTest;
 }
 /** queue: end */

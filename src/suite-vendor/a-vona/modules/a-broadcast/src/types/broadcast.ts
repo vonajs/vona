@@ -1,5 +1,5 @@
 import { ILocalInfos, OmitNever } from 'vona';
-import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import { ServiceOnion } from 'vona-module-a-onion';
 
 export interface IBroadcastEmitOptions {
   locale?: keyof ILocalInfos;
@@ -19,7 +19,7 @@ export interface IBroadcastJobContext<DATA> {
 
 export interface IBroadcastRecord {}
 
-export interface IDecoratorBroadcastOptions extends IOnionOptionsEnable {
+export interface IDecoratorBroadcastOptions {
   transaction?: boolean;
   instance?: boolean;
 }
