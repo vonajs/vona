@@ -98,7 +98,6 @@ export interface IModuleModel {
 /** model: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.mailSceneChanged.js';
-export * from '../bean/broadcast.mailSceneChanged_.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {

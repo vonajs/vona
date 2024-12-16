@@ -92,7 +92,6 @@ export interface IModuleModel {
 /** model: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.columnsClear.js';
-export * from '../bean/broadcast.columnsClear_.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {

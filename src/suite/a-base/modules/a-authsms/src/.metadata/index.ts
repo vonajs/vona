@@ -59,7 +59,6 @@ declare module 'vona-module-a-authsms' {
 /** beans: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.smsProviderChanged.js';
-export * from '../bean/broadcast.smsProviderChanged_.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {

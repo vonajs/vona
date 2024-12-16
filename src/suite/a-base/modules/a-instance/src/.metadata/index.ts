@@ -65,9 +65,7 @@ export interface IModuleModel {
 /** model: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.reload.js';
-export * from '../bean/broadcast.reload_.js';
 export * from '../bean/broadcast.resetCache.js';
-export * from '../bean/broadcast.resetCache_.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {

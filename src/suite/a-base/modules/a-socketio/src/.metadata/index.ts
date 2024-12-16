@@ -113,7 +113,6 @@ export interface IModuleModel {
 /** model: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.socketEmit.js';
-export * from '../bean/broadcast.socketEmit_.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {

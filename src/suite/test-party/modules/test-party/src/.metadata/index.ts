@@ -233,13 +233,11 @@ declare module 'vona-module-test-party' {
 /** aop: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.test.js';
-export * from '../bean/broadcast.test1.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   export interface IBroadcastRecord {
     'test-party:test': IDecoratorBroadcastOptions;
-    'test-party:test1': IDecoratorBroadcastOptions;
   }
 }
 declare module 'vona-module-test-party' {
@@ -247,19 +245,12 @@ declare module 'vona-module-test-party' {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }
-
-  export interface BroadcastTest1 {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
 }
 /** broadcast: end */
 /** broadcast: begin */
 import { BroadcastTest } from '../bean/broadcast.test.js';
-import { BroadcastTest1 } from '../bean/broadcast.test1.js';
 export interface IModuleBroadcast {
   test: BroadcastTest;
-  test1: BroadcastTest1;
 }
 /** broadcast: end */
 /** startup: begin */

@@ -76,9 +76,7 @@ declare module 'vona-module-a-cache' {
 /** entity: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.memClear.js';
-export * from '../bean/broadcast.memClear_.js';
 export * from '../bean/broadcast.memRemove.js';
-export * from '../bean/broadcast.memRemove_.js';
 
 import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {

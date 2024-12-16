@@ -2,12 +2,10 @@
 export * from '../bean/bean.authProvider.js';
 export * from '../bean/bean.authProviderBase_.js';
 export * from '../bean/bean.authProviderCache.js';
-export * from '../bean/broadcast.authProviderChanged.js';
 export * from '../bean/version.manager.js';
 import { BeanAuthProvider } from '../bean/bean.authProvider.js';
 import { BeanAuthProviderBase } from '../bean/bean.authProviderBase_.js';
 import { BeanAuthProviderCache } from '../bean/bean.authProviderCache.js';
-import { BroadcastAuthProviderChanged } from '../bean/broadcast.authProviderChanged.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -18,7 +16,6 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     authProviderBase: BeanAuthProviderBase;
-    'a-auth.broadcast.authProviderChanged': BroadcastAuthProviderChanged;
     'a-auth.version.manager': VersionManager;
   }
 }
@@ -29,11 +26,6 @@ declare module 'vona-module-a-auth' {
   }
 
   export interface BeanAuthProviderCache {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-
-  export interface BroadcastAuthProviderChanged {
     /** @internal */
     get scope(): ScopeModuleAAuth;
   }
@@ -109,6 +101,28 @@ export interface IModuleModel {
   authProvider: ModelAuthProvider;
 }
 /** model: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.authProviderChanged.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-auth:authProviderChanged': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-auth' {
+  export interface BroadcastAuthProviderChanged {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastAuthProviderChanged } from '../bean/broadcast.authProviderChanged.js';
+export interface IModuleBroadcast {
+  authProviderChanged: BroadcastAuthProviderChanged;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -221,6 +235,7 @@ export interface ScopeModuleAAuth {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   redlock: MetaRedlock;
   service: IModuleService;
 }
