@@ -30,11 +30,7 @@ export class BeanSmsProviderCache extends BeanBase {
     // change self
     await this._cacheSmsProvidersConfig();
     // broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: 'a-mail',
-      broadcastName: 'smsProviderChanged',
-      data: null,
-    });
+    this.scope.broadcast.smsProviderChanged.emit();
   }
 
   purgeProvider(provider) {

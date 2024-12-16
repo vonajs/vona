@@ -51,11 +51,7 @@ export class BeanAuthProviderCache extends BeanBase {
     // change self
     await this._cacheAuthProviderConfig(module, providerName);
     // broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: 'a-auth',
-      broadcastName: 'authProviderChanged',
-      data: { module, providerName },
-    });
+    this.scope.broadcast.authProviderChanged.emit({ module, providerName });
   }
 
   purgeScene(scene) {
