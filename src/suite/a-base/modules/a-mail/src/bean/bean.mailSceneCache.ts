@@ -30,11 +30,7 @@ export class BeanMailSceneCache extends BeanBase {
     // change self
     await this._cacheMailScenesConfig();
     // broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: 'a-mail',
-      broadcastName: 'mailSceneChanged',
-      data: null,
-    });
+    this.scope.broadcast.mailSceneChanged.emit();
   }
 
   purgeScene(scene) {

@@ -2,11 +2,11 @@ import { BeanBase, deepExtend } from 'vona';
 import { IBroadcastEmitOptions, IBroadcastJobContext } from '../types/broadcast.js';
 
 export class BeanBroadcastBase<DATA = unknown> extends BeanBase {
-  emit(data: DATA, options?: IBroadcastEmitOptions) {
+  emit(data?: DATA, options?: IBroadcastEmitOptions) {
     return this.$scope.broadcast.service.broadcast.emit(this._prepareInfo(data, options));
   }
 
-  private _prepareInfo(data: DATA, options?: IBroadcastEmitOptions): IBroadcastJobContext<DATA> {
+  private _prepareInfo(data?: DATA, options?: IBroadcastEmitOptions): IBroadcastJobContext<DATA> {
     options = deepExtend({}, options)!;
     if (this.ctx) {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
