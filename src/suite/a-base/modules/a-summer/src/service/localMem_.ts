@@ -83,11 +83,7 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     // clear on this worker
     this.lruCache.clear();
     // clear on other workers by broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: __ThisModule__,
-      broadcastName: 'memClear',
-      data: { cacheName: this._cacheName, cacheOptions: this._cacheOpitons, options },
-    });
+    this.scope.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOpitons, options });
     // clear layered
     const layered = this.__getLayered(options);
     await layered.clear(options);

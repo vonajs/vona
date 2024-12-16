@@ -21,11 +21,7 @@ export class ServiceVersion extends BeanBase {
       // clear columns cache
       this.bean.model.columnsClearAll();
       // broadcast
-      this.app.meta.broadcast.emit({
-        module: __ThisModule__,
-        broadcastName: 'columnsClear',
-        data: { mode: 'all' },
-      });
+      this.scope.broadcast.columnsClear.emit({ mode: 'all' });
       // log
       if (Object.keys(result).length > 0) console.log(result);
       console.log(chalk.cyan('  All modules are checked successfully!'));

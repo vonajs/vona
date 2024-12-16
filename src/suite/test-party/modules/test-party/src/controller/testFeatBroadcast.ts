@@ -4,12 +4,12 @@ import { Controller } from 'vona-module-a-web';
 @Controller()
 export class ControllerTestFeatBroadcast extends BeanBase {
   async emit() {
-    this.ctx.meta.util.broadcastEmit({
-      locale: 'zh-cn',
-      module: 'test-party',
-      broadcastName: 'broadcastTest',
-      data: { message: 'hello' },
-    });
+    this.scope.broadcast.test.emit(
+      { message: 'hello' },
+      {
+        locale: 'zh-cn',
+      },
+    );
     this.app.success();
   }
 }

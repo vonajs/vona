@@ -5,7 +5,7 @@ import { cast } from 'vona';
 export type TypeBroadcastMemClearJobData = {
   cacheName: string;
   cacheOptions: IDecoratorSummerCacheOptions;
-  options?: TSummerCacheActionOptions<unknown, unknown>;
+  options?: TSummerCacheActionOptions<any, any>;
 };
 
 @Broadcast()
