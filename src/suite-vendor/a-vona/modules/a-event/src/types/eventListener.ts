@@ -1,9 +1,9 @@
-import { IBeanRecord, OmitNever } from 'vona';
+import { OmitNever } from 'vona';
 import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
-export interface IAopRecord {}
+export interface IEventListenerRecord {}
 
-export type TypeDecoratorAopOptionsMatch = keyof IBeanRecord | RegExp | (keyof IBeanRecord | RegExp)[];
+export type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
 
 export interface IDecoratorAopOptions extends IOnionOptionsEnable, IOnionOptionsDeps<keyof IAopRecord> {
   match?: TypeDecoratorAopOptionsMatch;
