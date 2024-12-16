@@ -7,7 +7,7 @@ export type TypeBroadcastMemDelJobData = {
   cacheOptions: IDecoratorSummerCacheOptions;
   keyHash: string;
   key: unknown;
-  options?: TSummerCacheActionOptions<unknown, unknown>;
+  options?: TSummerCacheActionOptions<any, any>;
 };
 
 @Broadcast()

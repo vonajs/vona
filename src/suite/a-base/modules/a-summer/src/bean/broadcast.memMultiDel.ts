@@ -7,7 +7,7 @@ export type TypeBroadcastMemMultiDelJobData = {
   cacheOptions: IDecoratorSummerCacheOptions;
   keysHash: string[];
   keys: unknown[];
-  options?: TSummerCacheActionOptions<unknown, unknown>;
+  options?: TSummerCacheActionOptions<any, any>;
 };
 
 @Broadcast()

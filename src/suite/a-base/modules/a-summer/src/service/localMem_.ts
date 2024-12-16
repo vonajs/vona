@@ -55,10 +55,12 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     // del on this worker
     this.lruCache.delete(keyHash);
     // del on other workers by broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: __ThisModule__,
-      broadcastName: 'memDel',
-      data: { cacheName: this._cacheName, cacheOptions: this._cacheOpitons, keyHash, key, options },
+    this.scope.broadcast.memDel.emit({
+      cacheName: this._cacheName,
+      cacheOptions: this._cacheOpitons,
+      keyHash,
+      key,
+      options,
     });
     // del layered
     const layered = this.__getLayered(options);
@@ -69,10 +71,12 @@ export class ServiceLocalMem<KEY = any, DATA = any>
     // del on this worker
     keysHash.forEach(keyHash => this.lruCache.delete(keyHash));
     // del on other workers by broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: __ThisModule__,
-      broadcastName: 'memMultiDel',
-      data: { cacheName: this._cacheName, cacheOptions: this._cacheOpitons, keysHash, keys, options },
+    this.scope.broadcast.memMultiDel.emit({
+      cacheName: this._cacheName,
+      cacheOptions: this._cacheOpitons,
+      keysHash,
+      keys,
+      options,
     });
     // del layered
     const layered = this.__getLayered(options);
