@@ -1,6 +1,6 @@
-import { appResource, BeanBase, cast, Constructable, IBeanRecord, SymbolProxyDisable } from 'vona';
+import { appResource, BeanBase, Constructable, IBeanRecord, SymbolProxyDisable } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { IDecoratorAopOptions, TypeDecoratorAopOptionsMatch } from '../types/aop.js';
+import { IDecoratorAopOptions } from '../types/aop.js';
 
 @Service()
 export class ServiceAop extends BeanBase {
@@ -21,25 +21,11 @@ export class ServiceAop extends BeanBase {
       if (aop.beanOptions.beanFullName === beanOptions.beanFullName) continue;
       // // check if match aop
       // if (beanOptions.scene === 'aop' && !aop.beanOptions.matchAop) continue;
-      if (aopOptions.enable === false) continue;
-      if (!this.bean.onion.checkOnionOptionsMeta(aopOptions.meta)) continue;
-      if (
-        (aopOptions.match && __aopMatch(aopOptions.match, beanOptions.beanFullName)) ||
-        (aopOptions.ignore && !__aopMatch(aopOptions.ignore, beanOptions.beanFullName))
-      ) {
+      // check if enabled
+      if (this.bean.onion.checkOnionOptionsEnabled(aopOptions, beanOptions.beanFullName)) {
         aopsMatched.push(aop.beanOptions.beanFullName);
       }
     }
     return aopsMatched;
   }
-}
-
-function __aopMatch(match: TypeDecoratorAopOptionsMatch, beanFullName: string) {
-  if (!Array.isArray(match)) {
-    return (
-      (typeof match === 'string' && match === beanFullName) ||
-      (match instanceof RegExp && cast<RegExp>(match).test(beanFullName))
-    );
-  }
-  return match.some(item => __aopMatch(item, beanFullName));
 }

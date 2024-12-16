@@ -60,14 +60,10 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
   }
 
   protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
-    // enable
+    // enable/meta
     const enable = options?.enable ?? this._cacheOpitons.enable ?? this.scopeSummer.config.summer.enable;
-    if (enable === false) return false;
-    // meta
     const meta = this._cacheOpitons.meta ?? this.scopeSummer.config.summer.meta;
-    if (!this.app.bean.onion.checkOnionOptionsMeta(meta)) {
-      return false;
-    }
+    if (!this.bean.onion.checkOnionOptionsEnabled({ enable, meta })) return false;
     // default
     return true;
   }

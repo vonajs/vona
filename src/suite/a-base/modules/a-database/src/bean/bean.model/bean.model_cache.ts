@@ -408,13 +408,7 @@ export class BeanModelCache<TRecord extends {}> extends BeanModel<TRecord> {
   private __cacheEnabledInner() {
     if (this.__cacheOptions === false) return false;
     // enable
-    const enable = this.__cacheOptions?.enable;
-    if (enable === false) return false;
-    // meta
-    const meta = this.__cacheOptions.meta;
-    if (!this.app.bean.onion.checkOnionOptionsMeta(meta)) {
-      return false;
-    }
+    if (!this.bean.onion.checkOnionOptionsEnabled(this.__cacheOptions)) return false;
     // default
     return true;
   }
