@@ -1,16 +1,5 @@
-import { VonaApplication, IModuleConfigBroadcast } from 'vona';
-
-const broadcasts = {
-  resetCache: {
-    bean: 'resetCache',
-  } as IModuleConfigBroadcast,
-  reload: {
-    bean: 'reload',
-  } as IModuleConfigBroadcast,
-};
+import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
-  return {
-    broadcasts,
-  };
+  return {};
 };

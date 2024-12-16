@@ -1,33 +1,16 @@
 /** beans: begin */
 export * from '../bean/bean.instance.js';
-export * from '../bean/broadcast.reload.js';
-export * from '../bean/broadcast.resetCache.js';
 import { BeanInstance } from '../bean/bean.instance.js';
-import { BroadcastReload } from '../bean/broadcast.reload.js';
-import { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     instance: BeanInstance;
   }
 
-  export interface IBeanRecordGeneral {
-    'a-instance.broadcast.reload': BroadcastReload;
-    'a-instance.broadcast.resetCache': BroadcastResetCache;
-  }
+  export interface IBeanRecordGeneral {}
 }
 declare module 'vona-module-a-instance' {
   export interface BeanInstance {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-
-  export interface BroadcastReload {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-
-  export interface BroadcastResetCache {
     /** @internal */
     get scope(): ScopeModuleAInstance;
   }
@@ -80,6 +63,39 @@ export interface IModuleModel {
   instance: ModelInstance;
 }
 /** model: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.reload.js';
+export * from '../bean/broadcast.reload_.js';
+export * from '../bean/broadcast.resetCache.js';
+export * from '../bean/broadcast.resetCache_.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-instance:reload': IDecoratorBroadcastOptions;
+    'a-instance:resetCache': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface BroadcastReload {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+
+  export interface BroadcastResetCache {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastReload } from '../bean/broadcast.reload.js';
+import { BroadcastResetCache } from '../bean/broadcast.resetCache.js';
+export interface IModuleBroadcast {
+  reload: BroadcastReload;
+  resetCache: BroadcastResetCache;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
@@ -176,6 +192,7 @@ export interface ScopeModuleAInstance {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   redlock: MetaRedlock;
   service: IModuleService;
 }
