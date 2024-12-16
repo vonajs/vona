@@ -61,6 +61,28 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** aop: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.test.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'vona-test:test': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface BroadcastTest {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastTest } from '../bean/broadcast.test.js';
+export interface IModuleBroadcast {
+  test: BroadcastTest;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -278,6 +300,7 @@ export interface ScopeModuleVonaTest {
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   summerCache: IModuleSummerCache;
+  broadcast: IModuleBroadcast;
   status: MetaStatus;
   queue: IModuleQueue;
   service: IModuleService;
