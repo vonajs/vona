@@ -1,4 +1,4 @@
-import { IDecoratorBeanOptionsBase, PowerPartial, VonaContext } from 'vona';
+import { IDecoratorBeanOptionsBase, PowerPartial } from 'vona';
 import { VonaMetaFlavor, VonaMetaMode } from 'vona-shared';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
@@ -11,6 +11,11 @@ export interface IOnionOptionsEnable {
   meta?: IOnionOptionsMeta;
 }
 
+export interface IOnionOptionsMatch<T extends string> {
+  match?: T | RegExp | (T | RegExp)[];
+  ignore?: T | RegExp | (T | RegExp)[];
+}
+
 export interface IOnionOptionsDeps<T> {
   dependencies?: T[] | T;
   dependents?: T[] | T;
@@ -21,10 +26,7 @@ export interface IOnionOptionsMeta {
   mode?: VonaMetaMode | VonaMetaMode[];
 }
 
-export interface IOnionOptionsBase extends IOnionOptionsEnable {
-  match?: ((ctx: VonaContext) => boolean) | RegExp | string;
-  ignore?: ((ctx: VonaContext) => boolean) | RegExp | string;
-}
+export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<T> {}
 
 export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
   name: ONIONNAME;

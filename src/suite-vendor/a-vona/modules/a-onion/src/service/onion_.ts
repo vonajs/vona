@@ -86,13 +86,26 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     if (!this[SymbolOnionsEnabled]) {
       this[SymbolOnionsEnabled] = this.onionsGlobal.filter(onionSlice => {
         const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable;
-        return onionOptions.enable !== false && cast(this.app.bean).onion.checkOnionOptionsMeta(onionOptions.meta);
+        return onionOptions.enable !== false && this.bean.onion.checkOnionOptionsMeta(onionOptions.meta);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
     return this[SymbolOnionsEnabled];
   }
 
-  getOnionsEnabledWithSelector(selector: string) {}
+  getOnionsEnabledWithSelector(selector: string) {
+    if (!this[SymbolOnionsEnabledWithSelector][selector]) {
+      this[SymbolOnionsEnabledWithSelector][selector] = this.onionsGlobal.filter(onionSlice => {
+        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable;
+        if (onionOptions.enable === false) return false;
+        if (!this.bean.onion.checkOnionOptionsMeta(onionOptions.meta)) return false;
+        return (
+          (onionOptions.match && __aopMatch(onionOptions.match, selector)) ||
+          (onionOptions.ignore && !__aopMatch(onionOptions.ignore, selector))
+        );
+      }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
+    }
+    return this[SymbolOnionsEnabledWithSelector][selector];
+  }
 
   public get composedOnionsGlobal() {
     return this._composeOnionsGlobal();

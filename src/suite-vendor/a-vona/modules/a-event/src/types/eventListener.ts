@@ -1,5 +1,5 @@
 import { OmitNever } from 'vona';
-import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
 import { IEventEmitterRecord } from './eventEmitter.js';
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
@@ -8,17 +8,10 @@ export interface IEventExecute<DATA = unknown, RESULT = unknown> {
 
 export interface IEventListenerRecord {}
 
-export type TypeDecoratorEventListenerOptionsMatch =
-  | keyof IEventEmitterRecord
-  | RegExp
-  | (keyof IEventEmitterRecord | RegExp)[];
-
 export interface IDecoratorEventListenerOptions
   extends IOnionOptionsEnable,
-    IOnionOptionsDeps<keyof IEventListenerRecord> {
-  match?: TypeDecoratorEventListenerOptionsMatch;
-  ignore?: TypeDecoratorEventListenerOptionsMatch;
-}
+    IOnionOptionsMatch<keyof IEventEmitterRecord>,
+    IOnionOptionsDeps<keyof IEventListenerRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

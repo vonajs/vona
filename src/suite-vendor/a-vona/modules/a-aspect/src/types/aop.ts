@@ -1,14 +1,12 @@
 import { IBeanRecord, OmitNever } from 'vona';
-import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
 
 export interface IAopRecord {}
 
-export type TypeDecoratorAopOptionsMatch = keyof IBeanRecord | RegExp | (keyof IBeanRecord | RegExp)[];
-
-export interface IDecoratorAopOptions extends IOnionOptionsEnable, IOnionOptionsDeps<keyof IAopRecord> {
-  match?: TypeDecoratorAopOptionsMatch;
-  ignore?: TypeDecoratorAopOptionsMatch;
-}
+export interface IDecoratorAopOptions
+  extends IOnionOptionsEnable,
+    IOnionOptionsMatch<keyof IBeanRecord>,
+    IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
