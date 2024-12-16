@@ -1,5 +1,6 @@
 import { Next, OmitNever } from 'vona';
 import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IInterceptorRecordGlobal {}
 export interface IInterceptorRecordLocal {}
@@ -14,7 +15,7 @@ export interface IDecoratorInterceptorOptions {
 }
 
 export interface IDecoratorInterceptorOptionsGlobal
-  extends IOnionOptionsBase,
+  extends IOnionOptionsBase<keyof IApiPathRecord>,
     IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {
   global: true;
 }

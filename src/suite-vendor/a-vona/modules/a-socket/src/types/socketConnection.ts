@@ -1,6 +1,8 @@
 import { Next, OmitNever } from 'vona';
 import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
 
+export interface ISocketPathRecord {}
+
 export interface ISocketConnectionRecord {}
 
 export interface ISocketConnectionExecute {
@@ -8,7 +10,7 @@ export interface ISocketConnectionExecute {
 }
 
 export interface IDecoratorSocketConnectionOptions
-  extends IOnionOptionsBase,
+  extends IOnionOptionsBase<keyof ISocketPathRecord>,
     IOnionOptionsDeps<keyof ISocketConnectionRecord> {}
 
 declare module 'vona-module-a-onion' {

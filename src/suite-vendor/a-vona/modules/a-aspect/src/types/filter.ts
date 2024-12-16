@@ -1,5 +1,6 @@
 import { NextSync, OmitNever } from 'vona';
 import { IOnionOptionsBase, IOnionOptionsDeps, ServiceOnion } from 'vona-module-a-onion';
+import { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IFilterRecordGlobal {}
 export interface IFilterRecordLocal {}
@@ -21,7 +22,9 @@ export interface IDecoratorFilterOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorFilterOptionsGlobal extends IOnionOptionsBase, IOnionOptionsDeps<keyof IFilterRecordGlobal> {
+export interface IDecoratorFilterOptionsGlobal
+  extends IOnionOptionsBase<keyof IApiPathRecord>,
+    IOnionOptionsDeps<keyof IFilterRecordGlobal> {
   global: true;
 }
 

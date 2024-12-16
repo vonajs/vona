@@ -1,5 +1,6 @@
 import { Constructable, OmitNever, Type } from 'vona';
 import { IOnionOptionsBase, IOnionOptionsDeps, IOnionSlice, ServiceOnion } from 'vona-module-a-onion';
+import { IApiPathRecord } from 'vona-module-a-web';
 import { z } from 'zod';
 
 export interface IPipeRecordGlobal {}
@@ -14,7 +15,9 @@ export interface IDecoratorPipeOptions {
   enable?: boolean;
 }
 
-export interface IDecoratorPipeOptionsGlobal extends IOnionOptionsBase, IOnionOptionsDeps<keyof IPipeRecordGlobal> {
+export interface IDecoratorPipeOptionsGlobal
+  extends IOnionOptionsBase<keyof IApiPathRecord>,
+    IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   global: true;
 }
 
