@@ -11,9 +11,10 @@ export interface IOnionOptionsEnable {
   meta?: IOnionOptionsMeta;
 }
 
+export type TypeOnionOptionsMatchRule<T> = T | RegExp | (T | RegExp)[];
 export interface IOnionOptionsMatch<T extends string> {
-  match?: T | RegExp | (T | RegExp)[];
-  ignore?: T | RegExp | (T | RegExp)[];
+  match?: TypeOnionOptionsMatchRule<T>;
+  ignore?: TypeOnionOptionsMatchRule<T>;
 }
 
 export interface IOnionOptionsDeps<T> {

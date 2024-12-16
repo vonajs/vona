@@ -19,9 +19,11 @@ import {
   IOnionOptionsBase,
   IOnionOptionsDeps,
   IOnionOptionsEnable,
+  IOnionOptionsMatch,
   IOnionOptionsMeta,
   IOnionSlice,
   SymbolUseOnionLocal,
+  TypeOnionOptionsMatchRule,
 } from '../types/onion.js';
 
 const __adapter = (_context, chain) => {
@@ -95,12 +97,13 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   getOnionsEnabledWithSelector(selector: string) {
     if (!this[SymbolOnionsEnabledWithSelector][selector]) {
       this[SymbolOnionsEnabledWithSelector][selector] = this.onionsGlobal.filter(onionSlice => {
-        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable;
+        const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
         if (onionOptions.enable === false) return false;
         if (!this.bean.onion.checkOnionOptionsMeta(onionOptions.meta)) return false;
+        if (!onionOptions.match && !onionOptions.ignore) return true;
         return (
-          (onionOptions.match && __aopMatch(onionOptions.match, selector)) ||
-          (onionOptions.ignore && !__aopMatch(onionOptions.ignore, selector))
+          (onionOptions.match && __onionMatchSelector(onionOptions.match, selector)) ||
+          (onionOptions.ignore && !__onionMatchSelector(onionOptions.ignore, selector))
         );
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
@@ -411,4 +414,14 @@ function onionMatch(ctx: VonaContext, options: IOnionOptionsBase) {
   }
   const match = pathMatching(options);
   return match(ctx);
+}
+
+function __onionMatchSelector(match: TypeOnionOptionsMatchRule<string>, selector: string) {
+  if (!Array.isArray(match)) {
+    return (
+      (typeof match === 'string' && match === selector) ||
+      (match instanceof RegExp && cast<RegExp>(match).test(selector))
+    );
+  }
+  return match.some(item => __onionMatchSelector(item, selector));
 }
