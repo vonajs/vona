@@ -1,27 +1,33 @@
 import { OmitNever } from 'vona';
 import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+import { IEventEmitterRecord } from './eventEmitter.js';
 
 export interface IEventListenerRecord {}
 
-export type TypeDecoratorAopOptionsMatch = string | RegExp | (string | RegExp)[];
+export type TypeDecoratorEventListenerOptionsMatch =
+  | keyof IEventEmitterRecord
+  | RegExp
+  | (keyof IEventEmitterRecord | RegExp)[];
 
-export interface IDecoratorAopOptions extends IOnionOptionsEnable, IOnionOptionsDeps<keyof IAopRecord> {
-  match?: TypeDecoratorAopOptionsMatch;
-  ignore?: TypeDecoratorAopOptionsMatch;
+export interface IDecoratorEventListenerOptions
+  extends IOnionOptionsEnable,
+    IOnionOptionsDeps<keyof IEventListenerRecord> {
+  match?: TypeDecoratorEventListenerOptionsMatch;
+  ignore?: TypeDecoratorEventListenerOptionsMatch;
 }
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
-    aop: ServiceOnion<IDecoratorAopOptions, keyof IAopRecord>;
+    eventListener: ServiceOnion<IDecoratorEventListenerOptions, keyof IEventListenerRecord>;
   }
 }
 
 declare module 'vona' {
   export interface ConfigOnions {
-    aop: OmitNever<IAopRecord>;
+    eventListener: OmitNever<IEventListenerRecord>;
   }
 
   export interface ISceneCustomRecord {
-    aop: never;
+    eventListener: never;
   }
 }
