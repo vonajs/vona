@@ -2,6 +2,10 @@ import { OmitNever } from 'vona';
 import { IOnionOptionsDeps, IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import { IEventEmitterRecord } from './eventEmitter.js';
 
+export interface IEventExecute<DATA = unknown, RESULT = unknown> {
+  execute(data: DATA): Promise<RESULT>;
+}
+
 export interface IEventListenerRecord {}
 
 export type TypeDecoratorEventListenerOptionsMatch =

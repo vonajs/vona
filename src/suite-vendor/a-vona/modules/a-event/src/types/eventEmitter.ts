@@ -1,9 +1,5 @@
 import { ServiceOnion } from 'vona-module-a-onion';
 
-export interface IEventExecute<DATA = unknown, RESULT = unknown> {
-  execute(data: DATA): Promise<RESULT>;
-}
-
 export interface IEventJobContext<DATA> {
   eventName: keyof IEventEmitterRecord;
   data: DATA;
