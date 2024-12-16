@@ -1,11 +1,13 @@
-import { BeanEventEmitterBase, EventEmitter } from 'vona-module-a-event';
+import { BeanBase } from 'vona';
+import { EventListener, IEventExecute } from 'vona-module-a-event';
 
-export type TypeEvent<%=argv.beanNameCapitalize%>Data = unknown;
-
-export type TypeEvent<%=argv.beanNameCapitalize%>Result = void;
-
-@EventEmitter()
-export class EventEmitter<%=argv.beanNameCapitalize%> extends BeanEventEmitterBase<
-  TypeEvent<%=argv.beanNameCapitalize%>Data,
-  TypeEvent<%=argv.beanNameCapitalize%>Result
-> {}
+@EventListener({ match: 'some-module:<%=argv.beanNameCapitalize%>' })
+export class EventListener<%=argv.beanNameCapitalize%>
+  extends BeanBase
+  implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult>
+{
+  async execute(_data: TypeEventHelloEchoData, next: Next): Promise<TypeEventHelloEchoResult> {
+    // next
+    return next();
+  }
+}
