@@ -1,10 +1,3 @@
-// broadcasts
-const broadcasts = {
-  mailSceneChanged: {
-    bean: 'mailSceneChanged',
-  },
-};
-
 const sceneDefault = {
   // title: undefined,
   transport: {
@@ -27,7 +20,6 @@ import { VonaApplication } from 'vona';
 
 export const config = (_app: VonaApplication) => {
   return {
-    broadcasts,
     // default
     scene: {
       default: sceneDefault,

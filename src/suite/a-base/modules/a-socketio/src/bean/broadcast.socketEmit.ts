@@ -1,9 +1,13 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastSocketEmit extends BeanBase {
-  async execute(context) {
-    const data = context.data;
+export type TypeBroadcastSocketEmitJobData = unknown;
+
+@Broadcast()
+export class BroadcastSocketEmit
+  extends BeanBroadcastBase<TypeBroadcastSocketEmitJobData>
+  implements IBroadcastExecute<TypeBroadcastSocketEmitJobData>
+{
+  async execute(data: TypeBroadcastSocketEmitJobData, _isEmitter?: boolean) {
     this.app.bean.io.broadcastSocketEmit(data);
   }
 }

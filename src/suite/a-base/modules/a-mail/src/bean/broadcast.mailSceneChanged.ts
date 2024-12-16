@@ -1,10 +1,14 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastMailSceneChanged extends BeanBase {
-  async execute(context) {
-    const sameAsCaller = context.sameAsCaller;
-    if (!sameAsCaller) {
+export type TypeBroadcastMailSceneChangedJobData = unknown;
+
+@Broadcast()
+export class BroadcastMailSceneChanged
+  extends BeanBroadcastBase<TypeBroadcastMailSceneChangedJobData>
+  implements IBroadcastExecute<TypeBroadcastMailSceneChangedJobData>
+{
+  async execute(_data: TypeBroadcastMailSceneChangedJobData, isEmitter?: boolean) {
+    if (!isEmitter) {
       await this.app.bean.mailSceneCache._cacheMailScenesConfig();
     }
   }

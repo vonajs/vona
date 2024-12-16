@@ -1,19 +1,6 @@
-import { VonaApplication, IModuleConfigBroadcast } from 'vona';
+import { VonaApplication } from 'vona';
 import { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.js';
 import { IOnionOptionsMeta } from 'vona-module-a-onion';
-
-// broadcasts
-const broadcasts = {
-  memDel: {
-    bean: 'memDel',
-  } as IModuleConfigBroadcast,
-  memMultiDel: {
-    bean: 'memMultiDel',
-  } as IModuleConfigBroadcast,
-  memClear: {
-    bean: 'memClear',
-  } as IModuleConfigBroadcast,
-};
 
 export const configRedis = {
   mode: 'redis', // only redis
@@ -38,7 +25,6 @@ export const configAllWithIgnoreNull = { ...configAll, ignoreNull: true };
 
 export const config = (_app: VonaApplication) => {
   return {
-    broadcasts,
     summer: {
       enable: true,
       meta: {} as IOnionOptionsMeta,

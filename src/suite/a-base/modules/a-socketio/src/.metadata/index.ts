@@ -1,11 +1,9 @@
 /** beans: begin */
 export * from '../bean/bean.io.js';
 export * from '../bean/bean.ioMessageBase_.js';
-export * from '../bean/broadcast.socketEmit.js';
 export * from '../bean/version.manager.js';
 import { BeanIo } from '../bean/bean.io.js';
 import { BeanIoMessageBase } from '../bean/bean.ioMessageBase_.js';
-import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -15,17 +13,11 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     ioMessageBase: BeanIoMessageBase;
-    'a-socketio.broadcast.socketEmit': BroadcastSocketEmit;
     'a-socketio.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-socketio' {
   export interface BeanIo {
-    /** @internal */
-    get scope(): ScopeModuleASocketio;
-  }
-
-  export interface BroadcastSocketEmit {
     /** @internal */
     get scope(): ScopeModuleASocketio;
   }
@@ -119,6 +111,29 @@ export interface IModuleModel {
   messageSync: ModelMessageSync;
 }
 /** model: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.socketEmit.js';
+export * from '../bean/broadcast.socketEmit_.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-socketio:socketEmit': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-socketio' {
+  export interface BroadcastSocketEmit {
+    /** @internal */
+    get scope(): ScopeModuleASocketio;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastSocketEmit } from '../bean/broadcast.socketEmit.js';
+export interface IModuleBroadcast {
+  socketEmit: BroadcastSocketEmit;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 
@@ -352,6 +367,7 @@ export interface ScopeModuleASocketio {
   config: TypeModuleConfig<typeof config>;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   redlock: MetaRedlock;
   queue: IModuleQueue;
   service: IModuleService;

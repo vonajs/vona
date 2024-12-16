@@ -1,11 +1,21 @@
-import { Bean, BeanBase, cast } from 'vona';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
+import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';
+import { cast } from 'vona';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastMemClear extends BeanBase {
-  async execute(context) {
-    const sameAsCaller = context.sameAsCaller;
-    const { cacheName, cacheOptions, options } = context.data;
-    if (!sameAsCaller) {
+export type TypeBroadcastMemClearJobData = {
+  cacheName: string;
+  cacheOptions: IDecoratorSummerCacheOptions;
+  options?: TSummerCacheActionOptions<unknown, unknown>;
+};
+
+@Broadcast()
+export class BroadcastMemClear
+  extends BeanBroadcastBase<TypeBroadcastMemClearJobData>
+  implements IBroadcastExecute<TypeBroadcastMemClearJobData>
+{
+  async execute(data: TypeBroadcastMemClearJobData, isEmitter?: boolean) {
+    const { cacheName, cacheOptions, options } = data;
+    if (!isEmitter) {
       const cache = this.app.bean.summer.cache(cacheName, cacheOptions);
       cast(cache).localMem.__clearRaw(options);
     }

@@ -1,13 +1,11 @@
 /** beans: begin */
 export * from '../bean/bean.mail.js';
 export * from '../bean/bean.mailSceneCache.js';
-export * from '../bean/broadcast.mailSceneChanged.js';
 export * from '../bean/io.channel.mail.js';
 export * from '../bean/io.message.mail.js';
 export * from '../bean/version.manager.js';
 import { BeanMail } from '../bean/bean.mail.js';
 import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
-import { BroadcastMailSceneChanged } from '../bean/broadcast.mailSceneChanged.js';
 import { IoChannelMail } from '../bean/io.channel.mail.js';
 import { IoMessageMail } from '../bean/io.message.mail.js';
 import { VersionManager } from '../bean/version.manager.js';
@@ -19,7 +17,6 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'a-mail.broadcast.mailSceneChanged': BroadcastMailSceneChanged;
     'a-mail.io.channel.mail': IoChannelMail;
     'a-mail.io.message.mail': IoMessageMail;
     'a-mail.version.manager': VersionManager;
@@ -32,11 +29,6 @@ declare module 'vona-module-a-mail' {
   }
 
   export interface BeanMailSceneCache {
-    /** @internal */
-    get scope(): ScopeModuleAMail;
-  }
-
-  export interface BroadcastMailSceneChanged {
     /** @internal */
     get scope(): ScopeModuleAMail;
   }
@@ -104,6 +96,29 @@ export interface IModuleModel {
   mail: ModelMail;
 }
 /** model: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.mailSceneChanged.js';
+export * from '../bean/broadcast.mailSceneChanged_.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-mail:mailSceneChanged': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-mail' {
+  export interface BroadcastMailSceneChanged {
+    /** @internal */
+    get scope(): ScopeModuleAMail;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastMailSceneChanged } from '../bean/broadcast.mailSceneChanged.js';
+export interface IModuleBroadcast {
+  mailSceneChanged: BroadcastMailSceneChanged;
+}
+/** broadcast: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -218,6 +233,7 @@ export interface ScopeModuleAMail {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   status: MetaStatus;
   service: IModuleService;
 }
