@@ -1,4 +1,12 @@
+const __adapterDefault = (_context, chain) => {
+  return {
+    receiver: undefined,
+    fn: chain,
+  };
+};
+
 export function compose(chains, adapter) {
+  if (!adapter) adapter = __adapterDefault;
   if (!chains) chains = [];
   return function (context, next?) {
     // last called middleware #
@@ -27,6 +35,7 @@ export function compose(chains, adapter) {
 }
 
 export function composeAsync(chains, adapter) {
+  if (!adapter) adapter = __adapterDefault;
   if (!chains) chains = [];
   return function (context, next?) {
     // last called middleware #

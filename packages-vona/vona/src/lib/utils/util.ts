@@ -210,11 +210,11 @@ export function isNilOrEmptyString(str?: string | undefined | null): str is null
   return str === undefined || str === null || str === '';
 }
 
-export function compose(chains, adapter) {
+export function compose(chains, adapter?) {
   return _compose(chains, adapter);
 }
 
-export function composeAsync(chains, adapter) {
+export function composeAsync(chains, adapter?) {
   return _composeAsync(chains, adapter);
 }
 
