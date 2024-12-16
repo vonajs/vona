@@ -29,6 +29,7 @@ const __adapter = (_context, chain) => {
 };
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
+const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
@@ -39,6 +40,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
 
   private [SymbolOnionsEnabled]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
+  private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
   _cacheOnionsGlobal: Function[];
   _cacheOnionsHandler: Record<string, Function[]> = {};
@@ -86,6 +88,17 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
     return this[SymbolOnionsEnabled][selector];
+  }
+
+  getOnionsEnabledWrapped(wrapFn: Function, selector?: string) {
+    if (!selector) selector = '';
+    if (!this[SymbolOnionsEnabledWrapped][selector]) {
+      const onions = this.getOnionsEnabled(selector);
+      this[SymbolOnionsEnabledWrapped][selector] = onions.map(item => {
+        return wrapFn(item);
+      });
+    }
+    return this[SymbolOnionsEnabledWrapped][selector];
   }
 
   public get composedOnionsGlobal() {
@@ -344,7 +357,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     }
   }
 
-  _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
+  private _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
     const sceneName = this.sceneName;
     const fn = (ctx: VonaContext, next) => {
       let packet;

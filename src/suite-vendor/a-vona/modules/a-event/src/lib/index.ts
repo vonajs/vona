@@ -1,3 +1,3 @@
-export * from './beanQueueBase.js';
+export * from './beanEventEmitterBase.js';
 export * from './eventEmitter.js';
 export * from './eventListener.js';
