@@ -16,7 +16,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule {
     // controllers by decorator
     // only once
     if (module.info.relativeName === __ThisModule__) {
-      for (const controller of this.bean.onion.controller.onionsEnabled) {
+      for (const controller of this.bean.onion.controller.getOnionsEnabled()) {
         this.bean.router.registerController(controller.beanOptions.module, controller.beanOptions.beanClass);
       }
     }

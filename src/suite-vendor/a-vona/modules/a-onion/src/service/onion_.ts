@@ -32,6 +32,7 @@ const __adapter = (_context, chain) => {
 };
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
+const SymbolOnionsEnabledWithSelector = Symbol('SymbolOnionsEnabledWithSelector');
 
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
@@ -42,6 +43,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
 
   private [SymbolOnionsEnabled]: IOnionSlice<OPTIONS, ONIONNAME>[];
+  private [SymbolOnionsEnabledWithSelector]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
 
   _cacheOnionsGlobal: Function[];
   _cacheOnionsHandler: Record<string, Function[]> = {};
@@ -80,7 +82,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return composeAsync(onions, __adapter);
   }
 
-  get onionsEnabled() {
+  getOnionsEnabled() {
     if (!this[SymbolOnionsEnabled]) {
       this[SymbolOnionsEnabled] = this.onionsGlobal.filter(onionSlice => {
         const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable;
@@ -89,6 +91,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     }
     return this[SymbolOnionsEnabled];
   }
+
+  getOnionsEnabledWithSelector(selector: string) {}
 
   public get composedOnionsGlobal() {
     return this._composeOnionsGlobal();

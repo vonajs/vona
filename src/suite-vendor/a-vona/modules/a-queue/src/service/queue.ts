@@ -32,7 +32,7 @@ export class ServiceQueue extends BeanBase {
   }
 
   loadQueueWorkers(subdomain: string) {
-    for (const queueItem of this.bean.onion.queue.onionsEnabled) {
+    for (const queueItem of this.bean.onion.queue.getOnionsEnabled()) {
       const info: IQueueJobContext<unknown> = {
         queueName: queueItem.name as never,
         data: undefined as any,
