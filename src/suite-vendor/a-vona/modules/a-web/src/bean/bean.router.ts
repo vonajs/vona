@@ -11,7 +11,6 @@ import {
   VonaContext,
 } from 'vona';
 import is from 'is-type-of';
-import pathMatching from 'egg-path-matching';
 import * as ModuleInfo from '@cabloy/module-info';
 import { IDecoratorControllerOptions } from '../types/controller.js';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.js';
@@ -315,12 +314,14 @@ function wrapMiddleware(_sceneName: string, item: IOnionSlice) {
   return fn;
 }
 
-function middlewareMatch(ctx, options) {
-  if (!options.match && !options.ignore) {
-    return true;
-  }
-  const match = pathMatching(options);
-  return match(ctx);
+// todo: remove
+function middlewareMatch(_ctx, _options) {
+  return true;
+  // if (!options.match && !options.ignore) {
+  //   return true;
+  // }
+  // const match = pathMatching(options);
+  // return match(ctx);
 }
 
 function controllerActionToMiddleware(controllerBeanFullName, _route) {

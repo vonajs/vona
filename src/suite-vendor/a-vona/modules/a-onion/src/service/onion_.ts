@@ -1,6 +1,5 @@
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 import { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import pathMatching from 'egg-path-matching';
 import {
   appMetadata,
   appResource,
@@ -10,20 +9,16 @@ import {
   composeAsync,
   deepExtend,
   SymbolProxyDisable,
-  VonaApplication,
   VonaContext,
 } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { getOnionScenesMeta } from 'vona-shared';
 import {
-  IOnionOptionsBase,
   IOnionOptionsDeps,
   IOnionOptionsEnable,
   IOnionOptionsMatch,
-  IOnionOptionsMeta,
   IOnionSlice,
   SymbolUseOnionLocal,
-  TypeOnionOptionsMatchRule,
 } from '../types/onion.js';
 
 const __adapter = (_context, chain) => {
@@ -379,10 +374,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       // options
       const options = this.combineOnionOptions(ctx, item);
       // enable match ignore dependencies
-      if (
-        !optionsPrimitive &&
-        (options.enable === false || !onionMatchMeta(this.app, options.meta) || !onionMatch(ctx, options))
-      ) {
+      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, ctx.path)) {
         return typeof next === 'function' ? next() : next;
       }
       // execute
@@ -402,26 +394,4 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     fn._name = item.name;
     return fn;
   }
-}
-
-function onionMatchMeta(app: VonaApplication, meta?: IOnionOptionsMeta) {
-  return cast(app.bean).onion.checkOnionOptionsMeta(meta);
-}
-
-function onionMatch(ctx: VonaContext, options: IOnionOptionsBase) {
-  if (!options.match && !options.ignore) {
-    return true;
-  }
-  const match = pathMatching(options);
-  return match(ctx);
-}
-
-function __onionMatchSelector(match: TypeOnionOptionsMatchRule<string>, selector: string) {
-  if (!Array.isArray(match)) {
-    return (
-      (typeof match === 'string' && match === selector) ||
-      (match instanceof RegExp && cast<RegExp>(match).test(selector))
-    );
-  }
-  return match.some(item => __onionMatchSelector(item, selector));
 }

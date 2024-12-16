@@ -1,5 +1,10 @@
 import { Bean, BeanBase, SymbolProxyDisable } from 'vona';
-import { IOnionOptionsMeta } from '../types/onion.js';
+import {
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionOptionsMeta,
+  TypeOnionOptionsMatchRule,
+} from '../types/onion.js';
 import { ServiceOnion } from '../service/onion_.js';
 
 @Bean()
@@ -12,6 +17,17 @@ export class BeanOnion extends BeanBase {
       this.__instances[prop] = this.bean._getBeanSelector(ServiceOnion, prop);
     }
     return this.__instances[prop];
+  }
+
+  public checkOnionOptionsEnabled(options: IOnionOptionsEnable & IOnionOptionsMatch<string>, selector?: string) {
+    if (options.enable === false) return false;
+    if (!this.bean.onion.checkOnionOptionsMeta(options.meta)) return false;
+    if (!selector) return true;
+    if (!options.match && !options.ignore) return true;
+    return (
+      (options.match && __onionMatchSelector(options.match, selector)) ||
+      (options.ignore && !__onionMatchSelector(options.ignore, selector))
+    );
   }
 
   public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
@@ -30,4 +46,11 @@ export class BeanOnion extends BeanBase {
     // default
     return true;
   }
+}
+
+function __onionMatchSelector(match: TypeOnionOptionsMatchRule<string>, selector: string) {
+  if (!Array.isArray(match)) {
+    return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
+  }
+  return match.some(item => __onionMatchSelector(item, selector));
 }
