@@ -1,11 +1,18 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBroadcastBase, Broadcast, IBroadcastExecute } from 'vona-module-a-broadcast';
 
-@Bean({ scene: 'broadcast' })
-export class BroadcastColumnsClear extends BeanBase {
-  async execute(context) {
-    const sameAsCaller = context.sameAsCaller;
-    const { mode, tableName } = context.data;
-    if (!sameAsCaller) {
+export type TypeBroadcastColumnsClearJobData = {
+  mode?: 'all';
+  tableName?: string;
+};
+
+@Broadcast({ instance: false })
+export class BroadcastColumnsClear
+  extends BeanBroadcastBase<TypeBroadcastColumnsClearJobData>
+  implements IBroadcastExecute<TypeBroadcastColumnsClearJobData>
+{
+  async execute(data: TypeBroadcastColumnsClearJobData, isEmitter?: boolean) {
+    const { mode, tableName } = data;
+    if (!isEmitter) {
       // clear columns cache
       if (mode === 'all') {
         this.bean.model.columnsClearAll();

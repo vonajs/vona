@@ -1,9 +1,7 @@
 /** beans: begin */
 export * from '../bean/bean.worker.js';
-export * from '../bean/broadcast.columnsClear.js';
 export * from '../bean/version.manager.js';
 import { BeanWorker } from '../bean/bean.worker.js';
-import { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -12,17 +10,11 @@ declare module 'vona' {
   }
 
   export interface IBeanRecordGeneral {
-    'a-version.broadcast.columnsClear': BroadcastColumnsClear;
     'a-version.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-version' {
   export interface BeanWorker {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
-  export interface BroadcastColumnsClear {
     /** @internal */
     get scope(): ScopeModuleAVersion;
   }
@@ -98,6 +90,29 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 /** model: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.columnsClear.js';
+export * from '../bean/broadcast.columnsClear_.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-version:columnsClear': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface BroadcastColumnsClear {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
+export interface IModuleBroadcast {
+  columnsClear: BroadcastColumnsClear;
+}
+/** broadcast: end */
 /** startup: begin */
 export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';
@@ -214,6 +229,7 @@ export interface ScopeModuleAVersion {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  broadcast: IModuleBroadcast;
   service: IModuleService;
 }
 
