@@ -48,11 +48,7 @@ export class BeanCacheMem extends BeanModuleScopeBase {
     // remove this
     this._remove(name);
     // broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: 'a-cache',
-      broadcastName: 'memRemove',
-      data: { moduleName: this.moduleScope, name },
-    });
+    this.scope.broadcast.memRemove.emit({ moduleName: this.moduleScope, name });
   }
 
   // by broadcast
@@ -64,11 +60,7 @@ export class BeanCacheMem extends BeanModuleScopeBase {
     // clear this
     this._clear();
     // broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: 'a-cache',
-      broadcastName: 'memClear',
-      data: { moduleName: this.moduleScope },
-    });
+    this.scope.broadcast.memClear.emit({ moduleName: this.moduleScope });
   }
 
   // by broadcast

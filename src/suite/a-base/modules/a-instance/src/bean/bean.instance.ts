@@ -78,10 +78,6 @@ export class BeanInstance extends BeanBase {
 
   async reload() {
     // broadcast
-    this.ctx.meta.util.broadcastEmit({
-      module: 'a-instance',
-      broadcastName: 'reload',
-      data: null,
-    });
+    this.scope.broadcast.reload.emit();
   }
 }

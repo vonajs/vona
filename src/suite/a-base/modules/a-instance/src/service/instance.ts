@@ -38,11 +38,7 @@ export class ServiceInstance extends BeanBase {
       await this.bean.instance.reload();
     } else {
       // broadcast
-      this.ctx.meta.util.broadcastEmit({
-        module: 'a-instance',
-        broadcastName: 'resetCache',
-        data: null,
-      });
+      this.scope.broadcast.resetCache.emit();
     }
   }
 
