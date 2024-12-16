@@ -28,7 +28,7 @@ const __adapter = (_context, chain) => {
   };
 };
 
-const SymbolOnionsEnabledWithSelector = Symbol('SymbolOnionsEnabledWithSelector');
+const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
@@ -38,7 +38,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   onionsNormal: Record<ONIONNAME, IOnionSlice<OPTIONS, ONIONNAME>>;
   onionsGlobal: IOnionSlice<OPTIONS, ONIONNAME>[];
 
-  private [SymbolOnionsEnabledWithSelector]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
+  private [SymbolOnionsEnabled]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
 
   _cacheOnionsGlobal: Function[];
   _cacheOnionsHandler: Record<string, Function[]> = {};
@@ -79,13 +79,13 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
 
   getOnionsEnabled(selector?: string) {
     if (!selector) selector = '';
-    if (!this[SymbolOnionsEnabledWithSelector][selector]) {
-      this[SymbolOnionsEnabledWithSelector][selector] = this.onionsGlobal.filter(onionSlice => {
+    if (!this[SymbolOnionsEnabled][selector]) {
+      this[SymbolOnionsEnabled][selector] = this.onionsGlobal.filter(onionSlice => {
         const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
         return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector);
       }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
     }
-    return this[SymbolOnionsEnabledWithSelector][selector];
+    return this[SymbolOnionsEnabled][selector];
   }
 
   public get composedOnionsGlobal() {
