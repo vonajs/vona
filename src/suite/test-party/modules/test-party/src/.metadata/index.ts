@@ -325,7 +325,6 @@ export * from '../controller/testCtxResponse.js';
 export * from '../controller/testCtxSession.js';
 export * from '../controller/testCtxTail.js';
 export * from '../controller/testCtxTransaction.js';
-export * from '../controller/testEventHello.js';
 export * from '../controller/testFeatBean.js';
 export * from '../controller/testFeatBroadcast.js';
 export * from '../controller/testFeatCategory.js';
@@ -374,7 +373,6 @@ declare module 'vona-module-a-web' {
     'test-party:testCtxSession': IDecoratorControllerOptions;
     'test-party:testCtxTail': IDecoratorControllerOptions;
     'test-party:testCtxTransaction': IDecoratorControllerOptions;
-    'test-party:testEventHello': IDecoratorControllerOptions;
     'test-party:testFeatBean': IDecoratorControllerOptions;
     'test-party:testFeatBroadcast': IDecoratorControllerOptions;
     'test-party:testFeatCategory': IDecoratorControllerOptions;
@@ -490,11 +488,6 @@ declare module 'vona-module-test-party' {
   }
 
   export interface ControllerTestCtxTransaction {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface ControllerTestEventHello {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }

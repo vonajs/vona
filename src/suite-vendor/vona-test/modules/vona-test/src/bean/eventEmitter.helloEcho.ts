@@ -1,8 +1,10 @@
 import { BeanEventEmitterBase, EventEmitter } from 'vona-module-a-event';
 
-export type TypeEventHelloEchoData = unknown;
+export type TypeEventHelloEchoData = {
+  text: string;
+};
 
-export type TypeEventHelloEchoResult = void;
+export type TypeEventHelloEchoResult = string;
 
 @EventEmitter()
 export class EventEmitterHelloEcho extends BeanEventEmitterBase<TypeEventHelloEchoData, TypeEventHelloEchoResult> {}

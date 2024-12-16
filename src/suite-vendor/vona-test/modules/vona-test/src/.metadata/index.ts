@@ -1,25 +1,16 @@
 /** beans: begin */
 export * from '../bean/bean.testCtx.js';
-export * from '../bean/event.helloEcho.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
-import { EventHelloEcho } from '../bean/event.helloEcho.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     testCtx: BeanTestCtx;
   }
 
-  export interface IBeanRecordGeneral {
-    'vona-test.event.helloEcho': EventHelloEcho;
-  }
+  export interface IBeanRecordGeneral {}
 }
 declare module 'vona-module-vona-test' {
   export interface BeanTestCtx {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface EventHelloEcho {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
@@ -92,6 +83,44 @@ export interface IModuleBroadcast {
   test: BroadcastTest;
 }
 /** broadcast: end */
+/** eventEmitter: begin */
+export * from '../bean/eventEmitter.helloEcho.js';
+
+import { IDecoratorEventEmitterOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventEmitterRecord {
+    'vona-test:helloEcho': IDecoratorEventEmitterOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface EventEmitterHelloEcho {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** eventEmitter: end */
+/** eventEmitter: begin */
+import { EventEmitterHelloEcho } from '../bean/eventEmitter.helloEcho.js';
+export interface IModuleEventEmitter {
+  helloEcho: EventEmitterHelloEcho;
+}
+/** eventEmitter: end */
+/** eventListener: begin */
+export * from '../bean/eventListener.helloEcho.js';
+
+import { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventListenerRecord {
+    'vona-test:helloEcho': IDecoratorEventListenerOptions;
+  }
+}
+declare module 'vona-module-vona-test' {
+  export interface EventListenerHelloEcho {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** eventListener: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -112,22 +141,15 @@ declare module 'vona-module-vona-test' {
 import { MetaStatus } from '../bean/meta.status.js';
 /** meta status: end */
 /** queue: begin */
-export * from '../bean/queue.helloEcho.js';
 export * from '../bean/queue.test.js';
 
 import { IDecoratorQueueOptions } from 'vona-module-a-queue';
 declare module 'vona-module-a-queue' {
   export interface IQueueRecord {
-    'vona-test:helloEcho': IDecoratorQueueOptions;
     'vona-test:test': IDecoratorQueueOptions;
   }
 }
 declare module 'vona-module-vona-test' {
-  export interface QueueHelloEcho {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-
   export interface QueueTest {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
@@ -135,10 +157,8 @@ declare module 'vona-module-vona-test' {
 }
 /** queue: end */
 /** queue: begin */
-import { QueueHelloEcho } from '../bean/queue.helloEcho.js';
 import { QueueTest } from '../bean/queue.test.js';
 export interface IModuleQueue {
-  helloEcho: QueueHelloEcho;
   test: QueueTest;
 }
 /** queue: end */
@@ -319,6 +339,7 @@ export interface ScopeModuleVonaTest {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   summerCache: IModuleSummerCache;
   broadcast: IModuleBroadcast;
+  eventEmitter: IModuleEventEmitter;
   status: MetaStatus;
   queue: IModuleQueue;
   service: IModuleService;

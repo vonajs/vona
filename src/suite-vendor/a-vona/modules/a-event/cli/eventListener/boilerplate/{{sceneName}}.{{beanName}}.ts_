@@ -1,7 +1,7 @@
-import { BeanBase } from 'vona';
+import { BeanBase, Next } from 'vona';
 import { EventListener, IEventExecute } from 'vona-module-a-event';
 
-@EventListener({ match: 'some-module:<%=argv.beanNameCapitalize%>' })
+@EventListener({ match: 'some-module:<%=argv.beanName%>' })
 export class EventListener<%=argv.beanNameCapitalize%>
   extends BeanBase
   implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult>

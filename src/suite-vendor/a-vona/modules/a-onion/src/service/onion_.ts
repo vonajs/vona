@@ -350,7 +350,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     }
   }
 
-  private _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
+  /** internal */
+  public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: Function) {
     const sceneName = this.sceneName;
     const fn = (ctx: VonaContext, next) => {
       let packet;
