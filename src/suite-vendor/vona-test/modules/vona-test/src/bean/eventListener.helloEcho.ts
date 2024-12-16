@@ -1,11 +1,10 @@
 import { BeanBase } from 'vona';
-import { IEventExecute, EventListener } from 'vona-module-a-event';
-import { TypeEventHelloEchoJobData, TypeEventHelloEchoJobResult } from './eventEmitter.helloEcho.js';
+import { EventListener, IEventExecute } from 'vona-module-a-event';
 
-@EventListener()
+@EventListener({ match: 'some-event-name' })
 export class EventListenerHelloEcho
   extends BeanBase
-  implements IEventExecute<TypeEventHelloEchoJobData, TypeEventHelloEchoJobResult>
+  implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult>
 {
-  async execute(_data: TypeEventHelloEchoJobData): Promise<TypeEventHelloEchoJobResult> {}
+  async execute(_data: TypeEventHelloEchoData): Promise<TypeEventHelloEchoResult> {}
 }
