@@ -1,10 +1,5 @@
 import { ServiceOnion } from 'vona-module-a-onion';
 
-export interface IEventJobContext<DATA> {
-  eventName: keyof IEventEmitterRecord;
-  data: DATA;
-}
-
 export interface IEventEmitterRecord {}
 
 export interface IDecoratorEventEmitterOptions {}

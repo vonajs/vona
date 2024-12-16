@@ -21,13 +21,6 @@ import {
   SymbolUseOnionLocal,
 } from '../types/onion.js';
 
-const __adapter = (_context, chain) => {
-  return {
-    receiver: undefined,
-    fn: chain,
-  };
-};
-
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
@@ -63,7 +56,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     // compose
     const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return compose(onions, __adapter);
+    return compose(onions);
   }
 
   composeAsync(
@@ -76,7 +69,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     // compose
     const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return composeAsync(onions, __adapter);
+    return composeAsync(onions);
   }
 
   getOnionsEnabled(selector?: string) {
