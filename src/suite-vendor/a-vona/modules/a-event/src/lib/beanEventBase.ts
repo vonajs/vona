@@ -7,7 +7,9 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
     const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
       return this._wrapOnion(item);
     }, this.onionName);
-    return await composeAsync(eventListeners)(data, next);
+    if (eventListeners.length > 0) return await composeAsync(eventListeners)(data, next);
+    if (next) return await next(data);
+    return undefined!;
   }
 
   private _wrapOnion(item: IOnionSlice<IDecoratorEventListenerOptions, keyof IEventListenerRecord>) {
