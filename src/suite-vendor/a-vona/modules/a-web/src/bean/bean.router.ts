@@ -225,7 +225,7 @@ export class BeanRouter extends BeanBase {
     // end: controller
     const fnEnd = classControllerMiddleware;
     // compose
-    return this.app.bean.onion.middleware.composeAsync(ctx, fnStart, fnMid, fnEnd);
+    return this.app.bean.onion.middleware.compose(ctx, fnStart, fnMid, fnEnd);
   }
 
   _registerInner(route, middlewaresLocal) {

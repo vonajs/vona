@@ -1,6 +1,6 @@
 export default function (app) {
   return (ctx, next) => {
-    return app.bean.onion.socketConnection.composeAsync(ctx)(ctx, next);
+    return app.bean.onion.socketConnection.compose(ctx)(ctx, next);
   };
 }
 

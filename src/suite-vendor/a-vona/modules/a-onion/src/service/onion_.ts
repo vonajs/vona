@@ -49,19 +49,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return compose(onions);
   }
 
-  composeAsync(
-    ctx: VonaContext,
-    fnStart?: Function | Function[],
-    fnMid?: Function | Function[],
-    fnEnd?: Function | Function[],
-    executeCustom?: Function,
-  ) {
-    // compose
-    const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
-    // invoke
-    return compose(onions);
-  }
-
   getOnionsEnabled(selector?: string) {
     if (!selector) selector = '';
     if (!this[SymbolOnionsEnabled][selector]) {
