@@ -2,56 +2,54 @@ import { BeanBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
 class AopSimpleBase extends BeanBase {
-  actionSync(context, next) {
-    next();
-    context.result = `${context.result}:simpleaop`;
+  actionSync(_args, next) {
+    const result = next();
+    return `${result}:simpleaop`;
   }
 }
 
 @Aop({ match: 'testCtx', dependencies: 'vona-test:regExp', meta: { mode: 'unittest' } })
 export class AopSimple extends AopSimpleBase {
   // magic
-  __get__(context, next) {
-    next();
-    const prop = context.prop;
+  __get__(prop, next) {
+    const value = next();
     if (prop === 'magic') {
-      context.value = 'magic:simpleaop';
+      return 'magic:simpleaop';
     }
     if (prop === 'name') {
-      context.value = `${context.value}:simpleaop`;
+      return `${value}:simpleaop`;
     }
   }
 
-  __set__(context, next) {
-    const prop = context.prop;
+  __set__(prop, value, next) {
     if (prop === 'name') {
-      const parts = context.value.split(':');
+      const parts = value.split(':');
       const index = parts.indexOf('simpleaop');
       if (index > -1) {
         parts.splice(index, 1);
       }
-      context.value = parts.join(':');
+      value = parts.join(':');
     }
-    next();
+    return next(value);
   }
 
-  __get_name__(context, next) {
-    next();
-    context.value = `${context.value}:simpleaop`;
+  __get_name__(next) {
+    const value = next();
+    return `${value}:simpleaop`;
   }
 
-  __set_name__(context, next) {
-    const parts = context.value.split(':');
+  __set_name__(value, next) {
+    const parts = value.split(':');
     const index = parts.indexOf('simpleaop');
     if (index > -1) {
       parts.splice(index, 1);
     }
-    context.value = parts.join(':');
-    next();
+    value = parts.join(':');
+    return next(value);
   }
 
-  async actionAsync(context, next) {
-    await next();
-    context.result = `${context.result}:simpleaop`;
+  async actionAsync(_args, next) {
+    const result = await next();
+    return `${result}:simpleaop`;
   }
 }

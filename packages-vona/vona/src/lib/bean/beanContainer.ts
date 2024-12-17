@@ -218,7 +218,7 @@ export class BeanContainer {
   private _newBeanProxy(beanFullName, beanInstance) {
     const self = this;
     return new Proxy(beanInstance, {
-      get(target, prop, receiver) {
+      get(target, prop, _receiver) {
         if (typeof prop === 'symbol') {
           return target[prop];
         }
@@ -233,16 +233,10 @@ export class BeanContainer {
         if (!methodType) {
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
-          const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic);
+          const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'get', prop);
           if (_aopChainsProp.length === 0) return target[prop];
-          // context
-          const context = {
-            target,
-            receiver,
-            prop,
-          };
           // aop
-          return self.__composeForProp(_aopChainsProp)(context, () => {
+          return self.__composeForProp(_aopChainsProp)(undefined, () => {
             if (!descriptorInfo && target.__get__) {
               return target.__get__(prop);
             } else {
@@ -253,7 +247,7 @@ export class BeanContainer {
         // method
         return self._getInstanceMethodProxy(beanFullName, target, prop);
       },
-      set(target, prop, value, receiver) {
+      set(target, prop, value, _receiver) {
         if (typeof prop === 'symbol') {
           target[prop] = value;
           return true;
@@ -270,21 +264,22 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic);
+        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'set', prop);
         if (_aopChainsProp.length === 0) {
           target[prop] = value;
           return true;
         }
         // aop
-        return self.__composeForProp(_aopChainsProp)(value, () => {
+        return self.__composeForProp(_aopChainsProp)(value, value2 => {
+          if (value2 === undefined) value2 = value;
           if (!descriptorInfo && target.__set__) {
-            const res = target.__set__(prop, value);
+            const res = target.__set__(prop, value2);
             if (res === undefined) throw new Error('__set__ must return true/false');
             if (!res) {
-              target[prop] = value;
+              target[prop] = value2;
             }
           } else {
-            target[prop] = value;
+            target[prop] = value2;
           }
           // ok: prop be set
           return true;
@@ -300,22 +295,15 @@ export class BeanContainer {
       return beanInstance[prop];
     }
     // aop chains
-    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, null);
+    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, undefined, 'method', prop);
     if (_aopChainsProp.length === 0) return beanInstance[prop];
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
     if (beanInstance[methodProxyKey]) return beanInstance[methodProxyKey];
     const methodProxy = new Proxy(beanInstance[prop], {
       apply(target, thisArg, args) {
-        // context
-        const context = {
-          target: beanInstance,
-          receiver: thisArg,
-          prop,
-          arguments: args,
-        };
         // aop
-        return self.__composeForProp(_aopChainsProp)(context, () => {
+        return self.__composeForProp(_aopChainsProp)(args, () => {
           return target.apply(thisArg, args);
         });
       },
@@ -355,7 +343,13 @@ export class BeanContainer {
     return host.__aopChains__;
   }
 
-  private _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
+  private _getAopChainsProp(
+    beanFullName,
+    methodName,
+    methodNameMagic,
+    methodType: 'get' | 'set' | 'method',
+    prop: string,
+  ) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
@@ -369,9 +363,37 @@ export class BeanContainer {
       } else {
         const aop: any = this._getBean(aopKey as string as any);
         if (aop[methodName]) {
-          chains.push([aopKey, methodName]);
+          let fn;
+          if (methodType === 'get') {
+            fn = function (_, next) {
+              return aop[methodName](next);
+            };
+          } else if (methodType === 'set') {
+            fn = function (value, next) {
+              return aop[methodName](value, next);
+            };
+          } else if (methodType === 'method') {
+            fn = function (args, next) {
+              return aop[methodName](args, next);
+            };
+          }
+          chains.push([aopKey, fn]);
         } else if (methodNameMagic && aop[methodNameMagic]) {
-          chains.push([aopKey, methodNameMagic]);
+          let fn;
+          if (methodType === 'get') {
+            fn = function (_, next) {
+              return aop[methodNameMagic](prop, next);
+            };
+          } else if (methodType === 'set') {
+            fn = function (value, next) {
+              return aop[methodNameMagic](prop, value, next);
+            };
+          } else if (methodType === 'method') {
+            fn = function (args, next) {
+              return aop[methodNameMagic](args, next);
+            };
+          }
+          chains.push([aopKey, fn]);
         }
       }
     }
@@ -380,16 +402,13 @@ export class BeanContainer {
   }
 
   private __composeForPropAdapter = (_context, chain) => {
-    const [aopKey, methodName] = chain;
+    const [aopKey, fn] = chain;
     // SymbolProxyMagic
     if (aopKey === SymbolProxyMagic) return null;
     // chain
-    const aop = this._getBean(aopKey);
-    if (!aop) throw new Error(`aop not found: ${chain}`);
-    if (!aop[methodName]) return null;
     return {
-      receiver: aop,
-      fn: aop[methodName],
+      receiver: undefined,
+      fn,
     };
   };
 

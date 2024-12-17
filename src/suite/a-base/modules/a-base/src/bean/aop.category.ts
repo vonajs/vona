@@ -8,11 +8,26 @@ const __atomClassApp = {
 
 @Aop({ match: 'category' })
 export class AopCategory extends BeanBase {
-  async children(context, next) {
+  async children(
+    args: [
+      {
+        atomClass?;
+        language?;
+        categoryId?;
+        categoryName?;
+        categoryHidden?;
+        categoryFlag?;
+        setLocale?;
+        count?;
+        user?;
+      },
+    ],
+    next,
+  ) {
     // next
     const list = await next();
     // check atomClass
-    const params = context.arguments[0];
+    const params = args[0];
     const categoryIdParent = params.categoryId;
     const atomClass = params.atomClass;
     if (!atomClass) return list;
@@ -21,7 +36,6 @@ export class AopCategory extends BeanBase {
     if (!atomClassBase.resource) return list;
 
     // locale
-    //const list = context.result;
     if (list.length === 0) return list;
     // resourceType
     let res = this._checkResourceType({ list, categoryIdParent, atomClass });

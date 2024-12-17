@@ -3,28 +3,28 @@ import { Aop } from 'vona-module-a-aspect';
 
 @Aop({ match: [/^vona-test\.service\.test\w+$/, 'testCtx'], meta: { mode: 'unittest' } })
 export class AopRegExp extends BeanBase {
-  __get_name__(context, next) {
-    next();
-    context.value = `${context.value}:regexpaop`;
+  __get_name__(next) {
+    const value = next();
+    return `${value}:regexpaop`;
   }
 
-  __set_name__(context, next) {
-    const parts = context.value.split(':');
+  __set_name__(value, next) {
+    const parts = value.split(':');
     const index = parts.indexOf('regexpaop');
     if (index > -1) {
       parts.splice(index, 1);
     }
-    context.value = parts.join(':');
-    next();
+    value = parts.join(':');
+    return next(value);
   }
 
-  actionSync(context, next) {
-    next();
-    context.result = `${context.result}:regexpaop`;
+  actionSync(_args, next) {
+    const result = next();
+    return `${result}:regexpaop`;
   }
 
-  async actionAsync(context, next) {
-    await next();
-    context.result = `${context.result}:regexpaop`;
+  async actionAsync(_args, next) {
+    const result = await next();
+    return `${result}:regexpaop`;
   }
 }
