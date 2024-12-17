@@ -74,22 +74,15 @@ export class BeanShare extends BeanBase {
   async _share_record({ item, user }: any) {
     const userId = user.id;
     // aShareRecordPV
-    await this.app.bean.event.invoke({
-      module: __ThisModule__,
-      name: 'shareRecordPV',
-      data: { share: item, user },
-      next: async (context, next) => {
-        // record
-        const res = await this.modelShareRecordPV.insert({
-          shareId: item.id,
-          userId,
-        });
-        context.result = {
-          recordId: res[0],
-        };
-        // next
-        await next();
-      },
+    await this.scope.event.shareRecordPV.emit({ share: item, user }, async () => {
+      // record
+      const res = await this.modelShareRecordPV.insert({
+        shareId: item.id,
+        userId,
+      });
+      return {
+        recordId: res[0],
+      };
     });
     // aShareRecordUV
     const uvData = {
@@ -99,19 +92,12 @@ export class BeanShare extends BeanBase {
     };
     const uv = await this.modelShareRecordUV.get(uvData);
     if (!uv) {
-      await this.app.bean.event.invoke({
-        module: __ThisModule__,
-        name: 'shareRecordUV',
-        data: { share: item, user },
-        next: async (context, next) => {
-          // record
-          const res = await this.modelShareRecordUV.insert(uvData);
-          context.result = {
-            recordId: res[0],
-          };
-          // next
-          await next();
-        },
+      await this.scope.event.shareRecordUV.emit({ share: item, user }, async () => {
+        // record
+        const res = await this.modelShareRecordUV.insert(uvData);
+        return {
+          recordId: res[0],
+        };
       });
     }
   }

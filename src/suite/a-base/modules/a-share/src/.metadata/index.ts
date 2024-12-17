@@ -108,6 +108,37 @@ export interface IModuleModel {
   shareRecordUV: ModelShareRecordUV;
 }
 /** model: end */
+/** event: begin */
+export * from '../bean/event.shareRecordPV.js';
+export * from '../bean/event.shareRecordUV.js';
+
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-share:shareRecordPV': IDecoratorEventOptions;
+    'a-share:shareRecordUV': IDecoratorEventOptions;
+  }
+}
+declare module 'vona-module-a-share' {
+  export interface EventShareRecordPV {
+    /** @internal */
+    get scope(): ScopeModuleAShare;
+  }
+
+  export interface EventShareRecordUV {
+    /** @internal */
+    get scope(): ScopeModuleAShare;
+  }
+}
+/** event: end */
+/** event: begin */
+import { EventShareRecordPV } from '../bean/event.shareRecordPV.js';
+import { EventShareRecordUV } from '../bean/event.shareRecordUV.js';
+export interface IModuleEvent {
+  shareRecordPV: EventShareRecordPV;
+  shareRecordUV: EventShareRecordUV;
+}
+/** event: end */
 /** service: begin */
 export * from '../service/share.js';
 
@@ -165,6 +196,7 @@ export interface ScopeModuleAShare {
   util: BeanScopeUtil;
   entity: IModuleEntity;
   model: IModuleModel;
+  event: IModuleEvent;
   service: IModuleService;
 }
 
