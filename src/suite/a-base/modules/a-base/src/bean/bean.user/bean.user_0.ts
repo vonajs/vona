@@ -423,11 +423,7 @@ export class BeanUser0 extends BeanBase {
     }
 
     // user verify event
-    await this.app.bean.event.invoke({
-      module: __ThisModule__,
-      name: 'userVerify',
-      data: { verifyUser, profileUser },
-    });
+    await this.self.scope.event.userVerify.emit({ verifyUser, profileUser });
 
     // restore maxAge
     //   maxAge: 0,null/undefined,>0

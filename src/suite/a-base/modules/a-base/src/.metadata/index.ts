@@ -998,13 +998,17 @@ declare module 'vona-module-a-base' {
 /** aop: end */
 /** event: begin */
 export * from '../bean/event.accountMigration.js';
+export * from '../bean/event.loginInfo.js';
 export * from '../bean/event.userAdd.js';
+export * from '../bean/event.userVerify.js';
 
 import { IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-base:accountMigration': IDecoratorEventOptions;
+    'a-base:loginInfo': IDecoratorEventOptions;
     'a-base:userAdd': IDecoratorEventOptions;
+    'a-base:userVerify': IDecoratorEventOptions;
   }
 }
 declare module 'vona-module-a-base' {
@@ -1013,7 +1017,17 @@ declare module 'vona-module-a-base' {
     get scope(): ScopeModuleABase;
   }
 
+  export interface EventLoginInfo {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
   export interface EventUserAdd {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EventUserVerify {
     /** @internal */
     get scope(): ScopeModuleABase;
   }
@@ -1021,10 +1035,14 @@ declare module 'vona-module-a-base' {
 /** event: end */
 /** event: begin */
 import { EventAccountMigration } from '../bean/event.accountMigration.js';
+import { EventLoginInfo } from '../bean/event.loginInfo.js';
 import { EventUserAdd } from '../bean/event.userAdd.js';
+import { EventUserVerify } from '../bean/event.userVerify.js';
 export interface IModuleEvent {
   accountMigration: EventAccountMigration;
+  loginInfo: EventLoginInfo;
   userAdd: EventUserAdd;
+  userVerify: EventUserVerify;
 }
 /** event: end */
 /** meta: begin */

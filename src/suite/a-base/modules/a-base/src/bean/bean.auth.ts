@@ -93,10 +93,7 @@ export class BeanAuth extends BeanBase {
     }
     // login info event
     if (!isAuthOpen) {
-      await this.app.bean.event.invoke({
-        name: 'loginInfo',
-        data: { info },
-      });
+      await this.scope.event.loginInfo.emit({ info });
     }
     // ok
     return info;

@@ -225,7 +225,6 @@ export interface IModuleBroadcast {
 export * from '../bean/event.helloEcho.js';
 export * from '../bean/event.loginInfo.js';
 export * from '../bean/event.loginInfoDashboard.js';
-export * from '../bean/event.userVerify.js';
 
 import { IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
@@ -233,7 +232,6 @@ declare module 'vona-module-a-event' {
     'test-party:helloEcho': IDecoratorEventOptions;
     'test-party:loginInfo': IDecoratorEventOptions;
     'test-party:loginInfoDashboard': IDecoratorEventOptions;
-    'test-party:userVerify': IDecoratorEventOptions;
   }
 }
 declare module 'vona-module-test-party' {
@@ -251,25 +249,41 @@ declare module 'vona-module-test-party' {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }
-
-  export interface EventUserVerify {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
 }
 /** event: end */
 /** event: begin */
 import { EventHelloEcho } from '../bean/event.helloEcho.js';
 import { EventLoginInfo } from '../bean/event.loginInfo.js';
 import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
-import { EventUserVerify } from '../bean/event.userVerify.js';
 export interface IModuleEvent {
   helloEcho: EventHelloEcho;
   loginInfo: EventLoginInfo;
   loginInfoDashboard: EventLoginInfoDashboard;
-  userVerify: EventUserVerify;
 }
 /** event: end */
+/** eventListener: begin */
+export * from '../bean/eventListener.loginInfo.js';
+export * from '../bean/eventListener.userVerify.js';
+
+import { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventListenerRecord {
+    'test-party:loginInfo': IDecoratorEventListenerOptions;
+    'test-party:userVerify': IDecoratorEventListenerOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface EventListenerLoginInfo {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventListenerUserVerify {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** eventListener: end */
 /** startup: begin */
 export * from '../bean/startup.startupAll.js';
 export * from '../bean/startup.startupInstance.js';
