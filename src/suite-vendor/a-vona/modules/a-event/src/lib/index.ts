@@ -1,3 +1,3 @@
-export * from './beanEventEmitterBase.js';
-export * from './eventEmitter.js';
+export * from './beanEventBase.js';
+export * from './event.js';
 export * from './eventListener.js';

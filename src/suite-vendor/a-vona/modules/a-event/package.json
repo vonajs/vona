@@ -5,11 +5,11 @@
   "vonaModule": {
     "dependencies": {},
     "onions": {
-      "eventEmitter": {
-        "optionsGlobalInterfaceName": "IDecoratorEventEmitterOptions",
+      "event": {
+        "optionsGlobalInterfaceName": "IDecoratorEventOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-event",
         "scopeResource": true,
-        "boilerplate": "cli/eventEmitter/boilerplate"
+        "boilerplate": "cli/event/boilerplate"
       },
       "eventListener": {
         "optionsGlobalInterfaceName": "IDecoratorEventListenerOptions",

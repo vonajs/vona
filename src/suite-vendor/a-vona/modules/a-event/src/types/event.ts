@@ -1,0 +1,21 @@
+import { ServiceOnion } from 'vona-module-a-onion';
+
+export interface IEventRecord {}
+
+export interface IDecoratorEventOptions {}
+
+declare module 'vona-module-a-onion' {
+  export interface BeanOnion {
+    event: ServiceOnion<IDecoratorEventOptions, keyof IEventRecord>;
+  }
+}
+
+declare module 'vona' {
+  export interface ConfigOnions {
+    // event: OmitNever<IEventRecord>;
+  }
+
+  export interface ISceneCustomRecord {
+    event: never;
+  }
+}
