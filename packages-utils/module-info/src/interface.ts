@@ -93,6 +93,7 @@ export interface IModulePackage {
 
 export interface IGlobBeanFile {
   file: string;
+  fileContent: string;
   fileName: string;
   fileNameJS: string;
   fileNameJSRelative: string;

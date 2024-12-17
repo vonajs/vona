@@ -22,7 +22,8 @@
         "sceneIsolate": true,
         "optionsGlobalInterfaceName": "IDecoratorControllerOptions",
         "optionsGlobalInterfaceFrom": "vona-module-a-web",
-        "boilerplate": "cli/controller/boilerplate"
+        "boilerplate": "cli/controller/boilerplate",
+        "metadataCustom": "cli/controller/metadata/generate.ts"
       }
     }
   },

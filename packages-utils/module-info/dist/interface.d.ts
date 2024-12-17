@@ -35,6 +35,28 @@ export interface IBundleVendor {
     match: Array<string | RegExp>;
     output: string;
 }
+export interface OnionSceneMeta {
+    module?: IModule;
+    sceneIsolate?: boolean;
+    hasLocal?: boolean;
+    optionsRoute?: boolean;
+    optionsArgumentPipe?: boolean;
+    optionsDynamic?: boolean;
+    optionsGlobalInterfaceName?: string;
+    optionsGlobalInterfaceFrom?: string;
+    scopeResource?: boolean;
+    beanLocal?: boolean;
+    boilerplate?: string;
+    metadataCustom?: string;
+}
+export interface OnionMetaMeta {
+    module?: IModule;
+    scopeResource?: boolean;
+    boilerplate?: string;
+    metadataCustom?: string;
+}
+export type OnionScenesMeta = Record<string, OnionSceneMeta>;
+export type OnionMetasMeta = Record<string, OnionMetaMeta>;
 export interface IModulePackage {
     name: string;
     version: string;
@@ -43,6 +65,8 @@ export interface IModulePackage {
         fileVersion: number;
         dependencies?: Record<string, string>;
         globalDependencies?: Record<string, string | boolean>;
+        onions?: OnionScenesMeta;
+        metas?: OnionMetasMeta;
     };
     zovaModule?: {
         capabilities?: IModuleCapabilities;
@@ -57,4 +81,25 @@ export interface IModulePackage {
     author: string;
     dependencies: Record<string, string>;
 }
+export interface IGlobBeanFile {
+    file: string;
+    fileContent: string;
+    fileName: string;
+    fileNameJS: string;
+    fileNameJSRelative: string;
+    className: string;
+    beanName: string;
+    beanNameFull: string;
+    isIgnore: boolean;
+}
+export interface IMetadataCustomGenerateOptions {
+    cli: any;
+    sceneName: string;
+    sceneNameCapitalize: string;
+    sceneMeta: OnionSceneMeta;
+    moduleName: string;
+    modulePath: string;
+    globFiles: IGlobBeanFile[];
+}
+export type TypeMetadataCustomGenerate = (options: IMetadataCustomGenerateOptions) => Promise<string>;
 //# sourceMappingURL=interface.d.ts.map

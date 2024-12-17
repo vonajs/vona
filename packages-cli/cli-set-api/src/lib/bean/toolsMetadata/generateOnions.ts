@@ -20,7 +20,7 @@ export async function generateOnions(
   const contentRecordsLocal: string[] = [];
   let needImportOptionsGlobalInterface;
   for (const globFile of globFiles) {
-    const { file, fileNameJSRelative, className, beanNameFull, isIgnore } = globFile;
+    const { fileContent, fileNameJSRelative, className, beanNameFull, isIgnore } = globFile;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue;
     // get scope() also can be ignored
@@ -31,7 +31,7 @@ export async function generateOnions(
           get scope(): ${scopeModuleName};
         }`);
     }
-    const fileInfo = extractBeanInfo(sceneName, file, sceneMeta);
+    const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
     // import options
     if (fileInfo.optionsCustomInterface) {
       contentImports.push(
