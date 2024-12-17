@@ -270,16 +270,15 @@ export class BeanContainer {
           return true;
         }
         // aop
-        return self.__composeForProp(_aopChainsProp)(value, value2 => {
-          if (value2 === undefined) value2 = value;
+        return self.__composeForProp(_aopChainsProp)(value, value => {
           if (!descriptorInfo && target.__set__) {
-            const res = target.__set__(prop, value2);
+            const res = target.__set__(prop, value);
             if (res === undefined) throw new Error('__set__ must return true/false');
             if (!res) {
-              target[prop] = value2;
+              target[prop] = value;
             }
           } else {
-            target[prop] = value2;
+            target[prop] = value;
           }
           // ok: prop be set
           return true;
@@ -303,7 +302,7 @@ export class BeanContainer {
     const methodProxy = new Proxy(beanInstance[prop], {
       apply(target, thisArg, args) {
         // aop
-        return self.__composeForProp(_aopChainsProp)(args, () => {
+        return self.__composeForProp(_aopChainsProp)(args, args => {
           return target.apply(thisArg, args);
         });
       },

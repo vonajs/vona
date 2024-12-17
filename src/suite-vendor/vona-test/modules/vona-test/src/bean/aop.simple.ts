@@ -19,6 +19,7 @@ export class AopSimple extends AopSimpleBase {
     if (prop === 'name') {
       return `${value}:simpleaop`;
     }
+    return value;
   }
 
   __set__(prop, value, next) {

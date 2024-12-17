@@ -11,8 +11,8 @@ export function compose(chains, adapter) {
   return function (context, next?) {
     // last called middleware #
     let index = -1;
-    return dispatch(0);
-    function dispatch(i) {
+    return dispatch(0, context);
+    function dispatch(i, context) {
       if (i <= index) throw new Error('next() called multiple times');
       index = i;
       let receiver;
@@ -20,15 +20,16 @@ export function compose(chains, adapter) {
       const chain = chains[i];
       if (chain) {
         const obj = adapter(context, chain);
-        if (!obj) return dispatch(i + 1);
+        if (!obj) return dispatch(i + 1, context);
         receiver = obj.receiver;
         fn = obj.fn;
         if (!fn) throw new Error('fn is not defined');
       }
       if (i === chains.length) fn = next;
       if (!fn) return;
-      return fn.call(receiver, context, function next() {
-        return dispatch(i + 1);
+      return fn.call(receiver, context, function next(...args) {
+        context = args.length === 0 ? context : args[0];
+        return dispatch(i + 1, context);
       });
     }
   };
