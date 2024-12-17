@@ -223,13 +223,11 @@ export interface IModuleBroadcast {
 /** broadcast: end */
 /** event: begin */
 export * from '../bean/event.helloEcho.js';
-export * from '../bean/event.loginInfoDashboard.js';
 
 import { IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'test-party:helloEcho': IDecoratorEventOptions;
-    'test-party:loginInfoDashboard': IDecoratorEventOptions;
   }
 }
 declare module 'vona-module-test-party' {
@@ -237,19 +235,12 @@ declare module 'vona-module-test-party' {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }
-
-  export interface EventLoginInfoDashboard {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
 }
 /** event: end */
 /** event: begin */
 import { EventHelloEcho } from '../bean/event.helloEcho.js';
-import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
 export interface IModuleEvent {
   helloEcho: EventHelloEcho;
-  loginInfoDashboard: EventLoginInfoDashboard;
 }
 /** event: end */
 /** eventListener: begin */
