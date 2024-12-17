@@ -10,27 +10,29 @@ const __atomClassApp = {
 export class AopCategory extends BeanBase {
   async children(context, next) {
     // next
-    await next();
+    const list = await next();
     // check atomClass
     const params = context.arguments[0];
     const categoryIdParent = params.categoryId;
     const atomClass = params.atomClass;
-    if (!atomClass) return;
+    if (!atomClass) return list;
     // check if resource
     const atomClassBase = await this.app.bean.atomClass.atomClass(atomClass);
-    if (!atomClassBase.resource) return;
+    if (!atomClassBase.resource) return list;
 
     // locale
-    const list = context.result;
-    if (list.length === 0) return;
+    //const list = context.result;
+    if (list.length === 0) return list;
     // resourceType
     let res = this._checkResourceType({ list, categoryIdParent, atomClass });
-    if (res) return;
+    if (res) return list;
     // appKey
     res = await this._checkAppKey({ list, categoryIdParent, atomClass });
-    if (res) return;
+    if (res) return list;
     // general
     this._checkGeneral({ list });
+    // ok
+    return list;
   }
 
   _checkGeneral({ list }: any) {

@@ -240,24 +240,18 @@ export class BeanContainer {
             target,
             receiver,
             prop,
-            value: undefined,
           };
           // aop
-          self.__composeForProp(_aopChainsProp)(context, (context, next) => {
-            if (context.value === undefined) {
-              if (!descriptorInfo && target.__get__) {
-                context.value = target.__get__(prop);
-              } else {
-                context.value = target[prop];
-              }
+          return self.__composeForProp(_aopChainsProp)(context, () => {
+            if (!descriptorInfo && target.__get__) {
+              return target.__get__(prop);
+            } else {
+              return target[prop];
             }
-            next();
           });
-          // ok
-          return context.value;
         }
         // method
-        return self._getInstanceMethodProxy(beanFullName, target, prop, methodType);
+        return self._getInstanceMethodProxy(beanFullName, target, prop);
       },
       set(target, prop, value, receiver) {
         if (typeof prop === 'symbol') {
@@ -281,33 +275,25 @@ export class BeanContainer {
           target[prop] = value;
           return true;
         }
-        // context
-        const context = {
-          target,
-          receiver,
-          prop,
-          value,
-        };
         // aop
-        self.__composeForProp(_aopChainsProp)(context, (context, next) => {
+        return self.__composeForProp(_aopChainsProp)(value, () => {
           if (!descriptorInfo && target.__set__) {
-            const res = target.__set__(prop, context.value);
+            const res = target.__set__(prop, value);
             if (res === undefined) throw new Error('__set__ must return true/false');
             if (!res) {
-              target[prop] = context.value;
+              target[prop] = value;
             }
           } else {
-            target[prop] = context.value;
+            target[prop] = value;
           }
-          next();
+          // ok: prop be set
+          return true;
         });
-        // ok
-        return true;
       },
     });
   }
 
-  private _getInstanceMethodProxy(beanFullName, beanInstance, prop, methodType) {
+  private _getInstanceMethodProxy(beanFullName, beanInstance, prop) {
     const self = this;
     // not aop magic methods
     if (__isInnerMethod(prop)) {
@@ -327,36 +313,11 @@ export class BeanContainer {
           receiver: thisArg,
           prop,
           arguments: args,
-          result: undefined,
         };
         // aop
-        if (methodType === 'Function') {
-          self.__composeForProp(_aopChainsProp)(context, (context, next) => {
-            if (context.result === undefined) {
-              context.result = target.apply(thisArg, args);
-            }
-            next();
-          });
-          // ok
-          return context.result;
-        }
-        if (methodType === 'AsyncFunction') {
-          return new Promise((resolve, reject) => {
-            self
-              .__composeForProp(_aopChainsProp)(context, async (context, next) => {
-                if (context.result === undefined) {
-                  context.result = await target.apply(thisArg, args);
-                }
-                await next();
-              })
-              .then(() => {
-                resolve(context.result);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-        }
+        return self.__composeForProp(_aopChainsProp)(context, () => {
+          return target.apply(thisArg, args);
+        });
       },
     });
     __setPropertyValue(beanInstance, methodProxyKey, methodProxy);
