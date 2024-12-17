@@ -4,8 +4,8 @@ import { IEventRecord } from './event.js';
 
 export type NextEvent<RESULT = unknown> = () => Promise<RESULT>;
 
-export interface IEventExecute<ARGS extends unknown[] = unknown[], RESULT = unknown> {
-  execute(args: ARGS, next: Next): Promise<RESULT>;
+export interface IEventExecute<DATA = unknown, RESULT = unknown> {
+  execute(data: DATA, next: Next): Promise<RESULT>;
 }
 
 export interface IEventListenerRecord {}
