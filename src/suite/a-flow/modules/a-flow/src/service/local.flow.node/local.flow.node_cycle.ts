@@ -53,7 +53,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   async enter() {
     // current
     await this.self._setCurrent();
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'enter',
     });
     await this._saveVars();
@@ -62,7 +62,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async begin() {
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'begin',
     });
     await this._saveVars();
@@ -71,7 +71,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async doing() {
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'doing',
     });
     await this._saveVars();
@@ -80,7 +80,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async end() {
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'end',
     });
     await this._saveVars();
@@ -89,7 +89,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async leave() {
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'leave',
     });
     await this._saveVars();
@@ -97,7 +97,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async clear(options) {
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'clear',
       options,
     });
@@ -107,7 +107,7 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async change(options) {
-    const res = await this._behaviorsInvokeAsync({
+    const res = await this._behaviorsInvoke({
       methodName: 'change',
       options,
     });
@@ -117,9 +117,5 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
 
   _behaviorsInvoke(context) {
     return compose(this.behaviors, __adapter)(context);
-  }
-
-  async _behaviorsInvokeAsync(context) {
-    return await compose(this.behaviors, __adapter)(context);
   }
 }
