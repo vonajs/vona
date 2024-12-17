@@ -13,7 +13,7 @@ export function compose(chains, adapter) {
     let index = -1;
     return dispatch(0);
     function dispatch(i) {
-      if (i <= index) return new Error('next() called multiple times');
+      if (i <= index) throw new Error('next() called multiple times');
       index = i;
       let receiver;
       let fn;
@@ -23,7 +23,7 @@ export function compose(chains, adapter) {
         if (!obj) return dispatch(i + 1);
         receiver = obj.receiver;
         fn = obj.fn;
-        if (!fn) return new Error('fn is not defined');
+        if (!fn) throw new Error('fn is not defined');
       }
       if (i === chains.length) fn = next;
       if (!fn) return;
@@ -42,7 +42,7 @@ export function composeAsync(chains, adapter) {
     let index = -1;
     return dispatch(0);
     function dispatch(i) {
-      if (i <= index) return Promise.reject(new Error('next() called multiple times'));
+      if (i <= index) throw new Error('next() called multiple times');
       index = i;
       let receiver;
       let fn;
@@ -52,7 +52,7 @@ export function composeAsync(chains, adapter) {
         if (!obj) return dispatch(i + 1);
         receiver = obj.receiver;
         fn = obj.fn;
-        if (!fn) return Promise.reject(new Error('fn is not defined'));
+        if (!fn) throw new Error('fn is not defined');
       }
       if (i === chains.length) fn = next;
       if (!fn) return Promise.resolve();
