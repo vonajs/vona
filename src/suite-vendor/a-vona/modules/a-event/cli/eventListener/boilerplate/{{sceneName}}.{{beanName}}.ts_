@@ -1,12 +1,15 @@
-import { BeanBase, Next } from 'vona';
-import { EventListener, IEventExecute } from 'vona-module-a-event';
+import { BeanBase } from 'vona';
+import { EventListener, IEventExecute, NextEvent } from 'vona-module-a-event';
 
 @EventListener({ match: 'some-module:<%=argv.beanName%>' })
 export class EventListener<%=argv.beanNameCapitalize%>
   extends BeanBase
   implements IEventExecute<TypeEvent<%=argv.beanNameCapitalize%>Args, TypeEvent<%=argv.beanNameCapitalize%>Result>
 {
-  async execute(_args: TypeEvent<%=argv.beanNameCapitalize%>Args, next: Next): Promise<TypeEvent<%=argv.beanNameCapitalize%>Result> {
+  async execute(
+    _args: TypeEvent<%=argv.beanNameCapitalize%>Args,
+    next: NextEvent<TypeEvent<%=argv.beanNameCapitalize%>Result>,
+  ): Promise<TypeEvent<%=argv.beanNameCapitalize%>Result> {
     // next
     return next();
   }

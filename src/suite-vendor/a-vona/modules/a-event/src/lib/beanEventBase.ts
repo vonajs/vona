@@ -1,9 +1,14 @@
 import { BeanBase, composeAsync, Next } from 'vona';
 import { IOnionSlice } from 'vona-module-a-onion';
-import { IDecoratorEventListenerOptions, IEventExecute, IEventListenerRecord } from '../types/eventListener.js';
+import {
+  IDecoratorEventListenerOptions,
+  IEventExecute,
+  IEventListenerRecord,
+  NextEvent,
+} from '../types/eventListener.js';
 
 export class BeanEventBase<ARGS extends unknown[] = unknown[], RESULT = unknown> extends BeanBase {
-  async emit(args: ARGS, next?: () => Promise<RESULT>): Promise<RESULT> {
+  async emit(args: ARGS, next?: NextEvent<RESULT>): Promise<RESULT> {
     const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
       return this._wrapOnion(item);
     }, this.onionName);
