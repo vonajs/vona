@@ -1,16 +1,6 @@
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 import { IModule, OnionSceneMeta } from '@cabloy/module-info';
-import {
-  appMetadata,
-  appResource,
-  BeanBase,
-  cast,
-  compose,
-  composeAsync,
-  deepExtend,
-  SymbolProxyDisable,
-  VonaContext,
-} from 'vona';
+import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, SymbolProxyDisable, VonaContext } from 'vona';
 import { Service } from 'vona-module-a-web';
 import { getOnionScenesMeta } from 'vona-shared';
 import {
@@ -69,7 +59,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     // compose
     const onions = this._composeOnionsHandler(ctx, fnStart, fnMid, fnEnd, executeCustom);
     // invoke
-    return composeAsync(onions);
+    return compose(onions);
   }
 
   getOnionsEnabled(selector?: string) {

@@ -33,32 +33,3 @@ export function compose(chains, adapter) {
     }
   };
 }
-
-export function composeAsync(chains, adapter) {
-  if (!adapter) adapter = __adapterDefault;
-  if (!chains) chains = [];
-  return function (context, next?) {
-    // last called middleware #
-    let index = -1;
-    return dispatch(0);
-    function dispatch(i) {
-      if (i <= index) throw new Error('next() called multiple times');
-      index = i;
-      let receiver;
-      let fn;
-      const chain = chains[i];
-      if (chain) {
-        const obj = adapter(context, chain);
-        if (!obj) return dispatch(i + 1);
-        receiver = obj.receiver;
-        fn = obj.fn;
-        if (!fn) throw new Error('fn is not defined');
-      }
-      if (i === chains.length) fn = next;
-      if (!fn) return;
-      return fn.call(receiver, context, function next() {
-        return dispatch(i + 1);
-      });
-    }
-  };
-}

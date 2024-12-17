@@ -6,7 +6,7 @@ import { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKe
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 import { isClass } from '../utils/isClass.js';
-import { compose, composeAsync, isNilOrEmptyString } from '../utils/util.js';
+import { compose, isNilOrEmptyString } from '../utils/util.js';
 
 const SymbolProxyMagic = Symbol('Bean#SymbolProxyMagic');
 const SymbolBeanContainerInstances = Symbol('Bean#SymbolBeanContainerInstances');
@@ -343,7 +343,7 @@ export class BeanContainer {
         if (methodType === 'AsyncFunction') {
           return new Promise((resolve, reject) => {
             self
-              .__composeForPropAsync(_aopChainsProp)(context, async (context, next) => {
+              .__composeForProp(_aopChainsProp)(context, async (context, next) => {
                 if (context.result === undefined) {
                   context.result = await target.apply(thisArg, args);
                 }
@@ -434,10 +434,6 @@ export class BeanContainer {
 
   private __composeForProp(chains) {
     return compose(chains, this.__composeForPropAdapter);
-  }
-
-  private __composeForPropAsync(chains) {
-    return composeAsync(chains, this.__composeForPropAdapter);
   }
 }
 

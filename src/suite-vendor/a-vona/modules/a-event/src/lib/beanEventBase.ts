@@ -1,4 +1,4 @@
-import { BeanBase, composeAsync, Next } from 'vona';
+import { BeanBase, compose, Next } from 'vona';
 import { IOnionSlice } from 'vona-module-a-onion';
 import {
   IDecoratorEventListenerOptions,
@@ -19,7 +19,7 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
       return this._wrapOnion(item);
     }, this.onionName);
     if (eventListeners.length === 0) return await next();
-    return await composeAsync(eventListeners)(data, next);
+    return await compose(eventListeners)(data, next);
   }
 
   private _wrapOnion(item: IOnionSlice<IDecoratorEventListenerOptions, keyof IEventListenerRecord>) {

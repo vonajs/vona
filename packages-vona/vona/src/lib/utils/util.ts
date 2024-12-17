@@ -5,7 +5,7 @@ import * as security from 'egg-security';
 import * as uuid from 'uuid';
 import { VonaContext, IModule, TypeMonkeyName, IModuleInfo, parseInfo } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { compose as _compose, composeAsync as _composeAsync } from '@cabloy/compose';
+import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
 
 export interface IExecuteBeanCallbackParams {
@@ -212,10 +212,6 @@ export function isNilOrEmptyString(str?: string | undefined | null): str is null
 
 export function compose(chains, adapter?) {
   return _compose(chains, adapter);
-}
-
-export function composeAsync(chains, adapter?) {
-  return _composeAsync(chains, adapter);
 }
 
 export function subdomainDesp(subdomain: string | null | undefined): string {

@@ -1,4 +1,4 @@
-import { compose, composeAsync } from 'vona';
+import { compose } from 'vona';
 import { LocalFlowNode0 } from './local.flow.node_0.js';
 
 const __adapter = (context, chain) => {
@@ -120,6 +120,6 @@ export class LocalFlowNodeCycle extends LocalFlowNode0 {
   }
 
   async _behaviorsInvokeAsync(context) {
-    return await composeAsync(this.behaviors, __adapter)(context);
+    return await compose(this.behaviors, __adapter)(context);
   }
 }
