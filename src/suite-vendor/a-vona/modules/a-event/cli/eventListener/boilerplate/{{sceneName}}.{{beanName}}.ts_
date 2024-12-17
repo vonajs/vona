@@ -4,9 +4,9 @@ import { EventListener, IEventExecute } from 'vona-module-a-event';
 @EventListener({ match: 'some-module:<%=argv.beanName%>' })
 export class EventListener<%=argv.beanNameCapitalize%>
   extends BeanBase
-  implements IEventExecute<TypeEventHelloEchoArgs, TypeEventHelloEchoResult>
+  implements IEventExecute<TypeEvent<%=argv.beanNameCapitalize%>Args, TypeEvent<%=argv.beanNameCapitalize%>Result>
 {
-  async execute(_args: TypeEventHelloEchoArgs, next: Next): Promise<TypeEventHelloEchoResult> {
+  async execute(_args: TypeEvent<%=argv.beanNameCapitalize%>Args, next: Next): Promise<TypeEvent<%=argv.beanNameCapitalize%>Result> {
     // next
     return next();
   }
