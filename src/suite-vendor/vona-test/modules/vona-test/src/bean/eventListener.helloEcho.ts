@@ -8,10 +8,11 @@ export class EventListenerHelloEcho
   implements IEventExecute<TypeEventHelloEchoData, TypeEventHelloEchoResult>
 {
   async execute(
-    _data: TypeEventHelloEchoData,
+    data: TypeEventHelloEchoData,
     next: NextEvent<TypeEventHelloEchoResult>,
   ): Promise<TypeEventHelloEchoResult> {
     // next
-    return next();
+    const result = await next();
+    return `${data.text} ${result}`;
   }
 }

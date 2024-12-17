@@ -1,12 +1,12 @@
 import assert from 'assert';
 import { app } from 'vona-mock';
 
-describe('event.test.ts', () => {
+describe.only('event.test.ts', () => {
   it('action:event', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const result = await app.bean.scope('vona-test').event.helloEcho.emit({ text: 'hello' }, async () => {
-        return 'world';
-      });
+      // scope
+      const scopeTest = app.bean.scope('vona-test');
+      const result = await scopeTest.event.helloEcho.emit({ text: 'hello' }, 'world');
       assert.equal(result, 'hello world');
     });
   });
