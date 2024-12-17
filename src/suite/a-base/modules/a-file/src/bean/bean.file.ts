@@ -429,28 +429,20 @@ export class BeanFile extends BeanBase {
 
   async _fileDownloadCheck({ file, user }: any) {
     // invoke event
-    return await this.app.bean.event.invoke({
-      module: __ThisModule__,
-      name: 'fileDownloadCheck',
-      data: { file, user },
-      next: async (context, next) => {
-        if (context.result !== undefined) return await next();
-        // not check if !atomId
-        if (file.atomId) {
-          const res = await this.app.bean.atom.checkRightRead({
-            atom: { id: file.atomId },
-            user,
-            checkFlow: true,
-            disableAuthOpenCheck: true,
-          });
-          context.result = !!res;
-        } else {
-          // check if self
-          context.result = file.userId === user.id;
-        }
-        // next
-        await next();
-      },
+    return await this.scope.event.fileDownloadCheck.emit({ file, user }, async () => {
+      // not check if !atomId
+      if (file.atomId) {
+        const res = await this.app.bean.atom.checkRightRead({
+          atom: { id: file.atomId },
+          user,
+          checkFlow: true,
+          disableAuthOpenCheck: true,
+        });
+        return !!res;
+      } else {
+        // check if self
+        return file.userId === user.id;
+      }
     });
   }
 

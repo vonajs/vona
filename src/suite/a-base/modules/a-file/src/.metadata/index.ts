@@ -90,6 +90,28 @@ export interface IModuleModel {
   fileView: ModelFileView;
 }
 /** model: end */
+/** event: begin */
+export * from '../bean/event.fileDownloadCheck.js';
+
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-file:fileDownloadCheck': IDecoratorEventOptions;
+  }
+}
+declare module 'vona-module-a-file' {
+  export interface EventFileDownloadCheck {
+    /** @internal */
+    get scope(): ScopeModuleAFile;
+  }
+}
+/** event: end */
+/** event: begin */
+import { EventFileDownloadCheck } from '../bean/event.fileDownloadCheck.js';
+export interface IModuleEvent {
+  fileDownloadCheck: EventFileDownloadCheck;
+}
+/** event: end */
 /** service: begin */
 export * from '../service/file.js';
 
@@ -156,6 +178,7 @@ export interface ScopeModuleAFile {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   entity: IModuleEntity;
   model: IModuleModel;
+  event: IModuleEvent;
   service: IModuleService;
 }
 
