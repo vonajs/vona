@@ -223,24 +223,17 @@ export interface IModuleBroadcast {
 /** broadcast: end */
 /** event: begin */
 export * from '../bean/event.helloEcho.js';
-export * from '../bean/event.loginInfo.js';
 export * from '../bean/event.loginInfoDashboard.js';
 
 import { IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'test-party:helloEcho': IDecoratorEventOptions;
-    'test-party:loginInfo': IDecoratorEventOptions;
     'test-party:loginInfoDashboard': IDecoratorEventOptions;
   }
 }
 declare module 'vona-module-test-party' {
   export interface EventHelloEcho {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface EventLoginInfo {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }
@@ -253,27 +246,32 @@ declare module 'vona-module-test-party' {
 /** event: end */
 /** event: begin */
 import { EventHelloEcho } from '../bean/event.helloEcho.js';
-import { EventLoginInfo } from '../bean/event.loginInfo.js';
 import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
 export interface IModuleEvent {
   helloEcho: EventHelloEcho;
-  loginInfo: EventLoginInfo;
   loginInfoDashboard: EventLoginInfoDashboard;
 }
 /** event: end */
 /** eventListener: begin */
 export * from '../bean/eventListener.loginInfo.js';
+export * from '../bean/eventListener.loginInfoDashboard.js';
 export * from '../bean/eventListener.userVerify.js';
 
 import { IDecoratorEventListenerOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventListenerRecord {
     'test-party:loginInfo': IDecoratorEventListenerOptions;
+    'test-party:loginInfoDashboard': IDecoratorEventListenerOptions;
     'test-party:userVerify': IDecoratorEventListenerOptions;
   }
 }
 declare module 'vona-module-test-party' {
   export interface EventListenerLoginInfo {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventListenerLoginInfoDashboard {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }
