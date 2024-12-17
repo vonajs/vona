@@ -55,15 +55,10 @@ export function composeAsync(chains, adapter) {
         if (!fn) throw new Error('fn is not defined');
       }
       if (i === chains.length) fn = next;
-      if (!fn) return Promise.resolve();
-      try {
-        const res = fn.call(receiver, context, function next() {
-          return dispatch(i + 1);
-        });
-        return Promise.resolve(res);
-      } catch (err) {
-        return Promise.reject(err);
-      }
+      if (!fn) return;
+      return fn.call(receiver, context, function next() {
+        return dispatch(i + 1);
+      });
     }
   };
 }
