@@ -445,11 +445,7 @@ export class BeanUser0 extends BeanBase {
 
   async accountMigration({ userIdFrom, userIdTo }: any) {
     // accountMigration event
-    await this.app.bean.event.invoke({
-      module: __ThisModule__,
-      name: 'accountMigration',
-      data: { userIdFrom, userIdTo },
-    });
+    await this.self.scope.event.accountMigration.emit({ userIdFrom, userIdTo });
     // aAuth: delete old records
     const list = await this.modelAuth.select({
       where: {

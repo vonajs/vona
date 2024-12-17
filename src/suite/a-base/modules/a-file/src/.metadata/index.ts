@@ -92,11 +92,13 @@ export interface IModuleModel {
 /** model: end */
 /** event: begin */
 export * from '../bean/event.fileDownloadCheck.js';
+export * from '../bean/event.fileUpdateCheck.js';
 
 import { IDecoratorEventOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
     'a-file:fileDownloadCheck': IDecoratorEventOptions;
+    'a-file:fileUpdateCheck': IDecoratorEventOptions;
   }
 }
 declare module 'vona-module-a-file' {
@@ -104,12 +106,19 @@ declare module 'vona-module-a-file' {
     /** @internal */
     get scope(): ScopeModuleAFile;
   }
+
+  export interface EventFileUpdateCheck {
+    /** @internal */
+    get scope(): ScopeModuleAFile;
+  }
 }
 /** event: end */
 /** event: begin */
 import { EventFileDownloadCheck } from '../bean/event.fileDownloadCheck.js';
+import { EventFileUpdateCheck } from '../bean/event.fileUpdateCheck.js';
 export interface IModuleEvent {
   fileDownloadCheck: EventFileDownloadCheck;
+  fileUpdateCheck: EventFileUpdateCheck;
 }
 /** event: end */
 /** service: begin */

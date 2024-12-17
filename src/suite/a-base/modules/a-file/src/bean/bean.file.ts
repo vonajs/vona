@@ -389,29 +389,21 @@ export class BeanFile extends BeanBase {
 
   async _fileUpdateCheck({ file, user }: any) {
     // invoke event
-    return await this.app.bean.event.invoke({
-      module: __ThisModule__,
-      name: 'fileUpdateCheck',
-      data: { file, user },
-      next: async (context, next) => {
-        if (context.result !== undefined) return await next();
-        // not check if !atomId
-        if (file.atomId) {
-          const res = await this.app.bean.atom.checkRightAction({
-            atom: { id: file.atomId },
-            action: 3,
-            stage: 'draft',
-            user,
-            checkFlow: true,
-          });
-          context.result = res && res.atomClosed === 0;
-        } else {
-          // check if self
-          context.result = file.userId === user.id;
-        }
-        // next
-        await next();
-      },
+    return await this.scope.event.fileUpdateCheck.emit({ file, user }, async () => {
+      // not check if !atomId
+      if (file.atomId) {
+        const res = await this.app.bean.atom.checkRightAction({
+          atom: { id: file.atomId },
+          action: 3,
+          stage: 'draft',
+          user,
+          checkFlow: true,
+        });
+        return res && res.atomClosed === 0;
+      } else {
+        // check if self
+        return file.userId === user.id;
+      }
     });
   }
 

@@ -64,11 +64,7 @@ export class BeanUser1 extends BeanUser0 {
     item.id = userKey.itemId;
     item.atomId = userKey.atomId;
     item.itemId = userKey.itemId;
-    await this.app.bean.event.invoke({
-      module: __ThisModule__,
-      name: 'userAdd',
-      data: { user: item },
-    });
+    await this.self.scope.event.userAdd.emit({ user: item });
     // ok
     return returnKey ? userKey : userKey.itemId;
   }

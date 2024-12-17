@@ -1,11 +1,9 @@
 /** beans: begin */
 export * from '../bean/auth.provider.open.js';
 export * from '../bean/bean.authOpen.js';
-export * from '../bean/event.accountMigration.js';
 export * from '../bean/version.manager.js';
 import { AuthProviderOpen } from '../bean/auth.provider.open.js';
 import { BeanAuthOpen } from '../bean/bean.authOpen.js';
-import { EventAccountMigration } from '../bean/event.accountMigration.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
@@ -15,7 +13,6 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'a-authopen.auth.provider.open': AuthProviderOpen;
-    'a-authopen.event.accountMigration': EventAccountMigration;
     'a-authopen.version.manager': VersionManager;
   }
 }
@@ -26,11 +23,6 @@ declare module 'vona-module-a-authopen' {
   }
 
   export interface BeanAuthOpen {
-    /** @internal */
-    get scope(): ScopeModuleAAuthopen;
-  }
-
-  export interface EventAccountMigration {
     /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
@@ -104,6 +96,22 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** atom: end */
+/** eventListener: begin */
+export * from '../bean/eventListener.accountMigration.js';
+
+import { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventListenerRecord {
+    'a-authopen:accountMigration': IDecoratorEventListenerOptions;
+  }
+}
+declare module 'vona-module-a-authopen' {
+  export interface EventListenerAccountMigration {
+    /** @internal */
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
+/** eventListener: end */
 /** service: begin */
 export * from '../service/auth.js';
 export * from '../service/authOpen.js';

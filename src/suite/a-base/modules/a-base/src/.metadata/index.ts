@@ -996,6 +996,37 @@ declare module 'vona-module-a-base' {
   }
 }
 /** aop: end */
+/** event: begin */
+export * from '../bean/event.accountMigration.js';
+export * from '../bean/event.userAdd.js';
+
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-base:accountMigration': IDecoratorEventOptions;
+    'a-base:userAdd': IDecoratorEventOptions;
+  }
+}
+declare module 'vona-module-a-base' {
+  export interface EventAccountMigration {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface EventUserAdd {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** event: end */
+/** event: begin */
+import { EventAccountMigration } from '../bean/event.accountMigration.js';
+import { EventUserAdd } from '../bean/event.userAdd.js';
+export interface IModuleEvent {
+  accountMigration: EventAccountMigration;
+  userAdd: EventUserAdd;
+}
+/** event: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 export * from '../bean/meta.status.js';
@@ -1426,6 +1457,7 @@ export interface ScopeModuleABase {
   entity: IModuleEntity;
   model: IModuleModel;
   summerCache: IModuleSummerCache;
+  event: IModuleEvent;
   status: MetaStatus;
   redlock: MetaRedlock;
   queue: IModuleQueue;

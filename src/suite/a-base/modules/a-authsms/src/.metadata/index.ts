@@ -2,13 +2,11 @@
 export * from '../bean/auth.provider.sms.js';
 export * from '../bean/bean.smsProviderCache.js';
 export * from '../bean/captcha.provider.captcha.js';
-export * from '../bean/event.accountMigration.js';
 export * from '../bean/sms.provider.aliyun.js';
 export * from '../bean/sms.provider.test.js';
 import { AuthProviderSms } from '../bean/auth.provider.sms.js';
 import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
 import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
-import { EventAccountMigration } from '../bean/event.accountMigration.js';
 import { SmsProviderAliyun } from '../bean/sms.provider.aliyun.js';
 import { SmsProviderTest } from '../bean/sms.provider.test.js';
 import 'vona';
@@ -20,7 +18,6 @@ declare module 'vona' {
   export interface IBeanRecordGeneral {
     'a-authsms.auth.provider.sms': AuthProviderSms;
     'a-authsms.captcha.provider.captcha': CaptchaProviderCaptcha;
-    'a-authsms.event.accountMigration': EventAccountMigration;
     'a-authsms.sms.provider.aliyun': SmsProviderAliyun;
     'a-authsms.sms.provider.test': SmsProviderTest;
   }
@@ -37,11 +34,6 @@ declare module 'vona-module-a-authsms' {
   }
 
   export interface CaptchaProviderCaptcha {
-    /** @internal */
-    get scope(): ScopeModuleAAuthsms;
-  }
-
-  export interface EventAccountMigration {
     /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
@@ -79,6 +71,44 @@ export interface IModuleBroadcast {
   smsProviderChanged: BroadcastSmsProviderChanged;
 }
 /** broadcast: end */
+/** event: begin */
+export * from '../bean/event.accountMigration.js';
+
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-authsms:accountMigration': IDecoratorEventOptions;
+  }
+}
+declare module 'vona-module-a-authsms' {
+  export interface EventAccountMigration {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
+/** event: end */
+/** event: begin */
+import { EventAccountMigration } from '../bean/event.accountMigration.js';
+export interface IModuleEvent {
+  accountMigration: EventAccountMigration;
+}
+/** event: end */
+/** eventListener: begin */
+export * from '../bean/eventListener.accountMigration.js';
+
+import { IDecoratorEventListenerOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventListenerRecord {
+    'a-authsms:accountMigration': IDecoratorEventListenerOptions;
+  }
+}
+declare module 'vona-module-a-authsms' {
+  export interface EventListenerAccountMigration {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
+/** eventListener: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 
@@ -232,6 +262,7 @@ export interface ScopeModuleAAuthsms {
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
   broadcast: IModuleBroadcast;
+  event: IModuleEvent;
   status: MetaStatus;
   service: IModuleService;
 }
