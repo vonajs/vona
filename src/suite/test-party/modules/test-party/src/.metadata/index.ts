@@ -1,9 +1,5 @@
 /** beans: begin */
 export * from '../bean/cli.default.demo.js';
-export * from '../bean/event.helloEcho.js';
-export * from '../bean/event.loginInfo.js';
-export * from '../bean/event.loginInfoDashboard.js';
-export * from '../bean/event.userVerify.js';
 export * from '../bean/io.message.simpleChat.js';
 export * from '../bean/io.message.test.js';
 export * from '../bean/sequence.test.js';
@@ -12,10 +8,6 @@ export * from '../bean/stats.tasksUser.js';
 export * from '../bean/summer.cache.test.js';
 export * from '../bean/version.manager.js';
 import { CliDefaultDemo } from '../bean/cli.default.demo.js';
-import { EventHelloEcho } from '../bean/event.helloEcho.js';
-import { EventLoginInfo } from '../bean/event.loginInfo.js';
-import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
-import { EventUserVerify } from '../bean/event.userVerify.js';
 import { IoMessageSimpleChat } from '../bean/io.message.simpleChat.js';
 import { IoMessageTest } from '../bean/io.message.test.js';
 import { SequenceTest } from '../bean/sequence.test.js';
@@ -29,10 +21,6 @@ declare module 'vona' {
 
   export interface IBeanRecordGeneral {
     'test-party.cli.default.demo': CliDefaultDemo;
-    'test-party.event.helloEcho': EventHelloEcho;
-    'test-party.event.loginInfo': EventLoginInfo;
-    'test-party.event.loginInfoDashboard': EventLoginInfoDashboard;
-    'test-party.event.userVerify': EventUserVerify;
     'test-party.io.message.simpleChat': IoMessageSimpleChat;
     'test-party.io.message.test': IoMessageTest;
     'test-party.sequence.test': SequenceTest;
@@ -44,26 +32,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-test-party' {
   export interface CliDefaultDemo {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface EventHelloEcho {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface EventLoginInfo {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface EventLoginInfoDashboard {
-    /** @internal */
-    get scope(): ScopeModuleTestParty;
-  }
-
-  export interface EventUserVerify {
     /** @internal */
     get scope(): ScopeModuleTestParty;
   }
@@ -253,6 +221,55 @@ export interface IModuleBroadcast {
   test: BroadcastTest;
 }
 /** broadcast: end */
+/** event: begin */
+export * from '../bean/event.helloEcho.js';
+export * from '../bean/event.loginInfo.js';
+export * from '../bean/event.loginInfoDashboard.js';
+export * from '../bean/event.userVerify.js';
+
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'test-party:helloEcho': IDecoratorEventOptions;
+    'test-party:loginInfo': IDecoratorEventOptions;
+    'test-party:loginInfoDashboard': IDecoratorEventOptions;
+    'test-party:userVerify': IDecoratorEventOptions;
+  }
+}
+declare module 'vona-module-test-party' {
+  export interface EventHelloEcho {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventLoginInfo {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventLoginInfoDashboard {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+
+  export interface EventUserVerify {
+    /** @internal */
+    get scope(): ScopeModuleTestParty;
+  }
+}
+/** event: end */
+/** event: begin */
+import { EventHelloEcho } from '../bean/event.helloEcho.js';
+import { EventLoginInfo } from '../bean/event.loginInfo.js';
+import { EventLoginInfoDashboard } from '../bean/event.loginInfoDashboard.js';
+import { EventUserVerify } from '../bean/event.userVerify.js';
+export interface IModuleEvent {
+  helloEcho: EventHelloEcho;
+  loginInfo: EventLoginInfo;
+  loginInfoDashboard: EventLoginInfoDashboard;
+  userVerify: EventUserVerify;
+}
+/** event: end */
 /** startup: begin */
 export * from '../bean/startup.startupAll.js';
 export * from '../bean/startup.startupInstance.js';
@@ -663,6 +680,7 @@ export interface ScopeModuleTestParty {
   entity: IModuleEntity;
   model: IModuleModel;
   broadcast: IModuleBroadcast;
+  event: IModuleEvent;
   service: IModuleService;
 }
 

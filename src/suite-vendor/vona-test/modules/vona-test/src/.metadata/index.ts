@@ -1,25 +1,16 @@
 /** beans: begin */
 export * from '../bean/bean.testCtx.js';
-export * from '../bean/eventaaa.helloEcho.js';
 import { BeanTestCtx } from '../bean/bean.testCtx.js';
-import { EventaaaHelloEcho } from '../bean/eventaaa.helloEcho.js';
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     testCtx: BeanTestCtx;
   }
 
-  export interface IBeanRecordGeneral {
-    'vona-test.eventaaa.helloEcho': EventaaaHelloEcho;
-  }
+  export interface IBeanRecordGeneral {}
 }
 declare module 'vona-module-vona-test' {
   export interface BeanTestCtx {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-
-  export interface EventaaaHelloEcho {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
