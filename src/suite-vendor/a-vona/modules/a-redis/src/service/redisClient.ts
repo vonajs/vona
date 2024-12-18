@@ -60,7 +60,7 @@ export class ServiceRedisClient extends BeanBase {
     const keys = await redis.keys(pattern);
     const keysDel: string[] = [];
     for (const fullKey of keys) {
-      const key = keyPrefix ? fullKey.substr(keyPrefix.length) : fullKey;
+      const key = keyPrefix ? fullKey.substring(keyPrefix.length) : fullKey;
       keysDel.push(key);
     }
     if (keysDel.length > 0) {
