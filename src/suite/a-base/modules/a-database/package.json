@@ -7,7 +7,6 @@
     "capabilities": {
       "monkey": true
     },
-    "fileVersion": 0,
     "dependencies": {},
     "globalDependencies": {
       "bignumber.js": true,
