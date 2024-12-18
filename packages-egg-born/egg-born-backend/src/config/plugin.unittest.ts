@@ -2,6 +2,7 @@ export default {
   view: false,
   development: false,
   watcher: false,
+  redis: false,
 
   // need not redefined
   // static: {
@@ -12,11 +13,6 @@ export default {
   passport: {
     enable: true,
     package: '@zhennann/egg-passport',
-  },
-
-  redis: {
-    enable: true,
-    package: 'egg-redis',
   },
 
   io: {
