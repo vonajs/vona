@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { app, mockUrl } from 'vona-mock';
+import { app } from 'vona-mock';
 
 describe.only('transaction.test.ts', () => {
   const tableName = '__tempTransaction';
@@ -23,9 +23,7 @@ describe.only('transaction.test.ts', () => {
         name: 'hello!!',
       };
       try {
-        await app.bean.executor.performAction({
-          method: 'post',
-          url: mockUrl('transaction/fail'),
+        await app.bean.executor.performAction('post', '/vona/test/transaction/fail', {
           body: itemNew,
         });
       } catch (_err) {}
@@ -59,9 +57,7 @@ describe.only('transaction.test.ts', () => {
         id,
         name: 'hello!!',
       };
-      await app.bean.executor.performAction({
-        method: 'post',
-        url: mockUrl('transaction/success'),
+      await app.bean.executor.performAction('post', '/vona/test/transaction/success', {
         body: itemNew,
       });
 

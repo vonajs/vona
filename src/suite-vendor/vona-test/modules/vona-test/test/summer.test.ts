@@ -1,12 +1,9 @@
-import { app, mockUrl } from 'vona-mock';
+import { app } from 'vona-mock';
 
 describe.only('summer.test.ts', () => {
   it('action:summer', async () => {
     await app.bean.executor.mockCtx(async () => {
-      await app.bean.executor.performAction({
-        method: 'post',
-        url: mockUrl('summer'),
-      });
+      await app.bean.executor.performAction('post', '/vona/test/summer');
     });
   });
 });

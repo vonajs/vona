@@ -10,7 +10,7 @@ export async function performActionInner<T = any>({
   innerAccess,
   // subdomain, deprecated
   method,
-  url,
+  path,
   query,
   params,
   headers,
@@ -25,6 +25,7 @@ export async function performActionInner<T = any>({
     __fnMiddleware = compose([middleware]);
   }
   // request
+  const url = app.meta.util.combineApiPath('', path, true, true);
   const req = createRequest({ method, url }, ctxCaller);
   // response
   const res = new http.ServerResponse(req);
@@ -49,10 +50,10 @@ export async function performActionInner<T = any>({
     });
 
     // query params body
-    if (query) {
+    if (query !== undefined) {
       cast(ctx.req).query = cast(ctx.request).query = query;
     }
-    if (params) {
+    if (params !== undefined) {
       cast(ctx.req).params = cast(ctx.request).params = params;
     }
     cast(ctx.req).body = ctx.request.body = body;

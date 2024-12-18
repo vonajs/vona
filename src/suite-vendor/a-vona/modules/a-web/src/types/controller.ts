@@ -1,6 +1,13 @@
 import { OmitNever } from 'vona';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
+export interface IApiPathRecordMethodMap {
+  get: IApiPathGetRecord;
+  post: IApiPathPostRecord;
+  delete: IApiPathDeleteRecord;
+  put: IApiPathPutRecord;
+  patch: IApiPathPatchRecord;
+}
 export interface IApiPathRecord
   extends IApiPathGetRecord,
     IApiPathPostRecord,

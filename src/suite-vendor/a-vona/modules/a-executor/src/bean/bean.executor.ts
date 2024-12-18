@@ -1,13 +1,7 @@
 import { Bean, BeanBase, FunctionAsync } from 'vona';
-import { INewCtxOptions, IPerformActionParams, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
+import { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
-import {
-  IApiPathDeleteRecord,
-  IApiPathGetRecord,
-  IApiPathPatchRecord,
-  IApiPathPostRecord,
-  IApiPathPutRecord,
-} from 'vona-module-a-web';
+import { IApiPathRecordMethodMap } from 'vona-module-a-web';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -15,68 +9,18 @@ export class BeanExecutor extends BeanBase {
   //       because ctxCaller.module removed
   //       so, maybe need provide this.scope.util.combineUrl
   //          this result is: /api/a/user/add, thus the method of combineApiPath not needed in performActionInner
-  async performAction<T = any, PATHKEY extends keyof IApiPathGetRecord = keyof IApiPathGetRecord>({
-    innerAccess,
-    method,
-    path,
-    query,
-    params,
-    headers,
-    body,
-    onions,
-  }: IPerformActionParams<'get', IApiPathGetRecord[PATHKEY]>): Promise<T>;
-  async performAction<T = any, PATHKEY extends keyof IApiPathPostRecord = keyof IApiPathPostRecord>({
-    innerAccess,
-    method,
-    path,
-    query,
-    params,
-    headers,
-    body,
-    onions,
-  }: IPerformActionParams<'post', IApiPathPostRecord[PATHKEY]>): Promise<T>;
-  async performAction<T = any, PATHKEY extends keyof IApiPathPutRecord = keyof IApiPathPutRecord>({
-    innerAccess,
-    method,
-    path,
-    query,
-    params,
-    headers,
-    body,
-    onions,
-  }: IPerformActionParams<'put', IApiPathPutRecord[PATHKEY]>): Promise<T>;
-  async performAction<T = any, PATHKEY extends keyof IApiPathDeleteRecord = keyof IApiPathDeleteRecord>({
-    innerAccess,
-    method,
-    path,
-    query,
-    params,
-    headers,
-    body,
-    onions,
-  }: IPerformActionParams<'delete', IApiPathDeleteRecord[PATHKEY]>): Promise<T>;
-  async performAction<T = any, PATHKEY extends keyof IApiPathPatchRecord = keyof IApiPathPatchRecord>({
-    innerAccess,
-    method,
-    path,
-    query,
-    params,
-    headers,
-    body,
-    onions,
-  }: IPerformActionParams<'patch', IApiPathPatchRecord[PATHKEY]>): Promise<T>;
-  async performAction<T = any>({ innerAccess, method, url, query, params, headers, body, onions }: any): Promise<T> {
-    return await performActionInner({
-      ctxCaller: this.ctx,
-      innerAccess,
-      method,
-      url,
-      query,
-      params,
-      headers,
-      body,
-      onions,
-    });
+  async performAction<
+    // T,
+    METHOD extends keyof IApiPathRecordMethodMap,
+    PATHKEY extends keyof IApiPathRecordMethodMap[METHOD],
+  >(method: METHOD, path: IApiPathRecordMethodMap[METHOD][PATHKEY], options?: IPerformActionOptions): Promise<any> {
+    return await performActionInner(
+      Object.assign({}, options, {
+        ctxCaller: this.ctx,
+        method,
+        path,
+      }),
+    );
   }
 
   runInBackground(fn: FunctionAsync<void>) {

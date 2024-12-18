@@ -1,5 +1,6 @@
 import { ContextState, ILocalInfos, PowerPartial, VonaContext } from 'vona';
 import { ConfigOnions } from 'vona-module-a-onion';
+import { TypeRequestMethod } from 'vona-module-a-web';
 
 export interface IRunInAnonymousContextScopeOptions {
   locale?: keyof ILocalInfos;
@@ -22,11 +23,9 @@ export interface INewCtxOptions {
   extraData?: INewCtxExtraData;
 }
 
-export interface IPerformActionParams<METHOD, PATH> {
+export interface IPerformActionOptions {
   innerAccess?: boolean;
   // subdomain, deprecated
-  method: METHOD;
-  path: PATH;
   query?: object;
   params?: object;
   headers?: object;
@@ -38,8 +37,8 @@ export interface IPerformActionInnerParams {
   ctxCaller: VonaContext;
   innerAccess?: boolean;
   // subdomain, deprecated
-  method: 'post' | 'get';
-  url: string;
+  method: TypeRequestMethod;
+  path: any;
   query?: object;
   params?: object;
   headers?: object;
