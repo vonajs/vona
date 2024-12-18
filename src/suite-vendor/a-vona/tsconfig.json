@@ -50,6 +50,9 @@
     },
     {
       "path": "modules/a-event/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-redis/tsconfig.build.json"
     }
   ]
 }

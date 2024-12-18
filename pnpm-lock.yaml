@@ -233,6 +233,9 @@ importers:
       vona-module-a-queue:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-queue
+      vona-module-a-redis:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-redis
       vona-module-a-redlock:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-redlock
@@ -1072,7 +1075,7 @@ importers:
         specifier: ^1.0.7
         version: link:../../packages-utils/cluster-reload
       '@cabloy/compose':
-        specifier: ^1.0.9
+        specifier: ^2.0.0
         version: link:../../packages-utils/compose
       '@cabloy/deps':
         specifier: workspace:^
@@ -1244,6 +1247,9 @@ importers:
       vona-module-a-queue:
         specifier: workspace:^
         version: link:modules/a-queue
+      vona-module-a-redis:
+        specifier: workspace:^
+        version: link:modules/a-redis
       vona-module-a-redlock:
         specifier: workspace:^
         version: link:modules/a-redlock
@@ -1323,6 +1329,8 @@ importers:
       redlock:
         specifier: ^4.1.0
         version: 4.2.0
+
+  src/suite-vendor/a-vona/modules/a-redis: {}
 
   src/suite-vendor/a-vona/modules/a-redlock: {}
 

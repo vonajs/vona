@@ -12,6 +12,7 @@
       "a-meta": "5.0.0",
       "a-onion": "5.0.0",
       "a-queue": "5.0.0",
+      "a-redis": "5.0.0",
       "a-redlock": "5.0.0",
       "a-schedule": "5.0.0",
       "a-socket": "5.0.0",
