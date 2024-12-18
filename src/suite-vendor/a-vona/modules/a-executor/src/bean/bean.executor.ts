@@ -1,7 +1,13 @@
 import { Bean, BeanBase, FunctionAsync } from 'vona';
 import { INewCtxOptions, IPerformActionParams, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
-import { IApiPathGetRecord } from 'vona-module-a-web';
+import {
+  IApiPathDeleteRecord,
+  IApiPathGetRecord,
+  IApiPathPatchRecord,
+  IApiPathPostRecord,
+  IApiPathPutRecord,
+} from 'vona-module-a-web';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -19,6 +25,46 @@ export class BeanExecutor extends BeanBase {
     body,
     onions,
   }: IPerformActionParams<'get', IApiPathGetRecord[PATHKEY]>): Promise<T>;
+  async performAction<T = any, PATHKEY extends keyof IApiPathPostRecord = keyof IApiPathPostRecord>({
+    innerAccess,
+    method,
+    path,
+    query,
+    params,
+    headers,
+    body,
+    onions,
+  }: IPerformActionParams<'post', IApiPathPostRecord[PATHKEY]>): Promise<T>;
+  async performAction<T = any, PATHKEY extends keyof IApiPathPutRecord = keyof IApiPathPutRecord>({
+    innerAccess,
+    method,
+    path,
+    query,
+    params,
+    headers,
+    body,
+    onions,
+  }: IPerformActionParams<'put', IApiPathPutRecord[PATHKEY]>): Promise<T>;
+  async performAction<T = any, PATHKEY extends keyof IApiPathDeleteRecord = keyof IApiPathDeleteRecord>({
+    innerAccess,
+    method,
+    path,
+    query,
+    params,
+    headers,
+    body,
+    onions,
+  }: IPerformActionParams<'delete', IApiPathDeleteRecord[PATHKEY]>): Promise<T>;
+  async performAction<T = any, PATHKEY extends keyof IApiPathPatchRecord = keyof IApiPathPatchRecord>({
+    innerAccess,
+    method,
+    path,
+    query,
+    params,
+    headers,
+    body,
+    onions,
+  }: IPerformActionParams<'patch', IApiPathPatchRecord[PATHKEY]>): Promise<T>;
   async performAction<T = any>({ innerAccess, method, url, query, params, headers, body, onions }: any): Promise<T> {
     return await performActionInner({
       ctxCaller: this.ctx,
