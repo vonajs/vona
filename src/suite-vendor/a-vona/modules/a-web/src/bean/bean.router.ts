@@ -158,24 +158,7 @@ export class BeanRouter extends BeanBase {
     const actionPath: RegExp | string = handlerMetadata.path || '';
     const actionMethod: string = handlerMetadata.method || RequestMethod.GET;
     // routePath
-    let routePath: RegExp | string;
-    if (typeof actionPath !== 'string') {
-      // regexp
-      routePath = actionPath;
-    } else if (actionPath.startsWith('/')) {
-      // absolute
-      routePath = app.meta.util.combineApiPath(info, actionPath, true, true);
-    } else {
-      // relative
-      if (!controllerPath) {
-        routePath = app.meta.util.combineApiPath(info, actionPath, true, true);
-      } else {
-        routePath = app.meta.util.combineApiPath(info, controllerPath, true, true);
-        if (actionPath) {
-          routePath = `${routePath}/${actionPath}`;
-        }
-      }
-    }
+    const routePath = app.meta.util.combineApiPathControllerAndAction(info, controllerPath, actionPath, true, true);
 
     // middlewares options
     const actionMiddlewaresOptions = appMetadata.getMetadata(SymbolUseOnionOptions, controller.prototype, actionKey);

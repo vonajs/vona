@@ -22,6 +22,36 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
+  combineApiPathControllerAndAction(
+    moduleName: IModuleInfo | string,
+    controllerPath: string | undefined,
+    actionPath: RegExp | string | undefined,
+    prefix?: string | boolean,
+    simplify?: boolean,
+  ): RegExp | string {
+    if (actionPath === undefined) actionPath = '';
+    // routePath
+    let routePath: RegExp | string;
+    if (typeof actionPath !== 'string') {
+      // regexp
+      routePath = actionPath;
+    } else if (actionPath.startsWith('/')) {
+      // absolute
+      routePath = this.combineApiPath(moduleName, actionPath, prefix, simplify);
+    } else {
+      // relative
+      if (!controllerPath) {
+        routePath = this.combineApiPath(moduleName, actionPath, prefix, simplify);
+      } else {
+        routePath = this.combineApiPath(moduleName, controllerPath, prefix, simplify);
+        if (actionPath) {
+          routePath = `${routePath}/${actionPath}`;
+        }
+      }
+    }
+    return routePath;
+  }
+
   combineApiPath(
     moduleName: IModuleInfo | string,
     path: string | undefined,
