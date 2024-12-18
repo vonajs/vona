@@ -12,7 +12,6 @@ export async function performActionInner<T = any>({
   method,
   path,
   query,
-  params,
   headers,
   body,
   onions,
@@ -49,12 +48,9 @@ export async function performActionInner<T = any>({
       },
     });
 
-    // query params body
+    // query body
     if (query !== undefined) {
       cast(ctx.req).query = cast(ctx.request).query = query;
-    }
-    if (params !== undefined) {
-      cast(ctx.req).params = cast(ctx.request).params = params;
     }
     cast(ctx.req).body = ctx.request.body = body;
 

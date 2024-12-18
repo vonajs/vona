@@ -27,7 +27,6 @@ export interface IPerformActionOptions {
   innerAccess?: boolean;
   // subdomain, deprecated
   query?: object;
-  params?: object;
   headers?: object;
   body?: object;
   onions?: PowerPartial<ConfigOnions>;
@@ -40,7 +39,6 @@ export interface IPerformActionInnerParams {
   method: TypeRequestMethod;
   path: any;
   query?: object;
-  params?: object;
   headers?: object;
   body?: object;
   onions?: PowerPartial<ConfigOnions>;
