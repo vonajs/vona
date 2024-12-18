@@ -1,4 +1,4 @@
-import { Application as EggApplication, EggLoaderOptions, Singleton } from 'egg';
+import { Application as EggApplication, EggLoaderOptions } from 'egg';
 import { EggPassport } from '@zhennann/egg-passport';
 import { BeanContainer } from '../../lib/bean/beanContainer.js';
 import { AppMeta } from '../../lib/core/meta.js';

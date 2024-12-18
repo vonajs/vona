@@ -1,6 +1,5 @@
 /** beans: begin */
 export * from '../bean/bean.database.js';
-export * from '../bean/bean.databaseClient.js';
 export * from '../bean/bean.databaseDialectBase_.js';
 export * from '../bean/bean.modelBase_.js';
 export * from '../bean/bean.model_.js';
@@ -8,7 +7,6 @@ export * from '../bean/database.dialect.mysql.js';
 export * from '../bean/database.dialect.mysql2.js';
 export * from '../bean/database.dialect.pg.js';
 import { BeanDatabase } from '../bean/bean.database.js';
-import { BeanDatabaseClient } from '../bean/bean.databaseClient.js';
 import { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase_.js';
 import { BeanModelBase } from '../bean/bean.modelBase_.js';
 import { BeanModel } from '../bean/bean.model_.js';
@@ -19,7 +17,6 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGlobal {
     database: BeanDatabase;
-    databaseClient: BeanDatabaseClient;
   }
 
   export interface IBeanRecordGeneral {
@@ -33,11 +30,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-database' {
   export interface BeanDatabase {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-
-  export interface BeanDatabaseClient {
     /** @internal */
     get scope(): ScopeModuleADatabase;
   }
@@ -75,17 +67,24 @@ declare module 'vona-module-a-database' {
 }
 /** middleware: end */
 /** service: begin */
+export * from '../service/databaseClient.js';
 export * from '../service/dbMeta.js';
 export * from '../service/transaction.js';
 
 import 'vona';
 declare module 'vona' {
   export interface IServiceRecord {
+    'a-database:databaseClient': never;
     'a-database:dbMeta': never;
     'a-database:transaction': never;
   }
 }
 declare module 'vona-module-a-database' {
+  export interface ServiceDatabaseClient {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+
   export interface ServiceDbMeta {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -98,9 +97,11 @@ declare module 'vona-module-a-database' {
 }
 /** service: end */
 /** service: begin */
+import { ServiceDatabaseClient } from '../service/databaseClient.js';
 import { ServiceDbMeta } from '../service/dbMeta.js';
 import { ServiceTransaction } from '../service/transaction.js';
 export interface IModuleService {
+  databaseClient: ServiceDatabaseClient;
   dbMeta: ServiceDbMeta;
   transaction: ServiceTransaction;
 }
@@ -109,6 +110,7 @@ export interface IModuleService {
 import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
+    'a-database.service.databaseClient': ServiceDatabaseClient;
     'a-database.service.dbMeta': ServiceDbMeta;
     'a-database.service.transaction': ServiceTransaction;
   }

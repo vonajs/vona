@@ -2,7 +2,7 @@ import moment from 'moment';
 import chalk from 'chalk';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { BeanDatabaseClient } from 'vona-module-a-database';
+import { ServiceDatabaseClient } from 'vona-module-a-database';
 
 const __separator = '-';
 const __timeFormat = `YYYYMMDD${__separator}HHmmss`;
@@ -29,7 +29,7 @@ export class ServiceDatabase extends BeanBase {
     await this.__database();
   }
 
-  async __fetchDatabases(client: BeanDatabaseClient) {
+  async __fetchDatabases(client: ServiceDatabaseClient) {
     // dbs
     let dbs = await client.db.schema.fetchDatabases(this.databasePrefix);
     // filter
@@ -41,7 +41,7 @@ export class ServiceDatabase extends BeanBase {
     return dbs;
   }
 
-  async __createDatabase(client: BeanDatabaseClient) {
+  async __createDatabase(client: ServiceDatabaseClient) {
     // create
     const databaseName = `${this.databasePrefix}${moment().format(__timeFormat)}`;
     await client.db.schema.createDatabase(databaseName);

@@ -1,11 +1,12 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import knex, { Knex } from 'knex';
 import { configBases } from '../common/configBases.js';
+import { Service } from 'vona-module-a-web';
 
 export type ISetDatabaseNameResult = { database?: string; filename?: string };
 
-@Bean()
-export class BeanDatabaseClient extends BeanBase {
+@Service()
+export class ServiceDatabaseClient extends BeanBase {
   clientNameOriginal?: string;
   clientName: string;
   clientConfig: Knex.Config;

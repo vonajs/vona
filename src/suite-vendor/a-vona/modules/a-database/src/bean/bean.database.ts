@@ -1,12 +1,12 @@
 import { Bean, BeanBase } from 'vona';
-import { BeanDatabaseClient } from './bean.databaseClient.js';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanDatabaseDialectBase } from './bean.databaseDialectBase_.js';
+import { ServiceDatabaseClient } from '../service/databaseClient.js';
 
 @Bean()
 export class BeanDatabase extends BeanBase {
   getClient(clientName?: string) {
-    return this.app.bean._getBeanSelector(BeanDatabaseClient, clientName);
+    return this.app.bean._getBeanSelector(ServiceDatabaseClient, clientName);
   }
 
   get(clientName?: string) {
