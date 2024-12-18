@@ -1,12 +1,13 @@
+import { compose as _compose } from '@cabloy/compose';
+import { extend } from '@cabloy/extend';
+import * as ModuleInfo from '@cabloy/module-info';
+import * as security from 'egg-security';
 import fse from 'fs-extra';
 import path from 'path';
 import { URL } from 'url';
-import * as security from 'egg-security';
 import * as uuid from 'uuid';
-import { VonaContext, IModule, TypeMonkeyName } from '../../types/index.js';
+import { IModule, TypeMonkeyName, VonaContext } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
-import { compose as _compose } from '@cabloy/compose';
-import { extend } from '@cabloy/extend';
 
 export interface IExecuteBeanCallbackParams {
   ctx: VonaContext;
@@ -23,7 +24,7 @@ export class AppUtil extends BeanSimple {
   }
 
   combineApiPathControllerAndAction(
-    moduleName: string,
+    moduleName: ModuleInfo.IModuleInfo | string,
     controllerPath: string | undefined,
     actionPath: RegExp | string | undefined,
     prefix?: string | boolean,
@@ -52,7 +53,12 @@ export class AppUtil extends BeanSimple {
     return routePath;
   }
 
-  combineApiPath(moduleName: string, path: string | undefined, prefix?: string | boolean, simplify?: boolean) {
+  combineApiPath(
+    moduleName: ModuleInfo.IModuleInfo | string,
+    path: string | undefined,
+    prefix?: string | boolean,
+    simplify?: boolean,
+  ) {
     const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
     simplify = simplify ?? true;
     if (!path) path = '';
@@ -61,6 +67,7 @@ export class AppUtil extends BeanSimple {
     // ignore module path
     if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
+    if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     const parts = moduleName.split('-');
     // path
     let res = globalPrefix;

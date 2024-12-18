@@ -33,7 +33,9 @@ export class BeanRouter extends BeanBase {
 
     // path
     const routePath =
-      typeof route.path === 'string' ? app.meta.util.combineApiPath(info, route.path, true, false) : route.path;
+      typeof route.path === 'string'
+        ? app.meta.util.combineApiPath(info.relativeName, route.path, true, false)
+        : route.path;
 
     // route
     const _route = {
