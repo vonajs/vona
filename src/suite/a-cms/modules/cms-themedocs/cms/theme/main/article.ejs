@@ -9,9 +9,7 @@
   // relativeTop
   let relativeTop=site._docTree.relativeTop[article.atomCategoryId];
   if(relativeTop===undefined){
-    relativeTop=await ctx.app.bean.executor.performAction({
-      method: 'post',
-      url: '/api/a/base/category/relativeTop',
+    relativeTop=await ctx.app.bean.executor.performAction('post', '/a/base/category/relativeTop',{
       body: { categoryId: article.atomCategoryId },
     });
     // save

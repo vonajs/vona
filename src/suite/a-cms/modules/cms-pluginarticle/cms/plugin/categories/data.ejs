@@ -1,8 +1,6 @@
 <%
 // categories
-const categories = await ctx.app.bean.executor.performAction({
-  method: 'post',
-  url: '/api/a/base/category/tree',
+const categories = await ctx.app.bean.executor.performAction('post','/a/base/category/tree',{
   body: {
     atomClass: site.atomClass,
     language: site.language && site.language.current,

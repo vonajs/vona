@@ -7,9 +7,7 @@ const options = {
   ],
 };
 // tags
-const tags = await ctx.app.bean.executor.performAction({
-  method: 'post',
-  url: '/api/a/base/tag/list',
+const tags = await ctx.app.bean.executor.performAction('post','/a/base/tag/list',{
   body: {
     atomClass: site.atomClass,
     options,

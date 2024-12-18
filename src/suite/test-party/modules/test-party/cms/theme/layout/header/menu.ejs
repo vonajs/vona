@@ -22,9 +22,7 @@ function _menuItems(categories,submenu) {
 // categories
 if (!site._categories) {
   // categories
-  const res = await ctx.app.bean.executor.performAction({
-    method:'post',
-    url: '/api/a/base/category/tree',
+  const res = await ctx.app.bean.executor.performAction('post','/a/base/category/tree',{
     body: {
       atomClass: site.atomClass,
       language: site.language && site.language.current,

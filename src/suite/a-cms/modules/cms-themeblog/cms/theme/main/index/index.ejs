@@ -18,9 +18,7 @@
             mode: 'default',
           };
           // select
-          const data=await ctx.app.bean.executor.performAction({
-            method:'post',
-            url: '/api/a/cms/article/list',
+          const data=await ctx.app.bean.executor.performAction('post','/a/cms/article/list',{
             body: {
               atomClass: site.atomClass,
               options,
