@@ -130,7 +130,7 @@ importers:
         version: link:src/suite/a-base/modules/a-dashboardbooster
       vona-module-a-database:
         specifier: workspace:^
-        version: link:src/suite/a-base/modules/a-database
+        version: link:src/suite-vendor/a-vona/modules/a-database
       vona-module-a-debug:
         specifier: workspace:^
         version: link:src/suite/a-base/modules/a-debug
@@ -1306,6 +1306,27 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-vona/shared
 
+  src/suite-vendor/a-vona/modules/a-database:
+    dependencies:
+      '@cabloy/deps':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/deps
+      bignumber.js:
+        specifier: ^9.1.2
+        version: 9.1.2
+      knex:
+        specifier: ^3.1.0
+        version: 3.1.0(mysql2@3.11.5)(pg@8.13.1)
+      mysql2:
+        specifier: ^3.9.1
+        version: 3.11.5
+      pg:
+        specifier: ^8.11.3
+        version: 8.13.1
+      pg-types:
+        specifier: ^4.0.2
+        version: 4.0.2
+
   src/suite-vendor/a-vona/modules/a-event: {}
 
   src/suite-vendor/a-vona/modules/a-executor:
@@ -1476,7 +1497,7 @@ importers:
         version: link:modules/a-dashboardbooster
       vona-module-a-database:
         specifier: workspace:^
-        version: link:modules/a-database
+        version: link:../../suite-vendor/a-vona/modules/a-database
       vona-module-a-debug:
         specifier: workspace:^
         version: link:modules/a-debug
@@ -1756,27 +1777,6 @@ importers:
   src/suite/a-base/modules/a-dashboard: {}
 
   src/suite/a-base/modules/a-dashboardbooster: {}
-
-  src/suite/a-base/modules/a-database:
-    dependencies:
-      '@cabloy/deps':
-        specifier: workspace:^
-        version: link:../../../../../packages-utils/deps
-      bignumber.js:
-        specifier: ^9.1.2
-        version: 9.1.2
-      knex:
-        specifier: ^3.1.0
-        version: 3.1.0(mysql2@3.11.5)(pg@8.13.1)
-      mysql2:
-        specifier: ^3.9.1
-        version: 3.11.5
-      pg:
-        specifier: ^8.11.3
-        version: 8.13.1
-      pg-types:
-        specifier: ^4.0.2
-        version: 4.0.2
 
   src/suite/a-base/modules/a-debug:
     dependencies:
