@@ -8,17 +8,17 @@ import {
 } from '../types/eventListener.js';
 
 export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
-  async emit(data: DATA, nextOrDefault?: NextEvent<RESULT> | RESULT): Promise<RESULT> {
+  async emit(data: DATA, nextOrDefault?: NextEvent<DATA, RESULT> | RESULT): Promise<RESULT> {
     const next =
       typeof nextOrDefault === 'function'
-        ? (nextOrDefault as NextEvent<RESULT>)
+        ? (nextOrDefault as NextEvent<DATA, RESULT>)
         : async (): Promise<RESULT> => {
             return nextOrDefault!;
           };
     const eventListeners = this.bean.onion.eventListener.getOnionsEnabledWrapped(item => {
       return this._wrapOnion(item);
     }, this.onionName);
-    if (eventListeners.length === 0) return await next();
+    if (eventListeners.length === 0) return await next(data);
     return await compose(eventListeners)(data, next);
   }
 

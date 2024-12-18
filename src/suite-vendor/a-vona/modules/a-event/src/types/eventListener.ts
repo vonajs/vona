@@ -2,7 +2,7 @@ import { Next, OmitNever } from 'vona';
 import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'vona-module-a-onion';
 import { IEventRecord } from './event.js';
 
-export type NextEvent<RESULT = unknown> = () => Promise<RESULT>;
+export type NextEvent<DATA = unknown, RESULT = unknown> = (data: DATA) => Promise<RESULT>;
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
   execute(data: DATA, next: Next): Promise<RESULT>;
