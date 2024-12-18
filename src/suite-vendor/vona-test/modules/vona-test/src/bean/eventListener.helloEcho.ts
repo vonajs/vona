@@ -9,7 +9,7 @@ export class EventListenerHelloEcho
 {
   async execute(
     data: TypeEventHelloEchoData,
-    next: NextEvent<TypeEventHelloEchoResult>,
+    next: NextEvent<TypeEventHelloEchoData, TypeEventHelloEchoResult>,
   ): Promise<TypeEventHelloEchoResult> {
     // next
     const result = await next();

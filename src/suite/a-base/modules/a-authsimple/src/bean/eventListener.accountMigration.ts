@@ -9,7 +9,7 @@ export class EventListenerAccountMigration
 {
   async execute(
     data: TypeEventAccountMigrationData,
-    next: NextEvent<TypeEventAccountMigrationResult>,
+    next: NextEvent<TypeEventAccountMigrationData, TypeEventAccountMigrationResult>,
   ): Promise<TypeEventAccountMigrationResult> {
     const modelAuthSimple = this.scope.model.authSimple;
     // check userIdFrom

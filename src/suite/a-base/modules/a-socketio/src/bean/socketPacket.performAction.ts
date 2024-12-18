@@ -14,7 +14,7 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
     return next();
   }
 
-  async _performAction({ params: { id, method, url, body } }) {
+  async _performAction({ params: { id, method, path, body } }) {
     try {
       // headers
       const headers: any = {};
@@ -23,16 +23,15 @@ export class SocketPacketPerformAction extends BeanBase implements ISocketPacket
           headers[key] = this.ctx.request.query[key];
         }
       }
-      // params
-      const params = {
-        method: method || 'post',
-        url,
+      // options
+      const options = {
         body,
         headers,
         innerAccess: false, // force innerAccess as false
       };
       // performAction
-      const data = await this.bean.executor.performAction(params);
+      method = method || 'post';
+      const data = await this.bean.executor.performAction(method, path, options);
       this.ctx.socket.emit('performAction-callback', {
         id,
         result: {

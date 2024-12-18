@@ -13,7 +13,7 @@ export class EventListenerAccountMigration
 
   async execute(
     data: TypeEventAccountMigrationData,
-    next: NextEvent<TypeEventAccountMigrationResult>,
+    next: NextEvent<TypeEventAccountMigrationData, TypeEventAccountMigrationResult>,
   ): Promise<TypeEventAccountMigrationResult> {
     // delete aAuthOpen/aAuth
     const items = await this.modelAuthOpen.select({

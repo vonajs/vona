@@ -9,7 +9,7 @@ export class EventListenerLoginInfo
 {
   async execute(
     data: TypeEventLoginInfoData,
-    next: NextEvent<TypeEventLoginInfoResult>,
+    next: NextEvent<TypeEventLoginInfoData, TypeEventLoginInfoResult>,
   ): Promise<TypeEventLoginInfoResult> {
     const info = data.info;
     const provider = info.user && info.user.provider;

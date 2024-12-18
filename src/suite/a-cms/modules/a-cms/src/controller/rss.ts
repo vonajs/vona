@@ -21,9 +21,7 @@ export class ControllerRss extends BeanBase {
       mode: 'default',
     };
     // select
-    const res = await this.bean.executor.performAction({
-      method: 'post',
-      url: '/api/a/cms/article/list',
+    const res = await this.bean.executor.performAction('post', '/a/cms/article/list' as any, {
       body: { atomClass, options },
     });
     const list = res.list;
@@ -88,9 +86,7 @@ export class ControllerRss extends BeanBase {
       page: { index: 0 },
     };
     // select
-    const res = await this.bean.executor.performAction({
-      method: 'post',
-      url: '/api/a/cms/comment/all',
+    const res = await this.bean.executor.performAction('post', '/a/cms/comment/all' as any, {
       body: { atomClass, options },
     });
     const list = res.list;
@@ -151,9 +147,7 @@ export class ControllerRss extends BeanBase {
       orders: [['updatedAt', 'desc']],
       page: { index: 0 },
     };
-    const res = await this.bean.executor.performAction({
-      method: 'post',
-      url: '/api/a/base/comment/list',
+    const res = await this.bean.executor.performAction('post', '/a/base/comment/list' as any, {
       body: {
         key: { atomId },
         options,

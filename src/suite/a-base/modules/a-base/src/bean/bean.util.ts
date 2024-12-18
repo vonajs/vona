@@ -299,8 +299,8 @@ export class BeanUtil extends BeanBase {
       escapeURL(str) {
         return self.escapeURL(str);
       },
-      performAction({ method, url, body }: any) {
-        return self.bean.executor.performAction({ method, url, body });
+      performAction(method, path, { body }: any) {
+        return self.bean.executor.performAction(method, path, { body });
       },
     };
   }

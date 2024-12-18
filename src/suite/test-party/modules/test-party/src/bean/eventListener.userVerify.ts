@@ -10,7 +10,7 @@ export class EventListenerUserVerify
 {
   async execute(
     data: TypeEventUserVerifyData,
-    next: NextEvent<TypeEventUserVerifyResult>,
+    next: NextEvent<TypeEventUserVerifyData, TypeEventUserVerifyResult>,
   ): Promise<TypeEventUserVerifyResult> {
     assert(data.profileUser.profileId > 0);
     // next

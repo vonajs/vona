@@ -4,11 +4,11 @@ import pMap from 'p-map';
 
 @Service()
 export class ServiceUtil extends BeanBase {
-  async performAction({ params }: any) {
-    // force innerAccess as false
-    params.innerAccess = false;
-    // performAction
-    return await this.bean.executor.performAction(params);
+  async performAction({ params: _params }: any) {
+    // // force innerAccess as false
+    // params.innerAccess = false;
+    // // performAction
+    // return await this.bean.executor.performAction(params);
   }
 
   async performActions({ actions }: any) {

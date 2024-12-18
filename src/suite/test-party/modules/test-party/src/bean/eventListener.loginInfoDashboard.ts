@@ -9,7 +9,7 @@ export class EventListenerLoginInfoDashboard
 {
   async execute(
     data: TypeEventLoginInfoData,
-    next: NextEvent<TypeEventLoginInfoResult>,
+    next: NextEvent<TypeEventLoginInfoData, TypeEventLoginInfoResult>,
   ): Promise<TypeEventLoginInfoResult> {
     const info = data.info;
     info.config = this.app.bean.util.extend(info.config, {

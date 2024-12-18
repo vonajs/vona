@@ -6,9 +6,7 @@ export class ControllerComment extends BeanBase {
   async all() {
     const options = this.ctx.request.body.options;
     options.comment = 1;
-    const res = await this.bean.executor.performAction({
-      method: 'post',
-      url: '/api/a/base/atom/select',
+    const res = await this.bean.executor.performAction('post', '/a/base/atom/select' as any, {
       body: {
         atomClass: this.ctx.request.body.atomClass,
         options,
