@@ -72,7 +72,7 @@ export class ServiceQueue extends BeanBase {
     }
 
     // create work
-    const connectionWorker = app.redis.get('queue').duplicate();
+    const connectionWorker = app.bean.redis.get('queue').duplicate();
     const _workerOptions = Object.assign({}, this.scope.config.worker, workerOptions, {
       prefix,
       connection: connectionWorker,
@@ -134,12 +134,12 @@ export class ServiceQueue extends BeanBase {
     const queueOptions = queueConfig?.options?.queue;
 
     // create queue
-    const connectionQueue: Bull.ConnectionOptions = app.redis.get('queue').duplicate();
+    const connectionQueue: Bull.ConnectionOptions = app.bean.redis.get('queue').duplicate();
     const _queueOptions = Object.assign({}, queueOptions, { prefix, connection: connectionQueue });
     _queue.queue = new Bull.Queue(queueKey, _queueOptions);
 
     // create events
-    const connectionEvents: Bull.ConnectionOptions = app.redis.get('queue').duplicate();
+    const connectionEvents: Bull.ConnectionOptions = app.bean.redis.get('queue').duplicate();
     _queue.queueEvents = new Bull.QueueEvents(queueKey, { prefix, connection: connectionEvents });
     _queue.queueEvents.on('completed', ({ jobId, returnvalue }) => {
       this._callCallback(jobId, undefined, returnvalue);

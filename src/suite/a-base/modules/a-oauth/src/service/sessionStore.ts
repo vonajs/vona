@@ -5,18 +5,8 @@ const ONE_DAY = 1000 * 60 * 60 * 24;
 
 @Service()
 export class ServiceSessionStore extends BeanBase {
-  _redis: any;
-
-  constructor() {
-    super();
-    this._redis = null;
-  }
-
   get redis() {
-    if (!this._redis) {
-      this._redis = this.app.redis.get('auth') || this.app.redis.get('cache');
-    }
-    return this._redis;
+    return this.app.bean.redis.get('auth');
   }
 
   _getKeyToken({ ctx, token }: any) {

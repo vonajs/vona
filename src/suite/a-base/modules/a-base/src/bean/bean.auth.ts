@@ -2,13 +2,6 @@ import { Bean, BeanBase } from 'vona';
 
 @Bean()
 export class BeanAuth extends BeanBase {
-  _redisAuth: any;
-
-  constructor() {
-    super();
-    this._redisAuth = null;
-  }
-
   get model() {
     return this.$scope.auth.model.auth;
   }
@@ -22,10 +15,7 @@ export class BeanAuth extends BeanBase {
   }
 
   get redisAuth() {
-    if (!this._redisAuth) {
-      this._redisAuth = this.ctx.app.redis.get('auth') || this.ctx.app.redis.get('cache');
-    }
-    return this._redisAuth;
+    return this.bean.redis.get('auth');
   }
 
   // return current user auth info
@@ -176,7 +166,7 @@ export class BeanAuth extends BeanBase {
       return _user;
     }
     // save to redis
-    const key = this._getAuthRedisKey({ user });
+    const key = this._getAuthRedisKey({ user })!;
     if (!this.app.bean.util.checkDemo(false)) {
       // demo, allowed to auth more times
       _user.token = await this.redisAuth.get(key);

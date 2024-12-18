@@ -75,7 +75,7 @@ export class ServiceRedlock extends BeanBase {
     // clients
     const clients = [] as any;
     for (const clientName of this.scope.config.redlock.clients) {
-      const client = this.app.redis.get(clientName);
+      const client = this.app.bean.redis.get(clientName);
       clients.push(client);
     }
     // create

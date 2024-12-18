@@ -1,5 +1,5 @@
+import { Redis } from 'ioredis';
 import { CacheBase } from '../common/cacheBase.js';
-import { IORedis } from 'vona';
 import { ICacheLayeredBase } from '../common/cacheLayeredBase.js';
 import { TSummerCacheActionOptions } from '../types/summerCache.js';
 import { Service } from 'vona-module-a-web';
@@ -9,7 +9,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   extends CacheBase<KEY, DATA>
   implements ICacheLayeredBase<KEY, DATA>
 {
-  _redisSummer: IORedis.Redis;
+  _redisSummer: Redis;
 
   async get(keyHash: string, key: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const redisKey = this._getRedisKey(keyHash);
@@ -106,7 +106,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   get redisSummer() {
     if (!this._redisSummer) {
       const clientName = this._cacheOpitons.redis?.client ?? this.scopeSummer.config.summer.redis.client;
-      this._redisSummer = this.app.redis.get(clientName);
+      this._redisSummer = this.bean.redis.get(clientName);
     }
     return this._redisSummer;
   }

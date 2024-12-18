@@ -7,14 +7,14 @@ export class BeanCacheRedis extends BeanModuleScopeBase {
   }
 
   async get(name) {
-    const redis = this.ctx.app.redis.get('cache');
+    const redis = this.bean.redis.get('cache');
     const key = this._getKey(name);
     const value = await redis.get(key);
     return value ? JSON.parse(value) : undefined;
   }
 
   async set(name, value, timeout?) {
-    const redis = this.ctx.app.redis.get('cache');
+    const redis = this.bean.redis.get('cache');
     const key = this._getKey(name);
     if (timeout) {
       await redis.set(key, JSON.stringify(value), 'PX', timeout);
@@ -24,7 +24,7 @@ export class BeanCacheRedis extends BeanModuleScopeBase {
   }
 
   async getset(name, value, timeout?) {
-    const redis = this.ctx.app.redis.get('cache');
+    const redis = this.bean.redis.get('cache');
     const key = this._getKey(name);
     let valuePrev: any;
     if (timeout) {
@@ -38,13 +38,13 @@ export class BeanCacheRedis extends BeanModuleScopeBase {
   }
 
   async has(name) {
-    const redis = this.ctx.app.redis.get('cache');
+    const redis = this.bean.redis.get('cache');
     const key = this._getKey(name);
     return (await redis.exists(key)) > 0;
   }
 
   async remove(name) {
-    const redis = this.ctx.app.redis.get('cache');
+    const redis = this.bean.redis.get('cache');
     const key = this._getKey(name);
     await redis.del(key);
   }

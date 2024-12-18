@@ -3,15 +3,12 @@ import { Bean, BeanModuleScopeBase } from 'vona';
 
 @Bean()
 export class BeanProgress extends BeanModuleScopeBase {
-  _redis: any;
-
   get configModule() {
     return this.scope.config;
   }
 
   get redis() {
-    if (!this._redis) this._redis = this.ctx.app.redis.get('io') || this.ctx.app.redis.get('cache');
-    return this._redis;
+    return this.app.bean.redis.get('io');
   }
 
   _getRedisKey({ progressId }: any) {

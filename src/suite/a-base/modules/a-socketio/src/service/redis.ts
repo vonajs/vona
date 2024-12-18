@@ -6,16 +6,8 @@ const __keyUserIndex = 2;
 
 @Service()
 export class ServiceRedis extends BeanBase {
-  _redis: any;
-
-  constructor() {
-    super();
-    this._redis = null;
-  }
-
   get redis() {
-    if (!this._redis) this._redis = this.ctx.app.redis.get('io') || this.ctx.app.redis.get('cache');
-    return this._redis;
+    return this.app.bean.redis.get('io');
   }
 
   // subcribe
@@ -44,7 +36,7 @@ export class ServiceRedis extends BeanBase {
   }
 
   async _unsubscribeWhenDisconnect({ iid, user, socketId }: any) {
-    const keyPrefix = this.redis.options.keyPrefix;
+    const keyPrefix = this.redis.options.keyPrefix!;
     const keyPatern = `${keyPrefix}${__subVersion}:${iid}:${user.id}:*`;
     const keys = await this.redis.keys(keyPatern);
     const cmds: any[] = [];
@@ -58,11 +50,11 @@ export class ServiceRedis extends BeanBase {
 
   async _getPathUsersOnline({ path }: any) {
     const userIds: any = {};
-    const keyPrefix = this.redis.options.keyPrefix;
+    const keyPrefix = this.redis.options.keyPrefix!;
     const keyPatern = `${keyPrefix}${__subVersion}:${this.ctx.instance.id}:*:${path}`;
     const keys = await this.redis.keys(keyPatern);
     for (const fullKey of keys) {
-      const key = fullKey.substr(keyPrefix.length);
+      const key = fullKey.substring(keyPrefix.length);
       userIds[key.split(':')[__keyUserIndex]] = true;
     }
     return Object.keys(userIds).map(item => parseInt(item));
@@ -80,7 +72,7 @@ export class ServiceRedis extends BeanBase {
       cmdsGetAll.push(['hgetall', key]);
     }
     // pipeline
-    const valuesBatch = await this.redis.pipeline(cmdsGetAll).exec();
+    const valuesBatch = (await this.redis.pipeline(cmdsGetAll).exec())!;
     // check
     const result: any = {};
     const workersStatus: any = {};

@@ -164,19 +164,19 @@ export class ServiceStartup extends BeanBase {
     const app = this.app;
     if (!app.meta.isTest) return;
     // clear keys
-    await this._clearRedisKeys(app.redis.get('limiter'), `b_${app.name}:*`);
-    await this._clearRedisKeys(app.redis.get('queue'), `bull_${app.name}:*`);
+    await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
+    await this._clearRedisKeys(app.bean.redis.get('queue'), `bull_${app.name}:*`);
     // broadcast channel has subscribed
     // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);
     // redlock
     for (const clientName of this.$scope.redlock.config.redlock.clients) {
-      await this._clearRedisKeys(app.redis.get(clientName), `redlock_${app.name}:*`);
+      await this._clearRedisKeys(app.bean.redis.get(clientName), `redlock_${app.name}:*`);
     }
     for (const clientName in app.config.redis.clients) {
       if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
       if (clientName.includes('redlock')) continue;
       const client = app.config.redis.clients[clientName];
-      await this._clearRedisKeys(app.redis.get(clientName), `${client.keyPrefix}*`);
+      await this._clearRedisKeys(app.bean.redis.get(clientName), `${client.keyPrefix}*`);
     }
     // src/backend/app/public
     await fse.remove(path.join(app.options.baseDir, 'app/public/1'));

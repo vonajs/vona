@@ -2,7 +2,7 @@ import { Bean, BeanBase } from 'vona';
 import { ServiceRedisClient } from '../service/redisClient.js';
 
 @Bean()
-export class BeanDatabase extends BeanBase {
+export class BeanRedis extends BeanBase {
   getClient(clientName?: string) {
     return this.app.bean._getBeanSelector(ServiceRedisClient, clientName);
   }

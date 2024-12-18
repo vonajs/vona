@@ -1,9 +1,10 @@
-import { Bean, BeanBase, IORedis } from 'vona';
+import { Bean, BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
+import { Redis } from 'ioredis';
 
 @Bean()
 export class BeanWorker extends BeanBase {
-  _redisCache: IORedis.Redis;
+  _redisCache: Redis;
   // _redisIO = null;
 
   get id() {
@@ -11,7 +12,7 @@ export class BeanWorker extends BeanBase {
   }
 
   get redisCache() {
-    if (!this._redisCache) this._redisCache = this.app.redis.get('cache');
+    if (!this._redisCache) this._redisCache = this.bean.redis.get('cache');
     return this._redisCache;
   }
 
