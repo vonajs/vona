@@ -232,6 +232,7 @@ export default function (appInfo: VonaAppInfo) {
       enableReadyCheck: false,
     },
     clients: {
+      default: { keyPrefix: `default_${appInfo.name}:` },
       redlock: {},
       queue: {},
       broadcast: {},
