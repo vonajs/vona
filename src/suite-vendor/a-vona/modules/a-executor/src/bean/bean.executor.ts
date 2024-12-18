@@ -1,6 +1,7 @@
 import { Bean, BeanBase, FunctionAsync } from 'vona';
 import { INewCtxOptions, IPerformActionParams, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
+import { IApiPathGetRecord, RequestMethod } from 'vona-module-a-web';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
@@ -8,16 +9,17 @@ export class BeanExecutor extends BeanBase {
   //       because ctxCaller.module removed
   //       so, maybe need provide this.scope.util.combineUrl
   //          this result is: /api/a/user/add, thus the method of combineApiPath not needed in performActionInner
-  async performAction<T = any>({
+  async performAction<PATHKEY extends keyof IApiPathGetRecord, T = any>({
     innerAccess,
     method,
-    url,
+    path,
     query,
     params,
     headers,
     body,
     onions,
-  }: IPerformActionParams): Promise<T> {
+  }: IPerformActionParams<'get', IApiPathGetRecord[PATHKEY]>): Promise<T>;
+  async performAction<T = any>({ innerAccess, method, url, query, params, headers, body, onions }: any): Promise<T> {
     return await performActionInner({
       ctxCaller: this.ctx,
       innerAccess,

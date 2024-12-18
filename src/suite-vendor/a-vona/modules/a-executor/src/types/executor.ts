@@ -22,11 +22,11 @@ export interface INewCtxOptions {
   extraData?: INewCtxExtraData;
 }
 
-export interface IPerformActionParams {
+export interface IPerformActionParams<METHOD, PATH> {
   innerAccess?: boolean;
   // subdomain, deprecated
-  method: 'post' | 'get';
-  url: string;
+  method: METHOD;
+  path: PATH;
   query?: object;
   params?: object;
   headers?: object;

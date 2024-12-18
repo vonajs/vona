@@ -26,7 +26,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
           return '${string}';
         });
         contentPaths[method].push(`'${apiPath1}': '${apiPath2}'`);
-        contentPaths[method].push(`'${apiPath}': '${apiPath3}'`);
+        contentPaths[method].push(`'${apiPath}': \`${apiPath3}\``);
       }
     }
   }
