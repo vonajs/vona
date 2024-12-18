@@ -341,7 +341,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       // options
       const options = this.combineOnionOptions(ctx, item);
       // enable match ignore dependencies
-      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, ctx.route?.routePathRaw)) {
+      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, this._getRoutePathForMatch(ctx))) {
         return typeof next === 'function' ? next() : next;
       }
       // execute
@@ -360,5 +360,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     };
     fn._name = item.name;
     return fn;
+  }
+
+  private _getRoutePathForMatch(ctx: VonaContext) {
+    const routePathRaw: string | undefined = ctx.route?.routePathRaw;
+    if (!routePathRaw) return;
+    return routePathRaw.startsWith('//') ? '/' + ctx.path : ctx.path.substring(this.app.config.globalPrefix.length);
   }
 }
