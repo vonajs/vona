@@ -19,8 +19,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
         const apiPath1 = apiPath.replace(/(:[^\/]+)/g, (_, _part) => {
           return ':_string_';
         });
-        const apiPath2 = apiPath.replace(/(:[^\/]+)/g, (_, part) => {
-          return `:_${part.substring(1)}_`;
+        const apiPath2 = apiPath.replace(/(\/:[^\/]+)/g, (_, part) => {
+          return `:_${part.substring(2)}_`;
         });
         const apiPath3 = apiPath.replace(/(:[^\/]+)/g, (_, _part) => {
           return '${string}';

@@ -1,12 +1,11 @@
-import { app, mockUrl } from 'vona-mock';
-import { apiPath, RequestMethod } from 'vona-module-a-web';
+import { app } from 'vona-mock';
 
 describe.only('bean.test.ts', () => {
   it('action:bean', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction({
         method: 'get',
-        url: mockUrl('bean/test'),
+        path: '/vona/test/bean/test',
       });
     });
   });
@@ -15,8 +14,7 @@ describe.only('bean.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction({
         method: 'get',
-        path:
-        url: apiPath('/vona/test/bean/service'),
+        path: '/vona/test/bean/service',
       });
     });
   });
