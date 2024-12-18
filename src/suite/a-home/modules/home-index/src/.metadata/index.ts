@@ -30,6 +30,13 @@ declare module 'vona-module-home-index' {
   }
 }
 /** controller: end */
+/** controller: begin */
+declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord {
+    '//': '//';
+  }
+}
+/** controller: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
