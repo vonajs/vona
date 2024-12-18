@@ -3,7 +3,10 @@
   "version": "5.0.0",
   "title": "a-redis",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "globalDependencies": {
+      "ioredis": true
+    }
   },
   "type": "module",
   "exports": {
@@ -28,5 +31,7 @@
     "static"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "ioredis": "^5.4.1"
+  }
 }

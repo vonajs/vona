@@ -58,7 +58,6 @@
     "egg-security": "^3.0.0",
     "fs-extra": "^10.1.0",
     "inflation": "^2.0.0",
-    "ioredis": "^5.3.2",
     "module-alias": "^2.2.2",
     "passport-oauth2": "^1.6.1",
     "raw-body": "2.5.1",
