@@ -164,7 +164,7 @@ export class ServiceStartup extends BeanBase {
     const app = this.app;
     if (!app.meta.isTest) return;
     // clear keys
-    await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
+    // await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
     await this._clearRedisKeys(app.bean.redis.get('queue'), `bull_${app.name}:*`);
     // broadcast channel has subscribed
     // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);

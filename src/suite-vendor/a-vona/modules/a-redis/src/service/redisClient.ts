@@ -20,6 +20,7 @@ export class ServiceRedisClient extends BeanBase {
     clientName = clientName || 'default';
     const configRedis = this.app.config.redis;
     const configClient = configRedis.clients[clientName];
+    if (!configClient) throw new Error(`redis client not found: ${clientName}`);
     if (cast<RedisOptions>(configClient).sentinels) {
       // sentinels
       return new Redis(configClient);
