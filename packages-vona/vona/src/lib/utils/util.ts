@@ -23,6 +23,22 @@ export class AppUtil extends BeanSimple {
     return this.app.meta.appReadyInstances && this.app.meta.appReadyInstances[subdomain];
   }
 
+  combineApiPathControllerAndActionRaw(
+    moduleName: ModuleInfo.IModuleInfo | string,
+    controllerPath: string | undefined,
+    actionPath: RegExp | string | undefined,
+    simplify?: boolean,
+  ): RegExp | string {
+    let apiPath = this.combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, '/_api_', simplify);
+    if (typeof apiPath !== 'string') return apiPath;
+    if (apiPath.startsWith('/_api_')) {
+      apiPath = apiPath.substring('/_api_'.length);
+    } else {
+      apiPath = '/' + apiPath;
+    }
+    return apiPath;
+  }
+
   combineApiPathControllerAndAction(
     moduleName: ModuleInfo.IModuleInfo | string,
     controllerPath: string | undefined,
