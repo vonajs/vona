@@ -161,39 +161,11 @@ export class ServiceStartup extends BeanBase {
   }
 
   private async _clearResources() {
-    const app = this.app;
-    if (!app.meta.isTest) return;
-    // clear keys
-    // await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
-    await this._clearRedisKeys(app.bean.redis.get('queue'), `bull_${app.name}:*`);
-    // broadcast channel has subscribed
-    // await _clearRedisKeys(app.redis.get('broadcast'), `broadcast_${app.name}:*`);
-    // redlock
-    for (const clientName of this.$scope.redlock.config.redlock.clients) {
-      await this._clearRedisKeys(app.bean.redis.get(clientName), `redlock_${app.name}:*`);
-    }
-    for (const clientName in app.config.redis.clients) {
-      if (['redlock', 'limiter', 'queue', 'broadcast'].includes(clientName)) continue;
-      if (clientName.includes('redlock')) continue;
-      const client = app.config.redis.clients[clientName];
-      await this._clearRedisKeys(app.bean.redis.get(clientName), `${client.keyPrefix}*`);
-    }
+    if (!this.app.meta.isTest) return;
+    // redis
+    await this.$scope.redis.service.redisClient.clearAllData();
     // src/backend/app/public
-    await fse.remove(path.join(app.options.baseDir, 'app/public/1'));
-    await fse.remove(path.join(app.options.baseDir.replace('dist/backend', 'src/backend'), 'app/public/1'));
-  }
-
-  private async _clearRedisKeys(redis, pattern) {
-    if (!redis) return;
-    const keyPrefix = redis.options.keyPrefix;
-    const keys = await redis.keys(pattern);
-    const keysDel: string[] = [];
-    for (const fullKey of keys) {
-      const key = keyPrefix ? fullKey.substr(keyPrefix.length) : fullKey;
-      keysDel.push(key);
-    }
-    if (keysDel.length > 0) {
-      await redis.del(keysDel);
-    }
+    await fse.remove(path.join(this.app.options.baseDir, 'app/public/1'));
+    await fse.remove(path.join(this.app.options.baseDir.replace('dist/backend', 'src/backend'), 'app/public/1'));
   }
 }
