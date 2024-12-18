@@ -73,7 +73,7 @@ export class ServiceSchedule extends BeanBase {
           queueNameSub: scheduleName,
           jobName,
           jobOptions: {
-            // jobId,
+            jobId: jobName,
             repeat: scheduleItem.beanOptions.options!.repeat,
           },
         },

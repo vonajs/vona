@@ -164,15 +164,22 @@ export interface IModuleQueue {
 /** queue: end */
 /** schedule: begin */
 export * from '../bean/schedule.test.js';
+export * from '../bean/schedule.test2.js';
 
 import { IDecoratorScheduleOptions } from 'vona-module-a-schedule';
 declare module 'vona-module-a-schedule' {
   export interface IScheduleRecord {
     'vona-test:test': IDecoratorScheduleOptions;
+    'vona-test:test2': IDecoratorScheduleOptions;
   }
 }
 declare module 'vona-module-vona-test' {
   export interface ScheduleTest {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+
+  export interface ScheduleTest2 {
     /** @internal */
     get scope(): ScopeModuleVonaTest;
   }
