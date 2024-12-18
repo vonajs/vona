@@ -14,7 +14,7 @@ export class ControllerOnion extends BeanBase {
     //return 'Hello Vona';
   }
 
-  @Get('echo')
+  @Get('//echo')
   @UseGuardGlobal('a-core:user', { public: true })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   echo(
@@ -25,7 +25,7 @@ export class ControllerOnion extends BeanBase {
     return 'echo: ' + id + ':' + temp + ':' + name;
   }
 
-  @Get('echo2')
+  @Get('echo2/:userId/:userName')
   @UseGuardGlobal('a-core:user', { public: true })
   //async echo2(@Query(v.object(DtoUser, { passthrough: false, strict: false })) book: Partial<DtoUser>) {
   async echo2(@Query(DtoUser) book: Partial<DtoUser>) {

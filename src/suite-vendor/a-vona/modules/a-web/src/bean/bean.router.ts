@@ -158,7 +158,13 @@ export class BeanRouter extends BeanBase {
     const actionPath: RegExp | string = handlerMetadata.path || '';
     const actionMethod: string = handlerMetadata.method || RequestMethod.GET;
     // routePath
-    const routePath = app.meta.util.combineApiPathControllerAndAction(info, controllerPath, actionPath, true, true);
+    const routePath = app.meta.util.combineApiPathControllerAndAction(
+      info.relativeName,
+      controllerPath,
+      actionPath,
+      true,
+      true,
+    );
 
     // middlewares options
     const actionMiddlewaresOptions = appMetadata.getMetadata(SymbolUseOnionOptions, controller.prototype, actionKey);

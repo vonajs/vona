@@ -3,7 +3,7 @@ import path from 'path';
 import { URL } from 'url';
 import * as security from 'egg-security';
 import * as uuid from 'uuid';
-import { VonaContext, IModule, TypeMonkeyName, IModuleInfo, parseInfo } from '../../types/index.js';
+import { VonaContext, IModule, TypeMonkeyName } from '../../types/index.js';
 import { BeanSimple } from '../bean/beanSimple.js';
 import { compose as _compose } from '@cabloy/compose';
 import { extend } from '@cabloy/extend';
@@ -23,7 +23,7 @@ export class AppUtil extends BeanSimple {
   }
 
   combineApiPathControllerAndAction(
-    moduleName: IModuleInfo | string,
+    moduleName: string,
     controllerPath: string | undefined,
     actionPath: RegExp | string | undefined,
     prefix?: string | boolean,
@@ -52,12 +52,7 @@ export class AppUtil extends BeanSimple {
     return routePath;
   }
 
-  combineApiPath(
-    moduleName: IModuleInfo | string,
-    path: string | undefined,
-    prefix?: string | boolean,
-    simplify?: boolean,
-  ) {
+  combineApiPath(moduleName: string, path: string | undefined, prefix?: string | boolean, simplify?: boolean) {
     const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : this.app.config.globalPrefix;
     simplify = simplify ?? true;
     if (!path) path = '';
@@ -66,9 +61,7 @@ export class AppUtil extends BeanSimple {
     // ignore module path
     if (path.startsWith('/')) return `${globalPrefix}${path}`;
     // globalPrefix + module path + arg
-    const moduleInfo = typeof moduleName === 'string' ? parseInfo(moduleName) : moduleName;
-    if (!moduleInfo) throw new Error('invalid url');
-    const parts = moduleInfo.relativeName.split('-');
+    const parts = moduleName.split('-');
     // path
     let res = globalPrefix;
     if (!simplify || parts[0] !== 'a') res = `${res}/${parts[0]}`;
