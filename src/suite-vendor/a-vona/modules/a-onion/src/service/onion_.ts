@@ -341,7 +341,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       // options
       const options = this.combineOnionOptions(ctx, item);
       // enable match ignore dependencies
-      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, ctx.path)) {
+      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, ctx.route?.routePathRaw)) {
         return typeof next === 'function' ? next() : next;
       }
       // execute

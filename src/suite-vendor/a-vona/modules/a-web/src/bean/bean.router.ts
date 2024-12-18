@@ -138,7 +138,7 @@ export class BeanRouter extends BeanBase {
     }
   }
 
-  _registerControllerAction(
+  private _registerControllerAction(
     info: ModuleInfo.IModuleInfo,
     controller: Constructable,
     controllerBeanFullName: string,
@@ -167,6 +167,12 @@ export class BeanRouter extends BeanBase {
       true,
       true,
     );
+    const routePathRaw = app.meta.util.combineApiPathControllerAndActionRaw(
+      info.relativeName,
+      controllerPath,
+      actionPath,
+      true,
+    );
 
     // middlewares options
     const actionMiddlewaresOptions = appMetadata.getMetadata(SymbolUseOnionOptions, controller.prototype, actionKey);
@@ -188,6 +194,7 @@ export class BeanRouter extends BeanBase {
       routeName: undefined,
       routeMethod: actionMethod,
       routePath,
+      routePathRaw,
     };
 
     // fn
