@@ -12,6 +12,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const actionPaths = __parseActionPaths(fileContent);
     for (const [method, actionPath] of actionPaths) {
       if (!contentPaths[method]) contentPaths[method] = [];
+
       contentPaths[method].push(`${actionPath}: ${actionPath}`);
     }
   }
@@ -30,16 +31,12 @@ declare module 'vona-module-${moduleName}' {
 function __parseControllerPath(fileContent: string): string | false {
   let matched = fileContent.match(/@Controller\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*?export class/);
   if (!matched) {
-    matched = fileContent.match(/@Controller\(\{[\s\S]*?path: (\/[^\/]*\/)[\s\S]*?\}[\s\S]*?\)\s*?export class/);
-  }
-  if (!matched) {
     matched = fileContent.match(/@Controller\(([^\)]*)\)/);
   }
   if (!matched) return false;
   const controllerPath = matched[1];
   if (controllerPath === '') return '';
-  if (controllerPath.startsWith("'")) return controllerPath.replaceAll("'", '');
-  return false; // regexp
+  return controllerPath.replaceAll("'", '');
 }
 
 function __parseActionPaths(fileContent: string): [string, string][] {
