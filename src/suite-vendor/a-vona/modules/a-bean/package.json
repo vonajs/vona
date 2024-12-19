@@ -7,7 +7,8 @@
     "onions": {
       "beanTemp": {},
       "bean": {
-        "boilerplate": "cli/bean/boilerplate"
+        "boilerplate": "cli/bean/boilerplate",
+        "metadataCustom": "cli/bean/metadata/generate.ts"
       }
     }
   },
