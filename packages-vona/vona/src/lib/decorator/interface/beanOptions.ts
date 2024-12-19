@@ -4,8 +4,6 @@ import { Constructable } from '../index.js';
 
 export interface ISceneCustomRecord {}
 
-export type TypeDecoratorBeanOptionsSceneBase = keyof ISceneCustomRecord;
-
 export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**
    * global: equal to name
@@ -13,7 +11,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
    */
   beanFullName: string;
   module: string;
-  scene: TypeDecoratorBeanOptionsSceneBase;
+  scene: keyof ISceneCustomRecord;
   name: string;
   beanClass: Constructable<T>;
   // containerScope?: ContainerScope;
