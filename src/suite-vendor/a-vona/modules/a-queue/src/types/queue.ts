@@ -54,7 +54,7 @@ export interface IQueueCallbacks {
 export interface IQueueRecord {}
 
 export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
-  concurrency?: boolean;
+  concurrency?: number | boolean;
   transaction?: boolean;
   options?: {
     queue?: Bull.QueueOptions;

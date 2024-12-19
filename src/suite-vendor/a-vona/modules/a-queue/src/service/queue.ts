@@ -171,9 +171,13 @@ export class ServiceQueue extends BeanBase {
     // queue
     const queue = this._ensureQueue(info);
     // setGlobalConcurrency
+    let globalConcurrency;
     if (!queue.config?.concurrency) {
-      await queue.queue.setGlobalConcurrency(1);
+      globalConcurrency = 1;
+    } else {
+      globalConcurrency = queue.config?.concurrency === true ? Infinity : queue.config?.concurrency;
     }
+    await queue.queue.setGlobalConcurrency(globalConcurrency);
     // job
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
