@@ -383,7 +383,6 @@ import { Errors } from '../config/errors.js';
 /** scope: begin */
 import {
   BeanScopeBase,
-  Scope,
   TypeModuleBean,
   BeanScopeUtil,
   TypeModuleErrors,
@@ -391,6 +390,7 @@ import {
   TypeLocaleBase,
   TypeModuleConstants,
 } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAFlow extends BeanScopeBase {}

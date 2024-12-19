@@ -100,7 +100,6 @@ import { Errors } from '../config/errors.js';
 /** scope: begin */
 import {
   BeanScopeBase,
-  Scope,
   TypeModuleBean,
   BeanScopeUtil,
   TypeModuleConfig,
@@ -108,6 +107,7 @@ import {
   TypeModuleLocales,
   TypeLocaleBase,
 } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleACaptcha extends BeanScopeBase {}

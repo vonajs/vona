@@ -99,13 +99,13 @@ export const locales = {
 /** scope: begin */
 import {
   BeanScopeBase,
-  Scope,
   TypeModuleBean,
   BeanScopeUtil,
   TypeModuleLocales,
   TypeLocaleBase,
   TypeModuleConstants,
 } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleADetail extends BeanScopeBase {}

@@ -227,13 +227,13 @@ export const locales = {
 /** scope: begin */
 import {
   BeanScopeBase,
-  Scope,
   TypeModuleBean,
   BeanScopeUtil,
   TypeModuleConfig,
   TypeModuleLocales,
   TypeLocaleBase,
 } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAAuth extends BeanScopeBase {}

@@ -299,13 +299,13 @@ import { Errors } from '../config/errors.js';
 /** scope: begin */
 import {
   BeanScopeBase,
-  Scope,
   TypeModuleBean,
   BeanScopeUtil,
   TypeModuleErrors,
   TypeModuleLocales,
   TypeLocaleBase,
 } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleAFlowtask extends BeanScopeBase {}

@@ -17,7 +17,8 @@ declare module 'vona-module-a-swiper' {
 }
 /** beans: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleASwiper extends BeanScopeBase {}
