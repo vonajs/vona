@@ -45,6 +45,7 @@ export async function globBeanFiles(
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     const fileContent = isIgnore ? '' : fse.readFileSync(file).toString();
+    const isVirtual = fileContent.includes('@Virtual()');
     result.push({
       file,
       fileContent,
@@ -55,6 +56,7 @@ export async function globBeanFiles(
       beanName,
       beanNameFull,
       isIgnore,
+      isVirtual,
     });
   }
   return result;

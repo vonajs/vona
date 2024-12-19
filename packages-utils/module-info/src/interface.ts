@@ -102,6 +102,7 @@ export interface IGlobBeanFile {
   beanName: string;
   beanNameFull: string;
   isIgnore: boolean;
+  isVirtual: boolean;
 }
 
 export interface IMetadataCustomGenerateOptions {

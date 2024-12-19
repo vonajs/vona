@@ -18,7 +18,7 @@ declare module 'vona-module-a-cli' {
 /** beans: end */
 /** bean: begin */
 export * from '../bean/bean.cli.js';
-export * from '../bean/bean.cliBase_.js';
+export * from '../bean/bean.cliBase.js';
 
 import 'vona';
 declare module 'vona' {}

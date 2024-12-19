@@ -20,11 +20,11 @@ export async function generateOnions(
   const contentRecordsLocal: string[] = [];
   let needImportOptionsGlobalInterface;
   for (const globFile of globFiles) {
-    const { fileContent, fileNameJSRelative, className, beanNameFull, isIgnore } = globFile;
+    const { fileContent, fileNameJSRelative, className, beanNameFull, isIgnore, isVirtual } = globFile;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue;
     // get scope() also can be ignored
-    if (!['entity', 'dto'].includes(sceneName)) {
+    if (!['entity', 'dto'].includes(sceneName) && !isVirtual) {
       contentScopes.push(`
         export interface ${className} {
           /** @internal */
