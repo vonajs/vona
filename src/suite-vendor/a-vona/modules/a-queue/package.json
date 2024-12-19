@@ -5,8 +5,7 @@
   "vonaModule": {
     "dependencies": {},
     "globalDependencies": {
-      "bullmq": true,
-      "redlock": true
+      "bullmq": true
     },
     "onions": {
       "queue": {
@@ -42,8 +41,6 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@types/redlock": "^4.0.7",
-    "bullmq": "^5.34.3",
-    "redlock": "^4.1.0"
+    "bullmq": "^5.34.3"
   }
 }

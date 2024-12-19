@@ -4,6 +4,9 @@
   "title": "a-redlock",
   "vonaModule": {
     "dependencies": {},
+    "globalDependencies": {
+      "redlock": true
+    },
     "metas": {
       "redlock": {
         "scopeResource": true,
@@ -35,5 +38,8 @@
     "cli"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "@types/redlock": "^4.0.7",
+    "redlock": "^4.1.0"
+  }
 }

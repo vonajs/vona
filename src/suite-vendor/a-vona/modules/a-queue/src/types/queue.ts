@@ -1,5 +1,4 @@
 import * as Bull from 'bullmq';
-import Redlock from 'redlock';
 import { ILocalInfos, OmitNever } from 'vona';
 import { INewCtxExtraData } from 'vona-module-a-executor';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
@@ -26,7 +25,6 @@ export interface IQueueJobContext<DATA> {
 }
 
 export interface IQueueWork {
-  redlock: Redlock;
   worker: Bull.Worker;
 }
 export interface IQueueWorks {
@@ -34,7 +32,7 @@ export interface IQueueWorks {
 }
 
 export interface IQueueQueue {
-  config: IDecoratorQueueOptions;
+  config?: IDecoratorQueueOptions;
   options: Bull.QueueOptions;
   queue: Bull.Queue;
   queueEvents: Bull.QueueEvents;
@@ -61,7 +59,6 @@ export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
   options?: {
     queue?: Bull.QueueOptions;
     worker?: Bull.WorkerOptions;
-    redlock?: Redlock.Options & { lockTTL?: number };
     job?: Bull.JobsOptions;
   };
 }
