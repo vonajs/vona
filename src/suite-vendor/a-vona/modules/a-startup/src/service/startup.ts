@@ -150,10 +150,6 @@ export class ServiceStartup extends BeanBase {
         await this.runStartup(startup.name, subdomain, options);
       }
     }
-    // load queue workers
-    if (!this.app.meta.isTest) {
-      this.$scope.queue.service.queue.loadQueueWorkers(subdomain);
-    }
   }
 
   private get _startups() {

@@ -1,3 +1,19 @@
+/** startup: begin */
+export * from '../bean/startup.loadQueueWorkers.js';
+
+import { IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  export interface IStartupRecord {
+    'a-queue:loadQueueWorkers': IDecoratorStartupOptions;
+  }
+}
+declare module 'vona-module-a-queue' {
+  export interface StartupLoadQueueWorkers {
+    /** @internal */
+    get scope(): ScopeModuleAQueue;
+  }
+}
+/** startup: end */
 /** service: begin */
 export * from '../service/queue.js';
 
