@@ -1,7 +1,7 @@
 import { BeanBase } from 'vona';
 import { IScheduleExecute, Schedule, TypeScheduleJob } from 'vona-module-a-schedule';
 
-@Schedule({ enable: false, repeat: { every: 5000 } })
+@Schedule({ enable: false, repeat: { every: 2000 } })
 export class ScheduleTest2 extends BeanBase implements IScheduleExecute {
   async execute(job?: TypeScheduleJob) {
     console.log(

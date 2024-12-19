@@ -66,8 +66,12 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -76,6 +80,7 @@ export class ScopeModuleASchedule extends BeanScopeBase {}
 export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
   queue: IModuleQueue;
   service: IModuleService;
 }
@@ -88,6 +93,10 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     schedule: ScopeModuleASchedule;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-schedule': ReturnType<typeof config>;
   }
 }
 

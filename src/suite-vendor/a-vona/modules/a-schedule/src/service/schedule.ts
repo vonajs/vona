@@ -1,4 +1,4 @@
-import { BeanBase, cast } from 'vona';
+import { BeanBase, cast, deepExtend } from 'vona';
 import { IDecoratorScheduleOptions, IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.js';
 import { Service } from 'vona-module-a-web';
 
@@ -107,6 +107,11 @@ export class ServiceSchedule extends BeanBase {
         },
       },
     );
-    await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, { name: scheduleKey, data });
+    const templateOptions = deepExtend({}, this.scope.config.schedule.templateOptions, scheduleOptions.templateOptions);
+    await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, {
+      name: scheduleKey,
+      data,
+      opts: templateOptions,
+    });
   }
 }

@@ -15,6 +15,7 @@ export interface IScheduleRecord {}
 export interface IDecoratorScheduleOptions extends IOnionOptionsEnable {
   queue?: keyof IQueueRecord;
   repeat: Bull.RepeatOptions;
+  templateOptions?: Bull.JobSchedulerTemplateOptions;
   transaction?: boolean;
 }
 
