@@ -4,6 +4,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { checkIgnoreOfParts, getScopeModuleName } from './utils.js';
 import { OnionScenesMeta } from '@cabloy/module-info';
 
+// todo: remove
 export async function generateBeans(onionScenesMeta: OnionScenesMeta, moduleName: string, modulePath: string) {
   const scopeModuleName = getScopeModuleName(moduleName);
   const pattern = `${modulePath}/src/bean/*.ts`;
