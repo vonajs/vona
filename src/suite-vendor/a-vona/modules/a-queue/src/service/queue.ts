@@ -238,8 +238,7 @@ export class ServiceQueue extends BeanBase {
     const tz = repeat.tz || '';
     const pattern = repeat.pattern;
     const suffix = (pattern ? pattern : String(repeat.every)) || '';
-    const jobId = repeat.jobId ? repeat.jobId : '';
-    return `${jobName}:${jobId}:${endDate}:${tz}:${suffix}`;
+    return `${jobName}:${endDate}:${tz}:${suffix}`;
   }
 
   prepareJobInfo<DATA>(queueName: keyof IQueueRecord, data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {

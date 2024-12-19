@@ -49,14 +49,14 @@ export class ServiceSchedule extends BeanBase {
       job.data!.options!.jobName!,
       job.data!.options!.jobOptions!.repeat!,
     );
-    const jobNameConfig = this.__getScheduleId(this.ctx.subdomain, scheduleName);
+    const jobNameConfig = this.getScheduleKey(this.ctx.subdomain, scheduleName);
     const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(jobNameConfig, scheduleConfig!.repeat);
     if (jobKeyActive !== jobKeyConfig) return false;
     // ok
     return true;
   }
 
-  private __getScheduleId(subdomain: string, scheduleName: keyof IScheduleRecord) {
+  public getScheduleKey(subdomain: string, scheduleName: keyof IScheduleRecord) {
     return `${subdomain}.${cast<string>(scheduleName).replace(':', '.schedule.')}`; // not use :
   }
 
@@ -65,13 +65,18 @@ export class ServiceSchedule extends BeanBase {
     for (const scheduleItem of this.bean.onion.schedule.getOnionsEnabled()) {
       const scheduleName = scheduleItem.name;
       // push
-      const scheduleId = this.__getScheduleId(subdomain, scheduleName);
+      const scheduleKey = this.getScheduleKey(subdomain, scheduleName);
       const scheduleOptions = scheduleItem.beanOptions.options!;
       const queueName = scheduleOptions.queue || 'a-schedule:schedule';
       const queue = this.$scope.queue.service.queue.getQueue(queueName, subdomain);
-      await queue.upsertJobScheduler(scheduleId, scheduleOptions.repeat, {
-        data: { subdomain, scheduleName },
-      });
+      const data = this.$scope.queue.service.queue.prepareJobInfo(
+        queueName,
+        { scheduleName },
+        {
+          subdomain,
+        },
+      );
+      await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, { data });
     }
   }
 }
