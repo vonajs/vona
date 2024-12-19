@@ -1,5 +1,6 @@
+import { Virtual } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Virtual } from 'vona';
+
 import { BeanIoMessageBase } from 'vona-module-a-socketio';
 
 const __PATH_MESSAGE_UNIFORM = '/a/message/uniform';

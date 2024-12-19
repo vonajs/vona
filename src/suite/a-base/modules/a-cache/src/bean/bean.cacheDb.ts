@@ -1,6 +1,6 @@
 import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanModuleScopeBase, Bean } from 'vona';
+import { BeanModuleScopeBase } from 'vona';
 
 @Bean()
 export class BeanCacheDb extends BeanModuleScopeBase {

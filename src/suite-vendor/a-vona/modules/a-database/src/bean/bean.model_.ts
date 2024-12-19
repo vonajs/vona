@@ -1,4 +1,5 @@
-import { Virtual } from 'vona';
+import { Virtual } from 'vona-module-a-bean';
+
 import { BeanModelCrud2 } from './bean.model/bean.model_crud2.js';
 
 @Virtual()

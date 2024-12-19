@@ -2,7 +2,6 @@ import { Bean } from 'vona-module-a-bean';
 import {
   appMetadata,
   appResource,
-  Bean,
   BeanBase,
   cast,
   Constructable,

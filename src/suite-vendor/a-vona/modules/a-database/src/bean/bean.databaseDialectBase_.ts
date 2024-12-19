@@ -1,4 +1,5 @@
-import { BeanBase, Virtual } from 'vona';
+import { Virtual } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 import { TableIdentity } from 'vona-module-a-database';
 import { Knex } from 'knex';
 

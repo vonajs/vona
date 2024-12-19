@@ -37,6 +37,10 @@ export async function globBeanFiles(
     const parts = fileName.split('.').slice(0, -1);
     if (sceneMeta.sceneIsolate && parts.length !== 1) continue;
     if (!sceneMeta.sceneIsolate && parts.length < 2) continue;
+    // todo: remove
+    if (sceneName === 'bean' && parts[1] === 'base2') {
+      parts[1] = 'base';
+    }
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js');
     const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;

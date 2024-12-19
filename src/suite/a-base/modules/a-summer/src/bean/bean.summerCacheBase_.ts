@@ -1,4 +1,5 @@
-import { deepExtend, Virtual } from 'vona';
+import { Virtual } from 'vona-module-a-bean';
+import { deepExtend } from 'vona';
 import objectHash from 'object-hash';
 import { CacheBase } from '../common/cacheBase.js';
 import { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.js';

@@ -1,4 +1,5 @@
-import { BeanBase, Virtual } from 'vona';
+import { Virtual } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
 import eggBornUtils from 'egg-born-utils';
 import { ServiceConsole, ServiceHelper, ServiceTemplate } from '../index.js';

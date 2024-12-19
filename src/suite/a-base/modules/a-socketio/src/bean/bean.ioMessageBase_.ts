@@ -1,4 +1,5 @@
-import { BeanBase, Virtual } from 'vona';
+import { Virtual } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 
 @Virtual()

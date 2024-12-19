@@ -1,5 +1,5 @@
 import { Bean } from 'vona-module-a-bean';
-import { BeanModuleScopeBase, Bean } from 'vona';
+import { BeanModuleScopeBase } from 'vona';
 
 const CACHEMEMORY = Symbol('APP#__CACHEMEMORY');
 
