@@ -28,9 +28,21 @@ export class ServiceSchedule extends BeanBase {
     );
   }
 
-  public async deleteSchedule(job: TypeScheduleJob) {
-    const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
-    await queue.removeJobScheduler(job.name);
+  public async deleteSchedule(scheduleName: keyof IScheduleRecord): Promise<boolean>;
+  public async deleteSchedule(job: TypeScheduleJob): Promise<boolean>;
+  public async deleteSchedule(job: TypeScheduleJob | string): Promise<boolean> {
+    if (typeof job === 'string') {
+      const scheduleName = cast<keyof IScheduleRecord>(job);
+      const scheduleItem = this.bean.onion.schedule.onionsNormal[scheduleName];
+      const scheduleKey = this.getScheduleKey(this.ctx.subdomain, scheduleName);
+      const scheduleOptions = scheduleItem.beanOptions.options!;
+      const queueName = scheduleOptions.queue || 'a-schedule:schedule';
+      const queue = this.$scope.queue.service.queue.getQueue(queueName, this.ctx.subdomain);
+      return await queue.removeJobScheduler(scheduleKey);
+    } else {
+      const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
+      return await queue.removeJobScheduler(job.name);
+    }
   }
 
   public async checkScheduleValid(job: TypeScheduleJob) {
