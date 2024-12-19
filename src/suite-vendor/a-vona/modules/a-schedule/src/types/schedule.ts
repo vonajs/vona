@@ -28,7 +28,7 @@ declare module 'vona' {
     schedule: OmitNever<IScheduleRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     schedule: never;
   }
 }

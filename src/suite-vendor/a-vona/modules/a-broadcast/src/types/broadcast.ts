@@ -35,7 +35,7 @@ declare module 'vona' {
     broadcast: OmitNever<IBroadcastRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     broadcast: never;
   }
 }

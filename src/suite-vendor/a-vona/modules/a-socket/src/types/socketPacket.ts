@@ -23,7 +23,7 @@ declare module 'vona' {
     socketPacket: OmitNever<ISocketPacketRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     socketPacket: never;
   }
 }

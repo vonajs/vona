@@ -1,5 +1,5 @@
 declare module 'vona' {
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     scope: never;
   }
 }

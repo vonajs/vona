@@ -31,7 +31,7 @@ declare module 'vona' {
     guard: OmitNever<IGuardRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     guard: never;
   }
 }

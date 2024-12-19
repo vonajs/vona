@@ -1,10 +1,10 @@
 import { appResource } from '../../core/resource.js';
-import { ISceneCustomRecord } from '../interface/beanOptions.js';
+import { IBeanSceneRecord } from '../interface/beanOptions.js';
 import { Constructable } from '../type/constructable.js';
 import { parseModuleName } from './util.js';
 
 export function createBeanDecorator<T>(
-  scene: keyof ISceneCustomRecord,
+  scene: keyof IBeanSceneRecord,
   options?: T,
   optionsPrimitive?: boolean,
   virtual?: boolean,

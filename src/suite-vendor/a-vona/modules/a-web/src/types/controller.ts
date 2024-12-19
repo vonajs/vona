@@ -38,7 +38,7 @@ declare module 'vona' {
     controller: OmitNever<IControllerRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     controller: never;
   }
 }

@@ -19,7 +19,7 @@ declare module 'vona' {
     aop: OmitNever<IAopRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     aop: never;
   }
 }

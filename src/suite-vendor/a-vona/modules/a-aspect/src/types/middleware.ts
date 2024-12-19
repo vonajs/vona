@@ -31,7 +31,7 @@ declare module 'vona' {
     middleware: OmitNever<IMiddlewareRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     middleware: never;
   }
 }

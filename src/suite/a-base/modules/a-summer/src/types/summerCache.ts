@@ -63,7 +63,7 @@ declare module 'vona' {
     summerCache: OmitNever<ISummerCacheRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     summerCache: never;
   }
 }

@@ -9,7 +9,7 @@ declare module 'vona-module-a-onion' {
 }
 
 declare module 'vona' {
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     service: never;
   }
 }

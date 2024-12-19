@@ -18,7 +18,7 @@ declare module 'vona' {
     entity: OmitNever<IEntityRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     entity: never;
   }
 }

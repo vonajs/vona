@@ -16,7 +16,7 @@ declare module 'vona' {
     meta: OmitNever<IMetaRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     meta: never;
   }
 }

@@ -30,7 +30,7 @@ declare module 'vona' {
     startup: OmitNever<IStartupRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     startup: never;
   }
 }

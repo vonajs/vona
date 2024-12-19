@@ -46,7 +46,7 @@ declare module 'vona' {
     filter: OmitNever<IFilterRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     filter: never;
   }
 }

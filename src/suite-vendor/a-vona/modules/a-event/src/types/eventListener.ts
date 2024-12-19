@@ -26,7 +26,7 @@ declare module 'vona' {
     eventListener: OmitNever<IEventListenerRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     eventListener: never;
   }
 }

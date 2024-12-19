@@ -75,7 +75,7 @@ declare module 'vona' {
     pipe: OmitNever<IPipeRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     pipe: never;
   }
 }

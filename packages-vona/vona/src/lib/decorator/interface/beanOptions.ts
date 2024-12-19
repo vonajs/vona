@@ -2,7 +2,7 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 // import { ContainerScope } from '../index.js';
 
-export interface ISceneCustomRecord {}
+export interface IBeanSceneRecord {}
 
 export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**
@@ -11,7 +11,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
    */
   beanFullName: string;
   module: string;
-  scene: keyof ISceneCustomRecord;
+  scene: keyof IBeanSceneRecord;
   name: string;
   beanClass: Constructable<T>;
   // containerScope?: ContainerScope;

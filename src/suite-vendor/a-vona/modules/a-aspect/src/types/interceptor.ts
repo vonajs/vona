@@ -31,7 +31,7 @@ declare module 'vona' {
     interceptor: OmitNever<IInterceptorRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     interceptor: never;
   }
 }

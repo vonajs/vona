@@ -75,7 +75,7 @@ declare module 'vona' {
     queue: OmitNever<IQueueRecord>;
   }
 
-  export interface ISceneCustomRecord {
+  export interface IBeanSceneRecord {
     queue: never;
   }
 }
