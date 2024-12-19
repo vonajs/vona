@@ -1,7 +1,7 @@
 import { Virtual } from 'vona-module-a-bean';
 import { BeanBase } from 'vona';
-import { TableIdentity } from 'vona-module-a-database';
 import { Knex } from 'knex';
+import { TableIdentity } from '../types/tableIdentity.js';
 
 export interface IFetchDatabasesResultItem {
   name: string;

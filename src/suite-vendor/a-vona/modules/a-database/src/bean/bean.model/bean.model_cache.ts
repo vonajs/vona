@@ -1,5 +1,4 @@
 import { cast, deepExtend } from 'vona';
-import { TableIdentity } from 'vona-module-a-database';
 import { IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
 import { getTargetColumnName } from '../../common/utils.js';
 import {
@@ -8,6 +7,7 @@ import {
   IModelMethodOptions,
   IModelSelectParams,
   IModelUpdateOptions,
+  TableIdentity,
 } from '../../types/index.js';
 import { BeanModel } from '../bean.model_.js';
 

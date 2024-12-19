@@ -1,12 +1,12 @@
 import { BeanTemp } from 'vona-module-a-bean';
 
+import { Knex } from 'knex';
 import {
   BeanDatabaseDialectBase,
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
-  TableIdentity,
-} from 'vona-module-a-database';
-import { Knex } from 'knex';
+} from './bean.databaseDialectBase_.js';
+import { TableIdentity } from '../types/tableIdentity.js';
 
 @BeanTemp({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {

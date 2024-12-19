@@ -1,5 +1,4 @@
-import { TableIdentity } from 'vona-module-a-database';
-import { IModelMethodOptions, IModelUpdateOptions } from '../../types/index.js';
+import { IModelMethodOptions, IModelUpdateOptions, TableIdentity } from '../../types/index.js';
 import { BeanModelCrud } from './bean.model_crud.js';
 
 export class BeanModelCrud2<TRecord extends {}> extends BeanModelCrud<TRecord> {

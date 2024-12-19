@@ -912,7 +912,7 @@ declare module 'vona-module-a-base' {
     get scope(): ScopeModuleABase;
   }
 
-  export interface BeanBase {
+  export interface BeanBase2 {
     /** @internal */
     get scope(): ScopeModuleABase;
   }

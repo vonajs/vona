@@ -1,5 +1,4 @@
 import { cast } from 'vona';
-import { TableIdentity } from 'vona-module-a-database';
 import { BigNumber } from 'bignumber.js';
 import { BeanModelView } from './bean.model_view.js';
 import {
@@ -8,6 +7,7 @@ import {
   IModelMethodOptionsGeneral,
   IModelSelectParams,
   IModelUpdateOptionsGeneral,
+  TableIdentity,
 } from '../../types/index.js';
 import { Knex } from 'knex';
 
