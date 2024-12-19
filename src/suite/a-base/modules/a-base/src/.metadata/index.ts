@@ -972,7 +972,7 @@ import { BeanAtomStage } from '../bean/bean.atomStage.js';
 import { BeanAtomState } from '../bean/bean.atomState.js';
 import { BeanAtomStatic } from '../bean/bean.atomStatic.js';
 import { BeanAuth } from '../bean/bean.auth.js';
-import { BeanBase } from '../bean/bean.base.js';
+import { BeanBase2 } from '../bean/bean.base.js';
 import { BeanBodyCrypto } from '../bean/bean.bodyCrypto.js';
 import { BeanCategory } from '../bean/bean.category.js';
 import { BeanFormAction } from '../bean/bean.formAction.js';
@@ -993,7 +993,7 @@ declare module 'vona' {
     atomState: BeanAtomState;
     atomStatic: BeanAtomStatic;
     auth: BeanAuth;
-    base: BeanBase;
+    base: BeanBase2;
     bodyCrypto: BeanBodyCrypto;
     category: BeanCategory;
     formAction: BeanFormAction;
