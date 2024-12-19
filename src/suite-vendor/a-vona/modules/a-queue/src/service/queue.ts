@@ -136,6 +136,8 @@ export class ServiceQueue extends BeanBase {
     // create queue
     const connectionQueue: Bull.ConnectionOptions = app.bean.redis.get('queue').duplicate();
     const _queueOptions = Object.assign({}, queueOptions, { prefix, connection: connectionQueue });
+    _queue.config = queueConfig;
+    _queue.options = _queueOptions;
     _queue.queue = new Bull.Queue(queueKey, _queueOptions);
 
     // create events
@@ -196,13 +198,17 @@ export class ServiceQueue extends BeanBase {
     }
   }
 
-  _queuePush<DATA, RESULT>(info: IQueueJobContext<DATA>, isAsync: boolean): Promise<RESULT> {
+  async _queuePush<DATA, RESULT>(info: IQueueJobContext<DATA>, isAsync: boolean): Promise<RESULT> {
     // queue config
     const queueConfig = this.bean.onion.queue.getOnionOptions<IDecoratorQueueOptions>(info.queueName);
     // queueConfig.options: queue/worker/job/limiter
     const jobOptionsBase = queueConfig?.options?.job;
     // queue
-    const queue = this._getQueue(info);
+    const queue = this._ensureQueue(info);
+    // setGlobalConcurrency
+    if (!queue.config.concurrency) {
+      await queue.queue.setGlobalConcurrency(1);
+    }
     // job
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
@@ -212,7 +218,7 @@ export class ServiceQueue extends BeanBase {
     // not async
     if (!isAsync) {
       // add job
-      queue.add(jobName, info, jobOptions);
+      queue.queue.add(jobName, info, jobOptions);
       return undefined as any;
     }
     // async
@@ -226,7 +232,7 @@ export class ServiceQueue extends BeanBase {
         },
       };
       // add job
-      return queue.add(jobName, info, jobOptions);
+      return queue.queue.add(jobName, info, jobOptions);
     });
   }
 

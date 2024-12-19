@@ -34,6 +34,8 @@ export interface IQueueWorks {
 }
 
 export interface IQueueQueue {
+  config: IDecoratorQueueOptions;
+  options: Bull.QueueOptions;
   queue: Bull.Queue;
   queueEvents: Bull.QueueEvents;
 }
