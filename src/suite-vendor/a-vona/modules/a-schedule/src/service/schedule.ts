@@ -66,7 +66,11 @@ export class ServiceSchedule extends BeanBase {
     );
     const scheduleKeyConfig = this.getScheduleKey(this.ctx.subdomain, scheduleName);
     const scheduleHashConfig = this.$scope.queue.service.queue.getRepeatKey(scheduleKeyConfig, scheduleConfig!.repeat);
-    if (scheduleHashActive !== scheduleHashConfig) return false; // not delete schedule
+    if (scheduleHashActive !== scheduleHashConfig) {
+      await this.deleteSchedule(job);
+      await this.addSchedule(scheduleName, job.data.options!.subdomain);
+      return false;
+    }
     // ok
     return true;
   }
@@ -79,23 +83,30 @@ export class ServiceSchedule extends BeanBase {
     if (subdomain === undefined) subdomain = this.ctx.subdomain;
     for (const scheduleItem of this.bean.onion.schedule.getOnionsEnabled()) {
       const scheduleName = scheduleItem.name;
-      // push
-      const scheduleKey = this.getScheduleKey(subdomain, scheduleName);
-      const scheduleOptions = scheduleItem.beanOptions.options!;
-      const queueName = scheduleOptions.queue || 'a-schedule:schedule';
-      const queue = this.$scope.queue.service.queue.getQueue(queueName, subdomain);
-      const data = this.$scope.queue.service.queue.prepareJobInfo(
-        queueName,
-        { scheduleName },
-        {
-          subdomain,
-          queueNameSub: scheduleName,
-          jobOptions: {
-            repeat: scheduleOptions.repeat,
-          },
-        },
-      );
-      await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, { data });
+      await this.addSchedule(scheduleName, subdomain);
     }
+  }
+
+  public async addSchedule(scheduleName: keyof IScheduleRecord, subdomain?: string) {
+    if (subdomain === undefined) subdomain = this.ctx.subdomain;
+    const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
+    if (!scheduleItem) return;
+    // push
+    const scheduleKey = this.getScheduleKey(subdomain, scheduleName);
+    const scheduleOptions = scheduleItem.beanOptions.options!;
+    const queueName = scheduleOptions.queue || 'a-schedule:schedule';
+    const queue = this.$scope.queue.service.queue.getQueue(queueName, subdomain);
+    const data = this.$scope.queue.service.queue.prepareJobInfo(
+      queueName,
+      { scheduleName },
+      {
+        subdomain,
+        queueNameSub: scheduleName,
+        jobOptions: {
+          repeat: scheduleOptions.repeat,
+        },
+      },
+    );
+    await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, { name: scheduleKey, data });
   }
 }
