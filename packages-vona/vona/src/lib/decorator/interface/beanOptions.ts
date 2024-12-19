@@ -4,35 +4,8 @@ import { Constructable } from '../index.js';
 
 export interface ISceneCustomRecord {}
 
-export type TypeDecoratorBeanOptionsSceneBase =
-  | 'scope'
-  | 'meta'
-  | keyof ISceneCustomRecord
-  | TypeDecoratorBeanOptionsScene;
-export type TypeDecoratorBeanOptionsScene =
-  | 'bean'
-  | 'version'
-  | 'event'
-  | 'stats'
-  | 'sequence'
-  | 'test'
-  | 'flow.node'
-  | 'flow.edge'
-  | 'flow.behavior'
-  | 'flow.service'
-  | 'auth.provider'
-  | 'cli.create'
-  | 'cli.default'
-  | 'cli.front'
-  | 'cli.git'
-  | 'cli.store'
-  | 'cli.token'
-  | 'cli.tools'
-  | 'io.message'
-  | 'io.channel'
-  | 'captcha.provider'
-  | 'sms.provider'
-  | 'database.dialect';
+export type TypeDecoratorBeanOptionsSceneBase = 'scope' | 'meta' | keyof ISceneCustomRecord;
+
 export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**
    * global: equal to name
@@ -51,16 +24,3 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
-
-export interface IDecoratorBeanOptions {
-  /** global: if omit */
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  // containerScope?: ContainerScope;
-}
-
-// export type IDecoratorBeanOptions<T = unknown> = Omit<
-//   Partial<IDecoratorBeanOptionsBase<T>>,
-//   'beanFullName' | 'module' | 'name' | 'beanClass'
-// > &
-//   Pick<IDecoratorBeanOptionsBase, 'name'>;
