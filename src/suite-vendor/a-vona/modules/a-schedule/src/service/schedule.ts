@@ -8,8 +8,7 @@ export class ServiceSchedule extends BeanBase {
     // ignore on test
     if (this.app.meta.isTest) return;
     // check if valid
-    if (job && !this.__checkJobValid(scheduleName, job)) {
-      await this.__deleteSchedule(job);
+    if (job && !(await this.checkScheduleValid(job))) {
       return;
     }
     // schedule config
@@ -29,29 +28,34 @@ export class ServiceSchedule extends BeanBase {
     );
   }
 
-  private async __deleteSchedule(job: TypeScheduleJob) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.name, job.opts.repeat!);
-    const repeat = await cast(job).queue.repeat;
-    await repeat.removeRepeatableByKey(jobKeyActive);
+  public async deleteSchedule(job: TypeScheduleJob) {
+    const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
+    const result = await queue.removeJobScheduler(job.name);
+    console.log(result);
   }
 
-  private __checkJobValid(scheduleName: keyof IScheduleRecord, job: TypeScheduleJob) {
+  public async checkScheduleValid(job: TypeScheduleJob) {
+    const scheduleName = job.data.data.scheduleName;
     // schedule: maybe not exists
     const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
-    if (!scheduleItem) return false;
+    if (!scheduleItem) {
+      await this.deleteSchedule(job);
+      return false;
+    }
     // check disable
     if (-1 === this.bean.onion.schedule.getOnionsEnabled().findIndex(item => item.name === scheduleName)) {
+      await this.deleteSchedule(job);
       return false;
     }
     // check if changed
     const scheduleConfig = this.app.bean.onion.schedule.getOnionOptions<IDecoratorScheduleOptions>(scheduleName);
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
-      job.data!.options!.jobName!,
+    const scheduleHashActive = this.$scope.queue.service.queue.getRepeatKey(
+      job.name,
       job.data!.options!.jobOptions!.repeat!,
     );
-    const jobNameConfig = this.getScheduleKey(this.ctx.subdomain, scheduleName);
-    const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(jobNameConfig, scheduleConfig!.repeat);
-    if (jobKeyActive !== jobKeyConfig) return false;
+    const scheduleKeyConfig = this.getScheduleKey(this.ctx.subdomain, scheduleName);
+    const scheduleHashConfig = this.$scope.queue.service.queue.getRepeatKey(scheduleKeyConfig, scheduleConfig!.repeat);
+    if (scheduleHashActive !== scheduleHashConfig) return false; // not delete schedule
     // ok
     return true;
   }
@@ -74,6 +78,9 @@ export class ServiceSchedule extends BeanBase {
         { scheduleName },
         {
           subdomain,
+          jobOptions: {
+            repeat: scheduleOptions.repeat,
+          },
         },
       );
       await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, { data });
