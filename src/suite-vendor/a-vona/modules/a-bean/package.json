@@ -3,7 +3,12 @@
   "version": "5.0.0",
   "title": "a-bean",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "onions": {
+      "beanTemp": {
+        "boilerplate": "cli/beanTemp/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
