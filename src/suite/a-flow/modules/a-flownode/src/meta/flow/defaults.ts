@@ -5,7 +5,7 @@ export default {
   startEventTimer: {
     repeat: {
       every: 0,
-      cron: null,
+      pattern: undefined,
     },
     bean: null,
     parameterExpression: null,

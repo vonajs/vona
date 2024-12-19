@@ -18,7 +18,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
   async _addSchedule({ flowDefId, node }: any) {
     const repeat = this._getJobRepeat(node);
     if (!repeat) return;
-    if (!repeat.every && !repeat.cron) return;
+    if (!repeat.every && !repeat.pattern) return;
     // push
     const jobName = this._getJobName(flowDefId, node);
     this.scope.queue.startEventTimer.push(

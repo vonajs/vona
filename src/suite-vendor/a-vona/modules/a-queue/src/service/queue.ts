@@ -260,7 +260,7 @@ export class ServiceQueue extends BeanBase {
   getRepeatKey(jobName: string, repeat: Bull.RepeatOptions) {
     const endDate = repeat.endDate ? new Date(repeat.endDate).getTime() : '';
     const tz = repeat.tz || '';
-    const pattern = repeat.pattern || repeat.cron;
+    const pattern = repeat.pattern;
     const suffix = (pattern ? pattern : String(repeat.every)) || '';
     const jobId = repeat.jobId ? repeat.jobId : '';
     return `${jobName}:${jobId}:${endDate}:${tz}:${suffix}`;
