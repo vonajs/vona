@@ -8,7 +8,7 @@ export type TypeQueueStartEventTimerJobData = {
 
 export type TypeQueueStartEventTimerJobResult = void;
 
-@Queue({ concurrency: true })
+@Queue()
 export class QueueStartEventTimer
   extends BeanQueueBase<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>
   implements IQueueExecute<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>

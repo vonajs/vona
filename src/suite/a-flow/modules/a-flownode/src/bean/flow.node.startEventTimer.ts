@@ -1,9 +1,8 @@
 import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { cast } from 'vona';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
 import { TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult } from './queue.startEventTimer.js';
-import { TypeQueueJob } from 'vona-module-a-queue';
+import { IQueueRecord, TypeQueueJob } from 'vona-module-a-queue';
 
 @BeanTemp({ scene: 'flow.node' })
 export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
@@ -20,20 +19,21 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     if (!repeat) return;
     if (!repeat.every && !repeat.pattern) return;
     // push
-    const jobName = this._getJobName(flowDefId, node);
-    this.scope.queue.startEventTimer.push(
+    const scheduleKey = this._getScheduleKey(flowDefId, node);
+    const queueName = this._getQueueName();
+    const queue = this._getQueue();
+    const data = this.$scope.queue.service.queue.prepareJobInfo(
+      queueName,
+      { flowDefId, node },
       {
-        flowDefId,
-        node,
-      },
-      {
-        jobName,
+        subdomain: this.ctx.subdomain,
+        queueNameSub: scheduleKey,
         jobOptions: {
-          jobId: jobName,
           repeat,
         },
       },
     );
+    await queue.upsertJobScheduler(scheduleKey, repeat, { data });
   }
 
   async _runSchedule(
@@ -44,8 +44,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     // ignore on test
     if (this.ctx.app.meta.isTest) return;
     // check if valid
-    if (job && !(await this._checkJobValid(data, job))) {
-      await this._deleteSchedule(job);
+    if (job && !(await this._checkScheduleValid(data, job))) {
       return;
     }
     // bean/parameterExpression
@@ -68,53 +67,62 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     }
   }
 
-  async _checkJobValid(
+  async _checkScheduleValid(
     data: TypeQueueStartEventTimerJobData,
     job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>,
   ) {
     const { flowDefId, node } = data;
     // flowDef
     const flowDef = await this.app.bean.flowDef.getById({ flowDefId });
-    if (!flowDef) return false;
+    if (!flowDef) {
+      await this._deleteSchedule(job);
+      return false;
+    }
     // atomDisabled
-    if (flowDef.atomDisabled === 1) return false;
+    if (flowDef.atomDisabled === 1) {
+      await this._deleteSchedule(job);
+      return false;
+    }
     // content
     const content = flowDef.content ? JSON.parse(flowDef.content) : null;
-    if (!content) return false;
+    if (!content) {
+      await this._deleteSchedule(job);
+      return false;
+    }
     const nodeConfig = content.process.nodes.find(item => item.id === node.id);
-    if (!nodeConfig) return false;
+    if (!nodeConfig) {
+      await this._deleteSchedule(job);
+      return false;
+    }
     // check if changed
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
-      job.data!.options!.jobName!,
-      job.data!.options!.jobOptions!.repeat!,
-    );
+    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.name, job.data!.options!.jobOptions!.repeat!);
     const jobKeyConfig = this.$scope.queue.service.queue.getRepeatKey(
-      this._getJobName(flowDefId, nodeConfig),
+      this._getScheduleKey(flowDefId, nodeConfig),
       this._getJobRepeat(nodeConfig),
     );
-    if (jobKeyActive !== jobKeyConfig) return false;
+    if (jobKeyActive !== jobKeyConfig) return false; // not delete schedule
     // ok
     return true;
   }
 
   async _deleteSchedule(job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>) {
-    const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(job.name, job.opts.repeat!);
-    const repeat = await cast(job).queue.repeat;
-    await repeat.removeRepeatableByKey(jobKeyActive);
+    const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
+    await queue.removeJobScheduler(job.name);
   }
 
-  // cannot remove job, because no job info
-  async _deleteSchedule2({ flowDefId: _flowDefId, node: _node }: any) {
-    // const jobKeyActive = this.$scope.queue.service.queue.getRepeatKey(
-    //   this._getJobName(flowDefId, node),
-    //   this._getJobRepeat(node),
-    // );
-    // const queue = this.scope.queue.startEventTimer.getQueue();
-    // const repeat = await queue.repeat;
-    // await repeat.removeRepeatableByKey(jobKeyActive);
+  async _deleteSchedule2({ flowDefId, node }: any) {
+    const scheduleKey = this._getScheduleKey(flowDefId, node);
+    const queue = this._getQueue();
+    await queue.removeJobScheduler(scheduleKey);
   }
 
-  _getJobName(flowDefId, node) {
+  _getQueueName() {
+    return 'a-flownode:startEventTimer' as keyof IQueueRecord;
+  }
+  _getQueue() {
+    return this.$scope.queue.service.queue.getQueue(this._getQueueName(), this.ctx.subdomain);
+  }
+  _getScheduleKey(flowDefId, node) {
     return `${flowDefId}.${node.id}`.replace(/:/g, '.');
   }
   _getJobRepeat(node) {
