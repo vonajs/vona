@@ -1,30 +1,18 @@
 /** beans: begin */
-export * from '../bean/bean.ioMessageUniformBase_.js';
-export * from '../bean/bean.message.js';
 export * from '../bean/stats.message.js';
 export * from '../bean/version.manager.js';
-import { BeanIoMessageUniformBase } from '../bean/bean.ioMessageUniformBase_.js';
-import { BeanMessage } from '../bean/bean.message.js';
 import { StatsMessage } from '../bean/stats.message.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    message: BeanMessage;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    ioMessageUniformBase: BeanIoMessageUniformBase;
     'a-message.stats.message': StatsMessage;
     'a-message.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-message' {
-  export interface BeanMessage {
-    /** @internal */
-    get scope(): ScopeModuleAMessage;
-  }
-
   export interface StatsMessage {
     /** @internal */
     get scope(): ScopeModuleAMessage;
@@ -36,6 +24,28 @@ declare module 'vona-module-a-message' {
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.ioMessageUniformBase_.js';
+export * from '../bean/bean.message.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-message' {
+  export interface BeanMessage {
+    /** @internal */
+    get scope(): ScopeModuleAMessage;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanMessage } from '../bean/bean.message.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    message: BeanMessage;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/message.js';
 

@@ -1,30 +1,18 @@
 /** beans: begin */
-export * from '../bean/bean.atomCmsBase_.js';
-export * from '../bean/bean.cms.js';
 export * from '../bean/io.message.hotloadFile.js';
 export * from '../bean/version.manager.js';
-import { BeanAtomCmsBase } from '../bean/bean.atomCmsBase_.js';
-import { BeanCms } from '../bean/bean.cms.js';
 import { IoMessageHotloadFile } from '../bean/io.message.hotloadFile.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    cms: BeanCms;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    atomCmsBase: BeanAtomCmsBase;
     'a-cms.io.message.hotloadFile': IoMessageHotloadFile;
     'a-cms.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-cms' {
-  export interface BeanCms {
-    /** @internal */
-    get scope(): ScopeModuleACms;
-  }
-
   export interface IoMessageHotloadFile {
     /** @internal */
     get scope(): ScopeModuleACms;
@@ -117,6 +105,28 @@ declare module 'vona-module-a-cms' {
   }
 }
 /** atom: end */
+/** bean: begin */
+export * from '../bean/bean.atomCmsBase_.js';
+export * from '../bean/bean.cms.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-cms' {
+  export interface BeanCms {
+    /** @internal */
+    get scope(): ScopeModuleACms;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanCms } from '../bean/bean.cms.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    cms: BeanCms;
+  }
+}
+/** bean: end */
 /** meta: begin */
 export * from '../bean/meta.status.js';
 

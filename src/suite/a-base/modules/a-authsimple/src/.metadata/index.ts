@@ -1,15 +1,11 @@
 /** beans: begin */
 export * from '../bean/auth.provider.simple.js';
-export * from '../bean/bean.authSimple.js';
 export * from '../bean/version.manager.js';
 import { AuthProviderSimple } from '../bean/auth.provider.simple.js';
-import { BeanAuthSimple } from '../bean/bean.authSimple.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    authSimple: BeanAuthSimple;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-authsimple.auth.provider.simple': AuthProviderSimple;
@@ -18,11 +14,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsimple' {
   export interface AuthProviderSimple {
-    /** @internal */
-    get scope(): ScopeModuleAAuthsimple;
-  }
-
-  export interface BeanAuthSimple {
     /** @internal */
     get scope(): ScopeModuleAAuthsimple;
   }
@@ -80,6 +71,27 @@ export interface IModuleModel {
   authSimple: ModelAuthSimple;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.authSimple.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-authsimple' {
+  export interface BeanAuthSimple {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsimple;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanAuthSimple } from '../bean/bean.authSimple.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    authSimple: BeanAuthSimple;
+  }
+}
+/** bean: end */
 /** eventListener: begin */
 export * from '../bean/eventListener.accountMigration.js';
 

@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/bean.testCtx.js';
-import { BeanTestCtx } from '../bean/bean.testCtx.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    testCtx: BeanTestCtx;
-  }
-
-  export interface IBeanRecordGeneral {}
-}
-declare module 'vona-module-vona-test' {
-  export interface BeanTestCtx {
-    /** @internal */
-    get scope(): ScopeModuleVonaTest;
-  }
-}
-/** beans: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.test.js';
 
@@ -61,6 +43,27 @@ declare module 'vona-module-vona-test' {
   }
 }
 /** aop: end */
+/** bean: begin */
+export * from '../bean/bean.testCtx.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-vona-test' {
+  export interface BeanTestCtx {
+    /** @internal */
+    get scope(): ScopeModuleVonaTest;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanTestCtx } from '../bean/bean.testCtx.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    testCtx: BeanTestCtx;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.test.js';
 

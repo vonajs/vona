@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.dict.js';
 export * from '../bean/version.manager.js';
-import { BeanDict } from '../bean/bean.dict.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    dict: BeanDict;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-dict.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-dict' {
-  export interface BeanDict {
-    /** @internal */
-    get scope(): ScopeModuleADict;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleADict;
@@ -106,6 +97,27 @@ declare module 'vona-module-a-dict' {
   }
 }
 /** atom: end */
+/** bean: begin */
+export * from '../bean/bean.dict.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-dict' {
+  export interface BeanDict {
+    /** @internal */
+    get scope(): ScopeModuleADict;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanDict } from '../bean/bean.dict.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    dict: BeanDict;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/dict.js';
 

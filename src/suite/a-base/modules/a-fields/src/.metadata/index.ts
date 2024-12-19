@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.fields.js';
 export * from '../bean/version.manager.js';
-import { BeanFields } from '../bean/bean.fields.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    fields: BeanFields;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-fields.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-fields' {
-  export interface BeanFields {
-    /** @internal */
-    get scope(): ScopeModuleAFields;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAFields;
@@ -56,6 +47,27 @@ export interface IModuleSummerCache {
   fieldsRightOfUser: SummerCacheFieldsRightOfUser;
 }
 /** summerCache: end */
+/** bean: begin */
+export * from '../bean/bean.fields.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-fields' {
+  export interface BeanFields {
+    /** @internal */
+    get scope(): ScopeModuleAFields;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanFields } from '../bean/bean.fields.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    fields: BeanFields;
+  }
+}
+/** bean: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

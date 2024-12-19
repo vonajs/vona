@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/bean.instance.js';
-import { BeanInstance } from '../bean/bean.instance.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    instance: BeanInstance;
-  }
-
-  export interface IBeanRecordGeneral {}
-}
-declare module 'vona-module-a-instance' {
-  export interface BeanInstance {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-}
-/** beans: end */
 /** entity: begin */
 export * from '../entity/instance.js';
 
@@ -63,6 +45,27 @@ export interface IModuleModel {
   instance: ModelInstance;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.instance.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-instance' {
+  export interface BeanInstance {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanInstance } from '../bean/bean.instance.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    instance: BeanInstance;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.reload.js';
 export * from '../bean/broadcast.resetCache.js';

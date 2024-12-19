@@ -1,15 +1,11 @@
 /** beans: begin */
-export * from '../bean/bean.sequence.js';
 export * from '../bean/sequence.simple.js';
 export * from '../bean/version.manager.js';
-import { BeanSequence } from '../bean/bean.sequence.js';
 import { SequenceSimple } from '../bean/sequence.simple.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    sequence: BeanSequence;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-sequence.sequence.simple': SequenceSimple;
@@ -17,11 +13,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-sequence' {
-  export interface BeanSequence {
-    /** @internal */
-    get scope(): ScopeModuleASequence;
-  }
-
   export interface SequenceSimple {
     /** @internal */
     get scope(): ScopeModuleASequence;
@@ -58,6 +49,27 @@ declare module 'vona-module-a-sequence' {
   }
 }
 /** entity: end */
+/** bean: begin */
+export * from '../bean/bean.sequence.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-sequence' {
+  export interface BeanSequence {
+    /** @internal */
+    get scope(): ScopeModuleASequence;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanSequence } from '../bean/bean.sequence.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    sequence: BeanSequence;
+  }
+}
+/** bean: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 

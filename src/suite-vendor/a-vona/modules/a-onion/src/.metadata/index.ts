@@ -1,21 +1,24 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.onion.js';
-import { BeanOnion } from '../bean/bean.onion.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    onion: BeanOnion;
-  }
 
-  export interface IBeanRecordGeneral {}
-}
+import 'vona';
+declare module 'vona' {}
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
     /** @internal */
     get scope(): ScopeModuleAOnion;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanOnion } from '../bean/bean.onion.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    onion: BeanOnion;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/onion_.js';
 

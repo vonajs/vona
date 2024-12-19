@@ -1,15 +1,11 @@
 /** beans: begin */
 export * from '../bean/auth.provider.open.js';
-export * from '../bean/bean.authOpen.js';
 export * from '../bean/version.manager.js';
 import { AuthProviderOpen } from '../bean/auth.provider.open.js';
-import { BeanAuthOpen } from '../bean/bean.authOpen.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    authOpen: BeanAuthOpen;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-authopen.auth.provider.open': AuthProviderOpen;
@@ -18,11 +14,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authopen' {
   export interface AuthProviderOpen {
-    /** @internal */
-    get scope(): ScopeModuleAAuthopen;
-  }
-
-  export interface BeanAuthOpen {
     /** @internal */
     get scope(): ScopeModuleAAuthopen;
   }
@@ -96,6 +87,27 @@ declare module 'vona-module-a-authopen' {
   }
 }
 /** atom: end */
+/** bean: begin */
+export * from '../bean/bean.authOpen.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-authopen' {
+  export interface BeanAuthOpen {
+    /** @internal */
+    get scope(): ScopeModuleAAuthopen;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanAuthOpen } from '../bean/bean.authOpen.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    authOpen: BeanAuthOpen;
+  }
+}
+/** bean: end */
 /** eventListener: begin */
 export * from '../bean/eventListener.accountMigration.js';
 

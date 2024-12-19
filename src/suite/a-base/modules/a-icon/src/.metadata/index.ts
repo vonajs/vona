@@ -1,30 +1,42 @@
 /** beans: begin */
-export * from '../bean/bean.icon.js';
 export * from '../bean/version.manager.js';
-import { BeanIcon } from '../bean/bean.icon.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    icon: BeanIcon;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-icon.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-icon' {
-  export interface BeanIcon {
-    /** @internal */
-    get scope(): ScopeModuleAIcon;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAIcon;
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.icon.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-icon' {
+  export interface BeanIcon {
+    /** @internal */
+    get scope(): ScopeModuleAIcon;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanIcon } from '../bean/bean.icon.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    icon: BeanIcon;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/icon.js';
 

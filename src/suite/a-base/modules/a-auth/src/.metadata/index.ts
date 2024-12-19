@@ -1,35 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.authProvider.js';
-export * from '../bean/bean.authProviderBase_.js';
-export * from '../bean/bean.authProviderCache.js';
 export * from '../bean/version.manager.js';
-import { BeanAuthProvider } from '../bean/bean.authProvider.js';
-import { BeanAuthProviderBase } from '../bean/bean.authProviderBase_.js';
-import { BeanAuthProviderCache } from '../bean/bean.authProviderCache.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    authProvider: BeanAuthProvider;
-    authProviderCache: BeanAuthProviderCache;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    authProviderBase: BeanAuthProviderBase;
     'a-auth.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-auth' {
-  export interface BeanAuthProvider {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-
-  export interface BeanAuthProviderCache {
-    /** @internal */
-    get scope(): ScopeModuleAAuth;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAAuth;
@@ -101,6 +81,36 @@ export interface IModuleModel {
   authProvider: ModelAuthProvider;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.authProvider.js';
+export * from '../bean/bean.authProviderBase_.js';
+export * from '../bean/bean.authProviderCache.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-auth' {
+  export interface BeanAuthProvider {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+
+  export interface BeanAuthProviderCache {
+    /** @internal */
+    get scope(): ScopeModuleAAuth;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanAuthProvider } from '../bean/bean.authProvider.js';
+import { BeanAuthProviderCache } from '../bean/bean.authProviderCache.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    authProvider: BeanAuthProvider;
+    authProviderCache: BeanAuthProviderCache;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.authProviderChanged.js';
 

@@ -1,30 +1,42 @@
 /** beans: begin */
-export * from '../bean/bean.markdown.js';
 export * from '../bean/version.manager.js';
-import { BeanMarkdown } from '../bean/bean.markdown.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    markdown: BeanMarkdown;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-markdown.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-markdown' {
-  export interface BeanMarkdown {
-    /** @internal */
-    get scope(): ScopeModuleAMarkdown;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAMarkdown;
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.markdown.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-markdown' {
+  export interface BeanMarkdown {
+    /** @internal */
+    get scope(): ScopeModuleAMarkdown;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanMarkdown } from '../bean/bean.markdown.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    markdown: BeanMarkdown;
+  }
+}
+/** bean: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

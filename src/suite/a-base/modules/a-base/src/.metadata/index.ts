@@ -1,48 +1,10 @@
 /** beans: begin */
-export * from '../bean/bean.atom.js';
-export * from '../bean/bean.atomAction.js';
-export * from '../bean/bean.atomBase_.js';
-export * from '../bean/bean.atomClass.js';
-export * from '../bean/bean.atomRightAux.js';
-export * from '../bean/bean.atomStage.js';
-export * from '../bean/bean.atomState.js';
-export * from '../bean/bean.atomStatic.js';
-export * from '../bean/bean.auth.js';
-export * from '../bean/bean.base.js';
-export * from '../bean/bean.bodyCrypto.js';
-export * from '../bean/bean.category.js';
-export * from '../bean/bean.formAction.js';
-export * from '../bean/bean.resource.js';
-export * from '../bean/bean.role.js';
-export * from '../bean/bean.stash.js';
-export * from '../bean/bean.tag.js';
-export * from '../bean/bean.user.js';
-export * from '../bean/bean.util.js';
 export * from '../bean/stats.draftsCommon.js';
 export * from '../bean/stats.draftsFlowing.js';
 export * from '../bean/stats.labels.js';
 export * from '../bean/stats.stars.js';
 export * from '../bean/stats.starsLabels.js';
 export * from '../bean/version.manager.js';
-import { BeanAtom } from '../bean/bean.atom.js';
-import { BeanAtomAction } from '../bean/bean.atomAction.js';
-import { BeanAtomBase } from '../bean/bean.atomBase_.js';
-import { BeanAtomClass } from '../bean/bean.atomClass.js';
-import { BeanAtomRightAux } from '../bean/bean.atomRightAux.js';
-import { BeanAtomStage } from '../bean/bean.atomStage.js';
-import { BeanAtomState } from '../bean/bean.atomState.js';
-import { BeanAtomStatic } from '../bean/bean.atomStatic.js';
-import { BeanAuth } from '../bean/bean.auth.js';
-import { BeanBase2 } from '../bean/bean.base.js';
-import { BeanBodyCrypto } from '../bean/bean.bodyCrypto.js';
-import { BeanCategory } from '../bean/bean.category.js';
-import { BeanFormAction } from '../bean/bean.formAction.js';
-import { BeanResource } from '../bean/bean.resource.js';
-import { BeanRole } from '../bean/bean.role.js';
-import { BeanStash } from '../bean/bean.stash.js';
-import { BeanTag } from '../bean/bean.tag.js';
-import { BeanUser } from '../bean/bean.user.js';
-import { BeanUtil } from '../bean/bean.util.js';
 import { StatsDraftsCommon } from '../bean/stats.draftsCommon.js';
 import { StatsDraftsFlowing } from '../bean/stats.draftsFlowing.js';
 import { StatsLabels } from '../bean/stats.labels.js';
@@ -51,29 +13,9 @@ import { StatsStarsLabels } from '../bean/stats.starsLabels.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    atom: BeanAtom;
-    atomAction: BeanAtomAction;
-    atomClass: BeanAtomClass;
-    atomRightAux: BeanAtomRightAux;
-    atomStage: BeanAtomStage;
-    atomState: BeanAtomState;
-    atomStatic: BeanAtomStatic;
-    auth: BeanAuth;
-    base: BeanBase2;
-    bodyCrypto: BeanBodyCrypto;
-    category: BeanCategory;
-    formAction: BeanFormAction;
-    resource: BeanResource;
-    role: BeanRole;
-    stash: BeanStash;
-    tag: BeanTag;
-    user: BeanUser;
-    util: BeanUtil;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    atomBase: BeanAtomBase;
     'a-base.stats.draftsCommon': StatsDraftsCommon;
     'a-base.stats.draftsFlowing': StatsDraftsFlowing;
     'a-base.stats.labels': StatsLabels;
@@ -83,96 +25,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-base' {
-  export interface BeanAtom {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomAction {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomClass {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomRightAux {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomStage {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomState {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAtomStatic {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanAuth {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanBase2 {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanBodyCrypto {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanCategory {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanFormAction {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanResource {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanRole {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanStash {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanTag {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanUser {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
-  export interface BeanUtil {
-    /** @internal */
-    get scope(): ScopeModuleABase;
-  }
-
   export interface StatsDraftsCommon {
     /** @internal */
     get scope(): ScopeModuleABase;
@@ -996,6 +848,164 @@ declare module 'vona-module-a-base' {
   }
 }
 /** aop: end */
+/** bean: begin */
+export * from '../bean/bean.atom.js';
+export * from '../bean/bean.atomAction.js';
+export * from '../bean/bean.atomBase_.js';
+export * from '../bean/bean.atomClass.js';
+export * from '../bean/bean.atomRightAux.js';
+export * from '../bean/bean.atomStage.js';
+export * from '../bean/bean.atomState.js';
+export * from '../bean/bean.atomStatic.js';
+export * from '../bean/bean.auth.js';
+export * from '../bean/bean.base.js';
+export * from '../bean/bean.bodyCrypto.js';
+export * from '../bean/bean.category.js';
+export * from '../bean/bean.formAction.js';
+export * from '../bean/bean.resource.js';
+export * from '../bean/bean.role.js';
+export * from '../bean/bean.stash.js';
+export * from '../bean/bean.tag.js';
+export * from '../bean/bean.user.js';
+export * from '../bean/bean.util.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-base' {
+  export interface BeanAtom {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomAction {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomClass {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomRightAux {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomStage {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomState {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAtomStatic {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanAuth {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanBase {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanBodyCrypto {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanCategory {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanFormAction {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanResource {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanRole {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanStash {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanTag {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanUser {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+
+  export interface BeanUtil {
+    /** @internal */
+    get scope(): ScopeModuleABase;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanAtom } from '../bean/bean.atom.js';
+import { BeanAtomAction } from '../bean/bean.atomAction.js';
+import { BeanAtomClass } from '../bean/bean.atomClass.js';
+import { BeanAtomRightAux } from '../bean/bean.atomRightAux.js';
+import { BeanAtomStage } from '../bean/bean.atomStage.js';
+import { BeanAtomState } from '../bean/bean.atomState.js';
+import { BeanAtomStatic } from '../bean/bean.atomStatic.js';
+import { BeanAuth } from '../bean/bean.auth.js';
+import { BeanBase } from '../bean/bean.base.js';
+import { BeanBodyCrypto } from '../bean/bean.bodyCrypto.js';
+import { BeanCategory } from '../bean/bean.category.js';
+import { BeanFormAction } from '../bean/bean.formAction.js';
+import { BeanResource } from '../bean/bean.resource.js';
+import { BeanRole } from '../bean/bean.role.js';
+import { BeanStash } from '../bean/bean.stash.js';
+import { BeanTag } from '../bean/bean.tag.js';
+import { BeanUser } from '../bean/bean.user.js';
+import { BeanUtil } from '../bean/bean.util.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    atom: BeanAtom;
+    atomAction: BeanAtomAction;
+    atomClass: BeanAtomClass;
+    atomRightAux: BeanAtomRightAux;
+    atomStage: BeanAtomStage;
+    atomState: BeanAtomState;
+    atomStatic: BeanAtomStatic;
+    auth: BeanAuth;
+    base: BeanBase;
+    bodyCrypto: BeanBodyCrypto;
+    category: BeanCategory;
+    formAction: BeanFormAction;
+    resource: BeanResource;
+    role: BeanRole;
+    stash: BeanStash;
+    tag: BeanTag;
+    user: BeanUser;
+    util: BeanUtil;
+  }
+}
+/** bean: end */
 /** event: begin */
 export * from '../bean/event.accountMigration.js';
 export * from '../bean/event.loginInfo.js';

@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.share.js';
 export * from '../bean/version.manager.js';
-import { BeanShare } from '../bean/bean.share.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    share: BeanShare;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-share.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-share' {
-  export interface BeanShare {
-    /** @internal */
-    get scope(): ScopeModuleAShare;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAShare;
@@ -108,6 +99,27 @@ export interface IModuleModel {
   shareRecordUV: ModelShareRecordUV;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.share.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-share' {
+  export interface BeanShare {
+    /** @internal */
+    get scope(): ScopeModuleAShare;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanShare } from '../bean/bean.share.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    share: BeanShare;
+  }
+}
+/** bean: end */
 /** event: begin */
 export * from '../bean/event.shareRecordPV.js';
 export * from '../bean/event.shareRecordUV.js';

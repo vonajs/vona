@@ -1,27 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.io.js';
-export * from '../bean/bean.ioMessageBase_.js';
 export * from '../bean/version.manager.js';
-import { BeanIo } from '../bean/bean.io.js';
-import { BeanIoMessageBase } from '../bean/bean.ioMessageBase_.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    io: BeanIo;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    ioMessageBase: BeanIoMessageBase;
     'a-socketio.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-socketio' {
-  export interface BeanIo {
-    /** @internal */
-    get scope(): ScopeModuleASocketio;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleASocketio;
@@ -111,6 +99,28 @@ export interface IModuleModel {
   messageSync: ModelMessageSync;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.io.js';
+export * from '../bean/bean.ioMessageBase_.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-socketio' {
+  export interface BeanIo {
+    /** @internal */
+    get scope(): ScopeModuleASocketio;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanIo } from '../bean/bean.io.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    io: BeanIo;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.socketEmit.js';
 

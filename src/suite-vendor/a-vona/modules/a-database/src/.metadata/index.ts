@@ -1,39 +1,21 @@
 /** beans: begin */
-export * from '../bean/bean.database.js';
-export * from '../bean/bean.databaseDialectBase_.js';
-export * from '../bean/bean.modelBase_.js';
-export * from '../bean/bean.model_.js';
 export * from '../bean/database.dialect.mysql.js';
 export * from '../bean/database.dialect.mysql2.js';
 export * from '../bean/database.dialect.pg.js';
-import { BeanDatabase } from '../bean/bean.database.js';
-import { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase_.js';
-import { BeanModelBase } from '../bean/bean.modelBase_.js';
-import { BeanModel } from '../bean/bean.model_.js';
 import { DatabaseDialectMysql } from '../bean/database.dialect.mysql.js';
 import { DatabaseDialectMysql2 } from '../bean/database.dialect.mysql2.js';
 import { DatabaseDialectPg } from '../bean/database.dialect.pg.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    database: BeanDatabase;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    databaseDialectBase: BeanDatabaseDialectBase;
-    modelBase: BeanModelBase;
-    model: BeanModel;
     'a-database.database.dialect.mysql': DatabaseDialectMysql;
     'a-database.database.dialect.mysql2': DatabaseDialectMysql2;
     'a-database.database.dialect.pg': DatabaseDialectPg;
   }
 }
 declare module 'vona-module-a-database' {
-  export interface BeanDatabase {
-    /** @internal */
-    get scope(): ScopeModuleADatabase;
-  }
-
   export interface DatabaseDialectMysql {
     /** @internal */
     get scope(): ScopeModuleADatabase;
@@ -66,6 +48,30 @@ declare module 'vona-module-a-database' {
   }
 }
 /** middleware: end */
+/** bean: begin */
+export * from '../bean/bean.database.js';
+export * from '../bean/bean.databaseDialectBase_.js';
+export * from '../bean/bean.modelBase_.js';
+export * from '../bean/bean.model_.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-database' {
+  export interface BeanDatabase {
+    /** @internal */
+    get scope(): ScopeModuleADatabase;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanDatabase } from '../bean/bean.database.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    database: BeanDatabase;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/databaseClient.js';
 export * from '../service/dbMeta.js';

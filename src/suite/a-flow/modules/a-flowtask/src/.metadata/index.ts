@@ -1,5 +1,4 @@
 /** beans: begin */
-export * from '../bean/bean.flowTask.js';
 export * from '../bean/flow.node.activityUserTask.js';
 export * from '../bean/flow.node.endEventAtom.js';
 export * from '../bean/flow.node.startEventAtom.js';
@@ -7,7 +6,6 @@ export * from '../bean/io.message.workflow.js';
 export * from '../bean/stats.taskClaimings.js';
 export * from '../bean/stats.taskHandlings.js';
 export * from '../bean/version.manager.js';
-import { BeanFlowTask } from '../bean/bean.flowTask.js';
 import { FlowNodeActivityUserTask } from '../bean/flow.node.activityUserTask.js';
 import { FlowNodeEndEventAtom } from '../bean/flow.node.endEventAtom.js';
 import { FlowNodeStartEventAtom } from '../bean/flow.node.startEventAtom.js';
@@ -17,9 +15,7 @@ import { StatsTaskHandlings } from '../bean/stats.taskHandlings.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    flowTask: BeanFlowTask;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-flowtask.flow.node.activityUserTask': FlowNodeActivityUserTask;
@@ -32,11 +28,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-flowtask' {
-  export interface BeanFlowTask {
-    /** @internal */
-    get scope(): ScopeModuleAFlowtask;
-  }
-
   export interface FlowNodeActivityUserTask {
     /** @internal */
     get scope(): ScopeModuleAFlowtask;
@@ -160,6 +151,27 @@ export interface IModuleModel {
   flowTaskHistory: ModelFlowTaskHistory;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.flowTask.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-flowtask' {
+  export interface BeanFlowTask {
+    /** @internal */
+    get scope(): ScopeModuleAFlowtask;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanFlowTask } from '../bean/bean.flowTask.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    flowTask: BeanFlowTask;
+  }
+}
+/** bean: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 

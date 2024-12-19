@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/bean.captcha.js';
-import { BeanCaptcha } from '../bean/bean.captcha.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    captcha: BeanCaptcha;
-  }
-
-  export interface IBeanRecordGeneral {}
-}
-declare module 'vona-module-a-captcha' {
-  export interface BeanCaptcha {
-    /** @internal */
-    get scope(): ScopeModuleACaptcha;
-  }
-}
-/** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.captchaVerify.js';
 
@@ -32,6 +14,27 @@ declare module 'vona-module-a-captcha' {
   }
 }
 /** middleware: end */
+/** bean: begin */
+export * from '../bean/bean.captcha.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-captcha' {
+  export interface BeanCaptcha {
+    /** @internal */
+    get scope(): ScopeModuleACaptcha;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanCaptcha } from '../bean/bean.captcha.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    captcha: BeanCaptcha;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/captcha.js';
 

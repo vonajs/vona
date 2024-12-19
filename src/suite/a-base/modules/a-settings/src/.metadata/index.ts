@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.settings.js';
 export * from '../bean/version.manager.js';
-import { BeanSettings } from '../bean/bean.settings.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    settings: BeanSettings;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-settings.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-settings' {
-  export interface BeanSettings {
-    /** @internal */
-    get scope(): ScopeModuleASettings;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleASettings;
@@ -90,6 +81,27 @@ export interface IModuleModel {
   settingsRef: ModelSettingsRef;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.settings.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-settings' {
+  export interface BeanSettings {
+    /** @internal */
+    get scope(): ScopeModuleASettings;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanSettings } from '../bean/bean.settings.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    settings: BeanSettings;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/settings.js';
 

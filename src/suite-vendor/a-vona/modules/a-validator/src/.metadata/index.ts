@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/bean.validator.js';
-import { BeanValidator } from '../bean/bean.validator.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    validator: BeanValidator;
-  }
-
-  export interface IBeanRecordGeneral {}
-}
-declare module 'vona-module-a-validator' {
-  export interface BeanValidator {
-    /** @internal */
-    get scope(): ScopeModuleAValidator;
-  }
-}
-/** beans: end */
 /** pipe: begin */
 export * from '../bean/pipe.valid.js';
 import { IPipeOptionsValid } from '../bean/pipe.valid.js';
@@ -32,6 +14,27 @@ declare module 'vona-module-a-validator' {
   }
 }
 /** pipe: end */
+/** bean: begin */
+export * from '../bean/bean.validator.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-validator' {
+  export interface BeanValidator {
+    /** @internal */
+    get scope(): ScopeModuleAValidator;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanValidator } from '../bean/bean.validator.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    validator: BeanValidator;
+  }
+}
+/** bean: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

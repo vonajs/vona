@@ -1,25 +1,25 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.summer.js';
 export * from '../bean/bean.summerCacheBase_.js';
-import { BeanSummer } from '../bean/bean.summer.js';
-import { BeanSummerCacheBase } from '../bean/bean.summerCacheBase_.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    summer: BeanSummer;
-  }
 
-  export interface IBeanRecordGeneral {
-    summerCacheBase: BeanSummerCacheBase;
-  }
-}
+import 'vona';
+declare module 'vona' {}
 declare module 'vona-module-a-summer' {
   export interface BeanSummer {
     /** @internal */
     get scope(): ScopeModuleASummer;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanSummer } from '../bean/bean.summer.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    summer: BeanSummer;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.memClear.js';
 export * from '../bean/broadcast.memDel.js';

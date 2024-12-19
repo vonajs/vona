@@ -1,19 +1,15 @@
 /** beans: begin */
 export * from '../bean/auth.provider.sms.js';
-export * from '../bean/bean.smsProviderCache.js';
 export * from '../bean/captcha.provider.captcha.js';
 export * from '../bean/sms.provider.aliyun.js';
 export * from '../bean/sms.provider.test.js';
 import { AuthProviderSms } from '../bean/auth.provider.sms.js';
-import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
 import { CaptchaProviderCaptcha } from '../bean/captcha.provider.captcha.js';
 import { SmsProviderAliyun } from '../bean/sms.provider.aliyun.js';
 import { SmsProviderTest } from '../bean/sms.provider.test.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    smsProviderCache: BeanSmsProviderCache;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-authsms.auth.provider.sms': AuthProviderSms;
@@ -24,11 +20,6 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-authsms' {
   export interface AuthProviderSms {
-    /** @internal */
-    get scope(): ScopeModuleAAuthsms;
-  }
-
-  export interface BeanSmsProviderCache {
     /** @internal */
     get scope(): ScopeModuleAAuthsms;
   }
@@ -49,6 +40,27 @@ declare module 'vona-module-a-authsms' {
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.smsProviderCache.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-authsms' {
+  export interface BeanSmsProviderCache {
+    /** @internal */
+    get scope(): ScopeModuleAAuthsms;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanSmsProviderCache } from '../bean/bean.smsProviderCache.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    smsProviderCache: BeanSmsProviderCache;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.smsProviderChanged.js';
 

@@ -1,17 +1,13 @@
 /** beans: begin */
-export * from '../bean/bean.stats.js';
 export * from '../bean/io.message.stats.js';
 export * from '../bean/stats.deps.js';
 export * from '../bean/version.manager.js';
-import { BeanStats } from '../bean/bean.stats.js';
 import { IoMessageStats } from '../bean/io.message.stats.js';
 import { StatsDeps } from '../bean/stats.deps.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    stats: BeanStats;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-stats.io.message.stats': IoMessageStats;
@@ -20,11 +16,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-stats' {
-  export interface BeanStats {
-    /** @internal */
-    get scope(): ScopeModuleAStats;
-  }
-
   export interface IoMessageStats {
     /** @internal */
     get scope(): ScopeModuleAStats;
@@ -88,6 +79,27 @@ export interface IModuleModel {
   stats: ModelStats;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.stats.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-stats' {
+  export interface BeanStats {
+    /** @internal */
+    get scope(): ScopeModuleAStats;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanStats } from '../bean/bean.stats.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    stats: BeanStats;
+  }
+}
+/** bean: end */
 /** queue: begin */
 export * from '../bean/queue.stats.js';
 

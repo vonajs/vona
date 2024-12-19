@@ -1,48 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.cache.js';
-export * from '../bean/bean.cacheDb.js';
-export * from '../bean/bean.cacheMem.js';
-export * from '../bean/bean.cacheRedis.js';
 export * from '../bean/version.manager.js';
-import { BeanCache } from '../bean/bean.cache.js';
-import { BeanCacheDb } from '../bean/bean.cacheDb.js';
-import { BeanCacheMem } from '../bean/bean.cacheMem.js';
-import { BeanCacheRedis } from '../bean/bean.cacheRedis.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    cache: BeanCache;
-    cacheDb: BeanCacheDb;
-    cacheMem: BeanCacheMem;
-    cacheRedis: BeanCacheRedis;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-cache.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-cache' {
-  export interface BeanCache {
-    /** @internal */
-    get scope(): ScopeModuleACache;
-  }
-
-  export interface BeanCacheDb {
-    /** @internal */
-    get scope(): ScopeModuleACache;
-  }
-
-  export interface BeanCacheMem {
-    /** @internal */
-    get scope(): ScopeModuleACache;
-  }
-
-  export interface BeanCacheRedis {
-    /** @internal */
-    get scope(): ScopeModuleACache;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleACache;
@@ -74,6 +41,51 @@ declare module 'vona-module-a-cache' {
   }
 }
 /** entity: end */
+/** bean: begin */
+export * from '../bean/bean.cache.js';
+export * from '../bean/bean.cacheDb.js';
+export * from '../bean/bean.cacheMem.js';
+export * from '../bean/bean.cacheRedis.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-cache' {
+  export interface BeanCache {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BeanCacheDb {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BeanCacheMem {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+
+  export interface BeanCacheRedis {
+    /** @internal */
+    get scope(): ScopeModuleACache;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanCache } from '../bean/bean.cache.js';
+import { BeanCacheDb } from '../bean/bean.cacheDb.js';
+import { BeanCacheMem } from '../bean/bean.cacheMem.js';
+import { BeanCacheRedis } from '../bean/bean.cacheRedis.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    cache: BeanCache;
+    cacheDb: BeanCacheDb;
+    cacheMem: BeanCacheMem;
+    cacheRedis: BeanCacheRedis;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.memClear.js';
 export * from '../bean/broadcast.memRemove.js';

@@ -1,30 +1,42 @@
 /** beans: begin */
-export * from '../bean/bean.progress.js';
 export * from '../bean/version.manager.js';
-import { BeanProgress } from '../bean/bean.progress.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    progress: BeanProgress;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-progress.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-progress' {
-  export interface BeanProgress {
-    /** @internal */
-    get scope(): ScopeModuleAProgress;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAProgress;
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.progress.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-progress' {
+  export interface BeanProgress {
+    /** @internal */
+    get scope(): ScopeModuleAProgress;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanProgress } from '../bean/bean.progress.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    progress: BeanProgress;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/progress.js';
 

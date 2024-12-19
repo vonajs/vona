@@ -1,30 +1,42 @@
 /** beans: begin */
-export * from '../bean/bean.pinyin.js';
 export * from '../bean/version.manager.js';
-import { BeanPinyin } from '../bean/bean.pinyin.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    pinyin: BeanPinyin;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-pinyin.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-pinyin' {
-  export interface BeanPinyin {
-    /** @internal */
-    get scope(): ScopeModuleAPinyin;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAPinyin;
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.pinyin.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-pinyin' {
+  export interface BeanPinyin {
+    /** @internal */
+    get scope(): ScopeModuleAPinyin;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanPinyin } from '../bean/bean.pinyin.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    pinyin: BeanPinyin;
+  }
+}
+/** bean: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

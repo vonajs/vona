@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.userOnline.js';
 export * from '../bean/version.manager.js';
-import { BeanUserOnline } from '../bean/bean.userOnline.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    userOnline: BeanUserOnline;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-useronline.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-useronline' {
-  export interface BeanUserOnline {
-    /** @internal */
-    get scope(): ScopeModuleAUseronline;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAUseronline;
@@ -113,6 +104,27 @@ declare module 'vona-module-a-useronline' {
   }
 }
 /** atom: end */
+/** bean: begin */
+export * from '../bean/bean.userOnline.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-useronline' {
+  export interface BeanUserOnline {
+    /** @internal */
+    get scope(): ScopeModuleAUseronline;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanUserOnline } from '../bean/bean.userOnline.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    userOnline: BeanUserOnline;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/userOnline.js';
 

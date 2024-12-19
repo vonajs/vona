@@ -1,20 +1,13 @@
 /** beans: begin */
-export * from '../bean/bean.mail.js';
-export * from '../bean/bean.mailSceneCache.js';
 export * from '../bean/io.channel.mail.js';
 export * from '../bean/io.message.mail.js';
 export * from '../bean/version.manager.js';
-import { BeanMail } from '../bean/bean.mail.js';
-import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
 import { IoChannelMail } from '../bean/io.channel.mail.js';
 import { IoMessageMail } from '../bean/io.message.mail.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    mail: BeanMail;
-    mailSceneCache: BeanMailSceneCache;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-mail.io.channel.mail': IoChannelMail;
@@ -23,16 +16,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-mail' {
-  export interface BeanMail {
-    /** @internal */
-    get scope(): ScopeModuleAMail;
-  }
-
-  export interface BeanMailSceneCache {
-    /** @internal */
-    get scope(): ScopeModuleAMail;
-  }
-
   export interface IoChannelMail {
     /** @internal */
     get scope(): ScopeModuleAMail;
@@ -96,6 +79,35 @@ export interface IModuleModel {
   mail: ModelMail;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.mail.js';
+export * from '../bean/bean.mailSceneCache.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-mail' {
+  export interface BeanMail {
+    /** @internal */
+    get scope(): ScopeModuleAMail;
+  }
+
+  export interface BeanMailSceneCache {
+    /** @internal */
+    get scope(): ScopeModuleAMail;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanMail } from '../bean/bean.mail.js';
+import { BeanMailSceneCache } from '../bean/bean.mailSceneCache.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    mail: BeanMail;
+    mailSceneCache: BeanMailSceneCache;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.mailSceneChanged.js';
 

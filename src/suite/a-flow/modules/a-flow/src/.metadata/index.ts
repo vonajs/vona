@@ -1,20 +1,13 @@
 /** beans: begin */
-export * from '../bean/bean.flow.js';
-export * from '../bean/bean.flowDef.js';
 export * from '../bean/flow.behavior.base.js';
 export * from '../bean/stats.flowInitiateds.js';
 export * from '../bean/version.manager.js';
-import { BeanFlow } from '../bean/bean.flow.js';
-import { BeanFlowDef } from '../bean/bean.flowDef.js';
 import { FlowBehaviorBase } from '../bean/flow.behavior.base.js';
 import { StatsFlowInitiateds } from '../bean/stats.flowInitiateds.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    flow: BeanFlow;
-    flowDef: BeanFlowDef;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-flow.flow.behavior.base': FlowBehaviorBase;
@@ -23,16 +16,6 @@ declare module 'vona' {
   }
 }
 declare module 'vona-module-a-flow' {
-  export interface BeanFlow {
-    /** @internal */
-    get scope(): ScopeModuleAFlow;
-  }
-
-  export interface BeanFlowDef {
-    /** @internal */
-    get scope(): ScopeModuleAFlow;
-  }
-
   export interface FlowBehaviorBase {
     /** @internal */
     get scope(): ScopeModuleAFlow;
@@ -220,6 +203,35 @@ declare module 'vona-module-a-flow' {
   }
 }
 /** atom: end */
+/** bean: begin */
+export * from '../bean/bean.flow.js';
+export * from '../bean/bean.flowDef.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-flow' {
+  export interface BeanFlow {
+    /** @internal */
+    get scope(): ScopeModuleAFlow;
+  }
+
+  export interface BeanFlowDef {
+    /** @internal */
+    get scope(): ScopeModuleAFlow;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanFlow } from '../bean/bean.flow.js';
+import { BeanFlowDef } from '../bean/bean.flowDef.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    flow: BeanFlow;
+    flowDef: BeanFlowDef;
+  }
+}
+/** bean: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
 

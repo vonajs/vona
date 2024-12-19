@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.detail.js';
 export * from '../bean/version.manager.js';
-import { BeanDetail } from '../bean/bean.detail.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    detail: BeanDetail;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-detail.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-detail' {
-  export interface BeanDetail {
-    /** @internal */
-    get scope(): ScopeModuleADetail;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleADetail;
@@ -72,6 +63,27 @@ export interface IModuleModel {
   detailBase: ModelDetailBase;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.detail.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-detail' {
+  export interface BeanDetail {
+    /** @internal */
+    get scope(): ScopeModuleADetail;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanDetail } from '../bean/bean.detail.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    detail: BeanDetail;
+  }
+}
+/** bean: end */
 /** constant: begin */
 export * from '../config/constants.js';
 import { constants } from '../config/constants.js';

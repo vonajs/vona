@@ -1,21 +1,24 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.executor.js';
-import { BeanExecutor } from '../bean/bean.executor.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    executor: BeanExecutor;
-  }
 
-  export interface IBeanRecordGeneral {}
-}
+import 'vona';
+declare module 'vona' {}
 declare module 'vona-module-a-executor' {
   export interface BeanExecutor {
     /** @internal */
     get scope(): ScopeModuleAExecutor;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanExecutor } from '../bean/bean.executor.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    executor: BeanExecutor;
+  }
+}
+/** bean: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

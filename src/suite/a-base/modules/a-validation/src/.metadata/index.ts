@@ -1,29 +1,3 @@
-/** beans: begin */
-export * from '../bean/bean.ajv.js';
-export * from '../bean/bean.validation.js';
-import { BeanAjv } from '../bean/bean.ajv.js';
-import { BeanValidation } from '../bean/bean.validation.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    ajv: BeanAjv;
-    validation: BeanValidation;
-  }
-
-  export interface IBeanRecordGeneral {}
-}
-declare module 'vona-module-a-validation' {
-  export interface BeanAjv {
-    /** @internal */
-    get scope(): ScopeModuleAValidation;
-  }
-
-  export interface BeanValidation {
-    /** @internal */
-    get scope(): ScopeModuleAValidation;
-  }
-}
-/** beans: end */
 /** middleware: begin */
 export * from '../bean/middleware.validate.js';
 
@@ -40,6 +14,35 @@ declare module 'vona-module-a-validation' {
   }
 }
 /** middleware: end */
+/** bean: begin */
+export * from '../bean/bean.ajv.js';
+export * from '../bean/bean.validation.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-validation' {
+  export interface BeanAjv {
+    /** @internal */
+    get scope(): ScopeModuleAValidation;
+  }
+
+  export interface BeanValidation {
+    /** @internal */
+    get scope(): ScopeModuleAValidation;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanAjv } from '../bean/bean.ajv.js';
+import { BeanValidation } from '../bean/bean.validation.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    ajv: BeanAjv;
+    validation: BeanValidation;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/validation.js';
 

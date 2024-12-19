@@ -1,33 +1,43 @@
 /** beans: begin */
-export * from '../bean/bean.cli.js';
-export * from '../bean/bean.cliBase_.js';
 export * from '../bean/version.manager.js';
-import { BeanCli } from '../bean/bean.cli.js';
-import { BeanCliBase } from '../bean/bean.cliBase_.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    cli: BeanCli;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
-    cliBase: BeanCliBase;
     'a-cli.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-cli' {
-  export interface BeanCli {
-    /** @internal */
-    get scope(): ScopeModuleACli;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleACli;
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.cli.js';
+export * from '../bean/bean.cliBase_.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-cli' {
+  export interface BeanCli {
+    /** @internal */
+    get scope(): ScopeModuleACli;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanCli } from '../bean/bean.cli.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    cli: BeanCli;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/cli.js';
 export * from '../service/console.js';

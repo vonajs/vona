@@ -1,30 +1,42 @@
 /** beans: begin */
-export * from '../bean/bean.debug.js';
 export * from '../bean/version.manager.js';
-import { BeanDebug } from '../bean/bean.debug.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    debug: BeanDebug;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-debug.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-debug' {
-  export interface BeanDebug {
-    /** @internal */
-    get scope(): ScopeModuleADebug;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleADebug;
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.debug.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-debug' {
+  export interface BeanDebug {
+    /** @internal */
+    get scope(): ScopeModuleADebug;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanDebug } from '../bean/bean.debug.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    debug: BeanDebug;
+  }
+}
+/** bean: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
 

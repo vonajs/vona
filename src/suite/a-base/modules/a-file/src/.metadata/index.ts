@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.file.js';
 export * from '../bean/version.manager.js';
-import { BeanFile } from '../bean/bean.file.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    file: BeanFile;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-file.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-file' {
-  export interface BeanFile {
-    /** @internal */
-    get scope(): ScopeModuleAFile;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAFile;
@@ -90,6 +81,27 @@ export interface IModuleModel {
   fileView: ModelFileView;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.file.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-file' {
+  export interface BeanFile {
+    /** @internal */
+    get scope(): ScopeModuleAFile;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanFile } from '../bean/bean.file.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    file: BeanFile;
+  }
+}
+/** bean: end */
 /** event: begin */
 export * from '../bean/event.fileDownloadCheck.js';
 export * from '../bean/event.fileUpdateCheck.js';

@@ -1,24 +1,15 @@
 /** beans: begin */
-export * from '../bean/bean.worker.js';
 export * from '../bean/version.manager.js';
-import { BeanWorker } from '../bean/bean.worker.js';
 import { VersionManager } from '../bean/version.manager.js';
 import 'vona';
 declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    worker: BeanWorker;
-  }
+  export interface IBeanRecordGlobal {}
 
   export interface IBeanRecordGeneral {
     'a-version.version.manager': VersionManager;
   }
 }
 declare module 'vona-module-a-version' {
-  export interface BeanWorker {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-
   export interface VersionManager {
     /** @internal */
     get scope(): ScopeModuleAVersion;
@@ -90,6 +81,27 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 /** model: end */
+/** bean: begin */
+export * from '../bean/bean.worker.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-version' {
+  export interface BeanWorker {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanWorker } from '../bean/bean.worker.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    worker: BeanWorker;
+  }
+}
+/** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.columnsClear.js';
 

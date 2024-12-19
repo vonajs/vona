@@ -1,21 +1,24 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.router.js';
-import { BeanRouter } from '../bean/bean.router.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    router: BeanRouter;
-  }
 
-  export interface IBeanRecordGeneral {}
-}
+import 'vona';
+declare module 'vona' {}
 declare module 'vona-module-a-web' {
   export interface BeanRouter {
     /** @internal */
     get scope(): ScopeModuleAWeb;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanRouter } from '../bean/bean.router.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    router: BeanRouter;
+  }
+}
+/** bean: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
