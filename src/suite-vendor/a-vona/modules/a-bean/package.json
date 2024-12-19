@@ -5,7 +5,10 @@
   "vonaModule": {
     "dependencies": {},
     "onions": {
-      "beanTemp": {}
+      "beanTemp": {},
+      "bean": {
+        "boilerplate": "cli/bean/boilerplate"
+      }
     }
   },
   "type": "module",
