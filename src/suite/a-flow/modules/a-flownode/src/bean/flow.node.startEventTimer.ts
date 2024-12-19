@@ -10,7 +10,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     if (deploy) {
       await this._addSchedule({ flowDefId, node });
     } else {
-      await this._deleteSchedule2({ flowDefId, node });
+      await this._deleteSchedule(flowDefId, node);
     }
   }
 
@@ -105,15 +105,20 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
     return true;
   }
 
-  async _deleteSchedule(job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>) {
-    const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
-    await queue.removeJobScheduler(job.name);
-  }
-
-  async _deleteSchedule2({ flowDefId, node }: any) {
-    const scheduleKey = this._getScheduleKey(flowDefId, node);
-    const queue = this._getQueue();
-    await queue.removeJobScheduler(scheduleKey);
+  async _deleteSchedule(flowDefId: string, node): Promise<boolean>;
+  async _deleteSchedule(
+    job: TypeQueueJob<TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult>,
+  ): Promise<boolean>;
+  async _deleteSchedule(flowDefId: any, node?: any): Promise<boolean> {
+    if (typeof flowDefId === 'string') {
+      const scheduleKey = this._getScheduleKey(flowDefId, node);
+      const queue = this._getQueue();
+      return await queue.removeJobScheduler(scheduleKey);
+    } else {
+      const job = flowDefId;
+      const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
+      return await queue.removeJobScheduler(job.name);
+    }
   }
 
   _getQueueName() {
