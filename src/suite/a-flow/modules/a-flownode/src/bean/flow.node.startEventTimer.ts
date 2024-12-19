@@ -28,6 +28,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
       {
         jobName,
         jobOptions: {
+          jobId: jobName,
           repeat,
         },
       },
