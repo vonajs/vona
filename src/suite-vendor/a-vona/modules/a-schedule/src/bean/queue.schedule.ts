@@ -7,7 +7,7 @@ export type TypeQueueScheduleJobData = {
 
 export type TypeQueueScheduleJobResult = void;
 
-@Queue()
+@Queue({ concurrency: true })
 export class QueueSchedule
   extends BeanQueueBase<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
   implements IQueueExecute<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>

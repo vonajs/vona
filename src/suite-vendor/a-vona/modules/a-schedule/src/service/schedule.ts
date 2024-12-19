@@ -30,8 +30,7 @@ export class ServiceSchedule extends BeanBase {
 
   public async deleteSchedule(job: TypeScheduleJob) {
     const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.subdomain);
-    const result = await queue.removeJobScheduler(job.name);
-    console.log(result);
+    await queue.removeJobScheduler(job.name);
   }
 
   public async checkScheduleValid(job: TypeScheduleJob) {
