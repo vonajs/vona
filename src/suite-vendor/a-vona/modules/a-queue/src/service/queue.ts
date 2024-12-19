@@ -232,7 +232,7 @@ export class ServiceQueue extends BeanBase {
 
   _combineQueueKey<DATA>(info: IQueueJobContext<DATA>) {
     const subdomain = subdomainDesp(info.options?.subdomain);
-    return `${subdomain}||${info.queueName}`;
+    return `${subdomain}||${info.queueName.replace(':', '.queue.')}`;
   }
 
   async _performTask<DATA, RESULT>(job: TypeQueueJob<DATA, RESULT>) {
