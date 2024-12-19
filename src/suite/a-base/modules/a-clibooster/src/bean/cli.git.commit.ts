@@ -1,5 +1,5 @@
 import { BeanTemp } from 'vona-module-a-bean';
-import { Bean, IModule, ISuite } from 'vona';
+import { IModule, ISuite } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
 @BeanTemp({ scene: 'cli.git' })

@@ -1,23 +1,25 @@
 import { IMetadataCustomGenerateOptions } from '@cabloy/module-info';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
-  return '';
-  const { sceneName, moduleName, globFiles } = options;
-  const contentPaths: Record<string, string[]> = {};
+  const { sceneName, globFiles } = options;
+  const contentImports: string[] = [];
+  const contentRecordsGlobal: string[] = [];
   for (const globFile of globFiles) {
-    const { fileContent } = globFile;
+    const { className, beanName, fileNameJSRelative, isIgnore } = globFile;
+    if (isIgnore) continue;
+    const beanFullName = beanName;
+    contentImports.push(`import { ${className} } from '${fileNameJSRelative}';`);
+    contentRecordsGlobal.push(`'${beanFullName}': ${className};`);
   }
-  if (Object.keys(contentPaths).length === 0) return '';
-  let contentRecord = '';
-  for (const method in contentPaths) {
-    contentRecord += `export interface IApiPath${method}Record{
-        ${contentPaths[method].join('\n')}
-    }\n`;
-  }
+  if (contentImports.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
-declare module 'vona-module-a-web' {
-  ${contentRecord}
+${contentImports.join('\n')}
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    ${contentRecordsGlobal.join('\n')}
+  }
 }
 /** ${sceneName}: end */
 `;

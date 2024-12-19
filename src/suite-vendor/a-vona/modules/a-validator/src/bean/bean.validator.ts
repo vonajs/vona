@@ -1,4 +1,5 @@
-import { Bean, BeanBase, Constructable, HttpStatus, isNil } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase, Constructable, HttpStatus, isNil } from 'vona';
 import { z } from 'zod';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { ValidatorOptions } from '../lib/types/validatorOptions.js';

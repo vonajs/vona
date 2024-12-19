@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
 class TestCtx0 extends BeanBase {
   _name: string;

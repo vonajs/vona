@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+
 import { BeanRoleFlow } from './bean.role/bean.role_flow.js';
 
 @Bean()

@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 import { ServiceBuild, ServiceRender, ServiceSite } from '../index.js';
 
 @Bean()

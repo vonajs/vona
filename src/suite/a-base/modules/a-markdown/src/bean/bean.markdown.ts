@@ -1,4 +1,5 @@
-import { Bean, BeanBase, requireDynamic } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
 

@@ -1,5 +1,5 @@
 import { BeanTemp } from 'vona-module-a-bean';
-import { Bean, sleep } from 'vona';
+import { sleep } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
 @BeanTemp({ scene: 'cli.default' })

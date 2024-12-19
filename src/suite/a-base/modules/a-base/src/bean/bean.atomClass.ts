@@ -1,5 +1,6 @@
+import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanModuleScopeBase } from 'vona';
+import { BeanModuleScopeBase } from 'vona';
 import { AtomClass, AtomClassBase, AtomClassParams } from '../types.js';
 import { EntityAtomClass } from '../index.js';
 import { IModelSelectParamsJoin } from 'vona-module-a-database';

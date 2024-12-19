@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+
 import { BeanDetailDelete } from './bean.detail/bean.detail_delete.js';
 
 @Bean()

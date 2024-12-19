@@ -1,6 +1,7 @@
+import { Bean } from 'vona-module-a-bean';
 import { EntityUserOnline } from '../index.js';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanModuleScopeBase } from 'vona';
+import { BeanModuleScopeBase } from 'vona';
 
 const __atomClassUserOnline = {
   module: __ThisModule__,

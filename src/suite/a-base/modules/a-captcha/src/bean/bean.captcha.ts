@@ -1,4 +1,5 @@
-import { Bean, BeanModuleScopeBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanModuleScopeBase } from 'vona';
 
 import * as ModuleInfo from '@cabloy/module-info';
 import utils from '../common/utils.js';

@@ -1,4 +1,5 @@
-import { Bean, BeanBase, SymbolProxyDisable } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase, SymbolProxyDisable } from 'vona';
 import {
   IOnionOptionsEnable,
   IOnionOptionsMatch,

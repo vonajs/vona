@@ -2,15 +2,20 @@
 export * from '../bean/bean.redis.js';
 
 import 'vona';
-declare module 'vona' {
-  export interface IBeanRecord {
-    'a-redis:redis': never;
-  }
-}
+declare module 'vona' {}
 declare module 'vona-module-a-redis' {
   export interface BeanRedis {
     /** @internal */
     get scope(): ScopeModuleARedis;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanRedis } from '../bean/bean.redis.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    redis: BeanRedis;
   }
 }
 /** bean: end */

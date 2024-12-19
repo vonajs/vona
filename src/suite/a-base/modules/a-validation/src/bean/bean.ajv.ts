@@ -1,9 +1,10 @@
+import { Bean } from 'vona-module-a-bean';
 import Ajv from 'ajv';
 import AjvLocalize from 'ajv-i18n';
 import AjvKeywords from 'ajv-keywords';
 import jsBeautify from 'js-beautify';
 import systemKeywords from '../ajv/keywords.js';
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 
 @Bean()
 export class BeanAjv extends BeanBase {

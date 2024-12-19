@@ -1,5 +1,6 @@
+import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase, cast } from 'vona';
+import { BeanBase, cast } from 'vona';
 
 @Bean()
 export class BeanAuthSimple extends BeanBase {

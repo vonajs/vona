@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+
 import { BeanFlowUtils } from './bean.flow/bean.flow_utils.js';
 
 @Bean()

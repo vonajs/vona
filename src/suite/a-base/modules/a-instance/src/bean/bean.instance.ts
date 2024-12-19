@@ -1,5 +1,6 @@
+import { Bean } from 'vona-module-a-bean';
 import { ConfigInstanceBase, isNil, VonaConfig } from 'vona';
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { IModelSelectParams } from 'vona-module-a-database';
 import { EntityInstance } from '../entity/instance.js';

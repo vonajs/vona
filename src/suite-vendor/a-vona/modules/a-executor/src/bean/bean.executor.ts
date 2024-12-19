@@ -1,4 +1,5 @@
-import { Bean, BeanBase, FunctionAsync } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase, FunctionAsync } from 'vona';
 import { INewCtxOptions, IPerformActionOptions, IRunInAnonymousContextScopeOptions } from '../types/executor.js';
 import { performActionInner } from '../lib/performAction.js';
 import { IApiPathRecordMethodMap } from 'vona-module-a-web';

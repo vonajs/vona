@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { Redis } from 'ioredis';
 

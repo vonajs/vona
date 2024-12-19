@@ -1,5 +1,6 @@
+import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanModuleScopeBase } from 'vona';
+import { BeanModuleScopeBase } from 'vona';
 import { BeanAtomBase } from './bean.atomBase_.js';
 
 @Bean()

@@ -1,3 +1,4 @@
+import { Bean } from 'vona-module-a-bean';
 import { BeanModuleScopeBase, Bean } from 'vona';
 
 @Bean()

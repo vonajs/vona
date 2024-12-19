@@ -1,5 +1,6 @@
+import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase, requireDynamic } from 'vona';
+import { BeanBase, requireDynamic } from 'vona';
 
 import path from 'path';
 

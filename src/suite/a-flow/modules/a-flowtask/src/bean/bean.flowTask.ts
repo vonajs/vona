@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+
 import { BeanFlowTaskCheckViewWorkflow } from './bean.flowTask/bean.flowTask_checkViewWorkflow.js';
 
 @Bean()

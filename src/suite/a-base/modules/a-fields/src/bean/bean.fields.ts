@@ -1,4 +1,4 @@
-import { Bean } from 'vona';
+import { Bean } from 'vona-module-a-bean';
 import { BeanFieldsFieldsRight } from './bean.fields/bean.fields_fieldsRight.js';
 
 @Bean()

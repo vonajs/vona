@@ -1,5 +1,5 @@
 import { BeanTemp } from 'vona-module-a-bean';
-import { Bean, cast } from 'vona';
+import { cast } from 'vona';
 
 import path from 'path';
 import fse from 'fs-extra';

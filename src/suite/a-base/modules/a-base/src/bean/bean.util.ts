@@ -1,4 +1,5 @@
-import { Bean, BeanBase, deepExtend } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase, deepExtend } from 'vona';
 
 import * as uuid from 'uuid';
 import currency from '@zhennann/currency';

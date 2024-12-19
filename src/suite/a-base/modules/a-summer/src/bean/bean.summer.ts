@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 import { BeanSummerCacheBase } from './bean.summerCacheBase_.js';
 import { IDecoratorSummerCacheOptions } from '../types/summerCache.js';
 

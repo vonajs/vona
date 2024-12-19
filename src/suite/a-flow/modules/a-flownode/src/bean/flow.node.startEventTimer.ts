@@ -1,6 +1,6 @@
 import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, cast } from 'vona';
+import { cast } from 'vona';
 import { BeanFlowNodeBase } from 'vona-module-a-flow';
 import { TypeQueueStartEventTimerJobData, TypeQueueStartEventTimerJobResult } from './queue.startEventTimer.js';
 import { TypeQueueJob } from 'vona-module-a-queue';

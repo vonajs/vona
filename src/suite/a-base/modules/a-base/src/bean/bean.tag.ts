@@ -1,5 +1,6 @@
+import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 
 @Bean()
 export class BeanTag extends BeanBase {
