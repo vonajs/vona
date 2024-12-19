@@ -5,7 +5,7 @@ import {
   BeanDatabaseDialectBase,
   IFetchDatabasesResultItem,
   IFetchIndexesResultItem,
-} from './bean.databaseDialectBase_.js';
+} from './bean.databaseDialectBase.js';
 import { TableIdentity } from '../types/tableIdentity.js';
 
 @BeanTemp({ scene: 'database.dialect' })

@@ -6,7 +6,7 @@ import { buildWhere } from '../../common/buildWhere.js';
 import { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage } from '../../types/index.js';
 import { cast } from 'vona';
 import { BigNumber } from 'bignumber.js';
-import { ITableColumns } from '../bean.databaseDialectBase_.js';
+import { ITableColumns } from '../bean.databaseDialectBase.js';
 
 let __columns: Record<string, ITableColumns> = {};
 

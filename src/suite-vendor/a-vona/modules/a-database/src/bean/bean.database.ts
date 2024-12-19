@@ -1,7 +1,7 @@
 import { Bean } from 'vona-module-a-bean';
 import { BeanBase } from 'vona';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { BeanDatabaseDialectBase } from './bean.databaseDialectBase_.js';
+import { BeanDatabaseDialectBase } from './bean.databaseDialectBase.js';
 import { ServiceDatabaseClient } from '../service/databaseClient.js';
 
 @Bean()

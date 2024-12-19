@@ -2,7 +2,7 @@ import { Knex } from 'knex';
 import { ServiceDbMeta } from '../service/dbMeta.js';
 import { ServiceTransaction } from '../service/transaction.js';
 import { ConfigDatabase } from './config.js';
-import { BeanModel } from '../bean/bean.model_.js';
+import { BeanModel } from '../bean/bean.model.js';
 
 declare module 'vona' {
   export interface IBeanRecordGlobal {

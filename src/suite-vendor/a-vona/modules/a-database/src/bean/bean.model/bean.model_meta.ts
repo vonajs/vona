@@ -1,5 +1,5 @@
 import { BeanBase, cast, appResource } from 'vona';
-import { BeanModel } from '../bean.model_.js';
+import { BeanModel } from '../bean.model.js';
 import {
   IDecoratorEntityOptions,
   IDecoratorModelOptions,

@@ -9,7 +9,7 @@ import {
   IModelUpdateOptions,
   TableIdentity,
 } from '../../types/index.js';
-import { BeanModel } from '../bean.model_.js';
+import { BeanModel } from '../bean.model.js';
 
 const SymbolCacheOptions = Symbol('SymbolCacheOptions');
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
