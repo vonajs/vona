@@ -1,6 +1,6 @@
 import { cast } from 'vona';
 import { __ThisModule__ } from '../../.metadata/this.js';
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtomStarLabel } from './bean.atom_starLabel.js';
 
 export class BeanAtomClone extends BeanAtomStarLabel {

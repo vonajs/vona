@@ -1,5 +1,5 @@
 import { Atom } from '../lib/atom.js';
-import { BeanAtomBase } from '../bean/bean.atomBase_.js';
+import { BeanAtomBase } from '../bean/bean.atomBase.js';
 
 @Atom()
 export class AtomRoleRightSpread extends BeanAtomBase {

@@ -1,4 +1,4 @@
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtomRightActionsBulk } from './bean.atom_right_actionsBulk.js';
 
 export class BeanAtomRightCheckRightAction extends BeanAtomRightActionsBulk {

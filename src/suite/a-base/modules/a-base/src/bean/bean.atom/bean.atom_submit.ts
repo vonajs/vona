@@ -1,6 +1,6 @@
 import { FlowNodeStartEventAtom } from 'vona-module-a-flowtask';
 import { BeanAtomSimple } from './bean.atom_simple.js';
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { EntityAtomPro } from '../../index.js';
 
 export class BeanAtomSubmit extends BeanAtomSimple {

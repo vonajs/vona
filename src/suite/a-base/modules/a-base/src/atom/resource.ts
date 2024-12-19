@@ -1,4 +1,4 @@
-import { BeanAtomBase } from '../bean/bean.atomBase_.js';
+import { BeanAtomBase } from '../bean/bean.atomBase.js';
 import { Atom } from '../lib/atom.js';
 
 @Atom()

@@ -1,4 +1,4 @@
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtom0Select } from './bean.atom_0_select.js';
 
 export class BeanAtom0Write extends BeanAtom0Select {

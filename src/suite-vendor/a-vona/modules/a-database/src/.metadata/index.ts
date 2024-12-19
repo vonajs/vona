@@ -50,9 +50,9 @@ declare module 'vona-module-a-database' {
 /** middleware: end */
 /** bean: begin */
 export * from '../bean/bean.database.js';
-export * from '../bean/bean.databaseDialectBase_.js';
-export * from '../bean/bean.modelBase_.js';
-export * from '../bean/bean.model_.js';
+export * from '../bean/bean.databaseDialectBase.js';
+export * from '../bean/bean.model.js';
+export * from '../bean/bean.modelBase.js';
 
 import 'vona';
 declare module 'vona' {}

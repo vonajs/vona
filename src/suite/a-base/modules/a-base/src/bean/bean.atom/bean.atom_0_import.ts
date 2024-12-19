@@ -1,4 +1,4 @@
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtom0Export } from './bean.atom_0_export.js';
 
 export class BeanAtom0Import extends BeanAtom0Export {

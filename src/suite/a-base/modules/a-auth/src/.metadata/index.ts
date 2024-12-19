@@ -83,7 +83,7 @@ export interface IModuleModel {
 /** model: end */
 /** bean: begin */
 export * from '../bean/bean.authProvider.js';
-export * from '../bean/bean.authProviderBase_.js';
+export * from '../bean/bean.authProviderBase.js';
 export * from '../bean/bean.authProviderCache.js';
 
 import 'vona';

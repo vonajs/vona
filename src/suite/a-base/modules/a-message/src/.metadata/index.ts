@@ -25,7 +25,7 @@ declare module 'vona-module-a-message' {
 }
 /** beans: end */
 /** bean: begin */
-export * from '../bean/bean.ioMessageUniformBase_.js';
+export * from '../bean/bean.ioMessageUniformBase.js';
 export * from '../bean/bean.message.js';
 
 import 'vona';

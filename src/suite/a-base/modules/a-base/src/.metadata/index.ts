@@ -851,7 +851,7 @@ declare module 'vona-module-a-base' {
 /** bean: begin */
 export * from '../bean/bean.atom.js';
 export * from '../bean/bean.atomAction.js';
-export * from '../bean/bean.atomBase_.js';
+export * from '../bean/bean.atomBase.js';
 export * from '../bean/bean.atomClass.js';
 export * from '../bean/bean.atomRightAux.js';
 export * from '../bean/bean.atomStage.js';

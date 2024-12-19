@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js';
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtom0Read } from './bean.atom_0_read.js';
 import {
   AtomClass,

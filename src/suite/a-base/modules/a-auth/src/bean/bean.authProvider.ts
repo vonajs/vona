@@ -1,7 +1,7 @@
 import { Bean } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
 import { BeanBase, VonaContext } from 'vona';
-import { BeanAuthProviderBase } from './bean.authProviderBase_.js';
+import { BeanAuthProviderBase } from './bean.authProviderBase.js';
 
 @Bean()
 export class BeanAuthProvider extends BeanBase {

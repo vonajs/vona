@@ -1,6 +1,6 @@
 /** bean: begin */
 export * from '../bean/bean.summer.js';
-export * from '../bean/bean.summerCacheBase_.js';
+export * from '../bean/bean.summerCacheBase.js';
 
 import 'vona';
 declare module 'vona' {}

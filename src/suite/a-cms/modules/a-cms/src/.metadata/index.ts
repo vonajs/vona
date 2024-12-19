@@ -106,7 +106,7 @@ declare module 'vona-module-a-cms' {
 }
 /** atom: end */
 /** bean: begin */
-export * from '../bean/bean.atomCmsBase_.js';
+export * from '../bean/bean.atomCmsBase.js';
 export * from '../bean/bean.cms.js';
 
 import 'vona';

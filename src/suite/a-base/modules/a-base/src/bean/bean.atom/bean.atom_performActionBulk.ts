@@ -1,4 +1,4 @@
-import { BeanAtomBase } from '../bean.atomBase_.js';
+import { BeanAtomBase } from '../bean.atomBase.js';
 import { BeanAtomPerformAction } from './bean.atom_performAction.js';
 
 export class BeanAtomPerformActionBulk extends BeanAtomPerformAction {

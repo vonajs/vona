@@ -101,7 +101,7 @@ export interface IModuleModel {
 /** model: end */
 /** bean: begin */
 export * from '../bean/bean.io.js';
-export * from '../bean/bean.ioMessageBase_.js';
+export * from '../bean/bean.ioMessageBase.js';
 
 import 'vona';
 declare module 'vona' {}
