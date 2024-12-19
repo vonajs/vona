@@ -1,6 +1,6 @@
 import * as Bull from 'bullmq';
 import { TypeQueueScheduleJobData, TypeQueueScheduleJobResult } from '../bean/queue.schedule.js';
-import { IQueueJobContext } from 'vona-module-a-queue';
+import { IQueueJobContext, IQueueRecord } from 'vona-module-a-queue';
 import { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import { OmitNever } from 'vona';
 
@@ -13,6 +13,7 @@ export interface IScheduleExecute {
 export interface IScheduleRecord {}
 
 export interface IDecoratorScheduleOptions extends IOnionOptionsEnable {
+  queue: keyof IQueueRecord;
   repeat: Bull.RepeatOptions;
   transaction?: boolean;
 }

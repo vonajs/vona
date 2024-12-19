@@ -58,7 +58,7 @@ export interface IDecoratorQueueOptions extends IOnionOptionsEnable {
   transaction?: boolean;
   options?: {
     queue?: Bull.QueueOptions;
-    worker?: Bull.WorkerOptions;
+    worker?: Partial<Bull.WorkerOptions>;
     job?: Bull.JobsOptions;
   };
 }
