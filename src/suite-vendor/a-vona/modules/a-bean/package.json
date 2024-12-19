@@ -3,9 +3,7 @@
   "version": "5.0.0",
   "title": "a-bean",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
+    "dependencies": {}
   },
   "type": "module",
   "exports": {
