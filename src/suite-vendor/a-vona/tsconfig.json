@@ -53,6 +53,9 @@
     },
     {
       "path": "modules/a-redis/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-bean/tsconfig.build.json"
     }
   ]
 }
