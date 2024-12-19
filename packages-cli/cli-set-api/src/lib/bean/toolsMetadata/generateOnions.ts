@@ -31,6 +31,8 @@ export async function generateOnions(
           get scope(): ${scopeModuleName};
         }`);
     }
+    if (sceneMeta.optionsNone) continue;
+    // fileInfo
     const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
     // import options
     if (fileInfo.optionsCustomInterface) {

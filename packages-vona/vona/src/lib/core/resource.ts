@@ -33,7 +33,7 @@ export class AppResource extends BeanSimple {
     // module
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
-    const beanFullName = scene && scene !== 'bean' ? `${module}.${scene}.${name}` : name;
+    const beanFullName = scene && scene !== ('bean' as any) ? `${module}.${scene}.${name}` : name;
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options

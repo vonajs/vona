@@ -45,6 +45,7 @@ export interface OnionSceneMeta {
   module?: IModule;
   sceneIsolate?: boolean;
   hasLocal?: boolean;
+  optionsNone?: boolean;
   optionsRoute?: boolean;
   optionsArgumentPipe?: boolean;
   optionsDynamic?: boolean;
