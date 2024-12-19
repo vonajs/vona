@@ -27,7 +27,6 @@ export class AppResource extends BeanSimple {
 
   addBean(options: Partial<IDecoratorBeanOptionsBase>) {
     let { module, scene, name, beanClass, virtual } = options;
-    scene = scene!;
     // name
     name = this._parseBeanName(beanClass!, scene, name);
     // todo: remove
@@ -51,9 +50,9 @@ export class AppResource extends BeanSimple {
     beanOptions.__aopChainsKey__ = {};
     // record
     this.beans[beanFullName] = beanOptions;
-    if (!this.scenes[scene]) this.scenes[scene] = {};
-    if (!this.scenes[scene][module]) this.scenes[scene][module] = {};
-    this.scenes[scene][module][beanFullName] = beanOptions;
+    if (!this.scenes[scene!]) this.scenes[scene!] = {};
+    if (!this.scenes[scene!][module]) this.scenes[scene!][module] = {};
+    this.scenes[scene!][module][beanFullName] = beanOptions;
     // set metadata
     appMetadata.defineMetadata(SymbolDecoratorBeanFullName, beanFullName, beanOptions.beanClass);
     // ok

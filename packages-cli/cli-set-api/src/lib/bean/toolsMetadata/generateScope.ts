@@ -19,7 +19,6 @@ export async function generateScope(
   const contentRecords: string[] = [];
   // basic
   contentImports.push('BeanScopeBase');
-  contentImports.push('Scope');
   // _bean
   contentImports.push('TypeModuleBean');
   contentRecords.push('_bean: TypeModuleBean;');
@@ -51,6 +50,7 @@ export async function generateScope(
   // combine
   const content = `/** scope: begin */
 import { ${contentImports.join(', ')} } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModule${relativeNameCapitalize} extends BeanScopeBase {}

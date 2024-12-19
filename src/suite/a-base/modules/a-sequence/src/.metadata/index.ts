@@ -136,7 +136,8 @@ declare module 'vona-module-a-sequence' {
 }
 /** controller: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleASequence extends BeanScopeBase {}

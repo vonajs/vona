@@ -12,11 +12,13 @@ export function createBeanDecorator<T>(
   return function (target) {
     // module
     const module = parseModuleName();
+    // name
+    const name = scene === 'scope' ? 'module' : undefined;
     // add
     appResource.addBean({
       module,
       scene,
-      name: undefined,
+      name,
       beanClass: target as unknown as Constructable,
       options,
       optionsPrimitive,

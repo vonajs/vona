@@ -4,7 +4,7 @@ import { Constructable } from '../index.js';
 
 export interface ISceneCustomRecord {}
 
-export type TypeDecoratorBeanOptionsSceneBase = 'scope' | 'meta' | keyof ISceneCustomRecord;
+export type TypeDecoratorBeanOptionsSceneBase = keyof ISceneCustomRecord;
 
 export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**

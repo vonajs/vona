@@ -157,7 +157,8 @@ export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil, TypeModuleConfig } from 'vona';
+import { Scope } from 'vona-module-a-bean';
 
 @Scope()
 export class ScopeModuleACache extends BeanScopeBase {}
