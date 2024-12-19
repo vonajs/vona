@@ -13,7 +13,7 @@ export interface IScheduleExecute {
 export interface IScheduleRecord {}
 
 export interface IDecoratorScheduleOptions extends IOnionOptionsEnable {
-  queue: keyof IQueueRecord;
+  queue?: keyof IQueueRecord;
   repeat: Bull.RepeatOptions;
   transaction?: boolean;
 }
