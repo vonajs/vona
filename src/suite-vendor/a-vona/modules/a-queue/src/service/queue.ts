@@ -61,18 +61,53 @@ export class ServiceQueue extends BeanBase {
     const prefix = `bull_${app.name}:queue`;
     // queue config
     const queueConfig = app.bean.onion.queue.getOnionOptions<IDecoratorQueueOptions>(info.queueName);
-    // queueConfig.options: queue/worker/job
+    // queueConfig.options: queue/worker/job/redlock
     const workerOptions = queueConfig?.options?.worker;
+    const redlockOptions = queueConfig?.options?.redlock;
+    const _redlockOptions = Object.assign({}, this.$scope.redlock.config.redlock.options, redlockOptions);
+    const _lockTTL = redlockOptions?.lockTTL ?? this.$scope.redlock.config.redlock.lockTTL;
+
+    // redlock
+    if (!queueConfig?.concurrency) {
+      _worker.redlock = this.$scope.redlock.service.redlock.create(_redlockOptions);
+    }
+
     // create work
     const connectionWorker = app.bean.redis.get('queue').duplicate();
     const _workerOptions = Object.assign({}, this.scope.config.worker, workerOptions, {
       prefix,
       connection: connectionWorker,
     });
-    _worker.worker = new Bull.Worker(queueKey, job => this._performTask(job), _workerOptions);
+    _worker.worker = new Bull.Worker(
+      queueKey,
+      async job => {
+        // concurrency
+        if (queueConfig?.concurrency) {
+          return await this._performTask(job);
+        }
+        // redlock
+        const info = job.data as IQueueJobContext<DATA>;
+        const queueNameSub = info.options?.queueNameSub;
+        const _lockResource = `queue:${queueKey}${queueNameSub ? '#' + queueNameSub : ''}`;
+        return await this.$scope.redlock.service.redlock.lock(
+          _lockResource,
+          async () => {
+            return await this._performTask(job);
+          },
+          {
+            // subdomain: job.data.subdomain, // need not
+            redlock: _worker.redlock,
+            lockTTL: _lockTTL,
+          },
+        );
+      },
+      _workerOptions,
+    );
+
     _worker.worker.on('failed', (_job, err) => {
       app.logger.error(err);
     });
+
     _worker.worker.on('error', err => {
       if (err.message && err.message.indexOf('Missing lock for job') > -1) {
         const workerInner = _worker.worker as any;
@@ -170,15 +205,7 @@ export class ServiceQueue extends BeanBase {
     // queueConfig.options: queue/worker/job/limiter
     const jobOptionsBase = queueConfig?.options?.job;
     // queue
-    const queue = this._ensureQueue(info);
-    // setGlobalConcurrency
-    let globalConcurrency;
-    if (!queue.config?.concurrency) {
-      globalConcurrency = 1;
-    } else {
-      globalConcurrency = queue.config?.concurrency === true ? Infinity : queue.config?.concurrency;
-    }
-    await queue.queue.setGlobalConcurrency(globalConcurrency);
+    const queue = this._getQueue(info);
     // job
     const jobId = info.options?.jobOptions?.jobId || uuidv4();
     const jobName = info.options?.jobName || jobId;
@@ -188,7 +215,7 @@ export class ServiceQueue extends BeanBase {
     // not async
     if (!isAsync) {
       // add job
-      queue.queue.add(jobName, info, jobOptions);
+      queue.add(jobName, info, jobOptions);
       return undefined as any;
     }
     // async
@@ -202,7 +229,7 @@ export class ServiceQueue extends BeanBase {
         },
       };
       // add job
-      return queue.queue.add(jobName, info, jobOptions);
+      return queue.add(jobName, info, jobOptions);
     });
   }
 
