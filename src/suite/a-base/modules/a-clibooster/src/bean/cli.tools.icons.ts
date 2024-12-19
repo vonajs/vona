@@ -1,3 +1,4 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { Bean, cast } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
@@ -7,7 +8,7 @@ import eggBornUtils from 'egg-born-utils';
 import bb from 'bluebird';
 import xml2js from 'xml2js';
 
-@Bean({ scene: 'cli.tools' })
+@BeanTemp({ scene: 'cli.tools' })
 export class CliToolsIcons extends BeanCliBase {
   async execute({ user }: any) {
     const { argv } = this.context;

@@ -1,7 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanIoMessageBase } from 'vona-module-a-socketio';
 
-@Bean({ scene: 'io.message' })
+@BeanTemp({ scene: 'io.message' })
 export class IoMessageTest extends BeanIoMessageBase {
   async onSaveSync({ path, options, message, messageSync, messageClass }: any) {
     // options

@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
 const fileVersionUpdates = [
   //
@@ -6,7 +7,7 @@ const fileVersionUpdates = [
 ];
 const fileVersionInits = [1, 12];
 
-@Bean({ scene: 'version' })
+@BeanTemp({ scene: 'version' })
 export class VersionManager extends BeanBase {
   async update(options) {
     if (fileVersionUpdates.includes(options.version)) {

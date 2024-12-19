@@ -1,9 +1,10 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanAuthProviderBase } from 'vona-module-a-auth';
 
 import Strategy from '../meta/passport/strategy.js';
 
-@Bean({ scene: 'auth.provider' })
+@BeanTemp({ scene: 'auth.provider' })
 export class AuthProviderOpen extends BeanAuthProviderBase {
   async getConfigDefault() {
     return null;

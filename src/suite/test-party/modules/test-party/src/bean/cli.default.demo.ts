@@ -1,7 +1,8 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { Bean, sleep } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
-@Bean({ scene: 'cli.default' })
+@BeanTemp({ scene: 'cli.default' })
 export class CliDefaultDemo extends BeanCliBase {
   async meta({ user }: any) {
     const meta = await super.meta({ user });

@@ -1,8 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
 
 import { BeanFlowBehaviorBase } from '../common/flowBehaviorBase.js';
 
-@Bean({ scene: 'flow.behavior' })
+@BeanTemp({ scene: 'flow.behavior' })
 export class FlowBehaviorBase extends BeanFlowBehaviorBase {
   getBehaviorDefOptions({ behaviorDefId, options }: any) {
     return this.nodeInstance.nodeBaseBean.getBehaviorDefOptions({ behaviorDefId, options });

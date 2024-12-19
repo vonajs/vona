@@ -1,4 +1,5 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
 import chalk from 'chalk';
 import * as Boxen from 'boxen';
@@ -11,7 +12,7 @@ const boxenOptions = {
   borderStyle: 'round',
 } as Boxen.Options;
 
-@Bean({ scene: 'sms.provider' })
+@BeanTemp({ scene: 'sms.provider' })
 export class SmsProviderTest extends BeanBase {
   async sendCode({ context }: any) {
     // token

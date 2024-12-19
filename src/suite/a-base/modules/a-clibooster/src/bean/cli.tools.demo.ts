@@ -1,7 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanCliBase } from 'vona-module-a-cli';
 
-@Bean({ scene: 'cli.tools' })
+@BeanTemp({ scene: 'cli.tools' })
 export class CliToolsDemo extends BeanCliBase {
   get localUtils() {
     return this.scope.service.utils;

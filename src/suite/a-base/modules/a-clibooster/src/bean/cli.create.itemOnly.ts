@@ -1,8 +1,9 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean } from 'vona';
+
 import { BeanCliBase } from 'vona-module-a-cli';
 
-@Bean({ scene: 'cli.create' })
+@BeanTemp({ scene: 'cli.create' })
 export class CliCreateItemOnly extends BeanCliBase {
   async execute({ user }: any) {
     const { argv } = this.context;

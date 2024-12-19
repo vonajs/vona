@@ -1,5 +1,5 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean } from 'vona';
 
 import path from 'path';
 import os from 'os';
@@ -11,7 +11,7 @@ import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import CliStoreBase from '../common/cliStoreBase.js';
 
-@Bean({ scene: 'cli.store' })
+@BeanTemp({ scene: 'cli.store' })
 export class CliStoreSync extends CliStoreBase {
   constructor() {
     super('sync');

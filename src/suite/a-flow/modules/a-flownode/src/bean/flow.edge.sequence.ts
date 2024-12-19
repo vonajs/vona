@@ -1,7 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanFlowEdgeBase } from 'vona-module-a-flow';
 
-@Bean({ scene: 'flow.edge' })
+@BeanTemp({ scene: 'flow.edge' })
 export class FlowEdgeSequence extends BeanFlowEdgeBase {
   async onEdgeEnter() {
     // super

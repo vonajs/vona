@@ -1,5 +1,6 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { FlowNodeStartEventAtomActionRightViewWorkflow } from './flow.node.startEventAtom/flow.node.startEventAtom_actionRightViewWorkflow.js';
 
-@Bean({ scene: 'flow.node' })
+@BeanTemp({ scene: 'flow.node' })
 export class FlowNodeStartEventAtom extends FlowNodeStartEventAtomActionRightViewWorkflow {}

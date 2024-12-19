@@ -1,7 +1,8 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 import { EntityCache } from '../entity/cache.js';
 
-@Bean({ scene: 'version' })
+@BeanTemp({ scene: 'version' })
 export class VersionManager extends BeanBase {
   async update(options) {
     if (options.version === 1) {

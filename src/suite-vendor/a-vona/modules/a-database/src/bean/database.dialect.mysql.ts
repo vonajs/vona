@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import {
   BeanDatabaseDialectBase,
   IFetchDatabasesResultItem,
@@ -7,7 +8,7 @@ import {
 } from 'vona-module-a-database';
 import { Knex } from 'knex';
 
-@Bean({ scene: 'database.dialect' })
+@BeanTemp({ scene: 'database.dialect' })
 export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   async fetchDatabases(
     schemaBuilder: Knex.SchemaBuilder,

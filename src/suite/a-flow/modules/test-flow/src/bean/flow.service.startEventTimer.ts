@@ -1,7 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanFlowServiceBase } from 'vona-module-a-flownode';
 
-@Bean({ scene: 'flow.service' })
+@BeanTemp({ scene: 'flow.service' })
 export class FlowServiceStartEventTimer extends BeanFlowServiceBase {
   async execute(context) {
     // parameter

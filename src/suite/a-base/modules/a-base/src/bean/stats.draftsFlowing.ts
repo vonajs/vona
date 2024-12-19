@@ -1,6 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
-@Bean({ scene: 'stats' })
+@BeanTemp({ scene: 'stats' })
 export class StatsDraftsFlowing extends BeanBase {
   async execute(context) {
     const { user } = context;

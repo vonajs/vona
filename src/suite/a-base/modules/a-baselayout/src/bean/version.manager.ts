@@ -1,7 +1,8 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 
-@Bean({ scene: 'version' })
+@BeanTemp({ scene: 'version' })
 export class VersionManager extends BeanBase {
   get modelRoleRight() {
     return this.$scope.base.model.roleRight;

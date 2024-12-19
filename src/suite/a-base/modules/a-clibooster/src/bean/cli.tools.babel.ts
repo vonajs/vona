@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanCliBase } from 'vona-module-a-cli';
 
 import path from 'path';
@@ -7,7 +8,7 @@ import babel from '@babel/core';
 import UglifyJS from 'uglify-js';
 import fse from 'fs-extra';
 
-@Bean({ scene: 'cli.tools' })
+@BeanTemp({ scene: 'cli.tools' })
 export class CliToolsBabel extends BeanCliBase {
   async execute({ user }: any) {
     const { cwd, argv } = this.context;

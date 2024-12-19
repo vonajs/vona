@@ -1,8 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
 
 import { CliCreatePageBase } from '../common/cliCreatePage.js';
 
-@Bean({ scene: 'cli.create' })
+@BeanTemp({ scene: 'cli.create' })
 export class CliCreatePage extends CliCreatePageBase {
   constructor() {
     super('page');

@@ -1,3 +1,4 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { Bean, cast } from 'vona';
 
 import path from 'path';
@@ -9,7 +10,7 @@ import utility from 'utility';
 import eggBornUtils from 'egg-born-utils';
 import CliStoreBase from '../common/cliStoreBase.js';
 
-@Bean({ scene: 'cli.store' })
+@BeanTemp({ scene: 'cli.store' })
 export class CliStorePublish extends CliStoreBase {
   constructor() {
     super('publish');

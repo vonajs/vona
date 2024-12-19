@@ -1,7 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanCliBase } from 'vona-module-a-cli';
 
-@Bean({ scene: 'cli.token' })
+@BeanTemp({ scene: 'cli.token' })
 export class CliTokenList extends BeanCliBase {
   get localToken() {
     return this.bean.scope('a-authopen').service.token;

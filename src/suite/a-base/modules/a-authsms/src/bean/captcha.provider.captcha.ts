@@ -1,5 +1,6 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 
 import chalk from 'chalk';
 import * as Boxen from 'boxen';
@@ -12,7 +13,7 @@ const boxenOptions: Boxen.Options = {
   borderStyle: 'round',
 } as Boxen.Options;
 
-@Bean({ scene: 'captcha.provider' })
+@BeanTemp({ scene: 'captcha.provider' })
 export class CaptchaProviderCaptcha extends BeanBase {
   async verify(_context) {
     const { providerInstanceId, context, data, dataInput } = _context;

@@ -1,7 +1,8 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { Bean, IModule, ISuite } from 'vona';
 import { BeanCliBase } from 'vona-module-a-cli';
 
-@Bean({ scene: 'cli.git' })
+@BeanTemp({ scene: 'cli.git' })
 export class CliGitCommit extends BeanCliBase {
   async execute({ user }: any) {
     const { argv } = this.context;

@@ -1,8 +1,9 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
 import * as PopCore from '@alicloud/pop-core';
 
-@Bean({ scene: 'sms.provider' })
+@BeanTemp({ scene: 'sms.provider' })
 export class SmsProviderAliyun extends BeanBase {
   async sendCode({ providerInstanceId, context, config }: any) {
     // get

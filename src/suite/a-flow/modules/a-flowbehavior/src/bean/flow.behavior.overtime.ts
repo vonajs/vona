@@ -1,9 +1,10 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean } from 'vona';
+
 import { BeanFlowBehaviorBase } from 'vona-module-a-flow';
 import { TypeQueueOvertimeJobData } from './queue.overtime.js';
 
-@Bean({ scene: 'flow.behavior' })
+@BeanTemp({ scene: 'flow.behavior' })
 export class FlowBehaviorOvertime extends BeanFlowBehaviorBase {
   async enter(_context, next) {
     // addJob

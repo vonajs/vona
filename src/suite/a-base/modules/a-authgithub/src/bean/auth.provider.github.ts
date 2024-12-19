@@ -1,10 +1,11 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanAuthProviderBase } from 'vona-module-a-auth';
 
 import Strategy from 'passport-github';
 import StrategyMock from '../meta/passport/strategyMock.js';
 
-@Bean({ scene: 'auth.provider' })
+@BeanTemp({ scene: 'auth.provider' })
 export class AuthProviderGithub extends BeanAuthProviderBase {
   get configModule() {
     return this.scope.config;

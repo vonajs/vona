@@ -1,4 +1,5 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanIoChannelBase } from 'vona-module-a-socketio';
 import nodemailer from 'nodemailer';
 import chalk from 'chalk';
@@ -12,7 +13,7 @@ const boxenOptions: Boxen.Options = {
   borderStyle: 'round',
 } as Boxen.Options;
 
-@Bean({ scene: 'io.channel' })
+@BeanTemp({ scene: 'io.channel' })
 export class IoChannelMail extends BeanIoChannelBase {
   async onPush({ content /* options, message, messageSync, messageClass*/ }: any) {
     // check if content.message

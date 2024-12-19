@@ -1,6 +1,7 @@
-import { Bean, BeanBase } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+import { BeanBase } from 'vona';
 
-@Bean({ scene: 'captcha.provider' })
+@BeanTemp({ scene: 'captcha.provider' })
 export class CaptchaProviderCaptcha extends BeanBase {
   async verify(context) {
     const { data, dataInput } = context;

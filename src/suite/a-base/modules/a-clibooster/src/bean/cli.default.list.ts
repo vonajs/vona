@@ -1,7 +1,8 @@
-import { Bean } from 'vona';
+import { BeanTemp } from 'vona-module-a-bean';
+
 import { BeanCliBase } from 'vona-module-a-cli';
 
-@Bean({ scene: 'cli.default' })
+@BeanTemp({ scene: 'cli.default' })
 export class CliDefaultList extends BeanCliBase {
   async execute({ user }: any) {
     const { argv } = this.context;

@@ -1,8 +1,9 @@
+import { BeanTemp } from 'vona-module-a-bean';
 import { __ThisModule__ } from '../.metadata/this.js';
-import { Bean, BeanBase } from 'vona';
+import { BeanBase } from 'vona';
 import { BigNumber } from 'bignumber.js';
 
-@Bean({ scene: 'stats' })
+@BeanTemp({ scene: 'stats' })
 export class StatsMessage extends BeanBase {
   async execute(context) {
     const { keys, user } = context;
