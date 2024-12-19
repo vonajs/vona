@@ -2,7 +2,6 @@ export default {
   view: false,
   development: false,
   watcher: false,
-  redis: false,
 
   // need not redefined
   // static: {

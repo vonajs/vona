@@ -221,8 +221,6 @@ export default function (appInfo: VonaAppInfo) {
 
   // redis
   config.redis = {
-    app: true,
-    agent: false,
     default: {
       host: process.env.REDIS_DEFAULT_HOST,
       port: parseInt(process.env.REDIS_DEFAULT_PORT),
