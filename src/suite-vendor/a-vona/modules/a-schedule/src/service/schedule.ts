@@ -111,7 +111,6 @@ export class ServiceSchedule extends BeanBase {
       async () => {
         await this.deleteSchedule(scheduleName);
         await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, {
-          name: scheduleKey,
           data,
           opts: templateOptions,
         });
