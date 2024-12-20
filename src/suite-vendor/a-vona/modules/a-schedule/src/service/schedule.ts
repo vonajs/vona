@@ -67,9 +67,6 @@ export class ServiceSchedule extends BeanBase {
     const scheduleKeyConfig = this.getScheduleKey(this.ctx.subdomain, scheduleName);
     const scheduleHashConfig = this.$scope.queue.service.queue.getRepeatKey(scheduleKeyConfig, scheduleConfig!.repeat);
     if (scheduleHashActive !== scheduleHashConfig) {
-      // todo: to be considered, maybe not do delete/add
-      await this.deleteSchedule(job);
-      await this.addSchedule(scheduleName, job.data.options!.subdomain);
       return false;
     }
     // ok
@@ -109,6 +106,7 @@ export class ServiceSchedule extends BeanBase {
       },
     );
     const templateOptions = deepExtend({}, this.scope.config.schedule.templateOptions, scheduleOptions.templateOptions);
+    await this.deleteSchedule(scheduleName);
     await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, {
       name: scheduleKey,
       data,
