@@ -1,11 +1,16 @@
 {
-  "name": "vona-module-a-cabloy",
-  "version": "5.0.3",
-  "title": "a-cabloy",
+  "name": "vona-module-a-status",
+  "version": "5.0.0",
   "vonaModule": {
+    "fileVersion": 1,
     "dependencies": {
-      "a-vona": "5.0.0",
-      "a-status": "5.0.0"
+      "a-vona": "5.0.0"
+    },
+    "metas": {
+      "status": {
+        "scopeResource": true,
+        "boilerplate": "cli/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -22,14 +27,14 @@
     "./package.json": "./package.json"
   },
   "description": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "author": "zhennann",
+  "dependencies": {
+    "assert": "^2.0.0"
+  }
 }
