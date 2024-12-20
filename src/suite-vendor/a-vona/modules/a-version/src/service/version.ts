@@ -267,12 +267,8 @@ export class ServiceVersion extends BeanBase {
 
   private __getBeanVersion<T>(moduleName: string, throwErrorIfEmpty: boolean): T {
     // bean
-    let beanVersion = this.bean._getBean(`${moduleName}.meta.version` as any);
-    if (!beanVersion) {
-      // todo: remove version.manager
-      beanVersion = <any>this.bean._getBean(`${moduleName}.version.manager` as any);
-      if (!beanVersion && throwErrorIfEmpty) throw new Error(`meta.version not exists for ${moduleName}`);
-    }
+    const beanVersion = this.bean._getBean(`${moduleName}.meta.version` as any);
+    if (!beanVersion && throwErrorIfEmpty) throw new Error(`meta.version not exists for ${moduleName}`);
     return beanVersion;
   }
 }

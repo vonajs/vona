@@ -65,15 +65,22 @@ export interface IModuleModel {
 /** model: end */
 /** meta: begin */
 export * from '../bean/meta.redlock.js';
+export * from '../bean/meta.version.js';
 
 import 'vona';
 declare module 'vona' {
   export interface IMetaRecord {
     'a-status:redlock': never;
+    'a-status:version': never;
   }
 }
 declare module 'vona-module-a-status' {
   export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleAStatus;
+  }
+
+  export interface MetaVersion {
     /** @internal */
     get scope(): ScopeModuleAStatus;
   }
