@@ -1,5 +1,9 @@
 import { ConfigInstanceBase } from 'vona';
 
+export interface IMetaVersionOptions {
+  scene: 'update' | 'init' | 'test';
+}
+
 export interface IMetaVersionUpdateOptions {
   version: number;
 }

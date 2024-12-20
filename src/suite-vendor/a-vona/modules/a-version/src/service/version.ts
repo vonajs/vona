@@ -4,7 +4,7 @@ import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 import { Service } from 'vona-module-a-web';
 import { IInstanceStartupOptions } from 'vona-module-a-startup';
-import { IMetaVersionInit, IMetaVersionTest, IMetaVersionUpdate } from '../types/version.js';
+import { IMetaVersionInit, IMetaVersionOptions, IMetaVersionTest, IMetaVersionUpdate } from '../types/version.js';
 
 @Service()
 export class ServiceVersion extends BeanBase {
@@ -64,7 +64,7 @@ export class ServiceVersion extends BeanBase {
     // check all modules
     const debug = this.app.bean.debug.get('version');
     for (const module of this.app.meta.modulesArray) {
-      debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
+      if (debug.enabled) debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
       await this.__checkModule(module.info.relativeName, options);
     }
 
@@ -72,7 +72,7 @@ export class ServiceVersion extends BeanBase {
     if (options.scene === 'init' || options.scene === 'test') {
       await this.bean.executor.newCtx(
         async () => {
-          await this.__after();
+          await this.__after(options);
         },
         {
           subdomain: options.subdomain,
@@ -165,7 +165,8 @@ export class ServiceVersion extends BeanBase {
       // loop
       const debug = this.app.bean.debug.get('version');
       for (const version of versions) {
-        debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
+        if (debug.enabled)
+          debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
         await this.__updateModule2(options, module, version);
       }
     }
@@ -251,7 +252,7 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  protected async __after() {
+  protected async __after(options: IMetaVersionOptions) {
     // todo: raise event
     await this.app.bean.role.build();
   }
