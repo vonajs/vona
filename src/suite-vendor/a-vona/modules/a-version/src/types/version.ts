@@ -2,6 +2,7 @@ import { ConfigInstanceBase } from 'vona';
 
 export interface IMetaVersionOptions {
   scene: 'update' | 'init' | 'test';
+  subdomain?: string;
 }
 
 export interface IMetaVersionUpdateOptions {

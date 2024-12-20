@@ -72,7 +72,7 @@ export class ServiceVersion extends BeanBase {
     if (options.scene === 'init' || options.scene === 'test') {
       await this.bean.executor.newCtx(
         async () => {
-          await this.__after(options);
+          await this.__done(options);
         },
         {
           subdomain: options.subdomain,
@@ -252,9 +252,8 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  protected async __after(options: IMetaVersionOptions) {
-    // todo: raise event
-    await this.app.bean.role.build();
+  protected async __done(options: IMetaVersionOptions) {
+    await this.scope.event.versionDone.emit(options);
   }
 
   // get module

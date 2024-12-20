@@ -16,6 +16,49 @@ declare module 'vona-module-a-version' {
   }
 }
 /** beans: end */
+/** bean: begin */
+export * from '../bean/bean.worker.js';
+
+import 'vona';
+declare module 'vona' {}
+declare module 'vona-module-a-version' {
+  export interface BeanWorker {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanWorker } from '../bean/bean.worker.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    worker: BeanWorker;
+  }
+}
+/** bean: end */
+/** broadcast: begin */
+export * from '../bean/broadcast.columnsClear.js';
+
+import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
+declare module 'vona-module-a-broadcast' {
+  export interface IBroadcastRecord {
+    'a-version:columnsClear': IDecoratorBroadcastOptions;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface BroadcastColumnsClear {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** broadcast: end */
+/** broadcast: begin */
+import { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
+export interface IModuleBroadcast {
+  columnsClear: BroadcastColumnsClear;
+}
+/** broadcast: end */
 /** entity: begin */
 export * from '../entity/version.js';
 export * from '../entity/versionInit.js';
@@ -81,49 +124,28 @@ export interface IModuleModel {
   viewRecord: ModelViewRecord;
 }
 /** model: end */
-/** bean: begin */
-export * from '../bean/bean.worker.js';
+/** event: begin */
+export * from '../bean/event.versionDone.js';
 
-import 'vona';
-declare module 'vona' {}
+import { IDecoratorEventOptions } from 'vona-module-a-event';
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-version:versionDone': IDecoratorEventOptions;
+  }
+}
 declare module 'vona-module-a-version' {
-  export interface BeanWorker {
+  export interface EventVersionDone {
     /** @internal */
     get scope(): ScopeModuleAVersion;
   }
 }
-/** bean: end */
-/** bean: begin */
-import { BeanWorker } from '../bean/bean.worker.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    worker: BeanWorker;
-  }
+/** event: end */
+/** event: begin */
+import { EventVersionDone } from '../bean/event.versionDone.js';
+export interface IModuleEvent {
+  versionDone: EventVersionDone;
 }
-/** bean: end */
-/** broadcast: begin */
-export * from '../bean/broadcast.columnsClear.js';
-
-import { IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
-declare module 'vona-module-a-broadcast' {
-  export interface IBroadcastRecord {
-    'a-version:columnsClear': IDecoratorBroadcastOptions;
-  }
-}
-declare module 'vona-module-a-version' {
-  export interface BroadcastColumnsClear {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-}
-/** broadcast: end */
-/** broadcast: begin */
-import { BroadcastColumnsClear } from '../bean/broadcast.columnsClear.js';
-export interface IModuleBroadcast {
-  columnsClear: BroadcastColumnsClear;
-}
-/** broadcast: end */
+/** event: end */
 /** startup: begin */
 export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';
@@ -238,9 +260,10 @@ export interface ScopeModuleAVersion {
   config: TypeModuleConfig<typeof config>;
   error: TypeModuleErrors<typeof Errors>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  broadcast: IModuleBroadcast;
   entity: IModuleEntity;
   model: IModuleModel;
-  broadcast: IModuleBroadcast;
+  event: IModuleEvent;
   service: IModuleService;
 }
 
