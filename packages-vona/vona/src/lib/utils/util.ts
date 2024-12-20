@@ -3,7 +3,8 @@ import { extend } from '@cabloy/extend';
 import * as ModuleInfo from '@cabloy/module-info';
 import * as security from 'egg-security';
 import fse from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
+import os from 'node:os';
 import { URL } from 'url';
 import * as uuid from 'uuid';
 import { IModule, TypeMonkeyName, VonaContext } from '../../types/index.js';
@@ -105,6 +106,25 @@ export class AppUtil extends BeanSimple {
     const parts = moduleName.split('-');
     // path
     return `${globalPrefix}/${parts[0]}/${parts[1]}/${path}`;
+  }
+
+  async getPublicPathPhysicalRoot() {
+    if (this.app.meta.isTest || this.app.meta.isLocal) {
+      return this.app.config.static.dir;
+    }
+    const dir = this.app.config.publicDir || path.join(os.homedir(), 'vona', this.app.name, 'public');
+    await fse.ensureDir(dir);
+    return dir;
+  }
+
+  async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
+    const rootPath = await this.getPublicPathPhysicalRoot();
+    // use instance.id, not subdomain
+    const dir = path.join(rootPath, this.ctx.instance.id.toString(), subdir || '');
+    if (ensure) {
+      await fse.ensureDir(dir);
+    }
+    return dir;
   }
 
   createError(data, returnObject?: boolean) {
