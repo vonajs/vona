@@ -4,7 +4,13 @@ import { EntityVersion } from '../entity/version.js';
 import { EntityVersionInit } from '../entity/versionInit.js';
 import { Service } from 'vona-module-a-web';
 import { IInstanceStartupOptions } from 'vona-module-a-startup';
-import { IMetaVersionInit, IMetaVersionOptions, IMetaVersionTest, IMetaVersionUpdate } from '../types/version.js';
+import {
+  IMetaVersionInit,
+  IMetaVersionOptions,
+  IMetaVersionOptionsInner,
+  IMetaVersionTest,
+  IMetaVersionUpdate,
+} from '../types/version.js';
 
 @Service()
 export class ServiceVersion extends BeanBase {
@@ -16,7 +22,7 @@ export class ServiceVersion extends BeanBase {
   async __start() {
     // update all modules
     try {
-      const result = await this.__check({ scene: null });
+      const result = await this.__check({ scene: 'update' });
       // clear columns cache
       this.bean.model.columnsClearAll();
       // broadcast
@@ -32,7 +38,7 @@ export class ServiceVersion extends BeanBase {
 
   async __instanceInit(subdomain: string, instanceBase?: ConfigInstanceBase) {
     try {
-      const optionsInit = Object.assign({}, instanceBase, { scene: 'init', subdomain });
+      const optionsInit = Object.assign({}, instanceBase, { scene: 'init' as const, subdomain });
       await this.__check(optionsInit);
       console.log(chalk.cyan(`  The instance is initialized successfully: ${subdomain || 'default'}`));
     } catch (err) {
@@ -41,15 +47,15 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  async __instanceTest(subdomain) {
+  async __instanceTest(subdomain: string) {
     await this.__check({ scene: 'test', subdomain });
   }
 
   // scene: null/init/test
-  async __check(options) {
+  async __check(options: IMetaVersionOptionsInner) {
     options.result = {};
 
-    if (!options.scene) {
+    if (options.scene === 'update') {
       // confirm table aVersion exists
       const hasTableVersion = await this.bean.model.schema.hasTable('aVersion');
       if (!hasTableVersion) {
@@ -68,24 +74,22 @@ export class ServiceVersion extends BeanBase {
       await this.__checkModule(module.info.relativeName, options);
     }
 
-    // check if role dirty for init/test
-    if (options.scene === 'init' || options.scene === 'test') {
-      await this.bean.executor.newCtx(
-        async () => {
-          await this.__done(options);
-        },
-        {
-          subdomain: options.subdomain,
-        },
-      );
-    }
+    // version done
+    await this.bean.executor.newCtx(
+      async () => {
+        await this.__done(options);
+      },
+      {
+        subdomain: options.subdomain,
+      },
+    );
 
     // ok
     return options.result;
   }
 
   // check module
-  async __checkModule(moduleName, options) {
+  async __checkModule(moduleName: string, options: IMetaVersionOptionsInner) {
     // module
     const module = this.__getModule(moduleName);
 
@@ -95,7 +99,7 @@ export class ServiceVersion extends BeanBase {
       fileVersionNew = module.package.vonaModule.fileVersion;
     }
 
-    if (fileVersionNew && (!options.scene || options.scene === 'init')) {
+    if (fileVersionNew && ['update', 'init'].includes(options.scene)) {
       // update module or init module
 
       // -1: always
@@ -104,7 +108,7 @@ export class ServiceVersion extends BeanBase {
       } else {
         // fileVersionOld
         let fileVersionOld = 0; // default
-        if (!options.scene) {
+        if (options.scene === 'update') {
           const res = await this.bean.model
             .builder<EntityVersion>('aVersion')
             .select('*')
@@ -180,7 +184,7 @@ export class ServiceVersion extends BeanBase {
   async __updateModule2(options, module, version) {
     // perform action
     try {
-      if (!options.scene) {
+      if (options.scene === 'update') {
         // update
         await this.bean.executor.newCtx(
           async () => {

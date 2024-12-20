@@ -5,6 +5,11 @@ export interface IMetaVersionOptions {
   subdomain?: string;
 }
 
+export interface IMetaVersionOptionsInner extends IMetaVersionOptions {
+  result?: Record<string, any>;
+  instanceBase?: ConfigInstanceBase;
+}
+
 export interface IMetaVersionUpdateOptions {
   version: number;
 }
