@@ -3,7 +3,13 @@
   "version": "5.0.0",
   "title": "a-static",
   "vonaModule": {
-    "dependencies": {}
+    "dependencies": {},
+    "metas": {
+      "static": {
+        "scopeResource": true,
+        "boilerplate": "cli/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
@@ -25,7 +31,8 @@
   "author": "",
   "files": [
     "dist",
-    "static"
+    "static",
+    "cli"
   ],
   "scripts": {},
   "dependencies": {}

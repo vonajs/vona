@@ -1,5 +1,4 @@
 import { BeanBase, FunctionAsync } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
 import { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.js';
 
 export class BeanRedlockBase extends BeanBase {
