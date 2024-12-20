@@ -1,9 +1,9 @@
 import { schemaArray } from './array.js';
 import { schemaDefault } from './default.js';
+import { schemaEmail, schemaIp, schemaMax, schemaMin, schemaUrl, schemaUuid } from './helpers.js';
 import { schemaObject } from './object.js';
 import { schemaDescription, schemaOpenapi } from './openapi.js';
 import { schemaOptional } from './optional.js';
-import { schemaEmail, schemaIp, schemaMax, schemaMin, schemaUrl, schemaUuid } from './helpers.js';
 
 export const v = {
   array: schemaArray,
