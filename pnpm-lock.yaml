@@ -115,7 +115,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-swagger
       vona-module-a-validation:
         specifier: ^5.0.0
-        version: link:src/suite-vendor/a-vona/modules/a-validator
+        version: link:src/suite-vendor/a-vona/modules/a-validation
       vona-module-a-version:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-version
@@ -883,7 +883,7 @@ importers:
         version: link:modules/a-swagger
       vona-module-a-validation:
         specifier: workspace:^
-        version: link:modules/a-validator
+        version: link:modules/a-validation
       vona-module-a-vona:
         specifier: ^5.0.3
         version: link:modules/a-vona
@@ -1020,7 +1020,7 @@ importers:
         specifier: 0.2.2
         version: 0.2.2
 
-  src/suite-vendor/a-vona/modules/a-validator:
+  src/suite-vendor/a-vona/modules/a-validation:
     dependencies:
       '@asteasolutions/zod-to-openapi':
         specifier: ^7.2.0
