@@ -106,11 +106,17 @@ export class ServiceSchedule extends BeanBase {
       },
     );
     const templateOptions = deepExtend({}, this.scope.config.schedule.templateOptions, scheduleOptions.templateOptions);
-    await this.deleteSchedule(scheduleName);
-    await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, {
-      name: scheduleKey,
-      data,
-      opts: templateOptions,
-    });
+    await this.scope.redlock.lock(
+      `schedule.${scheduleName}`,
+      async () => {
+        await this.deleteSchedule(scheduleName);
+        await queue.upsertJobScheduler(scheduleKey, scheduleOptions.repeat, {
+          name: scheduleKey,
+          data,
+          opts: templateOptions,
+        });
+      },
+      { subdomain },
+    );
   }
 }

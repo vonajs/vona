@@ -1,3 +1,22 @@
+/** meta: begin */
+export * from '../bean/meta.redlock.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-schedule:redlock': never;
+  }
+}
+declare module 'vona-module-a-schedule' {
+  export interface MetaRedlock {
+    /** @internal */
+    get scope(): ScopeModuleASchedule;
+  }
+}
+/** meta: end */
+/** meta redlock: begin */
+import { MetaRedlock } from '../bean/meta.redlock.js';
+/** meta redlock: end */
 /** queue: begin */
 export * from '../bean/queue.schedule.js';
 
@@ -81,6 +100,7 @@ export interface ScopeModuleASchedule {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  redlock: MetaRedlock;
   queue: IModuleQueue;
   service: IModuleService;
 }
