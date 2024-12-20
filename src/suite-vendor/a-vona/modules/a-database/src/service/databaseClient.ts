@@ -1,4 +1,4 @@
-import { BeanBase } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import knex, { Knex } from 'knex';
 import { configBases } from '../common/configBases.js';
 import { Service } from 'vona-module-a-web';
@@ -52,7 +52,7 @@ export class ServiceDatabaseClient extends BeanBase {
     // combine
     const configBase = this.configDatabase.base;
     const configBaseClient = configBases[clientConfig.client as string];
-    clientConfig = this.bean.util.extend({}, configBase, configBaseClient, clientConfig);
+    clientConfig = deepExtend({}, configBase, configBaseClient, clientConfig);
     // ready
     return clientConfig;
   }

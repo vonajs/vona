@@ -1,4 +1,3 @@
-import { __ThisModule__ } from '../.metadata/this.js';
 import LRUCache from 'lru-cache';
 import { CacheBase } from '../common/cacheBase.js';
 import { Service } from 'vona-module-a-web';

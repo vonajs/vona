@@ -1,8 +1,6 @@
 import { Bean } from 'vona-module-a-bean';
 import { ConfigInstanceBase, isNil, VonaConfig } from 'vona';
 import { BeanBase } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
-import { IModelSelectParams } from 'vona-module-a-database';
 import { EntityInstance } from '../entity/instance.js';
 
 @Bean()
@@ -15,21 +13,8 @@ export class BeanInstance extends BeanBase {
     return this.scope.service.instance.getConfig()!;
   }
 
-  // todo: typecify
-  async list(options?) {
-    // options
-    if (!options) options = { where: null, orders: null, page: null };
-    const page = this.app.bean.util.page(options.page, false);
-    const orders = options.orders;
-    const where = options.where; // allow disabled=undefined
-    // const where = options.where || { disabled: 0 }; // allow disabled=undefined
-    // select
-    const _options = { where, orders } as IModelSelectParams;
-    if (page.size !== 0) {
-      _options.limit = page.size;
-      _options.offset = page.index;
-    }
-    return await this.modelInstance.select(_options);
+  async list() {
+    return await this.modelInstance.select();
   }
 
   async update(data: EntityInstance) {

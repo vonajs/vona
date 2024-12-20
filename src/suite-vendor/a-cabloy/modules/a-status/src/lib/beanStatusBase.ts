@@ -1,5 +1,4 @@
 import { BeanBase } from 'vona';
-import { __ThisModule__ } from '../.metadata/this.js';
 
 export class BeanStatusBase extends BeanBase {
   protected __get__(prop: string) {

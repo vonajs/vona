@@ -6,7 +6,6 @@ import {
   IModelMethodOptionsGeneral,
   IModelUpdateOptionsGeneral,
 } from '../../types/index.js';
-import { __ThisModule__ } from '../../.metadata/this.js';
 import { Knex } from 'knex';
 
 export class BeanModelMeta extends BeanBase {
