@@ -41,7 +41,7 @@ export class ControllerOnion extends BeanBase {
 
   @Get('echo3/:userId')
   @UseGuardGlobal('a-core:user', { public: true })
-  async echo3(@Query('id', v.optional) id: number) {
+  async echo3(@Query('id', v.optional()) id: number) {
     //this.scope.util.combineApiPath
     console.log(this.ctx.path);
     //const ctx = this.app.currentContext;

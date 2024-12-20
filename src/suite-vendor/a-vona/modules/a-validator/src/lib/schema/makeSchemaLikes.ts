@@ -1,0 +1,29 @@
+import { cast, Constructable, isClassStrict } from 'vona';
+import { schema } from './schema.js';
+import { z } from 'zod';
+import { SchemaLike, SchemaLikeCreate } from '../types/decorator.js';
+
+export function makeSchemaLikes(schemaLikes: SchemaLike[], typeInit: any): z.ZodSchema {
+  // default schema
+  let argSchema: z.ZodSchema = schema(typeInit);
+  // loop
+  for (let index = schemaLikes.length - 1; index >= 0; index--) {
+    const schemaLike = schemaLikes[index];
+    argSchema = makeSchemaLike(schemaLike, argSchema);
+  }
+  return argSchema;
+}
+
+export function makeSchemaLike(schemaLike: SchemaLike | undefined, schemaPrevious: z.ZodSchema): z.ZodSchema {
+  if (!schemaLike) return schemaPrevious;
+  if (!!cast<z.ZodSchema>(schemaLike).parseAsync) {
+    // schema
+    return schemaLike as z.ZodSchema;
+  } else if (isClassStrict(schemaLike)) {
+    // class
+    return schema(cast<Constructable>(schemaLike));
+  } else {
+    // function
+    return cast<SchemaLikeCreate>(schemaLike)(schemaPrevious);
+  }
+}

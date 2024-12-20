@@ -6,7 +6,7 @@ import {
   RouteHandlerArgumentType,
   SymbolRouteHandlersArgumentsMeta,
 } from 'vona-module-a-aspect';
-import { schemaChains } from '../schema/schemaChains.js';
+import { makeSchemaLikes } from '../schema/makeSchemaLikes.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
   return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
@@ -26,7 +26,7 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
       const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
       const metaType = paramtypes[index];
 
-      const argSchema = schemaChains(paramSchemaLikes, metaType);
+      const argSchema = makeSchemaLikes(paramSchemaLikes, metaType);
 
       argsMeta.push({
         index,
