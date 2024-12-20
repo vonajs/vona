@@ -71,6 +71,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-executor
+      vona-module-a-index:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-index
       vona-module-a-instance:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-instance
@@ -113,6 +116,9 @@ importers:
       vona-module-a-validator:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-validator
+      vona-module-a-version:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-version
       vona-module-a-vona:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-vona
@@ -1028,6 +1034,8 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.24.1
+
+  src/suite-vendor/a-vona/modules/a-version: {}
 
   src/suite-vendor/a-vona/modules/a-vona: {}
 

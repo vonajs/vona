@@ -7,15 +7,7 @@ export default function (appInfo: VonaAppInfo) {
   config.keys = appInfo.name + '_1596889047267_3245';
 
   // modules
-  config.modules = {
-    'a-captcha': {
-      configFront: {
-        local: {
-          // disabled: true,
-        },
-      },
-    },
-  };
+  config.modules = {};
 
   return config;
 }

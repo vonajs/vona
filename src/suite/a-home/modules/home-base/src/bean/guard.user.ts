@@ -11,11 +11,11 @@ export class GuardUser extends BeanBase implements IGuardExecute {
     // check user
     // todo: middleware.auth.ts
     if (!options.public) {
-      const user = this.ctx.state.user?.op;
-      if (!user || (user.id !== 0 && user.anonymous)) {
-        //return false;
-        return this.app.throw(401);
-      }
+      // const user = this.ctx.state.user?.op;
+      // if (!user || (user.id !== 0 && user.anonymous)) {
+      //   //return false;
+      //   return this.app.throw(401);
+      // }
     }
     // next
     return next();

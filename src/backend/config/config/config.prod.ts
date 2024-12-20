@@ -21,14 +21,7 @@ export default function (appInfo: VonaAppInfo) {
   ];
 
   // modules
-  config.modules = {
-    'a-base': {
-      account: {
-        // warning: if set true, should setup the provider's account of mail/sms
-        needActivation: false,
-      },
-    },
-  };
+  config.modules = {};
 
   return config;
 }
