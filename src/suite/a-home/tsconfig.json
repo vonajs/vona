@@ -8,6 +8,9 @@
     },
     {
       "path": "modules/home-index/tsconfig.build.json"
+    },
+    {
+      "path": "modules/home-user/tsconfig.build.json"
     }
   ]
 }

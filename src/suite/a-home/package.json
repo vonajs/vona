@@ -10,6 +10,7 @@
   "author": "zhennann",
   "dependencies": {
     "vona-module-home-base": "workspace:^",
-    "vona-module-home-index": "workspace:^"
+    "vona-module-home-index": "workspace:^",
+    "vona-module-home-user": "workspace:^"
   }
 }
