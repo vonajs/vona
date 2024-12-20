@@ -6,15 +6,16 @@ import { IQueueRecord, TypeQueueJob } from 'vona-module-a-queue';
 
 @BeanTemp({ scene: 'flow.node' })
 export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
+  // todo: 将参数列表改为分体式
   async deploy({ deploy, flowDefId, node }: any) {
     if (deploy) {
-      await this._addSchedule({ flowDefId, node });
+      await this._addSchedule(flowDefId, node);
     } else {
       await this._deleteSchedule(flowDefId, node);
     }
   }
 
-  async _addSchedule({ flowDefId, node }: any) {
+  async _addSchedule(flowDefId: string, node) {
     const repeat = this._getJobRepeat(node);
     if (!repeat) return;
     if (!repeat.every && !repeat.pattern) return;
