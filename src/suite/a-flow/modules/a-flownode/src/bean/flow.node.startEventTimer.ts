@@ -33,6 +33,7 @@ export class FlowNodeStartEventTimer extends BeanFlowNodeBase {
         },
       },
     );
+    await this._deleteSchedule(flowDefId, node);
     await queue.upsertJobScheduler(scheduleKey, repeat, { data });
   }
 
