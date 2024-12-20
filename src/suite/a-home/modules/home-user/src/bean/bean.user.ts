@@ -16,7 +16,7 @@ const userAdmin: IUser = {
 @Bean()
 export class BeanUser extends BeanUserBase {
   public get isAuthenticated(): boolean {
-    return this.current !== undefined && TableIdentity.isValid(this.userId);
+    return !!this.current && TableIdentity.isValid(this.userId);
   }
 
   public get current(): IUser | undefined {
