@@ -35,7 +35,7 @@ export class ServiceErrorView extends BeanBase {
     data.appInfo = this.serializeAppInfo();
 
     data.meta = {
-      errorLogo: this.scope.util.combineStaticPath('img/vona.png'),
+      errorLogo: this.scope.util.combineStaticPath('img/vona.svg'),
     };
 
     return this.complieView(this.viewTemplate, data);
