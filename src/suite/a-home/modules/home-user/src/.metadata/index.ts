@@ -1,19 +1,3 @@
-/** guard: begin */
-export * from '../bean/guard.user.js';
-import { IGuardOptionsUser } from '../bean/guard.user.js';
-import 'vona';
-declare module 'vona-module-a-aspect' {
-  export interface IGuardRecordGlobal {
-    'home-user:user': IGuardOptionsUser;
-  }
-}
-declare module 'vona-module-home-user' {
-  export interface GuardUser {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
-/** guard: end */
 /** bean: begin */
 export * from '../bean/bean.user.js';
 

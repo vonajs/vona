@@ -30,6 +30,22 @@ declare module 'vona-module-a-core' {
   }
 }
 /** interceptor: end */
+/** guard: begin */
+export * from '../bean/guard.user.js';
+import { IGuardOptionsUser } from '../bean/guard.user.js';
+import 'vona';
+declare module 'vona-module-a-aspect' {
+  export interface IGuardRecordGlobal {
+    'a-core:user': IGuardOptionsUser;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface GuardUser {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** guard: end */
 /** middleware: begin */
 export * from '../bean/middleware.development.js';
 export * from '../bean/middleware.gate.js';
