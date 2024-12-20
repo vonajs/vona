@@ -98,6 +98,9 @@ importers:
       vona-module-a-static:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-static
+      vona-module-a-status:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-status
       vona-module-a-summer:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-summer
@@ -946,6 +949,8 @@ importers:
       koa-compose:
         specifier: ^4.1.0
         version: 4.1.0
+
+  src/suite-vendor/a-vona/modules/a-instance: {}
 
   src/suite-vendor/a-vona/modules/a-meta: {}
 
