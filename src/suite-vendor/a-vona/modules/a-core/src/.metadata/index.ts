@@ -73,6 +73,25 @@ declare module 'vona-module-a-core' {
   }
 }
 /** middleware: end */
+/** meta: begin */
+export * from '../bean/meta.static.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-core:static': never;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface MetaStatic {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** meta: end */
+/** meta static: begin */
+import { MetaStatic } from '../bean/meta.static.js';
+/** meta static: end */
 /** service: begin */
 export * from '../service/errorView.js';
 
@@ -118,6 +137,7 @@ export interface ScopeModuleACore {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  static: MetaStatic;
   service: IModuleService;
 }
 
