@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-status.version.manager': VersionManager;
-  }
-}
-declare module 'vona-module-a-status' {
-  export interface VersionManager {
-    /** @internal */
-    get scope(): ScopeModuleAStatus;
-  }
-}
-/** beans: end */
 /** entity: begin */
 export * from '../entity/status.js';
 
