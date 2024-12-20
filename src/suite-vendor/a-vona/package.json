@@ -12,7 +12,7 @@
     "vona-module-a-core": "^5.0.3",
     "vona-module-a-swagger": "^5.0.3",
     "vona-module-a-vona": "^5.0.3",
-    "vona-module-a-validator": "workspace:^",
+    "vona-module-a-validation": "workspace:^",
     "vona-module-a-queue": "workspace:^",
     "vona-module-a-startup": "workspace:^",
     "vona-module-a-schedule": "workspace:^",

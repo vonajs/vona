@@ -1,4 +1,4 @@
-import { Rule, v } from 'vona-module-a-validator';
+import { Rule, v } from 'vona-module-a-validation';
 import { Dto } from 'vona-module-a-web';
 
 @Dto()

@@ -13,7 +13,7 @@
       "path": "modules/a-swagger/tsconfig.build.json"
     },
     {
-      "path": "modules/a-validator/tsconfig.build.json"
+      "path": "modules/a-validation/tsconfig.build.json"
     },
     {
       "path": "modules/a-queue/tsconfig.build.json"

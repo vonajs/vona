@@ -1,5 +1,5 @@
 import { Dto } from 'vona-module-a-web';
-import { Rule, v } from 'vona-module-a-validator';
+import { Rule, v } from 'vona-module-a-validation';
 
 @Dto()
 export class DtoProfile {

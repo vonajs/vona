@@ -1,7 +1,7 @@
 {
-  "name": "vona-module-a-validator",
+  "name": "vona-module-a-validation",
   "version": "5.0.0",
-  "title": "a-validator",
+  "title": "a-validation",
   "vonaModule": {
     "dependencies": {},
     "globalDependencies": {

@@ -56,9 +56,6 @@ importers:
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-broadcast
-      vona-module-a-cabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
@@ -104,39 +101,21 @@ importers:
       vona-module-a-static:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-static
-      vona-module-a-status:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-status
       vona-module-a-summer:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-summer
       vona-module-a-swagger:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-swagger
-      vona-module-a-validator:
+      vona-module-a-validation:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-validator
       vona-module-a-version:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-version
-      vona-module-a-vona:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-vona
       vona-module-a-web:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-web
-      vona-module-cabloy-test:
-        specifier: workspace:^
-        version: link:src/suite-vendor/cabloy-test/modules/cabloy-test
-      vona-module-home-base:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-base
-      vona-module-home-index:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-index
-      vona-module-vona-test:
-        specifier: workspace:^
-        version: link:src/suite-vendor/vona-test/modules/vona-test
       vona-shared:
         specifier: workspace:^
         version: link:packages-vona/shared
@@ -881,7 +860,7 @@ importers:
       vona-module-a-swagger:
         specifier: ^5.0.3
         version: link:modules/a-swagger
-      vona-module-a-validator:
+      vona-module-a-validation:
         specifier: workspace:^
         version: link:modules/a-validator
       vona-module-a-vona:

@@ -1,5 +1,5 @@
 import { Entity, EntityBase } from 'vona-module-a-database';
-import { Rule } from 'vona-module-a-validator';
+import { Rule } from 'vona-module-a-validation';
 
 @Entity('aStatus')
 export class EntityStatus extends EntityBase {

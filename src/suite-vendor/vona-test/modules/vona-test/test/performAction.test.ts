@@ -17,7 +17,7 @@ describe('performAction.test.js', () => {
     const result: { id: number; url: string } = await app.bean.executor.mockCtx(async () => {
       return await app.bean.executor.performAction('post', '/vona/test/performAction/echo', {
         onions: {
-          pipe: { 'a-validator:valid': { enable: false } },
+          pipe: { 'a-validation:valid': { enable: false } },
         },
       });
     });

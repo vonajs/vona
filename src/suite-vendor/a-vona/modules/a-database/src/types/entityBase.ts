@@ -1,5 +1,5 @@
 import { BeanBaseSimple, cast } from 'vona';
-import { Rule } from 'vona-module-a-validator';
+import { Rule } from 'vona-module-a-validation';
 import { IDecoratorEntityOptions } from './onionEntity.js';
 
 export class EntityBase extends BeanBaseSimple {

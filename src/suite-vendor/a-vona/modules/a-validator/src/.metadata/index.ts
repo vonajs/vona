@@ -4,10 +4,10 @@ import { IPipeOptionsValid } from '../bean/pipe.valid.js';
 import 'vona';
 declare module 'vona-module-a-aspect' {
   export interface IPipeRecordLocal {
-    'a-validator:valid': IPipeOptionsValid;
+    'a-validation:valid': IPipeOptionsValid;
   }
 }
-declare module 'vona-module-a-validator' {
+declare module 'vona-module-a-validation' {
   export interface PipeValid {
     /** @internal */
     get scope(): ScopeModuleAValidator;
@@ -19,7 +19,7 @@ export * from '../bean/bean.validator.js';
 
 import 'vona';
 declare module 'vona' {}
-declare module 'vona-module-a-validator' {
+declare module 'vona-module-a-validation' {
   export interface BeanValidator {
     /** @internal */
     get scope(): ScopeModuleAValidator;
@@ -62,7 +62,7 @@ export interface ScopeModuleAValidator {
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-validator': ScopeModuleAValidator;
+    'a-validation': ScopeModuleAValidator;
   }
 
   export interface IBeanScopeContainer {
@@ -70,11 +70,11 @@ declare module 'vona' {
   }
 
   export interface IBeanScopeLocale {
-    'a-validator': (typeof locales)[TypeLocaleBase];
+    'a-validation': (typeof locales)[TypeLocaleBase];
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-validator:${K}` {
-  return `a-validator:${key}`;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-validation:${K}` {
+  return `a-validation:${key}`;
 }
 /** scope: end */

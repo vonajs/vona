@@ -1,5 +1,5 @@
 import { BeanBase } from 'vona';
-import { Body, Query, v } from 'vona-module-a-validator';
+import { Body, Query, v } from 'vona-module-a-validation';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 import { Controller, Get, Post } from 'vona-module-a-web';
