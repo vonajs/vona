@@ -115,7 +115,11 @@ const _parseArray = z.ZodArray.prototype._parse;
 z.ZodArray.prototype._parse = function (input) {
   _coerceWithNil(input, () => {
     if (typeof input.data === 'string') {
-      input.data = JSON.parse(input.data);
+      if (input.data[0] === '[') {
+        input.data = JSON.parse(input.data);
+      } else {
+        input.data = input.data.split(',');
+      }
     }
   });
   return _parseArray.call(this, input);
