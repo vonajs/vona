@@ -1,6 +1,5 @@
 import { BeanBaseSimple, cast } from 'vona';
 import { Rule } from 'vona-module-a-validator';
-import { z } from 'zod';
 import { IDecoratorEntityOptions } from './onionEntity.js';
 
 export class EntityBase extends BeanBaseSimple {
@@ -15,14 +14,14 @@ export class EntityBase extends BeanBaseSimple {
     return columns;
   }
 
-  @Rule(z.number())
+  @Rule()
   id: number;
-  @Rule(z.date())
+  @Rule()
   createdAt: Date;
-  @Rule(z.date())
+  @Rule()
   updatedAt: Date;
-  @Rule(z.boolean())
+  @Rule()
   deleted: boolean;
-  @Rule(z.number())
+  @Rule()
   iid: number;
 }

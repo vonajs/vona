@@ -3,13 +3,12 @@ import { DtoUser } from '../src/dto/user.js';
 import { cast, catchError, mixinClass, omitClass, partialClass, pickClass } from 'vona';
 import assert from 'assert';
 import { Rule } from 'vona-module-a-validator';
-import { z } from 'zod';
 import { DtoProfile } from '../src/dto/profile.js';
 import { Dto } from 'vona-module-a-web';
 
 @Dto()
 class DtoUserWithMarried extends omitClass(DtoUser, ['married']) {
-  @Rule(z.boolean())
+  @Rule()
   married: boolean;
 }
 

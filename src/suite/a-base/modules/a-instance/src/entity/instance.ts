@@ -2,17 +2,16 @@ import { omitClass } from 'vona';
 import { Entity, EntityBase } from 'vona-module-a-database';
 import { IInstanceStartupOptions } from 'vona-module-a-startup';
 import { Rule } from 'vona-module-a-validator';
-import { z } from 'zod';
 
 @Entity('aInstance')
 export class EntityInstance extends omitClass(EntityBase, ['iid']) {
-  @Rule(z.boolean())
+  @Rule()
   disabled: boolean;
-  @Rule(z.string())
+  @Rule()
   name: string;
-  @Rule(z.string())
+  @Rule()
   title: string;
-  @Rule(z.string())
+  @Rule()
   config: string;
 }
 

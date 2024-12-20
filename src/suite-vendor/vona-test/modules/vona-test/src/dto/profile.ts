@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 @Dto()
 export class DtoProfile {
-  @Rule(z.number())
+  @Rule()
   id: number;
 
   @Rule(z.string().email())

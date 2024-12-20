@@ -4,12 +4,12 @@ import { z } from 'zod';
 
 @Dto()
 export class DtoUser {
-  @Rule(z.number())
+  @Rule()
   id: number;
 
   @Rule(z.string().min(3))
   name: string;
 
-  @Rule(z.boolean())
+  @Rule()
   married: boolean;
 }
