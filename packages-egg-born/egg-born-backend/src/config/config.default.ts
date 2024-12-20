@@ -261,8 +261,10 @@ export default function (appInfo: VonaAppInfo) {
 }
 
 function _performErrorFilters(ctx: VonaContext, err: Error, method: string) {
-  const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as any;
-  return beanFilter.performErrorFilters(ctx, err, method);
+  return ctx.app.ctxStorage.run(ctx as any, () => {
+    const beanFilter = ctx.app.bean._getBean('a-aspect.service.filter' as never) as any;
+    return beanFilter.performErrorFilters(err, method);
+  });
 }
 
 function getFullPath(ctx, dir, filename, _options) {
