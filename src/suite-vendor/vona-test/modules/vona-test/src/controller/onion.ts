@@ -3,8 +3,9 @@ import { Body, Query, v } from 'vona-module-a-validator';
 import { z } from 'zod';
 import { DtoUser } from '../dto/user.js';
 import { Controller, Get, Post } from 'vona-module-a-web';
-import { Middleware, UseFilterGlobal, UseGuardGlobal, UseMiddleware } from 'vona-module-a-aspect';
+import { Middleware, UseFilterGlobal, UseGuardGlobal, UseMiddleware, UseMiddlewareGlobal } from 'vona-module-a-aspect';
 import { Transaction } from 'vona-module-a-database';
+import { Gate } from 'vona-module-a-core';
 
 @Controller({ path: 'onion', meta: { mode: ['local', 'unittest'] } })
 export class ControllerOnion extends BeanBase {
@@ -17,6 +18,8 @@ export class ControllerOnion extends BeanBase {
 
   @Get('//echo')
   @UseGuardGlobal('a-core:user', { public: true })
+  //@UseMiddlewareGlobal('a-core:gate', { gate: { mode: 'local' } })
+  @Gate({ gate: { mode: 'local' } })
   @UseMiddleware('a-database:transaction', { isolationLevel: 'serializable', readOnly: true })
   @Transaction({ isolationLevel: 'read committed', readOnly: false })
   echo(
