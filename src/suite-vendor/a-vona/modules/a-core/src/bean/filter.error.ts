@@ -1,8 +1,8 @@
-import ErrorView from 'egg-onerror/lib/error_view.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { BeanBase, cast, HttpStatus, NextSync } from 'vona';
 import { Filter, IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
+import { ServiceErrorView } from 'vona-module-a-core';
 
 export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
   logs: Record<number | string, boolean>;
@@ -117,7 +117,8 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       return true;
     }
 
-    const errorView = new ErrorView(this.ctx, err, this._getViewTemplate());
+    this.ctx.request.headers['x-vona-error-logo'] = 'http://sdssds'; // this.scope.util.combineApiPath('static/img/vona.png');
+    const errorView = this.bean._newBean(ServiceErrorView, err, this._getViewTemplate());
     this.ctx.body = errorView.toHTML();
 
     // handled

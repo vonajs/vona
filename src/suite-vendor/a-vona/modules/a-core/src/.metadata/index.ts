@@ -73,6 +73,36 @@ declare module 'vona-module-a-core' {
   }
 }
 /** middleware: end */
+/** service: begin */
+export * from '../service/errorView.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IServiceRecord {
+    'a-core:errorView': never;
+  }
+}
+declare module 'vona-module-a-core' {
+  export interface ServiceErrorView {
+    /** @internal */
+    get scope(): ScopeModuleACore;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceErrorView } from '../service/errorView.js';
+export interface IModuleService {
+  errorView: ServiceErrorView;
+}
+/** service: end */
+/** service: begin */
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-core.service.errorView': ServiceErrorView;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -88,6 +118,7 @@ export interface ScopeModuleACore {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
+  service: IModuleService;
 }
 
 import 'vona';
