@@ -12,7 +12,7 @@ class DtoUserWithMarried extends omitClass(DtoUser, ['married']) {
   married: boolean;
 }
 
-describe.only('mappedTypes.test.ts', () => {
+describe('mappedTypes.test.ts', () => {
   it('action:mappedTypes', async () => {
     await app.bean.executor.mockCtx(async () => {
       const serviceValidator = app.bean.validator;

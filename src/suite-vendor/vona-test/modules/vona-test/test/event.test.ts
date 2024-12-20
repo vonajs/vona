@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { app } from 'vona-mock';
 
-describe.only('event.test.ts', () => {
+describe('event.test.ts', () => {
   it('action:event', async () => {
     await app.bean.executor.mockCtx(async () => {
       // scope

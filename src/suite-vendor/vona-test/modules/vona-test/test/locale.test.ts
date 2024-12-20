@@ -2,7 +2,7 @@ import assert from 'assert';
 import { app, mockModuleInfo } from 'vona-mock';
 import { __ThisModule__ } from '../src/.metadata/this.js';
 
-describe.only('locale.test.ts', () => {
+describe('locale.test.ts', () => {
   it('action:locale', async () => {
     const moduleInfo = mockModuleInfo();
     assert.equal(moduleInfo.relativeName, __ThisModule__);

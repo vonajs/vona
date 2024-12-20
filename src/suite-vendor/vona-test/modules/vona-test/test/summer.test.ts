@@ -1,6 +1,6 @@
 import { app } from 'vona-mock';
 
-describe.only('summer.test.ts', () => {
+describe('summer.test.ts', () => {
   it('action:summer', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction('post', '/vona/test/summer');

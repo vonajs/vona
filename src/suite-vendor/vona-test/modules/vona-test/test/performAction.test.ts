@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { app, mockUrl } from 'vona-mock';
 
-describe.only('performAction.test.js', () => {
+describe('performAction.test.js', () => {
   it('action:performAction', async () => {
     const result: { id: number; url: string } = await app.bean.executor.mockCtx(async () => {
       return await app.bean.executor.performAction('post', '/vona/test/performAction/echo', {

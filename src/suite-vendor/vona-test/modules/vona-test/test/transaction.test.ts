@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { app } from 'vona-mock';
 
-describe.only('transaction.test.ts', () => {
+describe('transaction.test.ts', () => {
   const tableName = '__tempTransaction';
 
   it('action:transaction:fail', async () => {

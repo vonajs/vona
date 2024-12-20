@@ -1,6 +1,6 @@
 import { app } from 'vona-mock';
 
-describe.only('bean.test.ts', () => {
+describe('bean.test.ts', () => {
   it('action:bean', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.executor.performAction('get', '/vona/test/bean/test');
