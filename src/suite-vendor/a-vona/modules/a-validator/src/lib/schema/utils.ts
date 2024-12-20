@@ -1,9 +1,34 @@
-import { z } from 'zod';
+import { IpVersion, z } from 'zod';
 import { errorUtil } from '../zod/errorUtil.js';
 
 export function schemaEmail(message?: errorUtil.ErrMessage) {
   return function (schema: z.ZodString): z.ZodString {
     return schema.email(message);
+  };
+}
+
+export function schemaUrl(message?: errorUtil.ErrMessage) {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.url(message);
+  };
+}
+
+export function schemaUuid(message?: errorUtil.ErrMessage) {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.uuid(message);
+  };
+}
+
+export function schemaIp(
+  options?:
+    | string
+    | {
+        version?: IpVersion;
+        message?: string;
+      },
+) {
+  return function (schema: z.ZodString): z.ZodString {
+    return schema.ip(options);
   };
 }
 
