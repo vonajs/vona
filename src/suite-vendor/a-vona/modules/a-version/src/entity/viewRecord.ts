@@ -1,8 +1,8 @@
+import { omitClass } from 'vona';
 import { Entity, EntityBase } from 'vona-module-a-database';
-import { OmitType } from 'vona-module-a-swagger';
 
 @Entity('aViewRecord')
-export class EntityViewRecord extends OmitType(EntityBase, ['iid']) {
+export class EntityViewRecord extends omitClass(EntityBase, ['iid']) {
   viewName: string;
   viewSql: string;
 }

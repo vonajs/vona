@@ -1,21 +1,3 @@
-/** beans: begin */
-export * from '../bean/version.manager.js';
-import { VersionManager } from '../bean/version.manager.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {}
-
-  export interface IBeanRecordGeneral {
-    'a-version.version.manager': VersionManager;
-  }
-}
-declare module 'vona-module-a-version' {
-  export interface VersionManager {
-    /** @internal */
-    get scope(): ScopeModuleAVersion;
-  }
-}
-/** beans: end */
 /** bean: begin */
 export * from '../bean/bean.worker.js';
 
@@ -146,6 +128,22 @@ export interface IModuleEvent {
   versionDone: EventVersionDone;
 }
 /** event: end */
+/** meta: begin */
+export * from '../bean/meta.version.js';
+
+import 'vona';
+declare module 'vona' {
+  export interface IMetaRecord {
+    'a-version:version': never;
+  }
+}
+declare module 'vona-module-a-version' {
+  export interface MetaVersion {
+    /** @internal */
+    get scope(): ScopeModuleAVersion;
+  }
+}
+/** meta: end */
 /** startup: begin */
 export * from '../bean/startup.databaseInit.js';
 export * from '../bean/startup.databaseName.js';

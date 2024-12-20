@@ -1,0 +1,46 @@
+import { BeanBase } from 'vona';
+import { Meta } from 'vona-module-a-meta';
+import {
+  IMetaVersionInit,
+  IMetaVersionInitOptions,
+  IMetaVersionUpdate,
+  IMetaVersionUpdateOptions,
+} from 'vona-module-a-version';
+import fse from 'fs-extra';
+
+@Meta()
+export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVersionInit {
+  async update(options: IMetaVersionUpdateOptions) {
+    if (options.version === 1) {
+      const entity = this.scope.entity.versionInit;
+      await this.bean.model.createTable(entity.table, function (table) {
+        table.basicFields({ deleted: false, iid: false });
+        table.string(entity.column('subdomain'), 50);
+        table.string(entity.column('module'), 50);
+        table.integer(entity.column('version'));
+      });
+      const entity2 = this.scope.entity.viewRecord;
+      await this.bean.model.createTable(entity2.table, function (table) {
+        table.basicFields({ deleted: true, iid: false });
+        table.string(entity2.column('viewName'), 255);
+        table.text(entity2.column('viewSql'));
+      });
+    }
+  }
+
+  async init(options: IMetaVersionInitOptions): Promise<void> {
+    if (options.version === 1) {
+      // remove publicDir
+      await this._removePublicDir();
+    }
+  }
+
+  async _removePublicDir() {
+    // only for test/local env
+    if (this.app.meta.isProd) return;
+    // path
+    const publicPath = await this.app.meta.util.getPublicPathPhysical();
+    // remove
+    await fse.remove(publicPath);
+  }
+}
