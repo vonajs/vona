@@ -1,50 +1,3 @@
-/** entity: begin */
-export * from '../entity/instance.js';
-
-import { IDecoratorEntityOptions } from 'vona-module-a-database';
-declare module 'vona-module-a-database' {
-  export interface IEntityRecord {
-    'a-instance:instance': IDecoratorEntityOptions;
-  }
-}
-declare module 'vona-module-a-instance' {}
-/** entity: end */
-/** entity: begin */
-import { EntityInstance } from '../entity/instance.js';
-export interface IModuleEntity {
-  instance: EntityInstance;
-}
-/** entity: end */
-/** entity: begin */
-declare module 'vona-module-a-instance' {
-  export interface EntityInstance {
-    column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
-    columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
-  }
-}
-/** entity: end */
-/** model: begin */
-export * from '../model/instance.js';
-
-import { IDecoratorModelOptions } from 'vona-module-a-database';
-declare module 'vona-module-a-database' {
-  export interface IModelRecord {
-    'a-instance:instance': IDecoratorModelOptions;
-  }
-}
-declare module 'vona-module-a-instance' {
-  export interface ModelInstance {
-    /** @internal */
-    get scope(): ScopeModuleAInstance;
-  }
-}
-/** model: end */
-/** model: begin */
-import { ModelInstance } from '../model/instance.js';
-export interface IModuleModel {
-  instance: ModelInstance;
-}
-/** model: end */
 /** bean: begin */
 export * from '../bean/bean.instance.js';
 
@@ -97,6 +50,53 @@ export interface IModuleBroadcast {
   resetCache: BroadcastResetCache;
 }
 /** broadcast: end */
+/** entity: begin */
+export * from '../entity/instance.js';
+
+import { IDecoratorEntityOptions } from 'vona-module-a-database';
+declare module 'vona-module-a-database' {
+  export interface IEntityRecord {
+    'a-instance:instance': IDecoratorEntityOptions;
+  }
+}
+declare module 'vona-module-a-instance' {}
+/** entity: end */
+/** entity: begin */
+import { EntityInstance } from '../entity/instance.js';
+export interface IModuleEntity {
+  instance: EntityInstance;
+}
+/** entity: end */
+/** entity: begin */
+declare module 'vona-module-a-instance' {
+  export interface EntityInstance {
+    column: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(column: K) => K;
+    columns: <K extends keyof Omit<EntityInstance, 'column' | 'columns' | 'table'>>(...columns: K[]) => K[];
+  }
+}
+/** entity: end */
+/** model: begin */
+export * from '../model/instance.js';
+
+import { IDecoratorModelOptions } from 'vona-module-a-database';
+declare module 'vona-module-a-database' {
+  export interface IModelRecord {
+    'a-instance:instance': IDecoratorModelOptions;
+  }
+}
+declare module 'vona-module-a-instance' {
+  export interface ModelInstance {
+    /** @internal */
+    get scope(): ScopeModuleAInstance;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelInstance } from '../model/instance.js';
+export interface IModuleModel {
+  instance: ModelInstance;
+}
+/** model: end */
 /** meta: begin */
 export * from '../bean/meta.index.js';
 export * from '../bean/meta.redlock.js';
@@ -160,10 +160,6 @@ declare module 'vona' {
   }
 }
 /** service: end */
-/** config: begin */
-export * from '../config/config.js';
-import { config } from '../config/config.js';
-/** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
@@ -173,14 +169,7 @@ export const locales = {
 };
 /** locale: end */
 /** scope: begin */
-import {
-  BeanScopeBase,
-  TypeModuleBean,
-  BeanScopeUtil,
-  TypeModuleConfig,
-  TypeModuleLocales,
-  TypeLocaleBase,
-} from 'vona';
+import { BeanScopeBase, TypeModuleBean, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -189,11 +178,10 @@ export class ScopeModuleAInstance extends BeanScopeBase {}
 export interface ScopeModuleAInstance {
   _bean: TypeModuleBean;
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  broadcast: IModuleBroadcast;
   entity: IModuleEntity;
   model: IModuleModel;
-  broadcast: IModuleBroadcast;
   redlock: MetaRedlock;
   service: IModuleService;
 }
@@ -206,10 +194,6 @@ declare module 'vona' {
 
   export interface IBeanScopeContainer {
     instance: ScopeModuleAInstance;
-  }
-
-  export interface IBeanScopeConfig {
-    'a-instance': ReturnType<typeof config>;
   }
 
   export interface IBeanScopeLocale {
