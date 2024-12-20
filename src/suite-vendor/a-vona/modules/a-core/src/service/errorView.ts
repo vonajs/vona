@@ -2,8 +2,8 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-web';
-import { Mustache } from 'mustache';
-import stackTrace from 'stack-trace';
+import Mustache from 'mustache';
+import * as StackTrace from 'stack-trace';
 import cookie from 'cookie';
 import util from 'node:util';
 
@@ -33,6 +33,10 @@ export class ServiceErrorView extends BeanBase {
 
     data.request = this.serializeRequest();
     data.appInfo = this.serializeAppInfo();
+
+    data.meta = {
+      errorLogo: this.scope.util.combineStaticPath('img/vona.png'),
+    };
 
     return this.complieView(this.viewTemplate, data);
   }
@@ -83,7 +87,7 @@ export class ServiceErrorView extends BeanBase {
   }
 
   parseError() {
-    const stack = stackTrace.parse(this.error);
+    const stack = StackTrace.parse(this.error);
     return stack.map(frame => {
       if (!this.isNode(frame)) {
         frame.context = this.getFrameSource(frame);

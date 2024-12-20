@@ -117,7 +117,6 @@ export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IF
       return true;
     }
 
-    this.ctx.request.headers['x-vona-error-logo'] = 'http://sdssds'; // this.scope.util.combineApiPath('static/img/vona.png');
     const errorView = this.bean._newBean(ServiceErrorView, err, this._getViewTemplate());
     this.ctx.body = errorView.toHTML();
 

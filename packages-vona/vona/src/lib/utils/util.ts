@@ -93,6 +93,20 @@ export class AppUtil extends BeanSimple {
     return res;
   }
 
+  combineStaticPath(moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined) {
+    const globalPrefix = '/api/static';
+    if (!path) path = '';
+    // ignore globalPrefix
+    if (path.startsWith('//')) return path.substring(1);
+    // ignore module path
+    if (path.startsWith('/')) return `${globalPrefix}${path}`;
+    // globalPrefix + module path + arg
+    if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
+    const parts = moduleName.split('-');
+    // path
+    return `${globalPrefix}/${parts[0]}/${parts[1]}/${path}`;
+  }
+
   createError(data, returnObject?: boolean) {
     const error = returnObject ? ({} as any) : new Error();
     error.code = data.code !== undefined ? data.code : 500;
