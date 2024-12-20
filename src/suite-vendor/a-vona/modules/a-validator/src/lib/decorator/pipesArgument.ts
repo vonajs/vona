@@ -1,5 +1,5 @@
 import { appMetadata, MetadataKey } from 'vona';
-import { PipeArgument } from '../types/decorator.js';
+import { SchemaLike } from '../types/decorator.js';
 import { valid } from '../../bean/pipe.valid.js';
 import {
   RouteHandlerArgumentMetaDecorator,
@@ -9,7 +9,7 @@ import {
 import { schemaChains } from '../schema/schemaChains.js';
 
 export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: Function) {
-  return function (field?: any, ...pipes: PipeArgument[]): ParameterDecorator {
+  return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       // not inherit
       const argsMeta = appMetadata.getOwnMetadataArray<RouteHandlerArgumentMetaDecorator>(
@@ -21,12 +21,12 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
 
       const hasParamField = typeof field === 'string';
       const paramField = hasParamField ? field : undefined;
-      const paramPipes = hasParamField ? pipes : [field, ...pipes];
+      const paramSchemaLikes = hasParamField ? schemaLikes : [field, ...schemaLikes].filter(item => !!item);
 
       const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
       const metaType = paramtypes[index];
 
-      const argSchema = schemaChains(paramPipes, metaType);
+      const argSchema = schemaChains(paramSchemaLikes, metaType);
 
       argsMeta.push({
         index,

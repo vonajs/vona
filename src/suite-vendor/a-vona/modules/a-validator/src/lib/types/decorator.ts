@@ -1,6 +1,6 @@
 import { Constructable } from 'vona';
 import { z } from 'zod';
 
-export type PipeArgumentCreate = (schema: z.ZodSchema) => z.ZodSchema;
+export type SchemaLikeCreate = (schema: z.ZodSchema) => z.ZodSchema;
 
-export type PipeArgument = PipeArgumentCreate | z.ZodSchema | Constructable;
+export type SchemaLike = SchemaLikeCreate | z.ZodSchema | Constructable;
