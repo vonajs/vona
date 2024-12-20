@@ -71,6 +71,9 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-executor
+      vona-module-a-instance:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-instance
       vona-module-a-meta:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-meta
@@ -949,6 +952,8 @@ importers:
       koa-compose:
         specifier: ^4.1.0
         version: 4.1.0
+
+  src/suite-vendor/a-vona/modules/a-index: {}
 
   src/suite-vendor/a-vona/modules/a-instance: {}
 
