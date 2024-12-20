@@ -98,6 +98,9 @@ importers:
       vona-module-a-static:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-static
+      vona-module-a-summer:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-summer
       vona-module-a-swagger:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-swagger
@@ -809,6 +812,12 @@ importers:
         version: link:modules/a-cabloy
 
   src/suite-vendor/a-cabloy/modules/a-cabloy: {}
+
+  src/suite-vendor/a-cabloy/modules/a-status:
+    dependencies:
+      assert:
+        specifier: ^2.0.0
+        version: 2.1.0
 
   src/suite-vendor/a-vona:
     dependencies:
