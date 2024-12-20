@@ -1,14 +1,5 @@
-import { IpVersion, z, ZodTypeAny } from 'zod';
+import { IpVersion, z } from 'zod';
 import { errorUtil } from '../zod/errorUtil.js';
-import { ZodOpenAPIMetadata } from '@asteasolutions/zod-to-openapi';
-
-export function schemaOpenapi<T extends ZodTypeAny>(metadata: Partial<ZodOpenAPIMetadata<z.input<T>>>);
-export function schemaOpenapi<T extends ZodTypeAny>(refId: string, metadata?: Partial<ZodOpenAPIMetadata<z.input<T>>>);
-export function schemaOpenapi<T extends ZodTypeAny>(refId: any, metadata?: any) {
-  return function (schema: T): T {
-    return schema.openapi(refId, metadata);
-  };
-}
 
 export function schemaEmail(message?: errorUtil.ErrMessage) {
   return function (schema: z.ZodString): z.ZodString {
